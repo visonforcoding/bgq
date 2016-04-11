@@ -1,0 +1,2941 @@
+2016-03-22 15:06:59 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin could not be found.
+Exception Attributes: array (
+  'class' => 'Admin',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /admin/
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:07:18 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Index could not be found.
+Exception Attributes: array (
+  'class' => 'Index',
+  'plugin' => 'Wpadmin',
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:08:04 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Index could not be found.
+Exception Attributes: array (
+  'class' => 'Index',
+  'plugin' => 'Wpadmin',
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:08:34 Error: [Cake\View\Exception\MissingViewException] View class "Admin.App" is missing.
+Exception Attributes: array (
+  'class' => 'Admin.App',
+)
+Request URL: /wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\ViewVarsTrait.php(118): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#1 F:\www\ckdemo\vendor\cakephp\cakephp\src\Controller\Controller.php(610): Cake\Controller\Controller->createView()
+#2 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(120): Cake\Controller\Controller->render()
+#3 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(Wpadmin\Controller\AdminController))
+#4 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 {main}
+
+
+2016-03-22 15:12:07 Error: [Cake\View\Exception\MissingViewException] View class "Admin.App" is missing.
+Exception Attributes: array (
+  'class' => 'Admin.App',
+)
+Request URL: /wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\ViewVarsTrait.php(118): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#1 F:\www\ckdemo\vendor\cakephp\cakephp\src\Controller\Controller.php(610): Cake\Controller\Controller->createView()
+#2 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(120): Cake\Controller\Controller->render()
+#3 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(Wpadmin\Controller\AdminController))
+#4 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 {main}
+
+
+2016-03-22 15:14:37 Error: [Cake\View\Exception\MissingViewException] View class "wpadmin.App" is missing.
+Exception Attributes: array (
+  'class' => 'wpadmin.App',
+)
+Request URL: /wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\ViewVarsTrait.php(118): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#1 F:\www\ckdemo\vendor\cakephp\cakephp\src\Controller\Controller.php(610): Cake\Controller\Controller->createView()
+#2 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(120): Cake\Controller\Controller->render()
+#3 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(Wpadmin\Controller\AdminController))
+#4 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 {main}
+
+
+2016-03-22 15:15:00 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jquery-1.11.1.min.js
+Referer URL: http://ckdemo.dev/wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:15:01 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/font-awesome/css/font-awesome.css
+Referer URL: http://ckdemo.dev/wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:15:01 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/zui/css/zui.min.css
+Referer URL: http://ckdemo.dev/wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:21:11 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/zui/css/zui.min.css
+Referer URL: http://ckdemo.dev/wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:21:11 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/font-awesome/css/font-awesome.css
+Referer URL: http://ckdemo.dev/wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:21:12 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jquery-1.11.1.min.js
+Referer URL: http://ckdemo.dev/wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:21:20 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/zui/css/zui.min.css
+Referer URL: http://ckdemo.dev/wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:21:21 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jquery-1.11.1.min.js
+Referer URL: http://ckdemo.dev/wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:21:21 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/font-awesome/css/font-awesome.css
+Referer URL: http://ckdemo.dev/wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:22:03 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin could not be found.
+Exception Attributes: array (
+  'class' => 'Admin',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /admin/
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:22:45 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Index could not be found.
+Exception Attributes: array (
+  'class' => 'Index',
+  'plugin' => 'Wpadmin',
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:23:09 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jquery-1.11.1.min.js
+Referer URL: http://ckdemo.dev/wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:23:10 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/zui/css/zui.min.css
+Referer URL: http://ckdemo.dev/wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:23:10 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/font-awesome/css/font-awesome.css
+Referer URL: http://ckdemo.dev/wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:23:34 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Wpadmin could not be found.
+Exception Attributes: array (
+  'class' => 'Wpadmin',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:23:45 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin could not be found.
+Exception Attributes: array (
+  'class' => 'Admin',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:24:53 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin could not be found.
+Exception Attributes: array (
+  'class' => 'Admin',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:29:50 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/zui/css/zui.min.css
+Referer URL: http://ckdemo.dev/wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:29:51 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/font-awesome/css/font-awesome.css
+Referer URL: http://ckdemo.dev/wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:29:51 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jquery-1.11.1.min.js
+Referer URL: http://ckdemo.dev/wpadmin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:33:29 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin could not be found.
+Exception Attributes: array (
+  'class' => 'Admin',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:39:08 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin could not be found.
+Exception Attributes: array (
+  'class' => 'Admin',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:42:13 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/zui/css/zui.min.css
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:42:14 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jquery-1.11.1.min.js
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:42:14 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/font-awesome/css/font-awesome.css
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:43:12 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jquery-1.11.1.min.js
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:43:13 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/zui/css/zui.min.css
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:43:13 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/font-awesome/css/font-awesome.css
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-03-22 15:52:03 Error: [Cake\Database\Exception] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cakedemo.group' doesn't exist
+Request URL: /admin/login
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\Database\Schema\Collection.php(96): Cake\Database\Schema\Collection->_reflect('Column', 'group', Array, Object(Cake\Database\Schema\Table))
+#1 F:\www\ckdemo\vendor\cakephp\cakephp\src\Database\Schema\CachedCollection.php(64): Cake\Database\Schema\Collection->describe('group', Array)
+#2 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Table.php(429): Cake\Database\Schema\CachedCollection->describe('group')
+#3 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Table.php(505): Cake\ORM\Table->schema()
+#4 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Query.php(371): Cake\ORM\Table->primaryKey()
+#5 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Query.php(349): Cake\ORM\Query->_addAssociationsToTypeMap(Object(Wpadmin\Model\Table\AdminTable), Object(Cake\Database\TypeMap), Array)
+#6 F:\www\ckdemo\plugins\Wpadmin\src\Controller\AdminController.php(170): Cake\ORM\Query->contain(Array)
+#7 [internal function]: Wpadmin\Controller\AdminController->login()
+#8 F:\www\ckdemo\vendor\cakephp\cakephp\src\Controller\Controller.php(429): call_user_func_array(Array, Array)
+#9 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#10 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(Wpadmin\Controller\AdminController))
+#11 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#12 {main}
+
+
+2016-03-22 15:54:12 Error: [Cake\Database\Exception] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cakedemo.menu' doesn't exist
+Request URL: /admin/login
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\Database\Schema\Collection.php(96): Cake\Database\Schema\Collection->_reflect('Column', 'menu', Array, Object(Cake\Database\Schema\Table))
+#1 F:\www\ckdemo\vendor\cakephp\cakephp\src\Database\Schema\CachedCollection.php(64): Cake\Database\Schema\Collection->describe('menu', Array)
+#2 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Table.php(429): Cake\Database\Schema\CachedCollection->describe('menu')
+#3 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Table.php(505): Cake\ORM\Table->schema()
+#4 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Query.php(371): Cake\ORM\Table->primaryKey()
+#5 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Query.php(376): Cake\ORM\Query->_addAssociationsToTypeMap(Object(Wpadmin\Model\Table\GroupTable), Object(Cake\Database\TypeMap), Array)
+#6 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Query.php(349): Cake\ORM\Query->_addAssociationsToTypeMap(Object(Wpadmin\Model\Table\AdminTable), Object(Cake\Database\TypeMap), Array)
+#7 F:\www\ckdemo\plugins\Wpadmin\src\Controller\AdminController.php(170): Cake\ORM\Query->contain(Array)
+#8 [internal function]: Wpadmin\Controller\AdminController->login()
+#9 F:\www\ckdemo\vendor\cakephp\cakephp\src\Controller\Controller.php(429): call_user_func_array(Array, Array)
+#10 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#11 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(Wpadmin\Controller\AdminController))
+#12 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2016-03-22 16:15:16 Error: [Cake\Database\Exception] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cakedemo.menu' doesn't exist
+Request URL: /admin/login
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\Database\Schema\Collection.php(96): Cake\Database\Schema\Collection->_reflect('Column', 'menu', Array, Object(Cake\Database\Schema\Table))
+#1 F:\www\ckdemo\vendor\cakephp\cakephp\src\Database\Schema\CachedCollection.php(64): Cake\Database\Schema\Collection->describe('menu', Array)
+#2 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Table.php(429): Cake\Database\Schema\CachedCollection->describe('menu')
+#3 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Table.php(505): Cake\ORM\Table->schema()
+#4 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Query.php(371): Cake\ORM\Table->primaryKey()
+#5 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Query.php(376): Cake\ORM\Query->_addAssociationsToTypeMap(Object(Wpadmin\Model\Table\GroupTable), Object(Cake\Database\TypeMap), Array)
+#6 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Query.php(349): Cake\ORM\Query->_addAssociationsToTypeMap(Object(Wpadmin\Model\Table\AdminTable), Object(Cake\Database\TypeMap), Array)
+#7 F:\www\ckdemo\plugins\Wpadmin\src\Controller\AdminController.php(170): Cake\ORM\Query->contain(Array)
+#8 [internal function]: Wpadmin\Controller\AdminController->login()
+#9 F:\www\ckdemo\vendor\cakephp\cakephp\src\Controller\Controller.php(429): call_user_func_array(Array, Array)
+#10 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#11 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(Wpadmin\Controller\AdminController))
+#12 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2016-03-22 16:15:41 Error: [Cake\Database\Exception] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cakedemo.menu' doesn't exist
+Request URL: /admin/login
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\Database\Schema\Collection.php(96): Cake\Database\Schema\Collection->_reflect('Column', 'menu', Array, Object(Cake\Database\Schema\Table))
+#1 F:\www\ckdemo\vendor\cakephp\cakephp\src\Database\Schema\CachedCollection.php(64): Cake\Database\Schema\Collection->describe('menu', Array)
+#2 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Table.php(429): Cake\Database\Schema\CachedCollection->describe('menu')
+#3 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Table.php(505): Cake\ORM\Table->schema()
+#4 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Query.php(371): Cake\ORM\Table->primaryKey()
+#5 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Query.php(376): Cake\ORM\Query->_addAssociationsToTypeMap(Object(Wpadmin\Model\Table\GroupTable), Object(Cake\Database\TypeMap), Array)
+#6 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Query.php(349): Cake\ORM\Query->_addAssociationsToTypeMap(Object(Wpadmin\Model\Table\AdminTable), Object(Cake\Database\TypeMap), Array)
+#7 F:\www\ckdemo\plugins\Wpadmin\src\Controller\AdminController.php(170): Cake\ORM\Query->contain(Array)
+#8 [internal function]: Wpadmin\Controller\AdminController->login()
+#9 F:\www\ckdemo\vendor\cakephp\cakephp\src\Controller\Controller.php(429): call_user_func_array(Array, Array)
+#10 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#11 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(Wpadmin\Controller\AdminController))
+#12 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2016-03-22 16:24:27 Error: [Cake\Database\Exception] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cakedemo.cwp_admin_group' doesn't exist
+Request URL: /admin/login
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\Database\Schema\Collection.php(96): Cake\Database\Schema\Collection->_reflect('Column', 'cwp_admin_group', Array, Object(Cake\Database\Schema\Table))
+#1 F:\www\ckdemo\vendor\cakephp\cakephp\src\Database\Schema\CachedCollection.php(64): Cake\Database\Schema\Collection->describe('cwp_admin_group', Array)
+#2 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Table.php(429): Cake\Database\Schema\CachedCollection->describe('cwp_admin_group')
+#3 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Query.php(211): Cake\ORM\Table->schema()
+#4 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Association\BelongsToMany.php(1200): Cake\ORM\Query->addDefaultTypes(Object(Cake\ORM\Table))
+#5 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Association\SelectableAssociationTrait.php(46): Cake\ORM\Association\BelongsToMany->_buildQuery(Array)
+#6 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\EagerLoader.php(586): Cake\ORM\Association\BelongsToMany->eagerLoader(Array)
+#7 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Query.php(921): Cake\ORM\EagerLoader->loadExternal(Object(Cake\ORM\Query), Object(Cake\Database\Statement\CallbackStatement))
+#8 F:\www\ckdemo\vendor\cakephp\cakephp\src\Datasource\QueryTrait.php(272): Cake\ORM\Query->_execute()
+#9 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Query.php(871): Cake\ORM\Query->_all()
+#10 F:\www\ckdemo\vendor\cakephp\cakephp\src\Datasource\QueryTrait.php(395): Cake\ORM\Query->all()
+#11 F:\www\ckdemo\plugins\Wpadmin\src\Controller\AdminController.php(171): Cake\ORM\Query->first()
+#12 [internal function]: Wpadmin\Controller\AdminController->login()
+#13 F:\www\ckdemo\vendor\cakephp\cakephp\src\Controller\Controller.php(429): call_user_func_array(Array, Array)
+#14 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#15 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(Wpadmin\Controller\AdminController))
+#16 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 {main}
+
+
+2016-03-28 10:12:45 Error: [Cake\View\Exception\MissingCellException] Cell class Admin.menuCell is missing.
+Exception Attributes: array (
+  'className' => 'Admin.menuCell',
+)
+Request URL: /admin
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\plugins\Wpadmin\src\Template\Layout\layout.ctp(62): Cake\View\View->cell('Admin.menu')
+#1 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(992): include('F:\\www\\ckdemo\\p...')
+#2 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(952): Cake\View\View->_evaluate('F:\\www\\ckdemo/p...', Array)
+#3 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(633): Cake\View\View->_render('F:\\www\\ckdemo/p...')
+#4 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(592): Cake\View\View->renderLayout('', 'Wpadmin.layout')
+#5 F:\www\ckdemo\vendor\cakephp\cakephp\src\Controller\Controller.php(611): Cake\View\View->render(NULL, NULL)
+#6 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(120): Cake\Controller\Controller->render()
+#7 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(Wpadmin\Controller\IndexController))
+#8 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2016-04-06 12:09:10 Error: [Cake\View\Exception\MissingCellException] Cell class Admin.menuCell is missing.
+Exception Attributes: array (
+  'className' => 'Admin.menuCell',
+)
+Request URL: /admin
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\plugins\Wpadmin\src\Template\Layout\layout.ctp(62): Cake\View\View->cell('Admin.menu')
+#1 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(992): include('F:\\www\\ckdemo\\p...')
+#2 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(952): Cake\View\View->_evaluate('F:\\www\\ckdemo/p...', Array)
+#3 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(633): Cake\View\View->_render('F:\\www\\ckdemo/p...')
+#4 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(592): Cake\View\View->renderLayout('', 'Wpadmin.layout')
+#5 F:\www\ckdemo\vendor\cakephp\cakephp\src\Controller\Controller.php(611): Cake\View\View->render(NULL, NULL)
+#6 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(120): Cake\Controller\Controller->render()
+#7 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(Wpadmin\Controller\IndexController))
+#8 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2016-04-06 12:13:40 Error: [Cake\View\Exception\MissingCellException] Cell class Admin.menuCell is missing.
+Exception Attributes: array (
+  'className' => 'Admin.menuCell',
+)
+Request URL: /admin
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\plugins\Wpadmin\src\Template\Layout\layout.ctp(62): Cake\View\View->cell('Admin.menu')
+#1 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(992): include('F:\\www\\ckdemo\\p...')
+#2 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(952): Cake\View\View->_evaluate('F:\\www\\ckdemo/p...', Array)
+#3 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(633): Cake\View\View->_render('F:\\www\\ckdemo/p...')
+#4 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(592): Cake\View\View->renderLayout('', 'Wpadmin.layout')
+#5 F:\www\ckdemo\vendor\cakephp\cakephp\src\Controller\Controller.php(611): Cake\View\View->render(NULL, NULL)
+#6 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(120): Cake\Controller\Controller->render()
+#7 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(Wpadmin\Controller\IndexController))
+#8 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2016-04-06 12:14:02 Error: [Cake\View\Exception\MissingCellException] Cell class Wpadmin.menuCell is missing.
+Exception Attributes: array (
+  'className' => 'Wpadmin.menuCell',
+)
+Request URL: /admin
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\plugins\Wpadmin\src\Template\Layout\layout.ctp(62): Cake\View\View->cell('Wpadmin.menu')
+#1 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(992): include('F:\\www\\ckdemo\\p...')
+#2 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(952): Cake\View\View->_evaluate('F:\\www\\ckdemo/p...', Array)
+#3 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(633): Cake\View\View->_render('F:\\www\\ckdemo/p...')
+#4 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(592): Cake\View\View->renderLayout('', 'Wpadmin.layout')
+#5 F:\www\ckdemo\vendor\cakephp\cakephp\src\Controller\Controller.php(611): Cake\View\View->render(NULL, NULL)
+#6 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(120): Cake\Controller\Controller->render()
+#7 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(Wpadmin\Controller\IndexController))
+#8 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2016-04-06 12:15:45 Error: Fatal Error (1): Class 'Admin\Utils\Util' not found in [F:\www\ckdemo\plugins\Wpadmin\src\View\Cell\MenuCell.php, line 57]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE\src\Error\BaseErrorHandler.php, line 215
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE\src\Error\BaseErrorHandler.php, line 98
+[main] - [internal], line ??
+
+
+
+2016-04-06 12:15:46 Error: [Cake\Error\FatalErrorException] Class 'Admin\Utils\Util' not found
+Request URL: /admin
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\Error\BaseErrorHandler.php(98): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Class 'Admin\\Ut...', 'F:\\www\\ckdemo\\p...', 57)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2016-04-06 12:25:40 Error: Fatal Error (1): Class 'Wpadmin\Utils\Util' not found in [F:\www\ckdemo\plugins\Wpadmin\src\View\Cell\MenuCell.php, line 57]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE\src\Error\BaseErrorHandler.php, line 215
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE\src\Error\BaseErrorHandler.php, line 98
+[main] - [internal], line ??
+
+
+
+2016-04-06 12:25:41 Error: [Cake\Error\FatalErrorException] Class 'Wpadmin\Utils\Util' not found
+Request URL: /admin
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\Error\BaseErrorHandler.php(98): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Class 'Wpadmin\\...', 'F:\\www\\ckdemo\\p...', 57)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2016-04-06 14:13:32 Error: [Cake\View\Exception\MissingCellException] Cell class Admin.menuCell is missing.
+Exception Attributes: array (
+  'className' => 'Admin.menuCell',
+)
+Request URL: /admin
+Referer URL: http://ckdemo.dev/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\plugins\Wpadmin\src\Template\Layout\layout.ctp(70): Cake\View\View->cell('Admin.menu::tit...')
+#1 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(992): include('F:\\www\\ckdemo\\p...')
+#2 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(952): Cake\View\View->_evaluate('F:\\www\\ckdemo/p...', Array)
+#3 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(633): Cake\View\View->_render('F:\\www\\ckdemo/p...')
+#4 F:\www\ckdemo\vendor\cakephp\cakephp\src\View\View.php(592): Cake\View\View->renderLayout('', 'Wpadmin.layout')
+#5 F:\www\ckdemo\vendor\cakephp\cakephp\src\Controller\Controller.php(611): Cake\View\View->render(NULL, NULL)
+#6 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(120): Cake\Controller\Controller->render()
+#7 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(Wpadmin\Controller\IndexController))
+#8 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 {main}
+
+
+2016-04-07 16:16:26 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/js/jquery.jqGrid.min.js
+Referer URL: http://ckdemo.dev/admin/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 16:16:27 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/js/i18n/grid.locale-cn.js
+Referer URL: http://ckdemo.dev/admin/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 16:26:08 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/css/ui.ace.css
+Referer URL: http://ckdemo.dev/admin/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 16:26:08 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/css/ui.jqgrid.css
+Referer URL: http://ckdemo.dev/admin/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 16:26:09 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/js/jquery.jqGrid.min.js
+Referer URL: http://ckdemo.dev/admin/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 16:26:09 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/js/i18n/grid.locale-cn.js
+Referer URL: http://ckdemo.dev/admin/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 16:26:23 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/css/ui.jqgrid.css
+Referer URL: http://ckdemo.dev/admin/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 16:26:24 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/css/ui.ace.css
+Referer URL: http://ckdemo.dev/admin/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 16:26:24 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/js/jquery.jqGrid.min.js
+Referer URL: http://ckdemo.dev/admin/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 16:26:25 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/js/i18n/grid.locale-cn.js
+Referer URL: http://ckdemo.dev/admin/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 16:29:34 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Article could not be found.
+Exception Attributes: array (
+  'class' => 'Article',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/article/getDataList
+Referer URL: http://ckdemo.dev/admin/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 16:52:20 Error: [Cake\Controller\Exception\MissingActionException] Action ArticlesController::getDataList() could not be found, or is not accessible.
+Exception Attributes: array (
+  'controller' => 'ArticlesController',
+  'action' => 'getDataList',
+  'prefix' => 'admin',
+  'plugin' => NULL,
+)
+Request URL: /admin/articles/getDataList
+Referer URL: http://ckdemo.dev/admin/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#1 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\Admin\ArticlesController))
+#2 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 {main}
+
+
+2016-04-07 16:52:28 Error: [Cake\Controller\Exception\MissingActionException] Action ArticlesController::getDataList() could not be found, or is not accessible.
+Exception Attributes: array (
+  'controller' => 'ArticlesController',
+  'action' => 'getDataList',
+  'prefix' => 'admin',
+  'plugin' => NULL,
+)
+Request URL: /admin/articles/getDataList
+Referer URL: http://ckdemo.dev/admin/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#1 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\Admin\ArticlesController))
+#2 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 {main}
+
+
+2016-04-07 17:00:37 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'username' in 'where clause'
+Request URL: /admin/articles/getDataList
+Referer URL: http://ckdemo.dev/admin/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\Database\Statement\MysqlStatement.php(36): PDOStatement->execute(NULL)
+#1 F:\www\ckdemo\vendor\cakephp\cakephp\src\Database\Statement\StatementDecorator.php(171): Cake\Database\Statement\MysqlStatement->execute(NULL)
+#2 F:\www\ckdemo\vendor\cakephp\cakephp\src\Database\Log\LoggingStatement.php(56): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#3 F:\www\ckdemo\vendor\cakephp\cakephp\src\Database\Connection.php(270): Cake\Database\Log\LoggingStatement->execute()
+#4 F:\www\ckdemo\vendor\cakephp\cakephp\src\Database\Query.php(188): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Query.php(788): Cake\Database\Query->execute()
+#6 F:\www\ckdemo\vendor\cakephp\cakephp\src\ORM\Query.php(739): Cake\ORM\Query->_performCount()
+#7 F:\www\ckdemo\plugins\Wpadmin\src\Controller\AppController.php(128): Cake\ORM\Query->count()
+#8 F:\www\ckdemo\src\Controller\Admin\ArticlesController.php(134): Wpadmin\Controller\AppController->getJsonForJqrid('1', '10', '', 'id', 'desc', Array)
+#9 [internal function]: App\Controller\Admin\ArticlesController->getDataList()
+#10 F:\www\ckdemo\vendor\cakephp\cakephp\src\Controller\Controller.php(429): call_user_func_array(Array, Array)
+#11 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#12 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\Admin\ArticlesController))
+#13 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#14 {main}
+
+
+2016-04-07 17:28:14 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Article could not be found.
+Exception Attributes: array (
+  'class' => 'Article',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/article/view?id=2
+Referer URL: http://ckdemo.dev/admin/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 17:31:04 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Article could not be found.
+Exception Attributes: array (
+  'class' => 'Article',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/article/exportExcel?sidx=id&sort=desc
+Referer URL: http://ckdemo.dev/admin/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 19:48:22 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin could not be found.
+Exception Attributes: array (
+  'class' => 'Admin',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/admin/login
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 19:49:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/css/validationEngine.jquery.css
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 19:49:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqform/jquery.form.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 19:49:34 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/uploadfile.css
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 19:49:34 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 19:49:35 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 19:49:35 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 19:49:36 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqform/jquery.form.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 19:49:36 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 19:49:37 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 19:49:38 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-07 19:50:11 Error: [Cake\Datasource\Exception\InvalidPrimaryKeyException] Record not found in table "articles" with primary key [NULL]
+Request URL: /admin/articles/view?id=3
+Referer URL: http://ckdemo.dev/admin/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\src\Controller\Admin\ArticlesController.php(34): Cake\ORM\Table->get(NULL, Array)
+#1 [internal function]: App\Controller\Admin\ArticlesController->view()
+#2 F:\www\ckdemo\vendor\cakephp\cakephp\src\Controller\Controller.php(429): call_user_func_array(Array, Array)
+#3 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#4 F:\www\ckdemo\vendor\cakephp\cakephp\src\Routing\Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\Admin\ArticlesController))
+#5 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#6 {main}
+
+
+2016-04-08 15:47:17 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Home could not be found.
+Exception Attributes: array (
+  'class' => 'Home',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /home/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-08 15:48:56 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Home could not be found.
+Exception Attributes: array (
+  'class' => 'Home',
+  'plugin' => NULL,
+  'prefix' => 'home',
+  '_ext' => NULL,
+)
+Request URL: /home/articles/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-08 15:49:43 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Articles could not be found.
+Exception Attributes: array (
+  'class' => 'Articles',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /articles/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:01:13 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:01:14 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:01:15 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/uploadfile.css
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:01:15 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqform/jquery.form.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:01:16 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:01:16 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/css/validationEngine.jquery.css
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:01:17 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqform/jquery.form.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:01:18 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:01:20 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:01:21 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:01:39 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/css/validationEngine.jquery.css
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:01:40 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/uploadfile.css
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:01:41 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqform/jquery.form.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:01:41 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:01:42 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:01:42 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:03 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/uploadfile.css
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:04 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqform/jquery.form.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:04 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:05 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:05 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:06 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/css/validationEngine.jquery.css
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:07 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqform/jquery.form.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:07 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:08 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:09 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:23 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/css/validationEngine.jquery.css
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:24 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/uploadfile.css
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:24 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:25 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqform/jquery.form.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:25 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:26 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:26 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:27 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:03:28 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:17:53 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/css/validationEngine.jquery.css
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:17:54 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/uploadfile.css
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:17:54 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqform/jquery.form.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:17:55 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:17:55 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:17:56 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:17:57 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/articles/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:21:38 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Menu could not be found.
+Exception Attributes: array (
+  'class' => 'Menu',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/menu/index
+Referer URL: http://ckdemo.dev/admin
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:22:25 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Menu could not be found.
+Exception Attributes: array (
+  'class' => 'Menu',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/menu/index
+Referer URL: http://ckdemo.dev/admin
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:24:16 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/css/ui.jqgrid.css
+Referer URL: http://ckdemo.dev/admin/menu/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:24:17 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/css/ui.ace.css
+Referer URL: http://ckdemo.dev/admin/menu/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:24:17 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/js/jquery.jqGrid.min.js
+Referer URL: http://ckdemo.dev/admin/menu/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:24:18 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/js/i18n/grid.locale-cn.js
+Referer URL: http://ckdemo.dev/admin/menu/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:24:32 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/css/ui.jqgrid.css
+Referer URL: http://ckdemo.dev/admin/menu/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:24:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/css/ui.ace.css
+Referer URL: http://ckdemo.dev/admin/menu/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:24:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/js/jquery.jqGrid.min.js
+Referer URL: http://ckdemo.dev/admin/menu/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:24:34 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/js/i18n/grid.locale-cn.js
+Referer URL: http://ckdemo.dev/admin/menu/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:30:13 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Menu could not be found.
+Exception Attributes: array (
+  'class' => 'Menu',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/menu/getDataList
+Referer URL: http://ckdemo.dev/admin/menu/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:34:34 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Menu could not be found.
+Exception Attributes: array (
+  'class' => 'Menu',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/menu/edit/1
+Referer URL: http://ckdemo.dev/admin/menu/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:35:54 Error: Fatal Error (1): Class 'Admin\Utils\Util' not found in [F:\www\ckdemo\plugins\Wpadmin\src\Controller\MenuController.php, line 94]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE\src\Error\BaseErrorHandler.php, line 215
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE\src\Error\BaseErrorHandler.php, line 98
+[main] - [internal], line ??
+
+
+
+2016-04-11 10:35:54 Error: [Cake\Error\FatalErrorException] Class 'Admin\Utils\Util' not found
+Request URL: /admin/menu/edit/1
+Referer URL: http://ckdemo.dev/admin/menu/index
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\Error\BaseErrorHandler.php(98): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Class 'Admin\\Ut...', 'F:\\www\\ckdemo\\p...', 94)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2016-04-11 10:36:35 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/uploadfile.css
+Referer URL: http://ckdemo.dev/admin/menu/edit/1
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:36:35 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/css/validationEngine.jquery.css
+Referer URL: http://ckdemo.dev/admin/menu/edit/1
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:36:36 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqform/jquery.form.js
+Referer URL: http://ckdemo.dev/admin/menu/edit/1
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:36:37 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/menu/edit/1
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:36:37 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/menu/edit/1
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:36:38 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/menu/edit/1
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:36:51 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/css/validationEngine.jquery.css
+Referer URL: http://ckdemo.dev/admin/menu/edit/1
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:36:51 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/uploadfile.css
+Referer URL: http://ckdemo.dev/admin/menu/edit/1
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:36:52 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqform/jquery.form.js
+Referer URL: http://ckdemo.dev/admin/menu/edit/1
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:36:52 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/menu/edit/1
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:36:53 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/menu/edit/1
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:36:53 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/menu/edit/1
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:39:42 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/layer/layer.js
+Referer URL: http://ckdemo.dev/wpadmin/util/icon
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:39:43 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/zui/css/zui.min.css
+Referer URL: http://ckdemo.dev/wpadmin/util/icon
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:39:43 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/zui/js/zui.min.plus.js
+Referer URL: http://ckdemo.dev/wpadmin/util/icon
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:39:44 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Js could not be found.
+Exception Attributes: array (
+  'class' => 'Js',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/js/jquery.js
+Referer URL: http://ckdemo.dev/wpadmin/util/icon
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:39:45 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/zui/js/zui.min.plus.js
+Referer URL: http://ckdemo.dev/wpadmin/util/icon
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:39:46 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/layer/layer.js
+Referer URL: http://ckdemo.dev/wpadmin/util/icon
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:41:53 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/zui/js/zui.min.plus.js
+Referer URL: http://ckdemo.dev/wpadmin/util/icon
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:41:54 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/layer/layer.js
+Referer URL: http://ckdemo.dev/wpadmin/util/icon
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:41:54 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/zui/css/zui.min.css
+Referer URL: http://ckdemo.dev/wpadmin/util/icon
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:41:55 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Js could not be found.
+Exception Attributes: array (
+  'class' => 'Js',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/js/jquery.js
+Referer URL: http://ckdemo.dev/wpadmin/util/icon
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:41:55 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/zui/js/zui.min.plus.js
+Referer URL: http://ckdemo.dev/wpadmin/util/icon
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:41:56 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/layer/layer.js
+Referer URL: http://ckdemo.dev/wpadmin/util/icon
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:51:32 Error: Fatal Error (1): Class 'Admin\Utils\Util' not found in [F:\www\ckdemo\plugins\Wpadmin\src\Controller\MenuController.php, line 65]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE\src\Error\BaseErrorHandler.php, line 215
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE\src\Error\BaseErrorHandler.php, line 98
+[main] - [internal], line ??
+
+
+
+2016-04-11 10:51:33 Error: [Cake\Error\FatalErrorException] Class 'Admin\Utils\Util' not found
+Request URL: /admin/menu/add
+Referer URL: http://ckdemo.dev/admin/menu/index
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\Error\BaseErrorHandler.php(98): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Class 'Admin\\Ut...', 'F:\\www\\ckdemo\\p...', 65)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2016-04-11 10:53:24 Error: Fatal Error (1): Class 'wpadmin\Utils\Util' not found in [F:\www\ckdemo\plugins\Wpadmin\src\Controller\MenuController.php, line 66]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE\src\Error\BaseErrorHandler.php, line 215
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE\src\Error\BaseErrorHandler.php, line 98
+[main] - [internal], line ??
+
+
+
+2016-04-11 10:53:24 Error: [Cake\Error\FatalErrorException] Class 'wpadmin\Utils\Util' not found
+Request URL: /admin/menu/add
+Referer URL: http://ckdemo.dev/admin/menu/index
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\Error\BaseErrorHandler.php(98): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Class 'wpadmin\\...', 'F:\\www\\ckdemo\\p...', 66)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2016-04-11 10:53:43 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/uploadfile.css
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:53:44 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/css/validationEngine.jquery.css
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:53:45 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqform/jquery.form.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:53:45 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:53:45 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:53:46 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:53:47 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:54:32 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/uploadfile.css
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:54:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/css/validationEngine.jquery.css
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:54:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqform/jquery.form.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:54:34 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:54:34 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:54:35 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:54:49 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/css/validationEngine.jquery.css
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:54:50 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/uploadfile.css
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:54:50 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqform/jquery.form.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:54:51 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:54:51 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:54:52 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:54:52 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:54:53 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:35 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:35 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/uploadfile.css
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:36 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:36 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:37 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqform/jquery.form.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:37 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/css/validationEngine.jquery.css
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:38 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqform/jquery.form.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:39 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:40 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:41 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:52 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/css/validationEngine.jquery.css
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:52 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/uploadfile.css
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:53 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:54 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqform/jquery.form.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:54 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqupload/jquery.uploadfile.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:55 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:55 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 10:58:56 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqvalidation/js/jquery.validationEngine.js
+Referer URL: http://ckdemo.dev/admin/menu/add
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 11:26:07 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin could not be found.
+Exception Attributes: array (
+  'class' => 'Admin',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/admin/index
+Referer URL: http://ckdemo.dev/admin/menu/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 11:27:26 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/css/ui.jqgrid.css
+Referer URL: http://ckdemo.dev/admin/admin/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 11:27:27 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/css/ui.ace.css
+Referer URL: http://ckdemo.dev/admin/admin/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 11:27:27 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/js/jquery.jqGrid.min.js
+Referer URL: http://ckdemo.dev/admin/admin/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 11:27:28 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Lib could not be found.
+Exception Attributes: array (
+  'class' => 'Lib',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/lib/jqgrid/js/i18n/grid.locale-cn.js
+Referer URL: http://ckdemo.dev/admin/admin/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-04-11 11:36:20 Error: Fatal Error (1): Class 'Time' not found in [F:\www\ckdemo\config\bootstrap.php, line 224]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE\src\Error\BaseErrorHandler.php, line 215
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE\src\Error\BaseErrorHandler.php, line 98
+[main] - [internal], line ??
+
+
+
+2016-04-11 11:36:21 Error: [Cake\Error\FatalErrorException] Class 'Time' not found
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\Error\BaseErrorHandler.php(98): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Class 'Time' no...', 'F:\\www\\ckdemo\\c...', 224)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2016-04-11 11:36:21 Error: Fatal Error (1): Class 'Time' not found in [F:\www\ckdemo\config\bootstrap.php, line 224]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE\src\Error\BaseErrorHandler.php, line 215
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE\src\Error\BaseErrorHandler.php, line 98
+[main] - [internal], line ??
+
+
+
+2016-04-11 11:36:22 Error: [Cake\Error\FatalErrorException] Class 'Time' not found
+Stack Trace:
+#0 F:\www\ckdemo\vendor\cakephp\cakephp\src\Error\BaseErrorHandler.php(98): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Class 'Time' no...', 'F:\\www\\ckdemo\\c...', 224)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2016-04-11 13:57:47 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin could not be found.
+Exception Attributes: array (
+  'class' => 'Admin',
+  'plugin' => NULL,
+  'prefix' => 'admin',
+  '_ext' => NULL,
+)
+Request URL: /admin/admin/add
+Referer URL: http://ckdemo.dev/admin/admin/index
+Stack Trace:
+#0 F:\www\ckdemo\webroot\index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+

@@ -1,0 +1,25 @@
+2016-03-23 10:47:03 Debug: command 'bake' in plugin 'Bake' was not aliased, conflicts with 'Bake'
+2016-03-23 10:47:03 Debug: command 'benchmark' in plugin 'DebugKit' was not aliased, conflicts with 'DebugKit'
+2016-03-23 10:47:03 Debug: command 'whitespace' in plugin 'DebugKit' was not aliased, conflicts with 'DebugKit'
+2016-03-23 10:47:03 Debug: command 'migrations' in plugin 'Migrations' was not aliased, conflicts with 'Migrations'
+2016-03-23 10:47:03 Debug: command 'admin' in plugin 'Wpadmin' was not aliased, conflicts with 'Wpadmin'
+2016-04-07 17:32:33 Notice: Notice (8): Undefined variable: modelName in [F:\www\ckdemo\tmp\bake\edit-ctp.php, line 39]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+include - ROOT\tmp\bake\edit-ctp.php, line 39
+Bake\View\BakeView::_evaluate() - ROOT\vendor\cakephp\bake\src\View\BakeView.php, line 199
+Cake\View\View::_render() - CORE\src\View\View.php, line 952
+Bake\View\BakeView::render() - ROOT\vendor\cakephp\bake\src\View\BakeView.php, line 136
+Bake\Shell\Task\BakeTemplateTask::generate() - ROOT\vendor\cakephp\bake\src\Shell\Task\BakeTemplateTask.php, line 89
+Bake\Shell\Task\TemplateTask::getContent() - ROOT\vendor\cakephp\bake\src\Shell\Task\TemplateTask.php, line 413
+Bake\Shell\Task\TemplateTask::bake() - ROOT\vendor\cakephp\bake\src\Shell\Task\TemplateTask.php, line 374
+Bake\Shell\Task\TemplateTask::main() - ROOT\vendor\cakephp\bake\src\Shell\Task\TemplateTask.php, line 144
+Cake\Console\Shell::runCommand() - CORE\src\Console\Shell.php, line 456
+Cake\Console\Shell::runCommand() - CORE\src\Console\Shell.php, line 450
+Cake\Console\ShellDispatcher::_dispatch() - CORE\src\Console\ShellDispatcher.php, line 217
+Cake\Console\ShellDispatcher::dispatch() - CORE\src\Console\ShellDispatcher.php, line 181
+Cake\Console\ShellDispatcher::run() - CORE\src\Console\ShellDispatcher.php, line 127
+[main] - ROOT\bin\cake.php, line 33
+
+
+

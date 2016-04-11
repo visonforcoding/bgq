@@ -1,0 +1,65 @@
+2016-03-22 15:08:33 Notice: Notice (8): Undefined variable: plugin in [F:\www\ckdemo\vendor\cakephp\cakephp\src\Template\Error\missing_view.ctp, line 24]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+include - CORE\src\Template\Error\missing_view.ctp, line 24
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 992
+Cake\View\View::_render() - CORE\src\View\View.php, line 952
+Cake\View\View::render() - CORE\src\View\View.php, line 587
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 611
+Cake\Error\ExceptionRenderer::_outputMessage() - CORE\src\Error\ExceptionRenderer.php, line 320
+Cake\Error\ExceptionRenderer::render() - CORE\src\Error\ExceptionRenderer.php, line 192
+Cake\Error\ErrorHandler::_displayException() - CORE\src\Error\ErrorHandler.php, line 144
+Cake\Error\BaseErrorHandler::handleException() - CORE\src\Error\BaseErrorHandler.php, line 179
+Cake\Error\BaseErrorHandler::wrapAndHandleException() - CORE\src\Error\BaseErrorHandler.php, line 163
+[main] - [internal], line ??
+
+
+
+2016-03-22 15:12:07 Notice: Notice (8): Undefined variable: plugin in [F:\www\ckdemo\vendor\cakephp\cakephp\src\Template\Error\missing_view.ctp, line 24]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+include - CORE\src\Template\Error\missing_view.ctp, line 24
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 992
+Cake\View\View::_render() - CORE\src\View\View.php, line 952
+Cake\View\View::render() - CORE\src\View\View.php, line 587
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 611
+Cake\Error\ExceptionRenderer::_outputMessage() - CORE\src\Error\ExceptionRenderer.php, line 320
+Cake\Error\ExceptionRenderer::render() - CORE\src\Error\ExceptionRenderer.php, line 192
+Cake\Error\ErrorHandler::_displayException() - CORE\src\Error\ErrorHandler.php, line 144
+Cake\Error\BaseErrorHandler::handleException() - CORE\src\Error\BaseErrorHandler.php, line 179
+Cake\Error\BaseErrorHandler::wrapAndHandleException() - CORE\src\Error\BaseErrorHandler.php, line 163
+[main] - [internal], line ??
+
+
+
+2016-03-22 15:14:37 Notice: Notice (8): Undefined variable: plugin in [F:\www\ckdemo\vendor\cakephp\cakephp\src\Template\Error\missing_view.ctp, line 24]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+include - CORE\src\Template\Error\missing_view.ctp, line 24
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 992
+Cake\View\View::_render() - CORE\src\View\View.php, line 952
+Cake\View\View::render() - CORE\src\View\View.php, line 587
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 611
+Cake\Error\ExceptionRenderer::_outputMessage() - CORE\src\Error\ExceptionRenderer.php, line 320
+Cake\Error\ExceptionRenderer::render() - CORE\src\Error\ExceptionRenderer.php, line 192
+Cake\Error\ErrorHandler::_displayException() - CORE\src\Error\ErrorHandler.php, line 144
+Cake\Error\BaseErrorHandler::handleException() - CORE\src\Error\BaseErrorHandler.php, line 179
+Cake\Error\BaseErrorHandler::wrapAndHandleException() - CORE\src\Error\BaseErrorHandler.php, line 163
+[main] - [internal], line ??
+
+
+
+2016-04-08 15:56:56 Notice: Notice (8): Undefined index: articels in [F:\www\ckdemo\src\Template\Home\Articles\index.ctp, line 6]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+include - APP/Template\Home\Articles\index.ctp, line 6
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 992
+Cake\View\View::_render() - CORE\src\View\View.php, line 952
+Cake\View\View::render() - CORE\src\View\View.php, line 587
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 611
+Cake\Routing\Dispatcher::_invoke() - CORE\src\Routing\Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE\src\Routing\Dispatcher.php, line 87
+[main] - ROOT\webroot\index.php, line 37
+
+
+
