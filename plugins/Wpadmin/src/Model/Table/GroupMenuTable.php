@@ -26,7 +26,7 @@ class GroupMenuTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('cwp_group_menu');
+        $this->table('group_menu');
         $this->displayField('id');
         $this->primaryKey('id');
 

@@ -23,12 +23,12 @@ class AdminTable extends Table {
     public function initialize(array $config) {
         parent::initialize($config);
 
-        $this->table('cwp_admin');
+        $this->table('admin');
         $this->displayField('id');
         $this->primaryKey('id');
         $this->belongsToMany('g', [
             'className' => 'Wpadmin.Group',
-            'joinTable' => 'cwp_admin_group',
+            'joinTable' => 'admin_group',
             'foreignKey' => 'admin_id',
             'targetForeignKey' => 'group_id'
         ]);
