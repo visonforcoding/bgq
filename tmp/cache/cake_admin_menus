@@ -1,2 +1,0 @@
-1460370021
-a:1:{i:0;a:10:{s:2:"id";i:1;s:4:"name";s:12:"系统管理";s:4:"node";N;s:3:"pid";i:0;s:5:"class";N;s:4:"rank";N;s:7:"is_menu";b:1;s:6:"status";b:1;s:6:"remark";N;s:5:"child";a:1:{i:0;a:9:{s:2:"id";i:2;s:4:"name";s:12:"菜单管理";s:4:"node";s:17:"/admin/menu/index";s:3:"pid";i:1;s:5:"class";s:18:"icon-align-justify";s:4:"rank";N;s:7:"is_menu";b:1;s:6:"status";b:1;s:6:"remark";s:0:"";}}}}
