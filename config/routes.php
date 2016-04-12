@@ -92,6 +92,13 @@ Router::prefix('admin', function ($routes) {
     $routes->connect('/:controller/:action/*');
 });
 
+Router::prefix('mobile', function ($routes) {
+    // Because you are in the admin scope,
+    // you do not need to include the /admin prefix
+    // or the admin route element.
+    $routes->connect('/:controller/:action/*');
+});
+
 
 /**
  * Load all plugin routes.  See the Plugin documentation on
