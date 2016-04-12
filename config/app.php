@@ -227,7 +227,7 @@ return [
             //'port' => 'non_standard_port_number',
             'username' => 'php',
             'password' => 'asdqwe123',
-            'database' => 'cakedemo',
+            'database' => 'binggq',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'flags' => [],
