@@ -52,7 +52,7 @@ class MenuCell extends Cell {
     protected function initData() {
         $menus = \Cake\Cache\Cache::read('admin_menus');
         if ($menus === false) {
-            $Menu = \Cake\ORM\TableRegistry::get('cwp_menu');
+            $Menu = \Cake\ORM\TableRegistry::get('menu');
             $menus = $Menu->find()->hydrate(false)->where('status = 1')->orderDesc('rank')->toArray();
             $menus =\Wpadmin\Utils\Util::getMenu($menus);
             \Cake\Cache\Cache::write('admin_menus', $menus);

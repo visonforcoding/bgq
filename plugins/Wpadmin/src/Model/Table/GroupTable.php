@@ -23,7 +23,7 @@ class GroupTable extends Table {
     public function initialize(array $config) {
         parent::initialize($config);
 
-        $this->table('cwp_group');
+        $this->table('`group`');
         $this->alias('g');
         $this->displayField('name');
 //        $this->hasMany('Admin', [
@@ -34,7 +34,7 @@ class GroupTable extends Table {
 //        ]);
         $this->belongsToMany('menu', [
             'className' => 'Wpadmin.Menu',
-            'joinTable' => 'cwp_group_menu',
+            'joinTable' => 'group_menu',
             'foreignKey' => 'group_id',
             'targetForeignKey' => 'menu_id'
         ]);

@@ -23,12 +23,12 @@ class MenuTable extends Table {
     public function initialize(array $config) {
         parent::initialize($config);
 
-        $this->table('cwp_menu');
+        $this->table('menu');
         $this->displayField('name');
         $this->primaryKey('id');
         $this->belongsToMany('g', [
             'className' => 'Admin.Group',
-            'joinTable' => 'cwp_group_menu',
+            'joinTable' => 'group_menu',
             'foreignKey' => 'menu_id',
             'targetForeignKey' => 'group_id'
         ]);
