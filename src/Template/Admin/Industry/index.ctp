@@ -2,38 +2,10 @@
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
 <?php $this->end() ?> 
-<%
-/**
-* CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
-* Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
-*
-* Licensed under The MIT License
-* For full copyright and license information, please see the LICENSE.txt
-* Redistributions of files must retain the above copyright notice.
-*
-* @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
-* @link          http://cakephp.org CakePHP(tm) Project
-* @since         0.1.0
-* @license       http://www.opensource.org/licenses/mit-license.php MIT License
-*/
-use Cake\Utility\Inflector;
-
-$fields = collection($fields)
-->filter(function($field) use ($schema) {
-return !in_array($schema->columnType($field), ['binary', 'text']);
-});
-//->take(7);
-
-if (isset($modelObject) && $modelObject->behaviors()->has('Tree')) {
-$fields = $fields->reject(function ($field) {
-return $field === 'lft' || $field === 'rght';
-});
-}
-%>
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
-            <a href="/admin/<%= strtolower($modelClass) %>/add" class="btn btn-small btn-warning">
+            <a href="/admin/industry/add" class="btn btn-small btn-warning">
                 <i class="icon icon-plus-sign"></i>添加
             </a>
             <div class="form-group">
@@ -63,28 +35,15 @@ return $field === 'lft' || $field === 'rght';
         });
         $.zui.store.pageClear(); //刷新页面缓存清除
         $("#list").jqGrid({
-            url: "/admin/<%= strtolower($modelClass) %>/getDataList",
+            url: "/admin/industry/getDataList",
             datatype: "json",
             mtype: "POST",
             colNames:   
-<%
-     $colNamesArr=[];
-     $colModelArr = [];
-    foreach ($fields as $field) {
-           if (in_array($field, $primaryKey)) {
-                    continue;
-            }
-          if (!in_array($field, ['created', 'modified', 'updated'])) {
-                     $fieldData =$schema->column($field);
-                     $colName = $fieldData['comment']?$fieldData['comment']:$field;
-                     $colNamesArr[] = "'".$colName."'"; 
-                     $colModelArr[] = "\r\n{name:'".$field."',editable:true,align:'center'}";
-            }
-    }
-        $colModelArr[] ="\r\n{name:'actionBtn',viewable:false,sortable:false,formatter:actionFormatter}";
-          echo '['.implode(',',$colNamesArr).",'操作']";
-  %>,
-            colModel: [<% echo implode(',',$colModelArr);%>],
+['父id','名称','操作'],
+            colModel: [
+{name:'pid',editable:true,align:'center'},
+{name:'name',editable:true,align:'center'},
+{name:'actionBtn',viewable:false,sortable:false,formatter:actionFormatter}],
             pager: "#pager",
             rowNum: 10,
             rowList: [10, 20, 30],
@@ -144,7 +103,7 @@ return $field === 'lft' || $field === 'rght';
     function actionFormatter(cellvalue, options, rowObject) {
         response = '<button onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-trash"></i> 删除</button>';
         response += '<button onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-eyes"></i> 查看详情</button>';
-        response += '<a href="/admin/<%= strtolower($modelClass) %>/edit/' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini"><i class="icon icon-pencil"></i> 修改</a>';
+        response += '<a href="/admin/industry/edit/' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini"><i class="icon icon-pencil"></i> 修改</a>';
         return response;
     }
 
@@ -156,7 +115,7 @@ return $field === 'lft' || $field === 'rght';
                 type: 'post',
                 data: {id: id},
                 dataType: 'json',
-                url: '/admin/<%= strtolower($modelClass) %>/delete',
+                url: '/admin/industry/delete',
                 success: function (res) {
                     layer.msg(res.msg);
                      if (res.status) {
@@ -189,12 +148,12 @@ return $field === 'lft' || $field === 'rght';
                     searchData['sidx'] = sortColumnName;
                     searchData['sort'] = sortOrder;
                     var searchQueryStr  = $.param(searchData);
-                    $("body").append("<iframe src='/admin/<%= strtolower($modelClass) %>/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                    $("body").append("<iframe src='/admin/industry/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
                 
              function doView(id) {
                 //查看明细
-                url = '/admin/<%=strtolower($modelClass)%>/view?id='+id;
+                url = '/admin/industry/view?id='+id;
                 layer.open({
                     type: 2,
                     title: '查看详情',
