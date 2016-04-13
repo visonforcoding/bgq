@@ -62,6 +62,6 @@ public function exportExcel()
         $res = $query->toArray();
         $this->autoRender = false;
         $filename = '<%=$currentModelName%>_'.date('Y-m-d').'.csv';
-        \Admin\Utils\Export::exportCsv($column,$res,$filename);
+        \Wpadmin\Utils\Export::exportCsv($column,$res,$filename);
 
 }

@@ -199,7 +199,7 @@ class IndustryController extends AppController {
         $res = $query->toArray();
         $this->autoRender = false;
         $filename = 'Industry_' . date('Y-m-d') . '.csv';
-        \Admin\Utils\Export::exportCsv($column, $res, $filename);
+        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
 
 }
