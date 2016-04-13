@@ -43,7 +43,7 @@
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">排序</label>
-        <div class="col-md-8">
+        <div class="col-md-1">
             <?php
             echo $this->Form->input('rank', ['label' => false, 'class' => 'form-control']);
             ?>
@@ -51,7 +51,7 @@
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">是否在菜单显示</label>
-        <div class="col-md-8">
+        <div class="col-md-1">
             <?php
             echo $this->Form->input('is_menu', ['label' => false, 'class' => 'form-control']);
             ?>
