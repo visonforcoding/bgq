@@ -5,7 +5,7 @@
  * Created on   :   2016-1-10 14:46:41 by allen <blog.rc5j.cn> , caowenpeng1990@126.com
  */
 
-namespace Admin\Utils;
+namespace Wpadmin\Utils;
 
 class Export {
 

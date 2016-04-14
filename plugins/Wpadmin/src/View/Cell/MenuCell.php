@@ -44,17 +44,20 @@ class MenuCell extends Cell {
         $this->set('breadFirst', $this->_breadFirst);
         $this->set('breadSecond', $this->_breadSecond);
     }
-    
-    public function title(){
-        $this->set('pageTitle',  $this->_pageTitle);
+
+    public function title() {
+        $this->set('pageTitle', $this->_pageTitle);
     }
 
     protected function initData() {
         $menus = \Cake\Cache\Cache::read('admin_menus');
         if ($menus === false) {
             $Menu = \Cake\ORM\TableRegistry::get('menu');
-            $menus = $Menu->find()->hydrate(false)->where('status = 1')->orderDesc('rank')->toArray();
-            $menus =\Wpadmin\Utils\Util::getMenu($menus);
+            $menus = $Menu->find('threaded', [
+                        'keyField' => 'id',
+                        'parentField' => 'pid'
+                    ])->hydrate(false)->where('status = 1')->orderDesc('rank')->toArray();
+            $menus = \Wpadmin\Utils\Util::getMenu($menus);
             \Cake\Cache\Cache::write('admin_menus', $menus);
         }
         $this->_menus = $menus;
@@ -64,21 +67,21 @@ class MenuCell extends Cell {
         $this->_url = $url;
         $active = null;
         foreach ($menus as $value) {
-            if (isset($value['child'])) {
-                foreach ($value['child'] as $sub_menu) {
+            if (isset($value['children'])) {
+                foreach ($value['children'] as $sub_menu) {
                     if ($sub_menu['node'] == $url) {
                         $this->_pageTitle = $sub_menu['name'];
-                        $this->_breadFirst = ['name'=>$value['name'],'node'=>$value['node']];
-                        $this->_breadSecond = ['name'=>$sub_menu['name'],'node'=>$sub_menu['node']];
+                        $this->_breadFirst = ['name' => $value['name'], 'node' => $value['node']];
+                        $this->_breadSecond = ['name' => $sub_menu['name'], 'node' => $sub_menu['node']];
                         break;
                     }
-                    if (isset($sub_menu['child'])) {
-                        foreach ($sub_menu['child'] as $v) {
+                    if (isset($sub_menu['children'])) {
+                        foreach ($sub_menu['children'] as $v) {
                             if ($v['node'] == $url) {
                                 $active = $sub_menu['node'];
                                 $this->_active = $active;
                                 $this->_pageTitle = $v['name'];
-                                $this->_breadFirst = ['name' => $value['name'],'node' => $value['node']];
+                                $this->_breadFirst = ['name' => $value['name'], 'node' => $value['node']];
                                 $this->_breadSecond = ['name' => $sub_menu['name'], 'node' => $sub_menu['node']];
                             }
                         }

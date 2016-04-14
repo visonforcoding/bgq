@@ -187,7 +187,7 @@ class MenuController extends AppController {
         $res = $query->toArray();
         $this->autoRender = false;
         $filename = 'Menu_' . date('Y-m-d') . '.csv';
-        \Admin\Utils\Export::exportCsv($column, $res, $filename);
+        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
 
 }

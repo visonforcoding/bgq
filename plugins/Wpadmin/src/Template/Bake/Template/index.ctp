@@ -156,7 +156,7 @@ return $field === 'lft' || $field === 'rght';
                 type: 'post',
                 data: {id: id},
                 dataType: 'json',
-                url: '/admin/<%= strtolower($modelClass) %>/delete',
+                url: '/wpadmin/<%= strtolower($modelClass) %>/delete',
                 success: function (res) {
                     layer.msg(res.msg);
                      if (res.status) {
