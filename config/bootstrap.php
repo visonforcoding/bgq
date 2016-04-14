@@ -197,6 +197,14 @@ Plugin::load('Migrations');
 // Debug Kit should not be installed on a production system
 if (Configure::read('debug')) {
     //Plugin::load('DebugKit', ['bootstrap' => true]);
+   $conn = ConnectionManager::get('default');
+   $conn->logQueries(true);
+   Log::config('queries', [
+    'className' => 'File',
+    'path' => LOGS,
+    'file' => 'queries.log',
+    'scopes' => ['queriesLog']
+]); 
 }
 
 /**
@@ -223,3 +231,6 @@ DispatcherFactory::add('ControllerFactory');
 //    ->useLocaleParser();
 
 Plugin::load('Wpadmin', ['bootstrap' => true, 'routes' => true]);
+
+//载入自定义配置文件
+Configure::load('wpadmin');

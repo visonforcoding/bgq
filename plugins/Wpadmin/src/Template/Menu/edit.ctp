@@ -59,7 +59,7 @@
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">状态</label>
-        <div class="col-md-8">
+        <div class="col-md-1">
             <?php
             echo $this->Form->input('status', ['label' => false, 'class' => 'form-control']);
             ?>

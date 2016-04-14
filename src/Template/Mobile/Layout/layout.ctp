@@ -6,6 +6,7 @@
         <title></title>
         <link href="/mobile/mui/css/mui.min.css" rel="stylesheet" />
         <link href="/mobile/mui/css/style.css" rel="stylesheet" />
+        <?= $this->fetch('static') ?>
     </head>
     <body>
         <?= $this->fetch('content') ?>

@@ -38,8 +38,12 @@ echo $this->element('form');
                 success: function (res) {
                     if (typeof res === 'object') {
                         if (res.status) {
-                            layer.alert(res.msg, function () {
+                            layer.confirm(res.msg, {
+                                btn: ['确认', '继续添加'] //按钮
+                            }, function () {
                                 window.location.href = '/admin/<%= strtolower($modelClass) %>/index';
+                            }, function () {
+                                window.location.reload();
                             });
                         } else {
                             layer.alert(res.msg, {icon: 5});

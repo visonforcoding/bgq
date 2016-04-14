@@ -35,12 +35,16 @@ if (PHP_SAPI === 'cli') {
         $view = $event->subject();
         if (strtolower($view->theme) == 'wpadmin') {
             $menuTable = \Cake\ORM\TableRegistry::get('menu');
-            $menu = $menuTable->newEntity();
-            $menu->name = strtolower($view->viewVars['name']).'管理';
-            $menu->node = '/admin/'.strtolower($view->viewVars['name']).'/index';
-            $menu->is_menu = 1;
-            $menu->pid = 1;
-            $menuTable->save($menu);
+            $node = '/admin/'.strtolower($view->viewVars['name']).'/index';
+            $menu = $menuTable->find()->where("`node` = '$node'")->first();
+            if(!$menu){
+                $menu = $menuTable->newEntity();
+                $menu->name = strtolower($view->viewVars['name']).'管理';
+                $menu->node = $node;
+                $menu->is_menu = 1;
+                $menu->pid = 1;
+                $menuTable->save($menu);
+            }
         }
     });
 }

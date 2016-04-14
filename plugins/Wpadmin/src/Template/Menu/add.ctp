@@ -8,7 +8,7 @@
         <label class="col-md-2 control-label">节点名称</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('name', ['label' => false, 'class' => 'form-control']);
+            echo $this->Form->input('name', ['label' => false, 'class' => 'form-control validate[required]']);
             ?>
         </div>
     </div>

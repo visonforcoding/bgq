@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh"><head>
         <meta charset="utf-8">
-        <title>后台管理登录</title>
+        <title><?=getPluginConfig('project.namfe')?>后台管理登录</title>
         <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
@@ -25,8 +25,12 @@
         </style>
         <div class="navbar navbar-inverse" role="navigation">
             <div class="navbar-header">
-                <a class="" href="index.html"><span class="navbar-brand"><span class="fa fa-paper-plane"></span>Seven-baby</span></a></div>
-
+                <a class="" href="index.html"><span class="navbar-brand">
+                    <span class="fa fa-paper-plane"></span>
+                        <?=  templateDefault(getPluginConfig('project.name'),'wpadmin后台管理系统')?>
+                    </span>
+                </a>
+            </div>
             <div class="navbar-collapse collapse" style="height: 1px;">
 
             </div>
@@ -55,7 +59,7 @@
                 </form>
             </div>
         </div>
-        <p class="pull-right" style=""><a href="http://www.portnine.com" target="blank" style="font-size: .75em; margin-top: .25em;">联系管理员</a></p>
+        <p class="pull-right" style=""><a href="#" target="blank" style="font-size: .75em; margin-top: .25em;">联系管理员</a></p>
         <p><a href="reset-password.html">忘记密码?</a></p>
     </div>
 

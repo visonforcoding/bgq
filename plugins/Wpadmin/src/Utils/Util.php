@@ -86,7 +86,7 @@ class Util {
      * @return boolean
      */
     public function directory_tree($source_dir) {
-        $realPath = APP_PATH.'public/'.$source_dir;
+        $realPath = APP_PATH . 'public/' . $source_dir;
         if ($fp = @opendir($realPath)) {
             $filedata = array();
 //            $source_dir = rtrim($source_dir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
@@ -96,17 +96,17 @@ class Util {
                 if (!trim($file, '.') OR ( $file[0] == '.')) {
                     continue;
                 }
-                if (is_dir($realPath .'/'. $file)) {
+                if (is_dir($realPath . '/' . $file)) {
                     $filedata[] = array(
                         'isDir' => true,
                         'name' => $file,
-                        'path' => $source_dir .'/'. $file
+                        'path' => $source_dir . '/' . $file
                     );
                 } else {
                     $filedata[] = array(
                         'isDir' => false,
                         'name' => $file,
-                         'path'=>$source_dir.'/'.$file   
+                        'path' => $source_dir . '/' . $file
                     );
                 }
             }
