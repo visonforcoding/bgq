@@ -8,6 +8,7 @@ use App\Controller\Mobile\AppController;
  * Index Controller
  *
  * @property \App\Model\Table\IndexTable $Index
+ * @property \App\Controller\Component\SmsComponent $Sms
  */
 class IndexController extends AppController {
 
@@ -17,6 +18,8 @@ class IndexController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
+        $this->loadComponent('Sms');
+        debug($this->Sms->sendByQf106('18316629973', '发送短信'));exit();
         $articleTable = \Cake\ORM\TableRegistry::get('articles');
         $articles = $articleTable->find()->all();
         $this->set(array(
