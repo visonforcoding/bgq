@@ -57,7 +57,6 @@ class MenuCell extends Cell {
                         'keyField' => 'id',
                         'parentField' => 'pid'
                     ])->hydrate(false)->where('status = 1')->orderDesc('rank')->toArray();
-            $menus = \Wpadmin\Utils\Util::getMenu($menus);
             \Cake\Cache\Cache::write('admin_menus', $menus);
         }
         $this->_menus = $menus;

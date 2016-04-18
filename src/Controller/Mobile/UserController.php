@@ -3,12 +3,13 @@
 namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
-use Gregwar\Image\Image;
+use Cake\Mailer\Email;
 
 /**
  * User Controller
  *
  * @property \App\Model\Table\UserTable $User
+ * @property \App\Controller\Component\HanvonComponent $Hanvon
  */
 class UserController extends AppController {
 
@@ -49,21 +50,20 @@ class UserController extends AppController {
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
     public function register() {
-
-        $mp = WWW_ROOT . '/mobile/img/mp.png';
-//        $type = pathinfo($mp, PATHINFO_EXTENSION);
-//        $data = file_get_contents($mp);
-//        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-        //debug($base64);
-        $img = Image::open($mp);
-        $base64 = $img->grayscale()->inline();
-        $http = new \Cake\Network\Http\Client();
-        $response = $http->post('http://op.juhe.cn/hanvon/bcard/query', [
-            'key' => '9379ea56576d3d2c07c992afa3383f3b',
-            'color' => 'gray',
-            "image" => $base64
-        ]);
-        debug($response);
+        //发邮件
+        $email = new Email('default');
+        $result = $email->from(['evelyn@smartlemon.cn' => '并购圈'])
+                ->to('caowenpeng1990@126.com')
+                ->template('default')
+                ->emailFormat('html')
+                ->subject('About')
+                ->send('My message');
+        debug($result);
+        exit();
+        $mp = WWW_ROOT . '/mobile/img/mp.jpg';
+        $this->loadComponent('Hanvon');
+        $response = $this->Hanvon->handMpByJuhe($mp);
+        var_dump($response);
         exit();
         $user = $this->User->newEntity();
         if ($this->request->is('post')) {

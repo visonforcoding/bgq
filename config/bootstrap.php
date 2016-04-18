@@ -234,3 +234,4 @@ Plugin::load('Wpadmin', ['bootstrap' => true, 'routes' => true]);
 
 //载入自定义配置文件
 Configure::load('wpadmin');
+Configure::load('dataconf');

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>zui_demo</title>
+        <title><?=templateDefault(getPluginConfig('project.name').'后台管理系统','wpadmin后台管理系统')?></title>
         <!-- zui -->
         <link href="/wpadmin/lib/zui/css/zui.min.css" rel="stylesheet">
         <link href="/wpadmin/lib/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">

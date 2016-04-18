@@ -14,6 +14,7 @@
  */
 namespace Cake\Validation;
 
+use Cake\I18n\Time;
 use Cake\Utility\Text;
 use DateTimeInterface;
 use LogicException;
@@ -457,6 +458,33 @@ class Validation
     }
 
     /**
+     * Date and/or time string validation.
+     * Uses `I18n::Time` to parse the date. This means parsing is locale dependent.
+     *
+     * @param string|\DateTime $check a date string or object (will always pass)
+     * @param string $type Parser type, one out of 'date', 'time', and 'datetime'
+     * @param string|int|null $format any format accepted by IntlDateFormatter
+     * @return bool Success
+     * @throws \InvalidArgumentException when unsupported $type given
+     * @see \Cake\I18N\Time::parseDate(), \Cake\I18N\Time::parseTime(), \Cake\I18N\Time::parseDateTime()
+     */
+    public static function localizedTime($check, $type = 'datetime', $format = null)
+    {
+        if ($check instanceof DateTimeInterface) {
+            return true;
+        }
+        static $methods = [
+            'date' => 'parseDate',
+            'time' => 'parseTime',
+            'datetime' => 'parseDateTime',
+        ];
+        if (empty($methods[$type])) {
+            throw new \InvalidArgumentException('Unsupported parser type given.');
+        }
+        return (Time::{$methods[$type]}($check, $format) !== null);
+    }
+
+    /**
      * Boolean validation, determines if value passed is a boolean integer or true/false.
      *
      * @param string $check a valid boolean
@@ -492,13 +520,11 @@ class Validation
 
             if ($places === null) {
                 $regex = "/^{$sign}(?:{$lnum}|{$dnum}){$exp}$/";
-
             } elseif ($places === true) {
                 if (is_float($check) && floor($check) === $check) {
                     $check = sprintf("%.1f", $check);
                 }
                 $regex = "/^{$sign}{$dnum}{$exp}$/";
-
             } elseif (is_numeric($places)) {
                 $places = '[0-9]{' . $places . '}';
                 $dnum = "(?:[0-9]*[\.]{$places}|{$lnum}[\.]{$places})";
@@ -1001,7 +1027,7 @@ class Validation
         if (isset($options['types']) && !static::mimeType($file, $options['types'])) {
             return false;
         }
-        return true;
+        return is_uploaded_file($file['tmp_name']);
     }
 
     /**

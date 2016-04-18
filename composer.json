@@ -10,7 +10,7 @@
         "mobiledetect/mobiledetectlib": "2.*",
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "*",
-        "gregwar/image": "2.*"
+        "intervention/image": "^2.3"
     },
     "require-dev": {
         "psy/psysh": "@stable",
