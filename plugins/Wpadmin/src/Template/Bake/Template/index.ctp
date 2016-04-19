@@ -81,7 +81,7 @@ return $field === 'lft' || $field === 'rght';
                      $colModelArr[] = "\r\n{name:'".$field."',editable:true,align:'center'}";
             }
     }
-        $colModelArr[] ="\r\n{name:'actionBtn',viewable:false,sortable:false,formatter:actionFormatter}";
+        $colModelArr[] ="\r\n{name:'actionBtn',align:'center',viewable:false,sortable:false,formatter:actionFormatter}";
           echo '['.implode(',',$colNamesArr).",'操作']";
   %>,
             colModel: [<% echo implode(',',$colModelArr);%>],
@@ -106,7 +106,7 @@ return $field === 'lft' || $field === 'rght';
                 repeatitems: false,
                 id: "0"
             },
-        }).navGrid('#pager', {edit: true, add: true, del: true, view: true}, searchFn, editFn, addFn, delFn, viewFn);
+        }).navGrid('#pager', {edit: false, add: false, del: false, view: true}, searchFn, editFn, addFn, delFn, viewFn);
     });
     var searchFn = {
     };
@@ -127,24 +127,14 @@ return $field === 'lft' || $field === 'rght';
             return [success, message];
         }
     };
-    function edit() {
-
-    }
-    ;
-    function addFn() {
-        console.log('add');
-    }
-    function delFn() {
-        console.log('add');
-    }
     function viewFn() {
         console.log('view');
     }
 
     function actionFormatter(cellvalue, options, rowObject) {
-        response = '<button onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-trash"></i> 删除</button>';
-        response += '<button onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-eyes"></i> 查看详情</button>';
-        response += '<a href="/admin/<%= strtolower($modelClass) %>/edit/' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini"><i class="icon icon-pencil"></i> 修改</a>';
+        response = '<a title="添加" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+        response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eyes"></i> </a>';
+        response += '<a title="编辑" href="/admin/<%= strtolower($modelClass) %>/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
         return response;
     }
 

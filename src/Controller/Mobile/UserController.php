@@ -51,28 +51,14 @@ class UserController extends AppController {
      */
     public function register() {
         //发邮件
-        $email = new Email('default');
-        $result = $email->from(['evelyn@smartlemon.cn' => '并购圈'])
-                ->to('caowenpeng1990@126.com')
-                ->template('default')
-                ->emailFormat('html')
-                ->subject('About')
-                ->send('My message');
-        debug($result);
-        exit();
-        $mp = WWW_ROOT . '/mobile/img/mp.jpg';
-        $this->loadComponent('Hanvon');
-        $response = $this->Hanvon->handMpByJuhe($mp);
-        var_dump($response);
-        exit();
         $user = $this->User->newEntity();
         if ($this->request->is('post')) {
             $user = $this->User->patchEntity($user, $this->request->data);
             if ($this->User->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                $this->Util->ajaxReturn(true,'添加成功');
             } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                $errors = $user->errors();
+                $this->Util->ajaxReturn(false,$errors);
             }
         }
 //        $industries = $this->User->Industrie->find('list', ['limit' => 200]);
@@ -129,7 +115,9 @@ class UserController extends AppController {
      * 用户登录
      */
     public function login() {
-        
+        $this->set(array(
+            'pageTitle'=>'登录'
+        ));
     }
 
 }

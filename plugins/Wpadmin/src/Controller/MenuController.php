@@ -115,6 +115,7 @@ class MenuController extends AppController {
             $this->response->type('json');
             $menu = $this->Menu->get($id);
             if ($this->Menu->delete($menu)) {
+                \Cake\Cache\Cache::delete('admin_menus');
                 echo json_encode(array('status' => true, 'msg' => '删除成功'));
             } else {
                 $errors = $menu->errors();

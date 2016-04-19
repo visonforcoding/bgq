@@ -31,17 +31,13 @@ $compact = ["'" . $singularName . "'"];
             'contain' => [<%= $this->Bake->stringifyList($belongsToMany, ['indent' => false]) %>]
         ]);
         if ($this->request->is(['post','put'])) {
-                 $this->autoRender = false;
-                 $this->response->type('json');
             $<%= $singularName %> = $this-><%= $currentModelName %>->patchEntity($<%= $singularName %>, $this->request->data);
             if ($this-><%= $currentModelName; %>->save($<%= $singularName %>)) {
-                 echo json_encode(array('status'=>true,'msg'=>'修改成功'));
+                  $this->Util->ajaxReturn(true,'删除成功');
             } else {
                  $errors = $<%=$singularName%>->errors();
-                echo json_encode(array('status'=>false,'msg'=>  getMessage($errors)));
-                
+                $this->Util->ajaxReturn(false,getMessage($errors));
             }
-            return;
         }
           <%
         $associations = array_merge(

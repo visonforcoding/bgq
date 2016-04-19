@@ -26,15 +26,12 @@
         $this->request->allowMethod('post');
          $id = $this->request->data('id');
                 if ($this->request->is('post')) {
-                 $this->autoRender = false;
-                $this->response->type('json');
                 $<%= $singularName %> = $this-><%= $currentModelName %>->get($id);
                  if ($this-><%= $currentModelName; %>->delete($<%= $singularName %>)) {
-                        echo json_encode(array('status' => true, 'msg' => '删除成功'));
+                     $this->Util->ajaxReturn(true,'删除成功');
                 } else {
                     $errors = $<%=$singularName%>->errors();
-                    echo json_encode(array('status' => false, 'msg' => getMessage($errors)));
-            }
+                    $this->Util->ajaxReturn(true,getMessage($errors));
+                }
           }
-        return ;
     }
