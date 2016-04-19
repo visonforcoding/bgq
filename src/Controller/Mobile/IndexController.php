@@ -18,13 +18,6 @@ class IndexController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        $this->loadComponent('Sms');
-        debug($this->Sms->sendByQf106('18316629973', '发送短信'));exit();
-        $articleTable = \Cake\ORM\TableRegistry::get('articles');
-        $articles = $articleTable->find()->all();
-        $this->set(array(
-            'articles'=>  json_encode($articles)
-        ));
     }
 
     /**

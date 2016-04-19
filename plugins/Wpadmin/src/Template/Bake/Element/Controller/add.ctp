@@ -24,17 +24,14 @@ $compact = ["'" . $singularName . "'"];
     {
         $<%= $singularName %> = $this-><%= $currentModelName %>->newEntity();
         if ($this->request->is('post')) {
-                 $this->autoRender = false;
-                 $this->response->type('json');
             $<%= $singularName %> = $this-><%= $currentModelName %>->patchEntity($<%= $singularName %>, $this->request->data);
             if ($this-><%= $currentModelName; %>->save($<%= $singularName %>)) {
                  echo json_encode(array('status'=>true,'msg'=>'添加成功'));
+                 $this->Util->ajaxReturn(true,'添加成功');
             } else {
                  $errors = $<%=$singularName%>->errors();
-                echo json_encode(array('status'=>false,'msg'=>  getMessage($errors),'errors'=>$errors));
-                
+                 $this->Util->ajaxReturn(false,getMessage($errors));
             }
-            return;
         }
         <%
         $associations = array_merge(

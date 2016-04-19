@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use App\Model\Entity\User;
@@ -13,8 +14,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Industries
  * @property \Cake\ORM\Association\BelongsTo $Cities
  */
-class UserTable extends Table
-{
+class UserTable extends Table {
 
     /**
      * Initialize method
@@ -22,8 +22,7 @@ class UserTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->table('user');
@@ -31,10 +30,18 @@ class UserTable extends Table
         $this->primaryKey('id');
 
         $this->belongsTo('Industries', [
-            'foreignKey' => 'industry_id'
+            'foreignKey' => 'industry_id',
+            'className' => 'Industry',
+            'joinTable' => 'industry',
         ]);
-        $this->belongsTo('Cities', [
-            'foreignKey' => 'city_id'
+
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'create_time' => 'new',
+                    'update_time' => 'always'
+                ]
+            ]
         ]);
     }
 
@@ -44,83 +51,41 @@ class UserTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+                ->integer('id')
+                ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('phone', 'create')
-            ->notEmpty('phone');
+                ->requirePresence('phone', 'create')
+                ->notEmpty('phone');
 
         $validator
-            ->requirePresence('pwd', 'create')
-            ->notEmpty('pwd');
+                ->requirePresence('pwd', 'create')
+                ->notEmpty('pwd');
 
         $validator
-            ->requirePresence('truename', 'create')
-            ->notEmpty('truename');
+                ->requirePresence('truename', 'create')
+                ->notEmpty('truename');
 
         $validator
-            ->requirePresence('level', 'create')
-            ->notEmpty('level');
+                ->allowEmpty('company');
 
         $validator
-            ->allowEmpty('idcard');
+                ->allowEmpty('position');
 
         $validator
-            ->allowEmpty('company');
+                ->email('email')
+                ->allowEmpty('email');
+
 
         $validator
-            ->allowEmpty('position');
+                ->allowEmpty('goodat');
 
         $validator
-            ->email('email')
-            ->allowEmpty('email');
+                ->requirePresence('card_path', 'create')
+                ->notEmpty('card_path');
 
-        $validator
-            ->integer('gender')
-            ->requirePresence('gender', 'create')
-            ->notEmpty('gender');
-
-        $validator
-            ->allowEmpty('goodat');
-
-        $validator
-            ->requirePresence('card_path', 'create')
-            ->notEmpty('card_path');
-
-        $validator
-            ->requirePresence('avatar', 'create')
-            ->notEmpty('avatar');
-
-        $validator
-            ->requirePresence('ymjy', 'create')
-            ->notEmpty('ymjy');
-
-        $validator
-            ->requirePresence('ywnl', 'create')
-            ->notEmpty('ywnl');
-
-        $validator
-            ->requirePresence('reason', 'create')
-            ->notEmpty('reason');
-
-        $validator
-            ->integer('status')
-            ->requirePresence('status', 'create')
-            ->notEmpty('status');
-
-        $validator
-            ->dateTime('create_time')
-            ->requirePresence('create_time', 'create')
-            ->notEmpty('create_time');
-
-        $validator
-            ->dateTime('update_time')
-            ->requirePresence('update_time', 'create')
-            ->notEmpty('update_time');
 
         return $validator;
     }
@@ -132,11 +97,11 @@ class UserTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
+    public function buildRules(RulesChecker $rules) {
         $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->isUnique(['phone']));
         $rules->add($rules->existsIn(['industry_id'], 'Industries'));
-        $rules->add($rules->existsIn(['city_id'], 'Cities'));
         return $rules;
     }
+
 }

@@ -24,10 +24,16 @@ use Cake\Event\Event;
  *
  * Add your application-wide methods in the class below, your controllers
  * will inherit them.
- *
+ * @property \App\Controller\Component\UtilComponent $Util
  * @link http://book.cakephp.org/3.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+
+    /**
+     * 无需验证登录的action
+     * @var array 
+     */
+    private $firewall;
 
     /**
      * Initialization hook method.
@@ -43,6 +49,12 @@ class AppController extends Controller {
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        $this->loadComponent('Util');
+
+        $this->firewall = array(
+            ['user', 'login'],
+            ['user', 'register'],
+        );
     }
 
     /**
@@ -52,7 +64,29 @@ class AppController extends Controller {
      * @return void
      */
     public function beforeRender(Event $event) {
-        $this->viewBuilder()->layout('layout');
+        //$this->viewBuilder()->layout('layout');
     }
+
+    public function beforeFilter(Event $event) {
+        $this->checkLogin();
+    }
+
+    /**
+     * 检查用户登录
+     * @return type
+     */
+    protected function checkLogin() {
+        $controller = strtolower($this->request->param('controller'));
+        $action = strtolower($this->request->param('action'));
+        $request_aim = [$controller, $action];
+        if (in_array($request_aim, $this->firewall)) {
+            return true;
+        }
+        $user = $this->request->session()->check('user');
+        if (!$user) {
+            return $this->redirect(['controller' => 'user', 'action' => 'login', 'prefix' => 'mobile']);
+        }
+    }
+    
 
 }

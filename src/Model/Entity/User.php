@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\Auth\DefaultPasswordHasher;
 
 /**
  * User Entity.
@@ -30,8 +32,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $create_time
  * @property \Cake\I18n\Time $update_time
  */
-class User extends Entity
-{
+class User extends Entity {
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -46,4 +47,9 @@ class User extends Entity
         '*' => true,
         'id' => false,
     ];
+
+    protected function _setPwd($password) {
+        return (new DefaultPasswordHasher)->hash($password);
+    }
+
 }

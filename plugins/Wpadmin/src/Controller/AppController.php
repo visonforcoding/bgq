@@ -6,6 +6,10 @@ use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 
+
+/**
+ * @property  Wpadmin\Controller\Component\UtilComponent $Util 开发通用组件
+ */
 class AppController extends Controller {
 
     protected $_user;
@@ -24,6 +28,7 @@ class AppController extends Controller {
 
     public function initialize() {
         $this->loadComponent('Flash');
+        $this->loadComponent('Util');
         $this->firewall = array(
             ['admin', 'login'],
         );
