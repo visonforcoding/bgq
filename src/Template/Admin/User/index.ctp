@@ -39,7 +39,7 @@
                 datatype: "json",
                 mtype: "POST",
                 colNames:
-                        ['手机号', '姓名', '等级', '身份证','职位', '邮箱', '性别', '行业','名片路径',  '审核状态', '创建时间',  '操作'],
+                        ['手机号', '姓名', '等级', '身份证','职位',  '性别', '行业',  '审核状态', '创建时间',  '操作'],
                 colModel: [
                     {name: 'phone', editable: true, align: 'center'},
                     {name: 'truename', editable: true, align: 'center'},
@@ -52,7 +52,6 @@
                     }},
                     {name: 'idcard', editable: true, align: 'center'},
                     {name: 'position', editable: true, align: 'center'},
-                    {name: 'email', editable: true, align: 'center'},
                     {name: 'gender', editable: true, align: 'center',formatter(cellvalue, options, rowObject){
                             if(cellvalue=='1'){
                                 return '男';
@@ -61,7 +60,6 @@
                             }
                     }},
                     {name: 'industry.name', editable: true, align: 'center'},
-                    {name: 'card_path', editable: true, align: 'center'},
                     {name: 'status', editable: true, align: 'center',formatter(cellvalue, options, rowObject){
                             switch(cellvalue)
                             {

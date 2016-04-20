@@ -106,34 +106,12 @@ return $field === 'lft' || $field === 'rght';
                 repeatitems: false,
                 id: "0"
             },
-        }).navGrid('#pager', {edit: false, add: false, del: false, view: true}, searchFn, editFn, addFn, delFn, viewFn);
+        }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
     });
-    var searchFn = {
-    };
-    var editFn = {
-        jqModal: true,
-        reloadAfterSubmit: true,
-        closeOnEscape: true,
-        savekey: [true, 13],
-        closeAfterEdit: true,
-        url: '',
-        beforeShowForm: function (form) {
-            $('#tr_password', form).hide();
-        },
-        afterSubmit: function (response) {
-            var responseText = $.parseJSON(response.responseText);
-            var success = responseText.success;
-            var message = responseText.message;
-            return [success, message];
-        }
-    };
-    function viewFn() {
-        console.log('view');
-    }
 
     function actionFormatter(cellvalue, options, rowObject) {
-        response = '<a title="添加" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-        response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eyes"></i> </a>';
+        response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+        response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
         response += '<a title="编辑" href="/admin/<%= strtolower($modelClass) %>/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
         return response;
     }

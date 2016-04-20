@@ -33,10 +33,10 @@ $compact = ["'" . $singularName . "'"];
         if ($this->request->is(['post','put'])) {
             $<%= $singularName %> = $this-><%= $currentModelName %>->patchEntity($<%= $singularName %>, $this->request->data);
             if ($this-><%= $currentModelName; %>->save($<%= $singularName %>)) {
-                  $this->Util->ajaxReturn(true,'删除成功');
+                  $this->Util->ajaxReturn(true,'修改成功');
             } else {
                  $errors = $<%=$singularName%>->errors();
-                $this->Util->ajaxReturn(false,getMessage($errors));
+               $this->Util->ajaxReturn(false,getMessage($errors));
             }
         }
           <%

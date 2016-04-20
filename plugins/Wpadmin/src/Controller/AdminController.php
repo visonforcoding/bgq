@@ -181,6 +181,7 @@ class AdminController extends AppController {
             $admin->login_time = date('Y-m-d H:i:s');
             $admin->login_ip = $this->request->clientIp();
             $this->Admin->save($admin);
+            $this->Util->actionLog('登录系统',$admin->username);
             return $this->redirect(['controller' => 'index', 'action' => 'index']);
         }
     }

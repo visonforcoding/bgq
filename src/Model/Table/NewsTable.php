@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use App\Model\Entity\News;
@@ -12,8 +13,7 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $Admins
  */
-class NewsTable extends Table
-{
+class NewsTable extends Table {
 
     /**
      * Initialize method
@@ -21,8 +21,7 @@ class NewsTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->table('news');
@@ -30,8 +29,19 @@ class NewsTable extends Table
         $this->primaryKey('id');
 
         $this->belongsTo('Admins', [
+            'joinTable' => 'admin',
             'foreignKey' => 'admin_id',
-            'joinType' => 'INNER'  
+            'joinType' => 'INNER',
+            'className' => 'Wpadmin.Admin'
+        ]);
+
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'create_time' => 'new',
+                    'update_time' => 'always'
+                ]
+            ]
         ]);
     }
 
@@ -41,45 +51,40 @@ class NewsTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+                ->integer('id')
+                ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('title', 'create')
-            ->notEmpty('title');
+                ->requirePresence('title', 'create')
+                ->notEmpty('title');
 
         $validator
-            ->integer('read_nums')
-            ->allowEmpty('read_nums');
+                ->integer('read_nums')
+                ->allowEmpty('read_nums');
 
         $validator
-            ->integer('praise_nums')
-            ->allowEmpty('praise_nums');
+                ->integer('praise_nums')
+                ->allowEmpty('praise_nums');
 
         $validator
-            ->integer('comment_nums')
-            ->allowEmpty('comment_nums');
+                ->integer('comment_nums')
+                ->allowEmpty('comment_nums');
 
         $validator
-            ->allowEmpty('cover');
+                ->allowEmpty('cover');
 
         $validator
-            ->allowEmpty('body');
+                ->allowEmpty('body');
 
         $validator
-            ->allowEmpty('summary');
+                ->allowEmpty('summary');
+
 
         $validator
-            ->dateTime('create_time')
-            ->requirePresence('create_time', 'create')
-            ->notEmpty('create_time');
-
-        $validator
-            ->dateTime('update_time')
-            ->allowEmpty('update_time');
+                ->dateTime('update_time')
+                ->allowEmpty('update_time');
 
         return $validator;
     }
@@ -91,9 +96,9 @@ class NewsTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
+    public function buildRules(RulesChecker $rules) {
         $rules->add($rules->existsIn(['admin_id'], 'Admins'));
         return $rules;
     }
+
 }

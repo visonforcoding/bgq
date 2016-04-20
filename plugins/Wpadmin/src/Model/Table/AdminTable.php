@@ -24,7 +24,7 @@ class AdminTable extends Table {
         parent::initialize($config);
 
         $this->table('admin');
-        $this->displayField('id');
+        $this->displayField('username');
         $this->primaryKey('id');
         $this->belongsToMany('g', [
             'className' => 'Wpadmin.Group',
