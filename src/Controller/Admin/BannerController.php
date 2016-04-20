@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use Wpadmin\Controller\AppController;
 use Wpadmin\Utils\UploadFile;
+use Cake\ORM\TableRegistry;
 /**
  * Banner Controller
  *
@@ -41,12 +42,13 @@ class BannerController extends AppController {
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add() {
+    public function add() {       
         $banner = $this->Banner->newEntity();
         if ($this->request->is('post')) {
             $this->autoRender = false;
             $this->response->type('json');
             $banner = $this->Banner->patchEntity($banner, $this->request->data);
+            $banner->create_time = date('Y-m-d H:i:s');
             if ($this->Banner->save($banner)) {
                 echo json_encode(array('status' => true, 'msg' => '添加成功'));
             } else {
@@ -124,7 +126,7 @@ class BannerController extends AppController {
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where[' type like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
