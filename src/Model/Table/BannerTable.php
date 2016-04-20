@@ -42,11 +42,6 @@ class BannerTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->integer('type')
-            ->requirePresence('type', 'create')
-            ->notEmpty('type');
-
-        $validator
             ->requirePresence('img', 'create')
             ->notEmpty('img');
 
@@ -58,10 +53,6 @@ class BannerTable extends Table
             ->requirePresence('remark', 'create')
             ->notEmpty('remark');
 
-        $validator
-            ->dateTime('create_time')
-            ->requirePresence('create_time', 'create')
-            ->notEmpty('create_time');
 
         return $validator;
     }
