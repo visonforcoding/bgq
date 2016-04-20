@@ -54,8 +54,8 @@ class NewsFixture extends TestFixture
             'cover' => 'Lorem ipsum dolor sit amet',
             'body' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
             'summary' => 'Lorem ipsum dolor sit amet',
-            'create_time' => '2016-04-19 20:16:35',
-            'update_time' => '2016-04-19 20:16:35'
+            'create_time' => '2016-04-20 09:38:01',
+            'update_time' => '2016-04-20 09:38:01'
         ],
     ];
 }

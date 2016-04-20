@@ -26,11 +26,10 @@ $compact = ["'" . $singularName . "'"];
         if ($this->request->is('post')) {
             $<%= $singularName %> = $this-><%= $currentModelName %>->patchEntity($<%= $singularName %>, $this->request->data);
             if ($this-><%= $currentModelName; %>->save($<%= $singularName %>)) {
-                 echo json_encode(array('status'=>true,'msg'=>'添加成功'));
                  $this->Util->ajaxReturn(true,'添加成功');
             } else {
                  $errors = $<%=$singularName%>->errors();
-                 $this->Util->ajaxReturn(false,getMessage($errors));
+                 $this->Util->ajaxReturn(['status'=>false, 'msg'=>getMessage($errors),'errors'=>$errors]);
             }
         }
         <%

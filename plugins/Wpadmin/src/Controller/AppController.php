@@ -6,7 +6,6 @@ use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 
-
 /**
  * @property  Wpadmin\Controller\Component\UtilComponent $Util 开发通用组件
  */
@@ -28,7 +27,7 @@ class AppController extends Controller {
 
     public function initialize() {
         $this->loadComponent('Flash');
-        $this->loadComponent('Util');
+        $this->loadComponent('Wpadmin.Util');
         $this->firewall = array(
             ['admin', 'login'],
         );
@@ -41,11 +40,40 @@ class AppController extends Controller {
 
     public function beforeFilter(Event $event) {
         $this->checkLogin();
+        //$this->autoLog();
     }
 
     public function beforeRender(\Cake\Event\Event $event) {
         $this->viewBuilder()->layout('Wpadmin.layout');
         $this->viewBuilder()->className('Wpadmin.App');
+        $action = strtolower($this->request->param('action'));
+        if (in_array($action, ['add','edit', 'delete', 'exportexcel'])) {
+            \Cake\Log\Log::debug($this->request->method());
+            if($this->request->is(['post', 'put'])){
+                \Cake\Log\Log::debug($action);
+                $msgArray = ['add'=>'添加','edit'=>'修改','delete'=>'删除','exportexcel'=>'导出excel'];
+                $msg = $msgArray[$action];
+                $user = $this->_user->username;
+                $this->Util->actionLog($msg,$user);
+            }
+        }
+    }
+
+    /**
+     * 自动日志
+     */
+    protected function autoLog() {
+        $action = strtolower($this->request->param('action'));
+        if (in_array($action, ['add','edit', 'delete', 'exportexcel'])) {
+            \Cake\Log\Log::debug($this->request->method());
+            if($this->request->is(['post', 'put'])){
+                \Cake\Log\Log::debug($action);
+                $msgArray = ['add'=>'添加','edit'=>'修改','delete'=>'删除','exportexcel'=>'导出excel'];
+                $msg = $msgArray[$action];
+                $user = $this->_user->username;
+                $this->Util->actionLog($msg,$user);
+            }
+        }
     }
 
     /**
@@ -66,7 +94,7 @@ class AppController extends Controller {
         }
         // return;
         $this->_user = $this->request->session()->read('User.admin');
-        if (in_array($request_aim, $this->noAcl)||$this->_user->username=='admin') {
+        if (in_array($request_aim, $this->noAcl) || $this->_user->username == 'admin') {
             //无需检测权限的action 直接pass
             return true;
         }
@@ -107,8 +135,8 @@ class AppController extends Controller {
         }
         // $this->log(__FILE__);
         //echo '无权限';
-       $this->set('NO_PERMISSION',TRUE);
-      $this->Flash->error($mesage, ['key' => 'acl']);
+        $this->set('NO_PERMISSION', TRUE);
+        $this->Flash->error($mesage, ['key' => 'acl']);
     }
 
     /**
