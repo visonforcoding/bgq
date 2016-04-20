@@ -52,7 +52,7 @@ class BannerFixture extends TestFixture
             'img' => 'Lorem ipsum dolor sit amet',
             'url' => 'Lorem ipsum dolor sit amet',
             'remark' => 'Lorem ipsum dolor sit amet',
-            'create_time' => '2016-04-19 10:31:22'
+            'create_time' => '2016-04-19 11:15:22'
         ],
     ];
 }

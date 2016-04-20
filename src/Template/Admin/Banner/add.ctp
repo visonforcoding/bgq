@@ -1,10 +1,12 @@
-<?php $this->start('static') ?>   
+<?php
+
+$this->start('static') ?>   
 <link href="/wpadmin/lib/jqupload/uploadfile.css" rel="stylesheet">
 <link href="/wpadmin/lib/jqvalidation/css/validationEngine.jquery.css" rel="stylesheet">
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($banner, ['class' => 'form-horizontal']) ?>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">类型</label>
         <div class="col-md-8">
                         <?php
@@ -12,7 +14,7 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">图片</label>
         <div class="col-md-8">
                         <?php
@@ -20,7 +22,7 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">链接地址</label>
         <div class="col-md-8">
                         <?php
@@ -28,7 +30,7 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">备注说明</label>
         <div class="col-md-8">
                         <?php
@@ -36,7 +38,7 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">创建时间</label>
         <div class="col-md-8">
                         <?php
@@ -44,11 +46,18 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
+        <label class="col-md-2 control-label">点击选择图片</label>
+        <div class="col-md-4">
+            <div id="attachuploader">上传</div>
+        </div>
+    </div>
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
         </div>
     </div>
+
     <?= $this->Form->end() ?>
 </div>
 
@@ -60,31 +69,38 @@
 <script>
     $(function () {
         // initJqupload('cover', '/admin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
-        $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
-        $('form').submit(function () {
-            var form = $(this);
-            $.ajax({
-                type: $(form).attr('method'),
-                url: $(form).attr('action'),
-                data: $(form).serialize(),
-                dataType: 'json',
-                success: function (res) {
-                    if (typeof res === 'object') {
-                        if (res.status) {
-                            layer.confirm(res.msg, {
-                                btn: ['确认', '继续添加'] //按钮
-                            }, function () {
-                                window.location.href = '/admin/banner/index';
-                            }, function () {
-                                window.location.reload();
-                            });
-                        } else {
-                            layer.alert(res.msg, {icon: 5});
-                        }
-                    }
+        var up = $("#attachuploader").uploadFile({
+            url: "/admin/banner/uploadImg",
+            fileName: "file",
+            uploadStr: "上传",
+            doneStr: "上传完成",
+            maxFileCount: 1,
+            dragDropStr: "<span><b>试试拖动文件上传</b></span>",
+            onSuccess: function (files, data, xhr, pd) {
+                console.log(data);
+                if (data.status) {
+                    layer.msg(data.msg);
+                    $("#attachuploader").parent('div').append('<input type="hidden" name="resume_url" value="' + data.path + '"/>')
+                } else {
+                    layer.alert(data.msg);
                 }
-            });
-            return false;
+            },
+            onSelect: function (files) {
+                up.reset();  //单个图片上传的 委曲求全的办法
+            },
+        });
+        $('form').ajaxForm({
+            dataType: 'json',
+            beforeSubmit: function (formData, jqForm, options) {
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.status) {
+                    layer.alert(data.msg, {icon: 6});
+                } else {
+                    layer.alert(data.msg, {icon: 5});
+                }
+            }
         });
     });
 </script>
