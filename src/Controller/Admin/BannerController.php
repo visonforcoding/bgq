@@ -176,7 +176,7 @@ class BannerController extends AppController {
 
     public function uploadImg() {
         $today = date('Y-m-d');
-        $urlpath = ROOT . '/plugins/Wpadmin/webroot/upload/banner/' . $today . '/';
+        $urlpath = ROOT . '/webroot/upload/banner/' . $today . '/';
         $savePath = $urlpath;
         $upload = new UploadFile(); // 实例化上传类
         $upload->maxSize = 31457280; // 设置附件上传大小
