@@ -78,6 +78,11 @@ $this->start('static') ?>
         $('form').ajaxForm({
             dataType: 'json',
             beforeSubmit: function (formData, jqForm, options) {
+                var record_path=$("#img").val();
+                if(record_path==''){
+                    layer.alert('请选择上传图片', {icon: 5});
+                    return false;
+                }
             },
             success: function (data) {
                 console.log(data);                
