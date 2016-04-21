@@ -40,7 +40,10 @@ class BannerTable extends Table
         $validator
             ->integer('id')
             ->allowEmpty('id', 'create');
-
+        $validator
+            ->requirePresence('type')
+            ->notEmpty('type', 'create');
+        
         $validator
             ->requirePresence('img', 'create')
             ->notEmpty('img');
