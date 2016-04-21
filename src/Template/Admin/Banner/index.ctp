@@ -41,10 +41,9 @@ $this->start('static') ?>
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['类型', '图片', '链接地址', '备注说明', '创建时间', '操作'],
+                                ['类型', '链接地址', '备注说明', '创建时间', '操作'],
                         colModel: [
                             {name: 'type', editable: true, align: 'center'},
-                            {name: 'img', editable: true, align: 'center'},
                             {name: 'url', editable: true, align: 'center'},
                             {name: 'remark', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
@@ -107,7 +106,7 @@ $this->start('static') ?>
 
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = '<button onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-trash"></i> 删除</button>';
-                    response += '<button onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-eyes"></i> 查看详情</button>';
+                    response += '<button onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-eyes"></i> 查看图片</button>';
                     response += '<a href="/admin/banner/edit/' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini"><i class="icon icon-pencil"></i> 修改</a>';
                     return response;
                 }
@@ -161,10 +160,10 @@ $this->start('static') ?>
                     url = '/admin/banner/view?id=' + id;
                     layer.open({
                         type: 2,
-                        title: '查看详情',
+                        title: '查看图片',
                         shadeClose: true,
                         shade: 0.8,
-                        area: ['380px', '70%'],
+                        area: ['65%', '50%'],
                         content: url//iframe的url
                     });
                 }

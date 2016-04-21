@@ -14,12 +14,11 @@ $this->start('static') ?>
             ?>
         </div>
     </div>
+    <input type="hidden" name="img" class="form-control" required="required" maxlength="250" id="img" >
     <div class="form-group">
-        <label class="col-md-2 control-label">图片</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('img', ['label' => false, 'class' => 'form-control']);
-            ?>
+        <label class="col-md-2 control-label">点击选择图片</label>
+        <div class="col-md-4">
+            <div id="attachuploader">上传</div>
         </div>
     </div>
     <div class="form-group">
@@ -36,20 +35,6 @@ $this->start('static') ?>
                         <?php
             echo $this->Form->input('remark', ['label' => false, 'class' => 'form-control']);
             ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">创建时间</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('create_time', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">点击选择图片</label>
-        <div class="col-md-4">
-            <div id="attachuploader">上传</div>
         </div>
     </div>
     <div class="form-group">
@@ -79,6 +64,7 @@ $this->start('static') ?>
             onSuccess: function (files, data, xhr, pd) {
                 console.log(data);
                 if (data.status) {
+                    $("#img").val(data.record_path);
                     layer.msg(data.msg);
                     $("#attachuploader").parent('div').append('<input type="hidden" name="resume_url" value="' + data.path + '"/>')
                 } else {
@@ -94,8 +80,8 @@ $this->start('static') ?>
             beforeSubmit: function (formData, jqForm, options) {
             },
             success: function (data) {
-                console.log(data);
-                if (data.status) {
+                console.log(data);                
+                if (data.status) {                    
                     layer.alert(data.msg, {icon: 6});
                 } else {
                     layer.alert(data.msg, {icon: 5});

@@ -29,6 +29,7 @@ class BannerController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null) {
+        $id=$_GET['id']?intval($_GET['id']):'';
         $this->viewBuilder()->autoLayout(false);
         $banner = $this->Banner->get($id, [
             'contain' => []
@@ -178,6 +179,7 @@ class BannerController extends AppController {
 
     public function uploadImg() {
         $today = date('Y-m-d');
+        $recode_path='/webroot/upload/banner/' . $today . '/';
         $urlpath = ROOT . '/webroot/upload/banner/' . $today . '/';
         $savePath = $urlpath;
         $upload = new UploadFile(); // 实例化上传类
@@ -191,11 +193,12 @@ class BannerController extends AppController {
             $info = $upload->getUploadFileInfo();
             $response['status'] = true;
             $response['path'] = $urlpath . $info[0]['savename'];
+            $response['record_path'] = $recode_path . $info[0]['savename'];
             $response['msg'] = '上传成功!';
         }
         $this->autoRender= false;
         $this->response->type('json');
-        echo json_encode($response);
+        echo json_encode($response);        
     }
 
 }
