@@ -57,121 +57,120 @@ return $field === 'lft' || $field === 'rght';
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
 <script>
-    $(function () {
-         $('#main-content').bind('resize', function () {
-            $("#list").setGridWidth($('#main-content').width() - 40);
-        });
-        $.zui.store.pageClear(); //刷新页面缓存清除
-        $("#list").jqGrid({
-            url: "/admin/<%= strtolower($modelClass) %>/getDataList",
-            datatype: "json",
-            mtype: "POST",
-            colNames:   
-<%
-     $colNamesArr=[];
-     $colModelArr = [];
-    foreach ($fields as $field) {
-           if (in_array($field, $primaryKey)) {
-                    continue;
-            }
-          if (!in_array($field, ['created', 'modified', 'updated'])) {
-                     $fieldData =$schema->column($field);
-                     $colName = $fieldData['comment']?$fieldData['comment']:$field;
-                     $colNamesArr[] = "'".$colName."'"; 
-                     $colModelArr[] = "\r\n{name:'".$field."',editable:true,align:'center'}";
-            }
-    }
-        $colModelArr[] ="\r\n{name:'actionBtn',align:'center',viewable:false,sortable:false,formatter:actionFormatter}";
-          echo '['.implode(',',$colNamesArr).",'操作']";
-  %>,
-            colModel: [<% echo implode(',',$colModelArr);%>],
-            pager: "#pager",
-            rowNum: 10,
-            rowList: [10, 20, 30],
-            sortname: "id",
-            sortorder: "desc",
-            viewrecords: true,
-            gridview: true,
-            autoencode: true,
-            caption: '',
-            autowidth: true,
-            height: 'auto',
-            rownumbers: true,
-            fixed: true,
-            jsonReader: {
-                root: "rows",
-                page: "page",
-                total: "total",
-                records: "records",
-                repeatitems: false,
-                id: "0"
-            },
-        }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
-    });
+                        $(function () {
+                        $('#main-content').bind('resize', function () {
+                        $("#list").setGridWidth($('#main-content').width() - 40);
+                        });
+                                $.zui.store.pageClear(); //刷新页面缓存清除
+                                $("#list").jqGrid({
+                        url: "/admin/<%= strtolower($modelClass) %>/getDataList",
+                                datatype: "json",
+                                mtype: "POST",
+                                colNames:
+                                < %
+                                $colNamesArr = [];
+                                $colModelArr = [];
+                                foreach ($fields as $field) {
+                        if (in_array($field, $primaryKey)) {
+                        continue;
+                        }
+                        if (!in_array($field, ['created', 'modified', 'updated'])) {
+                        $fieldData = $schema - > column($field);
+                                $colName = $fieldData['comment']?$fieldData['comment']:$field;
+                                $colNamesArr[] = "'".$colName."'";
+                                $colModelArr[] = "\r\n{name:'".$field."',editable:true,align:'center'}";
+                        }
+                        }
+                        $colModelArr[] = "\r\n{name:'actionBtn',align:'center',viewable:false,sortable:false,formatter:actionFormatter}";
+                                echo '['.implode(',', $colNamesArr).",'操作']";
+                                % > ,
+                                colModel: [ < % echo implode(',', $colModelArr); % > ],
+                                pager: "#pager",
+                                rowNum: 10,
+                                rowList: [10, 20, 30],
+                                sortname: "id",
+                                sortorder: "desc",
+                                viewrecords: true,
+                                gridview: true,
+                                autoencode: true,
+                                caption: '',
+                                autowidth: true,
+                                height: 'auto',
+                                rownumbers: true,
+                                fixed: true,
+                                jsonReader: {
+                                root: "rows",
+                                        page: "page",
+                                        total: "total",
+                                        records: "records",
+                                        repeatitems: false,
+                                        id: "0"
+                                },
+                        }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
+                        });
+                        function actionFormatter(cellvalue, options, rowObject) {
+                        response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                                response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
+                                response += '<a title="编辑" href="/admin/<%= strtolower($modelClass) %>/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+                                return response;
+                        }
 
-    function actionFormatter(cellvalue, options, rowObject) {
-        response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-        response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-        response += '<a title="编辑" href="/admin/<%= strtolower($modelClass) %>/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
-        return response;
-    }
-
-    function delRecord(id) {
-        layer.confirm('确定删除？', {
-            btn: ['确认', '取消'] //按钮
-        }, function () {
-            $.ajax({
+                function delRecord(id) {
+                layer.confirm('确定删除？', {
+                btn: ['确认', '取消'] //按钮
+                }, function () {
+                $.ajax({
                 type: 'post',
-                data: {id: id},
-                dataType: 'json',
-                url: '/wpadmin/<%= strtolower($modelClass) %>/delete',
-                success: function (res) {
-                    layer.msg(res.msg);
-                     if (res.status) {
-                            $('#list').trigger('reloadGrid');
-                     }
-                }
-            })
-        }, function () {
-        });
-    }
-    
-            function doSearch() {
-                    //搜索
-                var postData = $('#table-bar-form').serializeArray();
-                var data = {};
-                $.each(postData,function(i,n){
-                   data[n.name] = n.value; 
+                        data: {id: id},
+                        dataType: 'json',
+                        url: '/admin/<%= strtolower($modelClass) %>/delete',
+                        success: function (res) {
+                        layer.msg(res.msg);
+                                if (res.status) {
+                        $('#list').trigger('reloadGrid');
+                        }
+                        }
+                })
+                }, function () {
                 });
-                $.zui.store.pageSet('searchData', data); //本地存储查询参数 供导出操作等调用
-                $("#list").jqGrid('setGridParam', {
-                    postData: data
+                }
+
+                function doSearch() {
+                //搜索
+                var postData = $('#table-bar-form').serializeArray();
+                        var data = {};
+                        $.each(postData, function(i, n){
+                        data[n.name] = n.value;
+                        });
+                        $.zui.store.pageSet('searchData', data); //本地存储查询参数 供导出操作等调用
+                        $("#list").jqGrid('setGridParam', {
+                postData: data
                 }).trigger("reloadGrid");
                 }
-                
+
                 function doExport() {
-                    //导出excel
-                    var sortColumnName = $("#list").jqGrid('getGridParam', 'sortname');
-                    var sortOrder = $("#list").jqGrid('getGridParam', 'sortorder');
-                   var searchData = $.zui.store.pageGet('searchData')?$.zui.store.pageGet('searchData'):{};
-                    searchData['sidx'] = sortColumnName;
-                    searchData['sort'] = sortOrder;
-                    var searchQueryStr  = $.param(searchData);
-                    $("body").append("<iframe src='/admin/<%= strtolower($modelClass) %>/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                //导出excel
+                var sortColumnName = $("#list").jqGrid('getGridParam', 'sortname');
+                        var sortOrder = $("#list").jqGrid('getGridParam', 'sortorder');
+                        var searchData = $.zui.store.pageGet('searchData')?$.zui.store.pageGet('searchData'):{};
+                        searchData['sidx'] = sortColumnName;
+                        searchData['sort'] = sortOrder;
+                        var searchQueryStr = $.param(searchData);
+                        $("body").append("<iframe src='/admin/<%= strtolower($modelClass) %>/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
-                
-             function doView(id) {
+
+                function doView(id) {
                 //查看明细
-                url = '/admin/<%=strtolower($modelClass)%>/view?id='+id;
-                layer.open({
-                    type: 2,
-                    title: '查看详情',
-                    shadeClose: true,
-                    shade: 0.8,
-                    area: ['380px', '70%'],
-                    content: url//iframe的url
-                });
-            }
+                url = '/admin/<%=strtolower($modelClass)%>/view?id=' + id;
+                        layer.open({
+                        type: 2,
+                                title: '查看详情',
+                                shadeClose: true,
+                                shade: 0.8,
+                                area: ['380px', '70%'],
+                                content: url//iframe的url
+                        });
+                }
 </script>
 <?php
 $this->end();

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use App\Model\Entity\Industry;
@@ -12,8 +13,7 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\HasMany $User
  */
-class IndustryTable extends Table
-{
+class IndustryTable extends Table {
 
     /**
      * Initialize method
@@ -21,14 +21,16 @@ class IndustryTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->table('industry');
         $this->displayField('name');
         $this->primaryKey('id');
-
+        $this->addBehavior('Tree', [
+            'parent' => 'pid', // Use this instead of parent_id
+            'left' => 'id', // Use this instead of lft
+        ]);
         $this->hasMany('User', [
             'foreignKey' => 'industry_id'
         ]);
@@ -40,21 +42,21 @@ class IndustryTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+                ->integer('id')
+                ->allowEmpty('id', 'create');
 
         $validator
-            ->integer('pid')
-            ->requirePresence('pid', 'create')
-            ->notEmpty('pid');
+                ->integer('pid')
+                ->requirePresence('pid', 'create')
+                ->notEmpty('pid');
 
         $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
+                ->requirePresence('name', 'create')
+                ->notEmpty('name');
 
         return $validator;
     }
+
 }
