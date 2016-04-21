@@ -192,7 +192,8 @@ class AdminController extends AppController {
      */
     public function logout() {
         $this->viewBuilder()->autoLayout(false);
-        $this->request->session()->delete('User.admin');
+//        $this->request->session()->delete('User.admin');
+        $this->request->session()->destroy();
         $this->Flash->success('您已退出登录！');
         return $this->redirect(['controller' => 'admin', 'action' => 'login']);
     }

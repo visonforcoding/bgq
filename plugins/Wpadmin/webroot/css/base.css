@@ -329,3 +329,7 @@ body{
 .jqupload{
     margin-top:10px;
 }
+
+span.notice{
+    color: #ff0066;
+}
