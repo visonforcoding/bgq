@@ -1,10 +1,12 @@
-<?php $this->start('static') ?>   
+<?php
+
+$this->start('static') ?>   
 <link href="/wpadmin/lib/jqupload/uploadfile.css" rel="stylesheet">
 <link href="/wpadmin/lib/jqvalidation/css/validationEngine.jquery.css" rel="stylesheet">
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($banner, ['class' => 'form-horizontal']) ?>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">类型</label>
         <div class="col-md-8">
                         <?php
@@ -12,15 +14,17 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">图片</label>
         <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('img', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <div  class="img-thumbnail input-img"  single>
+                <img  alt="banner图片" src="<?= $banner->img; ?>"/>
+            </div>
+            <input name="img" value="<?= $banner->img; ?>"  type="hidden"/>
+            <div id="cover"   class="jqupload">上传</div>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">链接地址</label>
         <div class="col-md-8">
                         <?php
@@ -28,7 +32,7 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">备注说明</label>
         <div class="col-md-8">
                         <?php
@@ -36,15 +40,7 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
-        <label class="col-md-2 control-label">创建时间</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('create_time', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-        <div class="form-group">
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
         </div>
@@ -59,7 +55,7 @@
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/jquery.validationEngine.js"></script>
 <script>
     $(function () {
-        // initJqupload('cover', '/admin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
+        initJqupload('cover', '/admin/banner/doUpload?dir=banner', 'jpg,png,gif,jpeg'); //初始化图片上传
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('form').submit(function () {
             var form = $(this);
