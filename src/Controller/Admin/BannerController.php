@@ -74,7 +74,7 @@ class BannerController extends AppController {
         ]);
         if ($this->request->is(['post', 'put'])) {
             $this->autoRender = false;
-            $this->response->type('json');
+            $this->response->type('json');            
             $banner = $this->Banner->patchEntity($banner, $this->request->data);
             if ($this->Banner->save($banner)) {
                 echo json_encode(array('status' => true, 'msg' => '修改成功'));
@@ -179,7 +179,7 @@ class BannerController extends AppController {
 
     public function uploadImg() {
         $today = date('Y-m-d');
-        $recode_path='/webroot/upload/banner/' . $today . '/';
+        $recode_path='/upload/banner/' . $today . '/';//数据库中记录的路径
         $urlpath = ROOT . '/webroot/upload/banner/' . $today . '/';
         $savePath = $urlpath;
         $upload = new UploadFile(); // 实例化上传类
@@ -199,6 +199,29 @@ class BannerController extends AppController {
         $this->autoRender= false;
         $this->response->type('json');
         echo json_encode($response);        
+    }
+    public function doUpload() {
+        $dir = $this->request->query('dir');
+        $today = date('Y-m-d');
+        $urlpath =  '/upload/tmp/' . $today . '/';
+        if(!empty($dir)){
+            $urlpath = '/upload/banner/' . $today . '/';
+        }
+        $savePath = ROOT.'/webroot'.$urlpath;;
+        $upload = new UploadFile(); // 实例化上传类
+        $upload->maxSize = 31457280; // 设置附件上传大小
+        $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg'); // 设置附件上传类型
+        $upload->savePath = $savePath; // 设置附件上传目录
+        if (!$upload->upload()) {// 上传错误提示错误信息
+            $response['status'] = false;
+            $response['msg'] = $upload->getErrorMsg();
+        } else {// 上传成功 获取上传文件信息
+            $info = $upload->getUploadFileInfo();
+            $response['status'] = true;
+            $response['path'] = $urlpath . $info[0]['savename'];
+            $response['msg'] = '上传成功!';
+        }
+        $this->Util->ajaxReturn($response);
     }
 
 }
