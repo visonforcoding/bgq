@@ -34,16 +34,25 @@ return $field === 'lft' || $field === 'rght';
             }
            if (isset($keyFields[$field])) {
                 $fieldData = $schema->column($field);
+    %>
+         <div class="form-group">
+            <label class="col-md-2 control-label"><%=$fieldData['comment']?$fieldData['comment']:$field%></label>
+                <div class="col-md-8">
+         <%
             if (!empty($fieldData['null'])) {
-    %>
-          echo $this->Form->input('<%= $field %>', ['options' => $<%= $keyFields[$field] %>, 
-                'empty' => true,'class'=>'form-control']);
-    <%
+         %>
+        <?php echo $this->Form->input('<%= $field %>', ['label' => false,'options' => $<%= $keyFields[$field] %>, 
+                'empty' => true,'class'=>'form-control']); ?>
+        <%
             } else {
-    %>
-        echo $this->Form->input('<%= $field %>', ['options' => $<%= $keyFields[$field] %>,'class'=>'form-control']);
-    <%
-        }
+        %>
+       <?php echo $this->Form->input('<%= $field %>', ['label' => false,'options' => $<%= $keyFields[$field] %>,'class'=>'form-control']);?>
+          <%
+          }
+        %>
+            </div>
+         </div>
+        <%
         continue;
         }
     if (!in_array($field, ['created', 'modified', 'updated'])) {
@@ -74,7 +83,7 @@ return $field === 'lft' || $field === 'rght';
         foreach ($associations['BelongsToMany'] as $assocName => $assocData) {
     %>
     <div class="form-group">
-        <label class="col-md-2 control-label"><%=$fieldData['comment']?$fieldData['comment']:$field%></label>
+        <label class="col-md-2 control-label"><%=$assocName%></label>
         <div class="col-md-8">
     <?php
         echo $this->Form->input('<%= $assocData['property'] %>._ids', ['options' => $<%= $assocData['variable'] %>,'label'=>false,

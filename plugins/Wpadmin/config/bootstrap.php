@@ -15,7 +15,7 @@ use Cake\I18n\Time;
 Time::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');
 if (PHP_SAPI === 'cli') {
     // Attach bake events here.
-    EventManager::instance()->on( 'Bake.beforeRender.Controller.controller', function (Event $event) {
+    EventManager::instance()->on('Bake.beforeRender.Controller.controller', function (Event $event) {
         $view = $event->subject();
 //        if(strpos('Admin.', $view->viewVars['plugin'])!==FALSE){
         if (strtolower($view->theme) == 'wpadmin') {
@@ -31,20 +31,20 @@ if (PHP_SAPI === 'cli') {
             ];
         }
     });
-    EventManager::instance()->on('Bake.afterRender.Controller.controller',function(Event $event){
+    EventManager::instance()->on('Bake.afterRender.Controller.controller', function(Event $event) {
         $view = $event->subject();
         if (strtolower($view->theme) == 'wpadmin') {
             $menuTable = \Cake\ORM\TableRegistry::get('menu');
-            $node = '/admin/'.strtolower($view->viewVars['name']).'/index';
+            $node = '/admin/' . strtolower($view->viewVars['name']) . '/index';
             $menu = $menuTable->find()->where("`node` = '$node'")->first();
-            if(!$menu){
+            if (!$menu) {
                 $menu = $menuTable->newEntity();
-                $menu->name = strtolower($view->viewVars['name']).'管理';
+                $menu->name = strtolower($view->viewVars['name']) . '管理';
                 $menu->node = $node;
                 $menu->is_menu = 1;
                 $menu->pid = 1;
                 $menuTable->save($menu);
-                Cake\Cache\Cache::delete('admin_menus');
+                \Cake\Cache\Cache::delete('admin_menus');
             }
         }
     });

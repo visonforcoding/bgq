@@ -145,3 +145,49 @@ function initJqupload(id, url, allowedTypes) {
         }
     });
 }
+
+
+/**
+ * jquery-file-upload 上传插件初始化 消息弹出依赖layer.js
+ * @link http://hayageek.com/docs/jquery-upload-file.php#doc
+ * @param {type} id 上传触发按钮
+ * @param {type} url 
+ * @param {type} allowedTypes
+ * @returns {undefined}
+ */
+function initJquploadAttach(id, url, allowedTypes) {
+    var uploadObj = $('#' + id).uploadFile({
+        url: url,
+        returnType: 'json',
+        maxFileCount: 1,
+        allowedTypes: allowedTypes,
+        doneStr: "上传完成",
+        dragDrop: true,
+        multiple: false,
+        showDone: true,
+        uploadStr: "上传",
+        showStatusAfterSuccess: true,
+        maxFileCountErrorStr: "不被允许,允许的最大数量为",
+        dragDropStr: "<span><b>试试拖动文件上传</b></span>",
+        extErrorStr: "类型不允许,允许类型如下:",
+        multiDragErrorStr: '这里只能一次上传一张',
+        customErrorKeyStr: '上传发生了错误',
+        onSuccess: function (files, data, xhr, pd) {
+            if (data.status) {
+                $('#' + id).prev().val(data.path);
+               layer.msg(data.msg);
+            } else {
+                uploadObj.reset();
+                layer.msg(data.msg);
+            }
+        },
+        onSelect: function (files)
+        {
+            uploadObj.reset();  //单个图片上传的 委曲求全的办法
+        },
+        onError: function (files, status, errMsg, pd) {
+            console.log(status);
+        }
+    });
+    return uploadObj;
+}

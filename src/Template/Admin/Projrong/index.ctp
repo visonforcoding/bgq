@@ -2,38 +2,10 @@
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
 <?php $this->end() ?> 
-<%
-/**
-* CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
-* Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
-*
-* Licensed under The MIT License
-* For full copyright and license information, please see the LICENSE.txt
-* Redistributions of files must retain the above copyright notice.
-*
-* @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
-* @link          http://cakephp.org CakePHP(tm) Project
-* @since         0.1.0
-* @license       http://www.opensource.org/licenses/mit-license.php MIT License
-*/
-use Cake\Utility\Inflector;
-
-$fields = collection($fields)
-->filter(function($field) use ($schema) {
-return !in_array($schema->columnType($field), ['binary', 'text']);
-});
-//->take(7);
-
-if (isset($modelObject) && $modelObject->behaviors()->has('Tree')) {
-$fields = $fields->reject(function ($field) {
-return $field === 'lft' || $field === 'rght';
-});
-}
-%>
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
-            <a href="/admin/<%= strtolower($modelClass) %>/add" class="btn btn-small btn-warning">
+            <a href="/admin/projrong/add" class="btn btn-small btn-warning">
                 <i class="icon icon-plus-sign"></i>添加
             </a>
             <div class="form-group">
@@ -63,28 +35,31 @@ return $field === 'lft' || $field === 'rght';
         });
         $.zui.store.pageClear(); //刷新页面缓存清除
         $("#list").jqGrid({
-            url: "/admin/<%= strtolower($modelClass) %>/getDataList",
+            url: "/admin/projrong/getDataList",
             datatype: "json",
             mtype: "POST",
             colNames:   
-<%
-     $colNamesArr=[];
-     $colModelArr = [];
-    foreach ($fields as $field) {
-           if (in_array($field, $primaryKey)) {
-                    continue;
-            }
-          if (!in_array($field, ['created', 'modified', 'updated'])) {
-                     $fieldData =$schema->column($field);
-                     $colName = $fieldData['comment']?$fieldData['comment']:$field;
-                     $colNamesArr[] = "'".$colName."'"; 
-                     $colModelArr[] = "\r\n{name:'".$field."',editable:true,align:'center'}";
-            }
-    }
-        $colModelArr[] ="\r\n{name:'actionBtn',align:'center',viewable:false,sortable:false,formatter:actionFormatter}";
-          echo '['.implode(',',$colNamesArr).",'操作']";
-  %>,
-            colModel: [<% echo implode(',',$colModelArr);%>],
+['发布人id','发布人','公司','项目名称','融资阶段','地点','融资规模','股份','阅读数','点赞数','评论数','封面','项目简介','公司简介','核心团队','资料地址','创建时间','更新时间','操作'],
+            colModel: [
+{name:'user_id',editable:true,align:'center'},
+{name:'publisher',editable:true,align:'center'},
+{name:'company',editable:true,align:'center'},
+{name:'title',editable:true,align:'center'},
+{name:'rzjd',editable:true,align:'center'},
+{name:'address',editable:true,align:'center'},
+{name:'scale',editable:true,align:'center'},
+{name:'stock',editable:true,align:'center'},
+{name:'read_nums',editable:true,align:'center'},
+{name:'praise_nums',editable:true,align:'center'},
+{name:'comment_nums',editable:true,align:'center'},
+{name:'cover',editable:true,align:'center'},
+{name:'summary',editable:true,align:'center'},
+{name:'comp_desc',editable:true,align:'center'},
+{name:'team',editable:true,align:'center'},
+{name:'attach',editable:true,align:'center'},
+{name:'create_time',editable:true,align:'center'},
+{name:'update_time',editable:true,align:'center'},
+{name:'actionBtn',align:'center',viewable:false,sortable:false,formatter:actionFormatter}],
             pager: "#pager",
             rowNum: 10,
             rowList: [10, 20, 30],
@@ -112,7 +87,7 @@ return $field === 'lft' || $field === 'rght';
     function actionFormatter(cellvalue, options, rowObject) {
         response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
         response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-        response += '<a title="编辑" href="/admin/<%= strtolower($modelClass) %>/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+        response += '<a title="编辑" href="/admin/projrong/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
         return response;
     }
 
@@ -124,7 +99,7 @@ return $field === 'lft' || $field === 'rght';
                 type: 'post',
                 data: {id: id},
                 dataType: 'json',
-                url: '/admin/<%= strtolower($modelClass) %>/delete',
+                url: '/admin/projrong/delete',
                 success: function (res) {
                     layer.msg(res.msg);
                      if (res.status) {
@@ -157,12 +132,12 @@ return $field === 'lft' || $field === 'rght';
                     searchData['sidx'] = sortColumnName;
                     searchData['sort'] = sortOrder;
                     var searchQueryStr  = $.param(searchData);
-                    $("body").append("<iframe src='/admin/<%= strtolower($modelClass) %>/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                    $("body").append("<iframe src='/admin/projrong/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
                 
              function doView(id) {
                 //查看明细
-                url = '/admin/<%=strtolower($modelClass)%>/view?id='+id;
+                url = '/admin/projrong/view?id='+id;
                 layer.open({
                     type: 2,
                     title: '查看详情',
