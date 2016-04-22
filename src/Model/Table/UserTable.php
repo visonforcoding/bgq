@@ -26,7 +26,7 @@ class UserTable extends Table {
         parent::initialize($config);
 
         $this->table('user');
-        $this->displayField('id');
+        $this->displayField('truename');
         $this->primaryKey('id');
 
         $this->belongsTo('Industries', [

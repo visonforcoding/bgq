@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `actionlog` (
   `user` varchar(80) NOT NULL COMMENT '操作者',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 CHECKSUM=1 ROW_FORMAT=DYNAMIC COMMENT='后台操作日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 CHECKSUM=1 ROW_FORMAT=DYNAMIC COMMENT='后台操作日志表';
 
 -- 正在导出表  binggq.actionlog 的数据：~13 rows (大约)
 DELETE FROM `actionlog`;
@@ -48,7 +48,9 @@ INSERT INTO `actionlog` (`id`, `url`, `type`, `useragent`, `ip`, `filename`, `ms
 	(10, 'admin/login', 'POST', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0', '127.0.0.1', '', '登录系统', 'admin', 'login', 'array (\n  \'_csrf_token\' => \'\',\n  \'username\' => \'admin\',\n  \'password\' => \'admin\',\n)', 'admin', '2016-04-21 11:38:16'),
 	(11, 'admin/admin/login', 'POST', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0', '127.0.0.1', '', '登录系统', 'admin', 'login', 'array (\n  \'_csrf_token\' => \'\',\n  \'username\' => \'admin\',\n  \'password\' => \'admin\',\n)', 'admin', '2016-04-21 12:03:57'),
 	(12, 'admin/login', 'POST', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0', '127.0.0.1', '', '登录系统', 'admin', 'login', 'array (\n  \'_csrf_token\' => \'\',\n  \'username\' => \'admin\',\n  \'password\' => \'admin\',\n)', 'admin', '2016-04-21 12:04:32'),
-	(13, 'admin/login', 'POST', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0', '127.0.0.1', '', '登录系统', 'admin', 'login', 'array (\n  \'_csrf_token\' => \'\',\n  \'username\' => \'admin\',\n  \'password\' => \'admin\',\n)', 'admin', '2016-04-21 12:04:56');
+	(13, 'admin/login', 'POST', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0', '127.0.0.1', '', '登录系统', 'admin', 'login', 'array (\n  \'_csrf_token\' => \'\',\n  \'username\' => \'admin\',\n  \'password\' => \'admin\',\n)', 'admin', '2016-04-21 12:04:56'),
+	(14, 'admin/login', 'POST', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0', '127.0.0.1', '', '登录系统', 'admin', 'login', 'array (\n  \'_csrf_token\' => \'\',\n  \'username\' => \'admin\',\n  \'password\' => \'admin\',\n)', 'admin', '2016-04-22 11:05:58'),
+	(15, 'admin/admin/login', 'POST', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0', '127.0.0.1', '', '登录系统', 'admin', 'login', 'array (\n  \'_csrf_token\' => \'\',\n  \'username\' => \'admin\',\n  \'password\' => \'admin\',\n)', 'admin', '2016-04-22 12:09:45');
 /*!40000 ALTER TABLE `actionlog` ENABLE KEYS */;
 
 
@@ -71,10 +73,11 @@ CREATE TABLE IF NOT EXISTS `activity` (
   `summary` varchar(250) DEFAULT NULL COMMENT '摘要',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `title` (`title`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='活动表';
 
--- 正在导出表  binggq.activity 的数据：~2 rows (大约)
+-- 正在导出表  binggq.activity 的数据：~3 rows (大约)
 DELETE FROM `activity`;
 /*!40000 ALTER TABLE `activity` DISABLE KEYS */;
 INSERT INTO `activity` (`id`, `admin_id`, `publisher`, `industry_id`, `company`, `title`, `time`, `address`, `scale`, `read_nums`, `praise_nums`, `comment_nums`, `cover`, `body`, `summary`, `create_time`, `update_time`) VALUES
@@ -102,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 DELETE FROM `admin`;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 INSERT INTO `admin` (`id`, `username`, `truename`, `password`, `phone`, `enabled`, `ctime`, `utime`, `login_time`, `login_ip`) VALUES
-	(2, 'admin', '曹麦穗', '$2y$10$IwMcx3dYp7Sn.TPgovzc9Osem.XpMAdajZ1C.Z8y41LHcdcJUpCRy', '', 1, '2016-04-11 16:53:37', '2016-04-21 12:04:56', '2016-04-21 12:04:56', '127.0.0.1');
+	(2, 'admin', '曹麦穗', '$2y$10$IwMcx3dYp7Sn.TPgovzc9Osem.XpMAdajZ1C.Z8y41LHcdcJUpCRy', '', 1, '2016-04-11 16:53:37', '2016-04-22 12:09:45', '2016-04-22 12:09:45', '127.0.0.1');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 
 
@@ -164,6 +167,85 @@ INSERT INTO `agency` (`id`, `pid`, `name`) VALUES
 /*!40000 ALTER TABLE `agency` ENABLE KEYS */;
 
 
+-- 导出  表 binggq.banner 结构
+CREATE TABLE IF NOT EXISTS `banner` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '轮播图',
+  `type` varchar(20) NOT NULL DEFAULT '1' COMMENT '类型',
+  `img` varchar(250) NOT NULL COMMENT '图片',
+  `url` varchar(250) NOT NULL COMMENT '链接地址',
+  `remark` varchar(250) NOT NULL COMMENT '备注说明',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='轮播图';
+
+-- 正在导出表  binggq.banner 的数据：~0 rows (大约)
+DELETE FROM `banner`;
+/*!40000 ALTER TABLE `banner` DISABLE KEYS */;
+INSERT INTO `banner` (`id`, `type`, `img`, `url`, `remark`, `create_time`) VALUES
+	(10, '1', '/webroot/upload/banner/2016-04-21/571890c6ddbdb.jpg', 'http://movie.douban.com/subject/1295644/', '不错的页面', '2016-04-21 16:35:50');
+/*!40000 ALTER TABLE `banner` ENABLE KEYS */;
+
+
+-- 导出  表 binggq.career 结构
+CREATE TABLE IF NOT EXISTS `career` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '工作经历',
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户',
+  `company` varchar(50) NOT NULL COMMENT '公司',
+  `position` varchar(50) NOT NULL COMMENT '职位',
+  `start_date` date NOT NULL COMMENT '开始日期',
+  `end_date` date NOT NULL COMMENT '结束日期',
+  `desc` text NOT NULL COMMENT '描述',
+  `create_time` datetime NOT NULL COMMENT '创建日期',
+  `update_time` datetime NOT NULL COMMENT '修改日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工作经历';
+
+-- 正在导出表  binggq.career 的数据：~0 rows (大约)
+DELETE FROM `career`;
+/*!40000 ALTER TABLE `career` DISABLE KEYS */;
+/*!40000 ALTER TABLE `career` ENABLE KEYS */;
+
+
+-- 导出  表 binggq.education 结构
+CREATE TABLE IF NOT EXISTS `education` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '教育经历表',
+  `user_id` int(11) NOT NULL COMMENT '用户',
+  `school` varchar(50) NOT NULL COMMENT '学校',
+  `major` varchar(50) NOT NULL COMMENT '专业',
+  `education` varchar(50) NOT NULL COMMENT '学历',
+  `start_date` date NOT NULL COMMENT '开始日期',
+  `end_date` date NOT NULL COMMENT '结束日期',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='教育经历';
+
+-- 正在导出表  binggq.education 的数据：~0 rows (大约)
+DELETE FROM `education`;
+/*!40000 ALTER TABLE `education` DISABLE KEYS */;
+/*!40000 ALTER TABLE `education` ENABLE KEYS */;
+
+
+-- 导出  表 binggq.flow 结构
+CREATE TABLE IF NOT EXISTS `flow` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户',
+  `type` int(11) NOT NULL DEFAULT '0' COMMENT '交易类型',
+  `amount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '交易金额',
+  `pre_amount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '交易前金额',
+  `after_amount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '交易后金额',
+  `status` tinyint(4) NOT NULL COMMENT '交易状态',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime NOT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户资金流水';
+
+-- 正在导出表  binggq.flow 的数据：~0 rows (大约)
+DELETE FROM `flow`;
+/*!40000 ALTER TABLE `flow` DISABLE KEYS */;
+/*!40000 ALTER TABLE `flow` ENABLE KEYS */;
+
+
 -- 导出  表 binggq.group 结构
 CREATE TABLE IF NOT EXISTS `group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -173,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `group` (
   `utime` datetime NOT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='群组管理\r\n';
 
 -- 正在导出表  binggq.group 的数据：~0 rows (大约)
 DELETE FROM `group`;
@@ -231,9 +313,9 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态',
   `remark` varchar(100) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='菜单表';
 
--- 正在导出表  binggq.menu 的数据：~11 rows (大约)
+-- 正在导出表  binggq.menu 的数据：~13 rows (大约)
 DELETE FROM `menu`;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
 INSERT INTO `menu` (`id`, `name`, `node`, `pid`, `class`, `rank`, `is_menu`, `status`, `remark`) VALUES
@@ -249,7 +331,9 @@ INSERT INTO `menu` (`id`, `name`, `node`, `pid`, `class`, `rank`, `is_menu`, `st
 	(14, '内容管理', '', 0, 'icon-newspaper-o', 2, 1, 1, ''),
 	(15, '添加资讯', '/admin/news/add', 13, '', NULL, 0, 1, ''),
 	(16, '活动管理', '/admin/activity/index', 14, 'icon-trophy', NULL, 1, 1, ''),
-	(17, '轮播图管理', '/admin/banner/index', 14, 'icon-file-image', NULL, 1, 1, '');
+	(17, '轮播图管理', '/admin/banner/index', 14, 'icon-file-image', NULL, 1, 1, ''),
+	(19, '融资项目管理', '/admin/projrong/index', 20, 'icon-cubes', NULL, 1, 1, ''),
+	(20, '项目管理', '', 0, 'icon-diamond', 2, 1, 1, '');
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 
 
@@ -268,7 +352,8 @@ CREATE TABLE IF NOT EXISTS `news` (
   `summary` varchar(250) DEFAULT NULL COMMENT '摘要',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `title` (`title`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='咨询表';
 
 -- 正在导出表  binggq.news 的数据：~1 rows (大约)
@@ -279,33 +364,83 @@ INSERT INTO `news` (`id`, `admin_id`, `industry_id`, `admin_name`, `title`, `rea
 /*!40000 ALTER TABLE `news` ENABLE KEYS */;
 
 
--- 导出  表 binggq.project 结构
-CREATE TABLE IF NOT EXISTS `project` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '活动表',
+-- 导出  表 binggq.news_collect 结构
+CREATE TABLE IF NOT EXISTS `news_collect` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户新闻收藏表',
+  `user_id` int(11) NOT NULL,
+  `news_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户资讯收藏';
+
+-- 正在导出表  binggq.news_collect 的数据：~0 rows (大约)
+DELETE FROM `news_collect`;
+/*!40000 ALTER TABLE `news_collect` DISABLE KEYS */;
+/*!40000 ALTER TABLE `news_collect` ENABLE KEYS */;
+
+
+-- 导出  表 binggq.projrong 结构
+CREATE TABLE IF NOT EXISTS `projrong` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '融资项目',
   `user_id` int(10) NOT NULL COMMENT '发布人id',
   `publisher` varchar(50) NOT NULL COMMENT '发布人',
-  `industry_id` int(10) NOT NULL COMMENT '行业标签',
   `company` varchar(100) NOT NULL COMMENT '公司',
   `title` varchar(150) NOT NULL COMMENT '项目名称',
   `rzjd` varchar(50) NOT NULL COMMENT '融资阶段',
-  `ly` varchar(50) NOT NULL COMMENT '领域',
   `address` varchar(150) NOT NULL COMMENT '地点',
-  `scale` varchar(50) NOT NULL COMMENT '规模',
+  `scale` varchar(50) NOT NULL COMMENT '融资规模',
+  `stock` varchar(50) NOT NULL COMMENT '股份',
   `read_nums` int(11) DEFAULT NULL COMMENT '阅读数',
   `praise_nums` int(11) DEFAULT NULL COMMENT '点赞数',
   `comment_nums` int(11) DEFAULT NULL COMMENT '评论数',
   `cover` varchar(250) DEFAULT NULL COMMENT '封面',
   `body` text COMMENT '活动内容',
-  `summary` varchar(250) DEFAULT NULL COMMENT '项目简介',
+  `summary` varchar(550) DEFAULT NULL COMMENT '项目简介',
+  `comp_desc` varchar(550) DEFAULT NULL COMMENT '公司简介',
+  `team` varchar(550) DEFAULT NULL COMMENT '核心团队',
+  `attach` varchar(350) DEFAULT NULL COMMENT '资料地址',
+  `status` tinyint(4) DEFAULT '0' COMMENT '状态',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='项目';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='融资项目';
 
--- 正在导出表  binggq.project 的数据：~0 rows (大约)
-DELETE FROM `project`;
-/*!40000 ALTER TABLE `project` DISABLE KEYS */;
-/*!40000 ALTER TABLE `project` ENABLE KEYS */;
+-- 正在导出表  binggq.projrong 的数据：~1 rows (大约)
+DELETE FROM `projrong`;
+/*!40000 ALTER TABLE `projrong` DISABLE KEYS */;
+INSERT INTO `projrong` (`id`, `user_id`, `publisher`, `company`, `title`, `rzjd`, `address`, `scale`, `stock`, `read_nums`, `praise_nums`, `comment_nums`, `cover`, `body`, `summary`, `comp_desc`, `team`, `attach`, `status`, `create_time`, `update_time`) VALUES
+	(2, 2, '曹文鹏', '腾讯科技', '母婴健康交流', 'A轮', '深圳市南山区腾讯大厦', '500人', '14%', NULL, NULL, NULL, '/upload/proj/cover/2016-04-22/5719a69da9447.jpg', '特特', '12', '33', '养生项目组', '/upload/proj/attach/2016-04-22/5719a6b8d85c9.pptx', NULL, '0000-00-00 00:00:00', NULL);
+/*!40000 ALTER TABLE `projrong` ENABLE KEYS */;
+
+
+-- 导出  表 binggq.projrong_fans 结构
+CREATE TABLE IF NOT EXISTS `projrong_fans` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='融资项目感兴趣的人';
+
+-- 正在导出表  binggq.projrong_fans 的数据：~0 rows (大约)
+DELETE FROM `projrong_fans`;
+/*!40000 ALTER TABLE `projrong_fans` DISABLE KEYS */;
+/*!40000 ALTER TABLE `projrong_fans` ENABLE KEYS */;
+
+
+-- 导出  表 binggq.rong_tag 结构
+CREATE TABLE IF NOT EXISTS `rong_tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) DEFAULT NULL,
+  `industry_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='融资项目行业标签';
+
+-- 正在导出表  binggq.rong_tag 的数据：~2 rows (大约)
+DELETE FROM `rong_tag`;
+/*!40000 ALTER TABLE `rong_tag` DISABLE KEYS */;
+INSERT INTO `rong_tag` (`id`, `project_id`, `industry_id`) VALUES
+	(1, 2, 2),
+	(2, 2, 5);
+/*!40000 ALTER TABLE `rong_tag` ENABLE KEYS */;
 
 
 -- 导出  表 binggq.user 结构
@@ -325,6 +460,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `city` varchar(50) DEFAULT NULL COMMENT '常驻城市',
   `card_path` varchar(250) NOT NULL DEFAULT '' COMMENT '名片路径',
   `avatar` varchar(250) DEFAULT '' COMMENT '头像',
+  `money` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '账户余额',
   `ymjy` varchar(250) DEFAULT '' COMMENT '项目经验',
   `ywnl` varchar(250) DEFAULT '' COMMENT '业务能力',
   `reason` varchar(250) DEFAULT '' COMMENT '审核意见',
@@ -335,12 +471,27 @@ CREATE TABLE IF NOT EXISTS `user` (
   KEY `phone` (`phone`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
--- 正在导出表  binggq.user 的数据：~0 rows (大约)
+-- 正在导出表  binggq.user 的数据：~1 rows (大约)
 DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `phone`, `pwd`, `truename`, `level`, `idcard`, `company`, `position`, `email`, `gender`, `industry_id`, `goodat`, `city`, `card_path`, `avatar`, `ymjy`, `ywnl`, `reason`, `status`, `create_time`, `update_time`) VALUES
-	(2, '18316629973', '$2y$10$ZhwqXf41YVWVTZ3am.Uof.dzSn9myss903kZQ1VJQGBIrstq/NYTK', '曹文鹏', '1', '', '', '', '', 1, 3, '', NULL, '123', '', '', '', '', 1, '2016-04-19 16:35:17', '2016-04-19 16:35:17');
+INSERT INTO `user` (`id`, `phone`, `pwd`, `truename`, `level`, `idcard`, `company`, `position`, `email`, `gender`, `industry_id`, `goodat`, `city`, `card_path`, `avatar`, `money`, `ymjy`, `ywnl`, `reason`, `status`, `create_time`, `update_time`) VALUES
+	(2, '18316629973', '$2y$10$ZhwqXf41YVWVTZ3am.Uof.dzSn9myss903kZQ1VJQGBIrstq/NYTK', '曹文鹏', '1', '', '', '', '', 1, 3, '', NULL, '123', '', 1.00, '', '', '', 1, '2016-04-19 16:35:17', '2016-04-19 16:35:17');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
+
+
+-- 导出  表 binggq.user_fans 结构
+CREATE TABLE IF NOT EXISTS `user_fans` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL COMMENT '用户',
+  `following_id` int(11) NOT NULL COMMENT '关注对象',
+  `type` tinyint(4) NOT NULL DEFAULT '1' COMMENT '单向关注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户关系表';
+
+-- 正在导出表  binggq.user_fans 的数据：~0 rows (大约)
+DELETE FROM `user_fans`;
+/*!40000 ALTER TABLE `user_fans` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_fans` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
