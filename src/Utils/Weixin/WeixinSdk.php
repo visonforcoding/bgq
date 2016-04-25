@@ -86,7 +86,8 @@ class WeixinSdk {
         $tmpStr = implode($tmpArr);
         $tmpStr = sha1($tmpStr);
         if ($tmpStr == $signature) {
-            return true;
+            echo $_GET['echostr'];
+            exit();
         } else {
             return false;
         }
