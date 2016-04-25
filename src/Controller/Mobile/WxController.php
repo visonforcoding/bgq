@@ -42,7 +42,11 @@ class WxController extends AppController {
         //\Cake\Log\Log::debug($wx_accesstoken_url);
         $response = $httpClient->get($wx_accesstoken_url);
         if($response->isOk()){
-            var_dump(json_decode($response->body())->access_token);
+           $access_token =  json_decode($response->body())->access_token;
+           $open_id =  json_decode($response->body())->openid;
+           $wx_user_url = 'https://api.weixin.qq.com/sns/auth?access_token='.$access_token.'&openid='.$open_id;
+           $res = $httpClient->get($wx_user_url);
+           var_dump($res);
         }
         exit();
         $options = [
