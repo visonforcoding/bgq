@@ -21,8 +21,6 @@ class WxController extends AppController {
         $WeixinSdk = new WeixinSdk();
         $token = 'cwptest';
         $WeixinSdk->checkSignature($token);
-        echo $token;
-        exit();
     }
 
     /**
