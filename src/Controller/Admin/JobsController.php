@@ -2,7 +2,7 @@
 namespace App\Controller\Admin;
 
 use Wpadmin\Controller\AppController;
-
+use Cake\Datasource\ConnectionManager;
 /**
  * Jobs Controller
  *
@@ -18,7 +18,9 @@ class JobsController extends AppController
 */
 public function index()
 {
-$this->set('jobs', $this->Jobs);
+    $industries = $this->Jobs->Industry->find('list', ['limit' => 200])->toArray();
+    $this->set('industries', $industries);
+    $this->set('jobs', $this->Jobs);
 }
 
     /**
@@ -76,6 +78,11 @@ $this->set('jobs', $this->Jobs);
          //$job->user_id = $this->_user->id;
         if ($this->request->is(['post','put'])) {
             $job = $this->Jobs->patchEntity($job, $this->request->data);
+            $job->update_time= date('Y-m-d H:i:s');
+            $industry_ids=$this->request->data('industry_id');
+            if($industry_ids){
+               $job->industry_id= implode(',',$industry_ids); 
+            }
             if ($this->Jobs->save($job)) {
                   $this->Util->ajaxReturn(true,'修改成功');
             } else {
@@ -83,8 +90,8 @@ $this->set('jobs', $this->Jobs);
                $this->Util->ajaxReturn(false,getMessage($errors));
             }
         }
-                  //$users = $this->Jobs->Users->find('list', ['limit' => 200]);
-                //$industries = $this->Jobs->Industries->find('list', ['limit' => 200]);
+                $users = $this->Jobs->User->find('list', ['limit' => 200]);
+                $industries = $this->Jobs->Industry->find('list', ['limit' => 200]);
                 $this->set(compact('job', 'users', 'industries'));
     }
 

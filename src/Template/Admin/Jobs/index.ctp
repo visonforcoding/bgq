@@ -1,4 +1,6 @@
-<?php $this->start('static') ?>   
+<?php
+
+$this->start('static') ?>   
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
 <?php $this->end() ?> 
@@ -29,20 +31,20 @@
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
 <script>
-                        $(function () {
-                        $('#main-content').bind('resize', function () {
+                $(function () {
+                    $('#main-content').bind('resize', function () {
                         $("#list").setGridWidth($('#main-content').width() - 40);
-                        });
-                                $.zui.store.pageClear(); //刷新页面缓存清除
-                                $("#list").jqGrid({
+                    });
+                    $.zui.store.pageClear(); //刷新页面缓存清除
+                    $("#list").jqGrid({
                         url: "/admin/jobs/getDataList",
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户名', '公司', '招聘人数', '薪资范围(￥)', '行业', '工作地点', '招聘状态', '是否置顶','创建时间','更新时间','操作'],
+                                ['用户名', '公司', '招聘人数', '薪资范围(￥)', '行业', '工作地点', '招聘状态', '是否置顶', '创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
-                            {name: 'company', editable: true, align: 'center'},
+                            {name: 'user.company', editable: true, align: 'center'},
                             {name: 'num', editable: true, align: 'center'},
                             {name: 'offer_range', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     if (cellvalue) {
@@ -50,13 +52,7 @@
                                         return offer_range;
                                     }
                                 }},
-                            {name: 'industry_id', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
-                                    $.each(Object, function(p1, p2) {
-this; //这里的this指向每次遍历中Object的当前属性值
-p1; p2; //访问附加参数
-}, ['参数1', '参数2']);
-                                        return options;
-                                }},
+                            {name: 'industry_id', editable: true, align: 'center'},
                             {name: 'offer_addr', editable: true, align: 'center'},
                             {name: 'job_status', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     if (cellvalue == '1') {
@@ -99,69 +95,69 @@ p1; p2; //访问附加参数
                             id: "0"
                         },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
-                        });
-                        function actionFormatter(cellvalue, options, rowObject) {
-                        response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-                                response += '<a title="查看招聘描述" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-                                response += '<a title="编辑" href="/admin/jobs/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
-                                return response;
-                        }
+                });
+                function actionFormatter(cellvalue, options, rowObject) {
+                    response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response += '<a title="查看招聘描述" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
+                    response += '<a title="编辑" href="/admin/jobs/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+                    return response;
+                }
 
                 function delRecord(id) {
-                layer.confirm('确定删除？', {
-                btn: ['确认', '取消'] //按钮
-                }, function () {
-                $.ajax({
-                type: 'post',
-                        data: {id: id},
-                        dataType: 'json',
-                        url: '/admin/jobs/delete',
-                        success: function (res) {
-                        layer.msg(res.msg);
+                    layer.confirm('确定删除？', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                        $.ajax({
+                            type: 'post',
+                            data: {id: id},
+                            dataType: 'json',
+                            url: '/admin/jobs/delete',
+                            success: function (res) {
+                                layer.msg(res.msg);
                                 if (res.status) {
-                        $('#list').trigger('reloadGrid');
-                        }
-                        }
-                })
-                }, function () {
-                });
+                                    $('#list').trigger('reloadGrid');
+                                }
+                            }
+                        })
+                    }, function () {
+                    });
                 }
 
                 function doSearch() {
-                //搜索
-                var postData = $('#table-bar-form').serializeArray();
-                        var data = {};
-                        $.each(postData, function(i, n){
+                    //搜索
+                    var postData = $('#table-bar-form').serializeArray();
+                    var data = {};
+                    $.each(postData, function (i, n) {
                         data[n.name] = n.value;
-                        });
-                        $.zui.store.pageSet('searchData', data); //本地存储查询参数 供导出操作等调用
-                        $("#list").jqGrid('setGridParam', {
-                postData: data
-                }).trigger("reloadGrid");
+                    });
+                    $.zui.store.pageSet('searchData', data); //本地存储查询参数 供导出操作等调用
+                    $("#list").jqGrid('setGridParam', {
+                        postData: data
+                    }).trigger("reloadGrid");
                 }
 
                 function doExport() {
-                //导出excel
-                var sortColumnName = $("#list").jqGrid('getGridParam', 'sortname');
-                        var sortOrder = $("#list").jqGrid('getGridParam', 'sortorder');
-                        var searchData = $.zui.store.pageGet('searchData')?$.zui.store.pageGet('searchData'):{};
-                        searchData['sidx'] = sortColumnName;
-                        searchData['sort'] = sortOrder;
-                        var searchQueryStr = $.param(searchData);
-                        $("body").append("<iframe src='/admin/jobs/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                    //导出excel
+                    var sortColumnName = $("#list").jqGrid('getGridParam', 'sortname');
+                    var sortOrder = $("#list").jqGrid('getGridParam', 'sortorder');
+                    var searchData = $.zui.store.pageGet('searchData') ? $.zui.store.pageGet('searchData') : {};
+                    searchData['sidx'] = sortColumnName;
+                    searchData['sort'] = sortOrder;
+                    var searchQueryStr = $.param(searchData);
+                    $("body").append("<iframe src='/admin/jobs/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
 
                 function doView(id) {
-                //查看明细
-                url = '/admin/jobs/view?id=' + id;
-                        layer.open({
+                    //查看明细
+                    url = '/admin/jobs/view?id=' + id;
+                    layer.open({
                         type: 2,
-                                title: '查看招聘描述',
-                                shadeClose: true,
-                                shade: 0.8,
-                                area: ['60%', '40%'],
-                                content: url//iframe的url
-                        });
+                        title: '查看招聘描述',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['60%', '40%'],
+                        content: url//iframe的url
+                    });
                 }
 </script>
 <?php
