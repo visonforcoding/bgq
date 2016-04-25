@@ -42,7 +42,7 @@ class WxController extends AppController {
         //\Cake\Log\Log::debug($wx_accesstoken_url);
         $response = $httpClient->get($wx_accesstoken_url);
         if($response->isOk()){
-            var_dump(json_decode($response->body()));
+            var_dump(json_decode($response->body())->access_token);
         }
         exit();
         $options = [
