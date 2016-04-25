@@ -66,7 +66,7 @@ class MenuCell extends Cell {
         $this->_url = $url;
         $active = null;
         foreach ($menus as $value) {
-            if (isset($value['children'])) {
+            if (!empty($value['children'])) {
                 foreach ($value['children'] as $sub_menu) {
                     if ($sub_menu['node'] == $url) {
                         $this->_pageTitle = $sub_menu['name'];
@@ -74,7 +74,7 @@ class MenuCell extends Cell {
                         $this->_breadSecond = ['name' => $sub_menu['name'], 'node' => $sub_menu['node']];
                         break;
                     }
-                    if (isset($sub_menu['children'])) {
+                    if (!empty($sub_menu['children'])) {
                         foreach ($sub_menu['children'] as $v) {
                             if ($v['node'] == $url) {
                                 $active = $sub_menu['node'];
@@ -85,6 +85,14 @@ class MenuCell extends Cell {
                             }
                         }
                     }
+                }
+            } else {
+                if ($value['node'] == $url) {
+                    $active = $value['node'];
+                    $this->_active = $active;
+                    $this->_pageTitle = $value['name'];
+                    $this->_breadFirst = ['name' => $value['name'], 'node' => $value['node']];
+                    //$this->_breadSecond = ['name' => $sub_menu['name'], 'node' => $sub_menu['node']];
                 }
             }
         }

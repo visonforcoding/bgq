@@ -47,6 +47,7 @@ class User extends Entity {
         '*' => true,
         'id' => false,
     ];
+    protected $_hidden = ['pwd'];
 
     protected function _setPwd($password) {
         return (new DefaultPasswordHasher)->hash($password);

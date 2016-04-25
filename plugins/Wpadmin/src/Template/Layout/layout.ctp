@@ -29,13 +29,6 @@
                 <div class="collapse navbar-collapse navbar-collapse-example">
                     <ul class="nav navbar-nav navbar-avatar navbar-right">
                         <li>
-                            <a href="/shop/order/orderList" class="header-tooltip"  style="margin-top:8px;" data-toggle="tooltip"
-                               data-placement="bottom" data-container="body" title="" data-original-title= "4条未处理订单">
-                                <i style="font-size: 25px;" class="icon-shopping-cart icon-xlarge text-default"></i>
-                                <b style="display: block;" class="badge badge-notes bg-default count-n">4</b>
-                            </a>
-                        </li>
-                        <li>
                             <a href="/shop/user/message" class="header-tooltip" style="margin-top:8px;" data-toggle="tooltip"
                                data-placement="bottom" data-container="body" title="" data-original-title= "2条未读信息">
                                 <i  style="font-size: 25px;" class="icon-comment-alt icon-xlarge text-default"></i>
