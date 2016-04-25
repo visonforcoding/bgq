@@ -44,7 +44,7 @@ class WxController extends AppController {
         if($response->isOk()){
            $access_token =  json_decode($response->body())->access_token;
            $open_id =  json_decode($response->body())->openid;
-           $wx_user_url = 'https://api.weixin.qq.com/sns/auth?access_token='.$access_token.'&openid='.$open_id;
+           $wx_user_url = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$access_token.'&openid='.$open_id.'&lang=zh_CN';
            $res = $httpClient->get($wx_user_url);
            if($res->isOk()){
                var_dump($res->body());
