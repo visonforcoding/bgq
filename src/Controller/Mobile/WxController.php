@@ -33,8 +33,17 @@ class WxController extends AppController {
         $this->redirect($wx_code_url);
     }
 
-    public function getUser() {
+    public function getUserCode() {
+        $code = $this->request->param('code');
         $wxconfig = \Cake\Core\Configure::read('weixin');
+        $httpClient = new \Cake\Network\Http\Client();
+        $wx_accesstoken_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$wxconfig['appID'].'&secret='.$wxconfig['appsecret'].
+                '&code='.$code.'&grant_type=authorization_code';
+        $response = $httpClient->get($wx_accesstoken_url);
+        if($response->isOk()){
+            debug($response->body());
+        }
+        exit();
         $options = [
             'debug' => true,
             'app_id' => $wxconfig['appID'],
