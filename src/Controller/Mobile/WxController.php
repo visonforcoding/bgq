@@ -27,7 +27,7 @@ class WxController extends AppController {
 
     public function getUserJump() {
          $wxconfig = \Cake\Core\Configure::read('weixin');
-        $redirect_url = 'http://'.$_SERVER['SERVER_NAME'].'/mobile/wx/getUser';
+        $redirect_url = 'http://'.$_SERVER['SERVER_NAME'].'/mobile/wx/getUserCode';
         $wx_code_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='
                 . $wxconfig['appID'] . '&redirect_uri='.urlencode($redirect_url).'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
         $this->redirect($wx_code_url);
