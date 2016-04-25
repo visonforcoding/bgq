@@ -4,6 +4,8 @@ namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
 use App\Utils\Weixin\WeixinSdk;
+use EasyWeChat\Foundation\Application as WXSDK;
+
 /**
  * User Controller
  *
@@ -21,6 +23,31 @@ class WxController extends AppController {
         $WeixinSdk = new WeixinSdk();
         $token = 'cwptest';
         $WeixinSdk->checkSignature($token);
+    }
+
+    public function getUserJump() {
+         $wxconfig = \Cake\Core\Configure::read('weixin');
+        $redirect_url = $_SERVER['SERVER_NAME'].'/mobile/wx/getUser';
+        $wx_code_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='
+                . $wxconfig['appID'] . '&redirect_uri='.$redirect_url.'&response_type=code&scope=SCOPE&state=STATE#wechat_redirect';
+        $this->redirect($wx_code_url);
+    }
+
+    public function getUser() {
+        $wxconfig = \Cake\Core\Configure::read('weixin');
+        $options = [
+            'debug' => true,
+            'app_id' => $wxconfig['appID'],
+            'secret' => $wxconfig['appsecret'],
+            'token' => $wxconfig['token'],
+            // 'aes_key' => null, // 可选
+            'log' => [
+                'level' => 'debug',
+                'file' => LOGS . '/logs/easywechat.log', // XXX: 绝对路径！！！！
+            ],
+                //...
+        ];
+        $WXSDK = new WXSDK($options);
     }
 
     /**
@@ -50,10 +77,10 @@ class WxController extends AppController {
         if ($this->request->is('post')) {
             $user = $this->User->patchEntity($user, $this->request->data);
             if ($this->User->save($user)) {
-                $this->Util->ajaxReturn(true,'添加成功');
+                $this->Util->ajaxReturn(true, '添加成功');
             } else {
                 $errors = $user->errors();
-                $this->Util->ajaxReturn(false,$errors);
+                $this->Util->ajaxReturn(false, $errors);
             }
         }
 //        $industries = $this->User->Industrie->find('list', ['limit' => 200]);
@@ -111,7 +138,7 @@ class WxController extends AppController {
      */
     public function login() {
         $this->set(array(
-            'pageTitle'=>'登录'
+            'pageTitle' => '登录'
         ));
     }
 
