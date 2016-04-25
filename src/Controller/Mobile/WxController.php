@@ -39,10 +39,10 @@ class WxController extends AppController {
         $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer'=>false]);
         $wx_accesstoken_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$wxconfig['appID'].'&secret='.$wxconfig['appsecret'].
                 '&code='.$code.'&grant_type=authorization_code';
-        \Cake\Log\Log::debug($wx_accesstoken_url);
+        //\Cake\Log\Log::debug($wx_accesstoken_url);
         $response = $httpClient->get($wx_accesstoken_url);
         if($response->isOk()){
-            debug($response->body());
+            var_dump(json_decode($response->body()));
         }
         exit();
         $options = [
