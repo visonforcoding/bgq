@@ -34,7 +34,6 @@ class WxController extends AppController {
     }
 
     public function getUserCode() {
-        phpinfo();exit();
         $code = $this->request->param('code');
         $wxconfig = \Cake\Core\Configure::read('weixin');
         $httpClient = new \Cake\Network\Http\Client();
