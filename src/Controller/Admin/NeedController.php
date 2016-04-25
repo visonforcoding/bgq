@@ -125,14 +125,15 @@ public function getDataList()
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where['OR']= [['user.`truename` like' =>"%$keywords%"],['msg like'=>"%$keywords%"]];
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
+//             var_dump($begin_time);die;
+            $where['and'] = [['date(need.`create_time`) >' => $begin_time], ['date(need.`create_time`) <' => $end_time]];
         }
-                $query =  $this->Need->find();
+        $query =  $this->Need->find()->contain(['User']);
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
