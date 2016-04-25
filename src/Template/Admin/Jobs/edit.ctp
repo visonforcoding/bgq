@@ -6,22 +6,6 @@ $this->start('static') ?>
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($job, ['class' => 'form-horizontal']) ?>
-<!--    <div class="form-group">
-        <label class="col-md-2 control-label">用户id</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('user_id', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>-->
-    <div class="form-group">
-        <label class="col-md-2 control-label">公司</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('company', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
     <div class="form-group">
         <label class="col-md-2 control-label">招聘人数</label>
         <div class="col-md-8">
@@ -31,7 +15,7 @@ $this->start('static') ?>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">薪资范围，逗号分隔</label>
+        <label class="col-md-2 control-label">薪资范围，用逗号分隔</label>
         <div class="col-md-8">
                         <?php
             echo $this->Form->input('offer_range', ['label' => false, 'class' => 'form-control']);
@@ -39,11 +23,15 @@ $this->start('static') ?>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">行业id,用逗号分隔</label>
+        <label class="col-md-2 control-label">选择行业</label>
         <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('industry_id', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <?php $industry_arr=explode(',',$job->industry_id) ?>
+            <?php foreach ($industries as $key=>$value){ ?>                     
+                <label class="checkbox inline">
+                    <input type="checkbox" <?php echo in_array($key, $industry_arr) ? 'checked=checked' : ''; ?>  name="industry_id[]" id="inlineCheckbox<?php echo $key;?>" value="<?php echo $key;?>"> <?php echo $value;?>
+                </label>
+            <?php }?>
+            
         </div>
     </div>
     <div class="form-group">
@@ -57,13 +45,11 @@ $this->start('static') ?>
     <div class="form-group">
         <label class="col-md-2 control-label">招聘简介</label>
         <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('job_desc', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <script name='job_desc' id='content' rows='3' type="text/plain" class='form-control-editor'><?= $job->job_desc ?></script>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">招聘状态：1.提交，2.通过，3.拒绝</label>
+        <label class="col-md-2 control-label">审核：1.提交，2.通过，3.拒绝</label>
         <div class="col-md-8">
                         <?php
             echo $this->Form->input('job_status', ['label' => false, 'class' => 'form-control']);
@@ -78,22 +64,6 @@ $this->start('static') ?>
             ?>
         </div>
     </div>
-<!--    <div class="form-group">
-        <label class="col-md-2 control-label">创建时间</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('create_time', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">更新时间</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('update_time', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>-->
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
@@ -107,13 +77,13 @@ $this->start('static') ?>
 <script type="text/javascript" src="/wpadmin/lib/jqupload/jquery.uploadfile.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/jquery.validationEngine.js"></script>
-<!--<script src="/wpadmin/lib/ueditor/ueditor.config.js" ></script>
+<script src="/wpadmin/lib/ueditor/ueditor.config.js" ></script>
 <script src="/wpadmin/lib/ueditor/ueditor.all.js" ></script>
-<script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>    -->
+<script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>    
 <script>
     $(function () {
         // initJqupload('cover', '/wpadmin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
-        //var ue = UE.getEditor('content'); //初始化富文本编辑器
+        var ue = UE.getEditor('content'); //初始化富文本编辑器
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('form').submit(function () {
             var form = $(this);
