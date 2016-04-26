@@ -35,10 +35,11 @@ class NewsController extends AppController {
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null) {
+        phpinfo();exit();
         $news = $this->News->get($id, [
             'contain' => ['Admins']
         ]);
-        $wxconfig = \Cake\Core\Configure::read('weixing');
+        $wxconfig = \Cake\Core\Configure::read('weixin');
         $options = [
             'debug' => true,
             'app_id' => $wxconfig['appID'],
