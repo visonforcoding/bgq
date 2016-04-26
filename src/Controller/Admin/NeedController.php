@@ -125,7 +125,7 @@ public function getDataList()
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where['OR']= [['user.`truename` like' =>"%$keywords%"],['msg like'=>"%$keywords%"]];
+            $where['OR']= [['user.`truename` like' =>"%$keywords%"],['msg like'=>"%$keywords%"]];//搜索关键字为用户名和内容
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
