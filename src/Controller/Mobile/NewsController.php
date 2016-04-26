@@ -39,21 +39,7 @@ class NewsController extends AppController {
             'contain' => ['Admins']
         ]);
         $wxconfig = \Cake\Core\Configure::read('weixin');
-        $options = [
-            'debug' => true,
-            'app_id' => $wxconfig['appID'],
-            'secret' => $wxconfig['appsecret'],
-            'token' => $wxconfig['token'],
-            // 'aes_key' => null, // 可选
-            'log' => [
-                'level' => 'debug',
-                'file' => LOGS . '/logs/easywechat.log', // XXX: 绝对路径！！！！
-            ],
-                //...
-        ];
-        $WXSDK = new WXSDK($options);
         $this->set('news', $news);
-        $this->set('wxjs', $WXSDK->js);
         $this->set('_serialize', ['news']);
     }
 
