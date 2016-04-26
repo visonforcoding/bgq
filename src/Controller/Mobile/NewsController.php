@@ -38,6 +38,7 @@ class NewsController extends AppController {
         $news = $this->News->get($id, [
             'contain' => ['Admins']
         ]);
+        $wxconfig = \Cake\Core\Configure::read('weixing');
         $options = [
             'debug' => true,
             'app_id' => $wxconfig['appID'],
@@ -51,7 +52,6 @@ class NewsController extends AppController {
                 //...
         ];
         $WXSDK = new WXSDK($options);
-        
         $this->set('news', $news);
         $this->set('wxjs', $WXSDK->js);
         $this->set('_serialize', ['news']);
