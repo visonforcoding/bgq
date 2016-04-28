@@ -21,3 +21,4 @@ html,body { width: 100%; height: 100%;}
 .innerwaper{padding-left: 0.3rem;padding-right: 0.3rem;width:100%;}
 .h20{background:#f0eff5;border-top:1px solid #c8c7cc;border-bottom:1px solid #c8c7cc;height:0.2rem;}
 .wraper .nobottom{border-bottom:none;}
+.newswraper{padding-bottom:1rem;}
