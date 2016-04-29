@@ -2,30 +2,19 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-        <meta name="format-detection" content="telephone=no">
-        <title>FrozenUI Demo</title>
-        <link rel="stylesheet" href="/mobile/frozenui/css/frozen.css">
-        <?= $this->fetch('static') ?>
+        <meta name="format-detection"content="telephone=no, email=no" />
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <title>并购圈</title>
+        <link rel="stylesheet" type="text/css" href="/mobile/css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="/mobile/css/style.css"/>
+        <script src="/js/vue.min.js"></script>
+        <script src="/mobile/js/view.js"></script>
+        <?=$this->fetch('static') ?>
     </head>
-    <body ontouchstart="">
-        <?php if ($this->fetch('header')): ?>
-            <?= $this->fetch('header') ?>
-        <?php else: ?>
-            <?= $this->element('header') ?>
-        <?php endif; ?>
-        <footer class="ui-footer ui-footer-btn">
-            <ul class="ui-tiled ui-border-t">
-                <li data-href="index.html" class="ui-border-r"><div>基础样式</div></li>
-                <li data-href="ui.html" class="ui-border-r"><div>UI组件</div></li>
-                <li data-href="js.html"><div>JS插件</div></li>
-            </ul>
-        </footer>
-        <section class="ui-container ui-center">
-            <?= $this->fetch('content') ?>
-        </section>
-        <script src="/mobile/frozenui/lib/zepto.min.js"></script>
-        <script src="/mobile/frozenui/js/frozen.js"></script>
-        <?= $this->fetch('script') ?>
+    <body>
+        <?=$this->fetch('content')?>
+        <?=$this->fetch('script')?>
     </body>
 </html>

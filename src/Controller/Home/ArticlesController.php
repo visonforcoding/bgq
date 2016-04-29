@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller\Home;
 
-use App\Controller\AppController;
+use App\Controller\Home\AppController;
 
 /**
  * Articles Controller
