@@ -22,6 +22,7 @@ class SmsComponent extends Component {
 
     /**
      * Qf106 平台短信接口
+     * 只做简单发短信功能 具体业务和防止恶意刷短信 需结合在业务层处理
      * @param string $mobile 要发送到的手机号
      * @param string $content 发送的内容
      * @return bool true 成功 false 失败

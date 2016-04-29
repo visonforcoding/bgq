@@ -56,19 +56,18 @@ footer .othertype img{width:100%;height:auto;}
 
 .reg-shadow{width:100%;height:100%;position:fixed;left:0;top:0;background:rgba(0,0,0,.3);overflow:hidden;}
 .shadow-info{position:fixed;bottom:0;left:0;width:100%;}
-.shadow-info .picinfo{background: #fff;width:90%;margin:0.2rem auto;border-radius: 0.3rem;}
+.shadow-info .picinfo{background: #fff;width:80%;margin:0.2rem auto;border-radius: 0.3rem;}
 .picinfo span{display: block;color:#007aff;font-size:0.38rem;height:1.14rem;line-height: 1.14rem;text-align: center;}
 
 .reg-sucess a{display: block;width:1.69rem;height:1.69rem;background: url(../images/sucess.png) no-repeat;background-size: cover; margin:0.3rem auto;}
 .reg-sucess p{line-height: 1.38rem;font-size:0.3rem;color:#222c38;}
 
-/*web字体图标*/
 @font-face {font-family: 'iconfont';
-    src: url('../font/iconfont.eot'); /* IE9*/
-    src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('../font/iconfont.woff') format('woff'), /* chrome、firefox */
-    url('../font/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-    url('../font/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+    src: url('iconfont.eot'); /* IE9*/
+    src: url('iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('iconfont.woff') format('woff'), /* chrome、firefox */
+    url('iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
 }
 .iconfont{
     font-family:"iconfont" !important;
@@ -77,11 +76,10 @@ footer .othertype img{width:100%;height:auto;}
     -webkit-text-stroke-width: 0.2px;
     -moz-osx-font-smoothing: grayscale;
     }
-    
 /*news --start--*/
-.inner .news-serch{ width:0.32rem;height:0.32rem;font-size:0.32rem;top:0.29rem;}
+.news-serch{background: url(../images/serch.png) no-repeat; background-size:cover; width:0.32rem;height:0.32rem;}
 .banner{background: url(../images/banner.jpg) no-repeat center center;background-size:cover; width:100%;height:2.95rem;}
-.news-list-items{border-top:1px #c8c7cc solid; padding:0.36rem 0.4rem 0.3rem;background: #fff;}
+.news-list-items{border-top:1px #c8c7cc solid; padding:0.36rem 0.4rem 0.3rem;}
 .news-list-items h1{width:100%;color:#969fa9;font-size:0.24rem;line-height: 0.4rem;position:relative;padding-left:0.5rem;}
 .news-list-items h1 span{width:0.4rem;height:0.4rem;position:absolute;left:0;}
 .news-list-items h1{display: inline-block;}
@@ -92,59 +90,8 @@ footer .othertype img{width:100%;height:auto;}
 .newsbox .sec-news-l p{line-height:0.36rem;font-size:0.24rem;}
 .newsbox .sec-news-r{float:right;width:1.6rem;height:1.6rem;padding-top:0.24rem;}
 .newsbox .sec-news-r img{width:100%;height:auto;display: block;}
-.news-bottom{margin-top:0.26rem;}
-.news-bottom .sec-b-l{float:left; margin-top:0.07rem;}
-.news-bottom .sec-b-l div{display:inline-block;color:#969fa9;margin-right:0.5rem;}
-.sec-like span,.sec-comment span{display: inline-block; margin-right:0.1rem;width:0.24rem;height:0.22rem;}
+
+.news-bottom .sec-b-l{float:left;}
+.news-bottom .sec-b-l div{display:inline-block;}
+.sec-like span{display: inline-block;}
 .news-bottom .sec-b-r{float:right;}
-.sec-b-r a{display: inline-block;color:#969fa9;padding:0.1rem;font-size:0.2rem;border:1px #969fa9 solid;border-radius: 0.1rem;}
-.footer{border-top:1px #c8c7cc solid; padding-top:0.2rem;padding-bottom:0.1rem; background: #f7f7f8;}
-.navfooter li{float:left;width:25%;text-align: center;}
-.navfooter li span{display: block;height:0.53rem;font-size:0.44rem;color:#7a7e83;}
-.navfooter li a{display: block;line-height: 0.32rem;color:#7a7e83; text-align: center;}
-.navfooter li:hover span,.navfooter li:hover a{color:#dd204b;}
-.firstnews:after{content:'置顶';color:#dd204b;position:absolute;right:0.1rem;top:0;}
-
-/*新闻详情页--start*/
-.inner .collection{right:0.6rem;font-size:0.32rem;color:#fff;}
-.inner .share{font-size:0.34rem;color:#fff;}
-.newscon-box,.newscomment-box{background: #fff;margin-top:0.2rem;overflow:hidden;padding-bottom:0.4rem;border-bottom:1px #969fa9 solid;}
-.newscon-box h3{line-height:0.8rem;width:100%;text-align: center;border:1px #c8c7cc solid;font-size:0.28rem;color:#222c38;}
-.newscon-box img{width:80%;height:auto;display: block;margin:0.2rem auto;}
-.newscon-box p{width:90%;margin:0 auto;text-indent:0.5rem;line-height: 0.36rem;font-size:0.24rem;color:#9ba4ad;}
-.con-bottom{float:right;line-height: 0.4rem;margin-right: 8%;color:#9ba4ad;margin-top:0.08rem;}
-.con-bottom i{margin:0 0.1rem;}
-.con-bottom i.like{font-size:0.3rem;}
-.newscomment-box{border-top:1px #969fa9 solid;}
-.newscomment-box .comment-title{width:100%;font-size:;line-height: 0.8rem;font-size:0.28rem;color:#e01a48;height:0.8rem;
-border-bottom:1px #969fa9 solid; padding:0 0.3rem;position:relative;}
-.newscomment-box .comment-title span{position:absolute;right:5%;color:#7a7e83;font-size:0.2rem;}
-.newscomment-box .comment-title i{font-size:0.3rem;position:absolute;right:21%;color:#7a7e83;top:0.03em;}
-.newscomment-box .items{margin:0.3rem;border-bottom:1px #c8c7cc solid;}
-.comm-info{height:0.62rem;}
-.comm-info span{ display: block;float:left;}
-.comm-info span:first-child{width:0.62rem;height:0.62rem;margin-right:0.3rem;}
-.comm-info span:last-child{float:right;margin-top:0.14rem;}
-.comm-info span:last-child i{font-size:0.32rem;margin-right:0.1rem;}
-.comm-info span img{width:100%;height:auto;display: block;}
-.comm-info .infor-comm i{display: block;}
-.comm-info .username{font-size:0.22rem;line-height: 0.38rem;}
-.comm-info .job{font-size:0.2rem;line-height: 0.24rem;margin-top:0.05rem;color:#9ba4ad;}
-.newscomment-box p{width:100%;padding:0.2rem;padding-left:0.92rem;font-size:0.28rem;color:#7a7e83;line-height: 0.3rem;}
-
-/*新闻搜索--start*/
-.inner .news-serch{background:none;}
-.inner h1 input{width: 80%;background: #d52458; border: none;font-size: 0.3rem;color: #fff;}
-
-.inner h1 input::-webkit-input-placeholder { /* WebKit browsers */ 
-color: #fff; 
-} 
-.inner h1 input::-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
-color: #fff; 
-} 
-.inner h1 input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
-color: #fff; 
-} 
-.inner h1 input::-ms-input-placeholder { /* Internet Explorer 10+ */ 
-color: #fff; 
-} 
