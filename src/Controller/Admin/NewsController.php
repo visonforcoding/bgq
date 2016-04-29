@@ -69,7 +69,6 @@ class NewsController extends AppController {
         ]);
         if ($this->request->is(['post', 'put'])) {
             $news = $this->News->patchEntity($news, $this->request->data);
-            print_r($this->request->data());exit;
             if ($this->News->save($news)) {
                 $this->Util->ajaxReturn(true, '修改成功');
             } else {
