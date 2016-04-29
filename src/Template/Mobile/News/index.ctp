@@ -1,61 +1,60 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New News'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Admins'), ['controller' => 'Admin', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Admin'), ['controller' => 'Admin', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="news index large-9 medium-8 columns content">
-    <h3><?= __('News') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('admin_id') ?></th>
-                <th><?= $this->Paginator->sort('industry_id') ?></th>
-                <th><?= $this->Paginator->sort('admin_name') ?></th>
-                <th><?= $this->Paginator->sort('title') ?></th>
-                <th><?= $this->Paginator->sort('read_nums') ?></th>
-                <th><?= $this->Paginator->sort('praise_nums') ?></th>
-                <th><?= $this->Paginator->sort('comment_nums') ?></th>
-                <th><?= $this->Paginator->sort('cover') ?></th>
-                <th><?= $this->Paginator->sort('summary') ?></th>
-                <th><?= $this->Paginator->sort('create_time') ?></th>
-                <th><?= $this->Paginator->sort('update_time') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($news as $news): ?>
-            <tr>
-                <td><?= $this->Number->format($news->id) ?></td>
-                <td><?= $news->has('admin') ? $this->Html->link($news->admin->username, ['controller' => 'Admin', 'action' => 'view', $news->admin->id]) : '' ?></td>
-                <td><?= $this->Number->format($news->industry_id) ?></td>
-                <td><?= h($news->admin_name) ?></td>
-                <td><?= h($news->title) ?></td>
-                <td><?= $this->Number->format($news->read_nums) ?></td>
-                <td><?= $this->Number->format($news->praise_nums) ?></td>
-                <td><?= $this->Number->format($news->comment_nums) ?></td>
-                <td><?= h($news->cover) ?></td>
-                <td><?= h($news->summary) ?></td>
-                <td><?= h($news->create_time) ?></td>
-                <td><?= h($news->update_time) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $news->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $news->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $news->id], ['confirm' => __('Are you sure you want to delete # {0}?', $news->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
+<header>
+    <div class='inner'>
+        <h1>资讯</h1>
+        <a href="#this" class='iconfont news-serch h-regiser'>&#xe613;</a>
     </div>
+</header>
+<div class="wraper newswraper">
+    <div class="banner"></div>
+    <?php if (isset($news)): ?>
+        <?php foreach ($news as $news): ?>
+            <section class='news-list-items '>
+                <h1 class="firstnews"><span><img src="../images/user.png" /></span><?= $news->has('admin') ? $news->admin->truename : '' ?></h1>
+                <a href="/mobile/news/view/<?= h($news->id) ?>" class="newsbox clearfix">
+                    <div class="sec-news-l">
+                        <h3><?= h($news->title) ?></h3>
+                        <p><?= h($news->summary) ?></p>
+                    </div>	
+                    <div class="sec-news-r">
+                        <img src="<?= h($news->cover) ?>"/>
+                    </div>
+                </a>
+                <div class="news-bottom clearfix">
+                    <div class="sec-b-l">
+                        <div class="sec-like">
+                            <span class="iconfont">&#xe616;</span><?= $this->Number->format($news->praise_nums) ?>
+                        </div>
+                        <div class="sec-comment">
+                            <span class="iconfont">&#xe618;</span><?= $this->Number->format($news->comment_nums) ?>
+                        </div>
+                    </div>
+                    <div class="sec-b-r">
+                        <a href="#this">投资</a>
+                        <a href="#this">资金</a>
+                        <a href="#this">管理</a>
+                    </div>
+                </div>
+            </section>	
+        <?php endforeach; ?>
+    <?php endif; ?>
 </div>
+<footer class="footer">
+    <ul class="navfooter clearfix">
+        <li>
+            <span class="iconfont">&#xe601;</span>
+            <a href="#this">活动</a>
+        </li>
+        <li>
+            <span class="iconfont">&#xe609;</span>
+            <a href="#this">资讯</a>
+        </li>
+        <li>
+            <span class="iconfont">&#xe60b;</span>
+            <a href="#this">大咖</a>
+        </li>
+        <li>
+            <span class="iconfont">&#xe60d;</span>
+            <a href="#this">我</a>
+        </li>
+    </ul>
+</footer>

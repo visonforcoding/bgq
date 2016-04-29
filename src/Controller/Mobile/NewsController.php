@@ -2,7 +2,7 @@
 
 namespace App\Controller\Mobile;
 
-use App\Controller\AppController;
+use App\Controller\Mobile\AppController;
 use EasyWeChat\Foundation\Application as WXSDK;
 
 /**
@@ -22,7 +22,7 @@ class NewsController extends AppController {
             'contain' => ['Admins']
         ];
         $news = $this->paginate($this->News);
-
+        
         $this->set(compact('news'));
         $this->set('_serialize', ['news']);
     }

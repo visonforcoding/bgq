@@ -6,6 +6,6 @@
 </style>
 <div class="jobs view large-9 medium-8 columns content">
     <div class="row text">
-        <?= (h($job->job_desc)); ?>
+        <?= htmlspecialchars_decode(h($job->job_desc)); ?>
     </div>
 </div>
