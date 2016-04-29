@@ -22,8 +22,8 @@ footer .othertype img{width:100%;height:auto;}
 .loginbox .username input{width:5.96rem;}
 .loginbox .username span{background:url(img/ren.png) no-repeat;width:0.25rem;height:0.29rem;background-size:cover;}
 .loginbox .password span{background: url(img/pass.png) no-repeat;width:0.27rem;height:0.34rem; background-size: cover;}
-.loginbox .password input{width:4.43rem;}
-.loginbox .password a{color:#e01a48;}
+.loginbox .password input{width:4rem;}
+.loginbox .password button{color:#e01a48;border: none;background-color: #fff;line-height: 1.3rem;float:right;}
 .login-area .submit{display:inline-block;width:5.6rem;margin-left:0.58rem;background:#e01a48; padding:0.25rem 0;color:#fff;text-align: center;border-radius: 0.2rem;margin-top:0.76rem;box-shadow:0 0 15px rgba(0,0,0,0.3);font-size:0.3rem;}
 
 /*注册机构 --start*/
