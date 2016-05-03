@@ -1,3 +1,19 @@
+/*web字体图标*/
+@font-face {font-family: 'iconfont';
+    src: url('../font/iconfont.eot'); /* IE9*/
+    src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../font/iconfont.woff') format('woff'), /* chrome、firefox */
+    url('../font/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('../font/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:0.16rem;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    }
+    
 /*header*/
 header{width:100%;height:0.8rem;position:fixed;left:0;top:0;background:#d72355;border-bottom:1px #a8a7ab solid;overflow:hidden;z-index:2;}
 header h1{width:100%;text-align:center;line-height:0.8rem;font-size:0.32rem;color:#fff;font-weight:500;}
@@ -64,22 +80,6 @@ footer .othertype img{width:100%;height:auto;}
 .reg-sucess a{display: block;width:1.69rem;height:1.69rem;background: url(img/sucess.png) no-repeat;background-size: cover; margin:0.3rem auto;}
 .reg-sucess p{line-height: 1.38rem;font-size:0.3rem;color:#222c38;}
 
-/*web字体图标*/
-@font-face {font-family: 'iconfont';
-    src: url('../font/iconfont.eot'); /* IE9*/
-    src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('../font/iconfont.woff') format('woff'), /* chrome、firefox */
-    url('../font/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-    url('../font/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
-}
-.iconfont{
-    font-family:"iconfont" !important;
-    font-size:0.16rem;font-style:normal;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-stroke-width: 0.2px;
-    -moz-osx-font-smoothing: grayscale;
-    }
-    
 /*news --start--*/
 .inner .news-serch{ width:0.32rem;height:0.32rem;font-size:0.32rem;top:0.29rem;}
 .banner{background: url(img/banner.jpg) no-repeat center center;background-size:cover; width:100%;height:2.95rem;}
@@ -181,3 +181,4 @@ border-left:none;border-bottom:none;top:-1px;}
 .a-other-info > a{padding:0.1rem;border:1px #969fa9 solid;border-radius: 0.1rem;margin-left：0.07rem;}
 .a-other-info span:nth-of-type(2){margin-left:0.8rem;line-height:0.34rem;}
 .active-items{padding-bottom:0.4rem;border-bottom: 1px #c8c7cc solid;}
+.a-wraper section{border-top:none;}
