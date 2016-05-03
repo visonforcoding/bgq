@@ -25,9 +25,10 @@ class SmsComponent extends Component {
      * 只做简单发短信功能 具体业务和防止恶意刷短信 需结合在业务层处理
      * @param string $mobile 要发送到的手机号
      * @param string $content 发送的内容
+     * @param string $code 验证码 可选
      * @return bool true 成功 false 失败
      */
-    public function sendByQf106($mobile, $content) {
+    public function sendByQf106($mobile, $content,$code='') {
 
         $smsConfig = Configure::read('sms');
         if (!$smsConfig) {
@@ -47,6 +48,14 @@ class SmsComponent extends Component {
         if ($response->isOk()) {
             $body = Xml::toArray(Xml::build($response->body()));
             if ($body['returnsms']['returnstatus']&&$body['returnsms']['message']) {
+                $smsTable = \Cake\ORM\TableRegistry::get('smsmsg');
+                $sms = $smsTable->newEntity([
+                    'phone'=>$mobile,
+                    'code'=>$code,
+                    'content'=>$content,
+                    'create_time'=>date('Y-m-d H:i:s')
+                ]);
+                $smsTable->save($sms);
                 return true;
             } else {
                 return false;

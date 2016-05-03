@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 
-
-function jsonToTpl(json,tpl){
-	return tpl.replace(/{#(\\w+)#}/g,function(a,b){return json[b]===0?'0':(json[b]||\"\");});
+//表单验证
+function is_mobile(str) {
+    var reg = /^0?1[3|4|5|7|8][0-9]\d{8}$/;
+    return reg.test(str);
 }

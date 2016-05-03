@@ -10,6 +10,7 @@ use Cake\Mailer\Email;
  *
  * @property \App\Model\Table\UserTable $User
  * @property \App\Controller\Component\HanvonComponent $Hanvon
+ * @property \App\Controller\Component\SmsComponent $Sms
  */
 class UserController extends AppController {
 
@@ -70,7 +71,7 @@ class UserController extends AppController {
     }
 
     /**
-     * 检查
+     * 检查手机号是否存在
      */
     public function ckUserPhoneExist() {
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -81,6 +82,26 @@ class UserController extends AppController {
             } else {
                 $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或不可用']);
             }
+        }
+    }
+    
+    /**
+     * 发送动态验证码
+     */
+    public function sendVcode(){
+        $this->loadComponent('Sms');
+        $mobile = $this->request->data('phone');
+        $code = createRandomCode(4, 2); //创建随机验证码
+        $content = '您的动态验证码为'.$code;
+        $codeTable = \Cake\ORM\TableRegistry::get('smsmsg');
+        $vcode = $codeTable->find()->where("`phone` = '$mobile'")->orderDesc('create_time')->first();
+        if(empty($vcode)||(time()-$vcode['time'])>30){
+            $ckSms = $this->Sms->sendByQf106($mobile,$content,$code);
+            if($ckSms){
+                $this->Util->ajaxReturn(true,'发送成功');
+                $this->request->session()->write('UserLoginVcode', $value);
+            }
+        }else{
         }
     }
 
