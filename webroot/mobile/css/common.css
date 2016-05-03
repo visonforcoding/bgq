@@ -2,7 +2,7 @@ html, body, div,iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acr
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {margin:0;padding:0;}
 html{background:#f0eff5;}
 ol, ul { list-style: none; }
-a{text-decoration: none;}
+a{text-decoration: none; color:#333;}
 blockquote, q { quotes: none; }
 blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
 table { border-collapse: collapse; border-spacing: 0; }
@@ -17,7 +17,7 @@ html,body { width: 100%; height: 100%;}
 .clearfix:after { content:"."; display:block; clear:both; visibility:hidden; font-size:0; line-height:0; height:0;}
 .clearfix { *zoom:1; /* for IE6 7 */ }
 .inner{width:90%;margin:0 auto;position:relative;}
-.wraper{position:relative;padding-top:0.81rem;}
+.wraper{position:relative;padding-top:0.8rem;}
 .innerwaper{padding-left: 0.3rem;padding-right: 0.3rem;width:100%;}
 .h20{background:#f0eff5;border-top:1px solid #c8c7cc;border-bottom:1px solid #c8c7cc;height:0.2rem;}
 .wraper .nobottom{border-bottom:none;}
