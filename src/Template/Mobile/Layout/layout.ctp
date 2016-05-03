@@ -9,7 +9,7 @@
         <title>并购圈</title>
         <link rel="stylesheet" type="text/css" href="/mobile/css/common.css"/>
         <link rel="stylesheet" type="text/css" href="/mobile/css/style.css"/>
-        <script src="/js/vue.min.js"></script>
+        <script src="/js/jquery-1.11.1.js"></script>
         <script src="/mobile/js/view.js"></script>
         <?=$this->fetch('static') ?>
     </head>
