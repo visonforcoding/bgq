@@ -88,7 +88,7 @@
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/wpadmin/news/delete',
+                            url: '/admin/news/delete',
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
@@ -132,7 +132,7 @@
                         title: '查看详情',
                         shadeClose: true,
                         shade: 0.8,
-                        area: ['380px', '70%'],
+                        area: ['60%', '50%'],
                         content: url//iframe的url
                     });
                 }

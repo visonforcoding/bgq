@@ -28,6 +28,7 @@ class NewsController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null) {
+        $id=$_GET['id']?intval($_GET['id']):'';
         $this->viewBuilder()->autoLayout(false);
         $news = $this->News->get($id, [
             'contain' => ['Admins']
@@ -116,12 +117,12 @@ class NewsController extends AppController {
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where['or'] = [[' admin_name like' => "%$keywords%"],['(`title`) like' => "%$keywords%"],['(`summary`) like' => "%$keywords%"]];
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
+            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`update_time`) <' => $end_time]];
         }
         $query = $this->News->find();
         $query->hydrate(false);
