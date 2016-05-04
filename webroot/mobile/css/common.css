@@ -30,3 +30,35 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #222c38; }
 input::-moz-placeholder { /* Mozilla Firefox 4 to 18 */ color: #222c38; } 
 input::-moz-placeholder { /* Mozilla Firefox 19+ */ color: #222c38; } 
 input::-ms-input-placeholder { /* Internet Explorer 10+ */ color: #222c38; } 
+
+
+/*web字体图标*/
+@font-face {font-family: 'iconfont';
+    src: url('../font/iconfont.eot'); /* IE9*/
+    src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../font/iconfont.woff') format('woff'), /* chrome、firefox */
+    url('../font/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('../font/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:0.16rem;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    }
+    
+/*header*/
+header{width:100%;height:0.8rem;position:fixed;left:0;top:0;background:#d72355;border-bottom:1px #a8a7ab solid;overflow:hidden;z-index:99;}
+header h1{width:100%;text-align:center;line-height:0.8rem;font-size:0.32rem;color:#fff;font-weight:500;}
+header a{ font-size:0.28rem; color:#fff;}
+header .toback{position:absolute;left:0;top:0.2rem;background: url(img/icon1.png) no-repeat;background-size:cover;width:0.17rem;height:0.29rem;}
+header .h-regiser{position:absolute;right:0;top:0.25rem;}
+
+/*footer*/
+footer{position:fixed;bottom:0;left:0;overflow:hidden;width:100%;z-index:2;}
+footer h1{width:100%; font-size:0.3rem;color:#222c38;text-align:center;height:0.88rem;line-height:0.88rem;border-bottom:1px #c8c7cc solid;}
+footer .othertype{padding:0.35rem 0;width:100%;margin:0 auto;}
+footer .othertype a{display:block;width:0.7rem;height:0.57rem;margin:0 auto; }
+footer .othertype img{width:100%;height:auto;}
+.navfooter .active span,.navfooter .active a{color:#db1f4f;}

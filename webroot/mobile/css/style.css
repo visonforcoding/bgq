@@ -1,34 +1,3 @@
-/*web字体图标*/
-@font-face {font-family: 'iconfont';
-    src: url('../font/iconfont.eot'); /* IE9*/
-    src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('../font/iconfont.woff') format('woff'), /* chrome、firefox */
-    url('../font/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-    url('../font/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
-}
-.iconfont{
-    font-family:"iconfont" !important;
-    font-size:0.16rem;font-style:normal;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-stroke-width: 0.2px;
-    -moz-osx-font-smoothing: grayscale;
-    }
-    
-/*header*/
-header{width:100%;height:0.8rem;position:fixed;left:0;top:0;background:#d72355;border-bottom:1px #a8a7ab solid;overflow:hidden;z-index:99;}
-header h1{width:100%;text-align:center;line-height:0.8rem;font-size:0.32rem;color:#fff;font-weight:500;}
-header a{ font-size:0.28rem; color:#fff;}
-header .toback{position:absolute;left:0;top:0.2rem;background: url(img/icon1.png) no-repeat;background-size:cover;width:0.17rem;height:0.29rem;}
-header .h-regiser{position:absolute;right:0;top:0.25rem;}
-
-/*footer*/
-footer{position:fixed;bottom:0;left:0;overflow:hidden;width:100%;z-index:2;}
-footer h1{width:100%; font-size:0.3rem;color:#222c38;text-align:center;height:0.88rem;line-height:0.88rem;border-bottom:1px #c8c7cc solid;}
-footer .othertype{padding:0.35rem 0;width:100%;margin:0 auto;}
-footer .othertype a{display:block;width:0.7rem;height:0.57rem;margin:0 auto; }
-footer .othertype img{width:100%;height:auto;}
-
-
 /*登录主体 --start*/
 .login-area{padding:0.85rem 0.37rem 2.18rem; overflow:hidden;width:100%;position:relative;}
 .login-area .loginbox{border:1px #c8c7cc solid;border-radius:5px; background: #fff;}
@@ -250,3 +219,28 @@ border-left:none;border-bottom:none;top:-1px;}
 .wraper .paysucess{border-bottom:none;}
 .paybtn{margin:0.2rem 0.7rem;}
 .paybtn:nth-of-type(1){background: #3e82f7;}
+.m-banner{background: url(img/m-banner.png) no-repeat center center;background-size:cover;}
+
+/*约见 --start*/
+.itemsbox .no-b-right{border-right:none;}
+.m-items .m-title{border-bottom:1px #c8c7cc solid;padding-top:0.14rem;padding-bottom:0.14rem;}
+.m-items h3{border-left:0.04rem #e01a48 solid;padding-left:0.1rem;font-size:0.3rem;}
+.itemsbox{display: flex;flex-wrap: wrap;background: #fff;display: -webkit-flex;display: -moz-flex;display: -ms-flexbox;-webkit-flex-wrap: wrap;-moz-flex-wrap: wrap;-ms-flex-wrap: wrap;}
+.itemsbox a{font-size:0.26rem;color:#222c38;text-align: center;}
+.itemsbox div{width:2.5rem;height:2.7rem;display:flex;display: -webkit-flex;display: -moz-flex;display: -ms-flexbox;justify-content: center;align-items: center;border-right:1px #c8c7cc solid;border-bottom:1px #c8c7cc solid;}
+.itemsbox div img{height:0.86rem;width:auto;display:block;margin:auto;margin-bottom:0.4rem;}
+.navmenu{border-bottom:1px #c8c7cc solid;}
+.navmenu .innercon,.internet-v-info .innercon{display: flex;justify-content: space-between;}
+.navmenu ul{width:6.7rem;display: flex;justify-content:space-around;overflow:hidden;flex-wrap: wrap;}
+.navmenu li{height:0.9rem;line-height: 0.9rem;}
+.navmenu li a{color:#7a7e83;font-size:0.28rem;}
+.navmenu li a.active{color:#d62356}
+.morebtn{display: block;background: url(img/right.png) no-repeat;background-size:cover;width:0.13rem;height:0.22rem;align-self: center;}
+.internet-v-info{margin-top:0.2rem;border-bottom:1px #c8c7cc solid;border-top:1px #c8c7cc solid;padding:0.44rem 0;background: #fff;color:#969fa9;}
+.internet-v-info .head-img{width:1.21rem;height:1.21rem;display: block;border-radius: 50%;position:relative;}
+.head-img img{width:100%;height:auto;}
+.head-img i{position: absolute;right:0;bottom:0;width:0.29rem;height:0.3rem;background: url(img/v.png) no-repeat;background-size: cover;}
+.vipinfo h3{font-size:0.3rem;color:#222c38;}
+.vipinfo span{line-height: 0.64rem;font-size:0.26rem;margin-top:0.06rem;}
+.vipinfo .mark a{border:1px #969fa9 solid;border-radius: 0.05rem;line-height: 0.32rem;font-size:0.2rem;color:#969fa9;padding:0 0.12rem;}
+.meetnum{font-size:0.24rem;}
