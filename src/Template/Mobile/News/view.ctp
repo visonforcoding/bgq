@@ -15,7 +15,7 @@
         <section class="newscon-box">
             <h3><?= h($news->title) ?></h3>
             <img src="<?= h($news->cover) ?>"/>
-            <p><?= htmlspecialchars_decode(h($news->body)) ?></p>
+            <p><?= strip_tags($news->body) ?></p>
             <div class="con-bottom clearfix">
                 <span class="readnums">阅读<i><?= $this->Number->format($news->read_nums) ?></i></span>
                 <span >
