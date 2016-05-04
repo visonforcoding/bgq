@@ -51,7 +51,6 @@
 .picinfo span{display: block;color:#007aff;font-size:0.38rem;height:1.14rem;line-height: 1.14rem;text-align: center;}
 .reg-sucess a{display: block;width:1.69rem;height:1.69rem;background: url(img/sucess.png) no-repeat;background-size: cover; margin:0.3rem auto;}
 .reg-sucess p{line-height: 1.38rem;font-size:0.3rem;color:#222c38;}
-
 /*news --start--*/
 .inner .news-serch{ width:0.32rem;height:0.32rem;font-size:0.32rem;top:0.29rem;}
 .banner{background: url(img/banner.jpg) no-repeat center center;background-size:cover; width:100%;height:2.95rem;}
@@ -105,7 +104,6 @@ border-bottom:1px #c8c7cc solid; padding:0 0.3rem;position:relative;}
 .comm-info .username{font-size:0.22rem;line-height: 0.38rem;}
 .comm-info .job{font-size:0.2rem;line-height: 0.24rem;margin-top:0.05rem;color:#9ba4ad;}
 .newscomment-box p{width:100%;padding:0.2rem;padding-left:0.92rem;font-size:0.28rem;color:#7a7e83;line-height: 0.3rem;}
-
 /*新闻搜索--start*/
 .inner .news-serch{background:none;}
 .inner h1 input{width: 80%;background: #d52458; border: none;font-size: 0.3rem;color: #fff;}
@@ -113,7 +111,6 @@ border-bottom:1px #c8c7cc solid; padding:0 0.3rem;position:relative;}
 .inner h1 input::-moz-placeholder { /* Mozilla Firefox 4 to 18 */ color: #fff; } 
 .inner h1 input::-moz-placeholder { /* Mozilla Firefox 19+ */ color: #fff; } 
 .inner h1 input::-ms-input-placeholder { /* Internet Explorer 10+ */ color: #fff; } 
-
 .news-classify{width:100%;background: #fff; padding:0.14rem 0;border-bottom:1px #c8c7cc solid; height:0.78rem;line-height:0.5rem;}
 .news-classify a{color:#7a7e83;}
 .classify-l,.classify-r{width:50%;text-align: center;position:relative;}
@@ -130,7 +127,6 @@ border-bottom:1px #c8c7cc solid; padding:0 0.3rem;position:relative;}
 .all-industry ul{position:absolute;left:101%;width:100%;background: #fff;border:1px #c8c7cc solid;
 border-left:none;border-bottom:none;top:-1px;}
 .classify-l span.active,.classify-r span.active{background: url(img/up2.png) no-repeat right center;background-size:0.26rem 0.16rem;color:#e01a48;}
-
 /*活动--start*/
 .inner .subactivity{background: none; width:1.2rem; top:0.3rem;}
 .a-wraper .banner{background: url(../images/a-banner.png) no-repeat center center;background-size:cover;}
@@ -220,7 +216,6 @@ border-left:none;border-bottom:none;top:-1px;}
 .paybtn{margin:0.2rem 0.7rem;}
 .paybtn:nth-of-type(1){background: #3e82f7;}
 .m-banner{background: url(img/m-banner.png) no-repeat center center;background-size:cover;}
-
 /*约见 --start*/
 .itemsbox .no-b-right{border-right:none;}
 .m-items .m-title{border-bottom:1px #c8c7cc solid;padding-top:0.14rem;padding-bottom:0.14rem;}
