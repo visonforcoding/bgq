@@ -27,17 +27,22 @@
 		<div class="wraper">
 			<div class="uploadbox">
 				<a href='#this' class='imgcard'><img src='../images/card.png' /></a>
-				<a href="#this" class="uploadbtn">上传名片</a>
+				<div class="filebtn">
+					<a href="#this" class="uploadbtn">上传名片</a>
+					<input type="file" />
+				</div>
+				
+				
 				<p>系统将自动识别名片中的信息</p>
 			</div>
 			<div class="infobox">
 				<ul>
-					<li>姓名：<span class='infocard'>杨涛</span></li>
-					<li>公司：<span class='infocard'>IDG资本</span></li>
-					<li>职务：<span class='infocard'>董事长</span></li>
-					<li>联系电话：<span class='infocard'>13806159876</span></li>
-					<li>邮箱：<span class='infocard'>idg@foxmail.com</span></li>
-					<li>地址：<span class='infocard'>深圳市南山区新豪方大厦</span></li>
+					<li>姓名：<span class='infocard'><input type="text" placeholder="杨涛" /></span></li>
+					<li>公司：<span class='infocard'><input type="text" placeholder="IDG资本" /></span></li>
+					<li>职务：<span class='infocard'><input type="text" placeholder="董事长" /></span></li>
+					<li>联系电话：<span class='infocard'><input type="text" placeholder="13806159876" /></span></li>
+					<li>邮箱：<span class='infocard'><input type="email" placeholder="idg@foxmail.com" /></span></li>
+					<li>地址：<span class='infocard'><input type="text" placeholder="深圳市南山区新豪方大厦" /></li>
 					<li>登录密码：<span class='infocard reg-pass'><input type="password" name="password"  value="15555552345667" /></span></li>
 					<li>再次输入密码：<span class='infocard reg-repass'><input type="password" name="repassword"  value="12345667" /></span></li>
 				</ul>

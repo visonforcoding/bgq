@@ -25,3 +25,8 @@ i{font-style: normal;}
 .newswraper{padding-bottom:1rem;}
 .innercon{margin:0 auto;padding:0 0.3rem;background: #fff;}
 .h20{height:0.2rem;border-top:1px #c8c7cc solid;border-bottom:1px #c8c7cc solid;}
+/*placeholder reset--*/
+input::-webkit-input-placeholder { /* WebKit browsers */ color: #222c38; } 
+input::-moz-placeholder { /* Mozilla Firefox 4 to 18 */ color: #222c38; } 
+input::-moz-placeholder { /* Mozilla Firefox 19+ */ color: #222c38; } 
+input::-ms-input-placeholder { /* Internet Explorer 10+ */ color: #222c38; } 
