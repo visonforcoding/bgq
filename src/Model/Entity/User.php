@@ -52,5 +52,11 @@ class User extends Entity {
     protected function _setPwd($password) {
         return (new DefaultPasswordHasher)->hash($password);
     }
+    
+    protected function _setPhone($phone){
+        if(preg_match('/\+[0-9]{2}(.*)/', $phone,$matches)){
+            return $matches[1];
+        }
+    }
 
 }

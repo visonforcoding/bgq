@@ -27,10 +27,6 @@ class IndustryTable extends Table {
         $this->table('industry');
         $this->displayField('name');
         $this->primaryKey('id');
-        $this->addBehavior('Tree', [
-            'parent' => 'pid', // Use this instead of parent_id
-            'left' => 'id', // Use this instead of lft
-        ]);
         $this->hasMany('User', [
             'foreignKey' => 'industry_id'
         ]);

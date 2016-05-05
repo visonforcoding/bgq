@@ -12,7 +12,7 @@ use Cake\Validation\Validator;
  * User Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Industries
- * @property \Cake\ORM\Association\BelongsTo $Cities
+ * @property \Cake\ORM\Association\BelongsTo $Agencies
  */
 class UserTable extends Table {
 
@@ -29,11 +29,12 @@ class UserTable extends Table {
         $this->displayField('truename');
         $this->primaryKey('id');
 
-        $this->belongsTo('Industries', [
+        $this->belongsToMany('Industries', [
             'foreignKey' => 'industry_id',
             'className' => 'Industry',
             'joinTable' => 'industry',
         ]);
+        $this->belongsTo('Agencies');
 
         $this->addBehavior('Timestamp', [
             'events' => [
@@ -57,15 +58,11 @@ class UserTable extends Table {
                 ->allowEmpty('id', 'create');
 
         $validator
-                ->requirePresence('phone', 'create')
+                ->requirePresence('phone', 'create','手机号不可为空')
                 ->notEmpty('phone');
 
         $validator
-                ->requirePresence('pwd', 'create')
-                ->notEmpty('pwd');
-
-        $validator
-                ->requirePresence('truename', 'create')
+                ->requirePresence('truename', 'create','姓名不可为空')
                 ->notEmpty('truename');
 
         $validator
@@ -83,7 +80,7 @@ class UserTable extends Table {
                 ->allowEmpty('goodat');
 
         $validator
-                ->requirePresence('card_path', 'create')
+                ->requirePresence('card_path', 'create','请上传名片')
                 ->notEmpty('card_path');
 
 

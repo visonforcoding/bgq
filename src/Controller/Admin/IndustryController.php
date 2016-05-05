@@ -86,6 +86,7 @@ class IndustryController extends AppController {
         }
         $industrys = $this->Industry->find()->hydrate(false)->all()->toArray();
         $industrys = \Wpadmin\Utils\Util::tree($industrys, 0, 'id', 'pid');
+
         $this->set(compact('industry'));
         $this->set(compact('industrys'));
     }
