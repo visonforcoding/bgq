@@ -21,7 +21,7 @@ i{font-style: normal;}
 .wraper{position:relative;padding-top:0.8rem;}
 .innerwaper{padding-left: 0.3rem;padding-right: 0.3rem;width:100%;}
 .h20{background:#f0eff5;border-top:1px solid #c8c7cc;border-bottom:1px solid #c8c7cc;height:0.2rem;}
-.m-wraper{padding-top:4.2rem;}
+.m-wraper{padding-top:4.2rem;overflow:hidden;}
 .wraper .nobottom{border-bottom:none;}
 .newswraper{padding-bottom:1rem;}
 .innercon{margin:0 auto;padding:0 0.3rem;background: #fff;}
