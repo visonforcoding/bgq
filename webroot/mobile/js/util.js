@@ -6,9 +6,9 @@ $.util = {
 
     //
     alert:function(str, t){
-        $.util.idObj('#alert_text').html(str);
-        $('#alert_plan').show();
-        setTimeout(function(){$('#alert_plan').hide();}, t||3000);
+        $.util.idObj('#alertPlan').html(str);
+        $('#alertPlan').show();
+        setTimeout(function(){$('#alertPlan').hide();}, t||3000);
     },
 
 
