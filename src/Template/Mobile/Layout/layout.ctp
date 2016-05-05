@@ -16,5 +16,6 @@
     <body>
         <?=$this->fetch('content')?>
         <?=$this->fetch('script')?>
+        <div class="alert" id="alertPlan"></div>
     </body>
 </html>
