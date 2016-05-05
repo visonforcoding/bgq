@@ -144,7 +144,7 @@ class IndustryController extends AppController {
             $query->where($where);
         }
         $nums = $query->count();
-        $query->contain(['User']);
+        //$query->contain(['User']);
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }

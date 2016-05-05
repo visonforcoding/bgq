@@ -1,11 +1,11 @@
 <?php $this->start('static') ?>   
-<link rel="stylesheet" type="text/css" href="/admin/lib/jqgrid/css/ui.jqgrid.css">
-<link rel="stylesheet" type="text/css" href="/admin/lib/jqgrid/css/ui.ace.css">
+<link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
+<link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
 <?php $this->end() ?> 
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
-            <a href="/admin/group/add" class="btn btn-small btn-warning">
+            <a href="/wpadmin/group/add" class="btn btn-small btn-warning">
                 <i class="icon icon-plus-sign"></i>添加
             </a>
             <div class="form-group">
@@ -27,8 +27,8 @@
     <div id="pager"></div> 
 </div>
 <?php $this->start('script'); ?>
-<script src="/admin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
-<script src="/admin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
+<script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
+<script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
 <script>
                 $(function () {
                     $('#main-content').bind('resize', function () {
@@ -36,7 +36,7 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/group/getDataList",
+                        url: "/wpadmin/group/getDataList",
                         datatype: "json",
                         mtype: "POST",
                         colNames:
@@ -106,7 +106,7 @@
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = '<button onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-trash"></i> 删除</button>';
                     response += '<button onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-eye-open"></i> 删除</button>';
-                    response += '<a href="/admin/group/edit/' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini"><i class="icon icon-pencil"></i> 修改</a>';
+                    response += '<a href="/wpadmin/group/edit/' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini"><i class="icon icon-pencil"></i> 修改</a>';
                     return response;
                 }
 
@@ -118,7 +118,7 @@
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/admin/group/delete',
+                            url: '/wpadmin/group/delete',
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
@@ -151,12 +151,12 @@
                     searchData['sidx'] = sortColumnName;
                     searchData['sort'] = sortOrder;
                     var searchQueryStr = $.param(searchData);
-                    $("body").append("<iframe src='/admin/group/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                    $("body").append("<iframe src='/wpadmin/group/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
 
                 function doView(id) {
                     //查看明细
-                    url = '/admin/group/view?id=' + id;
+                    url = '/wpadmin/group/view?id=' + id;
                     layer.open({
                         type: 2,
                         title: '查看详情',

@@ -55,7 +55,8 @@ class ActivityController extends AppController {
             }
         }
         $admins = $this->Activity->Admins->find('list', ['limit' => 200]);
-        $industries = $this->Activity->Industries->find('treeList');
+        $industries = $this->Activity->Industries->find()->hydrate(false)->all()->toArray();
+        $industries = \Wpadmin\Utils\Util::tree($industries, 0, 'id', 'pid');
         $this->set(compact('activity', 'admins', 'industries'));
     }
 
