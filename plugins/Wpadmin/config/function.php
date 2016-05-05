@@ -12,6 +12,9 @@
  * @return type
  */
 function getMessage($errors) {
+    if(\Cake\Core\Configure::read('debug')) {
+        Cake\Log\Log::error($errors);
+    }
     foreach ($errors as $value) {
         foreach ($value as $val) {
             $error = $val;

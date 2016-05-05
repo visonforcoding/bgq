@@ -30,26 +30,96 @@ class UserController extends AppController {
     }
 
     /**
-     * Add method
-     *
+     * 注册 选择行业标签
+     * 
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
+    public function registerBusiness() {
+        $reg_phone = $this->request->session()->read('reg.phone');
+        if (!$reg_phone) {
+            $this->redirect('/user/register');
+        }
+        $IndustryTable = \Cake\ORM\TableRegistry::get('industry');
+        $industries = $IndustryTable->find('threaded', [
+                    'keyField' => 'id',
+                    'parentField' => 'pid'
+                ])->hydrate(false)->toArray();
+        $this->set(array(
+            'industries' => $industries
+        ));
+    }
+
+    /**
+     * 注册行业机构  注册第二步
+     * 
+     */
+    public function registerOrg() {
+        $reg_phone = $this->request->session()->read('reg.phone');
+        if (!$reg_phone) {
+            $this->redirect('/user/register');
+        }
+        if ($this->request->isPost()) {
+            $user = $this->User->findByPhone($reg_phone)->first();
+            if ($user) {
+                $user->agency_id = $this->request->data('agency');
+                if ($this->User->save($user)) {
+                    $this->request->session()->write('reg.step', 'two');
+                    $this->Util->ajaxReturn(['status' => true, 'url' => '/user/register-business']);
+                } else {
+                    $this->Util->ajaxReturn(['status' => false, 'msg' => '服务器出错']);
+                }
+            }
+            return;
+        }
+        $AgencyTable = \Cake\ORM\TableRegistry::get('agency');
+        $agencies = $AgencyTable->find('threaded', [
+                    'keyField' => 'id',
+                    'parentField' => 'pid'
+                ])->hydrate(false)->toArray();
+        $this->set(array(
+            'agencies' => $agencies
+        ));
+    }
+
+    /**
+     * 注册首页 第一步
+     */
     public function register() {
-        //发邮件
-        $user = $this->User->newEntity();
-        if ($this->request->is('post')) {
-            $user = $this->User->patchEntity($user, $this->request->data);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $user = $this->User->newEntity();
+            $data = $this->request->data();
+            $data['enabled'] = 0;
+            $user = $this->User->patchEntity($user, $data);
             if ($this->User->save($user)) {
-                $this->Util->ajaxReturn(true, '添加成功');
+                //session 记录 注册手机号 和 注册步骤
+                $this->request->session()->write([
+                    'reg.phone' => $user->phone,
+                    'reg.step' => 'one',
+                ]);
+                $this->Util->ajaxReturn(['status' => true, 'url' => '/user/register-org']);
             } else {
                 $errors = $user->errors();
-                $this->Util->ajaxReturn(false, $errors);
+                $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors)]);
             }
         }
-//        $industries = $this->User->Industrie->find('list', ['limit' => 200]);
-//        $cities = $this->User->Cities->find('list', ['limit' => 200]);
-        $this->set(compact('user'));
-        $this->set('_serialize', ['user']);
+    }
+
+    /**
+     * 处理识别名片
+     */
+    public function recogMp() {
+        $this->loadComponent('Hanvon');
+        $path = $this->request->data('path');
+        $file = ROOT . '/webroot' . $path;
+        $res = $this->Hanvon->handMpByJuhe($file);
+        $response = [];
+        if ($res) {
+            $response['status'] = true;
+            $response['result'] = $res;
+        } else {
+            $response['status'] = false;
+        }
+        $this->Util->ajaxReturn($response);
     }
 
     /**
@@ -57,12 +127,23 @@ class UserController extends AppController {
      */
     public function login() {
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->User->patchEntity($user, $this->request->data);
-            if ($this->User->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-                return $this->redirect(['action' => 'index']);
+            $phone = $this->request->data('phone');
+            $user = $this->User->findByPhoneAndEnabled($phone, 1)->first();
+            if ($user) {
+                $vcode = $this->request->session()->read('UserLoginVcode');
+                if ($vcode['code'] == $this->request->data('vcode')) {
+                    if (time() - $vcode['time'] < 60 * 10) {
+                        //10分钟验证码超时
+                        $this->request->session()->write('User.mobile', $user);
+                        $this->Util->ajaxReturn(['status' => true]);
+                    } else {
+                        $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
+                    }
+                } else {
+                    $this->Util->ajaxReturn(false, '验证码验证错误');
+                }
             } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或不可用']);
             }
         }
         $this->set(array(
@@ -84,24 +165,26 @@ class UserController extends AppController {
             }
         }
     }
-    
+
     /**
      * 发送动态验证码
      */
-    public function sendVcode(){
+    public function sendVcode() {
         $this->loadComponent('Sms');
         $mobile = $this->request->data('phone');
         $code = createRandomCode(4, 2); //创建随机验证码
-        $content = '您的动态验证码为'.$code;
+        $content = '您的动态验证码为' . $code;
         $codeTable = \Cake\ORM\TableRegistry::get('smsmsg');
         $vcode = $codeTable->find()->where("`phone` = '$mobile'")->orderDesc('create_time')->first();
-        if(empty($vcode)||(time()-$vcode['time'])>30){
-            $ckSms = $this->Sms->sendByQf106($mobile,$content,$code);
-            if($ckSms){
-                $this->Util->ajaxReturn(true,'发送成功');
-                $this->request->session()->write('UserLoginVcode', $value);
+        if (empty($vcode) || (time() - strtotime($vcode['time'])) > 30) {
+            //30s 的间隔时间
+            $ckSms = $this->Sms->sendByQf106($mobile, $content, $code);
+            if ($ckSms) {
+                $this->request->session()->write('UserLoginVcode', ['code' => $code, 'time' => time()]);
+                $this->Util->ajaxReturn(true, '发送成功');
             }
-        }else{
+        } else {
+            $this->Util->ajaxReturn(false, '30s后再发送');
         }
     }
 

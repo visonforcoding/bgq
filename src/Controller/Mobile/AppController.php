@@ -34,6 +34,8 @@ class AppController extends Controller {
      * @var array 
      */
     private $firewall;
+    
+    protected $user;
 
     /**
      * Initialization hook method.
@@ -51,6 +53,7 @@ class AppController extends Controller {
         $this->loadComponent('Flash');
         $this->loadComponent('Util');
 
+        //无需登录的
         $this->firewall = array(
             ['user', 'login'],
             ['user', 'register'],
@@ -68,6 +71,7 @@ class AppController extends Controller {
     }
 
     public function beforeFilter(Event $event) {
+        $this->user = $this->request->session()->read('User.mobile');
         //$this->checkLogin();
     }
 
@@ -82,7 +86,7 @@ class AppController extends Controller {
         if (in_array($request_aim, $this->firewall)) {
             return true;
         }
-        $user = $this->request->session()->check('user');
+        $user = $this->request->session()->check('User.mobile');
         if (!$user) {
             return $this->redirect(['controller' => 'user', 'action' => 'login', 'prefix' => 'mobile']);
         }

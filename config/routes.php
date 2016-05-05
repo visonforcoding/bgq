@@ -43,17 +43,15 @@ use Cake\Routing\Router;
 Router::defaultRouteClass('DashedRoute');
 
 Router::scope('/', function (RouteBuilder $routes) {
+    $routes->extensions(['json', 'xml','shtml']);
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['controller' => 'Index', 'action' => 'index', 'home','prefix'=>'mobile']);
-
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */
-    $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
     /**
      * Connect catchall routes for all controllers.
@@ -82,7 +80,9 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/admin/admin/login',['plugin'=>'wpadmin','controller'=>'admin','action'=>'login']);
     
     $routes->connect('/admin/',['plugin'=>'wpadmin','controller'=>'index','action'=>'index']);
-    $routes->connect('/:controller/:action/*',['prefix'=>'home']);
+    $routes->connect('/:controller/:action/*',['prefix'=>'mobile']);
+    //上传
+    $routes->connect('/do-upload/*',['plugin'=>'wpadmin','controller'=>'util','action'=>'doUpload']);
     $routes->fallbacks('DashedRoute');
 });
 
