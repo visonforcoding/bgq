@@ -16,7 +16,7 @@
             </div>
             <?php if (!empty($industry['children'])): ?>
                 <div class="orgmark">
-                    <?php foreach ($item['children'] as $item): ?>
+                    <?php foreach ($industry['children'] as $item): ?>
                         <a class="agency-item" data-val="<?=$item['id']?>" href="#this"><?= $item['name'] ?></a>
                     <?php endforeach; ?>
                 </div>
@@ -26,60 +26,47 @@
             <div class='h20'></div>
         <?php endif; ?>
     <?php endforeach; ?>
-    <div class="items">
-        <div class="orgtitle  innerwaper">
-            <span class="orgname">行业投资</span>
-        </div>
-        <div class="orgmark">
-            <?php foreach ($hang_items as $key=> $hang_item): ?>
-                <a data-id="<?=$key?>" href="#this"><?=$hang_item?></a>
-            <?php endforeach; ?>
-        </div>
-    </div>
-    <div class='h20'></div>
-    <div class="items">
-        <div class="orgtitle  innerwaper">
-            <span class="orgname">互联网</span>
-        </div>
-        <div class="orgmark">
-        </div>
-    </div>
-    <div class='h20'></div>
-    <div class="items">
-        <div class="orgtitle  innerwaper">
-            <span class="orgname">医疗健康</span>
-        </div>
-        <div class="orgmark">
-            <a href="#this">创业</a><a href="#this">产品</a><a href="#this">研发</a><a href="#this">运营</a>
-            <a href="#this">市场</a>
-        </div>
-    </div>
-    <div class='h20'></div>
-    <div class="items">
-        <div class="orgtitle  innerwaper">
-            <span class="orgname">资金业务</span>
-        </div>
-        <div class="orgmark">
-            <a href="#this">创业</a><a href="#this">产品</a><a href="#this">研发</a><a href="#this">运营</a>
-            <a href="#this">市场</a>
-        </div>
-    </div>
     <div class='h20'></div>
     <div class="items">
         <div class="orgtitle  innerwaper">
             <span class="orgname">其它</span>
         </div>
         <div class="orgmark myselfmark">
-            <a href="#this"><input type='text' placeholder="请输入" /></a>
+            <a href="#this"><input type='text' id="extra_industry" placeholder="请输入" /></a>
         </div>
     </div>
-    <a href="#this" class='nextstep'>下一步</a>
+    <a href="#this" id="submit" class='nextstep'>下一步</a>
 </div>
 <?php $this->start('script') ?>
-<script src="/mobile/js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/mobile/js/jquery-1.6.1.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="/mobile/js/register.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    
+    var agency,formdata;
+    $(function(){
+       $('#submit').click(function(){
+         agency = [];
+         formdata = {};
+           $('.agency-item.active').each(function(i,elm){
+               agency.push($(elm).data('val'));
+           });
+         formdata['industries[_ids]'] = agency;
+         var extra_industry = $('#extra_industry').val();
+         if(extra_industry !=''&&$('#extra_industry').parent().hasClass('active')){
+              formdata.ext_industry = extra_industry;
+         }
+           if(agency.length>0){
+               $.post('/user/register-business',formdata,function(res){
+                   if(res.status===true){
+                       window.location.href = res.url;
+                   }else{
+                       alert(res.msg);
+                   }
+               },'json');
+           }else{
+               alert('请先选择您所在行业标签');
+           }
+       });
+    });
 </script>
 <?php
 $this->end('script');

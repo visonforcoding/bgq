@@ -39,11 +39,25 @@ class UserController extends AppController {
         if (!$reg_phone) {
             $this->redirect('/user/register');
         }
+        if ($this->request->isPost()) {
+            $user = $this->User->findByPhone($reg_phone)->first();
+            if ($user) {
+                $data = $this->request->data();
+                $data['enabled'] = 1;
+                $user = $this->User->patchEntity($user,$data);
+                if ($this->User->save($user)) {
+                    $this->Util->ajaxReturn(['status' => true, 'url' => '/user/index']);
+                } else {
+                    $this->Util->ajaxReturn(['status' => false, 'msg' => '服务器出错']);
+                }
+            }
+            return;
+        }
         $IndustryTable = \Cake\ORM\TableRegistry::get('industry');
         $industries = $IndustryTable->find('threaded', [
                     'keyField' => 'id',
                     'parentField' => 'pid'
-                ])->hydrate(false)->toArray();
+                ])->where("`id` != '3'")->hydrate(false)->toArray();
         $this->set(array(
             'industries' => $industries
         ));

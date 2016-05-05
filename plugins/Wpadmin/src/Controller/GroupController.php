@@ -1,8 +1,8 @@
 <?php
 
-namespace Admin\Controller;
+namespace Wpadmin\Controller;
 
-use Wpdmin\Controller\AppController;
+use Wpadmin\Controller\AppController;
 
 /**
  * Group Controller

@@ -30,9 +30,10 @@ class UserTable extends Table {
         $this->primaryKey('id');
 
         $this->belongsToMany('Industries', [
-            'foreignKey' => 'industry_id',
             'className' => 'Industry',
-            'joinTable' => 'industry',
+            'joinTable' => 'user_industry',
+            'foreignKey' => 'user_id',
+            'targetForeignKey' => 'industry_id'
         ]);
         $this->belongsTo('Agencies');
 
@@ -58,11 +59,11 @@ class UserTable extends Table {
                 ->allowEmpty('id', 'create');
 
         $validator
-                ->requirePresence('phone', 'create','手机号不可为空')
+                ->requirePresence('phone', 'create', '手机号不可为空')
                 ->notEmpty('phone');
 
         $validator
-                ->requirePresence('truename', 'create','姓名不可为空')
+                ->requirePresence('truename', 'create', '姓名不可为空')
                 ->notEmpty('truename');
 
         $validator
@@ -80,7 +81,7 @@ class UserTable extends Table {
                 ->allowEmpty('goodat');
 
         $validator
-                ->requirePresence('card_path', 'create','请上传名片')
+                ->requirePresence('card_path', 'create', '请上传名片')
                 ->notEmpty('card_path');
 
 
