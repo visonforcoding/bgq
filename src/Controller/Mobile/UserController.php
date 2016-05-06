@@ -221,7 +221,7 @@ class UserController extends AppController {
             if ($vcode['code'] == $this->request->data('vcode')) {
                 if (time() - $vcode['time'] < 60 * 10) {
                     //10分钟验证码超时
-                    $user->wxopen_id = $open_id;
+                    $user->wx_openid = $open_id;
                     if ($this->User->save($user)) {
                         $this->request->session()->write('User.mobile', $user);
                         $this->Util->ajaxReturn(['status' => true]);
