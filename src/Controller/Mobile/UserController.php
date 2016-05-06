@@ -44,7 +44,7 @@ class UserController extends AppController {
             if ($user) {
                 $data = $this->request->data();
                 $data['enabled'] = 1;
-                $user = $this->User->patchEntity($user,$data);
+                $user = $this->User->patchEntity($user, $data);
                 if ($this->User->save($user)) {
                     $this->Util->ajaxReturn(['status' => true, 'url' => '/user/index']);
                 } else {
@@ -205,7 +205,36 @@ class UserController extends AppController {
     /**
      * 微信绑定页
      */
-    public function wxBindPhone(){
-        
+    public function wxBindPhone() {
+        $open_id = $this->request->session()->read('reg.wx_openid');
+        if (!$open_id) {
+            throw new Exception('非法操作');
+            //交互待处理
+        }
+        if ($this->request->isPost()) {
+            $phone = $this->request->data('phone');
+            $user = $this->User->findByPhoneAndEnabled($phone, 1)->first();
+            if (!$user) {
+                $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或不可用']);
+            }
+            $vcode = $this->request->session()->read('UserLoginVcode');
+            if ($vcode['code'] == $this->request->data('vcode')) {
+                if (time() - $vcode['time'] < 60 * 10) {
+                    //10分钟验证码超时
+                    $user->open_id = $open_id;
+                    if ($this->User->save($user)) {
+                        $this->request->session()->write('User.mobile', $user);
+                        $this->Util->ajaxReturn(['status' => true]);
+                    }else{
+                        $this->Util->ajaxReturn(false,'服务器出错');
+                    }
+                } else {
+                    $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
+                }
+            } else {
+                $this->Util->ajaxReturn(false, '验证码验证错误');
+            }
+        }
     }
+
 }
