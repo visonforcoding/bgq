@@ -13,6 +13,12 @@ use EasyWeChat\Foundation\Application as WXSDK;
  * @property \App\Controller\Component\HanvonComponent $Hanvon
  */
 class WxController extends AppController {
+    
+    
+    public function initialize() {
+        parent::initialize();
+        $this->loadModel('User');
+    }
 
     /**
      * Index method
@@ -20,11 +26,17 @@ class WxController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function test() {
+       $open_id = '123'; 
+       $user = $this->User->findByWx_openid($open_id)->first();
+       debug($user);die();
         $WeixinSdk = new WeixinSdk();
         $token = 'cwptest';
         $WeixinSdk->checkSignature($token);
     }
 
+    /**
+     * 授权登录/获取信息页  跳转页
+     */
     public function getUserJump() {
         $wxconfig = \Cake\Core\Configure::read('weixin');
         $redirect_url = 'http://'.$_SERVER['SERVER_NAME'].'/mobile/wx/getUserCode';
@@ -33,6 +45,10 @@ class WxController extends AppController {
         $this->redirect($wx_code_url);
     }
 
+    
+    /***
+     * 获取code->获取openid user 信息 业务处理
+     */
     public function getUserCode() {
         $code = $this->request->query('code');
         $wxconfig = \Cake\Core\Configure::read('weixin');
@@ -42,28 +58,24 @@ class WxController extends AppController {
         //\Cake\Log\Log::debug($wx_accesstoken_url);
         $response = $httpClient->get($wx_accesstoken_url);
         if($response->isOk()){
-           $access_token =  json_decode($response->body())->access_token;
            $open_id =  json_decode($response->body())->openid;
+           //首次登录需有一个绑定平台操作
+           $user = $this->User->findByWx_openid($open_id)->first();
+           if($user){
+               //存在则直接进入首页
+              return $this->redirect(['controller'=>'index','action'=>'index']);
+           }else{
+              return  $this->redirect(['controller'=>'user','action'=>'wxBindPhone']);
+           }
+           $access_token =  json_decode($response->body())->access_token;
            $wx_user_url = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$access_token.'&openid='.$open_id.'&lang=zh_CN';
            $res = $httpClient->get($wx_user_url);
            if($res->isOk()){
-               var_dump($res->body());
+               $userinfo = json_decode($res->body()); //微信用户信息
+               $open_id = $userinfo->openid;
+               //$headimgurl = $userinfo->headimgurl;
            }
         }
-        exit();
-        $options = [
-            'debug' => true,
-            'app_id' => $wxconfig['appID'],
-            'secret' => $wxconfig['appsecret'],
-            'token' => $wxconfig['token'],
-            // 'aes_key' => null, // 可选
-            'log' => [
-                'level' => 'debug',
-                'file' => LOGS . '/logs/easywechat.log', // XXX: 绝对路径！！！！
-            ],
-                //...
-        ];
-        $WXSDK = new WXSDK($options);
     }
 
     /**
