@@ -1,7 +1,10 @@
 <?php
 namespace App\Controller\Admin;
 
+use Psy\TabCompletion\Matcher\ClassNamesMatcher;
+
 use Wpadmin\Controller\AppController;
+use vendor\umeng;
 
 /**
  * Need Controller
@@ -108,13 +111,13 @@ $this->set('need', $this->Need);
           }
     }
 
-/**
-* get jqgrid data 
-*
-* @return json
-*/
-public function getDataList()
-{
+	/**
+	* get jqgrid data 
+	*
+	* @return json
+	*/
+	public function getDataList()
+	{
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
@@ -164,15 +167,15 @@ public function getDataList()
 //                 var_dump($data);die;
         $this->response->type('json');
         echo json_encode($data);
-}
+	}
 
-/**
-* export csv
-*
-* @return csv 
-*/
-public function exportExcel()
-{
+	/**
+	* export csv
+	*
+	* @return csv 
+	*/
+	public function exportExcel()
+	{
         $sort = $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
@@ -203,5 +206,6 @@ public function exportExcel()
         $filename = 'Need_'.date('Y-m-d').'.csv';
         \Wpadmin\Utils\Export::exportCsv($column,$res,$filename);
 
-}
+	}
+
 }
