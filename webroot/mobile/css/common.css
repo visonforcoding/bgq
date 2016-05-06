@@ -56,7 +56,6 @@ header h1{width:100%;text-align:center;line-height:0.8rem;font-size:0.32rem;colo
 header a{ font-size:0.28rem; color:#fff;}
 header .toback{position:absolute;left:0;top:0.2rem;background: url(img/icon1.png) no-repeat;background-size:cover;width:0.17rem;height:0.29rem;}
 header .h-regiser{position:absolute;right:0;top:0.3rem;}
-
 /*footer*/
 footer{position:fixed;bottom:0;left:0;overflow:hidden;width:100%;z-index:2;}
 footer h1{width:100%; font-size:0.3rem;color:#222c38;text-align:center;height:0.88rem;line-height:0.88rem;border-bottom:1px #c8c7cc solid;}
