@@ -15,6 +15,7 @@
     </head>
     <body>
         <?=$this->fetch('content')?>
+        <script src="/mobile/js/util.js"></script>
         <?=$this->fetch('script')?>
         <div class="alert" id="alertPlan"></div>
     </body>
