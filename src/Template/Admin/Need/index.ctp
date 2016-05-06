@@ -132,7 +132,7 @@
                     shade: 0.8,
                     area: ['380px', '70%'],
                     content: url,//iframe的url
-                	cancel:function(){//关闭弹框的回调函数
+                	cancel:function(){//关闭弹框的回调函数，关闭弹框之后重新刷新
                 		location.reload();
                 	}
                 });
