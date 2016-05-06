@@ -58,6 +58,7 @@ class WxController extends AppController {
         //\Cake\Log\Log::debug($wx_accesstoken_url);
         $response = $httpClient->get($wx_accesstoken_url);
         if($response->isOk()){
+            debug($response->body());
            $open_id =  json_decode($response->body())->openid;
            //首次登录需有一个绑定平台操作
            $user = $this->User->findByWx_openid($open_id)->first();
