@@ -202,4 +202,10 @@ class UserController extends AppController {
         }
     }
 
+    /**
+     * 微信绑定页
+     */
+    public function wxBindPhone(){
+        
+    }
 }
