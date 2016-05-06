@@ -2,7 +2,7 @@
     <div class='inner'>
         <a href='#this' class='toback'></a>
         <h1>
-            登录
+            绑定手机号
         </h1>
         <a href="/user/register" class='h-regiser'>注册</a>
     </div>
@@ -22,7 +22,7 @@
     </div>
 </div>
 <footer>
-    <h1>使用其他方式登录</h1>
+    <h1>若未注册过平台账户请前往完善用户信息</h1>
     <div class="othertype">
         <a href="/wx/get-user-jump">
             <img src="/mobile/images/weixin.png" />
