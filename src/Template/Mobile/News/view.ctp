@@ -2,7 +2,6 @@
     <div class='inner'>
         <a href='#this' class='toback'></a>
         <h1>
-
             资讯内容
         </h1>
         <a href="#this" class='iconfont collection h-regiser'>&#xe610;</a>
@@ -10,11 +9,11 @@
     </div>
 </header>
 
-<div class="wraper">
+<div class="wraper" id="news">
     <?php if (isset($news)): ?>
         <section class="newscon-box">
-            <h3><?= h($news->title) ?></h3>
-            <img src="<?= h($news->cover) ?>"/>
+            <h3><?= $news->title ?></h3>
+            <img src="<?= $news->cover ?>"/>
             <p><?= strip_tags($news->body) ?></p>
             <div class="con-bottom clearfix">
                 <span class="readnums">阅读<i><?= $this->Number->format($news->read_nums) ?></i></span>
@@ -32,7 +31,7 @@
         </h3>
         <div class="items">
             <div class="comm-info clearfix">
-                <span><img src="images/user.png"/></span>
+                <span><img src="/mobile/images/user.png"/></span>
                 <span class="infor-comm">
                     <i class="username">Unclehome</i>
                     <i class="job">数字联盟有限公司 董事长</i>
@@ -45,7 +44,7 @@
         </div>
         <div class="items">
             <div class="comm-info clearfix">
-                <span><img src="images/user.png"/></span>
+                <span><img src="/mobile/images/user.png"/></span>
                 <span class="infor-comm">
                     <i class="username">Unclehome</i>
                     <i class="job">数字联盟有限公司 董事长</i>
@@ -58,7 +57,7 @@
         </div>
         <div class="items">
             <div class="comm-info clearfix">
-                <span><img src="images/user.png"/></span>
+                <span><img src="/mobile/images/user.png"/></span>
                 <span class="infor-comm">
                     <i class="username">Unclehome</i>
                     <i class="job">数字联盟有限公司 董事长</i>
@@ -71,7 +70,7 @@
         </div>
         <div class="items">
             <div class="comm-info clearfix">
-                <span><img src="images/user.png"/></span>
+                <span><img src="/mobile/images/user.png"/></span>
                 <span class="infor-comm">
                     <i class="username">Unclehome</i>
                     <i class="job">数字联盟有限公司 董事长</i>
@@ -104,3 +103,8 @@
         </li>
     </ul>
 </footer>
+<?php $this->start('script') ?>
+<script>
+    $.util.jsonToTpl(<?=$newsjson?>,$('#news'));
+</script>
+<?php $this->end('script');?>

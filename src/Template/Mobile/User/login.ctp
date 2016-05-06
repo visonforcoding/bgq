@@ -24,7 +24,7 @@
 <footer>
     <h1>使用其他方式登录</h1>
     <div class="othertype">
-        <a href="#this">
+        <a href="/wx/get-user-jump">
             <img src="/mobile/images/weixin.png" />
         </a>
     </div>
@@ -85,7 +85,7 @@
             if (is_mobile(phone)) {
                 $.post('/user/ckUserPhoneExist', {phone: phone}, function (res) {
                     if (res.status === false) {
-                        alert(res.msg);
+                         $.util.alert(res.msg);
                     }
                 }, 'json');
             } else {

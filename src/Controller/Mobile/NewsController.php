@@ -3,7 +3,6 @@
 namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
-use EasyWeChat\Foundation\Application as WXSDK;
 
 /**
  * News Controller
@@ -36,10 +35,10 @@ class NewsController extends AppController {
      */
     public function view($id = null) {
         $news = $this->News->get($id, [
-            'contain' => ['Admins']
+            'contain' => ['Admins','Comments']
         ]);
-        $wxconfig = \Cake\Core\Configure::read('weixin');
         $this->set('news', $news);
+        $this->set('newsjson',  json_encode($news));
         $this->set('_serialize', ['news']);
     }
 

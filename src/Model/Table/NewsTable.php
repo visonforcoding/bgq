@@ -34,6 +34,10 @@ class NewsTable extends Table {
             'joinType' => 'INNER',
             'className' => 'Wpadmin.Admin'
         ]);
+        
+        $this->hasMany('Comments',[
+            'className' => 'Newscom',
+        ]);
 
         $this->addBehavior('Timestamp', [
             'events' => [

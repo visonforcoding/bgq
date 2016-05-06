@@ -10,13 +10,13 @@
         <?php foreach ($news as $news): ?>
             <section class='news-list-items '>
                 <h1 class="firstnews"><span><img src="../images/user.png" /></span><?= $news->has('admin') ? $news->admin->truename : '' ?></h1>
-                <a href="/mobile/news/view/<?= h($news->id) ?>" class="newsbox clearfix">
+                <a href="/mobile/news/view/<?=$news->id ?>" class="newsbox clearfix">
                     <div class="sec-news-l">
-                        <h3><?= h($news->title) ?></h3>
+                        <h3><?= $news->title ?></h3>
                         <p><?= h($news->summary) ?></p>
                     </div>	
                     <div class="sec-news-r">
-                        <img src="<?= h($news->cover) ?>"/>
+                        <img src="<?= $news->cover ?>"/>
                     </div>
                 </a>
                 <div class="news-bottom clearfix">

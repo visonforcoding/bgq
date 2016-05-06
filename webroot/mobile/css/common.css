@@ -32,7 +32,7 @@ input::-moz-placeholder { /* Mozilla Firefox 4 to 18 */ color: #222c38; }
 input::-moz-placeholder { /* Mozilla Firefox 19+ */ color: #222c38; } 
 input::-ms-input-placeholder { /* Internet Explorer 10+ */ color: #222c38; } 
 .alert{width:2rem;height:0.8rem;background: rgba(0,0,0,0.5);border-radius: 0.15rem;line-height: 0.8rem;text-align: center; position:fixed;left:50%;top:50%;
-	z-index: 999;margin-left:-1rem;margin-top:-0.4rem;color:#fff;font-size:0.28rem;}
+	z-index: 999;margin-left:-1rem;margin-top:-0.4rem;color:#fff;font-size:0.28rem;display:none}
 
 /*web字体图标*/
 @font-face {font-family: 'iconfont';

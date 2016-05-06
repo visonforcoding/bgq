@@ -6,11 +6,31 @@ $.util = {
 
     //
     alert:function(str, t){
-        $.util.idObj('#alertPlan').html(str);
+        $('#alertPlan').html(str);
         $('#alertPlan').show();
         setTimeout(function(){$('#alertPlan').hide();}, t||3000);
     },
-
+    
+    jsonToTpl:function (json,tpl){
+        return tpl.replace(/{#(\w+)#}/g,function(a,b){return json[b]===0?'0':(json[b]||'');});
+    },
+    
+    ajax:function(obj){
+        var tmp = obj.func;
+        obj.success = function(json){
+            if(json.code == 1){
+                tmp(json);
+            }
+            if(json.code == 2){
+                // login;
+            }
+            if(json.code == 3){
+                //$.util.alert(json.msg);
+            }
+            
+        };
+        $.ajax(obj);
+    },
 
     //循环轮播
     loop:function(opt){
@@ -35,6 +55,5 @@ $.util = {
             }
         });
     }
-
 
 };

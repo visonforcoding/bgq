@@ -51,10 +51,10 @@
            });
          formdata['industries[_ids]'] = agency;
          var extra_industry = $('#extra_industry').val();
-         if(extra_industry !=''&&$('#extra_industry').parent().hasClass('active')){
+         if(extra_industry !==''&&$('#extra_industry').parent().hasClass('active')){
               formdata.ext_industry = extra_industry;
          }
-           if(agency.length>0){
+           if(formdata.length>0){
                $.post('/user/register-business',formdata,function(res){
                    if(res.status===true){
                        window.location.href = res.url;
