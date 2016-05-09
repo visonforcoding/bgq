@@ -10,11 +10,34 @@ $.util = {
         $('#alertPlan').show();
         setTimeout(function(){$('#alertPlan').hide();}, t||3000);
     },
-    
+    /**
+     * 模板处理
+     * @param json
+     * @param tpl
+     * @returns {XML|string|*|void}
+     */
     jsonToTpl:function (json,tpl){
         return tpl.replace(/{#(\w+)#}/g,function(a,b){return json[b]===0?'0':(json[b]||'');});
     },
-    
+
+    /**
+     * 批量处理json列表数据
+     * @param contentId  容器id string
+     * @param tplId  模板id string
+     * @param data json数据列表  array
+     * @param func  处理json数据的方法，可选 会传入当前json对象
+     * @returns {string}
+     */
+    dataToTpl:function(contentId, tplId, data, func){
+        if(!data.length) return '';
+        var html=[], tpl = $.util.id(tplId).text;
+        $.each(data, function(i,d){
+            if(func) d=func(d);
+            html.push($.util.jsonToTpl(d,tpl));
+        });
+        $('#'+contentId).html(html.join(''));
+    },
+
     ajax:function(obj){
         var tmp = obj.func;
         obj.success = function(json){
