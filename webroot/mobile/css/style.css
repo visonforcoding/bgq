@@ -202,7 +202,7 @@ border-left:none;border-bottom:none;top:-1px;}
 .a-forword .forword a span{margin:0 auto;margin-bottom:0.18rem;display:block;height:0.78rem;}
 .a-forword .forword a:nth-of-type(1) span{background: url(img/weixin.png) no-repeat;background-size:cover; width:0.95rem;}
 .a-forword .forword a:nth-of-type(2) span{background: url(img/py.png) no-repeat;background-size:cover; width:0.78rem;}
-.sing-up ul li:nth-of-type(7) input{width:2rem;}
+/*.sing-up ul li:nth-of-type(7) input{width:2rem;}*/
 .sing-up ul li:nth-of-type(7) i{display:inline-block;background:url(img/link.png) no-repeat;width:0.26rem;height:0.3rem;background-size: cover;}
 .a-pay ul li:last-child{border-bottom:none;}
 .paytype{border-bottom:1px #c8c7cc solid;background: none; }

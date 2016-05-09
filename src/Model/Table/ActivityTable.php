@@ -41,6 +41,12 @@ class ActivityTable extends Table {
             'className' => 'Industry',
         ]);
 
+        $this->HasMany('Activityapply', [
+        		'foreignKey' => 'activity_id',
+        		'joinType' => 'INNER',
+        		'className' => 'Activityapply',
+        ]);
+        
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [
@@ -102,7 +108,7 @@ class ActivityTable extends Table {
 
         $validator
                 ->allowEmpty('summary');
-
+		
 
         return $validator;
     }

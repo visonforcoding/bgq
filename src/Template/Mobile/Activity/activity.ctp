@@ -2,7 +2,7 @@
 	<body>
 		<header>
 			<div class='inner'>
-				<a href='#this' class='toback subactivity'>发布活动</a>
+				<a href='/activity/release' class='toback subactivity' >发布活动</a>
 				<h1>
 					活动
 					
@@ -16,7 +16,7 @@
 			<?php foreach ($activity as $activity): ?>
 			<section class='news-list-items'>
 				<div class="active-items">
-					<a href="details/<?= $activity->id; ?>" class="a-head">
+					<a href="/activity/details/<?= $activity->id; ?>" class="a-head">
 						<img src="<?= $activity->cover; ?>"/>
 						<h3><?= $activity->title; ?></h3>
 					</a>
@@ -54,22 +54,23 @@
 			</li>
 		</ul>
 	</footer>
-	</body>
 	<div class="alert" id="alertPlan"></div>
+	</body>
+	
 <?php $this->start('script'); ?>
 <script>
-$('.toback').click(function(){
-	history.back();
+$('.subactivity').click(function(){
+	location.href="";
 })
 $(document).ready(function(){
-	alert(123);
+	
 });
-var winH = $(window).height();
-var i = 1;
-$(window).scroll(function () {
-    var pageH = $(document.body).height(); //页面总高度 
-    var scrollT = $(window).scrollTop(); //滚动条top 
-    var aa = (pageH-winH-scrollT)/pageH;
+//var winH = $(window).height();
+//var i = 1;
+//$(window).scroll(function () {
+//    var pageH = $(document.body).height(); //页面总高度 
+//    var scrollT = $(window).scrollTop(); //滚动条top 
+//    var aa = (pageH-winH-scrollT)/pageH;
 //    if(aa<0.02){
 //        $.getJSON("",{page:i},function(json){
 //            if(json){
@@ -88,7 +89,7 @@ $(window).scroll(function () {
 //            }
 //        });
 //    }
-});
+//});
 
 </script>
 <?php $this->end('script');
