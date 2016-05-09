@@ -112,7 +112,7 @@ class UserController extends AppController {
                 //第一次微信登录的完善信息
                 $data['wx_openid'] = $this->request->session()->read('reg.wx_oepnid');
             }
-            debug($data);exit();
+            debug($data);
             debug($this->request->session()->read('reg.wx_oepnid'));exit();
             $user = $this->User->patchEntity($user, $data);
             if ($this->User->save($user)) {
