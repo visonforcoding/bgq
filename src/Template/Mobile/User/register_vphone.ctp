@@ -2,9 +2,8 @@
     <div class='inner'>
         <a href='#this' class='toback'></a>
         <h1>
-            登录
+            第一步--验证手机号
         </h1>
-        <a href="/user/register-vphone" class='h-regiser'>注册</a>
     </div>
 </header>
 <div class="wraper">
@@ -16,7 +15,7 @@
                     <button class="clearfix" type="button"  id="getVcode" href='javascript:void(0);'>获取验证码</button>
                 </div>
             </div>
-            <a href="javascript:void(0);"  id="submit" class="submit" >确定</a>
+            <a href="javascript:void(0);"  id="submit" class="submit" >下一步</a>
         </form>
 
     </div>
@@ -71,7 +70,7 @@
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
-                        window.location.href = '/index/index';
+                        window.location.href = '/user/register';
                     } else {
                         alert(msg.msg);
                     }
@@ -84,8 +83,8 @@
         if (phone !== '') {
             if (is_mobile(phone)) {
                 $.post('/user/ckUserPhoneExist', {phone: phone}, function (res) {
-                    if (res.status === false) {
-                         $.util.alert(res.msg);
+                    if (res.status === true) {
+                         $.util.alert('该手机号已注册');
                     }
                 }, 'json');
             } else {

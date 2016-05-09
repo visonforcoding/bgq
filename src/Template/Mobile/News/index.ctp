@@ -9,7 +9,6 @@
     <div id="news"></div>
 </div>
 <script type="text/html" id="listTpl">
-
             <section class='news-list-items '>
                 <h1 class="firstnews"><span><img src="../images/user.png" /></span>4444</h1>
                 <a href="/mobile/news/view/{#id#}" class="newsbox clearfix">
@@ -60,12 +59,13 @@
 </footer>
 <?php $this->start('script') ?>
 <script>
-        var data = <?php echo $newsjson; ?>,
-            tpl = $.util.id('listTpl').text,
-            html=[];
-        for(var i=0, len=data.length; i<len; i++){
-            html.push($.util.jsonToTpl(data[i], tpl));
-        }
-        $('#news').html(html.join(''));
+//        var data = <?php echo $newsjson; ?>,
+//            tpl = $.util.id('listTpl').text,
+//            html=[];
+//        for(var i=0, len=data.length; i<len; i++){
+//            html.push($.util.jsonToTpl(data[i], tpl));
+//        }
+//        $('#news').html(html.join(''));
+$.util.dataToTpl('news','listTpl',<?=$newsjson?>);
 </script>
 <?php $this->end('script');?>
