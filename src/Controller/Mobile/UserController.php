@@ -136,6 +136,7 @@ class UserController extends AppController {
             if ($this->request->session()->read('reg.wx_bind') && $this->request->session()->check('reg.wx_openid')) {
                 //第一次微信登录的完善信息
                 $data['wx_openid'] = $this->request->session()->read('reg.wx_openid');
+                $data['avatar'] = $this->request->session()->read('reg.avatar');
             }
             $user = $this->User->patchEntity($user, $data);
             if ($this->User->save($user)) {
