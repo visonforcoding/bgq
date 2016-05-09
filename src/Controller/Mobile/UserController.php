@@ -105,6 +105,7 @@ class UserController extends AppController {
             $user = $this->User->newEntity();
             $data = $this->request->data();
             $data['enabled'] = 0;
+            \Cake\Log\Log::debug($this->request->session()->read('reg.wx_bind'));
             if ($this->request->session()->read('reg.wx_bind') && $this->request->session()->check('reg.wx_openid')) {
                 //第一次微信登录的完善信息
                 $data['wx_openid'] = $this->request->session()->read('reg.wx_oepnid');
