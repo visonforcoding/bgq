@@ -98,27 +98,49 @@ class UserController extends AppController {
     }
 
     /**
+     * 注册 验证手机号 第0步
+     */
+    public function registerVphone() {
+        if ($this->request->isPost()) {
+            $phone = $this->request->data('phone');
+            $user = $this->User->findByPhoneAndEnabled($phone, 1)->first();
+            $vcode = $this->request->session()->read('UserLoginVcode');
+            if ($vcode['code'] != $this->request->data('vcode')) {
+                $this->Util->ajaxReturn(false, '验证码验证错误');
+            }
+            if ($user) {
+                $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号已注册过您可前往登录']);
+            }
+            if (time() - $vcode['time'] < 60 * 10) {
+                //10分钟验证码超时
+                $this->request->session()->write('reg.phone',$phone );
+                $this->Util->ajaxReturn(['status' => true]);
+            } else {
+                $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
+            }
+        }
+    }
+
+    /**
      * 注册首页 第一步
      */
     public function register() {
+        if(!$this->request->session()->read('reg.phone')){
+            $this->redirect('/user/register-vphone');
+        }
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->User->newEntity();
             $data = $this->request->data();
             $data['enabled'] = 0;
-            \Cake\Log\Log::debug($this->request->session()->read('reg.wx_bind'));
-            \Cake\Log\Log::debug($this->request->session()->check('reg.wx_openid'));
+            $data['phone'] = $this->request->session()->read('reg.phone');
             if ($this->request->session()->read('reg.wx_bind') && $this->request->session()->check('reg.wx_openid')) {
-            \Cake\Log\Log::debug($this->request->session()->read('reg.wx_openid'));
                 //第一次微信登录的完善信息
-                $data['wx_openid'] = $this->request->session()->read('reg.wx_oepnid');
+                $data['wx_openid'] = $this->request->session()->read('reg.wx_openid');
             }
-            debug($data);
-            debug($this->request->session()->read('reg.wx_oepnid'));exit();
             $user = $this->User->patchEntity($user, $data);
             if ($this->User->save($user)) {
                 //session 记录 注册手机号 和 注册步骤
                 $this->request->session()->write([
-                    'reg.phone' => $user->phone,
                     'reg.step' => 'one',
                 ]);
                 $this->Util->ajaxReturn(['status' => true, 'url' => '/user/register-org']);
@@ -214,7 +236,7 @@ class UserController extends AppController {
     }
 
     /**
-     * 微信绑定页
+     * 微信绑定页(第一次进行微信登录需有的操作)
      */
     public function wxBindPhone() {
         $open_id = $this->request->session()->read('reg.wx_openid');
@@ -240,10 +262,10 @@ class UserController extends AppController {
                     } else {
                         $this->Util->ajaxReturn(false, '服务器出错');
                     }
-                }else{
+                } else {
                     //注册完善信息
-                    $this->request->session()->write('reg.wx_bind',true);
-                    $this->Util->ajaxReturn(['status'=>false,'msg'=>'您还未有平台账户需前往完善信息','url'=>'/user/register?type=wx_bind']);
+                    $this->request->session()->write('reg.wx_bind', true);
+                    $this->Util->ajaxReturn(['status' => false, 'msg' => '您还未有平台账户需前往完善信息', 'url' => '/user/register?type=wx_bind']);
                 }
             } else {
                 $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
