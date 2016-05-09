@@ -85,7 +85,8 @@
             if (is_mobile(phone)) {
                 $.post('/user/ckUserPhoneExist', {phone: phone}, function (res) {
                     if (res.status === false) {
-                         $.util.alert(res.msg);
+                         $.util.alert('您还没有平台账号请先完善信息');
+                         window.location.href = '/user/register?type=wx_bind';
                     }
                 }, 'json');
             } else {

@@ -23,7 +23,7 @@ class NewsController extends AppController {
         $news = $this->paginate($this->News);
         
         $this->set(compact('news'));
-        $this->set('_serialize', ['news']);
+        $this->set('newsjson',  json_encode($news));
     }
 
     /**
