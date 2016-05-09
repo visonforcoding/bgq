@@ -103,6 +103,9 @@ class UserController extends AppController {
             $user = $this->User->newEntity();
             $data = $this->request->data();
             $data['enabled'] = 0;
+            if($this->request->query('type')=='wx_bind'&&$this->request->session()->check('reg.wx_openid')){
+                $data['wx_openid'] = $this->request->session()->read('reg.wx_oepnid');
+            }
             $user = $this->User->patchEntity($user, $data);
             if ($this->User->save($user)) {
                 //session 记录 注册手机号 和 注册步骤
@@ -215,7 +218,7 @@ class UserController extends AppController {
             $phone = $this->request->data('phone');
             $user = $this->User->findByPhoneAndEnabled($phone, 1)->first();
             if (!$user) {
-                $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或不可用']);
+                $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册请前往完善信息','rcode'=>'noreg']);
             }
             $vcode = $this->request->session()->read('UserLoginVcode');
             if ($vcode['code'] == $this->request->data('vcode')) {

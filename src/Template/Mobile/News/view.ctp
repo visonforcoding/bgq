@@ -12,7 +12,7 @@
 <div class="wraper" id="news">
     <?php if (isset($news)): ?>
         <section class="newscon-box">
-            <h3><?= $news->title ?></h3>
+            <h3>{#title#}</h3>
             <img src="<?= $news->cover ?>"/>
             <p><?= strip_tags($news->body) ?></p>
             <div class="con-bottom clearfix">
@@ -105,6 +105,5 @@
 </footer>
 <?php $this->start('script') ?>
 <script>
-    $.util.jsonToTpl(<?=$newsjson?>,$('#news'));
 </script>
 <?php $this->end('script');?>
