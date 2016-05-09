@@ -35,7 +35,7 @@
     var t1 = null;
     $('input[name="phone"]').focusout(function () {
         var phone = $(this).val();
-        checkPhone(phone);
+       // checkPhone(phone);
     });
     $('#getVcode').on('click', function () {
         var $obj = $(this);
@@ -74,6 +74,7 @@
                         window.location.href = '/index/index';
                     } else {
                         alert(msg.msg);
+                        window.location.href = msg.url;
                     }
                 }
             }
