@@ -46,6 +46,8 @@ class UserController extends AppController {
                 $data['enabled'] = 1;
                 $user = $this->User->patchEntity($user, $data);
                 if ($this->User->save($user)) {
+                    //注册成功就算登录
+                    $this->request->session()->write('User.mobile',$user);
                     $this->Util->ajaxReturn(['status' => true, 'url' => '/user/index']);
                 } else {
                     $this->Util->ajaxReturn(['status' => false, 'msg' => '服务器出错']);
