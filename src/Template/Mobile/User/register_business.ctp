@@ -54,7 +54,8 @@
          if(extra_industry !==''&&$('#extra_industry').parent().hasClass('active')){
               formdata.ext_industry = extra_industry;
          }
-           if(formdata.length>0){
+           if(Object.keys(formdata).length>0){
+               //对象长度判断
                $.post('/user/register-business',formdata,function(res){
                    if(res.status===true){
                        window.location.href = res.url;
