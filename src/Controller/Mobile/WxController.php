@@ -78,8 +78,7 @@ class WxController extends AppController {
                 if ($res->isOk()) {
                     $userinfo = json_decode($res->body()); //微信用户信息
                     $headimgurl = $userinfo->headimgurl;
-                    \Cake\Log\Log::debug($headimgurl);
-                    $this->request->session()->write('avatar',$headimgurl);
+                    $this->request->session()->write('reg.avatar',$headimgurl);
                 }
                 return $this->redirect(['controller' => 'user', 'action' => 'wxBindPhone']);
             }
