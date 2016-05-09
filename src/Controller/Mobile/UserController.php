@@ -113,6 +113,7 @@ class UserController extends AppController {
                 $data['wx_openid'] = $this->request->session()->read('reg.wx_oepnid');
             }
             debug($data);exit();
+            debug($this->request->session()->read('reg.wx_oepnid'));exit();
             $user = $this->User->patchEntity($user, $data);
             if ($this->User->save($user)) {
                 //session 记录 注册手机号 和 注册步骤
