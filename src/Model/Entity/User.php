@@ -57,6 +57,7 @@ class User extends Entity {
         if(preg_match('/\+[0-9]{2}(.*)/', $phone,$matches)){
             return $matches[1];
         }
+        return $phone;
     }
 
 }
