@@ -21,7 +21,7 @@ class UserController extends AppController {
      */
     public function index() {
         $this->paginate = [
-            'contain' => ['Industries', 'Cities']
+            'contain' => ['Industries']
         ];
         $user = $this->paginate($this->User);
 

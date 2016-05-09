@@ -18,7 +18,7 @@ class IndexController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        var_dump($this->user);
+        var_dump($this->user);exit();
     }
 
     /**
