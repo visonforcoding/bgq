@@ -105,6 +105,7 @@ class UserController extends AppController {
             $user = $this->User->newEntity();
             $data = $this->request->data();
             $data['enabled'] = 0;
+            \Cake\Log\Log::debug($this->request->session()->check('reg.wx_openid'));
             \Cake\Log\Log::debug($this->request->session()->read('reg.wx_openid'));
             if($this->request->query('type')=='wx_bind'&&$this->request->session()->check('reg.wx_openid')){
                 $data['wx_openid'] = $this->request->session()->read('reg.wx_oepnid');
