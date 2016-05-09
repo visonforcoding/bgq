@@ -47,7 +47,7 @@ class UserController extends AppController {
                 $user = $this->User->patchEntity($user, $data);
                 if ($this->User->save($user)) {
                     //注册成功就算登录
-                    $this->request->session()->write('User.mobile',$user);
+                    $this->request->session()->write('User.mobile', $user);
                     $this->Util->ajaxReturn(['status' => true, 'url' => '/user/index']);
                 } else {
                     $this->Util->ajaxReturn(['status' => false, 'msg' => '服务器出错']);
@@ -105,9 +105,7 @@ class UserController extends AppController {
             $user = $this->User->newEntity();
             $data = $this->request->data();
             $data['enabled'] = 0;
-            \Cake\Log\Log::debug($this->request->session()->check('reg.wx_openid'));
-            \Cake\Log\Log::debug($this->request->session()->read('reg.wx_openid'));
-            if($this->request->query('type')=='wx_bind'&&$this->request->session()->check('reg.wx_openid')){
+            if ($this->request->query('type') == 'wx_bind' && $this->request->session()->check('reg.wx_openid')) {
                 $data['wx_openid'] = $this->request->session()->read('reg.wx_oepnid');
             }
             $user = $this->User->patchEntity($user, $data);
@@ -221,25 +219,28 @@ class UserController extends AppController {
         if ($this->request->isPost()) {
             $phone = $this->request->data('phone');
             $user = $this->User->findByPhoneAndEnabled($phone, 1)->first();
-            if (!$user) {
-                $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册请前往完善信息','rcode'=>'noreg']);
-            }
             $vcode = $this->request->session()->read('UserLoginVcode');
-            if ($vcode['code'] == $this->request->data('vcode')) {
-                if (time() - $vcode['time'] < 60 * 10) {
-                    //10分钟验证码超时
+            if ($vcode['code'] != $this->request->data('vcode')) {
+                $this->Util->ajaxReturn(false, '验证码验证错误');
+            }
+            if (time() - $vcode['time'] < 60 * 10) {
+                //10分钟验证码超时
+                if ($user) {
+                    //注册过 绑定 并登录
                     $user->wx_openid = $open_id;
                     if ($this->User->save($user)) {
                         $this->request->session()->write('User.mobile', $user);
                         $this->Util->ajaxReturn(['status' => true]);
-                    }else{
-                        $this->Util->ajaxReturn(false,'服务器出错');
+                    } else {
+                        $this->Util->ajaxReturn(false, '服务器出错');
                     }
-                } else {
-                    $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
+                }else{
+                    //注册完善信息
+                    $this->request->session()->write('reg.wx_bind',true);
+                    $this->Util->ajaxReturn(['status'=>false,'msg'=>'您还未有平台账户需前往完善信息','url'=>'/user/register?type=wx_bind']);
                 }
             } else {
-                $this->Util->ajaxReturn(false, '验证码验证错误');
+                $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
             }
         }
     }
