@@ -113,7 +113,7 @@ class UserController extends AppController {
             }
             if (time() - $vcode['time'] < 60 * 10) {
                 //10分钟验证码超时
-                $this->request->session()->write('reg.phone',$phone );
+                $this->request->session()->write('reg.phone', $phone);
                 $this->Util->ajaxReturn(['status' => true]);
             } else {
                 $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
@@ -125,7 +125,7 @@ class UserController extends AppController {
      * 注册首页 第一步
      */
     public function register() {
-        if(!$this->request->session()->read('reg.phone')){
+        if (!$this->request->session()->read('reg.phone')) {
             $this->redirect('/user/register-vphone');
         }
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -264,7 +264,10 @@ class UserController extends AppController {
                     }
                 } else {
                     //注册完善信息
-                    $this->request->session()->write('reg.wx_bind', true);
+                    $this->request->session()->write([
+                        'reg.phone'=>$phone,
+                        'reg.wx_bind'=>true,
+                        ]);
                     $this->Util->ajaxReturn(['status' => false, 'msg' => '您还未有平台账户需前往完善信息', 'url' => '/user/register?type=wx_bind']);
                 }
             } else {
