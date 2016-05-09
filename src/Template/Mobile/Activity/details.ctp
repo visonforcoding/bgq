@@ -1,12 +1,14 @@
 	<body>
 		<header>
 			<div class='inner'>
-				<a href='#this' class='toback'></a>
+				<a href='#this' class='toback' id="toback"></a>
 				<h1>
 					
 					活动详情
 				</h1>
-				
+				<!-- 
+				<a href="#this" class='iconfont collection h-regiser'>&#xe610;</a> // 收藏图标
+				 -->
 				<a href="#this" class='iconfont share h-regiser'>&#xe614;</a>
 			</div>
 		</header>
@@ -89,7 +91,7 @@
 					<span >
 						<i class="iconfont like">&#xe616;</i><?= $activity->praise_nums; ?>
 					</span>
-					<span><a href="#this" class='iconfont collection h-regiser'>&#xe610;</a></span>
+					<span><i class='iconfont like h-regiser'>&#xe610;</i><?php ?></span>
 				</div>
 			</section>
 			<section class="newscomment-box joinnumber">
@@ -203,7 +205,7 @@
 	</body>
 <?php $this->start('script'); ?>
 <script>
-$('.toback').click(function(){
+$('#toback').click(function(){
 	history.back();
 })
 $(document).ready(function(){

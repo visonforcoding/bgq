@@ -17,6 +17,8 @@ class ActivityController extends AppController{
 			$activity = $this->Activity->get($id, [
 	            'contain' => ['Admins', 'Industries'],
 	        ]);
+			$activity->read_nums += 1;// 阅读加1
+			$this->Activity->save($activity);
 			$this->set('activity',$activity);
 		}
 		else
@@ -29,14 +31,21 @@ class ActivityController extends AppController{
 	 * 活动列表
 	 */
 	public function activity(){
-		$this->paginate = [
-			'contain' => ['Admins','Industries'],
-			'order' => ['is_top' => '1', 'create_time' => 'DESC'],
-			'limit' => '2',
-		];
-		$activity = $this->paginate($this->Activity);
-		$this->set(compact('activity'));
-		$this->set('_serialize', ['activity']);
+// 		if($this->request->is('post'))
+// 		{
+			$this->paginate = [
+				'contain' => ['Admins','Industries'],
+				'order' => ['is_top' => '1', 'create_time' => 'DESC'],
+				'limit' => '2',
+			];
+			$activity = $this->paginate($this->Activity);
+			$this->set(compact('activity'));
+			$this->set('_serialize', ['activity']);
+// 		}
+// 		else
+// 		{
+// 			$this->Util->ajaxReturn(false,'非法进入！');
+// 		}
 	}
 	
 	/**
@@ -54,7 +63,27 @@ class ActivityController extends AppController{
 		{
 			if($this->request->is('post'))
 			{
-				
+				$activityApply = $this->Activity->Activityapply->newEntity();
+				$data = [
+					'user_id' => $this->user->id,
+					'activity_id' => $id,
+				];
+				$activityApply = $this->Activity->Activityapply->patchEntity($activityApply, $data);
+				if($this->Activity->Activityapply->find()->where($data)->first()) // 查找数据库是否有对应数据，即是否已报名
+				{
+					$this->Util->ajaxReturn(false, '已经报名过了！');
+				}
+				else
+				{
+					if($this->Activity->Activityapply->save($activityApply))
+					{
+						$this->Util->ajaxReturn(true, '提交成功！');
+					}
+					else
+					{
+						$this->Util->ajaxReturn(false, $activityApply->errors());
+					}
+				}
 			}
 			else
 			{
@@ -67,7 +96,16 @@ class ActivityController extends AppController{
 		}
 		else
 		{
-			$this->Util->ajaxReturn('0', '传值错误');
+			$this->Util->ajaxReturn(false, '传值错误');
 		}
 	}
+	
+	/**
+	 * 发布活动
+	 */
+	
+	public function release(){
+		
+	}
+	
 }

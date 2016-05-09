@@ -1,6 +1,6 @@
 		<header>
 			<div class='inner'>
-				<a href='#this' class='toback'></a>
+				<a href='#this' class='toback' id="toback"></a>
 				<h1>
 					
 					我要推荐
@@ -22,16 +22,14 @@
 			
 			<div class="a-form-box">
 				<ul>
-					
-					
 					<li>
 						<i>要求描述</i>
-						<textarea></textarea>
+						<textarea name="description"></textarea>
 					</li>
 				</ul>
 			</div>
 			
-			<a href="#this" class='nextstep'>提交</a>
+			<a href="#this" class='nextstep' id="submit">提交</a>
 		</div>
 	<script src="/mobile/js/jquery-1.6.1.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/mobile/js/register.js" type="text/javascript" charset="utf-8"></script>
@@ -40,7 +38,7 @@
 <script>
 		
 	// 返回上一页
-	$('.toback').click(function(){
+	$('#toback').click(function(){
 		history.back();
 	})
 	
