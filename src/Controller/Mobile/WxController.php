@@ -77,6 +77,7 @@ class WxController extends AppController {
                 $res = $httpClient->get($wx_user_url);
                 if ($res->isOk()) {
                     $userinfo = json_decode($res->body()); //微信用户信息
+                    \Cake\Log\Log::debug($userinfo);
                     $headimgurl = $userinfo->headimgurl;
                     $this->request->session()->write('avatar',$headimgurl);
                 }
