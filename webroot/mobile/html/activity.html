@@ -30,8 +30,8 @@
 			<div class="a-banner">
 				<ul class="pic-list-container" id="imgList">
 					<li><a href="#this"><img src="../images/a-banner.png"/></a></li>
-					<li><a href="#this"><img src="../images/banner.jpg"/></a></li>
-					<li><a href="#this"><img src="../images/a-banner.png"/></a></li>
+					<li><a href="#this"><img back_src="../images/banner.jpg"/></a></li>
+					<li><a href="#this"><img back_src="../images/a-banner.png"/></a></li>
 				</ul>
 				<div class="yd" id="imgTab">
 					<span class="cur"></span>
@@ -41,7 +41,7 @@
 			</div>
 
             <script>
-                $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
+                var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
             </script>
 			<section class='news-list-items'>
 				<div class="active-items">
