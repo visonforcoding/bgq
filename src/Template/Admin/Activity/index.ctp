@@ -39,7 +39,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['作者', '标签', '主办单位', '活动名称', '活动时间', '地点', '规模', '阅读数', '点赞数', '评论数',  '创建时间', '更新时间', '操作'],
+                                ['作者', '标签', '主办单位', '活动名称', '活动时间', '地点', '规模', '阅读数', '点赞数', '评论数', '报名人数', '报名费用', '创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'admin.truename', editable: true, align: 'center'},
                             {name: 'industry.name', editable: true, align: 'center'},
@@ -51,6 +51,8 @@
                             {name: 'read_nums', editable: true, align: 'center'},
                             {name: 'praise_nums', editable: true, align: 'center'},
                             {name: 'comment_nums', editable: true, align: 'center'},
+                            {name: 'apply_nums', editable: true, align: 'center'},
+                            {name: 'apply_fee', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
