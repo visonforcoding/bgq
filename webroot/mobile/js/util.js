@@ -62,7 +62,6 @@ $.util = {
 
     //轮播图  传入的都是
     loopImg:function(fatherDom, child, tab) {
-        setTimeout(function(){
         return $.util.loop({
             tp : 'img', //图片img或是文字text
             //min : 5,
@@ -74,12 +73,12 @@ $.util = {
             lockScrY:true,
             imgInitLazy:1000,
             loopScroll:true,
+            step:$(window).width(),
             //enableTransX:true,
             index: 1,
             fun:function(index){
             }
         });
-        }, 1000);
     }
 
 };
