@@ -20,6 +20,9 @@ news.prototype.bindEvent = function(){
         var target = e.srcElement || e.target, em=target, i=1;
         while(em && !em.id && i<=3){ em = em.parentNode; i++;}
         if(!em || !em.id) return;
+        if(em.id.indexOf('common_')){
+            //todo();
+        }
         switch(em.id){
             case 'imageViewer': case 'fullImg':
                 //do();
