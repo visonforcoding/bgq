@@ -52,14 +52,14 @@
 .inner .news-serch{ width:0.32rem;height:0.32rem;font-size:0.32rem;top:0.29rem;}
 .a-banner{width:100%;height:2.95rem;position:relative;}
 .pic-list-container{width:2000%;position:relative;overflow:hidden;}
-.pic-list-container li{width:7.5rem;float:left;}
-.pic-list-container li a{display: block;}
+.pic-list-container li{width:7.5rem;float:left;height:2.95rem;}
+.pic-list-container li a{display: block;width:100%;}
 .pic-list-container li img{width:100%;height:auto;display: block;}
 .a-banner .yd{position:absolute;bottom:0.1rem;width:100%;height:0.2rem; justify-content: center;display:-webkit-flex;display:-moz-flex;display:-ms-flex;display: flex;
 -webkit-justify-content: center;-moz-justify-content:center;-ms-justify-content:center;}
 .a-banner .yd span{width:0.1rem;height:0.1rem;border-radius: 50%;background: #929292;display: inline-block;margin:0 0.05rem;}
 .a-banner .yd span.cur{background: #fff;}
-.news-list-items{border-top:1px #c8c7cc solid; padding:0.36rem 0.4rem 0.3rem;background: #fff;}
+.news-list-items{border-top:1px #c8c7cc solid; padding:0.36rem 0.3rem 0.3rem;background: #fff;}
 .news-list-items h1{width:100%;color:#969fa9;font-size:0.24rem;line-height: 0.4rem;position:relative;padding-left:0.5rem;}
 .news-list-items h1 span{width:0.4rem;height:0.4rem;position:absolute;left:0;}
 .news-list-items h1{display: inline-block;}
@@ -142,8 +142,11 @@ border-left:none;border-bottom:none;top:-1px;}
 .a-other-info{color:#9ba4ad;}
 .a-other-info > *{display: inline-block;font-size:0.2rem;}
 .a-other-info span:nth-of-type(1){background: #4285f4;color:#fff; padding:0.11rem;border-radius: 0.1rem;}
-.a-other-info > a{padding:0.1rem;border:1px #969fa9 solid;border-radius: 0.1rem;margin-left：0.07rem;}
+.a-other-info > a{padding:0.05rem;border:1px #969fa9 solid;border-radius: 0.1rem;margin-left：0.07rem;}
 .a-other-info span:nth-of-type(2){margin-left:0.5rem;line-height:0.34rem;}
+@media only screen and (max-width: 330px) {
+	.a-other-info span:nth-of-type(2){margin-left:0;line-height:0.34rem;}
+}
 .active-items{padding-bottom:0.4rem;border-bottom: 1px #c8c7cc solid;}
 .a-wraper section{border-top:none;}
 .tojudge,.crowdfunding span,.tochoose{line-height: 0.8rem;color:#222c38;font-size:0.28rem;}
@@ -388,4 +391,17 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .vipinfo .mark .meetnum{float:right;}
 .my-search h3{height:0.8rem;background: #fff;text-indent: 0.3rem;line-height: 0.8rem;font-size:0.28rem;}
 .my-home-menu{height:0.95rem;display: flex; justify-content: center;align-items: center;}
-.my-home-menu a{width:50%;}
+.my-home-menu a{width:50%;border:2px #e01a48 solid;line-height: 0.52rem;text-align: center;color:#e01a48;}
+.my-home-menu a:nth-of-type(1){border-radius: 0.1rem 0 0 0.1rem;}
+.my-home-menu a:nth-of-type(2){border-radius: 0 0.1rem 0.1rem 0;}
+.my-home-menu a.active{background: #e01a48;color:#fff;}
+.my-collection-info{border-bottom:1px #c8c7cc solid;border-top:1px #c8c7cc solid;}
+.my-collection-info a{overflow:hidden;padding:0.29rem 0;display:block;border-bottom:1px #c8c7cc solid;}
+.my-collection-info .my-pic-acive{width:1.7rem;height:1.39rem;display: block;float:left;}
+.my-collection-info .my-pic-acive img{width:100%;height:auto;display: block;}
+.my-collection-items{float:left;margin-left:0.23rem;width:4.9rem;}
+.my-collection-items span{display:block;line-height: 0.36rem;color:#b4bac1;font-size:0.2rem;}
+.my-collection-items span i{float:right;color:#e01a48;}
+.my-collection-items h3{line-height: 0.43rem;color:#222c38;font-size:0.29rem;margin-bottom:0.23rem;}
+.my-news-items h3{height:0.84rem;overflow:hidden;width:100%;}
+.my-news-items span b{margin-left:0.2rem;}
