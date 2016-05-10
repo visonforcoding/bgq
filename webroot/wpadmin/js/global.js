@@ -120,7 +120,7 @@ function initJqupload(id, url, allowedTypes) {
         dragDrop: false,
         multiple: false,
         showDone: true,
-        uploadStr: "重置图片",
+        uploadStr: "上传图片",
         showStatusAfterSuccess: false,
         maxFileCountErrorStr: "不被允许,允许的最大数量为",
         dragDropStr: "<span><b>试试拖动文件上传</b></span>",

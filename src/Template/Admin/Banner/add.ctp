@@ -9,16 +9,21 @@ $this->start('static') ?>
     <div class="form-group">
         <label class="col-md-2 control-label">类型</label>
         <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('type', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <select name="type" class="form-control">
+                <?php foreach ($types as $key=>$type): ?>
+                <option value="<?=$key?>"><?=$type?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
     </div>
-    <input type="hidden" name="img" class="form-control" required="required" maxlength="250" id="img" >
-    <div class="form-group">
-        <label class="col-md-2 control-label">点击选择图片</label>
-        <div class="col-md-4">
-            <div id="attachuploader">上传</div>
+        <div class="form-group">
+        <label class="col-md-2 control-label">封面</label>
+        <div class="col-md-8">
+            <div  class="img-thumbnail input-img"  single>
+                <img  alt="封面图片" src=""/>
+            </div>
+            <input name="img"  type="hidden"/>
+            <div id="img" class="jqupload">上传</div>
         </div>
     </div>
     <div class="form-group">
@@ -53,46 +58,32 @@ $this->start('static') ?>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/jquery.validationEngine.js"></script>
 <script>
     $(function () {
-        // initJqupload('cover', '/admin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
-        var up = $("#attachuploader").uploadFile({
-            url: "/admin/banner/uploadImg",
-            fileName: "file",
-            uploadStr: "上传",
-            doneStr: "上传完成",
-            maxFileCount: 1,
-            dragDropStr: "<span><b>试试拖动文件上传</b></span>",
-            onSuccess: function (files, data, xhr, pd) {
-                console.log(data);
-                if (data.status) {
-                    $("#img").val(data.record_path);
-                    layer.msg(data.msg);
-                    $("#attachuploader").parent('div').append('<input type="hidden" name="resume_url" value="' + data.path + '"/>')
-                } else {
-                    layer.alert(data.msg);
-                }
-            },
-            onSelect: function (files) {
-                up.reset();  //单个图片上传的 委曲求全的办法
-            },
-        });
-        $('form').ajaxForm({
+        initJqupload('img', '/wpadmin/util/doUpload?dir=banner', 'jpg,png,gif,jpeg,webp'); //初始化图片上传
+        $('form').submit(function () {
+        var form = $(this);
+        $.ajax({
+            type: $(form).attr('method'),
+            url: $(form).attr('action'),
+            data: $(form).serialize(),
             dataType: 'json',
-            beforeSubmit: function (formData, jqForm, options) {
-                var record_path=$("#img").val();
-                if(record_path==''){
-                    layer.alert('请选择上传图片', {icon: 5});
-                    return false;
-                }
-            },
-            success: function (data) {
-                console.log(data);                
-                if (data.status) {                    
-                    layer.alert(data.msg, {icon: 6});
-                } else {
-                    layer.alert(data.msg, {icon: 5});
+            success: function (res) {
+                if (typeof res === 'object') {
+                    if (res.status) {
+                        layer.confirm(res.msg, {
+                            btn: ['确认', '继续添加'] //按钮
+                        }, function () {
+                            window.location.href = '/admin/banner/index';
+                        }, function () {
+                            window.location.reload();
+                        });
+                    } else {
+                        layer.alert(res.msg, {icon: 5});
+                    }
                 }
             }
         });
+        return false;
+      });
     });
 </script>
 <?php

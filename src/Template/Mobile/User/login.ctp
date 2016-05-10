@@ -21,6 +21,7 @@
 
     </div>
 </div>
+<?php $this->start('footer')?>
 <footer>
     <h1>使用其他方式登录</h1>
     <div class="othertype">
@@ -29,6 +30,7 @@
         </a>
     </div>
 </footer>
+<?php $this->end('footer');?>
 <?php $this->start('script') ?>
 <script src="/mobile/js/function.js"></script>
 <script>

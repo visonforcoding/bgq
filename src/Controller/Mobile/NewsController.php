@@ -5,7 +5,7 @@ namespace App\Controller\Mobile;
 use App\Controller\Mobile\AppController;
 
 /**
- * News Controller
+ * News Controller  新闻
  *
  * @property \App\Model\Table\NewsTable $News
  */
