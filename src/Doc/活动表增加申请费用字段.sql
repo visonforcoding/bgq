@@ -1,0 +1,1 @@
+ALTER TABLE activity add apply_fee INT(11) DEFAULT 0 COMMENT '报名费用'
