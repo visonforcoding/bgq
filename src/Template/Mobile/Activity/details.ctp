@@ -2,10 +2,7 @@
 		<header>
 			<div class='inner'>
 				<a href='#this' class='toback' id="toback"></a>
-				<h1>
-					
-					活动详情
-				</h1>
+				<h1><?= $pagetitle ?></h1>
 				<!-- 
 				<a href="#this" class='iconfont collection h-regiser'>&#xe610;</a> // 收藏图标
 				 -->
@@ -179,7 +176,7 @@
 			<footer class="footer">
 			<div class="a-btn">
 				<a href="/activity/recommend/<?= $activity->id; ?>">我要推荐</a>
-				<a href="/activity/enroll/<?= $activity->id; ?>">我要报名(400元)</a>
+				<a href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
 			</div>
 			</footer>
 		</div>

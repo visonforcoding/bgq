@@ -49,11 +49,14 @@
            $('.agency-item.active').each(function(i,elm){
                agency.push($(elm).data('val'));
            });
-         formdata['industries[_ids]'] = agency;
+//         formdata['industries[_ids]'] = agency;
+         formdata['industries'] = agency;
          var extra_industry = $('#extra_industry').val();
          if(extra_industry !==''&&$('#extra_industry').parent().hasClass('active')){
               formdata.ext_industry = extra_industry;
          }
+//         console.log(formdata.industries);
+           if(formdata.industries.length>0){
            if(Object.keys(formdata).length>0){
                //对象长度判断
                $.post('/user/register-business',formdata,function(res){

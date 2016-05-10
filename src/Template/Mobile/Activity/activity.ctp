@@ -3,16 +3,24 @@
 		<header>
 			<div class='inner'>
 				<a href='/activity/release' class='toback subactivity' >发布活动</a>
-				<h1>
-					活动
-					
-				</h1>
+				<h1><?= $pagetitle ?></h1>
 				<a href="#this" class='iconfont news-serch h-regiser'>&#xe613;</a>
 			</div>
 		</header>
 		
 		<div class="wraper newswraper a-wraper">
-			<div class="banner"></div>
+			<div class="a-banner">
+		        <ul class="pic-list-container" id="imgList">
+		            <li><a href="#this"><img src="/mobile/images/a-banner.png"/></a></li>
+		            <li><a href="#this"><img back_src="/mobile/images/banner.jpg"/></a></li>
+		            <li><a href="#this"><img back_src="/mobile/images/a-banner.png"/></a></li>
+		        </ul>
+		        <div class="yd" id="imgTab">
+		            <span class="cur"></span>
+		            <span></span>
+		            <span></span>
+		        </div>
+		    </div>
 			<?php foreach ($activity as $activity): ?>
 			<section class='news-list-items'>
 				<div class="active-items">
@@ -21,12 +29,21 @@
 						<h3><?= $activity->title; ?></h3>
 					</a>
 					<div class="a-bottom">
-						<span class="a-address"><?= $activity->address; ?></span>
+						<span class="a-address">
+						<?= $activity->address; ?>
+						<?php if ($isApply): ?>
+							<?php if(in_array($activity->id, $isApply)): ?>
+								<span class="is-apply">已报名</span>
+							<?php endif; ?>
+						<?php endif; ?>
+						</span>
+						
 						<div class="a-other-info">
-							<span class="a-number">601人报名</span>
+							<span class="a-number"><?= $activity->apply_nums; ?>人报名</span>
 							<a><?= $activity->industry->name; ?></a>
 							<span class="a-date"><?= $activity->time; ?></span>
 						</div>
+						
 					</div>
 					
 				</div>
@@ -34,29 +51,8 @@
 			<?php endforeach; ?>
 			
 		</div>
-	<footer class="footer">
-		<ul class="navfooter clearfix">
-			<li class="active">
-				<span class="iconfont">&#xe601;</span>
-				<a href="#this">活动</a>
-			</li>
-			<li>
-				<span class="iconfont">&#xe609;</span>
-				<a href="#this">资讯</a>
-			</li>
-			<li>
-				<span class="iconfont">&#xe60b;</span>
-				<a href="#this">大咖</a>
-			</li>
-			<li>
-				<span class="iconfont">&#xe60d;</span>
-				<a href="#this">我</a>
-			</li>
-		</ul>
-	</footer>
-	<div class="alert" id="alertPlan"></div>
 	</body>
-	
+<?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>
 <script>
 $('.subactivity').click(function(){
@@ -65,31 +61,7 @@ $('.subactivity').click(function(){
 $(document).ready(function(){
 	
 });
-//var winH = $(window).height();
-//var i = 1;
-//$(window).scroll(function () {
-//    var pageH = $(document.body).height(); //页面总高度 
-//    var scrollT = $(window).scrollTop(); //滚动条top 
-//    var aa = (pageH-winH-scrollT)/pageH;
-//    if(aa<0.02){
-//        $.getJSON("",{page:i},function(json){
-//            if(json){
-//                var str = "";
-//                $.each(json,function(index,array){
-//                    var str = "<div class=\"single_item\"><div class=\"element_head\">";
-//                    str += "<div class=\"date\">"+array['date']+"</div>";
-//                    str += "<div class=\"author\">"+array['author']+"</div>";
-//                    str += "</div><div class=\"content\">"+array['content']+"</div></div>";
-//                    $("#container").append(str);
-//                });
-//                i++;
-//            }else{
-//                alert("别滚动了，已经到底了。。。");
-//                return false;
-//            }
-//        });
-//    }
-//});
+var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
 
 </script>
 <?php $this->end('script');

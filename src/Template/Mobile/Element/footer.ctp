@@ -2,7 +2,7 @@
     <ul class="navfooter clearfix">
         <li>
             <span class="iconfont">&#xe601;</span>
-            <a href="#this">活动</a>
+            <a href="/activity/activity">活动</a>
         </li>
         <li>
             <span class="iconfont">&#xe609;</span>

@@ -2,9 +2,7 @@
 		<header>
 			<div class='inner'>
 				<a href='#this' class='toback' id="toback"></a>
-				<h1>
-					活动报名
-				</h1>
+				<h1><?= $pagetitle ?></h1>
 				
 			</div>
 		</header>
@@ -23,7 +21,7 @@
 						<li>公司：<span class='infocard'><input type="email" name="company" value="<?= $user->company; ?>" readonly/></span></li>
 						<li>职务：<span class='infocard'><input type="text" name="position" value="<?= $user->position; ?>" readonly/></span></li>
 						<li>联系方式：<span class='infocard reg-pass'><input type="text" name="phone" value="<?= $user->phone; ?>" readonly/></span></li>
-						<li>费用：<span class='infocard reg-repass'><input type="text" name="" placeholder="400元" readonly/></span></li>
+						<li>费用：<span class='infocard reg-repass'><input type="text" name="apply_fee" placeholder="<?= $activity->apply_fee; ?>元" readonly/></span></li>
 					</ul>
 				</div>
 				<a href="#this" class="nextstep" id="submit">提交</a>

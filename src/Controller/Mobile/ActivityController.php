@@ -20,6 +20,7 @@ class ActivityController extends AppController{
 			$activity->read_nums += 1;// 阅读加1
 			$this->Activity->save($activity);
 			$this->set('activity',$activity);
+			$this->set('pagetitle', '活动详情');
 		}
 		else
 		{
@@ -41,6 +42,21 @@ class ActivityController extends AppController{
 			$activity = $this->paginate($this->Activity);
 			$this->set(compact('activity'));
 			$this->set('_serialize', ['activity']);
+			// 用户已报名的活动
+			$activityApply = $this
+				->Activity
+				->Activityapply
+				->find()
+				->where(['user_id' => $this->user->id])
+				->select(['activity_id'])
+				->hydrate(false)
+				->toArray();
+			foreach ($activityApply as $k=>$v)
+			{
+				$isApply[] = $v['activity_id'];
+			}
+			$this->set('isApply', $isApply);
+			$this->set('pagetitle', '活动');
 // 		}
 // 		else
 // 		{
@@ -52,7 +68,7 @@ class ActivityController extends AppController{
 	 * 我要推荐
 	 */
 	public function recommend($id=''){
-		
+		$this->set('pagetitle', '我要推荐');
 	}
 	
 	/**
@@ -61,6 +77,9 @@ class ActivityController extends AppController{
 	public function enroll($id=''){
 		if($id)
 		{
+			$activity = $this->Activity->get($id, [
+					'contain' => ['Admins'],
+					]);
 			if($this->request->is('post'))
 			{
 				$activityApply = $this->Activity->Activityapply->newEntity();
@@ -77,6 +96,8 @@ class ActivityController extends AppController{
 				{
 					if($this->Activity->Activityapply->save($activityApply))
 					{
+						$activity->apply_nums += 1;
+						$this->Activity->save($activity);
 						$this->Util->ajaxReturn(true, '提交成功！');
 					}
 					else
@@ -87,11 +108,9 @@ class ActivityController extends AppController{
 			}
 			else
 			{
-				$activity = $this->Activity->get($id, [
-						'contain' => ['Admins'],
-						]);
 				$this->set('activity',$activity);
 				$this->set('user',$this->user);
+				$this->set('pagetitle', '我要报名');
 			}
 		}
 		else
@@ -105,7 +124,17 @@ class ActivityController extends AppController{
 	 */
 	
 	public function release(){
-		
+		if($this->request->is('post'))
+		{
+			$a = $this->request->data();
+			debug($a);die;
+		}
+		else
+		{
+			$industry = 0;
+			$this->set('industry',$industry);
+			$this->set('pagetitle', '发布活动');
+		}
 	}
 	
 }
