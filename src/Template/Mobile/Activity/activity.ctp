@@ -54,6 +54,7 @@
 	</body>
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>
+<script src="/mobile/js/loopScroll.js"></script>
 <script>
 $('.subactivity').click(function(){
 	location.href="";
