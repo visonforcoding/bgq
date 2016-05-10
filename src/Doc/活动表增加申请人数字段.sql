@@ -1,0 +1,1 @@
+ALTER TABLE activity add apply_nums INT(11) DEFAULT 0 COMMENT '报名人数'
