@@ -54,7 +54,11 @@ class NewsController extends AppController {
                 $this->Util->ajaxReturn(['status'=>false, 'msg'=>getMessage($errors),'errors'=>$errors]);
             }
         }
-        $this->set(compact('news'));
+        $industries = $this->News->Industries->find('threaded',[
+                        'keyField' => 'id',
+                        'parentField' => 'pid'
+                    ])->all()->toArray();
+        $this->set(compact('news','industries'));
     }
 
     /**

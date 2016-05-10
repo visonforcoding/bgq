@@ -12,6 +12,7 @@ use Cake\Validation\Validator;
  * News Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Admins
+ * @property \Cake\ORM\Association\BelongsToMany $Industries
  */
 class NewsTable extends Table {
 
@@ -34,8 +35,15 @@ class NewsTable extends Table {
             'joinType' => 'INNER',
             'className' => 'Wpadmin.Admin'
         ]);
-        
-        $this->hasMany('Comments',[
+
+        $this->belongsToMany('Industries', [
+            'className' => 'Industry',
+            'joinTable' => 'news_industry',
+            'foreignKey' => 'news_id',
+            'targetForeignKey' => 'industry_id'
+        ]);
+
+        $this->hasMany('Comments', [
             'className' => 'Newscom',
         ]);
 

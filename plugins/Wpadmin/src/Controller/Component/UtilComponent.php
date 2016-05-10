@@ -26,10 +26,11 @@ class UtilComponent extends Component {
         $this->autoRender = false;
         $this->response->type('json');
         if (is_array($status) && !empty($status)) {
-            exit(json_encode($status, JSON_UNESCAPED_UNICODE));
+            echo json_encode($status, JSON_UNESCAPED_UNICODE);
         } else {
-            exit(json_encode(array('status' => $status, 'msg' => $msg), JSON_UNESCAPED_UNICODE));
+            echo json_encode(array('status' => $status, 'msg' => $msg), JSON_UNESCAPED_UNICODE);
         }
+        exit();
     }
 
     /**
@@ -43,7 +44,7 @@ class UtilComponent extends Component {
      * @param type $param
      * @param type $useragent Description
      */
-    public function actionLog($msg, $user ) {
+    public function actionLog($msg, $user) {
         $actionlogTable = \Cake\ORM\TableRegistry::get('actionlog');
         $actionlog = $actionlogTable->newEntity();
         $actionlog->msg = $msg;

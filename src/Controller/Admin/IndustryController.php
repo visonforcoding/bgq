@@ -203,4 +203,28 @@ class IndustryController extends AppController {
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
 
+    /**
+     * 为select2提供数据
+     */
+    public function getIndustryForSelect() {
+        $keyword = $this->request->query('search');
+        $query = $this->Industry->find('threaded', [
+            'keyField' => $this->Industry->primaryKey(),
+            'parentField' => 'pid'
+        ])->hydrate(false)->select(['id','text'=>'name','pid']);
+        if (!empty($keyword)) {
+            $query->where("`name` like '%$keyword%'");
+        }
+        $industries = $query->toArray();
+        if ($industries) {
+            foreach ($industries as $key=> $value){
+                if($value['pid']==0){
+                    $industries[$key]['id'] = '';
+                    unset($industries[$key]['pid']);
+                }
+            }
+        }
+        $this->Util->ajaxReturn($industries);
+    }
+
 }

@@ -21,8 +21,12 @@ class NewsController extends AppController {
             'contain' => ['Admins']
         ];
         $news = $this->paginate($this->News);
-        
-        $this->set(compact('news'));
+        //获取资讯banner图
+        $bannerTable = \Cake\ORM\TableRegistry::get('banner');
+        $banners = $bannerTable->find()->where("`enabled` = '1' and `type` = '1'")
+                ->orderDesc('create_time')->limit(3)->toArray();
+//        debug($banners);exit();
+        $this->set(compact('news','banners'));
         $this->set('newsjson',  json_encode($news));
     }
 

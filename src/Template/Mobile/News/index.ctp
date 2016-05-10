@@ -7,9 +7,9 @@
 <div class="wraper newswraper">
     <div class="a-banner">
         <ul class="pic-list-container" id="imgList">
-            <li><a href="#this"><img src="/mobile/images/a-banner.png"/></a></li>
-            <li><a href="#this"><img back_src="/mobile/images/banner.jpg"/></a></li>
-            <li><a href="#this"><img back_src="/mobile/images/a-banner.png"/></a></li>
+            <?php foreach ($banners as $banner):?>
+            <li><a href="<?=$banner->url?>"><img src="<?=$banner->img?>"/></a></li>
+            <?php endforeach;?>
         </ul>
         <div class="yd" id="imgTab">
             <span class="cur"></span>
