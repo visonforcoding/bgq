@@ -7,9 +7,9 @@
 .loginbox .username input{width:5.96rem;}
 .loginbox .username span{background:url(img/ren.png) no-repeat;width:0.25rem;height:0.29rem;background-size:cover;}
 .loginbox .password span{background: url(img/pass.png) no-repeat;width:0.27rem;height:0.34rem; background-size: cover;}
-.loginbox .password input{width:4rem;}
+.loginbox .password input{width:3.5rem;}
 .loginbox .password button{color:#e01a48;border: none;background-color: #fff;line-height: 1.3rem;float:right;}
-.login-area .submit{display:inline-block;width:5.6rem;margin-left:0.58rem;background:#e01a48; padding:0.25rem 0;color:#fff;text-align: center;border-radius: 0.2rem;margin-top:0.76rem;box-shadow:0 0 15px rgba(0,0,0,0.3);font-size:0.3rem;}
+.login-area .submit{display:inline-block;width:5.6rem;margin-left:0.58rem;background:#e01a48; padding:0.25rem 0;color:#fff;text-align: center;border-radius: 0.2rem;margin-top:0.76rem;box-shadow:0 0 15px rgba(0,0,0,0.3);font-size:0.3rem;outline:none;}
 .tips{position:absolute;left:50%;top:50%; margin-left:-2.5rem;margin-top:-1.25rem;border-radius:0.05rem;color:#333;border:1px #9ba4ad solid;width:5rem;height:2.5rem;
 		background: red;padding:0.1rem;overflow:hidden; background: #fff;}
 .tips p{text-align: center;margin:0.4rem 0; font-size:0.28rem;}
@@ -22,24 +22,20 @@
 .items .orgtitle .bgorgname{background: url(img/up.png) no-repeat right center;background-size:0.25rem 0.16rem ;}
 .items{background:#fff;overflow:hidden;}
 
-.orgmark a{display: inline-block;height:0.59rem;line-height:0.59rem;width:1.52rem; text-align:center;font-size:0.26rem;margin:0.26rem 0.16rem;color:#7a7e83; border:1px #c8c7cc solid; 
-					border-radius: 0.3rem;}
-.nextstep{ display:inline-block;text-align:center;height:0.78rem;width:80%;font-size:0.3rem;line-height:0.78rem;background: #e01a48;color:#fff;margin:0.7rem;border-radius:0.2rem;
-			box-shadow: 0 0 0.05rem rgba(0,0,0,.4);}
+.orgmark a{display: inline-block;height:0.59rem;line-height:0.59rem;width:1.52rem; text-align:center;font-size:0.26rem;margin:0.26rem 0.16rem;color:#7a7e83; border:1px #c8c7cc solid; border-radius: 0.3rem;}
+.nextstep{ display:inline-block;text-align:center;height:0.78rem;width:80%;font-size:0.3rem;line-height:0.78rem;background: #e01a48;color:#fff;margin:0.7rem;border-radius:0.2rem;box-shadow: 0 0 0.05rem rgba(0,0,0,.4);}
 .items .active{border:1px #de204b solid; color:#de204b;position:relative;}
-.items .active:after{position:absolute;content:'';width:0.28rem;height:0.28rem;top:0;right:-0.14rem;
-					background: url(img/choose.png) no-repeat; background-size:cover;}
+.items .active:after{position:absolute;content:'';width:0.28rem;height:0.28rem;top:0;right:-0.14rem;background: url(img/choose.png) no-repeat; background-size:cover;}
 .myselfmark input{ width: 1.2rem; height: 0.4rem;border: none;line-height: 0.4rem; text-align: center;}
 
 /*注册--上传名片--start*/
 .uploadbox{padding:0.62rem 0.98rem 0.3rem 0.95rem;border-bottom:1px #c8c7cc solid;}
 .uploadbox .imgcard{display:block;background:#9ba4ad;padding:1.07rem 2.09rem 1.08rem 2.3rem;}
 .uploadbox .imgcard img{ width:1.18rem;height:0.96rem;display: block;}
-.uploadbox .uploadbtn{display: block; color:#fff;font-size:0.3rem;text-align:center;width:100%;height:0.78rem;line-height:0.78rem;
-					background: #3e82f7;border-radius: 0.2rem;margin:0.45rem 0 0.2rem;box-shadow: 0 0 0.3rem rgba(0,0,0,0.5);}
+.uploadbox .uploadbtn{display: block; color:#fff;font-size:0.3rem;text-align:center;width:100%;height:0.78rem;line-height:0.78rem;background: #3e82f7;border-radius: 0.2rem;margin:0.45rem 0 0.2rem;box-shadow: 0 0 0.3rem rgba(0,0,0,0.5);}
 .uploadbox  p{width:100%;text-align:center;font-size:0.24rem;color:#7a7e83;line-height: 0.46rem;}
 .infobox{padding:0.08rem 0.3rem 0; background: #FFFFFF;}
-.infobox li{position:relative;height:0.8rem;line-height: 0.8rem;border-bottom:1px #c8c7cc solid;font-size:0.3rem;color:#222c38;}
+.infobox li{position:relative;height:0.8rem;line-height: 0.8rem;border-bottom:1px #c8c7cc solid;font-size:0.28rem;color:#222c38;}
 .infobox li span.infocard{position:absolute;right:0.1rem;}
 .infobox li input{border:none;outline: none;text-align: right;width:4.8rem; padding-right:0.1rem;}
 .uploadbox .filebtn{overflow:hidden;position:relative;}
@@ -54,7 +50,11 @@
 .reg-sucess p{line-height: 1.38rem;font-size:0.3rem;color:#222c38;}
 /*news --start--*/
 .inner .news-serch{ width:0.32rem;height:0.32rem;font-size:0.32rem;top:0.29rem;}
-.banner{background: url(img/banner.jpg) no-repeat center center;background-size:cover; width:100%;height:2.95rem;}
+.banner{width:100%;height:2.95rem;}
+.pic-list-container{width:300%;position:relative;overflow:hidden;}
+.pic-list-container li{width:7.5rem;float:left;}
+.pic-list-container li a{display: block;}
+.pic-list-container li img{width:100%;height:auto;display: block;}
 .news-list-items{border-top:1px #c8c7cc solid; padding:0.36rem 0.4rem 0.3rem;background: #fff;}
 .news-list-items h1{width:100%;color:#969fa9;font-size:0.24rem;line-height: 0.4rem;position:relative;padding-left:0.5rem;}
 .news-list-items h1 span{width:0.4rem;height:0.4rem;position:absolute;left:0;}
@@ -139,7 +139,7 @@ border-left:none;border-bottom:none;top:-1px;}
 .a-other-info > *{display: inline-block;font-size:0.2rem;}
 .a-other-info span:nth-of-type(1){background: #4285f4;color:#fff; padding:0.11rem;border-radius: 0.1rem;}
 .a-other-info > a{padding:0.1rem;border:1px #969fa9 solid;border-radius: 0.1rem;margin-left：0.07rem;}
-.a-other-info span:nth-of-type(2){margin-left:0.8rem;line-height:0.34rem;}
+.a-other-info span:nth-of-type(2){margin-left:0.5rem;line-height:0.34rem;}
 .active-items{padding-bottom:0.4rem;border-bottom: 1px #c8c7cc solid;}
 .a-wraper section{border-top:none;}
 .tojudge,.crowdfunding span,.tochoose{line-height: 0.8rem;color:#222c38;font-size:0.28rem;}
@@ -383,3 +383,5 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .my-search-mark .items .orgname{background: none;}
 .vipinfo .mark .meetnum{float:right;}
 .my-search h3{height:0.8rem;background: #fff;text-indent: 0.3rem;line-height: 0.8rem;font-size:0.28rem;}
+.my-home-menu{height:0.95rem;display: flex; justify-content: center;align-items: center;}
+.my-home-menu a{width:50%;}
