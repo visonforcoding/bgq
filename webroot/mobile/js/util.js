@@ -22,8 +22,8 @@ $.util = {
 
     /**
      * 批量处理json列表数据
-     * @param contentId  容器id string
-     * @param tplId  模板id string
+     * @param contentId string   容器id , 传入空字符串‘’的话，会返回组装好的html
+     * @param tplId string 模板id
      * @param data json数据列表  array
      * @param func  处理json数据的方法，可选 会传入当前json对象
      * @returns {string}
@@ -35,7 +35,7 @@ $.util = {
             if(func) d=func(d);
             html.push($.util.jsonToTpl(d,tpl));
         });
-        $('#'+contentId).html(html.join(''));
+        return contentId === '' ? html.join('') : $('#'+contentId).html(html.join(''));
     },
 
     ajax:function(obj){
@@ -72,6 +72,7 @@ $.util = {
             //loopScroll:(this.loopImg.length > 1 ? true:false),
             lockScrY:true,
             imgInitLazy:1000,
+            loopScroll:true,
             //enableTransX:true,
             index: 1,
             fun:function(index){
