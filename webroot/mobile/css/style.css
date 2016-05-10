@@ -376,7 +376,7 @@ border-left:none;border-bottom:none;top:-1px;}
 .bbottom .orgtitle .orgname{background: none;}
 /*我的关注*/
 .h-add{background: url(img/add1.png) no-repeat;background-size:cover;width:0.25rem;height:0.25rem;}
-header h1 a{margin-right:0.38rem; padding-bottom:0.18rem;overflow:hidden;color:#eca9b7;}
+header h1 a{margin-right:0.38rem; padding-bottom:0.16rem;overflow:hidden;color:#eca9b7;}
 header h1 a:nth-of-type(2){margin-left:0.38rem;color:#eca9b7;margin-right: 0; }
 header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .my-focus-box{height:1.6rem;}
@@ -391,9 +391,9 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .vipinfo .mark .meetnum{float:right;}
 .my-search h3{height:0.8rem;background: #fff;text-indent: 0.3rem;line-height: 0.8rem;font-size:0.28rem;}
 .my-home-menu{height:0.95rem;display: flex; justify-content: center;align-items: center;}
-.my-home-menu a{width:50%;border:2px #e01a48 solid;line-height: 0.52rem;text-align: center;color:#e01a48;}
+.my-home-menu a{width:50%;border:1px #e01a48 solid;line-height: 0.52rem;text-align: center;color:#e01a48;}
 .my-home-menu a:nth-of-type(1){border-radius: 0.1rem 0 0 0.1rem;}
-.my-home-menu a:nth-of-type(2){border-radius: 0 0.1rem 0.1rem 0;}
+.my-home-menu a:last-of-type{border-radius: 0 0.1rem 0.1rem 0;}
 .my-home-menu a.active{background: #e01a48;color:#fff;}
 .my-collection-info{border-bottom:1px #c8c7cc solid;border-top:1px #c8c7cc solid;}
 .my-collection-info a{overflow:hidden;padding:0.29rem 0;display:block;border-bottom:1px #c8c7cc solid;}
@@ -405,3 +405,4 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .my-collection-items h3{line-height: 0.43rem;color:#222c38;font-size:0.29rem;margin-bottom:0.23rem;}
 .my-news-items h3{height:0.84rem;overflow:hidden;width:100%;}
 .my-news-items span b{margin-left:0.2rem;}
+.my-meet-info .mark a{border:0;border-radius: 0;color:#e01a48;}
