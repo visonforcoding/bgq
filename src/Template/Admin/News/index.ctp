@@ -39,15 +39,13 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['作者', '标题', '阅读数', '点赞数', '评论数', '封面', '摘要', '创建时间', '更新时间', '操作'],
+                                ['作者', '标题', '阅读数', '点赞数', '评论数',  '创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'admin.username', editable: true, align: 'center'},
                             {name: 'title', editable: true, align: 'center'},
                             {name: 'read_nums', editable: true, align: 'center'},
                             {name: 'praise_nums', editable: true, align: 'center'},
                             {name: 'comment_nums', editable: true, align: 'center'},
-                            {name: 'cover', editable: true, align: 'center'},
-                            {name: 'summary', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],

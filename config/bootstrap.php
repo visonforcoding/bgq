@@ -232,6 +232,7 @@ Plugin::load('Wpadmin', ['bootstrap' => true, 'routes' => true]);
 //载入自定义配置文件
 Configure::load('wpadmin');
 Configure::load('dataconf');
+Configure::load('proj_conf');
 require_once  dirname(__FILE__) . '/function.php';  //引入全局函数文件
 
 

@@ -30,3 +30,4 @@
         </ul>
     </div>
 </div>
+<?= $this->element('footer') ?>

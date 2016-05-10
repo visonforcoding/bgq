@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use Wpadmin\Controller\AppController;
 use Wpadmin\Utils\UploadFile;
 use Cake\ORM\TableRegistry;
+
 /**
  * Banner Controller
  *
@@ -29,7 +30,6 @@ class BannerController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null) {
-        $id=$_GET['id']?intval($_GET['id']):'';
         $this->viewBuilder()->autoLayout(false);
         $banner = $this->Banner->get($id, [
             'contain' => []
@@ -43,7 +43,7 @@ class BannerController extends AppController {
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add() {       
+    public function add() {
         $banner = $this->Banner->newEntity();
         if ($this->request->is('post')) {
             $this->autoRender = false;
@@ -58,7 +58,11 @@ class BannerController extends AppController {
             }
             return;
         }
-        $this->set(compact('banner'));
+        $types = \Cake\Core\Configure::read('bannerTypes');
+        $this->set(array(
+            'types' => $types,
+            'banner'=>$banner
+        ));
     }
 
     /**
@@ -74,7 +78,7 @@ class BannerController extends AppController {
         ]);
         if ($this->request->is(['post', 'put'])) {
             $this->autoRender = false;
-            $this->response->type('json');            
+            $this->response->type('json');
             $banner = $this->Banner->patchEntity($banner, $this->request->data);
             if ($this->Banner->save($banner)) {
                 echo json_encode(array('status' => true, 'msg' => '修改成功'));
@@ -179,7 +183,7 @@ class BannerController extends AppController {
 
     public function uploadImg() {
         $today = date('Y-m-d');
-        $recode_path='/upload/banner/' . $today . '/';//数据库中记录的路径
+        $recode_path = '/upload/banner/' . $today . '/'; //数据库中记录的路径
         $urlpath = ROOT . '/webroot/upload/banner/' . $today . '/';
         $savePath = $urlpath;
         $upload = new UploadFile(); // 实例化上传类
@@ -196,18 +200,20 @@ class BannerController extends AppController {
             $response['record_path'] = $recode_path . $info[0]['savename'];
             $response['msg'] = '上传成功!';
         }
-        $this->autoRender= false;
+        $this->autoRender = false;
         $this->response->type('json');
-        echo json_encode($response);        
+        echo json_encode($response);
     }
+
     public function doUpload() {
         $dir = $this->request->query('dir');
         $today = date('Y-m-d');
-        $urlpath =  '/upload/tmp/' . $today . '/';
-        if(!empty($dir)){
+        $urlpath = '/upload/tmp/' . $today . '/';
+        if (!empty($dir)) {
             $urlpath = '/upload/banner/' . $today . '/';
         }
-        $savePath = ROOT.'/webroot'.$urlpath;;
+        $savePath = ROOT . '/webroot' . $urlpath;
+        ;
         $upload = new UploadFile(); // 实例化上传类
         $upload->maxSize = 31457280; // 设置附件上传大小
         $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg'); // 设置附件上传类型

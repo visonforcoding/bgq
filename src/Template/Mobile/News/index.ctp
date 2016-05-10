@@ -5,12 +5,24 @@
     </div>
 </header>
 <div class="wraper newswraper">
-    <div class="banner"></div>
+    <div class="a-banner">
+        <ul class="pic-list-container" id="imgList">
+            <li><a href="#this"><img src="/mobile/images/a-banner.png"/></a></li>
+            <li><a href="#this"><img back_src="/mobile/images/banner.jpg"/></a></li>
+            <li><a href="#this"><img back_src="/mobile/images/a-banner.png"/></a></li>
+        </ul>
+        <div class="yd" id="imgTab">
+            <span class="cur"></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
     <div id="news"></div>
 </div>
+
 <script type="text/html" id="listTpl">
     <section class='news-list-items '>
-        <h1 class="firstnews"><span><img src="../images/user.png" /></span>4444</h1>
+        <h1 class="firstnews"><span><img src="/mobile/images/user.png" /></span>{#admin_name#}</h1>
         <a href="/mobile/news/view/{#id#}" class="newsbox clearfix">
             <div class="sec-news-l">
                 <h3>{#title#}</h3>
@@ -37,17 +49,11 @@
         </div>
     </section>	
 </script>
-<?php $this->fetch('footer')?>
-<?php $this->end('footer')?>
+<?= $this->element('footer'); ?>
 <?php $this->start('script') ?>
+<script src="/mobile/js/loopScroll.js"></script>
 <script>
-//        var data = <?php echo $newsjson; ?>,
-//            tpl = $.util.id('listTpl').text,
-//            html=[];
-//        for(var i=0, len=data.length; i<len; i++){
-//            html.push($.util.jsonToTpl(data[i], tpl));
-//        }
-//        $('#news').html(html.join(''));
     $.util.dataToTpl('news', 'listTpl',<?= $newsjson ?>);
+    var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
 </script>
 <?php $this->end('script'); ?>

@@ -30,7 +30,7 @@ class UtilController extends AppController {
         $upload = new UploadFile(); // 实例化上传类
         $upload->maxSize = 31457280; // 设置附件上传大小
         $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg','zip','ppt',
-            'pptx','doc','docx','xls','xlsx'); // 设置附件上传类型
+            'pptx','doc','docx','xls','xlsx','webp'); // 设置附件上传类型
         $upload->savePath = $savePath; // 设置附件上传目录
         if (!$upload->upload()) {// 上传错误提示错误信息
             $response['status'] = false;

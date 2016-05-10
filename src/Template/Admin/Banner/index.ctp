@@ -43,7 +43,10 @@ $this->start('static') ?>
                         colNames:
                                 ['类型', '链接地址', '备注说明', '创建时间', '操作'],
                         colModel: [
-                            {name: 'type', editable: true, align: 'center'},
+                            {name: 'type', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
+                                    var types = {'1':'资讯','2':'活动'};
+                                    return types[cellvalue];
+                            }},
                             {name: 'url', editable: true, align: 'center'},
                             {name: 'remark', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
