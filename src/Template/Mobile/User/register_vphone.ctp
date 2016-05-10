@@ -20,14 +20,6 @@
 
     </div>
 </div>
-<footer>
-    <h1>使用其他方式登录</h1>
-    <div class="othertype">
-        <a href="/wx/get-user-jump">
-            <img src="/mobile/images/weixin.png" />
-        </a>
-    </div>
-</footer>
 <?php $this->start('script') ?>
 <script src="/mobile/js/function.js"></script>
 <script>
