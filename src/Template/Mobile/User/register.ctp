@@ -32,7 +32,8 @@
     </div>
     <a href="#this" id="submit" class="nextstep">下一步</a>
 </div>
-
+<?php $this->start('footer'); ?>
+<?php $this->end('footer'); ?>
 <?php $this->start('script') ?>
 <script src="/mobile/js/jquery.js" type="text/javascript" charset="utf-8"></script>
 <script src="/mobile/js/lib/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>

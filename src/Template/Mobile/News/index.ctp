@@ -37,6 +37,8 @@
         </div>
     </section>	
 </script>
+<?php $this->fetch('footer')?>
+<?php $this->end('footer')?>
 <?php $this->start('script') ?>
 <script>
 //        var data = <?php echo $newsjson; ?>,

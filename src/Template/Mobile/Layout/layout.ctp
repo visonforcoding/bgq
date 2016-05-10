@@ -15,7 +15,7 @@
     </head>
     <body>
         <?= $this->fetch('content') ?>
-        <?php if (!$this->fetch('footer')): ?>
+        <?php if ($this->fetch('footer')): ?>
             <footer class="footer">
                 <ul class="navfooter clearfix">
                     <li>
