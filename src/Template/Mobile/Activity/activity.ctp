@@ -61,6 +61,7 @@ $('.subactivity').click(function(){
 $(document).ready(function(){
 	
 });
+
 var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
 
 </script>
