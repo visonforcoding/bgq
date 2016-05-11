@@ -1,19 +1,19 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Entity\Activityapply;
+use App\Model\Entity\Activitycom;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Activityapply Model
+ * Activitycom Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\BelongsTo $Activities
+ * @property \Cake\ORM\Association\BelongsTo $Users
  */
-class ActivityapplyTable extends Table
+class ActivitycomTable extends Table
 {
 
     /**
@@ -26,29 +26,17 @@ class ActivityapplyTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('activityapply');
+        $this->table('activitycom');
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER',
-        	'className' => 'User',
-        ]);
         $this->belongsTo('Activities', [
             'foreignKey' => 'activity_id',
-            'joinType' => 'INNER',
-        	'className' => 'Activity'
+            'joinType' => 'INNER'
         ]);
-        
-        
-        $this->addBehavior('Timestamp', [
-        		'events' => [
-	        		'Model.beforeSave' => [
-		        		'create_time' => 'new',
-		        		'update_time' => 'always'
-	        		]
-        		]
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
         ]);
     }
 
@@ -64,10 +52,24 @@ class ActivityapplyTable extends Table
             ->integer('id')
             ->allowEmpty('id', 'create');
 
-   
+        $validator
+            ->integer('pid')
+            ->requirePresence('pid', 'create')
+            ->notEmpty('pid');
 
+        $validator
+            ->requirePresence('body', 'create')
+            ->notEmpty('body');
 
+        $validator
+            ->integer('praise_nums')
+            ->requirePresence('praise_nums', 'create')
+            ->notEmpty('praise_nums');
 
+        $validator
+            ->dateTime('create_time')
+            ->requirePresence('create_time', 'create')
+            ->notEmpty('create_time');
 
         return $validator;
     }
@@ -81,8 +83,8 @@ class ActivityapplyTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['activity_id'], 'Activities'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
         return $rules;
     }
 }

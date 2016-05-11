@@ -21,20 +21,60 @@ class ActivityController extends AppController{
 			$this->Activity->save($activity);
 			$this->set('activity',$activity);
 			
+			// 是否已报名
 			$activityApply = $this
 							->Activity
 							->Activityapply
 							->find()
+							->contain(['Users'])
 							->where(['user_id' => $this->user->id])
-// 							->select(['activity_id'])
 							->hydrate(false)
 							->toArray();
-			
-			foreach ($activityApply as $k=>$v)
+			if($activityApply != '')
 			{
-				$isApply[] = $v['activity_id'];
+				foreach ($activityApply as $k=>$v)
+				{
+					$isApply[] = $v['activity_id'];
+				}
+				$this->set(compact('isApply'));
 			}
-			$this->set('isApply', $isApply);
+			
+			// 已报名的人
+			$allApply = $this
+							->Activity
+							->Activityapply
+							->find()
+							->contain(['Users'])
+							->where(['activity_id' => $id])
+							->order(['is_top' => 'DESC', 'Activityapply.create_time' => 'DESC'])
+							->hydrate(false)
+							->toArray();
+			if($allApply != '')
+			{
+				$userApply = [];
+				foreach ($allApply as $k=>$v)
+				{
+					$userApply[] = $v['user'];
+				}
+				$this->set('userApply', $userApply);
+			}
+			
+			// 评论
+			$comment = $this
+					->Activity
+					->Activitycom
+					->find()
+					->contain(['Users'])
+					->where(['activity_id' => $id])
+					->order(['Activitycom.create_time' => 'DESC'])
+					->hydrate(false)
+					->toArray();
+// 			debug($comment);die;
+			if($comment)
+			{
+				$this->set(compact('comment'));
+			}
+			
 			
 			$this->set('pagetitle', '活动详情');
 		}
@@ -52,7 +92,7 @@ class ActivityController extends AppController{
 // 		{
 			$this->paginate = [
 				'contain' => ['Admins','Industries'],
-				'order' => ['is_top' => '1', 'create_time' => 'DESC'],
+				'order' => ['is_top' => 'DESC', 'create_time' => 'DESC'],
 				'limit' => '2',
 			];
 			$activity = $this->paginate($this->Activity);
