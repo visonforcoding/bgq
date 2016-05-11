@@ -9,9 +9,10 @@
 		<div class="wraper">
 			<form action="" method="post">
 				<div class="h20"></div>
-				<div class="tojudge innercon clearfix">
-					是否为众筹活动
-					<span><input name="is_crowdfunding" hidden value="1" /></span>
+				<div class="infoboxlist a-pay paytype">
+					<ul class='ulinfo'>
+						<li>是否为众筹项目：<span class='infocard'><input type="radio" name='pay' checked="checked" /><i class='active'></i></span></li>
+					</ul>
 				</div>
 				<div class="h20"></div>
 				<div class="crowdfunding innercon">
@@ -32,6 +33,9 @@
 	//返回上一页
 	$('#toback').click(function(){
 		history.back();
+	})
+	$('input[name="pay"]').click(function(){
+		$(this).siblings('i').toggleClass('active');
 	})
 	
 	$('#submit').on('click', function () {

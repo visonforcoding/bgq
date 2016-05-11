@@ -126,7 +126,7 @@
 							<i class="job"><?= $v['user']['company'] ?> <?= $v['user']['position'] ?></i>
 						</span>
 						<span>
-							<b class="addnum" id="addnum">+1</b><i class="iconfont" id="likecom">&#xe615;</i><?= $v['praise_nums'] ?>
+							<b class="addnum">+1</b><i class="iconfont" id="likecom" value="0" comid="<?= $v['id'] ?>">&#xe615;</i><?= $v['praise_nums'] ?>
 						</span>
 					</div>
 					<p><?= $v['body'] ?></p>
@@ -171,20 +171,45 @@
 	</body>
 <?php $this->start('script'); ?>
 <script>
-$('#toback').click(function(){
-	history.back();
-})
-$(document).ready(function(){
+	// 返回上一页
+	$('#toback').click(function(){
+		history.back();
+	})
 	
-});
-$('#likecom').click(function(){
-	$(this).siblings('b').addClass('show');
-})
-$('.addnum')[0].addEventListener("webkitAnimationEnd", function(){
-    $('.show').removeClass('show');
-});
-$('.like').click(function(){
-	$(this).toggleClass('changecolor');
-})
+	
+	$(document).ready(function(){
+		
+	});
+
+	// 评论点赞头上
+	$('#likecom').click(function(){
+		$(this).siblings('b').addClass('show');
+		//$(this).toggleClass('changecolor');
+		$.ajax({
+            type: 'post',
+            url: '/activity/like/'+$(this).attr('comid'),
+            data: 'type='+$(this).attr('value'),
+            dataType: 'json',
+            success: function (msg) {
+                if (typeof msg === 'object') {
+                    if (msg.status === true) {
+                        $('.addnum').parent.html(msg);
+                    } else {
+                        $.util.alert(msg.msg);
+                    }
+                }
+            }
+        });
+	})
+	$('.addnum')[0].addEventListener("webkitAnimationEnd", function(){
+	    $('.show').removeClass('show');
+	});
+
+	// 喜欢、收藏按钮变色
+	$('.like').click(function(){
+		$(this).toggleClass('changecolor');
+	})
+	
+	// 
 </script>
 <?php $this->end('script');
