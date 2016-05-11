@@ -31,6 +31,7 @@ i{font-style: normal;}
 .wraper .color-items{color:#e01a48;}
 .wraper .f-color-gray{color:#bbc0c6;}
 .wraper .changecolor{color:#da2051;}
+.wraper .ft26{font-size:0.26rem;}
 .wraper .bbottom{border-bottom:1px solid #c8c7cc;}
 /*placeholder reset--*/
 input::-webkit-input-placeholder { /* WebKit browsers */ color: #222c38; } 
