@@ -137,7 +137,7 @@
 			<footer class="footer">
 			<div class="a-btn">
 				<a href="/activity/recommend/<?= $activity->id; ?>">我要推荐</a>
-				<?php if ($isApply): ?>
+				<?php if ($isApply != ''): ?>
 				<?php if(in_array($activity->id, $isApply)): ?>
 				<a>已报名(<?= $activity->apply_fee; ?>元)</a>
 				<?php else: ?>
