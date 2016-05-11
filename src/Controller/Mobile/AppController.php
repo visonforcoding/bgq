@@ -72,7 +72,7 @@ class AppController extends Controller {
 
     public function beforeFilter(Event $event) {
         $this->user = $this->request->session()->read('User.mobile');
-        //$this->checkLogin();
+        return $this->checkLogin();
     }
 
     /**
@@ -88,7 +88,8 @@ class AppController extends Controller {
         }
         $user = $this->request->session()->check('User.mobile');
         if (!$user) {
-            return $this->redirect(['controller' => 'user', 'action' => 'login', 'prefix' => 'mobile']);
+            return $this->redirect('/user/login');
+            //header("location:".'/user/login');
         }
     }
     

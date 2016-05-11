@@ -40,7 +40,7 @@ class AppController extends Controller {
     }
 
     public function beforeFilter(Event $event) {
-        $this->checkLogin();
+       return  $this->checkLogin();
         //$this->autoLog();
     }
 

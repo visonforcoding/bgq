@@ -12,7 +12,7 @@ function is_mobile(str) {
 }
 
 $(function(){
-   $('.toback').on('click',function(){
-       window.history.go(-1);
-   }) ;
+//   $('.toback').on('click',function(){
+//       window.history.go(-1);
+//   }) ;
 });
