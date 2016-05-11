@@ -107,11 +107,14 @@ class ActivityController extends AppController{
 				->select(['activity_id'])
 				->hydrate(false)
 				->toArray();
-			foreach ($activityApply as $k=>$v)
+			if($activityApply)
 			{
-				$isApply[] = $v['activity_id'];
+				foreach ($activityApply as $k=>$v)
+				{
+					$isApply[] = $v['activity_id'];
+				}
+				$this->set('isApply', $isApply);
 			}
-			$this->set('isApply', $isApply);
 			$this->set('pagetitle', '活动');
 // 		}
 // 		else
