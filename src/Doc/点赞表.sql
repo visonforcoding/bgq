@@ -1,4 +1,4 @@
-CREATE TABLE `like` (
+CREATE TABLE `user_like` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '点赞表',
 	`user_id` INT(11) NOT NULL COMMENT '用户id',
 	`relate_id` INT(11) NOT NULL COMMENT '点赞相关id，例：活动文章id或者是活动评论id',
