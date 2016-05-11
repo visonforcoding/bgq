@@ -10,6 +10,7 @@ use App\Controller\Mobile\AppController;
  * @property \App\Model\Table\IndustryTable $Industry
  */
 class IndustryController extends AppController {
+    
 
     /**
      * 
