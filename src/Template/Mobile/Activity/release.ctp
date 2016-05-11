@@ -36,6 +36,14 @@
 	})
 	$('input[name="pay"]').click(function(){
 		$(this).siblings('i').toggleClass('active');
+		if($(this).siblings('i').attr('class') == 'active')
+		{
+			$(this).attr('checked', true);
+		}
+		else
+		{
+			$(this).attr('checked', false);
+		}
 	})
 	
 	$('#submit').on('click', function () {
