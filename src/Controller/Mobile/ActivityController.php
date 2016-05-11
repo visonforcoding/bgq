@@ -87,7 +87,7 @@ class ActivityController extends AppController{
 	/**
 	 * 活动列表
 	 */
-	public function activity(){
+	public function index(){
 // 		if($this->request->is('post'))
 // 		{
 			$this->paginate = [
@@ -193,4 +193,8 @@ class ActivityController extends AppController{
 		}
 	}
 	
+// 	public function like($id){
+// 		$a = $this->request->data();
+// 		$this->
+// 	}
 }
