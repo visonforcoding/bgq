@@ -28,7 +28,6 @@ class NewsController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null) {
-        $id=$_GET['id']?intval($_GET['id']):'';
         $this->viewBuilder()->autoLayout(false);
         $news = $this->News->get($id, [
             'contain' => ['Admins']
@@ -47,18 +46,15 @@ class NewsController extends AppController {
         if ($this->request->is('post')) {
             $news = $this->News->patchEntity($news, $this->request->data);
             $news->admin_id = $this->_user->id;
+            $news->admin_name = $this->_user->truename;
             if ($this->News->save($news)) {
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {
                 $errors = $news->errors();
-                $this->Util->ajaxReturn(['status'=>false, 'msg'=>getMessage($errors),'errors'=>$errors]);
+                $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
             }
         }
-        $industries = $this->News->Industries->find('threaded',[
-                        'keyField' => 'id',
-                        'parentField' => 'pid'
-                    ])->all()->toArray();
-        $this->set(compact('news','industries'));
+        $this->set(compact('news'));
     }
 
     /**
@@ -70,7 +66,7 @@ class NewsController extends AppController {
      */
     public function edit($id = null) {
         $news = $this->News->get($id, [
-            'contain' => []
+            'contain' => ['Industries']
         ]);
         if ($this->request->is(['post', 'put'])) {
             $news = $this->News->patchEntity($news, $this->request->data);
@@ -81,7 +77,11 @@ class NewsController extends AppController {
                 $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
-        $this->set(compact('news'));
+        $selIndustryIds = [];
+        foreach($news->industries as $industry){
+            $selIndustryIds[] = $industry->id;
+        }
+        $this->set(compact('news','selIndustryIds'));
     }
 
     /**
@@ -114,14 +114,14 @@ class NewsController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'news.'.$this->request->data('sidx');
+        $sort = 'news.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where['or'] = [[' admin_name like' => "%$keywords%"],['(`title`) like' => "%$keywords%"],['(`summary`) like' => "%$keywords%"]];
+            $where['or'] = [[' admin_name like' => "%$keywords%"], ['(`title`) like' => "%$keywords%"], ['(`summary`) like' => "%$keywords%"]];
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));

@@ -18,7 +18,7 @@ class NewsController extends AppController {
      */
     public function index() {
         $this->paginate = [
-            'contain' => ['Admins']
+            'contain' => ['Admins','Industries']
         ];
         $news = $this->paginate($this->News);
         //获取资讯banner图
