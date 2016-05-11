@@ -70,6 +70,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      * routes you want in your application.
      */
     //wpadmin 的路由重置
+    $routes->connect('/',['prefix'=>'mobile','controller'=>'news','action'=>'index']);
     $routes->connect('/admin/login',['plugin'=>'wpadmin','controller'=>'admin','action'=>'login']);
     
     $routes->connect('/admin/menu/index',['plugin'=>'wpadmin','controller'=>'menu','action'=>'index']);
