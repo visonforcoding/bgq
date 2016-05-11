@@ -20,6 +20,22 @@ class ActivityController extends AppController{
 			$activity->read_nums += 1;// 阅读加1
 			$this->Activity->save($activity);
 			$this->set('activity',$activity);
+			
+			$activityApply = $this
+							->Activity
+							->Activityapply
+							->find()
+							->where(['user_id' => $this->user->id])
+// 							->select(['activity_id'])
+							->hydrate(false)
+							->toArray();
+			
+			foreach ($activityApply as $k=>$v)
+			{
+				$isApply[] = $v['activity_id'];
+			}
+			$this->set('isApply', $isApply);
+			
 			$this->set('pagetitle', '活动详情');
 		}
 		else

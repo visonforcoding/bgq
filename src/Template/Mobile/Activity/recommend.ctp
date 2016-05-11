@@ -12,10 +12,11 @@
 			<div class="items">
 				
 			<div class="orgmark">
-				<a href="#guest" class="agency-item">嘉宾推荐</a><a href="#place" class="agency-item">场地赞助</a><a href="#cash" class="agency-item">现金赞助</a><a href="#goods" class="agency-item">物品赞助</a><a href="#others" class="agency-item">其它</a>
+				<a href="#guest" class="agency-item" type="1">嘉宾推荐</a><a href="#place" class="agency-item" type="2">场地赞助</a><a href="#cash" class="agency-item" type="3">现金赞助</a><a href="#goods" class="agency-item" type="4">物品赞助</a><a href="#others" class="agency-item" type="5">其它</a>
 			</div>
 			</div>
 			<div class="h20"></div>
+			<input type="text" name="recommend_type" hidden />
 			<div class="a-form-box" id="guest">
 				<ul>
 					<li>
@@ -107,6 +108,10 @@
            
            $(attr).siblings('.a-form-box').find('input').val(null);
            $(attr).siblings('.a-form-box').find('textarea').val(null);
+
+           var val = $(this).attr('type');
+           console.log(val);
+           $('input[name="recommend_type"]').val(val);
        }) ;
     });
 
