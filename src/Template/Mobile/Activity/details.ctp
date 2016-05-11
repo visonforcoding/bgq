@@ -86,27 +86,19 @@
 					<span class="readnums">阅读<i><?= $activity->read_nums; ?></i></span>
 					
 					<span >
-						<i class="iconfont like">&#xe616;</i><?= $activity->praise_nums; ?>
+						<i class="iconfont like">&#xe616;</i>
 					</span>
-					<span><i class='iconfont like h-regiser'>&#xe610;</i><?php ?></span>
+					<span><i class='iconfont like h-regiser'>&#xe610;</i></span>
 				</div>
 			</section>
 			<section class="newscomment-box joinnumber">
 				<h3 class="comment-title">
 					已报名
-					
 				</h3>
 				<div class="items nobottom">
 					<div class="comm-info clearfix">
+					<?php foreach ()?>
 						<a href='#this'><img src="../images/user.png"/></a>
-						<a href='#this'><img src="../images/user.png"/></a>
-						<a href='#this'><img src="../images/user.png"/></a>
-						<a href='#this'><img src="../images/user.png"/></a>
-						<a href='#this'><img src="../images/user.png"/></a>
-						<a href='#this'><img src="../images/user.png"/></a>
-						<a href='#this'><img src="../images/user.png"/></a>
-						<a href='#this'><img src="../images/user.png"/></a>
-						
 					</div>
 					<!-- <span>显示全部</span> -->
 				</div>
@@ -176,7 +168,15 @@
 			<footer class="footer">
 			<div class="a-btn">
 				<a href="/activity/recommend/<?= $activity->id; ?>">我要推荐</a>
+				<?php if ($isApply): ?>
+				<?php if(in_array($activity->id, $isApply)): ?>
+				<a>已报名</a>
+				<?php else: ?>
 				<a href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+				<?php endif; ?>
+				<?php else: ?>
+				<a href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+				<?php endif; ?>
 			</div>
 			</footer>
 		</div>

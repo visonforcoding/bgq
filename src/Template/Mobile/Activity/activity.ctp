@@ -11,6 +11,7 @@
 		<div class="wraper newswraper a-wraper">
 			<div class="a-banner">
 		        <ul class="pic-list-container" id="imgList">
+		        <!-- <li><a href="<?= $banner->url; ?>"><img src="<?= $banner->img; ?>"/></a></li> -->
 		            <li><a href="#this"><img src="/mobile/images/a-banner.png"/></a></li>
 		            <li><a href="#this"><img back_src="/mobile/images/banner.jpg"/></a></li>
 		            <li><a href="#this"><img back_src="/mobile/images/a-banner.png"/></a></li>
