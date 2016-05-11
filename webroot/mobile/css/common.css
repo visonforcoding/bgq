@@ -24,6 +24,7 @@ i{font-style: normal;}
 .h20{background:#f0eff5;border-top:1px solid #c8c7cc;border-bottom:1px solid #c8c7cc;height:0.2rem;}
 .m-wraper{padding-top:4.2rem;overflow:hidden;position:relative;}
 .wraper .nobottom{border-bottom:none;}
+.wraper .no-margin-top{margin-top:0;}
 .newswraper{padding-bottom:1rem;}
 .innercon{margin:0 auto;padding:0 0.3rem;background: #fff;}
 .h20{height:0.2rem;border-top:1px #c8c7cc solid;border-bottom:1px #c8c7cc solid;}
