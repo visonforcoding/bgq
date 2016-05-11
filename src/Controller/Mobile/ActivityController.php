@@ -22,22 +22,29 @@ class ActivityController extends AppController{
 			$this->set('activity',$activity);
 			
 			// 是否已报名
-			$activityApply = $this
-							->Activity
-							->Activityapply
-							->find()
-							->contain(['Users'])
-							->where(['user_id' => $this->user->id])
-							->hydrate(false)
-							->toArray();
-			if($activityApply != '')
+			if($this->user)
 			{
+				$activityApply = $this
+				->Activity
+				->Activityapply
+				->find()
+				->contain(['Users'])
+				->where(['user_id' => $this->user->id])
+				->hydrate(false)
+				->toArray();
+				$isApply = [];
 				foreach ($activityApply as $k=>$v)
 				{
 					$isApply[] = $v['activity_id'];
 				}
-				$this->set(compact('isApply'));
+				$this->set('isApply', $isApply);
 			}
+			else
+			{
+				$isApply = [];
+				$this->set('isApply', $isApply);
+			}
+			
 			
 			// 已报名的人
 			$allApply = $this
@@ -70,10 +77,7 @@ class ActivityController extends AppController{
 					->hydrate(false)
 					->toArray();
 // 			debug($comment);die;
-			if($comment)
-			{
-				$this->set(compact('comment'));
-			}
+			$this->set('comment', $comment);
 			
 			
 			$this->set('pagetitle', '活动详情');
@@ -98,8 +102,10 @@ class ActivityController extends AppController{
 			$activity = $this->paginate($this->Activity);
 			$this->set(compact('activity'));
 			$this->set('_serialize', ['activity']);
-			// 用户已报名的活动
-			$activityApply = $this
+			if($this->user)
+			{
+				// 用户已报名的活动
+				$activityApply = $this
 				->Activity
 				->Activityapply
 				->find()
@@ -107,12 +113,15 @@ class ActivityController extends AppController{
 				->select(['activity_id'])
 				->hydrate(false)
 				->toArray();
-			if($activityApply)
-			{
 				foreach ($activityApply as $k=>$v)
 				{
 					$isApply[] = $v['activity_id'];
 				}
+				$this->set('isApply', $isApply);
+			}
+			else
+			{
+				$isApply = [];
 				$this->set('isApply', $isApply);
 			}
 			$this->set('pagetitle', '活动');
