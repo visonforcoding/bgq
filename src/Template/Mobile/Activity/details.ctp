@@ -10,7 +10,7 @@
 			</div>
 		</header>
 		
-		<div class="wraper">
+		<div class="wraper" style="margin-bottom:2rem;">
 			<section class="newscon-box a-detail">
 				<h3><?= $activity->title; ?></h3>
 				<img src="<?= $activity->cover; ?>"/>
@@ -97,8 +97,13 @@
 				</h3>
 				<div class="items nobottom">
 					<div class="comm-info clearfix">
-					<?php foreach ()?>
-						<a href='#this'><img src="../images/user.png"/></a>
+					<?php if($userApply): ?>
+					<?php foreach ($userApply as $k=>$v): ?>
+						<a href='javascript:void(0);'><img src="<?= $v['avatar']; ?>"/></a>
+					<?php endforeach; ?>
+					<?php else : ?>
+						暂时无人报名
+					<?php endif; ?>
 					</div>
 					<!-- <span>显示全部</span> -->
 				</div>
@@ -112,65 +117,29 @@
 					<i class="iconfont">&#xe618;</i>
 					<span>我要点评</span>
 				</h3>
+				<?php foreach ($comment as $k=>$v): ?>
 				<div class="items">
 					<div class="comm-info clearfix">
-						<span><img src="../images/user.png"/></span>
+						<span><img src="<?= $v['user']['avatar'] ?>"/></span>
 						<span class="infor-comm">
-							<i class="username">Unclehome</i>
-							<i class="job">数字联盟有限公司 董事长</i>
+							<i class="username"><?= $v['user']['truename'] ?></i>
+							<i class="job"><?= $v['user']['company'] ?> <?= $v['user']['position'] ?></i>
 						</span>
 						<span>
-							<i class="iconfont">&#xe615;</i>398
+							<b class="addnum" id="addnum">+1</b><i class="iconfont" id="likecom">&#xe615;</i><?= $v['praise_nums'] ?>
 						</span>
 					</div>
-					<p>非常值得一读的文章。</p>
+					<p><?= $v['body'] ?></p>
 				</div>
-				<div class="items">
-					<div class="comm-info clearfix">
-						<span><img src="../images/user.png"/></span>
-						<span class="infor-comm">
-							<i class="username">Unclehome</i>
-							<i class="job">数字联盟有限公司 董事长</i>
-						</span>
-						<span>
-							<i class="iconfont">&#xe615;</i>398
-						</span>
-					</div>
-					<p>非常值得一读的文章。</p>
-				</div>
-				<div class="items">
-					<div class="comm-info clearfix">
-						<span><img src="../images/user.png"/></span>
-						<span class="infor-comm">
-							<i class="username">Unclehome</i>
-							<i class="job">数字联盟有限公司 董事长</i>
-						</span>
-						<span>
-							<i class="iconfont">&#xe615;</i>398
-						</span>
-					</div>
-					<p>非常值得一读的文章。</p>
-				</div>
-				<div class="items">
-					<div class="comm-info clearfix">
-						<span><img src="../images/user.png"/></span>
-						<span class="infor-comm">
-							<i class="username">Unclehome</i>
-							<i class="job">数字联盟有限公司 董事长</i>
-						</span>
-						<span>
-							<i class="iconfont">&#xe615;</i>398
-						</span>
-					</div>
-					<p>非常值得一读的文章。</p>
-				</div>
+				<?php endforeach; ?>
+				
 			</section>
 			<footer class="footer">
 			<div class="a-btn">
 				<a href="/activity/recommend/<?= $activity->id; ?>">我要推荐</a>
 				<?php if ($isApply): ?>
 				<?php if(in_array($activity->id, $isApply)): ?>
-				<a>已报名</a>
+				<a>已报名(<?= $activity->apply_fee; ?>元)</a>
 				<?php else: ?>
 				<a href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
 				<?php endif; ?>
@@ -208,5 +177,14 @@ $('#toback').click(function(){
 $(document).ready(function(){
 	
 });
+$('#likecom').click(function(){
+	$(this).siblings('b').addClass('show');
+})
+$('.addnum')[0].addEventListener("webkitAnimationEnd", function(){
+    $('.show').removeClass('show');
+});
+$('.like').click(function(){
+	$(this).toggleClass('changecolor');
+})
 </script>
 <?php $this->end('script');

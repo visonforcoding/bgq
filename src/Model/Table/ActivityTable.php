@@ -47,6 +47,12 @@ class ActivityTable extends Table {
 //         		'className' => 'Recommend',
 //         ]);
         
+        $this->HasMany('Activitycom', [
+        		'foreignKey' => 'activity_id',
+        		'joinType' => 'INNER',
+        		'className' => 'Activitycom',
+        		]);
+        
         $this->HasMany('Activityapply', [
         		'foreignKey' => 'activity_id',
         		'joinType' => 'INNER',
