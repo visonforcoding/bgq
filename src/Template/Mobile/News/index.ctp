@@ -42,18 +42,22 @@
                 </div>
             </div>
             <div class="sec-b-r">
-                <a href="#this">投资</a>
-                <a href="#this">资金</a>
-                <a href="#this">管理</a>
+                {#industries_html#}
             </div>
         </div>
     </section>	
+</script>
+<script type="text/html" id="subTpl">
+<a href="#this">{#name#}</a>
 </script>
 <?= $this->element('footer'); ?>
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
-    $.util.dataToTpl('news', 'listTpl',<?= $newsjson ?>);
+    $.util.dataToTpl('news', 'listTpl',<?= $newsjson ?>, function(d){
+        d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
+        return d;
+    });
     var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
 </script>
 <?php $this->end('script'); ?>

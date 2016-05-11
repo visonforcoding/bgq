@@ -7,7 +7,7 @@
             <a href="/news/index"><span class="iconfont">&#xe609;</span>资讯</a>
         </li>
         <li>
-            <a href="#this"><span class="iconfont">&#xe60b;</span>大咖</a>
+            <a href="/meet/index"><span class="iconfont">&#xe60b;</span>大咖</a>
         </li>
         <li>
             <a href="/home/index"><span class="iconfont">&#xe60d;</span>我</a>

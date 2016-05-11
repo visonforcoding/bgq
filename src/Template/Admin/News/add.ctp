@@ -26,17 +26,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">行业标签</label>
         <div class="col-md-8">
-            <select name="industries[_ids][]" id="select-industry" class=" form-control" multiple="multiple">
-                <?php foreach($industries as $industry):?>
-                  <optgroup label="<?=$industry->name?>">
-                    <?php if(!empty($industry->children) ): ?>
-                      <?php foreach ($industry->children as $item):?>
-                        <option value="<?=$item->id?>"><?=$item->name?></option>
-                      <?php endforeach;?>
-                    <?php endif;?>
-                  </optgroup>
-                <?php endforeach;?>
-            </select>
+            <?=$this->cell('industry')?>
         </div>
     </div>
     <div class="form-group">
@@ -75,7 +65,7 @@
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-industry').select2({
             language: "zh-CN",
-            placeholder: '选择一个渠道'
+            placeholder: '选择一个标签'
         });
         $('form').submit(function () {
             var form = $(this);
