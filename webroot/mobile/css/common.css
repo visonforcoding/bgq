@@ -32,6 +32,8 @@ i{font-style: normal;}
 .wraper .f-color-gray{color:#bbc0c6;}
 .wraper .changecolor{color:#da2051;}
 .wraper .ft26{font-size:0.26rem;}
+.wraper .colorbg{background: #7a7e83;}
+.wraper a.colorbg{background: #7a7e83;}
 .wraper .bbottom{border-bottom:1px solid #c8c7cc;}
 /*placeholder reset--*/
 input::-webkit-input-placeholder { /* WebKit browsers */ color: #222c38; } 
