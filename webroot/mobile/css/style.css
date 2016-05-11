@@ -29,11 +29,11 @@
 .myselfmark input{ width: 1.2rem; height: 0.4rem;border: none;line-height: 0.4rem; text-align: center;}
 
 /*注册--上传名片--start*/
-.uploadbox{padding:0.62rem 0.98rem 0.3rem 0.95rem;border-bottom:1px #c8c7cc solid;}
+.uploadbox{padding:0.62rem 0.8rem 0.3rem 0.8rem;border-bottom:1px #c8c7cc solid;}
 .uploadbox .imgcard{display:block;background:#9ba4ad;padding:1.07rem 2.09rem 1.08rem 2.3rem;}
 .uploadbox .imgcard img{ width:1.18rem;height:0.96rem;display: block;}
 .uploadbox .uploadbtn{display: block; color:#fff;font-size:0.3rem;text-align:center;width:100%;height:0.78rem;line-height:0.78rem;background: #3e82f7;border-radius: 0.2rem;margin:0.45rem 0 0.2rem;box-shadow: 0 0 0.3rem rgba(0,0,0,0.5);}
-.uploadbox  p{width:100%;text-align:center;font-size:0.24rem;color:#7a7e83;line-height: 0.46rem;}
+.uploadbox  p{width:100%;text-align:center;font-size:0.28rem;color:#222c38;line-height: 0.46rem;}
 .infobox{padding:0.08rem 0.3rem 0; background: #FFFFFF;}
 .infobox li,.infoboxlist li{position:relative;height:0.8rem;line-height: 0.8rem;border-bottom:1px #c8c7cc solid;font-size:0.28rem;color:#222c38;}
 .infobox li span.infocard,.infoboxlist li span.infocard{position:absolute;right:0.1rem;}
@@ -163,7 +163,7 @@ border-left:none;border-bottom:none;top:-1px;}
 .crowdfunding{padding-bottom:0.27rem;border-top:1px #c8c7cc solid;}
 .crowdfunding input,.crowdfunding textarea{display:block;}
 .crowdfunding input,.crowdfunding textarea{border:1px #c8c7cc solid;border-radius: 3px;width:100%;height:0.5rem; padding:0.1rem;}
-.crowdfunding textarea{resize: none;height:2.6rem;}
+.crowdfunding textarea,.e-info-box .changeflex textarea{resize: none;height:2.6rem;width:100%;border-radius: 0.1rem;}
 .tochoose{line-height: 0.8rem;border-bottom:1px #c8c7cc solid;}
 .tochoose span{background: url(img/right.png) no-repeat center center;background-size:cover;width:0.16rem;height:0.25rem;margin-top:0.27rem;}
 .a-detail p{text-indent: 0;font-size:0.24rem;line-height: 0.36rem;padding-left:0;}
@@ -440,3 +440,8 @@ display: flex; flex-direction: column;justify-content: center; align-items: cent
 .paytype .ulinfo li{text-indent: 0; }
 .infoboxlist{margin-bottom:0.2rem;}
 .infoboxlist li{padding:0 0.3rem;}
+.e-info-box .changeflex{flex-direction: column;justify-content: flex-start;align-items: flex-start;}
+.e-info-box .changeflex b{margin-bottom:0.2rem;}
+.e-info-box .changeflex div{width:100%;}
+.e-info-box .changeflex p{line-height: 0.36rem;color:#9ba4ad;font-size:0.24rem;}
+.no-pass b,.no-pass p{line-height: 0.36rem;}
