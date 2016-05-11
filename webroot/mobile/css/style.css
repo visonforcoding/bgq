@@ -46,7 +46,8 @@
 .m-fixed-top{top:0.81rem;height:3.2rem;background: #fff;overflow:hidden;}
 .shadow-info .picinfo{background: rgba(255,255,255,0.8);width:90%;margin:0.2rem auto;border-radius: 0.3rem;}
 .picinfo span{display: block;color:#007aff;font-size:0.38rem;height:1.14rem;line-height: 1.14rem;text-align: center;}
-.reg-sucess a{display: block;width:1.69rem;height:1.69rem;background: url(img/sucess.png) no-repeat;background-size: cover; margin:0.3rem auto;}
+.reg-sucess a,.notexpert a{display: block;width:1.69rem;height:1.69rem;background: url(img/sucess.png) no-repeat;background-size: cover; margin:0.3rem auto;}
+.notexpert a{background: url(../images/cry.png) no-repeat;background-size: cover;}
 .reg-sucess p{line-height: 1.38rem;font-size:0.3rem;color:#222c38;}
 /*news --start--*/
 .inner .news-serch{ width:0.32rem;height:0.32rem;font-size:0.32rem;top:0.29rem;}
