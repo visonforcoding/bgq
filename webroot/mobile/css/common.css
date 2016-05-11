@@ -29,6 +29,8 @@ i{font-style: normal;}
 .innercon{margin:0 auto;padding:0 0.3rem;background: #fff;}
 .h20{height:0.2rem;border-top:1px #c8c7cc solid;border-bottom:1px #c8c7cc solid;}
 .wraper .color-items{color:#e01a48;}
+.wraper .f-color-gray{color:#bbc0c6;}
+.wraper .changecolor{color:#da2051;}
 .wraper .bbottom{border-bottom:1px solid #c8c7cc;}
 /*placeholder reset--*/
 input::-webkit-input-placeholder { /* WebKit browsers */ color: #222c38; } 
