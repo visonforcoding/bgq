@@ -40,12 +40,12 @@
 				<p>乐视体育CEO 雷振剑</p>
 				<p>复星集团执行总经理 龚 林</p>
 				<div class="con-bottom clearfix">
-					<span class="readnums">阅读<i><?= $activity->read_nums; ?></i></span>
+					<span class="readnums"><i class="iconfont like">&#xe601;</i><?= $activity->read_nums; ?></span>
 					
 					<span >
 						<i class="iconfont like<?php if ($isLike):?> changecolor<?php endif; ?>" artid="<?= $activity->id; ?>" type="0">&#xe616;</i>
 					</span>
-					<span><i class='iconfont collect h-regiser' artid="<?= $activity->id; ?>" type="0" >&#xe610;</i></span>
+					<span><i class='iconfont collect h-regiser<?php if ($isCollect):?> changecolor<?php endif; ?>' artid="<?= $activity->id; ?>" type="0" >&#xe610;</i></span>
 				</div>
 			</section>
 			<section class="newscomment-box joinnumber">
@@ -175,7 +175,7 @@
         });
 	})
 	
-	// 收藏按钮todo:
+	// 收藏按钮
 	$('.collect').click(function(){
 		$.ajax({
             type: 'post',

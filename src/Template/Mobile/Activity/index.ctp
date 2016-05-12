@@ -4,7 +4,7 @@
 			<div class='inner'>
 				<a href='/activity/release' class='subactivity' >发布活动</a>
 				<h1><?= $pagetitle ?></h1>
-				<a href="#this" class='iconfont news-serch h-regiser'>&#xe613;</a>
+				<a href="/activity/search" class='iconfont news-serch h-regiser'>&#xe613;</a>
 			</div>
 		</header>
 		
