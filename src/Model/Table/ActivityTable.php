@@ -51,7 +51,13 @@ class ActivityTable extends Table {
         		'foreignKey' => 'activity_id',
         		'joinType' => 'INNER',
         		'className' => 'Activitycom',
-        		]);
+        ]);
+        
+        $this->belongsTo('Userlike', [
+        		'foreignKey' => 'relate_id',
+        		'joinType' => 'INNER',
+        		'className' => 'Userlike',
+        ]);
         
         $this->HasMany('Activityapply', [
         		'foreignKey' => 'activity_id',

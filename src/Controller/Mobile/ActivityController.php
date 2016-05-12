@@ -205,8 +205,41 @@ class ActivityController extends AppController{
 		}
 	}
 	
-// 	public function like($id){
-// 		$a = $this->request->data();
-// 		$this->
-// 	}
+	public function comLike($id){
+		if($this->request->is('post'))
+		{
+			if($this->user)
+			{
+				$data = $this->request->data();
+				if($data['status'] == 1)
+				{
+					$data['status'] = 0;
+				}
+				else
+				{
+					$data['status'] = 1;
+				}
+				$data['user_id'] = $this->user->id;
+				$like = $this->Activity->Userlike->newEntity();
+				$like = $this->Activity->Userlike->patchEntity($like, $data);
+				if($this->Activity->Userlike->save($like))
+				{
+					$this->Util->ajaxReturn(true, '点赞成功！');
+				}
+				else
+				{
+					$this->Util->ajaxReturn(false, '点赞失败！');
+				}
+			}
+			else
+			{
+				$this->Util->ajaxReturn(false, '请先登录！');
+			}
+		}
+		else
+		{
+			$this->Util->ajaxReturn(false, '非法操作！');
+		}
+		
+	}
 }

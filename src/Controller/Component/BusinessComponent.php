@@ -19,12 +19,18 @@ class BusinessComponent extends Component
     protected $_defaultConfig = [];
     
     
-    public function like($id, $method, $likeType){
-    	$this->Like->newEntity();
-    	$this->Like->get($id, [
-    			'contain' => [],
-    		]);
-    	
+    public function like($id, $method, $likeType, $entity){
+    	$data = $this->request->data();
+		if($data['status'] == 1)
+		{
+			$data['status'] = 0;
+		}
+		else
+		{
+			$data['status'] = 1;
+		}
+		$data['user_id'] = $this->user->id;
+		$like = $this->Activity->Like->patchEntity($entity, $data);
     }
     
     
