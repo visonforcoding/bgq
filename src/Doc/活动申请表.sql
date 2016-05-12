@@ -4,8 +4,8 @@ CREATE TABLE `activityapply` (
 	`activity_id` INT(11) NOT NULL COMMENT '活动id',
 	`create_time` DATETIME NOT NULL COMMENT '提交时间',
 	`update_time` DATETIME NOT NULL COMMENT '更新时间',
-	`is_pass` TINYINT DEFAULT 0 COMMENT '审核是否通过',
-	`is_top` TINYINT DEFAULT 0 COMMENT '是否置顶',
+	`is_pass` TINYINT(2) DEFAULT 0 COMMENT '审核是否通过',
+	`is_top` TINYINT(2) DEFAULT 0 COMMENT '是否置顶',
 	PRIMARY KEY (`id`)
 )
 COMMENT='活动申请表'
