@@ -1,6 +1,6 @@
 		<header>
 			<div class='inner'>
-				<a href='#this' class='toback' id="toback"></a>
+				<a href='#this' class='toback'></a>
 				<h1><?= $pagetitle; ?></h1>
 				
 			</div>
@@ -91,11 +91,6 @@
 <?php $this->start('script');?>
 <script src="/mobile/js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
 <script>
-		
-	// 返回上一页
-	$('#toback').click(function(){
-		history.back();
-	})
 	
 	// 分类单选
     $(function(){

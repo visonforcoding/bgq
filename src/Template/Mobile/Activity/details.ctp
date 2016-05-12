@@ -1,7 +1,7 @@
 	<body>
 		<header>
 			<div class='inner'>
-				<a href='#this' class='toback' id="toback"></a>
+				<a href='#this' class='toback'></a>
 				<h1><?= $pagetitle ?></h1>
 				<!-- 
 				<a href="#this" class='iconfont collection h-regiser'>&#xe610;</a> // 收藏图标
@@ -28,49 +28,6 @@
 			<section class="a-detail newscomment-box">
 				<h3  class="comment-title">活动流程</h3>
 				<?= $activity->body; ?>
-				<!-- 
-				<p class="datetime">2016年04月27日</p>
-				<div class="timenode">
-					<p>
-						<a>
-							<span>13:00 - 14:00</span>
-							<span>签到</span>
-						</a>
-						<a>
-							<span>13:00 - 14:00</span>
-							<span>活动开场</span>
-						</a>
-						<a>
-							<span>14:00 - 14:05</span>
-							<span>签到</span>
-						</a>
-						<a>
-							<span>14:05 - 14:15</span>
-							<span>天天投介绍</span>
-						</a>
-						<a>
-							<span>14:15 - 14:55</span>
-							<span>圆桌论坛+现场提问</span>
-						</a>
-						<a>
-							<span>14:55 - 16:40</span>
-							<span>12个项目路演</span>
-						</a>
-						<a>
-							<span>14:40 - 18:00</span>
-							<span>投融资面对面一对一交流</span>
-						</a>
-						<a>
-							<span>18:00 - 00:00</span>
-							<span>活动结束</span>
-						</a>
-						<div class="centerline">
-							
-						</div>
-					</p>
-					
-				</div>
-				 -->
 			</section>
 			<section class="a-detail newscomment-box guests">
 				<h3 class="comment-title">参与嘉宾</h3>
@@ -86,9 +43,9 @@
 					<span class="readnums">阅读<i><?= $activity->read_nums; ?></i></span>
 					
 					<span >
-						<i class="iconfont like">&#xe616;</i>
+						<i class="iconfont like<?php if ($isLike):?> changecolor<?php endif; ?>" artid="<?= $activity->id; ?>" type="0">&#xe616;</i>
 					</span>
-					<span><i class='iconfont like h-regiser'>&#xe610;</i></span>
+					<span><i class='iconfont collect h-regiser' artid="<?= $activity->id; ?>" type="0" >&#xe610;</i></span>
 				</div>
 			</section>
 			<section class="newscomment-box joinnumber">
@@ -126,7 +83,7 @@
 							<i class="job"><?= $v['user']['company'] ?> <?= $v['user']['position'] ?></i>
 						</span>
 						<span>
-							<b class="addnum">+1</b><i class="iconfont" id="likecom" value="1" comid="<?= $v['id'] ?>" status="0">&#xe615;</i><?= $v['praise_nums'] ?>
+							<b class="addnum">+1</b><i class="iconfont" id="likecom" type="0" comid="<?= $v['id'] ?>">&#xe615;</i><b><?= $v['praise_nums'] ?></b>
 						</span>
 					</div>
 					<p><?= $v['body'] ?></p>
@@ -171,30 +128,25 @@
 	</body>
 <?php $this->start('script'); ?>
 <script>
-	// 返回上一页
-	$('#toback').click(function(){
-		history.back();
-	})
-	
 	
 	$(document).ready(function(){
 		
 	});
 
-	// 评论点赞头上
-	$('#likecom').click(function(){
-		$(this).siblings('b').addClass('show');
-		//$(this).toggleClass('changecolor');
-		$.ajax({
+	// 评论点赞
+	$('#likecom').on('click', function(){
+        $.ajax({
             type: 'post',
             url: '/activity/comLike/'+$(this).attr('comid'),
-            data: 'type='+$(this).attr('value')+'&relate_id='+$(this).attr('comid')+'&status='+$(this).attr('status'),
+            data: 'type='+$(this).attr('type')+'&relate_id='+$(this).attr('comid'),
             dataType: 'json',
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
-                        var num = $('.addnum').parent.html();
-                        $('.addnum').parent.html(num+1);
+                    	var num = $('.addnum').siblings('b').text();
+                		num = parseInt(num) + 1;
+                        $('.addnum').siblings('b').text(num);
+                        $('#likecom').siblings('.addnum').addClass('show');
                     } else {
                         $.util.alert(msg.msg);
                     }
@@ -202,15 +154,49 @@
             }
         });
 	})
+	
+
+	// 喜欢按钮
+	$('.like').click(function(){
+		$.ajax({
+            type: 'post',
+            url: '/activity/artLike/'+$(this).attr('artid'),
+            data: 'type='+$(this).attr('type')+'&relate_id='+$(this).attr('artid'),
+            dataType: 'json',
+            success: function (msg) {
+                if (typeof msg === 'object') {
+                    if (msg.status === true) {
+                        $('.like').toggleClass('changecolor');
+                    } else {
+                        $.util.alert(msg.msg);
+                    }
+                }
+            }
+        });
+	})
+	
+	// 收藏按钮todo:
+	$('.collect').click(function(){
+		$.ajax({
+            type: 'post',
+            url: '/activity/artCollect/'+$(this).attr('artid'),
+            data: 'type='+$(this).attr('type')+'&relate_id='+$(this).attr('artid'),
+            dataType: 'json',
+            success: function (msg) {
+                if (typeof msg === 'object') {
+                    if (msg.status === true) {
+                        $('.collect').toggleClass('changecolor');
+                    } else {
+                        $.util.alert(msg.msg);
+                    }
+                }
+            }
+        });
+	})
+	
+	// 动画结束前只能点击一次
 	$('.addnum')[0].addEventListener("webkitAnimationEnd", function(){
 	    $('.show').removeClass('show');
 	});
-
-	// 喜欢、收藏按钮变色
-	$('.like').click(function(){
-		$(this).toggleClass('changecolor');
-	})
-	
-	// 
 </script>
 <?php $this->end('script');

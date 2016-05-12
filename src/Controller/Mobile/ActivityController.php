@@ -5,6 +5,8 @@
   */
 
 namespace App\Controller\Mobile;
+use PhpParser\Node\Stmt\Switch_;
+
 use App\Controller\Mobile\AppController;
 class ActivityController extends AppController{
 	
@@ -79,6 +81,13 @@ class ActivityController extends AppController{
 // 			debug($comment);die;
 			$this->set('comment', $comment);
 			
+			// 是否已赞
+			$isLike = $this->Activity->Articlelike->find()->where(['user_id'=>$this->user->id, 'relate_id'=>$id])->first();
+			$this->set('isLike', $isLike);
+			
+			// 是否已收藏
+// 			$isCollect = $this->Activity->ArticleCollect->find()->where(['user_id'=>$this->user->id, 'relate_id'=>$id])->first();
+// 			$this->set('isCollect', $isCollect);
 			
 			$this->set('pagetitle', '活动详情');
 		}
@@ -94,6 +103,16 @@ class ActivityController extends AppController{
 	public function index(){
 // 		if($this->request->is('post'))
 // 		{
+			//获取资讯banner图
+			$bannerTable = \Cake\ORM\TableRegistry::get('banner');
+			$banners = $bannerTable
+					->find()
+					->where("`enabled` = '1' and `type` = '2'")
+					->orderDesc('create_time')
+					->limit(3)
+					->toArray();
+			$this->set(compact('banners'));
+			
 			$this->paginate = [
 				'contain' => ['Admins','Industries'],
 				'order' => ['is_top' => 'DESC', 'create_time' => 'DESC'],
@@ -113,6 +132,7 @@ class ActivityController extends AppController{
 				->select(['activity_id'])
 				->hydrate(false)
 				->toArray();
+				$isApply = [];
 				foreach ($activityApply as $k=>$v)
 				{
 					$isApply[] = $v['activity_id'];
@@ -124,6 +144,7 @@ class ActivityController extends AppController{
 				$isApply = [];
 				$this->set('isApply', $isApply);
 			}
+			
 			$this->set('pagetitle', '活动');
 // 		}
 // 		else
@@ -205,41 +226,57 @@ class ActivityController extends AppController{
 		}
 	}
 	
+	/**
+	 * 评论点赞
+	 * @param int $id
+	 */
 	public function comLike($id){
-		if($this->request->is('post'))
+		$this->loadComponent('Business');
+		$code = $this->Business->comLike($id, 'commentlike');
+		if($code == 'success')
 		{
-			if($this->user)
-			{
-				$data = $this->request->data();
-				if($data['status'] == 1)
-				{
-					$data['status'] = 0;
-				}
-				else
-				{
-					$data['status'] = 1;
-				}
-				$data['user_id'] = $this->user->id;
-				$like = $this->Activity->Userlike->newEntity();
-				$like = $this->Activity->Userlike->patchEntity($like, $data);
-				if($this->Activity->Userlike->save($like))
-				{
-					$this->Util->ajaxReturn(true, '点赞成功！');
-				}
-				else
-				{
-					$this->Util->ajaxReturn(false, '点赞失败！');
-				}
-			}
-			else
-			{
-				$this->Util->ajaxReturn(false, '请先登录！');
-			}
+			$this->Util->ajaxReturn(true, '点赞成功！');
 		}
 		else
 		{
-			$this->Util->ajaxReturn(false, '非法操作！');
+			$this->Util->ajaxReturn(false, $this->showError($code));
 		}
-		
+	}
+	
+	/**
+	 * 文章点赞
+	 * @param int $id 文章id
+	 */
+	public function artLike($id){
+		$this->loadComponent('Business');
+		$code = $this->Business->artLike($id, 'articlelike');
+		if($code == 'success')
+		{
+			$this->Util->ajaxReturn(true, '点赞成功！');
+		}
+		else
+		{
+			$this->Util->ajaxReturn(false, $this->showError($code));
+		}
+	}
+	
+	protected function showError($id){
+		switch ($id) {
+			case 1:
+				return '您已经点过赞了！';
+				break;
+			case 2:
+				return '系统错误！';
+				break;
+			case 3:
+				return '请先登录！';
+				break;
+			case 4:
+				return '非法操作';
+				break;
+			case 4:
+				return '您已经收藏过了';
+				break;
+		}
 	}
 }

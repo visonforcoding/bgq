@@ -1,6 +1,6 @@
 		<header>
 			<div class='inner'>
-				<a href='#this' class='toback' id="toback"></a>
+				<a href='#this' class='toback'></a>
 				<h1><?= $pagetitle; ?></h1>
 				
 			</div>
@@ -30,10 +30,6 @@
 		<?= $this->element('footer'); ?>
 <?php $this->start('script') ?>
 <script type="text/javascript">
-	//返回上一页
-	$('#toback').click(function(){
-		history.back();
-	})
 	$('input[name="pay"]').click(function(){
 		$(this).siblings('i').toggleClass('active');
 		if($(this).siblings('i').attr('class') == 'active')

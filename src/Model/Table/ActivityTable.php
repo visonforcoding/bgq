@@ -53,16 +53,22 @@ class ActivityTable extends Table {
         		'className' => 'Activitycom',
         ]);
         
-        $this->belongsTo('Userlike', [
+        $this->belongsTo('Commentlike', [
         		'foreignKey' => 'relate_id',
         		'joinType' => 'INNER',
-        		'className' => 'Userlike',
+        		'className' => 'Commentlike',
         ]);
         
         $this->HasMany('Activityapply', [
         		'foreignKey' => 'activity_id',
         		'joinType' => 'INNER',
         		'className' => 'Activityapply',
+        ]);
+        
+        $this->belongsTo('Articlelike', [
+        		'foreignKey' => 'relate_id',
+        		'joinType' => 'INNER',
+        		'className' => 'Articlelike',
         ]);
         
         $this->addBehavior('Timestamp', [
