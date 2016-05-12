@@ -41,82 +41,13 @@ class MeetController extends AppController {
         ]);
     }
 
+    
     /**
-     * View method
-     *
-     * @param string|null $id Meet id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * 专家类别查看  eg:互联网、大消费
      */
-    public function view($id = null) {
-        $meet = $this->Meet->get($id, [
-            'contain' => []
-        ]);
-
-        $this->set('meet', $meet);
-        $this->set('_serialize', ['meet']);
+    public function meetCat(){
+        
     }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
-     */
-    public function add() {
-        $meet = $this->Meet->newEntity();
-        if ($this->request->is('post')) {
-            $meet = $this->Meet->patchEntity($meet, $this->request->data);
-            if ($this->Meet->save($meet)) {
-                $this->Flash->success(__('The meet has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The meet could not be saved. Please, try again.'));
-            }
-        }
-        $this->set(compact('meet'));
-        $this->set('_serialize', ['meet']);
-    }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Meet id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null) {
-        $meet = $this->Meet->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $meet = $this->Meet->patchEntity($meet, $this->request->data);
-            if ($this->Meet->save($meet)) {
-                $this->Flash->success(__('The meet has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The meet could not be saved. Please, try again.'));
-            }
-        }
-        $this->set(compact('meet'));
-        $this->set('_serialize', ['meet']);
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Meet id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null) {
-        $this->request->allowMethod(['post', 'delete']);
-        $meet = $this->Meet->get($id);
-        if ($this->Meet->delete($meet)) {
-            $this->Flash->success(__('The meet has been deleted.'));
-        } else {
-            $this->Flash->error(__('The meet could not be deleted. Please, try again.'));
-        }
-        return $this->redirect(['action' => 'index']);
-    }
+  
 
 }

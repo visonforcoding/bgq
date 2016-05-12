@@ -83,7 +83,7 @@ class AppController extends Controller {
         $controller = strtolower($this->request->param('controller'));
         $action = strtolower($this->request->param('action'));
         $request_aim = [$controller, $action];
-        if (in_array($request_aim, $this->firewall)) {
+        if (in_array($request_aim, $this->firewall)||  in_array($controller, ['user','wx'])) {
             return true;
         }
         $user = $this->request->session()->check('User.mobile');
