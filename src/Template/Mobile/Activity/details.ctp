@@ -126,7 +126,7 @@
 							<i class="job"><?= $v['user']['company'] ?> <?= $v['user']['position'] ?></i>
 						</span>
 						<span>
-							<b class="addnum">+1</b><i class="iconfont" id="likecom" value="0" comid="<?= $v['id'] ?>">&#xe615;</i><?= $v['praise_nums'] ?>
+							<b class="addnum">+1</b><i class="iconfont" id="likecom" value="1" comid="<?= $v['id'] ?>" status="0">&#xe615;</i><?= $v['praise_nums'] ?>
 						</span>
 					</div>
 					<p><?= $v['body'] ?></p>
@@ -187,13 +187,14 @@
 		//$(this).toggleClass('changecolor');
 		$.ajax({
             type: 'post',
-            url: '/activity/like/'+$(this).attr('comid'),
-            data: 'type='+$(this).attr('value'),
+            url: '/activity/comLike/'+$(this).attr('comid'),
+            data: 'type='+$(this).attr('value')+'&relate_id='+$(this).attr('comid')+'&status='+$(this).attr('status'),
             dataType: 'json',
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
-                        $('.addnum').parent.html(msg);
+                        var num = $('.addnum').parent.html();
+                        $('.addnum').parent.html(num+1);
                     } else {
                         $.util.alert(msg.msg);
                     }
