@@ -260,6 +260,19 @@ class ActivityController extends AppController{
 		}
 	}
 	
+	public function collect($id){
+		$this->loadComponent('Business');
+		$code = $this->Business->collect($id);
+		if($code == 'success')
+		{
+			$this->Util->ajaxReturn(true, '收藏成功！');
+		}
+		else
+		{
+			$this->Util->ajaxReturn(false, $this->showError($code));
+		}
+	}
+	
 	protected function showError($id){
 		switch ($id) {
 			case 1:
@@ -274,7 +287,7 @@ class ActivityController extends AppController{
 			case 4:
 				return '非法操作';
 				break;
-			case 4:
+			case 5:
 				return '您已经收藏过了';
 				break;
 		}

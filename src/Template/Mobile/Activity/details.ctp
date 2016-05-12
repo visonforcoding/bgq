@@ -179,7 +179,7 @@
 	$('.collect').click(function(){
 		$.ajax({
             type: 'post',
-            url: '/activity/artCollect/'+$(this).attr('artid'),
+            url: '/activity/collect/'+$(this).attr('artid'),
             data: 'type='+$(this).attr('type')+'&relate_id='+$(this).attr('artid'),
             dataType: 'json',
             success: function (msg) {

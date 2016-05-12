@@ -143,7 +143,7 @@ class BusinessComponent extends Component
     }
     
     
-    public function collect($id, $table){
+    public function collect($id){
     	// 检查是否post
     	if($this->request->is('post'))
     	{
@@ -152,7 +152,7 @@ class BusinessComponent extends Component
     		{
     			$data = $this->request->data();// 这里传过来的数据为['type'=>'','relate_id'=>'']
     			$data['user_id'] = $this->request->session()->read('User.mobile')->id;
-    			$Table = \Cake\ORM\TableRegistry::get($table);
+    			$Table = \Cake\ORM\TableRegistry::get('collect');
     			$collect = $Table->newEntity();
     			$collect = $Table->patchEntity($collect, $data);
     			if($Table->find()->where($data)->first())// 查找是否已经收藏过了
