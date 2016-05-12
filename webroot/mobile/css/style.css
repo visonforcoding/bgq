@@ -262,7 +262,7 @@ border-left:none;border-bottom:none;top:-1px;}
 .m-sort{background: url(img/sort.png) no-repeat left center;background-size: 0.21rem 0.13rem;padding-left:0.25rem;}
 .m-fixed-top li{line-height: 0.8rem;font-size:0.3rem;border-bottom:1px #c8c7cc solid;text-indent: 0.65rem;}
 .m-fixed-top li.active{background: #eee;}
-.m-fixed-top li a{color:#7a7e83;}
+.m-fixed-top li a{color:#7a7e83;display:block;}
 /*大咖约见--start*/
 .m-to-more{overflow:hidden;position:absolute;height:4rem;background: url(img/tomore.png) center center no-repeat;background-size: cover;}
 .m-tomore-bottom{position:absolute;bottom:0;right:0;height:0.4rem;width:100%;background: rgba(0,0,0,.5);color:#fff;line-height: 0.4rem;text-align: right;}
@@ -424,7 +424,7 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .my-purse-info p{font-size:0.4rem;color:#222c38;margin-top:0.5rem;}
 .pay-detail{width:100%;background: #fff;}
 .pay-detail li:nth-of-type(1){font-size:0.3rem;}
-.pay-detail li{display: flex;align-items: center; justify-content:space-between;border-bottom:1px #c8c7cc solid;height:1.12rem;padding:0 0.3rem;}
+.pay-detail li,.systerm-info-box li{display: flex;align-items: center; justify-content:space-between;border-bottom:1px #c8c7cc solid;padding:0.2rem 0.3rem;}
 .pay-detail div>*{display: block;line-height: 0.4rem;}
 .pay-detail div span{font-size:0.26rem;color:#222c38;}
 .pay-detail div i{color:#9ba4ad;font-size:0.2rem;}
@@ -446,3 +446,15 @@ display: flex; flex-direction: column;justify-content: center; align-items: cent
 .e-info-box .changeflex div{width:100%;}
 .e-info-box .changeflex p{line-height: 0.36rem;color:#9ba4ad;font-size:0.24rem;}
 .no-pass b,.no-pass p{line-height: 0.36rem;}
+.m-message-top a{position:relative;}
+.m-message-top a i{display: block;width:0.25rem;height:0.25rem;background: #fff;position:absolute;border-radius: 50%;line-height: 0.25rem;text-align: center;color:#d52457;right:-0.2rem;top:-0.1rem;font-size:0.12rem;}
+.systerm-info-box li{margin-top:0.2rem;border-top:1px #c8c7cc solid;background: #fff;}
+.systerm-info-box li h3{font-size:0.28rem;color:#da1f50;margin-bottom:0.12rem;}
+.systerm-info-box li span:last-of-type{display: block;color:#969fa9;margin-top:0.18rem;}
+.systerm-info-box li a{display: block;background: url(img/right.png) no-repeat right center;background-size: 0.16rem 0.28rem;font-size:0.3rem;padding-right:0.3rem;}
+.installbox{margin-bottom:0;border-bottom:none;}
+.bottom-logo h3{width:1.78rem;height:0.61rem;}
+.bottom-logo h3 img{width:100%;height:auto;display: block;}
+.bottom-logo{display: flex;flex-direction: column;justify-content:center; align-items: center;height:3.44rem;width:100%;margin-top:2.48rem;}
+.bottom-logo p:nth-of-type(1){font-size:0.28rem;margin:0.2rem 0 0.34rem;color:#222c38;}
+.bottom-logo p a{color:#222c38;}
