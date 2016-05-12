@@ -1,7 +1,7 @@
 	<body>
 		<header>
 			<div class='inner'>
-				<a href='#this' class='toback' id="toback"></a>
+				<a href='#this' class='toback'></a>
 				<h1><?= $pagetitle ?></h1>
 				
 			</div>
@@ -31,10 +31,6 @@
 	</body>
 <?php $this->start('script');?>
 <script>
-	// 返回上一页
-	$('#toback').click(function(){
-		history.back();
-	})
 	$(document).ready(function(){
 		
 	});

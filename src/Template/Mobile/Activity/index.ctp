@@ -2,7 +2,7 @@
 	<body>
 		<header>
 			<div class='inner'>
-				<a href='/activity/release' class='toback subactivity' >发布活动</a>
+				<a href='/activity/release' class='subactivity' >发布活动</a>
 				<h1><?= $pagetitle ?></h1>
 				<a href="#this" class='iconfont news-serch h-regiser'>&#xe613;</a>
 			</div>
@@ -11,15 +11,14 @@
 		<div class="wraper newswraper a-wraper">
 			<div class="a-banner">
 		        <ul class="pic-list-container" id="imgList">
-		        <!-- <li><a href="<?= $banner->url; ?>"><img src="<?= $banner->img; ?>"/></a></li> -->
-		            <li><a href="#this"><img src="/mobile/images/a-banner.png"/></a></li>
-		            <li><a href="#this"><img back_src="/mobile/images/banner.jpg"/></a></li>
-		            <li><a href="#this"><img back_src="/mobile/images/a-banner.png"/></a></li>
+		        <?php foreach ($banners as $v): ?>
+		        	<li><a href="<?= $v->url; ?>"><img src="<?= $v->img; ?>"/></a></li>
+	        	<?php endforeach; ?>
 		        </ul>
 		        <div class="yd" id="imgTab">
+		        <?php foreach ($banners as $v): ?>
 		            <span class="cur"></span>
-		            <span></span>
-		            <span></span>
+	            <?php endforeach; ?>
 		        </div>
 		    </div>
 			<?php foreach ($activity as $activity): ?>
