@@ -1,0 +1,1 @@
+ALTER TABLE activity add guest varchar(255) COMMENT '参与嘉宾'

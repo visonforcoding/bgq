@@ -86,8 +86,8 @@ class ActivityController extends AppController{
 			$this->set('isLike', $isLike);
 			
 			// 是否已收藏
-// 			$isCollect = $this->Activity->ArticleCollect->find()->where(['user_id'=>$this->user->id, 'relate_id'=>$id])->first();
-// 			$this->set('isCollect', $isCollect);
+			$isCollect = $this->Activity->Collect->find()->where(['user_id'=>$this->user->id, 'relate_id'=>$id])->first();
+			$this->set('isCollect', $isCollect);
 			
 			$this->set('pagetitle', '活动详情');
 		}
@@ -260,6 +260,10 @@ class ActivityController extends AppController{
 		}
 	}
 	
+	/**
+	 * 收藏动作
+	 * @param int $id 文章id
+	 */
 	public function collect($id){
 		$this->loadComponent('Business');
 		$code = $this->Business->collect($id);
@@ -273,13 +277,22 @@ class ActivityController extends AppController{
 		}
 	}
 	
+	public function search(){
+		
+	}
+	
+	/**
+	 * 显示错误信息
+	 * @param int $id 错误码
+	 * @return string 错误信息
+	 */
 	protected function showError($id){
 		switch ($id) {
 			case 1:
-				return '您已经点过赞了！';
+				return '已经点过赞了';
 				break;
 			case 2:
-				return '系统错误！';
+				return '系统错误';
 				break;
 			case 3:
 				return '请先登录！';
@@ -288,7 +301,7 @@ class ActivityController extends AppController{
 				return '非法操作';
 				break;
 			case 5:
-				return '您已经收藏过了';
+				return '已经收藏过了';
 				break;
 		}
 	}

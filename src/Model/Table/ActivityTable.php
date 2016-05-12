@@ -41,11 +41,11 @@ class ActivityTable extends Table {
             'className' => 'Industry',
         ]);
 
-//         $this->belongsTo('Recommend', [
-//         		'foreignKey' => 'activity_id',
-//         		'joinType' => 'INNER',
-//         		'className' => 'Recommend',
-//         ]);
+        $this->belongsTo('Collect', [
+        		'foreignKey' => 'relate_id',
+        		'joinType' => 'INNER',
+        		'className' => 'Collect',
+        ]);
         
         $this->HasMany('Activitycom', [
         		'foreignKey' => 'activity_id',
