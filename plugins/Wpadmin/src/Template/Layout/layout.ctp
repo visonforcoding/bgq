@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title><?=templateDefault(getPluginConfig('project.name').'后台管理系统','wpadmin后台管理系统')?></title>
+        <title><?= templateDefault(getPluginConfig('project.name') . '后台管理系统', 'wpadmin后台管理系统') ?></title>
         <!-- zui -->
         <link href="/wpadmin/lib/zui/css/zui.min.css" rel="stylesheet">
         <link href="/wpadmin/lib/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
@@ -23,21 +23,17 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">
-                        <?=  templateDefault(getPluginConfig('project.name'),'wpadmin')?>后台管理系统
+                        <?= templateDefault(getPluginConfig('project.name'), 'wpadmin') ?>后台管理系统
                     </a>
                 </div>
                 <div class="collapse navbar-collapse navbar-collapse-example">
                     <ul class="nav navbar-nav navbar-avatar navbar-right">
                         <li>
-                            <a href="/shop/user/message" class="header-tooltip" style="margin-top:8px;" data-toggle="tooltip"
-                               data-placement="bottom" data-container="body" title="" data-original-title= "2条未读信息">
-                                <i  style="font-size: 25px;" class="icon-comment-alt icon-xlarge text-default"></i>
-                                <b style="display: block;" class="badge badge-notes bg-danger count-n">2</b>
-                            </a>
+                            <?= $this->cell('Wpadmin.inbox') ?>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <?=$this->request->session()->read('User.admin.username');?>
+                                <?= $this->request->session()->read('User.admin.username'); ?>
                                 <span class="thumb-small avatar inline">
                                     <img src="/wpadmin/img/avatar/avatar.jpg" alt="Mika Sokeil" class="img-circle">
                                 </span>
@@ -54,22 +50,22 @@
             </nav>
         </header>
         <div id="left-bar" style="width: 200px">
-           <?=$this->cell('Wpadmin.menu')?>
+            <?= $this->cell('Wpadmin.menu') ?>
         </div>
         <div id="main-content">
             <div id="breadcrumb">
-                <?=$this->cell('Wpadmin.menu::bread')?>
+                <?= $this->cell('Wpadmin.menu::bread') ?>
             </div>
             <div id="page-content">
                 <div class="page-header" >
-                    <?=$this->cell('Wpadmin.menu::title')?>
+                    <?= $this->cell('Wpadmin.menu::title') ?>
                 </div>
                 <div class="page-main" style="margin-top: 10px;">
-                    <?php if(isset($NO_PERMISSION)): ?>
-                    <?= $this->Flash->render('acl') ?>
-                    <?php else:?>
-                    <?= $this->fetch('content') ?>
-                    <?php endif;?>
+                    <?php if (isset($NO_PERMISSION)): ?>
+                        <?= $this->Flash->render('acl') ?>
+                    <?php else: ?>
+                        <?= $this->fetch('content') ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -87,13 +83,13 @@
                 $('#left-bar').add('#main-content').height($(window).height() - $('header').height());
                 $('.header-tooltip').tooltip();
                 $('#left-menu ul.nav-primary ul.nav li.active').parents('li').addClass('active show');
-                $('#switch-left-bar').on('click',function(){
+                $('#switch-left-bar').on('click', function () {
                     $('#left-bar').toggleClass('hide');
                     var width = 200;
-                    if($('#left-bar').hasClass('hide')){
+                    if ($('#left-bar').hasClass('hide')) {
                         width = 0;
                     }
-                    console.log($(window).width()-width);
+                    console.log($(window).width() - width);
 //                    $('#main-content').width($(window).width() - width);
                 });
             });

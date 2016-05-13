@@ -73,7 +73,7 @@
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
-                        window.location.href = '/index/index';
+                        window.location.href = '/';
                     } else {
                         alert(msg.msg);
                     }

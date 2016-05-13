@@ -104,7 +104,7 @@ return $field === 'lft' || $field === 'rght';
                 total: "total",
                 records: "records",
                 repeatitems: false,
-                id: "0"
+                id: "id"
             },
         }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
     });

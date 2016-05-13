@@ -11,8 +11,9 @@ use Cake\Validation\Validator;
 /**
  * User Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Industries
+ * @property \Cake\ORM\Association\BelongsToMany $Industries
  * @property \Cake\ORM\Association\BelongsTo $Agencies
+ * @property \Cake\ORM\Association\HasOne $Savant
  */
 class UserTable extends Table {
 
@@ -28,6 +29,11 @@ class UserTable extends Table {
         $this->table('user');
         $this->displayField('truename');
         $this->primaryKey('id');
+        
+        $this->hasOne('Savant',[
+            'className' => 'Savant',
+            'dependent' => true,  //删了用户同时会删掉专家信息记录
+        ]);
 
         $this->belongsToMany('Industries', [
             'className' => 'Industry',

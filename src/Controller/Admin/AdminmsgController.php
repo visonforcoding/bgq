@@ -165,4 +165,22 @@ class AdminmsgController extends AppController {
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
 
+    /**
+     * 处理jgqrid 的 celledit
+     */
+    public function handChange() {
+        if ($this->request->is('post')) {
+            $entity = $this->Adminmsg->get($this->request->data('id'));
+            $data = $this->request->data();
+            unset($data['id']);
+            unset($data['oper']);
+            $entity = $this->Adminmsg->patchEntity($entity, $data);
+            if ($this->Adminmsg->save($entity)) {
+                $this->Util->ajaxReturn(true, '修改成功');
+            } else {
+                $this->Util->ajaxReturn(false, '保存失败');
+            }
+        }
+    }
+
 }
