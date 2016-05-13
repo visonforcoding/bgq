@@ -19,7 +19,7 @@ i{font-style: normal;}
 .clearfix { *zoom:1; /* for IE6 7 */ }
 .inner{width:90%;margin:0 auto;position:relative;}
 .wraper{position:relative;padding-top:0.8rem;overflow:hidden;}
-.newswraper{position:relative;padding-top:0.8rem;}
+.news-wraper{position:relative;padding-top:0.8rem;}
 .innerwaper{padding-left: 0.3rem;padding-right: 0.3rem;width:100%;}
 .my-wraper{padding-top:1.6rem;}
 .h20{background:#f0eff5;border-top:1px solid #c8c7cc;border-bottom:1px solid #c8c7cc;height:0.2rem;}
