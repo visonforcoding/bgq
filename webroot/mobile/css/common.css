@@ -18,11 +18,11 @@ i{font-style: normal;}
 .clearfix:after { content:"."; display:block; clear:both; visibility:hidden; font-size:0; line-height:0; height:0;}
 .clearfix { *zoom:1; /* for IE6 7 */ }
 .inner{width:90%;margin:0 auto;position:relative;}
-.wraper{position:relative;padding-top:0.8rem;overflow:hidden;height:100%;}
+.wraper{position:relative;padding-top:0.8rem;overflow-x:hidden;height:100%;}
 .innerwaper{padding-left: 0.3rem;padding-right: 0.3rem;width:100%;}
 .my-wraper{padding-top:1.6rem;}
 .h20{background:#f0eff5;border-top:1px solid #c8c7cc;border-bottom:1px solid #c8c7cc;height:0.2rem;}
-.m-wraper{padding-top:4.2rem;overflow:hidden;position:relative;}
+.m-wraper{padding-top:4.2rem;overflow-x:hidden;position:relative;height:100%;}
 .wraper .nobottom{border-bottom:none;}
 .wraper .no-margin-top{margin-top:0;}
 .wraper .no-b-tb{border-bottom:none;margin-top:0;}
