@@ -16,4 +16,11 @@ return [
         '4' => '物品赞助',
         '5' => '其他',
     ],
+    'adminmsgType'=>[
+        '1'=>[
+            'table'=>'user',
+            'remark'=>'实名认证审核',
+            'url'=>'/admin/user/index'
+        ]
+    ]
 ];

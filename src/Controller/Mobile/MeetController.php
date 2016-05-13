@@ -10,8 +10,7 @@ use App\Controller\Mobile\AppController;
  * @property \App\Model\Table\UserTable $User Description
  */
 class MeetController extends AppController {
-    
-    
+
     public function initialize() {
         parent::initialize();
         $this->loadModel('User');
@@ -23,31 +22,58 @@ class MeetController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-
+        
     }
-    
+
     /**
      * 大咖推荐
      */
-    public function meetReco(){
+    public function meetReco() {
         $dakas = $this->User->find()
                 ->hydrate(false)
-                ->select(['id','truename','company','position','meet_nums','avatar'])
+                ->select(['id', 'truename', 'company', 'position', 'meet_nums', 'avatar'])
                 ->where("`level`= '2' and `enabled` = '1'")
                 ->orderDesc('meet_nums')
                 ->toArray();
         $this->set([
-            'dakas'=>  json_encode($dakas)
+            'dakas' => json_encode($dakas)
         ]);
     }
 
-    
     /**
      * 专家类别查看  eg:互联网、大消费
+     * @param type $id 行业标签id
      */
-    public function meetCat(){
+    public function meetCat($id = null) {
+        //拥有该标签的所有专家
+        $savants = $this->User
+                        ->find()
+                        ->matching('Industries', function($q)use($id) {
+                            return $q->where(['Industries.id' => $id]);
+                        })->toArray();
+        //该标签类下的所有子类
+        $sub_industries = $this->User->Industries->findByPid($id)->toArray();
+        $this->set([
+            'savants' => $savants,
+            'sub_industries' => $sub_industries
+        ]);
+    }
+
+    /**
+     * 专家详情页
+     */
+    public function view($id = null) {
+        $savant = $this->User->get($id, ['contain' => ['Savant']]);
+        $this->set([
+            'savant' => $savant
+        ]);
+    }
+    
+    /**
+     * 话题 添加
+     */
+    public function subject($id=null){
         
     }
-  
 
 }

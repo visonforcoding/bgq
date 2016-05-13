@@ -125,6 +125,9 @@ class UserController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
+        if($this->request->query('type')=='1'){
+            $where['status'] = 1;
+        }
         $query = $this->User->find();
         $query->hydrate(false);
         if (!empty($where)) {
@@ -188,6 +191,33 @@ class UserController extends AppController {
         $this->autoRender = false;
         $filename = 'User_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+    }
+    
+    
+    /**
+     * 实名认证管理
+     */
+    public function realname(){
+        
+    }
+    
+    
+    /**
+     * 处理jgqrid 的 celledit
+     */
+    public function handChange(){
+        if($this->request->is('post')){
+            $entity = $this->User->get($this->request->data('id'));
+            $data = $this->request->data();
+            unset($data['id']);
+            unset($data['oper']);
+            $entity = $this->User->patchEntity($entity, $data);
+            if($this->User->save($entity)){
+                $this->Util->ajaxReturn(true,'修改成功');
+            }else{
+                $this->Util->ajaxReturn(false,'保存失败');
+            }
+        }
     }
 
 }
