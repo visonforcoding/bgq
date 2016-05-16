@@ -57,6 +57,8 @@ class AppController extends Controller {
         $this->firewall = array(
             ['user', 'login'],
             ['user', 'register'],
+            ['news', 'index'],
+            ['news', 'view'],
         );
     }
 

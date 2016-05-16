@@ -73,7 +73,9 @@ class MeetController extends AppController {
      * 话题 添加
      */
     public function subject($id=null){
-        
+        if($this->request->is('post')){
+            
+        }
     }
 
 }
