@@ -251,7 +251,7 @@ border-left:none;border-bottom:none;top:-1px;}
 .morebtn{display: block;background: url(img/right.png) no-repeat;background-size:cover;width:0.15rem;height:0.22rem;align-self: center;}
 .internet-v-info{margin-top:0.2rem;border-bottom:1px #c8c7cc solid;border-top:1px #c8c7cc solid;padding:0.44rem 0;background: #fff;color:#969fa9;}
 .internet-v-info .head-img{width:1.21rem;height:1.21rem;display: block;border-radius: 50%;position:relative;margin-right:0.3rem;}
-.head-img img{width:100%;height:auto;}
+.head-img img{width:100%;height:auto;border-radius: 50%;}
 .head-img i{position: absolute;right:0;bottom:0;width:0.29rem;height:0.3rem;background: url(img/v.png) no-repeat;background-size: cover;}
 .vipinfo{width:5.3rem;}
 .vipinfo h3{font-size:0.3rem;color:#222c38;}
@@ -280,11 +280,12 @@ border-left:none;border-bottom:none;top:-1px;}
 .m-info-box li a{color:#e01a48;}
 .m-info-box li .myhome{width:100%;background: url(img/right.png) no-repeat right center; background-size:0.16rem 0.26rem;}
 .eduit{text-align: right;color:#e01a48;display: block;line-height: 0.74rem;font-size:0.28rem;padding:0 0.3rem;}
-.m-swiper-items{width:100%;margin-bottom:0.6rem;height:5.68rem;}
-.m-swiper-items ul{width:500%;position:absolute;left:-6.12rem; padding-bottom:0.4rem;border-bottom:1px #c8c7cc solid;display: flex;align-items: center;}
+.m-swiper-items{width:100%;margin-bottom:0.6rem;height:5rem;padding-top:0.2rem;}
+.m-swiper-items ul{width:2000%;position:absolute;display: flex;align-items: center;}
 /*阴影*/
-.m-swiper-items li.active{ width:6.12rem;height:4.9rem;}
-.m-swiper-items li{width:6.12rem;height:4.14rem;margin: 0.2rem;border-radius:0.2rem; background: #fff;position: relative;*zoom: 1;
+.m-swiper-items .s-to-more h3{background:##3e82f7 ;}
+.m-swiper-items .s-to-one h3{background:#e01b49;}
+.m-swiper-items li{width:6.12rem;height:4.9rem;margin: 0.2rem;border-radius:0.2rem; background: #fff;position: relative;*zoom: 1;
 -webkit-box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.27), 0 0 60px rgba(0, 0, 0, 0.06) inset;-moz-box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.27), 0 0 0.4rem rgba(0, 0, 0, 0.06) inset;box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.27), 0 0 0.4rem rgba(0, 0, 0, 0.06) inset;display: inline-block;}
 .m-swiper-items li.active:before {-webkit-transform: skew(-15deg) rotate(-6deg);-moz-transform: skew(-15deg) rotate(-6deg);transform: skew(-15deg) rotate(-6deg);left: 0.34rem;}
 .m-swiper-items li.active:after {-webkit-transform: skew(15deg) rotate(6deg);-moz-transform: skew(15deg) rotate(6deg);transform: skew(15deg) rotate(6deg);right: 0.34rem;}
@@ -293,8 +294,8 @@ border-left:none;border-bottom:none;top:-1px;}
 .m-swiper-items li h3 span{float: right;font-size:0.24rem;}
 .m-center-con{padding:0.28rem 0.32rem;border-bottom:1px dashed #c8c7cc;position:relative;}
 .m-center-con p{line-height: 0.36rem;font-size:0.24rem;color:#9ba4ad;}
-.m-bottom-con{height:1.44rem; display: flex;justify-content:space-around;align-items: center;}
-.m-bottom-con span{text-align: center;font-size:0.3rem;line-height: 0.54rem;}
+.m-bottom-con{height:1.44rem; display: flex;justify-content:space-around;padding-top:0.2rem;}
+.m-bottom-con span{text-align: center;font-size:0.3rem;line-height: 0.45rem;}
 .m-bottom-con i{display:block;color:#e01a48;}
 .m-center-con:before,.m-center-con:after{position:absolute;bottom:-0.12rem;background: #ebebf1;content:'';width:0.12rem;height:0.24rem;}
 .m-center-con:before{left:0;border-radius: 0 0.12rem 0.12rem 0;}
@@ -310,7 +311,13 @@ border-left:none;border-bottom:none;top:-1px;}
 .meet-type{font-size:0.28rem;}
 .m-detail-box li:nth-child(2){color:#e01a48;}
 .m-detail-box li:nth-child(3),.m-detail-box li:nth-child(4){font-size:0.24rem;line-height: 0.36rem;color:#9ba4ad;}
-
+.sub-list h3 span{margin-bottom:0.1rem;}
+.sub-list li .meet-type i{display: block;text-align: right;}
+.sub-list li .meet-type i:nth-of-type(2){margin-top:0.4rem;margin-bottom:0.1rem;color:#db1f4f;}
+.sub-list .meet-type i:last-of-type{color:#db1f4f;}
+.sub-list .sub-list-l span{margin-top:0.4rem;font-size:0.24rem;color:#9ba4ad;}
+.sub-list .sub-list-l span:last-of-type{margin-top:0.13rem;}
+ .sub-list li:nth-child(2),.m-detail-box li:nth-child(3), .m-detail-box li:nth-child(4){color: #222c38;font-size:0.3rem;}/*reset*/
 .a-form-box .m-tips{font-size:0.26rem;color:#85888d;line-height: 0.36rem;margin-top:0.13rem;}
 .a-form-box .m-tips b.iconfont:before{content: '\e623';line-height: 0.36rem; margin-right:0.2rem}
 .a-form-box .m-tips span{display: block;color:#e01a48; margin-left:0.5rem;}
