@@ -276,8 +276,9 @@ border-left:none;border-bottom:none;top:-1px;}
 .m-info-box .identification i{border:1px #c8c7cc solid;border-radius: 0.1rem;padding:0.08rem;margin-left:0.1rem;color:#969fa9;}
 .m-info-box li p{display: inline-block;}
 .m-info-box li p i{color:#7a7e83;font-size:0.32rem;margin-right:0.23rem;vertical-align: middle;}
-.m-info-box li p img{width:0.43rem;height:0.43rem;margin-right:0.06rem;vertical-align: middle;}
+.m-info-box li p img{width:0.43rem;height:0.43rem;margin-right:0.06rem;vertical-align: middle;border-radius:50%;}
 .m-info-box li a{color:#e01a48;}
+.inner .add-s{background: url(img/add-h.png) no-repeat;background-size: 0.27rem 0.27rem; width:0.27rem;height:0.27rem;display: block;}
 .m-info-box li .myhome{width:100%;background: url(img/right.png) no-repeat right center; background-size:0.16rem 0.26rem;}
 .eduit{text-align: right;color:#e01a48;display: block;line-height: 0.74rem;font-size:0.28rem;padding:0 0.3rem;}
 .m-swiper-items{width:100%;margin-bottom:0.6rem;height:5rem;padding-top:0.2rem;}
