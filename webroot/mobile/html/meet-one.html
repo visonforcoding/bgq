@@ -10,6 +10,9 @@
 		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
 		<script src="../js/view.js"></script>
+        <script src="../js/zepto.min.js"></script>
+        <script src="../js/loopScroll.js"></script>
+        <script src="../js/util.js"></script>
 	</head>
 	<body>
 		<header class="m-to-more">
@@ -38,14 +41,11 @@
 				<li><span class="myhome">个人主页</span></li>
 				
 			</ul>
-			
-				
-				
 			<div class="m-swiper-items">
-				<ul>
+				<ul id="subject">
 				<li>
 				<div class="inner-li-items">
-					<h3>天使阶段投融资指南<span>一对多面谈</span></h3>
+					<h3>1天使阶段投融资指南<span>一对多面谈</span></h3>
 					<div class='m-center-con'>
 						<a href="#this"><p>你是一名创业者吗？你是否在寻找天使投资？你是
 否有这样的体会，几个大学生的项目很容易获得了
@@ -63,7 +63,7 @@
 				
 				<li>
 					<div class="inner-li-items">
-					<h3>天使阶段投融资指南<span>一对多面谈</span></h3>
+					<h3>2天使阶段投融资指南<span>一对多面谈</span></h3>
 					<div class='m-center-con'>
 						<a href="#this"><p>你是一名创业者吗？你是否在寻找天使投资？你是
 否有这样的体会，几个大学生的项目很容易获得了
@@ -80,7 +80,7 @@
 				</li>
 				<li>
 					<div class="inner-li-items">
-					<h3>天使阶段投融资指南<span>一对多面谈</span></h3>
+					<h3>3天使阶段投融资指南<span>一对多面谈</span></h3>
 					<div class='m-center-con'>
 						<a href="#this"><p>你是一名创业者吗？你是否在寻找天使投资？你是
 否有这样的体会，几个大学生的项目很容易获得了
@@ -113,6 +113,22 @@
 			</section>
 			
 		</div>
+
+        <script>
+
+            subject = null;
+            setTimeout(function(){
+                subject = $.util.loop({
+                min : 5,
+                moveDom: $('#subject'),
+                moveChild: $('#subject li'),
+                lockScrY: true,
+                loopScroll: true
+            });
+            }, 0);
+
+
+        </script>
 	
 	</body>
 </html>

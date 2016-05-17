@@ -6,8 +6,8 @@ var scroll = function(o) {
     this.opt = {
         tp : 'text', //图片img或是文字text  默认text
         moveDom : null, //必选  待移动父元素zepto查询对象
-        moveChild : [], //必选  zepto查询对象
-        tab : [], //必选  zepto查询对象
+        moveChild : [], //必选  zepto查询对象列表
+        tab : [], //非必选  zepto查询对象列表  导航tab元素
         viewDom : null, //在那个容器里滑动，算宽度用，默认window  如果你的默认位置不对  那就要检查下这个
         touchDom2:[], //滑动事件的第二控制器   第一控制器是moveDom，   （dom原生对象数组，不建议搞太多）
         sp : null, //当前触发点的position
@@ -29,11 +29,13 @@ var scroll = function(o) {
         imgInit:true, //第一次加载图片
         imgInitLazy:4000, //第一次预加载图片延时
         enableTransX : false,//使用translateX(-n*100%)方式
+        hasTab : true,
         fun : function() {
         }
     };
     $.extend(this, this.opt, o);
     this.len = this.moveChild.length;
+    this.hasTab = this.tab.length > 0;
     this.min = this.min || {'text':100, 'img':1}[this.tp]; //min30是  andiord手Q划不动
     this.minp = this.minp || Math.max(this.min,30); //最少30像素翻页  注意一定要继承min值  很多地方没有给minp赋值
     if(!this.viewDom) this.viewDom = $(window);
@@ -62,8 +64,8 @@ $.extend(scroll.prototype, {
         if (!this.loopScroll) return;
         this.moveChild.eq(0).after(dom);
         this.len += 1;
-        this.tab.eq(this.len-2).after(tabDom);
-        this.tab = this.tab.parent().children();
+        this.hasTab && this.tab.eq(this.len-2).after(tabDom);
+        if(this.hasTab) this.tab = this.tab.parent().children();
 
         if(this.len == 2){
             this.moveChild = this.moveDom.children();
@@ -83,7 +85,7 @@ $.extend(scroll.prototype, {
         };
         ael(mid);
 
-        this.tab.each(function(i, em) {
+        this.hasTab && this.tab.each(function(i, em) {
             $(em).attr('no', i + 1);
             $(em).click(function() {
                 obj.stepMove($(this).attr('no'));
@@ -173,8 +175,8 @@ $.extend(scroll.prototype, {
     },
     stepMove : function(no, isSetOffsetIndex) {
         this.index = no > this.len ? this.len : no < 1 ? 1 : no;
-        this.tab.removeClass(this.tabClass);
-        this.tab.eq(this.index - 1).addClass(this.tabClass);
+        this.hasTab && this.tab.removeClass(this.tabClass);
+        this.hasTab && this.tab.eq(this.index - 1).addClass(this.tabClass);
         var tran = - this.step * ((this.loopScroll?no:this.index) - 1) - this.offset;
         this.moveDom.css({
             "-webkit-transform" : this.enableTransX ?
