@@ -94,6 +94,60 @@ $.util = {
         var exp = new Date(), expires = arguments[2] || null, path = arguments[3] || "/", domain = arguments[4] || null, secure = arguments[5] || false;
         expires ? exp.setMinutes(exp.getMinutes() + parseInt(expires)) : "";
         document.cookie = name + '=' + escape(value) + ( expires ? ';expires=' + exp.toGMTString() : '') + ( path ? ';path=' + path : '') + ( domain ? ';domain=' + domain : '') + ( secure ? ';secure' : '');
+    },
+
+
+    //初始化滚动加载列表图
+    initLoadImg: function(listId) {
+        var data = {cache:[]}, img=$("#"+listId+" img");
+        img.each(function(i) {
+            var dom = $(this), init_src=dom.attr('init_src');
+            init_src && data.cache.push({
+                url : init_src,
+                dom : dom
+            });
+        });
+        data.num = data.cache.length;
+        data.viewHeight = $(window).height();
+        data.scrollOffsetH = 500;
+        window._images_data = data;
+        $.util.loadImg();
+    },
+
+    //滚动加载列表图
+    loadImg: function(tp) {
+        // 滚动条的高度
+        var scrollHeight = $(window).scrollTop(), d = window._images_data;
+        if (!d || d.num == 0) {
+            return;
+        }
+        // 已经卷起的高度+可视区域高度+偏移量，即当前显示的元素的高度
+        visibleHeight = d.viewHeight + scrollHeight + d.scrollOffsetH;
+        $.each(d.cache, function(i, data) {
+            var em = data.dom, imgH =em.offset().top;
+            // 图片在后面两屏范围内，并且未被加载过
+            //if(tp=='detPC')$('#commDesc').append(['^'+visibleHeight, imgH].join('-'));
+            if (visibleHeight > imgH && !em.attr("loaded")) {
+                // 加载图片
+                //em.attr('h', [d.viewHeight , scrollHeight , d.scrollOffsetH, visibleHeight, imgH].join(','))
+                data.url && em.attr("src", data.url);
+                em.removeAttr('init_src');
+                em.attr("loaded", d.num+1);
+                d.num--;
+            }
+        });
+    },
+    //滚动事件
+    listScroll: function(listId, loadFunc) {
+        var obj = this, st = $(window).scrollTop();
+        //st > this.pageHight*2 ? $('.goTopBtn').show() : $('.goTopBtn').hide();
+
+
+        if (loadFunc && st >= (($(document).height() - $(window).height()) - 220)) {
+            loadFunc();
+            $.util.initLoadImg(listId);
+        }
+        $.util.loadImg();
     }
 
 };
