@@ -116,16 +116,16 @@
 
         <script>
 
-            subject = null;
-            setTimeout(function(){
+            var subject = null;
+            //setTimeout(function(){
                 subject = $.util.loop({
-                min : 5,
-                moveDom: $('#subject'),
-                moveChild: $('#subject li'),
-                lockScrY: true,
-                loopScroll: true
-            });
-            }, 0);
+                    min : 5,
+                    moveDom: $('#subject'),
+                    moveChild: $('#subject li'),
+                    lockScrY: true,
+                    loopScroll: true
+                });
+            //}, 0);
 
 
         </script>
