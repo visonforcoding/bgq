@@ -286,7 +286,8 @@ border-left:none;border-bottom:none;top:-1px;}
 /*阴影*/
 .m-swiper-items .s-to-more h3{background:##3e82f7 ;}
 .m-swiper-items .s-to-one h3{background:#e01b49;}
-.m-swiper-items li{width:6.12rem;height:4.9rem;margin: 0.2rem;border-radius:0.2rem; background: #fff;position: relative;*zoom: 1;
+.m-swiper-items li{padding:0.2rem;}
+.m-swiper-items li .inner-li-items{width:6.12rem;height:4.9rem;border-radius:0.2rem; background: #fff;position: relative;*zoom: 1;
 -webkit-box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.27), 0 0 60px rgba(0, 0, 0, 0.06) inset;-moz-box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.27), 0 0 0.4rem rgba(0, 0, 0, 0.06) inset;box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.27), 0 0 0.4rem rgba(0, 0, 0, 0.06) inset;display: inline-block;}
 .m-swiper-items li.active:before {-webkit-transform: skew(-15deg) rotate(-6deg);-moz-transform: skew(-15deg) rotate(-6deg);transform: skew(-15deg) rotate(-6deg);left: 0.34rem;}
 .m-swiper-items li.active:after {-webkit-transform: skew(15deg) rotate(6deg);-moz-transform: skew(15deg) rotate(6deg);transform: skew(15deg) rotate(6deg);right: 0.34rem;}
