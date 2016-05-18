@@ -34,7 +34,6 @@ class AppController extends Controller {
      * @var array 
      */
     private $firewall;
-    
     protected $user;
 
     /**
@@ -85,15 +84,27 @@ class AppController extends Controller {
         $controller = strtolower($this->request->param('controller'));
         $action = strtolower($this->request->param('action'));
         $request_aim = [$controller, $action];
-        if (in_array($request_aim, $this->firewall)||  in_array($controller, ['user','wx'])) {
+        if (in_array($request_aim, $this->firewall) || in_array($controller, ['user', 'wx'])) {
             return true;
         }
+        return $this->handCheckLogin();
+    }
+
+    
+    /**
+     * 处理检测登陆
+     * @return type
+     */
+    protected function handCheckLogin() {
         $user = $this->request->session()->check('User.mobile');
+        $url = '/'.$this->request->url;
         if (!$user) {
-            return $this->redirect('/user/login');
+            if ($this->request->is('ajax')) {
+                $this->Util->ajaxReturn(['status' => false, 'msg' => '请先登录', 'code' => 403,'redirect_url'=>$url]);
+            }
+            return $this->redirect('/user/login?redirect_url='.$url);
             //header("location:".'/user/login');
         }
     }
-    
 
 }

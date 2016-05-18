@@ -22,5 +22,12 @@ return [
             'remark'=>'实名认证审核',
             'url'=>'/admin/user/index'
         ]
-    ]
+    ],
+    'usermsgType'=>[
+        '1'=>[
+            'table'=>'user',
+            'remark'=>'关注消息',
+            'url'=>'/admin/user/index'
+        ]
+    ],
 ];

@@ -38,19 +38,44 @@ $.util = {
         return contentId === '' ? html.join('') : $('#'+contentId).html(html.join(''));
     },
 
+    /**
+     * 封装ajax
+     * @param {type} obj
+     * @returns {undefined}
+     */
     ajax:function(obj){
         var tmp = obj.func;
+        if(!obj['url']){
+            obj['url'] = '';
+        }
+        if(!obj['dataType']){
+            obj['dataType'] = 'json';
+        }
+        if(!obj['type']){
+            obj['type'] = 'post';
+        }
         obj.success = function(json){
-            if(json.code == 1){
+            if(json.code == 200){
                 tmp(json);
             }
-            if(json.code == 2){
-                // login;
+            if(json.code == 403){
+                $.util.alert('请先登录');
+                setTimeout(function(){
+                    window.location.href = json.redirect_url;
+                },1000);
             }
-            if(json.code == 3){
-                //$.util.alert(json.msg);
+            if(json.code == 500){
+                var msg = Bollean(json['message'])?json['message']:json.msg;
+                $.util.alert(msg);
             }
             
+        };
+        obj.statusCode= {
+            404:function(){$.util.alert('请求页面不存在');},
+            500:function(){$.util.alert('服务器出错');}
+        };
+        obj.error = function(XMLHttpRequest, textStatus, errorThrown){
+          $.util.alert('服务器错误了');  
         };
         $.ajax(obj);
     },

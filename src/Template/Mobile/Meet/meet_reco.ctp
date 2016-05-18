@@ -9,7 +9,8 @@
 <div class="wraper" id="dakas">
 </div>
 <script type="text/html" id="listTpl">
-        <section class="internet-v-info">
+    <section class="internet-v-info">
+        <a href="/meet/view/{#id#}"/>
         <div class="innercon">
             <span class="head-img"><img src="{#avatar#}"/><i></i></span>
             <div class="vipinfo">
@@ -21,6 +22,7 @@
                 </div>
             </div>
         </div>
+        </a>
     </section>
 </script>
 <?php $this->start('script') ?>

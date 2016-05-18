@@ -22,13 +22,16 @@ class UtilComponent extends Component {
      * @param array/boole $status 可为数组也可以为boole
      * @param type $msg
      */
-    public function ajaxReturn($status, $msg = '') {
+    public function ajaxReturn($status, $msg = '', $statusCode = 200) {
         $this->autoRender = false;
         $this->response->type('json');
         if (is_array($status) && !empty($status)) {
+            if (!array_key_exists('code', $status)) {
+                $status['code'] = 200;
+            }
             echo json_encode($status, JSON_UNESCAPED_UNICODE);
         } else {
-            echo json_encode(array('status' => $status, 'msg' => $msg), JSON_UNESCAPED_UNICODE);
+            echo json_encode(array('status' => $status, 'msg' => $msg, 'code' => $statusCode), JSON_UNESCAPED_UNICODE);
         }
         exit();
     }

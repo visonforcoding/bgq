@@ -13,6 +13,8 @@ function is_mobile(str) {
 
 $(function(){
    $('.toback').click(function(){
-      window.history.go(-1); 
+       if($(this).attr('href')=='#this'){
+          window.history.go(-1); 
+       }
    });
 });

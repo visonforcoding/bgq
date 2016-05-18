@@ -63,19 +63,34 @@ class MeetController extends AppController {
      * 专家详情页
      */
     public function view($id = null) {
-        $savant = $this->User->get($id, ['contain' => ['Savant']]);
+        $savant = $this->User->get($id, ['contain' => ['Savant','Subjects']]);
         $this->set([
             'savant' => $savant
         ]);
     }
-    
+
     /**
      * 话题 添加
      */
-    public function subject($id=null){
-        if($this->request->is('post')){
-            
+    public function subject($id = null) {
+        if ($this->request->is('post')) {
+            $SubjectTable = \Cake\ORM\TableRegistry::get('meet_subject');
+            $subject = $SubjectTable->newEntity();
+            $subject = $SubjectTable->patchEntity($subject, $this->request->data());
+            $subject->user_id = $this->user->id;
+            if ($SubjectTable->save($subject)) {
+                $this->Util->ajaxReturn(true, '添加成功');
+            } else {
+                $this->Util->ajaxReturn(false, '添加失败');
+            }
         }
+    }
+    
+    /**
+     * 预约
+     */
+    public function meet(){
+        
     }
 
 }
