@@ -17,6 +17,20 @@ class WxComponent extends Component {
      */
     protected $_defaultConfig = [];
 
+    const TOKEN_NAME = 'wx.access_token';
+    const WEIXIN_API_URL = 'https://api.weixin.qq.com/cgi-bin/';
+    const JSAPI_TICKET_NAME = 'wx.jsapi_ticket';
+
+    protected $app_id;
+    protected $app_secret;
+
+    public function initialize(array $config) {
+        parent::initialize($config);
+        $wxconfig = \Cake\Core\Configure::read('weixin');
+        $this->app_id = $wxconfig['appID'];
+        $this->app_secret = $wxconfig['appsecret'];
+    }
+
     /**
      *  验证服务器安全性  微信验证服务器是你的服务器 验证通过输出微信返回的字符串
      * @param type $token  公众号上填写的token值 
@@ -39,7 +53,6 @@ class WxComponent extends Component {
         }
     }
 
-    
     /**
      * 前往微信验证页 前去获取code
      */
@@ -50,30 +63,108 @@ class WxComponent extends Component {
                 . $wxconfig['appID'] . '&redirect_uri=' . urlencode($redirect_url) . '&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
         $this->redirect($wx_code_url);
     }
-    
-    
+
     /**
      * 通过返回的code 获取access_token 再异步获取openId 和 用户信息
      * @return boolean|stdClass 出错则返回false 成功则返回带有openId 的用户信息 json std对象
      */
-    public function getUser(){
+    public function getUser() {
         $code = $this->request->query('code');
         $wxconfig = \Cake\Core\Configure::read('weixin');
-        $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer'=>false]);
-        $wx_accesstoken_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$wxconfig['appID'].'&secret='.$wxconfig['appsecret'].
-                '&code='.$code.'&grant_type=authorization_code';
+        $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
+        $wx_accesstoken_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $wxconfig['appID'] . '&secret=' . $wxconfig['appsecret'] .
+                '&code=' . $code . '&grant_type=authorization_code';
         $response = $httpClient->get($wx_accesstoken_url);
-        if($response->isOk()){
-           $access_token =  json_decode($response->body())->access_token;
-           $open_id =  json_decode($response->body())->openid;
-           $wx_user_url = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$access_token.'&openid='.$open_id.'&lang=zh_CN';
-           $res = $httpClient->get($wx_user_url);
-           if($res->isOk()){
-              return json_decode($res->body());
-           }else{
-               return false;
-           }
-        }else{
+        if ($response->isOk()) {
+            $access_token = json_decode($response->body())->access_token;
+            $open_id = json_decode($response->body())->openid;
+            $wx_user_url = 'https://api.weixin.qq.com/sns/userinfo?access_token=' . $access_token . '&openid=' . $open_id . '&lang=zh_CN';
+            $res = $httpClient->get($wx_user_url);
+            if ($res->isOk()) {
+                return json_decode($res->body());
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 获取accessToken
+     */
+    public function getAccessToken() {
+        $access_token = \Cake\Cache\Cache::read(self::TOKEN_NAME);
+        $url = self::WEIXIN_API_URL . 'token?grant_type=client_credential&appid=' . $this->app_id . '&secret=' . $this->app_secret;
+        if (is_array($access_token)) {
+            $isExpires = $access_token['expires_in'] <= time() ? true : false;
+        }
+        if ($access_token === false || $isExpires) {
+            $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
+            $response = $httpClient->get($url);
+            if ($response->isOk()) {
+                $body = json_decode($response->body());
+                if (!property_exists($body, 'access_token')) {
+                    \Cake\Log\Log::error($response);
+                    return false;
+                }
+                $token = $body->access_token;
+                $expires = $body->expires_in;
+                $expires = time() + $expires;
+                \Cake\Cache\Cache::write(self::TOKEN_NAME, [
+                    'access_token' => $token,
+                    'expires_in' => $expires,
+                    'ctime' => date('Y-m-d H:i:s')
+                ]);
+                return $token;
+            } else {
+                \Cake\Log\Log::error($response);
+                return FALSE;
+            }
+        } else {
+            return $access_token['access_token'];
+        }
+    }
+
+    /**
+     * 获取jsapi_ticket
+     */
+    public function getJsapiTicket() {
+        $jsapi_tickt = \Cake\Cache\Cache::read(self::JSAPI_TICKET_NAME);
+        if(is_array($jsapi_tickt)){
+           $isExpires = $jsapi_tickt['expires_in'] <= time() ? true : false; 
+        }
+        if($jsapi_tickt!==false&&!$isExpires){
+            //存在缓存并且没过期
+            return $jsapi_tickt['jsapi_ticket'];
+        }
+        //否则 再次请求获取
+        $access_token = $this->getAccessToken();
+        if (!$access_token) {
+            \Cake\Log\Log::error('获取access_token 出错');
+            return false;
+        }
+        $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
+        $url = self::WEIXIN_API_URL . 'ticket/getticket?access_token=' . $access_token . '&type=jsapi';
+        $response = $httpClient->get($url);
+        if (!$response->isOk()) {
+            \Cake\Log\Log::error('请求获取jsapi_ticket出错');
+            \Cake\Log\Log::error($response);
+            return false;
+        }
+        $body = json_decode($response->body());
+        if ($body->errmsg == 'ok') {
+            $expires = $body->expires_in;
+            $expires = time() + $expires;
+            \Cake\Cache\Cache::write(self::JSAPI_TICKET_NAME, [
+                'jsapi_ticket' => $body->ticket,
+                'expires_in' => $expires,
+                'ctime' => date('Y-m-d H:i:s')
+            ]);
+            return $body->ticket;
+        } else {
+            \Cake\Log\Log::error('获取jsapi_ticket返回信息有误');
+            \Cake\Log\Log::error($body);
             return false;
         }
     }

@@ -14,6 +14,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsToMany $Industries
  * @property \Cake\ORM\Association\BelongsTo $Agencies
  * @property \Cake\ORM\Association\HasOne $Savant
+ * @property \Cake\ORM\Association\HasMany $Subject
  */
 class UserTable extends Table {
 
@@ -35,12 +36,17 @@ class UserTable extends Table {
             'dependent' => true,  //删了用户同时会删掉专家信息记录
         ]);
 
+        $this->hasMany('Subjects',[
+            'className'=>'MeetSubject',
+            ''
+        ]);
         $this->belongsToMany('Industries', [
             'className' => 'Industry',
             'joinTable' => 'user_industry',
             'foreignKey' => 'user_id',
             'targetForeignKey' => 'industry_id'
         ]);
+        
         $this->belongsTo('Agencies');
 
         $this->addBehavior('Timestamp', [

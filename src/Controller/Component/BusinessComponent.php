@@ -112,7 +112,6 @@ class BusinessComponent extends Component {
         }
     }
 
-
     public function collect($id) {
         // 检查是否post
         if ($this->request->is('post')) {
@@ -140,7 +139,6 @@ class BusinessComponent extends Component {
         }
     }
 
-    
     /**
      * 后台管理员消息 待处理事务
      * @param type $type
@@ -151,6 +149,48 @@ class BusinessComponent extends Component {
         $AdminmsgTable = \Cake\ORM\TableRegistry::get('adminmsg');
         $adminmsg = $AdminmsgTable->newEntity(['type' => $type, 'table_id' => $id, 'msg' => $msg]);
         $AdminmsgTable->save($adminmsg);
+    }
+
+    /**
+     * 用户消息
+     * @param type $user_id  用户id
+     * @param type $title  标题
+     * @param type $msg   内容
+     * @param type $type  类型
+     * @param type $id  对象id
+     */
+    public function usermsg($user_id, $title, $msg, $type = 0, $id = 0) {
+        if ($type != 0) {
+            $types = \Cake\Core\Configure::read('usermsgType');
+            $url = $types[$type]['url'];
+        }
+        $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
+        $data = [
+            'user_id' => $user_id,
+            'type' => $type,
+            'url' => $url,
+        ];
+        if ($type == 1) {
+            //关注消息
+            $usermsg = $UsermsgTable->newEntity();
+            $usermsg->user_id = $user_id;
+            $usermsg->type = $type;
+            $usermsg->url = $url;
+            $usermsg->table_id = $id; //被关注者id
+            $usermsg->title = '您有新的关注者';
+            $usermsg->msg = '您有1位新的关注者';
+            $UsermsgTable->save($usermsg);
+        }
+        $usermsg = $UsermsgTable->newEntity(array_merge($data, [
+            'user_id' => $user_id,
+            'type' => $type,
+            'url' => $url,
+            'title' => $title,
+            'msg' => $msg,
+            'table_id' => $id,
+            'url' => $url
+        ]));
+        $UsermsgTable->save($usermsg);
     }
 
 }

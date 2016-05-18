@@ -2,18 +2,19 @@
 
 namespace App\Model\Table;
 
-use App\Model\Entity\Need;
+use App\Model\Entity\Usermsg;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Need Model
+ * Usermsg Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
+ * @property \Cake\ORM\Association\BelongsTo $Tables
  */
-class NeedTable extends Table {
+class UsermsgTable extends Table {
 
     /**
      * Initialize method
@@ -24,11 +25,12 @@ class NeedTable extends Table {
     public function initialize(array $config) {
         parent::initialize($config);
 
-        $this->table('need');
-        $this->displayField('id');
+        $this->table('usermsg');
+        $this->displayField('title');
         $this->primaryKey('id');
 
-        $this->belongsTo('User', [
+        $this->belongsTo('Users', [
+            'className' => 'User',
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
@@ -53,9 +55,15 @@ class NeedTable extends Table {
                 ->integer('id')
                 ->allowEmpty('id', 'create');
 
+
+        $validator
+                ->requirePresence('title', 'create')
+                ->notEmpty('title');
+
         $validator
                 ->requirePresence('msg', 'create')
                 ->notEmpty('msg');
+
 
 
         return $validator;
@@ -69,7 +77,7 @@ class NeedTable extends Table {
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules) {
-        $rules->add($rules->existsIn(['user_id'], 'User'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
         return $rules;
     }
 

@@ -2,18 +2,18 @@
 
 namespace App\Model\Table;
 
-use App\Model\Entity\Need;
+use App\Model\Entity\MeetSubject;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Need Model
+ * MeetSubject Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
  */
-class NeedTable extends Table {
+class MeetSubjectTable extends Table {
 
     /**
      * Initialize method
@@ -24,14 +24,16 @@ class NeedTable extends Table {
     public function initialize(array $config) {
         parent::initialize($config);
 
-        $this->table('need');
-        $this->displayField('id');
+        $this->table('meet_subject');
+        $this->displayField('title');
         $this->primaryKey('id');
 
-        $this->belongsTo('User', [
+        $this->belongsTo('Users', [
+            'className'=>'User',
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [
@@ -54,9 +56,31 @@ class NeedTable extends Table {
                 ->allowEmpty('id', 'create');
 
         $validator
-                ->requirePresence('msg', 'create')
-                ->notEmpty('msg');
+                ->requirePresence('title', 'create')
+                ->notEmpty('title');
 
+        $validator
+                ->requirePresence('summary', 'create')
+                ->notEmpty('summary');
+
+        $validator
+                ->integer('type')
+                ->requirePresence('type', 'create')
+                ->notEmpty('type');
+
+        $validator
+                ->decimal('price')
+                ->requirePresence('price', 'create')
+                ->notEmpty('price');
+
+        $validator
+                ->requirePresence('address', 'create')
+                ->notEmpty('address');
+
+        $validator
+                ->integer('last_time')
+                ->requirePresence('last_time', 'create')
+                ->notEmpty('last_time');
 
         return $validator;
     }
@@ -69,7 +93,7 @@ class NeedTable extends Table {
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules) {
-        $rules->add($rules->existsIn(['user_id'], 'User'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
         return $rules;
     }
 

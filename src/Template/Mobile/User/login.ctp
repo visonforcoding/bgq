@@ -71,7 +71,7 @@
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
-                        window.location.href = '/';
+                        window.location.href = msg.redirect_url;
                     } else {
                         alert(msg.msg);
                     }

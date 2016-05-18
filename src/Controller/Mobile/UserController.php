@@ -11,6 +11,7 @@ use Cake\Mailer\Email;
  * @property \App\Model\Table\UserTable $User
  * @property \App\Controller\Component\HanvonComponent $Hanvon
  * @property \App\Controller\Component\SmsComponent $Sms
+ * @property \App\Controller\Component\BusinessComponent $Business
  */
 class UserController extends AppController {
 
@@ -174,6 +175,7 @@ class UserController extends AppController {
      * 用户登录
      */
     public function login() {
+        $redirect_url = empty($this->request->query('redirect_url')) ? '/' : $this->request->query('redirect_url');
         if ($this->request->is(['patch', 'post', 'put'])) {
             $phone = $this->request->data('phone');
             $user = $this->User->findByPhoneAndEnabled($phone, 1)->first();
@@ -183,7 +185,7 @@ class UserController extends AppController {
                     if (time() - $vcode['time'] < 60 * 10) {
                         //10分钟验证码超时
                         $this->request->session()->write('User.mobile', $user);
-                        $this->Util->ajaxReturn(['status' => true]);
+                        $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url]);
                     } else {
                         $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
                     }
@@ -266,14 +268,66 @@ class UserController extends AppController {
                 } else {
                     //注册完善信息
                     $this->request->session()->write([
-                        'reg.phone'=>$phone,
-                        'reg.wx_bind'=>true,
-                        ]);
+                        'reg.phone' => $phone,
+                        'reg.wx_bind' => true,
+                    ]);
                     $this->Util->ajaxReturn(['status' => false, 'msg' => '您还未有平台账户需前往完善信息', 'url' => '/user/register?type=wx_bind']);
                 }
             } else {
                 $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
             }
+        }
+    }
+
+    /*     * *
+     * 关注动作
+     */
+
+    public function follow() {
+        $this->handCheckLogin();
+        if ($this->request->is('post')) {
+
+            $following_id = $this->request->data('id');
+            $user_id = $this->user->id;
+            $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
+            //判断是否关注过
+            $fans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$following_id'")->first();
+            if ($fans) {
+                $this->Util->ajaxReturn(false, '您已经关注过');
+            }
+            //查看是否被该用户关注过
+            $follower = $FansTable->find()->where("`user_id` = '$following_id' and `following_id` = '$user_id'")->first();
+            $newfans = $FansTable->newEntity();
+            $newfans->user_id = $user_id;
+            $newfans->following_id = $following_id;
+            if ($follower) {
+                //有被关注
+                $errorFlag = [];
+                $follower->type = 2;  //关系标注为互为关注
+                $newfans->type = 2;
+                $FansTable->connection()->transactional(function()use($FansTable, $follower, $newfans, $errorFlag) {
+                    //开启事务
+                    $errorFlag[] = $FansTable->save($newfans);
+                    $errorFlag[] = $FansTable->save($follower);
+                });
+                if (in_array(false, $errorFlag)) {
+                    $this->Util->ajaxReturn(false, '关注失败');
+                }
+            } else {
+                $newfans->type = 1;
+                if (!$FansTable->save($newfans)) {
+                    $this->Util->ajaxReturn(true, '关注失败');
+                }
+            }
+            //发送一条关注消息给被关注者
+            $this->loadComponent('Business');
+            $this->Business->usermsg($following_id,'您有新的关注者','', 1,$newfans->id);
+            //更新被关注者粉丝数  列表方便显示
+            $follower_user = $this->User->get($following_id);
+            $fansCount = $FansTable->find()->where("`following_id` = '$following_id'")->count();
+            $follower_user->fans = $fansCount;
+            $this->User->save($follower_user);
+            $this->Util->ajaxReturn(true,'关注成功');
         }
     }
 
