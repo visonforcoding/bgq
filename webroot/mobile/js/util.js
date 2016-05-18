@@ -139,6 +139,10 @@ $.util = {
     },
     //滚动事件
     listScroll: function(listId, loadFunc) {
+        if(window.holdLoad) return;
+        window.holdLoad = true;
+        setTimeout(function(){window.holdLoad = false;}, 1000);  //只允许1秒加载一次下一页   防止上一个滑动事件还没有结束的状态中
+
         var obj = this, st = $(window).scrollTop();
         //st > this.pageHight*2 ? $('.goTopBtn').show() : $('.goTopBtn').hide();
 
