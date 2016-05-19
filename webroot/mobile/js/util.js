@@ -142,7 +142,7 @@ $.util = {
     //滚动加载列表图
     loadImg: function(tp) {
         // 滚动条的高度
-        var scrollHeight = $(window).scrollTop(), d = window._images_data;
+        var scrollHeight = document.body.scrollTop, d = window._images_data;
         if (!d || d.num == 0) {
             return;
         }
@@ -168,7 +168,7 @@ $.util = {
         window.holdLoad = true;
         setTimeout(function(){window.holdLoad = false;}, 1000);  //只允许1秒加载一次下一页   防止上一个滑动事件还没有结束的状态中
 
-        var obj = this, st = $(window).scrollTop();
+        var obj = this, st = document.body.scrollTop;
         //st > this.pageHight*2 ? $('.goTopBtn').show() : $('.goTopBtn').hide();
 
 

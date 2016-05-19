@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use App\Model\Entity\Newscom;
@@ -13,8 +14,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $News
  * @property \Cake\ORM\Association\BelongsTo $Users
  */
-class NewscomTable extends Table
-{
+class NewscomTable extends Table {
 
     /**
      * Initialize method
@@ -22,8 +22,7 @@ class NewscomTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->table('newscom');
@@ -35,8 +34,17 @@ class NewscomTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Users', [
+            'className'=>'User',
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
+        ]);
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'create_time' => 'new',
+                    'update_time' => 'always'
+                ]
+            ]
         ]);
     }
 
@@ -46,25 +54,24 @@ class NewscomTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+                ->integer('id')
+                ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('body', 'create')
-            ->notEmpty('body');
+                ->requirePresence('body', 'create')
+                ->notEmpty('body');
 
         $validator
-            ->integer('praise_nums')
-            ->requirePresence('praise_nums', 'create')
-            ->notEmpty('praise_nums');
+                ->integer('praise_nums')
+                ->requirePresence('praise_nums', 'create')
+                ->notEmpty('praise_nums');
 
         $validator
-            ->dateTime('create_time')
-            ->requirePresence('create_time', 'create')
-            ->notEmpty('create_time');
+                ->dateTime('create_time')
+                ->requirePresence('create_time', 'create')
+                ->notEmpty('create_time');
 
         return $validator;
     }
@@ -76,10 +83,10 @@ class NewscomTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
+    public function buildRules(RulesChecker $rules) {
         $rules->add($rules->existsIn(['news_id'], 'News'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         return $rules;
     }
+
 }

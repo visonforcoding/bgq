@@ -80,11 +80,11 @@ class AppController extends Controller {
      * 检查用户登录
      * @return type
      */
-    protected function checkLogin() {
+    private function checkLogin() {
         $controller = strtolower($this->request->param('controller'));
         $action = strtolower($this->request->param('action'));
         $request_aim = [$controller, $action];
-        if (in_array($request_aim, $this->firewall) || in_array($controller, ['user', 'wx'])) {
+        if (in_array($request_aim, $this->firewall) || in_array($controller, ['user', 'wx','news'])) {
             return true;
         }
         return $this->handCheckLogin();
