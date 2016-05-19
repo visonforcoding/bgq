@@ -77,6 +77,7 @@
         <script src="/wpadmin/lib/zui/js/zui.min.plus.js"></script>
         <script src="/wpadmin/lib/datetimepicker/jquery.datetimepicker.js"></script>
         <script src="/wpadmin/lib/layer/layer.js"></script>
+        <script src="/wpadmin/lib/layer/extend/layer.ext.js"></script>
         <script src="/wpadmin/js/global.js"></script>
         <script>
             $(function () {
