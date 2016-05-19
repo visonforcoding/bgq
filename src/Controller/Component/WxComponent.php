@@ -7,6 +7,7 @@ use Cake\Controller\ComponentRegistry;
 
 /**
  * Wx component  wx组件
+ * @author caowenpeng <caowenpeng1990@126.com>
  */
 class WxComponent extends Component {
 
@@ -131,10 +132,10 @@ class WxComponent extends Component {
      */
     public function getJsapiTicket() {
         $jsapi_tickt = \Cake\Cache\Cache::read(self::JSAPI_TICKET_NAME);
-        if(is_array($jsapi_tickt)){
-           $isExpires = $jsapi_tickt['expires_in'] <= time() ? true : false; 
+        if (is_array($jsapi_tickt)) {
+            $isExpires = $jsapi_tickt['expires_in'] <= time() ? true : false;
         }
-        if($jsapi_tickt!==false&&!$isExpires){
+        if ($jsapi_tickt !== false && !$isExpires) {
             //存在缓存并且没过期
             return $jsapi_tickt['jsapi_ticket'];
         }
@@ -167,6 +168,45 @@ class WxComponent extends Component {
             \Cake\Log\Log::error($body);
             return false;
         }
+    }
+
+    
+    /**
+     * 用于jsapi 调用的 签名等信息
+     * @return type
+     */
+    public function setJsapiSignature() {
+        $ticket = $this->getJsapiTicket();
+        $noncestr = createRandomCode(16, 3);
+        $timestamp = time();
+        $url = $this->request->scheme().'://'.$this->request->domain().$this->request->here(false);
+        $param = [
+            'noncestr' => $noncestr,
+            'jsapi_ticket' => $ticket,
+            'timestamp' => $timestamp,
+            'url' => $url
+        ];
+        ksort($param);
+        $signature = sha1(urldecode(http_build_query($param))); //不要转义的
+        return [
+            'signature' => $signature,
+            'nonceStr' => $noncestr,
+            'timestamp' => $timestamp,
+            'appId'=>  $this->app_id,
+        ];
+    }
+    
+    /**
+     * 微信配置信息
+     * @param array $apiList @link http://mp.weixin.qq.com/wiki/11/74ad127cc054f6b80759c40f77ec03db.html 所有api参数名列表
+     * @param boolean $debug
+     * @return array
+     */
+    public function wxconfig(array $apiList, $debug=true){
+        $wxsign = $this->setJsapiSignature();
+        $wxsign['debug'] = $debug;
+        $wxsign['jsApiList'] = $apiList;
+        return $wxsign;
     }
 
 }

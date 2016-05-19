@@ -26,10 +26,10 @@ class HomeController extends AppController {
      */
     public function index() {
         $this->loadComponent('Wx');
-        debug($this->Wx->getJsapiTicket());exit();
+        $wxConfig = $this->Wx->wxconfig(['onMenuShareTimeline','onMenuShareAppMessage']);
         $user_id = $this->user->id;
         $user = $this->User->get($user_id);
-        $this->set(compact('user'));
+        $this->set(compact('user','wxConfig'));
     }
 
     /**

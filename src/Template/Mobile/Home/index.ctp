@@ -51,21 +51,52 @@
     <div>
         <h3>通过以下渠道邀请</h3>
         <div class="forword">
-            <a href="#this"><span></span>微信好友</a>
-            <a href="#this"><span></span>微信朋友圈</a>
+            <a id="shareToWxFriend" href="#this"><span></span>微信好友</a>
+            <a id="shareToWxPYQ" href="#this"><span></span>微信朋友圈</a>
         </div>
     </div>
 </div>
 <?= $this->element('footer') ?>
 <?php $this->start('script') ?>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script>
-    $(function(){
-       $('#shareTo').click(function(){
+    wx.config(<?= json_encode($wxConfig) ?>);
+    $(function () {
+        $('#shareTo').click(function () {
             $('.reg-shadow,.shadow-info').removeAttr('hidden');
-       });
-       $('.reg-shadow').bind('click',function(e){
-           $('.reg-shadow,.shadow-info').attr('hidden',true);
-       });
+        });
+        $('.reg-shadow').bind('click', function (e) {
+            $('.reg-shadow,.shadow-info').attr('hidden', true);
+        });
+        $('#shareToWxPYQ').click(function () {
+            wx.onMenuShareTimeline({
+                title: '', // 分享标题
+                link: '', // 分享链接
+                imgUrl: '', // 分享图标
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+        });
+        $('#shareToWxFriend').click(function () {
+            wx.onMenuShareAppMessage({
+                title: '并购精英惠', // 分享标题
+                desc: '这里是描述', // 分享描述
+                link: 'http://bgq.smartlemon.cn', // 分享链接
+                imgUrl: 'http://wx.qlogo.cn/mmopen/ajNVdqHZLLCOibYvNGzNtJmgyOEpAyhkd45A3gbGgt2mbDYUdMeBVbbe9SmxwJiceNGd4ibZCeKTHSDq1kJDkVibXQ/0', // 分享图标
+                type: '', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+        });
     });
 </script>
 <?php $this->end('script'); ?>
