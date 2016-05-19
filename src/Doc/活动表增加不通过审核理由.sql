@@ -1,0 +1,1 @@
+ALTER TABLE activity add reason varchar(255) COMMENT '未通过审核理由'
