@@ -179,8 +179,7 @@ class WxComponent extends Component {
         $ticket = $this->getJsapiTicket();
         $noncestr = createRandomCode(16, 3);
         $timestamp = time();
-        $url = $_SERVER;
-        debug($url);
+        $url = $this->request->scheme().'://'.$_SERVER['SERVER_NAME'].$this->request->here(false);
         $param = [
             'noncestr' => $noncestr,
             'jsapi_ticket' => $ticket,
@@ -188,10 +187,7 @@ class WxComponent extends Component {
             'url' => $url
         ];
         ksort($param);
-        debug($param);
-        debug(urldecode(http_build_query($param)));
         $signature = sha1(urldecode(http_build_query($param))); //不要转义的
-        debug($signature);exit();
         return [
             'signature' => $signature,
             'nonceStr' => $noncestr,
