@@ -5,6 +5,8 @@
   */
 
 namespace App\Controller\Mobile;
+use Wpadmin\Utils\Util;
+
 use PhpParser\Node\Stmt\Switch_;
 
 use App\Controller\Mobile\AppController;
@@ -119,8 +121,10 @@ class ActivityController extends AppController{
 				'limit' => '2',
 			];
 			$activity = $this->paginate($this->Activity);
+// 			debug($activity);die;
 			$this->set(compact('activity'));
 			$this->set('_serialize', ['activity']);
+			$isApply = [];
 			if($this->user)
 			{
 				// 用户已报名的活动
@@ -137,14 +141,8 @@ class ActivityController extends AppController{
 				{
 					$isApply[] = $v['activity_id'];
 				}
-				$this->set('isApply', $isApply);
 			}
-			else
-			{
-				$isApply = [];
-				$this->set('isApply', $isApply);
-			}
-			
+			$this->set('isApply', $isApply);
 			$this->set('pagetitle', '活动');
 // 		}
 // 		else
@@ -213,15 +211,55 @@ class ActivityController extends AppController{
 	 */
 	
 	public function release(){
+		
+		if($this->request->param('pass'))
+		{
+			
+			$data = $this->request->param('pass');
+			$industry = \Cake\ORM\TableRegistry::get('industry');
+			foreach ($data as $k=>$v)
+			{
+				$industries[] = $industry->get($v);
+			}
+// 			debug($industries);die;
+			$this->set('industries', $industries);
+		}
 		if($this->request->is('post'))
 		{
-			$a = $this->request->data();
-			debug($a);die;
+			if($this->user)
+			{
+				$users = \Cake\ORM\TableRegistry::get('user');
+				$user = $users->get($this->user->id);
+				$data = $this->request->data();
+				$industries = $this->Activity->newEntity();
+				$industry = $this->Activity->patchEntity($industries, $data);
+				$industry->company = $user->company;
+				$industry->user_id = $user->id;
+				if($data['pay'])
+				{
+					$industry->is_crowdfunding = 1;
+				}
+				else
+				{
+					$industry->is_crowdfunding = 0;
+				}
+				if($this->Activity->save($industry))
+				{
+					$this->Util->ajaxReturn(true, '发布成功');
+				}
+				else
+				{
+					$this->Util->ajaxReturn(false, '发布失败');
+				}
+			}
+			else
+			{
+				$this->Util->ajaxReturn(false, '请先登录');
+			}
 		}
 		else
 		{
-			$industry = 0;
-			$this->set('industry',$industry);
+			$this->set('industries', $industries);
 			$this->set('pagetitle', '发布活动');
 		}
 	}
@@ -248,15 +286,31 @@ class ActivityController extends AppController{
 	 * @param int $id 文章id
 	 */
 	public function artLike($id){
-		$this->loadComponent('Business');
-		$code = $this->Business->artLike($id, 'articlelike');
-		if($code == 'success')
+		if($this->user)
 		{
-			$this->Util->ajaxReturn(true, '点赞成功！');
+			$this->loadComponent('Business');
+			$code = $this->Business->artLike($id, 'articlelike');
+			if($code == 'success')
+			{
+				$res = $this->likeLog($id, $this->user->id);
+				if($res)
+				{
+					$this->Util->ajaxReturn(true, '成功');
+				}
+				else
+				{
+					$this->Util->ajaxReturn(false, '失败');
+				}
+// 				$this->Util->ajaxReturn(true, '点赞成功！');
+			}
+			else
+			{
+				$this->Util->ajaxReturn(false, $this->showError($code));
+			}
 		}
 		else
 		{
-			$this->Util->ajaxReturn(false, $this->showError($code));
+			$this->Util->ajaxReturn(false, '请先登录');
 		}
 	}
 	
@@ -277,8 +331,152 @@ class ActivityController extends AppController{
 		}
 	}
 	
+	/**
+	 * 活动搜索
+	 */
 	public function search(){
+		$res = [];
+		$alert = [];
+		if($this->request->is('post'))
+		{
+			$data = $this->request->data();
+			$res = $this
+					->Activity
+					->find()
+					->where(['title LIKE' => '%'.$data['keyword'].'%']);
+			if($data['industry_id'])
+			{
+				$res = $res->andWhere(['industry_id' => $data['industry_id']]);
+			}
+			if($data['sort'])
+			{
+				$res = $res->orderDesc($data['sort']);
+			}
+			else
+			{
+				$res = $res->orderDesc('create_time');
+			}
+			$res = $res
+					->hydrate(false)
+					->all()
+					->toArray();
+			if($res == false || empty($res))
+			{
+				$alert = '暂无搜索结果';
+			}
+		}
+		$this->set('alert', $alert);
+		$this->set('search', $res);
 		
+		$isApply = [];
+		if($this->user)
+		{
+			// 用户已报名的活动
+			$activityApply = $this
+			->Activity
+			->Activityapply
+			->find()
+			->where(['user_id' => $this->user->id])
+			->select(['activity_id'])
+			->hydrate(false)
+			->toArray();
+			$isApply = [];
+			foreach ($activityApply as $k=>$v)
+			{
+				$isApply[] = $v['activity_id'];
+			}
+		}
+		$this->set('isApply', $isApply);
+		$industries = $this->Activity->Industries->find()->hydrate(false)->all()->toArray();
+		$industries = $this->tree($industries);
+		$this->set('industries', $industries);
+	}
+	
+	/**
+	 * 将子元素分到父元素数组的一个子集里面，无限循环
+	 * @param array $arr 原数组
+	 * @param int $pid 父id
+	 * @return array 重构后的数组
+	 */
+	public function tree($arr, $pid = '0'){
+		$p = [];
+		foreach($arr as $k=>$v)
+		{
+			if($v['pid'] == $pid)
+			{
+				$p[$k] = $v;
+				$p[$k]['child'] = $this->tree($arr, $v['id']);
+			}
+		}
+		return $p;
+	}
+	
+	
+	/**
+	 * 发布活动时选择的行业标签
+	 */
+	public function industries(){
+        $IndustryTable = \Cake\ORM\TableRegistry::get('industry');
+        $industries = $IndustryTable->find('threaded', [
+                    'keyField' => 'id',
+                    'parentField' => 'pid'
+                ])->where("`id` != '3'")->hydrate(false)->toArray();
+        $this->set(array(
+            'industries' => $industries
+        ));
+	}
+	
+	
+	public function doComment($id, $pid=0){
+		if($this->request->is('post'))
+		{
+			if($this->user)
+			{
+				$data = $this->request->data();
+				$data['user_id'] = $this->user->id;
+				$data['activity_id'] = $id;
+				$activitycom = $this->Activity->Activitycom->newEntity();
+				$comment = $this->Activity->Activitycom->patchEntity($activitycom, $data);
+// 				debug($comment);die;
+				$res = $this->Activity->Activitycom->save($comment);
+				if($res)
+				{
+					$activity = $this->Activity->get($id);
+					$activity->comment_nums += 1;
+					$this->Activity->save($activity);
+					$this->Util->ajaxReturn(true, '评论成功');
+				}
+				else
+				{
+					$this->Util->ajaxReturn(false, '系统错误');
+				}
+			}
+			else
+			{
+				$this->Util->ajaxReturn(false, '请先登录');
+			}
+		}
+		else
+		{
+			$this->Util->ajaxReturn(false, '非法操作');
+		}
+	}
+	
+	public function likeLog($id, $user_id){
+		$activity = $this->Activity->get($id);
+		$userTable = \Cake\ORM\TableRegistry::get('user');
+		$user = $userTable->find()->where(['id'=>$user_id])->hydrate(false)->first();
+		$msg = $user['truename'] . '于' . date('Y-m-d H:i:s', time()) . '对' . $activity->title . '活动点了赞';
+		$data = [
+			'relate_id' => $id,
+			'user_id' => $user_id,
+			'type' => 0,
+			'msg' => $msg,
+		];
+		$likeLogsTable = \Cake\ORM\TableRegistry::get('likelogs');
+		$likeLogs = $likeLogsTable->newEntity();
+		$like = $likeLogsTable->patchEntity($likeLogs, $data);
+		return $likeLogsTable->save($like, ['associated' => false]);
 	}
 	
 	/**

@@ -30,7 +30,7 @@ class ActivityController extends AppController {
     public function view($id = null) {
         $this->viewBuilder()->autoLayout(false);
         $activity = $this->Activity->get($id, [
-            'contain' => ['Admins', 'Industries']
+            'contain' => ['Users', 'Industries']
         ]);
         $this->set('activity', $activity);
         $this->set('_serialize', ['activity']);
@@ -69,7 +69,7 @@ class ActivityController extends AppController {
      */
     public function edit($id = null) {
         $activity = $this->Activity->get($id, [
-            'contain' => []
+            'contain' => ['Industries']
         ]);
         if ($this->request->is(['post', 'put'])) {
             $activity = $this->Activity->patchEntity($activity, $this->request->data);
@@ -83,6 +83,10 @@ class ActivityController extends AppController {
         $admins = $this->Activity->Admins->find('list', ['limit' => 200]);
         $industries = $this->Activity->Industries->find('list', ['limit' => 200]);
         $this->set(compact('activity', 'admins', 'industries'));
+        foreach($activity->industries as $industry){
+        	$selIndustryIds[] = $industry->id;
+        }
+        $this->set(compact('activity','selIndustryIds'));
     }
 
     /**
@@ -194,4 +198,33 @@ class ActivityController extends AppController {
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
 
+    public function top($id){
+    	$activity = $this->Activity->get($id);
+    	$activity->is_top = 1;
+    	$res = $this->Activity->save($activity);
+    	if($res)
+    	{
+    		$this->Util->ajaxReturn(true, '置顶成功');
+    	}
+    	else
+    	{
+    		$this->Util->ajaxReturn(false, '置顶失败');
+    	}
+    }
+    
+    public function untop($id)
+    {
+    	$activity = $this->Activity->get($id);
+    	$activity->is_top = 0;
+    	$res = $this->Activity->save($activity);
+    	if($res)
+    	{
+    		$this->Util->ajaxReturn(true, '取消置顶成功');
+    	}
+    	else
+    	{
+    		$this->Util->ajaxReturn(false, '取消置顶失败');
+    	}
+    }
+    
 }

@@ -40,7 +40,9 @@
 						
 						<div class="a-other-info">
 							<span class="a-number"><?= $activity->apply_nums; ?>人报名</span>
-							<a><?= $activity->industry->name; ?></a>
+							<?php foreach ($activity->industries as $k=>$v): ?>
+							<a><?= $v->name; ?></a>
+							<?php endforeach; ?>
 							<span class="a-date"><?= $activity->time; ?></span>
 						</div>
 						
