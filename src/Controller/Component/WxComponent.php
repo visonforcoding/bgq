@@ -58,10 +58,9 @@ class WxComponent extends Component {
      * 前往微信验证页 前去获取code
      */
     public function getUserJump() {
-        $wxconfig = \Cake\Core\Configure::read('weixin');
         $redirect_url = 'http://' . $_SERVER['SERVER_NAME'] . '/mobile/wx/getUserCode';
         $wx_code_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='
-                . $wxconfig['appID'] . '&redirect_uri=' . urlencode($redirect_url) . '&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+                . $this->app_id . '&redirect_uri=' . urlencode($redirect_url) . '&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
         $this->redirect($wx_code_url);
     }
 
@@ -71,9 +70,8 @@ class WxComponent extends Component {
      */
     public function getUser() {
         $code = $this->request->query('code');
-        $wxconfig = \Cake\Core\Configure::read('weixin');
         $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
-        $wx_accesstoken_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $wxconfig['appID'] . '&secret=' . $wxconfig['appsecret'] .
+        $wx_accesstoken_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $this->app_id . '&secret=' . $this->app_secret .
                 '&code=' . $code . '&grant_type=authorization_code';
         $response = $httpClient->get($wx_accesstoken_url);
         if ($response->isOk()) {

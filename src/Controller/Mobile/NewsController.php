@@ -11,23 +11,62 @@ use App\Controller\Mobile\AppController;
  */
 class NewsController extends AppController {
 
+    protected $newslimit = 5;
+
     /**
      * Index method
      *
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        $this->paginate = [
-            'contain' => ['Admins','Industries']
-        ];
-        $news = $this->paginate($this->News);
+        $news = $this->News->find()
+                        ->contain(['Admins', 'Industries'])
+                        ->limit($this->newslimit)->orderDesc('news.create_time')->toArray();
         //获取资讯banner图
         $bannerTable = \Cake\ORM\TableRegistry::get('banner');
         $banners = $bannerTable->find()->where("`enabled` = '1' and `type` = '1'")
-                ->orderDesc('create_time')->limit(3)->toArray();
+                        ->orderDesc('create_time')->limit(3)->toArray();
 //        debug($banners);exit();
-        $this->set(compact('news','banners'));
-        $this->set('newsjson',  json_encode($news));
+        $this->set(compact('news', 'banners'));
+        $this->set('newsjson', json_encode($news));
+    }
+
+    /**
+     * ajax 获取 更多页的 新闻数据
+     * @param type $page  页数
+     */
+    public function getMoreNews($page) {
+        $news = $this->News->find()
+                        ->contain(['Admins', 'Industries'])->page($page, $this->newslimit)
+                        ->orderDesc('news.create_time')->toArray();
+        if ($news) {
+            $this->Util->ajaxReturn(['status' => true, 'data' => $news]);
+        } else {
+            $this->Util->ajaxReturn(['status' => false]);
+        }
+    }
+
+    /**
+     * 评论
+     */
+    public function comment() {
+        $this->handCheckLogin();
+        if ($this->request->is('post')) {
+            $CommentTable = \Cake\ORM\TableRegistry::get('newscom');
+            $comment = $CommentTable->newEntity();
+            $comment->user_id = $this->user->id;
+            $comment->body = $this->request->data('content');
+            $comment->news_id = $this->request->data('id');
+            if ($CommentTable->save($comment)) {
+                //文章新闻数+1
+                $news = $this->News->get($this->request->data('id'));
+                $news->comment_nums +=1;
+                $this->News->save($news);
+                $this->Util->ajaxReturn(true, '评论成功');
+            } else {
+                $this->Util->ajaxReturn(false, '评论失败');
+            }
+        }
     }
 
     /**
@@ -39,10 +78,11 @@ class NewsController extends AppController {
      */
     public function view($id = null) {
         $news = $this->News->get($id, [
-            'contain' => ['Admins','Comments']
+            'contain' => ['Admins', 'Comments','Comments.Users'=>function($q){
+                    return $q->select(['id','avatar','truename','company','position']);
+            }]
         ]);
         $this->set('news', $news);
-        $this->set('newsjson',  json_encode($news));
         $this->set('_serialize', ['news']);
     }
 

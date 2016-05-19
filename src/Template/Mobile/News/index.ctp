@@ -7,9 +7,9 @@
 <div class="wraper newswraper">
     <div class="a-banner">
         <ul class="pic-list-container" id="imgList">
-            <?php foreach ($banners as $banner):?>
-            <li><a href="<?=$banner->url?>"><img src="<?=$banner->img?>"/></a></li>
-            <?php endforeach;?>
+            <?php foreach ($banners as $banner): ?>
+                <li><a href="<?= $banner->url ?>"><img src="<?= $banner->img ?>"/></a></li>
+            <?php endforeach; ?>
         </ul>
         <div class="yd" id="imgTab">
             <span class="cur"></span>
@@ -17,7 +17,10 @@
             <span></span>
         </div>
     </div>
-    <div id="news"></div>
+    <div id="news">
+
+    </div>
+    <div class="loading"></div>
 </div>
 
 <script type="text/html" id="listTpl">
@@ -48,16 +51,40 @@
     </section>	
 </script>
 <script type="text/html" id="subTpl">
-<a href="#this">{#name#}</a>
+    <a href="#this">{#name#}</a>
 </script>
 <?= $this->element('footer'); ?>
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
-    $.util.dataToTpl('news', 'listTpl',<?= $newsjson ?>, function(d){
+    $.util.dataToTpl('news', 'listTpl',<?= $newsjson ?>, function (d) {
         d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
         return d;
     });
     var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
+    var page = 2;
+    $(window).on("scroll", function () {
+        $.util.listScroll('items', function () {
+            //show loading
+            $('.loading').show();
+            //ajax data
+            //remove loading
+            //eg:
+            setTimeout(function () {
+                $.getJSON('/news/get-more-news/'+page,function(res){
+                    if(res.status){
+                        var html = $.util.dataToTpl('', 'listTpl', res.data, function (d) {
+                                 d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
+                                 return d;
+                        });
+                        $('#news').append(html);
+                        page++;
+                    }
+                });
+            $('.loading').hide();
+                //console.log(iii++);
+            }, 3000);
+        });
+    });
 </script>
 <?php $this->end('script'); ?>

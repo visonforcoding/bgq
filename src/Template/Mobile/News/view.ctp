@@ -23,81 +23,74 @@
             </div>
         </section>
     <?php endif; ?>
-    <section class="newscomment-box">
+    <section class="newscomment-box" >
         <h3 class="comment-title">
             评论
-
-            <span><i class="iconfont">&#xe618;</i>我要点评</span>
+            <span id="commit"><i  class="iconfont">&#xe618;</i>我要点评</span>
         </h3>
-        <div class="items">
-            <div class="comm-info clearfix">
-                <span><img src="../images/user.png"/></span>
-                <span class="infor-comm">
-                    <i class="username">Unclehome</i>
-                    <i class="job">数字联盟有限公司 董事长</i>
-                </span>
-                <span>
-                    <i class="iconfont">&#xe615;</i>398
-                </span>
-            </div>
-            <p>非常值得一读的文章。</p>
-        </div>
-        <div class="items">
-            <div class="comm-info clearfix">
-                <span><img src="../images/user.png"/></span>
-                <span class="infor-comm">
-                    <i class="username">Unclehome</i>
-                    <i class="job">数字联盟有限公司 董事长</i>
-                </span>
-                <span>
-                    <i class="iconfont">&#xe615;</i>398
-                </span>
-            </div>
-            <p>非常值得一读的文章。</p>
-        </div>
-        <div class="items">
-            <div class="comm-info clearfix">
-                <span><img src="../images/user.png"/></span>
-                <span class="infor-comm">
-                    <i class="username">Unclehome</i>
-                    <i class="job">数字联盟有限公司 董事长</i>
-                </span>
-                <span>
-                    <i class="iconfont">&#xe615;</i>398
-                </span>
-            </div>
-            <p>非常值得一读的文章。</p>
-        </div>
-        <div class="items">
-            <div class="comm-info clearfix">
-                <span><img src="../images/user.png"/></span>
-                <span class="infor-comm">
-                    <i class="username">Unclehome</i>
-                    <i class="job">数字联盟有限公司 董事长</i>
-                </span>
-                <span>
-                    <i class="iconfont">&#xe615;</i>398
-                </span>
-            </div>
-            <p>非常值得一读的文章。</p>
+        <div id="coms">
+
         </div>
     </section>
     <div class="reg-shadow" style="display: none;">
-
-
     </div>
     <div class="shadow-info a-shadow a-forword" style="display: none;">
         <ul>
-            <li><textarea type="text" placeholder="请输入评论"></textarea></li>
+            <li><textarea id="content" type="text" placeholder="请输入评论"></textarea></li>
 
-            <li><a href="javascript:void(0);">取消</a><a href="javascript:void(0);">发表</a></li>
+            <li><a id="cancel" href="javascript:void(0);">取消</a><a id="submit" href="javascript:void(0);">发表</a></li>
         </ul>
     </div>
     <div class="alert">
         已收藏
     </div>
 </div>
+<script type="text/html" id="listTpl">
+    <div class="items">
+        <div class="comm-info clearfix">
+            <span><img src="{#user_avatar#}"/></span>
+            <span class="infor-comm">
+                <i class="username">{#user_truename#}</i>
+                <i class="job">{#user_company#} {#user_position#}</i>
+            </span>
+            <span>
+                <i class="iconfont">&#xe615;</i>{#praise_nums#}
+            </span>
+        </div>
+        <p>{#body#}</p>
+    </div>
+</script>
 <?php $this->start('script') ?>
+<script src="/mobile/js/loopScroll.js"></script>
 <script>
+    $.util.dataToTpl('coms', 'listTpl',<?= json_encode($news->comments) ?>, function (d) {
+        //d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
+        d.user_avatar = d.user.avatar;
+        d.user_truename = d.user.truename;
+        d.user_company = d.user.company;
+        d.user_position = d.user.position;
+        return d;
+    });
+    $(function () {
+        $('#commit').click(function () {
+            $('.reg-shadow,.shadow-info').show('slow');
+        });
+        $('#cancel').click(function () {
+            $('.reg-shadow,.shadow-info').hide('slow');
+        });
+        $('#submit').click(function () {
+            var content = $('#content').val();
+            $.util.ajax({
+                url: '/news/comment',
+                data: {content: content, id:<?= $news->id ?>},
+                func: function (res) {
+                    $.util.alert(res.msg);
+                    if (res.status) {
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+    });
 </script>
 <?php $this->end('script'); ?>
