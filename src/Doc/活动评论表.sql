@@ -1,5 +1,6 @@
 CREATE TABLE `activitycom` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '活动评论表',
+	`pid` INT NOT NULL COMMENT '父id',
 	`user_id` INT(11) NOT NULL COMMENT '用户id',
 	`activity_id` INT(11) NOT NULL COMMENT '活动id',
 	`body` VARCHAR(550) NOT NULL COMMENT '评论内容',
