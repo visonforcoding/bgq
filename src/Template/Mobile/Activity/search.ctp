@@ -1,68 +1,122 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="format-detection"content="telephone=no, email=no" />
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-		<title>并购圈</title>
-		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
-		<script src="../js/view.js"></script>
-	</head>
-	<body>
 		<header>
 			<div class='inner'>
 				<a href='#this' class='toback iconfont news-serch'>&#xe613;</a>
 				<h1>
-					
-					<input type="text" placeholder="请输入关键词">
+				<form action="" method="post">
+					<input type="text" placeholder="请输入关键词" name="keyword" />
+					<input type="hidden" name="industry_id" value="" style="display:none;"/>
+					<input type="hidden" name="sort" value="" style="display:none;"/>
+				</form>
 				</h1>
-				<a href="javascript:void(0);" class='h-regiser'>取消</a>
+				<a href="/activity/index" class='h-regiser'>取消</a>
 			</div>
 		</header>
 		
-		<div class="wraper">
+		<div class="wraper" >
 			
 			<div class="news-classify">
 				<div class="classify-l fl ml">
-					<span  class="active">选择行业</span>
-					<ul class="all-industry" style='display:block;'>
-						<li ><a href="#this">移动互联网</a>
-							
-						</li>
-						<li><a href="#this">电子商务</a>
-							
-						</li>
-						<li><a href="#this">金融</a></li>
-						<li><a href="#this">企业服务</a></li>
-						<li  class="active"><a href="#this">教育</a>
-							<ul>
-								<li><a href="#this">初创型</a></li>
-								<li><a href="#this">成长型</a></li>
-								<li class="active"><a href="#this">成熟型</a></li>
-								<li><a href="#this">已上市</a></li>
-								
+					<span class="l">选择行业</span>
+					<ul class="all-industry" hidden>
+					<?php foreach ($industries as $k=>$v): ?>
+					<?php if($v['pid'] == 0): ?>
+						<li class="parent"><a href="javascript:void(0)"><?= $v['name'] ?></a>
+						<?php if ($v['child']): ?>
+							<ul hidden>
+							<?php foreach ($v['child'] as $key=>$val): ?>
+								<li class="child" value="<?= $val['id'] ?>"><a href="javascript:void(0)"><?= $val['name'] ?></a></li>
+							<?php endforeach; ?>
 							</ul>
+						<?php endif; ?>
 						</li>
-						<li><a href="#this">文化娱乐</a></li>
-						<li><a href="#this">游戏</a></li>
-						<li><a href="#this">O2O</a></li>
-						<li><a href="#this">硬件</a></li>
-						<li><a href="#this">医疗健康</a></li>
+					<?php endif; ?>
+					<?php endforeach; ?>
 					</ul>
 				</div>
+				
 				<div class="classify-r fr">
-					<span>排序</span>
-					<ul class="sort-mark" style="display:none;">
-						<li class="active"><a href="#this">报名最多</a></li>
-						<li><a href="#this">最近更新</a></li>
+					<span class="r">排序</span>
+					<ul class="sort-mark" hidden>
+						<li class="r-parent" value="apply_nums"><a href="javascript:void(0)">报名最多</a></li>
+						<li class="r-parent" value="create_time"><a href="javascript:void(0)">最近更新</a></li>
 					</ul>
 				</div>
 			</div>
-			
+			<?php if ($search): ?>
+		<section class="my-collection-info" style="padding-bottom: 0.2rem;margin-bottom: 1rem;background: #fff;">
+		<?php foreach ($search as $k=>$v): ?>
+			<div class="innercon">
+				<a href="#this" class="clearfix">
+					<span class="my-pic-acive"><img src="<?= $v['cover'] ?>"/></span>
+					<div class="my-collection-items">
+						<h3><?= $v['title'] ?></h3>
+						<?php if ($isApply): ?>
+						<?php if (in_array($v['id'], $isApply)): ?>
+						<span><i>已报名</i></span>
+						<?php endif; ?>
+						<?php endif; ?>
+						<span><?= $v['address'] ?></span>
+						<span><?= $v['time'] ?><i><?= $v['apply_nums'] ?>人报名</i></span>
+					</div>
+				</a>
+			</div>
+		<?php endforeach; ?>
+		</section>
+		<?php endif; ?>
 		</div>
+		<div class="alert" id="alertPlan"></div>
+<?= $this->element('footer'); ?>
+<?php $this->start('script'); ?>
+<script type="text/javascript">
+		
+	$('.l').click(function(){
+		$(this).toggleClass('active');
+		if($(this).hasClass('active') == true)
+		{
+			$(this).siblings('ul').show();
+			$(this).parent().siblings().children('span').removeClass('active');
+			$(this).parent().siblings().children('ul').hide();
+		}
+		else
+		{
+			$(this).siblings('ul').hide();
+		}
+	})
+
+	$('.r').click(function(){
+		$(this).toggleClass('active');
+		if($(this).hasClass('active') == true)
+		{
+			$(this).siblings('ul').show();
+			$(this).parent().siblings().children('span').removeClass('active');
+			$(this).parent().siblings().children('ul').hide();
+		}
+		else
+		{
+			$(this).siblings('ul').hide();
+		}
+	})
 	
-	</body>
-</html>
+	$('.parent').click(function(){
+		$(this).addClass('active');
+		$(this).siblings().removeClass('active');
+		$(this).children('ul').show();
+		$(this).siblings().children('ul').hide();
+	})
+	
+	$('.r-parent').click(function(){
+		$(this).addClass('active');
+		$(this).siblings().removeClass('active');
+		$(this).children('ul').show();
+		$(this).siblings().children('ul').hide();
+		$("input[name='sort']").attr('value',$(this).attr('value'));
+	})
+	
+	$('.child').click(function(){
+		$(this).toggleClass('active');
+		$(this).siblings().removeClass('active');
+		$("input[name='industry_id']").attr('value',$(this).attr('value'));
+	})
+	
+</script>
+<?php $this->end('script');

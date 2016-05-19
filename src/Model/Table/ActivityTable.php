@@ -35,10 +35,11 @@ class ActivityTable extends Table {
             'joinTable' => 'admin',
             'className' => 'Wpadmin.Admin',
         ]);
-        $this->belongsTo('Industries', [
-            'foreignKey' => 'industry_id',
-            'joinType' => 'INNER',
+        $this->belongsToMany('Industries', [
             'className' => 'Industry',
+            'joinTable' => 'activity_industry',
+            'foreignKey' => 'activity_id',
+            'targetForeignKey' => 'industry_id'
         ]);
 
         $this->belongsTo('Collect', [
@@ -47,7 +48,7 @@ class ActivityTable extends Table {
         		'className' => 'Collect',
         ]);
         
-        $this->HasMany('Activitycom', [
+        $this->hasMany('Activitycom', [
         		'foreignKey' => 'activity_id',
         		'joinType' => 'INNER',
         		'className' => 'Activitycom',
@@ -100,17 +101,17 @@ class ActivityTable extends Table {
                 ->requirePresence('title', 'create')
                 ->notEmpty('title');
 
-        $validator
-                ->requirePresence('time', 'create')
-                ->notEmpty('time');
+//         $validator
+//                 ->requirePresence('time', 'create')
+//                 ->notEmpty('time');
 
-        $validator
-                ->requirePresence('address', 'create')
-                ->notEmpty('address');
+//         $validator
+//                 ->requirePresence('address', 'create')
+//                 ->notEmpty('address');
 
-        $validator
-                ->requirePresence('scale', 'create')
-                ->notEmpty('scale');
+//         $validator
+//                 ->requirePresence('scale', 'create')
+//                 ->notEmpty('scale');
 
         $validator
                 ->integer('read_nums')

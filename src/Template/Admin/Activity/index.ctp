@@ -39,10 +39,10 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['作者', '标签', '主办单位', '活动名称', '活动时间', '地点', '规模', '阅读数', '点赞数', '评论数', '报名人数', '报名费用', '创建时间', '更新时间', '操作'],
+                                ['作者', '标签', '主办单位', '活动名称', '活动时间', '地点', '规模', '阅读数', '点赞数', '评论数', '是否众筹', '报名人数', '报名费用', '创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'admin.truename', editable: true, align: 'center'},
-                            {name: 'industry.name', editable: true, align: 'center'},
+                            {name: 'industries', editable: true, align: 'center', formatter: industryFormatter},
                             {name: 'company', editable: true, align: 'center'},
                             {name: 'title', editable: true, align: 'center'},
                             {name: 'time', editable: true, align: 'center'},
@@ -51,15 +51,18 @@
                             {name: 'read_nums', editable: true, align: 'center'},
                             {name: 'praise_nums', editable: true, align: 'center'},
                             {name: 'comment_nums', editable: true, align: 'center'},
+                            {name: 'is_crowdfunding', editable: true, align: 'center', formatter: crowdFormatter},
                             {name: 'apply_nums', editable: true, align: 'center'},
                             {name: 'apply_fee', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
-                            {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
+                            {name: 'actionBtn', width: '200%', align: 'left', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: 10,
                         rowList: [10, 20, 30],
                         sortname: "id",
+                        sortorder: "desc",
+                        sortname: "is_top",
                         sortorder: "desc",
                         viewrecords: true,
                         gridview: true,
@@ -80,13 +83,84 @@
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
                 });
 
+                function crowdFormatter(cellvalue, options, rowObject) {
+					if(rowObject.is_crowdfunding == 0)
+					{
+						response = '否';
+					}
+					else
+					{
+						response = '是';
+					}
+                    
+                    return response;
+                }
+
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="编辑" href="/admin/activity/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+					if(rowObject.is_top == 0)
+					{
+						response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="return top(' + rowObject.id + ')">置顶</a>';
+					}
+					else
+					{
+						response += '<a title="取消置顶" href="javascript:void(0)" class="grid-btn untop" onclick="return untop(' + rowObject.id + ')">取消置顶</a>';
+					}
                     return response;
                 }
 
+				function top(id){
+                    layer.confirm('确定置顶？', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                    	$.ajax({
+                            type: 'post',
+                            data: '',
+                            dataType: 'json',
+                            url: '/admin/activity/top/' + id,
+                            success: function (res) {
+                                if (res.status) {
+                                	layer.msg(res.msg);
+                                	setTimeout(function(){window.location.reload();}, 2000);
+                                }
+                            }
+                        })
+                    }, function () {
+                    });
+				}
+
+				function untop(id){
+                    layer.confirm('确定取消置顶？', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                    	$.ajax({
+                            type: 'post',
+                            data: '',
+                            dataType: 'json',
+                            url: '/admin/activity/untop/' + id,
+                            success: function (res) {
+                                if (res.status) {
+                                	layer.msg(res.msg);
+                                	setTimeout(function(){window.location.reload();}, 2000);
+                                }
+                            }
+                        })
+                    }, function () {
+                    });
+				}
+                
+                function industryFormatter(cellvalue, options, rowObject) {
+                    var industries = rowObject.industries;
+                    response = '';
+                    for(i=0;i<industries.length;i++)
+                    {
+                        response += '<span style="background:#8AE7F8;margin-right:5px;">' + industries[i].name + '</span>';
+                    }
+                    return response;
+                }
+                
                 function delRecord(id) {
                     layer.confirm('确定删除？', {
                         btn: ['确认', '取消'] //按钮

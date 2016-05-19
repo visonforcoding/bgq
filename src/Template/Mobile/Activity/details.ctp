@@ -31,16 +31,9 @@
 			</section>
 			<section class="a-detail newscomment-box guests">
 				<h3 class="comment-title">参与嘉宾</h3>
-				
-				<p> 中银律师事务所合伙人 安寿辉</p>
-				<p>中国文化产业基金总裁 陈 杭</p>
-				<p>景林资本董事总经理 陈晓东</p>
-				<p>奥美健康 董事长 褚 程</p>
-				<p>光大体育基金总裁 范 南</p>
-				<p>乐视体育CEO 雷振剑</p>
-				<p>复星集团执行总经理 龚 林</p>
+				<?= $activity->guest; ?>
 				<div class="con-bottom clearfix">
-					<span class="readnums"><i class="iconfont like">&#xe601;</i><?= $activity->read_nums; ?></span>
+					<span class="readnums"><i class="iconfont" style="font-size:0.3rem;">&#xe601;</i><?= $activity->read_nums; ?></span>
 					
 					<span >
 						<i class="iconfont like<?php if ($isLike):?> changecolor<?php endif; ?>" artid="<?= $activity->id; ?>" type="0">&#xe616;</i>
@@ -72,14 +65,14 @@
 				<h3 class="comment-title">
 					评论
 					<i class="iconfont">&#xe618;</i>
-					<span>我要点评</span>
+					<span class="comment">我要点评</span>
 				</h3>
 				<?php foreach ($comment as $k=>$v): ?>
 				<div class="items">
 					<div class="comm-info clearfix">
 						<span><img src="<?= $v['user']['avatar'] ?>"/></span>
 						<span class="infor-comm">
-							<i class="username"><?= $v['user']['truename'] ?></i>
+							<i class="username"><?= $v['user']['truename'] ?> @回复人</i>
 							<i class="job"><?= $v['user']['company'] ?> <?= $v['user']['position'] ?></i>
 						</span>
 						<span>
@@ -106,31 +99,31 @@
 			</div>
 			</footer>
 		</div>
-		<!-- 
-		<div class="reg-shadow">
-			
-		</div>
-		<div class="shadow-info a-shadow a-forword">
-			<ul style='display:none'>
-				<li><textarea type="text" placeholder="请输入评论"></textarea></li>
-				
-				<li><a href="">取消</a><a href="">发表</a></li>
-			</ul>
-			<div>
-			<h3>通过以下渠道转发</h3>
-			<div class="forword">
-				<a href="#this"><span></span>微信好友</a>
-				<a href="#this"><span></span>微信朋友圈</a>
-			</div>
+		<div class="reg-shadow" ontouchmove="return false;" hidden>
+			<div class="shadow-info a-shadow a-forword">
+				<ul>
+					<li><textarea type="text" placeholder="请输入评论" name="comment-content"></textarea></li>
+					
+					<li>
+						<a href="javascript:void(0);" class="cancel">取消</a>
+						<a href="javascript:void(0);" class="publish">发表</a>
+					</li>
+				</ul>
 			</div>
 		</div>
-		 -->
+		
 	</body>
 <?php $this->start('script'); ?>
 <script>
+
+	$('.comment').click(function(){
+		$('.reg-shadow').show();
+		$('.shadow-info').show();
+	})
 	
-	$(document).ready(function(){
-		
+	$('.cancel').click(function(){
+		$('.reg-shadow').hide();
+		$('.shadow-info').hide();
 	});
 
 	// 评论点赞
@@ -147,6 +140,11 @@
                 		num = parseInt(num) + 1;
                         $('.addnum').siblings('b').text(num);
                         $('#likecom').siblings('.addnum').addClass('show');
+                        // 动画结束前只能点击一次
+                        var addnum = $('.addnum')[0];
+                    	addnum.addEventListener("webkitAnimationEnd", function(){
+                    	    $('.show').removeClass('show');
+                    	});
                     } else {
                         $.util.alert(msg.msg);
                     }
@@ -194,9 +192,30 @@
         });
 	})
 	
-	// 动画结束前只能点击一次
-	$('.addnum')[0].addEventListener("webkitAnimationEnd", function(){
-	    $('.show').removeClass('show');
-	});
+	
+	// 我要点评
+	$('.publish').click(function(){
+		var data = {};
+		data.body = $('textarea[name="comment-content"]').val();
+		$.ajax({
+            type: 'post',
+            url: '/activity/doComment/<?= $activity->id ?>',
+            data: data,
+            dataType: 'json',
+            success: function (msg) {
+                if (typeof msg === 'object') {
+                    if (msg.status === true) {
+                    	$.util.alert(msg.msg);
+                    	setTimeout(function(){
+                        	window.location.reload();
+                        	window.doScroll('scrollbarDown');
+                        }, 3000);
+                    } else {
+                        $.util.alert(msg.msg);
+                    }
+                }
+            }
+        });
+	})
 </script>
 <?php $this->end('script');
