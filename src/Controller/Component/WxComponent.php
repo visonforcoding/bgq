@@ -179,7 +179,8 @@ class WxComponent extends Component {
         $ticket = $this->getJsapiTicket();
         $noncestr = createRandomCode(16, 3);
         $timestamp = time();
-        $url = $this->request->scheme().'://'.$this->request->domain().$this->request->here(false);
+        $url = $_SERVER;
+        debug($url);
         $param = [
             'noncestr' => $noncestr,
             'jsapi_ticket' => $ticket,
