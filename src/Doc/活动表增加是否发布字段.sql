@@ -1,0 +1,1 @@
+ALTER TABLE activity add is_release TINYINT(2) DEFAULT 0 COMMENT '是否发布，0：不发布：1：发布'
