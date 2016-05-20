@@ -141,9 +141,10 @@
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' />
             <a href="/admin/activitycom/index/<?= $activity->id; ?>" id='' class='btn btn-primary' data-loading='稍候...'>评论详情</a>
-            <a href="/admin/activity/logs" id='' class='btn btn-primary' data-loading='稍候...'>日志详情</a>
-            <a href="/admin/activity/apply" id='' class='btn btn-primary' data-loading='稍候...'>报名用户</a>
-            <a href="/admin/activity/sponsor" id='' class='btn btn-primary' data-loading='稍候...'>赞助详情</a>
+            <a href="/admin/likeLogs/index/<?= $activity->id; ?>" id='' class='btn btn-primary' data-loading='稍候...'>点赞日志</a>
+            <a href="/admin/collectLogs/index/<?= $activity->id; ?>" id='' class='btn btn-primary' data-loading='稍候...'>收藏日志</a>
+            <a href="/admin/apply/index/<?= $activity->id; ?>" id='' class='btn btn-primary' data-loading='稍候...'>报名用户</a>
+            <a href="/admin/sponsor/index/<?= $activity->id; ?>" id='' class='btn btn-primary' data-loading='稍候...'>赞助详情</a>
         </div>
     </div>
     <?= $this->Form->end() ?>

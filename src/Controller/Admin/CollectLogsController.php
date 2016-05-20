@@ -4,11 +4,11 @@ namespace App\Controller\Admin;
 use Wpadmin\Controller\AppController;
 
 /**
- * Activitycom Controller
+ * CollectLogs Controller
  *
- * @property \App\Model\Table\ActivitycomTable $Activitycom
+ * @property \App\Model\Table\CollectLogsTable $CollectLogs
  */
-class ActivitycomController extends AppController
+class CollectLogsController extends AppController
 {
 
 /**
@@ -16,27 +16,26 @@ class ActivitycomController extends AppController
 *
 * @return void
 */
-	public function index($id='')
-	{
-		$this->set('id', $id);
-		$this->set('activitycom', $this->Activitycom);
-	}
+public function index()
+{
+$this->set('collectLogs', $this->CollectLogs);
+}
 
     /**
      * View method
      *
-     * @param string|null $id Activitycom id.
+     * @param string|null $id Collect Log id.
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null)
     {
         $this->viewBuilder()->autoLayout(false);
-        $activitycom = $this->Activitycom->get($id, [
-            'contain' => ['Activities', 'Users']
+        $collectLog = $this->CollectLogs->get($id, [
+            'contain' => ['Users', 'Activities']
         ]);
-        $this->set('activitycom', $activitycom);
-        $this->set('_serialize', ['activitycom']);
+        $this->set('collectLog', $collectLog);
+        $this->set('_serialize', ['collectLog']);
     }
 
     /**
@@ -46,53 +45,51 @@ class ActivitycomController extends AppController
      */
     public function add()
     {
-        $activitycom = $this->Activitycom->newEntity();
+        $collectLog = $this->CollectLogs->newEntity();
         if ($this->request->is('post')) {
-            $activitycom = $this->Activitycom->patchEntity($activitycom, $this->request->data);
-            if ($this->Activitycom->save($activitycom)) {
+            $collectLog = $this->CollectLogs->patchEntity($collectLog, $this->request->data);
+            if ($this->CollectLogs->save($collectLog)) {
                  $this->Util->ajaxReturn(true,'添加成功');
             } else {
-                 $errors = $activitycom->errors();
+                 $errors = $collectLog->errors();
                  $this->Util->ajaxReturn(['status'=>false, 'msg'=>getMessage($errors),'errors'=>$errors]);
             }
         }
-                $activities = $this->Activitycom->Activities->find('list', ['limit' => 200]);
-        $users = $this->Activitycom->Users->find('list', ['limit' => 200]);
-        $replyusers = $this->Activitycom->Replyusers->find('list', ['limit' => 200]);
-        $this->set(compact('activitycom', 'activities', 'users', 'replyusers'));
+                $users = $this->CollectLogs->Users->find('list', ['limit' => 200]);
+        $activities = $this->CollectLogs->Activities->find('list', ['limit' => 200]);
+        $this->set(compact('collectLog', 'users', 'activities'));
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id Activitycom id.
+     * @param string|null $id Collect Log id.
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
     {
-         $activitycom = $this->Activitycom->get($id,[
+         $collectLog = $this->CollectLogs->get($id,[
             'contain' => []
         ]);
         if ($this->request->is(['post','put'])) {
-            $activitycom = $this->Activitycom->patchEntity($activitycom, $this->request->data);
-            if ($this->Activitycom->save($activitycom)) {
+            $collectLog = $this->CollectLogs->patchEntity($collectLog, $this->request->data);
+            if ($this->CollectLogs->save($collectLog)) {
                   $this->Util->ajaxReturn(true,'修改成功');
             } else {
-                 $errors = $activitycom->errors();
+                 $errors = $collectLog->errors();
                $this->Util->ajaxReturn(false,getMessage($errors));
             }
         }
-                  $activities = $this->Activitycom->Activities->find('list', ['limit' => 200]);
-                $users = $this->Activitycom->Users->find('list', ['limit' => 200]);
-                $replyusers = $this->Activitycom->Replyusers->find('list', ['limit' => 200]);
-                $this->set(compact('activitycom', 'activities', 'users', 'replyusers'));
+                  $users = $this->CollectLogs->Users->find('list', ['limit' => 200]);
+                $activities = $this->CollectLogs->Activities->find('list', ['limit' => 200]);
+                $this->set(compact('collectLog', 'users', 'activities'));
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id Activitycom id.
+     * @param string|null $id Collect Log id.
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
@@ -101,11 +98,11 @@ class ActivitycomController extends AppController
         $this->request->allowMethod('post');
          $id = $this->request->data('id');
                 if ($this->request->is('post')) {
-                $activitycom = $this->Activitycom->get($id);
-                 if ($this->Activitycom->delete($activitycom)) {
+                $collectLog = $this->CollectLogs->get($id);
+                 if ($this->CollectLogs->delete($collectLog)) {
                      $this->Util->ajaxReturn(true,'删除成功');
                 } else {
-                    $errors = $activitycom->errors();
+                    $errors = $collectLog->errors();
                     $this->Util->ajaxReturn(true,getMessage($errors));
                 }
           }
@@ -116,39 +113,32 @@ class ActivitycomController extends AppController
 *
 * @return json
 */
-public function getDataList($id='')
+public function getDataList()
 {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'activitycom.'.$this->request->data('sidx');
+        $sort = 'collectlogs.'.$this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where[' activitycom.`body` like'] = "%$keywords%";
+            $where[' username like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['activitycom.`create_time` >' => $begin_time], ['activitycom.`create_time` <' => $end_time]];
+            $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
-        if($id)
-        {
-        	$query =  $this->Activitycom->find()->where(['activity_id'=>$id]);
-        }
-        else
-        {
-        	$query =  $this->Activitycom->find();
-        }
+                $query =  $this->CollectLogs->find();
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
         }
         $nums = $query->count();
-        $query->contain(['Activities', 'Users', 'Replyusers']);
+        $query->contain(['Users', 'Activities']);
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
@@ -191,11 +181,11 @@ public function exportExcel()
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
-        $Table =  $this->Activitycom;
-        $column = ['父id','用户id','回复人的id','活动id','评论内容','点赞数','评论时间'];
+        $Table =  $this->CollectLogs;
+        $column = ['用户id','关联id（活动id或资讯id）','日志内容','记录时间','更新时间','类型值：0：活动；1：资讯'];
         $query = $Table->find();
         $query->hydrate(false);
-        $query->select(['pid','user_id','reply_id','activity_id','body','praise_nums','create_time']);
+        $query->select(['user_id','relate_id','msg','create_time','update_time','type']);
          if (!empty($where)) {
             $query->where($where);
         }
@@ -204,7 +194,7 @@ public function exportExcel()
         }
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = 'Activitycom_'.date('Y-m-d').'.csv';
+        $filename = 'CollectLogs_'.date('Y-m-d').'.csv';
         \Wpadmin\Utils\Export::exportCsv($column,$res,$filename);
 
 }
