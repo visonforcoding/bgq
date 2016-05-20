@@ -21,7 +21,7 @@ news.prototype.bindEvent = function(){
         while(em && !em.id && i<=3){ em = em.parentNode; i++;}
         if(!em || !em.id) return;
         if(em.id.indexOf('common_')){
-            //todo();
+            console.log($(em));
         }
         switch(em.id){
             case 'imageViewer': case 'fullImg':

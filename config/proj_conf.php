@@ -28,6 +28,11 @@ return [
             'table'=>'user',
             'remark'=>'关注消息',
             'url'=>'/admin/user/index'
+        ],
+        '2'=>[
+            'table'=>'newscom',
+            'remark'=>'资讯评论点赞消息',
+            'url'=>'/news/view/{#id#}#{#com_id#}'
         ]
     ],
 ];

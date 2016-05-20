@@ -54,10 +54,11 @@
                 <i class="job">{#user_company#} {#user_position#}</i>
             </span>
             <span>
-                <i class="iconfont">&#xe615;</i>{#praise_nums#}
+                <b class="addnum">+1</b><i data-id="{#id#}" data-disable="{#disable#}" style="{#style#}"  class="iconfont praise">&#xe615;</i>
+                <em>{#praise_nums#}</em>
             </span>
         </div>
-        <p>{#body#}</p>
+        <p id="common_{#id#}">{#body#}</p>
     </div>
 </script>
 <?php $this->start('script') ?>
@@ -69,10 +70,17 @@
         d.user_truename = d.user.truename;
         d.user_company = d.user.company;
         d.user_position = d.user.position;
+        d.style = '';
+        d.disable = '0';
+        if(d['likes'].length){
+            d.style= 'font-weight:bold';
+            d.disable = '1';
+        }
         return d;
     });
     $(function () {
-        $('#commit').click(function () {
+        $('#commit,.items').click(function () {
+            
             $('.reg-shadow,.shadow-info').show('slow');
         });
         $('#cancel').click(function () {
@@ -80,6 +88,10 @@
         });
         $('#submit').click(function () {
             var content = $('#content').val();
+            if(!content){
+                $.util.alert('评论内容不可为空');
+                return false;
+            }
             $.util.ajax({
                 url: '/news/comment',
                 data: {content: content, id:<?= $news->id ?>},
@@ -91,6 +103,51 @@
                 }
             });
         });
+        $('.praise').click(function () {
+            var id = $(this).data('id');
+            var obj = $(this);
+            if(obj.data('disable')==='1'){
+                return false;
+            }
+            $.util.ajax({
+                url: '/news/comment-praise',
+                data: {id:id},
+                func: function (res) {
+                    if (res.status) {
+                        obj.prev('.addnum').show();
+                        obj.next('em').html(parseInt(obj.next('em').text())+1);
+                        obj.css('font-weight','bold');
+                        obj.data('disable','1');
+                        setTimeout(function(){
+                            obj.prev('.addnum').hide();
+                        },1000);
+                    }
+                }
+            });
+        });
+    });
+        $('body').on('tap', function(e){
+        var target = e.srcElement || e.target, em=target, i=1;
+        while(em && !em.id && i<=3){ em = em.parentNode; i++;}
+        if(!em || !em.id) return;
+        if(em.id.indexOf('common_')){
+            console.log($(em));
+        }
+        switch(em.id){
+            case 'imageViewer': case 'fullImg':
+                //do();
+            break;
+            case 'blackCover':
+                //do();
+                break;
+            case 'detailClosePC':
+                //do();
+                break;
+            case 'goTop':
+                window.scroll(0,0);
+                e.preventDefault();
+                break;
+        }
     });
 </script>
 <?php $this->end('script'); ?>

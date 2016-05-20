@@ -8,6 +8,7 @@ use App\Controller\Mobile\AppController;
  * News Controller  新闻
  *
  * @property \App\Model\Table\NewsTable $News
+ * @property \App\Controller\Component\BusinessComponent $Business
  */
 class NewsController extends AppController {
 
@@ -53,10 +54,11 @@ class NewsController extends AppController {
         $this->handCheckLogin();
         if ($this->request->is('post')) {
             $CommentTable = \Cake\ORM\TableRegistry::get('newscom');
-            $comment = $CommentTable->newEntity();
-            $comment->user_id = $this->user->id;
-            $comment->body = $this->request->data('content');
-            $comment->news_id = $this->request->data('id');
+            $comment = $CommentTable->newEntity([
+                'user_id'=>  $this->user->id,
+                'news_id'=>  $this->request->data('id'),
+                'body'=>  $this->request->data('content')
+            ]);
             if ($CommentTable->save($comment)) {
                 //文章新闻数+1
                 $news = $this->News->get($this->request->data('id'));
@@ -64,7 +66,8 @@ class NewsController extends AppController {
                 $this->News->save($news);
                 $this->Util->ajaxReturn(true, '评论成功');
             } else {
-                $this->Util->ajaxReturn(false, '评论失败');
+                $msg = errorMsg($comment,'评论成功');
+                $this->Util->ajaxReturn(false, $msg);
             }
         }
     }
@@ -77,77 +80,44 @@ class NewsController extends AppController {
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null) {
-        $news = $this->News->get($id, [
-            'contain' => ['Admins', 'Comments','Comments.Users'=>function($q){
-                    return $q->select(['id','avatar','truename','company','position']);
-            }]
-        ]);
+        if(!empty($this->user)){
+            $user_id = $this->user->id;
+            $news = $this->News->get($id, [
+                'contain' => ['Admins', 'Comments','Comments.Users'=>function($q){
+                        return $q->select(['id','avatar','truename','company','position']);
+                },'Comments.Likes'=>function($q)use($user_id){
+                    return $q->where(['type'=>1,'user_id'=>$user_id]);
+                }]
+            ]);
+        }else{
+            $news = $this->News->get($id, [
+                'contain' => ['Admins', 'Comments','Comments.Users'=>function($q){
+                        return $q->select(['id','avatar','truename','company','position']);
+                }]
+            ]);
+        }
+        //阅读数+1
+        $news->read_nums +=1;
+        $this->News->save($news);
         $this->set('news', $news);
         $this->set('_serialize', ['news']);
     }
-
+    
+    
     /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
+     * 评论点赞
      */
-    public function add() {
-        $news = $this->News->newEntity();
-        if ($this->request->is('post')) {
-            $news = $this->News->patchEntity($news, $this->request->data);
-            if ($this->News->save($news)) {
-                $this->Flash->success(__('The news has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The news could not be saved. Please, try again.'));
+    public function commentPraise(){
+        $this->handCheckLogin();
+        if($this->request->is('post')){
+            $relate_id = $this->request->data('id');
+            $user_id = $this->user->id;
+            $this->loadComponent('Business');
+            if($this->Business->commentPraise($user_id, $relate_id, 1)){
+                $this->Util->ajaxReturn(true,'点赞成功');
+            }else{
+                $this->Util->ajaxReturn(false,'点赞失败');
             }
         }
-        $admins = $this->News->Admins->find('list', ['limit' => 200]);
-        $this->set(compact('news', 'admins'));
-        $this->set('_serialize', ['news']);
     }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id News id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null) {
-        $news = $this->News->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $news = $this->News->patchEntity($news, $this->request->data);
-            if ($this->News->save($news)) {
-                $this->Flash->success(__('The news has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The news could not be saved. Please, try again.'));
-            }
-        }
-        $admins = $this->News->Admins->find('list', ['limit' => 200]);
-        $this->set(compact('news', 'admins'));
-        $this->set('_serialize', ['news']);
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id News id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null) {
-        $this->request->allowMethod(['post', 'delete']);
-        $news = $this->News->get($id);
-        if ($this->News->delete($news)) {
-            $this->Flash->success(__('The news has been deleted.'));
-        } else {
-            $this->Flash->error(__('The news could not be deleted. Please, try again.'));
-        }
-        return $this->redirect(['action' => 'index']);
-    }
-
 }

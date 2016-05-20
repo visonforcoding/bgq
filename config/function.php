@@ -31,3 +31,27 @@ function createRandomCode($length, $type = 1) {
     }
     return $randomCode;
 }
+
+
+/**
+ * save 的验证错误信息
+ * @param type $entity
+ * @param type $msg
+ * @return type
+ */
+function errorMsg($entity,$msg) {
+    $errors = $entity->errors();
+    if(\Cake\Core\Configure::read('debug')) {
+        Cake\Log\Log::error($errors);
+    }
+    $message = null;
+    if(is_array($errors)){
+        foreach ($errors as $value) {
+            foreach ($value as $val) {
+                $message = $val;
+                break;
+            }
+        }
+    }
+    return empty($message)?$msg:$message;
+}

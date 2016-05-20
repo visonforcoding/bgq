@@ -30,13 +30,19 @@ class NewscomTable extends Table {
         $this->primaryKey('id');
 
         $this->belongsTo('News', [
+            'className' => 'News',
             'foreignKey' => 'news_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Users', [
-            'className'=>'User',
+            'className' => 'User',
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
+        ]);
+        $this->hasMany('Likes', [
+            'className' => 'CommentLike',
+            'joinType' => 'LEFT',
+            'foreignKey' => 'relate_id',
         ]);
         $this->addBehavior('Timestamp', [
             'events' => [
@@ -60,18 +66,8 @@ class NewscomTable extends Table {
                 ->allowEmpty('id', 'create');
 
         $validator
-                ->requirePresence('body', 'create')
+                ->requirePresence('body', 'create','评论内容不可为空')
                 ->notEmpty('body');
-
-        $validator
-                ->integer('praise_nums')
-                ->requirePresence('praise_nums', 'create')
-                ->notEmpty('praise_nums');
-
-        $validator
-                ->dateTime('create_time')
-                ->requirePresence('create_time', 'create')
-                ->notEmpty('create_time');
 
         return $validator;
     }
