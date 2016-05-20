@@ -21,7 +21,7 @@ class NewsController extends AppController {
     public function index() {
         $news = $this->News->find()
                         ->contain(['Admins', 'Industries'])
-                        ->limit($this->newslimit)->orderDesc('news.create_time')->toArray();
+                        ->limit($this->newslimit)->orderDesc('News.create_time')->toArray();
         //获取资讯banner图
         $bannerTable = \Cake\ORM\TableRegistry::get('banner');
         $banners = $bannerTable->find()->where("`enabled` = '1' and `type` = '1'")
@@ -38,7 +38,7 @@ class NewsController extends AppController {
     public function getMoreNews($page) {
         $news = $this->News->find()
                         ->contain(['Admins', 'Industries'])->page($page, $this->newslimit)
-                        ->orderDesc('news.create_time')->toArray();
+                        ->orderDesc('News.create_time')->toArray();
         if ($news) {
             $this->Util->ajaxReturn(['status' => true, 'data' => $news]);
         } else {
