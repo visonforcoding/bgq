@@ -75,7 +75,7 @@ class ActivityController extends AppController{
 					->Activity
 					->Activitycom
 					->find()
-					->contain(['Users'])
+					->contain(['Users', 'Replyusers'])
 					->where(['activity_id' => $id])
 					->order(['Activitycom.create_time' => 'DESC'])
 					->hydrate(false)
@@ -120,7 +120,7 @@ class ActivityController extends AppController{
 				'order' => ['is_top' => 'DESC', 'create_time' => 'DESC'],
 				'limit' => '2',
 			];
-			$activity = $this->paginate($this->Activity);
+			$activity = $this->paginate($this->Activity->find()->where(['is_check'=>1]));
 // 			debug($activity);die;
 			$this->set(compact('activity'));
 			$this->set('_serialize', ['activity']);
@@ -154,8 +154,37 @@ class ActivityController extends AppController{
 	/**
 	 * 我要推荐
 	 */
-	public function recommend($id=''){
-		$this->set('pagetitle', '我要推荐');
+	public function recommend($id){
+		if($this->request->is('post'))
+		{
+			if($this->user)
+			{
+				$data = $this->request->data();
+				$data['user_id'] = $this->user->id;
+				$data['activity_id'] = $id;
+				$sponsorTable = \Cake\ORM\TableRegistry::get('sponsor');
+				$sponsor = $sponsorTable->newEntity();
+				$formdata = $sponsorTable->patchEntity($sponsor, $data);
+				$res = $sponsorTable->save($formdata);
+				if($res)
+				{
+					$this->Util->ajaxReturn(true, '推荐成功');
+				}
+				else
+				{
+					$this->Util->ajaxReturn(false, '系统错误');
+				}
+			}
+			else
+			{
+				$this->Util->ajaxReturn(false, '请先登录');
+			}
+		}
+		else
+		{
+			$this->set('pagetitle', '我要推荐');
+		}
+		
 	}
 	
 	/**
@@ -286,31 +315,23 @@ class ActivityController extends AppController{
 	 * @param int $id 文章id
 	 */
 	public function artLike($id){
-		if($this->user)
+		$this->loadComponent('Business');
+		$code = $this->Business->artLike($id, 'articlelike');
+		if($code == 'success')
 		{
-			$this->loadComponent('Business');
-			$code = $this->Business->artLike($id, 'articlelike');
-			if($code == 'success')
+			$res = $this->likeLog($id, $this->user->id);
+			if($res)
 			{
-				$res = $this->likeLog($id, $this->user->id);
-				if($res)
-				{
-					$this->Util->ajaxReturn(true, '成功');
-				}
-				else
-				{
-					$this->Util->ajaxReturn(false, '失败');
-				}
-// 				$this->Util->ajaxReturn(true, '点赞成功！');
+				$this->Util->ajaxReturn(true, '点赞成功！');
 			}
 			else
 			{
-				$this->Util->ajaxReturn(false, $this->showError($code));
+				$this->Util->ajaxReturn(false, '系统错误');
 			}
 		}
 		else
 		{
-			$this->Util->ajaxReturn(false, '请先登录');
+			$this->Util->ajaxReturn(false, $this->showError($code));
 		}
 	}
 	
@@ -323,7 +344,15 @@ class ActivityController extends AppController{
 		$code = $this->Business->collect($id);
 		if($code == 'success')
 		{
-			$this->Util->ajaxReturn(true, '收藏成功！');
+			$res = $this->collectLog($id, $this->user->id);
+			if($res)
+			{
+				$this->Util->ajaxReturn(true, '收藏成功！');
+			}
+			else
+			{
+				$this->Util->ajaxReturn(false, '系统错误');
+			}
 		}
 		else
 		{
@@ -435,10 +464,20 @@ class ActivityController extends AppController{
 				$data = $this->request->data();
 				$data['user_id'] = $this->user->id;
 				$data['activity_id'] = $id;
+				
 				$activitycom = $this->Activity->Activitycom->newEntity();
-				$comment = $this->Activity->Activitycom->patchEntity($activitycom, $data);
-// 				debug($comment);die;
-				$res = $this->Activity->Activitycom->save($comment);
+				$doComment = $this->Activity->Activitycom->patchEntity($activitycom, $data);
+				if($data['pid'])
+				{
+					$comment = $this->Activity->Activitycom->get($data['pid']);
+					$doComment->reply_id = $comment->user_id;
+				}
+				else
+				{
+					$user = $this->Activity->get($id);
+					$doComment->reply_id = $user->user_id;
+				}
+				$res = $this->Activity->Activitycom->save($doComment);
 				if($res)
 				{
 					$activity = $this->Activity->get($id);
@@ -462,11 +501,17 @@ class ActivityController extends AppController{
 		}
 	}
 	
+	/**
+	 * 记录点赞日志
+	 * @param int $id 活动id
+	 * @param int $user_id 用户id
+	 * @return boolean true: 记录成功; false: 记录失败
+	 */
 	public function likeLog($id, $user_id){
 		$activity = $this->Activity->get($id);
 		$userTable = \Cake\ORM\TableRegistry::get('user');
 		$user = $userTable->find()->where(['id'=>$user_id])->hydrate(false)->first();
-		$msg = $user['truename'] . '于' . date('Y-m-d H:i:s', time()) . '对' . $activity->title . '活动点了赞';
+		$msg = $user['truename'] . ' 于' . date('Y-m-d H:i:s', time()) . '对 ' . $activity->title . ' 活动点了赞';
 		$data = [
 			'relate_id' => $id,
 			'user_id' => $user_id,
@@ -478,6 +523,30 @@ class ActivityController extends AppController{
 		$like = $likeLogsTable->patchEntity($likeLogs, $data);
 		return $likeLogsTable->save($like, ['associated' => false]);
 	}
+	
+	/**
+	 * 记录收藏日志
+	 * @param int $id 活动id
+	 * @param int $user_id 用户id
+	 * @return boolean true: 记录成功; false: 记录失败
+	 */
+	public function collectLog($id, $user_id){
+		$activity = $this->Activity->get($id);
+		$userTable = \Cake\ORM\TableRegistry::get('user');
+		$user = $userTable->find()->where(['id'=>$user_id])->hydrate(false)->first();
+		$msg = $user['truename'] . ' 于' . date('Y-m-d H:i:s', time()) . '收藏了 ' . $activity->title . ' 活动';
+		$data = [
+			'relate_id' => $id,
+			'user_id' => $user_id,
+			'type' => 0,
+			'msg' => $msg,
+		];
+		$collectLogsTable = \Cake\ORM\TableRegistry::get('collectlogs');
+		$collectLogs = $collectLogsTable->newEntity();
+		$collect = $collectLogsTable->patchEntity($collectLogs, $data);
+		return $collectLogsTable->save($collect, ['associated' => false]);
+	}
+	
 	
 	/**
 	 * 显示错误信息

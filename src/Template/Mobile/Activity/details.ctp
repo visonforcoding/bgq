@@ -18,11 +18,15 @@
 				<p>时间：<?= $activity->time; ?></p>
 				<p>地点：<?= $activity->address; ?></p>
 				<p>规模：<?= $activity->scale; ?></p>
+				<div class="a-other-info" style="text-indent: 0;font-size: 0.24rem;line-height: 0.36rem;padding-left: 0;width: 90%;margin: 0 auto;color: #9ba4ad;">
+					<?php foreach ($activity->industries as $k=>$v): ?>
+					<a><?= $v->name; ?></a>
+					<?php endforeach; ?>
+				</div>
 			</section>
 			<section class="a-detail newscomment-box">
 				<h3 class="comment-title">活动介绍</h3>
-				<p class="p"><?= $activity->summary; ?>
-</p>
+				<p class="p"><?= $activity->summary; ?></p>
 				
 			</section>
 			<section class="a-detail newscomment-box">
@@ -71,8 +75,8 @@
 				<div class="items">
 					<div class="comm-info clearfix">
 						<span><img src="<?= $v['user']['avatar'] ?>"/></span>
-						<span class="infor-comm">
-							<i class="username"><?= $v['user']['truename'] ?> @回复人</i>
+						<span class="infor-comm" value="<?= $v['id'] ?>">
+							<i class="username"><?= $v['user']['truename'] ?> <?php if ($v['pid']): ?>@<?= $v['replyuser']['truename'] ?><?php endif; ?></i>
 							<i class="job"><?= $v['user']['company'] ?> <?= $v['user']['position'] ?></i>
 						</span>
 						<span>
@@ -99,26 +103,44 @@
 			</div>
 			</footer>
 		</div>
-		<div class="reg-shadow" ontouchmove="return false;" hidden>
-			<div class="shadow-info a-shadow a-forword">
+		<div class="reg-shadow article-shadow" ontouchmove="return false;" hidden>
+			<div class="shadow-info a-shadow a-forword article">
 				<ul>
-					<li><textarea type="text" placeholder="请输入评论" name="comment-content"></textarea></li>
+					<li><textarea type="text" placeholder="请输入评论" name="comment-content-article"></textarea></li>
 					
 					<li>
 						<a href="javascript:void(0);" class="cancel">取消</a>
-						<a href="javascript:void(0);" class="publish">发表</a>
+						<a href="javascript:void(0);" class="publish-article">发表</a>
 					</li>
 				</ul>
 			</div>
 		</div>
-		
+		<div class="reg-shadow reply-shadow" ontouchmove="return false;" hidden>
+			<div class="shadow-info a-shadow a-forword reply">
+				<ul>
+					<li><textarea type="text" placeholder="请输入评论" name="comment-content-reply"></textarea></li>
+					
+					<li>
+						<a href="javascript:void(0);" class="cancel">取消</a>
+						<a href="javascript:void(0);" class="publish-reply">发表</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</body>
 <?php $this->start('script'); ?>
 <script>
 
 	$('.comment').click(function(){
-		$('.reg-shadow').show();
-		$('.shadow-info').show();
+		$('.article-shadow').show();
+		$('.article').show();
+	})
+	
+	$('.infor-comm').click(function(){
+		$('.reply-shadow').show();
+		$('.reply').show();
+		var comid = $(this).attr('value');
+		$('.publish-reply').attr('value', comid);
 	})
 	
 	$('.cancel').click(function(){
@@ -194,9 +216,35 @@
 	
 	
 	// 我要点评
-	$('.publish').click(function(){
+	$('.publish-article').click(function(){
 		var data = {};
-		data.body = $('textarea[name="comment-content"]').val();
+		data.body = $('textarea[name="comment-content-article"]').val();
+		data.pid = 0;
+		$.ajax({
+            type: 'post',
+            url: '/activity/doComment/<?= $activity->id ?>',
+            data: data,
+            dataType: 'json',
+            success: function (msg) {
+                if (typeof msg === 'object') {
+                    if (msg.status === true) {
+                    	$.util.alert(msg.msg);
+                    	setTimeout(function(){
+                        	window.location.reload();
+                        	window.doScroll('scrollbarDown');
+                        }, 3000);
+                    } else {
+                        $.util.alert(msg.msg);
+                    }
+                }
+            }
+        });
+	})
+	
+	$('.publish-reply').click(function(){
+		var data = {};
+		data.body = $('textarea[name="comment-content-reply"]').val();
+		data.pid = $('.publish-reply').attr('value');
 		$.ajax({
             type: 'post',
             url: '/activity/doComment/<?= $activity->id ?>',

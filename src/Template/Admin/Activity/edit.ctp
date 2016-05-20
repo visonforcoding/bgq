@@ -5,14 +5,24 @@
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($activity, ['class' => 'form-horizontal']) ?>
+    <?php if($activity->is_check == 2): ?>
+    	<div class="form-group">
+	        <label class="col-md-2 control-label">未通过审核理由</label>
+	        <div class="col-md-8">
+	                        <?php
+	            echo $this->Form->input('reason', ['label' => false, 'class' => 'form-control']);
+	            ?>
+	        </div>
+	    </div>
+    <?php endif; ?>
         <div class="form-group">
-        <label class="col-md-2 control-label">作者id</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('admin_id', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
+	        <label class="col-md-2 control-label">作者id</label>
+	        <div class="col-md-8">
+	                        <?php
+	            echo $this->Form->input('admin_id', ['label' => false, 'class' => 'form-control']);
+	            ?>
+	        </div>
+	    </div>
         <div class="form-group">
 	        <label class="col-md-2 control-label">行业标签</label>
 	        <div class="col-md-8">
@@ -129,7 +139,11 @@
     </div>
         <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
+            <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' />
+            <a href="/admin/activitycom/index/<?= $activity->id; ?>" id='' class='btn btn-primary' data-loading='稍候...'>评论详情</a>
+            <a href="/admin/activity/logs" id='' class='btn btn-primary' data-loading='稍候...'>日志详情</a>
+            <a href="/admin/activity/apply" id='' class='btn btn-primary' data-loading='稍候...'>报名用户</a>
+            <a href="/admin/activity/sponsor" id='' class='btn btn-primary' data-loading='稍候...'>赞助详情</a>
         </div>
     </div>
     <?= $this->Form->end() ?>

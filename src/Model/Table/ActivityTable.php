@@ -35,6 +35,13 @@ class ActivityTable extends Table {
             'joinTable' => 'admin',
             'className' => 'Wpadmin.Admin',
         ]);
+        
+        $this->belongsTo('Users', [
+        	'foreignKey' => 'user_id',
+        	'joinType' => 'INNER',
+        	'className' => 'User',
+        ]);
+        
         $this->belongsToMany('Industries', [
             'className' => 'Industry',
             'joinTable' => 'activity_industry',

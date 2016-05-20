@@ -131,7 +131,7 @@ class ActivityController extends AppController {
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
+            $where['and'] = [['activity.`create_time` >' => $begin_time], ['activity.`create_time` <' => $end_time]];
         }
         $query = $this->Activity->find();
         $query->hydrate(false);
@@ -139,7 +139,7 @@ class ActivityController extends AppController {
             $query->where($where);
         }
         $nums = $query->count();
-        $query->contain(['Admins', 'Industries']);
+        $query->contain(['Users', 'Industries']);
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
@@ -198,6 +198,10 @@ class ActivityController extends AppController {
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
 
+    /**
+     * 置顶操作
+     * @param int $id 活动id
+     */
     public function top($id){
     	$activity = $this->Activity->get($id);
     	$activity->is_top = 1;
@@ -212,6 +216,10 @@ class ActivityController extends AppController {
     	}
     }
     
+    /**
+     * 取消置顶操作
+     * @param int $id 活动id
+     */
     public function untop($id)
     {
     	$activity = $this->Activity->get($id);
@@ -225,6 +233,98 @@ class ActivityController extends AppController {
     	{
     		$this->Util->ajaxReturn(false, '取消置顶失败');
     	}
+    }
+    
+    /**
+     * 发布活动操作
+     * @param int $id 活动id
+     */
+    public function release($id){
+    	$activity = $this->Activity->get($id);
+    	$activity->is_check = 1;
+    	$res = $this->Activity->save($activity);
+    	if($res)
+    	{
+    		$this->Util->ajaxReturn(true, '发布成功');
+    	}
+    	else
+    	{
+    		$this->Util->ajaxReturn(false, '发布失败');
+    	}
+    }
+    
+    /**
+     * 审核不通过操作
+     * @param int $id 活动id
+     */
+    public function unrelease($id)
+    {
+    	$data = $this->request->data();
+    	$activity = $this->Activity->get($id);
+    	$activity->is_check = 2;
+    	$activity->reason = $data['reason'];
+    	$res = $this->Activity->save($activity);
+    	if($res)
+    	{
+    		$this->Util->ajaxReturn(true, '操作成功');
+    	}
+    	else
+    	{
+    		$this->Util->ajaxReturn(false, '操作失败');
+    	}
+    }
+    
+    public function comment($id){
+    	$this->set('id', $id);
+    	$this->set('comment', $this->Activity->Activitycom);
+    }
+    
+    
+    public function getCommentList($id){
+    	$this->request->allowMethod('ajax');
+    	$page = $this->request->data('page');
+    	$rows = $this->request->data('rows');
+    	$sort = 'activitycom.' . $this->request->data('sidx');
+    	$order = $this->request->data('sord');
+    	$keywords = $this->request->data('keywords');
+    	$begin_time = $this->request->data('begin_time');
+    	$end_time = $this->request->data('end_time');
+    	$where = [];
+    	if (!empty($keywords)) {
+    		$where[' body like'] = "%$keywords%";
+    	}
+    	if (!empty($begin_time) && !empty($end_time)) {
+    		$begin_time = date('Y-m-d', strtotime($begin_time));
+    		$end_time = date('Y-m-d', strtotime($end_time));
+    		$where['and'] = [['activitycom.`create_time` >' => $begin_time], ['activitycom.`create_time` <' => $end_time]];
+    	}
+    	$query = $this->Activity->Activitycom->find();
+    	$query->hydrate(false);
+    	if (!empty($where)) {
+    		$query->where($where);
+    	}
+    	$nums = $query->count();
+    	$query->contain(['Users']);
+    	if (!empty($sort) && !empty($order)) {
+    		$query->order([$sort => $order]);
+    	}
+    	
+    	$query->limit(intval($rows))
+    	->page(intval($page));
+    	$res = $query->toArray();
+//     	debug($res);die;
+    	if (empty($res)) {
+    		$res = array();
+    	}
+    	if ($nums > 0) {
+    		$total_pages = ceil($nums / $rows);
+    	} else {
+    		$total_pages = 0;
+    	}
+    	$data = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $res);
+    	$this->autoRender = false;
+    	$this->response->type('json');
+    	echo json_encode($data);
     }
     
 }
