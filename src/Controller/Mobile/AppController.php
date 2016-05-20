@@ -100,6 +100,7 @@ class AppController extends Controller {
         $url = '/'.$this->request->url;
         if (!$user) {
             if ($this->request->is('ajax')) {
+                $url = '/'.  $this->request->referer();
                 $this->Util->ajaxReturn(['status' => false, 'msg' => '请先登录', 'code' => 403,'redirect_url'=>$url]);
             }
             return $this->redirect('/user/login?redirect_url='.$url);

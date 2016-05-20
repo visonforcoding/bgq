@@ -35,6 +35,11 @@ class CommentlikeTable extends Table
             'joinType' => 'INNER',
         	'className' => 'User'
         ]);
+        $this->belongsTo('Newscom',[
+            'foreignKey' => 'relate_id',
+            'joinType' => 'INNER',
+        	'className' => 'Newscom'
+        ]);
         
         $this->addBehavior('Timestamp', [
         		'events' => [

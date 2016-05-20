@@ -38,7 +38,6 @@ class UserTable extends Table {
 
         $this->hasMany('Subjects',[
             'className'=>'MeetSubject',
-            ''
         ]);
         $this->belongsToMany('Industries', [
             'className' => 'Industry',

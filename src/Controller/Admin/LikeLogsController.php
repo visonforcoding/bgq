@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller\Admin;
 
 use Wpadmin\Controller\AppController;
@@ -8,19 +9,17 @@ use Wpadmin\Controller\AppController;
  *
  * @property \App\Model\Table\LikeLogsTable $LikeLogs
  */
-class LikeLogsController extends AppController
-{
+class LikeLogsController extends AppController {
 
-/**
-* Index method
-*
-* @return void
-*/
-public function index()
-{
-	 debug($this->LikeLogs);exit();
-$this->set('likeLogs', $this->LikeLogs);
-}
+    /**
+     * Index method
+     *
+     * @return void
+     */
+    public function index() {
+        
+        $this->set('likeLogs', $this->LikeLogs);
+    }
 
     /**
      * View method
@@ -29,8 +28,7 @@ $this->set('likeLogs', $this->LikeLogs);
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $this->viewBuilder()->autoLayout(false);
         $likeLog = $this->LikeLogs->get($id, [
             'contain' => ['Users', 'Relates']
@@ -44,19 +42,18 @@ $this->set('likeLogs', $this->LikeLogs);
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add()
-    {
+    public function add() {
         $likeLog = $this->LikeLogs->newEntity();
         if ($this->request->is('post')) {
             $likeLog = $this->LikeLogs->patchEntity($likeLog, $this->request->data);
             if ($this->LikeLogs->save($likeLog)) {
-                 $this->Util->ajaxReturn(true,'添加成功');
+                $this->Util->ajaxReturn(true, '添加成功');
             } else {
-                 $errors = $likeLog->errors();
-                 $this->Util->ajaxReturn(['status'=>false, 'msg'=>getMessage($errors),'errors'=>$errors]);
+                $errors = $likeLog->errors();
+                $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
             }
         }
-                $users = $this->LikeLogs->Users->find('list', ['limit' => 200]);
+        $users = $this->LikeLogs->Users->find('list', ['limit' => 200]);
         $relates = $this->LikeLogs->Relates->find('list', ['limit' => 200]);
         $this->set(compact('likeLog', 'users', 'relates'));
     }
@@ -68,23 +65,22 @@ $this->set('likeLogs', $this->LikeLogs);
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
-         $likeLog = $this->LikeLogs->get($id,[
+    public function edit($id = null) {
+        $likeLog = $this->LikeLogs->get($id, [
             'contain' => []
         ]);
-        if ($this->request->is(['post','put'])) {
+        if ($this->request->is(['post', 'put'])) {
             $likeLog = $this->LikeLogs->patchEntity($likeLog, $this->request->data);
             if ($this->LikeLogs->save($likeLog)) {
-                  $this->Util->ajaxReturn(true,'修改成功');
+                $this->Util->ajaxReturn(true, '修改成功');
             } else {
-                 $errors = $likeLog->errors();
-               $this->Util->ajaxReturn(false,getMessage($errors));
+                $errors = $likeLog->errors();
+                $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
-                  $users = $this->LikeLogs->Users->find('list', ['limit' => 200]);
-                $relates = $this->LikeLogs->Relates->find('list', ['limit' => 200]);
-                $this->set(compact('likeLog', 'users', 'relates'));
+        $users = $this->LikeLogs->Users->find('list', ['limit' => 200]);
+        $relates = $this->LikeLogs->Relates->find('list', ['limit' => 200]);
+        $this->set(compact('likeLog', 'users', 'relates'));
     }
 
     /**
@@ -94,32 +90,30 @@ $this->set('likeLogs', $this->LikeLogs);
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         $this->request->allowMethod('post');
-         $id = $this->request->data('id');
-                if ($this->request->is('post')) {
-                $likeLog = $this->LikeLogs->get($id);
-                 if ($this->LikeLogs->delete($likeLog)) {
-                     $this->Util->ajaxReturn(true,'删除成功');
-                } else {
-                    $errors = $likeLog->errors();
-                    $this->Util->ajaxReturn(true,getMessage($errors));
-                }
-          }
+        $id = $this->request->data('id');
+        if ($this->request->is('post')) {
+            $likeLog = $this->LikeLogs->get($id);
+            if ($this->LikeLogs->delete($likeLog)) {
+                $this->Util->ajaxReturn(true, '删除成功');
+            } else {
+                $errors = $likeLog->errors();
+                $this->Util->ajaxReturn(true, getMessage($errors));
+            }
+        }
     }
 
-/**
-* get jqgrid data 
-*
-* @return json
-*/
-public function getDataList()
-{
+    /**
+     * get jqgrid data 
+     *
+     * @return json
+     */
+    public function getDataList() {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'likelogs.'.$this->request->data('sidx');
+        $sort = 'likelogs.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
@@ -133,7 +127,7 @@ public function getDataList()
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['likelogs.`ctime` >' => $begin_time], ['likelogs.`ctime` <' => $end_time]];
         }
-                $query =  $this->LikeLogs->find();
+        $query = $this->LikeLogs->find();
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
@@ -143,7 +137,7 @@ public function getDataList()
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
-        
+
         $query->limit(intval($rows))
                 ->page(intval($page));
         $res = $query->toArray();
@@ -156,18 +150,17 @@ public function getDataList()
             $total_pages = 0;
         }
         $data = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $res);
-                $this->autoRender = false;
+        $this->autoRender = false;
         $this->response->type('json');
         echo json_encode($data);
-}
+    }
 
-/**
-* export csv
-*
-* @return csv 
-*/
-public function exportExcel()
-{
+    /**
+     * export csv
+     *
+     * @return csv 
+     */
+    public function exportExcel() {
         $sort = $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
@@ -182,12 +175,12 @@ public function exportExcel()
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
-        $Table =  $this->LikeLogs;
-        $column = ['用户id','关联id（活动id或资讯id）','日志内容','记录时间','更新时间','类型值：0：活动；1：资讯'];
+        $Table = $this->LikeLogs;
+        $column = ['用户id', '关联id（活动id或资讯id）', '日志内容', '记录时间', '更新时间', '类型值：0：活动；1：资讯'];
         $query = $Table->find();
         $query->hydrate(false);
-        $query->select(['user_id','relate_id','msg','create_time','update_time','type']);
-         if (!empty($where)) {
+        $query->select(['user_id', 'relate_id', 'msg', 'create_time', 'update_time', 'type']);
+        if (!empty($where)) {
             $query->where($where);
         }
         if (!empty($sort) && !empty($order)) {
@@ -195,8 +188,8 @@ public function exportExcel()
         }
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = 'LikeLogs_'.date('Y-m-d').'.csv';
-        \Wpadmin\Utils\Export::exportCsv($column,$res,$filename);
+        $filename = 'LikeLogs_' . date('Y-m-d') . '.csv';
+        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+    }
 
-}
 }

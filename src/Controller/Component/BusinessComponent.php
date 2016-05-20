@@ -179,18 +179,64 @@ class BusinessComponent extends Component {
             $usermsg->table_id = $id; //被关注者id
             $usermsg->title = '您有新的关注者';
             $usermsg->msg = '您有1位新的关注者';
-            $UsermsgTable->save($usermsg);
         }
         $usermsg = $UsermsgTable->newEntity(array_merge($data, [
-            'user_id' => $user_id,
-            'type' => $type,
-            'url' => $url,
             'title' => $title,
             'msg' => $msg,
             'table_id' => $id,
             'url' => $url
         ]));
         $UsermsgTable->save($usermsg);
+    }
+
+    /**
+     * 
+     * 对评论的点赞
+     * @param type $user_id
+     * @param type $relate_id
+     * @param type $type  评论的类型 0 活动 1资讯
+     */
+    public function commentPraise($user_id, $relate_id, $type) {
+        //检测是否评论过
+        switch ($type) {
+            case 0:
+                $table = 'activitycom';
+                break;
+            case 1:
+                $table = 'newscom';
+            default:
+                break;
+        }
+        $RelateTable = \Cake\ORM\TableRegistry::get($table);
+        $relate = $RelateTable->get($relate_id,['contain'=>['Users']]);
+        if (!$relate) {
+            throw new \Cake\Network\Exception\NotFoundException('该条评论不存在');
+        }
+        $data = [
+            'user_id' => $user_id,
+            'relate_id' => $relate_id,
+            'type' => $type
+        ];
+        $ComLikeTable = \Cake\ORM\TableRegistry::get('comment_like');
+        $comlike = $ComLikeTable->find()->where($data)->first();
+        if($comlike){
+            //点过赞
+            return false;
+        }
+        $comlike = $ComLikeTable->newEntity($data);
+        if (!$ComLikeTable->save($comlike)) {
+            //增加 点赞记录
+            return false;
+        }
+        $relate->praise_nums +=1;
+        if (!$RelateTable->save($relate)) {
+            //评论点赞数+1
+            return false;
+        }
+        //发送消息给该条评论的用户
+        $com_userid = $relate->user->id;
+        $this->usermsg($com_userid, '您有新的点赞', '您的评论获得新的点赞', 2,$relate_id);
+        return true;
     }
 
 }
