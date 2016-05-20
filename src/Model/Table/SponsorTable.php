@@ -1,19 +1,19 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Entity\Activitycom;
+use App\Model\Entity\Sponsor;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Activitycom Model
+ * Sponsor Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Activities
  * @property \Cake\ORM\Association\BelongsTo $Users
+ * @property \Cake\ORM\Association\BelongsTo $Activities
  */
-class ActivitycomTable extends Table
+class SponsorTable extends Table
 {
 
     /**
@@ -26,32 +26,25 @@ class ActivitycomTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('activitycom');
-        $this->displayField('id');
+        $this->table('sponsor');
+        $this->displayField('name');
         $this->primaryKey('id');
 
-        $this->belongsTo('Activities', [
-            'foreignKey' => 'activity_id',
-            'joinType' => 'INNER',
-        	'className' => 'Activity'
-        ]);
-        
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
         	'className' => 'User'
         ]);
-        
-        $this->belongsTo('Replyusers', [
-        	'foreignKey' => 'reply_id',
-        	'joinType' => 'INNER',
-       		'className' => 'User'
+        $this->belongsTo('Activities', [
+            'foreignKey' => 'activity_id',
+            'joinType' => 'INNER',
+        	'className' => 'Activity',
         ]);
         
         $this->addBehavior('Timestamp', [
         	'events' => [
         		'Model.beforeSave' => [
-        			'create_time' => 'new',
+	        		'create_time' => 'new',
         		]
         	]
         ]);
@@ -69,14 +62,33 @@ class ActivitycomTable extends Table
             ->integer('id')
             ->allowEmpty('id', 'create');
 
-        $validator
-            ->integer('pid')
-            ->requirePresence('pid', 'create')
-            ->notEmpty('pid');
 
         $validator
-            ->requirePresence('body', 'create')
-            ->notEmpty('body');
+            ->integer('type')
+            ->requirePresence('type', 'create')
+            ->notEmpty('type');
+
+        $validator
+            ->allowEmpty('description');
+
+        $validator
+            ->allowEmpty('name');
+
+        $validator
+            ->allowEmpty('company');
+
+        $validator
+            ->allowEmpty('department');
+
+        $validator
+            ->allowEmpty('position');
+
+        $validator
+            ->allowEmpty('address');
+
+        $validator
+            ->integer('people')
+            ->allowEmpty('people');
 
         return $validator;
     }
@@ -90,9 +102,8 @@ class ActivitycomTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['activity_id'], 'Activities'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['reply_id'], 'Users'));
+        $rules->add($rules->existsIn(['activity_id'], 'Activities'));
         return $rules;
     }
 }

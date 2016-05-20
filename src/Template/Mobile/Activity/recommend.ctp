@@ -16,7 +16,8 @@
 			</div>
 			</div>
 			<div class="h20"></div>
-			<input type="text" name="recommend_type" hidden />
+			<form method="post" action="">
+			<input type="text" name="type" hidden />
 			<div class="a-form-box" id="guest">
 				<ul>
 					<li>
@@ -33,7 +34,7 @@
 					</li>
 					<li>
 						<span>职务</span>
-						<input type="text" name="job" />
+						<input type="text" name="position" />
 					</li>
 					<li>
 						<i>经验简介</i>
@@ -45,11 +46,11 @@
 				<ul>
 					<li>
 						<span>地址</span>
-						<input type="text" name="position" />
+						<input type="text" name="address" />
 					</li>
 					<li>
 						<span>容纳人数</span>
-						<input type="text" name="scale" />
+						<input type="number" name="people" />
 					</li>
 					
 					<li>
@@ -82,7 +83,8 @@
 					</li>
 				</ul>
 			</div>
-			<a href="#this" class='nextstep' id="submit">提交</a>
+			</form>
+			<a href="#this" class='nextstep' id="submit" style="margin-bottom:1.7rem;">提交</a>
 		</div>
 		<?= $this->element('footer'); ?>
 	<script src="/mobile/js/jquery-1.6.1.min.js" type="text/javascript" charset="utf-8"></script>
@@ -91,7 +93,7 @@
 <?php $this->start('script');?>
 <script src="/mobile/js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
 <script>
-	
+	$('.a-form-box').hide();
 	// 分类单选
     $(function(){
        $('.agency-item').click(function(){
@@ -105,10 +107,42 @@
            $(attr).siblings('.a-form-box').find('textarea').val(null);
 
            var val = $(this).attr('type');
-           console.log(val);
-           $('input[name="recommend_type"]').val(val);
+           $('input[name="type"]').val(val);
        }) ;
+
+       $('#submit').click(function(){
+           var form = $('form').serializeArray();
+           var formData = [];
+           // 将空的对象清除
+           for(i=0;i<form.length;i++)
+           {
+               if(form[i].value != '')
+               {
+               		formData[i] = form[i];
+               }
+           }
+           console.log(formData);
+           $.ajax({
+               type: 'post',
+               url: $('form').attr('action'),
+               data: formData,
+               dataType: 'json',
+               success: function (msg) {
+                   if (typeof msg === 'object') {
+                       if (msg.status === true) {
+                       	$.util.alert(msg.msg);
+                           setTimeout(function(){
+                           	window.location.href = '/activity/index';
+                           },3000);
+                       } else {
+                           $.util.alert(msg.msg);
+                       }
+                   }
+               }
+       	});
+       })
     });
 
+    
 </script>
 <?php $this->end('script');

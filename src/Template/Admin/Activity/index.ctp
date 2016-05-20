@@ -41,7 +41,7 @@
                         colNames:
                                 ['作者', '标签', '主办单位', '活动名称', '活动时间', '地点', '规模', '阅读数', '点赞数', '评论数', '是否众筹', '报名人数', '报名费用', '创建时间', '更新时间', '操作'],
                         colModel: [
-                            {name: 'admin.truename', editable: true, align: 'center'},
+                            {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'industries', editable: true, align: 'center', formatter: industryFormatter},
                             {name: 'company', editable: true, align: 'center'},
                             {name: 'title', editable: true, align: 'center'},
@@ -100,13 +100,18 @@
                     response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="编辑" href="/admin/activity/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
-					if(rowObject.is_top == 0)
+					if(rowObject.is_top == 0 && rowObject.is_check == 1)
 					{
 						response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="return top(' + rowObject.id + ')">置顶</a>';
 					}
-					else
+					else if(rowObject.is_top == 1 && rowObject.is_check == 1)
 					{
 						response += '<a title="取消置顶" href="javascript:void(0)" class="grid-btn untop" onclick="return untop(' + rowObject.id + ')">取消置顶</a>';
+					}
+					if(rowObject.is_check == 0)
+					{
+						response += '<a title="发布" href="javascript:void(0)" class="grid-btn release" onclick="return release(' + rowObject.id + ')">发布</a>';
+						response += '<a title="未通过审核" href="javascript:void(0)" class="grid-btn unrelease" onclick="return unrelease(' + rowObject.id + ')">未通过审核</a>';
 					}
                     return response;
                 }
@@ -150,6 +155,53 @@
                     }, function () {
                     });
 				}
+
+				function release(id){
+                    layer.confirm('确定发布？', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                    	$.ajax({
+                            type: 'post',
+                            data: '',
+                            dataType: 'json',
+                            url: '/admin/activity/release/' + id,
+                            success: function (res) {
+                                if (res.status) {
+                                	layer.msg(res.msg);
+                                	setTimeout(function(){window.location.reload();}, 2000);
+                                }
+                            }
+                        })
+                    }, function () {
+                    });
+				}
+
+				function unrelease(id){
+					//需要引入layer.ext.js文件
+                    layer.prompt({
+                        title:'请输入审核不通过的理由',
+                        btn: ['确认', '取消'], //按钮
+                        formType: 0, // input.type 0:text,1:password,2:textarea
+                    }, function (pass) {
+                        var msg = {};
+                        msg.reason = pass;
+                    	$.ajax({
+                            type: 'post',
+                            data: msg,
+                            dataType: 'json',
+                            url: '/admin/activity/unrelease/' + id,
+                            success: function (res) {
+                                if (res.status) {
+                                	layer.msg(res.msg);
+                                	setTimeout(function(){window.location.reload();}, 2000);
+                                }
+                            }
+                        })
+                    }, function () {
+                    });
+				}
+
+
                 
                 function industryFormatter(cellvalue, options, rowObject) {
                     var industries = rowObject.industries;
