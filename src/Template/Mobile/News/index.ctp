@@ -20,7 +20,7 @@
     <div id="news">
 
     </div>
-    <div class="loading"></div>
+    <div id="buttonLoading" class="loadingbox"></div>
 </div>
 
 <script type="text/html" id="listTpl">
@@ -62,29 +62,38 @@
         return d;
     });
     var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
+
+
     var page = 2;
+    setTimeout(function(){
     $(window).on("scroll", function () {
         $.util.listScroll('items', function () {
-            //show loading
-            $('.loading').show();
-            //ajax data
-            //remove loading
-            //eg:
-            setTimeout(function () {
-                $.getJSON('/news/get-more-news/'+page,function(res){
-                    if(res.status){
-                        var html = $.util.dataToTpl('', 'listTpl', res.data, function (d) {
-                                 d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
-                                 return d;
-                        });
-                        $('#news').append(html);
-                        page++;
-                    }
-                });
-            $('.loading').hide();
-                //console.log(iii++);
-            }, 3000);
+            if(page == 9999){
+                $('#buttonLoading').html('亲，没有更多资讯了，请明天再来吧');
+                return;
+            }
+            $.util.showLoading('buttonLoading');
+            $.getJSON('/news/get-more-news/'+page,function(res){
+                console.log('page~~~'+page);
+                $.util.hideLoading('buttonLoading');
+                window.holdLoad = false;  //打开加载锁  可以开始再次加载
+
+                if(!res.status) {  //拉不到数据了  到底了
+                    page = 9999;
+                    return;
+                }
+
+                if(res.status){
+                    var html = $.util.dataToTpl('', 'listTpl', res.data, function (d) {
+                         d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
+                         return d;
+                    });
+                    $('#news').append(html);
+                    page++;
+                }
+            });
         });
     });
+    }, 2000);
 </script>
 <?php $this->end('script'); ?>

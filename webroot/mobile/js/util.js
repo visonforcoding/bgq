@@ -121,6 +121,20 @@ $.util = {
         document.cookie = name + '=' + escape(value) + ( expires ? ';expires=' + exp.toGMTString() : '') + ( path ? ';path=' + path : '') + ( domain ? ';domain=' + domain : '') + ( secure ? ';secure' : '');
     },
 
+    /**
+     * @param id  容器dom id
+     */
+    showLoading:function(id){
+        $('#'+id).html('<div class="loading"></div>');
+    },
+
+    /**
+     * @param id  容器dom id
+     */
+    hideLoading:function(id){
+        $('#'+id).html('');
+    },
+
 
     //初始化滚动加载列表图
     initLoadImg: function(listId) {
@@ -166,7 +180,7 @@ $.util = {
     listScroll: function(listId, loadFunc) {
         if(window.holdLoad) return;
         window.holdLoad = true;
-        setTimeout(function(){window.holdLoad = false;}, 1000);  //只允许1秒加载一次下一页   防止上一个滑动事件还没有结束的状态中
+        //setTimeout(function(){window.holdLoad = false;}, 1000);  //只允许1秒加载一次下一页   防止上一个滑动事件还没有结束的状态中
 
         var obj = this, st = document.body.scrollTop;
         //st > this.pageHight*2 ? $('.goTopBtn').show() : $('.goTopBtn').hide();
