@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer" id="footer" style="display: none">
     <ul class="navfooter clearfix">
         <li>
             <a href="/activity/index"><span class="iconfont">&#xe601;</span>活动</a>
@@ -14,3 +14,8 @@
         </li>
     </ul>
 </footer>
+<script>
+    if(navigator.userAgent.toLowerCase().indexOf('smartlemon') == -1){
+        document.getElementById('footer').style.display = 'block';
+    }
+</script>
