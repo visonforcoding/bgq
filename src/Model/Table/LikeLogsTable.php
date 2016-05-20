@@ -34,18 +34,17 @@ class LikeLogsTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
-//         $this->hasMany('Activities', [
-//             'foreignKey' => 'relate_id',
-//             'joinType' => 'INNER',
-//         	'className' => 'Activity'
-//         ]);
-        
+        $this->belongsTo('Activities', [
+            'foreignKey' => 'relate_id',
+            'joinType' => 'INNER',
+        	'className' => 'Activity'
+        ]);
         
         $this->addBehavior('Timestamp', [
         	'events' => [
         		'Model.beforeSave' => [
-	        		'create_time' => 'new',
-	        		'update_time' => 'always'
+        			'create_time' => 'new',
+        			'update_time' => 'always'
         		]
         	]
         ]);
