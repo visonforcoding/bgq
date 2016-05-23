@@ -5,12 +5,9 @@
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
-            <a href="/admin/activity/add" class="btn btn-small btn-warning">
-                <i class="icon icon-plus-sign"></i>添加
-            </a>
             <div class="form-group">
                 <label for="keywords">关键字</label>
-                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
+                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入评论内容">
             </div>
             <div class="form-group">
                 <label for="keywords">时间</label>
@@ -46,7 +43,8 @@
                             {name: 'body', editable: true, align: 'center'},
                             {name: 'praise_nums', editable: true, align: 'center'},
                             {name: 'actionBtn', width: '200%', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
-                        pager: "#pager",
+                            
+                            pager: "#pager",
                         rowNum: 10,
                         rowList: [10, 20, 30],
                         sortname: "id",

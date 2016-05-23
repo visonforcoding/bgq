@@ -11,15 +11,16 @@ use Wpadmin\Controller\AppController;
 class ActivityapplyController extends AppController
 {
 
-/**
-* Index method
-*
-* @return void
-*/
-public function index()
-{
-$this->set('activityapply', $this->Activityapply);
-}
+	/**
+	* Index method
+	*
+	* @return void
+	*/
+	public function index($id='')
+	{
+		$this->set('id', $id);
+		$this->set('activityapply', $this->Activityapply);
+	}
 
     /**
      * View method
@@ -113,7 +114,7 @@ $this->set('activityapply', $this->Activityapply);
 *
 * @return json
 */
-public function getDataList()
+public function getDataList($id='')
 {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
@@ -130,9 +131,16 @@ public function getDataList()
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
+            $where['and'] = [['activityapply.`ctime` >' => $begin_time], ['activityapply.`ctime` <' => $end_time]];
         }
-                $query =  $this->Activityapply->find();
+        if($id)
+        {
+        	$query =  $this->Activityapply->find()->where(['activity_id'=>$id]);
+        }
+        else
+        {
+            $query =  $this->Activityapply->find();
+        }
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
@@ -160,13 +168,13 @@ public function getDataList()
         echo json_encode($data);
 }
 
-/**
-* export csv
-*
-* @return csv 
-*/
-public function exportExcel()
-{
+	/**
+	* export csv
+	*
+	* @return csv 
+	*/
+	public function exportExcel()
+	{
         $sort = $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
@@ -197,5 +205,81 @@ public function exportExcel()
         $filename = 'Activityapply_'.date('Y-m-d').'.csv';
         \Wpadmin\Utils\Export::exportCsv($column,$res,$filename);
 
-}
+	}
+	
+	/**
+     * 置顶操作
+     * @param int $id 活动id
+     */
+    public function top($id){
+    	$activity = $this->Activityapply->get($id);
+    	$activity->is_top = 1;
+    	$res = $this->Activityapply->save($activity);
+    	if($res)
+    	{
+    		$this->Util->ajaxReturn(true, '置顶成功');
+    	}
+    	else
+    	{
+    		$this->Util->ajaxReturn(false, '置顶失败');
+    	}
+    }
+    
+    /**
+     * 取消置顶操作
+     * @param int $id 活动id
+     */
+    public function untop($id)
+    {
+    	$activity = $this->Activityapply->get($id);
+    	$activity->is_top = 0;
+    	$res = $this->Activityapply->save($activity);
+    	if($res)
+    	{
+    		$this->Util->ajaxReturn(true, '取消置顶成功');
+    	}
+    	else
+    	{
+    		$this->Util->ajaxReturn(false, '取消置顶失败');
+    	}
+    }
+    
+    /**
+     * 发布活动操作
+     * @param int $id 活动id
+     */
+    public function pass($id){
+    	$activity = $this->Activityapply->get($id);
+    	$activity->is_pass = 1;
+    	$res = $this->Activityapply->save($activity);
+    	if($res)
+    	{
+    		$this->Util->ajaxReturn(true, '操作成功');
+    	}
+    	else
+    	{
+    		$this->Util->ajaxReturn(false, '操作失败');
+    	}
+    }
+    
+    /**
+     * 审核不通过操作
+     * @param int $id 活动id
+     */
+    public function unpass($id)
+    {
+    	$data = $this->request->data();
+    	$activity = $this->Activityapply->get($id);
+    	$activity->is_pass = 0;
+    	$res = $this->Activityapply->save($activity);
+    	if($res)
+    	{
+    		$this->Util->ajaxReturn(true, '操作成功');
+    	}
+    	else
+    	{
+    		$this->Util->ajaxReturn(false, '操作失败');
+    	}
+    }
+	
 }

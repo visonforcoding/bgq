@@ -134,7 +134,7 @@ $this->set('need', $this->Need);
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
 //             var_dump($begin_time);die;
-            $where['and'] = [['date(need.`create_time`) >' => $begin_time], ['date(need.`create_time`) <' => $end_time]];
+            $where['and'] = [['need.`create_time` >' => $begin_time], ['need.`create_time` <' => $end_time]];
         }
         $query =  $this->Need->find()->contain(['User']);
         $query->hydrate(false);
@@ -150,10 +150,6 @@ $this->set('need', $this->Need);
         $query->limit(intval($rows))
               ->page(intval($page));
         $res = $query->toArray();
-        foreach ($res as $k=>$v)
-        {
-        	$res[$k]['is_read'] = $v['is_read'] ? '已读':'未读';
-        }
         if (empty($res)) {
             $res = array();
         }
@@ -164,7 +160,6 @@ $this->set('need', $this->Need);
         }
         $data = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $res);
                 $this->autoRender = false;
-//                 var_dump($data);die;
         $this->response->type('json');
         echo json_encode($data);
 	}

@@ -11,15 +11,16 @@ use Wpadmin\Controller\AppController;
 class SponsorController extends AppController
 {
 
-/**
-* Index method
-*
-* @return void
-*/
-public function index()
-{
-$this->set('sponsor', $this->Sponsor);
-}
+	/**
+	* Index method
+	*
+	* @return void
+	*/
+	public function index($id='')
+	{
+		$this->set('id', $id);
+		$this->set('sponsor', $this->Sponsor);
+	}
 
     /**
      * View method
@@ -113,7 +114,7 @@ $this->set('sponsor', $this->Sponsor);
 *
 * @return json
 */
-public function getDataList()
+public function getDataList($id='')
 {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
@@ -132,7 +133,14 @@ public function getDataList()
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
-                $query =  $this->Sponsor->find();
+        if($id)
+        {
+        	$query =  $this->Sponsor->find()->where(['activity_id'=>$id]);
+        }
+        else
+        {
+        	$query =  $this->Sponsor->find();
+        }
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);

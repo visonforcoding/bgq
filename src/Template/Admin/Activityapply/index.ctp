@@ -35,18 +35,18 @@
         });
         $.zui.store.pageClear(); //刷新页面缓存清除
         $("#list").jqGrid({
-            url: "/admin/activityapply/getDataList",
+            url: "/admin/activityapply/getDataList/<?= $id ?>",
             datatype: "json",
             mtype: "POST",
             colNames:   
-['用户id','活动id','提交时间','更新时间','审核是否通过','是否置顶','操作'],
+['用户','活动','提交时间','更新时间','审核是否通过','是否置顶','操作'],
             colModel: [
-{name:'user_id',editable:true,align:'center'},
-{name:'activity_id',editable:true,align:'center'},
+{name:'user.truename',editable:true,align:'center'},
+{name:'activity.title',editable:true,align:'center'},
 {name:'create_time',editable:true,align:'center'},
 {name:'update_time',editable:true,align:'center'},
-{name:'is_pass',editable:true,align:'center'},
-{name:'is_top',editable:true,align:'center'},
+{name:'is_pass',editable:true,align:'center', formatter: passFormatter},
+{name:'is_top',editable:true,align:'center', formatter: topFormatter},
 {name:'actionBtn',align:'center',viewable:false,sortable:false,formatter:actionFormatter}],
             pager: "#pager",
             rowNum: 10,
@@ -72,10 +72,48 @@
         }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
     });
 
+    function passFormatter(cellvalue, options, rowObject){
+        if(rowObject.is_pass == 0)
+        {
+            response = '未通过审核';
+        }
+        else if(rowObject.is_pass == 1)
+        {
+            response = '已通过审核';
+        }
+        return response;
+    }
+
+    function topFormatter(cellvalue, options, rowObject){
+        if(rowObject.is_top == 0)
+        {
+            response = '否';
+        }
+        else if(rowObject.is_top == 1)
+        {
+            response = '是';
+        }
+        return response;
+    }
+
     function actionFormatter(cellvalue, options, rowObject) {
-        response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-        response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-        response += '<a title="编辑" href="/admin/activityapply/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+        response = '<a title="删除" href="" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+		if(rowObject.is_top == 0)
+		{
+        	response += '<a title="置顶" href="" onClick="top(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">置顶</a>';
+		}
+		else
+		{
+			response += '<a title="取消置顶" href="" onClick="untop(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">取消置顶</a>';
+		}
+		if(rowObject.is_pass == 0)
+		{
+			response += '<a title="通过" href="" onClick="pass(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">通过</a>';
+		}
+		else
+		{
+			response += '<a title="不通过" href="" onClick="unpass(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">不通过</a>';
+		}
         return response;
     }
 
@@ -98,7 +136,87 @@
         }, function () {
         });
     }
-    
+
+    function top(id){
+        layer.confirm('确定置顶？', {
+            btn: ['确认', '取消'] //按钮
+        }, function () {
+        	$.ajax({
+                type: 'post',
+                data: '',
+                dataType: 'json',
+                url: '/admin/activityapply/top/' + id,
+                success: function (res) {
+                    if (res.status) {
+                    	layer.msg(res.msg);
+                    	setTimeout(function(){window.location.reload();}, 2000);
+                    }
+                }
+            })
+        }, function () {
+        });
+	}
+
+    function untop(id){
+        layer.confirm('确定取消置顶？', {
+            btn: ['确认', '取消'] //按钮
+        }, function () {
+        	$.ajax({
+                type: 'post',
+                data: '',
+                dataType: 'json',
+                url: '/admin/activityapply/untop/' + id,
+                success: function (res) {
+                    if (res.status) {
+                    	layer.msg(res.msg);
+                    	setTimeout(function(){window.location.reload();}, 2000);
+                    }
+                }
+            })
+        }, function () {
+        });
+	}
+
+	function pass(id){
+        layer.confirm('确定通过审核？', {
+            btn: ['确认', '取消'] //按钮
+        }, function () {
+        	$.ajax({
+                type: 'post',
+                data: '',
+                dataType: 'json',
+                url: '/admin/activityapply/pass/' + id,
+                success: function (res) {
+                    if (res.status) {
+                    	layer.msg(res.msg);
+                    	setTimeout(function(){window.location.reload();}, 2000);
+                    }
+                }
+            })
+        }, function () {
+        });
+	}
+
+	function unpass(id){
+		layer.confirm('确定不通过审核？', {
+            btn: ['确认', '取消'] //按钮
+        }, function () {
+        	$.ajax({
+                type: 'post',
+                data: '',
+                dataType: 'json',
+                url: '/admin/activityapply/unpass/' + id,
+                success: function (res) {
+                    if (res.status) {
+                    	layer.msg(res.msg);
+                    	setTimeout(function(){window.location.reload();}, 2000);
+                    }
+                }
+            })
+        }, function () {
+        });
+	}
+
             function doSearch() {
                     //搜索
                 var postData = $('#table-bar-form').serializeArray();

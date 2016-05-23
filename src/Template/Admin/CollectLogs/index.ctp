@@ -35,18 +35,18 @@
         });
         $.zui.store.pageClear(); //刷新页面缓存清除
         $("#list").jqGrid({
-            url: "/admin/collectlogs/getDataList",
+            url: "/admin/collectlogs/getDataList/<?= $id; ?>",
             datatype: "json",
             mtype: "POST",
             colNames:   
-['用户id','关联id（活动id或资讯id）','日志内容','记录时间','更新时间','类型值：0：活动；1：资讯','操作'],
+['用户','活动或资讯','日志内容','记录时间','更新时间','类型','操作'],
             colModel: [
-{name:'user_id',editable:true,align:'center'},
-{name:'relate_id',editable:true,align:'center'},
+{name:'user.truename',editable:true,align:'center'},
+{name:'relate_id',editable:true,align:'center', formatter: titleFormatter},
 {name:'msg',editable:true,align:'center'},
 {name:'create_time',editable:true,align:'center'},
 {name:'update_time',editable:true,align:'center'},
-{name:'type',editable:true,align:'center'},
+{name:'type',editable:true,align:'center', formatter: typeFormatter},
 {name:'actionBtn',align:'center',viewable:false,sortable:false,formatter:actionFormatter}],
             pager: "#pager",
             rowNum: 10,
@@ -72,10 +72,32 @@
         }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
     });
 
+    function titleFormatter(cellvalue, options, rowObject){
+		if(rowObject.type == 0)
+		{
+			response = rowObject.activity.title;
+		}
+		else if(rowObject.type == 1)
+		{
+			response = rowObject.news.title;
+		}
+		return response;
+	}
+
+	function typeFormatter(cellvalue, options, rowObject){
+		if(rowObject.type == 0)
+		{
+			response = '活动';
+		}
+		else
+		{
+			response = '资讯';
+		}
+		return response;
+	}
+    
     function actionFormatter(cellvalue, options, rowObject) {
         response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-        response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-        response += '<a title="编辑" href="/admin/collectlogs/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
         return response;
     }
 
