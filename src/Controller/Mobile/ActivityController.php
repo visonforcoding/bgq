@@ -13,7 +13,7 @@ use App\Controller\Mobile\AppController;
 
 class ActivityController extends AppController {
 
-    protected $limit = '1';
+    protected $limit = '5';
 
     /**
      * 活动详情
@@ -55,7 +55,10 @@ class ActivityController extends AppController {
                     ->find()
                     ->contain(['Users'])
                     ->where(['activity_id' => $id])
-                    ->order(['is_top' => 'DESC', 'Activityapply.create_time' => 'DESC'])
+                    ->order([
+                        'is_top' => 'DESC',
+                        'Activityapply.create_time' => 'DESC'
+                    ])
                     ->hydrate(false)
                     ->toArray();
             if ($allApply != '') {
@@ -74,16 +77,27 @@ class ActivityController extends AppController {
                     ->contain(['Users', 'Replyusers'])
                     ->where(['activity_id' => $id])
                     ->order(['Activitycom.create_time' => 'DESC'])
+                    ->limit($this->limit)
                     ->hydrate(false)
                     ->toArray();
-            $this->set('comment', $comment);
+            $this->set('comjson', json_encode($comment));
 
             // 是否已赞
-            $isLike = $this->Activity->Articlelike->find()->where(['user_id' => $this->user->id, 'relate_id' => $id])->first();
+            $isLike = $this
+                    ->Activity
+                    ->Articlelike
+                    ->find()
+                    ->where(['user_id' => $this->user->id, 'relate_id' => $id])
+                    ->first();
             $this->set('isLike', $isLike);
 
             // 是否已收藏
-            $isCollect = $this->Activity->Collect->find()->where(['user_id' => $this->user->id, 'relate_id' => $id])->first();
+            $isCollect = $this
+                    ->Activity
+                    ->Collect
+                    ->find()
+                    ->where(['user_id' => $this->user->id, 'relate_id' => $id])
+                    ->first();
             $this->set('isCollect', $isCollect);
 
             $this->set('pagetitle', '活动详情');
@@ -105,6 +119,8 @@ class ActivityController extends AppController {
                 ->orderDesc('Activity.create_time', 'Activity.is_top')
                 ->toArray();
         $this->set('actjson', json_encode($act));
+
+        // 轮播图
         $bannerTable = \Cake\ORM\TableRegistry::get('banner');
         $banners = $bannerTable
                 ->find()
@@ -117,7 +133,6 @@ class ActivityController extends AppController {
         $this->paginate = [
             'contain' => ['Admins', 'Industries'],
             'order' => ['is_top' => 'DESC', 'create_time' => 'DESC'],
-            'limit' => $this->limit,
         ];
         $activity = $this->paginate($this->Activity->find()->where(['is_check' => 1]));
 // 			debug($activity);die;
@@ -139,6 +154,7 @@ class ActivityController extends AppController {
                 $isApply[] = $v['activity_id'];
             }
         }
+        $isApply = implode(',', $isApply);
         $this->set('isApply', $isApply);
         $this->set('pagetitle', '活动');
     }
@@ -484,11 +500,22 @@ class ActivityController extends AppController {
             $isApply = [];
             $this->set('isApply', $isApply);
         }
-        $activity = $this->Activity->find()
+        $activity = $this->Activity->find()->where(['is_check' => 1])
                         ->contain(['Users', 'Industries'])->page($page, $this->limit)
                         ->orderDesc('Activity.create_time')->toArray();
         if ($activity) {
             $this->Util->ajaxReturn(['status' => true, 'data' => $activity]);
+        } else {
+            $this->Util->ajaxReturn(['status' => false]);
+        }
+    }
+    
+    public function getMoreComment($page, $id){
+        $comment = $this->Activity->Activitycom->find()->where(['activity_id' => $id])
+                        ->contain(['Users', 'Replyusers'])->page($page, $this->limit)
+                        ->orderDesc('Activitycom.create_time')->toArray();
+        if ($comment) {
+            $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
         } else {
             $this->Util->ajaxReturn(['status' => false]);
         }
