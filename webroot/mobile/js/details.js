@@ -181,24 +181,6 @@ activity.prototype.bindEvent = function () {
                     }
                 });
                 break;
-            case 'cancel':
-                //do();
-                break;
-            case 'cancel':
-                //do();
-                break;
-            case 'cancel':
-                //do();
-                break;
-            case 'cancel':
-                //do();
-                break;
-            case 'cancel':
-                //do();
-                break;
-            case 'cancel':
-                //do();
-                break;
             case 'goTop':
                 window.scroll(0, 0);
                 e.preventDefault();
