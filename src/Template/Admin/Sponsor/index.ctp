@@ -35,16 +35,16 @@
         });
         $.zui.store.pageClear(); //刷新页面缓存清除
         $("#list").jqGrid({
-            url: "/admin/sponsor/getDataList",
+            url: "/admin/sponsor/getDataList/<?= $id; ?>",
             datatype: "json",
             mtype: "POST",
             colNames:   
-['用户id','活动id','提交时间','类型值：1：嘉宾推荐；2：场地赞助；3：现金赞助；4：物品赞助；5：其他','描述','姓名','公司/机构','部门','职务','地址','容纳人数','操作'],
+['用户','活动','提交时间','类型','描述','姓名','公司/机构','部门','职务','地址','容纳人数','操作'],
             colModel: [
-{name:'user_id',editable:true,align:'center'},
-{name:'activity_id',editable:true,align:'center'},
+{name:'user.truename',editable:true,align:'center'},
+{name:'activity.title',editable:true,align:'center'},
 {name:'create_time',editable:true,align:'center'},
-{name:'type',editable:true,align:'center'},
+{name:'type',editable:true,align:'center', formatter: typeFormatter},
 {name:'description',editable:true,align:'center'},
 {name:'name',editable:true,align:'center'},
 {name:'company',editable:true,align:'center'},
@@ -77,10 +77,32 @@
         }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
     });
 
+    function typeFormatter(cellvalue, options, rowObject){
+        if(rowObject.type == 1)
+        {
+            response = '嘉宾推荐';
+        }
+        else if(rowObject.type == 2)
+        {
+            response = '场地赞助';
+        }
+        else if(rowObject.type == 3)
+        {
+            response = '现金赞助';
+        }
+        else if(rowObject.type == 4)
+        {
+            response = '物品赞助';
+        }
+        else if(rowObject.type == 5)
+        {
+            response = '其他';
+        }
+        return response;
+    }
+
     function actionFormatter(cellvalue, options, rowObject) {
         response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-        response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-        response += '<a title="编辑" href="/admin/sponsor/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
         return response;
     }
 

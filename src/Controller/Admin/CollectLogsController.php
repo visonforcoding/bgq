@@ -11,15 +11,20 @@ use Wpadmin\Controller\AppController;
 class CollectLogsController extends AppController
 {
 
-/**
-* Index method
-*
-* @return void
-*/
-public function index()
-{
-$this->set('collectLogs', $this->CollectLogs);
-}
+	public function initialize(){
+		parent::initialize();
+		$this->loadModel('CollectLogs');
+	}
+	/**
+	* Index method
+	*
+	* @return void
+	*/
+	public function index($id='')
+	{
+		$this->set('id', $id);
+		$this->set('collectLogs', $this->CollectLogs);
+	}
 
     /**
      * View method
@@ -113,7 +118,7 @@ $this->set('collectLogs', $this->CollectLogs);
 *
 * @return json
 */
-public function getDataList()
+public function getDataList($id='')
 {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
@@ -130,9 +135,16 @@ public function getDataList()
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
+            $where['and'] = [['collectlogs.`create_time` >' => $begin_time], ['collectlogs.`create_time` <' => $end_time]];
         }
-                $query =  $this->CollectLogs->find();
+        if($id)
+        {
+        	$query =  $this->CollectLogs->find()->where(['relate_id'=>$id]);
+        }
+        else
+        {
+        	$query =  $this->CollectLogs->find();
+        }
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);

@@ -32,7 +32,8 @@ class LikeLogsTable extends Table
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
+            'joinType' => 'INNER',
+        	'className' => 'User'
         ]);
         $this->belongsTo('Activities', [
             'foreignKey' => 'relate_id',

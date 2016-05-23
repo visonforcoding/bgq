@@ -39,13 +39,13 @@
             datatype: "json",
             mtype: "POST",
             colNames:   
-['用户','内容','创建时间','修改时间','状态','操作'],
+['用户','内容','创建时间','修改时间','操作'],
             colModel: [
 {name:'user.truename',editable:true,align:'center'},
 {name:'msg',editable:true,align:'center'},
 {name:'create_time',editable:true,align:'center'},
 {name:'update_time',editable:true,align:'center'},
-{name:'is_read',editable:true,align:'center'},
+//{name:'is_read',editable:true,align:'center', formatter: readFormatter},
 {name:'actionBtn',align:'center',viewable:false,sortable:false,formatter:actionFormatter}],
             pager: "#pager",
             rowNum: 10,
@@ -70,6 +70,18 @@
             },
         }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
     });
+
+    //function readFormatter(cellvalue, options, rowObject){
+    //    if(rowObject.is_read == 0)
+    //    {
+    //        response = '未读';
+    //    }
+    //  else if(rowObject.is_read == 1)
+    //  {
+    //  	response = '已读';
+    //  }
+    //    return response;
+    //}
 
     function actionFormatter(cellvalue, options, rowObject) {
         response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';

@@ -34,8 +34,10 @@
 				<?= $activity->body; ?>
 			</section>
 			<section class="a-detail newscomment-box guests">
+			<?php if($activity->guest): ?>
 				<h3 class="comment-title">参与嘉宾</h3>
 				<?= $activity->guest; ?>
+			<?php endif; ?>
 				<div class="con-bottom clearfix">
 					<span class="readnums"><i class="iconfont" style="font-size:0.3rem;">&#xe601;</i><?= $activity->read_nums; ?></span>
 					
@@ -83,7 +85,7 @@
 							<b class="addnum">+1</b><i class="iconfont" id="likecom" type="0" comid="<?= $v['id'] ?>">&#xe615;</i><b><?= $v['praise_nums'] ?></b>
 						</span>
 					</div>
-					<p><?= $v['body'] ?></p>
+					<p class="infor-comm"><?= $v['body'] ?></p>
 				</div>
 				<?php endforeach; ?>
 				
