@@ -101,7 +101,7 @@
                 <li><textarea type="text" placeholder="请输入评论" name="comment-content-article"></textarea></li>
                 <li>
                     <a href="javascript:void(0);" id="cancel">取消</a>
-                    <a href="javascript:void(0);" class="publish-article">发表</a>
+                    <a href="javascript:void(0);" id="publish-article" activity_id="<?= $activity->id; ?>">发表</a>
                 </li>
             </ul>
         </div>
@@ -112,7 +112,7 @@
                 <li><textarea type="text" placeholder="请输入评论" name="comment-content-reply"></textarea></li>
                 <li>
                     <a href="javascript:void(0);" id="cancel">取消</a>
-                    <a href="javascript:void(0);" class="publish-reply">发表</a>
+                    <a href="javascript:void(0);" id="publish-reply" activity_id="<?= $activity->id; ?>">发表</a>
                 </li>
             </ul>
         </div>
@@ -123,15 +123,15 @@
     <div class="items">
         <div class="comm-info clearfix">
             <span><img init_src="{#user_avatar#}"/></span>
-            <span class="infor-comm" value="{#id#}">
+            <span class="infor-comm">
                 <i class="username">{#user_truename#} {#reply#}</i>
                 <i class="job">{#user_company#} {#user_position#}</i>
             </span>
             <span>
-                <b class="addnum">+1</b><i class="iconfont" id="likecom" type="0" comid="{#id#}">&#xe615;</i><b>{#praise_nums#}</b>
+                <b class="addnum" id="addnum_{#id#}">+1</b><i class="iconfont" id="likecom_{#id#}" type="0" comid="{#id#}">&#xe615;</i><b>{#praise_nums#}</b>
             </span>
         </div>
-        <p class="infor-comm" id="reply">{#body#}</p>
+        <p class="infor-comm" id="reply_{#id#}" value="{#id#}">{#body#}</p>
     </div>
 </script>
 <script src="/mobile/js/details.js"></script>
@@ -264,66 +264,66 @@
 //});
 
 
-// 我要点评
-    $('.publish-article').click(function () {
-        var data = {};
-        var body = $('textarea[name="comment-content-article"]').val();
-        if (!body) {
-            $.util.alert('评论内容不可为空');
-            return false;
-        }
-        data.body = body;
-        data.pid = 0;
-        $.ajax({
-            type: 'post',
-            url: '/activity/doComment/<?= $activity->id ?>',
-            data: data,
-            dataType: 'json',
-            success: function (msg) {
-                if (typeof msg === 'object') {
-                    if (msg.status === true) {
-                        $.util.alert(msg.msg);
-                        setTimeout(function () {
-                            window.location.reload();
-                            window.doScroll('scrollbarDown');
-                        }, 3000);
-                    } else {
-                        $.util.alert(msg.msg);
-                    }
-                }
-            }
-        });
-    });
-
-    $('.publish-reply').click(function () {
-        var data = {};
-        var body = $('textarea[name="comment-content-reply"]').val();
-        if (!body) {
-            $.util.alert('评论内容不可为空');
-            return false;
-        }
-        data.body = body;
-        data.pid = $('.publish-reply').attr('value');
-        $.ajax({
-            type: 'post',
-            url: '/activity/doComment/<?= $activity->id ?>',
-            data: data,
-            dataType: 'json',
-            success: function (msg) {
-                if (typeof msg === 'object') {
-                    if (msg.status === true) {
-                        $.util.alert(msg.msg);
-                        setTimeout(function () {
-                            window.location.reload();
-                            window.doScroll('scrollbarDown');
-                        }, 3000);
-                    } else {
-                        $.util.alert(msg.msg);
-                    }
-                }
-            }
-        });
-    });
+//// 我要点评
+//    $('.publish-article').click(function () {
+//        var data = {};
+//        var body = $('textarea[name="comment-content-article"]').val();
+//        if (!body) {
+//            $.util.alert('评论内容不可为空');
+//            return false;
+//        }
+//        data.body = body;
+//        data.pid = 0;
+//        $.ajax({
+//            type: 'post',
+//            url: '/activity/doComment/<?= $activity->id ?>',
+//            data: data,
+//            dataType: 'json',
+//            success: function (msg) {
+//                if (typeof msg === 'object') {
+//                    if (msg.status === true) {
+//                        $.util.alert(msg.msg);
+//                        setTimeout(function () {
+//                            window.location.reload();
+//                            window.doScroll('scrollbarDown');
+//                        }, 3000);
+//                    } else {
+//                        $.util.alert(msg.msg);
+//                    }
+//                }
+//            }
+//        });
+//    });
+//
+//    $('.publish-reply').click(function () {
+//        var data = {};
+//        var body = $('textarea[name="comment-content-reply"]').val();
+//        if (!body) {
+//            $.util.alert('评论内容不可为空');
+//            return false;
+//        }
+//        data.body = body;
+//        data.pid = $('.publish-reply').attr('value');
+//        $.ajax({
+//            type: 'post',
+//            url: '/activity/doComment/<?= $activity->id ?>',
+//            data: data,
+//            dataType: 'json',
+//            success: function (msg) {
+//                if (typeof msg === 'object') {
+//                    if (msg.status === true) {
+//                        $.util.alert(msg.msg);
+//                        setTimeout(function () {
+//                            window.location.reload();
+//                            window.doScroll('scrollbarDown');
+//                        }, 3000);
+//                    } else {
+//                        $.util.alert(msg.msg);
+//                    }
+//                }
+//            }
+//        });
+//    });
 
 </script>
 <?php $this->end('script');
