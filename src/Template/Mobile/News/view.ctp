@@ -72,9 +72,11 @@
         d.user_position = d.user.position;
         d.style = '';
         d.disable = '0';
-        if(d['likes'].length){
-            d.style= 'font-weight:bold';
-            d.disable = '1';
+        if(d.hasOwnProperty('likes')){
+            if(d['likes'].length){
+                d.style= 'font-weight:bold';
+                d.disable = '1';
+            }
         }
         return d;
     });
