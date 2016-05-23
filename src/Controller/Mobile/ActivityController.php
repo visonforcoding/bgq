@@ -400,7 +400,12 @@ class ActivityController extends AppController {
         ));
     }
 
-    public function doComment($id, $pid = 0) {
+    /**
+     * 评论动作
+     * @param int $id 活动id
+     * @param int $pid 父id
+     */
+    public function doComment($id) {
         if ($this->request->is('post')) {
             if ($this->user) {
                 $data = $this->request->data();
