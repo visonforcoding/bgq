@@ -455,7 +455,7 @@ class ActivityController extends AppController {
             'type' => 0,
             'msg' => $msg,
         ];
-        $likeLogsTable = \Cake\ORM\TableRegistry::get('likelogs');
+        $likeLogsTable = \Cake\ORM\TableRegistry::get('LikeLogs');
         $likeLogs = $likeLogsTable->newEntity();
         $like = $likeLogsTable->patchEntity($likeLogs, $data);
         return $likeLogsTable->save($like, ['associated' => false]);
@@ -484,6 +484,10 @@ class ActivityController extends AppController {
         return $collectLogsTable->save($collect, ['associated' => false]);
     }
 
+    /**
+     * ajax获取更多活动内容
+     * @param int $page 分页
+     */
     public function getMoreActivity($page) {
         // 是否已报名
         if ($this->user) {
@@ -514,8 +518,13 @@ class ActivityController extends AppController {
             $this->Util->ajaxReturn(['status' => false]);
         }
     }
-    
-    public function getMoreComment($page, $id){
+
+    /**
+     * ajax获取更多评论
+     * @param int $page 分页
+     * @param int $id 活动id
+     */
+    public function getMoreComment($page, $id) {
         $comment = $this->Activity->Activitycom->find()->where(['activity_id' => $id])
                         ->contain(['Users', 'Replyusers'])->page($page, $this->limit)
                         ->orderDesc('Activitycom.create_time')->toArray();

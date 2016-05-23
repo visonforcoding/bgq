@@ -149,7 +149,7 @@
     setTimeout(function () {
         $(window).on("scroll", function () {
             $.util.listScroll('items', function () {
-                if (page == 9999) {
+                if (page === 9999) {
                     $('#buttonLoading').html('亲，没有更多资讯了，请明天再来吧');
                     return;
                 }
@@ -165,10 +165,10 @@
 
                     if (res.status) {
                         var html = $.util.dataToTpl('', 'comment_tpl', res.data, function (d) {
-                            d.avatar = d.user.avatar; // 头像
-                            d.truename = d.user.truename; // 名字
-                            d.company = d.user.company; // 公司
-                            d.position = d.user.position; // 职务
+                            d.user_avatar = d.user.avatar; // 头像
+                            d.user_truename = d.user.truename; // 名字
+                            d.user_company = d.user.company; // 公司
+                            d.user_position = d.user.position; // 职务
                             d.reply = d.pid > 0 ? '@' + d.replyuser.truename : ''; // 是否回复别人的评论
                             return d;
                         });
@@ -179,151 +179,6 @@
             });
         });
     }, 2000);
-
-//    $('.comment').click(function () {
-//        $('.article-shadow').show();
-//        $('.article').show();
-//    });
-
-//    $('.infor-comm').click(function () {
-//        $('.reply-shadow').show();
-//        $('.reply').show();
-//        var comid = $(this).attr('value');
-//        $('.publish-reply').attr('value', comid);
-//    });
-
-//    $('.cancel').click(function () {
-//        $('.reg-shadow').hide();
-//        $('.shadow-info').hide();
-//    });
-
-//    // 评论点赞
-//    $('#likecom').on('click', function () {
-//        $.ajax({
-//            type: 'post',
-//            url: '/activity/comLike/' + $(this).attr('comid'),
-//            data: 'type=' + $(this).attr('type') + '&relate_id=' + $(this).attr('comid'),
-//            dataType: 'json',
-//            success: function (msg) {
-//                if (typeof msg === 'object') {
-//                    if (msg.status === true) {
-//                        var num = $('.addnum').siblings('b').text();
-//                        num = parseInt(num) + 1;
-//                        $('.addnum').siblings('b').text(num);
-//                        $('#likecom').siblings('.addnum').addClass('show');
-//                        // 动画结束前只能点击一次
-//                        var addnum = $('.addnum')[0];
-//                        addnum.addEventListener("webkitAnimationEnd", function () {
-//                            $('.show').removeClass('show');
-//                        });
-//                    } else {
-//                        $.util.alert(msg.msg);
-//                    }
-//                }
-//            }
-//        });
-//    });
-
-
-//// 喜欢按钮
-//$('.like').click(function () {
-//    $.ajax({
-//        type: 'post',
-//        url: '/activity/artLike/' + $(this).attr('artid'),
-//        data: 'type=' + $(this).attr('type') + '&relate_id=' + $(this).attr('artid'),
-//        dataType: 'json',
-//        success: function (msg) {
-//            if (typeof msg === 'object') {
-//                if (msg.status === true) {
-//                    $('.like').toggleClass('changecolor');
-//                } else {
-//                    $.util.alert(msg.msg);
-//                }
-//            }
-//        }
-//    });
-//});
-
-//// 收藏按钮
-//$('.collect').click(function () {
-//    $.ajax({
-//        type: 'post',
-//        url: '/activity/collect/' + $(this).attr('artid'),
-//        data: 'type=' + $(this).attr('type') + '&relate_id=' + $(this).attr('artid'),
-//        dataType: 'json',
-//        success: function (msg) {
-//            if (typeof msg === 'object') {
-//                if (msg.status === true) {
-//                    $('.collect').toggleClass('changecolor');
-//                } else {
-//                    $.util.alert(msg.msg);
-//                }
-//            }
-//        }
-//    });
-//});
-
-
-//// 我要点评
-//    $('.publish-article').click(function () {
-//        var data = {};
-//        var body = $('textarea[name="comment-content-article"]').val();
-//        if (!body) {
-//            $.util.alert('评论内容不可为空');
-//            return false;
-//        }
-//        data.body = body;
-//        data.pid = 0;
-//        $.ajax({
-//            type: 'post',
-//            url: '/activity/doComment/<?= $activity->id ?>',
-//            data: data,
-//            dataType: 'json',
-//            success: function (msg) {
-//                if (typeof msg === 'object') {
-//                    if (msg.status === true) {
-//                        $.util.alert(msg.msg);
-//                        setTimeout(function () {
-//                            window.location.reload();
-//                            window.doScroll('scrollbarDown');
-//                        }, 3000);
-//                    } else {
-//                        $.util.alert(msg.msg);
-//                    }
-//                }
-//            }
-//        });
-//    });
-//
-//    $('.publish-reply').click(function () {
-//        var data = {};
-//        var body = $('textarea[name="comment-content-reply"]').val();
-//        if (!body) {
-//            $.util.alert('评论内容不可为空');
-//            return false;
-//        }
-//        data.body = body;
-//        data.pid = $('.publish-reply').attr('value');
-//        $.ajax({
-//            type: 'post',
-//            url: '/activity/doComment/<?= $activity->id ?>',
-//            data: data,
-//            dataType: 'json',
-//            success: function (msg) {
-//                if (typeof msg === 'object') {
-//                    if (msg.status === true) {
-//                        $.util.alert(msg.msg);
-//                        setTimeout(function () {
-//                            window.location.reload();
-//                            window.doScroll('scrollbarDown');
-//                        }, 3000);
-//                    } else {
-//                        $.util.alert(msg.msg);
-//                    }
-//                }
-//            }
-//        });
-//    });
 
 </script>
 <?php $this->end('script');
