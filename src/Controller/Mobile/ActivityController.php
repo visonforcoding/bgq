@@ -26,8 +26,12 @@ class ActivityController extends AppController {
             $activity->read_nums += 1; // 阅读加1
             $this->Activity->save($activity);
             $this->set('activity', $activity);
-            $this->set('user', $this->user);
-            
+            if ($this->user) {
+                $this->set('user', $this->user->id);
+            } else {
+                $this->set('user', '');
+            }
+
             // 是否已报名
             if ($this->user) {
                 $activityApply = $this

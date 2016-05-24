@@ -49,24 +49,31 @@ activity.prototype.bindEvent = function () {
             });
         }
         if (em.id.indexOf('reply_') != -1) {
-            $('.reply-shadow').show();
-            $('.reply').show();
-            var comid = $(em).attr('value');
-            $('#publish-reply').attr('value', comid);
-        }
-        switch (em.id) {
-            // 点击评论
-            case 'article-comment':
-                $('.article-shadow').show();
-                $('.article').show();
-                break;
-
-            // 点击回复评论
-            case 'reply':
+            if ($('#article_comment').attr('user_id'))
+            {
+                if($(em).attr('user_id') == $('#article_comment').attr('user_id'))
+                {
+                    return;
+                }
                 $('.reply-shadow').show();
                 $('.reply').show();
                 var comid = $(em).attr('value');
                 $('#publish-reply').attr('value', comid);
+            } else
+            {
+                $.util.alert('请先登录');
+            }
+        }
+        switch (em.id) {
+            // 点击评论
+            case 'article_comment':
+                if ($(em).attr('user_id'))
+                {
+                    $('.article-shadow').show();
+                    $('.article').show();
+                } else {
+                    $.util.alert('请先登录');
+                }
                 break;
 
             // 取消评论
@@ -179,7 +186,7 @@ activity.prototype.bindEvent = function () {
                 });
                 break;
             case 'enroll':
-                if ($(em).attr('user')) {
+                if ($(em).attr('user_id')) {
                     location.href = '/activity/enroll/' + $(em).attr('activity_id');
                 } else {
                     $.util.alert('请先登录');

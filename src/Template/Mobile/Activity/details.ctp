@@ -75,7 +75,7 @@
             <h3 class="comment-title">
                 评论
                 <i class="iconfont">&#xe618;</i>
-                <span id="article-comment">我要点评</span>
+                <span id="article_comment" user_id="<?= $user; ?>">我要点评</span>
             </h3>
             <div id="comment"></div>
             <div id="buttonLoading" class="loadingbox"></div>
@@ -87,10 +87,10 @@
                     <?php if (in_array($activity->id, $isApply)): ?>
                         <a>已报名(<?= $activity->apply_fee; ?>元)</a>
                     <?php else: ?>
-                        <a id="enroll" activity_id="<?= $activity->id; ?>" user="<?= $user; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                        <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
                     <?php endif; ?>
                 <?php else: ?>
-                    <a id="enroll" activity_id="<?= $activity->id; ?>" user="<?= $user; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                    <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
                 <?php endif; ?>
             </div>
         </footer>
@@ -137,7 +137,7 @@
                 <b>{#praise_nums#}</b>
             </span>
         </div>
-        <p class="infor-comm" id="reply_{#id#}" value="{#id#}">{#body#}</p>
+        <p class="infor-comm" id="reply_{#id#}" value="{#id#}" user_id="{#user_id#}">{#body#}</p>
     </div>
 </script>
 <script src="/mobile/js/activity_details.js"></script>
