@@ -13,6 +13,7 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $Admins
  * @property \Cake\ORM\Association\BelongsToMany $Industries
+ * @property \Cake\ORM\Association\HasMany $likes
  */
 class NewsTable extends Table {
 
@@ -41,6 +42,13 @@ class NewsTable extends Table {
             'joinTable' => 'news_industry',
             'foreignKey' => 'news_id',
             'targetForeignKey' => 'industry_id'
+        ]);
+
+        $this->hasMany('Praises', [
+            'className' => 'LikeLogs',
+            'joinTable' => 'like_logs',
+            'joinType' => 'LEFT',
+            'foreignKey' => 'relate_id',
         ]);
 
         $this->hasMany('Comments', [

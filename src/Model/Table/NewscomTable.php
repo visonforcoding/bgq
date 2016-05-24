@@ -39,6 +39,11 @@ class NewscomTable extends Table {
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Reply', [
+            'className' => 'User',
+            'foreignKey' => 'reply_user',
+            'joinType' => 'LEFT'
+        ]);
         $this->hasMany('Likes', [
             'className' => 'CommentLike',
             'joinType' => 'LEFT',

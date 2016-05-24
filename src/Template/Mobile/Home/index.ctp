@@ -13,7 +13,7 @@
 <div class="wraper m-wraper">
     <ul class="h-home-menu">
         <li><a href="/home/my-following"><i class="iconfont">&#xe60f;</i>我的关注</a></li>
-        <li><a href="#this"><i class="iconfont">&#xe610;</i>我的收藏</a></li>
+        <li><a href="/home/my-collect-activity"><i class="iconfont">&#xe610;</i>我的收藏</a></li>
         <li><a href="#this"><i class="iconfont">&#xe60b;</i>我的约见</a></li>
         <li><a href="/home/my-activity-submit"><i class="iconfont">&#xe601;</i>我的活动</a></li>
     </ul>

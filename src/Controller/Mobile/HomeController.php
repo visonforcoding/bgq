@@ -3,6 +3,7 @@
 namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
+use Cake\I18n\Time;
 
 /**
  * Home Controller  个人中心
@@ -200,10 +201,58 @@ class HomeController extends AppController {
         }
     }
     
+    /**
+     * 小秘书历史记录
+     */
     public function myHistoryNeed(){
         $NeedTable = \Cake\ORM\TableRegistry::get('need');
         $user_id = $this->user->id;
         $needs = $NeedTable->find()->where(['user_id'=>$user_id])->orderDesc('create_time')->toArray();
         $this->set(compact('needs'));
+    }
+    
+    
+    /**
+     * 活动收藏记录
+     */
+    public function myCollectActivity(){
+        
+    }
+    
+    
+    /**
+     * 资讯收藏
+     */
+    public function myCollectNews(){
+//        $now = new Time('2016-3-12 12:34:12');
+        $now = new Time();
+        echo $now->timeAgoInWords(
+           [ 'accuracy' => [
+                     'year' => 'year',
+                     'month' => 'month',
+                     'hour' => 'hour'
+                 ],'end' => '+10 year']
+        );
+        //exit();
+        $user_id = $this->user->id;
+        $CollectTable = \Cake\ORM\TableRegistry::get('Collect');
+        $collects = $CollectTable->find()->hydrate(false)
+                                 ->contain(['News'])
+                                 ->where(['is_delete'=>0,'user_id'=>$user_id])
+                                 ->orderDesc('Collect.create_time')
+                                 ->decorateResults(function($item){
+                                     $item['Collect__time_str'] = (new Time($item['Collect__create_time']))->timeAgoInWords(
+                                         [ 'accuracy' => [
+                                             'month' => 'month',
+                                             'hour' => 'hour'
+                                             ],'end' => '+1 year']
+                                         );
+                                     debug($item);
+                                     return $item;
+                                 },false)
+                                 ->toArray();
+        debug($collects);
+                                 exit();
+        $this->set(compact('collects'));
     }
 }

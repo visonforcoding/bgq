@@ -184,9 +184,10 @@ class BusinessComponent extends Component {
             'title' => $title,
             'msg' => $msg,
             'table_id' => $id,
-            'url' => $url
         ]));
-        $UsermsgTable->save($usermsg);
+        if (!$UsermsgTable->save($usermsg)) {
+            \Cake\Log\Log::error($usermsg->errors());
+        }
     }
 
     /**
@@ -208,7 +209,7 @@ class BusinessComponent extends Component {
                 break;
         }
         $RelateTable = \Cake\ORM\TableRegistry::get($table);
-        $relate = $RelateTable->get($relate_id,['contain'=>['Users']]);
+        $relate = $RelateTable->get($relate_id, ['contain' => ['Users']]);
         if (!$relate) {
             throw new \Cake\Network\Exception\NotFoundException('该条评论不存在');
         }
@@ -219,7 +220,7 @@ class BusinessComponent extends Component {
         ];
         $ComLikeTable = \Cake\ORM\TableRegistry::get('comment_like');
         $comlike = $ComLikeTable->find()->where($data)->first();
-        if($comlike){
+        if ($comlike) {
             //点过赞
             return false;
         }
@@ -235,8 +236,112 @@ class BusinessComponent extends Component {
         }
         //发送消息给该条评论的用户
         $com_userid = $relate->user->id;
-        $this->usermsg($com_userid, '您有新的点赞', '您的评论获得新的点赞', 2,$relate_id);
+        $this->usermsg($com_userid, '您有新的点赞', '您的评论获得新的点赞', 2, $relate_id);
         return true;
+    }
+
+    /**
+     * 
+     * @param type $user_id
+     * @param type $relate_id
+     * @param type $type 0活动  1资讯
+     * @return boolean
+     * @throws \Cake\Network\Exception\NotFoundException
+     */
+    public function praise($user_id, $relate_id, $type) {
+        //检测是否评论过
+        switch ($type) {
+            case 0:
+                $table = 'activity';
+                break;
+            case 1:
+                $table = 'news';
+            default:
+                break;
+        }
+        $RelateTable = \Cake\ORM\TableRegistry::get($table);
+        $relate = $RelateTable->get($relate_id);
+        if (!$relate) {
+            throw new \Cake\Network\Exception\NotFoundException('点赞内容不存在');
+        }
+        $data = [
+            'user_id' => $user_id,
+            'relate_id' => $relate_id,
+            'type' => $type
+        ];
+        $likeTable = \Cake\ORM\TableRegistry::get('like_logs');
+        $comlike = $likeTable->find()->where($data)->first();
+        if ($comlike) {
+            //点过赞
+            return '你已点过赞';
+        }
+        $data['msg'] = '进行了点赞';
+        $comlike = $likeTable->newEntity($data);
+        $errorFlag = [];
+        $likeTable->connection()->transactional(function()use($likeTable, $comlike, $relate, $RelateTable, $errorFlag) {
+            $errorFlag[] = $likeTable->save($comlike);
+            $relate->praise_nums +=1;
+            $errorFlag[] = $RelateTable->save($relate);
+        });
+        if (in_array(false, $errorFlag)) {
+            return '点赞失败';
+        }
+        return true;
+    }
+
+   /**
+    * 
+    * @param type $user_id
+    * @param type $relate_id 
+    * @param type $type 0 活动 1资讯
+    * @return boolean|array false 执行失败  array 成功执行的返回
+    * @throws \Cake\Network\Exception\NotFoundException
+    */
+    public function collectIt($user_id, $relate_id, $type) {
+        //检测是否评论过
+        switch ($type) {
+            case 0:
+                $table = 'activity';
+                break;
+            case 1:
+                $table = 'news';
+            default:
+                break;
+        }
+        $RelateTable = \Cake\ORM\TableRegistry::get($table);
+        $relate = $RelateTable->get($relate_id);
+        if (!$relate) {
+            throw new \Cake\Network\Exception\NotFoundException('点赞内容不存在');
+        }
+        $data = [
+            'user_id' => $user_id,
+            'relate_id' => $relate_id,
+            'type' => $type
+        ];
+        $collectTable = \Cake\ORM\TableRegistry::get('collect');
+        $collect = $collectTable->findOrCreate($data, function($entity) {
+            $entity->is_delete = 1;  //初始数据 取消
+        });
+        if ($collect->is_delete) {
+            //收藏
+            $collect->is_delete = 0;
+            $res = [
+                'collect' => true,
+                'msg' => '收藏成功'
+            ];
+        } else {
+            //取消收藏
+            $collect->is_delete = 1;
+            $res = [
+                'collect' => false,
+                'msg' => '取消收藏'
+            ];
+        }
+        if ($collectTable->save($collect)) {
+            return $res;
+        } else {
+            return false;
+        }
     }
 
 }

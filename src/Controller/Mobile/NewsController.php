@@ -53,17 +53,29 @@ class NewsController extends AppController {
     public function comment() {
         $this->handCheckLogin();
         if ($this->request->is('post')) {
+            $reply_id = $this->request->data('reply_id');
             $CommentTable = \Cake\ORM\TableRegistry::get('newscom');
-            $comment = $CommentTable->newEntity([
+            if($reply_id==$this->user->id){
+                $this->Util->ajaxReturn(false,'不能对自己进行回复');
+            }
+            if(is_numeric($reply_id)&&$reply_id>0){
+                //该条评论是 对评论的回复
+                $data['pid'] = $reply_id;
+                $reply_com = $CommentTable->get($reply_id);
+                $data['reply_user'] = $reply_com->user_id;
+            }
+            $comment = $CommentTable->newEntity(array_merge($data,[
                 'user_id'=>  $this->user->id,
                 'news_id'=>  $this->request->data('id'),
                 'body'=>  $this->request->data('content')
-            ]);
+            ]));
             if ($CommentTable->save($comment)) {
                 //文章新闻数+1
                 $news = $this->News->get($this->request->data('id'));
                 $news->comment_nums +=1;
                 $this->News->save($news);
+                $this->loadComponent('Business');
+                $this->Business->usermsg($reply_com->user_id,'评论回复','有人回复了你的评论!', 3,$comment->id);
                 $this->Util->ajaxReturn(true, '评论成功');
             } else {
                 $msg = errorMsg($comment,'评论成功');
@@ -87,12 +99,18 @@ class NewsController extends AppController {
                         return $q->select(['id','avatar','truename','company','position']);
                 },'Comments.Likes'=>function($q)use($user_id){
                     return $q->where(['type'=>1,'user_id'=>$user_id]);
+                },'Praises'=>function($q)use($user_id){
+                    return $q->where(['type'=>1,'user_id'=>$user_id]);
+                },'Comments.Reply'=>function($q){
+                    return $q->select(['id','truename']);
                 }]
             ]);
         }else{
             $news = $this->News->get($id, [
                 'contain' => ['Admins', 'Comments','Comments.Users'=>function($q){
                         return $q->select(['id','avatar','truename','company','position']);
+                },'Comments.Reply'=>function($q){
+                    return $q->select(['id','truename']);
                 }]
             ]);
         }
@@ -100,6 +118,7 @@ class NewsController extends AppController {
         $news->read_nums +=1;
         $this->News->save($news);
         $this->set('news', $news);
+        $this->set('user', $this->user);
         $this->set('_serialize', ['news']);
     }
     
@@ -118,6 +137,40 @@ class NewsController extends AppController {
             }else{
                 $this->Util->ajaxReturn(false,'点赞失败');
             }
+        }
+    }
+    
+    /**
+     * 资讯点赞
+     */
+    public function newsPraise(){
+         $this->handCheckLogin();
+        if($this->request->is('post')){
+            $relate_id = $this->request->data('id');
+            $user_id = $this->user->id;
+            $this->loadComponent('Business');
+            $res = $this->Business->praise($user_id, $relate_id, 1);
+            if($res===true){
+                $this->Util->ajaxReturn(true,'点赞成功');
+            }else{
+                $this->Util->ajaxReturn(false,$res);
+            }
+        }
+    }
+    
+    /**
+     * 收藏
+     */
+    public function collect(){
+        $this->handCheckLogin();
+        $this->loadComponent('Business');
+        $data_id = $this->request->data('id');
+        $res = $this->Business->collectIt($this->user->id,$data_id, 1);
+        if($res!==false){
+            $res['status'] = true;
+            $this->Util->ajaxReturn($res);
+        }else{
+            $this->Util->ajaxReturn(false,'服务器出错');
         }
     }
 }
