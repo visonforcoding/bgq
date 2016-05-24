@@ -17,9 +17,9 @@
             <p>地点：<?= $activity->address; ?></p>
             <p>规模：<?= $activity->scale; ?></p>
             <div class="a-other-info" style="text-indent: 0;font-size: 0.24rem;line-height: 0.36rem;padding-left: 0;width: 90%;margin: 0 auto;color: #9ba4ad;">
-            <?php foreach ($activity->industries as $k=>$v): ?>
-                <a><?= $v->name; ?></a>
-            <?php endforeach; ?>
+                <?php foreach ($activity->industries as $k => $v): ?>
+                    <a><?= $v->name; ?></a>
+                <?php endforeach; ?>
             </div>
         </section>
         <section class="a-detail newscomment-box">
@@ -31,10 +31,10 @@
             <?= $activity->body; ?>
         </section>
         <section class="a-detail newscomment-box guests">
-	<?php if($activity->guest): ?>
-            <h3 class="comment-title">参与嘉宾</h3>
-            <?= $activity->guest; ?>
-	<?php endif; ?>
+            <?php if ($activity->guest): ?>
+                <h3 class="comment-title">参与嘉宾</h3>
+                <?= $activity->guest; ?>
+            <?php endif; ?>
             <div class="con-bottom clearfix">
                 <!--阅读数-->
                 <span class="readnums">
@@ -43,11 +43,11 @@
                 </span>
                 <!--喜欢按钮-->
                 <span >
-                    <i class="iconfont like <?php if ($isLike):?> changecolor<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like">&#xe616;</i>
+                    <i class="iconfont like <?php if ($isLike): ?> changecolor<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like">&#xe616;</i>
                 </span>
                 <!--收藏按钮-->
                 <span>
-                    <i class='iconfont collect h-regiser <?php if ($isCollect):?> changecolor<?php endif; ?>' artid="<?= $activity->id; ?>" type="0" id="collect">&#xe610;</i>
+                    <i class='iconfont collect h-regiser <?php if ($isCollect): ?> changecolor<?php endif; ?>' artid="<?= $activity->id; ?>" type="0" id="collect">&#xe610;</i>
                 </span>
             </div>
         </section>
@@ -57,12 +57,12 @@
             </h3>
             <div class="items nobottom">
                 <div class="comm-info clearfix">
-                    <?php if($userApply): ?>
-                    <?php foreach ($userApply as $k=>$v): ?>
-                    <a href='javascript:void(0);'><img src="<?= $v['avatar']; ?>"/></a>
-                    <?php endforeach; ?>
+                    <?php if ($userApply): ?>
+                        <?php foreach ($userApply as $k => $v): ?>
+                            <a href='javascript:void(0);'><img src="<?= $v['avatar']; ?>"/></a>
+                        <?php endforeach; ?>
                     <?php else : ?>
-                    暂时无人报名
+                        暂时无人报名
                     <?php endif; ?>
                 </div>
                 <!-- <span>显示全部</span> -->
@@ -84,13 +84,13 @@
             <div class="a-btn">
                 <a href="/activity/recommend/<?= $activity->id; ?>">我要推荐</a>
                 <?php if ($isApply != ''): ?>
-                <?php if(in_array($activity->id, $isApply)): ?>
-                <a>已报名(<?= $activity->apply_fee; ?>元)</a>
+                    <?php if (in_array($activity->id, $isApply)): ?>
+                        <a>已报名(<?= $activity->apply_fee; ?>元)</a>
+                    <?php else: ?>
+                        <a id="enroll" activity_id="<?= $activity->id; ?>" user="<?= $user; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                    <?php endif; ?>
                 <?php else: ?>
-                <a href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
-                <?php endif; ?>
-                <?php else: ?>
-                <a href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                    <a id="enroll" activity_id="<?= $activity->id; ?>" user="<?= $user; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
                 <?php endif; ?>
             </div>
         </footer>
@@ -98,7 +98,9 @@
     <div class="reg-shadow article-shadow" ontouchmove="return false;" hidden>
         <div class="shadow-info a-shadow a-forword article">
             <ul>
-                <li><textarea type="text" placeholder="请输入评论" name="comment-content-article"></textarea></li>
+                <li>
+                    <textarea type="text" placeholder="请输入评论" name="comment-content-article"></textarea>
+                </li>
                 <li>
                     <a href="javascript:void(0);" id="cancel">取消</a>
                     <a href="javascript:void(0);" id="publish-article" activity_id="<?= $activity->id; ?>">发表</a>
@@ -109,7 +111,9 @@
     <div class="reg-shadow reply-shadow" ontouchmove="return false;" hidden>
         <div class="shadow-info a-shadow a-forword reply">
             <ul>
-                <li><textarea type="text" placeholder="请输入评论" name="comment-content-reply"></textarea></li>
+                <li>
+                    <textarea type="text" placeholder="请输入评论" name="comment-content-reply"></textarea>
+                </li>
                 <li>
                     <a href="javascript:void(0);" id="cancel">取消</a>
                     <a href="javascript:void(0);" id="publish-reply" activity_id="<?= $activity->id; ?>">发表</a>
@@ -128,13 +132,15 @@
                 <i class="job">{#user_company#} {#user_position#}</i>
             </span>
             <span>
-                <b class="addnum" id="addnum_{#id#}">+1</b><i class="iconfont" id="likecom_{#id#}" type="0" comid="{#id#}">&#xe615;</i><b>{#praise_nums#}</b>
+                <b class="addnum" id="addnum_{#id#}">+1</b>
+                <i class="iconfont" id="likecom_{#id#}" type="0" comid="{#id#}">&#xe615;</i>
+                <b>{#praise_nums#}</b>
             </span>
         </div>
         <p class="infor-comm" id="reply_{#id#}" value="{#id#}">{#body#}</p>
     </div>
 </script>
-<script src="/mobile/js/details.js"></script>
+<script src="/mobile/js/activity_details.js"></script>
 <script>
     $.util.dataToTpl('comment', 'comment_tpl',<?= $comjson ?>, function (d) {
         d.user_avatar = d.user.avatar;
@@ -181,4 +187,5 @@
     }, 2000);
 
 </script>
-<?php $this->end('script');
+<?php
+$this->end('script');

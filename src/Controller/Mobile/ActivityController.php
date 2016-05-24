@@ -13,7 +13,7 @@ use App\Controller\Mobile\AppController;
 
 class ActivityController extends AppController {
 
-    protected $limit = '5';
+    protected $limit = '5'; // 分页条数
 
     /**
      * 活动详情
@@ -26,7 +26,8 @@ class ActivityController extends AppController {
             $activity->read_nums += 1; // 阅读加1
             $this->Activity->save($activity);
             $this->set('activity', $activity);
-
+            $this->set('user', $this->user);
+            
             // 是否已报名
             if ($this->user) {
                 $activityApply = $this
@@ -82,27 +83,31 @@ class ActivityController extends AppController {
                     ->toArray();
             $this->set('comjson', json_encode($comment));
 
-            // 是否已赞
-            $isLike = $this
-                    ->Activity
-                    ->Articlelike
-                    ->find()
-                    ->where(['user_id' => $this->user->id, 'relate_id' => $id])
-                    ->first();
+            
+            $isLike = '';
+            $isCollect = '';
+            if ($this->user) {
+                // 是否已赞
+                $isLike = $this
+                        ->Activity
+                        ->Articlelike
+                        ->find()
+                        ->where(['user_id' => $this->user->id, 'relate_id' => $id])
+                        ->first();
+                // 是否已收藏
+                $isCollect = $this
+                        ->Activity
+                        ->Collect
+                        ->find()
+                        ->where(['user_id' => $this->user->id, 'relate_id' => $id])
+                        ->first();
+            }
             $this->set('isLike', $isLike);
-
-            // 是否已收藏
-            $isCollect = $this
-                    ->Activity
-                    ->Collect
-                    ->find()
-                    ->where(['user_id' => $this->user->id, 'relate_id' => $id])
-                    ->first();
             $this->set('isCollect', $isCollect);
 
             $this->set('pagetitle', '活动详情');
         } else {
-            $this->Util->ajaxReturn('0', '传值错误');
+            $this->Util->ajaxReturn(false, '传值错误');
         }
     }
 
@@ -156,6 +161,7 @@ class ActivityController extends AppController {
         }
         $isApply = implode(',', $isApply);
         $this->set('isApply', $isApply);
+        $this->set('user', $this->user);
         $this->set('pagetitle', '活动');
     }
 
@@ -201,12 +207,12 @@ class ActivityController extends AppController {
                 ];
                 $activityApply = $this->Activity->Activityapply->patchEntity($activityApply, $data);
                 if ($this->Activity->Activityapply->find()->where($data)->first()) { // 查找数据库是否有对应数据，即是否已报名
-                    $this->Util->ajaxReturn(false, '已经报名过了！');
+                    $this->Util->ajaxReturn(false, '已经报名过了');
                 } else {
                     if ($this->Activity->Activityapply->save($activityApply)) {
                         $activity->apply_nums += 1;
                         $this->Activity->save($activity);
-                        $this->Util->ajaxReturn(true, '提交成功！');
+                        $this->Util->ajaxReturn(true, '提交成功');
                     } else {
                         $this->Util->ajaxReturn(false, $activityApply->errors());
                     }
@@ -324,17 +330,20 @@ class ActivityController extends AppController {
         $alert = [];
         if ($this->request->is('post')) {
             $data = $this->request->data();
+            $industry_id = $data['industry_id'];
             $res = $this
                     ->Activity
                     ->find()
                     ->where(['title LIKE' => '%' . $data['keyword'] . '%']);
             if ($data['industry_id']) {
-                $res = $res->andWhere(['industry_id' => $data['industry_id']]);
+                $res = $res->contain(['Industries' => function($q)use($industry_id) {
+                    return $q->where(['Industries.id' => $industry_id]);
+                }]);
             }
             if ($data['sort']) {
                 $res = $res->orderDesc($data['sort']);
             } else {
-                $res = $res->orderDesc('create_time');
+                $res = $res->orderDesc('create_time'); // 默认按时间倒序排列
             }
             $res = $res
                     ->hydrate(false)
@@ -369,195 +378,200 @@ class ActivityController extends AppController {
         $this->set('industries', $industries);
     }
 
-    /**
-     * 将子元素分到父元素数组的一个子集里面，无限循环
-     * @param array $arr 原数组
-     * @param int $pid 父id
-     * @return array 重构后的数组
-     */
-    public function tree($arr, $pid = '0') {
-        $p = [];
-        foreach ($arr as $k => $v) {
-            if ($v['pid'] == $pid) {
-                $p[$k] = $v;
-                $p[$k]['child'] = $this->tree($arr, $v['id']);
-            }
-        }
-        return $p;
-    }
-
-    /**
-     * 发布活动时选择的行业标签
-     */
-    public function industries() {
-        $IndustryTable = \Cake\ORM\TableRegistry::get('industry');
-        $industries = $IndustryTable->find('threaded', [
-                    'keyField' => 'id',
-                    'parentField' => 'pid'
-                ])->where("`id` != '3'")->hydrate(false)->toArray();
-        $this->set(array(
-            'industries' => $industries
-        ));
-    }
-
-    /**
-     * 评论动作
-     * @param int $id 活动id
-     * @param int $pid 父id
-     */
-    public function doComment($id) {
-        if ($this->request->is('post')) {
-            if ($this->user) {
-                $data = $this->request->data();
-                $data['user_id'] = $this->user->id;
-                $data['activity_id'] = $id;
-
-                $activitycom = $this->Activity->Activitycom->newEntity();
-                $doComment = $this->Activity->Activitycom->patchEntity($activitycom, $data);
-                if ($data['pid']) {
-                    $comment = $this->Activity->Activitycom->get($data['pid']);
-                    $doComment->reply_id = $comment->user_id;
-                } else {
-                    $user = $this->Activity->get($id);
-                    $doComment->reply_id = $user->user_id;
+            /**
+             * 将子元素分到父元素数组的一个子集里面，无限循环
+             * @param array $arr 原数组
+             * @param int $pid 父id
+             * @return array 重构后的数组
+             */
+            public function tree($arr, $pid = '0') {
+                $p = [];
+                foreach ($arr as $k => $v) {
+                    if ($v['pid'] == $pid) {
+                        $p[$k] = $v;
+                        $p[$k]['child'] = $this->tree($arr, $v['id']);
+                    }
                 }
-                $res = $this->Activity->Activitycom->save($doComment);
-                if ($res) {
-                    $activity = $this->Activity->get($id);
-                    $activity->comment_nums += 1;
-                    $this->Activity->save($activity);
-                    $this->Util->ajaxReturn(true, '评论成功');
+                return $p;
+            }
+
+            /**
+             * 发布活动时选择的行业标签
+             */
+            public function industries() {
+                $IndustryTable = \Cake\ORM\TableRegistry::get('industry');
+                $industries = $IndustryTable->find('threaded', [
+                            'keyField' => 'id',
+                            'parentField' => 'pid'
+                        ])->where("`id` != '3'")->hydrate(false)->toArray();
+                $this->set(array(
+                    'industries' => $industries
+                ));
+                $this->set('pagetitle', '行业标签');
+            }
+
+            /**
+             * 评论动作
+             * @param int $id 活动id
+             * @param int $pid 父id
+             */
+            public function doComment($id) {
+                if ($this->request->is('post')) {
+                    if ($this->user) {
+                        $data = $this->request->data();
+                        $data['body'] = trim($data['body']);
+                        if ($data['body'] == '') {
+                            $this->Util->ajaxReturn(false, '内容不能为空');
+                        }
+                        $data['user_id'] = $this->user->id;
+                        $data['activity_id'] = $id;
+                        $activitycom = $this->Activity->Activitycom->newEntity();
+                        $doComment = $this->Activity->Activitycom->patchEntity($activitycom, $data);
+                        if ($data['pid']) {
+                            $comment = $this->Activity->Activitycom->get($data['pid']);
+                            $doComment->reply_id = $comment->user_id;
+                        } else {
+                            $user = $this->Activity->get($id);
+                            $doComment->reply_id = $user->user_id;
+                        }
+                        $res = $this->Activity->Activitycom->save($doComment);
+                        if ($res) {
+                            $activity = $this->Activity->get($id);
+                            $activity->comment_nums += 1;
+                            $this->Activity->save($activity);
+                            $this->Util->ajaxReturn(true, '评论成功');
+                        } else {
+                            $this->Util->ajaxReturn(false, '系统错误');
+                        }
+                    } else {
+                        $this->Util->ajaxReturn(false, '请先登录');
+                    }
                 } else {
-                    $this->Util->ajaxReturn(false, '系统错误');
+                    $this->Util->ajaxReturn(false, '非法操作');
                 }
-            } else {
-                $this->Util->ajaxReturn(false, '请先登录');
             }
-        } else {
-            $this->Util->ajaxReturn(false, '非法操作');
-        }
-    }
 
-    /**
-     * 记录点赞日志
-     * @param int $id 活动id
-     * @param int $user_id 用户id
-     * @return boolean true: 记录成功; false: 记录失败
-     */
-    public function likeLog($id, $user_id) {
-        $activity = $this->Activity->get($id);
-        $userTable = \Cake\ORM\TableRegistry::get('user');
-        $user = $userTable->find()->where(['id' => $user_id])->hydrate(false)->first();
-        $msg = $user['truename'] . ' 于' . date('Y-m-d H:i:s', time()) . '对 ' . $activity->title . ' 点了赞';
-        $data = [
-            'relate_id' => $id,
-            'user_id' => $user_id,
-            'type' => 0,
-            'msg' => $msg,
-        ];
-        $likeLogsTable = \Cake\ORM\TableRegistry::get('LikeLogs');
-        $likeLogs = $likeLogsTable->newEntity();
-        $like = $likeLogsTable->patchEntity($likeLogs, $data);
-        return $likeLogsTable->save($like, ['associated' => false]);
-    }
-
-    /**
-     * 记录收藏日志
-     * @param int $id 活动id
-     * @param int $user_id 用户id
-     * @return boolean true: 记录成功; false: 记录失败
-     */
-    public function collectLog($id, $user_id) {
-        $activity = $this->Activity->get($id);
-        $userTable = \Cake\ORM\TableRegistry::get('user');
-        $user = $userTable->find()->where(['id' => $user_id])->hydrate(false)->first();
-        $msg = $user['truename'] . ' 于' . date('Y-m-d H:i:s', time()) . '收藏了 ' . $activity->title;
-        $data = [
-            'relate_id' => $id,
-            'user_id' => $user_id,
-            'type' => 0,
-            'msg' => $msg,
-        ];
-        $collectLogsTable = \Cake\ORM\TableRegistry::get('collectlogs');
-        $collectLogs = $collectLogsTable->newEntity();
-        $collect = $collectLogsTable->patchEntity($collectLogs, $data);
-        return $collectLogsTable->save($collect, ['associated' => false]);
-    }
-
-    /**
-     * ajax获取更多活动内容
-     * @param int $page 分页
-     */
-    public function getMoreActivity($page) {
-        // 是否已报名
-        if ($this->user) {
-            $activityApply = $this
-                    ->Activity
-                    ->Activityapply
-                    ->find()
-                    ->contain(['Users'])
-                    ->where(['user_id' => $this->user->id])
-                    ->hydrate(false)
-                    ->toArray();
-            $isApply = [];
-            foreach ($activityApply as $k => $v) {
-                $isApply[] = $v['activity_id'];
+            /**
+             * 记录点赞日志
+             * @param int $id 活动id
+             * @param int $user_id 用户id
+             * @return boolean true: 记录成功; false: 记录失败
+             */
+            public function likeLog($id, $user_id) {
+                $activity = $this->Activity->get($id);
+                $userTable = \Cake\ORM\TableRegistry::get('user');
+                $user = $userTable->find()->where(['id' => $user_id])->hydrate(false)->first();
+                $msg = $user['truename'] . ' 于' . date('Y-m-d H:i:s', time()) . '对 ' . $activity->title . ' 点了赞';
+                $data = [
+                    'relate_id' => $id,
+                    'user_id' => $user_id,
+                    'type' => 0,
+                    'msg' => $msg,
+                ];
+                $likeLogsTable = \Cake\ORM\TableRegistry::get('LikeLogs');
+                $likeLogs = $likeLogsTable->newEntity();
+                $like = $likeLogsTable->patchEntity($likeLogs, $data);
+                return $likeLogsTable->save($like, ['associated' => false]);
             }
-            $isApply = implode(',', $isApply);
-            $this->set('isApply', $isApply);
-        } else {
-            $isApply = [];
-            $this->set('isApply', $isApply);
-        }
-        $activity = $this->Activity->find()->where(['is_check' => 1])
-                        ->contain(['Users', 'Industries'])->page($page, $this->limit)
-                        ->orderDesc('Activity.create_time')->toArray();
-        if ($activity) {
-            $this->Util->ajaxReturn(['status' => true, 'data' => $activity]);
-        } else {
-            $this->Util->ajaxReturn(['status' => false]);
-        }
-    }
 
-    /**
-     * ajax获取更多评论
-     * @param int $page 分页
-     * @param int $id 活动id
-     */
-    public function getMoreComment($page, $id) {
-        $comment = $this->Activity->Activitycom->find()->where(['activity_id' => $id])
-                        ->contain(['Users', 'Replyusers'])->page($page, $this->limit)
-                        ->orderDesc('Activitycom.create_time')->toArray();
-        if ($comment) {
-            $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
-        } else {
-            $this->Util->ajaxReturn(['status' => false]);
-        }
-    }
+            /**
+             * 记录收藏日志
+             * @param int $id 活动id
+             * @param int $user_id 用户id
+             * @return boolean true: 记录成功; false: 记录失败
+             */
+            public function collectLog($id, $user_id) {
+                $activity = $this->Activity->get($id);
+                $userTable = \Cake\ORM\TableRegistry::get('user');
+                $user = $userTable->find()->where(['id' => $user_id])->hydrate(false)->first();
+                $msg = $user['truename'] . ' 于' . date('Y-m-d H:i:s', time()) . '收藏了 ' . $activity->title;
+                $data = [
+                    'relate_id' => $id,
+                    'user_id' => $user_id,
+                    'type' => 0,
+                    'msg' => $msg,
+                ];
+                $collectLogsTable = \Cake\ORM\TableRegistry::get('collectlogs');
+                $collectLogs = $collectLogsTable->newEntity();
+                $collect = $collectLogsTable->patchEntity($collectLogs, $data);
+                return $collectLogsTable->save($collect, ['associated' => false]);
+            }
 
-    /**
-     * 显示错误信息
-     * @param int $id 错误码
-     * @return string 错误信息
-     */
-    protected function showError($id) {
-        switch ($id) {
-            case 1:
-                return '已经点过赞了';
-                break;
-            case 2:
-                return '系统错误';
-                break;
-            case 3:
-                return '请先登录！';
-                break;
-            case 4:
-                return '非法操作';
-                break;
-            case 5:
-                return '已经收藏过了';
-                break;
-        }
-    }
+            /**
+             * ajax获取更多活动内容
+             * @param int $page 分页
+             */
+            public function getMoreActivity($page) {
+                // 是否已报名
+                if ($this->user) {
+                    $activityApply = $this
+                            ->Activity
+                            ->Activityapply
+                            ->find()
+                            ->contain(['Users'])
+                            ->where(['user_id' => $this->user->id])
+                            ->hydrate(false)
+                            ->toArray();
+                    $isApply = [];
+                    foreach ($activityApply as $k => $v) {
+                        $isApply[] = $v['activity_id'];
+                    }
+                    $isApply = implode(',', $isApply);
+                    $this->set('isApply', $isApply);
+                } else {
+                    $isApply = [];
+                    $this->set('isApply', $isApply);
+                }
+                $activity = $this->Activity->find()->where(['is_check' => 1])
+                                ->contain(['Users', 'Industries'])->page($page, $this->limit)
+                                ->orderDesc('Activity.create_time')->toArray();
+                if ($activity) {
+                    $this->Util->ajaxReturn(['status' => true, 'data' => $activity]);
+                } else {
+                    $this->Util->ajaxReturn(['status' => false]);
+                }
+            }
 
-}
+            /**
+             * ajax获取更多评论
+             * @param int $page 分页
+             * @param int $id 活动id
+             */
+            public function getMoreComment($page, $id) {
+                $comment = $this->Activity->Activitycom->find()->where(['activity_id' => $id])
+                                ->contain(['Users', 'Replyusers'])->page($page, $this->limit)
+                                ->orderDesc('Activitycom.create_time')->toArray();
+                if ($comment) {
+                    $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
+                } else {
+                    $this->Util->ajaxReturn(['status' => false]);
+                }
+            }
+
+            /**
+             * 显示错误信息
+             * @param int $id 错误码
+             * @return string 错误信息
+             */
+            protected function showError($id) {
+                switch ($id) {
+                    case 1:
+                        return '已经点过赞了';
+                        break;
+                    case 2:
+                        return '系统错误';
+                        break;
+                    case 3:
+                        return '请先登录！';
+                        break;
+                    case 4:
+                        return '非法操作';
+                        break;
+                    case 5:
+                        return '已经收藏过了';
+                        break;
+                }
+            }
+
+        }
+        

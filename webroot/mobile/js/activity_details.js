@@ -54,9 +54,6 @@ activity.prototype.bindEvent = function () {
             var comid = $(em).attr('value');
             $('#publish-reply').attr('value', comid);
         }
-        if (em.id.indexOf('likecom_') != -1) {
-//            console.log($(em));
-        }
         switch (em.id) {
             // 点击评论
             case 'article-comment':
@@ -180,6 +177,13 @@ activity.prototype.bindEvent = function () {
                         }
                     }
                 });
+                break;
+            case 'enroll':
+                if ($(em).attr('user')) {
+                    location.href = '/activity/enroll/' + $(em).attr('activity_id');
+                } else {
+                    $.util.alert('请先登录');
+                }
                 break;
             case 'goTop':
                 window.scroll(0, 0);
