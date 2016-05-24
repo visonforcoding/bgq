@@ -1,6 +1,6 @@
 <header>
     <div class='inner'>
-        <a href='#this' class='toback'></a>
+        <a href='/home/index' class='toback'></a>
         <h1>
             我的收藏
         </h1>

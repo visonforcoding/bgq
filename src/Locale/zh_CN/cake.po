@@ -362,75 +362,75 @@ msgstr ""
 
 #: I18n/RelativeTimeFormatter.php:80
 msgid "{0} ago"
-msgstr "{0} 之前"
+msgstr "{0}前"
 
 #: I18n/RelativeTimeFormatter.php:82
 msgid "{0} after"
-msgstr "{0} 之后"
+msgstr "{0}后"
 
 #: I18n/RelativeTimeFormatter.php:82
 msgid "{0} before"
-msgstr "{0} 之前"
+msgstr "{0}前"
 
 #: I18n/RelativeTimeFormatter.php:113
 msgid "just now"
-msgstr "就刚刚"
+msgstr "刚刚"
 
 #: I18n/RelativeTimeFormatter.php:150
 msgid "about a second ago"
-msgstr "大约1秒钟之前"
+msgstr "1秒钟前"
 
 #: I18n/RelativeTimeFormatter.php:151
 msgid "about a minute ago"
-msgstr "大约1分钟之前"
+msgstr "1分钟前"
 
 #: I18n/RelativeTimeFormatter.php:152
 msgid "about an hour ago"
-msgstr "大约1个小时之前"
+msgstr "1个小时前"
 
 #: I18n/RelativeTimeFormatter.php:153;328
 msgid "about a day ago"
-msgstr "大约1天之前"
+msgstr "1天前"
 
 #: I18n/RelativeTimeFormatter.php:154;329
 msgid "about a week ago"
-msgstr "大约1周之前"
+msgstr "1周前"
 
 #: I18n/RelativeTimeFormatter.php:155;330
 msgid "about a month ago"
-msgstr "大约1个月内"
+msgstr "1个月内"
 
 #: I18n/RelativeTimeFormatter.php:156;331
 msgid "about a year ago"
-msgstr "大约1年之前"
+msgstr "1年之前"
 
 #: I18n/RelativeTimeFormatter.php:166
 msgid "in about a second"
-msgstr "大约1秒内"
+msgstr "1秒内"
 
 #: I18n/RelativeTimeFormatter.php:167
 msgid "in about a minute"
-msgstr "大约1分钟内"
+msgstr "1分钟内"
 
 #: I18n/RelativeTimeFormatter.php:168
 msgid "in about an hour"
-msgstr "大约1个小时内"
+msgstr "1个小时内"
 
 #: I18n/RelativeTimeFormatter.php:169;341
 msgid "in about a day"
-msgstr "大约1天内"
+msgstr "1天内"
 
 #: I18n/RelativeTimeFormatter.php:170;342
 msgid "in about a week"
-msgstr "大约1周内"
+msgstr "1周内"
 
 #: I18n/RelativeTimeFormatter.php:171;343
 msgid "in about a month"
-msgstr "大约1个月内"
+msgstr "1个月内"
 
 #: I18n/RelativeTimeFormatter.php:172;344
 msgid "in about a year"
-msgstr "大约1年内"
+msgstr "1年内"
 
 #: I18n/RelativeTimeFormatter.php:300
 msgid "today"
@@ -438,7 +438,7 @@ msgstr "今天"
 
 #: I18n/RelativeTimeFormatter.php:364
 msgid "%s ago"
-msgstr "%s之前"
+msgstr "%s前"
 
 #: I18n/RelativeTimeFormatter.php:365
 msgid "on %s"

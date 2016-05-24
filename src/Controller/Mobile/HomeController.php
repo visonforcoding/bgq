@@ -224,35 +224,26 @@ class HomeController extends AppController {
      * 资讯收藏
      */
     public function myCollectNews(){
-//        $now = new Time('2016-3-12 12:34:12');
-        $now = new Time();
-        echo $now->timeAgoInWords(
-           [ 'accuracy' => [
-                     'year' => 'year',
-                     'month' => 'month',
-                     'hour' => 'hour'
-                 ],'end' => '+10 year']
-        );
-        //exit();
         $user_id = $this->user->id;
         $CollectTable = \Cake\ORM\TableRegistry::get('Collect');
         $collects = $CollectTable->find()->hydrate(false)
                                  ->contain(['News'])
                                  ->where(['is_delete'=>0,'user_id'=>$user_id])
                                  ->orderDesc('Collect.create_time')
-                                 ->decorateResults(function($item){
-                                     $item['Collect__time_str'] = (new Time($item['Collect__create_time']))->timeAgoInWords(
-                                         [ 'accuracy' => [
-                                             'month' => 'month',
-                                             'hour' => 'hour'
-                                             ],'end' => '+1 year']
-                                         );
-                                     debug($item);
-                                     return $item;
-                                 },false)
+                                 ->formatResults(function($items){
+                                     return $items->map(function($item){
+                                         //时间语义化转换
+                                        $item['create_str'] =$item['create_time']->timeAgoInWords(
+                                           [ 'accuracy' => [
+                                                     'year' => 'year',
+                                                     'month' => 'month',
+                                                     'hour' => 'hour'
+                                                 ],'end' => '+10 year']
+                                        );
+                                         return $item;
+                                     });
+                                 })
                                  ->toArray();
-        debug($collects);
-                                 exit();
         $this->set(compact('collects'));
     }
 }
