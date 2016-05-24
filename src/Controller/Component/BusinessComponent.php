@@ -289,14 +289,14 @@ class BusinessComponent extends Component {
         return true;
     }
 
-   /**
-    * 
-    * @param type $user_id
-    * @param type $relate_id 
-    * @param type $type 0 活动 1资讯
-    * @return boolean|array false 执行失败  array 成功执行的返回
-    * @throws \Cake\Network\Exception\NotFoundException
-    */
+    /**
+     * 
+     * @param type $user_id
+     * @param type $relate_id 
+     * @param type $type 0 活动 1资讯
+     * @return boolean|array false 执行失败  array 成功执行的返回
+     * @throws \Cake\Network\Exception\NotFoundException
+     */
     public function collectIt($user_id, $relate_id, $type) {
         //检测是否评论过
         switch ($type) {

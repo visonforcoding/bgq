@@ -209,16 +209,16 @@ class IndustryController extends AppController {
     public function getIndustryForSelect() {
         $keyword = $this->request->query('search');
         $query = $this->Industry->find('threaded', [
-            'keyField' => $this->Industry->primaryKey(),
-            'parentField' => 'pid'
-        ])->hydrate(false)->select(['id','text'=>'name','pid']);
+                    'keyField' => $this->Industry->primaryKey(),
+                    'parentField' => 'pid'
+                ])->hydrate(false)->select(['id', 'text' => 'name', 'pid']);
         if (!empty($keyword)) {
             $query->where("`name` like '%$keyword%'");
         }
         $industries = $query->toArray();
         if ($industries) {
-            foreach ($industries as $key=> $value){
-                if($value['pid']==0){
+            foreach ($industries as $key => $value) {
+                if ($value['pid'] == 0) {
                     $industries[$key]['id'] = '';
                     unset($industries[$key]['pid']);
                 }

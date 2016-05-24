@@ -83,10 +83,10 @@ class ActivityController extends AppController {
         $admins = $this->Activity->Admins->find('list', ['limit' => 200]);
         $industries = $this->Activity->Industries->find('list', ['limit' => 200]);
         $this->set(compact('activity', 'admins', 'industries'));
-        foreach($activity->industries as $industry){
-        	$selIndustryIds[] = $industry->id;
+        foreach ($activity->industries as $industry) {
+            $selIndustryIds[] = $industry->id;
         }
-        $this->set(compact('activity','selIndustryIds'));
+        $this->set(compact('activity', 'selIndustryIds'));
     }
 
     /**
@@ -202,76 +202,62 @@ class ActivityController extends AppController {
      * 置顶操作
      * @param int $id 活动id
      */
-    public function top($id){
-    	$activity = $this->Activity->get($id);
-    	$activity->is_top = 1;
-    	$res = $this->Activity->save($activity);
-    	if($res)
-    	{
-    		$this->Util->ajaxReturn(true, '置顶成功');
-    	}
-    	else
-    	{
-    		$this->Util->ajaxReturn(false, '置顶失败');
-    	}
+    public function top($id) {
+        $activity = $this->Activity->get($id);
+        $activity->is_top = 1;
+        $res = $this->Activity->save($activity);
+        if ($res) {
+            $this->Util->ajaxReturn(true, '置顶成功');
+        } else {
+            $this->Util->ajaxReturn(false, '置顶失败');
+        }
     }
-    
+
     /**
      * 取消置顶操作
      * @param int $id 活动id
      */
-    public function untop($id)
-    {
-    	$activity = $this->Activity->get($id);
-    	$activity->is_top = 0;
-    	$res = $this->Activity->save($activity);
-    	if($res)
-    	{
-    		$this->Util->ajaxReturn(true, '取消置顶成功');
-    	}
-    	else
-    	{
-    		$this->Util->ajaxReturn(false, '取消置顶失败');
-    	}
+    public function untop($id) {
+        $activity = $this->Activity->get($id);
+        $activity->is_top = 0;
+        $res = $this->Activity->save($activity);
+        if ($res) {
+            $this->Util->ajaxReturn(true, '取消置顶成功');
+        } else {
+            $this->Util->ajaxReturn(false, '取消置顶失败');
+        }
     }
-    
+
     /**
      * 发布活动操作
      * @param int $id 活动id
      */
-    public function release($id){
-    	$activity = $this->Activity->get($id);
-    	$activity->is_check = 1;
-    	$res = $this->Activity->save($activity);
-    	if($res)
-    	{
-    		$this->Util->ajaxReturn(true, '发布成功');
-    	}
-    	else
-    	{
-    		$this->Util->ajaxReturn(false, '发布失败');
-    	}
+    public function release($id) {
+        $activity = $this->Activity->get($id);
+        $activity->is_check = 1;
+        $res = $this->Activity->save($activity);
+        if ($res) {
+            $this->Util->ajaxReturn(true, '发布成功');
+        } else {
+            $this->Util->ajaxReturn(false, '发布失败');
+        }
     }
-    
+
     /**
      * 审核不通过操作
      * @param int $id 活动id
      */
-    public function unrelease($id)
-    {
-    	$data = $this->request->data();
-    	$activity = $this->Activity->get($id);
-    	$activity->is_check = 2;
-    	$activity->reason = $data['reason'];
-    	$res = $this->Activity->save($activity);
-    	if($res)
-    	{
-    		$this->Util->ajaxReturn(true, '操作成功');
-    	}
-    	else
-    	{
-    		$this->Util->ajaxReturn(false, '操作失败');
-    	}
+    public function unrelease($id) {
+        $data = $this->request->data();
+        $activity = $this->Activity->get($id);
+        $activity->is_check = 2;
+        $activity->reason = $data['reason'];
+        $res = $this->Activity->save($activity);
+        if ($res) {
+            $this->Util->ajaxReturn(true, '操作成功');
+        } else {
+            $this->Util->ajaxReturn(false, '操作失败');
+        }
     }
-    
+
 }
