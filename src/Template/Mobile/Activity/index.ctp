@@ -2,7 +2,7 @@
 <body>
     <header>
         <div class='inner'>
-            <a href='/activity/release' class='subactivity' >发布活动</a>
+            <a class='subactivity' id="release" user="<?= $user; ?>">发布活动</a>
             <h1><?= $pagetitle ?></h1>
             <a href="/activity/search" class='iconfont news-serch h-regiser'>&#xe613;</a>
         </div>
@@ -11,14 +11,14 @@
     <div class="wraper newswraper a-wraper">
         <div class="a-banner">
             <ul class="pic-list-container" id="imgList">
-		        <?php foreach ($banners as $v): ?>
-                <li><a href="<?= $v->url; ?>"><img src="<?= $v->img; ?>"/></a></li>
-	        	<?php endforeach; ?>
+                <?php foreach ($banners as $v): ?>
+                    <li><a href="<?= $v->url; ?>"><img src="<?= $v->img; ?>"/></a></li>
+                <?php endforeach; ?>
             </ul>
             <div class="yd" id="imgTab">
-		        <?php foreach ($banners as $v): ?>
-                <span class="cur"></span>
-	            <?php endforeach; ?>
+                <?php foreach ($banners as $v): ?>
+                    <span class="cur"></span>
+                <?php endforeach; ?>
             </div>
         </div>
         <div id="activity"></div>
@@ -54,6 +54,7 @@
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>
 <script src="/mobile/js/loopScroll.js"></script>
+<script src="/mobile/js/activity_index.js"></script>
 <script>
     var isApply = ',' + <?= $isApply ?> + ',';
     $.util.dataToTpl('activity', 'activity_tpl',<?= $actjson ?>, function (d) {
@@ -61,11 +62,10 @@
         d.industries_name = $.util.dataToTpl('', 'subTpl', d.industries);
         return d;
     });
-
-    var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span')); //img loop
-
-
-
+    
+    //轮播
+    var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span')); 
+    
     var page = 2;
     setTimeout(function () {
         $(window).on("scroll", function () {
