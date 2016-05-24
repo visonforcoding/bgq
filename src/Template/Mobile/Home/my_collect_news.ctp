@@ -1,6 +1,6 @@
 <header>
     <div class='inner'>
-        <a href='#this' class='toback'></a>
+        <a href='/home/index' class='toback'></a>
         <h1>
             我的收藏
         </h1>
@@ -9,7 +9,7 @@
 <div class="wraper">
     <div class="inner">
         <div  class="inner my-home-menu" >
-            <a href="#this">活动</a>
+            <a href="/home/my-collect-activity">活动</a>
             <a href="#this"  class="active">资讯</a>
         </div>
     </div>
@@ -22,8 +22,7 @@
             <span class="my-pic-acive"><img src="{#news_cover#}"/></span>
             <div class="my-collection-items my-news-items">
                 <h3>{#news_title#}</h3>
-
-                <span>{#news_user#}<b>9分钟前</b> <i>{#news_read#}人阅读</i></span>
+                <span>{#news_user#}<b>{#create_str#}</b> <i>{#news_read#}人阅读</i></span>
             </div>
         </a>
     </div>
