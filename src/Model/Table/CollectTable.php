@@ -37,6 +37,12 @@ class CollectTable extends Table
         	'className' => 'User'
         ]);
         
+        $this->belongsTo('News', [
+            'foreignKey' => 'relate_id',
+            'joinType' => 'INNER',
+        	'className' => 'News'
+        ]);
+        
         $this->addBehavior('Timestamp', [
         		'events' => [
 	        		'Model.beforeSave' => [

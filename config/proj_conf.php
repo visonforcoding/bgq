@@ -33,6 +33,11 @@ return [
             'table'=>'newscom',
             'remark'=>'资讯评论点赞消息',
             'url'=>'/news/view/{#id#}#{#com_id#}'
+        ],
+      '3'=>[
+            'table'=>'newscom',
+            'remark'=>'资讯评论回复消息',
+            'url'=>'/news/view/{#id#}#{#com_id#}'
         ]
     ],
 ];
