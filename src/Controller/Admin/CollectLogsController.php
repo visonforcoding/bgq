@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller\Admin;
 
 use Wpadmin\Controller\AppController;
@@ -8,23 +9,22 @@ use Wpadmin\Controller\AppController;
  *
  * @property \App\Model\Table\CollectLogsTable $CollectLogs
  */
-class CollectLogsController extends AppController
-{
+class CollectLogsController extends AppController {
 
-	public function initialize(){
-		parent::initialize();
-		$this->loadModel('CollectLogs');
-	}
-	/**
-	* Index method
-	*
-	* @return void
-	*/
-	public function index($id='')
-	{
-		$this->set('id', $id);
-		$this->set('collectLogs', $this->CollectLogs);
-	}
+    public function initialize() {
+        parent::initialize();
+        $this->loadModel('CollectLogs');
+    }
+
+    /**
+     * Index method
+     *
+     * @return void
+     */
+    public function index($id = '') {
+        $this->set('id', $id);
+        $this->set('collectLogs', $this->CollectLogs);
+    }
 
     /**
      * View method
@@ -33,8 +33,7 @@ class CollectLogsController extends AppController
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $this->viewBuilder()->autoLayout(false);
         $collectLog = $this->CollectLogs->get($id, [
             'contain' => ['Users', 'Activities']
@@ -48,19 +47,18 @@ class CollectLogsController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add()
-    {
+    public function add() {
         $collectLog = $this->CollectLogs->newEntity();
         if ($this->request->is('post')) {
             $collectLog = $this->CollectLogs->patchEntity($collectLog, $this->request->data);
             if ($this->CollectLogs->save($collectLog)) {
-                 $this->Util->ajaxReturn(true,'添加成功');
+                $this->Util->ajaxReturn(true, '添加成功');
             } else {
-                 $errors = $collectLog->errors();
-                 $this->Util->ajaxReturn(['status'=>false, 'msg'=>getMessage($errors),'errors'=>$errors]);
+                $errors = $collectLog->errors();
+                $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
             }
         }
-                $users = $this->CollectLogs->Users->find('list', ['limit' => 200]);
+        $users = $this->CollectLogs->Users->find('list', ['limit' => 200]);
         $activities = $this->CollectLogs->Activities->find('list', ['limit' => 200]);
         $this->set(compact('collectLog', 'users', 'activities'));
     }
@@ -72,23 +70,22 @@ class CollectLogsController extends AppController
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
-         $collectLog = $this->CollectLogs->get($id,[
+    public function edit($id = null) {
+        $collectLog = $this->CollectLogs->get($id, [
             'contain' => []
         ]);
-        if ($this->request->is(['post','put'])) {
+        if ($this->request->is(['post', 'put'])) {
             $collectLog = $this->CollectLogs->patchEntity($collectLog, $this->request->data);
             if ($this->CollectLogs->save($collectLog)) {
-                  $this->Util->ajaxReturn(true,'修改成功');
+                $this->Util->ajaxReturn(true, '修改成功');
             } else {
-                 $errors = $collectLog->errors();
-               $this->Util->ajaxReturn(false,getMessage($errors));
+                $errors = $collectLog->errors();
+                $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
-                  $users = $this->CollectLogs->Users->find('list', ['limit' => 200]);
-                $activities = $this->CollectLogs->Activities->find('list', ['limit' => 200]);
-                $this->set(compact('collectLog', 'users', 'activities'));
+        $users = $this->CollectLogs->Users->find('list', ['limit' => 200]);
+        $activities = $this->CollectLogs->Activities->find('list', ['limit' => 200]);
+        $this->set(compact('collectLog', 'users', 'activities'));
     }
 
     /**
@@ -98,32 +95,30 @@ class CollectLogsController extends AppController
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         $this->request->allowMethod('post');
-         $id = $this->request->data('id');
-                if ($this->request->is('post')) {
-                $collectLog = $this->CollectLogs->get($id);
-                 if ($this->CollectLogs->delete($collectLog)) {
-                     $this->Util->ajaxReturn(true,'删除成功');
-                } else {
-                    $errors = $collectLog->errors();
-                    $this->Util->ajaxReturn(true,getMessage($errors));
-                }
-          }
+        $id = $this->request->data('id');
+        if ($this->request->is('post')) {
+            $collectLog = $this->CollectLogs->get($id);
+            if ($this->CollectLogs->delete($collectLog)) {
+                $this->Util->ajaxReturn(true, '删除成功');
+            } else {
+                $errors = $collectLog->errors();
+                $this->Util->ajaxReturn(true, getMessage($errors));
+            }
+        }
     }
 
-/**
-* get jqgrid data 
-*
-* @return json
-*/
-public function getDataList($id='')
-{
+    /**
+     * get jqgrid data 
+     *
+     * @return json
+     */
+    public function getDataList($id = '') {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'collectlogs.'.$this->request->data('sidx');
+        $sort = 'collectlogs.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
@@ -137,13 +132,10 @@ public function getDataList($id='')
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['collectlogs.`create_time` >' => $begin_time], ['collectlogs.`create_time` <' => $end_time]];
         }
-        if($id)
-        {
-        	$query =  $this->CollectLogs->find()->where(['relate_id'=>$id]);
-        }
-        else
-        {
-        	$query =  $this->CollectLogs->find();
+        if ($id) {
+            $query = $this->CollectLogs->find()->where(['relate_id' => $id]);
+        } else {
+            $query = $this->CollectLogs->find();
         }
         $query->hydrate(false);
         if (!empty($where)) {
@@ -154,7 +146,7 @@ public function getDataList($id='')
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
-        
+
         $query->limit(intval($rows))
                 ->page(intval($page));
         $res = $query->toArray();
@@ -167,18 +159,17 @@ public function getDataList($id='')
             $total_pages = 0;
         }
         $data = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $res);
-                $this->autoRender = false;
+        $this->autoRender = false;
         $this->response->type('json');
         echo json_encode($data);
-}
+    }
 
-/**
-* export csv
-*
-* @return csv 
-*/
-public function exportExcel()
-{
+    /**
+     * export csv
+     *
+     * @return csv 
+     */
+    public function exportExcel() {
         $sort = $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
@@ -193,12 +184,12 @@ public function exportExcel()
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
-        $Table =  $this->CollectLogs;
-        $column = ['用户id','关联id（活动id或资讯id）','日志内容','记录时间','更新时间','类型值：0：活动；1：资讯'];
+        $Table = $this->CollectLogs;
+        $column = ['用户id', '关联id（活动id或资讯id）', '日志内容', '记录时间', '更新时间', '类型值：0：活动；1：资讯'];
         $query = $Table->find();
         $query->hydrate(false);
-        $query->select(['user_id','relate_id','msg','create_time','update_time','type']);
-         if (!empty($where)) {
+        $query->select(['user_id', 'relate_id', 'msg', 'create_time', 'update_time', 'type']);
+        if (!empty($where)) {
             $query->where($where);
         }
         if (!empty($sort) && !empty($order)) {
@@ -206,8 +197,7 @@ public function exportExcel()
         }
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = 'CollectLogs_'.date('Y-m-d').'.csv';
-        \Wpadmin\Utils\Export::exportCsv($column,$res,$filename);
-
-}
+        $filename = 'CollectLogs_' . date('Y-m-d') . '.csv';
+        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+    }
 }
