@@ -126,20 +126,25 @@ class ActivityController extends AppController {
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where['OR'] = [
+                ['users.`truename` like' => "%$keywords%"],
+                ['title like' => "%$keywords%"],
+                ['activity.`company` like' => "%$keywords%"],
+                ['activity.`address` like' => "%$keywords%"],
+            ];
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['activity.`create_time` >' => $begin_time], ['activity.`create_time` <' => $end_time]];
         }
-        $query = $this->Activity->find();
+        $query = $this->Activity->find()->contain(['Users']);
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
         }
         $nums = $query->count();
-        $query->contain(['Users', 'Industries']);
+        $query->contain(['Industries']);
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }

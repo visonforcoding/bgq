@@ -18,41 +18,11 @@ class ActivityController extends AppController {
     /**
      * 活动详情
      */
+
     public function details($id = '') {
         if ($id) {
-            $activity = $this->Activity->get($id, [
-                'contain' => ['Admins', 'Industries'],
-            ]);
-            $activity->read_nums += 1; // 阅读加1
-            $this->Activity->save($activity);
-            $this->set('activity', $activity);
-            if ($this->user) {
-                $this->set('user', $this->user->id);
-            } else {
-                $this->set('user', '');
-            }
-
-            // 是否已报名
-            if ($this->user) {
-                $activityApply = $this
-                        ->Activity
-                        ->Activityapply
-                        ->find()
-                        ->contain(['Users'])
-                        ->where(['user_id' => $this->user->id])
-                        ->hydrate(false)
-                        ->toArray();
-                $isApply = [];
-                foreach ($activityApply as $k => $v) {
-                    $isApply[] = $v['activity_id'];
-                }
-                $this->set('isApply', $isApply);
-            } else {
-                $isApply = [];
-                $this->set('isApply', $isApply);
-            }
-
-
+            $isLike = '';
+            $isCollect = '';
             // 已报名的人
             $allApply = $this
                     ->Activity
@@ -87,10 +57,30 @@ class ActivityController extends AppController {
                     ->toArray();
             $this->set('comjson', json_encode($comment));
 
-            
-            $isLike = '';
-            $isCollect = '';
+            $activity = $this->Activity->get($id, [
+                'contain' => ['Admins', 'Industries'],
+            ]);
+            $activity->read_nums += 1; // 阅读加1
+            $this->Activity->save($activity);
+            $this->set('activity', $activity);
+            $this->set('user', $this->user->id);
+
             if ($this->user) {
+                // 是否已报名
+                $activityApply = $this
+                        ->Activity
+                        ->Activityapply
+                        ->find()
+                        ->contain(['Users'])
+                        ->where(['user_id' => $this->user->id])
+                        ->hydrate(false)
+                        ->toArray();
+                $isApply = [];
+                foreach ($activityApply as $k => $v) {
+                    $isApply[] = $v['activity_id'];
+                }
+                $this->set('isApply', $isApply);
+
                 // 是否已赞
                 $isLike = $this
                         ->Activity
@@ -105,6 +95,10 @@ class ActivityController extends AppController {
                         ->find()
                         ->where(['user_id' => $this->user->id, 'relate_id' => $id])
                         ->first();
+            } else {
+                $this->set('user', '');
+                $isApply = [];
+                $this->set('isApply', $isApply);
             }
             $this->set('isLike', $isLike);
             $this->set('isCollect', $isCollect);
@@ -341,46 +335,46 @@ class ActivityController extends AppController {
                     ->where(['title LIKE' => '%' . $data['keyword'] . '%']);
             if ($data['industry_id']) {
                 $res = $res->contain(['Industries' => function($q)use($industry_id) {
-                    return $q->where(['Industries.id' => $industry_id]);
-                }]);
-            }
-            if ($data['sort']) {
-                $res = $res->orderDesc($data['sort']);
-            } else {
-                $res = $res->orderDesc('create_time'); // 默认按时间倒序排列
-            }
-            $res = $res
-                    ->hydrate(false)
-                    ->all()
-                    ->toArray();
-            if ($res == false || empty($res)) {
-                $alert = '暂无搜索结果';
-            }
-        }
-        $this->set('alert', $alert);
-        $this->set('search', $res);
+                        return $q->where(['Industries.id' => $industry_id]);
+                    }]);
+                    }
+                    if ($data['sort']) {
+                        $res = $res->orderDesc($data['sort']);
+                    } else {
+                        $res = $res->orderDesc('create_time'); // 默认按时间倒序排列
+                    }
+                    $res = $res
+                            ->hydrate(false)
+                            ->all()
+                            ->toArray();
+                    if ($res == false || empty($res)) {
+                        $alert = '暂无搜索结果';
+                    }
+                }
+                $this->set('alert', $alert);
+                $this->set('search', $res);
 
-        $isApply = [];
-        if ($this->user) {
-            // 用户已报名的活动
-            $activityApply = $this
-                    ->Activity
-                    ->Activityapply
-                    ->find()
-                    ->where(['user_id' => $this->user->id])
-                    ->select(['activity_id'])
-                    ->hydrate(false)
-                    ->toArray();
-            $isApply = [];
-            foreach ($activityApply as $k => $v) {
-                $isApply[] = $v['activity_id'];
+                $isApply = [];
+                if ($this->user) {
+                    // 用户已报名的活动
+                    $activityApply = $this
+                            ->Activity
+                            ->Activityapply
+                            ->find()
+                            ->where(['user_id' => $this->user->id])
+                            ->select(['activity_id'])
+                            ->hydrate(false)
+                            ->toArray();
+                    $isApply = [];
+                    foreach ($activityApply as $k => $v) {
+                        $isApply[] = $v['activity_id'];
+                    }
+                }
+                $this->set('isApply', $isApply);
+                $industries = $this->Activity->Industries->find()->hydrate(false)->all()->toArray();
+                $industries = $this->tree($industries);
+                $this->set('industries', $industries);
             }
-        }
-        $this->set('isApply', $isApply);
-        $industries = $this->Activity->Industries->find()->hydrate(false)->all()->toArray();
-        $industries = $this->tree($industries);
-        $this->set('industries', $industries);
-    }
 
             /**
              * 将子元素分到父元素数组的一个子集里面，无限循环

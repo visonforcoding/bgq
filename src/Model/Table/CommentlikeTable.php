@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use App\Model\Entity\Like;
@@ -13,8 +14,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\BelongsTo $Relates
  */
-class CommentlikeTable extends Table
-{
+class CommentlikeTable extends Table {
 
     /**
      * Initialize method
@@ -22,8 +22,7 @@ class CommentlikeTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->table('comment_like');
@@ -33,20 +32,20 @@ class CommentlikeTable extends Table
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
-        	'className' => 'User'
+            'className' => 'User'
         ]);
-        $this->belongsTo('Newscom',[
+        $this->belongsTo('Newscom', [
             'foreignKey' => 'relate_id',
             'joinType' => 'INNER',
-        	'className' => 'Newscom'
+            'className' => 'Newscom'
         ]);
-        
+
         $this->addBehavior('Timestamp', [
-        		'events' => [
-        		'Model.beforeSave' => [
-        		'create_time' => 'new',
-        		]
-        	]
+            'events' => [
+                'Model.beforeSave' => [
+                    'create_time' => 'new',
+                ]
+            ]
         ]);
     }
 
@@ -56,16 +55,15 @@ class CommentlikeTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+                ->integer('id')
+                ->allowEmpty('id', 'create');
 
         $validator
-            ->integer('type')
-            ->requirePresence('type', 'create')
-            ->notEmpty('type');
+                ->integer('type')
+                ->requirePresence('type', 'create')
+                ->notEmpty('type');
 
         return $validator;
     }
@@ -77,10 +75,10 @@ class CommentlikeTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
+    public function buildRules(RulesChecker $rules) {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 //         $rules->add($rules->existsIn(['relate_id'], 'Relates'));
         return $rules;
     }
+
 }

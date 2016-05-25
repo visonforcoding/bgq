@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use App\Model\Entity\Activitycom;
@@ -13,8 +14,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Activities
  * @property \Cake\ORM\Association\BelongsTo $Users
  */
-class ActivitycomTable extends Table
-{
+class ActivitycomTable extends Table {
 
     /**
      * Initialize method
@@ -22,8 +22,7 @@ class ActivitycomTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->table('activitycom');
@@ -33,27 +32,27 @@ class ActivitycomTable extends Table
         $this->belongsTo('Activities', [
             'foreignKey' => 'activity_id',
             'joinType' => 'INNER',
-        	'className' => 'Activity'
+            'className' => 'Activity'
         ]);
-        
+
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
-        	'className' => 'User'
+            'className' => 'User'
         ]);
-        
+
         $this->belongsTo('Replyusers', [
-        	'foreignKey' => 'reply_id',
-        	'joinType' => 'INNER',
-       		'className' => 'User'
+            'foreignKey' => 'reply_id',
+            'joinType' => 'INNER',
+            'className' => 'User'
         ]);
-        
+
         $this->addBehavior('Timestamp', [
-        	'events' => [
-        		'Model.beforeSave' => [
-        			'create_time' => 'new',
-        		]
-        	]
+            'events' => [
+                'Model.beforeSave' => [
+                    'create_time' => 'new',
+                ]
+            ]
         ]);
     }
 
@@ -63,20 +62,19 @@ class ActivitycomTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+                ->integer('id')
+                ->allowEmpty('id', 'create');
 
         $validator
-            ->integer('pid')
-            ->requirePresence('pid', 'create')
-            ->notEmpty('pid');
+                ->integer('pid')
+                ->requirePresence('pid', 'create')
+                ->notEmpty('pid');
 
         $validator
-            ->requirePresence('body', 'create')
-            ->notEmpty('body');
+                ->requirePresence('body', 'create')
+                ->notEmpty('body');
 
         return $validator;
     }
@@ -88,11 +86,11 @@ class ActivitycomTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
+    public function buildRules(RulesChecker $rules) {
         $rules->add($rules->existsIn(['activity_id'], 'Activities'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['reply_id'], 'Users'));
         return $rules;
     }
+
 }
