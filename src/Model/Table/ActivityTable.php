@@ -35,13 +35,13 @@ class ActivityTable extends Table {
             'joinTable' => 'admin',
             'className' => 'Wpadmin.Admin',
         ]);
-        
+
         $this->belongsTo('Users', [
-        	'foreignKey' => 'user_id',
-        	'joinType' => 'INNER',
-        	'className' => 'User',
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER',
+            'className' => 'User',
         ]);
-        
+
         $this->belongsToMany('Industries', [
             'className' => 'Industry',
             'joinTable' => 'activity_industry',
@@ -50,35 +50,35 @@ class ActivityTable extends Table {
         ]);
 
         $this->belongsTo('Collect', [
-        		'foreignKey' => 'relate_id',
-        		'joinType' => 'INNER',
-        		'className' => 'Collect',
+            'foreignKey' => 'relate_id',
+            'joinType' => 'INNER',
+            'className' => 'Collect',
         ]);
-        
+
         $this->hasMany('Activitycom', [
-        		'foreignKey' => 'activity_id',
-        		'joinType' => 'INNER',
-        		'className' => 'Activitycom',
+            'foreignKey' => 'activity_id',
+            'joinType' => 'INNER',
+            'className' => 'Activitycom',
         ]);
-        
+
         $this->belongsTo('Commentlike', [
-        		'foreignKey' => 'relate_id',
-        		'joinType' => 'INNER',
-        		'className' => 'Commentlike',
+            'foreignKey' => 'relate_id',
+            'joinType' => 'INNER',
+            'className' => 'Commentlike',
         ]);
-        
+
         $this->HasMany('Activityapply', [
-        		'foreignKey' => 'activity_id',
-        		'joinType' => 'INNER',
-        		'className' => 'Activityapply',
+            'foreignKey' => 'activity_id',
+            'joinType' => 'INNER',
+            'className' => 'Activityapply',
         ]);
-        
+
         $this->belongsTo('Articlelike', [
-        		'foreignKey' => 'relate_id',
-        		'joinType' => 'INNER',
-        		'className' => 'Articlelike',
+            'foreignKey' => 'relate_id',
+            'joinType' => 'INNER',
+            'className' => 'Articlelike',
         ]);
-        
+
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [
@@ -111,11 +111,9 @@ class ActivityTable extends Table {
 //         $validator
 //                 ->requirePresence('time', 'create')
 //                 ->notEmpty('time');
-
 //         $validator
 //                 ->requirePresence('address', 'create')
 //                 ->notEmpty('address');
-
 //         $validator
 //                 ->requirePresence('scale', 'create')
 //                 ->notEmpty('scale');
@@ -140,7 +138,7 @@ class ActivityTable extends Table {
 
         $validator
                 ->allowEmpty('summary');
-		
+
 
         return $validator;
     }

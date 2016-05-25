@@ -120,7 +120,7 @@ class ActivityapplyController extends AppController {
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where[' users.truename like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
@@ -142,8 +142,7 @@ class ActivityapplyController extends AppController {
             $query->order([$sort => $order]);
         }
 
-        $query->limit(intval($rows))
-                ->page(intval($page));
+        $query->limit(intval($rows))->page(intval($page));
         $res = $query->toArray();
         if (empty($res)) {
             $res = array();
