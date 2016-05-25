@@ -46,10 +46,9 @@ class MeetController extends AppController {
      */
     public function meetCat($id = null) {
         //拥有该标签的所有专家
-        $savants = $this->User
-                        ->find()
+        $savants = $this->User->find()
                         ->matching('Industries', function($q)use($id) {
-                            return $q->where(['Industries.id' => $id]);
+                            return $q->where(['Industries.id' => $id])->orWhere(['pid'=>$id]);
                         })->toArray();
         //该标签类下的所有子类
         $sub_industries = $this->User->Industries->findByPid($id)->toArray();
