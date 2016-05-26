@@ -1,1 +1,0 @@
-ALTER TABLE activity add is_top TINYINT(2) DEFAULT 0 COMMENT '是否置顶'
