@@ -24,7 +24,6 @@ CREATE TABLE `activitycom` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '活动评论表',
 	`pid` INT NOT NULL COMMENT '父id',
 	`user_id` INT(11) NOT NULL COMMENT '用户id',
-	`reply_id` INT NOT NULL COMMENT '回复用户id',
 	`activity_id` INT(11) NOT NULL COMMENT '活动id',
 	`body` VARCHAR(550) NOT NULL COMMENT '评论内容',
 	`praise_nums` INT(11) DEFAULT 0 NOT NULL COMMENT '点赞数',
@@ -83,3 +82,17 @@ CREATE TABLE `article_like` (
 COMMENT='文章点赞表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
+
+#活动标签
+CREATE TABLE `activity_industry` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '活动标签表',
+	`industry_id` INT(11) NOT NULL COMMENT '用户id',
+	`activity_id` INT(11) NOT NULL COMMENT '活动id',
+	PRIMARY KEY (`id`)
+)
+COMMENT='活动标签表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB.
+
+#活动评论增加回复人id
+ALTER TABLE activitycom add reply_id INT COMMENT '回复用户id'
