@@ -246,4 +246,64 @@ class HomeController extends AppController {
                                  ->toArray();
         $this->set(compact('collects'));
     }
+    
+    /**
+     * 我的约见 （我是顾客）
+     */
+    public function myBook(){
+        $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+        $type = $this->request->query('type');
+        $where['SubjectBook.status'] =in_array($type, ['0','1','3'])?$type:0;
+        $where['SubjectBook.user_id'] = $this->user->id;
+        $books = $BookTable->find()->contain(['Subjects','Subjects.User'=>function($q){
+            return $q->select(['truename','avatar','id','company','position']);
+        }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
+        
+        $this->set(compact('books','type'));
+    }
+    
+    
+    /**
+     * 我的约见 我是顾客的详情
+     */
+    public function myBookDetail($id=null){
+        $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+        $book = $BookTable->get($id,[
+            'contain'=>['Users'=>function($q){
+                 return $q->select(['truename','id','avatar','company','position']);
+            },'Subjects']
+        ]);
+        $subject = $book->subject;
+        $this->set(compact('subject','book'));
+    }
+
+
+
+
+    /**
+     * 我的约见 (我是专家)
+     */
+    public function myBookSavant(){
+        $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+        $type = $this->request->query('type');
+        $where['SubjectBook.status'] =in_array($type, ['0','1','3'])?$type:0;
+        $where['SubjectBook.savant_id'] = $this->user->id;
+        $books = $BookTable->find()->contain(['Subjects','Users'=>function($q){
+            return $q->select(['truename','avatar','id','company','position']);
+        }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
+        $this->set(compact('books','type'));
+    }
+    
+    
+    /**
+     * 预约支付页
+     * @param int $id  预定id
+     */
+    public function meetPay($id=null){
+        $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+        $book = $BookTable->get($id,[
+            'contain'=>['Subjects']
+        ]);
+        $this->set(compact('book'));
+    }
 }

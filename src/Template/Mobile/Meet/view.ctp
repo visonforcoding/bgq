@@ -20,32 +20,50 @@
                 <p><i class="iconfont">&#xe615;</i><img src="../images/user.png"/><img src="../images/user.png"/><img src="../images/user.png"/><img src="../images/user.png"/><img src="../images/user.png"/></p>等<i>64</i>人推荐</span>
             <a href="javascript:void(0);">推荐他</a>
         </li>
-        <li><a href="/home/my-home-page/<?=$savant->id?>"><span class="myhome">个人主页</span></a></li>
+        <li><a href="/home/my-home-page/<?= $savant->id ?>"><span class="myhome">个人主页</span></a></li>
     </ul>
     <a href="/meet/subject" class="eduit">编辑</a>
     <div class="m-swiper-items toone">
-        <ul>
+        <ul id="subject">
             <?php foreach ($savant->subjects as $subject): ?>
                 <?php if ($subject->type == '2'): ?>
                     <li class="s-to-more">
-                    <h3><?=$subject->title?><span>一对多面谈</span></h3>
+                    <a href="/meet/subject-detail/<?=$subject->id?>">
+                        <h3><?= $subject->title ?><span>一对多面谈</span></h3>
                     <?php else: ?>
                     <li class="s-to-one">
-                    <h3><?=$subject->title?><span>一对一面谈</span></h3>
+                    <a href="/meet/subject-detail/<?=$subject->id?>">
+                        <h3><?= $subject->title ?><span>一对一面谈</span></h3>
                     <?php endif; ?>
                     <div class='m-center-con'>
-                        <p><?=$subject->summary?></p>
+                        <p><?= $subject->summary ?></p>
                     </div>
                     <div  class='m-bottom-con'>
-                        <span>价格<i><?=$subject->price?>元/次</i></span>
-                        <span>时间<i>约<?=$subject->last_time?>小时</i></span>
+                        <span>价格<i><?= $subject->price ?>元/次</i></span>
+                        <span>时间<i>约<?= $subject->last_time ?>小时</i></span>
                     </div>
+                    </a>
                 </li>
             <?php endforeach; ?>
         </ul>
     </div>
     <section class="a-detail newscomment-box m-about-expert">
         <h3 class="comment-title">专家简介</h3>
-        <p><?=$savant->summary?></p>
+        <p><?= $savant->summary ?></p>
     </section>
 </div>
+<?php $this->start('script') ?>
+<script src="/mobile/js/loopScroll.js"></script>
+<script>
+    var subject = null;
+    //setTimeout(function(){
+    subject = $.util.loop({
+        min: 5,
+        moveDom: $('#subject'),
+        moveChild: $('#subject li'),
+        lockScrY: true,
+        loopScroll: true
+    });
+</script>
+<?php
+$this->end('script');
