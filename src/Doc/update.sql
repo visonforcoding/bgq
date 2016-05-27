@@ -70,16 +70,16 @@ COMMENT='活动赞助表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 
-#文章点赞
-CREATE TABLE `article_like` (
-	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '文章点赞表',
+#评论点赞
+CREATE TABLE `comment_like` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '评论点赞表',
 	`user_id` INT(11) NOT NULL COMMENT '用户id',
 	`relate_id` INT(11) NOT NULL COMMENT '点赞相关id，例：活动id或者是资讯id',
 	`create_time` DATETIME NOT NULL COMMENT '点赞时间',
 	`type` TINYINT NOT NULL COMMENT '类型值：0：活动；1：资讯',
 	PRIMARY KEY (`id`)
 )
-COMMENT='文章点赞表'
+COMMENT='评论点赞表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 
@@ -96,3 +96,18 @@ ENGINE=InnoDB.
 
 #活动评论增加回复人id
 ALTER TABLE activitycom add reply_id INT COMMENT '回复用户id'
+
+#文章点赞
+CREATE TABLE `like_logs` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '点赞日志表',
+	`user_id` INT(11) NOT NULL COMMENT '用户id',
+	`relate_id` INT(11) NOT NULL COMMENT '关联id（活动id或资讯id）',
+	`msg` varchar(255) NOT NULL COMMENT '日志内容',
+	`create_time` DATETIME NOT NULL COMMENT '记录时间',
+	`update_time` DATETIME NOT NULL COMMENT '更新时间',
+	`type` TINYINT NOT NULL COMMENT '类型值：0：活动；1：资讯',
+	PRIMARY KEY (`id`)
+)
+COMMENT='点赞日志表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
