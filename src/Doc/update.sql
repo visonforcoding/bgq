@@ -1,3 +1,18 @@
+#小秘书
+CREATE TABLE `need` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Ð¡ÃØÊé',
+	`user_id` INT(11) NOT NULL COMMENT 'ÓÃ»§',
+	`msg` VARCHAR(550) NOT NULL COMMENT 'ÄÚÈÝ',
+	`status` TINYINT(4) NOT NULL COMMENT '×´Ì¬',
+	`create_time` DATETIME NOT NULL COMMENT '´´½¨Ê±¼ä',
+	`update_time` DATETIME NOT NULL COMMENT 'ÐÞ¸ÄÊ±¼ä',
+	`is_read` TINYINT DEFAULT 0 COMMENT 'ÊÇ·ñÒÑ¶Á£¨0£ºÎ´¶Á£»1£ºÒÑ¶Á£©',
+	PRIMARY KEY (`id`)
+)
+COMMENT='Ð¡ÃØÊé'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+
 #活动增加发布审查
 ALTER TABLE activity add is_check TINYINT(2) DEFAULT 0 COMMENT '是否审核，0：未审核；1：发布；2：未通过审核'
 
