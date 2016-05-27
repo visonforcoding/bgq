@@ -48,12 +48,10 @@ activity.prototype.bindEvent = function () {
                         formData[i] = form[i];
                     }
                 }
-                $.ajax({
-                    type: 'post',
+                $.util.ajax({
                     url: $('form').attr('action'),
                     data: formData,
-                    dataType: 'json',
-                    success: function (msg) {
+                    func: function (msg) {
                         if (typeof msg === 'object') {
                             if (msg.status === true) {
                                 $.util.alert(msg.msg);

@@ -70,12 +70,10 @@ activity.prototype.bindEvent = function () {
                     formData.title = $('input[name="title"]').val(); // 标题
                     formData.body = $('textarea[name="body"]').val(); // 内容
                     formData['industries[_ids]'] = agency;
-                    $.ajax({
-                        type: 'post',
+                    $.util.ajax({
                         url: form.attr('action'),
                         data: formData,
-                        dataType: 'json',
-                        success: function (msg) {
+                        func: function (msg) {
                             if (typeof msg === 'object') {
                                 if (msg.status === true) {
                                     $.util.alert(msg.msg);

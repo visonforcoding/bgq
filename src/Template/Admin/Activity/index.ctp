@@ -10,7 +10,7 @@
             </a>
             <div class="form-group">
                 <label for="keywords">关键字</label>
-                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
+                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="用户、标题、公司、地址">
             </div>
             <div class="form-group">
                 <label for="keywords">时间</label>
@@ -38,8 +38,9 @@
                         url: "/admin/activity/getDataList",
                         datatype: "json",
                         mtype: "POST",
-                        colNames: ['作者', '标签', '主办单位', '活动名称', '活动时间', '地点', '规模', '阅读数', '点赞数', '评论数', '是否众筹', '报名人数', '报名费用', '创建时间', '更新时间', '操作'],
+                        colNames: ['id', '作者', '标签', '主办单位', '活动名称', '活动时间', '地点', '规模', '阅读数', '点赞数', '评论数', '是否众筹', '报名人数', '报名费用', '创建时间', '更新时间', '操作'],
                         colModel: [
+                            {name: 'id', editable: true, align: 'center'},
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'industries', editable: true, align: 'center', formatter: industryFormatter},
                             {name: 'company', editable: true, align: 'center'},
@@ -60,6 +61,8 @@
                         rowNum: 10,
                         rowList: [10, 20, 30],
                         sortname: "id",
+                        sortorder: "desc",
+                        sortname: "is_check",
                         sortorder: "desc",
                         sortname: "is_top",
                         sortorder: "desc",
@@ -205,8 +208,6 @@
                     }, function () {
                     });
                 }
-
-
 
                 function industryFormatter(cellvalue, options, rowObject) {
                     var industries = rowObject.industries;
