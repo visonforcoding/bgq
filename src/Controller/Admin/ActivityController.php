@@ -46,7 +46,10 @@ class ActivityController extends AppController {
         if ($this->request->is('post')) {
             $activity = $this->Activity->patchEntity($activity, $this->request->data);
             $activity->admin_id = $this->_user->id;
+            $activity->user_id = $this->_user->id;
             $activity->publisher = $this->_user->truename;
+            debug($activity);
+            die;
             if ($this->Activity->save($activity)) {
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {
@@ -128,7 +131,7 @@ class ActivityController extends AppController {
         if (!empty($keywords)) {
             $where['OR'] = [
                 ['users.`truename` like' => "%$keywords%"],
-                ['title like' => "%$keywords%"],
+                ['activity.`title` like' => "%$keywords%"],
                 ['activity.`company` like' => "%$keywords%"],
                 ['activity.`address` like' => "%$keywords%"],
             ];
@@ -145,6 +148,7 @@ class ActivityController extends AppController {
         }
         $nums = $query->count();
         $query->contain(['Industries']);
+
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
@@ -152,6 +156,7 @@ class ActivityController extends AppController {
         $query->limit(intval($rows))
                 ->page(intval($page));
         $res = $query->toArray();
+//        debug($res);die;
         if (empty($res)) {
             $res = array();
         }

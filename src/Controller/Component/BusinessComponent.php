@@ -66,7 +66,7 @@ class BusinessComponent extends Component {
     }
 
     /**
-     * 文章点赞表
+     * 文章点赞
      * @param int $id 评论id，赞的是哪篇文章
      * @param string $table 表名,小写
      */
@@ -84,7 +84,7 @@ class BusinessComponent extends Component {
                     return 1;
                 } else {
                     if ($Table->save($like)) { // 插入数据库
-                        if (!$data['type']) { // 不同类型插入不用数据库（活动或者资讯）
+                        if (!$data['type']) { // 不同类型插入不同数据库（活动或者资讯）
                             $activity = \Cake\ORM\TableRegistry::get('Activity');
                             $comment = $activity->get($id, [
                                 'contain' => [],
@@ -112,6 +112,11 @@ class BusinessComponent extends Component {
         }
     }
 
+    /**
+     * 收藏文章
+     * @param int $id
+     * @return string|int 错误码或者成功
+     */
     public function collect($id) {
         // 检查是否post
         if ($this->request->is('post')) {

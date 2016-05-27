@@ -24,12 +24,9 @@ activity.prototype.bindEvent = function () {
         if (!em || !em.id)
             return;
         if (em.id.indexOf('likecom_') != -1) {
-            $.ajax({
-                type: 'post',
+            $.util.ajax({
                 url: '/activity/comLike/' + $(em).attr('comid'),
-                data: 'type=' + $(em).attr('type') + '&relate_id=' + $(em).attr('comid'),
-                dataType: 'json',
-                success: function (msg) {
+                func: function (msg) {
                     if (typeof msg === 'object') {
                         if (msg.status === true) {
                             var num = $('#addnum_' + $(em).attr('comid')).siblings('b').text();
@@ -86,12 +83,9 @@ activity.prototype.bindEvent = function () {
 
             // 喜欢
             case 'like':
-                $.ajax({
-                    type: 'post',
+                $.util.ajax({
                     url: '/activity/artLike/' + $(em).attr('artid'),
-                    data: 'type=' + $(em).attr('type') + '&relate_id=' + $(em).attr('artid'),
-                    dataType: 'json',
-                    success: function (msg) {
+                    func: function (msg) {
                         if (typeof msg === 'object') {
                             if (msg.status === true) {
                                 $('.like').toggleClass('changecolor');
@@ -105,13 +99,11 @@ activity.prototype.bindEvent = function () {
                 
             // 收藏
             case 'collect':
-                $.ajax({
-                    type: 'post',
+                $.util.ajax({
                     url: '/activity/collect/' + $(em).attr('artid'),
-                    data: 'type=' + $(em).attr('type') + '&relate_id=' + $(em).attr('artid'),
-                    dataType: 'json',
-                    success: function (msg) {
+                    func: function (msg) {
                         if (typeof msg === 'object') {
+                            console.log(msg);
                             if (msg.status === true) {
                                 $('.collect').toggleClass('changecolor');
                             } else {
@@ -133,12 +125,10 @@ activity.prototype.bindEvent = function () {
                 data.body = body;
                 data.pid = 0;
                 var activity_id = $('#publish-article').attr('activity_id');
-                $.ajax({
-                    type: 'post',
+                $.util.ajax({
                     url: '/activity/doComment/' + activity_id,
                     data: data,
-                    dataType: 'json',
-                    success: function (msg) {
+                    func: function (msg) {
                         if (typeof msg === 'object') {
                             if (msg.status === true) {
                                 $.util.alert(msg.msg);
@@ -165,12 +155,10 @@ activity.prototype.bindEvent = function () {
                 data.body = body;
                 data.pid = $('#publish-reply').attr('value');
                 var activity_id = $('#publish-reply').attr('activity_id');
-                $.ajax({
-                    type: 'post',
+                $.util.ajax({
                     url: '/activity/doComment/' + activity_id,
                     data: data,
-                    dataType: 'json',
-                    success: function (msg) {
+                    func: function (msg) {
                         if (typeof msg === 'object') {
                             if (msg.status === true) {
                                 $.util.alert(msg.msg);
