@@ -9,7 +9,7 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Sponsor Model
+ * Sponsor Model   赞助（我要推荐）
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\BelongsTo $Activities
@@ -39,6 +39,15 @@ class SponsorTable extends Table {
             'joinType' => 'INNER',
             'className' => 'Activity',
         ]);
+<<<<<<< .mine
+        
+        $this->addBehavior('Timestamp', [
+        	'events' => [
+        		'Model.beforeSave' => [
+	        		'create_time' => 'new',
+        		]
+        	]
+=======
 
         $this->addBehavior('Timestamp', [
             'events' => [
@@ -46,6 +55,7 @@ class SponsorTable extends Table {
                     'create_time' => 'new',
                 ]
             ]
+>>>>>>> .r268
         ]);
     }
 

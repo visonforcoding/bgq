@@ -28,7 +28,7 @@ class MeetSubjectTable extends Table {
         $this->displayField('title');
         $this->primaryKey('id');
 
-        $this->belongsTo('Users', [
+        $this->belongsTo('User', [
             'className'=>'User',
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'

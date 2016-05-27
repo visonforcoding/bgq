@@ -38,6 +38,11 @@ return [
             'table'=>'newscom',
             'remark'=>'资讯评论回复消息',
             'url'=>'/news/view/{#id#}#{#com_id#}'
+        ],
+      '4'=>[
+            'table'=>'subject_book',
+            'remark'=>'话题被预约',
+            'url'=>'/home/my-book-savant'
         ]
     ],
 ];
