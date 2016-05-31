@@ -67,5 +67,10 @@
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>
 <script src="/mobile/js/activity_search.js"></script>
+<script>
+    <?php if($alert): ?>
+        $.util.alert('<?= $alert; ?>');
+    <?php endif; ?>
+</script>
 <?php
 $this->end('script');

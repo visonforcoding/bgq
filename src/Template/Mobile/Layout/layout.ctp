@@ -18,7 +18,6 @@
         <script src="/mobile/js/util.js"></script>
         <script src="/mobile/js/function.js"></script>
         <script>
-            console.log(window.location.href.indexOf('activity'));
             if(window.location.href.indexOf('activity') != -1)
             {
                 $('.activity_icon').css({color:'#dd204b'});
