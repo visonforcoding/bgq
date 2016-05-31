@@ -24,21 +24,19 @@ activity.prototype.bindEvent = function () {
         if (!em || !em.id)
             return;
         if (em.id.indexOf('parent_') != -1) {
+            $('#choose_industry_ul li').removeClass('active');
             $(em).addClass('active');
-            $(em).siblings().removeClass('active');
+            $('.choose_industry_child_ul').hide();
             $(em).children('ul').show();
-            $(em).siblings().children('ul').hide();
         }
         if (em.id.indexOf('child_') != -1) {
-            $(em).toggleClass('active');
-            $(em).siblings().removeClass('active');
+            $('.choose_industry_child_li').removeClass('active');
+            $(em).addClass('active');
             $("input[name='industry_id']").attr('value', $(em).attr('value'));
         }
         if (em.id.indexOf('sort_') != -1) {
+            $('.choose_sort_child').removeClass('active');
             $(em).addClass('active');
-            $(em).siblings().removeClass('active');
-            $(em).children('ul').show();
-            $(em).siblings().children('ul').hide();
             $("input[name='sort']").attr('value', $(em).attr('value'));
         }
         switch (em.id) {
@@ -46,24 +44,24 @@ activity.prototype.bindEvent = function () {
                 $(em).toggleClass('active');
                 if ($(em).hasClass('active') == true)
                 {
-                    $(em).siblings('ul').show();
-                    $(em).parent().siblings().children('span').removeClass('active');
-                    $(em).parent().siblings().children('ul').hide();
+                    $('#choose_industry_ul').show();
+                    $('#choose_sort').removeClass('active');
+                    $('#sort_mark').hide();
                 } else
                 {
-                    $(em).siblings('ul').hide();
+                    $('#choose_industry_ul').hide();
                 }
                 break;
             case 'choose_sort':
                 $(em).toggleClass('active');
                 if ($(em).hasClass('active') == true)
                 {
-                    $(em).siblings('ul').show();
-                    $(em).parent().siblings().children('span').removeClass('active');
-                    $(em).parent().siblings().children('ul').hide();
+                    $('#sort_mark').show();
+                    $('#choose_industry').removeClass('active');
+                    $('#choose_industry_ul').hide();
                 } else
                 {
-                    $(em).siblings('ul').hide();
+                    $('#sort_mark').hide();
                 }
                 break;
             case 'toback':

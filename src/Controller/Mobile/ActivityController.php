@@ -10,7 +10,12 @@ namespace App\Controller\Mobile;
 use Wpadmin\Utils\Util;
 use PhpParser\Node\Stmt\Switch_;
 use App\Controller\Mobile\AppController;
-
+/**
+ * Activity Controller  活动
+ *
+ * @property \App\Model\Table\ActivityTable $Activity
+ * @property \App\Controller\Component\BusinessComponent $Business
+ */
 class ActivityController extends AppController {
 
     protected $limit = '5'; // 分页条数
@@ -191,6 +196,7 @@ class ActivityController extends AppController {
      * 我要报名
      */
     public function enroll($id = '') {
+        $this->handCheckLogin();
         if ($id) {
             $activity = $this->Activity->get($id, [
                 'contain' => ['Admins'],
@@ -227,7 +233,6 @@ class ActivityController extends AppController {
      * 发布活动
      */
     public function release() {
-
         if ($this->request->param('pass')) {
 
             $data = $this->request->param('pass');
@@ -265,9 +270,10 @@ class ActivityController extends AppController {
 
     /**
      * 评论点赞
-     * @param int $id
+     * @param int $id 评论id
      */
     public function comLike($id) {
+        $this->handCheckLogin();
         $this->loadComponent('Business');
         $res = $this->Business->commentPraise($this->user->id, $id, 0);
         if($res !== false)
@@ -286,6 +292,7 @@ class ActivityController extends AppController {
      * @param int $id 文章id
      */
     public function artLike($id) {
+        $this->handCheckLogin();
         $this->loadComponent('Business');
         $res = $this->Business->praise($this->user->id, $id, 0);
         if($res !== false)
@@ -310,6 +317,7 @@ class ActivityController extends AppController {
      * @param int $id 文章id
      */
     public function collect($id) {
+        $this->handCheckLogin();
         $this->loadComponent('Business');
         $res = $this->Business->collectIt($this->user->id, $id, 0);
         if($res !== false)
