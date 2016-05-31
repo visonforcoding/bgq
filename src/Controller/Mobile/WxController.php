@@ -101,13 +101,10 @@ class WxController extends AppController {
         $out_trade_no = createRandomCode(12);
         $fee = $book->subject->price;
         $notify_url = 'ttt';
-        $this->loadComponent('Wx');
         $this->loadComponent('Wxpay');
-        $wxConfig = $this->Wx->wxconfig(['chooseWXPay']);
-        $wxpayParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, $notify_url);
+        $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, $notify_url);
         $this->set(array(
-            'wxpayParameters' => $wxpayParameters,
-            'wxConfig' => $wxConfig
+            'jsApiParameters' => $jsApiParameters,
         ));
         $this->set(compact('book'));
     }
