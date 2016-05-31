@@ -7,8 +7,8 @@ blockquote, q { quotes: none; }
 blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
 table { border-collapse: collapse; border-spacing: 0; }
 * { tap-highlight-color: rgba(0, 0, 0, 0); -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -ms-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; }
-body {font: 0.14rem / 0.24rem;font-family:'Microsoft YaHei', 'STHeiti',Helvetica,Arial,sans-serif; }
-input, textarea, button, input, select{ outline: 0; resize: none;font-size:100%;font-family:'Microsoft YaHei', 'STHeiti',Helvetica,Arial,sans-serif;}
+body {font: 0.14rem / 0.24rem 'Microsoft YaHei', 'STHeiti',Helvetica,Arial,sans-serif; }
+input, textarea, button, input, select{ outline: 0; resize: none;font-size:100%;font-family:'Microsoft YaHei';}
 
 html{font-size: 40px; outline: 0;-webkit-text-size-adjust:none;}
 html,body { width: 100%; height: 100%;}
@@ -78,7 +78,7 @@ header .h-regiser{position:absolute;right:0;top:0.3rem;}
 /*footer*/
 footer{position:fixed;bottom:0;left:0;overflow:hidden;width:100%;z-index:2;}
 footer h1{width:100%; font-size:0.3rem;color:#222c38;text-align:center;height:0.88rem;line-height:0.88rem;border-bottom:1px #c8c7cc solid;}
-footer .othertype{padding:0.35rem 0;width:100%;margin:0 auto;}
+footer .othertype{padding:0.35rem 0;width:100%;}
 footer .othertype a{display:block;width:0.7rem;height:0.57rem;margin:0 auto; }
-footer .othertype img{width:100%;height:auto;}
+footer .othertype img{width:100%;height:auto;display:block;}
 .navfooter .active span,.navfooter .active a{color:#db1f4f;}
