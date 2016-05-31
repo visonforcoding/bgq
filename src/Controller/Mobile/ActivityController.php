@@ -335,8 +335,7 @@ class ActivityController extends AppController {
      * 活动搜索
      */
     public function search() {
-        $res = [];
-        $alert = [];
+        $alert = '';
         if ($this->request->is('post')) {
             $data = $this->request->data();
             $industry_id = $data['industry_id'];
@@ -352,21 +351,26 @@ class ActivityController extends AppController {
                 ]);
             }
             if ($data['sort']) {
-                $res = $res->orderDesc($data['sort']);
+                $res->orderDesc($data['sort']);
             } else {
-                $res = $res->orderDesc('create_time'); // 默认按时间倒序排列
+                $res->orderDesc('create_time'); // 默认按时间倒序排列
             }
             $res = $res
                     ->hydrate(false)
-                    ->all()
                     ->toArray();
+            foreach ($res as $k=>$v)
+            {
+                if($v['industries'] == [])
+                {
+                    unset($res[$k]);
+                }
+            }
             if ($res == false || empty($res)) {
                 $alert = '暂无搜索结果';
             }
+            $this->set('search', $res);
         }
         $this->set('alert', $alert);
-        $this->set('search', $res);
-
         $isApply = [];
         if ($this->user) {
             // 用户已报名的活动
