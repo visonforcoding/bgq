@@ -71,7 +71,7 @@ class WxController extends AppController {
             if ($user) {
                 //存在则直接 表示登录 进入首页
                 $this->request->session()->write('User.mobile', $user);
-                return $this->redirect(['controller' => 'index', 'action' => 'index']);
+                return $this->redirect('/');
             } else {
                 $this->request->session()->write('reg.wx_openid', $open_id);
                 $access_token = json_decode($response->body())->access_token;
