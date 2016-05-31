@@ -1,15 +1,14 @@
 #小秘书
 CREATE TABLE `need` (
-	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Ð¡ÃØÊé',
-	`user_id` INT(11) NOT NULL COMMENT 'ÓÃ»§',
-	`msg` VARCHAR(550) NOT NULL COMMENT 'ÄÚÈÝ',
-	`status` TINYINT(4) NOT NULL COMMENT '×´Ì¬',
-	`create_time` DATETIME NOT NULL COMMENT '´´½¨Ê±¼ä',
-	`update_time` DATETIME NOT NULL COMMENT 'ÐÞ¸ÄÊ±¼ä',
-	`is_read` TINYINT DEFAULT 0 COMMENT 'ÊÇ·ñÒÑ¶Á£¨0£ºÎ´¶Á£»1£ºÒÑ¶Á£©',
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '小秘书',
+	`user_id` INT(11) NOT NULL COMMENT '用户',
+	`msg` VARCHAR(550) NOT NULL COMMENT '内容',
+	`status` TINYINT(4) NOT NULL COMMENT '状态0未读1已读',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	`update_time` DATETIME NOT NULL COMMENT '修改时间',
 	PRIMARY KEY (`id`)
 )
-COMMENT='Ð¡ÃØÊé'
+COMMENT='小秘书'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 
