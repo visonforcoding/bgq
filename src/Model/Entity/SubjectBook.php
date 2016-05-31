@@ -11,6 +11,8 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Subject $subject
  * @property int $user_id
  * @property \App\Model\Entity\User $user
+ * @property int $savant_id
+ * @property \App\Model\Entity\Savant $savant
  * @property string $summary
  * @property int $status
  * @property \Cake\I18n\Time $create_time
