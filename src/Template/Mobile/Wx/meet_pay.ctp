@@ -21,7 +21,7 @@
             <li><b></b>支付宝支付：<span id="pay_ali" data-pay="ali" class='infocard reg-repass'><input type="radio" name='pay' /><i></i></span></li>
         </ul>
     </div>
-    <a href="#this" id="submit"  class="nextstep">400元&nbsp;&nbsp;确认支付</a>
+    <a  id="submit"  class="nextstep">400元&nbsp;&nbsp;确认支付</a>
 </div>
 
 <?php $this->start('script') ?>
