@@ -27,14 +27,17 @@ activity.prototype.bindEvent = function () {
             $('.agency-item').removeClass('active');
             $(em).addClass('active');
 
-            var attr = $(em).attr('href');
-            $(attr).show().siblings('.a-form-box').hide();
+            var attr = $(em).attr('href');// href里面是对应的id写法：#guest
+            $('.a-form-box').hide();
+            $(attr).show();
 
-            $(attr).siblings('.a-form-box').find('input').val(null);
-            $(attr).siblings('.a-form-box').find('textarea').val(null);
-
+            if ($('input[name="type"]').val() != $(em).attr('type')) {
+                $('.a-form-box').find('input').val(null);
+                $('.a-form-box').find('textarea').val(null);
+            }
+            
             var val = $(em).attr('type');
-            $('input[name="type"]').val(val);
+            $('input[name="type"]').attr('value', val);
         }
         switch (em.id) {
             case 'submit':

@@ -16,14 +16,14 @@
     <div class="news-classify">
         <div class="classify-l fl ml">
             <span id="choose_industry">选择行业</span>
-            <ul class="all-industry" hidden>
+            <ul class="all-industry" hidden id="choose_industry_ul">
                 <?php foreach ($industries as $k => $v): ?>
                     <?php if ($v['pid'] == 0): ?>
                         <li id="parent_<?= $v['id'] ?>"><a href="javascript:void(0)"><?= $v['name'] ?></a>
                             <?php if ($v['child']): ?>
-                                <ul hidden>
+                                <ul class="choose_industry_child_ul" hidden>
                                     <?php foreach ($v['child'] as $key => $val): ?>
-                                        <li id="child_<?= $v['id'] ?>" value="<?= $val['id'] ?>"><a href="javascript:void(0)"><?= $val['name'] ?></a></li>
+                                        <li id="child_<?= $v['id'] ?>" value="<?= $val['id'] ?>" class="choose_industry_child_li"><a href="javascript:void(0)"><?= $val['name'] ?></a></li>
                                     <?php endforeach; ?>
                                 </ul>
                             <?php endif; ?>
@@ -35,9 +35,9 @@
 
         <div class="classify-r fr">
             <span id="choose_sort">排序</span>
-            <ul class="sort-mark" hidden>
-                <li id="sort_mostapply" value="apply_nums"><a href="javascript:void(0)">报名最多</a></li>
-                <li id="sort_recently" value="create_time"><a href="javascript:void(0)">最近更新</a></li>
+            <ul class="sort-mark" hidden id="sort_mark">
+                <li id="sort_mostapply" value="apply_nums" class="choose_sort_child"><a href="javascript:void(0)">报名最多</a></li>
+                <li id="sort_recently" value="create_time" class="choose_sort_child"><a href="javascript:void(0)">最近更新</a></li>
             </ul>
         </div>
     </div>

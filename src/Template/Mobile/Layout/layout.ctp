@@ -17,6 +17,29 @@
         <?= $this->fetch('content') ?>
         <script src="/mobile/js/util.js"></script>
         <script src="/mobile/js/function.js"></script>
+        <script>
+            console.log(window.location.href.indexOf('activity'));
+            if(window.location.href.indexOf('activity') != -1)
+            {
+                $('.activity_icon').css({color:'#dd204b'});
+                $('.activity_icon span').css({color:'#dd204b'});
+            }
+            else if(window.location.href.indexOf('news') != -1)
+            {
+                $('.news_icon').css({color:'#dd204b'});
+                $('.news_icon span').css({color:'#dd204b'});
+            }
+            else if(window.location.href.indexOf('meet') != -1)
+            {
+                $('.meet_icon').css({color:'#dd204b'});
+                $('.meet_icon span').css({color:'#dd204b'});
+            }
+            else if(window.location.href.indexOf('home') != -1)
+            {
+                $('.home_icon').css({color:'#dd204b'});
+                $('.home_icon span').css({color:'#dd204b'});
+            }
+        </script>
         <?= $this->fetch('script') ?>
         <div class="alert" id="alertPlan"></div>
     </body>

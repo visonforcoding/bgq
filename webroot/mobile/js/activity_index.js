@@ -1,13 +1,18 @@
 var activity = function () {
     var opt = {
+        page:2
     };
 
     $.extend(this, opt);
 };
 
 activity.prototype.init = function () {
+    var obj = this;
     this.setDet();
     this.bindEvent();
+    setTimeout(function(){
+        obj.getData();
+    }, 2000);
 };
 
 activity.prototype.setDet = function () {
@@ -37,6 +42,39 @@ activity.prototype.bindEvent = function () {
                 e.preventDefault();
                 break;
         }
+    });
+};
+
+activity.prototype.getData = function(){
+    var  obj = this;
+    $(window).on("scroll", function () {
+        $.util.listScroll('items', function () {
+            if (obj.page == 9999) {
+                $('#buttonLoading').html('亲，没有更多资讯了，请明天再来吧');
+                return;
+            }
+            $.util.showLoading('buttonLoading');
+            $.getJSON('/activity/getMoreActivity/' + obj.page, function (res) {
+                console.log('page~~~' + obj.page);
+                $.util.hideLoading('buttonLoading');
+                window.holdLoad = false;  //打开加载锁  可以开始再次加载
+
+                if (!res.status) {  //拉不到数据了  到底了
+                    obj.page = 9999;
+                    return;
+                }
+
+                if (res.status) {
+                    var html = $.util.dataToTpl('', 'activity_tpl', res.data, function (d) {
+                        d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
+                        d.industries_name = $.util.dataToTpl('', 'subTpl', d.industries);
+                        return d;
+                    });
+                    $('#activity').append(html);
+                    obj.page++;
+                }
+            });
+        });
     });
 };
 

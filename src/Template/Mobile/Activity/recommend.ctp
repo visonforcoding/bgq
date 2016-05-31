@@ -1,6 +1,6 @@
 <header>
     <div class='inner'>
-        <a href='#this' class='' id="toback"></a>
+        <a href='#this' class='toback' id="toback"></a>
         <h1><?= $pagetitle; ?></h1>
 
     </div>
@@ -17,7 +17,7 @@
     </div>
     <div class="h20"></div>
     <form method="post" action="">
-        <input type="text" name="type" hidden />
+        <input type="text" name="type" hidden value="" />
         <div class="a-form-box" id="guest">
             <ul>
                 <li>

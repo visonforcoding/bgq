@@ -11,7 +11,7 @@
         <div class="h20"></div>
         <div class="infoboxlist a-pay paytype">
             <ul class='ulinfo'>
-                <li>是否为众筹项目：<span class='infocard'><input type="checkbox" name='pay' checked="true" id="pay"/><i class='active'></i></span></li>
+                <li id="pay">是否为众筹项目：<span class='infocard'><input type="checkbox" name='pay' checked="true" id="pay_input"/><i class='active' id="pay_i"></i></span></li>
             </ul>
         </div>
         <div class="tojudge innercon tochoose" id="tochoose">

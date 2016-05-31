@@ -23,28 +23,15 @@ activity.prototype.bindEvent = function () {
         }
         if (!em || !em.id)
             return;
-        if (em.id.indexOf('agency_item_') != -1) {
-            $('.agency-item').removeClass('active');
-            $(em).addClass('active');
-
-            var attr = $(em).attr('href');
-            $(attr).show().siblings('.a-form-box').hide();
-
-            $(attr).siblings('.a-form-box').find('input').val(null);
-            $(attr).siblings('.a-form-box').find('textarea').val(null);
-
-            var val = $(em).attr('type');
-            $('input[name="type"]').val(val);
-        }
         switch (em.id) {
             case 'pay':
-                $(em).siblings('i').toggleClass('active');
-                if ($(em).siblings('i').attr('class') == 'active')
+                $('#pay_i').toggleClass('active');
+                if ($('#pay_i').hasClass('active') == true)
                 {
-                    $(em).attr('checked', true);
+                    $('#pay_input').attr('checked', true);
                 } else
                 {
-                    $(em).attr('checked', false);
+                    $('#pay_input').attr('checked', false);
                 }
                 break;
             case 'submit':
