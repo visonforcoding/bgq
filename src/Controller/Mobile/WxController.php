@@ -80,11 +80,36 @@ class WxController extends AppController {
                 if ($res->isOk()) {
                     $userinfo = json_decode($res->body()); //微信用户信息
                     $headimgurl = $userinfo->headimgurl;
-                    $this->request->session()->write('reg.avatar',$headimgurl);
+                    $this->request->session()->write('reg.avatar', $headimgurl);
                 }
                 return $this->redirect(['controller' => 'user', 'action' => 'wxBindPhone']);
             }
         }
+    }
+
+    /**
+     * 预约支付页
+     * @param int $id  预定id
+     */
+    public function meetPay($id = null) {
+        $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+        $book = $BookTable->get($id, [
+            'contain' => ['Subjects']
+        ]);
+        $body = '预约话题支付';
+        $openid = $this->user->wx_openid;
+        $out_trade_no = createRandomCode(12);
+        $fee = $book->subject->price;
+        $notify_url = 'ttt';
+        $this->loadComponent('Wx');
+        $this->loadComponent('Wxpay');
+        $wxConfig = $this->Wx->wxconfig(['chooseWXPay']);
+        $wxpayParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, $notify_url);
+        $this->set(array(
+            'wxpayParameters' => $wxpayParameters,
+            'wxConfig' => $wxConfig
+        ));
+        $this->set(compact('book'));
     }
 
 }

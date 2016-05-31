@@ -63,9 +63,9 @@
                          <?=json_encode($jsApiParameters)?>,
                         function (res) {
                             alert(res.err_msg);
-                            for(a in res){
-                                alert(res[a]);
-                            }
+                            $.each(res,function(i,n){
+                                alert(n);
+                            });
                             WeixinJSBridge.log(res.err_msg);
                                  if(res.err_msg == "get_brand_wcpay_request:ok" ) {
                                    alert('支付成功!');
