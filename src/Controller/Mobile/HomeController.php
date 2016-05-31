@@ -315,8 +315,10 @@ class HomeController extends AppController {
         $out_trade_no = createRandomCode(12);
         $fee = $book->subject->price;
         $notify_url = 'ttt';
-        $res = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, $notify_url);
-        debug($res);exit();
+        $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, $notify_url);
+        $this->set(array(
+            'jsApiParameters'=>$jsApiParameters
+        ));
         $this->set(compact('book'));
     }
     

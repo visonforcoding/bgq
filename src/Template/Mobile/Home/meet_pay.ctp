@@ -21,7 +21,7 @@
             <li><b></b>支付宝支付：<span id="pay_ali" data-pay="ali" class='infocard reg-repass'><input type="radio" name='pay' /><i></i></span></li>
         </ul>
     </div>
-    <a href="#this" id="submit" class="nextstep">400元&nbsp;&nbsp;确认支付</a>
+    <a href="#this" id="submit"  class="nextstep">400元&nbsp;&nbsp;确认支付</a>
 </div>
 
 <?php $this->start('script') ?>
@@ -60,7 +60,7 @@
             {
                 WeixinJSBridge.invoke(
                         'getBrandWCPayRequest',
-                        {{jsApiParameters|raw}},
+                         <?=json_encode($jsApiParameters)?>,
                         function (res) {
                             WeixinJSBridge.log(res.err_msg);
                                  if(res.err_msg == "get_brand_wcpay_request:ok" ) {
@@ -73,6 +73,7 @@
 
             function callpay()
             {
+                console.log('微信支付被唤起');
                 if (typeof WeixinJSBridge == "undefined") {
                     if (document.addEventListener) {
                         document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
