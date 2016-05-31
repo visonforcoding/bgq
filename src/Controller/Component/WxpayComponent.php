@@ -42,21 +42,19 @@ class WxpayComponent extends Component {
      */
     protected $_defaultConfig = [];
 
-    
     /**
-     * 统一下单
-     * @param type $attach
-     * @param type $body
-     * @param type $notify_url
-     * @param type $openid
-     * @param type $out_trade_no
-     * @param type $fee
+     * 
+     * @param type $body   商品信息
+     * @param type $openid  发起支付的用户openid
+     * @param type $out_trade_no  商户上的订单号
+     * @param type $fee   支付金额
+     * @param type $notify_url  异步回调地址
+     * @return type
      */
-    public function unifiedorder($attach,$body,$notify_url,$openid,$out_trade_no,$fee) {
-        $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
+    public function unifiedorder($body, $openid, $out_trade_no, $fee, $notify_url = null) {
+        $apiurl = self::WEIXIN_PAY_API_URL . '/pay/unifiedorder';
         $xmlText = '<xml>
                     <appid>%s</appid>
-                    <attach>%s</attach>
                     <body>%s</body>
                     <mch_id>%s</mch_id>
                     <nonce_str>%s</nonce_str>
@@ -71,32 +69,84 @@ class WxpayComponent extends Component {
         $ip = $this->request->clientIp();
         $nonce_str = createRandomCode(16);
         $params = [
-            'appid'=>  $this->app_id,
-            'attach'=>  $attach,
-            'body'=>  $body,
-            'mch_id'=>  $this->mchid,
-            'nonce_str'=>  $nonce_str,
-            'notify_url'=>  $notify_url,
-            'openid'=>  $openid,
-            'out_trade_no'=>  $out_trade_no,
-            'spbill_create_ip'=>  $ip,
-            'total_fee'=>  $fee,
-            'trade_type'=>  'JSAPI',
+            'appid' => $this->app_id,
+            'body' => $body,
+            'mch_id' => $this->mchid,
+            'nonce_str' => $nonce_str,
+            'notify_url' => $notify_url,
+            'openid' => $openid,
+            'out_trade_no' => $out_trade_no,
+            'spbill_create_ip' => $ip,
+            'total_fee' => $fee,
+            'trade_type' => 'JSAPI',
         ];
         $sign = $this->setSign($params);
-        $xmlString = sprintf($xmlText,  $this->app_id,$attach,$body,  $this->mchid,$nonce_str,$notify_url,$openid,$out_trade_no,$ip,$fee,$sign);
-        debug($xmlString);
+        $xmlString = sprintf($xmlText, $this->app_id, $body, $this->mchid, $nonce_str, $notify_url, $openid, $out_trade_no, $ip, $fee, $sign);
+        $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
+        $res = $httpClient->post($apiurl, $xmlString);
+        if (!$res->isOk()) {
+            \Cake\Log\Log::error($res);
+            return false;
+        }
+        $body = (array)simplexml_load_string($res->body(), 'SimpleXMLElement', LIBXML_NOCDATA);
+        if ($body['return_code'] == 'SUCCESS' && $body['result_code'] == 'SUCCESS') {
+            return $body;
+        } else {
+            \Cake\Log\Log::error($body);
+            return false;
+        }
     }
-    
-    public function setSign($params){
-        debug($params);
+
+    /**
+     *  生成签名
+     * @param type $params
+     * @return type
+     */
+    public function setSign($params) {
         ksort($params);
         $stringA = urldecode(http_build_query($params)); //不要转义的
-        debug($stringA);
-        $stringB = $stringA.'&key='.$this->key;
-        debug($stringB);
+        $stringB = $stringA . '&key=' . $this->key;
         $sign = strtoupper(md5($stringB));
         return $sign;
+    }
+
+    /**
+     * 生成支付参数
+     */
+    public function setPayParameter($prepay_id) {
+        $timestamp = time();
+        $nonceStr = createRandomCode(16);
+        $params = [
+            'appId' => $this->app_id,
+            'timeStamp' => $timestamp,
+            'nonceStr' => $nonceStr,
+            'package' => 'prepay_id=' . $prepay_id,
+            'signType' => 'MD5'
+        ];
+        $sign = $this->setSign($params);
+        $params['paySign'] = $sign;
+        return $params;
+    }
+    
+    
+    /**
+     * 直接获取 支付参数
+     * @param type $body
+     * @param type $openid
+     * @param type $out_trade_no
+     * @param type $fee
+     * @param type $notify_url
+     * @return boolean
+     */
+    public function getPayParameter($body, $openid, $out_trade_no, $fee, $notify_url = null){
+        $res = $this->unifiedorder($body, $openid, $out_trade_no, $fee, $notify_url);
+        if($res){
+            $prepay_id = $res['prepay_id'];
+            $pay_param = $this->setPayParameter($prepay_id);
+            return $pay_param;
+        }else{
+            return false;
+        }
     }
 
 }

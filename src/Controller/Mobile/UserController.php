@@ -180,18 +180,18 @@ class UserController extends AppController {
             $phone = $this->request->data('phone');
             $user = $this->User->findByPhoneAndEnabled($phone, 1)->first();
             if ($user) {
-               // $vcode = $this->request->session()->read('UserLoginVcode');
-              //  if ($vcode['code'] == $this->request->data('vcode')) {
-                  //  if (time() - $vcode['time'] < 60 * 10) {
-                        //10分钟验证码超时
-                        $this->request->session()->write('User.mobile', $user);
-                        $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url]);
+                // $vcode = $this->request->session()->read('UserLoginVcode');
+                //  if ($vcode['code'] == $this->request->data('vcode')) {
+                //  if (time() - $vcode['time'] < 60 * 10) {
+                //10分钟验证码超时
+                $this->request->session()->write('User.mobile', $user);
+                $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url]);
                 //    } else {
                 //        $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
-               //     }
-              //  } else {
-              //      $this->Util->ajaxReturn(false, '验证码验证错误');
-               // }
+                //     }
+                //  } else {
+                //      $this->Util->ajaxReturn(false, '验证码验证错误');
+                // }
             } else {
                 $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或不可用']);
             }
@@ -321,14 +321,25 @@ class UserController extends AppController {
             }
             //发送一条关注消息给被关注者
             $this->loadComponent('Business');
-            $this->Business->usermsg($following_id,'您有新的关注者','', 1,$newfans->id);
+            $this->Business->usermsg($following_id, '您有新的关注者', '', 1, $newfans->id);
             //更新被关注者粉丝数  列表方便显示
             $follower_user = $this->User->get($following_id);
             $fansCount = $FansTable->find()->where("`following_id` = '$following_id'")->count();
             $follower_user->fans = $fansCount;
             $this->User->save($follower_user);
-            $this->Util->ajaxReturn(true,'关注成功');
+            $this->Util->ajaxReturn(true, '关注成功');
         }
+    }
+
+    /**
+     * 登出
+     */
+    public function loginOut() {
+        $this->viewBuilder()->autoLayout(false);
+        $this->request->session()->delete('User.mobile');
+        $this->request->session()->destroy();
+        $this->Flash->success('您已退出登录！');
+        return $this->redirect('/');
     }
 
 }

@@ -28,9 +28,6 @@ class HomeController extends AppController {
      */
     public function index() {
         $this->loadComponent('Wx');
-        $this->loadComponent('Wxpay');
-        $this->Wxpay->unifiedorder('test', 'fff','http://wxpay.weixin.qq.com/pub_v2/pay/notify.v2.php', 'ogD3IwZkB0fiIdrRDPwn_ao9mMBA', '111', '888','333s');
-        exit();
         $wxConfig = $this->Wx->wxconfig(['onMenuShareTimeline','onMenuShareAppMessage']);
         $user_id = $this->user->id;
         $user = $this->User->get($user_id);
@@ -312,6 +309,14 @@ class HomeController extends AppController {
         $book = $BookTable->get($id,[
             'contain'=>['Subjects']
         ]);
+        $this->loadComponent('Wxpay');
+        $body = '预约话题支付';
+        $openid = $this->user->wx_openid;
+        $out_trade_no = createRandomCode(12);
+        $fee = $book->subject->price;
+        $notify_url = 'ttt';
+        $res = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, $notify_url);
+        debug($res);exit();
         $this->set(compact('book'));
     }
     
