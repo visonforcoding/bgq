@@ -99,7 +99,8 @@ class WxController extends AppController {
         $body = '预约话题支付';
         $openid = $this->user->wx_openid;
         $out_trade_no = createRandomCode(12);
-        $fee = $book->subject->price;
+        //$fee = intval(($book->subject->price)*100);  //支付金额(分)
+        $fee = 1;  //测试时 1分
         $notify_url = 'ttt';
         $this->loadComponent('Wxpay');
         $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, $notify_url);
