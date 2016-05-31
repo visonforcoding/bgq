@@ -180,18 +180,18 @@ class UserController extends AppController {
             $phone = $this->request->data('phone');
             $user = $this->User->findByPhoneAndEnabled($phone, 1)->first();
             if ($user) {
-                $vcode = $this->request->session()->read('UserLoginVcode');
-                if ($vcode['code'] == $this->request->data('vcode')) {
-                    if (time() - $vcode['time'] < 60 * 10) {
+               // $vcode = $this->request->session()->read('UserLoginVcode');
+              //  if ($vcode['code'] == $this->request->data('vcode')) {
+                  //  if (time() - $vcode['time'] < 60 * 10) {
                         //10分钟验证码超时
                         $this->request->session()->write('User.mobile', $user);
                         $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url]);
-                    } else {
-                        $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
-                    }
-                } else {
-                    $this->Util->ajaxReturn(false, '验证码验证错误');
-                }
+                //    } else {
+                //        $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
+               //     }
+              //  } else {
+              //      $this->Util->ajaxReturn(false, '验证码验证错误');
+               // }
             } else {
                 $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或不可用']);
             }

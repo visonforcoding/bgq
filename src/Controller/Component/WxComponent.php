@@ -6,7 +6,8 @@ use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;
 
 /**
- * Wx component  wx组件
+ * Wx component  wx组件 
+ *  获取access_token,用户openId, jsapi 签名信息
  * @author caowenpeng <caowenpeng1990@126.com>
  */
 class WxComponent extends Component {
@@ -123,7 +124,7 @@ class WxComponent extends Component {
         } else {
             return $access_token['access_token'];
         }
-    }
+    } 
 
     /**
      * 获取jsapi_ticket

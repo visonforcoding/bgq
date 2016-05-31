@@ -12,6 +12,7 @@ use Cake\I18n\Time;
  * @property \App\Model\Table\UserTable $User
  * @property \App\Controller\Component\BusinessComponent $Business
  * @property \App\Controller\Component\WxComponent $Wx
+ * @property \App\Controller\Component\WxpayComponent $Wxpay
  */
 class HomeController extends AppController {
 
@@ -27,10 +28,17 @@ class HomeController extends AppController {
      */
     public function index() {
         $this->loadComponent('Wx');
+        $this->loadComponent('Wxpay');
+        $this->Wxpay->unifiedorder('test', 'fff','http://wxpay.weixin.qq.com/pub_v2/pay/notify.v2.php', 'ogD3IwZkB0fiIdrRDPwn_ao9mMBA', '111', '888','333s');
+        exit();
         $wxConfig = $this->Wx->wxconfig(['onMenuShareTimeline','onMenuShareAppMessage']);
         $user_id = $this->user->id;
         $user = $this->User->get($user_id);
-        $this->set(compact('user','wxConfig'));
+        $this->set(compact('user'));
+        $this->set(array(
+            'user'=>$user,
+            'wxConfig'=>$wxConfig
+        ));
     }
 
     /**
@@ -305,5 +313,12 @@ class HomeController extends AppController {
             'contain'=>['Subjects']
         ]);
         $this->set(compact('book'));
+    }
+    
+    /***
+     * 我的钱包
+     */
+    public function myPurse(){
+        
     }
 }

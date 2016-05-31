@@ -36,6 +36,7 @@ class WxController extends AppController {
 
     /**
      * 授权登录/获取信息页  跳转页
+     * ①微信公众号 绑定JS安全域名
      */
     public function getUserJump() {
         $wxconfig = \Cake\Core\Configure::read('weixin');

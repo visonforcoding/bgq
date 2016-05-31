@@ -16,8 +16,12 @@ return [
         'password' => 'SHAOye1688'
     ],
     'weixin' => [
-        'appID' => 'wx5e373cce4b84bd5e',
-        'appsecret' => 'd4624c36b6795d1d99dcf0547af5443d',
-        'token'=>'cwptest'
+        'appID' => 'wxf3d1e078715e41ce',
+        'appsecret' => '293c2fb5bcf96db8eea854365471d48b',
+        'token'=>'cwptest',
+        'mchid'=>'1296107201',
+        'key'=>'3596f7e1a0f6d4171005f9226f3e36ec',
+        'sslcert_path'=> dirname(__FILE__).'/wxcert/apiclient_cert.pem',
+        'sslkey_path'=> dirname(__FILE__).'/wxcert/apiclient_key.pem',
     ]
 ];

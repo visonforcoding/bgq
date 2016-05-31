@@ -26,7 +26,8 @@ class SubjectBookTableTest extends TestCase
     public $fixtures = [
         'app.subject_book',
         'app.subjects',
-        'app.users'
+        'app.users',
+        'app.savants'
     ];
 
     /**

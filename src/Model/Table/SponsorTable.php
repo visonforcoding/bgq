@@ -39,23 +39,12 @@ class SponsorTable extends Table {
             'joinType' => 'INNER',
             'className' => 'Activity',
         ]);
-<<<<<<< .mine
-        
-        $this->addBehavior('Timestamp', [
-        	'events' => [
-        		'Model.beforeSave' => [
-	        		'create_time' => 'new',
-        		]
-        	]
-=======
-
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [
                     'create_time' => 'new',
                 ]
             ]
->>>>>>> .r268
         ]);
     }
 
