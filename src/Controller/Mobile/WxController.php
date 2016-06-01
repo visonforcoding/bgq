@@ -10,12 +10,13 @@ use EasyWeChat\Foundation\Application as WXSDK;
  * User Controller
  *
  * @property \App\Model\Table\UserTable $User
- * @property \App\Controller\Component\HanvonComponent $Hanvon
+ * @property \App\Controller\Component\WxComponent $Wx
  */
 class WxController extends AppController {
 
     public function initialize() {
         parent::initialize();
+        $this->loadComponent('Wx');
         $this->loadModel('User');
     }
 
@@ -91,16 +92,10 @@ class WxController extends AppController {
      * 静默登录
      */
     public function getUserCodeBase() {
-        $code = $this->request->query('code');
-        $wxconfig = \Cake\Core\Configure::read('weixin');
-        $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
-        $wx_accesstoken_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $wxconfig['appID'] . '&secret=' . $wxconfig['appsecret'] .
-                '&code=' . $code . '&grant_type=authorization_code';
-        //\Cake\Log\Log::debug($wx_accesstoken_url);
-        $response = $httpClient->get($wx_accesstoken_url);
-        if ($response->isOk()) {
-            if (isset(json_decode($response->body())->openid)) {
-                $open_id = json_decode($response->body())->openid;
+        $res = $this->Wx->getUser();
+        if ($res) {
+            if (isset($res->openid)) {
+                $open_id = $res->openid;
                 $user = $this->User->findByWx_openid($open_id)->first();
                 if ($user) {
                     //通过微信 获取到 在平台上有绑定的用户  就默认登录

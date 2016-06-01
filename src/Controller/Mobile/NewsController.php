@@ -24,7 +24,7 @@ class NewsController extends AppController {
         if($this->request->isWeixin()&&empty($this->user)){
             //如果是微信 静默授权页获取openid
             $this->loadComponent('Wx');
-            return $this->Wx->getUserJump(true, '/news/index');
+            return $this->Wx->getUserJump(true);
         }
         $news = $this->News->find()
                         ->contain(['Admins', 'Industries'])
