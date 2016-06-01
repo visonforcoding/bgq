@@ -69,12 +69,14 @@
     //api名称列表
     var apiList = ["db.get",
         "db.set",
-        //"share.QQ",
-        //"share.QQfriend",
-        //"share.WX",
-        //"share.WXfriend",
-        //"env.hasQQ",
-        //"env.hasWX",
+        "hide.share", //隐藏分享图标
+        "show.search", //显示搜索
+        "share.QQ",
+        "share.QQfriend",
+        "share.WX",
+        "share.WXfriend",
+        "env.hasQQ",
+        "env.hasWX",
         'login.wx',
         "event.getLocation",
         "event.beginOrder",
@@ -119,11 +121,17 @@
                 //无参数   无回调
                 case "event.beginOrder":
                 case "event.endOrder":
+                case "hide.share":
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {}, '');
                     });
                     break;
                 //一个字符型参数   无回调
+                case "show.search":
+                    registerAPI(null, api, function () {
+                        return JSApiInvoke(api, {url:arguments[0]}, '');
+                    });
+                    break;
                 case "event.tel":
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {tel:arguments[0]}, '');
@@ -148,7 +156,7 @@
                         window.reuploadPhotoCB = arguments[0];
                         return JSApiInvoke(api, {}, '');
                         //var re = JSON.parse(JSApiInvoke(api, {}, '', 'string'));
-                        //return re.data; 
+                        //return re.data;
                     });
                     break;
                 case "share.QQ":
