@@ -2,7 +2,6 @@
     <div class='inner'>
         <a href='#this' class='toback'></a>
         <h1>个人中心</h1>
-
         <a href="#this" class='iconfont share h-regiser'>&#xe619;</a>
     </div>
     <div class="h-home-bottom">
