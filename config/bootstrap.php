@@ -168,6 +168,7 @@ Request::addDetector('tablet', function ($request) {
     $detector = new \Detection\MobileDetect();
     return $detector->isTablet();
 });
+Request::addDetector('weixin',['env' => 'HTTP_USER_AGENT', 'pattern' => '/MicroMessenger/i']);
 
 /**
  * Custom Inflector rules, can be set to correctly pluralize or singularize

@@ -9,6 +9,7 @@ use App\Controller\Mobile\AppController;
  *
  * @property \App\Model\Table\NewsTable $News
  * @property \App\Controller\Component\BusinessComponent $Business
+ * @property \App\Controller\Component\WxComponent $Wx
  */
 class NewsController extends AppController {
 
@@ -20,6 +21,11 @@ class NewsController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
+        if($this->request->isWeixin()){
+            //如果是微信 静默授权页获取openid
+            $this->loadComponent('Wx');
+            return $this->Wx->getUserJump(true, '/news/index');
+        }
         $news = $this->News->find()
                         ->contain(['Admins', 'Industries'])
                         ->limit($this->newslimit)->orderDesc('News.create_time')->toArray();
