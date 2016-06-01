@@ -21,7 +21,7 @@ class NewsController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        if($this->request->isWeixin()){
+        if($this->request->isWeixin()&&empty($this->user)){
             //如果是微信 静默授权页获取openid
             $this->loadComponent('Wx');
             return $this->Wx->getUserJump(true, '/news/index');
