@@ -88,7 +88,7 @@ class WxController extends AppController {
     }
 
     /**
-     * 预约支付页
+     * 预约支付页  此页面URL 需在微信公众号的微信支付那里配置 支付域
      * @param int $id  预定id
      */
     public function meetPay($id = null) {

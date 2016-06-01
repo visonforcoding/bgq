@@ -56,13 +56,21 @@ class WxComponent extends Component {
     }
 
     /**
+     * 
      * 前往微信验证页 前去获取code
+     * @param type $base  是否base 静默获取
+     * @param string $redirect_url 跳转url
      */
-    public function getUserJump() {
-        $redirect_url = 'http://' . $_SERVER['SERVER_NAME'] . '/mobile/wx/getUserCode';
+    public function getUserJump($base=false,$redirect_url=null) {
+        if(empty($redirect_url)){
+            $redirect_url = 'http://' . $_SERVER['SERVER_NAME'] . '/mobile/wx/getUserCode';
+        }else{
+            $redirect_url = 'http://' . $_SERVER['SERVER_NAME'] .$redirect_url;
+        }
+        $scope = $base?'snsapi_base':'snsapi_userinfo';
         $wx_code_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='
-                . $this->app_id . '&redirect_uri=' . urlencode($redirect_url) . '&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
-        $this->redirect($wx_code_url);
+                . $this->app_id . '&redirect_uri=' . urlencode($redirect_url) . '&response_type=code&scope='.$scope.'&state=STATE#wechat_redirect';
+        $this->_registry->getController()->redirect($wx_code_url);
     }
 
     /**

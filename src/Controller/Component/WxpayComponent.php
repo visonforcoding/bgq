@@ -111,7 +111,7 @@ class WxpayComponent extends Component {
     }
 
     /**
-     * 生成支付参数
+     * 生成支付参数 供页面JSapi 调用发起支付 (!!并且该页面URL 需是在微信公众号的微信支付那里配置了支付域)
      */
     public function setPayParameter($prepay_id) {
         $timestamp = time();
