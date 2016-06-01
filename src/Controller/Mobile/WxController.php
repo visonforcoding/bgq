@@ -47,7 +47,7 @@ class WxController extends AppController {
         $this->redirect($wx_code_url);
     }
 
-    /*     * *
+    /*     * ***
      * 获取code->获取openid user 信息 业务处理
      */
 
@@ -85,6 +85,31 @@ class WxController extends AppController {
                 return $this->redirect(['controller' => 'user', 'action' => 'wxBindPhone']);
             }
         }
+    }
+
+    /**
+     * 静默登录
+     */
+    public function getUserCodeBase() {
+        $code = $this->request->query('code');
+        $wxconfig = \Cake\Core\Configure::read('weixin');
+        $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
+        $wx_accesstoken_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $wxconfig['appID'] . '&secret=' . $wxconfig['appsecret'] .
+                '&code=' . $code . '&grant_type=authorization_code';
+        //\Cake\Log\Log::debug($wx_accesstoken_url);
+        $response = $httpClient->get($wx_accesstoken_url);
+        if ($response->isOk()) {
+            if (isset(json_decode($response->body())->openid)) {
+                $open_id = json_decode($response->body())->openid;
+                $user = $this->User->findByWx_openid($open_id)->first();
+                if ($user) {
+                    //通过微信 获取到 在平台上有绑定的用户  就默认登录
+                    $this->request->session()->write('User.mobile', $user);
+                }
+            }
+        }
+        //无论怎样 必须要跳会首页
+        return $this->redirect('/');
     }
 
     /**
