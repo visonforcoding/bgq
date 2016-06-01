@@ -121,6 +121,15 @@ $.util = {
         document.cookie = name + '=' + escape(value) + ( expires ? ';expires=' + exp.toGMTString() : '') + ( path ? ';path=' + path : '') + ( domain ? ';domain=' + domain : '') + ( secure ? ';secure' : '');
     },
 
+    loginWX: function(cb) {
+        if(window.__isAPP){
+            LEMON.login.wx(cb);
+        }
+        else if($.util.isWX){
+            location.href = '/wx/get-user-jump';
+        }
+    },
+
     /**
      * @param id  容器dom id
      */
@@ -194,3 +203,6 @@ $.util = {
     }
 
 };
+
+$.util.isWX = navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1;
+$.util.isQQ = navigator.userAgent.toLowerCase().indexOf('qq') != -1;
