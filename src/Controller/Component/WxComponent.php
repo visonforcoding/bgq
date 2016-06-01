@@ -64,10 +64,10 @@ class WxComponent extends Component {
     public function getUserJump($base=false) {
         if(!$base){
             $redirect_url = 'http://' . $_SERVER['SERVER_NAME'] . '/mobile/wx/getUserCode';
-            $scope = 'snsapi_base';
+            $scope = 'snsapi_userinfo';
         }else{
             $redirect_url = 'http://' . $_SERVER['SERVER_NAME'] .'/wx/getUserCodeBase';
-            $scope = 'snsapi_userinfo';
+            $scope = 'snsapi_base';
         }
         $wx_code_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='
                 . $this->app_id . '&redirect_uri=' . urlencode($redirect_url) . '&response_type=code&scope='.$scope.'&state=STATE#wechat_redirect';
