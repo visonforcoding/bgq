@@ -40,6 +40,6 @@
             }
         </script>
         <?= $this->fetch('script') ?>
-        <div class="alert" id="alertPlan"></div>
+        <div class="alert" id="alertPlan"><span id="alertText"></span></div>
     </body>
 </html>

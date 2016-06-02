@@ -6,8 +6,9 @@ $.util = {
 
     //
     alert:function(str, t){
-        $('#alertPlan').html(str);
+        $('#alertText').html(str);
         $('#alertPlan').show();
+        //.css('width', $('#alertText').width()+30);
         setTimeout(function(){$('#alertPlan').hide();}, t||3000);
     },
     /**
