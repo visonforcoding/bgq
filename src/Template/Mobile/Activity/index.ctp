@@ -3,7 +3,7 @@
     <header>
         <div class='inner'>
             <a class='subactivity' id="release" user="<?= $user; ?>">发布活动</a>
-            <h1><?= $pagetitle ?></h1>
+            <h1><?= $pageTitle ?></h1>
             <a href="/activity/search" class='iconfont news-serch h-regiser'>&#xe613;</a>
         </div>
     </header>

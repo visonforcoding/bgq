@@ -2,7 +2,7 @@
     <div class='inner'>
         <a href='#this' class='toback'></a>
         <h1>
-            <?= $pagetitle; ?>
+            <?= $pageTitle; ?>
         </h1>
     </div>
 </header>
