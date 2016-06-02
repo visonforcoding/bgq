@@ -14,17 +14,16 @@
 	<body>
 		<header>
 			<div class='inner'>
-				<a href='#this' class='toback'></a>
+				<a href='javascript:history.go(-1);' class='toback'></a>
 				<h1>
 					
 					活动详情
 				</h1>
-				<a href="#this" class='iconfont collection h-regiser'>&#xe610;</a>
-				<a href="#this" class='iconfont share h-regiser'>&#xe614;</a>
+				
 			</div>
 		</header>
 		
-		<div class="wraper">
+		<div class="wraper pd10">
 			<section class="newscon-box a-detail">
 				<h3>2016中国国际体育投融资总裁年会</h3>
 				<img src="../images/detail.png"/>
@@ -131,8 +130,8 @@
 			<section class="newscomment-box">
 				<h3 class="comment-title">
 					评论
-					<i class="iconfont">&#xe618;</i>
-					<span>我要点评</span>
+					
+					<span><i class="iconfont">&#xe618;</i>我要点评</span>
 				</h3>
 				<div class="items">
 					<div class="comm-info clearfix">
@@ -191,16 +190,18 @@
 				<a href="#this">我要推荐</a>
 				<a href="#this">我要报名(400元)</a>
 			</div>
-			<!--底部四个图-->
-			<footer>
-				<div class="iconlist">
-					<span class="iconfont"></span>
-					<span class="iconfont"></span>
-					<span class="iconfont"></span>
-					<span class="iconfont"></span>
-				</div>
-			</footer>
+			
 		</div>
+		
+		<!--底部四个图-->
+			
+		<div class="iconlist">
+			<span class="iconfont">&#xe618;</span>
+			<span class="iconfont">&#xe610;</span>
+			<span class="iconfont">&#xe614;</span>
+			<span class="iconfont"></span>
+		</div>
+			
 		<div class="reg-shadow" style='display:none'>
 			
 		</div>
@@ -208,7 +209,7 @@
 			<ul style='display:none'>
 				<li><textarea type="text" placeholder="请输入评论"></textarea></li>
 				
-				<li><a href="">取消</a><a href="">发表</a></li>
+				<li><a href="javascript:void(0);">取消</a><a href="javascript:void(0);">发表</a></li>
 			</ul>
 			<div>
 			<h3>通过以下渠道转发</h3>
