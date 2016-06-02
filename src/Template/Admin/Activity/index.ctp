@@ -103,20 +103,20 @@
                     response += '<a title="编辑" href="/admin/activity/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     if (rowObject.is_top == 0 && rowObject.is_check == 1)
                     {
-                        response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="return top(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
+                        response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
                     } else if (rowObject.is_top == 1 && rowObject.is_check == 1)
                     {
-                        response += '<a title="取消置顶" href="javascript:void(0)" class="grid-btn untop" onclick="return untop(' + rowObject.id + ')"><i class="icon icon-long-arrow-down"></i></a>';
+                        response += '<a title="取消置顶" href="javascript:void(0)" class="grid-btn untop" onclick="untop(' + rowObject.id + ')"><i class="icon icon-long-arrow-down"></i></a>';
                     }
                     if (rowObject.is_check == 0)
                     {
-                        response += '<a title="发布" href="javascript:void(0)" class="grid-btn release" onclick="return release(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
-                        response += '<a title="未通过审核" href="javascript:void(0)" class="grid-btn unrelease" onclick="return unrelease(' + rowObject.id + ')"><i class="icon icon-times"></i></a>';
+                        response += '<a title="发布" href="javascript:void(0)" class="grid-btn release" onclick="release(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
+                        response += '<a title="未通过审核" href="javascript:void(0)" class="grid-btn unrelease" onclick="unrelease(' + rowObject.id + ')"><i class="icon icon-times"></i></a>';
                     }
                     return response;
                 }
 
-                function top(id) {
+                function istop(id) {
                     layer.confirm('确定置顶？', {
                         btn: ['确认', '取消'] //按钮
                     }, function () {

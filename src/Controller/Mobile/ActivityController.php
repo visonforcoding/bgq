@@ -109,7 +109,7 @@ class ActivityController extends AppController {
             $this->set('isLike', $isLike);
             $this->set('isCollect', $isCollect);
 
-            $this->set('pagetitle', '活动详情');
+            $this->set('pageTitle', '活动详情');
         } else {
             $this->Util->ajaxReturn(false, '传值错误');
         }
@@ -166,7 +166,7 @@ class ActivityController extends AppController {
         $isApply = implode(',', $isApply);
         $this->set('isApply', $isApply);
         $this->set('user', $this->user);
-        $this->set('pagetitle', '活动');
+        $this->set('pageTitle', '活动');
     }
 
     /**
@@ -188,7 +188,7 @@ class ActivityController extends AppController {
                 $this->Util->ajaxReturn(false, '系统错误');
             }
         } else {
-            $this->set('pagetitle', '我要推荐');
+            $this->set('pageTitle', '我要推荐');
         }
     }
 
@@ -222,7 +222,7 @@ class ActivityController extends AppController {
             } else {
                 $this->set('activity', $activity);
                 $this->set('user', $this->user);
-                $this->set('pagetitle', '我要报名');
+                $this->set('pageTitle', '我要报名');
             }
         } else {
             $this->Util->ajaxReturn(false, '传值错误');
@@ -264,7 +264,7 @@ class ActivityController extends AppController {
             }
         } else {
             $this->set('industries', $industries);
-            $this->set('pagetitle', '发布活动');
+            $this->set('pageTitle', '发布活动');
         }
     }
 
@@ -335,6 +335,7 @@ class ActivityController extends AppController {
      * 活动搜索
      */
     public function search() {
+        $res = [];
         $alert = '';
         if ($this->request->is('post')) {
             $data = $this->request->data();
@@ -368,8 +369,8 @@ class ActivityController extends AppController {
             if ($res == false || empty($res)) {
                 $alert = '暂无搜索结果';
             }
-            $this->set('search', $res);
         }
+        $this->set('search', $res);
         $this->set('alert', $alert);
         $isApply = [];
         if ($this->user) {
@@ -391,6 +392,7 @@ class ActivityController extends AppController {
         $industries = $this->Activity->Industries->find()->hydrate(false)->all()->toArray();
         $industries = $this->tree($industries);
         $this->set('industries', $industries);
+        $this->set('pageTitle', '搜索');
     }
 
     /**
@@ -422,7 +424,7 @@ class ActivityController extends AppController {
         $this->set(array(
             'industries' => $industries
         ));
-        $this->set('pagetitle', '行业标签');
+        $this->set('pageTitle', '行业标签');
     }
 
     /**

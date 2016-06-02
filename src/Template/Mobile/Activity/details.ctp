@@ -2,7 +2,7 @@
     <header>
         <div class='inner'>
             <a href='#this' class='toback'></a>
-            <h1><?= $pagetitle ?></h1>
+            <h1><?= $pageTitle ?></h1>
             <!--<a href="#this" class='iconfont collection h-regiser'>&#xe610;</a> // 收藏图标-->
             <a href="#this" class='iconfont share h-regiser'>&#xe614;</a>
         </div>
