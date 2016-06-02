@@ -50,9 +50,16 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #222c38; }
 input::-moz-placeholder { /* Mozilla Firefox 4 to 18 */ color: #222c38; } 
 input::-moz-placeholder { /* Mozilla Firefox 19+ */ color: #222c38; } 
 input::-ms-input-placeholder { /* Internet Explorer 10+ */ color: #222c38; } 
-.alert{width:2rem;height:0.8rem;background: rgba(0,0,0,0.5);border-radius: 0.15rem;line-height: 0.8rem;text-align: center; position:fixed;left:50%;top:50%;
-	z-index: 999;margin-left:-1rem;margin-top:-0.4rem;color:#fff;font-size:0.28rem;display:none}
-
+.a-search input::-webkit-input-placeholder { /* WebKit browsers */ color: #fff; } 
+.a-search input::-moz-placeholder { /* Mozilla Firefox 4 to 18 */ color: #fff; } 
+.a-search input::-moz-placeholder { /* Mozilla Firefox 19+ */ color: #fff; } 
+.a-search input::-ms-input-placeholder { /* Internet Explorer 10+ */ color: #fff; } 
+.alert{position:fixed;
+	z-index: 999;color:#fff;font-size:0.28rem;left:0;top:0;bottom:0;right:0;margin:auto;width:50%;font-size:0.3rem;
+	display: -webkit-flex;display:-moz-flex;display:-ms-flex;display: flex;
+	-webkit-justify-content: center;-moz-justify-content: center;-ms-justify-content: center;justify-content: center;
+	-webkit-align-items:center;-moz-align-items:center;-ms-align-items:center;align-items: center;}
+.alert span{line-height: 0.38rem;text-align: center;background: rgba(0,0,0,0.5);border-radius: 0.15rem;padding:0.3rem;}
 /*web字体图标*/
 @font-face {font-family: 'iconfont';
     src: url('../font/iconfont.eot'); /* IE9*/
