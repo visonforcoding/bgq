@@ -13,6 +13,7 @@ use Cake\I18n\Time;
  * @property \App\Controller\Component\BusinessComponent $Business
  * @property \App\Controller\Component\WxComponent $Wx
  * @property \App\Controller\Component\WxpayComponent $Wxpay
+ * @property \App\Controller\Component\SmsComponent $Sms
  */
 class HomeController extends AppController {
 
@@ -276,14 +277,12 @@ class HomeController extends AppController {
         $book = $BookTable->get($id,[
             'contain'=>['Users'=>function($q){
                  return $q->select(['truename','id','avatar','company','position']);
-            },'Subjects']
+            },'Subjects','Lmorder']
         ]);
         $subject = $book->subject;
         $this->set(compact('subject','book'));
     }
-
-
-
+ 
 
     /**
      * 我的约见 (我是专家)
@@ -300,8 +299,66 @@ class HomeController extends AppController {
     }
     
     
-
+       
+    /**
+     * 我的约见 我是专家详情
+     * @param type $id
+     */
+    public function myBookSavantDetail($id=null){
+        $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+        $book = $BookTable->get($id,[
+            'contain'=>['Users'=>function($q){
+                 return $q->select(['truename','id','avatar','company','position','phone','email']);
+            },'Subjects','Users.Industries']
+        ]);
+        $subject = $book->subject;
+        $this->set(compact('subject','book'));
+    }
     
+    
+    /**
+     * 同意约见 约见状态更改->生成一条订单(目前对前台用户暂时没作用)
+     */
+    public function bookOk(){
+        if($this->request->is('post')){
+            $id = $this->request->data('id'); //book id
+            $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+            $book = $BookTable->get($id,[
+                'contain'=>[
+                    'Subjects',
+                    'Users'
+                ]
+            ]);
+            $book->status = 1; //更改
+            $OrderTable = \Cake\ORM\TableRegistry::get('order');
+            $order = $OrderTable->newEntity([
+                'type'=>1,
+                'relate_id'=>$id,   //预定表的id
+                'user_id'=>  $book->user_id,
+                'seller_id'=> $book->savant_id,
+                'order_no'=>  time().$book->user_id.$id.  createRandomCode(2,2),
+                'price'=>  $book->subject->price,
+                'remark'=>'预约话题'.$book->subject->title
+            ]);
+            $transRes = $BookTable->connection()->transactional(function()use($book, $BookTable, $order, $OrderTable) {
+                return $BookTable->save($book)&&$OrderTable->save($order);
+            });
+            if ($transRes) {
+                //短信和消息通知
+                $this->loadComponent('Sms');
+                $msg = "您预约的话题：《".$book->subject->title."》已确认通过，请及时登录平台支付预约款。";
+                $this->Sms->sendByQf106($book->user->phone, $msg);
+                $this->loadComponent('Business');
+                $this->Business->usermsg($book->user_id,'预约通知',$msg, 4, $id);
+                $this->Util->ajaxReturn(true,'处理成功!');
+            }else{
+                $this->Util->ajaxReturn(false,'服务器出错!');
+            }
+        }
+    }
+
+
+
     /***
      * 我的钱包
      */

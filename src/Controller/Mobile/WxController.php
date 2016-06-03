@@ -11,6 +11,7 @@ use EasyWeChat\Foundation\Application as WXSDK;
  *
  * @property \App\Model\Table\UserTable $User
  * @property \App\Controller\Component\WxComponent $Wx
+ * @property \App\Controller\Component\WxpayComponent $Wxpay
  */
 class WxController extends AppController {
 
@@ -48,10 +49,9 @@ class WxController extends AppController {
         $this->redirect($wx_code_url);
     }
 
-    /*     * ***
+    /* *
      * 获取code->获取openid user 信息 业务处理
      */
-
     public function getUserCode() {
         $code = $this->request->query('code');
         $wxconfig = \Cake\Core\Configure::read('weixin');
@@ -93,14 +93,12 @@ class WxController extends AppController {
      */
     public function getUserCodeBase() {
         $res = $this->Wx->getUser();
-        if ($res) {
-            if (isset($res->openid)) {
-                $open_id = $res->openid;
-                $user = $this->User->findByWx_openid($open_id)->first();
-                if ($user) {
-                    //通过微信 获取到 在平台上有绑定的用户  就默认登录
-                    $this->request->session()->write('User.mobile', $user);
-                }
+        if (isset($res->openid)) {
+            $open_id = $res->openid;
+            $user = $this->User->findByWx_openid($open_id)->first();
+            if ($user) {
+                //通过微信 获取到 在平台上有绑定的用户  就默认登录
+                $this->request->session()->write('User.mobile', $user);
             }
         }
         //无论怎样 必须要跳会首页
@@ -109,25 +107,33 @@ class WxController extends AppController {
 
     /**
      * 预约支付页  此页面URL 需在微信公众号的微信支付那里配置 支付域
-     * @param int $id  预定id
+     * @param int $id  订单id
      */
     public function meetPay($id = null) {
-        $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
-        $book = $BookTable->get($id, [
-            'contain' => ['Subjects']
+        $OrderTable = \Cake\ORM\TableRegistry::get('Order');
+        $order = $OrderTable->get($id, [
+            'contain' => ['SubjectBook','SubjectBook.Subjects']
         ]);
-        $body = '预约话题支付';
+        $body = '预约话题《'.$order->subject_book->subject->title.'》支付';
         $openid = $this->user->wx_openid;
-        $out_trade_no = createRandomCode(12);
-        //$fee = intval(($book->subject->price)*100);  //支付金额(分)
+        $out_trade_no = $order->order_no;
+        //$fee = intval(($order->price)*100);  //支付金额(分)
         $fee = 1;  //测试时 1分
-        $notify_url = 'ttt';
         $this->loadComponent('Wxpay');
-        $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, $notify_url);
+        $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee);
         $this->set(array(
             'jsApiParameters' => $jsApiParameters,
         ));
+        $book = $order->subject_book;
         $this->set(compact('book'));
+    }
+    
+    /**
+     * 微信的异步回调通知
+     */
+    public function wxNotify(){
+       $this->loadComponent('Wxpay');
+       $this->Wxpay->notify();exit();
     }
 
 }

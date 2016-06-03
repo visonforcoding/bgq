@@ -107,7 +107,7 @@ class UserTable extends Table {
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules) {
-        $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->isUnique(['email'],'邮箱被占用'));
         $rules->add($rules->isUnique(['phone']));
         $rules->add($rules->existsIn(['industry_id'], 'Industries'));
         return $rules;

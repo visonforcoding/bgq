@@ -348,5 +348,40 @@ class BusinessComponent extends Component {
             return false;
         }
     }
+    
+    /**
+     * 处理订单业务
+     * @param \App\Model\Entity\Order $order
+     */
+    public function handOrder(\App\Model\Entity\Order $order){
+        if($order->type==1){
+            //处理预约
+            $this->handMeetOrder($order);
+        }
+    }
+    
+    /**
+     * 处理预约订单
+     * @param \App\Model\Entity\Order $order
+     */
+    protected function handMeetOrder(\App\Model\Entity\Order $order){
+        $book_id = $order->relate_id;
+        $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+        $book = $BookTable->get($book_id);
+        $book->status = 3; //预约流程完成
+        $order->status = 1;  //订单完成
+//        $order->seller->money += $order->price;
+        $order->seller->money = 111;
+        debug($order);
+        $order->dirty('Sellers',true);
+        debug($order);
+        $OrderTable = \Cake\ORM\TableRegistry::get('Order');
+        $OrderTable->save($order,['associated' => ['Sellers']]);
+        exit();
+        $transRes = $BookTable->connection()->transactional(function()use($order,$BookTable,$book,$OrderTable){
+            return $OrderTable->save($order,['associated' =>['Sellers']])&&$BookTable->save($book);
+        });
+        debug($transRes);
+    }
 
 }

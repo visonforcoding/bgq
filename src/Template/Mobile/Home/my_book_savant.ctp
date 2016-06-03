@@ -17,6 +17,7 @@
         </div>
     </div>
     <?php foreach($books as $book): ?>
+    <a href="/home/my-book-savant-detail/<?=$book->id?>">
         <section class="internet-v-info no-margin-top">
             <div class="innercon">
                 <span class="head-img"><img src="<?=$book->user->avatar?>"/><i></i></span>
@@ -29,5 +30,6 @@
                 </div>
             </div>
         </section>
+    </a>
     <?php endforeach;?>
 </div>
