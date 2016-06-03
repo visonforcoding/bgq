@@ -7,6 +7,7 @@ use Cake\Controller\ComponentRegistry;
 
 /**
  * Wxpay component  用于微信支付
+ * @property \App\Controller\Component\BusinessComponent $Business
  */
 class WxpayComponent extends Component {
 
@@ -23,6 +24,14 @@ class WxpayComponent extends Component {
     protected $key;
     protected $sslcert_path = '../cert/apiclient_cert.pem';
     protected $sslkey_path = '../cert/apiclient_key.pem';
+    protected $notify_url;
+    /**
+     * Default configuration.
+     *
+     * @var array
+     */
+    protected $_defaultConfig = [];
+    public $components = ['Business'];
 
     public function initialize(array $config) {
         parent::initialize($config);
@@ -33,14 +42,9 @@ class WxpayComponent extends Component {
         $this->sslcert_path = $wxconfig['sslcert_path'];
         $this->sslkey_path = $wxconfig['sslkey_path'];
         $this->key = $wxconfig['key'];
+        $this->notify_url = $this->request->scheme() . '://' . $_SERVER['SERVER_NAME'] . $wxconfig['notify_url'];
     }
 
-    /**
-     * Default configuration.
-     *
-     * @var array
-     */
-    protected $_defaultConfig = [];
 
     /**
      * 
@@ -68,6 +72,7 @@ class WxpayComponent extends Component {
                     </xml>';
         $ip = $this->request->clientIp();
         $nonce_str = createRandomCode(16);
+        $notify_url = empty($notify_url) ? $this->notify_url : $notify_url;
         $params = [
             'appid' => $this->app_id,
             'body' => $body,
@@ -88,7 +93,7 @@ class WxpayComponent extends Component {
             \Cake\Log\Log::error($res);
             return false;
         }
-        $body = (array)simplexml_load_string($res->body(), 'SimpleXMLElement', LIBXML_NOCDATA);
+        $body = (array) simplexml_load_string($res->body(), 'SimpleXMLElement', LIBXML_NOCDATA);
         if ($body['return_code'] == 'SUCCESS' && $body['result_code'] == 'SUCCESS') {
             return $body;
         } else {
@@ -127,8 +132,7 @@ class WxpayComponent extends Component {
         $params['paySign'] = $sign;
         return $params;
     }
-    
-    
+
     /**
      * 直接获取 支付参数
      * @param type $body
@@ -138,14 +142,37 @@ class WxpayComponent extends Component {
      * @param type $notify_url
      * @return boolean
      */
-    public function getPayParameter($body, $openid, $out_trade_no, $fee, $notify_url = null){
+    public function getPayParameter($body, $openid, $out_trade_no, $fee, $notify_url = null) {
         $res = $this->unifiedorder($body, $openid, $out_trade_no, $fee, $notify_url);
-        if($res){
+        if ($res) {
             $prepay_id = $res['prepay_id'];
             $pay_param = $this->setPayParameter($prepay_id);
             return $pay_param;
-        }else{
+        } else {
             return false;
+        }
+    }
+
+    
+    /**
+     * 专家预约 付款 状态更改为完成 流程完毕
+     * @return boolean
+     */
+    public function notify() {
+        $data = $this->request->input('Cake\Utility\Xml::build');
+        if ($data->result_code != 'SUCCESS') {
+            (new \Cake\Mailer\Email())
+                    ->to('caowenpeng1990@126.com')
+                    ->subject('微信回调失败')
+                    ->send('微信回调失败:'.$data->result_msg);
+            \Cake\Log\Log::error($data->result_msg);
+            return false;
+        }
+        $order_no = $data->out_trade_no;
+        $OrderTable = \Cake\ORM\TableRegistry::get('Order');
+        $order = $OrderTable->find()->contain(['Sellers'])->where(['Lmorder.status'=>0,'order_no'=>$order_no])->first();
+        if($order){
+            $this->Business->handOrder($order);
         }
     }
 

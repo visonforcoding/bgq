@@ -2,20 +2,20 @@
 
 namespace App\Model\Table;
 
-use App\Model\Entity\SubjectBook;
+use App\Model\Entity\Order;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * SubjectBook Model
+ * Order Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Subjects
+ * @property \Cake\ORM\Association\BelongsTo $Relates
  * @property \Cake\ORM\Association\BelongsTo $Users
- * @property \Cake\ORM\Association\BelongsTo $Savants
+ * @property \Cake\ORM\Association\BelongsTo $Sellers
  */
-class SubjectBookTable extends Table {
+class OrderTable extends Table {
 
     /**
      * Initialize method
@@ -26,18 +26,14 @@ class SubjectBookTable extends Table {
     public function initialize(array $config) {
         parent::initialize($config);
 
-        $this->table('subject_book');
+        $this->table('`order`');
         $this->displayField('id');
         $this->primaryKey('id');
+        $this->alias('Lmorder');  //因为使用了系统关键字
 
-        $this->hasOne('Lmorder',[
-            'className'=>'Order',
-            'foreignKey'=>'relate_id',
-            'joinType'=>'INNER'
-        ]);
-        $this->belongsTo('Subjects', [
-            'className' => 'MeetSubject',
-            'foreignKey' => 'subject_id',
+        $this->belongsTo('SubjectBook', [
+            'className'=>'SubjectBook',
+            'foreignKey' => 'relate_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Users', [
@@ -45,9 +41,9 @@ class SubjectBookTable extends Table {
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Savants', [
+        $this->belongsTo('Sellers', [
             'className' => 'User',
-            'foreignKey' => 'savant_id',
+            'foreignKey' => 'seller_id',
             'joinType' => 'INNER'
         ]);
         $this->addBehavior('Timestamp', [
@@ -72,23 +68,23 @@ class SubjectBookTable extends Table {
                 ->allowEmpty('id', 'create');
 
         $validator
-                ->requirePresence('summary', 'create')
-                ->notEmpty('summary');
+                ->integer('type')
+                ->requirePresence('type', 'create')
+                ->notEmpty('type');
 
         $validator
-                ->integer('status')
-                ->requirePresence('status', 'create')
-                ->notEmpty('status');
+                ->requirePresence('order_no', 'create')
+                ->notEmpty('order_no');
 
         $validator
-                ->dateTime('create_time')
-                ->requirePresence('create_time', 'create')
-                ->notEmpty('create_time');
+                ->decimal('price')
+                ->requirePresence('price', 'create')
+                ->notEmpty('price');
+
 
         $validator
-                ->dateTime('update_time')
-                ->requirePresence('update_time', 'create')
-                ->notEmpty('update_time');
+                ->requirePresence('remark', 'create')
+                ->notEmpty('remark');
 
         return $validator;
     }
@@ -101,9 +97,8 @@ class SubjectBookTable extends Table {
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules) {
-        $rules->add($rules->existsIn(['subject_id'], 'Subjects'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['savant_id'], 'Savants'));
+        $rules->add($rules->existsIn(['seller_id'], 'Sellers'));
         return $rules;
     }
 

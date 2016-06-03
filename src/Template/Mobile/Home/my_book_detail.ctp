@@ -40,7 +40,7 @@
         </ul>
     </section>
     <?php if($book->status==1):?>
-    <a href="/wx/meet-pay/<?=$book->id?>" class="nextstep">去付款</a>
+    <a href="/wx/meet-pay/<?=$book->lmorder->id?>" class="nextstep">去付款</a>
     <?php endif;?>
     <?php if($book->status==0):?>
         <a href="#this" class="nextstep">取消预约</a>

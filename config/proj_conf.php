@@ -41,7 +41,7 @@ return [
         ],
       '4'=>[
             'table'=>'subject_book',
-            'remark'=>'话题被预约',
+            'remark'=>'话题预约',
             'url'=>'/home/my-book-savant'
         ]
     ],

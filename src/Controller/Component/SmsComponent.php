@@ -47,7 +47,7 @@ class SmsComponent extends Component {
         $response = $http->post($url, $requestData);
         if ($response->isOk()) {
             $body = Xml::toArray(Xml::build($response->body()));
-            if ($body['returnsms']['returnstatus']&&$body['returnsms']['message']) {
+            if($body['returnsms']['successCounts']) {
                 $smsTable = \Cake\ORM\TableRegistry::get('smsmsg');
                 $sms = $smsTable->newEntity([
                     'phone'=>$mobile,
@@ -58,6 +58,7 @@ class SmsComponent extends Component {
                 $smsTable->save($sms);
                 return true;
             } else {
+                \Cake\Log\Log::error('【短信接口】:'.$body['returnsms']['message']);
                 return false;
             }
         } else {
