@@ -28,7 +28,7 @@
         </section>
         <section class="a-detail newscomment-box">
             <h3  class="comment-title">活动流程</h3>
-            <div style="padding-left: 0.2rem;"><?= $activity->body; ?></div>
+            <div><?= $activity->body; ?></div>
         </section>
         <section class="a-detail newscomment-box guests">
             <?php if ($activity->guest): ?>
