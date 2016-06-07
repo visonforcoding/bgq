@@ -29,7 +29,7 @@
                 <div class="collapse navbar-collapse navbar-collapse-example">
                     <ul class="nav navbar-nav navbar-avatar navbar-right">
                         <li>
-                            <?= $this->cell('Wpadmin.inbox:display') ?>
+                            <?= $this->cell('Wpadmin.inbox') ?>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -50,7 +50,7 @@
             </nav>
         </header>
         <div id="left-bar" style="width: 200px">
-            <?= $this->cell('Wpadmin.menu:display') ?>
+            <?= $this->cell('Wpadmin.menu') ?>
         </div>
         <div id="main-content">
             <div id="breadcrumb">
