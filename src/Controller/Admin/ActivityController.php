@@ -117,7 +117,6 @@ class ActivityController extends AppController {
      * @return json
      */
     public function getDataList() {
-        debug($this->Activity->find()->toArray());die;
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
@@ -148,9 +147,9 @@ class ActivityController extends AppController {
         $nums = $query->count();
         $query->contain(['Industries']);
 
-//        if (!empty($sort) && !empty($order)) {
-//            $query->order([$sort => $order]);
-//        }
+        if (!empty($sort) && !empty($order)) {
+            $query->order([$sort => $order]);
+        }
 
         $query->limit(intval($rows))
                 ->page(intval($page));
