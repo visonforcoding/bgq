@@ -46,7 +46,7 @@
                     if (msg.status === true) {
                         $.util.alert(msg.msg);
                         setTimeout(function () {
-                            window.location.href = '/activity/activity';
+                            window.location.href = '/activity/index';
                         }, 3000);
                     } else {
                         $.util.alert(msg.msg);
