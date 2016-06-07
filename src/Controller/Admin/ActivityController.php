@@ -48,8 +48,6 @@ class ActivityController extends AppController {
             $activity->admin_id = $this->_user->id;
             $activity->user_id = $this->_user->id;
             $activity->publisher = $this->_user->truename;
-            debug($activity);
-            die;
             if ($this->Activity->save($activity)) {
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {
