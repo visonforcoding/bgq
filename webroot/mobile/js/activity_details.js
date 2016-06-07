@@ -46,33 +46,32 @@ activity.prototype.bindEvent = function () {
             });
         }
         if (em.id.indexOf('reply_') != -1) {
-            if ($('#article_comment').attr('user_id'))
-            {
-                if($(em).attr('user_id') == $('#article_comment').attr('user_id'))
-                {
+            if ($('#article_comment').attr('user_id')) {
+                if($(em).attr('user_id') == $('#article_comment').attr('user_id')) {
                     return;
                 }
                 $('.reply-shadow').show();
                 $('.reply').show();
                 var comid = $(em).attr('value');
                 $('#publish-reply').attr('value', comid);
-            } else
-            {
+            } else {
+                $.util.alert('请先登录');
+            }
+        }
+        // 点击评论
+        if(em.id.indexOf('article_comment_') != -1){
+            if ($(em).attr('user_id')) {
+                $('.article-shadow').show();
+                $('.article').show();
+            } else {
                 $.util.alert('请先登录');
             }
         }
         switch (em.id) {
-            // 点击评论
-            case 'article_comment':
-                if ($(em).attr('user_id'))
-                {
-                    $('.article-shadow').show();
-                    $('.article').show();
-                } else {
-                    $.util.alert('请先登录');
-                }
+            // 回到顶部
+            case 'toTop':
+                window.scrollTo(0,0);
                 break;
-
             // 取消评论
             case 'cancel':
                 setTimeout(function () {
@@ -103,9 +102,9 @@ activity.prototype.bindEvent = function () {
                     url: '/activity/collect/' + $(em).attr('artid'),
                     func: function (msg) {
                         if (typeof msg === 'object') {
-                            console.log(msg);
                             if (msg.status === true) {
-                                $('.collect').toggleClass('changecolor');
+                                $.util.alert(msg.msg);
+                                $(em).toggleClass('active');
                             } else {
                                 $.util.alert(msg.msg);
                             }

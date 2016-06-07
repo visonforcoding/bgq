@@ -2,9 +2,9 @@
 <body>
     <header>
         <div class='inner'>
-            <a class='subactivity' id="release" user="<?= $user; ?>">发布活动</a>
-            <h1><?= $pageTitle ?></h1>
-            <a href="/activity/search" class='iconfont news-serch h-regiser'>&#xe613;</a>
+            <h1>
+                <?= $pageTitle; ?>
+            </h1>
         </div>
     </header>
 
@@ -19,6 +19,14 @@
                 <?php foreach ($banners as $v): ?>
                     <span class="cur"></span>
                 <?php endforeach; ?>
+            </div>
+            <div class="a-search-box">
+                <div class="a-search">
+                    <i class="iconfont">&#xe613;</i>
+                    <div class="s-con">
+                        <input type="text" placeholder="请输入关键词" class="search"/>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="activity"></div>
@@ -50,7 +58,9 @@
 <script type="text/html" id="subTpl">
     <a href="#this">{#name#}</a>
 </script>
-
+<div class="submitbtn subactivity" id="release" user="<?= $user; ?>">
+    <span>发布<br />活动</span>
+</div>
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>
 <script src="/mobile/js/loopScroll.js"></script>
@@ -62,10 +72,17 @@
         d.industries_name = $.util.dataToTpl('', 'subTpl', d.industries);
         return d;
     });
-    
-    //轮播
-    var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span')); 
-    
 
+    //轮播
+    var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
+
+    $('.s-con').click(function () {
+        $('.search').focus();
+    });
+
+    $('.search').focus(function () {
+        location.href = "/activity/search";
+    });
 </script>
-<?php $this->end('script');
+<?php
+$this->end('script');
