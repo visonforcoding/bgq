@@ -50,15 +50,15 @@
             </nav>
         </header>
         <div id="left-bar" style="width: 200px">
-            <?= $this->cell('Wpadmin.menu') ?>
+            <?= $this->cell('Wpadmin.Menu') ?>
         </div>
         <div id="main-content">
             <div id="breadcrumb">
-                <?= $this->cell('Wpadmin.menu::bread') ?>
+                <?= $this->cell('Wpadmin.Menu::bread') ?>
             </div>
             <div id="page-content">
                 <div class="page-header" >
-                    <?= $this->cell('Wpadmin.menu::title') ?>
+                    <?= $this->cell('Wpadmin.Menu::title') ?>
                 </div>
                 <div class="page-main" style="margin-top: 10px;">
                     <?php if (isset($NO_PERMISSION)): ?>
