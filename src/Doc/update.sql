@@ -125,4 +125,4 @@ CREATE TABLE `like_logs` (
 COMMENT='点赞日志表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
-#=======06.07=======
+#=======06.07  已执行=======
