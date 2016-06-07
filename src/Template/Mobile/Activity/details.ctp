@@ -30,7 +30,7 @@
         </section>
         <section class="a-detail newscomment-box">
             <h3  class="comment-title">活动流程</h3>
-            <div><?= $activity->body; ?></div>
+            <div class="innercon"><?= $activity->body; ?></div>
         </section>
         <section class="a-detail newscomment-box guests">
             <?php if ($activity->guest): ?>
