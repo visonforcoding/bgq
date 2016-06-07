@@ -63,7 +63,6 @@
         </section>
     <?php endif; ?>
 </div>
-<div class="alert" id="alertPlan"></div>
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>
 <script src="/mobile/js/activity_search.js"></script>

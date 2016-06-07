@@ -23,11 +23,6 @@
                 $('.activity_icon').css({color:'#dd204b'});
                 $('.activity_icon span').css({color:'#dd204b'});
             }
-            else if(window.location.href.indexOf('news') != -1)
-            {
-                $('.news_icon').css({color:'#dd204b'});
-                $('.news_icon span').css({color:'#dd204b'});
-            }
             else if(window.location.href.indexOf('meet') != -1)
             {
                 $('.meet_icon').css({color:'#dd204b'});
@@ -38,8 +33,13 @@
                 $('.home_icon').css({color:'#dd204b'});
                 $('.home_icon span').css({color:'#dd204b'});
             }
+            else
+            {
+                $('.news_icon').css({color:'#dd204b'});
+                $('.news_icon span').css({color:'#dd204b'});
+            }
         </script>
         <?= $this->fetch('script') ?>
-        <div class="alert" id="alertPlan"><span id="alertText"></span></div>
+        <div class="alert" id="alertPlan" style="display:none;"><span id="alertText"></span></div>
     </body>
 </html>

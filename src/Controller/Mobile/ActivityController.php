@@ -277,13 +277,13 @@ class ActivityController extends AppController {
         $this->handCheckLogin();
         $this->loadComponent('Business');
         $res = $this->Business->commentPraise($this->user->id, $id, 0);
-        if($res !== false)
-        {
+        if ($res !== false) {
+            if ($res !== true) {
+                $this->Util->ajaxReturn(false, $res);
+            }
             $res['status'] = true;
             $this->Util->ajaxReturn($res);
-        }
-        else
-        {
+        } else {
             $this->Util->ajaxReturn(false, '系统错误');
         }
     }

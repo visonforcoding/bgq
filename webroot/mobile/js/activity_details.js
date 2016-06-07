@@ -27,6 +27,7 @@ activity.prototype.bindEvent = function () {
             $.util.ajax({
                 url: '/activity/comLike/' + $(em).attr('comid'),
                 func: function (msg) {
+                    console.log(msg);
                     if (typeof msg === 'object') {
                         if (msg.status === true) {
                             var num = $('#addnum_' + $(em).attr('comid')).siblings('b').text();
@@ -46,8 +47,8 @@ activity.prototype.bindEvent = function () {
             });
         }
         if (em.id.indexOf('reply_') != -1) {
-            if ($('#article_comment').attr('user_id')) {
-                if($(em).attr('user_id') == $('#article_comment').attr('user_id')) {
+            if ($('#article_comment_1').attr('user_id')) {
+                if($(em).attr('user_id') == $('#article_comment_1').attr('user_id')) {
                     return;
                 }
                 $('.reply-shadow').show();

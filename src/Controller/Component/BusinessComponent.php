@@ -227,7 +227,7 @@ class BusinessComponent extends Component {
         $comlike = $ComLikeTable->find()->where($data)->first();
         if ($comlike) {
             //点过赞
-            return false;
+            return '你已点过赞';
         }
         $comlike = $ComLikeTable->newEntity($data);
         if (!$ComLikeTable->save($comlike)) {

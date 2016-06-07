@@ -28,7 +28,7 @@
         </section>
         <section class="a-detail newscomment-box">
             <h3  class="comment-title">活动流程</h3>
-            <?= $activity->body; ?>
+            <div style="padding-left: 0.2rem;"><?= $activity->body; ?></div>
         </section>
         <section class="a-detail newscomment-box guests">
             <?php if ($activity->guest): ?>
@@ -62,7 +62,7 @@
                             <a href='javascript:void(0);'><img src="<?= $v['avatar']; ?>"/></a>
                         <?php endforeach; ?>
                     <?php else : ?>
-                        暂时无人报名
+                            <div style="font-size:0.2rem;line-height: 0.22rem;">暂时无人报名</div>
                     <?php endif; ?>
                 </div>
                 <!-- <span>显示全部</span> -->
@@ -133,7 +133,7 @@
 <script type="text/html" id="comment_tpl">
     <div class="items">
         <div class="comm-info clearfix">
-            <span><img init_src="{#user_avatar#}"/></span>
+            <span><img src="{#user_avatar#}"/></span>
             <span class="infor-comm">
                 <i class="username">{#user_truename#} {#reply#}</i>
                 <i class="job">{#user_company#} {#user_position#}</i>
