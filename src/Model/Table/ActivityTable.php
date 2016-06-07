@@ -76,7 +76,7 @@ class ActivityTable extends Table {
         $this->belongsTo('Likelogs', [
             'foreignKey' => 'relate_id',
             'joinType' => 'INNER',
-            'className' => 'Likelogs',
+            'className' => 'like_logs',
         ]);
 
         $this->addBehavior('Timestamp', [
