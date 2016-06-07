@@ -82,9 +82,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">摘要</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('summary', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <script name='summary' id='summary' rows='3' type="text/plain" class='form-control-editor'><?= $activity->summary ?></script>
         </div>
     </div>
     <div class="form-group">
