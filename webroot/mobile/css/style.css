@@ -531,3 +531,15 @@ display: flex; flex-direction: column;justify-content: center; align-items: cent
 .datetime{font-size:0.26rem;}
 .systerm-info-box span{font-size:0.26rem;line-height:0.42rem;}
 .systerm-info-box h3{line-height: 0.42rem;}
+.expert-commond{background: #f0eff5;position: relative;}
+.expert-commond:before{content:'专家推荐';color:#7a7e83;position: absolute;width:1.2rem;height:0.24rem;
+top:-0.1rem;left:50%;margin-left:-0.52rem;background: #f0eff5;text-align: center;font-size:0.22rem;}
+.expert-commond ul{display: flex;height:2.65rem;flex-wrap: wrap;align-items: center;justify-content: space-between;background: #f0eff5;border-top:#c8c7cc 1px solid;}
+.expert-commond ul li{width:3rem;}
+
+.expert-commond li a{display: block;overflow:hidden;}
+.expert-commond img{float:left;width:0.62rem;height:0.62rem;border-radius: 50%;}
+.expert-commond h3{float:left;font-size:0.26rem;margin-left:0.3rem;color:#7a7e83;line-height: 0.35rem;}
+.expert-commond h3 span{display: block;font-size:0.2rem;color:#9ba4ad;}
+.companyinfo{position:fixed;bottom:0.42rem;width:100%;}
+.companyinfo p{line-height: 0.3rem;font-size:0.22rem;color:#c8ccd3;text-align: center;}
