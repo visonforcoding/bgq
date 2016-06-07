@@ -367,7 +367,7 @@ border-right:1px #c8c7cc solid;border-bottom:1px #c8c7cc solid;}
 .add-subject{height:0.9rem;line-height:0.9rem;border-bottom:1px #c8c7cc solid;font-size:0.3rem;color:#222c38;display: flex; justify-content: center;}
 .add-subject span{background: url(img/add.png) no-repeat left center;background-size: 0.3rem 0.3rem; padding-left:0.4rem;}
 /*个人中心*/
-.myhome{background: #d72355;}
+.myhome{background: #d72355;position:fixed;}
 .h-home-bottom{height:2.17rem;margin:0.5rem 0 0.14rem;display: flex; justify-content: center;align-items: center; flex-direction:column;color:#fff;}
 .h-home-bottom div span{width:1.12rem;height:1.12rem;display:inline-block;position:relative;}
 .h-home-bottom div span:after{content: '';position: absolute;background: url(img/v.png) no-repeat;right:0;bottom:0;width:0.29rem;height:0.3rem;background-size:cover ;}
