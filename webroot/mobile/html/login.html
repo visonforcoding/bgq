@@ -14,12 +14,12 @@
 	<body>
 		<header>
 			<div class='inner'>
-				<a href='#this' class='toback'></a>
+				<a href='javascript:history.go(-1);' class='toback'></a>
 				<h1>
 					
 					登录
 				</h1>
-				<a href="regiser.html" class='h-regiser'>注册</a>
+				
 			</div>
 		</header>
 		
@@ -32,12 +32,13 @@
 						<button class="clearfix">获取验证码</button>
 					</div>
 					</div>
-					<a href="javascript:void(0);" class="submit" >确定</a>
+					<a href="activity.html" class="submit redshadow" >确定</a>
+					<a href="register-org.html" class='historyinfo colore01'>注册</a>
 				</form>
-				<div class="tips" style='display:none'>
+				<!--<div class="tips" style='display:none'>
 					<p>你输入的账号不正确！</p>
 					<span class="closed">确定</span>
-				</div>
+				</div>-->
 		</div>
 	</div>
 	<footer>
@@ -48,7 +49,7 @@
 			</a>
 		</div>
 	</footer>
-	<div class="alert">
+	<div class="alert" style="display: none;">
 		<span>你输入的账号不正确！</span>
 	</div>
 	</body>

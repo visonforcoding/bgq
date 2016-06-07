@@ -13,26 +13,28 @@
 		
 	</head>
 	<body>
-		<header class="my-focus-box">
+		<header>
 			<div class='inner'>
-				<a href='#this' class='toback iconfont news-serch'>&#xe613;</a>
-				<h1>
-					
-					<input type="text" placeholder="请输入关键词">
-				</h1>
-				<a href="javascript:void(0);" class='h-regiser'>取消</a>
+				<a href='javascript:history.go(-1);' class='toback'></a>
+				<h1>搜索</h1>
+				<!--<a href="javascript:void(0);" class='h-regiser'>取消</a>-->
 			</div>
-			<div class='inner my-search'>
-				
-				<h3 style="display: none;">
-					<span>搜索结果</span>
-					
-				</h3>
-				<h3>未搜索到相关结果</h3>
-			</div>
+			
 		</header>
 		
-		<div class="wraper my-wraper" style="display: none;">
+		<div class="wraper">
+			<div class="my-focus-box">
+				<div class='inner my-search'>
+					<a href='#this' class='toback iconfont news-serch'>&#xe613;</a>
+					<h1><input type="text" placeholder="请输入关键词"></h1>
+				</div>
+			</div>
+			<div class="hf20"></div>
+			<div class='my-search bbottom'>
+				<h3><span>未搜索到相关结果</span></h3>
+				
+			</div>
+			
 			<section class="internet-v-info">
 				<div class="innercon">
 					<span class="head-img"><img src="../images/vip.png"/><i></i></span>
