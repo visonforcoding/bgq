@@ -417,7 +417,9 @@ display:-webkit-flex;display:-moz-flex;display:-ms-flex;display: flex;
 .e-info-box input{width:5rem; text-align: right; border:none;outline:none;}
 .e-info-box .no-right-ico{background: none;padding-right:0;}
 .e-info-box .nobga{align-items:center;display:-webkit-flex;display:-moz-flex;display:-ms-flex;display: flex;
--webkit-justify-content:space-between;-moz-justify-content:space-between;-ms-justify-content:space-between;justify-content:space-between;}
+-webkit-justify-content:space-between;-moz-justify-content:space-between;-ms-justify-content:space-between;justify-content:space-between;    background: url(img/right.png) no-repeat right center;
+    background-size: 0.18rem 0.25rem;
+    padding-right: 0.38rem;}
 .checked-sex{height:3.05rem;background: #fff;}
 .checked-sex .h-checked-sex{display: flex;justify-content: space-between;align-items: center;height:0.88rem;padding:0 0.3rem;margin-bottom:0.15rem;}
 .checked-sex h3{color:#333;font-size:0.32rem;}
@@ -432,7 +434,7 @@ display:-webkit-flex;display:-moz-flex;display:-ms-flex;display: flex;
 .edit-education-bottom .education-title{line-height: 0.79rem;font-size:0.28rem;color:#d3265b; padding:0 0.3rem;}}
 .edit-education-bottom h3{width:100%;}
 .edit-education-bottom h3 a{float:right;color:#3e82f7}
-.edit-education-bottom li:last-of-type{flex-direction: column;}
+.edit-education-bottom li.textareabox{flex-direction: column;}
 .edit-education-bottom li:last-of-type span,.edit-education-bottom li:last-of-type .edit-textarea{width:100%; margin-bottom:0.2rem;margin-top:0.1rem;}
 .bbottom .orgtitle .orgname{background: none;}
 /*我的关注*/
