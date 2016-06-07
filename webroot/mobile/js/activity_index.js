@@ -2,7 +2,6 @@ var activity = function () {
     var opt = {
         page:2
     };
-
     $.extend(this, opt);
 };
 

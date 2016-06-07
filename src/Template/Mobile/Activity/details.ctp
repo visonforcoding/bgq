@@ -1,14 +1,14 @@
 <body>
     <header>
         <div class='inner'>
-            <a href='#this' class='toback'></a>
-            <h1><?= $pageTitle ?></h1>
-            <!--<a href="#this" class='iconfont collection h-regiser'>&#xe610;</a> // 收藏图标-->
-            <a href="#this" class='iconfont share h-regiser'>&#xe614;</a>
+            <a href='javascript:history.go(-1);' class='toback'></a>
+            <h1>
+                活动详情
+            </h1>
         </div>
     </header>
 
-    <div class="wraper" style="margin-bottom:2rem;">
+    <div class="wraper" style="margin-bottom:1rem;" id="isTop">
         <section class="newscon-box a-detail">
             <h3><?= $activity->title; ?></h3>
             <img src="<?= $activity->cover; ?>"/>
@@ -46,9 +46,9 @@
                     <i class="iconfont like <?php if ($isLike): ?> changecolor<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like">&#xe616;</i>
                 </span>
                 <!--收藏按钮-->
-                <span>
+<!--                <span>
                     <i class='iconfont collect h-regiser <?php if ($isCollect): ?> changecolor<?php endif; ?>' artid="<?= $activity->id; ?>" type="0" id="collect">&#xe610;</i>
-                </span>
+                </span>-->
             </div>
         </section>
         <section class="newscomment-box joinnumber">
@@ -75,12 +75,11 @@
             <h3 class="comment-title">
                 评论
                 <i class="iconfont">&#xe618;</i>
-                <span id="article_comment" user_id="<?= $user; ?>">我要点评</span>
+                <span id="article_comment_1" user_id="<?= $user; ?>">我要点评</span>
             </h3>
             <div id="comment"></div>
             <div id="buttonLoading" class="loadingbox"></div>
         </section>
-        <footer class="footer">
             <div class="a-btn">
                 <a href="/activity/recommend/<?= $activity->id; ?>">我要推荐</a>
                 <?php if ($isApply != ''): ?>
@@ -93,7 +92,14 @@
                     <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
                 <?php endif; ?>
             </div>
-        </footer>
+    </div>
+    <!--底部四个图-->
+
+    <div class="iconlist">
+        <span class="iconfont" id="article_comment_2" user_id="<?= $user; ?>">&#xe618;</span>
+        <span class="iconfont<?php if (!$isCollect): ?> active<?php endif; ?>" id="collect" artid="<?= $activity->id; ?>">&#xe610;</span>
+        <span class="iconfont">&#xe614;</span>
+        <span class="iconfont" id='toTop'></span>
     </div>
     <div class="reg-shadow article-shadow" ontouchmove="return false;" hidden>
         <div class="shadow-info a-shadow a-forword article">
@@ -108,6 +114,7 @@
             </ul>
         </div>
     </div>
+
     <div class="reg-shadow reply-shadow" ontouchmove="return false;" hidden>
         <div class="shadow-info a-shadow a-forword reply">
             <ul>

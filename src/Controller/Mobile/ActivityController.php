@@ -68,7 +68,6 @@ class ActivityController extends AppController {
             $activity->read_nums += 1; // 阅读加1
             $this->Activity->save($activity);
             $this->set('activity', $activity);
-            $this->set('user', $this->user->id);
 
             if ($this->user) {
                 // 是否已报名
@@ -101,6 +100,8 @@ class ActivityController extends AppController {
                         ->where(['user_id' => $this->user->id, 'relate_id' => $id])
                         ->first();
                 $isCollect = !$isCollect['is_delete'];
+                
+                $this->set('user', $this->user->id);
             } else {
                 $this->set('user', '');
                 $isApply = [];
