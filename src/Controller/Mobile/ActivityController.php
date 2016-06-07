@@ -88,7 +88,7 @@ class ActivityController extends AppController {
                 // 是否已赞
                 $isLike = $this
                         ->Activity
-                        ->LikeLogs
+                        ->like_logs
                         ->find()
                         ->where(['user_id' => $this->user->id, 'relate_id' => $id])
                         ->first();
