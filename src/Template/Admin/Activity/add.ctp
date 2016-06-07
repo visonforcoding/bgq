@@ -106,6 +106,7 @@
 $(function () {
     initJqupload('cover', '/wpadmin/util/doUpload?dir=newscover', 'jpg,png,gif,jpeg'); //初始化图片上传
     var ue = UE.getEditor('content'); //初始化富文本编辑器
+    UE.getEditor('summary');
     $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
     $('#select-industry').select2({
         language: "zh-CN",
