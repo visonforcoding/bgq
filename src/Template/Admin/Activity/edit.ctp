@@ -9,7 +9,7 @@
     	<div class="form-group">
 	        <label class="col-md-2 control-label">未通过审核理由</label>
 	        <div class="col-md-8">
-	                        <?php
+                    <?php
 	            echo $this->Form->input('reason', ['label' => false, 'class' => 'form-control']);
 	            ?>
 	        </div>
@@ -18,7 +18,7 @@
         <div class="form-group">
 	        <label class="col-md-2 control-label">作者id</label>
 	        <div class="col-md-8">
-	                        <?php
+                    <?php
 	            echo $this->Form->input('admin_id', ['label' => false, 'class' => 'form-control']);
 	            ?>
 	        </div>
@@ -32,7 +32,7 @@
         <div class="form-group">
         <label class="col-md-2 control-label">主办单位</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('company', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
@@ -40,7 +40,7 @@
         <div class="form-group">
         <label class="col-md-2 control-label">活动名称</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('title', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
@@ -48,7 +48,7 @@
         <div class="form-group">
         <label class="col-md-2 control-label">活动时间（3.2~4.1）</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('time', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
@@ -56,7 +56,7 @@
         <div class="form-group">
         <label class="col-md-2 control-label">地点</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('address', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
@@ -64,7 +64,7 @@
         <div class="form-group">
         <label class="col-md-2 control-label">规模</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('scale', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
@@ -72,7 +72,7 @@
         <div class="form-group">
         <label class="col-md-2 control-label">阅读数</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('read_nums', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
@@ -80,7 +80,7 @@
         <div class="form-group">
         <label class="col-md-2 control-label">点赞数</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('praise_nums', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
@@ -90,7 +90,7 @@
         <div class="col-md-8">
         <?php
             echo $this->Form->input('comment_nums', ['label' => false, 'class' => 'form-control']);
-		?>
+        ?>
         </div>
     </div>
         <div class="form-group">
@@ -112,19 +112,19 @@
         <div class="form-group">
 	        <label class="col-md-2 control-label">摘要</label>
 	        <div class="col-md-8">
-		            <script name='summary' id='summary' rows='3' type="text/plain" class='form-control-editor'><?= $activity->summary ?></script>
-		        </div>
+                    <script name='summary' id='summary' rows='3' type="text/plain" class='form-control-editor'><?= $activity->summary ?></script>
+                </div>
 	    </div>
 	    <div class="form-group">
 	        <label class="col-md-2 control-label">参与嘉宾</label>
 	        <div class="col-md-8">
-		            <script name='guest' id='guest' rows='3' type="text/plain" class='form-control-editor'><?= $activity->guest ?></script>
-		        </div>
+                    <script name='guest' id='guest' rows='3' type="text/plain" class='form-control-editor'><?= $activity->guest ?></script>
+                </div>
 	    </div>
         <div class="form-group">
         <label class="col-md-2 control-label">创建时间</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('create_time', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
@@ -132,7 +132,7 @@
         <div class="form-group">
         <label class="col-md-2 control-label">更新时间</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('update_time', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
