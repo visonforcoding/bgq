@@ -114,6 +114,7 @@
 
 
                 //无参数   无回调
+                case "share.banner":
                 case "hide.share":
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {}, '');
