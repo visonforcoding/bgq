@@ -42,9 +42,6 @@
             <li><a id="cancel" href="javascript:void(0);">取消</a><a id="submit" href="javascript:void(0);">发表</a></li>
         </ul>
     </div>
-    <div class="alert">
-        已收藏
-    </div>
 </div>
 <script type="text/html" id="listTpl">
     <div class="items">
@@ -55,7 +52,8 @@
                 <i class="job">{#user_company#} {#user_position#}</i>
             </span>
             <span data-disable="{#disable#}" data-id="{#id#}" id="praise_{#id#}">
-                <b class="addnum">+1</b><i    style="{#style#}"  class="iconfont praise">&#xe615;</i>
+                <b class="addnum">+1</b>
+                <i style="{#style#}" class="iconfont praise">&#xe615;</i>
                 <em>{#praise_nums#}</em>
             </span>
         </div>
