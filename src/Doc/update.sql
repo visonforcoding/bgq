@@ -10,28 +10,28 @@ CREATE TABLE `need` (
 )
 COMMENT='小秘书'
 COLLATE='utf8_general_ci'
-ENGINE=InnoDB
+ENGINE=InnoDB;
 
 #活动增加发布审查
-ALTER TABLE activity add is_check TINYINT(2) DEFAULT 0 COMMENT '是否审核，0：未审核；1：发布；2：未通过审核'
+ALTER TABLE activity add is_check TINYINT(2) DEFAULT 0 COMMENT '是否审核，0：未审核；1：发布；2：未通过审核';
 
 #活动增加是否置顶
-ALTER TABLE activity add is_top TINYINT(2) DEFAULT 0 COMMENT '是否置顶'
+ALTER TABLE activity add is_top TINYINT(2) DEFAULT 0 COMMENT '是否置顶';
 
 #活动增加报名人数
-ALTER TABLE activity add apply_nums INT(11) DEFAULT 0 COMMENT '报名人数'
+ALTER TABLE activity add apply_nums INT(11) DEFAULT 0 COMMENT '报名人数';
 
 #活动增加报名费用
-ALTER TABLE activity add apply_fee INT(11) DEFAULT 0 COMMENT '报名费用'
+ALTER TABLE activity add apply_fee INT(11) DEFAULT 0 COMMENT '报名费用';
 
 #活动增加参与嘉宾
-ALTER TABLE activity add guest varchar(255) COMMENT '参与嘉宾'
+ALTER TABLE activity add guest varchar(255) COMMENT '参与嘉宾';
 
 #活动增加未通过审查理由
-ALTER TABLE activity add reason varchar(255) COMMENT '未通过审核理由'
+ALTER TABLE activity add reason varchar(255) COMMENT '未通过审核理由';
 
 #活动增加是否众筹
-ALTER TABLE activity add is_crowdfunding TINYINT(2) DEFAULT 0 COMMENT '是否众筹活动'
+ALTER TABLE activity add is_crowdfunding TINYINT(2) DEFAULT 0 COMMENT '是否众筹活动';
 
 #活动评论
 CREATE TABLE `activitycom` (
@@ -47,7 +47,7 @@ CREATE TABLE `activitycom` (
 )
 COMMENT='活动评论表'
 COLLATE='utf8_general_ci'
-ENGINE=InnoDB
+ENGINE=InnoDB;
 
 #活动申请
 CREATE TABLE `activityapply` (
@@ -62,7 +62,7 @@ CREATE TABLE `activityapply` (
 )
 COMMENT='活动申请表'
 COLLATE='utf8_general_ci'
-ENGINE=InnoDB
+ENGINE=InnoDB;
 
 #活动-我要推荐
 CREATE TABLE `sponsor` (
@@ -82,7 +82,7 @@ CREATE TABLE `sponsor` (
 )
 COMMENT='活动赞助表'
 COLLATE='utf8_general_ci'
-ENGINE=InnoDB
+ENGINE=InnoDB;
 
 #评论点赞
 CREATE TABLE `comment_like` (
@@ -95,7 +95,7 @@ CREATE TABLE `comment_like` (
 )
 COMMENT='评论点赞表'
 COLLATE='utf8_general_ci'
-ENGINE=InnoDB
+ENGINE=InnoDB;
 
 #活动标签
 CREATE TABLE `activity_industry` (
@@ -106,10 +106,10 @@ CREATE TABLE `activity_industry` (
 )
 COMMENT='活动标签表'
 COLLATE='utf8_general_ci'
-ENGINE=InnoDB.
+ENGINE=InnoDB;
 
 #活动评论增加回复人id
-ALTER TABLE activitycom add reply_id INT COMMENT '回复用户id'
+ALTER TABLE activitycom add reply_id INT COMMENT '回复用户id';
 
 #文章点赞
 CREATE TABLE `like_logs` (
@@ -124,4 +124,5 @@ CREATE TABLE `like_logs` (
 )
 COMMENT='点赞日志表'
 COLLATE='utf8_general_ci'
-ENGINE=InnoDB
+ENGINE=InnoDB;
+#=======06.07=======
