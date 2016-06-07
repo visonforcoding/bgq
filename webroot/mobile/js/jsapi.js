@@ -75,19 +75,14 @@
         "share.QQfriend",
         "share.WX",
         "share.WXfriend",
+        "share.WB",
         "env.hasQQ",
         "env.hasWX",
         'login.wx',
         "event.getLocation",
-        "event.beginOrder",
-        "event.endOrder",
-        "event.setOrder", //将订单号和上传图片张数传给客户端
-        "event.getLocation",
         "event.tel",
-        "event.uploadPic",
         "event.uploadPhoto",
-        "event.reuploadPhoto",
-        "event.getDistance"];
+        "event.reuploadPhoto"];
 
     for (var i = 0, len = apiList.length; i < len && apiList[i]; i++) {
         (function (api) { //api eg:'share.qq'
@@ -119,8 +114,6 @@
 
 
                 //无参数   无回调
-                case "event.beginOrder":
-                case "event.endOrder":
                 case "hide.share":
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {}, '');
@@ -137,16 +130,9 @@
                         return JSApiInvoke(api, {tel:arguments[0]}, '');
                     });
                     break;
-                case "event.setOrder":
-                    registerAPI(null,api,function(){
-                       return JSApiInvoke(api,{order:arguments[0],count:arguments[1]}, '');
-                    });
-                    break;
                 //无参数 只用到callback
                 case "event.getLocation":
-                case "event.uploadPic":
                 case "event.uploadPhoto":
-                case "event.getDistance":
                     registerAPI(null, api, function () {
                         JSApiInvoke(api, {}, apiCallback(arguments[0]));
                     });
@@ -163,7 +149,7 @@
                 case "share.QQfriend":
                 case "share.WX":
                 case "share.WXfriend":
-                case "share.Weibo":
+                case "share.WB":
                     registerAPI(null, api, function () {
                         var param = arguments[0] || window.shareConfig, cb = arguments[1] || function () {
                             }; //这里ios一定要callback
