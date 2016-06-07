@@ -14,16 +14,20 @@
 	<body>
 		<header>
 			<div class='inner'>
-				<a href='#this' class='toback iconfont news-serch'>&#xe613;</a>
-				<h1>
-					
-					<input type="text" placeholder="请输入关键词">
-				</h1>
-				<a href="javascript:void(0);" class='h-regiser'>取消</a>
+				<a href='javascript:history.go(-1);' class='toback'></a>
+				<h1>搜索</h1>
+				<!--<a href="javascript:void(0);" class='h-regiser'>取消</a>-->
 			</div>
 		</header>
 		
 		<div class="wraper my-search-mark">
+			<div class="my-focus-box">
+				<div class='inner my-search'>
+					<a href='#this' class='toback iconfont news-serch'>&#xe613;</a>
+					<h1><input type="text" placeholder="请输入关键词"></h1>
+				</div>
+			</div>
+			<div class="hf20"></div>
 			<div class="items">
 				<div class="orgtitle  innerwaper">
 					<span class="orgname">投资机构</span>

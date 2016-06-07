@@ -9,7 +9,11 @@
 		<title>并购圈</title>
 		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
-		<script src="../js/view.js"></script>
+	 	<script src="../js/view.js"></script>
+        <script src="../js/jquery.js"></script>
+        <script ssssrc="../js/zepto.min.js"></script>
+        <script src="../js/loopScroll.js"></script>
+        <script src="../js/util.js"></script>
 	</head>
 	<body>
 		<header>
@@ -19,12 +23,12 @@
 					资讯
 					
 				</h1>
-				<a href="#this" class='iconfont news-serch h-regiser'>&#xe613;</a>
+				<!--<a href="#this" class='iconfont news-serch h-regiser'>&#xe613;</a>-->
 			</div>
 		</header>
 		
-		<div class="wraper newswraper">
-			<div class="a-banner">
+		<div class="wraper newswraper" id="wraper">
+			<div class="a-banner" >
 				<ul class="pic-list-container" id="imgList">
 					<li><a href="#this"><img src="../images/a-banner.png"/></a></li>
 					<li><a href="#this"><img src="../images/banner.jpg"/></a></li>
@@ -35,10 +39,18 @@
 					<span></span>
 					<span></span>
 				</div>
+				<div class="a-search-box">
+					<div class="a-search">
+						<a href="news-search.html"><i class="iconfont">&#xe613;</i></a>
+						<div class="s-con">
+							<input type="text" placeholder="请输入关键词" />
+						</div>
+					</div>
+				</div>
 			</div>
 			<section class='news-list-items '>
-				<h1 class="firstnews"><span><img src="images/user.png" /></span>王璟</h1>
-				<a href="#this" class="newsbox clearfix">
+				<h1 class="firstnews"><span><img src="../images/user.png" /></span>王璟</h1>
+				<a href="news-content.html" class="newsbox clearfix">
 					<div class="sec-news-l">
 						<h3>什么人适合做并购？</h3>
 						<p>一笔并购重组业务，一般是交给一种人在管控，至于【这个人】到底
@@ -67,7 +79,7 @@
 			
 			<section class='news-list-items'>
 				<h1><span><img src="../images/user.png" /></span>王璟</h1>
-				<a href="#this" class="newsbox clearfix">
+				<a href="news-content.html" class="newsbox clearfix">
 					<div class="sec-news-l">
 						<h3>什么人适合做并购？</h3>
 						<p>一笔并购重组业务，一般是交给一种人在管控，至于【这个人】到底
@@ -96,7 +108,7 @@
 			
 			<section class='news-list-items'>
 				<h1><span><img src="../images/user.png" /></span>王璟</h1>
-				<a href="#this" class="newsbox clearfix">
+				<a href="news-content.html" class="newsbox clearfix">
 					<div class="sec-news-l">
 						<h3>什么人适合做并购？</h3>
 						<p>一笔并购重组业务，一般是交给一种人在管控，至于【这个人】到底
@@ -125,7 +137,7 @@
 			
 			<section class='news-list-items'>
 				<h1><span><img src="../images/user.png" /></span>王璟</h1>
-				<a href="#this" class="newsbox clearfix">
+				<a href="news-content.html" class="newsbox clearfix">
 					<div class="sec-news-l">
 						<h3>什么人适合做并购？</h3>
 						<p>一笔并购重组业务，一般是交给一种人在管控，至于【这个人】到底
@@ -157,21 +169,24 @@
 		<ul class="navfooter clearfix">
 			<li>
 				<span class="iconfont">&#xe601;</span>
-				<a href="#this">活动</a>
+				<a href="activity.html">活动</a>
 			</li>
 			<li class="active">
 				<span class="iconfont">&#xe609;</span>
-				<a href="#this">资讯</a>
+				<a href="news.html">资讯</a>
 			</li>
 			<li>
 				<span class="iconfont">&#xe60b;</span>
-				<a href="#this">大咖</a>
+				<a href="meet.html">大咖</a>
 			</li>
 			<li>
 				<span class="iconfont">&#xe60d;</span>
-				<a href="#this">我</a>
+				<a href="myhome.html">我</a>
 			</li>
 		</ul>
 	</footer>
+	  <script>
+                var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
+            </script>
 	</body>
 </html>
