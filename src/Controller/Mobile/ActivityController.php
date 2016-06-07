@@ -259,9 +259,9 @@ class ActivityController extends AppController {
                 $industry->is_crowdfunding = 0;
             }
             if ($this->Activity->save($industry)) {
-                $this->Util->ajaxReturn(true, '发布成功');
+                $this->Util->ajaxReturn(true, '提交成功');
             } else {
-                $this->Util->ajaxReturn(false, '发布失败');
+                $this->Util->ajaxReturn(false, '提交失败');
             }
         } else {
             $this->set('industries', $industries);

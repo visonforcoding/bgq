@@ -40,24 +40,50 @@ activity.prototype.bindEvent = function () {
             $("input[name='sort']").attr('value', $(em).attr('value'));
         }
         switch (em.id) {
+            // 行业
             case 'choose_industry':
-                $(em).toggleClass('active');
-                if ($(em).hasClass('active') == true)
+                $('#choose_industries').toggleClass('active');
+                if ($('#choose_industries').hasClass('active') == true)
                 {
                     $('#choose_industry_ul').show();
-                    $('#choose_sort').removeClass('active');
+                    $('#choose_sorts').removeClass('active');
                     $('#sort_mark').hide();
                 } else
                 {
                     $('#choose_industry_ul').hide();
                 }
                 break;
+            case 'choose_industries':
+                $(em).toggleClass('active');
+                if ($(em).hasClass('active') == true)
+                {
+                    $('#choose_industry_ul').show();
+                    $('#choose_sorts').removeClass('active');
+                    $('#sort_mark').hide();
+                } else
+                {
+                    $('#choose_industry_ul').hide();
+                }
+                break;
+            // 排序
             case 'choose_sort':
+                $('#choose_sorts').toggleClass('active');
+                if ($('#choose_sorts').hasClass('active') == true)
+                {
+                    $('#sort_mark').show();
+                    $('#choose_industries').removeClass('active');
+                    $('#choose_industry_ul').hide();
+                } else
+                {
+                    $('#sort_mark').hide();
+                }
+                break;
+            case 'choose_sorts':
                 $(em).toggleClass('active');
                 if ($(em).hasClass('active') == true)
                 {
                     $('#sort_mark').show();
-                    $('#choose_industry').removeClass('active');
+                    $('#choose_industries').removeClass('active');
                     $('#choose_industry_ul').hide();
                 } else
                 {

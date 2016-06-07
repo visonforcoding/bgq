@@ -14,8 +14,8 @@
 <div class="fixedwraper" >
 
     <div class="news-classify">
-        <div class="classify-l fl ml">
-            <span id="choose_industry">选择行业</span>
+        <div class="classify-l fl ml" id="choose_industry">
+            <span id="choose_industries">选择行业</span>
             <ul class="all-industry" hidden id="choose_industry_ul">
                 <?php foreach ($industries as $k => $v): ?>
                     <?php if ($v['pid'] == 0): ?>
@@ -33,8 +33,8 @@
             </ul>
         </div>
 
-        <div class="classify-r fr">
-            <span id="choose_sort">排序</span>
+        <div class="classify-r fr" id="choose_sort">
+            <span id="choose_sorts">排序</span>
             <ul class="sort-mark" hidden id="sort_mark">
                 <li id="sort_mostapply" value="apply_nums" class="choose_sort_child"><a href="javascript:void(0)">报名最多</a></li>
                 <li id="sort_recently" value="create_time" class="choose_sort_child"><a href="javascript:void(0)">最近更新</a></li>
