@@ -32,7 +32,7 @@
     window.onActiveView = window.onActiveView || function () {
     };
     var LEMON = {};
-    window.__isAPP = LEMON.isAPP = window.JSApi || navigator.userAgent.toLowerCase().indexOf("ningmeng") >= 0;  //判断页面是否在app的环境中
+    window.__isAPP = LEMON.isAPP = window.JSApi || navigator.userAgent.toLowerCase().indexOf("smartlemon") >= 0;  //判断页面是否在app的环境中
 
     var isAPP = LEMON.isAPP;
     var registerAPI = function (obj, names, fun) {
