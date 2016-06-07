@@ -209,6 +209,7 @@
                     });
                 }
 
+                // 标签
                 function industryFormatter(cellvalue, options, rowObject) {
                     var industries = rowObject.industries;
                     response = '';
