@@ -38,7 +38,6 @@
     <div class="shadow-info a-shadow a-forword" style="display: none;">
         <ul>
             <li><textarea id="content" type="text" placeholder="请输入评论"></textarea></li>
-
             <li><a id="cancel" href="javascript:void(0);">取消</a><a id="submit" href="javascript:void(0);">发表</a></li>
         </ul>
     </div>
