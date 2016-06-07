@@ -29,7 +29,7 @@
                 <div class="collapse navbar-collapse navbar-collapse-example">
                     <ul class="nav navbar-nav navbar-avatar navbar-right">
                         <li>
-                            <?= $this->cell('Wpadmin.inbox') ?>
+                            
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
