@@ -1,13 +1,4 @@
-<!--<header id="header" class="ui-header ui-header-positive ui-border-b" style="display: none">
-    <i class="ui-icon-return" onclick="history.back()"></i>
-    <h1><?= $pageTitle ?></h1>
-    <?php if (isset($pageHeaderLink)): ?>
-        <button class="ui-btn"  onclick="document.location.href='<?=$pageHeaderLink?>'">
-        <?php else: ?>
-            <button class="ui-btn">
-    <?php endif; ?>
-    <?= isset($pageHeaderLinkLabel) ? $pageHeaderLinkLabel : '回首页' ?></button>
-</header>-->
+
 <header>
     <div class='inner'>
         <a href='javascript:history.go(-1);' class='toback'></a>
