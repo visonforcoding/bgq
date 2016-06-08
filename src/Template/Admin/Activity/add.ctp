@@ -53,6 +53,22 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">是否众筹</label>
+        <div class="col-md-8">
+            <?php
+            echo $this->Form->input('is_crowdfunding', ['type' => 'select', 'options' => ['0' => '否','1' => '是'], 'label' => false, 'class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">费用</label>
+        <div class="col-md-8">
+        <?php
+            echo $this->Form->input('apply_fee', ['label' => false, 'class' => 'form-control']);
+        ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">封面</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
