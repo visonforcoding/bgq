@@ -9,8 +9,8 @@
     <?= isset($pageHeaderLinkLabel) ? $pageHeaderLinkLabel : '回首页' ?></button>
 </header>
 
-<script>
+<!--<script>
     if(/smartlemon|micromessenger/.test(navigator.userAgent.toLowerCase())){
         document.getElementById('header').style.display = 'block';
     }
-</script>
+</script>-->
