@@ -68,7 +68,9 @@
 <script src="/mobile/js/activity_search.js"></script>
 <script>
     <?php if($alert): ?>
-        $.util.alert('<?= $alert; ?>');
+        setTimeout(function (){
+            $.util.alert('<?= $alert; ?>');
+        },500);
     <?php endif; ?>
 </script>
 <?php
