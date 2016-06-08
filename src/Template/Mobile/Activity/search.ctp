@@ -41,6 +41,7 @@
             </ul>
         </div>
     </div>
+    <div id="search">
     <?php if ($search): ?>
         <section class="my-collection-info" style="padding-bottom: 0.2rem;margin-bottom: 1rem;background: #fff;">
             <?php foreach ($search as $k => $v): ?>
@@ -62,6 +63,7 @@
             <?php endforeach; ?>
         </section>
     <?php endif; ?>
+    </div>
 </div>
 <div id="buttonLoading" class="loadingbox"></div>
 <?= $this->element('footer'); ?>
@@ -115,7 +117,7 @@
                             d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span><i>已报名</i></span>';
                             return d;
                         });
-                        $('#comment').append(html);
+                        $('#search').append(html);
                         page++;
                     }
                 });
