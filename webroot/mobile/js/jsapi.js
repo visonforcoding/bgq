@@ -69,6 +69,8 @@
     //api名称列表
     var apiList = ["db.get",
         "db.set",
+        "sys.version",
+        "sys.QRcode",
         "hide.share", //隐藏分享图标
         "show.search", //显示搜索
         "share.QQ",
@@ -113,9 +115,18 @@
                     break;
 
 
+                case "sys.version":
+                    registerAPI(null, api, function () {
+                        var invokeResult = JSApiInvoke(api, '', '', 'string');
+                        //alert(invokeResult);
+                        var re = JSON.parse(invokeResult);
+                        return re.data;
+                    });
+                    break;
                 //无参数   无回调
                 case "share.banner":
                 case "hide.share":
+                case "sys.QRcode":
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {}, '');
                     });
