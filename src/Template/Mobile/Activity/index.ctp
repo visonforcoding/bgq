@@ -8,7 +8,7 @@
         </div>
     </header>
 
-    <div class="wraper newswraper a-wraper">
+    <div class="wraper a-wraper">
         <div class="a-banner">
             <ul class="pic-list-container" id="imgList">
                 <?php foreach ($banners as $v): ?>
