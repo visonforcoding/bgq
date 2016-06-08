@@ -149,7 +149,6 @@ class ActivityController extends AppController {
             'order' => ['is_top' => 'DESC', 'create_time' => 'DESC'],
         ];
         $activity = $this->paginate($this->Activity->find()->where(['is_check' => 1]));
-// 			debug($activity);die;
         $this->set(compact('activity'));
         $this->set('_serialize', ['activity']);
         $isApply = [];
@@ -348,7 +347,8 @@ class ActivityController extends AppController {
             $res = $this
                     ->Activity
                     ->find()
-                    ->where(['title LIKE' => '%' . $data['keyword'] . '%']);
+                    ->where(['title LIKE' => '%' . $data['keyword'] . '%'])
+                    ->andWhere(['is_check'=>'1']);
             if ($data['industry_id']) {
                 $res = $res->contain([
                     'Industries' => function($q)use($industry_id) {
@@ -366,6 +366,7 @@ class ActivityController extends AppController {
                 $res->orderDesc('create_time'); // 默认按时间倒序排列
             }
             $res = $res
+                    ->limit($this->limit)
                     ->hydrate(false)
                     ->toArray();
             foreach ($res as $k=>$v)
@@ -378,10 +379,12 @@ class ActivityController extends AppController {
             if ($res == false || empty($res)) {
                 $alert = '暂无搜索结果';
             }
+            $this->set('keyword', $data['keyword']);
         }
         $this->set('search', $res);
         $this->set('alert', $alert);
         $isApply = [];
+        $is_apply = '';
         if ($this->user) {
             // 用户已报名的活动
             $activityApply = $this
@@ -392,16 +395,65 @@ class ActivityController extends AppController {
                     ->select(['activity_id'])
                     ->hydrate(false)
                     ->toArray();
-            $isApply = [];
             foreach ($activityApply as $k => $v) {
                 $isApply[] = $v['activity_id'];
             }
+            $is_apply = implode(',', $isApply);
         }
         $this->set('isApply', $isApply);
+        $this->set('is_apply', $is_apply);
         $industries = $this->Activity->Industries->find()->hydrate(false)->all()->toArray();
         $industries = $this->tree($industries);
         $this->set('industries', $industries);
         $this->set('pageTitle', '搜索');
+    }
+    
+    public function getMoreSearch($page, $industry_id, $sort, $keyword) {
+        $isApply = [];
+        if ($this->user) {
+            // 用户已报名的活动
+            $activityApply = $this
+                            ->Activity
+                            ->Activityapply
+                            ->find()
+                            ->where(['user_id' => $this->user->id])
+                            ->select(['activity_id'])
+                            ->hydrate(false)
+                            ->toArray();
+            foreach ($activityApply as $k => $v) {
+                $isApply[] = $v['activity_id'];
+            }
+            $isApply = implode(',', $isApply);
+        }
+        $this->set('is_apply', $isApply);
+        
+        $res = $this
+                ->Activity
+                ->find()
+                ->where(['title LIKE' => '%' . $keyword . '%'])
+                ->andWhere(['is_check'=>'1']);
+        if ($industry_id) {
+            $res = $res->contain([
+                'Industries' => function($q)use($industry_id) {
+                    return $q->where(['Industries.id' => $industry_id]);
+                }
+            ]);
+        } else {
+            $res = $res->contain(['Industries']);
+        }
+        if ($sort) {
+            $res->orderDesc($sort);
+        } else {
+            $res->orderDesc('create_time'); // 默认按时间倒序排列
+        }
+        $res = $res
+                ->page($page, $this->limit)
+                ->toArray();
+        if ($res) {
+            $this->Util->ajaxReturn(['status' => true, 'data' => $res]);
+        } else {
+            $this->Util->ajaxReturn(['status' => false]);
+        }
     }
 
     /**
@@ -528,6 +580,7 @@ class ActivityController extends AppController {
      * @param int $page 分页
      */
     public function getMoreActivity($page) {
+        $isApply = [];
         // 是否已报名
         if ($this->user) {
             $activityApply = $this->Activity
@@ -537,16 +590,13 @@ class ActivityController extends AppController {
                             ->where(['user_id' => $this->user->id])
                             ->hydrate(false)
                             ->toArray();
-            $isApply = [];
             foreach ($activityApply as $k => $v) {
                 $isApply[] = $v['activity_id'];
             }
             $isApply = implode(',', $isApply);
-            $this->set('isApply', $isApply);
-        } else {
-            $isApply = [];
-            $this->set('isApply', $isApply);
         }
+        $this->set('isApply', $isApply);
+        
         $activity = $this->Activity
                         ->find()
                         ->where(['is_check' => 1])

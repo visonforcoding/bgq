@@ -3,7 +3,7 @@
         <a href='#this' class='toback iconfont news-serch' id="toback">&#xe613;</a>
         <h1>
             <form action="" method="post">
-                <input type="text" placeholder="请输入关键词" name="keyword" />
+                <input type="text" placeholder="请输入关键词" name="keyword" value="<?php if($keyword){echo $keyword;} ?>" />
                 <input type="hidden" name="industry_id" value="" style="display:none;"/>
                 <input type="hidden" name="sort" value="" style="display:none;"/>
             </form>
@@ -63,8 +63,24 @@
         </section>
     <?php endif; ?>
 </div>
+<div id="buttonLoading" class="loadingbox"></div>
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>
+<script type="text/html" id="search_tpl">
+    <section class="my-collection-info" style="padding-bottom: 0.2rem;margin-bottom: 1rem;background: #fff;">
+            <div class="innercon">
+                <a href="/activity/details/{#id#}" class="clearfix">
+                    <span class="my-pic-acive"><img src="{#cover#}"/></span>
+                    <div class="my-collection-items">
+                        <h3>{#title#}</h3>
+                        {#apply_msg#}
+                        <span>{#address#}</span>
+                        <span>{#time#}<i>{#aplly_nums#}人报名</i></span>
+                    </div>
+                </a>
+            </div>
+    </section>
+</script>
 <script src="/mobile/js/activity_search.js"></script>
 <script>
     <?php if($alert): ?>
@@ -72,6 +88,40 @@
             $.util.alert('<?= $alert; ?>');
         },500);
     <?php endif; ?>
+    
+    <?php if($is_apply): ?>
+    window.isApply = ',' + <?= $is_apply ?> + ',';
+    <?php endif; ?>
+    var page = 2;
+    setTimeout(function () {
+        $(window).on("scroll", function () {
+            $.util.listScroll('items', function () {
+                if (page === 9999) {
+                    $('#buttonLoading').html('亲，没有更多资讯了');
+                    return;
+                }
+                $.util.showLoading('buttonLoading');
+                $.getJSON('/activity/getMoreSearch/' + page + '/' + $('input[name="industry_id"]').val() + '/' + $('input[name="sort"]').val() + '/' + $('input[name="keyword"]').val(), function (res) {
+                    $.util.hideLoading('buttonLoading');
+                    window.holdLoad = false;  //打开加载锁  可以开始再次加载
+
+                    if (!res.status) {  //拉不到数据了  到底了
+                        page = 9999;
+                        return;
+                    }
+
+                    if (res.status) {
+                        var html = $.util.dataToTpl('', 'search_tpl', res.data, function (d) {
+                            d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span><i>已报名</i></span>';
+                            return d;
+                        });
+                        $('#comment').append(html);
+                        page++;
+                    }
+                });
+            });
+        });
+    }, 2000);
 </script>
 <?php
 $this->end('script');
