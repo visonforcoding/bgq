@@ -339,77 +339,34 @@ class ActivityController extends AppController {
      * 活动搜索
      */
     public function search() {
-        $res = [];
-        $alert = '';
-        $data['keyword'] = '';
-        if ($this->request->is('post')) {
-            $data = $this->request->data();
-            $industry_id = $data['industry_id'];
-            $res = $this
-                    ->Activity
-                    ->find()
-                    ->where(['title LIKE' => '%' . $data['keyword'] . '%'])
-                    ->andWhere(['is_check'=>'1']);
-            if ($data['industry_id']) {
-                $res = $res->contain([
-                    'Industries' => function($q)use($industry_id) {
-                        return $q->where(['Industries.id' => $industry_id]);
-                    }
-                ]);
-            }
-            else
-            {
-                $res = $res->contain(['Industries']);
-            }
-            if ($data['sort']) {
-                $res->orderDesc($data['sort']);
-            } else {
-                $res->orderDesc('create_time'); // 默认按时间倒序排列
-            }
-            $res = $res
-                    ->limit($this->limit)
-                    ->hydrate(false)
-                    ->toArray();
-            foreach ($res as $k=>$v)
-            {
-                if($v['industries'] == [])
-                {
-                    unset($res[$k]);
-                }
-            }
-            if ($res == false || empty($res)) {
-                $alert = '暂无搜索结果';
-            }
-        }
-        $this->set('keyword', $data['keyword']);
-        $this->set('search', $res);
-        $this->set('alert', $alert);
-        $isApply = [];
-        $is_apply = '';
+        $isApply = '';
         if ($this->user) {
             // 用户已报名的活动
             $activityApply = $this
-                    ->Activity
-                    ->Activityapply
-                    ->find()
-                    ->where(['user_id' => $this->user->id])
-                    ->select(['activity_id'])
-                    ->hydrate(false)
-                    ->toArray();
+                            ->Activity
+                            ->Activityapply
+                            ->find()
+                            ->where(['user_id' => $this->user->id])
+                            ->select(['activity_id'])
+                            ->hydrate(false)
+                            ->toArray();
             foreach ($activityApply as $k => $v) {
                 $isApply[] = $v['activity_id'];
             }
-            $is_apply = implode(',', $isApply);
+            $isApply = implode(',', $isApply);
         }
         $this->set('isApply', $isApply);
-        $this->set('is_apply', $is_apply);
+        
         $industries = $this->Activity->Industries->find()->hydrate(false)->all()->toArray();
         $industries = $this->tree($industries);
         $this->set('industries', $industries);
         $this->set('pageTitle', '搜索');
     }
     
-    public function getMoreSearch($page, $industry_id, $sort, $keyword) {
+    
+    public function getSearchRes() {
+        $data = $this->request->data();
+        $industry_id = $data['industry_id'];
         $isApply = [];
         if ($this->user) {
             // 用户已报名的活动
@@ -431,7 +388,7 @@ class ActivityController extends AppController {
         $res = $this
                 ->Activity
                 ->find()
-                ->where(['title LIKE' => '%' . $keyword . '%'])
+                ->where(['title LIKE' => '%' . $data['keyword'] . '%'])
                 ->andWhere(['is_check'=>'1']);
         if ($industry_id) {
             $res = $res->contain([
@@ -442,18 +399,22 @@ class ActivityController extends AppController {
         } else {
             $res = $res->contain(['Industries']);
         }
-        if ($sort) {
-            $res->orderDesc($sort);
+        if ($data['sort']) {
+            $res->orderDesc($data['sort']);
         } else {
             $res->orderDesc('create_time'); // 默认按时间倒序排列
         }
         $res = $res
-                ->page($page, $this->limit)
+                ->limit($this->limit)
                 ->toArray();
-        if ($res) {
+        if ($res!=false) {
+            if($res == '')
+            {
+                $this->Util->ajaxReturn(false, '暂无搜索结果');
+            }
             $this->Util->ajaxReturn(['status' => true, 'data' => $res]);
         } else {
-            $this->Util->ajaxReturn(['status' => false]);
+            $this->Util->ajaxReturn(false, '系统错误');
         }
     }
 

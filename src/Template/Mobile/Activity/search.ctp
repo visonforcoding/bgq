@@ -1,14 +1,15 @@
+<?= $this->element('header'); ?>
 <header>
     <div class='inner'>
         <a href='#this' class='toback iconfont news-serch' id="toback">&#xe613;</a>
         <h1>
-            <form action="" method="post">
-                <input type="text" placeholder="请输入关键词" name="keyword" value="<?php if($keyword){echo $keyword;} ?>" />
-                <input type="hidden" name="industry_id" value="" style="display:none;"/>
-                <input type="hidden" name="sort" value="" style="display:none;"/>
+            <form id="searchForm" onsubmit="return false;">
+            <input type="text" placeholder="请输入关键词" name="keyword" />
+            <input type="hidden" name="industry_id" value="" style="display:none;"/>
+            <input type="hidden" name="sort" value="" style="display:none;"/>
             </form>
         </h1>
-        <a href="/activity/index" class='h-regiser'>取消</a>
+        <a href="javascript:void(0);" class='h-regiser' id="doSearch">搜索</a>
     </div>
 </header>
 <div class="fixedwraper" >
@@ -41,60 +42,29 @@
             </ul>
         </div>
     </div>
-    <div id="search">
-    <?php if ($search): ?>
-        <section class="my-collection-info" style="padding-bottom: 0.2rem;margin-bottom: 1rem;background: #fff;">
-            <?php foreach ($search as $k => $v): ?>
-                <div class="innercon">
-                    <a href="/activity/details/<?= $v['id']; ?>" class="clearfix">
-                        <span class="my-pic-acive"><img src="<?= $v['cover'] ?>"/></span>
-                        <div class="my-collection-items">
-                            <h3><?= $v['title'] ?></h3>
-                            <?php if ($isApply): ?>
-                                <?php if (in_array($v['id'], $isApply)): ?>
-                                    <span><i>已报名</i></span>
-                                <?php endif; ?>
-                            <?php endif; ?>
-                            <span><?= $v['address'] ?></span>
-                            <span><?= $v['time'] ?><i><?= $v['apply_nums'] ?>人报名</i></span>
-                        </div>
-                    </a>
-                </div>
-            <?php endforeach; ?>
-        </section>
-    <?php endif; ?>
-    </div>
+    <section class="my-collection-info" style="padding-bottom: 0.2rem;margin-bottom: 1rem;background: #fff;" id="search"></section>
 </div>
 <div id="buttonLoading" class="loadingbox"></div>
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>
 <script type="text/html" id="search_tpl">
-    <section class="my-collection-info" style="padding-bottom: 0.2rem;margin-bottom: 1rem;background: #fff;">
-        <div class="innercon">
-            <a href="/activity/details/{#id#}" class="clearfix">
-                <span class="my-pic-acive"><img src="{#cover#}"/></span>
-                <div class="my-collection-items">
-                    <h3>{#title#}</h3>
-                    {#apply_msg#}
-                    <span>{#address#}</span>
-                    <span>{#time#}<i>{#aplly_nums#}人报名</i></span>
-                </div>
-            </a>
-        </div>
-    </section>
+    <div class="innercon">
+        <a href="/activity/details/{#id#}" class="clearfix">
+            <span class="my-pic-acive"><img src="{#cover#}"/></span>
+            <div class="my-collection-items">
+                <h3>{#title#}</h3>
+                {#apply_msg#}
+                <span>{#address#}</span>
+                <span>{#time#}<i>{#aplly_nums#}人报名</i></span>
+            </div>
+        </a>
+    </div>
 </script>
 <script src="/mobile/js/activity_search.js"></script>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
-    <?php if($alert): ?>
-        setTimeout(function (){
-            $.util.alert('<?= $alert; ?>');
-        },500);
-    <?php endif; ?>
+    window.isApply = ',' + <?= $isApply ?> + ',';
     
-    <?php if($is_apply): ?>
-    window.isApply = ',' + <?= $is_apply ?> + ',';
-    <?php endif; ?>
     var page = 2;
     setTimeout(function () {
         $(window).on("scroll", function () {

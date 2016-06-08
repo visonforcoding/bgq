@@ -33,13 +33,75 @@ activity.prototype.bindEvent = function () {
             $('.choose_industry_child_li').removeClass('active');
             $(em).addClass('active');
             $("input[name='industry_id']").attr('value', $(em).attr('value'));
+            $('#choose_industries').html($(em).children('a').html());
+            $('#choose_industry_ul').hide();
+            $('#choose_industries').removeClass('active');
+            $.ajax({
+                type: 'post',
+                url: '/activity/getSearchRes',
+                data: $('#searchForm').serialize(),
+                dataType: 'json',
+                success: function (msg) {
+                    if (typeof msg === 'object') {
+                        if (msg.status === true) {
+                            var html = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                                d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == - 1 ? '' : '<span class="is-apply">已报名</span>';
+                                return d;
+                            });
+                        } else {
+                            $.util.alert(msg.msg);
+                        }
+                    }
+                }
+            });
         }
         if (em.id.indexOf('sort_') != -1) {
             $('.choose_sort_child').removeClass('active');
             $(em).addClass('active');
             $("input[name='sort']").attr('value', $(em).attr('value'));
+            $('#choose_sorts').html($(em).children('a').html());
+            $('#sort_mark').hide();
+            $('#choose_sorts').removeClass('active');
+            $.ajax({
+                type: 'post',
+                url: '/activity/getSearchRes',
+                data: $('#searchForm').serialize(),
+                dataType: 'json',
+                success: function (msg) {
+                    if (typeof msg === 'object') {
+                        if (msg.status === true) {
+                            var html = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                                d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == - 1 ? '' : '<span class="is-apply">已报名</span>';
+                                return d;
+                            });
+                        } else {
+                            $.util.alert(msg.msg);
+                        }
+                    }
+                }
+            });
         }
         switch (em.id) {
+            case 'doSearch':
+                $.ajax({
+                    type: 'post',
+                    url: '/activity/getSearchRes',
+                    data: $('#searchForm').serialize(),
+                    dataType: 'json',
+                    success: function (msg) {
+                        if (typeof msg === 'object') {
+                            if (msg.status === true) {
+                                var html = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                                    d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == - 1 ? '' : '<span class="is-apply">已报名</span>';
+                                    return d;
+                                });
+                            } else {
+                                $.util.alert(msg.msg);
+                            }
+                        }
+                    }
+                });
+                break;
             // 行业
             case 'choose_industry':
                 $('#choose_industries').toggleClass('active');
