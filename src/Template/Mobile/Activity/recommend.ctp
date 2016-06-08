@@ -1,6 +1,6 @@
 <header>
     <div class='inner'>
-        <a href='#this' class='toback' id="toback"></a>
+        <a href='javascript:void(0);' class='toback' id="toback"></a>
         <h1><?= $pageTitle; ?></h1>
 
     </div>

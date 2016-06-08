@@ -7,29 +7,29 @@
     <?= $this->Form->create($activity, ['class' => 'form-horizontal']) ?>
     <?php if($activity->is_check == 2): ?>
     	<div class="form-group">
-	        <label class="col-md-2 control-label">未通过审核理由</label>
-	        <div class="col-md-8">
-                    <?php
-	            echo $this->Form->input('reason', ['label' => false, 'class' => 'form-control']);
-	            ?>
-	        </div>
-	    </div>
+            <label class="col-md-2 control-label">未通过审核理由</label>
+            <div class="col-md-8">
+                <?php
+                echo $this->Form->input('reason', ['label' => false, 'class' => 'form-control']);
+                ?>
+            </div>
+        </div>
     <?php endif; ?>
-        <div class="form-group">
-	        <label class="col-md-2 control-label">作者id</label>
-	        <div class="col-md-8">
-                    <?php
-	            echo $this->Form->input('admin_id', ['label' => false, 'class' => 'form-control']);
-	            ?>
-	        </div>
-	    </div>
-        <div class="form-group">
-	        <label class="col-md-2 control-label">行业标签</label>
-	        <div class="col-md-8">
-	                <?= $this->cell('Industry',[$selIndustryIds]) ?>
-	        </div>
-	    </div>
-        <div class="form-group">
+    <div class="form-group">
+        <label class="col-md-2 control-label">作者id</label>
+        <div class="col-md-8">
+            <?php
+            echo $this->Form->input('admin_id', ['label' => false, 'class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">行业标签</label>
+        <div class="col-md-8">
+            <?= $this->cell('Industry',[$selIndustryIds]) ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">主办单位</label>
         <div class="col-md-8">
             <?php
@@ -37,7 +37,7 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">活动名称</label>
         <div class="col-md-8">
             <?php
@@ -45,7 +45,7 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">活动时间（3.2~4.1）</label>
         <div class="col-md-8">
             <?php
@@ -53,7 +53,7 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">地点</label>
         <div class="col-md-8">
             <?php
@@ -61,7 +61,7 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">规模</label>
         <div class="col-md-8">
             <?php
@@ -69,7 +69,7 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">阅读数</label>
         <div class="col-md-8">
             <?php
@@ -77,7 +77,7 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">点赞数</label>
         <div class="col-md-8">
             <?php
@@ -85,7 +85,7 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">评论数</label>
         <div class="col-md-8">
         <?php
@@ -93,35 +93,51 @@
         ?>
         </div>
     </div>
-        <div class="form-group">
-	        <label class="col-md-2 control-label">封面</label>
-	        <div class="col-md-8">
-	            <div  class="img-thumbnail input-img"  single>
-	                <img  alt="封面图片" src="<?= $activity->cover; ?>"/>
-	            </div>
-	            <input name="cover" value="<?= $activity->cover; ?>"  type="hidden"/>
-	            <div id="cover"   class="jqupload">上传</div>
-	        </div>
-	    </div>
-        <div class="form-group">
-	        <label class="col-md-2 control-label">内容</label>
-	        <div class="col-md-8">
-	            <script name='body' id='body' rows='3' type="text/plain" class='form-control-editor'><?= $activity->body ?></script>
-	        </div>
-	    </div>
-        <div class="form-group">
-	        <label class="col-md-2 control-label">摘要</label>
-	        <div class="col-md-8">
-                    <script name='summary' id='summary' rows='3' type="text/plain" class='form-control-editor'><?= $activity->summary ?></script>
-                </div>
-	    </div>
-	    <div class="form-group">
-	        <label class="col-md-2 control-label">参与嘉宾</label>
-	        <div class="col-md-8">
-                    <script name='guest' id='guest' rows='3' type="text/plain" class='form-control-editor'><?= $activity->guest ?></script>
-                </div>
-	    </div>
-        <div class="form-group">
+    <div class="form-group">
+        <label class="col-md-2 control-label">是否众筹</label>
+        <div class="col-md-8">
+            <?php
+            echo $this->Form->input('is_crowdfunding', ['type' => 'select', 'options' => ['0' => '否','1' => '是'], 'label' => false, 'class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">费用</label>
+        <div class="col-md-8">
+        <?php
+            echo $this->Form->input('apply_fee', ['label' => false, 'class' => 'form-control']);
+        ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">封面</label>
+        <div class="col-md-8">
+            <div  class="img-thumbnail input-img"  single>
+                <img  alt="封面图片" src="<?= $activity->cover; ?>"/>
+            </div>
+            <input name="cover" value="<?= $activity->cover; ?>"  type="hidden"/>
+            <div id="cover"   class="jqupload">上传</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">内容</label>
+        <div class="col-md-8">
+            <script name='body' id='body' rows='3' type="text/plain" class='form-control-editor'><?= $activity->body ?></script>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">摘要</label>
+        <div class="col-md-8">
+            <script name='summary' id='summary' rows='3' type="text/plain" class='form-control-editor'><?= $activity->summary ?></script>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">参与嘉宾</label>
+        <div class="col-md-8">
+            <script name='guest' id='guest' rows='3' type="text/plain" class='form-control-editor'><?= $activity->guest ?></script>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">创建时间</label>
         <div class="col-md-8">
             <?php
@@ -129,7 +145,7 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">更新时间</label>
         <div class="col-md-8">
             <?php
@@ -137,7 +153,7 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' />
             <a href="/admin/activitycom/index/<?= $activity->id; ?>" id='' class='btn btn-primary' data-loading='稍候...'>评论详情</a>
