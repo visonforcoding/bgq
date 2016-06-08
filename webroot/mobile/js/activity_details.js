@@ -57,18 +57,24 @@ activity.prototype.bindEvent = function () {
                 $('#publish-reply').attr('value', comid);
             } else {
                 $.util.alert('请先登录');
-            }
-        }
-        // 点击评论
-        if(em.id.indexOf('article_comment_') != -1){
-            if ($(em).attr('user_id')) {
-                $('.article-shadow').show();
-                $('.article').show();
-            } else {
-                $.util.alert('请先登录');
+                setTimeout(function () {
+                    location.href = '/user/login';
+                }, 2000);
             }
         }
         switch (em.id) {
+            // 点击评论
+            case 'article_comment':
+                if ($(em).attr('user_id')) {
+                    $('.article-shadow').show();
+                    $('.article').show();
+                } else {
+                    $.util.alert('请先登录');
+                    setTimeout(function () {
+                        location.href = '/user/login';
+                    }, 2000);
+                }
+                break;
             // 回到顶部
             case 'toTop':
                 window.scrollTo(0,0);
@@ -178,6 +184,9 @@ activity.prototype.bindEvent = function () {
                     location.href = '/activity/enroll/' + $(em).attr('activity_id');
                 } else {
                     $.util.alert('请先登录');
+                    setTimeout(function () {
+                        location.href = '/user/login';
+                    }, 2000);
                 }
                 break;
             case 'goTop':

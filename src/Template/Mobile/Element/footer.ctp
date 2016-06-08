@@ -16,7 +16,7 @@
 </footer>
 <script>
     if(navigator.userAgent.toLowerCase().indexOf('smartlemon') == -1){
-        document.getElementById('header').style.display = 'block';
+//        document.getElementById('header').style.display = 'block';
         document.getElementById('footer').style.display = 'block';
         $('.wraper').addClass('newswraper');
     }

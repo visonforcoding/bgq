@@ -77,7 +77,6 @@
             <h3 class="comment-title">
                 评论
                 <i class="iconfont">&#xe618;</i>
-                <span id="article_comment_1" user_id="<?= $user; ?>">我要点评</span>
             </h3>
             <div id="comment"></div>
             <div id="buttonLoading" class="loadingbox"></div>
@@ -98,7 +97,7 @@
     <!--底部四个图-->
 
     <div class="iconlist">
-        <span class="iconfont" id="article_comment_2" user_id="<?= $user; ?>">&#xe618;</span>
+        <span class="iconfont" id="article_comment" user_id="<?= $user; ?>">&#xe618;</span>
         <span class="iconfont<?php if (!$isCollect): ?> active<?php endif; ?>" id="collect" artid="<?= $activity->id; ?>" >&#xe610;</span>
         <span class="iconfont">&#xe614;</span>
         <span class="iconfont" id='toTop'></span>
