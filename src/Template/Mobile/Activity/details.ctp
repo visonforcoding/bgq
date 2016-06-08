@@ -155,7 +155,7 @@
         $(window).on("scroll", function () {
             $.util.listScroll('items', function () {
                 if (page === 9999) {
-                    $('#buttonLoading').html('亲，没有更多资讯了，请明天再来吧');
+                    $('#buttonLoading').html('亲，没有更多评论了');
                     return;
                 }
                 $.util.showLoading('buttonLoading');
