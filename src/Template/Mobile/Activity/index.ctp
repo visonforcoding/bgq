@@ -48,7 +48,7 @@
 </script>
 
 <script type="text/html" id="subTpl">
-    <a href="#this">{#name#}</a>
+    <a href="javascript:void(0);">{#name#}</a>
 </script>
 <div class="submitbtn subactivity" id="release" user="<?= $user; ?>">
     <span>发布<br />活动</span>

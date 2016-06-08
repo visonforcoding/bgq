@@ -69,23 +69,22 @@
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>
 <script type="text/html" id="search_tpl">
-    <div id="items">
-        <section class="my-collection-info" style="padding-bottom: 0.2rem;margin-bottom: 1rem;background: #fff;">
-            <div class="innercon">
-                <a href="/activity/details/{#id#}" class="clearfix">
-                    <span class="my-pic-acive"><img src="{#cover#}"/></span>
-                    <div class="my-collection-items">
-                        <h3>{#title#}</h3>
-                        {#apply_msg#}
-                        <span>{#address#}</span>
-                        <span>{#time#}<i>{#aplly_nums#}人报名</i></span>
-                    </div>
-                </a>
-            </div>
-        </section>
-    </div>
+    <section class="my-collection-info" style="padding-bottom: 0.2rem;margin-bottom: 1rem;background: #fff;">
+        <div class="innercon">
+            <a href="/activity/details/{#id#}" class="clearfix">
+                <span class="my-pic-acive"><img src="{#cover#}"/></span>
+                <div class="my-collection-items">
+                    <h3>{#title#}</h3>
+                    {#apply_msg#}
+                    <span>{#address#}</span>
+                    <span>{#time#}<i>{#aplly_nums#}人报名</i></span>
+                </div>
+            </a>
+        </div>
+    </section>
 </script>
 <script src="/mobile/js/activity_search.js"></script>
+<script src="/mobile/js/loopScroll.js"></script>
 <script>
     <?php if($alert): ?>
         setTimeout(function (){
