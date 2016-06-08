@@ -99,8 +99,12 @@ class ActivityController extends AppController {
                         ->find()
                         ->where(['user_id' => $this->user->id, 'relate_id' => $id])
                         ->first();
-                $isCollect = !$isCollect['is_delete'];
-                
+                if ($isCollect) {
+                    $isCollect = !$isCollect['is_delete'];
+                } else {
+                    $isCollect = 0;
+                }
+
                 $this->set('user', $this->user->id);
             } else {
                 $this->set('user', '');
