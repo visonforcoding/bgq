@@ -12,7 +12,7 @@
     <div class="items">
 
         <div class="orgmark">
-            <a href="#guest" class="agency-item" id="agency_item_1" type="1">嘉宾推荐</a><a href="#place" class="agency-item" id="agency_item_2" type="2">场地赞助</a><a href="#cash" class="agency-item" id="agency_item_3" type="3">现金赞助</a><a href="#goods" class="agency-item" id="agency_item_4" type="4">物品赞助</a><a href="#others" class="agency-item" id="agency_item_5" type="5">其它</a>
+            <a box_id="#guest" class="agency-item" id="agency_item_1" type="1">嘉宾推荐</a><a box_id="#place" class="agency-item" id="agency_item_2" type="2">场地赞助</a><a box_id="#cash" class="agency-item" id="agency_item_3" type="3">现金赞助</a><a box_id="#goods" class="agency-item" id="agency_item_4" type="4">物品赞助</a><a box_id="#others" class="agency-item" id="agency_item_5" type="5">其它</a>
         </div>
     </div>
     <div class="h20"></div>
@@ -20,7 +20,7 @@
         <input type="text" name="type" hidden value="" />
         <div class="a-form-box" id="guest">
             <ul>
-                <li>
+<!--                <li>
                     <span>姓名</span>
                     <input type="text" name="name"/>
                 </li>
@@ -35,26 +35,26 @@
                 <li>
                     <span>职务</span>
                     <input type="text" name="position" />
-                </li>
+                </li>-->
                 <li>
-                    <i>经验简介</i>
+                    <i>嘉宾简介</i>
                     <textarea name="description"></textarea>
                 </li>
             </ul>
         </div>
         <div class="a-form-box" id="place">
             <ul>
-                <li>
+<!--                <li>
                     <span>地址</span>
                     <input type="text" name="address" />
                 </li>
                 <li>
                     <span>容纳人数</span>
                     <input type="number" name="people" />
-                </li>
+                </li>-->
 
                 <li>
-                    <i>其它说明</i>
+                    <i>场地说明</i>
                     <textarea name="description"></textarea>
                 </li>
             </ul>
@@ -84,7 +84,7 @@
             </ul>
         </div>
     </form>
-    <a href="#this" class='nextstep' id="submit" style="margin-bottom:1.7rem;">提交</a>
+    <a href="javascript:void(0);" class='nextstep' id="submit" style="margin-bottom:1.7rem;">提交</a>
 </div>
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>
