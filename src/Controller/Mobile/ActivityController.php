@@ -380,8 +380,8 @@ class ActivityController extends AppController {
             if ($res == false || empty($res)) {
                 $alert = '暂无搜索结果';
             }
-            $this->set('keyword', $data['keyword']);
         }
+        $this->set('keyword', $data['keyword']);
         $this->set('search', $res);
         $this->set('alert', $alert);
         $isApply = [];
