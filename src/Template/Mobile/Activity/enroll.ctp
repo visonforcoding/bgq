@@ -1,5 +1,4 @@
 <body>
-<?= $this->element('header'); ?>
     <div class="wraper">
         <div class="h20">
 

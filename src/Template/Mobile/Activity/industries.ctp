@@ -1,4 +1,3 @@
-<?= $this->element('header'); ?>
 <div id="app" class="wraper">
     <h1 class='choose-org-type innerwaper'>请选择行业标签(可多选)</h1>
     <?php foreach ($industries as $key => $industry): ?>

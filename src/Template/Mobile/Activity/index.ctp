@@ -1,6 +1,5 @@
 
 <body>
-<?= $this->element('header'); ?>
     <div class="wraper a-wraper">
         <div class="a-banner">
             <ul class="pic-list-container" id="imgList">

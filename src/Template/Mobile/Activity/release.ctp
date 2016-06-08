@@ -1,4 +1,3 @@
-<?= $this->element('header'); ?>
 <div class="wraper">
     <form action="" method="post">
         <div class="h20"></div>
