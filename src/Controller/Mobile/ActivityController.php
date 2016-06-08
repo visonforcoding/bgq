@@ -341,7 +341,7 @@ class ActivityController extends AppController {
     public function search() {
         $res = [];
         $alert = '';
-        $data['keyword'] = [];
+        $data['keyword'] = '';
         if ($this->request->is('post')) {
             $data = $this->request->data();
             $industry_id = $data['industry_id'];
