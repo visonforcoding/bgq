@@ -1,11 +1,4 @@
-<header>
-    <div class='inner'>
-        <a href='#this' class='toback' ></a>
-        <h1><?= $pageTitle; ?></h1>
-
-    </div>
-</header>
-
+<?= $this->element('header'); ?>
 <div class="wraper">
     <form action="" method="post">
         <div class="h20"></div>

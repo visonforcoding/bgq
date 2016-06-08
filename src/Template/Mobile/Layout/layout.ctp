@@ -14,6 +14,7 @@
         <?= $this->fetch('static') ?>
     </head>
     <body>
+        <?= $this->element('header'); ?>
         <?= $this->fetch('content') ?>
         <script src="/mobile/js/util.js"></script>
         <script src="/mobile/js/function.js"></script>
