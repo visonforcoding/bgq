@@ -104,6 +104,7 @@
                 }
                 $.util.showLoading('buttonLoading');
                 $.getJSON('/activity/getMoreSearch/' + page + '/' + $('input[name="industry_id"]').val() + '/' + $('input[name="sort"]').val() + '/' + $('input[name="keyword"]').val(), function (res) {
+                    console.log('page~~~' + page);
                     $.util.hideLoading('buttonLoading');
                     window.holdLoad = false;  //打开加载锁  可以开始再次加载
 
