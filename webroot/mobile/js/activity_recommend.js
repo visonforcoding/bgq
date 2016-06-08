@@ -68,9 +68,6 @@ activity.prototype.bindEvent = function () {
                     }
                 });
                 break;
-            case 'toback':
-                location.href = '/activity/index';
-                break;
             case 'goTop':
                 window.scroll(0, 0);
                 e.preventDefault();
