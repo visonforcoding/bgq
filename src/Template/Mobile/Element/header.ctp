@@ -8,17 +8,16 @@
     <?php endif; ?>
     <?= isset($pageHeaderLinkLabel) ? $pageHeaderLinkLabel : '回首页' ?></button>
 </header>-->
-    <header>
-        <?= $pageHeaderLink ?>
-        <a href='javascript:history.go(-1);' class='toback'></a>
-        <div class='inner'>
-            <h1>
-                <?= $pageTitle; ?>
-            </h1>
-        </div>
-    </header>
-<!--<script>
+<header>
+    <a href='javascript:history.go(-1);' class='toback'></a>
+    <div class='inner'>
+        <h1>
+            <?= $pageTitle; ?>
+        </h1>
+    </div>
+</header>
+<script>
     if(/smartlemon|micromessenger/.test(navigator.userAgent.toLowerCase())){
         document.getElementById('header').style.display = 'block';
     }
-</script>-->
+</script>
