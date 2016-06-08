@@ -1,13 +1,5 @@
 <body>
-    <header>
-        <div class='inner'>
-            <a href='javascript:history.go(-1);' class='toback'></a>
-            <h1>
-                活动详情
-            </h1>
-        </div>
-    </header>
-
+<?= $this->element('header'); ?>
     <div class="wraper" style="margin-bottom:1rem;" id="isTop">
         <section class="newscon-box a-detail">
             <h3><?= $activity->title; ?></h3>

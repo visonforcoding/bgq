@@ -1,12 +1,5 @@
 <body>
-    <header>
-        <div class='inner'>
-            <a href='#this' class='toback'></a>
-            <h1><?= $pageTitle ?></h1>
-
-        </div>
-    </header>
-
+<?= $this->element('header'); ?>
     <div class="wraper">
         <div class="h20">
 

@@ -1,10 +1,3 @@
-<!--<header>
-    <div class='inner'>
-        <a href='javascript:void(0);' class='toback' id="toback"></a>
-        <h1><?= $pageTitle; ?></h1>
-
-    </div>
-</header>-->
 <?= $this->element('header'); ?>
 <div class="wraper">
     <div class="h20"></div>
