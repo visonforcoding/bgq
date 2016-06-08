@@ -1,4 +1,3 @@
-<?= $this->element('header'); ?>
 <div class="wraper">
     <div class="h20"></div>
     <h1 class='choose-org-type innerwaper a-choose'>推荐类型</h1>
