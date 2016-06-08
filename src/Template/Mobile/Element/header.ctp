@@ -9,6 +9,8 @@
     <?= isset($pageHeaderLinkLabel) ? $pageHeaderLinkLabel : '回首页' ?></button>
 </header>-->
     <header>
+        <?= $pageHeaderLink ?>
+        <a href='javascript:history.go(-1);' class='toback'></a>
         <div class='inner'>
             <h1>
                 <?= $pageTitle; ?>
