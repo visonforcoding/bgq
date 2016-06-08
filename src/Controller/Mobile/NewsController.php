@@ -36,6 +36,7 @@ class NewsController extends AppController {
 //        debug($banners);exit();
         $this->set(compact('news', 'banners'));
         $this->set('newsjson', json_encode($news));
+        $this->set('pageTitle', '资讯');
     }
 
     /**
@@ -126,6 +127,7 @@ class NewsController extends AppController {
         $this->set('news', $news);
         $this->set('user', $this->user);
         $this->set('_serialize', ['news']);
+        $this->set('pageTitle', '资讯内容');
     }
     
     
