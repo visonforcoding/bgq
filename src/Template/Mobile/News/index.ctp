@@ -1,9 +1,9 @@
-<header>
+<!--<header>
     <div class='inner'>
         <h1>资讯</h1>
         <a href="#this" class='iconfont news-serch h-regiser'>&#xe613;</a>
     </div>
-</header>
+</header>-->
 <div class="wraper newswraper">
     <div class="a-banner">
         <ul class="pic-list-container" id="imgList">
