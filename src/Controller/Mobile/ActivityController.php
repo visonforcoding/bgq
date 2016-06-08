@@ -356,6 +356,10 @@ class ActivityController extends AppController {
                     }
                 ]);
             }
+            else
+            {
+                $res = $res->contain(['Industries']);
+            }
             if ($data['sort']) {
                 $res->orderDesc($data['sort']);
             } else {
