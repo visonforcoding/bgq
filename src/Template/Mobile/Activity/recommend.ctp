@@ -1,11 +1,11 @@
-<header>
+<!--<header>
     <div class='inner'>
         <a href='javascript:void(0);' class='toback' id="toback"></a>
         <h1><?= $pageTitle; ?></h1>
 
     </div>
-</header>
-
+</header>-->
+<?= $this->element('header'); ?>
 <div class="wraper">
     <div class="h20"></div>
     <h1 class='choose-org-type innerwaper a-choose'>推荐类型</h1>
