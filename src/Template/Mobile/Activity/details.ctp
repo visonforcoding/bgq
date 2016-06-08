@@ -99,7 +99,7 @@
 
     <div class="iconlist">
         <span class="iconfont" id="article_comment_2" user_id="<?= $user; ?>">&#xe618;</span>
-        <span class="iconfont<?php if (!$isCollect): ?> active<?php endif; ?>" id="collect" artid="<?= $activity->id; ?>" isCollect="<?= !$isCollect; ?>">&#xe610;</span>
+        <span class="iconfont<?php if (!$isCollect): ?> active<?php endif; ?>" id="collect" artid="<?= $activity->id; ?>" >&#xe610;</span>
         <span class="iconfont">&#xe614;</span>
         <span class="iconfont" id='toTop'></span>
     </div>
