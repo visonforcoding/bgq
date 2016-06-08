@@ -38,6 +38,10 @@
                 $('.news_icon').css({color:'#dd204b'});
                 $('.news_icon span').css({color:'#dd204b'});
             }
+            if(window.location.href.indexOf('index') != -1)
+            {
+                $('.toback').hide();
+            }
         </script>
         <?= $this->fetch('script') ?>
         <div class="alert" id="alertPlan" style="display: none"><span id="alertText"></span></div>

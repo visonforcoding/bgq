@@ -1,12 +1,5 @@
 
 <body>
-<!--    <header>
-        <div class='inner'>
-            <h1>
-                <?= $pageTitle; ?>
-            </h1>
-        </div>
-    </header>-->
 <?= $this->element('header'); ?>
     <div class="wraper a-wraper">
         <div class="a-banner">
