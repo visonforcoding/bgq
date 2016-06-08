@@ -69,7 +69,8 @@
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>
 <script type="text/html" id="search_tpl">
-    <section class="my-collection-info" style="padding-bottom: 0.2rem;margin-bottom: 1rem;background: #fff;">
+    <div id="items">
+        <section class="my-collection-info" style="padding-bottom: 0.2rem;margin-bottom: 1rem;background: #fff;">
             <div class="innercon">
                 <a href="/activity/details/{#id#}" class="clearfix">
                     <span class="my-pic-acive"><img src="{#cover#}"/></span>
@@ -81,7 +82,8 @@
                     </div>
                 </a>
             </div>
-    </section>
+        </section>
+    </div>
 </script>
 <script src="/mobile/js/activity_search.js"></script>
 <script>
