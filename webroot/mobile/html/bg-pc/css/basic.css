@@ -1,0 +1,45 @@
+html,body,p,div,h1,h2,h3,h4,h5,h6,ul,li,dl,dt,dd{margin:0;padding:0;}
+html,body {outline:none;background-color:#fff;min-width:1000px;width:100%;font:12px/1.6 "Microsoft YaHei",Arial,sans-serif;height:100%;color:#999999;}
+ul,li{list-style: none;}
+a{text-decoration: none;outline: none;color:#999;}
+b,h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+h3{font-size:20px;color:#222222;}
+h4{font-weight: bold;font-size:24px;color:#333333;}
+i,b,em{font-style: normal;font-weight: 100;}
+i{color:#D3D3D3;}
+img,input,textarea {border:0;outline: none;font:inherit;}
+img{display: block;}
+p{font-size:14px;line-height: 34px;}
+input[type="button"],input[type="submit"] {cursor:pointer;}
+.clear:after{display:block;height:0;line-height:0;clear:both;visibility:hidden;content:'\0020';}
+.clear{*zoom:1;clear:both;}
+.clearfix:after { content:"."; display:block; clear:both; visibility:hidden; font-size:0; line-height:0; height:0;}
+.clearfix { *zoom:1; /* for IE6 7 */ }
+.cl{*zoom:1;}
+.cr{visibility:hidden;display:block;clear:both;font-size:0;height:0;content:" ";}
+.fl{float:left;}
+.fr{float:right;}
+/*主色调*/
+.colore01{color:#e01b49;}
+.color99{color:#999;}
+/*margin--padding*/
+.mb16{margin-bottom:16px;}
+.mt10{margin-top:10px;}
+.bt{border-top:1px #d2d2d2 solid;}
+.bb{border-bottom:1px #d2d2d2 solid;}
+.pd40{padding-bottom:40px;}
+/*iconfont图标*/
+@font-face {font-family: 'iconfont';
+    src: url('../font/iconfont.eot'); /* IE9*/
+    src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../font/iconfont.woff') format('woff'), /* chrome、firefox */
+    url('../font/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('../font/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    }

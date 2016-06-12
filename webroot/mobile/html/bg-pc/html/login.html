@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>并购圈-登录</title>
+		<link rel="stylesheet" type="text/css" href="../css/basic.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+	</head>
+	<body>
+		<div class="wraper">
+			
+			
+			<div class="head">
+				<h1 class="innerbox wxlogin">
+					<a href="#this" class="cur  login" id="login">登录</a>
+					<a href="#this" class="reg">注册</a>
+					<div class="wx" id="wx">
+						<!--<img src="../img/wx.png"/>
+						<i>打开并购圈APP，扫码登陆</i>-->
+						
+					</div>
+				</h1>
+			</div>
+		
+			<span class="fixedmiddle"></span>
+		
+		</div>
+		<div class="innerwraper"></div>
+		<script type="text/javascript">
+		var isInside = false;
+			var loginbtn = document.getElementById('login');
+			var wxbox = document.getElementById('wx');
+			var img = wxbox.getElementsByTagName('img')[0];
+			loginbtn.onmouseover= function(){
+				wxbox.style.opacity = 1;
+				
+			}
+			
+			loginbtn.onmouseout = function(){
+				
+				setTimeout(function(){
+					if(!isInside){
+						
+						wxbox.style.opacity = 0;
+					}
+				},1000);
+				
+			}
+			
+			wxbox.onmouseover = function(){
+				isInside = true;
+				}
+//			
+			wxbox.onmouseout = function(){
+				isInside = false;
+				this.style.opacity = 0;
+			}
+			
+		</script>
+	</body>
+</html>
