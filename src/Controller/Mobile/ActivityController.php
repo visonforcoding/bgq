@@ -478,11 +478,13 @@ class ActivityController extends AppController {
 //                $this->Business->usermsg();
             }
             $res = $this->Activity->Activitycom->save($doComment);
+            $newComment[] = $this->Activity->Activitycom->get($res->id, ['contain'=>["Users", "Replyusers"]])->toArray();
             if ($res) {
                 $activity = $this->Activity->get($id);
                 $activity->comment_nums += 1;
                 $this->Activity->save($activity);
-                $this->Util->ajaxReturn(true, '评论成功');
+                
+                $this->Util->ajaxReturn(['status' => true, 'msg' => '评论成功', 'data' => $newComment]);
             } else {
                 $this->Util->ajaxReturn(false, '系统错误');
             }
