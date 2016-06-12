@@ -122,6 +122,7 @@ activity.prototype.bindEvent = function () {
                 
             // 评论文章
             case 'publish-article':
+                $(this).die('tap');
                 var data = {};
                 var body = $('textarea[name="comment-content-article"]').val();
                 if (!body) {
@@ -152,6 +153,7 @@ activity.prototype.bindEvent = function () {
                 
             // 回复评论
             case 'publish-reply':
+                $(this).die('tap');
                 var data = {};
                 var body = $('textarea[name="comment-content-reply"]').val();
                 if (!body) {
