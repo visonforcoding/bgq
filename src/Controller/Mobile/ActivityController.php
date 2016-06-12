@@ -60,6 +60,7 @@ class ActivityController extends AppController {
                     ->limit($this->limit)
                     ->hydrate(false)
                     ->toArray();
+            debug($comment);die;
             $this->set('comjson', json_encode($comment));
 
             $activity = $this->Activity->get($id, [
