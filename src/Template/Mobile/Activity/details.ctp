@@ -142,6 +142,7 @@
 <script src="/mobile/js/activity_details.js"></script>
 <script>
     $.util.dataToTpl('comment', 'comment_tpl',<?= $comjson ?>, function (d) {
+        console.log(d.pid);
         d.user_avatar = d.user.avatar;
         d.user_truename = d.user.truename;
         d.user_company = d.user.company;
