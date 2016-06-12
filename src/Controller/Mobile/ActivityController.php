@@ -456,7 +456,7 @@ class ActivityController extends AppController {
      * @param int $pid 父id
      */
     public function doComment($id) {
-        $this->loadComponent('business');
+        $this->loadComponent('Business');
         if ($this->request->is('post')) {
             $this->handCheckLogin();
             $data = $this->request->data();
