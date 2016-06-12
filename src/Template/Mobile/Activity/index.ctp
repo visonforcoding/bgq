@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div id="activity"></div>
+        <div id="activity" style='position: relative;'></div>
         <div id="buttonLoading" class="loadingbox"></div>
     </div>
 </body>
