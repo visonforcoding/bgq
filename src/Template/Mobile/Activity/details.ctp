@@ -111,7 +111,7 @@
         <div class="shadow-info a-shadow a-forword reply">
             <ul>
                 <li>
-                    <textarea type="text" placeholder="请输入评论" name="comment-content-reply"></textarea>
+                    <textarea type="text" placeholder="请输入评论" name="comment-content-reply" id="reply_textarea"></textarea>
                 </li>
                 <li>
                     <a href="javascript:void(0);" id="cancel">取消</a>
@@ -127,7 +127,7 @@
         <div class="comm-info clearfix">
             <span><img src="{#user_avatar#}"/></span>
             <span class="infor-comm">
-                <i class="username">{#user_truename#} {#reply#}</i>
+                <i class="username" id='comment_username_{#id#}'>{#user_truename#} {#reply#}</i>
                 <i class="job">{#user_company#} {#user_position#}</i>
             </span>
             <span>
@@ -142,7 +142,6 @@
 <script src="/mobile/js/activity_details.js"></script>
 <script>
     $.util.dataToTpl('comment', 'comment_tpl',<?= $comjson ?>, function (d) {
-        console.log(d.pid);
         d.user_avatar = d.user.avatar;
         d.user_truename = d.user.truename;
         d.user_company = d.user.company;
