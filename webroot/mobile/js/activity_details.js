@@ -47,8 +47,8 @@ activity.prototype.bindEvent = function () {
             });
         }
         if (em.id.indexOf('reply_') != -1) {
-            if ($('#article_comment_1').attr('user_id')) {
-                if($(em).attr('user_id') == $('#article_comment_1').attr('user_id')) {
+            if ($('#article_comment').attr('user_id')) {
+                if($(em).attr('user_id') == $('#article_comment').attr('user_id')) {
                     return;
                 }
                 $('.reply-shadow').show();
