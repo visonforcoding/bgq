@@ -51,6 +51,10 @@ activity.prototype.bindEvent = function () {
                 if($(em).attr('user_id') == $('#article_comment').attr('user_id')) {
                     return;
                 }
+                var reply_id = $(em).attr('value');
+                var msg = '回复' + $('#comment_username_' + reply_id).html();
+                console.log(msg);
+                $('#reply_textarea').attr('placeholder', msg);
                 $('.reply-shadow').show();
                 $('.reply').show();
                 var comid = $(em).attr('value');
