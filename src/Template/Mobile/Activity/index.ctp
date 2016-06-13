@@ -1,6 +1,14 @@
 
 <body>
     <div class="wraper a-wraper">
+        <div class="a-search-box">
+            <div class="a-search">
+                <i class="iconfont">&#xe613;</i>
+                <div class="s-con">
+                    <input type="text" placeholder="请输入关键词" class="search"/>
+                </div>
+            </div>
+        </div>
         <div class="a-banner">
             <ul class="pic-list-container" id="imgList">
                 <?php foreach ($banners as $v): ?>
@@ -12,17 +20,13 @@
                     <span class="cur"></span>
                 <?php endforeach; ?>
             </div>
-            <div class="a-search-box">
-                <div class="a-search">
-                    <i class="iconfont">&#xe613;</i>
-                    <div class="s-con">
-                        <input type="text" placeholder="请输入关键词" class="search"/>
-                    </div>
-                </div>
-            </div>
+            
         </div>
-        <div id="activity" style='position: relative;'></div>
+        <div id="activity"></div>
         <div id="buttonLoading" class="loadingbox"></div>
+        <div class="submitbtn subactivity" id="release" user="<?= $user; ?>">
+            <span>发布<br />活动</span>
+        </div>
     </div>
 </body>
 <script type="text/html" id="activity_tpl">
@@ -46,18 +50,16 @@
         </div>
     </section>
 </script>
-
 <script type="text/html" id="subTpl">
     <a href="javascript:void(0);">{#name#}</a>
 </script>
-<div class="submitbtn subactivity" id="release" user="<?= $user; ?>">
-    <span>发布<br />活动</span>
-</div>
+
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script src="/mobile/js/activity_index.js"></script>
 <script>
+    window.up = false;
     window.isApply = ',' + <?= $isApply ?> + ',';
     $.util.dataToTpl('activity', 'activity_tpl',<?= $actjson ?>, function (d) {
         d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';

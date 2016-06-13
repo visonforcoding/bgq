@@ -48,21 +48,20 @@ activity.prototype.bindEvent = function () {
 activity.prototype.scroll = function () {
 //    var obj = this;
     $(window).on("scroll", function () {
-        console.log(document.body.scrollTop);
-        console.log($(window).height());
-        // 滚动超过banner图，banner图隐藏
+        // 滚动一定距离，搜索隐藏
         if (document.body.scrollTop > ($('#imgList').height() + $('.inner').height())) {
-//            $('.a-banner').addClass();
-            $('#activity').css({top: 0});
-        } else {
-//            $('.a-banner').addClass();
-            $('#activity').css({top: $('#imgList').height()});
+            $('.a-search-box').removeClass('movedown');
+            $('.a-search-box').addClass('moveup');
+            window.up = true;
+        }
+        if(document.body.scrollTop < ($('#imgList').height() + $('.inner').height()) && window.up == true){
+            $('.a-search-box').addClass('movedown');
         }
         // 滚动两个屏幕长度，隐藏发布活动
-        if (document.body.scrollTop > ($(window).height() * 2)) {
-//            $('#release').addClass();
+        if (document.body.scrollTop > ($(window).height())) {
+            $('#release').removeClass('moveleft').addClass('moveright');
         } else {
-//            $('#release').addClass();
+            $('#release').addClass('moveleft');
         }
     });
 };
