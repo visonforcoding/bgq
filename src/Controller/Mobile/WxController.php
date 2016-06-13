@@ -133,7 +133,7 @@ class WxController extends AppController {
      */
     public function wxNotify(){
        $this->loadComponent('Wxpay');
-       $this->Wxpay->notify();exit();
+       $this->Wxpay->notify();
     }
 
 }

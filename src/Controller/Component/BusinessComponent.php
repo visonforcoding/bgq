@@ -8,6 +8,7 @@ use Cake\Controller\ComponentRegistry;
 /**
  * 处理通用业务
  * Business component
+ * @property \App\Controller\Component\SmsComponent $Sms
  */
 class BusinessComponent extends Component {
 
@@ -17,6 +18,7 @@ class BusinessComponent extends Component {
      * @var array
      */
     protected $_defaultConfig = [];
+    public $components = ['Sms'];
 
     /**
      * 评论点赞
@@ -370,18 +372,16 @@ class BusinessComponent extends Component {
         $book = $BookTable->get($book_id);
         $book->status = 3; //预约流程完成
         $order->status = 1;  //订单完成
-//        $order->seller->money += $order->price;
-        $order->seller->money = 111;
-        debug($order);
-        $order->dirty('Sellers',true);
-        debug($order);
+        $order->seller->money += $order->price;    //专家余额+
+        $order->dirty('seller',true);  //这里的seller 一定得是关联属性 不是关联模型名称 可以理解为实体
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
-        $OrderTable->save($order,['associated' => ['Sellers']]);
-        exit();
         $transRes = $BookTable->connection()->transactional(function()use($order,$BookTable,$book,$OrderTable){
             return $OrderTable->save($order,['associated' =>['Sellers']])&&$BookTable->save($book);
         });
-        debug($transRes);
+        if($transRes){
+            //向专家发送一条短信
+            $this->Sms->sendByQf106($order->seller->phone,'申请人已经向您支付了预约费用：'.$order->price.'元，请做好赴约准备。');
+        }
     }
 
 }
