@@ -10,7 +10,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 body {font: 0.14rem / 0.24rem 'Microsoft YaHei', 'STHeiti',Helvetica,Arial,sans-serif; }
 input, textarea, button, input, select{ outline: 0; resize: none;font-size:100%;font-family:'Microsoft YaHei';}
 
-html{font-size: 40px; outline: 0;-webkit-text-size-adjust:none;}
+html{ outline: 0;-webkit-text-size-adjust:none;}
 html,body { width: 100%; height: 100%;}
 i{font-style: normal;}
 .fl { float:left; display: inline; }
@@ -117,8 +117,8 @@ footer .othertype img{width:100%;height:auto;display:block;}
 @-webkit-keyframes moveright{from {right:0.32rem; }	to { right:-1000px;}}
 @keyframes moveright {from {right:0.32rem;}to {right:-1000px; }}
 /*moveleft*/
-@-webkit-keyframes moveleft{from {right:-1000px; }to { right:0.32rem;}}
-@keyframes moveleft {from {right:-1000px;}to {right:0.32rem; }}
+@-webkit-keyframes moveleft{from {right:-1rem; }to { right:0.32rem;}}
+@keyframes moveleft {from {right:-1rem;}to {right:0.32rem; }}
 
 .wraper .moveup{-webkit-animation: moveup 1s;overflow:hidden;animation-fill-mode:forwards}
 .wraper .moveright{-webkit-animation: moveright 1s;animation-fill-mode:forwards;
