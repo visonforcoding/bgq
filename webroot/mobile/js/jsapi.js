@@ -158,6 +158,7 @@
                         //return re.data;
                     });
                     break;
+                case "share.banner":
                 case "share.QQ":
                 case "share.QQfriend":
                 case "share.WX":
