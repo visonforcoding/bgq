@@ -127,7 +127,7 @@
         <div class="comm-info clearfix">
             <span><img src="{#user_avatar#}"/></span>
             <span class="infor-comm">
-                <i class="username" id='comment_username_{#id#}'>{#user_truename#} {#reply#}</i>
+                <i class="username" id='comment_username_{#id#}'>{#user_truename#} {#reply#}<time>{#create_time#}</time></i>
                 <i class="job">{#user_company#} {#user_position#}</i>
             </span>
             <span>

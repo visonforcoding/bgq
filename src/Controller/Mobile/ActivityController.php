@@ -350,10 +350,12 @@ class ActivityController extends AppController {
                             ->select(['activity_id'])
                             ->hydrate(false)
                             ->toArray();
-            foreach ($activityApply as $k => $v) {
-                $isApply[] = $v['activity_id'];
+            if ($activityApply) {
+                foreach ($activityApply as $k => $v) {
+                    $isApply[] = $v['activity_id'];
+                }
+                $isApply = implode(',', $isApply);
             }
-            $isApply = implode(',', $isApply);
         }
         $this->set('isApply', $isApply);
         
@@ -598,8 +600,9 @@ class ActivityController extends AppController {
     }
     
     public function test(){
-        $a = $this->Activity->Activitycom->find()->hydrate(false)->all()->toArray();
-        debug($a);die;
+        $a = $this->request->session();
+        $b = $a->read('User');
+        debug($b);die;
     }
 
 }

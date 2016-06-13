@@ -126,3 +126,6 @@ COMMENT='点赞日志表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
 #=======06.07  已执行=======
+
+#活动评论增加回复人id
+ALTER TABLE activitycom add reply_id INT COMMENT '回复用户id';
