@@ -188,5 +188,22 @@
 			</li>
 		</ul>
 	</footer>
+	<script type="text/javascript">
+		$(window).on('scroll',function(){
+			var scrolltop = $(document).scrollTop();
+			var eleheight = $('.inner').height() + $('.a-banner').height();
+			
+			if(scrolltop >= eleheight){
+				$('.a-banner').removeClass('movedown');
+				$('.a-banner').addClass('moveup');
+				$('.submitbtn').removeClass('moveleft').addClass('moveright')
+			}else{
+				$('.a-banner').addClass('movedown');
+				$('.submitbtn').addClass('moveleft')
+			}
+			
+		
+		})
+	</script>
 	</body>
 </html>

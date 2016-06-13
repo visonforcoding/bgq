@@ -25,7 +25,7 @@ i{font-style: normal;}
 .my-wraper{padding-top:1.6rem;}
 .h20{background:#f0eff5;border-top:1px solid #c8c7cc;border-bottom:1px solid #c8c7cc;height:0.2rem;}
 .m-wraper{padding-top:4.2rem;overflow-x:hidden;position:relative;padding-bottom:1rem;}
-.wraper .nobottom{border-bottom:none;}
+.wraper .nobottom,.wraper .no-bottom{border-bottom:none;}
 .wraper .no-margin-top{margin-top:0;}
 .wraper .no-b-tb{border-bottom:none;margin-top:0;}
 .wraper .no-t-border{border-top:none;}
@@ -39,6 +39,7 @@ i{font-style: normal;}
 .wraper .changecolor{color:#da2051;}
 .wraper .ft26{font-size:0.26rem;}
 .wraper .mt0{margin-top:0;}
+.wraper .mb50{margin-bottom:50px;}
 .wraper .colorbg{background: #7a7e83;}
 .wraper a.colorbg{background: #7a7e83;}
 .wraper .bbottom{border-bottom:1px solid #c8c7cc;}
@@ -66,12 +67,21 @@ input::-ms-input-placeholder { /* Internet Explorer 10+ */ color: #222c38; }
 	-webkit-align-items:center;-moz-align-items:center;-ms-align-items:center;align-items: center;}
 .alert span{line-height: 0.38rem;text-align: center;background: rgba(0,0,0,0.5);border-radius: 0.15rem;padding:0.3rem;}
 /*web字体图标*/
-@font-face {font-family: 'iconfont';
-    src: url('../font/iconfont.eot'); /* IE9*/
-    src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('../font/iconfont.woff') format('woff'), /* chrome、firefox */
-    url('../font/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-    url('../font/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+@font-face {
+	font-family: 'iconfont';
+    src: url('../font/iconfont1.eot'); /* IE9*/
+    src: url('../font/iconfont1.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../font/iconfont1.woff') format('woff'), /* chrome、firefox */
+    url('../font/iconfont1.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('../font/iconfont1.svg#iconfont') format('svg'); /* iOS 4.1- */
+   
+}
+@font-face {font-family: "iconfont";
+  src: url('iconfont1.eot?t=1461832679'); /* IE9*/
+  src: url('iconfont1.eot?t=1461832679#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont1.woff?t=1461832679') format('woff'), /* chrome, firefox */
+  url('iconfont1.ttf?t=1461832679') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont1.svg?t=1461832679#iconfont') format('svg'); /* iOS 4.1- */
 }
 .iconfont{
     font-family:"iconfont" !important;
@@ -96,3 +106,24 @@ footer .othertype img{width:100%;height:auto;display:block;}
 .navfooter .active span,.navfooter .active a{color:#db1f4f;}
 .pd10{padding-bottom:1rem;}
 .wraper .colore01{color:#e01a48;}
+/*活动页动画*/
+/*moveup*/
+@-webkit-keyframes moveup {from {height:2.95rem; }to { height:0;}}
+@keyframes moveup {from {height:2.95rem;}to {height:0; }}
+/*movedown*/
+@-webkit-keyframes movedown {from {height:0; }to { height:2.95rem;}}
+@keyframes movedown {from {height:0;}to {height:2.95rem; }}
+/*moveright*/
+@-webkit-keyframes moveright{from {right:0.32rem; }	to { right:-1000px;}}
+@keyframes moveright {from {right:0.32rem;}to {right:-1000px; }}
+/*moveleft*/
+@-webkit-keyframes moveleft{from {right:-1000px; }to { right:0.32rem;}}
+@keyframes moveleft {from {right:-1000px;}to {right:0.32rem; }}
+
+.wraper .moveup{-webkit-animation: moveup 1s;overflow:hidden;animation-fill-mode:forwards}
+.wraper .moveright{-webkit-animation: moveright 1s;animation-fill-mode:forwards;
+-webkit-animation-fill-mode:forwards;}
+.wraper .moveleft{-webkit-animation: moveleft 1s;animation-fill-mode:forwards;
+-webkit-animation-fill-mode:forwards;}
+.wraper .movedown{-webkit-animation: movedown 1s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
+

@@ -6,9 +6,10 @@
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-		<title>并购圈</title>
+		<title>并购圈-大咖</title>
 		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="../font/iconfont.css"/>
 		<script src="../js/view.js"></script>
         <script src="../js/jquery.js"></script>
         <script ssssrc="../js/zepto.min.js"></script>
@@ -48,6 +49,48 @@
 					</div>
 				</div>
 			</div>
+			<!--分类--start-->
+			<div class="menusort clearfix">
+				<div class="allmenu">
+					<div class="menulist clearfix" id="allsort">
+					<a href="#this"><i class="iconfont">&#xe63f;</i>互联网</a>
+					<a href="#this">
+						<i class="iconfont">&#xe642;</i>
+						金融
+					</a>
+					<a href="#this">
+						<i class="iconfont">&#xe640;</i>
+						健康医疗
+					</a>
+					<a href="#this">
+						<i class="iconfont">&#xe643;</i>
+						艺术
+					</a>
+					<a href="#this">
+						<i class="iconfont">&#xe644;</i>
+						餐饮
+					</a>
+					<a href="#this">
+						<i class="iconfont">&#xe645;</i>
+						养生
+					</a>
+					<a href="#this">
+						<i class="iconfont">&#xe646;</i>
+						保险
+					</a>
+					<a href="#this">
+						<i class="iconfont">&#xe647;</i>
+						汽车
+					</a>
+					<a href="#this">
+						<i class="iconfont">&#xe648;</i>
+						更多
+					</a>
+				</div>
+				</div>
+				<a href="javascript:void(0);" class="sele-r"></a>
+			</div>
+			<!--分类--end-->
 			<div class="m-items">
 				<div class="innercon m-title">
 					<h3>推荐</h3>
@@ -104,6 +147,23 @@
 	</footer>
 	 <script>
                 var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
-            </script>
+               
+      </script>
+       <script>
+
+            var sortlist = 
+            setTimeout(function(){
+            	 $.util.loop({
+                  
+                    moveDom: $('#allsort'),
+                    moveChild: $('#allsort a'),
+                    
+                });
+            },1000)
+           
+           
+
+
+        </script>
 	</body>
 </html>
