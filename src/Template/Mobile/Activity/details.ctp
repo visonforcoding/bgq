@@ -111,7 +111,7 @@
         <div class="shadow-info a-shadow a-forword reply">
             <ul>
                 <li>
-                    <textarea type="text" placeholder="请输入评论" name="comment-content-reply" id="reply_textarea"></textarea>
+                    <textarea type="text" placeholder="请输入评论" name="comment-content-reply" id="r_textarea"></textarea>
                 </li>
                 <li>
                     <a href="javascript:void(0);" id="cancel">取消</a>
