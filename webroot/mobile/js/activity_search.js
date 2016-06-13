@@ -34,8 +34,10 @@ activity.prototype.bindEvent = function () {
             $(em).addClass('active');
             $("input[name='industry_id']").attr('value', $(em).attr('value'));
             $('#choose_industries').html($(em).children('a').html());
-            $('#choose_industry_ul').hide();
-            $('#choose_industries').removeClass('active');
+            setTimeout(function(){
+                $('#choose_industry_ul').hide();
+                $('#choose_industries').removeClass('active');
+            },301);
             $.ajax({
                 type: 'post',
                 url: '/activity/getSearchRes',
@@ -60,8 +62,10 @@ activity.prototype.bindEvent = function () {
             $(em).addClass('active');
             $("input[name='sort']").attr('value', $(em).attr('value'));
             $('#choose_sorts').html($(em).children('a').html());
-            $('#sort_mark').hide();
-            $('#choose_sorts').removeClass('active');
+            setTimeout(function(){
+                $('#sort_mark').hide();
+                $('#choose_sorts').removeClass('active');
+            },301);
             $.ajax({
                 type: 'post',
                 url: '/activity/getSearchRes',
