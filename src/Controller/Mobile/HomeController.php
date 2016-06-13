@@ -20,6 +20,7 @@ class HomeController extends AppController {
     public function initialize() {
         parent::initialize();
         $this->loadModel('User');
+        $this->set('pageTitle','个人中心');
     }
 
     /**
