@@ -108,11 +108,11 @@ footer .othertype img{width:100%;height:auto;display:block;}
 .wraper .colore01{color:#e01a48;}
 /*活动页动画*/
 /*moveup*/
-@-webkit-keyframes moveup {from {height:2.95rem; }to { height:0;}}
-@keyframes moveup {from {height:2.95rem;}to {height:0; }}
+@-webkit-keyframes moveup {from {opacity: 1; }to { opacity: 0;}}
+@keyframes moveup {from {opacity: 1; }to { opacity: 0;}}
 /*movedown*/
-@-webkit-keyframes movedown {from {height:0; }to { height:2.95rem;}}
-@keyframes movedown {from {height:0;}to {height:2.95rem; }}
+@-webkit-keyframes movedown {from {opacity: 0; }to { opacity: 1;}}
+@keyframes movedown {from {opacity: 0; }to { opacity: 1;}}
 /*moveright*/
 @-webkit-keyframes moveright{from {right:0.32rem; }	to { right:-1000px;}}
 @keyframes moveright {from {right:0.32rem;}to {right:-1000px; }}

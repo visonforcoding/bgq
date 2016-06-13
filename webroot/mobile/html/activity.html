@@ -28,6 +28,14 @@
 		</header>
 		
 		<div class="wraper newswraper a-wraper" id="wraper">
+			<div class="a-search-box">
+					<div class="a-search">
+						<a href="news-search.html"><i class="iconfont">&#xe613;</i></a>
+						<div class="s-con">
+							<input type="text" placeholder="请输入关键词" />
+						</div>
+					</div>
+			</div>
 			<div class="a-banner">
 				<ul class="pic-list-container" id="imgList">
 					<li><a href="#this"><img src="../images/a-banner.png"/></a></li>
@@ -39,14 +47,14 @@
 					<span></span>
 					<span></span>
 				</div>
-				<div class="a-search-box">
+				<!--<div class="a-search-box">
 					<div class="a-search">
 						<a href="news-search.html"><i class="iconfont">&#xe613;</i></a>
 						<div class="s-con">
 							<input type="text" placeholder="请输入关键词" />
 						</div>
 					</div>
-				</div>
+				</div>-->
 			</div>
 
             <script>
@@ -190,19 +198,19 @@
 	</footer>
 	<script type="text/javascript">
 		$(window).on('scroll',function(){
+			
+			//$('.a-banner').removeClass('movedown');
 			var scrolltop = $(document).scrollTop();
 			var eleheight = $('.inner').height() + $('.a-banner').height();
-			
 			if(scrolltop >= eleheight){
-				$('.a-banner').removeClass('movedown');
-				$('.a-banner').addClass('moveup');
+				$('.a-search-box').removeClass('movedown');
+				$('.a-search-box').addClass('moveup');
 				$('.submitbtn').removeClass('moveleft').addClass('moveright')
+				
 			}else{
-				$('.a-banner').addClass('movedown');
+				$('.a-search-box').addClass('movedown');
 				$('.submitbtn').addClass('moveleft')
 			}
-			
-		
 		})
 	</script>
 	</body>
