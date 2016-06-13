@@ -149,6 +149,7 @@ class WxpayComponent extends Component {
             $pay_param = $this->setPayParameter($prepay_id);
             return $pay_param;
         } else {
+            \Cake\Log\Log::error($res);
             return false;
         }
     }
