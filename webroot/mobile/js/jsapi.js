@@ -73,6 +73,7 @@
         "sys.QRcode",
         "hide.share", //隐藏分享图标
         "show.search", //显示搜索
+        "share.banner",
         "share.QQ",
         "share.QQfriend",
         "share.WX",
