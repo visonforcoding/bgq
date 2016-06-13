@@ -595,6 +595,11 @@ class ActivityController extends AppController {
             $this->Util->ajaxReturn(['status' => false]);
         }
     }
+    
+    public function test(){
+        $a = $this->Activity->Activitycom->find()->all()->hydrate(false)->toArray();
+        debug($a);die;
+    }
 
 }
         
