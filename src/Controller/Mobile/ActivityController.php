@@ -391,11 +391,12 @@ class ActivityController extends AppController {
                 ->where(['title LIKE' => '%' . $data['keyword'] . '%'])
                 ->andWhere(['is_check'=>'1']);
         if ($industry_id) {
-            $res = $res->contain([
-                'Industries' => function($q)use($industry_id) {
+            $res = $res->matching(
+                'Industries', function($q)use($industry_id) {
                     return $q->where(['Industries.id' => $industry_id]);
                 }
-            ]);
+            );
+    
         } else {
             $res = $res->contain(['Industries']);
         }
@@ -407,8 +408,8 @@ class ActivityController extends AppController {
         $res = $res
                 ->limit($this->limit)
                 ->toArray();
-        if ($res!=false) {
-            if($res == '')
+        if ($res!==false) {
+            if($res == [])
             {
                 $this->Util->ajaxReturn(false, '暂无搜索结果');
             }
