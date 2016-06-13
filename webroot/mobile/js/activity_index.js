@@ -9,6 +9,7 @@ activity.prototype.init = function () {
     var obj = this;
     this.setDet();
     this.bindEvent();
+    this.scroll();
     setTimeout(function(){
         obj.getData();
     }, 2000);
@@ -44,9 +45,33 @@ activity.prototype.bindEvent = function () {
     });
 };
 
+activity.prototype.scroll = function () {
+//    var obj = this;
+    $(window).on("scroll", function () {
+        console.log(document.body.scrollTop);
+        console.log($(window).height());
+        // 滚动超过banner图，banner图隐藏
+        if (document.body.scrollTop > ($('#imgList').height() + $('.inner').height())) {
+//            $('.a-banner').addClass();
+            $('#activity').css({top: 0});
+        } else {
+//            $('.a-banner').addClass();
+            $('#activity').css({top: $('#imgList').height()});
+        }
+        // 滚动两个屏幕长度，隐藏发布活动
+        if (document.body.scrollTop > ($(window).height() * 2)) {
+//            $('#release').addClass();
+        } else {
+//            $('#release').addClass();
+        }
+    });
+};
+
 activity.prototype.getData = function(){
     var  obj = this;
     $(window).on("scroll", function () {
+        
+        
         $.util.listScroll('items', function () {
             if (obj.page == 9999) {
                 $('#buttonLoading').html('亲，没有更多资讯了，请明天再来吧');
@@ -64,7 +89,7 @@ activity.prototype.getData = function(){
                 }
 
                 if (res.status) {
-                    var html = $.util.dataToTpl('', 'search_tpl', res.data, function (d) {
+                    var html = $.util.dataToTpl('', 'activity_tpl', res.data, function (d) {
                         d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
                         d.industries_name = $.util.dataToTpl('', 'subTpl', d.industries);
                         return d;
