@@ -19,6 +19,8 @@ class BannerController extends AppController {
      * @return void
      */
     public function index() {
+        $types = \Cake\Core\Configure::read('bannerTypes');
+        $this->set('types', $types);
         $this->set('banner', $this->Banner);
     }
 
@@ -129,14 +131,19 @@ class BannerController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
+        $type = $this->request->data('type');
         $where = [];
+        if(!empty($type))
+        {
+            $where['type'] = $type;
+        }
         if (!empty($keywords)) {
-            $where[' type like'] = "%$keywords%";
+            $where['remark like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
+            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
         $data = $this->getJsonForJqrid($page, $rows, '', $sort, $order, $where);
         $this->autoRender = false;
