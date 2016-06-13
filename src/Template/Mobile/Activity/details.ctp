@@ -101,7 +101,7 @@
                 </li>
                 <li>
                     <a href="javascript:void(0);" id="cancel">取消</a>
-                    <a href="javascript:void(0);" id="publish-article" activity_id="<?= $activity->id; ?>">发表</a>
+                    <a href="javascript:void(0);" id="publish_article" activity_id="<?= $activity->id; ?>">发表</a>
                 </li>
             </ul>
         </div>
@@ -115,7 +115,7 @@
                 </li>
                 <li>
                     <a href="javascript:void(0);" id="cancel">取消</a>
-                    <a href="javascript:void(0);" id="publish-reply" activity_id="<?= $activity->id; ?>">发表</a>
+                    <a href="javascript:void(0);" id="publish_reply" activity_id="<?= $activity->id; ?>">发表</a>
                 </li>
             </ul>
         </div>
@@ -141,6 +141,8 @@
 </script>
 <script src="/mobile/js/activity_details.js"></script>
 <script>
+    window.article = true;
+    window.reply = true;
     $.util.dataToTpl('comment', 'comment_tpl',<?= $comjson ?>, function (d) {
         d.user_avatar = d.user.avatar;
         d.user_truename = d.user.truename;

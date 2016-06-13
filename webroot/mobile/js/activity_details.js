@@ -57,7 +57,7 @@ activity.prototype.bindEvent = function () {
                 $('.reply-shadow').show();
                 $('.reply').show();
                 var comid = $(em).attr('value');
-                $('#publish-reply').attr('value', comid);
+                $('#publish_reply').attr('value', comid);
             } else {
                 $.util.alert('请先登录');
                 setTimeout(function () {
@@ -124,79 +124,93 @@ activity.prototype.bindEvent = function () {
                 break;
                 
             // 评论文章
-            case 'publish-article':
-                $(this).die('tap');
-                var data = {};
-                var body = $('textarea[name="comment-content-article"]').val();
-                if (!body) {
-                    $.util.alert('内容不可为空');
-                    return false;
-                }
-                data.body = body;
-                data.pid = 0;
-                var activity_id = $('#publish-article').attr('activity_id');
-                $.util.ajax({
-                    url: '/activity/doComment/' + activity_id,
-                    data: data,
-                    func: function (msg) {
-                        if (typeof msg === 'object') {
-                            if (msg.status === true) {
-                                $.util.alert(msg.msg);
-                                var html = $.util.dataToTpl('', 'comment_tpl', msg.data, function (d) {
-                                    d.user_avatar = d.user.avatar; // 头像
-                                    d.user_truename = d.user.truename; // 名字
-                                    d.user_company = d.user.company; // 公司
-                                    d.user_position = d.user.position; // 职务
-                                    d.reply = d.pid > 0 ? '@' + d.replyuser.truename : ''; // 是否回复别人的评论
-                                    return d;
-                                });
-                                $('#comment').prepend(html);
-                                $('.article-shadow').hide();
-                                $('.article').hide();
-                            } else {
-                                $.util.alert(msg.msg);
+            case 'publish_article':
+                var a = $(em)[0];
+                if(window.article == true)
+                {
+                    a.addEventListener('tap', function(){
+                        window.article = false;
+                    }, true);
+                    var data = {};
+                    var body = $('textarea[name="comment-content-article"]').val();
+                    if (!body) {
+                        $.util.alert('内容不可为空');
+                        return false;
+                    }
+                    data.body = body;
+                    data.pid = 0;
+                    var activity_id = $('#publish_article').attr('activity_id');
+                    $.util.ajax({
+                        url: '/activity/doComment/' + activity_id,
+                        data: data,
+                        func: function (msg) {
+                            if (typeof msg === 'object') {
+                                if (msg.status === true) {
+                                    $.util.alert(msg.msg);
+                                    var html = $.util.dataToTpl('', 'comment_tpl', msg.data, function (d) {
+                                        d.user_avatar = d.user.avatar; // 头像
+                                        d.user_truename = d.user.truename; // 名字
+                                        d.user_company = d.user.company; // 公司
+                                        d.user_position = d.user.position; // 职务
+                                        d.reply = d.pid > 0 ? '@' + d.replyuser.truename : ''; // 是否回复别人的评论
+                                        return d;
+                                    });
+                                    $('#comment').prepend(html);
+                                    $('.article-shadow').hide();
+                                    $('.article').hide();
+                                } else {
+                                    $.util.alert(msg.msg);
+                                }
                             }
                         }
-                    }
-                });
+                    });
+                    window.article = true;
+                }
                 break;
                 
             // 回复评论
-            case 'publish-reply':
-                $(this).die('tap');
-                var data = {};
-                var body = $('textarea[name="comment-content-reply"]').val();
-                if (!body) {
-                    $.util.alert('内容不可为空');
-                    return false;
-                }
-                data.body = body;
-                data.pid = $('#publish-reply').attr('value');
-                var activity_id = $('#publish-reply').attr('activity_id');
-                $.util.ajax({
-                    url: '/activity/doComment/' + activity_id,
-                    data: data,
-                    func: function (msg) {
-                        if (typeof msg === 'object') {
-                            if (msg.status === true) {
-                                $.util.alert(msg.msg);
-                                var html = $.util.dataToTpl('', 'comment_tpl', msg.data, function (d) {
-                                    d.user_avatar = d.user.avatar; // 头像
-                                    d.user_truename = d.user.truename; // 名字
-                                    d.user_company = d.user.company; // 公司
-                                    d.user_position = d.user.position; // 职务
-                                    d.reply = d.pid > 0 ? '@' + d.replyuser.truename : ''; // 是否回复别人的评论
-                                    return d;
-                                });
-                                $('#comment').prepend(html);
-                                $('.reply-shadow').hide();
-                                $('.reply').hide();
-                            } else {
-                                $.util.alert(msg.msg);
+            case 'publish_reply':
+                var a = $(em)[0];
+                if(window.reply == true)
+                {
+                    a.addEventListener('tap', function(){
+                        window.reply = false;
+                    }, true);
+                    var data = {};
+                    var body = $('textarea[name="comment-content-reply"]').val();
+                    if (!body) {
+                        $.util.alert('内容不可为空');
+                        return false;
+                    }
+                    data.body = body;
+                    data.pid = $('#publish_reply').attr('value');
+                    var activity_id = $('#publish_reply').attr('activity_id');
+                    $.util.ajax({
+                        url: '/activity/doComment/' + activity_id,
+                        data: data,
+                        func: function (msg) {
+                            if (typeof msg === 'object') {
+                                if (msg.status === true) {
+                                    $.util.alert(msg.msg);
+                                    var html = $.util.dataToTpl('', 'comment_tpl', msg.data, function (d) {
+                                        d.user_avatar = d.user.avatar; // 头像
+                                        d.user_truename = d.user.truename; // 名字
+                                        d.user_company = d.user.company; // 公司
+                                        d.user_position = d.user.position; // 职务
+                                        d.reply = d.pid > 0 ? '@' + d.replyuser.truename : ''; // 是否回复别人的评论
+                                        return d;
+                                    });
+                                    $('#comment').prepend(html);
+                                    $('.reply-shadow').hide();
+                                    $('.reply').hide();
+                                } else {
+                                    $.util.alert(msg.msg);
+                                }
                             }
                         }
-                    }
-                });
+                    });
+                    window.reply = true;
+                }
                 break;
             case 'enroll':
                 if ($(em).attr('user_id')) {
