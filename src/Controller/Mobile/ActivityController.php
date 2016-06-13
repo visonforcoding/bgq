@@ -597,7 +597,7 @@ class ActivityController extends AppController {
     }
     
     public function test(){
-        $a = $this->Activity->Activitycom->find()->all()->hydrate(false)->toArray();
+        $a = $this->Activity->Activitycom->find()->hydrate(false)->all()->toArray();
         debug($a);die;
     }
 
