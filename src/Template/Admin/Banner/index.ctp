@@ -11,6 +11,15 @@ $this->start('static') ?>
                 <i class="icon icon-plus-sign"></i>添加
             </a>
             <div class="form-group">
+                <label for="keywords">类型</label>
+                <select class="form-control" name="type" id="keywords">
+                    <option>请选择类型</option>
+                    <?php foreach ($types as $key=>$type): ?>
+                    <option value="<?=$key?>"><?=$type?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="keywords">关键字</label>
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
             </div>
