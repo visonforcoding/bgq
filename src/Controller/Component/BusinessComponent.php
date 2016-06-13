@@ -378,6 +378,7 @@ class BusinessComponent extends Component {
         $transRes = $BookTable->connection()->transactional(function()use($order,$BookTable,$book,$OrderTable){
             return $OrderTable->save($order,['associated' =>['Sellers']])&&$BookTable->save($book);
         });
+        \Cake\Log\Log::debug($transRes);
         if($transRes){
             //向专家发送一条短信
             $this->Sms->sendByQf106($order->seller->phone,'申请人已经向您支付了预约费用：'.$order->price.'元，请做好赴约准备。');
