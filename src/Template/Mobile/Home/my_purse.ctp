@@ -9,31 +9,21 @@
 <div class="wraper">
     <div class="my-purse-info">
         <a href='javascript:void(0);'></a>
-                 <p>¥<i>800</i></p>
-        <a href="#this" class="nextstep">提现</a>
+        <p>¥<i><?= $userInfo->money ?></i></p>
+        <a href="/home/withdraw" class="nextstep">提现</a>
     </div>
-    <ul class='pay-detail'>
+    <ul class='pay-detail' id="flows">
         <li><h3 class="color-items">钱包明细</h3></li>
-        <li>
-            <div><span>约见收入</span><i>2016-05-01</i></div>
-            <span class="dollars">+500</span>
-        </li>
-        <li>
-            <div><span>提现</span><i>2016-05-01</i></div>
-            <span class="dollars">-1500</span>
-        </li>
-        <li>
-            <div><span>约见收入</span><i>2016-05-01</i></div>
-            <span class="dollars">+500</span>
-        </li>
-        <li>
-            <div><span>约见收入</span><i>2016-05-01</i></div>
-            <span class="dollars">+500</span>
-        </li>
-        <li>
-            <div><span>约见收入</span><i>2016-05-01</i></div>
-            <span class="dollars">+500</span>
-        </li>
+        <?php foreach($flows as $flow): ?>
+            <li>
+                <div><span><?=$flow->type_msg?></span><i><?=$flow->create_type?></i></div>
+                <span class="dollars">
+                    <?php if($flow->income=='1'):?>+<?php else:?>-<?php endif;?><?=$flow->amount?>
+                </span>
+            </li>
+        <?php endforeach; ?>
     </ul>
-
 </div>
+<?php $this->start('script') ?>
+<?php
+$this->end('script')?>

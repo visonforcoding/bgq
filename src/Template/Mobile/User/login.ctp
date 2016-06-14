@@ -24,7 +24,7 @@
 <footer>
     <h1>使用其他方式登录</h1>
     <div class="othertype">
-        <a href="/wx/get-user-jump">
+        <a id="wxlogin" href="javascript:void(0);">
             <img src="/mobile/images/weixin.png" />
         </a>
     </div>
@@ -80,12 +80,31 @@
         });
         return false;
     });
+    $('#wxlogin').on('click', function () {
+        if ($.util.isApp) {
+            $.util.loginWX(function (code) {
+                $.ajax({
+                    url: '/wx/kk'
+                });
+            });
+        } else {
+            $.ajax({
+                type:'post',
+                url: '/wx/appLogin',
+                success:function(res){
+                    
+                }
+            });
+            return;
+            document.location.href = '/wx/get-user-jump';
+        }
+    });
     function checkPhone(phone) {
         if (phone !== '') {
             if (is_mobile(phone)) {
                 $.post('/user/ckUserPhoneExist', {phone: phone}, function (res) {
                     if (res.status === false) {
-                         $.util.alert(res.msg);
+                        $.util.alert(res.msg);
                     }
                 }, 'json');
             } else {

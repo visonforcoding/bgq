@@ -190,6 +190,19 @@ class HomeController extends AppController {
         $this->set(compact('unReadCount','fans'));
     }
     
+    
+    /**
+     * 我的系统消息
+     */
+    public function myMessageSys(){
+        $user_id = $this->user->id;
+        $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
+        $unReadCount = $UsermsgTable->find()->where(['user_id'=>$user_id,'status'=>0])->count();
+        $msgs = $UsermsgTable->find()->where(['user_id'=>$user_id,'type !='=>1])->toArray();
+        $this->set(compact('msgs','unReadCount'));
+    }
+
+
     /**
      * 小秘书
      */
@@ -364,6 +377,25 @@ class HomeController extends AppController {
      * 我的钱包
      */
     public function myPurse(){
-        
+        $user_id = $this->user->id;
+        $userInfo = $this->User->get($user_id);
+        $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+        $flows = $FlowTable->find()->where(['user_id'=>$user_id,'status'=>'1'])->orderDesc('create_time')->toArray();
+        $this->set(array(
+            'userInfo'=>$userInfo,
+            'flows'=>$flows
+        ));
+    }
+    
+    /**
+     * 提现
+     */
+    public function withdraw(){
+        $user_id = $this->user->id;
+        $userInfo = $this->User->get($user_id);
+        if($this->request->isAjax()){
+            $this->Util->ajaxReturn(['ff'=>'rr']);
+        }
+        $this->set(compact('userInfo'));
     }
 }

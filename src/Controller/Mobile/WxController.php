@@ -49,9 +49,10 @@ class WxController extends AppController {
         $this->redirect($wx_code_url);
     }
 
-    /* *
+    /*     *
      * 获取code->获取openid user 信息 业务处理
      */
+
     public function getUserCode() {
         $code = $this->request->query('code');
         $wxconfig = \Cake\Core\Configure::read('weixin');
@@ -112,9 +113,9 @@ class WxController extends AppController {
     public function meetPay($id = null) {
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
         $order = $OrderTable->get($id, [
-            'contain' => ['SubjectBook','SubjectBook.Subjects']
+            'contain' => ['SubjectBook', 'SubjectBook.Subjects']
         ]);
-        $body = '预约话题《'.$order->subject_book->subject->title.'》支付';
+        $body = '预约话题《' . $order->subject_book->subject->title . '》支付';
         $openid = $this->user->wx_openid;
         $out_trade_no = $order->order_no;
         //$fee = intval(($order->price)*100);  //支付金额(分)
@@ -127,14 +128,27 @@ class WxController extends AppController {
         $book = $order->subject_book;
         $this->set(compact('book'));
     }
-    
+
     /**
      * 微信的异步回调通知
      */
-    public function wxNotify(){
-       $this->loadComponent('Wxpay');
-       $this->Wxpay->notify();
-       exit();
+    public function wxNotify() {
+        $this->loadComponent('Wxpay');
+        $this->Wxpay->notify();
+        exit();
+    }
+
+    
+    /**
+     * app 微信登录接口
+     * @return type
+     */
+    public function appLogin() {
+        if($this->request->isPost()){
+            $code = $this->request->data('code');
+            $res = $this->Wx->getUser($code);
+            $this->Util->ajaxReturn(json_encode($res));
+        }
     }
 
 }

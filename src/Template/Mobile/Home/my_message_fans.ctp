@@ -3,7 +3,7 @@
         <a href='/home/index' class='toback'></a>
         <h1 class="m-message-top">
             <a href="javascript:void(0);" class="active">新的关注<i><?=$unReadCount?></i></a>|
-            <a href="javascript:void(0);">系统消息<i>3</i></a>
+            <a href="/home/my-message-sys">系统消息<i>3</i></a>
         </h1>
         <a href="javascript:void(0);" class="h-regiser h-add"></a>
     </div>

@@ -78,8 +78,8 @@ class WxComponent extends Component {
      * 通过返回的code 获取access_token 再异步获取openId 和 用户信息
      * @return boolean|stdClass 出错则返回false 成功则返回带有openId 的用户信息 json std对象
      */
-    public function getUser() {
-        $code = $this->request->query('code');
+    public function getUser($code=null) {
+        $code = !empty($code)?$code:$this->request->query('code');
         $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
         $wx_accesstoken_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $this->app_id . '&secret=' . $this->app_secret .
                 '&code=' . $code . '&grant_type=authorization_code';
