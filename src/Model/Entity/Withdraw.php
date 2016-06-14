@@ -10,11 +10,14 @@ use Cake\ORM\Entity;
  * @property int $user_id
  * @property \App\Model\Entity\User $user
  * @property float $amount
+ * @property string $cardno
+ * @property string $bank
+ * @property string $truename
  * @property float $fee
  * @property string $remark
  * @property int $status
- * @property \Cake\I18n\Time $ctime
- * @property \Cake\I18n\Time $utime
+ * @property \Cake\I18n\Time $create_time
+ * @property \Cake\I18n\Time $update_time
  */
 class Withdraw extends Entity
 {
