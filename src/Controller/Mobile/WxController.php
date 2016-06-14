@@ -146,7 +146,7 @@ class WxController extends AppController {
     public function appLogin() {
         if($this->request->isPost()){
             $code = $this->request->data('code');
-            $res = $this->Wx->getUser($code);
+            $res = $this->Wx->getUser($code,true);
             $this->Util->ajaxReturn(json_encode($res));
         }
     }
