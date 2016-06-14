@@ -144,6 +144,7 @@
                     });
                     break;
                 //无参数 只用到callback
+                case 'login.wx':
                 case "event.getLocation":
                 case "event.uploadPhoto":
                     registerAPI(null, api, function () {
@@ -181,18 +182,6 @@
                         }, apiCallback(cb));
                     });
                     break;
-                case 'login.wx':
-                    registerAPI(null, api, function() {
-                        var cb = arguments[0] || function(){};
-                        return JSApiInvoke(api, {}, apiCallback(function(code){
-                            $.ajax('/loginxxx/'+code, function(json){
-                                //json todo
-                                cb();
-                            });
-                        }));
-                    });
-                break;
-
                 default:
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {}, '');
