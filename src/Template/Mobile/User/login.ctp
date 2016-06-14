@@ -83,6 +83,7 @@
     $('#wxlogin').on('click', function () {
         if ($.util.isAPP) {
             alert('我在APP');
+                alert(LEMON.login.wx);
             LEMON.login.wx(function (code) {
                 alert(code);
                 $.ajax({
