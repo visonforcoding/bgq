@@ -1,4 +1,3 @@
-<?= $this->element('header'); ?>
 <div class="fixedwraper" >
     <div class='h-news-search'>
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe613;</a>
