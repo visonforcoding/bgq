@@ -92,9 +92,9 @@
                 url: '/wx/appLogin',
                 success:function(res){
                     alert(res);
-                    $.each(res,function(i,n){
-                        alert(i+':'+n);
-                    });
+//                    $.each(res,function(i,n){
+//                        alert(i+':'+n);
+//                    });
                 }
             });
             });
