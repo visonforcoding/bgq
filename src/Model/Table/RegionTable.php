@@ -29,11 +29,11 @@ class RegionTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
 
-        $this->belongsToMany('Activity', [
-            'foreignKey' => 'region_id',
-            'targetForeignKey' => 'activity_id',
-            'joinTable' => 'activity_region'
-        ]);
+//        $this->belongsToMany('Activity', [
+//            'foreignKey' => 'region_id',
+//            'targetForeignKey' => 'activity_id',
+//            'joinTable' => 'activity_region'
+//        ]);
     }
 
     /**
