@@ -9,7 +9,7 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Withdraw Model  提现金额
+ * Withdraw Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
  */
@@ -60,28 +60,22 @@ class WithdrawTable extends Table {
                 ->notEmpty('amount');
 
         $validator
-                ->numeric('fee')
-                ->requirePresence('fee', 'create')
-                ->notEmpty('fee');
+                ->requirePresence('cardno', 'create')
+                ->notEmpty('cardno');
 
         $validator
-                ->requirePresence('remark', 'create')
-                ->notEmpty('remark');
+                ->requirePresence('bank', 'create')
+                ->notEmpty('bank');
+
+        $validator
+                ->requirePresence('truename', 'create')
+                ->notEmpty('truename');
+
 
         $validator
                 ->integer('status')
                 ->requirePresence('status', 'create')
                 ->notEmpty('status');
-
-        $validator
-                ->dateTime('ctime')
-                ->requirePresence('ctime', 'create')
-                ->notEmpty('ctime');
-
-        $validator
-                ->dateTime('utime')
-                ->requirePresence('utime', 'create')
-                ->notEmpty('utime');
 
         return $validator;
     }

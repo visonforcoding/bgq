@@ -394,7 +394,27 @@ class HomeController extends AppController {
         $user_id = $this->user->id;
         $userInfo = $this->User->get($user_id);
         if($this->request->isAjax()){
-            $this->Util->ajaxReturn(['ff'=>'rr']);
+            $amount =  $this->request->data('amount');
+            $bank =  $this->request->data('bank');
+            $cardno =  $this->request->data('cardno');
+            $truename =  $this->request->data('truename');
+            if($amount>$userInfo->money){
+                $this->Util->ajaxReturn(false,'提现金额不能大于钱包余额');
+            }
+            $WithdrawTable = \Cake\ORM\TableRegistry::get('Withdraw');
+            $withdraw = $WithdrawTable->newEntity([
+                'user_id'=>$user_id,
+                'amount'=>  $amount,
+                'cardno'=> $cardno,
+                'truename'=>$truename,
+                'bank'=>$bank,
+            ]);
+            if($WithdrawTable->save($withdraw)){
+                $this->Util->ajaxReturn(true,'提现申请成功');
+            }else{
+                \Cake\Log\Log::error($withdraw->errors());
+                $this->Util->ajaxReturn(false,'提现申请失败');
+            }
         }
         $this->set(compact('userInfo'));
     }
