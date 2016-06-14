@@ -19,7 +19,7 @@ i{font-style: normal;}
 .clearfix { *zoom:1; /* for IE6 7 */ }
 .inner{width:90%;margin:0 auto;position:relative;}
 .wraper{position:relative;overflow:hidden;}
-.fixedwraper{position:relative;padding-top:0.8rem;}
+.fixedwraper{position:relative;/*padding-top:0.8rem;*/}
 .innerwaper{padding-left: 0.3rem;padding-right: 0.3rem;width:100%;}
 .my-wraper{padding-top:1.6rem;}
 .h20{background:#f0eff5;border-top:1px solid #c8c7cc;border-bottom:1px solid #c8c7cc;height:0.2rem;}
@@ -128,4 +128,4 @@ footer .othertype img{width:100%;height:auto;display:block;}
 .wraper .moveleft{-webkit-animation: moveleft 1s;animation-fill-mode:forwards;
 -webkit-animation-fill-mode:forwards;}
 .wraper .movedown{-webkit-animation: movedown 1s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
-
+header{display:none;}
