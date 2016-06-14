@@ -82,7 +82,9 @@
     });
     $('#wxlogin').on('click', function () {
         if ($.util.isAPP) {
+            alert('我在APP');
             LEMON.login.wx(function (code) {
+                alert(code);
                 $.ajax({
                 type:'post',
                 data:{code:code},
