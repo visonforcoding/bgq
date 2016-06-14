@@ -23,6 +23,8 @@ return [
         'key'=>'3596f7e1a0f6d4171005f9226f3e36ec',
         'sslcert_path'=> dirname(__FILE__).'/wxcert/apiclient_cert.pem',
         'sslkey_path'=> dirname(__FILE__).'/wxcert/apiclient_key.pem',
-        'notify_url'=>'/wx/wx-notify'
+        'notify_url'=>'/wx/wx-notify',
+        'AppID'=>'wxb450720adce7295f',     //APP端的 开放平台appid
+        'AppSecret'=>'1c721c93e80578c2b707358993dcd371'
     ]
 ];

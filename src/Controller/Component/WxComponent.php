@@ -25,12 +25,14 @@ class WxComponent extends Component {
 
     protected $app_id;
     protected $app_secret;
+    protected $wxconfig;
 
     public function initialize(array $config) {
         parent::initialize($config);
         $wxconfig = \Cake\Core\Configure::read('weixin');
         $this->app_id = $wxconfig['appID'];
         $this->app_secret = $wxconfig['appsecret'];
+        $this->wxconfig = $wxconfig;
     }
 
     /**
@@ -78,10 +80,17 @@ class WxComponent extends Component {
      * 通过返回的code 获取access_token 再异步获取openId 和 用户信息
      * @return boolean|stdClass 出错则返回false 成功则返回带有openId 的用户信息 json std对象
      */
-    public function getUser($code=null) {
+    public function getUser($code=null,$isApp=false) {
         $code = !empty($code)?$code:$this->request->query('code');
         $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
-        $wx_accesstoken_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $this->app_id . '&secret=' . $this->app_secret .
+        $appid = $this->app_id;
+        $app_secret = $this->app_secret;
+        if($isApp){
+            $wxconfig = $this->wxconfig;
+            $appid = $wxconfig['AppID'];
+            $app_secret = $wxconfig['AppSecret'];
+        }
+        $wx_accesstoken_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $appid . '&secret=' . $app_secret .
                 '&code=' . $code . '&grant_type=authorization_code';
         $response = $httpClient->get($wx_accesstoken_url);
         if ($response->isOk()) {
