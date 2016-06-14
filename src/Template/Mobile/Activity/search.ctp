@@ -85,7 +85,6 @@
                             if (msg.status === true) {
                                 var html = $.util.dataToTpl('', 'search_tpl', msg.data , function (d) {
                                     d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
-                                    d.industries_name = $.util.dataToTpl('', 'subTpl', d.industries);
                                     return d;
                                 });
                                 $('#search').append(html);
