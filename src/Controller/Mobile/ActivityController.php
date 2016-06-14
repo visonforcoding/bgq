@@ -445,7 +445,6 @@ class ActivityController extends AppController {
     public function getMoreSearch($page){
         $data = $this->request->data();
         $industry_id = $data['industry_id'];
-        // 已报名
         $isApply = [];
         if ($this->user) {
             // 用户已报名的活动
@@ -480,7 +479,7 @@ class ActivityController extends AppController {
             $res = $res->orderDesc('create_time');
         }
         $res = $res
-                ->page($page, $this->newslimit)
+                ->page($page, $this->limit)
                 ->toArray();
         if ($res) {
             $this->Util->ajaxReturn(['status' => true, 'data' => $res]);
