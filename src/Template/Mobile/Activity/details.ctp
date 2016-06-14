@@ -88,8 +88,8 @@
                 <?php foreach($savant as $k => $v): ?>
                 <li>
                     <a href="javascript:void(0)">
-                        <img src="<?= $v['avatar'] ?>" alt="<?= $v['truename'] ?>" />
-                        <h3><?= $v['truename'] ?><span><?= $v['company'] ?> <?= $v['position'] ?></span></h3>
+                        <img src="<?= $v['user']['avatar'] ?>" alt="<?= $v['user']['truename'] ?>" />
+                        <h3><?= $v['user']['truename'] ?><span><?= $v['user']['company'] ?> <?= $v['user']['position'] ?></span></h3>
                     </a>
                 </li>
                 <?php endforeach; ?>

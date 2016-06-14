@@ -202,6 +202,22 @@ $.util = {
             $.util.initLoadImg(listId);
         }
         $.util.loadImg();
+    },
+    
+    // 搜索框滚动隐藏
+    searchHide: function() {
+        window.up = false;
+        $(window).on('scroll', function(){
+            // 滚动一定距离，搜索隐藏
+            if (document.body.scrollTop > ($('#imgList').height() + $('.inner').height())) {
+                $('.a-search-box').removeClass('movedown');
+                $('.a-search-box').addClass('moveup');
+                window.up = true;
+            }
+            if(document.body.scrollTop < ($('#imgList').height() + $('.inner').height()) && window.up == true){
+                $('.a-search-box').addClass('movedown');
+            }
+        });
     }
 
 };

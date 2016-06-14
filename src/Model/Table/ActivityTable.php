@@ -49,6 +49,13 @@ class ActivityTable extends Table {
             'targetForeignKey' => 'industry_id'
         ]);
         
+        $this->belongsToMany('Savants', [
+            'className' => 'Savant',
+            'joinTable' => 'activity_savant',
+            'foreignKey' => 'activity_id',
+            'targetForeignKey' => 'savant_id'
+        ]);
+        
         $this->belongsTo('Regions', [
             'foreignKey' => 'region_id',
             'joinType' => 'INNER',
@@ -84,6 +91,8 @@ class ActivityTable extends Table {
             'joinType' => 'INNER',
             'className' => 'like_logs',
         ]);
+        
+        
 
         $this->addBehavior('Timestamp', [
             'events' => [
