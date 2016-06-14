@@ -81,21 +81,20 @@
         return false;
     });
     $('#wxlogin').on('click', function () {
-        if ($.util.isApp) {
-            $.util.loginWX(function (code) {
+        if ($.util.isAPP) {
+            LEMON.login.wx(function (code) {
                 $.ajax({
-                    url: '/wx/kk'
-                });
-            });
-        } else {
-            $.ajax({
                 type:'post',
+                data:{code:code},
                 url: '/wx/appLogin',
                 success:function(res){
-                    
+                    $.each(res,function(i,n){
+                        alert(i+':'+n);
+                    });
                 }
             });
-            return;
+            });
+        } else {
             document.location.href = '/wx/get-user-jump';
         }
     });
