@@ -14,7 +14,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace App\Controller\Home;
+namespace App\Controller\Mobile;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
@@ -24,10 +24,17 @@ use Cake\Event\Event;
  *
  * Add your application-wide methods in the class below, your controllers
  * will inherit them.
- *
+ * @property \App\Controller\Component\UtilComponent $Util
  * @link http://book.cakephp.org/3.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+
+    /**
+     * 无需验证登录的action
+     * @var array 
+     */
+    private $firewall;
+    protected $user;
 
     /**
      * Initialization hook method.
@@ -43,6 +50,15 @@ class AppController extends Controller {
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        $this->loadComponent('Util');
+
+        //无需登录的
+        $this->firewall = array(
+            ['user', 'login'],
+            ['user', 'register'],
+            ['news', 'index'],
+            ['news', 'view'],
+        );
     }
 
     /**
@@ -52,7 +68,47 @@ class AppController extends Controller {
      * @return void
      */
     public function beforeRender(Event $event) {
-        
+        $this->viewBuilder()->layout('layout');
     }
+
+    public function beforeFilter(Event $event) {
+        $this->user = $this->request->session()->read('User.mobile');
+        return $this->checkLogin();
+    }
+
+    /**
+     * 检查用户登录
+     * @return type
+     */
+    private function checkLogin() {
+        $controller = strtolower($this->request->param('controller'));
+        $action = strtolower($this->request->param('action'));
+        $request_aim = [$controller, $action];
+        if (in_array($request_aim, $this->firewall) || 
+                in_array($controller, ['user', 'wx','news','activity','meet','pay'])) {
+            return true;
+        }
+        return $this->handCheckLogin();
+    }
+
+    
+    /**
+     * 处理检测登陆
+     * @return type
+     */
+    protected function handCheckLogin() {
+        $user = $this->request->session()->check('User.mobile');
+        $url = '/'.$this->request->url;
+        if (!$user) {
+            if ($this->request->is('ajax')) {
+                $url = $this->request->referer();
+                $login_url = '/user/login?redirect_url='.$url;
+                $this->Util->ajaxReturn(['status' => false, 'msg' => '请先登录', 'code' => 403,'redirect_url'=>$login_url]);
+            }
+            return $this->redirect('/user/login?redirect_url='.$url);
+            //header("location:".'/user/login');
+        }
+    }
+    
 
 }
