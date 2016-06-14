@@ -15,8 +15,26 @@
     </ul>
 </footer>
 <script>
-    if(navigator.userAgent.toLowerCase().indexOf('smartlemon') == -1){
-        document.getElementById('footer').style.display = 'block';
-        $('.wraper').addClass('newswraper');
+
+    if(!/smartlemon/.test(navigator.userAgent.toLowerCase())) {
+        if (window.location.href.indexOf('activity') != -1) {
+            $('.activity_icon').css({color: '#dd204b'});
+            $('.activity_icon span').css({color: '#dd204b'});
+        }
+        else if (window.location.href.indexOf('meet') != -1) {
+            $('.meet_icon').css({color: '#dd204b'});
+            $('.meet_icon span').css({color: '#dd204b'});
+        }
+        else if (window.location.href.indexOf('home') != -1) {
+            $('.home_icon').css({color: '#dd204b'});
+            $('.home_icon span').css({color: '#dd204b'});
+        }
+        else {
+            $('.news_icon').css({color: '#dd204b'});
+            $('.news_icon span').css({color: '#dd204b'});
+        }
+        if (window.location.href.indexOf('index') != -1) {
+            $('.toback').hide();
+        }
     }
 </script>

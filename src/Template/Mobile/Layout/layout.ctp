@@ -19,32 +19,14 @@
         <script src="/mobile/js/util.js"></script>
         <script src="/mobile/js/function.js"></script>
         <script>
-            if (/smartlemon|micromessenger/.test(navigator.userAgent.toLowerCase())) {
-                document.getElementsByTagName('header')[0] && document.getElementsByTagName('header')[0].style.display = 'block';
+
+            if(!/smartlemon|micromessenger/.test(navigator.userAgent.toLowerCase())){
+                $('header').show();
             }
-            if (window.location.href.indexOf('activity') != -1)
-            {
-                $('.activity_icon').css({color: '#dd204b'});
-                $('.activity_icon span').css({color: '#dd204b'});
-            }
-            else if (window.location.href.indexOf('meet') != -1)
-            {
-                $('.meet_icon').css({color: '#dd204b'});
-                $('.meet_icon span').css({color: '#dd204b'});
-            }
-            else if (window.location.href.indexOf('home') != -1)
-            {
-                $('.home_icon').css({color: '#dd204b'});
-                $('.home_icon span').css({color: '#dd204b'});
-            }
-            else
-            {
-                $('.news_icon').css({color: '#dd204b'});
-                $('.news_icon span').css({color: '#dd204b'});
-            }
-            if (window.location.href.indexOf('index') != -1)
-            {
-                $('.toback').hide();
+
+            if(navigator.userAgent.toLowerCase().indexOf('smartlemon') == -1){
+                $('footer').show();
+                //$('.wraper').addClass('newswraper');
             }
         </script>
         <?= $this->fetch('script') ?>
