@@ -29,6 +29,7 @@ class WithdrawTable extends Table {
         $this->primaryKey('id');
 
         $this->belongsTo('Users', [
+            'className'=>'user',
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
@@ -71,11 +72,6 @@ class WithdrawTable extends Table {
                 ->requirePresence('truename', 'create')
                 ->notEmpty('truename');
 
-
-        $validator
-                ->integer('status')
-                ->requirePresence('status', 'create')
-                ->notEmpty('status');
 
         return $validator;
     }

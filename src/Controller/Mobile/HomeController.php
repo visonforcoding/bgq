@@ -397,7 +397,6 @@ class HomeController extends AppController {
             $amount =  $this->request->data('amount');
             $bank =  $this->request->data('bank');
             $cardno =  $this->request->data('cardno');
-            $truename =  $this->request->data('truename');
             if($amount>$userInfo->money){
                 $this->Util->ajaxReturn(false,'提现金额不能大于钱包余额');
             }
@@ -406,7 +405,7 @@ class HomeController extends AppController {
                 'user_id'=>$user_id,
                 'amount'=>  $amount,
                 'cardno'=> $cardno,
-                'truename'=>$truename,
+                'truename'=>$userInfo->truename,
                 'bank'=>$bank,
             ]);
             if($WithdrawTable->save($withdraw)){
