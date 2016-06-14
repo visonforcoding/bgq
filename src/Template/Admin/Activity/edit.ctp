@@ -110,6 +110,12 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">专家推荐</label>
+        <div class="col-md-8">
+            <?= $this->cell('Savant',[$selSavantIds]); ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">费用</label>
         <div class="col-md-8">
         <?php
@@ -191,6 +197,10 @@
         UE.getEditor('guest');
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-industry').select2({
+            language: "zh-CN",
+            placeholder: '选择一个标签'
+        });
+        $('#select-savant').select2({
             language: "zh-CN",
             placeholder: '选择一个标签'
         });

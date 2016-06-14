@@ -59,7 +59,7 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script src="/mobile/js/activity_index.js"></script>
 <script>
-    window.up = false;
+//    window.up = false;
     window.isApply = ',' + <?= $isApply ?> + ',';
     $.util.dataToTpl('activity', 'activity_tpl',<?= $actjson ?>, function (d) {
         d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
@@ -77,6 +77,8 @@
     $('.search').focus(function () {
         location.href = "/activity/search";
     });
+    
+    $.util.searchHide();
 </script>
 <?php
 $this->end('script');

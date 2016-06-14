@@ -57,9 +57,11 @@ class ActivityController extends AppController {
         }
         $admins = $this->Activity->Admins->find('list', ['limit' => 200]);
         $regions = $this->Activity->Regions->find('list', ['limit' => 200]);
+        $savants = $this->Activity->Savants->find('list', ['limit' => 200]);
         $industries = $this->Activity->Industries->find()->hydrate(false)->all()->toArray();
         $industries = \Wpadmin\Utils\Util::tree($industries, 0, 'id', 'pid');
-        $this->set(compact('activity', 'admins', 'industries', 'regions'));
+        
+        $this->set(compact('activity', 'admins', 'industries', 'regions', 'savants'));
     }
 
     /**
@@ -71,7 +73,7 @@ class ActivityController extends AppController {
      */
     public function edit($id = null) {
         $activity = $this->Activity->get($id, [
-            'contain' => ['Industries'],
+            'contain' => ['Industries', 'Savants'],
         ]);
         if ($this->request->is(['post', 'put'])) {
             $activity = $this->Activity->patchEntity($activity, $this->request->data);
@@ -85,11 +87,19 @@ class ActivityController extends AppController {
         $admins = $this->Activity->Admins->find('list', ['limit' => 200]);
         $industries = $this->Activity->Industries->find('list', ['limit' => 200]);
         $regions = $this->Activity->Regions->find('list', ['limit' => 200]);
-        $this->set(compact('activity', 'admins', 'industries', 'regions'));
+//        $SavantTable = \Cake\ORM\TableRegistry::get('Savant');
+//        $savants = $SavantTable->find('list', ['limit' => 200])->contain(['Users']);
+//        $savants = $this->Activity->Savants->find('list', ['limit' => 200])->contain(['Users']);
+//        debug($savants);die;
+        $this->set(compact('activity', 'admins', 'industries', 'regions', 'savants'));
+        foreach ($activity->savants as $savant)
+        {
+            $selSavantIds[] = $savant->id;
+        }
         foreach ($activity->industries as $industry) {
             $selIndustryIds[] = $industry->id;
         }
-        $this->set(compact('activity', 'selIndustryIds'));
+        $this->set(compact('activity', 'selIndustryIds', 'selSavantIds'));
     }
 
     /**

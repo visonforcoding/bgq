@@ -108,7 +108,6 @@ Router::scope('/w/', function ($routes) {
     $routes->connect('/:controller/:action/*',['prefix'=>'home']);
 });
 
-
 /**
  * Load all plugin routes.  See the Plugin documentation on
  * how to customize the loading of plugin routes.

@@ -145,3 +145,14 @@ ENGINE=InnoDB;
 
 #活动增加地区
 ALTER TABLE activity add region_id INT NOT NULL COMMENT '地区id';
+
+#专家推荐活动关系表
+CREATE TABLE `activity_savant` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '专家推荐活动关系表',
+	`activity_id` INT NOT NULL COMMENT '活动id',
+	`savant_id` INT NOT NULL COMMENT '专家id',
+	PRIMARY KEY (`id`)
+)
+COMMENT='专家推荐活动关系表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;

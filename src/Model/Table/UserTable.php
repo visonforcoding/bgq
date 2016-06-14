@@ -46,6 +46,12 @@ class UserTable extends Table {
             'targetForeignKey' => 'industry_id'
         ]);
         
+        $this->hasOne('Savants', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER',
+            'className' => 'Savant',
+        ]);
+        
         $this->belongsTo('Agencies');
 
         $this->addBehavior('Timestamp', [

@@ -64,7 +64,14 @@ class ActivityController extends AppController {
             $this->set('comjson', json_encode($comment));
 
             // 专家推荐
-//            $savant = $this
+            $savant = $this
+                    ->Activity
+                    ->Savants
+                    ->find()
+                    ->contain(['Users'])
+                    ->hydrate(false)
+                    ->toArray();
+//            debug($savant);die;
             $this->set('savant', $savant);
             
             // 活动详情

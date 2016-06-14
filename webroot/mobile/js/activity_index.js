@@ -48,15 +48,15 @@ activity.prototype.bindEvent = function () {
 activity.prototype.scroll = function () {
 //    var obj = this;
     $(window).on("scroll", function () {
-        // 滚动一定距离，搜索隐藏
-        if (document.body.scrollTop > ($('#imgList').height() + $('.inner').height())) {
-            $('.a-search-box').removeClass('movedown');
-            $('.a-search-box').addClass('moveup');
-            window.up = true;
-        }
-        if(document.body.scrollTop < ($('#imgList').height() + $('.inner').height()) && window.up == true){
-            $('.a-search-box').addClass('movedown');
-        }
+//        // 滚动一定距离，搜索隐藏
+//        if (document.body.scrollTop > ($('#imgList').height() + $('.inner').height())) {
+//            $('.a-search-box').removeClass('movedown');
+//            $('.a-search-box').addClass('moveup');
+//            window.up = true;
+//        }
+//        if(document.body.scrollTop < ($('#imgList').height() + $('.inner').height()) && window.up == true){
+//            $('.a-search-box').addClass('movedown');
+//        }
         // 滚动两个屏幕长度，隐藏发布活动
         if (document.body.scrollTop > ($(window).height())) {
             $('#release').removeClass('moveleft').addClass('moveright');
