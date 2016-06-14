@@ -265,14 +265,13 @@ class NewsController extends AppController {
         } else {
             $news = $news->contain(['Industries']);
         }
-        if($data['sort'])
-        {
-            $news = $news->orderDesc('News.'.$data['sort']);
-        }
-        else
-        {
+        
+        if ($data['sort']) {
+            $news = $news->orderDesc('News.' . $data['sort']);
+        } else {
             $news = $news->orderDesc('News.create_time');
         }
+
         $news = $news
                 ->page($page, $this->newslimit)
                 ->toArray();
