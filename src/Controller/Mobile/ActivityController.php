@@ -28,6 +28,7 @@ class ActivityController extends AppController {
         if ($id) {
             $isLike = '';
             $isCollect = '';
+            $savant = '';
             // 已报名的人
             $allApply = $this
                     ->Activity
@@ -62,6 +63,11 @@ class ActivityController extends AppController {
                     ->toArray();
             $this->set('comjson', json_encode($comment));
 
+            // 专家推荐
+//            $savant = $this
+            $this->set('savant', $savant);
+            
+            // 活动详情
             $activity = $this->Activity->get($id, [
                 'contain' => ['Admins', 'Industries'],
             ]);
@@ -359,8 +365,10 @@ class ActivityController extends AppController {
         }
         $this->set('isApply', $isApply);
         
+        $region = $this->Activity->Regions->find()->hydrate(false)->all()->toArray();
         $industries = $this->Activity->Industries->find()->hydrate(false)->all()->toArray();
         $industries = $this->tree($industries);
+        $this->set('region', $region);
         $this->set('industries', $industries);
         $this->set('pageTitle', '搜索');
     }
@@ -601,7 +609,7 @@ class ActivityController extends AppController {
     
     public function test(){
         $a = $this->request->session();
-        $b = $a->read('User');
+        $b = $a->read();
         debug($b);die;
     }
 
