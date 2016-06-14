@@ -51,6 +51,7 @@ activity.prototype.bindEvent = function () {
                                 return d;
                             });
                         } else {
+                            $('#search').html('');
                             $.util.alert(msg.msg);
                         }
                     }
@@ -100,6 +101,7 @@ activity.prototype.bindEvent = function () {
                                     return d;
                                 });
                             } else {
+                                $('#search').html('');
                                 $.util.alert(msg.msg);
                             }
                         }
@@ -155,9 +157,6 @@ activity.prototype.bindEvent = function () {
                 {
                     $('#sort_mark').hide();
                 }
-                break;
-            case 'toback':
-                location.href = '/activity/index';
                 break;
             case 'goTop':
                 window.scroll(0, 0);

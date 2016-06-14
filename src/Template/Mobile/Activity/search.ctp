@@ -1,5 +1,5 @@
 <?= $this->element('header'); ?>
-<header>
+<!--<header>
     <div class='inner'>
         <a href='#this' class='toback iconfont news-serch' id="toback">&#xe613;</a>
         <h1>
@@ -11,9 +11,17 @@
         </h1>
         <a href="javascript:void(0);" class='h-regiser' id="doSearch">搜索</a>
     </div>
-</header>
+</header>-->
 <div class="fixedwraper" >
-
+    <div class='h-news-search'>
+        <a href='javascript:void(0);' class='iconfont news-serch'>&#xe613;</a>
+        <form id="searchForm" onsubmit="return false;" style="width:100%;">
+        <h1><input type="text" name="keyword" placeholder="请输入关键词"></h1>
+        <input type="hidden" name="industry_id" value="" style="display:none;"/>
+        <input type="hidden" name="sort" value="" style="display:none;"/>
+        </form>
+        <div class='h-regiser' id="doSearch" style="position: relative;right: 0;font-size: 0.28rem;width: 0.7rem;">搜索</div>
+    </div>
     <div class="news-classify">
         <div class="classify-l fl ml" id="choose_industry">
             <span id="choose_industries">选择行业</span>
