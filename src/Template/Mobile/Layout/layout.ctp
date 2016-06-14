@@ -15,6 +15,7 @@
     </head>
     <body>
         <?= $this->fetch('content') ?>
+        <script src="/mobile/js/jsapi.js"></script>
         <script src="/mobile/js/util.js"></script>
         <script src="/mobile/js/function.js"></script>
         <script>
