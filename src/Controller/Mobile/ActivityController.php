@@ -474,12 +474,9 @@ class ActivityController extends AppController {
         } else {
             $res = $res->contain(['Industries']);
         }
-        if($data['sort'])
-        {
+        if ($data['sort']) {
             $res = $res->orderDesc($data['sort']);
-        }
-        else
-        {
+        } else {
             $res = $res->orderDesc('create_time');
         }
         $res = $res
