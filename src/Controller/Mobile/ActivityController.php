@@ -437,6 +437,41 @@ class ActivityController extends AppController {
             $this->Util->ajaxReturn(false, '系统错误');
         }
     }
+    
+    /**
+     * 加载更多搜索结果
+     * @param int $page 页数
+     */
+    public function getMoreSearch($page){
+        $data = $this->request->data();
+        $industry_id = $data['industry_id'];
+        $res = $this->News->find()->where(['title LIKE' => '%' . $data['keyword'] . '%']);
+        if ($industry_id) {
+            $res = $res->matching(
+                'Industries', function($q)use($industry_id) {
+                    return $q->where(['Industries.id' => $industry_id]);
+                }
+            );
+        } else {
+            $res = $res->contain(['Industries']);
+        }
+        if($data['sort'])
+        {
+            $res = $res->orderDesc($data['sort']);
+        }
+        else
+        {
+            $res = $res->orderDesc('create_time');
+        }
+        $res = $res
+                ->page($page, $this->newslimit)
+                ->toArray();
+        if ($res) {
+            $this->Util->ajaxReturn(['status' => true, 'data' => $res]);
+        } else {
+            $this->Util->ajaxReturn(['status' => false]);
+        }
+    }
 
     /**
      * 将子元素分到父元素数组的一个子集里面，无限循环

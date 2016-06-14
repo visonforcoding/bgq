@@ -1,17 +1,4 @@
 <?= $this->element('header'); ?>
-<!--<header>
-    <div class='inner'>
-        <a href='#this' class='toback iconfont news-serch' id="toback">&#xe613;</a>
-        <h1>
-            <form id="searchForm" onsubmit="return false;">
-            <input type="text" placeholder="请输入关键词" name="keyword" />
-            <input type="hidden" name="industry_id" value="" style="display:none;"/>
-            <input type="hidden" name="sort" value="" style="display:none;"/>
-            </form>
-        </h1>
-        <a href="javascript:void(0);" class='h-regiser' id="doSearch">搜索</a>
-    </div>
-</header>-->
 <div class="fixedwraper" >
     <div class='h-news-search'>
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe613;</a>
@@ -82,23 +69,28 @@
                     return;
                 }
                 $.util.showLoading('buttonLoading');
-                $.getJSON('/activity/getSearchRes/' + page + '/' + $('input[name="industry_id"]').val() + '/' + $('input[name="sort"]').val() + '/' + $('input[name="keyword"]').val(), function (res) {
-                    console.log('page~~~' + page);
-                    $.util.hideLoading('buttonLoading');
-                    window.holdLoad = false;  //打开加载锁  可以开始再次加载
-
-                    if (!res.status) {  //拉不到数据了  到底了
-                        page = 9999;
-                        return;
-                    }
-
-                    if (res.status) {
-                        var html = $.util.dataToTpl('', 'search_tpl', res.data, function (d) {
-                            d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span><i>已报名</i></span>';
-                            return d;
-                        });
-                        $('#search').append(html);
-                        page++;
+                $.ajax({
+                    type: 'post',
+                    url: '/activity/getMoreSearch/' + page,
+                    data: $('#searchForm').serialize(),
+                    dataType: 'json',
+                    success: function (msg) {
+                        console.log('page~~~' + page);
+                        $.util.hideLoading('buttonLoading');
+                        window.holdLoad = false;  //打开加载锁  可以开始再次加载
+                        if (!msg.status) {  //拉不到数据了  到底了
+                            page = 9999;
+                            return;
+                        }
+                        if (typeof msg === 'object') {
+                            if (msg.status === true) {
+                                var html = $.util.dataToTpl('', 'search_tpl', msg.data , function (d) {
+                                    return d;
+                                });
+                                $('#search').append(html);
+                                page++;
+                            }
+                        }
                     }
                 });
             });
