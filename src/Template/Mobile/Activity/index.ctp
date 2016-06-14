@@ -1,5 +1,6 @@
 
 <body>
+    <?= $this->element('header'); ?>
     <div class="wraper a-wraper">
         <div class="a-search-box">
             <div class="a-search">

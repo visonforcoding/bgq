@@ -5,6 +5,14 @@
     </div>
 </header>
 <div class="wraper newswraper">
+    <div class="a-search-box">
+        <div class="a-search">
+            <a href="news-search.html"><i class="iconfont">&#xe613;</i></a>
+            <div class="s-con">
+                <input type="text" placeholder="请输入关键词" class="search"/>
+            </div>
+        </div>
+    </div>
     <div class="a-banner">
         <ul class="pic-list-container" id="imgList">
             <?php foreach ($banners as $banner): ?>
@@ -95,5 +103,15 @@
         });
     });
     }, 2000);
+    
+    $('.s-con').click(function () {
+        $('.search').focus();
+    });
+
+    $('.search').focus(function () {
+        location.href = "/news/search";
+    });
+    
+    $.util.searchHide();
 </script>
 <?php $this->end('script'); ?>

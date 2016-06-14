@@ -181,4 +181,105 @@ class NewsController extends AppController {
             $this->Util->ajaxReturn(false,'服务器出错');
         }
     }
+    
+    /**
+     * 活动搜索
+     */
+    public function search() {
+        $industries = $this->News->Industries->find()->hydrate(false)->all()->toArray();
+        $industries = $this->tree($industries);
+        $this->set('industries', $industries);
+        $this->set('pageTitle', '搜索');
+    }
+    
+    /**
+     * 搜索结果
+     */
+    public function getSearchRes() {
+        $data = $this->request->data();
+        $industry_id = $data['industry_id'];
+        
+        $res = $this
+                ->News
+                ->find()
+                ->where(['title LIKE' => '%' . $data['keyword'] . '%']);
+        if ($industry_id) {
+            $res = $res->matching(
+                'Industries', function($q)use($industry_id) {
+                    return $q->where(['Industries.id' => $industry_id]);
+                }
+            );
+        } else {
+            $res = $res->contain(['Industries']);
+        }
+        if ($data['sort']) {
+            $res->orderDesc($data['sort']);
+        } else {
+            $res->orderDesc('create_time'); // 默认按时间倒序排列
+        }
+        $res = $res
+                ->limit($this->newslimit)
+                ->toArray();
+        if ($res!==false) {
+            if($res == [])
+            {
+                $this->Util->ajaxReturn(false, '暂无搜索结果');
+            }
+            $this->Util->ajaxReturn(['status' => true, 'data' => $res]);
+        } else {
+            $this->Util->ajaxReturn(false, '系统错误');
+        }
+    }
+    
+    /**
+     * 将子元素分到父元素数组的一个子集里面，无限循环
+     * @param array $arr 原数组
+     * @param int $pid 父id
+     * @return array 重构后的数组
+     */
+    public function tree($arr, $pid = '0') {
+        $p = [];
+        foreach ($arr as $k => $v) {
+            if ($v['pid'] == $pid) {
+                $p[$k] = $v;
+                $p[$k]['child'] = $this->tree($arr, $v['id']);
+            }
+        }
+        return $p;
+    }
+    
+    /**
+     * 加载更多搜索结果
+     * @param int $page 页数
+     */
+    public function getMoreSearch($page){
+        $data = $this->request->data();
+        $industry_id = $data['industry_id'];
+        $news = $this->News->find()->where(['title LIKE' => '%' . $data['keyword'] . '%']);
+        if ($industry_id) {
+            $news = $news->matching(
+                'Industries', function($q)use($industry_id) {
+                    return $q->where(['Industries.id' => $industry_id]);
+                }
+            );
+        } else {
+            $news = $news->contain(['Industries']);
+        }
+        if($data['sort'])
+        {
+            $news = $news->orderDesc('News.'.$data['sort']);
+        }
+        else
+        {
+            $news = $news->orderDesc('News.create_time');
+        }
+        $news = $news
+                ->page($page, $this->newslimit)
+                ->toArray();
+        if ($news) {
+            $this->Util->ajaxReturn(['status' => true, 'data' => $news]);
+        } else {
+            $this->Util->ajaxReturn(['status' => false]);
+        }
+    }
 }

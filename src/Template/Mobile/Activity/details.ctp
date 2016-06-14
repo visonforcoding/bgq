@@ -1,4 +1,5 @@
 <body>
+    <?= $this->element('header'); ?>
     <div class="wraper" style="margin-bottom:1rem;" id="isTop">
         <section class="newscon-box a-detail">
             <h3><?= $activity->title; ?></h3>
