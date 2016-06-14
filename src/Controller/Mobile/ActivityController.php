@@ -372,15 +372,17 @@ class ActivityController extends AppController {
         }
         $this->set('isApply', $isApply);
         
-        $region = $this->Activity->Regions->find()->hydrate(false)->all()->toArray();
+//        $region = $this->Activity->Regions->find()->hydrate(false)->all()->toArray();
         $industries = $this->Activity->Industries->find()->hydrate(false)->all()->toArray();
         $industries = $this->tree($industries);
-        $this->set('region', $region);
+//        $this->set('region', $region);
         $this->set('industries', $industries);
         $this->set('pageTitle', '搜索');
     }
     
-    
+    /**
+     * 搜索结果
+     */
     public function getSearchRes() {
         $data = $this->request->data();
         $industry_id = $data['industry_id'];
