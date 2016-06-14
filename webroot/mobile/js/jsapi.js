@@ -70,7 +70,7 @@
     var apiList = ["db.get",
         "db.set",
         "sys.version",
-        "sys.QRcode",
+        "sys.QRcode",  //二维码扫描
         "hide.share", //隐藏分享图标
         "show.search", //显示搜索
         "share.banner",

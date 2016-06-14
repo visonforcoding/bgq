@@ -34,7 +34,7 @@ $.util = {
         var html=[], tpl = $.util.id(tplId).text;
         $.each(data, function(i,d){
             if(func) d=func(d);
-            html.push($.util.jsonToTpl(d,tpl));
+            html.push($.util.jsonToTpl(d,$.util.id(tplId).text));
         });
         return contentId === '' ? html.join('') : $('#'+contentId).html(html.join(''));
     },
@@ -208,3 +208,4 @@ $.util = {
 
 $.util.isWX = navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1;
 $.util.isQQ = navigator.userAgent.toLowerCase().indexOf('qq') != -1;
+$.util.isAPP = navigator.userAgent.toLowerCase().indexOf('smartlemon') != -1;
