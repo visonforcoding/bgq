@@ -91,10 +91,9 @@
                 data:{code:code},
                 url: '/wx/appLogin',
                 success:function(res){
-                    alert(res);
-//                    $.each(res,function(i,n){
-//                        alert(i+':'+n);
-//                    });
+                    $.each(JSON.parse(res),function(i,n){
+                        alert(i+':'+n);
+                    });
                 }
             });
             });
