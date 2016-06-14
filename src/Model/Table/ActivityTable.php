@@ -48,6 +48,12 @@ class ActivityTable extends Table {
             'foreignKey' => 'activity_id',
             'targetForeignKey' => 'industry_id'
         ]);
+        
+        $this->belongsTo('Regions', [
+            'foreignKey' => 'region_id',
+            'joinType' => 'INNER',
+            'className' => 'Region',
+        ]);
 
         $this->belongsTo('Collect', [
             'foreignKey' => 'relate_id',

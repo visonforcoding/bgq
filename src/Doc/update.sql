@@ -36,13 +36,11 @@ ALTER TABLE activity add is_crowdfunding TINYINT(2) DEFAULT 0 COMMENT '是否众
 #活动评论
 CREATE TABLE `activitycom` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '活动评论表',
-	`pid` INT NOT NULL COMMENT '父id',
 	`user_id` INT(11) NOT NULL COMMENT '用户id',
 	`activity_id` INT(11) NOT NULL COMMENT '活动id',
 	`body` VARCHAR(550) NOT NULL COMMENT '评论内容',
 	`praise_nums` INT(11) DEFAULT 0 NOT NULL COMMENT '点赞数',
 	`create_time` DATETIME NOT NULL COMMENT '评论时间',
-	`is_delete` TINYINT(2) DEFAULT 0 NOT NULL COMMENT '状态值：0：未删除；1：已删除',
 	PRIMARY KEY (`id`)
 )
 COMMENT='活动评论表'
@@ -129,3 +127,21 @@ ENGINE=InnoDB;
 
 #活动评论增加回复人id
 ALTER TABLE activitycom add reply_id INT COMMENT '回复用户id';
+
+#活动评论增加父id
+ALTER TABLE activitycom add pid INT NOT NULL COMMENT '父id';
+
+-- ALTER TABLE activitycom add is_delete TINYINT(2) DEFAULT 0 NOT NULL COMMENT '状态值：0：未删除；1：已删除';
+
+#地区标签表
+CREATE TABLE `region` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '地区标签表',
+	`name` varchar(50) NOT NULL COMMENT '地区名称',
+	PRIMARY KEY (`id`)
+)
+COMMENT='地区标签表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+#活动增加地区
+ALTER TABLE activity add region_id INT NOT NULL COMMENT '地区id';

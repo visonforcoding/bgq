@@ -38,7 +38,7 @@
                         url: "/admin/activity/getDataList",
                         datatype: "json",
                         mtype: "POST",
-                        colNames: ['id', '作者', '标签', '主办单位', '活动名称', '活动时间', '地点', '规模', '阅读数', '点赞数', '评论数', '是否众筹', '报名人数', '报名费用', '创建时间', '更新时间', '操作'],
+                        colNames: ['id', '作者', '标签', '主办单位', '活动名称', '活动时间', '地区', '地点', '规模', '阅读数', '点赞数', '评论数', '是否众筹', '报名人数', '报名费用', '创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'id', editable: true, align: 'center'},
                             {name: 'user.truename', editable: true, align: 'center'},
@@ -46,6 +46,7 @@
                             {name: 'company', editable: true, align: 'center'},
                             {name: 'title', editable: true, align: 'center'},
                             {name: 'time', editable: true, align: 'center'},
+                            {name: 'region.name', editable: true, align: 'center'},
                             {name: 'address', editable: true, align: 'center'},
                             {name: 'scale', editable: true, align: 'center'},
                             {name: 'read_nums', editable: true, align: 'center'},

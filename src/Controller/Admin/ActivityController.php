@@ -56,9 +56,10 @@ class ActivityController extends AppController {
             }
         }
         $admins = $this->Activity->Admins->find('list', ['limit' => 200]);
+        $regions = $this->Activity->Regions->find('list', ['limit' => 200]);
         $industries = $this->Activity->Industries->find()->hydrate(false)->all()->toArray();
         $industries = \Wpadmin\Utils\Util::tree($industries, 0, 'id', 'pid');
-        $this->set(compact('activity', 'admins', 'industries'));
+        $this->set(compact('activity', 'admins', 'industries', 'regions'));
     }
 
     /**
@@ -70,7 +71,7 @@ class ActivityController extends AppController {
      */
     public function edit($id = null) {
         $activity = $this->Activity->get($id, [
-            'contain' => ['Industries']
+            'contain' => ['Industries'],
         ]);
         if ($this->request->is(['post', 'put'])) {
             $activity = $this->Activity->patchEntity($activity, $this->request->data);
@@ -83,7 +84,8 @@ class ActivityController extends AppController {
         }
         $admins = $this->Activity->Admins->find('list', ['limit' => 200]);
         $industries = $this->Activity->Industries->find('list', ['limit' => 200]);
-        $this->set(compact('activity', 'admins', 'industries'));
+        $regions = $this->Activity->Regions->find('list', ['limit' => 200]);
+        $this->set(compact('activity', 'admins', 'industries', 'regions'));
         foreach ($activity->industries as $industry) {
             $selIndustryIds[] = $industry->id;
         }
@@ -145,7 +147,7 @@ class ActivityController extends AppController {
             $query->where($where);
         }
         $nums = $query->count();
-        $query->contain(['Industries']);
+        $query->contain(['Industries', 'Regions']);
 
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);

@@ -60,9 +60,6 @@
                 </div>
                 <!-- <span>显示全部</span> -->
             </div>
-
-
-
         </section>
         <section class="newscomment-box">
             <h3 class="comment-title">
@@ -72,21 +69,36 @@
             <div id="comment"></div>
             <div id="buttonLoading" class="loadingbox"></div>
         </section>
-            <div class="a-btn">
-                <a href="/activity/recommend/<?= $activity->id; ?>">我要推荐</a>
-                <?php if ($isApply != ''): ?>
-                    <?php if (in_array($activity->id, $isApply)): ?>
-                        <a>已报名(<?= $activity->apply_fee; ?>元)</a>
-                    <?php else: ?>
-                        <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
-                    <?php endif; ?>
+        <div class="a-btn">
+            <a href="/activity/recommend/<?= $activity->id; ?>">我要赞助</a>
+            <?php if ($isApply != ''): ?>
+                <?php if (in_array($activity->id, $isApply)): ?>
+                    <a>已报名(<?= $activity->apply_fee; ?>元)</a>
                 <?php else: ?>
                     <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
                 <?php endif; ?>
-            </div>
+            <?php else: ?>
+                <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+            <?php endif; ?>
+        </div>
+        <!--专家推荐-->
+        <?php if($savant): ?>
+        <div class="expert-commond innercon">
+            <ul>
+                <?php foreach($savant as $k => $v): ?>
+                <li>
+                    <a href="javascript:void(0)">
+                        <img src="<?= $v['avatar'] ?>" alt="<?= $v['truename'] ?>" />
+                        <h3><?= $v['truename'] ?><span><?= $v['company'] ?> <?= $v['position'] ?></span></h3>
+                    </a>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <?php endif; ?>
     </div>
+    
     <!--底部四个图-->
-
     <div class="iconlist">
         <span class="iconfont" id="article_comment" user_id="<?= $user; ?>">&#xe618;</span>
         <span class="iconfont<?php if (!$isCollect): ?> active<?php endif; ?>" id="collect" artid="<?= $activity->id; ?>" >&#xe610;</span>
