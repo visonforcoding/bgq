@@ -350,38 +350,50 @@ class BusinessComponent extends Component {
             return false;
         }
     }
-    
+
     /**
      * 处理订单业务
      * @param \App\Model\Entity\Order $order
      */
-    public function handOrder(\App\Model\Entity\Order $order){
-        if($order->type==1){
+    public function handOrder(\App\Model\Entity\Order $order) {
+        if ($order->type == 1) {
             //处理预约
             $this->handMeetOrder($order);
         }
     }
-    
+
     /**
-     * 处理预约订单
+     * 处理预约订单 1.预约状态更改 2.订单状态更改 3.专家 余额更改 4.交易流水记录生成
      * @param \App\Model\Entity\Order $order
      */
-    protected function handMeetOrder(\App\Model\Entity\Order $order){
+    protected function handMeetOrder(\App\Model\Entity\Order $order) {
         $book_id = $order->relate_id;
         $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
         $book = $BookTable->get($book_id);
         $book->status = 3; //预约流程完成
         $order->status = 1;  //订单完成
+        $pre_amount = $order->seller->money;
         $order->seller->money += $order->price;    //专家余额+
-        $order->dirty('seller',true);  //这里的seller 一定得是关联属性 不是关联模型名称 可以理解为实体
+        $order->dirty('seller', true);  //这里的seller 一定得是关联属性 不是关联模型名称 可以理解为实体
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
-        $transRes = $BookTable->connection()->transactional(function()use($order,$BookTable,$book,$OrderTable){
-            return $OrderTable->save($order,['associated' =>['Sellers']])&&$BookTable->save($book);
+        $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+        $flow = $FlowTable->newEntity([
+            'user_id' => $order->seller_id,
+            'type' => 1,
+            'type_msg' => '约见收入',
+            'income' => 1,
+            'amount' => $order->price,
+            'pre_amount' => $pre_amount,
+            'after_amount' => $order->seller->money,
+            'status' => 1,
+            'remark' => '约见获取收入:' . $order->price
+        ]);
+        $transRes = $BookTable->connection()->transactional(function()use($order, $BookTable, $book, $OrderTable, $FlowTable, $flow) {
+            return $OrderTable->save($order, ['associated' => ['Sellers']]) && $BookTable->save($book) && $FlowTable->save($flow);
         });
-        \Cake\Log\Log::debug($transRes);
-        if($transRes){
+        if ($transRes) {
             //向专家发送一条短信
-            $this->Sms->sendByQf106($order->seller->phone,'申请人已经向您支付了预约费用：'.$order->price.'元，请做好赴约准备。');
+            $this->Sms->sendByQf106($order->seller->phone, '申请人已经向您支付了预约费用：' . $order->price . '元，请做好赴约准备。');
         }
     }
 
