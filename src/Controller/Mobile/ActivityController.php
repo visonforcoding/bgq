@@ -445,7 +445,26 @@ class ActivityController extends AppController {
     public function getMoreSearch($page){
         $data = $this->request->data();
         $industry_id = $data['industry_id'];
-        $res = $this->News->find()->where(['title LIKE' => '%' . $data['keyword'] . '%']);
+        // 已报名
+        $isApply = [];
+        if ($this->user) {
+            // 用户已报名的活动
+            $activityApply = $this
+                            ->Activity
+                            ->Activityapply
+                            ->find()
+                            ->where(['user_id' => $this->user->id])
+                            ->select(['activity_id'])
+                            ->hydrate(false)
+                            ->toArray();
+            foreach ($activityApply as $k => $v) {
+                $isApply[] = $v['activity_id'];
+            }
+            $isApply = implode(',', $isApply);
+        }
+        $this->set('is_apply', $isApply);
+        
+        $res = $this->Activity->find()->where(['title LIKE' => '%' . $data['keyword'] . '%']);
         if ($industry_id) {
             $res = $res->matching(
                 'Industries', function($q)use($industry_id) {
