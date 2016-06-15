@@ -125,6 +125,7 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
 #=======06.07  已执行=======
 
+
 #活动评论增加回复人id
 ALTER TABLE activitycom add reply_id INT COMMENT '回复用户id';
 
@@ -150,6 +151,17 @@ ALTER TABLE activity add region_id INT NOT NULL COMMENT '地区id';
 CREATE TABLE `activity_savant` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '专家推荐活动关系表',
 	`activity_id` INT NOT NULL COMMENT '活动id',
+	`savant_id` INT NOT NULL COMMENT '专家id',
+	PRIMARY KEY (`id`)
+)
+COMMENT='专家推荐活动关系表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+#专家推荐资讯关系表
+CREATE TABLE `news_savant` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '专家推荐资讯关系表',
+	`news_id` INT NOT NULL COMMENT '资讯id',
 	`savant_id` INT NOT NULL COMMENT '专家id',
 	PRIMARY KEY (`id`)
 )
