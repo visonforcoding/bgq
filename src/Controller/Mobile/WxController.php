@@ -147,12 +147,13 @@ class WxController extends AppController {
         if($this->request->isPost()){
             $code = $this->request->data('code');
             $res = $this->Wx->getUser($code,true);
+            \Cake\Log\Log::debug($res);
             if(!$res){
                 //获取到openid 有问题
                 $this->Util->ajaxReturn(['status'=>false,'msg'=>'与微信服务器']);
             }
             $open_id = $res->openid;
-            $user = $this->User->findByWx_openid($open_id)->first();
+            $user = $this->User->findByApp_wx_openid($open_id)->first();
             if($user){
                 //直接登陆
                 $this->response->cookie(['login_token'=>$user->user_token]);//设置cookie
