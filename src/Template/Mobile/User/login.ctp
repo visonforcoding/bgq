@@ -88,6 +88,7 @@
                 data:{code:code},
                 url: '/wx/appLogin',
                 success:function(res){
+                    alert(res);
                     alert(res.msg);
                     if(res.status){
                         document.location.href = res.redirect_url;
