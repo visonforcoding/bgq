@@ -147,7 +147,24 @@ class WxController extends AppController {
         if($this->request->isPost()){
             $code = $this->request->data('code');
             $res = $this->Wx->getUser($code,true);
-            $this->Util->ajaxReturn(json_encode($res));
+            if(!$res){
+                //获取到openid 有问题
+                $this->Util->ajaxReturn(['status'=>false,'msg'=>'与微信服务器']);
+            }
+            $open_id = $res->openid;
+            $user = $this->User->findByWx_openid($open_id)->first();
+            if($user){
+                //直接登陆
+                $this->response->cookie(['login_token'=>$user->user_token]);//设置cookie
+                $this->request->session()->write('User.mobile', $user);
+                $this->Util->ajaxReturn(['status'=>true,'msg'=>'登陆成功','redirect_url'=>'/']);
+            }else{
+                //未注册过
+                $headimgurl = $res->headimgurl;
+                $this->request->session()->write('reg.wx_openid', $open_id);
+                $this->request->session()->write('reg.avatar', $headimgurl);
+                $this->Util->ajaxReturn(['status'=>true,'msg'=>'登陆成功，前往完善信息','redirect_url'=>'/user/wx-bind-phone']);
+            }
         }
     }
 

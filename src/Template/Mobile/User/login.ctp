@@ -82,21 +82,19 @@
     });
     $('#wxlogin').on('click', function () {
         if ($.util.isAPP) {
-            alert('我在APP');
-                alert(LEMON.login.wx);
             LEMON.login.wx(function (code) {
-                alert(code);
                 $.ajax({
                 type:'post',
                 data:{code:code},
                 url: '/wx/appLogin',
                 success:function(res){
-                    $.each(JSON.parse(res),function(i,n){
-                        alert(i+':'+n);
-                    });
+                    alert(res.msg);
+                    if(res.status){
+                        document.location.href = res.redirect_url;
+                    }
                 }
             });
-            });
+          });
         } else {
             document.location.href = '/wx/get-user-jump';
         }
