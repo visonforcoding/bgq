@@ -43,6 +43,13 @@ class NewsTable extends Table {
             'foreignKey' => 'news_id',
             'targetForeignKey' => 'industry_id'
         ]);
+        
+        $this->belongsToMany('Savants', [
+            'className' => 'Savant',
+            'joinTable' => 'news_savant',
+            'foreignKey' => 'news_id',
+            'targetForeignKey' => 'savant_id'
+        ]);
 
         $this->hasMany('Praises', [
             'className' => 'LikeLogs',
@@ -53,6 +60,10 @@ class NewsTable extends Table {
 
         $this->hasMany('Comments', [
             'className' => 'Newscom',
+        ]);
+        
+        $this->belongsTo('Users', [
+            'className' => 'User',
         ]);
 
         $this->addBehavior('Timestamp', [

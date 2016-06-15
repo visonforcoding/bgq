@@ -14,6 +14,12 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">专家推荐</label>
+        <div class="col-md-8">
+            <?= $this->cell('savant') ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">封面</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
@@ -64,6 +70,10 @@
         var ue = UE.getEditor('content'); //初始化富文本编辑器
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-industry').select2({
+            language: "zh-CN",
+            placeholder: '选择一个标签'
+        });
+        $('#select-savant').select2({
             language: "zh-CN",
             placeholder: '选择一个标签'
         });

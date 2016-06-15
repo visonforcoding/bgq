@@ -126,11 +126,12 @@ activity.prototype.bindEvent = function () {
             // 评论文章
             case 'publish_article':
                 var a = $(em)[0];
+                console.log(window.article);
                 if(window.article == true)
                 {
                     a.addEventListener('tap', function(){
                         window.article = false;
-                    }, true);
+                    },false);
                     var data = {};
                     var body = $('textarea[name="comment-content-article"]').val();
                     if (!body) {
@@ -156,15 +157,17 @@ activity.prototype.bindEvent = function () {
                                         return d;
                                     });
                                     $('#comment').prepend(html);
+                                    $('#allComments').prepend(html);
                                     $('.article-shadow').hide();
                                     $('.article').hide();
+                                    window.article = true;
                                 } else {
                                     $.util.alert(msg.msg);
+                                    window.article = true;
                                 }
                             }
                         }
                     });
-                    window.article = true;
                 }
                 break;
                 
@@ -201,6 +204,7 @@ activity.prototype.bindEvent = function () {
                                         return d;
                                     });
                                     $('#comment').prepend(html);
+                                    $('#allComments').prepend(html);
                                     $('.reply-shadow').hide();
                                     $('.reply').hide();
                                 } else {

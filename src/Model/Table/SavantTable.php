@@ -29,6 +29,20 @@ class SavantTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
+        $this->belongsToMany('News', [
+            'className' => 'News',
+            'joinTable' => 'news_savant',
+            'foreignKey' => 'savant_id',
+            'targetForeignKey' => 'news_id'
+        ]);
+        
+        $this->belongsToMany('Activity', [
+            'className' => 'Activity',
+            'joinTable' => 'activity_savant',
+            'foreignKey' => 'savant_id',
+            'targetForeignKey' => 'activity_id'
+        ]);
+        
         $this->belongsTo('Users', [
             'className'=>'User',
             'foreignKey' => 'user_id',

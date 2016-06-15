@@ -63,21 +63,17 @@ class ActivityController extends AppController {
                     ->toArray();
             $this->set('comjson', json_encode($comment));
 
-            // 专家推荐
-            $savant = $this
-                    ->Activity
-                    ->Savants
-                    ->find()
-                    ->contain(['Users'])
-                    ->hydrate(false)
-                    ->toArray();
-//            debug($savant);die;
-            $this->set('savant', $savant);
-            
             // 活动详情
             $activity = $this->Activity->get($id, [
-                'contain' => ['Admins', 'Industries'],
+                'contain' => [
+                    'Admins',
+                    'Industries',
+                    'Savants' => function($q){
+                        return $q->contain(['Users']);
+                    },
+                ],
             ]);
+//            debug($activity);die;
             $activity->read_nums += 1; // 阅读加1
             $this->Activity->save($activity);
             $this->set('activity', $activity);
@@ -297,8 +293,7 @@ class ActivityController extends AppController {
             if ($res !== true) {
                 $this->Util->ajaxReturn(false, $res);
             }
-            $res['status'] = true;
-            $this->Util->ajaxReturn($res);
+            $this->Util->ajaxReturn(true, $res);
         } else {
             $this->Util->ajaxReturn(false, '系统错误');
         }
@@ -372,10 +367,10 @@ class ActivityController extends AppController {
         }
         $this->set('isApply', $isApply);
         
-//        $region = $this->Activity->Regions->find()->hydrate(false)->all()->toArray();
+        $region = $this->Activity->Regions->find()->hydrate(false)->all()->toArray();
         $industries = $this->Activity->Industries->find()->hydrate(false)->all()->toArray();
         $industries = $this->tree($industries);
-//        $this->set('region', $region);
+        $this->set('regions', $region);
         $this->set('industries', $industries);
         $this->set('pageTitle', '搜索');
     }
@@ -415,9 +410,11 @@ class ActivityController extends AppController {
                     return $q->where(['Industries.id' => $industry_id]);
                 }
             );
-    
         } else {
             $res = $res->contain(['Industries']);
+        }
+        if($data['region']){
+            $res = $res->andWhere(['region_id'=>$data['region']]);
         }
         if ($data['sort']) {
             $res->orderDesc($data['sort']);
@@ -659,6 +656,24 @@ class ActivityController extends AppController {
                         ->page($page, $this->limit)
                         ->orderDesc('Activitycom.create_time')
                         ->toArray();
+        if ($comment) {
+            $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
+        } else {
+            $this->Util->ajaxReturn(['status' => false]);
+        }
+    }
+    
+    public function showAllComment($id){
+        // 评论
+        $comment = $this
+                ->Activity
+                ->Activitycom
+                ->find()
+                ->contain(['Users', 'Replyusers'])
+                ->where(['activity_id' => $id])
+                ->order(['Activitycom.create_time' => 'DESC'])
+                ->limit(10)
+                ->toArray();
         if ($comment) {
             $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
         } else {

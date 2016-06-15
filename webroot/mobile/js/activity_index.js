@@ -35,6 +35,9 @@ activity.prototype.bindEvent = function () {
                     location.href = "/activity/release";
                 } else {
                     $.util.alert('请先登录');
+                    setTimeout(function(){
+                        location.href = "/user/login";
+                    },2000);
                 }
                 break;
             case 'goTop':
