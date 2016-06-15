@@ -58,6 +58,7 @@ class NewsController extends AppController {
      * 评论
      */
     public function comment() {
+        $data = [];
         $this->handCheckLogin();
         if ($this->request->is('post')) {
             $reply_id = $this->request->data('reply_id');
@@ -76,14 +77,28 @@ class NewsController extends AppController {
                 'news_id'=>  $this->request->data('id'),
                 'body'=>  $this->request->data('content')
             ]));
-            if ($CommentTable->save($comment)) {
+            $newComment = $CommentTable->save($comment);
+            if ($newComment) {
                 //文章新闻数+1
                 $news = $this->News->get($this->request->data('id'));
                 $news->comment_nums +=1;
                 $this->News->save($news);
-                $this->loadComponent('Business');
-                $this->Business->usermsg($reply_com->user_id,'评论回复','有人回复了你的评论!', 3,$comment->id);
-                $this->Util->ajaxReturn(true, '评论成功');
+                if(is_numeric($reply_id)&&$reply_id>0){
+                    $this->loadComponent('Business');
+                    $this->Business->usermsg($reply_com->user_id,'评论回复','有人回复了你的评论!', 3,$comment->id);
+                }
+                $user_id = $this->user->id;
+                $res = $this->News->Comments->get($newComment->id, [
+                    'contain' => ['Users'=>function($q){
+                            return $q->select(['id','avatar','truename','company','position']);
+                    },'Likes'=>function($q)use($user_id){
+                        return $q->where(['type'=>1,'user_id'=>$user_id]);
+                    },'Reply'=>function($q){
+                        return $q->select(['id','truename']);
+                    }],
+                    'order' => ['Comments.create_time' => 'Desc'],
+                ]);
+                $this->Util->ajaxReturn(['status'=>true, 'msg'=>'评论成功', 'data'=>  $res]);
             } else {
                 $msg = errorMsg($comment,'评论成功');
                 $this->Util->ajaxReturn(false, $msg);
@@ -99,10 +114,14 @@ class NewsController extends AppController {
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null) {
+        $savant = '';
+        $isCollect = [];
         if(!empty($this->user)){
             $user_id = $this->user->id;
             $news = $this->News->get($id, [
-                'contain' => ['Admins', 'Comments','Comments.Users'=>function($q){
+                'contain' => ['Admins', 'Comments'=>function($q){
+                        return $q->orderDesc('Comments.create_time')->limit($this->newslimit);
+                },'Comments.Users'=>function($q){
                         return $q->select(['id','avatar','truename','company','position']);
                 },'Comments.Likes'=>function($q)use($user_id){
                     return $q->where(['type'=>1,'user_id'=>$user_id]);
@@ -110,17 +129,26 @@ class NewsController extends AppController {
                     return $q->where(['type'=>1,'user_id'=>$user_id]);
                 },'Comments.Reply'=>function($q){
                     return $q->select(['id','truename']);
-                }]
+                },'Savants'=>function($q){
+                    return $q->contain(['Users']);
+                }],
             ]);
+            $collectTable = \Cake\ORM\TableRegistry::get('collect');
+            $isCollect = $collectTable->find()->where(['user_id'=>$user_id, 'relate_id'=>$id, 'type'=>1, 'is_delete'=>0])->toArray();
         }else{
             $news = $this->News->get($id, [
-                'contain' => ['Admins', 'Comments','Comments.Users'=>function($q){
+                'contain' => ['Admins', 'Comments'=>function($q){
+                        return $q->orderDesc('Comments.create_time')->limit($this->newslimit);
+                },'Comments.Users'=>function($q){
                         return $q->select(['id','avatar','truename','company','position']);
                 },'Comments.Reply'=>function($q){
                     return $q->select(['id','truename']);
-                }]
+                },'Savants'=>function($q){
+                    return $q->contain(['Users']);
+                }],
             ]);
         }
+        $this->set('isCollect', $isCollect);
         //阅读数+1
         $news->read_nums +=1;
         $this->News->save($news);
@@ -280,5 +308,50 @@ class NewsController extends AppController {
         } else {
             $this->Util->ajaxReturn(['status' => false]);
         }
+    }
+    
+    /**
+     * ajax获取更多评论
+     * @param int $page 分页
+     * @param int $id 活动id
+     */
+    public function getMoreComment($page, $id) {
+        $comment = $this->News
+                        ->Comments
+                        ->find()
+                        ->where(['news_id' => $id])
+                        ->contain(['Users', 'Reply'])
+                        ->page($page, $this->newslimit)
+                        ->orderDesc('Comments.create_time')
+                        ->toArray();
+        if ($comment) {
+            $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
+        } else {
+            $this->Util->ajaxReturn(['status' => false]);
+        }
+    }
+    
+    public function showAllComment($id){
+        // 评论
+        $comment = $this
+                ->News
+                ->Comments
+                ->find()
+                ->contain(['Users', 'Reply'])
+                ->where(['news_id' => $id])
+                ->order(['Comments.create_time' => 'DESC'])
+                ->limit(10)
+                ->toArray();
+        if ($comment) {
+            $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
+        } else {
+            $this->Util->ajaxReturn(['status' => false]);
+        }
+    }
+    
+    public function test(){
+        $a = $this->request->session();
+        $b = $a->read();
+        debug($b);die;
     }
 }

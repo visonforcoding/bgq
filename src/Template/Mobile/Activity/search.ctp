@@ -5,6 +5,7 @@
         <h1><input type="text" name="keyword" placeholder="请输入关键词"></h1>
         <input type="hidden" name="industry_id" value="" style="display:none;"/>
         <input type="hidden" name="sort" value="" style="display:none;"/>
+        <input type="hidden" name="region" value="" style="display:none;"/>
         </form>
         <div class='h-regiser' id="doSearch" style="position: relative;right: 0;font-size: 0.28rem;width: 0.7rem;">搜索</div>
     </div>
@@ -27,7 +28,14 @@
                 <?php endforeach; ?>
             </ul>
         </div>
-
+        <div class="place-l fl ml" id="choose_region">
+            <span id="choose_regions">选择地区</span>
+            <ul class="sort-mark" id="choose_region_ul" hidden>
+                <?php foreach($regions as $k=>$v): ?>
+                <li id="region_<?= $v['id'] ?>" value='<?= $v['id'] ?>' class="choose_region_li"><a href="javascript:void(0);"><?= $v['name'] ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
         <div class="classify-r fr" id="choose_sort">
             <span id="choose_sorts">排序</span>
             <ul class="sort-mark" hidden id="sort_mark">

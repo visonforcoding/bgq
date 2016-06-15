@@ -26,7 +26,7 @@
         <div id="activity"></div>
         <div id="buttonLoading" class="loadingbox"></div>
         <div class="submitbtn subactivity" id="release" user="<?= $user; ?>">
-            <span>发布<br />活动</span>
+            <img src="/mobile/images/as.png">
         </div>
     </div>
 </body>

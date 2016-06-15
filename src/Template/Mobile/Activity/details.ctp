@@ -1,6 +1,6 @@
 <body>
     <?= $this->element('header'); ?>
-    <div class="wraper" style="margin-bottom:1rem;" id="isTop">
+    <div class="wraper" style="margin-bottom:1rem;" id="activity_detail">
         <section class="newscon-box a-detail">
             <h3><?= $activity->title; ?></h3>
             <img src="<?= $activity->cover; ?>"/>
@@ -56,7 +56,7 @@
                             <a href='javascript:void(0);'><img src="<?= $v['avatar']; ?>"/></a>
                         <?php endforeach; ?>
                     <?php else : ?>
-                            <div style="font-size:0.2rem;line-height: 0.22rem;">暂时无人报名</div>
+                        <div style="font-size:0.2rem;line-height: 0.22rem;">暂时无人报名</div>
                     <?php endif; ?>
                 </div>
                 <!-- <span>显示全部</span> -->
@@ -67,8 +67,7 @@
                 评论
                 <i class="iconfont">&#xe618;</i>
             </h3>
-            <div id="comment"></div>
-            <div id="buttonLoading" class="loadingbox"></div>
+            <div id="comment"></div><span class='com-all'><a href="#allcoment" id="showAllComment">显示全部</a></span>
         </section>
         <div class="a-btn">
             <a href="/activity/recommend/<?= $activity->id; ?>">我要赞助</a>
@@ -83,22 +82,33 @@
             <?php endif; ?>
         </div>
         <!--专家推荐-->
-        <?php if($savant): ?>
-        <div class="expert-commond innercon">
-            <ul>
-                <?php foreach($savant as $k => $v): ?>
-                <li>
-                    <a href="javascript:void(0)">
-                        <img src="<?= $v['user']['avatar'] ?>" alt="<?= $v['user']['truename'] ?>" />
-                        <h3><?= $v['user']['truename'] ?><span><?= $v['user']['company'] ?> <?= $v['user']['position'] ?></span></h3>
-                    </a>
-                </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
+        <?php if ($activity->savants): ?>
+            <div class="expert-commond innercon">
+                <ul>
+                    <?php foreach ($activity->savants as $k => $v): ?>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <img src="<?= $v['user']['avatar'] ?>" alt="<?= $v['user']['truename'] ?>" />
+                                <h3><?= $v['user']['truename'] ?><span><?= $v['user']['company'] ?> <?= $v['user']['position'] ?></span></h3>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
         <?php endif; ?>
     </div>
-    
+
+    <div class="wraper pd10" id="allcoment" style="display:none;">
+        <section class="newscomment-box">
+            <h3 class="comment-title">
+                评论
+                <span><i class="iconfont">&#xe618;</i>我要点评</span>
+            </h3>
+            <div id="allComments"></div>
+            <div id="buttonLoading" class="loadingbox"></div>
+        </section>
+    </div>
+
     <!--底部四个图-->
     <div class="iconlist">
         <span class="iconfont" id="article_comment" user_id="<?= $user; ?>">&#xe618;</span>
@@ -165,41 +175,75 @@
         return d;
     });
 
-    var page = 2;
-    setTimeout(function () {
-        $(window).on("scroll", function () {
-            $.util.listScroll('items', function () {
-                if (page === 9999) {
-                    $('#buttonLoading').html('亲，没有更多评论了');
-                    return;
+    
+
+    $(window).on('hashchange', function () {
+        if (location.hash == '#allcoment')
+        {
+            $('#activity_detail').hide('slow');
+            $('#allcoment').show('slow');
+            $.ajax({
+                type: 'post',
+                url: '/activity/showAllComment/<?= $activity->id ?>',
+                dataType: 'json',
+                success: function (res) {
+                    if (typeof res === 'object') {
+                        if (res.status === true) {
+                            $.util.dataToTpl('allComments', 'comment_tpl',res.data, function (d) {
+                                d.user_avatar = d.user.avatar;
+                                d.user_truename = d.user.truename;
+                                d.user_company = d.user.company;
+                                d.user_position = d.user.position;
+                                d.reply = d.pid > 0 ? '@' + d.replyuser.truename : '';
+                                return d;
+                            });
+                        }
+                    }
                 }
-                $.util.showLoading('buttonLoading');
-                $.getJSON('/activity/getMoreComment/' + page + '/' + <?= $activity->id; ?>, function (res) {
-                    $.util.hideLoading('buttonLoading');
-                    window.holdLoad = false;  //打开加载锁  可以开始再次加载
-
-                    if (!res.status) {  //拉不到数据了  到底了
-                        page = 9999;
-                        return;
-                    }
-
-                    if (res.status) {
-                        var html = $.util.dataToTpl('', 'comment_tpl', res.data, function (d) {
-                            d.user_avatar = d.user.avatar; // 头像
-                            d.user_truename = d.user.truename; // 名字
-                            d.user_company = d.user.company; // 公司
-                            d.user_position = d.user.position; // 职务
-                            d.reply = d.pid > 0 ? '@' + d.replyuser.truename : ''; // 是否回复别人的评论
-                            return d;
-                        });
-                        $('#comment').append(html);
-                        page++;
-                    }
-                });
             });
-        });
-    }, 2000);
+            var page = 3;
+            setTimeout(function () {
+                $(window).on("scroll", function () {
+                    $.util.listScroll('items', function () {
+                        if (page === 9999) {
+                            $('#buttonLoading').html('亲，没有更多评论了');
+                            return;
+                        }
+                        $.util.showLoading('buttonLoading');
+                        $.getJSON('/activity/getMoreComment/' + page + '/' + <?= $activity->id; ?>, function (res) {
+                            $.util.hideLoading('buttonLoading');
+                            window.holdLoad = false;  //打开加载锁  可以开始再次加载
 
+                            if (!res.status) {  //拉不到数据了  到底了
+                                page = 9999;
+                                return;
+                            }
+
+                            if (res.status) {
+                                var html = $.util.dataToTpl('', 'comment_tpl', res.data, function (d) {
+                                    d.user_avatar = d.user.avatar; // 头像
+                                    d.user_truename = d.user.truename; // 名字
+                                    d.user_company = d.user.company; // 公司
+                                    d.user_position = d.user.position; // 职务
+                                    d.reply = d.pid > 0 ? '@' + d.replyuser.truename : ''; // 是否回复别人的评论
+                                    return d;
+                                });
+                                $('#allComments').append(html);
+                                page++;
+                            }
+                        });
+                    });
+                });
+            }, 2000);
+        } else
+        {
+            $('#activity_detail').show('slow');
+            $('#allcoment').hide('slow');
+        }
+    });
+//    $(window).on('popstate',function(){
+//        alert();
+//    });
 </script>
 <?php
 $this->end('script');

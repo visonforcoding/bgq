@@ -86,6 +86,34 @@ activity.prototype.bindEvent = function () {
                 }
             });
         }
+        if (em.id.indexOf('region_') != -1) {
+            $('.choose_region_li').removeClass('active');
+            $(em).addClass('active');
+            $("input[name='region']").attr('value', $(em).attr('value'));
+            $('#choose_regions').html($(em).children('a').html());
+            setTimeout(function(){
+                $('#choose_region_ul').hide();
+                $('#choose_regions').removeClass('active');
+            },301);
+            $.ajax({
+                type: 'post',
+                url: '/activity/getSearchRes',
+                data: $('#searchForm').serialize(),
+                dataType: 'json',
+                success: function (msg) {
+                    if (typeof msg === 'object') {
+                        if (msg.status === true) {
+                            var html = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                                d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == - 1 ? '' : '<span class="is-apply">已报名</span>';
+                                return d;
+                            });
+                        } else {
+                            $.util.alert(msg.msg);
+                        }
+                    }
+                }
+            });
+        }
         switch (em.id) {
             case 'doSearch':
                 $.ajax({
@@ -115,7 +143,9 @@ activity.prototype.bindEvent = function () {
                 {
                     $('#choose_industry_ul').show();
                     $('#choose_sorts').removeClass('active');
+                    $('#choose_regions').removeClass('active');
                     $('#sort_mark').hide();
+                    $('#choose_region_ul').hide();
                 } else
                 {
                     $('#choose_industry_ul').hide();
@@ -127,7 +157,9 @@ activity.prototype.bindEvent = function () {
                 {
                     $('#choose_industry_ul').show();
                     $('#choose_sorts').removeClass('active');
+                    $('#choose_regions').removeClass('active');
                     $('#sort_mark').hide();
+                    $('#choose_region_ul').hide();
                 } else
                 {
                     $('#choose_industry_ul').hide();
@@ -140,7 +172,9 @@ activity.prototype.bindEvent = function () {
                 {
                     $('#sort_mark').show();
                     $('#choose_industries').removeClass('active');
+                    $('#choose_regions').removeClass('active');
                     $('#choose_industry_ul').hide();
+                    $('#choose_region_ul').hide();
                 } else
                 {
                     $('#sort_mark').hide();
@@ -152,10 +186,41 @@ activity.prototype.bindEvent = function () {
                 {
                     $('#sort_mark').show();
                     $('#choose_industries').removeClass('active');
+                    $('#choose_regions').removeClass('active');
                     $('#choose_industry_ul').hide();
+                    $('#choose_region_ul').hide();
                 } else
                 {
                     $('#sort_mark').hide();
+                }
+                break;
+            // 地区
+            case 'choose_region':
+                $('#choose_regions').toggleClass('active');
+                if ($('#choose_regions').hasClass('active') == true)
+                {
+                    $('#choose_region_ul').show();
+                    $('#choose_industries').removeClass('active');
+                    $('#choose_sorts').removeClass('active');
+                    $('#choose_industry_ul').hide();
+                    $('#sort_mark').hide();
+                } else
+                {
+                    $('#choose_region_ul').hide();
+                }
+                break;
+            case 'choose_regions':
+                $(em).toggleClass('active');
+                if ($(em).hasClass('active') == true)
+                {
+                    $('#choose_region_ul').show();
+                    $('#choose_industries').removeClass('active');
+                    $('#choose_sorts').removeClass('active');
+                    $('#choose_industry_ul').hide();
+                    $('#sort_mark').hide();
+                } else
+                {
+                    $('#choose_region_ul').hide();
                 }
                 break;
             case 'goTop':
