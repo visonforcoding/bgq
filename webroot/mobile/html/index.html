@@ -8,12 +8,16 @@
 		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 		<title>并购圈</title>
 		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
 		<script src="../js/view.js"></script>
+		<script src="../js/zepto.min.js"></script>
+        <script src="../js/loopScroll.js"></script>
+        <script src="../js/util.js"></script>
 	</head>
 	<body>
 		
 			<div class="indexwraper">
-				<div class="indexboxlist">
+				<div class="indexboxlist" id="imgList">
 					<section>
 						<img src="../images/index1.jpg"/>
 						<h3>并购一站式服务平台</h3>
@@ -24,12 +28,14 @@
 						<a href="activity.html" class="btn"></a>
 					</section>
 				</div>
-				<div class="yd">
+				<div class="yd" id="imgTab">
+					<span class="cur"></span>
 					<span></span>
-					<span></span>
-					<span></span>
+					
 				</div>
 			</div>	
-		
+			<script type="text/javascript">
+				 var loop = $.util.loopImg($('#imgList'), $('#imgList section'), $('#imgTab span'));
+			</script>
 	</body>
 </html>
