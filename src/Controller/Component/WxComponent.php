@@ -93,6 +93,7 @@ class WxComponent extends Component {
         $wx_accesstoken_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $appid . '&secret=' . $app_secret .
                 '&code=' . $code . '&grant_type=authorization_code';
         $response = $httpClient->get($wx_accesstoken_url);
+        \Cake\Log\Log::error($response);
         if ($response->isOk()) {
             $access_token = json_decode($response->body())->access_token;
             $open_id = json_decode($response->body())->openid;
