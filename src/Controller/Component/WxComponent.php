@@ -98,9 +98,10 @@ class WxComponent extends Component {
             $access_token = json_decode($response->body())->access_token;
             $open_id = json_decode($response->body())->openid;
             if($base){
-                return json_decode($response->body());
+                //return json_decode($response->body());
             }
-            $wx_user_url = 'https://api.weixin.qq.com/sns/userinfo?access_token=' . $access_token . '&openid=' . $open_id . '&lang=zh_CN';
+            $wx_user_url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . $access_token . '&openid=' . $open_id . '&lang=zh_CN';
+            //$wx_user_url = 'https://api.weixin.qq.com/sns/userinfo?access_token=' . $access_token . '&openid=' . $open_id . '&lang=zh_CN';
             $res = $httpClient->get($wx_user_url);
             \Cake\Log\Log::error($res);
             if ($res->isOk()) {
