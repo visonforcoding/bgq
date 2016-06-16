@@ -99,6 +99,7 @@ class WxComponent extends Component {
             $open_id = json_decode($response->body())->openid;
             $wx_user_url = 'https://api.weixin.qq.com/sns/userinfo?access_token=' . $access_token . '&openid=' . $open_id . '&lang=zh_CN';
             $res = $httpClient->get($wx_user_url);
+            \Cake\Log\Log::error($res);
             if ($res->isOk()) {
                 return json_decode($res->body());
             } else {
