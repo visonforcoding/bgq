@@ -95,7 +95,8 @@ class WxComponent extends Component {
         $response = $httpClient->get($wx_accesstoken_url);
         \Cake\Log\Log::error($response);
         if ($response->isOk()) {
-            $access_token = json_decode($response->body())->access_token;
+//            $access_token = json_decode($response->body())->access_token;
+            $access_token = $this->getAccessToken();
             $open_id = json_decode($response->body())->openid;
             if($base){
                 //return json_decode($response->body());
