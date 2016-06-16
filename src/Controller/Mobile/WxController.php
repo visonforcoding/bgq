@@ -94,7 +94,7 @@ class WxController extends AppController {
      */
     public function getUserCodeBase() {
         $res = $this->Wx->getUser(true);
-        \Cake\Log\Log::debug($res);
+        $this->request->session()->write('Login.wxbase',true);
         if (isset($res->openid)) {
             $open_id = $res->openid;
             $user = $this->User->findByWx_openid($open_id)->first();
@@ -102,9 +102,6 @@ class WxController extends AppController {
                 //通过微信 获取到 在平台上有绑定的用户  就默认登录
                 $this->request->session()->write('User.mobile', $user);
             }
-        }else{
-           //获取失败
-           $this->request->session()->write('Login.wxbase',false);
         }
         //无论怎样 必须要跳会首页
         return $this->redirect('/');
