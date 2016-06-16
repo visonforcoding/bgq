@@ -80,7 +80,7 @@ class WxComponent extends Component {
      * 通过返回的code 获取access_token 再异步获取openId 和 用户信息
      * @return boolean|stdClass 出错则返回false 成功则返回带有openId 的用户信息 json std对象
      */
-    public function getUser($base=false,$code=null,$isApp=false) {
+    public function getUser($code=null,$isApp=false) {
         $code = !empty($code)?$code:$this->request->query('code');
         $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
         $appid = $this->app_id;
@@ -98,12 +98,11 @@ class WxComponent extends Component {
 //            $access_token = json_decode($response->body())->access_token;
             $access_token = $this->getAccessToken(); //并不是返回的access_token  真尼玛B的
             $open_id = json_decode($response->body())->openid;
-            if($base){
-                //return json_decode($response->body());
+            $wx_user_url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . $access_token . '&openid=' . $open_id . '&lang=zh_CN';
+            if($isApp){
+                $wx_user_url = 'https://api.weixin.qq.com/sns/userinfo?access_token=' . $access_token . '&openid=' . $open_id . '&lang=zh_CN';
             }
             //另一个接口地址  能获取到union_id
-            $wx_user_url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . $access_token . '&openid=' . $open_id . '&lang=zh_CN';
-            //$wx_user_url = 'https://api.weixin.qq.com/sns/userinfo?access_token=' . $access_token . '&openid=' . $open_id . '&lang=zh_CN';
             $res = $httpClient->get($wx_user_url);
             \Cake\Log\Log::error($res);
             if ($res->isOk()) {
