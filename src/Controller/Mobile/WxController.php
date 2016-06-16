@@ -102,6 +102,9 @@ class WxController extends AppController {
                 //通过微信 获取到 在平台上有绑定的用户  就默认登录
                 $this->request->session()->write('User.mobile', $user);
             }
+        }else{
+           //获取失败
+           $this->request->session()->write('Login.wxbase',false);
         }
         //无论怎样 必须要跳会首页
         return $this->redirect('/');
