@@ -95,12 +95,13 @@ class WxComponent extends Component {
         $response = $httpClient->get($wx_accesstoken_url);
         \Cake\Log\Log::error($response);
         if ($response->isOk()) {
-//            $access_token = json_decode($response->body())->access_token;
-            $access_token = $this->getAccessToken(); //并不是返回的access_token  真尼玛B的
             $open_id = json_decode($response->body())->openid;
-            $wx_user_url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . $access_token . '&openid=' . $open_id . '&lang=zh_CN';
             if($isApp){
+                $access_token = json_decode($response->body())->access_token;
                 $wx_user_url = 'https://api.weixin.qq.com/sns/userinfo?access_token=' . $access_token . '&openid=' . $open_id . '&lang=zh_CN';
+            }else{
+                $access_token = $this->getAccessToken(); //并不是返回的access_token  真尼玛B的
+                $wx_user_url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . $access_token . '&openid=' . $open_id . '&lang=zh_CN';
             }
             //另一个接口地址  能获取到union_id
             $res = $httpClient->get($wx_user_url);
