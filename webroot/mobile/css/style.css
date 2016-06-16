@@ -394,14 +394,19 @@ height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;text-indent: 0.18rem;}
 /*个人中心*/
 .myhome,.myhome-h{background: #d72355;position:fixed;}
 .myhome-h{height:3.6rem;}
-.h-home-bottom{height:2.17rem;margin:0.5rem 0 0.14rem;display: flex; justify-content: center;align-items: center; flex-direction:column;color:#fff;}
+.h-home-bottom{padding:0.5rem 0 0.14rem;
+display: -webkit-flex; display:-moz- flex;display:-ms- flex;display: flex;
+-webkit-justify-content: center;-moz-justify-content: center;-ms-justify-content: center;justify-content: center;
+-webkit-align-items: center; -moz-align-items: center; -ms-align-items: center; align-items: center; align-items: center; 
+-webkit-flex-direction:column;-moz-flex-direction:column;-ms-flex-direction:column;flex-direction:column;
+color:#fff;background: #d72355;}
 .h-home-bottom div span{width:1.12rem;height:1.12rem;display:inline-block;position:relative;}
 .h-home-bottom div span:after{content: '';position: absolute;background: url(img/v.png) no-repeat;right:0;bottom:0;width:0.29rem;height:0.3rem;background-size:cover ;}
 .h-home-bottom div span img{width:100%;height:auto;display: block;border-radius: 50%;border:1px #fff solid;}
 .h-home-bottom div i{font-size:0.32rem;margin-left:0.15rem;}
-.h-home-bottom h3{margin-top:0.16rem;font-size:0.36rem;line-height: 0.4rem;text-align: center;margin-right:0.35rem;margin-bottom:0.3rem;}
+.h-home-bottom h3{margin-top:0.16rem;font-size:0.36rem;line-height: 0.4rem;text-align: center;margin-right:0.35rem;margin-bottom:0.1rem;}
 .h-home-bottom h3 span{display: block;font-size:0.26rem;line-height: 0.4rem;}
-.h-home-bottom .tofocus-m span{border:1px #fff solid;padding:0.03rem 0.1rem;border-radius: 0.1rem; margin-right: 0.35rem;}
+.h-home-bottom .tofocus-m span{color:#fff;border:1px #fff solid;padding:0.03rem 0.1rem;border-radius: 0.1rem; margin-right: 0.35rem;}
 .h-home-menu{display: flex;flex-wrap: wrap; background: #fff;border-bottom:1px #c8c7cc solid;margin-bottom:0.2rem;}
 .h-home-menu li{width:50%; padding:0.5rem 0;text-align: center;border:1px #c8c7cc solid;border-bottom:none;border-right:none;}
 .h-home-menu li a{font-size:0.28rem;color:#222c38;vertical-align: middle; }
