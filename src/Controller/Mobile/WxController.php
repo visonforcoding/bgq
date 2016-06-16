@@ -93,7 +93,7 @@ class WxController extends AppController {
      * 静默登录
      */
     public function getUserCodeBase() {
-        $res = $this->Wx->getUser(true);
+        $res = $this->Wx->getUser();
         $this->request->session()->write('Login.wxbase',true);
         if (isset($res->openid)) {
             $open_id = $res->openid;
@@ -147,7 +147,7 @@ class WxController extends AppController {
     public function appLogin() {
         if($this->request->isPost()){
             $code = $this->request->data('code');
-            $res = $this->Wx->getUser(true,$code,true);
+            $res = $this->Wx->getUser($code,true);
             \Cake\Log\Log::debug($res);
             if(!$res){
                 //获取到openid 有问题
