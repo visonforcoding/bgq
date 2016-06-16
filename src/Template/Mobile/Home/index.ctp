@@ -37,7 +37,7 @@
                     </i>
                 </a>
             </li>
-            <li><a href="#this"><i class="iconfont">&#xe61f;</i>隐私策略</a></li>
+            <li><a href="/home/my-secret"><i class="iconfont">&#xe61f;</i>隐私策略</a></li>
             <li><a href="/home/my-message-fans"><i class="iconfont">&#xe620;</i>消息通知<i class="otherintroduce clearfix">您有新消息</i></a></li>
             <li><a id="shareTo" href="#this"><i class="iconfont">&#xe621;</i>邀请好友</a></li>
         </ul>

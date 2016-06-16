@@ -16,8 +16,8 @@ return [
         'password' => 'SHAOye1688'
     ],
     'weixin' => [
-        'appID' => 'wxf3d1e078715e41ce',
-        'appsecret' => '293c2fb5bcf96db8eea854365471d48b',
+        'appID' => 'wx0cf353f9fc03aad0',
+        'appsecret' => '460366e0beddcf18a21873db11a4eb1c',
         'token'=>'cwptest',
         'mchid'=>'1296107201',
         'key'=>'3596f7e1a0f6d4171005f9226f3e36ec',

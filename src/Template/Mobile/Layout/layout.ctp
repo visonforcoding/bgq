@@ -22,6 +22,8 @@
 
             if(!/smartlemon|micromessenger/.test(navigator.userAgent.toLowerCase())){
                 $('header').show();
+            }else{
+                $($('.wraper')[0]).css('padding-top','0');
             }
 
             if(navigator.userAgent.toLowerCase().indexOf('smartlemon') == -1){
