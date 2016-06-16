@@ -27,9 +27,10 @@ h1,h2,h3,h4,h5,h6{font-weight: 100;}
 .innerwaper{padding-left: 0.3rem;padding-right: 0.3rem;width:100%;}
 .my-wraper{padding-top:1.6rem;}
 .h20{background:#f0eff5;border-top:1px solid #c8c7cc;border-bottom:1px solid #c8c7cc;height:0.2rem;}
-.m-wraper,.m-wraper-h{padding-top:4.2rem;overflow-x:hidden;position:relative;padding-bottom:1rem;}
+.m-wraper,.m-wraper-h{overflow-x:hidden;position:relative;padding-bottom:1rem;}
 .m-wraper-h{padding-top:3.4rem;padding-bottom:1.2rem;}
 .wraper .nobottom,.wraper .no-bottom{border-bottom:none;}
+.no-bottom{border-bottom:none;}
 .wraper .no-margin-top{margin-top:0;}
 .wraper .no-b-tb{border-bottom:none;margin-top:0;}
 .wraper .no-t-border{border-top:none;}
