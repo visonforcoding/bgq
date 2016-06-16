@@ -417,4 +417,11 @@ class HomeController extends AppController {
         }
         $this->set(compact('userInfo'));
     }
+    
+    /**
+     * 隐私设置
+     */
+    public function mySecret(){
+        
+    }
 }

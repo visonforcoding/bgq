@@ -94,6 +94,7 @@ class WxController extends AppController {
      */
     public function getUserCodeBase() {
         $res = $this->Wx->getUser();
+        \Cake\Log\Log::debug($res);
         if (isset($res->openid)) {
             $open_id = $res->openid;
             $user = $this->User->findByWx_openid($open_id)->first();
