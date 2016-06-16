@@ -24,6 +24,7 @@ class NewsController extends AppController {
         if($this->request->isWeixin()&&empty($this->user)&&!$this->request->session()->check('Login.wxbase')){
             //如果是微信 静默授权页获取openid
             $this->loadComponent('Wx');
+            $this->request->session()->delete('Login.wxbase');  //每次还是会进行静默登陆，但是不会死循环
             return $this->Wx->getUserJump(true);
         }
         $news = $this->News->find()
