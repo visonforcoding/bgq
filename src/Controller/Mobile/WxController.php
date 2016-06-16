@@ -93,7 +93,7 @@ class WxController extends AppController {
      * 静默登录
      */
     public function getUserCodeBase() {
-        $res = $this->Wx->getUser();
+        $res = $this->Wx->getUser(true);
         \Cake\Log\Log::debug($res);
         if (isset($res->openid)) {
             $open_id = $res->openid;
