@@ -147,7 +147,7 @@ class WxController extends AppController {
     public function appLogin() {
         if($this->request->isPost()){
             $code = $this->request->data('code');
-            $res = $this->Wx->getUser($code,true);
+            $res = $this->Wx->getUser(true,$code,true);
             \Cake\Log\Log::debug($res);
             if(!$res){
                 //获取到openid 有问题
