@@ -69,7 +69,6 @@ $.util = {
                 var msg = Bollean(json['message'])?json['message']:json.msg;
                 $.util.alert(msg);
             }
-            
         };
         obj.statusCode= {
             404:function(){$.util.alert('请求页面不存在');},

@@ -10,8 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
         <script src="../js/view.js"></script>
-        <script src="../js/jquery.js"></script>
-        <script ssssrc="../js/zepto.min.js"></script>
+        <script src="../js/zepto.min.js"></script>
         <script src="../js/loopScroll.js"></script>
         <script src="../js/util.js"></script>
 	</head>
@@ -165,7 +164,7 @@
                     //remove loading
                     //eg:
                     setTimeout(function(){
-                        console.log(iii++);
+                        //console.log(iii++);
                         var html = $.util.dataToTpl('', 'itemTpl', [{no:iii},{no:iii},{no:iii}]);
                         $('#items').append(html);
                     }, 3000)
@@ -200,8 +199,8 @@
 		$(window).on('scroll',function(){
 			
 			//$('.a-banner').removeClass('movedown');
-			var scrolltop = $(document).scrollTop();
-			var eleheight = $('.inner').height() + $('.a-banner').height();
+			var scrolltop = document.body.scrollTop;
+			var eleheight = $('.a-banner').height();
 			if(scrolltop >= eleheight){
 				$('.a-search-box').removeClass('movedown');
 				$('.a-search-box').addClass('moveup');
