@@ -24,15 +24,15 @@ class NewsController extends AppController {
         \Cake\Log\Log::debug($this->request->session()->read('Login.wxbase'));
         debug($this->request->session()->check('Login.wxbase'));
         var_dump(!$this->request->session()->check('Login.wxbase'));
-        if($this->request->isWeixin()&&empty($this->user)&&!$this->request->session()->check('Login.wxbase')){
+        if($this->request->isWeixin()&&empty($this->user)&&!$this->request->session()->read('Login.wxbase')){
             //如果是微信 静默授权页获取openid
             \Cake\Log\Log::debug('进行静默登陆');
             $this->loadComponent('Wx');
             $this->request->session()->delete('Login.wxbase');  //每次还是会进行静默登陆，但是不会死循环
             return $this->Wx->getUserJump(true);
         }
+        $this->request->session()->delete('Login.wxbase');  //每次还是会进行静默登陆，但是不会死循环
         \Cake\Log\Log::debug($this->request->session()->read('Login.wxbase'));
-        exit();
         $news = $this->News->find()
                         ->contain(['Admins', 'Industries'])
                         ->limit($this->newslimit)->orderDesc('News.create_time')->toArray();
