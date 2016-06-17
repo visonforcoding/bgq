@@ -102,8 +102,8 @@ class WxComponent extends Component {
             }else{
                 $access_token = $this->getAccessToken(); //并不是返回的access_token  真尼玛B的
                 $wx_user_url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . $access_token . '&openid=' . $open_id . '&lang=zh_CN';
+                //该接口地址能获取到union_id
             }
-            //另一个接口地址  能获取到union_id
             $res = $httpClient->get($wx_user_url);
             \Cake\Log\Log::error($res);
             if ($res->isOk()) {
