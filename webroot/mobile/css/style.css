@@ -84,9 +84,10 @@ display:-webkit-flex;display:-moz-flex;display:-ms-flex;display: flex;
 .news-list-items h1 span img,.con-des img{width:100%;height:auto;display: block;}
 .newsbox{overflow:hidden;display: block; color:#969fa9;}
 .newsbox .sec-news-l{float:left;width:4.7rem;}
-.newsbox .sec-news-l h3{line-height: 0.86rem;font-size:26px;color:#222c38;font-weight: 400;}
-.newsbox .sec-news-l p{line-height:0.38rem;font-size:16px;word-break: break-all;display: -webkit-box;-webkit-line-clamp: 3;
+.newsbox .sec-news-l h3,.newsbox .sec-news-l p{word-break: break-all;display: -webkit-box;-webkit-line-clamp: 3;
     -webkit-box-orient: vertical;overflow: hidden;}
+.newsbox .sec-news-l h3{line-height: 0.4rem;margin:0.2rem 0;font-size:0.32rem;color:#222c38;font-weight: 400;-webkit-line-clamp: 2;}
+.newsbox .sec-news-l p{line-height:0.38rem;font-size:0.3rem;-webkit-line-clamp: 3;}
 .newsbox .sec-news-r{float:right;width:1.6rem;height:1.6rem;margin-top:0.24rem;overflow:hidden;}
 .newsbox .sec-news-r img{width:100%;height:auto;display: block;}
 .news-bottom{margin-top:0.26rem;}
