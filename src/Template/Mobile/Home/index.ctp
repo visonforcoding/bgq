@@ -18,7 +18,7 @@
     </ul>
     <div class="h-home-menulist">
         <ul class="innercon">
-            <li><a href="/home/my-xiaomi"><i class="iconfont">&#xe61a;</i>小秘书</a></li>
+            <!--<li><a href="/home/my-xiaomi"><i class="iconfont">&#xe61a;</i>小秘书</a></li>-->
             <li><a href="/home/my-purse"><i class="iconfont">&#xe61b;</i>钱包</a></li>
             <li><a href="/meet/view/<?= $user->id ?>"><i class="iconfont">&#xe61c;</i>专家主页</a></li>
             <li><a href="/home/realname-auth"><i class="iconfont">&#xe61d;</i>实名认证<i class="otherintroduce clearfix">
@@ -54,6 +54,9 @@
             <a id="shareToWxPYQ" href="#this"><span></span>微信朋友圈</a>
         </div>
     </div>
+</div>
+<div class="submitbtn">
+    <a href="/home/my-xiaomi"><img src="/mobile/images/ms.png"/></a>
 </div>
 <?= $this->element('footer') ?>
 <?php $this->start('script') ?>

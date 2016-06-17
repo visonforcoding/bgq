@@ -168,3 +168,32 @@ CREATE TABLE `news_savant` (
 COMMENT='专家推荐活动关系表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
+
+#资讯增加用户id，即作者
+ALTER TABLE news add user_id INT NOT NULL COMMENT '用户id';
+
+#赠名片表
+CREATE TABLE `card_box` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '赠名片表',
+	`ownerid` INT NOT NULL COMMENT '名片夹主人id',
+	`uid` INT NOT NULL COMMENT '名片id',
+	`resend` TINYINT NOT NULL COMMENT '1回赠2不回赠',
+	`create_time` INT NOT NULL COMMENT '创建时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='赠名片表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+#赠名片记录表
+CREATE TABLE `card_box_log` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '赠名片记录表',
+	`optid` INT NOT NULL COMMENT '操作人id',
+	`targetid` INT NOT NULL COMMENT '目标id',
+	`type` TINYINT NOT NULL COMMENT '1发放2回赠',
+	`create_time` INT NOT NULL COMMENT '创建时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='赠名片记录表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;

@@ -91,7 +91,7 @@ class ActivityController extends AppController {
 //        $savants = $SavantTable->find('list', ['limit' => 200])->contain(['Users']);
 //        $savants = $this->Activity->Savants->find('list', ['limit' => 200])->contain(['Users']);
 //        debug($savants);die;
-        $this->set(compact('activity', 'admins', 'industries', 'regions', 'savants'));
+        $this->set(compact('activity', 'admins', 'industries', 'regions'));
         foreach ($activity->savants as $savant)
         {
             $selSavantIds[] = $savant->id;

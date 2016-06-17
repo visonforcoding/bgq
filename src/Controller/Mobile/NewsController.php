@@ -29,7 +29,7 @@ class NewsController extends AppController {
             return $this->Wx->getUserJump(true);
         }
         $news = $this->News->find()
-                        ->contain(['Admins', 'Industries'])
+                        ->contain(['Users', 'Industries'])
                         ->limit($this->newslimit)->orderDesc('News.create_time')->toArray();
         //获取资讯banner图
         $bannerTable = \Cake\ORM\TableRegistry::get('banner');
@@ -116,12 +116,11 @@ class NewsController extends AppController {
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null) {
-        $savant = '';
         $isCollect = [];
         if(!empty($this->user)){
             $user_id = $this->user->id;
             $news = $this->News->get($id, [
-                'contain' => ['Admins', 'Comments'=>function($q){
+                'contain' => ['Users', 'Comments'=>function($q){
                         return $q->orderDesc('Comments.create_time')->limit($this->newslimit);
                 },'Comments.Users'=>function($q){
                         return $q->select(['id','avatar','truename','company','position']);
@@ -139,7 +138,7 @@ class NewsController extends AppController {
             $isCollect = $collectTable->find()->where(['user_id'=>$user_id, 'relate_id'=>$id, 'type'=>1, 'is_delete'=>0])->toArray();
         }else{
             $news = $this->News->get($id, [
-                'contain' => ['Admins', 'Comments'=>function($q){
+                'contain' => ['Users', 'Comments'=>function($q){
                         return $q->orderDesc('Comments.create_time')->limit($this->newslimit);
                 },'Comments.Users'=>function($q){
                         return $q->select(['id','avatar','truename','company','position']);
@@ -150,6 +149,7 @@ class NewsController extends AppController {
                 }],
             ]);
         }
+//        debug($news);die;
         $this->set('isCollect', $isCollect);
         //阅读数+1
         $news->read_nums +=1;

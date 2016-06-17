@@ -53,6 +53,18 @@ class UserTable extends Table {
         ]);
         
         $this->belongsTo('Agencies');
+        
+        $this->hasOne('Educations',[
+//            'foreignKey' => 'user_id',
+//            'joinType' => 'INNER',
+            'className' => 'Education',
+        ]);
+        
+        $this->hasOne('Careers',[
+//            'foreignKey' => 'user_id',
+//            'joinType' => 'INNER',
+            'className' => 'Career',
+        ]);
 
         $this->addBehavior('Timestamp', [
             'events' => [

@@ -68,6 +68,7 @@ class ActivityController extends AppController {
                 'contain' => [
                     'Admins',
                     'Industries',
+                    'Regions',
                     'Savants' => function($q){
                         return $q->contain(['Users']);
                     },
@@ -136,7 +137,7 @@ class ActivityController extends AppController {
         $act = $this
                 ->Activity
                 ->find()
-                ->contain(['Users', 'Industries'])
+                ->contain(['Users', 'Industries', 'Regions'])
                 ->limit($this->limit)
                 ->where(['is_check' => 1])
                 ->orderDesc('Activity.create_time', 'Activity.is_top')
@@ -154,7 +155,7 @@ class ActivityController extends AppController {
         $this->set(compact('banners'));
 
         $this->paginate = [
-            'contain' => ['Admins', 'Industries'],
+            'contain' => ['Admins', 'Industries', 'Regions'],
             'order' => ['is_top' => 'DESC', 'create_time' => 'DESC'],
         ];
         $activity = $this->paginate($this->Activity->find()->where(['is_check' => 1]));

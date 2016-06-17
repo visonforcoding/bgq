@@ -1,6 +1,6 @@
-<header class="m-to-more">
+<!--<header class="m-to-more">
     <div class='inner'>
-        <a href='#this' class='toback'></a>
+        <a href='javascript:history.go(-1);' class='toback'></a>
         <a href="#this" class='iconfont collection h-regiser'>&#xe610;</a>
         <a href="#this" class='iconfont share h-regiser'>&#xe614;</a>
     </div>
@@ -8,53 +8,74 @@
         <span><i class="iconfont">&#xe624;</i>广东 深圳</span>
         <span><i class="iconfont">&#xe60b;</i>22人约见过</span>
     </div>
-</header>
+</header>-->
+
 <div class="wraper m-wraper">
     <ul class="m-info-box">
         <li>
-            <h3><?= $savant->truename ?><span><?= $savant->company ?> <?= $savant->position ?></span></h3>
-            <span class="identification"><i>实名认证</i><i>专家认证</i></span>
+            <h3><?= $biggie->truename ?><span><?= $biggie->company ?> <?= $biggie->position ?></span></h3><span class="identification"><i>实名认证</i><i>专家认证</i></span>
         </li>
         <li>
             <span>
-                <p><i class="iconfont">&#xe615;</i><img src="../images/user.png"/><img src="../images/user.png"/><img src="../images/user.png"/><img src="../images/user.png"/><img src="../images/user.png"/></p>等<i>64</i>人推荐</span>
+                <p>
+                    <i class="iconfont">&#xe615;</i>
+                    <img src="/mobile/images/user.png"/>
+                    <img src="/mobile/images/user.png"/>
+                    <img src="/mobile/images/user.png"/>
+                    <img src="/mobile/images/user.png"/>
+                    <img src="/mobile/images/user.png"/>
+                </p>等<i>64</i>人推荐</span>
             <a href="javascript:void(0);">推荐他</a>
         </li>
-        <li><a href="/home/my-home-page/<?= $savant->id ?>"><span class="myhome">个人主页</span></a></li>
+        <li class="conr"><a href="/meet/myhome/<?= $biggie->id ?>" class="tohome"><i class="iconfont">&#xe60d;</i>个人主页</a></li>
+
     </ul>
-    <a href="/meet/subject" class="eduit">编辑</a>
-    <div class="m-swiper-items toone">
+    <div class="m-swiper-items">
         <ul id="subject">
-            <?php foreach ($savant->subjects as $subject): ?>
-                <?php if ($subject->type == '2'): ?>
-                    <li class="s-to-more">
-                    <a href="/meet/subject-detail/<?=$subject->id?>">
-                        <h3><?= $subject->title ?><span>一对多面谈</span></h3>
-                    <?php else: ?>
-                    <li class="s-to-one">
-                    <a href="/meet/subject-detail/<?=$subject->id?>">
-                        <h3><?= $subject->title ?><span>一对一面谈</span></h3>
-                    <?php endif; ?>
+            <?php foreach ($biggie->subjects as $v): ?>
+            <li>
+                <div class="inner-li-items">
+                    <h3><?= $v['title'] ?><span><?php if($v['type'] == 1): ?>一对一<?php else: ?>一对多<?php endif; ?>面谈</span></h3>
                     <div class='m-center-con'>
-                        <p><?= $subject->summary ?></p>
+                        <a href="meet-one-detail.html">
+                            <p>
+                                <?= $v['summary'] ?>
+                            </p>
+                        </a>
                     </div>
                     <div  class='m-bottom-con'>
-                        <span>价格<i><?= $subject->price ?>元/次</i></span>
-                        <span>时间<i>约<?= $subject->last_time ?>小时</i></span>
+                        <span>价格<i><?= $v['price'] ?>元/次</i></span>
+                        <span>时间<i>约<?= $v['last_time'] ?>小时</i></span>
                     </div>
-                    </a>
-                </li>
+                </div>	
+            </li>
             <?php endforeach; ?>
         </ul>
     </div>
     <section class="a-detail newscomment-box m-about-expert">
         <h3 class="comment-title">专家简介</h3>
-        <p><?= $savant->summary ?></p>
+        <a href="meet-one-detail.html">
+            <p>
+                <?= $biggie->savant->summary ?>
+            </p>
+        </a>
+
     </section>
+
 </div>
-<?php $this->start('script') ?>
+<!--底部四个图-->
+
+<div class="iconlist">
+        <!--<span class="iconfont">&#xe618;</span>-->
+    <span class="iconfont">&#xe610;</span>
+    <span class="iconfont">&#xe614;</span>
+    <span class="iconfont" id='goTop'></span>
+</div>
+<!--底部四个图**end-->
+<?php $this->start('script'); ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+
     var subject = null;
     //setTimeout(function(){
     subject = $.util.loop({
@@ -64,6 +85,9 @@
         lockScrY: true,
         loopScroll: true
     });
+    //}, 0);
+
+
 </script>
 <?php
 $this->end('script');

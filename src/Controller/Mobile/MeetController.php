@@ -17,13 +17,61 @@ class MeetController extends AppController {
         $this->loadModel('User');
     }
 
+    protected $limit = '5'; // 分页条数
+    
     /**
      * Index method  专家约见首页
      *
      * @return \Cake\Network\Response|null
      */
     public function index() {
+        // 轮播图
+        $bannerTable = \Cake\ORM\TableRegistry::get('banner');
+        $banners = $bannerTable
+                ->find()
+                ->where("`enabled` = '1' and `type` = '3'")
+                ->orderDesc('create_time')
+                ->limit(3)
+                ->toArray();
+        $this->set(compact('banners'));
         
+        $users = $this
+                ->User
+                ->find()
+                ->contain(['Subjects'])
+//                ->matching('Industries', function($q) {
+//                    return $q->where(['Industries.id' => '1']);
+//                })
+                ->where(['enabled'=>'1', 'level'=>'2'])
+                ->limit($this->limit)
+                ->toArray();
+        $this->set('meetjson', json_encode($users));
+    }
+    
+    /**
+     * 大咖首页点击类别获取结果
+     */
+    public function getIndex(){
+        $data = $this->request->data();
+        $industry_id = $data['industry_id'];
+        $users = $this
+                ->User
+                ->find()
+                ->contain(['Subjects'])
+                ->matching('Industries', function($q)use($industry_id) {
+                    return $q->where(['Industries.id' => $industry_id]);
+                })
+                ->where(['enabled'=>'1', 'level'=>'2'])
+                ->limit($this->limit)
+                ->toArray();
+        if($users)
+        {
+            $this->Util->ajaxReturn(['status'=>true, 'data'=>$users]);
+        }
+        else
+        {
+            $this->Util->ajaxReturn(false, '暂无结果');
+        }
     }
 
     /**
@@ -63,9 +111,10 @@ class MeetController extends AppController {
      * 专家详情页
      */
     public function view($id = null) {
-        $savant = $this->User->get($id, ['contain' => ['Savant', 'Subjects']]);
+        $biggie = $this->User->get($id, ['contain' => ['Savant', 'Subjects']]);
+//        debug($biggie);die;
         $this->set([
-            'savant' => $savant
+            'biggie' => $biggie
         ]);
     }
 
@@ -148,5 +197,71 @@ class MeetController extends AppController {
     public function meet() {
         
     }
+    
+    /**
+     * 搜索页
+     */
+    public function search(){
+        $this->set('search');
+    }
 
+    /**
+     * ajax获取搜索结果
+     */
+    public function getSearchRes(){
+        $data = $this->request->data();
+        $keyword = $data['keyword'];
+        $User = $this
+                ->User
+                ->find()
+                ->contain(['Subjects'=>function($q)use($keyword){
+                    return $q->where(['title like'=>'%'.$keyword.'%']);
+                }])
+                ->where(['enabled'=>'1', 'level'=>'2', 'truename like'=>'%'.$keyword.'%'])
+                ->limit(10)
+                ->toArray();
+        if($User) {
+            $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $User]);
+        } else {
+            $this->Util->ajaxReturn(false, '暂无搜索结果');
+        }
+    }
+    
+    /**
+     * 滑动搜索结果加载更多
+     * @param int $page
+     */
+    public function getMoreSearch($page){
+        $data = $this->request->data();
+        $keyword = $data['keyword'];
+        $User = $this
+                ->User
+                ->find()
+                ->contain(['Subjects'=>function($q)use($keyword){
+                    return $q->where(['title like'=>'%'.$keyword.'%']);
+                }])
+                ->where(['enabled'=>'1', 'level'=>'2', 'truename like'=>'%'.$keyword.'%'])
+                ->page($page, $this->limit)
+                ->toArray();
+        if($User) {
+            $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $User]);
+        } else {
+            $this->Util->ajaxReturn(false, '暂无搜索结果');
+        }
+    }
+    
+    /**
+     * 专家主页
+     * @param type $id
+     */
+    public function myhome($id){
+        if($this->user->id == $id)
+        {
+            $this->redirect('/home/index');
+        }
+        $user = $this->User->get($id, [
+            'contain' => ['Industries', 'Careers', 'Educations'],
+        ]);
+        $this->set('user', $user);
+    }
 }
