@@ -13,7 +13,7 @@ $this->start('static') ?>
             <div class="form-group">
                 <label for="keywords">类型</label>
                 <select class="form-control" name="type" id="keywords">
-                    <option>请选择类型</option>
+                    <option value=''>全部</option>
                     <?php foreach ($types as $key=>$type): ?>
                     <option value="<?=$key?>"><?=$type?></option>
                     <?php endforeach; ?>
@@ -53,7 +53,7 @@ $this->start('static') ?>
                                 ['类型', '链接地址', '备注说明', '创建时间', '操作'],
                         colModel: [
                             {name: 'type', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
-                                    var types = {'1':'资讯','2':'活动'};
+                                    var types = {'1':'资讯','2':'活动','3':'大咖'};
                                     return types[cellvalue];
                             }},
                             {name: 'url', editable: true, align: 'center'},

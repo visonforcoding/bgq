@@ -44,7 +44,7 @@
                 </span>
                 <div class="a-other-info">
                     <span class="a-number">{#apply_nums#}人报名</span>
-                    {#industries_name#}
+                    <a href="javascript:void(0);">{#region_name#}</a>{#industries_name#}
                     <span class="a-date">{#time#}</span>
                 </div>
             </div>
@@ -60,11 +60,11 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script src="/mobile/js/activity_index.js"></script>
 <script>
-//    window.up = false;
     window.isApply = ',' + <?= $isApply ?> + ',';
     $.util.dataToTpl('activity', 'activity_tpl',<?= $actjson ?>, function (d) {
         d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
         d.industries_name = $.util.dataToTpl('', 'subTpl', d.industries);
+        d.region_name = d.region.name;
         return d;
     });
 

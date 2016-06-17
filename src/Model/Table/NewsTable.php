@@ -63,9 +63,11 @@ class NewsTable extends Table {
         ]);
         
         $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER',
             'className' => 'User',
         ]);
-
+        
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [

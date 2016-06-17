@@ -33,7 +33,7 @@
 
 <script type="text/html" id="listTpl">
     <section class='news-list-items '>
-        <h1 class="firstnews"><span><img src="/mobile/images/user.png" /></span>{#admin_name#}</h1>
+        <h1 class="firstnews"><span><img src="{#avatar#}" /></span>{#author#}</h1>
         <a href="/news/view/{#id#}" class="newsbox clearfix">
             <div class="sec-news-l">
                 <h3>{#title#}</h3>
@@ -66,6 +66,8 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
     $.util.dataToTpl('news', 'listTpl',<?= $newsjson ?>, function (d) {
+        d.avatar = d.user.avatar;
+        d.author = d.user.truename;
         d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
         return d;
     });

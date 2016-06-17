@@ -125,13 +125,12 @@ activity.prototype.bindEvent = function () {
                 
             // 评论文章
             case 'publish_article':
-                var a = $(em)[0];
-                console.log(window.article);
-                if(window.article == true)
+                if (window.article == true)
                 {
-                    a.addEventListener('tap', function(){
-                        window.article = false;
-                    },false);
+                    setTimeout(function(){
+                        window.article = true;
+                    },2000);
+                    window.article = false;
                     var data = {};
                     var body = $('textarea[name="comment-content-article"]').val();
                     if (!body) {
@@ -160,25 +159,22 @@ activity.prototype.bindEvent = function () {
                                     $('#allComments').prepend(html);
                                     $('.article-shadow').hide();
                                     $('.article').hide();
-                                    window.article = true;
                                 } else {
                                     $.util.alert(msg.msg);
-                                    window.article = true;
                                 }
                             }
                         }
                     });
                 }
                 break;
-                
             // 回复评论
             case 'publish_reply':
-                var a = $(em)[0];
                 if(window.reply == true)
                 {
-                    a.addEventListener('tap', function(){
-                        window.reply = false;
-                    }, true);
+                    setTimeout(function(){
+                        window.reply = true;
+                    },2000);
+                    window.reply == false;
                     var data = {};
                     var body = $('textarea[name="comment-content-reply"]').val();
                     if (!body) {
@@ -213,7 +209,6 @@ activity.prototype.bindEvent = function () {
                             }
                         }
                     });
-                    window.reply = true;
                 }
                 break;
             case 'enroll':

@@ -6,6 +6,14 @@
 <div class="work-copy">
     <?= $this->Form->create($news, ['class' => 'form-horizontal']) ?>
     <div class="form-group">
+        <label class="col-md-2 control-label">作者</label>
+        <div class="col-md-8">
+            <?php
+            echo $this->Form->input('user_id', ['label' => false, 'class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">标题</label>
         <div class="col-md-8">
             <?php

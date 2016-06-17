@@ -9,6 +9,7 @@
         <title><?= isset($pageTitle) ? $pageTitle : '并购圈' ?></title>
         <link rel="stylesheet" type="text/css" href="/mobile/css/common.css"/>
         <link rel="stylesheet" type="text/css" href="/mobile/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="/mobile/font/font/iconfont.css">
         <script src="/mobile/js/zepto.min.js"></script>
         <script src="/mobile/js/view.js"></script>
         <?= $this->fetch('static') ?>

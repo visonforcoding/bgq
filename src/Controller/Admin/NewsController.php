@@ -54,7 +54,8 @@ class NewsController extends AppController {
                 $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
             }
         }
-        $this->set(compact('news'));
+        $users = $this->News->Users->find('list', ['limit' => 200]);
+        $this->set(compact('news', 'users'));
     }
 
     /**
@@ -77,6 +78,8 @@ class NewsController extends AppController {
                 $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
+        $users = $this->News->Users->find('list', ['limit' => 200]);
+        $this->set(compact('news', 'users'));
         $selIndustryIds = [];
         foreach($news->industries as $industry){
             $selIndustryIds[] = $industry->id;
@@ -134,7 +137,7 @@ class NewsController extends AppController {
             $query->where($where);
         }
         $nums = $query->count();
-        $query->contain(['Admins']);
+        $query->contain(['Users']);
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }

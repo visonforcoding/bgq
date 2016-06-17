@@ -9,6 +9,7 @@
             <p>地点：<?= $activity->address; ?></p>
             <p>规模：<?= $activity->scale; ?></p>
             <div class="a-other-info" style="text-indent: 0;font-size: 0.24rem;line-height: 0.36rem;padding-left: 0;width: 90%;margin: 0 auto;color: #9ba4ad;">
+                <a><?= $activity->region->name; ?></a>
                 <?php foreach ($activity->industries as $k => $v): ?>
                     <a><?= $v->name; ?></a>
                 <?php endforeach; ?>
@@ -67,7 +68,8 @@
                 评论
                 <i class="iconfont">&#xe618;</i>
             </h3>
-            <div id="comment"></div><span class='com-all'><a href="#allcoment" id="showAllComment">显示全部</a></span>
+            <div id="comment"></div>
+            <span class='com-all' style="display:none;"><a href="#allcoment" id="showAllComment">显示全部</a></span>
         </section>
         <div class="a-btn">
             <a href="/activity/recommend/<?= $activity->id; ?>">我要赞助</a>
@@ -174,8 +176,15 @@
         d.reply = d.pid > 0 ? '@' + d.replyuser.truename : '';
         return d;
     });
-
     
+    // 少于五条评论隐藏显示全部
+    var circle = setInterval(function(){
+        if($('#comment').children('.items').length >= 5)
+        {
+            $('.com-all').show();
+            clearInterval(circle);
+        }
+    },100);
 
     $(window).on('hashchange', function () {
         if (location.hash == '#allcoment')
@@ -241,9 +250,7 @@
             $('#allcoment').hide('slow');
         }
     });
-//    $(window).on('popstate',function(){
-//        alert();
-//    });
+    
 </script>
 <?php
 $this->end('script');

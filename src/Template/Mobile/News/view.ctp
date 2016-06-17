@@ -12,6 +12,7 @@
     <?php if (isset($news)): ?>
         <section class="newscon-box">
             <h3><?= $news->title ?></h3>
+            <h1 class="con-des"><span><img src="<?= $news->user->avatar ?>" /></span><?= $news->user->truename ?><time><?= date('Y-m-d H:i', strtotime($news->create_time)) ?></time></h1>
             <img src="<?= $news->cover ?>"/>
             <p><?= strip_tags($news->body) ?></p>
             <div class="con-bottom clearfix">
@@ -80,7 +81,7 @@
         <div class="comm-info clearfix">
             <span><img src="{#user_avatar#}"/></span>
             <span class="infor-comm">
-                <i class="username">{#user_truename#}</i>
+                <i class="username">{#user_truename#}<time>{#create_time#}</time></i>
                 <i class="job">{#user_company#} {#user_position#}</i>
             </span>
             <span data-disable="{#disable#}" data-id="{#id#}" id="praise_{#id#}">
@@ -95,6 +96,15 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    // 少于五条评论隐藏显示全部
+    var circle = setInterval(function(){
+        if($('#coms').children('.items').length >= 5)
+        {
+            $('.com-all').show();
+            clearInterval(circle);
+        }
+    },100);
+    
     var reply_id = 0;
     $.util.dataToTpl('coms', 'listTpl',<?= json_encode($news->comments) ?>, function (d) {
         //d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);

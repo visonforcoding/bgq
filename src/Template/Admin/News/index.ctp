@@ -41,7 +41,7 @@
                         colNames:
                                 ['作者', '标题', '阅读数', '点赞数', '评论数',  '创建时间', '更新时间', '操作'],
                         colModel: [
-                            {name: 'admin.username', editable: true, align: 'center'},
+                            {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'title', editable: true, align: 'center'},
                             {name: 'read_nums', editable: true, align: 'center'},
                             {name: 'praise_nums', editable: true, align: 'center'},

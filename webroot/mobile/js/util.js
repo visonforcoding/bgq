@@ -218,7 +218,7 @@ $.util = {
             }
         });
     }
-
+    
 };
 
 $.util.isWX = navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1;
