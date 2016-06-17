@@ -29,11 +29,11 @@ class UtilComponent extends Component {
             if (!array_key_exists('code', $status)) {
                 $status['code'] = 200;
             }
-            echo json_encode($status, JSON_UNESCAPED_UNICODE);
+            $json =  json_encode($status, JSON_UNESCAPED_UNICODE);
         } else {
-            echo json_encode(array('status' => $status, 'msg' => $msg, 'code' => $statusCode), JSON_UNESCAPED_UNICODE);
+            $json =  json_encode(array('status' => $status, 'msg' => $msg, 'code' => $statusCode), JSON_UNESCAPED_UNICODE);
         }
-        exit();
+        return $this->response->body($json);
     }
 
 }
