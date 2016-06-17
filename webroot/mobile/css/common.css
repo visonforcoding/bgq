@@ -95,10 +95,11 @@ header .toback{position:absolute;left:0;top:0.2rem;background: url(img/icon1.png
 header .h-regiser{position:absolute;right:0;top:0.3rem;}
 /*footer*/
 footer{position:fixed;bottom:0;left:0;overflow:hidden;width:100%;z-index:2;}
-footer h1{width:100%; font-size:0.3rem;color:#222c38;text-align:center;height:0.88rem;line-height:0.88rem;border-bottom:1px #c8c7cc solid;}
-footer .othertype{padding:0.35rem 0;width:100%;}
-footer .othertype a{display:block;width:0.7rem;height:0.57rem;margin:0 auto; }
-footer .othertype img{width:100%;height:auto;display:block;}
+footer h1,.wxlogin h1{width:100%; font-size:0.32rem;color:#222c38;text-align:center;height:0.88rem;line-height:0.88rem;border-bottom:1px #c8c7cc solid;}
+.wxlogin{overflow:hidden;width:100%;}
+footer .othertype,.wxlogin .othertype{padding:0.35rem 0;width:100%;}
+footer .othertype a,.wxlogin .othertype a{display:block;width:0.7rem;height:0.57rem;margin:0 auto; }
+footer .othertype img,.wxlogin .othertype img{width:100%;height:auto;display:block;}
 .navfooter .active span,.navfooter .active a{color:#db1f4f;}
 .pd10{padding-bottom:1rem;}
 .wraper .colore01{color:#e01a48;}
