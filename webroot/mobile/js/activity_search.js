@@ -150,6 +150,7 @@ activity.prototype.bindEvent = function () {
                 {
                     $('#choose_industry_ul').hide();
                 }
+                
                 break;
             case 'choose_industries':
                 $(em).toggleClass('active');
@@ -195,6 +196,7 @@ activity.prototype.bindEvent = function () {
                 }
                 break;
             // 地区
+            
             case 'choose_region':
                 $('#choose_regions').toggleClass('active');
                 if ($('#choose_regions').hasClass('active') == true)
@@ -209,6 +211,7 @@ activity.prototype.bindEvent = function () {
                     $('#choose_region_ul').hide();
                 }
                 break;
+                
             case 'choose_regions':
                 $(em).toggleClass('active');
                 if ($(em).hasClass('active') == true)
@@ -223,6 +226,7 @@ activity.prototype.bindEvent = function () {
                     $('#choose_region_ul').hide();
                 }
                 break;
+                
             case 'goTop':
                 window.scroll(0, 0);
                 e.preventDefault();
