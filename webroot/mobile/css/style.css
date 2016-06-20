@@ -366,8 +366,9 @@ height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;text-indent: 0.18rem;}
 .toone .active h3{background: #e01a48;}
 .m-detail-box{background: #fff;}
 .m-detail-box li{padding:0.25rem 0.3rem;border-bottom:1px solid #c8c7cc;display: flex; justify-content:space-between;font-size:0.3rem;}
-.m-detail-box li span{display: block;font-size:0.28rem;}
-.m-detail-box li:first-child h3 span{font-size:0.24rem;margin-top:0.26rem;color:#9ba4ad;}
+.m-detail-box li span{display: block;font-size:0.28rem;line-height: 0.4rem;}
+.m-detail-box li h3{width:75%;line-height: 0.4rem;}
+.m-detail-box li:first-child h3 span{font-size:0.26rem;margin-top:0.1rem;color:#9ba4ad;}
 .meet-type{font-size:0.28rem;}
 .m-detail-box li:nth-child(2){color:#e01a48;}
 .m-detail-box li:nth-child(3),.m-detail-box li:nth-child(4){font-size:0.24rem;line-height: 0.36rem;color:#9ba4ad;}
