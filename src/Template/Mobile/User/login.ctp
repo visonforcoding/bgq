@@ -88,7 +88,6 @@
                 data:{code:code},
                 url: '/wx/appLogin',
                 success:function(res){
-                    alert(res);
                     res = JSON.parse(res);
                     alert(res.msg);
                     if(res.status){
