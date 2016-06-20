@@ -57,8 +57,6 @@ class ActivityTable extends Table {
         ]);
         
         $this->belongsTo('Regions', [
-            'foreignKey' => 'region_id',
-            'joinType' => 'INNER',
             'className' => 'Region',
         ]);
 
