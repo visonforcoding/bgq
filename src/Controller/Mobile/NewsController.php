@@ -36,7 +36,7 @@ class NewsController extends AppController {
                     'expires' => '+10 years'
                 ]);
                 $this->Cookie->write('login_token',  $this->request->session()->read('Login.login_token'));
-                debug($this->Cookie->read('login_token'));
+                //debug($this->Cookie->read('login_token'));
             }
         }
         $news = $this->News->find()
