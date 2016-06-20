@@ -18,9 +18,9 @@ class UtilComponent extends Component {
     protected $_defaultConfig = [];
 
     /**
-     * ajax 返回json
+     * ajax 返回json object response object
      * @param array/boole $status 可为数组也可以为boole
-     * @param type $msg
+     * @param \Cake\Network\Response $response
      */
     public function ajaxReturn($status, $msg = '', $statusCode = 200) {
         $this->autoRender = false;
