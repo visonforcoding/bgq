@@ -404,8 +404,9 @@ display: -webkit-flex; display:-moz- flex;display:-ms- flex;display: flex;
 -webkit-align-items: center; -moz-align-items: center; -ms-align-items: center; align-items: center; align-items: center; 
 -webkit-flex-direction:column;-moz-flex-direction:column;-ms-flex-direction:column;flex-direction:column;
 color:#fff;background: #d72355;}
-.h-home-bottom div span{width:1.12rem;height:1.12rem;display:inline-block;position:relative;}
-.h-home-bottom div span:after{content: '';position: absolute;background: url(img/v.png) no-repeat;right:0;bottom:0;width:0.29rem;height:0.3rem;background-size:cover ;}
+.h-home-bottom div span{width:1.12rem;height:1.12rem;display:inline-block;position:relative;background-color: #fff;
+border-radius: 50%;}
+.h-home-bottom div span:after{content: '';position: absolute;background: url(img/v.png) no-repeat;right:0;bottom:0;width:0.3rem;height:0.3rem;background-size:cover ;}
 .h-home-bottom div span img{width:100%;height:auto;display: block;border-radius: 50%;border:1px #fff solid;}
 .h-home-bottom div i{font-size:0.32rem;margin-left:0.15rem;}
 .h-home-bottom h3{margin-top:0.16rem;font-size:0.36rem;line-height: 0.4rem;text-align: center;margin-right:0.35rem;margin-bottom:0.1rem;}
@@ -413,7 +414,7 @@ color:#fff;background: #d72355;}
 .h-home-bottom .tofocus-m span{color:#fff;border:1px #fff solid;padding:0.03rem 0.1rem;border-radius: 0.1rem; margin-right: 0.35rem;}
 .h-home-menu{display: flex;flex-wrap: wrap; background: #fff;border-bottom:1px #c8c7cc solid;margin-bottom:0.2rem;}
 .h-home-menu li{width:50%; padding:0.5rem 0;text-align: center;border:1px #c8c7cc solid;border-bottom:none;border-right:none;}
-.h-home-menu li a{font-size:0.28rem;color:#222c38;vertical-align: middle; }
+.h-home-menu li a{font-size:0.3rem;color:#222c38;vertical-align: middle; }
 .h-home-menu li a i{font-size:0.32rem;color:#c04444;margin-right:0.23rem;}
 .h-home-menu li:nth-of-type(1) a i{color:#52aae6;}
 .h-home-menu li:nth-of-type(2) a i{color:#dd204b;}
