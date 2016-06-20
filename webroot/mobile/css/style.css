@@ -420,8 +420,8 @@ color:#fff;background: #d72355;}
 .h-home-menu li:nth-of-type(3) a i{color:#1cc3a7;}
 .h-home-menulist{margin-bottom:0.2rem;border-top:1px #c8c7cc solid;border-bottom:1px #c8c7cc solid;background: #fff;}
 .h-home-menulist li{border-bottom:1px #c8c7cc solid;line-height: 1.11rem;}
-.h-home-menulist li a{display: block;width:100%;background: url(img/right.png) no-repeat right center;background-size:0.18rem 0.27rem;font-size:0.28rem;color:#222c38;}
-.h-home-menulist li a i{color:#dd204b;margin-right: 0.24rem;font-size:0.26rem;}
+.h-home-menulist li a{display: block;width:100%;background: url(img/right.png) no-repeat right center;background-size:0.18rem 0.27rem;font-size:0.3rem;color:#222c38;}
+.h-home-menulist li a i{color:#dd204b;margin-right: 0.24rem;font-size:0.3rem;}
 .h-home-menulist li a .otherintroduce{float:right;margin-right: 0.3rem;}
 /*.h-home-menulist li:nth-of-type(7) a .otherintroduce{color:#dd204b;}*/
 .h-home-menulist li:last-of-type{border-bottom:none;}
