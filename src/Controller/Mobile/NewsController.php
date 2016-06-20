@@ -29,13 +29,12 @@ class NewsController extends AppController {
             return $this->Wx->getUserJump(true);
         }
         $news = $this->News->find()
-                        ->contain(['Users', 'Industries'])
+                        ->contain(['Admins', 'Industries'])
                         ->limit($this->newslimit)->orderDesc('News.create_time')->toArray();
         //获取资讯banner图
         $bannerTable = \Cake\ORM\TableRegistry::get('banner');
         $banners = $bannerTable->find()->where("`enabled` = '1' and `type` = '1'")
                         ->orderDesc('create_time')->limit(3)->toArray();
-//        debug($banners);exit();
         $this->set(compact('news', 'banners'));
         $this->set('newsjson', json_encode($news));
         $this->set('pageTitle', '资讯');
@@ -50,9 +49,9 @@ class NewsController extends AppController {
                         ->contain(['Admins', 'Industries'])->page($page, $this->newslimit)
                         ->orderDesc('News.create_time')->toArray();
         if ($news) {
-            $this->Util->ajaxReturn(['status' => true, 'data' => $news]);
+            return $this->Util->ajaxReturn(['status' => true, 'data' => $news]);
         } else {
-            $this->Util->ajaxReturn(['status' => false]);
+            return $this->Util->ajaxReturn(['status' => false]);
         }
     }
 
@@ -120,7 +119,7 @@ class NewsController extends AppController {
         if(!empty($this->user)){
             $user_id = $this->user->id;
             $news = $this->News->get($id, [
-                'contain' => ['Users', 'Comments'=>function($q){
+                'contain' => ['Admins', 'Comments'=>function($q){
                         return $q->orderDesc('Comments.create_time')->limit($this->newslimit);
                 },'Comments.Users'=>function($q){
                         return $q->select(['id','avatar','truename','company','position']);
@@ -138,7 +137,7 @@ class NewsController extends AppController {
             $isCollect = $collectTable->find()->where(['user_id'=>$user_id, 'relate_id'=>$id, 'type'=>1, 'is_delete'=>0])->toArray();
         }else{
             $news = $this->News->get($id, [
-                'contain' => ['Users', 'Comments'=>function($q){
+                'contain' => ['Admins', 'Comments'=>function($q){
                         return $q->orderDesc('Comments.create_time')->limit($this->newslimit);
                 },'Comments.Users'=>function($q){
                         return $q->select(['id','avatar','truename','company','position']);
@@ -171,9 +170,9 @@ class NewsController extends AppController {
             $user_id = $this->user->id;
             $this->loadComponent('Business');
             if($this->Business->commentPraise($user_id, $relate_id, 1)){
-                $this->Util->ajaxReturn(true,'点赞成功');
+                return $this->Util->ajaxReturn(true,'点赞成功');
             }else{
-                $this->Util->ajaxReturn(false,'点赞失败');
+                return $this->Util->ajaxReturn(false,'点赞失败');
             }
         }
     }
@@ -189,9 +188,9 @@ class NewsController extends AppController {
             $this->loadComponent('Business');
             $res = $this->Business->praise($user_id, $relate_id, 1);
             if($res===true){
-                $this->Util->ajaxReturn(true,'点赞成功');
+                return $this->Util->ajaxReturn(true,'点赞成功');
             }else{
-                $this->Util->ajaxReturn(false,$res);
+                return $this->Util->ajaxReturn(false,$res);
             }
         }
     }
@@ -206,9 +205,9 @@ class NewsController extends AppController {
         $res = $this->Business->collectIt($this->user->id,$data_id, 1);
         if($res!==false){
             $res['status'] = true;
-            $this->Util->ajaxReturn($res);
+            return $this->Util->ajaxReturn($res);
         }else{
-            $this->Util->ajaxReturn(false,'服务器出错');
+            return $this->Util->ajaxReturn(false,'服务器出错');
         }
     }
     
@@ -253,11 +252,11 @@ class NewsController extends AppController {
         if ($res!==false) {
             if($res == [])
             {
-                $this->Util->ajaxReturn(false, '暂无搜索结果');
+                return $this->Util->ajaxReturn(false, '暂无搜索结果');
             }
-            $this->Util->ajaxReturn(['status' => true, 'data' => $res]);
+            return $this->Util->ajaxReturn(['status' => true, 'data' => $res]);
         } else {
-            $this->Util->ajaxReturn(false, '系统错误');
+            return $this->Util->ajaxReturn(false, '系统错误');
         }
     }
     
@@ -306,9 +305,9 @@ class NewsController extends AppController {
                 ->page($page, $this->newslimit)
                 ->toArray();
         if ($news) {
-            $this->Util->ajaxReturn(['status' => true, 'data' => $news]);
+            return $this->Util->ajaxReturn(['status' => true, 'data' => $news]);
         } else {
-            $this->Util->ajaxReturn(['status' => false]);
+            return $this->Util->ajaxReturn(['status' => false]);
         }
     }
     
@@ -327,9 +326,9 @@ class NewsController extends AppController {
                         ->orderDesc('Comments.create_time')
                         ->toArray();
         if ($comment) {
-            $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
+            return $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
         } else {
-            $this->Util->ajaxReturn(['status' => false]);
+            return $this->Util->ajaxReturn(['status' => false]);
         }
     }
     
@@ -345,9 +344,9 @@ class NewsController extends AppController {
                 ->limit(10)
                 ->toArray();
         if ($comment) {
-            $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
+            return $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
         } else {
-            $this->Util->ajaxReturn(['status' => false]);
+            return $this->Util->ajaxReturn(['status' => false]);
         }
     }
     

@@ -73,6 +73,9 @@ class AppController extends Controller {
 
     public function beforeFilter(Event $event) {
         $this->user = $this->request->session()->read('User.mobile');
+        if(!$this->user&&$this->request->isLemon()){
+            debug($this->request->cookie('login_token'));exit();
+        }
         return $this->checkLogin();
     }
 

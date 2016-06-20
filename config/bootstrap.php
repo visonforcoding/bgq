@@ -169,6 +169,7 @@ Request::addDetector('tablet', function ($request) {
     return $detector->isTablet();
 });
 Request::addDetector('weixin',['env' => 'HTTP_USER_AGENT', 'pattern' => '/MicroMessenger/i']);
+Request::addDetector('lemon',['env' => 'HTTP_USER_AGENT', 'pattern' => '/smartlemon/i']);
 
 /**
  * Custom Inflector rules, can be set to correctly pluralize or singularize
