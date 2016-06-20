@@ -161,11 +161,6 @@ class WxController extends AppController {
                     $user->app_wx_openid = $open_id;
                     $this->User->save($user);
                 }
-//                $this->loadComponent('Cookie');
-//                $this->Cookie->config('path', '/');
-//                $this->Cookie->config([
-//                    'expires' => '+10 years'
-//                ]);
                 $this->request->session()->write('Login.login_token',$user->user_token);
                 $this->request->session()->write('User.mobile', $user);
                 return $this->Util->ajaxReturn(['status' => true, 'msg' => '登陆成功', 'redirect_url' => '/']);
