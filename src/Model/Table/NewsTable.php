@@ -33,7 +33,7 @@ class NewsTable extends Table {
         $this->belongsTo('Admins', [
             'joinTable' => 'admin',
             'foreignKey' => 'admin_id',
-            'joinType' => 'INNER',
+            'joinType' => 'LEFT',
             'className' => 'Wpadmin.Admin'
         ]);
 
