@@ -305,7 +305,7 @@ height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;text-indent: 0.18rem;}
 .internet-v-info{margin-top:0.2rem;border-bottom:1px #c8c7cc solid;border-top:1px #c8c7cc solid;padding:0.44rem 0;background: #fff;color:#969fa9;}
 .internet-v-info .head-img{width:1.21rem;height:1.21rem;display: block;border-radius: 50%;position:relative;margin-right:0.3rem;}
 .head-img img{width:100%;height:auto;border-radius: 50%;}
-.head-img i{position: absolute;right:0.1rem;bottom:0;width:0.29rem;height:0.3rem;background: url(img/v.png) no-repeat;background-size: cover;}
+.head-img i{position: absolute;right:0.12rem;bottom:0;width:0.29rem;height:0.3rem;background: url(img/v.png) no-repeat;background-size: contain;}
 .vipinfo{width:5.3rem;}
 .vipinfo h3{font-size:0.32rem;color:#222c38;line-height: 0.46rem;}
 .vipinfo h3 span{float:right;}
