@@ -4,6 +4,7 @@ namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
 use Wpadmin\Utils\UploadFile;
+
 /**
  * Api Controller  用于app接口
  *
@@ -25,15 +26,33 @@ class ApiController extends AppController {
 
     protected function checkAcl() {
         if (!$this->request->isPost()) {
-            $this->Util->ajaxReturn(false, '请求受限', 405);
+            return $this->Util->ajaxReturn(false, '请求受限', 405);
         }
         if (!in_array(strtolower($this->request->param('action')), $this->noAcl)) {
             if (!$this->request->data('timestamp') || !$this->request->data('access_token')) {
-                $this->Util->ajaxReturn(false, '参数不正确', 412);
+                return $this->Util->ajaxReturn(false, '参数不正确', 412);
             }
             if (!$this->checkSign($this->request->data())) {
-                $this->Util->ajaxReturn(false, '验证不通过', 401);
+                return $this->Util->ajaxReturn(false, '验证不通过', 401);
             }
+        }else{
+            return $this->baseCheckAcl();
+        }
+    }
+
+    protected function baseCheckAcl() {
+        $timestamp = $this->request->data('timestamp');
+        $access_token = $this->request->data('access_token');
+        if (!$timestamp || !$access_token) {
+            return $this->Util->ajaxReturn(false, '参数不正确', 412);
+        }
+        $timediff = time() - $timestamp;
+        if($timediff >30*60){
+            return $this->Util->ajaxReturn(false, '时间参数过期',408);
+        }
+        $sign = strtoupper(md5($timestamp.self::TOKEN));
+        if($sign!=$access_token){
+            return $this->Util->ajaxReturn(false, '验证不通过',401);
         }
     }
 
@@ -89,7 +108,7 @@ class ApiController extends AppController {
             $response['path'] = $urlpath . $info[0]['savename'];
             $response['msg'] = '上传成功!';
         }
-        $this->Util->ajaxReturn($response);
+        return $this->Util->ajaxReturn($response);
     }
 
 }
