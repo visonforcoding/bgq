@@ -185,7 +185,7 @@ class UserController extends AppController {
                 //  if (time() - $vcode['time'] < 60 * 10) {
                 //10分钟验证码超时
                 $this->request->session()->write('User.mobile', $user);
-                $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url]);
+                return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url]);
                 //    } else {
                 //        $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
                 //     }
@@ -193,7 +193,7 @@ class UserController extends AppController {
                 //      $this->Util->ajaxReturn(false, '验证码验证错误');
                 // }
             } else {
-                $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或不可用']);
+               return $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或不可用']);
             }
         }
         $this->set(array(
@@ -209,9 +209,9 @@ class UserController extends AppController {
             $phone = $this->request->data('phone');
             $user = $this->User->findByPhoneAndEnabled($phone, 1)->first();
             if ($user) {
-                $this->Util->ajaxReturn(['status' => true]);
+              return  $this->Util->ajaxReturn(['status' => true]);
             } else {
-                $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或不可用']);
+              return  $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或不可用']);
             }
         }
     }
@@ -231,10 +231,10 @@ class UserController extends AppController {
             $ckSms = $this->Sms->sendByQf106($mobile, $content, $code);
             if ($ckSms) {
                 $this->request->session()->write('UserLoginVcode', ['code' => $code, 'time' => time()]);
-                $this->Util->ajaxReturn(true, '发送成功');
+               return $this->Util->ajaxReturn(true, '发送成功');
             }
         } else {
-            $this->Util->ajaxReturn(false, '30s后再发送');
+           return $this->Util->ajaxReturn(false, '30s后再发送');
         }
     }
 
@@ -252,7 +252,7 @@ class UserController extends AppController {
             $user = $this->User->findByPhoneAndEnabled($phone, 1)->first();
             $vcode = $this->request->session()->read('UserLoginVcode');
             if ($vcode['code'] != $this->request->data('vcode')) {
-                $this->Util->ajaxReturn(false, '验证码验证错误');
+              return  $this->Util->ajaxReturn(false, '验证码验证错误');
             }
             if (time() - $vcode['time'] < 60 * 10) {
                 //10分钟验证码超时
@@ -261,9 +261,9 @@ class UserController extends AppController {
                     $user->wx_openid = $open_id;
                     if ($this->User->save($user)) {
                         $this->request->session()->write('User.mobile', $user);
-                        $this->Util->ajaxReturn(['status' => true]);
+                        return $this->Util->ajaxReturn(['status' => true]);
                     } else {
-                        $this->Util->ajaxReturn(false, '服务器出错');
+                        return $this->Util->ajaxReturn(false, '服务器出错');
                     }
                 } else {
                     //注册完善信息
@@ -271,10 +271,10 @@ class UserController extends AppController {
                         'reg.phone' => $phone,
                         'reg.wx_bind' => true,
                     ]);
-                    $this->Util->ajaxReturn(['status' => false, 'msg' => '您还未有平台账户需前往完善信息', 'url' => '/user/register?type=wx_bind']);
+                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '您还未有平台账户需前往完善信息', 'url' => '/user/register?type=wx_bind']);
                 }
             } else {
-                $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
+                return $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
             }
         }
     }
@@ -293,7 +293,7 @@ class UserController extends AppController {
             //判断是否关注过
             $fans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$following_id'")->first();
             if ($fans) {
-                $this->Util->ajaxReturn(false, '您已经关注过');
+               return $this->Util->ajaxReturn(false, '您已经关注过');
             }
             //查看是否被该用户关注过
             $follower = $FansTable->find()->where("`user_id` = '$following_id' and `following_id` = '$user_id'")->first();
@@ -311,12 +311,12 @@ class UserController extends AppController {
                     $errorFlag[] = $FansTable->save($follower);
                 });
                 if (in_array(false, $errorFlag)) {
-                    $this->Util->ajaxReturn(false, '关注失败');
+                   return $this->Util->ajaxReturn(false, '关注失败');
                 }
             } else {
                 $newfans->type = 1;
                 if (!$FansTable->save($newfans)) {
-                    $this->Util->ajaxReturn(true, '关注失败');
+                   return $this->Util->ajaxReturn(true, '关注失败');
                 }
             }
             //发送一条关注消息给被关注者
@@ -327,7 +327,7 @@ class UserController extends AppController {
             $fansCount = $FansTable->find()->where("`following_id` = '$following_id'")->count();
             $follower_user->fans = $fansCount;
             $this->User->save($follower_user);
-            $this->Util->ajaxReturn(true, '关注成功');
+           return $this->Util->ajaxReturn(true, '关注成功');
         }
     }
 

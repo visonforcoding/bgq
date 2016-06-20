@@ -424,4 +424,13 @@ class HomeController extends AppController {
     public function mySecret(){
         
     }
+    
+    /**
+     * 设置
+     */
+    public function myInstall(){
+        $this->set([
+            'pageTitle'=>'设置'
+        ]);
+    }
 }
