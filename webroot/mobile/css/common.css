@@ -105,23 +105,23 @@ footer .othertype img,.wxlogin .othertype img{width:100%;height:auto;display:blo
 .wraper .colore01{color:#e01a48;}
 /*animate css*/
 /*moveup*/
-@-webkit-keyframes moveup {from {opacity: 1; }to { opacity: 0;}}
-@keyframes moveup {from {opacity: 1; }to { opacity: 0;}}
+@-webkit-keyframes moveup {from { }to { -webkit-transform: translateY(-100px);transform: translateY(-100px);}}
+@keyframes moveup {from { }to {-webkit-transform: translateY(-100px);transform: translateY(-100px); }}
 /*movedown*/
-@-webkit-keyframes movedown {from {opacity: 0; }to { opacity: 1;}}
-@keyframes movedown {from {opacity: 0; }to { opacity: 1;}}
+@-webkit-keyframes movedown {from {opacity: 0; }to { -webkit-transform: translateY(10px);transform: translateY(10px);}}
+@keyframes movedown {from {opacity: 0; }to { -webkit-transform: translateY(10px);transform: translateY(10px);}}
 /*moveright*/
-@-webkit-keyframes moveright{from {right:0.32rem; }	to { right:-1000px;}}
-@keyframes moveright {from {right:0.32rem;}to {right:-1000px; }}
+@-webkit-keyframes moveright{from {}to { -webkit-transform: translateX(100px);transform: translateX(100px);}}
+@keyframes moveright {from {}to {-webkit-transform: translateX(100px);transform: translateX(100px);}}
 /*moveleft*/
 @-webkit-keyframes moveleft{from {right:-1rem; }to { right:0.32rem;}}
 @keyframes moveleft {from {right:-1rem;}to {right:0.32rem; }}
-.wraper .moveup{-webkit-animation: moveup 1s;overflow:hidden;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
-.wraper .moveright{-webkit-animation: moveright 1s;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;
+.wraper .moveup{-webkit-animation: moveup .6s linear;animation: moveup .6s linear;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
+.wraper .moveright{-webkit-animation: moveright .6s linear;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;
 -webkit-animation-fill-mode:forwards;}
-.wraper .moveleft{-webkit-animation: moveleft 1s;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;
+.wraper .moveleft{-webkit-animation: moveleft .6s linear;animation: moveleft .6s linear;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;
 -webkit-animation-fill-mode:forwards;}
-.wraper .movedown{-webkit-animation: movedown 1s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
+.wraper .movedown{-webkit-animation: movedown .6s;animation: movedown .6s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
 header{display:none;}
 .indexwraper{width:100%;height:100%;overflow:hidden;background: #fff;}
 .indexboxlist{width:2000%;height:100%;}

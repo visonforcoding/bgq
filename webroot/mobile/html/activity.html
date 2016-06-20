@@ -205,8 +205,10 @@
 				$('.a-search-box').removeClass('movedown');
 				$('.a-search-box').addClass('moveup');
 				$('.submitbtn').removeClass('moveleft').addClass('moveright')
+				 window.up = true;
 				
-			}else{
+			}
+			if(scrolltop < eleheight&& window.up == true){
 				$('.a-search-box').addClass('movedown');
 				$('.submitbtn').addClass('moveleft')
 			}
