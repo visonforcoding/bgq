@@ -161,6 +161,7 @@ class WxController extends AppController {
                     $user->app_wx_openid = $open_id;
                     $this->User->save($user);
                 }
+                $this->loadComponent('Cookie');
                 $this->Cookie->config('path', '/');
                 $this->Cookie->config([
                     'expires' => '+10 years'
