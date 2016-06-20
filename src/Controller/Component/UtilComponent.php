@@ -33,7 +33,8 @@ class UtilComponent extends Component {
         } else {
             $json =  json_encode(array('status' => $status, 'msg' => $msg, 'code' => $statusCode), JSON_UNESCAPED_UNICODE);
         }
-        return $this->response->body($json);
+        $this->response->body($json);
+        return $this->response;
     }
 
 }
