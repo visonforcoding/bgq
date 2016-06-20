@@ -21,7 +21,11 @@ class ApiController extends AppController {
 
     public function initialize() {
         parent::initialize();
-        $this->checkAcl();
+    }
+    
+    public function beforeFilter(\Cake\Event\Event $event) {
+        parent::beforeFilter($event);
+        return $this->checkAcl();
     }
 
     protected function checkAcl() {
@@ -68,9 +72,17 @@ class ApiController extends AppController {
         $sign = strtoupper(md5($stringB));
         return $sign;
     }
+    
+    protected function baseSign($time){
+        return strtoupper(md5($time.self::TOKEN));
+    }
 
     public function test() {
         $this->Util->ajaxReturn(['access_token' => $this->setSign($this->request->data())]);
+    }
+    public function baseTest() {
+        $time = time();
+        return $this->Util->ajaxReturn(['access_token' => $this->baseSign($time),'time'=>$time]);
     }
 
     /**
@@ -88,6 +100,11 @@ class ApiController extends AppController {
         return $access_token == $sign;
     }
 
+    
+    /**
+     * 上传接口
+     * @return type
+     */
     public function upload() {
         $this->autoRender = false;
         $dir = 'app';
@@ -105,7 +122,7 @@ class ApiController extends AppController {
         } else {// 上传成功 获取上传文件信息
             $info = $upload->getUploadFileInfo();
             $response['status'] = true;
-            $response['path'] = $urlpath . $info[0]['savename'];
+            $response['path'] = $this->request->scheme() . '://' . $_SERVER['SERVER_NAME'].$urlpath . $info[0]['savename'];
             $response['msg'] = '上传成功!';
         }
         return $this->Util->ajaxReturn($response);
