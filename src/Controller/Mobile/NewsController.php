@@ -28,6 +28,16 @@ class NewsController extends AppController {
             $this->request->session()->delete('Login.wxbase');  //每次还是会进行静默登陆，但是不会死循环
             return $this->Wx->getUserJump(true);
         }
+        if($this->request->isLemon()&&$this->user){
+            if($this->request->session()->check('Login.login_token')){
+                $this->loadComponent('Cookie');
+                $this->Cookie->config('path', '/');
+                $this->Cookie->config([
+                    'expires' => '+10 years'
+                ]);
+                $this->Cookie->write('login_token',  $this->request->session()->read('Login.login_token'));
+            }
+        }
         $news = $this->News->find()
                         ->contain(['Admins', 'Industries'])
                         ->limit($this->newslimit)->orderDesc('News.create_time')->toArray();
@@ -99,10 +109,10 @@ class NewsController extends AppController {
                     }],
                     'order' => ['Comments.create_time' => 'Desc'],
                 ]);
-                $this->Util->ajaxReturn(['status'=>true, 'msg'=>'评论成功', 'data'=>  $res]);
+                return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'评论成功', 'data'=>  $res]);
             } else {
                 $msg = errorMsg($comment,'评论成功');
-                $this->Util->ajaxReturn(false, $msg);
+                return $this->Util->ajaxReturn(false, $msg);
             }
         }
     }
