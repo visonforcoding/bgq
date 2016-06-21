@@ -326,13 +326,14 @@ height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;text-indent: 0.18rem;}
 .m-tomore-bottom span{margin-right:0.3rem;font-size:0.26rem;}
 .m-tomore-bottom span i{margin-right:0.12rem;font-size:0.26rem;}
 .m-info-box{overflow:hidden;border-bottom:1px #c8c7cc solid;border-top:1px #c8c7cc solid; background: #fff;margin-top:4rem;}
-.m-info-box li{height:1.1rem;line-height: 1.1rem;margin:0 0.3rem;border-bottom:1px #c8c7cc solid;/* display: flex; justify-content: space-between;*/font-size:0.28rem;}
+.m-info-box li{padding:0.3rem 0;margin:0 0.3rem;border-bottom:1px #c8c7cc solid;/* display: flex; justify-content: space-between;*/font-size:0.28rem;overflow:hidden;}
 .commendnum{width:85%;}
 .m-info-box li:last-child{border-bottom:none;}
 .conr{background: url(img/right.png) right center no-repeat;background-size:0.16rem 0.25rem;}
-.m-info-box li h3{font-size:0.33rem;color:#222c38;}
+.m-info-box li h3{font-size:0.3rem;color:#222c38;line-height: 0.4rem;width:60%;}
 .m-info-box li h3{float:left;}
-.m-info-box li:first-of-type span,.m-info-box li:nth-of-type(2) a{float:right;}
+.m-info-box li:first-of-type span{margin-top:0.1rem;}
+.m-info-box li:first-of-type span,.m-info-box li:nth-of-type(2) a{float:right;line-height:0.4rem;}
 .m-info-box li h3 span{font-size:0.3rem;margin-left:0.3rem;}
 .m-info-box .identification i{border:1px #c8c7cc solid;border-radius: 0.1rem;padding:0.08rem;margin-left:0.1rem;color:#969fa9;font-size:0.26rem;}
 .m-info-box li p{display: inline-block;}
