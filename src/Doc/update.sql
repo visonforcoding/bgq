@@ -212,3 +212,9 @@ CREATE TABLE `biggie_ad` (
 COMMENT='大咖广告表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
+
+#活动报名是否已签到字段
+ALTER TABLE activityapply add is_sign TINYINT(2) DEFAULT 0 COMMENT '是否已签到，0：未签到；1：已签到';
+
+#活动表添加分享描述字段
+ALTER TABLE activity add is_sign TINYINT(2) DEFAULT 0 COMMENT '是否已签到，0：未签到；1：已签到';
