@@ -88,6 +88,7 @@
                 data:{code:code},
                 url: '/wx/appLogin',
                 success:function(res){
+                    alert(res);
                     res = JSON.parse(res);
                     if(res.status){
                         $.util.setCookie('token_uin',res.login_token,10*365*24*60*60);
