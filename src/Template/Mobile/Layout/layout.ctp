@@ -33,7 +33,7 @@
                 }
             })()
 
-            (function() {
+            (function(){
                 if(!$.util.isAPP)  return;
                 var apptk = LEMON.db.get('token_uin'), cookietk = $.util.getCookie('token_uin');
                 if(apptk && cookietk){
