@@ -312,6 +312,10 @@ class BusinessComponent extends Component {
                 break;
             case 1:
                 $table = 'news';
+                break;
+            case 2:
+                $table = 'user';
+                break;
             default:
                 break;
         }

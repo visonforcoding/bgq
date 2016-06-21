@@ -1,4 +1,4 @@
-<header>
+<!--<header>
     <div class='inner'>
         <a href='#this' class='toback'></a>
         <h1>
@@ -6,7 +6,7 @@
         </h1>
         <a href="#this" class='iconfont share h-regiser'>&#xe614;</a>
     </div>
-</header>
+</header>-->
 <div class="wraper">
     <div class="h20">
     </div>

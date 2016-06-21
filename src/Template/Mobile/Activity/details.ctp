@@ -173,7 +173,10 @@
         d.user_truename = d.user.truename;
         d.user_company = d.user.company;
         d.user_position = d.user.position;
-        d.reply = d.pid > 0 ? '@' + d.replyuser.truename : '';
+        if(d.pid>0)
+        {
+            d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.reply.truename + ' </span>：' + d.body;
+        }
         return d;
     });
     
