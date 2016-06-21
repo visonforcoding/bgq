@@ -452,11 +452,12 @@ border-radius: 50%;padding:1px;}
 .h-info-box li p span{margin-top:0.28rem;font-size:0.26rem;}
 .h-info-box li p i{font-size:;color:#9ba4ad;margin-top:0.14rem;}
 .h-info-box .no-b-border{border-bottom:none;}
-.e-info-box li a{align-items:center;background: url(img/right.png) no-repeat right center; background-size:0.18rem 0.25rem;padding-right:0.38rem;
-display:-webkit-flex;display:-moz-flex;display:-ms-flex;display: flex;
--webkit-justify-content:space-between;-moz-justify-content:space-between;-ms-justify-content:space-between;justify-content:space-between;
-
+.e-info-box li a{background: url(img/right.png) no-repeat right center; background-size:0.18rem 0.25rem;padding-right:0.38rem;
+/*display:-webkit-flex;display:-moz-flex;display:-ms-flex;display: flex;align-items:center;
+-webkit-justify-content:space-between;-moz-justify-content:space-between;-ms-justify-content:space-between;justify-content:space-between;*/ display:block;overflow:hidden;height:0.5rem;line-height: 0.5rem;
 }
+.h-info-box li span{float:left;display: block;}
+.h-info-box li div{float:right;}
 .e-info-box .upload-user-img span{display:block;width:0.46rem;height:0.38rem;background: url(../images/user-img.png) no-repeat;background-size:cover;}
 .upload-user-img{width:0.46rem;height:0.38rem;}
 .upload-user-img span{position: relative;}
