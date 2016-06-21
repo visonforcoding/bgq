@@ -5,7 +5,7 @@
     </div>
 </header>
 <div class="wraper newswraper">
-    <div class="a-search-box">
+    <div class="a-search-box" id="search">
         <div class="a-search">
             <a href="news-search.html"><i class="iconfont">&#xe613;</i></a>
             <div class="s-con">
@@ -115,5 +115,11 @@
     });
     
     $.util.searchHide();
+    
+    if($.util.isAPP)
+    {
+        $('#search').hide();
+        LEMON.show.search();
+    }
 </script>
 <?php $this->end('script'); ?>

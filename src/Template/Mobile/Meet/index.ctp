@@ -19,7 +19,7 @@
             <span></span>
             <?php endforeach; ?>
         </div>
-        <div class="a-search-box">
+        <div class="a-search-box" id="search">
             <div class="a-search">
                 <i class="iconfont">&#xe613;</i>
                 <div class="s-con">
@@ -122,6 +122,11 @@
     
     $.util.searchHide();
     
+    if($.util.isAPP)
+    {
+        $('#search').hide();
+        LEMON.show.search();
+    }
     
 </script>
 <?php $this->end('script');
