@@ -81,15 +81,17 @@
 <script>
 
     var subject = null;
-    //setTimeout(function(){
-    subject = $.util.loop({
-        min: 5,
-        moveDom: $('#subject'),
-        moveChild: $('#subject li'),
-        lockScrY: true,
-        loopScroll: true
-    });
-    //}, 0);
+    setTimeout(function(){
+        subject = $.util.loop({
+            min : 3,
+            moveDom: $('#subject'),
+            moveChild: $('#subject li'),
+            lockScrY: true,
+            loopScroll: true,
+            autoTime:3000,
+
+        });
+    }, 0);
 
     $('body').on('tap', function(e){
         var target = e.srcElement || e.target, em=target, i=1;

@@ -87,14 +87,14 @@ class ActivityController extends AppController {
         $admins = $this->Activity->Admins->find('list', ['limit' => 200]);
         $industries = $this->Activity->Industries->find('list', ['limit' => 200]);
         $regions = $this->Activity->Regions->find('list', ['limit' => 200]);
-//        $SavantTable = \Cake\ORM\TableRegistry::get('Savant');
-//        $savants = $SavantTable->find('list', ['limit' => 200])->contain(['Users']);
-//        $savants = $this->Activity->Savants->find('list', ['limit' => 200])->contain(['Users']);
-//        debug($savants);die;
         $this->set(compact('activity', 'admins', 'industries', 'regions'));
-        foreach ($activity->savants as $savant)
+        $selSavantIds = [];
+        if($activity->savants)
         {
-            $selSavantIds[] = $savant->id;
+            foreach ($activity->savants as $savant)
+            {
+                $selSavantIds[] = $savant->id;
+            }
         }
         foreach ($activity->industries as $industry) {
             $selIndustryIds[] = $industry->id;

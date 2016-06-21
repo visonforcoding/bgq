@@ -35,6 +35,12 @@ class MeetController extends AppController {
                 ->toArray();
         $this->set(compact('banners'));
         
+        // 广告
+        $biggieAdTable = \Cake\ORM\TableRegistry::get('BiggieAd');
+        $biggieAds = $biggieAdTable->find()->contain(['Savants'])->all();
+//        debug($biggieAds);die;
+        $this->set('biggieAd', $biggieAds);
+        
         $users = $this
                 ->User
                 ->find()
@@ -272,15 +278,24 @@ class MeetController extends AppController {
      */
     public function myhome($id){
         $isMe = '';
-        $type = '0';
+        $type = '0';// 关注类型初始化
+        $isGive = '';
         if ($this->user) {
             if ($this->user->id == $id) {
                 $isMe = true;
             }
-            $isAttention = $this->User->UserFans->find()->where(['user_id' => $this->user->id, 'following_id' => $id])->first();
-            if($isAttention)
+            else
             {
-                $type = $isAttention->type;
+                $isAttention = $this->User->UserFans->find()->where(['user_id' => $this->user->id, 'following_id' => $id])->first();
+                if($isAttention)
+                {
+                    $type = $isAttention->type;
+                }
+                $isGiveCard = $this->User->CardBoxes->find()->where(['ownerid'=>$id, 'uid'=>$this->user->id])->first();
+                if($isGiveCard)
+                {
+                    $isGive = $isGiveCard;
+                }
             }
         }
         $user = $this->User->get($id, [
@@ -289,6 +304,7 @@ class MeetController extends AppController {
         
         $this->set('type', $type);
         $this->set('isMe', $isMe);
+        $this->set('isGive', $isGive);
         $this->set('user', $user);
     }
     
@@ -297,7 +313,7 @@ class MeetController extends AppController {
      * @param int $id 大咖用户id
      */
     public function collect($id){
-        $this->handCheckLogin();
+        return $this->handCheckLogin();
         $this->loadComponent('Business');
         $res = $this->Business->collectIt($this->user->id, $id, 2);
         if($res !== false)
@@ -313,7 +329,11 @@ class MeetController extends AppController {
     
     
     public function attention($id){
-        $this->handCheckLogin();
+        $noLogin = $this->handCheckLogin();
+        if($noLogin)
+        {
+            return $noLogin;
+        }
         if($id == $this->user->id)
         {
             return $this->Util->ajaxReturn(false, '不可关注自己');
@@ -399,13 +419,48 @@ class MeetController extends AppController {
     }
     
     public function giveCard($id){
-        $this->handCheckLogin();
+        $noLogin = $this->handCheckLogin();
+        if($noLogin)
+        {
+            return $noLogin;
+        }
+        $cardBoxTable = \Cake\ORM\TableRegistry::get('CardBox');
         if($this->user->id == $id)
         {
             return $this->Util->ajaxReturn(false, '不可给自己递名片');
         }
-        $cardcase = $this->User->OwnerId->newEntity();
-        $this->User->OwnerId->patchEntity($cardcase, $data);
+        $data['ownerid'] = $id;
+        $data['uid'] = $this->user->id;
+        $isGive = $cardBoxTable->find()->where($data)->first();
+        if($isGive)
+        {
+            return $this->Util->ajaxReturn(false, '已递名片');
+        }
+        else
+        {
+            // 查询是否给我递过名片
+            $isGiveMe = $cardBoxTable->find()->where(['ownerid'=>$this->user->id, 'uid'=>$id])->first();
+            if($isGiveMe)
+            {
+                $data['resend'] = 1;
+            }
+            else
+            {
+                $data['resend'] = 2;
+            }
+            $cardcase = $cardBoxTable->newEntity();
+            $cardcase = $cardBoxTable->patchEntity($cardcase, $data);
+            $res = $cardBoxTable->save($cardcase);
+            if($res)
+            {
+                return $this->Util->ajaxReturn(true, '递名片成功');
+            }
+            else
+            {
+                return $this->Util->ajaxReturn(false, '系统错误');
+            }
+        }
+        
         
         
     }

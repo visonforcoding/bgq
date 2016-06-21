@@ -24,7 +24,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">专家推荐</label>
         <div class="col-md-8">
-            <?= $this->cell('savant') ?>
+            <?= $this->cell('savant', [$selSavantIds]) ?>
         </div>
     </div>
     <div class="form-group">

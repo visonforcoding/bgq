@@ -76,7 +76,9 @@
     
     <div class="dk">
         <ul>
-            <li><a href="/meet/view/"><img src="/mobile/images/dk.jpg"/><span>8人见过</span></a></li>
+            <?php foreach($biggieAd as $k=>$v): ?>
+            <li><a href="/meet/view/<?= $v['savant']['user_id'] ?>"><img src="<?= $v['url'] ?>"/><span><?= $v['savant']['meet_nums'] ?>人见过</span></a></li>
+            <?php endforeach; ?>
         </ul>
     </div>
     <div id='biggie'></div>
@@ -98,7 +100,7 @@
     </section>
 </script>
 <script type='text/html' id='subTpl'>
-    <a href="javascript:void(0);">{#title#}</a>
+    <a href="/meet/subject_detail/{#id#}">{#title#}</a>
 </script>
 <?=$this->element('footer');?>
 <?php $this->start('script'); ?>

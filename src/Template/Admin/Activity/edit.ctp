@@ -112,7 +112,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">专家推荐</label>
         <div class="col-md-8">
-            <?= $this->cell('Savant',[$selSavantIds]); ?>
+            <?= $this->cell('Savant', [$selSavantIds]); ?>
         </div>
     </div>
     <div class="form-group">
@@ -191,7 +191,7 @@
 <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
     $(function () {
-    	initJqupload('cover', '/wpadmin/util/doUpload?dir=newscover', 'jpg,png,gif,jpeg'); //初始化图片上传
+    	initJqupload('cover', '/wpadmin/util/doUpload?dir=activitycover', 'jpg,png,gif,jpeg'); //初始化图片上传
         var ue = UE.getEditor('body'); //初始化富文本编辑器
         UE.getEditor('summary');
         UE.getEditor('guest');

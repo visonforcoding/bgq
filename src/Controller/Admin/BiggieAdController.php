@@ -5,11 +5,16 @@ namespace App\Controller\Admin;
 use Wpadmin\Controller\AppController;
 
 /**
- * News Controller
+ * BiggieAd Controller
  *
- * @property \App\Model\Table\NewsTable $News
+ * @property \App\Model\Table\BiggieAdTable $BiggieAd
  */
-class NewsController extends AppController {
+class BiggieAdController extends AppController {
+    
+    public function initialize() {
+        parent::initialize();
+        $this->loadModel('BiggieAd');
+    }
 
     /**
      * Index method
@@ -17,23 +22,23 @@ class NewsController extends AppController {
      * @return void
      */
     public function index() {
-        $this->set('news', $this->News);
+        $this->set('biggieAd', $this->BiggieAd);
     }
 
     /**
      * View method
      *
-     * @param string|null $id News id.
+     * @param string|null $id Biggie Ad id.
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null) {
         $this->viewBuilder()->autoLayout(false);
-        $news = $this->News->get($id, [
-            'contain' => ['Admins']
+        $biggieAd = $this->BiggieAd->get($id, [
+            'contain' => ['Savants']
         ]);
-        $this->set('news', $news);
-        $this->set('_serialize', ['news']);
+        $this->set('biggieAd', $biggieAd);
+        $this->set('_serialize', ['biggieAd']);
     }
 
     /**
@@ -42,65 +47,50 @@ class NewsController extends AppController {
      * @return void Redirects on successful add, renders view otherwise.
      */
     public function add() {
-        $news = $this->News->newEntity();
+        $biggieAd = $this->BiggieAd->newEntity();
         if ($this->request->is('post')) {
-            $news = $this->News->patchEntity($news, $this->request->data);
-            $news->admin_id = $this->_user->id;
-            $news->admin_name = $this->_user->truename;
-            if ($this->News->save($news)) {
+            $biggieAd = $this->BiggieAd->patchEntity($biggieAd, $this->request->data);
+            if ($this->BiggieAd->save($biggieAd)) {
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {
-                $errors = $news->errors();
+                $errors = $biggieAd->errors();
                 $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
             }
         }
-        $savants = $this->News->Savants->find('list', ['limit' => 200]);
-        $users = $this->News->Users->find('list', ['limit' => 200]);
-        $this->set(compact('news', 'users', 'savants'));
+        $savants = $this->BiggieAd->Savants->find('list', ['limit' => 200]);
+        $userTable = \Cake\ORM\TableRegistry::get('User');
+        $users = $userTable->find('list', ['limit' => 200]);
+        $this->set(compact('biggieAd', 'savants', 'users'));
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id News id.
+     * @param string|null $id Biggie Ad id.
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
-        $news = $this->News->get($id, [
-            'contain' => ['Industries','Savants']
+        $biggieAd = $this->BiggieAd->get($id, [
+            'contain' => []
         ]);
         if ($this->request->is(['post', 'put'])) {
-            $news = $this->News->patchEntity($news, $this->request->data);
-            if ($this->News->save($news)) {
+            $biggieAd = $this->BiggieAd->patchEntity($biggieAd, $this->request->data);
+            if ($this->BiggieAd->save($biggieAd)) {
                 $this->Util->ajaxReturn(true, '修改成功');
             } else {
-                $errors = $news->errors();
+                $errors = $biggieAd->errors();
                 $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
-        $users = $this->News->Users->find('list', ['limit' => 200]);
-        $this->set(compact('news', 'users'));
-        $selIndustryIds = [];
-        foreach($news->industries as $industry){
-            $selIndustryIds[] = $industry->id;
-        }
-        // 专家推荐
-        $selSavantIds = [];
-        if($news->savants)
-        {
-            foreach ($news->savants as $savant)
-            {
-                $selSavantIds[] = $savant->id;
-            }
-        }
-        $this->set(compact('news','selIndustryIds', 'selSavantIds'));
+        $savants = $this->BiggieAd->Savants->find('list', ['limit' => 200]);
+        $this->set(compact('biggieAd', 'savants'));
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id News id.
+     * @param string|null $id Biggie Ad id.
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
@@ -108,11 +98,11 @@ class NewsController extends AppController {
         $this->request->allowMethod('post');
         $id = $this->request->data('id');
         if ($this->request->is('post')) {
-            $news = $this->News->get($id);
-            if ($this->News->delete($news)) {
+            $biggieAd = $this->BiggieAd->get($id);
+            if ($this->BiggieAd->delete($biggieAd)) {
                 $this->Util->ajaxReturn(true, '删除成功');
             } else {
-                $errors = $news->errors();
+                $errors = $biggieAd->errors();
                 $this->Util->ajaxReturn(true, getMessage($errors));
             }
         }
@@ -127,27 +117,27 @@ class NewsController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'news.' . $this->request->data('sidx');
+        $sort = 'biggiead.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where['or'] = [[' admin_name like' => "%$keywords%"], ['(`title`) like' => "%$keywords%"], ['(`summary`) like' => "%$keywords%"]];
+            $where[' username like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
+            $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
-        $query = $this->News->find();
+        $query = $this->BiggieAd->find();
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
         }
         $nums = $query->count();
-        $query->contain(['Users']);
+        $query->contain(['Savants']);
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
@@ -189,11 +179,11 @@ class NewsController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
-        $Table = $this->News;
-        $column = ['作者', '标题', '阅读数', '点赞数', '评论数', '封面', '内容', '摘要', '创建时间', '更新时间'];
+        $Table = $this->BiggieAd;
+        $column = ['大咖id', '图片地址', '创建时间'];
         $query = $Table->find();
         $query->hydrate(false);
-        $query->select(['admin_id', 'title', 'read_nums', 'praise_nums', 'comment_nums', 'cover', 'body', 'summary', 'create_time', 'update_time']);
+        $query->select(['savant_id', 'url', 'create_time']);
         if (!empty($where)) {
             $query->where($where);
         }
@@ -202,7 +192,7 @@ class NewsController extends AppController {
         }
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = 'News_' . date('Y-m-d') . '.csv';
+        $filename = 'BiggieAd_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
 
