@@ -75,6 +75,7 @@
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
+                        //绑定成功则 跳到个人中心页
                         window.location.href = '/home/index';
                     } else {
                         $.util.alert(msg.msg);
