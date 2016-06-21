@@ -19,7 +19,8 @@
     </div>
     <ul class="m-info-box">
         <li>
-            <h3><?= $biggie->truename ?><span><?= $biggie->company ?> <?= $biggie->position ?></span></h3><span class="identification"><i>实名认证</i><i>专家认证</i></span>
+            <h3><?= $biggie->truename ?><?= $biggie->company ?> <?= $biggie->position ?></h3>
+            <span class="identification"><i>实名认证</i><i>专家认证</i></span>
         </li>
         <li>
             <span class="commendnum">

@@ -94,6 +94,9 @@ class WxController extends AppController {
      */
     public function getUserCodeBase() {
         $res = $this->Wx->getUser();
+        //微信静默登录
+        \Cake\Log\Log::debug('静默登录');
+        \Cake\Log\Log::debug($res);
         $this->request->session()->write('Login.wxbase', true);
         if (isset($res->openid)) {
             $open_id = $res->openid;

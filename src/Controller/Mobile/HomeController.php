@@ -260,6 +260,7 @@ class HomeController extends AppController {
      * 活动收藏记录
      */
     public function myCollectActivity(){
+       
         
     }
     
@@ -462,6 +463,10 @@ class HomeController extends AppController {
      * 修改个人信息
      */
     public function editUserinfo(){
-        
+        $user_id = $this->user->id;
+        $user = $this->User->get($user_id);
+        $this->set([
+            'user'=>$user
+        ]);
     }
 }
