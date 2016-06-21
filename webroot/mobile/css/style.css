@@ -344,11 +344,11 @@ height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;text-indent: 0.18rem;}
 .m-info-box li .myhome{width:100%;background: url(img/right.png) no-repeat right center; background-size:0.16rem 0.26rem;}
 .eduit{text-align: right;color:#e01a48;display: block;line-height: 0.74rem;font-size:0.28rem;padding:0 0.3rem;}
 .m-swiper-items{width:100%;margin-bottom:0.6rem;height:5rem;padding-top:0.2rem;}
-.m-swiper-items ul{width:2000%;position:absolute;display: flex;align-items: center;}
+.m-swiper-items ul{width:2000%;position:absolute;/*display: flex;align-items: center;*/overflow:hidden;}
 /*阴影*/
 .m-swiper-items .s-to-more h3{background:##3e82f7 ;}
 .m-swiper-items .s-to-one h3{background:#e01b49;}
-.m-swiper-items li{margin-right:0.15rem;}
+.m-swiper-items li{margin-right:0.15rem;float:left;}
 .m-swiper-items li .inner-li-items{width:6.12rem;height:4.9rem;border-radius:0.2rem; background: #fff;position: relative;*zoom: 1;
 -webkit-box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.27), 0 0 60px rgba(0, 0, 0, 0.06) inset;-moz-box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.27), 0 0 0.4rem rgba(0, 0, 0, 0.06) inset;box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.27), 0 0 0.4rem rgba(0, 0, 0, 0.06) inset;display: inline-block;}
 .m-swiper-items li.active:before {-webkit-transform: skew(-15deg) rotate(-6deg);-moz-transform: skew(-15deg) rotate(-6deg);transform: skew(-15deg) rotate(-6deg);left: 0.34rem;}
