@@ -25,7 +25,6 @@
 <script src="/mobile/js/function.js"></script>
 <script>
     var t1 = null;
-    var phone = $('input[name="phone"]').val();
     $('input[name="phone"]').focusout(function () {
         var phone = $(this).val();
        // checkPhone(phone);
@@ -62,6 +61,7 @@
         }, 'json');
     });
     $('#submit').on('tap', function () {
+        var phone = $('input[name="phone"]').val();
          if (!is_mobile(phone)) {
             $.util.alert('手机号不正确');
             return;
