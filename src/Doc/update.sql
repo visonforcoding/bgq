@@ -178,7 +178,7 @@ CREATE TABLE `card_box` (
 	`ownerid` INT NOT NULL COMMENT '名片夹主人id',
 	`uid` INT NOT NULL COMMENT '名片id',
 	`resend` TINYINT NOT NULL COMMENT '1回赠2不回赠',
-	`create_time` INT NOT NULL COMMENT '创建时间',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
 	PRIMARY KEY (`id`)
 )
 COMMENT='赠名片表'
@@ -191,7 +191,7 @@ CREATE TABLE `card_box_log` (
 	`optid` INT NOT NULL COMMENT '操作人id',
 	`targetid` INT NOT NULL COMMENT '目标id',
 	`type` TINYINT NOT NULL COMMENT '1发放2回赠',
-	`create_time` INT NOT NULL COMMENT '创建时间',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
 	PRIMARY KEY (`id`)
 )
 COMMENT='赠名片记录表'
