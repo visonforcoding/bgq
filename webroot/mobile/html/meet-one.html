@@ -56,7 +56,7 @@
 				
 			</ul>
 			<div class="m-swiper-items">
-				<ul>
+				<ul id="subject">
 				<li>
 				<div class="inner-li-items">
 					<h3>1天使阶段投融资指南<span>一对多面谈</span></h3>
@@ -139,8 +139,8 @@
         <script>
 
             var subject = null;
-           
-                subject = $.util.loop({
+           setTimeout(function(){
+           	subject = $.util.loop({
                     min : 3,
                     moveDom: $('#subject'),
                     moveChild: $('#subject li'),
@@ -149,6 +149,8 @@
                     autoTime:3000,
                     
                 });
+           },0)
+                
         
 
 
