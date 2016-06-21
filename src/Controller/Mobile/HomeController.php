@@ -433,4 +433,11 @@ class HomeController extends AppController {
             'pageTitle'=>'设置'
         ]);
     }
+    
+    /**
+     * 修改个人信息
+     */
+    public function editUserinfo(){
+        
+    }
 }

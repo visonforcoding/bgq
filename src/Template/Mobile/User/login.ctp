@@ -92,6 +92,7 @@
                     res = JSON.parse(res);
                     if(res.status){
                         $.util.setCookie('token_uin',res.token_uin,10*365*24*60);
+                        LEMON.db.set('token_uin',res.token_uin);
                         document.location.href = res.redirect_url;
                     }
                 }
