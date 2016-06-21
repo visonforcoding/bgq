@@ -562,14 +562,13 @@ display: flex; flex-direction: column;justify-content: center; align-items: cent
 .bottom-logo p a{color:#222c38;}
 .bg-change:first-of-type{background: #e01a48;}
 .bg-change:last-of-type{background: #3e82f7;}
-.iconlist{position:fixed;width:100%;background: #fff;height:1rem;z-index:997;bottom:0;left:0;display:-webkit-flex;display:-moz-flex;display:-ms-flex;display: flex;
--webkit-justify-content:space-around;-moz-justify-content:space-around;-ms-justify-content;justify-content: space-around
--webkit-align-items:center;-moz-align-items:center;-ms-align-items:center;align-items: center;
-border-top:1px #d2d2d2 solid;
+.iconlist{position:fixed;width:100%;background: #fff;height:1rem;z-index:997;bottom:0;left:0;
+/*display:-webkit-flex;display: flex;-webkit-justify-content:space-around;justify-content: space-around;-webkit-align-items:center;align-items: center;*/
+border-top:1px #d2d2d2 solid;line-height: 1rem;font-size:0;
 }
-.iconlist span{font-size:0.32rem;color:#e01b49;}
+.iconlist span{font-size:0.32rem;color:#e01b49;width:33%;text-align: center;display: inline-block;}
 .iconlist span.active{color:#5e5e5e}
-.iconlist span:last-of-type{background: url(img/first.png) no-repeat;background-size:cover;width:0.3rem;height:0.32rem;}
+.iconlist span:last-of-type{background: url(img/first.png) no-repeat center center;background-size:0.3rem 0.32rem;width:33%;height:0.32rem;}
 .my-home-slidemenu{display:-webkit-flex;display:-moz-flex;display:-ms-flex;display: flex;
 -webkit-justify-content:space-around;-moz-justify-content:space-around;-ms-justify-content;justify-content: space-around;height:1rem;
 -webkit-align-items:center;-moz-align-items:center;-ms-align-items:center;align-items: center;}
