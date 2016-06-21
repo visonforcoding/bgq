@@ -16,7 +16,7 @@
             <a href="edit-card.html">
                 <span>头像：</span>
                 <div class="upload-user-img">
-                    <span><input type="file" /></span>
+                    <span><input name="avatar" id="upload_pic" type="file" /></span>
                 </div>
             </a>
         </li>
@@ -24,7 +24,7 @@
             <a href="javascript:void(0)">
                 <span>姓名：</span>
                 <div>
-                    <input type="text" placeholder="杨涛" />
+                    <input type="truename" value="<?=$user->truename?>" />
                 </div>
             </a>
         </li>
@@ -32,7 +32,7 @@
             <a href="javascript:void(0)">
                 <span>公司：</span>
                 <div>
-                    <input type="text" placeholder="IDG资本" />
+                    <input type="company" value="<?=$user->company?>" />
                 </div>
             </a>
         </li>
@@ -40,7 +40,7 @@
             <a href="javascript:void(0)">
                 <span>职务：</span>
                 <div >
-                    <input type="text" placeholder="董事长" />
+                    <input type="position" value="<?=$user->position?>" />
                 </div>
             </a>
         </li>
@@ -48,7 +48,7 @@
             <a href="javascript:void(0)">
                 <span>联系电话：</span>
                 <div>
-                    <input type="text" placeholder="13854612879" />
+                    <input type="phone" value="<?=$user->phone?>" />
                 </div>
             </a>
         </li>
@@ -56,7 +56,7 @@
             <a href="javascript:void(0)">
                 <span>邮箱：</span>
                 <div>
-                    <input type="text" placeholder="IDG@foxmail.com" />
+                    <input type="email" value="<?=$user->email?>" />
                 </div>
             </a>
         </li>
@@ -80,8 +80,7 @@
             <a href="javascript:void(0)">
                 <span>所在地：</span>
                 <div>
-
-                    <span>深圳市南山区深南大道新豪方大厦5F</span>
+                    <span>深圳</span>
                 </div>
             </a>
         </li>
@@ -175,3 +174,58 @@
     <span class="f-color-gray">广东   深圳</span>
     <span class="f-color-gray">海南 佛山</span>
 </div>
+<script src="/mobile/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="/mobile/js/lib/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(function () {
+        $('#upload_pic').change(function () {
+            var file = $(this).get(0).files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function (e) {
+                console.log(reader);
+                $('.imgcard').find('img').attr('src', e.target.result);
+                lrz(file,{quality:0.7}).then(function(rst){
+                    //压缩处理
+                    $.ajax({
+                        url: '/do-upload?dir=user/avatar&zip=1',
+                        data: rst.formData,
+                        type: 'POST',
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        dataType: 'json',
+                        success: function (data) {
+                            if(data.status===true){
+                               $('input[name="avatar"]').val(data.path);
+                            }
+                        },
+                        error: function () {
+                        }
+                    });
+                });
+            };
+        });
+        
+        $('#submit').on('click',function(){
+            var $form = $('form');
+            $.ajax({
+                type: $form.attr('method'),
+                url: $form.attr('action'),
+                data: $form.serialize(),
+                dataType: 'json',
+                success: function (msg) {
+                    if (typeof msg === 'object') {
+                        if (msg.status) {
+                            window.location.href = msg.url;
+                        } else {
+                            alert(msg.msg);
+                        }
+                    }
+                }
+            });
+        });
+    });
+</script>
+<?php
+$this->end('script');
