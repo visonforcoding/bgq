@@ -32,6 +32,12 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/function.js"></script>
 <script>
+    
+    if(location.href.indexOf('loginout=1')>0){
+        $.util.setCookie('token_uin','');
+        LEMON.db.set('token_uin','');
+        $.util.setCookie('login_url','/home/index',99999);
+    }
     var t1 = null;
     $('input[name="phone"]').focusout(function () {
         var phone = $(this).val();
