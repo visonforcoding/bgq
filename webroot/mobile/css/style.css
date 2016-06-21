@@ -410,6 +410,7 @@ height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;text-indent: 0.18rem;}
 -webkit-align-items: center;  align-items: center;
 -webkit-flex-direction:column;flex-direction:column;*/
 color:#fff;background: #d72355;}
+.h-home-bottom h4{text-align: center;padding:0.1rem 0;}
 .h-home-bottom div span{width:1.12rem;height:1.12rem;display:inline-block;position:relative;background-color: #fff;
 border-radius: 50%;padding:1px;}
 .h-home-bottom div{text-align: center;position:relative;}
