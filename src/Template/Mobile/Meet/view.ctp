@@ -66,17 +66,20 @@
     </section>
 
 </div>
+</div>
 <!--底部四个图-->
 
 <div class="iconlist">
-    <!--<span class="iconfont">&#xe618;</span>-->
-    <span class="iconfont">&#xe610;</span>
+        <!--<span class="iconfont">&#xe618;</span>-->
+    <span class="iconfont <?php if(!$isCollect): ?>active<?php endif; ?>" id="collect">&#xe610;</span>
     <span class="iconfont">&#xe614;</span>
-    <span class="iconfont"></span>
+    <span class="iconfont" id='goTop'></span>
 </div>
+<!--底部四个图**end-->
 <?php $this->start('script'); ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+
     var subject = null;
     //setTimeout(function(){
     subject = $.util.loop({
@@ -87,6 +90,43 @@
         loopScroll: true
     });
     //}, 0);
+
+    $('body').on('tap', function(e){
+        var target = e.srcElement || e.target, em=target, i=1;
+        while(em && !em.id && i<=3){ em = em.parentNode; i++;}
+        if(!em || !em.id) return;
+        if(em.id.indexOf('common_')){
+            console.log($(em));
+        }
+        switch(em.id){
+            case 'imageViewer': case 'fullImg':
+                //do();
+            break;
+            case 'collect':
+                $.util.ajax({
+                    url: '/meet/collect/<?= $biggie->id ?>',
+                    func: function (msg) {
+                        if (typeof msg === 'object') {
+                            if (msg.status === true) {
+                                $.util.alert(msg.msg);
+                                $(em).toggleClass('active');
+                            } else {
+                                $.util.alert(msg.msg);
+                            }
+                        }
+                    }
+                });
+                break;
+            case 'detailClosePC':
+                //do();
+                break;
+            case 'goTop':
+                window.scrollTo(0,0);
+                e.preventDefault();
+                break;
+        }
+    });
+
 </script>
 <?php
 $this->end('script');
