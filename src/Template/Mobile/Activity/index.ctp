@@ -64,7 +64,7 @@
     $.util.dataToTpl('activity', 'activity_tpl',<?= $actjson ?>, function (d) {
         d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
         d.industries_name = $.util.dataToTpl('', 'subTpl', d.industries);
-        d.region_name = d.region.name;
+        d.region_name = d.region ? '<a>' + d.region.name + '</a>' : '';
         return d;
     });
 
