@@ -34,27 +34,27 @@
         <ul id="subject">
             <?php foreach ($biggie->subjects as $v): ?>
             <li>
-                <div class="inner-li-items">
-                    <h3><?= $v['title'] ?><span><?php if($v['type'] == 1): ?>一对一<?php else: ?>一对多<?php endif; ?>面谈</span></h3>
-                    <div class='m-center-con'>
-                        <a href="meet-one-detail.html">
+                <a href="/meet/subject_detail/<?= $v['id'] ?>">
+                    <div class="inner-li-items">
+                        <h3><?= $v['title'] ?><span><?php if($v['type'] == 1): ?>一对一<?php else: ?>一对多<?php endif; ?>面谈</span></h3>
+                        <div class='m-center-con'>
                             <p>
                                 <?= $v['summary'] ?>
                             </p>
-                        </a>
+                        </div>
+                        <div  class='m-bottom-con'>
+                            <span>价格<i><?= $v['price'] ?>元/次</i></span>
+                            <span>时间<i>约<?= $v['last_time'] ?>小时</i></span>
+                        </div>
                     </div>
-                    <div  class='m-bottom-con'>
-                        <span>价格<i><?= $v['price'] ?>元/次</i></span>
-                        <span>时间<i>约<?= $v['last_time'] ?>小时</i></span>
-                    </div>
-                </div>	
+                </a>
             </li>
             <?php endforeach; ?>
         </ul>
     </div>
     <section class="a-detail newscomment-box m-about-expert">
         <h3 class="comment-title">专家简介</h3>
-        <a href="meet-one-detail.html">
+        <a href="/meet/myhome/<?= $biggie->id ?>">
             <p>
                 <?= $biggie->savant->summary ?>
             </p>
@@ -67,7 +67,7 @@
 
 <div class="iconlist">
         <!--<span class="iconfont">&#xe618;</span>-->
-    <span class="iconfont">&#xe610;</span>
+    <span class="iconfont <?php if(!$isCollect): ?>active<?php endif; ?>" id="collect">&#xe610;</span>
     <span class="iconfont">&#xe614;</span>
     <span class="iconfont" id='goTop'></span>
 </div>
@@ -87,6 +87,41 @@
     });
     //}, 0);
 
+    $('body').on('tap', function(e){
+        var target = e.srcElement || e.target, em=target, i=1;
+        while(em && !em.id && i<=3){ em = em.parentNode; i++;}
+        if(!em || !em.id) return;
+        if(em.id.indexOf('common_')){
+            console.log($(em));
+        }
+        switch(em.id){
+            case 'imageViewer': case 'fullImg':
+                //do();
+            break;
+            case 'collect':
+                $.util.ajax({
+                    url: '/meet/collect/<?= $biggie->id ?>',
+                    func: function (msg) {
+                        if (typeof msg === 'object') {
+                            if (msg.status === true) {
+                                $.util.alert(msg.msg);
+                                $(em).toggleClass('active');
+                            } else {
+                                $.util.alert(msg.msg);
+                            }
+                        }
+                    }
+                });
+                break;
+            case 'detailClosePC':
+                //do();
+                break;
+            case 'goTop':
+                window.scrollTo(0,0);
+                e.preventDefault();
+                break;
+        }
+    });
 
 </script>
 <?php

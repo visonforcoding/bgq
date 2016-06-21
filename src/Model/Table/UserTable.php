@@ -39,6 +39,7 @@ class UserTable extends Table {
         $this->hasMany('Subjects',[
             'className'=>'MeetSubject',
         ]);
+        
         $this->belongsToMany('Industries', [
             'className' => 'Industry',
             'joinTable' => 'user_industry',
@@ -55,15 +56,26 @@ class UserTable extends Table {
         $this->belongsTo('Agencies');
         
         $this->hasOne('Educations',[
-//            'foreignKey' => 'user_id',
-//            'joinType' => 'INNER',
             'className' => 'Education',
         ]);
         
         $this->hasOne('Careers',[
-//            'foreignKey' => 'user_id',
-//            'joinType' => 'INNER',
             'className' => 'Career',
+        ]);
+        
+        $this->hasOne('UserFans',[
+            'className' => 'UserFans',
+        ]);
+        
+        $this->hasOne('CardBoxes',[
+            'className' => 'CardBox',
+            'foreignKey' => 'ownerid',
+        ]);
+        
+        $this->belongsTo('Collect',[
+            'foreignKey' => 'relate_id',
+            'joinType' => 'INNER',
+            'className' => 'Collect',
         ]);
 
         $this->addBehavior('Timestamp', [

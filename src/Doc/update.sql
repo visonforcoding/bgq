@@ -197,3 +197,6 @@ CREATE TABLE `card_box_log` (
 COMMENT='赠名片记录表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
+
+#收藏表修改注释，增加大咖收藏
+ALTER TABLE `collect` CHANGE COLUMN `type` `type` tinyint(3) NOT NULL DEFAULT 0 COMMENT '类型值：0：活动；1：资讯；2：大咖'

@@ -66,11 +66,11 @@ class MeetController extends AppController {
                 ->toArray();
         if($users)
         {
-            $this->Util->ajaxReturn(['status'=>true, 'data'=>$users]);
+            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$users]);
         }
         else
         {
-            $this->Util->ajaxReturn(false, '暂无结果');
+            return $this->Util->ajaxReturn(false, '暂无结果');
         }
     }
 
@@ -111,8 +111,24 @@ class MeetController extends AppController {
      * 专家详情页
      */
     public function view($id = null) {
+        $isCollect = '';
+        // 是否已收藏
+        if($this->user)
+        {
+            $isCollect = $this
+                    ->User
+                    ->Collect
+                    ->find()
+                    ->where(['user_id' => $this->user->id, 'relate_id' => $id])
+                    ->first();
+            if ($isCollect) {
+                $isCollect = !$isCollect['is_delete'];
+            } else {
+                $isCollect = 0;
+            }
+        }
+        $this->set('isCollect', $isCollect);
         $biggie = $this->User->get($id, ['contain' => ['Savant', 'Subjects']]);
-//        debug($biggie);die;
         $this->set([
             'biggie' => $biggie
         ]);
@@ -143,9 +159,9 @@ class MeetController extends AppController {
             $subject = $SubjectTable->patchEntity($subject, $this->request->data());
             $subject->user_id = $this->user->id;
             if ($SubjectTable->save($subject)) {
-                $this->Util->ajaxReturn(true, '添加成功');
+                return $this->Util->ajaxReturn(true, '添加成功');
             } else {
-                $this->Util->ajaxReturn(false, '添加失败');
+                return $this->Util->ajaxReturn(false, '添加失败');
             }
         }
     }
@@ -174,10 +190,10 @@ class MeetController extends AppController {
                 $this->loadComponent('Business');
                 $user_id = $subject->user->id;
                 $this->Business->usermsg($user_id,'话题预约','您有新的话题预约请求',4,$book->id);
-                $this->Util->ajaxReturn(true,'预定成功');
+                return $this->Util->ajaxReturn(true,'预定成功');
             }else{
                 $error = errorMsg($book,'预定失败');
-                $this->Util->ajaxReturn(false,$error);
+                return $this->Util->ajaxReturn(false,$error);
             }
             
         }
@@ -221,9 +237,9 @@ class MeetController extends AppController {
                 ->limit(10)
                 ->toArray();
         if($User) {
-            $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $User]);
+            return $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $User]);
         } else {
-            $this->Util->ajaxReturn(false, '暂无搜索结果');
+            return $this->Util->ajaxReturn(false, '暂无搜索结果');
         }
     }
     
@@ -244,24 +260,154 @@ class MeetController extends AppController {
                 ->page($page, $this->limit)
                 ->toArray();
         if($User) {
-            $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $User]);
+            return $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $User]);
         } else {
-            $this->Util->ajaxReturn(false, '暂无搜索结果');
+            return $this->Util->ajaxReturn(false, '暂无搜索结果');
         }
     }
     
     /**
-     * 专家主页
-     * @param type $id
+     * 个人主页
+     * @param type $id 用户id
      */
     public function myhome($id){
-        if($this->user->id == $id)
-        {
-            $this->redirect('/home/index');
+        $isMe = '';
+        $type = '0';
+        if ($this->user) {
+            if ($this->user->id == $id) {
+                $isMe = true;
+            }
+            $isAttention = $this->User->UserFans->find()->where(['user_id' => $this->user->id, 'following_id' => $id])->first();
+            if($isAttention)
+            {
+                $type = $isAttention->type;
+            }
         }
         $user = $this->User->get($id, [
             'contain' => ['Industries', 'Careers', 'Educations'],
         ]);
+        
+        $this->set('type', $type);
+        $this->set('isMe', $isMe);
         $this->set('user', $user);
     }
+    
+    /**
+     * 大咖收藏
+     * @param int $id 大咖用户id
+     */
+    public function collect($id){
+        $this->handCheckLogin();
+        $this->loadComponent('Business');
+        $res = $this->Business->collectIt($this->user->id, $id, 2);
+        if($res !== false)
+        {
+            $res['status'] = true;
+            return $this->Util->ajaxReturn($res);
+        }
+        else
+        {
+            return $this->Util->ajaxReturn(false, '系统错误');
+        }
+    }
+    
+    
+    public function attention($id){
+        $this->handCheckLogin();
+        if($id == $this->user->id)
+        {
+            return $this->Util->ajaxReturn(false, '不可关注自己');
+        }
+        $data['user_id'] = $this->user->id;
+        $data['following_id'] = $id;
+        $isAttention = $this->User->UserFans->find()->where($data)->first();
+        $isFans = $this->User->UserFans->find()->where(['user_id'=>$id, 'following_id'=>$this->user->id])->first();
+        if($isAttention)
+        {
+            $type = $isAttention->type;
+        }
+        else
+        {
+            if($isFans)
+            {
+                $fanses = $this->User->UserFans->newEntity();
+                $fans = $this->User->UserFans->patchEntity($fanses, $data);
+                $fans->type = 2;
+                $attention = $this->User->UserFans->save($fans);
+                
+                $isFans = $this->User->UserFans->get($isFans->id);
+                $isFans->type = 2;
+                $attentioned = $this->User->UserFans->save($isFans);
+                if($attention && $attentioned)
+                {
+                    return $this->Util->ajaxReturn(['status' => true, 'msg' => '关注成功', 'type' => '2']);
+                }
+                else
+                {
+                    return $this->Util->ajaxReturn(false, '系统错误');
+                }
+            }
+            else
+            {
+                $fanses = $this->User->UserFans->newEntity();
+                $fans = $this->User->UserFans->patchEntity($fanses, $data);
+                $fans->type = 1;
+                $res = $this->User->UserFans->save($fans);
+                if($res)
+                {
+                    return $this->Util->ajaxReturn(['status' => true, 'msg' => '关注成功', 'type' => '1']);
+                }
+                else
+                {
+                    return $this->Util->ajaxReturn(false, '系统错误');
+                }
+            }
+            
+        }
+        if($type == 1){
+            // 已关注，取消关注
+            $data['type'] = '0';
+            $fans = $this->User->UserFans->get($isAttention->id);
+            $res = $this->User->UserFans->delete($fans);
+            if($res)
+            {
+                
+                return $this->Util->ajaxReturn(['status' => true, 'msg' => '取消关注成功', 'type' => 0]);
+            }
+            else
+            {
+                return $this->Util->ajaxReturn(false, '系统错误');
+            }
+        }
+        elseif($type == 2)
+        {
+            // 互相关注，取消关注
+            $fans = $this->User->UserFans->get($isAttention->id);
+            $res = $this->User->UserFans->delete($fans);
+            if($res)
+            {
+                $isFans = $this->User->UserFans->get($isFans->id);
+                $isFans->type = 1;
+                $this->User->UserFans->save($isFans);
+                return $this->Util->ajaxReturn(['status' => true, 'msg' => '取消关注成功', 'type' => 0]);
+            }
+            else
+            {
+                return $this->Util->ajaxReturn(false, '系统错误');
+            }
+        }
+    }
+    
+    public function giveCard($id){
+        $this->handCheckLogin();
+        if($this->user->id == $id)
+        {
+            return $this->Util->ajaxReturn(false, '不可给自己递名片');
+        }
+        $cardcase = $this->User->OwnerId->newEntity();
+        $this->User->OwnerId->patchEntity($cardcase, $data);
+        
+        
+    }
+    
 }

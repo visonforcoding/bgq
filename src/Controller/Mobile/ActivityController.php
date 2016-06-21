@@ -126,7 +126,7 @@ class ActivityController extends AppController {
 
             $this->set('pageTitle', '活动详情');
         } else {
-            $this->Util->ajaxReturn(false, '传值错误');
+            return $this->Util->ajaxReturn(false, '传值错误');
         }
     }
 
@@ -197,9 +197,9 @@ class ActivityController extends AppController {
             $formdata = $sponsorTable->patchEntity($sponsor, $data);
             $res = $sponsorTable->save($formdata);
             if ($res) {
-                $this->Util->ajaxReturn(true, '推荐成功');
+                return $this->Util->ajaxReturn(true, '推荐成功');
             } else {
-                $this->Util->ajaxReturn(false, '系统错误');
+                return $this->Util->ajaxReturn(false, '系统错误');
             }
         } else {
             $this->set('pageTitle', '我要推荐');
@@ -223,14 +223,14 @@ class ActivityController extends AppController {
                 ];
                 $activityApply = $this->Activity->Activityapply->patchEntity($activityApply, $data);
                 if ($this->Activity->Activityapply->find()->where($data)->first()) { // 查找数据库是否有对应数据，即是否已报名
-                    $this->Util->ajaxReturn(false, '已经报名过了');
+                    return $this->Util->ajaxReturn(false, '已经报名过了');
                 } else {
                     if ($this->Activity->Activityapply->save($activityApply)) {
                         $activity->apply_nums += 1;
                         $this->Activity->save($activity);
-                        $this->Util->ajaxReturn(true, '提交成功');
+                        return $this->Util->ajaxReturn(true, '提交成功');
                     } else {
-                        $this->Util->ajaxReturn(false, $activityApply->errors());
+                        return $this->Util->ajaxReturn(false, $activityApply->errors());
                     }
                 }
             } else {
@@ -239,7 +239,7 @@ class ActivityController extends AppController {
                 $this->set('pageTitle', '我要报名');
             }
         } else {
-            $this->Util->ajaxReturn(false, '传值错误');
+            return $this->Util->ajaxReturn(false, '传值错误');
         }
     }
 
@@ -272,9 +272,9 @@ class ActivityController extends AppController {
                 $industry->is_crowdfunding = 0;
             }
             if ($this->Activity->save($industry)) {
-                $this->Util->ajaxReturn(true, '提交成功');
+                return $this->Util->ajaxReturn(true, '提交成功');
             } else {
-                $this->Util->ajaxReturn(false, '提交失败');
+                return $this->Util->ajaxReturn(false, '提交失败');
             }
         } else {
             $this->set('industries', $industries);
@@ -292,11 +292,11 @@ class ActivityController extends AppController {
         $res = $this->Business->commentPraise($this->user->id, $id, 0);
         if ($res !== false) {
             if ($res !== true) {
-                $this->Util->ajaxReturn(false, $res);
+                return $this->Util->ajaxReturn(false, $res);
             }
-            $this->Util->ajaxReturn(true, $res);
+            return $this->Util->ajaxReturn(true, $res);
         } else {
-            $this->Util->ajaxReturn(false, '系统错误');
+            return $this->Util->ajaxReturn(false, '系统错误');
         }
     }
 
@@ -308,20 +308,14 @@ class ActivityController extends AppController {
         $this->handCheckLogin();
         $this->loadComponent('Business');
         $res = $this->Business->praise($this->user->id, $id, 0);
-        if($res !== false)
-        {
-            if(is_string($res))
-            {
-                $this->Util->ajaxReturn(false, $res);
+        if ($res !== false) {
+            if (is_string($res)) {
+                return $this->Util->ajaxReturn(false, $res);
+            } else {
+                return $this->Util->ajaxReturn(true, '点赞成功');
             }
-            else
-            {
-                $this->Util->ajaxReturn(true, '点赞成功');
-            }
-        }
-        else
-        {
-            $this->Util->ajaxReturn(false, '系统错误');
+        } else {
+            return $this->Util->ajaxReturn(false, '系统错误');
         }
     }
 
@@ -333,14 +327,11 @@ class ActivityController extends AppController {
         $this->handCheckLogin();
         $this->loadComponent('Business');
         $res = $this->Business->collectIt($this->user->id, $id, 0);
-        if($res !== false)
-        {
+        if ($res !== false) {
             $res['status'] = true;
-            $this->Util->ajaxReturn($res);
-        }
-        else
-        {
-            $this->Util->ajaxReturn(false, '系统错误');
+            return $this->Util->ajaxReturn($res);
+        } else {
+            return $this->Util->ajaxReturn(false, '系统错误');
         }
     }
 
@@ -428,11 +419,11 @@ class ActivityController extends AppController {
         if ($res!==false) {
             if($res == [])
             {
-                $this->Util->ajaxReturn(false, '暂无搜索结果');
+                return $this->Util->ajaxReturn(false, '暂无搜索结果');
             }
-            $this->Util->ajaxReturn(['status' => true, 'data' => $res]);
+            return $this->Util->ajaxReturn(['status' => true, 'data' => $res]);
         } else {
-            $this->Util->ajaxReturn(false, '系统错误');
+            return $this->Util->ajaxReturn(false, '系统错误');
         }
     }
     
@@ -480,9 +471,9 @@ class ActivityController extends AppController {
                 ->page($page, $this->limit)
                 ->toArray();
         if ($res) {
-            $this->Util->ajaxReturn(['status' => true, 'data' => $res]);
+            return $this->Util->ajaxReturn(['status' => true, 'data' => $res]);
         } else {
-            $this->Util->ajaxReturn(['status' => false]);
+            return $this->Util->ajaxReturn(['status' => false]);
         }
     }
 
@@ -530,7 +521,7 @@ class ActivityController extends AppController {
             $data = $this->request->data();
             $data['body'] = trim($data['body']);
             if ($data['body'] == '') {
-                $this->Util->ajaxReturn(false, '内容不能为空');
+                return $this->Util->ajaxReturn(false, '内容不能为空');
             }
             $data['user_id'] = $this->user->id;
             $data['activity_id'] = $id;
@@ -552,12 +543,12 @@ class ActivityController extends AppController {
                 $activity->comment_nums += 1;
                 $this->Activity->save($activity);
                 
-                $this->Util->ajaxReturn(['status' => true, 'msg' => '评论成功', 'data' => $newComment]);
+                return $this->Util->ajaxReturn(['status' => true, 'msg' => '评论成功', 'data' => $newComment]);
             } else {
-                $this->Util->ajaxReturn(false, '系统错误');
+                return $this->Util->ajaxReturn(false, '系统错误');
             }
         } else {
-            $this->Util->ajaxReturn(false, '非法操作');
+            return $this->Util->ajaxReturn(false, '非法操作');
         }
     }
 
@@ -637,9 +628,9 @@ class ActivityController extends AppController {
                         ->orderDesc('Activity.create_time')
                         ->toArray();
         if ($activity) {
-            $this->Util->ajaxReturn(['status' => true, 'data' => $activity]);
+            return $this->Util->ajaxReturn(['status' => true, 'data' => $activity]);
         } else {
-            $this->Util->ajaxReturn(['status' => false]);
+            return $this->Util->ajaxReturn(['status' => false]);
         }
     }
 
@@ -658,9 +649,9 @@ class ActivityController extends AppController {
                         ->orderDesc('Activitycom.create_time')
                         ->toArray();
         if ($comment) {
-            $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
+            return $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
         } else {
-            $this->Util->ajaxReturn(['status' => false]);
+            return $this->Util->ajaxReturn(['status' => false]);
         }
     }
     
@@ -676,9 +667,9 @@ class ActivityController extends AppController {
                 ->limit(10)
                 ->toArray();
         if ($comment) {
-            $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
+            return $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
         } else {
-            $this->Util->ajaxReturn(['status' => false]);
+            return $this->Util->ajaxReturn(['status' => false]);
         }
     }
     
