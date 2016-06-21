@@ -31,6 +31,10 @@
     });
     $('#getVcode').on('click', function () {
         var $obj = $(this);
+        if($obj.attr('lock')){
+            return;
+        }
+        $obj.attr('lock','lock');
         var phone = $('input[name="phone"]').val();
         if (is_mobile(phone)) {
             $.post('/user/sendVcode', {phone: phone}, function (res) {
@@ -45,6 +49,7 @@
                             //$obj.removeAttr('disabled');
                             $obj.html('获取验证码');
                             clearInterval(t1);
+                            $obj.removeAttr('lock');
                         } else {
                             $('#timer').text(timer);
                         }
