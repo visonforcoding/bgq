@@ -200,3 +200,15 @@ ENGINE=InnoDB;
 
 #收藏表修改注释，增加大咖收藏
 ALTER TABLE `collect` CHANGE COLUMN `type` `type` tinyint(3) NOT NULL DEFAULT 0 COMMENT '类型值：0：活动；1：资讯；2：大咖'
+
+#大咖广告表
+CREATE TABLE `biggie_ad` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '大咖广告表',
+	`savant_id` INT NOT NULL COMMENT '大咖id',
+	`url` VARCHAR(50) NOT NULL COMMENT '图片地址',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='大咖广告表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
