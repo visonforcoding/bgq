@@ -163,7 +163,7 @@ class WxController extends AppController {
                 }
                 $this->request->session()->write('Login.login_token',$user->user_token);
                 $this->request->session()->write('User.mobile', $user);
-                return $this->Util->ajaxReturn(['status' => true, 'msg' => '登陆成功', 'redirect_url' => '/']);
+                return $this->Util->ajaxReturn(['status' => true, 'msg' => '登陆成功', 'redirect_url' => '/home/index','token_uin'=>$user->user_token]);
             } else {
                 //未注册过
                 $headimgurl = $res->headimgurl;

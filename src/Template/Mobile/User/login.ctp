@@ -83,15 +83,14 @@
     $('#wxlogin').on('click', function () {
         if ($.util.isAPP) {
             LEMON.login.wx(function (code) {
-                $.ajax({
+            $.ajax({
                 type:'post',
                 data:{code:code},
                 url: '/wx/appLogin',
                 success:function(res){
-                    alert(res);
                     res = JSON.parse(res);
-                    alert(res.msg);
                     if(res.status){
+                        $.util.setCookie('token_uin',res.login_token,10*365*24*60*60);
                         document.location.href = res.redirect_url;
                     }
                 }
