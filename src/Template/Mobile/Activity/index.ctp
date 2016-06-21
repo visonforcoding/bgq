@@ -44,7 +44,7 @@
                 </span>
                 <div class="a-other-info">
                     <span class="a-number">{#apply_nums#}人报名</span>
-                    <a href="javascript:void(0);">{#region_name#}</a>{#industries_name#}
+                    {#region_name#}{#industries_name#}
                     <span class="a-date">{#time#}</span>
                 </div>
             </div>
