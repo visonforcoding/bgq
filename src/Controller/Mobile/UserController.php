@@ -249,7 +249,7 @@ class UserController extends AppController {
     public function wxBindPhone() {
         $open_id = $this->request->session()->read('reg.wx_openid');
         if (!$open_id) {
-            throw new Exception('非法操作');
+            //throw new Exception('非法操作');
             //交互待处理
         }
         if ($this->request->isPost()) {

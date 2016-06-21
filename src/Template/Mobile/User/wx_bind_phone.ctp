@@ -25,40 +25,47 @@
 <script src="/mobile/js/function.js"></script>
 <script>
     var t1 = null;
+    var phone = $('input[name="phone"]').val();
     $('input[name="phone"]').focusout(function () {
         var phone = $(this).val();
        // checkPhone(phone);
     });
     $('#getVcode').on('tap', function () {
         var $obj = $(this);
+        var phone = $('input[name="phone"]').val();
+        if (!is_mobile(phone)) {
+            $.util.alert('手机号不正确');
+            return;
+        }
         if($obj.attr('lock')){
             return;
         }
         $obj.attr('lock','lock');
-        var phone = $('input[name="phone"]').val();
-        if (is_mobile(phone)) {
-            $.post('/user/sendVcode', {phone: phone}, function (res) {
-                if (res.status === true) {
-                    //$obj.attr('disabled ','true');
-                    var text = '<i id="timer">' + 30 + '</i>秒后重新发送';
-                    $obj.html(text);
-                    t1 = setInterval(function () {
-                        var timer = $('#timer').text();
-                        timer--;
-                        if (timer < 1) {
-                            //$obj.removeAttr('disabled');
-                            $obj.html('获取验证码');
-                            clearInterval(t1);
-                            $obj.removeAttr('lock');
-                        } else {
-                            $('#timer').text(timer);
-                        }
-                    }, 1000);
-                }
-            }, 'json');
-        }
+        $.post('/user/sendVcode', {phone: phone}, function (res) {
+            if (res.status === true) {
+                //$obj.attr('disabled ','true');
+                var text = '<i id="timer">' + 30 + '</i>秒后重新发送';
+                $obj.html(text);
+                t1 = setInterval(function () {
+                    var timer = $('#timer').text();
+                    timer--;
+                    if (timer < 1) {
+                        //$obj.removeAttr('disabled');
+                        $obj.html('获取验证码');
+                        clearInterval(t1);
+                        $obj.removeAttr('lock');
+                    } else {
+                        $('#timer').text(timer);
+                    }
+                }, 1000);
+            }
+        }, 'json');
     });
     $('#submit').on('tap', function () {
+        if(!phone){
+            $.util.alert('手机号不能为空');
+            return;
+        }
         $form = $('form');
         $.ajax({
             type: 'post',
