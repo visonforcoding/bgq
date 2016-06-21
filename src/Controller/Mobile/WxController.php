@@ -167,6 +167,7 @@ class WxController extends AppController {
             } else {
                 //未注册过
                 $headimgurl = $res->headimgurl;
+                $this->request->session()->write('reg.wx_unionid', $union_id);
                 $this->request->session()->write('reg.wx_openid', $open_id);
                 $this->request->session()->write('reg.avatar', $headimgurl);
                 return $this->Util->ajaxReturn(['status' => true, 'msg' => '登陆成功，前往完善信息', 'redirect_url' => '/user/wx-bind-phone']);

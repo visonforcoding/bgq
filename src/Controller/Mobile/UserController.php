@@ -49,9 +49,9 @@ class UserController extends AppController {
                 if ($this->User->save($user)) {
                     //注册成功就算登录
                     $this->request->session()->write('User.mobile', $user);
-                    $this->Util->ajaxReturn(['status' => true, 'url' => '/user/index']);
+                    return $this->Util->ajaxReturn(['status' => true, 'url' => '/user/index']);
                 } else {
-                    $this->Util->ajaxReturn(['status' => false, 'msg' => '服务器出错']);
+                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '服务器出错']);
                 }
             }
             return;
@@ -81,9 +81,9 @@ class UserController extends AppController {
                 $user->agency_id = $this->request->data('agency');
                 if ($this->User->save($user)) {
                     $this->request->session()->write('reg.step', 'two');
-                    $this->Util->ajaxReturn(['status' => true, 'url' => '/user/register-business']);
+                    return $this->Util->ajaxReturn(['status' => true, 'url' => '/user/register-business']);
                 } else {
-                    $this->Util->ajaxReturn(['status' => false, 'msg' => '服务器出错']);
+                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '服务器出错']);
                 }
             }
             return;
@@ -107,17 +107,17 @@ class UserController extends AppController {
             $user = $this->User->findByPhoneAndEnabled($phone, 1)->first();
             $vcode = $this->request->session()->read('UserLoginVcode');
             if ($vcode['code'] != $this->request->data('vcode')) {
-                $this->Util->ajaxReturn(false, '验证码验证错误');
+                return $this->Util->ajaxReturn(false, '验证码验证错误');
             }
             if ($user) {
-                $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号已注册过您可前往登录']);
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号已注册过您可前往登录']);
             }
             if (time() - $vcode['time'] < 60 * 10) {
                 //10分钟验证码超时
                 $this->request->session()->write('reg.phone', $phone);
-                $this->Util->ajaxReturn(['status' => true]);
+                return $this->Util->ajaxReturn(['status' => true]);
             } else {
-                $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
+                return $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
             }
         }
     }
@@ -136,7 +136,12 @@ class UserController extends AppController {
             $data['phone'] = $this->request->session()->read('reg.phone');
             if ($this->request->session()->read('reg.wx_bind') && $this->request->session()->check('reg.wx_openid')) {
                 //第一次微信登录的完善信息
-                $data['wx_openid'] = $this->request->session()->read('reg.wx_openid');
+                $data['union_id'] = $this->request->session()->read('reg.wx_unionid');
+                if($this->request->is('lemon')){
+                    $data['app_wx_openid'] = $this->request->session()->read('reg.wx_openid');
+                }else{
+                    $data['wx_openid'] = $this->request->session()->read('reg.wx_openid');
+                }
                 $data['avatar'] = $this->request->session()->read('reg.avatar');
             }
             $user = $this->User->patchEntity($user, $data);
@@ -145,10 +150,10 @@ class UserController extends AppController {
                 $this->request->session()->write([
                     'reg.step' => 'one',
                 ]);
-                $this->Util->ajaxReturn(['status' => true, 'url' => '/user/register-org']);
+                return $this->Util->ajaxReturn(['status' => true, 'url' => '/user/register-org']);
             } else {
                 $errors = $user->errors();
-                $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors)]);
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors)]);
             }
         }
     }
@@ -168,7 +173,7 @@ class UserController extends AppController {
         } else {
             $response['status'] = false;
         }
-        $this->Util->ajaxReturn($response);
+        return $this->Util->ajaxReturn($response);
     }
 
     /**
@@ -234,7 +239,7 @@ class UserController extends AppController {
                return $this->Util->ajaxReturn(true, '发送成功');
             }
         } else {
-           return $this->Util->ajaxReturn(false, '30s后再发送');
+           return $this->Util->ajaxReturn(false, '30秒后再发送');
         }
     }
 

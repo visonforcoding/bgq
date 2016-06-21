@@ -29,7 +29,7 @@
         var phone = $(this).val();
        // checkPhone(phone);
     });
-    $('#getVcode').on('click', function () {
+    $('#getVcode').on('tap', function () {
         var $obj = $(this);
         if($obj.attr('lock')){
             return;
@@ -40,7 +40,7 @@
             $.post('/user/sendVcode', {phone: phone}, function (res) {
                 if (res.status === true) {
                     //$obj.attr('disabled ','true');
-                    var text = '<i id="timer">' + 30 + '</i>s后重新发送';
+                    var text = '<i id="timer">' + 30 + '</i>秒后重新发送';
                     $obj.html(text);
                     t1 = setInterval(function () {
                         var timer = $('#timer').text();
@@ -58,7 +58,7 @@
             }, 'json');
         }
     });
-    $('#submit').on('click', function () {
+    $('#submit').on('tap', function () {
         $form = $('form');
         $.ajax({
             type: 'post',
@@ -68,10 +68,10 @@
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
-                        window.location.href = '/';
-                    } else {
-                        alert(msg.msg);
                         window.location.href = msg.url;
+                    } else {
+                        $.util.alert(msg.msg);
+//                        window.location.href = '/';
                     }
                 }
             }
