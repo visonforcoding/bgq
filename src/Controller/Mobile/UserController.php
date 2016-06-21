@@ -272,9 +272,9 @@ class UserController extends AppController {
                     //注册过 绑定 并登录
                     $user->union_id = $union_id;
                     if ($this->request->is('lemon')) {
-                        $data['app_wx_openid'] = $this->request->session()->read('reg.wx_openid');
+                        $user->app_wx_openid = $this->request->session()->read('reg.wx_openid');
                     } else {
-                        $data['wx_openid'] = $this->request->session()->read('reg.wx_openid');
+                        $user->wx_openid = $this->request->session()->read('reg.wx_openid');
                     }
                     if ($this->User->save($user)) {
                         $this->request->session()->write('User.mobile', $user);

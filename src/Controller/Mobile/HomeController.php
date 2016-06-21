@@ -20,7 +20,6 @@ class HomeController extends AppController {
     public function initialize() {
         parent::initialize();
         $this->loadModel('User');
-        $this->set('pageTitle','个人中心');
     }
 
     /**
@@ -53,6 +52,9 @@ class HomeController extends AppController {
         foreach($industries as $industry){
             $industry_arr[] = $industry['name'];
         }
+        $this->set([
+            'pageTitle'=>'个人主页'
+        ]);
         $this->set(compact('user','industry_arr'));
     }
 
@@ -70,7 +72,8 @@ class HomeController extends AppController {
         $ActivityTable = \Cake\ORM\TableRegistry::get('activity');
         $activities = $ActivityTable->findByUserId($this->user->id)->toArray();
         $this->set([
-            'activities' => $activities
+            'activities' => $activities,
+            'pageTitle'=>'我的活动'
         ]);
     }
     
@@ -93,6 +96,9 @@ class HomeController extends AppController {
                 $this->Util->ajaxReturn(false, '保存失败');
             }
         }
+        $this->set([
+            'pageTitle'=>'实名认证'
+        ]);
         $this->set(compact('user'));
     }
 
@@ -123,6 +129,9 @@ class HomeController extends AppController {
                 $this->Util->ajaxReturn(false, '保存失败');
             }
         }
+        $this->set([
+            'pageTitle'=>'专家认证'
+        ]);
         $this->set(compact('user'));
     }
     
@@ -138,7 +147,9 @@ class HomeController extends AppController {
         }])->hydrate(false)
                 ->where(['user_id'=>$user_id])
                 ->toArray();
-        $this->set(compact('followings'));
+        $this->set([
+            'followings'=>$followings
+        ]);
     }
     
     
@@ -154,7 +165,9 @@ class HomeController extends AppController {
         }])->hydrate(false)
                 ->where(['following_id'=>$user_id])
                 ->toArray();
-        $this->set(compact('fans'));
+        $this->set([
+            'fans'=>$fans
+        ]);
     }
     
     /**
@@ -163,7 +176,6 @@ class HomeController extends AppController {
     public function myMessageFans(){
         //查找type 为1 的消息
         $user_id = $this->user->id;
-        
         $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
         $unReadCount = $UsermsgTable->find()->where(['user_id'=>$user_id,'status'=>0])->count();
         
@@ -187,6 +199,9 @@ class HomeController extends AppController {
                 ->orderDesc('usermsg.create_time')->toArray();
         //看了之后 就更改状态了为已读
         $UsermsgTable->updateAll(['status'=>1],['user_id'=>$user_id,'status'=>0]);
+        $this->set([
+            'pageTitle'=>'关注消息'
+        ]);
         $this->set(compact('unReadCount','fans'));
     }
     
@@ -199,6 +214,9 @@ class HomeController extends AppController {
         $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
         $unReadCount = $UsermsgTable->find()->where(['user_id'=>$user_id,'status'=>0])->count();
         $msgs = $UsermsgTable->find()->where(['user_id'=>$user_id,'type !='=>1])->toArray();
+        $this->set([
+            'pageTitle'=>'系统消息'
+        ]);
         $this->set(compact('msgs','unReadCount'));
     }
 
@@ -219,6 +237,9 @@ class HomeController extends AppController {
                 $this->Util->ajaxReturn(false, '提交失败');
             }
         }
+        $this->set([
+            'pageTitle'=>'小秘书'
+        ]);
     }
     
     /**
@@ -228,6 +249,9 @@ class HomeController extends AppController {
         $NeedTable = \Cake\ORM\TableRegistry::get('need');
         $user_id = $this->user->id;
         $needs = $NeedTable->find()->where(['user_id'=>$user_id])->orderDesc('create_time')->toArray();
+        $this->set([
+            'pageTitle'=>'小秘书历史记录'
+        ]);
         $this->set(compact('needs'));
     }
     
