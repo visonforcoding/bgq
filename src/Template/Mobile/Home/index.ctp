@@ -5,7 +5,7 @@
 </header>
 <div class="wraper newswraper">
     <div class="h-home-bottom">
-        <div><span><img src="<?= $user->avatar ?>"/></span><i class="iconfont">&#xe61e;</i></div>
+        <div><span><a href="/home/edit-userinfo"><img src="<?= $user->avatar ?>"/></a></span><i class="iconfont">&#xe61e;</i></div>
         <h3><?= $user->truename ?><span><?= $user->company ?> <?= $user->position ?></span></h3>
     </div>
     <ul class="h-home-menu clearfix">
