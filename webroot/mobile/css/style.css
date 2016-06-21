@@ -358,8 +358,10 @@ height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;text-indent: 0.18rem;}
 .m-swiper-items li h3 span{float: right;font-size:0.24rem;}
 .m-center-con{padding:0.28rem 0.32rem;border-bottom:1px dashed #c8c7cc;position:relative;}
 .m-center-con p{line-height: 0.36rem;font-size:0.26rem;color:#9ba4ad;}
-.m-bottom-con{height:1.44rem; display: flex;justify-content:space-around;padding-top:0.2rem;}
+.m-bottom-con{height:1.44rem; /*display: flex;justify-content:space-around;*/padding-top:0.2rem;}
 .m-bottom-con span{text-align: center;font-size:0.3rem;line-height: 0.45rem;}
+.m-bottom-con span:first-of-type{float:left;margin-left:0.2rem;}
+.m-bottom-con span:last-of-type{float:right;margin-right:0.2rem;}
 .m-bottom-con i{display:block;color:#e01a48;}
 .m-center-con:before,.m-center-con:after{position:absolute;bottom:-0.12rem;background: #ebebf1;content:'';width:0.12rem;height:0.24rem;}
 .m-center-con:before{left:0;border-radius: 0 0.12rem 0.12rem 0;}
