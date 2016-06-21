@@ -2,11 +2,11 @@
 <body>
     <?= $this->element('header'); ?>
     <div class="wraper a-wraper">
-        <div class="a-search-box">
+        <div class="a-search-box" id="search">
             <div class="a-search">
                 <i class="iconfont">&#xe613;</i>
                 <div class="s-con">
-                    <input type="text" placeholder="请输入关键词" class="search"/>
+                    <input type="text" placeholder="请输入关键词" class="search" />
                 </div>
             </div>
         </div>
@@ -80,6 +80,12 @@
     });
     
     $.util.searchHide();
+    
+    if($.util.isAPP)
+    {
+        $('#search').hide();
+        LEMON.show.search();
+    }
 </script>
 <?php
 $this->end('script');
