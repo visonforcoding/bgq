@@ -8,7 +8,7 @@
         <div><span><img src="<?= $user->avatar ?>"/></span><i class="iconfont">&#xe61e;</i></div>
         <h3><?= $user->truename ?><span><?= $user->company ?> <?= $user->position ?></span></h3>
     </div>
-    <ul class="h-home-menu">
+    <ul class="h-home-menu clearfix">
         <li><a href="/home/my-following"><i class="iconfont">&#xe60f;</i>我的关注</a></li>
         <li><a href="/home/my-collect-activity"><i class="iconfont">&#xe610;</i>我的收藏</a></li>
         <li><a href="/home/my-book"><i class="iconfont">&#xe60b;</i>我的约见</a></li>
