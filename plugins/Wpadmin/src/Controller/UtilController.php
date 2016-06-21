@@ -21,6 +21,9 @@ class UtilController extends AppController {
 
     public function doUpload() {
         $dir = $this->request->query('dir');
+        if($this->request->query('zip')){
+            //缩略图处理
+        }
         $today = date('Y-m-d');
         $urlpath =  '/upload/tmp/' . $today . '/';
         if(!empty($dir)){
