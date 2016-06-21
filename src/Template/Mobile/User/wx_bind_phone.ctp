@@ -78,7 +78,9 @@
                         window.location.href = '/home/index';
                     } else {
                         $.util.alert(msg.msg);
-                        window.location.href = msg.url;
+                        if(msg.url){
+                            window.location.href = msg.url;
+                        }
                     }
                 }
             }
