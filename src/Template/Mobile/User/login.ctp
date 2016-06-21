@@ -91,7 +91,7 @@
                     alert(res);
                     res = JSON.parse(res);
                     if(res.status){
-                        $.util.setCookie('token_uin',res.login_token,10*365*24*60*60);
+                        $.util.setCookie('token_uin',res.token_uin,10*365*24*60*60);
                         document.location.href = res.redirect_url;
                     }
                 }
