@@ -75,10 +75,10 @@
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
-                        window.location.href = msg.url;
+                        window.location.href = '/home/index';
                     } else {
                         $.util.alert(msg.msg);
-//                        window.location.href = '/';
+                        window.location.href = msg.url;
                     }
                 }
             }
