@@ -62,8 +62,8 @@
         }, 'json');
     });
     $('#submit').on('tap', function () {
-        if(!phone){
-            $.util.alert('手机号不能为空');
+         if (!is_mobile(phone)) {
+            $.util.alert('手机号不正确');
             return;
         }
         $form = $('form');
