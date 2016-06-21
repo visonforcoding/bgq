@@ -276,7 +276,7 @@ class UserController extends AppController {
                         'reg.phone' => $phone,
                         'reg.wx_bind' => true,
                     ]);
-                    return $this->Util->ajaxReturn(['status' => false, 'msg' => '您还未有平台账户需前往完善信息', 'url' => '/user/register?type=wx_bind']);
+                    return $this->Util->ajaxReturn(['status' => true, 'msg' => '您还未有平台账户需前往完善信息', 'url' => '/user/register?type=wx_bind']);
                 }
             } else {
                 return $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
