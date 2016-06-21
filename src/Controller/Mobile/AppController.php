@@ -104,9 +104,9 @@ class AppController extends Controller {
     protected function handCheckLogin() {
         $user = $this->request->session()->check('User.mobile');
         $url = '/'.$this->request->url;
-        if($this->request->isLemon()&&$this->request->cookie('login_uin')){
+        if($this->request->isLemon()&&$this->request->cookie('token_uin')){
             \Cake\Log\Log::debug('用户cookie');
-            \Cake\Log\Log::debug($this->request->cookie('login_uin'));
+            \Cake\Log\Log::debug($this->request->cookie('token_uin'));
         }
         if (!$user) {
             if ($this->request->is('ajax')) {
