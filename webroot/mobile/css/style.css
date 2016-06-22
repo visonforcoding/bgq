@@ -430,7 +430,7 @@ border-radius: 50%;padding:1px;}
 	.h-home-menu li{padding:0.32rem 0 0.32rem 1rem;}
 }
 @media (min-width: 320px) and (max-width: 374px) {
-	.h-home-menu li{padding:0.3rem 0 0.3rem 1rem;}
+	.h-home-menu li{padding:0.32rem 0 0.32rem 1rem;}
 }
 .h-home-menu li:nth-of-type(n){border-left:1px #c8c7cc solid;}
 .h-home-menu li a{font-size:0.3rem;color:#222c38;vertical-align: middle; }
