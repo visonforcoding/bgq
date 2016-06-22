@@ -269,7 +269,7 @@ class ActivityController extends AppController {
             return $this->Util->ajaxReturn(false, '系统错误');
         }
         $savePath = $folder.'/'.time().$id.'.png';
-        \PHPQRCode\QRcode::png('/activity/sign/'.$id, $savePath);
+        \PHPQRCode\QRcode::png('http://m.chinamatop.com/activity/sign/'.$id, $savePath);
         return $this->Util->ajaxReturn(true, '发布成功');
     }
 

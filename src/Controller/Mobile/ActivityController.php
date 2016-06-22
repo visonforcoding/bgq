@@ -687,16 +687,15 @@ class ActivityController extends AppController {
      * @param int $id
      */
     public function sign($id){
-        debug($this->user->id);die;
         $activity = $this->Activity->get($id);
         if(!$activity)
         {
-            return $this->Util->ajaxReturn(false, '活动不存在');
+            echo '活动不存在';
         }
         $is_apply = $this->Activity->Activityapply->find()->where(['user_id'=>$this->user->id, 'activity_id'=>$id, 'is_pass'=>1])->first();
         if(!$is_apply)
         {
-            return $this->Util->ajaxReturn(false, '未报名或者未通过审核');
+            echo '未报名或者未通过审核';
         }
         $apply = $this->Activity->Activityapply->get($is_apply->id);
         $apply->is_sign = 1;
