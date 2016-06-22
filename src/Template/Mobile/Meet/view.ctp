@@ -61,7 +61,11 @@
         <h3 class="comment-title">专家简介</h3>
         <a href="meet-one-detail.html">
             <p>
+                <?php if($biggie->savant->summary): ?>
                 <?= $biggie->savant->summary ?>
+                <?php else: ?>
+                无。
+                <?php endif; ?>
             </p>
         </a>
     </section>
