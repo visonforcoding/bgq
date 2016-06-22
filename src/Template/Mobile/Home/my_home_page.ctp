@@ -45,6 +45,11 @@
             <h3>所在地：<em>深圳</em></h3>
         </li>
     </ul>
+    <ul class="h-info-box">
+                <li class="no-b-border">
+                    <a href="edit-user-info.html">编辑</a>
+                </li>
+            </ul>
     <?php if($user->level=='2'):?>
     <ul class="h-info-box">
         <li class="no-b-border">
