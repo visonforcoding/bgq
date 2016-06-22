@@ -23,10 +23,7 @@
                         if(n>30) clearInterval(wxReadTimmer);
                         if(window.wx){
                             clearInterval(wxReadTimmer);
-                            wx.config({"signature":"ed8072f791b5b04c9766945a1d01f83aab011f57",
-                                "nonceStr":"YYIKKJNADVSNFEZH",
-                                "timestamp":1466593417,"appId":"wx0cf353f9fc03aad0","debug":true,
-                                "jsApiList":["onMenuShareTimeline","onMenuShareAppMessage","scanQRCode"]});
+                            wx.config(<?=  json_encode($wxConfig)?>);
                             wx.ready(function(){
                                 wx.onMenuShareTimeline(window.shareConfig);
                                 wx.onMenuShareAppMessage(window.shareConfig);
