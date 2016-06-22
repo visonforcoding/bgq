@@ -2,9 +2,7 @@
     <div class='inner'>
         <a href='#this' class='toback'></a>
         <h1>
-
-            <a href="javascript:void(0);" class="active">我的发布</a>|
-            <a href="javascript:void(0);">已经报名</a>
+            我的活动
         </h1>
 
     </div>
@@ -12,6 +10,11 @@
 <div class="wraper">
     <div class="h20 nobottom">
     </div>
+    <div class="inner my-home-menu" >
+                <a href="my-activity-submit.html">我的发布</a>
+                <a href="javascript:void(0);"  class="active">已经报名</a>
+                    
+                </div>
     <section class="my-collection-info" id="dataBox">
     </section>
 </div>
