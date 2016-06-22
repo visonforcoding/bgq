@@ -189,6 +189,7 @@ class ActivityController extends AppController {
     public function recommend($id) {
         if ($this->request->is('post')) {
             $this->handCheckLogin();
+            debug($this->user->id);die;
             $data = $this->request->data();
             if($data['description'] == '')
             {
