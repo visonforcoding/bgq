@@ -23,7 +23,7 @@
                         if(n>30) clearInterval(wxReadTimmer);
                         if(window.wx){
                             clearInterval(wxReadTimmer);
-                            wx.config(<?=  json_encode($wxConfig)?>);
+                            wx.config(<?=json_encode($wxConfig)?>);
                             wx.ready(function(){
                                 wx.onMenuShareTimeline(window.shareConfig);
                                 wx.onMenuShareAppMessage(window.shareConfig);
