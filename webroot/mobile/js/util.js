@@ -38,8 +38,15 @@ $.util = {
         });
         return contentId === '' ? html.join('') : $('#'+contentId).html(html.join(''));
     },
-
     /**
+     * 去掉字符串两端空格
+     * @param str
+     */
+    trim: function (str){
+        return str.replace(/(^\s*)|(\s*$)/g, "");
+    },
+
+/**
      * 封装ajax
      * @param {type} obj
      * @returns {undefined}
