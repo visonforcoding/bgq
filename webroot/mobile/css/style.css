@@ -358,7 +358,7 @@ height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;text-indent: 0.18rem;}
 .m-swiper-items li.active:before, .m-swiper-items li.active:after {width: 70%;height: 55%;content: ' ';-webkit-box-shadow: 0 0.15rem 0.2rem rgba(0, 0, 0, 0.3);-moz-box-shadow: 0 0.15rem 0.2rem rgba(0, 0, 0, 0.3);box-shadow: 0 0.15rem 0.2rem rgba(0, 0, 0, 0.3); position:absolute;bottom: 0.24rem;z-index: -1;}
 .m-swiper-items li h3{padding:0 0.23rem;background: #dc1e4e;line-height: 0.7rem;font-size:0.28rem;color:#fff; border-radius: 0.2rem 0.2rem 0 0;}
 .m-swiper-items li h3 span{float: right;font-size:0.24rem;}
-.m-center-con{padding:0.28rem 0.32rem;border-bottom:1px dashed #c8c7cc;position:relative;}
+.m-center-con{padding:0.28rem 0.32rem;border-bottom:1px dashed #c8c7cc;position:relative;min-height:3rem;}
 .m-center-con p{line-height: 0.36rem;font-size:0.26rem;color:#9ba4ad;}
 .m-bottom-con{height:1.44rem; /*display: flex;justify-content:space-around;*/padding-top:0.2rem;}
 .m-bottom-con span{text-align: center;font-size:0.3rem;line-height: 0.45rem;}
