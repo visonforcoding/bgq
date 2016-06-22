@@ -123,7 +123,7 @@ class WxComponent extends Component {
         $access_token = \Cake\Cache\Cache::read(self::TOKEN_NAME);
         $url = self::WEIXIN_API_URL . 'token?grant_type=client_credential&appid=' . $this->app_id . '&secret=' . $this->app_secret;
         if (is_array($access_token)) {
-            $isExpires = $access_token['expires_in'] <= time() ? true : false;
+            $isExpires = ($access_token['expires_in']-time())<2200 ? true : false;
         }
         if ($access_token === false || $isExpires) {
             $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
