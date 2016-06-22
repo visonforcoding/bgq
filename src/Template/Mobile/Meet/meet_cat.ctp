@@ -4,11 +4,23 @@
         <h1>
             互联网
         </h1>
-        <a href="#this" class='h-regiser m-sort'>默认排序</a>
+        <!-- <a href="#this" class='h-regiser m-sort'>默认排序</a> -->
     </div>
 </header>
 <div class="wraper">
-    <div class="navmenu">
+    <div class="navmenu c-zindex">
+         <div class="innercon">
+            <a href="#this" class='h-regiser defaultsort'>默认排序</a>
+            <ul>
+                <li><a href="#this" class="active">全部</a></li>
+               <?php foreach($sub_industries as $sub_cat):?>
+                    <li><a href="/meet/meet-cat/<?=$sub_cat->id?>"><?=$sub_cat->name?></a></li>
+                <?php endforeach;?>
+            </ul>
+            <a href="javascript:void(0);" class="morebtn"></a>
+         </div>
+        </div>
+   <!--  <div class="navmenu">
         <div class="innercon">
             <ul>
                 <li><a href="#this" class="active">全部</a></li>
@@ -18,7 +30,7 @@
             </ul>
             <a href="javascript:void(0);" class="morebtn"></a>
         </div>
-    </div>
+    </div> -->
     <div id="dakas"></div>
 </div>
 
