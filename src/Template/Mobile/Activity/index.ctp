@@ -34,7 +34,7 @@
     <section class='news-list-items'>
         <div class="active-items">
             <a href="/activity/details/{#id#}" class="a-head">
-                <img src="{#cover#}"/>
+               <div><img src="{#cover#}"/></div>
                 <h3>{#title#}</h3>
             </a>
             <div class="a-bottom">
