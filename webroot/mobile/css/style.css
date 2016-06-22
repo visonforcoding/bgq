@@ -425,12 +425,12 @@ border-radius: 50%;padding:1px;}
 .h-home-bottom h3 span{display: block;font-size:0.26rem;line-height: 0.4rem;}
 .h-home-bottom .tofocus-m span{color:#fff;border:1px #fff solid;padding:0.03rem 0.1rem;border-radius: 0.1rem; margin-right: 0.35rem;}
 .h-home-menu{/*display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap: wrap;flex-wrap: wrap;*/background: #fff;border-bottom:1px #c8c7cc solid;margin-bottom:0.2rem;overflow:hidden;/*向下兼容*/}
-.h-home-menu li{width:50%; padding:0.33rem 0 0.33rem 1rem;border:1px #c8c7cc solid;border-bottom:none;border-right:none;float:left;/*向下兼容*/}
+.h-home-menu li{width:50%; padding:0.3rem 0 0.3rem 1rem;border:1px #c8c7cc solid;border-bottom:none;border-right:none;float:left;/*向下兼容*/}
 @media (min-width: 414px) and (max-width: 640px) {
-	.h-home-menu li{padding:0.34rem 0 0.34rem 1rem;}
+	.h-home-menu li{padding:0.3rem 0 0.3rem 1rem;}
 }
 @media (min-width: 320px) and (max-width: 374px) {
-	.h-home-menu li{padding:0.34rem 0 0.34rem 1rem;}
+	.h-home-menu li{padding:0.3rem 0 0.3rem 1rem;}
 }
 .h-home-menu li:nth-of-type(n){border-left:1px #c8c7cc solid;}
 .h-home-menu li a{font-size:0.3rem;color:#222c38;vertical-align: middle; }
