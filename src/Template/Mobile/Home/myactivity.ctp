@@ -10,16 +10,11 @@
 <div class="wraper">
     <div class="h20 nobottom">
     </div>
-<<<<<<< .mine    <div class="inner my-home-menu">
+    <div class="inner my-home-menu">
         <a href="javascript:void(0);" class="active" id="myActivity">我的发布</a>|
         <a href="javascript:void(0);" id="applyActivity">已经报名</a>
     </div>
-=======    <div class="inner my-home-menu" >
-        <a href="my-activity-submit.html">我的发布</a>
-        <a href="javascript:void(0);"  class="active">已经报名</a>
-                    
-     </div>
->>>>>>> .theirs    <section class="my-collection-info" id="dataBox">
+    <section class="my-collection-info" id="dataBox">
     </section>
 </div>
 <script type="text/html" id="listTpl">
