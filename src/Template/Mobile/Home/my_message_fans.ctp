@@ -2,13 +2,21 @@
     <div class='inner'>
         <a href='/home/index' class='toback'></a>
         <h1 class="m-message-top">
+                    我的消息
+                </h1>
+      <!--   <h1 class="m-message-top">
             <a href="javascript:void(0);" class="active">新的关注<i><?=$unReadCount?></i></a>|
             <a href="/home/my-message-sys">系统消息<i>3</i></a>
-        </h1>
-        <a href="javascript:void(0);" class="h-regiser h-add"></a>
+        </h1> -->
+        <!-- <a href="javascript:void(0);" class="h-regiser h-add"></a> -->
     </div>
 </header>
-<div class="wraper" id="follow">
+<div class="wraper">
+    <div class="inner my-home-menu m-message-top" >
+        <a href="my-message-focus.html" class="active">新的关注<i>2</i></a>
+        <a href="my-message-system.html">系统消息<i>3</i></a>
+     </div>
+    <div id='follow'></div>
 </div>
 <script type="text/html" id="listTpl">
     <section class="internet-v-info no-margin-top">
