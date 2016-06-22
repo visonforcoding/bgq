@@ -68,6 +68,11 @@ class AppController extends Controller {
      */
     public function beforeRender(Event $event) {
         $this->viewBuilder()->layout('layout');
+        if($this->request->is('weixin')){
+            $this->loadComponent('Wx');
+            $wxConfig = $this->Wx->wxconfig(['onMenuShareTimeline','onMenuShareAppMessage','scanQRCode'],false);
+            $this->set(compact('wxConfig'));
+        }
     }
 
     public function beforeFilter(Event $event) {
@@ -79,6 +84,7 @@ class AppController extends Controller {
         }
         return $this->checkLogin();
     }
+    
 
     /**
      * 检查用户登录
