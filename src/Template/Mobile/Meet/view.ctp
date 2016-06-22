@@ -73,13 +73,20 @@
 <div class="iconlist">
         <!--<span class="iconfont">&#xe618;</span>-->
     <span class="iconfont <?php if(!$isCollect): ?>active<?php endif; ?>" id="collect">&#xe610;</span>
-    <span class="iconfont">&#xe614;</span>
+    <span class="iconfont" id="share">&#xe614;</span>
     <span class="iconfont" id='goTop'></span>
 </div>
 <!--底部四个图**end-->
 <?php $this->start('script'); ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    // 分享设置
+    window.shareConfig = {
+//        img_url: 'http://m.jealousauto.com/static/user/image/zmc_logo_1.png',
+        link: 'http://m.chinamatop.com/meet/view/<?= $biggie->id ?>',
+        title: '<?= $biggie->truename ?>',
+        desc: '<?= $biggie->summary ?>'
+    };
 
     var subject = null;
     setTimeout(function(){
@@ -120,8 +127,8 @@
                     }
                 });
                 break;
-            case 'detailClosePC':
-                //do();
+            case 'share':
+                LEMON.share.banner();
                 break;
             case 'goTop':
                 window.scrollTo(0,0);

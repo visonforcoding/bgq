@@ -115,7 +115,7 @@
     <div class="iconlist">
         <span class="iconfont" id="article_comment" user_id="<?= $user; ?>">&#xe618;</span>
         <span class="iconfont<?php if (!$isCollect): ?> active<?php endif; ?>" id="collect" artid="<?= $activity->id; ?>" >&#xe610;</span>
-        <span class="iconfont">&#xe614;</span>
+        <span class="iconfont" id="share">&#xe614;</span>
         <span class="iconfont" id='toTop'></span>
     </div>
     <div class="reg-shadow article-shadow" ontouchmove="return false;" hidden>
@@ -166,6 +166,14 @@
 </script>
 <script src="/mobile/js/activity_details.js"></script>
 <script>
+    // 分享设置
+    window.shareConfig = {
+//        img_url: 'http://m.jealousauto.com/static/user/image/zmc_logo_1.png',
+        link: 'http://m.chinamatop.com/activity/details/<?= $activity->id ?>',
+        title: '<?= $activity->title ?>',
+        desc: '<?= $activity->share_desc ?>'
+    };
+    
     window.article = true;
     window.reply = true;
     $.util.dataToTpl('comment', 'comment_tpl',<?= $comjson ?>, function (d) {
@@ -253,6 +261,8 @@
             $('#allcoment').hide('slow');
         }
     });
+    
+    
     
 </script>
 <?php

@@ -37,6 +37,11 @@ activity.prototype.bindEvent = function () {
                     $.util.alert('请输入内容');
                     return false;
                 }
+                if($('input[name="type"]').attr('value') == '')
+                {
+                    $.util.alert('请选择一个类别');
+                    return false;
+                }
                 var form = $('form').serializeArray();
                 $.util.ajax({
                     url: $('form').attr('action'),
@@ -46,7 +51,7 @@ activity.prototype.bindEvent = function () {
                             if (msg.status === true) {
                                 $.util.alert(msg.msg);
                                 setTimeout(function () {
-                                    window.location.href = '/activity/index';
+                                    window.location.href = '/activity/details' + $().attr();
                                 }, 3000);
                             } else {
                                 $.util.alert(msg.msg);

@@ -152,22 +152,6 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">创建时间</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('create_time', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">更新时间</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('update_time', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' />
             <a href="/admin/activitycom/index/<?= $activity->id; ?>" id='' class='btn btn-primary' data-loading='稍候...'>评论详情</a>

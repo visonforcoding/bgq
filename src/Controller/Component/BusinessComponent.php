@@ -345,7 +345,7 @@ class BusinessComponent extends Component {
             $collect->is_delete = 1;
             $res = [
                 'collect' => false,
-                'msg' => '取消收藏'
+                'msg' => '取消收藏成功'
             ];
         }
         if ($collectTable->save($collect)) {

@@ -20,7 +20,7 @@ news.prototype.bindEvent = function(){
         var target = e.srcElement || e.target, em=target, i=1;
         while(em && !em.id && i<=3){ em = em.parentNode; i++;}
         if(!em || !em.id) return;
-        if(em.id.indexOf('common_')){
+        if(em.id.indexOf('common_') != -1){
             console.log($(em));
         }
         switch(em.id){
@@ -34,7 +34,7 @@ news.prototype.bindEvent = function(){
                 //do();
                 break;
             case 'goTop':
-                window.scroll(0,0);
+                window.scrollTo(0,0);
                 e.preventDefault();
                 break;
         }

@@ -28,17 +28,17 @@ class CardBoxTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
         
-//        $this->belongsTo('Uid', [
-//            'foreignKey' => 'uid',
-//            'joinType' => 'INNER',
-//            'className' => 'User',
-//        ]);
-//        
-//        $this->belongsTo('OwnerId', [
-//            'foreignKey' => 'ownerid',
-//            'joinType' => 'INNER',
-//            'className' => 'User',
-//        ]);
+        $this->belongsTo('OtherCard', [
+            'foreignKey' => 'uid',
+            'joinType' => 'INNER',
+            'className' => 'User',
+        ]);
+        
+        $this->belongsTo('MyCardCase', [
+            'foreignKey' => 'ownerid',
+            'joinType' => 'INNER',
+            'className' => 'User',
+        ]);
         
         $this->addBehavior('Timestamp', [
             'events' => [

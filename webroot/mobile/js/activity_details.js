@@ -61,7 +61,7 @@ activity.prototype.bindEvent = function () {
             } else {
                 $.util.alert('请先登录');
                 setTimeout(function () {
-                    location.href = '/user/login';
+                    location.href = '/user/login?redirect_url=/activity/details/' + $('#enroll').attr('activity_id');
                 }, 2000);
             }
         }
@@ -74,7 +74,7 @@ activity.prototype.bindEvent = function () {
                 } else {
                     $.util.alert('请先登录');
                     setTimeout(function () {
-                        location.href = '/user/login';
+                        location.href = '/user/login?redirect_url=/activity/details/' + $('#enroll').attr('activity_id');
                     }, 2000);
                 }
                 break;
@@ -217,9 +217,12 @@ activity.prototype.bindEvent = function () {
                 } else {
                     $.util.alert('请先登录');
                     setTimeout(function () {
-                        location.href = '/user/login';
-                    }, 2000);
+                        location.href = '/user/login?redirect_url=/activity/details/' + $(em).attr('activity_id');
+                    }, 1000);
                 }
+                break;
+            case 'share':
+                LEMON.share.banner();
                 break;
             case 'goTop':
                 window.scroll(0, 0);

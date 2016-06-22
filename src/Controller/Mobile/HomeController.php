@@ -22,6 +22,8 @@ class HomeController extends AppController {
         $this->loadModel('User');
     }
 
+    protected $limit = '5'; // 分页条数
+    
     /**
      * Index method  个人中心页
      *
@@ -62,13 +64,18 @@ class HomeController extends AppController {
      * 我的活动 报名
      */
     public function myActivityApply() {
-        
+        $ActivityTable = \Cake\ORM\TableRegistry::get('activity');
+        $activities = $ActivityTable->findByUserId($this->user->id)->toArray();
+        $this->set([
+            'activities' => $activities,
+            'pageTitle'=>'我的活动'
+        ]);
     }
 
     /**
      * 我的活动 发布
      */
-    public function myActivitySubmit() {
+    public function myactivity() {
         $ActivityTable = \Cake\ORM\TableRegistry::get('activity');
         $activities = $ActivityTable->findByUserId($this->user->id)->toArray();
         $this->set([
@@ -468,5 +475,61 @@ class HomeController extends AppController {
         $this->set([
             'user'=>$user
         ]);
+    }
+    
+    public function cardcase(){
+        $this->handCheckLogin();
+        $card = $this
+                ->User
+                ->CardBoxes
+                ->find()
+                ->contain(['OtherCard'])
+                ->where(['ownerid'=>$this->user->id, 'resend'=>'2'])
+                ->orderDesc('CardBoxes.`create_time`')
+                ->limit($this->limit)
+                ->toArray();
+//        debug($card);die;
+        $this->set('cardjson', json_encode($card));
+    }
+    
+    public function getCrad($resend){
+        $card = $this
+                ->User
+                ->CardBoxes
+                ->find()
+                ->contain(['OtherCard'])
+                ->where(['ownerid'=>$this->user->id, 'resend'=>$resend])
+                ->orderDesc('CardBoxes.`create_time`')
+                ->limit($this->limit)
+                ->toArray();
+        if($card !== false)
+        {
+            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$card]);
+        }
+        else
+        {
+            return $this->Util->ajaxReturn(false, '系统错误');
+        }
+    }
+    
+    public function sendBack($id){
+        $sendMe = $this
+                ->User
+                ->CardBoxes
+                ->find()
+                ->where(['ownerid'=>$this->user->id, 'uid'=>$id])
+                ->first();
+//        debug($sendMe);die;
+        $sendMe = $this->User->CardBoxes->get($sendMe->id);
+        $sendMe->resend = 1;
+        $res = $this->User->CardBoxes->save($sendMe);
+        if($res)
+        {
+            return $this->Util->ajaxReturn(true, '回赠成功');
+        }
+        else
+        {
+            return $this->Util->ajaxReturn(false, '回赠失败');
+        }
     }
 }
