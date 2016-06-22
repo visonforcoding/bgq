@@ -538,7 +538,7 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .pay-detail div i{color:#9ba4ad;font-size:0.2rem;}
 .pay-detail .dollars{font-size:0.3rem;color:#e01a48;}
 .topull{margin-bottom:0.2rem;}
-.wraper .tocard{font-size:0.26rem; text-align: center;}
+.wraper .tocard{font-size:0.26rem; text-align: center;line-height: 0.32rem;}
 .totips{width:5.8rem;height:4.1rem;background: #fff;border-radius: 0.2rem; position:fixed;left:50%;top:50%;margin-left:-2.9rem;margin-top:-2.5rem;
 display: flex; flex-direction: column;justify-content: center; align-items: center; box-shadow: 0 0 0.5rem rgba(0,0,0,.6);z-index:999;}
 .totips .closed{position:absolute;display:block;right:-0.25rem;top:-0.25rem;width:0.66rem;height:0.66rem;background: #e01b49;border:0.04rem solid #fff;border-radius: 50%;line-height: 0.55rem;text-align: center;font-size:0.5rem;color:#fff;}
