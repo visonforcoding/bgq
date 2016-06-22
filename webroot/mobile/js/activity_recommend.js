@@ -51,7 +51,7 @@ activity.prototype.bindEvent = function () {
                             if (msg.status === true) {
                                 $.util.alert(msg.msg);
                                 setTimeout(function () {
-                                    window.location.href = '/activity/details' + $().attr();
+                                    window.location.href = '/activity/details/' + $('input[name="activity_id"]').val();
                                 }, 3000);
                             } else {
                                 $.util.alert(msg.msg);
