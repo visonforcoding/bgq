@@ -64,7 +64,7 @@
 <div class="iconlist">
     <span class="iconfont" id="commit">&#xe618;</span>
     <span class="iconfont <?php if (!$isCollect): ?>active<?php endif; ?>" id="collect">&#xe610;</span>
-    <span class="iconfont">&#xe614;</span>
+    <span class="iconfont" id="share">&#xe614;</span>
     <span class="iconfont" id="goTop"></span>
 </div>
 <!--底部四个图**end-->
@@ -96,6 +96,14 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    // 分享设置
+    window.shareConfig = {
+//        img_url: 'http://m.jealousauto.com/static/user/image/zmc_logo_1.png',
+        link: 'http://m.chinamatop.com/news/view/<?= $activity->id ?>',
+        title: '<?= $news->title ?>',
+        desc: '<?= $news->share_desc ?>'
+    };
+    
     // 少于五条评论隐藏显示全部
     var circle = setInterval(function(){
         if($('#coms').children('.items').length >= 5)
@@ -252,6 +260,9 @@
                             }
                         }
                     });
+                    break;
+                case 'share':
+                    LEMON.share.banner();
                     break;
                 case 'goTop':
                     window.scrollTo(0, 0);

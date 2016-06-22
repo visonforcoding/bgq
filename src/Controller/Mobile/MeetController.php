@@ -38,9 +38,9 @@ class MeetController extends AppController {
         // 广告
         $biggieAdTable = \Cake\ORM\TableRegistry::get('BiggieAd');
         $biggieAds = $biggieAdTable->find()->contain(['Savants'])->all();
-//        debug($biggieAds);die;
         $this->set('biggieAd', $biggieAds);
         
+        // 默认用户
         $users = $this
                 ->User
                 ->find()
@@ -327,7 +327,10 @@ class MeetController extends AppController {
         }
     }
     
-    
+    /**
+     * 关注动作
+     * @param int $id 大咖id
+     */
     public function attention($id){
         $noLogin = $this->handCheckLogin();
         if($noLogin)
@@ -418,6 +421,10 @@ class MeetController extends AppController {
         }
     }
     
+    /**
+     * 递名片动作
+     * @param int $id 大咖id
+     */
     public function giveCard($id){
         $noLogin = $this->handCheckLogin();
         if($noLogin)
@@ -460,9 +467,6 @@ class MeetController extends AppController {
                 return $this->Util->ajaxReturn(false, '系统错误');
             }
         }
-        
-        
-        
     }
     
 }

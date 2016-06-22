@@ -12,12 +12,12 @@
         <li><a href="/home/my-following"><i class="iconfont">&#xe60f;</i>我的关注</a></li>
         <li><a href="/home/my-collect-activity"><i class="iconfont">&#xe610;</i>我的收藏</a></li>
         <li><a href="/home/my-book"><i class="iconfont">&#xe60b;</i>我的约见</a></li>
-        <li><a href="/home/my-activity-submit"><i class="iconfont">&#xe601;</i>我的活动</a></li>
+        <li><a href="/home/myactivity"><i class="iconfont">&#xe601;</i>我的活动</a></li>
     </ul>
     <!--分类一-->
     <div class="h-home-menulist">
         <ul class="innercon">
-            <li><a href="#this"><i class="iconfont">&#xe609;</i>名片夹</a></li>
+            <li><a href="/home/cardcase"><i class="iconfont">&#xe609;</i>名片夹</a></li>
             <li><a href="/home/my-purse"><i class="iconfont">&#xe61b;</i>钱包</a></li>
             <li><a href="/meet/view/<?= $user->id ?>"><i class="iconfont">&#xe61c;</i>专家主页</a></li>
         </ul>
