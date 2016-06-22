@@ -4,7 +4,7 @@
         <h1>
             登录
         </h1>
-        <a href="/user/register-vphone" class='h-regiser'>注册</a>
+        <!-- <a href="/user/register-vphone" class='h-regiser'>注册</a> -->
     </div>
 </header>
 <div class="wraper">
@@ -16,7 +16,8 @@
                     <button class="clearfix" type="button"  id="getVcode" href='javascript:void(0);'>获取验证码</button>
                 </div>
             </div>
-            <a href="javascript:void(0);"  id="submit" class="submit" >确定</a>
+            <a href="javascript:void(0);"  id="submit" class="submit redshadow" >确定</a>
+             <a href="/user/register-vphone" class='historyinfo colore01'>注册</a>
         </form>
 
     </div>
