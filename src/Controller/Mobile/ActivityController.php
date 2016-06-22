@@ -188,11 +188,7 @@ class ActivityController extends AppController {
      */
     public function recommend($id) {
         if ($this->request->is('post')) {
-            $noLogin = $this->handCheckLogin();
-            if($noLogin)
-            {
-                return $noLogin;
-            }
+            $this->handCheckLogin();
             $data = $this->request->data();
             if($data['description'] == '')
             {
@@ -211,6 +207,7 @@ class ActivityController extends AppController {
             }
         } else {
             $this->set('pageTitle', '我要推荐');
+            $this->set('activity_id', $id);
         }
     }
 
@@ -255,6 +252,7 @@ class ActivityController extends AppController {
      * 发布活动
      */
     public function release() {
+        $industries = '';
         if ($this->request->param('pass')) {
 
             $data = $this->request->param('pass');
@@ -262,7 +260,6 @@ class ActivityController extends AppController {
             foreach ($data as $k => $v) {
                 $industries[] = $industry->get($v);
             }
-// 			debug($industries);die;
             $this->set('industries', $industries);
         }
         if ($this->request->is('post')) {
@@ -705,11 +702,11 @@ class ActivityController extends AppController {
         $res = $this->Activity->Activityapply->save($apply);
         if($res)
         {
-            return $this->Util->ajaxReturn(true, '签到成功');
+            echo '签到成功';
         }
         else
         {
-            return $this->Util->ajaxReturn(false, '系统错误');
+            echo '系统错误';
         }
     }
     

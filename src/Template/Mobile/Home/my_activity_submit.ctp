@@ -51,14 +51,13 @@
                 $(em).addClass('active');
                 $('#applyActivity').removeClass('active');
                 $.util.ajax({
-                    url: "",
+                    url: "/home/getMyActivity",
                     func: function(msg){
                         if(typeof msg == 'object')
                         {
                             if(msg.status)
                             {
                                 $.util.dataToTpl('dataBox', 'listTpl',msg.data);
-                                $.util.alert(msg.msg);
                             }
                             else
                             {
@@ -76,6 +75,30 @@
                 $('#dataBox').html('');
                 $(em).addClass('active');
                 $('#myActivity').removeClass('active');
+                $.util.ajax({
+                    url: "/home/myActivityApply",
+                    func: function(msg){
+                        if(typeof msg == 'object')
+                        {
+                            if(msg.status)
+                            {
+                                $.util.dataToTpl('dataBox', 'listTpl',msg.data, function(d){
+                                    d.id = d.activity.id;
+                                    d.cover = d.activity.cover;
+                                    d.title = d.activity.title;
+                                    d.adress = d.activity.adress;
+                                    d.apply_nums = d.activity.apply_nums;
+                                    d.time = d.activity.time;
+                                    return d;
+                                });
+                            }
+                            else
+                            {
+                                $.util.alert(msg.msg);
+                            }
+                        }
+                    }
+                });
                 break;
             case 'detailClosePC':
                 //do();

@@ -40,10 +40,6 @@
                 <span >
                     <i class="iconfont like <?php if ($isLike): ?> changecolor<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like">&#xe616;</i>
                 </span>
-                <!--收藏按钮-->
-<!--                <span>
-                    <i class='iconfont collect h-regiser <?php if ($isCollect): ?> changecolor<?php endif; ?>' artid="<?= $activity->id; ?>" type="0" id="collect">&#xe610;</i>
-                </span>-->
             </div>
         </section>
         <section class="newscomment-box joinnumber">
@@ -54,7 +50,7 @@
                 <div class="comm-info clearfix">
                     <?php if ($userApply): ?>
                         <?php foreach ($userApply as $k => $v): ?>
-                            <a href='javascript:void(0);'><img src="<?= $v['avatar']; ?>"/></a>
+                            <a href='/meet/homepage/<?= $v['id'] ?>'><img src="<?= $v['avatar']; ?>"/></a>
                         <?php endforeach; ?>
                     <?php else : ?>
                         <div style="font-size:0.2rem;line-height: 0.22rem;">暂时无人报名</div>

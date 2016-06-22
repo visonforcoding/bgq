@@ -49,10 +49,10 @@ class ActivityController extends AppController {
             $activity->user_id = $this->_user->id;
             $activity->publisher = $this->_user->truename;
             if ($this->Activity->save($activity)) {
-                $this->Util->ajaxReturn(true, '添加成功');
+                return $this->Util->ajaxReturn(true, '添加成功');
             } else {
                 $errors = $activity->errors();
-                $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
             }
         }
         $admins = $this->Activity->Admins->find('list', ['limit' => 200]);
@@ -78,10 +78,10 @@ class ActivityController extends AppController {
         if ($this->request->is(['post', 'put'])) {
             $activity = $this->Activity->patchEntity($activity, $this->request->data);
             if ($this->Activity->save($activity)) {
-                $this->Util->ajaxReturn(true, '修改成功');
+                return $this->Util->ajaxReturn(true, '修改成功');
             } else {
                 $errors = $activity->errors();
-                $this->Util->ajaxReturn(false, getMessage($errors));
+                return $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
         $admins = $this->Activity->Admins->find('list', ['limit' => 200]);
@@ -115,10 +115,10 @@ class ActivityController extends AppController {
         if ($this->request->is('post')) {
             $activity = $this->Activity->get($id);
             if ($this->Activity->delete($activity)) {
-                $this->Util->ajaxReturn(true, '删除成功');
+                return $this->Util->ajaxReturn(true, '删除成功');
             } else {
                 $errors = $activity->errors();
-                $this->Util->ajaxReturn(true, getMessage($errors));
+                return $this->Util->ajaxReturn(true, getMessage($errors));
             }
         }
     }
@@ -226,9 +226,9 @@ class ActivityController extends AppController {
         $activity->is_top = 1;
         $res = $this->Activity->save($activity);
         if ($res) {
-            $this->Util->ajaxReturn(true, '置顶成功');
+            return $this->Util->ajaxReturn(true, '置顶成功');
         } else {
-            $this->Util->ajaxReturn(false, '置顶失败');
+            return $this->Util->ajaxReturn(false, '置顶失败');
         }
     }
 
@@ -241,9 +241,9 @@ class ActivityController extends AppController {
         $activity->is_top = 0;
         $res = $this->Activity->save($activity);
         if ($res) {
-            $this->Util->ajaxReturn(true, '取消置顶成功');
+            return $this->Util->ajaxReturn(true, '取消置顶成功');
         } else {
-            $this->Util->ajaxReturn(false, '取消置顶失败');
+            return $this->Util->ajaxReturn(false, '取消置顶失败');
         }
     }
 
@@ -255,11 +255,22 @@ class ActivityController extends AppController {
         $activity = $this->Activity->get($id);
         $activity->is_check = 1;
         $res = $this->Activity->save($activity);
-        if ($res) {
-            $this->Util->ajaxReturn(true, '发布成功');
-        } else {
-            $this->Util->ajaxReturn(false, '发布失败');
+        if(!$res)
+        {
+            return $this->Util->ajaxReturn(false, '发布失败');
         }
+        $folder = WWW_ROOT.'/upload/qrcode/activitycode/'.date('Y-m-d');
+        if(!file_exists($folder))
+        {
+            $res = mkdir($folder);
+        }
+        if(!$res)
+        {
+            return $this->Util->ajaxReturn(false, '系统错误');
+        }
+        $savePath = $folder.'/'.time().$id.'.png';
+        \PHPQRCode\QRcode::png('/activity/sign/'.$id, $savePath);
+        return $this->Util->ajaxReturn(true, '发布成功');
     }
 
     /**
@@ -273,9 +284,9 @@ class ActivityController extends AppController {
         $activity->reason = $data['reason'];
         $res = $this->Activity->save($activity);
         if ($res) {
-            $this->Util->ajaxReturn(true, '操作成功');
+            return $this->Util->ajaxReturn(true, '操作成功');
         } else {
-            $this->Util->ajaxReturn(false, '操作失败');
+            return $this->Util->ajaxReturn(false, '操作失败');
         }
     }
 

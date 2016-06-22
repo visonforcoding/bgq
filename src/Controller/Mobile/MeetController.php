@@ -276,7 +276,7 @@ class MeetController extends AppController {
      * 个人主页
      * @param type $id 用户id
      */
-    public function myhome($id){
+    public function homepage($id){
         $isMe = '';
         $type = '0';// 关注类型初始化
         $isGive = '';

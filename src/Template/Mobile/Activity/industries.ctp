@@ -8,7 +8,7 @@
             <?php if (!empty($industry['children'])): ?>
                 <div class="orgmark">
                     <?php foreach ($industry['children'] as $item): ?>
-                        <a class="agency-item" data-val="<?= $item['id'] ?>" href="#this"><?= $item['name'] ?></a>
+                        <a class="agency-item" data-val="<?= $item['id'] ?>" href="javascript:void(0)"><?= $item['name'] ?></a>
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
