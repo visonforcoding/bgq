@@ -23,7 +23,7 @@ display:-webkit-flex;display: flex;-webkit-align-items: center;align-items: cent
 .items .orgtitle .bgorgname{background: url(img/up.png) no-repeat right center;background-size:0.25rem 0.16rem ;}
 .items{background:#fff;overflow:hidden;}
 .orgmark{padding:0 0.3rem;font-size:0;}
-.orgmark a{display: inline-block;padding:0.15rem 0.2rem;text-align:center;font-size:0.26rem;margin:0.26rem 0;color:#7a7e83; border:1px #c8c7cc solid; border-radius: 0.3rem;margin-right:0.1rem;}
+.orgmark a{display: inline-block;padding:0.15rem 0.28rem;text-align:center;font-size:0.26rem;margin:0.26rem 0;color:#7a7e83; border:1px #c8c7cc solid; border-radius: 0.3rem;margin-right:0.1rem;}
 .orgmark a:nth-of-type(4n){margin-right:0;}
 .nextstep{ display:block;text-align:center;height:0.78rem;width:80%;font-size:0.3rem;line-height:0.78rem;background: #e01a48;color:#fff;margin:0 auto;margin-top:0.8rem;margin-bottom:0.52rem;border-radius:0.2rem;}
 .redshadow{box-shadow: 0 0.2rem 0.2rem rgba(224,26,72,.2);}
