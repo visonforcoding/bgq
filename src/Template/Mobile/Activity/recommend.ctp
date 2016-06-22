@@ -10,42 +10,10 @@
     <div class="h20"></div>
     <form method="post" action="">
         <input type="text" name="type" hidden value="" />
-        <div class="a-form-box" id="guest">
+        <div class="a-form-box">
             <ul>
                 <li>
-                    <i>嘉宾简介</i>
-                    <textarea name="description"></textarea>
-                </li>
-            </ul>
-        </div>
-        <div class="a-form-box" id="place">
-            <ul>
-                <li>
-                    <i>场地说明</i>
-                    <textarea name="description"></textarea>
-                </li>
-            </ul>
-        </div>
-        <div class="a-form-box" id="goods">
-            <ul>
-                <li>
-                    <i>要求描述</i>
-                    <textarea name="description"></textarea>
-                </li>
-            </ul>
-        </div>
-        <div class="a-form-box" id="cash">
-            <ul>
-                <li>
-                    <i>要求描述</i>
-                    <textarea name="description"></textarea>
-                </li>
-            </ul>
-        </div>
-        <div class="a-form-box" id="others">
-            <ul>
-                <li>
-                    <i>要求描述</i>
+                    <i>描述</i>
                     <textarea name="description"></textarea>
                 </li>
             </ul>
