@@ -68,7 +68,7 @@
                 评论
                 <!-- <i class="iconfont">&#xe618;</i> -->
             </h3>
-            <div id="comment"></div>
+            <div id="comment"><h4>还没任何评论</h4></div>
             <span class='com-all' style="display:none;"><a href="#allcoment" id="showAllComment">显示全部</a></span>
         </section>
         <div class="a-btn">
