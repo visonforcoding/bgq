@@ -66,7 +66,7 @@
         <section class="newscomment-box">
             <h3 class="comment-title">
                 评论
-                <i class="iconfont">&#xe618;</i>
+                <!-- <i class="iconfont">&#xe618;</i> -->
             </h3>
             <div id="comment"></div>
             <span class='com-all' style="display:none;"><a href="#allcoment" id="showAllComment">显示全部</a></span>
