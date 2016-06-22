@@ -8,7 +8,7 @@
 </header>
 <div class="wraper" id="follow">
     <div class="h-add">
-        <img src="../css/img/add1.png" alt="" />
+        <img src="/img/add1.png" alt="" />
     </div>
      <div  class="inner my-home-menu" >
         <a href="my-onfocus.html" >我的关注</a>
