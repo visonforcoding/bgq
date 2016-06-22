@@ -12,22 +12,6 @@
         <input type="text" name="type" hidden value="" />
         <div class="a-form-box" id="guest">
             <ul>
-<!--                <li>
-                    <span>姓名</span>
-                    <input type="text" name="name"/>
-                </li>
-                <li>
-                    <span>公司/机构</span>
-                    <input type="text" name="company"/>
-                </li>
-                <li>
-                    <span>部门</span>
-                    <input type="text" name="department" />
-                </li>
-                <li>
-                    <span>职务</span>
-                    <input type="text" name="position" />
-                </li>-->
                 <li>
                     <i>嘉宾简介</i>
                     <textarea name="description"></textarea>
@@ -36,15 +20,6 @@
         </div>
         <div class="a-form-box" id="place">
             <ul>
-<!--                <li>
-                    <span>地址</span>
-                    <input type="text" name="address" />
-                </li>
-                <li>
-                    <span>容纳人数</span>
-                    <input type="number" name="people" />
-                </li>-->
-
                 <li>
                     <i>场地说明</i>
                     <textarea name="description"></textarea>
