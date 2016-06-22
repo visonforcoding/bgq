@@ -1,21 +1,30 @@
-<header class="my-focus-box">
+<header>
     <div class='inner'>
         <a href='#this' class='toback'></a>
         <h1>
-            <a href="javascript:void(0);" class="active">我的关注</a>|
-            <a href="javascript:void(0);">我的粉丝</a>
+           我的活动
         </h1>
-        <a href="javascript:void(0);" class="h-regiser h-add"></a>
+        <!-- <a href="javascript:void(0);" class="h-regiser h-add"></a> -->
     </div>
-    <div class='inner my-search'>
-        <a href='#this' class='toback iconfont news-serch'>&#xe613;</a>
-        <h1>
-
-            <input type="text" placeholder="请输入关键词">
-        </h1>
-    </div>
+   
 </header>
-<div class="wraper my-wraper" id="follow">
+<div class="wraper" id="follow">
+    <div class="h-add">
+        <img src="/img/add1.png" alt="" />
+    </div>
+     <div  class="inner my-home-menu" >
+        <a href="my-onfocus.html" >我的关注</a>
+        <a href="my-fans.html" class="active">我的粉丝</a>
+                    
+     </div>
+            
+    <div class="my-focus-box">
+        <div class='inner my-search'>
+            <a href='#this' class='toback iconfont news-serch'>&#xe613;</a>
+            <h1><input type="text" placeholder="请输入关键词"></h1>
+        </div>
+    </div>
+</div>
 </div>
 <script type="text/html" id="listTpl">
     <section class="internet-v-info">
