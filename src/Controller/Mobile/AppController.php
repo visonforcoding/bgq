@@ -72,8 +72,8 @@ class AppController extends Controller {
         if($this->request->is('weixin')){
             $this->loadComponent('Wx');
             $wxConfig = $this->Wx->wxconfig(['onMenuShareTimeline','onMenuShareAppMessage','scanQRCode'],false);
-            $this->set(compact('wxConfig'));
         }
+        $this->set(compact('wxConfig'));
     }
 
     public function beforeFilter(Event $event) {
