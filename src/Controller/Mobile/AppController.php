@@ -68,10 +68,10 @@ class AppController extends Controller {
      */
     public function beforeRender(Event $event) {
         $this->viewBuilder()->layout('layout');
+        $wxConfig = [];
         if($this->request->is('weixin')){
             $this->loadComponent('Wx');
             $wxConfig = $this->Wx->wxconfig(['onMenuShareTimeline','onMenuShareAppMessage','scanQRCode'],false);
-            debug($wxConfig);exit();
             $this->set(compact('wxConfig'));
         }
     }
