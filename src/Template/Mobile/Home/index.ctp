@@ -5,7 +5,7 @@
 </header>
 <div class="wraper newswraper">
     <div class="h-home-bottom">
-        <a href="/home/edit-userinfo">
+        <a href="/user/home-page">
             <div><span>
                     <img src="<?= $user->avatar ?>"/></span><i class="iconfont">&#xe61e;</i>
             </div>
