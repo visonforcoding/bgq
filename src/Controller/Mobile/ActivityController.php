@@ -190,6 +190,10 @@ class ActivityController extends AppController {
         if ($this->request->is('post')) {
             $this->handCheckLogin();
             $data = $this->request->data();
+            if($data['description'] == '')
+            {
+                return $this->Util->ajaxReturn(false, '请输入内容');
+            }
             $data['user_id'] = $this->user->id;
             $data['activity_id'] = $id;
             $sponsorTable = \Cake\ORM\TableRegistry::get('sponsor');
@@ -655,6 +659,10 @@ class ActivityController extends AppController {
         }
     }
     
+    /**
+     * 显示全部评论页面
+     * @param int $id 活动id
+     */
     public function showAllComment($id){
         // 评论
         $comment = $this
@@ -670,6 +678,34 @@ class ActivityController extends AppController {
             return $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
         } else {
             return $this->Util->ajaxReturn(['status' => false]);
+        }
+    }
+    
+    /**
+     * 活动签到，用于生成二维码
+     * @param int $id
+     */
+    public function sign($id){
+        $activity = $this->Activity->get($id);
+        if(!$activity)
+        {
+            return $this->Util->ajaxReturn(false, '活动不存在');
+        }
+        $is_apply = $this->Activity->Activityapply->find()->where(['user_id'=>$this->user->id, 'activity_id'=>$id, 'is_pass'=>1])->first();
+        if(!$is_apply)
+        {
+            return $this->Util->ajaxReturn(false, '未报名或者未通过审核');
+        }
+        $apply = $this->Activity->Activityapply->get($is_apply->id);
+        $apply->is_sign = 1;
+        $res = $this->Activity->Activityapply->save($apply);
+        if($res)
+        {
+            return $this->Util->ajaxReturn(true, '签到成功');
+        }
+        else
+        {
+            return $this->Util->ajaxReturn(false, '系统错误');
         }
     }
     
