@@ -1,7 +1,7 @@
 <header>
     <div class='inner'>
         <a href='#this' class='toback'></a>
-       <h1>我的关注</h1>
+       <h1>我的粉丝</h1>
         <!--<a href="javascript:void(0);" class="h-regiser h-add"></a>-->
     </div>
    
@@ -11,8 +11,8 @@
         <img src="/img/add1.png" alt="" />
     </div>
      <div  class="inner my-home-menu" >
-        <a href="my-onfocus.html" >我的关注</a>
-        <a href="my-fans.html" class="active">我的粉丝</a>
+        <a href="/home/my-following" >我的关注</a>
+        <a href="/home/my-fans" class="active">我的粉丝</a>
                     
      </div>
             
