@@ -427,7 +427,7 @@ border-radius: 50%;padding:1px;}
 .h-home-menu{/*display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap: wrap;flex-wrap: wrap;*/background: #fff;border-bottom:1px #c8c7cc solid;margin-bottom:0.2rem;overflow:hidden;/*向下兼容*/}
 .h-home-menu li{width:50%; padding:0.3rem 0 0.3rem 1rem;border:1px #c8c7cc solid;border-bottom:none;border-right:none;float:left;/*向下兼容*/}
 @media (min-width: 414px) and (max-width: 640px) {
-	.h-home-menu li{padding:0.32rem 0 0.32rem 1rem;}
+	.h-home-menu li{padding:0.34rem 0 0.34rem 1rem;}
 }
 @media (min-width: 320px) and (max-width: 374px) {
 	.h-home-menu li{padding:0.32rem 0 0.32rem 1rem;}
