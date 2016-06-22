@@ -3,7 +3,7 @@
         <h1>个人中心</h1>
     </div>
 </header>
-<div class="wraper">
+<div class="wraper newswraper">
     <div class="h-home-bottom">
         <a href="/user/home-page">
             <div><span>
