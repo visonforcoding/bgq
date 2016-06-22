@@ -191,7 +191,7 @@ class ActivityController extends AppController {
             $noLogin = $this->handCheckLogin();
             if($noLogin)
             {
-                return $this->Util->ajaxReturn(false, '请先登录');
+                return $noLogin;
             }
             $data = $this->request->data();
             if($data['description'] == '')
@@ -199,7 +199,6 @@ class ActivityController extends AppController {
                 return $this->Util->ajaxReturn(false, '请输入内容');
             }
             $data['user_id'] = $this->user->id;
-            debug($data);die;
             $data['activity_id'] = $id;
             $sponsorTable = \Cake\ORM\TableRegistry::get('sponsor');
             $sponsor = $sponsorTable->newEntity();
