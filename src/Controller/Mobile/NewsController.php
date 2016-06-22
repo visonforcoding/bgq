@@ -60,7 +60,7 @@ class NewsController extends AppController {
      */
     public function comment() {
         $data = [];
-        $this->handCheckLogin();
+       $this->handCheckLogin();
         if ($this->request->is('post')) {
             $reply_id = $this->request->data('reply_id');
             $CommentTable = \Cake\ORM\TableRegistry::get('newscom');

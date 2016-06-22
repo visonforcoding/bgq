@@ -180,10 +180,11 @@ class UserController extends AppController {
      * 用户登录
      */
     public function login() {
-        $redirect_url = empty($this->request->query('redirect_url')) ? '/' : $this->request->query('redirect_url');
+        $redirect_url = empty($this->request->query('redirect_url')) ? 
+                (empty($this->request->referer()) ? '/' : $this->request->referer()):$this->request->query('redirect_url');
         $this->response->cookie([
             'name' => 'login_url',
-            'value' => empty($this->request->referer()) ? '/' : $this->request->referer(),
+            'value' => $redirect_url,
             'path' => '/',
             'expire' => time() + 600
         ]);

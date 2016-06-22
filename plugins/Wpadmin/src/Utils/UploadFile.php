@@ -13,8 +13,13 @@ namespace Wpadmin\Utils;
  * 文件上传类
  * @category   ORG
  * @package  ORG
- * @subpackage  Net
+ * @subpackage  Intervention Image 依赖包
+ * @property bool $thumb 是否生成缩略图
+ * @property string $thumbMaxWidth 缩略图最大宽
+ * @property string $thumbMaxHeight 缩略图最大高
+ * @property string $thumbPrefix 缩略图前缀名
  * @author    liu21st <liu21st@gmail.com>
+ * @edit allen <caowenpeng1990@126.com>
  */
 class UploadFile {//类定义开始
 
@@ -117,7 +122,6 @@ class UploadFile {//类定义开始
                 $thumbPath      =   $this->thumbPath?$this->thumbPath:dirname($filename).'/';
                 $thumbExt       =   $this->thumbExt ? $this->thumbExt : $file['extension']; //自定义缩略图扩展名
                 // 生成图像缩略图
-                import($this->imageClassPath);
                 for($i=0,$len=count($thumbWidth); $i<$len; $i++) {
                     if(!empty($thumbFile[$i])) {
                         $thumbname  =   $thumbFile[$i];
@@ -126,7 +130,7 @@ class UploadFile {//类定义开始
                         $suffix     =   isset($thumbSuffix[$i])?$thumbSuffix[$i]:$thumbSuffix[0];
                         $thumbname  =   $prefix.basename($filename,'.'.$file['extension']).$suffix;
                     }
-                    Image::thumb($filename,$thumbPath.$thumbname.'.'.$thumbExt,'',$thumbWidth[$i],$thumbHeight[$i],true);                    
+                    \Intervention\Image\ImageManagerStatic::make($filename)->resize(intval($thumbWidth[0]),  intval($thumbHeight[0]))->save($thumbPath.$thumbname.'.'.$thumbExt);
                 }
                 if($this->thumbRemoveOrigin) {
                     // 生成缩略图之后删除原图

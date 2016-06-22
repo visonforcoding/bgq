@@ -430,7 +430,7 @@ class HomeController extends AppController {
             $bank =  $this->request->data('bank');
             $cardno =  $this->request->data('cardno');
             if($amount>$userInfo->money){
-                $this->Util->ajaxReturn(false,'提现金额不能大于钱包余额');
+                return $this->Util->ajaxReturn(false,'提现金额不能大于钱包余额');
             }
             $WithdrawTable = \Cake\ORM\TableRegistry::get('Withdraw');
             $withdraw = $WithdrawTable->newEntity([
@@ -441,10 +441,10 @@ class HomeController extends AppController {
                 'bank'=>$bank,
             ]);
             if($WithdrawTable->save($withdraw)){
-                $this->Util->ajaxReturn(true,'提现申请成功');
+               return $this->Util->ajaxReturn(true,'提现申请成功');
             }else{
                 \Cake\Log\Log::error($withdraw->errors());
-                $this->Util->ajaxReturn(false,'提现申请失败');
+               return $this->Util->ajaxReturn(false,'提现申请失败');
             }
         }
         $this->set(compact('userInfo'));
@@ -472,10 +472,30 @@ class HomeController extends AppController {
     public function editUserinfo(){
         $user_id = $this->user->id;
         $user = $this->User->get($user_id);
+        if($this->request->is('post')){
+            $user = $this->User->patchEntity($user,  $this->request->data());
+            if($this->User->save($user)){
+                return $this->Util->ajaxReturn(true,'保存成功');
+            }else{
+                return $this->Util->ajaxReturn(false,'保存失败');
+            }
+        }
         $this->set([
-            'user'=>$user
+            'user'=>$user,
+            'pageTitle'=>'个人信息'
         ]);
     }
+<<<<<<< .mine
+    
+    /**
+     * 擅长业务
+     */
+    public function myBusiness(){
+        $this->set([
+            'pageTitle'=>'擅长业务'
+        ]);
+    }
+
     
     public function cardcase(){
         $this->handCheckLogin();
@@ -532,4 +552,5 @@ class HomeController extends AppController {
             return $this->Util->ajaxReturn(false, '回赠失败');
         }
     }
+
 }
