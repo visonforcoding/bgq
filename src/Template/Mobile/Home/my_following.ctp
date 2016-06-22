@@ -8,7 +8,7 @@
     </div>
    
 </header>
-<div class="wraper" id="follow">
+<div class="wraper">
     <div class="h-add">
         <img src="/img/add1.png" alt="" />
     </div>
@@ -22,6 +22,8 @@
             <a href='#this' class='toback iconfont news-serch'>&#xe613;</a>
             <h1><input type="text" placeholder="请输入关键词"></h1>
         </div>
+    </div>
+    <div id="follow">
     </div>
 </div>
 
