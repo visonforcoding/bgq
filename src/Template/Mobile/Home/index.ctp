@@ -94,37 +94,7 @@
 </div>
 <?= $this->element('footer') ?>
 <?php $this->start('script') ?>
-<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script>
-    wx.config(<?= json_encode($wxConfig) ?>);
-    wx.ready(function () {
-        wx.onMenuShareAppMessage({
-            title: '并购精英惠', // 分享标题
-            desc: '这里是描述', // 分享描述
-            link: 'http://bgq.smartlemon.cn', // 分享链接
-            imgUrl: 'http://wx.qlogo.cn/mmopen/ajNVdqHZLLCOibYvNGzNtJmgyOEpAyhkd45A3gbGgt2mbDYUdMeBVbbe9SmxwJiceNGd4ibZCeKTHSDq1kJDkVibXQ/0', // 分享图标
-            type: '', // 分享类型,music、video或link，不填默认为link
-            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-            success: function () {
-                // 用户确认分享后执行的回调函数
-            },
-            cancel: function () {
-                // 用户取消分享后执行的回调函数
-            }
-        });
-        wx.onMenuShareTimeline({
-            title: '', // 分享标题
-            link: '', // 分享链接
-            imgUrl: '', // 分享图标
-            success: function () {
-                // 用户确认分享后执行的回调函数
-            },
-            cancel: function () {
-                // 用户取消分享后执行的回调函数
-            }
-        });
-    });
-
     function QRCode(){
         if($.util.isAPP){
             LEMON.sys.QRcode();

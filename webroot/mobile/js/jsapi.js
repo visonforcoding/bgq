@@ -15,12 +15,12 @@
  */
 (function () {
     var defaultConfig = {
-        img_url: 'http://m.jealousauto.com/static/user/image/zmc_logo_1.png',
-        img_width: "80",
-        img_height: "80",
-        link: 'http://m.jealousauto.com/',
+        imgUrl: 'http://m.jealousauto.com/static/user/image/zmc_logo_1.png',
+        link: 'http://m.chinamatop.com/',
         title: '并购菁英汇',
-        desc: '并购菁英汇'
+        desc: '并购菁英汇',
+        success:function(){},
+        cancel:function(){}
     };
     window.shareConfig = defaultConfig;
     window.nativeShare = function (type) {
