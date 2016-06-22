@@ -57,6 +57,7 @@ class ApiController extends AppController {
             return $this->Util->ajaxReturn(false, '时间参数过期',408);
         }
         $sign = strtoupper(md5($timestamp.self::TOKEN));
+        \Cake\Log\Log::debug($sign);
         if($sign!=$access_token){
             return $this->Util->ajaxReturn(false, '验证不通过',401);
         }
