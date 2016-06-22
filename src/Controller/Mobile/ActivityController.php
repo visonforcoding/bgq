@@ -687,6 +687,7 @@ class ActivityController extends AppController {
      * @param int $id
      */
     public function sign($id){
+        debug($this->user->id);die;
         $activity = $this->Activity->get($id);
         if(!$activity)
         {
