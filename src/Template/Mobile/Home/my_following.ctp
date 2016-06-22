@@ -25,7 +25,7 @@
         </div>
     </div>
 </div>
-</div>
+
 <script type="text/html" id="listTpl">
     <section class="internet-v-info">
         <div class="innercon">
