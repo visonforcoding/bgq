@@ -14,8 +14,7 @@
     </div>
      <div  class="inner my-home-menu" >
         <a href="my-onfocus.html" >我的关注</a>
-        <a href="my-fans.html" class="active">我的粉丝</a>
-                    
+        <a href="my-fans.html" class="active">我的粉丝</a>     
      </div>
             
     <div class="my-focus-box">
