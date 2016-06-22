@@ -313,7 +313,7 @@ class MeetController extends AppController {
      * @param int $id 大咖用户id
      */
     public function collect($id){
-        return $this->handCheckLogin();
+        $this->handCheckLogin();
         $this->loadComponent('Business');
         $res = $this->Business->collectIt($this->user->id, $id, 2);
         if($res !== false)
@@ -332,11 +332,7 @@ class MeetController extends AppController {
      * @param int $id 大咖id
      */
     public function attention($id){
-        $noLogin = $this->handCheckLogin();
-        if($noLogin)
-        {
-            return $noLogin;
-        }
+        $this->handCheckLogin();
         if($id == $this->user->id)
         {
             return $this->Util->ajaxReturn(false, '不可关注自己');
