@@ -12,11 +12,13 @@
 </header>
 <div class="wraper m-fixed-bottom">
     <ul class="h-info-box e-info-box">
+        <form method="post">
         <li>
-            <a href="edit-card.html">
+            <a href="javascript:void(0)">
                 <span>头像：</span>
                 <div class="upload-user-img">
-                    <span><input name="avatar" id="upload_pic" type="file" /></span>
+                    <input type="hidden" name="avatar" >
+                    <span><input  id="upload_pic" type="file" /></span>
                 </div>
             </a>
         </li>
@@ -85,7 +87,7 @@
             </a>
         </li>
         <li>
-            <a href="my-business.html">
+            <a href="/home/my-business">
                 <span>擅长业务：</span>
                 <div>
 
@@ -106,13 +108,12 @@
             <a href="edit-education.html">
                 <span>教育经历：</span>
                 <div>
-
                     <span></span>
                 </div>
             </a>
         </li>
         <li>
-            <a href="edit-work.html">
+            <a  href="edit-work.html">
                 <span>工作经历：</span>
                 <div>
 
@@ -138,9 +139,9 @@
                 </div>
             </a>
         </li>
-
+        </form>
     </ul>
-    <a href="javascript:void(0);" class="nextstep">完成</a>
+    <a id="submit" href="javascript:void(0);" class="nextstep">完成</a>
 </div>
 <div class='reg-shadow' style="display: none;"></div>
 <div class="shadow-info" style="display: none;">
@@ -157,7 +158,7 @@
         <a href="javascript:void(0);">取消</a>
 
         <h3>性别</h3>
-        <a href="javascript:void(0);">完成</a>
+        <a  href="javascript:void(0);">完成</a>
     </div>
     <span>女</span>
     <span>男</span>
@@ -184,7 +185,7 @@
             reader.readAsDataURL(file);
             reader.onload = function (e) {
                 console.log(reader);
-                $('.imgcard').find('img').attr('src', e.target.result);
+                //$('.imgcard').find('img').attr('src', e.target.result);
                 lrz(file,{quality:0.7}).then(function(rst){
                     //压缩处理
                     $.ajax({
@@ -197,7 +198,7 @@
                         dataType: 'json',
                         success: function (data) {
                             if(data.status===true){
-                               $('input[name="avatar"]').val(data.path);
+                               $('input[name="avatar"]').val(data.thumbpath);
                             }
                         },
                         error: function () {
@@ -206,7 +207,6 @@
                 });
             };
         });
-        
         $('#submit').on('click',function(){
             var $form = $('form');
             $.ajax({
@@ -217,9 +217,9 @@
                 success: function (msg) {
                     if (typeof msg === 'object') {
                         if (msg.status) {
-                            window.location.href = msg.url;
+                            $.util.alert(msg.msg);
                         } else {
-                            alert(msg.msg);
+                            $.util.alert(msg.msg);
                         }
                     }
                 }

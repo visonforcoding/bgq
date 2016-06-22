@@ -21,9 +21,6 @@ class UtilController extends AppController {
 
     public function doUpload() {
         $dir = $this->request->query('dir');
-        if($this->request->query('zip')){
-            //缩略图处理
-        }
         $today = date('Y-m-d');
         $urlpath =  '/upload/tmp/' . $today . '/';
         if(!empty($dir)){
@@ -34,6 +31,12 @@ class UtilController extends AppController {
         $upload->maxSize = 31457280; // 设置附件上传大小
         $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg','zip','ppt',
             'pptx','doc','docx','xls','xlsx','webp'); // 设置附件上传类型
+        if($this->request->query('zip')){
+            //缩略图处理
+            $upload->thumb = true;
+            $upload->thumbMaxWidth = '60';
+            $upload->thumbMaxHeight = '60';
+        }
         $upload->savePath = $savePath; // 设置附件上传目录
         if (!$upload->upload()) {// 上传错误提示错误信息
             $response['status'] = false;
@@ -42,6 +45,7 @@ class UtilController extends AppController {
             $info = $upload->getUploadFileInfo();
             $response['status'] = true;
             $response['path'] = $urlpath . $info[0]['savename'];
+            $response['thumbpath'] = $urlpath . $upload->thumbPrefix.$info[0]['savename'];
             $response['msg'] = '上传成功!';
         }
         $this->Util->ajaxReturn($response);
