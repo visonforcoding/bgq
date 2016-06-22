@@ -100,7 +100,7 @@ class WxController extends AppController {
         $this->request->session()->write('Login.wxbase', true);
         if (isset($res->unionid)) {
             $union_id = $res->unionid;
-            $user = $this->User->findByUnion_idAndEnable($union_id,1)->first();
+            $user = $this->User->findByUnion_idAndEnabled($union_id,1)->first();
             if ($user) {
                 //通过微信 获取到 在平台上有绑定的用户  就默认登录
                 $this->request->session()->write('User.mobile', $user);
