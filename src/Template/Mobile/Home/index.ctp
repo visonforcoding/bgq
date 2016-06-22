@@ -59,6 +59,13 @@
             <li><a href="/home/my-install"><i class="iconfont">&#xe619;</i>设置</a></li>
         </ul>
     </div>
+    <!--分类五-->
+    <div class="h-home-menulist">
+        <ul class="innercon">
+            <li><a href="my-install.html"><i class="sao-bg"></i>扫一扫</a></li>
+        </ul>
+    </div>
+    
 </div>
 <div class="submitbtn">
     <a href="release-activity.html"><img src="/mobile/images/ms.png"/></a>
