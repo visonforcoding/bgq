@@ -21,14 +21,14 @@
 
     </div>
 </div>
-<footer>
+<div class="wxlogin">
     <h1>使用其他方式登录</h1>
     <div class="othertype">
         <a id="wxlogin" href="javascript:void(0);">
             <img src="/mobile/images/weixin.png" />
         </a>
     </div>
-</footer>
+</div>
 <?php $this->start('script') ?>
 <script src="/mobile/js/function.js"></script>
 <script>
