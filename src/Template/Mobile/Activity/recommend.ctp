@@ -25,7 +25,6 @@
 <?php $this->start('script'); ?>
 <script src="/mobile/js/activity_recommend.js"></script>
 <script>
-    $('.a-form-box').hide();
 </script>
 <?php
 $this->end('script');
