@@ -21,6 +21,7 @@ class NewsController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
+        debug($this->user);exit();
         if($this->request->isWeixin()&&empty($this->user)&&!$this->request->session()->check('Login.wxbase')){
             //如果是微信 静默授权页获取openid
             \Cake\Log\Log::debug('进行静默登陆');
