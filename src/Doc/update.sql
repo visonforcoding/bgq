@@ -218,3 +218,6 @@ ALTER TABLE activityapply add is_sign TINYINT(2) DEFAULT 0 COMMENT '是否已签
 
 #活动表添加分享描述字段
 ALTER TABLE activity add is_sign TINYINT(2) DEFAULT 0 COMMENT '是否已签到，0：未签到；1：已签到';
+
+#修改活动报名费用字段的类型为浮点型
+ALTER TABLE `activity` CHANGE COLUMN `apply_fee` `apply_fee` Float NOT NULL DEFAULT 0 COMMENT '报名费用'
