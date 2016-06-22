@@ -27,11 +27,6 @@ activity.prototype.bindEvent = function () {
             $('.agency-item').removeClass('active');
             $(em).addClass('active');
 
-            if ($('input[name="type"]').val() != $(em).attr('type')) {
-                $('.a-form-box').find('input').val(null);
-                $('.a-form-box').find('textarea').val(null);
-            }
-            
             var val = $(em).attr('type');
             $('input[name="type"]').attr('value', val);
         }
