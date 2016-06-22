@@ -454,7 +454,7 @@ border-radius: 50%;padding:1px;}
 .h-info-box li p i{font-size:;color:#9ba4ad;margin-top:0.14rem;}
 .h-info-box li h3 em{float:right;}
 .h-info-box .no-b-border{border-bottom:none;}
-/*.e-info-box li a*/
+.e-info-box li a{display: block;overflow:hidden;}
 .e-info-box li{background: url(img/right.png) no-repeat right center; background-size:0.18rem 0.25rem;padding-right:0.38rem;
 /*display:-webkit-flex;display:-moz-flex;display:-ms-flex;display: flex;align-items:center;
 -webkit-justify-content:space-between;-moz-justify-content:space-between;-ms-justify-content:space-between;justify-content:space-between;*/ display:block;overflow:hidden;line-height: 0.5rem;
