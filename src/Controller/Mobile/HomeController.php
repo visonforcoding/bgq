@@ -485,7 +485,6 @@ class HomeController extends AppController {
             'pageTitle'=>'个人信息'
         ]);
     }
-<<<<<<< .mine
     
     /**
      * 擅长业务
