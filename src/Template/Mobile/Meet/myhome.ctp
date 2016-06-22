@@ -3,7 +3,7 @@
         <div><span><img src="<?= $user->avatar ?>"/></span><i class="iconfont">&#xe61e;</i></div>
         <h3><?= $user->truename ?><span><?= $user->company ?> <?= $user->position ?></span></h3>
         <h4>
-            <a href="javascript:void(0);" class="tofocus-m fl">
+            <a href="javascript:void(0);" class="tofocus-m">
                 <span id="<?php if(!$isMe): ?>attention<?php endif; ?>">
                 <?php if($type == 1): ?>
                 已关注
@@ -14,7 +14,7 @@
                 <?php endif; ?>
                 </span>
             </a>
-            <a href="javascript:void(0);" class="tofocus-m fr">
+            <a href="javascript:void(0);" class="tofocus-m">
                 <span id="<?php if(!$isMe): ?>giveCard<?php endif; ?>">
                     <?php if($isGive): ?>
                     已递名片
@@ -28,21 +28,21 @@
     </div>
     <ul class="h-info-box">
         <li>
-            <h3>个人标签：<span>互联网资讯、企业并购、投融资管理</span></h3>
+            <h3>个人标签：<em>互联网资讯、企业并购、投融资管理</em></h3>
         </li>
         <li>
-            <h3>公司业务：<span>互联网</span></h3>
+            <h3>公司业务：<em>互联网</em></h3>
         </li>
         
         <li>
             <p>教育经历：
                 <?php if($user->education): ?>
                 <?php foreach($user->education as $k=>$v): ?>
-                <span><?= $v['school'] ?></span>
+                <em><?= $v['school'] ?></em>
                 <i><?= $v['start_date'] ?>-<?= $v['end_date'] ?>，<?= $v['education'] ?>，<?= $v['major'] ?></i>
                 <?php endforeach; ?>
                 <?php else: ?>
-                <span>无。</span>
+                <em>无。</em>
                 <?php endif; ?>
             </p>
         </li>
@@ -50,33 +50,33 @@
             <p>工作经历：
                 <?php if($user->career): ?>
                 <?php foreach($user->career as $k=>$v): ?>
-                <span><?= $v['company'] ?></span>
+                <em><?= $v['company'] ?></em>
                 <i><?= $v['start_date'] ?>-<?= $v['end_date'] ?>，<?= $v['position'] ?></i>
                 <?php endforeach; ?>
                 <?php else: ?>
-                <span>无。</span>
+                <em>无。</em>
                 <?php endif; ?>
             </p>
         </li>
         
         <li>
-            <h3>联系电话：<span><?= $user->phone ?></span></h3>
+            <h3>联系电话：<em><?= $user->phone ?></em></h3>
         </li>
         <li>
-            <h3>邮箱：<span><?= $user->email ?></span></h3>
+            <h3>邮箱：<em><?= $user->email ?></em></h3>
         </li>
         <li>
-            <h3>行业：<span>
+            <h3>行业：<em>
                 <?php if($user->ext_industry): ?><?= $user->ext_industry ?>、<?php endif; ?>
                 <?php foreach($user->industries as $k=>$v): ?>
                     <?php if($k == 1): ?>、<?php endif; ?>
                     <?= $v['name'] ?>
                 <?php endforeach; ?>
-                </span>
+                </em>
             </h3>
         </li>
         <li class="no-b-border">
-            <h3>所在地：<span><?= $user->city ?></span></h3>
+            <h3>所在地：<em><?= $user->city ?></em></h3>
         </li>
 
 
