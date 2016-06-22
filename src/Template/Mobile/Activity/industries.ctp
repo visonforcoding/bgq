@@ -26,7 +26,7 @@
             <a href="#this"><input type='text' id="extra_industry" placeholder="请输入" /></a>
         </div>
     </div>
-    <a href="#this" id="submit" class='nextstep'>确定</a>
+    <a href="javascript:void(0)" id="submit" class='nextstep'>确定</a>
 </div>
 <?php $this->start('script') ?>
 <script src="/mobile/js/jquery-1.6.1.min.js" type="text/javascript" charset="utf-8"></script>
@@ -56,7 +56,7 @@
                     window.location.href = url;
                 });
             } else {
-                alert('请先选择您所在行业标签');
+                $.util.alert('请先选择您所在行业标签');
             }
         });
     });
