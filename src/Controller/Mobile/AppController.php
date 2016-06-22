@@ -51,7 +51,6 @@ class AppController extends Controller {
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Util');
-
         //无需登录的
         $this->firewall = array(
             ['user', 'login'],
