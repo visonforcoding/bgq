@@ -25,7 +25,7 @@
             <li><a href="/home/cardcase"><i class="iconfont">&#xe609;</i>名片夹</a></li>
             <li><a href="meet-one.html"><i class="iconfont">&#xe61c;</i>个人主页</a></li>
             <li><a href="/home/my-purse"><i class="iconfont">&#xe61b;</i>钱包</a></li>
-            <li><a href="#this"><i class="sao-bg"></i>扫一扫</a></li>
+            <li><a href="javascript:QRCode();"><i class="sao-bg"></i>扫一扫</a></li>
         </ul>
     </div>
     <!--分类二-->
