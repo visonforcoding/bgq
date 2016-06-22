@@ -538,7 +538,6 @@ class HomeController extends AppController {
                 ->find()
                 ->where(['ownerid'=>$this->user->id, 'uid'=>$id])
                 ->first();
-//        debug($sendMe);die;
         $sendMe = $this->User->CardBoxes->get($sendMe->id);
         $sendMe->resend = 1;
         $res = $this->User->CardBoxes->save($sendMe);

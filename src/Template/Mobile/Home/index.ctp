@@ -5,8 +5,12 @@
 </header>
 <div class="wraper newswraper">
     <div class="h-home-bottom">
-        <div><span><a href="/home/edit-userinfo"><img src="<?= $user->avatar ?>"/></a></span><i class="iconfont">&#xe61e;</i></div>
-        <h3><?= $user->truename ?><span><?= $user->company ?> <?= $user->position ?></span></h3>
+        <a href="/home/edit-userinfo">
+            <div><span>
+                    <img src="<?= $user->avatar ?>"/></span><i class="iconfont">&#xe61e;</i>
+            </div>
+            <h3><?= $user->truename ?><span><?= $user->company ?> <?= $user->position ?></span></h3>
+        </a>
     </div>
     <ul class="h-home-menu clearfix">
         <li><a href="/home/my-following"><i class="iconfont">&#xe60f;</i>我的关注</a></li>
