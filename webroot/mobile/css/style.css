@@ -425,17 +425,24 @@ border-radius: 50%;padding:1px;}
 .h-home-bottom h3 span{display: block;font-size:0.26rem;line-height: 0.4rem;}
 .h-home-bottom .tofocus-m span{color:#fff;border:1px #fff solid;padding:0.03rem 0.1rem;border-radius: 0.1rem; margin-right: 0.35rem;}
 .h-home-menu{/*display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap: wrap;flex-wrap: wrap;*/background: #fff;border-bottom:1px #c8c7cc solid;margin-bottom:0.2rem;overflow:hidden;/*向下兼容*/}
-.h-home-menu li{width:50%; padding:0.5rem 0;text-align: center;border:1px #c8c7cc solid;border-bottom:none;border-right:none;float:left;/*向下兼容*/}
+.h-home-menu li{width:50%; padding:0.33rem 0 0.33rem 1rem;border:1px #c8c7cc solid;border-bottom:none;border-right:none;float:left;/*向下兼容*/}
+@media (min-width: 414px) and (max-width: 640px) {
+	.h-home-menu li{padding:0.39rem 0 0.39rem 1rem;}
+}
+@media (min-width: 320px) and (max-width: 374px) {
+	.h-home-menu li{padding:0.38rem 0 0.38rem 1rem;}
+}
+.h-home-menu li:nth-of-type(n){border-left:1px #c8c7cc solid;}
 .h-home-menu li a{font-size:0.3rem;color:#222c38;vertical-align: middle; }
-.h-home-menu li a i{font-size:0.32rem;color:#c04444;margin-right:0.23rem;}
-.h-home-menu li:nth-of-type(1) a i{color:#52aae6;}
-.h-home-menu li:nth-of-type(2) a i{color:#dd204b;}
-.h-home-menu li:nth-of-type(3) a i{color:#1cc3a7;}
+.h-home-menu li a i{font-size:0.32rem;color:#dd1f4b;margin-right:0.23rem;}
+.navlist li:nth-of-type(4) a i{color:#c04444;}
+.navlist li:nth-of-type(1) a i{color:#52abe3;}
+.navlist li:nth-of-type(3) a i{color:#1cc3a7;}
 .h-home-menulist{margin-bottom:0.2rem;border-top:1px #c8c7cc solid;border-bottom:1px #c8c7cc solid;background: #fff;}
 .h-home-menulist li{border-bottom:1px #c8c7cc solid;line-height: 1.11rem;}
 .h-home-menulist li a{display: block;width:100%;background: url(img/right.png) no-repeat right center;background-size:0.18rem 0.27rem;font-size:0.3rem;color:#222c38;}
 .h-home-menulist li a i{color:#dd204b;margin-right: 0.24rem;font-size:0.3rem;}
-.h-home-menulist li a .sao-bg{background: url(img/sao.png) no-repeat;width:0.32rem;height:0.32rem;background-size: contain;
+.h-home-menu li a .sao-bg{background: url(img/sao.png) no-repeat;width:0.32rem;height:0.32rem;background-size: contain;
     display: inline-block;    vertical-align: middle;}
 .h-home-menulist li a .otherintroduce{float:right;margin-right: 0.3rem;}
 /*.h-home-menulist li:nth-of-type(7) a .otherintroduce{color:#dd204b;}*/
