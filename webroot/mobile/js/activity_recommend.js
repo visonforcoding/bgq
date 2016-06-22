@@ -27,10 +27,6 @@ activity.prototype.bindEvent = function () {
             $('.agency-item').removeClass('active');
             $(em).addClass('active');
 
-            var attr = $(em).attr('box_id');// href里面是对应的id写法：#guest
-            $('.a-form-box').hide();
-            $(attr).show();
-
             if ($('input[name="type"]').val() != $(em).attr('type')) {
                 $('.a-form-box').find('input').val(null);
                 $('.a-form-box').find('textarea').val(null);
