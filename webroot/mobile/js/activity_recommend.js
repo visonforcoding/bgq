@@ -41,19 +41,15 @@ activity.prototype.bindEvent = function () {
         }
         switch (em.id) {
             case 'submit':
-                var form = $('form').serializeArray();
-                var formData = [];
-                // 将空的对象清除
-                for (i = 0; i < form.length; i++)
+                if($('textarea[name="description"]').val() == '')
                 {
-                    if (form[i].value != '')
-                    {
-                        formData[i] = form[i];
-                    }
+                    $.util.alert('请输入内容');
+                    return false;
                 }
+                var form = $('form').serializeArray();
                 $.util.ajax({
                     url: $('form').attr('action'),
-                    data: formData,
+                    data: form,
                     func: function (msg) {
                         if (typeof msg === 'object') {
                             if (msg.status === true) {
