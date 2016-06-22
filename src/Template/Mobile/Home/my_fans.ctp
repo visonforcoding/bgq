@@ -1,4 +1,4 @@
-<header class="my-focus-box">
+<header>
     <div class='inner'>
         <a href='#this' class='toback'></a>
        <h1>我的关注</h1>
