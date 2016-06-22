@@ -10,7 +10,8 @@
         "mobiledetect/mobiledetectlib": "2.*",
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "*",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "aferrandini/phpqrcode": "1.0.1"
     },
     "require-dev": {
         "psy/psysh": "@stable",

@@ -32,7 +32,7 @@
                 等<i>64</i>人推荐</span>
             <a href="javascript:void(0);">推荐他</a>
         </li>
-        <li class="conr"><a href="/meet/myhome/<?= $biggie->id ?>" class="tohome"><i class="iconfont">&#xe60d;</i>个人主页</a></li>
+        <li class="conr"><a href="/meet/homepage/<?= $biggie->id ?>" class="tohome"><i class="iconfont">&#xe60d;</i>个人主页</a></li>
 
     </ul>
     <div class="m-swiper-items">

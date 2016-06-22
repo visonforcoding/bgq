@@ -44,7 +44,7 @@ class HomeController extends AppController {
     /**
      * 个人主页
      */
-    public function myHomePage($id=null) {
+    public function homepage($id=null) {
         $user_id = isset($id)?$id:$this->user->id;
         $user = $this->User->get($user_id,['contain'=>['Industries'=>function($q){
             return $q->hydrate(false)->select(['id','name']);
@@ -64,18 +64,35 @@ class HomeController extends AppController {
      * 我的活动 报名
      */
     public function myActivityApply() {
+        $applyTable = \Cake\ORM\TableRegistry::get('activityapply');
+        $myActivity = $applyTable->find()->contain(['Activities'])->where(['Activityapply.user_id'=>$this->user->id])->toArray();
+        if($myActivity !== false)
+        {
+            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$myActivity]);
+        }
+        else
+        {
+            return $this->Util->ajaxReturn(false, '系统错误');
+        }
+    }
+    
+    public function getMyActivity(){
         $ActivityTable = \Cake\ORM\TableRegistry::get('activity');
         $activities = $ActivityTable->findByUserId($this->user->id)->toArray();
-        $this->set([
-            'activities' => $activities,
-            'pageTitle'=>'我的活动'
-        ]);
+        if($activities !== false)
+        {
+            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$activities]);
+        }
+        else
+        {
+            return $this->Util->ajaxReturn(false, '系统错误');
+        }
     }
 
     /**
      * 我的活动 发布
      */
-    public function myactivity() {
+    public function myActivitySubmit() {
         $ActivityTable = \Cake\ORM\TableRegistry::get('activity');
         $activities = $ActivityTable->findByUserId($this->user->id)->toArray();
         $this->set([
