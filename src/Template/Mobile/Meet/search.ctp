@@ -1,11 +1,11 @@
-<!--<header>
+<header>
     <div class='inner'>
         <a href='#this' class='toback iconfont news-serch'>&#xe613;</a>
         <h1>
-
-            <input type="text" placeholder="请输入关键词">
+            搜索
+           
         </h1>
-        <a href="javascript:void(0);" class='h-regiser'>取消</a>
+       <!--  <a href="javascript:void(0);" class='h-regiser'>取消</a> -->
     </div>
 </header>-->
 
