@@ -1,6 +1,6 @@
 <body>
     <?= $this->element('header'); ?>
-    <div class="wraper" id="activity_detail" style='padding-bottom:0.12rem;'>
+    <div class="wraper" id="activity_detail" style='padding-bottom:1.2rem;'>
         <section class="newscon-box a-detail">
             <h3><?= $activity->title; ?></h3>
            <div> <img src="<?= $activity->cover; ?>"/></div>
