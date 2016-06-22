@@ -90,10 +90,11 @@ class WxComponent extends Component {
             $appid = $wxconfig['AppID'];
             $app_secret = $wxconfig['AppSecret'];
         }
+        \Cake\Log\Log::debug($code);
         $wx_accesstoken_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $appid . '&secret=' . $app_secret .
                 '&code=' . $code . '&grant_type=authorization_code';
         $response = $httpClient->get($wx_accesstoken_url);
-        \Cake\Log\Log::error($response);
+        \Cake\Log\Log::debug($response);
         if ($response->isOk()) {
             $open_id = json_decode($response->body())->openid;
             if($isApp){
@@ -105,7 +106,7 @@ class WxComponent extends Component {
                 //该接口地址能获取到union_id
             }
             $res = $httpClient->get($wx_user_url);
-            \Cake\Log\Log::error($res);
+            \Cake\Log\Log::debug($res);
             if ($res->isOk()) {
                 return json_decode($res->body());
             } else {
