@@ -1,5 +1,5 @@
 /*登录主体 --start*/
-.login-area{padding:0.85rem 0.37rem 1.8rem; overflow:hidden;width:100%;position:relative;}
+.login-area{padding:0.85rem 0.37rem 1.6rem; overflow:hidden;width:100%;position:relative;}
 .login-area .loginbox{border-radius:5px; background: #fff;}
 .loginbox span{display:inline-block; margin-left:0.42rem;}
 .loginbox input{border:none;outline:none;font-size:0.3rem;color:#222c38;text-indent:0.4rem;}
