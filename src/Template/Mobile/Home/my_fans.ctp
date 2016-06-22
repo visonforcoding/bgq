@@ -21,7 +21,7 @@
             <a href='#this' class='toback iconfont news-serch'>&#xe613;</a>
             <h1><input type="text" placeholder="请输入关键词"></h1>
         </div>
-      </div>
+    </div>
 </div>
 <script type="text/html" id="listTpl">
     <section class="internet-v-info">
