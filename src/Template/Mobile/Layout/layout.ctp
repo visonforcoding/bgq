@@ -10,15 +10,41 @@
         <link rel="stylesheet" type="text/css" href="/mobile/css/common.css"/>
         <link rel="stylesheet" type="text/css" href="/mobile/css/style.css"/>
         <link rel="stylesheet" type="text/css" href="/mobile/font/font/iconfont.css">
-        <script src="/mobile/js/zepto.min.js"></script>
-        <script src="/mobile/js/view.js"></script>
+        <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+        <script type="text/javascript" src="/mobile/js/jsapi.js"></script>
+        <script type="text/javascript" src="/mobile/js/zepto.min.js"></script>
+        <script type="text/javascript" src="/mobile/js/view.js"></script>
+        <script>
+            (function(){  //微信分享
+                if(navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1){
+                    var n=0;
+                    var wxReadTimmer = setInterval(function(){
+                        n++;
+                        if(n>30) clearInterval(wxReadTimmer);
+                        if(window.wx){
+                            clearInterval(wxReadTimmer);
+                            wx.config({"signature":"ed8072f791b5b04c9766945a1d01f83aab011f57",
+                                "nonceStr":"YYIKKJNADVSNFEZH",
+                                "timestamp":1466593417,"appId":"wx0cf353f9fc03aad0","debug":true,
+                                "jsApiList":["onMenuShareTimeline","onMenuShareAppMessage","scanQRCode"]});
+                            wx.ready(function(){
+                                wx.onMenuShareTimeline(window.shareConfig);
+                                wx.onMenuShareAppMessage(window.shareConfig);
+                                wx.onMenuShareQQ(window.shareConfig);
+                                wx.onMenuShareWeibo(window.shareConfig);
+                                wx.onMenuShareQZone(window.shareConfig);
+                            });
+                        }
+                    },500);
+                }
+            })();
+        </script>
         <?= $this->fetch('static') ?>
     </head>
     <body>
         <?= $this->fetch('content') ?>
-        <script src="/mobile/js/jsapi.js"></script>
-        <script src="/mobile/js/util.js"></script>
-        <script src="/mobile/js/function.js"></script>
+        <script type="text/javascript" src="/mobile/js/util.js"></script>
+        <script type="text/javascript" src="/mobile/js/function.js"></script>
         <script>
             (function(){
                 if(!/smartlemon|micromessenger/.test(navigator.userAgent.toLowerCase())){
