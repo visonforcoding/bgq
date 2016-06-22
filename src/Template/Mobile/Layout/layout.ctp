@@ -29,7 +29,6 @@
 
                 if(navigator.userAgent.toLowerCase().indexOf('smartlemon') == -1){
                     $('footer').show();
-                    //$('.wraper').addClass('newswraper');
                 }
             })();
 
