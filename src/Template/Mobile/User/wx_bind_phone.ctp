@@ -4,7 +4,7 @@
         <h1>
             绑定手机号
         </h1>
-        <a href="/user/register" class='h-regiser'>注册</a>
+        <!-- <a href="/user/register" class='h-regiser'>注册</a> -->
     </div>
 </header>
 <div class="wraper">
