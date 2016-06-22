@@ -188,13 +188,16 @@ class ActivityController extends AppController {
      */
     public function recommend($id) {
         if ($this->request->is('post')) {
-            $this->handCheckLogin();
+            $noLogin = $this->handCheckLogin();
+            if($noLogin)
+            {
+                return $this->Util->ajaxReturn(false, '请先登录');
+            }
             $data = $this->request->data();
             if($data['description'] == '')
             {
                 return $this->Util->ajaxReturn(false, '请输入内容');
             }
-            
             $data['user_id'] = $this->user->id;
             debug($data);die;
             $data['activity_id'] = $id;
