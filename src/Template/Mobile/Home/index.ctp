@@ -16,7 +16,7 @@
         <li><a href="/home/my-following"><i class="iconfont">&#xe60f;</i>我的关注</a></li>
         <li><a href="/home/my-collect-activity"><i class="iconfont">&#xe610;</i>我的收藏</a></li>
         <li><a href="/home/my-book"><i class="iconfont">&#xe60b;</i>我的约见</a></li>
-        <li><a href="/home/myactivity"><i class="iconfont">&#xe601;</i>我的活动</a></li>
+        <li><a href="/home/my_activity_submit"><i class="iconfont">&#xe601;</i>我的活动</a></li>
     </ul>
     <!--分类一-->
     <div class="h-home-menulist">
@@ -66,7 +66,7 @@
     <!--分类五-->
     <div class="h-home-menulist">
         <ul class="innercon">
-            <li><a href="my-install.html"><i class="sao-bg"></i>扫一扫</a></li>
+            <li><a href="javascript:LEMON.sys.QRcode();"><i class="sao-bg"></i>扫一扫</a></li>
         </ul>
     </div>
     
