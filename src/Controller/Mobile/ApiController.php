@@ -29,6 +29,8 @@ class ApiController extends AppController {
     }
 
     protected function checkAcl() {
+        \Cake\Log\Log::debug('接口debug');
+        \Cake\Log\Log::debug($this->request->data());
         if (!$this->request->isPost()) {
             return $this->Util->ajaxReturn(false, '请求受限', 405);
         }
