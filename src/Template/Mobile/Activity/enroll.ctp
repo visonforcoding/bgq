@@ -1,8 +1,6 @@
 <body>
     <div class="wraper">
-        <div class="h20">
-
-        </div>
+        
         <form action="" method="post">
             <div class="infobox sing-up">
                 <ul>
