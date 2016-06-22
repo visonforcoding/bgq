@@ -190,6 +190,7 @@ class ActivityController extends AppController {
         if ($this->request->is('post')) {
             $this->handCheckLogin();
             $data = $this->request->data();
+            debug($data);die;
             if($data['description'] == '')
             {
                 return $this->Util->ajaxReturn(false, '请输入内容');
