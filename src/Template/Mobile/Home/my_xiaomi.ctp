@@ -4,7 +4,7 @@
         <h1>
             小秘书
         </h1>
-        <a href="/home/my-history-need" class='h-regiser'>历史消息</a>
+        <!-- <a href="/home/my-history-need" class='h-regiser'>历史消息</a> -->
     </div>
 </header>
 <div class="wraper">
@@ -17,7 +17,8 @@
             </li>
         </ul>
     </div>
-    <a href="#this" id="submit" class="nextstep">发送</a>
+    <a href="#this" id="submit" class="nextstep redshadow">发送</a>
+    <a href="my-history-info.html" class='historyinfo'>历史消息</a>
 </div>
 <?php $this->start('script') ?>
 <script>
