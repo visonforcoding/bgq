@@ -170,6 +170,8 @@ display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: flex;
 border-left:none;border-bottom:none;top:-1px;}
 .classify-l span.active,.classify-r span.active,.place-l span.active{background: url(img/up2.png) no-repeat right center;background-size:0.26rem 0.16rem;color:#e01a48;}
 /*活动--start*/
+#comment{min-height:1rem;}
+#comment h4{font-size:0.32rem;color:#7a7d82;text-align: center;line-height: center;line-height:1rem;}
 .inner .subactivity{background: none; width:1.2rem; top:0.3rem; position:absolute;}
 .a-wraper .banner{background: url(../images/a-banner.png) no-repeat center center;background-size:cover;}
 .a-head{display:block;}
