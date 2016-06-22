@@ -6,7 +6,7 @@
     </div>
    
 </header>
-<div class="wraper my-wraper" id="follow">
+<div class="wraper" id="follow">
     <div class="h-add">
         <img src="../css/img/add1.png" alt="" />
     </div>
