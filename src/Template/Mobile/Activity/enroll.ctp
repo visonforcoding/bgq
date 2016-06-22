@@ -11,7 +11,7 @@
                     <li>公司：<span class='infocard'><input type="email" name="company" value="<?= $user->company; ?>" readonly/></span></li>
                     <li>职务：<span class='infocard'><input type="text" name="position" value="<?= $user->position; ?>" readonly/></span></li>
                     <li>联系方式：<span class='infocard reg-pass'><input type="text" name="phone" value="<?= $user->phone; ?>" readonly/></span></li>
-                    <li class='no-b-bottom'>费用：<span class='infocard reg-repass'><input type="text" name="apply_fee" placeholder="<?= $activity->apply_fee; ?>元" readonly/></span></li>
+                    <li class='no-bottom'>费用：<span class='infocard reg-repass'><input type="text" name="apply_fee" placeholder="<?= $activity->apply_fee; ?>元" readonly/></span></li>
                 </ul>
             </div>
             <a href="#this" class="nextstep" id="submit">提交</a>
