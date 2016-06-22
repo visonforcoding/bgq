@@ -31,7 +31,7 @@
                     $('footer').show();
                     //$('.wraper').addClass('newswraper');
                 }
-            })()
+            })();
 
             (function(){
                 if(!$.util.isAPP)  return;
