@@ -11,10 +11,10 @@
     <div class="h20 nobottom">
     </div>
     <div class="inner my-home-menu" >
-                <a href="my-activity-submit.html">我的发布</a>
-                <a href="javascript:void(0);"  class="active">已经报名</a>
+        <a href="my-activity-submit.html">我的发布</a>
+        <a href="javascript:void(0);"  class="active">已经报名</a>
                     
-                </div>
+     </div>
     <section class="my-collection-info" id="dataBox">
     </section>
 </div>
