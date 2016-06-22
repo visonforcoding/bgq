@@ -16,18 +16,31 @@ use Cake\Mailer\Email;
 class UserController extends AppController {
 
     /**
-     * Index method
+     * Index method  个人主页
      *
      * @return \Cake\Network\Response|null
      */
-    public function index() {
-        $this->paginate = [
-            'contain' => ['Industries']
-        ];
-        $user = $this->paginate($this->User);
-
-        $this->set(compact('user'));
-        $this->set('_serialize', ['user']);
+    public function homePage($id=null) {
+        $self = false;
+        if(empty($id)){
+            //自己差看自己的
+            $this->handCheckLogin();
+            $id = $this->user->id;
+            $self = true;
+        }
+        $user = $this->User->get($id,['contain'=>['Industries'=>function($q){
+            return $q->hydrate(false)->select(['id','name']);
+        }]]);
+        $industries = $user->industries;
+        $industry_arr = [];
+        foreach($industries as $industry){
+            $industry_arr[] = $industry['name'];
+        }
+        $this->set([
+            'pageTitle'=>'个人主页',
+            'self'=>$self
+        ]);
+        $this->set(compact('user','industry_arr'));
     }
 
     /**
@@ -180,8 +193,8 @@ class UserController extends AppController {
      * 用户登录
      */
     public function login() {
-        $redirect_url = empty($this->request->query('redirect_url')) ? 
-                (empty($this->request->referer()) ? '/' : $this->request->referer()):$this->request->query('redirect_url');
+        $redirect_url = empty($this->request->query('redirect_url')) ?
+                (empty($this->request->referer()) ? '/' : $this->request->referer()) : $this->request->query('redirect_url');
         $this->response->cookie([
             'name' => 'login_url',
             'value' => $redirect_url,
