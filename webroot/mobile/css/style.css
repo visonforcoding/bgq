@@ -443,7 +443,7 @@ border-radius: 50%;padding:1px;}
 .h-info-box li{padding:0.2rem 0;border-bottom:1px #c8c7cc solid;font-size:0.28rem;}
 .s-title-pass li{padding:0.25rem 0.3rem;}
 .s-title-pass li:last-of-type{border-bottom:none;}
-.h-info-box li h3{width:100%;}
+.h-info-box li h3{width:100%;line-height: 0.43rem;}
 .s-title-pass li h3{color:#e01a48;}
 .s-title-pass li p{color:#9ba4ad; line-height: 0.36rem;}
 .h-info-box .no-b-border a{display:block;background: url(img/right.png) no-repeat right center; background-size:0.18rem 0.25rem;}
