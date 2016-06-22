@@ -26,6 +26,7 @@
                 </div>
             </li>
             <li class="no-right-ico">
+                
                 <span>手机：</span>
                 <div>
                     <input  type="text" value="<?= $user->phone ?>" readonly="true" />
