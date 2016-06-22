@@ -66,7 +66,7 @@
     <!--分类五-->
     <div class="h-home-menulist">
         <ul class="innercon">
-            <li><a href="javascript:LEMON.sys.QRcode();"><i class="sao-bg"></i>扫一扫</a></li>
+            <li><a href="javascript:QRCode();"><i class="sao-bg"></i>扫一扫</a></li>
         </ul>
     </div>
     
@@ -107,19 +107,25 @@
         });
     });
 
-    $(function () {
-        $('#shareTo').click(function () {
-            $('.reg-shadow,.shadow-info').removeAttr('hidden');
-        });
-        $('.reg-shadow').bind('click', function (e) {
-            $('.reg-shadow,.shadow-info').attr('hidden', true);
-        });
-        $('#shareToWxPYQ').click(function () {
+    function QRCode(){
+        if($.util.isAPP){
+            LEMON.sys.QRcode();
+        }
+        else if($.util.isWX){
+            wx.scanQRCode({
+                needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                success: function (res) {
+                    //var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+                }
+            });
+        }
+        else{
+            $.util.alert('请在APP或是微信使用扫一扫功能')
+        }
 
-        });
-        $('#shareToWxFriend').click(function () {
+    }
 
-        });
-    });
+
 </script>
 <?php $this->end('script'); ?>
