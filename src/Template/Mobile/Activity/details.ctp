@@ -3,7 +3,7 @@
     <div class="wraper" style="margin-bottom:1rem;" id="activity_detail">
         <section class="newscon-box a-detail">
             <h3><?= $activity->title; ?></h3>
-            <img src="<?= $activity->cover; ?>"/>
+           <div> <img src="<?= $activity->cover; ?>"/></div>
             <p>主办单位：<?= $activity->company; ?></p>
             <p>时间：<?= $activity->time; ?></p>
             <p>地点：<?= $activity->address; ?></p>
