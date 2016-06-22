@@ -1,10 +1,14 @@
-<header class="m-to-more myhome">
+<header class="myhome no-bottom">
     <div class='inner'>
         <a href='#this' class='toback'></a>
         <h1>个人主页</h1>
-        <a href="#this" class='iconfont share h-regiser'>&#xe619;</a>
+       <!--  <a href="#this" class='iconfont share h-regiser'>&#xe619;</a> -->
     </div>
-    <div class="h-home-bottom">
+   
+</header>
+
+<div class="m-wraper m-fixed-bottom wraper">
+     <div class="h-home-bottom">
         <div><span><img src="<?=$user->avatar?>"/></span><i class="iconfont">&#xe61e;</i></div>
         <h3><?=$user->truename?><span><?=$user->company?> <?=$user->position?></span></h3>
             
@@ -13,9 +17,6 @@
                     <a href="javascript:void(0);" class="tofocus-m"><span>递名片</span></a>
                 </h4>
     </div>
-</header>
-
-<div class="m-wraper m-fixed-bottom">
     <ul class="h-info-box">
         <li>
             <h3>个人标签：
