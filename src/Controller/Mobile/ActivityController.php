@@ -194,6 +194,7 @@ class ActivityController extends AppController {
             {
                 return $this->Util->ajaxReturn(false, '请输入内容');
             }
+            debug($data);die;
             $data['user_id'] = $this->user->id;
             $data['activity_id'] = $id;
             $sponsorTable = \Cake\ORM\TableRegistry::get('sponsor');
