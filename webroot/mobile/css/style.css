@@ -402,14 +402,14 @@ height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;text-indent: 0.18rem;}
 .add-subject{height:0.9rem;line-height:0.9rem;border-bottom:1px #c8c7cc solid;font-size:0.3rem;color:#222c38;display: flex; justify-content: center;}
 .add-subject span{background: url(img/add.png) no-repeat left center;background-size: 0.3rem 0.3rem; padding-left:0.4rem;}
 /*个人中心*/
-.myhome,.myhome-h{background: #d72355;position:fixed;}
+.myhome,.myhome-h{background: #dd204b;position:fixed;}
 .myhome-h{height:3.6rem;}
 .h-home-bottom{padding:0.5rem 0 0.14rem;
 /*display: -webkit-flex; display: flex;
 -webkit-justify-content: center;justify-content: center;
 -webkit-align-items: center;  align-items: center;
 -webkit-flex-direction:column;flex-direction:column;*/
-color:#fff;background: #d72355;background: -webkit-linear-gradient( top,#e01a48,#d2275c);}
+color:#fff;background: #dd204b;}
 .h-home-bottom h4{text-align: center;padding:0.1rem 0;}
 .h-home-bottom div span{width:1.12rem;height:1.12rem;display:inline-block;position:relative;background-color: #fff;
 border-radius: 50%;padding:1px;}
