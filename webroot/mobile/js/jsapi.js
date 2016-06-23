@@ -71,6 +71,7 @@
         "db.set",
         "sys.version",
         "sys.QRcode",  //二维码扫描
+        "sys.back",
         "hide.share", //隐藏分享图标
         "show.search", //显示搜索
         "share.banner",
@@ -133,6 +134,7 @@
                     });
                     break;
                 //一个字符型参数   无回调
+                case "sys.back":
                 case "show.search":
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {url:arguments[0]}, '');
