@@ -33,6 +33,7 @@
     <li onclick="LEMON.login.wx(callback)">LEMON.login.wx(callback)  微信登录</li>
     <!--<li onclick="LEMON.login.wx(function(code){alert(12);alert(code);alert('code:'+code)})">LEMON.login.wx(function(code){alert('code:'+code)})  微信登录</li>-->
     <li onclick="LEMON.hide.share()">LEMON.hide.share()  隐藏分享图标</li>
+    <li onclick="LEMON.sys.back('http://m.chinamatop.com/')">LEMON.sys.back('http://m.chinamatop.com/') 设置点击返回的跳转链接</li>
     <li onclick="LEMON.show.search('test url')">LEMON.show.search('test url') 显示搜索图标</li>
 
     <li onclick="LEMON.share.banner()">LEMON.share.banner() 分享条,可能分享部分用到的很少,直接原生的</li>
@@ -122,7 +123,7 @@
         setTimeout(function() {
             console.log("ERROR:" + h);
             alert(h);
-            var a = encodeURIComponent(h), b = new Image;
+            //var a = encodeURIComponent(h), b = new Image;
             //b.src = "//wq.jd.com/webmonitor/collect/badjs.json?Content=" + a + "&t=" + Math.random();
             //当前用户登录ID、时间、手机号码、上报URL
             //b.src = "/BadJS/index.html?Content=" + a + "&t=" + Math.random();
