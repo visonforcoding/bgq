@@ -190,8 +190,8 @@ class HomeController extends AppController {
         //查找type 为1 的消息
         $user_id = $this->user->id;
         $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
-        $unReadCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0])->count();
-
+        $unReadFollowCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0,'type'=>1])->count(); //未读关注消息
+        $unReadSysCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0,'type !='=>1])->count(); //未读系统消息
         $fans = $UsermsgTable->find()
                         ->hydrate(false)
                         ->select(['u.truename', 'u.avatar', 'u.id', 'create_time',
@@ -213,9 +213,11 @@ class HomeController extends AppController {
         //看了之后 就更改状态了为已读
         $UsermsgTable->updateAll(['status' => 1], ['user_id' => $user_id, 'status' => 0]);
         $this->set([
-            'pageTitle' => '关注消息'
+            'pageTitle' => '关注消息',
+            'fans'=>$fans,
+            'unReadSysCount'=>$unReadSysCount,
+            'unReadFollowCount'=>$unReadFollowCount
         ]);
-        $this->set(compact('unReadCount', 'fans'));
     }
 
     /**
@@ -224,10 +226,13 @@ class HomeController extends AppController {
     public function myMessageSys() {
         $user_id = $this->user->id;
         $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
-        $unReadCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0])->count();
+        $unReadFollowCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0,'type'=>1])->count(); //未读关注消息
+        $unReadSysCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0,'type !='=>1])->count(); //未读系统消息
         $msgs = $UsermsgTable->find()->where(['user_id' => $user_id, 'type !=' => 1])->toArray();
         $this->set([
-            'pageTitle' => '系统消息'
+            'pageTitle' => '系统消息',
+            'unReadFollowCount'=>$unReadFollowCount,
+            'unReadSysCount'=>$unReadSysCount
         ]);
         $this->set(compact('msgs', 'unReadCount'));
     }
@@ -303,15 +308,18 @@ class HomeController extends AppController {
     * 我的约见 （我是顾客）
     */
     public function myBook() {
-    $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
-    $type = $this->request->query('type');
-    $where['SubjectBook.status'] = in_array($type, ['0', '1', '3']) ? $type : 0;
-    $where['SubjectBook.user_id'] = $this->user->id;
-    $books = $BookTable->find()->contain(['Subjects', 'Subjects.User' => function($q) {
-                    return $q->select(['truename', 'avatar', 'id', 'company', 'position']);
-                }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
+        $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+        $type = $this->request->query('type');
+        $where['SubjectBook.status'] = in_array($type, ['0', '1', '3']) ? $type : 0;
+        $where['SubjectBook.user_id'] = $this->user->id;
+        $books = $BookTable->find()->contain(['Subjects', 'Subjects.User' => function($q) {
+                        return $q->select(['truename', 'avatar', 'id', 'company', 'position']);
+                    }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
 
-            $this->set(compact('books', 'type'));
+        $this->set([
+            'pageTitle'=>'我的约见'
+        ]);
+        $this->set(compact('books', 'type'));
     }
 
     /**
@@ -409,7 +417,8 @@ class HomeController extends AppController {
         $flows = $FlowTable->find()->where(['user_id' => $user_id, 'status' => '1'])->orderDesc('create_time')->toArray();
         $this->set(array(
             'userInfo' => $userInfo,
-            'flows' => $flows
+            'flows' => $flows,
+            'pageTitle'=>'我的钱包'
         ));
     }
 
@@ -441,6 +450,9 @@ class HomeController extends AppController {
                 return $this->Util->ajaxReturn(false, '提现申请失败');
             }
         }
+        $this->set([
+            'pageTitle'=>'提现'
+        ]);
         $this->set(compact('userInfo'));
     }
 

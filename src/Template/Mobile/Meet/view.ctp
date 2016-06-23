@@ -41,7 +41,7 @@
                 <div class="inner-li-items">
                     <h3><?= $v['title'] ?><span><?php if($v['type'] == 1): ?>一对一<?php else: ?>一对多<?php endif; ?>面谈</span></h3>
                     <div class='m-center-con'>
-                        <a href="meet-one-detail.html">
+                        <a href="/meet/subject-detail/<?=$v->id?>">
                             <p>
                                 <?= $v['summary'] ?>
                             </p>

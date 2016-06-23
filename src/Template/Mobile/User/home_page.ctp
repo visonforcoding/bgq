@@ -2,7 +2,6 @@
     <div class='inner'>
         <a href='javascript:history.go(-1);' class='toback'></a>
         <h1>个人主页</h1>
-
         <!--<a href="#this" class='iconfont share h-regiser'>&#xe619;</a>-->
     </div>
 </header>

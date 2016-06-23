@@ -4,7 +4,6 @@
         <h1>
             编辑话题
         </h1>
-
     </div>
 </header>
 <div class="wraper">
