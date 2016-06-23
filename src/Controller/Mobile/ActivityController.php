@@ -706,7 +706,8 @@ class ActivityController extends AppController {
         $res = $this->Activity->Activityapply->save($apply);
         if($res)
         {
-            $this->set('res', $activity->title . ' 活动签到成功!');
+            $content = '<a href="/activity/details/'. $activity->id .'">' . $activity->title . '</a>签到成功!';
+            $this->set('res', $content);
         }
         else
         {
