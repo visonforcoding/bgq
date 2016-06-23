@@ -126,10 +126,10 @@ class WxComponent extends Component {
         $url = self::WEIXIN_API_URL . 'token?grant_type=client_credential&appid=' . $this->app_id . '&secret=' . $this->app_secret;
         if (is_array($access_token)) {
             $isExpires = ($access_token['expires_in']-time())<2200 ? true : false;
-            \Cake\Log\Log::debug('access_token过期:'.$isExpires,'devlog');
+            \Cake\Log\Log::debug('access_token过期:'.(string)$isExpires,'devlog');
         }
         if ($access_token === false || $isExpires) {
-            \Cake\Log\Log::error('微信接口token重新请求','devlog');
+            \Cake\Log\Log::warning('微信接口token重新请求','devlog');
             $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
             $response = $httpClient->get($url);
             if ($response->isOk()) {
@@ -142,6 +142,7 @@ class WxComponent extends Component {
                 $token = $body->access_token;
                 $expires = $body->expires_in;
                 $expires = time() + $expires;
+                \Cake\Log\Log::debug($body);
                 \Cake\Cache\Cache::write(self::TOKEN_NAME, [
                     'access_token' => $token,
                     'expires_in' => $expires,
