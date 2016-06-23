@@ -690,28 +690,28 @@ class ActivityController extends AppController {
         $activity = $this->Activity->get($id);
         if(!$activity)
         {
-            echo '活动不存在';
+            $this->set('res', '活动不存在');
         }
         $is_apply = $this->Activity->Activityapply->find()->where(['user_id'=>$this->user->id, 'activity_id'=>$id, 'is_pass'=>1])->first();
         if(!$is_apply)
         {
-            echo '未报名或者未通过审核';
+            $this->set('res', '未报名或者未通过审核');
         }
         $apply = $this->Activity->Activityapply->get($is_apply->id);
         $apply->is_sign = 1;
         $res = $this->Activity->Activityapply->save($apply);
         if($res)
         {
-            echo '签到成功';
+            $this->set('res', '签到成功');
         }
         else
         {
-            echo '系统错误';
+            $this->set('res', '系统错误');
         }
     }
     
     public function test(){
-        $a = $this->request;
+        $a = $this->request->env('HTTP_HOST');
         debug($a);die;
     }
 
