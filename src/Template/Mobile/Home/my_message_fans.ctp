@@ -35,6 +35,9 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    if($.util.isAPP){
+        LEMON.sys.back('/home/index');
+    }
     $.util.dataToTpl('follow', 'listTpl',<?= json_encode($fans) ?>, function(d){
         d.follower_truename = d.u.truename;
         d.follower_company = d.u.company;
