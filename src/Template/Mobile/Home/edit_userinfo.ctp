@@ -179,6 +179,18 @@
 <script src="/mobile/js/lib/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>
 <script>
     $(function () {
+        $('#upload_pic').click(function(){
+            if($.util.isAPP){
+                LEMON.event.uploadPhoto(function(data){
+                    alert(data);
+                  var data = JSON.parse(data);
+                   if(data.status===true){
+                       $('input[name="avatar"]').val(data.thumbpath);
+                    }
+                });
+               return true; 
+            }
+        });
         $('#upload_pic').change(function () {
             var file = $(this).get(0).files[0];
             var reader = new FileReader();
