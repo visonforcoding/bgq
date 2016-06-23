@@ -140,10 +140,10 @@ class ActivityController extends AppController {
         $where = [];
         if (!empty($keywords)) {
             $where['OR'] = [
-                ['users.`truename` like' => "%$keywords%"],
-                ['activity.`title` like' => "%$keywords%"],
-                ['activity.`company` like' => "%$keywords%"],
-                ['activity.`address` like' => "%$keywords%"],
+                ['Users.`truename` like' => "%$keywords%"],
+                ['Activity.`title` like' => "%$keywords%"],
+                ['Activity.`company` like' => "%$keywords%"],
+                ['Activity.`address` like' => "%$keywords%"],
             ];
         }
         if (!empty($begin_time) && !empty($end_time)) {
@@ -268,8 +268,9 @@ class ActivityController extends AppController {
         {
             return $this->Util->ajaxReturn(false, '系统错误');
         }
+        // 生成二维码
         $savePath = $folder.'/'.time().$id.'.png';
-        \PHPQRCode\QRcode::png('http://m.chinamatop.com/activity/sign/'.$id, $savePath);
+        \PHPQRCode\QRcode::png('http://'. $this->request->env('HTTP_HOST') . '/activity/sign/'.$id, $savePath);
         return $this->Util->ajaxReturn(true, '发布成功');
     }
 
