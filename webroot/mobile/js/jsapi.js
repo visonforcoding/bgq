@@ -151,7 +151,7 @@
                 case "event.reuploadPhoto":
                     registerAPI(null, api, function () {
                         window.reuploadPhotoCB = arguments[0];
-                        return JSApiInvoke(api, {}, apiCallback(arguments[1]));
+                        return JSApiInvoke(api, {}, apiCallback(arguments[0]));
                         //var re = JSON.parse(JSApiInvoke(api, {}, '', 'string'));
                         //return re.data;
                     });
