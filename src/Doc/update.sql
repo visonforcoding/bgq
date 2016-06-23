@@ -135,8 +135,6 @@ ALTER TABLE activitycom add reply_id INT COMMENT '回复用户id';
 #活动评论增加父id
 ALTER TABLE activitycom add pid INT NOT NULL COMMENT '父id';
 
--- ALTER TABLE activitycom add is_delete TINYINT(2) DEFAULT 0 NOT NULL COMMENT '状态值：0：未删除；1：已删除';
-
 #地区标签表
 CREATE TABLE `region` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '地区标签表',
@@ -220,5 +218,5 @@ ENGINE=InnoDB;
 ALTER TABLE activityapply add is_sign TINYINT(2) DEFAULT 0 COMMENT '是否已签到，0：未签到；1：已签到';
 
 #活动表添加分享描述字段
-ALTER TABLE activity add is_sign TINYINT(2) DEFAULT 0 COMMENT '是否已签到，0：未签到；1：已签到';
+ALTER TABLE activity add share_desc VARCHAR(100) COMMENT '分享描述';
 
