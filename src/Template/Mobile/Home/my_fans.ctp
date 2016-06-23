@@ -1,10 +1,10 @@
-<header>
+<!--<header>
     <div class='inner'>
         <a href='#this' class='toback'></a>
         <h1>我的粉丝</h1>
-        <!--<a href="javascript:void(0);" class="h-regiser h-add"></a>-->
+        <a href="javascript:void(0);" class="h-regiser h-add"></a>
     </div>
-</header>
+</header>-->
 <div class="wraper">
     <div class="h-add">
         <img src="/mobile/images/add1.png" alt="" />
@@ -43,6 +43,10 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    if(LEMON.isAPP)
+    {
+        LEMON.sys.back('/home/index');
+    }
     $.util.dataToTpl('follow', 'listTpl',<?= json_encode($fans) ?>, function (d) {
         if (d) {
             d.fans_truename = d.user.truename;

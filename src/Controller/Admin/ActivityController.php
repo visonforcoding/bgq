@@ -259,10 +259,10 @@ class ActivityController extends AppController {
         {
             return $this->Util->ajaxReturn(false, '发布失败');
         }
-        $folder = WWW_ROOT.'/upload/qrcode/activitycode/'.date('Y-m-d');
+        $folder = '/upload/qrcode/activitycode/'.date('Y-m-d');
         if(!file_exists($folder))
         {
-            $res = mkdir($folder);
+            $res = mkdir(WWW_ROOT.$folder);
         }
         if(!$res)
         {

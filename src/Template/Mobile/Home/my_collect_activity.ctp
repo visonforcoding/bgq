@@ -66,3 +66,11 @@
         </div>
     </section>	
 </div>
+<?php $this->start('script'); ?>
+<script>
+    if(LEMON.isAPP)
+    {
+        LEMON.sys.back('/home/index');
+    }
+</script>
+<?php $this->end('script');

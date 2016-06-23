@@ -30,6 +30,10 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    if(LEMON.isAPP)
+    {
+        LEMON.sys.back('/home/index');
+    }
     $.util.dataToTpl('collect', 'listTpl',<?= json_encode($collects) ?>, function(d){
         d.news_title = d.news.title;
         d.news_read = d.news.read_nums;

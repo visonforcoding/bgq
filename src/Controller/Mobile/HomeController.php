@@ -335,6 +335,7 @@ class HomeController extends AppController {
                 ]);
                 $subject = $book->subject;
                 $this->set(compact('subject', 'book'));
+        $this->set('pageTitle', '我是顾客');
     }
 
     /**
@@ -349,6 +350,7 @@ class HomeController extends AppController {
                         return $q->select(['truename', 'avatar', 'id', 'company', 'position']);
                     }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
                 $this->set(compact('books', 'type'));
+        $this->set('pageTitle', '我是专家');
     }
 
     /**
