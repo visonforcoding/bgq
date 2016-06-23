@@ -113,19 +113,19 @@ class ActivityapplyController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'activityapply.' . $this->request->data('sidx');
+        $sort = 'Activityapply.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where[' users.truename like'] = "%$keywords%";
+            $where[' Users.truename like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['activityapply.`ctime` >' => $begin_time], ['activityapply.`ctime` <' => $end_time]];
+            $where['and'] = [['Activityapply.`create_time` >' => $begin_time], ['Activityapply.`create_time` <' => $end_time]];
         }
         if ($id) {
             $query = $this->Activityapply->find()->where(['activity_id' => $id]);
