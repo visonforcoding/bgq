@@ -37,7 +37,8 @@ class HomeController extends AppController {
         $this->set(compact('user'));
         $this->set(array(
             'user'=>$user,
-            'wxConfig'=>$wxConfig
+            'wxConfig'=>$wxConfig,
+            'pageTitle' => '个人中心',
         ));
     }
 
@@ -76,6 +77,9 @@ class HomeController extends AppController {
         }
     }
     
+    /**
+     * 我的发布活动
+     */
     public function getMyActivity(){
         $ActivityTable = \Cake\ORM\TableRegistry::get('activity');
         $activities = $ActivityTable->findByUserId($this->user->id)->toArray();
@@ -257,7 +261,6 @@ class HomeController extends AppController {
             if($NeedTable->save($need)){
                 $this->Util->ajaxReturn(true,'提交成功');
             }else{
-//                $error = getMessage($need->errors());
                 $this->Util->ajaxReturn(false, '提交失败');
             }
         }

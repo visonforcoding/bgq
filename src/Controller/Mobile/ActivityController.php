@@ -702,12 +702,13 @@ class ActivityController extends AppController {
         $res = $this->Activity->Activityapply->save($apply);
         if($res)
         {
-            $this->set('res', '签到成功');
+            $this->set('res', $activity->title . ' 活动签到成功!');
         }
         else
         {
             $this->set('res', '系统错误');
         }
+        $this->set('pageTitle', '活动签到');
     }
     
     public function test(){
