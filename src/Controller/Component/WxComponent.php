@@ -133,6 +133,7 @@ class WxComponent extends Component {
             $response = $httpClient->get($url);
             if ($response->isOk()) {
                 $body = json_decode($response->body());
+                \Cake\Log\Log::debug($body);
                 if (!property_exists($body, 'access_token')) {
                     \Cake\Log\Log::error($response);
                     return false;
