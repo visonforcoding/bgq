@@ -178,6 +178,7 @@
     $(function () {
         $('#upload_pic').click(function(){
             if($.util.isAPP){
+                alert('我要调JSAPI了');
                 LEMON.event.uploadPhoto(function(data){
                     alert(data);
                   var data = JSON.parse(data);
@@ -185,7 +186,7 @@
                        $('input[name="avatar"]').val(data.thumbpath);
                     }
                 });
-               return true; 
+               return false; 
             }
         });
         $('#upload_pic').change(function () {
