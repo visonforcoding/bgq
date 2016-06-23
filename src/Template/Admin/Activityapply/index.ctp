@@ -95,20 +95,20 @@
                 }
 
                 function actionFormatter(cellvalue, options, rowObject) {
-                    response = '<a title="删除" href="" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response = '<a title="删除" href="javascript:void(0)" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     if (rowObject.is_top == 0)
                     {
-                        response += '<a title="置顶" href="" onClick="top(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">置顶</a>';
+                        response += '<a title="置顶" href="javascript:void(0)" onClick="top(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">置顶</a>';
                     } else
                     {
-                        response += '<a title="取消置顶" href="" onClick="untop(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">取消置顶</a>';
+                        response += '<a title="取消置顶" href="javascript:void(0)" onClick="untop(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">取消置顶</a>';
                     }
                     if (rowObject.is_pass == 0)
                     {
-                        response += '<a title="通过" href="" onClick="pass(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">通过</a>';
+                        response += '<a title="通过" href="javascript:void(0)" onClick="pass(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">通过</a>';
                     } else
                     {
-                        response += '<a title="不通过" href="" onClick="unpass(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">不通过</a>';
+                        response += '<a title="不通过" href="javascript:void(0)" onClick="unpass(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">不通过</a>';
                     }
                     return response;
                 }
@@ -189,9 +189,9 @@
                             success: function (res) {
                                 if (res.status) {
                                     layer.msg(res.msg);
-//                                    setTimeout(function () {
-//                                        window.location.reload();
-//                                    }, 2000);
+                                    setTimeout(function () {
+                                        window.location.reload();
+                                    }, 2000);
                                 }
                             }
                         });
