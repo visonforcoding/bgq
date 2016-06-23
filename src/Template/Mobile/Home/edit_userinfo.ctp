@@ -178,7 +178,7 @@
     $(function () {
         $('#upload_pic').click(function(){
             if($.util.isAPP){
-                LEMON.event.uploadPhoto(function(data){
+                LEMON.event.uploadPhoto({'url_query':'?dir=user/avatar&zip=1'},function(data){
                     alert(data);
                   var data = JSON.parse(data);
                    if(data.status===true){
