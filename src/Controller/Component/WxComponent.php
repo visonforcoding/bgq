@@ -126,7 +126,9 @@ class WxComponent extends Component {
         if (is_array($access_token)) {
             $isExpires = ($access_token['expires_in']-time())<2200 ? true : false;
         }
+        $isExpires = true;
         if ($access_token === false || $isExpires) {
+            \Cake\Log\Log::debug('微信接口token重新请求');
             $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
             $response = $httpClient->get($url);
             if ($response->isOk()) {
@@ -149,6 +151,7 @@ class WxComponent extends Component {
                 return FALSE;
             }
         } else {
+            \Cake\Log\Log::debug($access_token);
             return $access_token['access_token'];
         }
     } 
