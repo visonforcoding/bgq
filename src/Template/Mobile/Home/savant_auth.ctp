@@ -2,10 +2,8 @@
     <div class='inner'>
         <a href='#this' class='toback'></a>
         <h1>
-
             专家认证
         </h1>
-
     </div>
 </header>
 
@@ -16,7 +14,7 @@
         <li class="no-right-ico">
             <span>姓名：</span>
             <div>
-                <input type="text" value="<?=$user->truename?>" placeholder="杨涛" />
+                <input type="text" value="<?= $user->truename ?>" placeholder="杨涛" />
             </div>
         </li>
         <li>
@@ -28,38 +26,38 @@
         <li class="no-right-ico">
             <span>手机：</span>
             <div>
-                <input type="text" value="<?=$user->phone?>" placeholder="13854612879" />
+                <input type="text" value="<?= $user->phone ?>" placeholder="13854612879" />
             </div>
         </li>
         <li class="no-right-ico">
             <span>邮箱：</span>
             <div>
-                <input type="text" value="<?=$user->email?>" placeholder="IDG@foxmail.com" />
+                <input type="text" value="<?= $user->email ?>" placeholder="IDG@foxmail.com" />
             </div>
         </li>
         <li class="no-right-ico">
             <span>公司：</span>
             <div>
-                <input type="text" value="<?=$user->company?>" placeholder="IDG资本" />
+                <input type="text" value="<?= $user->company ?>" placeholder="IDG资本" />
             </div>
         </li>
         <li class="no-right-ico">
             <span>职务：</span>
             <div >
-                <input type="text" value="<?=$user->position?>" placeholder="董事长" />
+                <input type="text" value="<?= $user->position ?>" placeholder="董事长" />
             </div>
         </li>
         <form method="post" action="">
             <li class="no-right-ico changeflex">
                 <b>项目经验</b>
                 <div >
-                    <textarea name="xmjy"></textarea>
+                    <textarea name="xmjy"><?=$user->savant->xmjy?></textarea>
                 </div>
             </li>
             <li class="nobottom no-right-ico changeflex">
                 <b>资源优势</b>
                 <div >
-                    <textarea name="zyys"></textarea>
+                    <textarea name="zyys"><?=$user->savant->zyys?></textarea>
                 </div>
             </li>
         </form>

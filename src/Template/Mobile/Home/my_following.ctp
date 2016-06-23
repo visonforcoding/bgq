@@ -10,11 +10,11 @@
 </header>
 <div class="wraper">
     <div class="h-add">
-        <img src="/img/add1.png" alt="" />
+        <img src="/mobile/images/add1.png" alt="" />
     </div>
      <div  class="inner my-home-menu" >
-        <a href="/home/my-following" >我的关注</a>
-        <a href="/home/my-fans" class="active">我的粉丝</a>     
+        <a href="/home/my-following" class="active">我的关注</a>
+        <a href="/home/my-fans" >我的粉丝</a>     
      </div>
             
     <div class="my-focus-box">

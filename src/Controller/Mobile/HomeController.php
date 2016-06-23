@@ -23,15 +23,16 @@ class HomeController extends AppController {
     }
 
     protected $limit = '5'; // 分页条数
-    
+
     /**
      * Index method  个人中心页
      *
      * @return \Cake\Network\Response|null
      */
+
     public function index() {
         $this->loadComponent('Wx');
-        $wxConfig = $this->Wx->wxconfig(['onMenuShareTimeline','onMenuShareAppMessage','scanQRCode']);
+        $wxConfig = $this->Wx->wxconfig(['onMenuShareTimeline', 'onMenuShareAppMessage', 'scanQRCode']);
         $user_id = $this->user->id;
         $user = $this->User->get($user_id);
         $this->set(compact('user'));
@@ -45,37 +46,25 @@ class HomeController extends AppController {
     /**
      * 个人主页
      */
-    public function homepage($id=null) {
-        $user_id = isset($id)?$id:$this->user->id;
-        $user = $this->User->get($user_id,['contain'=>['Industries'=>function($q){
-            return $q->hydrate(false)->select(['id','name']);
-        }]]);
+    public function homepage($id = null) {
+        $user_id = isset($id) ? $id : $this->user->id;
+        $user = $this->User->get($user_id, ['contain' => ['Industries' => function($q) {
+                    return $q->hydrate(false)->select(['id', 'name']);
+                }]]);
         $industries = $user->industries;
         $industry_arr = [];
-        foreach($industries as $industry){
+        foreach ($industries as $industry) {
             $industry_arr[] = $industry['name'];
         }
         $this->set([
-            'pageTitle'=>'个人主页'
+            'pageTitle' => '个人主页'
         ]);
-        $this->set(compact('user','industry_arr'));
+        $this->set(compact('user', 'industry_arr'));
     }
 
-    /**
-     * 我的活动 报名
-     */
-    public function myActivityApply() {
-        $applyTable = \Cake\ORM\TableRegistry::get('activityapply');
-        $myActivity = $applyTable->find()->contain(['Activities'])->where(['Activityapply.user_id'=>$this->user->id])->toArray();
-        if($myActivity !== false)
-        {
-            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$myActivity]);
-        }
-        else
-        {
-            return $this->Util->ajaxReturn(false, '系统错误');
-        }
-    }
+
+
+
     
     /**
      * 我的发布活动
@@ -83,12 +72,9 @@ class HomeController extends AppController {
     public function getMyActivity(){
         $ActivityTable = \Cake\ORM\TableRegistry::get('activity');
         $activities = $ActivityTable->findByUserId($this->user->id)->toArray();
-        if($activities !== false)
-        {
-            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$activities]);
-        }
-        else
-        {
+        if ($activities !== false) {
+            return $this->Util->ajaxReturn(['status' => true, 'data' => $activities]);
+        } else {
             return $this->Util->ajaxReturn(false, '系统错误');
         }
     }
@@ -101,11 +87,9 @@ class HomeController extends AppController {
         $activities = $ActivityTable->findByUserId($this->user->id)->toArray();
         $this->set([
             'activities' => $activities,
-            'pageTitle'=>'我的活动'
+            'pageTitle' => '我的活动'
         ]);
     }
-    
-    
 
     /**
      * 实名认证
@@ -125,7 +109,7 @@ class HomeController extends AppController {
             }
         }
         $this->set([
-            'pageTitle'=>'实名认证'
+            'pageTitle' => '实名认证'
         ]);
         $this->set(compact('user'));
     }
@@ -135,7 +119,7 @@ class HomeController extends AppController {
      */
     public function savantAuth() {
         $user_id = $this->user->id;
-        $user = $this->User->get($user_id);
+        $user = $this->User->get($user_id,['contain'=>['Savants']]);
         $UserTable = \Cake\ORM\TableRegistry::get('user');
         if ($this->request->is('post')) {
             $SavantTable = \Cake\ORM\TableRegistry::get('savant');
@@ -158,417 +142,400 @@ class HomeController extends AppController {
             }
         }
         $this->set([
-            'pageTitle'=>'专家认证'
+            'pageTitle' => '专家认证'
         ]);
         $this->set(compact('user'));
     }
-    
+
     /**
      * 我的关注
      */
-    public function myFollowing(){
+    public function myFollowing() {
         $user_id = $this->user->id;
         $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
-        $followings = $FansTable->find()->contain(['Followings'=>function($q){
-            return $q->select(['id','truename','company','position','avatar','fans'])
-                      ->where('enabled = 1');
-        }])->hydrate(false)
-                ->where(['user_id'=>$user_id])
-                ->toArray();
+        $followings = $FansTable->find()->contain(['Followings' => function($q) {
+                        return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
+                                ->where('enabled = 1');
+                    }])->hydrate(false)
+                        ->where(['user_id' => $user_id])
+                        ->toArray();
         $this->set([
-            'followings'=>$followings
+            'followings' => $followings,
+            'pageTitle'=>'我的关注'
         ]);
     }
-    
-    
+
     /**
      * 我的粉丝
      */
-    public function myFans(){
+    public function myFans() {
         $user_id = $this->user->id;
         $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
-        $fans = $FansTable->find()->contain(['Users'=>function($q){
-            return $q->select(['id','truename','company','position','avatar','fans'])
-                      ->where('enabled = 1');
+        $fans = $FansTable->find()->contain(['Users' => function($q) {
+                        return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
+                                ->where('enabled = 1');
         }])->hydrate(false)
-                ->where(['following_id'=>$user_id])
-                ->toArray();
+            ->where(['following_id' => $user_id])
+            ->toArray();
         $this->set([
-            'fans'=>$fans
+            'fans' => $fans,
+            'pageTitle'=>'我的粉丝'
         ]);
     }
-    
+
     /**
      * 我的关注消息
      */
-    public function myMessageFans(){
+    public function myMessageFans() {
         //查找type 为1 的消息
         $user_id = $this->user->id;
         $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
-        $unReadCount = $UsermsgTable->find()->where(['user_id'=>$user_id,'status'=>0])->count();
-        
+        $unReadCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0])->count();
+
         $fans = $UsermsgTable->find()
-                 ->hydrate(false)
-                 ->select(['u.truename','u.avatar','u.id','create_time',
-                     'u.company','u.position','u.fans','uf.type'])
-                 ->join([
-                     'u'=>[
-                         'table'=>'user',
-                         'type'=>'inner',
-                         'conditions' => 'u.id = usermsg.user_id',
-                     ],
-                     'uf'=>[
-                         'table'=>'user_fans',
-                         'type'=>'inner',
-                         'conditions' => 'uf.id = usermsg.table_id',
-                     ]
-                 ])
-                ->where("usermsg.`user_id` = '$user_id'")
-                ->orderDesc('usermsg.create_time')->toArray();
+                        ->hydrate(false)
+                        ->select(['u.truename', 'u.avatar', 'u.id', 'create_time',
+                            'u.company', 'u.position', 'u.fans', 'uf.type'])
+                        ->join([
+                            'u' => [
+                                'table' => 'user',
+                                'type' => 'inner',
+                                'conditions' => 'u.id = usermsg.user_id',
+                            ],
+                            'uf' => [
+                                'table' => 'user_fans',
+                                'type' => 'inner',
+                                'conditions' => 'uf.id = usermsg.table_id',
+                            ]
+                        ])
+                        ->where("usermsg.`user_id` = '$user_id'")
+                        ->orderDesc('usermsg.create_time')->toArray();
         //看了之后 就更改状态了为已读
-        $UsermsgTable->updateAll(['status'=>1],['user_id'=>$user_id,'status'=>0]);
+        $UsermsgTable->updateAll(['status' => 1], ['user_id' => $user_id, 'status' => 0]);
         $this->set([
-            'pageTitle'=>'关注消息'
+            'pageTitle' => '关注消息'
         ]);
-        $this->set(compact('unReadCount','fans'));
+        $this->set(compact('unReadCount', 'fans'));
     }
-    
-    
+
     /**
      * 我的系统消息
      */
-    public function myMessageSys(){
+    public function myMessageSys() {
         $user_id = $this->user->id;
         $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
-        $unReadCount = $UsermsgTable->find()->where(['user_id'=>$user_id,'status'=>0])->count();
-        $msgs = $UsermsgTable->find()->where(['user_id'=>$user_id,'type !='=>1])->toArray();
+        $unReadCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0])->count();
+        $msgs = $UsermsgTable->find()->where(['user_id' => $user_id, 'type !=' => 1])->toArray();
         $this->set([
-            'pageTitle'=>'系统消息'
+            'pageTitle' => '系统消息'
         ]);
-        $this->set(compact('msgs','unReadCount'));
+        $this->set(compact('msgs', 'unReadCount'));
     }
-
 
     /**
      * 小秘书
      */
-    public function myXiaomi(){
-        if($this->request->is('post')){
+    public function myXiaomi() {
+        if ($this->request->is('post')) {
             $user_id = $this->user->id;
             $NeedTable = \Cake\ORM\TableRegistry::get('need');
             $content = $this->request->data('content');
-            $need = $NeedTable->newEntity(['user_id'=>$user_id,'msg'=>$content]);
-            if($NeedTable->save($need)){
-                $this->Util->ajaxReturn(true,'提交成功');
-            }else{
+            $need = $NeedTable->newEntity(['user_id' => $user_id, 'msg' => $content]);
+            if ($NeedTable->save($need)) {
+                $this->Util->ajaxReturn(true, '提交成功');
+            } else {
                 $this->Util->ajaxReturn(false, '提交失败');
             }
         }
         $this->set([
-            'pageTitle'=>'小秘书'
+            'pageTitle' => '小秘书'
         ]);
     }
-    
+
     /**
      * 小秘书历史记录
      */
-    public function myHistoryNeed(){
+    public function myHistoryNeed() {
         $NeedTable = \Cake\ORM\TableRegistry::get('need');
         $user_id = $this->user->id;
-        $needs = $NeedTable->find()->where(['user_id'=>$user_id])->orderDesc('create_time')->toArray();
+        $needs = $NeedTable->find()->where(['user_id' => $user_id])->orderDesc('create_time')->toArray();
         $this->set([
-            'pageTitle'=>'小秘书历史记录'
+            'pageTitle' => '小秘书历史记录'
         ]);
         $this->set(compact('needs'));
     }
-    
-    
+
     /**
      * 活动收藏记录
      */
-    public function myCollectActivity(){
-       
-        
+    public function myCollectActivity() {
+
     }
-    
-    
+
     /**
      * 资讯收藏
      */
-    public function myCollectNews(){
+    public function myCollectNews() {
         $user_id = $this->user->id;
         $CollectTable = \Cake\ORM\TableRegistry::get('Collect');
         $collects = $CollectTable->find()->hydrate(false)
-                                 ->contain(['News'])
-                                 ->where(['is_delete'=>0,'user_id'=>$user_id])
-                                 ->orderDesc('Collect.create_time')
-                                 ->formatResults(function($items){
-                                     return $items->map(function($item){
-                                         //时间语义化转换
-                                        $item['create_str'] =$item['create_time']->timeAgoInWords(
-                                           [ 'accuracy' => [
-                                                     'year' => 'year',
-                                                     'month' => 'month',
-                                                     'hour' => 'hour'
-                                                 ],'end' => '+10 year']
-                                        );
-                                         return $item;
-                                     });
-                                 })
-                                 ->toArray();
+                ->contain(['News'])
+                ->where(['is_delete' => 0, 'user_id' => $user_id])
+                ->orderDesc('Collect.create_time')
+                ->formatResults(function($items) {
+                    return $items->map(function($item) {
+                                //时间语义化转换
+                                $item['create_str'] = $item['create_time']->timeAgoInWords(
+                                        [ 'accuracy' => [
+                                                'year' => 'year',
+                                                'month' => 'month',
+                                                'hour' => 'hour'
+                                            ], 'end' => '+10 year']
+                                );
+                                return $item;
+                            });
+                })
+                ->toArray();
         $this->set(compact('collects'));
     }
-    
+
     /**
-     * 我的约见 （我是顾客）
-     */
-    public function myBook(){
-        $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
-        $type = $this->request->query('type');
-        $where['SubjectBook.status'] =in_array($type, ['0','1','3'])?$type:0;
-        $where['SubjectBook.user_id'] = $this->user->id;
-        $books = $BookTable->find()->contain(['Subjects','Subjects.User'=>function($q){
-            return $q->select(['truename','avatar','id','company','position']);
-        }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
-        
-        $this->set(compact('books','type'));
+    * 我的约见 （我是顾客）
+    */
+    public function myBook() {
+    $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+    $type = $this->request->query('type');
+    $where['SubjectBook.status'] = in_array($type, ['0', '1', '3']) ? $type : 0;
+    $where['SubjectBook.user_id'] = $this->user->id;
+    $books = $BookTable->find()->contain(['Subjects', 'Subjects.User' => function($q) {
+                    return $q->select(['truename', 'avatar', 'id', 'company', 'position']);
+                }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
+
+            $this->set(compact('books', 'type'));
     }
-    
-    
+
     /**
      * 我的约见 我是顾客的详情
      */
-    public function myBookDetail($id=null){
+    public function myBookDetail($id = null) {
         $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
-        $book = $BookTable->get($id,[
-            'contain'=>['Users'=>function($q){
-                 return $q->select(['truename','id','avatar','company','position']);
-            },'Subjects','Lmorder']
-        ]);
-        $subject = $book->subject;
-        $this->set(compact('subject','book'));
+        $book = $BookTable->get($id, [
+            'contain' => ['Users' => function($q) {
+                    return $q->select(['truename', 'id', 'avatar', 'company', 'position']);
+                }, 'Subjects', 'Lmorder']
+                ]);
+                $subject = $book->subject;
+                $this->set(compact('subject', 'book'));
     }
- 
 
     /**
      * 我的约见 (我是专家)
      */
-    public function myBookSavant(){
+    public function myBookSavant() {
         $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
         $type = $this->request->query('type');
-        $where['SubjectBook.status'] =in_array($type, ['0','1','3'])?$type:0;
+        $where['SubjectBook.status'] = in_array($type, ['0', '1', '3']) ? $type : 0;
         $where['SubjectBook.savant_id'] = $this->user->id;
-        $books = $BookTable->find()->contain(['Subjects','Users'=>function($q){
-            return $q->select(['truename','avatar','id','company','position']);
-        }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
-        $this->set(compact('books','type'));
+        $books = $BookTable->find()->contain(['Subjects', 'Users' => function($q) {
+                        return $q->select(['truename', 'avatar', 'id', 'company', 'position']);
+                    }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
+                $this->set(compact('books', 'type'));
     }
-    
-    
-       
+
     /**
      * 我的约见 我是专家详情
      * @param type $id
      */
-    public function myBookSavantDetail($id=null){
+    public function myBookSavantDetail($id = null) {
         $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
-        $book = $BookTable->get($id,[
-            'contain'=>['Users'=>function($q){
-                 return $q->select(['truename','id','avatar','company','position','phone','email']);
-            },'Subjects','Users.Industries']
-        ]);
-        $subject = $book->subject;
-        $this->set(compact('subject','book'));
+        $book = $BookTable->get($id, [
+            'contain' => ['Users' => function($q) {
+                    return $q->select(['truename', 'id', 'avatar', 'company', 'position', 'phone', 'email']);
+                }, 'Subjects', 'Users.Industries']
+                ]);
+                $subject = $book->subject;
+                $this->set(compact('subject', 'book'));
     }
-    
-    
+
     /**
-     * 同意约见 约见状态更改->生成一条订单(目前对前台用户暂时没作用)
-     */
-    public function bookOk(){
-        if($this->request->is('post')){
+    * 同意约见 约见状态更改->生成一条订单(目前对前台用户暂时没作用)
+    */
+    public function bookOk() {
+        if ($this->request->is('post')) {
             $id = $this->request->data('id'); //book id
             $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
-            $book = $BookTable->get($id,[
-                'contain'=>[
+            $book = $BookTable->get($id, [
+                'contain' => [
                     'Subjects',
                     'Users'
                 ]
-            ]);
-            $book->status = 1; //更改
-            $OrderTable = \Cake\ORM\TableRegistry::get('order');
-            $order = $OrderTable->newEntity([
-                'type'=>1,
-                'relate_id'=>$id,   //预定表的id
-                'user_id'=>  $book->user_id,
-                'seller_id'=> $book->savant_id,
-                'order_no'=>  time().$book->user_id.$id.  createRandomCode(2,2),
-                'price'=>  $book->subject->price,
-                'remark'=>'预约话题'.$book->subject->title
-            ]);
-            $transRes = $BookTable->connection()->transactional(function()use($book, $BookTable, $order, $OrderTable) {
-                return $BookTable->save($book)&&$OrderTable->save($order);
-            });
-            if ($transRes) {
-                //短信和消息通知
-                $this->loadComponent('Sms');
-                $msg = "您预约的话题：《".$book->subject->title."》已确认通过，请及时登录平台支付预约款。";
-                $this->Sms->sendByQf106($book->user->phone, $msg);
-                $this->loadComponent('Business');
-                $this->Business->usermsg($book->user_id,'预约通知',$msg, 4, $id);
-                $this->Util->ajaxReturn(true,'处理成功!');
-            }else{
-                $this->Util->ajaxReturn(false,'服务器出错!');
+        ]);
+        $book->status = 1; //更改
+        $OrderTable = \Cake\ORM\TableRegistry::get('order');
+        $order = $OrderTable->newEntity([
+            'type' => 1,
+            'relate_id' => $id, //预定表的id
+            'user_id' => $book->user_id,
+            'seller_id' => $book->savant_id,
+            'order_no' => time() . $book->user_id . $id . createRandomCode(2, 2),
+            'price' => $book->subject->price,
+            'remark' => '预约话题' . $book->subject->title
+        ]);
+        $transRes = $BookTable->connection()->transactional(function()use($book, $BookTable, $order, $OrderTable) {
+            return $BookTable->save($book) && $OrderTable->save($order);
+        });
+        if ($transRes) {
+            //短信和消息通知
+            $this->loadComponent('Sms');
+            $msg = "您预约的话题：《" . $book->subject->title . "》已确认通过，请及时登录平台支付预约款。";
+            $this->Sms->sendByQf106($book->user->phone, $msg);
+            $this->loadComponent('Business');
+            $this->Business->usermsg($book->user_id, '预约通知', $msg, 4, $id);
+            $this->Util->ajaxReturn(true, '处理成功!');
+        } else {
+            $this->Util->ajaxReturn(false, '服务器出错!');
             }
         }
     }
 
-
-
-    /***
+    /*                                                             * *
      * 我的钱包
      */
-    public function myPurse(){
+
+    public function myPurse() {
         $user_id = $this->user->id;
         $userInfo = $this->User->get($user_id);
         $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
-        $flows = $FlowTable->find()->where(['user_id'=>$user_id,'status'=>'1'])->orderDesc('create_time')->toArray();
+        $flows = $FlowTable->find()->where(['user_id' => $user_id, 'status' => '1'])->orderDesc('create_time')->toArray();
         $this->set(array(
-            'userInfo'=>$userInfo,
-            'flows'=>$flows
+            'userInfo' => $userInfo,
+            'flows' => $flows
         ));
     }
-    
+
     /**
      * 提现
      */
-    public function withdraw(){
+    public function withdraw() {
         $user_id = $this->user->id;
         $userInfo = $this->User->get($user_id);
-        if($this->request->isAjax()){
-            $amount =  $this->request->data('amount');
-            $bank =  $this->request->data('bank');
-            $cardno =  $this->request->data('cardno');
-            if($amount>$userInfo->money){
-                return $this->Util->ajaxReturn(false,'提现金额不能大于钱包余额');
+        if ($this->request->isAjax()) {
+            $amount = $this->request->data('amount');
+            $bank = $this->request->data('bank');
+            $cardno = $this->request->data('cardno');
+            if ($amount > $userInfo->money) {
+                return $this->Util->ajaxReturn(false, '提现金额不能大于钱包余额');
             }
             $WithdrawTable = \Cake\ORM\TableRegistry::get('Withdraw');
             $withdraw = $WithdrawTable->newEntity([
-                'user_id'=>$user_id,
-                'amount'=>  $amount,
-                'cardno'=> $cardno,
-                'truename'=>$userInfo->truename,
-                'bank'=>$bank,
+                'user_id' => $user_id,
+                'amount' => $amount,
+                'cardno' => $cardno,
+                'truename' => $userInfo->truename,
+                'bank' => $bank,
             ]);
-            if($WithdrawTable->save($withdraw)){
-               return $this->Util->ajaxReturn(true,'提现申请成功');
-            }else{
+            if ($WithdrawTable->save($withdraw)) {
+                return $this->Util->ajaxReturn(true, '提现申请成功');
+            } else {
                 \Cake\Log\Log::error($withdraw->errors());
-               return $this->Util->ajaxReturn(false,'提现申请失败');
+                return $this->Util->ajaxReturn(false, '提现申请失败');
             }
         }
         $this->set(compact('userInfo'));
     }
-    
+
     /**
      * 隐私设置
      */
-    public function mySecret(){
-        
+    public function mySecret() {
+
     }
-    
+
     /**
      * 设置
      */
-    public function myInstall(){
+    public function myInstall() {
         $this->set([
-            'pageTitle'=>'设置'
-        ]);
-    }
-    
-    /**
-     * 修改个人信息
-     */
-    public function editUserinfo(){
-        $user_id = $this->user->id;
-        $user = $this->User->get($user_id);
-        if($this->request->is('post')){
-            $user = $this->User->patchEntity($user,  $this->request->data());
-            if($this->User->save($user)){
-                return $this->Util->ajaxReturn(true,'保存成功');
-            }else{
-                return $this->Util->ajaxReturn(false,'保存失败');
-            }
-        }
-        $this->set([
-            'user'=>$user,
-            'pageTitle'=>'个人信息'
-        ]);
-    }
-    
-    /**
-     * 擅长业务
-     */
-    public function myBusiness(){
-        $this->set([
-            'pageTitle'=>'擅长业务'
+            'pageTitle' => '设置'
         ]);
     }
 
-    
-    public function cardcase(){
+    /**
+     * 修改个人信息
+     */
+    public function editUserinfo() {
+        $user_id = $this->user->id;
+        $user = $this->User->get($user_id);
+        if ($this->request->is('post')) {
+            $user = $this->User->patchEntity($user, $this->request->data());
+            if ($this->User->save($user)) {
+                return $this->Util->ajaxReturn(true, '保存成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '保存失败');
+            }
+        }
+        $this->set([
+            'user' => $user,
+            'pageTitle' => '个人信息'
+        ]);
+    }
+
+    /**
+     * 擅长业务
+     */
+    public function myBusiness() {
+        $this->set([
+            'pageTitle' => '擅长业务'
+        ]);
+    }
+
+    public function cardcase() {
         $this->handCheckLogin();
         $card = $this
                 ->User
                 ->CardBoxes
                 ->find()
                 ->contain(['OtherCard'])
-                ->where(['ownerid'=>$this->user->id, 'resend'=>'2'])
+                ->where(['ownerid' => $this->user->id, 'resend' => '2'])
                 ->orderDesc('CardBoxes.`create_time`')
                 ->limit($this->limit)
                 ->toArray();
-//        debug($card);die;
         $this->set('cardjson', json_encode($card));
     }
-    
-    public function getCrad($resend){
+
+    public function getCrad($resend) {
         $card = $this
                 ->User
                 ->CardBoxes
                 ->find()
                 ->contain(['OtherCard'])
-                ->where(['ownerid'=>$this->user->id, 'resend'=>$resend])
+                ->where(['ownerid' => $this->user->id, 'resend' => $resend])
                 ->orderDesc('CardBoxes.`create_time`')
                 ->limit($this->limit)
                 ->toArray();
-        if($card !== false)
-        {
-            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$card]);
-        }
-        else
-        {
+        if ($card !== false) {
+            return $this->Util->ajaxReturn(['status' => true, 'data' => $card]);
+        } else {
             return $this->Util->ajaxReturn(false, '系统错误');
         }
     }
-    
-    public function sendBack($id){
+
+    public function sendBack($id) {
         $sendMe = $this
                 ->User
                 ->CardBoxes
                 ->find()
-                ->where(['ownerid'=>$this->user->id, 'uid'=>$id])
+                ->where(['ownerid' => $this->user->id, 'uid' => $id])
                 ->first();
         $sendMe = $this->User->CardBoxes->get($sendMe->id);
         $sendMe->resend = 1;
         $res = $this->User->CardBoxes->save($sendMe);
-        if($res)
-        {
+        if ($res) {
             return $this->Util->ajaxReturn(true, '回赠成功');
-        }
-        else
-        {
+        } else {
             return $this->Util->ajaxReturn(false, '回赠失败');
         }
     }
 
 }
+                                                        

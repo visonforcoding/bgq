@@ -8,11 +8,26 @@
 </header>
 <div class="m-wraper m-fixed-bottom wraper">
     <div class="h-home-bottom">
-        <div><span><img src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : $user->avatar ?>"/></span><i class="iconfont">&#xe61e;</i></div>
-        <h3><?= $user->truename ?><span><?= $user->company ?> <?= $user->position ?></span></h3>
+        <div>
+            <a href="<?php if($self): ?>/home/edit-userinfo<?php else:?>javascript:void(0)<?php endif;?>">
+                <span><img src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : $user->avatar ?>"/></span>
+                <i class="iconfont">&#xe61e;</i></div>
+            </a>
+        <h3>
+            <?= $user->truename ?><span><?= $user->company ?> <?= $user->position ?></span>
+        </h3>
         <h4>
-            <a href="javascript:void(0);" id="follow_btn" class="tofocus-m"><span>+关注</span></a>
-            <a href="javascript:void(0);" class="tofocus-m"><span>递名片</span></a>
+            <?php if(!$self):?>
+            <?php if ($isFans): ?>
+                <a href="javascript:void(0);" id="follow_btn_disable" class="tofocus-m">
+                    <span>√已关注</span>
+                <?php else: ?>
+                    <a href="javascript:void(0);" id="follow_btn" data-id="<?= $user->id ?>" class="tofocus-m">
+                        <span>+关注</span>
+                    <?php endif; ?>
+                </a>
+                <a href="javascript:void(0);" class="tofocus-m"><span>递名片</span></a>
+            <?php endif;?>
         </h4>
     </div>
     <ul class="h-info-box">
@@ -48,13 +63,13 @@
             </li>
         </ul>
     <?php endif; ?>
-    <?php if($self):?>
-    <ul class="h-info-box">
-        <li class="no-b-border">
-            <a href="/home/edit-userinfo">编辑</a>
-        </li>
-    </ul>
-    <?php endif;?>
+    <?php if ($self): ?>
+        <ul class="h-info-box">
+            <li class="no-b-border">
+                <a href="/home/edit-userinfo">编辑</a>
+            </li>
+        </ul>
+    <?php endif; ?>
 </div>
 <?php $this->start('script') ?>
 <script>

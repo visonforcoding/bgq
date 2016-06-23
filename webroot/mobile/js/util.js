@@ -82,7 +82,8 @@ $.util = {
             500:function(){$.util.alert('服务器出错');}
         };
         obj.error = function(XMLHttpRequest, textStatus, errorThrown){
-          $.util.alert('服务器错误了');  
+          $.util.alert('服务器出错');
+          console.log(errorThrown);
         };
         $.ajax(obj);
     },
