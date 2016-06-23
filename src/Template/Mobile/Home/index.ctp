@@ -45,7 +45,7 @@
     </div>
 </div>
 <div class="submitbtn">
-    <a href="release-activity.html"><img src="/mobile/images/ms.png"/></a>
+    <a href="/home/my_xiaomi"><img src="/mobile/images/ms.png"/></a>
 </div>
 <?= $this->element('footer') ?>
 <?php $this->start('script') ?>

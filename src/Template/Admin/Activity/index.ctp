@@ -98,19 +98,28 @@
                     response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="编辑" href="/admin/activity/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
-                    if (rowObject.is_top == 0 && rowObject.is_check == 1)
-                    {
+                    if (rowObject.is_top == 0 && rowObject.is_check == 1) {
                         response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
-                    } else if (rowObject.is_top == 1 && rowObject.is_check == 1)
-                    {
+                        response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onmouseover="oncode(' + rowObject.id + ');" onmouseout="outcode(' + rowObject.id + ')"><i class="icon icon-qrcode"></i><div hidden id="' + rowObject.id + '" style="position:absolute;top:0;"><img src="' + rowObject.qrcode + '" /></div> </a>';
+                    } else if (rowObject.is_top == 1 && rowObject.is_check == 1) {
                         response += '<a title="取消置顶" href="javascript:void(0)" class="grid-btn untop" onclick="untop(' + rowObject.id + ')"><i class="icon icon-long-arrow-down"></i></a>';
+                        response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn"><i class="icon icon-qrcode"></i> </a>';
                     }
-                    if (rowObject.is_check == 0)
-                    {
+                    if (rowObject.is_check == 0) {
                         response += '<a title="发布" href="javascript:void(0)" class="grid-btn release" onclick="release(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
                         response += '<a title="未通过审核" href="javascript:void(0)" class="grid-btn unrelease" onclick="unrelease(' + rowObject.id + ')"><i class="icon icon-times"></i></a>';
                     }
                     return response;
+                }
+                
+                function oncode(id){
+                    var a = '#'+id;
+                    $(a).show();
+                }
+                
+                function outcode(id){
+                    var a = '#'+id;
+                    $(a).hide();
                 }
 
                 function istop(id) {
