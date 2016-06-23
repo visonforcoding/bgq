@@ -698,6 +698,7 @@ class ActivityController extends AppController {
             $this->set('res', '未报名或者未通过审核');
         }
         $apply = $this->Activity->Activityapply->get($is_apply->id);
+        debug($apply);die;
         if($apply->is_sign == 1)
         {
             $this->set('res', '您已经签到了，请勿重复扫码');
