@@ -711,10 +711,8 @@ class ActivityController extends AppController {
     }
     
     public function test(){
-        $a = $this->request->session();
-        $b = $a->read();
-        debug($b);die;
+        $a = $this->request;
+        debug($a);die;
     }
 
 }
-        
