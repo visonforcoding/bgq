@@ -78,6 +78,10 @@
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
+                        if($.util.isAPP){
+                            $.util.setCookie('token_uin',msg.token_uin,10*365*24*60);
+                            LEMON.db.set('token_uin',msg.token_uin);
+                        }
                         window.location.href = msg.redirect_url;
                     } else {
                         alert(msg.msg);
