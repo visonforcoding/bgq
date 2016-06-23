@@ -274,7 +274,7 @@ class HomeController extends AppController {
      * 活动收藏记录
      */
     public function myCollectActivity() {
-
+        $this->set('pageTitle', '活动收藏');
     }
 
     /**
@@ -302,6 +302,7 @@ class HomeController extends AppController {
                 })
                 ->toArray();
         $this->set(compact('collects'));
+        $this->set('pageTitle', '资讯收藏');
     }
 
     /**
@@ -460,7 +461,7 @@ class HomeController extends AppController {
      * 隐私设置
      */
     public function mySecret() {
-
+        $this->set('pageTitle', '隐私策略');
     }
 
     /**
@@ -501,6 +502,9 @@ class HomeController extends AppController {
         ]);
     }
 
+    /**
+     * 名片夹
+     */
     public function cardcase() {
         $this->handCheckLogin();
         $card = $this
@@ -513,8 +517,13 @@ class HomeController extends AppController {
                 ->limit($this->limit)
                 ->toArray();
         $this->set('cardjson', json_encode($card));
+        $this->set('pageTitle' ,'名片夹');
     }
 
+    /**
+     * 名片夹是否回赠
+     * @param int $resend
+     */
     public function getCrad($resend) {
         $card = $this
                 ->User
@@ -532,6 +541,10 @@ class HomeController extends AppController {
         }
     }
 
+    /**
+     * 回赠动作
+     * @param int $id
+     */
     public function sendBack($id) {
         $sendMe = $this
                 ->User

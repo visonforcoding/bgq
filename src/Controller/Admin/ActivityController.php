@@ -271,6 +271,13 @@ class ActivityController extends AppController {
         // 生成二维码
         $savePath = $folder.'/'.time().$id.'.png';
         \PHPQRCode\QRcode::png('http://'. $this->request->env('HTTP_HOST') . '/activity/sign/'.$id, $savePath);
+        $activity = $this->Activity->get($id);
+        $activity->qrcode = $savePath;
+        $res = $this->Activity->save($activity);
+        if(!$res)
+        {
+            return $this->Util->ajaxReturn(false, '发布失败');
+        }
         return $this->Util->ajaxReturn(true, '发布成功');
     }
 
