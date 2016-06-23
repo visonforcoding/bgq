@@ -142,7 +142,7 @@ class MeetController extends AppController {
 
     /**
      * 主题详情页 ->预约操作
-     * @param type $id
+     * @param int $id
      */
     public function subjectDetail($id = null) {
         $SubjectTable = \Cake\ORM\TableRegistry::get('MeetSubject');
@@ -210,13 +210,6 @@ class MeetController extends AppController {
      * 预定成功页
      */
     public function bookSuccess(){
-        
-    }
-
-    /**
-     * 预约
-     */
-    public function meet() {
         
     }
     

@@ -90,11 +90,11 @@ class WxComponent extends Component {
             $appid = $wxconfig['AppID'];
             $app_secret = $wxconfig['AppSecret'];
         }
-        \Cake\Log\Log::debug($code);
+        \Cake\Log\Log::debug($code,'devlog');
         $wx_accesstoken_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $appid . '&secret=' . $app_secret .
                 '&code=' . $code . '&grant_type=authorization_code';
         $response = $httpClient->get($wx_accesstoken_url);
-        \Cake\Log\Log::debug($response);
+        \Cake\Log\Log::debug($response,'devlog');
         if ($response->isOk()) {
             $open_id = json_decode($response->body())->openid;
             if($isApp){
@@ -106,7 +106,7 @@ class WxComponent extends Component {
                 //该接口地址能获取到union_id
             }
             $res = $httpClient->get($wx_user_url);
-            \Cake\Log\Log::debug($res);
+            \Cake\Log\Log::debug($res,'devlog');
             if ($res->isOk()) {
                 return json_decode($res->body());
             } else {
@@ -121,7 +121,7 @@ class WxComponent extends Component {
      * 获取accessToken
      */
     public function getAccessToken() {
-        \Cake\Log\Log::debug('获取普通accessToken','devlog');
+        \Cake\Log\Log::notice('获取普通accessToken','devlog');
         $access_token = \Cake\Cache\Cache::read(self::TOKEN_NAME);
         $url = self::WEIXIN_API_URL . 'token?grant_type=client_credential&appid=' . $this->app_id . '&secret=' . $this->app_secret;
         if (is_array($access_token)) {
@@ -129,7 +129,7 @@ class WxComponent extends Component {
             \Cake\Log\Log::debug('access_token过期:'.$isExpires,'devlog');
         }
         if ($access_token === false || $isExpires) {
-            \Cake\Log\Log::debug('微信接口token重新请求','devlog');
+            \Cake\Log\Log::error('微信接口token重新请求','devlog');
             $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
             $response = $httpClient->get($url);
             if ($response->isOk()) {

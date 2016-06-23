@@ -13,8 +13,8 @@
 </header>
 <div class="wraper">
     <div class="inner my-home-menu m-message-top" >
-        <a href="my-message-focus.html" class="active">新的关注<i>2</i></a>
-        <a href="my-message-system.html">系统消息<i>3</i></a>
+        <a href="/home/my-message-fans" class="active">新的关注<i><?=$unReadFollowCount?></i></a>
+        <a href="/home/my-message-sys">系统消息<i><?=$unReadSysCount?></i></a>
      </div>
     <div id='follow'></div>
 </div>
