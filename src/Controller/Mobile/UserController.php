@@ -210,7 +210,12 @@ class UserController extends AppController {
                 //  if (time() - $vcode['time'] < 60 * 10) {
                 //10分钟验证码超时
                 $this->request->session()->write('User.mobile', $user);
-                return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url]);
+                $user_token = false;
+                if($this->request->is('lemon')){
+                    $this->request->session()->write('Login.login_token',$user->user_token);
+                    $user_token = $user->user_token;
+                }
+                return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,'token_uin'=>$user_token]);
                 //    } else {
                 //        $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
                 //     }
