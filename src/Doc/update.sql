@@ -224,4 +224,4 @@ ALTER TABLE activity add share_desc VARCHAR(100) COMMENT '分享描述';
 ALTER TABLE activity add is_top TINYINT(2) DEFAULT 0 COMMENT '是否置顶';
 
 #活动增加二维码路径
-ALTER TABLE activity add qrcode VARCHAR(30) COMMENT '签到二维码';
+ALTER TABLE activity add qrcode VARCHAR(200) COMMENT '签到二维码';
