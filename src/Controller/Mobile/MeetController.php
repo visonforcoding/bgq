@@ -52,6 +52,7 @@ class MeetController extends AppController {
                 ->limit($this->limit)
                 ->toArray();
         $this->set('meetjson', json_encode($users));
+        $this->set('pageTitle', '大咖首页');
     }
     
     /**
