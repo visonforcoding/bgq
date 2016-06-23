@@ -148,17 +148,18 @@
                 //无参数 只用到callback
                 case 'login.wx':
                 case "event.getLocation":
-                case "event.uploadPhoto":
-                    registerAPI(null, api, function () {
-                        JSApiInvoke(api, {}, apiCallback(arguments[0]));
-                    });
-                    break;
                 case "event.reuploadPhoto":
                     registerAPI(null, api, function () {
                         window.reuploadPhotoCB = arguments[0];
                         return JSApiInvoke(api, {}, '');
                         //var re = JSON.parse(JSApiInvoke(api, {}, '', 'string'));
                         //return re.data;
+                    });
+                    break;
+                //有参数 有callback
+                case "event.uploadPhoto":
+                    registerAPI(null, api, function () {
+                        JSApiInvoke(api, {param:arguments[0]}, apiCallback(arguments[1]));
                     });
                     break;
                 case "share.banner":
