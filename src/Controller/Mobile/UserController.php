@@ -23,7 +23,7 @@ class UserController extends AppController {
     public function homePage($id=null) {
         $self = false;
         if(empty($id)){
-            //自己差看自己的
+            //自己看自己的
             $this->handCheckLogin();
             $id = $this->user->id;
             $self = true;
@@ -36,9 +36,16 @@ class UserController extends AppController {
         foreach($industries as $industry){
             $industry_arr[] = $industry['name'];
         }
+        $isFans = false;
+        if($this->user){
+            $user_id = $this->user->id;
+            $FansTable = \Cake\ORM\TableRegistry::get('UserFans');
+            $isFans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$id'")->count();
+        }
         $this->set([
             'pageTitle'=>'个人主页',
-            'self'=>$self
+            'self'=>$self,
+            'isFans'=>$isFans
         ]);
         $this->set(compact('user','industry_arr'));
     }
@@ -318,14 +325,13 @@ class UserController extends AppController {
         ]);
     }
 
-    /*     * *
+    /**
      * 关注动作
+     * @return type
      */
-
     public function follow() {
         $this->handCheckLogin();
         if ($this->request->is('post')) {
-
             $following_id = $this->request->data('id');
             $user_id = $this->user->id;
             $FansTable = \Cake\ORM\TableRegistry::get('user_fans');

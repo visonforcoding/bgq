@@ -109,7 +109,6 @@ class AppController extends Controller {
      */
     protected function handCheckLogin() {
         $user = $this->request->session()->check('User.mobile');
-        \Cake\Log\Log::debug($user);
         $url = '/'.$this->request->url;
         if($this->request->isLemon()&&$this->request->cookie('token_uin')&&!$user){
             //如果是APP，获取user_token 自动登录
@@ -128,8 +127,8 @@ class AppController extends Controller {
                 $this->autoRender = false;
                 $this->response->type('json');
                 $this->response->body(json_encode(['status' => false, 'msg' => '请先登录', 'code' => 403,'redirect_url'=>$login_url]));
-                $this->response->stop();
-                return;
+                $this->response->send();
+                return $this->response->stop();
             }
             return $this->redirect('/user/login?redirect_url='.$url);
             //header("location:".'/user/login');

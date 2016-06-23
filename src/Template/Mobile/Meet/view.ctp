@@ -23,17 +23,16 @@
             <span class="identification"><i>实名认证</i><i>专家认证</i></span>
         </li>
         <li>
-            <span class="commendnum">
+            <span  class="commendnum">
 
                 <p><i class="iconfont">&#xe615;</i>
-                    <img src="../images/user.png"/><img src="../images/user.png"/><img src="../images/user.png"/>
-                    <img src="../images/user.png"/><img src="../images/user.png"/><img src="../images/user.png"/>
-                    <img src="../images/user.png"/></p>
+                    <img src="/mobile/images/user.png"/><img src="/mobile/images/user.png"/><img src="/mobile/images/user.png"/>
+                    <img src="/mobile/images/user.png"/><img src="/mobile/images/user.png"/><img src="/mobile/images/user.png"/>
+                    <img src="/mobile/images/user.png"/></p>
                 等<i>64</i>人推荐</span>
             <a href="javascript:void(0);">推荐他</a>
         </li>
-        <li class="conr"><a href="/meet/homepage/<?= $biggie->id ?>" class="tohome"><i class="iconfont">&#xe60d;</i>个人主页</a></li>
-
+        <li class="conr"><a class="alink" href="/user/home-page/<?= $biggie->id ?>" class="tohome"><i class="iconfont">&#xe60d;</i>个人主页</a></li>
     </ul>
     <div class="m-swiper-items">
         <ul id="subject">
@@ -73,7 +72,6 @@
 </div>
 </div>
 <!--底部四个图-->
-
 <div class="iconlist">
         <!--<span class="iconfont">&#xe618;</span>-->
     <span class="iconfont <?php if(!$isCollect): ?>active<?php endif; ?>" id="collect">&#xe610;</span>
@@ -91,7 +89,6 @@
         title: '<?= $biggie->truename ?>',
         desc: '<?= $biggie->summary ?>'
     };
-
     var subject = null;
     setTimeout(function(){
         subject = $.util.loop({
@@ -104,7 +101,6 @@
 
         });
     }, 0);
-
     $('body').on('tap', function(e){
         var target = e.srcElement || e.target, em=target, i=1;
         while(em && !em.id && i<=3){ em = em.parentNode; i++;}

@@ -119,8 +119,7 @@ class MeetController extends AppController {
     public function view($id = null) {
         $isCollect = '';
         // 是否已收藏
-        if($this->user)
-        {
+        if ($this->user) {
             $isCollect = $this
                     ->User
                     ->Collect
@@ -136,7 +135,8 @@ class MeetController extends AppController {
         $this->set('isCollect', $isCollect);
         $biggie = $this->User->get($id, ['contain' => ['Savant', 'Subjects']]);
         $this->set([
-            'biggie' => $biggie
+            'biggie' => $biggie,
+            'pageTitle'=>$biggie->truename.'的专家主页'
         ]);
     }
 

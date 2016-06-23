@@ -168,8 +168,8 @@ Request::addDetector('tablet', function ($request) {
     $detector = new \Detection\MobileDetect();
     return $detector->isTablet();
 });
-Request::addDetector('weixin',['env' => 'HTTP_USER_AGENT', 'pattern' => '/MicroMessenger/i']);
-Request::addDetector('lemon',['env' => 'HTTP_USER_AGENT', 'pattern' => '/smartlemon/i']);
+Request::addDetector('weixin', ['env' => 'HTTP_USER_AGENT', 'pattern' => '/MicroMessenger/i']);
+Request::addDetector('lemon', ['env' => 'HTTP_USER_AGENT', 'pattern' => '/smartlemon/i']);
 
 /**
  * Custom Inflector rules, can be set to correctly pluralize or singularize
@@ -209,8 +209,9 @@ if (Configure::read('debug')) {
 Log::config('devlog', [
     'className' => 'Cake\Log\Engine\FileLog',
     'path' => LOGS,
-    'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
-    'file' => 'error',
+    'levels' => [],
+    'scopes' => ['devlog'],
+    'file' => 'devlog',
 ]);
 
 /**
@@ -242,7 +243,7 @@ Plugin::load('Wpadmin', ['bootstrap' => true, 'routes' => true]);
 Configure::load('wpadmin');
 Configure::load('dataconf');
 Configure::load('proj_conf');
-require_once  dirname(__FILE__) . '/function.php';  //引入全局函数文件
+require_once dirname(__FILE__) . '/function.php';  //引入全局函数文件
 
 
 
