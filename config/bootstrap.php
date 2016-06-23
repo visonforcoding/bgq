@@ -205,6 +205,13 @@ if (Configure::read('debug')) {
         'scopes' => ['queriesLog']
     ]);
 }
+//开发调试文件
+Log::config('devlog', [
+    'className' => 'Cake\Log\Engine\FileLog',
+    'path' => LOGS,
+    'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
+    'file' => 'error',
+]);
 
 /**
  * Connect middleware/dispatcher filters.

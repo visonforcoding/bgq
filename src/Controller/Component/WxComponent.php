@@ -121,14 +121,15 @@ class WxComponent extends Component {
      * 获取accessToken
      */
     public function getAccessToken() {
+        \Cake\Log\Log::debug('获取普通accessToken','devlog');
         $access_token = \Cake\Cache\Cache::read(self::TOKEN_NAME);
         $url = self::WEIXIN_API_URL . 'token?grant_type=client_credential&appid=' . $this->app_id . '&secret=' . $this->app_secret;
         if (is_array($access_token)) {
             $isExpires = ($access_token['expires_in']-time())<2200 ? true : false;
+            \Cake\Log\Log::debug('access_token过期:'.$isExpires,'devlog');
         }
-        $isExpires = true;
         if ($access_token === false || $isExpires) {
-            \Cake\Log\Log::debug('微信接口token重新请求');
+            \Cake\Log\Log::debug('微信接口token重新请求','devlog');
             $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
             $response = $httpClient->get($url);
             if ($response->isOk()) {
