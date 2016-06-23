@@ -134,7 +134,7 @@ class WxComponent extends Component {
             $response = $httpClient->get($url);
             if ($response->isOk()) {
                 $body = json_decode($response->body());
-                \Cake\Log\Log::debug($body);
+                \Cake\Log\Log::debug($body,'devlog');
                 if (!property_exists($body, 'access_token')) {
                     \Cake\Log\Log::error($response);
                     return false;
@@ -142,7 +142,7 @@ class WxComponent extends Component {
                 $token = $body->access_token;
                 $expires = $body->expires_in;
                 $expires = time() + $expires;
-                \Cake\Log\Log::debug($body);
+                \Cake\Log\Log::debug($body,'devlog');
                 \Cake\Cache\Cache::write(self::TOKEN_NAME, [
                     'access_token' => $token,
                     'expires_in' => $expires,
