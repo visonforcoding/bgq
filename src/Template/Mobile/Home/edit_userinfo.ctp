@@ -26,7 +26,7 @@
             <a href="javascript:void(0)">
                 <span>姓名：</span>
                 <div>
-                    <input type="truename" value="<?=$user->truename?>" />
+                    <input type="truename" readonly value="<?=$user->truename?>" />
                 </div>
             </a>
         </li>
@@ -50,7 +50,7 @@
             <a href="javascript:void(0)">
                 <span>联系电话：</span>
                 <div>
-                    <input type="phone" value="<?=$user->phone?>" />
+                    <input type="phone" readonly value="<?=$user->phone?>" />
                 </div>
             </a>
         </li>
@@ -90,7 +90,6 @@
             <a href="/home/my-business">
                 <span>擅长业务：</span>
                 <div>
-
                     <span></span>
                 </div>
             </a>
@@ -99,7 +98,6 @@
             <a href="edit-company-business.html">
                 <span>公司业务：</span>
                 <div>
-
                     <span></span>
                 </div>
             </a>
@@ -126,7 +124,6 @@
                 <span>我的名片：</span>
                 <div class="upload-user-img">
                     <span><input type="file"/></span>
-
                 </div>
             </a>
         </li>
