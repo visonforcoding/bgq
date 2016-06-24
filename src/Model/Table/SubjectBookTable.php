@@ -33,7 +33,7 @@ class SubjectBookTable extends Table {
         $this->hasOne('Lmorder',[
             'className'=>'Order',
             'foreignKey'=>'relate_id',
-            'joinType'=>'INNER'
+            'joinType'=>'LEFT'
         ]);
         $this->belongsTo('Subjects', [
             'className' => 'MeetSubject',
