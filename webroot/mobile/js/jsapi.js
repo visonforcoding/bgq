@@ -83,6 +83,8 @@
         "env.hasQQ",
         "env.hasWX",
         'login.wx',
+        'pay.wx',
+        'pay.ali',
         "event.getLocation",
         "event.tel",
         "event.uploadPhoto",
@@ -157,6 +159,8 @@
                     });
                     break;
                 //有参数 有callback
+                case 'pay.wx':
+                case 'pay.ali':
                 case "event.uploadPhoto":
                     registerAPI(null, api, function () {
                         JSApiInvoke(api, {param:arguments[0]}, apiCallback(arguments[1]));
