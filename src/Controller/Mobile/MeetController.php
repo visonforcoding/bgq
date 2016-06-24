@@ -467,4 +467,8 @@ class MeetController extends AppController {
         }
     }
     
+    public function moreIndustries(){
+        
+    }
+    
 }

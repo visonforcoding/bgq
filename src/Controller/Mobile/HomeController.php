@@ -63,7 +63,7 @@ class HomeController extends AppController {
     }
 
     /**
-     * 我的活动 报名
+     * ajax获取我的活动 报名
      */
     public function myActivityApply() {
         $applyTable = \Cake\ORM\TableRegistry::get('activityapply');
@@ -79,7 +79,7 @@ class HomeController extends AppController {
     }
     
     /**
-     * 我的发布活动
+     * ajax获取我的发布活动
      */
     public function getMyActivity(){
         $ActivityTable = \Cake\ORM\TableRegistry::get('activity');
