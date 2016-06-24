@@ -29,7 +29,7 @@ class NewsController extends AppController {
             return $this->Wx->getUserJump(true);
         }
         $news = $this->News->find()
-                        ->contain(['Admins', 'Industries'])
+                        ->contain(['Users', 'Industries'])
                         ->limit($this->newslimit)->orderDesc('News.create_time')->toArray();
         //获取资讯banner图
         $bannerTable = \Cake\ORM\TableRegistry::get('banner');
@@ -46,7 +46,7 @@ class NewsController extends AppController {
      */
     public function getMoreNews($page) {
         $news = $this->News->find()
-                        ->contain(['Admins', 'Industries'])->page($page, $this->newslimit)
+                        ->contain(['Users', 'Industries'])->page($page, $this->newslimit)
                         ->orderDesc('News.create_time')->toArray();
         if ($news) {
             return $this->Util->ajaxReturn(['status' => true, 'data' => $news]);
@@ -119,7 +119,7 @@ class NewsController extends AppController {
         if(!empty($this->user)){
             $user_id = $this->user->id;
             $news = $this->News->get($id, [
-                'contain' => ['Admins', 'Comments'=>function($q){
+                'contain' => ['Users', 'Comments'=>function($q){
                         return $q->orderDesc('Comments.create_time')->limit($this->newslimit);
                 },'Comments.Users'=>function($q){
                         return $q->select(['id','avatar','truename','company','position']);
@@ -137,7 +137,7 @@ class NewsController extends AppController {
             $isCollect = $collectTable->find()->where(['user_id'=>$user_id, 'relate_id'=>$id, 'type'=>1, 'is_delete'=>0])->toArray();
         }else{
             $news = $this->News->get($id, [
-                'contain' => ['Admins', 'Comments'=>function($q){
+                'contain' => ['Users', 'Comments'=>function($q){
                         return $q->orderDesc('Comments.create_time')->limit($this->newslimit);
                 },'Comments.Users'=>function($q){
                         return $q->select(['id','avatar','truename','company','position']);

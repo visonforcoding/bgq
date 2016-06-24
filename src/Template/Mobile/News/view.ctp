@@ -39,7 +39,7 @@
                 <?php foreach ($news->savants as $k => $v): ?>
                     <li>
                         <a href="javascript:void(0)">
-                            <img src="<?= $v['user']['avatar'] ?>" alt="<?= $v['user']['truename'] ?>" />
+                            <img src="<?= $v['user']['avatar'] ? $v['user']['avatar'] : '/mobile/images/touxiang.png' ?>" alt="<?= $v['user']['truename'] ?>" />
                             <h3><?= $v['user']['truename'] ?><span><?= $v['user']['company'] ?> <?= $v['user']['position'] ?></span></h3>
                         </a>
                     </li>
@@ -116,7 +116,7 @@
     var reply_id = 0;
     $.util.dataToTpl('coms', 'listTpl',<?= json_encode($news->comments) ?>, function (d) {
         //d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
-        d.user_avatar = d.user.avatar;
+        d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
         d.user_truename = d.user.truename;
         d.user_company = d.user.company;
         d.user_position = d.user.position;
