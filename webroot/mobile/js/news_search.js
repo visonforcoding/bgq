@@ -47,6 +47,9 @@ activity.prototype.bindEvent = function () {
                     if (typeof msg === 'object') {
                         if (msg.status === true) {
                             var html = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                                d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                                d.author = d.user.truename;
+                                d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
                                 return d;
                             });
                         } else {
@@ -75,6 +78,9 @@ activity.prototype.bindEvent = function () {
                     if (typeof msg === 'object') {
                         if (msg.status === true) {
                             var html = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                                d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                                d.author = d.user.truename;
+                                d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
                                 return d;
                             });
                         } else {
@@ -95,6 +101,9 @@ activity.prototype.bindEvent = function () {
                         if (typeof msg === 'object') {
                             if (msg.status === true) {
                                 var html = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                                    d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                                    d.author = d.user.truename;
+                                    d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
                                     return d;
                                 });
                             } else {

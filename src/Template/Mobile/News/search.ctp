@@ -55,7 +55,7 @@
     </div>
 </script>-->
 <script type="text/html" id="search_tpl">
-    <h1 class="firstnews"><span><img src="/mobile/images/user.png" /></span>{#admin_name#}</h1>
+    <h1 class="firstnews"><span><img src="{#avatar#}" /></span>{#author#}</h1>
         <a href="/news/view/{#id#}" class="newsbox clearfix">
             <div class="sec-news-l">
                 <h3>{#title#}</h3>
@@ -99,6 +99,9 @@
                         if (typeof msg === 'object') {
                             if (msg.status === true) {
                                 var html = $.util.dataToTpl('', 'search_tpl', msg.data , function (d) {
+                                    d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                                    d.author = d.user.truename;
+                                    d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
                                     return d;
                                 });
                                 $('#search').append(html);
