@@ -134,6 +134,7 @@ class WxController extends AppController {
             'jsApiParameters' => $jsApiParameters,
         ));
         $book = $order->subject_book;
+        $this->set(['pageTitle'=>'话题支付']);
         $this->set(compact('book'));
     }
 

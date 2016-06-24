@@ -59,9 +59,9 @@
                     if(res.err_msg == "get_brand_wcpay_request：ok" ) {
                         
                     }  
-//                    $.each(res, function (i, n) {
-//                        alert(i + ':' + n);
-//                    });
+                    $.each(res, function (i, n) {
+                        alert(i + ':' + n);
+                    });
                 }
         );
     }

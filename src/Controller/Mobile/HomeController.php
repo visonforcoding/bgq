@@ -402,9 +402,9 @@ class HomeController extends AppController {
             $this->Sms->sendByQf106($book->user->phone, $msg);
             $this->loadComponent('Business');
             $this->Business->usermsg($book->user_id, '预约通知', $msg, 4, $id);
-            $this->Util->ajaxReturn(true, '处理成功!');
+            return $this->Util->ajaxReturn(true, '处理成功!');
         } else {
-            $this->Util->ajaxReturn(false, '服务器出错!');
+            return $this->Util->ajaxReturn(false, '服务器出错!');
             }
         }
     }
