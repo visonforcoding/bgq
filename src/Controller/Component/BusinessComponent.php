@@ -397,6 +397,7 @@ class BusinessComponent extends Component {
         });
         if ($transRes) {
             //向专家发送一条短信
+            //资金流水记录
             $this->Sms->sendByQf106($order->seller->phone, '申请人已经向您支付了预约费用：' . $order->price . '元，请做好赴约准备。');
         }
     }

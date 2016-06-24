@@ -20,6 +20,7 @@ return [
         'appsecret' => '460366e0beddcf18a21873db11a4eb1c',
         'token'=>'cwptest',
         'mchid'=>'1348060901',
+        'App_mchid'=>'1350978901',
         'key'=>'33DB349F8DB955DC78FC5F84F8E5D3F8',
         'sslcert_path'=> dirname(__FILE__).'/wxcert/apiclient_cert.pem',
         'sslkey_path'=> dirname(__FILE__).'/wxcert/apiclient_key.pem',
