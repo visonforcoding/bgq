@@ -188,5 +188,14 @@ class WxController extends AppController {
         }
     }
     
+    /**
+     * 支付成功
+     */
+    public function paySuccess(){
+        $this->set([
+            'pageTitle'=>'支付结果页'
+        ]);
+    }
+    
 
 }
