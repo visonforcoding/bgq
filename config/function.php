@@ -42,7 +42,7 @@ function createRandomCode($length, $type = 1) {
 function errorMsg($entity,$msg) {
     $errors = $entity->errors();
     if(\Cake\Core\Configure::read('debug')) {
-        Cake\Log\Log::error($errors);
+        Cake\Log\Log::error($errors,'devlog');
     }
     $message = null;
     if(is_array($errors)){
