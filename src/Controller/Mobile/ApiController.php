@@ -35,9 +35,9 @@ class ApiController extends AppController {
             if (!array_key_exists('code', $status)) {
                 $status['code'] = 200;
             }
-            $json = json_encode($status, 256);
+            $json = json_encode($status, JSON_UNESCAPED_UNICODE);
         } else {
-            $json = json_encode(array('status' => $status, 'msg' => $msg, 'code' => $statusCode), 25);
+            $json = json_encode(array('status' => $status, 'msg' => $msg, 'code' => $statusCode), JSON_UNESCAPED_UNICODE);
         }
         echo $json;
         exit();
