@@ -7,15 +7,16 @@
 </header>
 <div class="m-wraper m-fixed-bottom wraper">
     <div class="h-home-bottom">
+         <a href="<?php if($self): ?>/home/edit-userinfo<?php else:?>javascript:void(0)<?php endif;?>">
         <div>
-            <a href="<?php if($self): ?>/home/edit-userinfo<?php else:?>javascript:void(0)<?php endif;?>">
                 <span><img src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : $user->avatar ?>"/></span>
                 <i class="iconfont">&#xe61e;</i>
-            </a>
+           
         </div>
         <h3>
             <?= $user->truename ?><span><?= $user->company ?> <?= $user->position ?></span>
         </h3>
+         </a>
         <h4>
             <?php if(!$self):?>
             <?php if ($isFans): ?>
