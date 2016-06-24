@@ -31,7 +31,6 @@ class HomeController extends AppController {
      */
 
     public function index() {
-        phpinfo();
         $this->loadComponent('Wx');
         $wxConfig = $this->Wx->wxconfig(['onMenuShareTimeline', 'onMenuShareAppMessage', 'scanQRCode']);
         $user_id = $this->user->id;
