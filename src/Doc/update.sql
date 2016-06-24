@@ -241,3 +241,6 @@ CREATE TABLE `rd` (
 COMMENT='rd表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
+
+#==========06.24 执行==============
+
