@@ -8,7 +8,7 @@
 </header>
 <div class="wraper">
     <div class="uploadbox">
-        <a href='#this' class='imgcard'><img src='/mobile/images/card.png' /></a>
+        <a href='#this' class='imgcard'><img src='/mobile/images/card.jpg' /></a>
         <div class="filebtn">
             <a href="#this" class="uploadbtn">上传名片</a>
             <input id="upload_pic" type="file" />
