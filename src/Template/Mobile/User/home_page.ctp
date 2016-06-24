@@ -51,10 +51,10 @@
         <li class="tr">
             <h3>邮箱：<em><?= $user->email ?></em></h3>
         </li>
-        <li>
+        <li  class="tr">
             <h3>行业：<em>互联网</em></h3>
         </li>
-        <li class="no-b-border">
+        <li class="no-b-border tr">
             <h3>所在地：<em>深圳</em></h3>
         </li>
     </ul>
