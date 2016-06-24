@@ -475,7 +475,7 @@ border-radius: 50%;padding:1px;}
 /*display:-webkit-flex;display:-moz-flex;display:-ms-flex;display: flex;align-items:center;
 -webkit-justify-content:space-between;-moz-justify-content:space-between;-ms-justify-content:space-between;justify-content:space-between;*/ display:block;overflow:hidden;line-height: 0.5rem;
 }
-.h-info-box li span{float:left;display: block;font-size:0.3rem;}
+.h-info-box li span{float:left;display: block;font-size:0.28rem;}
 .h-info-box li div{float:right;}
 .e-info-box .upload-user-img span{display:block;width:0.46rem;height:0.38rem;background: url(../images/user-img.png) no-repeat;background-size:cover;}
 .upload-user-img{width:0.46rem;height:0.38rem;}
