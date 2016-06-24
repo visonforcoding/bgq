@@ -148,7 +148,7 @@ activity.prototype.bindEvent = function () {
                                 if (msg.status === true) {
                                     $.util.alert(msg.msg);
                                     var html = $.util.dataToTpl('', 'comment_tpl', msg.data, function (d) {
-                                        d.user_avatar = d.user.avatar; // 头像
+                                        d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                                         d.user_truename = d.user.truename; // 名字
                                         d.user_company = d.user.company; // 公司
                                         d.user_position = d.user.position; // 职务
@@ -195,7 +195,7 @@ activity.prototype.bindEvent = function () {
                                 if (msg.status === true) {
                                     $.util.alert(msg.msg);
                                     var html = $.util.dataToTpl('', 'comment_tpl', msg.data, function (d) {
-                                        d.user_avatar = d.user.avatar; // 头像
+                                        d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                                         d.user_truename = d.user.truename; // 名字
                                         d.user_company = d.user.company; // 公司
                                         d.user_position = d.user.position; // 职务

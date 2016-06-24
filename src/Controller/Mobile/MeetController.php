@@ -17,7 +17,7 @@ class MeetController extends AppController {
         $this->loadModel('User');
     }
 
-    protected $limit = '5'; // 分页条数
+//    protected $limit = '5'; // 分页条数
     
     /**
      * Index method  专家约见首页
@@ -31,7 +31,7 @@ class MeetController extends AppController {
                 ->find()
                 ->where("`enabled` = '1' and `type` = '3'")
                 ->orderDesc('create_time')
-                ->limit(3)
+//                ->limit(3)
                 ->toArray();
         $this->set(compact('banners'));
         
@@ -49,7 +49,7 @@ class MeetController extends AppController {
 //                    return $q->where(['Industries.id' => '1']);
 //                })
                 ->where(['enabled'=>'1', 'level'=>'2'])
-                ->limit($this->limit)
+//                ->limit($this->limit)
                 ->toArray();
         $this->set('meetjson', json_encode($users));
         $this->set('pageTitle', '大咖');
@@ -69,7 +69,7 @@ class MeetController extends AppController {
                     return $q->where(['Industries.id' => $industry_id]);
                 })
                 ->where(['enabled'=>'1', 'level'=>'2'])
-                ->limit($this->limit)
+//                ->limit($this->limit)
                 ->toArray();
         if($users)
         {
@@ -242,7 +242,7 @@ class MeetController extends AppController {
                     return $q->where(['title like'=>'%'.$keyword.'%']);
                 }])
                 ->where(['enabled'=>'1', 'level'=>'2', 'truename like'=>'%'.$keyword.'%'])
-                ->limit(10)
+//                ->limit(10)
                 ->toArray();
         if($User) {
             return $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $User]);
@@ -265,7 +265,7 @@ class MeetController extends AppController {
                     return $q->where(['title like'=>'%'.$keyword.'%']);
                 }])
                 ->where(['enabled'=>'1', 'level'=>'2', 'truename like'=>'%'.$keyword.'%'])
-                ->page($page, $this->limit)
+//                ->page($page, $this->limit)
                 ->toArray();
         if($User) {
             return $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $User]);

@@ -225,3 +225,19 @@ ALTER TABLE activity add is_top TINYINT(2) DEFAULT 0 COMMENT '是否置顶';
 
 #活动增加二维码路径
 ALTER TABLE activity add qrcode VARCHAR(200) COMMENT '签到二维码';
+
+#rd表
+CREATE TABLE `rd` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'rd表',
+	`ptag` INT NOT NULL COMMENT 'ptag',
+	`user_id` INT NOT NULL COMMENT '用户',
+	`relate_id` INT NOT NULL COMMENT '关联',
+	`description` VARCHAR(100) NOT NULL COMMENT '描述',
+	`type` TINYINT(4) NOT NULL COMMENT '类型',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	`is_delete` TINYINT(2) NOT NULL DEFAULT 0 COMMENT '是否删除',
+	PRIMARY KEY (`id`)
+)
+COMMENT='rd表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;

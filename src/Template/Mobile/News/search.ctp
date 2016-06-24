@@ -11,7 +11,7 @@
     text-align: center;">搜 索</div>
     </div>
     <div class="news-classify">
-        <div class="classify-l fl ml" id="choose_industry">
+        <div class="classify-l fl ml" id="choose_industry" style="width:50%;">
             <span id="choose_industries">选择行业</span>
             <ul class="all-industry" hidden id="choose_industry_ul">
                 <?php foreach ($industries as $k => $v): ?>
@@ -30,7 +30,7 @@
             </ul>
         </div>
 
-        <div class="classify-r fr" id="choose_sort">
+        <div class="classify-r fr" id="choose_sort" style="width:50%;">
             <span id="choose_sorts">排序</span>
             <ul class="sort-mark" hidden id="sort_mark">
                 <li id="sort_mostapply" value="read_nums" class="choose_sort_child"><a href="javascript:void(0)">阅读最多</a></li>
