@@ -14,7 +14,8 @@ use Cake\Mailer\Email;
  * @property \App\Controller\Component\BusinessComponent $Business
  */
 class UserController extends AppController {
-
+    
+    
     /**
      * Index method  个人主页
      *
@@ -174,7 +175,8 @@ class UserController extends AppController {
                 ]);
                 return $this->Util->ajaxReturn(['status' => true, 'url' => '/user/register-org']);
             } else {
-               return $this->Util->ajaxReturn(['status' => false, 'msg' => errorMsg($user,'输入有误')]);
+                \Cake\Log\Log::error($user->errors());
+               return $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($user->errors())]);
             }
         }
         $this->set([

@@ -104,8 +104,9 @@ class UserTable extends Table {
                 ->notEmpty('phone');
 
         $validator
+                ->notBlank('truename','姓名不可为空')
                 ->requirePresence('truename', 'create', '姓名不可为空')
-                ->notEmpty('truename');
+                ->notEmpty('truename','姓名不可为空');
 
         $validator
                 ->allowEmpty('company');
@@ -115,13 +116,13 @@ class UserTable extends Table {
 
         $validator
                 ->email('email',false,'邮箱输入不正确')
-                ->allowEmpty('email');
+                ->notEmpty('email','请输入邮箱');
         $validator
                 ->allowEmpty('goodat');
 
         $validator
                 ->requirePresence('card_path', 'create', '请上传名片')
-                ->notEmpty('card_path');
+                ->notEmpty('card_path','请上传名片');
 
 
         return $validator;
