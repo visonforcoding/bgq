@@ -66,8 +66,8 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
     $.util.dataToTpl('news', 'listTpl',<?= $newsjson ?>, function (d) {
-//        d.avatar = d.user.avatar;
-        d.author = d.admin.truename;
+        d.avatar = d.user.avatar;
+        d.author = d.user.truename;
         d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
         return d;
     });
