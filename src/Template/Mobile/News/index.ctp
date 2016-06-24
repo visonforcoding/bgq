@@ -119,7 +119,7 @@
     if($.util.isAPP)
     {
         $('#search').hide();
-        LEMON.show.search();
+        LEMON.show.search('/news/search');
     }
 </script>
 <?php $this->end('script'); ?>
