@@ -108,6 +108,7 @@ class WxComponent extends Component {
             $res = $httpClient->get($wx_user_url);
             \Cake\Log\Log::debug($res,'devlog');
             if ($res->isOk()) {
+                \Cake\Log\Log::debug($res->body(),'devlog');
                 return json_decode($res->body());
             } else {
                 return false;

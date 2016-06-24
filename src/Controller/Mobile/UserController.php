@@ -51,7 +51,7 @@ class UserController extends AppController {
     }
 
     /**
-     * 注册 选择行业标签
+     * 注册 选择行业标签 最后一步
      * 
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
@@ -65,11 +65,12 @@ class UserController extends AppController {
             if ($user) {
                 $data = $this->request->data();
                 $data['enabled'] = 1;
+                $data['user_token'] = md5(uniqid());
                 $user = $this->User->patchEntity($user, $data);
                 if ($this->User->save($user)) {
                     //注册成功就算登录
                     $this->request->session()->write('User.mobile', $user);
-                    return $this->Util->ajaxReturn(['status' => true, 'url' => '/user/index']);
+                    return $this->Util->ajaxReturn(['status' => true, 'url' => '/home/index']);
                 } else {
                     return $this->Util->ajaxReturn(['status' => false, 'msg' => '服务器出错']);
                 }
@@ -82,7 +83,8 @@ class UserController extends AppController {
                     'parentField' => 'pid'
                 ])->where("`id` != '3'")->hydrate(false)->toArray();
         $this->set(array(
-            'industries' => $industries
+            'industries' => $industries,
+            'pageTitle'=>'选择行业标签'
         ));
     }
 
@@ -106,7 +108,6 @@ class UserController extends AppController {
                     return $this->Util->ajaxReturn(['status' => false, 'msg' => '服务器出错']);
                 }
             }
-            return;
         }
         $AgencyTable = \Cake\ORM\TableRegistry::get('agency');
         $agencies = $AgencyTable->find('threaded', [
@@ -114,7 +115,8 @@ class UserController extends AppController {
                     'parentField' => 'pid'
                 ])->hydrate(false)->toArray();
         $this->set(array(
-            'agencies' => $agencies
+            'agencies' => $agencies,
+            'pageTitle'=>'注册行业机构'
         ));
     }
 
@@ -176,6 +178,9 @@ class UserController extends AppController {
                 return $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors)]);
             }
         }
+        $this->set([
+            'pageTitle'=>'注册'
+        ]);
     }
 
     /**

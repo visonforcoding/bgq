@@ -19,12 +19,12 @@
         <form id="reg-form" action="" method="post">
         <ul>
             <input name="card_path" type="hidden"/>
-            <li>姓名：<span class='infocard'><input type="text" name="truename" placeholder="杨涛" /></span></li>
-            <li>公司：<span class='infocard'><input type="text" name="company" placeholder="IDG资本" /></span></li>
-            <li>职务：<span class='infocard'><input type="text" name="position" placeholder="董事长" /></span></li>
+            <li>姓名：<span class='infocard'><input type="text" name="truename"  /></span></li>
+            <li>公司：<span class='infocard'><input type="text" name="company"  /></span></li>
+            <li>职务：<span class='infocard'><input type="text" name="position"  /></span></li>
             <!--<li>联系电话：<span class='infocard'><input type="text" name="phone" placeholder="13806159876" /></span></li>-->
-            <li>邮箱：<span class='infocard'><input type="email" name="email" placeholder="idg@foxmail.com" /></span></li>
-            <li class='nobottom'>地址：<span class='infocard'><input type="text" name="address" placeholder="深圳市南山区新豪方大厦" /></li>
+            <li>邮箱：<span class='infocard'><input type="email" name="email"  /></span></li>
+            <li>地址：<span class='infocard'><input type="text" name="address"  /></li>
             <!--<li>登录密码：<span class='infocard reg-pass'><input type="password" name="password"   /></span></li>-->
             <!--<li>再次输入密码：<span class='infocard reg-repass'><input type="password" name="repassword"   /></span></li>-->
         </ul>
@@ -59,9 +59,10 @@
                         success: function (data) {
                             if(data.status===true){
                                $('input[name="card_path"]').val(data.path);
+                               return ;
                                $.post('/user/recog-mp',{path:data.path},function(res){
                                    if(res.status===true){
-                                       console.log(res.result);
+                                       //console.log(res.result);
                                        $('input[name="truename"]').val(res.result.name[0]);
                                        $('input[name="company"]').val(res.result.comp[0]);
                                        $('input[name="position"]').val(res.result.title[0]);

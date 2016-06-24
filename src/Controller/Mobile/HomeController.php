@@ -377,7 +377,10 @@ class HomeController extends AppController {
                 }, 'Subjects', 'Users.Industries']
                 ]);
                 $subject = $book->subject;
-                $this->set(compact('subject', 'book'));
+        $this->set([
+            'pageTitle'=>'预约详情'
+        ]);
+        $this->set(compact('subject', 'book'));
     }
 
     /**

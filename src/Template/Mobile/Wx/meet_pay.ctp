@@ -41,7 +41,14 @@
                     if (payMethod == 'wx') {
                         if($.util.isAPP){
                             LEMON.pay.wx(<?= json_encode($jsApiParameters) ?>,function(res){
-                                alert(res);
+                                if(res=='0'){
+                                    $.util.alert('支付成功');
+                                    setTimeout(function(){
+                                        window.location.href = '/wx/pay-success';
+                                    },1000);
+                                }else{
+                                    $.util.alert('支付未成功');
+                                }
                             });
                             return false;
                         }
