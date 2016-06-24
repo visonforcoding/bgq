@@ -128,9 +128,11 @@ class ApiController extends AppController {
         $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg', 'zip', 'ppt',
             'pptx', 'doc', 'docx', 'xls', 'xlsx', 'webp'); // 设置附件上传类型
         $upload->savePath = $savePath; // 设置附件上传目录
+        $isZip = false;
         if(isset($extra_data_json->zip)){
             if ($extra_data_json->zip) {
                 //缩略图处理
+                $isZip = true;
                 $upload->thumb = true;
                 $upload->thumbMaxWidth = '60';
                 $upload->thumbMaxHeight = '60';
@@ -144,7 +146,9 @@ class ApiController extends AppController {
             $info = $upload->getUploadFileInfo();
             $response['status'] = true;
             $response['path'] = $urlpath . $info[0]['savename'];
-            $response['thumbpath'] = $urlpath . $upload->thumbPrefix . $info[0]['savename'];
+            if($isZip){
+                $response['thumbpath'] = $urlpath . $upload->thumbPrefix . $info[0]['savename'];
+            }
             $response['msg'] = '上传成功!';
         }
         return $this->Util->ajaxReturn($response);

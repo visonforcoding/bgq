@@ -179,7 +179,7 @@
         $('#upload_pic').click(function(){
             if($.util.isAPP){
                 alert('我要调JSAPI了');
-                LEMON.event.uploadPhoto("{'dir':'user/avatar','zip':'1'}",function(data){
+                LEMON.event.uploadPhoto('{"dir":"user/avatar","zip":"1"}',function(data){
                     alert(data);
                   var data = JSON.parse(data);
                    if(data.status===true){
