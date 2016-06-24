@@ -5,11 +5,17 @@
 		<meta name="format-detection"content="telephone=no, email=no" />
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 		<title>编辑个人主页</title>
+		
 		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mobiscroll.css"/>
 		<script src="../js/view.js"></script>
+		
+		
 	</head>
 	<body>
 		<header>
@@ -23,49 +29,7 @@
 		</header>
 		
 		<div class="m-wraper edit-education-bottom wraper">
-			<div class="education-items">
-				<div class="education-title">
-					<h3>
-					教育经历<i>1</i></span>
-					<a href="javascript:void(0);" class="deletbtn">删除</a>
-				</h3>
-				</div>
-				<ul class="h-info-box e-info-box">
-					<li  class="no-right-ico">
-						
-						<span>学校：</span>
-						<div><input type="text" placeholder="北京大学" /></div>
-						
-					</li>
-					<li  class="no-right-ico nobga">
-						
-						<span>院系/专业：</span>
-						<div>
-							<input type="text" placeholder="金融系" />
-						</div>
-						
-					</li>
-					<li class="no-right-ico nobga">
-						<span>学历：</span>
-						<div>
-							<input type="text" placeholder="本科" />
-						</div>
-					</li>
-					<li class="nobga">
-						<span>开始日期：</span>
-						<div>
-							<input type="text" placeholder="2000年9月" />
-						</div>
-					</li>
-					<li class="no-b-border nobga">
-						<span>结束日期：</span>
-						<div>
-							<input type="text" placeholder="2004年7月" />
-						</div>
-					</li>
-					
-				</ul>
-			</div>
+			
 			<div class="education-items">
 				<div class="education-title">
 					<h3>
@@ -74,32 +38,40 @@
 				</h3>
 				</div>
 				<ul class="h-info-box e-info-box">
-					<li  class="no-right-ico nobga">
+					<li  class="no-right-ico">
 						<span>学校：</span>
 						<div><input type="text" placeholder="北京大学" /></div>
 					</li>
-					<li  class="no-right-ico nobga">
+					<li  class="no-right-ico">
 						<span>院系/专业：</span>
 						<div>
 							<input type="text" placeholder="金融系" />
 						</div>
 					</li>
-					<li class="no-right-ico nobga">
+					<li class="no-right-ico">
 						<span>学历：</span>
 						<div>
-							<input type="text" placeholder="本科" />
+							<select name="" class="education">
+								 <option value="1">高中</option>
+								  <option value="2">中专</option>
+								  <option value="3">大专</option>
+								  <option value="4">本科</option>
+								  <option value="5">研究生</option>
+								  <option value="6">硕士</option>
+								  <option value="7">博士</option>
+							</select>
 						</div>
 					</li>
-					<li class="nobga">
+					<li>
 						<span>开始日期：</span>
 						<div>
-							<input type="text" placeholder="2000年9月" />
+							<input type="text" placeholder="2000年9月" class="checktime" readonly="readonly" />
 						</div>
 					</li>
-					<li class="no-b-border nobga">
+					<li class="no-b-border">
 						<span>结束日期：</span>
 						<div>
-							<input type="text" placeholder="2004年7月" />
+							<input type="text" placeholder="2004年7月" readonly="readonly" class="checktime"/>
 						</div>
 					</li>
 					
@@ -110,31 +82,38 @@
 			</div>
 			<a href="javascript:void(0);" class="nextstep">完成</a>
 		</div>
-		<div class='reg-shadow'></div>
-			
-			<div class="checked-sex shadow-info" style="display: none;">
-				<div class="h-checked-sex">
-					<a href="javascript:void(0);">取消</a>
-					
-					<h3>学历</h3>
-					<a href="javascript:void(0);">完成</a>
-				</div>
-				<span class="f-color-gray">大专</span>
-				<span>本科</span>
-				<span class="f-color-gray">硕士</span>
-				
-			</div>
-			<div class="checked-sex shadow-info">
-				<div class="h-checked-sex">
-					<a href="javascript:void(0);">取消</a>
-					
-					<h3>开始日期</h3>
-					<a href="javascript:void(0);">完成</a>
-				</div>
-				<span class="f-color-gray">1998  7</span>
-				<span>1999  7</span>
-				<span class="f-color-gray">2000 9</span>
-				
-			</div>
+		<div class='reg-shadow'  style="display: none;"></div>
+		
+<script src="../js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/mobiscroll.2.13.2.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+// 日期选择
+     $('.checktime').mobiscroll().date({
+        theme: 'mobiscroll',
+        display: 'bottom',
+        headerText: function (valueText) { return "请选择时间"; },
+        //onBeforeShow: function (inst) { inst.settings.wheels[0].length>2?inst.settings.wheels[0].pop():null; },
+      	 endYear:2020,
+      	 //startYear:1980
+      	 dateFormat: 'yy-mm-dd',
+      	 rows:3
+     });
+    
+     $('.education').mobiscroll().select({
+        theme: 'mobiscroll',
+        display: 'bottom',
+         headerText: function (valueText) { return "请选择学历"; },
+          rows:3
+        
+       
+    });
+//性别选择
+     $('.checkedsex').mobiscroll().select({
+        theme: 'mobiscroll',
+        display: 'bottom',
+        headerText: function (valueText) { return "请选择性别"; },
+    });
+</script>
 	</body>
 </html>
