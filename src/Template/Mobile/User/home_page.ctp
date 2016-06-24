@@ -36,20 +36,21 @@
         <li>
             <h3>公司业务：<em>互联网资讯、企业并购、投融资管理</em></h3>
         </li>
-        <li>
-            <p>教育经历：<em>北京大学</em><i>2000-2004，工商管理，本科</i></p>
+        <li class="c-color">
+            教育经历：
+            <h3><em><i>北京大学</i><i>2000-2004，工商管理，本科</i></em></h3>
         </li>
-        <li>
-            <p>工作经历：<em>IDG资本</span><i>2005-2014，投资经理</i></p>
+        <li class="c-color">
+            <h3>工作经历：<em><i>IDG资本</i><i>2005-2014，投资经理</i></em></h3>
         </li>
-        <li>
+        <li class="tr">
             <h3>联系电话：<em><?= $user->phone ?></em></h3>
         </li>
-        <li>
-            <h3>邮箱：<em><?= $user->email ?></span></h3>
+        <li class="tr">
+            <h3>邮箱：<em><?= $user->email ?></em></h3>
         </li>
         <li>
-            <h3>行业：<em>互联网</span></h3>
+            <h3>行业：<em>互联网</em></h3>
         </li>
         <li class="no-b-border">
             <h3>所在地：<em>深圳</em></h3>
