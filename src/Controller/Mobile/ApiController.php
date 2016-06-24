@@ -113,6 +113,7 @@ class ApiController extends AppController {
         $dir = 'app';
         $extra_data = $this->request->data('extra_param');
         $extra_data_json = json_decode($extra_data);
+        \Cake\Log\Log::debug($extra_data_json,'devlog');
         if(is_object($extra_data_json)){
             if(isset($extra_data_json->dir)){
                 $dir = $extra_data_json->dir;
