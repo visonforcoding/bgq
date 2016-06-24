@@ -227,6 +227,7 @@ class MeetController extends AppController {
      */
     public function search(){
         $this->set('search');
+        $this->set('pageTitle', '搜索');
     }
 
     /**
@@ -238,8 +239,8 @@ class MeetController extends AppController {
         $User = $this
                 ->User
                 ->find()
-                ->contain(['Subjects'=>function($q)use($keyword){
-                    return $q->where(['title like'=>'%'.$keyword.'%']);
+                ->matching(['Subjects'=>function($q)use($keyword){
+                    return $q->where(['Subjects.title like'=>'%'.$keyword.'%']);
                 }])
                 ->where(['enabled'=>'1', 'level'=>'2', 'truename like'=>'%'.$keyword.'%'])
 //                ->limit(10)
@@ -468,7 +469,7 @@ class MeetController extends AppController {
     }
     
     public function moreIndustries(){
-        
+        $this->set('pageTitle', '行业');
     }
     
 }
