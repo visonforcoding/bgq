@@ -10,8 +10,9 @@
         <div>
             <a href="<?php if($self): ?>/home/edit-userinfo<?php else:?>javascript:void(0)<?php endif;?>">
                 <span><img src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : $user->avatar ?>"/></span>
-                <i class="iconfont">&#xe61e;</i></div>
+                <i class="iconfont">&#xe61e;</i>
             </a>
+        </div>
         <h3>
             <?= $user->truename ?><span><?= $user->company ?> <?= $user->position ?></span>
         </h3>
