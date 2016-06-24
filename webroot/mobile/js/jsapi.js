@@ -17,15 +17,14 @@
     var defaultConfig = {
         imgUrl: 'http://m.chinamatop.com/mobile/images/bgq_logo.png',
         link: 'http://m.chinamatop.com/',
-        title: '并购菁英汇',
-        desc: '并购菁英汇为你提供国内外的并购热点以及资讯',
+        title: '并购帮',
+        desc: '并购帮为你提供国内外的并购热点以及资讯',
         success:function(){},
         cancel:function(){}
     };
     window.shareConfig = defaultConfig;
     window.nativeShare = function (type) {
-        LEMON.share[type](window.shareConfig, function () {
-        });
+        LEMON.share[type](window.shareConfig, function(){});
     };
     window.onBottom = window.onBottom || function () {
     };
