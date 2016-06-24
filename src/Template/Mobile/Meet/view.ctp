@@ -38,21 +38,21 @@
         <ul id="subject">
             <?php foreach ($biggie->subjects as $v): ?>
             <li>
-                <div class="inner-li-items">
-                    <h3><?= $v['title'] ?><span><?php if($v['type'] == 1): ?>一对一<?php else: ?>一对多<?php endif; ?>面谈</span></h3>
-                    <div class='m-center-con'>
-                        <a href="/meet/subject-detail/<?=$v->id?>">
-                            <p>
-                                <?= $v['summary'] ?>
-                            </p>
+                    <div class="inner-li-items">
+                        <h3><?= $v['title'] ?><span><?php if ($v['type'] == 1): ?>一对一<?php else: ?>一对多<?php endif; ?>面谈</span></h3>
+                        <a class="alink" href="/meet/subject-detail/<?= $v->id ?>">
+                            <div class='m-center-con'>
+                                <p>
+                                    <?= $v['summary'] ?>
+                                </p>
+                            </div>
                         </a>
-                    </div>
-                    <div  class='m-bottom-con'>
-                        <span>价格<i><?= $v['price'] ?>元/次</i></span>
-                        <span>时间<i>约<?= $v['last_time'] ?>小时</i></span>
-                    </div>
-                </div>	
-            </li>
+                        <div  class='m-bottom-con'>
+                            <span>价格<i><?= $v['price'] ?>元/次</i></span>
+                            <span>时间<i>约<?= $v['last_time'] ?>小时</i></span>
+                        </div>
+                    </div>	
+                </li>
             <?php endforeach; ?>
         </ul>
     </div>
