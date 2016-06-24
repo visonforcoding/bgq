@@ -127,7 +127,7 @@
     if($.util.isAPP)
     {
         $('#search').hide();
-        LEMON.show.search();
+        LEMON.show.search('/meet/search');
     }
     
 </script>
