@@ -24,7 +24,7 @@
             <li>职务：<span class='infocard'><input type="text" name="position" placeholder="董事长" /></span></li>
             <!--<li>联系电话：<span class='infocard'><input type="text" name="phone" placeholder="13806159876" /></span></li>-->
             <li>邮箱：<span class='infocard'><input type="email" name="email" placeholder="idg@foxmail.com" /></span></li>
-            <li>地址：<span class='infocard'><input type="text" name="address" placeholder="深圳市南山区新豪方大厦" /></li>
+            <li class='nobottom'>地址：<span class='infocard'><input type="text" name="address" placeholder="深圳市南山区新豪方大厦" /></li>
             <!--<li>登录密码：<span class='infocard reg-pass'><input type="password" name="password"   /></span></li>-->
             <!--<li>再次输入密码：<span class='infocard reg-repass'><input type="password" name="repassword"   /></span></li>-->
         </ul>
