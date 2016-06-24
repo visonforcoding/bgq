@@ -78,7 +78,7 @@
 .newscon-box .con-des span{margin-left:-0.6rem;width:0.5rem;height:0.5rem;position:absolute;overflow:hidden;}
 .con-des time{margin-left:10px;}
 .newscon-box .con-des img{margin:0;width;100%;border-radius: 50%;}
-.news-list-items h1 span{width:0.5rem;height:0.5rem;position:absolute;left:0;overflow:hidden;}
+.news-list-items h1 span{width:0.5rem;height:0.5rem;position:absolute;left:0;overflow:hidden; border-radius: 0.25rem;}
 .news-list-items h1,.con-des{display: inline-block;}
 .news-list-items h1 span img,.con-des img{width:100%;height:auto;display: block;}
 .newsbox{overflow:hidden;display: block; color:#969fa9;}
