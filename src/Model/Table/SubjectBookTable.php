@@ -75,20 +75,6 @@ class SubjectBookTable extends Table {
                 ->requirePresence('summary', 'create')
                 ->notEmpty('summary');
 
-        $validator
-                ->integer('status')
-                ->requirePresence('status', 'create')
-                ->notEmpty('status');
-
-        $validator
-                ->dateTime('create_time')
-                ->requirePresence('create_time', 'create')
-                ->notEmpty('create_time');
-
-        $validator
-                ->dateTime('update_time')
-                ->requirePresence('update_time', 'create')
-                ->notEmpty('update_time');
 
         return $validator;
     }
