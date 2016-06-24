@@ -249,7 +249,7 @@
             theme: 'mobiscroll',
             display: 'bottom',
             headerText: function (valueText) { return "请选择性别"; },
-            row:3
+            rows:3
     });
     });
 </script>
