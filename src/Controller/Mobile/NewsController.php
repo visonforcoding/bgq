@@ -118,7 +118,7 @@ class NewsController extends AppController {
         for($i=10;$i<28;$i++)
         {
             $a = $this->News->get($i);
-            $b = $this->News->patchEntity($a, ['user_id'=>2]);
+            $b = $this->News->patchEntity($a, ['user_id'=>8]);
             
             $this->News->save($b);
         }
