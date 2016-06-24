@@ -115,6 +115,8 @@ class NewsController extends AppController {
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null) {
+        $a = $this->News->find()->all();
+        debug($a);die;
         for($i=10;$i<28;$i++)
         {
             $a = $this->News->get($i);
