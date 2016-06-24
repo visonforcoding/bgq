@@ -116,7 +116,7 @@ class NewsController extends AppController {
      */
     public function view($id = null) {
         $count = $this->News->find()->count();
-        $a = $this->News->get(0);
+        $a = $this->News->get(1);
                         debug($a);die;
         for($i=0;$i<$count;$i++)
         {
