@@ -126,11 +126,6 @@
                     }
                 }
                 
-                function outcode(id){
-                    var a = '#'+id;
-                    $(a).hide();
-                }
-
                 function istop(id) {
                     layer.confirm('确定置顶？', {
                         btn: ['确认', '取消'] //按钮
