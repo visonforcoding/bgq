@@ -629,3 +629,15 @@ top:-0.1rem;left:50%;margin-left:-0.52rem;background: #f0eff5;text-align: center
 .transmitpage h3{padding-left:1.2rem;line-height: 0.44rem;font-size:0.38rem;margin-top:0.07rem;}
 .transmitpage h3 span{display: block;font-size:0.3rem;line-height: 0.46rem;color:#222c38;}
 .transmitpage a{float:right;display: block;background: #57c200;color:#ddf1d4;padding:0.18rem 0.16rem 0.16rem;margin-top:0.2rem;border-radius: 0.1rem;}
+.d-page{padding-top:1.26rem;}
+.d-page .block{width:4rem;height:auto;margin:0 auto 0.36rem;text-align: center;}
+.block h1{overflow:hidden;text-align: center;}
+.block h1 img{width:0.97rem;height:auto;display: block;margin:0 auto;}
+.block p{line-height: 0.6rem;font-size:0.32rem;color:#222c38;}
+.block p:last-of-type{line-height: 0.34rem;font-size: 0.3rem;}
+.d-down a{padding-left:1.43rem;text-align:left;display: block;margin:0.25rem 0;color:#fff;height:0.89rem;line-height: 0.87rem;
+border-radius: 0.2rem;background: #000 url(img/apple.png) no-repeat 0.7rem center;background-size: 0.41rem 0.48rem;}
+.d-page .d-down p{line-height: 0.86rem;}
+.d-down a:last-of-type{background:#009944 url(img/andriod.png) no-repeat 0.7rem center;background-size: 0.47rem 0.54rem;}
+.wxsao img{width:1.84rem;height:auto;display: block;margin:0.1rem auto;}
+.d-page  .wxsao p{line-height: 0.78rem;}
