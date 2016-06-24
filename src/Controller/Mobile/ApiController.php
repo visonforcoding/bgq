@@ -118,6 +118,7 @@ class ApiController extends AppController {
                 $dir = $extra_data_json->dir;
             }
         }
+        \Cake\Log\Log::debug($this->request->data(),'devlog');
         $today = date('Y-m-d');
         $urlpath = '/upload/' . $dir . '/' . $today . '/';
         $savePath = ROOT . '/webroot' . $urlpath;
