@@ -66,11 +66,6 @@
                 <img src="{#cover#}"/>
             </div>
         </a>
-        <div class="news-bottom clearfix">
-            <div class="sec-b-r">
-                {#industries_html#}
-            </div>
-        </div>
 </script>
 <script src="/mobile/js/news_search.js"></script>
 <script src="/mobile/js/loopScroll.js"></script>
@@ -102,7 +97,6 @@
                                 var html = $.util.dataToTpl('', 'search_tpl', msg.data , function (d) {
                                     d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                                     d.author = d.user.truename;
-                                    d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
                                     return d;
                                 });
                                 $('#search').append(html);

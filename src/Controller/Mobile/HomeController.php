@@ -62,9 +62,21 @@ class HomeController extends AppController {
         $this->set(compact('user', 'industry_arr'));
     }
 
-
-
-
+    /**
+     * 我的活动 报名
+     */
+    public function myActivityApply() {
+        $applyTable = \Cake\ORM\TableRegistry::get('activityapply');
+        $myActivity = $applyTable->find()->contain(['Activities'])->where(['Activityapply.user_id'=>$this->user->id])->toArray();
+        if($myActivity !== false)
+        {
+            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$myActivity]);
+        }
+        else
+        {
+            return $this->Util->ajaxReturn(false, '系统错误');
+        }
+    }
     
     /**
      * 我的发布活动
@@ -103,9 +115,9 @@ class HomeController extends AppController {
             if ($this->User->save($user)) {
                 $this->loadComponent('Business');
                 $this->Business->adminmsg(1, $user_id, '您有一条实名认证申请需处理');
-                $this->Util->ajaxReturn(true, '保存成功');
+                return $this->Util->ajaxReturn(true, '保存成功');
             } else {
-                $this->Util->ajaxReturn(false, '保存失败');
+                return $this->Util->ajaxReturn(false, '保存失败');
             }
         }
         $this->set([

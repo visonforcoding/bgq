@@ -242,11 +242,11 @@ class NewsController extends AppController {
             $res = $res->contain(['Industries']);
         }
         if ($data['sort']) {
-            $res->orderDesc($data['sort']);
+            $res->orderDesc('News.' . $data['sort']);
         } else {
-            $res->orderDesc('create_time'); // 默认按时间倒序排列
+            $res->orderDesc('News.create_time'); // 默认按时间倒序排列
         }
-        $res = $res
+        $res = $res->contain(['Users'])
                 ->limit($this->newslimit)
                 ->toArray();
         if ($res!==false) {
