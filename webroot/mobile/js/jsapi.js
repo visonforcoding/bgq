@@ -15,10 +15,10 @@
  */
 (function () {
     var defaultConfig = {
-        imgUrl: 'http://m.jealousauto.com/static/user/image/zmc_logo_1.png',
+        imgUrl: 'http://m.chinamatop.com/mobile/images/bgq_logo.png',
         link: 'http://m.chinamatop.com/',
         title: '并购菁英汇',
-        desc: '并购菁英汇',
+        desc: '并购菁英汇为你提供国内外的并购热点以及资讯',
         success:function(){},
         cancel:function(){}
     };
@@ -182,10 +182,8 @@
                         return JSApiInvoke(api, {
                             title: param.title,
                             desc: param.desc,
-                            img_url: param.img_url,
-                            link: param.link,
-                            img_width: param.img_width || 80,
-                            img_heigth: param.img_height || 80
+                            imgUrl: param.imgUrl,
+                            link: param.link
                         }, apiCallback(cb));
                     });
                     break;
