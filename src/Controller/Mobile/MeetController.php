@@ -217,7 +217,9 @@ class MeetController extends AppController {
      * 预定成功页
      */
     public function bookSuccess(){
-        
+        $this->set([
+            'pageTitle'=> '预约成功'
+        ]);
     }
     
     /**
