@@ -21,7 +21,7 @@
         </div>
         <div class="a-search-box" id="search">
             <div class="a-search">
-                <i class="iconfont">&#xe613;</i>
+               <a href="#this"> <i class="iconfont">&#xe613;</i></a>
                 <div class="s-con">
                     <input type="text" placeholder="请输入关键词" class='search'/>
                 </div>
