@@ -13,8 +13,8 @@
             <a href="#this" class='iconfont share h-regiser'>&#xe614;</a>-->
         </div>
         <div class="m-tomore-bottom">
-            <span><i class="iconfont">&#xe624;</i>广东 深圳</span>
-            <span><i class="iconfont">&#xe60b;</i>22人约见过</span>
+            <span><i class="iconfont">&#xe624;</i><?= $biggie->city ?></span>
+            <span><i class="iconfont">&#xe60b;</i><?= $biggie->meet_nums ?>人约见过</span>
         </div>
     </div>
     <ul class="m-info-box">
@@ -84,8 +84,8 @@
 <script>
     // 分享设置
     window.shareConfig.link = 'http://m.chinamatop.com/news/view/<?= $biggie->id ?>';
-    window.shareConfig.title = '<?= $biggie->title ?>';
-    var share_desc = '<?= $biggie->share_desc ?>';
+    window.shareConfig.title = '并购帮大咖·<?= $biggie->truename ?>';
+    var share_desc = '<?= $biggie->savant->summary ?>';
     share_desc && (window.shareConfig.desc = share_desc);
 </script>
 <script>

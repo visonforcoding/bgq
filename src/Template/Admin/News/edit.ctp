@@ -55,7 +55,14 @@
             <script name='body' id='content' rows='3' type="text/plain" class='form-control-editor'><?= $news->body ?></script>
         </div>
     </div>
-
+    <div class="form-group">
+        <label class="col-md-2 control-label">分享描述</label>
+        <div class="col-md-8">
+        <?php
+            echo $this->Form->input('share_desc', ['label' => false, 'class' => 'form-control']);
+        ?>
+        </div>
+    </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
