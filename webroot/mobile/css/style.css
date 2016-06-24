@@ -4,7 +4,7 @@
 .loginbox span{display:inline-block; margin-left:0.42rem;}
 .loginbox input{border:none;outline:none;font-size:0.3rem;color:#222c38;text-indent:0.4rem;}
 .loginbox .username,.loginbox .password{height:1.43rem;border-bottom:1px #c8c7cc solid;
-display:-webkit-flex;display: flex;-webkit-align-items: center;align-items: center;}
+/*display:-webkit-flex;display: flex;-webkit-align-items: center;align-items: center;*/line-height: 1.41rem;}
 .loginbox .password{border-bottom:none;}
 .loginbox .username input{width:5.96rem;}
 .loginbox .username span{background:url(img/ren.png) no-repeat;width:0.25rem;height:0.29rem;background-size:cover;}
@@ -58,10 +58,11 @@ display:-webkit-flex;display: flex;-webkit-align-items: center;align-items: cent
 .inner .news-serch{ width:0.32rem;height:0.32rem;font-size:0.32rem;top:0.29rem;}
 .a-banner{width:100%;height:2.95rem;position:relative;}
 .a-search-box{position:fixed;top:0.2rem;width:100%; padding:0 0.68rem;z-index:3;}
-.a-search{display: flex;background:rgba(255,255,255,.5); align-items: center;width:100%;border-radius: 0.1rem;height:0.53rem;}
+.a-search{/*display: flex;align-items: center;*/background:rgba(255,255,255,.5); width:100%;border-radius: 0.1rem;height:0.53rem;line-height: 0.53rem;}
+.a-search a{float:left;}
 .a-search i{color:#fff;font-size:0.26rem;margin:0 0.1rem;}
-.a-search .s-con{width:100%;padding-right:0.2rem;}
-.a-search .s-con input{font-size:0.28rem;height:0.53rem;line-height:0.53rem;background: none;border:none;color:#fff;}
+.a-search .s-con{padding-right:0.2rem;}
+.a-search .s-con input{font-size:0.3rem;height:0.53rem;line-height:0.53rem;background: none;border:none;color:#fff;width:90%;}
 .pic-list-container{width:2000%;position:relative;overflow:hidden;}
 .pic-list-container li{width:7.5rem;float:left;/*height:2.95rem;*/}
 .pic-list-container li a{display: block;width:100%;height:2.95rem;overflow:hidden;}
@@ -455,7 +456,8 @@ border-radius: 50%;padding:1px;}
 .h-info-box li{padding:0.2rem 0;border-bottom:1px #c8c7cc solid;font-size:0.28rem;}
 .s-title-pass li{padding:0.25rem 0.3rem;}
 .s-title-pass li:last-of-type{border-bottom:none;}
-.h-info-box li h3{width:100%;line-height: 0.43rem;}
+.h-info-box li h3{width:100%;overflow:hidden;font-size:.28rem;line-height: 0.38rem;}
+/*.h-info-box li b{float:left;}*/
 .s-title-pass li h3{color:#e01a48;}
 .s-title-pass li p{color:#9ba4ad; line-height: 0.36rem;}
 .h-info-box .no-b-border a{display:block;background: url(img/right.png) no-repeat right center; background-size:0.18rem 0.25rem;}
@@ -464,7 +466,8 @@ border-radius: 50%;padding:1px;}
 .h-info-box li p span,.h-info-box li p i{display: block;}
 .h-info-box li p span{margin-top:0.28rem;font-size:0.26rem;}
 .h-info-box li p i{font-size:;color:#9ba4ad;margin-top:0.14rem;}
-.h-info-box li h3 em{float:right;}
+.h-info-box li em{float:right;width:78%;}
+.tr em{text-align: right;}
 .h-info-box .no-b-border{border-bottom:none;}
 .e-info-box li a{display: block;overflow:hidden;}
 .e-info-box li{background: url(img/right.png) no-repeat right center; background-size:0.18rem 0.25rem;padding-right:0.38rem;
@@ -641,3 +644,6 @@ border-radius: 0.2rem;background: #000 url(img/apple.png) no-repeat 0.7rem cente
 .d-down a:last-of-type{background:#009944 url(img/andriod.png) no-repeat 0.7rem center;background-size: 0.47rem 0.54rem;}
 .wxsao img{width:1.84rem;height:auto;display: block;margin:0.1rem auto;}
 .d-page  .wxsao p{line-height: 0.78rem;}
+.c-color h3{margin:0.26rem 0;}
+.c-color h3 em{color:#9ba4ad;display: block;width:100%}
+.c-color em i{margin-right:0.3rem;}
