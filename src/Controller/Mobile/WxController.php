@@ -124,12 +124,17 @@ class WxController extends AppController {
             'contain' => ['SubjectBook', 'SubjectBook.Subjects']
         ]);
         $body = '预约话题《' . $order->subject_book->subject->title . '》支付';
-        $openid = $this->user->wx_openid;
         $out_trade_no = $order->order_no;
+        $openid = $this->user->wx_openid;
         //$fee = intval(($order->price)*100);  //支付金额(分)
         $fee = 1;  //测试时 1分
         $this->loadComponent('Wxpay');
-        $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee);
+        $isApp = false;
+        if($this->request->is('lemon')){
+            $isApp = true;
+            $openid = $this->user->app_wx_openid;
+        }
+        $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee,null,$isApp);
         $this->set(array(
             'jsApiParameters' => $jsApiParameters,
         ));
@@ -182,5 +187,6 @@ class WxController extends AppController {
             }
         }
     }
+    
 
 }

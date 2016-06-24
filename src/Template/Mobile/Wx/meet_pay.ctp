@@ -39,6 +39,12 @@
             switch (em.id) {
                 case 'submit':
                     if (payMethod == 'wx') {
+                        if($.util.isAPP){
+                            LEMON.pay.wx(<?= json_encode($jsApiParameters) ?>,function(res){
+                                alert(res);
+                            });
+                            return false;
+                        }
                         callpay();
                     }
                     break;
