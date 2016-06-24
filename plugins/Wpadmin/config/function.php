@@ -13,7 +13,7 @@
  */
 function getMessage($errors) {
     if(\Cake\Core\Configure::read('debug')) {
-        Cake\Log\Log::error($errors);
+        Cake\Log\Log::error($errors,'devlog');
     }
     foreach ($errors as $value) {
         foreach ($value as $val) {
