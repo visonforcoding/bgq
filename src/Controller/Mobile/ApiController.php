@@ -47,7 +47,7 @@ class ApiController extends AppController {
         \Cake\Log\Log::debug('接口debug');
         \Cake\Log\Log::debug($this->request->data());
         if (!$this->request->isPost()) {
-            return $this->Util->ajaxReturn(false, '请求受限', 405);
+            return $this->jsonResponse(false, '请求受限', 405);
         }
         if (!in_array(strtolower($this->request->param('action')), $this->noAcl)) {
             if (!$this->request->data('timestamp') || !$this->request->data('access_token')) {
