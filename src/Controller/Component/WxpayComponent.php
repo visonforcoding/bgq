@@ -149,7 +149,7 @@ class WxpayComponent extends Component {
                 'partnerid' => $this->mchid,
                 'prepayid' => $prepay_id,
                 'timestamp' => $timestamp,
-                'nonceStr' => $nonceStr,
+                'noncestr' => $nonceStr,
                 'package' => 'Sign=WXPay',
             ];
         }
