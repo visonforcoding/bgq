@@ -687,6 +687,7 @@ class ActivityController extends AppController {
      * @param int $id
      */
     public function sign($id){
+        $this->handCheckLogin();
         $activity = $this->Activity->get($id);
         if(!$activity)
         {
