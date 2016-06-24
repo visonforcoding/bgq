@@ -7,7 +7,7 @@
             <a href="/activity/index" class="activity_icon"><span class="iconfont">&#xe601;</span>活动</a>
         </li>
         <li>
-            <a href="/meet/index" class="meet_icon"><span class="iconfont">&#xe60b;</span>大咖</a>
+            <a href="/meet/index" class="meet_icon"><span class="iconfont">&#xe60b;</span>约见</a>
         </li>
         <li>
             <a href="/home/index" class="home_icon"><span class="iconfont">&#xe60d;</span>我</a>
