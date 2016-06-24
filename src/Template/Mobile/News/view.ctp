@@ -99,7 +99,7 @@
     // 分享设置
     window.shareConfig = {
 //        img_url: 'http://m.jealousauto.com/static/user/image/zmc_logo_1.png',
-        link: 'http://m.chinamatop.com/news/view/<?= $activity->id ?>',
+        link: 'http://m.chinamatop.com/news/view/<?= $news->id ?>',
         title: '<?= $news->title ?>',
         desc: '<?= $news->share_desc ?>'
     };
