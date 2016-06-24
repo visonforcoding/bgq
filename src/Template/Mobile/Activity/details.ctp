@@ -50,7 +50,7 @@
                 <div class="comm-info clearfix">
                     <?php if ($userApply): ?>
                         <?php foreach ($userApply as $k => $v): ?>
-                            <a href='/meet/homepage/<?= $v['id'] ?>'><img src="<?= $v['avatar']; ?>"/></a>
+                            <a href='/meet/homepage/<?= $v['id'] ?>'><img src="<?= $v['avatar'] ? $v['avatar'] : '/mobile/images/touxiang.png'; ?>"/></a>
                         <?php endforeach; ?>
                     <?php else : ?>
                         <div style="font-size:0.2rem;line-height: 0.22rem;">暂时无人报名</div>
@@ -86,7 +86,7 @@
                     <?php foreach ($activity->savants as $k => $v): ?>
                         <li>
                             <a href="javascript:void(0)">
-                                <img src="<?= $v['user']['avatar'] ?>" alt="<?= $v['user']['truename'] ?>" />
+                                <img src="<?= $v['user']['avatar'] ? $v['user']['avatar'] : '/mobile/images/touxiang.png' ?>" alt="<?= $v['user']['truename'] ?>" />
                                 <h3><?= $v['user']['truename'] ?><span><?= $v['user']['company'] ?> <?= $v['user']['position'] ?></span></h3>
                             </a>
                         </li>
@@ -110,7 +110,7 @@
     <!--底部四个图-->
     <div class="iconlist">
         <span class="iconfont" id="article_comment" user_id="<?= $user; ?>">&#xe618;</span>
-        <span class="iconfont<?php if (!$isCollect): ?> active<?php endif; ?>" id="collect" artid="<?= $activity->id; ?>" >&#xe610;</span>
+        <span class="iconfont <?php if (!$isCollect): ?>active<?php endif; ?>" id="collect" artid="<?= $activity->id; ?>" >&#xe610;</span>
         <span class="iconfont" id="share">&#xe614;</span>
         <span class="iconfont" id='toTop'></span>
     </div>
@@ -172,7 +172,7 @@
     window.article = true;
     window.reply = true;
     $.util.dataToTpl('comment', 'comment_tpl',<?= $comjson ?>, function (d) {
-        d.user_avatar = d.user.avatar;
+        d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
         d.user_truename = d.user.truename;
         d.user_company = d.user.company;
         d.user_position = d.user.position;
@@ -205,7 +205,7 @@
                     if (typeof res === 'object') {
                         if (res.status === true) {
                             $.util.dataToTpl('allComments', 'comment_tpl',res.data, function (d) {
-                                d.user_avatar = d.user.avatar;
+                                d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                                 d.user_truename = d.user.truename;
                                 d.user_company = d.user.company;
                                 d.user_position = d.user.position;
@@ -236,7 +236,7 @@
 
                             if (res.status) {
                                 var html = $.util.dataToTpl('', 'comment_tpl', res.data, function (d) {
-                                    d.user_avatar = d.user.avatar; // 头像
+                                    d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                                     d.user_truename = d.user.truename; // 名字
                                     d.user_company = d.user.company; // 公司
                                     d.user_position = d.user.position; // 职务

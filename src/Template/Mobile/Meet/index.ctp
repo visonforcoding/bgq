@@ -108,6 +108,7 @@
 <script src="/mobile/js/meet_index.js"></script>
 <script>
     $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
+        d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
         d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
         return d;
     });

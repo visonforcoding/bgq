@@ -32,6 +32,7 @@ meet.prototype.bindEvent = function(){
                     if (typeof msg === 'object') {
                         if (msg.status === true) {
                             $.util.dataToTpl('biggie', 'biggie_tpl', msg.data , function (d) {
+                                d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
                                 d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
                                 return d;
                             });
