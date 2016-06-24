@@ -12,7 +12,7 @@
     <?php if (isset($news)): ?>
         <section class="newscon-box">
             <h3><?= $news->title ?></h3>
-            <h1 class="con-des"><span><img src="<?= $news->admin->avatar ? $news->admin->avatar : '/mobile/images/touxiang.png'  ?>" /></span><?= $news->admin->truename ?><time><?= date('Y-m-d H:i', strtotime($news->create_time)) ?></time></h1>
+            <h1 class="con-des"><span><img src="<?= $news->user->avatar ? $news->user->avatar : '/mobile/images/touxiang.png'  ?>" /></span><?= $news->user->truename ?><time><?= date('Y-m-d H:i', strtotime($news->create_time)) ?></time></h1>
             <img src="<?= $news->cover ?>"/>
             <p><?= strip_tags($news->body) ?></p>
             <div class="con-bottom clearfix">
