@@ -14,20 +14,22 @@
         <a href="javascript:void(0);" class="active" id="myActivity">我的发布</a>|
         <a href="javascript:void(0);" id="applyActivity">已经报名</a>
     </div>
-    <section class="my-collection-info" id="dataBox">
-    </section>
+    <div id="dataBox"></div>
+    
 </div>
 <script type="text/html" id="listTpl">
-    <div class="innercon">
-        <a href="/activity/details/{#id#}" class="clearfix nobottom">
-            <span class="my-pic-acive"><img src="{#cover#}"/></span>
-            <div class="my-collection-items">
-                <h3>{#title#}</h3>
-                <span>{#address#}<i class="f-color-gray">{#apply_nums#}人报名</i></span>
-                <span>{#time#}</span>
-            </div>
-        </a>
-    </div>
+    <section class="my-collection-info">
+        <div class="innercon">
+            <a href="/activity/details/{#id#}" class="clearfix nobottom">
+                <span class="my-pic-acive"><img src="{#cover#}"/></span>
+                <div class="my-collection-items">
+                    <h3>{#title#}</h3>
+                    <span>{#address#}<i class="f-color-gray">{#apply_nums#}人报名</i></span>
+                    <span>{#time#}</span>
+                </div>
+            </a>
+        </div>
+    </section>
 </script>
 <?= $this->element('footer'); ?>
 <?php $this->start('script') ?>
