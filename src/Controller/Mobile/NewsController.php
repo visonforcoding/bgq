@@ -115,14 +115,9 @@ class NewsController extends AppController {
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null) {
-        $count = $this->News->find()->all();
-                debug($count);die;
-        $a = $this->News->get(10);
-                        debug($a);die;
-        for($i=0;$i<$count;$i++)
+        for($i=10;$i<28;$i++)
         {
-            $a = $this->News->get(0);
-                        debug($a);die;
+            $a = $this->News->get($i);
             $b = $this->News->patchEntity($a, ['user_id'=>2]);
             
             $this->News->save($b);
