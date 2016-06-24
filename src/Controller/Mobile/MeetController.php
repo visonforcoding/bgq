@@ -468,8 +468,12 @@ class MeetController extends AppController {
         }
     }
     
-    public function moreIndustries(){
+    public function allIndustries(){
         $this->set('pageTitle', '行业');
+    }
+    
+    public function moreIndustries(){
+        $this->set('pageTitle', '行业搜索');
     }
     
 }
