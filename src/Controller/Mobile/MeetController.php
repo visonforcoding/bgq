@@ -207,6 +207,9 @@ class MeetController extends AppController {
             }
             
         }
+        $this->set([
+            'pageTitle'=>'话题预约'
+        ]);
         $this->set(compact('subject'));
     }
     
