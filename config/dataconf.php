@@ -27,5 +27,10 @@ return [
         'notify_url'=>'/wx/wx-notify',
         'AppID'=>'wxb450720adce7295f',     //APP端的 开放平台appid
         'AppSecret'=>'1c721c93e80578c2b707358993dcd371'
+    ],
+    'umeng' => [
+        'AppKey' => '57552eac67e58e5bdb001c6c',
+        'AppMasterSecret' => 'vq6gyz0uztuke0yz5wcodsluhfm339vf',
+        'UmengMessageSecret' => '795ffe74e61cd9b28cba5efd98f97171',
     ]
 ];
