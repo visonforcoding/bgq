@@ -153,6 +153,9 @@ class MeetController extends AppController {
                 }])
                 ->where(['MeetSubject.id' => $id])
                 ->first();
+        $this->set([
+            'pageTitle'=>'话题详情'
+        ]);
         $this->set(compact('subject'));
     }
 
