@@ -116,11 +116,14 @@ class NewsController extends AppController {
      */
     public function view($id = null) {
         $count = $this->News->find()->count();
+        $a = $this->News->get(0);
+                        debug($a);die;
         for($i=0;$i<$count;$i++)
         {
-            $a = $this->News->get($i);
+            $a = $this->News->get(0);
+                        debug($a);die;
             $b = $this->News->patchEntity($a, ['user_id'=>2]);
-            debug($b);die;
+            
             $this->News->save($b);
         }
         $isCollect = [];
