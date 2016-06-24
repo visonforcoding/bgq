@@ -174,8 +174,7 @@ class UserController extends AppController {
                 ]);
                 return $this->Util->ajaxReturn(['status' => true, 'url' => '/user/register-org']);
             } else {
-                $errors = $user->errors();
-                return $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors)]);
+               return $this->Util->ajaxReturn(['status' => false, 'msg' => errorMsg($user,'输入有误')]);
             }
         }
         $this->set([

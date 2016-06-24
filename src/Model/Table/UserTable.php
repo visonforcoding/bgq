@@ -114,10 +114,8 @@ class UserTable extends Table {
                 ->allowEmpty('position');
 
         $validator
-                ->email('email')
+                ->email('email',false,'邮箱输入不正确')
                 ->allowEmpty('email');
-
-
         $validator
                 ->allowEmpty('goodat');
 

@@ -21,6 +21,11 @@ class NewsController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $user = $UserTable->newEntity();
+        $user = $UserTable->patchEntity($user, ['email'=>'fue']);
+        $ck = $UserTable->save($user);
+        debug($user->errors());exit();
         if($this->request->isWeixin()&&empty($this->user)&&!$this->request->session()->check('Login.wxbase')){
             //如果是微信 静默授权页获取openid
             \Cake\Log\Log::debug('进行静默登陆','devlog');
