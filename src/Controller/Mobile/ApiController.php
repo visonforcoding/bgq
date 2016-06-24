@@ -25,7 +25,7 @@ class ApiController extends AppController {
 
     public function beforeFilter(\Cake\Event\Event $event) {
         parent::beforeFilter($event);
-        return $this->checkAcl();
+        //return $this->checkAcl();
     }
 
     protected function jsonResponse($status, $msg = '', $statusCode = 200) {
@@ -124,6 +124,7 @@ class ApiController extends AppController {
      * @return type
      */
     public function upload() {
+        $this->jsonResponse(['test'=>'ttt']);
         $this->autoRender = false;
         $dir = 'app';
         $extra_data = $this->request->data('extra_param');
