@@ -66,7 +66,11 @@
             <a href="javascript:void(0)">
                 <span>性别：</span>
                 <div>
-                    <span>男</span>
+                    <span><select name="" class='checkedsex'>
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                    </select>
+                </span>
                 </div>
             </a>
         </li>
@@ -150,7 +154,7 @@
         <span>取消</span>
     </div>
 </div>
-<div class="checked-sex shadow-info" style="display: none;">
+<!-- <div class="checked-sex shadow-info" style="display: none;">
     <div class="h-checked-sex">
         <a href="javascript:void(0);">取消</a>
 
@@ -171,9 +175,12 @@
     <span>广西   广州</span>
     <span class="f-color-gray">广东   深圳</span>
     <span class="f-color-gray">海南 佛山</span>
-</div>
+</div> -->
 <script src="/mobile/js/jquery.js" type="text/javascript" charset="utf-8"></script>
 <script src="/mobile/js/lib/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>
+<script src="/mobile/js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+<script src="/mobile/js/mobiscroll.2.13.2.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="/mobile/css/mobiscroll.css"/>
 <script>
     $(function () {
         $('#upload_pic').click(function(){
@@ -237,6 +244,12 @@
                 }
             });
         });
+
+         $('.checkedsex').mobiscroll().select({
+            theme: 'mobiscroll',
+            display: 'bottom',
+            headerText: function (valueText) { return "请选择性别"; },
+    });
     });
 </script>
 <?php
