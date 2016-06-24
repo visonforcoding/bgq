@@ -163,13 +163,12 @@
 <script src="/mobile/js/activity_details.js"></script>
 <script>
     // 分享设置
-    window.shareConfig = {
-//        img_url: 'http://m.jealousauto.com/static/user/image/zmc_logo_1.png',
-        link: 'http://m.chinamatop.com/activity/details/<?= $activity->id ?>',
-        title: '<?= $activity->title ?>',
-        desc: '<?= $activity->share_desc ?>'
-    };
-    
+    window.shareConfig.link = 'http://m.chinamatop.com/news/view/<?= $activity->id ?>';
+    window.shareConfig.title = '<?= $activity->title ?>';
+    var share_desc = '<?= $activity->share_desc ?>';
+    share_desc && (window.shareConfig.desc = share_desc);
+</script>
+<script>
     window.article = true;
     window.reply = true;
     $.util.dataToTpl('comment', 'comment_tpl',<?= $comjson ?>, function (d) {

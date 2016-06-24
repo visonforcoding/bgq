@@ -83,12 +83,12 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
     // 分享设置
-    window.shareConfig = {
-//        img_url: 'http://m.jealousauto.com/static/user/image/zmc_logo_1.png',
-        link: 'http://m.chinamatop.com/meet/view/<?= $biggie->id ?>',
-        title: '<?= $biggie->truename ?>',
-        desc: '<?= $biggie->summary ?>'
-    };
+    window.shareConfig.link = 'http://m.chinamatop.com/news/view/<?= $biggie->id ?>';
+    window.shareConfig.title = '<?= $biggie->title ?>';
+    var share_desc = '<?= $biggie->share_desc ?>';
+    share_desc && (window.shareConfig.desc = share_desc);
+</script>
+<script>
     var subject = null;
     setTimeout(function(){
         subject = $.util.loop({

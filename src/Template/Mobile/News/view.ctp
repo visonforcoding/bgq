@@ -97,12 +97,12 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
     // 分享设置
-    window.shareConfig = {
-//        img_url: 'http://m.jealousauto.com/static/user/image/zmc_logo_1.png',
-        link: 'http://m.chinamatop.com/news/view/<?= $news->id ?>',
-        title: '<?= $news->title ?>',
-        desc: '<?= $news->share_desc ?>'
-    };
+    window.shareConfig.link = 'http://m.chinamatop.com/news/view/<?= $news->id ?>';
+    window.shareConfig.title = '<?= $news->title ?>';
+    var share_desc = '<?= $news->share_desc ?>';
+    share_desc && (window.shareConfig.desc = share_desc);
+</script>
+<script>
     
     // 少于五条评论隐藏显示全部
     var circle = setInterval(function(){
