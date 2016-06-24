@@ -38,7 +38,7 @@
             </ul>
         </div>
     </div>
-    <section class="news-list-items" style="padding-bottom: 0.2rem;margin-bottom: 1rem;background: #fff;" id="search"></section>
+    <div id="search"></div>
 </div>
 <div id="buttonLoading" class="loadingbox"></div>
 <?= $this->element('footer'); ?>
@@ -56,6 +56,7 @@
     </div>
 </script>-->
 <script type="text/html" id="search_tpl">
+    <section class="news-list-items" style="padding-bottom: 0.2rem;background: #fff;">
     <h1 class="firstnews"><span><img src="{#avatar#}" /></span>{#author#}</h1>
         <a href="/news/view/{#id#}" class="newsbox clearfix">
             <div class="sec-news-l">
@@ -66,6 +67,7 @@
                 <img src="{#cover#}"/>
             </div>
         </a>
+    </section>
 </script>
 <script src="/mobile/js/news_search.js"></script>
 <script src="/mobile/js/loopScroll.js"></script>
