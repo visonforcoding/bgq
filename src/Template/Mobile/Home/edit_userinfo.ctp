@@ -182,6 +182,8 @@
                 LEMON.event.uploadPhoto('{"dir":"user/avatar","zip":"1"}',function(data){
                     alert(data);
                   var data = JSON.parse(data);
+                    alert(data.msg);
+                  alert(data);
                    if(data.status===true){
                        $('input[name="avatar"]').val(data.thumbpath);
                     }
