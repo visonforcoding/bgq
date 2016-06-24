@@ -101,7 +101,7 @@ class UserTable extends Table {
 
         $validator
                 ->requirePresence('phone', 'create', '手机号不可为空')
-                ->notEmpty('phone');
+                ->notEmpty('phone','手机号不能为空');
 
         $validator
                 ->notBlank('truename','姓名不可为空')
