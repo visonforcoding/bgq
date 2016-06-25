@@ -1,17 +1,19 @@
 <header>
     <div class='inner'>
-        <h1>资讯</h1>
+        <h1>资讯首页</h1>
         <!-- <a href="#this" class='iconfont news-serch h-regiser'>&#xe613;</a> -->
     </div>
 </header>
 <div class="wraper newswraper" style="margin-bottom: 1rem;">
     <div class="a-search-box" id="search">
-        <div class="a-search">
-            <a href="news-search.html"><i class="iconfont">&#xe613;</i></a>
-            <div class="s-con">
-                <input type="text" placeholder="请输入关键词" class="search"/>
+        <a href="news-search.html">
+            <div class="a-search">
+                <i class="iconfont">&#xe613;</i>
+                <div class="s-con">
+                    <input type="text" placeholder="请输入关键词" class="search"/>
+                </div>
             </div>
-        </div>
+       </a>
     </div>
     <div class="a-banner">
         <ul class="pic-list-container" id="imgList">
