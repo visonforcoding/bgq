@@ -1,13 +1,13 @@
-<!--<header>
+<header>
     <div class='inner'>
         <a href='#this' class='toback'></a>
         <h1>
             资讯内容
         </h1>
-        <a href="#this" id="collect" class='iconfont collection h-regiser'>&#xe610;</a>
-        <a href="#this" class='iconfont share h-regiser'>&#xe614;</a>
+      <!--   <a href="#this" id="collect" class='iconfont collection h-regiser'>&#xe610;</a>
+        <a href="#this" class='iconfont share h-regiser'>&#xe614;</a> -->
     </div>
-</header>-->
+</header>
 <div class="wraper" id="news" style="padding-bottom: 1rem;">
     <?php if (isset($news)): ?>
         <section class="newscon-box">
