@@ -7,6 +7,7 @@
     </div>
 </header>
 <div class="wraper">
+    <?php debug(json_encode($jsApiParameters)); ?>
     <div class="h20"></div>
     <div class="infobox a-pay">
         <ul>
