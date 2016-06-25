@@ -19,7 +19,7 @@
                 <span class="readnums">阅读<i><?= $this->Number->format($news->read_nums) ?></i></span>
                 <span  data-id="<?= $news->id ?>" <?php if (isset($news->praises) && !empty($news->praises)): ?> data-disable="1" class="liked"<?php endif; ?>
                        id="news-praise" >
-                    <i class="iconfont like">&#xe616;</i><em><?= $this->Number->format($news->praise_nums) ?></em>
+                    <i class="iconfont like <?php if (isset($news->praises) && !empty($news->praises)): ?>changecolor<?php endif; ?>" >&#xe616;</i><em><?= $this->Number->format($news->praise_nums) ?></em>
                 </span>
             </div>
         </section>
@@ -27,10 +27,10 @@
     <section class="newscomment-box mb50" >
         <h3 class="comment-title">
             评论
-            <span id="commit"><i  class="iconfont">&#xe618;</i>我要点评</span>
+            <!--<span id="commit"><i  class="iconfont">&#xe618;</i>我要点评</span>-->
         </h3>
         <div id="coms"></div>
-        <span class='com-all'><a href="#allcoment">显示全部</a></span>
+        <span class='com-all' ><a href="#allcoment">显示全部</a></span>
     </section>
     <!--专家推荐****************-->
     <?php if ($news->savants): ?>
@@ -38,7 +38,7 @@
             <ul>
                 <?php foreach ($news->savants as $k => $v): ?>
                     <li>
-                        <a href="javascript:void(0)">
+                        <a href="/meet/view/<?= $v['user']['id'] ?>">
                             <img src="<?= $v['user']['avatar'] ? $v['user']['avatar'] : '/mobile/images/touxiang.png' ?>" alt="<?= $v['user']['truename'] ?>" />
                             <h3><?= $v['user']['truename'] ?><span><?= $v['user']['company'] ?> <?= $v['user']['position'] ?></span></h3>
                         </a>
@@ -79,10 +79,7 @@
 <script type="text/html" id="listTpl">
     <div class="items">
         <div class="comm-info clearfix">
-            
             <span><a class="alink" href="/user/home-page/{#user_id#}"><img src="{#user_avatar#}"/></a></span>
-            
-           
             <span class="infor-comm">
                 <a href="/user/home-page/{#user_id#}"> <i class="username">{#user_truename#}<time>{#create_time#}</time></i>  </a>
                 <i class="job">{#user_company#} {#user_position#}</i>
@@ -107,7 +104,7 @@
     share_desc && (window.shareConfig.desc = share_desc);
 </script>
 <script>
-    
+    $('.com-all').hide();
     // 少于五条评论隐藏显示全部
     var circle = setInterval(function(){
         if($('#coms').children('.items').length >= 5)
@@ -161,7 +158,7 @@
                         if (res.status) {
                             obj.find('.addnum').show();
                             obj.find('em').html(parseInt(obj.find('em').text()) + 1);
-                            obj.find('i.praise').css('font-weight', 'bold');
+//                            obj.find('i.praise').css('font-weight', 'bold');
                             obj.data('disable', '1');
                             setTimeout(function () {
                                 obj.find('.addnum').hide();
@@ -188,7 +185,9 @@
                     break;
                 case 'cancel':
                     //关闭 评论框
-                    $('.reg-shadow,.shadow-info').hide('slow');
+                    setTimeout(function (){
+                        $('.reg-shadow,.shadow-info').hide('slow');
+                    }, 301);
                     break;
                 case 'submit':
                     //提交评论
@@ -206,7 +205,7 @@
                                 console.log(res.data);
                                 var html = $.util.dataToTpl('', 'listTpl', [res.data], function (d) {
                                     //d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
-                                    d.user_avatar = d.user.avatar;
+                                    d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                                     d.user_truename = d.user.truename;
                                     d.user_company = d.user.company;
                                     d.user_position = d.user.position;
@@ -248,7 +247,6 @@
                                 obj.find('em').html(parseInt(obj.find('em').text()) + 1);
                                 obj.find('i.like').css('font-weight', 'bold');
                                 obj.find('i.like').css('color', 'red');
-                                window.location.reload();
                             }
                         }
                     });
@@ -289,7 +287,7 @@
                     if (typeof res === 'object') {
                         if (res.status === true) {
                             var html = $.util.dataToTpl('allComments', 'listTpl', res.data, function (d) {
-                                d.user_avatar = d.user.avatar;
+                                d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                                 d.user_truename = d.user.truename;
                                 d.user_company = d.user.company;
                                 d.user_position = d.user.position;
@@ -330,7 +328,7 @@
 
                             if (res.status) {
                                 var html = $.util.dataToTpl('', 'listTpl', res.data, function (d) {
-                                    d.user_avatar = d.user.avatar;
+                                    d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                                     d.user_truename = d.user.truename;
                                     d.user_company = d.user.company;
                                     d.user_position = d.user.position;

@@ -35,8 +35,9 @@
 
 <script type="text/html" id="listTpl">
     <section class='news-list-items '>
-    
-        <h1><span><img src="{#avatar#}" /></span>{#author#}</h1>
+        <a href="/user/home-page/{#user_id#}">
+            <h1><span><img src="{#avatar#}" /></span>{#author#}</h1>
+        </a>
         <a href="/news/view/{#id#}" class="newsbox clearfix">
             <div class="sec-news-l">
                 <h3>{#title#}</h3>
@@ -69,6 +70,7 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
     $.util.dataToTpl('news', 'listTpl',<?= $newsjson ?>, function (d) {
+        d.user_id = d.user.id;
         d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
         d.author = d.user.truename;
         d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
@@ -98,7 +100,7 @@
 
                 if(res.status){
                     var html = $.util.dataToTpl('', 'listTpl', res.data, function (d) {
-                        d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
+                        d.user_id = d.user.id;
                         d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                         d.author = d.user.truename;
                         d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
