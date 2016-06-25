@@ -6,7 +6,7 @@
         <a href="#this" class='iconfont news-serch h-regiser'>&#xe613;</a>
     </div>
 </header>-->
-
+<link rel="stylesheet" type="text/css" href="/mobile/font/font/iconfont.css">
 <div class="wraper newswraper">
     <div class="a-banner" >
         <ul class="pic-list-container" id="imgList">
