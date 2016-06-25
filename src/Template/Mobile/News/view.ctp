@@ -123,7 +123,7 @@
         d.user_position = d.user.position;
         d.user_id = d.user.id;
         if (d.pid > 0) {
-            d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.reply.truename + ' </span>：' + d.body;
+            d.body = '回复<span style="color:rgba(0, 0, 0, 0.95);"> ' + d.reply.truename + ' </span>：' + d.body;
         }
         d.style = '';
         d.disable = '0';
