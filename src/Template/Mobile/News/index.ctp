@@ -33,7 +33,7 @@
 
 <script type="text/html" id="listTpl">
     <section class='news-list-items '>
-    // 置顶class：firstnews
+    
         <h1><span><img src="{#avatar#}" /></span>{#author#}</h1>
         <a href="/news/view/{#id#}" class="newsbox clearfix">
             <div class="sec-news-l">
