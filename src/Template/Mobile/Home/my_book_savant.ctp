@@ -19,7 +19,7 @@
         <a href="/home/my-book-savant-detail/<?= $book->id ?>">
             <section class="internet-v-info no-margin-top">
                 <div class="innercon">
-                    <span class="head-img"><img src="<?= $book->user->avatar ?>"/><i></i></span>
+                    <span class="head-img"><img src="<?= empty($book->subject->user->avatar)?'/mobile/images/touxiang.jpg':$book->subject->user->avatar ?>"/><i></i></span>
                     <div class="vipinfo my-meet-info">
                         <h3><?= $book->user->truename ?><span class="meetnum">12人见过</span></h3>
                         <span class="job"><?= $book->user->company ?>&nbsp;&nbsp;<?= $book->user->position ?></span>
