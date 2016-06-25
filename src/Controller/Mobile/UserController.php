@@ -453,7 +453,6 @@ class UserController extends AppController {
             }
             $cardcase = $cardBoxTable->newEntity();
             $cardcase = $cardBoxTable->patchEntity($cardcase, $data);
-            debug($cardcase);die;
             $res = $cardBoxTable->save($cardcase);
             if($res)
             {
