@@ -117,7 +117,7 @@ class BiggieAdController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'biggieAd.' . $this->request->data('sidx');
+        $sort = 'BiggieAd.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
@@ -129,7 +129,7 @@ class BiggieAdController extends AppController {
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
+            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
         $query = $this->BiggieAd->find();
         $query->hydrate(false);
