@@ -8,7 +8,15 @@
 </header>
 <div class="wraper">
     <div class="my-good-b">
-        <textarea></textarea>
+        <textarea name="scyw"></textarea>
     </div>
-    <a href="#this" class="nextstep">保存</a>
+    <a href="#this" id="submit" class="nextstep">保存</a>
 </div>
+
+<?php $this->start('script') ?>
+<script>
+    $('#submit').on('tap',function(){
+        
+    });
+</script>
+<?php $this->end('script'); ?>
