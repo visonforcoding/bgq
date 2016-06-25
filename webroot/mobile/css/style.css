@@ -90,7 +90,7 @@
 .newsbox .sec-news-l h3{line-height: 0.4rem;margin:0.2rem 0;font-size:0.32rem;color:#222c38;font-weight: 400;-webkit-line-clamp: 2;}
 .newsbox .sec-news-l p{line-height:0.38rem;font-size:0.3rem;-webkit-line-clamp: 3;}
 .newsbox .sec-news-r{float:right;width:1.6rem;height:1.6rem;margin-top:0.24rem;overflow:hidden;}
-.newsbox .sec-news-r img{width:100%;height:auto;display: block;}
+.newsbox .sec-news-r img{width:100%;display: block;min-height:1.6rem;}
 .news-bottom{margin-top:0.26rem;}
 .news-bottom .sec-b-l{float:left; margin-top:0.07rem;}
 .news-bottom .sec-b-l div{display:inline-block;color:#969fa9;margin-right:0.5rem;font-size:0.28rem;}
