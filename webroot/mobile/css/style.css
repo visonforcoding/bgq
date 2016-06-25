@@ -47,7 +47,7 @@
     margin: 0.45rem 0 0.2rem; opacity: 0;}
 .reg-shadow{width:100%;height:100%;position:fixed;left:0;top:0;background:rgba(0,0,0,.3);overflow:hidden;z-index:998;}
 .shadow-info,.m-fixed-top{position:fixed;bottom:0;left:0;width:100%;z-index:999;}
-.m-fixed-top{top:1.7rem;height:3.2rem;background: #fff;overflow:hidden;}
+.m-fixed-top{top:1.69rem;height:3.2rem;background: #fff;overflow:hidden;}
 .c-zindex{position:fixed;z-index:1000;}
 .shadow-info .picinfo{background: rgba(255,255,255,0.8);width:90%;margin:0.2rem auto;border-radius: 0.3rem;}
 .picinfo span{display: block;color:#007aff;font-size:0.38rem;height:1.14rem;line-height: 1.14rem;text-align: center;}
@@ -294,14 +294,14 @@ height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;}
 .itemsbox div{width:2.5rem;height:2.7rem;float:left;/*display: -webkit-flex;display: -moz-flex;display: -ms-flexbox;display:flex;-webkit-justify-content: center;-moz-justify-content: center;-ms-justify-content: center;justify-content: center;-webkit-align-items: center;-moz-align-items: center;-ms-align-items: center;align-items: center;*/border-right:1px #c8c7cc solid;border-bottom:1px #c8c7cc solid;}
 .itemsbox div img{height:0.86rem;width:auto;display:block;margin:auto;margin-bottom:0.4rem;}
 .navmenu{border-bottom:1px #c8c7cc solid;}
-.navmenu .innercon{width:100%;/*display: flex;align-items: center;*/padding-left:1.6rem;}
-.navmenu .innercon .allmark{width:1.14rem;}
+.navmenu .innercon{width:100%;/*display: flex;align-items: center;*/padding-left:1.6rem;background: url(img/right.png) 96% center no-repeat;background-size:0.16rem 0.25rem;    }
+.navmenu .innercon .allmark{}
 .navmenu .innercon .allmark.active{color:#e01a48;}
-.navmenu .innercon .outerbox{background: url(img/right.png) right center no-repeat;background-size:0.16rem 0.25rem;    white-space: nowrap;}
-.j-sort{background: #fff;}
+.navmenu .innercon .outerbox{white-space: nowrap;float:right;width:85%;overflow:hidden;-webkit-overflow-scrolling: touch;overflow-x: scroll;margin-right:0.2rem;}
+.j-sort{background: #fff;line-height: 0.89rem;position:fixed;z-index:999;height: 0.89rem;}
 .internet-v-info .innercon{/*display: flex;justify-content: flex-start;*/overflow:hidden;padding:0.1rem 0.3rem;}
 .defaultsort{width:1.92rem;border-right:1px #ccc solid;height:0.52rem;line-height: 0.52rem;background: url(../images/down.png) no-repeat left center;background-size:0.25rem 0.16rem;padding-left:0.47rem;}
-.navmenu ul{overflow:hidden;height:0.89rem;width:4.83rem;white-space: nowrap;}
+.navmenu ul{height:0.89rem;white-space: nowrap;width:150%;}
 .navmenu li{margin:0 0.25rem;float:left;}
 .navmenu li a{color:#7a7e83;font-size:0.28rem;}
 .navmenu li a.active{color:#d62356}
