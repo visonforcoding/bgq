@@ -130,7 +130,7 @@
 			</section>
 		</div>
 	
-	<div class='reg-shadow' style="display: none;"></div>
+	<div class='reg-shadow' style="display: block;"></div>
 		<div class="m-fixed-top">
 			<ul>
 				<li class="active"><a href="#this">人气推荐</a></li>
