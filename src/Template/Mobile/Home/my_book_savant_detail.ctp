@@ -26,9 +26,11 @@
         </li>
         <li>
             <h3>行业：
+                <em style="margin-left:5px;">
                 <?php foreach($book->user->industries as $industry): ?>
-                    <em style="margin-left:5px;"><?=$industry->name?></em>
+                    <?=$industry->name?>
                 <?php endforeach;?>
+                </em>
             </h3>
         </li>
         <li class="no-b-border">
