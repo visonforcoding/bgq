@@ -74,7 +74,6 @@ class ActivityController extends AppController {
                     },
                 ],
             ]);
-//            debug($activity);die;
             $activity->read_nums += 1; // 阅读加1
             $this->Activity->save($activity);
             $this->set('activity', $activity);

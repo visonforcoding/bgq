@@ -146,15 +146,17 @@
 <script type="text/html" id="comment_tpl">
     <div class="items">
         <div class="comm-info clearfix">
-            <a href="/user/home-page/{#user_id#}" class="alink">
-            <span><img src="{#user_avatar#}"/></span>
-            </a>
-            <a href="/user/home-page/{#user_id#}" class="alink">
-            <span class="infor-comm">
-                <i class="username" id='comment_username_{#id#}'>{#user_truename#} {#reply#}<time>{#create_time#}</time></i>
-                <i class="job">{#user_company#} {#user_position#}</i>
+            <span>
+                <a href="/user/home-page/{#user_id#}" class="alink">
+                    <img src="{#user_avatar#}"/>
+                </a>
             </span>
-            </a>
+            <span class="infor-comm">
+                <a href="/user/home-page/{#user_id#}" class="alink">
+                    <i class="username" id='comment_username_{#id#}'>{#user_truename#} {#reply#}<time>{#create_time#}</time></i>
+                    <i class="job">{#user_company#} {#user_position#}</i>
+                </a>
+            </span>
             <span>
                 <b class="addnum" id="addnum_{#id#}">+1</b>
                 <i class="iconfont" id="likecom_{#id#}" type="0" comid="{#id#}">&#xe615;</i>
