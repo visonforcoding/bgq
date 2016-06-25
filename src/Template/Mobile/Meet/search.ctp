@@ -16,7 +16,7 @@
         <h1><input type="text" name="keyword" placeholder="请输入关键词"></h1>
         </form>
         <div class='h-regiser' id="doSearch" style="position: relative;right: 0;font-size: 0.28rem;width:1.2rem; padding: 0.1rem 0 0.12rem;color:#fff;background: #dd1f4b;border-radius: 0.1rem;
-    text-align: center;">搜索</div>
+    text-align: center;">搜 索</div>
     </div>
     <div id='biggie'></div>
 </div>
