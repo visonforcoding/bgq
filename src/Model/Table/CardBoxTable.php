@@ -64,17 +64,17 @@ class CardBoxTable extends Table
         $validator
             ->integer('ownerid')
             ->requirePresence('ownerid', 'create')
-            ->notEmpty('ownerid');
+            ->notEmpty('ownerid', '名片夹主人id不能为空');
 
         $validator
             ->integer('uid')
             ->requirePresence('uid', 'create')
-            ->notEmpty('uid');
+            ->notEmpty('uid', '用户id不能为空');
 
         $validator
             ->integer('resend')
             ->requirePresence('resend', 'create')
-            ->notEmpty('resend');
+            ->notEmpty('resend','是否回赠不能为空');
 
         return $validator;
     }
