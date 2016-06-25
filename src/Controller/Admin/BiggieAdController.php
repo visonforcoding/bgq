@@ -57,10 +57,10 @@ class BiggieAdController extends AppController {
                 $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
             }
         }
-        $savants = $this->BiggieAd->Savants->find('list', ['limit' => 200]);
+        $biggies = $this->BiggieAd->Savants->find('list', ['limit' => 200]);
         $userTable = \Cake\ORM\TableRegistry::get('User');
         $users = $userTable->find('list', ['limit' => 200]);
-        $this->set(compact('biggieAd', 'savants', 'users'));
+        $this->set(compact('biggieAd', 'biggies', 'users'));
     }
 
     /**
@@ -72,7 +72,7 @@ class BiggieAdController extends AppController {
      */
     public function edit($id = null) {
         $biggieAd = $this->BiggieAd->get($id, [
-            'contain' => []
+            'contain' => ['Savants']
         ]);
         if ($this->request->is(['post', 'put'])) {
             $biggieAd = $this->BiggieAd->patchEntity($biggieAd, $this->request->data);
@@ -83,8 +83,13 @@ class BiggieAdController extends AppController {
                 $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
+        $selSavantIds = [];
+        if($biggieAd->savant)
+        {
+            $selSavantIds[] = $biggieAd->savant->id;
+        }
         $savants = $this->BiggieAd->Savants->find('list', ['limit' => 200]);
-        $this->set(compact('biggieAd', 'savants'));
+        $this->set(compact('biggieAd', 'selSavantIds'));
     }
 
     /**
@@ -131,7 +136,11 @@ class BiggieAdController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $query = $this->BiggieAd->find();
+        $query = $this->BiggieAd->find()->contain([
+            'Savants'=>function($q){
+                return $q->contain(['Users']);
+            }
+        ]);
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);

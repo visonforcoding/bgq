@@ -152,7 +152,7 @@ $(function () {
     });
     $('#select-savant').select2({
         language: "zh-CN",
-        placeholder: '选择一个标签'
+        placeholder: '选择一位专家'
     });
     $('form').submit(function () {
         var form = $(this);
