@@ -7,11 +7,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 		<title>并购圈-行业分类</title>
-		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
-		<link rel="stylesheet" type="text/css" href="../font/font/iconfont.css"/>
-        <script src="../js/view.js"></script>
-        <script ssssrc="../js/zepto.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/mobile/css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="/mobile/css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="/mobile/font/font/iconfont.css"/>
+        <script src="/mobile/js/view.js"></script>
+        <script ssssrc="/mobile/js/zepto.min.js"></script>
        
 	</head>
 	<body>
