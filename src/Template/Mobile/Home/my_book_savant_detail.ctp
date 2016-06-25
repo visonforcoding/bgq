@@ -16,23 +16,23 @@
     </div>
     <ul class="h-info-box">
         <li>
-            <h3>标签：<span>杨涛</span></h3>
+            <h3>标签：<em>杨涛</em></h3>
         </li>
         <li>
-            <h3>联系电话：<span><?=$book->user->phone?></span></h3>
+            <h3>联系电话：<em><?=$book->user->phone?></em></h3>
         </li>
         <li>
-            <h3>邮箱：<span><?=$book->user->email?></span></h3>
+            <h3>邮箱：<em><?=$book->user->email?></em></h3>
         </li>
         <li>
             <h3>行业：
                 <?php foreach($book->user->industries as $industry): ?>
-                    <span style="margin-left:5px;"><?=$industry->name?></span>
+                    <em style="margin-left:5px;"><?=$industry->name?></em>
                 <?php endforeach;?>
             </h3>
         </li>
         <li class="no-b-border">
-            <h3>所在地：<span>深圳</span></h3>
+            <h3>所在地：<em>深圳</em></h3>
         </li>
     </ul>
     <ul class="h-info-box s-title-pass">
