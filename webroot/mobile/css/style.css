@@ -110,7 +110,7 @@
 .newscon-box,.newscomment-box{background: #fff;overflow:hidden;padding-bottom:0.2rem;border-bottom:1px #c8c7cc solid;}
 .newscon-box h3{line-height:0.46rem;width:100%;font-size:0.4rem;color:#222c38; margin:0.3rem 0 0.2rem;padding:0 0.3rem;}
 .newscon-box img{width:90%;height:auto;display: block;margin:0.3rem auto;}
-.newscon-box p{width:90%;margin:0.1rem auto;text-indent:0.5rem;line-height: 0.42rem;font-size:0.3rem;color:#9ba4ad;text-align: justify;}
+.newscon-box p{width:90%;margin:0.1rem auto;text-indent:2em;line-height: 0.42rem;font-size:0.3rem;color:#9ba4ad;text-align: justify;}
 .con-bottom{float:right;line-height: 0.4rem;margin-right: 8%;color:#9ba4ad;margin-top:0.08rem;font-size:0.28rem;}
 .con-bottom i{margin:0 0.1rem; color:#9ba4ad;}
 .con-bottom i.like{font-size:0.3rem;}
