@@ -4,7 +4,7 @@
         <h1>
             话题
         </h1>
-        <a href="#this" class='iconfont share h-regiser'>&#xe614;</a>
+        <!-- <a href="#this" class='iconfont share h-regiser'>&#xe614;</a> -->
     </div>
 </header>
 <div class="wraper">
