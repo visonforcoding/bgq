@@ -48,10 +48,30 @@ class UserController extends AppController {
             $FansTable = \Cake\ORM\TableRegistry::get('UserFans');
             $isFans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$id'")->count();
         }
+        $isGive = '';
+        if ($this->user) {
+            if ($this->user->id == $id) {
+                $isMe = true;
+            }
+            else
+            {
+                $isAttention = $this->User->UserFans->find()->where(['user_id' => $this->user->id, 'following_id' => $id])->first();
+                if($isAttention)
+                {
+                    $type = $isAttention->type;
+                }
+                $isGiveCard = $this->User->CardBoxes->find()->where(['ownerid'=>$id, 'uid'=>$this->user->id])->first();
+                if($isGiveCard)
+                {
+                    $isGive = $isGiveCard;
+                }
+            }
+        }
         $this->set([
             'pageTitle'=>'个人主页',
             'self'=>$self,
-            'isFans'=>$isFans
+            'isFans'=>$isFans,
+            'isGive' => $isGive
         ]);
         $this->set(compact('user','industry_arr'));
     }
@@ -397,6 +417,54 @@ class UserController extends AppController {
         $this->request->session()->destroy();
         $this->Flash->success('您已退出登录！');
         return $this->redirect('/user/login?loginout=1');
+    }
+    
+    /**
+     * 递名片动作
+     * @param int $id 大咖id
+     */
+    public function giveCard($id){
+        $noLogin = $this->handCheckLogin();
+        if($noLogin)
+        {
+            return $noLogin;
+        }
+        $cardBoxTable = \Cake\ORM\TableRegistry::get('CardBox');
+        if($this->user->id == $id)
+        {
+            return $this->Util->ajaxReturn(false, '不可给自己递名片');
+        }
+        $data['ownerid'] = $id;
+        $data['uid'] = $this->user->id;
+        $isGive = $cardBoxTable->find()->where($data)->first();
+        if($isGive)
+        {
+            return $this->Util->ajaxReturn(false, '已递名片');
+        }
+        else
+        {
+            // 查询是否给我递过名片
+            $isGiveMe = $cardBoxTable->find()->where(['ownerid'=>$this->user->id, 'uid'=>$id])->first();
+            if($isGiveMe)
+            {
+                $data['resend'] = 1;
+            }
+            else
+            {
+                $data['resend'] = 2;
+            }
+            $cardcase = $cardBoxTable->newEntity();
+            $cardcase = $cardBoxTable->patchEntity($cardcase, $data);
+            $res = $cardBoxTable->save($cardcase);
+            if($res)
+            {
+                return $this->Util->ajaxReturn(true, '递名片成功');
+            }
+            else
+            {
+                return $this->Util->ajaxReturn(false, '系统错误');
+            }
+        }
     }
 
 }
