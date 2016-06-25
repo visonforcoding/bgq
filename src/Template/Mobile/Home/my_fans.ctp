@@ -6,7 +6,7 @@
     </div>
 </header>-->
 <div class="wraper">
-    <div class="h-add">
+    <div class="h-add" style='display:none'>
         <img src="/mobile/images/add1.png" alt="" />
     </div>
     <div  class="inner my-home-menu" >
