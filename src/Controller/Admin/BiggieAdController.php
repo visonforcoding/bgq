@@ -117,7 +117,7 @@ class BiggieAdController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'biggiead.' . $this->request->data('sidx');
+        $sort = 'biggieAd.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
