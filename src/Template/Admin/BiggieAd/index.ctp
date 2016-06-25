@@ -5,7 +5,7 @@
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
-            <a href="/admin/biggiead/add" class="btn btn-small btn-warning">
+            <a href="/admin/biggieAd/add" class="btn btn-small btn-warning">
                 <i class="icon icon-plus-sign"></i>添加
             </a>
             <div class="form-group">
@@ -35,7 +35,7 @@
         });
         $.zui.store.pageClear(); //刷新页面缓存清除
         $("#list").jqGrid({
-            url: "/admin/biggiead/getDataList",
+            url: "/admin/biggieAd/getDataList",
             datatype: "json",
             mtype: "POST",
             colNames:   
@@ -72,7 +72,7 @@
     function actionFormatter(cellvalue, options, rowObject) {
         response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
         response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-        response += '<a title="编辑" href="/admin/biggiead/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+        response += '<a title="编辑" href="/admin/biggieAd/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
         return response;
     }
 
@@ -84,7 +84,7 @@
                 type: 'post',
                 data: {id: id},
                 dataType: 'json',
-                url: '/admin/biggiead/delete',
+                url: '/admin/biggieAd/delete',
                 success: function (res) {
                     layer.msg(res.msg);
                      if (res.status) {
@@ -117,12 +117,12 @@
                     searchData['sidx'] = sortColumnName;
                     searchData['sort'] = sortOrder;
                     var searchQueryStr  = $.param(searchData);
-                    $("body").append("<iframe src='/admin/biggiead/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                    $("body").append("<iframe src='/admin/biggieAd/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
                 
              function doView(id) {
                 //查看明细
-                url = '/admin/biggiead/view/'+id;
+                url = '/admin/biggieAd/view/'+id;
                 layer.open({
                     type: 2,
                     title: '查看详情',
