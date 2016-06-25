@@ -34,6 +34,11 @@
                     },500);
                 }
             })();
+            function addParem(param, url){
+                if(!param) return '';
+                if(!url) url = location.href;
+                return url + (url.indexOf('?') > 0 ? '&':'?') + param;
+            }
         </script>
         <?= $this->fetch('static') ?>
     </head>
@@ -111,7 +116,7 @@
 
                 setTimeout(function() {
                     console.log("ERROR:" + h);
-                    alert("JS ERROR:" + h);
+                    //alert("JS ERROR:" + h);
                     //var a = encodeURIComponent(h), b = new Image;
                     //b.src = "//wq.jd.com/webmonitor/collect/badjs.json?Content=" + a + "&t=" + Math.random();
                     //当前用户登录ID、时间、手机号码、上报URL
