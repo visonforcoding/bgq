@@ -73,7 +73,7 @@
 .a-banner .yd span.cur{background: #fff;}
 .news-list-items{border-top:1px #c8c7cc solid; padding:0.36rem 0.3rem 0;background: #fff;padding-bottom:0.1rem;overflow:hidden;}
 .news-list-items:last-of-type{border-bottom:1px #c8c7cc solid;}
-.news-list-items time,.con-des time{margin-left:20px;color:#969fa9;font-size:0.28rem;line-height: 0.4rem;}
+.news-list-items time,.con-des time{margin-left:20px;color:#969fa9;font-size:0.26rem;line-height: 0.4rem;}
 .news-list-items h1,.con-des{width:100%;color:#969fa9;font-size:0.28rem;line-height: 0.5rem;position:relative;padding-left:0.65rem;height:0.5rem;}
 .con-des{border-bottom:1px #d2d2d2 solid;text-indent:0.6rem;padding:0 0.3rem 0.2rem;height:auto;}
 .newscon-box .con-des span{margin-left:-0.6rem;width:0.5rem;height:0.5rem;position:absolute;overflow:hidden;}
