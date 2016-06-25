@@ -105,7 +105,7 @@
         switch(em.id){
             case 'giveCard':
                 $.util.ajax({
-                    url: '/meet/giveCard/<?= $user->id ?>',
+                    url: '/user/giveCard/<?= $user->id ?>',
                     func: function(msg){
                         if(typeof msg == 'object')
                         {
