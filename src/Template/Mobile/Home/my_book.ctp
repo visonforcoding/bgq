@@ -19,7 +19,7 @@
         <a style="display:block" href="/home/my-book-detail/<?= $book->id ?>">
             <section class="internet-v-info no-margin-top">
                 <div class="innercon">
-                    <span class="head-img"><img src="<?= $book->subject->user->avatar ?>"/><i></i></span>
+                    <span class="head-img"><img src="<?= empty($book->subject->user->avatar)?'/mobile/images/touxiang.jpg':$book->subject->user->avatar ?>"/><i></i></span>
                     <div class="vipinfo my-meet-info">
                         <h3><?= $book->subject->user->truename ?><span class="meetnum">12人见过</span></h3>
                         <span class="job"><?= $book->subject->user->company ?>&nbsp;&nbsp;<?= $book->subject->user->position ?></span>
