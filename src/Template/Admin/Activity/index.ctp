@@ -103,7 +103,7 @@
                         response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(' + rowObject.id + ');"><i class="icon icon-qrcode"></i><div hidden id="' + rowObject.id + '" style="position:relative;top:0;"><img src="' + rowObject.qrcode + '" /></div> </a>';
                     } else if (rowObject.is_top == 1 && rowObject.is_check == 1) {
                         response += '<a title="取消置顶" href="javascript:void(0)" class="grid-btn untop" onclick="untop(' + rowObject.id + ')"><i class="icon icon-long-arrow-down"></i></a>';
-                        response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(' + rowObject.id + ');"><i class="icon icon-qrcode"></i><div hidden id="' + rowObject.id + '" style="position:relative;top:0;"><img src="' + rowObject.qrcode + '" /></div> </a>';
+                        response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(' + rowObject.id + ');"><i class="icon icon-qrcode"></i><div hidden id="code_' + rowObject.id + '" style="position:relative;top:0;"><img src="' + rowObject.qrcode + '" /></div> </a>';
                     }
                     if (rowObject.is_check == 0) {
                         response += '<a title="发布" href="javascript:void(0)" class="grid-btn release" onclick="release(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
@@ -113,7 +113,7 @@
                 }
                 
                 function oncode(id){
-                    var activity_id = '#'+id;
+                    var activity_id = '#code_'+id;
                     if($(activity_id).hasClass('active'))
                     {
                         $(activity_id).hide();
