@@ -25,19 +25,19 @@
 </div>
 <script type="text/html" id="listTpl">
     <section class="internet-v-info">
-        <a href="/user/home-page/{#fans_id#}" >
+        
             <div class="innercon">
-                <span class="head-img"><img src="{#fans_avatar#}"/><i></i></span>
+                <a href="/user/home-page/{#fans_id#}" ><span class="head-img"><img src="{#fans_avatar#}"/><i></i></span> </a>
                 <div class="vipinfo">
-                    <h3>{#fans_truename#}<span class="meetnum"></span></h3>
-                    <span class="job">{#fans_company#}&nbsp;&nbsp;{#fans_position#}</span>
+                   <a href="/user/home-page/{#fans_id#}" > <h3>{#fans_truename#}<span class="meetnum"></span></h3>
+                    <span class="job">{#fans_company#}&nbsp;&nbsp;{#fans_position#}</span></a>
                     <div class="mark">
                         <a href="#this">演员的自我修养</a>
                         <span class="meetnum">{#fans_fans#}人关注</span>
                     </div>
                 </div>
             </div>
-        </a>
+       
     </section>	
 </script>
 <?php $this->start('script') ?>
