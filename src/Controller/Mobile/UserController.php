@@ -424,8 +424,11 @@ class UserController extends AppController {
      * @param int $id 大咖id
      */
     public function giveCard($id){
+        
         $this->handCheckLogin();
         $cardBoxTable = \Cake\ORM\TableRegistry::get('CardBox');
+        $a = $cardBoxTable->find()->all();
+        debug($a);die;
         if($this->user->id == $id)
         {
             return $this->Util->ajaxReturn(false, '不可给自己递名片');
