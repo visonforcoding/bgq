@@ -93,7 +93,7 @@
                                     $('#list').trigger('reloadGrid');
                                 }
                             }
-                        })
+                        });
                     }, function () {
                     });
                 }
