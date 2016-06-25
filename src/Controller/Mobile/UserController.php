@@ -425,7 +425,7 @@ class UserController extends AppController {
      */
     public function giveCard($id){
         
-        $this->handCheckLogin();
+//        $this->handCheckLogin();
         $cardBoxTable = \Cake\ORM\TableRegistry::get('CardBox');
         $a = $cardBoxTable->find()->all();
         debug($a);die;
