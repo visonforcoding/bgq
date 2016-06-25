@@ -22,7 +22,7 @@
 
     <div class="h-home-menu">
         <ul class="clearfix">
-            <li><a href="/home/cardcase"><i class="iconfont">&#xe609;</i>名片夹</a></li>
+            <li><a href="/home/cardcase"><i class="iconfont">&#xe649;</i>名片夹</a></li>
             <li><a href="/user/home-page"><i class="iconfont">&#xe61c;</i>个人主页</a></li>
             <li><a href="/home/my-purse"><i class="iconfont">&#xe61b;</i>钱包</a></li>
             <li><a href="javascript:QRCode();"><i class="sao-bg"></i>扫一扫</a></li>
@@ -49,6 +49,7 @@
 </div>
 <?= $this->element('footer') ?>
 <?php $this->start('script') ?>
+<link rel="stylesheet" href="/mobile/css/font/font/iconfont.css" />
 <script>
     function QRCode() {
         if ($.util.isAPP) {
