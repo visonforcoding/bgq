@@ -3,11 +3,13 @@
     <?= $this->element('header'); ?>
     <div class="wraper a-wraper">
         <div class="a-search-box" id="search">
+             <a href="news-search.html"> 
             <div class="a-search">
-                <a href="news-search.html"> <i class="iconfont">&#xe613;</i></a>
+               <i class="iconfont">&#xe613;</i>
                 <div class="s-con">
                     <input type="text" placeholder="请输入关键词" class="search" />
                 </div>
+                </a>
             </div>
         </div>
         <div class="a-banner">
