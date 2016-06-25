@@ -294,9 +294,7 @@ class UserController extends AppController {
         $this->loadComponent('Sms');
         $mobile = $this->request->data('phone');
         $user = $this->User->findByPhoneAndEnabled($mobile, 1)->first();
-        if ($user) {
-            return $this->Util->ajaxReturn(['status' => true]);
-        } else {
+        if (!$user) {
             return $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或不可用']);
         }
         $code = createRandomCode(4, 2); //创建随机验证码
