@@ -17,7 +17,7 @@ class MeetController extends AppController {
         $this->loadModel('User');
     }
 
-//    protected $limit = '5'; // 分页条数
+    protected $limit = '5'; // 分页条数
     
     /**
      * Index method  专家约见首页
@@ -45,18 +45,15 @@ class MeetController extends AppController {
                 ->User
                 ->find()
                 ->contain(['Subjects'])
-//                ->matching('Industries', function($q) {
-//                    return $q->where(['Industries.id' => '1']);
-//                })
                 ->where(['enabled'=>'1', 'level'=>'2'])
-//                ->limit($this->limit)
+                ->limit($this->limit)
                 ->toArray();
         $this->set('meetjson', json_encode($users));
-        $this->set('pageTitle', '大咖');
+        $this->set('pageTitle', '约见');
     }
     
     /**
-     * 大咖首页点击类别获取结果
+     * 约见首页点击类别获取结果
      */
     public function getIndex(){
         $data = $this->request->data();
@@ -82,7 +79,7 @@ class MeetController extends AppController {
     }
 
     /**
-     * 大咖推荐
+     * 约见推荐
      */
     public function meetReco() {
         $dakas = $this->User->find()
@@ -312,7 +309,7 @@ class MeetController extends AppController {
     }
     
     /**
-     * 大咖收藏
+     * 约见收藏
      * @param int $id 大咖用户id
      */
     public function collect($id){
@@ -472,8 +469,12 @@ class MeetController extends AppController {
         $this->set('pageTitle', '行业');
     }
     
-    public function moreIndustries(){
+    public function moreIndustries($id){
         $this->set('pageTitle', '行业搜索');
+    }
+    
+    public function getMoreBiggie($page){
+        
     }
     
 }
