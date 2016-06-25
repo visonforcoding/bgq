@@ -91,7 +91,7 @@
     }
    if($('header').attr('display') == 'block'){
 
-    $('.a-search-box').css({'top':'0.81rem'});
+    $('.a-search-box').css('top','0.81rem');
    }
 </script>
 <?php
