@@ -33,39 +33,39 @@
         <div class="allmenu">
             <div class="menulist clearfix" id="allsort">
                 <a href="/meet/industries" id='sort_1' sort='1'>
-                    <i class="iconfont">&#xe600;</i>
+                    <i class="iconfont">&#xe63f;</i>
                     <span>互联网</span>
                 </a>
                 <a href="/meet/industries" id='sort_2' sort='2'>
-                    <i class="iconfont">&#xe602;</i>
+                    <i class="iconfont">&#xe642;</i>
                     <span>金融</span>
                 </a>
                 <a href="/meet/industries" id='sort_3' sort='3'>
-                    <i class="iconfont">&#xe601;</i>
+                    <i class="iconfont">&#xe640;</i>
                     <span>健康医疗</span>
                 </a>
                 <a href="/meet/industries" id='sort_4' sort='4'>
-                    <i class="iconfont">&#xe603;</i>
+                    <i class="iconfont">&#xe643;</i>
                     <span>艺术</span>
                 </a>
                 <a href="/meet/industries" id='sort_5' sort='5'>
-                    <i class="iconfont">&#xe604;</i>
+                    <i class="iconfont">&#xe644;</i>
                     <span>餐饮</span>
                 </a>
                 <a href="/meet/industries" id='sort_6' sort='6'>
-                    <i class="iconfont">&#xe605;</i>
+                    <i class="iconfont">&#xe645;</i>
                     <span>养生</span>
                 </a>
                 <a href="/meet/industries" id='sort_7' sort='7'>
-                    <i class="iconfont">&#xe606;</i>
+                    <i class="iconfont">&#xe646;</i>
                     <span>保险</span>
                 </a>
                 <a href="/meet/industries" id='sort_8' sort='8'>
-                    <i class="iconfont">&#xe607;</i>
+                    <i class="iconfont">&#xe647;</i>
                     <span>汽车</span>
                 </a>
                 <a href="/meet/moreIndustries">
-                    <i class="iconfont">&#xe608;</i>
+                    <i class="iconfont">&#xe648;</i>
                     <span>更多</span>
                 </a>
             </div>
@@ -106,6 +106,7 @@
 <?php $this->start('script'); ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script src="/mobile/js/meet_index.js"></script>
+<link rel="stylesheet" href="/mobile/css/font/font/iconfont.css" />
 <script>
     $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
         d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.jpg';
