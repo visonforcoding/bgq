@@ -19,16 +19,16 @@
             <?php if(!$self):?>
             <?php if ($isFans): ?>
                 <a href="javascript:void(0);" id="follow_btn_disable" class="tofocus-m">
-                    <span>√已关注</span>
+                    <span id="attention">√已关注</span>
                 <?php else: ?>
                     <a href="javascript:void(0);" id="follow_btn" data-id="<?= $user->id ?>" class="tofocus-m">
-                        <span>+关注</span>
+                        <span id="attention">+关注</span>
                     <?php endif; ?>
                 </a>
                 <a href="javascript:void(0);" class="tofocus-m">
                     <span id="giveCard">
                         <?php if ($isGive): ?>
-                            已递名片
+                            √已递名片
                         <?php else: ?>
                             递名片
                         <?php endif; ?>
@@ -90,6 +90,7 @@
                 data: {id: user_id},
                 func: function (res) {
                     $.util.alert(res.msg);
+                    $('#attention').text('√已关注')
                 }
             });
         });
@@ -110,6 +111,7 @@
                         if(typeof msg == 'object')
                         {
                             $.util.alert(msg.msg);
+                            $('#giveCard').text('√已递名片');
                         }
                     }
                 });
