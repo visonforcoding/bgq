@@ -3,6 +3,7 @@
         <h1>个人中心</h1>
     </div>
 </header>
+<link rel="stylesheet" href="/mobile/css/font/font/iconfont.css" />
 <div class="wraper">
     <div class="h-home-bottom">
         <a href="/user/home-page">
@@ -49,7 +50,7 @@
 </div>
 <?= $this->element('footer') ?>
 <?php $this->start('script') ?>
-<link rel="stylesheet" href="/mobile/css/font/font/iconfont.css" />
+
 <script>
     function QRCode() {
         if ($.util.isAPP) {
