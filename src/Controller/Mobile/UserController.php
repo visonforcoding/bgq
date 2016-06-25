@@ -443,7 +443,6 @@ class UserController extends AppController {
         {
             // 查询是否给我递过名片
             $isGiveMe = $cardBoxTable->find()->where(['ownerid'=>$this->user->id, 'uid'=>$id])->first();
-            debug($isGiveMe);die;
             if($isGiveMe)
             {
                 $data['resend'] = 1;
@@ -454,6 +453,7 @@ class UserController extends AppController {
             }
             $cardcase = $cardBoxTable->newEntity();
             $cardcase = $cardBoxTable->patchEntity($cardcase, $data);
+            debug($cardcase);die;
             $res = $cardBoxTable->save($cardcase);
             if($res)
             {
