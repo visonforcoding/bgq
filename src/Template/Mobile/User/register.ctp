@@ -38,6 +38,10 @@
 <script src="/mobile/js/lib/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>
 <script src="/mobile/js/register.js" type="text/javascript" charset="utf-8"></script>
 <script>
+    if(LEMON.isAPP)
+    {
+        LEMON.event.uploadPhoto('', callback());
+    }
     $(function () {
         $('#upload_pic').change(function () {
             var file = $(this).get(0).files[0];
