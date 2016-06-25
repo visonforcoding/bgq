@@ -138,7 +138,7 @@ class WxpayComponent extends Component {
         if(!$isApp){
             $params = [
                 'appId' => $this->app_id,
-                'timeStamp' => "'$timestamp'",
+                'timeStamp' => "$timestamp",
                 'nonceStr' => $nonceStr,
                 'package' => 'prepay_id=' . $prepay_id,
                 'signType' => 'MD5'
