@@ -259,9 +259,9 @@ class HomeController extends AppController {
             $content = $this->request->data('content');
             $need = $NeedTable->newEntity(['user_id' => $user_id, 'msg' => $content]);
             if ($NeedTable->save($need)) {
-                $this->Util->ajaxReturn(true, '提交成功');
+                return $this->Util->ajaxReturn(true, '提交成功');
             } else {
-                $this->Util->ajaxReturn(false, '提交失败');
+                return $this->Util->ajaxReturn(false, '提交失败');
             }
         }
         $this->set([
