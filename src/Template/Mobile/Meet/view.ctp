@@ -85,7 +85,7 @@
     // 分享设置
     window.shareConfig.link = 'http://m.chinamatop.com/news/view/<?= $biggie->id ?>';
     window.shareConfig.title = '并购帮大咖·<?= $biggie->truename ?>';
-    var share_desc = '<?= $biggie->savant->summary ?>';
+    var share_desc = '<?= isset($biggie->savant->summary)?$biggie->savant->summary:'并购帮大咖' ?>';
     share_desc && (window.shareConfig.desc = share_desc);
 </script>
 <script>

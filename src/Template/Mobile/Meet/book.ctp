@@ -45,6 +45,7 @@
             return;
         switch (em.id) {
             case 'submit':
+                alert('我要提交了');
                 var id = <?=$subject->id ?>;
                 var summary = $('#summary').val();
                 if(!summary){
