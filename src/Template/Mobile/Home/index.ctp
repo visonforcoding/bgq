@@ -3,7 +3,7 @@
         <h1>个人中心</h1>
     </div>
 </header>
-<link rel="stylesheet" href="/mobile/css/font/font/iconfont.css" />
+<link rel="stylesheet" href="/mobile/font/font/iconfont.css" />
 <div class="wraper">
     <div class="h-home-bottom">
         <a href="/user/home-page">
