@@ -84,7 +84,7 @@
             
            
             <span class="infor-comm">
-                <a class="alink" href="/user/home-page/{#user_id#}"> <i class="username">{#user_truename#}<time>{#create_time#}</time></i>  </a>
+                <a href="/user/home-page/{#user_id#}"> <i class="username">{#user_truename#}<time>{#create_time#}</time></i>  </a>
                 <i class="job">{#user_company#} {#user_position#}</i>
             </span>
           
