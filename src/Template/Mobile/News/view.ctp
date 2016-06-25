@@ -14,7 +14,7 @@
             <h3><?= $news->title ?></h3>
             <h1 class="con-des"><span><img src="<?= $news->user->avatar ? $news->user->avatar : '/mobile/images/touxiang.png'  ?>" /></span><?= $news->user->truename ?><time><?= date('Y-m-d H:i', strtotime($news->create_time)) ?></time></h1>
             <img src="<?= $news->cover ?>"/>
-            <p><?= strip_tags($news->body) ?></p>
+            <p><?= $news->body ?></p>
             <div class="con-bottom clearfix">
                 <span class="readnums">阅读<i><?= $this->Number->format($news->read_nums) ?></i></span>
                 <span  data-id="<?= $news->id ?>" <?php if (isset($news->praises) && !empty($news->praises)): ?> data-disable="1" class="liked"<?php endif; ?>
