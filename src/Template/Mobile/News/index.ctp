@@ -6,7 +6,7 @@
 </header>
 <div class="wraper newswraper">
     <div class="a-search-box" id="search">
-        <a href="news-search.html">
+        <a href="/news/search">
             <div class="a-search">
                 <i class="iconfont">&#xe613;</i>
                 <div class="s-con">
