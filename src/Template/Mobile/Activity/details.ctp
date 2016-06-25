@@ -146,11 +146,15 @@
 <script type="text/html" id="comment_tpl">
     <div class="items">
         <div class="comm-info clearfix">
+            <a href="/user/home-page/{#user_id#}" class="alink">
             <span><img src="{#user_avatar#}"/></span>
+            </a>
+            <a href="/user/home-page/{#user_id#}" class="alink">
             <span class="infor-comm">
                 <i class="username" id='comment_username_{#id#}'>{#user_truename#} {#reply#}<time>{#create_time#}</time></i>
                 <i class="job">{#user_company#} {#user_position#}</i>
             </span>
+            </a>
             <span>
                 <b class="addnum" id="addnum_{#id#}">+1</b>
                 <i class="iconfont" id="likecom_{#id#}" type="0" comid="{#id#}">&#xe615;</i>
@@ -176,6 +180,7 @@
         d.user_truename = d.user.truename;
         d.user_company = d.user.company;
         d.user_position = d.user.position;
+        d.user_id = d.user.id;
         if(d.pid>0)
         {
             d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.reply.truename + ' </span>：' + d.body;

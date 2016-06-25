@@ -79,11 +79,15 @@
 <script type="text/html" id="listTpl">
     <div class="items">
         <div class="comm-info clearfix">
+            <a class="alink" href="/user/home-page/{#user_id#}">
             <span><img src="{#user_avatar#}"/></span>
+            </a>
+            <a class="alink" href="/user/home-page/{#user_id#}">
             <span class="infor-comm">
                 <i class="username">{#user_truename#}<time>{#create_time#}</time></i>
                 <i class="job">{#user_company#} {#user_position#}</i>
             </span>
+            </a>
             <span data-disable="{#disable#}" data-id="{#id#}" id="praise_{#id#}">
                 <b class="addnum">+1</b>
                 <i style="{#style#}" class="iconfont praise">&#xe615;</i>
@@ -120,6 +124,7 @@
         d.user_truename = d.user.truename;
         d.user_company = d.user.company;
         d.user_position = d.user.position;
+        d.user_id = d.user.id;
         if (d.pid > 0) {
             d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.reply.truename + ' </span>：' + d.body;
         }
