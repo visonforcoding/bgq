@@ -27,7 +27,15 @@
                         <span>+关注</span>
                     <?php endif; ?>
                 </a>
-                <a href="javascript:void(0);" class="tofocus-m"><span>递名片</span></a>
+                <a href="javascript:void(0);" class="tofocus-m">
+                    <span id="giveCard">
+                        <?php if ($isGive): ?>
+                            已递名片
+                        <?php else: ?>
+                            递名片
+                        <?php endif; ?>
+                    </span>
+                </a>
             <?php endif;?>
         </h4>
     </div>
@@ -87,6 +95,32 @@
                 }
             });
         });
+    });
+    
+    $('body').on('tap', function(e){
+        var target = e.srcElement || e.target, em=target, i=1;
+        while(em && !em.id && i<=3){ em = em.parentNode; i++;}
+        if(!em || !em.id) return;
+        if(em.id.indexOf('common_')){
+            console.log($(em));
+        }
+        switch(em.id){
+            case 'giveCard':
+                $.util.ajax({
+                    url: '/meet/giveCard/<?= $user->id ?>',
+                    func: function(msg){
+                        if(typeof msg == 'object')
+                        {
+                            $.util.alert(msg.msg);
+                        }
+                    }
+                });
+                break;
+            case 'goTop':
+                window.scrollTo(0,0);
+                e.preventDefault();
+                break;
+        }
     });
 </script>
 <?php
