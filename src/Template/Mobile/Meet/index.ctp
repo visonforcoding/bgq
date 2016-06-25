@@ -106,7 +106,7 @@
 <?php $this->start('script'); ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script src="/mobile/js/meet_index.js"></script>
-<link rel="stylesheet" href="/mobile/css/font/font/iconfont.css" />
+<link rel="stylesheet" href="/mobile/font/font/iconfont.css" />
 <script>
     $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
         d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.jpg';
