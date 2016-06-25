@@ -435,7 +435,6 @@ class UserController extends AppController {
         $data['ownerid'] = $id;
         $data['uid'] = $this->user->id;
         $isGive = $cardBoxTable->find()->where($data)->first();
-        debug($isGive);die;
         if($isGive)
         {
             return $this->Util->ajaxReturn(false, '已递名片');
@@ -444,6 +443,7 @@ class UserController extends AppController {
         {
             // 查询是否给我递过名片
             $isGiveMe = $cardBoxTable->find()->where(['ownerid'=>$this->user->id, 'uid'=>$id])->first();
+            debug($isGiveMe);die;
             if($isGiveMe)
             {
                 $data['resend'] = 1;
