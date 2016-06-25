@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="/mobile/css/mobiscroll.css"/>
 <header class="myhome">
     <div class='inner'>
         <a href='javascript:history.go(-1);' class='toback'></a>
@@ -58,7 +59,7 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
 <script src="/mobile/js/mobiscroll.2.13.2.js" type="text/javascript" charset="utf-8"></script>
-<link rel="stylesheet" type="text/css" href="/mobile/css/mobiscroll.css"/>
+
 
 <script>
     $('.choice').mobiscroll().select({
