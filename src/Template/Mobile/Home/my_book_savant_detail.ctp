@@ -1,18 +1,19 @@
-<header class="m-to-more myhome">
+<header class="myhome no-bottom">
     <div class='inner'>
         <a href='#this' class='toback'></a>
         <h1>
             <?php if($book->status==0):?>待确认<?php endif;?>
             <?php if($book->status==1):?>已确认<?php endif;?>
         </h1>
-        <a href="#this" class='iconfont share h-regiser'>&#xe619;</a>
+        <!-- <a href="#this" class='iconfont share h-regiser'>&#xe619;</a> -->
     </div>
+    
+</header>
+<div class="wraper newswraper">
     <div class="h-home-bottom">
         <div><span><img src="<?=  empty($book->user->avatar)?'/mobile/images/touxiang.jpg':$book->user->avatar?>"/></span><i class="iconfont">&#xe61e;</i></div>
         <h3><?=$book->user->truename?><span><?=$book->user->company?> <?=$book->user->position?></span></h3>
     </div>
-</header>
-<div class="m-wraper m-fixed-bottom no-margin-b">
     <ul class="h-info-box">
         <li>
             <h3>标签：<span>杨涛</span></h3>
