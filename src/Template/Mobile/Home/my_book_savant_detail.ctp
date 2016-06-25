@@ -8,7 +8,7 @@
         <a href="#this" class='iconfont share h-regiser'>&#xe619;</a>
     </div>
     <div class="h-home-bottom">
-        <div><span><img src="<?=$book->user->avatar?>"/></span><i class="iconfont">&#xe61e;</i></div>
+        <div><span><img src="<?=  empty($book->user->avatar)?'/mobile/images/touxiang.jpg':$book->user->avatar?>"/></span><i class="iconfont">&#xe61e;</i></div>
         <h3><?=$book->user->truename?><span><?=$book->user->company?> <?=$book->user->position?></span></h3>
     </div>
 </header>
@@ -17,7 +17,6 @@
         <li>
             <h3>标签：<span>杨涛</span></h3>
         </li>
-
         <li>
             <h3>联系电话：<span><?=$book->user->phone?></span></h3>
         </li>

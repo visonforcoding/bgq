@@ -45,9 +45,7 @@
             return;
         switch (em.id) {
             case 'submit':
-                alert('我要提交了');
                 var id = <?=$subject->id ?>;
-                alert('我要提交了');
                 var summary = $('#summary').val();
                 if(!summary){
                     $.util.alert('内容不可为空');
@@ -57,7 +55,6 @@
                    url:'',
                    data:{id:id,summary:summary},
                    func:function(res){
-                       alert(res);
                        $.util.alert(res.msg);
                        if(res.status){
                            document.location.href='/meet/book-success';
