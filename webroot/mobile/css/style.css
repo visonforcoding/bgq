@@ -83,7 +83,7 @@
 .news-list-items h1,.con-des{display: inline-block;}
 .news-list-items h1 span img,.con-des img{width:100%;height:auto;display: block;}
 .newsbox{overflow:hidden;display: block; color:#969fa9;}
-.newsbox .sec-news-l{float:left;width:4.7rem;}
+.newsbox .sec-news-l{float:left;width:5.2rem;}
 /*超出隐藏*/
 .newsbox .sec-news-l h3,.newsbox .sec-news-l p,.newscon-box h3{word-break: break-all;display: -webkit-box;-webkit-line-clamp: 3;
     -webkit-box-orient: vertical;overflow: hidden;}
