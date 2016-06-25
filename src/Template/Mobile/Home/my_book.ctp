@@ -7,7 +7,7 @@
 </header>
 <div class="wraper">
     <div class="inner my-home-menu" >
-        <a href="my-customer.html" class="active">我是顾客</a>
+        <a href="/home/my-book" class="active">我是顾客</a>
         <a href="/home/my-book-savant">我是专家</a>
     </div>
     <div  class="inner my-home-slidemenu" >
@@ -34,6 +34,7 @@
 </div>
 <?php $this->start('script'); ?>
 <script>
+    var books = <?=  json_encode($books)?>; var savant_books = <?=  json_encode($savant_books)?>;
     if(LEMON.isAPP)
     {
         LEMON.sys.back('/home/index');
