@@ -40,6 +40,12 @@ class MeetController extends AppController {
         $biggieAds = $biggieAdTable->find()->contain(['Savants'])->all();
         $this->set('biggieAd', $biggieAds);
         
+        // 行业标签
+        $industriesTable = \Cake\ORM\TableRegistry::get('industry');
+        $industries = $industriesTable->find()->all();
+        $this->set('industries', $industries);
+        
+        
         // 默认用户
         $users = $this
                 ->User
@@ -481,7 +487,14 @@ class MeetController extends AppController {
                 ->where(['enabled'=>'1', 'level'=>'2'])
                 ->page($page, $this->limit)
                 ->toArray();
-        
+        if($biggies)
+        {
+            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$biggies]);
+        }
+        else
+        {
+            return $this->Util->ajaxReturn(false);
+        }
     }
     
 }
