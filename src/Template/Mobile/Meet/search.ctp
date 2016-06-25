@@ -7,7 +7,7 @@
         </h1>
        <!--  <a href="javascript:void(0);" class='h-regiser'>取消</a> -->
     </div>
-</header>-->
+</header>
 
 <div class="wraper">
     <div class='h-news-search'>
