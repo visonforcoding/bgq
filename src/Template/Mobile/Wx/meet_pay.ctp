@@ -6,7 +6,7 @@
         </h1>
     </div>
 </header>
-    <?php debug(json_encode($jsApiParameters)); ?>
+    <?php print json_encode($jsApiParameters); ?>
 <div class="wraper">
     <div class="h20"></div>
     <div class="infobox a-pay">
