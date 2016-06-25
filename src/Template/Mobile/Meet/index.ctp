@@ -32,39 +32,39 @@
     <div class="menusort clearfix">
         <div class="allmenu">
             <div class="menulist clearfix" id="allsort">
-                <a href="/meet/industries" id='sort_1' sort='1'>
+                <a href="/meet/moreIndustries/" id='sort_1' sort='1'>
                     <i class="iconfont">&#xe63f;</i>
                     <span>互联网</span>
                 </a>
-                <a href="/meet/industries" id='sort_2' sort='2'>
+                <a href="/meet/moreIndustries/" id='sort_2' sort='2'>
                     <i class="iconfont">&#xe642;</i>
                     <span>金融</span>
                 </a>
-                <a href="/meet/industries" id='sort_3' sort='3'>
+                <a href="/meet/moreIndustries/" id='sort_3' sort='3'>
                     <i class="iconfont">&#xe640;</i>
                     <span>健康医疗</span>
                 </a>
-                <a href="/meet/industries" id='sort_4' sort='4'>
+                <a href="/meet/moreIndustries/" id='sort_4' sort='4'>
                     <i class="iconfont">&#xe643;</i>
                     <span>艺术</span>
                 </a>
-                <a href="/meet/industries" id='sort_5' sort='5'>
+                <a href="/meet/moreIndustries/" id='sort_5' sort='5'>
                     <i class="iconfont">&#xe644;</i>
                     <span>餐饮</span>
                 </a>
-                <a href="/meet/industries" id='sort_6' sort='6'>
+                <a href="/meet/moreIndustries/" id='sort_6' sort='6'>
                     <i class="iconfont">&#xe645;</i>
                     <span>养生</span>
                 </a>
-                <a href="/meet/industries" id='sort_7' sort='7'>
+                <a href="/meet/moreIndustries/" id='sort_7' sort='7'>
                     <i class="iconfont">&#xe646;</i>
                     <span>保险</span>
                 </a>
-                <a href="/meet/industries" id='sort_8' sort='8'>
+                <a href="/meet/moreIndustries/" id='sort_8' sort='8'>
                     <i class="iconfont">&#xe647;</i>
                     <span>汽车</span>
                 </a>
-                <a href="/meet/moreIndustries">
+                <a href="/meet/industries">
                     <i class="iconfont">&#xe648;</i>
                     <span>更多</span>
                 </a>
