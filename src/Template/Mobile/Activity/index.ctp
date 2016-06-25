@@ -1,7 +1,7 @@
 
 <body>
     <?= $this->element('header'); ?>
-    <div class="wraper a-wraper">
+    <div class="wraper a-wraper pd10">
         <div class="a-search-box" id="search">
              <a href="/activity/search.html"> 
             <div class="a-search">
