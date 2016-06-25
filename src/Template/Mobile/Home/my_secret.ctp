@@ -43,7 +43,7 @@
         </li>
     </ul>
     <p class="inner f-color-gray">资料包括行业、擅长业务、标签、工作经历、教育经历等</p>
-    <a href="#this" class="nextstep">保存</a>
+    <a href="javascript:void(0);" class="nextstep">保存</a>
 </div>
 <!-- <div class='reg-shadow' style="display: none;"></div>
 <div class="checked-sex shadow-info" style="display: none;">
