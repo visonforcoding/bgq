@@ -4,7 +4,7 @@
         <!-- <a href="#this" class='iconfont news-serch h-regiser'>&#xe613;</a> -->
     </div>
 </header>
-<div class="wraper newswraper" style="margin-bottom: 1rem;">
+<div class="wraper newswraper">
     <div class="a-search-box" id="search">
         <a href="news-search.html">
             <div class="a-search">
