@@ -82,6 +82,7 @@
         </ul>
     </div>
     <div id='biggie'></div>
+    <div id="buttonLoading" class="loadingbox"></div>
 </div>
 <script type='text/html' id='biggie_tpl'>
     <section class="internet-v-info">
@@ -123,7 +124,7 @@
                 return;
             }
             $.util.showLoading('buttonLoading');
-            $.getJSON('/news/getMoreBiggie/'+page,function(res){
+            $.getJSON('/meet/getMoreBiggie/'+page,function(res){
                 console.log('page~~~'+page);
                 $.util.hideLoading('buttonLoading');
                 window.holdLoad = false;  //打开加载锁  可以开始再次加载
@@ -141,7 +142,7 @@
                         d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
                         return d;
                     });
-                    $('#news').append(html);
+                    $('#biggie').append(html);
                     page++;
                 }
             });

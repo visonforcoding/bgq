@@ -37,7 +37,7 @@
     $.util.dataToTpl('card', 'card_tpl',<?= $cardjson ?>, function (d) {
         d.user_id = d.other_card.id;
         d.user_truename = d.other_card.truename;
-        d.user_avatar = d.other_card.avatar;
+        d.user_avatar = d.other_card.avatar ? d.other_card.avatar : '/mobile/images/touxiang.png';
         d.user_company = d.other_card.company;
         d.user_position = d.other_card.position;
         d.user_phone = d.other_card.phone;
@@ -92,7 +92,7 @@
                                 $.util.dataToTpl('card', 'card_tpl', msg.data, function (d) {
                                     d.user_id = d.other_card.id;
                                     d.user_truename = d.other_card.truename;
-                                    d.user_avatar = d.other_card.avatar;
+                                    d.user_avatar = d.other_card.avatar ? d.other_card.avatar : '/mobile/images/touxiang.png';
                                     d.user_company = d.other_card.company;
                                     d.user_position = d.other_card.position;
                                     d.user_phone = d.other_card.phone;
@@ -127,7 +127,7 @@
                                 $.util.dataToTpl('card', 'card_tpl', msg.data, function (d) {
                                     d.user_id = d.other_card.id;
                                     d.user_truename = d.other_card.truename;
-                                    d.user_avatar = d.other_card.avatar;
+                                    d.user_avatar = d.other_card.avatar ? d.other_card.avatar : '/mobile/images/touxiang.png';
                                     d.user_company = d.other_card.company;
                                     d.user_position = d.other_card.position;
                                     d.user_phone = d.other_card.phone;

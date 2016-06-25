@@ -20,14 +20,14 @@
 
     <ul class="h-info-box e-info-box no-t-border">
 
-        <li class="btop">
+<!--        <li class="btop">
             <a href="">
                 <span>修改密码</span>
                 <div>
                     <span></span>
                 </div>
             </a>
-        </li>
+        </li>-->
 
         <li>
             <a href="">

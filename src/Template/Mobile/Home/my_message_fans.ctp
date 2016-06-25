@@ -41,7 +41,7 @@
     $.util.dataToTpl('follow', 'listTpl',<?= json_encode($fans) ?>, function(d){
         d.follower_truename = d.u.truename;
         d.follower_company = d.u.company;
-        d.follower_avatar = d.u.avatar;
+        d.follower_avatar = d.u.avatar ? d.u.avatar : '/mobile/images/touxiang.png';
         d.follower_position = d.u.position;
         if(d.uf.type=='2'){
             d.type = '<span class="meetnum f-color-black">已关注</span>';
