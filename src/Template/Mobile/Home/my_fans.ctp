@@ -51,7 +51,7 @@
         if (d) {
             d.fans_truename = d.user.truename;
             d.fans_company = d.user.company;
-            d.fans_avatar = d.user.avatar;
+            d.fans_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
             d.fans_position = d.user.position;
             d.fans_fans = d.user.fans;
             d.fans_id = d.user.id;

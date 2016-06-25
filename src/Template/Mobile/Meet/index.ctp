@@ -109,10 +109,45 @@
 <link rel="stylesheet" href="/mobile/font/font/iconfont.css" />
 <script>
     $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
-        d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.jpg';
+        d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
         d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
         return d;
     });
+    
+    var page = 2;
+    setTimeout(function(){
+    $(window).on("scroll", function () {
+        $.util.listScroll('items', function () {
+            if(page == 9999){
+                $('#buttonLoading').html('亲，没有更多条目了，请看看其他的栏目吧');
+                return;
+            }
+            $.util.showLoading('buttonLoading');
+            $.getJSON('/news/getMoreBiggie/'+page,function(res){
+                console.log('page~~~'+page);
+                $.util.hideLoading('buttonLoading');
+                window.holdLoad = false;  //打开加载锁  可以开始再次加载
+
+                if(!res.status) {  //拉不到数据了  到底了
+                    page = 9999;
+                    return;
+                }
+
+                if(res.status){
+                    var html = $.util.dataToTpl('', 'listTpl', res.data, function (d) {
+                        d.user_id = d.user.id;
+                        d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                        d.author = d.user.truename;
+                        d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
+                        return d;
+                    });
+                    $('#news').append(html);
+                    page++;
+                }
+            });
+        });
+    });
+    }, 2000);
     
     //轮播
     var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
