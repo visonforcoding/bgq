@@ -148,7 +148,7 @@ class WxpayComponent extends Component {
                 'appid' => $this->App_id,
                 'partnerid' => $this->mchid,
                 'prepayid' => $prepay_id,
-                'timestamp' => $timestamp,
+                'timestamp' => "$timestamp",
                 'noncestr' => $nonceStr,
                 'package' => 'Sign=WXPay',
             ];

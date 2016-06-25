@@ -378,6 +378,7 @@ class BusinessComponent extends Component {
         $order->status = 1;  //订单完成
         $pre_amount = $order->seller->money;
         $order->seller->money += $order->price;    //专家余额+
+        $order->seller->meet_nums += 1;    // 约见次数+1
         $order->dirty('seller', true);  //这里的seller 一定得是关联属性 不是关联模型名称 可以理解为实体
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
         $FlowTable = \Cake\ORM\TableRegistry::get('Flow');

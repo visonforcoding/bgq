@@ -91,7 +91,7 @@
             </a>
         </li>
         <li>
-            <a href="/home/my-business">
+            <a href="#/home/my-business">
                 <span>擅长业务：</span>
                 <div>
                     <span></span>
@@ -99,7 +99,7 @@
             </a>
         </li>
         <li>
-            <a href="edit-company-business.html">
+            <a href="#/home/edit-company-business">
                 <span>公司业务：</span>
                 <div>
                     <span></span>
@@ -107,7 +107,7 @@
             </a>
         </li>
         <li>
-            <a href="edit-education.html">
+            <a href="#/home/edit-education">
                 <span>教育经历：</span>
                 <div>
                     <span></span>
@@ -115,7 +115,7 @@
             </a>
         </li>
         <li>
-            <a  href="edit-work.html">
+            <a  href="#/home/edit-work">
                 <span>工作经历：</span>
                 <div>
 
@@ -124,7 +124,7 @@
             </a>
         </li>
         <li>
-            <a href="edit-card.html">
+            <a href="#/home/edit-card">
                 <span>我的名片：</span>
                 <div class="upload-user-img">
                     <span><input type="file"/></span>
@@ -132,7 +132,7 @@
             </a>
         </li>
         <li class="nobottom">
-            <a href="edit-mark.html">
+            <a href="#/edit-mark">
                 <span>个人标签：</span>
                 <div>
                     <span></span>

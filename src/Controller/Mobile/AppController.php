@@ -130,7 +130,9 @@ class AppController extends Controller {
                 $this->response->send();
                 return $this->response->stop();
             }
-            return $this->redirect('/user/login?redirect_url='.$url);
+            $this->redirect('/user/login?redirect_url='.$url); //return $response object
+            $this->response->send();
+            return $this->response->stop();
             //header("location:".'/user/login');
         }
     }
