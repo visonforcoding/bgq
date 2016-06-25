@@ -424,11 +424,7 @@ class UserController extends AppController {
      * @param int $id 大咖id
      */
     public function giveCard($id){
-        $noLogin = $this->handCheckLogin();
-        if($noLogin)
-        {
-            return $noLogin;
-        }
+        $this->handCheckLogin();
         $cardBoxTable = \Cake\ORM\TableRegistry::get('CardBox');
         if($this->user->id == $id)
         {

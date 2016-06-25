@@ -220,6 +220,12 @@ ALTER TABLE activityapply add is_sign TINYINT(2) DEFAULT 0 COMMENT '是否已签
 #活动表添加分享描述字段
 ALTER TABLE activity add share_desc VARCHAR(100) COMMENT '分享描述';
 
+#资讯表添加分享描述字段
+ALTER TABLE news add share_desc VARCHAR(100) COMMENT '分享描述';
+
+#约见表添加分享描述字段
+ALTER TABLE meet add share_desc VARCHAR(100) COMMENT '分享描述';
+
 #活动增加是否置顶
 ALTER TABLE activity add is_top TINYINT(2) DEFAULT 0 COMMENT '是否置顶';
 
@@ -241,6 +247,4 @@ CREATE TABLE `rd` (
 COMMENT='rd表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
-
-#==========06.24 执行==============
-
+#=======06.24  已执行=======

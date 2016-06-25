@@ -30,7 +30,7 @@
             <!--<span id="commit"><i  class="iconfont">&#xe618;</i>我要点评</span>-->
         </h3>
         <div id="coms"></div>
-        <span class='com-all' ><a href="#allcoment">显示全部</a></span>
+        <span class='com-all' id=""><a href="#allcoment">显示全部</a></span>
     </section>
     <!--专家推荐****************-->
     <?php if ($news->savants): ?>
