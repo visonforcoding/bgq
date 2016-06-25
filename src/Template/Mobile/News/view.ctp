@@ -79,15 +79,15 @@
 <script type="text/html" id="listTpl">
     <div class="items">
         <div class="comm-info clearfix">
-            <a class="alink" href="/user/home-page/{#user_id#}">
-            <span><img src="{#user_avatar#}"/></span>
-            </a>
-            <a class="alink" href="/user/home-page/{#user_id#}">
+            
+            <span><a class="alink" href="/user/home-page/{#user_id#}"><img src="{#user_avatar#}"/></a></span>
+            
+           
             <span class="infor-comm">
-                <i class="username">{#user_truename#}<time>{#create_time#}</time></i>
+                <a class="alink" href="/user/home-page/{#user_id#}"> <i class="username">{#user_truename#}<time>{#create_time#}</time></i>  </a>
                 <i class="job">{#user_company#} {#user_position#}</i>
             </span>
-            </a>
+          
             <span data-disable="{#disable#}" data-id="{#id#}" id="praise_{#id#}">
                 <b class="addnum">+1</b>
                 <i style="{#style#}" class="iconfont praise">&#xe615;</i>
