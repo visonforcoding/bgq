@@ -90,6 +90,7 @@
         LEMON.show.search('/activity/search');
     }
    if($('header').attr('display') == 'block'){
+    console.log(11);
     $('.a-search-box').css({'top','0.81rem'});
    }
 </script>
