@@ -298,7 +298,7 @@ class HomeController extends AppController {
         $CollectTable = \Cake\ORM\TableRegistry::get('Collect');
         $collects = $CollectTable->find()->hydrate(false)
                 ->contain(['News'])
-                ->where(['is_delete' => 0, 'Collect.user_id' => $user_id])
+                ->where(['is_delete' => 0, 'Collect .user_id' => $user_id])
                 ->orderDesc('Collect.create_time')
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
@@ -324,14 +324,23 @@ class HomeController extends AppController {
     public function myBook() {
         $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
         $type = $this->request->query('type');
-        $where['SubjectBook.status'] = in_array($type, ['0', '1', '3']) ? $type : 0;
+//        $where['SubjectBook.status'] = in_array($type, ['0', '1', '3']) ? $type : 0;
+        $where['SubjectBook.status !='] = 2;
         $where['SubjectBook.user_id'] = $this->user->id;
         $books = $BookTable->find()->contain(['Subjects', 'Subjects.User' => function($q) {
                         return $q->select(['truename', 'avatar', 'id', 'company', 'position']);
                     }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
-
+                    
+        $savant_books = $BookTable->find()->contain(['Subjects', 'Users' => function($q) {
+                        return $q->select(['truename', 'avatar', 'id', 'company', 'position']);
+                    }])->where([
+                       'SubjectBook.status !='=>2, 
+                       'SubjectBook.savant_id ='=>$this->user->id, 
+                    ])->orderDesc('SubjectBook.update_time')->toArray();            
         $this->set([
-            'pageTitle'=>'我的约见'
+            'pageTitle'=>'我的约见',
+            'books'=>$books,
+            'savant_books'=>$savant_books   //我是专家
         ]);
         $this->set(compact('books', 'type'));
     }
