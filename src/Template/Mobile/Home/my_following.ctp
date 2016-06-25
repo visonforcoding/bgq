@@ -52,7 +52,7 @@
     $.util.dataToTpl('follow', 'listTpl',<?= json_encode($followings) ?>, function(d){
         d.following_truename = d.following.truename;
         d.following_company = d.following.company;
-        d.following_avatar = d.following.avatar;
+        d.following_avatar = d.following.avatar ? d.following.avatar : '/mobile/images/touxiang.png';
         d.following_position = d.following.position;
         d.following_fans = d.following.fans;
         return d;
