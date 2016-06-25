@@ -35,10 +35,10 @@
 
 <script type="text/html" id="listTpl">
     <section class='news-list-items '>
-        <a href="/user/home-page/{#user_id#}">
+        <a href="javascript:void(0)">
             <h1><span><img src="{#avatar#}" /></span>{#author#}<time>{#create_time#}</time></h1>
         </a>
-        <a href="/news/view/{#id#}" class="newsbox clearfix">
+        <a href="javascript:void(0)" class="newsbox clearfix">
             <div class="sec-news-l">
                 <h3>{#title#}</h3>
                 <p>{#summary#}</p>
