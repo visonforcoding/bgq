@@ -25,7 +25,7 @@
 </div>
 <script type="text/html" id="listTpl">
     <section class="internet-v-info">
-        <a  class="alink" href="/user/home-page/{#fans_id#}" >
+        <a href="/user/home-page/{#fans_id#}" >
             <div class="innercon">
                 <span class="head-img"><img src="{#fans_avatar#}"/><i></i></span>
                 <div class="vipinfo">
