@@ -11,6 +11,6 @@
         <a href='javascript:void(0);'></a>
         <p>支付成功</p>
     </div>
-    <a href="my-customer.html" class="nextstep paybtn">查看预约</a>
-    <a href="meet-one.html" class="nextstep paybtn">返回主页</a>
+    <a href="/home/my-book" class="nextstep paybtn">查看预约</a>
+    <a href="/home/index" class="nextstep paybtn">返回主页</a>
 </div>
