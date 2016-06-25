@@ -114,7 +114,7 @@
 .con-bottom i{margin:0 0.1rem; color:#9ba4ad;}
 .con-bottom i.like{font-size:0.3rem;}
 .con-bottom i.collect{font-size:0.3rem;}
-.newscomment-box{border-top:1px #c8c7cc solid;margin-top:0.2rem;}
+.newscomment-box{border-top:1px #c8c7cc solid;}
 .newscomment-box .comment-title{width:100%;line-height: 0.8rem;font-size:0.3rem;color:#e01a48;height:0.8rem;
 border-bottom:1px #c8c7cc solid; padding:0 0.3rem;position:relative;}
 .newscomment-box .comment-title span{position:absolute;right:0.3rem;color:#7a7e83;font-size:0.28rem;}
