@@ -89,10 +89,7 @@
         $('#search').hide();
         LEMON.show.search('/activity/search');
     }
-   if($('header').attr('display') == 'block'){
-
-    $('.a-search-box').css({'top','0.81rem'});
-   }
+   
 </script>
 <?php
 $this->end('script');
