@@ -33,7 +33,7 @@
             <div class="con-bottom clearfix">
                 <!--阅读数-->
                 <span class="readnums">
-                    <i class="iconfont" style="font-size:0.3rem;">&#xe601;</i>
+                    <i style="font-size:0.3rem;">已阅读</i>
                     <?= $activity->read_nums; ?>
                 </span>
                 <!--喜欢按钮-->

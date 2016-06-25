@@ -32,6 +32,7 @@
         var phone = $('input[name="phone"]').val();
         if (is_mobile(phone)) {
             $.post('/user/sendVcode', {phone: phone}, function (res) {
+                console.log(res);
                 if (res.status === true) {
                     //$obj.attr('disabled ','true');
                     var text = '<i id="timer">' + 30 + '</i>s后重新发送';
