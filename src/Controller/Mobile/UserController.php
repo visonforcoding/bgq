@@ -23,6 +23,11 @@ class UserController extends AppController {
      */
     public function homePage($id=null) {
         $self = false;
+        if($this->user){
+            if($id ==$this->user->id){
+                $self = true;
+            }
+        }
         if(empty($id)){
             //自己看自己的
             $this->handCheckLogin();
