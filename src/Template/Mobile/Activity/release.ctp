@@ -1,11 +1,11 @@
 <div class="wraper">
     <form action="" method="post">
         <div class="h20"></div>
-        <div class="infoboxlist a-pay paytype">
+<!--        <div class="infoboxlist a-pay paytype">
             <ul class='ulinfo'>
                 <li id="pay">是否为众筹项目：<span class='infocard'><input type="checkbox" name='pay' checked="true" id="pay_input"/><i class='active' id="pay_i"></i></span></li>
             </ul>
-        </div>
+        </div>-->
         <div class="tojudge innercon tochoose" id="tochoose">
             选择行业标签
             <span></span>
