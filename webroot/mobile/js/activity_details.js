@@ -228,7 +228,14 @@ activity.prototype.bindEvent = function () {
                 }
                 break;
             case 'share':
-                LEMON.share.banner();
+                if(navigator.userAgent.toLowerCase().indexOf('micromessenger') == -1)
+                {
+                    LEMON.share.banner();
+                }
+                else
+                {
+                    $.util.alert('请点击右上角分享');
+                }
                 break;
             case 'goTop':
                 window.scroll(0, 0);
