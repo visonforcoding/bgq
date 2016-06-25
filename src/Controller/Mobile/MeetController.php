@@ -474,6 +474,13 @@ class MeetController extends AppController {
     }
     
     public function getMoreBiggie($page){
+        $biggies = $this
+                ->User
+                ->find()
+                ->contain(['Subjects'])
+                ->where(['enabled'=>'1', 'level'=>'2'])
+                ->page($page, $this->limit)
+                ->toArray();
         
     }
     
