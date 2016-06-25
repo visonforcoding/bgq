@@ -9,7 +9,7 @@
     <div class="h-home-bottom">
          <a href="<?php if($self): ?>/home/edit-userinfo<?php else:?>javascript:void(0)<?php endif;?>">
         <div>
-                <span><img src="<?= empty($user->avatar) ? '/mobile/images/touxiang.jpg' : $user->avatar ?>"/></span>
+                <span><img src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : $user->avatar ?>"/></span>
                 <i class="iconfont">&#xe61e;</i>
            
         </div>
