@@ -279,7 +279,7 @@ border-left:none;border-bottom:none;top:-1px;}
 .dk li{display: inline-block;overflow:hidden;border-radius: 0.1rem;-webkit-box-shadow: 0 0.05rem 0.2rem rgba(34, 44, 56, 0.2);margin-right:0.2rem;}
 .dk a{width:4.23rem;height:2.44rem;overflow:hidden; display: block;position:relative;border-radius: 0.1rem;}
 .dk img{width:100%;height:auto;display: block;}
-.dk span{position:absolute;right:-5%;padding:0 0.2rem;background: #E01A48;top:0.3rem;color:#fff;font-size:0.24rem;
+.dk span{position:absolute;right:-5%;padding:0 0.2rem 0 0.1rem ;background: #E01A48;top:0.3rem;color:#fff;font-size:0.24rem;
 height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;}
 @media only screen and (max-width: 412px) {
 	/*.dk span{width:2.2rem;height:0.44rem;line-height: 0.44rem;}*/
