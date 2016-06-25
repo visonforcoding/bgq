@@ -84,7 +84,7 @@
                         }
                         window.location.href = msg.redirect_url;
                     } else {
-                        alert(msg.msg);
+                        $.util.alert(msg.msg);
                     }
                 }
             }
@@ -99,7 +99,6 @@
                 data:{code:code},
                 url: '/wx/appLogin',
                 success:function(res){
-                    alert(res);
                     res = JSON.parse(res);
                     if(res.status){
                         $.util.setCookie('token_uin',res.token_uin,10*365*24*60);

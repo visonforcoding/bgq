@@ -240,7 +240,7 @@ class HomeController extends AppController {
         $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
         $unReadFollowCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0,'type'=>1])->count(); //未读关注消息
         $unReadSysCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0,'type !='=>1])->count(); //未读系统消息
-        $msgs = $UsermsgTable->find()->where(['user_id' => $user_id, 'type !=' => 1])->toArray();
+        $msgs = $UsermsgTable->find()->where(['user_id' => $user_id, 'type !=' => 1])->orderDesc('create_time')->toArray();
         $this->set([
             'pageTitle' => '系统消息',
             'unReadFollowCount'=>$unReadFollowCount,
