@@ -7,7 +7,7 @@
     <div class="h-home-bottom">
         <a href="/user/home-page">
             <div><span>
-                    <img src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : $user->avatar ?>"/></span><i class="iconfont">&#xe61e;</i>
+                    <img src="<?= empty($user->avatar) ? '/mobile/images/touxiang.jpg' : $user->avatar ?>"/></span><i class="iconfont">&#xe61e;</i>
             </div>
             <h3><?= $user->truename ?><span><?= $user->company ?> <?= $user->position ?></span></h3>
         </a>
