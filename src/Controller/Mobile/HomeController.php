@@ -261,6 +261,7 @@ class HomeController extends AppController {
             if ($NeedTable->save($need)) {
                 return $this->Util->ajaxReturn(true, '提交成功');
             } else {
+                
                 return $this->Util->ajaxReturn(false, '提交失败');
             }
         }
@@ -297,7 +298,7 @@ class HomeController extends AppController {
         $CollectTable = \Cake\ORM\TableRegistry::get('Collect');
         $collects = $CollectTable->find()->hydrate(false)
                 ->contain(['News'])
-                ->where(['is_delete' => 0, 'user_id' => $user_id])
+                ->where(['is_delete' => 0, 'Collect.user_id' => $user_id])
                 ->orderDesc('Collect.create_time')
                 ->formatResults(function($items) {
                     return $items->map(function($item) {

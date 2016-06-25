@@ -135,6 +135,8 @@ class WxController extends AppController {
             $openid = $this->user->app_wx_openid;
         }
         $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee,null,$isApp);
+        \Cake\Log\Log::debug('微信支付参数','devlog');
+        \Cake\Log\Log::debug($jsApiParameters,'devlog');
         $this->set(array(
             'jsApiParameters' => $jsApiParameters,
         ));
