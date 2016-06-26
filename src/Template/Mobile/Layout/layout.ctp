@@ -13,6 +13,7 @@
         <script type="text/javascript" src="/mobile/js/jsapi.js"></script>
         <script type="text/javascript" src="/mobile/js/zepto.min.js"></script>
         <script type="text/javascript" src="/mobile/js/view.js"></script>
+        <script type="text/javascript" src="/mobile/js/util.js"></script>
         <script>
             (function(){  //微信分享
                 if(navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1){
@@ -44,7 +45,7 @@
     </head>
     <body>
         <?= $this->fetch('content') ?>
-        <script type="text/javascript" src="/mobile/js/util.js"></script>
+        
         <script type="text/javascript" src="/mobile/js/function.js"></script>
         <script>
             (function(){

@@ -17,14 +17,14 @@
             <div class="outerbox">
                 <ul>
                     <?php foreach ($industries as $k=>$v): ?>
-                        <li><a href="javascript:void(0)"><?= $v['name'] ?></a></li>
+                        <li id="sub_<?= $v['id'] ?>" data_id="<?= $v['id'] ?>"><a href="javascript:void(0)"><?= $v['name'] ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
         </div>
     </div>
     <div style="height:1rem;"></div>
-    
+    <div id='biggies'></div>
 </div>
 
 <div class='reg-shadow' style="display: none;"></div>
@@ -52,8 +52,8 @@
         </div>
     </section>
 </script>
-<script type="text/html" id="subTpl">
-    <a href="javascript:void(0);">{#name#}</a>
+<script type='text/html' id='subTpl'>
+    <a href="/meet/subject_detail/{#id#}">{#title#}</a>
 </script>
 <script src="/mobile/js/loopScroll.js"></script>
 <script type="text/javascript">
