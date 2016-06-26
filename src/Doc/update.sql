@@ -248,3 +248,9 @@ COMMENT='rd表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
 #=======06.24  已执行=======
+
+#资讯表添加缩略图
+ALTER TABLE news add thumb VARCHAR(200) COMMENT '缩略图';
+
+#活动表添加缩略图
+ALTER TABLE activity add thumb VARCHAR(200) COMMENT '缩略图';

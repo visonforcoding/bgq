@@ -1,151 +1,101 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="format-detection"content="telephone=no, email=no" />
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-		<title>并购圈</title>
-		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
-		<script src="../js/view.js"></script>
-	</head>
-	<body>
-		<header>
-			<div class='inner'>
-				<a href='#this' class='toback'></a>
-				<h1>
-					互联网
-				</h1>
-				
-			</div>
-		</header>
-		
-		<div class="wraper">
-			<div class="navmenu j-sort">
-				<a href="#this" class="h-regiser m-sort active">默认排序</a>
-				
-				<div class="innercon">
-					<a href="#this" class="active allmark">全部</a>
-					<div class="outerbox">
-						
-						<ul>
-							<li><a href="#this">创业</a></li>
-							<li><a href="#this">行业经验</a></li>
-							<li><a href="#this">产品</a></li>
-							<li><a href="#this">研发</a></li>
-							<li><a href="#this">创业</a></li>
-							<li><a href="#this">行业经验</a></li>
-							<li><a href="#this">产品</a></li>
-							<li><a href="#this">研发</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div style="height:1rem;"></div>
-			<section class="internet-v-info">
-				<div class="innercon">
-					<span class="head-img"><img src="../images/vip.png"/><i></i></span>
-					<div class="vipinfo">
-						<h3>杨海鼎<span class="meetnum">22人见过</span></h3>
-						<span class="job">法国凯辉基金&nbsp;&nbsp;执行总监</span>
-						<div class="mark">
-							<a href="#this">演员的自我修养</a>
-							<a href="#this">如何上好一堂英语课</a>
-						</div>
-					</div>
-					
-				</div>
-			</section>
-			<section class="internet-v-info">
-				<div class="innercon">
-					<span class="head-img"><img src="../images/vip.png"/><i></i></span>
-					<div class="vipinfo">
-						<h3>杨海鼎<span class="meetnum">22人见过</span></h3>
-						<span class="job">法国凯辉基金&nbsp;&nbsp;执行总监</span>
-						<div class="mark">
-							<a href="#this">演员的自我修养</a>
-							<a href="#this">如何上好一堂英语课</a>
-						</div>
-					</div>
-					
-				</div>
-			</section>
-			<section class="internet-v-info">
-				<div class="innercon">
-					<span class="head-img"><img src="../images/vip.png"/><i></i></span>
-					<div class="vipinfo">
-						<h3>杨海鼎<span class="meetnum clearfix">22人见过</span></h3>
-						<span class="job">法国凯辉基金&nbsp;&nbsp;执行总监</span>
-						<div class="mark">
-							<a href="#this">演员的自我修养</a>
-							<a href="#this">如何上好一堂英语课</a>
-						</div>
-					</div>
-					
-				</div>
-			</section>
-			<section class="internet-v-info">
-				<div class="innercon">
-					<span class="head-img"><img src="../images/vip.png"/><i></i></span>
-					<div class="vipinfo">
-						<h3>杨海鼎<span class="meetnum">22人见过</span></h3>
-						<span class="job">法国凯辉基金&nbsp;&nbsp;执行总监</span>
-						<div class="mark">
-							<a href="#this">演员的自我修养</a>
-							<a href="#this">如何上好一堂英语课</a>
-						</div>
-					</div>
-					
-				</div>
-			</section>
-			<section class="internet-v-info">
-				<div class="innercon">
-					<span class="head-img"><img src="../images/vip.png"/><i></i></span>
-					<div class="vipinfo">
-						<h3>杨海鼎<span class="meetnum">22人见过</span></h3>
-						<span class="job">法国凯辉基金&nbsp;&nbsp;执行总监</span>
-						<div class="mark">
-							<a href="#this">演员的自我修养</a>
-							<a href="#this">如何上好一堂英语课</a>
-						</div>
-					</div>
-					
-				</div>
-			</section>
-			<section class="internet-v-info">
-				<div class="innercon">
-					<span class="head-img"><img src="../images/vip.png"/><i></i></span>
-					<div class="vipinfo">
-						<h3>杨海鼎<span class="meetnum">22人见过</span></h3>
-						<span class="job">法国凯辉基金&nbsp;&nbsp;执行总监</span>
-						<div class="mark">
-							<a href="#this">演员的自我修养</a>
-							<a href="#this">如何上好一堂英语课</a>
-						</div>
-					</div>
-					
-				</div>
-			</section>
-		</div>
-	
-	<div class='reg-shadow' style="display: none;"></div>
-		<div class="m-fixed-top" style="display: none;">
-			<ul>
-				<li class="active"><a href="#this">人气推荐</a></li>
-				<li><a href="#this">最新上榜</a></li>
-				<li><a href="#this">评价最好</a></li>
-				<li><a href="#this">约见最多</a></li>
-			</ul>
-		</div>
-	</div>
-	<script type="text/javascript">
-		$('.m-sort').on('touchstart',function(e){
-			$('.reg-shadow').css('display','block');
-			$('.m-fixed-top').css('display','block');
-			// $('body').css({'height':'100%','overflow':'hidden'})
-		})
-	</script>
-	</body>
-</html>
+<header>
+    <div class='inner'>
+        <a href='#this' class='toback'></a>
+        <h1>
+            互联网
+        </h1>
+
+    </div>
+</header>
+
+<div class="wraper">
+    <div class="navmenu j-sort">
+        <a href="javascript:void(0);" class="h-regiser m-sort active" id="sort">默认排序</a>
+
+        <div class="innercon">
+            <a href="/meet/moreIndustries" class="allmark <?php echo $id ? '':'active' ?>">全部</a>
+            <div class="outerbox">
+                <ul>
+                    <?php foreach ($industries as $k=>$v): ?>
+                        <li><a href="javascript:void(0)"><?= $v['name'] ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div style="height:1rem;"></div>
+    
+</div>
+
+<div class='reg-shadow' style="display: none;"></div>
+<div class="m-fixed-top" style="display: none;">
+    <ul>
+        <li><a href="javascript:void(0);">人气推荐</a></li>
+        <li><a href="javascript:void(0);">最新上榜</a></li>
+        <li><a href="javascript:void(0);">评价最好</a></li>
+        <li><a href="javascript:void(0);">约见最多</a></li>
+    </ul>
+</div>
+<script type='text/html' id='biggie_tpl'>
+    <section class="internet-v-info">
+        <div class="innercon">
+            <a href="/meet/view/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
+            <div class="vipinfo">
+                <a href="/meet/view/{#id#}">
+                    <h3>{#truename#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
+                    <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
+                </a>
+                <div class="mark">
+                    {#subjects#}
+                </div>
+            </div>
+        </div>
+    </section>
+</script>
+<script type="text/html" id="subTpl">
+    <a href="javascript:void(0);">{#name#}</a>
+</script>
+<script src="/mobile/js/loopScroll.js"></script>
+<script type="text/javascript">
+    window.sort = true;
+    
+    $.util.dataToTpl('biggies', 'biggie_tpl',<?= $biggiejson ?>, function (d) {
+        d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+        d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
+        return d;
+    });
+    $('body').on('tap', function(e){
+        var target = e.srcElement || e.target, em=target, i=1;
+        while(em && !em.id && i<=3){ em = em.parentNode; i++;}
+        if(!em || !em.id) return;
+        if(em.id.indexOf('common_') != -1){
+            console.log($(em));
+        }
+        switch(em.id){
+            case 'imageViewer': case 'fullImg':
+                //do();
+            break;
+            case 'sort':
+                if(window.sort == true)
+                {
+                    $('.reg-shadow').show();
+                    $('.m-fixed-top').show();
+                    window.sort = false;
+                }
+                else
+                {
+                    $('.reg-shadow').hide();
+                    $('.m-fixed-top').hide();
+                    window.sort = true;
+                }
+                break;
+            case 'detailClosePC':
+                //do();
+                break;
+            case 'goTop':
+                window.scrollTo(0,0);
+                e.preventDefault();
+                break;
+        }
+    });
+</script>
