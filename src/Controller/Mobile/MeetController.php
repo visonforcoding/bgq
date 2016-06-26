@@ -121,13 +121,16 @@ class MeetController extends AppController {
      * 专家详情页
      */
     public function view($id = null) {
+        $self = false;
+        if($this->user){
+            if($id == $this->user->id){
+                $self = true;
+            }
+        }
         $isCollect = '';
         // 是否已收藏
         if ($this->user) {
-            $isCollect = $this
-                    ->User
-                    ->Collect
-                    ->find()
+            $isCollect = $this->User->Collect->find()
                     ->where(['user_id' => $this->user->id, 'relate_id' => $id])
                     ->first();
             if ($isCollect) {
@@ -136,8 +139,8 @@ class MeetController extends AppController {
                 $isCollect = 0;
             }
         }
+        $biggie = $this->User->get($id, ['contain' => ['Savant', 'Subjects','RecoUsers','RecoUsers.Users']]);
         $this->set('isCollect', $isCollect);
-        $biggie = $this->User->get($id, ['contain' => ['Savant', 'Subjects']]);
         $this->set([
             'biggie' => $biggie,
             'pageTitle'=>$biggie->truename.'的专家主页'
@@ -289,17 +292,13 @@ class MeetController extends AppController {
         if ($this->user) {
             if ($this->user->id == $id) {
                 $isMe = true;
-            }
-            else
-            {
+            }else{
                 $isAttention = $this->User->UserFans->find()->where(['user_id' => $this->user->id, 'following_id' => $id])->first();
-                if($isAttention)
-                {
+                if($isAttention){
                     $type = $isAttention->type;
                 }
                 $isGiveCard = $this->User->CardBoxes->find()->where(['ownerid'=>$id, 'uid'=>$this->user->id])->first();
-                if($isGiveCard)
-                {
+                if($isGiveCard){
                     $isGive = $isGiveCard;
                 }
             }
@@ -479,6 +478,36 @@ class MeetController extends AppController {
         $this->set('pageTitle', '行业搜索');
     }
     
+
+    /**
+     * 推荐他
+     */
+    public function recom($id){
+        $this->handCheckLogin();
+        if($this->request->is('post')){
+            $user_id = $this->user->id;
+            if($user_id==$id){
+                return $this->Util->ajaxReturn(false,'不可推荐自己');
+            }
+            $RecomTable = \Cake\ORM\TableRegistry::get('SavantReco');
+            $recom = $RecomTable->newEntity([
+                'user_id' => $user_id,
+                'savant_id'=>$id,
+            ]);
+            if($RecomTable->save($recom)){
+                $SavantTable = \Cake\ORM\TableRegistry::get('Savant');
+                $savant = $SavantTable->findByUser_id($id)->first();
+                $savant->reco_nums += 1;
+                $SavantTable->save($savant);
+                return $this->Util->ajaxReturn(['status'=>true,'msg'=>'推荐成功',
+                    'avatar'=>  empty($this->user->avatar)?'/mobile/images/touxiang.jpg':$this->user->avatar
+                        ]);
+            }else{
+                return $this->Util->ajaxReturn(false,  errorMsg($recom,'推荐失败'));
+            }
+        }
+    }
+
     public function getMoreBiggie($page){
         $biggies = $this
                 ->User
@@ -497,4 +526,5 @@ class MeetController extends AppController {
         }
     }
     
+
 }

@@ -66,11 +66,12 @@
             <a href="javascript:void(0)">
                 <span>性别：</span>
                 <div>
-                    <span><select name="" class='checkedsex'>
+                    <span>
+                    <select name="gender" class='checkedsex'>
                         <option value="1">男</option>
                         <option value="2">女</option>
                     </select>
-                </span>
+                    </span>
                 </div>
             </a>
         </li>

@@ -77,6 +77,12 @@ class UserTable extends Table {
             'joinType' => 'INNER',
             'className' => 'Collect',
         ]);
+        
+        $this->hasMany('RecoUsers',[
+            'foreignKey'=>'savant_id',
+            'joinType'=>'LEFT',
+            'className'=>'SavantReco'
+        ]);
 
         $this->addBehavior('Timestamp', [
             'events' => [
