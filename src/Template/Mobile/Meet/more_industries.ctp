@@ -43,7 +43,7 @@
 					</div>
 				</div>
 			</div>
-			
+			<div style="height:1rem;"></div>
 			<section class="internet-v-info">
 				<div class="innercon">
 					<span class="head-img"><img src="../images/vip.png"/><i></i></span>
@@ -130,8 +130,8 @@
 			</section>
 		</div>
 	
-	<div class='reg-shadow' style="display: block;"></div>
-		<div class="m-fixed-top">
+	<div class='reg-shadow' style="display: none;"></div>
+		<div class="m-fixed-top" style="display: none;">
 			<ul>
 				<li class="active"><a href="#this">人气推荐</a></li>
 				<li><a href="#this">最新上榜</a></li>
@@ -140,5 +140,12 @@
 			</ul>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$('.m-sort').on('touchstart',function(e){
+			$('.reg-shadow').css('display','block');
+			$('.m-fixed-top').css('display','block');
+			// $('body').css({'height':'100%','overflow':'hidden'})
+		})
+	</script>
 	</body>
 </html>
