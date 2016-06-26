@@ -19,18 +19,18 @@
     </div>
     <ul class="m-info-box">
         <li>
-            <h3><?= $biggie->truename ?><em><?= $biggie->company ?><?= $biggie->position ?></em></h3>
+            <h3><?= $biggie->truename ?><em><?= $biggie->company ?></em><em><?= $biggie->position ?></em></h3>
             <span class="identification"></span>
         </li>
         <li>
             <span  class="commendnum">
-
-                <p><i class="iconfont">&#xe615;</i>
-                    <img src="/mobile/images/user.png"/><img src="/mobile/images/user.png"/><img src="/mobile/images/user.png"/>
-                    <img src="/mobile/images/user.png"/><img src="/mobile/images/user.png"/><img src="/mobile/images/user.png"/>
-                    <img src="/mobile/images/user.png"/></p>
-                等<i>64</i>人推荐</span>
-            <a href="javascript:void(0);">推荐他</a>
+                <p id="recom_avatar">
+                    <?php foreach ($biggie->reco_users as $reco_user): ?>
+                        <img src="<?= empty($reco_user->user->avatar) ? '/mobile/images/touxiang.jpg' : $reco_user->user->avatar ?>"/>
+                    <?php endforeach; ?>
+                </p>
+                等<i id="meet_nums"><?=$biggie->savant->reco_nums?></i>人推荐</span>
+            <a id="recom" href="javascript:void(0);">推荐他</a>
         </li>
         <li class="conr"><a class="alink mr" href="/user/home-page/<?= $biggie->id ?>" class="tohome"><i class="iconfont">&#xe60d;</i>个人主页</a></li>
     </ul>
@@ -125,6 +125,20 @@
                             }
                         }
                     }
+                });
+                break;
+            case 'recom':
+                $.util.ajax({
+                   url:'/meet/recom/<?=$biggie->id?>', 
+                   func:function(res){
+                       if(typeof res ==='object'){
+                           $.util.alert(res.msg);
+                           if(res.status===true){
+                               $('#recom_avatar').prepend('<img src="'+res.avatar+'"/>');
+                               $('#meet_nums').text((parseInt($('#meet_nums').text())+1));
+                           }
+                       }
+                   }
                 });
                 break;
             case 'share':
