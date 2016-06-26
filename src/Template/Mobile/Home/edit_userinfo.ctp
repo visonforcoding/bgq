@@ -1,3 +1,6 @@
+<?php $this->start('css')?>
+<link rel="stylesheet" type="text/css" href="/mobile/css/mobiscroll.css"/>
+<?php $this->end('css')?>
 <header>
     <div class='inner'>
         <a href='javascript:history.go(-1);' class='toback'></a>
@@ -17,8 +20,7 @@
             <a href="javascript:void(0)">
                 <span>头像：</span>
                 <div class="upload-user-img">
-                   
-                    <span> <input type="hidden" name="avatar" ><input  id="upload_pic" type="file" /></span>
+                    <span> <input type="hidden" name="avatar" value="<?=$user->avatar?>" ><input  id="upload_pic" type="file" /></span>
                 </div>
             </a>
         </li>
@@ -68,8 +70,8 @@
                 <div>
                     <span>
                     <select name="gender" class='checkedsex'>
-                        <option value="1">男</option>
-                        <option value="2">女</option>
+                        <option value="1" <?php if($user->gender==1):?>selected="true"<?php endif; ?>>男</option>
+                        <option value="2" <?php if($user->gender==2):?>selected="false"<?php endif; ?>>女</option>
                     </select>
                     </span>
                 </div>
@@ -92,7 +94,7 @@
             </a>
         </li>
         <li>
-            <a href="#/home/my-business">
+            <a href="/home/my-business">
                 <span>擅长业务：</span>
                 <div>
                     <span></span>
@@ -100,7 +102,7 @@
             </a>
         </li>
         <li>
-            <a href="#/home/edit-company-business">
+            <a href="/home/edit-company-business">
                 <span>公司业务：</span>
                 <div>
                     <span></span>
@@ -108,7 +110,7 @@
             </a>
         </li>
         <li>
-            <a href="#/home/edit-education">
+            <a href="/home/edit-education">
                 <span>教育经历：</span>
                 <div>
                     <span></span>
@@ -116,7 +118,7 @@
             </a>
         </li>
         <li>
-            <a  href="#/home/edit-work">
+            <a  href="/home/edit-work">
                 <span>工作经历：</span>
                 <div>
 
@@ -125,7 +127,7 @@
             </a>
         </li>
         <li>
-            <a href="#/home/edit-card">
+            <a href="/home/edit-card">
                 <span>我的名片：</span>
                 <div class="upload-user-img">
                     <span><input type="file"/></span>
@@ -133,7 +135,7 @@
             </a>
         </li>
         <li class="nobottom">
-            <a href="#/edit-mark">
+            <a href="/home/edit-mark">
                 <span>个人标签：</span>
                 <div>
                     <span></span>
@@ -181,7 +183,6 @@
 <script src="/mobile/js/lib/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>
 <script src="/mobile/js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
 <script src="/mobile/js/mobiscroll.2.13.2.js" type="text/javascript" charset="utf-8"></script>
-<link rel="stylesheet" type="text/css" href="/mobile/css/mobiscroll.css"/>
 <script>
     $(function () {
         $('#upload_pic').click(function(){
