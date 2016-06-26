@@ -315,7 +315,7 @@ $.extend(simpleScroll.prototype, {
         }
     },
     showDef:function(dom) {
-        this.offset = -dom.offsetLeft();
+        this.offset = -dom.offset().left;
         this.moveDom.css({'left':this.offset+'px'});
     }
 });
