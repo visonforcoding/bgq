@@ -31,7 +31,7 @@ class MeetController extends AppController {
                 ->find()
                 ->where("`enabled` = '1' and `type` = '3'")
                 ->orderDesc('create_time')
-//                ->limit(3)
+                ->limit(3)
                 ->toArray();
         $this->set(compact('banners'));
         
@@ -239,12 +239,16 @@ class MeetController extends AppController {
         $User = $this
                 ->User
                 ->find()
-                ->matching(['Subjects'=>function($q)use($keyword){
-                    return $q->where(['Subjects.title like'=>'%'.$keyword.'%']);
-                }])
-                ->where(['enabled'=>'1', 'level'=>'2', 'truename like'=>'%'.$keyword.'%'])
+                ->matching('Subjects', function($q)use($keyword){
+                    return $q->where(['title like'=>'%'.$keyword.'%']);
+                })
+//                ->contain(['Subjects'=>function($q)use($keyword){
+//                    return $q->where(['title like' => "%$keyword%"]);
+//                }])
+//                ->Where(['enabled'=>'1', 'level'=>'2', 'truename like'=>'%'.$keyword.'%'])
 //                ->limit(10)
                 ->toArray();
+        debug($User);die;
         if($User) {
             return $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $User]);
         } else {
@@ -474,6 +478,9 @@ class MeetController extends AppController {
             $biggie = $this
                     ->User
                     ->find()
+                    ->matching('Industries', function($q)use($id){
+                        return $q->where(['Industries.id'=>$id]);
+                    })
                     ->contain(['Subjects'])
                     ->where(['enabled'=>'1', 'level'=>'2'])
                     ->toArray();
@@ -481,11 +488,16 @@ class MeetController extends AppController {
         }
         else
         {
-            $biggie = $this->User->find()->contain(['Subjects'])->all()->toArray();
-            $this->set('biggie', $biggie);
+            $biggie = $this
+                    ->User
+                    ->find()
+                    ->contain(['Subjects'])
+                    ->where(['enabled'=>'1', 'level'=>'2'])
+                    ->toArray();
+            $this->set('biggiejson', json_encode($biggie));
         }
         $industriesTable = \Cake\ORM\TableRegistry::get('industry');
-        $industries = $industriesTable->find()->all();
+        $industries = $industriesTable->find()->where(['pid !='=>0])->toArray();
         $this->set([
             'pageTitle'=>'行业搜索',
             'industries'=>$industries,
