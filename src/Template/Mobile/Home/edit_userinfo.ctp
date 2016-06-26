@@ -17,8 +17,8 @@
             <a href="javascript:void(0)">
                 <span>头像：</span>
                 <div class="upload-user-img">
-                    <input type="hidden" name="avatar" >
-                    <span><input  id="upload_pic" type="file" /></span>
+                   
+                    <span> <input type="hidden" name="avatar" ><input  id="upload_pic" type="file" /></span>
                 </div>
             </a>
         </li>
