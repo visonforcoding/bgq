@@ -44,7 +44,7 @@ a,button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);}
 .innercon{margin:0 auto;padding:0 0.3rem;background: #fff;}
 .h20{height:0.2rem;border-top:1px #c8c7cc solid;border-bottom:1px #c8c7cc solid;}
 .wraper .color-items{color:#e01a48;}
-.wraper .f-color-gray{color:#bbc0c6;font-size:0.2rem;line-height: 0.32rem;}
+.wraper .f-color-gray{color:#bbc0c6;font-size:0.28rem;line-height: 0.32rem;}
 .wraper .f-color-black{color:#222c38;}
 .wraper .changecolor{color:#da2051;}
 .wraper .ft26{font-size:0.26rem;}
