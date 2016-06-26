@@ -524,9 +524,85 @@ class HomeController extends AppController {
      * 擅长业务
      */
     public function myBusiness() {
+        $user = $this->User->get($this->user->id);
+        if($this->request->is('post')){
+            $user = $this->User->patchEntity($user,  $this->request->data());
+            if($this->User->save($user)){
+                return $this->Util->ajaxReturn(true,'修改成功');
+            }else{
+                return $this->Util->ajaxReturn(false,'保存失败');
+            }
+        }
         $this->set([
-            'pageTitle' => '擅长业务'
+            'pageTitle' => '擅长业务',
+            'user'=>$user
         ]);
+    }
+    
+    
+    /**
+     * 公司业务
+     * @return type
+     */
+    public function editCompanyBusiness(){
+        $user = $this->User->get($this->user->id);
+        if($this->request->is('post')){
+            $user = $this->User->patchEntity($user,  $this->request->data());
+            if($this->User->save($user)){
+                return $this->Util->ajaxReturn(true,'修改成功');
+            }else{
+                return $this->Util->ajaxReturn(false,'保存失败');
+            }
+        }
+        $this->set([
+            'pageTitle' => '公司业务',
+            'user'=>$user
+        ]);
+    }
+    
+    
+    /**
+     * 编辑教育经历
+     */
+    public function editEducation(){
+        $this->set([
+            'pageTitle' =>'编辑教育经历'
+        ]);
+    }
+    
+    
+    /**
+     * 编辑工作经历
+     */
+    public function editWork(){
+        $CareerTable = \Cake\ORM\TableRegistry::get('Career');
+        $careers = $CareerTable->find()->where(['user_id'=>  $this->user->id])->toArray();
+        if($this->request->is('post')){
+            $data = $this->request->data();
+            $data['user_id'] = $this->user->id;
+            $career = $CareerTable->newEntity($data);
+            if($CareerTable->save($career)){
+                return $this->Util->ajaxReturn(true,'保存成功!');
+            }else{
+                return $this->Util->ajaxReturn(false,  errorMsg($career,'保存失败'));
+            }
+        }
+        $this->set([
+           'pageTitle'=>'编辑工作经历 ' ,
+            'careers'=>$careers
+        ]);
+    }
+    
+    
+    /**
+     * 编辑名片
+     */
+    public function editCard(){
+        
+    }
+    
+    public function editMark(){
+        
     }
 
     /**

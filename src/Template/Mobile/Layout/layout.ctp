@@ -9,6 +9,7 @@
         <title><?=$pageTitle  ?></title>
         <link rel="stylesheet" type="text/css" href="/mobile/css/common.css"/>
         <link rel="stylesheet" type="text/css" href="/mobile/css/style.css"/>
+        <?= $this->fetch('css') ?>
         <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
         <script type="text/javascript" src="/mobile/js/jsapi.js"></script>
         <script type="text/javascript" src="/mobile/js/zepto.min.js"></script>
