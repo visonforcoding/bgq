@@ -20,7 +20,7 @@
 
         <div class="innercon">
             <a href="/meet/moreIndustries" class="allmark <?php echo $id ? '':'active' ?>">全部</a>
-            <div class="outerbox">
+            <div class="outerbox" id="outer">
                 <ul id="industries_ul">
                     <?php foreach ($industries as $k=>$v): ?>
                         <li id="sub_<?= $v['id'] ?>" data_id="<?= $v['id'] ?>"><a href="javascript:void(0)"><?= $v['name'] ?></a></li>
@@ -64,6 +64,13 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script type="text/javascript">
     window.sort = true;
+
+
+    var tagscroll = new simpleScroll({
+        moveDom:$('#industries_ul'),
+        viewDom:$('#outer')
+    });
+
     
     $.util.dataToTpl('biggies', 'biggie_tpl',<?= $biggiejson ?>, function (d) {
         d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
