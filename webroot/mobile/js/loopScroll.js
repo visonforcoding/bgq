@@ -316,7 +316,11 @@ $.extend(simpleScroll.prototype, {
     },
     showDef:function(dom) {
         this.offset = -dom.offset().left;
-        this.moveDom.css({'left':this.offset+'px'});
+        this.moveDom.css({
+            //"-webkit-backface-visibility": "hidden",
+            "-webkit-transform" : "translate3D(" + this.offset + "px,0,0)",
+            "-webkit-transition" : "0"
+        });
     }
 });
 
