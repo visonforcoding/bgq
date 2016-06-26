@@ -49,7 +49,8 @@
         <script>
             (function(){
                 if(!/smartlemon|micromessenger/.test(navigator.userAgent.toLowerCase())){
-                    $('header').show();
+                    //$('header').show();
+                    //$('#search').css('top','0.9rem');
                 }else{
                     $($('.wraper')[0]).css('padding-top','0');
                 }

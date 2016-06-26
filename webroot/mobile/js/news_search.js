@@ -16,6 +16,7 @@ activity.prototype.setDet = function () {
 
 activity.prototype.bindEvent = function () {
     $('body').on('tap', function (e) {
+        setTimeout(function(){
         var target = e.srcElement || e.target, em = target, i = 1;
         while (em && !em.id && i <= 3) {
             em = em.parentNode;
@@ -166,6 +167,8 @@ activity.prototype.bindEvent = function () {
                 e.preventDefault();
                 break;
         }
+
+        }, 350);
     });
 };
 
