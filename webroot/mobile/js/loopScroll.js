@@ -135,6 +135,7 @@ $.extend(scroll.prototype, {
         //if (Math.abs(x) > Math.abs(y)) {
             e.preventDefault();
             var offset = x - this.step * (this.index - 1) - this.offset;
+            //console.log(x)
             this.moveDom.css({
                 "-webkit-backface-visibility": "hidden",
                 "-webkit-transform" : this.enableTransX ? "translateX(" + (this.loopScroll?this.index:this.index-1)*(-100) + "%)" :
@@ -198,3 +199,125 @@ $.extend(scroll.prototype, {
 });
 
 // 入口函数  new scroll(opt);
+
+
+
+
+//var aa = new simpleScroll({moveDom:$('#outerUL'), viewDom:$('#outer')});
+
+var simpleScroll = function(o) {
+    this.opt = {
+        moveDom : null, //必选  待移动元素zepto查询对象
+        viewDom : null, //在那个容器里滑动，算宽度用，默认window  如果你的默认位置不对  那就要检查下这个
+        left : $(new Image()), //左按钮  zepto查询对象列表
+        right : $(new Image()), //右按钮  zepto查询对象列表
+        viewWidth:0, //可视区宽度
+        width : 0, //总宽度
+        sp : null, //当前触发点的position
+
+        offset:0,  //当前偏移量
+        tabClass : 'cur',
+        transition : 0.5,
+        fun : function() {
+        }
+    };
+    $.extend(this, this.opt, o);
+    this.width = this.moveDom.width();
+    if(!this.viewDom) this.viewDom = $(window);
+    this.viewWidth = this.viewDom.width();
+    if(this.viewWidth >= this.width) {  //只有一个的时候  不滚动
+        this.left.addClass(this.tabClass);
+        this.right.addClass(this.tabClass);
+        return;
+    }
+
+    this.startEvent();
+
+};
+$.extend(simpleScroll.prototype, {
+    startEvent : function() {
+        var obj = this, dom = this.moveDom.get(0);
+        dom.addEventListener("touchstart", obj, false);
+        dom.addEventListener("touchmove", obj, false);
+        dom.addEventListener("touchend", obj, false);
+        dom.addEventListener("touchcancel", obj, false);
+        dom.addEventListener("webkitTransitionEnd", obj, false);
+        this.left && this.left.click(function(){obj.move('left')});
+        this.right && this.right.click(function(){obj.move('right')});
+    },
+    // 默认事件处理函数，事件分发用
+    handleEvent : function(e) {
+        switch(e.type) {
+            case "touchstart":
+                this.sp = this.getPosition(e);
+                break;
+            case "touchmove":
+                this.touchmove(e);
+                break;
+            case "touchend":
+            case "touchcancel":
+                this.move();
+                break;
+            case "webkitTransitionEnd":
+                e.preventDefault();
+                break;
+        }
+    },
+    getPosition : function(e) {
+        var touch = e.changedTouches ? e.changedTouches[0] : e;
+        return {
+            x : touch.pageX,
+            y : touch.pageY
+        };
+    },
+    touchmove : function(e) {
+        var mp = this.getPosition(e), x = mp.x - this.sp.x, y = mp.y - this.sp.y;
+        this.sp = mp;
+        if (Math.abs(x) > Math.abs(y)) {
+            e.preventDefault();
+            this.offset += x;
+            this.moveDom.css({
+                //"-webkit-backface-visibility": "hidden",
+                "-webkit-transform" : "translate3D(" + this.offset + "px,0,0)",
+                "-webkit-transition" : "0"
+            });
+        }
+    },
+    move : function(tp) {
+        var offset=this.offset;
+        if(tp){
+            var step = this.viewWidth;
+            if(tp == 'right') step = -step;
+            this.offset += step;
+        }
+
+        if(this.offset > 0) this.offset = 0
+        if(-this.offset > this.width) this.offset = -this.width;
+
+        if(this.offset == offset) return;
+
+        this.moveDom.css({
+            //"-webkit-backface-visibility": "hidden",
+            "-webkit-transform" : "translate3D(" + this.offset + "px,0,0)",
+            "-webkit-transition" : "all "+this.transition+"s ease"
+        });
+
+        this.showTab();
+    },
+    showTab:function(){
+        if(this.offset == 0){
+            this.left.addClass(this.tabClass);
+            this.right.removeClass(this.tabClass);
+        }
+        if(this.offset == -this.width){
+            this.right.addClass(this.tabClass);
+            this.left.removeClass(this.tabClass);
+        }
+    },
+    showDef:function(dom) {
+        this.offset = -dom.offsetLeft();
+        this.moveDom.css({'left':this.offset+'px'});
+    }
+});
+
+// 入口函数  new simpleScroll(opt);
