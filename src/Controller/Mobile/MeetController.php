@@ -40,12 +40,6 @@ class MeetController extends AppController {
         $biggieAds = $biggieAdTable->find()->contain(['Savants'])->all();
         $this->set('biggieAd', $biggieAds);
         
-        // 行业标签
-        $industriesTable = \Cake\ORM\TableRegistry::get('industry');
-        $industries = $industriesTable->find()->all();
-        $this->set('industries', $industries);
-        
-        
         // 默认用户
         $users = $this
                 ->User
@@ -474,8 +468,29 @@ class MeetController extends AppController {
         $this->set('pageTitle', '行业');
     }
     
-    public function moreIndustries($id){
-        $this->set('pageTitle', '行业搜索');
+    public function moreIndustries($id = ''){
+        if($id)
+        {
+            $biggie = $this
+                    ->User
+                    ->find()
+                    ->contain(['Subjects'])
+                    ->where(['enabled'=>'1', 'level'=>'2'])
+                    ->toArray();
+            $this->set('biggiejson', json_encode($biggie));
+        }
+        else
+        {
+            $biggie = $this->User->find()->contain(['Subjects'])->all()->toArray();
+            $this->set('biggie', $biggie);
+        }
+        $industriesTable = \Cake\ORM\TableRegistry::get('industry');
+        $industries = $industriesTable->find()->all();
+        $this->set([
+            'pageTitle'=>'行业搜索',
+            'industries'=>$industries,
+            'id' => $id,
+        ]);
     }
     
 
