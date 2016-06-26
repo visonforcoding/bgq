@@ -25,6 +25,11 @@ meet.prototype.bindEvent = function(){
         }
         switch(em.id){
             case 'doSearch':
+                if(!$('input[name="keyword"]').val)
+                {
+                    $.util.alert('请输入搜索内容');
+                    return false;
+                }
                 $.ajax({
                     type: 'post',
                     url: '/meet/getSearchRes',
@@ -32,6 +37,7 @@ meet.prototype.bindEvent = function(){
                     dataType: 'json',
                     success: function (msg) {
                         if (typeof msg === 'object') {
+                            console.log(msg.data);
                             if (msg.status === true) {
                                 $.util.dataToTpl('biggie', 'biggie_tpl', msg.data , function (d) {
                                     d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';

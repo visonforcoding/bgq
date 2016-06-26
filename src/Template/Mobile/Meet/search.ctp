@@ -63,6 +63,7 @@
                             return;
                         }
                         if (typeof msg === 'object') {
+                            
                             if (msg.status === true) {
                                 var html = $.util.dataToTpl('', 'biggie_tpl', msg.data , function (d) {
                                     d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
