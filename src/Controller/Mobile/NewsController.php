@@ -290,9 +290,9 @@ class NewsController extends AppController {
                 'Industries', function($q)use($industry_id) {
                     return $q->where(['Industries.id' => $industry_id]);
                 }
-            );
+            )->contain(['Users']);
         } else {
-            $news = $news->contain(['Industries']);
+            $news = $news->contain(['Industries', 'Users']);
         }
         
         if ($data['sort']) {
