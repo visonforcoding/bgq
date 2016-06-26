@@ -236,21 +236,24 @@ class MeetController extends AppController {
     public function getSearchRes(){
         $data = $this->request->data();
         $keyword = $data['keyword'];
-        $User = $this
+        $users = $this
                 ->User
                 ->find()
+                ->contain(['Subjects'])
+                ->distinct(['User.id'])
                 ->matching('Subjects', function($q)use($keyword){
-                    return $q->where(['title like'=>'%'.$keyword.'%']);
+//                    return $q->orWhere(['title like'=>'%'.$keyword.'%']);
+                    return $q;
                 })
 //                ->contain(['Subjects'=>function($q)use($keyword){
 //                    return $q->where(['title like' => "%$keyword%"]);
 //                }])
-//                ->Where(['enabled'=>'1', 'level'=>'2', 'truename like'=>'%'.$keyword.'%'])
+                ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%"])
+                ->orWhere(['Subjects.title like'=>"%$keyword%"])
 //                ->limit(10)
                 ->toArray();
-        debug($User);die;
-        if($User) {
-            return $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $User]);
+        if($users) {
+            return $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $users]);
         } else {
             return $this->Util->ajaxReturn(false, '暂无搜索结果');
         }
@@ -263,14 +266,21 @@ class MeetController extends AppController {
     public function getMoreSearch($page){
         $data = $this->request->data();
         $keyword = $data['keyword'];
-        $User = $this
+        $users = $this
                 ->User
                 ->find()
-                ->contain(['Subjects'=>function($q)use($keyword){
-                    return $q->where(['title like'=>'%'.$keyword.'%']);
-                }])
-                ->where(['enabled'=>'1', 'level'=>'2', 'truename like'=>'%'.$keyword.'%'])
-//                ->page($page, $this->limit)
+                ->contain(['Subjects'])
+                ->distinct(['User.id'])
+                ->matching('Subjects', function($q)use($keyword){
+//                    return $q->orWhere(['title like'=>'%'.$keyword.'%']);
+                    return $q;
+                })
+//                ->contain(['Subjects'=>function($q)use($keyword){
+//                    return $q->where(['title like' => "%$keyword%"]);
+//                }])
+                ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%"])
+                ->orWhere(['Subjects.title like'=>"%$keyword%"])
+//                ->limit(10)
                 ->toArray();
         if($User) {
             return $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $User]);
@@ -505,7 +515,42 @@ class MeetController extends AppController {
         ]);
     }
     
-
+    public function getIndustriesBiggie(){
+        $data = $this->request->data();
+        debug($data);die;
+        $industry_id = $data['industry_id'];
+//        $sort = $data['sort'];
+        $biggie = $this
+                    ->User
+                    ->find()
+                    ->matching('Industries', function($q)use($industry_id){
+                        return $q->where(['Industries.id'=>$industry_id]);
+                    })
+                    ->contain(['Subjects'])
+                    ->where(['enabled'=>'1', 'level'=>'2'])
+                    ->toArray();
+//        if($sort)
+//        {
+//            if($sort !== 'reco_nums'){
+//                $biggie = $biggie->orderDesc($sort);
+//            } else {
+//                
+//            }
+//        }
+//        $biggie = $biggie
+//                ->where(['enabled'=>'1', 'level'=>'2'])
+//                ->toArray();
+        if($biggie !== false){
+            if ($biggie) {
+                return $this->Util->ajaxReturn(['status' => true, 'data' => $biggie]);
+            } else {
+                return $this->Util->ajaxReturn(false, '暂无搜索结果');
+            }
+        } else {
+            return $this->Util->ajaxReturn(false, '系统错误');
+        }
+    }
+    
     /**
      * 推荐他
      */

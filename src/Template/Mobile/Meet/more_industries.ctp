@@ -9,13 +9,19 @@
 </header>
 
 <div class="wraper">
+    <div hidden>
+        <form method="post" id="industry_form">
+            <input type="text" name="industry_id" value="" />
+            <input type="text" name="sort" value="" />
+        </form>
+    </div>
     <div class="navmenu j-sort">
         <a href="javascript:void(0);" class="h-regiser m-sort active" id="sort">默认排序</a>
 
         <div class="innercon">
             <a href="/meet/moreIndustries" class="allmark <?php echo $id ? '':'active' ?>">全部</a>
             <div class="outerbox">
-                <ul>
+                <ul id="industries_ul">
                     <?php foreach ($industries as $k=>$v): ?>
                         <li id="sub_<?= $v['id'] ?>" data_id="<?= $v['id'] ?>"><a href="javascript:void(0)"><?= $v['name'] ?></a></li>
                     <?php endforeach; ?>
@@ -29,11 +35,11 @@
 
 <div class='reg-shadow' style="display: none;"></div>
 <div class="m-fixed-top" style="display: none;">
-    <ul>
-        <li><a href="javascript:void(0);">人气推荐</a></li>
-        <li><a href="javascript:void(0);">最新上榜</a></li>
-        <li><a href="javascript:void(0);">评价最好</a></li>
-        <li><a href="javascript:void(0);">约见最多</a></li>
+    <ul id="sort_ul">
+        <li id="reco_nums"><a href="javascript:void(0);">人气推荐</a></li>
+        <li id="create_time"><a href="javascript:void(0);">最新上榜</a></li>
+        <!--<li><a href="javascript:void(0);">评价最好</a></li>-->
+        <li id="meet_nums"><a href="javascript:void(0);">约见最多</a></li>
     </ul>
 </div>
 <script type='text/html' id='biggie_tpl'>
@@ -68,13 +74,102 @@
         var target = e.srcElement || e.target, em=target, i=1;
         while(em && !em.id && i<=3){ em = em.parentNode; i++;}
         if(!em || !em.id) return;
-        if(em.id.indexOf('common_') != -1){
+        if(em.id.indexOf('sub_') != -1){
             console.log($(em));
+            $('#industries_ul').find('a').removeClass('active');
+            var industry_id = $(em).attr('data_id');
+            $(em).children('a').addClass('active');
+            $('input[name="indudstry_id"]').attr('value', industry_id);
+            $('#biggies').html('');
+            $.ajax({
+                type: 'POST',
+                url: '/meet/getIndustriesBiggie',
+                dataType: 'json',
+                data: $('#industry_form').serialize(),
+                success: function (msg) {
+                    if(typeof msg == 'object')
+                    {
+                        if(msg.status)
+                        {
+                            $.util.dataToTpl('biggies', 'biggie_tpl', msg.data, function (d) {
+                                d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                                d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
+                                return d;
+                            });
+                        }
+                        else
+                        {
+                            $.util.alert(msg.msg);
+                        }
+                    }
+                }
+            });
         }
         switch(em.id){
-            case 'imageViewer': case 'fullImg':
-                //do();
-            break;
+            case 'meet_nums':
+                $('.reg-shadow').hide();
+                $('.m-fixed-top').hide();
+                window.sort = true;
+                $('#sort_ul').children('li').removeClass('active');
+                $(em).addClass('active');
+                $('input[name="sort"]').attr('value', $(em).attr('id'));
+                $('#biggies').html('');
+                $.ajax({
+                    type: 'POST',
+                    url: '/meet/getIndustriesBiggie',
+                    dataType: 'json',
+                    data: $('#industry_form').serialize(),
+                    success: function (msg) {
+                        if(typeof msg == 'object')
+                        {
+                            if(msg.status)
+                            {
+                                $.util.dataToTpl('biggies', 'biggie_tpl', msg.data, function (d) {
+                                    d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                                    d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
+                                    return d;
+                                });
+                            }
+                            else
+                            {
+                                $.util.alert(msg.msg);
+                            }
+                        }
+                    }
+                });
+                break;
+            case 'create_time':
+                $('.reg-shadow').hide();
+                $('.m-fixed-top').hide();
+                window.sort = true;
+                $('#sort_ul').children('li').removeClass('active');
+                $(em).addClass('active');
+                $('input[name="sort"]').attr('value', $(em).attr('id'));
+                $('#biggies').html('');
+                $.ajax({
+                    type: 'POST',
+                    url: '/meet/getIndustriesBiggie',
+                    dataType: 'json',
+                    data: $('#industry_form').serialize(),
+                    success: function (msg) {
+                        if(typeof msg == 'object')
+                        {
+                            if(msg.status)
+                            {
+                                $.util.dataToTpl('biggies', 'biggie_tpl', msg.data, function (d) {
+                                    d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                                    d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
+                                    return d;
+                                });
+                            }
+                            else
+                            {
+                                $.util.alert(msg.msg);
+                            }
+                        }
+                    }
+                });
+                break;
             case 'sort':
                 if(window.sort == true)
                 {
@@ -89,8 +184,37 @@
                     window.sort = true;
                 }
                 break;
-            case 'detailClosePC':
-                //do();
+            case 'reco_nums':
+                $('.reg-shadow').hide();
+                $('.m-fixed-top').hide();
+                window.sort = true;
+                $('#sort_ul').children('li').removeClass('active');
+                $(em).addClass('active');
+                $('input[name="sort"]').attr('value', $(em).attr('id'));
+                $('#biggies').html('');
+                $.ajax({
+                    type: 'POST',
+                    url: '/meet/getIndustriesBiggie',
+                    dataType: 'json',
+                    data: $('#industry_form').serialize(),
+                    success: function (msg) {
+                        if(typeof msg == 'object')
+                        {
+                            if(msg.status)
+                            {
+                                $.util.dataToTpl('biggies', 'biggie_tpl', msg.data, function (d) {
+                                    d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                                    d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
+                                    return d;
+                                });
+                            }
+                            else
+                            {
+                                $.util.alert(msg.msg);
+                            }
+                        }
+                    }
+                });
                 break;
             case 'goTop':
                 window.scrollTo(0,0);
