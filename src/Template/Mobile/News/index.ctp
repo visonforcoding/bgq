@@ -38,7 +38,7 @@
         <a href="javascript:void(0)">
             <h1><span><img src="{#avatar#}" /></span>{#author#}<time>{#create_time#}</time></h1>
         </a>
-        <a href="javascript:void(0)" class="newsbox clearfix">
+        <a href="/news/view/{#id#}" class="newsbox clearfix">
             <div class="sec-news-l">
                 <h3>{#title#}</h3>
                 <p>{#summary#}</p>
