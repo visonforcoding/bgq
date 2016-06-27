@@ -58,12 +58,12 @@
 </div>
 <?php $this->start('script'); ?>
 <script>
-    $('#logout').on('click', function(){
+    $('#logout').on('tap', function(){
         $.ajax({
             type: 'POST',
             url: '/user/login-out',
             dataType: 'json',
-            success: funciton(msg){
+            success: function(msg){
                 if(msg.status) {
                     $.util.alert(msg.msg);
                     location.href = '/';
