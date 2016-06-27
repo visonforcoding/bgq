@@ -117,6 +117,7 @@ class NewscomController extends AppController {
      * @return json
      */
     public function getDataList($id = '') {
+        debug(123);die;
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
