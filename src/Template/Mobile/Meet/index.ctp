@@ -7,7 +7,7 @@
     </div>
 </header>
 <link rel="stylesheet" type="text/css" href="/mobile/font/font/iconfont.css">
-<div class="wraper newswraper">
+<div class="wraper newswraper pd10">
     <div class="a-banner" >
         <ul class="pic-list-container" id="imgList">
             <?php foreach ($banners as $k=>$v): ?>
