@@ -58,7 +58,7 @@
 </div>
 <?php $this->start('script'); ?>
 <script>
-    $('#logout').click(function(){
+    $('#logout').on('click', function(){
         $.ajax({
             type: 'POST',
             url: '/user/login-out',
