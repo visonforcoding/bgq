@@ -297,14 +297,17 @@ height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;}
 .itemsbox div{width:2.5rem;height:2.7rem;float:left;/*display: -webkit-flex;display: -moz-flex;display: -ms-flexbox;display:flex;-webkit-justify-content: center;-moz-justify-content: center;-ms-justify-content: center;justify-content: center;-webkit-align-items: center;-moz-align-items: center;-ms-align-items: center;align-items: center;*/border-right:1px #c8c7cc solid;border-bottom:1px #c8c7cc solid;}
 .itemsbox div img{height:0.86rem;width:auto;display:block;margin:auto;margin-bottom:0.4rem;}
 .navmenu{border-bottom:1px #c8c7cc solid;}
-.navmenu .innercon{width:100%;/*display: flex;align-items: center;*/padding-left:1.6rem;background: url(img/right.png) 96% center no-repeat;background-size:0.16rem 0.25rem;    }
+.navmenu .innercon{width:100%;/*display: flex;align-items: center;*/padding-left:1.6rem;overflow:hidden;height:0.89rem;}
 .navmenu .innercon .allmark{}
 .navmenu .innercon .allmark.active{color:#e01a48;}
-.navmenu .innercon .outerbox{white-space: nowrap;float:right;width:85%;overflow:hidden;-webkit-overflow-scrolling: touch;overflow-x: scroll;margin-right:0.2rem;}
+.navmenu .innercon .outerbox{white-space: nowrap;display:inline-block;width:85%;height:0.89rem;overflow:hidden;-webkit-overflow-scrolling: touch;overflow-x: scroll;margin-right:0.2rem;margin-left:0.1rem;}
 .j-sort{background: #fff;line-height: 0.89rem;position:fixed;z-index:999;height: 0.89rem;}
 .internet-v-info .innercon{/*display: flex;justify-content: flex-start;*/overflow:hidden;padding:0.1rem 0.3rem;}
 .defaultsort{width:1.92rem;border-right:1px #ccc solid;height:0.52rem;line-height: 0.52rem;background: url(../images/down.png) no-repeat left center;background-size:0.25rem 0.16rem;padding-left:0.47rem;}
 .navmenu ul{height:0.89rem;white-space: nowrap;width:650%;}
+.leftbtn,.rightbtn{display:inline-block;background: url(img/right.png) center center  no-repeat;
+background-size: 0.16rem 0.25rem;width:0.16rem;height:100%;}
+.leftbtn{-webkit-transform:rotate(180deg); }
 .navmenu li{margin:0 0.25rem;float:left;}
 .navmenu li a{color:#7a7e83;font-size:0.28rem;}
 .navmenu li a.active{color:#d62356}
