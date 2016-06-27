@@ -46,8 +46,8 @@
             <h3 class="comment-title">
                 已报名
             </h3>
-            <div class="items nobottom">
-                <div class="comm-info clearfix">
+            <div class="items  nobottom">
+                <div class="comm-info t-ablock">
                     <?php if ($userApply): ?>
                         <?php foreach ($userApply as $k => $v): ?>
                             <a href='/meet/homepage/<?= $v['id'] ?>'><img src="<?= $v['avatar'] ? $v['avatar'] : '/mobile/images/touxiang.png'; ?>"/></a>
