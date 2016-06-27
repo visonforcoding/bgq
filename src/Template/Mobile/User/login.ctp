@@ -37,7 +37,7 @@
     if(location.href.indexOf('loginout=1')>0){
         $.util.setCookie('token_uin','');
         LEMON.db.set('token_uin','');
-        $.util.setCookie('login_url','/home/index',99999);
+        //$.util.setCookie('login_url','/home/index',99999);
     }
     var t1 = null;
     $('input[name="phone"]').focusout(function () {
@@ -51,7 +51,7 @@
             $.post('/user/sendVcode', {phone: phone}, function (res) {
                 if (res.status === true) {
                     //$obj.attr('disabled ','true');
-                    var text = '<i id="timer">' + 30 + '</i>s后重新发送';
+                    var text = '<i id="timer">' + 30 + '</i>秒后重新发送';
                     $obj.html(text);
                     t1 = setInterval(function () {
                         var timer = $('#timer').text();
@@ -94,7 +94,7 @@
     $('#wxlogin').on('click', function () {
         if ($.util.isAPP) {
             LEMON.login.wx(function (code) {
-            $.ajax({
+            $.ajax({   //获取open id,比对是否存在,登录或是注册  生成token
                 type:'post',
                 data:{code:code},
                 url: '/wx/appLogin',

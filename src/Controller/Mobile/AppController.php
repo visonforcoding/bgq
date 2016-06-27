@@ -123,7 +123,7 @@ class AppController extends Controller {
         if (!$user) {
             if ($this->request->is('ajax')) {
                 $url = $this->request->referer();
-                $login_url = '/user/login?redirect_url='.$url;
+                $login_url = '/user/login?redirect_url='.$url;  //最好 url——encode一下,  先注意验证一下url带有问号参数的情况
                 $this->autoRender = false;
                 $this->response->type('json');
                 $this->response->body(json_encode(['status' => false, 'msg' => '请先登录', 'code' => 403,'redirect_url'=>$login_url]));
