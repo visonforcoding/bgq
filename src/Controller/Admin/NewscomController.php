@@ -22,7 +22,6 @@ class NewscomController extends AppController {
      * @return void
      */
     public function index($id = '') {
-        debug($id);die;
         $this->set('id', $id);
         $this->set('newscom', $this->Newscom);
     }
