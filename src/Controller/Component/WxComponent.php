@@ -125,9 +125,12 @@ class WxComponent extends Component {
         \Cake\Log\Log::notice('获取普通accessToken','devlog');
         $access_token = \Cake\Cache\Cache::read(self::TOKEN_NAME);
         $url = self::WEIXIN_API_URL . 'token?grant_type=client_credential&appid=' . $this->app_id . '&secret=' . $this->app_secret;
+        $isExpires = true;   //过期标志
         if (is_array($access_token)) {
             $isExpires = ($access_token['expires_in']-time())<2200 ? true : false;
-            \Cake\Log\Log::debug('access_token过期:'.(string)$isExpires,'devlog');
+            if($isExpires){
+                \Cake\Log\Log::debug('access_token过期:','devlog');
+            }
         }
         if ($access_token === false || $isExpires) {
             \Cake\Log\Log::warning('微信接口token重新请求','devlog');
@@ -137,12 +140,14 @@ class WxComponent extends Component {
                 $body = json_decode($response->body());
                 \Cake\Log\Log::debug($body,'devlog');
                 if (!property_exists($body, 'access_token')) {
-                    \Cake\Log\Log::error($response);
+                    \Cake\Log\Log::error('未获取access_token属性','devlog');
+                    \Cake\Log\Log::error($response,'devlog');
                     return false;
                 }
                 $token = $body->access_token;
                 $expires = $body->expires_in;
                 $expires = time() + $expires;
+                \Cake\Log\Log::debug('重新获取access_token成功','devlog');
                 \Cake\Log\Log::debug($body,'devlog');
                 \Cake\Cache\Cache::write(self::TOKEN_NAME, [
                     'access_token' => $token,
