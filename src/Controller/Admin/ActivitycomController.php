@@ -115,19 +115,19 @@ class ActivitycomController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'activitycom.' . $this->request->data('sidx');
+        $sort = 'Activitycom.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where[' activitycom.`body` like'] = "%$keywords%";
+            $where[' Activitycom.`body` like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['activitycom.`create_time` >' => $begin_time], ['activitycom.`create_time` <' => $end_time]];
+            $where['and'] = [['Activitycom.`create_time` >' => $begin_time], ['Activitycom.`create_time` <' => $end_time]];
         }
         if ($id) {
             $query = $this->Activitycom->find()->where(['activity_id' => $id]);
