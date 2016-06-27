@@ -95,6 +95,7 @@ activity.prototype.getData = function(){
                         d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
                         d.industries_name = $.util.dataToTpl('', 'subTpl', d.industries);
                         d.region_name = d.region ? '<a>' + d.region.name + '</a>' : '';
+                        d.cover = d.thumb ? d.thumb : d.cover;
                         return d;
                     });
                     $('#activity').append(html);
