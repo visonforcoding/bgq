@@ -1,4 +1,4 @@
-<header>
+﻿<header>
     <div class='inner'>
         <a href='#this' class='toback'></a>
         <h1>
@@ -19,14 +19,16 @@
         <a href="javascript:void(0);" class="h-regiser m-sort active" id="sort">默认排序</a>
 
         <div class="innercon">
-            <a href="/meet/moreIndustries" class="allmark <?php echo $id ? '':'active' ?>">全部</a>
+           <span class="leftbtn"></span>
             <div class="outerbox" id="outer">
                 <ul id="industries_ul">
+  <li><a href="/meet/moreIndustries" class="allmark <?php echo $id ? '':'active' ?>">全部</a></li>
                     <?php foreach ($industries as $k=>$v): ?>
                         <li id="sub_<?= $v['id'] ?>" data_id="<?= $v['id'] ?>"><a href="javascript:void(0)"><?= $v['name'] ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
+		<span class="rightbtn"></span>
         </div>
     </div>
     <div style="height:1rem;"></div>
