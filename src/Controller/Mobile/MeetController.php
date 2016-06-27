@@ -242,12 +242,8 @@ class MeetController extends AppController {
                 ->contain(['Subjects'])
                 ->distinct(['User.id'])
                 ->matching('Subjects', function($q)use($keyword){
-//                    return $q->orWhere(['title like'=>'%'.$keyword.'%']);
                     return $q;
                 })
-//                ->contain(['Subjects'=>function($q)use($keyword){
-//                    return $q->where(['title like' => "%$keyword%"]);
-//                }])
                 ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%"])
                 ->orWhere(['Subjects.title like'=>"%$keyword%"])
 //                ->limit(10)
@@ -272,12 +268,8 @@ class MeetController extends AppController {
                 ->contain(['Subjects'])
                 ->distinct(['User.id'])
                 ->matching('Subjects', function($q)use($keyword){
-//                    return $q->orWhere(['title like'=>'%'.$keyword.'%']);
                     return $q;
                 })
-//                ->contain(['Subjects'=>function($q)use($keyword){
-//                    return $q->where(['title like' => "%$keyword%"]);
-//                }])
                 ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%"])
                 ->orWhere(['Subjects.title like'=>"%$keyword%"])
 //                ->limit(10)
