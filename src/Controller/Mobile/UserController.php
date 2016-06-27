@@ -421,8 +421,9 @@ class UserController extends AppController {
         $this->viewBuilder()->autoLayout(false);
         $this->request->session()->delete('User.mobile');
         $this->request->session()->destroy();
-        $this->Flash->success('您已退出登录！');
-        return $this->redirect('/user/login?loginout=1');
+//        $this->Flash->success('您已退出登录！');
+//        return $this->redirect('/user/login?loginout=1');
+        return $this->Util->ajaxReturn(true, '您已退出登录！');
     }
     
     /**
