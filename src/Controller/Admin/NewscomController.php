@@ -11,6 +11,11 @@ use Wpadmin\Controller\AppController;
  */
 class NewscomController extends AppController {
 
+    public function initialize() {
+        parent::initialize();
+        $this->loadModel('Newscom');
+    }
+    
     /**
      * Index method
      *
