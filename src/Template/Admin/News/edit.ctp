@@ -28,6 +28,16 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">缩略图</label>
+        <div class="col-md-8">
+            <div  class="img-thumbnail input-img"  single>
+                <img  alt="缩略图" src="<?= $news->thumb; ?>"/>
+            </div>
+            <input name="thumb" value="<?= $news->thumb; ?>"  type="hidden"/>
+            <div id="thumb"   class="jqupload">上传</div>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">封面</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
@@ -83,6 +93,7 @@
 <script>
     $(function () {
         initJqupload('cover', '/wpadmin/util/doUpload?dir=newscover', 'jpg,png,gif,jpeg'); //初始化图片上传
+        initJqupload('thumb', '/wpadmin/util/doUpload?dir=newsthumb', 'jpg,png,gif,jpeg'); //初始化图片上传
         var ue = UE.getEditor('content'); //初始化富文本编辑器
         $('#select-industry').select2({
             language: "zh-CN",
