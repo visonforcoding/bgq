@@ -37,8 +37,8 @@
                 </div>
             </a>
         </li>
-        <li  class="nobottom">
-            <a href="/user/login-out">
+        <li  class="nobottom" id="logout">
+            <a href="javascript:void(0)">
                 <span>注销登录</span>
                 <div>
                     <span></span>
@@ -56,3 +56,20 @@
     <p>Copyright ©2012-2018</p>
     <p>君汉控股（深圳）有限公司</p>
 </div>
+<?php $this->start('script'); ?>
+<script>
+    $('#logout').click(function(){
+        $.ajax({
+            type: 'POST',
+            url: '/user/login-out',
+            dataType: 'json',
+            success: funciton(msg){
+                if(msg.status) {
+                    $.util.alert(msg.msg);
+                    location.href = '/';
+                }
+            }
+        });
+    });
+</script>
+<?php $this->end('script');
