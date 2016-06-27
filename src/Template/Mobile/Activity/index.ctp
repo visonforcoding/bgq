@@ -67,6 +67,7 @@
         d.apply_msg = '';
         d.industries_name = $.util.dataToTpl('', 'subTpl', d.industries);
         d.region_name = d.region ? '<a>' + d.region.name + '</a>' : '';
+        d.cover = d.thumb ? d.thumb : d.cover;
         return d;
     });
 
