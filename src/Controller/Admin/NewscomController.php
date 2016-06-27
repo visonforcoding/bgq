@@ -22,6 +22,7 @@ class NewscomController extends AppController {
      * @return void
      */
     public function index($id = '') {
+        debug($id);die;
         $this->set('id', $id);
         $this->set('newscom', $this->Newscom);
     }
@@ -152,7 +153,6 @@ class NewscomController extends AppController {
         $query->limit(intval($rows))
                 ->page(intval($page));
         $res = $query->toArray();
-        debug($res);die;
         if (empty($res)) {
             $res = array();
         }
