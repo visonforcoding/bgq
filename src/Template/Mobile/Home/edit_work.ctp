@@ -138,6 +138,7 @@
 </script>
 <script src="/mobile/js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
 <script src="/mobile/js/mobiscroll.2.13.2.js" type="text/javascript" charset="utf-8"></script>
+<script src="/mobile/js/util.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript">
 // 日期选择
@@ -154,7 +155,20 @@
         rows: 3
     });
     $('.deletbtn').on('tap',function(){
-        
+        var id = $(this).data('id');
+        var obj = $(this);
+        if(!id){
+            return false;
+        }
+        $.util.ajax({
+            url:'/home/del-career/'+id,
+            func:function(res){
+                $.util.alert(res.msg);
+                if(res.status){
+                    $(obj).parents('div.education-items').remove();
+                }
+            }
+        });
     });
     $('#submit').on('tap',function(){
         var form  = $(this).prevAll('.education-items')[0];

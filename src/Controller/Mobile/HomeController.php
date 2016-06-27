@@ -139,18 +139,16 @@ class HomeController extends AppController {
             $savant->user_id = $user_id;
             $savant = $SavantTable->patchEntity($savant, $this->request->data());
             $user->savant_status = 2;
-            $errorFlag = [];
-            $this->User->connection()->transactional(function()use($SavantTable, $savant, $user, $UserTable, $errorFlag) {
+            $ckRes = $this->User->connection()->transactional(function()use($SavantTable, $savant, $user, $UserTable) {
                 //开启事务
-                $errorFlag[] = $SavantTable->save($savant);
-                $errorFlag[] = $UserTable->save($user);
+                return $SavantTable->save($savant)&&$UserTable->save($user);
             });
-            if (!in_array(false, $errorFlag)) {
+            if ($ckRes) {
                 $this->loadComponent('Business');
                 $this->Business->adminmsg(1, $user_id, '您有一条专家认证申请需处理');
-                $this->Util->ajaxReturn(true, '保存成功');
+                return $this->Util->ajaxReturn(true, '保存成功');
             } else {
-                $this->Util->ajaxReturn(false, '保存失败');
+                return $this->Util->ajaxReturn(false,  errorMsg($savant,'保存失败'));
             }
         }
         $this->set([
@@ -565,8 +563,23 @@ class HomeController extends AppController {
      * 编辑教育经历
      */
     public function editEducation(){
+        $EducationTable = \Cake\ORM\TableRegistry::get('Education');
+        $educations = $EducationTable->find()->where(['user_id'=>  $this->user->id])->toArray();
+        if($this->request->is('post')){
+            $data = $this->request->data();
+            $data['user_id'] = $this->user->id;
+            $education = $EducationTable->newEntity($data);
+            if($EducationTable->save($education)){
+                return $this->Util->ajaxReturn(true,'保存成功!');
+            }else{
+                return $this->Util->ajaxReturn(false,  errorMsg($education,'保存失败'));
+            }
+        }
+        $educationType = \Cake\Core\Configure::read('educationType');
         $this->set([
-            'pageTitle' =>'编辑教育经历'
+            'pageTitle' =>'编辑教育经历',
+            'educations'=>$educations,
+            'educationType'=>$educationType
         ]);
     }
     
@@ -594,6 +607,51 @@ class HomeController extends AppController {
     }
     
     
+    
+    /**
+     * 删除教育
+     * @param type $id
+     * @return type
+     */
+    public function delEducation($id){
+        $EducationTable = \Cake\ORM\TableRegistry::get('Education');
+        $education = $EducationTable->find()->where(['user_id'=>  $this->user->id,'id'=>$id])->first();
+        if($education){
+            if($EducationTable->delete($education)){
+                return $this->Util->ajaxReturn(true, '删除成功');
+            }else{
+                return $this->Util->ajaxReturn(false, '删除失败');
+            }
+        }else{
+            return $this->Util->ajaxReturn(false, '记录不存在');
+        }
+        
+    }
+
+
+    /**
+     * 删除工作经历
+     * @param type $id
+     * @return type
+     */
+    public function delCareer($id){
+        $CareerTable = \Cake\ORM\TableRegistry::get('Career');
+        $career = $CareerTable->find()->where(['user_id'=>  $this->user->id,'id'=>$id])->first();
+        if($career){
+            if($CareerTable->delete($career)){
+                return $this->Util->ajaxReturn(true, '删除成功');
+            }else{
+                return $this->Util->ajaxReturn(false, '删除失败');
+            }
+        }else{
+            return $this->Util->ajaxReturn(false, '记录不存在');
+        }
+    }
+    
+
+
+
+
     /**
      * 编辑名片
      */

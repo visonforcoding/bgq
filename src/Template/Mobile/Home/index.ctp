@@ -32,7 +32,12 @@
     <!--分类二-->
     <div class="h-home-menu">
         <ul class="clearfix">
+            <?php if($user->level==1): ?>
+            <li><a href="/user/home-page/<?= $user->id ?>"><i class="iconfont">&#xe61d;</i>个人主页</a></li>
+            <?php endif;?>
+            <?php if($user->level==2): ?>
             <li><a href="/meet/view/<?= $user->id ?>"><i class="iconfont">&#xe61d;</i>专家主页</a></li>
+            <?php endif;?>
             <li>  <a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li>
         </ul>
     </div>

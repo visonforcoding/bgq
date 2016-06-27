@@ -30,8 +30,18 @@ class EducationTable extends Table
         $this->primaryKey('id');
 
         $this->belongsTo('Users', [
+            'className'=>'User',
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
+        ]);
+        
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'create_time' => 'new',
+                    'update_time' => 'always'
+                ]
+            ]
         ]);
     }
 
@@ -49,35 +59,25 @@ class EducationTable extends Table
 
         $validator
             ->requirePresence('school', 'create')
-            ->notEmpty('school');
+            ->notEmpty('school','学校不可为空');
 
         $validator
             ->requirePresence('major', 'create')
-            ->notEmpty('major');
+            ->notEmpty('major','专业不可为空');
 
         $validator
+            ->integer('education')
             ->requirePresence('education', 'create')
-            ->notEmpty('education');
+            ->notEmpty('education','学历不可为空');
 
         $validator
-            ->date('start_date')
             ->requirePresence('start_date', 'create')
-            ->notEmpty('start_date');
+            ->notEmpty('start_date','开始时间不可为空');
 
         $validator
-            ->date('end_date')
             ->requirePresence('end_date', 'create')
-            ->notEmpty('end_date');
+            ->notEmpty('end_date','结束时间不可为空');
 
-        $validator
-            ->dateTime('create_time')
-            ->requirePresence('create_time', 'create')
-            ->notEmpty('create_time');
-
-        $validator
-            ->dateTime('update_time')
-            ->requirePresence('update_time', 'create')
-            ->notEmpty('update_time');
 
         return $validator;
     }
