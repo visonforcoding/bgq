@@ -307,8 +307,8 @@ height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;}
 .navmenu ul{height:0.89rem;white-space: nowrap;width:650%;}
 .leftbtn,.rightbtn{display:inline-block;background: url(img/right.png) center center  no-repeat;
 background-size: 0.16rem 0.25rem;width:0.16rem;height:100%;}
-.leftbtn{-webkit-transform:rotate(180deg); }
-.navmenu li{margin:0 0.25rem;float:left;}
+.leftbtn{-webkit-transform:rotate(180deg);transform: rotate(180deg); }
+.navmenu li{margin:0 0.1rem;float:left;}
 .navmenu li a{color:#7a7e83;font-size:0.28rem;}
 .navmenu li a.active{color:#d62356}
 .morebtn{display: block;background: url(img/right.png) no-repeat;background-size:cover;width:0.15rem;height:0.22rem;align-self: center;}
