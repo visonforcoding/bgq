@@ -83,6 +83,16 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">缩略图</label>
+        <div class="col-md-8">
+            <div  class="img-thumbnail input-img"  single>
+                <img  alt="缩略图" src=""/>
+            </div>
+            <input name="thumb"  type="hidden"/>
+            <div id="thumb" class="jqupload">上传</div>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">封面</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
@@ -143,6 +153,7 @@
 <script>
 $(function () {
     initJqupload('cover', '/wpadmin/util/doUpload?dir=activitycover', 'jpg,png,gif,jpeg'); //初始化图片上传
+    initJqupload('thumb', '/wpadmin/util/doUpload?dir=activitythumb', 'jpg,png,gif,jpeg'); //初始化图片上传
     var ue = UE.getEditor('content'); //初始化富文本编辑器
     UE.getEditor('summary');
     $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});

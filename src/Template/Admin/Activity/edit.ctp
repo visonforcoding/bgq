@@ -124,6 +124,16 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">缩略图</label>
+        <div class="col-md-8">
+            <div  class="img-thumbnail input-img"  single>
+                <img  alt="缩略图" src="<?= $activity->thumb; ?>"/>
+            </div>
+            <input name="thumb" value="<?= $activity->thumb; ?>"  type="hidden"/>
+            <div id="thumb"   class="jqupload">上传</div>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">封面</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
