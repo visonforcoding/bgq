@@ -49,7 +49,7 @@ class UserTable extends Table {
         
         $this->hasOne('Savants', [
             'foreignKey' => 'user_id',
-            'joinType' => 'INNER',
+            'joinType' => 'LEFT',
             'className' => 'Savant',
         ]);
         

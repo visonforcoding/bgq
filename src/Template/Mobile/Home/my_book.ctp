@@ -21,7 +21,7 @@
     </div>
 <script type="text/html" id="tpl">
     <section class="internet-v-info no-margin-top">
-        <a href="/home/my-book-detail/{#id#}">
+        <a  href="/home/my-book-detail/{#id#}">
         <div class="innercon">
             <span class="head-img"><img src="{#user_logo#}"/><i></i></span>
             <div class="vipinfo my-meet-info">

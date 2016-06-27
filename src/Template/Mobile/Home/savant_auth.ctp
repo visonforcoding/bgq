@@ -51,18 +51,26 @@
             <li class="no-right-ico changeflex">
                 <b>项目经验</b>
                 <div >
-                    <textarea name="xmjy"><?=$user->savant->xmjy?></textarea>
+                    <textarea name="xmjy"><?=isset($user->savant)?$user->savant->xmjy:''?></textarea>
                 </div>
             </li>
             <li class="nobottom no-right-ico changeflex">
                 <b>资源优势</b>
                 <div >
-                    <textarea name="zyys"><?=$user->savant->zyys?></textarea>
+                    <textarea name="zyys"><?=  isset($user->savant)?$user->savant->zyys:''?></textarea>
                 </div>
             </li>
         </form>
     </ul>
-    <a id="submit" class="nextstep">申请认证</a>
+    <?php if($user->savant_status==1): ?>
+        <a id="submit" class="nextstep">申请认证</a>
+    <?php endif; ?>
+    <?php if($user->savant_status==3): ?>
+        <a  class="nextstep">已认证</a>
+    <?php endif; ?>
+    <?php if($user->savant_status==2): ?>
+        <a  class="nextstep">审核中</a>
+    <?php endif; ?>
 </div>
 <?php $this->start('script') ?>
 <script>
