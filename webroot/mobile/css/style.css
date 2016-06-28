@@ -270,7 +270,7 @@ border-left:none;border-bottom:none;top:-1px;}
 .m-banner{background: url(img/m-banner.png) no-repeat center center;background-size:cover;width:100%;height:2.96rem;}
 /*约见 --start*/
 .menusort{width:100%;background: #fff;margin:0.2rem 0;padding-top:0.2rem;padding-bottom:0.1rem;border-top:1px #d2d2d2 solid;border-bottom:1px #d2d2d2 solid;display: flex; align-items: center;justify-content: space-between;}
-.menusort .menulist{white-space: nowrap;}
+.menusort .menulist{white-space: nowrap;width:500%;}
 .allmenu{width:90%;overflow:hidden;overflow-x:scroll;-webkit-overflow-scrolling: touch;}
 .allmenu::-webkit-scrollbar,.dk ul::-webkit-scrollbar,.outerbox::-webkit-scrollbar{display: none;}
 .sele-r{float:right;background: url(img/right.png) no-repeat;width:0.16rem;height:0.25rem;background-size: cover;}
@@ -388,7 +388,7 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .m-detail-box{background: #fff;}
 .m-detail-box li{padding:0.25rem 0.3rem;border-bottom:1px solid #c8c7cc;display: flex; justify-content:space-between;font-size:0.3rem;}
 .m-detail-box li span{display: block;font-size:0.28rem;line-height: 0.4rem;}
-.m-detail-box li h3{width:75%;line-height: 0.4rem;}
+.m-detail-box li h3{width:75%;line-height: 0.4rem;font-size:0.3rem;}
 .m-detail-box li:first-child h3 span{font-size:0.26rem;margin-top:0.1rem;color:#9ba4ad;}
 .meet-type{font-size:0.28rem;}
 .m-detail-box li:nth-child(2){color:#e01a48;}
