@@ -68,7 +68,7 @@
     <span class="iconfont" id="goTop"></span>
 </div>
 <!--底部四个图**end-->
-<div class="reg-shadow" style="display: none;" id="shadow"></div>
+<div class="reg-shadow" style="display: none;"></div>
 <!-- 评论框 -->
 <div class="shadow-info a-shadow a-forword" style="display: none;">
     <ul>
@@ -77,6 +77,7 @@
     </ul>
 </div>
 <!-- 微信分享 -->
+<div class="reg-shadow" style="display: none;" id="shadow"></div>
 <div class="wxshare" id="wxshare" hidden>
     <span></span>
     <p></p>
