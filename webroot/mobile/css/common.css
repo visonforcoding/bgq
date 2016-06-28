@@ -16,7 +16,7 @@ i{font-style: normal;}
 h1,h2,h3,h4,h5,h6{font-size:0.32rem;}
 p{background-color: transparent;word-break: break-all;font-size:.28rem;}
 /*app*/
-button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);}
+a,button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);}
 /*reset css end*/
 /*common css*/
 .fl { float:left; display: inline; }
