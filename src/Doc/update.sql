@@ -255,3 +255,8 @@ ALTER TABLE news add thumb VARCHAR(200) COMMENT '缩略图';
 #活动表添加缩略图
 ALTER TABLE activity add thumb VARCHAR(200) COMMENT '缩略图';
 #==========0628
+
+#话题表修改6-28
+ALTER TABLE `meet_subject`
+	CHANGE COLUMN `invite_time` `invite_time` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '约见时间' AFTER `type`,
+	CHANGE COLUMN `address` `address` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '地址' AFTER `price`;

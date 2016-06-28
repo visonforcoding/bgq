@@ -37,36 +37,19 @@ class UserController extends AppController {
         }
         $user = $this->User->get($id,['contain'=>['Industries'=>function($q){
             return $q->hydrate(false)->select(['id','name']);
-        }]]);
+        },'Secret','Careers','Educations']]);
         $industries = $user->industries;
         $industry_arr = [];
         foreach($industries as $industry){
             $industry_arr[] = $industry['name'];
         }
         $isFans = false;
+        $isGive = false;
         if($this->user){
             $user_id = $this->user->id;
             $FansTable = \Cake\ORM\TableRegistry::get('UserFans');
-            $isFans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$id'")->count();
-        }
-        $isGive = '';
-        if ($this->user) {
-            if ($this->user->id == $id) {
-                $isMe = true;
-            }
-            else
-            {
-                $isAttention = $this->User->UserFans->find()->where(['user_id' => $this->user->id, 'following_id' => $id])->first();
-                if($isAttention)
-                {
-                    $type = $isAttention->type;
-                }
-                $isGiveCard = $this->User->CardBoxes->find()->where(['ownerid'=>$id, 'uid'=>$this->user->id])->first();
-                if($isGiveCard)
-                {
-                    $isGive = $isGiveCard;
-                }
-            }
+            $isFans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$id'")->count();  //检测是否关注
+            $isGive = $this->User->CardBoxes->find()->where(['ownerid'=>$id, 'uid'=>$this->user->id])->first();  //检测是否递过名片
         }
         $this->set([
             'pageTitle'=>'个人主页',

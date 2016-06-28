@@ -160,11 +160,11 @@ class MeetController extends AppController {
     }
 
     /**
-     * 话题 添加
+     * 话题 添加 与 编辑
      */
     public function subject($id = null) {
+        $SubjectTable = \Cake\ORM\TableRegistry::get('meet_subject');
         if ($this->request->is('post')) {
-            $SubjectTable = \Cake\ORM\TableRegistry::get('meet_subject');
             $subject = $SubjectTable->newEntity();
             $subject = $SubjectTable->patchEntity($subject, $this->request->data());
             $subject->user_id = $this->user->id;
@@ -173,6 +173,10 @@ class MeetController extends AppController {
             } else {
                 return $this->Util->ajaxReturn(false, '添加失败');
             }
+        }
+        if($id){
+            $subject = $SubjectTable->get($id);
+            $this->set('subject',$subject);
         }
     }
     
@@ -332,96 +336,7 @@ class MeetController extends AppController {
         }
     }
     
-    /**
-     * 关注动作
-     * @param int $id 大咖id
-     */
-    public function attention($id){
-        $this->handCheckLogin();
-        if($id == $this->user->id)
-        {
-            return $this->Util->ajaxReturn(false, '不可关注自己');
-        }
-        $data['user_id'] = $this->user->id;
-        $data['following_id'] = $id;
-        $isAttention = $this->User->UserFans->find()->where($data)->first();
-        $isFans = $this->User->UserFans->find()->where(['user_id'=>$id, 'following_id'=>$this->user->id])->first();
-        if($isAttention)
-        {
-            $type = $isAttention->type;
-        }
-        else
-        {
-            if($isFans)
-            {
-                $fanses = $this->User->UserFans->newEntity();
-                $fans = $this->User->UserFans->patchEntity($fanses, $data);
-                $fans->type = 2;
-                $attention = $this->User->UserFans->save($fans);
-                
-                $isFans = $this->User->UserFans->get($isFans->id);
-                $isFans->type = 2;
-                $attentioned = $this->User->UserFans->save($isFans);
-                if($attention && $attentioned)
-                {
-                    return $this->Util->ajaxReturn(['status' => true, 'msg' => '关注成功', 'type' => '2']);
-                }
-                else
-                {
-                    return $this->Util->ajaxReturn(false, '系统错误');
-                }
-            }
-            else
-            {
-                $fanses = $this->User->UserFans->newEntity();
-                $fans = $this->User->UserFans->patchEntity($fanses, $data);
-                $fans->type = 1;
-                $res = $this->User->UserFans->save($fans);
-                if($res)
-                {
-                    return $this->Util->ajaxReturn(['status' => true, 'msg' => '关注成功', 'type' => '1']);
-                }
-                else
-                {
-                    return $this->Util->ajaxReturn(false, '系统错误');
-                }
-            }
-            
-        }
-        if($type == 1){
-            // 已关注，取消关注
-            $data['type'] = '0';
-            $fans = $this->User->UserFans->get($isAttention->id);
-            $res = $this->User->UserFans->delete($fans);
-            if($res)
-            {
-                
-                return $this->Util->ajaxReturn(['status' => true, 'msg' => '取消关注成功', 'type' => 0]);
-            }
-            else
-            {
-                return $this->Util->ajaxReturn(false, '系统错误');
-            }
-        }
-        elseif($type == 2)
-        {
-            // 互相关注，取消关注
-            $fans = $this->User->UserFans->get($isAttention->id);
-            $res = $this->User->UserFans->delete($fans);
-            if($res)
-            {
-                $isFans = $this->User->UserFans->get($isFans->id);
-                $isFans->type = 1;
-                $this->User->UserFans->save($isFans);
-                return $this->Util->ajaxReturn(['status' => true, 'msg' => '取消关注成功', 'type' => 0]);
-            }
-            else
-            {
-                return $this->Util->ajaxReturn(false, '系统错误');
-            }
-        }
-    }
-    
+  
     /**
      * 递名片动作
      * @param int $id 大咖id
