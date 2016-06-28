@@ -77,7 +77,7 @@
     </ul>
 </div>
 <!-- 微信分享 -->
-<div class="wxshare">
+<div class="wxshare" id="wxshare" hidden>
     <span></span>
     <p></p>
  </div>
@@ -282,9 +282,10 @@
                     {
                         LEMON.share.banner();
                     }
-                    else
+                    else if($.util.isWX)
                     {
-                        $.util.alert('请点击右上角分享');
+                        $('#wxshare').show();
+                        $('.reg-shadow').show();
                     }
                     break;
                 case 'goTop':
