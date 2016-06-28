@@ -194,6 +194,7 @@
 <script>
     $(function () {
     	initJqupload('cover', '/wpadmin/util/doUpload?dir=activitycover', 'jpg,png,gif,jpeg'); //初始化图片上传
+    	initJqupload('thumb', '/wpadmin/util/doUpload?dir=activitythumb', 'jpg,png,gif,jpeg'); //初始化图片上传
         var ue = UE.getEditor('body'); //初始化富文本编辑器
         UE.getEditor('summary');
         UE.getEditor('guest');
