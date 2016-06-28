@@ -254,3 +254,4 @@ ALTER TABLE news add thumb VARCHAR(200) COMMENT '缩略图';
 
 #活动表添加缩略图
 ALTER TABLE activity add thumb VARCHAR(200) COMMENT '缩略图';
+#==========0628
