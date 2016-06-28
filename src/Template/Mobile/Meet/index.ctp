@@ -30,7 +30,7 @@
     </div>
     <!--分类--start-->
     <div class="menusort clearfix">
-        <div class="allmenu">
+        <div class="allmenu" id="icons">
             <div class="menulist clearfix" id="allsort">
                 
                 <a href="/meet/moreIndustries/4">
@@ -152,6 +152,8 @@
     
     //轮播
     var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
+    var iconLoop = new simpleScroll({viewDom:$('#icons'),  moveDom:$('#allsort'), right:$('#toRight')});
+
     $('.s-con').click(function () {
         $('.search').focus();
     });

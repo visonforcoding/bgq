@@ -222,9 +222,12 @@ var simpleScroll = function(o) {
         }
     };
     $.extend(this, this.opt, o);
-    this.width = this.moveDom.width();
+    var obj = this;
     if(!this.viewDom) this.viewDom = $(window);
     this.viewWidth = this.viewDom.width();
+    //this.width = this.moveDom.width();
+    this.moveDom.children().each(function(){obj.width += $(this).width()});
+    //this.width -= this.viewWidth;
     if(this.viewWidth >= this.width) {  //只有一个的时候  不滚动
         this.left.addClass(this.tabClass);
         this.right.addClass(this.tabClass);
@@ -242,8 +245,8 @@ $.extend(simpleScroll.prototype, {
         dom.addEventListener("touchend", obj, false);
         dom.addEventListener("touchcancel", obj, false);
         dom.addEventListener("webkitTransitionEnd", obj, false);
-        this.left && this.left.click(function(){obj.move('left')});
-        this.right && this.right.click(function(){obj.move('right')});
+        this.left && this.left.tap(function(){obj.move('left')});
+        this.right && this.right.tap(function(){obj.move('right')});
     },
     // 默认事件处理函数，事件分发用
     handleEvent : function(e) {
@@ -284,7 +287,7 @@ $.extend(simpleScroll.prototype, {
         }
     },
     move : function(tp) {
-        var offset=this.offset;
+        var offset=this.offset, maxWidth = this.width - this.viewWidth+50;
         if(tp){
             var step = this.viewWidth;
             if(tp == 'right') step = -step;
@@ -292,7 +295,7 @@ $.extend(simpleScroll.prototype, {
         }
 
         if(this.offset > 0) this.offset = 0
-        if(-this.offset > this.width) this.offset = -this.width;
+        if(-this.offset > maxWidth) this.offset = -maxWidth;
 
         if(this.offset == offset) return;
 
