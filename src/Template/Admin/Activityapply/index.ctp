@@ -49,7 +49,7 @@
                             {name: 'is_top', editable: true, align: 'center', formatter: topFormatter},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
-                        rowNum: 10,
+                        rowNum: 30,
                         rowList: [10, 20, 30],
                         sortname: "id",
                         sortorder: "desc",

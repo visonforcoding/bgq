@@ -46,7 +46,7 @@
 {name:'type',editable:true,align:'center',formatter: typeFormatter},
 {name:'actionBtn',align:'center',viewable:false,sortable:false,formatter:actionFormatter}],
             pager: "#pager",
-            rowNum: 10,
+            rowNum: 30,
             rowList: [10, 20, 30],
             sortname: "id",
             sortorder: "desc",

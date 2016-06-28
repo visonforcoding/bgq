@@ -59,7 +59,7 @@
                             {name: 'update_time', editable: true, align: 'center'},
                             {name: 'actionBtn', width: '200%', align: 'left', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
-                        rowNum: 10,
+                        rowNum: 30,
                         rowList: [10, 20, 30],
                         sortname: "create_time",
                         sortorder: "desc",
