@@ -305,7 +305,7 @@ height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;}
 .j-sort{background: #fff;line-height: 0.89rem;position:fixed;z-index:999;height: 0.89rem;}
 .internet-v-info .innercon{/*display: flex;justify-content: flex-start;*/overflow:hidden;padding:0.1rem 0.3rem;}
 .defaultsort{width:1.92rem;border-right:1px #ccc solid;height:0.52rem;line-height: 0.52rem;background: url(../images/down.png) no-repeat left center;background-size:0.25rem 0.16rem;padding-left:0.47rem;}
-.navmenu ul{height:0.89rem;white-space: nowrap;}
+.navmenu ul{height:0.89rem;width:300%}
 .leftbtn,.rightbtn{display:inline-block;background: url(img/right.png) center center  no-repeat;
 background-size: 0.16rem 0.25rem;width:0.16rem;height:100%;}
 /*.leftbtn{-webkit-transform:rotate(180deg);transform: rotate(180deg); }*/
