@@ -180,9 +180,9 @@
     <span class="f-color-gray">海南 佛山</span>
 </div> -->
 <script src="/mobile/js/jquery.js" type="text/javascript" charset="utf-8"></script>
-<script src="/mobile/js/lib/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>
-<script src="/mobile/js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
-<script src="/mobile/js/mobiscroll.2.13.2.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="/mobile/js/lib/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>-->
+<!--<script src="/mobile/js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>-->
+<!--<script src="/mobile/js/mobiscroll.2.13.2.js" type="text/javascript" charset="utf-8"></script>-->
 <script>
     $(function () {
         $('#upload_pic').click(function(){
