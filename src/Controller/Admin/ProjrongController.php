@@ -56,7 +56,7 @@ class ProjrongController extends AppController {
             }
         }
         $users = $this->Projrong->Users->find('list', ['limit' => 200]);
-        $tags = $this->Projrong->tags->find('treeList', ['limit' => 200]);
+//        $tags = $this->Projrong->tags->find('treeList', ['limit' => 200]);
         $this->set(compact('projrong', 'users', 'tags'));
     }
 

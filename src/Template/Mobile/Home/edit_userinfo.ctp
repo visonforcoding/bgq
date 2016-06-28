@@ -1,6 +1,6 @@
-<?php $this->start('css')?>
+<?php $this->start('css') ?>
 <link rel="stylesheet" type="text/css" href="/mobile/css/mobiscroll.css"/>
-<?php $this->end('css')?>
+<?php $this->end('css') ?>
 <header>
     <div class='inner'>
         <a href='javascript:history.go(-1);' class='toback'></a>
@@ -16,6 +16,7 @@
 <div class="wraper m-fixed-bottom">
     <ul class="h-info-box e-info-box">
         <form method="post">
+
         <li>
             <a href="javascript:void(0)">
                 <span>头像：</span>
@@ -121,7 +122,6 @@
             <a  href="/home/edit-work">
                 <span>工作经历：</span>
                 <div>
-
                     <span></span>
                 </div>
             </a>
@@ -139,10 +139,9 @@
                 <span>个人标签：</span>
                 <div>
                     <span></span>
-
-                </div>
-            </a>
-        </li>
+                    </div>
+                </a>
+            </li>
         </form>
     </ul>
     <a id="submit" href="javascript:void(0);" class="nextstep">完成</a>
@@ -179,23 +178,26 @@
     <span class="f-color-gray">广东   深圳</span>
     <span class="f-color-gray">海南 佛山</span>
 </div> -->
-<script src="/mobile/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="/mobile/js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+
 <!--<script src="/mobile/js/lib/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>-->
 <!--<script src="/mobile/js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>-->
 <!--<script src="/mobile/js/mobiscroll.2.13.2.js" type="text/javascript" charset="utf-8"></script>-->
 <script src="/mobile/js/util.js" type="text/javascript" charset="utf-8"></script>
+
 <script>
     $(function () {
+
         $('#upload_pic').click(function(){
             if($.util.isAPP){
 //                alert('我要调JSAPI了');
                 LEMON.event.uploadPhoto('{"dir":"user/avatar","zip":"1"}',function(data){
-                  var data = JSON.parse(data);
+                    var data = JSON.parse(data);
                    if(data.status===true){
                        $('input[name="avatar"]').val(data.thumbpath);
                     }
                 });
-               return false; 
+                return false;
             } else if($.util.isWX) {
                 $.util.wxUploadPic(function(id){
                     console.log(123);
@@ -221,7 +223,7 @@
             reader.onload = function (e) {
                 console.log(reader);
                 //$('.imgcard').find('img').attr('src', e.target.result);
-                lrz(file,{quality:0.7}).then(function(rst){
+                lrz(file, {quality: 0.7}).then(function (rst) {
                     //压缩处理
                     $.ajax({
                         url: '/do-upload?dir=user/avatar&zip=1',
@@ -232,8 +234,8 @@
                         contentType: false,
                         dataType: 'json',
                         success: function (data) {
-                            if(data.status===true){
-                               $('input[name="avatar"]').val(data.thumbpath);
+                            if (data.status === true) {
+                                $('input[name="avatar"]').val(data.thumbpath);
                             }
                         },
                         error: function () {
@@ -242,7 +244,7 @@
                 });
             };
         });
-        $('#submit').on('click',function(){
+        $('#submit').on('click', function () {
             var $form = $('form');
             $.ajax({
                 type: $form.attr('method'),
@@ -262,12 +264,14 @@
             });
         });
 
-         $('.checkedsex').mobiscroll().select({
+        $('.checkedsex').mobiscroll().select({
             theme: 'mobiscroll',
             display: 'bottom',
-            headerText: function (valueText) { return "请选择性别"; },
-            rows:3
-    });
+            headerText: function (valueText) {
+                return "请选择性别";
+            },
+            rows: 3
+        });
     });
 </script>
 <?php

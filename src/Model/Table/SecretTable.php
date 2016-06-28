@@ -1,18 +1,18 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Entity\Education;
+use App\Model\Entity\Secret;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Education Model 教育经历
+ * Secret Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
  */
-class EducationTable extends Table
+class SecretTable extends Table
 {
 
     /**
@@ -25,23 +25,14 @@ class EducationTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('education');
+        $this->table('secret');
         $this->displayField('id');
         $this->primaryKey('id');
 
         $this->belongsTo('Users', [
-            'className'=>'User',
+            'className' =>'User',
             'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
-        ]);
-        
-        $this->addBehavior('Timestamp', [
-            'events' => [
-                'Model.beforeSave' => [
-                    'create_time' => 'new',
-                    'update_time' => 'always'
-                ]
-            ]
+            'joinType' => 'LEFT'
         ]);
     }
 
@@ -56,27 +47,6 @@ class EducationTable extends Table
         $validator
             ->integer('id')
             ->allowEmpty('id', 'create');
-
-        $validator
-            ->requirePresence('school', 'create')
-            ->notEmpty('school','学校不可为空');
-
-        $validator
-            ->requirePresence('major', 'create')
-            ->notEmpty('major','专业不可为空');
-
-        $validator
-            ->integer('education')
-            ->requirePresence('education', 'create')
-            ->notEmpty('education','学历不可为空');
-
-        $validator
-            ->requirePresence('start_date', 'create')
-            ->notEmpty('start_date','开始时间不可为空');
-
-        $validator
-            ->requirePresence('end_date', 'create')
-            ->notEmpty('end_date','结束时间不可为空');
 
 
         return $validator;

@@ -16,7 +16,7 @@
     </div>
     <ul class="h-info-box">
         <li>
-            <h3>标签：<em>杨涛</em></h3>
+            <h3>标签：<em><?=$industries_str?></em></h3>
         </li>
         <li>
             <h3>联系电话：<em><?=$book->user->phone?></em></h3>
@@ -69,14 +69,27 @@
         }
         if (!em || !em.id)
             return;
+        var book_id = <?=$book->id?>;
         switch (em.id) {
             case 'meetOk':
-                var book_id = <?=$book->id?>;
                 $.util.ajax({
                    url:'/home/book-ok',
                    data:{id:book_id},
                    func:function(res){
                        $.util.alert(res.msg);
+                       setTimeout(function(){
+                           window.location.href = '/home/my-book-savant';
+                       },1500);
+                   }
+                });
+            case 'meetNo':
+                $.util.ajax({
+                   url:'/home/book-no/'+book_id,
+                   func:function(res){
+                     $.util.alert(res.msg);
+                     setTimeout(function(){
+                           window.location.href = '/home/my-book-savant';
+                       },1500);
                    }
                 });
             case 'goTop':

@@ -13,7 +13,8 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsToMany $Industries
  * @property \Cake\ORM\Association\BelongsTo $Agencies
- * @property \Cake\ORM\Association\HasOne $Savant
+ * @property \Cake\ORM\Association\HasOne $Savant  专家信息
+ * @property \Cake\ORM\Association\HasOne $Secret 隐私设置
  * @property \Cake\ORM\Association\HasMany $Subject
  */
 class UserTable extends Table {
@@ -55,12 +56,15 @@ class UserTable extends Table {
         
         $this->belongsTo('Agencies');
         
-        $this->hasOne('Educations',[
+        $this->hasMany('Educations',[
             'className' => 'Education',
+            'foreignKey'=>'user_id'
+
         ]);
         
-        $this->hasOne('Careers',[
+        $this->hasMany('Careers',[
             'className' => 'Career',
+            'foreignKey'=>'user_id'
         ]);
         
         $this->hasOne('UserFans',[
@@ -82,6 +86,11 @@ class UserTable extends Table {
             'foreignKey'=>'savant_id',
             'joinType'=>'LEFT',
             'className'=>'SavantReco'
+        ]);
+        $this->hasOne('Secret',[
+            'foreignKey'=>'user_id',
+            'joinType'=>'LEFT',
+            'className'=>'Secret'
         ]);
 
         $this->addBehavior('Timestamp', [

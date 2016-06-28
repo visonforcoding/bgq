@@ -373,20 +373,33 @@ class HomeController extends AppController {
         $this->set('pageTitle', '我是专家');
     }
 
+    
+    
     /**
      * 我的约见 我是专家详情
      * @param type $id
      */
     public function myBookSavantDetail($id = null) {
         $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+    
         $book = $BookTable->get($id, [
             'contain' => ['Users' => function($q) {
                     return $q->select(['truename', 'id', 'avatar', 'company', 'position', 'phone', 'email']);
                 }, 'Subjects', 'Users.Industries']
                 ]);
-                $subject = $book->subject;
+        $subject = $book->subject;
+        $industries = $book->user->industries;
+        $industries_arr = [];
+        foreach($industries as $industry){
+            $industries_arr[] = $industry->name;
+        }
+        if(!empty($book->user->ext_industry)){
+            $industries_arr[] = $book->user->ext_industry;
+        }
+        $industries_str = implode('、',$industries_arr );
         $this->set([
-            'pageTitle'=>'预约详情'
+            'pageTitle'=>'预约详情',
+            'industries_str'=>$industries_str
         ]);
         $this->set(compact('subject', 'book'));
     }
@@ -430,6 +443,30 @@ class HomeController extends AppController {
             return $this->Util->ajaxReturn(false, '服务器出错!');
             }
         }
+    }
+    
+    /***
+     * 取笑预约
+     */
+    public function bookNo($id){
+        if($this->request->is('post')){
+            $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+            $book = $BookTable->get($id, [
+                'contain' => [
+                    'Subjects',
+                    'Users'
+                ]
+            ]);
+            $book->status = 2;
+            if($BookTable->save($book)){
+                $this->loadComponent('Business');
+                $this->Business->usermsg($book->user_id, '预约通知', '您的预约未被通过', 4, $id);
+                return $this->Util->ajaxReturn(true, '操作成功');
+            }else{
+                return $this->Util->ajaxReturn(false,'操作失败');
+            }
+        }
+        
     }
 
     /*                                                             * *
@@ -486,7 +523,23 @@ class HomeController extends AppController {
      * 隐私设置
      */
     public function mySecret() {
-        $this->set('pageTitle', '隐私策略');
+        $ScrectTable = \Cake\ORM\TableRegistry::get('Secret');
+        $user_id = $this->user->id;
+        $secret = $ScrectTable->findOrCreate(['user_id'=>$user_id]);
+        if($this->request->is('post')){
+            $ScrectTable->patchEntity($secret,  $this->request->data());
+            if($ScrectTable->save($secret)){
+                return $this->Util->ajaxReturn(true, '修改成功');
+            }else{
+                return $this->Util->ajaxReturn(false,'修改失败');
+            }
+        }
+        $secretType = \Cake\Core\Configure::read('secretType');
+        $this->set([
+            'pageTitle' => '隐私策略',
+            'secret' => $secret,
+            'secretType'=>$secretType
+        ]);
     }
 
     /**

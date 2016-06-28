@@ -21,14 +21,14 @@
     </div>
 <script type="text/html" id="tpl">
     <section class="internet-v-info no-margin-top">
-        <a  href="/home/my-book-detail/{#id#}">
+        <a  href="{#link#}{#id#}">
         <div class="innercon">
             <span class="head-img"><img src="{#user_logo#}"/><i></i></span>
             <div class="vipinfo my-meet-info">
                 <h3>{#truename#}<span class="meetnum">{#meet_nums#}</span></h3>
                 <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
                 <div class="mark">
-                    <a href="#this">约见话题：{#title#} </a>
+                    <span>约见话题：{#title#}</span>
                 </div>
             </div>
         </div>
@@ -56,6 +56,7 @@
         }
         else {
             book_html[type][status] = $.util.dataToTpl('', 'tpl', cdata, function(d){
+                d.link = type == 'books' ? '/home/my-book-detail/' :'/home/my-book_savant_detail/';
                 d.subject.user = d.subject.user || {};
                 d.user_logo = d.subject.user.avatar || '/mobile/images/touxiang.jpg';
                 d.truename = d.subject.user.truename;
