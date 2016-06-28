@@ -9,9 +9,11 @@ $this->start('static') ?>
     <div class="form-group">
         <label class="col-md-2 control-label">类型</label>
         <div class="col-md-8">
-            <?php foreach ($types as $key=>$type): ?>
-            <option value="<?=$key?>" <?php if($type == $key): ?>selected<?php endif; ?>><?=$type?></option>
-            <?php endforeach; ?>
+            <select name="type" class="form-control">
+                <?php foreach ($types as $key=>$type): ?>
+                <option value="<?=$key?>" <?php if($type == $key): ?>selected<?php endif; ?>><?=$type?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
     </div>
     <div class="form-group">
