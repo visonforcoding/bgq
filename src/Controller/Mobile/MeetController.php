@@ -272,7 +272,7 @@ class MeetController extends AppController {
                 })
                 ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%"])
                 ->orWhere(['Subjects.title like'=>"%$keyword%"])
-//                ->limit(10)
+                ->limit(10)
                 ->toArray();
         if($User) {
             return $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $User]);
@@ -509,29 +509,25 @@ class MeetController extends AppController {
     
     public function getIndustriesBiggie(){
         $data = $this->request->data();
-        debug($data);die;
         $industry_id = $data['industry_id'];
-//        $sort = $data['sort'];
+        $sort = $data['sort'];
         $biggie = $this
                     ->User
                     ->find()
                     ->matching('Industries', function($q)use($industry_id){
                         return $q->where(['Industries.id'=>$industry_id]);
                     })
-                    ->contain(['Subjects'])
-                    ->where(['enabled'=>'1', 'level'=>'2'])
-                    ->toArray();
-//        if($sort)
-//        {
-//            if($sort !== 'reco_nums'){
-//                $biggie = $biggie->orderDesc($sort);
-//            } else {
-//                
-//            }
-//        }
-//        $biggie = $biggie
-//                ->where(['enabled'=>'1', 'level'=>'2'])
-//                ->toArray();
+                    ->contain(['Subjects']);
+        if($sort) {
+            if($sort !== 'reco_nums'){
+                $biggie = $biggie->orderDesc($sort);
+            } else {
+                
+            }
+        }
+        $biggie = $biggie
+                ->where(['enabled'=>'1', 'level'=>'2'])
+                ->toArray();
         if($biggie !== false){
             if ($biggie) {
                 return $this->Util->ajaxReturn(['status' => true, 'data' => $biggie]);
