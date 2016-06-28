@@ -95,15 +95,15 @@ class WxController extends AppController {
     public function getUserCodeBase() {
         $res = $this->Wx->getUser();
         //微信静默登录
-        \Cake\Log\Log::debug('静默登录');
-        \Cake\Log\Log::debug($res);
+        \Cake\Log\Log::debug('静默登录','devlog');
+        \Cake\Log\Log::debug($res,'devlog');
         $this->request->session()->write('Login.wxbase', true);
+        $user = false;
         if (isset($res->unionid)) {
             $union_id = $res->unionid;
             $user = $this->User->findByUnion_idAndEnabled($union_id,1)->first();
-        }
-        if (isset($res->openid)) {
-            $open_id = $res->unionid;
+        }elseif (isset($res->openid)) {
+            $open_id = $res->openid;
             $user = $this->User->findByWx_openidAndEnabled($open_id,1)->first();
         }
         if ($user) {
