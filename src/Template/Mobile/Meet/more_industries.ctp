@@ -8,7 +8,7 @@
     </div>
 </header>
 
-<div class="wraper">
+<div class="wraper pd10">
     <div hidden>
         <form method="post" id="industry_form">
             <input type="text" name="industry_id" value="" />
@@ -86,9 +86,10 @@
         if(em.id.indexOf('sub_') != -1){
             console.log($(em));
             $('#industries_ul').find('a').removeClass('active');
+            $('.allmark').removeClass('active');
             var industry_id = $(em).attr('data_id');
             $(em).children('a').addClass('active');
-            $('input[name="indudstry_id"]').attr('value', industry_id);
+            $('input[name="industry_id"]').attr('value', industry_id);
             $('#biggies').html('');
             $.ajax({
                 type: 'POST',
