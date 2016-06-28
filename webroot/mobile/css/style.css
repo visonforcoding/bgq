@@ -301,7 +301,7 @@ height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;}
 
 /*.navmenu .innercon .allmark{}*/
 .navmenu .innercon .allmark.active{color:#e01a48;}
-.navmenu .innercon .outerbox{white-space: nowrap;display:inline-block;width:85%;height:0.89rem;overflow:hidden;-webkit-overflow-scrolling: touch;overflow-x: scroll;margin-right:0.2rem;margin-left:0.1rem;}
+.navmenu .innercon .outerbox{white-space: nowrap;display:inline-block;width:92%;height:0.89rem;overflow:hidden;-webkit-overflow-scrolling: touch;overflow-x: scroll;margin-right:0.2rem;}
 .j-sort{background: #fff;line-height: 0.89rem;position:fixed;z-index:999;height: 0.89rem;}
 .internet-v-info .innercon{/*display: flex;justify-content: flex-start;*/overflow:hidden;padding:0.1rem 0.3rem;}
 .defaultsort{width:1.92rem;border-right:1px #ccc solid;height:0.52rem;line-height: 0.52rem;background: url(../images/down.png) no-repeat left center;background-size:0.25rem 0.16rem;padding-left:0.47rem;}
