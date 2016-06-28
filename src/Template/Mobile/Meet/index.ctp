@@ -71,7 +71,7 @@
                 </a>
             </div>
         </div>
-        <a href="javascript:void(0);" class="sele-r"></a>
+        <a href="javascript:void(0);" class="sele-r" id="toRight"></a>
     </div>
     <!--分类--end-->
     
@@ -107,7 +107,6 @@
 <?=$this->element('footer');?>
 <?php $this->start('script'); ?>
 <script src="/mobile/js/loopScroll.js"></script>
-<script src="/mobile/js/meet_index.js"></script>
 <link rel="stylesheet" href="/mobile/font/font/iconfont.css" />
 <script>
     $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
@@ -169,5 +168,9 @@
         LEMON.show.search('/meet/search');
     }
     
+    $('#toRight').on('tap', function(){
+        scroll.moveDom = $('#allsort');
+        scroll.moveChild = $('#allsort').children('a');
+    });
 </script>
 <?php $this->end('script');

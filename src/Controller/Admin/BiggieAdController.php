@@ -49,7 +49,9 @@ class BiggieAdController extends AppController {
     public function add() {
         $biggieAd = $this->BiggieAd->newEntity();
         if ($this->request->is('post')) {
-            $biggieAd = $this->BiggieAd->patchEntity($biggieAd, $this->request->data);
+            $data = $this->request->data;
+            $data['savant_id'] = $data['biggies'];
+            $biggieAd = $this->BiggieAd->patchEntity($biggieAd, $data);
             if ($this->BiggieAd->save($biggieAd)) {
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {
