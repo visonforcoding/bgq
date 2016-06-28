@@ -68,7 +68,7 @@
     <span class="iconfont" id="goTop"></span>
 </div>
 <!--底部四个图**end-->
-<div class="reg-shadow" style="display: none;"></div>
+<div class="reg-shadow" style="display: none;" id="shadow"></div>
 <!-- 评论框 -->
 <div class="shadow-info a-shadow a-forword" style="display: none;">
     <ul>
@@ -288,6 +288,13 @@
                         $('.reg-shadow').show();
                     }
                     break;
+                case 'shadow':
+                    $(em).hide();
+                    $('#wxshare').hide();
+                    break;
+                case 'wxshare':
+                    $(em).hide();
+                    $('#shadow').hide();
                 case 'goTop':
                     window.scrollTo(0, 0);
                     e.preventDefault();
