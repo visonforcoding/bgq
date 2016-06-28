@@ -204,7 +204,7 @@
                         dateType: 'json',
                         type: 'POST',
                         success: function (msg) {
-                            $.util.alert(msg.msg, 10000);
+                            alert(JSON.stringify(msg));
                             if(msg.status===true){
                                 $('input[name="avatar"]').val(msg.path);
                             }
