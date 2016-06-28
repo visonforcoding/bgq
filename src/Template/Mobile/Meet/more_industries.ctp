@@ -19,7 +19,7 @@
         <a href="javascript:void(0);" class="h-regiser m-sort active" id="sort">默认排序</a>
 
         <div class="innercon">
-           <span class="leftbtn"></span>
+           <!-- <span class="leftbtn"></span> -->
             <div class="outerbox" id="outer">
                 <ul id="industries_ul">
   <li><a href="/meet/moreIndustries" class="allmark <?php echo $id ? '':'active' ?>">全部</a></li>
