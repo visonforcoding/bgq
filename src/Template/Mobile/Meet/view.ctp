@@ -25,16 +25,22 @@
         <li>
             <span  class="commendnum">
                 <p id="recom_avatar">
+                    <!-- 只推荐5条 -->
+
                     <?php foreach ($biggie->reco_users as $reco_user): ?>
                         <img src="<?= empty($reco_user->user->avatar) ? '/mobile/images/touxiang.jpg' : $reco_user->user->avatar ?>"/>
                     <?php endforeach; ?>
+
+                   <a href="#this" class="ml20">查看更多</a>
                 </p>
-                等<i id="meet_nums"><?=$biggie->savant->reco_nums?></i>人推荐</span>
-            <a id="recom" href="javascript:void(0);">推荐他</a>
+                <!-- 等<i id="meet_nums"><?=$biggie->savant->reco_nums?></i>人推荐 -->
+                </span>
+            <a id="recom" href="javascript:void(0);"><i class="iconfont f7">&#xe615;</i>推荐他</a>
         </li>
         <li class="conr"><a class="alink mr" href="/user/home-page/<?= $biggie->id ?>" class="tohome"><i class="iconfont">&#xe60d;</i>个人主页</a></li>
     </ul>
     <div class="m-swiper-items">
+        <h3 class="s-eidt"><a href="#this">编辑话题</a></h3>
         <ul id="subject">
             <?php foreach ($biggie->subjects as $v): ?>
             <li>
@@ -57,7 +63,7 @@
         </ul>
     </div>
     <section class="a-detail newscomment-box m-about-expert">
-        <h3 class="comment-title">专家简介</h3>
+        <h3 class="comment-title">专家简介<a href="#this" class="fr color-items">编辑</a></h3>
         <a href="meet-one-detail.html">
             <p>
                 <?php if(!empty($biggie->savant->summary)): ?>
