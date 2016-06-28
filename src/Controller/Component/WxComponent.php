@@ -110,11 +110,10 @@ class WxComponent extends Component {
             if ($res->isOk()) {
                 \Cake\Log\Log::debug($res->body(),'devlog');
                 $union_res = json_decode($res->body());
-                if(true){
-//                if(property_exists($union_res, 'errcode')){
+                if(property_exists($union_res, 'errcode')){
                     //第二步获取失败
-                    \Cake\Log\Log::error('获取weixin用户信息时unionId接口返回结果显示有误');
-                    \Cake\Log\Log::error($res->body());
+                    \Cake\Log\Log::error('获取weixin用户信息时unionId接口返回结果显示有误','devlog');
+                    \Cake\Log\Log::error($res->body(),'devlog');
                     return json_decode($response->body());
                 }
                 return json_decode($res->body());
