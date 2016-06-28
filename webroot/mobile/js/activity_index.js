@@ -36,12 +36,12 @@ activity.prototype.bindEvent = function () {
                 } else {
                     $.util.alert('请先登录');
                     setTimeout(function(){
-                        location.href = "/user/login";
+                        location.href = "/user/login?redirect_url=/activity/index";
                     },2000);
                 }
                 break;
             case 'goTop':
-                window.scroll(0, 0);
+                window.scrollTo(0, 0);
                 e.preventDefault();
                 break;
         }
@@ -60,10 +60,11 @@ activity.prototype.scroll = function () {
 //        if(document.body.scrollTop < ($('#imgList').height() + $('.inner').height()) && window.up == true){
 //            $('.a-search-box').addClass('movedown');
 //        }
-        // 滚动两个屏幕长度，隐藏发布活动
-        if (document.body.scrollTop > ($(window).height())) {
+        // 滚动一个屏幕长度，隐藏发布活动
+        if (document.body.scrollTop > $(window).height()) {
             $('#release').removeClass('moveleft').addClass('moveright');
-        } else {
+            window.up = true;
+        } else if(document.body.scrollTop < $(window).height() && window.up == true) {
             $('#release').addClass('moveleft');
         }
     });
