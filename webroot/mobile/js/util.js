@@ -234,6 +234,7 @@ $.util = {
             success: function (res) {
                 var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                 alert(localIds)
+                alert(localIds[0]);
                 wx.uploadImage({
                     localId: localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
                     isShowProgressTips: 1, // 默认为1，显示进度提示
