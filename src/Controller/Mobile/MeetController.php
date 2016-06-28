@@ -470,10 +470,17 @@ class MeetController extends AppController {
         }
     }
     
+    /**
+     * 行业九宫格列表
+     */
     public function industries(){
         $this->set('pageTitle', '行业');
     }
     
+    /**
+     * 行业搜索专家页面
+     * @param int $id 行业id
+     */
     public function moreIndustries($id = ''){
         if($id)
         {
@@ -507,6 +514,9 @@ class MeetController extends AppController {
         ]);
     }
     
+    /**
+     * ajax获取行业搜索专家结果
+     */
     public function getIndustriesBiggie(){
         $data = $this->request->data();
         $industry_id = $data['industry_id'];
@@ -525,7 +535,9 @@ class MeetController extends AppController {
             if($sort !== 'reco_nums'){
                 $biggie = $biggie->orderDesc($sort);
             } else {
-//                $biggie = $biggie->contain(['']);
+                $biggie = $biggie->contain(['Savants'=>function($q)use($sort){
+                    return $q->orderDesc($sort);
+                }]);
             }
         }
         $biggie = $biggie
