@@ -480,6 +480,7 @@ class UserController extends AppController {
 //        $url = 'http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=yovsNj9tivZxw3IEpIU_BOl0lHWHi-PwCCyU_dFWCfzrnIK-8vOe7i5DOVZvT3PdTUdVQkOVgGRpYBY_ZbMoAIDHMsrpuPQvpQ1f4xvg9I8klPrKawWYnQIjAdMbTpG5GDIeAGABYD&media_id=' . $id;
         $httpClient = new \Cake\Network\Http\Client();
         $response = $httpClient->get($url);
+        \Cake\Log\Log::error($response,'devlog');
         return $this->Util->ajaxReturn(true, $response);
         \Intervention\Image\ImageManagerStatic::make($filename)
                 ->resize(intval($thumbWidth[0]),  intval($thumbHeight[0]))
