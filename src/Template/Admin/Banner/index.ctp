@@ -169,7 +169,7 @@ $this->start('static') ?>
 
                 function doView(id) {
                     //查看明细
-                    url = '/admin/banner/view?id=' + id;
+                    url = '/admin/banner/view/' + id;
                     layer.open({
                         type: 2,
                         title: '查看图片',

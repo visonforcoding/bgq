@@ -174,7 +174,7 @@
 
         function doView(id) {
             //查看明细
-            url = '/admin/user/view' + id;
+            url = '/admin/user/view/' + id;
             layer.open({
                 type: 2,
                 title: '查看详情',

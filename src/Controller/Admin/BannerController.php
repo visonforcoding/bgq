@@ -90,7 +90,8 @@ class BannerController extends AppController {
             }
             return;
         }
-        $this->set(compact('banner'));
+        $types = \Cake\Core\Configure::read('bannerTypes');
+        $this->set(compact('banner,types'));
     }
 
     /**
