@@ -206,6 +206,7 @@
                         success: function (msg) {
 //                            alert(JSON.stringify(msg));
                             if(msg.status===true){
+                                $.util.alert(msg.msg);
                                 $('input[name="avatar"]').val(msg.path);
                             }
                         }
