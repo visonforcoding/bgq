@@ -110,7 +110,7 @@
 .inner .share{font-size:0.34rem;color:#fff;}
 .newscon-box,.newscomment-box{background: #fff;overflow:hidden;padding-bottom:0.2rem;border-bottom:1px #c8c7cc solid;}
 .newscon-box h3{line-height:0.46rem;width:100%;font-size:0.4rem;color:#222c38; margin:0.3rem 0 0.2rem;padding:0 0.3rem;}
-.newscon-box img{width:90%;height:auto;display: block;margin:0.3rem auto;}
+.newscon-box img{max-width:90%;height:auto;display: block;margin:0.3rem auto;}
 .newscon-box p{width:90%;margin:0.1rem auto;line-height: 0.42rem;font-size:0.3rem;color:#9ba4ad;text-align: justify;}
 .con-bottom{float:right;line-height: 0.4rem;margin-right: 8%;color:#9ba4ad;margin-top:0.08rem;font-size:0.28rem;}
 .con-bottom i{margin:0 0.1rem; color:#9ba4ad;}
@@ -298,7 +298,9 @@ height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;}
 .itemsbox div img{height:0.86rem;width:auto;display:block;margin:auto;margin-bottom:0.4rem;}
 .navmenu{border-bottom:1px #c8c7cc solid;}
 .navmenu .innercon{width:100%;/*display: flex;align-items: center;*/padding-left:1.6rem;overflow:hidden;height:0.89rem;}
-.navmenu .innercon .allmark{}
+.innercon .leftbtn,.innercon .rightbtn{background: url(img/right.png) 96% center no-repeat;
+    background-size: 0.16rem 0.25rem;display:inline-block;width:0.16rem;height:0.25rem;}
+/*.navmenu .innercon .allmark{}*/
 .navmenu .innercon .allmark.active{color:#e01a48;}
 .navmenu .innercon .outerbox{white-space: nowrap;display:inline-block;width:85%;height:0.89rem;overflow:hidden;-webkit-overflow-scrolling: touch;overflow-x: scroll;margin-right:0.2rem;margin-left:0.1rem;}
 .j-sort{background: #fff;line-height: 0.89rem;position:fixed;z-index:999;height: 0.89rem;}
