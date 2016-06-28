@@ -480,11 +480,19 @@ class UserController extends AppController {
 //        $url = 'http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=yovsNj9tivZxw3IEpIU_BOl0lHWHi-PwCCyU_dFWCfzrnIK-8vOe7i5DOVZvT3PdTUdVQkOVgGRpYBY_ZbMoAIDHMsrpuPQvpQ1f4xvg9I8klPrKawWYnQIjAdMbTpG5GDIeAGABYD&media_id=' . $id;
         $httpClient = new \Cake\Network\Http\Client();
         $response = $httpClient->get($url);
-        \Cake\Log\Log::error($response,'devlog');
-        return $this->Util->ajaxReturn(true, $response);
-        \Intervention\Image\ImageManagerStatic::make($filename)
-                ->resize(intval($thumbWidth[0]),  intval($thumbHeight[0]))
-                ->save($thumbPath.$thumbname.'.'.$thumbExt);
+        if($response->isOk()){
+            $res = $response->body();
+        }
+        $today = date('Y-m-d');
+        $path = WWW_ROOT.'/upload/user/avatar/'.$today;
+        $file_name = $path.'/thumb_'.  uniqid().'.jpg';
+        if(!is_dir($path)){
+            mkdir($path,0777,true);
+        }
+        \Intervention\Image\ImageManagerStatic::make($res)
+                ->resize(60,60)
+                ->save($file_name);
+        return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'上传成功', 'path'=>$file_name]);
     }
 
 }
