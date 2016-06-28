@@ -159,7 +159,7 @@
             </span>
             <span class="infor-comm">
                 <a href="/user/home-page/{#user_id#}" class="alink">
-                    <i class="username" id='comment_username_{#id#}'>{#user_truename#} {#reply#}<time>{#create_time#}</time></i>
+                    <i class="username" id='comment_username_{#id#}'>{#user_truename#}</i><time>{#create_time#}</time>
                     <i class="job">{#user_company#} {#user_position#}</i>
                 </a>
             </span>
