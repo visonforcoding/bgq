@@ -130,7 +130,7 @@
             <a href="/home/edit-card">
                 <span>我的名片：</span>
                 <div class="upload-user-img">
-                    <span><input type="file"/></span>
+                    <span><input type="text"/></span>
                 </div>
             </a>
         </li>
