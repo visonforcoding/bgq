@@ -66,7 +66,11 @@
             success: function(msg){
                 if(msg.status) {
                     $.util.alert(msg.msg);
+                    $.util.setCookie('token_uin','');
+                    LEMON.db.set('token_uin','');
                     location.href = '/';
+                } else {
+                    $.util.alert(msg.msg);
                 }
             }
         });
