@@ -50,7 +50,7 @@
                 <div class="comm-info t-ablock">
                     <?php if ($userApply): ?>
                         <?php foreach ($userApply as $k => $v): ?>
-                            <a href='/meet/homepage/<?= $v['id'] ?>'><img src="<?= $v['avatar'] ? $v['avatar'] : '/mobile/images/touxiang.png'; ?>"/></a>
+                            <a href='/user/home-page/<?= $v['id'] ?>'><img src="<?= $v['avatar'] ? $v['avatar'] : '/mobile/images/touxiang.png'; ?>"/></a>
                         <?php endforeach; ?>
                     <?php else : ?>
                         <div style="font-size:0.2rem;line-height: 0.22rem;">暂时无人报名</div>
