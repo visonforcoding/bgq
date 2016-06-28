@@ -46,13 +46,14 @@ activity.prototype.bindEvent = function () {
                 }
             });
         }
+        // 回复评论
         if (em.id.indexOf('reply_') != -1) {
             if ($('#article_comment').attr('user_id')) {
                 if($(em).attr('user_id') == $('#article_comment').attr('user_id')) {
                     return;
                 }
                 var reply_id = $(em).attr('value');
-                var msg = '回复 ' + $('#comment_username_' + reply_id).html() + ' :';
+                var msg = '回复 ' + $('#comment_username_' + reply_id).text() + ' :';
                 $('#r_textarea').attr('placeholder', msg);
                 $('.reply-shadow').show();
                 $('.reply').show();
