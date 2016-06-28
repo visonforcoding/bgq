@@ -35,7 +35,10 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
-    $.util.dataToTpl('dataBox', 'listTpl',<?= json_encode($activities) ?>);
+    $.util.dataToTpl('dataBox', 'listTpl',<?= json_encode($activities) ?>, function(d){
+        d.cover = d.thumb ? d.thumb : d.cover;
+        return d;
+    });
     $('body').on('tap', function(e){
         var target = e.srcElement || e.target, em=target, i=1;
         while(em && !em.id && i<=3){ em = em.parentNode; i++;}
@@ -59,7 +62,10 @@
                         {
                             if(msg.status)
                             {
-                                $.util.dataToTpl('dataBox', 'listTpl',msg.data);
+                                $.util.dataToTpl('dataBox', 'listTpl',msg.data, function(d){
+                                    d.cover = d.thumb ? d.thumb : d.cover;
+                                    return d;
+                                });
                             }
                             else
                             {
@@ -86,7 +92,7 @@
                             {
                                 $.util.dataToTpl('dataBox', 'listTpl',msg.data, function(d){
                                     d.id = d.activity.id;
-                                    d.cover = d.activity.cover;
+                                    d.cover = d.activity.thumb ? d.activity.thumb : d.activity.thumb;
                                     d.title = d.activity.title;
                                     d.adress = d.activity.adress;
                                     d.apply_nums = d.activity.apply_nums;
