@@ -67,7 +67,7 @@ class HomeController extends AppController {
      */
     public function myActivityApply() {
         $applyTable = \Cake\ORM\TableRegistry::get('activityapply');
-        $myActivity = $applyTable->find()->contain(['Activities'])->where(['Activityapply.user_id'=>$this->user->id])->toArray();
+        $myActivity = $applyTable->find()->contain(['Activities'])->where(['activityapply.user_id'=>$this->user->id])->toArray();
         if($myActivity !== false)
         {
             return $this->Util->ajaxReturn(['status'=>true, 'data'=>$myActivity]);
