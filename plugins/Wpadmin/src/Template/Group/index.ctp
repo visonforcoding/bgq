@@ -105,7 +105,7 @@
 
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = '<button onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-trash"></i> 删除</button>';
-                    response += '<button onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-eye-open"></i> 删除</button>';
+                    response += '<button onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-eye-open"></i> 查看</button>';
                     response += '<a href="/wpadmin/group/edit/' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini"><i class="icon icon-pencil"></i> 修改</a>';
                     return response;
                 }
@@ -156,7 +156,7 @@
 
                 function doView(id) {
                     //查看明细
-                    url = '/wpadmin/group/view?id=' + id;
+                    url = '/wpadmin/group/view/' + id;
                     layer.open({
                         type: 2,
                         title: '查看详情',
