@@ -198,17 +198,19 @@
                return false; 
             } else if($.util.isWX) {
                 $.util.wxUploadPic(function(id){
+                    console.log(123);
                     $.ajax({
                         url: "/user/getWxPic/" + id,
                         dateType: 'json',
                         type: 'POST',
                         success: function (msg) {
                             $.util.alert(msg, 10000);
+                            if(data.status===true){
+                                $('input[name="avatar"]').val(data.thumbpath);
+                            }
                         }
                     });
-                    if(data.status===true){
-                       $('input[name="avatar"]').val(data.thumbpath);
-                    }
+                    
                 })
             }
         });
