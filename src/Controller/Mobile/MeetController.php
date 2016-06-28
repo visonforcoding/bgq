@@ -513,19 +513,23 @@ class MeetController extends AppController {
         $sort = $data['sort'];
         $biggie = $this
                     ->User
-                    ->find()
-                    ->matching('Industries', function($q)use($industry_id){
-                        return $q->where(['Industries.id'=>$industry_id]);
-                    })
-                    ->contain(['Subjects']);
+                    ->find();
+        // 选择标签再匹配
+        if($industry_id)
+        {
+            $biggie = $biggie->matching('Industries', function($q)use($industry_id){
+                            return $q->where(['Industries.id'=>$industry_id]);
+                        });
+        }
         if($sort) {
             if($sort !== 'reco_nums'){
                 $biggie = $biggie->orderDesc($sort);
             } else {
-                
+//                $biggie = $biggie->contain(['']);
             }
         }
         $biggie = $biggie
+                ->contain(['Subjects'])
                 ->where(['enabled'=>'1', 'level'=>'2'])
                 ->toArray();
         if($biggie !== false){

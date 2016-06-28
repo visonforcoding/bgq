@@ -119,6 +119,7 @@
             case 'meet_nums':
                 $('.reg-shadow').hide();
                 $('.m-fixed-top').hide();
+                $('#sort').html('约见最多');
                 window.sort = true;
                 $('#sort_ul').children('li').removeClass('active');
                 $(em).addClass('active');
@@ -151,6 +152,7 @@
             case 'create_time':
                 $('.reg-shadow').hide();
                 $('.m-fixed-top').hide();
+                $('#sort').html('最新上榜');
                 window.sort = true;
                 $('#sort_ul').children('li').removeClass('active');
                 $(em).addClass('active');
@@ -197,6 +199,7 @@
             case 'reco_nums':
                 $('.reg-shadow').hide();
                 $('.m-fixed-top').hide();
+                $('#sort').html('人气推荐');
                 window.sort = true;
                 $('#sort_ul').children('li').removeClass('active');
                 $(em).addClass('active');
