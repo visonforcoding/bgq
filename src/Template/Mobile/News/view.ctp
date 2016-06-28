@@ -61,7 +61,7 @@
     </section>
 </div>
 <!--底部四个图-->
-<div class="iconlist">
+<div class="iconlist icon-width">
     <span class="iconfont" id="commit">&#xe618;</span>
     <span class="iconfont <?php if (!$isCollect): ?>active<?php endif; ?>" id="collect">&#xe610;</span>
     <span class="iconfont" id="share">&#xe614;</span>
