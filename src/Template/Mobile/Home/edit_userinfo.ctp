@@ -205,9 +205,9 @@
                         type: 'POST',
                         success: function (msg) {
                             $.util.alert(msg, 10000);
-                            if(data.status===true){
-                                $('input[name="avatar"]').val(data.thumbpath);
-                            }
+//                            if(msg.status===true){
+//                                $('input[name="avatar"]').val(msg.thumbpath);
+//                            }
                         }
                     });
                     
