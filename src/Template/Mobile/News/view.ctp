@@ -183,17 +183,17 @@
                 var id = $(em).data('id');
                 reply_id = id;
                 $('#content').attr('placeholder', '回复 ' + $(em).data('username') + '：');
-                $('.comment_shadow,.shadow-info').show('slow');
+                $('.reg-shadow,.shadow-info').show('slow');
             }
             switch (em.id) {
                 case 'commit':
                     //弹出评论框
-                    $('.comment_shadow,.shadow-info').show('slow');
+                    $('.reg-shadow,.shadow-info').show('slow');
                     break;
                 case 'cancel':
                     //关闭 评论框
                     setTimeout(function (){
-                        $('.comment_shadow,.shadow-info').hide('slow');
+                        $('.reg-shadow,.shadow-info').hide('slow');
                     }, 301);
                     break;
                 case 'submit':
@@ -237,7 +237,7 @@
                                     });
                                     $('#coms').prepend(html);
                                     $('#allComments').prepend(html);
-                                    $('.comment_shadow,.shadow-info').hide('slow');
+                                    $('.reg-shadow,.shadow-info').hide('slow');
                                 } else
                                 {
                                     $.util.alert(res.msg);
