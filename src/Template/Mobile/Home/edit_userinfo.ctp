@@ -204,14 +204,13 @@
                         dateType: 'json',
                         type: 'POST',
                         success: function (msg) {
-                            alert(JSON.stringify(msg));
+//                            alert(JSON.stringify(msg));
                             if(msg.status===true){
                                 $('input[name="avatar"]').val(msg.path);
                             }
                         }
                     });
-                    
-                })
+                });
             }
         });
         $('#upload_pic').change(function () {
