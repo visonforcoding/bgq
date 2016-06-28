@@ -68,7 +68,7 @@
     <span class="iconfont" id="goTop"></span>
 </div>
 <!--底部四个图**end-->
-<div class="reg-shadow" style="display: none;"></div>
+<div class="reg-shadow" style="display: none;" id="comment_shadow"></div>
 <!-- 评论框 -->
 <div class="shadow-info a-shadow a-forword" style="display: none;">
     <ul>
@@ -183,17 +183,17 @@
                 var id = $(em).data('id');
                 reply_id = id;
                 $('#content').attr('placeholder', '回复 ' + $(em).data('username') + '：');
-                $('.reg-shadow,.shadow-info').show('slow');
+                $('.comment_shadow,.shadow-info').show('slow');
             }
             switch (em.id) {
                 case 'commit':
                     //弹出评论框
-                    $('.reg-shadow,.shadow-info').show('slow');
+                    $('.comment_shadow,.shadow-info').show('slow');
                     break;
                 case 'cancel':
                     //关闭 评论框
                     setTimeout(function (){
-                        $('.reg-shadow,.shadow-info').hide('slow');
+                        $('.comment_shadow,.shadow-info').hide('slow');
                     }, 301);
                     break;
                 case 'submit':
@@ -237,7 +237,7 @@
                                     });
                                     $('#coms').prepend(html);
                                     $('#allComments').prepend(html);
-                                    $('.reg-shadow,.shadow-info').hide('slow');
+                                    $('.comment_shadow,.shadow-info').hide('slow');
                                 } else
                                 {
                                     $.util.alert(res.msg);
