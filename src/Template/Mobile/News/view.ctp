@@ -68,14 +68,19 @@
     <span class="iconfont" id="goTop"></span>
 </div>
 <!--底部四个图**end-->
-<div class="reg-shadow" style="display: none;">
-</div>
+<div class="reg-shadow" style="display: none;"></div>
+<!-- 评论框 -->
 <div class="shadow-info a-shadow a-forword" style="display: none;">
     <ul>
         <li><textarea id="content" type="text" placeholder="请输入评论"></textarea></li>
         <li><a id="cancel" href="javascript:void(0);">取消</a><a id="submit" href="javascript:void(0);">发表</a></li>
     </ul>
 </div>
+<!-- 微信分享 -->
+<div class="wxshare">
+    <span></span>
+    <p></p>
+ </div>
 <script type="text/html" id="listTpl">
     <div class="items">
         <div class="comm-info clearfix">
