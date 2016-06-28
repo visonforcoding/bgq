@@ -253,6 +253,7 @@
                     if (typeof msg === 'object') {
                         if (msg.status) {
                             $.util.alert(msg.msg);
+                            location.href = '/home/index';
                         } else {
                             $.util.alert(msg.msg);
                         }

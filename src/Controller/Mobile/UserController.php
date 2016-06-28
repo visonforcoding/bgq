@@ -492,7 +492,7 @@ class UserController extends AppController {
         \Intervention\Image\ImageManagerStatic::make($res)
                 ->resize(60,60)
                 ->save(WWW_ROOT . $file_name);
-        return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'上传成功', 'path'=>'/' . $file_name]);
+        return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'头像上传成功', 'path'=>'/' . $file_name]);
     }
 
 }
