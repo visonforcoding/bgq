@@ -53,7 +53,7 @@ activity.prototype.bindEvent = function () {
                     return;
                 }
                 var reply_id = $(em).attr('value');
-                var msg = '回复 ' + $('#comment_username_' + reply_id).text() + ' :';
+                var msg = '回复 ' + $('#comment_username_' + reply_id).attr('username') + ' :';
                 $('#r_textarea').attr('placeholder', msg);
                 $('.reply-shadow').show();
                 $('.reply').show();
