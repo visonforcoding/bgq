@@ -232,10 +232,19 @@ activity.prototype.bindEvent = function () {
                 {
                     LEMON.share.banner();
                 }
-                else
+                else if($.util.isWX)
                 {
-                    $.util.alert('请点击右上角分享');
+                    $('#wxshare').show();
+                    $('#shadow').show();
                 }
+                break;
+            case 'shadow':
+                $(em).hide();
+                $('#wxshare').hide();
+                break;
+            case 'wxshare':
+                $(em).hide();
+                $('#shadow').hide();
                 break;
             case 'goTop':
                 window.scroll(0, 0);

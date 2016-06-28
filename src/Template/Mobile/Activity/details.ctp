@@ -114,6 +114,12 @@
         <span class="iconfont" id="share">&#xe614;</span>
         <span class="iconfont" id='toTop'></span>
     </div>
+    <!-- 微信分享 -->
+    <div class="reg-shadow" style="display: none;" id="shadow"></div>
+<div class="wxshare" id="wxshare" hidden>
+    <span></span>
+    <p></p>
+ </div>
     <div class="reg-shadow article-shadow" ontouchmove="return false;" hidden>
         <div class="shadow-info a-shadow a-forword article">
             <ul>

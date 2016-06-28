@@ -285,7 +285,7 @@
                     else if($.util.isWX)
                     {
                         $('#wxshare').show();
-                        $('.reg-shadow').show();
+                        $('#shadow').show();
                     }
                     break;
                 case 'shadow':
@@ -295,6 +295,7 @@
                 case 'wxshare':
                     $(em).hide();
                     $('#shadow').hide();
+                    break;
                 case 'goTop':
                     window.scrollTo(0, 0);
                     e.preventDefault();
