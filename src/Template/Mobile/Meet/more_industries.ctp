@@ -1,13 +1,13 @@
-<!--﻿<header>
+﻿<header>
     <div class='inner'>
         <a href='#this' class='toback'></a>
         <h1>
             互联网
         </h1>
     </div>
-</header>-->
+</header>
 
-<div class="wraper pd10">
+<div class="wraper">
     <div hidden>
         <form method="post" id="industry_form">
             <input type="text" name="industry_id" value="" />
