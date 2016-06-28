@@ -11,7 +11,7 @@ $this->start('static') ?>
         <div class="col-md-8">
             <select name="type" class="form-control">
                 <?php foreach ($types as $key=>$type): ?>
-                <option value="<?=$key?>" <?php if($type == $key): ?>selected<?php endif; ?>><?=$type?></option>
+                <option value="<?=$key?>" <?php if($banner->type == $key): ?>selected<?php endif; ?>><?=$type?></option>
                 <?php endforeach; ?>
             </select>
         </div>
