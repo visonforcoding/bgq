@@ -204,10 +204,10 @@
                         dateType: 'json',
                         type: 'POST',
                         success: function (msg) {
-                            $.util.alert(msg, 10000);
-//                            if(msg.status===true){
-//                                $('input[name="avatar"]').val(msg.thumbpath);
-//                            }
+                            $.util.alert(msg.msg, 10000);
+                            if(msg.status===true){
+                                $('input[name="avatar"]').val(msg.path);
+                            }
                         }
                     });
                     
