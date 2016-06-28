@@ -484,15 +484,15 @@ class UserController extends AppController {
             $res = $response->body();
         }
         $today = date('Y-m-d');
-        $path = WWW_ROOT.'/upload/user/avatar/'.$today;
+        $path = 'upload/user/avatar/'.$today;
         $file_name = $path.'/thumb_'.  uniqid().'.jpg';
         if(!is_dir($path)){
             mkdir($path,0777,true);
         }
         \Intervention\Image\ImageManagerStatic::make($res)
                 ->resize(60,60)
-                ->save($file_name);
-        return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'上传成功', 'path'=>$file_name]);
+                ->save(WWW_ROOT . $file_name);
+        return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'上传成功', 'path'=>'/' . $file_name]);
     }
 
 }
