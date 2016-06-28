@@ -52,10 +52,10 @@
 </div>
 
 <?php $this->start('script'); ?>
-<script type="text/javascript" src="/admin/lib/jqform/jquery.form.js"></script>
-<script type="text/javascript" src="/admin/lib/jqupload/jquery.uploadfile.js"></script>
-<script type="text/javascript" src="/admin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js"></script>
-<script type="text/javascript" src="/admin/lib/jqvalidation/js/jquery.validationEngine.js"></script>
+<script type="text/javascript" src="/wpadmin/lib/jqform/jquery.form.js"></script>
+<script type="text/javascript" src="/wpadmin/lib/jqupload/jquery.uploadfile.js"></script>
+<script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js"></script>
+<script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/jquery.validationEngine.js"></script>
 <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
     $(function () {
