@@ -25,22 +25,24 @@
         <ul class="clearfix">
             <li><a href="/home/cardcase"><i class="iconfont">&#xe649;</i>名片夹</a></li>
             <li><a href="/user/home-page"><i class="iconfont">&#xe61c;</i>个人主页</a></li>
+            <?php if($user->level==1): ?>
+            <li>  <a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li>
+            <?php endif;?>
+            <?php if($user->level==2): ?>
             <li><a href="/home/my-purse"><i class="iconfont">&#xe61b;</i>钱包</a></li>
+            <?php endif;?>
             <li><a href="javascript:QRCode();"><i class="sao-bg"></i>扫一扫</a></li>
         </ul>
     </div>
     <!--分类二-->
+    <?php if($user->level==2): ?>
     <div class="h-home-menu">
         <ul class="clearfix">
-            <?php if($user->level==1): ?>
-            <li><a href="/user/home-page/<?= $user->id ?>"><i class="iconfont">&#xe61d;</i>个人主页</a></li>
-            <?php endif;?>
-            <?php if($user->level==2): ?>
             <li><a href="/meet/view/<?= $user->id ?>"><i class="iconfont">&#xe61d;</i>专家主页</a></li>
-            <?php endif;?>
             <li>  <a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li>
         </ul>
     </div>
+    <?php endif;?>
     <div class="h-home-menu">
         <ul class="clearfix">
             <li><a href="/home/my-secret"><i class="iconfont">&#xe61f;</i>隐私策略</a></li>
