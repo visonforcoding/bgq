@@ -76,8 +76,8 @@
             ?>
         </div>
     </div>
-              echo $this->Form->input('industry_id', ['options' => $industries, 
-                'empty' => true,'class'=>'form-control']);
+<!--              echo $this->Form->input('industry_id', ['options' => $industries, 
+                'empty' => true,'class'=>'form-control']);-->
         <div class="form-group">
         <label class="col-md-2 control-label">擅长业务</label>
         <div class="col-md-8">
