@@ -114,7 +114,7 @@ class NeedController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'need.' . $this->request->data('sidx');
+        $sort = 'Need.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
@@ -122,14 +122,14 @@ class NeedController extends AppController {
         $where = [];
         if (!empty($keywords)) {
             $where['OR'] = [
-                ['user.`truename` like' => "%$keywords%"],
+                ['User.`truename` like' => "%$keywords%"],
                 ['msg like' => "%$keywords%"],
             ]; //搜索关键字为用户名和内容
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['need.`create_time` >' => $begin_time], ['need.`create_time` <' => $end_time]];
+            $where['and'] = [['Need.`create_time` >' => $begin_time], ['Need.`create_time` <' => $end_time]];
         }
         $query = $this->Need->find()->contain(['User']);
         $query->hydrate(false);
