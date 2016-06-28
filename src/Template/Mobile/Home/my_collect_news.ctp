@@ -18,7 +18,7 @@
 </div>
 <script type="text/html" id="listTpl">
     <div class="innercon">
-        <a href="#this" class="clearfix nobottom">
+        <a href="/news/view/{#news_id#}" class="clearfix nobottom">
             <span class="my-pic-acive"><img src="{#news_cover#}"/></span>
             <div class="my-collection-items my-news-items">
                 <h3>{#news_title#}</h3>
@@ -35,6 +35,7 @@
         LEMON.sys.back('/home/index');
     }
     $.util.dataToTpl('collect', 'listTpl',<?= json_encode($collects) ?>, function(d){
+        d.news_id = d.news.id;
         d.news_title = d.news.title;
         d.news_read = d.news.read_nums;
         d.news_user = d.news.admin_name;
