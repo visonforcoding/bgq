@@ -45,7 +45,7 @@
 .uploadbox .filebtn{overflow:hidden;position:relative;}
 .uploadbox .filebtn input[type='file']{position:absolute;top:0;left:0;position: absolute;top: 0;left: 0;width: 100%;height: 0.78rem;border: 1px #ccc solid;
     margin: 0.45rem 0 0.2rem; opacity: 0;}
-.reg-shadow{width:100%;height:100%;position:fixed;left:0;top:0;background:rgba(0,0,0,.3);overflow:hidden;z-index:998;}
+.reg-shadow{width:100%;height:100%;position:fixed;left:0;top:0;background:rgba(0,0,0,.7);overflow:hidden;z-index:998;}
 .shadow-info,.m-fixed-top{position:fixed;bottom:0;left:0;width:100%;z-index:999;}
 .m-fixed-top{top:1.69rem;height:3.2rem;background: #fff;overflow:hidden;}
 .c-zindex{position:fixed;z-index:1000;}
@@ -598,8 +598,10 @@ display: flex; flex-direction: column;justify-content: center; align-items: cent
 border-top:1px #d2d2d2 solid;line-height: 1rem;font-size:0;
 }
 .iconlist span{font-size:0.32rem;color:#e01b49;width:33%;text-align: center;display: inline-block;}
+
 .iconlist span.active{color:#5e5e5e}
 .iconlist span:last-of-type{background: url(img/first.png) no-repeat center center;background-size:0.3rem 0.32rem;width:33%;height:0.32rem;}
+.icon-width span,.icon-width span:last-of-type{width:25%;}
 .my-home-slidemenu{/*display:-webkit-flex;display:-moz-flex;display:-ms-flex;display: flex;
 -webkit-justify-content:space-around;-moz-justify-content:space-around;-ms-justify-content;justify-content: space-around;-webkit-align-items:center;-moz-align-items:center;-ms-align-items:center;align-items: center;*/font-size:0;padding:0.2rem 0;
 }
