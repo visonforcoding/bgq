@@ -248,7 +248,7 @@ $.util = {
                         func && func(serverId);
                     }
                 });
-            }
+            },
             fail: function (res) {
                 alert(777)
                 alert(JSON.stringify(res));
