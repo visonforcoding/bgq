@@ -298,8 +298,7 @@ height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;}
 .itemsbox div img{height:0.86rem;width:auto;display:block;margin:auto;margin-bottom:0.4rem;}
 .navmenu{border-bottom:1px #c8c7cc solid;}
 .navmenu .innercon{width:100%;/*display: flex;align-items: center;*/padding-left:1.6rem;overflow:hidden;height:0.89rem;}
-.innercon .leftbtn,.innercon .rightbtn{background: url(img/right.png) 96% center no-repeat;
-    background-size: 0.16rem 0.25rem;display:inline-block;width:0.16rem;height:0.25rem;}
+
 /*.navmenu .innercon .allmark{}*/
 .navmenu .innercon .allmark.active{color:#e01a48;}
 .navmenu .innercon .outerbox{white-space: nowrap;display:inline-block;width:85%;height:0.89rem;overflow:hidden;-webkit-overflow-scrolling: touch;overflow-x: scroll;margin-right:0.2rem;margin-left:0.1rem;}
