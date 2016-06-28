@@ -10,7 +10,7 @@
     <div class="uploadbox">
         <a href='#this' class='imgcard'><img src='/mobile/images/card.jpg' /></a>
         <div class="filebtn">
-            <a href="#this" class="uploadbtn">上传名片</a>
+            <a href="javascript:void(0)" class="uploadbtn" id="uploadPic">上传名片</a>
             <input id="upload_pic" type="file" />
         </div>
         <p>系统将自动识别名片中的信息</p>
@@ -34,14 +34,14 @@
 </div>
 <?php $this->assign('footer','')?>
 <?php $this->start('script') ?>
-<script src="/mobile/js/jquery.js" type="text/javascript" charset="utf-8"></script>
-<script src="/mobile/js/lib/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>
-<script src="/mobile/js/register.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="/mobile/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="/mobile/js/lib/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>-->
+<!--<script src="/mobile/js/register.js" type="text/javascript" charset="utf-8"></script>-->
 <script>
-    if(LEMON.isAPP)
-    {
-        LEMON.event.uploadPhoto('', callback());
-    }
+//    if(LEMON.isAPP)
+//    {
+//        LEMON.event.uploadPhoto('', callback());
+//    }
     $(function () {
         $('#upload_pic').change(function () {
             var file = $(this).get(0).files[0];
@@ -103,6 +103,16 @@
             });
         });
     });
+    
+    $('#uploadPic').on('tap', function(){
+        if($.util.isAPP){
+            LEMON.event.uploadPhoto(callback());
+        } else if($.util.isWX) {
+            $.util.wxUploadPic(callback());
+        } else {
+            $.util.alert('请在微信或APP里面上传名片');
+        }
+    })
 </script>
 <?php
 $this->end('script');
