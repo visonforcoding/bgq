@@ -152,8 +152,10 @@
     
     //轮播
     var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
-    var iconLoop = new simpleScroll({viewDom:$('#icons'),  moveDom:$('#allsort'), right:$('#toRight')});
-
+    setTimeout(function(){
+        var iconLoop = new simpleScroll({viewDom:$('#icons'),  moveDom:$('#allsort'), right:$('#toRight')});
+    },1000);
+    
     $('.s-con').click(function () {
         $('.search').focus();
     });
@@ -170,9 +172,5 @@
         LEMON.show.search('/meet/search');
     }
     
-    $('#toRight').on('tap', function(){
-        scroll.moveDom = $('#allsort');
-        scroll.moveChild = $('#allsort').children('a');
-    });
 </script>
 <?php $this->end('script');

@@ -535,9 +535,7 @@ class MeetController extends AppController {
             if($sort !== 'reco_nums'){
                 $biggie = $biggie->orderDesc($sort);
             } else {
-                $biggie = $biggie->contain(['Savants'=>function($q)use($sort){
-                    return $q->orderDesc($sort);
-                }]);
+                $biggie = $biggie->matching('Savants')->orderDesc('Savants.reco_nums');
             }
         }
         $biggie = $biggie
@@ -584,6 +582,10 @@ class MeetController extends AppController {
         }
     }
 
+    /**
+     * 专家下拉加载更多
+     * @param int $page 页数
+     */
     public function getMoreBiggie($page){
         $biggies = $this
                 ->User
