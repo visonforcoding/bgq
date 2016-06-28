@@ -20,7 +20,7 @@
             <a href="javascript:void(0)">
                 <span>头像：</span>
                 <div class="upload-user-img">
-                    <span> <input type="hidden" name="avatar" value="<?=$user->avatar?>" ><span id="upload_pic"></span></span>
+                    <span id="upload_pic"> <input type="hidden" name="avatar" value="<?=$user->avatar?>" ></span>
                 </div>
             </a>
         </li>
