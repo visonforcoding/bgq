@@ -25,7 +25,7 @@ var scroll = function(o) {
         autoTime : 0,    //自动轮播， 默认不自动， 需要的话就传毫秒值 如5000
         holdAuto : false,    //自动轮播锁定  当滑出轮播区域后  或是手指在滑动的时候 可以屏蔽自动轮播
         tabClass : 'cur',
-        transition : 0.3,
+        transition : 0.5,
         imgInit:true, //第一次加载图片
         imgInitLazy:4000, //第一次预加载图片延时
         enableTransX : false,//使用translateX(-n*100%)方式
@@ -211,6 +211,7 @@ var simpleScroll = function(o) {
         viewDom : null, //在那个容器里滑动，算宽度用，默认window  如果你的默认位置不对  那就要检查下这个
         left : $(new Image()), //左按钮  zepto查询对象列表
         right : $(new Image()), //右按钮  zepto查询对象列表
+        fix:0,  //有时候右边被盖住了  显示不全  就加以修正
         viewWidth:0, //可视区宽度
         width : 0, //总宽度
         sp : null, //当前触发点的position
@@ -287,7 +288,7 @@ $.extend(simpleScroll.prototype, {
         }
     },
     move : function(tp) {
-        var offset=this.offset, maxWidth = this.width - this.viewWidth+50;
+        var offset=this.offset, maxWidth = this.width - this.viewWidth + this.fix;
         if(tp){
             var step = this.viewWidth;
             if(tp == 'right') step = -step;
