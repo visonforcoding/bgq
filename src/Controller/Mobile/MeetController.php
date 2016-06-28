@@ -274,8 +274,8 @@ class MeetController extends AppController {
                 ->orWhere(['Subjects.title like'=>"%$keyword%"])
                 ->limit(10)
                 ->toArray();
-        if($User) {
-            return $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $User]);
+        if($users) {
+            return $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $users]);
         } else {
             return $this->Util->ajaxReturn(false, '暂无搜索结果');
         }
