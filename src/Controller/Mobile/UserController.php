@@ -12,6 +12,7 @@ use Cake\Mailer\Email;
  * @property \App\Controller\Component\HanvonComponent $Hanvon
  * @property \App\Controller\Component\SmsComponent $Sms
  * @property \App\Controller\Component\BusinessComponent $Business
+ * @property \App\Controller\Component\WxComponent $Wx
  */
 class UserController extends AppController {
     
@@ -470,6 +471,19 @@ class UserController extends AppController {
                 return $this->Util->ajaxReturn(false, '系统错误');
             }
         }
+    }
+    
+    public function getWxPic($id=''){
+        $this->loadComponent('WxComponent');
+        $token = $this->Wx->getAccessToken();
+//        $url = 'http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=' . $token . '&media_id=' . $id;
+        $url = 'http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=yovsNj9tivZxw3IEpIU_BOl0lHWHi-PwCCyU_dFWCfzrnIK-8vOe7i5DOVZvT3PdTUdVQkOVgGRpYBY_ZbMoAIDHMsrpuPQvpQ1f4xvg9I8klPrKawWYnQIjAdMbTpG5GDIeAGABYD&media_id=' . $id;
+        $httpClient = new \Cake\Network\Http\Client();
+        $response = $httpClient->get($url);
+        return $this->Util->ajaxReturn(true, $response);
+        \Intervention\Image\ImageManagerStatic::make($filename)
+                ->resize(intval($thumbWidth[0]),  intval($thumbHeight[0]))
+                ->save($thumbPath.$thumbname.'.'.$thumbExt);
     }
 
 }
