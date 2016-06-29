@@ -48,6 +48,7 @@ class HanvonComponent extends Component {
         );
         if ($response->isOk()) {
             $body = json_decode($response->body());
+            \Cake\Log\Log::error($body,'devlog');
             if ($body->code == '0') {
                 return $body;
             } else {
