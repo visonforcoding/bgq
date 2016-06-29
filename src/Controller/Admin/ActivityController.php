@@ -72,6 +72,10 @@ class ActivityController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
+        
+        
+        
+        
         $activity = $this->Activity->get($id, [
             'contain' => ['Industries', 'Savants'],
         ]);
@@ -276,8 +280,48 @@ class ActivityController extends AppController {
         $res = $this->Activity->save($activity);
         if(!$res)
         {
-            return $this->Util->ajaxReturn(false, '发布失败');
+            return $this->Util->ajaxReturn(false, '二维码生成失败');
         }
+        
+        // 将与活动标签相同的专家随机选择4个添加到活动专家推荐中
+        // 思路：活动->查出活动标签->查出相同用户标签->去除重复用户->查出是专家的用户->大于四个随机选四个，不然全部插入活动专家推荐表
+        $userTable = \Cake\ORM\TableRegistry::get('User');
+        $userIndustryTable = \Cake\ORM\TableRegistry::get('user_industry');
+        $activityIndustryTable = \Cake\ORM\TableRegistry::get('activity_industry');
+        $activitySavantTable = \Cake\ORM\TableRegistry::get('activity_savant');
+        $industries = $activityIndustryTable->find()->where(['activity_id'=>$id])->hydrate(false)->toArray();
+        $industry = [];
+        foreach ($industries as $k=>$v){
+            $industry[] = $v['industry_id'];
+        }
+        $userIndustries = $userIndustryTable->find()->where(['industry_id in'=>$industry])->hydrate(false)->toArray();
+        $users = [];
+        foreach ($userIndustries as $k=>$v){
+            $users[] = $v['user_id'];
+        }
+        // 去除重复用户id
+        $user = array_unique($users);
+        $savants = $userTable->find()->where(['id in'=>$user, 'enabled'=>1, 'level'=>2])->hydrate(false)->toArray();
+        debug($savants);die;
+        if(count($savants) > 4) {
+            $savant = array_rand($savants, 4);
+            foreach ($savant as $k=>$v){
+                $data['savant_id'] = $v['id'];
+                $data['activity_id'] = $id;
+                $activitySavants = $activitySavantTable->newEntity();
+                $activitySavant = $activitySavant->patchEntity($activitySavants, $data);
+                $res = $activityIndustryTable->save($activitySavant);
+            }
+        } else {
+            foreach($savants as $k=>$v){
+                $data['savant_id'] = $v['id'];
+                $data['activity_id'] = $id;
+                $activitySavants = $activitySavantTable->newEntity();
+                $activitySavant = $activitySavant->patchEntity($activitySavants, $data);
+                $res = $activityIndustryTable->save($activitySavant);
+            }
+        }
+        
         return $this->Util->ajaxReturn(true, '发布成功');
     }
 
