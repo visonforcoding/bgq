@@ -255,4 +255,38 @@ class WxComponent extends Component {
         return $wxsign;
     }
 
+    
+    /**
+     *  处理微信上传
+     */
+    public function wxUpload() {
+        $dir = $this->request->query('dir');
+        $zip = $this->request->query('zip');
+        $today = date('Y-m-d');
+        $urlpath = '/upload/tmp/' . $today . '/';
+        if (!empty($dir)) {
+            $urlpath = '/upload/' . $dir . '/' . $today . '/';
+        }
+        $savePath = ROOT . '/webroot' . $urlpath;
+        if (!is_dir($savePath)) {
+            mkdir($savePath, 0777, true);
+        }
+        $uniqid = uniqid();
+        $filename = $uniqid.'.jpg';
+        $token = $this->getAccessToken();
+        $url = 'http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=' . $token . '&media_id=' . $id;
+        $httpClient = new \Cake\Network\Http\Client();
+        $response = $httpClient->get($url);
+        if($response->isOk()){
+            $res = $response->body();
+        }
+       $image = \Intervention\Image\ImageManagerStatic::make($res);
+        if($zip){
+            $image->resize(60,60);
+            $filename = 'thumb_'.$uniqid.'.jpg';
+        }
+        $image->save($savePath.$filename);
+        return $urlpath.$filename;
+    }
+
 }

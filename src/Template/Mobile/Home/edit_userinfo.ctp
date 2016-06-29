@@ -190,7 +190,6 @@
 
         $('#upload_pic').click(function(){
             if($.util.isAPP){
-//                alert('我要调JSAPI了');
                 LEMON.event.uploadPhoto('{"dir":"user/avatar","zip":"1"}',function(data){
                     var data = JSON.parse(data);
                    if(data.status===true){
@@ -200,13 +199,11 @@
                 return false;
             } else if($.util.isWX) {
                 $.util.wxUploadPic(function(id){
-                    console.log(123);
                     $.ajax({
                         url: "/user/getWxPic/" + id,
                         dateType: 'json',
                         type: 'POST',
                         success: function (msg) {
-//                            alert(JSON.stringify(msg));
                             if(msg.status===true){
                                 $.util.alert(msg.msg);
                                 $('input[name="avatar"]').val(msg.path);
