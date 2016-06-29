@@ -24,7 +24,7 @@
     <div class="h-home-menu">
         <ul class="clearfix">
             <li><a href="/home/cardcase"><i class="iconfont">&#xe649;</i>名片夹</a></li>
-            <li><a href="/user/home-page"><i class="iconfont">&#xe61c;</i>个人主页</a></li>
+            <li><a href="/user/home-page"><i class="iconfont">&#xe61c;</i>个人资料</a></li>
             <?php if($user->level==1): ?>
             <li>  <a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li>
             <?php endif;?>
