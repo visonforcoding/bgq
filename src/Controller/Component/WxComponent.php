@@ -259,7 +259,7 @@ class WxComponent extends Component {
     /**
      *  处理微信上传
      */
-    public function wxUpload() {
+    public function wxUpload($id) {
         $dir = $this->request->query('dir');
         $zip = $this->request->query('zip');
         $today = date('Y-m-d');
