@@ -182,13 +182,13 @@
 
 <!--<script src="/mobile/js/lib/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>-->
 <!--<script src="/mobile/js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>-->
-<!--<script src="/mobile/js/mobiscroll.2.13.2.js" type="text/javascript" charset="utf-8"></script>-->
+<script src="/mobile/js/mobiscroll.2.13.2.js" type="text/javascript" charset="utf-8"></script>
 <script src="/mobile/js/util.js" type="text/javascript" charset="utf-8"></script>
 
 <script>
     $(function () {
 
-        $('#upload_pic').click(function(){
+        $('#upload_pic').on('touchstart',function(){
             if($.util.isAPP){
                 LEMON.event.uploadPhoto('{"dir":"user/avatar","zip":"1"}',function(data){
                     var data = JSON.parse(data);
@@ -211,36 +211,38 @@
                         }
                     });
                 });
+            }else{
+                $.util.alert('请在微信或APP上传图片');
             }
         });
-        $('#upload_pic').change(function () {
-            var file = $(this).get(0).files[0];
-            var reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = function (e) {
-                console.log(reader);
-                //$('.imgcard').find('img').attr('src', e.target.result);
-                lrz(file, {quality: 0.7}).then(function (rst) {
-                    //压缩处理
-                    $.ajax({
-                        url: '/do-upload?dir=user/avatar&zip=1',
-                        data: rst.formData,
-                        type: 'POST',
-                        cache: false,
-                        processData: false,
-                        contentType: false,
-                        dataType: 'json',
-                        success: function (data) {
-                            if (data.status === true) {
-                                $('input[name="avatar"]').val(data.thumbpath);
-                            }
-                        },
-                        error: function () {
-                        }
-                    });
-                });
-            };
-        });
+//        $('#upload_pic').change(function () {
+//            var file = $(this).get(0).files[0];
+//            var reader = new FileReader();
+//            reader.readAsDataURL(file);
+//            reader.onload = function (e) {
+//                console.log(reader);
+//                //$('.imgcard').find('img').attr('src', e.target.result);
+//                lrz(file, {quality: 0.7}).then(function (rst) {
+//                    //压缩处理
+//                    $.ajax({
+//                        url: '/do-upload?dir=user/avatar&zip=1',
+//                        data: rst.formData,
+//                        type: 'POST',
+//                        cache: false,
+//                        processData: false,
+//                        contentType: false,
+//                        dataType: 'json',
+//                        success: function (data) {
+//                            if (data.status === true) {
+//                                $('input[name="avatar"]').val(data.thumbpath);
+//                            }
+//                        },
+//                        error: function () {
+//                        }
+//                    });
+//                });
+//            };
+//        });
         $('#submit').on('click', function () {
             var $form = $('form');
             $.ajax({
