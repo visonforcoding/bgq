@@ -85,6 +85,7 @@
          if (path) {
             alert(path);
             $.post('/user/recog-mp', {path:path}, function (res) {
+                alert(res);
                 if (res.status === true) {
                     $('input[name="truename"]').val(res.result.name[0]);
                     $('input[name="company"]').val(res.result.comp[0]);
