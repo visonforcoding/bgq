@@ -301,27 +301,25 @@ class ActivityController extends AppController {
         }
         // 去除重复用户id
         $user = array_unique($users);
-        $savants = $userTable->find()->where(['id in'=>$user, 'enabled'=>1, 'level'=>2])->hydrate(false)->toArray();
-        debug($savants);die;
+        $savants = $userTable->find()->contain(['Savants'])->where(['User.id in'=>$user, 'enabled'=>1, 'level'=>2])->hydrate(false)->toArray();
         if(count($savants) > 4) {
             $savant = array_rand($savants, 4);
             foreach ($savant as $k=>$v){
-                $data['savant_id'] = $v['id'];
+                $data['savant_id'] = $v['savant']['id'];
                 $data['activity_id'] = $id;
                 $activitySavants = $activitySavantTable->newEntity();
-                $activitySavant = $activitySavant->patchEntity($activitySavants, $data);
-                $res = $activityIndustryTable->save($activitySavant);
+                $activitySavant = $activitySavantTable->patchEntity($activitySavants, $data);
+                $res = $activitySavantTable->save($activitySavant);
             }
         } else {
             foreach($savants as $k=>$v){
-                $data['savant_id'] = $v['id'];
+                $data['savant_id'] = $v['savant']['id'];
                 $data['activity_id'] = $id;
                 $activitySavants = $activitySavantTable->newEntity();
-                $activitySavant = $activitySavant->patchEntity($activitySavants, $data);
-                $res = $activityIndustryTable->save($activitySavant);
+                $activitySavant = $activitySavantTable->patchEntity($activitySavants, $data);
+                $res = $activitySavantTable->save($activitySavant);
             }
         }
-        
         return $this->Util->ajaxReturn(true, '发布成功');
     }
 
