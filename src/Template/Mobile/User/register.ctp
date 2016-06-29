@@ -79,6 +79,7 @@
             $.util.alert('请在微信或APP里面上传名片');
         }
         if (path) {
+            alert(path);
             $.post('/user/recog-mp', {path:path}, function (res) {
                 if (res.status === true) {
                     $('input[name="truename"]').val(res.result.name[0]);
