@@ -34,7 +34,9 @@ class HanvonComponent extends Component {
 //        $imgData = (string) Image::make($imgFile)->greyscale()->encode('png')->encode('data-url');  //灰阶处理
 //        preg_match('/data:image\/png;base64,(.*)/',$imgData,$matches); //实际他们需要的字符串不需要前面的东西
 //        $base64 = $matches[1];
-        $base64 = base64_encode(file_get_contents($imgFile)); //不灰阶处理
+        //$base64 = base64_encode(file_get_contents($imgFile)); //不灰阶处理
+        $base64 = $this->resizeImg($imgFile);  //压缩并返回base64
+
         $http = new Client();
         $requestData = [
             'lang' => 'chns',

@@ -202,6 +202,8 @@ class UserController extends AppController {
         $path = $this->request->data('path');
         $file = ROOT . '/webroot' . $path;
         $res = $this->Hanvon->handMpByHanvon($file);
+        \Cake\Log\Log::debug('汉王调试','devlog');
+        \Cake\Log\Log::debug($res,'devlog');
         $response = [];
         if ($res) {
             $response['status'] = true;
