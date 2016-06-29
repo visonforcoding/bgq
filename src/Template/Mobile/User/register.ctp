@@ -78,6 +78,7 @@
         } else {
             $.util.alert('请在微信或APP里面上传名片');
         }
+        alert(path);
         if (path) {
             alert(path);
             $.post('/user/recog-mp', {path:path}, function (res) {
