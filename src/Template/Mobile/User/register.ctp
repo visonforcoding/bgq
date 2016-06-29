@@ -70,7 +70,9 @@
                         if (res.status === true) {
                             $.util.alert(res.msg);
                             path = res.path;
+                            alert(path);
                             $('input[name="card_path"]').val(res.path);
+                            doRecogMp(path);
                         }
                     }
                 });
@@ -78,8 +80,9 @@
         } else {
             $.util.alert('请在微信或APP里面上传名片');
         }
-        alert(path);
-        if (path) {
+    });
+    function doRecogMp(path){
+         if (path) {
             alert(path);
             $.post('/user/recog-mp', {path:path}, function (res) {
                 if (res.status === true) {
@@ -91,7 +94,7 @@
                 }
             }, 'json');
         }
-    });
+    }
 </script>
 <?php
 $this->end('script');
