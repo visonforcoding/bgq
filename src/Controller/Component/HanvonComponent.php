@@ -44,14 +44,14 @@ class HanvonComponent extends Component {
                 // 'color'=>'gray'  //无论是不是经过了灰阶处理 返回都错了,不知什么原因
         ];
         $response = $http->post('http://api.hanvon.com/rt/ws/v1/ocr/bcard/recg?key='
-                . $key . '&code=cf22e3bb-d41c-47e0-aa44-a92984f5829d', (string) json_encode($requestData), ['headers' => ['Content-Type' => 'application/octet-stream']]
+                . $key . '&code=91f6a58d-e418-4e58-8ec2-61b583c55ba2', (string) json_encode($requestData), ['headers' => ['Content-Type' => 'application/octet-stream']]
         );
         if ($response->isOk()) {
             $body = json_decode($response->body());
-            \Cake\Log\Log::error($body,'devlog');
             if ($body->code == '0') {
                 return $body;
             } else {
+                \Cake\Log\Log::error($body,'devlog');
                 return false;
             }
         } else {
