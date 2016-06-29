@@ -213,6 +213,28 @@ class UserController extends AppController {
         }
         return $this->Util->ajaxReturn($response);
     }
+    /**
+     * 处理识别名片
+     */
+    public function recogTest() {
+        $this->loadComponent('Hanvon');
+//        $path = $this->request->data('path');
+        $path = '/upload/user/mp/2016-06-24/576d2f18c95d7.jpg';
+        $file = ROOT . '/webroot' . $path;
+        $res = $this->Hanvon->handMpByHanvon($file);
+        \Cake\Log\Log::debug('汉王调试','devlog');
+        \Cake\Log\Log::debug($res,'devlog');
+        $response = [];
+        if ($res) {
+            $response['status'] = true;
+            $response['result'] = $res;
+        } else {
+            $response['status'] = false;
+        }
+        return $this->Util->ajaxReturn($response);
+    }
+    
+  
 
     /**
      * 用户登录
