@@ -11,9 +11,15 @@
 
 <div class="wraper">
     <div class="h20"></div>
-    <div class="infoboxlist a-pay paytype installbox">
+<!--    <div class="infoboxlist a-pay paytype installbox">
         <ul class='ulinfo'>
             <li>消息提醒：<span class='infocard'><input type="radio" name='pay' checked="checked" /><i class='active'></i></span></li>
+
+        </ul>
+    </div>-->
+    <div class="infoboxlist a-pay paytype installbox">
+        <ul class='ulinfo'>
+            <li>系统版本：</li>
 
         </ul>
     </div>
