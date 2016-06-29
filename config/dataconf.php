@@ -11,10 +11,11 @@ return [
         'juhe' => '9379ea56576d3d2c07c992afa3383f3b'
     ],
     'sms' => [
-        'userid' => 11053,
-        'account' => 'xifeo',
-        'password' => 'SHAOye1688'
+        'userid' => 14394,
+        'account' => 'chinamatop',
+        'password' => 'jyh1606_jh'
     ],
+
     'weixin' => [
         'appID' => 'wx0cf353f9fc03aad0',
         'appsecret' => '460366e0beddcf18a21873db11a4eb1c',
