@@ -201,7 +201,7 @@ class UserController extends AppController {
         $this->loadComponent('Hanvon');
         $path = $this->request->data('path');
         $file = ROOT . '/webroot' . $path;
-        $res = $this->Hanvon->handMpByJuhe($file);
+        $res = $this->Hanvon->handMpByHanvon($file);
         $response = [];
         if ($res) {
             $response['status'] = true;
@@ -460,7 +460,6 @@ class UserController extends AppController {
         $this->loadComponent('Wx');
         $token = $this->Wx->getAccessToken();
         $url = 'http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=' . $token . '&media_id=' . $id;
-//        $url = 'http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=yovsNj9tivZxw3IEpIU_BOl0lHWHi-PwCCyU_dFWCfzrnIK-8vOe7i5DOVZvT3PdTUdVQkOVgGRpYBY_ZbMoAIDHMsrpuPQvpQ1f4xvg9I8klPrKawWYnQIjAdMbTpG5GDIeAGABYD&media_id=' . $id;
         $httpClient = new \Cake\Network\Http\Client();
         $response = $httpClient->get($url);
         if($response->isOk()){
