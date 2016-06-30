@@ -11,8 +11,8 @@
         <span type="savant_books">我是专家</span>
     </div>
     <div  class="inner my-home-slidemenu" id="statusTab">
-        <span status="1" class="active">待付款</span>
-        <span status="0">确认中</span>
+        <span status="1">待付款</span>
+        <span status="0" class="active">确认中</span>
         <span status="3">已完成</span>
     </div>
 
@@ -38,7 +38,7 @@
 </div>
 <?php $this->start('script'); ?>
 <script>
-    var book_html = {books:[], savant_books:[]}, status='1', type='books';
+    var book_html = {books:[], savant_books:[]}, status='0', type='books';
     var books = <?=  json_encode($books)?>; var savant_books = <?=  json_encode($savant_books)?>;
 </script>
 <script>
