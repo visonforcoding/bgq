@@ -286,7 +286,7 @@ class HomeController extends AppController {
      */
     public function myCollectActivity() {
         $collectTable = \Cake\ORM\TableRegistry::get('collect');
-        $activity = $collectTable->find()->where(['type'=>0, 'is_delete'=>0, 'Collect.user_id'=>$this->user->id])->contain(['Activities'])->toArray();
+        $activity = $collectTable->find()->where(['type'=>0, 'is_delete'=>0, 'collect.user_id'=>$this->user->id])->contain(['Activities'])->toArray();
         $this->set(['pageTitle'=>'活动收藏', 'activityjson'=>  json_encode($activity)]);
     }
 
