@@ -75,7 +75,7 @@
             data: $form.serialize(),
             func: function (msg) {
                 if (typeof msg === 'object') {
-                    alert($.parseJSON(msg));
+                    alert(JSON.stringify(msg));
                     if (msg.status === true) {
                         if($.util.isAPP){
                             $.util.setCookie('token_uin',msg.token_uin,10*365*24*60);
