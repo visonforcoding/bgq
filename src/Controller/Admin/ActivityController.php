@@ -133,6 +133,9 @@ class ActivityController extends AppController {
      * @return json
      */
     public function getDataList() {
+        $a = \Cake\ORM\TableRegistry::get('user');
+        $a->find()->all();
+        debug($a);die;
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
@@ -155,7 +158,7 @@ class ActivityController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['Activity.`create_time` >' => $begin_time], ['Activity.`create_time` <' => $end_time]];
         }
-        $query = $this->Activity->find()->toArray();
+        $query = $this->Activity->find()->contain(['Users']);
         debug($query);die;
         $query->hydrate(false);
         if (!empty($where)) {
