@@ -155,7 +155,8 @@ class ActivityController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['Activity.`create_time` >' => $begin_time], ['Activity.`create_time` <' => $end_time]];
         }
-        $query = $this->Activity->find()->contain(['Users']);
+        $query = $this->Activity->find()->contain(['Users'])->toArray();
+        debug($query);die;
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
@@ -170,7 +171,6 @@ class ActivityController extends AppController {
         $query->limit(intval($rows))
                 ->page(intval($page));
         $res = $query->toArray();
-        debug($res);die;
         if (empty($res)) {
             $res = array();
         }
