@@ -21,7 +21,7 @@
             <a href="javascript:void(0)">
                 <span>头像：</span>
                 <div class="upload-user-img">
-                    <span id="upload_pic"> <input type="hidden" name="avatar" value="<?=$user->avatar?>" ></span>
+                    <span id="upload_pic" class='tx'> <input type="hidden" name="avatar" value="<?=$user->avatar?>" ></span>
                 </div>
             </a>
         </li>
