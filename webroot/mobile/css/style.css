@@ -176,7 +176,7 @@ display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: flex;
 .all-industry li,.sort-mark li{height:0.78rem;line-height: 0.78rem; text-align: center;border-bottom:1px #d2d2d2 solid;}
 .all-industry li a,.sort-mark li a{display: block;}
 .all-industry ul{position:absolute;left:101%;width:100%;background: #fff;border:1px #c8c7cc solid;
-border-left:none;border-bottom:none;top:-1px;}
+border-bottom:none;top:-1px;margin-top:-1px;margin-left:-1px;}
 .classify-l span.active,.classify-r span.active,.place-l span.active{background: url(img/up2.png) no-repeat right center;background-size:0.26rem 0.16rem;color:#e01a48;}
 /*活动--start*/
 #comment{min-height:1rem;}
