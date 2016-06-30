@@ -36,7 +36,9 @@
 <script type="text/html" id="listTpl">
     <section class='news-list-items '>
         <a href="javascript:void(0)">
-            <h1><span><img src="{#avatar#}" /></span>{#author#}<time>{#create_time#}</time></h1>
+            <h1><a href="/user/home-page/{#user_id#}"<span><img src="{#avatar#}" /></span>{#author#}</a>
+                <time>{#create_time#}</time>
+            </h1>
         </a>
         <a href="/news/view/{#id#}" class="newsbox clearfix">
             <div class="sec-news-l">

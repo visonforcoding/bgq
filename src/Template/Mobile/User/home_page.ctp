@@ -54,7 +54,7 @@
                                 <em>
                                     <i><?= $education->school ?></i>
                                     <i><?= date('Y', strtotime($education->start_date)) ?>-<?= date('Y', strtotime($education->end_date)) ?>，<?= $education->education ?>，
-                                        <?= major ?></i>
+                                        <?= $education->major ?></i>
                                 </em>
                             </h3>
                         <?php endforeach; ?>
@@ -79,7 +79,7 @@
                         <h3>联系电话：<em><?= $user->phone ?></em></h3>
                     </li>
                 <?php endif; ?>
-                <?php if ($user->secret->phone_set == '1'): ?>
+                <?php if ($user->secret->email_set == '1'): ?>
                     <li class="tr">
                         <h3>邮箱：<em><?= $user->email ?></em></h3>
                     </li>
@@ -99,7 +99,7 @@
                         <em>
                             <i><?= $education->school ?></i>
                             <i><?= date('Y', strtotime($education->start_date)) ?>-<?= date('Y', strtotime($education->end_date)) ?>，<?= $education->education ?>，
-                                <?= major ?></i>
+                                <?= $education->major ?></i>
                         </em>
                     </h3>
                 <?php endforeach; ?>

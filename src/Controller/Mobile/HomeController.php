@@ -31,14 +31,13 @@ class HomeController extends AppController {
      */
 
     public function index() {
-        $this->loadComponent('Wx');
-        $wxConfig = $this->Wx->wxconfig(['onMenuShareTimeline', 'onMenuShareAppMessage', 'scanQRCode']);
         $user_id = $this->user->id;
         $user = $this->User->get($user_id);
+        $isWx = $this->request->is('weixin')?true:false;
         $this->set(compact('user'));
         $this->set(array(
             'user'=>$user,
-            'wxConfig'=>$wxConfig,
+            'isWx'=>$isWx,
             'pageTitle' => '个人中心',
         ));
     }

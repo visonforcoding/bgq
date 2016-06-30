@@ -56,7 +56,9 @@
             <li><a href="/home/my-secret"><i class="iconfont">&#xe61f;</i>隐私策略</a></li>
             <li><a id="shareTo" href="#this"><i class="iconfont">&#xe621;</i>邀请好友</a></li>
             <li><a href="/home/my-message-fans"><i class="iconfont">&#xe620;</i>消息通知</a></li>
+            <?php if(!$isWx): ?>
             <li><a href="/home/my-install"><i class="iconfont">&#xe619;</i>设置</a></li>
+            <?php endif;?>
         </ul>
     </div>
 </div>
@@ -83,7 +85,6 @@
         else {
             $.util.alert('请在APP或是微信使用扫一扫功能');
         }
-
     }
 </script>
 <?php $this->end('script'); ?>
