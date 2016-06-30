@@ -129,7 +129,7 @@ footer .othertype img,.wxlogin .othertype img{width:100%;height:auto;display:blo
 @keyframes addheight {from {}to { bottom:0;}}
 @-webkit-keyframes moveheight{from {bottom:0;}to {bottom:-300px;}}
 @keyframes moveheight {from {bottom:0;}to { bottom:-300px;}}
-.scale{-webkit-animation: scale .3s;animation: scale .3s;}
+.scale{-webkit-animation: scale .3s;animation: scale .3s;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
 .c-height{-webkit-animation: addheight .3s linear;animation: addheight .3s linear;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
 .m-height{-webkit-animation: moveheight .3s linear;animation: moveheight .3s linear;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
 .wraper .moveup{-webkit-animation: moveup .6s linear;animation: moveup .6s linear;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
