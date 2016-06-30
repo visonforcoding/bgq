@@ -71,7 +71,7 @@
         "sys.version",
         "sys.QRcode",  //二维码扫描
         "sys.back",
-        "hide.share", //隐藏分享图标
+        "show.shareIco", //隐藏分享图标
         "show.search", //显示搜索
         "share.banner",
         "share.QQ",
@@ -128,7 +128,7 @@
                     break;
                 //无参数   无回调
                 case "share.banner":
-                case "hide.share":
+                case "show.shareIco":
                 case "sys.QRcode":
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {}, '');
