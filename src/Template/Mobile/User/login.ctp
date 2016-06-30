@@ -33,8 +33,6 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/function.js"></script>
 <script>
-    LEMON.db.set('AA','333');
-    alert(LEMON.db.get('AA'));
     if(location.href.indexOf('loginout=1')>0){
         $.util.setCookie('token_uin','');
         LEMON.db.set('token_uin','');
@@ -78,13 +76,10 @@
                 if (typeof msg === 'object') {
                     alert(JSON.stringify(msg));
                     if (msg.status === true) {
-                        alert('我打算跳转了');
                         if($.util.isAPP){
                             $.util.setCookie('token_uin',msg.token_uin,10*365*24*60);
                             LEMON.db.set('token_uin',msg.token_uin);
                         }
-                        alert(LEMON.db.get('token_uin'));
-                        alert('我打算跳转了');
                         document.location.href = msg.redirect_url;
                     } else {
                         $.util.alert(msg.msg);
