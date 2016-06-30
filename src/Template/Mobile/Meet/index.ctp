@@ -30,8 +30,8 @@
     </div>
     <!--分类--start-->
     <div class="menusort clearfix">
-        <div class="allmenu" id="icons">
-            <div class="menulist clearfix" id="allsort">
+        <div class="allmenu">
+            <div class="menulist clearfix" >
                 
                 <a href="/meet/moreIndustries/4">
                     <i class="iconfont">&#xe640;</i>
@@ -155,10 +155,10 @@
     }, 2000);
     
     //轮播
-    var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
-    setTimeout(function(){
-        var iconLoop = new simpleScroll({viewDom:$('#icons'),  moveDom:$('#allsort'), right:$('#toRight'), fix:25});
-    },1000);
+    // var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
+    // setTimeout(function(){
+    //     var iconLoop = new simpleScroll({viewDom:$('#icons'),  moveDom:$('#allsort'), right:$('#toRight'), fix:25});
+    // },1000);
     
     $('.s-con').click(function () {
         $('.search').focus();
