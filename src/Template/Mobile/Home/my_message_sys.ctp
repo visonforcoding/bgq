@@ -7,8 +7,8 @@
 </header>
 <div class="wraper" >
     <div class="inner my-home-menu m-message-top" >
-        <a href="/home/my-message-fans" >新的关注<i><?= $unReadFollowCount ?></i></a>
-        <a href="/home/my-message-sys" class="active">系统消息<i><?= $unReadSysCount ?></i></a>
+        <a href="/home/my-message-fans" >新的关注<?php if($unReadFollowCount): ?><i><?= $unReadFollowCount ?></i><?php endif; ?></a>
+        <a href="/home/my-message-sys" class="active">系统消息<?php if($unReadSysCount): ?><i><?=$unReadSysCount?></i><?php endif; ?></a>
     </div>
     <ul class="systerm-info-box" id="msgs">
     </ul>
