@@ -197,6 +197,7 @@
                     //关闭 评论框
                     setTimeout(function (){
                         $('#comment_shadow').hide('slow');
+                         $('.shadow-info').removeClass('c-height');
                     }, 301);
                     break;
                 case 'submit':
