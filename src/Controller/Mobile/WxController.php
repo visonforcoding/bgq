@@ -108,8 +108,8 @@ class WxController extends AppController {
 //        }
         if ($user) {
             //通过微信 获取到 在平台上有绑定的用户  就默认登录
-            if(empty($user->union_id)&&isset($res->union_id)){
-                $user->union_id = $res->union_id;
+            if(empty($user->union_id)&&isset($res->unionid)){
+                $user->union_id = $res->unionid;
                 $this->User->save($user);
             }
             $this->request->session()->write('User.mobile', $user);
