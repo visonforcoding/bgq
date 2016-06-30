@@ -33,7 +33,8 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/function.js"></script>
 <script>
-    
+    LEMON.db.set('AA','333');
+    alert(LEMON.db.get('AA'));
     if(location.href.indexOf('loginout=1')>0){
         $.util.setCookie('token_uin','');
         LEMON.db.set('token_uin','');
