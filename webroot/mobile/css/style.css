@@ -558,7 +558,7 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .my-home-menu a:last-of-type,.my-home-menu span:last-of-type{border-radius: 0 0.1rem 0.1rem 0;}
 .my-home-menu a.active,.my-home-menu span.active{background: #e01a48;color:#fff;}
 .my-collection-info{border-bottom:1px #d2d2d2 solid;border-top:1px #d2d2d2 solid;}
-.my-collection-info .innercon:last-of-type{border-bottom:none;}
+.my-collection-info .innercon:last-of-type a{border-bottom:none;}
 .my-collection-info a{overflow:hidden;padding:0.29rem 0;display:block;border-bottom:1px #d2d2d2 solid;}
 .my-collection-info .my-pic-acive{width:1.7rem;height:1.39rem;display: block;float:left;}
 .my-collection-info .my-pic-acive img{width:100%;height:auto;display: block;}
