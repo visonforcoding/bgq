@@ -98,7 +98,7 @@
                     <h3>{#truename#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
                     <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
                 </a>
-                <div class="mark">
+                <div class="mark bgblue">
                     {#subjects#}
                 </div>
             </div>
