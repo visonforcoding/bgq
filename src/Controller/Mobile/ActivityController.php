@@ -50,30 +50,7 @@ class ActivityController extends AppController {
                 $this->set('userApply', $userApply);
             }
 
-            $user_id = $this->user->id;
-            // 活动详情
-            $activity = $this->Activity->get($id, [
-                'contain' => [
-                    'Admins',
-                    'Industries',
-                    'Regions',
-                    'Savants' => function($q){
-                        return $q->contain(['Users']);
-                    },
-                    'Activitycom' => function($q)use($id){
-                        return $q->where(['activity_id'=>$id])->orderDesc('Activitycom.create_time');
-                    },
-                    'Activitycom.Users',
-                    'Activitycom.Replyusers',
-                    'Activitycom.Likes'=>function($q)use($user_id){
-                        return $q->where(['type'=>0,'user_id'=>$user_id]);
-                    }
-                ],
-            ]);
-//            debug($activity);die;
-            $activity->read_nums += 1; // 阅读加1
-            $this->Activity->save($activity);
-            $this->set('activity', $activity);
+            
 
             if ($this->user) {
                 // 是否已报名
@@ -112,14 +89,54 @@ class ActivityController extends AppController {
                 }
 
                 $this->set('user', $this->user->id);
+                
+                $user_id = $this->user->id;
+                // 活动详情
+                $activity = $this->Activity->get($id, [
+                    'contain' => [
+                        'Admins',
+                        'Industries',
+                        'Regions',
+                        'Savants' => function($q){
+                            return $q->contain(['Users']);
+                        },
+                        'Activitycom' => function($q)use($id){
+                            return $q->where(['activity_id'=>$id])->orderDesc('Activitycom.create_time');
+                        },
+                        'Activitycom.Users',
+                        'Activitycom.Replyusers',
+                        'Activitycom.Likes'=>function($q)use($user_id){
+                            return $q->where(['type'=>0,'user_id'=>$user_id]);
+                        }
+                    ],
+                ]);
+                
+                
             } else {
+                $activity = $this->Activity->get($id, [
+                    'contain' => [
+                        'Admins',
+                        'Industries',
+                        'Regions',
+                        'Savants' => function($q){
+                            return $q->contain(['Users']);
+                        },
+                        'Activitycom' => function($q)use($id){
+                            return $q->where(['activity_id'=>$id])->orderDesc('Activitycom.create_time');
+                        },
+                        'Activitycom.Users',
+                        'Activitycom.Replyusers',
+                    ],
+                ]);
                 $this->set('user', '');
                 $isApply = [];
                 $this->set('isApply', $isApply);
             }
+            $activity->read_nums += 1; // 阅读加1
+            $this->Activity->save($activity);
             $this->set('isLike', $isLike);
             $this->set('isCollect', $isCollect);
-
+            $this->set('activity', $activity);
             $this->set('pageTitle', '活动详情');
         } else {
             return $this->Util->ajaxReturn(false, '传值错误');
