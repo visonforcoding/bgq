@@ -199,13 +199,11 @@
                 return false;
             } else if($.util.isWX) {
                 $.util.wxUploadPic(function(id){
-                    $.ajax({
+                    $.util.ajax({
                         url: "/user/getWxPic/" + id,
-                        dateType: 'json',
-                        type: 'POST',
-                        success: function (msg) {
+                        func: function (msg) {
+                            $.util.alert(msg.msg);
                             if(msg.status===true){
-                                $.util.alert(msg.msg);
                                 $('input[name="avatar"]').val(msg.path);
                             }
                         }
@@ -215,42 +213,12 @@
                 $.util.alert('请在微信或APP上传图片');
             }
         });
-//        $('#upload_pic').change(function () {
-//            var file = $(this).get(0).files[0];
-//            var reader = new FileReader();
-//            reader.readAsDataURL(file);
-//            reader.onload = function (e) {
-//                console.log(reader);
-//                //$('.imgcard').find('img').attr('src', e.target.result);
-//                lrz(file, {quality: 0.7}).then(function (rst) {
-//                    //压缩处理
-//                    $.ajax({
-//                        url: '/do-upload?dir=user/avatar&zip=1',
-//                        data: rst.formData,
-//                        type: 'POST',
-//                        cache: false,
-//                        processData: false,
-//                        contentType: false,
-//                        dataType: 'json',
-//                        success: function (data) {
-//                            if (data.status === true) {
-//                                $('input[name="avatar"]').val(data.thumbpath);
-//                            }
-//                        },
-//                        error: function () {
-//                        }
-//                    });
-//                });
-//            };
-//        });
+
         $('#submit').on('click', function () {
             var $form = $('form');
-            $.ajax({
-                type: $form.attr('method'),
-                url: $form.attr('action'),
+            $.util.ajax({
                 data: $form.serialize(),
-                dataType: 'json',
-                success: function (msg) {
+                func: function (msg) {
                     if (typeof msg === 'object') {
                         if (msg.status) {
                             $.util.alert(msg.msg);
