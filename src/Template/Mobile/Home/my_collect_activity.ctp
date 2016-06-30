@@ -66,11 +66,27 @@
         </div>
     </section>	
 </div>
+<script type="text/html" id="listTpl">
+    <div class="innercon">
+        <a href="/activity/details/{#id#}" class="clearfix nobottom">
+            <span class="my-pic-acive"><img src="{#cover#}"/></span>
+            <div class="my-collection-items">
+                <h3>{#title#}</h3>
+                <span>{#address#}</span>
+                <span>{#time#} <i>{#apply_nums#}人报名</i></span>
+            </div>
+        </a>
+    </div>
+</script>
 <?php $this->start('script'); ?>
 <script>
     if(LEMON.isAPP)
     {
         LEMON.sys.back('/home/index');
     }
+    
+    $.util.dataToTpl('activity', 'listTpl',<?= $activityjson ?>, function (d) {
+        return d;
+    });
 </script>
 <?php $this->end('script');
