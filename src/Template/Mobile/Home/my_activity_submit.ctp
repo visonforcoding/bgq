@@ -92,7 +92,7 @@
                             {
                                 $.util.dataToTpl('dataBox', 'listTpl',msg.data, function(d){
                                     d.id = d.activity.id;
-                                    d.cover = d.activity.thumb ? d.activity.thumb : d.activity.thumb;
+                                    d.cover = d.activity.thumb ? d.activity.thumb : d.activity.cover;
                                     d.title = d.activity.title;
                                     d.adress = d.activity.adress;
                                     d.apply_nums = d.activity.apply_nums;
