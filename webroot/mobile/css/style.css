@@ -47,7 +47,7 @@
 .uploadbox .filebtn input[type='file']{position:absolute;top:0;left:0;position: absolute;top: 0;left: 0;width: 100%;height: 0.78rem;border: 1px #ccc solid;
     margin: 0.45rem 0 0.2rem; opacity: 0;}
 .reg-shadow{width:100%;height:100%;position:fixed;left:0;top:0;background:rgba(0,0,0,.7);overflow:hidden;z-index:998;}
-.shadow-info,.m-fixed-top{position:fixed;bottom:0;left:0;width:100%;z-index:999;}
+.shadow-info,.m-fixed-top{position:fixed;bottom:-300px;left:0;width:100%;z-index:999;}
 .m-fixed-top{top:1.69rem;height:3.2rem;background: #fff;overflow:hidden;}
 .c-zindex{position:fixed;z-index:1000;}
 .shadow-info .picinfo{background: rgba(255,255,255,0.8);width:90%;margin:0.2rem auto;border-radius: 0.3rem;}
@@ -115,8 +115,8 @@
 .newscon-box h3{line-height:0.46rem;width:100%;font-size:0.4rem;color:#222c38; margin:0.3rem 0 0.2rem;padding:0 0.3rem;}
 .newscon-box img{max-width:90%;height:auto;display: block;margin:0.3rem auto;}
 .newscon-box p{width:90%;margin:0.1rem auto;line-height: 0.42rem;font-size:0.3rem;color:#9ba4ad;text-align: justify;}
-.con-bottom{float:right;line-height: 0.4rem;margin-right: 8%;color:#9ba4ad;margin-top:0.08rem;font-size:0.28rem;}
-.con-bottom i{margin:0 0.1rem; color:#9ba4ad;}
+.con-bottom{float:right;line-height: 0.4rem;margin-right: 8%;color:#9ba4ad;margin-top:0.08rem;font-size:0.28rem;margin-bottom:0.2rem;}
+.con-bottom i{margin:0 0.1rem; color:#9ba4ad;vertical-align: middle;}
 .con-bottom i.like{font-size:0.3rem;}
 .con-bottom i.collect{font-size:0.3rem;}
 .newscomment-box{border-top:1px #c8c7cc solid;}
