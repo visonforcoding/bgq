@@ -19,7 +19,7 @@
                 <span class="readnums">阅读<i><?= $this->Number->format($news->read_nums) ?></i></span>
                 <span  data-id="<?= $news->id ?>" <?php if (isset($news->praises) && !empty($news->praises)): ?> data-disable="1" class="liked"<?php endif; ?>
                        id="news-praise" >
-                    <i class="iconfont like <?php if (isset($news->praises) && !empty($news->praises)): ?>changecolor<?php endif; ?>" >&#xe616;</i><em><?= $this->Number->format($news->praise_nums) ?></em>
+                    <i class="iconfont like <?php if (isset($news->praises) && !empty($news->praises)): ?>scale<?php endif; ?>" >&#xe616;</i><em><?= $this->Number->format($news->praise_nums) ?></em>
                 </span>
             </div>
         </section>
@@ -188,7 +188,10 @@
             switch (em.id) {
                 case 'commit':
                     //弹出评论框
-                    $('#comment_shadow,.shadow-info').show('slow');
+                    // $('#comment_shadow,.shadow-info').show('slow');
+                    
+                    $('#comment_shadow').show('slow');
+                    $('.shadow-info').addClass('c-height');
                     break;
                 case 'cancel':
                     //关闭 评论框
