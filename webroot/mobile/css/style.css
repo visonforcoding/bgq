@@ -508,7 +508,7 @@ border-radius: 50%;padding:1px;}
 .h-info-box li span{float:left;display: block;font-size:0.28rem;}
 .h-info-box li div{float:right;}
 .e-info-box .upload-user-img span{display:block;width:0.46rem;height:0.38rem;background: url(../images/user-img.png) no-repeat;background-size:contain;}
-.e-info-box .upload-user-img .tx{background: url(../images/touxaing.png) no-repeat;background-size:contain;}
+.e-info-box .upload-user-img .tx{background: url(../images/touxaing.png) no-repeat;background-size:contain;width:0.6rem;height:0.6rem;}
 .upload-user-img{width:0.46rem;height:0.38rem;background: url(../images/user-img.png) no-repeat;background-size:contain;}
 .upload-user-img span{position: relative;}
 .upload-user-img span input{border:1px #ccc solid;position: absolute; width:0.46rem;height:0.38rem;opacity: 0;}
