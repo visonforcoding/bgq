@@ -143,6 +143,7 @@ class WxController extends AppController {
         \Cake\Log\Log::debug($jsApiParameters,'devlog');
         $this->set(array(
             'jsApiParameters' => $jsApiParameters,
+            'isWx'=>  $this->request->is('weixin')?true:false,
         ));
         $book = $order->subject_book;
         $this->set(['pageTitle'=>'话题支付']);
@@ -208,6 +209,11 @@ class WxController extends AppController {
         return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'头像上传成功', 'path'=>$path]);
     }
     
+    
+    /**
+     * 记录js的调试
+     * @return type
+     */
     public function jsLog(){
        $content = $this->request->query('content');
        \Cake\Log\Log::error('js错误','devlog');

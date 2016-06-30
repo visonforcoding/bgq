@@ -6,7 +6,6 @@
         </h1>
     </div>
 </header>
-    <?php print json_encode($jsApiParameters); ?>
 <div class="wraper">
     <div class="h20"></div>
     <div class="infobox a-pay">
@@ -19,7 +18,9 @@
     <div class="infobox a-pay paytype">
         <ul>
             <li><b></b>微信支付：<span id="pay_weixin" data-pay="wx" class='infocard'><input type="radio" name='pay' checked="checked" /><i class='active'></i></span></li>
+            <?php if(!$isWx):?>
             <li><b></b>支付宝支付：<span id="pay_ali" data-pay="ali" class='infocard reg-repass'><input type="radio" name='pay' /><i></i></span></li>
+            <?php endif;?>
         </ul>
     </div>
     <a  id="submit"  class="nextstep"><?= $book->subject->price ?>元&nbsp;&nbsp;确认支付</a>
