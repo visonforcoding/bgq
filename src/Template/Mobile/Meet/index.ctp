@@ -65,13 +65,17 @@
                     <i class="iconfont">&#xe647;</i>
                     <span>节能环保</span>
                 </a>
+                 <a href="/meet/moreIndustries/11">
+                    <i class="iconfont">&#xe647;</i>
+                    <span>节能环保</span>
+                </a>
                 <a href="/meet/industries">
                     <i class="iconfont">&#xe648;</i>
                     <span>更多</span>
                 </a>
             </div>
         </div>
-        <a href="javascript:void(0);" class="sele-r" id="toRight"></a>
+        <!-- <a href="javascript:void(0);" class="sele-r" id="toRight"></a> -->
     </div>
     <!--分类--end-->
     
