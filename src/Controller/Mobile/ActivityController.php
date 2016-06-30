@@ -50,19 +50,7 @@ class ActivityController extends AppController {
                 $this->set('userApply', $userApply);
             }
 
-            // 评论
-            $comment = $this
-                    ->Activity
-                    ->Activitycom
-                    ->find()
-                    ->contain(['Users', 'Replyusers'])
-                    ->where(['activity_id' => $id])
-                    ->order(['Activitycom.create_time' => 'DESC'])
-                    ->limit($this->limit)
-                    ->hydrate(false)
-                    ->toArray();
-            $this->set('comjson', json_encode($comment));
-
+            $user_id = $this->user->id;
             // 活动详情
             $activity = $this->Activity->get($id, [
                 'contain' => [
@@ -72,8 +60,17 @@ class ActivityController extends AppController {
                     'Savants' => function($q){
                         return $q->contain(['Users']);
                     },
+                    'Activitycom' => function($q)use($id){
+                        return $q->where(['activity_id'=>$id])->orderDesc('Activitycom.create_time');
+                    },
+                    'Activitycom.Users',
+                    'Activitycom.Replyusers',
+                    'Activitycom.Likes'=>function($q)use($user_id){
+                        return $q->where(['type'=>0,'user_id'=>$user_id]);
+                    }
                 ],
             ]);
+//            debug($activity);die;
             $activity->read_nums += 1; // 阅读加1
             $this->Activity->save($activity);
             $this->set('activity', $activity);
@@ -368,7 +365,7 @@ class ActivityController extends AppController {
         $industries = $this->tree($industries);
         $this->set('regions', $region);
         $this->set('industries', $industries);
-        $this->set('pageTitle', '搜索');
+        $this->set('pageTitle', '活动搜索');
     }
     
     /**
@@ -664,12 +661,15 @@ class ActivityController extends AppController {
      * @param int $id 活动id
      */
     public function showAllComment($id){
+        $user_id = $this->user->id;
         // 评论
         $comment = $this
                 ->Activity
                 ->Activitycom
                 ->find()
-                ->contain(['Users', 'Replyusers'])
+                ->contain(['Users', 'Replyusers', 'Likes'=>function($q)use($user_id){
+                        return $q->where(['type'=>0,'user_id'=>$user_id]);
+                    }])
                 ->where(['activity_id' => $id])
                 ->order(['Activitycom.create_time' => 'DESC'])
                 ->limit(10)

@@ -46,7 +46,12 @@ class ActivitycomTable extends Table {
             'joinType' => 'INNER',
             'className' => 'User'
         ]);
-
+        $this->hasMany('Likes', [
+            'className' => 'CommentLike',
+            'joinType' => 'LEFT',
+            'foreignKey' => 'relate_id',
+        ]);
+        
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [

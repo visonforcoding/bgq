@@ -29,7 +29,7 @@
             评论
             <!--<span id="commit"><i  class="iconfont">&#xe618;</i>我要点评</span>-->
         </h3>
-        <div id="coms"></div>
+        <div id="comment"><h4 id="noComment">还没任何评论</h4></div>
         <span class='com-all' id=""><a href="#allcoment">显示全部</a></span>
     </section>
     <!--专家推荐****************-->
@@ -93,7 +93,7 @@
           
             <span data-disable="{#disable#}" data-id="{#id#}" id="praise_{#id#}">
                 <b class="addnum">+1</b>
-                <i style="{#style#}" class="iconfont praise">&#xe615;</i>
+                <i style="{#style#}" class="iconfont praise_{#id#}">&#xe615;</i>
                 <em>{#praise_nums#}</em>
             </span>
         </div>
@@ -112,17 +112,20 @@
 <script>
     window.submit = true;
     $('.com-all').hide();
-    // 少于五条评论隐藏显示全部
+    // 少于五条评论隐藏显示全部, 大于一条评论隐藏还没有任何评论
     var circle = setInterval(function(){
-        if($('#coms').children('.items').length >= 5)
+        if($('#comment').children('.items').length >= 5)
         {
             $('.com-all').show();
             clearInterval(circle);
         }
+        if($('#comment').children('.items').length > 0) {
+            $('#noComment').hide();
+        }
     },100);
     
     var reply_id = 0;
-    $.util.dataToTpl('coms', 'listTpl',<?= json_encode($news->comments) ?>, function (d) {
+    $.util.dataToTpl('comment', 'listTpl',<?= json_encode($news->comments) ?>, function (d) {
         //d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
         d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
         d.user_truename = d.user.truename;
@@ -136,7 +139,7 @@
         d.disable = '0';
         if (d.hasOwnProperty('likes')) {
             if (d['likes'].length) {
-                d.style = 'font-weight:bold';
+                d.style = 'color:red';
                 d.disable = '1';
             }
         }
@@ -163,12 +166,13 @@
                     data: {id: id},
                     func: function (res) {
                         if (res.status) {
-                            obj.find('.addnum').show();
-                            obj.find('em').html(parseInt(obj.find('em').text()) + 1);
-//                            obj.find('i.praise').css('font-weight', 'bold');
-                            obj.data('disable', '1');
+                            console.log($('.praise_'+ id))
+                            $('.praise_'+ id).siblings('.addnum').show();
+                            $('.praise_'+ id).siblings('em').html(parseInt(obj.find('em').text()) + 1);
+                            $('.praise_'+ id).css('color', 'red');
+                            $('#praise_'+ id).data('disable', '1');
                             setTimeout(function () {
-                                obj.find('.addnum').hide();
+                                $('.praise_'+ id).siblings('.addnum').hide();
                             }, 1000);
                         }
                     }
@@ -197,7 +201,7 @@
                     //关闭 评论框
                     setTimeout(function (){
                         $('#comment_shadow').hide('slow');
-                         $('.shadow-info').removeClass('c-height').addClass('m-height');
+                        $('.shadow-info').removeClass('c-height').addClass('m-height');
                     }, 301);
                     break;
                 case 'submit':
@@ -239,9 +243,10 @@
                                         }
                                         return d;
                                     });
-                                    $('#coms').prepend(html);
+                                    $('#comment').prepend(html);
                                     $('#allComments').prepend(html);
-                                    $('#comment_shadow,.shadow-info').hide('slow');
+                                    $('#comment_shadow').hide('slow');
+                                    $('.shadow-info').removeClass('c-height').addClass('m-height');
                                 } else
                                 {
                                     $.util.alert(res.msg);
@@ -301,6 +306,12 @@
                     $(em).hide();
                     $('#shadow').hide();
                     break;
+                case 'comment_shadow':
+                    setTimeout(function(){
+                        $('#comment_shadow').hide('slow');
+                        $('.shadow-info').removeClass('c-height').addClass('m-height');
+                    },301);
+                    break;
                 case 'goTop':
                     window.scrollTo(0, 0);
                     e.preventDefault();
@@ -332,7 +343,7 @@
                                 d.disable = '0';
                                 if (d.hasOwnProperty('likes')) {
                                     if (d['likes'].length) {
-                                        d.style = 'font-weight:bold';
+                                        d.style = 'color:red';
                                         d.disable = '1';
                                     }
                                 }
@@ -373,7 +384,7 @@
                                     d.disable = '0';
                                     if (d.hasOwnProperty('likes')) {
                                         if (d['likes'].length) {
-                                            d.style = 'font-weight:bold';
+                                            d.style = 'color:red';
                                             d.disable = '1';
                                         }
                                     }

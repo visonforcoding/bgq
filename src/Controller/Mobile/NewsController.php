@@ -218,7 +218,7 @@ class NewsController extends AppController {
         $industries = $this->News->Industries->find()->hydrate(false)->all()->toArray();
         $industries = $this->tree($industries);
         $this->set('industries', $industries);
-        $this->set('pageTitle', '搜索');
+        $this->set('pageTitle', '资讯搜索');
     }
     
     /**
@@ -333,12 +333,15 @@ class NewsController extends AppController {
     }
     
     public function showAllComment($id){
+        $user_id = $this->user->id;
         // 评论
         $comment = $this
                 ->News
                 ->Comments
                 ->find()
-                ->contain(['Users', 'Reply'])
+                ->contain(['Users', 'Reply', 'Likes'=>function($q)use($user_id){
+                    return $q->where(['type'=>1,'user_id'=>$user_id]);
+                }])
                 ->where(['news_id' => $id])
                 ->order(['Comments.create_time' => 'DESC'])
                 ->limit(10)

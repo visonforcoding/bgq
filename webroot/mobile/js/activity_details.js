@@ -24,21 +24,26 @@ activity.prototype.bindEvent = function () {
         if (!em || !em.id)
             return;
         if (em.id.indexOf('likecom_') != -1) {
+            if ($(em).attr('disable') === '1') {
+                return false;
+            }
             $.util.ajax({
                 url: '/activity/comLike/' + $(em).attr('comid'),
                 func: function (msg) {
                     console.log(msg);
                     if (typeof msg === 'object') {
                         if (msg.status === true) {
-                            var num = $('#addnum_' + $(em).attr('comid')).siblings('b').text();
+                            var num = $('.addnum_' + $(em).attr('comid')).siblings('.praise_num').text();
                             num = parseInt(num) + 1;
-                            $('#addnum_' + $(em).attr('comid')).siblings('b').text(num);
-                            $('#likecom_' + $(em).attr('comid')).siblings('.addnum').addClass('show');
+                            $('.addnum_' + $(em).attr('comid')).siblings('.praise_num').text(num);
+                            $('.addnum_' + $(em).attr('comid')).siblings('.addnum').addClass('show');
                             // 动画结束前只能点击一次
-                            var addnum = $('#addnum_' + $(em).attr('comid'))[0];
+                            var addnum = $('.addnum_' + $(em).attr('comid'))[0];
                             addnum.addEventListener("webkitAnimationEnd", function () {
                                 $('.show').removeClass('show');
                             });
+                            $('.addnum_' + $(em).attr('comid')).css('color', 'red');
+                            $('.addnum_' + $(em).attr('comid')).attr('disable', '1');
                         } else {
                             $.util.alert(msg.msg);
                         }
@@ -71,7 +76,7 @@ activity.prototype.bindEvent = function () {
             case 'article_comment':
                 if ($(em).attr('user_id')) {
                     $('.article-shadow').show();
-                    $('.article').show();
+                    $('.article').removeClass('m-height').addClass('c-height');
                 } else {
                     $.util.alert('请先登录');
                     setTimeout(function () {
@@ -85,21 +90,22 @@ activity.prototype.bindEvent = function () {
                 break;
             // 取消评论
             case 'cancel':
-                setTimeout(function () {
-                    $('.reg-shadow').hide();
-                    $('.shadow-info').hide();
-                }, 301);
+                $('.reg-shadow').hide();
+                $('.shadow-info').removeClass('c-height').addClass('m-height');
                 break;
-
             // 喜欢
             case 'like':
+                $('.like').toggleClass('changecolor');
+                $('.like').toggleClass('scale');
                 $.util.ajax({
                     url: '/activity/artLike/' + $(em).attr('artid'),
                     func: function (msg) {
                         if (typeof msg === 'object') {
                             if (msg.status === true) {
-                                $('.like').toggleClass('changecolor');
+                                $.util.alert(msg.msg);
                             } else {
+                                $('.like').toggleClass('scale');
+                                $('.like').toggleClass('changecolor');
                                 $.util.alert(msg.msg);
                             }
                         }
@@ -161,8 +167,9 @@ activity.prototype.bindEvent = function () {
                                     });
                                     $('#comment').prepend(html);
                                     $('#allComments').prepend(html);
-                                    $('.article-shadow').hide();
-                                    $('.article').hide();
+                                    $('.reg-shadow').hide();
+                                    $('.shadow-info').removeClass('c-height');
+                                    $('.shadow-info').addClass('m-height');
                                 } else {
                                     $.util.alert(msg.msg);
                                 }
@@ -208,8 +215,9 @@ activity.prototype.bindEvent = function () {
                                     });
                                     $('#comment').prepend(html);
                                     $('#allComments').prepend(html);
-                                    $('.reply-shadow').hide();
-                                    $('.reply').hide();
+                                    $('.reg-shadow').hide();
+                                    $('.shadow-info').removeClass('c-height');
+                                    $('.shadow-info').addClass('m-height');
                                 } else {
                                     $.util.alert(msg.msg);
                                 }
@@ -246,6 +254,18 @@ activity.prototype.bindEvent = function () {
             case 'wxshare':
                 $(em).hide();
                 $('#shadow').hide();
+                break;
+            case 'reply_shadow':
+                setTimeout(function () {
+                    $('.reg-shadow').hide();
+                    $('.shadow-info').removeClass('c-height').addClass('m-height');
+                }, 301);
+                break;
+            case 'article_shadow':
+                setTimeout(function () {
+                    $('.reg-shadow').hide();
+                    $('.shadow-info').removeClass('c-height').addClass('m-height');
+                },301);
                 break;
             case 'goTop':
                 window.scroll(0, 0);
