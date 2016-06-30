@@ -73,8 +73,7 @@ class WxComponent extends Component {
         }
         $wx_code_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='
                 . $this->app_id . '&redirect_uri=' . urlencode($redirect_url) . '&response_type=code&scope='.$scope.'&state=STATE#wechat_redirect';
-        $this->_registry->getController()->redirect($wx_code_url);
-        return $this->_registry->getController()->response->stop();
+        return $this->_registry->getController()->redirect($wx_code_url);
     }
 
     /**
