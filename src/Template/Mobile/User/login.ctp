@@ -77,6 +77,7 @@
                 if (typeof msg === 'object') {
                     alert(JSON.stringify(msg));
                     if (msg.status === true) {
+                        alert('我打算跳转了');
                         if($.util.isAPP){
                             $.util.setCookie('token_uin',msg.token_uin,10*365*24*60);
                             LEMON.db.set('token_uin',msg.token_uin);
