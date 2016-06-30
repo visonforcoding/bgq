@@ -191,13 +191,13 @@
                     // $('#comment_shadow,.shadow-info').show('slow');
                     
                     $('#comment_shadow').show('slow');
-                    $('.shadow-info').addClass('c-height');
+                    $('.shadow-info').removeClass('m-height').addClass('c-height');
                     break;
                 case 'cancel':
                     //关闭 评论框
                     setTimeout(function (){
                         $('#comment_shadow').hide('slow');
-                         $('.shadow-info').removeClass('c-height');
+                         $('.shadow-info').removeClass('c-height').addClass('m-height');
                     }, 301);
                     break;
                 case 'submit':
