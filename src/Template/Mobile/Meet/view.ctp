@@ -23,7 +23,7 @@
             <span class="identification"></span>
         </li>
         <li>
-             <a id="recom" href="javascript:void(0);"><i class="iconfont f7">&#xe615;</i>推荐他</a>
+             <a id="recom" href="javascript:void(0);" class="tocommend"><i class="iconfont f7">&#xe615;</i>推荐他</a>
             <span  class="commendnum">
                 <p id="recom_avatar">
                     <!-- 只推荐7条 -->
