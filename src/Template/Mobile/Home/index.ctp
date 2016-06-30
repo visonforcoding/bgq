@@ -13,6 +13,14 @@
             <h3><?= $user->truename ?><span><?= $user->company ?> <?= $user->position ?></span></h3>
         </a>
     </div>
+    <div class="h-home-menu topnav">
+                <ul class="clearfix">
+                    <li><a href="/home/cardcase"><i></i>名片夹</a></li>
+                   <li><a href="/user/home-page"><i></i>个人资料</a></li>
+                    <li><a href="/home/my_xiaomi"><i></i>小秘书</a></li>
+                    
+                </ul>
+            </div>
     <ul class="h-home-menu navlist clearfix">
         <li><a href="/home/my-following"><i class="iconfont">&#xe60f;</i>我的关注</a></li>
         <li><a href="/home/my-collect-activity"><i class="iconfont">&#xe610;</i>我的收藏</a></li>
@@ -23,8 +31,8 @@
 
     <div class="h-home-menu">
         <ul class="clearfix">
-            <li><a href="/home/cardcase"><i class="iconfont">&#xe649;</i>名片夹</a></li>
-            <li><a href="/user/home-page"><i class="iconfont">&#xe61c;</i>个人资料</a></li>
+           <!--  <li><a href="/home/cardcase"><i class="iconfont">&#xe649;</i>名片夹</a></li>
+            <li><a href="/user/home-page"><i class="iconfont">&#xe61c;</i>个人资料</a></li> -->
             <?php if($user->level==1): ?>
             <li>  <a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li>
             <?php endif;?>
@@ -52,9 +60,9 @@
         </ul>
     </div>
 </div>
-<div class="submitbtn">
+<!-- <div class="submitbtn">
     <a href="/home/my_xiaomi"><img src="/mobile/images/ms.png"/></a>
-</div>
+</div> -->
 <?= $this->element('footer') ?>
 <?php $this->start('script') ?>
 
