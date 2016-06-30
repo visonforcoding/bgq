@@ -1,6 +1,6 @@
 
 <body>
-    <div class="wraper a-wraper pd10">
+    <div class="wraper a-wraper">
         <div class="a-search-box" id="search">
              <a href="/activity/search"> 
             <div class="a-search">
