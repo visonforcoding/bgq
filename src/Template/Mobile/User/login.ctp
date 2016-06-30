@@ -70,12 +70,10 @@
     });
     $('#submit').on('click', function () {
         $form = $('form');
-        $.ajax({
-            type: 'post',
+        $.util.ajax({
             url: $form.attr('action'),
             data: $form.serialize(),
-            dataType: 'json',
-            success: function (msg) {
+            func: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
                         if($.util.isAPP){
@@ -94,11 +92,11 @@
     $('#wxlogin').on('click', function () {
         if ($.util.isAPP) {
             LEMON.login.wx(function (code) {
-            $.ajax({   //获取open id,比对是否存在,登录或是注册  生成token
-                type:'post',
+            $.util.ajax({   //获取open id,比对是否存在,登录或是注册  生成token
                 data:{code:code},
                 url: '/wx/appLogin',
-                success:function(res){
+                func:function(res){
+                    alert(res);
                     res = JSON.parse(res);
                     if(res.status){
                         $.util.setCookie('token_uin',res.token_uin,10*365*24*60);
