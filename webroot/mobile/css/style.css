@@ -75,7 +75,7 @@
 .news-list-items{border-bottom:1px #d2d2d2 solid;padding:0.3rem;background: #fff;overflow:hidden;position:relative;}
 /*.tbof:before{content:'';position:absolute;border-top:1px #c8c7cc solid;left:0;right:0;top:0;height:1px;
 -webkit-transform:scaleY(.5);transform:scaleY(.5);-webkit-transform-origin:0 0;transform-origin:0 0;}*/
-.news-list-items:last-of-type{border-bottom:1px #d2d2d2 solid;}
+/*.news-list-items:last-of-type{border-bottom:1px #d2d2d2 solid;}*/
 /*#activity{border-bottom:1px #d2d2d2 solid;}*/
 .news-list-items:last-of-type .active-items{border-bottom:none;}
 .news-list-items time,.con-des time{margin-left:20px;color:#969fa9;font-size:0.26rem;line-height: 0.4rem;}
