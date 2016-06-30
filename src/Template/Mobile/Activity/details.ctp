@@ -38,7 +38,7 @@
                 </span>
                 <!--喜欢按钮-->
                 <span >
-                    <i class="iconfont like <?php if ($isLike): ?> changecolor<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like">&#xe616;</i>
+                    <i class="iconfont like <?php if ($isLike): ?> changecolor scale<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like">&#xe616;</i>
                 </span>
             </div>
         </section>
@@ -53,7 +53,7 @@
                             <a href='/user/home-page/<?= $v['id'] ?>'><img src="<?= $v['avatar'] ? $v['avatar'] : '/mobile/images/touxiang.png'; ?>"/></a>
                         <?php endforeach; ?>
                     <?php else : ?>
-                        <div style="font-size:0.2rem;line-height: 0.22rem;">暂时无人报名</div>
+                        <div style="font-size: 0.32rem;color: #7a7d82;text-align: center;line-height: 0.62rem;">暂时无人报名</div>
                     <?php endif; ?>
                 </div>
                 <!-- <span>显示全部</span> -->
@@ -64,7 +64,7 @@
                 评论
                 <!-- <i class="iconfont">&#xe618;</i> -->
             </h3>
-            <div id="comment"><h4>还没任何评论</h4></div>
+            <div id="comment"><h4 id="noComment">还没任何评论</h4></div>
             <span class='com-all' style="display:none;"><a href="#allcoment" id="showAllComment">显示全部</a></span>
         </section>
         <div class="a-btn">
@@ -85,7 +85,7 @@
                 <ul>
                     <?php foreach ($activity->savants as $k => $v): ?>
                         <li>
-                            <a href="javascript:void(0)">
+                            <a href="/meet/view/<?= $v['id'] ?>">
                                 <img src="<?= $v['user']['avatar'] ? $v['user']['avatar'] : '/mobile/images/touxiang.png' ?>" alt="<?= $v['user']['truename'] ?>" />
                                 <h3><?= $v['user']['truename'] ?><span><?= $v['user']['company'] ?> <?= $v['user']['position'] ?></span></h3>
                             </a>
@@ -120,33 +120,32 @@
     <span></span>
     <p></p>
  </div>
-    <div class="reg-shadow article-shadow" ontouchmove="return false;" hidden>
-        <div class="shadow-info a-shadow a-forword article">
-            <ul>
-                <li>
-                    <textarea type="text" placeholder="请输入评论" name="comment-content-article"></textarea>
-                </li>
-                <li>
-                    <a href="javascript:void(0);" id="cancel">取消</a>
-                    <a href="javascript:void(0);" id="publish_article" activity_id="<?= $activity->id; ?>">发表</a>
-                </li>
-            </ul>
-        </div>
+    <div class="reg-shadow article-shadow" ontouchmove="return false;" hidden id="article_shadow"></div>
+    <div class="shadow-info a-shadow a-forword article">
+        <ul>
+            <li>
+                <textarea type="text" placeholder="请输入评论" name="comment-content-article"></textarea>
+            </li>
+            <li>
+                <a href="javascript:void(0);" id="cancel">取消</a>
+                <a href="javascript:void(0);" id="publish_article" activity_id="<?= $activity->id; ?>">发表</a>
+            </li>
+        </ul>
     </div>
 
-    <div class="reg-shadow reply-shadow" ontouchmove="return false;" hidden>
-        <div class="shadow-info a-shadow a-forword reply">
-            <ul>
-                <li>
-                    <textarea type="text" placeholder="请输入评论" name="comment-content-reply" id="r_textarea"></textarea>
-                </li>
-                <li>
-                    <a href="javascript:void(0);" id="cancel">取消</a>
-                    <a href="javascript:void(0);" id="publish_reply" activity_id="<?= $activity->id; ?>">发表</a>
-                </li>
-            </ul>
-        </div>
+    <div class="reg-shadow reply-shadow" ontouchmove="return false;" hidden id="reply_shadow"></div>
+    <div class="shadow-info a-shadow a-forword reply">
+        <ul>
+            <li>
+                <textarea type="text" placeholder="请输入评论" name="comment-content-reply" id="r_textarea"></textarea>
+            </li>
+            <li>
+                <a href="javascript:void(0);" id="cancel">取消</a>
+                <a href="javascript:void(0);" id="publish_reply" activity_id="<?= $activity->id; ?>">发表</a>
+            </li>
+        </ul>
     </div>
+    
 </body>
 <?php $this->start('script'); ?>
 <script type="text/html" id="comment_tpl">
@@ -163,10 +162,10 @@
                     <i class="job">{#user_company#} {#user_position#}</i>
                 </a>
             </span>
-            <span>
-                <b class="addnum" id="addnum_{#id#}">+1</b>
-                <i class="iconfont" id="likecom_{#id#}" type="0" comid="{#id#}">&#xe615;</i>
-                <b>{#praise_nums#}</b>
+            <span id="likecom_{#id#}" comid="{#id#}" disable="{#disable#}">
+                <b class="addnum">+1</b>
+                <i class="iconfont addnum_{#id#}" style="{#style#}">&#xe615;</i>
+                <b class="praise_num">{#praise_nums#}</b>
             </span>
         </div>
         <p class="infor-comm" id="reply_{#id#}" value="{#id#}" user_id="{#user_id#}">{#body#}</p>
@@ -183,7 +182,7 @@
 <script>
     window.article = true;
     window.reply = true;
-    $.util.dataToTpl('comment', 'comment_tpl',<?= $comjson ?>, function (d) {
+    $.util.dataToTpl('comment', 'comment_tpl',<?= json_encode($activity->activitycom); ?>, function (d) {
         d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
         d.user_truename = d.user.truename;
         d.user_company = d.user.company;
@@ -193,15 +192,25 @@
         {
             d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.reply.truename + ' </span>：' + d.body;
         }
+        d.style = '';
+        d.disable = '0';
+        if (d.hasOwnProperty('likes')) {
+            if (d['likes'].length) {
+                d.style = 'color:red';
+                d.disable = '1';
+            }
+        }
         return d;
     });
     
-    // 少于五条评论隐藏显示全部
+    // 少于五条评论隐藏显示全部，大于一条评论隐藏还没有评论
     var circle = setInterval(function(){
-        if($('#comment').children('.items').length >= 5)
-        {
+        if($('#comment').children('.items').length >= 5){
             $('.com-all').show();
             clearInterval(circle);
+        }
+        if($('#comment').children('.items').length > 0) {
+            $('#noComment').hide();
         }
     },100);
 
@@ -222,7 +231,19 @@
                                 d.user_truename = d.user.truename;
                                 d.user_company = d.user.company;
                                 d.user_position = d.user.position;
-                                d.reply = d.pid > 0 ? '@' + d.replyuser.truename : '';
+                                d.user_id = d.user.id;
+                                if(d.pid>0)
+                                {
+                                    d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.reply.truename + ' </span>：' + d.body;
+                                }
+                                d.style = '';
+                                d.disable = '0';
+                                if (d.hasOwnProperty('likes')) {
+                                    if (d['likes'].length) {
+                                        d.style = 'color:red';
+                                        d.disable = '1';
+                                    }
+                                }
                                 return d;
                             });
                         }
@@ -253,7 +274,19 @@
                                     d.user_truename = d.user.truename; // 名字
                                     d.user_company = d.user.company; // 公司
                                     d.user_position = d.user.position; // 职务
-                                    d.reply = d.pid > 0 ? '@' + d.replyuser.truename : ''; // 是否回复别人的评论
+                                    d.user_id = d.user.id;
+                                    if(d.pid>0)
+                                    {
+                                        d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.reply.truename + ' </span>：' + d.body;
+                                    }
+                                    d.style = '';
+                                    d.disable = '0';
+                                    if (d.hasOwnProperty('likes')) {
+                                        if (d['likes'].length) {
+                                            d.style = 'color:red';
+                                            d.disable = '1';
+                                        }
+                                    }
                                     return d;
                                 });
                                 $('#allComments').append(html);
