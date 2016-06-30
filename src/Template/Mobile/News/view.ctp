@@ -196,7 +196,7 @@
                 case 'cancel':
                     //关闭 评论框
                     setTimeout(function (){
-                        $('#comment_shadow,.shadow-info').hide('slow');
+                        $('#comment_shadow').hide('slow');
                     }, 301);
                     break;
                 case 'submit':
