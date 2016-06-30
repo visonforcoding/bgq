@@ -23,19 +23,21 @@
             <span class="identification"></span>
         </li>
         <li>
+             <a id="recom" href="javascript:void(0);"><i class="iconfont f7">&#xe615;</i>推荐他</a>
             <span  class="commendnum">
                 <p id="recom_avatar">
-                    <!-- 只推荐5条 -->
+                    <!-- 只推荐7条 -->
 
                     <?php foreach ($biggie->reco_users as $reco_user): ?>
                         <img src="<?= empty($reco_user->user->avatar) ? '/mobile/images/touxiang.jpg' : $reco_user->user->avatar ?>"/>
                     <?php endforeach; ?>
 
-                   <a href="#this" class="ml20">查看更多</a>
+                  
                 </p>
                 <!-- 等<i id="meet_nums"><?=$biggie->savant->reco_nums?></i>人推荐 -->
+                 <a href="#this" class="fr">查看更多</a>
                 </span>
-            <a id="recom" href="javascript:void(0);"><i class="iconfont f7">&#xe615;</i>推荐他</a>
+           
         </li>
         <li class="conr"><a class="alink mr" href="/user/home-page/<?= $biggie->id ?>" class="tohome"><i class="iconfont">&#xe60d;</i>个人主页</a></li>
     </ul>
