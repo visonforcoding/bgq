@@ -28,11 +28,10 @@
 				<a href="#this" class="h-regiser m-sort active">默认排序</a>
 				
 				<div class="innercon">
-					
-					<span class="leftbtn"></span>
-					<div class="outerbox">
+					<!--<span class="leftbtn"><a href="#this" class="active allmark">全部</a></span>-->
+					<div class="outerbox" id="outerbox">
 						
-						<ul>
+						<ul id="outer">
 							<li><a href="#this" class="active allmark">全部</a></li>
 							<li><a href="#this">创业</a></li>
 							<li><a href="#this">行业经验</a></li>
@@ -42,10 +41,23 @@
 							<li><a href="#this">行业经验</a></li>
 							<li><a href="#this">产品</a></li>
 							<li><a href="#this">研发</a></li>
+							<li><a href="#this">研发</a></li>
+							<li><a href="#this">创业</a></li>
+							<li><a href="#this">行业经验</a></li>
+							<li><a href="#this">产品</a></li>
+							<li><a href="#this">研发</a></li>
 						</ul>
 					</div>
 					<span class="rightbtn"></span>
 				</div>
+			</div>
+			<div class="m-fixed-top" style="display: block;">
+				<ul>
+					<li class="active"><a href="#this">人气推荐</a></li>
+					<li><a href="#this">最新上榜</a></li>
+					<li><a href="#this">评价最好</a></li>
+					<li><a href="#this">约见最多</a></li>
+				</ul>
 			</div>
 			<div style="height:1rem;"></div>
 			<section class="internet-v-info">
@@ -134,22 +146,22 @@
 			</section>
 		</div>
 	
-	<div class='reg-shadow' style="display: none;"></div>
-		<div class="m-fixed-top" style="display: none;">
-			<ul>
-				<li class="active"><a href="#this">人气推荐</a></li>
-				<li><a href="#this">最新上榜</a></li>
-				<li><a href="#this">评价最好</a></li>
-				<li><a href="#this">约见最多</a></li>
-			</ul>
-		</div>
+	<div class='reg-shadow' style="display: block;"></div>
+		
 	</div>
 	<script type="text/javascript">
-		$('.m-sort').on('touchstart',function(e){
-			$('.reg-shadow').css('display','block');
-			$('.m-fixed-top').css('display','block');
-			$('body').css({'height':'100%','overflow':'hidden'})
+			var $li = $('#outerbox ul');
+			var num = $li.find('li').length;console.log(num);
+			var wd=0;
+			
+		
+		$('.m-sort').on('tap',function(e){
+			
 		})
+		$('#outer li').on('tap',function(e){
+			
+		})
+		
 	</script>
 	</body>
 </html>
