@@ -154,11 +154,11 @@
     });
     }, 2000);
     
-    //轮播
-    // var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
-    // setTimeout(function(){
-    //     var iconLoop = new simpleScroll({viewDom:$('#icons'),  moveDom:$('#allsort'), right:$('#toRight'), fix:25});
-    // },1000);
+    轮播
+    var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
+    setTimeout(function(){
+        var iconLoop = new simpleScroll({viewDom:$('#icons'),  moveDom:$('#allsort'), right:$('#toRight'), fix:25});
+    },1000);
     
     $('.s-con').click(function () {
         $('.search').focus();
