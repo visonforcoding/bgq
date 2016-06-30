@@ -108,6 +108,7 @@ activity.prototype.bindEvent = function () {
                                 return d;
                             });
                         } else {
+                            $('#search').html('');
                             $.util.alert(msg.msg);
                         }
                     }
