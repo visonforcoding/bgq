@@ -133,8 +133,6 @@ class ActivityController extends AppController {
      * @return json
      */
     public function getDataList() {
-        $a = $this->Activity->find()->all();
-        debug($a);die;
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
