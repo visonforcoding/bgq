@@ -207,5 +207,17 @@ class WxController extends AppController {
         $path = $this->Wx->wxUpload($id);  
         return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'头像上传成功', 'path'=>$path]);
     }
+    
+    public function jsLog(){
+       $content = $this->request->query('content');
+       \Cake\Log\Log::error('js错误','devlog');
+        $res = \Cake\Log\Log::error($content,'devlog');
+        if($res){
+            return $this->Util->ajaxReturn(true, 'ok');
+        }else{
+            return $this->Util->ajaxReturn(false,'error');
+        }
+       
+    }
 
 }
