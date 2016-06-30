@@ -44,7 +44,7 @@
             </ul>
         </div>
     </div>
-    <section class="my-collection-info" style="padding-bottom: 0.2rem;margin-bottom: 1rem;background: #fff;" id="search"></section>
+    <section class="my-collection-info" id="search"></section>
 </div>
 <div id="buttonLoading" class="loadingbox"></div>
 <?= $this->element('footer'); ?>
