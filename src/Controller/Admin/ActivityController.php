@@ -170,6 +170,7 @@ class ActivityController extends AppController {
         $query->limit(intval($rows))
                 ->page(intval($page));
         $res = $query->toArray();
+        debug($res);die;
         if (empty($res)) {
             $res = array();
         }
