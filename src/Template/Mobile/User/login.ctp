@@ -81,7 +81,8 @@
                             $.util.setCookie('token_uin',msg.token_uin,10*365*24*60);
                             LEMON.db.set('token_uin',msg.token_uin);
                         }
-                        window.location.href = msg.redirect_url;
+                        alert('我打算跳转了');
+                        document.location.href = msg.redirect_url;
                     } else {
                         $.util.alert(msg.msg);
                     }
