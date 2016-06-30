@@ -40,7 +40,7 @@ a,button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);}
 .hf20{height:0.2rem;background: #fff;border-bottom:1px #c8c7cc solid;}
 .wraper .texthide{word-break: break-all;display: -webkit-box;/*-webkit-line-clamp: 3;限制行数*/-webkit-box-orient: vertical;overflow: hidden;}
 
-.newswraper{padding-bottom:1.2rem;}
+.newswraper{padding-bottom:1.4rem;}
 .innercon{margin:0 auto;padding:0 0.3rem;background: #fff;}
 .h20{height:0.2rem;border-top:1px #c8c7cc solid;border-bottom:1px #c8c7cc solid;}
 .wraper .color-items{color:#e01a48;}
