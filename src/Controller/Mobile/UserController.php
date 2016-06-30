@@ -243,6 +243,9 @@ class UserController extends AppController {
 //        $redirect_url = empty($this->request->query('redirect_url')) ?
 //                (empty($this->request->referer()) ? '/' : $this->request->referer()) : $this->request->query('redirect_url');
         $redirect_url = empty($this->request->query('redirect_url')) ? '/':  $this->request->query('redirect_url');
+        if(in_array($redirect_url,['/home/my-install','/user/login'])){
+            $redirect_url = '/home/index';
+        }
         $this->response->cookie([
             'name' => 'login_url',
             'value' => $redirect_url,
