@@ -134,8 +134,8 @@ class ActivityController extends AppController {
      */
     public function getDataList() {
         $a = \Cake\ORM\TableRegistry::get('user');
-        $a->find()->all();
-        debug($a);die;
+        $b = $a->find()->all();
+        debug($b);die;
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
