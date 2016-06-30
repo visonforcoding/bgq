@@ -94,6 +94,7 @@ class WxComponent extends Component {
         $wx_accesstoken_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $appid . '&secret=' . $app_secret .
                 '&code=' . $code . '&grant_type=authorization_code';
         $response = $httpClient->get($wx_accesstoken_url);
+        \Cake\Log\Log::debug('获取weixin信息第二步','devlog');
         \Cake\Log\Log::debug($response,'devlog');
         if ($response->isOk()) {
             $open_id = json_decode($response->body())->openid;
@@ -106,6 +107,7 @@ class WxComponent extends Component {
                 //该接口地址能获取到union_id
             }
             $res = $httpClient->get($wx_user_url);
+            \Cake\Log\Log::debug('获取weixin信息第二步','devlog');
             \Cake\Log\Log::debug($res,'devlog');
             if ($res->isOk()) {
                 \Cake\Log\Log::debug($res->body(),'devlog');
@@ -113,7 +115,6 @@ class WxComponent extends Component {
                 if(property_exists($union_res, 'errcode')){
                     //第二步获取失败
                     \Cake\Log\Log::error('获取weixin用户信息时unionId接口返回结果显示有误','devlog');
-                    \Cake\Log\Log::error($res->body(),'devlog');
                     return json_decode($response->body());
                 }
                 return json_decode($res->body());
