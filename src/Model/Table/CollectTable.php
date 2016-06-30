@@ -41,6 +41,11 @@ class CollectTable extends Table {
             'joinType' => 'INNER',
             'className' => 'News'
         ]);
+        $this->belongsTo('Activities', [
+            'foreignKey' => 'relate_id',
+            'joinType' => 'INNER',
+            'className' => 'Activity'
+        ]);
 
         $this->addBehavior('Timestamp', [
             'events' => [
