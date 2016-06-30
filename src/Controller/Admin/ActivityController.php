@@ -153,7 +153,7 @@ class ActivityController extends AppController {
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['activity.`create_time` >' => $begin_time], ['activity.`create_time` <' => $end_time]];
+            $where['and'] = [['Activity.`create_time` >' => $begin_time], ['Activity.`create_time` <' => $end_time]];
         }
         $query = $this->Activity->find()->contain(['Users']);
         $query->hydrate(false);
