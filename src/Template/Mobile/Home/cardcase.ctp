@@ -14,7 +14,7 @@
                     <h1><input type="text" placeholder="请输入关键词"></h1>
                 </div>
             </div>
-            <div class="hf20"></div>
+           
     <div class="h20 nobottom"></div>
     <div class="inner my-home-menu" >
         <a href="javascript:void(0);" class='active' id="noSend">未回赠</a>
