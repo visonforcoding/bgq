@@ -190,7 +190,7 @@ class NewsController extends AppController {
             if($res===true){
                 return $this->Util->ajaxReturn(true,'点赞成功');
             }else{
-                return $this->Util->ajaxReturn(false,$res);
+                return $this->Util->ajaxReturn(false, $res);
             }
         }
     }

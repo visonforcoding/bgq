@@ -739,9 +739,12 @@ class ActivityController extends AppController {
      */
     public function allEnroll($id){
         $activityApplyTable = \Cake\ORM\TableRegistry::get('activityapply');
-        $activityApplyTable->find()->where(['activity_id' => $id])->toArray();
+        $user = $activityApplyTable->find()->where(['activity_id' => $id])->contain(['Users'])->toArray();
         $activity = $this->Activity->get($id);
-        $this->set('pageTitle', $activity->title);
+        $this->set([
+            'pageTitle'=>$activity->title,
+            'userjson' => json_encode($user),
+        ]);
     }
     
     public function test(){
