@@ -13,7 +13,7 @@
         <h3>杨涛<span>IDG资本 董事长</span></h3>
     </div>-->
 </header>
-<div class="wraper m-fixed-bottom">
+<div class="wraper m-fixed-bottom newswraper">
     <form method="post">
     <ul class="h-info-box e-info-box">
         <li class='u-img no-right-ico'>
