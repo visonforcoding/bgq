@@ -16,7 +16,7 @@
 <div class="wraper m-fixed-bottom">
     <form method="post">
     <ul class="h-info-box e-info-box">
-        <li>
+        <li class='u-img no-right-ico'>
             <a href="javascript:void(0)">
                 <span>头像：</span>
                 <div class="upload-user-img">
