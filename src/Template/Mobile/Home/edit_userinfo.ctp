@@ -195,11 +195,9 @@
                        $('input[name="avatar"]').val(data.thumbpath);
                        $.util.ajax({
                            url: '/user/getAppPic',
-                           data: '{pic:'+ data.thumbpath +'}',
+                           data: '{avatar:'+ data.thumbpath +'}',
                            func: function(msg){
-                               alert(msg.msg);
                                if(msg.status){
-                                   
                                    $.util.alert(msg.msg);
                                } else {
                                    $.util.alert(msg.msg);
