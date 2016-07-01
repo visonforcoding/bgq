@@ -127,12 +127,14 @@ border-bottom:1px #d2d2d2 solid; padding:0 0.3rem;position:relative;font-weight:
 .newscomment-box .comment-title span{position:absolute;right:0.3rem;color:#7a7e83;font-size:0.28rem;}
 .newscomment-box .comment-title i{font-size:0.3rem;margin-right:0.1rem; vertical-align: middle;display:inline-block;}
 .newscomment-box .items{margin: 0.3rem 0.3rem 0 0.3rem;border-bottom:1px #d2d2d2 solid;padding-bottom:0.2rem;}
-.entrollist{padding: 0.3rem 0.3rem 0 0.3rem;border-bottom:1px #d2d2d2 solid;padding-bottom:0.2rem;}
+.entrollist{padding:0.2rem 0.3rem;border-bottom:1px #d2d2d2 solid;}
 .entrollist:last-of-type{border-bottom:none;}
+.entrollist a{display: block;overflow: hide;}
 .newscomment-box .no-bottom{border-bottom:none;}
 .t-ablock{font-size:0;}
 .t-ablock a{display:inline-block;width:0.62rem;height:0.62rem;overflow:hidden;border-radius:0.31rem;margin:0 0.07rem;}
 .comm-info{height:0.62rem;color:#7a7e83;}
+.entrollist .comm-info{height:auto;}
 .comm-info span{ display: block;float:left;}
 .comm-info span:first-child{width:0.62rem;height:0.62rem;margin-right:0.3rem;}
 .comm-info span:last-child{float:right;margin-top:0.14rem;position:relative;padding-top:0.2rem;}
