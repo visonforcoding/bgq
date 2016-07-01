@@ -11,7 +11,6 @@
 		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
 		<link rel="stylesheet" type="text/css" href="../font/font/iconfont.css"/>
 		<script src="../js/view.js"></script>
-        <script src="../js/jquery.js"></script>
         <script src="../js/zepto.min.js"></script>
         <script src="../js/loopScroll.js"></script>
         <script src="../js/util.js"></script>
@@ -102,7 +101,7 @@
 		
 			<!--分类--end-->
 			<div class="dk">
-				<ul>
+				<ul id="items">
 					<li><a href="#this"><img src="../images/dk.jpg"/><span>8人见过</span></a></li>
 					<li><a href="#this"><img src="../images/dk.jpg"/><span>8人见过</span></a></li>
 					<li><a href="#this"><img src="../images/dk.jpg"/><span>8人见过</span></a></li>
@@ -197,6 +196,22 @@
 	</footer>
 	 <script>
                 var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
+                 
+
+            var sub = null;
+	        setTimeout(function(){
+	           	sub = $.util.loop({
+	                    min : 3,
+	                    moveDom: $('#items'),
+	                    moveChild: $('#items li'),
+	                    lockScrY: true,
+	                    loopScroll: true,
+//	                    autoTime:3000,
+	                    
+	                });
+           },0)
+
+       
                
       </script>
        
