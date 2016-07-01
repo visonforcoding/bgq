@@ -574,6 +574,7 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .history-info li{padding:0.08rem 0 0.18rem;border-bottom:1px #d2d2d2 solid;background: #fff;}
 .history-info li span{line-height: 0.6rem;font-size:0.26rem;}
 .history-info li p{line-height: 0.36rem;color:#9ba4ad;font-size:0.26rem;}
+.wraper i.changecolor{color:#da2051;font-size:0.4rem;}
 /*我的钱包*/
 .my-purse-info {height:5.2rem;width:100%;/*justify-content: center;align-items: center;display: flex;flex-direction: column;*/border-bottom:1px #d2d2d2 solid;text-align: center;margin-top:0.4rem;}
 .my-purse-info a:nth-of-type(1){background: url(img/purse.png) no-repeat;background-size:cover;width:1.79rem;height:1.69rem;display:inline-block;}
