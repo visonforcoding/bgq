@@ -344,6 +344,9 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .meetnum{font-size:0.28rem;color:#969fa9;}
 .toc{text-align: center;display: block;color:#E01A48;}
 .toc i{background: url(img/ca.png) no-repeat;background-size:cover;width:0.32rem;height:0.26rem;display: block;margin:0.55rem auto 0.1rem;}
+.internet-v-info .lay-c h3{font-weight:bold;}
+.internet-v-info .lay-c span:first-of-type{color:#7a7e83;font-size:0.28rem;}
+.internet-v-info .lay-c span{font-size:0.26rem;}
 .m-sort{background: url(img/sort.png) no-repeat left center;background-size: 0.21rem 0.13rem;padding-left:0.25rem;position:absolute;}
 .m-fixed-top li{line-height: 0.8rem;font-size:0.3rem;border-bottom:1px #d2d2d2 solid;text-indent: 0.65rem;}
 .m-fixed-top li.active{background: #eee;}
