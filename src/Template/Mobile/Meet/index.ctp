@@ -46,31 +46,31 @@
                     <span>大消费</span>
                 </a>
                 <a href="/meet/moreIndustries/7">
-                    <i class="iconfont">&#xe643;</i>
+                    <i class="iconfont">&#xe64a;</i>
                     <span>文化传媒</span>
                 </a>
                 <a href="/meet/moreIndustries/8">
-                    <i class="iconfont">&#xe644;</i>
+                    <i class="iconfont">&#xe64b;</i>
                     <span>工业4.0</span>
                 </a>
                 <a href="/meet/moreIndustries/9">
-                    <i class="iconfont">&#xe645;</i>
+                    <i class="iconfont">&#xe64c;</i>
                     <span>新能源</span>
                 </a>
                 <a href="/meet/moreIndustries/10">
-                    <i class="iconfont">&#xe646;</i>
+                    <i class="iconfont">&#xe64e;</i>
                     <span>新材料</span>
                 </a>
                 <a href="/meet/moreIndustries/11">
-                    <i class="iconfont">&#xe647;</i>
+                    <i class="iconfont">&#xe645;</i>
                     <span>节能环保</span>
                 </a>
                  <a href="/meet/moreIndustries/11">
-                    <i class="iconfont">&#xe647;</i>
-                    <span>节能环保</span>
+                    <i class="iconfont">&#xe64f;</i>
+                    <span>定增基金</span>
                 </a>
                 <a href="/meet/industries">
-                    <i class="iconfont">&#xe648;</i>
+                    <i class="iconfont">&#xe6e0;</i>
                     <span>更多</span>
                 </a>
             </div>
