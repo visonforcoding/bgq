@@ -19,7 +19,7 @@
                 <span class="readnums">阅读<i><?= $this->Number->format($news->read_nums) ?></i></span>
                 <span  data-id="<?= $news->id ?>" <?php if (isset($news->praises) && !empty($news->praises)): ?> data-disable="1" class="liked"<?php endif; ?>
                        id="news-praise" >
-                    <i class="iconfont like <?php if (isset($news->praises) && !empty($news->praises)): ?>scale<?php endif; ?>" >&#xe616;</i><em><?= $this->Number->format($news->praise_nums) ?></em>
+                    <i class="iconfont like <?php if (isset($news->praises) && !empty($news->praises)): ?>changecolor<?php endif; ?>" >&#xe616;</i><em><?= $this->Number->format($news->praise_nums) ?></em>
                 </span>
             </div>
         </section>
@@ -103,6 +103,9 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    if($.util.isAPP) {
+        LEMON.show.shareIco();
+    }
     // 分享设置
     window.shareConfig.link = 'http://m.chinamatop.com/news/view/<?= $news->id ?>';
     window.shareConfig.title = '<?= $news->title ?>';
@@ -262,6 +265,8 @@
                     if (obj.data('disable') === '1') {
                         return false;
                     }
+                    obj.find('i').toggleClass('scale');
+                    obj.find('i').toggleClass('changecolor');
                     $.util.ajax({
                         url: '/news/news-praise',
                         data: {id:<?= $news->id ?>},
@@ -269,8 +274,9 @@
                             $.util.alert(res.msg);
                             if (res.status) {
                                 obj.find('em').html(parseInt(obj.find('em').text()) + 1);
-                                obj.find('i.like').css('font-weight', 'bold');
-                                obj.find('i.like').css('color', 'red');
+                            } else {
+                                obj.find('i').toggleClass('scale');
+                                obj.find('i').toggleClass('changecolor');
                             }
                         }
                     });
@@ -289,12 +295,9 @@
                     });
                     break;
                 case 'share':
-                    if(navigator.userAgent.toLowerCase().indexOf('micromessenger') == -1)
-                    {
+                    if($.util.isAPP){
                         LEMON.share.banner();
-                    }
-                    else if($.util.isWX)
-                    {
+                    } else if($.util.isWX) {
                         $('#wxshare').show();
                         $('#shadow').show();
                     }

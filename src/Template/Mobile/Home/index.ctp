@@ -14,13 +14,12 @@
         </a>
     </div>
     <div class="h-home-menu topnav">
-                <ul class="clearfix">
-                    <li><a href="/home/cardcase"><i></i>名片夹</a></li>
-                   <li><a href="/user/home-page"><i></i>个人资料</a></li>
-                    <li><a href="/home/my_xiaomi"><i></i>小秘书</a></li>
-                    
-                </ul>
-            </div>
+        <ul class="clearfix">
+            <li><a href="/home/cardcase"><i></i>名片夹</a></li>
+            <li><a href="/user/home-page"><i></i>个人资料</a></li>
+            <li><a href="/home/my_xiaomi"><i></i>小秘书</a></li>
+        </ul>
+    </div>
     <ul class="h-home-menu navlist clearfix">
         <li><a href="/home/my-following"><i class="iconfont">&#xe60f;</i>我的关注</a></li>
         <li><a href="/home/my-collect-activity"><i class="iconfont">&#xe610;</i>我的收藏</a></li>
@@ -33,12 +32,12 @@
         <ul class="clearfix">
            <!--  <li><a href="/home/cardcase"><i class="iconfont">&#xe649;</i>名片夹</a></li>
             <li><a href="/user/home-page"><i class="iconfont">&#xe61c;</i>个人资料</a></li> -->
-            <?php if($user->level==1): ?>
-            <li>  <a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li>
-            <?php endif;?>
-            <?php if($user->level==2): ?>
-            <li><a href="/home/my-purse"><i class="iconfont">&#xe61b;</i>钱包</a></li>
-            <?php endif;?>
+            <?php if ($user->level == 1): ?>
+                <li>  <a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li>
+            <?php endif; ?>
+            <?php if ($user->level == 2): ?>
+                <li><a href="/home/my-purse"><i class="iconfont">&#xe61b;</i>钱包</a></li>
+            <?php endif; ?>
             <li><a href="javascript:QRCode();"><i class="sao-bg"></i>扫一扫</a></li>
         </ul>
     </div>
@@ -61,6 +60,12 @@
             <?php endif;?>
         </ul>
     </div>
+    <!-- 微信分享 -->
+<div class="reg-shadow" style="display: none;" id="shadow"></div>
+<div class="wxshare" id="wxshare" hidden>
+    <span></span>
+    <p></p>
+ </div>
 </div>
 <!-- <div class="submitbtn">
     <a href="/home/my_xiaomi"><img src="/mobile/images/ms.png"/></a>
@@ -84,6 +89,18 @@
         }
         else {
             $.util.alert('请在APP或是微信使用扫一扫功能');
+        }
+    }
+    
+    function shareFriends(){
+        // 分享设置
+        window.shareConfig.link = 'http://m.chinamatop.com/';
+        window.shareConfig.title = '并购帮';
+        if($.util.isAPP){
+            LEMON.share.banner();
+        } else if ($.util.isWX){
+            $('#wxshare').show();
+            $('#shadow').show();
         }
     }
 </script>
