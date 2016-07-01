@@ -501,17 +501,24 @@ class UserController extends AppController {
         \Intervention\Image\ImageManagerStatic::make($res)
                 ->resize(60,60)
                 ->save(WWW_ROOT . $file_name);
-        return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'头像上传成功', 'path'=>'/' . $file_name]);
+        $file_name = '/' . $file_name;
+        $user = $this->User->get($this->user->id);
+        $user = $this->User->patchEntity($user, ['avatar'=>$file_name]);
+        $res = $this->User->save($user);
+        if($res){
+            return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'头像上传成功', 'path'=>$file_name]);
+        } else {
+            return $this->Util->ajaxReturn(false, '头像上传失败');
+        }
     }
 
     public function getAppPic(){
         $data = $this->request->data;
-        return $this->Util->ajaxReturn(true, $data);
         $user = $this->User->get($this->user->id);
         $user = $this->User->patchEntity($user, $data);
         $res = $this->User->save($user);
         if ($res) {
-            return $this->Util->ajaxReturn(true, '头像上传成功');
+            return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'头像上传成功', 'path'=>$data['avatar']]);
         } else {
             return $this->Util->ajaxReturn(false, '头像上传失败');
         }
