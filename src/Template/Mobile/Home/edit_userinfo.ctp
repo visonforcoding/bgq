@@ -204,6 +204,8 @@
                                }
                            }
                        });
+                    } else {
+                        $.util.alert('app上传失败');
                     }
                 });
                 return false;
