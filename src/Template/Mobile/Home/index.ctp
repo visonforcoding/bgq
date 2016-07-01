@@ -53,7 +53,7 @@
     <div class="h-home-menu">
         <ul class="clearfix">
             <li><a href="/home/my-secret"><i class="iconfont">&#xe61f;</i>隐私策略</a></li>
-            <li><a id="shareTo" href="#this"><i class="iconfont">&#xe621;</i>邀请好友</a></li>
+            <li><a id="shareTo" href="javascript:shareFriends();"><i class="iconfont">&#xe621;</i>邀请好友</a></li>
             <li><a href="/home/my-message-fans"><i class="iconfont">&#xe620;</i>消息通知</a></li>
             <?php if(!$isWx): ?>
             <li><a href="/home/my-install"><i class="iconfont">&#xe619;</i>设置</a></li>
@@ -103,5 +103,15 @@
             $('#shadow').show();
         }
     }
+    
+    $('#wxshare').on('tap', function(){
+        $('#wxshare').hide();
+        $('#shadow').hide();
+    });
+    
+    $('#shadow').on('tap', function(){
+        $('#wxshare').hide();
+        $('#shadow').hide();
+    })
 </script>
 <?php $this->end('script'); ?>
