@@ -18,9 +18,9 @@
 <script type='text/html' id="card_tpl">
     <section class="internet-v-info">
         <div class="innercon">
-            <a href="/meet/view/{#user_id#}"><span class="head-img"><img src="{#user_avatar#}"/><i></i></span></a>
+            <a href="/meet/view/{#user_id#}" class="head-img"><img src="{#user_avatar#}"/><i></i></a>
             <div class="vipinfo">
-                <a href="/meet/view/{#user_id#}">
+                <a href="/meet/view/{#user_id#}" class='fl'>
                     <h3>{#user_truename#}</h3>
                     <span class="c-info">{#user_company#}  {#user_position#}</span>
                     <span class="c-info">{#user_phone#}</span>
