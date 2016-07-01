@@ -11,42 +11,6 @@
 
     <ul class="h-info-box e-info-box">
 
-        <li class="no-right-ico">
-            <span>姓名：</span>
-            <div>
-                <input type="text" value="<?= $user->truename ?>" placeholder="杨涛" />
-            </div>
-        </li>
-        <li>
-            <span>性别：</span>
-            <div>
-                <span>男</span>
-            </div>
-        </li>
-        <li class="no-right-ico">
-            <span>手机：</span>
-            <div>
-                <input type="text" value="<?= $user->phone ?>" placeholder="13854612879" />
-            </div>
-        </li>
-        <li class="no-right-ico">
-            <span>邮箱：</span>
-            <div>
-                <input type="text" value="<?= $user->email ?>" placeholder="IDG@foxmail.com" />
-            </div>
-        </li>
-        <li class="no-right-ico">
-            <span>公司：</span>
-            <div>
-                <input type="text" value="<?= $user->company ?>" placeholder="IDG资本" />
-            </div>
-        </li>
-        <li class="no-right-ico">
-            <span>职务：</span>
-            <div >
-                <input type="text" value="<?= $user->position ?>" placeholder="董事长" />
-            </div>
-        </li>
         <form method="post" action="">
             <li class="no-right-ico changeflex">
                 <b>项目经验</b>
@@ -84,12 +48,8 @@
                 dataType: 'json',
                 success: function (msg) {
                     if (typeof msg === 'object') {
-                        if (msg.status === true) {
-                            $.util.alert(msg.msg);
-                            window.location.reload();
-                        } else {
-                            $.util.alert(msg.msg);
-                        }
+                        $.util.alert(msg.msg);
+                        window.location.href = '/home/index';
                     }
                 }
             });
