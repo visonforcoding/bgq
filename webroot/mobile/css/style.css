@@ -8,7 +8,7 @@
 .loginbox .password{border-bottom:none;}
 .loginbox .username input{width:5.96rem;}
 .loginbox .username span{background:url(img/ren.png) no-repeat;width:0.25rem;height:0.29rem;background-size:cover;}
-.loginbox .password span{background: url(img/pass.png) no-repeat;width:0.27rem;height:0.34rem; background-size: cover;}
+.loginbox .password span{background: url(img/pass.png) no-repeat;width:0.27rem;height:0.34rem; background-size:contain;}
 .loginbox .password input{width:3.6rem;}
 .loginbox .password button{color:#e01a48;border: none;background-color: #fff;font-size:0.26rem;width:2.2rem;}
 .login-area .submit{display:block;width:5.6rem;margin-left:0.58rem;background:#e01a48; color:#fff;text-align: center;border-radius: 0.2rem;margin:0 auto;margin-top:0.76rem;margin-bottom:0.56rem;font-size:0.3rem;outline:none;height:0.8rem;line-height: 0.78rem;}
