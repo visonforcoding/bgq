@@ -136,9 +136,9 @@
              <ul class="h-info-box e-info-box">
         <li>
             <a href="/home/edit-card">
-                <span class="m-card">我的名片：</span>
+                <span >我的名片：</span>
                 <div class="upload-user-img">
-                    <span><input type="text"/></span>
+                    <span class="m-card"><input type="text"/></span>
                 </div>
             </a>
         </li>
