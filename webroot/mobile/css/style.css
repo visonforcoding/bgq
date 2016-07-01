@@ -122,8 +122,8 @@
 .con-bottom i.like{font-size:0.3rem;}
 .con-bottom i.collect{font-size:0.3rem;}
 .newscomment-box{border-top:1px #d2d2d2 solid;}
-.newscomment-box .comment-title{width:100%;line-height: 0.8rem;font-size:0.28rem;color:#e01a48;height:0.8rem;
-border-bottom:1px #d2d2d2 solid; padding:0 0.3rem;position:relative;}
+.newscomment-box .comment-title{width:100%;line-height: 0.8rem;font-size:0.32rem;color:#e01a48;height:0.8rem;
+border-bottom:1px #d2d2d2 solid; padding:0 0.3rem;position:relative;font-weight:500}
 .newscomment-box .comment-title span{position:absolute;right:0.3rem;color:#7a7e83;font-size:0.28rem;}
 .newscomment-box .comment-title i{font-size:0.3rem;margin-right:0.1rem; vertical-align: middle;display:inline-block;}
 .newscomment-box .items{margin: 0.3rem 0.3rem 0 0.3rem;border-bottom:1px #d2d2d2 solid;padding-bottom:0.2rem;}
