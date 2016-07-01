@@ -82,7 +82,7 @@
     <div class="dk">
         <ul>
             <?php foreach($biggieAd as $k=>$v): ?>
-            <li><a href="/meet/view/<?= $v['savant']['user_id'] ?>"><img src="<?= $v['url'] ?>"/><span><?= $v['savant']['meet_nums'] ? $v['savant']['meet_nums'] : 0; ?>人见过</span></a></li>
+            <li><a href="/meet/view/<?= $v['savant']['user_id'] ?>"><img src="<?= $v['url'] ?>"/></a></li>
             <?php endforeach; ?>
         </ul>
     </div>
