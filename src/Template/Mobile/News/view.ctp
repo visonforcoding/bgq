@@ -15,11 +15,11 @@
             <h1 class="con-des"><span><img src="<?= $news->user->avatar ? $news->user->avatar : '/mobile/images/touxiang.png'  ?>" /></span><?= $news->user->truename ?><time><?= $news->create_time->i18nFormat('yyyy-MM-dd HH:mm:ss') ?></time></h1>
             <img src="<?= $news->cover ?>"/>
             <p><?= $news->body ?></p>
-            <div class="con-bottom clearfix">
+            <div class="con-bottom clearfix pd20">
                 <span class="readnums">阅读<i><?= $this->Number->format($news->read_nums) ?></i></span>
                 <span  data-id="<?= $news->id ?>" <?php if (isset($news->praises) && !empty($news->praises)): ?> data-disable="1" class="liked"<?php endif; ?>
                        id="news-praise" >
-                    <i class="iconfont like <?php if (isset($news->praises) && !empty($news->praises)): ?>changecolor<?php endif; ?>" >&#xe616;</i><em><?= $this->Number->format($news->praise_nums) ?></em>
+                    <i class="iconfont like <?php if (isset($news->praises) && !empty($news->praises)): ?>scale<?php endif; ?>" >&#xe616;</i><em><?= $this->Number->format($news->praise_nums) ?></em>
                 </span>
             </div>
         </section>
@@ -103,9 +103,6 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
-    if($.util.isAPP) {
-        LEMON.show.shareIco();
-    }
     // 分享设置
     window.shareConfig.link = 'http://m.chinamatop.com/news/view/<?= $news->id ?>';
     window.shareConfig.title = '<?= $news->title ?>';
@@ -113,7 +110,7 @@
     share_desc && (window.shareConfig.desc = share_desc);
 </script>
 <script>
-    window.submit = true;
+    windowssubmit = true;
     $('.com-all').hide();
     // 少于五条评论隐藏显示全部, 大于一条评论隐藏还没有任何评论
     var circle = setInterval(function(){
@@ -190,8 +187,7 @@
                 var id = $(em).data('id');
                 reply_id = id;
                 $('#content').attr('placeholder', '回复 ' + $(em).data('username') + '：');
-                $('#comment_shadow').show('slow');
-                $('.shadow-info').removeClass('m-height').addClass('c-height');
+                $('#comment_shadow,.shadow-info').show('slow');
             }
             switch (em.id) {
                 case 'commit':
@@ -265,8 +261,6 @@
                     if (obj.data('disable') === '1') {
                         return false;
                     }
-                    obj.find('i').toggleClass('scale');
-                    obj.find('i').toggleClass('changecolor');
                     $.util.ajax({
                         url: '/news/news-praise',
                         data: {id:<?= $news->id ?>},
@@ -274,9 +268,8 @@
                             $.util.alert(res.msg);
                             if (res.status) {
                                 obj.find('em').html(parseInt(obj.find('em').text()) + 1);
-                            } else {
-                                obj.find('i').toggleClass('scale');
-                                obj.find('i').toggleClass('changecolor');
+                                obj.find('i.like').css('font-weight', 'bold');
+                                obj.find('i.like').css('color', 'red');
                             }
                         }
                     });
@@ -295,9 +288,12 @@
                     });
                     break;
                 case 'share':
-                    if($.util.isAPP){
+                    if(navigator.userAgent.toLowerCase().indexOf('micromessenger') == -1)
+                    {
                         LEMON.share.banner();
-                    } else if($.util.isWX) {
+                    }
+                    else if($.util.isWX)
+                    {
                         $('#wxshare').show();
                         $('#shadow').show();
                     }
