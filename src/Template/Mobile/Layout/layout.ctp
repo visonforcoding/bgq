@@ -9,11 +9,11 @@
         <title><?=$pageTitle  ?></title>
         <link rel="stylesheet" type="text/css" href="/mobile/css/common.css"/>
         <link rel="stylesheet" type="text/css" href="/mobile/css/style.css"/>
+        <script type="text/javascript" src="/mobile/js/view.js"></script>
         <?= $this->fetch('css') ?>
         <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
         <script type="text/javascript" src="/mobile/js/jsapi.js"></script>
         <script type="text/javascript" src="/mobile/js/zepto.min.js"></script>
-        <script type="text/javascript" src="/mobile/js/view.js"></script>
         <script type="text/javascript" src="/mobile/js/util.js"></script>
         <script>
             (function(){  //微信分享
@@ -135,6 +135,6 @@
 
 
         <?= $this->fetch('script') ?>
-        <div class="alert" id="alertPlan" style="display: none"><span id="alertText"></span></div>
+        <div class="alert" id="alertPlan" style="display: none;"><span id="alertText"></span></div>
     </body>
 </html>
