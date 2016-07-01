@@ -24,7 +24,7 @@
         </ul>
     </div>
 
-    <ul class="h-info-box e-info-box no-t-border">
+    <ul class="h-info-box e-info-box no-t-border hli">
 
 <!--        <li class="btop">
             <a href="">
