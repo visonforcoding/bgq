@@ -87,11 +87,20 @@
     <span class="iconfont" id='goTop'></span>
 </div>
 <!--底部四个图**end-->
+<!-- 微信分享 -->
+<div class="reg-shadow" style="display: none;" id="shadow"></div>
+<div class="wxshare" id="wxshare" hidden>
+    <span></span>
+    <p></p>
+ </div>
 <?php $this->start('script'); ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    if($.util.isAPP) {
+        LEMON.show.shareIco();
+    }
     // 分享设置
-    window.shareConfig.link = 'http://m.chinamatop.com/news/view/<?= $biggie->id ?>';
+    window.shareConfig.link = 'http://m.chinamatop.com/meet/view/<?= $biggie->id ?>';
     window.shareConfig.title = '并购帮大咖·<?= $biggie->truename ?>';
     var share_desc = '<?= isset($biggie->savant->summary)?$biggie->savant->summary:'并购帮大咖' ?>';
     share_desc && (window.shareConfig.desc = share_desc);
@@ -150,14 +159,20 @@
                 });
                 break;
             case 'share':
-                if(navigator.userAgent.toLowerCase().indexOf('micromessenger') == -1)
-                {
+                if($.util.isAPP){
                     LEMON.share.banner();
+                } else if($.util.isWX) {
+                    $('#wxshare').show();
+                    $('#shadow').show();
                 }
-                else
-                {
-                    $.util.alert('请点击右上角分享');
-                }
+                break;
+            case 'shadow':
+                $(em).hide();
+                $('#wxshare').hide();
+                break;
+            case 'wxshare':
+                $(em).hide();
+                $('#shadow').hide();
                 break;
             case 'goTop':
                 window.scrollTo(0,0);
