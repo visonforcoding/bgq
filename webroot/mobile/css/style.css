@@ -117,7 +117,8 @@
 .newscon-box img{max-width:90%;height:auto;display: block;margin:0.3rem auto;}
 .newscon-box p{width:90%;margin:0.1rem auto;line-height: 0.42rem;font-size:0.3rem;color:#9ba4ad;text-align: justify;}
 .con-bottom{float:right;line-height: 0.4rem;margin-right: 8%;color:#9ba4ad;margin-top:0.08rem;font-size:0.28rem;margin-bottom:0.2rem;}
-.con-bottom i{margin:0 0.1rem; color:#9ba4ad;vertical-align: middle;}
+.readnums{font-size:0.3rem;}
+.con-bottom i{margin:0 0.1rem; color:#9ba4ad;}
 .con-bottom i.like{font-size:0.3rem;}
 .con-bottom i.collect{font-size:0.3rem;}
 .newscomment-box{border-top:1px #d2d2d2 solid;}
@@ -126,6 +127,8 @@ border-bottom:1px #d2d2d2 solid; padding:0 0.3rem;position:relative;}
 .newscomment-box .comment-title span{position:absolute;right:0.3rem;color:#7a7e83;font-size:0.28rem;}
 .newscomment-box .comment-title i{font-size:0.3rem;margin-right:0.1rem; vertical-align: middle;display:inline-block;}
 .newscomment-box .items{margin: 0.3rem 0.3rem 0 0.3rem;border-bottom:1px #d2d2d2 solid;padding-bottom:0.2rem;}
+.entrollist{padding: 0.3rem 0.3rem 0 0.3rem;border-bottom:1px #d2d2d2 solid;padding-bottom:0.2rem;}
+.entrollist:last-of-type{border-bottom:none;}
 .newscomment-box .no-bottom{border-bottom:none;}
 .t-ablock{font-size:0;}
 .t-ablock a{display:inline-block;width:0.62rem;height:0.62rem;overflow:hidden;border-radius:0.31rem;margin:0 0.07rem;}
