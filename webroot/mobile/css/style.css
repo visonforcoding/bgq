@@ -494,7 +494,7 @@ border-radius: 50%;padding:1px;}
 /*个人主页*/
 .h-info-box{background: #fff;border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid; padding:0.1rem 0.3rem; margin-bottom:0.2rem;}
 .s-title-pass{padding:0;}
-.h-info-box li{height:0.8rem;line-height:0.8rem;border-bottom:1px #e5e5e5 solid;font-size:0.28rem;}
+.h-info-box li{line-height:0.4rem;border-bottom:1px #e5e5e5 solid;font-size:0.3rem;}
 .h-info-box li:last-of-type{border-bottom:none;}
 .s-title-pass li{padding:0.25rem 0.3rem;}
 .s-title-pass li:last-of-type{border-bottom:none;}
@@ -697,7 +697,7 @@ border-radius: 0.2rem;background: #000 url(img/apple.png) no-repeat 0.7rem cente
 .wxsao img{width:1.84rem;height:auto;display: block;margin:0.1rem auto;}
 .d-page  .wxsao p{line-height: 0.78rem;}
 .c-color h3{margin:0.26rem 0;}
-.c-color h3 em{color:#9ba4ad;display: block;width:100%}
+.c-color h3 em{color:#9ba4ad;display: block;width:100%;line-height:0.36rem;font-size:0.3rem;}
 .c-color em i{margin-right:0.3rem;}
 .wxshare{position:fixed;left:0;top:0.2rem;z-index: 1003;width:100%;height:100%; overflow:hidden;display:none;}
 .wxshare img{width:100%;height:auto;}
