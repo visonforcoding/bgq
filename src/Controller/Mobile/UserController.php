@@ -506,6 +506,7 @@ class UserController extends AppController {
 
     public function getAppPic(){
         $data = $this->request->data;
+        return $this->Util->ajaxReturn(true, $data);
         $user = $this->User->get($this->user->id);
         $user = $this->User->patchEntity($user, $data);
         $res = $this->User->save($user);
