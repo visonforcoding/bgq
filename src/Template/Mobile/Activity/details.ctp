@@ -73,12 +73,13 @@
                 <?php if (in_array($activity->id, $isApply)): ?>
                     <a>已报名(<?= $activity->apply_fee; ?>元)</a>
                 <?php else: ?>
-                    <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                    <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
                 <?php endif; ?>
             <?php else: ?>
-                <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
             <?php endif; ?>
         </div>
+        
         <!--专家推荐-->
         <?php if ($activity->savants): ?>
             <div class="expert-commond innercon">
@@ -116,10 +117,10 @@
     </div>
     <!-- 微信分享 -->
     <div class="reg-shadow" style="display: none;" id="shadow"></div>
-<div class="wxshare" id="wxshare" hidden>
-    <span></span>
-    <p></p>
- </div>
+    <div class="wxshare" id="wxshare" hidden>
+        <span></span>
+        <p></p>
+    </div>
     <div class="reg-shadow article-shadow" ontouchmove="return false;" hidden id="article_shadow"></div>
     <div class="shadow-info a-shadow a-forword article">
         <ul>
