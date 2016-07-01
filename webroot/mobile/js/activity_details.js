@@ -15,9 +15,9 @@ activity.prototype.setDet = function () {
 };
 
 activity.prototype.bindEvent = function () {
+    //ii=0;
     //$('body').on('touchstart', function(e){
     $('body').on('tap', function (e) {
-        //alert(111)
         var target = e.srcElement || e.target, em = target, i = 1;
         //$('#article_comment').html((ii++)+em.id+'~~'+em.className)
         while (em && !em.id && i <= 3) {

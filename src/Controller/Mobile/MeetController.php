@@ -445,8 +445,10 @@ class MeetController extends AppController {
      * @param int $id 行业id
      */
     public function moreIndustries($id = ''){
+        $industriesTable = \Cake\ORM\TableRegistry::get('industry');
         if($id)
         {
+            $industry = $industriesTable->get($id);
             $biggie = $this
                     ->User
                     ->find()
@@ -456,7 +458,10 @@ class MeetController extends AppController {
                     ->contain(['Subjects'])
                     ->where(['enabled'=>'1', 'level'=>'2'])
                     ->toArray();
-            $this->set('biggiejson', json_encode($biggie));
+            $this->set([
+                'biggiejson'=>json_encode($biggie),
+                'pageTitle' => $industry->name,
+            ]);
         }
         else
         {
@@ -466,12 +471,13 @@ class MeetController extends AppController {
                     ->contain(['Subjects'])
                     ->where(['enabled'=>'1', 'level'=>'2'])
                     ->toArray();
-            $this->set('biggiejson', json_encode($biggie));
+            $this->set([
+                'biggiejson'=>json_encode($biggie),
+                'pageTitle' => '行业搜索',
+            ]);
         }
-        $industriesTable = \Cake\ORM\TableRegistry::get('industry');
         $industries = $industriesTable->find()->where(['pid !='=>0])->toArray();
         $this->set([
-            'pageTitle'=>'行业搜索',
             'industries'=>$industries,
             'id' => $id,
         ]);
