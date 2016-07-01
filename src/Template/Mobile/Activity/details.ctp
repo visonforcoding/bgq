@@ -45,6 +45,7 @@
         <section class="newscomment-box joinnumber">
             <h3 class="comment-title">
                 已报名
+                <a href="/activity/allEnroll" class="allentrol">查看全部</a>
             </h3>
             <div class="items  nobottom">
                 <div class="comm-info t-ablock">
@@ -73,10 +74,10 @@
                 <?php if (in_array($activity->id, $isApply)): ?>
                     <a>已报名(<?= $activity->apply_fee; ?>元)</a>
                 <?php else: ?>
-                    <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="#/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                    <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
                 <?php endif; ?>
             <?php else: ?>
-                <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="#/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
             <?php endif; ?>
         </div>
         
