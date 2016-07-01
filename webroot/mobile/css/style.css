@@ -428,7 +428,7 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .a-form-box .m-tips span{display: block;color:#e01a48; margin-left:0.5rem;}
 .wraper .m-form-box{padding-bottom:0;margin-top:0.2rem;border-top:1px solid #c8c7cc;}
 .m-form-box li textarea{height:6rem;}
-.m-detail-box .booking-price{color:#e01a48; }
+.m-detail-box .booking-price{color:#e01a48; width:20%;}
 .m-detail-box .booking-price span{margin-top:0.2rem;}
 .wraper .m-subject{background: #fff;}
 .m-subject li{text-indent: 0;}
