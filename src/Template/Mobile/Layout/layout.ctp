@@ -9,7 +9,9 @@
         <title><?=$pageTitle  ?></title>
         <link rel="stylesheet" type="text/css" href="/mobile/css/common.css"/>
         <link rel="stylesheet" type="text/css" href="/mobile/css/style.css"/>
-        <script type="text/javascript" src="/mobile/js/view.js"></script>
+        <script type="text/javascript">
+            (function(win){var h;var docEl=document.documentElement;function setUnitA(){var clientWidth=docEl.clientWidth;if(!clientWidth){return}docEl.style.fontSize=100*(clientWidth/750)+"px"}win.addEventListener("resize",function(){clearTimeout(h);h=setTimeout(setUnitA,300)},false);win.addEventListener("pageshow",function(e){if(e.persisted){clearTimeout(h);h=setTimeout(setUnitA,300)}},false);setUnitA()})(window);
+        </script>
         <?= $this->fetch('css') ?>
         <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
         <script type="text/javascript" src="/mobile/js/jsapi.js"></script>
