@@ -42,7 +42,9 @@
         <li class="conr"><a class="alink mr" href="/user/home-page/<?= $biggie->id ?>" class="tohome"><i class="iconfont">&#xe60d;</i>个人主页</a></li>
     </ul>
     <div class="m-swiper-items">
-        <h3 class="s-eidt"><a href="#this">编辑话题</a></h3>
+        <?php if($self):?>
+        <h3 class="s-eidt"><a href="/meet/my-subjects">编辑话题</a></h3>
+        <?php endif;?>
         <ul id="subject">
             <?php foreach ($biggie->subjects as $v): ?>
             <li>
@@ -65,7 +67,9 @@
         </ul>
     </div>
     <section class="a-detail newscomment-box m-about-expert">
-        <h3 class="comment-title">专家简介<a href="#this" class="fr color-items">编辑</a></h3>
+        <?php if($self):?>
+        <h3 class="comment-title">专家简介<a href="/meet/edit-summary" class="fr color-items">编辑</a></h3>
+        <?php endif;?>
         <a href="meet-one-detail.html">
             <p>
                 <?php if(!empty($biggie->savant->summary)): ?>

@@ -134,9 +134,10 @@ class MeetController extends AppController {
             }
         }
         $biggie = $this->User->get($id, ['contain' => ['Savant', 'Subjects','RecoUsers','RecoUsers.Users']]);
-        $this->set('isCollect', $isCollect);
         $this->set([
             'biggie' => $biggie,
+            'isCollect'=>$isCollect,
+            'self'=>$self,
             'pageTitle'=>$biggie->truename.'的专家主页'
         ]);
     }
@@ -160,27 +161,74 @@ class MeetController extends AppController {
     }
 
     /**
-     * 话题 添加 与 编辑
+     * 话题 添加 与 编辑 与删除
      */
     public function subject($id = null) {
         $SubjectTable = \Cake\ORM\TableRegistry::get('meet_subject');
         if ($this->request->is('post')) {
-            $subject = $SubjectTable->newEntity();
-            $subject = $SubjectTable->patchEntity($subject, $this->request->data());
+            if(empty($id)){
+                $subject = $SubjectTable->newEntity();
+                $subject = $SubjectTable->patchEntity($subject, $this->request->data());
+            }else{
+                $subject = $SubjectTable->get($id);
+                $subject = $SubjectTable->patchEntity($subject, $this->request->data());
+            }
             $subject->user_id = $this->user->id;
             if ($SubjectTable->save($subject)) {
-                return $this->Util->ajaxReturn(true, '添加成功');
+                return $this->Util->ajaxReturn(true, '保存成功');
             } else {
-                return $this->Util->ajaxReturn(false, '添加失败');
+                return $this->Util->ajaxReturn(false, '保存失败');
             }
         }
         if($id){
             $subject = $SubjectTable->get($id);
             $this->set('subject',$subject);
         }
+        $this->set([
+            'pageTitle'=>'话题编辑'
+        ]);
     }
     
     
+    /**
+     * 专家简介编辑
+     */
+    public function editSummary(){
+        if($this->request->is('post')){
+            $this->handCheckLogin();
+            $user_id =  $this->user->id;
+            $SavantTable = \Cake\ORM\TableRegistry::get('Savant');
+            $savant = $SavantTable->findByUser_id($user_id)->first();
+            if($savant){
+                $savant->summary = $this->request->data('summary');
+                if($SavantTable->save($savant)){
+                    return $this->Util->ajaxReturn(true,'保存成功');
+                }
+            }
+            return $this->Util->ajaxReturn(false, '保存失败');
+        }
+        $this->set([
+            'pageTitle'=>'简介修改'
+        ]);
+    }
+    
+    /**
+     * 话题列表
+     */
+    public function mySubjects(){
+        $this->handCheckLogin();
+        $user_id = $this->user->id;
+        $SubjectTable = \Cake\ORM\TableRegistry::get('MeetSubject');
+        $subjects = $SubjectTable->find()->where(['user_id'=>$user_id])->orderDesc('create_time')->toArray();
+        $this->set([
+            'pageTitle'=>'我的话题',
+            'subjects'=>$subjects
+        ]);
+    }
+
+
+
+
     /***
      * 话题预约页
      */
