@@ -15,7 +15,7 @@
                 </div>
             </div>
            
-    <div class="h20 nobottom"></div>
+    <div class="h2"></div>
     <div class="inner my-home-menu" >
         <a href="javascript:void(0);" class='active' id="noSend">未回赠</a>
         <a href="javascript:void(0);" id="send">已回赠</a>
