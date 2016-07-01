@@ -11,7 +11,7 @@
 .loginbox .password span{background: url(img/pass.png) no-repeat;width:0.27rem;height:0.34rem; background-size: cover;}
 .loginbox .password input{width:3.6rem;}
 .loginbox .password button{color:#e01a48;border: none;background-color: #fff;font-size:0.26rem;width:2.2rem;}
-.login-area .submit{display:block;width:5.6rem;margin-left:0.58rem;background:#e01a48; padding:0.25rem 0;color:#fff;text-align: center;border-radius: 0.2rem;margin:0 auto;margin-top:0.76rem;margin-bottom:0.56rem;font-size:0.3rem;outline:none;}
+.login-area .submit{display:block;width:5.6rem;margin-left:0.58rem;background:#e01a48; color:#fff;text-align: center;border-radius: 0.2rem;margin:0 auto;margin-top:0.76rem;margin-bottom:0.56rem;font-size:0.3rem;outline:none;height:0.8rem;line-height: 0.78rem;}
 .tips{position:absolute;left:50%;top:50%; margin-left:-2.5rem;margin-top:-1.25rem;border-radius:0.05rem;color:#333;border:1px #9ba4ad solid;width:5rem;height:2.5rem;background: red;padding:0.1rem;overflow:hidden; background: #fff;}
 .tips p{text-align: center;margin:0.4rem 0; font-size:0.28rem;}
 .tips .closed{ display: block;padding:0.1rem;width:35%;background:#d62357;color:#fff;border-radius: 0.1rem; text-align: center;margin:0 auto;margin-top:0.8rem;}
