@@ -80,7 +80,7 @@
     <!--分类--end-->
     
     <div class="dk">
-        <ul>
+        <ul id='items'>
             <?php foreach($biggieAd as $k=>$v): ?>
             <li><a href="/meet/view/<?= $v['savant']['user_id'] ?>"><img src="<?= $v['url'] ?>"/></a></li>
             <?php endforeach; ?>
@@ -159,6 +159,18 @@
     // setTimeout(function(){
     //     var iconLoop = new simpleScroll({viewDom:$('#icons'),  moveDom:$('#allsort'), right:$('#toRight'), fix:25});
     // },1000);
+ var sub = null;
+            setTimeout(function(){
+                sub = $.util.loop({
+                        min : 3,
+                        moveDom: $('#items'),
+                        moveChild: $('#items li'),
+                        lockScrY: true,
+                        loopScroll: true,
+//                      autoTime:3000,
+                        
+                    });
+           },0)
     
     $('.s-con').click(function () {
         $('.search').focus();
