@@ -271,6 +271,7 @@
                             if (res.status) {
                                 obj.find('em').html(parseInt(obj.find('em').text()) + 1);
                             } else {
+                                $.util.alert(msg.msg);
                                 obj.find('i.like').toggleClass('changecolor');
                                 obj.find('i.like').toggleClass('changecolor');
                             }

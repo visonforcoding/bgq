@@ -187,13 +187,25 @@
 
 <script>
     $(function () {
-
         $('#upload_pic').on('touchstart',function(){
             if($.util.isAPP){
                 LEMON.event.uploadPhoto('{"dir":"user/avatar","zip":"1"}',function(data){
                     var data = JSON.parse(data);
                    if(data.status===true){
                        $('input[name="avatar"]').val(data.thumbpath);
+                       $.util.ajax({
+                           url: '/user/getAppPic',
+                           data: '{pic:'+ data.thumbpath +'}',
+                           func: function(msg){
+                               alert(msg.msg);
+                               if(msg.status){
+                                   
+                                   $.util.alert(msg.msg);
+                               } else {
+                                   $.util.alert(msg.msg);
+                               }
+                           }
+                       });
                     }
                 });
                 return false;
@@ -203,6 +215,7 @@
                         url: "/user/getWxPic/" + id,
                         func: function (msg) {
                             $.util.alert(msg.msg);
+                            $.util.alert(msg.path);
                             if(msg.status===true){
                                 $('input[name="avatar"]').val(msg.path);
                             }

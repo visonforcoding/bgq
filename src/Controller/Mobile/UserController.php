@@ -504,4 +504,8 @@ class UserController extends AppController {
         return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'头像上传成功', 'path'=>'/' . $file_name]);
     }
 
+    public function getAppPic(){
+        $data = $this->request->data;
+        return $this->Util->ajaxReturn(true, $data);
+    }
 }
