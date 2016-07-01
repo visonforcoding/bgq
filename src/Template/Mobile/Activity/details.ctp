@@ -45,10 +45,10 @@
         <section class="newscomment-box joinnumber">
             <h3 class="comment-title">
                 已报名
-                <a href="/activity/allEnroll" class="allentrol">查看全部</a>
+                <a href="/activity/allEnroll/<?= $activity->id ?>" class="allentrol" hidden>查看全部</a>
             </h3>
             <div class="items  nobottom">
-                <div class="comm-info t-ablock">
+                <div class="comm-info t-ablock" id="allEnroll">
                     <?php if ($userApply): ?>
                         <?php foreach ($userApply as $k => $v): ?>
                             <a href='/user/home-page/<?= $v['id'] ?>'><img src="<?= $v['avatar'] ? $v['avatar'] : '/mobile/images/touxiang.png'; ?>"/></a>
@@ -208,6 +208,14 @@
         return d;
     });
     
+    // 报名的人数多余9个显示查看更多
+    var showMoreEnroll = setInterval(function(){
+        if($('#allEnroll').children('a').length > 9){
+            $('.allentrol').show();
+            clearInterval(showMoreEnroll);
+        }
+    }, 100);
+    
     // 少于五条评论隐藏显示全部，大于一条评论隐藏还没有评论
     var circle = setInterval(function(){
         if($('#comment').children('.items').length >= 5){
@@ -217,7 +225,7 @@
         if($('#comment').children('.items').length > 0) {
             $('#noComment').hide();
         }
-    },100);
+    }, 100);
 
     $(window).on('hashchange', function () {
         if (location.hash == '#allcoment')

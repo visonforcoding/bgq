@@ -733,6 +733,17 @@ class ActivityController extends AppController {
         $this->set('pageTitle', '活动签到');
     }
     
+    /**
+     * 查看全部报名的人
+     * @param int $id 活动id
+     */
+    public function allEnroll($id){
+        $activityApplyTable = \Cake\ORM\TableRegistry::get('activityapply');
+        $activityApplyTable->find()->where(['activity_id' => $id])->toArray();
+        $activity = $this->Activity->get($id);
+        $this->set('pageTitle', $activity->title);
+    }
+    
     public function test(){
         $a = $this->request->env('HTTP_HOST');
         debug($a);die;
