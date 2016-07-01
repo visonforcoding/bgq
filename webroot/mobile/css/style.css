@@ -560,7 +560,7 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .vipinfo .mark .meetnum{float:right;}
 .my-search h3{height:0.8rem;background: #fff;line-height: 0.8rem;font-size:0.28rem;text-indent: 0.3rem;}
 .my-home-menu{overflow:hidden;/*display: flex; justify-content: center;align-items: center;*/font-size:0;}
-.my-home-menu a,.my-home-menu span{width:50%;border:1px #e01a48 solid;line-height: 0.52rem;text-align: center;color:#e01a48;display:inline-block;margin:0.2rem 0;font-size:0.28rem;}
+.my-home-menu a,.my-home-menu span{width:50%;border:1px #e01a48 solid;line-height: 0.58rem;text-align: center;color:#e01a48;display:inline-block;margin:0.2rem 0;font-size:0.28rem;height:0.6rem;}
 .my-home-menu a:nth-of-type(1),.my-home-menu span:nth-of-type(1){border-radius: 0.1rem 0 0 0.1rem;}
 .my-home-menu a:last-of-type,.my-home-menu span:last-of-type{border-radius: 0 0.1rem 0.1rem 0;}
 .my-home-menu a.active,.my-home-menu span.active{background: #e01a48;color:#fff;}
