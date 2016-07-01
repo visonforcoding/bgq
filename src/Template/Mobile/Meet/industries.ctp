@@ -24,7 +24,7 @@
 
         <div class="wraper newswraper a-wraper">
             <div class="m-items mt20">
-<div class="itemsbox">
+                <div class="itemsbox">
                     
                 
                     <div><a href="/meet/moewIndustries/4"><i class="iconfont">&#xe640;</i><span>医疗健康</span></a></div>
