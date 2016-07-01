@@ -73,10 +73,10 @@
                 <?php if (in_array($activity->id, $isApply)): ?>
                     <a>已报名(<?= $activity->apply_fee; ?>元)</a>
                 <?php else: ?>
-                    <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                    <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="#/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
                 <?php endif; ?>
             <?php else: ?>
-                <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                <a id="enroll" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="#/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
             <?php endif; ?>
         </div>
         
