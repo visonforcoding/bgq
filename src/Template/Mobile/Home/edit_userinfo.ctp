@@ -113,7 +113,10 @@
                 </div>
             </a>
         </li>
-        <li>
+       
+        </ul>
+             <ul class="h-info-box e-info-box">
+                 <li>
             <a href="/home/edit-education">
                 <span>教育经历：</span>
                 <div>
@@ -129,6 +132,8 @@
                 </div>
             </a>
         </li>
+         </ul>
+             <ul class="h-info-box e-info-box">
         <li>
             <a href="/home/edit-card">
                 <span class="m-card">我的名片：</span>
@@ -147,7 +152,7 @@
             </li>
     </ul>
     </form>
-    <a id="submit" href="javascript:void(0);" class="nextstep">完成</a>
+    <a id="submit" href="javascript:void(0);" class="f-bottom">完成</a>
 </div>
 <div class='reg-shadow' style="display: none;"></div>
 <div class="shadow-info" style="display: none;">
