@@ -25,7 +25,7 @@ a,button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);}
 .clearfix:after { content:"."; display:block; clear:both; visibility:hidden; font-size:0; line-height:0; height:0;}
 .clearfix { *zoom:1; /* for IE6 7 */ }
 .inner{width:90%;margin:0 auto;position:relative;}
-.wraper{position:relative;overflow:hidden;}
+.wraper{/*position:relative;overflow:hidden;*/}
 .fixedwraper{position:relative;/*padding-top:0.8rem;*/}
 .innerwaper{padding-left: 0.3rem;padding-right: 0.3rem;width:100%;}
 .my-wraper{padding-top:1.6rem;}
