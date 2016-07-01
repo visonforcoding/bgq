@@ -187,7 +187,8 @@
                 var id = $(em).data('id');
                 reply_id = id;
                 $('#content').attr('placeholder', '回复 ' + $(em).data('username') + '：');
-                $('#comment_shadow,.shadow-info').show('slow');
+                $('#comment_shadow').show('slow');
+                $('.shadow-info').removeClass('m-height').addClass('c-height');
             }
             switch (em.id) {
                 case 'commit':
