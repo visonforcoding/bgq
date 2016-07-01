@@ -131,7 +131,7 @@
         </li>
         <li>
             <a href="/home/edit-card">
-                <span>我的名片：</span>
+                <span class="m-card">我的名片：</span>
                 <div class="upload-user-img">
                     <span><input type="text"/></span>
                 </div>
