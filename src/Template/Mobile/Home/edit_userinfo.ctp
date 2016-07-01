@@ -14,9 +14,8 @@
     </div>-->
 </header>
 <div class="wraper m-fixed-bottom">
+    <form method="post">
     <ul class="h-info-box e-info-box">
-        <form method="post">
-
         <li>
             <a href="javascript:void(0)">
                 <span>头像：</span>
@@ -49,6 +48,21 @@
                 </div>
             </a>
         </li>
+        <li>
+            <a href="javascript:void(0)">
+                <span>性别：</span>
+                <div>
+                    <span>
+                    <select name="gender" class='checkedsex'>
+                        <option value="1" <?php if($user->gender==1):?>selected="true"<?php endif; ?>>男</option>
+                        <option value="2" <?php if($user->gender==2):?>selected="false"<?php endif; ?>>女</option>
+                    </select>
+                    </span>
+                </div>
+            </a>
+        </li>
+    </ul>
+    <ul class="h-info-box e-info-box">
         <li class="no-right-ico">
             <a href="javascript:void(0)">
                 <span>联系电话：</span>
@@ -65,19 +79,8 @@
                 </div>
             </a>
         </li>
-        <li>
-            <a href="javascript:void(0)">
-                <span>性别：</span>
-                <div>
-                    <span>
-                    <select name="gender" class='checkedsex'>
-                        <option value="1" <?php if($user->gender==1):?>selected="true"<?php endif; ?>>男</option>
-                        <option value="2" <?php if($user->gender==2):?>selected="false"<?php endif; ?>>女</option>
-                    </select>
-                    </span>
-                </div>
-            </a>
-        </li>
+    </ul>
+    <ul class="h-info-box e-info-box">
         <li>
             <a href="javascript:void(0)">
                 <span>行业：</span>
@@ -90,7 +93,7 @@
             <a href="javascript:void(0)">
                 <span>所在地：</span>
                 <div>
-                    <span>深圳</span>
+                    <span><?= $user->city ?></span>
                 </div>
             </a>
         </li>
@@ -142,8 +145,8 @@
                     </div>
                 </a>
             </li>
-        </form>
     </ul>
+    </form>
     <a id="submit" href="javascript:void(0);" class="nextstep">完成</a>
 </div>
 <div class='reg-shadow' style="display: none;"></div>
