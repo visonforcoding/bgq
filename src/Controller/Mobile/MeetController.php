@@ -257,6 +257,12 @@ class MeetController extends AppController {
      * 话题预约页
      */
     public function book($id = null){
+        $self = false;
+        if($this->user){
+            if($this->user->id==$id){
+                $self = true;
+            }
+        }
         $SubjectTable = \Cake\ORM\TableRegistry::get('MeetSubject');
         $subject = $SubjectTable->find()
                 ->contain(['User'=>function($q){
@@ -270,6 +276,9 @@ class MeetController extends AppController {
             $data['summary'] = $this->request->data('summary');
             $data['user_id']  = $this->user->id;
             $data['savant_id']  = $subject->user->id;
+            if($this->user->id==$subject->user->id){
+                return $this->Util->ajaxReturn(false,'不可约见自己');
+            }
             $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
             $book = $BookTable->newEntity($data);
             if($BookTable->save($book)){
@@ -284,11 +293,26 @@ class MeetController extends AppController {
             
         }
         $this->set([
-            'pageTitle'=>'话题预约'
+            'pageTitle'=>'话题预约',
+            'self'=>$self
         ]);
         $this->set(compact('subject'));
     }
     
+    
+    /**
+     * 推荐的查看更多
+     */
+    public function viewMoreReco($id=null){
+        $RecomTable = \Cake\ORM\TableRegistry::get('SavantReco');
+        
+        
+        $this->set([
+            'pageTitle'=>'查看更多'
+        ]);
+    }
+
+
     /**
      * 预定成功页
      */
