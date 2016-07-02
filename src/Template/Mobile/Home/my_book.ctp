@@ -25,7 +25,10 @@
         <div class="innercon">
             <span class="head-img"><img src="{#user_logo#}"/><i></i></span>
             <div class="vipinfo my-meet-info">
-                <h3>{#truename#}<span class="timenode fl">ffff</span><span class="meetnum">{#meet_nums#}</span></h3>
+                <h3>{#truename#}
+                    <span class="meetnum ml20">{#meet_nums#}</span>
+                    <span style="font-size: 0.2rem">{#time#}</span>
+                </h3>
                 <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
                 <div class="mark">
                     <span class='color-items'>约见话题：{#title#}</span>
@@ -64,7 +67,7 @@
                 d.company = d.subject.user.company?d.subject.user.company:d.user.company;
                 d.position = d.subject.user.position?d.subject.user.position:d.user.position;
                 d.title = d.subject.title;
-
+                d.time = d.create_time
                 return d;
             });
         }
