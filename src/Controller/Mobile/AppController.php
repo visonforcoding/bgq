@@ -158,13 +158,14 @@ class AppController extends Controller {
 //            $user = $this->User->findByUnion_idAndEnabled($union_id,1)->first();
 //        }elseif (isset($res->openid)) {
                     $open_id = $res->openid;
-                    $user = $this->User->findByWx_openidAndEnabled($open_id, 1)->first();
+                    $UserTable = \Cake\ORM\TableRegistry::get('User');
+                    $user = $UserTable->findByWx_openidAndEnabled($open_id, 1)->first();
 //        }
                     if ($user) {
                         //通过微信 获取到 在平台上有绑定的用户  就默认登录
                         if (empty($user->union_id) && isset($res->unionid)) {
                             $user->union_id = $res->unionid;
-                            $this->User->save($user);
+                            $UserTable->save($user);
                         }
                         $this->request->session()->write('User.mobile', $user);
                     }
