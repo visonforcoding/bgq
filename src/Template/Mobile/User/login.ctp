@@ -65,7 +65,9 @@
                     }, 1000);
                 }else{
                     if(res.status===false&&res.errCode===1){
-                        window.confirm(res.msg);
+                        if(window.confirm(res.msg)){
+                            location.href = '/user/register-vphone?rephone='+phone;
+                        };
                     }
                 }
             }, 'json');
