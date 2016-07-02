@@ -206,7 +206,7 @@ class WxController extends AppController {
     
     public function wxUploadPic($id){
         $path = $this->Wx->wxUpload($id);  
-        return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'头像上传成功', 'path'=>$path]);
+        return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'上传成功', 'path'=>$path]);
     }
     
     

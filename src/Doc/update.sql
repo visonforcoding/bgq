@@ -260,3 +260,15 @@ ALTER TABLE activity add thumb VARCHAR(200) COMMENT '缩略图';
 ALTER TABLE `meet_subject`
 	CHANGE COLUMN `invite_time` `invite_time` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '约见时间' AFTER `type`,
 	CHANGE COLUMN `address` `address` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '地址' AFTER `price`;
+
+#增加表字段 7/2
+CREATE TABLE `profiletag` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(50) NOT NULL DEFAULT '0' COMMENT '个人标签',
+	PRIMARY KEY (`id`)
+)
+COMMENT='个人标签'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=6
+;
