@@ -45,12 +45,12 @@
                 $.util.wxUploadPic(function (id) {
                     $.util.ajax({
                         url: "/wx/wxUploadPic/" + id + '?dir=user/mp',
-                        func: function (msg) {
-                            $.util.alert(msg.msg);
+                        func: function (res) {
+                            $.util.alert(res.msg);
                             if (msg.status === true) {
-                                $('#img').attr('src', data.path);
+                                $('#img').attr('src', res.path);
                                 $.util.ajax({
-                                    data: {card_path: data.path},
+                                    data: {card_path: res.path},
                                     func: function (msg) {
                                         if (msg.status) {
                                             $.util.alert(msg.msg);
