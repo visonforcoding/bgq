@@ -212,6 +212,11 @@ class UserController extends AppController {
             unset($data['id']);
             unset($data['oper']);
             $entity = $this->User->patchEntity($entity, $data);
+            if(isset($data['savant_status'])){
+                if($data['savant_status']=='3'){
+                    $entity->level = 2;
+                }
+            }
             if($this->User->save($entity)){
                 $this->Util->ajaxReturn(true,'修改成功');
             }else{

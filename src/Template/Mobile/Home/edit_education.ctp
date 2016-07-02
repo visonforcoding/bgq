@@ -16,8 +16,9 @@
         <form action="" method="post">
         <div class="education-title">
             <h3>
-                教育经历<i>2</i></span>
-                <a href="javascript:void(0);" class="deletbtn">删除</a>
+                教育经历<i></i></span>
+                <a href="javascript:void(0);" class="deletbtn ml20">删除</a>
+                <a href="javascript:void(0);" class="savetbtn">保存</a>
             </h3>
         </div>
         <ul class="h-info-box e-info-box">
@@ -61,13 +62,16 @@
         </ul>
         </form>
     </div>
+    <?php $k=0?>
     <?php foreach($educations as $education): ?>
+    <?php $k++;?>
     <div class="education-items">
         <form action="" method="post">
         <div class="education-title">
             <h3>
-                教育经历<i>2</i></span>
+                教育经历<i><?=$k?></i></span>
                 <a href="javascript:void(0);" data-id="<?=$education->id?>" class="deletbtn">删除</a>
+                <a href="javascript:void(0);" data-id="<?=$education->id?>" class="savebtn">保存</a>
             </h3>
         </div>
         <ul class="h-info-box e-info-box">
@@ -113,59 +117,10 @@
         </form>
     </div>
     <?php endforeach;?>
-    <div class="education-items">
-        <form action="" method="post">
-        <div class="education-title">
-            <h3>
-                教育经历<i>2</i></span>
-                <a href="javascript:void(0);" class="deletbtn">删除</a>
-            </h3>
-        </div>
-        <ul class="h-info-box e-info-box">
-            <li  class="no-right-ico">
-                <span>学校：</span>
-                <div><input name="school" type="text" /></div>
-            </li>
-            <li  class="no-right-ico">
-                <span>院系/专业：</span>
-                <div>
-                    <input name="major" type="text"  />
-                </div>
-            </li>
-            <li class="no-right-ico">
-                <span>学历：</span>
-                <div>
-                    <select name="education" class="education">
-                        <option value="1">高中</option>
-                        <option value="2">中专</option>
-                        <option value="3">大专</option>
-                        <option value="4">本科</option>
-                        <option value="5">研究生</option>
-                        <option value="6">硕士</option>
-                        <option value="7">博士</option>
-                    </select>
-                </div>
-            </li>
-            <li>
-                <span>开始日期：</span>
-                <div>
-                    <input type="text" name="start_date" class="checktime" readonly="readonly" />
-                </div>
-            </li>
-            <li class="no-b-border">
-                <span>结束日期：</span>
-                <div>
-                    <input type="text" name="end_date" readonly="readonly" class="checktime"/>
-                </div>
-            </li>
-
-        </ul>
-        </form>
-    </div>
     <div class="add-subject nobottom">
         <span id="addwork">添加教育经历</span>
     </div>
-    <a href="javascript:void(0);" id="submit" class="nextstep">完成</a>
+    <!--<a href="javascript:void(0);" id="submit" class="nextstep">完成</a>-->
 </div>
 <div class='reg-shadow'  style="display: none;"></div>
 <script type="text/javascript">
@@ -198,8 +153,6 @@
             return "请选择学历";
         },
         rows: 3
-
-
     });
 //性别选择
     $('.checkedsex').mobiscroll().select({
@@ -225,10 +178,15 @@
             }
         });
     });
-    $('#submit').on('tap',function(){
-        var form  = $(this).prevAll('.education-items')[0];
+    $('.savebtn').on('tap',function(){
+        var data_id =  $(this).data('id');
+        var form  = $(this);
+        var data = $(form).find('form').serialize();
+        if(!data_id){
+            data['id'] = data_id;
+        }
         $.util.ajax({
-            data : $(form).find('form').serialize(),
+            data : data,
             func : function(res){
                 $.util.alert(res.msg);
                 if(res.status){
