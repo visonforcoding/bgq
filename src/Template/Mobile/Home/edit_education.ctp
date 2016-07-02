@@ -17,7 +17,7 @@
         <div class="education-title">
             <h3>
                 教育经历<i></i></span>
-                <a onclick="delete(this);" class="deletbtn ml20">删除</a>
+                <a onclick="deleteEd(this);" class="deletbtn ml20">删除</a>
                 <a onclick="checkForm(this);" class="savetbtn">保存</a>
             </h3>
         </div>
@@ -70,7 +70,7 @@
         <div class="education-title">
             <h3>
                 教育经历<i><?=$k?></i></span>
-                <a onclick="delete(this);" data-id="<?=$education->id?>" class="deletbtn ml20">删除</a>
+                <a onclick="deleteEd(this);" data-id="<?=$education->id?>" class="deletbtn ml20">删除</a>
                 <a onclick="checkForm(this);" data-id="<?=$education->id?>" class="savebtn">保存</a>
             </h3>
         </div>
@@ -131,7 +131,7 @@
         $('.wraper .education-items').eq(0).clone(true,true).insertBefore('.add-subject').show();
     });
     
-    function delete() {
+    function deleteEd() {
         if(window.confirm('您确认要删除这段教育经历吗?')){
             //do delete
         }
