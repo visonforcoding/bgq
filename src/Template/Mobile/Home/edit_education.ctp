@@ -13,7 +13,7 @@
 <iframe id="submitAction" name="submitAction" style="display: none"></iframe>
 <div class="m-wraper edit-education-bottom wraper">
     <div class="education-items" style="display: none">
-        <form action="" method="post">
+        <form action="" method="post" target="submitAction">
         <div class="education-title">
             <h3>
                 教育经历<i></i></span>
@@ -66,7 +66,7 @@
     <?php foreach($educations as $education): ?>
     <?php $k++;?>
     <div class="education-items">
-        <form action="" method="post">
+        <form action="" method="post" target="submitAction">
         <div class="education-title">
             <h3>
                 教育经历<i><?=$k?></i></span>
