@@ -89,11 +89,11 @@
                 </div>
             </a>
         </li>
-        <li>
+        <li class="no-right-ico">
             <a href="javascript:void(0)">
                 <span>所在地：</span>
                 <div>
-                    <span><?= $user->city ?></span>
+                    <input name="city" type="text"  value="<?=$user->city?>" />
                 </div>
             </a>
         </li>

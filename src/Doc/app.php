@@ -1,4 +1,5 @@
 <?php
+
 return [
     /**
      * Debug Level:
@@ -10,7 +11,6 @@ return [
      * true: Errors and warnings shown.
      */
     'debug' => filter_var(env('DEBUG', true), FILTER_VALIDATE_BOOLEAN),
-
     /**
      * Configure basic information about the application.
      *
@@ -38,7 +38,7 @@ return [
     'App' => [
         'namespace' => 'App',
         'encoding' => env('APP_ENCODING', 'UTF-8'),
-        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
+        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'zh_CN'),
         'base' => false,
         'dir' => 'src',
         'webroot' => 'webroot',
@@ -54,7 +54,6 @@ return [
             'locales' => [APP . 'Locale' . DS],
         ],
     ],
-
     /**
      * Security and encryption configuration
      *
@@ -65,7 +64,6 @@ return [
     'Security' => [
         'salt' => env('SECURITY_SALT', '6f9e0cc5b57a945d8bdd7ae66ca3007f2fef1ff7810e2af52506c6f0e5e3ffec'),
     ],
-
     /**
      * Apply timestamps with the last modified time to static assets (js, css, images).
      * Will append a querystring parameter containing the time the file was modified.
@@ -75,9 +73,8 @@ return [
      * enable timestamping regardless of debug value.
      */
     'Asset' => [
-        // 'timestamp' => true,
+    // 'timestamp' => true,
     ],
-
     /**
      * Configure the cache adapters.
      */
@@ -87,7 +84,6 @@ return [
             'path' => CACHE,
             'url' => env('CACHE_DEFAULT_URL', null),
         ],
-
         /**
          * Configure the cache used for general framework caching.
          * Translation cache files are stored with this configuration.
@@ -101,7 +97,6 @@ return [
             'duration' => '+2 minutes',
             'url' => env('CACHE_CAKECORE_URL', null),
         ],
-
         /**
          * Configure the cache for model and datasource caches. This cache
          * configuration is used to store schema descriptions, and table listings
@@ -117,7 +112,6 @@ return [
             'url' => env('CACHE_CAKEMODEL_URL', null),
         ],
     ],
-
     /**
      * Configure the Error and Exception handlers used by your application.
      *
@@ -154,7 +148,6 @@ return [
         'log' => true,
         'trace' => true,
     ],
-
     /**
      * Email configuration.
      *
@@ -176,19 +169,18 @@ return [
      */
     'EmailTransport' => [
         'default' => [
-            'className' => 'Mail',
+            'className' => 'SMTP',
             // The following keys are used in SMTP transports
-            'host' => 'mail.qq.com',
+            'host' => 'smtp.exmail.qq.com',
             'port' => 25,
             'timeout' => 30,
-            'username' => 'user',
-            'password' => 'secret',
+            'username' => 'evelyn@smartlemon.cn',
+            'password' => 'Chenlu123',
             'client' => null,
             'tls' => null,
             'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
         ],
     ],
-
     /**
      * Email delivery profiles
      *
@@ -201,12 +193,11 @@ return [
     'Email' => [
         'default' => [
             'transport' => 'default',
-            'from' => 'you@localhost',
-            //'charset' => 'utf-8',
-            //'headerCharset' => 'utf-8',
+            'from' => ['evelyn@smartlemon.cn'=>'并购圈'],
+        //'charset' => 'utf-8',
+        //'headerCharset' => 'utf-8',
         ],
     ],
-
     /**
      * Connection information used by the ORM to connect
      * to your application's datastores.
@@ -233,7 +224,6 @@ return [
             'flags' => [],
             'cacheMetadata' => true,
             'log' => false,
-
             /**
              * Set identifier quoting to true if you are using reserved words or
              * special characters in your table or column names. Enabling this
@@ -243,7 +233,6 @@ return [
              * manipulated before being executed.
              */
             'quoteIdentifiers' => false,
-
             /**
              * During development, if using MySQL < 5.6, uncommenting the
              * following line could boost the speed at which schema metadata is
@@ -252,10 +241,8 @@ return [
              * which is the recommended value in production environments
              */
             //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
-            
             'url' => env('DATABASE_URL', null),
         ],
-
         /**
          * The test connection is used during the test suite.
          */
@@ -277,7 +264,6 @@ return [
             'url' => env('DATABASE_TEST_URL', null),
         ],
     ],
-
     /**
      * Configures logging options
      */
@@ -297,7 +283,6 @@ return [
             'url' => env('LOG_ERROR_URL', null),
         ],
     ],
-
     /**
      * Session configuration.
      *
@@ -338,5 +323,11 @@ return [
      */
     'Session' => [
         'defaults' => 'php',
+        'timeout' => 1440,  //服务器的过期时间
+        'ini' => [
+            // Invalidate the cookie after 30 minutes without visiting
+            // any page on the site.
+            'session.cookie_lifetime' => 86400
+        ]
     ],
 ];

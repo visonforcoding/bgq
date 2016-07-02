@@ -14,11 +14,74 @@
             <span class="orgname">个人标签（最多5个）</span>
         </div>
         <div class="orgmark">
-            <a href="#this">创业</a><a href="#this">产品</a><a href="#this">研发</a><a href="#this">运营</a>
-            <a href="#this">市场</a><a href="#this" class='color-items'>添加</a>
+               <?php  if($mark_arr):?>
+                            <?php foreach ($profiletags as  $key=> $tag): ?>
+                                <?php $flag = false;?>
+                                    <?php foreach($mark_arr as $mark):?>
+                                            <?php if($tag->name==$mark): ?>
+                                                    <a href="#this" data-val="<?= $tag->name ?>" class="agency-item active"><?= $tag->name ?></a>
+                                                    <?php $flag =true; ?>
+                                            <?php endif;?>
+                                      <?php endforeach;?>
+                                 <?php if(!$flag): ?>
+                                    <a href="#this" data-val="<?= $tag->name ?>" class="agency-item"><?= $tag->name ?></a>
+                                   <?php endif;?>
+                            <?php endforeach; ?>
+                    <?php else:?>
+                            <?php foreach ($profiletags as $tag): ?>
+                                <a href="#this" data-val="<?= $tag->name ?>" class="agency-item"><?= $tag->name ?></a>
+                            <?php endforeach; ?>
+                <?php endif;?>
+            <a href="#this" class='color-items'>
+                添加
+                <!--<input type="text" name="extra" />-->
+            </a>
         </div>
     </div>
-    <a href="#this" class='nextstep'>保存</a>
+    <a  id="submit" href="#this" class='nextstep'>保存</a>
 </div>
-<script src="../js/jquery-1.6.1.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/register.js" type="text/javascript" charset="utf-8"></script>
+<?php $this->start('script') ?>
+<script src="/mobile/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="/mobile/js/util.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var agency, formdata;
+    $(function () {
+        $('.agency-item').on('click', function () {
+            $(this).toggleClass('active');
+        });
+        $('#submit').click(function () {
+            agency = [];
+            formdata = {};
+            $('.agency-item.active').each(function (i, elm) {
+                agency.push($(elm).data('val'));
+            });
+            formdata['tags'] = agency;
+//         formdata['industries'] = agency;
+            var extra_industry = $('#extra_industry').val();
+            if (extra_industry !== '' && $('#extra_industry').parent().hasClass('active')) {
+                formdata.ext_industry = extra_industry;
+            }
+            if (Object.keys(formdata).length < 5) {
+                if (Object.keys(formdata).length = 0) {
+                    $.util.alert('至少要选一个');
+                }
+                //对象长度判断
+                $.util.ajax({
+                    data: formdata,
+                    func: function (res) {
+                        $.util.alert(res.msg);
+                        if (res.status) {
+                            setTimeout(function () {
+                                window.location.href = '/user/edit-userinfo'
+                            }, 1500);
+                        }
+                    }
+                })
+            } else {
+                $.util.alert('最多可选5个');
+            }
+        });
+    });
+</script>
+<?php
+$this->end('script');

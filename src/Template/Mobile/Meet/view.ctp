@@ -35,7 +35,7 @@
                   
                 </p>
                 <!-- 等<i id="meet_nums"><?=$biggie->savant->reco_nums?></i>人推荐 -->
-                 <a href="#this" class="fr">查看更多</a>
+                 <a href="/meet/view-more-reco/<?=$biggie->id?>" class="fr">查看更多</a>
                 </span>
            
         </li>
