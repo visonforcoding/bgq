@@ -711,6 +711,7 @@ class HomeController extends AppController {
      */
     public function editCard(){
          $user_id = $this->user->id;
+         debug($user_id);
         $userInfo = $this->User->get($user_id);
         if($this->request->is('post')){
             $userInfo->card_path = $this->request->data('card_path');
