@@ -25,10 +25,26 @@
         <div class="h20"></div>
         <div class="infobox paytype m-subject">
             <ul>
-                <li>一对一面谈：<span class='infocard'>
-                    <input type="radio" name='type' value="1" <?php if(isset($subject)): ?><?php if($subject->type=='1'):?>checked="checked"<?php endif;?><?php endif; ?>  /><i class='active'></i></span></li>
+                <li>一对一面谈：
+                    <span class='infocard'>
+                    <input type="radio" name='type' value="1" 
+                        <?php if(isset($subject)): ?>
+                        <?php if($subject->type=='1'):?>checked="checked"<?php endif;?>
+                            <?php else:?>checked="checked"<?php endif; ?>  />
+                    
+                    <?php if(isset($subject)): ?>
+                        <?php if($subject->type=='1'):?><i class='active'></i><?php else: ?><i></i><?php endif;?>
+                        <?php else:?><i class="active"></i>
+                            <?php endif; ?>
+                    </span>
+                </li>
                 <li>一对多面谈：<span class='infocard reg-repass'>
-                        <input type="radio" value="2" <?php if(isset($subject)): ?><?php if($subject->type=='2'):?>checked="checked"<?php endif;?><?php endif; ?> name='type' /><i></i></span>
+                    <input type="radio" value="2" <?php if(isset($subject)): ?><?php if($subject->type=='2'):?>checked="checked"<?php endif;?><?php endif; ?> name='type' />
+                     <?php if(isset($subject)): ?>
+                        <?php if($subject->type=='2'):?><i class='active'></i><?php else: ?><i></i><?php endif;?>
+                        <?php else:?><i></i>
+                            <?php endif; ?>
+                    </span>
                 </li>
             </ul>
         </div>
@@ -46,10 +62,29 @@
         </div>
     </form>
     <a id="submit" href="#this" class="nextstep">提交</a>
-    <a href="activity-success.html" class="s-btn colorbg">删除</a>
+    <?php if(isset($subject)): ?>
+    <a href="#this" id="del" class="s-btn colorbg">删除</a>
+    <?php endif;?>
 </div>
 <?php $this->start('script') ?>
 <script>
+    $('input[name="type"]').on('click',function(){
+            $('input[name="type"]').next('i').removeClass('active');
+            $(this).next('i').addClass('active');
+    });
+    $('#del').on('click',function(){
+             $.util.ajax({
+                 url:'/meet/del-subject/'<?php if(isset($subject)):?>+<?=$subject->id?><?php endif;?>,
+                 func:function(res){
+                     $.util.alert(res.msg);
+                     if(res.status){
+                         setTimeout(function(){
+                             window.location.href = '/meet/my-subjects'
+                         },1500)
+                     }
+                 }
+             });
+    });
     $('#submit').on('click', function () {
         $form = $('form');
         $.util.ajax({
@@ -58,11 +93,12 @@
             data: $form.serialize(),
             func: function (msg) {
                 if (typeof msg === 'object') {
+                    $.util.alert(msg.msg);
                     if (msg.status === true) {
-                        window.history.go(-1);
-                    } else {
-                        $.util.alert(msg.msg);
-                    }
+                        setTimeout(function(){
+                            window.location.href = '/meet/my-subjects';
+                        },1500);
+                    } 
                 }
             }
         });

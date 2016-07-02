@@ -296,7 +296,36 @@ class UserController extends AppController {
             }
         }
     }
+    
+    
+   
 
+    /**
+     * 发送登录验证码
+     */
+    public function sendLoginCode() {
+        
+        $this->loadComponent('Sms');
+        $mobile = $this->request->data('phone');
+        $user = $this->User->findByPhoneAndEnabled($mobile, 1)->first();
+        if (!$user) {
+            return $this->Util->ajaxReturn(['status' => false,'msg'=>'该手机未注册,是否前往注册','phone'=>$mobile,'errCode'=>1]);
+        }
+        $code = createRandomCode(4, 2); //创建随机验证码
+        $content = '您的动态验证码为' . $code;
+        $codeTable = \Cake\ORM\TableRegistry::get('smsmsg');
+        $vcode = $codeTable->find()->where("`phone` = '$mobile'")->orderDesc('create_time')->first();
+        if (empty($vcode) || (time() - strtotime($vcode['time'])) > 30) {
+            //30s 的间隔时间
+            $ckSms = $this->Sms->sendByQf106($mobile, $content, $code);
+            if ($ckSms) {
+                $this->request->session()->write('UserLoginVcode', ['code' => $code, 'time' => time()]);
+                return $this->Util->ajaxReturn(true, '发送成功');
+            }
+        } else {
+            return $this->Util->ajaxReturn(['status' => false,'msg'=>'30秒后再发送','errCode'=>2]);
+        }
+    }
     /**
      * 发送动态验证码
      */

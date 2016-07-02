@@ -14,13 +14,13 @@
         <ul class="m-detail-box sub-list">
             <?php foreach($subjects as $subject): ?>
                 <li>
-                    <a class="alink" href="/meet/subject/<?=$subject->id?>">
-                    <div class="sub-list-l">
+                    <a class="alink clearfix" href="/meet/subject/<?=$subject->id?>">
+                    <div class="sub-list-l fl">
                         <h3><?=$subject->title?></h3>
                         <span>地点：<?=$subject->address ?></span>
                         <span>时间：<?=$subject->invite_time?></span>
                     </div>
-                    <span class="meet-type">
+                    <span class="meet-type fr">
                         <i>
                             <?php if($subject->type=='1'):?>
                                 一对一面谈
@@ -38,5 +38,5 @@
     </section>
 </div>
 <div class="submitbtn c-width">
-    <a href="release-activity.html"><img src="/mobile/images/add-s.png"/></a>
+    <a href="/meet/subject"><img src="/mobile/images/add-s.png"/></a>
 </div>

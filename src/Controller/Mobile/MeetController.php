@@ -166,18 +166,21 @@ class MeetController extends AppController {
     public function subject($id = null) {
         $SubjectTable = \Cake\ORM\TableRegistry::get('meet_subject');
         if ($this->request->is('post')) {
+            $this->handCheckLogin();
             if(empty($id)){
                 $subject = $SubjectTable->newEntity();
                 $subject = $SubjectTable->patchEntity($subject, $this->request->data());
+                $subject->user_id = $this->user->id;
             }else{
                 $subject = $SubjectTable->get($id);
+//                $subject->type = $this->request->data('type');
                 $subject = $SubjectTable->patchEntity($subject, $this->request->data());
+                
             }
-            $subject->user_id = $this->user->id;
             if ($SubjectTable->save($subject)) {
                 return $this->Util->ajaxReturn(true, '保存成功');
             } else {
-                return $this->Util->ajaxReturn(false, '保存失败');
+                return $this->Util->ajaxReturn(false, errorMsg($subject, '保存失败'));
             }
         }
         if($id){
@@ -190,6 +193,27 @@ class MeetController extends AppController {
     }
     
     
+    /**
+     * 话题的删除
+     */
+    public function delSubject($id){
+        $this->handCheckLogin();
+        $user_id = $this->user->id;
+        $SubjectTable = \Cake\ORM\TableRegistry::get('meet_subject');
+        if ($this->request->is('post')) {
+            $subject = $SubjectTable->find()->where(['user_id'=>$user_id,'id'=>$id])->first();
+            if($subject){
+                if($SubjectTable->delete($subject)){
+                    return $this->Util->ajaxReturn(true,'删除成功');
+                }
+            }
+        }
+        return $this->Util->ajaxReturn(false,'删除失败');
+    }
+
+
+
+
     /**
      * 专家简介编辑
      */

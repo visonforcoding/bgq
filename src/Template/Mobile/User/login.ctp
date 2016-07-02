@@ -41,13 +41,13 @@
     var t1 = null;
     $('input[name="phone"]').focusout(function () {
         var phone = $(this).val();
-        checkPhone(phone);
+        //checkPhone(phone);
     });
     $('#getVcode').on('click', function () {
         var $obj = $(this);
         var phone = $('input[name="phone"]').val();
         if (is_mobile(phone)) {
-            $.post('/user/sendVcode', {phone: phone}, function (res) {
+            $.post('/user/sendLoginCode', {phone: phone}, function (res) {
                 if (res.status === true) {
                     //$obj.attr('disabled ','true');
                     var text = '<i id="timer">' + 30 + '</i>秒后重新发送';
@@ -63,6 +63,10 @@
                             $('#timer').text(timer);
                         }
                     }, 1000);
+                }else{
+                    if(res.status===false&&res.errCode===1){
+                        window.confirm(res.msg);
+                    }
                 }
             }, 'json');
         }

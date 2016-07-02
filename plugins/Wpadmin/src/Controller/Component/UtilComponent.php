@@ -51,6 +51,7 @@ class UtilComponent extends Component {
         $actionlog->user = $user;
         $actionlog->ip = $this->request->clientIp();
         $actionlog->url = $this->request->url;
+        $actionlog->filename = __FILE__;
         $actionlog->controller = strtolower($this->request->param('controller'));
         $param = var_export($this->request->data(), true);
         $actionlog->type = $this->request->method();

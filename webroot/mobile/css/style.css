@@ -676,7 +676,7 @@ top:-0.1rem;left:50%;margin-left:-0.52rem;background: #f0eff5;text-align: center
 .indexwraper .yd span{display:block;margin-right: 0.2rem;width:0.2rem;height:0.2rem;background: #cfcfcf;border-radius: 50%;}
 .yd span.cur{background: #a0a0a0;}
 .choose-mark{height:2000%;width:100%;}
-.alink{display: block;overflow:hidden;}
+.alink{display: block;overflow:hidden;width:100%;}
 .transmitpage{background: #fff;overflow:hidden;padding:0.16rem 0.3rem;border-bottom:1px #e5e5e5 solid;}
 .transmitpage div{float:left;}
 .transmitpage h1{width:0.92rem;height;0.92rem;overflow:hidden;position:absolute;color:#222c38;}
