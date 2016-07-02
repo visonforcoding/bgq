@@ -44,7 +44,7 @@
             } else if ($.util.isWX) {
                 $.util.wxUploadPic(function (id) {
                     $.util.ajax({
-                        url: "/user/getWxPic/" + id + '?dir=user/mp',
+                        url: "/wx/wxUploadPic/" + id + '?dir=user/mp',
                         func: function (msg) {
                             $.util.alert(msg.msg);
                             if (msg.status === true) {
