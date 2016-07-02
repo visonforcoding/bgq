@@ -46,8 +46,8 @@
                     $.util.ajax({
                         url: "/wx/wxUploadPic/" + id + '?dir=user/mp',
                         func: function (res) {
-                            $.util.alert(res.msg);
-                            if (msg.status === true) {
+                            alert(res.path);
+                            if (res.status === true) {
                                 $('#img').attr('src', res.path);
                                 $.util.ajax({
                                     data: {card_path: res.path},
