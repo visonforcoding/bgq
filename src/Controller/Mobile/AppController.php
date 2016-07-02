@@ -25,6 +25,7 @@ use Cake\Event\Event;
  * Add your application-wide methods in the class below, your controllers
  * will inherit them.
  * @property \App\Controller\Component\UtilComponent $Util
+ * @property \App\Controller\Component\WxComponent $Wx
  * @link http://book.cakephp.org/3.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
@@ -145,6 +146,7 @@ class AppController extends Controller {
             if ($this->request->isWeixin() && empty($this->user) && !$this->request->session()->check('Login.wxbase')) {
                 if ($this->request->query('code')) {
                     //若是来自于微信的回传
+                    $this->loadComponent('Wx');
                     $res = $this->Wx->getUser();
                     //微信静默登录
                     \Cake\Log\Log::debug('静默登录', 'devlog');

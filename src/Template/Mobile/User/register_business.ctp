@@ -40,6 +40,7 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/jquery-1.6.1.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="/mobile/js/register.js" type="text/javascript" charset="utf-8"></script>
+<script src="/mobile/js/util.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var agency,formdata;
     $(function(){
@@ -62,11 +63,11 @@
                    if(res.status===true){
                        window.location.href = res.url;
                    }else{
-                       alert(res.msg);
+                       $.util.alert(res.msg);
                    }
                },'json');
            }else{
-               alert('请先选择您所在行业标签');
+               $.util.alert('请先选择您所在行业标签');
            }
        });
     });

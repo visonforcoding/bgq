@@ -70,7 +70,7 @@
         <div class="education-title">
             <h3>
                 教育经历<i><?=$k?></i></span>
-                <a href="javascript:void(0);" data-id="<?=$education->id?>" class="deletbtn">删除</a>
+                <a href="javascript:void(0);" data-id="<?=$education->id?>" class="deletbtn ml20">删除</a>
                 <a href="javascript:void(0);" data-id="<?=$education->id?>" class="savebtn">保存</a>
             </h3>
         </div>
@@ -103,13 +103,13 @@
             <li>
                 <span>开始日期：</span>
                 <div>
-                    <input type="text" name="start_date" value="<?=$education->start_date?>" class="checktime" readonly="readonly" />
+                    <input type="text" name="start_date" value="<?=$education->start_date->i18nFormat('yyyy-MM-dd')?>" class="checktime" readonly="readonly" />
                 </div>
             </li>
             <li class="no-b-border">
                 <span>结束日期：</span>
                 <div>
-                    <input type="text" name="end_date" readonly="readonly" value="<?=$education->end_date?>" class="checktime"/>
+                    <input type="text" name="end_date" readonly="readonly" value="<?=$education->end_date->i18nFormat('yyyy-MM-dd')?>" class="checktime"/>
                 </div>
             </li>
 
@@ -123,14 +123,14 @@
     <!--<a href="javascript:void(0);" id="submit" class="nextstep">完成</a>-->
 </div>
 <div class='reg-shadow'  style="display: none;"></div>
-<script type="text/javascript">
-    $('#addwork').on('touchstart', function () {
-        $('.wraper .education-items').eq(0).clone(true).insertBefore('.add-subject').show();
-    });
-</script>
 <script src="/mobile/js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
 <script src="/mobile/js/mobiscroll.2.13.2.js" type="text/javascript" charset="utf-8"></script>
 <script src="/mobile/js/util.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $('#addwork').on('touchstart', function () {
+        $('.wraper .education-items').eq(0).clone(true,true).insertBefore('.add-subject').show();
+    });
+</script>
 <script type="text/javascript">
 // 日期选择
     $('.checktime').mobiscroll().date({
@@ -145,7 +145,14 @@
         dateFormat: 'yy-mm-dd',
         rows: 3
     });
-
+    $('.education').mobiscroll().select({
+        theme: 'mobiscroll',
+        display: 'bottom',
+        headerText: function (valueText) {
+            return "请选择学历";
+        },
+        rows: 3
+    });
     $('.education').mobiscroll().select({
         theme: 'mobiscroll',
         display: 'bottom',

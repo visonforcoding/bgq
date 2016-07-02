@@ -8,29 +8,56 @@
 </header>
 
 <div class="wraper">
-    <!--<div class="uploadbox nobottom">
-        <a href='#this' class='imgcard'><img src='../images/card.png' /></a>
-        <div class="filebtn">
-            <a href="#this" class="uploadbtn">上传名片</a>
-            <input type="file" />
-        </div>
-        
-    </div>-->
     <div class="uploadbox nobottom">
-        <a href='#this' class='imgcard'><img src='../images/card.jpg' /></a>
-        <a href="#this" class="uploadbtn">上传名片</a>
-
-    </div>
-
-</div>
-<div class='reg-shadow'></div>
-<div class="shadow-info">
-    <div class="picinfo">
-        <span>拍照</span>
-        <span>相册</span>
-    </div>
-    <div class="picinfo">
-        <span>取消</span>
+        <input type="hidden" name="card_path" value="<?=$user->card_path?>" />
+        <a href='#this' class='imgcard'><img src='/mobile/images/card.jpg' /></a>
+        <a href="javascript:void(0)" id="uploadPic" class="uploadbtn">上传名片</a>
+        <a href="#this" style="width:100%" id="save" class="nextstep">保存</a>
     </div>
 </div>
 </div>
+<?php $this->start('script') ?>
+<script src="/mobile/js/util.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(function () {
+        $('#uploadPic').on('touchstart',function(){
+            if($.util.isAPP){
+                LEMON.event.uploadPhoto('{"dir":"user/mp"}',function(data){
+                    var data = JSON.parse(data);
+                   if(data.status===true){
+                       $('input[name="avatar"]').val(data.path);
+                       $.util.ajax({
+                           url: '/user/getAppPic',
+                           data: {avatar:data.path},
+                           func: function(msg){
+                               if(msg.status){
+                                   $.util.alert(msg.msg);
+                               } else {
+                                   $.util.alert(msg.msg);
+                               }
+                           }
+                       });
+                    } else {
+                        $.util.alert('app上传失败');
+                    }
+                });
+                return false;
+            } else if($.util.isWX) {
+                $.util.wxUploadPic(function(id){
+                    $.util.ajax({
+                        url: "/user/getWxPic/" + id + '?dir=user/mp',
+                        func: function (msg) {
+                            $.util.alert(msg.msg);
+                            if(msg.status===true){
+                                $('input[name="avatar"]').val(msg.path);
+                            }
+                        }
+                    });
+                });
+            }else{
+                $.util.alert('请在微信或APP上传图片');
+            }
+        });
+    });
+</script>
+<?php $this->end('script');

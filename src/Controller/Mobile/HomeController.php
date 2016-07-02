@@ -327,11 +327,11 @@ class HomeController extends AppController {
         $where['SubjectBook.status !='] = 2;
         $where['SubjectBook.user_id'] = $this->user->id;
         $books = $BookTable->find()->contain(['Subjects', 'Subjects.User' => function($q) {
-                        return $q->select(['truename', 'avatar', 'id', 'company', 'position']);
+                        return $q->select(['truename', 'avatar', 'id', 'company', 'position','meet_nums']);
                     }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
                     
         $savant_books = $BookTable->find()->contain(['Subjects', 'Users' => function($q) {
-                        return $q->select(['truename', 'avatar', 'id', 'company', 'position']);
+                        return $q->select(['truename', 'avatar', 'id', 'company', 'position','meet_nums']);
                     }])->where([
                        'SubjectBook.status !='=>2, 
                        'SubjectBook.savant_id ='=>$this->user->id, 
@@ -710,11 +710,42 @@ class HomeController extends AppController {
      * 编辑名片
      */
     public function editCard(){
-        
+         $user_id = $this->user->id;
+        $userInfo = $this->User->get($user_id);
+        $this->set([
+            'pageTitle'=>'名片修改',
+             'user'=>$userInfo
+        ]);
     }
     
+    
+    /**
+     * 编辑标签
+     */
     public function editMark(){
-        
+           $user_id = $this->user->id;
+           $userInfo = $this->User->get($user_id);
+           if($this->request->is('post')){
+               $userInfo ->grbq = serialize($this->request->data('tags'));
+               if($this->User->save($userInfo)){
+                   return $this->Util->ajaxReturn(true, '更新成功');
+               }else{
+                   return $this->Util->ajaxReturn(false,'服务器开小差了');
+               }
+           }
+           $ProfiletagTable = \Cake\ORM\TableRegistry::get('Profiletag');
+           $profiletags = $ProfiletagTable->find()->toArray();
+           $mark_ser = $userInfo->grbq;  //个人标签
+           $mark_arr = [];
+           if(is_array(unserialize($mark_ser))){
+               $mark_arr = unserialize($mark_ser);
+           }
+          $this->set([
+            'pageTitle'=>'个人标签',
+             'user'=>$userInfo,
+              'mark_arr'=>$mark_arr,
+              'profiletags'=>$profiletags
+        ]);
     }
 
     /**

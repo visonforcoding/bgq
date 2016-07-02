@@ -25,7 +25,7 @@
         <div class="innercon">
             <span class="head-img"><img src="{#user_logo#}"/><i></i></span>
             <div class="vipinfo my-meet-info">
-                <h3>{#truename#}<span class="meetnum">{#meet_nums#}</span></h3>
+                <h3>{#truename#}<span class="timenode fl">ffff</span><span class="meetnum">{#meet_nums#}</span></h3>
                 <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
                 <div class="mark">
                     <span class='color-items'>约见话题：{#title#}</span>
@@ -58,11 +58,11 @@
             book_html[type][status] = $.util.dataToTpl('', 'tpl', cdata, function(d){
                 d.link = type == 'books' ? '/home/my-book-detail/' :'/home/my-book_savant_detail/';
                 d.subject.user = d.subject.user || {};
-                d.user_logo = d.subject.user.avatar || '/mobile/images/touxiang.jpg';
-                d.truename = d.subject.user.truename;
-                d.meet_nums = d.subject.user.meet_nums ? d.subject.user.meet_nums + '人约见过' : '';
-                d.company = d.subject.user.company;
-                d.position = d.subject.user.position;
+                d.user_logo = d.subject.user.avatar?d.subject.user.avatar:d.user.avatar;
+                d.truename = d.subject.user.truename?d.subject.user.truename:d.user.truename;
+                d.meet_nums = d.subject.user.meet_nums ?d.subject.user.meet_nums + '人约见过' : d.user.meet_nums+'约见过';
+                d.company = d.subject.user.company?d.subject.user.company:d.user.company;
+                d.position = d.subject.user.position?d.subject.user.position:d.user.position;
                 d.title = d.subject.title;
 
                 return d;
