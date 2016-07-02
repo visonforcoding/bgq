@@ -52,11 +52,7 @@
                                 $.util.ajax({
                                     data: {card_path: res.path},
                                     func: function (msg) {
-                                        if (msg.status) {
-                                            $.util.alert(msg.msg);
-                                        } else {
-                                            $.util.alert(msg.msg);
-                                        }
+                                        alert(msg);
                                     }
                                 });
                             }
