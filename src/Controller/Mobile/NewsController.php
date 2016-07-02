@@ -352,4 +352,28 @@ class NewsController extends AppController {
         $b = $a->read();
         debug($b);die;
     }
+    
+        /**
+     * 编辑名片
+     */
+    public function editCard(){
+//         $user_id = $this->user->id;
+         $user_id = 8;
+         $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $userInfo = $UserTable->get($user_id);
+        if($this->request->is('post')){
+            $userInfo->card_path = $this->request->data('card_path');
+            debug($userInfo);
+            if($UserTable->save($userInfo)){
+                return $this->Util->ajaxReturn(true, '更改成功');
+            }else{
+                return $this->Util->ajaxReturn(false,'服务器开小差了');
+            }
+        }
+        $this->set([
+            'pageTitle'=>'名片修改',
+             'user'=>$userInfo
+        ]);
+    }
 }
+
