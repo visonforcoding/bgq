@@ -272,3 +272,7 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=6
 ;
+
+#添加个人标签
+ALTER TABLE `user`
+	ADD COLUMN `grbq` TEXT NULL DEFAULT '' COMMENT '个人标签' AFTER `reason`;

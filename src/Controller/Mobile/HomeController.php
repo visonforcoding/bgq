@@ -712,6 +712,14 @@ class HomeController extends AppController {
     public function editCard(){
          $user_id = $this->user->id;
         $userInfo = $this->User->get($user_id);
+        if($this->request->is('post')){
+            $userInfo->card_path = $this->request->data('card_path');
+            if($this->User->save($userinfo)){
+                return $this->Util->ajaxReturn(true, '更改成功');
+            }else{
+                return $this->Util->ajaxReturn(false,'服务器开小差了');
+            }
+        }
         $this->set([
             'pageTitle'=>'名片修改',
              'user'=>$userInfo
