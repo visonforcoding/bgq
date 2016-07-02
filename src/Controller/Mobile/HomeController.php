@@ -715,7 +715,8 @@ class HomeController extends AppController {
         if($this->request->is('post')){
             $userInfo->card_path = $this->request->data('card_path');
             \Cake\Log\Log::debug($userInfo,'devlog');
-             \Cake\Log\Log::debug($this->User->save($userInfo));exit();
+            \Cake\Log\Log::debug($userInfo->errors());
+             \Cake\Log\Log::debug($this->User->save($userInfo),'devlog');exit();
             if($this->User->save($userinfo)){
                 return $this->Util->ajaxReturn(true, '更改成功');
             }else{
