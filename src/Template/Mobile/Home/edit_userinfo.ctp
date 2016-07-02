@@ -201,6 +201,7 @@
                     var data = JSON.parse(data);
                    if(data.status===true){
                        $('input[name="avatar"]').val(data.thumbpath);
+                       $('#upload_pic img').attr('src', data.thumbpath);
                        $.util.ajax({
                            url: '/user/getAppPic',
                            data: {avatar:data.thumbpath},
@@ -223,8 +224,8 @@
                         url: "/user/getWxPic/" + id,
                         func: function (msg) {
                             $.util.alert(msg.msg);
-                            $.util.alert(msg.path);
                             if(msg.status===true){
+                                $('#upload_pic img').attr('src', msg.path);
                                 $('input[name="avatar"]').val(msg.path);
                             }
                         }

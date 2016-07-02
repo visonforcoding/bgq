@@ -195,9 +195,10 @@
                 case 'commit':
                     //弹出评论框
                     // $('#comment_shadow,.shadow-info').show('slow');
-                    
-                    $('#comment_shadow').show('slow');
-                    $('.shadow-info').removeClass('m-height').addClass('c-height');
+                    setTimeout(function(){
+                        $('#comment_shadow').show('slow');
+                        $('.shadow-info').removeClass('m-height').addClass('c-height');
+                    },300);
                     break;
                 case 'cancel':
                     //关闭 评论框

@@ -22,6 +22,17 @@
 </div>
 <?php $this->start('script') ?>
 <script>
+    function getQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+
+    if(getQueryString('rephone')){
+        $('input[name="phone"]').val(getQueryString('rephone'));
+    }
+
     var t1 = null;
     $('input[name="phone"]').focusout(function () {
         var phone = $(this).val();
