@@ -22,24 +22,24 @@
         <ul class="h-info-box e-info-box">
             <li  class="no-right-ico">
                 <span>公司：</span>
-                <div><input type="text" name="company" placeholder="请输入" /></div>
+                <div><input type="text" name="company"  /></div>
             </li>
             <li  class="no-right-ico">
                 <span>职位：</span>
                 <div>
-                    <input type="text" name="position" placeholder="请输入" />
+                    <input type="text" name="position"   />
                 </div>
             </li>
             <li class="">
                 <span>开始日期：</span>
                 <div>
-                    <input type="text" name="start_date" placeholder="请选择日期" class="checktime" readonly="readonly"  />
+                    <input type="text" name="start_date" />
                 </div>
             </li>
             <li class="">
                 <span>结束日期：</span>
                 <div>
-                    <input type="text" name="end_date" placeholder="请选择日期" class="checktime" readonly="readonly"  />
+                    <input type="text" name="end_date"  />
                 </div>
             </li>
             <li  class="no-b-border textareabox no-right-ico">
@@ -62,7 +62,7 @@
         <ul class="h-info-box e-info-box">
             <li  class="no-right-ico">
                 <span>公司：</span>
-                <div><input name="company" type="text" value="<?=$career->company?>" readonly  /></div>
+                <div><input name="company" type="text" value="<?=$career->company?>"  /></div>
             </li>
             <li  class="no-right-ico">
                 <span>职位：</span>
@@ -70,16 +70,16 @@
                     <input name="position" type="text" value="<?=$career->position?>" />
                 </div>
             </li>
-            <li class="">
+            <li  class="no-right-ico">
                 <span>开始日期：</span>
                 <div>
-                    <input type="text" name="start_date" placeholder="请选择日期" value="<?=$career->start_date?>" class="checktime" readonly="readonly"  />
+                    <input type="text" name="start_date" value="<?=$career->start_date?>"  />
                 </div>
             </li>
-            <li class="">
+            <li  class="no-right-ico">
                 <span>结束日期：</span>
                 <div>
-                    <input type="text" name="end_date" placeholder="请选择日期" class="checktime" value="<?=$career->end_date?>" readonly="readonly"  />
+                    <input type="text" name="end_date" value="<?=$career->end_date?>" />
                 </div>
             </li>
             <li  class="no-b-border textareabox no-right-ico">
