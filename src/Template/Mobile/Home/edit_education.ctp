@@ -101,13 +101,13 @@
                     </select>
                 </div>
             </li>
-            <li>
+            <li  class="no-right-ico">
                 <span>开始日期：</span>
                 <div>
                     <input type="text" name="start_date" maxlength="10" value="<?=$education->start_date?>"/>
                 </div>
             </li>
-            <li class="no-b-border">
+            <li  class="no-right-ico">
                 <span>结束日期：</span>
                 <div>
                     <input type="text" name="end_date" maxlength="10" value="<?=$education->end_date?>"/>
