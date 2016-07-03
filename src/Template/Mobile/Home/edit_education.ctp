@@ -65,7 +65,7 @@
     <?php $k=0?>
     <?php foreach($educations as $education): ?>
     <?php $k++;?>
-    <div class="education-items">
+    <div class="education-items oldlist">
         <form action="/home/save_education" method="post" target="submitAction">
         <!--    <input type="hidden" name="id" value="<?=$education->id?>">  -->
         <div class="education-title">
@@ -127,6 +127,10 @@
     $('#addwork').on('touchstart', function () {
         $('.wraper .education-items').eq(0).clone(true,true).insertBefore('.add-subject').show();
     });
+
+    if($('.oldlist').length == 0){
+        $('.wraper .education-items').eq(0).clone(true,true).insertBefore('.add-subject').show();
+    }
     
     function deleteEd(em) {
         var id = $(em.parentNode).data('id'), form=em;
