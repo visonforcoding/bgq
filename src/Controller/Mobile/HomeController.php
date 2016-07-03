@@ -619,22 +619,38 @@ class HomeController extends AppController {
     public function editEducation(){
         $EducationTable = \Cake\ORM\TableRegistry::get('Education');
         $educations = $EducationTable->find()->where(['user_id'=>  $this->user->id])->toArray();
-        if($this->request->is('post')){
-            $data = $this->request->data();
-            $data['user_id'] = $this->user->id;
-            $education = $EducationTable->newEntity($data);
-            if($EducationTable->save($education)){
-                return $this->Util->ajaxReturn(true,'保存成功!');
-            }else{
-                return $this->Util->ajaxReturn(false,  errorMsg($education,'保存失败'));
-            }
-        }
         $educationType = \Cake\Core\Configure::read('educationType');
         $this->set([
             'pageTitle' =>'编辑教育经历',
             'educations'=>$educations,
             'educationType'=>$educationType
         ]);
+    }
+    
+    public function saveEducation(){
+        $EducationTable = \Cake\ORM\TableRegistry::get('Education');
+        if($this->request->is('post')){
+            $data = $this->request->data();
+            if(!empty($data['id'])){
+                $education = $EducationTable->get($data['id']);
+                if($education){
+                    $education = $EducationTable->patchEntity($education, $data);
+                    $res = $EducationTable->save($education);
+                } else {
+                    return $this->Util->ajaxReturn(false, '不存在的id');
+                }
+            } else {
+                $data['user_id'] = $this->user->id;
+                $education = $EducationTable->newEntity();
+                $education = $EducationTable->patchEntity($education, $data);
+                $res = $EducationTable->save($education);
+            }
+            if($res){
+                return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'保存成功', 'id'=>$res->id]);
+            }else{
+                return $this->Util->ajaxReturn(false, '保存失败');
+            }
+        }
     }
     
     

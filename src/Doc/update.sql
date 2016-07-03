@@ -274,5 +274,10 @@ AUTO_INCREMENT=6
 ;
 
 #添加个人标签
-ALTER TABLE `user`
-	ADD COLUMN `grbq` TEXT NULL DEFAULT '' COMMENT '个人标签' AFTER `reason`;
+ALTER TABLE `user` ADD COLUMN `grbq` TEXT NULL DEFAULT '' COMMENT '个人标签' AFTER `reason`;
+
+#修改教育经历表日期格式
+ALTER TABLE `education`
+  CHANGE COLUMN `start_date` `start_date` varchar(20) NULL DEFAULT NULL COMMENT '开始日期';
+ALTER TABLE `education`
+  CHANGE COLUMN `end_date` `end_date` varchar(20) NULL DEFAULT NULL COMMENT '结束日期';

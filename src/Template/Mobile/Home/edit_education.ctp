@@ -13,7 +13,7 @@
 <iframe id="submitAction" name="submitAction" style="display: none"></iframe>
 <div class="m-wraper edit-education-bottom wraper">
     <div class="education-items" style="display: none">
-        <form action="" method="post" target="submitAction">
+        <form action="/home/save_education" method="post" target="submitAction">
         <div class="education-title">
             <h3>
                 教育经历<i></i></span>
@@ -35,7 +35,7 @@
             <li class="no-right-ico">
                 <span>学历：</span>
                 <div>
-                    <select name="eudcation" class="education">
+                    <select name="education" class="education">
                         <option value="1">高中</option>
                         <option value="2">中专</option>
                         <option value="3">大专</option>
@@ -66,7 +66,7 @@
     <?php foreach($educations as $education): ?>
     <?php $k++;?>
     <div class="education-items">
-        <form action="" method="post" target="submitAction">
+        <form action="/home/save_education" method="post" target="submitAction">
         <!--    <input type="hidden" name="id" value="<?=$education->id?>">  -->
         <div class="education-title">
             <h3 data-id="<?=$education->id?>">
@@ -199,4 +199,5 @@
 
         //form.submit();
     }
+    
 </script>
