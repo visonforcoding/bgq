@@ -67,7 +67,7 @@
     <?php $k++;?>
     <div class="education-items">
         <form action="" method="post" target="submitAction">
-            <input type="hidden" name="id" value="<?=$education->id?>">
+        <!--    <input type="hidden" name="id" value="<?=$education->id?>">  -->
         <div class="education-title">
             <h3>
                 教育经历<i><?=$k?></i></span>
@@ -178,6 +178,24 @@
             return;
         }
 
-        form.submit();
+
+        var data_id =  $(em).data('id');
+        var data = $(form).serialize();
+        if(!data_id){
+            data['id'] = data_id;
+        }
+        $.util.ajax({
+            data : data,
+            url:'save_education',
+            func : function(res){
+                $.util.alert(res.msg);
+                if(res.id){
+                    $(em).attr('data-id', res.id);
+                }
+            }
+        });
+
+
+        //form.submit();
     }
 </script>
