@@ -36,7 +36,7 @@
             <a href="javascript:void(0)">
                 <span>公司：</span>
                 <div>
-                    <input type="company" value="<?=$user->company?>" />
+                    <input type="company" name="company" value="<?=$user->company?>" />
                 </div>
             </a>
         </li>
@@ -44,7 +44,7 @@
             <a href="javascript:void(0)">
                 <span>职务：</span>
                 <div >
-                    <input type="position" value="<?=$user->position?>" />
+                    <input type="position" name="position" value="<?=$user->position?>" />
                 </div>
             </a>
         </li>
@@ -75,17 +75,16 @@
             <a href="javascript:void(0)">
                 <span>邮箱：</span>
                 <div>
-                    <input type="email" value="<?=$user->email?>" />
+                    <input type="email" name="email" value="<?=$user->email?>" />
                 </div>
             </a>
         </li>
     </ul>
     <ul class="h-info-box e-info-box">
         <li>
-            <a href="javascript:void(0)">
+            <a href="/home/edit_industries">
                 <span>行业：</span>
                 <div>
-                    <input type="text" placeholder="金融" />
                 </div>
             </a>
         </li>
