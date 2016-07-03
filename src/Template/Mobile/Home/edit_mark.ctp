@@ -32,7 +32,7 @@
                                 <a href="#this" data-val="<?= $tag->name ?>" class="agency-item"><?= $tag->name ?></a>
                             <?php endforeach; ?>
                 <?php endif;?>
-            <a href="#this" class='color-items'>
+            <a href="javascript:void(0)" class='color-items' id="addTag">
                 添加
                 <!--<input type="text" name="extra" />-->
             </a>
@@ -56,7 +56,7 @@
                 agency.push($(elm).data('val'));
             });
             formdata['tags'] = agency;
-//         formdata['industries'] = agency;
+//            formdata['industries'] = agency;
             var extra_industry = $('#extra_industry').val();
             if (extra_industry !== '' && $('#extra_industry').parent().hasClass('active')) {
                 formdata.ext_industry = extra_industry;
@@ -80,6 +80,10 @@
             } else {
                 $.util.alert('最多可选5个');
             }
+        });
+        
+        $('#addTag').on('tap', function(){
+            layer.alery(123);
         });
     });
 </script>

@@ -864,6 +864,44 @@ class HomeController extends AppController {
             return $this->Util->ajaxReturn(false, '回赠失败');
         }
     }
+    
+    /**
+     * 编辑行业标签
+     */
+    public function editindustries(){
+        $userIndustryTable = \Cake\ORM\TableRegistry::get('user_industry');
+        $userindustry = $userIndustryTable->find()->where(['user_id' => $this->user->id])->hydrate(false)->toArray();
+        foreach ($userindustry as $k=>$v){
+            $industry_id[] = $v['industry_id'];
+        }
+        
+        $IndustryTable = \Cake\ORM\TableRegistry::get('industry');
+        $industries = $IndustryTable->find('threaded', [
+                    'keyField' => 'id',
+                    'parentField' => 'pid'
+                ])->where("`id` != '3'")->hydrate(false)->toArray();
+        $this->set(array(
+            'userIndustry' => $industry_id,
+            'industries' => $industries,
+            'pageTitle'=>'选择行业标签'
+        ));
+    }
+    
+    /**
+     * 保存行业标签
+     */
+    public function saveIndustries(){
+        if ($this->request->is('post')) {
+            $data = $this->request->data();
+            $user = $this->User->get($this->user->id);
+            $user = $this->User->patchEntity($user, $data);
+            if ($this->User->save($user)) {
+                return $this->Util->ajaxReturn(true, '保存成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '保存失败');
+            }
+        }
+    }
 
 }
                                                         
