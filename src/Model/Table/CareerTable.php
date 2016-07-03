@@ -65,18 +65,16 @@ class CareerTable extends Table {
                 ->notEmpty('position', '职位不可为空');
 
         $validator
-                ->date('start_date')
                 ->requirePresence('start_date', 'create', '起始时间不可为空')
                 ->notEmpty('start_date', '起始时间不可为空');
 
         $validator
-                ->date('end_date')
                 ->requirePresence('end_date', 'create', '结束时间不可为空')
                 ->notEmpty('end_date', '结束时间不可为空');
 
-        $validator
-                ->requirePresence('descb', 'create', '描述不可为空')
-                ->notEmpty('descb', '描述不可为空');
+//        $validator
+//                ->requirePresence('descb', 'create', '描述不可为空')
+//                ->notEmpty('descb', '描述不可为空');
 
 
         return $validator;

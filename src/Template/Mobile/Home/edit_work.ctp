@@ -44,7 +44,7 @@
             </li>
             <li  class="no-b-border textareabox no-right-ico">
                 <span>描述</span>
-                <textarea name="desc"></textarea>
+                <textarea name="descb"></textarea>
             </li>
         </ul>
         </form>
