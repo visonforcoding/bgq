@@ -35,7 +35,7 @@
             <li class="no-right-ico">
                 <span>学历：</span>
                 <div>
-                    <select name="deucation" class="education">
+                    <select name="eudcation" class="education">
                         <option value="1">高中</option>
                         <option value="2">中专</option>
                         <option value="3">大专</option>
