@@ -281,3 +281,13 @@ ALTER TABLE `education`
   CHANGE COLUMN `start_date` `start_date` varchar(20) NULL DEFAULT NULL COMMENT '开始日期';
 ALTER TABLE `education`
   CHANGE COLUMN `end_date` `end_date` varchar(20) NULL DEFAULT NULL COMMENT '结束日期';
+
+#修改工作经历表日期格式
+ALTER TABLE `career`
+  CHANGE COLUMN `start_date` `start_date` varchar(20) NULL DEFAULT NULL COMMENT '开始日期';
+ALTER TABLE `career`
+  CHANGE COLUMN `end_date` `end_date` varchar(20) NULL DEFAULT NULL COMMENT '结束日期';
+
+#工作描述可以为空
+ALTER TABLE `binggq`.`career`
+  CHANGE COLUMN `descb` `descb` text NULL COMMENT '描述';

@@ -627,6 +627,9 @@ class HomeController extends AppController {
         ]);
     }
     
+    /**
+     * 保存教育经历
+     */
     public function saveEducation(){
         $EducationTable = \Cake\ORM\TableRegistry::get('Education');
         if($this->request->is('post')){
@@ -662,6 +665,7 @@ class HomeController extends AppController {
         $careers = $CareerTable->find()->where(['user_id'=>  $this->user->id])->toArray();
         if($this->request->is('post')){
             $data = $this->request->data();
+            
             $data['user_id'] = $this->user->id;
             $career = $CareerTable->newEntity($data);
             if($CareerTable->save($career)){
@@ -674,6 +678,35 @@ class HomeController extends AppController {
            'pageTitle'=>'编辑工作经历 ' ,
             'careers'=>$careers
         ]);
+    }
+    
+    /**
+     * 保存工作经历
+     */
+    public function saveWork(){
+        $CareerTable = \Cake\ORM\TableRegistry::get('Career');
+        if($this->request->is('post')){
+            $data = $this->request->data();
+            if(!empty($data['id'])){
+                $career = $CareerTable->get($data['id']);
+                if($career){
+                    $career = $CareerTable->patchEntity($career, $data);
+                    $res = $CareerTable->save($career);
+                } else {
+                    return $this->Util->ajaxReturn(false, '不存在的id');
+                }
+            } else {
+                $data['user_id'] = $this->user->id;
+                $career = $CareerTable->newEntity();
+                $career = $CareerTable->patchEntity($career, $data);
+                $res = $CareerTable->save($career);
+            }
+            if($res){
+               return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'保存成功', 'id'=>$res->id]);
+            }else{
+                return $this->Util->ajaxReturn(false,  errorMsg($career,'保存失败'));
+            }
+        }
     }
     
     
@@ -704,7 +737,7 @@ class HomeController extends AppController {
      * @param type $id
      * @return type
      */
-    public function delCareer($id){
+    public function delWork($id){
         $CareerTable = \Cake\ORM\TableRegistry::get('Career');
         $career = $CareerTable->find()->where(['user_id'=>  $this->user->id,'id'=>$id])->first();
         if($career){
