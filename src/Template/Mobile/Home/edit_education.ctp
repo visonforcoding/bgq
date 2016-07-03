@@ -104,13 +104,13 @@
             <li  class="no-right-ico">
                 <span>开始日期：</span>
                 <div>
-                    <input type="text" name="start_date" maxlength="10" value="<?=$education->start_date?>"/>
+                    <input type="text" name="start_date" maxlength="10" value="<?=$education->start_date->i18nFormat('yyyy-MM-dd') ?>"/>
                 </div>
             </li>
             <li  class="no-right-ico">
                 <span>结束日期：</span>
                 <div>
-                    <input type="text" name="end_date" maxlength="10" value="<?=$education->end_date?>"/>
+                    <input type="text" name="end_date" maxlength="10" value="<?=$education->end_date->i18nFormat('yyyy-MM-dd') ?>"/>
                 </div>
             </li>
         </ul>

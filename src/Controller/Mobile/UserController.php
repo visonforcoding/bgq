@@ -76,6 +76,7 @@ class UserController extends AppController {
                 $data = $this->request->data();
                 $data['enabled'] = 1;
                 $data['user_token'] = md5(uniqid());
+                $data['avatar'] =  '/mobile/images/touxiang.jpg';
                 $user = $this->User->patchEntity($user, $data);
                 if ($this->User->save($user)) {
                     //注册成功就算登录
