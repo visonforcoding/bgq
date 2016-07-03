@@ -131,22 +131,39 @@
         $('.wraper .education-items').eq(0).clone(true,true).insertBefore('.add-subject').show();
     });
     
-    function deleteEd() {
+    function deleteEd(em) {
+        var id = $(em).data('id'), form=em;
+        while(form && form.tagName != 'FORM'){
+            form = form.parentNode;
+        }
+        if(!form || !$(form).attr('target')) return;
+        if(!id){
+            $(form.parentNode).remove();
+            return false;
+        }
         if(window.confirm('您确认要删除这段教育经历吗?')){
-            //do delete
+            $.util.ajax({
+                url:'/home/del-education/'+id,
+                func:function(res){
+                    $.util.alert(res.msg);
+                    if(res.status){
+                        $(form.parentNode).remove();
+                    }
+                }
+            });
         }
     }
+
+    function msg(str) {
+        $.util.alert(str);
+    }
+
     function checkForm(em){
-        var form = null;
-        while(em){
-            if(em.tagName != 'FORM'){
-                em = em.parentNode;
-            }
-            else{
-                form = em;
-                break;
-            }
+        var form = em;
+        while(form && form.tagName != 'FORM'){
+            form = form.parentNode;
         }
+        if(!form || !$(form).attr('target')) return;
         if(!form.school.value){
             $.util.alert('请填写学校');
             return;
@@ -179,14 +196,6 @@
         endYear: 2020,
         //startYear:1980
         dateFormat: 'yy-mm-dd',
-        rows: 3
-    });
-    $('.education').mobiscroll().select({
-        theme: 'mobiscroll',
-        display: 'bottom',
-        headerText: function (valueText) {
-            return "请选择学历";
-        },
         rows: 3
     });
     $('.education').mobiscroll().select({
