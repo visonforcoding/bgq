@@ -67,6 +67,7 @@
     <?php $k++;?>
     <div class="education-items">
         <form action="" method="post" target="submitAction">
+            <input type="hidden" name="id" value="<?=$education->id?>">
         <div class="education-title">
             <h3>
                 教育经历<i><?=$k?></i></span>
@@ -112,7 +113,6 @@
                     <input type="text" name="end_date" maxlength="10" value="<?=$education->end_date?>"/>
                 </div>
             </li>
-
         </ul>
         </form>
     </div>
