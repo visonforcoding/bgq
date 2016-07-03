@@ -69,10 +69,10 @@
         <form action="" method="post" target="submitAction">
         <!--    <input type="hidden" name="id" value="<?=$education->id?>">  -->
         <div class="education-title">
-            <h3>
+            <h3 data-id="<?=$education->id?>">
                 教育经历<i><?=$k?></i></span>
-                <a onclick="deleteEd(this);" data-id="<?=$education->id?>" class="deletbtn ml20">删除</a>
-                <a onclick="checkForm(this);" data-id="<?=$education->id?>" class="savebtn">保存</a>
+                <a onclick="deleteEd(this);"  class="deletbtn ml20">删除</a>
+                <a onclick="checkForm(this);" class="savebtn">保存</a>
             </h3>
         </div>
         <ul class="h-info-box e-info-box">
@@ -129,7 +129,7 @@
     });
     
     function deleteEd(em) {
-        var id = $(em).data('id'), form=em;
+        var id = $(em.parentNode).data('id'), form=em;
         while(form && form.tagName != 'FORM'){
             form = form.parentNode;
         }
@@ -179,7 +179,7 @@
         }
 
 
-        var data_id =  $(em).data('id');
+        var data_id =  $(em.parentNode).data('id');
         var data = $(form).serialize();
         if(data_id){
             data += '&id='+data_id;
@@ -191,7 +191,7 @@
             func : function(res){
                 $.util.alert(res.msg);
                 if(res.id){
-                    $(em).attr('data-id', res.id);
+                    $(em.parentNode).attr('data-id', res.id);
                 }
             }
         });
