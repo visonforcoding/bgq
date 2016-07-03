@@ -49,13 +49,13 @@
             <li>
                 <span>开始日期：</span>
                 <div>
-                    <input type="text" name="start_date" class="checktime" readonly="readonly" />
+                    <input name="start_date" maxlength="10" type="text"  />
                 </div>
             </li>
             <li class="no-b-border">
                 <span>结束日期：</span>
                 <div>
-                    <input type="text" name="end_date" readonly="readonly" class="checktime"/>
+                    <input name="end_date" maxlength="10" type="text"  />
                 </div>
             </li>
 
@@ -103,13 +103,13 @@
             <li>
                 <span>开始日期：</span>
                 <div>
-                    <input type="text" name="start_date" value="<?=$education->start_date->i18nFormat('yyyy-MM-dd')?>" class="checktime" readonly="readonly" />
+                    <input type="text" name="start_date" maxlength="10" value="<?=$education->start_date?>"/>
                 </div>
             </li>
             <li class="no-b-border">
                 <span>结束日期：</span>
                 <div>
-                    <input type="text" name="end_date" readonly="readonly" value="<?=$education->end_date->i18nFormat('yyyy-MM-dd')?>" class="checktime"/>
+                    <input type="text" name="end_date" maxlength="10" value="<?=$education->end_date?>"/>
                 </div>
             </li>
 
@@ -123,9 +123,6 @@
     <!--<a href="javascript:void(0);" id="submit" class="nextstep">完成</a>-->
 </div>
 <div class='reg-shadow'  style="display: none;"></div>
-<script src="/mobile/js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
-<script src="/mobile/js/mobiscroll.2.13.2.js" type="text/javascript" charset="utf-8"></script>
-<script src="/mobile/js/util.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
     $('#addwork').on('touchstart', function () {
         $('.wraper .education-items').eq(0).clone(true,true).insertBefore('.add-subject').show();
@@ -183,70 +180,4 @@
 
         form.submit();
     }
-</script>
-<script type="text/javascript">
-// 日期选择
-    $('.checktime').mobiscroll().date({
-        theme: 'mobiscroll',
-        display: 'bottom',
-        headerText: function (valueText) {
-            return "请选择时间";
-        },
-        //onBeforeShow: function (inst) { inst.settings.wheels[0].length>2?inst.settings.wheels[0].pop():null; },
-        endYear: 2020,
-        //startYear:1980
-        dateFormat: 'yy-mm-dd',
-        rows: 3
-    });
-    $('.education').mobiscroll().select({
-        theme: 'mobiscroll',
-        display: 'bottom',
-        headerText: function (valueText) {
-            return "请选择学历";
-        },
-        rows: 3
-    });
-//性别选择
-    $('.checkedsex').mobiscroll().select({
-        theme: 'mobiscroll',
-        display: 'bottom',
-        headerText: function (valueText) {
-            return "请选择性别";
-        },
-    });
-    $('.deletbtn').on('tap',function(){
-        var id = $(this).data('id');
-        var obj = $(this);
-        if(!id){
-            return false;
-        }
-        $.util.ajax({
-            url:'/home/del-education/'+id,
-            func:function(res){
-                $.util.alert(res.msg);
-                if(res.status){
-                    $(obj).parents('div.education-items').remove();
-                }
-            }
-        });
-    });
-    $('.savebtn').on('tap',function(){
-        var data_id =  $(this).data('id');
-        var form  = $(this);
-        var data = $(form).find('form').serialize();
-        if(!data_id){
-            data['id'] = data_id;
-        }
-        $.util.ajax({
-            data : data,
-            func : function(res){
-                $.util.alert(res.msg);
-                if(res.status){
-                    setTimeout(function(){
-                     window.location.href = '/home/edit-userinfo';   
-                    },1500);
-                }
-            }
-        });
-    });
 </script>
