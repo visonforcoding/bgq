@@ -115,7 +115,7 @@
         while(form && form.tagName != 'FORM'){
             form = form.parentNode;
         }
-        if(!form || !$(form).attr('target')) return;
+        if(!form || form.tagName != 'FORM') return;
         if(!id){
             $(form.parentNode).remove();
             return false;
