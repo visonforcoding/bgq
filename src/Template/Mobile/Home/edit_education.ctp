@@ -181,8 +181,9 @@
 
         var data_id =  $(em).data('id');
         var data = $(form).serialize();
-        if(!data_id){
-            data['id'] = data_id;
+        if(data_id){
+            data += '&id='+data_id;
+            //data['id'] = data_id;
         }
         $.util.ajax({
             data : data,
