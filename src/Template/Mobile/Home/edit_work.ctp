@@ -30,13 +30,13 @@
                     <input type="text" name="position"   />
                 </div>
             </li>
-            <li class="">
+            <li  class="no-right-ico">
                 <span>开始日期：</span>
                 <div>
                     <input type="text" name="start_date" />
                 </div>
             </li>
-            <li class="">
+            <li  class="no-right-ico">
                 <span>结束日期：</span>
                 <div>
                     <input type="text" name="end_date"  />
@@ -142,7 +142,7 @@
         while(form && form.tagName != 'FORM'){
             form = form.parentNode;
         }
-        if(!form || !$(form).attr('target')) return;
+        if(!form || form.tagName != 'FORM') return;
         if(!form.company.value){
             $.util.alert('请填写公司');
             return;
