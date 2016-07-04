@@ -5,13 +5,19 @@
             <div class="mt-info">
                 <h3><?= $user->truename ?></h3>
                 <span class="job"><?= $user->company ?> <?= $user->position ?> </span>
-                <span class="mmark"><?php foreach($user->industries as $k=>$v): ?>IT互联网</span>
+                <span class="mmark"><?php foreach($user->industries as $k=>$v): ?><?= $v['name'] ?> <?php endforeach; ?></span>
             </div>
             <div class="linkinfo">
                 <p><span>手机号:<a href="tel"><?= $user->phone ?></a></span></p>
                 <p><span>邮    箱:<i><?= $user->email ?></i></span></p>
                 <p><span>地    区:<i><?= $user->city ?></i></span></p>
             </div>
+        </div>
+    </div>
+    <div class="ul-list">
+        <h3>个人标签：</h3>
+        <div class="mmark">
+            <a href="javascript:void(0)">研发</a><a href="javascript:void(0)">设计</a><a href="javascript:void(0)">产品</a>
         </div>
     </div>
     <div class="h-home-bottom">
