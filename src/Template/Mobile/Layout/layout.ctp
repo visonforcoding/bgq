@@ -121,7 +121,7 @@
 
                 setTimeout(function() {
                     console.log("ERROR:" + h);
-                    alert("JS ERROR:" + h);
+                    //alert("JS ERROR:" + h);
                     (new Image).src = '/wx/jslog?content='+encodeURIComponent(h);
                     //var a = encodeURIComponent(h), b = new Image;
                     //b.src = "//wq.jd.com/webmonitor/collect/badjs.json?Content=" + a + "&t=" + Math.random();
