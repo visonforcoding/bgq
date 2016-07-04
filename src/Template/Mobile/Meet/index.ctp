@@ -12,7 +12,7 @@
         <div class="a-search">
            <a href="#this"> <i class="iconfont">&#xe613;</i></a>
             <div class="s-con">
-                <input type="text" placeholder="请输入关键词" class='search'/>
+                <input type="text" placeholder="请输入关键词" readonly class='search'/>
             </div>
         </div>
     </div>

@@ -19,7 +19,7 @@
           <?php foreach ($recoms as $recom):?>
         <div class="entrollist">
             <div class="comm-info clearfix">
-                <a href="/user/home-page/<?=$recom->user->id?>">
+                <a href="/user/home-page/<?=$recom->user->id; ?>">
                     <span><img src="<?=$recom->user->avatar?>"/></span>
                     <div class="infor-comm">
                         <i class="username"><?=$recom->user->truename?> </i>

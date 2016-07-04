@@ -110,6 +110,7 @@
     window.shareConfig.title = '<?= $news->title ?>';
     var share_desc = '<?= $news->share_desc ?>';
     share_desc && (window.shareConfig.desc = share_desc);
+    LEMON.show.shareIco();
 </script>
 <script>
     window.comme_submit = true;

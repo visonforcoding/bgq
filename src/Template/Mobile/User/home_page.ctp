@@ -9,7 +9,7 @@
     <div class="h-home-bottom">
         <a href="<?php if ($self): ?>/home/edit-userinfo<?php else: ?>javascript:void(0)<?php endif; ?>">
             <div>
-                <span><img src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : $user->avatar ?>"/></span>
+                <span><img id="user_img" src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : $user->avatar ?>"/></span>
             </div>
             <h3>
                 <?= $user->truename ?><span><?= $user->company ?> <?= $user->position ?></span>
@@ -145,6 +145,17 @@
     <?php endif; ?>
 </div>
 <?php $this->start('script') ?>
+<script>
+    (function () {
+        var imgUrl = '<?= $user->avatar ?>';
+        if(imgUrl) window.shareConfig.imgUrl = location.origin +  imgUrl;
+        window.shareConfig.link = location.href;
+        window.shareConfig.title = '并购帮会员';
+        window.shareConfig.desc = '<?= $user->company ?>  <?= $user->truename ?>';
+        LEMON.show.shareIco();
+    })();
+
+</script>
 <script>
     $(function () {
         $('#follow_btn').on('click', function () {

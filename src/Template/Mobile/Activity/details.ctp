@@ -175,14 +175,12 @@
 </script>
 <script src="/mobile/js/activity_details.js"></script>
 <script>
-    if($.util.isAPP) {
-        LEMON.show.shareIco();
-    }
     // 分享设置
     window.shareConfig.link = 'http://m.chinamatop.com/activity/details/<?= $activity->id ?>';
     window.shareConfig.title = '<?= $activity->title ?>';
     var share_desc = '<?= $activity->share_desc ?>';
     share_desc && (window.shareConfig.desc = share_desc);
+    LEMON.show.shareIco();
 </script>
 <script>
     window.article = true;
