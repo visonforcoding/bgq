@@ -102,6 +102,7 @@
                 url: '/wx/appLogin',
                 func:function(res){
                     alert(res);
+                    alert(res.redirect_url);
                     res = JSON.parse(res);
                     if(res.status){
                         $.util.setCookie('token_uin',res.token_uin,10*365*24*60);
