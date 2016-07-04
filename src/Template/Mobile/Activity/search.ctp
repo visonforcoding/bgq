@@ -7,7 +7,7 @@
         <input type="hidden" name="sort" value="" style="display:none;"/>
         <input type="hidden" name="region" value="" style="display:none;"/>
         </form>
-        <div class='h-regiser' id="doSearch" style="position: relative;right: 0;font-size: 0.28rem;width: 0.7rem;">搜索</div>
+        <div class='h-regiser' id="doSearch">搜索</div>
     </div>
     <div class="news-classify">
         <div class="classify-l fl ml" id="choose_industry">
