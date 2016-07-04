@@ -568,7 +568,7 @@ class HomeController extends AppController {
         }
         $this->set([
             'user' => $user,
-            'pageTitle' => '个人信息'
+            'pageTitle' => '编辑个人主页'
         ]);
     }
 
