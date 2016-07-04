@@ -4,8 +4,8 @@
 .head{position:fixed;z-index:2;width:100%;}
 .wxlogin{position:relative;}
 .wraper .wx{position:absolute;right:0;width:330px;height:345px;top:90px;z-index:3;background: #fff;
-/*display:-webkit-flex;display:-moz-flex;display:-ms-flex;display: flex;justify-content:center;flex-direction: column;align-items: center;*/
-border-radius: 10px;opacity: 0;background:#fff url(../img/wx1.png) no-repeat center center;}
+display:-webkit-flex;display:-moz-flex;display:-ms-flex;display: flex;justify-content:center;flex-direction: column;align-items: center;
+border-radius: 10px;opacity: 0;}
 .wraper .wx:before{position: absolute;height:27px;width:57px;content:'';background:url(../img/up.png) no-repeat;top:-25px;right:20px;}
 .wx img{display: block;width:180px;height:auto;}
 .wx i{margin-top:30px;font-size:18px;color:#222c38;}
