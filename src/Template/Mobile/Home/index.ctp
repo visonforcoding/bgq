@@ -7,8 +7,13 @@
 <div class="wraper">
     <div class="h-home-bottom">
         <a href="/user/home-page/<?= $user->id ?>">
-            <div><span>
-                    <img src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : $user->avatar ?>"/></span>
+            <div>
+                <span>
+                    <img src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : $user->avatar ?>"/>
+                    <?php if($user->level == 2): ?>
+                        <i class="v"></i>
+                    <?php endif; ?>
+                </span>
             </div>
             <h3><?= $user->truename ?><span><?= $user->company ?> <?= $user->position ?></span></h3>
         </a>
