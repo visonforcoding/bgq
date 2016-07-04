@@ -1,5 +1,5 @@
 <div class="m-wraper m-fixed-bottom wraper">
-    <div class="m-info-card">
+<!--    <div class="m-info-card">
         <div class="m-info">
             <a href="javascript:void(0)" class="m-pic"><img src="<?= $user->avatar ?>"/></a>
             <div class="mt-info">
@@ -19,7 +19,7 @@
         <div class="mmark">
             <a href="javascript:void(0)">研发</a><a href="javascript:void(0)">设计</a><a href="javascript:void(0)">产品</a>
         </div>
-    </div>
+    </div>-->
     <div class="h-home-bottom">
         <a href="<?php if ($self): ?>/home/edit-userinfo<?php else: ?>javascript:void(0)<?php endif; ?>">
             <div>
