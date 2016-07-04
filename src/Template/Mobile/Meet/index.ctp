@@ -158,23 +158,23 @@
     
     //轮播
     var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
-    var loop2 = $.util.loopImg($('#items'), $('#imgList li'));
+    //var loop2 = $.util.loopImg($('#items'), $('#imgList li'));
 
 
     // setTimeout(function(){
     //     var iconLoop = new simpleScroll({viewDom:$('#icons'),  moveDom:$('#allsort'), right:$('#toRight'), fix:25});
     // },1000);
+
     var sub = null;
+
     setTimeout(function(){
-        return;
         sub = $.util.loop({
                 min : 3,
                 moveDom: $('#items'),
                 moveChild: $('#items li'),
                 lockScrY: true,
                 loopScroll: true,
-                autoTime:3000,
-
+                autoTime:0,
             });
    },0)
 
