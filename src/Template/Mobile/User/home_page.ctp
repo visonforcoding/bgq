@@ -23,7 +23,12 @@
     <div class="h-home-bottom">
         <a href="<?php if ($self): ?>/home/edit-userinfo<?php else: ?>javascript:void(0)<?php endif; ?>">
             <div>
-                <span><img id="user_img" src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : $user->avatar ?>"/></span>
+                <span>
+                    <img id="user_img" src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : $user->avatar ?>"/>
+                    <?php if($user->level == 2): ?>
+                        <i class="v"></i>
+                    <?php endif; ?>
+                </span>
             </div>
             <h3>
                 <?= $user->truename ?><span><?= $user->company ?> <?= $user->position ?></span>
