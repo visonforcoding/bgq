@@ -81,5 +81,6 @@
             }
         });
     });
+    $('.ulinfo').find('li').text('系统版本：'+LEMON.sys.version());
 </script>
 <?php $this->end('script');

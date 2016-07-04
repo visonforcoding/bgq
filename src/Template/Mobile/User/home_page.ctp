@@ -53,7 +53,7 @@
                             <h3>
                                 <em>
                                     <i><?= $education->school ?></i>
-                                    <i><?= date('Y', strtotime($education->start_date)) ?>-<?= date('Y', strtotime($education->end_date)) ?>，<?= $education->education ?>，
+                                    <i><?= $education->start_date ?>-<?= $education->end_date ?>，<?= $education->education ?>，
                                         <?= $education->major ?></i>
                                 </em>
                             </h3>
@@ -65,7 +65,7 @@
                             <h3>
                                 <em>
                                     <i><?= $career->company ?></i>
-                                    <i><?= date('Y', strtotime($career->start_date)) ?>-<?= date('Y', strtotime($career->end_date)) ?>，<?= $career->position ?></i>
+                                    <i><?= $career->start_date ?>-<?= $career->end_date ?>，<?= $career->position ?></i>
                                 </em>
                             </h3>
                         <?php endforeach; ?>
@@ -98,7 +98,7 @@
                     <h3>
                         <em>
                             <i><?= $education->school ?></i>
-                            <i><?= date('Y', strtotime($education->start_date)) ?>-<?= date('Y', strtotime($education->end_date)) ?>，<?= $educationType[$education->education] ?>，
+                            <i><?= $education->start_date ?>-<?= $education->end_date ?>，<?= $educationType[$education->education] ?>，
                                 <?= $education->major ?></i>
                         </em>
                     </h3>
@@ -110,7 +110,7 @@
                     <h3>
                         <em>
                             <i><?= $career->company ?></i>
-                            <i><?= date('Y', strtotime($career->start_date)) ?>-<?= date('Y', strtotime($career->end_date)) ?>，<?= $career->position ?></i>
+                            <i><?= $career->start_date ?>-<?= $career->end_date ?>，<?= $career->position ?></i>
                         </em>
                     </h3>
                 <?php endforeach; ?>
