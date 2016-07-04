@@ -112,7 +112,7 @@
     share_desc && (window.shareConfig.desc = share_desc);
 </script>
 <script>
-    windows.comme_submit = true;
+    window.comme_submit = true;
     $('.com-all').hide();
     // 少于五条评论隐藏显示全部, 大于一条评论隐藏还没有任何评论
     var circle = setInterval(function(){
