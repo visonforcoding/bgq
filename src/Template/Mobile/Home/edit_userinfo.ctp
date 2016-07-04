@@ -13,7 +13,7 @@
         <h3>杨涛<span>IDG资本 董事长</span></h3>
     </div>-->
 </header>
-<div class="wraper m-fixed-bottom newswraper">
+<div class="wraper m-fixed-bottom">
     <form method="post">
     <ul class="h-info-box e-info-box">
         <li class='u-img no-right-ico'>
@@ -151,6 +151,7 @@
             </li>
     </ul>
     </form>
+    <div style='height:1rem;'></div>
     <a id="submit" href="javascript:void(0);" class="f-bottom">完成</a>
 </div>
 <div class='reg-shadow' style="display: none;"></div>
