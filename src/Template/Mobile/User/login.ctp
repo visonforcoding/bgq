@@ -98,6 +98,7 @@
         if ($.util.isAPP) {
             alert('开始APP登录');
             LEMON.login.wx(function (code) {
+                alert(code);
             $.util.ajax({   //获取open id,比对是否存在,登录或是注册  生成token
                 data:{code:code},
                 url: '/wx/appLogin',
