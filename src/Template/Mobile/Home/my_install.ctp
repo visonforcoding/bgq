@@ -26,7 +26,7 @@
 
     <ul class="h-info-box e-info-box no-t-border hli">
 
-        <li class="btop lh4 no-right-ico">
+        <li class="lh4 no-right-ico">
             <a href="">
                 <span>系统版本</span>
                 <div>
