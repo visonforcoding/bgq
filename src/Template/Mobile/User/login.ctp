@@ -104,7 +104,7 @@
                 url: '/wx/appLogin',
                 func:function(res){
                     alert(res);
-                    res = JSON.parse(res);
+                    //res = JSON.parse(res);
                     alert(res.redirect_url);
                     return false;
                     if(res.status){
