@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/mobile/font/font/iconfont.css" />
 <div class="wraper">
     <div class="h-home-bottom">
-        <a href="/user/home-page">
+        <a href="/user/home-page/<?= $user->id ?>">
             <div><span>
                     <img src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : $user->avatar ?>"/></span>
             </div>

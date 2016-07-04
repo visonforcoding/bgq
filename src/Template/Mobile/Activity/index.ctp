@@ -6,7 +6,7 @@
             <div class="a-search">
                <i class="iconfont">&#xe613;</i>
                 <div class="s-con">
-                    <input type="text" placeholder="请输入关键词" class="search" />
+                    <input type="text" placeholder="请输入关键词" readonly class="search" />
                 </div>
                 </a>
             </div>

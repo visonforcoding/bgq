@@ -29,10 +29,10 @@
                     <!-- 只推荐7条 -->
 
                     <?php foreach ($biggie->reco_users as $reco_user): ?>
+                    <a href="/user/home-page/<?= $reco_user->user->id; ?>">
                         <img src="<?= empty($reco_user->user->avatar) ? '/mobile/images/touxiang.jpg' : $reco_user->user->avatar ?>"/>
+                    </a>
                     <?php endforeach; ?>
-
-                  
                 </p>
                 <!-- 等<i id="meet_nums"><?=$biggie->savant->reco_nums?></i>人推荐 -->
                  <a href="/meet/view-more-reco/<?=$biggie->id?>" class="fr">查看更多</a>
@@ -100,14 +100,14 @@
 <?php $this->start('script'); ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
-    if($.util.isAPP) {
+    (function () {
+        var imgUrl = '<?= $biggie->avatar ?>';
+        if(imgUrl) window.shareConfig.imgUrl = location.origin +  imgUrl;
+        window.shareConfig.link = location.href;
+        window.shareConfig.title = '并购帮大咖';
+        window.shareConfig.desc = '<?= $biggie->company ?>  <?= $biggie->truename ?>';
         LEMON.show.shareIco();
-    }
-    // 分享设置
-    window.shareConfig.link = 'http://m.chinamatop.com/meet/view/<?= $biggie->id ?>';
-    window.shareConfig.title = '并购帮大咖·<?= $biggie->truename ?>';
-    var share_desc = '<?= isset($biggie->savant->summary)?$biggie->savant->summary:'并购帮大咖' ?>';
-    share_desc && (window.shareConfig.desc = share_desc);
+    })();
 </script>
 <script>
     var subject = null;
