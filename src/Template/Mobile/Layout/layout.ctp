@@ -55,7 +55,7 @@
                 if(!/smartlemon|micromessenger/.test(navigator.userAgent.toLowerCase())){
                     //$('header').show();
                     //$('#search').css('top','0.9rem');
-                }else{
+                }else if($.util.isAPP){
                     $($('.wraper')[0]).css('padding-top','0');
                 }
 
@@ -76,7 +76,7 @@
                 else if(cookietk){
                     LEMON.db.set('token_uin', cookietk);
                 }
-            })()
+            })();
 
         </script>
 
