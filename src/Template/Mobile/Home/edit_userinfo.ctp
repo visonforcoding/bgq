@@ -52,7 +52,7 @@
             <a href="javascript:void(0)">
                 <span>性别：</span>
                 <div>
-                    <span>
+                    <span class='typeselect'>
                     <select name="gender" class='checkedsex'>
                         <option value="1" <?php if($user->gender==1):?>selected="selected"<?php endif; ?>>男</option>
                         <option value="2" <?php if($user->gender==2):?>selected="selected"<?php endif; ?>>女</option>
