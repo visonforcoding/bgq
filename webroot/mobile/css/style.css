@@ -119,6 +119,7 @@
 .newscon-box h3{line-height:0.46rem;width:100%;font-size:0.4rem;color:#222c38; margin:0.3rem 0 0.2rem;padding:0 0.3rem;}
 .newscon-box img{max-width:90%;height:auto;display: block;margin:0.3rem auto;}
 .newscon-box p{width:90%;margin:0.1rem auto;line-height: 0.42rem;font-size:0.3rem;color:#9ba4ad;text-align: justify;}
+
 .con-bottom{float:right;margin-right: 8%;color:#9ba4ad;margin-top:0.2rem;font-size:0.28rem;}
 .readnums{font-size:0.3rem;}
 .con-bottom i{margin:0 0.1rem; color:#9ba4ad;}
@@ -139,6 +140,7 @@ border-bottom:1px #e5e5e5 solid; padding:0 0.3rem;position:relative;font-weight:
 .comm-info{height:0.62rem;color:#7a7e83;}
 .entrollist .comm-info{height:auto;}
 .comm-info span{ display: block;float:left;}
+.infor-comm{width:4.5rem;}
 .comm-info span:first-child{width:0.62rem;height:0.62rem;margin-right:0.3rem;}
 .comm-info span:last-child{float:right;margin-top:0.14rem;position:relative;padding-top:0.2rem;}
 .comm-info span .addnum{position:absolute;top:-0.1rem;left:0;width:0.3rem;height;0.3rem;padding-top:0.1rem;display: none;color:#da2051;font-size:0.28rem;font-weight: bold;}
@@ -153,7 +155,7 @@ border-bottom:1px #e5e5e5 solid; padding:0 0.3rem;position:relative;font-weight:
 .comm-info .infor-comm i{display: block;}
 .comm-info .username{font-size:0.3rem;line-height: 0.38rem;}
 .comm-info .username time{font-size:0.26rem;margin-left:0.3rem;color:#9ba4ad;}
-.comm-info .job{font-size:0.26rem;line-height: 0.3rem;margin-top:0.05rem;width:5.8rem;color:#9ba4ad;}
+.comm-info .job{font-size:0.26rem;line-height: 0.3rem;margin-top:0.05rem;/*width:5.8rem;*/color:#9ba4ad;}
 .newscomment-box p{width:100%;padding:0.2rem;padding-left:0.92rem;font-size:0.28rem;color:#7a7e83;line-height: 0.3rem;clear:both;
 text-align: justify;}
 /*新闻搜索--start*/
