@@ -106,7 +106,6 @@
                     alert(res);
                     //res = JSON.parse(res);
                     alert(res.redirect_url);
-                    return false;
                     if(res.status){
                         $.util.setCookie('token_uin',res.token_uin,10*365*24*60);
                         LEMON.db.set('token_uin',res.token_uin);
