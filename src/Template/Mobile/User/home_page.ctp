@@ -1,11 +1,19 @@
-<header class="myhome no-bottom">
-    <div class='inner'>
-        <a href='javascript:history.go(-1);' class='toback'></a>
-        <h1>个人主页</h1>
-        <!--<a href="#this" class='iconfont share h-regiser'>&#xe619;</a>-->
-    </div>
-</header>
 <div class="m-wraper m-fixed-bottom wraper">
+    <div class="m-info-card">
+        <div class="m-info">
+            <a href="javascript:void(0)" class="m-pic"><img src="<?= $user->avatar ?>"/></a>
+            <div class="mt-info">
+                <h3><?= $user->truename ?></h3>
+                <span class="job"><?= $user->company ?> <?= $user->position ?> </span>
+                <span class="mmark"><?php foreach($user->industries as $k=>$v): ?>IT互联网</span>
+            </div>
+            <div class="linkinfo">
+                <p><span>手机号:<a href="tel"><?= $user->phone ?></a></span></p>
+                <p><span>邮    箱:<i><?= $user->email ?></i></span></p>
+                <p><span>地    区:<i><?= $user->city ?></i></span></p>
+            </div>
+        </div>
+    </div>
     <div class="h-home-bottom">
         <a href="<?php if ($self): ?>/home/edit-userinfo<?php else: ?>javascript:void(0)<?php endif; ?>">
             <div>
