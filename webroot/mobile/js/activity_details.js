@@ -64,7 +64,7 @@ activity.prototype.bindEvent = function () {
                 var msg = '回复 ' + $('#comment_username_' + reply_id).attr('user_name') + ' :';
                 $('#r_textarea').attr('placeholder', msg);
                 $('.reply-shadow').show();
-                $('.reply').show();
+                $('.reply').removeClass('m-height').addClass('c-height');
                 var comid = $(em).attr('value');
                 $('#publish_reply').attr('value', comid);
             } else {
