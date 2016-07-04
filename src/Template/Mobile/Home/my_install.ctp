@@ -35,7 +35,7 @@
             </a>
         </li>-->
 
-        <li class="btop">
+        <li class="btop lh4">
             <a href="">
                 <span>给我打分</span>
                 <div>
@@ -43,7 +43,7 @@
                 </div>
             </a>
         </li>
-        <li  class="nobottom" id="logout">
+        <li  class="nobottom lh4" id="logout">
             <a href="javascript:void(0)">
                 <span>注销登录</span>
                 <div>
