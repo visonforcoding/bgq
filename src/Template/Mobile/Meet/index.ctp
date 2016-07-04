@@ -9,12 +9,14 @@
 <link rel="stylesheet" type="text/css" href="/mobile/font/font/iconfont.css">
 <div class="wraper newswraper">
     <div class="a-search-box" id="search">
-        <div class="a-search">
-           <a href="#this"> <i class="iconfont">&#xe613;</i></a>
-            <div class="s-con">
-                <input type="text" placeholder="请输入关键词" readonly class='search'/>
+        <a href="/meet/search">
+            <div class="a-search">
+                <i class="iconfont">&#xe613;</i>
+                <div class="s-con">
+                    <input type="text" placeholder="请输入关键词" readonly class='search'/>
+                </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="a-banner" >
         <ul class="pic-list-container" id="imgList">
@@ -171,14 +173,6 @@
                         
                     });
            },0)
-    
-    $('.s-con').click(function () {
-        $('.search').focus();
-    });
-
-    $('.search').focus(function () {
-        location.href = "/meet/search";
-    });
     
     $.util.searchHide();
 </script>

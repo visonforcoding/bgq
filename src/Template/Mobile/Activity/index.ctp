@@ -2,14 +2,14 @@
 <body>
     <div class="wraper a-wraper">
         <div class="a-search-box" id="search">
-             <a href="/activity/search"> 
-            <div class="a-search">
-               <i class="iconfont">&#xe613;</i>
-                <div class="s-con">
-                    <input type="text" placeholder="请输入关键词" readonly class="search" />
+            <a href="/activity/search"> 
+                <div class="a-search">
+                    <i class="iconfont">&#xe613;</i>
+                    <div class="s-con">
+                        <input type="text" placeholder="请输入关键词" readonly class="search" />
+                    </div>
                 </div>
-                </a>
-            </div>
+            </a>
         </div>
         <div class="a-banner">
             <ul class="pic-list-container" id="imgList">
@@ -73,14 +73,6 @@
     //轮播
     var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
 
-    $('.s-con').click(function () {
-        $('.search').focus();
-    });
-
-    $('.search').focus(function () {
-        location.href = "/activity/search";
-    });
-    
     $.util.searchHide();
 </script>
 <?php

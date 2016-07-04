@@ -13,7 +13,7 @@
                     <input type="text" placeholder="请输入关键词" readonly class="search" />
                 </div>
             </div>
-       </a>
+        </a>
     </div>
     <div class="a-banner">
         <ul class="pic-list-container" id="imgList">
@@ -117,14 +117,6 @@
         });
     });
     }, 2000);
-    
-    $('.s-con').click(function () {
-        $('.search').focus();
-    });
-
-    $('.search').focus(function () {
-        location.href = "/news/search";
-    });
     
     $.util.searchHide();
 </script>
