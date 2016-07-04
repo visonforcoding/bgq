@@ -1,7 +1,7 @@
 <div class="fixedwraper" >
     <div class='h-news-search'>
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe613;</a>
-        <form id="searchForm" onsubmit="return false;" style="width:100%;">
+        <form id="searchForm" onsubmit="return false;" >
         <h1><input type="text" name="keyword" placeholder="请输入关键词"></h1>
         <input type="hidden" name="industry_id" value="" style="display:none;"/>
         <input type="hidden" name="sort" value="" style="display:none;"/>
