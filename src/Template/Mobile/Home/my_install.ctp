@@ -17,24 +17,24 @@
 
         </ul>
     </div>-->
-    <div class="infoboxlist a-pay paytype installbox">
+   <!--  <div class="infoboxlist a-pay paytype installbox">
         <ul class='ulinfo'>
             <li>系统版本：</li>
 
         </ul>
-    </div>
+    </div> -->
 
     <ul class="h-info-box e-info-box no-t-border hli">
 
-<!--        <li class="btop">
+        <li class="btop">
             <a href="">
-                <span>修改密码</span>
+                <span>系统版本</span>
                 <div>
-                    <span></span>
+                    <span>Verson 1.0</span>
                 </div>
             </a>
-        </li>-->
-
+        </li>
+            
         <li class="btop lh4">
             <a href="">
                 <span>给我打分</span>
