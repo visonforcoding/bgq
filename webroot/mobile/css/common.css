@@ -39,9 +39,11 @@ a,button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);}
 .wraper .no-b-tb{border-bottom:none;margin-top:0;}
 .wraper .no-t-border{border-top:none;}
 .wraper .pd20{margin-bottom:0.2rem;}
+.wraper .tr{text-align: right;}
 .hf20{height:0.2rem;background: #fff;border-bottom:1px #e5e5e5 solid;}
 .wraper .texthide{word-break: break-all;display: -webkit-box;/*-webkit-line-clamp: 3;限制行数*/-webkit-box-orient: vertical;overflow: hidden;}
-
+.bggray{background: #7a7d82;}
+.bgred{background: #e01a48;}
 .newswraper,.a-wraper{padding-bottom:1.2rem;}
 .innercon{margin:0 auto;padding:0 0.3rem;background: #fff;}
 .h20{height:0.2rem;border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid;}
@@ -115,8 +117,8 @@ footer .othertype img,.wxlogin .othertype img{width:100%;height:auto;display:blo
 @-webkit-keyframes moveup {from { }to { -webkit-transform: translateY(-100px);transform: translateY(-100px);}}
 @keyframes moveup {from { }to {-webkit-transform: translateY(-100px);transform: translateY(-100px); }}
 /*movedown*/
-@-webkit-keyframes movedown {from {opacity: 0; }to { -webkit-transform: translateY(20px);transform: translateY(20px);}}
-@keyframes movedown {from {opacity: 0; }to { -webkit-transform: translateY(20px);transform: translateY(20px);}}
+@-webkit-keyframes movedown {from {opacity: 0; }to { -webkit-transform: translateY(2px);transform: translateY(2px);}}
+@keyframes movedown {from {opacity: 0; }to { -webkit-transform: translateY(10px);transform: translateY(10px);}}
 /*moveright*/
 @-webkit-keyframes moveright{from {}to { -webkit-transform: translateX(100px);transform: translateX(100px);}}
 @keyframes moveright {from {}to {-webkit-transform: translateX(100px);transform: translateX(100px);}}
