@@ -63,7 +63,6 @@
                     $('footer').show();
                 } else if($.util.isAPP){
                     $($('.wraper')[0]).css('padding-bottom','0');
-                    alert($($('.wraper')[0]));
                 }
             })();
 

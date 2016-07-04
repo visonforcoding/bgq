@@ -5,6 +5,8 @@
         <title><?= $pageTitle ? $pageTitle : '并购圈'; ?></title>
         <link rel="stylesheet" type="text/css" href="/pc/css/basic.css"/>
         <link rel="stylesheet" type="text/css" href="/pc/css/style.css"/>
+        <script type="text/javascript" src="/mobile/js/zepto.min.js"></script>
+        <script type="text/javascript" src="/mobile/js/util.js"></script>
         <?= $this->fetch('static') ?>
     </head>
     <body>

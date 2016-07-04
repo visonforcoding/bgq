@@ -14,7 +14,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace App\Controller\Mobile;
+namespace App\Controller\Home;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
