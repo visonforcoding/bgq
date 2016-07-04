@@ -54,8 +54,8 @@
                 <div>
                     <span>
                     <select name="gender" class='checkedsex'>
-                        <option value="1" <?php if($user->gender==1):?>selected="true"<?php endif; ?>>男</option>
-                        <option value="2" <?php if($user->gender==2):?>selected="false"<?php endif; ?>>女</option>
+                        <option value="1" <?php if($user->gender==1):?>selected="selected"<?php endif; ?>>男</option>
+                        <option value="2" <?php if($user->gender==2):?>selected="selected"<?php endif; ?>>女</option>
                     </select>
                     </span>
                 </div>
