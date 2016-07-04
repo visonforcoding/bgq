@@ -59,9 +59,16 @@
         });
     });
     $('#uploadPic').on('tap', function () {
-        var path = null;
         if ($.util.isAPP) {
-            LEMON.event.uploadPhoto(callback());
+            LEMON.event.uploadPhoto('{"dir":"user/mp"}', function (data) {
+                var data = JSON.parse(data);
+                if (data.status === true) {
+                    $.util.alert('上传成功');
+                    doRecogMp(data.path);
+                } else {
+                    $.util.alert('上传失败,请稍后再试。');
+                }
+            });
         } else if ($.util.isWX) {
             $.util.wxUploadPic(function (id) {
                 $.util.ajax({
@@ -69,10 +76,7 @@
                     func: function (res) {
                         if (res.status === true) {
                             $.util.alert(res.msg);
-                            path = res.path;
-                            $('.imgcard').find('img').attr('src', res.path);
-                            $('input[name="card_path"]').val(res.path);
-                            doRecogMp(path);
+                            doRecogMp(res.path);
                         }
                     }
                 });
@@ -81,7 +85,12 @@
             $.util.alert('请在微信或APP里面上传名片');
         }
     });
+
+
     function doRecogMp(path){
+        $('.imgcard').find('img').attr('src', path);
+        $('input[name="card_path"]').val(path);
+
          if (path) {
             $.post('/user/recog-mp', {path:path}, function (res) {
                 if (res.status === true) {
