@@ -55,8 +55,11 @@
                 if(!/smartlemon|micromessenger/.test(navigator.userAgent.toLowerCase())){
                     //$('header').show();
                     //$('#search').css('top','0.9rem');
-                }else if($.util.isAPP){
+                }else{
                     $($('.wraper')[0]).css('padding-top','0');
+                }
+                if($.util.isAPP){
+                    $($('.wraper')[0]).css('padding-bottom','0');
                 }
 
                 if(navigator.userAgent.toLowerCase().indexOf('smartlemon') == -1){
