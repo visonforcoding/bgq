@@ -34,7 +34,7 @@
 .redshadow{box-shadow: 0 0.2rem 0.2rem rgba(224,26,72,.2);}
 .grayshadow{box-shadow: 0 0.2rem 0.2rem rgba(122,126,131,.2);}
 .items .active{border:1px #de204b solid; color:#de204b;position:relative;}
-.items .active:after{position:absolute;content:'';width:0.28rem;height:0.28rem;top:0;right:-0.14rem;background: url(img/choose.png) no-repeat; background-size:cover;}
+.items .active:after{position:absolute;content:'';width:0.28rem;height:0.28rem;top:0;right:-0.14rem;background: url(img/choose.png) no-repeat; background-size:contain;}
 .myselfmark input{ width: 1.2rem; height: 0.4rem;border: none;line-height: 0.4rem; text-align: center;}
 
 /*注册--上传名片--start*/
