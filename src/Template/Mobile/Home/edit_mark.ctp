@@ -14,28 +14,30 @@
             <span class="orgname">个人标签（最多5个）</span>
         </div>
         <div class="orgmark">
-               <?php  if($mark_arr):?>
-                            <?php foreach ($profiletags as  $key=> $tag): ?>
-                                <?php $flag = false;?>
-                                    <?php foreach($mark_arr as $mark):?>
-                                            <?php if($tag->name==$mark): ?>
-                                                    <a href="#this" data-val="<?= $tag->name ?>" class="agency-item active"><?= $tag->name ?></a>
-                                                    <?php $flag =true; ?>
-                                            <?php endif;?>
-                                      <?php endforeach;?>
-                                 <?php if(!$flag): ?>
-                                    <a href="#this" data-val="<?= $tag->name ?>" class="agency-item"><?= $tag->name ?></a>
-                                   <?php endif;?>
-                            <?php endforeach; ?>
-                    <?php else:?>
-                            <?php foreach ($profiletags as $tag): ?>
-                                <a href="#this" data-val="<?= $tag->name ?>" class="agency-item"><?= $tag->name ?></a>
-                            <?php endforeach; ?>
-                <?php endif;?>
-            <a href="javascript:void(0)" class='color-items' id="addTag">
-                添加
-                <!--<input type="text" name="extra" />-->
-            </a>
+            <?php if ($mark_arr): ?>
+                <?php foreach ($profiletags as  $tag): ?>
+                    <?php $flag = false; ?>
+                    <?php foreach ($mark_arr as $mark): ?>
+                        <?php if ($tag == $mark): ?>
+                            <a href="#this" data-val="<?= $tag ?>" class="agency-item active"><?= $tag ?></a>
+                            <?php $flag = true; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                    <?php if (!$flag): ?>
+                        <a href="#this" data-val="<?= $tag ?>" class="agency-item"><?= $tag ?></a>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                  <?php if($extra_mark):?>
+                        <?php foreach ($extra_mark as $extra):?>
+                        <a href="#this" data-val="<?= $extra ?>" class="agency-item active"><?= $extra ?></a>
+                        <?php endforeach;?>
+                   <?php endif;?>
+            <?php else: ?>
+                <?php foreach ($profiletags as $tag): ?>
+                    <a href="#this" data-val="<?= $tag ?>" class="agency-item"><?= $tag ?></a>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <a href="#this" class='a-mark agency-item'><input style="border: none" type="" name="" id="extra_industry" value="" placeholder="输入自定义新标签" /></a>
         </div>
     </div>
     <a  id="submit" href="#this" class='nextstep'>保存</a>
@@ -52,14 +54,16 @@
         $('#submit').click(function () {
             agency = [];
             formdata = {};
-            $('.agency-item.active').each(function (i, elm) {
+            $('.agency-item.active').not('.a-mark').each(function (i, elm) {
                 agency.push($(elm).data('val'));
             });
             formdata['tags'] = agency;
 //            formdata['industries'] = agency;
             var extra_industry = $('#extra_industry').val();
             if (extra_industry !== '' && $('#extra_industry').parent().hasClass('active')) {
-                formdata.ext_industry = extra_industry;
+                console.log(formdata);
+                console.log(extra_industry);
+                formdata['tags'].push(extra_industry);
             }
             if (Object.keys(formdata).length < 5) {
                 if (Object.keys(formdata).length = 0) {
@@ -72,7 +76,7 @@
                         $.util.alert(res.msg);
                         if (res.status) {
                             setTimeout(function () {
-                                window.location.href = '/home/edit-userinfo'
+                                //window.location.href = '/home/edit-userinfo'
                             }, 1500);
                         }
                     }
@@ -81,8 +85,8 @@
                 $.util.alert('最多可选5个');
             }
         });
-        
-        $('#addTag').on('tap', function(){
+
+        $('#addTag').on('tap', function () {
             layer.alery(123);
         });
     });
