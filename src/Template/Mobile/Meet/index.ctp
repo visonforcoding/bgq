@@ -181,12 +181,5 @@
     });
     
     $.util.searchHide();
-    
-    if($.util.isAPP)
-    {
-        $('#search').hide();
-        LEMON.show.search('/meet/search');
-    }
-    
 </script>
 <?php $this->end('script');
