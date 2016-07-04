@@ -58,12 +58,12 @@
                 }else{
                     $($('.wraper')[0]).css('padding-top','0');
                 }
-                if($.util.isAPP){
-                    $($('.wraper')[0]).css('padding-bottom','0');
-                }
 
                 if(navigator.userAgent.toLowerCase().indexOf('smartlemon') == -1){
                     $('footer').show();
+                } else if($.util.isAPP){
+                    $($('.wraper')[0]).css('padding-bottom','0');
+                    alert($($('.wraper')[0]));
                 }
             })();
 
