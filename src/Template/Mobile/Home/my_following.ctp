@@ -30,7 +30,7 @@
 <script type="text/html" id="listTpl">
     <section class="internet-v-info">
         <div class="innercon">
-            <span class="head-img"><img src="{#following_avatar#}"/><i></i></span>
+            <a href='/user/home-page/{#id#}'><span class="head-img"><img src="{#following_avatar#}"/><i></i></span></a>
             <div class="vipinfo">
                 <h3>{#following_truename#}<span class="meetnum"></span></h3>
                 <span class="job">{#following_company#}&nbsp;&nbsp;{#following_position#}</span>
