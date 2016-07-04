@@ -33,6 +33,9 @@
             data:{content:content},
             func:function(res){
                 $.util.alert(res.msg);
+                setTimeout(function(){
+                    location.href = '/home/index';
+                },2000);
             }
          });
       });
