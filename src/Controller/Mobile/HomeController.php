@@ -791,17 +791,26 @@ class HomeController extends AppController {
                }
            }
            $ProfiletagTable = \Cake\ORM\TableRegistry::get('Profiletag');
-           $profiletags = $ProfiletagTable->find()->toArray();
+           $profiletags = $ProfiletagTable->find('list')->select(['name'])->toArray();
            $mark_ser = $userInfo->grbq;  //个人标签
            $mark_arr = [];
+           $extra_arr = [];
            if(is_array(unserialize($mark_ser))){
                $mark_arr = unserialize($mark_ser);
+               if($mark_arr){
+                   foreach ($mark_arr as $mark){
+                        if(!in_array($mark, $profiletags)){
+                            $extra_arr[] = $mark;
+                        }
+                   }
+               }
            }
           $this->set([
             'pageTitle'=>'个人标签',
              'user'=>$userInfo,
               'mark_arr'=>$mark_arr,
-              'profiletags'=>$profiletags
+              'profiletags'=>$profiletags,
+              'extra_mark'=>$extra_arr
         ]);
     }
 
