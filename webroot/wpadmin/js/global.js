@@ -129,6 +129,7 @@ function initJqupload(id, url, allowedTypes) {
         customErrorKeyStr: '上传发生了错误',
         onSuccess: function (files, data, xhr, pd) {
             if (data.status) {
+                $('#' + id).prevAll('.input-img').removeClass('input-img');
                 $('#' + id).prevAll('.img-thumbnail').find('img').attr('src', data.path);
                 $('#' + id).prev().val(data.path);
             } else {
