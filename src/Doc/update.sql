@@ -291,3 +291,4 @@ ALTER TABLE `career`
 #工作描述可以为空
 ALTER TABLE `binggq`.`career`
   CHANGE COLUMN `descb` `descb` text NULL COMMENT '描述';
+#======07 03 done====

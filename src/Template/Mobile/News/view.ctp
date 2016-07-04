@@ -112,7 +112,7 @@
     share_desc && (window.shareConfig.desc = share_desc);
 </script>
 <script>
-    windowssubmit = true;
+    windows.comme_submit = true;
     $('.com-all').hide();
     // 少于五条评论隐藏显示全部, 大于一条评论隐藏还没有任何评论
     var circle = setInterval(function(){
@@ -214,12 +214,12 @@
                         $.util.alert('评论内容不可为空');
                         return false;
                     }
-                    if(window.submit == true)
+                    if(window.comme_submit == true)
                     {
                         setTimeout(function(){
-                            window.submit = true;
+                            window.comme_submit = true;
                         },2000);
-                        window.submit = false;
+                        window.comme_submit = false;
                         $.util.ajax({
                             url: '/news/comment',
                             data: {reply_id: reply_id, content: content, id:<?= $news->id ?>},

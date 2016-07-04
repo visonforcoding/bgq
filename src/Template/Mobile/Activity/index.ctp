@@ -82,13 +82,6 @@
     });
     
     $.util.searchHide();
-    
-    if($.util.isAPP)
-    {
-        $('#search').hide();
-        LEMON.show.search('/activity/search');
-    }
-  
 </script>
 <?php
 $this->end('script');
