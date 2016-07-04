@@ -96,16 +96,13 @@
     });
     $('#wxlogin').on('click', function () {
         if ($.util.isAPP) {
-            alert('开始APP登录');
             LEMON.login.wx(function (code) {
-                alert(code);
             $.util.ajax({   //获取open id,比对是否存在,登录或是注册  生成token
                 data:{code:code},
                 url: '/wx/appLogin',
                 func:function(res){
-                    alert(res);
                     //res = JSON.parse(res);
-                    alert(res.redirect_url);
+                    $.util.alert(res.msg);
                     if(res.status){
                         $.util.setCookie('token_uin',res.token_uin,10*365*24*60);
                         LEMON.db.set('token_uin',res.token_uin);
