@@ -98,7 +98,7 @@
                     <h3>
                         <em>
                             <i><?= $education->school ?></i>
-                            <i><?= date('Y', strtotime($education->start_date)) ?>-<?= date('Y', strtotime($education->end_date)) ?>，<?= $education->education ?>，
+                            <i><?= date('Y', strtotime($education->start_date)) ?>-<?= date('Y', strtotime($education->end_date)) ?>，<?= $educationType[$education->education] ?>，
                                 <?= $education->major ?></i>
                         </em>
                     </h3>

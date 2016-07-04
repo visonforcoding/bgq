@@ -1,6 +1,7 @@
 <?php $this->start('static') ?>   
 <link href="/wpadmin/lib/jqupload/uploadfile.css" rel="stylesheet">
 <link href="/wpadmin/lib/jqvalidation/css/validationEngine.jquery.css" rel="stylesheet">
+<link href="/wpadmin/lib/select2/css/select2.min.css" rel="stylesheet">
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($projrong, ['class' => 'form-horizontal']) ?>
@@ -154,13 +155,10 @@
             ?>
         </div>
     </div>
-        <div class="form-group">
-        <label class="col-md-2 control-label">tags</label>
+    <div class="form-group">
+        <label class="col-md-2 control-label">行业标签</label>
         <div class="col-md-8">
-    <?php
-        echo $this->Form->input('tags._ids', ['options' => $tags,'label'=>false,
-            'class'=>'form-control']);
-        ?>
+            <?=$this->cell('Industry')?>
         </div>
     </div>
         <div class="form-group">
@@ -176,14 +174,16 @@
 <script type="text/javascript" src="/wpadmin/lib/jqupload/jquery.uploadfile.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/jquery.validationEngine.js"></script>
-<!--<script src="/wpadmin/lib/ueditor/ueditor.config.js" ></script>
-<script src="/wpadmin/lib/ueditor/ueditor.all.js" ></script>
-<script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>    -->
+<script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
     $(function () {
         // initJqupload('cover', '/wpadmin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
         //var ue = UE.getEditor('content'); //初始化富文本编辑器
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
+        $('#select-industry').select2({
+            language: "zh-CN",
+            placeholder: '选择一个标签'
+        });
         $('form').submit(function () {
             var form = $(this);
             $.ajax({

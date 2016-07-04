@@ -32,12 +32,9 @@ class ScanController extends AppController {
     public function check($guid){
         $userTable = \Cake\ORM\TableRegistry::get('User');
         $user = $userTable->find()->where('guid='.$guid)->toArray();
-        if($user != false)
-        {
+        if ($user != false) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
@@ -53,12 +50,9 @@ class ScanController extends AppController {
         $user = $userTable->get($id);
         $user->guid = $guid;
         $res = $userTable->save();
-        if($res)
-        {
+        if ($res) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
@@ -75,13 +69,11 @@ class ScanController extends AppController {
     }
     
     public function create_qrcode($guid){
-        require_once(ROOT . DS . 'vendor' . DS  . 'phpqrcode' . DS . 'phpqrcode.php');
-        $qrcode = new \QRcode();
         $text = 'http://' . $_SERVER['SERVER_NAME'] . '/scan/scanLogin/' . $guid; //二维码内容
-        $url = 'upload/qrcode/'. $guid .'.png'; //二维码路径
+        $url = 'upload/qrcode/logincode/'. $guid .'.png'; //二维码路径
         $level = 'L'; //容错级别   
         $size = 6; //生成图片大小   
-        $qrcode->png($text, $url, $level, $size, 2);
+        \PHPQRCode\QRcode::png($text, $url, $level, $size, 2);
         return $url;
     }
 

@@ -51,11 +51,13 @@ class UserController extends AppController {
             $isFans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$id'")->count();  //检测是否关注
             $isGive = $this->User->CardBoxes->find()->where(['ownerid'=>$id, 'uid'=>$this->user->id])->first();  //检测是否递过名片
         }
+        $educationType = \Cake\Core\Configure::read('educationType');
         $this->set([
             'pageTitle'=>'个人主页',
             'self'=>$self,
             'isFans'=>$isFans,
-            'isGive' => $isGive
+            'isGive' => $isGive,
+            'educationType' => $educationType
         ]);
         $this->set(compact('user','industry_arr'));
     }
