@@ -19,13 +19,16 @@
     var loginbtn = document.getElementById('login');
     var wxbox = document.getElementById('wx');
     var img = wxbox.getElementsByTagName('img')[0];
+    var timer = '';
     loginbtn.onmouseover = function () {
         wxbox.style.opacity = 1;
+        timer = setInterval(check, 2000);
     };
     loginbtn.onmouseout = function () {
         setTimeout(function () {
             if (!isInside) {
                 wxbox.style.opacity = 0;
+                clearInterval(timer);
             }
         }, 1000);
     };
@@ -37,13 +40,14 @@
         this.style.opacity = 0;
     };
 
-    setInterval(check(), 1000);
+    
     function check(){
         $.ajax({
             type: 'POST',
-            url: '/w/User/check',
+            url: '/w/User/check/<?= $guid ?>',
             dataType: 'json',
             success: function (res) {
+                console.log(res);
                 if(res.status){
                     $.util.alert(res.msg);
                     setTimeout(function(){

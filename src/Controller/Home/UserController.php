@@ -22,8 +22,11 @@ class UserController extends AppController {
     public function login(){
         $guid = $this->create_guid();
         $code = $this->create_qrcode($guid);
-        $this->set('code', $code);
-        $this->set('pageTitle', '登录');
+        $this->set([
+            'pageTitle'=>'登录',
+            'code' => $code,
+            'guid' => $guid,
+        ]);
     }
     
     /**
@@ -31,19 +34,19 @@ class UserController extends AppController {
      * @param string $guid
      */
     public function scanLogin($guid) {
-        if($this->request->is('post')){
-            $user_id = $this->user->id;
-            $user = $this->User->get($user_id);
-            $user = $this->User->patchEntity($user, ['guid'=>$guid]);
-            $res = $this->User->save($user);
-            if($res){
-                return true;
-            } else {
-                return false;
-            }
+        $user_id = $this->user->id;
+        $user = $this->User->get($user_id);
+        $data['guid'] = $guid;
+        $user = $this->User->patchEntity($user, $data);
+        $res = $this->User->save($user);
+        if($res){
+            $this->set('res', '授权成功！');
+        } else {
+            $this->set('res', '授权失败！');
         }
-        debug($this->user->id);die;
-        $this->set('pageTitle', '扫码登录');
+        $this->set([
+            'pageTitle'=>'扫码登录',
+        ]);
     }
     
     /**
@@ -52,12 +55,11 @@ class UserController extends AppController {
      * @return boolean
      */
     public function check($guid){
-        $userTable = \Cake\ORM\TableRegistry::get('User');
-        $user = $userTable->find()->where('guid='.$guid)->toArray();
+        $user = $this->User->find()->where(['guid'=>$guid])->toArray();
         if ($user != false) {
-            return true;
+            return $this->Util->ajaxReturn(true, '登录成功');
         } else {
-            return false;
+            return $this->Util->ajaxReturn(false, '登录失败');
         }
     }
     
