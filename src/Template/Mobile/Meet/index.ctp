@@ -8,6 +8,14 @@
 </header>
 <link rel="stylesheet" type="text/css" href="/mobile/font/font/iconfont.css">
 <div class="wraper newswraper">
+    <div class="a-search-box" id="search">
+        <div class="a-search">
+           <a href="#this"> <i class="iconfont">&#xe613;</i></a>
+            <div class="s-con">
+                <input type="text" placeholder="请输入关键词" class='search'/>
+            </div>
+        </div>
+    </div>
     <div class="a-banner" >
         <ul class="pic-list-container" id="imgList">
             <?php foreach ($banners as $k=>$v): ?>
@@ -18,14 +26,6 @@
             <?php foreach ($banners as $v): ?>
             <span></span>
             <?php endforeach; ?>
-        </div>
-        <div class="a-search-box" id="search">
-            <div class="a-search">
-               <a href="#this"> <i class="iconfont">&#xe613;</i></a>
-                <div class="s-con">
-                    <input type="text" placeholder="请输入关键词" class='search'/>
-                </div>
-            </div>
         </div>
     </div>
     <!--分类--start-->
