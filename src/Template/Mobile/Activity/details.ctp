@@ -1,6 +1,6 @@
 <body>
     <?= $this->element('header'); ?>
-    <div class="wraper" id="activity_detail" style='margin-bottom:1.2rem;'>
+    <div class="wraper" id="activity_detail" >
         <section class="newscon-box a-detail">
             <h3><?= $activity->title; ?></h3>
            <div> <img src="<?= $activity->cover; ?>"/></div>
@@ -96,6 +96,7 @@
                 </ul>
             </div>
         <?php endif; ?>
+        <div style='height:1rem;'></div>
     </div>
 
     <div class="wraper pd10" id="allcoment" style="display:none;">
