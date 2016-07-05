@@ -220,10 +220,10 @@ class MeetController extends AppController {
      * 专家简介编辑
      */
     public function editSummary(){
+        $user_id =  $this->user->id;
+        $SavantTable = \Cake\ORM\TableRegistry::get('Savant');
         if($this->request->is('post')){
             $this->handCheckLogin();
-            $user_id =  $this->user->id;
-            $SavantTable = \Cake\ORM\TableRegistry::get('Savant');
             $savant = $SavantTable->findByUser_id($user_id)->first();
             if($savant){
                 $savant->summary = $this->request->data('summary');
@@ -233,8 +233,10 @@ class MeetController extends AppController {
             }
             return $this->Util->ajaxReturn(false, '保存失败');
         }
+        $savant = $SavantTable->findByUser_id($user_id)->first();
         $this->set([
-            'pageTitle'=>'简介修改'
+            'pageTitle'=>'简介修改',
+            'summary' => $savant->summary
         ]);
     }
     

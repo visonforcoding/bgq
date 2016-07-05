@@ -13,7 +13,7 @@
     <div class="a-form-box">
         <ul>
             <li>
-                <textarea id="summary"></textarea>
+                <textarea id="summary"><?= $summary ?></textarea>
             </li>
         </ul>
     </div>
