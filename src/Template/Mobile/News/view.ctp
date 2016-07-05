@@ -308,7 +308,7 @@
                     break;
                 case 'shadow':case 'wxshare':
                     setTimeout(function(){
-                        $(em).hide();
+                        $('#shadow').hide();
                         $('#wxshare').hide();
                     },301);
                     break;

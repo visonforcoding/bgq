@@ -251,13 +251,11 @@ activity.prototype.bindEvent = function () {
                     $('#shadow').show();
                 }
                 break;
-            case 'shadow':
-                $(em).hide();
-                $('#wxshare').hide();
-                break;
-            case 'wxshare':
-                $(em).hide();
-                $('#shadow').hide();
+            case 'shadow':case 'wxshare':
+                setTimeout(function(){
+                    $('#shadow').hide();
+                    $('#wxshare').hide();
+                },301);
                 break;
             case 'reply_shadow':
                 setTimeout(function () {
