@@ -121,6 +121,9 @@ footer .othertype img,.wxlogin .othertype img{width:100%;height:auto;display:blo
 /*movedown*/
 @-webkit-keyframes movedown {from {}to { top:0.6rem;}}
 @keyframes movedown {from {}to { top:0.6rem;}}
+/*wx*/
+@-webkit-keyframes moveto {from {}to { top:0.2rem;}}
+@keyframes moveto {from {}to { top:0.2rem;}}
 /*moveright*/
 @-webkit-keyframes moveright{from {}to { -webkit-transform: translateX(100px);transform: translateX(100px);}}
 @keyframes moveright {from {}to {-webkit-transform: translateX(100px);transform: translateX(100px);}}
@@ -144,6 +147,7 @@ footer .othertype img,.wxlogin .othertype img{width:100%;height:auto;display:blo
 .wraper .moveleft{-webkit-animation: moveleft .6s linear;animation: moveleft .6s linear;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;
 -webkit-animation-fill-mode:forwards;}
 .wraper .movedown{-webkit-animation: movedown .6s;animation: movedown .6s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
+.wraper .moveto{-webkit-animation: moveto .6s;animation: moveto .6s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
 header{display:none;}
 .indexwraper{width:100%;height:100%;overflow:hidden;background: #fff;}
 .indexboxlist{width:2000%;height:100%;}
