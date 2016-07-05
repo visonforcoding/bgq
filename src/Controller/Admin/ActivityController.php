@@ -48,7 +48,45 @@ class ActivityController extends AppController {
             $activity->admin_id = $this->_user->id;
             $activity->user_id = $this->_user->id;
             $activity->publisher = $this->_user->truename;
-            if ($this->Activity->save($activity)) {
+            $res = $this->Activity->save($activity);
+            if ($res) {
+                // 将与活动标签相同的专家随机选择4个添加到活动专家推荐中
+                // 思路：活动->查出活动标签->查出相同用户标签->去除重复用户->查出是专家的用户->大于四个随机选四个，不然全部插入活动专家推荐表
+                $userTable = \Cake\ORM\TableRegistry::get('User');
+                $userIndustryTable = \Cake\ORM\TableRegistry::get('user_industry');
+                $activityIndustryTable = \Cake\ORM\TableRegistry::get('activity_industry');
+                $activitySavantTable = \Cake\ORM\TableRegistry::get('activity_savant');
+                $industries = $activityIndustryTable->find()->where(['activity_id'=>$res->id])->hydrate(false)->toArray();
+                $industry = [];
+                foreach ($industries as $k=>$v){
+                    $industry[] = $v['industry_id'];
+                }
+                $userIndustries = $userIndustryTable->find()->where(['industry_id in'=>$industry])->hydrate(false)->toArray();
+                $users = [];
+                foreach ($userIndustries as $k=>$v){
+                    $users[] = $v['user_id'];
+                }
+                // 去除重复用户id
+                $user = array_unique($users);
+                $savants = $userTable->find()->contain(['Savants'])->where(['User.id in'=>$user, 'enabled'=>1, 'level'=>2])->hydrate(false)->toArray();
+                if(count($savants) > 4) {
+                    $savant = array_rand($savants, 4);
+                    foreach ($savant as $k=>$v){
+                        $data['savant_id'] = $v['savant']['id'];
+                        $data['activity_id'] = $id;
+                        $activitySavants = $activitySavantTable->newEntity();
+                        $activitySavant = $activitySavantTable->patchEntity($activitySavants, $data);
+                        $res = $activitySavantTable->save($activitySavant);
+                    }
+                } else {
+                    foreach($savants as $k=>$v){
+                        $data['savant_id'] = $v['savant']['id'];
+                        $data['activity_id'] = $id;
+                        $activitySavants = $activitySavantTable->newEntity();
+                        $activitySavant = $activitySavantTable->patchEntity($activitySavants, $data);
+                        $res = $activitySavantTable->save($activitySavant);
+                    }
+                }
                 return $this->Util->ajaxReturn(true, '添加成功');
             } else {
                 $errors = $activity->errors();
@@ -263,7 +301,7 @@ class ActivityController extends AppController {
         {
             return $this->Util->ajaxReturn(false, '发布失败');
         }
-        $folder = '/upload/qrcode/activitycode/'.date('Y-m-d');
+        $folder = 'upload/qrcode/activitycode/'.date('Y-m-d');
         if(!file_exists(WWW_ROOT . $folder))
         {
             $res = mkdir(WWW_ROOT . $folder);
@@ -283,43 +321,7 @@ class ActivityController extends AppController {
             return $this->Util->ajaxReturn(false, '二维码生成失败');
         }
         
-        // 将与活动标签相同的专家随机选择4个添加到活动专家推荐中
-        // 思路：活动->查出活动标签->查出相同用户标签->去除重复用户->查出是专家的用户->大于四个随机选四个，不然全部插入活动专家推荐表
-        $userTable = \Cake\ORM\TableRegistry::get('User');
-        $userIndustryTable = \Cake\ORM\TableRegistry::get('user_industry');
-        $activityIndustryTable = \Cake\ORM\TableRegistry::get('activity_industry');
-        $activitySavantTable = \Cake\ORM\TableRegistry::get('activity_savant');
-        $industries = $activityIndustryTable->find()->where(['activity_id'=>$id])->hydrate(false)->toArray();
-        $industry = [];
-        foreach ($industries as $k=>$v){
-            $industry[] = $v['industry_id'];
-        }
-        $userIndustries = $userIndustryTable->find()->where(['industry_id in'=>$industry])->hydrate(false)->toArray();
-        $users = [];
-        foreach ($userIndustries as $k=>$v){
-            $users[] = $v['user_id'];
-        }
-        // 去除重复用户id
-        $user = array_unique($users);
-        $savants = $userTable->find()->contain(['Savants'])->where(['User.id in'=>$user, 'enabled'=>1, 'level'=>2])->hydrate(false)->toArray();
-        if(count($savants) > 4) {
-            $savant = array_rand($savants, 4);
-            foreach ($savant as $k=>$v){
-                $data['savant_id'] = $v['savant']['id'];
-                $data['activity_id'] = $id;
-                $activitySavants = $activitySavantTable->newEntity();
-                $activitySavant = $activitySavantTable->patchEntity($activitySavants, $data);
-                $res = $activitySavantTable->save($activitySavant);
-            }
-        } else {
-            foreach($savants as $k=>$v){
-                $data['savant_id'] = $v['savant']['id'];
-                $data['activity_id'] = $id;
-                $activitySavants = $activitySavantTable->newEntity();
-                $activitySavant = $activitySavantTable->patchEntity($activitySavants, $data);
-                $res = $activitySavantTable->save($activitySavant);
-            }
-        }
+        
         return $this->Util->ajaxReturn(true, '发布成功');
     }
 
