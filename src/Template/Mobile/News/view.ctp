@@ -8,7 +8,7 @@
         <a href="#this" class='iconfont share h-regiser'>&#xe614;</a> -->
     </div>
 </header>
-<div class="wraper" id="news" style="padding-bottom: 1rem;">
+<div class="wraper" id="news" style="margin-bottom: 1rem;">
     <?php if (isset($news)): ?>
         <section class="newscon-box">
             <h3><?= $news->title ?></h3>
