@@ -30,7 +30,7 @@
 <script type="text/html" id="listTpl">
     <section class="internet-v-info">
         <div class="innercon">
-            <a href='/user/home-page/{#id#}'><span class="head-img"><img src="{#following_avatar#}"/><i></i></span></a>
+            <a href='/user/home-page/{#following_id#}'><span class="head-img"><img src="{#following_avatar#}"/><i></i></span></a>
             <div class="vipinfo">
                 <h3>{#following_truename#}<span class="meetnum"></span></h3>
                 <span class="job">{#following_company#}&nbsp;&nbsp;{#following_position#}</span>
@@ -50,6 +50,7 @@
         LEMON.sys.back('/home/index');
     }
     $.util.dataToTpl('follow', 'listTpl',<?= json_encode($followings) ?>, function(d){
+        d.following_id = d.following.id;
         d.following_truename = d.following.truename;
         d.following_company = d.following.company;
         d.following_avatar = d.following.avatar ? d.following.avatar : '/mobile/images/touxiang.png';
