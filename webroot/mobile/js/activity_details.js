@@ -105,6 +105,7 @@ activity.prototype.bindEvent = function () {
                     func: function (msg) {
                         if (typeof msg === 'object') {
                             if (msg.status === true) {
+                                $('.like').next('span').text(parseInt($('.like').next('span').text())+1);
                                 $.util.alert(msg.msg);
                             } else {
                                 $('.like').toggleClass('scale');
