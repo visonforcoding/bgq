@@ -561,6 +561,7 @@ border-radius: 50%;padding:1px;}
 .e-info-box input{width:4.5rem; text-align: right; border:none;outline:none;font-size:0.3rem;}
 .e-info-box input[readonly],.cogray{color:gray;}
 .e-info-box .no-right-ico{background: none;padding-right:0.3rem;}
+.h-info-box a.no-ico{background:none;color:#E01A48;text-align: center;}
 .e-info-box .nobga{align-items:center;display:-webkit-flex;display:-moz-flex;display:-ms-flex;display: flex;
 -webkit-justify-content:space-between;-moz-justify-content:space-between;-ms-justify-content:space-between;justify-content:space-between;    background: url(img/right.png) no-repeat right center;
     background-size: 0.18rem 0.25rem;
