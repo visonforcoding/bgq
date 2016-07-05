@@ -146,6 +146,7 @@ class AppController extends Controller {
             if ($this->request->isWeixin() && empty($this->user) && !$this->request->session()->check('Login.wxbase')) {
                 if ($this->request->query('code')) {
                     //若是来自于微信的回传
+                    \Cake\Log\Log::debug('微信回跳','devlog');
                     $this->loadComponent('Wx');
                     $res = $this->Wx->getUser();
                     //微信静默登录
