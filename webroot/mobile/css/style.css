@@ -237,6 +237,7 @@ border-bottom:none;top:-1px;margin-top:-1px;margin-left:-1px;}
 }
 .wraper .guests{border-bottom:1px #e5e5e5 solid;}
 .guests p{padding:0;width:90%;margin:0 auto;}
+.guests p a{color:#7a7e83;}
 .guests p:nth-of-type(1){margin-top:0.2rem;}
 .newscomment-box .nobottom{border-bottom: none;}
 .newscomment-box .items a.link{display: inline-block;width:0.62rem;height:0.62rem;margin-right:0.16rem;border-radius: 50%;overflow:hidden;}
