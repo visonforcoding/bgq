@@ -26,7 +26,11 @@
                 <div class="ul-list">
                     <h3>个人标签：</h3>
                     <div class="mmark">
-                        <span class="m-con">研发、设计、产品</span>
+                        <span class="m-con">
+                            <?php foreach(unserialize($user->grbq) as $v): ?>
+                                <?= $v ?> 
+                            <?php endforeach; ?>
+                        </span>
                     </div>
                 </div>
                 <ul class="ul-list">

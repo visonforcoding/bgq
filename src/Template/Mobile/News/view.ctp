@@ -191,16 +191,14 @@
                 var id = $(em).data('id');
                 reply_id = id;
                 $('#content').attr('placeholder', '回复 ' + $(em).data('username') + '：');
-                $('#comment_shadow,.shadow-info').show('slow');
+                $('#comment_shadow').show('slow');
+                $('.shadow-info').removeClass('m-height').addClass('c-height');
             }
             switch (em.id) {
                 case 'commit':
                     //弹出评论框
-                    // $('#comment_shadow,.shadow-info').show('slow');
-                    setTimeout(function(){
-                        $('#comment_shadow').show('slow');
-                        $('.shadow-info').removeClass('m-height').addClass('c-height');
-                    },300);
+                    $('#comment_shadow').show('slow');
+                    $('.shadow-info').removeClass('m-height').addClass('c-height');
                     break;
                 case 'cancel':
                     //关闭 评论框
@@ -250,8 +248,10 @@
                                     });
                                     $('#comment').prepend(html);
                                     $('#allComments').prepend(html);
-                                    $('#comment_shadow').hide('slow');
-                                    $('.shadow-info').removeClass('c-height').addClass('m-height');
+                                    setTimeout(function(){
+                                        $('#comment_shadow').hide('slow');
+                                        $('.shadow-info').removeClass('c-height').addClass('m-height');
+                                    }, 301);
                                 } else
                                 {
                                     $.util.alert(res.msg);
@@ -307,13 +307,11 @@
                         $('#shadow').show();
                     }
                     break;
-                case 'shadow':
-                    $(em).hide();
-                    $('#wxshare').hide();
-                    break;
-                case 'wxshare':
-                    $(em).hide();
-                    $('#shadow').hide();
+                case 'shadow':case 'wxshare':
+                    setTimeout(function(){
+                        $(em).hide();
+                        $('#wxshare').hide();
+                    },301);
                     break;
                 case 'comment_shadow':
                     setTimeout(function(){
