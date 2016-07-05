@@ -153,7 +153,7 @@ class ActivityController extends AppController {
                 ->contain(['Users', 'Industries', 'Regions'])
                 ->limit($this->limit)
                 ->where(['is_check' => 1])
-                ->orderDesc('Activity.create_time', 'Activity.is_top')
+                ->order(['Activity.is_top' => 'desc','Activity.create_time' => 'desc'])
                 ->toArray();
         $this->set('actjson', json_encode($act));
 

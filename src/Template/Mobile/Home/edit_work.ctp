@@ -33,13 +33,13 @@
             <li  class="no-right-ico">
                 <span>开始日期：</span>
                 <div>
-                    <input type="text" name="start_date" />
+                    <input type="text" name="start_date" placeholder="<?php echo date('Y-m-d'); ?>" />
                 </div>
             </li>
             <li  class="no-right-ico">
                 <span>结束日期：</span>
                 <div>
-                    <input type="text" name="end_date"  />
+                    <input type="text" name="end_date" placeholder="<?php echo date('Y-m-d'); ?>" />
                 </div>
             </li>
             <li  class="no-b-border textareabox no-right-ico">
