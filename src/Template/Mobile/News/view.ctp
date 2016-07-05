@@ -242,7 +242,7 @@
                                         d.disable = '0';
                                         if (d.hasOwnProperty('likes')) {
                                             if (d['likes'].length) {
-                                                d.style = 'font-weight:bold';
+                                                d.style = 'color:red';
                                                 d.disable = '1';
                                             }
                                         }

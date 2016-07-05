@@ -1,7 +1,7 @@
-<div class="m-wraper m-fixed-bottom wraper">
+<div class="wraper">
     <div class="m-info-card">
         <div class="m-info">
-            <a href="javascript:void(0)" class="m-pic"><img src="<?= $user->avatar ?>"/></a>
+            <a href="/home/edit-userinfo" class="m-pic"><img src="<?= $user->avatar ? $user->avatar : '/mobile/images/touxiang.png' ?>"/></a>
             <div class="mt-info">
                 <h3><?= $user->truename ?></h3>
                 <span class="job"><?= $user->company ?> <?= $user->position ?> </span>
@@ -58,7 +58,7 @@
     
     <ul class="h-info-box">
         <li>
-            <h3>擅长业务：<em class="tr"><?= implode('、', $industry_arr) ?></em></h3>
+            <h3>擅长业务：<em class="tr"><?= $user->goodat ?></em></h3>
         </li>
         <li>
             <h3>公司业务：<em class="tr"><?= $user->gsyw ?></em></h3>
@@ -78,11 +78,24 @@
             </li>
         </ul>
     <?php endif; ?>
+</div>
     <!--<div style="height:1rem"></div>-->
-    <!--未关注递名片-->
     <?php if (!$self): ?>
         <div class="f-bottom">
-            <a href="" class="bgred">关注</a><a href="" class="bggray">递名片</a>
+            <a href="javascript:void(0);" class="bgred" id="follow_btn">
+                <?php if($isFans): ?>
+                已关注
+                <?php else: ?>
+                关注
+                <?php endif; ?>
+            </a>
+            <a href="javascript:void(0);" class="bggray" id="giveCard">
+                <?php if($isGive): ?>
+                已递名片
+                <?php else: ?>
+                递名片
+                <?php endif; ?>
+            </a>
         </div>
     <?php endif; ?>
 <?php $this->start('script') ?>
@@ -101,13 +114,12 @@
     $(function () {
         $('#follow_btn').on('click', function () {
             //关注
-            var user_id = $(this).data('id');
             $.util.ajax({
                 url: '/user/follow',
-                data: {id: user_id},
+                data: {id: <?= $user->id ?>},
                 func: function (res) {
                     $.util.alert(res.msg);
-                    $('#attention').text('√已关注')
+                    $('#follow_btn').text('已关注');
                 }
             });
         });
@@ -132,7 +144,7 @@
                         if (typeof msg == 'object')
                         {
                             $.util.alert(msg.msg);
-                            $('#giveCard').text('√已递名片');
+                            $('#giveCard').text('已递名片');
                         }
                     }
                 });

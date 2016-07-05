@@ -37,7 +37,7 @@ class UserController extends AppController {
         }
         $user = $this->User->get($id,['contain'=>['Industries'=>function($q){
             return $q->hydrate(false)->select(['id','name']);
-        },'Secret','Careers','Educations']]);
+        }, 'Secret','Careers','Educations']]);
         $industries = $user->industries;
         $industry_arr = [];
         foreach($industries as $industry){

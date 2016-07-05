@@ -37,7 +37,9 @@ class MeetController extends AppController {
         
         // 广告
         $biggieAdTable = \Cake\ORM\TableRegistry::get('BiggieAd');
-        $biggieAds = $biggieAdTable->find()->contain(['Savants'])->all();
+        $biggieAds = $biggieAdTable->find()->contain(['Savants'=>function($q){
+                return $q->contain(['Users']);
+            }])->all();
         $this->set('biggieAd', $biggieAds);
         
         // 默认用户
