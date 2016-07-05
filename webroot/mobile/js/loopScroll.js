@@ -42,7 +42,7 @@ var scroll = function(o) {
     if(this.len > 1) this.startEvent();  //只有一个的时候  不轮播  设置第一个的位置居中
     if(this.loadImg) this.image = this.moveDom.find('img');
     this.resize(this.step || this.moveChild.eq(0).width());
-    if(this.autoTime){
+    if(this.len > 1 && this.autoTime){
         var obj = this;
         setInterval(function(){
             if(!obj.holdAuto){
