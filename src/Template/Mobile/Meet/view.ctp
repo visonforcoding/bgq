@@ -5,7 +5,7 @@
         <a href="#this" class='iconfont share h-regiser'>&#xe614;</a>-->
     </div>
 </header>
-<div class="wraper m-wraper">
+<div class="wraper">
     <div class="m-to-more">
         <div class='inner'>
             <a href='javascript:history.go(-1);' class='toback'></a>
