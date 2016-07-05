@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-    
+                                                                    
         <?php if (isset($user->secret)): ?>
             <?php if ($user->secret->profile_set == '1'): ?>
             <?php if(is_array(unserialize($user->grbq))): ?>
@@ -65,6 +65,7 @@
                 </ul>
             <?php endif; ?>
         <?php endif; ?>
+            
     <?php if($user->goodat): ?>
     <div class="ul-list">
         <h3>擅长业务：</h3>

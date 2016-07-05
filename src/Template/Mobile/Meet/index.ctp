@@ -115,6 +115,13 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <link rel="stylesheet" href="/mobile/font/font/iconfont.css" />
 <script>
+    if($.util.isAPP){
+        $('#search').css({'top':'0.6rem'});
+    } else if($.util.isWX) {
+        $('#search').css({'top':'0.2rem'});
+    }
+</script>
+<script>
     $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
         d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
         d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);

@@ -71,6 +71,13 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    if($.util.isAPP){
+        $('#search').css({'top':'0.6rem'});
+    } else if($.util.isWX) {
+        $('#search').css({'top':'0.2rem'});
+    }
+</script>
+<script>
     $.util.dataToTpl('news', 'listTpl',<?= $newsjson ?>, function (d) {
         d.user_id = d.user.id;
         d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
