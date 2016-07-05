@@ -46,7 +46,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">活动时间（3.2~4.1）</label>
+        <label class="col-md-2 control-label">活动时间</label>
         <div class="col-md-8">
             <?php
             echo $this->Form->input('time', ['label' => false, 'class' => 'form-control']);
