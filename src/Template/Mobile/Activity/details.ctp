@@ -96,7 +96,7 @@
                 </ul>
             </div>
         <?php endif; ?>
-        <div style='height:1rem;'></div>
+        <div style='height:1.2rem;'></div>
     </div>
 
     <div class="wraper pd10" id="allcoment" style="display:none;">
