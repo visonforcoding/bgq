@@ -13,10 +13,10 @@
                         <p><span>手机号:<a href="tel"><?= $user->phone ?></a></span></p>
                     <?php endif; ?>
                     <?php if ($user->secret->email_set == '1'): ?>
-                        <p><span>邮    箱:<i><?= $user->email ?></i></span></p>
+                        <p><span>邮    &nbsp;&nbsp;箱:<i><?= $user->email ?></i></span></p>
                     <?php endif; ?>
                 <?php endif; ?>
-                <p><span>地    区:<i><?= $user->city ?></i></span></p>
+                <p><span>地    &nbsp;&nbsp;区:<i><?= $user->city ?></i></span></p>
             </div>
         </div>
     </div>
