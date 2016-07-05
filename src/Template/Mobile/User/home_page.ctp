@@ -92,7 +92,7 @@
     <?php if ($self): ?>
         <ul class="h-info-box">
             <li class="no-b-border">
-                <a href="/home/edit-userinfo">编辑</a>
+                <a href="/home/edit-userinfo" class='no-ico'>编辑</a>
             </li>
         </ul>
     <?php endif; ?>
