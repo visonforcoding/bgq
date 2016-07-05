@@ -363,7 +363,7 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .m-tomore-bottom{position:absolute;bottom:0;right:0;height:0.4rem;width:100%;background: rgba(0,0,0,.5);color:#fff;line-height: 0.4rem;text-align: right;}
 .m-tomore-bottom span{margin-right:0.3rem;font-size:0.26rem;}
 .m-tomore-bottom span i{margin-right:0.12rem;font-size:0.26rem;}
-.m-info-box{overflow:hidden;border-bottom:1px #e5e5e5 solid;border-top:1px #e5e5e5 solid; background: #fff;margin-top:4rem;}
+.m-info-box{overflow:hidden;border-bottom:1px #e5e5e5 solid;border-top:1px #e5e5e5 solid; background: #fff;margin-top:4rem;margin-bottom:0.2rem;}
 .m-info-box li{padding:0.3rem 0;margin:0 0.3rem;border-bottom:1px #e5e5e5 solid;/* display: flex; justify-content: space-between;*/font-size:0.28rem;overflow:hidden;}
 .m-info-box li em{margin-left:0.2rem;font-size:0.3rem;font-weight:500;}
 .commendnum{width:85%;}
