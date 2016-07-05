@@ -9,9 +9,9 @@
    
 </header>-->
 <div class="wraper">
-    <div class="h-add">
+<!--    <div class="h-add">
         <img src="/mobile/images/add1.png" alt="" />
-    </div>
+    </div>-->
      <div  class="inner my-home-menu" >
         <a href="/home/my-following" class="active">我的关注</a>
         <a href="/home/my-fans" >我的粉丝</a>     

@@ -27,9 +27,11 @@
                     <h3>个人标签：</h3>
                     <div class="mmark">
                         <span class="m-con">
-                            <?php foreach(unserialize($user->grbq) as $v): ?>
-                                <?= $v ?> 
-                            <?php endforeach; ?>
+                            <?php if(is_array(unserialize($user->grbq))): ?>
+                                <?php foreach(unserialize($user->grbq) as $v): ?>
+                                    <?= $v ?> 
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </span>
                     </div>
                 </div>

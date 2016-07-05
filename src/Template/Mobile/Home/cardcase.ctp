@@ -25,7 +25,7 @@
 <script type='text/html' id="card_tpl">
     <section class="internet-v-info">
         <div class="innercon">
-            <a href="/meet/view/{#user_id#}" class="head-img"><img src="{#user_avatar#}"/><i></i></a>
+            <a href="/user/home-page/{#user_id#}" class="head-img"><img src="{#user_avatar#}"/><i></i></a>
             <div class="vipinfo lay-c">
                 <a href="/meet/view/{#user_id#}" class='fl'>
                     <h3>{#user_truename#}</h3>
