@@ -23,9 +23,7 @@
                         <p><span>邮   箱:<i><?= $user->email ?></i></span></p>
                     <?php endif; ?>
                 <?php endif; ?>
-<<<<<<< .mine                <p><span>地   区:<i><?= $user->city ?></i></span></p>
-=======                <p><span>地    &nbsp;&nbsp;区:<i><?= $user->city ?></i></span></p>
->>>>>>> .theirs            </div>
+                <p><span>地    &nbsp;&nbsp;区:<i><?= $user->city ?></i></span></p>
         </div>
     <div class="h-home-bottom">
        
