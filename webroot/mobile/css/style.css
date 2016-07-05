@@ -40,7 +40,7 @@
 /*注册--上传名片--start*/
 .uploadbox{/*display:flex;flex-direction:column;justify-content:center;align-items: center;*//*border-bottom:1px #c8c7cc solid;*/padding:0.62rem 0.8rem;}
 .uploadbox .imgcard{display:block;background:#9ba4ad;width:5.57rem;height:3.11rem;overflow:hidden;}
-.uploadbox .imgcard img{ width:100%;height:auto;display: block;}
+.uploadbox .imgcard img{ width:100%;height:100%;display: block;}
 .uploadbox .uploadbtn{display: block; color:#fff;font-size:0.3rem;text-align:center;width:100%;height:0.78rem;line-height:0.78rem;background: #3e82f7;border-radius: 0.2rem;margin:0.45rem 0 0.2rem;box-shadow: 0 0 0.3rem rgba(0,0,0,0.5);}
 .uploadbox  p{width:100%;text-align:center;font-size:0.28rem;color:#222c38;line-height: 0.46rem;}
 .infobox{padding:0.08rem 0.3rem 0; background: #FFFFFF;border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid;}
@@ -155,7 +155,7 @@ border-bottom:1px #e5e5e5 solid; padding:0 0.3rem;position:relative;font-weight:
 .comm-info .infor-comm i{display: block;}
 .comm-info .username{font-size:0.3rem;line-height: 0.38rem;}
 .comm-info .username time{font-size:0.26rem;margin-left:0.3rem;color:#9ba4ad;}
-.comm-info .job{font-size:0.26rem;line-height: 0.3rem;margin-top:0.05rem;/*width:5.8rem;*/color:#9ba4ad;}
+.comm-info .job{font-size:0.28rem;line-height: 0.3rem;margin-top:0.05rem;/*width:5.8rem;*/color:#9ba4ad;}
 .newscomment-box p{width:100%;padding:0.2rem;padding-left:0.92rem;font-size:0.28rem;color:#7a7e83;line-height: 0.3rem;clear:both;
 text-align: justify;}
 /*新闻搜索--start*/
@@ -691,7 +691,7 @@ top:-0.1rem;left:50%;margin-left:-0.52rem;background: #f0eff5;text-align: center
 .expert-commond ul li{width:50%;display: inline-block;margin-top:0.3rem;}
 .expert-commond li a{display: block;overflow:hidden;}
 .expert-commond img{float:left;width:0.62rem;height:0.62rem;border-radius: 50%;}
-.expert-commond h3{float:left;font-size:0.28rem;margin-left:0.3rem;color:#7a7e83;line-height: 0.32rem;    width: 65%;height: 0.96rem;overflow: hidden;}
+.expert-commond h3{float:left;font-size:0.3rem;margin-left:0.3rem;color:#7a7e83;line-height: 0.32rem;    width: 65%;height: 0.96rem;overflow: hidden;}
 .expert-commond h3 span{display: block;font-size:.24rem;color:#9ba4ad;line-height: 0.3rem;
     margin-top: 0.05rem;}
 .companyinfo{position:fixed;bottom:0.42rem;width:100%;}
