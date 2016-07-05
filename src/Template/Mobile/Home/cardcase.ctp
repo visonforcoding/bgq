@@ -11,7 +11,10 @@
     <div class="my-focus-box">
                 <div class='inner my-search'>
                     <a href='#this' class='toback iconfont news-serch'>&#xe613;</a>
-                    <h1><input type="text" placeholder="请输入关键词"></h1>
+                    <form id="searchForm" onsubmit="return false;" style="width: 100%" >
+                    <h1><input type="text" name="keyword" placeholder="请输入关键词" value=""></h1>
+                    </form>
+                    <div class='h-regiser' id="doSearch">搜索</div>
                 </div>
             </div>
            
@@ -153,6 +156,9 @@
                         }
                     }
                 });
+                break;
+            case 'doSearch':
+                
                 break;
             case 'goTop':
                 window.scrollTo(0,0);
