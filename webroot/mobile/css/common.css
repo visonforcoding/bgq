@@ -116,11 +116,11 @@ footer .othertype img,.wxlogin .othertype img{width:100%;height:auto;display:blo
 .wraper .colore01{color:#e01a48;}
 /*animate css*/
 /*moveup*/
-@-webkit-keyframes moveup {from { }to { top:-3rem;}}
-@keyframes moveup {from { }to {top:-3rem;}}
+@-webkit-keyframes moveup {from { }to { top:-100px;}}
+@keyframes moveup {from { }to {top:-100px;}}
 /*movedown*/
-@-webkit-keyframes movedown {from {}to { top:0.5rem;}}
-@keyframes movedown {from {}to { top:0.5rem;}}
+@-webkit-keyframes movedown {from {}to { top:0.8rem;}}
+@keyframes movedown {from {}to { top:0.8rem;}}
 /*moveright*/
 @-webkit-keyframes moveright{from {}to { -webkit-transform: translateX(100px);transform: translateX(100px);}}
 @keyframes moveright {from {}to {-webkit-transform: translateX(100px);transform: translateX(100px);}}
