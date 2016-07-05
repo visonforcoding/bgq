@@ -949,7 +949,7 @@ class HomeController extends AppController {
             $keyword = $data['keyword'];
             $user_id = $this->user->id;
             $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
-            $fans = $FansTable->find()->contain(['Users' => function($q) {
+            $fans = $FansTable->find()->contain(['Users' => function($q)use($keyword) {
                             return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
                                     ->where(['enabled'=>1, 'truename like'=>"%$keyword%"]   )->contain(['Subjects']);
             }])->hydrate(false)

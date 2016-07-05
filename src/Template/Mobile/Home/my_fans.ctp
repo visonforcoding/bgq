@@ -76,7 +76,7 @@
             type: 'POST',
             data: $('form').serialize(),
             dataType: 'json',
-            url: "/home/search_following",
+            url: "/home/search_fans",
             success: function (res) {
                 console.log(res);
                 if(res.status){
