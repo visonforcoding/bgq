@@ -439,7 +439,7 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .m-subject li{text-indent: 0;}
 .m-subject li:nth-child(2),.m-subject-info li:nth-child(2){border-bottom: none;}
 .m-subject-info{margin-top:0.2rem;border-top:1px solid #c8c7cc;border-bottom:1px solid #e5e5e5;}
-.m-subject-info .s-price input{width:0.9rem;border:1px #c8c7cc solid;border-radius: 0.05rem;margin:0 0.1rem;text-align: left;}
+.m-subject-info .s-price input{width:0.9rem;border:1px #c8c7cc solid;border-radius: 0.05rem;margin:0 0.1rem;text-align: center;}
 .wraper .s-form-box{margin-bottom:-1px;}
 .s-form-box li:first-child{flex-direction: column;height:auto;}
 .add-subject{height:0.9rem;line-height:0.9rem;border-bottom:1px solid #e5e5e5;font-size:0.3rem;color:#222c38;display: flex; justify-content: center;}
