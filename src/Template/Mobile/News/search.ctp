@@ -2,12 +2,12 @@
 <div class="fixedwraper">
     <div class='h-news-search'>
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe613;</a>
-        <form id="searchForm" onsubmit="return false;" style="width:100%;">
+        <form id="searchForm" onsubmit="return false;" >
         <h1><input type="text" placeholder="请输入关键词" name="keyword"></h1>
         <input type="hidden" name="industry_id" value="" style="display:none;"/>
         <input type="hidden" name="sort" value="" style="display:none;"/>
         </form>
-        <div class='h-regiser' id="doSearch" style="position: relative;right: 0;font-size: 0.28rem;width:1.2rem; padding: 0.11rem 0 0.12rem;color:#fff;background: #dd1f4b;border-radius: 0.1rem;
+        <div class='h-regiser' id="doSearch" style="font-size: 0.28rem;width:1.2rem; padding: 0.11rem 0 0.12rem;
     text-align: center;">搜 索</div>
     </div>
     <div class="news-classify">
