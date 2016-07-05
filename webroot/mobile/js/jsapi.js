@@ -18,7 +18,7 @@
         imgUrl: 'http://m.chinamatop.com/mobile/images/bgq_logo.png',
         link: 'http://m.chinamatop.com/',
         title: '并购帮',
-        desc: '并购帮为你提供国内外的并购热点以及资讯',
+        desc: '专注并购人的生活方式',
         success:function(){},
         cancel:function(){}
     };
