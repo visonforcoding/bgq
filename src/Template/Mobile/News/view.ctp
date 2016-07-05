@@ -8,7 +8,7 @@
         <a href="#this" class='iconfont share h-regiser'>&#xe614;</a> -->
     </div>
 </header>
-<div class="wraper" id="news" style="margin-bottom: 1rem;">
+<div class="wraper" id="news">
     <?php if (isset($news)): ?>
         <section class="newscon-box">
             <h3><?= $news->title ?></h3>
@@ -50,6 +50,7 @@
         </div>
     <?php endif; ?>
     <!--专家推荐****************-->
+    <div style='height:1rem'></div>
 </div>
 <div class="wraper pd10" id="allcoment" style="display:none;">
     <section class="newscomment-box">
