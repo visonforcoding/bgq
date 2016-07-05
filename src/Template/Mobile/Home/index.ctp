@@ -21,7 +21,7 @@
     <div class="h-home-menu topnav">
         <ul class="clearfix">
             <li><a href="/home/cardcase"><i></i>名片夹</a></li>
-            <li><a href="/user/home-page"><i></i>个人资料</a></li>
+            <li><a href="/home/edit-userinfo"><i></i>个人资料</a></li>
             <li><a href="/home/my_xiaomi"><i></i>小秘书</a></li>
         </ul>
     </div>
