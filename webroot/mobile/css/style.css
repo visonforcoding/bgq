@@ -206,6 +206,7 @@ border-bottom:none;top:-1px;margin-top:-1px;margin-left:-1px;}
 .a-other-info > *{display: inline-block;font-size:0.24rem;}
 .a-other-info span:nth-of-type(1){background: #4285f4;color:#fff; padding:0.11rem;border-radius: 0.1rem;}
 .a-other-info > a{padding:0.1rem;border:1px #969fa9 solid;border-radius: 0.1rem;margin-left：0.07rem;}
+.a-detail .ac{border:1px #e5e5e5 solid; color:#969fa9;}
 .a-other-info span:nth-of-type(2){float:right;line-height:0.34rem;padding:0.09rem 0;}
 .submitbtn{position:fixed;bottom:1.26rem;right:0.32rem;width:1.03rem;height:0.91rem;}
 .submitbtn a{width:100%;height:100%;display: block;}
