@@ -56,8 +56,8 @@
         </div>
         <div class="infobox m-subject-info">
             <ul class="s-price">
-                <li>所需时间：<span class='infocard'>约<input type="text" name="last_time" value="<?php if(isset($subject)): ?><?=$subject->last_time?><?php endif; ?>" />小时</span></li>
-                <li>价格：<span class='infocard reg-repass'><input type="text" name="price" value='<?php if(isset($subject)): ?><?=$subject->price?><?php endif; ?>' />元/次</span></li>
+                <li>所需时间：<span class='infocard'>约<input type="text" class='tc' name="last_time" value="<?php if(isset($subject)): ?><?=$subject->last_time?><?php endif; ?>" />小时</span></li>
+                <li>价格：<span class='infocard reg-repass'><input type="text" class='tc' name="price" value='<?php if(isset($subject)): ?><?=$subject->price?><?php endif; ?>' />元/次</span></li>
             </ul>
         </div>
     </form>
