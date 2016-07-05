@@ -43,6 +43,7 @@
         <li id="meet_nums"><a href="javascript:void(0);">约见最多</a></li>
     </ul>
 </div>
+<div class="alert" id="alertPlan" style="display: none;"><span id="alertText"></span></div>
 <script type='text/html' id='biggie_tpl'>
     <section class="internet-v-info">
         <div class="innercon">
@@ -63,8 +64,10 @@
     <a href="/meet/subject_detail/{#id#}">{#title#}</a>
 </script>
 <script src="/mobile/js/loopScroll.js"></script>
+<?php $this->start('script') ?>
 <script type="text/javascript">
     window.sort = true;
+    
 
     setTimeout(function(){
         
@@ -239,4 +242,8 @@
                 break;
         }
     });
+    if($('#biggies').children('.internet-v-info').length == 0){
+        $.util.alert('暂无该行业专家');
+    }
 </script>
+<?php $this->end('script');
