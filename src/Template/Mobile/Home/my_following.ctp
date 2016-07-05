@@ -32,7 +32,7 @@
         <div class="innercon">
             <a href='/user/home-page/{#following_id#}'><span class="head-img"><img src="{#following_avatar#}"/><i></i></span></a>
             <div class="vipinfo">
-                <a href="/user/home-page/{#user_id#}">
+                <a href="/user/home-page/{#following_id#}">
                     <h3>{#following_truename#}<span class="meetnum"></span></h3>
                     <span class="job">{#following_company#}&nbsp;&nbsp;{#following_position#}</span>
                 </a>
