@@ -31,7 +31,7 @@
                     <input name="major" type="text"  />
                 </div>
             </li>
-            <li class="no-right-ico">
+            <li>
                 <span>学历：</span>
                 <div>
                     <span class='typeselect'>
