@@ -118,7 +118,7 @@
             moveChild: $('#subject li'),
             lockScrY: true,
             loopScroll: true,
-            autoTime:3000,
+            // autoTime:3000,
 
         });
     }, 0);
