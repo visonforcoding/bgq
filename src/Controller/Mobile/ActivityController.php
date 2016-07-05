@@ -549,6 +549,10 @@ class ActivityController extends AppController {
                 $comment = $this->Activity->Activitycom->get($data['pid']);
                 $doComment->reply_id = $comment->user_id;
 //                $this->Business->usermsg($this->user->id, '', '', $type, $id);
+                //对评论的回复
+                $this->loadComponent('Business');
+                $jump_url = '/activity/view/'.$id.'#allcoment#common_'.$doComment->id;
+                $this->Business->usermsg($comment->user_id,'评论回复','有人回复了你的评论!', 3,$doComment->id,$jump_url);
             } else {
                 $user = $this->Activity->get($id);
                 $doComment->reply_id = $user->user_id;
