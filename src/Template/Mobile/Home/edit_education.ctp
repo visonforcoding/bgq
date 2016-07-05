@@ -34,7 +34,7 @@
             <li>
                 <span>学历：</span>
                 <div>
-                    <span class='typeselect'>
+                    <span class='typeselect c-select'>
                     <select name="education" class="education">
                         <option value="1">高中</option>
                         <option value="2">中专</option>
