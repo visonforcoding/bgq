@@ -27,12 +27,12 @@
         <div class="innercon">
             <a href="/user/home-page/{#user_id#}" class="head-img"><img src="{#user_avatar#}"/><i></i></a>
             <div class="vipinfo lay-c">
-                <a href="/meet/view/{#user_id#}" class='fl'>
+                <a href="/user/home-page/{#user_id#}" class='fl'>
                     <h3>{#user_truename#}</h3>
                     <span class="c-info">{#user_company#}  {#user_position#}</span>
                     <span class="c-info">{#user_phone#}</span>
                     <span class="c-info">{#user_email#}</span> 
-                    </a>
+                </a>
                 {#giveBack#}
             </div>
         </div>

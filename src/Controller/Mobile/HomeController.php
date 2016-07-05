@@ -164,7 +164,7 @@ class HomeController extends AppController {
         $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
         $followings = $FansTable->find()->contain(['Followings' => function($q) {
                         return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
-                                ->where('enabled = 1');
+                                ->where('enabled = 1')->contain(['Subjects']);
                     }])->hydrate(false)
                         ->where(['user_id' => $user_id])
                         ->toArray();

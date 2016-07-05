@@ -23,19 +23,20 @@
     
         <?php if (isset($user->secret)): ?>
             <?php if ($user->secret->profile_set == '1'): ?>
+            <?php if(is_array(unserialize($user->grbq))): ?>
                 <div class="ul-list">
                     <h3>个人标签：</h3>
                     <div class="mmark">
                         <span class="m-con">
-                            <?php if(is_array(unserialize($user->grbq))): ?>
-                                <?php foreach(unserialize($user->grbq) as $v): ?>
-                                    <?= $v ?> 
-                                <?php endforeach; ?>
-                            <?php endif; ?>
+                            <?php foreach(unserialize($user->grbq) as $v): ?>
+                                <?= $v ?> 
+                            <?php endforeach; ?>
                         </span>
                     </div>
                 </div>
+            <?php endif; ?>
                 <ul class="ul-list">
+                    <?php if($user->educations): ?>
                     <li>
                         <h3>教育经历：</h3>
                         <div class="mmark">
@@ -47,6 +48,8 @@
                             <?php endforeach; ?>
                         </div>
                     </li>
+                    <?php endif; ?>
+                    <?php if($user->careers): ?>
                     <li>
                         <h3>工作经历：</h3>
                         <div class="mmark">
@@ -58,30 +61,26 @@
                             <?php endforeach; ?>
                         </div>
                     </li>
+                    <?php endif; ?>
                 </ul>
             <?php endif; ?>
         <?php endif; ?>
-        <div class="ul-list">
-                <h3>擅长业务：</h3>
-                <div class="mmark">
-                    <span class="m-con"><?= $user->goodat ?></span>
-                </div>
-            </div>
-            <div class="ul-list">
-                <h3>公司业务：</h3>
-                <div class="mmark">
-                    <span class="m-con"><?= $user->gsyw ?></span>
-                </div>
-            </div>
-    
-   <!--  <div class="ul-list">
-        <li>
-            <h3>擅长业务：<em class="tr"><?= $user->goodat ?></em></h3>
-        </li>
-        <li>
-            <h3>公司业务：<em class="tr"><?= $user->gsyw ?></em></h3>
-        </li>
-    </div> -->
+    <?php if($user->goodat): ?>
+    <div class="ul-list">
+        <h3>擅长业务：</h3>
+        <div class="mmark">
+            <span class="m-con"><?= $user->goodat ?></span>
+        </div>
+    </div>
+    <?php endif; ?>
+    <?php if($user->gsyw): ?>
+    <div class="ul-list">
+        <h3>公司业务：</h3>
+        <div class="mmark">
+            <span class="m-con"><?= $user->gsyw ?></span>
+        </div>
+    </div>
+    <?php endif; ?>
     <?php if($user->level == 2): ?>
     <ul class="h-info-box">
         <li class="no-b-border">
