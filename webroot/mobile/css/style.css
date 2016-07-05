@@ -488,7 +488,7 @@ border-radius: 50%;padding:1px;}
 .h-home-bottom div span img{width:100%;height:auto;display: block;border-radius: 50%;}
 .h-home-bottom div i{font-size:0.32rem;margin-left:0.15rem;position:absolute;bottom:0;color:#fff;}
 .h-home-bottom h3{margin-top:0.16rem;font-size:0.36rem;line-height: 0.4rem;text-align: center;margin-bottom:0.1rem;color:#fff;}
-.h-home-bottom h3 span{display: block;font-size:0.26rem;line-height: 0.4rem;}
+.h-home-bottom h3 span{display: block;font-size:0.3rem;line-height: 0.4rem;}
 .h-home-bottom .tofocus-m span{color:#fff;border:1px #fff solid;padding:0.03rem 0.1rem;border-radius: 0.1rem; margin-right: 0.35rem;}
 .h-home-menu{/*display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap: wrap;flex-wrap: wrap;*/background: #fff;border-bottom:1px #e5e5e5 solid;margin-bottom:0.2rem;overflow:hidden;/*向下兼容*/}
 .typeselect{width:1rem;overflow: hidden;}
