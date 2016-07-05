@@ -179,7 +179,7 @@ class ActivityController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = [];
+        $where = ['Activity.id'=>19];
         if (!empty($keywords)) {
             $where['OR'] = [
                 ['Users.`truename` like' => "%$keywords%"],
@@ -194,10 +194,12 @@ class ActivityController extends AppController {
             $where['and'] = [['Activity.`create_time` >' => $begin_time], ['Activity.`create_time` <' => $end_time]];
         }
         $query = $this->Activity->find()->contain(['Users']);
+        
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
         }
+        debug($query->toArray());die;
         $nums = $query->count();
         $query->contain(['Industries', 'Regions']);
 
@@ -208,6 +210,7 @@ class ActivityController extends AppController {
         $query->limit(intval($rows))
                 ->page(intval($page));
         $res = $query->toArray();
+        
         if (empty($res)) {
             $res = array();
         }

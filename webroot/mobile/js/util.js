@@ -218,11 +218,16 @@ $.util = {
             // 滚动一定距离，搜索隐藏
             if (document.body.scrollTop > ($('#imgList').height() + $('.inner').height())) {
                 $('.a-search-box').removeClass('movedown');
+                $('.a-search-box').removeClass('moveto');
                 $('.a-search-box').addClass('moveup');
                 window.up = true;
             }
             if(document.body.scrollTop < ($('#imgList').height() + $('.inner').height()) && window.up == true){
-                $('.a-search-box').addClass('movedown');
+                if($.util.isAPP){
+                    $('.a-search-box').addClass('movedown');
+                } else if($.util.isWX) {
+                    $('.a-search-box').addClass('moveto');
+                }
             }
         });
     },

@@ -61,6 +61,13 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script src="/mobile/js/activity_index.js"></script>
 <script>
+    if($.util.isAPP){
+        $('#search').css({'top':'0.6rem'});
+    } else if($.util.isWX) {
+        $('#search').css({'top':'0.2rem'});
+    }
+</script>
+<script>
     window.isApply = ',' + <?= $isApply ?> + ',';
     $.util.dataToTpl('activity', 'activity_tpl',<?= $actjson ?>, function (d) {
         d.apply_msg = '';
