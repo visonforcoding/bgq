@@ -186,7 +186,6 @@ class BusinessComponent extends Component {
             $usermsg->user_id = $user_id;
             $usermsg->type = $type;
             $usermsg->url = $url;
-            $usermsg->table_id = $id; //被关注者id
             $usermsg->title = '您有新的关注者';
             $usermsg->msg = '您有1位新的关注者';
         }
@@ -215,17 +214,17 @@ class BusinessComponent extends Component {
         //检测是否评论过
         switch ($type) {
             case 0:
-                $table = 'activitycom';
+                $table = 'Activitycom';
                 break;
             case 1:
-                $table = 'newscom';
+                $table = 'Newscom';
             default:
                 break;
         }
         $RelateTable = \Cake\ORM\TableRegistry::get($table);
         $relate = $RelateTable->get($relate_id, ['contain' => ['Users']]);
         if (!$relate) {
-            throw new \Cake\Network\Exception\NotFoundException('该条评论不存在');
+            return '该条评论不存在';
         }
         $data = [
             'user_id' => $user_id,
@@ -252,7 +251,7 @@ class BusinessComponent extends Component {
                 $table_id = $relate->activity_id; 
                 $redirect_url = '/activity/view/'.$table_id.'#allcoment'.'#common_'.$relate_id;
             }else{
-                $talble_id = $relate->news_id; 
+                $table_id = $relate->news_id; 
                 $redirect_url = '/news/view/'.$table_id.'#allcoment'.'#common_'.$relate_id;
             }
             $this->usermsg($com_userid, '您有新的点赞', '您的评论获得新的点赞', 2, $relate_id,$redirect_url);
@@ -411,7 +410,7 @@ class BusinessComponent extends Component {
             return $OrderTable->save($order, ['associated' => ['Sellers']]) && $BookTable->save($book) && $FlowTable->save($flow);
         });
         if ($transRes) {
-            //向专家发送一条短信
+            //向专家和买家发送一条短信
             //资金流水记录
             $seller_msg =  '申请人'.$order->user->truename.'手机号:'.$order->user->phone.'已经向您支付了预约费用：' . $order->price . '元，请做好赴约准备。';
             $this->Sms->sendByQf106($order->seller->phone,$seller_msg);
