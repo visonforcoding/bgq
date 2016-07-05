@@ -74,7 +74,6 @@
             $.util.alert('请输入内容');
             return false;
         }
-        console.log($('form').serialize());
         $.ajax({
             type: 'POST',
             data: $('form').serialize(),

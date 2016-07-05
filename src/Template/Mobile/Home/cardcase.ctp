@@ -158,7 +158,36 @@
                 });
                 break;
             case 'doSearch':
-                
+                if($('input[name="keyword"]').val() === ''){
+                    $.util.alert('请输入内容');
+                    return false;
+                }
+                $.ajax({
+                    type: 'POST',
+                    data: $('form').serialize(),
+                    dataType: 'json',
+                    url: "/home/search_card",
+                    success: function (res) {
+                        if(res.status){
+                            $.util.dataToTpl('card', 'card_tpl', res.data, function (d) {
+                                d.user_id = d.other_card.id;
+                                d.user_truename = d.other_card.truename;
+                                d.user_avatar = d.other_card.avatar ? d.other_card.avatar : '/mobile/images/touxiang.png';
+                                d.user_company = d.other_card.company;
+                                d.user_position = d.other_card.position;
+                                d.user_phone = d.other_card.phone;
+                                d.user_email = d.other_card.email;
+                                if(d.resend == 2)
+                                {
+                                    d.giveBack = '<div class="fr" id="giveBack_'+ d.other_card.id + '" uid="' + d.other_card.id + '"><span class="meetnum toc"><i></i>回赠</span></div>';
+                                }
+                                return d;
+                            });
+                        } else {
+                            $.util.alert(res.msg);
+                        }
+                    }
+                });
                 break;
             case 'goTop':
                 window.scrollTo(0,0);

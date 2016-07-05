@@ -73,13 +73,13 @@
             <li  class="no-right-ico">
                 <span>开始日期：</span>
                 <div>
-                    <input type="text" name="start_date" value="<?=$career->start_date->i18nFormat('yyyy-MM-dd') ?>"  />
+                    <input type="text" name="start_date" value="<?=$career->start_date ?>"  />
                 </div>
             </li>
             <li  class="no-right-ico">
                 <span>结束日期：</span>
                 <div>
-                    <input type="text" name="end_date" value="<?=$career->end_date->i18nFormat('yyyy-MM-dd') ?>" />
+                    <input type="text" name="end_date" value="<?=$career->end_date ?>" />
                 </div>
             </li>
             <li  class="no-b-border textareabox no-right-ico">
