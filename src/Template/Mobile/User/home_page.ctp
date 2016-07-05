@@ -61,15 +61,27 @@
                 </ul>
             <?php endif; ?>
         <?php endif; ?>
+        <div class="ul-list">
+                <h3>擅长业务：</h3>
+                <div class="mmark">
+                    <span class="m-con"><?= $user->goodat ?></span>
+                </div>
+            </div>
+            <div class="ul-list">
+                <h3>公司业务：</h3>
+                <div class="mmark">
+                    <span class="m-con"><?= $user->gsyw ?></span>
+                </div>
+            </div>
     
-    <ul class="h-info-box">
+   <!--  <div class="ul-list">
         <li>
             <h3>擅长业务：<em class="tr"><?= $user->goodat ?></em></h3>
         </li>
         <li>
             <h3>公司业务：<em class="tr"><?= $user->gsyw ?></em></h3>
         </li>
-    </ul>
+    </div> -->
     <?php if($user->level == 2): ?>
     <ul class="h-info-box">
         <li class="no-b-border">
