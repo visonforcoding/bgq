@@ -26,7 +26,7 @@
                 <div class="ul-list">
                     <h3>个人标签：</h3>
                     <div class="mmark">
-                        <a href="javascript:void(0)">研发</a><a href="javascript:void(0)">设计</a><a href="javascript:void(0)">产品</a>
+                        <span class="m-con">研发、设计、产品</span>
                     </div>
                 </div>
                 <ul class="ul-list">
@@ -81,9 +81,9 @@
     <!--<div style="height:1rem"></div>-->
     <!--未关注递名片-->
     <?php if (!$self): ?>
-    <div class="f-bottom">
-        <a href="" class="bgred">关注</a><a href="">递名片</a>
-    </div>
+        <div class="f-bottom">
+            <a href="" class="bgred">关注</a><a href="" class="bggray">递名片</a>
+        </div>
     <?php endif; ?>
 <?php $this->start('script') ?>
 <script>
