@@ -4,7 +4,7 @@
     </div>
 </header>
 <link rel="stylesheet" href="/mobile/font/font/iconfont.css" />
-<div class="wraper">
+<div class="wraper newswraper">
     <div class="h-home-bottom">
         <a href="/user/home-page/<?= $user->id ?>">
             <div>
