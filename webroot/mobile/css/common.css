@@ -119,8 +119,8 @@ footer .othertype img,.wxlogin .othertype img{width:100%;height:auto;display:blo
 @-webkit-keyframes moveup {from { }to { top:-3rem;}}
 @keyframes moveup {from { }to {top:-3rem;}}
 /*movedown*/
-@-webkit-keyframes movedown {from {opacity: 0; }to { -webkit-transform: translateY(0.3rem);transform: translateY(0.3rem);}}
-@keyframes movedown {from {opacity: 0; }to { -webkit-transform: translateY(0.3rem);transform: translateY(0.3rem);}}
+@-webkit-keyframes movedown {from {}to { top:0.3rem;}}
+@keyframes movedown {from {}to { top:0.3rem;}}
 /*moveright*/
 @-webkit-keyframes moveright{from {}to { -webkit-transform: translateX(100px);transform: translateX(100px);}}
 @keyframes moveright {from {}to {-webkit-transform: translateX(100px);transform: translateX(100px);}}
