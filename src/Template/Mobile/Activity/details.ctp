@@ -8,7 +8,7 @@
             <p>时间：<?= $activity->time; ?></p>
             <p>地点：<?= $activity->address; ?></p>
             <p>规模：<?= $activity->scale; ?></p>
-            <div class="a-other-info" style="text-indent: 0;font-size: 0.24rem;line-height: 0.36rem;padding-left: 0;width: 90%;margin: 0 auto;color: #9ba4ad;">
+            <div class="a-other-info innercon ac">
                 <a><?= $activity->region->name; ?></a>
                 <?php foreach ($activity->industries as $k => $v): ?>
                     <a><?= $v->name; ?></a>
