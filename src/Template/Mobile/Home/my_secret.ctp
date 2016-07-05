@@ -14,7 +14,7 @@
                 <a href="javascript:void(0)">
                     <span>联系电话：</span>
                     <div>
-                        <span style='c-select'>
+                        <span class='c-select'>
                         <select name="phone_set" class='choice'>
                             <option value="1" <?php if (isset($secret)): ?><?php if ($secret->phone_set == '1'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>公开</option>
                             <option value="2" <?php if (isset($secret)): ?><?php if ($secret->phone_set == '2'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>不公开</option>
@@ -27,7 +27,7 @@
                 <a href="javascript:void(0)">
                     <span>邮箱：</span>
                     <div>
-                       <span style='c-select'>
+                       <span class='c-select'>
                         <select name="email_set" class='choice'>
                            <option value="1" <?php if (isset($secret)): ?><?php if ($secret->email_set == '1'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>公开</option>
                             <option value="2" <?php if (isset($secret)): ?><?php if ($secret->email_set == '2'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>不公开</option>
@@ -40,7 +40,7 @@
                 <a href="javascript:void(0)">
                     <span>我的资料：</span>
                     <div>
-                        <span style='c-select'>
+                        <span class='c-select'>
                         <select name="profile_set" class='choice'>
                             <option value="1" <?php if (isset($secret)): ?><?php if ($secret->profile_set == '1'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>公开</option>
                             <option value="2" <?php if (isset($secret)): ?><?php if ($secret->profile_set == '2'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>不公开</option>
