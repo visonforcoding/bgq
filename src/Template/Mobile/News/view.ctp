@@ -266,7 +266,7 @@
                         return false;
                     }
                     obj.find('i.like').toggleClass('changecolor');
-                    obj.find('i.like').toggleClass('changecolor');
+                    obj.find('i.like').toggleClass('scale');
                     $.util.ajax({
                         url: '/news/news-praise',
                         data: {id:<?= $news->id ?>},
@@ -277,7 +277,7 @@
                             } else {
                                 $.util.alert(msg.msg);
                                 obj.find('i.like').toggleClass('changecolor');
-                                obj.find('i.like').toggleClass('changecolor');
+                                obj.find('i.like').toggleClass('scale');
                             }
                         }
                     });

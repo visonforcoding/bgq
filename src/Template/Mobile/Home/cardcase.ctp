@@ -13,6 +13,7 @@
                     <a href='#this' class='toback iconfont news-serch'>&#xe613;</a>
                     <form id="searchForm" onsubmit="return false;" style="width: 100%" >
                     <h1><input type="text" name="keyword" placeholder="请输入关键词" value=""></h1>
+                    <input hidden name="resend" value="2" />
                     </form>
                     <div class='h-regiser' id="doSearch">搜索</div>
                 </div>
@@ -91,6 +92,7 @@
                 $('#card').html('');
                 $(em).addClass('active');
                 $('#noSend').removeClass('active');
+                $('input[name="resend"]').attr('value','1');
                 $.util.ajax({
                     url: "/home/getCrad/1",
                     func: function(msg){
@@ -126,6 +128,7 @@
                 $('#card').html('');
                 $(em).addClass('active');
                 $('#send').removeClass('active');
+                $('input[name="resend"]').attr('value','2');
                 $.util.ajax({
                     url: "/home/getCrad/2",
                     func: function(msg){

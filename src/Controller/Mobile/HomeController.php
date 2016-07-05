@@ -840,7 +840,7 @@ class HomeController extends AppController {
     }
 
     /**
-     * 名片夹是否回赠
+     * 名片夹列表
      * @param int $resend
      */
     public function getCrad($resend) {
@@ -919,6 +919,9 @@ class HomeController extends AppController {
         }
     }
     
+    /**
+     * 搜索我的关注
+     */
     public function searchFollowing(){
         if($this->request->is('post')){
             $data = $this->request->data;
@@ -943,6 +946,9 @@ class HomeController extends AppController {
         }
     }
     
+    /**
+     * 搜索我的粉丝
+     */
     public function searchFans(){
         if($this->request->is('post')){
             $data = $this->request->data;
@@ -960,6 +966,34 @@ class HomeController extends AppController {
                     return $this->Util->ajaxReturn(['status'=>true, 'data'=>$fans]);
                 } else {
                     return $this->Util->ajaxReturn(false, '您的粉丝里无这个人');
+                }
+            } else {
+                return $this->Util->ajaxReturn(false, '系统错误');
+            }
+        }
+    }
+    
+    public function searchcard(){
+        if($this->request->is('post')){
+            $data = $this->request->data;
+            $keyword = $data['keyword'];
+            $resend = $data['resend'];
+            $card = $this
+                    ->User
+                    ->CardBoxes
+                    ->find()
+                    ->contain(['OtherCard'=>function($q)use($keyword){
+                        return $q->where(['OtherCard.truename like' => "%$keyword%"]);
+                    }])
+                    ->where(['ownerid' => $this->user->id, 'resend' => $resend])
+                    ->orderDesc('CardBoxes.`create_time`')
+                    ->limit($this->limit)
+                    ->toArray();
+            if($card !== false){
+                if($card){
+                    return $this->Util->ajaxReturn(['status'=>true, 'data'=>$card]);
+                } else {
+                    return $this->Util->ajaxReturn(false, '您的名片夹里无这个人');
                 }
             } else {
                 return $this->Util->ajaxReturn(false, '系统错误');
