@@ -50,13 +50,13 @@
             <li>
                 <span>开始日期：</span>
                 <div>
-                    <input name="start_date" maxlength="10" type="text"  />
+                    <input name="start_date" maxlength="10" type="text" placeholder="<?php echo date('Y-m-d'); ?>" />
                 </div>
             </li>
             <li class="no-b-border">
                 <span>结束日期：</span>
                 <div>
-                    <input name="end_date" maxlength="10" type="text"  />
+                    <input name="end_date" maxlength="10" type="text" placeholder="<?php echo date('Y-m-d'); ?>" />
                 </div>
             </li>
 

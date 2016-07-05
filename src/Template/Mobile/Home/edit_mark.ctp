@@ -76,7 +76,7 @@
                         $.util.alert(res.msg);
                         if (res.status) {
                             setTimeout(function () {
-                                //window.location.href = '/home/edit-userinfo'
+                                window.location.href = '/home/edit-userinfo'
                             }, 1500);
                         }
                     }
