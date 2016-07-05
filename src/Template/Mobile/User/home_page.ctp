@@ -6,23 +6,25 @@
     </div>
 </header>
 <div class="wraper">
-    <!-- 名片 -->
-        <div class="m-info-card">
-              <a href="<?php if ($self): ?>/home/edit-userinfo<?php else: ?>javascript:void(0)<?php endif; ?>">
-                    <div class="m-info">
-                        <span class="m-pic"><img id="user_img" src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : $user->avatar ?>"/></span>
-                        <div class="mt-info">
-                            <h3> <?= $user->truename ?></h3>
-                            <span class="job"><?= $user->company ?> <?= $user->position ?></span>
-                            <span class="mmark">IT互联网</span>
-                        </div>
-                        <div class="linkinfo">
-                            <p><span>手机号:<a href="tel">13865636596</a></span></p>
-                            <p><span>邮    &nbsp;&nbsp;箱:<i>idg@idg.com</i></span></p>
-                            <p><span>地    &nbsp;&nbsp;区:<i>广东深圳</i></span></p>
-                        </div>
-                    </div>
-            </a>
+    <div class="m-info-card">
+        <div class="m-info">
+            <a href="/home/edit-userinfo" class="m-pic"><img src="<?= $user->avatar ? $user->avatar : '/mobile/images/touxiang.png' ?>"/></a>
+            <div class="mt-info">
+                <h3><?= $user->truename ?></h3>
+                <span class="job"><?= $user->company ?> <?= $user->position ?> </span>
+                <span class="mmark"><?php foreach($user->industries as $k=>$v): ?><?= $v['name'] ?> <?php endforeach; ?></span>
+            </div>
+            <div class="linkinfo">
+                <?php if (isset($user->secret)): ?>
+                    <?php if ($user->secret->phone_set == '1'): ?>
+                        <p><span>手机号:<a href="tel"><?= $user->phone ?></a></span></p>
+                    <?php endif; ?>
+                    <?php if ($user->secret->email_set == '1'): ?>
+                        <p><span>邮    &nbsp;&nbsp;箱:<i><?= $user->email ?></i></span></p>
+                    <?php endif; ?>
+                <?php endif; ?>
+                <p><span>地    &nbsp;&nbsp;区:<i><?= $user->city ?></i></span></p>
+            </div>
         </div>
     <div class="h-home-bottom">
        
