@@ -62,7 +62,7 @@
 /*news --start--*/
 .inner .news-serch{ width:0.32rem;height:0.32rem;font-size:0.32rem;top:0.29rem;}
 .a-banner{width:100%;height:4rem;position:relative;}
-.a-search-box{position:fixed;margin-top:0.2rem;width:100%; padding:0 0.68rem;z-index:3;max-width:1080px;}
+.a-search-box{position:fixed;margin-top:0.3rem;width:100%; padding:0 0.68rem;z-index:3;max-width:1080px;}
 .a-search{/*display: flex;align-items: center;*/background:rgba(255,255,255,.5); width:100%;border-radius: 0.1rem;height:0.53rem;line-height: 0.53rem;}
 .a-search a{}
 .a-search i{color:#fff;font-size:0.26rem;margin:0 0.1rem;float:left;}
