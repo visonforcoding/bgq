@@ -32,15 +32,20 @@
         <div class="innercon">
             <a href='/user/home-page/{#following_id#}'><span class="head-img"><img src="{#following_avatar#}"/><i></i></span></a>
             <div class="vipinfo">
-                <h3>{#following_truename#}<span class="meetnum"></span></h3>
-                <span class="job">{#following_company#}&nbsp;&nbsp;{#following_position#}</span>
+                <a href="/user/home-page/{#user_id#}">
+                    <h3>{#following_truename#}<span class="meetnum"></span></h3>
+                    <span class="job">{#following_company#}&nbsp;&nbsp;{#following_position#}</span>
+                </a>
                 <div class="mark">
-                    <a href="#this">演员的自我修养</a>
+                    {#following_subject#}
                     <span class="meetnum">{#following_fans#}人关注</span>
                 </div>
             </div>
         </div>
     </section>	
+</script>
+<script type="text/html" id="tpl">
+    <a href="javascript:void(0)">{#title#}</a>
 </script>
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
@@ -50,12 +55,14 @@
         LEMON.sys.back('/home/index');
     }
     $.util.dataToTpl('follow', 'listTpl',<?= json_encode($followings) ?>, function(d){
+        console.log(d.following);
         d.following_id = d.following.id;
         d.following_truename = d.following.truename;
         d.following_company = d.following.company;
         d.following_avatar = d.following.avatar ? d.following.avatar : '/mobile/images/touxiang.png';
         d.following_position = d.following.position;
         d.following_fans = d.following.fans;
+        d.following_subject = $.util.dataToTpl('', 'tpl', d.following.subjects);
         return d;
     });
 </script>
