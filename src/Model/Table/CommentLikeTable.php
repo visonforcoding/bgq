@@ -14,7 +14,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\BelongsTo $Relates
  */
-class CommentlikeTable extends Table {
+class CommentLikeTable extends Table {
 
     /**
      * Initialize method
@@ -40,7 +40,7 @@ class CommentlikeTable extends Table {
             'className' => 'Newscom'
         ]);
 
-        $this->addBehavior('Timestamp', [
+          $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [
                     'create_time' => 'new',

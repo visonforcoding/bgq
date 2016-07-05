@@ -428,15 +428,14 @@ class UserController extends AppController {
             $newfans->following_id = $following_id;
             if ($follower) {
                 //有被关注
-                $errorFlag = [];
                 $follower->type = 2;  //关系标注为互为关注
                 $newfans->type = 2;
-                $FansTable->connection()->transactional(function()use($FansTable, $follower, $newfans, $errorFlag) {
+                $transRes = $FansTable->connection()
+                        ->transactional(function()use($FansTable, $follower, $newfans) {
                     //开启事务
-                    $errorFlag[] = $FansTable->save($newfans);
-                    $errorFlag[] = $FansTable->save($follower);
+                    return $FansTable->save($newfans)&&$FansTable->save($follower);
                 });
-                if (in_array(false, $errorFlag)) {
+                if (!$transRes) {
                     return $this->Util->ajaxReturn(false, '关注失败');
                 }
             } else {

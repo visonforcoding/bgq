@@ -54,8 +54,8 @@
         </li>
     </ul>
     <?php if($book->status==0):?>
-    <a id="meetOk" class="nextstep paybtn bg-change">约见通过</a>
-    <a id="meetNo" class="nextstep paybtn bg-change">不通过</a>
+    <a id="meetOk" href="javascript:void(0)" class="nextstep paybtn bg-change">约见通过</a>
+    <a id="meetNo" href="javascript:void(0)" class="nextstep paybtn bg-change">不通过</a>
     <?php endif;?>
 </div>
 <?php $this->start('script') ?>
@@ -82,16 +82,18 @@
                        },1500);
                    }
                 });
+                break;
             case 'meetNo':
                 $.util.ajax({
                    url:'/home/book-no/'+book_id,
                    func:function(res){
                      $.util.alert(res.msg);
                      setTimeout(function(){
-                           window.location.href = '/home/my-book-savant';
+                          window.location.href = '/home/my-book-savant';
                        },1500);
                    }
                 });
+                break;
             case 'goTop':
                 window.scroll(0, 0);
                 e.preventDefault();

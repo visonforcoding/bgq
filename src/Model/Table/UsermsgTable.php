@@ -60,11 +60,6 @@ class UsermsgTable extends Table {
                 ->requirePresence('title', 'create')
                 ->notEmpty('title');
 
-        $validator
-                ->requirePresence('msg', 'create')
-                ->notEmpty('msg');
-
-
 
         return $validator;
     }

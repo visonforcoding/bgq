@@ -166,7 +166,7 @@ class BusinessComponent extends Component {
      * @param type $type  类型
      * @param type $id  对象id
      */
-    public function usermsg($user_id, $title, $msg, $type = 0, $id = 0) {
+    public function usermsg($user_id, $title, $msg, $type = 0, $id = 0,$redirect_url = null) {
         if ($type != 0) {
             $types = \Cake\Core\Configure::read('usermsgType');
             $url = $types[$type]['url'];
@@ -175,8 +175,11 @@ class BusinessComponent extends Component {
         $data = [
             'user_id' => $user_id,
             'type' => $type,
-            'url' => $url,
+            'url' => '',
         ];
+        if($redirect_url){
+            $data['url']  = $redirect_url;
+        }
         if ($type == 1) {
             //关注消息
             $usermsg = $UsermsgTable->newEntity();
@@ -187,13 +190,17 @@ class BusinessComponent extends Component {
             $usermsg->title = '您有新的关注者';
             $usermsg->msg = '您有1位新的关注者';
         }
+        if($type==2){
+            //资讯评论点赞消息
+        }
         $usermsg = $UsermsgTable->newEntity(array_merge($data, [
             'title' => $title,
             'msg' => $msg,
             'table_id' => $id,
         ]));
         if (!$UsermsgTable->save($usermsg)) {
-            \Cake\Log\Log::error($usermsg->errors());
+            \Cake\Log\Log::error($usermsg,'devlog');
+            \Cake\Log\Log::error($usermsg->errors(),'devlog');
         }
     }
 
@@ -225,26 +232,35 @@ class BusinessComponent extends Component {
             'relate_id' => $relate_id,
             'type' => $type
         ];
-        $ComLikeTable = \Cake\ORM\TableRegistry::get('comment_like');
+        $ComLikeTable = \Cake\ORM\TableRegistry::get('CommentLike');
         $comlike = $ComLikeTable->find()->where($data)->first();
         if ($comlike) {
             //点过赞
             return '你已点过赞';
+        }else{
+            $comlike = $ComLikeTable->newEntity($data);
         }
-        $comlike = $ComLikeTable->newEntity($data);
-        if (!$ComLikeTable->save($comlike)) {
-            //增加 点赞记录
-            return false;
+         $transRes = $ComLikeTable->connection()->transactional(function()use($ComLikeTable, $comlike, $relate, $RelateTable) {
+             \Cake\Log\Log::debug($comlike,'devlog');
+            $relate->praise_nums +=1;
+            return $ComLikeTable->save($comlike)&&$RelateTable->save($relate);
+        });
+        if($transRes){
+            //发送消息给该条评论的用户
+            $com_userid = $relate->user->id;
+            if($type==0){
+                $table_id = $relate->activity_id; 
+                $redirect_url = '/activity/view/'.$table_id.'#allcoment'.'#common_'.$relate_id;
+            }else{
+                $talble_id = $relate->news_id; 
+                $redirect_url = '/news/view/'.$table_id.'#allcoment'.'#common_'.$relate_id;
+            }
+            $this->usermsg($com_userid, '您有新的点赞', '您的评论获得新的点赞', 2, $relate_id,$redirect_url);
+            return true;
+        }else{
+            \Cake\Log\Log::error($comlike->errors(),'devlog');
         }
-        $relate->praise_nums +=1;
-        if (!$RelateTable->save($relate)) {
-            //评论点赞数+1
-            return false;
-        }
-        //发送消息给该条评论的用户
-        $com_userid = $relate->user->id;
-        $this->usermsg($com_userid, '您有新的点赞', '您的评论获得新的点赞', 2, $relate_id);
-        return true;
+        return false;
     }
 
     /**
@@ -269,7 +285,7 @@ class BusinessComponent extends Component {
         $RelateTable = \Cake\ORM\TableRegistry::get($table);
         $relate = $RelateTable->get($relate_id);
         if (!$relate) {
-            throw new \Cake\Network\Exception\NotFoundException('点赞内容不存在');
+            return '点赞内容不存在';
         }
         $data = [
             'user_id' => $user_id,
@@ -284,13 +300,11 @@ class BusinessComponent extends Component {
         }
         $data['msg'] = '进行了点赞';
         $comlike = $likeTable->newEntity($data);
-        $errorFlag = [];
-        $likeTable->connection()->transactional(function()use($likeTable, $comlike, $relate, $RelateTable, $errorFlag) {
-            $errorFlag[] = $likeTable->save($comlike);
+        $transRes = $likeTable->connection()->transactional(function()use($likeTable, $comlike, $relate, $RelateTable) {
             $relate->praise_nums +=1;
-            $errorFlag[] = $RelateTable->save($relate);
+            return $likeTable->save($comlike)&&$RelateTable->save($relate);
         });
-        if (in_array(false, $errorFlag)) {
+        if (!$transRes) {
             return '点赞失败';
         }
         return true;
@@ -399,7 +413,10 @@ class BusinessComponent extends Component {
         if ($transRes) {
             //向专家发送一条短信
             //资金流水记录
-            $this->Sms->sendByQf106($order->seller->phone, '申请人已经向您支付了预约费用：' . $order->price . '元，请做好赴约准备。');
+            $seller_msg =  '申请人'.$order->user->truename.'手机号:'.$order->user->phone.'已经向您支付了预约费用：' . $order->price . '元，请做好赴约准备。';
+            $this->Sms->sendByQf106($order->seller->phone,$seller_msg);
+            $buyer_msg = '您已支付成功,可凭短信赴约,专家:'.$order->seller->truename.'手机号:'.$order->selle->phone;
+            $this->Sms->sendByQf106($order->user->phone, $buyer_msg);
         }
     }
 

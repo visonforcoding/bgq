@@ -49,6 +49,7 @@ class NewsController extends AppController {
         }
     }
 
+    
     /**
      * 评论
      */
@@ -80,7 +81,8 @@ class NewsController extends AppController {
                 $this->News->save($news);
                 if(is_numeric($reply_id)&&$reply_id>0){
                     $this->loadComponent('Business');
-                    $this->Business->usermsg($reply_com->user_id,'评论回复','有人回复了你的评论!', 3,$comment->id);
+                    $jump_url = '/news/view/'.  $this->request->data('id').'#allcoment#common_'.$newComment->id;
+                    $this->Business->usermsg($reply_com->user_id,'评论回复','有人回复了你的评论!', 3,$newComment->id,$jump_url);
                 }
                 $user_id = $this->user->id;
                 $res = $this->News->Comments->get($newComment->id, [

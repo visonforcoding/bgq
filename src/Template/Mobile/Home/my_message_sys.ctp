@@ -20,13 +20,14 @@
             <span>{#msg#}</span>
             <span class='datetime'>{#create_time#}</span>
         </div>
-        <a href="#this">查看详情</a>
+        <a href="{#jump_url#}">查看详情</a>
     </li>
 </script>
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
-    $.util.dataToTpl('msgs', 'listTpl',<?= json_encode($msgs) ?>, function (d) {
+    $.util.dataToTpl('msgs', 'listTpl',<?= json_encode($msgs) ?>, function (d) {     
+            d.jump_url  = d.url?d.url:'#this';
         return d;
     });
 </script>

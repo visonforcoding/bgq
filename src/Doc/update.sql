@@ -292,3 +292,6 @@ ALTER TABLE `career`
 ALTER TABLE `binggq`.`career`
   CHANGE COLUMN `descb` `descb` text NULL COMMENT '描述';
 #======07 03 done====
+#消息表msg 默认为空
+#ALTER TABLE `usermsg`
+	CHANGE COLUMN `msg` `msg` VARCHAR(550) NOT NULL DEFAULT '' COMMENT '内容' AFTER `title`;

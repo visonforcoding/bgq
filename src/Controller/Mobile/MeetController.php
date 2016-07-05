@@ -278,6 +278,7 @@ class MeetController extends AppController {
             $data['summary'] = $this->request->data('summary');
             $data['user_id']  = $this->user->id;
             $data['savant_id']  = $subject->user->id;
+            $data['status']  = 0;  //默认状态
             if($this->user->id==$subject->user->id){
                 return $this->Util->ajaxReturn(false,'不可约见自己');
             }

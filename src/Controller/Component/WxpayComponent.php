@@ -203,7 +203,7 @@ class WxpayComponent extends Component {
         }
         $order_no = $data->out_trade_no;
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
-        $order = $OrderTable->find()->contain(['Sellers'])->where(['Lmorder.status'=>0,'order_no'=>$order_no])->first();
+        $order = $OrderTable->find()->contain(['Sellers','Users'])->where(['Lmorder.status'=>0,'order_no'=>$order_no])->first();
         if($order){
             $this->Business->handOrder($order);
         }

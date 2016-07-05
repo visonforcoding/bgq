@@ -206,15 +206,15 @@ class HomeController extends AppController {
                         ->select(['u.truename', 'u.avatar', 'u.id', 'create_time',
                             'u.company', 'u.position', 'u.fans', 'uf.type'])
                         ->join([
-                            'u' => [
-                                'table' => 'user',
-                                'type' => 'inner',
-                                'conditions' => 'u.id = usermsg.user_id',
-                            ],
-                            'uf' => [
+                               'uf' => [
                                 'table' => 'user_fans',
                                 'type' => 'inner',
                                 'conditions' => 'uf.id = usermsg.table_id',
+                            ],
+                            'u' => [
+                                'table' => 'user',
+                                'type' => 'inner',
+                                'conditions' => 'u.id = uf.user_id',
                             ]
                         ])
                         ->where("usermsg.`user_id` = '$user_id'")
@@ -329,7 +329,6 @@ class HomeController extends AppController {
         $books = $BookTable->find()->contain(['Subjects', 'Subjects.User' => function($q) {
                         return $q->select(['truename', 'avatar', 'id', 'company', 'position','meet_nums']);
                     }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
-                    
         $savant_books = $BookTable->find()->contain(['Subjects', 'Users' => function($q) {
                         return $q->select(['truename', 'avatar', 'id', 'company', 'position','meet_nums']);
                     }])->where([
@@ -426,6 +425,7 @@ class HomeController extends AppController {
             'user_id' => $book->user_id,
             'seller_id' => $book->savant_id,
             'order_no' => time() . $book->user_id . $id . createRandomCode(2, 2),
+            'fee'=>0,    // 实际支付的默认值
             'price' => $book->subject->price,
             'remark' => '预约话题' . $book->subject->title
         ]);
@@ -518,6 +518,13 @@ class HomeController extends AppController {
             'pageTitle'=>'提现'
         ]);
         $this->set(compact('userInfo'));
+    }
+    
+    /**
+     * 提现成功页
+     */
+    public function withdrawSuccess(){
+        
     }
 
     /**

@@ -60,12 +60,13 @@
         else {
             book_html[type][status] = $.util.dataToTpl('', 'tpl', cdata, function(d){
                 d.link = type == 'books' ? '/home/my-book-detail/' :'/home/my-book_savant_detail/';
-                d.subject.user = d.subject.user || {};
-                d.user_logo = d.subject.user.avatar?d.subject.user.avatar:d.user.avatar;
-                d.truename = d.subject.user.truename?d.subject.user.truename:d.user.truename;
-                d.meet_nums = d.subject.user.meet_nums ?d.subject.user.meet_nums + '人约见过' : d.user.meet_nums+'约见过';
-                d.company = d.subject.user.company?d.subject.user.company:d.user.company;
-                d.position = d.subject.user.position?d.subject.user.position:d.user.position;
+//                d.subject.user = d.subject.user || {};
+                var user = d.subject.user?d.subject.user:d.user;
+                d.user_logo = user.avatar;
+                d.truename = user.truename;
+                d.meet_nums = user.meet_nums+'人约见过';
+                d.company = user.company;
+                d.position = user.position;
                 d.title = d.subject.title;
                 d.time = d.create_time
                 return d;

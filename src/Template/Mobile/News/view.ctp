@@ -93,7 +93,6 @@
                 <a href="/user/home-page/{#user_id#}"> <i class="username">{#user_truename#}<time>{#create_time#}</time></i>  </a>
                 <i class="job">{#user_company#} {#user_position#}</i>
             </span>
-          
             <span data-disable="{#disable#}" data-id="{#id#}" id="praise_{#id#}">
                 <b class="addnum">+1</b>
                 <i style="{#style#}" class="iconfont praise_{#id#}">&#xe615;</i>
