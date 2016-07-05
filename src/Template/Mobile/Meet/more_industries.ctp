@@ -243,7 +243,7 @@
         }
     });
     if($('#biggies').children('.internet-v-info').length == 0){
-        $.util.alert('暂无该行业专家');
+        $.util.alert('暂无该行业专家', 300000);
     }
 </script>
 <?php $this->end('script');
