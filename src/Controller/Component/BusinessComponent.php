@@ -415,7 +415,7 @@ class BusinessComponent extends Component {
             //资金流水记录
             $seller_msg =  '申请人'.$order->user->truename.'手机号:'.$order->user->phone.'已经向您支付了预约费用：' . $order->price . '元，请做好赴约准备。';
             $this->Sms->sendByQf106($order->seller->phone,$seller_msg);
-            $buyer_msg = '您已支付成功,可凭短信赴约,专家:'.$order->seller->truename.'手机号:'.$order->selle->phone;
+            $buyer_msg = '您已支付成功,可凭短信赴约,专家:'.$order->seller->truename.'手机号:'.$order->seller->phone;
             $this->Sms->sendByQf106($order->user->phone, $buyer_msg);
         }
     }
