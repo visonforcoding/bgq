@@ -27,6 +27,11 @@ class AgencyTable extends Table
         $this->table('agency');
         $this->displayField('name');
         $this->primaryKey('id');
+        
+        $this->belongsTo('Agencies', [
+            'className' => 'agency',
+            'foreignKey' => 'pid',
+        ]);
     }
 
     /**

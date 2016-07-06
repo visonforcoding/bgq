@@ -8,7 +8,7 @@
             <a href="/admin/agency/add" class="btn btn-small btn-warning">
                 <i class="icon icon-plus-sign"></i>添加
             </a>
-            <div class="form-group">
+<!--            <div class="form-group">
                 <label for="keywords">关键字</label>
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
             </div>
@@ -18,7 +18,7 @@
                 <label for="keywords">到</label>
                 <input type="text" name="end_time" class="form-control date_timepicker_end" id="keywords" placeholder="结束时间">
             </div>
-            <a onclick="doSearch();" class="btn btn-info"><i class="icon icon-search"></i>搜索</a>
+            <a onclick="doSearch();" class="btn btn-info"><i class="icon icon-search"></i>搜索</a>-->
             <a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>
         </div>
     </form>
@@ -39,9 +39,9 @@
             datatype: "json",
             mtype: "POST",
             colNames:   
-['父id','名称','操作'],
+['上级标签','名称','操作'],
             colModel: [
-{name:'pid',editable:true,align:'center'},
+{name:'agency.name',editable:true,align:'center', formatter:nameFormatter},
 {name:'name',editable:true,align:'center'},
 {name:'actionBtn',viewable:false,sortable:false,formatter:actionFormatter}],
             pager: "#pager",
@@ -99,10 +99,20 @@
     function viewFn() {
         console.log('view');
     }
+    
+    function nameFormatter(cellvalue, options, rowObject){
+        var response = '';
+        if(!rowObject.agency){
+            response = '顶级标签';
+        } else {
+            response = rowObject.agency.name;
+        }
+        return response;
+    }
 
     function actionFormatter(cellvalue, options, rowObject) {
         response = '<button onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-trash"></i> 删除</button>';
-        response += '<button onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-eyes"></i> 查看详情</button>';
+//        response += '<button onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-eyes"></i> 查看详情</button>';
         response += '<a href="/admin/agency/edit/' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini"><i class="icon icon-pencil"></i> 修改</a>';
         return response;
     }

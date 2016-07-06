@@ -123,7 +123,7 @@ class AgencyController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = $this->request->data('sidx');
+        $sort = 'Agency.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
@@ -135,9 +135,31 @@ class AgencyController extends AppController {
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
+            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $data = $this->getJsonForJqrid($page, $rows, '', $sort, $order, $where);
+        $query = $this->Agency->find()->contain(['Agencies']);
+        $query->hydrate(false);
+        if (!empty($where)) {
+            $query->where($where);
+        }
+        $nums = $query->count();
+        //$query->contain(['User']);
+        if (!empty($sort) && !empty($order)) {
+            $query->order([$sort => $order]);
+        }
+
+        $query->limit(intval($rows))
+                ->page(intval($page));
+        $res = $query->toArray();
+        if (empty($res)) {
+            $res = array();
+        }
+        if ($nums > 0) {
+            $total_pages = ceil($nums / $rows);
+        } else {
+            $total_pages = 0;
+        }
+        $data = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $res);
         $this->autoRender = false;
         $this->response->type('json');
         echo json_encode($data);

@@ -124,7 +124,7 @@ class IndustryController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = $this->request->data('sidx');
+        $sort = 'Industries.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
@@ -138,7 +138,7 @@ class IndustryController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
-        $query = $this->Industry->find();
+        $query = $this->Industry->find()->contain(['Industries']);
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
