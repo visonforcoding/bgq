@@ -3,12 +3,14 @@
 namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
+use App\Utils\umeng\Umeng;
 
 /**
  * Index Controller
  *
  * @property \App\Model\Table\IndexTable $Index
  * @property \App\Controller\Component\SmsComponent $Sms
+ * @property \App\Controller\Component\WxComponent $Wx
  */
 class IndexController extends AppController {
 
@@ -18,7 +20,13 @@ class IndexController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        var_dump($this->user);exit();
+        //$umengObj = new Umeng($key, $secret);
+        //var_dump($umengObj);
+        $this->autoRender =false;
+        debug($_SERVER);
+        $this->loadComponent('Wx');
+        //$access_token = $this->Wx->getAccessToken();
+        //debug($access_token);
     }
 
     /**
