@@ -8,33 +8,41 @@
                 <span class="mmark"><?php foreach($user->industries as $k=>$v): ?><?= $v['name'] ?> <?php endforeach; ?></span>
             </div>
             <div class="linkinfo">
-                <?php if (isset($user->secret)): ?>
-                    <?php if ($user->secret->phone_set == '1'): ?>
+                <?php if(!$self): ?>
+                    <?php if (isset($user->secret)): ?>
+                        <?php if ($user->secret->phone_set == '1'): ?>
+                            <p><span>手机号:<a href="tel"><?= $user->phone ?></a></span></p>
+                        <?php endif; ?>
+                        <?php if ($user->secret->email_set == '1'): ?>
+                            <p><span>邮   &nbsp;&nbsp;箱:<i><?= $user->email ?></i></span></p>
+                        <?php endif; ?>
+                    <?php else: ?>
                         <p><span>手机号:<a href="tel"><?= $user->phone ?></a></span></p>
-                    <?php endif; ?>
-                    <?php if ($user->secret->email_set == '1'): ?>
                         <p><span>邮   &nbsp;&nbsp;箱:<i><?= $user->email ?></i></span></p>
                     <?php endif; ?>
+                <?php else: ?>
+                    <p><span>手机号:<a href="tel"><?= $user->phone ?></a></span></p>
+                    <p><span>邮   &nbsp;&nbsp;箱:<i><?= $user->email ?></i></span></p>
                 <?php endif; ?>
                 <p><span>地   &nbsp;&nbsp;区:<i><?= $user->city ?></i></span></p>
             </div>
         </div>
     </div>
-                                                                    
+    <?php if(!$self): ?>
         <?php if (isset($user->secret)): ?>
             <?php if ($user->secret->profile_set == '1'): ?>
-            <?php if(is_array(unserialize($user->grbq))): ?>
-                <div class="ul-list">
-                    <h3>个人标签：</h3>
-                    <div class="mmark">
-                        <span class="m-con">
-                            <?php foreach(unserialize($user->grbq) as $v): ?>
-                                <?= $v ?> 
-                            <?php endforeach; ?>
-                        </span>
+                <?php if(is_array(unserialize($user->grbq))): ?>
+                    <div class="ul-list">
+                        <h3>个人标签：</h3>
+                        <div class="mmark">
+                            <span class="m-con">
+                                <?php foreach(unserialize($user->grbq) as $v): ?>
+                                    <?= $v ?> 
+                                <?php endforeach; ?>
+                            </span>
+                        </div>
                     </div>
-                </div>
-            <?php endif; ?>
+                <?php endif; ?>
                 <ul class="ul-list">
                     <?php if($user->educations): ?>
                     <li>
@@ -64,8 +72,82 @@
                     <?php endif; ?>
                 </ul>
             <?php endif; ?>
+        <?php else: ?>
+            <div class="ul-list">
+                <h3>个人标签：</h3>
+                <div class="mmark">
+                    <span class="m-con">
+                        <?php if(is_array(unserialize($user->grbq))): ?>
+                            <?php foreach(unserialize($user->grbq) as $v): ?>
+                                <?= $v ?> 
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </span>
+                </div>
+            </div>
+            <ul class="ul-list">
+                <li>
+                    <h3>教育经历：</h3>
+                    <div class="mmark">
+                        <?php foreach ($user->educations as $education): ?>
+                            <p>
+                                <span><?= $education->school ?></span>
+                                <em><?= $education->start_date ?>-<?= $education->end_date ?>，<?= $education->major ?>，<?= $educationType[$education->education] ?></em>
+                            </p>
+                        <?php endforeach; ?>
+                    </div>
+                </li>
+                <li>
+                    <h3>工作经历：</h3>
+                    <div class="mmark">
+                        <?php foreach ($user->careers as $career): ?>
+                            <p>
+                                <span><?= $career->company ?></span>
+                                <em><?= $career->start_date ?>-<?= $career->end_date ?>，<?= $career->position ?></em>
+                            </p>
+                        <?php endforeach; ?>
+                    </div>
+                </li>
+            </ul>
         <?php endif; ?>
-            
+    <?php else: ?>
+        <div class="ul-list">
+            <h3>个人标签：</h3>
+            <div class="mmark">
+                <span class="m-con">
+                    <?php if(is_array(unserialize($user->grbq))): ?>
+                        <?php foreach(unserialize($user->grbq) as $v): ?>
+                            <?= $v ?> 
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </span>
+            </div>
+        </div>
+        <ul class="ul-list">
+            <li>
+                <h3>教育经历：</h3>
+                <div class="mmark">
+                    <?php foreach ($user->educations as $education): ?>
+                        <p>
+                            <span><?= $education->school ?></span>
+                            <em><?= $education->start_date ?>-<?= $education->end_date ?>，<?= $education->major ?>，<?= $educationType[$education->education] ?></em>
+                        </p>
+                    <?php endforeach; ?>
+                </div>
+            </li>
+            <li>
+                <h3>工作经历：</h3>
+                <div class="mmark">
+                    <?php foreach ($user->careers as $career): ?>
+                        <p>
+                            <span><?= $career->company ?></span>
+                            <em><?= $career->start_date ?>-<?= $career->end_date ?>，<?= $career->position ?></em>
+                        </p>
+                    <?php endforeach; ?>
+                </div>
+            </li>
+        </ul>
+    <?php endif; ?>
     <?php if($user->goodat): ?>
     <div class="ul-list">
         <h3>擅长业务：</h3>
