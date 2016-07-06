@@ -255,7 +255,7 @@ activity.prototype.bindEvent = function () {
                 setTimeout(function(){
                     $('#shadow').hide();
                     $('#wxshare').hide();
-                },301);
+                }, 400);
                 break;
             case 'reply_shadow':
                 setTimeout(function () {

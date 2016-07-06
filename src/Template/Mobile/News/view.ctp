@@ -310,7 +310,7 @@
                     setTimeout(function(){
                         $('#shadow').hide();
                         $('#wxshare').hide();
-                    },301);
+                    }, 400);
                     break;
                 case 'comment_shadow':
                     setTimeout(function(){

@@ -176,13 +176,11 @@
                     $('#shadow').show();
                 }
                 break;
-            case 'shadow':
-                $(em).hide();
-                $('#wxshare').hide();
-                break;
-            case 'wxshare':
-                $(em).hide();
-                $('#shadow').hide();
+            case 'shadow':case 'wxshare':
+                setTimeout(function(){
+                    $('#shadow').hide();
+                    $('#wxshare').hide();
+                }, 400);
                 break;
             case 'goTop':
                 window.scrollTo(0, 0);
