@@ -410,7 +410,7 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .m-center-con:after{right:0;border-radius: 0.12rem 0 0 0.12rem; }
 .wraper .m-about-expert{margin-bottom:0.3rem;border-bottom:1px solid #e5e5e5;}
 .wraper .m-about-expert h3{color:#222c38;}
-.m-about-expert p{padding:0.3rem;text-indent: 2em;font-size:0.28rem;}
+.m-about-expert p{padding:0.3rem;/*text-indent: 2em;*/font-size:0.28rem;}
 .toone .active h3{background: #e01a48;}
 .m-detail-box{background: #fff;}
 .m-detail-box li{padding:0.25rem 0.3rem;border-bottom:1px solid #e5e5e5;display: flex; justify-content:space-between;font-size:0.3rem;}
