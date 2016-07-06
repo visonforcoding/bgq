@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!--version：app版本信息。url:下载地址(ios不需要)。describe:版本详细描述 -->
+	<ios 
+		version="1.1.0" 
+	    describe="1.优化用户的体验.\r\n2.修复bug...">
+	</ios>
+
+    <android 
+		version="1" 
+		describe="1.优化用户的体验.\r\n2.修复bug."
+        url="http://storage.360buyimg.com/jzyc/jzyc-v4.1.98.apk">
+    </android>
+
+    <h5-upgrade >
+        <!--	
+			name名称，			
+			version版本号，分大版本号和小版本号，譬如1002，1000是大版本号，2是小版本号，
+			url版本下载链接 -->
+
+			<module
+				 name="page1" 
+				 version="1002"
+				 url = "http://.../页面名称.1002.zip"
+			/>
+        
+            <module
+                name="app_follow" 
+				version="1000"
+                url="http://.../页面名称.1002.zip"   
+            />
+        
+            <module
+                name="app_daren" 
+				version="2001"
+                url="http://.../页面名称.1002.zip"
+            />
+        
+        
+   </h5-upgrade>
+   
+</root>
+
+
