@@ -32,8 +32,8 @@ class IndexController extends AppController {
 //        $cipher = base64_encode($result);
 //        debug(Security::decrypt(base64_decode($cipher), $key));
         $this->loadComponent('Wx');
-//        $access_token = $this->Wx->getAccessToken();
-//        var_dump($access_token);exit();
+        $access_token = $this->Wx->getAccessToken();
+        var_dump($access_token);exit();
 //        $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
 //        $res = $httpClient->post('http://bgq.dev/api/wxtoken');
         //debug($res);
