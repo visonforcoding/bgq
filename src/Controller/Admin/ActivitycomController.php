@@ -197,5 +197,32 @@ class ActivitycomController extends AppController {
         $filename = 'Activitycom_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
+    
+    public function reply($id){
+        if($this->request->is('post')){
+            $data = $this->request->data;
+            $lastcom = $this->Activitycom->get($id);
+            $activityTable = \Cake\ORM\TableRegistry::get('activity');
+            $reply = [
+                'user_id' => $this->_user->id,
+                'activity_id' => $lastcom->activity_id,
+                'body' => $data['reply'],
+                'reply_id' => $lastcom->user_id,
+                'pid' => $lastcom->id,
+            ];
+            $activitycom = $this->Activitycom->newEntity();
+            $activitycom = $this->Activitycom->patchEntity($activitycom, $reply);
+            $res = $this->Activitycom->save($activitycom);
+            if($res) {
+                $activity = $activityTable->get($activitycom->activity_id);
+                $activity->comment_nums += 1;
+                $activityTable->save($activity);
+                return $this->Util->ajaxReturn(true, '回复成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '回复失败');
+            }
+        }
+        
+    }
 
 }

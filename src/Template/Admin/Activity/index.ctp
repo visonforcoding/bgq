@@ -61,7 +61,7 @@
                         pager: "#pager",
                         rowNum: 30,
                         rowList: [10, 20, 30],
-                        sortname: "create_time",
+                        sortname: "id",
                         sortorder: "desc",
                         viewrecords: true,
                         gridview: true,
@@ -136,11 +136,9 @@
                             dataType: 'json',
                             url: '/admin/activity/top/' + id,
                             success: function (res) {
+                                layer.msg(res.msg);
                                 if (res.status) {
-                                    layer.msg(res.msg);
-                                    setTimeout(function () {
-                                        window.location.reload();
-                                    }, 2000);
+                                    $('#list').trigger('reloadGrid');
                                 }
                             }
                         })
@@ -158,11 +156,9 @@
                             dataType: 'json',
                             url: '/admin/activity/untop/' + id,
                             success: function (res) {
+                                layer.msg(res.msg);
                                 if (res.status) {
-                                    layer.msg(res.msg);
-                                    setTimeout(function () {
-                                        window.location.reload();
-                                    }, 2000);
+                                    $('#list').trigger('reloadGrid');
                                 }
                             }
                         })
@@ -180,11 +176,9 @@
                             dataType: 'json',
                             url: '/admin/activity/release/' + id,
                             success: function (res) {
+                                layer.msg(res.msg);
                                 if (res.status) {
-                                    layer.msg(res.msg);
-                                    setTimeout(function () {
-                                        window.location.reload();
-                                    }, 2000);
+                                    $('#list').trigger('reloadGrid');
                                 }
                             }
                         })
@@ -207,11 +201,9 @@
                             dataType: 'json',
                             url: '/admin/activity/unrelease/' + id,
                             success: function (res) {
+                                layer.msg(res.msg);
                                 if (res.status) {
-                                    layer.msg(res.msg);
-                                    setTimeout(function () {
-                                        window.location.reload();
-                                    }, 2000);
+                                    $('#list').trigger('reloadGrid');
                                 }
                             }
                         });
