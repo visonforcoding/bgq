@@ -9,12 +9,13 @@
     <android 
 		version="1" 
 		describe="1.优化用户的体验.\r\n2.修复bug."
-        url="http://storage.360buyimg.com/jzyc/jzyc-v4.1.98.apk">
+        url="http://m.chinamatop.com/mobile/app/app_bgq.apk">
     </android>
 
     <h5-upgrade >
         <!--	
-			name名称，			
+			name名称，
+			
 			version版本号，分大版本号和小版本号，譬如1002，1000是大版本号，2是小版本号，
 			url版本下载链接 -->
 
