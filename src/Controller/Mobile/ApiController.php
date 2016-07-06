@@ -9,6 +9,8 @@ use Wpadmin\Utils\UploadFile;
  * Api Controller  用于app接口
  *
  * @property \App\Model\Table\ApiTable $Api
+ * @property \App\Controller\Component\WxComponent $Wx
+ * @property \App\Controller\Component\EncryptComponent $Encrypt
  *
  */
 class ApiController extends AppController {
@@ -16,7 +18,7 @@ class ApiController extends AppController {
     const TOKEN = 'dBkuJtWzHuPJFtTjZqHJugGP';
 
     protected $noAcl = [
-        'upload'
+        'upload','wxtoken'
     ];
 
     public function initialize() {
@@ -25,7 +27,7 @@ class ApiController extends AppController {
 
     public function beforeFilter(\Cake\Event\Event $event) {
         parent::beforeFilter($event);
-        return $this->checkAcl();
+        //return $this->checkAcl();
     }
 
     protected function jsonResponse($status, $msg = '', $statusCode = 200) {
@@ -167,6 +169,26 @@ class ApiController extends AppController {
             $response['msg'] = '上传成功!';
         }
         return $this->jsonResponse($response);
+    }
+    
+    
+    public function wxtoken(){
+        $wxconfig = \Cake\Core\Configure::read('weixin');
+        $master_ip = $wxconfig['master_ip'];
+        $master_domain = $wxconfig['master_domain'];
+        if($this->request->env('SERVER_ADDR')!=$master_ip||
+                $this->request->env('SERVER_NAME')!=$master_domain){
+            //非中控服务器请求 保证中控服务器才能进行本地的获取 
+            \Cake\Log\Log::notice('非中控请求调取接口','devlog');
+           return 'false';
+        }
+        $this->loadComponent('Wx');
+        $this->loadComponent('Encrypt');
+        $token = $this->Wx->getAccessToken();
+        $en_token = $this->Encrypt->encrypt($token);
+        $this->response->body($en_token);
+        $this->response->send();
+        $this->response->stop();
     }
 
 }

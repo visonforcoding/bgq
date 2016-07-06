@@ -130,6 +130,9 @@ class WxController extends AppController {
         $body = '预约话题《' . $order->subject_book->subject->title . '》支付';
         $out_trade_no = $order->order_no;
         $openid = $this->user->wx_openid;
+        if(empty($openid)){
+            
+        }
         //$fee = intval(($order->price)*100);  //支付金额(分)
         $fee = 1;  //测试时 1分
         $this->loadComponent('Wxpay');
