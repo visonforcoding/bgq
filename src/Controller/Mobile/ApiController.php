@@ -27,7 +27,7 @@ class ApiController extends AppController {
 
     public function beforeFilter(\Cake\Event\Event $event) {
         parent::beforeFilter($event);
-        //return $this->checkAcl();
+        return $this->checkAcl();
     }
 
     protected function jsonResponse($status, $msg = '', $statusCode = 200) {
