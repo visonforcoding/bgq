@@ -236,7 +236,8 @@ class MeetController extends AppController {
         $savant = $SavantTable->findByUser_id($user_id)->first();
         $this->set([
             'pageTitle'=>'简介修改',
-            'summary' => $savant->summary
+            'summary' => $savant->summary,
+            'id' => $this->user->id
         ]);
     }
     
