@@ -33,9 +33,9 @@ class EncryptComponent extends Component {
 
     public function initialize(array $config) {
         parent::initialize($config);
-        $config = \Cake\Core\Configure::read('encrypt');
-        $this->key = $config['key'];
-        $this->salt = $config['salt'];
+        $conf = \Cake\Core\Configure::read('encrypt');
+        $this->key = $conf['key'];
+        $this->salt = $conf['salt'];
         if (empty($this->key) || empty($this->salt)) {
             throw new \Cake\Core\Exception\Exception('KEY或salt未配置');
         }
