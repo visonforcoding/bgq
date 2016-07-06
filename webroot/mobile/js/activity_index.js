@@ -30,6 +30,8 @@ activity.prototype.bindEvent = function () {
             return;
         switch (em.id) {
             case 'release':
+                location.href = "/activity/release";
+                /**
                 if ($(em).attr('user'))
                 {
                     location.href = "/activity/release";
@@ -39,6 +41,7 @@ activity.prototype.bindEvent = function () {
                         location.href = "/user/login?redirect_url=/activity/index";
                     },2000);
                 }
+                 */
                 break;
             case 'goTop':
                 window.scrollTo(0, 0);
