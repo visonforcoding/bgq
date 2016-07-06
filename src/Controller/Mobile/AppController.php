@@ -97,7 +97,7 @@ class AppController extends Controller {
         $action = strtolower($this->request->param('action'));
         $request_aim = [$controller, $action];
         if (in_array($request_aim, $this->firewall) ||
-                in_array($controller, ['user', 'wx', 'news', 'activity', 'meet', 'pay', 'api'])) {
+                in_array($controller, ['user', 'wx', 'news', 'activity', 'meet', 'pay', 'api','index'])) {
             return true;
         }
         return $this->handCheckLogin();
