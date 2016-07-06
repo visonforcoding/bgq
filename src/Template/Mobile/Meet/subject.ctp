@@ -48,9 +48,9 @@
                 </li>
             </ul>
         </div>
-        <div class="infobox m-subject-info">
+        <div class="infobox m-subject-info" id="addrtime" <?php if(isset($subject)): ?><?php if($subject->type=='1'):?>hidden<?php endif;?><?php else:?>hidden<?php endif; ?>>
             <ul>
-                <li>地点：<span class='infocard'><input type="text" type="text" name="address" value="<?php if(isset($subject)): ?><?=$subject->address?><?php endif; ?>" /></span></li>
+                <li>地点：<span class='infocard'><input type="text" name="address" value="<?php if(isset($subject)): ?><?=$subject->address?><?php endif; ?>" /></span></li>
                 <li>时间：<span class='infocard reg-repass'><input type="text" name="invite_time" value='<?php if(isset($subject)): ?><?=$subject->invite_time?><?php endif; ?>' /></span></li>
             </ul>
         </div>
@@ -71,6 +71,11 @@
     $('input[name="type"]').on('click',function(){
             $('input[name="type"]').next('i').removeClass('active');
             $(this).next('i').addClass('active');
+            if($(this).attr('value') == 1){
+                $('#addrtime').hide();
+            } else {
+                $('#addrtime').show();
+            }
     });
     $('#del').on('click',function(){
              $.util.ajax({
