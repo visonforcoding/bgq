@@ -223,7 +223,7 @@ $.util = {
                 window.up = true;
             }
             if(document.body.scrollTop < ($('#imgList').height() + $('.inner').height()) && window.up == true){
-                if($.util.isAPP){
+                if(!$.util.isWX){
                     $('.a-search-box').addClass('movedown');
                 } else if($.util.isWX) {
                     $('.a-search-box').addClass('moveto');
