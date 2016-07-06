@@ -185,6 +185,8 @@ class ApiController extends AppController {
         $this->loadComponent('Wx');
         $this->loadComponent('Encrypt');
         $token = $this->Wx->getAccessToken();
+        \Cake\Log\Log::debug('中控服务器获取token','devlog');
+        \Cake\Log\Log::debug($token,'devlog');
         $en_token = $this->Encrypt->encrypt($token);
         $this->response->body($en_token);
         $this->response->send();
