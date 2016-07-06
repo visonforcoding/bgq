@@ -172,6 +172,10 @@ class ApiController extends AppController {
     }
     
     
+    /**
+     * 中控的access_token 分发接口
+     * @return string
+     */
     public function wxtoken(){
         $wxconfig = \Cake\Core\Configure::read('weixin');
         $master_ip = $wxconfig['master_ip'];

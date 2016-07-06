@@ -156,7 +156,7 @@ class WxComponent extends Component {
         if($this->request->env('SERVER_ADDR')!=$this->master_ip||
                 $this->request->env('SERVER_NAME')!=$this->master_domain){
             //非中控服务器请求
-            \Cake\Log\Log::notice('非中控请求','devlog');
+            //\Cake\Log\Log::notice('非中控请求','devlog');
             return $this->handMasterRequest();
         }
         $access_token = \Cake\Cache\Cache::read(self::TOKEN_NAME);
@@ -200,7 +200,10 @@ class WxComponent extends Component {
         }
     } 
     
-    
+    /**
+     * 中控获取机制
+     * @return boolean
+     */
     protected function handMasterRequest(){
         $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
         $api_url = 'http://'.$this->master_domain.self::MASTER_TOKEN_API;
