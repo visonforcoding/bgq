@@ -202,5 +202,31 @@ class NewscomController extends AppController {
         $filename = 'Newscom_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
+    
+    public function reply($id){
+        if($this->request->is('post')){
+            $data = $this->request->data;
+            $lastcom = $this->Newscom->get($id);
+            $newsTable = \Cake\ORM\TableRegistry::get('news');
+            $reply = [
+                'user_id' => $this->_user->id,
+                'news_id' => $lastcom->news_id,
+                'body' => $data['reply'],
+                'reply_user' => $lastcom->user_id,
+                'pid' => $lastcom->id,
+            ];
+            $newscom = $this->Newscom->newEntity();
+            $newscom = $this->Newscom->patchEntity($newscom, $reply);
+            $res = $this->Newscom->save($newscom);
+            if($res) {
+                $news = $newsTable->get($newscom->news_id);
+                $news->comment_nums += 1;
+                $newsTable->save($news);
+                return $this->Util->ajaxReturn(true, '回复成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '回复失败');
+            }
+        }
+    }
 
 }

@@ -36,14 +36,14 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '评论时间', '评论内容', '点赞数', '操作'],
+                                ['用户', '评论时间', '评论内容', '点赞数', '所属活动', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'body', editable: true, align: 'center'},
                             {name: 'praise_nums', editable: true, align: 'center'},
+                            {name: 'activity.title', editable: true, align: 'center'},
                             {name: 'actionBtn', width: '200%', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
-                            
                             pager: "#pager",
                         rowNum: 30,
                         rowList: [10, 20, 30],
@@ -69,21 +69,43 @@
                 });
 
                 function crowdFormatter(cellvalue, options, rowObject) {
-					if(rowObject.is_crowdfunding == 0)
-					{
-						response = '否';
-					}
-					else
-					{
-						response = '是';
-					}
-                    
+                    if(rowObject.is_crowdfunding == 0){
+                        response = '否';
+                    } else {
+                        response = '是';
+                    }
                     return response;
                 }
 
                 function actionFormatter(cellvalue, options, rowObject) {
-                    response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response = '<a title="回复" onClick="reply(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-print"></i> </a>';
+                    response += '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     return response;
+                }
+                
+                function reply(id) {
+                    //需要引入layer.ext.js文件
+                    layer.prompt({
+                        title: '请输入回复内容',
+                        btn: ['确认', '取消'], //按钮
+                        formType: 2, // input.type 0:text,1:password,2:textarea
+                    }, function (pass) {
+                        var msg = {};
+                        msg.reply = pass;
+                        $.ajax({
+                            type: 'post',
+                            data: msg,
+                            dataType: 'json',
+                            url: '/admin/activitycom/reply/' + id,
+                            success: function (res) {
+                                layer.msg(res.msg);
+                                if (res.status) {
+                                    $('#list').trigger('reloadGrid');
+                                }
+                            }
+                        });
+                    }, function () {
+                    });
                 }
 
                 function delRecord(id) {
@@ -94,7 +116,7 @@
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/admin/activity/delete',
+                            url: '/admin/activitycom/delete',
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
@@ -127,12 +149,12 @@
                     searchData['sidx'] = sortColumnName;
                     searchData['sort'] = sortOrder;
                     var searchQueryStr = $.param(searchData);
-                    $("body").append("<iframe src='/admin/activity/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                    $("body").append("<iframe src='/admin/activitycom/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
 
                 function doView(id) {
                     //查看明细
-                    url = '/admin/activity/view?id=' + id;
+                    url = '/admin/activitycom/view?id=' + id;
                     layer.open({
                         type: 2,
                         title: '查看详情',
