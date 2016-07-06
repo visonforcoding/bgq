@@ -7,14 +7,14 @@
     </div>
 </header>
 <div class="wraper">
-    <div class="h20"></div>
+    <div class="h20 nobottom"></div>
     <div class="infobox a-pay">
         <ul>
             <li>话题名称：<span class='infocard'><input type="text" placeholder="<?= $book->subject->title ?>" /></span></li>
             <li>费用：<span class='infocard reg-repass'><input type="text" value='<?= $book->subject->price ?>元' readonly="readonly"/></span></li>
         </ul>
     </div>
-    <div class="h20"></div>
+    <div class="h20 no-t-border"></div>
     <div class="infobox a-pay paytype">
         <ul>
             <li><b></b>微信支付：<span id="pay_weixin" data-pay="wx" class='infocard'><input type="radio" name='pay' checked="checked" /><i class='active'></i></span></li>
