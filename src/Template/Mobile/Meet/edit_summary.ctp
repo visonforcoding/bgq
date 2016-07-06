@@ -34,7 +34,7 @@
                $.util.alert(res.msg);
                if(res.status){
                    setTimeout(function(){
-                       window.history.go(-1);
+                       location.href = "/meet/view/<?= $id ?>";
                    },1000);
                }
            }
