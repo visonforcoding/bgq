@@ -189,6 +189,7 @@ class ApiController extends AppController {
         \Cake\Log\Log::debug($token,'devlog');
         $en_token = $this->Encrypt->encrypt($token);
         \Cake\Log\Log::debug($en_token,'devlog');
+        \Cake\Log\Log::debug($this->Encrypt->decrypt($en_token),'devlog');
         $this->response->body($en_token);
         $this->response->send();
         $this->response->stop();
