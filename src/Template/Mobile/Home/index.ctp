@@ -117,6 +117,6 @@
         $('#wxshare').hide();
         $('#shadow').hide();
     })
-    if ($.util.isAPP) { $('.h-home-bottom').css({'padding-top':'0.8rem'});};
+    if ($.util.isAPP) {$('.h-home-bottom').css({'padding-top':'0.8rem'})}
 </script>
 <?php $this->end('script'); ?>
