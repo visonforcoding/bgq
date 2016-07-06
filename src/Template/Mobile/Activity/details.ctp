@@ -38,7 +38,7 @@
                 </span>
                 <!--喜欢按钮-->
                 <span >
-                    <i class="iconfont like <?php if ($isLike): ?> changecolor<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like">&#xe616;</i><span><?= $activity->praise_nums ?></span>
+                    <i class="iconfont like <?php if ($isLike): ?> changecolor<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like">&#xe616;</i><span><?= $activity->praise_nums ? $activity->praise_nums : '0' ?></span>
                 </span>
             </div>
         </section>
