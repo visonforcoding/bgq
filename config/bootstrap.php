@@ -171,6 +171,7 @@ Request::addDetector('tablet', function ($request) {
 Request::addDetector('weixin', ['env' => 'HTTP_USER_AGENT', 'pattern' => '/MicroMessenger/i']);
 Request::addDetector('lemon', ['env' => 'HTTP_USER_AGENT', 'pattern' => '/smartlemon/i']);
 
+
 /**
  * Custom Inflector rules, can be set to correctly pluralize or singularize
  * table, model, controller names or whatever other string is passed to the

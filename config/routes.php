@@ -84,6 +84,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/:controller/:action/*',['prefix'=>'mobile']);
     //上传
     $routes->connect('/do-upload/*',['plugin'=>'wpadmin','controller'=>'util','action'=>'doUpload']);
+    $routes->connect('/get-token/*',['prefix'=>'mobile','controller'=>'api','action'=>'wxtoken']);
     $routes->fallbacks('DashedRoute');
 });
 

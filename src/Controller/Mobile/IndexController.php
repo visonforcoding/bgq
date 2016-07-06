@@ -4,6 +4,7 @@ namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
 use App\Utils\umeng\Umeng;
+use Cake\Utility\Security;
 
 /**
  * Index Controller
@@ -11,6 +12,7 @@ use App\Utils\umeng\Umeng;
  * @property \App\Model\Table\IndexTable $Index
  * @property \App\Controller\Component\SmsComponent $Sms
  * @property \App\Controller\Component\WxComponent $Wx
+ * @property \App\Controller\Component\EncryptComponent $Encrypt
  */
 class IndexController extends AppController {
 
@@ -23,10 +25,20 @@ class IndexController extends AppController {
         //$umengObj = new Umeng($key, $secret);
         //var_dump($umengObj);
         $this->autoRender =false;
-        debug($_SERVER);
+        //debug($this->request);
+//        $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
+//        debug(Security::hash(uniqid()),'sha1',true);
+//        $result = Security::encrypt('123', $key);
+//        $cipher = base64_encode($result);
+//        debug(Security::decrypt(base64_decode($cipher), $key));
         $this->loadComponent('Wx');
-        //$access_token = $this->Wx->getAccessToken();
-        //debug($access_token);
+        $access_token = $this->Wx->getAccessToken();
+        var_dump($access_token);exit();
+        $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
+        $res = $httpClient->post('http://bgq.dev/api/wxtoken');
+        debug($res);
+        $this->loadComponent('Encrypt');
+        debug($this->Encrypt->decrypt($res->body()));
     }
 
     /**

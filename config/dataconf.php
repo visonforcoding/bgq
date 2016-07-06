@@ -15,7 +15,9 @@ return [
         'account' => 'chinamatop',
         'password' => 'jyh1606_jh'
     ],
-
+    'encrypt'=>[
+        'key'=>'e878caddbb44ee591f30389477f21e30a3cd4377',
+    ],
     'weixin' => [
         'appID' => 'wx0cf353f9fc03aad0',
         'appsecret' => '460366e0beddcf18a21873db11a4eb1c',
@@ -27,7 +29,9 @@ return [
         'sslkey_path'=> dirname(__FILE__).'/wxcert/apiclient_key.pem',
         'notify_url'=>'/wx/wx-notify',
         'AppID'=>'wxb450720adce7295f',     //APP端的 开放平台appid
-        'AppSecret'=>'1c721c93e80578c2b707358993dcd371'
+        'AppSecret'=>'1c721c93e80578c2b707358993dcd371',
+        'master_ip'=>'112.74.88.156' ,   //中控服务器ip
+        'master_domain'=>'m.chinamatop.com'    //中控服务器ip
     ],
     'umeng' => [
         'AppKey' => '57552eac67e58e5bdb001c6c',

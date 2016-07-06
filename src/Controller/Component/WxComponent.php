@@ -9,6 +9,7 @@ use Cake\Controller\ComponentRegistry;
  * Wx component  wx组件 
  *  获取access_token,用户openId, jsapi 签名信息
  * @author caowenpeng <caowenpeng1990@126.com>
+ * @property \App\Controller\Component\EncryptComponent $Encrypt
  */
 class WxComponent extends Component {
 
@@ -18,20 +19,34 @@ class WxComponent extends Component {
      * @var array
      */
     protected $_defaultConfig = [];
+    public $components = ['Encrypt'];
 
     const TOKEN_NAME = 'wx.access_token';
     const WEIXIN_API_URL = 'https://api.weixin.qq.com/cgi-bin/';
     const JSAPI_TICKET_NAME = 'wx.jsapi_ticket';
+    const MASTER_TOKEN_API = '/get-token';
 
     protected $app_id;
     protected $app_secret;
     protected $wxconfig;
+    /**
+     * 中控服务器ip
+     * @var type 
+     */
+    protected $master_ip;  
+    /**
+     * 中空服务器域名
+     * @var type 
+     */
+    protected $master_domain;
 
     public function initialize(array $config) {
         parent::initialize($config);
         $wxconfig = \Cake\Core\Configure::read('weixin');
         $this->app_id = $wxconfig['appID'];
         $this->app_secret = $wxconfig['appsecret'];
+        $this->master_ip = $wxconfig['master_ip'];
+        $this->master_domain = $wxconfig['master_domain'];
         $this->wxconfig = $wxconfig;
     }
 
@@ -137,6 +152,13 @@ class WxComponent extends Component {
      */
     public function getAccessToken() {
         \Cake\Log\Log::notice('获取普通accessToken','devlog');
+        $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
+        if($this->request->env('SERVER_ADDR')!=$this->master_ip||
+                $this->request->env('SERVER_NAME')!=$this->master_domain){
+            //非中控服务器请求
+            \Cake\Log\Log::notice('非中控请求','devlog');
+            return $this->handMasterRequest();
+        }
         $access_token = \Cake\Cache\Cache::read(self::TOKEN_NAME);
         $url = self::WEIXIN_API_URL . 'token?grant_type=client_credential&appid=' . $this->app_id . '&secret=' . $this->app_secret;
         $isExpires = true;   //过期标志
@@ -148,7 +170,6 @@ class WxComponent extends Component {
         }
         if ($access_token === false || $isExpires) {
             \Cake\Log\Log::warning('微信接口token重新请求','devlog');
-            $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
             $response = $httpClient->get($url);
             if ($response->isOk()) {
                 $body = json_decode($response->body());
@@ -178,6 +199,22 @@ class WxComponent extends Component {
             return $access_token['access_token'];
         }
     } 
+    
+    
+    protected function handMasterRequest(){
+        $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
+        $api_url = 'http://'.$this->master_domain.self::MASTER_TOKEN_API;
+        $time = time();
+        $res = $httpClient->post($api_url,[
+            'timestamp'=>$time,
+            'access_token'=>strtoupper(md5($time . 'dBkuJtWzHuPJFtTjZqHJugGP'))
+        ]);
+        if(!$res->isOk()){
+            return false;
+        }else{
+            return $this->Encrypt->decrypt($res->body());
+        }
+    }
 
     /**
      * 获取jsapi_ticket
