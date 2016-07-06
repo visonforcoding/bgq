@@ -32,7 +32,13 @@ return [
         'AppID'=>'wxb450720adce7295f',     //APP端的 开放平台appid
         'AppSecret'=>'1c721c93e80578c2b707358993dcd371',
         'master_ip'=>'112.74.88.156' ,   //中控服务器ip
-        'master_domain'=>'m.chinamatop.com'    //中控服务器ip
+        'master_domain'=>'m.chinamatop.com'    //中控服务器域名
+    ],
+    'alipay' => [
+        'partner' => '2088221650569093',  //合作者身份
+        'seller_id' => 'maclub@chinama.club',
+        'notify_url'=>'/wx/ali-notify',
+        'private_key'=>  dirname(__FILE__).'/alipay/key/rsa_private_key.pem',
     ],
     'umeng' => [
         'AppKey' => '57552eac67e58e5bdb001c6c',
