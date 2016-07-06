@@ -33,9 +33,9 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['id', '地区名称', '操作'],
+                                ['地区名称', '操作'],
                         colModel: [
-                            {name: 'id', editable: true, align: 'center'},
+//                            {name: 'id', editable: true, align: 'center'},
                             {name: 'name', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",

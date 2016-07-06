@@ -30,6 +30,10 @@ class IndustryTable extends Table {
         $this->hasMany('User', [
             'foreignKey' => 'industry_id'
         ]);
+        $this->belongsTo('Industries', [
+            'className' => 'industry',
+            'foreignKey' => 'pid',
+        ]);
     }
 
     /**
