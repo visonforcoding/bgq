@@ -265,6 +265,7 @@ class ActivityController extends AppController {
      * 发布活动
      */
     public function release() {
+        $this->handCheckLogin();
         $industries = '';
         if ($this->request->param('pass')) {
 
