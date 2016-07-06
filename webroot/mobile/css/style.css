@@ -284,7 +284,7 @@ border-bottom:none;top:-1px;margin-top:-1px;margin-left:-1px;}
 .paytype i.active{width:0.29rem;height:0.29rem;background: url(img/choose.png) no-repeat;background-size:cover;border:1px #de204c solid;}
 .paytype li b{width:0.32rem;height:0.32rem;position:absolute;left:0;top:0.25rem;}
 .paytype li:first-child b{background: url(img/w-pay.png) no-repeat;background-size: cover; }
-.paytype li:last-child b{background: url(img/z-pay.png) no-repeat;background-size: cover; }
+.paytype li:nth-of-type(2) b{background: url(img/z-pay.png) no-repeat;background-size: cover; }
 .wraper .paysucess{border-bottom:none;}
 .paybtn{margin:0.2rem 0.7rem;}
 .paybtn:nth-of-type(1){background: #3e82f7;}
