@@ -212,6 +212,7 @@ class WxComponent extends Component {
         if(!$res->isOk()){
             return false;
         }else{
+            //debug(\Cake\Utility\Security::decrypt(base64_decode($res->body()),'e878caddbb44ee591f30389477f21e30a3cd4377'));
             return $this->Encrypt->decrypt($res->body());
         }
     }
