@@ -25,22 +25,28 @@ class EncryptComponent extends Component {
      */
     protected $key;
 
+    /**
+     *
+     * @var type 
+     */
+    protected $salt;
+
     public function initialize(array $config) {
         parent::initialize($config);
         $config = \Cake\Core\Configure::read('encrypt');
         $this->key = $config['key'];
-        if(empty($this->key)){
-            throw new \Cake\Core\Exception\Exception('KEY未配置');
+        $this->salt = $config['salt'];
+        if (empty($this->key) || empty($this->salt)) {
+            throw new \Cake\Core\Exception\Exception('KEY或salt未配置');
         }
     }
-    
-    
-    public function encrypt($plain){
-        return base64_encode(Security::encrypt($plain, $this->key));
+
+    public function encrypt($plain) {
+        return base64_encode(Security::encrypt($plain, $this->key, $this->salt));
     }
-    
-    public function decrypt($cipher){
-        return Security::decrypt(base64_decode($cipher), $this->key);
+
+    public function decrypt($cipher) {
+        return Security::decrypt(base64_decode($cipher), $this->key, $this->salt);
     }
 
 }
