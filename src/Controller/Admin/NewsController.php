@@ -134,20 +134,19 @@ class NewsController extends AppController {
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where['or'] = [[' admin_name like' => "%$keywords%"], ['(`title`) like' => "%$keywords%"], ['(`summary`) like' => "%$keywords%"]];
+            $where['or'] = [[' Users.truename like' => "%$keywords%"], ['(`title`) like' => "%$keywords%"], ['(`summary`) like' => "%$keywords%"]];
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $query = $this->News->find();
+        $query = $this->News->find()->contain(['Users']);
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
         }
         $nums = $query->count();
-        $query->contain(['Users']);
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
