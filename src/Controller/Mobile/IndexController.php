@@ -31,18 +31,32 @@ class IndexController extends AppController {
 //        $result = Security::encrypt('123', $key);
 //        $cipher = base64_encode($result);
 //        debug(Security::decrypt(base64_decode($cipher), $key));
-        $this->loadComponent('Wx');
-        $access_token = $this->Wx->getAccessToken();
-        var_dump($access_token);exit();
+//        $this->loadComponent('Wx');
+//        $access_token = $this->Wx->getAccessToken();
+//        var_dump($access_token);exit();
 //        $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
 //        $res = $httpClient->post('http://bgq.dev/api/wxtoken');
         //debug($res);
-        $token = 'QZeqKxItfF2jXWdIWjePlhBEX3JK9JKtIJkCwYMisw8c8Raqg2iOIWufshlgswB04Mj0d8mnmu3uuDUtqsbP51W0AOsyLWx1lhkWPA0Svcy60eLZmTiHKWEA-BXiOdDaDKThAEANUD';
-        
+        //$token = 'QZeqKxItfF2jXWdIWjePlhBEX3JK9JKtIJkCwYMisw8c8Raqg2iOIWufshlgswB04Mj0d8mnmu3uuDUtqsbP51W0AOsyLWx1lhkWPA0Svcy60eLZmTiHKWEA-BXiOdDaDKThAEANUD';
+        $token = 'MjQMDc3YWZkMTk0NzJmYTc3NjI1MWU2ZDA1NWI5ZmI4Y2VjMTYxNjcxYTA4MGY4NzFjNTU3ZWQ0YWIwNTkwNAQ5bXSGZ1tx/Q1EuasSyLB4rrFnzYlobxSDbeTJu0PPt3EPsv1FgvYet/jDx1ItuasQCBOMma7lG7ZskFHSBL7epml/ox0l5Gt0GqQ+3Ef21qvC1UzCHAWr0mB+E5f0wYY51pcY0H/gMe2BrY5C0XeX5jC+PnilQ/DfvcrsQ1ypVzCsnkRiVH3kkagRtFUyriYco7S3zjhiBHUQL0a3FVw=';
         $this->loadComponent('Encrypt');
-        $en_token = $this->Encrypt->encrypt($token);
-        debug($en_token);
-        debug($this->Encrypt->decrypt($en_token));
+        //$en_str = $this->Encrypt->encrypt('123');
+        //var_dump($en_str);
+        $key = 'fkc33fdsafasdfasdfasdfasdgasddklsjfasdklfjasdkljaskljgklasdjgaekljgkl';
+        $en_str = Security::encrypt('123', $key,'1');
+        debug(Security::decrypt($en_str, $key,'1'));
+        debug(Security::hash(uniqid(),'md5'));
+        //$en_token = $this->Encrypt->encrypt($token);
+        //debug($en_token);
+        //debug($this->Encrypt->decrypt($en_str));
+    }
+    
+    public function test(){
+        $this->autoRender = false;
+        $cipher = 'NDk3MzYyNmI3YzI0YjMwZDU4MTViZTliOTVhNGRlYzZhOTk3ZmZlZmQwNmNlOTI1NjExODU1ZDAwNTJiMzEwZaD0xBasVESkYgXn99ZSMnBRdwanx0YcQse1r6cbGC1Z';
+        $this->loadComponent('Encrypt');
+        $str = $this->Encrypt->decrypt($cipher);
+        debug($str);
     }
 
     /**

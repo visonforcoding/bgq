@@ -16,7 +16,8 @@ return [
         'password' => 'jyh1606_jh'
     ],
     'encrypt'=>[
-        'key'=>'e878caddbb44ee591f30389477f21e30a3cd4377',
+        'key'=>'e878caddbb44ee591f30389477f21e30a3cd4377', //实际要求要32位
+        'salt'=>'d2339263f44886091b8a62ef43196f15',
     ],
     'weixin' => [
         'appID' => 'wx0cf353f9fc03aad0',
