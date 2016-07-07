@@ -14,3 +14,7 @@
     <a href="/home/my-book" class="nextstep paybtn">查看预约</a>
     <a href="#this" class="nextstep paybtn">返回主页</a>
 </div>
+
+<script>
+    LEMON.sys.back('/meet/index');
+</script>
