@@ -44,7 +44,12 @@ return [
             'table'=>'subject_book',
             'remark'=>'话题预约',
             'url'=>'/home/my-book-savant'
-        ]
+        ],
+      '5'=>[
+            'table'=>'savant',
+            'remark'=>'专家申请',
+            'url'=>'/home/savant-auth'
+      ]
     ],
     'educationType'=>[
         '1'=>'高中',

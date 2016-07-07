@@ -5,6 +5,16 @@
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($savant, ['class' => 'form-horizontal']) ?>
+    <?php if($savant->user->savant_status == 0): ?>
+    	<div class="form-group">
+            <label class="col-md-2 control-label">未通过审核理由</label>
+            <div class="col-md-8">
+                <?php
+                echo $this->Form->input('user.reason', ['label' => false, 'class' => 'form-control']);
+                ?>
+            </div>
+        </div>
+    <?php endif; ?>
     <div class="form-group">
         <label class="col-md-2 control-label">用户</label>
         <div class="col-md-8">

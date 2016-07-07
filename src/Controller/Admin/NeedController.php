@@ -194,5 +194,9 @@ class NeedController extends AppController {
         $filename = 'Need_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
+    
+    public function reply($id){
+        
+    }
 
 }

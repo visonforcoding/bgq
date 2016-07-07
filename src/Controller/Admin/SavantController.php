@@ -8,6 +8,7 @@ use Wpadmin\Controller\AppController;
  * Savant Controller
  *
  * @property \App\Model\Table\SavantTable $Savant
+ * @property \App\Controller\Component\BusinessComponent $Business 通用业务处理组件
  */
 class SavantController extends AppController {
 
@@ -198,6 +199,7 @@ class SavantController extends AppController {
      * @param int $id 专家id
      */
     public function pass($id){
+        
         $savant = $this->Savant->get($id);
         $userTable = \Cake\ORM\TableRegistry::get('user');
         $user = $userTable->get($savant->user_id);
@@ -205,6 +207,8 @@ class SavantController extends AppController {
         $user->savant_status = 3;
         $res = $userTable->save($user);
         if($res){
+            $this->loadComponent('Business');
+            $this->Business->usermsg($savant->user_id, '专家申请新消息', '您的专家申请审核通过啦！', 5, $savant->id);
             return $this->Util->ajaxReturn(true, '审核通过');
         } else {
             return $this->Util->ajaReturn(false, '系统错误');
@@ -216,12 +220,16 @@ class SavantController extends AppController {
      * @param int $id 专家id
      */
     public function unpass($id){
+        $data = $this->request->data;
         $savant = $this->Savant->get($id);
         $userTable = \Cake\ORM\TableRegistry::get('user');
         $user = $userTable->get($savant->user_id);
         $user->savant_status = 0;
+        $user->reason = $data['reason'];
         $res = $userTable->save($user);
         if($res){
+            $this->loadComponent('Business');
+            $this->Business->usermsg($savant->user_id, '专家申请新消息', '您的专家申请审核不通过！原因为：' . $data['reason'], 5, $savant->id);
             return $this->Util->ajaxReturn(true, '审核不通过');
         } else {
             return $this->Util->ajaReturn(false, '系统错误');
