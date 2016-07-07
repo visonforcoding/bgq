@@ -279,7 +279,7 @@ class HomeController extends AppController {
     public function myHistoryNeed() {
         $NeedTable = \Cake\ORM\TableRegistry::get('need');
         $user_id = $this->user->id;
-        $needs = $NeedTable->find()->where(['user_id' => $user_id])->orderDesc('create_time')->toArray();
+        $needs = $NeedTable->find()->where(['user_id' => $user_id])->orWhere(['reply_id' => $user_id])->orderDesc('create_time')->toArray();
         $this->set([
             'pageTitle' => '小秘书历史记录'
         ]);

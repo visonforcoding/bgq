@@ -23,6 +23,9 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
     $.util.dataToTpl('follow', 'listTpl',<?= json_encode($needs) ?>, function (d) {
+        if(d.pid != 0){
+            d.msg = '小秘书回复：' + d.msg;
+        }
         return d;
     });
 </script>

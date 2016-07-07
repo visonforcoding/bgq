@@ -295,3 +295,9 @@ ALTER TABLE `binggq`.`career`
 #消息表msg 默认为空
 #ALTER TABLE `usermsg`
 	CHANGE COLUMN `msg` `msg` VARCHAR(550) NOT NULL DEFAULT '' COMMENT '内容' AFTER `title`;
+
+#小秘书表增加pid字段
+ALTER TABLE need add pid INT NOT NULL DEFAULT 0 COMMENT '父id' AFTER id
+
+#小秘书表增加reply_id字段
+ALTER TABLE need add reply_id INT NOT NULL DEFAULT 0 COMMENT '回复用户id' AFTER pid
