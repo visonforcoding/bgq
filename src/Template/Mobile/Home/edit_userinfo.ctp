@@ -198,7 +198,9 @@
         $('#upload_pic').on('touchstart',function(){
             if($.util.isAPP){
                 LEMON.event.uploadPhoto('{"dir":"user/avatar","zip":"1"}',function(data){
+                    alert(data);
                     var data = JSON.parse(data);
+                    alert(data);
                    if(data.status===true){
                        $('input[name="avatar"]').val(data.thumbpath);
                        $('#upload_pic img').attr('src', data.thumbpath);
