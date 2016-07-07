@@ -360,9 +360,9 @@ class ActivityController extends AppController {
             $activity->qrcode = $savePath;
             $res = $this->Activity->save($activity);
             if($res){
-                echo '1';
+                debug('1');
             } else {
-                echo '2'.$v['id'];
+                debug('2'.$v['id']);
             }
         }
         
