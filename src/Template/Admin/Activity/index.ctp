@@ -57,7 +57,7 @@
                             {name: 'apply_fee', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
-                            {name: 'actionBtn', width: '200%', align: 'left', viewable: false, sortable: false, formatter: actionFormatter}],
+                            {name: 'actionBtn', width: '200%', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: 30,
                         rowList: [10, 20, 30],
@@ -95,7 +95,8 @@
                 }
 
                 function actionFormatter(cellvalue, options, rowObject) {
-                    response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response = '<div class="bigdiv" onmouseout=$(this).find(".showall").hide();$(this).find(".showallbtn").show();><a class="showallbtn" title="操作" onmouseover=$(this).hide();$(this).next(".showall").show();><i class="icon icon-resize-full"></i></a>';
+                    response += '<div class="showall" hidden onmouseover=$(this).prev(".showallbtn").hide();$(this).show();><a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="编辑" href="/admin/activity/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     if (rowObject.is_top == 0 && rowObject.is_check == 1) {
@@ -109,6 +110,7 @@
                         response += '<a title="发布" href="javascript:void(0)" class="grid-btn release" onclick="release(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
                         response += '<a title="未通过审核" href="javascript:void(0)" class="grid-btn unrelease" onclick="unrelease(' + rowObject.id + ')"><i class="icon icon-times"></i></a>';
                     }
+                    response += '</div></div>';
                     return response;
                 }
                 
