@@ -193,6 +193,10 @@ class SavantController extends AppController {
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
     
+    /**
+     * 审核通过
+     * @param int $id 专家id
+     */
     public function pass($id){
         $savant = $this->Savant->get($id);
         $userTable = \Cake\ORM\TableRegistry::get('user');
@@ -207,6 +211,10 @@ class SavantController extends AppController {
         }
     }
     
+    /**
+     * 审核不通过
+     * @param int $id 专家id
+     */
     public function unpass($id){
         $savant = $this->Savant->get($id);
         $userTable = \Cake\ORM\TableRegistry::get('user');
