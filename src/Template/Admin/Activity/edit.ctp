@@ -129,16 +129,19 @@
             <div  class="img-thumbnail input-img"  single>
                 <img  alt="请上传160*160大小的缩略图" src="<?= $activity->thumb; ?>"/>
             </div>
+            <div style="color:red">请上传160*160大小的缩略图</div>
             <input name="thumb" value="<?= $activity->thumb; ?>"  type="hidden"/>
             <div id="thumb"   class="jqupload">上传</div>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">封面</label>
+        
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
-                <img  alt="封面图片" src="<?= $activity->cover; ?>"/>
+                <img  alt="请上传宽为690，高小于388的封面图" src="<?= $activity->cover; ?>"/>
             </div>
+            <div style="color:red">请上传宽为690，高小于388的封面图</div>
             <input name="cover" value="<?= $activity->cover; ?>"  type="hidden"/>
             <div id="cover"   class="jqupload">上传</div>
         </div>

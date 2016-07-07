@@ -17,11 +17,12 @@ $this->start('static') ?>
         </div>
     </div>
         <div class="form-group">
-        <label class="col-md-2 control-label">封面</label>
+        <label class="col-md-2 control-label">图片</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
-                <img  alt="封面图片" src=""/>
+                <img  alt="请上传750*400大小的图片" src=""/>
             </div>
+            <div style="color:red">请上传750*400大小的图片</div>
             <input name="img"  type="hidden"/>
             <div id="img" class="jqupload">上传</div>
         </div>
