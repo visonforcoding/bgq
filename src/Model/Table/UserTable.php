@@ -153,7 +153,7 @@ class UserTable extends Table {
      */
     public function buildRules(RulesChecker $rules) {
         $rules->add($rules->isUnique(['email'],'邮箱被占用'));
-        $rules->add($rules->isUnique(['phone']),'该手机号已被占用');
+        $rules->add($rules->isUnique(['phone'],'该手机号已被占用'));
         $rules->add($rules->existsIn(['industry_id'], 'Industries'));
         return $rules;
     }

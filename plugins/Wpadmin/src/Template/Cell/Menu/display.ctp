@@ -1,6 +1,6 @@
 <nav class="menu" id="left-menu"  data-toggle="menu" >
     <ul class="nav nav-primary">
-        <li><a href="/">
+        <li><a href="/admin/index/index">
                 <i class="icon-home"></i> 主面板<i style="float: right"  class="icon-undo"></i></a></li>
         <?php foreach ($menus as $menu): ?>
             <?php if ($menu['pid'] == '0' && $menu['is_menu'] == '1'): ?>

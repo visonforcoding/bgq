@@ -44,13 +44,14 @@ class UserController extends AppController {
     public function add() {
         $user = $this->User->newEntity();
         if ($this->request->is('post')) {
+            $user->user_token = md5(uniqid());
+            $user->avatar = '/mobile/images/touxiang.jpg';
             $user = $this->User->patchEntity($user, $this->request->data);
             if ($this->User->save($user)) {
-                echo json_encode(array('status' => true, 'msg' => '添加成功'));
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {
                 $errors = $user->errors();
-                $this->Util->ajaxReturn(false, getMessage($errors));
+                $this->Util->ajaxReturn(['stauts'=>false,'msg'=>  errorMsg($user, '添加失败'),'errors'=>$errors]);
             }
         }
         $industries = $this->User->Industries->find('list', ['limit' => 200]);
@@ -118,7 +119,7 @@ class UserController extends AppController {
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where['or'] = [['truename like'=>"%$keywords%"],['email like'=>"%$keywords%"],['phone like'=>"%$keywords%"]];
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
@@ -169,7 +170,7 @@ class UserController extends AppController {
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where[' truename like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
@@ -177,19 +178,38 @@ class UserController extends AppController {
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
         $Table = $this->User;
-        $column = ['手机号', '密码', '姓名', '等级,1:普通2:专家', '身份证', '公司', '职位', '邮箱', '1,男，2女', '行业', '擅长业务', '常驻城市', '名片路径', '头像', '项目经验', '业务能力', '审核意见', '审核状态：1.正常2.认证不同通过3.黑名单', '创建时间', '修改时间'];
+        $column = ['手机号', '姓名', '等级', '身份证', '公司', '职位', '邮箱', '性别', '擅长业务', '常驻城市', '项目经验', '业务能力', '审核意见', '审核状态', '创建时间'];
         $query = $Table->find();
         $query->hydrate(false);
-        $query->select(['phone', 'pwd', 'truename', 'level', 'idcard', 'company', 'position', 'email', 'gender', 'industry_id', 'goodat', 'city', 'card_path', 'avatar', 'ymjy', 'ywnl', 'reason', 'status', 'create_time', 'update_time']);
+        $query->select(['phone', 'truename', 'level', 'idcard', 'company', 'position', 'email', 'gender', 'goodat', 'city', 'ymjy', 'ywnl', 'reason', 'status', 'create_time']);
         if (!empty($where)) {
             $query->where($where);
         }
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
+          $query->formatResults(function($items) {
+            return $items->map(function($item) {
+                        //时间语义化转换
+                        $item['gender'] = $item['gender']=='1'?'男':'女';
+                        switch ($item['level']) {
+                            case '1':
+                                $item['level'] = '普通';
+                                break;
+                            case '2':
+                                $item['level'] = '专家';
+                                break;
+                              default:
+                              $item['level'] = '普通';
+                                break;
+                        }
+                        $item['gender'] = $item['gender']=='1'?'男':'女';
+                        return $item;
+                    });
+        });
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = 'User_' . date('Y-m-d') . '.csv';
+        $filename = '会员_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
     

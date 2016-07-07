@@ -40,15 +40,27 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['节点名称', '路径', '父ID', '样式', '排序', '是否在菜单显示', '状态', '备注', '操作'],
+                                ['节点名称', '路径', '上级id', '样式', '排序', '是否在菜单显示', '状态', '备注', '操作'],
                         colModel: [
                             {name: 'name', editable: true, align: 'center'},
                             {name: 'node', editable: true, align: 'center'},
                             {name: 'pid', editable: true, align: 'center'},
-                            {name: 'class', editable: true, align: 'center'},
+                            {name: 'class', editable: true, align: 'center',formatter:function(cell,option,row){
+                                    return '<i class="icon '+cell+' "></i>';
+                            }},
                             {name: 'rank', editable: true, align: 'center'},
-                            {name: 'is_menu', editable: true, align: 'center'},
-                            {name: 'status', editable: true, align: 'center'},
+                            {name: 'is_menu', editable: true, align: 'center',formatter:function(cell,option,row){
+                                    if(cell){
+                                        return '是';
+                                    }
+                                    return '否';
+                            }},
+                            {name: 'status', editable: true, align: 'center',formatter:function(cell,option,row){
+                                    if(cell){
+                                        return '是';
+                                    }
+                                    return '否';
+                            }},
                             {name: 'remark', editable: true, align: 'center'},
                             {name: 'actionBtn', viewable: false, sortable: false,width:260, formatter: actionFormatter}],
                         pager: "#pager",

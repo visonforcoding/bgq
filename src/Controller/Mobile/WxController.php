@@ -12,6 +12,7 @@ use EasyWeChat\Foundation\Application as WXSDK;
  * @property \App\Model\Table\UserTable $User
  * @property \App\Controller\Component\WxComponent $Wx
  * @property \App\Controller\Component\WxpayComponent $Wxpay
+ * @property \App\Controller\Component\AlipayComponent $Alipay
  */
 class WxController extends AppController {
 
@@ -137,16 +138,18 @@ class WxController extends AppController {
         $fee = 1;  //测试时 1分
         $this->loadComponent('Wxpay');
         $isApp = false;
+        $aliPayParameters = '';
         if($this->request->is('lemon')){
             $isApp = true;
             $openid = $this->user->app_wx_openid;
+            $this->loadComponent('Alipay');
+            $aliPayParameters = $this->Alipay->setPayParameter($out_trade_no, '并购帮-预约话题', $fee, $body);
         }
         $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee,null,$isApp);
-        \Cake\Log\Log::debug('微信支付参数','devlog');
-        \Cake\Log\Log::debug($jsApiParameters,'devlog');
         $this->set(array(
             'jsApiParameters' => $jsApiParameters,
             'isWx'=>  $this->request->is('weixin')?true:false,
+            'aliPayParameters'=>$aliPayParameters,
         ));
         $book = $order->subject_book;
         $this->set(['pageTitle'=>'话题支付']);

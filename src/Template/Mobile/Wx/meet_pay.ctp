@@ -61,6 +61,11 @@
                         }
                         callpay();
                     }
+                    if(payMethod=='ali'){
+                        if($.util.isAPP){
+                            LEMON.pay.ali('');
+                        }
+                    }
                     break;
                 case 'goTop':
                     window.scroll(0, 0);

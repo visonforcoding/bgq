@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">父ID</label>
+        <label class="col-md-2 control-label">上级id</label>
         <div class="col-md-8">
             <select name="pid" class="form-control">
                 <option value="0">根节点</option>
