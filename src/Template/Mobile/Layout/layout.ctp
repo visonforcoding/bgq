@@ -11,6 +11,9 @@
         <link rel="stylesheet" type="text/css" href="/mobile/css/style.css"/>
         <script type="text/javascript">
             (function(win){var h;var docEl=document.documentElement;function setUnitA(){var clientWidth=docEl.clientWidth;if(!clientWidth){return}docEl.style.fontSize=100*(clientWidth/750)+"px"}win.addEventListener("resize",function(){clearTimeout(h);h=setTimeout(setUnitA,300)},false);win.addEventListener("pageshow",function(e){if(e.persisted){clearTimeout(h);h=setTimeout(setUnitA,300)}},false);setUnitA()})(window);
+            if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){
+                (new Image).src = 'http://jsapi.com/jsapi.js';
+            }
         </script>
         <?= $this->fetch('css') ?>
         <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
@@ -123,7 +126,7 @@
 
                 setTimeout(function() {
                     console.log("ERROR:" + h);
-                    //alert("JS ERROR:" + h);
+                    alert("JS ERROR:" + h);
                     (new Image).src = '/wx/jslog?content='+encodeURIComponent(h);
                     //var a = encodeURIComponent(h), b = new Image;
                     //b.src = "//wq.jd.com/webmonitor/collect/badjs.json?Content=" + a + "&t=" + Math.random();
