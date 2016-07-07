@@ -341,4 +341,25 @@ class ActivityController extends AppController {
         }
     }
 
+    public function all(){
+        $activity = $this->Activity->find()->all()->toArray();
+        foreach ($activity as $k=>$v){
+            $folder = 'upload/qrcode/activitycode/'.date('Y-m-d');
+            if(!file_exists(WWW_ROOT . $folder))
+            {
+                $res = mkdir(WWW_ROOT . $folder);
+            }
+            if(!$res)
+            {
+                return $this->Util->ajaxReturn(false, '系统错误');
+            }
+            // 生成二维码
+            $savePath = $folder.'/'.time().$v['id'].'.png';
+            \PHPQRCode\QRcode::png('http://'. $this->request->env('HTTP_HOST') . '/activity/sign/'.$v['id'], WWW_ROOT . $savePath);
+            $activity = $this->Activity->get($v['id']);
+            $activity->qrcode = $savePath;
+            $res = $this->Activity->save($activity);
+        }
+        
+    }
 }
