@@ -5,9 +5,9 @@ namespace App\View\Cell;
 use Cake\View\Cell;
 
 /**
- * Industry cell
+ * Agency cell 机构shell
  */
-class IndustryCell extends Cell {
+class AgencyCell extends Cell {
 
     /**
      * List of valid options that can be passed into this
@@ -22,13 +22,13 @@ class IndustryCell extends Cell {
      *
      * @return void
      */
-    public function display($selIds=null) {
-        $IndustryTable = \Cake\ORM\TableRegistry::get('Industry');
-        $industries = $IndustryTable->find('threaded', [
+    public function display() {
+        $IndustryTable = \Cake\ORM\TableRegistry::get('Agency');
+        $agencies = $IndustryTable->find('threaded', [
                     'keyField' => 'id',
                     'parentField' => 'pid'
                 ])->all()->toArray();
-        $this->set(compact('industries','selIds'));
+        $this->set(compact('agencies', 'selIds'));
     }
 
 }

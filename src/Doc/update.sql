@@ -295,7 +295,9 @@ ALTER TABLE `binggq`.`career`
 #消息表msg 默认为空
 #ALTER TABLE `usermsg`
 	CHANGE COLUMN `msg` `msg` VARCHAR(550) NOT NULL DEFAULT '' COMMENT '内容' AFTER `title`;
-
+#user表user_token 的长度
+ALTER TABLE `user`
+	CHANGE COLUMN `user_token` `user_token` VARCHAR(100) NOT NULL COMMENT '用户标志' AFTER `phone`;
 #小秘书表增加pid字段
 ALTER TABLE need add pid INT NOT NULL DEFAULT 0 COMMENT '父id' AFTER id
 

@@ -1,6 +1,7 @@
 <?php $this->start('static') ?>   
 <link href="/wpadmin/lib/jqupload/uploadfile.css" rel="stylesheet">
 <link href="/wpadmin/lib/jqvalidation/css/validationEngine.jquery.css" rel="stylesheet">
+<link href="/wpadmin/lib/select2/css/select2.min.css" rel="stylesheet">
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($user, ['class' => 'form-horizontal']) ?>
@@ -13,14 +14,6 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">密码</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('pwd', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-md-2 control-label">姓名</label>
         <div class="col-md-8">
             <?php
@@ -28,14 +21,13 @@
             ?>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">等级,1:普通2:专家</label>
+<!--    <div class="form-group">
+        <label class="col-md-2 control-label">等级</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('level', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <label class="radio-inline"> <input name="level" value="1" checked="checked"  type="radio"> 普通</label>
+            <label class="radio-inline"> <input name="level" value="2"  type="radio"> 专家 </label>
         </div>
-    </div>
+    </div>-->
     <div class="form-group">
         <label class="col-md-2 control-label">身份证</label>
         <div class="col-md-8">
@@ -69,7 +61,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">1,男，2女</label>
+        <label class="col-md-2 control-label">性别</label>
         <div class="col-md-8">
             <?php
             echo $this->Form->input('gender', ['label' => false, 'class' => 'form-control']);
@@ -77,11 +69,19 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">行业</label>
+        <label class="col-md-2 control-label">机构标签</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('industry_id', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <?=$this->cell('Agency')?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">上传名片</label>
+        <div class="col-md-8">
+            <div  class="img-thumbnail input-img"  single>
+                <img  alt="封面图片" src=""/>
+            </div>
+            <input name="card_path"  type="hidden"/>
+            <div id="card_path" class="jqupload">上传</div>
         </div>
     </div>
     <div class="form-group">
@@ -97,22 +97,6 @@
         <div class="col-md-8">
             <?php
             echo $this->Form->input('city', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">名片路径</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('card_path', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">头像</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('avatar', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
@@ -141,26 +125,10 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">审核状态：1.正常2.认证不同通过3.黑名单</label>
+        <label class="col-md-2 control-label">审核状态：</label>
         <div class="col-md-8">
             <?php
             echo $this->Form->input('status', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">创建时间</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('create_time', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">修改时间</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('update_time', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
@@ -177,10 +145,15 @@
 <script type="text/javascript" src="/wpadmin/lib/jqupload/jquery.uploadfile.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/jquery.validationEngine.js"></script>
+<script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
     $(function () {
-        // initJqupload('cover', '/admin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
+         initJqupload('card_path', '/wpadmin/util/doUpload?dir=/user/mp', 'jpg,png,gif,jpeg'); //初始化图片上传
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
+         $('#select-agency').select2({
+            language: "zh-CN",
+            placeholder: '选择一个标签'
+        });
         $('form').submit(function () {
             var form = $(this);
             $.ajax({
