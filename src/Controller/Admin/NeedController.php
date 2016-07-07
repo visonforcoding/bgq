@@ -10,6 +10,7 @@ use vendor\umeng;
  * Need Controller
  *
  * @property \App\Model\Table\NeedTable $Need
+ * @property \App\Controller\Component\BusinessComponent $Business 通用业务处理组件
  */
 class NeedController extends AppController {
 
@@ -196,7 +197,26 @@ class NeedController extends AppController {
     }
     
     public function reply($id){
-        
+        if($this->request->is('post')){
+            $data = $this->request->data;
+            $usermsg = $this->Need->get($id);
+            $new = [
+                'pid' => $usermsg->id,
+                'user_id' => $this->_user->id,
+                'reply_id' => $usermsg->user_id,
+                'msg' => $data['reply'],
+            ];
+            $need = $this->Need->newEntity();
+            $need = $this->Need->patchEntity($need, $new);
+            $res = $this->Need->save($need);
+            if($res) {
+                $this->loadComponent('Business');
+                $this->Business->usermsg($usermsg->user_id, '您有新的消息', '您有新的小秘书消息', '6', $usermsg->id);
+                return $this->Util->ajaxReturn(true, '回复成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '系统错误');
+            }
+        }
     }
 
 }

@@ -49,6 +49,11 @@ return [
             'table'=>'savant',
             'remark'=>'专家申请',
             'url'=>'/home/savant-auth'
+      ],
+      '6'=>[
+          'table'=>'need',
+          'remark'=>'小秘书消息',
+          'url'=>'/home/my-history-need'
       ]
     ],
     'educationType'=>[
