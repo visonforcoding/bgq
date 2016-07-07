@@ -357,7 +357,7 @@ class ActivityController extends AppController {
             $savePath = $folder.'/'.time().$v['id'].'.png';
             \PHPQRCode\QRcode::png('http://'. $this->request->env('HTTP_HOST') . '/activity/sign/'.$v['id'], WWW_ROOT . $savePath);
             $activity = $this->Activity->get($v['id']);
-            $activity->qrcode = $savePath;
+            $activity->qrcode = '/' . $savePath;
             $res = $this->Activity->save($activity);
             if($res){
                 debug('1');
