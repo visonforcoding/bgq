@@ -348,10 +348,10 @@ class ActivityController extends AppController {
             if(!file_exists(WWW_ROOT . $folder))
             {
                 $res = mkdir(WWW_ROOT . $folder);
-            }
-            if(!$res)
-            {
-                return $this->Util->ajaxReturn(false, '系统错误');
+                if(!$res)
+                {
+                    return $this->Util->ajaxReturn(false, '系统错误');
+                }
             }
             // 生成二维码
             $savePath = $folder.'/'.time().$v['id'].'.png';
@@ -365,6 +365,6 @@ class ActivityController extends AppController {
                 debug('2'.$v['id']);
             }
         }
-        
+        exit();
     }
 }
