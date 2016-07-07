@@ -359,6 +359,11 @@ class ActivityController extends AppController {
             $activity = $this->Activity->get($v['id']);
             $activity->qrcode = $savePath;
             $res = $this->Activity->save($activity);
+            if($res){
+                echo '1';
+            } else {
+                echo '2'.$v['id'];
+            }
         }
         
     }
