@@ -134,9 +134,15 @@ class HomeController extends AppController {
         $UserTable = \Cake\ORM\TableRegistry::get('user');
         if ($this->request->is('post')) {
             $SavantTable = \Cake\ORM\TableRegistry::get('savant');
-            $savant = $SavantTable->newEntity();
-            $savant->user_id = $user_id;
-            $savant = $SavantTable->patchEntity($savant, $this->request->data());
+            $repeat = $SavantTable->find()->where(['user_id' => $user_id])->first();
+            if($repeat){
+                $savant = $SavantTable->get($repeat->id);
+                $savant = $SavantTable->patchEntity($savant, $this->request->data());
+            } else {
+                $savant = $SavantTable->newEntity();
+                $savant->user_id = $user_id;
+                $savant = $SavantTable->patchEntity($savant, $this->request->data());
+            }
             $user->savant_status = 2;
             $ckRes = $this->User->connection()->transactional(function()use($SavantTable, $savant, $user, $UserTable) {
                 //开启事务

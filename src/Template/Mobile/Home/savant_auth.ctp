@@ -15,13 +15,13 @@
             <li class="no-right-ico changeflex">
                 <b>项目经验</b>
                 <div >
-                    <textarea name="xmjy" <?php if($user->savant_status!=1): ?>disabled style="background: gainsboro;"<?php endif; ?>><?=isset($user->savant)?$user->savant->xmjy:''?></textarea>
+                    <textarea name="xmjy" <?php if($user->savant_status==2 || $user->savant_status==3): ?>disabled style="background: gainsboro;"<?php endif; ?>><?=isset($user->savant)?$user->savant->xmjy:''?></textarea>
                 </div>
             </li>
             <li class="nobottom no-right-ico changeflex">
                 <b>资源优势</b>
                 <div >
-                    <textarea name="zyys" <?php if($user->savant_status!=1): ?>disabled style="background: gainsboro;"<?php endif; ?>><?=  isset($user->savant)?$user->savant->zyys:''?></textarea>
+                    <textarea name="zyys" <?php if($user->savant_status==2 || $user->savant_status==3): ?>disabled style="background: gainsboro;"<?php endif; ?>><?=  isset($user->savant)?$user->savant->zyys:''?></textarea>
                 </div>
             </li>
         </form>
@@ -34,6 +34,9 @@
     <?php endif; ?>
     <?php if($user->savant_status==2): ?>
         <a  class="nextstep">审核中</a>
+    <?php endif; ?>
+    <?php if($user->savant_status==0): ?>
+        <a id="submit" class="nextstep">重新申请认证</a>
     <?php endif; ?>
 </div>
 <?php $this->start('script') ?>

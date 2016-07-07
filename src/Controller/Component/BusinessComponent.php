@@ -167,16 +167,17 @@ class BusinessComponent extends Component {
      * @param type $id  对象id
      */
     public function usermsg($user_id, $title, $msg, $type = 0, $id = 0,$redirect_url = null) {
-        if ($type != 0) {
-            $types = \Cake\Core\Configure::read('usermsgType');
-            $url = $types[$type]['url'];
-        }
         $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
         $data = [
             'user_id' => $user_id,
             'type' => $type,
             'url' => '',
         ];
+        if ($type != 0) {
+            $types = \Cake\Core\Configure::read('usermsgType');
+            $url = $types[$type]['url'];
+            $data['url'] = $url;
+        }
         if($redirect_url){
             $data['url']  = $redirect_url;
         }
