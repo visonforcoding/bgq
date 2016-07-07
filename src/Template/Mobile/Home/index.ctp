@@ -5,9 +5,9 @@
 </header>
 <link rel="stylesheet" href="/mobile/font/font/iconfont.css" />
 <div class="wraper newswraper">
-    <div class="h-home-bottom">
+    <div class="h-home-bottom c-padding">
         <a href="/user/home-page/<?= $user->id ?>">
-            <div>
+            <div class="t-home-top">
                 <span>
                     <img src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : $user->avatar ?>"/>
                     <?php if($user->level == 2): ?>
@@ -15,7 +15,8 @@
                     <?php endif; ?>
                 </span>
             </div>
-            <h3><?= $user->truename ?><span><?= $user->company ?> <?= $user->position ?></span></h3>
+            <h3><?= $user->truename ?><i class="v"></i><!-- <span><?= $user->company ?> <?= $user->position ?></span> --></h3>
+            <div class="info-desc"><span><i></i><?= $user->company ?></span><span><i></i><?= $user->position ?></span></div>
         </a>
     </div>
     <div class="h-home-menu topnav">
@@ -117,6 +118,8 @@
         $('#wxshare').hide();
         $('#shadow').hide();
     })
-    if ($.util.isAPP) {$('.h-home-bottom').css({'padding-top':'0.8rem'})}
+    if ($.util.isAPP) {
+        $('.h-home-bottom').css({'padding-top':'0.8rem'});
+    }
 </script>
 <?php $this->end('script'); ?>
