@@ -93,6 +93,12 @@
                     console.log($(window).width() - width);
 //                    $('#main-content').width($(window).width() - width);
                 });
+                
+                $('.img-thumbnail').each(function(){
+                    if($(this).find('img').attr('src')){
+                        $(this).removeClass('input-img');
+                    }
+                });
             });
         </script>
         <?= $this->fetch('script') ?>

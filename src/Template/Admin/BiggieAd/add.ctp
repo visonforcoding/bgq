@@ -15,8 +15,9 @@
         <label class="col-md-2 control-label">封面</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img" single>
-                <img  alt="封面图片" src=""/>
+                <img  alt="请上传423*244的图片" src=""/>
             </div>
+            <div style="color:red">请上传423*244的图片</div>
             <input name="url"  type="hidden"/>
             <div id="url" class="jqupload">上传</div>
         </div>

@@ -113,8 +113,18 @@ class ActivitycomController extends AppController {
      */
     public function getDataList($id = '') {
         $this->request->allowMethod('ajax');
+//        var_dump($this->request->data);die;
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
+        if($rows == 20 ){
+            if($this->request->session()->read('rows')){
+                $rows = $this->request->session()->read('rows');
+            } else {
+                $rows = 30;
+            }
+        } else {
+            $this->request->session()->write('rows', $rows);
+        }
         $sort = 'Activitycom.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');

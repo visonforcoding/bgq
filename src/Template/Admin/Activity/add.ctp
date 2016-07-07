@@ -88,6 +88,7 @@
             <div  class="img-thumbnail input-img"  single>
                 <img  alt="请上传160*160大小的缩略图" src=""/>
             </div>
+            <div style="color:red">请上传160*160大小的缩略图</div>
             <input name="thumb"  type="hidden"/>
             <div id="thumb" class="jqupload">上传</div>
         </div>
@@ -96,8 +97,9 @@
         <label class="col-md-2 control-label">封面</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
-                <img  alt="封面图片" src=""/>
+                <img  alt="请上传宽为690，高小于388的封面图" src=""/>
             </div>
+            <div style="color:red">请上传宽为690，高小于388的封面图</div>
             <input name="cover"  type="hidden"/>
             <div id="cover" class="jqupload">上传</div>
         </div>

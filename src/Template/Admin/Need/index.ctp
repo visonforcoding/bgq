@@ -84,10 +84,36 @@
     //}
 
     function actionFormatter(cellvalue, options, rowObject) {
+        response = '<a title="回复" onClick="reply(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-print"></i> </a>';
         response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-        response += '<a title="查看"  onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn"><i class="icon icon-eye-open"></i> </a>';
+//        response += '<a title="查看"  onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn"><i class="icon icon-eye-open"></i> </a>';
         //response += '<a title="编辑" href="/admin/need/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
         return response;
+    }
+    
+    function reply(id) {
+        //需要引入layer.ext.js文件
+        layer.prompt({
+            title: '请输入回复内容',
+            btn: ['确认', '取消'], //按钮
+            formType: 2, // input.type 0:text,1:password,2:textarea
+        }, function (pass) {
+            var msg = {};
+            msg.reply = pass;
+            $.ajax({
+                type: 'post',
+                data: msg,
+                dataType: 'json',
+                url: '/admin/activitycom/reply/' + id,
+                success: function (res) {
+                    layer.msg(res.msg);
+                    if (res.status) {
+                        $('#list').trigger('reloadGrid');
+                    }
+                }
+            });
+        }, function () {
+        });
     }
 
     function delRecord(id) {
@@ -145,7 +171,7 @@
                     area: ['380px', '70%'],
                     content: url,//iframe的url
                 	cancel:function(){//关闭弹框的回调函数，关闭弹框之后重新刷新
-                		location.reload();
+                            $('#list').trigger('reloadGrid');
                 	}
                 });
             }
