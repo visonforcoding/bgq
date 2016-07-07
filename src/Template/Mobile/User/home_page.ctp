@@ -179,7 +179,7 @@
         </ul>
     <?php endif; ?>
 </div>
-    <!--<div style="height:1rem"></div>-->
+    <div style="height:1rem"></div>
     <?php if (!$self): ?>
         <div class="f-bottom">
             <a href="javascript:void(0);" class="bgred" id="follow_btn">
