@@ -486,9 +486,9 @@ border-radius: 50%;padding:1px;}
 .info-desc{font-size:0;-webkit-justify-content: center;display: -webkit-flex; justify-content: center;display: flex;color:#fff;}
 .info-desc span{display:inline-block;font-size:0.3rem;line-height:0.6rem;}
 .info-desc span:first-of-type{margin-right: 0.2rem;}
-.info-desc span i{background: url(img/jobs.png) no-repeat;display: inline-block;width:0.33rem;height:0.32rem;
+.info-desc span i{background: url(img/jobs.png) no-repeat;display: inline-block;width:0.24rem;height:0.325rem;
 background-size: contain;margin-right: 0.1rem;vertical-align: middle;}
-.info-desc span:first-of-type i{background: url(img/comp.png) no-repeat;width:0.34rem;height:0.32rem;
+.info-desc span:first-of-type i{background: url(img/comp.png) no-repeat;width:0.27rem;height:0.25rem;
 background-size: contain;}
 .h-home-bottom div.t-home-top span:before{position:absolute;content: '';width:2.8rem;height:2.8rem;border:0.05rem #e3315b solid;left:-0.25rem;top:-0.25rem;border-radius: 1.4rem;}
 .h-home-bottom div.t-home-top span:after{position:absolute;content: '';width:3.6rem;height:3.6rem;border:0.05rem #e3315b solid;left:-0.63rem;top:-0.63rem;border-radius: 1.8rem;}
