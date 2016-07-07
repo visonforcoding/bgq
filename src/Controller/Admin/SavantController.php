@@ -66,8 +66,11 @@ class SavantController extends AppController {
      */
     public function edit($id = null) {
         $savant = $this->Savant->get($id, [
-            'contain' => ['Users']
+            'contain' => ['Users'=>function($q){
+                    return $q->contain(['Subjects']);
+                }]
         ]);
+//        debug($savant);die;
         if ($this->request->is(['post', 'put'])) {
             $savant = $this->Savant->patchEntity($savant, $this->request->data);
             if ($this->Savant->save($savant)) {
@@ -130,7 +133,10 @@ class SavantController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $query = $this->Savant->find()->contain(['Users']);
+        $query = $this
+                ->Savant
+                ->find()
+                ->contain(['Users']);
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);

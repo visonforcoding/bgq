@@ -55,6 +55,55 @@
             ?>
         </div>
     </div>
+    <?php if($savant->user->subjects): ?>
+    <?php foreach($savant->user->subjects as $k=>$v): ?>
+    <div class="form-group">
+        <label class="col-md-2 control-label">话题<?=$k+1?></label>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">标题</label>
+        <div class="col-md-8">
+            <input type="text" name="title" class="form-control" id="title" disabled value="<?=$v['title']?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">话题简介</label>
+        <div class="col-md-8">
+            <textarea name="title" class="form-control" id="title" disabled ><?=$v['summary']?></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">类型</label>
+        <div class="col-md-8">
+            <input type="text" name="title" class="form-control" id="title" disabled value="<?php switch($v['type']){case 1: echo '一对一';break;case 2: echo '一对多';break;} ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">约见时间</label>
+        <div class="col-md-8">
+            <input type="text" name="title" class="form-control" id="title" disabled value="<?=$v['invite_time']?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">价格</label>
+        <div class="col-md-8">
+            <input type="text" name="title" class="form-control" id="title" disabled value="<?=$v['price']?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">地址</label>
+        <div class="col-md-8">
+            <input type="text" name="title" class="form-control" id="title" disabled value="<?=$v['address']?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">持续时间</label>
+        <div class="col-md-8">
+            <input type="text" name="title" class="form-control" id="title" disabled value="<?=$v['last_time']?>小时">
+        </div>
+    </div>
+    <?php endforeach; ?>
+    <?php endif; ?>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
