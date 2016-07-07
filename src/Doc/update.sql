@@ -299,7 +299,8 @@ ALTER TABLE `binggq`.`career`
 ALTER TABLE `user`
 	CHANGE COLUMN `user_token` `user_token` VARCHAR(100) NOT NULL COMMENT '用户标志' AFTER `phone`;
 #小秘书表增加pid字段
-ALTER TABLE need add pid INT NOT NULL DEFAULT 0 COMMENT '父id' AFTER id
+ALTER TABLE need add pid INT NOT NULL DEFAULT 0 COMMENT '父id' AFTER id;
 
 #小秘书表增加reply_id字段
-ALTER TABLE need add reply_id INT NOT NULL DEFAULT 0 COMMENT '回复用户id' AFTER pid
+ALTER TABLE need add reply_id INT NOT NULL DEFAULT 0 COMMENT '回复用户id' AFTER pid;
+#======0707========
