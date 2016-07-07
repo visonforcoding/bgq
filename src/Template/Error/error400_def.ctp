@@ -1,31 +1,14 @@
-<?php 
+<?php
 use Cake\Core\Configure;
 use Cake\Error\Debugger;
-?>
-<?php $this->set(['pageTitle'=>'出错了']) ?>
-<?php $this->layout = 'layout'; ?>
-<?php if (!Configure::read('debug')):?>
-<header>
-    <div class='inner'>
-        <a href='javascript:history.go(-1);' class='toback'></a>
-        <h1>404</h1>
-    </div>
-</header>
-<div class="wraper">
-    <div class="errorpage">
-        <a href='javascript:void(0);'></a>
-    </div>
-    <p class="ptips">可能原因：网络信号弱，<em>找不到请求页面</em></p>
-    <div class='btnlist'>
-        <a href="javascript:location.reload()"><i></i>刷新</a><a href="/"><i></i>主页</a><a href="javascript:history.go(-1);"><i></i>返回</a>
-    </div>
-</div>
-<?php else:?>
-<?php 
+
+$this->layout = 'error';
+
+if (Configure::read('debug')):
     $this->layout = 'dev_error';
 
     $this->assign('title', $message);
-    $this->assign('templateName', 'error500.ctp');
+    $this->assign('templateName', 'error400.ctp');
 
     $this->start('file');
 ?>
@@ -46,6 +29,7 @@ use Cake\Error\Debugger;
     endif;
 
     $this->end();
+endif;
 ?>
 <h2><?= h($message) ?></h2>
 <p class="error">
@@ -55,5 +39,3 @@ use Cake\Error\Debugger;
         "<strong>'{$url}'</strong>"
     ) ?>
 </p>
-
-<?php endif;
