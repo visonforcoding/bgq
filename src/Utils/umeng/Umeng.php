@@ -5,7 +5,7 @@
  * @author : Wash Cai <1020183302@qq.com>
  */
 namespace App\Utils\umeng;
-require_once(dirname(__FILE__) . '/' . 'notification/Notification.php');
+require_once dirname(__FILE__).'/notification/Notification.php';
 
 /**
  * 友盟推送
@@ -43,7 +43,7 @@ class Umeng {
      * @return boolean true:发送成功;false:发送失败
      */
     function sendAll($title, $content, $ticker, $production_mode = 'true', $extra = '', $expire_time = '', $badge = '', $after_open = '', $sound = '') {
-        $brocast = new Notification();
+        $brocast = new \Notification();
 
         $brocast->setAppMasterSecret($this->appMasterSecret);
         $brocast->setPredefinedKeyValue("appkey", $this->appkey);
@@ -94,7 +94,7 @@ class Umeng {
      * @return boolean true:发送成功;false:发送失败;
      */
     function sendAlias($alias, $title, $content, $ticker, $alias_type, $production_mode = 'true', $extra = '', $expire_time = '', $badge = '', $after_open = '', $sound = '') {
-        $brocast = new Notification();
+        $brocast = new \Notification();
 
         $brocast->setAppMasterSecret($this->appMasterSecret);
         $brocast->setPredefinedKeyValue("appkey", $this->appkey);
@@ -144,7 +144,7 @@ class Umeng {
      * @return boolean true:发送成功;false:发送失败;
      */
     function sendFile($title, $content, $ticker, $file, $alias_type, $production_mode = 'true', $badge = '', $after_open = '', $sound = '') {
-        $brocast = new Notification();
+        $brocast = new \Notification();
         $brocast->setAppMasterSecret($this->appMasterSecret);
         $brocast->setPredefinedKeyValue("appkey", $this->appkey);
         $brocast->setPredefinedKeyValue("timestamp", $this->timestamp); // 时间戳
