@@ -4,7 +4,7 @@
         <option <?php if(isset($selIds)): ?>
             <?php if (in_array($savant->id, $selIds)): ?>selected="selected"<?php endif; ?>
                 <?php endif;?> 
-                  value="<?= $savant->id ?>"><?= $savant->user->truename ?>
+                  value="<?= $savant->id ?>"><?= $savant->user->truename ?> / <?=$savant->user->company?>
         </option>
     <?php endforeach; ?>
 </select>

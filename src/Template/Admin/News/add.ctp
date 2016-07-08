@@ -8,9 +8,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">作者</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('user_id', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <?= $this->cell('User') ?>
         </div>
     </div>
     <div class="form-group">
@@ -104,7 +102,11 @@
         });
         $('#select-savant').select2({
             language: "zh-CN",
-            placeholder: '选择一个标签'
+            placeholder: '选择一个专家'
+        });
+        $('#select-user').select2({
+            language: "zh-CN",
+            placeholder: '选择一个用户'
         });
         $('form').submit(function () {
             var form = $(this);
