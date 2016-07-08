@@ -24,7 +24,7 @@ class UserCell extends Cell {
      */
     public function display($selIds=null) {
         $UserTable = \Cake\ORM\TableRegistry::get('user');
-        $users = $UserTable->find()->all()->toArray();
+        $users = $UserTable->find()->where(['enabled'=>1])->all()->toArray();
         $this->set(compact('users','selIds'));
     }
 

@@ -230,6 +230,7 @@ class SavantController extends AppController {
         $savant = $this->Savant->get($id);
         $userTable = \Cake\ORM\TableRegistry::get('user');
         $user = $userTable->get($savant->user_id);
+        $user->level = 1;
         $user->savant_status = 0;
         $user->reason = $data['reason'];
         $res = $userTable->save($user);
