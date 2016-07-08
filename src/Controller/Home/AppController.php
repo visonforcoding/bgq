@@ -85,7 +85,7 @@ class AppController extends Controller {
         $action = strtolower($this->request->param('action'));
         $request_aim = [$controller, $action];
         if (in_array($request_aim, $this->firewall) || 
-                in_array($controller, ['user', 'wx','news','activity','meet','pay'])) {
+                in_array($controller, ['user'])) {
             return true;
         }
         return $this->handCheckLogin();
@@ -102,10 +102,10 @@ class AppController extends Controller {
         if (!$user) {
             if ($this->request->is('ajax')) {
 //                $url = $this->request->referer();
-                $login_url = '/user/login';
+                $login_url = '/w/user/login';
                 $this->Util->ajaxReturn(['status' => false, 'msg' => '请先登录', 'code' => 403,'redirect_url'=>$login_url]);
             }
-            return $this->redirect('/user/login');
+            return $this->redirect('/w/user/login');
             //header("location:".'/user/login');
         }
     }

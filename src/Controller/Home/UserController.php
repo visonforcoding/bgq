@@ -55,8 +55,9 @@ class UserController extends AppController {
      * @return boolean
      */
     public function check($guid){
-        $user = $this->User->find()->where(['guid'=>$guid])->toArray();
+        $user = $this->User->find()->where(['guid'=>$guid])->first();
         if ($user != false) {
+            $user = $this->request->session()->write('User.mobile', $user);
             return $this->Util->ajaxReturn(true, '登录成功');
         } else {
             return $this->Util->ajaxReturn(false, '登录失败');
