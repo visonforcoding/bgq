@@ -422,40 +422,64 @@ class UserController extends AppController {
             //判断是否关注过
             $fans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$following_id'")->first();
             if ($fans) {
-                return $this->Util->ajaxReturn(false, '您已经关注过');
-            }
-            //查看是否被该用户关注过
-            $follower = $FansTable->find()->where("`user_id` = '$following_id' and `following_id` = '$user_id'")->first();
-            $newfans = $FansTable->newEntity();
-            $newfans->user_id = $user_id;
-            $newfans->following_id = $following_id;
-            if ($follower) {
-                //有被关注
-                $follower->type = 2;  //关系标注为互为关注
-                $newfans->type = 2;
-                $transRes = $FansTable->connection()
-                        ->transactional(function()use($FansTable, $follower, $newfans) {
-                    //开启事务
-                    return $FansTable->save($newfans)&&$FansTable->save($follower);
-                });
-                if (!$transRes) {
-                    return $this->Util->ajaxReturn(false, '关注失败');
+                //关注了就取消关注
+//                return $this->Util->ajaxReturn(false, '您已经关注过');
+                //查看是否被该用户关注过
+                $follower = $FansTable->find()->where("`user_id` = '$following_id' and `following_id` = '$user_id'")->first();
+                if ($follower) {
+                    //有被关注，取消互相关注
+                    $follower->type = 1;  
+                    $newfans->type = 1;
+                    $transRes = $FansTable->connection()
+                            ->transactional(function()use($FansTable, $follower, $newfans) {
+                        //开启事务
+                        return $FansTable->save($newfans)&&$FansTable->save($follower);
+                    });
+                    if (!$transRes) {
+                        return $this->Util->ajaxReturn(false, '取消关注失败');
+                    }
+                }
+                $fans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$following_id'")->first();
+                $res = $FansTable->delete($fans);
+                if(!$res) {
+                    return $this->Util->ajaxReturn(false, '取消关注失败');
+                } else {
+                    return $this->Util->ajaxReturn(true, '取消关注成功');
                 }
             } else {
-                $newfans->type = 1;
-                if (!$FansTable->save($newfans)) {
-                    return $this->Util->ajaxReturn(true, '关注失败');
+                //查看是否被该用户关注过
+                $follower = $FansTable->find()->where("`user_id` = '$following_id' and `following_id` = '$user_id'")->first();
+                $newfans = $FansTable->newEntity();
+                $newfans->user_id = $user_id;
+                $newfans->following_id = $following_id;
+                if ($follower) {
+                    //有被关注
+                    $follower->type = 2;  //关系标注为互为关注
+                    $newfans->type = 2;
+                    $transRes = $FansTable->connection()
+                            ->transactional(function()use($FansTable, $follower, $newfans) {
+                        //开启事务
+                        return $FansTable->save($newfans)&&$FansTable->save($follower);
+                    });
+                    if (!$transRes) {
+                        return $this->Util->ajaxReturn(false, '关注失败');
+                    }
+                } else {
+                    $newfans->type = 1;
+                    if (!$FansTable->save($newfans)) {
+                        return $this->Util->ajaxReturn(true, '关注失败');
+                    }
                 }
+                //发送一条关注消息给被关注者
+                $this->loadComponent('Business');
+                $this->Business->usermsg($following_id, '您有新的关注者', '', 1, $newfans->id);
+                //更新被关注者粉丝数  列表方便显示
+                $follower_user = $this->User->get($following_id);
+                $fansCount = $FansTable->find()->where("`following_id` = '$following_id'")->count();
+                $follower_user->fans = $fansCount;
+                $this->User->save($follower_user);
+                return $this->Util->ajaxReturn(true, '关注成功');
             }
-            //发送一条关注消息给被关注者
-            $this->loadComponent('Business');
-            $this->Business->usermsg($following_id, '您有新的关注者', '', 1, $newfans->id);
-            //更新被关注者粉丝数  列表方便显示
-            $follower_user = $this->User->get($following_id);
-            $fansCount = $FansTable->find()->where("`following_id` = '$following_id'")->count();
-            $follower_user->fans = $fansCount;
-            $this->User->save($follower_user);
-            return $this->Util->ajaxReturn(true, '关注成功');
         }
     }
 
