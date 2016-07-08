@@ -24,7 +24,9 @@ class BiggieCell extends Cell {
      */
     public function display($selIds=null) {
         $BiggieTable = \Cake\ORM\TableRegistry::get('savant');
-        $biggies = $BiggieTable->find()->contain('Users')->all()->toArray();
+        $biggies = $BiggieTable->find()->contain(['Users'=>function($q){
+            return $q->where(['level'=>2, 'enabled'=>'1']);
+        }])->all()->toArray();
         $this->set(compact('biggies','selIds'));
     }
 

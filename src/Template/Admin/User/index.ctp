@@ -115,7 +115,7 @@
             response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
             response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn"><i class="icon icon-eye-open"></i> </a>';
             response += '<a title="查看名片" onClick="showMp(' +" ' "+rowObject.card_path+" ' " + ');" data-id="' + rowObject.id + '" class="grid-btn"><i class="icon icon-picture"></i> </a>';
-            response += '<a title="复制链接" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-copy"></i> </a>';
+            response += '<a title="复制个人主页" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-copy"></i> </a>';
             response += '<a title="修改" href="/admin/user/edit/' + rowObject.id + '" class="grid-btn"><i class="icon icon-pencil"></i> </a>';
             return response;
         }
