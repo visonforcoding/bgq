@@ -61,6 +61,7 @@
     $('#uploadPic').on('tap', function () {
         if ($.util.isAPP) {
             LEMON.event.uploadPhoto('{"dir":"user/mp"}', function (data) {
+                alert(data);
                 var data = JSON.parse(data);
                 if (data.status === true) {
                     $.util.alert('上传成功');
