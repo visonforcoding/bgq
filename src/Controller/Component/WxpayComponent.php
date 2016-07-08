@@ -173,6 +173,7 @@ class WxpayComponent extends Component {
      * @return boolean
      */
     public function getPayParameter($body, $openid, $out_trade_no, $fee, $notify_url = null,$isApp=false) {
+        $fee = intval($fee*100);
         $res = $this->unifiedorder($body, $openid, $out_trade_no, $fee, $notify_url,$isApp);
         if ($res) {
             $prepay_id = $res['prepay_id'];
