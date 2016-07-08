@@ -13,6 +13,7 @@ use Cake\Utility\Security;
  * @property \App\Controller\Component\SmsComponent $Sms
  * @property \App\Controller\Component\WxComponent $Wx
  * @property \App\Controller\Component\EncryptComponent $Encrypt
+ * @property \App\Controller\Component\PushComponent $Push
  */
 class IndexController extends AppController {
 
@@ -38,14 +39,16 @@ class IndexController extends AppController {
 //        $res = $httpClient->post('http://bgq.dev/api/wxtoken');
         //debug($res);
         //$token = 'QZeqKxItfF2jXWdIWjePlhBEX3JK9JKtIJkCwYMisw8c8Raqg2iOIWufshlgswB04Mj0d8mnmu3uuDUtqsbP51W0AOsyLWx1lhkWPA0Svcy60eLZmTiHKWEA-BXiOdDaDKThAEANUD';
-        $token = 'MjQMDc3YWZkMTk0NzJmYTc3NjI1MWU2ZDA1NWI5ZmI4Y2VjMTYxNjcxYTA4MGY4NzFjNTU3ZWQ0YWIwNTkwNAQ5bXSGZ1tx/Q1EuasSyLB4rrFnzYlobxSDbeTJu0PPt3EPsv1FgvYet/jDx1ItuasQCBOMma7lG7ZskFHSBL7epml/ox0l5Gt0GqQ+3Ef21qvC1UzCHAWr0mB+E5f0wYY51pcY0H/gMe2BrY5C0XeX5jC+PnilQ/DfvcrsQ1ypVzCsnkRiVH3kkagRtFUyriYco7S3zjhiBHUQL0a3FVw=';
-        $this->loadComponent('Encrypt');
+//        $token = 'MjQMDc3YWZkMTk0NzJmYTc3NjI1MWU2ZDA1NWI5ZmI4Y2VjMTYxNjcxYTA4MGY4NzFjNTU3ZWQ0YWIwNTkwNAQ5bXSGZ1tx/Q1EuasSyLB4rrFnzYlobxSDbeTJu0PPt3EPsv1FgvYet/jDx1ItuasQCBOMma7lG7ZskFHSBL7epml/ox0l5Gt0GqQ+3Ef21qvC1UzCHAWr0mB+E5f0wYY51pcY0H/gMe2BrY5C0XeX5jC+PnilQ/DfvcrsQ1ypVzCsnkRiVH3kkagRtFUyriYco7S3zjhiBHUQL0a3FVw=';
+//        $this->loadComponent('Encrypt');
         //$en_str = $this->Encrypt->encrypt('123');
         //var_dump($en_str);
-        $key = 'fkc33fdsafasdfasdfasdfasdgasddklsjfasdklfjasdkljaskljgklasdjgaekljgkl';
-        $en_str = Security::encrypt('123', $key,'1');
-        debug(Security::decrypt($en_str, $key,'1'));
-        debug(Security::hash(uniqid(),'md5'));
+//        $key = 'fkc33fdsafasdfasdfasdfasdgasddklsjfasdklfjasdkljaskljgklasdjgaekljgkl';
+//        $en_str = Security::encrypt('123', $key,'1');
+//        debug(Security::decrypt($en_str, $key,'1'));
+//        debug(Security::hash(uniqid(),'md5'));
+        $this->loadComponent('Push');
+        $this->Push->test();
         //$en_token = $this->Encrypt->encrypt($token);
         //debug($en_token);
         //debug($this->Encrypt->decrypt($en_str));
