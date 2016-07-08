@@ -27,7 +27,6 @@ class MeetSubjectController extends AppController {
 
     /**
      * View method
-     *
      * @param string|null $id Meet Subject id.
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
