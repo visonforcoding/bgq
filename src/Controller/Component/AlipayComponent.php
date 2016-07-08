@@ -116,7 +116,7 @@ class AlipayComponent extends Component {
         openssl_free_key($res);
 	//base64编码
         $sign = urlencode(base64_encode($sign));
-        $stringB = $stringA.'&sign='.$sign.'&sign_type=RSA';
+        $stringB = $stringA.'&sign="'.$sign.'"&sign_type="RSA"';
        return $stringB;
    }
    
