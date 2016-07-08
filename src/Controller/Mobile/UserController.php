@@ -422,26 +422,19 @@ class UserController extends AppController {
             //判断是否关注过
             $fans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$following_id'")->first();
             if ($fans) {
-                //关注了就取消关注
-//                return $this->Util->ajaxReturn(false, '您已经关注过');
                 //查看是否被该用户关注过
                 $follower = $FansTable->find()->where("`user_id` = '$following_id' and `following_id` = '$user_id'")->first();
                 if ($follower) {
-                    //有被关注，取消互相关注
+                    //有被关注，改变互相关注状态
                     $follower->type = 1;  
-                    $newfans->type = 1;
-                    $transRes = $FansTable->connection()
-                            ->transactional(function()use($FansTable, $follower, $newfans) {
-                        //开启事务
-                        return $FansTable->save($newfans)&&$FansTable->save($follower);
-                    });
-                    if (!$transRes) {
-                        return $this->Util->ajaxReturn(false, '取消关注失败');
-                    }
                 }
                 $fans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$following_id'")->first();
-                $res = $FansTable->delete($fans);
-                if(!$res) {
+                $transRes = $FansTable->connection()
+                        ->transactional(function()use($FansTable, $follower, $fans) {
+                    //开启事务
+                    return $FansTable->delete($fans)&&$FansTable->save($follower);
+                });
+                if(!$transRes) {
                     return $this->Util->ajaxReturn(false, '取消关注失败');
                 } else {
                     return $this->Util->ajaxReturn(true, '取消关注成功');
