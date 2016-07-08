@@ -10,12 +10,13 @@
             <div class="t-home-top">
                 <span>
                     <img src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : $user->avatar ?>"/>
-                    <?php if($user->level == 2): ?>
-                        <i class="v"></i>
-                    <?php endif; ?>
                 </span>
             </div>
-            <h3><?= $user->truename ?><i class="v"></i><!-- <span><?= $user->company ?> <?= $user->position ?></span> --></h3>
+            <h3><?= $user->truename ?>
+                <?php if ($user->level == 2): ?>
+                    <i class="v"></i>
+                <?php endif; ?>
+            </h3>
             <div class="info-desc"><span><i></i><?= $user->company ?></span><span><i></i><?= $user->position ?></span></div>
         </a>
     </div>
