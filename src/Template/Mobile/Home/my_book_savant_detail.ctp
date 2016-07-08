@@ -9,10 +9,11 @@
     </div>
     
 </header>
-<div class="wraper newswraper">
+<div class="wraper">
     <div class="h-home-bottom">
-        <div><span><img src="<?=  empty($book->user->avatar)?'/mobile/images/touxiang.jpg':$book->user->avatar?>"/></span><i class="iconfont">&#xe61e;</i></div>
-        <h3><?=$book->user->truename?><span><?=$book->user->company?> <?=$book->user->position?></span></h3>
+        <div class="t-home-top"><span><img src="<?=  empty($book->user->avatar)?'/mobile/images/touxiang.jpg':$book->user->avatar?>"/></span></div>
+        <h3><?=$book->user->truename?><i class="iconfont">&#xe61e;</i></h3>
+        <div class="info-desc"><span><i></i><?= $user->company ?></span><span><i></i><?= $user->position ?></span></div>
     </div>
     <ul class="h-info-box">
         <li>
