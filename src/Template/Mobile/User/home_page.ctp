@@ -184,7 +184,7 @@
         <div class="f-bottom">
             <a href="javascript:void(0);" class="bgred" id="follow_btn">
                 <?php if($isFans): ?>
-                已关注
+                取消关注
                 <?php else: ?>
                 关注
                 <?php endif; ?>
@@ -219,7 +219,14 @@
                 data: {id: <?= $user->id ?>},
                 func: function (res) {
                     $.util.alert(res.msg);
-                    $('#follow_btn').text('已关注');
+                    if(res.status){
+                        if(res.msg.indexOf('取消关注') != ''){
+                            $('#follow_btn').text('取消关注');
+                        } else {
+                            $('#follow_btn').text('关注');
+                        }
+                    }
+                    
                 }
             });
         });
