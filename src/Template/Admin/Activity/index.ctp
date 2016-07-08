@@ -25,6 +25,28 @@
     <table id="list"><tr><td></td></tr></table> 
     <div id="pager"></div> 
 </div>
+<style>
+    .bigdiv{}
+.position{position:absolute; display:none ;width:300px;height:60px;left:69%;z-index: 999;background:whitesmoke; border: 1px solid #E1E1E1}
+.position:before{position:absolute;width:0;height:0;border:10px transparent solid; border-left:5px #e5e5e5 solid;content: '';right:-15px;top:17%;}
+</style>
+
+<script type="text/html" id="optTpl">
+    <div class="bigdiv" onmouseout="$(this).find(&quot;.showall&quot;).hide();$(this).find(&quot;.showallbtn&quot;).show();">
+        <a class="showallbtn" title="操作" onmouseover="$(this).hide();$(this).next(&quot;.showall&quot;).show();" style="display: inline;">
+            <i class="icon icon-resize-full"></i>
+        </a>
+        <div class="showall" hidden="" onmouseover="$(this).prev(&quot;.showallbtn&quot;).hide();$(this).show();" style="display: none;">
+            <a title="删除" onclick="delRecord(20);" data-id="20" class="grid-btn "><i class="icon icon-trash"></i> </a>
+            <a title="查看" onclick="doView(20);" data-id="20" class="grid-btn " style="position: absolute;"><i class="icon icon-eye-open"></i> </a>
+            <a title="编辑" href="/admin/activity/edit/20" class="grid-btn "><i class="icon icon-pencil"></i> </a>
+            <a title="取消置顶" href="javascript:void(0)" class="grid-btn untop" onclick="untop(20)"><i class="icon icon-long-arrow-down"></i></a>
+            <a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(20);"><i class="icon icon-qrcode"></i>
+                <div hidden="" id="code_20" style="position: relative; top: 0px; display: block;" class="active"><img src="/upload/qrcode/activitycode/2016-07-07/146789662020.png"></div>
+            </a>
+        </div>
+    </div>
+</script>
 <?php $this->start('script'); ?>
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
@@ -95,8 +117,8 @@
                 }
 
                 function actionFormatter(cellvalue, options, rowObject) {
-                    response = '<div class="bigdiv" onmouseout=$(this).find(".showall").hide();$(this).find(".showallbtn").show();><a class="showallbtn" title="操作" onmouseover=$(this).hide();$(this).next(".showall").show();><i class="icon icon-resize-full"></i></a>';
-                    response += '<div class="showall" hidden onmouseover=$(this).prev(".showallbtn").hide();$(this).show();><a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response = '<div class="bigdiv" onmouseout="$(this).find(\'.position\').hide()" onmouseover="$(this).find(\'.position\').show()">';
+                    response += '<div class="position"><a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="编辑" href="/admin/activity/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     if (rowObject.is_top == 0 && rowObject.is_check == 1) {
@@ -110,9 +132,10 @@
                         response += '<a title="发布" href="javascript:void(0)" class="grid-btn release" onclick="release(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
                         response += '<a title="未通过审核" href="javascript:void(0)" class="grid-btn unrelease" onclick="unrelease(' + rowObject.id + ')"><i class="icon icon-times"></i></a>';
                     }
-                    response += '</div></div>';
+                    response += '</div><a class="showallbtn" title="操作"><i class="icon icon-resize-full"></i></a></div>';
                     return response;
                 }
+
                 
                 function oncode(id){
                     var activity_id = '#code_'+id;
