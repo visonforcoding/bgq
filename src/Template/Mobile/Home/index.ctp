@@ -119,7 +119,7 @@
         $('#shadow').hide();
     })
     if ($.util.isAPP) {
-        $('.h-home-bottom').css({'padding-top':'1.5rem'});
+        $('.h-home-bottom').css({'padding-top':'1rem'});
     }
 </script>
 <?php $this->end('script'); ?>
