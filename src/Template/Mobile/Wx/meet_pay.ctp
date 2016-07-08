@@ -63,7 +63,9 @@
                     }
                     if(payMethod=='ali'){
                         if($.util.isAPP){
-                            LEMON.pay.ali('');
+                            LEMON.pay.ali('<?=$aliPayParameters?>',function(res){
+                                alert(res);
+                            });
                         }
                     }
                     break;
