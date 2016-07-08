@@ -92,6 +92,8 @@
                     response += '<a title="编辑" href="/admin/savant/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     if (rowObject.user.savant_status == 2) {
                         response += '<a title="审核通过" href="javascript:void(0)" class="grid-btn release" onclick="pass(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
+                    }
+                    if(rowObject.user.savant_status != 0){
                         response += '<a title="未通过审核" href="javascript:void(0)" class="grid-btn unrelease" onclick="unpass(' + rowObject.id + ')"><i class="icon icon-times"></i></a>';
                     }
                     return response;
