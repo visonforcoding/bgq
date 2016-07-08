@@ -105,7 +105,7 @@
                     if (typeof res === 'object') {
                         if (res.status) {
                             layer.alert(res.msg, function () {
-                                window.location.href = '/admin/meetsubject/index';
+                                window.location.href = '/admin/meetSubject/index';
                             });
                         } else {
                             layer.alert(res.msg, {icon: 5});
