@@ -27,7 +27,7 @@
 </div>
 <style>
     .bigdiv{}
-.position{position:absolute; display:none ;width:300px;height:60px;right:6%;z-index: 999;background:whitesmoke; border: 1px solid #E1E1E1}
+.position{position:absolute; display:none ;width:200px;height:60px;right:6%;z-index: 999;background:whitesmoke; border: 1px solid #E1E1E1;line-height: 60px;}
 .position:before{position:absolute;width:0;height:0;border:10px transparent solid; border-left:5px #e5e5e5 solid;content: '';right:-15px;top:17%;}
 </style>
 
