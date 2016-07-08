@@ -106,14 +106,32 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
     // 分享设置
-    window.shareConfig.link = 'http://m.chinamatop.com/news/view/<?= $news->id ?>';
+    window.shareConfig.link = 'http://m.chinamatop.com/news/view/<?= $news->id ?>?share=1';
     window.shareConfig.title = '<?= $news->title ?>';
     var share_desc = '<?= $news->share_desc ?>';
     share_desc && (window.shareConfig.desc = share_desc);
-    LEMON.show.shareIco();
+        LEMON.show.shareIco();
+        LEMON.sys.back('/news/index');
+
+    window.__comments = <?= json_encode($news->comments) ?>;
+    window.__user_id = <?= isset($user->id) ? $user->id : 0 ?>;
+    window.__id = <?= $news->id ?>;
+    window.comme_submit = true;
 </script>
 <script>
-    window.comme_submit = true;
+
+    function checkLogin(func){
+        if(window.__user_id || $.util.getCookie('token_uin')){
+            func();
+        }
+        else{
+            $.util.alert('请登录后操作');
+            setTimeout(function () {
+                location.href = '/user/login?redirect_url=/news/view/' + window.__id;
+            }, 1000);
+        }
+    }
+
     $('.com-all').hide();
     // 少于五条评论隐藏显示全部, 大于一条评论隐藏还没有任何评论
     var circle = setInterval(function(){
@@ -128,7 +146,7 @@
     },100);
     
     var reply_id = 0;
-    $.util.dataToTpl('comment', 'listTpl',<?= json_encode($news->comments) ?>, function (d) {
+    $.util.dataToTpl('comment', 'listTpl', window.__comments, function (d) {
         //d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
         d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
         d.user_truename = d.user.truename;
@@ -148,6 +166,7 @@
         }
         return d;
     });
+
     setTimeout(function () {
         $('body').on('tap', function (e) {
             var target = e.srcElement || e.target, em = target, i = 1;
@@ -164,26 +183,30 @@
                 if (obj.data('disable') === '1') {
                     return false;
                 }
-                $.util.ajax({
-                    url: '/news/comment-praise',
-                    data: {id: id},
-                    func: function (res) {
-                        if (res.status) {
-                            console.log($('.praise_'+ id))
-                            $('.praise_'+ id).siblings('.addnum').show();
-                            $('.praise_'+ id).siblings('em').html(parseInt(obj.find('em').text()) + 1);
-                            $('.praise_'+ id).css('color', 'red');
-                            $('#praise_'+ id).data('disable', '1');
-                            setTimeout(function () {
-                                $('.praise_'+ id).siblings('.addnum').hide();
-                            }, 1000);
+                checkLogin(function () {
+                    $.util.ajax({
+                        url: '/news/comment-praise',
+                        data: {id: id},
+                        func: function (res) {
+                            if (res.status) {
+                                console.log($('.praise_' + id))
+                                $('.praise_' + id).siblings('.addnum').show();
+                                $('.praise_' + id).siblings('em').html(parseInt(obj.find('em').text()) + 1);
+                                $('.praise_' + id).css('color', 'red');
+                                $('#praise_' + id).data('disable', '1');
+                                setTimeout(function () {
+                                    $('.praise_' + id).siblings('.addnum').hide();
+                                }, 1000);
+                            }
                         }
-                    }
+                    });
                 });
+
+
             }
             if (em.id.indexOf('common_') !== -1) {
                 //回复评论
-                var user_id = <?= isset($user->id) ? $user->id : 0 ?>;
+                var user_id = window.__user_id;
                 if ($(em).data('userid') == user_id) {
                     return;
                 }
@@ -196,8 +219,10 @@
             switch (em.id) {
                 case 'commit':
                     //弹出评论框
-                    $('#comment_shadow').show('slow');
-                    $('.shadow-info').removeClass('m-height').addClass('c-height');
+                    checkLogin(function () {
+                        $('#comment_shadow').show('slow');
+                        $('.shadow-info').removeClass('m-height').addClass('c-height');
+                    });
                     break;
                 case 'cancel':
                     //关闭 评论框
@@ -221,7 +246,7 @@
                         window.comme_submit = false;
                         $.util.ajax({
                             url: '/news/comment',
-                            data: {reply_id: reply_id, content: content, id:<?= $news->id ?>},
+                            data: {reply_id: reply_id, content: content, id:window.__id},
                             func: function (res) {
                                 if (res.status == true) {
                                     $.util.alert(res.msg);
@@ -265,34 +290,38 @@
                     if (obj.data('disable') === '1') {
                         return false;
                     }
-                    obj.find('i.like').toggleClass('changecolor');
-                    obj.find('i.like').toggleClass('scale');
-                    $.util.ajax({
-                        url: '/news/news-praise',
-                        data: {id:<?= $news->id ?>},
-                        func: function (res) {
-                            $.util.alert(res.msg);
-                            if (res.status) {
-                                obj.find('em').html(parseInt(obj.find('em').text()) + 1);
-                            } else {
-                                obj.find('i.like').toggleClass('changecolor');
-                                obj.find('i.like').toggleClass('scale');
-                                $.util.alert(msg.msg);
+                    checkLogin(function () {
+                        obj.find('i.like').toggleClass('changecolor');
+                        obj.find('i.like').toggleClass('scale');
+                        $.util.ajax({
+                            url: '/news/news-praise',
+                            data: {id: window.__id},
+                            func: function (res) {
+                                $.util.alert(res.msg);
+                                if (res.status) {
+                                    obj.find('em').html(parseInt(obj.find('em').text()) + 1);
+                                } else {
+                                    obj.find('i.like').toggleClass('changecolor');
+                                    obj.find('i.like').toggleClass('scale');
+                                    $.util.alert(msg.msg);
+                                }
                             }
-                        }
+                        });
                     });
                     break;
                 case 'collect':
-                    var news_id = <?= $news->id ?>;
-                    $.util.ajax({
-                        url: '/news/collect',
-                        data: {id: news_id},
-                        func: function (res) {
-                            $.util.alert(res.msg);
-                            if (res.status) {
-                                $(em).toggleClass('active');
+                    checkLogin(function () {
+                        var news_id = window.__id;
+                        $.util.ajax({
+                            url: '/news/collect',
+                            data: {id: news_id},
+                            func: function (res) {
+                                $.util.alert(res.msg);
+                                if (res.status) {
+                                    $(em).toggleClass('active');
+                                }
                             }
-                        }
+                        });
                     });
                     break;
                 case 'share':
@@ -368,7 +397,7 @@
                             return;
                         }
                         $.util.showLoading('buttonLoading');
-                        $.getJSON('/news/getMoreComment/' + page + '/' + <?= $news->id; ?>, function (res) {
+                        $.getJSON('/news/getMoreComment/' + page + '/' + window.__id, function (res) {
                             $.util.hideLoading('buttonLoading');
                             window.holdLoad = false;  //打开加载锁  可以开始再次加载
 
