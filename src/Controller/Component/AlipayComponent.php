@@ -35,7 +35,7 @@ class AlipayComponent extends Component {
      * @var type 
      */
     protected $seller_id;
-    
+
     /**
      * 私钥
      * @var type 
@@ -61,7 +61,7 @@ class AlipayComponent extends Component {
      * @param type $order_body
      * @return type
      */
-    public function setSign($order_no,$order_title,$order_fee,$order_body) {
+    public function setSign($order_no, $order_title, $order_fee, $order_body) {
         $params = [
             'service' => 'mobile.securitypay.pay',
             'partner' => $this->partner,
@@ -81,11 +81,11 @@ class AlipayComponent extends Component {
         $res = openssl_get_privatekey($this->private_key);
         openssl_sign($stringA, $sign, $res);
         openssl_free_key($res);
-	//base64编码
+        //base64编码
         $sign = base64_encode($sign);
         return $sign;
     }
-    
+
     /**
      * 生成支付参数
      * @param type $order_no
@@ -94,8 +94,8 @@ class AlipayComponent extends Component {
      * @param type $order_body
      * @return string
      */
-   public function setPayParameter($order_no,$order_title,$order_fee,$order_body){
-       $params = [
+    public function setPayParameter($order_no, $order_title, $order_fee, $order_body) {
+        $params = [
             'service' => 'mobile.securitypay.pay',
             'partner' => $this->partner,
             '_input_charset' => 'utf-8',
@@ -114,22 +114,29 @@ class AlipayComponent extends Component {
         $res = openssl_get_privatekey($this->private_key);
         openssl_sign($stringA, $sign, $res);
         openssl_free_key($res);
-	//base64编码
+        //base64编码
         $sign = urlencode(base64_encode($sign));
-        $stringB = $stringA.'&sign="'.$sign.'"&sign_type="RSA"';
-       return $stringB;
-   }
-   
-   /**
-    * 
-    * @param type $params
-    */
-   public function buildLinkString($params){
-       $string = '';
-      foreach($params as $key=>$value){
-          $string.= $key.'="'.$value.'"';
-      }
-      return $string;
-   }
+        $stringB = $stringA . '&sign="' . $sign . '"&sign_type="RSA"';
+        return $stringB;
+    }
+
+    /**
+     * 
+     * @param type $params
+     */
+    public function buildLinkString($params) {
+        $string = '';
+        foreach ($params as $key => $value) {
+            $string.= $key . '="' . $value . '"&';
+        }
+        //去掉最后一个&字符
+        $string = substr($string, 0, count($arg) - 2);
+
+        //如果存在转义字符，那么去掉转义
+        if (get_magic_quotes_gpc()) {
+            $string = stripslashes($string);
+        }
+        return $string;
+    }
 
 }
