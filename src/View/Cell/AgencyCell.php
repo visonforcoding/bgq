@@ -22,13 +22,13 @@ class AgencyCell extends Cell {
      *
      * @return void
      */
-    public function display() {
+    public function display($selId=null) {
         $IndustryTable = \Cake\ORM\TableRegistry::get('Agency');
         $agencies = $IndustryTable->find('threaded', [
                     'keyField' => 'id',
                     'parentField' => 'pid'
                 ])->all()->toArray();
-        $this->set(compact('agencies', 'selIds'));
+        $this->set(compact('agencies', 'selId'));
     }
 
 }

@@ -44,11 +44,11 @@
                 cellsubmit : 'remote',
                 cellurl: '/admin/user/hand-change',
                 colNames:
-                        ['手机号', '姓名', '等级', '身份证','职位',  '性别','专家认证', '创建时间',  '操作'],
+                        ['手机号', '姓名', '等级', '身份证','职位',  '性别','专家认证','帐号状态', '创建时间',  '操作'],
                 colModel: [
                     {name: 'phone', editable: false, align: 'center'},
                     {name: 'truename', editable: false, align: 'center'},
-                    {name: 'level', editable: false, align: 'center',formatter(cellvalue, options, rowObject){
+                    {name: 'level', editable: false, align: 'center',formatter:function(cellvalue, options, rowObject){
                             if(cellvalue=='1'){
                                 return '普通';
                             }else{
@@ -57,14 +57,14 @@
                     }},
                     {name: 'idcard', editable: false, align: 'center'},
                     {name: 'position', editable: false, align: 'center'},
-                    {name: 'gender', editable: false, align: 'center',formatter(cellvalue, options, rowObject){
+                    {name: 'gender', editable: false, align: 'center',formatter:function(cellvalue, options, rowObject){
                             if(cellvalue=='1'){
                                 return '男';
                             }else{
                                 return '女';
                             }
                     }},
-                    {name: 'savant_status', editable: true, align: 'center',formatter(cellvalue, options, rowObject){
+                    {name: 'savant_status', editable: false, align: 'center',formatter:function(cellvalue, options, rowObject){
                             switch(cellvalue){
                              case 1:
                                 return '未认证';
@@ -76,6 +76,14 @@
                                 return '审核不通过';
                             }
                     },edittype:'select',editoptions: { value:"1:未认证;2:待审核;3:审核通过;0:审核不通过" } },
+                    {name: 'enabled', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
+                            switch(cellvalue){
+                             case true:
+                                return '正常';
+                            case false:
+                                return '<i style="color:red">禁用</i>';
+                            }
+                    },edittype:'select',editoptions: { value:"1:正常;0:禁用" }},
                     {name: 'create_time', editable: true, align: 'center'},
                     {name: 'actionBtn',align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                 pager: "#pager",

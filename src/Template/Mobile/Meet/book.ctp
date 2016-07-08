@@ -57,7 +57,7 @@
                    func:function(res){
                        $.util.alert(res.msg);
                        if(res.status){
-                           document.location.href='/meet/book-success';
+                           document.location.href='/meet/book-success/<?=$subject->user->id?>';
                        }
                    }
                 });

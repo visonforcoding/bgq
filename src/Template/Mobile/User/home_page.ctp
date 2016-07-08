@@ -1,7 +1,7 @@
 <div class="wraper">
     <div class="m-info-card">
         <div class="m-info">
-            <a href="/home/edit-userinfo" class="m-pic"><img src="<?= $user->avatar ? $user->avatar : '/mobile/images/touxiang.png' ?>"/></a>
+            <a href="/home/edit-userinfo" class="m-pic"><img src="<?= $user->avatar ? getOriginAvatar($user->avatar) : '/mobile/images/touxiang.png' ?>"/></a>
             <div class="mt-info">
                 <h3><?= $user->truename ?></h3>
                 <span class="job"><?= $user->company ?> <?= $user->position ?> </span>
