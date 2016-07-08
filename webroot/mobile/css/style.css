@@ -483,9 +483,9 @@ color:#fff;background: #dd1f4b;}
 .h-home-bottom h4{text-align: center;padding:0.1rem 0;}
 .h-home-bottom div.t-home-top span{width:2.4rem;height:2.4rem;display:inline-block;position:relative;background-color: #fff;
 border-radius: 50%;padding:1px;}
-.info-desc{font-size:0;-webkit-justify-content: center;display: -webkit-flex; justify-content: center;display: flex;color:#fff;}
-.info-desc span{display:inline-block;font-size:0.3rem;line-height:0.6rem;}
-.info-desc span:first-of-type{margin-right: 0.2rem;}
+.info-desc{font-size:0;color:#fff;}
+.info-desc span{display:block;font-size:0.3rem;line-height:0.4rem;}
+.info-desc span:first-of-type{}
 .info-desc span i{background: url(img/jobs.png) no-repeat;display: inline-block;width:0.24rem;height:0.325rem;
 background-size: contain;margin-right: 0.1rem;vertical-align: middle;}
 .info-desc span:first-of-type i{background: url(img/comp.png) no-repeat;width:0.27rem;height:0.25rem;
