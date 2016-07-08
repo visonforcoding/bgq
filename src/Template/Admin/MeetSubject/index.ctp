@@ -5,7 +5,7 @@
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
-            <a href="/admin/meetsubject/add" class="btn btn-small btn-warning">
+            <a href="/admin/meetSubject/add" class="btn btn-small btn-warning">
                 <i class="icon icon-plus-sign"></i>添加
             </a>
             <div class="form-group">
@@ -35,7 +35,7 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/meetsubject/getDataList",
+                        url: "/admin/meetSubject/getDataList",
                         datatype: "json",
                         mtype: "POST",
                         colNames:
@@ -90,7 +90,7 @@
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-                    response += '<a title="编辑" href="/admin/meetsubject/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+                    response += '<a title="编辑" href="/admin/meetSubject/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     return response;
                 }
 
@@ -102,7 +102,7 @@
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/admin/meetsubject/delete',
+                            url: '/admin/meetSubject/delete',
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
@@ -135,12 +135,12 @@
                     searchData['sidx'] = sortColumnName;
                     searchData['sort'] = sortOrder;
                     var searchQueryStr = $.param(searchData);
-                    $("body").append("<iframe src='/admin/meetsubject/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                    $("body").append("<iframe src='/admin/meetSubject/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
 
                 function doView(id) {
                     //查看明细
-                    url = '/admin/meetsubject/view/' + id;
+                    url = '/admin/meetSubject/view/' + id;
                     layer.open({
                         type: 2,
                         title: '查看详情',
