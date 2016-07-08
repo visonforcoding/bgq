@@ -709,6 +709,7 @@ class ActivityController extends AppController {
      */
     public function sign($id){
         $this->handCheckLogin();
+        $this->set('pageTitle', '活动签到');
         $activity = $this->Activity->get($id);
         if(!$activity)
         {
@@ -733,14 +734,13 @@ class ActivityController extends AppController {
         {
             $content = '<a style="color:blue;text-decoration:underline;" href="/activity/details/'. $activity->id .'">' . $activity->title . '</a>签到成功!';
             $this->set('res', $content);
+            return;
         }
         else
         {
             $this->set('res', '系统错误');
             return;
         }
-        $this->set('pageTitle', '活动签到');
-        return;
     }
     
     /**
