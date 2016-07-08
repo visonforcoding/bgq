@@ -130,7 +130,7 @@ class AlipayComponent extends Component {
             $string.= $key . '="' . $value . '"&';
         }
         //去掉最后一个&字符
-        $string = substr($string, 0, count($arg) - 2);
+        $string = substr($string, 0, count($string) - 2);
 
         //如果存在转义字符，那么去掉转义
         if (get_magic_quotes_gpc()) {
