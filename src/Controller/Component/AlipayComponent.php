@@ -108,16 +108,28 @@ class AlipayComponent extends Component {
             'body' => $order_body,
         ];
         ksort($params);
-        $stringA = urldecode(http_build_query($params)); //不要转义的
+        $stringA = $this->buildLinkString($params); //不要转义的
         //$stringB = $stringA . '&key=' . $this->key;
         //$sign = strtoupper(md5($stringB));
         $res = openssl_get_privatekey($this->private_key);
         openssl_sign($stringA, $sign, $res);
         openssl_free_key($res);
 	//base64编码
-        $sign = base64_encode($sign);
+        $sign = urlencode(base64_encode($sign));
         $stringB = $stringA.'&sign='.$sign.'&sign_type=RSA';
        return $stringB;
+   }
+   
+   /**
+    * 
+    * @param type $params
+    */
+   public function buildLinkString($params){
+       $string = '';
+      foreach($params as $key=>$value){
+          $string.= $key.'="'.$value.'"';
+      }
+      return $string;
    }
 
 }
