@@ -713,16 +713,19 @@ class ActivityController extends AppController {
         if(!$activity)
         {
             $this->set('res', '活动不存在');
+            return;
         }
-        $is_apply = $this->Activity->Activityapply->find()->where(['user_id'=>$this->user->id, 'activity_id'=>$id, 'is_pass'=>1])->first();
+        $is_apply = $this->Activity->Activityapply->find()->where(['user_id'=>$this->user->id, 'activity_id'=>$id])->first();
         if(!$is_apply)
         {
-            $this->set('res', '未报名或者未通过审核');
+            $this->set('res', '未报名此活动');
+            return;
         }
         $apply = $this->Activity->Activityapply->get($is_apply->id);
         if($apply->is_sign == 1)
         {
             $this->set('res', '您已经签到了，请勿重复扫码');
+            return;
         }
         $apply->is_sign = 1;
         $res = $this->Activity->Activityapply->save($apply);
@@ -734,8 +737,10 @@ class ActivityController extends AppController {
         else
         {
             $this->set('res', '系统错误');
+            return;
         }
         $this->set('pageTitle', '活动签到');
+        return;
     }
     
     /**
