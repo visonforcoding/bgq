@@ -139,6 +139,7 @@ class WxController extends AppController {
         $this->loadComponent('Wxpay');
         $isApp = false;
         $aliPayParameters = '';
+        $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee,null,$isApp);
         if($this->request->is('lemon')){
             $isApp = true;
             $openid = $this->user->app_wx_openid;
@@ -146,7 +147,6 @@ class WxController extends AppController {
             $fee = $fee/100;  //转化成元
             $aliPayParameters = $this->Alipay->setPayParameter($out_trade_no, '并购帮-预约话题', $fee, $body);
         }
-        $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee,null,$isApp);
         $this->set(array(
             'jsApiParameters' => $jsApiParameters,
             'isWx'=>  $this->request->is('weixin')?true:false,
