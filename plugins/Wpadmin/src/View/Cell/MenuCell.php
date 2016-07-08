@@ -60,7 +60,8 @@ class MenuCell extends Cell {
             \Cake\Cache\Cache::write('admin_menus', $menus);
         }
         $this->_menus = $menus;
-        $controller = strtolower($this->request->param('controller'));
+        $controller = $this->request->param('controller');
+        $controller = strtolower(preg_replace('/((?<=[a-z])(?=[A-Z]))/', '-', $controller));
         $action = strtolower($this->request->param('action'));
         $url = '/admin/' . $controller . '/' . $action;
         $this->_url = $url;
