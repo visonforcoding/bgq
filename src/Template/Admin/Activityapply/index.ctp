@@ -39,13 +39,12 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '活动', '提交时间', '更新时间', '审核是否通过', '是否置顶', '操作'],
+                                ['用户', '活动', '提交时间', '更新时间', '是否置顶', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'activity.title', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
-                            {name: 'is_pass', editable: true, align: 'center', formatter: passFormatter},
                             {name: 'is_top', editable: true, align: 'center', formatter: topFormatter},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
@@ -102,13 +101,6 @@
                     } else
                     {
                         response += '<a title="取消置顶" href="javascript:void(0)" onClick="untop(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">取消置顶</a>';
-                    }
-                    if (rowObject.is_pass == 0)
-                    {
-                        response += '<a title="通过" href="javascript:void(0)" onClick="pass(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">通过</a>';
-                    } else
-                    {
-                        response += '<a title="不通过" href="javascript:void(0)" onClick="unpass(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">不通过</a>';
                     }
                     return response;
                 }
