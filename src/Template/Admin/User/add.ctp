@@ -63,9 +63,8 @@
     <div class="form-group">
         <label class="col-md-2 control-label">性别</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('gender', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <label class="radio-inline"> <input name="gender" value="1" checked="checked"  type="radio"> 男</label>
+            <label class="radio-inline"> <input name="gender" value="2"  type="radio"> 女 </label>
         </div>
     </div>
     <div class="form-group">
@@ -85,14 +84,6 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">擅长业务</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('goodat', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-md-2 control-label">常驻城市</label>
         <div class="col-md-8">
             <?php
@@ -101,35 +92,21 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">擅长业务</label>
+        <div class="col-md-8">
+            <textarea name="goodat" class="form-control" rows="2"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">项目经验</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('ymjy', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <textarea name="ymjy" class="form-control" rows="2"></textarea>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">业务能力</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('ywnl', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">审核意见</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('reason', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">审核状态：</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('status', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <textarea class="form-control" name="ywnl" rows="2"></textarea>
         </div>
     </div>
     <div class="form-group">

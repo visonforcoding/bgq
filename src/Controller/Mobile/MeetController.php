@@ -326,9 +326,10 @@ class MeetController extends AppController {
     /**
      * 预定成功页
      */
-    public function bookSuccess(){
+    public function bookSuccess($id){
         $this->set([
-            'pageTitle'=> '预约成功'
+            'pageTitle'=> '预约成功',
+            'id'=>$id
         ]);
     }
     

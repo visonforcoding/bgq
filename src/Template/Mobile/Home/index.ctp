@@ -9,7 +9,7 @@
         <a href="/user/home-page/<?= $user->id ?>">
             <div class="t-home-top">
                 <span>
-                    <img src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : $user->avatar ?>"/>
+                    <img src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : getOriginAvatar($user->avatar) ?>"/>
                 </span>
             </div>
             <h3><?= $user->truename ?>

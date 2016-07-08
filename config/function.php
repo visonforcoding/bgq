@@ -55,3 +55,12 @@ function errorMsg($entity,$msg) {
     }
     return empty($message)?$msg:$message;
 }
+
+/**
+ * 
+ * @param type $thumb
+ * @return type
+ */
+function getOriginAvatar($thumb){
+  return   preg_replace('/thumb_/', '',$thumb);
+}
