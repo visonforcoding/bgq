@@ -133,7 +133,8 @@ class AlipayComponent extends Component {
         //排序
         ksort($para_filter);
         reset($para_filter);
-        $dataWait = $this->buildLinkString($para_filter);
+//        $dataWait = $this->buildLinkString($para_filter);
+        $dataWait = http_build_query($para_filter);
         \Cake\Log\Log::debug($dataWait,'devlog');
         $res = openssl_get_publickey($this->alipay_public_key);
         \Cake\Log\Log::debug($res,'devlog');
