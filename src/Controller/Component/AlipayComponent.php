@@ -153,6 +153,7 @@ class AlipayComponent extends Component {
         } else {
             //生成签名结果
             $data = $this->request->data();
+            \Cake\Log\Log::debug($data,'devlog');
             $isSign = $this->rsaVerify($data);
             if ($isSign && !empty($data['notify_id'])) {
                 //获取支付宝远程服务器ATN结果（验证是否是支付宝发来的消息）
