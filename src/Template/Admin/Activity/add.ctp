@@ -108,13 +108,7 @@
         <label class="col-md-2 control-label">活动内容</label>
         <div class="col-md-8">
             <script name='body' id='content' rows='3' type="text/plain" class='form-control-editor'>
-                <p>活动介绍：</p>
-                <p><br/></p>
-                <p><br/></p>
-                <p>活动流程：</p>
-                <p><br/></p>
-                <p><br/></p>
-                <p>参与嘉宾：</p>
+                <p>流程介绍：</p>
                 <p><br/></p>
                 <p><br/></p>
                 <p>联系方式：<br/></p>
