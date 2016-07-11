@@ -134,11 +134,12 @@ class AlipayComponent extends Component {
         ksort($para_filter);
         reset($para_filter);
         $dataWait = $this->buildLinkString($para_filter);
+        \Cake\Log\Log::error($dataWait,'devlog');
         $res = openssl_get_publickey($this->alipay_public_key);
         $result = (bool) openssl_verify($dataWait, base64_decode($sign), $res);
         openssl_free_key($res);
         if(!$result){
-            \Cake\Log\Log::error(__FILE__,'devlog');
+            \Cake\Log\Log::error(__FUNCTION__,'devlog');
             \Cake\Log\Log::error('验签失败','devlog');
         }
         return $result;
