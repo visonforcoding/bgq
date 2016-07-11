@@ -19,8 +19,9 @@
     </div>
     <ul class="m-info-box">
         <li>
-            <h3><?= $biggie->truename ?><em><?= $biggie->company ?></em><em><?= $biggie->position ?></em></h3>
-            <span class="identification"></span>
+            <h3><?= $biggie->truename ?><em><?= $biggie->position ?></em></h3>
+            <!-- <span class="identification"></span> -->
+            <h3 class="mycustorm" ><?= $biggie->company ?></h3>
         </li>
         <li>
             <a id="recom" href="javascript:void(0);" class="tocommend"><i class="iconfont f7">&#xe615;</i>推荐他</a>
