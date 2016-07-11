@@ -113,6 +113,24 @@ class AlipayComponent extends Component {
         }
         return $string;
     }
+    /**
+     * 
+     * @param type $params
+     */
+    public function buildLinkStringNo($params) {
+        $string = '';
+        foreach ($params as $key => $value) {
+            $string.= $key . '="' . $value . '"&';
+        }
+        //去掉最后一个&字符
+        $string = substr($string, 0, count($string) - 2);
+
+        //如果存在转义字符，那么去掉转义
+        if (get_magic_quotes_gpc()) {
+            $string = stripslashes($string);
+        }
+        return $string;
+    }
 
     /**
      * RSA验签
@@ -133,8 +151,7 @@ class AlipayComponent extends Component {
         //排序
         ksort($para_filter);
         reset($para_filter);
-//        $dataWait = $this->buildLinkString($para_filter);
-        $dataWait = http_build_query($para_filter);
+        $dataWait = $this->buildLinkStringNo($para_filter);
         \Cake\Log\Log::debug($dataWait,'devlog');
         $res = openssl_get_publickey($this->alipay_public_key);
         \Cake\Log\Log::debug($res,'devlog');
