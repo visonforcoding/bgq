@@ -166,12 +166,14 @@ class AlipayComponent extends Component {
                     return false;
                 }
                 $responseTxt = $response->body();
+                \Cake\Log\Log::debug($responseTxt,'devlog');
                 if (preg_match("/true$/i", $responseTxt) && $isSign) {
                     return true;
                 } else {
                     return false;
                 }
             } else {
+                \Cake\Log\Log::error('支付宝支付验签失败','devlog');
                 return false;
             }
         }
