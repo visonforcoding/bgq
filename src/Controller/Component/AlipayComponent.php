@@ -218,7 +218,7 @@ class AlipayComponent extends Component {
             $OrderTable = \Cake\ORM\TableRegistry::get('Order');
             $order = $OrderTable->find()->contain(['Sellers', 'Users'])->where(['Lmorder.status' => 0, 'order_no' => $order_no])->first();
             if ($order) {
-                $realFee = $data['total_fee '];
+                $realFee = $data['total_fee'];
                 $out_trade_no = $data['trade_no'];
                 $this->Business->handOrder($order, $realFee, 2, $out_trade_no);
             } else {
