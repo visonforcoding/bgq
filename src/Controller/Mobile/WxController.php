@@ -164,11 +164,13 @@ class WxController extends AppController {
     }
     
     public function aliNotify(){
+        \Cake\Log\Log::debug('进入支付宝支付回调');
         $this->loadComponent('Alipay');
         if(!$this->Alipay->notifyVerify()){
             return;
         }
-            
+        $this->Alipay->notify();
+        
     }
 
     /**
