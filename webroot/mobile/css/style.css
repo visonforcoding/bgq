@@ -1,16 +1,17 @@
 /*登录主体 --start*/
 .login-area{padding:0.85rem 0.37rem 1.6rem; overflow:hidden;width:100%;position:relative;}
-.login-area .loginbox{border-radius:5px; background: #fff;}
-.loginbox span{display:inline-block; margin-left:0.42rem;}
-.loginbox input{border:none;outline:none;font-size:0.3rem;color:#222c38;padding-left:0.4rem;height:100%;}
-.loginbox .username,.loginbox .password{height:1.43rem;border-bottom:1px #c8c7cc solid;
-/*display:-webkit-flex;display: flex;-webkit-align-items: center;align-items: center;*/line-height: 1.43rem;font-size:0;}
+.login-area .loginbox{border-radius:5px; background: #fff;box-sizing: border-box;line-height: 1.4rem;}
+.loginbox span{display:block;margin-top:0.53rem;}
+.loginbox input{border:none;outline:none;font-size:0.3rem;color:#222c38;height:1.4rem;}
+.loginbox .label{float:left;height:1.4rem;margin-left:-0.56rem;}
+.loginbox .username,.loginbox .password{border-bottom:1px #c8c7cc solid;padding-left:1.2rem;
+/*display:-webkit-flex;display: flex;-webkit-align-items: center;align-items: center;*/}
 .loginbox .password{border-bottom:none;}
-.loginbox .username input{width:5.6rem;}
-.loginbox .username span{background:url(img/ren.png) no-repeat;width:0.25rem;height:0.29rem;background-size:contain;}
+.loginbox .username input{width:5.4rem;}
+.loginbox .username span{background:url(img/ren.png) no-repeat;width:0.25rem;height:0.29rem;background-size:contain;margin-top:0.56rem;}
 .loginbox .password span{background: url(img/pass.png) no-repeat;width:0.27rem;height:0.34rem; background-size:contain;}
-.loginbox .password input{width:3.6rem;}
-.loginbox .password button{color:#e01a48;border: none;background-color: #fff;font-size:0.26rem;width:2.2rem;height:100%;float:right;}
+.loginbox .password input{width:3.4rem;}
+.loginbox .password button{color:#e01a48;border: none;background-color: #fff;font-size:0.26rem;width:2rem;line-height:1.4rem;float:right;}
 .login-area .submit{display:block;width:5.6rem;margin-left:0.58rem;background:#e01a48; color:#fff;text-align: center;border-radius: 0.2rem;margin:0 auto;margin-top:0.76rem;margin-bottom:0.56rem;font-size:0.32rem;
 outline:none;height:0.8rem;line-height: 0.78rem;}
 .tips{position:absolute;left:50%;top:50%; margin-left:-2.5rem;margin-top:-1.25rem;border-radius:0.05rem;color:#333;border:1px #9ba4ad solid;width:5rem;height:2.5rem;background: red;padding:0.1rem;overflow:hidden; background: #fff;}
@@ -63,12 +64,12 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 /*news --start--*/
 .inner .news-serch{ width:0.32rem;height:0.32rem;font-size:0.32rem;top:0.29rem;}
 .a-banner{width:100%;height:4rem;position:relative;}
-.a-search-box{position:fixed;top:0.6rem;width:100%; padding:0 0.68rem;z-index:3;max-width:1080px;}
-.a-search{/*display: flex;align-items: center;*/background:rgba(255,255,255,.5); width:100%;border-radius: 0.1rem;height:0.6rem;line-height: 0.6rem;}
+.a-search-box{position:fixed;top:0.6rem;width:100%; padding:0 0.68rem;z-index:3;max-width:750px;}
+.a-search{/*display: flex;align-items: center;*/background:rgba(255,255,255,.5); width:100%;border-radius: 0.1rem;height:34px;line-height: 34px;}
 .a-search a{}
-.a-search i{color:#fff;font-size:0.3rem;margin-left:0.2rem;float:left;width:0.4rem;}
+.a-search i{color:#fff;font-size:18px;margin-left:0.2rem;float:left;width:26px;}
 .a-search .s-con{padding-right:0.2rem;float:left;width:85%;}
-.a-search .s-con input{/*font-size:0.3rem;height:0.6rem;line-height:0.6rem;*/background: none;border:none;color:#fff;width:90%;line-height:0.6rem;display:block;height:0.6rem;font-size:0.3rem;}
+.a-search .s-con input{/*font-size:0.3rem;height:0.6rem;line-height:0.6rem;*/background: none;border:none;color:#fff;width:90%;line-height:34px;display:block;height:34px;font-size:16px;padding:0;}
 .pic-list-container{width:2000%;position:relative;overflow:hidden;}
 .pic-list-container li{width:7.5rem;float:left;/*height:2.95rem;*/}
 .pic-list-container li a{display: block;width:100%;height:4rem;overflow:hidden;}
@@ -781,3 +782,13 @@ background-size:3.82rem 1.9rem;margin-top:1rem;}
 .btnlist a:nth-of-type(2) i{background: url(img/ho.png) no-repeat;width:0.38rem;height:0.37rem;background-size: contain;}
 .btnlist a:nth-of-type(3) i{background: url(img/ba.png) no-repeat;width:0.4rem;height:0.32rem;background-size: contain;}
 .scroller{overflow-y: scroll;width:100%;height:100%;-webkit-overflow-scrolling: touch;}
+@media only screen and (min-width: 750px){
+	.newsbox .sec-news-l,.vipinfo{width:450px;}
+	.footer{height:120px;}
+	.navfooter li span{font-size:40px;height:50px;}
+	.navfooter li a{font-size:30px;line-height: 32px;}
+	.newsbox .sec-news-l h3,.newsbox .sec-news-l p{font-size:30px;line-height: 32px;}
+	.dk ul{width:800%;}
+	.loginbox .password input{width:300px;}
+	.loginbox .password button{width:200px;}
+}
