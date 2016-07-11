@@ -365,12 +365,13 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .m-tomore-bottom span i{margin-right:0.12rem;font-size:0.26rem;}
 .m-info-box{overflow:hidden;border-bottom:1px #e5e5e5 solid;border-top:1px #e5e5e5 solid; background: #fff;margin-top:4rem;margin-bottom:0.2rem;}
 .m-info-box li{padding:0.3rem 0;margin:0 0.3rem;border-bottom:1px #e5e5e5 solid;/* display: flex; justify-content: space-between;*/font-size:0.28rem;overflow:hidden;}
-.m-info-box li em{margin-left:0.2rem;font-size:0.3rem;font-weight:500;}
+.m-info-box li em{margin-left:0.2rem;font-size:0.3rem;font-weight:500;color:#9ba4ad}
 .commendnum{width:85%;}
 .m-info-box li:last-child{border-bottom:none;}
 .conr{background: url(img/right.png) right center no-repeat;background-size:0.16rem 0.25rem;}
 .m-info-box li h3{font-size:0.32rem;color:#222c38;line-height: 0.4rem;font-weight:600;}
-.m-info-box li h3{float:left;}
+.m-info-box li h3{/*float:left;*/}
+.m-info-box li .mycustorm{font-weight: 100;margin-top:0.1rem;font-size:0.32rem;color:#9ba4ad}
 .m-info-box li:first-of-type span{margin-top:0.1rem;}
 .m-info-box li:first-of-type span,.m-info-box li:nth-of-type(2) a{float:right;line-height:0.4rem;}
 .m-info-box li a.tocommend{float:left;margin-right:0.2rem;}
@@ -496,7 +497,7 @@ background-size: contain;}
 .h-home-bottom div.t-home-top a{display: inline-block;}
 .h-home-bottom h3 .v{background: url(img/v.png) no-repeat;width:0.3rem;height:0.3rem;background-size:contain;display: inline-block;}
 .h-home-bottom div.t-home-top span img{width:2.31rem;height:2.31rem;display: block;border-radius: 50%;margin: 0.04rem;}
-.h-home-bottom h3 i{font-size:0.32rem;margin-left:0.15rem;color:#fff;vertical-align: middle;}
+.h-home-bottom h3 i{font-size:0.32rem;margin-left:0.05rem;color:#fff;vertical-align: middle;}
 .h-home-bottom h3{font-size:0.36rem;line-height: 0.4rem;margin-bottom:0.1rem;color:#fff;text-align: center;font-weight: bold;text-indent: 0.2rem;}
 .h-home-bottom h3 span{display: block;font-size:0.3rem;line-height: 0.4rem;}
 .h-home-bottom .tofocus-m span{color:#fff;border:1px #fff solid;padding:0.03rem 0.1rem;border-radius: 0.1rem; margin-right: 0.35rem;}
