@@ -57,7 +57,7 @@ class AlipayComponent extends Component {
         $this->seller_id = $conf['seller_id'];
         $this->private_key = file_get_contents($conf['private_key']);
         $this->sslkey_path = $conf['sslkey_path'];
-        $this->alipay_public_key = $conf['alipay_public_key'];
+        $this->alipay_public_key = file_get_contents($conf['alipay_public_key']);
         $this->notify_url = $this->request->scheme() . '://' . $_SERVER['SERVER_NAME'] . $conf['notify_url'];
     }
 
@@ -134,10 +134,13 @@ class AlipayComponent extends Component {
         ksort($para_filter);
         reset($para_filter);
         $dataWait = $this->buildLinkString($para_filter);
-        $pubKey = file_get_contents($this->alipay_public_key);
-        $res = openssl_get_publickey($pubKey);
+        $res = openssl_get_publickey($this->alipay_public_key);
         $result = (bool) openssl_verify($dataWait, base64_decode($sign), $res);
         openssl_free_key($res);
+        if(!$result){
+            \Cake\Log\Log::error(__FILE__,'devlog');
+            \Cake\Log\Log::error('验签失败','devlog');
+        }
         return $result;
     }
 
@@ -157,6 +160,7 @@ class AlipayComponent extends Component {
             $isSign = $this->rsaVerify($data);
             if ($isSign && !empty($data['notify_id'])) {
                 //获取支付宝远程服务器ATN结果（验证是否是支付宝发来的消息）
+                \Cake\Log\Log::error('验证通过，开始验证ANT结果','devlog');
                 $responseTxt = 'false';
                 $notify_id = $data['notify_id'];
                 $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
