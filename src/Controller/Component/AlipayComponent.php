@@ -120,7 +120,7 @@ class AlipayComponent extends Component {
     public function buildLinkStringNo($params) {
         $string = '';
         foreach ($params as $key => $value) {
-            $string.= $key . '="' . $value . '"&';
+            $string.= $key . '=' . $value . '&';
         }
         //去掉最后一个&字符
         $string = substr($string, 0, count($string) - 2);
