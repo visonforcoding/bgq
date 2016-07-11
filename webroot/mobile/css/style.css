@@ -2,7 +2,7 @@
 .login-area{padding:0.85rem 0.37rem 1.6rem; overflow:hidden;width:100%;position:relative;}
 .login-area .loginbox{border-radius:5px; background: #fff;}
 .loginbox span{display:inline-block; margin-left:0.42rem;}
-.loginbox input{border:none;outline:none;font-size:0.3rem;color:#222c38;text-indent:0.4rem;height:100%;}
+.loginbox input{border:none;outline:none;font-size:0.3rem;color:#222c38;padding-left:0.4rem;height:100%;}
 .loginbox .username,.loginbox .password{height:1.43rem;border-bottom:1px #c8c7cc solid;
 /*display:-webkit-flex;display: flex;-webkit-align-items: center;align-items: center;*/line-height: 1.43rem;font-size:0;}
 .loginbox .password{border-bottom:none;}
