@@ -57,7 +57,7 @@ class AlipayComponent extends Component {
         $this->seller_id = $conf['seller_id'];
         $this->private_key = file_get_contents($conf['private_key']);
         $this->sslkey_path = $conf['sslkey_path'];
-        $this->public_key = $conf['alipay_public_key'];
+        $this->alipay_public_key = $conf['alipay_public_key'];
         $this->notify_url = $this->request->scheme() . '://' . $_SERVER['SERVER_NAME'] . $conf['notify_url'];
     }
 
