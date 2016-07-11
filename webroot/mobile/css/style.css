@@ -6,7 +6,7 @@
 .loginbox .username,.loginbox .password{height:1.43rem;border-bottom:1px #c8c7cc solid;
 /*display:-webkit-flex;display: flex;-webkit-align-items: center;align-items: center;*/line-height: 1.41rem;}
 .loginbox .password{border-bottom:none;}
-.loginbox .username input{width:5.96rem;}
+.loginbox .username input{width:5.8rem;}
 .loginbox .username span{background:url(img/ren.png) no-repeat;width:0.25rem;height:0.29rem;background-size:cover;}
 .loginbox .password span{background: url(img/pass.png) no-repeat;width:0.27rem;height:0.34rem; background-size:contain;}
 .loginbox .password input{width:3.6rem;}
