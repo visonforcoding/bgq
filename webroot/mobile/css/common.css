@@ -8,7 +8,7 @@ blockquote, q { quotes: none; }
 blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
 table { border-collapse: collapse; border-spacing: 0; }
 *{ tap-highlight-color: rgba(0, 0, 0, 0); -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -ms-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; }
-body {font: 16px / 0.24rem 'Microsoft YaHei', 'STHeiti',Helvetica,Arial,sans-serif; min-width:320px;max-width: 1080px;width:100%;margin:0 auto; -webkit-overflow-scrolling: touch;  overflow-scrolling: touch;}
+body {font: 16px / 0.24rem 'Microsoft YaHei', 'STHeiti',Helvetica,Arial,sans-serif; min-width:320px;max-width: 750px;width:100%;margin:0 auto; -webkit-overflow-scrolling: touch;  overflow-scrolling: touch;box-shadow: 0 0 10px rgba(0,0,0,.3);}
 input, textarea, button, input, select{ outline: 0; resize: none;font-size:100%;font-family:'Microsoft YaHei';background: rgba(255,255,255,0);}
 html{ outline: 0;-webkit-text-size-adjust:none;}
 html,body { width: 100%;}
@@ -106,7 +106,7 @@ header a{ font-size:0.28rem; color:#fff;}
 header .toback{position:absolute;left:0;top:0.2rem;background: url(img/icon1.png) no-repeat;background-size:cover;width:0.17rem;height:0.29rem;}
 header .h-regiser{position:absolute;right:0;top:0.3rem;}
 /*footer*/
-footer{position:fixed;bottom:0;overflow:hidden;width:100%;z-index:2;max-width:1080px;margin:0 auto;}
+footer{position:fixed;bottom:0;overflow:hidden;width:100%;z-index:2;max-width:750px;margin:0 auto;}
 footer h1,.wxlogin h1{width:100%; font-size:0.32rem;color:#222c38;text-align:center;height:0.88rem;line-height:0.88rem;border-bottom:1px #e5e5e5 solid;}
 .wxlogin{overflow:hidden;width:100%;}
 footer .othertype,.wxlogin .othertype{padding:0.35rem 0;width:100%;}
