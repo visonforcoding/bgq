@@ -50,7 +50,7 @@
             <?php foreach ($biggie->subjects as $v): ?>
                 <li>
                     <div class="inner-li-items">
-                        <h3><?= $v['title'] ?><span><?php if ($v['type'] == 1): ?>一对一<?php else: ?>一对多<?php endif; ?>面谈</span></h3>
+                        <h3><?= $v['title'] ?><span><?php if ($v['type'] == 1): ?>一对一面谈<?php else: ?>众筹约见<?php endif; ?></span></h3>
                         <a class="alink" href="/meet/subject-detail/<?= $v->id ?>">
                             <div class='m-center-con'>
                                 <p>
