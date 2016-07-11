@@ -94,8 +94,8 @@ class WxController extends AppController {
     public function getUserCodeBase() {
         $res = $this->Wx->getUser();
         //微信静默登录
-        \Cake\Log\Log::debug('静默登录','devlog');
-        \Cake\Log\Log::debug($res,'devlog');
+        \Cake\Log\Log::debug('静默登录', 'devlog');
+        \Cake\Log\Log::debug($res, 'devlog');
         $this->request->session()->write('Login.wxbase', true);
         $user = false;
 //        if (isset($res->unionid)) {
@@ -103,11 +103,11 @@ class WxController extends AppController {
 //            $user = $this->User->findByUnion_idAndEnabled($union_id,1)->first();
 //        }elseif (isset($res->openid)) {
         $open_id = $res->openid;
-        $user = $this->User->findByWx_openidAndEnabled($open_id,1)->first();
+        $user = $this->User->findByWx_openidAndEnabled($open_id, 1)->first();
 //        }
         if ($user) {
             //通过微信 获取到 在平台上有绑定的用户  就默认登录
-            if(empty($user->union_id)&&isset($res->unionid)){
+            if (empty($user->union_id) && isset($res->unionid)) {
                 $user->union_id = $res->unionid;
                 $this->User->save($user);
             }
@@ -129,7 +129,7 @@ class WxController extends AppController {
         $body = '预约话题《' . $order->subject_book->subject->title . '》支付';
         $out_trade_no = $order->order_no;
         $openid = $this->user->wx_openid;
-        if(empty($openid)){
+        if (empty($openid)) {
             
         }
         //$fee = intval(($order->price)*100);  //支付金额(分)
@@ -137,20 +137,20 @@ class WxController extends AppController {
         $this->loadComponent('Wxpay');
         $isApp = false;
         $aliPayParameters = '';
-        if($this->request->is('lemon')){
+        if ($this->request->is('lemon')) {
             $isApp = true;
             $openid = $this->user->app_wx_openid;
             $this->loadComponent('Alipay');
             $aliPayParameters = $this->Alipay->setPayParameter($out_trade_no, '并购帮-预约话题', $fee, $body);
         }
-        $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee,null,$isApp);
+        $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, null, $isApp);
         $this->set(array(
             'jsApiParameters' => $jsApiParameters,
-            'isWx'=>  $this->request->is('weixin')?true:false,
-            'aliPayParameters'=>$aliPayParameters,
+            'isWx' => $this->request->is('weixin') ? true : false,
+            'aliPayParameters' => $aliPayParameters,
         ));
         $book = $order->subject_book;
-        $this->set(['pageTitle'=>'话题支付']);
+        $this->set(['pageTitle' => '话题支付']);
         $this->set(compact('book'));
     }
 
@@ -162,15 +162,17 @@ class WxController extends AppController {
         $this->Wxpay->notify();
         exit();
     }
-    
-    public function aliNotify(){
+
+    public function aliNotify() {
         \Cake\Log\Log::debug('进入支付宝支付回调');
         $this->loadComponent('Alipay');
-        if(!$this->Alipay->notifyVerify()){
-            return;
+        if (!$this->Alipay->notifyVerify()) {
+            echo 'fail';
+        } else {
+            $this->Alipay->notify();
+            echo 'success';
         }
-        $this->Alipay->notify();
-        
+        exit();
     }
 
     /**
@@ -181,7 +183,7 @@ class WxController extends AppController {
         if ($this->request->isPost()) {
             $code = $this->request->data('code');
             $res = $this->Wx->getUser($code, true);
-            \Cake\Log\Log::debug($res,'devlog');
+            \Cake\Log\Log::debug($res, 'devlog');
             if (!$res) {
                 //获取到openid 有问题
                 return $this->Util->ajaxReturn(['status' => false, 'msg' => '与微信服务器交互出现问题']);
@@ -195,9 +197,9 @@ class WxController extends AppController {
                     $user->app_wx_openid = $open_id;
                     $this->User->save($user);
                 }
-                $this->request->session()->write('Login.login_token',$user->user_token);
+                $this->request->session()->write('Login.login_token', $user->user_token);
                 $this->request->session()->write('User.mobile', $user);
-                return $this->Util->ajaxReturn(['status' => true, 'msg' => '登陆成功', 'redirect_url' => '/home/index','token_uin'=>$user->user_token]);
+                return $this->Util->ajaxReturn(['status' => true, 'msg' => '登陆成功', 'redirect_url' => '/home/index', 'token_uin' => $user->user_token]);
             } else {
                 //未注册过
                 $headimgurl = $res->headimgurl;
@@ -208,36 +210,34 @@ class WxController extends AppController {
             }
         }
     }
-    
+
     /**
      * 支付成功
      */
-    public function paySuccess(){
+    public function paySuccess() {
         $this->set([
-            'pageTitle'=>'支付结果页'
+            'pageTitle' => '支付结果页'
         ]);
     }
-    
-    public function wxUploadPic($id){
-        $path = $this->Wx->wxUpload($id);  
-        return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'上传成功', 'path'=>$path]);
+
+    public function wxUploadPic($id) {
+        $path = $this->Wx->wxUpload($id);
+        return $this->Util->ajaxReturn(['status' => true, 'msg' => '上传成功', 'path' => $path]);
     }
-    
-    
+
     /**
      * 记录js的调试
      * @return type
      */
-    public function jsLog(){
-       $content = $this->request->query('content');
-       \Cake\Log\Log::error('js错误','devlog');
-        $res = \Cake\Log\Log::error($content,'devlog');
-        if($res){
+    public function jsLog() {
+        $content = $this->request->query('content');
+        \Cake\Log\Log::error('js错误', 'devlog');
+        $res = \Cake\Log\Log::error($content, 'devlog');
+        if ($res) {
             return $this->Util->ajaxReturn(true, 'ok');
-        }else{
-            return $this->Util->ajaxReturn(false,'error');
+        } else {
+            return $this->Util->ajaxReturn(false, 'error');
         }
-       
     }
 
 }

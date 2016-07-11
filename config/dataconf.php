@@ -38,6 +38,7 @@ return [
         'partner' => '2088221650569093',  //合作者身份
         'seller_id' => 'maclub@chinama.club',
         'notify_url'=>'/wx/ali-notify',
+        'sslkey_path'=>dirname(__FILE__).'/alipay/cacert.pem',
         'private_key'=>  dirname(__FILE__).'/alipay/key/rsa_private_key.pem',
         'alipay_public_key'=>  dirname(__FILE__).'/alipay/key/alipay_public_key.pem',
     ],
