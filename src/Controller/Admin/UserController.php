@@ -32,6 +32,12 @@ class UserController extends AppController {
         $user = $this->User->get($id, [
             'contain' => ['Industries']
         ]);
+        $genderConf = \Cake\Core\Configure::read('gender');
+        $levelConf = \Cake\Core\Configure::read('userLevel');
+        $savantStatusConf = \Cake\Core\Configure::read('savantStatus');
+        $user->gender = $genderConf[$user->gender];
+        $user->level = $levelConf[$user->level];
+        $user->savant_status = $savantStatusConf[$user->savant_status];
         $this->set('user', $user);
         $this->set('_serialize', ['user']);
     }
