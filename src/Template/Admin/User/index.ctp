@@ -192,7 +192,7 @@
                 title: '查看详情',
                 shadeClose: true,
                 shade: 0.8,
-                area: ['380px', '70%'],
+                area: ['580px', '70%'],
                 content: url//iframe的url
             });
         }

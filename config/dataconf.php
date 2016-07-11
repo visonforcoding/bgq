@@ -39,6 +39,7 @@ return [
         'seller_id' => 'maclub@chinama.club',
         'notify_url'=>'/wx/ali-notify',
         'private_key'=>  dirname(__FILE__).'/alipay/key/rsa_private_key.pem',
+        'alipay_public_key'=>  dirname(__FILE__).'/alipay/key/alipay_public_key.pem',
     ],
     'umeng' => [
         'AppKey' => '57552eac67e58e5bdb001c6c',
