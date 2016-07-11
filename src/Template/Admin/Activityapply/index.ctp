@@ -39,13 +39,14 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '活动', '提交时间', '更新时间', '是否置顶', '操作'],
+                                ['用户', '活动', '提交时间', '更新时间', '是否置顶', '是否签到', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'activity.title', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
                             {name: 'is_top', editable: true, align: 'center', formatter: topFormatter},
+                            {name: 'is_sign', editable: true, align: 'center', formatter: signFormatter},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: 30,
@@ -87,6 +88,17 @@
                     {
                         response = '否';
                     } else if (rowObject.is_top == 1)
+                    {
+                        response = '是';
+                    }
+                    return response;
+                }
+                
+                function signFormatter(cellvalue, options, rowObject) {
+                    if (rowObject.is_sign == 0)
+                    {
+                        response = '否';
+                    } else if (rowObject.is_sign == 1)
                     {
                         response = '是';
                     }

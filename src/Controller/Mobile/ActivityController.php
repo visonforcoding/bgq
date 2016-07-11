@@ -762,8 +762,8 @@ class ActivityController extends AppController {
     
     public function test(){
         $this->loadComponent('Push');
-//        $res = $this->Push->sendAll('感谢使用并购帮APP', '非常感谢使用并购帮APP，并购帮专注并购人的生活方式', '你有一条推送', false);
-        $res = $this->Push->check('us11905146820872013101');
+        $res = $this->Push->sendAll('感谢使用并购帮APP', '非常感谢使用并购帮APP，并购帮专注并购人的生活方式', '你有一条推送', true);
+//        $res = $this->Push->check('us24920146821107191101');
         debug($res);
         exit();
     }
