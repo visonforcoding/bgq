@@ -11,7 +11,7 @@
             <div class="a-other-info innercon ac">
                 <a><?= $activity->region->name; ?></a>
                 <?php foreach ($activity->industries as $k => $v): ?>
-                    <a><?= $v->name; ?></a>
+                    <a href="/activity/search"><?= $v->name; ?></a>
                 <?php endforeach; ?>
             </div>
         </section>
