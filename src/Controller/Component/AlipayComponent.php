@@ -147,6 +147,7 @@ class AlipayComponent extends Component {
      */
     public function notifyVerify() {
         if (!$this->request->is('post')) {//判断POST来的数组是否为空
+            \Cake\Log\Log::error('支付宝回调请求方式错误','devlog');
             return false;
         } else {
             //生成签名结果
