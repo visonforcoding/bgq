@@ -42,9 +42,14 @@ return [
         'private_key'=>  dirname(__FILE__).'/alipay/key/rsa_private_key.pem',
         'alipay_public_key'=>  dirname(__FILE__).'/alipay/key/alipay_public_key.pem',
     ],
-    'umeng' => [
+    'umeng_android' => [
         'AppKey' => '57552eac67e58e5bdb001c6c',
         'AppMasterSecret' => 'vq6gyz0uztuke0yz5wcodsluhfm339vf',
         'UmengMessageSecret' => '795ffe74e61cd9b28cba5efd98f97171',
+    ],
+    'umeng_ios' => [
+        'AppKey' => '57568930e0f55ab0d1002af0',
+        'AppMasterSecret' => 'yfmgulh7mqcyfbbmax5wpmughka4mwv2',
+//        'UmengMessageSecret' => '795ffe74e61cd9b28cba5efd98f97171',
     ]
 ];

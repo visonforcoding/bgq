@@ -6,7 +6,7 @@
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <title><?=$pageTitle  ?></title>
+        <title><?= isset($pageTitle) ? $pageTitle : '并购帮'; ?></title>
         <link rel="stylesheet" type="text/css" href="/mobile/css/common.css"/>
         <link rel="stylesheet" type="text/css" href="/mobile/css/style.css"/>
         <script type="text/javascript">
