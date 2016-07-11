@@ -423,6 +423,7 @@ class BusinessComponent extends Component {
             $this->Sms->sendByQf106($order->seller->phone,$seller_msg);
             $buyer_msg = '您已支付成功,可凭短信赴约,专家:'.$order->seller->truename.'手机号:'.$order->seller->phone;
             $this->Sms->sendByQf106($order->user->phone, $buyer_msg);
+            return true;
         }
     }
 
