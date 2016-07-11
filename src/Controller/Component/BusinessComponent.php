@@ -372,11 +372,14 @@ class BusinessComponent extends Component {
     /**
      * 处理订单业务
      * @param \App\Model\Entity\Order $order
+     * @param float $realFee 实际支付金额
+     * @param int $payType 支付方式
+     * @param string $out_trade_no 第三方平台交易号
      */
-    public function handOrder(\App\Model\Entity\Order $order) {
+    public function handOrder(\App\Model\Entity\Order $order,$realFee,$payType,$out_trade_no) {
         if ($order->type == 1) {
             //处理预约
-            $this->handMeetOrder($order);
+            $this->handMeetOrder($order,$realFee,$payType,$out_trade_no);
         }
     }
 
@@ -384,12 +387,15 @@ class BusinessComponent extends Component {
      * 处理预约订单 1.预约状态更改 2.订单状态更改 3.专家 余额更改 4.交易流水记录生成
      * @param \App\Model\Entity\Order $order
      */
-    protected function handMeetOrder(\App\Model\Entity\Order $order) {
+    protected function handMeetOrder(\App\Model\Entity\Order $order,$realFee,$payType,$out_trade_no) {
         $book_id = $order->relate_id;
         $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
         $book = $BookTable->get($book_id);
         $book->status = 3; //预约流程完成
         $order->status = 1;  //订单完成
+        $order->fee = $realFee;  //实际支付金额
+        $order->payType = $payType;  //实际支付金额
+        $order->out_trade_no = $out_trade_no;  //第三方订单号
         $pre_amount = $order->seller->money;
         $order->seller->money += $order->price;    //专家余额+
         $order->seller->meet_nums += 1;    // 约见次数+1

@@ -47,8 +47,10 @@ class IndexController extends AppController {
 //        $en_str = Security::encrypt('123', $key,'1');
 //        debug(Security::decrypt($en_str, $key,'1'));
 //        debug(Security::hash(uniqid(),'md5'));
-        $this->loadComponent('Push');
-        $this->Push->test();
+//        $this->loadComponent('Push');
+//        $this->Push->test();
+//        
+//        var_dump(1/100);
         //$en_token = $this->Encrypt->encrypt($token);
         //debug($en_token);
         //debug($this->Encrypt->decrypt($en_str));
