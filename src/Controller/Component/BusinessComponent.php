@@ -394,7 +394,7 @@ class BusinessComponent extends Component {
         $book->status = 3; //预约流程完成
         $order->status = 1;  //订单完成
         $order->fee = $realFee;  //实际支付金额
-        $order->payType = $payType;  //实际支付金额
+        $order->paytype = $payType;  //实际支付金额
         $order->out_trade_no = $out_trade_no;  //第三方订单号
         $pre_amount = $order->seller->money;
         $order->seller->money += $order->price;    //专家余额+
@@ -423,7 +423,6 @@ class BusinessComponent extends Component {
             $this->Sms->sendByQf106($order->seller->phone,$seller_msg);
             $buyer_msg = '您已支付成功,可凭短信赴约,专家:'.$order->seller->truename.'手机号:'.$order->seller->phone;
             $this->Sms->sendByQf106($order->user->phone, $buyer_msg);
-            return true;
         }
     }
 
