@@ -6,6 +6,12 @@
 <link rel="stylesheet" href="/mobile/font/font/iconfont.css" />
 <div class="wraper newswraper">
     <div class="h-home-bottom">
+        <div class='inner h-home-top'>
+                    <a href='/home/my-message-fans' class='iconfont share'>&#xe620;<span class='opci'></span></a>
+                      <!--<h1>个人中心</h1>-->
+                   
+                    <a href="/home/my-install" class='iconfont share'><?php if(!$isWx): ?>&#xe619;设置<?php endif;?></a>
+                </div>
         <a href="/user/home-page/<?= $user->id ?>">
             <div class="t-home-top">
                 <span>
