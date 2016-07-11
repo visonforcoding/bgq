@@ -15,6 +15,7 @@ use App\Controller\Mobile\AppController;
  *
  * @property \App\Model\Table\ActivityTable $Activity
  * @property \App\Controller\Component\BusinessComponent $Business
+ * @property \App\Controller\Component\PushComponent $Push
  */
 class ActivityController extends AppController {
 
@@ -550,10 +551,7 @@ class ActivityController extends AppController {
                 $comment = $this->Activity->Activitycom->get($data['pid']);
                 $doComment->reply_id = $comment->user_id;
 //                $this->Business->usermsg($this->user->id, '', '', $type, $id);
-                //对评论的回复
-                $this->loadComponent('Business');
-                $jump_url = '/activity/view/'.$id.'#allcoment#common_'.$doComment->id;
-                $this->Business->usermsg($comment->user_id,'评论回复','有人回复了你的评论!', 3,$doComment->id,$jump_url);
+                
             } else {
                 $user = $this->Activity->get($id);
                 $doComment->reply_id = $user->user_id;
@@ -562,6 +560,11 @@ class ActivityController extends AppController {
             $res = $this->Activity->Activitycom->save($doComment);
             $newComment[] = $this->Activity->Activitycom->get($res->id, ['contain'=>["Users", "Replyusers"]])->toArray();
             if ($res) {
+                //对评论的回复
+                $this->loadComponent('Business');
+                $jump_url = '/activity/view/'.$id.'#allcoment#common_'.$doComment->id;
+                $this->Business->usermsg($comment->user_id,'评论回复','有人回复了你的评论!', 3, $doComment->id,$jump_url);
+                
                 $activity = $this->Activity->get($id);
                 $activity->comment_nums += 1;
                 $this->Activity->save($activity);
@@ -758,8 +761,11 @@ class ActivityController extends AppController {
     }
     
     public function test(){
-        $a = $this->request->env('HTTP_HOST');
-        debug($a);die;
+        $this->loadComponent('Push');
+//        $res = $this->Push->sendAll('感谢使用并购帮APP', '非常感谢使用并购帮APP，并购帮专注并购人的生活方式', '你有一条推送', false);
+        $res = $this->Push->check('us11905146820872013101');
+        debug($res);
+        exit();
     }
 
 }
