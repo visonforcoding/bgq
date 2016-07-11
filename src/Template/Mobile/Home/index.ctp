@@ -7,9 +7,12 @@
 <div class="wraper newswraper">
     <div class="h-home-bottom">
         <div class='inner h-home-top'>
-                    <a href='/home/my-message-fans' class='iconfont share'>&#xe620;<span class='opci'></span></a>
+                    <a href='/home/my-message-fans' class='iconfont share'>&#xe620;
+                        <?php if($hasMsg):?>
+                        <span class='opci'></span>
+                        <?php endif; ?>
+                    </a>
                       <!--<h1>个人中心</h1>-->
-                   
                     <a href="/home/my-install" class='iconfont share'><?php if(!$isWx): ?>&#xe619;<?php endif;?></a>
                 </div>
         <a href="/user/home-page/<?= $user->id ?>">

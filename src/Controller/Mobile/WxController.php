@@ -3,8 +3,6 @@
 namespace App\Controller\Mobile;
 
 use App\Controller\Mobile\AppController;
-use App\Utils\Weixin\WeixinSdk;
-use EasyWeChat\Foundation\Application as WXSDK;
 
 /**
  * User Controller
@@ -163,6 +161,14 @@ class WxController extends AppController {
         $this->loadComponent('Wxpay');
         $this->Wxpay->notify();
         exit();
+    }
+    
+    public function aliNotify(){
+        $this->loadComponent('Alipay');
+        if(!$this->Alipay->notifyVerify()){
+            return;
+        }
+            
     }
 
     /**

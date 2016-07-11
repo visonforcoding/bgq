@@ -8,6 +8,7 @@ use Cake\Controller\ComponentRegistry;
 /**
  * 支付宝
  * Alipay component
+ * @property \App\Controller\Component\BusinessComponent $Business
  */
 class AlipayComponent extends Component {
 
@@ -17,6 +18,7 @@ class AlipayComponent extends Component {
      * @var array
      */
     protected $_defaultConfig = [];
+    public $components = ['Business'];
 
     /**
      * 合作者id
@@ -42,6 +44,12 @@ class AlipayComponent extends Component {
      */
     protected $private_key;
 
+    /**
+     * 支付宝公钥
+     * @var type 
+     */
+    protected $alipay_public_key;
+
     public function initialize(array $config) {
         parent::initialize($config);
         $conf = \Cake\Core\Configure::read('alipay');
@@ -50,40 +58,8 @@ class AlipayComponent extends Component {
         $this->private_key = file_get_contents($conf['private_key']);
         $this->sslkey_path = $conf['sslkey_path'];
         $this->key = $conf['key'];
+        $this->public_key = $conf['alipay_public_key'];
         $this->notify_url = $this->request->scheme() . '://' . $_SERVER['SERVER_NAME'] . $conf['notify_url'];
-    }
-
-    /**
-     * 生成签名
-     * @param type $order_no
-     * @param type $order_title
-     * @param type $order_fee
-     * @param type $order_body
-     * @return type
-     */
-    public function setSign($order_no, $order_title, $order_fee, $order_body) {
-        $params = [
-            'service' => 'mobile.securitypay.pay',
-            'partner' => $this->partner,
-            '_input_charset' => 'utf-8',
-            'notify_url' => $this->notify_url,
-            'out_trade_no' => "$order_no",
-            'subject' => $order_title,
-            'payment_type' => '1',
-            'seller_id' => $this->seller_id,
-            'total_fee' => $order_fee,
-            'body' => $order_body,
-        ];
-        ksort($params);
-        $stringA = urldecode(http_build_query($params)); //不要转义的
-        //$stringB = $stringA . '&key=' . $this->key;
-        //$sign = strtoupper(md5($stringB));
-        $res = openssl_get_privatekey($this->private_key);
-        openssl_sign($stringA, $sign, $res);
-        openssl_free_key($res);
-        //base64编码
-        $sign = base64_encode($sign);
-        return $sign;
     }
 
     /**
@@ -137,6 +113,90 @@ class AlipayComponent extends Component {
             $string = stripslashes($string);
         }
         return $string;
+    }
+
+    /**
+     * RSA验签
+     * @param $data 接收的数据
+     * return 验证结果
+     */
+    public function rsaVerify($data) {
+        $sign = $data['sign'];
+        $para_filter = array();
+        //过滤不被签名的数据
+        foreach ($data as $key => $val) {
+            if ($key == "sign" || $key == "sign_type" || $val == "") {
+                continue;
+            } else {
+                $para_filter[$key] = $data[$key];
+            }
+        }
+        //排序
+        ksort($para_filter);
+        reset($para_filter);
+        $dataWait = $this->buildLinkString($para_filter);
+        $pubKey = file_get_contents($this->alipay_public_key);
+        $res = openssl_get_publickey($pubKey);
+        $result = (bool) openssl_verify($dataWait, base64_decode($sign), $res);
+        openssl_free_key($res);
+        return $result;
+    }
+
+    /**
+     * 支付宝的回调验证，验证通过则进行 接下来的业务处理
+     * @return boolean
+     */
+    public function notifyVerify() {
+        if (!$this->request->is('post')) {//判断POST来的数组是否为空
+            return false;
+        } else {
+            //生成签名结果
+            $data = $this->request->data();
+            $isSign = $this->rsaVerify($data);
+            if ($isSign && !empty($data['notify_id'])) {
+                //获取支付宝远程服务器ATN结果（验证是否是支付宝发来的消息）
+                $responseTxt = 'false';
+                $notify_id = $data['notify_id'];
+                $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
+                $verifyAlipayUrl = 'https://mapi.alipay.com/gateway.do?service=notify_verify&partner=' . $this->partner . '&notify_id=' . $notify_id;
+                $response = $httpClient->get($verifyAlipayUrl);
+                if (!$response->isOk()) {
+                    \Cake\Log\Log::error('请求支付宝验证来源失败', 'devlog');
+                    \Cake\Log\Log::error($response, 'devlog');
+                    return false;
+                }
+                $responseTxt = $response->body();
+                if (preg_match("/true$/i", $responseTxt) && $isSign) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+
+    /**
+     * 回调处理
+     */
+    public function notify() {
+        $data = $this->request->data();
+        if (isset($data['trade_status ']) && $data['trade_status'] == 'TRADE_SUCCESS') {
+            //支付宝端成功
+            $order_no = $data['out_trade_no'];
+            $OrderTable = \Cake\ORM\TableRegistry::get('Order');
+            $order = $OrderTable->find()->contain(['Sellers', 'Users'])->where(['Lmorder.status' => 0, 'order_no' => $order_no])->first();
+            if ($order) {
+                $realFee = $data['total_fee '];
+                $out_trade_no = $data['trade_no'];
+                $this->Business->handOrder($order, $realFee, 2, $out_trade_no);
+            } else {
+                \Cake\Log\Log::error('支付宝交易回调查询订单失败,订单号:' . $order_no, 'devlog');
+            }
+        } else {
+            \Cake\Log\Log::error('支付宝交易回调状态异常,状态值:' . $data['out_trade_no'], 'devlog');
+        }
     }
 
 }
