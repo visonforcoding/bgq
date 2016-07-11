@@ -551,7 +551,6 @@ class ActivityController extends AppController {
                 $comment = $this->Activity->Activitycom->get($data['pid']);
                 $doComment->reply_id = $comment->user_id;
 //                $this->Business->usermsg($this->user->id, '', '', $type, $id);
-                
             } else {
                 $user = $this->Activity->get($id);
                 $doComment->reply_id = $user->user_id;
@@ -560,10 +559,12 @@ class ActivityController extends AppController {
             $res = $this->Activity->Activitycom->save($doComment);
             $newComment[] = $this->Activity->Activitycom->get($res->id, ['contain'=>["Users", "Replyusers"]])->toArray();
             if ($res) {
-                //对评论的回复
-                $this->loadComponent('Business');
-                $jump_url = '/activity/view/'.$id.'#allcoment#common_'.$doComment->id;
-                $this->Business->usermsg($comment->user_id,'评论回复','有人回复了你的评论!', 3, $doComment->id,$jump_url);
+                if ($data['pid']) {
+                    //对评论的回复
+                    $this->loadComponent('Business');
+                    $jump_url = '/activity/view/'.$id.'#allcoment#common_'.$doComment->id;
+                    $this->Business->usermsg($comment->user_id, '评论回复', '有人回复了你的评论!', 3, $doComment->id, $jump_url);
+                }
                 
                 $activity = $this->Activity->get($id);
                 $activity->comment_nums += 1;
@@ -762,9 +763,12 @@ class ActivityController extends AppController {
     
     public function test(){
         $this->loadComponent('Push');
-        $res = $this->Push->sendAll('感谢使用并购帮APP', '非常感谢使用并购帮APP，并购帮专注并购人的生活方式', '你有一条推送', true);
-//        $res = $this->Push->check('us24920146821107191101');
+//        $res = $this->Push->sendAll('感谢使用并购帮APP', '非常感谢使用并购帮APP，并购帮专注并购人的生活方式', '你有一条推送', true);
+//        $res = $this->Push->sendAll('感谢使用并购帮APP', '非常感谢使用并购帮APP，并购帮专注并购人的生活方式', '你有一条推送', false);
+        $res = $this->Push->ios_check('us24509146822979010801');
+//        $res1 = $this->Push->android_check('us76823146822886105701');
         debug($res);
+//        debug($res1);
         exit();
     }
 
