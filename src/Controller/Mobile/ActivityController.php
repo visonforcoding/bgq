@@ -19,7 +19,7 @@ use App\Controller\Mobile\AppController;
  */
 class ActivityController extends AppController {
 
-    protected $limit = '5'; // 分页条数
+    protected $limit = '50'; // 分页条数
 
     /**
      * 活动详情
@@ -328,14 +328,12 @@ class ActivityController extends AppController {
         $this->handCheckLogin();
         $this->loadComponent('Business');
         $res = $this->Business->praise($this->user->id, $id, 0);
-        if ($res !== false) {
-            if (is_string($res)) {
-                return $this->Util->ajaxReturn(false, $res);
-            } else {
-                return $this->Util->ajaxReturn(true, '点赞成功');
-            }
-        } else {
-            return $this->Util->ajaxReturn(false, '系统错误');
+        if($res===true){
+            return $this->Util->ajaxReturn(true,'点赞成功');
+        } elseif($res == '取消点赞成功'){
+            return $this->Util->ajaxReturn(true,'取消点赞成功');
+        }else{
+            return $this->Util->ajaxReturn(false, $res);
         }
     }
 

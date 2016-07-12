@@ -27,7 +27,7 @@
                 <span class="readnums">阅读<i><?= $this->Number->format($news->read_nums) ?></i></span>
                 <span  data-id="<?= $news->id ?>" <?php if (isset($news->praises) && !empty($news->praises)): ?> data-disable="1" class="liked"<?php endif; ?>
                        id="news-praise" >
-                    <i class="iconfont like <?php if (isset($news->praises) && !empty($news->praises)): ?>changecolor<?php endif; ?>" >&#xe616;</i><em><?= $this->Number->format($news->praise_nums) ?></em>
+                    <i class="iconfont like <?php if (isset($news->praises) && !empty($news->praises)): ?>changecolor scale<?php endif; ?>" >&#xe616;</i><em><?= $this->Number->format($news->praise_nums) ?></em>
                 </span>
             </div>
         </section>
@@ -293,9 +293,6 @@
                 case 'news-praise':
                     //对文章的赞
                     var obj = $(em);
-                    if (obj.data('disable') === '1') {
-                        return false;
-                    }
                     checkLogin(function () {
                         obj.find('i.like').toggleClass('changecolor');
                         obj.find('i.like').toggleClass('scale');
@@ -304,12 +301,16 @@
                             data: {id: window.__id},
                             func: function (res) {
                                 $.util.alert(res.msg);
+                                console.log(res);
                                 if (res.status) {
-                                    obj.find('em').html(parseInt(obj.find('em').text()) + 1);
+                                    if(obj.find('i.like').hasClass('changecolor')){
+                                        obj.find('em').html(parseInt(obj.find('em').text()) + 1);
+                                    } else {
+                                        obj.find('em').html(parseInt(obj.find('em').text()) - 1);
+                                    }
                                 } else {
                                     obj.find('i.like').toggleClass('changecolor');
                                     obj.find('i.like').toggleClass('scale');
-                                    $.util.alert(msg.msg);
                                 }
                             }
                         });

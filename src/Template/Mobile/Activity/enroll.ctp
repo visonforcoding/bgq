@@ -14,17 +14,23 @@
                     <li class='no-bottom'>费用：<span class='infocard reg-repass'><input type="text" name="apply_fee" placeholder="<?= $activity->apply_fee; ?>元" readonly/></span></li>
                 </ul>
             </div>
-            <a href="#this" class="nextstep" id="submit">提交</a>
+            <div style="margin: 0.1rem 0 0 0.3rem;font-size: 0.3rem;color:red;">活动报名，费用不可退，请谨慎提交</div>
+            <a href="javascript:void(0)" class="nextstep" id="submit">提交</a>
         </form>
     </div>
-
+    <div class='reg-shadow' hidden></div>
+    <div class="totips" style="display:none;">
+        <h3></h3>
+        <span>确定报名以及生成付款订单吗？</span>
+        <a href="javascript:void(0)" class="nextstep topush" id="comfirm">确认</a>
+        <span class='closed'>
+            &times;
+        </span>
+    </div>
 </body>
 <?php $this->start('script'); ?>
 <script>
-    $(document).ready(function () {
-
-    });
-    $('#submit').on('click', function () {
+    $('#comfirm').on('tap', function () {
         $form = $('form');
         $.ajax({
             type: 'post',
@@ -36,8 +42,8 @@
                     if (msg.status === true) {
                         $.util.alert(msg.msg);
                         setTimeout(function () {
-                            window.location.href = '/activity/details/<?= $activity->id ?>';
-                        }, 3000);
+                            window.location.href = '/Wx/meet_pay/activity/<?= $activity->id ?>';
+                        }, 2000);
                     } else {
                         $.util.alert(msg.msg);
                     }
@@ -45,6 +51,14 @@
             }
         });
         return false;
+    });
+    $('#submit').on('tap', function(){
+        $('.reg-shadow').show('slow');
+        $('.totips').show('slow');
+    });
+    $('.closed').on('click', function(){
+        $('.reg-shadow').hide('slow');
+        $('.totips').hide('slow');
     });
 </script>
 <?php
