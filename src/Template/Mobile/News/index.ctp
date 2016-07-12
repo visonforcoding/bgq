@@ -95,7 +95,6 @@
                 return d;
             });
             $('#news').append(html);
-            page++;
         }
     });
 

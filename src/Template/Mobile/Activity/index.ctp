@@ -12,21 +12,12 @@
             </a>
         </div>
         <div class="a-banner">
-            <ul class="pic-list-container" id="imgList">
-                <?php foreach ($banners as $v): ?>
-                    <li><a href="<?= $v->url; ?>"><img src="<?= $v->img; ?>"/></a></li>
-                <?php endforeach; ?>
-            </ul>
-            <div class="yd" id="imgTab">
-                <?php foreach ($banners as $v): ?>
-                    <span class="cur"></span>
-                <?php endforeach; ?>
-            </div>
-            
+            <ul class="pic-list-container" id="imgList"></ul>
+            <div class="yd" id="imgTab"></div>
         </div>
         <div id="activity"></div>
         <div id="buttonLoading" class="loadingbox"></div>
-        <div class="submitbtn subactivity" id="release" user="<?= $user; ?>">
+        <div class="submitbtn subactivity" id="release">
             <img src="/mobile/images/as.png">
         </div>
     </div>
@@ -55,7 +46,9 @@
 <script type="text/html" id="subTpl">
     <a href="javascript:void(0);">{#name#}</a>
 </script>
-
+<script type="text/html" id="bannerTpl">
+    <li><a href="{#url#}"><img back_src="{#img#}"/></a></li>
+</script>
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>
 <script src="/mobile/js/loopScroll.js"></script>
@@ -68,18 +61,31 @@
     }
 </script>
 <script>
-    window.isApply = ',' + <?= $isApply ?> + ',';
-    $.util.dataToTpl('activity', 'activity_tpl',<?= $actjson ?>, function (d) {
-        d.apply_msg = '';
-        d.industries_name = $.util.dataToTpl('', 'subTpl', d.industries);
-        d.region_name = d.region ? '<a>' + d.region.name + '</a>' : '';
-        d.cover = d.thumb ? d.thumb : d.cover;
-        return d;
+    $.getJSON('/activity/get-banner',function(res){
+        if(res.status){
+            var tab=[], html = $.util.dataToTpl('', 'bannerTpl', res.data, function (d) {
+                tab.push('<span></span>');
+                return d;
+            });
+            $('#imgList').html(html);
+            $('#imgTab').html(tab.join(''));
+            var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
+        }
     });
-
-    //轮播
-    var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
-
+    
+    $.getJSON('/activity/getMoreActivity/1', function (res) {
+        if (res.status) {
+            var html = $.util.dataToTpl('', 'activity_tpl', res.data, function (d) {
+                d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
+                d.industries_name = $.util.dataToTpl('', 'subTpl', d.industries);
+                d.region_name = d.region ? '<a>' + d.region.name + '</a>' : '';
+                d.cover = d.thumb ? d.thumb : d.cover;
+                return d;
+            });
+            $('#activity').append(html);
+        }
+    });
+    window.isApply = ',' + <?= $isApply ?> + ',';
     $.util.searchHide();
 </script>
 <?php
