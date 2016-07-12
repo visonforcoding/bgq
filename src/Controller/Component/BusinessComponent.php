@@ -296,7 +296,17 @@ class BusinessComponent extends Component {
         $comlike = $likeTable->find()->where($data)->first();
         if ($comlike) {
             //点过赞
-            return '你已点过赞';
+//            return '你已点过赞';
+            $like = $likeTable->get($comlike->id);
+            $res = $likeTable->connection()->transactional(function()use($likeTable, $like, $relate, $RelateTable) {
+                $relate->praise_nums -=1;
+                return $likeTable->delete($like)&&$RelateTable->save($relate);
+            });
+            if($res){
+                return '取消点赞成功';
+            } else {
+                return '取消点赞失败';
+            }
         }
         $data['msg'] = '进行了点赞';
         $comlike = $likeTable->newEntity($data);

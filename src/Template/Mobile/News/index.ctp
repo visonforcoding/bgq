@@ -16,20 +16,10 @@
         </a>
     </div>
     <div class="a-banner">
-        <ul class="pic-list-container" id="imgList">
-            <?php foreach ($banners as $banner): ?>
-                <li><a href="<?= $banner->url ?>"><img src="<?= $banner->img ?>"/></a></li>
-            <?php endforeach; ?>
-        </ul>
-        <div class="yd" id="imgTab">
-            <span class="cur"></span>
-            <span></span>
-            <span></span>
-        </div>
+        <ul class="pic-list-container" id="imgList"></ul>
+        <div class="yd" id="imgTab"></div>
     </div>
-    <div id="news">
-
-    </div>
+    <div id="news"></div>
     <div id="buttonLoading" class="loadingbox"></div>
 </div>
 
@@ -67,6 +57,9 @@
 <script type="text/html" id="subTpl">
     <a href="#this">{#name#}</a>
 </script>
+<script type="text/html" id="bannerTpl">
+    <li><a href="{#url#}"><img back_src="{#img#}"/></a></li>
+</script>
 <?= $this->element('footer'); ?>
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
@@ -78,16 +71,33 @@
     }
 </script>
 <script>
-    $.util.dataToTpl('news', 'listTpl',<?= $newsjson ?>, function (d) {
-        d.user_id = d.user.id;
-        d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-        d.author = d.user.truename;
-        d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
-        d.cover = d.thumb ? d.thumb : d.cover;
-        return d;
+    $.getJSON('/news/get-banner',function(res){
+        if(res.status){
+            var tab=[], html = $.util.dataToTpl('', 'bannerTpl', res.data, function (d) {
+                tab.push('<span></span>');
+                return d;
+            });
+            $('#imgList').html(html);
+            $('#imgTab').html(tab.join(''));
+            var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
+        }
     });
-    var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
-
+    
+    
+    $.getJSON('/news/get-more-news/1',function(res){
+        if(res.status){
+            var html = $.util.dataToTpl('', 'listTpl', res.data, function (d) {
+                d.user_id = d.user.id;
+                d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                d.author = d.user.truename;
+                d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
+                d.cover = d.thumb ? d.thumb : d.cover;
+                return d;
+            });
+            $('#news').append(html);
+            page++;
+        }
+    });
 
     var page = 2;
     setTimeout(function(){

@@ -38,7 +38,7 @@
                 </span>
                 <!--喜欢按钮-->
                 <span >
-                    <i class="iconfont like <?php if ($isLike): ?> changecolor<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like">&#xe616;</i><span><?= $activity->praise_nums ? $activity->praise_nums : '0' ?></span>
+                    <i class="iconfont like <?php if ($isLike): ?> changecolor scale<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like">&#xe616;</i><span><?= $activity->praise_nums ? $activity->praise_nums : '0' ?></span>
                 </span>
             </div>
         </section>
@@ -205,6 +205,7 @@
         if (d.hasOwnProperty('likes')) {
             if (d['likes'].length) {
                 d.style = 'color:red';
+                d.disable = '1';
             }
         }
         return d;
@@ -261,7 +262,7 @@
                                 d.user_id = d.user.id;
                                 if(d.pid>0)
                                 {
-                                    d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.reply.truename + ' </span>：' + d.body;
+                                    d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.replyuser.truename + ' </span>：' + d.body;
                                 }
                                 d.style = '';
                                 d.disable = '0';
@@ -411,13 +412,16 @@
                         url: '/activity/artLike/' + $(em).attr('artid'),
                         func: function (msg) {
                             if (typeof msg === 'object') {
-                                if (msg.status === true) {
-                                    $('.like').next('span').text(parseInt($('.like').next('span').text())+1);
-                                    $.util.alert(msg.msg);
+                                $.util.alert(msg.msg);
+                                if (msg.status) {
+                                    if($('.like').hasClass('changecolor')){
+                                        $('.like').next('span').text(parseInt($('.like').next('span').text())+1);
+                                    } else {
+                                        $('.like').next('span').text(parseInt($('.like').next('span').text())-1);
+                                    }
                                 } else {
                                     $('.like').toggleClass('scale');
                                     $('.like').toggleClass('changecolor');
-                                    $.util.alert(msg.msg);
                                 }
                             }
                         }

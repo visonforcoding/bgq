@@ -21,16 +21,6 @@ class NewsController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        
-        $news = $this->News->find()
-                        ->contain(['Users', 'Industries'])
-                        ->limit($this->newslimit)->orderDesc('News.create_time')->toArray();
-        //获取资讯banner图
-        $bannerTable = \Cake\ORM\TableRegistry::get('banner');
-        $banners = $bannerTable->find()->where("`enabled` = '1' and `type` = '1'")
-                        ->orderDesc('create_time')->limit(3)->toArray();
-        $this->set(compact('news', 'banners'));
-        $this->set('newsjson', json_encode($news));
         $this->set('pageTitle', '资讯');
     }
 
@@ -185,6 +175,8 @@ class NewsController extends AppController {
             $res = $this->Business->praise($user_id, $relate_id, 1);
             if($res===true){
                 return $this->Util->ajaxReturn(true,'点赞成功');
+            } elseif($res == '取消点赞成功'){
+                return $this->Util->ajaxReturn(true,'取消点赞成功');
             }else{
                 return $this->Util->ajaxReturn(false, $res);
             }
@@ -347,6 +339,14 @@ class NewsController extends AppController {
         } else {
             return $this->Util->ajaxReturn(['status' => false]);
         }
+    }
+    
+    public function getBanner(){
+        //获取资讯banner图
+        $bannerTable = \Cake\ORM\TableRegistry::get('banner');
+        $banners = $bannerTable->find()->where("`enabled` = '1' and `type` = '1'")
+                        ->orderDesc('create_time')->limit(3)->toArray();
+        return $this->Util->ajaxReturn(['status'=>true, 'data'=>$banners]);
     }
     
     public function test(){

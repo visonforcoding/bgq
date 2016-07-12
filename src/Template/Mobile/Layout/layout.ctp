@@ -52,6 +52,8 @@
     <body>
         <?= $this->fetch('content') ?>
         
+        <?= $this->fetch('script') ?>
+        
         <script type="text/javascript" src="/mobile/js/function.js"></script>
         <script>
             (function(){
@@ -141,7 +143,6 @@
 
 
 
-        <?= $this->fetch('script') ?>
         <div class="alert" id="alertPlan" style="display: none;"><span id="alertText"></span></div>
     </body>
 </html>
