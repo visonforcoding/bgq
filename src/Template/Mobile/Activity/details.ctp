@@ -184,7 +184,7 @@
         LEMON.show.shareIco();
         LEMON.sys.back('/activity/index');
 
-    window.__user_id = <?= isset($user) ? $user : 0 ?>;
+    window.__user_id = <?= $user == [] ? $user : '0' ?>;
     window.__id = <?= $activity->id ?>;
     window.activitycom = <?= json_encode($activity->activitycom); ?>;
 </script>
@@ -202,11 +202,9 @@
             d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.replyuser.truename + ' </span>：' + d.body;
         }
         d.style = '';
-        d.disable = '0';
         if (d.hasOwnProperty('likes')) {
             if (d['likes'].length) {
                 d.style = 'color:red';
-                d.disable = '1';
             }
         }
         return d;
