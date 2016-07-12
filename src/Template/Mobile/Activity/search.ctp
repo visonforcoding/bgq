@@ -65,6 +65,7 @@
 <script src="/mobile/js/activity_search.js"></script>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    $('input[name="keyword"]').focus();
     window.isApply = ',' + <?= $isApply ?> + ',';
     
     var page = 2;

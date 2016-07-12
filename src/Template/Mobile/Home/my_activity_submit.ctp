@@ -11,8 +11,8 @@
     <div class="h20 nobottom">
     </div>
     <div class="inner my-home-menu">
-        <a href="javascript:void(0);" class="active" id="myActivity">我的发布</a>|
-        <a href="javascript:void(0);" id="applyActivity">已经报名</a>
+        <a href="javascript:void(0);" class="active" id="applyActivity">已经报名</a>|
+        <a href="javascript:void(0);" id="myActivity">我的发布</a>
     </div>
     <div id="dataBox"></div>
     
@@ -35,9 +35,25 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
-    $.util.dataToTpl('dataBox', 'listTpl',<?= json_encode($activities) ?>, function(d){
-        d.cover = d.thumb ? d.thumb : d.cover;
-        return d;
+    $.util.ajax({
+        url: "/home/myActivityApply",
+        func: function(msg){
+            if(typeof msg == 'object')
+            {
+                if(msg.status)
+                {
+                    $.util.dataToTpl('dataBox', 'listTpl',msg.data, function(d){
+                        d.id = d.activity.id;
+                        d.cover = d.activity.thumb ? d.activity.thumb : d.activity.cover;
+                        d.title = d.activity.title;
+                        d.adress = d.activity.adress;
+                        d.apply_nums = d.activity.apply_nums;
+                        d.time = d.activity.time;
+                        return d;
+                    });
+                }
+            }
+        }
     });
     $('body').on('tap', function(e){
         var target = e.srcElement || e.target, em=target, i=1;
