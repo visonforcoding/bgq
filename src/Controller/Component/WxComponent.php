@@ -110,12 +110,12 @@ class WxComponent extends Component {
             $appid = $wxconfig['AppID'];
             $app_secret = $wxconfig['AppSecret'];
         }
-        \Cake\Log\Log::debug($code,'devlog');
+        //\Cake\Log\Log::debug($code,'devlog');
         $wx_accesstoken_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $appid . '&secret=' . $app_secret .
                 '&code=' . $code . '&grant_type=authorization_code';
         $response = $httpClient->get($wx_accesstoken_url);
-        \Cake\Log\Log::debug('获取weixin信息第二步','devlog');
-        \Cake\Log\Log::debug($response,'devlog');
+        //\Cake\Log\Log::debug('获取weixin信息第二步','devlog');
+        //\Cake\Log\Log::debug($response,'devlog');
         if ($response->isOk()) {
             $open_id = json_decode($response->body())->openid;
             if($isApp){
@@ -127,9 +127,9 @@ class WxComponent extends Component {
                 //该接口地址能获取到union_id
             }
             $res = $httpClient->get($wx_user_url);
-            \Cake\Log\Log::debug('获取weixin信息第二步','devlog');
-            \Cake\Log\Log::debug($res,'devlog');
-            if ($res->isOk()) {
+//            \Cake\Log\Log::debug('获取weixin信息第二步','devlog');
+//            \Cake\Log\Log::debug($res,'devlog');
+            if ($res->isOk()) { 
                 \Cake\Log\Log::debug($res->body(),'devlog');
                 $union_res = json_decode($res->body());
                 if(property_exists($union_res, 'errcode')){
@@ -202,6 +202,14 @@ class WxComponent extends Component {
     
     /**
      * 中控获取机制
+     * 如若开发服a、b和线上服务器c .其中有任意1个在另一个获取access_token后获取了，由于使用的是相同的appid 等信息，
+     * 所以前一个获取的服务器的token便会在，5分钟之后失效，由于没有超出7200秒的过期时间又不会重新获取，所以便会出现
+     * 经常性的有access_token 失效的情况。
+     * 中控服务器用来解决此问题，原理是保证线上和开发服务器使用的access_token是同一份。开发服务器取本地的文件缓存，非
+     * 开发服务器便采取接口形式从开发服务器获取access_token .
+     * 其中为了保证access_token安全，接口调用会有token 和时效验证，并且token还会背rsa加密，需用相同salt和key解密。
+     * 防止http 抓包盗用。
+     * @author caowenpeng <caowenpeng1990@126.com>
      * @return boolean
      */
     protected function handMasterRequest(){

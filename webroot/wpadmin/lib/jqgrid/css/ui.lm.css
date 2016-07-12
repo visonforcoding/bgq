@@ -30,3 +30,12 @@
     text-shadow: none;
     line-height: 15px;
 }
+
+.ui-jqgrid tr.jqgrow td {
+    font-weight: normal;
+    overflow: hidden; 
+    white-space: normal !important; 
+    height:22px; 
+    padding: 0 2px 0 2px;border-bottom-width: 1px; 
+    border-bottom-color: inherit;
+    border-bottom-style: solid;}

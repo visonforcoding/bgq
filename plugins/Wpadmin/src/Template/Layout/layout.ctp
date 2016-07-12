@@ -82,6 +82,9 @@
         <script>
             $(function () {
                 $('#left-bar').add('#main-content').height($(window).height() - $('header').height());
+                $(window).bind('resize',function(){
+                    $('#left-bar').add('#main-content').height($(window).height() - $('header').height());
+                });
                 $('.header-tooltip').tooltip();
                 $('#left-menu ul.nav-primary ul.nav li.active').parents('li').addClass('active show');
                 $('#switch-left-bar').on('click', function () {

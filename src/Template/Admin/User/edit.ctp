@@ -1,6 +1,7 @@
 <?php $this->start('static') ?>   
 <link href="/wpadmin/lib/jqupload/uploadfile.css" rel="stylesheet">
 <link href="/wpadmin/lib/jqvalidation/css/validationEngine.jquery.css" rel="stylesheet">
+<link href="/wpadmin/lib/select2/css/select2.min.css" rel="stylesheet">
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($user, ['class' => 'form-horizontal']) ?>
@@ -76,9 +77,9 @@
         <label class="col-md-2 control-label">上传名片</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
-                <img  alt="封面图片" src=""/>
+                <img  alt="封面图片" src="<?=$user->card_path?>"/>
             </div>
-            <input name="card_path"  type="hidden"/>
+            <input name="card_path" value="<?=$user->card_path?>" type="hidden"/>
             <div id="card_path" class="jqupload">上传</div>
         </div>
     </div>
@@ -121,9 +122,10 @@
 <script type="text/javascript" src="/wpadmin/lib/jqupload/jquery.uploadfile.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/jquery.validationEngine.js"></script>
+<script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
     $(function () {
-        // initJqupload('cover', '/admin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
+         initJqupload('card_path', '/admin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-agency').select2({
             language: "zh-CN",

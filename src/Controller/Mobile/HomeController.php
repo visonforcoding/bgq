@@ -384,248 +384,248 @@ class HomeController extends AppController {
                                                                 $this->set('pageTitle', '我是专家');
                                                             }
 
-                                                            /**
-                                                             * 我的约见 我是专家详情
-                                                             * @param type $id
-                                                             */
-                                                            public function myBookSavantDetail($id = null) {
-                                                                $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+    /**
+     * 我的约见 我是专家详情
+     * @param type $id
+     */
+    public function myBookSavantDetail($id = null) {
+        $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
 
-                                                                $book = $BookTable->get($id, [
-                                                                    'contain' => ['Users' => function($q) {
-                                                                            return $q->select(['truename', 'id', 'avatar', 'company', 'position', 'phone', 'email']);
-                                                                        }, 'Subjects', 'Users.Industries']
-                                                                        ]);
-                                                                        $subject = $book->subject;
-                                                                        $industries = $book->user->industries;
-                                                                        $industries_arr = [];
-                                                                        foreach ($industries as $industry) {
-                                                                            $industries_arr[] = $industry->name;
-                                                                        }
-                                                                        if (!empty($book->user->ext_industry)) {
-                                                                            $industries_arr[] = $book->user->ext_industry;
-                                                                        }
-                                                                        $industries_str = implode('、', $industries_arr);
-                                                                        $this->set([
-                                                                            'pageTitle' => '预约详情',
-                                                                            'industries_str' => $industries_str
-                                                                        ]);
-                                                                        $this->set(compact('subject', 'book'));
-                                                                    }
+        $book = $BookTable->get($id, [
+            'contain' => ['Users' => function($q) {
+                    return $q->select(['truename', 'id', 'avatar', 'company', 'position', 'phone', 'email']);
+                }, 'Subjects', 'Users.Industries']
+                ]);
+                $subject = $book->subject;
+                $industries = $book->user->industries;
+                $industries_arr = [];
+                foreach ($industries as $industry) {
+                    $industries_arr[] = $industry->name;
+                }
+                if (!empty($book->user->ext_industry)) {
+                    $industries_arr[] = $book->user->ext_industry;
+                }
+                $industries_str = implode('、', $industries_arr);
+                $this->set([
+                    'pageTitle' => '预约详情',
+                    'industries_str' => $industries_str
+                ]);
+                $this->set(compact('subject', 'book'));
+    }
 
-                                                                    /**
-                                                                     * 同意约见 约见状态更改->生成一条订单(目前对前台用户暂时没作用)
-                                                                     */
-                                                                    public function bookOk() {
-                                                                        if ($this->request->is('post')) {
-                                                                            $id = $this->request->data('id'); //book id
-                                                                            $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
-                                                                            $book = $BookTable->get($id, [
-                                                                                'contain' => [
-                                                                                    'Subjects',
-                                                                                    'Users'
-                                                                                ]
-                                                                            ]);
-                                                                            $book->status = 1; //更改
-                                                                            $OrderTable = \Cake\ORM\TableRegistry::get('order');
-                                                                            $order = $OrderTable->newEntity([
-                                                                                'type' => 1,
-                                                                                'relate_id' => $id, //预定表的id
-                                                                                'user_id' => $book->user_id,
-                                                                                'seller_id' => $book->savant_id,
-                                                                                'order_no' => time() . $book->user_id . $id . createRandomCode(2, 2),
-                                                                                'fee' => 0, // 实际支付的默认值
-                                                                                'price' => $book->subject->price,
-                                                                                'remark' => '预约话题' . $book->subject->title
-                                                                            ]);
-                                                                            $transRes = $BookTable->connection()->transactional(function()use($book, $BookTable, $order, $OrderTable) {
-                                                                                return $BookTable->save($book) && $OrderTable->save($order);
-                                                                            });
-                                                                            if ($transRes) {
-                                                                                //短信和消息通知
-                                                                                $this->loadComponent('Sms');
-                                                                                $msg = "您预约的话题：《" . $book->subject->title . "》已确认通过，请及时登录平台支付预约款。";
-                                                                                $this->Sms->sendByQf106($book->user->phone, $msg);
-                                                                                $this->loadComponent('Business');
-                                                                                $this->Business->usermsg($book->user_id, '预约通知', $msg, 4, $id);
-                                                                                return $this->Util->ajaxReturn(true, '处理成功!');
-                                                                            } else {
-                                                                                return $this->Util->ajaxReturn(false, '服务器出错!');
-                                                                            }
-                                                                        }
-                                                                    }
+    /**
+     * 同意约见 约见状态更改->生成一条订单(目前对前台用户暂时没作用)
+     */
+    public function bookOk() {
+        if ($this->request->is('post')) {
+            $id = $this->request->data('id'); //book id
+            $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+            $book = $BookTable->get($id, [
+                'contain' => [
+                    'Subjects',
+                    'Users'
+                ]
+            ]);
+            $book->status = 1; //更改
+            $OrderTable = \Cake\ORM\TableRegistry::get('order');
+            $order = $OrderTable->newEntity([
+                'type' => 1,
+                'relate_id' => $id, //预定表的id
+                'user_id' => $book->user_id,
+                'seller_id' => $book->savant_id,
+                'order_no' => time() . $book->user_id . $id . createRandomCode(2, 2),
+                'fee' => 0, // 实际支付的默认值
+                'price' => $book->subject->price,
+                'remark' => '预约话题' . $book->subject->title
+            ]);
+            $transRes = $BookTable->connection()->transactional(function()use($book, $BookTable, $order, $OrderTable) {
+                return $BookTable->save($book) && $OrderTable->save($order);
+            });
+            if ($transRes) {
+                //短信和消息通知
+                $this->loadComponent('Sms');
+                $msg = "您预约的话题：《" . $book->subject->title . "》已确认通过，请及时登录平台支付预约款。";
+                $this->Sms->sendByQf106($book->user->phone, $msg);
+                $this->loadComponent('Business');
+                $this->Business->usermsg($book->user_id, '预约通知', $msg, 4, $id);
+                return $this->Util->ajaxReturn(true, '处理成功!');
+            } else {
+                return $this->Util->ajaxReturn(false, '服务器出错!');
+            }
+        }
+    }
 
-                                                                    /*                                                                     * *
-                                                                     * 取笑预约
-                                                                     */
+    /*                                                                     * *
+     * 取笑预约
+     */
 
-                                                                    public function bookNo($id) {
-                                                                        if ($this->request->is('post')) {
-                                                                            $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
-                                                                            $book = $BookTable->get($id, [
-                                                                                'contain' => [
-                                                                                    'Subjects',
-                                                                                    'Users'
-                                                                                ]
-                                                                            ]);
-                                                                            $book->status = 2;
-                                                                            if ($BookTable->save($book)) {
-                                                                                $this->loadComponent('Business');
-                                                                                $this->Business->usermsg($book->user_id, '预约通知', '您的预约未被通过', 4, $id);
-                                                                                return $this->Util->ajaxReturn(true, '操作成功');
-                                                                            } else {
-                                                                                return $this->Util->ajaxReturn(false, '操作失败');
-                                                                            }
-                                                                        }
-                                                                    }
+    public function bookNo($id) {
+        if ($this->request->is('post')) {
+            $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+            $book = $BookTable->get($id, [
+                'contain' => [
+                    'Subjects',
+                    'Users'
+                ]
+            ]);
+            $book->status = 2;
+            if ($BookTable->save($book)) {
+                $this->loadComponent('Business');
+                $this->Business->usermsg($book->user_id, '预约通知', '您的预约未被通过', 4, $id);
+                return $this->Util->ajaxReturn(true, '操作成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '操作失败');
+            }
+        }
+    }
 
-                                                                    /*                                                                     * *
-                                                                     * 我的钱包
-                                                                     */
+    /*                                                                     * *
+     * 我的钱包
+     */
 
-                                                                    public function myPurse() {
-                                                                        $user_id = $this->user->id;
-                                                                        $userInfo = $this->User->get($user_id);
-                                                                        $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
-                                                                        $flows = $FlowTable->find()->where(['user_id' => $user_id, 'status' => '1'])->orderDesc('create_time')->toArray();
-                                                                        $this->set(array(
-                                                                            'userInfo' => $userInfo,
-                                                                            'flows' => $flows,
-                                                                            'pageTitle' => '我的钱包'
-                                                                        ));
-                                                                    }
+    public function myPurse() {
+        $user_id = $this->user->id;
+        $userInfo = $this->User->get($user_id);
+        $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+        $flows = $FlowTable->find()->where(['user_id' => $user_id, 'status' => '1'])->orderDesc('create_time')->toArray();
+        $this->set(array(
+            'userInfo' => $userInfo,
+            'flows' => $flows,
+            'pageTitle' => '我的钱包'
+        ));
+    }
 
-                                                                    /**
-                                                                     * 提现
-                                                                     */
-                                                                    public function withdraw() {
-                                                                        $user_id = $this->user->id;
-                                                                        $userInfo = $this->User->get($user_id);
-                                                                        if ($this->request->isAjax()) {
-                                                                            $amount = $this->request->data('amount');
-                                                                            $bank = $this->request->data('bank');
-                                                                            $cardno = $this->request->data('cardno');
-                                                                            if ($amount > $userInfo->money) {
-                                                                                return $this->Util->ajaxReturn(false, '提现金额不能大于钱包余额');
-                                                                            }
-                                                                            $WithdrawTable = \Cake\ORM\TableRegistry::get('Withdraw');
-                                                                            $withdraw = $WithdrawTable->newEntity([
-                                                                                'user_id' => $user_id,
-                                                                                'amount' => $amount,
-                                                                                'cardno' => $cardno,
-                                                                                'truename' => $userInfo->truename,
-                                                                                'bank' => $bank,
-                                                                            ]);
-                                                                            if ($WithdrawTable->save($withdraw)) {
-                                                                                return $this->Util->ajaxReturn(true, '提现申请成功');
-                                                                            } else {
-                                                                                \Cake\Log\Log::error($withdraw->errors());
-                                                                                return $this->Util->ajaxReturn(false, '提现申请失败');
-                                                                            }
-                                                                        }
-                                                                        $this->set([
-                                                                            'pageTitle' => '提现'
-                                                                        ]);
-                                                                        $this->set(compact('userInfo'));
-                                                                    }
+    /**
+     * 提现
+     */
+    public function withdraw() {
+        $user_id = $this->user->id;
+        $userInfo = $this->User->get($user_id);
+        if ($this->request->isAjax()) {
+            $amount = $this->request->data('amount');
+            $bank = $this->request->data('bank');
+            $cardno = $this->request->data('cardno');
+            if ($amount > $userInfo->money) {
+                return $this->Util->ajaxReturn(false, '提现金额不能大于钱包余额');
+            }
+            $WithdrawTable = \Cake\ORM\TableRegistry::get('Withdraw');
+            $withdraw = $WithdrawTable->newEntity([
+                'user_id' => $user_id,
+                'amount' => $amount,
+                'cardno' => $cardno,
+                'truename' => $userInfo->truename,
+                'bank' => $bank,
+            ]);
+            if ($WithdrawTable->save($withdraw)) {
+                return $this->Util->ajaxReturn(true, '提现申请成功');
+            } else {
+                \Cake\Log\Log::error($withdraw->errors());
+                return $this->Util->ajaxReturn(false, '提现申请失败');
+            }
+        }
+        $this->set([
+            'pageTitle' => '提现'
+        ]);
+        $this->set(compact('userInfo'));
+    }
 
-                                                                    /**
-                                                                     * 提现成功页
-                                                                     */
-                                                                    public function withdrawSuccess() {
-                                                                        
-                                                                    }
+    /**
+     * 提现成功页
+     */
+    public function withdrawSuccess() {
 
-                                                                    /**
-                                                                     * 隐私设置
-                                                                     */
-                                                                    public function mySecret() {
-                                                                        $ScrectTable = \Cake\ORM\TableRegistry::get('Secret');
-                                                                        $user_id = $this->user->id;
-                                                                        $secret = $ScrectTable->findOrCreate(['user_id' => $user_id]);
-                                                                        if ($this->request->is('post')) {
-                                                                            $ScrectTable->patchEntity($secret, $this->request->data());
-                                                                            if ($ScrectTable->save($secret)) {
-                                                                                return $this->Util->ajaxReturn(true, '修改成功');
-                                                                            } else {
-                                                                                return $this->Util->ajaxReturn(false, '修改失败');
-                                                                            }
-                                                                        }
-                                                                        $secretType = \Cake\Core\Configure::read('secretType');
-                                                                        $this->set([
-                                                                            'pageTitle' => '隐私策略',
-                                                                            'secret' => $secret,
-                                                                            'secretType' => $secretType
-                                                                        ]);
-                                                                    }
+    }
 
-                                                                    /**
-                                                                     * 设置
-                                                                     */
-                                                                    public function myInstall() {
-                                                                        $this->set([
-                                                                            'pageTitle' => '设置'
-                                                                        ]);
-                                                                    }
+    /**
+     * 隐私设置
+     */
+    public function mySecret() {
+        $ScrectTable = \Cake\ORM\TableRegistry::get('Secret');
+        $user_id = $this->user->id;
+        $secret = $ScrectTable->findOrCreate(['user_id' => $user_id]);
+        if ($this->request->is('post')) {
+            $ScrectTable->patchEntity($secret, $this->request->data());
+            if ($ScrectTable->save($secret)) {
+                return $this->Util->ajaxReturn(true, '修改成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '修改失败');
+            }
+        }
+        $secretType = \Cake\Core\Configure::read('secretType');
+        $this->set([
+            'pageTitle' => '隐私策略',
+            'secret' => $secret,
+            'secretType' => $secretType
+        ]);
+    }
 
-                                                                    /**
-                                                                     * 修改个人信息
-                                                                     */
-                                                                    public function editUserinfo() {
-                                                                        $user_id = $this->user->id;
-                                                                        $user = $this->User->get($user_id);
-                                                                        if ($this->request->is('post')) {
-                                                                            $user = $this->User->patchEntity($user, $this->request->data());
-                                                                            if ($this->User->save($user)) {
-                                                                                return $this->Util->ajaxReturn(true, '保存成功');
-                                                                            } else {
-                                                                                return $this->Util->ajaxReturn(false, '保存失败');
-                                                                            }
-                                                                        }
-                                                                        $this->set([
-                                                                            'user' => $user,
-                                                                            'pageTitle' => '编辑个人主页'
-                                                                        ]);
-                                                                    }
+    /**
+     * 设置
+     */
+    public function myInstall() {
+        $this->set([
+            'pageTitle' => '设置'
+        ]);
+    }
 
-                                                                    /**
-                                                                     * 擅长业务
-                                                                     */
-                                                                    public function myBusiness() {
-                                                                        $user = $this->User->get($this->user->id);
-                                                                        if ($this->request->is('post')) {
-                                                                            $user = $this->User->patchEntity($user, $this->request->data());
-                                                                            if ($this->User->save($user)) {
-                                                                                return $this->Util->ajaxReturn(true, '修改成功');
-                                                                            } else {
-                                                                                return $this->Util->ajaxReturn(false, '保存失败');
-                                                                            }
-                                                                        }
-                                                                        $this->set([
-                                                                            'pageTitle' => '擅长业务',
-                                                                            'user' => $user
-                                                                        ]);
-                                                                    }
+    /**
+     * 修改个人信息
+     */
+    public function editUserinfo() {
+        $user_id = $this->user->id;
+        $user = $this->User->get($user_id);
+        if ($this->request->is('post')) {
+            $user = $this->User->patchEntity($user, $this->request->data());
+            if ($this->User->save($user)) {
+                return $this->Util->ajaxReturn(true, '保存成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '保存失败');
+            }
+        }
+        $this->set([
+            'user' => $user,
+            'pageTitle' => '编辑个人主页'
+        ]);
+    }
 
-                                                                    /**
-                                                                     * 公司业务
-                                                                     * @return type
-                                                                     */
-                                                                    public function editCompanyBusiness() {
-                                                                        $user = $this->User->get($this->user->id);
-                                                                        if ($this->request->is('post')) {
-                                                                            $user = $this->User->patchEntity($user, $this->request->data());
-                                                                            if ($this->User->save($user)) {
-                                                                                return $this->Util->ajaxReturn(true, '修改成功');
-                                                                            } else {
-                                                                                return $this->Util->ajaxReturn(false, '保存失败');
-                                                                            }
-                                                                        }
-                                                                        $this->set([
-                                                                            'pageTitle' => '公司业务',
-                                                                            'user' => $user
-                                                                        ]);
-                                                                    }
+    /**
+     * 擅长业务
+     */
+    public function myBusiness() {
+        $user = $this->User->get($this->user->id);
+        if ($this->request->is('post')) {
+            $user = $this->User->patchEntity($user, $this->request->data());
+            if ($this->User->save($user)) {
+                return $this->Util->ajaxReturn(true, '修改成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '保存失败');
+            }
+        }
+        $this->set([
+            'pageTitle' => '擅长业务',
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * 公司业务
+     * @return type
+     */
+    public function editCompanyBusiness() {
+        $user = $this->User->get($this->user->id);
+        if ($this->request->is('post')) {
+            $user = $this->User->patchEntity($user, $this->request->data());
+            if ($this->User->save($user)) {
+                return $this->Util->ajaxReturn(true, '修改成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '保存失败');
+            }
+        }
+        $this->set([
+            'pageTitle' => '公司业务',
+            'user' => $user
+        ]);
+    }
 
                                                                     /**
                                                                      * 编辑教育经历

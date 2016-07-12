@@ -304,3 +304,17 @@ ALTER TABLE need add pid INT NOT NULL DEFAULT 0 COMMENT '父id' AFTER id;
 #小秘书表增加reply_id字段
 ALTER TABLE need add reply_id INT NOT NULL DEFAULT 0 COMMENT '回复用户id' AFTER pid;
 #======0707========
+
+#添加重要信息数据库记录表
+CREATE TABLE `log` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`flag` VARCHAR(50) NOT NULL DEFAULT '',
+	`msg` VARCHAR(550) NOT NULL DEFAULT '',
+	`data` TEXT NULL,
+	`create_time` DATETIME NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COMMENT='重要的信息日志记录'
+ENGINE=InnoDB
+;
+

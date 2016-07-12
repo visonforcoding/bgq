@@ -25,7 +25,7 @@ class IndexController extends AppController {
     public function index() {
         //$umengObj = new Umeng($key, $secret);
         //var_dump($umengObj);
-        $this->autoRender =false;
+        $this->autoRender = false;
         //debug($this->request);
 //        $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
 //        debug(Security::hash(uniqid()),'sha1',true);
@@ -54,9 +54,18 @@ class IndexController extends AppController {
         //$en_token = $this->Encrypt->encrypt($token);
         //debug($en_token);
         //debug($this->Encrypt->decrypt($en_str));
+//        $xml = \Cake\Utility\Xml::build([
+//                    'return_code' => 'SUCCESS',
+//                    'return_msg' => 'OK',
+//        ]);
+//        debug($xml);
+         $arr = ['foo'=>'bar','you'=>'done'];
+         $this->Util->dblog('order', '一个测试日志', $arr);
+        $arr = 'testnkad';
+        echo var_export($arr,true);
     }
-    
-    public function test(){
+
+    public function test() {
         $this->autoRender = false;
         $cipher = 'NDk3MzYyNmI3YzI0YjMwZDU4MTViZTliOTVhNGRlYzZhOTk3ZmZlZmQwNmNlOTI1NjExODU1ZDAwNTJiMzEwZaD0xBasVESkYgXn99ZSMnBRdwanx0YcQse1r6cbGC1Z';
         $this->loadComponent('Encrypt');

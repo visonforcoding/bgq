@@ -29,7 +29,6 @@
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
 <script src="/wpadmin/lib/zeroclipboard/dist/ZeroClipboard.js"></script>
-
 <script>
         $(function () {
             $('#main-content').bind('resize', function () {
@@ -40,11 +39,11 @@
                 url: "/admin/user/getDataList",
                 datatype: "json",
                 mtype: "POST",
-                cellEdit : true,
+                cellEdit : false,
                 cellsubmit : 'remote',
                 cellurl: '/admin/user/hand-change',
                 colNames:
-                        ['手机号', '姓名', '等级', '身份证','职位',  '性别','专家认证','帐号状态', '创建时间',  '操作'],
+                        ['手机号', '姓名', '等级', '公司','职位',  '性别','专家认证','帐号状态', '创建时间',  '操作'],
                 colModel: [
                     {name: 'phone', editable: false, align: 'center'},
                     {name: 'truename', editable: false, align: 'center'},
@@ -55,7 +54,7 @@
                                 return '专家';
                             }
                     }},
-                    {name: 'idcard', editable: false, align: 'center'},
+                    {name: 'company', editable: false, align: 'center'},
                     {name: 'position', editable: false, align: 'center'},
                     {name: 'gender', editable: false, align: 'center',formatter:function(cellvalue, options, rowObject){
                             if(cellvalue=='1'){
@@ -79,15 +78,15 @@
                     {name: 'enabled', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
                             switch(cellvalue){
                              case true:
-                                return '正常';
+                                return '<button onClick="ableUser('+rowObject.id+')" class="btn btn-mini"><i class="icon icon-check-circle"></i> 正常</button>';
                             case false:
-                                return '<i style="color:red">禁用</i>';
+                                return '<button onClick="ableUser('+rowObject.id+')" class="btn btn-mini"><i class="icon icon-remove-circle"></i><i style="color:red"> 已禁用</i></button>';
                             }
                     },edittype:'select',editoptions: { value:"1:正常;0:禁用" }},
                     {name: 'create_time', editable: true, align: 'center'},
                     {name: 'actionBtn',align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                 pager: "#pager",
-                rowNum: 30,
+                rowNum: 10,
                 rowList: [10, 20, 30],
                 sortname: "id",
                 sortorder: "desc",
@@ -148,7 +147,7 @@
                     type: 'post',
                     data: {id: id},
                     dataType: 'json',
-                    url: '/wpadmin/user/delete',
+                    url: '/admin/user/delete',
                     success: function (res) {
                         layer.msg(res.msg);
                         if (res.status) {
@@ -208,6 +207,20 @@
                  skin: 'layui-layer-nobg', //没有背景色
                 content: '<img src=" '+obj+' ">'
             });
+        }
+        function ableUser(id){
+             $.ajax({
+                    type: 'post',
+                    data: {id: id},
+                    dataType: 'json',
+                    url: '/admin/user/able-user',
+                    success: function (res) {
+                        layer.msg(res.msg);
+                        if (res.status) {
+                            $('#list').trigger('reloadGrid');
+                        }
+                    }
+            })
         }
 </script>
 <?php

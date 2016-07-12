@@ -159,7 +159,7 @@ class WxController extends AppController {
      */
     public function wxNotify() {
         $this->loadComponent('Wxpay');
-        $this->Wxpay->notify();
+        $res = $this->Wxpay->notify();
         exit();
     }
 
@@ -171,7 +171,6 @@ class WxController extends AppController {
             echo 'fail';
         } else {
             $this->Alipay->notify();
-            echo 'success';
         }
         exit();
     }
