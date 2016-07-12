@@ -791,4 +791,6 @@ background-size:3.82rem 1.9rem;margin-top:1rem;}
 	.dk ul{width:800%;}
 	.loginbox .password input{width:300px;}
 	.loginbox .password button{width:200px;}
+	.vipinfo .mark a{font-size:22px;}
+	.a-other-info > *{font-size:24px;}
 }
