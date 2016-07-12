@@ -9,7 +9,7 @@ blockquote:before, blockquote:after, q:before, q:after { content: ''; content: n
 table { border-collapse: collapse; border-spacing: 0; }
 *{ tap-highlight-color: rgba(0, 0, 0, 0); -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -ms-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; }
 body {font: 16px / 0.24rem 'Microsoft YaHei', 'STHeiti',Helvetica,Arial,sans-serif; min-width:320px;max-width: 750px;width:100%;margin:0 auto; -webkit-overflow-scrolling: touch;  overflow-scrolling: touch;}
-input, textarea, button, input, select{ outline: 0; resize: none;font-size:100%;font-family:'Microsoft YaHei';background: rgba(255,255,255,0);}
+input, textarea, button, input, select{ outline: 0; resize: none;font-size:100%;font:inherit;background: rgba(255,255,255,0);}
 html{ outline: 0;-webkit-text-size-adjust:none;}
 html,body { width: 100%;}
 i{font-style: normal;}
