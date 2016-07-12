@@ -12,7 +12,13 @@
     <?php if (isset($news)): ?>
         <section class="newscon-box">
             <h3><?= $news->title ?></h3>
-            <h1 class="con-des"><span><img src="<?= $news->user->avatar ? $news->user->avatar : '/mobile/images/touxiang.png'  ?>" /></span><?= $news->user->truename ?>
+            <h1 class="con-des">
+                <a href="/user/home-page/<?= $news->user->id ?>">
+                    <span>
+                        <img src="<?= $news->user->avatar ? $news->user->avatar : '/mobile/images/touxiang.png'  ?>" />
+                    </span>
+                </a>
+                <?= $news->user->truename ?>
                 <time><?= $news->create_time->i18nFormat('yyyy-MM-dd HH:mm:ss') ?></time>
             </h1>
             <img src="<?= $news->cover ?>"/>
