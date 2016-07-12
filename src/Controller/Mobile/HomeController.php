@@ -99,10 +99,10 @@ class HomeController extends AppController {
              * 我的活动 发布
              */
             public function myActivitySubmit() {
-                $ActivityTable = \Cake\ORM\TableRegistry::get('activity');
-                $activities = $ActivityTable->findByUserId($this->user->id)->toArray();
+//                $ActivityTable = \Cake\ORM\TableRegistry::get('activity');
+//                $activities = $ActivityTable->findByUserId($this->user->id)->toArray();
                 $this->set([
-                    'activities' => $activities,
+//                    'activities' => $activities,
                     'pageTitle' => '我的活动'
                 ]);
             }

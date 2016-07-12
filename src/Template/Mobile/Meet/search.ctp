@@ -39,6 +39,7 @@
 <?php $this->start('script'); ?>
 <script src='/mobile/js/meet_search.js'></script>
 <script>
+    $('input[name="keyword"]').focus();
     var page = 3;
     setTimeout(function () {
         $(window).on("scroll", function () {
