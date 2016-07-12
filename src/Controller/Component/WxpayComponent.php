@@ -8,6 +8,7 @@ use Cake\Controller\ComponentRegistry;
 /**
  * Wxpay component  用于微信支付
  * @property \App\Controller\Component\BusinessComponent $Business
+ * @property \App\Controller\Component\UtilComponent $Util
  */
 class WxpayComponent extends Component {
 
@@ -28,13 +29,14 @@ class WxpayComponent extends Component {
     protected $App_id;
     protected $App_secret;
     protected $App_mchid;
+
     /**
      * Default configuration.
      *
      * @var array
      */
     protected $_defaultConfig = [];
-    public $components = ['Business'];
+    public $components = ['Business', 'Util'];
 
     public function initialize(array $config) {
         parent::initialize($config);
@@ -51,7 +53,6 @@ class WxpayComponent extends Component {
         $this->notify_url = $this->request->scheme() . '://' . $_SERVER['SERVER_NAME'] . $wxconfig['notify_url'];
     }
 
-
     /**
      * 
      * @param type $body   商品信息
@@ -62,7 +63,7 @@ class WxpayComponent extends Component {
      * @param boolean $isApp  异步回调地址
      * @return type
      */
-    public function unifiedorder($body, $openid, $out_trade_no, $fee, $notify_url = null,$isApp = false) {
+    public function unifiedorder($body, $openid, $out_trade_no, $fee, $notify_url = null, $isApp = false) {
         $apiurl = self::WEIXIN_PAY_API_URL . '/pay/unifiedorder';
         $xmlText = '<xml>
                     <appid>%s</appid>
@@ -80,9 +81,9 @@ class WxpayComponent extends Component {
         $ip = $this->request->clientIp();
         $nonce_str = createRandomCode(16);
         $notify_url = empty($notify_url) ? $this->notify_url : $notify_url;
-        $trade_type = $isApp?'APP':'JSAPI';
-        $appid = $isApp?$this->App_id:$this->app_id;
-        $mchid = $isApp?$this->App_mchid:$this->mchid;
+        $trade_type = $isApp ? 'APP' : 'JSAPI';
+        $appid = $isApp ? $this->App_id : $this->app_id;
+        $mchid = $isApp ? $this->App_mchid : $this->mchid;
         $params = [
             'appid' => $appid,
             'body' => $body,
@@ -96,22 +97,22 @@ class WxpayComponent extends Component {
             'trade_type' => $trade_type
         ];
         $sign = $this->setSign($params);
-        $xmlString = sprintf($xmlText,$appid, $body, $mchid, $nonce_str, $notify_url, $openid, $out_trade_no, $ip, $fee,$trade_type, $sign);
+        $xmlString = sprintf($xmlText, $appid, $body, $mchid, $nonce_str, $notify_url, $openid, $out_trade_no, $ip, $fee, $trade_type, $sign);
         $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
         $res = $httpClient->post($apiurl, $xmlString);
         if (!$res->isOk()) {
-            \Cake\Log\Log::error($res,'devlog');
+            \Cake\Log\Log::error($res, 'devlog');
             return false;
         }
         $body = (array) simplexml_load_string($res->body(), 'SimpleXMLElement', LIBXML_NOCDATA);
         if ($body['return_code'] == 'SUCCESS' && $body['result_code'] == 'SUCCESS') {
             return $body;
         } else {
-            \Cake\Log\Log::error('微信支付统一下单:','devlog');
-            \Cake\Log\Log::error(__FUNCTION__,'devlog');
-            \Cake\Log\Log::error($body,'devlog');
-            \Cake\Log\Log::error($xmlString,'devlog');
-            \Cake\Log\Log::error($sign,'devlog');
+            \Cake\Log\Log::error('微信支付统一下单:', 'devlog');
+            \Cake\Log\Log::error(__FUNCTION__, 'devlog');
+            \Cake\Log\Log::error($body, 'devlog');
+            \Cake\Log\Log::error($xmlString, 'devlog');
+            \Cake\Log\Log::error($sign, 'devlog');
             return false;
         }
     }
@@ -132,10 +133,10 @@ class WxpayComponent extends Component {
     /**
      * 生成支付参数 供页面JSapi 调用发起支付 (!!并且该页面URL 需是在微信公众号的微信支付那里配置了支付域)
      */
-    public function setPayParameter($prepay_id,$isApp=false) {
+    public function setPayParameter($prepay_id, $isApp = false) {
         $timestamp = time();
         $nonceStr = createRandomCode(16);
-        if(!$isApp){
+        if (!$isApp) {
             $params = [
                 'appId' => $this->app_id,
                 'timeStamp' => "$timestamp",
@@ -143,7 +144,7 @@ class WxpayComponent extends Component {
                 'package' => 'prepay_id=' . $prepay_id,
                 'signType' => 'MD5'
             ];
-        }else{
+        } else {
             $params = [
                 'appid' => $this->App_id,
                 'partnerid' => $this->mchid,
@@ -154,9 +155,9 @@ class WxpayComponent extends Component {
             ];
         }
         $sign = $this->setSign($params);
-        if($isApp){
+        if ($isApp) {
             $params['sign'] = $sign;
-        }else{
+        } else {
             $params['paySign'] = $sign;
         }
         return $params;
@@ -172,21 +173,20 @@ class WxpayComponent extends Component {
      * @param boolean $isApp
      * @return boolean
      */
-    public function getPayParameter($body, $openid, $out_trade_no, $fee, $notify_url = null,$isApp=false) {
-        $fee = intval($fee*100);
-        $res = $this->unifiedorder($body, $openid, $out_trade_no, $fee, $notify_url,$isApp);
+    public function getPayParameter($body, $openid, $out_trade_no, $fee, $notify_url = null, $isApp = false) {
+        $fee = intval($fee * 100);
+        $res = $this->unifiedorder($body, $openid, $out_trade_no, $fee, $notify_url, $isApp);
         if ($res) {
             $prepay_id = $res['prepay_id'];
-            $pay_param = $this->setPayParameter($prepay_id,$isApp);
+            $pay_param = $this->setPayParameter($prepay_id, $isApp);
             return $pay_param;
         } else {
-            \Cake\Log\Log::error(__FUNCTION__,'devlog');
-            \Cake\Log\Log::error($res,'devlog');
+            \Cake\Log\Log::error(__FUNCTION__, 'devlog');
+            \Cake\Log\Log::error($res, 'devlog');
             return false;
         }
     }
 
-    
     /**
      * 专家预约 付款 状态更改为完成 流程完毕
      * @return boolean
@@ -197,19 +197,58 @@ class WxpayComponent extends Component {
             (new \Cake\Mailer\Email())
                     ->to('caowenpeng1990@126.com')
                     ->subject('微信回调失败')
-                    ->send('微信回调失败:'.$data->result_msg);
-            \Cake\Log\Log::error('微信回调失败','devlog');
-            \Cake\Log\Log::error($data->result_msg,'devlog');
+                    ->send('微信回调失败:' . $data->result_msg);
+            \Cake\Log\Log::error('微信回调失败', 'devlog');
+            \Cake\Log\Log::error($data->result_msg, 'devlog');
             return false;
         }
         $order_no = $data->out_trade_no;
         $out_trade_no = $data->transaction_id;
         $realFee = $data->total_fee;
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
-        $order = $OrderTable->find()->contain(['Sellers','Users'])->where(['Lmorder.status'=>0,'order_no'=>$order_no])->first();
-        if($order){
-            $this->Business->handOrder($order, $realFee, 1, $out_trade_no);
+        $order = $OrderTable->find()->contain(['Sellers', 'Users'])->where(['Lmorder.status' => 0, 'order_no' => $order_no])->first();
+        $resXml = $this->arr2xml([
+            'return_code' => 'FAIL',
+            'return_msg' => 'error'
+        ]);
+        if ($order) {
+            $res = $this->Business->handOrder($order, $realFee, 1, $out_trade_no);
+            if ($res) {
+                $resXml = $this->arr2xml([
+                    'return_code' => 'SUCCESS',
+                    'return_msg' => 'OK'
+                ]);
+            }else{
+                $this->Util->dblog(UtilComponent::FLAG_ORDER, $msg, $data);
+            }
+        } else {
+            $msg = '微信订单回调订单未找到，订单号:' . $order_no;
+            \Cake\Log\Log::warning($msg, 'devlog');
+            $this->Util->dblog(UtilComponent::FLAG_ORDER, $msg, $data);
         }
+        $this->response->body($resXml);
+        $this->response->send();
+        $this->response->stop();
+    }
+
+    /**
+     *   简易将数组转换为xml，仅支持1级，适用于微信开发
+     *    @param array $data    要转换的数组
+     *   @param bool $root     是否要根节点
+     *   @return string         xml字符串
+     */
+    protected function arr2xml($data, $root = true) {
+        $str = "";
+        if ($root) {
+            $str .= "<xml>";
+        }
+        foreach ($data as $key => $val) {
+            $str.= "<$key><![CDATA[$val]]></$key>";
+        }
+        if ($root) {
+            $str .= "</xml>";
+        }
+        return $str;
     }
 
 }

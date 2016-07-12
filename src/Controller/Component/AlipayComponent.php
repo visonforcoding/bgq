@@ -9,6 +9,7 @@ use Cake\Controller\ComponentRegistry;
  * 支付宝
  * Alipay component
  * @property \App\Controller\Component\BusinessComponent $Business
+ * @property \App\Controller\Component\UtilComponent $Util
  */
 class AlipayComponent extends Component {
 
@@ -18,7 +19,7 @@ class AlipayComponent extends Component {
      * @var array
      */
     protected $_defaultConfig = [];
-    public $components = ['Business'];
+    public $components = ['Business','Util'];
 
     /**
      * 合作者id
@@ -114,10 +115,10 @@ class AlipayComponent extends Component {
         return $string;
     }
     /**
-     * 
+     * 说起来你可能不信，支付宝这一步拼接字符串又不需要引号，而它的demo版例子其实错的，我*
      * @param type $params
      */
-    public function buildLinkStringNo($params) {
+    public function buildLinkStringNoQuota($params) {
         $string = '';
         foreach ($params as $key => $value) {
             $string.= $key . '=' . $value . '&';
@@ -151,12 +152,9 @@ class AlipayComponent extends Component {
         //排序
         ksort($para_filter);
         reset($para_filter);
-        $dataWait = $this->buildLinkStringNo($para_filter);
-        \Cake\Log\Log::debug($dataWait,'devlog');
+        $dataWait = $this->buildLinkStringNoQuota($para_filter);
         $res = openssl_get_publickey($this->alipay_public_key);
-        \Cake\Log\Log::debug($res,'devlog');
         $result =  openssl_verify($dataWait, base64_decode($sign), $res);
-        \Cake\Log\Log::debug($result,'devlog');
         $result = (bool) $result;
         openssl_free_key($res);
         if(!$result){
@@ -217,13 +215,20 @@ class AlipayComponent extends Component {
             $order_no = $data['out_trade_no'];
             $OrderTable = \Cake\ORM\TableRegistry::get('Order');
             $order = $OrderTable->find()->contain(['Sellers', 'Users'])->where(['Lmorder.status' => 0, 'order_no' => $order_no])->first();
+            $output = 'fail';
             if ($order) {
                 $realFee = $data['total_fee'];
                 $out_trade_no = $data['trade_no'];
-                $this->Business->handOrder($order, $realFee, 2, $out_trade_no);
+                $res = $this->Business->handOrder($order, $realFee, 2, $out_trade_no);
+                if($res){
+                    $output = 'success';
+                }
             } else {
                 \Cake\Log\Log::error('支付宝交易回调查询订单失败,订单号:' . $order_no, 'devlog');
             }
+            $this->response->body($output);
+            $this->response->send();
+            $this->response->stop();
         } else {
             \Cake\Log\Log::error('支付宝交易回调状态异常,状态值:' . $data['out_trade_no'], 'devlog');
         }

@@ -57,7 +57,7 @@ class UserController extends AppController {
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {
                 $errors = $user->errors();
-                $this->Util->ajaxReturn(['stauts'=>false,'msg'=>  errorMsg($user, '添加失败'),'errors'=>$errors]);
+                $this->Util->ajaxReturn(['stauts' => false, 'msg' => errorMsg($user, '添加失败'), 'errors' => $errors]);
             }
         }
         $industries = $this->User->Industries->find('list', ['limit' => 200]);
@@ -78,7 +78,7 @@ class UserController extends AppController {
         if ($this->request->is(['post', 'put'])) {
             $user = $this->User->patchEntity($user, $this->request->data);
             if ($this->User->save($user)) {
-                $this->Util->ajaxReturn(true, '删除成功');
+                $this->Util->ajaxReturn(true, '修改成功');
             } else {
                 $errors = $user->errors();
                 $this->Util->ajaxReturn(false, getMessage($errors));
@@ -118,21 +118,21 @@ class UserController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'User.'.$this->request->data('sidx');
+        $sort = 'User.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where['or'] = [['truename like'=>"%$keywords%"],['email like'=>"%$keywords%"],['phone like'=>"%$keywords%"]];
+            $where['or'] = [['truename like' => "%$keywords%"], ['email like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        if($this->request->query('type')=='1'){
+        if ($this->request->query('type') == '1') {
             $where['status'] = 1;
         }
         $query = $this->User->find();
@@ -194,10 +194,10 @@ class UserController extends AppController {
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
-          $query->formatResults(function($items) {
+        $query->formatResults(function($items) {
             return $items->map(function($item) {
                         //时间语义化转换
-                        $item['gender'] = $item['gender']=='1'?'男':'女';
+                        $item['gender'] = $item['gender'] == '1' ? '男' : '女';
                         switch ($item['level']) {
                             case '1':
                                 $item['level'] = '普通';
@@ -205,11 +205,11 @@ class UserController extends AppController {
                             case '2':
                                 $item['level'] = '专家';
                                 break;
-                              default:
-                              $item['level'] = '普通';
+                            default:
+                                $item['level'] = '普通';
                                 break;
                         }
-                        $item['gender'] = $item['gender']=='1'?'男':'女';
+                        $item['gender'] = $item['gender'] == '1' ? '男' : '女';
                         return $item;
                     });
         });
@@ -218,35 +218,49 @@ class UserController extends AppController {
         $filename = '会员_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
-    
-    
+
     /**
      * 实名认证管理
      */
-    public function realname(){
+    public function realname() {
         
     }
-    
-    
+
     /**
      * 处理jgqrid 的 celledit
      */
-    public function handChange(){
-        if($this->request->is('post')){
+    public function handChange() {
+        if ($this->request->is('post')) {
             $entity = $this->User->get($this->request->data('id'));
             $data = $this->request->data();
             unset($data['id']);
             unset($data['oper']);
             $entity = $this->User->patchEntity($entity, $data);
-            if(isset($data['savant_status'])){
-                if($data['savant_status']=='3'){
+            if (isset($data['savant_status'])) {
+                if ($data['savant_status'] == '3') {
                     $entity->level = 2;
                 }
             }
-            if($this->User->save($entity)){
-                $this->Util->ajaxReturn(true,'修改成功');
-            }else{
-                $this->Util->ajaxReturn(false,'保存失败');
+            if ($this->User->save($entity)) {
+                $this->Util->ajaxReturn(true, '修改成功');
+            } else {
+                $this->Util->ajaxReturn(false, '保存失败');
+            }
+        }
+    }
+    
+    /**
+     *  禁用和启用用户
+     * @param type $id
+     */
+    public function ableUser(){
+          if ($this->request->is('post')) {
+            $entity = $this->User->get($this->request->data('id'));
+            $entity->enabled = $entity->enabled==1?0:1;
+            if ($this->User->save($entity)) {
+                $this->Util->ajaxReturn(true, '修改成功');
+            } else {
+                $this->Util->ajaxReturn(false, '保存失败');
             }
         }
     }
