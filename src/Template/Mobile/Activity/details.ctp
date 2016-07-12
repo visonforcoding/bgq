@@ -184,7 +184,7 @@
         LEMON.show.shareIco();
         LEMON.sys.back('/activity/index');
 
-    window.__user_id = <?= $user == [] ? $user : '0' ?>;
+    window.__user_id = <?= !empty($user) ? $user : '0' ?>;
     window.__id = <?= $activity->id ?>;
     window.activitycom = <?= json_encode($activity->activitycom); ?>;
 </script>
