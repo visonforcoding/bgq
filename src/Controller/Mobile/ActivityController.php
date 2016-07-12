@@ -148,33 +148,6 @@ class ActivityController extends AppController {
      * 活动列表
      */
     public function index() {
-        $act = $this
-                ->Activity
-                ->find()
-                ->contain(['Users', 'Industries', 'Regions'])
-                ->limit($this->limit)
-                ->where(['is_check' => 1])
-                ->order(['Activity.is_top' => 'desc','Activity.create_time' => 'desc'])
-                ->toArray();
-        $this->set('actjson', json_encode($act));
-
-        // 轮播图
-        $bannerTable = \Cake\ORM\TableRegistry::get('banner');
-        $banners = $bannerTable
-                ->find()
-                ->where("`enabled` = '1' and `type` = '2'")
-                ->orderDesc('create_time')
-                ->limit(3)
-                ->toArray();
-        $this->set(compact('banners'));
-
-        $this->paginate = [
-            'contain' => ['Admins', 'Industries', 'Regions'],
-            'order' => ['is_top' => 'DESC', 'create_time' => 'DESC'],
-        ];
-        $activity = $this->paginate($this->Activity->find()->where(['is_check' => 1]));
-        $this->set(compact('activity'));
-        $this->set('_serialize', ['activity']);
         $isApply = [];
         if ($this->user) {
             // 用户已报名的活动
@@ -757,6 +730,18 @@ class ActivityController extends AppController {
             'pageTitle'=>$activity->title,
             'userjson' => json_encode($user),
         ]);
+    }
+    
+    public function getBanner(){
+        // 轮播图
+        $bannerTable = \Cake\ORM\TableRegistry::get('banner');
+        $banners = $bannerTable
+                ->find()
+                ->where("`enabled` = '1' and `type` = '2'")
+                ->orderDesc('create_time')
+                ->limit(3)
+                ->toArray();
+        return $this->Util->ajaxReturn(['status'=>true, 'data'=>$banners]);
     }
     
     public function test(){
