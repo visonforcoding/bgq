@@ -97,7 +97,7 @@ class AppController extends Controller {
         $action = strtolower($this->request->param('action'));
         $request_aim = [$controller, $action];
         if (in_array($request_aim, $this->firewall) ||
-                in_array($controller, ['user', 'wx', 'news', 'activity', 'meet', 'pay', 'api','index'])) {
+                in_array($controller, ['user', 'wx', 'news', 'activity', 'meet', 'pay', 'api', 'index'])) {
             return true;
         }
         return $this->handCheckLogin();
@@ -117,6 +117,12 @@ class AppController extends Controller {
             $user = $UserTable->findByUser_tokenAndEnabled($user_token, 1)->first();
             if ($user) {
                 $this->request->session()->write('User.mobile', $user);
+                $this->response->cookie([
+                    'name' => 'login_stauts',
+                    'value' => 'yes',
+                    'path' => '/',
+                    'expire' => time() + 1200
+                ]);
                 $this->user = $this->request->session()->read('User.mobile');
             }
         }
@@ -146,7 +152,7 @@ class AppController extends Controller {
             if ($this->request->isWeixin() && empty($this->user) && !$this->request->session()->check('Login.wxbase')) {
                 if ($this->request->query('code')) {
                     //若是来自于微信的回传
-                    \Cake\Log\Log::debug('微信回跳','devlog');
+                    \Cake\Log\Log::debug('微信回跳', 'devlog');
                     $this->loadComponent('Wx');
                     $res = $this->Wx->getUser();
                     //微信静默登录

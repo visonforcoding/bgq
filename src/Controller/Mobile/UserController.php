@@ -287,6 +287,7 @@ class UserController extends AppController {
             'pageTitle' => '登录'
         ));
     }
+    
 
     /**
      * 检查手机号是否存在
@@ -573,5 +574,18 @@ class UserController extends AppController {
         } else {
             return $this->Util->ajaxReturn(false, '头像上传失败');
         }
+    }
+    
+    
+    /**
+     * 静态页用于请求登陆
+     */
+    public function loginStatus(){
+        if($this->user){
+            echo 'yes';
+        }else{
+            echo 'no';
+        }
+        exit();
     }
 }
