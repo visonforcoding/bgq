@@ -800,8 +800,8 @@ background-size:3.82rem 1.9rem;margin-top:1rem;}
 @media only screen and (min-width: 414px) {
 	.tipsbtn{height:40px;line-height: 38px;font-size:16px;}
 }
-.todialogue{width:100%;height:0.84rem;position:fixed;bottom:0;left:0;background: #fff;box-shadow: 0 0 1px rgba(0,0,0,.1);line-height: 0.84rem;font-size:0;}
-.todialogue textarea{width:85%;background: none;border:none;height;0.4rem;line-height: 0.4rem;padding:0;padding-left:0.2rem;font-size:0.3rem;height:0.84rem;padding-top:0.2rem;}
+.todialogue{width:100%;height:0.84rem;position:fixed;bottom:0;background: #fff;box-shadow: 0 0 1px rgba(0,0,0,.1);line-height: 0.84rem;font-size:0;max-width: 750px;}
+.todialogue textarea{width:85%;background: none;border:none;height;0.4rem;line-height: 0.4rem;padding:0;padding-left:0.2rem;font-size:0.3rem;height:0.84rem;padding-top:0.2rem;overflow:hidden;}
 .todialogue span{display: inline-block;background: url(img/ca.png) no-repeat center center;background-size: 0.32rem 0.26rem;width:10%;height:0.84rem;}
 .s-label{width:100%;height:auto;overflow:hidden;padding:0 0.3rem;margin-top:0.4rem;}
 .s-label li{float:left;margin-right:0.13rem;width:23%;margin-bottom:0.4rem;overflow: hidden;}
