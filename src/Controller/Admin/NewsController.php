@@ -17,6 +17,8 @@ class NewsController extends AppController {
      * @return void
      */
     public function index() {
+        $domain = $this->request->env('SERVER_NAME');
+        $this->set(compact('domain'));
         $this->set('news', $this->News);
     }
 

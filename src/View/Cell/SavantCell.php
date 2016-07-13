@@ -23,7 +23,7 @@ class SavantCell extends Cell {
      * @return void
      */
     public function display($selIds=null) {
-        $SavantTable = \Cake\ORM\TableRegistry::get('savant');
+        $SavantTable = \Cake\ORM\TableRegistry::get('Savant');
         $savants = $SavantTable->find()->contain(['Users'=>function($q){return $q->where(['level'=>2, 'enabled'=>'1']);}])->all()->toArray();
         $this->set(compact('savants','selIds'));
     }

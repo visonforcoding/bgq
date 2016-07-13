@@ -28,6 +28,7 @@
 <?php $this->start('script'); ?>
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
+<script src="/wpadmin/lib/zeroclipboard/dist/ZeroClipboard.js"></script>
 <script>
                 $(function () {
                     $('#main-content').bind('resize', function () {
@@ -39,7 +40,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['作者', '标题', '阅读数', '点赞数', '评论数',  '创建时间', '更新时间', '操作'],
+                                ['作者', '标题', '阅读数', '点赞数', '评论数', '创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'title', editable: true, align: 'center'},
@@ -73,14 +74,28 @@
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
                 });
                 function actionFormatter(cellvalue, options, rowObject) {
-                    response = '<div class="bigdiv" onmouseout=$(this).find(".showall").hide();$(this).find(".showallbtn").show(); ><a class="showallbtn" title="操作" onmouseover=$(this).hide();$(this).next(".showall").show();><i class="icon icon-resize-full"></i></a>';
-                    response += '<div class="showall" hidden onmouseover=$(this).show();$(this).prev(".showallbtn").hide(); ><a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+//                    response = '<div class="bigdiv" onmouseout=$(this).find(".showall").hide();$(this).find(".showallbtn").show(); ><a class="showallbtn" title="操作" onmouseover=$(this).hide();$(this).next(".showall").show();><i class="icon icon-resize-full"></i></a>';
+//                    response = '<div class="showall" hidden onmouseover=$(this).show();$(this).prev(".showallbtn").hide(); ><a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
+                    response += '<a title="复制" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
                     response += '<a title="编辑" href="/admin/news/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
-                    response += '</div></div>';
+//                    response += '</div></div>';
                     return response;
                 }
-                
+
+                var clip = '';
+                setTimeout(function () {
+                    clip = new ZeroClipboard($('.copy'));
+                    console.log('可以复制了');
+                    clip.on('copy', function (event) {
+                        clip.setData('text/plain', '<?=$domain?>'+'/news/view/' + event.target.id);
+                    });
+                    clip.on("aftercopy", function (event) {
+                        alert("复制了: " + event.data["text/plain"]);
+                    });
+                }, 1000);
+
                 function delRecord(id) {
                     layer.confirm('确定删除？', {
                         btn: ['确认', '取消'] //按钮

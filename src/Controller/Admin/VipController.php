@@ -9,13 +9,13 @@ use Wpadmin\Controller\AppController;
  *
  * @property \App\Model\Table\UserTable $User
  */
-class SeniorController extends AppController {
-    
-    protected  $User;
+class VipController extends AppController {
+
+    protected $User;
+
     public function initialize() {
         $this->loadModel('User');
         parent::initialize();
-        
     }
 
     /**
@@ -130,7 +130,7 @@ class SeniorController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = ['grade'=>2];
+        $where = ['grade' => 3];
         if (!empty($keywords)) {
             $where['or'] = [['truename like' => "%$keywords%"], ['email like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
         }
@@ -182,7 +182,7 @@ class SeniorController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = ['grade'=>2];
+        $where = ['grade' => 3];
         if (!empty($keywords)) {
             $where['truename like'] = "%$keywords%";
         }
@@ -192,10 +192,11 @@ class SeniorController extends AppController {
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
         $Table = $this->User;
-        $column = ['手机号', '姓名', '等级', '身份证', '公司', '职位', '邮箱', '性别', '擅长业务', '常驻城市', '项目经验', '业务能力', '审核意见', '审核状态', '创建时间'];
+        $column = ['手机号', '姓名', '等级', '身份证', '公司', '职位', '邮箱', '性别', '擅长业务', '常驻城市', '项目经验', '业务能力', '审核意见','负责人', '审核状态', '创建时间'];
         $query = $Table->find();
+        $query->contain(['Customer']);
         $query->hydrate(false);
-        $query->select(['phone', 'truename', 'level', 'idcard', 'company', 'position', 'email', 'gender', 'goodat', 'city', 'ymjy', 'ywnl', 'reason', 'status', 'create_time']);
+        $query->select(['phone', 'truename', 'level', 'idcard', 'company', 'position', 'email', 'gender', 'goodat', 'city', 'ymjy', 'ywnl', 'reason','Customer.truename' ,'status', 'create_time']);
         if (!empty($where)) {
             $query->where($where);
         }
@@ -256,15 +257,15 @@ class SeniorController extends AppController {
             }
         }
     }
-    
+
     /**
      *  禁用和启用用户
      * @param type $id
      */
-    public function ableUser(){
-          if ($this->request->is('post')) {
+    public function ableUser() {
+        if ($this->request->is('post')) {
             $entity = $this->User->get($this->request->data('id'));
-            $entity->enabled = $entity->enabled==1?0:1;
+            $entity->enabled = $entity->enabled == 1 ? 0 : 1;
             if ($this->User->save($entity)) {
                 $this->Util->ajaxReturn(true, '修改成功');
             } else {
@@ -272,6 +273,5 @@ class SeniorController extends AppController {
             }
         }
     }
-    
 
 }

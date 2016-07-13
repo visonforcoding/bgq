@@ -1,79 +1,114 @@
-<head>
-    <link rel="stylesheet" type="text/css" href="/wpadmin/lib/zui/css/zui.min.css"/>
-</head>
-<body>
-    <div class="user view large-9 medium-8 columns content">
-        <table class="vertical-table table table-hover table-bordered">
-            <tbody>
-                <tr>
-                    <th><?= __('手机号') ?></th>
-                    <td><?= h($user->phone) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('姓名') ?></th>
-                    <td><?= h($user->truename) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('等级') ?></th>
-                    <td><?= h($user->level) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('身份证') ?></th>
-                    <td><?= h($user->idcard) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('公司') ?></th>
-                    <td><?= h($user->company) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('职位') ?></th>
-                    <td><?= h($user->position) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('邮箱') ?></th>
-                    <td><?= h($user->email) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('行业标签') ?></th>
-                    <td><?= $user->has('industry') ? $this->Html->link($user->industry->name, ['controller' => 'Industry', 'action' => 'view', $user->industry->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('擅长业务') ?></th>
-                    <td><?= h($user->goodat) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('城市') ?></th>
-                    <td><?= h($user->city) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('名片') ?></th>
-                    <td><img style="width:200px;height:100px;" src="<?= $user->card_path ?>"/></td>
-                </tr>
-                <tr>
-                    <th><?= __('头像') ?></th>
-                    <td><img src="<?= $user->avatar ?>"/></td>
-                </tr>
-                <tr>
-                    <th><?= __('项目经验') ?></th>
-                    <td><?= h($user->ymjy) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('业务能力') ?></th>
-                    <td><?= h($user->ywnl) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('性别') ?></th>
-                    <td><?= $user->gender ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('专家认证状态') ?></th>
-                    <td><?= $user->savant_status ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('加入时间') ?></th>
-                    <td><?= h($user->create_time) ?></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</body>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>查看个人信息</title>
+        <link rel="stylesheet" href="/wpadmin/lib/zui/css/zui.min.css" />
+        <link rel="stylesheet" href="/wpadmin/css/profile.css" />
+
+    </head>
+    <body>
+        <div class='container inner'>
+            <div class='row'>
+                <div class='bx t-info  mt20'>
+                    <div class='col-md-12 profile-header row'>
+                        <div class='text-center fl profile-info'>
+                            <img src="<?= $user->avatar ?>" alt="" class='header-pic'/>
+                        </div>
+                        <div class='profile-info fl'>
+                            <div class="header-fullname"><?= $user->truename ?></div>
+                            <div class="header-information"><?= $user->company ?> <?= $user->position ?></div>
+                        </div>
+                    </div>
+                    <div class='col-md-12 row mt20'>
+                        <div class='numlist'>
+                            <div>
+                                <i><?= count($user->focus) ?></i>
+                                <span>关注</span>
+                            </div>
+                            <div>
+                                <i><?= count($user->followers) ?></i>
+                                <span>粉丝</span>
+                            </div>
+                            <div>
+                                <i><?= $newscom_count + $activitycom_count ?></i>
+                                <span>评论</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class='container inner'>
+            <div class='row mt20'>
+                <table class="table table-bordered bx text-center">
+                    <tr class="active"><td>手机号</td><td>报名人数</td><td>报名人数</td><td>报名人数</td></tr>
+                    <tr><td><?=$user->phone?></td><td>报名人数</td><td>报名人数</td><td>报名人数</td></tr>
+                    <tr class="warning"><td>报名人数</td><td>报名人数</td><td>报名人数</td><td>报名人数</td></tr>
+                    <tr><td>报名人数</td><td>报名人数</td><td>报名人数</td><td>报名人数</td></tr>
+                    <tr class="info"><td>报名人数</td><td>报名人数</td><td>报名人数</td><td>报名人数</td></tr>
+                </table>
+
+            </div>
+        </div>
+        <div class='container inner'>
+            <div class='row mt20 bx'>
+                <h6 class='row-title before-themeprimary no-margin-top'>关注</h6>
+                <div class="row  p30">
+                    <?php foreach ($user->focus as $item): ?>
+                        <div class="col-sm-2 col-md-2">
+                            <div class="thumbnail">
+                                <img src="<?= $item->following->avatar ?>" alt="头像找不到了" class='header-pi'/>
+                                <div class="caption">
+                                    <h5><?= $item->following->truename ?></h5>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>   
+            </div>
+        </div>
+        <div class='container inner'>
+            <div class='row mt20 bx'>
+                <h6 class='row-title before-themeprimary no-margin-top'>粉丝</h6>
+                <div class="row  p30">
+                    <?php foreach ($user->followers as $follower): ?>
+                        <div class="col-sm-2 col-md-2">
+                            <div class="thumbnail">
+                                <img src="<?= $follower->user->avatar ?>" alt="头像找不到了" class='header-pi'/>
+                                <div class="caption">
+                                    <h5><?= $follower->user->truename ?></h5>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+
+                </div>
+            </div>
+        </div>
+        <div class='container inner'>
+            <div class='row mt20  bx'>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">已报名活动</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr><td>活动名称</td><td>付款</td><td>确认</td><td>备注</td></tr>
+                            <tr><td>22</td><td>222</td><td>22</td><td>222</td></tr>
+                            <tr><td>22</td><td>222</td><td>22</td><td>222</td></tr>
+                            <tr><td>22</td><td>222</td><td>22</td><td>222</td></tr>
+                            <tr><td>22</td><td>222</td><td>22</td><td>222</td></tr>
+                            <tr><td>22</td><td>222</td><td>22</td><td>222</td></tr>
+                        </table>
+                    </div>
+                    <div class="panel-footer">*注意。。。。</div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

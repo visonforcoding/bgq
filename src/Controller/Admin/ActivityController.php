@@ -17,6 +17,8 @@ class ActivityController extends AppController {
      * @return void
      */
     public function index() {
+        $domain = $this->request->env('SERVER_NAME');
+        $this->set(compact('domain'));
         $this->set('activity', $this->Activity);
     }
 
@@ -56,22 +58,22 @@ class ActivityController extends AppController {
                 $userIndustryTable = \Cake\ORM\TableRegistry::get('user_industry');
                 $activityIndustryTable = \Cake\ORM\TableRegistry::get('activity_industry');
                 $activitySavantTable = \Cake\ORM\TableRegistry::get('activity_savant');
-                $industries = $activityIndustryTable->find()->where(['activity_id'=>$res->id])->hydrate(false)->toArray();
+                $industries = $activityIndustryTable->find()->where(['activity_id' => $res->id])->hydrate(false)->toArray();
                 $industry = [];
-                foreach ($industries as $k=>$v){
+                foreach ($industries as $k => $v) {
                     $industry[] = $v['industry_id'];
                 }
-                $userIndustries = $userIndustryTable->find()->where(['industry_id in'=>$industry])->hydrate(false)->toArray();
+                $userIndustries = $userIndustryTable->find()->where(['industry_id in' => $industry])->hydrate(false)->toArray();
                 $users = [];
-                foreach ($userIndustries as $k=>$v){
+                foreach ($userIndustries as $k => $v) {
                     $users[] = $v['user_id'];
                 }
                 // 去除重复用户id
                 $user = array_unique($users);
-                $savants = $userTable->find()->contain(['Savants'])->where(['User.id in'=>$user, 'enabled'=>1, 'level'=>2])->hydrate(false)->toArray();
-                if(count($savants) > 4) {
+                $savants = $userTable->find()->contain(['Savants'])->where(['User.id in' => $user, 'enabled' => 1, 'level' => 2])->hydrate(false)->toArray();
+                if (count($savants) > 4) {
                     $savant = array_rand($savants, 4);
-                    foreach ($savant as $k=>$v){
+                    foreach ($savant as $k => $v) {
                         $data['savant_id'] = $v['savant']['id'];
                         $data['activity_id'] = $id;
                         $activitySavants = $activitySavantTable->newEntity();
@@ -79,7 +81,7 @@ class ActivityController extends AppController {
                         $res = $activitySavantTable->save($activitySavant);
                     }
                 } else {
-                    foreach($savants as $k=>$v){
+                    foreach ($savants as $k => $v) {
                         $data['savant_id'] = $v['savant']['id'];
                         $data['activity_id'] = $id;
                         $activitySavants = $activitySavantTable->newEntity();
@@ -98,7 +100,7 @@ class ActivityController extends AppController {
         $savants = $this->Activity->Savants->find('list', ['limit' => 200]);
         $industries = $this->Activity->Industries->find()->hydrate(false)->all()->toArray();
         $industries = \Wpadmin\Utils\Util::tree($industries, 0, 'id', 'pid');
-        
+
         $this->set(compact('activity', 'admins', 'industries', 'regions', 'savants'));
     }
 
@@ -110,10 +112,10 @@ class ActivityController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
-        
-        
-        
-        
+
+
+
+
         $activity = $this->Activity->get($id, [
             'contain' => ['Industries', 'Savants'],
         ]);
@@ -131,10 +133,8 @@ class ActivityController extends AppController {
         $regions = $this->Activity->Regions->find('list', ['limit' => 200]);
         $this->set(compact('activity', 'admins', 'industries', 'regions'));
         $selSavantIds = [];
-        if($activity->savants)
-        {
-            foreach ($activity->savants as $savant)
-            {
+        if ($activity->savants) {
+            foreach ($activity->savants as $savant) {
                 $selSavantIds[] = $savant->id;
             }
         }
@@ -194,7 +194,7 @@ class ActivityController extends AppController {
             $where['and'] = [['Activity.`create_time` >' => $begin_time], ['Activity.`create_time` <' => $end_time]];
         }
         $query = $this->Activity->find()->contain(['Users']);
-        
+
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
@@ -202,7 +202,7 @@ class ActivityController extends AppController {
         $nums = $query->count();
 //        $query->contain(['Industries', 'Regions']);
         if (!empty($sort) && !empty($order)) {
-            $query->order(['is_top'=>'desc', $sort => $order]);
+            $query->order(['is_top' => 'desc', $sort => $order]);
         }
         $query->limit(intval($rows))
                 ->page(intval($page));
@@ -296,31 +296,27 @@ class ActivityController extends AppController {
         $activity = $this->Activity->get($id);
         $activity->is_check = 1;
         $res = $this->Activity->save($activity);
-        if(!$res)
-        {
+        if (!$res) {
             return $this->Util->ajaxReturn(false, '发布失败');
         }
-        $folder = 'upload/qrcode/activitycode/'.date('Y-m-d');
-        if(!file_exists(WWW_ROOT . $folder))
-        {
+        $folder = 'upload/qrcode/activitycode/' . date('Y-m-d');
+        if (!file_exists(WWW_ROOT . $folder)) {
             $res = mkdir(WWW_ROOT . $folder);
         }
-        if(!$res)
-        {
+        if (!$res) {
             return $this->Util->ajaxReturn(false, '系统错误');
         }
         // 生成二维码
-        $savePath = $folder.'/'.time().$id.'.png';
-        \PHPQRCode\QRcode::png('http://'. $this->request->env('HTTP_HOST') . '/activity/sign/'.$id, WWW_ROOT . $savePath);
+        $savePath = $folder . '/' . time() . $id . '.png';
+        \PHPQRCode\QRcode::png('http://' . $this->request->env('HTTP_HOST') . '/activity/sign/' . $id, WWW_ROOT . $savePath);
         $activity = $this->Activity->get($id);
         $activity->qrcode = $savePath;
         $res = $this->Activity->save($activity);
-        if(!$res)
-        {
+        if (!$res) {
             return $this->Util->ajaxReturn(false, '二维码生成失败');
         }
-        
-        
+
+
         return $this->Util->ajaxReturn(true, '发布成功');
     }
 
@@ -341,30 +337,29 @@ class ActivityController extends AppController {
         }
     }
 
-    public function all(){
+    public function all() {
         $activity = $this->Activity->find()->all()->toArray();
-        foreach ($activity as $k=>$v){
-            $folder = 'upload/qrcode/activitycode/'.date('Y-m-d');
-            if(!file_exists(WWW_ROOT . $folder))
-            {
+        foreach ($activity as $k => $v) {
+            $folder = 'upload/qrcode/activitycode/' . date('Y-m-d');
+            if (!file_exists(WWW_ROOT . $folder)) {
                 $res = mkdir(WWW_ROOT . $folder);
-                if(!$res)
-                {
+                if (!$res) {
                     return $this->Util->ajaxReturn(false, '系统错误');
                 }
             }
             // 生成二维码
-            $savePath = $folder.'/'.time().$v['id'].'.png';
-            \PHPQRCode\QRcode::png('http://'. $this->request->env('HTTP_HOST') . '/activity/sign/'.$v['id'], WWW_ROOT . $savePath);
+            $savePath = $folder . '/' . time() . $v['id'] . '.png';
+            \PHPQRCode\QRcode::png('http://' . $this->request->env('HTTP_HOST') . '/activity/sign/' . $v['id'], WWW_ROOT . $savePath);
             $activity = $this->Activity->get($v['id']);
             $activity->qrcode = '/' . $savePath;
             $res = $this->Activity->save($activity);
-            if($res){
+            if ($res) {
                 debug('1');
             } else {
-                debug('2'.$v['id']);
+                debug('2' . $v['id']);
             }
         }
         exit();
     }
+
 }

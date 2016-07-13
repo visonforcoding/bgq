@@ -16,7 +16,7 @@
         <li><h3 class="color-items">钱包明细</h3></li>
         <?php foreach($flows as $flow): ?>
             <li>
-                <div><span><?=$flow->type_msg?></span><i><?=$flow->create_type?></i></div>
+                <div><span><?=$flow->remark?></span><i><?=$flow->create_time->i18nFormat('yyyy-MM-dd HH:mm')?></i></div>
                 <span class="dollars">
                     <?php if($flow->income=='1'):?>+<?php else:?>-<?php endif;?><?=$flow->amount?>
                 </span>

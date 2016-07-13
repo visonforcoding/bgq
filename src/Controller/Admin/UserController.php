@@ -30,14 +30,30 @@ class UserController extends AppController {
     public function view($id = null) {
         $this->viewBuilder()->autoLayout(false);
         $user = $this->User->get($id, [
-            'contain' => ['Industries']
+            'contain' => ['Industries','Agencies','Educations','Careers','Focus','Followers.Users'=>function($q){
+                return $q->select(['truename','avatar','id']);
+            },'Focus.Followings'=>function($q){
+                return $q->select(['truename','avatar','id']);
+            }]
         ]);
+        //查询资讯评论数
+        $NewscomTable = \Cake\ORM\TableRegistry::get('Newscom');
+        $newscom_count = $NewscomTable->find()->where(['user_id'=>$id])->count();
+        
+        //查询活动评论数
+        $ActivitycomTable = \Cake\ORM\TableRegistry::get('Activitycom');
+        $activitycom_count = $ActivitycomTable->find()->where(['user_id'=>$id])->count();
+        
         $genderConf = \Cake\Core\Configure::read('gender');
         $levelConf = \Cake\Core\Configure::read('userLevel');
         $savantStatusConf = \Cake\Core\Configure::read('savantStatus');
         $user->gender = $genderConf[$user->gender];
         $user->level = $levelConf[$user->level];
         $user->savant_status = $savantStatusConf[$user->savant_status];
+        $this->set([
+            'newscom_count'=>$newscom_count,
+            'activitycom_count'=>$activitycom_count
+        ]);
         $this->set('user', $user);
         $this->set('_serialize', ['user']);
     }

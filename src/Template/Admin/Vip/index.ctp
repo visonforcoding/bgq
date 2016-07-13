@@ -36,7 +36,7 @@
             });
             $.zui.store.pageClear(); //刷新页面缓存清除
             $("#list").jqGrid({
-                url: "/admin/senior/getDataList",
+                url: "/admin/vip/getDataList",
                 datatype: "json",
                 mtype: "POST",
                 colNames:
@@ -90,11 +90,11 @@
                                 return '<button onClick="ableUser('+rowObject.id+')" class="btn btn-mini"><i class="icon icon-remove-circle"></i><i style="color:red"> 已禁用</i></button>';
                             }
                     },edittype:'select',editoptions: { value:"1:正常;0:禁用" }},
-                    {name: 'customer.truename', editable: true, align: 'center'},
+                    {name: 'customer.id', editable: true, align: 'center'},
                     {name: 'create_time', editable: true, align: 'center'},
                     {name: 'actionBtn',align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                 pager: "#pager",
-                rowNum: 10,
+                rowNum: 30,
                 rowList: [10, 20, 30],
                 sortname: "id",
                 sortorder: "desc",
@@ -124,7 +124,7 @@
             response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn"><i class="icon icon-eye-open"></i> </a>';
             response += '<a title="查看名片" onClick="showMp(' +" ' "+rowObject.card_path+" ' " + ');" data-id="' + rowObject.id + '" class="grid-btn"><i class="icon icon-picture"></i> </a>';
             response += '<a title="复制个人主页" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
-            response += '<a title="修改" href="/admin/senior/edit/' + rowObject.id + '" class="grid-btn"><i class="icon icon-pencil"></i> </a>';
+            response += '<a title="修改" href="/admin/vip/edit/' + rowObject.id + '" class="grid-btn"><i class="icon icon-pencil"></i> </a>';
             return response;
         }
         
@@ -148,7 +148,7 @@
                     type: 'post',
                     data: {id: id},
                     dataType: 'json',
-                    url: '/admin/senior/delete',
+                    url: '/admin/vip/delete',
                     success: function (res) {
                         layer.msg(res.msg);
                         if (res.status) {
@@ -181,12 +181,12 @@
             searchData['sidx'] = sortColumnName;
             searchData['sort'] = sortOrder;
             var searchQueryStr = $.param(searchData);
-            $("body").append("<iframe src='/admin/senior/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+            $("body").append("<iframe src='/admin/vip/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
         }
 
         function doView(id) {
             //查看明细
-            url = '/admin/senior/view/' + id;
+            url = '/admin/vip/view/' + id;
             layer.open({
                 type: 2,
                 title: '查看详情',
@@ -214,7 +214,7 @@
                     type: 'post',
                     data: {id: id},
                     dataType: 'json',
-                    url: '/admin/senior/able-user',
+                    url: '/admin/vip/able-user',
                     success: function (res) {
                         layer.msg(res.msg);
                         if (res.status) {
