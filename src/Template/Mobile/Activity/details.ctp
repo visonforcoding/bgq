@@ -148,7 +148,11 @@
             </li>
         </ul>
     </div>
-    
+    <div class="totips" style="height:3.6rem;" hidden id="isdel" >
+        <h3>确定要删除本条评论？</h3>
+        <span></span>
+        <a href="javascript:void(0)" class="tipsbtn" id="no">取消</a><a href="javascript:void(0)" class="tipsbtn" id="yes">确认</a>
+    </div>
 </body>
 <?php $this->start('script'); ?>
 <script type="text/html" id="comment_tpl">
@@ -374,11 +378,15 @@
             }
             // 回复评论
             if (em.id.indexOf('reply_') != -1) {
+                var id = $(em).attr('value');
                 checkLogin(function(){
-                    //if($(em).attr('user_id') == $('#article_comment').attr('user_id')) {
-                    //    return;
-                    //}
-                    var reply_id = $(em).attr('value');
+                    if($(em).attr('user_id') == $('#article_comment').attr('user_id')) {
+                        $('#shadow').show();
+                        $('#isdel').show();
+                        $('#isdel').attr('com_id', id);
+                        return;
+                    }
+                    var reply_id = id;
                     var msg = '回复 ' + $('#comment_username_' + reply_id).attr('user_name') + ' :';
                     $('#r_textarea').attr('placeholder', msg);
                     $('.reply-shadow').show();
@@ -560,10 +568,13 @@
                     }
                     break;
                 case 'shadow':case 'wxshare':
-                setTimeout(function(){
-                    $('#shadow').hide();
-                    $('#wxshare').hide();
-                }, 400);
+                    setTimeout(function(){
+                        $('#shadow').hide();
+                        $('#wxshare').hide();
+                        $('#shadow').hide();
+                        $('#isdel').hide();
+                        $('#isdel').attr('com_id','');
+                    }, 400);
                 break;
                 case 'reply_shadow':
                     setTimeout(function () {
@@ -575,6 +586,32 @@
                     setTimeout(function () {
                         $('.reg-shadow').hide();
                         $('.shadow-info').removeClass('c-height').addClass('m-height');
+                    },301);
+                    break;
+                case 'yes':
+                    var id = $('#isdel').attr('com_id');
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        url: "/activity/del-comment/" + id,
+                        success: function (res) {
+                            $.util.alert(res.msg);
+                            if(res.status){
+                                $('#reply_' + id).parent().remove();
+                                setTimeout(function(){
+                                    $('#shadow').hide();
+                                    $('#isdel').hide();
+                                    $('#isdel').attr('com_id','');
+                                },301);
+                            }
+                        }
+                    });
+                    break;
+                case 'no':
+                    setTimeout(function(){
+                        $('#shadow').hide();
+                        $('#isdel').hide();
+                        $('#isdel').attr('com_id','');
                     },301);
                     break;
                 case 'goTop':

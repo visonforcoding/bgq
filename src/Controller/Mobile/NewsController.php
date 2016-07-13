@@ -13,7 +13,7 @@ use App\Controller\Mobile\AppController;
  */
 class NewsController extends AppController {
 
-    protected $newslimit = 5;
+    protected $newslimit = 50;
 
     /**
      * Index method
@@ -134,7 +134,6 @@ class NewsController extends AppController {
                 }],
             ]);
         }
-//        debug($news);die;
         $this->set('isCollect', $isCollect);
         //阅读数+1
         $news->read_nums +=1;
@@ -320,6 +319,10 @@ class NewsController extends AppController {
         }
     }
     
+    /**
+     * 展示全部评论
+     * @param type $id
+     */
     public function showAllComment($id){
         $user_id = $this->user->id;
         // 评论
@@ -349,19 +352,13 @@ class NewsController extends AppController {
         return $this->Util->ajaxReturn(['status'=>true, 'data'=>$banners]);
     }
     
-    public function test(){
-        $a = $this->request->session();
-        $b = $a->read();
-        debug($b);die;
-    }
-    
-        /**
+    /**
      * 编辑名片
      */
     public function editCard(){
-//         $user_id = $this->user->id;
-         $user_id = 8;
-         $UserTable = \Cake\ORM\TableRegistry::get('User');
+//        $user_id = $this->user->id;
+        $user_id = 8;
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
         $userInfo = $UserTable->get($user_id);
         if($this->request->is('post')){
             $userInfo->card_path = $this->request->data('card_path');
@@ -376,6 +373,17 @@ class NewsController extends AppController {
             'pageTitle'=>'名片修改',
              'user'=>$userInfo
         ]);
+    }
+    
+    public function delComment($id){
+        $newscomTable = \Cake\ORM\TableRegistry::get('newscom');
+        $newscom = $newscomTable->get($id);
+        $res = $newscomTable->delete($newscom);
+        if($res){
+            return $this->Util->ajaxReturn(true, '删除成功');
+        } else {
+            return $this->Util->ajaxReturn(false, '删除失败');
+        }
     }
 }
 

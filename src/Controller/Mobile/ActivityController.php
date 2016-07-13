@@ -536,11 +536,9 @@ class ActivityController extends AppController {
                     $jump_url = '/activity/view/'.$id.'#allcoment#common_'.$doComment->id;
                     $this->Business->usermsg($comment->user_id, '评论回复', '有人回复了你的评论!', 3, $doComment->id, $jump_url);
                 }
-                
                 $activity = $this->Activity->get($id);
                 $activity->comment_nums += 1;
                 $this->Activity->save($activity);
-                
                 return $this->Util->ajaxReturn(['status' => true, 'msg' => '评论成功', 'data' => $newComment]);
             } else {
                 return $this->Util->ajaxReturn(false, '系统错误');
@@ -732,6 +730,9 @@ class ActivityController extends AppController {
         ]);
     }
     
+    /**
+     * ajax获取banner图
+     */
     public function getBanner(){
         // 轮播图
         $bannerTable = \Cake\ORM\TableRegistry::get('banner');
@@ -744,11 +745,24 @@ class ActivityController extends AppController {
         return $this->Util->ajaxReturn(['status'=>true, 'data'=>$banners]);
     }
     
+    public function delComment($id){
+        $activitycomTable = \Cake\ORM\TableRegistry::get('activitycom');
+        $activitycom = $activitycomTable->get($id);
+        $res = $activitycomTable->delete($activitycom);
+        if($res) {
+            return $this->Util->ajaxReturn(true, '删除成功');
+        } else {
+            return $this->Util->ajaxReturn(false, '删除失败');
+        }
+    }
+    
     public function test(){
         $this->loadComponent('Push');
-//        $res = $this->Push->sendAll('感谢使用并购帮APP', '非常感谢使用并购帮APP，并购帮专注并购人的生活方式', '你有一条推送', true);
-//        $res = $this->Push->sendAll('感谢使用并购帮APP', '非常感谢使用并购帮APP，并购帮专注并购人的生活方式', '你有一条推送', false);
-        $res = $this->Push->ios_check('us24509146822979010801');
+        $data = [
+            'url' => 'http://m.chinamatop.com/activity/details/16',
+        ];
+        $res = $this->Push->sendAll('感谢使用并购帮APP', '非常感谢使用并购帮APP，并购帮专注并购人的生活方式', '你有一条推送', false, $data, 'go_app');
+//        $res = $this->Push->ios_check('us24509146822979010801');
 //        $res1 = $this->Push->android_check('us76823146822886105701');
         debug($res);
 //        debug($res1);

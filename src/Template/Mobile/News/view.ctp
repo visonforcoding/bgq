@@ -91,6 +91,12 @@
     <span></span>
     <p></p>
  </div>
+<div class="totips" style="height:3.6rem;" hidden id="isdel" >
+    <h3>确定要删除本条评论？</h3>
+    <span></span>
+    <a href="javascript:void(0)" class="tipsbtn" id="no">取消</a><a href="javascript:void(0)" class="tipsbtn" id="yes">确认</a>
+</div>
+
 <script type="text/html" id="listTpl">
     <div class="items">
         <div class="comm-info clearfix">
@@ -212,11 +218,15 @@
             }
             if (em.id.indexOf('common_') !== -1) {
                 //回复评论
+                var id = $(em).data('id');
                 var user_id = window.__user_id;
                 if ($(em).data('userid') == user_id) {
+                    $('#shadow').show();
+                    $('#isdel').show();
+                    $('#isdel').attr('com_id', id);
                     return;
                 }
-                var id = $(em).data('id');
+                
                 reply_id = id;
                 $('#content').attr('placeholder', '回复 ' + $(em).data('username') + '：');
                 $('#comment_shadow').show('slow');
@@ -346,12 +356,40 @@
                     setTimeout(function(){
                         $('#shadow').hide();
                         $('#wxshare').hide();
+                        $('#isdel').hide();
+                        $('#isdel').attr('com_id', '');
                     }, 400);
                     break;
                 case 'comment_shadow':
                     setTimeout(function(){
                         $('#comment_shadow').hide('slow');
                         $('.shadow-info').removeClass('c-height').addClass('m-height');
+                    },301);
+                    break;
+                case 'yes':
+                    var id = $('#isdel').attr('com_id');
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        url: "/news/del-comment/" + id,
+                        success: function (res) {
+                            $.util.alert(res.msg);
+                            if(res.status){
+                                $('#common_' + id).parent().remove();
+                                setTimeout(function(){
+                                    $('#shadow').hide();
+                                    $('#isdel').hide();
+                                    $('#isdel').attr('com_id','');
+                                },301);
+                            }
+                        }
+                    });
+                    break;
+                case 'no':
+                    setTimeout(function(){
+                        $('#shadow').hide();
+                        $('#isdel').hide();
+                        $('#isdel').attr('com_id','');
                     },301);
                     break;
                 case 'goTop':
