@@ -39,17 +39,17 @@ class PushComponent extends Component {
      * @param string $ticker 通知栏提示文字
      * @param boolean $production_mode 是否生产环境，true为生产环境，false为测试环境
      * @param string $extra 用户自定义key-value。只对"通知(display_type=notification)"生效。可以配合通知到达后, 打开App, 打开URL, 打开Activity使用。
-     * @param string $expire_time 消息过期时间,其值不可小于发送时间,默认为3天后过期。格式: "YYYY-MM-DD hh:mm:ss"。
-     * @param int $badge ios消息数量提示
      * @param string $after_open 之后打开，值为"go_app", "go_url", "go_activity", "go_custom",
      *                                           "go_app": 打开应用
      *                                           "go_url": 跳转到URL
      *                                           "go_activity": 打开特定的activity
      *                                           "go_custom": 用户自定义内容。
+     * @param string $expire_time 消息过期时间,其值不可小于发送时间,默认为3天后过期。格式: "YYYY-MM-DD hh:mm:ss"。
+     * @param int $badge ios消息数量提示
      * @@param string $sound ios声音
      * @return boolean true:发送成功;false:发送失败
      */
-    public function sendAll($title, $content, $ticker, $production_mode = 'true', $extra = '', $expire_time = '', $badge = '', $after_open = '', $sound = ''){
+    public function sendAll($title, $content, $ticker, $production_mode = 'true', $extra = '', $after_open = '', $expire_time = '', $badge = '', $sound = ''){
         $umngObj = new Umeng($this->android_key, $this->android_secret, $this->ios_key, $this->ios_secret);
         $res = $umngObj->sendAll($title, $content, $ticker, $production_mode, $extra, $expire_time, $badge, $after_open, $sound);
         return $res;
@@ -74,9 +74,9 @@ class PushComponent extends Component {
      * @param string $sound ios声音
      * @return boolean true:发送成功;false:发送失败;
      */
-    public function sendAlias($alias, $title, $content, $ticker, $alias_type, $production_mode = 'true', $extra = '', $expire_time = '', $badge = '', $after_open = '', $sound = ''){
+    public function sendAlias($alias, $title, $content, $ticker, $alias_type = 'BGB', $production_mode = 'true', $extra = '', $after_open = '', $expire_time = '', $badge = '', $sound = ''){
         $umngObj = new Umeng($this->android_key, $this->android_secret, $this->ios_key, $this->ios_secret);
-        $res = $umngObj->sendAlias($alias, $title, $content, $ticker, $alias_type, $production_mode, $extra, $expire_time, $badge);
+        $res = $umngObj->sendAlias($alias, $title, $content, $ticker, $alias_type, $production_mode, $extra, $expire_time, $badge, $after_open, $sound);
         return $res;
     }
     /**
@@ -96,9 +96,9 @@ class PushComponent extends Component {
      * @param string $sound ios声音
      * @return boolean true:发送成功;false:发送失败;
      */
-    public function sendFile($title, $content, $ticker, $file, $alias_type, $production_mode = 'true', $badge = '', $after_open = '', $sound = ''){
+    public function sendFile($title, $content, $ticker, $file, $alias_type = 'BGB', $production_mode = 'true', $extra = '', $badge = '', $after_open = '', $sound = ''){
         $umngObj = new Umeng($this->android_key, $this->android_secret, $this->ios_key, $this->ios_secret);
-        $res = $umngObj->sendFile($title, $content, $ticker, $file, $alias_type, $production_mode, $badge, $after_open, $sound);
+        $res = $umngObj->sendFile($title, $content, $ticker, $file, $alias_type, $production_mode, $extra, $badge, $after_open, $sound);
         return $res;
     }
     
