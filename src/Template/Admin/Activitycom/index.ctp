@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
 <style>
-    .area{margin:100px auto;width:60%;}
+    .area{}
             .floor>div,.floor>div>div,.floor>div>div>div,.floor>div>div>div>div,.floor>div>div>div>div>div,.floor>div>div>div>div>div>div,.floor>div>div>div>div>div>div>div{border:1px #ccc solid;padding:1px;background: #e1e1e1;}
             .inner-wraper{margin-bottom:10px;padding:0 10px;padding-left:40px;}
             .author{margin-top:10px;color:blue;}
