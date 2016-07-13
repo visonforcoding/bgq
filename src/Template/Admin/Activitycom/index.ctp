@@ -32,18 +32,30 @@
     <div id="pager"></div>  -->
 
     <div class="floor area">
-                <p class="author"><span>曹麦穗:</span></p>
+        <p class="author"><span>曹麦穗:</span></p>
+        <div class="floor">
+            <div class="floor">
                 <div class="floor">
-                    
-                                        <span class="floor-num">1</span>
-                                    <section class="inner-wraper">
-                                        <p class="author"><span>op1qazse4rfvgy7ujm:</span></p>
-                                        <p class="content">领土问题无条件支持！一寸山河一寸血，一步也不能退让！</p>
-                                    </section>
-                            
-                                </div>
-                
-                <p class="content">国家兴亡，匹夫有责。大敌当前，戮力同心，捍卫主权。</p>
+            <span class="floor-num">1</span>
+            <section class="inner-wraper">
+                <p class="author"><span>op1qazse4rfvgy7ujm:</span></p>
+                <p class="content">领土问题无条件支持！一寸山河一寸血，一步也不能退让！</p>
+            </section>
+         </div>
+            <span class="floor-num">2</span>
+            <section class="inner-wraper">
+                <p class="author"><span>op1qazse4rfvgy7ujm:</span></p>
+                <p class="content">领土问题无条件支持！一寸山河一寸血，一步也不能退让！</p>
+            </section>
+         </div>
+            <span class="floor-num">3</span>
+            <section class="inner-wraper">
+                <p class="author"><span>op1qazse4rfvgy7ujm:</span></p>
+                <p class="content">领土问题无条件支持！一寸山河一寸血，一步也不能退让！</p>
+            </section>
+         </div>
+        
+        <p class="content">国家兴亡，匹夫有责。大敌当前，戮力同心，捍卫主权。</p>
     </div>
 </div>
 <?php $this->start('script'); ?>
@@ -51,6 +63,14 @@
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
 <script>
                 $(function () {
+                    $.ajax({
+                        url：'/activitycom/index',
+                        datatype: 'json',
+                        type: 'post',
+                        success: function(res){
+                            console.log(res);
+                        }
+                    })
                     $('#main-content').bind('resize', function () {
                         $("#list").setGridWidth($('#main-content').width() - 40);
                     });
