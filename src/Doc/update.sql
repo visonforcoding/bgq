@@ -318,3 +318,34 @@ COMMENT='重要的信息日志记录'
 ENGINE=InnoDB
 ;
 
+#user 表修改
+ALTER TABLE `user`
+	CHANGE COLUMN `level` `level` TINYINT NOT NULL DEFAULT '1' COMMENT '等级,1:普通2:专家' AFTER `truename`,
+	ADD COLUMN `grade` TINYINT NOT NULL DEFAULT '1' AFTER `level`;
+
+#删掉旧表
+DROP TABLE `flow`;
+
+#交易流水记录表
+CREATE TABLE `flow` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL DEFAULT '0' COMMENT '用户',
+	`type` INT(11) NOT NULL DEFAULT '0' COMMENT '交易类型',
+	`type_msg` VARCHAR(50) NOT NULL COMMENT '类型名称',
+	`income` TINYINT(1) NOT NULL DEFAULT '1' COMMENT '是否收入1:收入2:支出',
+	`amount` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '交易金额',
+	`pre_amount` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '交易前金额',
+	`after_amount` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '交易后金额',
+	`status` TINYINT(4) NOT NULL COMMENT '交易状态',
+	`remark` VARCHAR(50) NOT NULL COMMENT '备注',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	`update_time` DATETIME NOT NULL COMMENT '修改时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='用户资金流水'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+#添加关联字段id
+ALTER TABLE `flow`
+	ADD COLUMN `relate_id` INT(11) NOT NULL DEFAULT '0' COMMENT '关联id' AFTER `user_id`;

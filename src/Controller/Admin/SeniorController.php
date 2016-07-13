@@ -5,11 +5,18 @@ namespace App\Controller\Admin;
 use Wpadmin\Controller\AppController;
 
 /**
- * User Controller
+ * User Controller  高级会员
  *
  * @property \App\Model\Table\UserTable $User
  */
-class UserController extends AppController {
+class SeniorController extends AppController {
+    
+    protected  $User;
+    public function initialize() {
+        $this->loadModel('User');
+        parent::initialize();
+        
+    }
 
     /**
      * Index method
@@ -123,7 +130,7 @@ class UserController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = [];
+        $where = ['grade'=>2];
         if (!empty($keywords)) {
             $where['or'] = [['truename like' => "%$keywords%"], ['email like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
         }
@@ -174,9 +181,9 @@ class UserController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = [];
+        $where = ['grade'=>2];
         if (!empty($keywords)) {
-            $where[' truename like'] = "%$keywords%";
+            $where['truename like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));

@@ -79,11 +79,17 @@ class UserController extends AppController {
                 $data['enabled'] = 1;
                 $data['user_token'] = md5(uniqid());
                 $data['avatar'] =  '/mobile/images/touxiang.jpg';
+                $user->register_status = 3;
                 $user = $this->User->patchEntity($user, $data);
                 if ($this->User->save($user)) {
                     //注册成功就算登录
                     $this->request->session()->write('User.mobile', $user);
-                    return $this->Util->ajaxReturn(['status' => true, 'url' => '/home/index']);
+                    $user_token = false;
+                    if($this->request->is('lemon')){
+                        $this->request->session()->write('Login.login_token',$user->user_token);
+                        $user_token = $user->user_token;
+                    }
+                    return $this->Util->ajaxReturn(['status' => true, 'url' => '/home/index','token_uin'=>$user_token]);
                 } else {
                     return $this->Util->ajaxReturn(['status' => false, 'msg' => '服务器出错']);
                 }
@@ -114,6 +120,7 @@ class UserController extends AppController {
             $user = $this->User->findByPhone($reg_phone)->first();
             if ($user) {
                 $user->agency_id = $this->request->data('agency');
+                $user->register_status = 2;
                 if ($this->User->save($user)) {
                     $this->request->session()->write('reg.step', 'two');
                     return $this->Util->ajaxReturn(['status' => true, 'url' => '/user/register-business']);
@@ -180,6 +187,7 @@ class UserController extends AppController {
                 }
                 $data['avatar'] = $this->request->session()->read('reg.avatar');
             }
+            $user->register_status = 1; //注册到第一步
             $user = $this->User->patchEntity($user, $data);
             if ($this->User->save($user)) {
                 //session 记录 注册手机号 和 注册步骤
@@ -260,9 +268,10 @@ class UserController extends AppController {
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $phone = $this->request->data('phone');
-            $user = $this->User->findByPhoneAndEnabled($phone, 1)->first();
+            $user = $this->User->findByPhone($phone)->first();
             if ($user) {
-                // $vcode = $this->request->session()->read('UserLoginVcode');
+                if($user->enabled==1){
+                       // $vcode = $this->request->session()->read('UserLoginVcode');
                 //  if ($vcode['code'] == $this->request->data('vcode')) {
                 //  if (time() - $vcode['time'] < 60 * 10) {
                 //10分钟验证码超时
@@ -278,8 +287,13 @@ class UserController extends AppController {
                 //     }
                 //  } else {
                 //      $this->Util->ajaxReturn(false, '验证码验证错误');
-                // }
-            } else {
+                // } 
+                }elseif($user->register_status<3){
+                    //中断注册的情况
+                }
+            
+            } else{
+                //不存在该手机号用户
                 return $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或不可用']);
             }
         }
@@ -389,7 +403,12 @@ class UserController extends AppController {
                     }
                     if ($this->User->save($user)) {
                         $this->request->session()->write('User.mobile', $user);
-                        return $this->Util->ajaxReturn(['status' => true]);
+                        $user_token = false;
+                        if($this->request->is('lemon')){
+                            $this->request->session()->write('Login.login_token',$user->user_token);
+                            $user_token = $user->user_token;
+                        }
+                        return $this->Util->ajaxReturn(['status' => true,'token_uin'=>$user_token]);
                     } else {
                         return $this->Util->ajaxReturn(false, '服务器出错');
                     }

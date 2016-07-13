@@ -415,6 +415,7 @@ class BusinessComponent extends Component {
         $flow = $FlowTable->newEntity([
             'user_id' => $order->seller_id,
             'type' => 1,
+            'relate_id'=>$order->id,   //关联的订单id
             'type_msg' => '约见收入',
             'income' => 1,
             'amount' => $order->price,

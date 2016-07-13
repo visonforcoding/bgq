@@ -76,6 +76,10 @@
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
                         //绑定成功则 跳到个人中心页
+                        if($.util.isAPP){
+                            $.util.setCookie('token_uin',msg.token_uin,10*365*24*60);
+                            LEMON.db.set('token_uin',msg.token_uin);
+                        }
                         window.location.href = '/home/index';
                     } else {
                         $.util.alert(msg.msg);

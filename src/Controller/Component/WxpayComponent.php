@@ -219,12 +219,12 @@ class WxpayComponent extends Component {
                     'return_msg' => 'OK'
                 ]);
             }else{
-                $this->Util->dblog(UtilComponent::FLAG_ORDER, $msg, $data);
+                $this->Util->dblog('order', $msg, $data);
             }
         } else {
             $msg = '微信订单回调订单未找到，订单号:' . $order_no;
             \Cake\Log\Log::warning($msg, 'devlog');
-            $this->Util->dblog(UtilComponent::FLAG_ORDER, $msg, $data);
+            $this->Util->dblog('order', $msg, $data);
         }
         $this->response->body($resXml);
         $this->response->send();

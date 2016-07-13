@@ -36,12 +36,9 @@
             });
             $.zui.store.pageClear(); //刷新页面缓存清除
             $("#list").jqGrid({
-                url: "/admin/user/getDataList",
+                url: "/admin/senior/getDataList",
                 datatype: "json",
                 mtype: "POST",
-                cellEdit : false,
-                cellsubmit : 'remote',
-                cellurl: '/admin/user/hand-change',
                 colNames:
                         ['手机号', '姓名', '类型','等级', '公司','职位',  '性别','专家认证','帐号状态', '创建时间',  '操作'],
                 colModel: [
@@ -115,13 +112,6 @@
                     records: "records",
                     repeatitems: false,
                     id: 'id',
-                },
-                afterSubmitCell:function(serverresponse, rowid, cellname, value, iRow, iCol){
-                   var res = $.parseJSON(serverresponse.responseText);
-                    layer.msg(res.msg);
-                    if(res.status){
-                        $('#list').trigger('reloadGrid');
-                    }
                 }
             }).navGrid('#pager', {edit: false, add: false, del: false, view: true,search:false});
         });
@@ -157,7 +147,7 @@
                     type: 'post',
                     data: {id: id},
                     dataType: 'json',
-                    url: '/admin/user/delete',
+                    url: '/admin/senior/delete',
                     success: function (res) {
                         layer.msg(res.msg);
                         if (res.status) {
@@ -190,12 +180,12 @@
             searchData['sidx'] = sortColumnName;
             searchData['sort'] = sortOrder;
             var searchQueryStr = $.param(searchData);
-            $("body").append("<iframe src='/admin/user/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+            $("body").append("<iframe src='/admin/senior/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
         }
 
         function doView(id) {
             //查看明细
-            url = '/admin/user/view/' + id;
+            url = '/admin/senior/view/' + id;
             layer.open({
                 type: 2,
                 title: '查看详情',
@@ -223,7 +213,7 @@
                     type: 'post',
                     data: {id: id},
                     dataType: 'json',
-                    url: '/admin/user/able-user',
+                    url: '/admin/senior/able-user',
                     success: function (res) {
                         layer.msg(res.msg);
                         if (res.status) {
