@@ -116,8 +116,8 @@
     window.shareConfig.title = '<?= $news->title ?>';
     var share_desc = '<?= $news->share_desc ?>';
     share_desc && (window.shareConfig.desc = share_desc);
-        LEMON.show.shareIco();
-        LEMON.sys.back('/news/index');
+    LEMON.show.shareIco();
+    //LEMON.sys.back('/news/index');
 
     window.__comments = <?= json_encode($news->comments) ?>;
     window.__user_id = <?= isset($user->id) ? $user->id : 0 ?>;
@@ -444,5 +444,9 @@
             $('#allcoment').hide();
         }
     });
+
+    $.util.staticLogin();
+
+
 </script>
 <?php $this->end('script'); ?>

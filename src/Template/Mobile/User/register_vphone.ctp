@@ -41,7 +41,7 @@
     $('#getVcode').on('click', function () {
         var $obj = $(this);
         var phone = $('input[name="phone"]').val();
-        if (is_mobile(phone)) {
+        if ($.util.isMobile(phone)) {
             $.post('/user/sendVcode', {phone: phone}, function (res) {
                 console.log(res);
                 if (res.status === true) {
@@ -88,7 +88,7 @@
     });
     function checkPhone(phone) {
         if (phone !== '') {
-            if (is_mobile(phone)) {
+            if ($.util.isMobile(phone)) {
                 $.post('/user/ckUserPhoneExist', {phone: phone}, function (res) {
                     if (res.status === true) {
                          $.util.alert('该手机号已注册');

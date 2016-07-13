@@ -32,7 +32,7 @@
     $('#getVcode').on('tap', function () {
         var $obj = $(this);
         var phone = $('input[name="phone"]').val();
-        if (!is_mobile(phone)) {
+        if (!$.util.isMobile(phone)) {
             $.util.alert('手机号不正确');
             return;
         }
@@ -62,7 +62,7 @@
     });
     $('#submit').on('tap', function () {
         var phone = $('input[name="phone"]').val();
-         if (!is_mobile(phone)) {
+         if (!$.util.isMobile(phone)) {
             $.util.alert('手机号不正确');
             return;
         }
@@ -90,7 +90,7 @@
     });
     function checkPhone(phone) {
         if (phone !== '') {
-            if (is_mobile(phone)) {
+            if ($.util.isMobile(phone)) {
                 $.post('/user/ckUserPhoneExist', {phone: phone}, function (res) {
                     if (res.status === false) {
                          $.util.alert('您还没有平台账号请先完善信息');

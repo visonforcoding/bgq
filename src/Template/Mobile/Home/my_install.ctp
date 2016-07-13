@@ -73,6 +73,7 @@
                 if(msg.status) {
                     $.util.alert(msg.msg);
                     $.util.setCookie('token_uin','');
+                    $.util.setCookie('login_status', '');
                     LEMON.db.set('token_uin','');
                     location.href = '/';
                 } else {
