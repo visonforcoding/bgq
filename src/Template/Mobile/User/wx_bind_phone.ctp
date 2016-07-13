@@ -22,7 +22,6 @@
     </div>
 </div>
 <?php $this->start('script') ?>
-<script src="/mobile/js/function.js"></script>
 <script>
     var t1 = null;
     $('input[name="phone"]').focusout(function () {
