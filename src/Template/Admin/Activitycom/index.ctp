@@ -1,9 +1,18 @@
 <?php $this->start('static') ?>   
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
+<style>
+    .area{margin:100px auto;width:60%;}
+            .floor>div,.floor>div>div,.floor>div>div>div,.floor>div>div>div>div,.floor>div>div>div>div>div,.floor>div>div>div>div>div>div,.floor>div>div>div>div>div>div>div{border:1px #ccc solid;padding:1px;background: #e1e1e1;}
+            .inner-wraper{margin-bottom:10px;padding:0 10px;padding-left:40px;}
+            .author{margin-top:10px;color:blue;}
+            .content{margin-top:10px;color:#333;}
+            .floor-num{position:absolute;width:30px;height:15px;background: gray;color:#fff;line-height: 15px;text-align: center;margin-top:10px;}
+</style>
 <?php $this->end() ?> 
+
 <div class="col-xs-12">
-    <form id="table-bar-form">
+   <!--  <form id="table-bar-form">
         <div class="table-bar form-inline">
             <div class="form-group">
                 <label for="keywords">关键字</label>
@@ -20,7 +29,22 @@
         </div>
     </form>
     <table id="list"><tr><td></td></tr></table> 
-    <div id="pager"></div> 
+    <div id="pager"></div>  -->
+
+    <div class="floor area">
+                <p class="author"><span>曹麦穗:</span></p>
+                <div class="floor">
+                    
+                                        <span class="floor-num">1</span>
+                                    <section class="inner-wraper">
+                                        <p class="author"><span>op1qazse4rfvgy7ujm:</span></p>
+                                        <p class="content">领土问题无条件支持！一寸山河一寸血，一步也不能退让！</p>
+                                    </section>
+                            
+                                </div>
+                
+                <p class="content">国家兴亡，匹夫有责。大敌当前，戮力同心，捍卫主权。</p>
+    </div>
 </div>
 <?php $this->start('script'); ?>
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
