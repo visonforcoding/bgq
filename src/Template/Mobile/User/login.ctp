@@ -31,7 +31,6 @@
     </div>
 </div>
 <?php $this->start('script') ?>
-<script src="/mobile/js/function.js"></script>
 <script>
     if(location.href.indexOf('loginout=1')>0){
         $.util.setCookie('token_uin','');

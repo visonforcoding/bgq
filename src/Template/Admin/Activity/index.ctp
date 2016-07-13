@@ -27,7 +27,7 @@
 </div>
 <style>
     .bigdiv{}
-.position{position:absolute; display:none ;width:200px;height:60px;right:6%;z-index: 999;background:whitesmoke; border: 1px solid #E1E1E1;line-height: 60px;}
+.position{position:absolute; display:none ;font-size: 20px; width:230px;height:45px;right:6%;z-index: 999;background:whitesmoke; border: 1px solid #E1E1E1;line-height: 40px;}
 .position:before{position:absolute;width:0;height:0;border:10px transparent solid; border-left:5px #e5e5e5 solid;content: '';right:-15px;top:17%;}
 </style>
 
@@ -126,17 +126,17 @@
                         response += '<a title="评论详情" href="/admin/activitycom/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-comment"></i> </a>';
                         response += '<a title="点赞日志" href="/admin/likeLogs/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-heart"></i> </a>';
                         response += '<a title="收藏日志" href="/admin/collectLogs/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-star"></i> </a>';
-                        response += '<a title="报名用户" href="/admin/activityapply/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-level-up"></i> </a>';
+                        response += '<a title="报名用户" href="/admin/activityapply/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-user"></i> </a>';
                         response += '<a title="赞助详情" href="/admin/sponsor/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-dollar"></i> </a>';
-                        response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(' + rowObject.id + ');"><i class="icon icon-qrcode"></i><div hidden id="code_' + rowObject.id + '" style="position:relative;top:0;"><img src="' + rowObject.qrcode + '" /></div> </a>';
+                        response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(' + rowObject.id + ');"><i class="icon icon-qrcode"></i><div hidden id="code_' + rowObject.id + '" style="position:relative;top:0;"><img back_src="' + rowObject.qrcode + '" /></div> </a>';
                     } else if (rowObject.is_top == 1 && rowObject.is_check == 1) {
                         response += '<a title="取消置顶" href="javascript:void(0)" class="grid-btn untop" onclick="untop(' + rowObject.id + ')"><i class="icon icon-long-arrow-down"></i></a>';
                         response += '<a title="评论详情" href="/admin/activitycom/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-comment"></i> </a>';
                         response += '<a title="点赞日志" href="/admin/likeLogs/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-heart"></i> </a>';
                         response += '<a title="收藏日志" href="/admin/collectLogs/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-star"></i> </a>';
-                        response += '<a title="报名用户" href="/admin/activityapply/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-level-up"></i> </a>';
+                        response += '<a title="报名用户" href="/admin/activityapply/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-user"></i> </a>';
                         response += '<a title="赞助详情" href="/admin/sponsor/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-dollar"></i> </a>';
-                        response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(' + rowObject.id + ');"><i class="icon icon-qrcode"></i><div hidden id="code_' + rowObject.id + '" style="position:relative;top:0;"><img src="' + rowObject.qrcode + '" /></div> </a>';
+                        response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(' + rowObject.id + ');"><i class="icon icon-qrcode"></i><div hidden id="code_' + rowObject.id + '" style="position:relative;top:0;"><img back_src="' + rowObject.qrcode + '" /></div> </a>';
                     }
                     if (rowObject.is_check == 0) {
                         response += '<a title="发布" href="javascript:void(0)" class="grid-btn release" onclick="release(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
@@ -149,6 +149,7 @@
                 
                 function oncode(id){
                     var activity_id = '#code_'+id;
+                    $(activity_id).find('img').attr('src', $(activity_id).find('img').attr('back_src'));
                     if($(activity_id).hasClass('active'))
                     {
                         $(activity_id).hide();
