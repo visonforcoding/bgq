@@ -9,6 +9,7 @@ use Cake\Controller\ComponentRegistry;
  * 处理通用业务
  * Business component
  * @property \App\Controller\Component\SmsComponent $Sms
+ * @property \App\Controller\Component\PushComponent $Push
  */
 class BusinessComponent extends Component {
 
@@ -18,7 +19,7 @@ class BusinessComponent extends Component {
      * @var array
      */
     protected $_defaultConfig = [];
-    public $components = ['Sms'];
+    public $components = ['Sms', 'Push'];
 
     /**
      * 评论点赞
@@ -198,9 +199,24 @@ class BusinessComponent extends Component {
             'msg' => $msg,
             'table_id' => $id,
         ]));
-        if (!$UsermsgTable->save($usermsg)) {
+        $res = $UsermsgTable->save($usermsg);
+        if (!$res) {
             \Cake\Log\Log::error($usermsg,'devlog');
             \Cake\Log\Log::error($usermsg->errors(),'devlog');
+        } else {
+            $userTable = \Cake\ORM\TableRegistry::get('user');
+            $user = $userTable->get($user_id);
+            if($type == 1){
+                $data = [
+                   'url' => 'http://m.chinamatop.com/home/my-message-fans' 
+                ];
+                $this->Push->sendAlias($user->user_token, '您有1位新的关注者', '', '您有新的关注者', true, $data, 'go_url');
+            } else {
+                $data = [
+                   'url' => 'http://m.chinamatop.com/home/my-message-sys' 
+                ];
+                $this->Push->sendAlias($user->user_token, $title, $msg, $title, true, $data, 'go_url');
+            }
         }
     }
 
