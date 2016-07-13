@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -11,8 +12,7 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property \App\Model\Entity\User[] $user
  */
-class Industry extends Entity
-{
+class Industry extends Entity {
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -27,4 +27,8 @@ class Industry extends Entity
         '*' => true,
         'id' => false,
     ];
+    protected $_hidden = [
+        '_joinData'
+    ];
+
 }

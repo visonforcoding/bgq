@@ -61,7 +61,7 @@
                         url: "/admin/activity/getDataList",
                         datatype: "json",
                         mtype: "POST",
-                        colNames: ['id', '作者', '主办单位', '活动名称', '活动时间', '地点', '规模', '阅读数', '点赞数', '评论数', '是否众筹', '报名人数', '报名费用', '创建时间', '更新时间', '操作'],
+                        colNames: ['id', '作者', '主办单位', '活动名称', '活动时间', '地点', '规模', '阅读数', '点赞数', '评论数', '报名人数', '报名费用', '创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'id', editable: true, align: 'center'},
                             {name: 'user.truename', editable: true, align: 'center'},
@@ -75,7 +75,7 @@
                             {name: 'read_nums', editable: true, align: 'center'},
                             {name: 'praise_nums', editable: true, align: 'center'},
                             {name: 'comment_nums', editable: true, align: 'center'},
-                            {name: 'is_crowdfunding', editable: true, align: 'center', formatter: crowdFormatter},
+//                            {name: 'is_crowdfunding', editable: true, align: 'center', formatter: crowdFormatter},
                             {name: 'apply_nums', editable: true, align: 'center'},
                             {name: 'apply_fee', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
