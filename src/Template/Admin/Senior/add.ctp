@@ -14,6 +14,12 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">负责人</label>
+        <div class="col-md-8">
+            <?= $this->cell('Admin') ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">姓名</label>
         <div class="col-md-8">
             <?php
@@ -21,13 +27,13 @@
             ?>
         </div>
     </div>
-<!--    <div class="form-group">
-        <label class="col-md-2 control-label">等级</label>
-        <div class="col-md-8">
-            <label class="radio-inline"> <input name="level" value="1" checked="checked"  type="radio"> 普通</label>
-            <label class="radio-inline"> <input name="level" value="2"  type="radio"> 专家 </label>
-        </div>
-    </div>-->
+    <!--    <div class="form-group">
+            <label class="col-md-2 control-label">等级</label>
+            <div class="col-md-8">
+                <label class="radio-inline"> <input name="level" value="1" checked="checked"  type="radio"> 普通</label>
+                <label class="radio-inline"> <input name="level" value="2"  type="radio"> 专家 </label>
+            </div>
+        </div>-->
     <div class="form-group">
         <label class="col-md-2 control-label">身份证</label>
         <div class="col-md-8">
@@ -70,7 +76,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">机构标签</label>
         <div class="col-md-8">
-            <?=$this->cell('Agency')?>
+            <?= $this->cell('Agency') ?>
         </div>
     </div>
     <div class="form-group">
@@ -125,11 +131,15 @@
 <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
     $(function () {
-         initJqupload('card_path', '/wpadmin/util/doUpload?dir=/user/mp', 'jpg,png,gif,jpeg'); //初始化图片上传
+        initJqupload('card_path', '/wpadmin/util/doUpload?dir=/user/mp', 'jpg,png,gif,jpeg'); //初始化图片上传
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
-         $('#select-agency').select2({
+        $('#select-agency').select2({
             language: "zh-CN",
             placeholder: '选择一个标签'
+        });
+        $('#select-admin').select2({
+            language: "zh-CN",
+            placeholder: '选择一个管理员'
         });
         $('form').submit(function () {
             var form = $(this);
@@ -144,7 +154,7 @@
                             layer.confirm(res.msg, {
                                 btn: ['确认', '继续添加'] //按钮
                             }, function () {
-                                window.location.href = '/admin/user/index';
+                                window.location.href = '/admin/senior/index';
                             }, function () {
                                 window.location.reload();
                             });

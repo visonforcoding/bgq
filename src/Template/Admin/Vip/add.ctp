@@ -14,6 +14,12 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">负责人</label>
+        <div class="col-md-8">
+            <?= $this->cell('Admin') ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">姓名</label>
         <div class="col-md-8">
             <?php
@@ -63,31 +69,23 @@
     <div class="form-group">
         <label class="col-md-2 control-label">性别</label>
         <div class="col-md-8">
-            <label class="radio-inline"> <input name="gender" value="1" <?php if($user->gender==1):?> checked="checked"<?php endif;?>  type="radio"> 男</label>
-            <label class="radio-inline"> <input name="gender" value="2" <?php if($user->gender==2):?> checked="checked"<?php endif;?>  type="radio"> 女 </label>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">等级</label>
-        <div class="col-md-8">
-            <label class="radio-inline"> <input name="grade" value="1" <?php if($user->grade==1):?> checked="checked"<?php endif;?>  type="radio"> 普通</label>
-            <label class="radio-inline"> <input name="grade" value="2" <?php if($user->grade==2):?> checked="checked"<?php endif;?>  type="radio"> 高级 </label>
-            <label class="radio-inline"> <input name="grade" value="3" <?php if($user->grade==3):?> checked="checked"<?php endif;?>  type="radio"> vip </label>
+            <label class="radio-inline"> <input name="gender" value="1" checked="checked"  type="radio"> 男</label>
+            <label class="radio-inline"> <input name="gender" value="2"  type="radio"> 女 </label>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">机构标签</label>
         <div class="col-md-8">
-            <?= $this->cell('Agency', [$user->agency_id]) ?>
+            <?= $this->cell('Agency') ?>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">上传名片</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
-                <img  alt="封面图片" src="<?=$user->card_path?>"/>
+                <img  alt="封面图片" src=""/>
             </div>
-            <input name="card_path" value="<?=$user->card_path?>" type="hidden"/>
+            <input name="card_path"  type="hidden"/>
             <div id="card_path" class="jqupload">上传</div>
         </div>
     </div>
@@ -102,19 +100,19 @@
     <div class="form-group">
         <label class="col-md-2 control-label">擅长业务</label>
         <div class="col-md-8">
-            <textarea name="goodat" class="form-control" rows="2"><?=$user->goodat?></textarea>
+            <textarea name="goodat" class="form-control" rows="2"></textarea>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">项目经验</label>
         <div class="col-md-8">
-            <textarea name="ymjy" class="form-control" rows="2"><?=$user->ymjy?></textarea>
+            <textarea name="ymjy" class="form-control" rows="2"></textarea>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">业务能力</label>
         <div class="col-md-8">
-            <textarea class="form-control" name="ywnl" rows="2"><?=$user->ywnl?></textarea>
+            <textarea class="form-control" name="ywnl" rows="2"></textarea>
         </div>
     </div>
     <div class="form-group">
@@ -133,11 +131,15 @@
 <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
     $(function () {
-         initJqupload('card_path', '/admin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
+        initJqupload('card_path', '/wpadmin/util/doUpload?dir=/user/mp', 'jpg,png,gif,jpeg'); //初始化图片上传
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-agency').select2({
             language: "zh-CN",
             placeholder: '选择一个标签'
+        });
+        $('#select-admin').select2({
+            language: "zh-CN",
+            placeholder: '选择一个管理员'
         });
         $('form').submit(function () {
             var form = $(this);
@@ -149,8 +151,12 @@
                 success: function (res) {
                     if (typeof res === 'object') {
                         if (res.status) {
-                            layer.alert(res.msg, function () {
-                                window.location.href = '/admin/user/index';
+                            layer.confirm(res.msg, {
+                                btn: ['确认', '继续添加'] //按钮
+                            }, function () {
+                                window.location.href = '/admin/vip/index';
+                            }, function () {
+                                window.location.reload();
                             });
                         } else {
                             layer.alert(res.msg, {icon: 5});

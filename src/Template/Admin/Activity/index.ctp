@@ -50,6 +50,7 @@
 <?php $this->start('script'); ?>
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
+<script src="/wpadmin/lib/zeroclipboard/dist/ZeroClipboard.js"></script>
 <script>
                 $(function () {
                     $('#main-content').bind('resize', function () {
@@ -103,7 +104,17 @@
                         },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
                 });
-               
+                var clip = '';
+                setTimeout(function () {
+                    clip = new ZeroClipboard($('.copy'));
+                    console.log('可以复制了');
+                    clip.on('copy', function (event) {
+                        clip.setData('text/plain', '<?=$domain?>'+'/activity/view/' + event.target.id);
+                    });
+                    clip.on("aftercopy", function (event) {
+                        alert("复制了: " + event.data["text/plain"]);
+                    });
+                }, 1000);
                 function crowdFormatter(cellvalue, options, rowObject) {
                     if (rowObject.is_crowdfunding == 0)
                     {
@@ -117,10 +128,12 @@
                 }
 
                 function actionFormatter(cellvalue, options, rowObject) {
-                    response = '<div class="bigdiv" onmouseout="$(this).find(\'.position\').hide()" onmouseover="$(this).find(\'.position\').show()">';
-                    response += '<div class="position"><a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+//                    response = '<div class="bigdiv" onmouseout="$(this).find(\'.position\').hide()" onmouseover="$(this).find(\'.position\').show()">';
+//                    response += '<div class="position"><a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="编辑" href="/admin/activity/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+                    response += '<a title="复制" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
                     if (rowObject.is_top == 0 && rowObject.is_check == 1) {
                         response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
                         response += '<a title="评论详情" href="/admin/activitycom/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-comment"></i> </a>';
@@ -142,7 +155,7 @@
                         response += '<a title="发布" href="javascript:void(0)" class="grid-btn release" onclick="release(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
                         response += '<a title="未通过审核" href="javascript:void(0)" class="grid-btn unrelease" onclick="unrelease(' + rowObject.id + ')"><i class="icon icon-times"></i></a>';
                     }
-                    response += '</div><a class="showallbtn" title="操作"><i class="icon icon-resize-full"></i></a></div>';
+//                    response += '</div><a class="showallbtn" title="操作"><i class="icon icon-resize-full"></i></a></div>';
                     return response;
                 }
 

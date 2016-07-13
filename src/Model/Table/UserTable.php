@@ -55,7 +55,9 @@ class UserTable extends Table {
             'className' => 'Savant',
         ]);
         
-        $this->belongsTo('Agencies');
+        $this->belongsTo('Agencies',[
+            'className'=>'Agency'
+        ]);
         
         $this->hasMany('Educations',[
             'className' => 'Education',
@@ -70,6 +72,26 @@ class UserTable extends Table {
         
         $this->hasOne('UserFans',[
             'className' => 'UserFans',
+        ]);
+        $this->hasMany('Focus',[
+            'className' => 'UserFans',
+            'foreignKey'=>'user_id'
+        ]);
+        //粉丝
+        $this->hasMany('Followers',[
+            'className' => 'UserFans',
+            'foreignKey'=>'following_id'
+        ]);
+        //资讯评论
+        $this->hasMany('Newscoms',[
+            'className' => 'Newscom',
+            'foreignKey'=>'user_id'
+        ]);
+        
+        //活动评论
+        $this->hasMany('Activitycoms',[
+            'className' => 'Activitycom',
+            'foreignKey'=>'user_id'
         ]);
         
         $this->hasOne('CardBoxes',[
@@ -92,6 +114,12 @@ class UserTable extends Table {
             'foreignKey'=>'user_id',
             'joinType'=>'LEFT',
             'className'=>'Secret'
+        ]);
+        //联络人
+        $this->belongsTo('Customer',[
+            'className'=>'Wpadmin.Admin',
+            'joinType'=>'LEFT',
+            'foreignKey'=>'admin_id'
         ]);
 
         $this->addBehavior('Timestamp', [

@@ -48,10 +48,10 @@ foreach ($menus as $key => $value) {
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>
-        <li>
+<!--        <li>
             <a href=""><i class="icon-tasks"></i> 消息中心
                 <span class="label label-badge label-danger pull-right">2</span>
             </a>
-        </li>
+        </li>-->
     </ul>
 </nav>

@@ -7,7 +7,7 @@ use Cake\View\Cell;
 /**
  * Industry cell
  */
-class UserCell extends Cell {
+class AdminCell extends Cell {
 
     /**
      * List of valid options that can be passed into this
@@ -23,9 +23,9 @@ class UserCell extends Cell {
      * @return void
      */
     public function display($selIds=null) {
-        $UserTable = \Cake\ORM\TableRegistry::get('User');
-        $users = $UserTable->find()->where(['enabled'=>1])->all()->toArray();
-        $this->set(compact('users','selIds'));
+        $AdminTable = \Cake\ORM\TableRegistry::get('Admin');
+        $admins = $AdminTable->find()->where(['enabled'=>1])->all()->toArray();
+        $this->set(compact('admins','selIds'));
     }
 
 }

@@ -21,8 +21,8 @@
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>
-        <li>
+<!--        <li>
             <?= $this->cell('Wpadmin.inbox::menu') ?>
-        </li>
+        </li>-->
     </ul>
 </nav>

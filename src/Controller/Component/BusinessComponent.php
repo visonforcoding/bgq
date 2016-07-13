@@ -438,7 +438,7 @@ class BusinessComponent extends Component {
             'pre_amount' => $pre_amount,
             'after_amount' => $order->seller->money,
             'status' => 1,
-            'remark' => '约见获取收入:' . $order->price
+            'remark' => '约见获取收入-' . $order->user->truename
         ]);
         $transRes = $BookTable->connection()->transactional(function()use($order, $BookTable, $book, $OrderTable, $FlowTable, $flow) {
             return $OrderTable->save($order, ['associated' => ['Sellers']]) && $BookTable->save($book) && $FlowTable->save($flow);
