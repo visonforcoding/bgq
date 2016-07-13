@@ -225,12 +225,14 @@ class AlipayComponent extends Component {
                 }
             } else {
                 \Cake\Log\Log::error('支付宝交易回调查询订单失败,订单号:' . $order_no, 'devlog');
+                $this->Util->dblog('order', '支付宝交易回调查询订单失败,订单号:' . $order_no, $data);
             }
             $this->response->body($output);
             $this->response->send();
             $this->response->stop();
         } else {
             \Cake\Log\Log::error('支付宝交易回调状态异常,状态值:' . $data['out_trade_no'], 'devlog');
+            $this->Util->dblog('order','支付宝交易回调状态异常,状态值:' . $data['out_trade_no'], $data);
         }
     }
 

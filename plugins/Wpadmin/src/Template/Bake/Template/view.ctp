@@ -51,34 +51,16 @@ $groupedFields = collection($fields)
 $groupedFields += ['number' => [], 'string' => [], 'boolean' => [], 'date' => [], 'text' => []];
 $pk = "\$$singularVar->{$primaryKey[0]}";
 %>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit <%= $singularHumanName %>'), ['action' => 'edit', <%= $pk %>]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete <%= $singularHumanName %>'), ['action' => 'delete', <%= $pk %>], ['confirm' => __('Are you sure you want to delete # {0}?', <%= $pk %>)]) ?> </li>
-        <li><?= $this->Html->link(__('List <%= $pluralHumanName %>'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New <%= $singularHumanName %>'), ['action' => 'add']) ?> </li>
-<%
-    $done = [];
-    foreach ($associations as $type => $data) {
-        foreach ($data as $alias => $details) {
-            if ($details['controller'] !== $this->name && !in_array($details['controller'], $done)) {
-%>
-        <li><?= $this->Html->link(__('List <%= $this->_pluralHumanName($alias) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New <%= Inflector::humanize(Inflector::singularize(Inflector::underscore($alias))) %>'), ['controller' => '<%= $details['controller'] %>', 'action' => 'add']) ?> </li>
-<%
-                $done[] = $details['controller'];
-            }
-        }
-    }
-%>
-    </ul>
-</nav>
+<head>
+    <link rel="stylesheet" type="text/css" href="/wpadmin/lib/zui/css/zui.min.css"/>
+</head>
+<body>
 <div class="<%= $pluralVar %> view large-9 medium-8 columns content">
     <h3><?= h($<%= $singularVar %>-><%= $displayField %>) ?></h3>
     <table class="vertical-table">
 <% if ($groupedFields['string']) : %>
 <% foreach ($groupedFields['string'] as $field) : %>
+<% $fieldData = $schema->column($field);%>
 <% if (isset($associationFields[$field])) :
             $details = $associationFields[$field];
 %>
@@ -122,7 +104,7 @@ $pk = "\$$singularVar->{$primaryKey[0]}";
 <% if ($groupedFields['text']) : %>
 <% foreach ($groupedFields['text'] as $field) : %>
     <div class="row">
-        <h4><?= __('<%= Inflector::humanize($field) %>') ?></h4>
+        <h4><%=$fieldData['comment']?$fieldData['comment']:$field%></h4>
         <?= $this->Text->autoParagraph(h($<%= $singularVar %>-><%= $field %>)); ?>
     </div>
 <% endforeach; %>
@@ -161,3 +143,4 @@ foreach ($relations as $alias => $details):
     </div>
 <% endforeach; %>
 </div>
+</body>

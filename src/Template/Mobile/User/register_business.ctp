@@ -61,6 +61,10 @@
                //对象长度判断
                $.post('/user/register-business',formdata,function(res){
                    if(res.status===true){
+                        if($.util.isAPP){
+                            $.util.setCookie('token_uin',res.token_uin,10*365*24*60);
+                            LEMON.db.set('token_uin',res.token_uin);
+                        }
                        window.location.href = res.url;
                    }else{
                        $.util.alert(res.msg);
