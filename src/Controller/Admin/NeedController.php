@@ -195,7 +195,10 @@ class NeedController extends AppController {
         $filename = 'Need_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
-    
+    /**
+     * 回复
+     * @param int $id
+     */
     public function reply($id){
         if($this->request->is('post')){
             $data = $this->request->data;
