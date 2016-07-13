@@ -60,14 +60,14 @@
             ?>
         </div>
     </div>
-    <div class="form-group">
+<!--    <div class="form-group">
         <label class="col-md-2 control-label">是否众筹</label>
         <div class="col-md-8">
             <?php
             echo $this->Form->input('is_crowdfunding', ['type' => 'select', 'options' => ['0' => '否','1' => '是'], 'label' => false, 'class' => 'form-control']);
             ?>
         </div>
-    </div>
+    </div>-->
     <div class="form-group">
         <label class="col-md-2 control-label">专家推荐</label>
         <div class="col-md-8">

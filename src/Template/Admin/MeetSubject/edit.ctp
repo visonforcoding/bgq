@@ -6,12 +6,6 @@
 <div class="work-copy">
     <?= $this->Form->create($meetSubject, ['class' => 'form-horizontal']) ?>
     <div class="form-group">
-        <label class="col-md-2 control-label">专家</label>
-        <div class="col-md-8">
-            <?= $this->cell('Biggie'); ?>
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-md-2 control-label">标题</label>
         <div class="col-md-8">
             <?php
@@ -22,9 +16,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">简介</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('summary', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <textarea class="form-control" name="summary"><?=$meetSubject->summary?></textarea>
         </div>
     </div>
     <div class="form-group">
@@ -81,9 +73,6 @@
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/jquery.validationEngine.js"></script>
 <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
-<!--<script src="/wpadmin/lib/ueditor/ueditor.config.js" ></script>
-<script src="/wpadmin/lib/ueditor/ueditor.all.js" ></script>
-<script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>    -->
 <script>
     $(function () {
         // initJqupload('cover', '/wpadmin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传

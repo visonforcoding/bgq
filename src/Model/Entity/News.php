@@ -35,4 +35,8 @@ class News extends Entity
         '*' => true,
         'id' => false,
     ];
+    
+     protected $_hidden = [
+        '_joinData'
+    ];
 }

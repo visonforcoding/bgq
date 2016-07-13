@@ -1,6 +1,7 @@
 <?php $this->start('static') ?>   
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
+<link href="/wpadmin/lib/select2/css/select2.min.css" rel="stylesheet">
 <?php $this->end() ?> 
 <div class="col-xs-12">
     <form id="table-bar-form">
@@ -11,6 +12,10 @@
             <div class="form-group">
                 <label for="keywords">关键字</label>
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="用户名、标题、摘要">
+            </div>
+            <div class="form-group">
+                <label for="keywords">行业标签</label>
+                  <?=$this->cell('Industry')?>
             </div>
             <div class="form-group">
                 <label for="keywords">时间</label>
@@ -29,6 +34,7 @@
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
 <script src="/wpadmin/lib/zeroclipboard/dist/ZeroClipboard.js"></script>
+<script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
                 $(function () {
                     $('#main-content').bind('resize', function () {
@@ -40,10 +46,17 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['作者', '标题', '阅读数', '点赞数', '评论数', '创建时间', '更新时间', '操作'],
+                                ['作者', '标题','行业标签', '阅读数', '点赞数', '评论数', '创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'title', editable: true, align: 'center'},
+                            {name: 'industries', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
+                                    var industries_arr = [];
+                                     $.each(cellvalue,function(i,n){
+                                         industries_arr.push(n.name);
+                                     })
+                                     return industries_arr.join(',');
+                            }},
                             {name: 'read_nums', editable: true, align: 'center'},
                             {name: 'praise_nums', editable: true, align: 'center'},
                             {name: 'comment_nums', editable: true, align: 'center'},
@@ -72,6 +85,11 @@
                             id: "0"
                         },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
+                    
+                    $('#select-industry').select2({
+                        language: "zh-CN",
+                        placeholder: '选择一个标签'
+                    });
                 });
                 function actionFormatter(cellvalue, options, rowObject) {
 //                    response = '<div class="bigdiv" onmouseout=$(this).find(".showall").hide();$(this).find(".showallbtn").show(); ><a class="showallbtn" title="操作" onmouseover=$(this).hide();$(this).next(".showall").show();><i class="icon icon-resize-full"></i></a>';
