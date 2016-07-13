@@ -181,8 +181,8 @@
     window.shareConfig.title = '<?= $activity->title ?>';
     var share_desc = '<?= $activity->share_desc ?>';
     share_desc && (window.shareConfig.desc = share_desc);
-        LEMON.show.shareIco();
-        LEMON.sys.back('/activity/index');
+    LEMON.show.shareIco();
+    //LEMON.sys.back('/activity/index');
 
     window.__user_id = <?= !empty($user) ? $user : '0' ?>;
     window.__id = <?= $activity->id ?>;

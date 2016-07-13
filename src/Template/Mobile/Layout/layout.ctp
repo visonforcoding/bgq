@@ -54,7 +54,6 @@
         
         <?= $this->fetch('script') ?>
         
-        <script type="text/javascript" src="/mobile/js/function.js"></script>
         <script>
             (function(){
                 if(!/smartlemon|micromessenger/.test(navigator.userAgent.toLowerCase())){
