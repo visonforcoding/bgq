@@ -91,7 +91,7 @@
     <span></span>
     <p></p>
  </div>
-<div class="totips" style="height:3.6rem;" hidden id="isdel" >
+<div class="totips" style="height:3.6rem;display:none;" id="isdel" >
     <h3>确定要删除本条评论？</h3>
     <span></span>
     <a href="javascript:void(0)" class="tipsbtn" id="no">取消</a><a href="javascript:void(0)" class="tipsbtn" id="yes">确认</a>
