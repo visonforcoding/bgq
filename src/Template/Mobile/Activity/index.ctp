@@ -26,13 +26,13 @@
     <section class='news-list-items'>
         <div class="active-items">
             <a href="/activity/details/{#id#}" class="a-head">
-               <div><img src="{#cover#}"/></div>
+               <div><img src="{#cover#}"/>{#apply_msg#}</div>
                 <h3>{#title#}</h3>
             </a>
             <div class="a-bottom">
                 <span class="a-address">
                     {#address#}
-                    {#apply_msg#}
+                    
                 </span>
                 <div class="a-other-info">
                     <span class="a-number">{#apply_nums#}人报名</span>
@@ -43,8 +43,8 @@
         </div>
     </section>
 </script>
-<script type="text/html" id="subTpl">
-    <a href="javascript:void(0);">{#name#}</a>
+<script type="text/html" id="subTpl"> 
+    <a href="/activity/search">{#name#}</a>
 </script>
 <script type="text/html" id="bannerTpl">
     <li><a href="{#url#}"><img back_src="{#img#}"/></a></li>
@@ -59,6 +59,9 @@
     } else if($.util.isWX) {
         $('#search').css({'top':'0.2rem'});
     }
+</script>
+<script>
+    window.isApply = ',' + '<?= $isApply ?>' + ',';
 </script>
 <script>
     $.getJSON('/activity/get-banner',function(res){
@@ -76,7 +79,7 @@
     $.getJSON('/activity/getMoreActivity/1', function (res) {
         if (res.status) {
             var html = $.util.dataToTpl('', 'activity_tpl', res.data, function (d) {
-                d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
+                d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="registered">已报名</span>';
                 d.industries_name = $.util.dataToTpl('', 'subTpl', d.industries);
                 d.region_name = d.region ? '<a>' + d.region.name + '</a>' : '';
                 d.cover = d.thumb ? d.thumb : d.cover;
@@ -85,7 +88,7 @@
             $('#activity').append(html);
         }
     });
-    window.isApply = ',' + <?= $isApply ?> + ',';
+    
     $.util.searchHide();
 </script>
 <?php

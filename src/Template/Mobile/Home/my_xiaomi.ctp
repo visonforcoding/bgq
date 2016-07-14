@@ -1,44 +1,57 @@
-<header>
+<!--<header>
     <div class='inner'>
         <a href='javascript:history.go(-1);' class='toback'></a>
         <h1>
             小秘书
         </h1>
-        <!-- <a href="/home/my-history-need" class='h-regiser'>历史消息</a> -->
+
     </div>
-</header>
+</header>-->
+
 <div class="wraper">
-    <div class="h20">
-    </div>
-    <div class="a-form-box">
+    <!--<div class="h20">
+            
+    </div>-->
+    <div class="dialogue">
         <ul>
-            <li>
-                <textarea id="content"></textarea>
-            </li>
+            <?php if(!empty($conversation)): ?>
+                <?php foreach($conversation as $k=>$v): ?>
+                    <?php if($v['pid']!=0): ?>
+                        <li class="fl"><span><?= $v['msg'] ?></span><time><?= $v['create_time']->i18nFormat('yyyy-MM-dd') ?></time></li>
+                    <?php else: ?>
+                        <li class="fr"><span><?= $v['msg'] ?></span><time><?= $v['create_time']->i18nFormat('yyyy-MM-dd') ?></time></li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </ul>
     </div>
-    <a href="javascript:void(0)" id="submit" class="nextstep redshadow">发送</a>
-    <a href="/home/my-history-need" class='historyinfo'>历史消息</a>
+</div>
+<div style="height:1rem"></div>
+<div class="todialogue">
+    <textarea placeholder="请输入内容" id="content"></textarea>
+    <span id="submit"></span>
 </div>
 <?php $this->start('script') ?>
 <script>
-   $(function(){
-      $('#submit').click(function(){
-         var content =  $('#content').val();
-         if(!content){
-             $.util.alert('不可为空');
-             return false;
-         }
-         $.util.ajax({
-            data:{content:content},
-            func:function(res){
-                $.util.alert(res.msg);
-                setTimeout(function(){
-                    location.href = '/home/index';
-                },2000);
+   window.scrollTo(0, 999999);
+    $(function(){
+        $('#submit').click(function(){
+            var content =  $('#content').val();
+            if(!content){
+                $.util.alert('内容不可为空');
+                return false;
             }
-         });
-      });
-   });
+            $.util.ajax({
+               url: '/home/reply_xiaomi',
+               data:{content:content},
+               func:function(res){
+                   $.util.alert(res.msg);
+                   setTimeout(function(){
+                       location.href = '/home/my_xiaomi';
+                   },2000);
+               }
+            });
+        });
+    });
 </script>
 <?php $this->end('script');

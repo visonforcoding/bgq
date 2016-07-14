@@ -256,11 +256,25 @@ class HomeController extends AppController {
                                 ]);
                                 $this->set(compact('msgs', 'unReadCount'));
                             }
+                            
+                            public function myXiaomi(){
+                                $NeedTable = \Cake\ORM\TableRegistry::get('need');
+                                $where['OR'] = ['reply_id'=>$this->user->id, 'user_id'=>$this->user->id];
+                                $res = $NeedTable->find()->where($where)->hydrate(false)->toArray();
+//                                debug($res);die;
+                                if(!$res){
+                                    $res = '';
+                                }
+                                $this->set([
+                                    'pageTitle' => '小秘书',
+                                    'conversation' => $res,
+                                ]);
+                            }
 
                             /**
-                             * 小秘书
+                             * 回复小秘书
                              */
-                            public function myXiaomi() {
+                            public function replyXiaomi() {
                                 if ($this->request->is('post')) {
                                     $user_id = $this->user->id;
                                     $NeedTable = \Cake\ORM\TableRegistry::get('need');
@@ -273,9 +287,6 @@ class HomeController extends AppController {
                                         return $this->Util->ajaxReturn(false, '提交失败');
                                     }
                                 }
-                                $this->set([
-                                    'pageTitle' => '小秘书'
-                                ]);
                             }
 
                             /**

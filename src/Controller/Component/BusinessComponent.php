@@ -215,7 +215,7 @@ class BusinessComponent extends Component {
                 $data = [
                    'url' => 'http://m.chinamatop.com/home/my-message-sys' 
                 ];
-                $this->Push->sendAlias($user->user_token, $title, $msg, $title, true, $data, 'go_url');
+                $this->Push->sendAlias($user->user_token, $title, $msg, $title, true, $data, 'go_app');
             }
         }
     }
