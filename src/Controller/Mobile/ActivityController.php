@@ -533,7 +533,7 @@ class ActivityController extends AppController {
                 if ($data['pid']) {
                     //对评论的回复
                     $this->loadComponent('Business');
-                    $jump_url = '/activity/view/'.$id.'#allcoment#common_'.$doComment->id;
+                    $jump_url = '/activity/view/'.$id.'#allcoment#reply_'.$doComment->id;
                     $this->Business->usermsg($comment->user_id, '评论回复', '有人回复了你的评论!', 3, $doComment->id, $jump_url);
                 }
                 $activity = $this->Activity->get($id);
