@@ -121,19 +121,31 @@ class WxController extends AppController {
      * 预约支付页  此页面URL 需在微信公众号的微信支付那里配置 支付域
      * @param int $id  订单id
      */
-    public function meetPay($id = null) {
+    public function meetPay($type = null, $id = null) {
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
-        $order = $OrderTable->get($id, [
-            'contain' => ['SubjectBook', 'SubjectBook.Subjects']
-        ]);
-        $body = '预约话题《' . $order->subject_book->subject->title . '》支付';
+        if($type == 1){
+            $order = $OrderTable->get($id, [
+                'contain' => ['SubjectBook', 'SubjectBook.Subjects']
+            ]);
+            $body = '预约话题《' . $order->subject_book->subject->title . '》支付';
+            $title = '并购帮-预约话题';
+            $order_detail = $order->subject_book->subject;
+        } else {
+            $order = $OrderTable->get($id, [
+                'contain' => ['Activityapplys', 'Activityapplys.Activities']
+            ]);
+            $body = '活动报名《' . $order->activityapply->activity->title . '》支付';
+            $title = '并购帮-活动报名';
+            $order_detail = $order->activityapply->activity;
+        }
+        $order_detail->price = $order->price;
         $out_trade_no = $order->order_no;
         $openid = $this->user->wx_openid;
         if (empty($openid)) {
-            
+
         }
-        //$fee = intval(($order->price)*100);  //支付金额(分)
-        $fee = 0.01; //元
+        $fee = $order->price;  //支付金额(分)
+//            $fee = 0.01; //元
         $this->loadComponent('Wxpay');
         $isApp = false;
         $aliPayParameters = '';
@@ -141,7 +153,7 @@ class WxController extends AppController {
             $isApp = true;
             $openid = $this->user->app_wx_openid;
             $this->loadComponent('Alipay');
-            $aliPayParameters = $this->Alipay->setPayParameter($out_trade_no, '并购帮-预约话题', $fee, $body);
+            $aliPayParameters = $this->Alipay->setPayParameter($out_trade_no, $title, $fee, $body);
         }
         $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, null, $isApp);
         $this->set(array(
@@ -149,9 +161,9 @@ class WxController extends AppController {
             'isWx' => $this->request->is('weixin') ? true : false,
             'aliPayParameters' => $aliPayParameters,
         ));
-        $book = $order->subject_book;
-        $this->set(['pageTitle' => '话题支付']);
-        $this->set(compact('book'));
+        
+        $this->set(['pageTitle' => '订单支付']);
+        $this->set(compact('order_detail'));
     }
 
     /**

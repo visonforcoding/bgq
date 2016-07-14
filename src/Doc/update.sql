@@ -353,5 +353,5 @@ ALTER TABLE `flow`
 #新闻评论表添加是否删除字段
 ALTER TABLE `newscom` ADD COLUMN `is_delete` TINYINT(2) NOT NULL DEFAULT '0' COMMENT '是否删除';
 
-#新闻评论表添加是否删除字段
-ALTER TABLE `newscom` ADD COLUMN `is_delete` TINYINT(2) NOT NULL DEFAULT '0' COMMENT '是否删除';
+#活动评论表添加是否删除字段
+ALTER TABLE `activitycom` ADD COLUMN `is_delete` TINYINT(2) NOT NULL DEFAULT '0' COMMENT '是否删除';

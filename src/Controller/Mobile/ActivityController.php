@@ -36,7 +36,7 @@ class ActivityController extends AppController {
                     ->Activityapply
                     ->find()
                     ->contain(['Users'])
-                    ->where(['activity_id' => $id])
+                    ->where(['activity_id' => $id, 'is_pass'=>1])
                     ->order([
                         'is_top' => 'DESC',
                         'Activityapply.create_time' => 'DESC'
@@ -54,21 +54,6 @@ class ActivityController extends AppController {
             
 
             if ($this->user) {
-                // 是否已报名
-                $activityApply = $this
-                        ->Activity
-                        ->Activityapply
-                        ->find()
-                        ->contain(['Users'])
-                        ->where(['user_id' => $this->user->id])
-                        ->hydrate(false)
-                        ->toArray();
-                $isApply = [];
-                foreach ($activityApply as $k => $v) {
-                    $isApply[] = $v['activity_id'];
-                }
-                $this->set('isApply', $isApply);
-
                 // 是否已赞
                 $isLike = $this
                         ->Activity
@@ -99,6 +84,9 @@ class ActivityController extends AppController {
                         'Industries',
                         'Regions',
                         'Savants',
+                        'Activityapply' => function($q)use($user_id){
+                            return $q->where(['user_id'=>$user_id]);
+                        },
                         'Activitycom' => function($q)use($id){
                             return $q->where(['activity_id'=>$id, 'is_delete'=>0])->orderDesc('Activitycom.create_time');
                         },
@@ -109,8 +97,11 @@ class ActivityController extends AppController {
                         }
                     ],
                 ]);
-                
-                
+                $order = [];
+                $orderTable = \Cake\ORM\TableRegistry::get('order');
+                if($activity->activityapply['0']->is_pass == 0){
+                    $order = $orderTable->find()->where(['type'=>2, 'relate_id'=>$activity->activityapply['0']->id, 'user_id'=>$this->user->id])->first();
+                }
             } else {
                 $activity = $this->Activity->get($id, [
                     'contain' => [
@@ -126,15 +117,16 @@ class ActivityController extends AppController {
                     ],
                 ]);
                 $this->set('user', '');
-                $isApply = [];
-                $this->set('isApply', $isApply);
             }
             $activity->read_nums += 1; // 阅读加1
             $this->Activity->save($activity);
-            $this->set('isLike', $isLike);
-            $this->set('isCollect', $isCollect);
-            $this->set('activity', $activity);
-            $this->set('pageTitle', '活动详情');
+            $this->set([
+                'pageTitle'=>'活动详情',
+                'activity'=>$activity,
+                'isCollect'=>$isCollect,
+                'isLike'=>$isLike,
+                'order'=>$order,
+            ]);
         } else {
             return $this->Util->ajaxReturn(false, '传值错误');
         }

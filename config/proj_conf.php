@@ -54,7 +54,12 @@ return [
           'table'=>'need',
           'remark'=>'小秘书消息',
           'url'=>'/home/my-history-need'
-      ]
+      ],
+        '7'=>[
+            'table'=>'activity',
+            'remark'=>'活动报名',
+            'url'=>'/home/my_activity_submit'
+        ],
     ],
     'educationType'=>[
         '1'=>'高中',

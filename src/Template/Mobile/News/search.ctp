@@ -29,13 +29,6 @@
             </ul>
         </div>
 
-        <div class="classify-r fr" id="choose_sort" style="width:50%;">
-            <span id="choose_sorts">排序</span>
-            <ul class="sort-mark" hidden id="sort_mark">
-                <li id="sort_mostapply" value="read_nums" class="choose_sort_child"><a href="javascript:void(0)">阅读最多</a></li>
-                <li id="sort_recently" value="create_time" class="choose_sort_child"><a href="javascript:void(0)">最近更新</a></li>
-            </ul>
-        </div>
     </div>
     <div id="search"></div>
 </div>
