@@ -98,9 +98,7 @@ class ActivityController extends AppController {
                         'Admins',
                         'Industries',
                         'Regions',
-                        'Savants' => function($q){
-                            return $q->contain(['Users']);
-                        },
+                        'Savants',
                         'Activitycom' => function($q)use($id){
                             return $q->where(['activity_id'=>$id, 'is_delete'=>0])->orderDesc('Activitycom.create_time');
                         },
@@ -119,9 +117,7 @@ class ActivityController extends AppController {
                         'Admins',
                         'Industries',
                         'Regions',
-                        'Savants' => function($q){
-                            return $q->contain(['Users']);
-                        },
+                        'Savants',
                         'Activitycom' => function($q)use($id){
                             return $q->where(['activity_id'=>$id, 'is_delete' => 0])->orderDesc('Activitycom.create_time');
                         },
@@ -205,31 +201,62 @@ class ActivityController extends AppController {
         $this->handCheckLogin();
         if ($id) {
             $activity = $this->Activity->get($id, [
-                'contain' => ['Admins'],
+                'contain' => ['Users'],
             ]);
-            if ($this->request->is('post')) {
-                $activityApply = $this->Activity->Activityapply->newEntity();
-                $data = [
-                    'user_id' => $this->user->id,
-                    'activity_id' => $id,
-                ];
-                $activityApply = $this->Activity->Activityapply->patchEntity($activityApply, $data);
-                if ($this->Activity->Activityapply->find()->where($data)->first()) { // 查找数据库是否有对应数据，即是否已报名
-                    return $this->Util->ajaxReturn(false, '已经报名过了');
-                } else {
-                    if ($this->Activity->Activityapply->save($activityApply)) {
-                        $activity->apply_nums += 1;
-                        $this->Activity->save($activity);
-                        return $this->Util->ajaxReturn(true, '提交成功');
+            
+                if ($this->request->is('post')) {
+                    $activityApply = $this->Activity->Activityapply->newEntity();
+                    $data = [
+                        'user_id' => $this->user->id,
+                        'activity_id' => $id,
+                    ];
+                    $activityApply = $this->Activity->Activityapply->patchEntity($activityApply, $data);
+                    if ($this->Activity->Activityapply->find()->where($data)->first()) { // 查找数据库是否有对应数据，即是否已报名
+                        return $this->Util->ajaxReturn(false, '已经报名过了');
                     } else {
-                        return $this->Util->ajaxReturn(false, $activityApply->errors());
+                        if($activity->apply_fee == 0){
+                            if ($this->Activity->Activityapply->save($activityApply)) {
+                                $activity->apply_nums += 1;
+                                $this->Activity->save($activity);
+                                return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/activity/details/'.$id]);
+                            } else {
+                                return $this->Util->ajaxReturn(false, $activityApply->errors());
+                            }
+                        } else {
+                            $activityApply->is_pass = 0;
+                            $OrderTable = \Cake\ORM\TableRegistry::get('order');
+                            $applyTable = \Cake\ORM\TableRegistry::get('activityapply');
+                            $order = $OrderTable->newEntity([
+                                'type' => 2, // 类型为活动报名
+                                'relate_id' => $activityApply->id, //预定表的id
+                                'user_id' => $this->user->id,
+                                'seller_id' => $activity->user_id,
+                                'order_no' => time() . $activity->user_id . $id . createRandomCode(2, 2),
+                                'fee' => 0, // 实际支付的默认值
+                                'price' => $activity->apply_fee,
+                                'remark' => '活动报名' . $activity->title
+                            ]);
+                            $transRes = $applyTable->connection()->transactional(function()use($activityApply, $applyTable, $order, $OrderTable) {
+                                return $applyTable->save($activityApply) && $OrderTable->save($order);
+                            });
+                            if($transRes){
+                                $order = $OrderTable->find()->where(['relate_id'=>$id, 'type'=>2, 'user_id'=>$this->user->id])->first();
+                                //短信和消息通知
+                                $this->loadComponent('Sms');
+                                $msg = "您报名的活动：《" . $activity->title . "》已确认通过，请及时登录平台支付报名费用。";
+                                $this->Sms->sendByQf106($this->user->phone, $msg);
+                                $this->loadComponent('Business');
+                                $this->Business->usermsg($this->user->id, '报名通知', $msg, 7, $id);
+                                return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/Wx/meet_pay/2/'.$order['id']]);
+                            } else {
+                                return $this->Util->ajaxReturn(false, $activityApply->errors());
+                            }
+                        }
                     }
                 }
-            } else {
-                $this->set('activity', $activity);
-                $this->set('user', $this->user);
-                $this->set('pageTitle', '我要报名');
-            }
+            $this->set('activity', $activity);
+            $this->set('user', $this->user);
+            $this->set('pageTitle', '我要报名');
         } else {
             return $this->Util->ajaxReturn(false, '传值错误');
         }

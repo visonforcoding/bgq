@@ -115,9 +115,7 @@ class NewsController extends AppController {
                     return $q->where(['type'=>1,'user_id'=>$user_id]);
                 },'Comments.Reply'=>function($q){
                     return $q->select(['id','truename']);
-                },'Savants'=>function($q){
-                    return $q->contain(['Users']);
-                }],
+                },'Savants'],
             ]);
             $collectTable = \Cake\ORM\TableRegistry::get('collect');
             $isCollect = $collectTable->find()->where(['user_id'=>$user_id, 'relate_id'=>$id, 'type'=>1, 'is_delete'=>0])->toArray();
@@ -129,9 +127,7 @@ class NewsController extends AppController {
                     return $q->select(['id','avatar','truename','company','position']);
                 },'Comments.Reply'=>function($q){
                     return $q->select(['id','truename']);
-                },'Savants'=>function($q){
-                    return $q->contain(['Users']);
-                }],
+                },'Savants'],
             ]);
         }
         $this->set('isCollect', $isCollect);

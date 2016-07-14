@@ -46,9 +46,9 @@
             <ul>
                 <?php foreach ($news->savants as $k => $v): ?>
                     <li>
-                        <a href="/meet/view/<?= $v['user']['id'] ?>">
-                            <img src="<?= $v['user']['avatar'] ? $v['user']['avatar'] : '/mobile/images/touxiang.png' ?>" alt="<?= $v['user']['truename'] ?>" />
-                            <h3><?= $v['user']['truename'] ?><span><?= $v['user']['company'] ?> <?= $v['user']['position'] ?></span></h3>
+                        <a href="/meet/view/<?= $v['id'] ?>">
+                            <img src="<?= $v['avatar'] ? $v['avatar'] : '/mobile/images/touxiang.png' ?>" alt="<?= $v['truename'] ?>" />
+                            <h3><?= $v['truename'] ?><span><?= $v['company'] ?> <?= $v['position'] ?></span></h3>
                         </a>
                     </li>
                 <?php endforeach; ?>
