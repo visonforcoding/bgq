@@ -45,7 +45,7 @@ class NewsTable extends Table {
         ]);
         
         $this->belongsToMany('Savants', [
-            'className' => 'Savant',
+            'className' => 'User',
             'joinTable' => 'news_savant',
             'foreignKey' => 'news_id',
             'targetForeignKey' => 'savant_id'

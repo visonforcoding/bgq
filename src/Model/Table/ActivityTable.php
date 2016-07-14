@@ -50,7 +50,7 @@ class ActivityTable extends Table {
         ]);
         
         $this->belongsToMany('Savants', [
-            'className' => 'Savant',
+            'className' => 'User',
             'joinTable' => 'activity_savant',
             'foreignKey' => 'activity_id',
             'targetForeignKey' => 'savant_id'

@@ -22,7 +22,7 @@
     <div class="totips" style="display:none;">
         <h3></h3>
         <span>确定报名以及生成付款订单吗？</span>
-        <a href="javascript:void(0)" class="nextstep topush" id="comfirm">确认</a>
+        <a href="javascript:void(0)" class="nextstep" id="comfirm">确认</a>
         <span class='closed'>
             &times;
         </span>
@@ -42,7 +42,7 @@
                     if (msg.status === true) {
                         $.util.alert(msg.msg);
                         setTimeout(function () {
-                            window.location.href = '/Wx/meet_pay/activity/<?= $activity->id ?>';
+                            window.location.href = msg.url;
                         }, 2000);
                     } else {
                         $.util.alert(msg.msg);

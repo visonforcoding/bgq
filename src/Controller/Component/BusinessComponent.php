@@ -406,6 +406,9 @@ class BusinessComponent extends Component {
         if ($order->type == 1) {
             //处理预约
             return $this->handMeetOrder($order,$realFee,$payType,$out_trade_no);
+        } elseif ($order->type == 2) {
+            // 处理报名
+            return $this->handApplyOrder($order,$realFee,$payType,$out_trade_no);
         }
     }
 
@@ -449,6 +452,52 @@ class BusinessComponent extends Component {
             $seller_msg =  '申请人'.$order->user->truename.'手机号:'.$order->user->phone.'已经向您支付了预约费用：' . $order->price . '元，请做好赴约准备。';
             $this->Sms->sendByQf106($order->seller->phone,$seller_msg);
             $buyer_msg = '您已支付成功,可凭短信赴约,专家:'.$order->seller->truename.'手机号:'.$order->seller->phone;
+            $this->Sms->sendByQf106($order->user->phone, $buyer_msg);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    /**
+     * 处理预约订单 1.预约状态更改 2.订单状态更改 3.专家 余额更改 4.交易流水记录生成
+     * @param \App\Model\Entity\Order $order
+     */
+    protected function handApplyOrder(\App\Model\Entity\Order $order,$realFee,$payType,$out_trade_no) {
+        $activityapply_id = $order->relate_id;
+        $ActivityapplyTable = \Cake\ORM\TableRegistry::get('Activityapply');
+        $Activityapply = $ActivityapplyTable->get($activityapply_id, [
+            'contain' => ['Activities'],
+        ]);
+        $Activityapply->is_pass = 1; //报名通过
+        $order->status = 1;  //订单完成
+        $order->fee = $realFee;  //实际支付金额
+        $order->paytype = $payType;  //实际支付金额
+        $order->out_trade_no = $out_trade_no;  //第三方订单号
+        $pre_amount = $order->seller->money;
+        $order->seller->money += $order->price;    //余额+
+        $order->activity->apply_nums += 1;    // 报名次数+1
+        $order->dirty('seller', true);  //这里的seller 一定得是关联属性 不是关联模型名称 可以理解为实体
+        $OrderTable = \Cake\ORM\TableRegistry::get('Order');
+        $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+        $flow = $FlowTable->newEntity([
+            'user_id' => $order->seller_id,
+            'type' => 2,
+            'relate_id'=>$order->id,   //关联的订单id
+            'type_msg' => '报名收入',
+            'income' => 1,
+            'amount' => $order->price,
+            'pre_amount' => $pre_amount,
+            'after_amount' => $order->seller->money,
+            'status' => 1,
+            'remark' => '活动获取收入-' . $order->user->truename
+        ]);
+        $transRes = $ActivityapplyTable->connection()->transactional(function()use($order, $ActivityapplyTable, $Activityapply, $OrderTable, $FlowTable, $flow) {
+            return $OrderTable->save($order, ['associated' => ['Sellers']]) && $ActivityapplyTable->save($Activityapply) && $FlowTable->save($flow);
+        });
+        if ($transRes) {
+            //向专家和买家发送一条短信
+            //资金流水记录
+            $buyer_msg = '您已成功报名' . $Activityapply->activity->title . '，详情请打开并购帮APP查看';
             $this->Sms->sendByQf106($order->user->phone, $buyer_msg);
             return true;
         }else{

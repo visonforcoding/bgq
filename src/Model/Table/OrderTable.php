@@ -36,6 +36,12 @@ class OrderTable extends Table {
             'foreignKey' => 'relate_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Activityapplys', [
+            'className'=>'Activityapply',
+            'foreignKey' => 'relate_id',
+            'joinType' => 'INNER'
+        ]);
+        
         $this->belongsTo('Users', [
             'className' => 'User',
             'foreignKey' => 'user_id',

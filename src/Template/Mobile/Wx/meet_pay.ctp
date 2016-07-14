@@ -10,8 +10,8 @@
     <div class="h20 nobottom"></div>
     <div class="infobox a-pay">
         <ul>
-            <li>话题名称：<span class='infocard'><input type="text" placeholder="<?= $book->subject->title ?>" /></span></li>
-            <li>费用：<span class='infocard reg-repass'><input type="text" value='<?= $book->subject->price ?>元' readonly="readonly"/></span></li>
+            <li>标题名称：<span class='infocard'><input type="text" placeholder="<?=  $order_detail->title ?>" /></span></li>
+            <li>费用：<span class='infocard reg-repass'><input type="text" value='<?=  $order_detail->price ?>元' readonly="readonly"/></span></li>
         </ul>
     </div>
     <div class="h20 no-t-border"></div>
@@ -23,7 +23,7 @@
             <?php endif;?>
         </ul>
     </div>
-    <a  id="submit"  class="nextstep"><?= $book->subject->price ?>元&nbsp;&nbsp;确认支付</a>
+    <a  id="submit"  class="nextstep"><?=  $order_detail->price ?>元&nbsp;&nbsp;确认支付</a>
 </div>
 
 <?php $this->start('script') ?>
