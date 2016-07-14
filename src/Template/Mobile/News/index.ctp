@@ -1,7 +1,6 @@
 <header>
     <div class='inner'>
         <h1>资讯首页</h1>
-        <!-- <a href="#this" class='iconfont news-serch h-regiser'>&#xe613;</a> -->
     </div>
 </header>
 <div class="wraper newswraper">
