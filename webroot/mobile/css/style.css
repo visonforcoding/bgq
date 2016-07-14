@@ -52,7 +52,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .uploadbox .filebtn{overflow:hidden;position:relative;}
 .uploadbox .filebtn input[type='file']{position:absolute;top:0;left:0;position: absolute;top: 0;left: 0;width: 100%;height: 0.78rem;border: 1px #ccc solid;
     margin: 0.45rem 0 0.2rem; opacity: 0;}
-.reg-shadow{width:100%;height:100%;position:fixed;left:0;top:0;background:rgba(0,0,0,.7);overflow:hidden;z-index:998;}
+.reg-shadow{width:100%;height:100%;position:fixed;left:0;top:0;background:rgba(0,0,0,.8);overflow:hidden;z-index:998;}
 .shadow-info,.m-fixed-top{position:fixed;bottom:-300px;left:0;width:100%;z-index:999;}
 .m-fixed-top{top:1.69rem;height:3.2rem;background: #fff;overflow:hidden;}
 .c-zindex{position:fixed;z-index:1000;}
@@ -805,7 +805,7 @@ background-size:3.82rem 1.9rem;margin-top:1rem;}
 .todialogue span{display: inline-block;background: url(img/ca.png) no-repeat center center;background-size: 0.32rem 0.26rem;width:10%;height:0.84rem;}
 .s-label{width:100%;height:auto;overflow:hidden;padding:0 0.3rem;margin-top:0.4rem;}
 .s-label li{float:left;margin-right:0.13rem;width:23%;margin-bottom:0.4rem;overflow: hidden;}
-.s-label li a{display:block;height:34px;line-height: 34px;text-align:center;border:1px #969fa9 solid;font-size:14px;border-radius: 3px;color:#969fa9;}
+.s-label li a{display:block;height:34px;line-height: 34px;text-align:center;border:1px #969fa9 solid;font-size:14px;border-radius: 3px;color:#969fa9;padding:0 0.02rem;}
 .scroller{overflow-y: scroll;width:100%;height:100%;-webkit-overflow-scrolling: touch;}
 @media only screen and (min-width: 750px){
 	
@@ -820,3 +820,6 @@ background-size:3.82rem 1.9rem;margin-top:1rem;}
 	.vipinfo .mark a{font-size:22px;}
 	.a-other-info > *{font-size:24px;}
 }
+.loginbtn{height:40px;line-height: 38px;width:4rem;text-align: center;color:#fff;box-shadow: 0 0 1px rgba(255,255,255,.8);background:rgba(0,0,0,.3);position:absolute;margin:auto;top:30%;left:50%;margin-left:-2rem;
+font-size:16px;border-radius: 3px;border:1px #fff solid;}
+.s-label li .active{border:1px #e01b49 solid;color:#e01b49;}
