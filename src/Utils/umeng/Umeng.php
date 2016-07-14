@@ -69,7 +69,7 @@ class Umeng {
         $android_brocast->setPredefinedKeyValue("after_open", $after_open); // 之后打开
         $android_brocast->setPredefinedKeyValue("production_mode", $production_mode); // 生产环境
         $android_brocast->setPredefinedKeyValue('type', 'broadcast'); // 类型为广播
-        $android_brocast->setExtraField("test", $extra); // 安卓额外内容
+        $android_brocast->setExtraField("extra", $extra); // 安卓额外内容
         $android_res = json_decode($android_brocast->send());
         if ($android_res->ret == 'FAIL') {
             if ($production_mode) {
@@ -88,7 +88,7 @@ class Umeng {
         $ios_brocast->setPredefinedKeyValue("alert", $title); // ios标题
         $ios_brocast->setPredefinedKeyValue("badge", $badge); // ios信息提示
         $ios_brocast->setPredefinedKeyValue("sound", $sound); // ios声音
-        $ios_brocast->setCustomizedField("test", $extra); // ios额外内容
+        $ios_brocast->setCustomizedField("extra", $extra); // ios额外内容
         $ios_res = json_decode($ios_brocast->send());
         if ($ios_res->ret == 'FAIL') {
             if ($production_mode) {
@@ -140,7 +140,7 @@ class Umeng {
         $android_brocast->setPredefinedKeyValue("after_open", $after_open); // 之后打开
         $android_brocast->setPredefinedKeyValue("production_mode", $production_mode); // 生产环境
         $android_brocast->setPredefinedKeyValue('type', 'customizedcast'); // 类型为单播
-        $android_brocast->setExtraField("test", $extra); // 安卓额外内容
+        $android_brocast->setExtraField("extra", $extra); // 安卓额外内容
         $android_res = json_decode($android_brocast->send());
         if ($android_res->ret == 'FAIL') {
             if ($production_mode) {
@@ -159,7 +159,7 @@ class Umeng {
         $ios_brocast->setPredefinedKeyValue("alert", $title); // ios标题
         $ios_brocast->setPredefinedKeyValue("badge", $badge); // ios信息提示
         $ios_brocast->setPredefinedKeyValue("sound", $sound); // ios声音
-        $ios_brocast->setCustomizedField("test", $extra); // ios额外内容
+        $ios_brocast->setCustomizedField("extra", $extra); // ios额外内容
         $ios_res = json_decode($ios_brocast->send());
         if ($ios_res->ret == 'FAIL') {
             if ($production_mode) {
@@ -194,7 +194,7 @@ class Umeng {
      * @param string $sound ios声音
      * @return boolean true:发送成功;false:发送失败;
      */
-    function sendFile($title, $content, $ticker, $file, $alias_type, $production_mode = 'true', $badge = '', $after_open = '', $sound = '') {
+    function sendFile($title, $content, $ticker, $file, $alias_type, $production_mode = 'true', $extra = '', $badge = '', $after_open = '', $sound = '') {
         // 安卓推送
         $android_brocast = new \AndroidNotification();
         $android_brocast->setAppMasterSecret($this->android_appMasterSecret);
@@ -208,6 +208,7 @@ class Umeng {
         $android_brocast->setPredefinedKeyValue("text", $content); // 内容
         $android_brocast->setPredefinedKeyValue("after_open", $after_open);  // 安卓之后动作
         $android_brocast->setPredefinedKeyValue("production_mode", $production_mode); // 生产环境
+        $android_brocast->setCustomizedField("extra", $extra); // ios额外内容
         $android_upload = $android_brocast->uploadContents($file);
         $android_data = json_decode($android_upload);
         if ($android_data->ret == 'SUCCESS') {
@@ -233,6 +234,7 @@ class Umeng {
         $ios_brocast->setPredefinedKeyValue("alert", $title); // ios提示信息
         $ios_brocast->setPredefinedKeyValue("badge", $badge); // ios信息数量提示
         $ios_brocast->setPredefinedKeyValue("sound", $sound); // ios声音提示
+        $ios_brocast->setCustomizedField("extra", $extra); // ios额外内容
         $ios_upload = $ios_brocast->uploadContents($file);
         $ios_data = json_decode($ios_upload);
         if ($ios_data->ret == 'SUCCESS') {

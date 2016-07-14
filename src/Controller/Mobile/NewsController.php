@@ -106,7 +106,7 @@ class NewsController extends AppController {
             $user_id = $this->user->id;
             $news = $this->News->get($id, [
                 'contain' => ['Users', 'Comments'=>function($q){
-                    return $q->orderDesc('Comments.create_time')->limit($this->newslimit);
+                    return $q->where(['is_delete'=>0])->orderDesc('Comments.create_time')->limit($this->newslimit);
                 },'Comments.Users'=>function($q){
                     return $q->select(['id','avatar','truename','company','position']);
                 },'Comments.Likes'=>function($q)use($user_id){
@@ -124,7 +124,7 @@ class NewsController extends AppController {
         }else{
             $news = $this->News->get($id, [
                 'contain' => ['Users', 'Comments'=>function($q){
-                    return $q->orderDesc('Comments.create_time')->limit($this->newslimit);
+                    return $q->where(['is_delete'=>0])->orderDesc('Comments.create_time')->limit($this->newslimit);
                 },'Comments.Users'=>function($q){
                     return $q->select(['id','avatar','truename','company','position']);
                 },'Comments.Reply'=>function($q){
@@ -307,7 +307,7 @@ class NewsController extends AppController {
         $comment = $this->News
                         ->Comments
                         ->find()
-                        ->where(['news_id' => $id])
+                        ->where(['news_id' => $id, 'is_delete'=>0])
                         ->contain(['Users', 'Reply'])
                         ->page($page, $this->newslimit)
                         ->orderDesc('Comments.create_time')
@@ -333,7 +333,7 @@ class NewsController extends AppController {
                 ->contain(['Users', 'Reply', 'Likes'=>function($q)use($user_id){
                     return $q->where(['type'=>1,'user_id'=>$user_id]);
                 }])
-                ->where(['news_id' => $id])
+                ->where(['news_id' => $id, 'is_delete'=>0])
                 ->order(['Comments.create_time' => 'DESC'])
                 ->limit(10)
                 ->toArray();
@@ -378,7 +378,8 @@ class NewsController extends AppController {
     public function delComment($id){
         $newscomTable = \Cake\ORM\TableRegistry::get('newscom');
         $newscom = $newscomTable->get($id);
-        $res = $newscomTable->delete($newscom);
+        $newscom->is_delete = 1;
+        $res = $newscomTable->save($newscom);
         if($res){
             return $this->Util->ajaxReturn(true, '删除成功');
         } else {

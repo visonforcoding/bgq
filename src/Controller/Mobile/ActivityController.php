@@ -102,7 +102,7 @@ class ActivityController extends AppController {
                             return $q->contain(['Users']);
                         },
                         'Activitycom' => function($q)use($id){
-                            return $q->where(['activity_id'=>$id])->orderDesc('Activitycom.create_time');
+                            return $q->where(['activity_id'=>$id, 'is_delete'=>0])->orderDesc('Activitycom.create_time');
                         },
                         'Activitycom.Users',
                         'Activitycom.Replyusers',
@@ -123,7 +123,7 @@ class ActivityController extends AppController {
                             return $q->contain(['Users']);
                         },
                         'Activitycom' => function($q)use($id){
-                            return $q->where(['activity_id'=>$id])->orderDesc('Activitycom.create_time');
+                            return $q->where(['activity_id'=>$id, 'is_delete' => 0])->orderDesc('Activitycom.create_time');
                         },
                         'Activitycom.Users',
                         'Activitycom.Replyusers',
@@ -639,7 +639,7 @@ class ActivityController extends AppController {
         $comment = $this->Activity
                         ->Activitycom
                         ->find()
-                        ->where(['activity_id' => $id])
+                        ->where(['activity_id' => $id, 'is_delete' => 0])
                         ->contain(['Users', 'Replyusers'])
                         ->page($page, $this->limit)
                         ->orderDesc('Activitycom.create_time')
@@ -748,7 +748,8 @@ class ActivityController extends AppController {
     public function delComment($id){
         $activitycomTable = \Cake\ORM\TableRegistry::get('activitycom');
         $activitycom = $activitycomTable->get($id);
-        $res = $activitycomTable->delete($activitycom);
+        $activitycom->is_delete = 1;
+        $res = $activitycomTable->save($activitycom);
         if($res) {
             return $this->Util->ajaxReturn(true, '删除成功');
         } else {
@@ -759,11 +760,11 @@ class ActivityController extends AppController {
     public function test(){
         $this->loadComponent('Push');
         $data = [
-            'url' => 'http://m.chinamatop.com/activity/details/16',
+            'url' => 'http://m.chinamatop.com/meet/view/7',
         ];
         $res = $this->Push->sendAll('感谢使用并购帮APP', '非常感谢使用并购帮APP，并购帮专注并购人的生活方式', '你有一条推送', false, $data, 'go_app');
 //        $res = $this->Push->ios_check('us24509146822979010801');
-//        $res1 = $this->Push->android_check('us76823146822886105701');
+//        $res = $this->Push->android_check('us71005146840261729001');
         debug($res);
 //        debug($res1);
         exit();
