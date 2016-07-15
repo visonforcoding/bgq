@@ -258,7 +258,7 @@ $.util = {
             var ifr = document.createElement('iframe');
             ifr.style.display = 'none';
             ifr.src = '/user/login_status';
-            document.body.appendChild(ifr);
+            //document.body.appendChild(ifr);
         }
     },
     isMobile:function(str) {
