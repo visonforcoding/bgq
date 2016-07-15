@@ -128,7 +128,7 @@
 //       url:'/home/getinfo'
 //    });
      $.ajax({
-        url:"/home/get-3userinfo",
+        url:"/home/get-userinfo",
         success:function(res){
             
         }
