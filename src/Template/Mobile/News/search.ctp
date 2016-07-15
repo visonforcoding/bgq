@@ -41,9 +41,6 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
     
-    if($('.s-label li a.default').length != 0){
-        $('.industry.default').trigger('tap');
-    }
     
     $('input[name="keyword"]').focus();
     var page = 2;
@@ -90,14 +87,17 @@
     
     var search_data = {};
     $('.industry').on('tap', function(){
-        if($(this).hasClass('active')){
-            $(this).removeClass('active');
+        industryTap(this);
+    });
+    function industryTap(em){
+        if($(em).hasClass('active')){
+            $(em).removeClass('active');
             $('input[name="industry_id"]').val('');
             return;
         }
         $('.industry').removeClass('active');
-        $(this).addClass('active');
-        var industry_id = $(this).attr('industry_id');
+        $(em).addClass('active');
+        var industry_id = $(em).attr('industry_id');
         $('input[name="industry_id"]').val(industry_id);
         if(search_data[industry_id]){
             $('#search').html(search_data[industry_id]);
@@ -123,7 +123,12 @@
                 }
             }
         });
-    });
+    }
+    
+    if($('.s-label li a.default').length != 0){
+        industryTap($('.s-label li a.default').get(0));
+    }
+    
     
     $('#searchForm').submit(function(){
         $.ajax({

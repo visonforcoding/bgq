@@ -19,7 +19,16 @@
             </ul>
         </div>
     </form>
-    <a href="javascript:void(0);" class='nextstep' id="submit" style="margin-bottom:1.7rem;">提交</a>
+    <a href="javascript:void(0);" class='nextstep' id="submit">提交</a>
+    <div class='reg-shadow' hidden></div>
+    <div class="totips" style="display:none;">
+        <h3></h3>
+        <span>确定报名吗？</span>
+        <a href="javascript:void(0)" class="nextstep" id="comfirm">确认</a>
+        <span class='closed' id='closed'>
+            &times;
+        </span>
+    </div>
 </div>
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>

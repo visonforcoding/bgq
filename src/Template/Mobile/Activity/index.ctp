@@ -36,16 +36,16 @@
                 </span>
                 <div class="a-other-info">
                     <span class="a-number">{#apply_nums#}人报名</span>
-                    {#region_name#}{#industries_name#}
+                    {#region_name#}<a href="/activity/search/{#series_id#}">{#series_name#}</a>
                     <span class="a-date">{#time#}</span>
                 </div>
             </div>
         </div>
     </section>
 </script>
-<script type="text/html" id="subTpl"> 
+<!--<script type="text/html" id="subTpl"> 
     <a href="/activity/search">{#name#}</a>
-</script>
+</script>-->
 <script type="text/html" id="bannerTpl">
     <li><a href="{#url#}"><img back_src="{#img#}"/></a></li>
 </script>
@@ -62,6 +62,7 @@
 </script>
 <script>
     window.isApply = ',' + '<?= $isApply ?>' + ',';
+    window.series = <?= json_encode($activityseries) ?>;
 </script>
 <script>
     $.getJSON('/activity/get-banner',function(res){
@@ -80,7 +81,7 @@
         if (res.status) {
             var html = $.util.dataToTpl('', 'activity_tpl', res.data, function (d) {
                 d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="registered">已报名</span>';
-                d.industries_name = $.util.dataToTpl('', 'subTpl', d.industries);
+                d.series_name = window.series[d.series_id];
                 d.region_name = d.region ? '<a>' + d.region.name + '</a>' : '';
                 d.cover = d.thumb ? d.thumb : d.cover;
                 return d;

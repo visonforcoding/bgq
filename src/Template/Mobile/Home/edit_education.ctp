@@ -90,6 +90,7 @@
             <li class="no-right-ico">
                 <span>学历：</span>
                 <div>
+                    <span class='typeselect c-select'>
                     <select name="education" class="education">
                         <option value="<?=$education->education?>" selected="selected"><?=$educationType[$education->education]?></option>
                         <option value="1">高中</option>
@@ -100,6 +101,7 @@
                         <option value="6">硕士</option>
                         <option value="7">博士</option>
                     </select>
+                    </span>
                 </div>
             </li>
             <li  class="no-right-ico">

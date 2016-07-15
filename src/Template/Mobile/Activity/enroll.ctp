@@ -21,7 +21,7 @@
     <div class='reg-shadow' hidden></div>
     <div class="totips" style="display:none;">
         <h3></h3>
-        <span>确定报名以及生成付款订单吗？</span>
+        <span>确定报名吗？</span>
         <a href="javascript:void(0)" class="nextstep" id="comfirm">确认</a>
         <span class='closed'>
             &times;

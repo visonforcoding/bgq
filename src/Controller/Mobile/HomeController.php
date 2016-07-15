@@ -51,10 +51,7 @@ class HomeController extends AppController {
     }
     
     public function getUserinfo(){
-        echo 'test';
-        exit();
-        //$this->handCheckLogin();
-        //debug(123);die;
+        $this->handCheckLogin();
         $user_id = $this->user->id;
         $user = $this->User->get($user_id);
         $isWx = $this->request->is('weixin') ? true : false;
@@ -66,7 +63,6 @@ class HomeController extends AppController {
             $hasMsg = true;
         }
         $res = compact('user', 'isWx', 'hasMsg');
-        debug($res);die;
         return $this->Util->ajaxReturn(['status'=>true, 'data'=>$res]);
     }
 
