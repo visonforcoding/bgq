@@ -195,6 +195,7 @@
 <script>
     window.article = true;
     window.reply = true;
+    window.location.hash = '';
     $.util.dataToTpl('comment', 'comment_tpl', window.activitycom, function (d) {
         d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
         d.user_truename = d.user.truename;
@@ -348,53 +349,6 @@
             }
             if (!em || !em.id)
                 return;
-            if (em.id.indexOf('likecom_') != -1) {
-                if ($(em).attr('disable') === '1') {
-                    return false;
-                }
-                $.util.ajax({
-                    url: '/activity/comLike/' + $(em).attr('comid'),
-                    func: function (msg) {
-                        console.log(msg);
-                        if (typeof msg === 'object') {
-                            if (msg.status === true) {
-                                var num = $('.addnum_' + $(em).attr('comid')).siblings('.praise_num').text();
-                                num = parseInt(num) + 1;
-                                $('.addnum_' + $(em).attr('comid')).siblings('.praise_num').text(num);
-                                $('.addnum_' + $(em).attr('comid')).siblings('.addnum').addClass('show');
-                                // 动画结束前只能点击一次
-                                var addnum = $('.addnum_' + $(em).attr('comid'))[0];
-                                addnum.addEventListener("webkitAnimationEnd", function () {
-                                    $('.show').removeClass('show');
-                                });
-                                $('.addnum_' + $(em).attr('comid')).css('color', 'red');
-                                $('.addnum_' + $(em).attr('comid')).attr('disable', '1');
-                            } else {
-                                $.util.alert(msg.msg);
-                            }
-                        }
-                    }
-                });
-            }
-            // 回复评论
-            if (em.id.indexOf('reply_') != -1) {
-                var id = $(em).attr('value');
-                checkLogin(function(){
-                    if($(em).attr('user_id') == $('#article_comment').attr('user_id')) {
-                        $('#shadow').show();
-                        $('#isdel').show();
-                        $('#isdel').attr('com_id', id);
-                        return;
-                    }
-                    var reply_id = id;
-                    var msg = '回复 ' + $('#comment_username_' + reply_id).attr('user_name') + ' :';
-                    $('#r_textarea').attr('placeholder', msg);
-                    $('.reply-shadow').show();
-                    $('.reply').removeClass('m-height').addClass('c-height');
-                    var comid = $(em).attr('value');
-                    $('#publish_reply').attr('value', comid);
-                });
-            }
             switch (em.id) {
                     // 点击评论
                 case 'article_comment':
@@ -620,7 +574,67 @@
                     break;
             }
         });
-    })();
+    
+    $('body').on('click', function (e) {
+            var target = e.srcElement || e.target, em = target, i = 1;
+            //$('#article_comment').html((ii++)+em.id+'~~'+em.className)
+            while (em && !em.id && i <= 3) {
+                em = em.parentNode;
+                i++;
+            }
+            if (!em || !em.id)
+                return;
+            // 评论点赞
+            if (em.id.indexOf('likecom_') != -1) {
+                if ($(em).attr('disable') === '1') {
+                    return false;
+                }
+                $.util.ajax({
+                    url: '/activity/comLike/' + $(em).attr('comid'),
+                    func: function (msg) {
+                        console.log(msg);
+                        if (typeof msg === 'object') {
+                            if (msg.status === true) {
+                                var num = $('.addnum_' + $(em).attr('comid')).siblings('.praise_num').text();
+                                num = parseInt(num) + 1;
+                                $('.addnum_' + $(em).attr('comid')).siblings('.praise_num').text(num);
+                                $('.addnum_' + $(em).attr('comid')).siblings('.addnum').addClass('show');
+                                // 动画结束前只能点击一次
+                                var addnum = $('.addnum_' + $(em).attr('comid'))[0];
+                                addnum.addEventListener("webkitAnimationEnd", function () {
+                                    $('.show').removeClass('show');
+                                });
+                                $('.addnum_' + $(em).attr('comid')).css('color', 'red');
+                                $('.addnum_' + $(em).attr('comid')).attr('disable', '1');
+                            } else {
+                                $.util.alert(msg.msg);
+                            }
+                        }
+                    }
+                });
+            }
+            // 回复评论
+            if (em.id.indexOf('reply_') != -1) {
+                var id = $(em).attr('value');
+                checkLogin(function(){
+                    if($(em).attr('user_id') == $('#article_comment').attr('user_id')) {
+                        $('#shadow').show();
+                        $('#isdel').show();
+                        $('#isdel').attr('com_id', id);
+                        return;
+                    }
+                    var reply_id = id;
+                    var msg = '回复 ' + $('#comment_username_' + reply_id).attr('user_name') + ' :';
+                    $('#r_textarea').attr('placeholder', msg);
+                    $('.reply-shadow').show();
+                    $('.reply').removeClass('m-height').addClass('c-height');
+                    var comid = $(em).attr('value');
+                    $('#publish_reply').attr('value', comid);
+                });
+            }
+        });
+    }
+)();
     
     
 </script>
