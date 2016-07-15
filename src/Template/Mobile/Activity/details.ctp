@@ -337,7 +337,6 @@
     });
 
 
-    (function () {
         //ii=0;
         //$('body').on('touchstart', function(e){
         $('body').on('tap', function (e) {
@@ -633,8 +632,7 @@
                 });
             }
         });
-    }
-)();
+    
     
     
 </script>

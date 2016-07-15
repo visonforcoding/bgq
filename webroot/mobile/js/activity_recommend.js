@@ -42,6 +42,10 @@ activity.prototype.bindEvent = function () {
                     $.util.alert('请选择一个类别');
                     return false;
                 }
+                $('.reg-shadow').show('slow');
+                $('.totips').show('slow');
+                break;
+            case 'comfirm':
                 var form = $('form').serializeArray();
                 $.util.ajax({
                     url: $('form').attr('action'),
@@ -59,6 +63,10 @@ activity.prototype.bindEvent = function () {
                         }
                     }
                 });
+                break;
+            case 'closed':
+                $('.reg-shadow').hide('slow');
+                $('.totips').hide('slow');
                 break;
             case 'goTop':
                 window.scroll(0, 0);

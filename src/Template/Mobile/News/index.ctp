@@ -54,7 +54,7 @@
     </section>	
 </script>
 <script type="text/html" id="subTpl">
-    <a href="/news/search">{#name#}</a>
+    <a href="/news/search/{#id#}">{#name#}</a>
 </script>
 <script type="text/html" id="bannerTpl">
     <li><a href="{#url#}"><img back_src="{#img#}"/></a></li>
