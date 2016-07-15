@@ -197,11 +197,14 @@ class NewsController extends AppController {
     /**
      * 活动搜索
      */
-    public function search() {
+    public function search($id=null) {
         $industries = $this->News->Industries->find()->hydrate(false)->all()->toArray();
-        $industries = $this->tree($industries);
         $this->set('industries', $industries);
-        $this->set('pageTitle', '资讯搜索');
+        $this->set([
+            'pageTitle'=>'资讯搜索',
+            'industries'=>$industries,
+            'id' => $id,
+        ]);
     }
     
     /**
@@ -224,11 +227,8 @@ class NewsController extends AppController {
         } else {
             $res = $res->contain(['Industries']);
         }
-        if ($data['sort']) {
-            $res->orderDesc('News.' . $data['sort']);
-        } else {
-            $res->orderDesc('News.create_time'); // 默认按时间倒序排列
-        }
+        
+        $res = $res->orderDesc('News.create_time'); // 默认按时间倒序排列
         $res = $res->contain(['Users'])
                 ->limit($this->newslimit)
                 ->toArray();
