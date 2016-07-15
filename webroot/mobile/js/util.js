@@ -36,7 +36,8 @@ $.util = {
             if(func) d=func(d);
             html.push($.util.jsonToTpl(d,$.util.id(tplId).text));
         });
-        return contentId === '' ? html.join('') : $('#'+contentId).html(html.join(''));
+        if(contentId) $('#'+contentId).html(html.join(''));
+        return html.join('');
     },
     /**
      * 去掉字符串两端空格
