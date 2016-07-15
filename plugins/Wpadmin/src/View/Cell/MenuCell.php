@@ -50,14 +50,28 @@ class MenuCell extends Cell {
     }
 
     protected function initData() {
-        $menus = \Cake\Cache\Cache::read('admin_menus');
+        $admin = $this->request->session()->read('User.admin');
+        $menus = \Cake\Cache\Cache::read($admin->username . '_menus');
         if ($menus === false) {
             $Menu = \Cake\ORM\TableRegistry::get('menu');
-            $menus = $Menu->find('threaded', [
-                        'keyField' => 'id',
-                        'parentField' => 'pid'
-                    ])->hydrate(false)->where('status = 1')->orderDesc('rank')->toArray();
-            \Cake\Cache\Cache::write('admin_menus', $menus);
+            if ($admin->username == 'admin') {
+                $menus = $Menu->find('threaded', [
+                            'keyField' => 'id',
+                            'parentField' => 'pid'
+                        ])->hydrate(false)->where('status = 1')->orderDesc('rank')->toArray();
+            } else {
+                $AdminMenu = \Cake\ORM\TableRegistry::get('AdminMenu');
+                $AdminMenu->displayField('menu_id');
+                $admin_menus = $AdminMenu->find('list')->where(['admin_id' => $admin->id])->toArray();
+                $admin_menus = array_values($admin_menus);
+                if ($admin_menus) {
+                    $menus = $Menu->find('threaded', [
+                                'keyField' => 'id',
+                                'parentField' => 'pid'
+                            ])->hydrate(false)->where(['status' => 1, 'id in' => $admin_menus])->orderDesc('rank')->toArray();
+                }
+            }
+            \Cake\Cache\Cache::write($admin->username . '_menus', $menus);
         }
         $this->_menus = $menus;
         $controller = $this->request->param('controller');

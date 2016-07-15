@@ -132,6 +132,7 @@ class NewsController extends AppController {
         $sort = 'News.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
+        $industry = $this->request->data('industries');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
@@ -143,13 +144,18 @@ class NewsController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $query = $this->News->find()->contain(['Users','Industries'=>function($q){
-            return $q->hydrate(false)->select(['name']);
-        }]);
-//        $query->matching('Industries',function($q){
-//            return $q->where([]);
-//        });
-        $query->hydrate(false);
+        $query = $this->News->find();
+        $query->contain(['Users','Industries'=>function($q){
+                    return $q->hydrate(false)->select(['name']);
+         }]);
+        if(!empty($industry)){
+            //过滤
+           $query->matching('Industries',function($q)use($industry){
+               return $q->where(['Industries.id'=>$industry['_ids'][0]]);
+           });
+        }
+       
+        //$query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
         }

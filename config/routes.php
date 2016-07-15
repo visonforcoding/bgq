@@ -94,6 +94,7 @@ Router::prefix('admin', function ($routes) {
     // Because you are in the admin scope,
     // you do not need to include the /admin prefix
     // or the admin route element.
+     $routes->extensions(['json', 'xml','shtml']);
     $routes->connect('/:controller/:action/*');
 });
 

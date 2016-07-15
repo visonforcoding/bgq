@@ -9,17 +9,17 @@ $(function () {
             })
         },
         timepicker: false,
-        lang:'zh'
+        lang: 'zh'
     });
     $('.date_timepicker_end').datetimepicker({
         format: 'Y/m/d',
         onShow: function (ct) {
             this.setOptions({
-               minDate: $('.date_timepicker_start').val() ? $('.date_timepicker_start').val() : false
+                minDate: $('.date_timepicker_start').val() ? $('.date_timepicker_start').val() : false
             })
         },
         timepicker: false,
-        lang:'zh'
+        lang: 'zh'
     });
     // 仅选择日期
     //图片选择器
@@ -60,7 +60,7 @@ function  choiceImg(path) {
 //图标选择
 function  choiceIcon(path) {
     layer.msg('图标选取成功', {icon: 6});
-   //ICON_OBJ.parents('.form-group').find('img').attr('src', path);
+    //ICON_OBJ.parents('.form-group').find('img').attr('src', path);
     ICON_OBJ.parents('.form-group').find('input').val(path);
     layer.close(iframe_index);
 }
@@ -176,7 +176,7 @@ function initJquploadAttach(id, url, allowedTypes) {
         onSuccess: function (files, data, xhr, pd) {
             if (data.status) {
                 $('#' + id).prev().val(data.path);
-               layer.alert(data.msg);
+                layer.alert(data.msg);
             } else {
                 uploadObj.reset();
                 layer.alert(data.msg);
@@ -192,3 +192,92 @@ function initJquploadAttach(id, url, allowedTypes) {
     });
     return uploadObj;
 }
+
+$.global = {
+    /**
+     * 去掉字符串两端空格
+     * @param str
+     */
+    trim: function (str) {
+        return str.replace(/(^\s*)|(\s*$)/g, "");
+    },
+    /**
+     * 封装ajax
+     * @param {type} obj
+     * @returns {undefined}
+     */
+    ajax: function (obj) {
+        var tmp = obj.func;
+        if (!obj['url']) {
+            obj['url'] = '';
+        }
+        if (!obj['dataType']) {
+            obj['dataType'] = 'json';
+        }
+        if (!obj['type']) {
+            obj['type'] = 'post';
+        }
+        obj.success = function (json) {
+            if (json.code == 200) {
+                tmp(json);
+            }
+            if (json.code == 403) {
+                $.util.alert('请先登录');
+                setTimeout(function () {
+                    window.location.href = json.redirect_url;
+                }, 1000);
+            }
+            if (json.code == 500) {
+                var msg = Bollean(json['message']) ? json['message'] : json.msg;
+                $.util.alert(msg);
+            }
+        };
+        obj.statusCode = {
+            404: function () {
+                $.util.alert('请求页面不存在');
+            },
+            500: function () {
+                $.util.alert('服务器出错');
+            }
+        };
+        obj.error = function (XMLHttpRequest, textStatus, errorThrown) {
+            $.util.alert('服务器出错');
+            console.log(errorThrown);
+        };
+        $.ajax(obj);
+    },
+    /**
+     * 读取COOKIE
+     */
+    getCookie: function (name) {
+        var reg = new RegExp("(^| )" + name + "(?:=([^;]*))?(;|$)"), val = document.cookie.match(reg);
+        return val ? (val[2] ? unescape(val[2]).replace(/(^")|("$)/g, "") : "") : null;
+    },
+    /**
+     * 写入COOKIES
+     */
+    setCookie: function (name, value, expires, path, domain, secure) {
+        var exp = new Date(), expires = arguments[2] || null, path = arguments[3] || "/", domain = arguments[4] || null, secure = arguments[5] || false;
+        expires ? exp.setMinutes(exp.getMinutes() + parseInt(expires)) : "";
+        document.cookie = name + '=' + escape(value) + (expires ? ';expires=' + exp.toGMTString() : '') + (path ? ';path=' + path : '') + (domain ? ';domain=' + domain : '') + (secure ? ';secure' : '');
+    },
+    queryParam2Json: function (str) {
+        var pairs = str.split('&');
+        var result = {};
+        pairs.forEach(function (pair) {
+            pair = pair.split('=');
+            var name = pair[0]
+            var value = pair[1]
+            if (name.length)
+                if (result[name] !== undefined) {
+                    if (!result[name].push) {
+                        result[name] = [result[name]];
+                    }
+                    result[name].push(value || '');
+                } else {
+                    result[name] = value || '';
+                }
+        });
+        return(result);
+    }
+};

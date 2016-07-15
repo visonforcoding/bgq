@@ -15,7 +15,7 @@
             </div>
             <div class="form-group">
                 <label for="keywords">行业标签</label>
-                  <?=$this->cell('Industry')?>
+                  <?=$this->cell('Industry::news',[['single']])?>
             </div>
             <div class="form-group">
                 <label for="keywords">时间</label>
@@ -136,14 +136,11 @@
 
                 function doSearch() {
                     //搜索
-                    var postData = $('#table-bar-form').serializeArray();
-                    var data = {};
-                    $.each(postData, function (i, n) {
-                        data[n.name] = n.value;
-                    });
-                    $.zui.store.pageSet('searchData', data); //本地存储查询参数 供导出操作等调用
+                    var postData = $('#table-bar-form').serialize();
+                    postData = decodeURI(postData);
+                    $.zui.store.pageSet('searchData', postData); //本地存储查询参数 供导出操作等调用
                     $("#list").jqGrid('setGridParam', {
-                        postData: data
+                        postData: $.global.queryParam2Json(postData)
                     }).trigger("reloadGrid");
                 }
 

@@ -9,8 +9,15 @@ use Wpadmin\Controller\AppController;
  *
  * @property \App\Model\Table\SavantTable $Savant
  * @property \App\Controller\Component\BusinessComponent $Business 通用业务处理组件
+ * @property \App\Model\Table\UserTable $User
  */
 class SavantController extends AppController {
+    
+    
+    public function initialize() {
+        parent::initialize();
+        $this->loadModel('User');
+    }
 
     /**
      * Index method
@@ -119,25 +126,22 @@ class SavantController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'Savant.' . $this->request->data('sidx');
+        $sort = 'User.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = [];
+        $where = ['User.level'=>2];
         if (!empty($keywords)) {
-            $where[' Users.truename like'] = "%$keywords%";
+            $where[' User.truename like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $query = $this
-                ->Savant
-                ->find()
-                ->contain(['Users']);
-        $query->hydrate(false);
+        $query = $this->User->find()->select(['User.truename','Savant.reco_nums','User.savant_status','Savant.xmjy','Savant.zyys','Savant.summary'])
+                ->contain(['Savant']);
         if (!empty($where)) {
             $query->where($where);
         }
@@ -242,5 +246,27 @@ class SavantController extends AppController {
             return $this->Util->ajaReturn(false, '系统错误');
         }
     }
-
+    
+    /**
+     * 
+     */
+    public function getRandomSavants(){
+        $tags = $this->request->query('tags');
+        //拥有该标签的所有专家
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $UserTable->displayField('id');
+        $savants = $UserTable->find('list')
+                        ->distinct(['User.id'])
+                        ->select(['id'])
+                        ->matching('Industries', function($q)use($tags) {
+                            return $q->where(['Industries.id in' =>$tags ]);
+                        })->where(['User.level'=>2])->order('rand()')->limit(4)
+                        ->toArray();
+        $savants = array_values($savants);               
+        $res = ['ids'=>$savants];
+        $this->response->type('json');
+        $this->response->body(json_encode($res));
+        $this->response->send();
+        $this->response->stop();
+    }
 }

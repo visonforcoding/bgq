@@ -30,5 +30,18 @@ class IndustryCell extends Cell {
                 ])->all()->toArray();
         $this->set(compact('industries','selIds'));
     }
+    
+    /**
+     *  资讯的标签只有行业投资 pid =1 的记录
+     * @param type $selIds
+     */
+    public function news($selIds=null){
+        $IndustryTable = \Cake\ORM\TableRegistry::get('Industry');
+        $industries = $IndustryTable->find('threaded', [
+                    'keyField' => 'id',
+                    'parentField' => 'pid'
+                ])->where(['pid'=>1])->all()->toArray();
+        $this->set(compact('industries','selIds'));
+    }
 
 }

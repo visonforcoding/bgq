@@ -144,8 +144,8 @@ class WxController extends AppController {
         if (empty($openid)) {
 
         }
-        $fee = $order->price;  //支付金额(分)
-//            $fee = 0.01; //元
+        $fee = 0.01; //元
+//        $fee = $order->price;  //支付金额(分)
         $this->loadComponent('Wxpay');
         $isApp = false;
         $aliPayParameters = '';
@@ -175,6 +175,9 @@ class WxController extends AppController {
         exit();
     }
 
+    /**
+     * 支付宝异步回调通知
+     */
     public function aliNotify() {
         \Cake\Log\Log::debug('进入支付宝支付回调','devlog');
         $this->loadComponent('Alipay');

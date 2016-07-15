@@ -41,13 +41,13 @@
                         colNames:
                                 ['用户', '推荐次数', '项目经验', '资源优势', '简介', '审核情况', '操作'],
                         colModel: [
-                            {name: 'user.truename', editable: true, align: 'center'},
-                            {name: 'reco_nums', editable: true, align: 'center'},
+                            {name: 'truename', editable: true, align: 'center'},
+                            {name: 'savant.reco_nums', editable: true, align: 'center'},
 //                            {name: 'cover', editable: true, align: 'center'},
-                            {name: 'xmjy', editable: true, align: 'left'},
-                            {name: 'zyys', editable: true, align: 'left'},
-                            {name: 'summary', editable: true, align: 'center'},
-                            {name: 'user.savant_status', editable: true, align: 'center', formatter: statusFormatter},
+                            {name: 'savant.xmjy', editable: true, align: 'left'},
+                            {name: 'savant.zyys', editable: true, align: 'left'},
+                            {name: 'savant.summary', editable: true, align: 'center'},
+                            {name: 'savant_status', editable: true, align: 'center', formatter: statusFormatter},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: 10,
@@ -74,13 +74,13 @@
                 });
                 
                 function statusFormatter(cellvalue, options, rowObject){
-                    if(rowObject.user.savant_status == 0){
+                    if(rowObject.savant_status == 0){
                         response = '未通过审核';
-                    } else if(rowObject.user.savant_status == 1) {
+                    } else if(rowObject.savant_status == 1) {
                         response = '未认证';
-                    } else if(rowObject.user.savant_status == 2) {
+                    } else if(rowObject.savant_status == 2) {
                         response = '待审核';
-                    } else if(rowObject.user.savant_status == 3) {
+                    } else if(rowObject.savant_status == 3) {
                         response = '已通过审核';
                     }
                     return response;
@@ -90,10 +90,10 @@
                     response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="编辑" href="/admin/savant/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
-                    if (rowObject.user.savant_status == 2) {
+                    if (rowObject.savant_status == 2) {
                         response += '<a title="审核通过" href="javascript:void(0)" class="grid-btn release" onclick="pass(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
                     }
-                    if(rowObject.user.savant_status != 0){
+                    if(rowObject.savant_status != 0){
                         response += '<a title="未通过审核" href="javascript:void(0)" class="grid-btn unrelease" onclick="unpass(' + rowObject.id + ')"><i class="icon icon-times"></i></a>';
                     }
                     return response;
