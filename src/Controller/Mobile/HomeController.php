@@ -42,12 +42,32 @@ class HomeController extends AppController {
             $hasMsg = true;
         }
         $this->set(compact('user'));
-        $this->set(array(
+        $this->set([
             'user' => $user,
             'isWx' => $isWx,
             'hasMsg'=>$hasMsg,
             'pageTitle' => '个人中心',
-        ));
+        ]);
+    }
+    
+    public function getUserinfo(){
+        echo 'test';
+        exit();
+        //$this->handCheckLogin();
+        //debug(123);die;
+        $user_id = $this->user->id;
+        $user = $this->User->get($user_id);
+        $isWx = $this->request->is('weixin') ? true : false;
+        $UsermsgTable = \Cake\ORM\TableRegistry::get('Usermsg');
+        $unReadFollowCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type' => 1])->count(); //未读关注消息
+        $unReadSysCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type !=' => 1])->count(); //未读系统消息
+        $hasMsg = false;
+        if ($unReadFollowCount || $unReadSysCount) {
+            $hasMsg = true;
+        }
+        $res = compact('user', 'isWx', 'hasMsg');
+        debug($res);die;
+        return $this->Util->ajaxReturn(['status'=>true, 'data'=>$res]);
     }
 
     /**
