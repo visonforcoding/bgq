@@ -35,7 +35,6 @@
     <section class="newscomment-box mb50" >
         <h3 class="comment-title">
             评论
-            <!--<span id="commit"><i  class="iconfont">&#xe618;</i>我要点评</span>-->
         </h3>
         <div id="comment"><h4 id="noComment">还没任何评论</h4></div>
         <span class='com-all' id=""><a href="#allcoment">显示全部</a></span>
