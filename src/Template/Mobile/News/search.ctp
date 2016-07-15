@@ -2,51 +2,26 @@
 <div class="fixedwraper">
     <div class='h-news-search'>
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe613;</a>
-        <form id="searchForm" onsubmit="return false;" >
+        <form id="searchForm" >
         <h1><input type="text" placeholder="请输入关键词" name="keyword"></h1>
-        <input type="hidden" name="industry_id" value="" style="display:none;"/>
-        <input type="hidden" name="sort" value="" style="display:none;"/>
+        <input type="hidden" name="industry_id" value="" />
         </form>
         <div class='h-regiser' id="doSearch" >搜 索</div>
     </div>
-    <div class="news-classify">
-        <div class="classify-l fl ml" id="choose_industry" style="width:50%;">
-            <span id="choose_industries">选择行业</span>
-            <ul class="all-industry" hidden id="choose_industry_ul">
-                <?php foreach ($industries as $k => $v): ?>
-                    <?php if ($v['pid'] == 0): ?>
-                        <li id="parent_<?= $v['id'] ?>"><a href="javascript:void(0)"><?= $v['name'] ?></a>
-                            <?php if ($v['child']): ?>
-                                <ul class="choose_industry_child_ul" hidden>
-                                    <?php foreach ($v['child'] as $key => $val): ?>
-                                        <li id="child_<?= $v['id'] ?>" value="<?= $val['id'] ?>" class="choose_industry_child_li"><a href="javascript:void(0)"><?= $val['name'] ?></a></li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            <?php endif; ?>
-                        </li>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-
-    </div>
+    <ul class="s-label">
+        <?php foreach ($industries as $k => $v): ?>
+            <?php if ($v['pid'] == 1): ?>
+                <li>
+                    <a href="javascript:void(0)" industry_id='<?= $v['id'] ?>' class="industry <?php if(is_numeric($id)): ?><?php if($id == $v['id']):?>default<?php endif;?><?php endif; ?>"><?= $v['name']?></a>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </ul>
     <div id="search"></div>
 </div>
 <div id="buttonLoading" class="loadingbox"></div>
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>
-<!--<script type="text/html" id="search_tpl">
-    <div class="innercon">
-        <a href="/news/view/{#id#}" class="clearfix">
-            <span class="my-pic-acive"><img src="{#cover#}"/></span>
-            <div class="my-collection-items">
-                <h3>{#title#}</h3>
-                <span>{#address#}</span>
-                <span>{#time#}</span>
-            </div>
-        </a>
-    </div>
-</script>-->
 <script type="text/html" id="search_tpl">
     <section class="news-list-items" style="padding-bottom: 0.2rem;background: #fff;">
   
@@ -65,9 +40,18 @@
 <script src="/mobile/js/news_search.js"></script>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    
+    if($('.s-label li a.default').length != 0){
+        $('.industry.default').trigger('tap');
+    }
+    
+    $('input[name="keyword"]').focus();
     var page = 2;
     setTimeout(function () {
         $(window).on("scroll", function () {
+            if($('.news-list-items').length == 0){
+                return;
+            }
             $.util.listScroll('items', function () {
                 if (page === 9999) {
                     $('#buttonLoading').html('亲，没有更多资讯了');
@@ -103,6 +87,68 @@
             });
         });
     }, 2000);
+    
+    var search_data = {};
+    $('.industry').on('tap', function(){
+        if($(this).hasClass('active')){
+            $(this).removeClass('active');
+            $('input[name="industry_id"]').val('');
+            return;
+        }
+        $('.industry').removeClass('active');
+        $(this).addClass('active');
+        var industry_id = $(this).attr('industry_id');
+        $('input[name="industry_id"]').val(industry_id);
+        if(search_data[industry_id]){
+            $('#search').html(search_data[industry_id]);
+            return;
+        }
+        $('#search').html('');
+        $.ajax({
+            type: 'post',
+            url: '/news/getSearchRes',
+            data: $('#searchForm').serialize(),
+            dataType: 'json',
+            success: function (msg) {
+                if (typeof msg === 'object') {
+                    if (msg.status === true) {
+                        search_data[industry_id] = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                            d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                            d.author = d.user.truename;
+                            return d;
+                        });
+                    } else {
+                        $.util.alert(msg.msg);
+                    }
+                }
+            }
+        });
+    });
+    
+    $('#searchForm').submit(function(){
+        $.ajax({
+            type: 'post',
+            url: '/news/getSearchRes',
+            data: $('#searchForm').serialize(),
+            dataType: 'json',
+            success: function (msg) {
+                if (typeof msg === 'object') {
+                    if (msg.status === true) {
+                        var html = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                            d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                            d.author = d.user.truename;
+                            return d;
+                        });
+                    } else {
+                        $('#search').html('');
+                        $.util.alert(msg.msg);
+                    }
+                }
+            }
+        });
+        return false;
+    });
+    
 </script>
 <?php
 $this->end('script');

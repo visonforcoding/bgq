@@ -1,30 +1,19 @@
 <div class="fixedwraper" >
     <div class='h-news-search'>
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe613;</a>
-        <form id="searchForm" onsubmit="return false;" >
+        <form id="searchForm" >
         <h1><input type="text" name="keyword" placeholder="请输入关键词"></h1>
-        <input type="hidden" name="industry_id" value="" style="display:none;"/>
-        <input type="hidden" name="sort" value="" style="display:none;"/>
-        <input type="hidden" name="region" value="" style="display:none;"/>
+        <input type="hidden" name="series_id" value="" />
+        <input type="hidden" name="region" value="" />
         </form>
         <div class='h-regiser' id="doSearch">搜索</div>
     </div>
     <div class="news-classify">
         <div class="classify-l fl ml" id="choose_industry">
-            <span id="choose_industries">选择行业</span>
+            <span id="choose_industries">选择分类</span>
             <ul class="all-industry" hidden id="choose_industry_ul">
-                <?php foreach ($industries as $k => $v): ?>
-                    <?php if ($v['pid'] == 0): ?>
-                        <li id="parent_<?= $v['id'] ?>"><a href="javascript:void(0)"><?= $v['name'] ?></a>
-                            <?php if ($v['child']): ?>
-                                <ul class="choose_industry_child_ul" hidden>
-                                    <?php foreach ($v['child'] as $key => $val): ?>
-                                        <li id="child_<?= $v['id'] ?>" value="<?= $val['id'] ?>" class="choose_industry_child_li"><a href="javascript:void(0)"><?= $val['name'] ?></a></li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            <?php endif; ?>
-                        </li>
-                    <?php endif; ?>
+                <?php foreach ($activitySeries as $k => $v): ?>
+                <li id="parent_<?= $k ?>" series_id="<?= $k ?>" class="<?php if(is_numeric($sid)): ?><?php if($sid == $k):?>default<?php endif;?><?php endif;?>"><a href="javascript:void(0)"><?= $v ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </div>
@@ -34,13 +23,6 @@
                 <?php foreach($regions as $k=>$v): ?>
                 <li id="region_<?= $v['id'] ?>" value='<?= $v['id'] ?>' class="choose_region_li"><a href="javascript:void(0);"><?= $v['name'] ?></a></li>
                 <?php endforeach; ?>
-            </ul>
-        </div>
-        <div class="classify-r fr" id="choose_sort">
-            <span id="choose_sorts">排序</span>
-            <ul class="sort-mark" hidden id="sort_mark">
-                <li id="sort_mostapply" value="apply_nums" class="choose_sort_child"><a href="javascript:void(0)">报名最多</a></li>
-                <li id="sort_recently" value="create_time" class="choose_sort_child"><a href="javascript:void(0)">最近更新</a></li>
             </ul>
         </div>
     </div>
@@ -68,12 +50,19 @@
     $('input[name="keyword"]').focus();
     window.isApply = ',' + <?= $isApply ?> + ',';
     
+    if($('#choose_industry_ul li.default').length != 0){
+        $('.default').trigger('tap');
+    }
+    
     var page = 2;
     setTimeout(function () {
         $(window).on("scroll", function () {
+            if($('.innercon').length == 0){
+                return;
+            }
             $.util.listScroll('items', function () {
                 if (page === 9999) {
-                    $('#buttonLoading').html('亲，没有更多资讯了');
+                    $('#buttonLoading').html('亲，没有更多条目了');
                     return;
                 }
                 $.util.showLoading('buttonLoading');
@@ -105,6 +94,30 @@
             });
         });
     }, 2000);
+    
+    
+    $('#searchForm').submit(function(){
+        $.ajax({
+            type: 'post',
+            url: '/activity/getSearchRes',
+            data: $('#searchForm').serialize(),
+            dataType: 'json',
+            success: function (msg) {
+                if (typeof msg === 'object') {
+                    if (msg.status === true) {
+                        var html = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                            d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == - 1 ? '' : '<span class="is-apply">已报名</span>';
+                            return d;
+                        });
+                    } else {
+                        $('#search').html('');
+                        $.util.alert(msg.msg);
+                    }
+                }
+            }
+        });
+        return false;
+    });
 </script>
 <?php
 $this->end('script');
