@@ -10,6 +10,9 @@ use Wpadmin\Controller\AppController;
  * @property \App\Model\Table\ActivityTable $Activity
  */
 class ActivityController extends AppController {
+    
+    
+    const SERIES_CONF = 'activitySeries';
 
     /**
      * Index method
@@ -17,9 +20,13 @@ class ActivityController extends AppController {
      * @return void
      */
     public function index() {
+        $series = \Cake\Core\Configure::read(self::SERIES_CONF);
         $domain = $this->request->env('SERVER_NAME');
         $this->set(compact('domain'));
         $this->set('activity', $this->Activity);
+        $this->set([
+            'series'=>$series
+        ]);
     }
 
     /**
@@ -40,7 +47,7 @@ class ActivityController extends AppController {
 
     /**
      * Add method
-     *
+     *   将与活动标签相同的专家随机选择4个添加到活动专家推荐中
      * @return void Redirects on successful add, renders view otherwise.
      */
     public function add() {
@@ -52,20 +59,13 @@ class ActivityController extends AppController {
             $activity->publisher = $this->_user->truename;
             $res = $this->Activity->save($activity);
             if ($res) {
-                // 将与活动标签相同的专家随机选择4个添加到活动专家推荐中
-                // 思路：活动->查出活动标签->查出相同用户标签->去除重复用户->查出是专家的用户->大于四个随机选四个，不然全部插入活动专家推荐表
-        
                 return $this->Util->ajaxReturn(true, '添加成功');
             } else {
                 $errors = $activity->errors();
                 return $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
             }
         }
-        $admins = $this->Activity->Admins->find('list', ['limit' => 200]);
         $regions = $this->Activity->Regions->find('list', ['limit' => 200]);
-        $savants = $this->Activity->Savants->find('list', ['limit' => 200]);
-        $industries = $this->Activity->Industries->find()->hydrate(false)->all()->toArray();
-        $industries = \Wpadmin\Utils\Util::tree($industries, 0, 'id', 'pid');
 
         $this->set(compact('activity', 'admins', 'industries', 'regions', 'savants'));
     }
@@ -78,10 +78,6 @@ class ActivityController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
-
-
-
-
         $activity = $this->Activity->get($id, [
             'contain' => ['Industries', 'Savants'],
         ]);
@@ -94,10 +90,7 @@ class ActivityController extends AppController {
                 return $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
-        $admins = $this->Activity->Admins->find('list', ['limit' => 200]);
-        $industries = $this->Activity->Industries->find('list', ['limit' => 200]);
         $regions = $this->Activity->Regions->find('list', ['limit' => 200]);
-        $this->set(compact('activity', 'admins', 'industries', 'regions'));
         $selSavantIds = [];
         if ($activity->savants) {
             foreach ($activity->savants as $savant) {
@@ -107,6 +100,7 @@ class ActivityController extends AppController {
         foreach ($activity->industries as $industry) {
             $selIndustryIds[] = $industry->id;
         }
+        $this->set(compact('regions'));
         $this->set(compact('activity', 'selIndustryIds', 'selSavantIds'));
     }
 
@@ -143,9 +137,18 @@ class ActivityController extends AppController {
         $sort = 'Activity.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
+        $series_id = $this->request->data('series_id');
+        $region_id = $this->request->data('region_id');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
+        
+        if (!empty($series_id)) {
+            $where['and'] = ['series_id'=>$series_id];
+        }
+        if (!empty($region_id)) {
+            $where['and'] = ['series_id'=>$series_id];
+        }
         if (!empty($keywords)) {
             $where['OR'] = [
                 ['Users.`truename` like' => "%$keywords%"],

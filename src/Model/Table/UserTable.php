@@ -31,95 +31,102 @@ class UserTable extends Table {
         $this->table('user');
         $this->displayField('truename');
         $this->primaryKey('id');
-        
-        $this->hasOne('Savant',[
+
+        $this->hasOne('Savant', [
             'className' => 'Savant',
-            'dependent' => true,  //删了用户同时会删掉专家信息记录
+            'dependent' => true, //删了用户同时会删掉专家信息记录
         ]);
 
-        $this->hasMany('Subjects',[
-            'className'=>'MeetSubject',
+        $this->hasMany('Subjects', [
+            'className' => 'MeetSubject',
         ]);
-        
+
         $this->belongsToMany('Industries', [
             'className' => 'Industry',
             'joinTable' => 'user_industry',
             'foreignKey' => 'user_id',
             'targetForeignKey' => 'industry_id'
         ]);
-        
-        
+
+
         $this->hasOne('Savants', [
             'foreignKey' => 'user_id',
             'joinType' => 'LEFT',
             'className' => 'Savant',
         ]);
-        
-        $this->belongsTo('Agencies',[
-            'className'=>'Agency'
-        ]);
-        
-        $this->hasMany('Educations',[
-            'className' => 'Education',
-            'foreignKey'=>'user_id'
 
+        $this->belongsTo('Agencies', [
+            'className' => 'Agency'
         ]);
-        
-        $this->hasMany('Careers',[
+
+        $this->hasMany('Educations', [
+            'className' => 'Education',
+            'foreignKey' => 'user_id'
+        ]);
+
+        $this->hasMany('Careers', [
             'className' => 'Career',
-            'foreignKey'=>'user_id'
+            'foreignKey' => 'user_id'
         ]);
-        
-        $this->hasOne('UserFans',[
+
+        $this->belongsToMany('Activity', [
+            'className' => 'Activity',
+            'joinTable' => 'activity_savant',
+            'foreignKey' => 'savant_id',
+            'targetForeignKey' => 'activity_id'
+        ]);
+
+
+        $this->hasOne('UserFans', [
             'className' => 'UserFans',
         ]);
-        $this->hasMany('Focus',[
+        $this->hasMany('Focus', [
             'className' => 'UserFans',
-            'foreignKey'=>'user_id'
+            'foreignKey' => 'user_id'
         ]);
         //粉丝
-        $this->hasMany('Followers',[
+        $this->hasMany('Followers', [
             'className' => 'UserFans',
-            'foreignKey'=>'following_id'
+            'foreignKey' => 'following_id'
         ]);
         //资讯评论
-        $this->hasMany('Newscoms',[
+        $this->hasMany('Newscoms', [
             'className' => 'Newscom',
-            'foreignKey'=>'user_id'
+            'foreignKey' => 'user_id'
         ]);
-        
+
         //活动评论
-        $this->hasMany('Activitycoms',[
+        $this->hasMany('Activitycoms', [
             'className' => 'Activitycom',
-            'foreignKey'=>'user_id'
+            'foreignKey' => 'user_id'
         ]);
-        
-        $this->hasOne('CardBoxes',[
+
+        $this->hasOne('CardBoxes', [
             'className' => 'CardBox',
             'foreignKey' => 'ownerid',
         ]);
-        
-        $this->belongsTo('Collect',[
+
+        $this->belongsTo('Collect', [
             'foreignKey' => 'relate_id',
             'joinType' => 'INNER',
             'className' => 'Collect',
         ]);
-        
-        $this->hasMany('RecoUsers',[
-            'foreignKey'=>'savant_id',
-            'joinType'=>'LEFT',
-            'className'=>'SavantReco'
+
+        $this->hasMany('RecoUsers', [
+            'foreignKey' => 'savant_id',
+            'joinType' => 'LEFT',
+            'className' => 'SavantReco'
         ]);
-        $this->hasOne('Secret',[
-            'foreignKey'=>'user_id',
-            'joinType'=>'LEFT',
-            'className'=>'Secret'
+        $this->hasOne('Secret', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'LEFT',
+            'className' => 'Secret'
         ]);
         //联络人
-        $this->belongsTo('Customer',[
-            'className'=>'Wpadmin.Admin',
-            'joinType'=>'LEFT',
-            'foreignKey'=>'admin_id'
+        $this->belongsTo('Customer', [
+            'className' => 'Wpadmin.Admin',
+            'joinType' => 'LEFT',
+            'foreignKey' => 'admin_id'
         ]);
 
         $this->addBehavior('Timestamp', [
@@ -145,12 +152,12 @@ class UserTable extends Table {
 
         $validator
                 ->requirePresence('phone', 'create', '手机号不可为空')
-                ->notEmpty('phone','手机号不能为空');
+                ->notEmpty('phone', '手机号不能为空');
 
         $validator
-                ->notBlank('truename','姓名不可为空')
+                ->notBlank('truename', '姓名不可为空')
                 ->requirePresence('truename', 'create', '姓名不可为空')
-                ->notEmpty('truename','姓名不可为空');
+                ->notEmpty('truename', '姓名不可为空');
 
         $validator
                 ->allowEmpty('company');
@@ -159,14 +166,14 @@ class UserTable extends Table {
                 ->allowEmpty('position');
 
         $validator
-                ->email('email',false,'邮箱输入不正确')
-                ->notEmpty('email','请输入邮箱');
+                ->email('email', false, '邮箱输入不正确')
+                ->notEmpty('email', '请输入邮箱');
         $validator
                 ->allowEmpty('goodat');
 
         $validator
                 ->requirePresence('card_path', 'create', '请上传名片')
-                ->notEmpty('card_path','请上传名片');
+                ->notEmpty('card_path', '请上传名片');
 
 
         return $validator;
@@ -180,8 +187,8 @@ class UserTable extends Table {
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules) {
-        $rules->add($rules->isUnique(['email'],'邮箱被占用'));
-        $rules->add($rules->isUnique(['phone'],'该手机号已被占用'));
+        $rules->add($rules->isUnique(['email'], '邮箱被占用'));
+        $rules->add($rules->isUnique(['phone'], '该手机号已被占用'));
         $rules->add($rules->existsIn(['industry_id'], 'Industries'));
         return $rules;
     }

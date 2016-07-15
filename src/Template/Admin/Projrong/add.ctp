@@ -8,7 +8,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">发布人</label>
         <div class="col-md-8">
-            <?php echo $this->Form->input('user_id', ['label' => false, 'options' => $users, 'class' => 'form-control']); ?>
+              <?= $this->cell('User') ?>
         </div>
     </div>
     <div class="form-group">
@@ -30,9 +30,13 @@
     <div class="form-group">
         <label class="col-md-2 control-label">融资阶段</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('rzjd', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <?= $this->cell('Stage') ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">融资规模</label>
+        <div class="col-md-8">
+            <?= $this->cell('Scale') ?>
         </div>
     </div>
     <div class="form-group">
@@ -43,14 +47,7 @@
             ?>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">融资规模</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('scale', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
+
     <div class="form-group">
         <label class="col-md-2 control-label">股份</label>
         <div class="col-md-8">
@@ -111,7 +108,19 @@
     <div class="form-group">
         <label class="col-md-2 control-label">行业标签</label>
         <div class="col-md-8">
-            <?=$this->cell('Industry')?>
+            <?= $this->cell('Industry::news') ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">跟进人</label>
+        <div class="col-md-8">
+            <input class="form-control" name="follower"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">进度描述</label>
+        <div class="col-md-8">
+            <textarea class="form-control" rows="2" name="stage_remark"></textarea>
         </div>
     </div>
     <div class="form-group">
@@ -134,6 +143,10 @@
         initJqupload('cover', '/wpadmin/util/doUpload?dir=proj/cover', 'jpg,png,gif,jpeg'); //初始化图片上传
         initJquploadAttach('attach', '/wpadmin/util/doUpload?dir=proj/attach', 'jpg,png,gif,jpeg,ppt,pptx,doc,xls,xlsx,zip,rar'); //初始化附件上传
         $('#select-industry').select2({
+            language: "zh-CN",
+            placeholder: '选择一个标签'
+        });
+        $('#select-user').select2({
             language: "zh-CN",
             placeholder: '选择一个标签'
         });

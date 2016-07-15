@@ -28,9 +28,9 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-collapse-example">
                     <ul class="nav navbar-nav navbar-avatar navbar-right">
-                        <li>
+<!--                        <li>
                             <?= $this->cell('Wpadmin.Inbox') ?>
-                        </li>
+                        </li>-->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <?= $this->request->session()->read('User.admin.username'); ?>

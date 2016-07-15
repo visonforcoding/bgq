@@ -55,9 +55,7 @@ class ProjrongController extends AppController {
                 $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
             }
         }
-        $users = $this->Projrong->Users->find('list', ['limit' => 200]);
-//        $tags = $this->Projrong->tags->find('treeList', ['limit' => 200]);
-        $this->set(compact('projrong', 'users', 'tags'));
+        $this->set(compact('projrong', 'tags'));
     }
 
     /**
@@ -69,7 +67,7 @@ class ProjrongController extends AppController {
      */
     public function edit($id = null) {
         $projrong = $this->Projrong->get($id, [
-            'contain' => ['tags']
+            'contain' => ['Industries']
         ]);
         if ($this->request->is(['post', 'put'])) {
             $projrong = $this->Projrong->patchEntity($projrong, $this->request->data);
@@ -80,9 +78,11 @@ class ProjrongController extends AppController {
                 $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
-        $users = $this->Projrong->Users->find('list', ['limit' => 200]);
-        $tags = $this->Projrong->tags->find('list', ['limit' => 200]);
-        $this->set(compact('projrong', 'users', 'tags'));
+        $selIndustryIds = [];
+        foreach($projrong->industries as $industry){
+            $selIndustryIds[] = $industry->id;
+        }
+        $this->set(compact('projrong', 'users', 'selIndustryIds'));
     }
 
     /**
@@ -118,11 +118,19 @@ class ProjrongController extends AppController {
         $sort = 'Projrong.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
+        $stage_id = $this->request->data('stage_id');
+        $scale_id = $this->request->data('scale_id');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where['username like'] = "%$keywords%";
+        }
+        if (!empty($stage_id)) {
+            $where['stage_id'] = "$stage_id";
+        }
+        if (!empty($scale_id)) {
+            $where['scale_id'] = "$scale_id";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
@@ -135,7 +143,7 @@ class ProjrongController extends AppController {
             $query->where($where);
         }
         $nums = $query->count();
-        $query->contain(['Users', 'tags']);
+        $query->contain(['Stage','Scale','Users','Industries']);
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }

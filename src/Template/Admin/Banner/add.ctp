@@ -1,6 +1,4 @@
-<?php
-
-$this->start('static') ?>   
+<?php $this->start('static') ?>   
 <link href="/wpadmin/lib/jqupload/uploadfile.css" rel="stylesheet">
 <link href="/wpadmin/lib/jqvalidation/css/validationEngine.jquery.css" rel="stylesheet">
 <?php $this->end() ?> 

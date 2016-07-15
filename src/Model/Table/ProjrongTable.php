@@ -32,11 +32,25 @@ class ProjrongTable extends Table {
             'joinType' => 'INNER',
             'className' => 'User'
         ]);
-        $this->belongsToMany('tags', [
+        $this->belongsToMany('Industries', [
             'className' => 'Industry',
             'joinTable' => 'rong_tag',
             'foreignKey' => 'project_id',
             'targetForeignKey' => 'industry_id'
+        ]);
+        $this->belongsTo('Stage', [
+            'className' => 'Stage',
+        ]);
+        $this->belongsTo('Scale', [
+            'className' => 'Scale',
+        ]);
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'create_time' => 'new',
+                    'update_time' => 'always'
+                ]
+            ]
         ]);
     }
 
@@ -63,17 +77,11 @@ class ProjrongTable extends Table {
                 ->requirePresence('title', 'create')
                 ->notEmpty('title');
 
-        $validator
-                ->requirePresence('rzjd', 'create')
-                ->notEmpty('rzjd');
 
         $validator
                 ->requirePresence('address', 'create')
                 ->notEmpty('address');
 
-        $validator
-                ->requirePresence('scale', 'create')
-                ->notEmpty('scale');
 
         $validator
                 ->requirePresence('stock', 'create')

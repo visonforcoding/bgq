@@ -1,0 +1,9 @@
+<select name="region_id" id="select-region" class=" form-control">
+    <?php foreach ($items as $key=>$item): ?>
+        <option <?php if (isset($selId)): ?>
+                <?php if ($key== $selId): ?>selected="selected"<?php endif; ?>
+            <?php endif; ?> 
+            value="<?= $key ?>"><?= $item ?>
+        </option>
+    <?php endforeach; ?>
+</select>
