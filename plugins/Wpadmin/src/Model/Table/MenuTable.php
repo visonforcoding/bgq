@@ -32,6 +32,13 @@ class MenuTable extends Table {
             'foreignKey' => 'menu_id',
             'targetForeignKey' => 'group_id'
         ]);
+        
+        $this->belongsToMany('Admins', [
+            'className' => 'Wpadmin.Admin',
+            'joinTable' => 'admin_menu',
+            'foreignKey' => 'menu_id',
+            'targetForeignKey' => 'group_id'
+        ]);
     }
 
     /**

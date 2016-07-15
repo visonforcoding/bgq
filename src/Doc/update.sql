@@ -346,12 +346,29 @@ COMMENT='用户资金流水'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
+
 #添加关联字段id
 ALTER TABLE `flow`
+<<<<<<< .mine
+	ADD COLUMN `relate_id` INT(11) NOT NULL DEFAULT '0' COMMENT '关联id' AFTER `user_id`;
+
+#乱码
+ALTER TABLE `activity`
+	CHANGE COLUMN `apply_fee` `apply_fee` FLOAT NOT NULL DEFAULT '0' COMMENT '报名费用' AFTER `apply_nums`;
+
+ALTER TABLE `activity`
+	CHANGE COLUMN `is_top` `is_top` TINYINT(2) NULL DEFAULT '0' COMMENT '是否置顶' AFTER `is_check`;
+
+ALTER TABLE `activity`
+	CHANGE COLUMN `qrcode` `qrcode` VARCHAR(200) NULL DEFAULT NULL COMMENT '二维码' AFTER `region_id`;
+
+ALTER TABLE `activity`
+	ADD COLUMN `series_id` TINYINT NOT NULL AFTER `reason`;
+=======
 	ADD COLUMN `relate_id` INT(11) NOT NULL DEFAULT '0' COMMENT '关联id' AFTER `user_id`;
 
 #新闻评论表添加是否删除字段
 ALTER TABLE `newscom` ADD COLUMN `is_delete` TINYINT(2) NOT NULL DEFAULT '0' COMMENT '是否删除';
 
 #活动评论表添加是否删除字段
-ALTER TABLE `activitycom` ADD COLUMN `is_delete` TINYINT(2) NOT NULL DEFAULT '0' COMMENT '是否删除';
+ALTER TABLE `activitycom` ADD COLUMN `is_delete` TINYINT(2) NOT NULL DEFAULT '0' COMMENT '是否删除';>>>>>>> .r1918

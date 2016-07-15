@@ -5,6 +5,12 @@
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($activity, ['class' => 'form-horizontal']) ?>
+    <div class="form-group">
+        <label class="col-md-2 control-label">系列标签</label>
+        <div class="col-md-8">
+            <?= $this->cell('series',[[$activity->series_id]]) ?>
+        </div>
+    </div>
     <?php if($activity->is_check == 2): ?>
     	<div class="form-group">
             <label class="col-md-2 control-label">未通过审核理由</label>

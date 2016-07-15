@@ -7,7 +7,7 @@ use Cake\View\Cell;
 /**
  * Industry cell
  */
-class BiggieCell extends Cell {
+class SeriesCell extends Cell {
 
     /**
      * List of valid options that can be passed into this
@@ -23,11 +23,12 @@ class BiggieCell extends Cell {
      * @return void
      */
     public function display($selIds=null) {
-        $BiggieTable = \Cake\ORM\TableRegistry::get('Savant');
-        $biggies = $BiggieTable->find()->contain(['Users'=>function($q){
-            return $q->where(['level'=>2, 'enabled'=>'1']);
-        }])->all()->toArray();
-        $this->set(compact('biggies','selIds'));
+        $activitySeries = \Cake\Core\Configure::read('activitySeries');
+        $this->set([
+            'items'=>$activitySeries
+        ]);
+        $this->set(compact('selIds'));
     }
+    
 
 }

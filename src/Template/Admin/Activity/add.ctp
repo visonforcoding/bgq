@@ -6,6 +6,12 @@
 <div class="work-copy">
     <?= $this->Form->create($activity, ['class' => 'form-horizontal']) ?>
     <div class="form-group">
+        <label class="col-md-2 control-label">系列标签</label>
+        <div class="col-md-8">
+            <?=$this->cell('Series')?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">行业标签</label>
         <div class="col-md-8">
             <?=$this->cell('Industry')?>
@@ -153,13 +159,26 @@ $(function () {
     var ue = UE.getEditor('content'); //初始化富文本编辑器
     UE.getEditor('summary');
     $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
-    $('#select-industry').select2({
+    $('#select-series').select2({
+        language: "zh-CN",
+        placeholder: '选择一个标签',
+    });
+    var industrySelect2 = $('#select-industry').select2({
         language: "zh-CN",
         placeholder: '选择一个标签'
     });
-    $('#select-savant').select2({
+    var savantSelect2 = $('#select-savant').select2({
         language: "zh-CN",
         placeholder: '选择一位专家'
+    });
+    $('#select-industry').on('change',function(evt){
+        var selOption = industrySelect2.val();
+        var changIds = [];
+        $.get('/admin/savant/get-random-savants',{'tags':selOption},function(res){
+                console.log(res);
+                changIds = res.ids;
+                savantSelect2.val(changIds).trigger('change'); //set the value
+        },'json');
     });
     $('form').submit(function () {
         var form = $(this);

@@ -31,6 +31,7 @@
 <script src="/wpadmin/lib/zeroclipboard/dist/ZeroClipboard.js"></script>
 <script>
         $(function () {
+            
             $('#main-content').bind('resize', function () {
                 $("#list").setGridWidth($('#main-content').width() - 40);
             });

@@ -32,6 +32,12 @@ class AdminTable extends Table {
             'foreignKey' => 'admin_id',
             'targetForeignKey' => 'group_id'
         ]);
+        $this->belongsToMany('Menus', [
+            'className' => 'Wpadmin.Menu',
+            'joinTable' => 'admin_menu',
+            'foreignKey' => 'admin_id',
+            'targetForeignKey' => 'menu_id'
+        ]);
 
 
         $this->addBehavior('Timestamp', [

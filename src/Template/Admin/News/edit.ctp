@@ -58,7 +58,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">行业标签</label>
         <div class="col-md-8">
-                <?= $this->cell('Industry',[$selIndustryIds]) ?>
+                <?= $this->cell('Industry::news',[$selIndustryIds]) ?>
         </div>
     </div>
     <div class="form-group">
