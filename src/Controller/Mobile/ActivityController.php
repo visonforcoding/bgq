@@ -152,10 +152,14 @@ class ActivityController extends AppController {
                 $isApply[] = $v['activity_id'];
             }
         }
+        $activityseries = \Cake\Core\Configure::read('activitySeries');
         $isApply = implode(',', $isApply);
-        $this->set('isApply', $isApply);
-        $this->set('user', $this->user);
-        $this->set('pageTitle', '活动');
+        $this->set([
+            'pageTitle'=>'活动',
+            'user'=>$this->user,
+            'isApply'=>$isApply,
+            'activityseries'=>$activityseries,
+        ]);
     }
 
     /**
@@ -348,7 +352,7 @@ class ActivityController extends AppController {
     /**
      * 活动搜索
      */
-    public function search() {
+    public function search($id='') {
         $isApply = '';
         if ($this->user) {
             // 用户已报名的活动
@@ -370,11 +374,15 @@ class ActivityController extends AppController {
         $this->set('isApply', $isApply);
         
         $region = $this->Activity->Regions->find()->hydrate(false)->all()->toArray();
-        $industries = $this->Activity->Industries->find()->hydrate(false)->all()->toArray();
-        $industries = $this->tree($industries);
-        $this->set('regions', $region);
-        $this->set('industries', $industries);
-        $this->set('pageTitle', '活动搜索');
+//        $industries = $this->Activity->Industries->find()->hydrate(false)->all()->toArray();
+        $activitySeries = \Cake\Core\Configure::read('activitySeries');
+//        $this->set('industries', $industries);
+        $this->set([
+            'pageTitle'=>'活动搜索',
+            'activitySeries'=>$activitySeries,
+            'regions'=>$region,
+            'sid' => $id,
+        ]);
     }
     
     /**
@@ -382,7 +390,7 @@ class ActivityController extends AppController {
      */
     public function getSearchRes() {
         $data = $this->request->data();
-        $industry_id = $data['industry_id'];
+        $series_id = $data['series_id'];
         $isApply = [];
         if ($this->user) {
             // 用户已报名的活动
@@ -406,23 +414,13 @@ class ActivityController extends AppController {
                 ->find()
                 ->where(['title LIKE' => '%' . $data['keyword'] . '%'])
                 ->andWhere(['is_check'=>'1']);
-        if ($industry_id) {
-            $res = $res->matching(
-                'Industries', function($q)use($industry_id) {
-                    return $q->where(['Industries.id' => $industry_id]);
-                }
-            );
-        } else {
-            $res = $res->contain(['Industries']);
+        if ($series_id) {
+            $res = $res->andWhere(['series_id'=>$series_id]);
         }
         if($data['region']){
             $res = $res->andWhere(['region_id'=>$data['region']]);
         }
-        if ($data['sort']) {
-            $res->orderDesc($data['sort']);
-        } else {
-            $res->orderDesc('create_time'); // 默认按时间倒序排列
-        }
+        $res = $res->orderDesc('create_time'); // 默认按时间倒序排列
         $res = $res
                 ->limit($this->limit)
                 ->toArray();
@@ -472,11 +470,7 @@ class ActivityController extends AppController {
         } else {
             $res = $res->contain(['Industries']);
         }
-        if ($data['sort']) {
-            $res = $res->orderDesc($data['sort']);
-        } else {
-            $res = $res->orderDesc('create_time');
-        }
+        $res = $res->orderDesc('create_time');
         $res = $res
                 ->page($page, $this->limit)
                 ->toArray();
