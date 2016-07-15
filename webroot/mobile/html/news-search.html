@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
 		<script src="../js/view.js"></script>
+		<script src="../js/zepto.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<header>
@@ -22,10 +23,14 @@
 		<div class="fixedwraper">
 			<div class='h-news-search'>
 				<a href='javascript:void(0);' class='iconfont news-serch'>&#xe613;</a>
-				<h1><input type="text" placeholder="请输入关键词"></h1>
+				<form action="" ><h1><input type="text" placeholder="请输入关键词"></h1></form>
+				<div class="h-regiser" id="doSearch">搜 索</div>
 			</div>
-			<ul class="s-label">
-				<li><a href="javascript:void(0);">医疗健康人数人数</a></li>
+			<div class="marklayer">
+				<div class="toggle"><a href="javascript:void(0);">医疗健康人数人数</a><span class="ani-toggle"></span>
+				</div>
+				<ul class="s-label">
+				<li><a href="javascript:void(0);" class="active">医疗健康人数人数</a></li>
 				<li><a href="javascript:void(0);">医疗健康</a></li>
 				<li><a href="javascript:void(0);">医疗健康</a></li>
 				<li><a href="javascript:void(0);">医疗健康</a></li>
@@ -35,8 +40,17 @@
 				<li><a href="javascript:void(0);">医疗健康</a></li>
 				<li><a href="javascript:void(0);">医疗健康</a></li>
 			</ul>
+			</div>
+			
 			
 		</div>
-	
+	<script type="text/javascript">
+	  
+		$('.ani-toggle').on('touchstart',function(){
+			$('.ani-toggle').toggleClass('active');
+			$('.s-label').toggleClass('disp');
+			
+		})
+	</script>
 	</body>
 </html>
