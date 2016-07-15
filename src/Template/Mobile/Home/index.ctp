@@ -143,7 +143,7 @@
 </script>-->
 <?= $this->element('footer') ?>
 <?php $this->start('script') ?>
-<script>
+<script> 
     window.__user_id = <?= $user->id ?>;
 </script>
 <script>
