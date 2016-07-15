@@ -93,9 +93,9 @@ class AppController extends Controller {
             $this->failAccess('请重新登录!');
             return $this->redirect(['controller' => 'admin', 'action' => 'login']);
         }
-        return true;
         // return;
         $this->_user = $this->request->session()->read('User.admin');
+        return true;
         if (in_array($request_aim, $this->noAcl) || $this->_user->username == 'admin') {
             //无需检测权限的action 直接pass
             return true;

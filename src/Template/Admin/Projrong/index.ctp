@@ -13,6 +13,14 @@
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
             </div>
             <div class="form-group">
+                <label for="keywords">融资规模</label>
+                <?=$this->cell('Scale',['hasAll'])?>
+            </div>
+            <div class="form-group">
+                <label for="keywords">融资阶段</label>
+                <?=$this->cell('Stage',['hasAll'])?>
+            </div>
+            <div class="form-group">
                 <label for="keywords">时间</label>
                 <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords" placeholder="开始时间">
                 <label for="keywords">到</label>
@@ -29,124 +37,124 @@
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
 <script>
-    $(function () {
-         $('#main-content').bind('resize', function () {
-            $("#list").setGridWidth($('#main-content').width() - 40);
-        });
-        $.zui.store.pageClear(); //刷新页面缓存清除
-        $("#list").jqGrid({
-            url: "/admin/projrong/getDataList",
-            datatype: "json",
-            mtype: "POST",
-            colNames:   
-['发布人id','发布人','公司','项目名称','融资阶段','地点','融资规模','股份','阅读数','点赞数','评论数','封面','项目简介','公司简介','核心团队','资料地址','创建时间','更新时间','操作'],
-            colModel: [
-{name:'user_id',editable:true,align:'center'},
-{name:'publisher',editable:true,align:'center'},
-{name:'company',editable:true,align:'center'},
-{name:'title',editable:true,align:'center'},
-{name:'rzjd',editable:true,align:'center'},
-{name:'address',editable:true,align:'center'},
-{name:'scale',editable:true,align:'center'},
-{name:'stock',editable:true,align:'center'},
-{name:'read_nums',editable:true,align:'center'},
-{name:'praise_nums',editable:true,align:'center'},
-{name:'comment_nums',editable:true,align:'center'},
-{name:'cover',editable:true,align:'center'},
-{name:'summary',editable:true,align:'center'},
-{name:'comp_desc',editable:true,align:'center'},
-{name:'team',editable:true,align:'center'},
-{name:'attach',editable:true,align:'center'},
-{name:'create_time',editable:true,align:'center'},
-{name:'update_time',editable:true,align:'center'},
-{name:'actionBtn',align:'center',viewable:false,sortable:false,formatter:actionFormatter}],
-            pager: "#pager",
-            rowNum: 30,
-            rowList: [10, 20, 30],
-            sortname: "id",
-            sortorder: "desc",
-            viewrecords: true,
-            gridview: true,
-            autoencode: true,
-            caption: '',
-            autowidth: true,
-            height: 'auto',
-            rownumbers: true,
-            fixed: true,
-            jsonReader: {
-                root: "rows",
-                page: "page",
-                total: "total",
-                records: "records",
-                repeatitems: false,
-                id: "0"
-            },
-        }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
-    });
-
-    function actionFormatter(cellvalue, options, rowObject) {
-        response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-        response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-        response += '<a title="编辑" href="/admin/projrong/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
-        return response;
-    }
-
-    function delRecord(id) {
-        layer.confirm('确定删除？', {
-            btn: ['确认', '取消'] //按钮
-        }, function () {
-            $.ajax({
-                type: 'post',
-                data: {id: id},
-                dataType: 'json',
-                url: '/admin/projrong/delete',
-                success: function (res) {
-                    layer.msg(res.msg);
-                     if (res.status) {
-                            $('#list').trigger('reloadGrid');
-                     }
-                }
-            })
-        }, function () {
-        });
-    }
-    
-            function doSearch() {
-                    //搜索
-                var postData = $('#table-bar-form').serializeArray();
-                var data = {};
-                $.each(postData,function(i,n){
-                   data[n.name] = n.value; 
+                $(function () {
+                    $('#main-content').bind('resize', function () {
+                        $("#list").setGridWidth($('#main-content').width() - 40);
+                    });
+                    $.zui.store.pageClear(); //刷新页面缓存清除
+                    $("#list").jqGrid({
+                        url: "/admin/projrong/getDataList",
+                        datatype: "json",
+                        mtype: "POST",
+                        colNames:
+                                ['发布人id', '发布人', '公司', '项目名称', '融资阶段', '地点', '融资规模', '股份', '阅读数', '点赞数', '评论数', '封面', '项目简介', '公司简介', '核心团队', '资料地址', '创建时间', '更新时间', '操作'],
+                        colModel: [
+                            {name: 'user_id', editable: true, align: 'center'},
+                            {name: 'publisher', editable: true, align: 'center'},
+                            {name: 'company', editable: true, align: 'center'},
+                            {name: 'title', editable: true, align: 'center'},
+                            {name: 'stage.name', editable: true, align: 'center'},
+                            {name: 'address', editable: true, align: 'center'},
+                            {name: 'scale.name', editable: true, align: 'center'},
+                            {name: 'stock', editable: true, align: 'center'},
+                            {name: 'read_nums', editable: true, align: 'center'},
+                            {name: 'praise_nums', editable: true, align: 'center'},
+                            {name: 'comment_nums', editable: true, align: 'center'},
+                            {name: 'cover', editable: true, align: 'center'},
+                            {name: 'summary', editable: true, align: 'center'},
+                            {name: 'comp_desc', editable: true, align: 'center'},
+                            {name: 'team', editable: true, align: 'center'},
+                            {name: 'attach', editable: true, align: 'center'},
+                            {name: 'create_time', editable: true, align: 'center'},
+                            {name: 'update_time', editable: true, align: 'center'},
+                            {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
+                        pager: "#pager",
+                        rowNum: 30,
+                        rowList: [10, 20, 30],
+                        sortname: "id",
+                        sortorder: "desc",
+                        viewrecords: true,
+                        gridview: true,
+                        autoencode: true,
+                        caption: '',
+                        autowidth: true,
+                        height: 'auto',
+                        rownumbers: true,
+                        fixed: true,
+                        jsonReader: {
+                            root: "rows",
+                            page: "page",
+                            total: "total",
+                            records: "records",
+                            repeatitems: false,
+                            id: "0"
+                        },
+                    }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
                 });
-                $.zui.store.pageSet('searchData', data); //本地存储查询参数 供导出操作等调用
-                $("#list").jqGrid('setGridParam', {
-                    postData: data
-                }).trigger("reloadGrid");
+
+                function actionFormatter(cellvalue, options, rowObject) {
+                    response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
+                    response += '<a title="编辑" href="/admin/projrong/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+                    return response;
                 }
-                
+
+                function delRecord(id) {
+                    layer.confirm('确定删除？', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                        $.ajax({
+                            type: 'post',
+                            data: {id: id},
+                            dataType: 'json',
+                            url: '/admin/projrong/delete',
+                            success: function (res) {
+                                layer.msg(res.msg);
+                                if (res.status) {
+                                    $('#list').trigger('reloadGrid');
+                                }
+                            }
+                        })
+                    }, function () {
+                    });
+                }
+
+                function doSearch() {
+                    //搜索
+                    var postData = $('#table-bar-form').serializeArray();
+                    var data = {};
+                    $.each(postData, function (i, n) {
+                        data[n.name] = n.value;
+                    });
+                    $.zui.store.pageSet('searchData', data); //本地存储查询参数 供导出操作等调用
+                    $("#list").jqGrid('setGridParam', {
+                        postData: data
+                    }).trigger("reloadGrid");
+                }
+
                 function doExport() {
                     //导出excel
                     var sortColumnName = $("#list").jqGrid('getGridParam', 'sortname');
                     var sortOrder = $("#list").jqGrid('getGridParam', 'sortorder');
-                   var searchData = $.zui.store.pageGet('searchData')?$.zui.store.pageGet('searchData'):{};
+                    var searchData = $.zui.store.pageGet('searchData') ? $.zui.store.pageGet('searchData') : {};
                     searchData['sidx'] = sortColumnName;
                     searchData['sort'] = sortOrder;
-                    var searchQueryStr  = $.param(searchData);
+                    var searchQueryStr = $.param(searchData);
                     $("body").append("<iframe src='/admin/projrong/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
-                
-             function doView(id) {
-                //查看明细
-                url = '/admin/projrong/view/'+id;
-                layer.open({
-                    type: 2,
-                    title: '查看详情',
-                    shadeClose: true,
-                    shade: 0.8,
-                    area: ['380px', '70%'],
-                    content: url//iframe的url
-                });
-            }
+
+                function doView(id) {
+                    //查看明细
+                    url = '/admin/projrong/view/' + id;
+                    layer.open({
+                        type: 2,
+                        title: '查看详情',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['380px', '70%'],
+                        content: url//iframe的url
+                    });
+                }
 </script>
 <?php
 $this->end();

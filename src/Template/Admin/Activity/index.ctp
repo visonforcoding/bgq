@@ -13,6 +13,19 @@
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="用户、标题、公司、地址">
             </div>
             <div class="form-group">
+                <label for="keywords">系列</label>
+                <select class="form-control" name="series_id">
+                    <option value="0">所有系列</option>
+                    <?php foreach ($series as $key=>$item):?>
+                        <option value="<?=$key?>"><?=$item?></option>
+                    <?php endforeach;?>
+                </select>
+            </div>
+            <div class="form-group">
+                  <label for="keywords">城市</label>
+                  <?=$this->cell('Region') ?>
+            </div>
+            <div class="form-group">
                 <label for="keywords">时间</label>
                 <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords" placeholder="开始时间">
                 <label for="keywords">到</label>
@@ -61,9 +74,8 @@
                         url: "/admin/activity/getDataList",
                         datatype: "json",
                         mtype: "POST",
-                        colNames: ['id', '作者', '主办单位', '活动名称', '活动时间', '地点', '规模', '阅读数', '点赞数', '评论数', '报名人数', '报名费用', '创建时间', '更新时间', '操作'],
+                        colNames: [ '发布人', '主办单位', '活动名称', '活动时间', '地点', '规模', '阅读数', '点赞数', '评论数', '报名人数', '报名费用', '创建时间', '更新时间', '操作'],
                         colModel: [
-                            {name: 'id', editable: true, align: 'center'},
                             {name: 'user.truename', editable: true, align: 'center'},
 //                            {name: 'industries', editable: true, align: 'center', formatter: industryFormatter},
                             {name: 'company', editable: true, align: 'center'},
@@ -131,7 +143,7 @@
 //                    response = '<div class="bigdiv" onmouseout="$(this).find(\'.position\').hide()" onmouseover="$(this).find(\'.position\').show()">';
 //                    response += '<div class="position"><a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
+//                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="编辑" href="/admin/activity/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     response += '<a title="复制" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
                     if (rowObject.is_top == 0 && rowObject.is_check == 1) {
