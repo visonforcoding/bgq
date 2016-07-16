@@ -20,10 +20,11 @@
 <script type="text/html" id="listTpl">
     <section class="my-collection-info">
         <div class="innercon">
-            <a href="/activity/details/{#id#}" class="clearfix nobottom">
+            <a href="{#id#}" class="clearfix nobottom">
                 <span class="my-pic-acive"><img src="{#cover#}"/></span>
                 <div class="my-collection-items">
                     <h3>{#title#}</h3>
+                    <div style="color:red">{#check#}</div>
                     <span>{#address#}<i class="f-color-gray">{#apply_nums#}人报名</i></span>
                     <span>{#time#}</span>
                 </div>
@@ -43,7 +44,7 @@
                 if(msg.status)
                 {
                     $.util.dataToTpl('dataBox', 'listTpl',msg.data, function(d){
-                        d.id = d.activity.id;
+                        d.id = '/activity/details/' + d.activity.id;
                         d.cover = d.activity.thumb ? d.activity.thumb : d.activity.cover;
                         d.title = d.activity.title;
                         d.adress = d.activity.adress;
@@ -80,6 +81,15 @@
                             {
                                 $.util.dataToTpl('dataBox', 'listTpl',msg.data, function(d){
                                     d.cover = d.thumb ? d.thumb : d.cover;
+                                    if(d.is_check == 0){
+                                        d.id = 'javascript:void(0)';
+                                        d.check = '审核中';
+                                    } else if(d.is_check == 1) {
+                                        d.id = '/activity/details/' + d.id;
+                                    } else if(d.is_check == 2) {
+                                        d.id = 'javascript:void(0)';
+                                        d.check = '审核未通过，理由为：' + d.reason;
+                                    }
                                     return d;
                                 });
                             }

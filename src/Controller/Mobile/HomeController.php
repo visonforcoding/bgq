@@ -22,7 +22,7 @@ class HomeController extends AppController {
         $this->loadModel('User');
     }
 
-    protected $limit = '5'; // 分页条数
+    protected $limit = '50'; // 分页条数
 
     /**
      * Index method  个人中心页
