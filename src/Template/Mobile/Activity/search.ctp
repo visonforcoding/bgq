@@ -1,6 +1,13 @@
 <div class="fixedwraper" >
     <div class='h-news-search'>
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe613;</a>
+        <span class="sel-area"><span id="sellect">地区</span>
+            <div class="arealist" hidden>
+                <?php foreach($regions as $k=>$v): ?>
+                <span class="regions" region_id="<?= $v['id'] ?>"><?= $v['name'] ?></span>
+                <?php endforeach; ?>
+            </div>
+        </span>
         <form id="searchForm" >
         <h1><input type="text" name="keyword" placeholder="请输入关键词"></h1>
         <input type="hidden" name="series_id" value="" />
@@ -8,7 +15,18 @@
         </form>
         <div class='h-regiser' id="doSearch">搜索</div>
     </div>
-    <div class="news-classify">
+    <div class='h2'></div>
+    <div class="items">
+        <div class="orgtitle  innerwaper">
+            <span class="orgname">活动系列</span>
+        </div>
+        <div class="orgmark">
+            <?php foreach ($activitySeries as $k => $v): ?>
+            <a href="javascript:void(0)" series_id="<?= $k ?>" class="series <?php if(is_numeric($sid)): ?><?php if($sid == $k):?>default<?php endif;?><?php endif;?>"><?= $v ?></a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<!--    <div class="news-classify">
         <div class="classify-l fl ml" id="choose_industry">
             <span id="choose_industries">选择分类</span>
             <ul class="all-industry" hidden id="choose_industry_ul">
@@ -25,7 +43,7 @@
                 <?php endforeach; ?>
             </ul>
         </div>
-    </div>
+    </div>-->
     <section class="my-collection-info" id="search"></section>
 </div>
 <div id="buttonLoading" class="loadingbox"></div>
@@ -53,6 +71,80 @@
     if($('#choose_industry_ul li.default').length != 0){
         $('.default').trigger('tap');
     }
+    
+    $('.orgname').on('tap',function(){
+        if($('.orgmark').hasClass('ohide')){
+            $('.orgmark').toggleClass('ohide');
+            $('.orgmark').show();
+        } else {
+            $('.orgmark').toggleClass('ohide');
+            $('.orgmark').hide();
+        }
+    })
+
+    $('.sel-area').on('tap',function(){
+        if($('.arealist').hasClass('hide')){
+            $('.arealist').toggleClass('hide');
+            $('.arealist').hide();
+        } else {
+            $('.arealist').toggleClass('hide');
+            $('.arealist').show();
+        }
+    })
+    
+    $('.series').on('tap', function(){
+        $('.series').removeClass('active');
+        $(this).addClass('active');
+        $('input[name="series_id"]').val($(this).attr('series_id'));
+        $('.orgname').text($(this).text());
+        $.ajax({
+            type: 'post',
+            url: '/activity/getSearchRes',
+            data: $('#searchForm').serialize(),
+            dataType: 'json',
+            success: function (msg) {
+                if (typeof msg === 'object') {
+                    if (msg.status === true) {
+                        var html = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                            d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == - 1 ? '' : '<span class="is-apply">已报名</span>';
+                            return d;
+                        });
+                        $('.orgmark').toggleClass('ohide');
+                        $('.orgmark').hide();
+                        
+                    } else {
+                        $('#search').html('');
+                        $.util.alert(msg.msg);
+                    }
+                }
+            }
+        });
+    })
+    
+    $('.regions').on('tap', function(){
+        $('#sellect').text($(this).text());
+        $('.arealist').hide();
+        $('input[name="region"]').val($(this).attr('region_id'));
+        $.ajax({
+            type: 'post',
+            url: '/activity/getSearchRes',
+            data: $('#searchForm').serialize(),
+            dataType: 'json',
+            success: function (msg) {
+                if (typeof msg === 'object') {
+                    if (msg.status === true) {
+                        var html = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                            d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == - 1 ? '' : '<span class="is-apply">已报名</span>';
+                            return d;
+                        });
+                    } else {
+                        $('#search').html('');
+                        $.util.alert(msg.msg);
+                    }
+                }
+            }
+        });
+    });
     
     var page = 2;
     setTimeout(function () {
