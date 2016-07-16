@@ -8,6 +8,8 @@
         </form>
         <div class='h-regiser' id="doSearch" >搜 索</div>
     </div>
+    <div class="marklayer">
+    <div class="toggle"><a href="javascript:void(0);" id="industry_name">选择行业标签</a><span class="ani-toggle"></span></div>
     <ul class="s-label">
         <?php foreach ($industries as $k => $v): ?>
             <?php if ($v['pid'] == 1): ?>
@@ -17,6 +19,7 @@
             <?php endif; ?>
         <?php endforeach; ?>
     </ul>
+    </div>
     <div id="search"></div>
 </div>
 <div id="buttonLoading" class="loadingbox"></div>
@@ -24,7 +27,6 @@
 <?php $this->start('script'); ?>
 <script type="text/html" id="search_tpl">
     <section class="news-list-items" style="padding-bottom: 0.2rem;background: #fff;">
-  
     <h1><span><img src="{#avatar#}" /></span>{#author#}</h1>
         <a href="/news/view/{#id#}" class="newsbox clearfix">
             <div class="sec-news-l">
@@ -40,7 +42,16 @@
 <script src="/mobile/js/news_search.js"></script>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
-    
+    $('.ani-toggle').on('tap',function(){
+        $('.ani-toggle').toggleClass('active');
+        $('.s-label').toggleClass('disp');
+        if($('.s-label').hasClass('disp')){
+            $('.s-label').children().hide();
+        } else {
+            $('.s-label').children().show();
+        }
+        
+    })
     
     $('input[name="keyword"]').focus();
     var page = 2;
@@ -95,6 +106,8 @@
             $('input[name="industry_id"]').val('');
             return;
         }
+        $('#industry_name').text($(em).text());
+        $('#search').html('');
         $('.industry').removeClass('active');
         $(em).addClass('active');
         var industry_id = $(em).attr('industry_id');
@@ -103,7 +116,6 @@
             $('#search').html(search_data[industry_id]);
             return;
         }
-        $('#search').html('');
         $.ajax({
             type: 'post',
             url: '/news/getSearchRes',
@@ -117,6 +129,14 @@
                             d.author = d.user.truename;
                             return d;
                         });
+                        $('.ani-toggle').toggleClass('active');
+                        $('.s-label').toggleClass('disp');
+                        if($('.s-label').hasClass('disp')){
+                            $('.s-label').children().hide();
+                        } else {
+                            $('.s-label').children().show();
+                        }
+                        
                     } else {
                         $.util.alert(msg.msg);
                     }
