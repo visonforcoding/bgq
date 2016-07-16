@@ -148,45 +148,51 @@
 </script>
 <script>
     var savant = '';
-    $.ajax({
-        type: 'POST',
-        url: '/home/get-userinfo',
-        dataType: 'json',
-        success: function (res) {
-            if(res.status){
-                $('#loginShadow').hide();
-                $('.totips').hide();
-                var html = $('#savantTpl').text();
-                var user = $('#userTpl').text();
-                if(res.data.user.level == 1){
-                    savant = '<li><a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li>';
-                    user = user.replace('{#v#}','');
-                } else if(res.data.user.level == 2) {
-                    savant = '<li><a href="/home/my-purse"><i class="iconfont">&#xe61b;</i>钱包</a></li>';
-                    html += '<div class="h-home-menu"><ul class="clearfix"><li><a href="/meet/view/' + res.data.user.id + '"><i class="iconfont">&#xe61d;</i>专家主页</a></li><li><a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li></ul></div>';
-                    user = user.replace('{#v#}','<i class="v"></i>');
-                }
-                html = html.replace('{#savant#}', savant);
-                $('#res').html(html+$('#icoTpl').text());
-                if(res.data.hasMsg){
-                    user = user.replace('{#hasMsg#}','<span class="opci"></span>');
-                }
-                if(!res.data.isWx){
-                    user = user.replace('{#setUp#}','&#xe619;');
-                }
-                user = user.replace('{#user_id#}',res.data.user.id);
-                user = user.replace('{#truename#}',res.data.user.truename);
-                user = user.replace('{#company#}',res.data.user.company);
-                user = user.replace('{#position#}',res.data.user.position);
-                if(res.data.user.avatar){
-                    user = user.replace('{#avatar#}', res.data.user.avatar);
+    if(window.__user_id){
+        $('#loginShadow').hide();
+        $('.totips').hide();
+        $.ajax({
+            type: 'POST',
+            url: '/home/get-userinfo',
+            dataType: 'json',
+            success: function (res) {
+                if(res.status){
+                    var html = $('#savantTpl').text();
+                    var user = $('#userTpl').text();
+                    if(res.data.user.level == 1){
+                        savant = '<li><a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li>';
+                        user = user.replace('{#v#}','');
+                    } else if(res.data.user.level == 2) {
+                        savant = '<li><a href="/home/my-purse"><i class="iconfont">&#xe61b;</i>钱包</a></li>';
+                        html += '<div class="h-home-menu"><ul class="clearfix"><li><a href="/meet/view/' + res.data.user.id + '"><i class="iconfont">&#xe61d;</i>专家主页</a></li><li><a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li></ul></div>';
+                        user = user.replace('{#v#}','<i class="v"></i>');
+                    }
+                    html = html.replace('{#savant#}', savant);
+                    $('#res').html(html+$('#icoTpl').text());
+                    if(res.data.hasMsg){
+                        user = user.replace('{#hasMsg#}','<span class="opci"></span>');
+                    }
+                    if(!res.data.isWx){
+                        user = user.replace('{#setUp#}','&#xe619;');
+                    }
+                    user = user.replace('{#user_id#}',res.data.user.id);
+                    user = user.replace('{#truename#}',res.data.user.truename);
+                    user = user.replace('{#company#}',res.data.user.company);
+                    user = user.replace('{#position#}',res.data.user.position);
+                    if(res.data.user.avatar){
+                        user = user.replace('{#avatar#}', res.data.user.avatar);
+                    } else {
+                        user = user.replace('{#avatar#}', '/mobile/images/touxiang/png');
+                    }
+                    $('#user').html(user);
                 } else {
-                    user = user.replace('{#avatar#}', '/mobile/images/touxiang/png');
+                    $('#loginShadow').show();
+                    $('.totips').show();
                 }
-                $('#user').html(user);
-            }
-       }
-    });
+           }
+        });
+    }
+    
     function QRCode() {
         if ($.util.isAPP) {
             LEMON.sys.QRcode();
