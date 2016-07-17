@@ -239,14 +239,14 @@ class ActivityController extends AppController {
                             return $applyTable->save($activityApply) && $OrderTable->save($order);
                         });
                         if($transRes){
-                            $order = $OrderTable->find()->where(['relate_id'=>$id, 'type'=>2, 'user_id'=>$this->user->id])->first();
-                            //短信和消息通知
+                            $order = $OrderTable->find()->where(['relate_id'=>$activityApply->id, 'type'=>2, 'user_id'=>$this->user->id])->first();
+//                            //短信和消息通知
                             $this->loadComponent('Sms');
                             $msg = "您报名的活动：《" . $activity->title . "》已确认通过，请及时登录平台支付报名费用。";
                             $this->Sms->sendByQf106($this->user->phone, $msg);
                             $this->loadComponent('Business');
                             $this->Business->usermsg($this->user->id, '报名通知', $msg, 7, $id);
-                            return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/Wx/meet_pay/2/'.$order['id']]);
+                            return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/Wx/meet_pay/2/'.$order->id]);
                         } else {
                             return $this->Util->ajaxReturn(false, $activityApply->errors());
                         }
