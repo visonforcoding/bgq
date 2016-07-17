@@ -20,7 +20,7 @@
     </div>
     <div class='reg-shadow' hidden></div>
     <div class="totips" style="display:none;">
-        <h3>请点击确定进行下一步</h3>
+        <h3>活动报名成功</h3>
         <span></span>
         <a href="" class="nextstep" id="comfirm">确认</a>
 <!--        <span class='closed'>
@@ -40,11 +40,16 @@
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
-                        $('.reg-shadow').show('slow');
-                        $('.totips').show('slow');
-                        $('#confirm').attr('href', msg.url);
-                    } else {
                         $.util.alert(msg.msg);
+                        if(msg.url.indexOf('/Wx/')){
+                            setTimeout(function(){
+                                window.location.href = msg.url;
+                            },2000);
+                        } else {
+                            $('.reg-shadow').show('slow');
+                            $('.totips').show('slow');
+                            $('#comfirm').attr('href', msg.url);
+                        }
                     }
                 }
             }
