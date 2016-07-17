@@ -12,7 +12,7 @@
                       <!--<h1>个人中心</h1>-->
                     <a href="/home/my-install" class='iconfont share'><?php if(!$isWx): ?>&#xe619;<?php endif;?></a>
                 </div>
-        <a href="/user/home-page/<?= $user->id ?>">
+        <a href="javascript:void(0)">
             <div class="t-home-top">
                 <span>
                     <img src='/mobile/images/touxiang.png'/>
@@ -75,28 +75,6 @@
     </div>
     
 </script>
-<!--<script type="text/html" id="savantTpl">
-    <div class="h-home-menu">
-        <ul class="clearfix">
-            <?php if ($user->level == 1): ?>
-                <li><a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li>
-            <?php endif; ?>
-            <?php if ($user->level == 2): ?>
-                <li><a href="/home/my-purse"><i class="iconfont">&#xe61b;</i>钱包</a></li>
-            <?php endif; ?>
-            <li><a href="javascript:QRCode();"><i class="sao-bg"></i>扫一扫</a></li>
-        </ul>
-    </div>
-    分类二
-    <?php if($user->level==2): ?>
-    <div class="h-home-menu">
-        <ul class="clearfix">
-            <li><a href="/meet/view/<?= $user->id ?>"><i class="iconfont">&#xe61d;</i>专家主页</a></li>
-            <li>  <a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li>
-        </ul>
-    </div>
-    <?php endif;?>
-</script>-->
 <script type="text/html" id="userTpl">
     <div class='inner h-home-top'>
         <a href='/home/my-message-fans' class='iconfont share'>&#xe620;
@@ -117,34 +95,10 @@
         <div class="info-desc"><span><i></i>{#company#}</span><span><i></i>{#position#}</span></div>
     </a>
 </script>
-<!--<script type="text/html" id="userTpl">
-    <div class='inner h-home-top'>
-        <a href='/home/my-message-fans' class='iconfont share'>&#xe620;
-            <?php if ($hasMsg): ?>
-                <span class='opci'></span>
-            <?php endif; ?>
-        </a>
-        <h1>个人中心</h1>
-        <a href="/home/my-install" class='iconfont share'><?php if (!$isWx): ?>&#xe619;<?php endif; ?></a>
-    </div>
-    <a href="/user/home-page/<?= $user->id ?>">
-        <div class="t-home-top">
-            <span>
-                <img src="<?= empty($user->avatar) ? '/mobile/images/touxiang.png' : getOriginAvatar($user->avatar) ?>"/>
-            </span>
-        </div>
-        <h3><?= $user->truename ?>
-            <?php if ($user->level == 2): ?>
-                <i class="v"></i>
-            <?php endif; ?>
-        </h3>
-        <div class="info-desc"><span><i></i><?= $user->company ?></span><span><i></i><?= $user->position ?></span></div>
-    </a>
-</script>-->
 <?= $this->element('footer') ?>
 <?php $this->start('script') ?>
 <script>
-    window.__user_id = <?= $user->id ?>;
+    window.__user_id = <?= $user_id ?>;
 </script>
 <script>
     var savant = '';

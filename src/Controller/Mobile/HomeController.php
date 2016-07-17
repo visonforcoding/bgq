@@ -31,21 +31,23 @@ class HomeController extends AppController {
      */
 
     public function index() {
-        $user_id = $this->user->id;
-        $user = $this->User->get($user_id);
-        $isWx = $this->request->is('weixin') ? true : false;
-        $UsermsgTable = \Cake\ORM\TableRegistry::get('Usermsg');
-        $unReadFollowCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type' => 1])->count(); //未读关注消息
-        $unReadSysCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type !=' => 1])->count(); //未读系统消息
-        $hasMsg = false;
-        if ($unReadFollowCount || $unReadSysCount) {
-            $hasMsg = true;
+        $user_id = '';
+        if($this->user){
+            $user_id = $this->user->id;
         }
-        $this->set(compact('user'));
+//        $user = $this->User->get($user_id);
+        $isWx = $this->request->is('weixin') ? true : false;
+//        $UsermsgTable = \Cake\ORM\TableRegistry::get('Usermsg');
+//        $unReadFollowCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type' => 1])->count(); //未读关注消息
+//        $unReadSysCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type !=' => 1])->count(); //未读系统消息
+//        $hasMsg = false;
+//        if ($unReadFollowCount || $unReadSysCount) {
+//            $hasMsg = true;
+//        }
         $this->set([
-            'user' => $user,
+            'user_id' => $user_id,
             'isWx' => $isWx,
-            'hasMsg'=>$hasMsg,
+//            'hasMsg'=>$hasMsg,
             'pageTitle' => '个人中心',
         ]);
     }
