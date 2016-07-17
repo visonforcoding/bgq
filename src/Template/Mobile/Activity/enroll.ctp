@@ -40,8 +40,8 @@
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
-                        $.util.alert(msg.msg);
                         if(msg.url.indexOf('/Wx/') != -1){
+                            $.util.alert(msg.msg);
                             setTimeout(function(){
                                 window.location.href = msg.url;
                             },2000);
