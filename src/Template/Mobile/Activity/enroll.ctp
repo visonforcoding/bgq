@@ -20,9 +20,9 @@
     </div>
     <div class='reg-shadow' hidden></div>
     <div class="totips" style="display:none;">
-        <h3></h3>
-        <span>确定报名吗？</span>
-        <a href="javascript:void(0)" class="nextstep" id="comfirm">确认</a>
+        <h3>请点击确定进行下一步</h3>
+        <span></span>
+        <a href="" class="nextstep" id="comfirm">确认</a>
         <span class='closed'>
             &times;
         </span>
@@ -30,7 +30,7 @@
 </body>
 <?php $this->start('script'); ?>
 <script>
-    $('#comfirm').on('tap', function () {
+    $('#submit').on('tap', function () {
         $form = $('form');
         $.ajax({
             type: 'post',
@@ -40,10 +40,9 @@
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
-                        $.util.alert(msg.msg);
-                        setTimeout(function () {
-                            window.location.href = msg.url;
-                        }, 2000);
+                        $('.reg-shadow').show('slow');
+                        $('.totips').show('slow');
+                        $('#confirm').attr('href', msg.url);
                     } else {
                         $.util.alert(msg.msg);
                     }
@@ -51,10 +50,6 @@
             }
         });
         return false;
-    });
-    $('#submit').on('tap', function(){
-        $('.reg-shadow').show('slow');
-        $('.totips').show('slow');
     });
     $('.closed').on('click', function(){
         $('.reg-shadow').hide('slow');

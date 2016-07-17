@@ -99,8 +99,10 @@ class ActivityController extends AppController {
                 ]);
                 $order = [];
                 $orderTable = \Cake\ORM\TableRegistry::get('order');
-                if($activity->activityapply['0']->is_pass == 0){
-                    $order = $orderTable->find()->where(['type'=>2, 'relate_id'=>$activity->activityapply['0']->id, 'user_id'=>$this->user->id])->first();
+                if($activity->activityapply){
+                    if($activity->activityapply['0']->is_pass == 0){
+                        $order = $orderTable->find()->where(['type'=>2, 'relate_id'=>$activity->activityapply['0']->id, 'user_id'=>$this->user->id])->first();
+                    }
                 }
             } else {
                 $activity = $this->Activity->get($id, [

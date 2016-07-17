@@ -42,10 +42,6 @@ activity.prototype.bindEvent = function () {
                     $.util.alert('请选择一个类别');
                     return false;
                 }
-                $('.reg-shadow').show('slow');
-                $('.totips').show('slow');
-                break;
-            case 'comfirm':
                 var form = $('form').serializeArray();
                 $.util.ajax({
                     url: $('form').attr('action'),
@@ -53,10 +49,11 @@ activity.prototype.bindEvent = function () {
                     func: function (msg) {
                         if (typeof msg === 'object') {
                             if (msg.status === true) {
-                                $.util.alert(msg.msg);
-                                setTimeout(function () {
-                                    window.location.href = '/activity/details/' + $('input[name="activity_id"]').val();
-                                }, 3000);
+                                $('.reg-shadow').show('slow');
+                                $('.totips').show('slow');
+//                                setTimeout(function () {
+//                                    window.location.href = '/activity/details/' + $('input[name="activity_id"]').val();
+//                                }, 3000);
                             } else {
                                 $.util.alert(msg.msg);
                             }
