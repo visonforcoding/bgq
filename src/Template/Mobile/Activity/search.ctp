@@ -57,12 +57,12 @@
                 <h3>{#title#}</h3>
                 {#apply_msg#}
                 <span>{#address#}</span>
-                <span>{#time#}<i>{#aplly_nums#}人报名</i></span>
+                <span>{#time#}<i>{#appply_nums#}人报名</i></span>
             </div>
         </a>
     </div>
 </script>
-<script src="/mobile/js/activity_search.js"></script>
+<!--<script src="/mobile/js/activity_search.js"></script>-->
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
     $('input[name="keyword"]').focus();
@@ -111,7 +111,6 @@
                         });
                         $('.orgmark').toggleClass('ohide');
                         $('.orgmark').hide();
-                        
                     } else {
                         $('#search').html('');
                         $.util.alert(msg.msg);
@@ -123,7 +122,9 @@
     
     $('.regions').on('tap', function(){
         $('#sellect').text($(this).text());
-        $('.arealist').hide();
+        setTimeout(function(){
+            $('.arealist').hide();
+        },400);
         $('input[name="region"]').val($(this).attr('region_id'));
         $.ajax({
             type: 'post',
