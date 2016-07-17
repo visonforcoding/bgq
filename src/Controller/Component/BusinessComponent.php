@@ -210,7 +210,7 @@ class BusinessComponent extends Component {
                 $data = [
                    'url' => 'http://m.chinamatop.com/home/my-message-fans' 
                 ];
-                $this->Push->sendAlias($user->user_token, '您有1位新的关注者', '', '您有新的关注者', true, $data, 'go_url');
+                $this->Push->sendAlias($user->user_token, '您有1位新的关注者', '', '您有新的关注者', true, $data, 'go_app');
             } else {
                 $data = [
                    'url' => 'http://m.chinamatop.com/home/my-message-sys' 
