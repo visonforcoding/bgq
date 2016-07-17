@@ -30,8 +30,6 @@
 </body>
 <?php $this->start('script'); ?>
 <script>
-    var a = '/Wx/meet_pay/2/';
-    console.log(a.indexOf('/Wx/'));
     $('#submit').on('tap', function () {
         $form = $('form');
         $.ajax({
