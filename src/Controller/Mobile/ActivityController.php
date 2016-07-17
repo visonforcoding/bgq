@@ -52,7 +52,7 @@ class ActivityController extends AppController {
             }
 
             
-
+            $order = [];
             if ($this->user) {
                 // 是否已赞
                 $isLike = $this
@@ -97,7 +97,7 @@ class ActivityController extends AppController {
                         }
                     ],
                 ]);
-                $order = [];
+                
                 $orderTable = \Cake\ORM\TableRegistry::get('order');
                 if($activity->activityapply){
                     if($activity->activityapply['0']->is_pass == 0){
@@ -221,6 +221,7 @@ class ActivityController extends AppController {
                             return $this->Util->ajaxReturn(false, $activityApply->errors());
                         }
                     } else {
+                        $activityApply = $this->Activity->Activityapply->save($activityApply);
                         $activityApply->is_pass = 0;
                         $OrderTable = \Cake\ORM\TableRegistry::get('order');
                         $applyTable = \Cake\ORM\TableRegistry::get('activityapply');
