@@ -19,7 +19,7 @@ use App\Controller\Mobile\AppController;
  */
 class ActivityController extends AppController {
 
-    protected $limit = '50'; // 分页条数
+    protected $limit = '5'; // 分页条数
 
     /**
      * 活动详情

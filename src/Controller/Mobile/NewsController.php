@@ -13,7 +13,7 @@ use App\Controller\Mobile\AppController;
  */
 class NewsController extends AppController {
 
-    protected $newslimit = 50;
+    protected $newslimit = 5;
 
     /**
      * Index method
