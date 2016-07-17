@@ -22,12 +22,12 @@
     <a href="javascript:void(0);" class='nextstep' id="submit">提交</a>
     <div class='reg-shadow' hidden></div>
     <div class="totips" style="display:none;">
-        <h3></h3>
-        <span>非常感谢你的推荐或赞助，请点击确定</span>
-        <a href="javascript:void(0)" class="nextstep" id="comfirm">确认</a>
-        <span class='closed' id='closed'>
+        <h3>非常感谢你的推荐或赞助</h3>
+        <span></span>
+        <a href="/activity/details/<?= $activity_id ?>" class="nextstep" id="comfirm">确认</a>
+<!--        <span class='closed' id='closed'>
             &times;
-        </span>
+        </span>-->
     </div>
 </div>
 <?= $this->element('footer'); ?>

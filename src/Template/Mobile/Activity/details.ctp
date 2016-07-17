@@ -70,12 +70,12 @@
         </section>
         <div class="a-btn">
             <a href="/activity/recommend/<?= $activity->id; ?>">我要赞助</a>
-            <?php if (!isset($activity->activityapply)): ?>
+            <?php if (empty($activity->activityapply)): ?>
                 <a id="enroll11" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
             <?php else: ?>
                 <?php if($activity->activityapply['0']->is_pass == 0): ?>
                     <a href="/wx/meet_pay/2/<?= $order->id; ?>">去付款(<?= $activity->apply_fee; ?>元)</a>
-                <?php elseif($activity->activityapply->is_pass == 1): ?>
+                <?php elseif($activity->activityapply['0']->is_pass == 1): ?>
                     <a>已报名</a>
                 <?php endif; ?>
             <?php endif; ?>
