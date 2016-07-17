@@ -639,8 +639,9 @@ class ActivityController extends AppController {
                         ->page($page, $this->limit)
                         ->orderDesc('Activity.create_time')
                         ->toArray();
+        $a = $this->Activity->find()->all()->toArray();
         if ($activity) {
-            return $this->Util->ajaxReturn(['status' => true, 'data' => $activity]);
+            return $this->Util->ajaxReturn(['status' => true, 'data' => $activity, 'a'=>$a]);
         } else {
             return $this->Util->ajaxReturn(['status' => false]);
         }
