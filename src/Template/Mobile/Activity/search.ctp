@@ -68,8 +68,8 @@
     $('input[name="keyword"]').focus();
     window.isApply = ',' + <?= $isApply ?> + ',';
     
-    if($('#choose_industry_ul li.default').length != 0){
-        $('.default').trigger('tap');
+    if($('.default').length != 0){
+        seriesTap($('.default').get(0));
     }
     
     $('.orgname').on('tap',function(){
@@ -93,10 +93,14 @@
     })
     
     $('.series').on('tap', function(){
+        seriesTap(this);
+    })
+    
+    function seriesTap(em){
         $('.series').removeClass('active');
-        $(this).addClass('active');
-        $('input[name="series_id"]').val($(this).attr('series_id'));
-        $('.orgname').text($(this).text());
+        $(em).addClass('active');
+        $('input[name="series_id"]').val($(em).attr('series_id'));
+        $('.orgname').text($(em).text());
         $.ajax({
             type: 'post',
             url: '/activity/getSearchRes',
@@ -118,7 +122,7 @@
                 }
             }
         });
-    })
+    }
     
     $('.regions').on('tap', function(){
         $('#sellect').text($(this).text());
