@@ -30,6 +30,8 @@
 </body>
 <?php $this->start('script'); ?>
 <script>
+    var a = '/Wx/meet_pay/2/';
+    console.log(a.indexOf('/Wx/'));
     $('#submit').on('tap', function () {
         $form = $('form');
         $.ajax({
@@ -41,7 +43,7 @@
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
                         $.util.alert(msg.msg);
-                        if(msg.url.indexOf('/Wx/')){
+                        if(msg.url.indexOf('/Wx/') != -1){
                             setTimeout(function(){
                                 window.location.href = msg.url;
                             },2000);
