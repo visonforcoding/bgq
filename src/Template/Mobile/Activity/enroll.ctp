@@ -23,9 +23,9 @@
         <h3>请点击确定进行下一步</h3>
         <span></span>
         <a href="" class="nextstep" id="comfirm">确认</a>
-        <span class='closed'>
+<!--        <span class='closed'>
             &times;
-        </span>
+        </span>-->
     </div>
 </body>
 <?php $this->start('script'); ?>
