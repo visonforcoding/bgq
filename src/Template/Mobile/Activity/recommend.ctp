@@ -23,7 +23,7 @@
     <div class='reg-shadow' hidden></div>
     <div class="totips" style="display:none;">
         <h3></h3>
-        <span>确定报名吗？</span>
+        <span>非常感谢你的推荐或赞助，请点击确定</span>
         <a href="javascript:void(0)" class="nextstep" id="comfirm">确认</a>
         <span class='closed' id='closed'>
             &times;
