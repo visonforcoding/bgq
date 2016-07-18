@@ -779,7 +779,10 @@ class ActivityController extends AppController {
         $data = [
             'url' => 'http://m.chinamatop.com/meet/view/7',
         ];
-        $res = $this->Push->sendAll('感谢使用并购帮APP', '非常感谢使用并购帮APP，并购帮专注并购人的生活方式', '你有一条推送', false, $data, 'go_app');
+        $userTable = \Cake\ORM\TableRegistry::get('user');
+        $user = $userTable->find()->where(['truename'=>'游依婷'])->toArray();
+//        $res = $this->Push->sendAll('感谢使用并购帮APP', '非常感谢使用并购帮APP，并购帮专注并购人的生活方式', '你有一条推送', false, $data, 'go_activity');
+        $res = $this->Push->sendAlias($user->user_token, '感谢使用并购帮APP', '非常感谢使用并购帮APP，并购帮专注并购人的生活方式', '你有一条推送', 'BGB', false, $data, 'go_activity');
 //        $res = $this->Push->ios_check('us24509146822979010801');
 //        $res = $this->Push->android_check('us71005146840261729001');
         debug($res);
