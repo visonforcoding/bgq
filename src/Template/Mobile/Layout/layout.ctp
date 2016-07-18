@@ -10,10 +10,11 @@
         <link rel="stylesheet" type="text/css" href="/mobile/css/common.css"/>
         <link rel="stylesheet" type="text/css" href="/mobile/css/style.css"/>
         <script type="text/javascript">
-            (function(win){var h;var docEl=document.documentElement;function setUnitA(){var clientWidth=docEl.clientWidth;if(!clientWidth){return}docEl.style.fontSize=100*(clientWidth/750)+"px"}win.addEventListener("resize",function(){clearTimeout(h);h=setTimeout(setUnitA,300)},false);win.addEventListener("pageshow",function(e){if(e.persisted){clearTimeout(h);h=setTimeout(setUnitA,300)}},false);setUnitA()})(window);
-            if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){
-                document.write('<script src="http://jsapi.com/jsapi.js"><\/script>');
-            }
+            // (function(win){var h;var docEl=document.documentElement;function setUnitA(){var clientWidth=docEl.clientWidth;if(!clientWidth){return}docEl.style.fontSize=100*(clientWidth/750)+"px"}win.addEventListener("resize",function(){clearTimeout(h);h=setTimeout(setUnitA,300)},false);win.addEventListener("pageshow",function(e){if(e.persisted){clearTimeout(h);h=setTimeout(setUnitA,300)}},false);setUnitA()})(window);
+            // if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){
+            //     document.write('<script src="http://jsapi.com/jsapi.js"><\/script>');
+            // }
+            (function(win){var h;var docEl=document.documentElement;function setUnitA(){var clientWidth=docEl.clientWidth;if(!clientWidth){return}if(clientWidth>750){docEl.style.fontSize=100+"px"}else{docEl.style.fontSize=100*(clientWidth/750)+"px"}}win.addEventListener("resize",function(){clearTimeout(h);h=setTimeout(setUnitA,300)},false);win.addEventListener("pageshow",function(e){if(e.persisted){clearTimeout(h);h=setTimeout(setUnitA,300)}},false);setUnitA()})(window);
         </script>
         <?= $this->fetch('css') ?>
         <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
