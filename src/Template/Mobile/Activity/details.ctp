@@ -45,7 +45,7 @@
         <section class="newscomment-box joinnumber">
             <h3 class="comment-title">
                 已报名
-                <a href="/activity/allEnroll/<?= $activity->id ?>" class="allentrol" hidden>查看全部</a>
+                <a href="/activity/allEnroll/<?= $activity->id ?>" class="allentrol">查看全部</a>
             </h3>
             <div class="items  nobottom">
                 <div class="comm-info t-ablock" id="allEnroll">
@@ -220,13 +220,13 @@
         return d;
     });
     
-    // 报名的人数多余9个显示查看更多
-    var showMoreEnroll = setInterval(function(){
-        if($('#allEnroll').children('a').length > 9){
-            $('.allentrol').show();
-            clearInterval(showMoreEnroll);
-        }
-    }, 100);
+//    // 报名的人数多余9个显示查看更多
+//    var showMoreEnroll = setInterval(function(){
+//        if($('#allEnroll').children('a').length > 9){
+//            $('.allentrol').show();
+//            clearInterval(showMoreEnroll);
+//        }
+//    }, 100);
     
     // 少于五条评论隐藏显示全部，大于一条评论隐藏还没有评论
     var circle = setInterval(function(){
