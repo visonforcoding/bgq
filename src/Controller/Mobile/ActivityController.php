@@ -88,7 +88,7 @@ class ActivityController extends AppController {
                             return $q->where(['user_id'=>$user_id]);
                         },
                         'Activitycom' => function($q)use($id){
-                            return $q->where(['activity_id'=>$id, 'is_delete'=>0])->orderDesc('Activitycom.create_time');
+                            return $q->where(['activity_id'=>$id, 'is_delete'=>0])->orderDesc('Activitycom.create_time')->limit($this->limit);
                         },
                         'Activitycom.Users',
                         'Activitycom.Replyusers',
@@ -112,7 +112,7 @@ class ActivityController extends AppController {
                         'Regions',
                         'Savants',
                         'Activitycom' => function($q)use($id){
-                            return $q->where(['activity_id'=>$id, 'is_delete' => 0])->orderDesc('Activitycom.create_time');
+                            return $q->where(['activity_id'=>$id, 'is_delete' => 0])->orderDesc('Activitycom.create_time')->limit($this->limit);
                         },
                         'Activitycom.Users',
                         'Activitycom.Replyusers',

@@ -8,17 +8,19 @@
         </form>
         <div class='h-regiser' id="doSearch" >搜 索</div>
     </div>
-    <div class="marklayer">
-    <div class="toggle"><a href="javascript:void(0);" id="industry_name">选择行业标签</a><span class="ani-toggle"></span></div>
-    <ul class="s-label">
-        <?php foreach ($industries as $k => $v): ?>
-            <?php if ($v['pid'] == 1): ?>
+    <div class="markbox">
+        <div class="a-s-title">
+            <span class="orgname">选择行业标签</span>
+        </div>
+        <ul class="a-s-mark s-width">
+            <?php foreach ($industries as $k => $v): ?>
+                <?php if ($v['pid'] == 1): ?>
                 <li>
                     <a href="javascript:void(0)" industry_id='<?= $v['id'] ?>' class="industry <?php if(is_numeric($id)): ?><?php if($id == $v['id']):?>default<?php endif;?><?php endif; ?>"><?= $v['name']?></a>
                 </li>
-            <?php endif; ?>
-        <?php endforeach; ?>
-    </ul>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </ul>
     </div>
     <div id="search"></div>
 </div>
@@ -42,16 +44,16 @@
 <script src="/mobile/js/news_search.js"></script>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
-    $('.ani-toggle').on('tap',function(){
-        $('.ani-toggle').toggleClass('active');
-        $('.s-label').toggleClass('disp');
-        if($('.s-label').hasClass('disp')){
-            $('.s-label').children().hide();
-        } else {
-            $('.s-label').children().show();
+    $('.a-s-title .orgname').on('touchstart',function(){
+        $(this).toggleClass('active');
+        if($('.a-s-mark').hasClass('disp')){
+            $('.a-s-mark').removeClass('disp').addClass('nblock');
+        }else if($('.a-s-mark').hasClass('nblock')){
+            $('.a-s-mark').removeClass('nblock').addClass('disp');
+        }else{
+            $('.a-s-mark').addClass('disp');
         }
-        
-    })
+    });
     
 
     var page = 2;
@@ -106,7 +108,7 @@
             $('input[name="industry_id"]').val('');
             return;
         }
-        $('#industry_name').text($(em).text());
+        $('.orgname').text($(em).text());
         $('#search').html('');
         $('.industry').removeClass('active');
         $(em).addClass('active');
@@ -138,6 +140,14 @@
                             d.author = d.user.truename;
                             return d;
                         });
+                        $(this).toggleClass('active');
+                        if($('.a-s-mark').hasClass('disp')){
+                            $('.a-s-mark').removeClass('disp').addClass('nblock');
+                        }else if($('.a-s-mark').hasClass('nblock')){
+                            $('.a-s-mark').removeClass('nblock').addClass('disp');
+                        }else{
+                            $('.a-s-mark').addClass('disp');
+                        }
                     } else {
                         $.util.alert(msg.msg);
                     }
