@@ -50,6 +50,53 @@
     }
 </script>
 <script>
+    var search_data = {};
+    function industryTap(em){
+        if($(em).hasClass('active')){
+            $(em).removeClass('active');
+            $('input[name="industry_id"]').val('');
+            return;
+        }
+        $('.orgname').text($(em).text());
+        $('#search').html('');
+        $('.industry').removeClass('active');
+        $(em).addClass('active');
+        var industry_id = $(em).attr('industry_id');
+        $('input[name="industry_id"]').val(industry_id);
+        $('.orgname').toggleClass('active');
+        if($('.a-s-mark').hasClass('disp')){
+            $('.a-s-mark').removeClass('disp').addClass('nblock');
+        }else if($('.a-s-mark').hasClass('nblock')){
+            $('.a-s-mark').removeClass('nblock').addClass('disp');
+        }else{
+            $('.a-s-mark').addClass('disp');
+        }
+
+        if(search_data[industry_id]){
+            $('#search').html(search_data[industry_id]);
+            return;
+        }
+        $.ajax({
+            type: 'post',
+            url: '/news/getSearchRes',
+            data: $('#searchForm').serialize(),
+            dataType: 'json',
+            success: function (msg) {
+                if (typeof msg === 'object') {
+                    if (msg.status === true) {
+                        search_data[industry_id] = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                            d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                            d.author = d.user.truename;
+                            return d;
+                        });
+                        
+                    } else {
+                        $.util.alert(msg.msg);
+                    }
+                }
+            }
+        });
+    }
     $.ajax({
         type: 'POST',
         dataType: 'json',
@@ -62,9 +109,17 @@
                             d.default = 'default';
                         }
                     }
-                    console.log(d);
                     return d;
                 });
+                $('.industry').on('tap', function(){
+                    industryTap(this);
+                });
+                if($('.default').length != 0){
+                    industryTap($('.default').get(0));
+                }
+                else{
+                    setTimeout(function(){$('input[name="keyword"]').focus();}, 1000);
+                }
             }
         }
     });
@@ -123,63 +178,10 @@
         });
     }, 2000);
     
-    var search_data = {};
-    $('.industry').on('tap', function(){
-        industryTap(this);
-    });
-    function industryTap(em){
-        if($(em).hasClass('active')){
-            $(em).removeClass('active');
-            $('input[name="industry_id"]').val('');
-            return;
-        }
-        $('.orgname').text($(em).text());
-        $('#search').html('');
-        $('.industry').removeClass('active');
-        $(em).addClass('active');
-        var industry_id = $(em).attr('industry_id');
-        $('input[name="industry_id"]').val(industry_id);
-        $('.orgname').toggleClass('active');
-        if($('.a-s-mark').hasClass('disp')){
-            $('.a-s-mark').removeClass('disp').addClass('nblock');
-        }else if($('.a-s-mark').hasClass('nblock')){
-            $('.a-s-mark').removeClass('nblock').addClass('disp');
-        }else{
-            $('.a-s-mark').addClass('disp');
-        }
-
-        if(search_data[industry_id]){
-            $('#search').html(search_data[industry_id]);
-            return;
-        }
-        $.ajax({
-            type: 'post',
-            url: '/news/getSearchRes',
-            data: $('#searchForm').serialize(),
-            dataType: 'json',
-            success: function (msg) {
-                if (typeof msg === 'object') {
-                    if (msg.status === true) {
-                        search_data[industry_id] = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
-                            d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                            d.author = d.user.truename;
-                            return d;
-                        });
-                        
-                    } else {
-                        $.util.alert(msg.msg);
-                    }
-                }
-            }
-        });
-    }
     
-    if($('.s-label li a.default').length != 0){
-        industryTap($('.s-label li a.default').get(0));
-    }
-    else{
-        setTimeout(function(){$('input[name="keyword"]').focus();}, 1000);
-    }
+    
+    
+    
     
     
     $('#searchForm').submit(function(){
