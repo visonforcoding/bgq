@@ -739,7 +739,7 @@ class ActivityController extends AppController {
      */
     public function allEnroll($id){
         $activityApplyTable = \Cake\ORM\TableRegistry::get('activityapply');
-        $user = $activityApplyTable->find()->where(['activity_id' => $id])->contain(['Users'])->toArray();
+        $user = $activityApplyTable->find()->where(['activity_id' => $id, 'is_pass'=>1])->contain(['Users'])->toArray();
         $activity = $this->Activity->get($id);
         $this->set([
             'pageTitle'=>$activity->title,
@@ -780,9 +780,9 @@ class ActivityController extends AppController {
             'url' => 'http://m.chinamatop.com/meet/view/7',
         ];
         $userTable = \Cake\ORM\TableRegistry::get('user');
-        $user = $userTable->find()->where(['truename'=>'游依婷'])->toArray();
+        $user = $userTable->find()->where(['truename'=>'蔡铧枢'])->first();
 //        $res = $this->Push->sendAll('感谢使用并购帮APP', '非常感谢使用并购帮APP，并购帮专注并购人的生活方式', '你有一条推送', false, $data, 'go_activity');
-        $res = $this->Push->sendAlias($user->user_token, '感谢使用并购帮APP', '非常感谢使用并购帮APP，并购帮专注并购人的生活方式', '你有一条推送', 'BGB', false, $data, 'go_activity');
+        $res = $this->Push->sendAlias($user->user_token, '感谢使用并购帮APP', '非常感谢使用并购帮APP，并购帮专注并购人的生活方式', '你有一条推送', 'BGB', false, $data, 'go_app');
 //        $res = $this->Push->ios_check('us24509146822979010801');
 //        $res = $this->Push->android_check('us71005146840261729001');
         debug($res);
