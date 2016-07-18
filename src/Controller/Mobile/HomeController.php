@@ -897,10 +897,13 @@ class HomeController extends AppController {
                                                                                 ->find()
                                                                                 ->where(['ownerid' => $this->user->id, 'uid' => $id])
                                                                                 ->first();
-                                                                        $sendMe = $this->User->CardBoxes->get($sendMe->id);
+//                                                                        $sendMe = $this->User->CardBoxes->get($sendMe->id);
                                                                         $sendMe->resend = 1;
                                                                         $res = $this->User->CardBoxes->save($sendMe);
                                                                         if ($res) {
+                                                                            $cardbox = $this->User->CardBoxes->newEntity();
+                                                                            $cardbox = $this->User->CardBoxes->patchEntity($cardbox, ['ownerid'=>$id, 'uid'=>$this->user->id, 'resend'=>1]);
+                                                                            $this->User->CardBoxes->save($cardbox);
                                                                             return $this->Util->ajaxReturn(true, '回赠成功');
                                                                         } else {
                                                                             return $this->Util->ajaxReturn(false, '回赠失败');
