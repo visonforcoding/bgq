@@ -67,6 +67,7 @@ class Umeng {
         $android_brocast->setPredefinedKeyValue("title", $title); // 安卓标题
         $android_brocast->setPredefinedKeyValue("text", $content); // 安卓内容
         $android_brocast->setPredefinedKeyValue("after_open", $after_open); // 之后打开
+        $android_brocast->setPredefinedKeyValue("activity", 'com.chinamatop.club.app.activity.MainActivity'); // 对应的activity
         $android_brocast->setPredefinedKeyValue("production_mode", $production_mode); // 生产环境
         $android_brocast->setPredefinedKeyValue('type', 'broadcast'); // 类型为广播
         $android_brocast->setExtraField("extra", $extra); // 安卓额外内容
@@ -138,6 +139,7 @@ class Umeng {
         $android_brocast->setPredefinedKeyValue("title", $title); // 安卓标题
         $android_brocast->setPredefinedKeyValue("text", $content); // 安卓内容
         $android_brocast->setPredefinedKeyValue("after_open", $after_open); // 之后打开
+        $android_brocast->setPredefinedKeyValue("activity", 'com.chinamatop.club.app.activity.MainActivity'); // 对应的activity
         $android_brocast->setPredefinedKeyValue("production_mode", $production_mode); // 生产环境
         $android_brocast->setPredefinedKeyValue('type', 'customizedcast'); // 类型为单播
         $android_brocast->setExtraField("extra", $extra); // 安卓额外内容
@@ -207,6 +209,7 @@ class Umeng {
         $android_brocast->setPredefinedKeyValue("title", $title); // 标题
         $android_brocast->setPredefinedKeyValue("text", $content); // 内容
         $android_brocast->setPredefinedKeyValue("after_open", $after_open);  // 安卓之后动作
+        $android_brocast->setPredefinedKeyValue("activity", 'com.chinamatop.club.app.activity.MainActivity'); // 对应的activity
         $android_brocast->setPredefinedKeyValue("production_mode", $production_mode); // 生产环境
         $android_brocast->setCustomizedField("extra", $extra); // ios额外内容
         $android_upload = $android_brocast->uploadContents($file);

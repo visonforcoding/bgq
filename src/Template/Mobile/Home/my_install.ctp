@@ -75,7 +75,7 @@
                     $.util.setCookie('token_uin','');
                     $.util.setCookie('login_status', '');
                     LEMON.db.set('token_uin','');
-                    location.href = '/';
+                    location.href = '/home/index';
                 } else {
                     $.util.alert(msg.msg);
                 }
