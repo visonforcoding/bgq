@@ -209,10 +209,7 @@ class SavantController extends AppController {
      * @param int $id 专家id
      */
     public function pass($id){
-        
-        $savant = $this->Savant->get($id);
-        $userTable = \Cake\ORM\TableRegistry::get('user');
-        $user = $userTable->get($savant->user_id);
+        $user = $this->User->get($id);
         $user->level = 2;
         $user->savant_status = 3;
         $res = $userTable->save($user);
