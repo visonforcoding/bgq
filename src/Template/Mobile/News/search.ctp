@@ -114,13 +114,13 @@
         $(em).addClass('active');
         var industry_id = $(em).attr('industry_id');
         $('input[name="industry_id"]').val(industry_id);
-
-        $('.ani-toggle').toggleClass('active');
-        $('.s-label').toggleClass('disp');
-        if($('.s-label').hasClass('disp')){
-            $('.s-label').children().hide();
-        } else {
-            $('.s-label').children().show();
+        $('.orgname').toggleClass('active');
+        if($('.a-s-mark').hasClass('disp')){
+            $('.a-s-mark').removeClass('disp').addClass('nblock');
+        }else if($('.a-s-mark').hasClass('nblock')){
+            $('.a-s-mark').removeClass('nblock').addClass('disp');
+        }else{
+            $('.a-s-mark').addClass('disp');
         }
 
         if(search_data[industry_id]){
@@ -140,14 +140,7 @@
                             d.author = d.user.truename;
                             return d;
                         });
-                        $(this).toggleClass('active');
-                        if($('.a-s-mark').hasClass('disp')){
-                            $('.a-s-mark').removeClass('disp').addClass('nblock');
-                        }else if($('.a-s-mark').hasClass('nblock')){
-                            $('.a-s-mark').removeClass('nblock').addClass('disp');
-                        }else{
-                            $('.a-s-mark').addClass('disp');
-                        }
+                        
                     } else {
                         $.util.alert(msg.msg);
                     }

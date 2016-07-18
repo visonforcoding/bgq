@@ -95,7 +95,7 @@
                             d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == - 1 ? '' : '<span class="is-apply">已报名</span>';
                             return d;
                         });
-                        $(this).toggleClass('active');
+                        $('.orgname').toggleClass('active');
                         if($('.a-s-mark').hasClass('disp')){
                             $('.a-s-mark').removeClass('disp').addClass('block');
                         }else if($('.a-s-mark').hasClass('block')){
