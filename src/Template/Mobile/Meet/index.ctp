@@ -182,7 +182,7 @@
                 lockScrY: true,
                 loopScroll: true,
                 autoTime:0,
-                viewDom:$('.m-swiper-items'),
+               viewDom:$('.dk'),
             });
    },0)
 
