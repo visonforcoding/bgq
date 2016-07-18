@@ -125,6 +125,8 @@
                     $('#res').html(html+$('#icoTpl').text());
                     if(res.data.hasMsg){
                         user = user.replace('{#hasMsg#}','<span class="opci"></span>');
+                    } else {
+                        user = user.replace('{#hasMsg#}','');
                     }
                     if(!res.data.isWx){
                         user = user.replace('{#setUp#}','&#xe619;');
