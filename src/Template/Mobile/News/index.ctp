@@ -78,7 +78,7 @@
             });
             $('#imgList').html(html);
             $('#imgTab').html(tab.join(''));
-            var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
+            var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'),$('.a-banner'));
         }
     });
     
