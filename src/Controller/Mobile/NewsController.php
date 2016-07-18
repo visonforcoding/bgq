@@ -195,7 +195,7 @@ class NewsController extends AppController {
     }
     
     /**
-     * 活动搜索
+     * 资讯搜索
      */
     public function search($id=null) {
         $industries = $this->News->Industries->find()->hydrate(false)->all()->toArray();
