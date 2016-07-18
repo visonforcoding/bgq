@@ -69,6 +69,8 @@
     var apiList = ["db.get",
         "db.set",
         "sys.version",
+        "sys.showKeyboard",  //显示键盘
+        "sys.hideKeyboard",  //隐藏键盘
         "sys.QRcode",  //二维码扫描
         "sys.back",
         "sys.logout",
@@ -130,6 +132,8 @@
                 //无参数   无回调
                 case "share.banner":
                 case "show.shareIco":
+                case "sys.showKeyboard":
+                case "sys.hideKeyboard":
                 case "sys.QRcode":
                 case "sys.logout":
                     registerAPI(null, api, function () {
