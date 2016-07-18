@@ -702,7 +702,7 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .bottom-logo p a{color:#222c38;}
 .bg-change:first-of-type{background: #e01a48;}
 .bg-change:last-of-type{background: #3e82f7;}
-.iconlist{position:fixed;width:100%;background: #fff;height:1rem;z-index:997;bottom:0;left:0;
+.iconlist{position:fixed;width:100%;background: #fff;height:1rem;z-index:997;bottom:0;left:0;right:0;margin:auto;
 /*display:-webkit-flex;display: flex;-webkit-justify-content:space-around;justify-content: space-around;-webkit-align-items:center;align-items: center;*/
 border-top:1px #e5e5e5 solid;line-height: 1rem;font-size:0;
 }
