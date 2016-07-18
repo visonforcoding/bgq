@@ -12,14 +12,7 @@
         <div class="a-s-title">
             <span class="orgname">选择行业标签</span>
         </div>
-        <ul class="a-s-mark s-width">
-            <?php foreach ($industries as $k => $v): ?>
-                <?php if ($v['pid'] == 1): ?>
-                <li>
-                    <a href="javascript:void(0)" industry_id='<?= $v['id'] ?>' class="industry <?php if(is_numeric($id)): ?><?php if($id == $v['id']):?>default<?php endif;?><?php endif; ?>"><?= $v['name']?></a>
-                </li>
-                <?php endif; ?>
-            <?php endforeach; ?>
+        <ul class="a-s-mark s-width" id="industry">
         </ul>
     </div>
     <div id="search"></div>
@@ -41,9 +34,41 @@
         </a>
     </section>
 </script>
+<script type="text/html" id="industryTpl">
+    <li>
+        <a href="javascript:void(0)" industry_id='{#id#}' class="industry {#default#}">{#name#}</a>
+    </li>
+</script>
 <script src="/mobile/js/news_search.js"></script>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    var a = <?= $id?>+'.';
+    if( a === '.'){
+        window.sid = '';
+    }else {
+        window.sid = a;
+    }
+</script>
+<script>
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: "/news/getIndustry",
+        success: function (msg) {
+            if(msg.status){
+                $.util.dataToTpl('industry', 'industryTpl', msg.industries, function(d){
+                    if(window.sid !== '.'){
+                        if(d.id == window.sid){
+                            d.default = 'default';
+                        }
+                    }
+                    console.log(d);
+                    return d;
+                });
+            }
+        }
+    });
+    
     $('.a-s-title .orgname').on('touchstart',function(){
         $(this).toggleClass('active');
         if($('.a-s-mark').hasClass('disp')){
