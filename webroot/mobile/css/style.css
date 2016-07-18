@@ -107,7 +107,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .news-bottom .sec-b-l div{display:inline-block;color:#969fa9;margin-right:0.5rem;font-size:0.28rem;}
 .sec-like span,.sec-comment span{display: inline-block; margin-right:0.1rem;width:0.24rem;height:0.22rem;font-size:0.26rem;}
 .news-bottom .sec-b-r{float:right;}
-.sec-b-r a{display: inline-block;color:#969fa9;padding:4px;font-size:12px;border:1px #969fa9 solid;border-radius: 5px;}
+.sec-b-r a{display: inline-block;color:#969fa9;padding:4px;font-size:12px;border:1px #969fa9 solid;border-radius: 5px;/*box-shadow: 0 0 1px 0 #969fa9;box-shadow:0 0 1px 0 rgba(150,159,169,1) inset;*/}
 .footer{border-top:1px #e5e5e5 solid; padding-top:0.2rem;padding-bottom:0.1rem; background: #f7f7f8;height:1.2rem;overflow:hidden;}
 .navfooter li{float:left;width:25%;text-align: center;}
 .navfooter li span{display: block;height:0.53rem;font-size:0.44rem;color:#7a7e83;}
