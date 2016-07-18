@@ -130,6 +130,8 @@
                     }
                     if(!res.data.isWx){
                         user = user.replace('{#setUp#}','&#xe619;');
+                    } else {
+                        user = user.replace('{#setUp#}','');
                     }
                     user = user.replace('{#user_id#}',res.data.user.id);
                     user = user.replace('{#truename#}',res.data.user.truename);
