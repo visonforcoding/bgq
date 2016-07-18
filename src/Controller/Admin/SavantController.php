@@ -228,16 +228,16 @@ class SavantController extends AppController {
      */
     public function unpass($id){
         $data = $this->request->data;
-        $savant = $this->Savant->get($id);
-        $userTable = \Cake\ORM\TableRegistry::get('user');
-        $user = $userTable->get($savant->user_id);
+        $user = $this->User->get($id);
+        $user->level = 2;
+        $user->savant_status = 3;
         $user->level = 1;
         $user->savant_status = 0;
         $user->reason = $data['reason'];
-        $res = $userTable->save($user);
+        $res = $this->User->save($user);
         if($res){
             $this->loadComponent('Business');
-            $this->Business->usermsg($savant->user_id, '专家申请新消息', '您的专家申请审核不通过！原因为：' . $data['reason'], 5, $savant->id);
+            $this->Business->usermsg($id, '专家申请新消息', '您的专家申请审核不通过！原因为：' . $data['reason'], 5, $id);
             return $this->Util->ajaxReturn(true, '审核不通过');
         } else {
             return $this->Util->ajaReturn(false, '系统错误');
