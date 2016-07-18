@@ -122,6 +122,7 @@
             lockScrY: true,
             loopScroll: true,
             autoTime: 3000,
+            viewDom:$('.m-swiper-items'),
         });
     }, 0);
     $('body').on('tap', function (e) {
