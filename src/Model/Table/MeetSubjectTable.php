@@ -73,9 +73,9 @@ class MeetSubjectTable extends Table {
                 ->requirePresence('price', 'create')
                 ->notEmpty('price');
 
-        $validator
-                ->requirePresence('address', 'create')
-                ->notEmpty('address');
+//        $validator
+//                ->requirePresence('address', 'create')
+//                ->notEmpty('address');
 
         $validator
                 ->integer('last_time')
