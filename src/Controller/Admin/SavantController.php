@@ -212,7 +212,7 @@ class SavantController extends AppController {
         $user = $this->User->get($id);
         $user->level = 2;
         $user->savant_status = 3;
-        $res = $userTable->save($user);
+        $res = $this->User->save($user);
         if($res){
             $this->loadComponent('Business');
             $this->Business->usermsg($savant->user_id, '专家申请新消息', '您的专家申请审核通过啦！', 5, $savant->id);
