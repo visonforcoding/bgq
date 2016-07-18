@@ -40,7 +40,7 @@
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a>修改个人信息</a></li>
+                                <li><a href="/wpadmin/admin/profile">修改个人信息</a></li>
                                 <li class="divider"></li>
                                 <li><a href="/wpadmin/admin/logout"><i class="icon icon-off"></i> 注销</a></li>
                             </ul>
