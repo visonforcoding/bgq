@@ -164,7 +164,7 @@
     }, 2000);
     
     //轮播
-    var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
+    var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'),$('.a-banner'));
     //var loop2 = $.util.loopImg($('#items'), $('#imgList li'));
 
 
