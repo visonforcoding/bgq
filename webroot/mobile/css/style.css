@@ -54,7 +54,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .uploadbox .filebtn input[type='file']{position:absolute;top:0;left:0;position: absolute;top: 0;left: 0;width: 100%;height: 0.78rem;border: 1px #ccc solid;
     margin: 0.45rem 0 0.2rem; opacity: 0;}
 .reg-shadow{width:100%;height:100%;position:fixed;left:0;top:0;background:rgba(0,0,0,.6);overflow:hidden;z-index:998;}
-.shadow-info,.m-fixed-top{position:fixed;bottom:-300px;left:0;width:100%;z-index:999;}
+.shadow-info,.m-fixed-top{position:fixed;bottom:-500px;left:0;width:100%;z-index:999;}
 .m-fixed-top{top:1.69rem;height:3.2rem;background: #fff;overflow:hidden;}
 .c-zindex{position:fixed;z-index:1000;}
 .shadow-info .picinfo{background: rgba(255,255,255,0.8);width:90%;margin:0.2rem auto;border-radius: 0.3rem;}
