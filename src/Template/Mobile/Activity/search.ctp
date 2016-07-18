@@ -15,35 +15,16 @@
         </form>
         <div class='h-regiser' id="doSearch">搜索</div>
     </div>
-    <div class='h2'></div>
-    <div class="items">
-        <div class="orgtitle  innerwaper">
+    <div class="markbox">
+        <div class="a-s-title">
             <span class="orgname">活动系列</span>
         </div>
-        <div class="orgmark">
+        <ul class="a-s-mark">
             <?php foreach ($activitySeries as $k => $v): ?>
-            <a href="javascript:void(0)" series_id="<?= $k ?>" class="series <?php if(is_numeric($sid)): ?><?php if($sid == $k):?>default<?php endif;?><?php endif;?>"><?= $v ?></a>
+            <li><a href="javascript:void(0)" series_id="<?= $k ?>" class="series <?php if(is_numeric($sid)): ?><?php if($sid == $k):?>default<?php endif;?><?php endif;?>"><?= $v ?></a></li>
             <?php endforeach; ?>
-        </div>
+        </ul>
     </div>
-<!--    <div class="news-classify">
-        <div class="classify-l fl ml" id="choose_industry">
-            <span id="choose_industries">选择分类</span>
-            <ul class="all-industry" hidden id="choose_industry_ul">
-                <?php foreach ($activitySeries as $k => $v): ?>
-                <li id="parent_<?= $k ?>" series_id="<?= $k ?>" class="<?php if(is_numeric($sid)): ?><?php if($sid == $k):?>default<?php endif;?><?php endif;?>"><a href="javascript:void(0)"><?= $v ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-        <div class="place-l fl ml" id="choose_region">
-            <span id="choose_regions">选择地区</span>
-            <ul class="sort-mark" id="choose_region_ul" hidden>
-                <?php foreach($regions as $k=>$v): ?>
-                <li id="region_<?= $v['id'] ?>" value='<?= $v['id'] ?>' class="choose_region_li"><a href="javascript:void(0);"><?= $v['name'] ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    </div>-->
     <section class="my-collection-info" id="search"></section>
 </div>
 <div id="buttonLoading" class="loadingbox"></div>
@@ -72,16 +53,17 @@
         seriesTap($('.default').get(0));
     }
     
-    $('.orgname').on('tap',function(){
-        if($('.orgmark').hasClass('ohide')){
-            $('.orgmark').toggleClass('ohide');
-            $('.orgmark').show();
-        } else {
-            $('.orgmark').toggleClass('ohide');
-            $('.orgmark').hide();
+    $('.a-s-title .orgname').on('touchstart',function(){
+        $(this).toggleClass('active');
+        if($('.a-s-mark').hasClass('disp')){
+            $('.a-s-mark').removeClass('disp').addClass('block');
+        }else if($('.a-s-mark').hasClass('block')){
+            $('.a-s-mark').removeClass('block').addClass('disp');
+        }else{
+            $('.a-s-mark').addClass('disp');
         }
     })
-
+    
     $('.sel-area').on('tap',function(){
         if($('.arealist').hasClass('hide')){
             $('.arealist').toggleClass('hide');
@@ -90,11 +72,11 @@
             $('.arealist').toggleClass('hide');
             $('.arealist').show();
         }
-    })
+    });
     
-    $('.series').on('tap', function(){
+    $('.series').on('click', function(){
         seriesTap(this);
-    })
+    });
     
     function seriesTap(em){
         $('.series').removeClass('active');
@@ -113,11 +95,14 @@
                             d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == - 1 ? '' : '<span class="is-apply">已报名</span>';
                             return d;
                         });
-                        $('.orgmark').toggleClass('ohide');
-                        setTimeout(function(){
-                            $('.orgmark').hide();
-                        },400);
-                        
+                        $(this).toggleClass('active');
+                        if($('.a-s-mark').hasClass('disp')){
+                            $('.a-s-mark').removeClass('disp').addClass('block');
+                        }else if($('.a-s-mark').hasClass('block')){
+                            $('.a-s-mark').removeClass('block').addClass('disp');
+                        }else{
+                            $('.a-s-mark').addClass('disp');
+                        }
                     } else {
                         $('#search').html('');
                         $.util.alert(msg.msg);

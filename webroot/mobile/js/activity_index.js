@@ -69,7 +69,6 @@ activity.prototype.getData = function(){
     var  obj = this;
     $(window).on("scroll", function () {
         
-        
         $.util.listScroll('items', function () {
             if (obj.page == 9999) {
                 $('#buttonLoading').html('亲，没有更多活动了，请看看其他的栏目吧');
