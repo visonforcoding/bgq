@@ -23,7 +23,6 @@
     <li onclick="alert(2);testset();"> testset();</li>
     <li onclick="alert(LEMON.db.get('name'))">LEMON.db.get('name')</li>
     <li onclick="alert(LEMON.sys.version())">LEMON.sys.version() 当前版本号</li>
-    <li onclick="LEMON.sys.logout()">LEMON.sys.logout()扫二维码</li>
     <li onclick="LEMON.sys.QRcode()">LEMON.sys.QRcode()扫二维码</li>
     <li onclick="LEMON.login.wx(callback)">LEMON.login.wx(callback)</li>
     <li onclick="LEMON.pay.wx('order_id', callback)">LEMON.pay.wx('order_id', callback)  微信支付</li>
@@ -40,8 +39,10 @@
     <li onclick="LEMON.show.search('test url')">LEMON.show.search('test url') 显示搜索图标</li>
 
     <li onclick="LEMON.share.banner()">LEMON.share.banner() 分享条,可能分享部分用到的很少,直接原生的</li>
-    <li onclick="LEMON.sys.showKeyboard()">LEMON.sys.showKeyboard() </li>
-    <li onclick="LEMON.sys.hideKeyboard()">LEMON.sys.hideKeyboard() </li>
+    <li onclick="LEMON.sys.openLOC()">LEMON.sys.openLOC()开启缓存</li>
+    <li onclick="LEMON.sys.closeLOC()">LEMON.sys.closeLOC()关闭缓存</li>
+    <li onclick="LEMON.sys.showKeyboard()">LEMON.sys.showKeyboard()显示键盘 </li>
+    <li onclick="LEMON.sys.hideKeyboard()">LEMON.sys.hideKeyboard() 关闭键盘</li>
 
     <!--
     <li onclick="LEMON.share.QQ(callback)">LEMON.share.QQ(callback) 分享QQ空间</li>

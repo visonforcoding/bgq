@@ -69,6 +69,8 @@
     var apiList = ["db.get",
         "db.set",
         "sys.version",
+        "sys.openLOC",  //开启缓存
+        "sys.closeLOC", //关闭缓存
         "sys.showKeyboard",  //显示键盘
         "sys.hideKeyboard",  //隐藏键盘
         "sys.QRcode",  //二维码扫描
