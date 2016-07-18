@@ -4,7 +4,12 @@
     function setUnitA() {
         var clientWidth = docEl.clientWidth;
         if (!clientWidth) return;
-        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+       
+        if(clientWidth >750){
+        	docEl.style.fontSize =100 +'px';
+        }else{
+        	 docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+        }
     };
     win.addEventListener('resize', function () {
         clearTimeout(h);
