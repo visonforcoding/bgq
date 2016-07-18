@@ -222,7 +222,7 @@ border-bottom:none;top:-1px;margin-top:-1px;margin-left:-1px;}
 .submitbtn a{width:100%;height:100%;display: block;}
 .submitbtn img{width:100%;height:auto;display: block;}
 .submitbtn .s-activ{width: 1rem;
-    height: 1rem;display: block;border-radius: 50%;background: rgba(224,26,72,.9);text-align: center;color:#fff;line-height: 14px;padding-top: 0.22rem;font-size: 12px;font-weight: 100;}
+    height: 1rem;display: table-cell;border-radius: 50%;background: rgba(224,26,72,.9);text-align: center;color:#fff;font-size: .2rem;font-weight: 100;vertical-align: middle;}
 .active-items{padding-bottom:0.4rem;border-bottom: 1px #e5e5e5 solid;}
 
 .a-wraper section{border-top:none;}
@@ -686,7 +686,7 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .e-info-box .changeflex p{line-height: 0.36rem;color:#9ba4ad;font-size:0.24rem;}
 .no-pass b,.no-pass p{line-height: 0.36rem;}
 .m-message-top a{position:relative;}
-.m-message-top a i{display: block;width:0.25rem;height:0.25rem;background: #e01a48;position:absolute;border-radius: 50%;line-height: 0.25rem;text-align: center;color:#fff;right:0.8rem;top:0.06rem;font-size:0.2rem;}
+.m-message-top a i{display: block;width:15px;height:15px;background: #e01a48;position:absolute;border-radius: 50%;line-height: 14px;text-align: center;color:#fff;right:0.8rem;top:0.06rem;font-size:12px;}
 .m-message-top a.active i{background: #fff;color:#d52457}
 .systerm-info-box li{margin-top:0.2rem;border-top:1px #e5e5e5 solid;background: #fff;}
 .systerm-info-box li h3{font-size:0.28rem;color:#da1f50;}
