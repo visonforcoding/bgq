@@ -50,9 +50,9 @@
  </div>
 <div class="reg-shadow" style="display: block;" id="loginShadow"></div>
 <div class="totips" style="display: block;">
-    <h3>请登录</h3>
+    <h3>您还没有登录</h3>
     <span></span>
-    <a href="/user/login" class="nextstep">确认</a>
+    <a href="/user/login" class="nextstep">去登录</a>
     <!--<span class='closed'>
             &times;
     </span>-->
