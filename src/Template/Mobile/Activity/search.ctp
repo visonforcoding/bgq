@@ -114,7 +114,10 @@
                             return d;
                         });
                         $('.orgmark').toggleClass('ohide');
-                        $('.orgmark').hide();
+                        setTimeout(function(){
+                            $('.orgmark').hide();
+                        },400);
+                        
                     } else {
                         $('#search').html('');
                         $.util.alert(msg.msg);
