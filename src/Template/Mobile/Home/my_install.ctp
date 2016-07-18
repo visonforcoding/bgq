@@ -45,7 +45,7 @@
         </li>
         <li  class="nobottom lh4" id="logout">
             <a href="javascript:void(0)">
-                <span>注销登录</span>
+                <span style="color:red;">注销登录</span>
                 <div>
                     <span></span>
                 </div>
