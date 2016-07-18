@@ -131,7 +131,7 @@ class SavantController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = ['User.level >'=>1];
+        $where = ['User.savant_status >'=>1];
         if (!empty($keywords)) {
             $where[' User.truename like'] = "%$keywords%";
         }
