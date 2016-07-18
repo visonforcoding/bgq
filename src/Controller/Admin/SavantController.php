@@ -140,7 +140,7 @@ class SavantController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $query = $this->User->find()->select(['User.truename','Savant.reco_nums','User.savant_status','Savant.xmjy','Savant.zyys','Savant.summary'])
+        $query = $this->User->find()->select(['User.id','User.truename','Savant.reco_nums','User.savant_status','Savant.xmjy','Savant.zyys','Savant.summary'])
                 ->contain(['Savant']);
         if (!empty($where)) {
             $query->where($where);
