@@ -26,30 +26,37 @@
 				<form action="" ><h1><input type="text" placeholder="请输入关键词"></h1></form>
 				<div class="h-regiser" id="doSearch">搜 索</div>
 			</div>
-			<div class="marklayer">
-				<div class="toggle"><a href="javascript:void(0);">医疗健康人数人数</a><span class="ani-toggle"></span>
+			<div class="markbox">
+				<div class="a-s-title">
+					<span class="orgname">并购沙龙系列</span>
 				</div>
-				<ul class="s-label">
-				<li><a href="javascript:void(0);" class="active">医疗健康人数人数</a></li>
-				<li><a href="javascript:void(0);">医疗健康</a></li>
-				<li><a href="javascript:void(0);">医疗健康</a></li>
-				<li><a href="javascript:void(0);">医疗健康</a></li>
-				<li><a href="javascript:void(0);">医疗健康</a></li>
-				<li><a href="javascript:void(0);">医疗健康</a></li>
-				<li><a href="javascript:void(0);">医疗健康</a></li>
-				<li><a href="javascript:void(0);">医疗健康</a></li>
-				<li><a href="javascript:void(0);">医疗健康</a></li>
-			</ul>
+				<ul	class="a-s-mark s-width">
+					<li><a href="#this" class="active">并购沙龙系列</a></li>
+					<li><a href="#this">上市公司系列</a></li>
+					<li><a href="#this">菁英下午茶系列</a></li>
+					<li><a href="#this">项目路演系列</a></li>
+					<li><a href="#this" class="active">并购沙龙系列</a></li>
+					<li><a href="#this">上市公司系列</a></li>
+					<li><a href="#this">菁英下午茶系列</a></li>
+					<li><a href="#this" class="active">项目路演系列</a></li>
+					<li><a href="#this">菁英下午茶系列</a></li>
+					<li><a href="#this" class="active">项目路演系列</a></li>
+				</ul>
 			</div>
 			
 			
 		</div>
 	<script type="text/javascript">
-	  
-		$('.ani-toggle').on('touchstart',function(){
-			$('.ani-toggle').toggleClass('active');
-			$('.s-label').toggleClass('disp');
-			
+		$('.a-s-title .orgname').on('touchstart',function(){
+			$(this).toggleClass('active');
+//			$('.a-s-mark').toggleClass('disp');
+			if($('.a-s-mark').hasClass('disp')){
+				$('.a-s-mark').removeClass('disp').addClass('nblock');
+			}else if($('.a-s-mark').hasClass('nblock')){
+				$('.a-s-mark').removeClass('nblock').addClass('disp');
+			}else{
+				$('.a-s-mark').addClass('disp');
+			}
 		})
 	</script>
 	</body>
