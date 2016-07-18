@@ -79,7 +79,7 @@ class ProjrongController extends AppController {
             }
         }
         $selIndustryIds = [];
-        foreach($projrong->industries as $industry){
+        foreach ($projrong->industries as $industry) {
             $selIndustryIds[] = $industry->id;
         }
         $this->set(compact('projrong', 'users', 'selIndustryIds'));
@@ -133,6 +133,7 @@ class ProjrongController extends AppController {
             $where['scale_id'] = "$scale_id";
         }
         if (!empty($begin_time) && !empty($end_time)) {
+            //时间筛选
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`cteate_time`) <' => $end_time]];
@@ -143,7 +144,15 @@ class ProjrongController extends AppController {
             $query->where($where);
         }
         $nums = $query->count();
-        $query->contain(['Stage','Scale','Users','Industries']);
+        $query->contain(['Stage', 'Scale', 'Users', 'Industries']);
+        
+        $industry = $this->request->data('industries');
+        if (!empty($industry['_ids'][0])) {
+            //过滤
+            $query->matching('Industries', function($q)use($industry) {
+                return $q->where(['Industries.id' => $industry['_ids'][0]]);
+            });
+        }
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }

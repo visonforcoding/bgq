@@ -197,5 +197,13 @@ class AdminController extends AppController {
         $this->Flash->success('您已退出登录！');
         return $this->redirect(['controller' => 'admin', 'action' => 'login']);
     }
+    
+    
+    /***
+     * 修改个人信息
+     */
+    public function profile(){
+        
+    }
 
 }

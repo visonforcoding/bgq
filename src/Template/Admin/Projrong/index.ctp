@@ -1,6 +1,7 @@
 <?php $this->start('static') ?>   
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
+<link href="/wpadmin/lib/select2/css/select2.min.css" rel="stylesheet">
 <?php $this->end() ?> 
 <div class="col-xs-12">
     <form id="table-bar-form">
@@ -13,12 +14,16 @@
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
             </div>
             <div class="form-group">
-                <label for="keywords">融资规模</label>
-                <?=$this->cell('Scale',['hasAll'])?>
+                <label>融资规模</label>
+                <?= $this->cell('Scale', ['hasAll']) ?>
             </div>
             <div class="form-group">
-                <label for="keywords">融资阶段</label>
-                <?=$this->cell('Stage',['hasAll'])?>
+                <label>融资阶段</label>
+                <?= $this->cell('Stage', ['hasAll']) ?>
+            </div>
+            <div class="form-group">
+                <label>标签</label>
+                <?= $this->cell('Industry::news', [['single']]) ?>
             </div>
             <div class="form-group">
                 <label for="keywords">时间</label>
@@ -36,6 +41,7 @@
 <?php $this->start('script'); ?>
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
+<script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
                 $(function () {
                     $('#main-content').bind('resize', function () {
@@ -47,12 +53,18 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['发布人id', '发布人', '公司', '项目名称', '融资阶段', '地点', '融资规模', '股份', '阅读数', '点赞数', '评论数', '封面', '项目简介', '公司简介', '核心团队', '资料地址', '创建时间', '更新时间', '操作'],
+                                [ '发布人', '公司', '项目名称','标签' ,'融资阶段', '地点', '融资规模', '股份', '阅读数', '点赞数', '评论数', '封面', '项目简介', '公司简介', '核心团队', '资料地址', '创建时间', '更新时间', '操作'],
                         colModel: [
-                            {name: 'user_id', editable: true, align: 'center'},
                             {name: 'publisher', editable: true, align: 'center'},
                             {name: 'company', editable: true, align: 'center'},
                             {name: 'title', editable: true, align: 'center'},
+                            {name: 'industries', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
+                                    var industries_arr = [];
+                                    $.each(cellvalue, function (i, n) {
+                                        industries_arr.push(n.name);
+                                    })
+                                    return industries_arr.join(',');
+                                }},
                             {name: 'stage.name', editable: true, align: 'center'},
                             {name: 'address', editable: true, align: 'center'},
                             {name: 'scale.name', editable: true, align: 'center'},
@@ -90,6 +102,11 @@
                             id: "0"
                         },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
+
+                    $('#select-industry').select2({
+                        language: "zh-CN",
+                        placeholder: '选择一个标签'
+                    });
                 });
 
                 function actionFormatter(cellvalue, options, rowObject) {
