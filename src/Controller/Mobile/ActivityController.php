@@ -774,6 +774,26 @@ class ActivityController extends AppController {
         }
     }
     
+    /**
+     * 获取地区
+     */
+    public function getRegionAndSeries(){
+        $region = $this->Activity->Regions->find()->hydrate(false)->all()->toArray();
+        $activitySeries = \Cake\Core\Configure::read('activitySeries');
+        $series = [];
+        if($activitySeries){
+            foreach ($activitySeries as $k=>$v){
+                $series[$k]['id'] = $k;
+                $series[$k]['name'] = $v;
+            }
+        }
+        return $this->Util->ajaxReturn([
+            'status' => true,
+            'region' => $region,
+            'series' => $series,
+        ]);
+    }
+    
     public function test(){
         $this->loadComponent('Push');
         $data = [

@@ -199,7 +199,6 @@ class NewsController extends AppController {
      */
     public function search($id=null) {
         $industries = $this->News->Industries->find()->hydrate(false)->all()->toArray();
-        $this->set('industries', $industries);
         $this->set([
             'pageTitle'=>'资讯搜索',
             'industries'=>$industries,
@@ -371,6 +370,10 @@ class NewsController extends AppController {
         ]);
     }
     
+    /**
+     * 删除自己的评论
+     * @param type $id
+     */
     public function delComment($id){
         $newscomTable = \Cake\ORM\TableRegistry::get('newscom');
         $newscom = $newscomTable->get($id);
@@ -381,6 +384,23 @@ class NewsController extends AppController {
         } else {
             return $this->Util->ajaxReturn(false, '删除失败');
         }
+    }
+    
+    public function getIndustry(){
+        $industries = $this->News->Industries->find()->hydrate(false)->all()->toArray();
+        $industry = [];
+        foreach($industries as $k=>$v){
+            if($v['pid'] == 1){
+                $industry[] = [
+                    'id' => $v['id'],
+                    'name' => $v['name'],
+                ];
+            }
+        }
+        return $this->Util->ajaxReturn([
+            'status' => true,
+            'industries' => $industry,
+        ]);
     }
 }
 

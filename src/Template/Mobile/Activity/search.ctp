@@ -2,10 +2,8 @@
     <div class='h-news-search'>
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe613;</a>
         <span class="sel-area"><span id="sellect">地区</span>
-            <div class="arealist" hidden>
-                <?php foreach($regions as $k=>$v): ?>
-                <span class="regions" region_id="<?= $v['id'] ?>"><?= $v['name'] ?></span>
-                <?php endforeach; ?>
+            <div class="arealist" hidden id="region">
+                
             </div>
         </span>
         <form id="searchForm" >
@@ -19,10 +17,8 @@
         <div class="a-s-title">
             <span class="orgname">活动系列</span>
         </div>
-        <ul class="a-s-mark">
-            <?php foreach ($activitySeries as $k => $v): ?>
-            <li><a href="javascript:void(0)" series_id="<?= $k ?>" class="series <?php if(is_numeric($sid)): ?><?php if($sid == $k):?>default<?php endif;?><?php endif;?>"><?= $v ?></a></li>
-            <?php endforeach; ?>
+        <ul class="a-s-mark" id="series">
+            
         </ul>
     </div>
     <section class="my-collection-info" id="search"></section>
@@ -43,15 +39,81 @@
         </a>
     </div>
 </script>
+<script type="text/html" id="regionTpl">
+    <span class="regions" region_id="{#id#}">{#name#}</span>
+</script>
+<script type="text/html" id="seriesTpl">
+    <li><a href="javascript:void(0)" series_id="{#id#}" class="series {#default#}">{#name#}</a></li>
+</script>
 <!--<script src="/mobile/js/activity_search.js"></script>-->
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    var a = <?= $sid?>+'.';
+    if( a === '.'){
+        window.sid = '';
+    }else {
+        window.sid = a;
+    }
+</script>
+<script>
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: "/activity/get-region-and-series",
+        success: function (msg) {
+            if(msg.status){
+                $.util.dataToTpl('region', 'regionTpl', msg.region, function(d){
+                    return d;
+                });
+                $.util.dataToTpl('series', 'seriesTpl', msg.series, function(d){
+                    if(window.sid !== '.'){
+                        if(d.id == window.sid){
+                            d.default = 'default';
+                        }
+                    }
+                    return d;
+                });
+                
+                $('.series').on('tap', function(){
+                    seriesTap(this);
+                });
+                if($('.default').length != 0){
+                    seriesTap($('.default').get(0));
+                }
+                $('.regions').on('tap', function(){
+                    $('#sellect').text($(this).text());
+                    setTimeout(function(){
+                        $('.arealist').hide();
+                    },400);
+                    $('input[name="region"]').val($(this).attr('region_id'));
+                    $.ajax({
+                        type: 'post',
+                        url: '/activity/getSearchRes',
+                        data: $('#searchForm').serialize(),
+                        dataType: 'json',
+                        success: function (msg) {
+                            if (typeof msg === 'object') {
+                                if (msg.status === true) {
+                                    var html = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                                        d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == - 1 ? '' : '<span class="is-apply">已报名</span>';
+                                        return d;
+                                    });
+                                } else {
+                                    $('#search').html('');
+                                    $.util.alert(msg.msg);
+                                }
+                            }
+                        }
+                    });
+                });
+            }
+        }
+    });
+    
     $('input[name="keyword"]').focus();
     window.isApply = ',' + <?= $isApply ?> + ',';
     
-    if($('.default').length != 0){
-        seriesTap($('.default').get(0));
-    }
+    
     
     $('.a-s-title .orgname').on('touchstart',function(){
         $(this).toggleClass('active');
@@ -74,9 +136,7 @@
         }
     });
     
-    $('.series').on('click', function(){
-        seriesTap(this);
-    });
+    
     
     function seriesTap(em){
         $('.series').removeClass('active');
@@ -112,32 +172,7 @@
         });
     }
     
-    $('.regions').on('tap', function(){
-        $('#sellect').text($(this).text());
-        setTimeout(function(){
-            $('.arealist').hide();
-        },400);
-        $('input[name="region"]').val($(this).attr('region_id'));
-        $.ajax({
-            type: 'post',
-            url: '/activity/getSearchRes',
-            data: $('#searchForm').serialize(),
-            dataType: 'json',
-            success: function (msg) {
-                if (typeof msg === 'object') {
-                    if (msg.status === true) {
-                        var html = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
-                            d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == - 1 ? '' : '<span class="is-apply">已报名</span>';
-                            return d;
-                        });
-                    } else {
-                        $('#search').html('');
-                        $.util.alert(msg.msg);
-                    }
-                }
-            }
-        });
-    });
+    
     
     var page = 2;
     setTimeout(function () {
