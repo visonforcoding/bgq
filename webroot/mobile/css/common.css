@@ -17,6 +17,7 @@ h1,h2,h3,h4,h5,h6{font-size:0.32rem;}
 p{background-color: transparent;word-break: break-all;font-size:.28rem;}
 /*app*/
 a,button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);}
+textarea::-webkit-scrollbar{display: none;}
 /*reset css end*/
 /*common css*/
 .fl { float:left; display: inline; }
@@ -45,11 +46,14 @@ a,button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);}
 .wraper .tc{text-align:center;}
 .hf20{height:0.2rem;background: #fff;border-bottom:1px #e5e5e5 solid;}
 .wraper .texthide{word-break: break-all;display: -webkit-box;/*-webkit-line-clamp: 3;限制行数*/-webkit-box-orient: vertical;overflow: hidden;}
+
 .bggray{background: #7a7d82;}
 .bgred{background: #e01a48;}
+
 .newswraper,.a-wraper{padding-bottom:1.2rem;}
 .innercon{margin:0 auto;padding:0 0.3rem;background: #fff;}
 .h20{height:0.2rem;border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid;}
+
 .wraper .color-items{color:#e01a48;}
 .wraper .f-color-gray{color:#bbc0c6;font-size:0.28rem;line-height: 0.32rem;}
 .wraper .f-color-black{color:#222c38;}
