@@ -18,7 +18,9 @@
         <div id="activity"></div>
         <div id="buttonLoading" class="loadingbox"></div>
         <div class="submitbtn subactivity" id="release">
-            <img src="/mobile/images/as.png">
+            <a href="javascript:void(0)">
+                <span class="s-activ">活动<br>需求</span>
+            </a>
         </div>
     </div>
 </body>

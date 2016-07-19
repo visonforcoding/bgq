@@ -60,6 +60,16 @@ return [
             'remark'=>'活动报名',
             'url'=>'/home/my_activity_submit'
         ],
+        '8'=>[
+            'table'=>'activitycom',
+            'remark'=>'活动评论点赞消息',
+            'url'=>'/activity/details/{#id#}#{#com_id#}'
+        ],
+        '9'=>[
+            'table'=>'activitycom',
+            'remark'=>'活动评论回复消息',
+            'url'=>'/activity/details/{#id#}#{#com_id#}'
+        ],
     ],
     'educationType'=>[
         '1'=>'高中',
