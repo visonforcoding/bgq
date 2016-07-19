@@ -13,6 +13,10 @@
    data:{}      //对于取结果的，数据会以json结构放在data里，否则data为空json
  }
  */
+
+if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios需要先注入JSApi对象
+    document.write('<script src="http://jsapi.com/jsapi.js"><\/script>');
+}
 (function () {
     var defaultConfig = {
         imgUrl: 'http://m.chinamatop.com/mobile/images/bgq_logo.png',
