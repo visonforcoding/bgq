@@ -349,7 +349,6 @@ ENGINE=InnoDB
 
 #添加关联字段id
 ALTER TABLE `flow`
-<<<<<<< .mine
 	ADD COLUMN `relate_id` INT(11) NOT NULL DEFAULT '0' COMMENT '关联id' AFTER `user_id`;
 
 #乱码
@@ -364,11 +363,22 @@ ALTER TABLE `activity`
 
 ALTER TABLE `activity`
 	ADD COLUMN `series_id` TINYINT NOT NULL AFTER `reason`;
-=======
-	ADD COLUMN `relate_id` INT(11) NOT NULL DEFAULT '0' COMMENT '关联id' AFTER `user_id`;
 
 #新闻评论表添加是否删除字段
 ALTER TABLE `newscom` ADD COLUMN `is_delete` TINYINT(2) NOT NULL DEFAULT '0' COMMENT '是否删除';
 
 #活动评论表添加是否删除字段
-ALTER TABLE `activitycom` ADD COLUMN `is_delete` TINYINT(2) NOT NULL DEFAULT '0' COMMENT '是否删除';>>>>>>> .r1918
+ALTER TABLE `activitycom` ADD COLUMN `is_delete` TINYINT(2) NOT NULL DEFAULT '0' COMMENT '是否删除';
+
+
+#咨询来源
+ALTER TABLE `news`
+	ADD COLUMN `source` VARCHAR(50) NOT NULL COMMENT '来源' AFTER `user_id`;
+ALTER TABLE `news`
+	ALTER `source` DROP DEFAULT;
+ALTER TABLE `news`
+	CHANGE COLUMN `source` `source` VARCHAR(50) NULL COMMENT '来源' AFTER `user_id`;
+
+
+ALTER TABLE `news`
+	CHANGE COLUMN `keywords` `keywords` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '关键字' AFTER `source`;

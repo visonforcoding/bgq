@@ -116,7 +116,8 @@ class UserController extends AppController {
         $id = $this->request->data('id');
         if ($this->request->is('post')) {
             $user = $this->User->get($id);
-            if ($this->User->delete($user)) {
+            $user->softDelete();
+            if ($this->User->save($user)) {
                 $this->Util->ajaxReturn(true, '删除成功');
             } else {
                 $errors = $user->errors();
@@ -139,7 +140,7 @@ class UserController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = [];
+        $where = ['is_del'=>0];
         if (!empty($keywords)) {
             $where['or'] = [['truename like' => "%$keywords%"], ['email like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
         }
@@ -190,7 +191,7 @@ class UserController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = [];
+        $where = ['is_del'=>0];
         if (!empty($keywords)) {
             $where[' truename like'] = "%$keywords%";
         }

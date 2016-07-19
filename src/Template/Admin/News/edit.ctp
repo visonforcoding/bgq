@@ -75,6 +75,22 @@
         ?>
         </div>
     </div>
+        <div class="form-group">
+        <label class="col-md-2 control-label">关键字</label>
+        <div class="col-md-8">
+        <?php
+            echo $this->Form->input('keywords', ['label' => false, 'class' => 'form-control']);
+        ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">来源</label>
+        <div class="col-md-8">
+        <?php
+            echo $this->Form->input('source', ['label' => false, 'class' => 'form-control']);
+        ?>
+        </div>
+    </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 

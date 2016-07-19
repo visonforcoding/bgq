@@ -18,7 +18,6 @@
             </div>
             <a href="javascript:void(0);"  id="submit" class="submit" >确定</a>
         </form>
-
     </div>
 </div>
 <?php $this->start('script') ?>
