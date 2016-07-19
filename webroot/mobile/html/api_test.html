@@ -153,10 +153,13 @@
 
 
     (function(){
-            var ifr = document.createElement('iframe');
-            //ifr.style.display = 'none';
-            ifr.src = '/user/login_status';
-            document.body.appendChild(ifr);
+        var ifr = document.createElement('iframe');
+        ifr.src = '/user/login_status';
+        document.body.appendChild(ifr);
+
+        var ifr = document.createElement('iframe');
+        ifr.src = 'http://www.baidu.com';
+        document.body.appendChild(ifr);
     })();
 </script>
 
