@@ -124,20 +124,26 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .body-con img{min-height:.1rem;}
 .newscon-box p{width:90%;margin:0.1rem auto;line-height: 0.46rem;font-size:0.3rem;color:#9ba4ad;text-align: justify;text-indent:2em;}
 .newscon-box p a,.body-con a{font-size:0.3rem;}
-.con-bottom{float:right;margin-right: 8%;color:#9ba4ad;margin-top:0.2rem;font-size:0.28rem;}
-.readnums{font-size:0.28rem;}
-.con-bottom i{margin:0 0.1rem; color:#9ba4ad;}
-.con-bottom i.like{font-size:0.3rem;}
+.con-bottom{float:right;margin-right: .3rem;color:#9ba4ad;margin-top:0.2rem;font-size:0.28rem;}
+.con-bottom span{display: inline-block;width:1.2rem;font-size:0.24rem;}
+.con-bottom .a-coll{width:0.6rem;}
+.a-coll i{font-size:0.34rem;}
+.readnums{}
+.con-bottom i{margin:0 0.1rem; color:#9ba4ad;vertical-align: -.03rem;font-size:0.32rem;}
+.con-bottom i.like{font-size:0.32rem;}
 .con-bottom i.collect{font-size:0.3rem;}
 .newscomment-box{border-top:1px #e5e5e5 solid;}
 .newscomment-box .comment-title{width:100%;line-height: 0.8rem;font-size:0.3rem;color:#e01a48;height:0.8rem;
 border-bottom:1px #e5e5e5 solid; padding:0 0.3rem;position:relative;font-weight:500}
-.newscomment-box .comment-title span{position:absolute;right:0.3rem;color:#7a7e83;font-size:0.24rem;}
+.newscomment-box .comment-title span{position:absolute;right:0.3rem;color:#7a7e83;font-size:0.26rem;}
 .newscomment-box .comment-title i{font-size:0.28rem;margin-right:0.1rem; vertical-align: middle;display:inline-block;}
 .newscomment-box .items{margin: 0.3rem 0.3rem 0 0.3rem;border-bottom:1px #e5e5e5 solid;padding-bottom:0.2rem;}
 .entrollist{padding:0.2rem 0.3rem;border-bottom:1px #e5e5e5 solid;}
 .entrollist:last-of-type{border-bottom:none;}
 .entrollist a{display: block;overflow: hide;}
+.line{height:1px;background: -webkit-linear-gradient(left,#ededee 0%,#7a7d82 50%, #d5d7da 100%);  background: linear-gradient(left,#ededee 0%,#7a7d82 50%, #d5d7da 100%);margin:0.8rem 0.3rem .4rem; position:relative;}
+.line:after{content: '我们会在三个工作日内处理您的申请';position:absolute;width:4rem;left:50%;margin-left: -2rem;height:.6rem;top:50%;margin-top:-.3rem;background: #f0eff5;text-align: center;line-height: .6rem;
+color:#7a7d82;font-size:.24rem;}
 .newscomment-box .no-bottom{border-bottom:none;}
 .t-ablock{font-size:0;}
 .t-ablock a{display:inline-block;width:0.62rem;height:0.62rem;overflow:hidden;border-radius:0.31rem;margin:0 0.07rem;}
@@ -264,6 +270,9 @@ border-bottom:none;top:-1px;margin-top:-1px;margin-left:-1px;}
 .a-btn >a{display: inline-block;width:3.35rem;height:0.8rem;color:#fff;line-height: 0.8rem; text-align: center;font-size:0.28rem;border-radius: 0.2rem;-webkit-box-shadow: 0 0.2rem 0.2rem rgba(62,130,247,0.2);    box-shadow: 0 0.2rem 0.2rem rgba(62,130,247,0.2);}
 .a-btn >a:nth-of-type(1){background: #3e82f7;margin-right:0.1rem;}
 .a-btn >a:nth-of-type(2){background: #e01a48;-webkit-box-shadow: 0 0.1rem 0.2rem rgba(224,26,72,0.2);box-shadow: 0 0.1rem 0.2rem rgba(224,26,72,0.2);}
+.fixed-btn{width:100%;position:fixed;max-width: 750px;margin:0 auto;height:.98rem;line-height: .98rem;bottom:0;box-shadow: 0 0 1px rgba(0,0,0,.3);font-size:0;}
+.fixed-btn .l-btn,.fixed-btn .r-btn{display: inline-block;font-size: .3rem;color:#fff;background: #3e82f7;width:49.8%;text-align: center;}
+.fixed-btn .r-btn{background: #e01a48;margin-left: 1px;}
 .wraper .a-choose{background:#fff;}
 .a-form-box{overflow:hidden;background:#fff;border-bottom:1px #e5e5e5 solid;}
 .a-form-box li{height:0.52rem;margin:0.26rem;display: flex; justify-content: space-between;}
@@ -650,7 +659,7 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .my-collection-items{float:left;margin-left:0.23rem;width:4.9rem;font-size:0.26rem;}
 .my-collection-items span{display:block;line-height: 0.36rem;color:#b4bac1;}
 .my-collection-items span i{float:right;color:#e01a48;}
-.my-collection-items h3{line-height: 0.43rem;color:#222c38;font-size:0.3rem;margin-bottom:0.23rem;}
+.my-collection-items h3{line-height: 0.43rem;color:#7a7e83;font-size:0.3rem;margin-bottom:0.23rem;}
 .my-news-items h3{height:0.84rem;overflow:hidden;width:100%;}
 .my-news-items span b{margin-left:0.2rem;}
 .my-meet-info .mark a{border:0;border-radius: 0;color:#e01a48;}
