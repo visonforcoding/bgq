@@ -130,7 +130,8 @@
     window.comme_submit = true;
 </script>
 <script>
-
+    window.location.hash = '';
+    
     function checkLogin(func){
         if(window.__user_id || $.util.getCookie('token_uin')){
             func();

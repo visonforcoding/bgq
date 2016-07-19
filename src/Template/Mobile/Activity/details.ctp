@@ -173,13 +173,13 @@
                     <i class="job">{#user_company#} {#user_position#}</i>
                 </a>
             </span>
-            <span id="likecom_{#id#}" comid="{#id#}" disable="{#disable#}">
+            <span id="likecom_{#id#}" comid="{#id#}" disabled="{#disable#}">
                 <b class="addnum">+1</b>
                 <i class="iconfont addnum_{#id#}" style="{#style#}">&#xe615;</i>
                 <b class="praise_num">{#praise_nums#}</b>
             </span>
         </div>
-        <p class="infor-comm" id="reply_{#id#}" value="{#id#}" user_id="{#user_id#}">{#body#}</p>
+        <p class="infor-comm reply_{#id#}" id="reply_{#id#}" value="{#id#}" user_id="{#user_id#}">{#body#}</p>
     </div>
 </script>
 <!--<script src="/mobile/js/activity_details.js"></script>-->
@@ -206,8 +206,7 @@
         d.user_company = d.user.company;
         d.user_position = d.user.position;
         d.user_id = d.user.id;
-        if(d.pid>0)
-        {
+        if(d.pid>0) {
             d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.replyuser.truename + ' </span>：' + d.body;
         }
         d.style = '';
@@ -269,8 +268,7 @@
                                 d.user_company = d.user.company;
                                 d.user_position = d.user.position;
                                 d.user_id = d.user.id;
-                                if(d.pid>0)
-                                {
+                                if(d.pid>0) {
                                     d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.replyuser.truename + ' </span>：' + d.body;
                                 }
                                 d.style = '';
@@ -312,8 +310,7 @@
                                     d.user_company = d.user.company; // 公司
                                     d.user_position = d.user.position; // 职务
                                     d.user_id = d.user.id;
-                                    if(d.pid>0)
-                                    {
+                                    if(d.pid>0) {
                                         d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.reply.truename + ' </span>：' + d.body;
                                     }
                                     d.style = '';
@@ -441,7 +438,6 @@
                                             d.user_truename = d.user.truename; // 名字
                                             d.user_company = d.user.company; // 公司
                                             d.user_position = d.user.position; // 职务
-//                                        d.reply = d.pid > 0 ? '@' + d.replyuser.truename : ''; // 是否回复别人的评论
                                             if (d.pid > 0) {
                                                 d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.replyuser.truename + ' </span>：' + d.body;
                                             }
@@ -489,7 +485,6 @@
                                             d.user_truename = d.user.truename; // 名字
                                             d.user_company = d.user.company; // 公司
                                             d.user_position = d.user.position; // 职务
-//                                        d.reply = d.pid > 0 ? '@' + d.replyuser.truename : ''; // 是否回复别人的评论
                                             if (d.pid > 0) {
                                                 d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.replyuser.truename + ' </span>：' + d.body;
                                             }
@@ -498,8 +493,7 @@
                                         $('#comment').prepend(html);
                                         $('#allComments').prepend(html);
                                         $('.reg-shadow').hide();
-                                        $('.shadow-info').removeClass('c-height');
-                                        $('.shadow-info').addClass('m-height');
+                                        $('.shadow-info').removeClass('c-height').addClass('m-height');
                                     } else {
                                         $.util.alert(msg.msg);
                                     }
@@ -528,7 +522,6 @@
                     setTimeout(function(){
                         $('#shadow').hide();
                         $('#wxshare').hide();
-                        $('#shadow').hide();
                         $('#isdel').hide();
                         $('#isdel').attr('com_id','');
                     }, 400);
@@ -554,7 +547,7 @@
                         success: function (res) {
                             $.util.alert(res.msg);
                             if(res.status){
-                                $('#reply_' + id).parent().remove();
+                                $('.reply_' + id).parent().remove();
                                 setTimeout(function(){
                                     $('#shadow').hide();
                                     $('#isdel').hide();
@@ -589,7 +582,7 @@
                 return;
             // 评论点赞
             if (em.id.indexOf('likecom_') != -1) {
-                if ($(em).attr('disable') === '1') {
+                if ($(em).attr('disabled') == '1') {
                     return false;
                 }
                 $.util.ajax({
