@@ -26,16 +26,17 @@
     </div>
     <div class="h-home-menu topnav">
         <ul class="clearfix">
-            <li><a href="/home/cardcase"><i></i>名片夹</a></li>
-            <li><a href="/home/edit-userinfo"><i></i>个人资料</a></li>
             <li><a href="/home/my_xiaomi"><i></i>小秘书</a></li>
+            
+            <li><a href="/home/edit-userinfo"><i></i>个人资料</a></li>
+            <li><a href="/home/cardcase"><i></i>名片夹</a></li>
         </ul>
     </div>
     <ul class="h-home-menu navlist clearfix">
         <li><a href="/home/my-following"><i class="iconfont">&#xe60f;</i>我的关注</a></li>
+        <li><a href="/home/my_activity_submit"><i class="iconfont">&#xe601;</i>我的活动</a></li>
         <li><a href="/home/my-collect-activity"><i class="iconfont">&#xe610;</i>我的收藏</a></li>
         <li><a href="/home/my-book"><i class="iconfont">&#xe60b;</i>我的约见</a></li>
-        <li><a href="/home/my_activity_submit"><i class="iconfont">&#xe601;</i>我的活动</a></li>
     </ul>
     <!--分类一-->
     
@@ -77,23 +78,25 @@
 </script>
 <script type="text/html" id="userTpl">
     <div class='inner h-home-top'>
-        <a href='/home/my-message-fans' class='iconfont share'>&#xe620;
+        <a href='/home/my-message-fans' class='iconfont share' style="display: block;width: 20px;height:30px;">&#xe620;
             {#hasMsg#}
         </a>
         <!--<h1>个人中心</h1>-->
-        <a href="/home/my-install" class='iconfont share'>{#setUp#}</a>
+        <a href="/home/my-install" class='iconfont share' style="display: block;width: 20px;height:30px;">{#setUp#}</a>
     </div>
-    <a href="/user/home-page/{#user_id#}">
-        <div class="t-home-top">
+    
+    <div class="t-home-top">
+        <a href="/user/home-page/{#user_id#}">
             <span>
                 <img src="{#avatar#}"/>
             </span>
-        </div>
-        <h3>{#truename#}
-            {#v#}
-        </h3>
-        <div class="info-desc"><span><i></i>{#company#}</span><span><i></i>{#position#}</span></div>
-    </a>
+        </a>
+    </div>
+    <h3>{#truename#}
+        {#v#}
+    </h3>
+    <div class="info-desc"><span><i></i>{#company#}</span><span><i></i>{#position#}</span></div>
+    
 </script>
 <?= $this->element('footer') ?>
 <?php $this->start('script') ?>
@@ -113,13 +116,13 @@
                 if(res.status){
                     var html = $('#savantTpl').text();
                     var user = $('#userTpl').text();
-                    if(res.data.user.level == 1){
-                        savant = '<li><a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li>';
-                        user = user.replace('{#v#}','');
-                    } else if(res.data.user.level == 2) {
+                    if(res.data.user.level == 2) {
                         savant = '<li><a href="/home/my-purse"><i class="iconfont">&#xe61b;</i>钱包</a></li>';
                         html += '<div class="h-home-menu"><ul class="clearfix"><li><a href="/meet/view/' + res.data.user.id + '"><i class="iconfont">&#xe61d;</i>专家主页</a></li><li><a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li></ul></div>';
                         user = user.replace('{#v#}','<i class="v"></i>');
+                    } else {
+                        savant = '<li><a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li>';
+                        user = user.replace('{#v#}','');
                     }
                     html = html.replace('{#savant#}', savant);
                     $('#res').html(html+$('#icoTpl').text());

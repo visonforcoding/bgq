@@ -21,7 +21,7 @@
                 </div>
             </li>
             <li class="nobottom no-right-ico changeflex">
-                <b>资源优势</b>
+                <b>擅长话题</b>
                 <div >
                     <textarea name="zyys" <?php if($user->savant_status==2 || $user->savant_status==3): ?>disabled style="background: gainsboro;"<?php endif; ?> placeholder="" >
                         <?= isset($user->savant)?$user->savant->zyys:''?>
@@ -42,6 +42,7 @@
     <?php if($user->savant_status==0): ?>
         <a id="submit" class="nextstep">重新申请认证</a>
     <?php endif; ?>
+    <div style="color:red; text-align: center">我们的秘书会在两个工作日内联系您</div>
 </div>
 <?php $this->start('script') ?>
 <script>
