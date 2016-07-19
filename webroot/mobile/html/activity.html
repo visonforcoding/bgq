@@ -57,7 +57,12 @@
 			</div>
 
             <script>
-                var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
+                var loop = $.util.loopImg(
+                	$('#imgList'),
+                	$('#imgList li'),
+                	$('#imgTab span'),
+                	$('.a-banner')
+                	);
             </script>
 
             <div id="items">
@@ -65,9 +70,14 @@
 			<section class='news-list-items'>
 				<div class="active-items">
 					<a href="activity-details.html" class="a-head">
-						<div>
-							<img src="../images/a1.png"/><span class="registered">已报名</span>
+						<div class="conbox">
+							<img src="../images/a1.png"/>
+							<div class="status">
+								<span class="registered">已报名</span>
+								<span class="registered colorbg">已过期</span>
+							</div>
 						</div>
+						
 						<h3>2006年中国国际体育融资总裁年会</h3>
 					</a>
 					<div class="a-bottom">
@@ -86,7 +96,10 @@
 			<section class='news-list-items'>
 				<div class="active-items">
 					<a href="activity-details.html" class="a-head">
-						<div><img src="../images/a1.png"/><span class="registered">已报名</span></div>
+						<div class="conbox"><img src="../images/a1.png"/><div class="status">
+								<span class="registered">已报名</span>
+								<span class="registered colorbg">已过期</span>
+							</div></div>
 						<h3 class="texthide">2006年中国国际体育融资总裁年会2006年中国国际体育融资总裁年会2006年中国国际体育融资总裁年会2006年中国国际体育融资总裁年会</h3>
 					</a>
 					<div class="a-bottom">
@@ -105,7 +118,10 @@
 			<section class='news-list-items'>
 				<div class="active-items">
 					<a href="activity-details.html" class="a-head">
-						<div><img src="../images/a1.png"/><span class="registered">已报名</span></div>
+						<div class="conbox"><img src="../images/a1.png"/><div class="status">
+								<span class="registered">已报名</span>
+								<span class="registered colorbg">已过期</span>
+							</div></div>
 						<h3>2006年中国国际体育融资总裁年会</h3>
 					</a>
 					<div class="a-bottom">
@@ -174,7 +190,7 @@
             });
         </script>
         <div class="submitbtn">
-            <a href="release-activity.html"><span class="s-activ">发布<br />活动</span></a>
+            <a href="release-activity.html"><span class="s-activ">发布<br />需求</span></a>
         </div>
 	<footer class="footer">
 		<ul class="navfooter clearfix">
