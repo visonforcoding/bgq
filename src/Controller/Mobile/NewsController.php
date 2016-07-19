@@ -47,11 +47,15 @@ class NewsController extends AppController {
         $data = [];
        $this->handCheckLogin();
         if ($this->request->is('post')) {
+            $com = $this->request->data();
+            $com['content'] = trim($com['content']);
+            if ($com['content'] == '') {
+                return $this->Util->ajaxReturn(false, '内容不能为空');
+            } elseif(mb_strlen($com['content']) > 300){
+                return $this->Util->ajaxReturn(false, '请控制评论内容300字以下');
+            }
             $reply_id = $this->request->data('reply_id');
             $CommentTable = \Cake\ORM\TableRegistry::get('newscom');
-            if($reply_id==$this->user->id){
-                $this->Util->ajaxReturn(false,'不能对自己进行回复');
-            }
             if(is_numeric($reply_id)&&$reply_id>0){
                 //该条评论是 对评论的回复
                 $data['pid'] = $reply_id;

@@ -529,6 +529,8 @@ class ActivityController extends AppController {
             $data['body'] = trim($data['body']);
             if ($data['body'] == '') {
                 return $this->Util->ajaxReturn(false, '内容不能为空');
+            } elseif(mb_strlen($data['body']) > 300){
+                return $this->Util->ajaxReturn(false, '请控制评论内容300字以下');
             }
             $data['user_id'] = $this->user->id;
             $data['activity_id'] = $id;
@@ -549,8 +551,8 @@ class ActivityController extends AppController {
                 if ($data['pid']) {
                     //对评论的回复
                     $this->loadComponent('Business');
-                    $jump_url = '/activity/view/'.$id.'#allcoment#reply_'.$doComment->id;
-                    $this->Business->usermsg($comment->user_id, '评论回复', '有人回复了你的评论!', 3, $doComment->id, $jump_url);
+                    $jump_url = '/activity/details/'.$id.'#allcoment#reply_'.$doComment->id;
+                    $this->Business->usermsg($comment->user_id, '评论回复', '有人回复了你的评论!', 9, $doComment->id, $jump_url);
                 }
                 $activity = $this->Activity->get($id);
                 $activity->comment_nums += 1;
