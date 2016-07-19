@@ -14,6 +14,10 @@ class ChartComponent extends Component {
     
     protected $colors = ['#69D2E7','#A7DBDB','#E0E4CC','#F38630','#FA6900','#E94C6F','#542733','#5A6A62','#C6D5CD'
         ,'#FDF200','#DB3340','#E8B71A','#F7EAC8','#1FDA9A','#28ABE3','#588C73','#DFE0DB','#FF66CC','#000000','#F7F960'];
+    
+    
+    protected $days = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'
+            , '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
     /**
      * Default configuration.
      *
@@ -34,6 +38,25 @@ class ChartComponent extends Component {
         $datasets = ['data'=>$data,'backgroundColor'=>$colors];
         $output['data']['datasets'] = [$datasets];
         $output['data']['labels'] = $labels;
+        return json_encode($output);
+    }
+    
+    
+    public function setLineChartByDayWithMonth(array $data){
+        $intdata = [];
+        for ($i = 0; $i < 31; $i++) {
+            $intdata[$i] = 0;
+        }
+        foreach ($intdata as $k=>$v){
+            foreach($data as $key=>$value){
+                if($k+1 == $value['day']){
+                    $intdata[$k]  = intval($value['nums']);
+                }
+            }
+        }
+        $datasets = ['data'=>$intdata,'label'=>'test'];
+        $output['data']['labels'] = $this->days;
+        $output['data']['datasets'] = [$datasets];
         return json_encode($output);
     }
 
