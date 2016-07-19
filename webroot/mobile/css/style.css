@@ -1,14 +1,14 @@
 /*登录主体 --start*/
 .login-area{padding:0.85rem 0.37rem 1.6rem; overflow:hidden;width:100%;position:relative;}
 .login-area .loginbox{border-radius:5px; background: #fff;box-sizing: border-box;line-height: 1.4rem;}
-.loginbox span{display:block;margin-top:0.53rem;}
+.loginbox span{display:block;margin-top:0.5rem;}
 .loginbox input{border:none;outline:none;font-size:0.3rem;color:#222c38;height:0.8rem;}
 .loginbox .label{float:left;line-height:1.4rem;margin-left:-0.56rem;}
 .loginbox .username,.loginbox .password{border-bottom:1px #c8c7cc solid;padding-left:1.2rem;
 /*display:-webkit-flex;display: flex;-webkit-align-items: center;align-items: center;*/}
 .loginbox .password{border-bottom:none;}
 .loginbox .username input{width:5.4rem;padding:0;}
-.loginbox .username span{background:url(img/ren.png) no-repeat;width:0.25rem;height:0.29rem;background-size:contain;margin-top:0.56rem;}
+.loginbox .username span{background:url(img/ren.png) no-repeat;width:0.25rem;height:0.29rem;background-size:contain;margin-top:0.53rem;}
 .loginbox .password span{background: url(img/pass.png) no-repeat;width:0.27rem;height:0.34rem; background-size:contain;}
 .loginbox .password input{width:3.4rem;padding:0;}
 .loginbox .password button{color:#e01a48;border: none;background-color: #fff;font-size:0.26rem;width:2rem;height:1.4rem;padding:0;}
@@ -79,7 +79,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 -webkit-justify-content: center;-moz-justify-content:center;-ms-justify-content:center;}
 .a-banner .yd span{width:0.1rem;height:0.1rem;border-radius: 50%;background: #929292;display: inline-block;margin:0 0.05rem;}
 .a-banner .yd span.cur{background: #fff;}
-.news-list-items{border-top:1px #e5e5e5 solid;padding:0.3rem;background: #fff;overflow:hidden;position:relative;}
+.news-list-items{border-top:1px #e5e5e5 solid;padding:0.16rem 0.3rem;background: #fff;overflow:hidden;position:relative;}
 /*.tbof:before{content:'';position:absolute;border-top:1px #e5e5e5 solid;left:0;right:0;top:0;height:1px;
 -webkit-transform:scaleY(.5);transform:scaleY(.5);-webkit-transform-origin:0 0;transform-origin:0 0;}*/
 .news-list-items:last-of-type{border-bottom:1px #e5e5e5 solid;}
@@ -99,7 +99,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 /*超出隐藏*/
 .newsbox .sec-news-l h3,.newsbox .sec-news-l p,.newscon-box h3{word-break: break-all;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}
 .newsbox .sec-news-l h3{line-height: 0.4rem;margin:0.2rem 0;font-size:0.32rem;color:#222c38;font-weight: 400;-webkit-line-clamp: 2;}
-.newsbox .sec-news-l p{line-height:0.38rem;font-size:0.3rem;-webkit-line-clamp: 2;}
+.newsbox .sec-news-l p{line-height:0.38rem;font-size:0.28rem;-webkit-line-clamp: 2;}
 .newsbox .sec-news-r{float:right;width:1.6rem;height:1.6rem;margin-top:0.24rem;overflow:hidden;}
 .newsbox .sec-news-r img{width:100%;display: block;min-height:1.6rem;}
 .news-bottom{margin-top:0.26rem;}
