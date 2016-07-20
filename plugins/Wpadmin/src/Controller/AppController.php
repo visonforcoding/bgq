@@ -30,7 +30,8 @@ class AppController extends Controller {
         $this->loadComponent('Wpadmin.Util');
         $this->firewall = array(
             ['admin', 'login'],
-            ['util','doupload']
+            ['util','doupload'],
+            ['report','logger']
         );
         $this->noAcl = array(
             ['admin', 'login'],
