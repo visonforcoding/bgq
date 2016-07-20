@@ -27,7 +27,7 @@
                 <span class="readnums"><i class="iconfont like">&#xe60b;</i><?= $this->Number->format($news->read_nums) ?></span>
                 <span  data-id="<?= $news->id ?>" <?php if (isset($news->praises) && !empty($news->praises)): ?> data-disable="1" class="liked"<?php endif; ?>
                        id="news-praise" >
-                    <i class="iconfont like <?php if (isset($news->praises) && !empty($news->praises)): ?>changecolor scale<?php endif; ?>" >&#xe616;</i><em><?= $this->Number->format($news->praise_nums) ?></em>
+                    <i class="iconfont like <?php if (isset($news->praises) && !empty($news->praises)): ?>changecolor scale<?php endif; ?>" >&#xe61b;</i><em><?= $this->Number->format($news->praise_nums) ?></em>
                 </span>
             </div>
         </section>
