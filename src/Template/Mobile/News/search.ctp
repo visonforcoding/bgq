@@ -1,7 +1,7 @@
 <?= $this->element('header'); ?>
 <div class="fixedwraper">
     <div class='h-news-search'>
-        <a href='javascript:void(0);' class='iconfont news-serch'>&#xe613;</a>
+        <a href='javascript:void(0);' class='iconfont news-serch'>&#xe618;</a>
         <form id="searchForm" >
         <h1><input type="text" placeholder="请输入关键词" name="keyword"></h1>
         <input type="hidden" name="industry_id" value="" />
