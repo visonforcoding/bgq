@@ -80,6 +80,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
         "sys.QRcode",  //二维码扫描
         "sys.back",
         "sys.logout",
+        "sys.device", //获取唯一设备id
         "show.shareIco", //隐藏分享图标
         "show.search", //显示搜索
         "share.banner",
@@ -128,6 +129,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
 
 
                 case "sys.version":
+                case "sys.device":
                     registerAPI(null, api, function () {
                         var invokeResult = JSApiInvoke(api, '', '', 'string');
                         //alert(invokeResult);
