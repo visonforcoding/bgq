@@ -33,16 +33,16 @@
             <div class="con-bottom clearfix">
                 <!--阅读数-->
                 <span class="readnums">
-                    <i class="iconfont ">&#xe601;</i>
+                    <i class="iconfont ">&#xe60b;</i>
                     <?= $activity->read_nums; ?>
                 </span>
                 <!--喜欢按钮-->
                 <span >
-                    <i class="iconfont like <?php if ($isLike): ?> changecolor scale<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like">&#xe616;</i><i class='like_num'><?= $activity->praise_nums ? $activity->praise_nums : '0' ?></i>
+                    <i class="iconfont like <?php if ($isLike): ?> changecolor scale<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like">&#xe61b;</i><i class='like_num'><?= $activity->praise_nums ? $activity->praise_nums : '0' ?></i>
                 </span>
                 <!--收藏按钮-->
                 <span >
-                    <i class="iconfont <?php if ($isCollect): ?> changecolor scale<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="collect">&#xe610;</i>
+                    <i class="iconfont <?php if ($isCollect): ?> changecolor scale<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="collect">&#xe615;</i>
                 </span>
             </div>
         </section>
@@ -67,7 +67,7 @@
         <section class="newscomment-box">
             <h3 class="comment-title">
                 评论
-                <span id="article_comment" user_id="<?= $user; ?>"><i class="iconfont" >&#xe618;</i>我要点评</span>
+                <span id="article_comment" user_id="<?= $user; ?>"><i class="iconfont" >&#xe62e;</i>我要点评</span>
             </h3>
             <div id="comment"><h4 id="noComment">还没任何评论</h4></div>
             <span class='com-all' style="display:none;"><a href="#allcoment" id="showAllComment">显示全部</a></span>
@@ -149,7 +149,7 @@
         <section class="newscomment-box">
             <h3 class="comment-title">
                 评论
-                <span id="article_comment" user_id="<?= $user; ?>"><i class="iconfont">&#xe618;</i>我要点评</span>
+                <span id="article_comment" user_id="<?= $user; ?>"><i class="iconfont">&#xe62e;</i>我要点评</span>
             </h3>
             <div id="allComments"></div>
             <div id="buttonLoading" class="loadingbox"></div>
@@ -231,7 +231,7 @@
             </span>
             <span id="likecom_{#id#}" comid="{#id#}" disabled="{#disable#}">
                 <b class="addnum">+1</b>
-                <i class="iconfont addnum_{#id#}" style="{#style#}">&#xe615;</i>
+                <i class="iconfont addnum_{#id#}" style="{#style#}">&#xe61a;</i>
                 <b class="praise_num">{#praise_nums#}</b>
             </span>
         </div>
