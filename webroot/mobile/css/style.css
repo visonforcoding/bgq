@@ -29,6 +29,18 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .orgmark a{display: inline-block;padding:0.15rem 0.28rem;text-align:center;font-size:0.26rem;margin:0.26rem 0;color:#7a7e83; border:1px #c8c7cc solid; border-radius:3px;margin-right:0.1rem;}
 .orgmark .a-mark{padding:0.1rem 0.2rem;}
 .a-mark input{border:none;color:#7a7e83;}
+.bgff .orgname{color:#222c38;font-size:.29rem;}
+.mark-items h3.r-t-head{font-size:.28rem;}
+/*修改*/
+.mark-items{background: #fff;border-top:1px #e5e5e5 solid;overflow:hidden;padding-bottom:.2rem;}
+.r-t-head{text-indent: .3rem;border-bottom:1px #e5e5e5 solid;height:.6rem;line-height: .58rem;}
+.mark-items .b-mark{margin:0.25rem 0;padding:0 .3rem;}
+.b-mark li{float:left;width:32.3%;overflow:hidden;margin-bottom:0.1rem;margin-right:.1rem;text-align: center;}
+.b-mark li:nth-of-type(3n){margin-right:0;}
+.b-mark li a{display: block;border:1px #e5e5e5 solid;height:.58rem;line-height: .56rem;}
+.b-mark a.active{background: #e01b49;color:#fff;border:1px #e01b49 solid;}
+.b-mark .perli{width:100%;}
+.perli input{width:100%;border:none;border:1px #e5e5e5 solid;background: none;text-align: center;line-height: .58rem;font-size:.28rem;}
 /*.orgmark a:nth-of-type(4n){margin-right:0;}*/
 .nextstep,.s-btn{ display:block;text-align:center;height:0.78rem;width:80%;font-size:0.3rem;line-height:0.78rem;background: #e01a48;color:#fff;margin:0 auto;margin-top:0.4rem;margin-bottom:0.4rem;border-radius:0.2rem;}
 .f-bottom{position: fixed;width: 100%;height: 1rem;bottom: 0;left: 0;border-radius: 0;color: #fff;
@@ -39,7 +51,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .items .active{border:1px #de204b solid; color:#de204b;position:relative;}
 .items .active:after{position:absolute;content:'';width:0.28rem;height:0.28rem;top:0;right:-0.14rem;background: url(img/choose.png) no-repeat; background-size:contain;}
 .myselfmark input{ width: 1.2rem; height: 0.4rem;border: none;line-height: 0.4rem; text-align: center;}
-
+.markslider{overflow: hidden;}
 /*注册--上传名片--start*/
 .uploadbox{/*display:flex;flex-direction:column;justify-content:center;align-items: center;*//*border-bottom:1px #c8c7cc solid;*/padding:0.62rem 0.8rem;}
 .uploadbox .imgcard{display:block;background:#9ba4ad;width:5.57rem;height:3.11rem;overflow:hidden;}
@@ -571,6 +583,7 @@ background-size: contain;}
 .h-home-menulist li:last-of-type{border-bottom:none;}
 /*个人主页*/
 .h-info-box{background: #fff;border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid; padding:0.1rem 0.3rem; margin-bottom:0.2rem;}
+.h-info-box a{color:#222c38;}
 .s-title-pass{padding:0;}
 .h-info-box li{line-height:0.4rem;border-bottom:1px #e5e5e5 solid;font-size:0.3rem;padding:0.2rem 0;}
 .h-info-box li:last-of-type{border-bottom:none;}
@@ -604,7 +617,7 @@ background-size: contain;}
 .upload-user-img{width:0.46rem;height:0.38rem;/*background: url(../images/user-img.png) no-repeat;background-size:contain;*/}
 .upload-user-img span{position: relative;}
 .upload-user-img span input{border:1px #ccc solid;position: absolute; width:0.46rem;height:0.38rem;opacity: 0;}
-.e-info-box input{width:4.5rem; text-align: right; border:none;outline:none;font-size:0.3rem;}
+.e-info-box input{width:4.5rem; text-align: right; border:none;outline:none;font-size:0.28rem;}
 .e-info-box input[readonly],.cogray{color:gray;}
 .e-info-box .no-right-ico{background: none;padding-right:0.3rem;}
 .h-info-box a.no-ico{background:none;color:#E01A48;text-align: center;}
@@ -864,6 +877,24 @@ width:0.5rem;height:0.16rem;display: inline-block;transition: all .3s;float:righ
 	from{height:0;}
 	to{height:3.2rem;}
 }
+@keyframes smark{
+	from{height:auto;overflow:hidden;}
+	to{height:0;overflow:hidden;}
+}
+@-webkit-keyframes smark{
+	from{height:auto;overflow:hidden;}
+	to{height:0;overflow:hidden;}
+}
+@keyframes nosmark{
+	from{height:0;overflow:hidden;}
+	to{height:auto;overflow:hidden;}
+}
+@-webkit-keyframes nosmark{
+	from{height:0;overflow:hidden;}
+	to{height:auto;overflow:hidden;}
+}
+.smark{-webkit-animation: smark .1s ;animation: smark .1s ;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
+.nosmark{-webkit-animation: nosmark .1s ;animation: nosmark .1s ;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
 .disp{-webkit-animation: disp .3s ;animation: disp .3s ;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
 .block{-webkit-animation: block .3s ;animation: block .3s ;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
 .nblock{-webkit-animation: nblock .3s ;animation: nblock .3s ;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
