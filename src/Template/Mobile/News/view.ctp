@@ -24,7 +24,7 @@
             <img src="<?= $news->cover ?>"/>
             <p><?= $news->body ?></p>
             <div class="con-bottom clearfix pd20">
-                <span class="readnums">阅读<i><?= $this->Number->format($news->read_nums) ?></i></span>
+                <span class="readnums"><i class="iconfont like">&#xe60b;</i><?= $this->Number->format($news->read_nums) ?></span>
                 <span  data-id="<?= $news->id ?>" <?php if (isset($news->praises) && !empty($news->praises)): ?> data-disable="1" class="liked"<?php endif; ?>
                        id="news-praise" >
                     <i class="iconfont like <?php if (isset($news->praises) && !empty($news->praises)): ?>changecolor scale<?php endif; ?>" >&#xe616;</i><em><?= $this->Number->format($news->praise_nums) ?></em>
@@ -62,7 +62,7 @@
         <h3 class="comment-title">
             评论
 
-            <span><i class="iconfont">&#xe618;</i>我要点评</span>
+            <span><i class="iconfont">&#xe62e;</i>我要点评</span>
         </h3>
         <div id="allComments"></div>
         <div id="buttonLoading" class="loadingbox"></div>
@@ -70,10 +70,10 @@
 </div>
 <!--底部四个图-->
 <div class="iconlist icon-width">
-    <span class="iconfont" id="commit">&#xe618;</span>
-    <span class="iconfont <?php if (!$isCollect): ?>active<?php endif; ?>" id="collect">&#xe610;</span>
-    <span class="iconfont" id="share">&#xe614;</span>
-    <span class="iconfont" id="goTop"></span>
+    <span class="iconfont" id="commit">&#xe61d;</span>
+    <span class="iconfont <?php if (!$isCollect): ?>active<?php endif; ?>" id="collect">&#xe615;</span>
+    <span class="iconfont" id="share">&#xe619;</span>
+    <span class="iconfont" id="goTop">&#xe606;</span>
 </div>
 <!--底部四个图**end-->
 <div class="reg-shadow" style="display: none;" id="comment_shadow"></div>
@@ -106,7 +106,7 @@
             </span>
             <span data-disable="{#disable#}" data-id="{#id#}" id="praise_{#id#}">
                 <b class="addnum">+1</b>
-                <i style="{#style#}" class="iconfont praise_{#id#}">&#xe615;</i>
+                <i style="{#style#}" class="iconfont praise_{#id#}">&#xe61a;</i>
                 <em>{#praise_nums#}</em>
             </span>
         </div>
