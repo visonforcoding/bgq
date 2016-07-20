@@ -208,12 +208,14 @@ $.util = {
         //setTimeout(function(){window.holdLoad = false;}, 1000);  //只允许1秒加载一次下一页   防止上一个滑动事件还没有结束的状态中
 
         var obj = this, st = document.body.scrollTop;
-        //st > this.pageHight*2 ? $('.goTopBtn').show() : $('.goTopBtn').hide();
 
-
+        //console.log([$(document).height(), $(window).height(),$(document).height()-$(window).height()-200,st].join('-'));
         if (loadFunc && st >= (($(document).height() - $(window).height()) - 220)) {
             loadFunc();
             $.util.initLoadImg(listId);
+        }
+        else{
+            window.holdLoad = false;
         }
         $.util.loadImg();
     },
