@@ -113,7 +113,7 @@
 <?=$this->element('footer');?>
 <?php $this->start('script'); ?>
 <script src="/mobile/js/loopScroll.js"></script>
-<link rel="stylesheet" href="/mobile/font/font/iconfont.css" />
+
 <script>
     if($.util.isAPP){
         $('#search').css({'top':'0.6rem'});
