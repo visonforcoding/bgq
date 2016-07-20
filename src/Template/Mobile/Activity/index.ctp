@@ -4,7 +4,7 @@
         <div class="a-search-box" id="search">
             <a href="/activity/search"> 
                 <div class="a-search">
-                    <i class="iconfont">&#xe613;</i>
+                    <i class="iconfont">&#xe618;</i>
                     <div class="s-con">
                         <input type="text" placeholder="请输入关键词" readonly class="search" />
                     </div>
