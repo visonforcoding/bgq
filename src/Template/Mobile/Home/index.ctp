@@ -3,14 +3,13 @@
         <h1>个人中心</h1>
     </div>
 </header>
-<link rel="stylesheet" href="/mobile/font/font/iconfont.css" />
+
 <div class="wraper newswraper">
     <div class="h-home-bottom" id="user" >
         <div class='inner h-home-top'>
-                    <a href='/home/my-message-fans' class='iconfont share' >&#xe620;
-                    </a>
+                    <a href='/home/my-message-fans' class='iconfont share' >&#xe625;</a>
                       <!--<h1>个人中心</h1>-->
-                    <a href="/home/my-install" class='iconfont share'><?php if(!$isWx): ?>&#xe619;<?php endif;?></a>
+                    <a href="/home/my-install" class='iconfont share'><?php if(!$isWx): ?>&#xe61e;<?php endif;?></a>
                 </div>
         <a href="javascript:void(0)">
             <div class="t-home-top">
@@ -21,7 +20,7 @@
             <h3 id="username">张三
                     <i class="v"></i>
             </h3>
-            <div class="info-desc"><span><i></i>并购菁英有限公司</span><span><i></i>技术主管</span></div>
+            <div class="info-desc"><span><i class="iconfont">&#xe62a;</i>并购菁英有限公司</span><span><i class="iconfont">&#xe612;</i>技术主管</span></div>
         </a>
     </div>
     <div class="h-home-menu topnav">
@@ -33,10 +32,10 @@
         </ul>
     </div>
     <ul class="h-home-menu navlist clearfix">
-        <li><a href="/home/my-following"><i class="iconfont">&#xe60f;</i>我的关注</a></li>
-        <li><a href="/home/my_activity_submit"><i class="iconfont">&#xe601;</i>我的活动</a></li>
-        <li><a href="/home/my-collect-activity"><i class="iconfont">&#xe610;</i>我的收藏</a></li>
-        <li><a href="/home/my-book"><i class="iconfont">&#xe60b;</i>我的约见</a></li>
+        <li><a href="/home/my-following"><i class="iconfont">&#xe614;</i>我的关注</a></li>
+        <li><a href="/home/my_activity_submit"><i class="iconfont">&#xe617;</i>我的活动</a></li>
+        <li><a href="/home/my-collect-activity"><i class="iconfont">&#xe615;</i>我的收藏</a></li>
+        <li><a href="/home/my-book"><i class="iconfont">&#xe616;</i>我的约见</a></li>
     </ul>
     <!--分类一-->
     
@@ -62,8 +61,8 @@
 <script type="text/html" id="icoTpl">
     <div class="h-home-menu">
         <ul class="clearfix">
-            <li><a href="/home/my-secret"><i class="iconfont">&#xe61f;</i>隐私策略</a></li>
-            <li><a id="shareTo" href="javascript:shareFriends();"><i class="iconfont">&#xe621;</i>邀请好友</a></li>
+            <li><a href="/home/my-secret"><i class="iconfont">&#xe624;</i>隐私策略</a></li>
+            <li><a id="shareTo" href="javascript:shareFriends();"><i class="iconfont">&#xe626;</i>邀请好友</a></li>
         </ul>
     </div>
 </script>
@@ -71,14 +70,14 @@
     <div class="h-home-menu">
         <ul class="clearfix">
             {#savant#}
-            <li><a href="javascript:QRCode();"><i class="sao-bg"></i>扫一扫</a></li>
+            <li><a href="javascript:QRCode();"><i class="iconfont">&#xe60a;</i>扫一扫</a></li>
         </ul>
     </div>
     
 </script>
 <script type="text/html" id="userTpl">
     <div class='inner h-home-top'>
-        <a href='/home/my-message-fans' class='iconfont share' style="display: block;width: 20px;height:30px;">&#xe620;
+        <a href='/home/my-message-fans' class='iconfont share' style="display: block;width: 20px;height:30px;">&#xe625;
             {#hasMsg#}
         </a>
         <!--<h1>个人中心</h1>-->
@@ -111,8 +110,8 @@
                 var html = $('#savantTpl').text();
                 var user = $('#userTpl').text();
                 if(res.data.user.level == 2) {
-                    savant = '<li><a href="/home/my-purse"><i class="iconfont">&#xe61b;</i>钱包</a></li>';
-                    html += '<div class="h-home-menu"><ul class="clearfix"><li><a href="/meet/view/' + res.data.user.id + '"><i class="iconfont">&#xe61d;</i>专家主页</a></li><li><a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li></ul></div>';
+                    savant = '<li><a href="/home/my-purse"><i class="iconfont">&#xe620;</i>钱包</a></li>';
+                    html += '<div class="h-home-menu"><ul class="clearfix"><li><a href="/meet/view/' + res.data.user.id + '"><i class="iconfont">&#xe621;</i>专家主页</a></li><li><a href="/home/savant-auth"><i class="iconfont">&#xe623;</i>专家认证</a></li></ul></div>';
                     user = user.replace('{#v#}','<i class="v"></i>');
                 } else {
                     savant = '<li><a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li>';
