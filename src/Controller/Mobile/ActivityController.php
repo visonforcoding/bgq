@@ -416,6 +416,7 @@ class ActivityController extends AppController {
                 ->Activity
                 ->find()
                 ->where(['title LIKE' => '%' . $data['keyword'] . '%'])
+                ->orWhere(['body LIKE' => "%" . $data['keyword'] . "%"])
                 ->andWhere(['is_check'=>'1']);
         if ($series_id) {
             $res = $res->andWhere(['series_id'=>$series_id]);
@@ -684,7 +685,7 @@ class ActivityController extends AppController {
                 ->contain(['Users', 'Replyusers', 'Likes'=>function($q)use($user_id){
                         return $q->where(['type'=>0,'user_id'=>$user_id]);
                     }])
-                ->where(['activity_id' => $id])
+                ->where(['activity_id' => $id, 'is_delete'=>0])
                 ->order(['Activitycom.create_time' => 'DESC'])
                 ->limit(10)
                 ->toArray();

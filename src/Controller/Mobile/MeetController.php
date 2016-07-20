@@ -123,22 +123,29 @@ class MeetController extends AppController {
                 $self = true;
             }
         }
-        $isCollect = '';
-        // 是否已收藏
-        if ($this->user) {
-            $isCollect = $this->User->Collect->find()
-                    ->where(['user_id' => $this->user->id, 'relate_id' => $id])
-                    ->first();
-            if ($isCollect) {
-                $isCollect = !$isCollect['is_delete'];
-            } else {
-                $isCollect = 0;
-            }
+        $user_id = $this->user->id;
+//        $isCollect = '';
+//        // 是否已收藏
+//        if ($this->user) {
+//            $isCollect = $this->User->Collect->find()
+//                    ->where(['user_id' => $this->user->id, 'relate_id' => $id])
+//                    ->first();
+//            if ($isCollect) {
+//                $isCollect = !$isCollect['is_delete'];
+//            } else {
+//                $isCollect = 0;
+//            }
+//        }
+        $isReco = '';
+        if(!$self){
+            $isReco = $this->User->get($id, ['contain' => ['RecoUsers'=>function($q)use($user_id){
+                return $q->where(['user_id'=>$user_id]);
+            }]]);
         }
         $biggie = $this->User->get($id, ['contain' => ['Savant', 'Subjects','RecoUsers','RecoUsers.Users']]);
         $this->set([
             'biggie' => $biggie,
-            'isCollect'=>$isCollect,
+            'isReco'=>$isReco,
             'self'=>$self,
             'pageTitle'=>$biggie->truename.'的专家主页'
         ]);
@@ -251,7 +258,8 @@ class MeetController extends AppController {
         $subjects = $SubjectTable->find()->where(['user_id'=>$user_id])->orderDesc('create_time')->toArray();
         $this->set([
             'pageTitle'=>'我的话题',
-            'subjects'=>$subjects
+            'subjects'=>$subjects,
+            'user_id' => $user_id
         ]);
     }
 

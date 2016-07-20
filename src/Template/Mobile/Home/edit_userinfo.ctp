@@ -28,7 +28,7 @@
             <a href="javascript:void(0)">
                 <span>姓名：</span>
                 <div>
-                    <input type="truename" readonly value="<?=$user->truename?>" />
+                    <input type="truename" name="truename" value="<?=$user->truename?>" />
                 </div>
             </a>
         </li>

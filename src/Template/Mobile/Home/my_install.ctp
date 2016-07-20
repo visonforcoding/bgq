@@ -43,15 +43,16 @@
                 </div>
             </a>
         </li>
-        <li  class="nobottom lh4" id="logout">
+<!--        <li  class="nobottom lh4" id="logout">
             <a href="javascript:void(0)">
                 <span style="color:red;">注销登录</span>
                 <div>
                     <span></span>
                 </div>
             </a>
-        </li>
+        </li>-->
     </ul>
+   <a href="javascript:void(0);" class="nextstep redshadow" id="logout">退出登录</a>
 </div>
 <div class='bottom-logo'>
     <h3><a href="#this"><img src="/mobile/images/logo.png"/></a></h3>

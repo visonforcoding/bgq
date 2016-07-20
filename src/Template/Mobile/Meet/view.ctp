@@ -24,7 +24,7 @@
             <h3 class="mycustorm" ><?= $biggie->company ?></h3>
         </li>
         <li>
-            <a id="recom" href="javascript:void(0);" class="tocommend"><i class="iconfont f7">&#xe615;</i>推荐他</a>
+            <a id="recom" href="javascript:void(0);" class="tocommend"><i class="iconfont f7 <?php if($isReco): ?>changecolor<?php endif; ?>">&#xe615;</i>推荐他</a>
             <span  class="commendnum">
                 <p id="recom_avatar">
                     <!-- 只推荐7条 -->
@@ -88,7 +88,7 @@
 <!--底部四个图-->
 <div class="iconlist">
         <!--<span class="iconfont">&#xe618;</span>-->
-    <span class="iconfont <?php if (!$isCollect): ?>active<?php endif; ?>" id="collect">&#xe610;</span>
+    <!--<span class="iconfont <?php if (!$isCollect): ?>active<?php endif; ?>" id="collect">&#xe610;</span>-->
     <span class="iconfont" id="share">&#xe614;</span>
     <span class="iconfont" id='goTop'></span>
 </div>
@@ -165,6 +165,7 @@
                             if (res.status === true) {
                                 $('#recom_avatar').prepend('<img src="' + res.avatar + '"/>');
                                 $('#meet_nums').text((parseInt($('#meet_nums').text()) + 1));
+                                $('.f7').addClass('changecolor');
                             }
                         }
                     }

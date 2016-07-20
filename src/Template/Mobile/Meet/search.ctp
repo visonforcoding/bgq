@@ -12,7 +12,7 @@
 <div class="wraper">
     <div class='h-news-search'>
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe613;</a>
-        <form id="searchForm" onsubmit="return false;">
+        <form id="searchForm">
         <h1><input type="text" name="keyword" placeholder="请输入关键词"></h1>
         </form>
         <div class='h-regiser' id="doSearch">搜 索</div>
@@ -79,5 +79,35 @@
             });
         });
     }, 2000);
+    
+    $('#searchForm').on('submit', function(){
+        if(!$('input[name="keyword"]').val)
+        {
+            $.util.alert('请输入搜索内容');
+            return false;
+        }
+        $.ajax({
+            type: 'post',
+            url: '/meet/getSearchRes',
+            data: $('#searchForm').serialize(),
+            dataType: 'json',
+            success: function (msg) {
+                if (typeof msg === 'object') {
+                    console.log(msg.data);
+                    if (msg.status === true) {
+                        $.util.dataToTpl('biggie', 'biggie_tpl', msg.data , function (d) {
+                            d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                            d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
+                            return d;
+                        });
+                    } else {
+                        $('#biggie').html('');
+                        $.util.alert(msg.msg);
+                    }
+                }
+            }
+        });
+        return false;
+    });
 </script>
 <?php $this->end('script');

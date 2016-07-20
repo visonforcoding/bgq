@@ -20,6 +20,9 @@
         </div>
     </form>
     <a href="javascript:void(0);" class='nextstep' id="submit">提交</a>
+    <div class="line">
+        <span class="mistips">我们会在三个工作日内处理您的申请</span>
+    </div>
     <div class='reg-shadow' hidden></div>
     <div class="totips" style="display:none;">
         <h3>非常感谢你的推荐或赞助</h3>

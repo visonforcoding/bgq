@@ -40,3 +40,7 @@
 <div class="submitbtn c-width">
     <a href="/meet/subject"><img src="/mobile/images/add-s.png"/></a>
 </div>
+
+<script>
+    LEMON.sys.back('/meet/view/<?= $user_id ?>');
+</script>
