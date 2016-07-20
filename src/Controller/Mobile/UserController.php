@@ -607,4 +607,57 @@ class UserController extends AppController {
         }
         exit();
     }
+    
+    public function changePhone(){
+        if($this->request->is('post')){
+            $user_id = $this->user->id;
+            $user = $this->User->get($user_id);
+            $vcode = $this->request->session()->read('newPhoneVcode');
+            if ($vcode['code'] != $this->request->data('vcode')) {
+                return $this->Util->ajaxReturn(false, '验证码验证错误');
+            }
+            $oldPhone = $this->User->find()->where(['phone'=>$this->request->data('phone')])->first();
+            if($oldPhone){
+                return $this->Util->ajaxReturn(false, '该手机号已注册');
+            }
+            if (time() - $vcode['time'] < 60 * 10){
+                $user->phone = $this->request->data('phone');
+                $res = $this->User->save($user);
+                if($res){
+                    return $this->Util->ajaxReturn(true, '修改成功');
+                } else {
+                    return $this->Util->ajaxReturn(false, '修改失败');
+                }
+            } else {
+                return $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
+            }
+        }
+        $this->set('pageTitle', '修改手机号');
+    }
+    
+    /**
+     * 发送修改手机验证码
+     */
+    public function changePhoneVcode() {
+        $this->loadComponent('Sms');
+        $mobile = $this->request->data('phone');
+        $oldPhone = $this->User->find()->where(['phone'=>$this->request->data('phone')])->first();
+        if($oldPhone){
+            return $this->Util->ajaxReturn(false, '该手机号已注册');
+        }
+        $code = createRandomCode(4, 2); //创建随机验证码
+        $content = '您的动态验证码为' . $code;
+        $codeTable = \Cake\ORM\TableRegistry::get('smsmsg');
+        $vcode = $codeTable->find()->where("`phone` = '$mobile'")->orderDesc('create_time')->first();
+        if (empty($vcode) || (time() - strtotime($vcode['time'])) > 30) {
+            //30s 的间隔时间
+            $ckSms = $this->Sms->sendByQf106($mobile, $content, $code);
+            if ($ckSms) {
+                $this->request->session()->write('newPhoneVcode', ['code' => $code, 'time' => time()]);
+                return $this->Util->ajaxReturn(true, '发送成功');
+            }
+        } else {
+            return $this->Util->ajaxReturn(false, '30秒后再发送');
+        }
+    }
 }

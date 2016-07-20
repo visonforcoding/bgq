@@ -43,14 +43,14 @@
                 </div>
             </a>
         </li>
-<!--        <li  class="nobottom lh4" id="logout">
-            <a href="javascript:void(0)">
-                <span style="color:red;">注销登录</span>
+        <li  class="nobottom lh4">
+            <a href="/user/change-phone">
+                <span>更换手机</span>
                 <div>
                     <span></span>
                 </div>
             </a>
-        </li>-->
+        </li>
     </ul>
    <a href="javascript:void(0);" class="nextstep redshadow" id="logout">退出登录</a>
 </div>
