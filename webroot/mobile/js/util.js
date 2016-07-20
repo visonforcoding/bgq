@@ -4,6 +4,11 @@ $.util = {
         return document.getElementById(str) || document.createElement('span');
     },
 
+    getParam:function (e,t){  //获取url参数
+        var n=arguments[1]||window.location.search,r=new RegExp("(^|&)"+e+"=([^&]*)(&|$)","i"),i=n.substr(n.indexOf("?")+1).match(r);
+        return i!=null?i[2]:"";
+    },
+
     //
     alert:function(str, t){
         $('#alertText').html(str);
@@ -265,8 +270,23 @@ $.util = {
     isMobile:function(str) {
         var reg = /^0?1[3|4|5|7|8][0-9]\d{8}$/;
         return reg.test(str);
+    },
+
+    report: function(ptag) {
+        var act = 'v', param = ['/admin/report/logger?',
+            'screen=' + window.screen.height + '*' + window.screen.width,
+            'refer=' + (document.referrer||document.domain).replace(/http:\/\/|https:\/\//, '').replace(/\/.*|\?.*/, '')
+        ];
+        if (ptag) {
+            act = 'c';
+            param.push('ptag=' + ptag);
+        }
+        else if ($.util.getParam('ptag')) {
+            param.push('ptag=' + $.util.getParam('ptag'));
+        }
+        param.push('act='+act);
+        (new Image).src = param.join('&');
     }
-    
 };
 
 $.util.isWX = navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1;
