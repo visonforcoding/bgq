@@ -67,7 +67,7 @@
                 }
             })();
 
-            (function(){
+            (function(){  //cookie和jsapi直接互相设置token_uin
                 if(!$.util.isAPP)  return;
                 var apptk = LEMON.db.get('token_uin'), cookietk = $.util.getCookie('token_uin');
                 if(apptk && cookietk){
@@ -81,6 +81,26 @@
                 }
             })();
 
+            (function() {  //设置一个设备id到cookie  如果没有  就随机生成一个
+                if(LEMON.sys.device()){
+                    $.util.setCookie('device_id', LEMON.sys.device(), 99999999);
+                }
+                else if(!$.util.getCookie('device_id')){
+                    var device_id = (new Date()).getTime()+''+Math.floor(Math.random()*1000000);
+                    $.util.setCookie('device_id',  device_id, 99999999);
+                }
+            })();
+
+            (function() {  //处理页面上报
+                var rpClick = function(e){
+                    var em = e.srcElement || e.target, i=1, zem=$(em);
+                    while(!zem.attr('ptag') && i<=5){ zem = zem.parent(); i++;}
+                    if(!zem.attr('ptag')) return;
+                    $.util.report(zem.attr('ptag'));
+                };
+                $('body').tap(rpClick);  //页面ptag上报
+                $.util.report();  //页面访问上报
+            })();
         </script>
 
 
