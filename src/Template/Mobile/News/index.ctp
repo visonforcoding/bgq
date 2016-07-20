@@ -7,7 +7,7 @@
     <div class="a-search-box" id="search">
         <a href="/news/search">
             <div class="a-search">
-                <i class="iconfont">&#xe613;</i>
+                <i class="iconfont">&#xe618;</i>
                 <div class="s-con">
                     <input type="text" placeholder="请输入关键词" readonly class="search" />
                 </div>
@@ -41,10 +41,10 @@
         <div class="news-bottom clearfix">
             <div class="sec-b-l">
                 <div class="sec-like">
-                    <span class="iconfont">&#xe616;</span>{#praise_nums#}
+                    <span class="iconfont">&#xe61b;</span>{#praise_nums#}
                 </div>
                 <div class="sec-comment">
-                    <span class="iconfont">&#xe618;</span>{#comment_nums#}
+                    <span class="iconfont">&#xe61d;</span>{#comment_nums#}
                 </div>
             </div>
             <div class="sec-b-r">
