@@ -805,7 +805,7 @@ background-size:3.82rem 1.9rem;margin-top:1rem;}
 .btnlist a:nth-of-type(2) i{background: url(img/ho.png) no-repeat;width:0.38rem;height:0.37rem;background-size: contain;}
 .btnlist a:nth-of-type(3) i{background: url(img/ba.png) no-repeat;width:0.4rem;height:0.32rem;background-size: contain;}
 .dialogue{width:100%;padding-top:0.4rem;}
-.dialogue ul{overflow: hidden;padding:0 0.3rem;height:9.8rem;}
+.dialogue ul{padding:0 0.3rem;-webkit-overflow-scrolling: touch;overflow-y:scroll;height:9.8rem;}
 .dialogue li{max-width: 80%;margin-top:0.3rem;display:block;clear:both;}
 .dialogue li span,.dialogue li time{display: block;}
 .dialogue li time{font-size:12px;color:#e01a48;margin-top:0.1rem;}
