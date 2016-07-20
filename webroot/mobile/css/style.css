@@ -225,7 +225,7 @@ border-bottom:none;top:-1px;margin-top:-1px;margin-left:-1px;}
 .inner .subactivity{background: none; width:1.2rem; top:0.3rem; position:absolute;}
 .a-wraper .banner{background: url(../images/a-banner.png) no-repeat center center;background-size:cover;}
 .a-head{display:block;}
-.a-head div.conbox{width: 6.9rem;max-height:3.88rem;overflow: hidden;max-width:998px;position:relative;}
+.a-head div.conbox{width: 6.9rem;max-height:3.88rem;overflow: hidden;min-height:1.2rem;position:relative;}
 .status{position:absolute;right:-30px;top:0;}
 .status span{display:block;background: #e01a48;width:100px;height:34px;border-radius: 0.5rem;line-height:34px;color:#fff;padding-left:15px;font-size:16px;margin-top:20px;}
 .a-head img{width:100%;height:auto;display: block;}
