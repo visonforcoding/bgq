@@ -15,16 +15,14 @@
             <li class="no-right-ico changeflex">
                 <b>项目经验</b>
                 <div >
-                    <textarea name="xmjy" <?php if($user->savant_status==2 || $user->savant_status==3): ?>disabled style="background: gainsboro;"<?php endif; ?> placeholder="" >
-                        <?=isset($user->savant) ? $user->savant->xmjy : ''?>
+                    <textarea name="xmjy" <?php if($user->savant_status==2 || $user->savant_status==3): ?>disabled style="background: gainsboro;"<?php endif; ?> placeholder="" ><?=isset($user->savant) ? $user->savant->xmjy : ''?>
                     </textarea>
                 </div>
             </li>
             <li class="nobottom no-right-ico changeflex">
                 <b>擅长话题</b>
                 <div >
-                    <textarea name="zyys" <?php if($user->savant_status==2 || $user->savant_status==3): ?>disabled style="background: gainsboro;"<?php endif; ?> placeholder="" >
-                        <?= isset($user->savant)?$user->savant->zyys:''?>
+                    <textarea name="zyys" <?php if($user->savant_status==2 || $user->savant_status==3): ?>disabled style="background: gainsboro;"<?php endif; ?> placeholder="" ><?= isset($user->savant)?$user->savant->zyys:''?>
                     </textarea>
                 </div>
             </li>
