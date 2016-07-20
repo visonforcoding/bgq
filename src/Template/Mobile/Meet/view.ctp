@@ -13,8 +13,8 @@
             <a href="#this" class='iconfont share h-regiser'>&#xe614;</a>-->
         </div>
         <div class="m-tomore-bottom">
-            <span><i class="iconfont">&#xe624;</i><?= $biggie->city ?></span>
-            <span><i class="iconfont">&#xe60b;</i><?= $biggie->meet_nums ?>人约见过</span>
+            <span><i class="iconfont">&#xe629;</i><?= $biggie->city ?></span>
+            <span><i class="iconfont">&#xe616;</i><?= $biggie->meet_nums ?>人约见过</span>
         </div>
     </div>
     <ul class="m-info-box">
@@ -24,7 +24,7 @@
             <h3 class="mycustorm" ><?= $biggie->company ?></h3>
         </li>
         <li>
-            <a id="recom" href="javascript:void(0);" class="tocommend"><i class="iconfont f7 <?php if($isReco): ?>changecolor<?php endif; ?>">&#xe615;</i>推荐他</a>
+            <a id="recom" href="javascript:void(0);" class="tocommend"><i class="iconfont f7 <?php if($isReco): ?>changecolor<?php endif; ?>">&#xe61a;</i>推荐他</a>
             <span  class="commendnum">
                 <p id="recom_avatar">
                     <!-- 只推荐7条 -->
@@ -40,7 +40,7 @@
             </span>
 
         </li>
-        <li class="conr"><a class="alink mr" href="/user/home-page/<?= $biggie->id ?>" class="tohome"><i class="iconfont">&#xe60d;</i>个人主页</a></li>
+        <li class="conr"><a class="alink mr" href="/user/home-page/<?= $biggie->id ?>" class="tohome"><i class="iconfont">&&#xe612;</i>个人主页</a></li>
     </ul>
     <div class="m-swiper-items">
         <?php if ($self): ?>
@@ -89,8 +89,9 @@
 <div class="iconlist">
         <!--<span class="iconfont">&#xe618;</span>-->
     <!--<span class="iconfont <?php if (!$isCollect): ?>active<?php endif; ?>" id="collect">&#xe610;</span>-->
-    <span class="iconfont" id="share">&#xe614;</span>
-    <span class="iconfont" id='goTop'></span>
+    <span class="iconfont" id="share">&#xe612;</span>
+    <span class="iconfont" >&#xe615;</span>
+    <span class="iconfont" id='goTop'>&#xe606;</span>
 </div>
 <!--底部四个图**end-->
 <!-- 微信分享 -->
