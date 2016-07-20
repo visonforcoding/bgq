@@ -220,7 +220,8 @@ class NewsController extends AppController {
         $res = $this
                 ->News
                 ->find()
-                ->where(['title LIKE' => '%' . $data['keyword'] . '%']);
+                ->where(['title LIKE' => '%' . $data['keyword'] . '%'])
+                ->Orwhere(['body LIKE' => '%' . $data['keyword'] . '%']);
         if ($industry_id) {
             $res = $res->matching(
                 'Industries', function($q)use($industry_id) {

@@ -33,12 +33,16 @@
             <div class="con-bottom clearfix">
                 <!--阅读数-->
                 <span class="readnums">
-                    <i>阅读</i>
+                    <i class="iconfont ">&#xe601;</i>
                     <?= $activity->read_nums; ?>
                 </span>
                 <!--喜欢按钮-->
                 <span >
-                    <i class="iconfont like <?php if ($isLike): ?> changecolor scale<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like">&#xe616;</i><span><?= $activity->praise_nums ? $activity->praise_nums : '0' ?></span>
+                    <i class="iconfont like <?php if ($isLike): ?> changecolor scale<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like">&#xe616;</i><i class='like_num'><?= $activity->praise_nums ? $activity->praise_nums : '0' ?></i>
+                </span>
+                <!--收藏按钮-->
+                <span >
+                    <i class="iconfont <?php if ($isCollect): ?> changecolor scale<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="collect">&#xe610;</i>
                 </span>
             </div>
         </section>
@@ -63,15 +67,19 @@
         <section class="newscomment-box">
             <h3 class="comment-title">
                 评论
-                <!-- <i class="iconfont">&#xe618;</i> -->
+                <span id="article_comment" user_id="<?= $user; ?>"><i class="iconfont" >&#xe618;</i>我要点评</span>
             </h3>
             <div id="comment"><h4 id="noComment">还没任何评论</h4></div>
             <span class='com-all' style="display:none;"><a href="#allcoment" id="showAllComment">显示全部</a></span>
         </section>
-        <div class="a-btn">
-            <a href="/activity/recommend/<?= $activity->id; ?>">我要赞助</a>
-            <?php if($activity->apply_end_time): ?>
-                <a>已过期</a>
+<!--        <div class="a-btn">
+            <?php if (strtotime($activity->apply_end_time) < time()): ?>
+                <a style="background:gray;">已过期</a>
+            <?php else: ?>
+                <a href="/activity/recommend/<?= $activity->id; ?>">我要赞助</a>
+            <?php endif; ?>
+            <?php if(strtotime($activity->apply_end_time) < time()): ?>
+                <a style="background:gray;">已过期</a>
             <?php else: ?>
                 <?php if (empty($activity->activityapply)): ?>
                     <a id="enroll11" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
@@ -83,8 +91,42 @@
                     <?php endif; ?>
                 <?php endif; ?>
             <?php endif; ?>
+        </div>-->
+        <div style="height:.6rem"></div>
+        <div class="active-commond innercon">
+            <section class="my-collection-info  nobottom">
+                <div>
+                    <a href="activity-details.html" class="clearfix">
+                        <span class="my-pic-acive"><img src="/mobile/images/newspic1.png"></span>
+                        <div class="my-collection-items">
+                            <h3>2016年中国国际体育融资总裁年会</h3>
+                            <span>深圳市福田区东海国际公寓 <i>601人报名</i></span>
+                            <span>04月28日 - 04月30日 </span>
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <a href="activity-details.html" class="clearfix">
+                        <span class="my-pic-acive"><img src="/mobile/images/newspic1.png"></span>
+                        <div class="my-collection-items">
+                            <h3>2016年中国国际体育融资总裁年会</h3>
+                            <span>深圳市福田区东海国际公寓 <i>601人报名</i></span>
+                            <span>04月28日 - 04月30日 </span>
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <a href="activity-details.html" class="clearfix">
+                        <span class="my-pic-acive"><img src="/mobile/images/newspic1.png"></span>
+                        <div class="my-collection-items">
+                            <h3>2016年中国国际体育融资总裁年会</h3>
+                            <span>深圳市福田区东海国际公寓 <i>601人报名</i></span>
+                            <span>04月28日 - 04月30日 </span>
+                        </div>
+                    </a>
+                </div>
+            </section>
         </div>
-        
         <!--专家推荐-->
         <?php if ($activity->savants): ?>
             <div class="expert-commond innercon">
@@ -107,19 +149,33 @@
         <section class="newscomment-box">
             <h3 class="comment-title">
                 评论
-                <span><i class="iconfont">&#xe618;</i>我要点评</span>
+                <span id="article_comment" user_id="<?= $user; ?>"><i class="iconfont">&#xe618;</i>我要点评</span>
             </h3>
             <div id="allComments"></div>
             <div id="buttonLoading" class="loadingbox"></div>
         </section>
     </div>
 
-    <!--底部四个图-->
-    <div class="iconlist">
-        <span class="iconfont" id="article_comment" user_id="<?= $user; ?>">&#xe618;</span>
-        <span class="iconfont <?php if (!$isCollect): ?>active<?php endif; ?>" id="collect" artid="<?= $activity->id; ?>" >&#xe610;</span>
-        <span class="iconfont" id="share">&#xe614;</span>
-        <span class="iconfont" id='toTop'></span>
+    <!--吸底按钮-->
+    <div class="fixed-btn">
+        <?php if (strtotime($activity->apply_end_time) < time()): ?>
+            <a style="background:gray;" class="l-btn">已过期</a>
+        <?php else: ?>
+            <a href="/activity/recommend/<?= $activity->id; ?>" class="l-btn">我要赞助</a>
+        <?php endif; ?>
+        <?php if(strtotime($activity->apply_end_time) < time()): ?>
+            <a style="background:gray;" class="r-btn">已过期</a>
+        <?php else: ?>
+            <?php if (empty($activity->activityapply)): ?>
+                <a  class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+            <?php else: ?>
+                <?php if($activity->activityapply['0']->is_pass == 0): ?>
+                    <a href="/wx/meet_pay/2/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
+                <?php elseif($activity->activityapply['0']->is_pass == 1): ?>
+                    <a class="r-btn">已报名</a>
+                <?php endif; ?>
+            <?php endif; ?>
+        <?php endif; ?>
     </div>
     <!-- 微信分享 -->
     <div class="reg-shadow" style="display: none;" id="shadow"></div>
@@ -190,6 +246,7 @@
     var share_desc = '<?= $activity->share_desc ?>';
     share_desc && (window.shareConfig.desc = share_desc);
     LEMON.show.shareIco();
+    
     //LEMON.sys.back('/activity/index');
 
     window.__user_id = <?= !empty($user) ? $user : '0' ?>;
@@ -377,9 +434,9 @@
                                 $.util.alert(msg.msg);
                                 if (msg.status) {
                                     if($('.like').hasClass('changecolor')){
-                                        $('.like').next('span').text(parseInt($('.like').next('span').text())+1);
+                                        $('.like_num').html(parseInt($('.like_num').html())+1);
                                     } else {
-                                        $('.like').next('span').text(parseInt($('.like').next('span').text())-1);
+                                        $('.like_num').html(parseInt($('.like_num').html())-1);
                                     }
                                 } else {
                                     $('.like').toggleClass('scale');
@@ -397,11 +454,10 @@
                             url: '/activity/collect/' + $(em).attr('artid'),
                             func: function (msg) {
                                 if (typeof msg === 'object') {
+                                    $.util.alert(msg.msg);
                                     if (msg.status === true) {
-                                        $.util.alert(msg.msg);
-                                        $(em).toggleClass('active');
-                                    } else {
-                                        $.util.alert(msg.msg);
+                                        $(em).toggleClass('changecolor');
+                                        $(em).toggleClass('scale');
                                     }
                                 }
                             }

@@ -117,10 +117,7 @@ class HomeController extends AppController {
              * 我的活动 发布
              */
             public function myActivitySubmit() {
-//                $ActivityTable = \Cake\ORM\TableRegistry::get('activity');
-//                $activities = $ActivityTable->findByUserId($this->user->id)->toArray();
                 $this->set([
-//                    'activities' => $activities,
                     'pageTitle' => '我的活动'
                 ]);
             }
@@ -189,37 +186,48 @@ class HomeController extends AppController {
              * 我的关注
              */
             public function myFollowing() {
+                $this->set([
+                    'pageTitle' => '我的关注'
+                ]);
+            }
+            
+            /**
+             * ajax获取我的关注
+             */
+            public function getMyFollowing(){
                 $user_id = $this->user->id;
                 $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
                 $followings = $FansTable->find()->contain(['Followings' => function($q) {
-                                return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
-                                        ->where('enabled = 1')->contain(['Subjects']);
-                            }])->hydrate(false)
-                                ->where(['user_id' => $user_id])
-                                ->toArray();
-                        $this->set([
-                            'followings' => $followings,
-                            'pageTitle' => '我的关注'
-                        ]);
-                    }
+                    return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
+                            ->where('enabled = 1')->contain(['Subjects']);
+                }])->hydrate(false)
+                    ->where(['user_id' => $user_id])
+                    ->toArray();
+                if($followings){
+                    return $this->Util->ajaxReturn(['status'=>true, 'data'=>$followings]);
+                } else {
+                    return $this->Util->ajaxReturn(false, '系统错误');
+                }
+            }
 
                     /**
-                     * 我的粉丝
+                     * ajax我的粉丝
                      */
-                    public function myFans() {
+                    public function getMyFans() {
                         $user_id = $this->user->id;
                         $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
                         $fans = $FansTable->find()->contain(['Users' => function($q) {
-                                        return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
-                                                ->where('enabled = 1')->contain(['Subjects']);
-                                    }])->hydrate(false)
-                                        ->where(['following_id' => $user_id])
-                                        ->toArray();
-                                $this->set([
-                                    'fans' => $fans,
-                                    'pageTitle' => '我的粉丝'
-                                ]);
-                            }
+                                return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
+                                        ->where('enabled = 1')->contain(['Subjects']);
+                            }])->hydrate(false)
+                                ->where(['following_id' => $user_id])
+                                ->toArray();
+                        if($fans){
+                            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$fans]);
+                        } else {
+                            return $this->Util->ajaxReturn(false, '系统错误');
+                        }
+                    }
 
                             /**
                              * 我的关注消息
@@ -324,37 +332,55 @@ class HomeController extends AppController {
                              * 活动收藏记录
                              */
                             public function myCollectActivity() {
+                                $this->set(['pageTitle' => '活动收藏']);
+                            }
+                            
+                            /**
+                             * ajax获取我收藏的活动
+                             */
+                            public function getMyCollectActivity(){
                                 $collectTable = \Cake\ORM\TableRegistry::get('collect');
-                                $activity = $collectTable->find()->where(['type' => 0, 'is_delete' => 0, 'collect.user_id' => $this->user->id])->contain(['Activities'])->toArray();
-                                $this->set(['pageTitle' => '活动收藏', 'activityjson' => json_encode($activity)]);
+                                $activity = $collectTable
+                                        ->find()
+                                        ->where(['type' => 0, 'is_delete' => 0, 'collect.user_id' => $this->user->id])
+                                        ->contain(['Activities'])
+                                        ->toArray();
+                                if($activity){
+                                    return $this->Util->ajaxReturn(['status'=>true, 'data'=>$activity]);
+                                } else {
+                                    return $this->Util->ajaxReturn(false, '系统错误');
+                                }
                             }
 
                             /**
                              * 资讯收藏
                              */
-                            public function myCollectNews() {
+                            public function getMyCollectNews() {
                                 $user_id = $this->user->id;
                                 $CollectTable = \Cake\ORM\TableRegistry::get('Collect');
                                 $collects = $CollectTable->find()->hydrate(false)
-                                        ->contain(['News'])
-                                        ->where(['is_delete' => 0, 'Collect.user_id' => $user_id])
-                                        ->orderDesc('Collect.create_time')
-                                        ->formatResults(function($items) {
-                                            return $items->map(function($item) {
-                                                        //时间语义化转换
-                                                        $item['create_str'] = $item['create_time']->timeAgoInWords(
-                                                                [ 'accuracy' => [
-                                                                        'year' => 'year',
-                                                                        'month' => 'month',
-                                                                        'hour' => 'hour'
-                                                                    ], 'end' => '+10 year']
-                                                        );
-                                                        return $item;
-                                                    });
-                                        })
-                                        ->toArray();
-                                $this->set(compact('collects'));
-                                $this->set('pageTitle', '资讯收藏');
+                                    ->contain(['News'])
+                                    ->where(['is_delete' => 0, 'Collect.user_id' => $user_id])
+                                    ->orderDesc('Collect.create_time')
+                                    ->formatResults(function($items) {
+                                        return $items->map(function($item) {
+                                            //时间语义化转换
+                                            $item['create_str'] = $item['create_time']->timeAgoInWords(
+                                                    [ 'accuracy' => [
+                                                            'year' => 'year',
+                                                            'month' => 'month',
+                                                            'hour' => 'hour'
+                                                        ], 'end' => '+10 year']
+                                            );
+                                            return $item;
+                                        });
+                                    })
+                                    ->toArray();
+                                if($collects){
+                                    return $this->Util->ajaxReturn(['status'=>true, 'data'=>$collects]);
+                                } else {
+                                    return $this->Util->ajaxReturn(false, '系统错误');
+                                }
                             }
 
                             /**
@@ -948,59 +974,78 @@ class HomeController extends AppController {
                                                                         }
                                                                     }
 
-                                                                    /**
-                                                                     * 搜索我的关注
-                                                                     */
-                                                                    public function searchFollowing() {
-                                                                        if ($this->request->is('post')) {
-                                                                            $data = $this->request->data;
-                                                                            $keyword = $data['keyword'];
-                                                                            $user_id = $this->user->id;
-                                                                            $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
-                                                                            $followings = $FansTable->find()->contain(['Followings' => function($q)use($keyword) {
-                                                                                            return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
-                                                                                                    ->where(['truename like' => "%$keyword%", 'enabled' => 1])->contain(['Subjects']);
-                                                                                        }])->hydrate(false)
-                                                                                            ->where(['user_id' => $user_id])
-                                                                                            ->toArray();
-                                                                                    if ($followings !== false) {
-                                                                                        if ($followings) {
-                                                                                            return $this->Util->ajaxReturn(['status' => true, 'data' => $followings]);
-                                                                                        } else {
-                                                                                            return $this->Util->ajaxReturn(false, '您的关注里无这个人');
-                                                                                        }
-                                                                                    } else {
-                                                                                        return $this->Util->ajaxReturn(false, '系统错误');
-                                                                                    }
-                                                                                }
-                                                                            }
+    /**
+     * 我的关注搜索
+     */
+    public function myFollowingSearch() {
+        if ($this->request->is('post')) {
+            $data = $this->request->data;
+            $keyword = $data['keyword'];
+            $user_id = $this->user->id;
+            if($data['type'] == 1){
+                $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
+                $followings = $FansTable->find()->contain(['Followings' => function($q)use($keyword) {
+                        return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
+                                ->where(['truename like' => "%$keyword%", 'enabled' => 1])->contain(['Subjects']);
+                    }])->hydrate(false)
+                        ->where(['user_id' => $user_id])
+                        ->toArray();
+                if ($followings !== false) {
+                    if ($followings) {
+                        return $this->Util->ajaxReturn(['status' => true, 'data' => $followings]);
+                    } else {
+                        return $this->Util->ajaxReturn(false, '您的关注里无这个人');
+                    }
+                } else {
+                    return $this->Util->ajaxReturn(false, '系统错误');
+                }
+            } elseif($data['type'] == 2){
+                $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
+                $fans = $FansTable->find()->contain(['Users' => function($q)use($keyword) {
+                        return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
+                                ->where(['enabled' => 1, 'truename like' => "%$keyword%"])->contain(['Subjects']);
+                    }])->hydrate(false)
+                        ->where(['following_id' => $user_id])
+                        ->toArray();
+                if ($fans !== false) {
+                    if ($fans) {
+                        return $this->Util->ajaxReturn(['status' => true, 'data' => $fans]);
+                    } else {
+                        return $this->Util->ajaxReturn(false, '您的粉丝里无这个人');
+                    }
+                } else {
+                    return $this->Util->ajaxReturn(false, '系统错误');
+                }
+            }
+        }
+    }
 
-                                                                            /**
-                                                                             * 搜索我的粉丝
-                                                                             */
-                                                                            public function searchFans() {
-                                                                                if ($this->request->is('post')) {
-                                                                                    $data = $this->request->data;
-                                                                                    $keyword = $data['keyword'];
-                                                                                    $user_id = $this->user->id;
-                                                                                    $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
-                                                                                    $fans = $FansTable->find()->contain(['Users' => function($q)use($keyword) {
-                                                                                                    return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
-                                                                                                            ->where(['enabled' => 1, 'truename like' => "%$keyword%"])->contain(['Subjects']);
-                                                                                                }])->hydrate(false)
-                                                                                                    ->where(['following_id' => $user_id])
-                                                                                                    ->toArray();
-                                                                                            if ($fans !== false) {
-                                                                                                if ($fans) {
-                                                                                                    return $this->Util->ajaxReturn(['status' => true, 'data' => $fans]);
-                                                                                                } else {
-                                                                                                    return $this->Util->ajaxReturn(false, '您的粉丝里无这个人');
-                                                                                                }
-                                                                                            } else {
-                                                                                                return $this->Util->ajaxReturn(false, '系统错误');
-                                                                                            }
-                                                                                        }
-                                                                                    }
+//                                                                            /**
+//                                                                             * 搜索我的粉丝
+//                                                                             */
+//                                                                            public function searchFans() {
+//                                                                                if ($this->request->is('post')) {
+//                                                                                    $data = $this->request->data;
+//                                                                                    $keyword = $data['keyword'];
+//                                                                                    $user_id = $this->user->id;
+//                                                                                    $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
+//                                                                                    $fans = $FansTable->find()->contain(['Users' => function($q)use($keyword) {
+//                                                                                                    return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
+//                                                                                                            ->where(['enabled' => 1, 'truename like' => "%$keyword%"])->contain(['Subjects']);
+//                                                                                                }])->hydrate(false)
+//                                                                                                    ->where(['following_id' => $user_id])
+//                                                                                                    ->toArray();
+//                                                                                            if ($fans !== false) {
+//                                                                                                if ($fans) {
+//                                                                                                    return $this->Util->ajaxReturn(['status' => true, 'data' => $fans]);
+//                                                                                                } else {
+//                                                                                                    return $this->Util->ajaxReturn(false, '您的粉丝里无这个人');
+//                                                                                                }
+//                                                                                            } else {
+//                                                                                                return $this->Util->ajaxReturn(false, '系统错误');
+//                                                                                            }
+//                                                                                        }
+//                                                                                    }
 
                                                                                     public function searchcard() {
                                                                                         if ($this->request->is('post')) {

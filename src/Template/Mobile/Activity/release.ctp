@@ -21,12 +21,13 @@
         </div>
         <div class="h20"></div>
         <div class="crowdfunding innercon">
-            <span>您要发布活动的主题</span><input type="text" name="title" />
-            <span>内容</span><textarea name="body" rows="" cols=""></textarea>
+            <span>您想要发起的活动主题是</span><input type="text" name="title" />
+            <span>请描述您的大概需求</span><textarea name="body" rows="" cols=""></textarea>
         </div>
         <div class="h20"></div>
 
         <a href="javascript:void(0)" class='nextstep' id="submit">提交</a>
+        
     </form>
     <div class='reg-shadow' hidden></div>
     <div class="totips" style="display:none;">
@@ -56,9 +57,9 @@
                 var formData = {};
                 var agency = [];
                 if ($('input[name="title"]').val() == '') {
-                    $.util.alert('题目不能为空');
+                    $.util.alert('主题不能为空');
                 } else if ($('textarea[name="body"]').val() == '') {
-                    $.util.alert('请填写内容');
+                    $.util.alert('请填写需求');
                 } else {
                     for (i = 0; i < $('.industries').length; i++)
                     {

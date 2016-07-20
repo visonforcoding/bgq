@@ -16,7 +16,7 @@
                 <b>项目经验</b>
                 <div >
                     <textarea name="xmjy" <?php if($user->savant_status==2 || $user->savant_status==3): ?>disabled style="background: gainsboro;"<?php endif; ?> placeholder="" >
-                        <?=isset($user->savant)?$user->savant->xmjy:''?>
+                        <?=isset($user->savant) ? $user->savant->xmjy : ''?>
                     </textarea>
                 </div>
             </li>

@@ -22,7 +22,7 @@
             <ul>
 
                 <li>
-                    <i>请简略介绍需求(10-300字)</i>
+                    <i>请简略介绍需求(300字以内)</i>
                     <textarea id="summary"></textarea>
                     <i class="m-tips"><b class="iconfont"></b>详细的介绍能让专家更加了解你<span>你填的信息只有专家能看到，不会公开给其它人</span></i>
                 </li>
