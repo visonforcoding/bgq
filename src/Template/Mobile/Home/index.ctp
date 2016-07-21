@@ -9,7 +9,7 @@
         <div class='inner h-home-top'>
                     <a href='/home/my-message-fans' class='iconfont share' >&#xe625;</a>
                       <!--<h1>个人中心</h1>-->
-                    <a href="/home/my-install" class='iconfont share'><?php if(!$isWx): ?>&#xe61e;<?php endif;?></a>
+                    <?php if(!$isWx): ?><a href="/home/my-install" class='iconfont share'>&#xe61e;</a><?php endif;?>
                 </div>
         <a href="javascript:void(0)">
             <div class="t-home-top">
@@ -81,7 +81,7 @@
             {#hasMsg#}
         </a>
         <!--<h1>个人中心</h1>-->
-        <a href="/home/my-install" class='iconfont share' style="display: block;width: 20px;height:30px;">{#setUp#}</a>
+        {#setUp#}
     </div>
     
     <div class="t-home-top">
@@ -125,7 +125,7 @@
                     user = user.replace('{#hasMsg#}','');
                 }
                 if(!res.data.isWx){
-                    user = user.replace('{#setUp#}','&#xe61e;');
+                    user = user.replace('{#setUp#}','<a href="/home/my-install" class="iconfont share" style="display: block;width: 20px;height:30px;">&#xe61e;</a>');
                 } else {
                     user = user.replace('{#setUp#}','');
                 }

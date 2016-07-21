@@ -19,9 +19,9 @@
     <?php if (isset($news)): ?>
         <section class="newscon-box">
             <h3><?= $news->title ?></h3>
-            <h1 class="con-des">
-                <?php if($news->reproduce): ?>
-                    <div class="website">【<?= $news->reproduce ?>】</div>
+            <h1 class="con-des origin">
+                <?php if($news->source): ?>
+                    <div class="website">【<?= $news->source ?>】</div>
                 <?php else: ?>
                     <a href="/user/home-page/<?= $news->user->id ?>">
                         <span>
