@@ -72,7 +72,7 @@
                     <span>定增基金</span>
                 </a>
                 <a href="/meet/industries">
-                    <i class="iconfont">&#xe6e0;</i>
+                    <i class="iconfont">&#xe64f;</i>
                     <span>更多</span>
                 </a>
             </div>
