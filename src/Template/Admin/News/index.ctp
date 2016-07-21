@@ -48,7 +48,11 @@
                         colNames:
                                 ['作者', '标题','行业标签', '阅读数', '点赞数', '评论数', '创建时间', '更新时间', '操作'],
                         colModel: [
-                            {name: 'user.truename', editable: true, align: 'center'},
+                            {name: 'user.truename', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
+                                    if(!cellvalue){
+                                        return rowObject.source;
+                                    }
+                            }},
                             {name: 'title', editable: true, align: 'center'},
                             {name: 'industries', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
                                     var industries_arr = [];
