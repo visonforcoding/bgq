@@ -107,7 +107,8 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .news-list-items h1,.con-des{display: inline-block;box-sizing: border;}
 .news-list-items h1 span img,.con-des img{width:.5rem;height:.5rem;display: block;border-radius: 100%;}
 .newsbox{overflow:hidden;display: block; color:#969fa9;}
-.news-list-items .origin{padding-left:0;}
+.news-list-items .origin,.newscon-box .origin{padding-left:0;}
+.newscon-box .origin{text-indent: 0.1rem;}
 .origin div.website{display: inline-block;color:#222c38;font-size:.3rem;}
 .origin time{margin-left:10px;}
 .newsbox .sec-news-l{float:left;width:5.1rem;}
