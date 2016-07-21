@@ -254,5 +254,9 @@ class WxController extends AppController {
             return $this->Util->ajaxReturn(false, 'error');
         }
     }
+    
+    public function shareDownload(){
+        $this->set('pageTitle', '下载并购帮');
+    }
 
 }
