@@ -244,12 +244,12 @@
         d.user_position = d.user.position;
         d.user_id = d.user.id;
         if(d.pid>0) {
-            d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.replyuser.truename + ' </span>：' + d.body;
+            d.body = '回复<span style="color:#222"> ' + d.replyuser.truename + ' </span>：' + d.body;
         }
         d.style = '';
         if (d.hasOwnProperty('likes')) {
             if (d['likes'].length) {
-                d.style = 'color:red';
+                d.style = 'color:#e01a48';
                 d.disable = '1';
             }
         }
@@ -475,7 +475,7 @@
                                             d.user_company = d.user.company; // 公司
                                             d.user_position = d.user.position; // 职务
                                             if (d.pid > 0) {
-                                                d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.replyuser.truename + ' </span>：' + d.body;
+                                                d.body = '回复<span style="color:#222"> ' + d.replyuser.truename + ' </span>：' + d.body;
                                             }
                                             return d;
                                         });
@@ -636,7 +636,7 @@
                                 addnum.addEventListener("webkitAnimationEnd", function () {
                                     $('.show').removeClass('show');
                                 });
-                                $('.addnum_' + $(em).attr('comid')).css('color', 'red');
+                                $('.addnum_' + $(em).attr('comid')).css('color', '#e01a48');
                                 $('.addnum_' + $(em).attr('comid')).attr('disable', '1');
                             } else {
                                 $.util.alert(msg.msg);
