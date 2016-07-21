@@ -70,7 +70,7 @@
                 <span id="article_comment" user_id="<?= $user; ?>"><i class="iconfont" >&#xe62e;</i>我要点评</span>
             </h3>
             <div id="comment"><h4 id="noComment">还没任何评论</h4></div>
-            <span class='com-all' style="display:none;"><a href="#allcoment" id="showAllComment">显示全部</a></span>
+            <span class='com-all' style="display:none;"><a href="#allcoment" id="showAllComment">更多</a></span>
         </section>
         <div style="height:.6rem"></div>
         <div class="active-commond innercon">
