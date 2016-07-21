@@ -114,7 +114,7 @@
                     html += '<div class="h-home-menu"><ul class="clearfix"><li><a href="/meet/view/' + res.data.user.id + '"><i class="iconfont">&#xe621;</i>专家主页</a></li><li><a href="/home/savant-auth"><i class="iconfont">&#xe623;</i>专家认证</a></li></ul></div>';
                     user = user.replace('{#v#}','<i class="v"></i>');
                 } else {
-                    savant = '<li><a href="/home/savant-auth"><i class="iconfont">&#xe61e;</i>专家认证</a></li>';
+                    savant = '<li><a href="/home/savant-auth"><i class="iconfont">&#xe623;</i>专家认证</a></li>';
                     user = user.replace('{#v#}','');
                 }
                 html = html.replace('{#savant#}', savant);
