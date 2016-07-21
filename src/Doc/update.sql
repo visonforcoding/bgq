@@ -382,3 +382,59 @@ ALTER TABLE `news`
 
 ALTER TABLE `news`
 	CHANGE COLUMN `keywords` `keywords` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '关键字' AFTER `source`;
+
+#求职者信息
+CREATE TABLE `candidate` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`job_id` INT(11) UNSIGNED NOT NULL DEFAULT '0' COMMENT '招聘信息id',
+	`truename` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '姓名',
+	`birthday` DATE NOT NULL COMMENT '生日',
+	`phone` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '电话',
+	`email` VARCHAR(60) NOT NULL DEFAULT '' COMMENT '邮箱',
+	`address` VARCHAR(60) NOT NULL DEFAULT '' COMMENT '地址',
+	`career` TEXT NOT NULL COMMENT '工作经历',
+	`education` TEXT NOT NULL COMMENT '教育经历',
+	`salary` VARCHAR(50) NOT NULL COMMENT '期望薪水',
+	`create_time` DATETIME NOT NULL,
+	`update_time` DATETIME NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COMMENT='求职者'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=3
+;
+
+#工作
+CREATE TABLE `job` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`company` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '公司',
+	`admin_id` INT(11) NOT NULL DEFAULT '0' COMMENT '负责人id',
+	`contact` VARCHAR(150) NOT NULL DEFAULT '' COMMENT '联系方式',
+	`earnings` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '分成方式',
+	`position` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '招聘职位',
+	`salary` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '薪资范围',
+	`address` VARCHAR(150) NOT NULL DEFAULT '' COMMENT '工作地点',
+	`summary` VARCHAR(750) NOT NULL DEFAULT '' COMMENT '招聘简介',
+	`create_time` DATETIME NOT NULL,
+	`update_time` DATETIME NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COMMENT='招聘信息'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=2
+;
+
+#工作-标签关联表
+CREATE TABLE `job_industry` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`job_id` INT(11) NOT NULL,
+	`industry_id` INT(11) NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COMMENT='招聘行业标签'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=3
+;
