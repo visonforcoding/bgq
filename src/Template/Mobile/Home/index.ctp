@@ -125,7 +125,7 @@
                     user = user.replace('{#hasMsg#}','');
                 }
                 if(!res.data.isWx){
-                    user = user.replace('{#setUp#}','&#xe619;');
+                    user = user.replace('{#setUp#}','&#xe61e;');
                 } else {
                     user = user.replace('{#setUp#}','');
                 }
