@@ -83,7 +83,7 @@
     });
     
     function dealData(data){
-        var html = $.util.dataToTpl('', 'listTpl', res.data, function (d) {
+        var html = $.util.dataToTpl('', 'listTpl', data, function (d) {
             d.user_id = d.user.id;
             d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
             d.author = d.user.truename;

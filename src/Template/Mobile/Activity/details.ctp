@@ -1,5 +1,11 @@
 <body>
-    <?= $this->element('header'); ?>
+    <div class="transmitpage clearfix" hidden id="share_download">
+        <div>
+            <h1><img src="/mobile/images/logo-wx.png"></h1>
+            <h3>并购圈<span>并购人的生活方式</span></h3>
+        </div>
+        <a href="/Wx/share_download">立即下载</a>
+    </div>
     <div class="wraper" id="activity_detail" >
         <section class="newscon-box a-detail">
             <h3><?= $activity->title; ?></h3>
@@ -38,7 +44,7 @@
                 </span>
                 <!--喜欢按钮-->
                 <span >
-                    <i class="iconfont like <?php if ($isLike): ?> changecolor scale<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like">&#xe61b;</i><i class='like_num'><?= $activity->praise_nums ? $activity->praise_nums : '0' ?></i>
+                    <i class="iconfont like <?php if ($isLike): ?> changecolor scale<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like">&#xe61b;</i><em class='like_num'><?= $activity->praise_nums ? $activity->praise_nums : '0' ?></em>
                 </span>
                 <!--收藏按钮-->
                 <span >
@@ -70,7 +76,7 @@
                 <span id="article_comment" user_id="<?= $user; ?>"><i class="iconfont" >&#xe62e;</i>我要点评</span>
             </h3>
             <div id="comment"><h4 id="noComment">还没任何评论</h4></div>
-            <span class='com-all' style="display:none;"><a href="#allcoment" id="showAllComment">更多</a></span>
+            <span class='com-all' style="display:none;"><a href="#allcoment" id="showAllComment">查看更多评价</a></span>
         </section>
         <div style="height:.6rem"></div>
         <div class="active-commond innercon">
@@ -234,6 +240,9 @@
     window.activitycom = <?= json_encode($activity->activitycom); ?>;
 </script>
 <script>
+    if(location.href.indexOf('?share=1') != -1){
+        $('#share_download').show();
+    }
     window.article = true;
     window.reply = true;
     window.location.hash = '';
@@ -306,7 +315,7 @@
                                 d.user_position = d.user.position;
                                 d.user_id = d.user.id;
                                 if(d.pid>0) {
-                                    d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.replyuser.truename + ' </span>：' + d.body;
+                                    d.body = '回复<span style="color:#222;"> ' + d.replyuser.truename + ' </span>：' + d.body;
                                 }
                                 d.style = '';
                                 d.disable = '0';
@@ -348,7 +357,7 @@
                                     d.user_position = d.user.position; // 职务
                                     d.user_id = d.user.id;
                                     if(d.pid>0) {
-                                        d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.reply.truename + ' </span>：' + d.body;
+                                        d.body = '回复<span style="color:#222;"> ' + d.reply.truename + ' </span>：' + d.body;
                                     }
                                     d.style = '';
                                     d.disable = '0';
@@ -522,7 +531,7 @@
                                             d.user_company = d.user.company; // 公司
                                             d.user_position = d.user.position; // 职务
                                             if (d.pid > 0) {
-                                                d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.replyuser.truename + ' </span>：' + d.body;
+                                                d.body = '回复<span style="color:#222;"> ' + d.replyuser.truename + ' </span>：' + d.body;
                                             }
                                             return d;
                                         });

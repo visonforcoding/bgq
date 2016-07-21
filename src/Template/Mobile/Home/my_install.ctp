@@ -45,7 +45,7 @@
         </li>
         <li  class="nobottom lh4">
             <a href="/user/change-phone">
-                <span>更换手机</span>
+                <span>更换手机号码</span>
                 <div>
                     <span></span>
                 </div>

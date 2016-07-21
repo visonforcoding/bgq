@@ -5,6 +5,13 @@
         <a href="#this" class='iconfont share h-regiser'>&#xe614;</a>-->
     </div>
 </header>
+<div class="transmitpage clearfix" hidden id="share_download">
+    <div>
+        <h1><img src="/mobile/images/logo-wx.png"></h1>
+        <h3>并购圈<span>并购人的生活方式</span></h3>
+    </div>
+    <a href="/Wx/share_download">立即下载</a>
+</div>
 <div class="wraper">
     <div class="m-to-more">
         <div class='inner'>
@@ -114,6 +121,9 @@
             })();
 </script>
 <script>
+    if(location.href.indexOf('?share=1') != -1){
+        $('#share_download').show();
+    }
     var subject = null;
     setTimeout(function () {
         subject = $.util.loop({

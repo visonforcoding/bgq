@@ -8,6 +8,13 @@
         <a href="#this" class='iconfont share h-regiser'>&#xe614;</a> -->
     </div>
 </header>
+<div class="transmitpage clearfix" hidden id="share_download">
+    <div>
+        <h1><img src="/mobile/images/logo-wx.png"></h1>
+        <h3>并购圈<span>并购人的生活方式</span></h3>
+    </div>
+    <a href="/Wx/share_download">立即下载</a>
+</div>
 <div class="wraper" id="news">
     <?php if (isset($news)): ?>
         <section class="newscon-box">
@@ -37,7 +44,7 @@
             评论
         </h3>
         <div id="comment"><h4 id="noComment">还没任何评论</h4></div>
-        <span class='com-all' id=""><a href="#allcoment">显示全部</a></span>
+        <span class='com-all' id=""><a href="#allcoment">查看更多评价</a></span>
     </section>
     <!--专家推荐****************-->
     <?php if ($news->savants): ?>
@@ -131,7 +138,9 @@
 </script>
 <script>
     window.location.hash = '';
-    
+    if(location.href.indexOf('?share=1') != -1){
+        $('#share_download').show();
+    }
     function checkLogin(func){
         if(window.__user_id || $.util.getCookie('token_uin')){
             func();
