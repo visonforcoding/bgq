@@ -29,7 +29,7 @@
 		<div class="wraper newswraper" id="wraper">
 			<div class="a-search-box">
 					<div class="a-search">
-						<a href="news-search.html"><i class="iconfont">&#xe613;</i></a>
+						<a href="news-search.html"><i class="iconfont">&#xe618;</i></a>
 						<div class="s-con">
 							<input type="text" placeholder="请输入关键词" />
 						</div>
@@ -38,8 +38,8 @@
 			<div class="a-banner" >
 				<ul class="pic-list-container" id="imgList">
 					<li><a href="#this"><img src="../images/a-banner.png"/></a></li>
-					<li><a href="#this"><img src="../images/banner.jpg"/></a></li>
-					<li><a href="#this"><img src="../images/a-banner.png"/></a></li>
+					<!--<li><a href="#this"><img src="../images/banner.jpg"/></a></li>
+					<li><a href="#this"><img src="../images/a-banner.png"/></a></li>-->
 				</ul>
 				<div class="yd" id="imgTab">
 					<span class="cur"></span>
@@ -49,7 +49,8 @@
 				
 			</div>
 			<section class='news-list-items tbof'>
-				<h1 class="firstnews"><span><img src="../images/user.png" /></span>王璟<time>2016.06.08 13:00</time></h1>
+				<h1 class="firstnews origin"><div class="website">【腾讯新闻】</div><!--<span><img src="../images/user.png" /></span>王璟--><time>2016.06.08 13:00</time></h1>
+				
 				<a href="news-content.html" class="newsbox clearfix">
 					<div class="sec-news-l">
 						<h3>什么人适合做并购？什么人适合做并购？什么人适合做并购？</h3>
@@ -64,10 +65,10 @@
 				<div class="news-bottom clearfix">
 					<div class="sec-b-l">
 						<div class="sec-like">
-							<span class="iconfont">&#xe616;</span>322
+							<span class="iconfont">&#xe61b;</span>322
 						</div>
 						<div class="sec-comment">
-							<span class="iconfont">&#xe618;</span>58
+							<span class="iconfont">&#xe61d;</span>58
 						</div>
 					</div>
 					<div class="sec-b-r">
@@ -93,10 +94,10 @@
 				<div class="news-bottom clearfix">
 					<div class="sec-b-l">
 						<div class="sec-like">
-							<span class="iconfont">&#xe616;</span>322
+							<span class="iconfont">&#xe61b;</span>322
 						</div>
 						<div class="sec-comment">
-							<span class="iconfont">&#xe618;</span>58
+							<span class="iconfont">&#xe61d;</span>58
 						</div>
 					</div>
 					<div class="sec-b-r">
@@ -122,10 +123,10 @@
 				<div class="news-bottom clearfix">
 					<div class="sec-b-l">
 						<div class="sec-like">
-							<span class="iconfont">&#xe616;</span>322
+							<span class="iconfont">&#xe61b;</span>322
 						</div>
 						<div class="sec-comment">
-							<span class="iconfont">&#xe618;</span>58
+							<span class="iconfont">&#xe61d;</span>58
 						</div>
 					</div>
 					<div class="sec-b-r">
@@ -151,10 +152,10 @@
 				<div class="news-bottom clearfix">
 					<div class="sec-b-l">
 						<div class="sec-like">
-							<span class="iconfont">&#xe616;</span>322
+							<span class="iconfont">&#xe61b;</span>322
 						</div>
 						<div class="sec-comment">
-							<span class="iconfont">&#xe618;</span>58
+							<span class="iconfont">&#xe61d;</span>58
 						</div>
 					</div>
 					<div class="sec-b-r">
@@ -171,25 +172,25 @@
 		<ul class="navfooter clearfix">
 			<li class="active">
 				
-				<a href="news.html"><span class="iconfont">&#xe609;</span>资讯</a>
+				<a href="news.html"><span class="iconfont">&#xe648;</span>资讯</a>
 			</li>
 			<li>
 				
-				<a href="activity.html"><span class="iconfont">&#xe601;</span>活动</a>
+				<a href="activity.html"><span class="iconfont">&#xe60c;</span>活动</a>
 			</li>
 			
 			<li>
 				
-				<a href="meet.html"><span class="iconfont">&#xe60b;</span>大咖</a>
+				<a href="meet.html"><span class="iconfont">&#xe649;</span>大咖</a>
 			</li>
 			<li>
 				
-				<a href="myhome.html"><span class="iconfont">&#xe60d;</span>我</a>
+				<a href="myhome.html"><span class="iconfont">&#xe612;</span>我</a>
 			</li>
 		</ul>
 	</footer>
 	  <script>
-                var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
+                var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'),$('.a-banner'));
        </script>
 	</body>
 </html>
