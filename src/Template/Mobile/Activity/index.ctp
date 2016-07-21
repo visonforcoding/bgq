@@ -91,9 +91,8 @@
     
     function dealData(data){
         var html = $.util.dataToTpl('', 'activity_tpl', data, function (d) {
-            var date = new Date();
             d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="registered">已报名</span>';
-            d.pass_msg = d.apply_end_time > date.toLocaleTimeString() ? '': '<span class="registered colorbg">已过期</span>';
+            d.pass_msg = d.pass_time ? '<span class="registered colorbg">已过期</span>' : '';
             d.series_name = window.series[d.series_id];
             d.region_name = d.region ? '<a>' + d.region.name + '</a>' : '';
             d.cover = d.thumb ? d.thumb : d.cover;

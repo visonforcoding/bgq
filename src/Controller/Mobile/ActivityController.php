@@ -642,9 +642,15 @@ class ActivityController extends AppController {
                         ->page($page, $this->limit)
                         ->orderDesc('Activity.create_time')
                         ->toArray();
-        $a = $this->Activity->find()->all()->toArray();
+        foreach($activity as $k=>$v){
+            if($v['apply_end_time'] <= time()){
+                $activity[$k]['pass_time'] = 1;
+            } else {
+                $activity[$k]['pass_time'] = 0;
+            }
+        }
         if ($activity) {
-            return $this->Util->ajaxReturn(['status' => true, 'data' => $activity, 'a'=>$a]);
+            return $this->Util->ajaxReturn(['status' => true, 'data' => $activity]);
         } else {
             return $this->Util->ajaxReturn(['status' => false]);
         }
