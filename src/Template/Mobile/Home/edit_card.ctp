@@ -10,7 +10,9 @@
 <div class="wraper">
     <div class="uploadbox nobottom">
         <input type="hidden" name="card_path" value="<?= $user->card_path ?>" />
-        <a href='#this' class='imgcard'><img id="img" src='<?= $user->card_path ?>' /></a>
+        <!--<a href='#this' class='imgcard'>-->
+            <img id="img" src='<?= $user->card_path ?>' />
+        <!--</a>-->
         <a href="javascript:void(0)" id="uploadPic" class="uploadbtn">上传名片</a>
         <!--<a href="#this" style="width:100%" id="save" class="nextstep">保存</a>-->
     </div>
