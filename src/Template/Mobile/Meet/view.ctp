@@ -47,7 +47,7 @@
             </span>
 
         </li>
-        <li class="conr"><a class="alink mr" href="/user/home-page/<?= $biggie->id ?>" class="tohome"><i class="iconfont">&&#xe612;</i>个人主页</a></li>
+        <li class="conr"><a class="alink mr" href="/user/home-page/<?= $biggie->id ?>" class="tohome"><i class="iconfont">&#xe612;</i>个人主页</a></li>
     </ul>
     <div class="m-swiper-items">
         <?php if ($self): ?>
