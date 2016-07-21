@@ -25,7 +25,7 @@
 <script type="text/html" id="listTpl">
     <section class='news-list-items '>
         <a href="javascript:void(0)">
-            <h1>{#author#}
+            <h1 class="origin">{#author#}
                 <time>{#create_time#}</time>
             </h1>
         </a>
@@ -86,7 +86,7 @@
         var html = $.util.dataToTpl('', 'listTpl', data, function (d) {
             d.user_id = d.user.id;
             d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-            d.author = d.reproduce ? '<div class="website">【'+ d.reproduce +'】</div>' : '<span><img src="'+ d.avatar +'"/></span>' + d.user.truename;
+            d.author = d.source ? '<div class="website">【'+ d.source +'】</div>' : '<span><img src="'+ d.avatar +'"/></span>' + d.user.truename;
             d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
             d.cover = d.thumb ? d.thumb : d.cover;
             return d;
