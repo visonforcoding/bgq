@@ -45,7 +45,7 @@ class Export {
                 $cnt = 0;
             }
             foreach ($value as $i => $v) {
-                $value[$i] = iconv('utf-8', 'gbk', $v);
+                $value[$i] = iconv('utf-8', 'gbk//ignore', $v);
             }
             fputcsv($fp, $value);
         }
