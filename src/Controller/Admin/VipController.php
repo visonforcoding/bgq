@@ -91,8 +91,13 @@ class VipController extends AppController {
                 $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
+        $isSuperAdmin = true;
+        if ($this->_user->username != 'admin') {
+            $where['admin_id'] = $this->_user->id;
+            $isSuperAdmin = false;
+        }
         $industries = $this->User->Industries->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'industries'));
+        $this->set(compact('user', 'industries', 'isSuperAdmin'));
     }
 
     /**
@@ -131,6 +136,9 @@ class VipController extends AppController {
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = ['grade' => 3];
+        if ($this->_user->username != 'admin') {
+            $where['admin_id'] = $this->_user->id;
+        }
         if (!empty($keywords)) {
             $where['or'] = [['truename like' => "%$keywords%"], ['email like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
         }
@@ -183,6 +191,9 @@ class VipController extends AppController {
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = ['grade' => 3];
+        if ($this->_user->username != 'admin') {
+            $where['admin_id'] = $this->_user->id;
+        }
         if (!empty($keywords)) {
             $where['truename like'] = "%$keywords%";
         }
@@ -192,11 +203,11 @@ class VipController extends AppController {
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
         $Table = $this->User;
-        $column = ['手机号', '姓名', '等级', '身份证', '公司', '职位', '邮箱', '性别', '擅长业务', '常驻城市', '项目经验', '业务能力', '审核意见','负责人', '审核状态', '创建时间'];
+        $column = ['手机号', '姓名', '等级', '身份证', '公司', '职位', '邮箱', '性别', '擅长业务', '常驻城市', '项目经验', '业务能力', '审核意见', '负责人', '审核状态', '创建时间'];
         $query = $Table->find();
         $query->contain(['Customer']);
         $query->hydrate(false);
-        $query->select(['phone', 'truename', 'level', 'idcard', 'company', 'position', 'email', 'gender', 'goodat', 'city', 'ymjy', 'ywnl', 'reason','Customer.truename' ,'status', 'create_time']);
+        $query->select(['phone', 'truename', 'level', 'idcard', 'company', 'position', 'email', 'gender', 'goodat', 'city', 'ymjy', 'ywnl', 'reason', 'Customer.truename', 'status', 'create_time']);
         if (!empty($where)) {
             $query->where($where);
         }

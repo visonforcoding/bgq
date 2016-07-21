@@ -77,9 +77,6 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/admin/menu/edit/*',['plugin'=>'wpadmin','controller'=>'menu','action'=>'edit']);
     $routes->connect('/admin/menu/add/*',['plugin'=>'wpadmin','controller'=>'menu','action'=>'add']);
     
-    $routes->connect('/admin/admin/index',['plugin'=>'wpadmin','controller'=>'admin','action'=>'index']);
-    $routes->connect('/admin/admin/add',['plugin'=>'wpadmin','controller'=>'admin','action'=>'add']);
-    $routes->connect('/admin/admin/edit',['plugin'=>'wpadmin','controller'=>'admin','action'=>'edit']);
     $routes->connect('/admin/admin/login',['plugin'=>'wpadmin','controller'=>'admin','action'=>'login']);
     
     $routes->connect('/admin/',['plugin'=>'wpadmin','controller'=>'index','action'=>'index']);

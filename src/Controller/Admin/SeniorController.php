@@ -10,12 +10,12 @@ use Wpadmin\Controller\AppController;
  * @property \App\Model\Table\UserTable $User
  */
 class SeniorController extends AppController {
-    
-    protected  $User;
+
+    protected $User;
+
     public function initialize() {
         $this->loadModel('User');
         parent::initialize();
-        
     }
 
     /**
@@ -91,8 +91,13 @@ class SeniorController extends AppController {
                 $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
+        $isSuperAdmin = true;
+        if ($this->_user->username != 'admin') {
+            $where['admin_id'] = $this->_user->id;
+            $isSuperAdmin = false;
+        }
         $industries = $this->User->Industries->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'industries'));
+        $this->set(compact('user', 'industries','isSuperAdmin'));
     }
 
     /**
@@ -130,7 +135,10 @@ class SeniorController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = ['grade'=>2];
+        $where = ['grade' => 2];
+        if ($this->_user->username != 'admin') {
+            $where['admin_id'] = $this->_user->id;
+        }
         if (!empty($keywords)) {
             $where['or'] = [['truename like' => "%$keywords%"], ['email like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
         }
@@ -182,7 +190,10 @@ class SeniorController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = ['grade'=>2];
+        $where = ['grade' => 2];
+        if ($this->_user->username != 'admin') {
+            $where['admin_id'] = $this->_user->id;
+        }
         if (!empty($keywords)) {
             $where['truename like'] = "%$keywords%";
         }
@@ -256,15 +267,15 @@ class SeniorController extends AppController {
             }
         }
     }
-    
+
     /**
      *  禁用和启用用户
      * @param type $id
      */
-    public function ableUser(){
-          if ($this->request->is('post')) {
+    public function ableUser() {
+        if ($this->request->is('post')) {
             $entity = $this->User->get($this->request->data('id'));
-            $entity->enabled = $entity->enabled==1?0:1;
+            $entity->enabled = $entity->enabled == 1 ? 0 : 1;
             if ($this->User->save($entity)) {
                 $this->Util->ajaxReturn(true, '修改成功');
             } else {
@@ -272,6 +283,5 @@ class SeniorController extends AppController {
             }
         }
     }
-    
 
 }

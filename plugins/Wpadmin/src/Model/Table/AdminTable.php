@@ -38,8 +38,6 @@ class AdminTable extends Table {
             'foreignKey' => 'admin_id',
             'targetForeignKey' => 'menu_id'
         ]);
-
-
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [

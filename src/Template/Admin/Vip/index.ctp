@@ -90,7 +90,7 @@
                                 return '<button onClick="ableUser('+rowObject.id+')" class="btn btn-mini"><i class="icon icon-remove-circle"></i><i style="color:red"> 已禁用</i></button>';
                             }
                     },edittype:'select',editoptions: { value:"1:正常;0:禁用" }},
-                    {name: 'customer.id', editable: true, align: 'center'},
+                    {name: 'customer.truename', editable: true, align: 'center'},
                     {name: 'create_time', editable: true, align: 'center'},
                     {name: 'actionBtn',align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                 pager: "#pager",
