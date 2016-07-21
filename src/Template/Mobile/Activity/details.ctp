@@ -72,26 +72,6 @@
             <div id="comment"><h4 id="noComment">还没任何评论</h4></div>
             <span class='com-all' style="display:none;"><a href="#allcoment" id="showAllComment">显示全部</a></span>
         </section>
-<!--        <div class="a-btn">
-            <?php if (strtotime($activity->apply_end_time) < time()): ?>
-                <a style="background:gray;">已过期</a>
-            <?php else: ?>
-                <a href="/activity/recommend/<?= $activity->id; ?>">我要赞助</a>
-            <?php endif; ?>
-            <?php if(strtotime($activity->apply_end_time) < time()): ?>
-                <a style="background:gray;">已过期</a>
-            <?php else: ?>
-                <?php if (empty($activity->activityapply)): ?>
-                    <a id="enroll11" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
-                <?php else: ?>
-                    <?php if($activity->activityapply['0']->is_pass == 0): ?>
-                        <a href="/wx/meet_pay/2/<?= $order->id; ?>">去付款(<?= $activity->apply_fee; ?>元)</a>
-                    <?php elseif($activity->activityapply['0']->is_pass == 1): ?>
-                        <a>已报名</a>
-                    <?php endif; ?>
-                <?php endif; ?>
-            <?php endif; ?>
-        </div>-->
         <div style="height:.6rem"></div>
         <div class="active-commond innercon">
             <section class="my-collection-info  nobottom">
@@ -158,12 +138,12 @@
 
     <!--吸底按钮-->
     <div class="fixed-btn">
-        <?php if (strtotime($activity->apply_end_time) < time()): ?>
+        <?php if ($activity->apply_end_time < time()): ?>
             <a style="background:gray;" class="l-btn">已过期</a>
         <?php else: ?>
             <a href="/activity/recommend/<?= $activity->id; ?>" class="l-btn">我要赞助</a>
         <?php endif; ?>
-        <?php if(strtotime($activity->apply_end_time) < time()): ?>
+        <?php if($activity->apply_end_time < time()): ?>
             <a style="background:gray;" class="r-btn">已过期</a>
         <?php else: ?>
             <?php if (empty($activity->activityapply)): ?>

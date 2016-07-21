@@ -107,7 +107,7 @@
         var imgUrl = '<?= $biggie->avatar ?>';
         if (imgUrl)
             window.shareConfig.imgUrl = location.origin + imgUrl;
-        window.shareConfig.link = location.href;
+        window.shareConfig.link = 'http://m.chinamatop.com/meet/view/<?= $biggie->id ?>?share=1';
         window.shareConfig.title = '并购帮大咖';
         window.shareConfig.desc = '<?= $biggie->company ?>  <?= $biggie->truename ?>';
                 LEMON.show.shareIco();
