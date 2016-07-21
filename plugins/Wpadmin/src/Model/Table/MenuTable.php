@@ -2,7 +2,7 @@
 
 namespace Wpadmin\Model\Table;
 
-use Admin\Model\Entity\Menu;
+use Wpadmin\Model\Entity\Menu;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -27,7 +27,7 @@ class MenuTable extends Table {
         $this->displayField('name');
         $this->primaryKey('id');
         $this->belongsToMany('g', [
-            'className' => 'Admin.Group',
+            'className' => 'Wpadmin.Group',
             'joinTable' => 'group_menu',
             'foreignKey' => 'menu_id',
             'targetForeignKey' => 'group_id'
@@ -37,7 +37,7 @@ class MenuTable extends Table {
             'className' => 'Wpadmin.Admin',
             'joinTable' => 'admin_menu',
             'foreignKey' => 'menu_id',
-            'targetForeignKey' => 'group_id'
+            'targetForeignKey' => 'admin_id'
         ]);
     }
 

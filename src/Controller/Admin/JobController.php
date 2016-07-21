@@ -5,11 +5,11 @@ namespace App\Controller\Admin;
 use Wpadmin\Controller\AppController;
 
 /**
- * News Controller
+ * Job Controller
  *
- * @property \App\Model\Table\NewsTable $News
+ * @property \App\Model\Table\JobTable $Job
  */
-class NewsController extends AppController {
+class JobController extends AppController {
 
     /**
      * Index method
@@ -17,25 +17,23 @@ class NewsController extends AppController {
      * @return void
      */
     public function index() {
-        $domain = $this->request->env('SERVER_NAME');
-        $this->set(compact('domain'));
-        $this->set('news', $this->News);
+        $this->set('job', $this->Job);
     }
 
     /**
      * View method
      *
-     * @param string|null $id News id.
+     * @param string|null $id Job id.
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null) {
         $this->viewBuilder()->autoLayout(false);
-        $news = $this->News->get($id, [
-            'contain' => ['Admins']
+        $job = $this->Job->get($id, [
+            'contain' => ['Admins', 'Industry']
         ]);
-        $this->set('news', $news);
-        $this->set('_serialize', ['news']);
+        $this->set('job', $job);
+        $this->set('_serialize', ['job']);
     }
 
     /**
@@ -44,65 +42,50 @@ class NewsController extends AppController {
      * @return void Redirects on successful add, renders view otherwise.
      */
     public function add() {
-        $news = $this->News->newEntity();
+        $job = $this->Job->newEntity();
         if ($this->request->is('post')) {
-            $news = $this->News->patchEntity($news, $this->request->data);
-            $news->admin_id = $this->_user->id;
-            $news->admin_name = $this->_user->truename;
-            if ($this->News->save($news)) {
+            $job = $this->Job->patchEntity($job, $this->request->data);
+            if ($this->Job->save($job)) {
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {
-                $errors = $news->errors();
+                $errors = $job->errors();
                 $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
             }
         }
-//        $savants = $this->News->Savants->find('list', ['limit' => 200]);
-//        $users = $this->News->Users->find('list', ['limit' => 200]);
-        $this->set(compact('news'));
+        $this->set(compact('job'));
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id News id.
+     * @param string|null $id Job id.
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
-        $news = $this->News->get($id, [
-            'contain' => ['Industries','Savants']
+        $job = $this->Job->get($id, [
+            'contain' => ['Industries']
         ]);
         if ($this->request->is(['post', 'put'])) {
-            $news = $this->News->patchEntity($news, $this->request->data);
-            if ($this->News->save($news)) {
+            $job = $this->Job->patchEntity($job, $this->request->data);
+            if ($this->Job->save($job)) {
                 $this->Util->ajaxReturn(true, '修改成功');
             } else {
-                $errors = $news->errors();
+                $errors = $job->errors();
                 $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
-        $users = $this->News->Users->find('list', ['limit' => 200]);
-        $this->set(compact('news', 'users'));
         $selIndustryIds = [];
-        foreach($news->industries as $industry){
+        foreach ($job->industries as $industry) {
             $selIndustryIds[] = $industry->id;
         }
-        // 专家推荐
-        $selSavantIds = [];
-        if($news->savants)
-        {
-            foreach ($news->savants as $savant)
-            {
-                $selSavantIds[] = $savant->id;
-            }
-        }
-        $this->set(compact('news','selIndustryIds', 'selSavantIds'));
+        $this->set(compact('job','selIndustryIds'));
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id News id.
+     * @param string|null $id Job id.
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
@@ -110,11 +93,11 @@ class NewsController extends AppController {
         $this->request->allowMethod('post');
         $id = $this->request->data('id');
         if ($this->request->is('post')) {
-            $news = $this->News->get($id);
-            if ($this->News->delete($news)) {
+            $job = $this->Job->get($id);
+            if ($this->Job->delete($job)) {
                 $this->Util->ajaxReturn(true, '删除成功');
             } else {
-                $errors = $news->errors();
+                $errors = $job->errors();
                 $this->Util->ajaxReturn(true, getMessage($errors));
             }
         }
@@ -129,37 +112,27 @@ class NewsController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'News.' . $this->request->data('sidx');
+        $sort = 'Job.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
-        $industry = $this->request->data('industries');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where['or'] = [[' Users.truename like' => "%$keywords%"], ['(`title`) like' => "%$keywords%"], ['(`summary`) like' => "%$keywords%"]];
+            $where[' username like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
+            $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
-        $query = $this->News->find();
-        $query->contain(['Users','Industries'=>function($q){
-                    return $q->hydrate(false)->select(['name']);
-         }]);
-        if(!empty($industry['_ids'][0])){
-            //过滤
-           $query->matching('Industries',function($q)use($industry){
-               return $q->where(['Industries.id'=>$industry['_ids'][0]]);
-           });
-        }
-       
-        //$query->hydrate(false);
+        $query = $this->Job->find();
+        $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
         }
         $nums = $query->count();
+        $query->contain(['Admins', 'Industries']);
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
@@ -201,11 +174,11 @@ class NewsController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
-        $Table = $this->News;
-        $column = ['作者', '标题', '阅读数', '点赞数', '评论数', '封面', '内容', '摘要', '创建时间', '更新时间'];
+        $Table = $this->Job;
+        $column = ['公司', '负责人id', '联系方式', '分成方式', '招聘职位', '薪资范围', '工作地点', '招聘简介', 'create_time', 'update_time'];
         $query = $Table->find();
         $query->hydrate(false);
-        $query->select(['admin_id', 'title', 'read_nums', 'praise_nums', 'comment_nums', 'cover', 'body', 'summary', 'create_time', 'update_time']);
+        $query->select(['company', 'admin_id', 'contact', 'earnings', 'position', 'salary', 'address', 'summary', 'create_time', 'update_time']);
         if (!empty($where)) {
             $query->where($where);
         }
@@ -214,7 +187,7 @@ class NewsController extends AppController {
         }
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = 'News_' . date('Y-m-d') . '.csv';
+        $filename = 'Job_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
 

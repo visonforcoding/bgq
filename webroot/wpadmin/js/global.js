@@ -1,6 +1,7 @@
 $(function () {
 //    $.datetimepicker.setLocale('zh'); //日期选择器插件
-    //$('.datetime').datetimepicker({lang: 'zh'});
+    $('.datetimepicker').datetimepicker({lang: 'zh'});
+    $('.datepicker').datetimepicker({lang: 'zh',timepicker:false,format:'Y-m-d'});
     $('.date_timepicker_start').datetimepicker({
         format: 'Y/m/d',
         onShow: function (ct) {

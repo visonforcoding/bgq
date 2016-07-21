@@ -4,23 +4,23 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Job Entity.
+ * Candidate Entity.
  *
  * @property int $id
- * @property string $company
- * @property int $admin_id
- * @property \App\Model\Entity\Admin $admin
- * @property string $contact
- * @property int $earnings
- * @property string $position
- * @property string $salary
+ * @property int $job_id
+ * @property \App\Model\Entity\Job $job
+ * @property string $truename
+ * @property \Cake\I18n\Time $birthday
+ * @property string $phone
+ * @property string $email
  * @property string $address
- * @property string $summary
+ * @property string $career
+ * @property string $education
+ * @property string $salary
  * @property \Cake\I18n\Time $create_time
  * @property \Cake\I18n\Time $update_time
- * @property \App\Model\Entity\Industry[] $industry
  */
-class Job extends Entity
+class Candidate extends Entity
 {
 
     /**
