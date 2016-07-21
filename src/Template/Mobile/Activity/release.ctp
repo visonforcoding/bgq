@@ -1,6 +1,6 @@
 <div class="wraper">
     <form action="" method="post">
-        <div class="h20"></div>
+        <!-- <div class="h20"></div> -->
 <!--        <div class="infoboxlist a-pay paytype">
             <ul class='ulinfo'>
                 <li id="pay">是否为众筹项目：<span class='infocard'><input type="checkbox" name='pay' checked="true" id="pay_input"/><i class='active' id="pay_i"></i></span></li>
@@ -19,12 +19,12 @@
                 <?php endif; ?>
             </div>
         </div>
-        <div class="h20"></div>
-        <div class="crowdfunding innercon">
+        <div class="h2"></div>
+        <div class="crowdfunding innercon border">
             <span>您想要发起的活动主题是</span><input type="text" name="title" />
             <span>请描述您的大概需求</span><textarea name="body" rows="" cols=""></textarea>
         </div>
-        <div class="h20"></div>
+        <div class="h2"></div>
 
         <a href="javascript:void(0)" class='nextstep' id="submit">提交</a>
         <div class="line">
