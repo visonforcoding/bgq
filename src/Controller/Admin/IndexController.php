@@ -108,7 +108,7 @@ class IndexController extends AppController {
                     group by date(sb.create_time)')->fetchAll('assoc');
         $this->loadComponent('Chart');
         $month = date('m');
-        $label = $month.'月用活动报名数';
+        $label = $month.'月用户约见数';
         echo $this->Chart->setLineChartByDayWithMonth($result,$label,['backgroundColor'=>11,'borderCapStyle'=>'round']);
         exit();
     }
