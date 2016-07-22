@@ -109,7 +109,7 @@
     <!--行业标签-->
     <div class="markbox border" id="classfy">
         <div class="a-s-title bgff">
-            <span class="orgname">请选择行业标签<!--<i class="classfytext"></i>--></span>
+            <span class="orgname">请选择行业标签(最多4个)<!--<i class="classfytext"></i>--></span>
         </div>
         <div class="markslider">
             <div class="classfytext">
