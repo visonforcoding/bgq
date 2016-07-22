@@ -145,12 +145,12 @@
     <!--吸底按钮-->
     <div class="fixed-btn">
         <?php if ($activity->apply_end_time < time()): ?>
-            <a style="background:gray;" class="l-btn">已过期</a>
+            <a style="background:gray;" class="l-btn">我要赞助</a>
         <?php else: ?>
             <a href="/activity/recommend/<?= $activity->id; ?>" class="l-btn">我要赞助</a>
         <?php endif; ?>
         <?php if($activity->apply_end_time < time()): ?>
-            <a style="background:gray;" class="r-btn">已过期</a>
+            <a style="background:gray;" class="r-btn">我要报名</a>
         <?php else: ?>
             <?php if (empty($activity->activityapply)): ?>
                 <a  class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>

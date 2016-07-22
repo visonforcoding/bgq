@@ -1,6 +1,6 @@
 <div class="wraper bg-ff">
     <div class="head-info">
-        <a href="/home/edit-userinfo" class="m-pic"><img src="<?= $user->avatar ? $user->avatar : '/mobile/images/touxiang.png' ?>"/></a>
+        <a href="/home/edit-userinfo" class="m-pic"><span><img src="<?= $user->avatar ? $user->avatar : '/mobile/images/touxiang.png' ?>"/></span></a>
     </div>
     <div class="h-user">
         <h3><?= $user->truename ?></h3>
