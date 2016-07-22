@@ -463,14 +463,15 @@ class UserController extends AppController {
                 $follower = $FansTable->find()->where("`user_id` = '$following_id' and `following_id` = '$user_id'")->first();
                 if ($follower) {
                     //有被关注，改变互相关注状态
-                    $follower->type = 1;  
+                    $follower->type = 1; 
+                    $transRes = $FansTable->connection()
+                            ->transactional(function()use($FansTable, $follower, $fans) {
+                        //开启事务
+                        return $FansTable->delete($fans)&&$FansTable->save($follower);
+                    });
+                } else {
+                    $transRes = $FansTable->delete($fans);
                 }
-                $fans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$following_id'")->first();
-                $transRes = $FansTable->connection()
-                        ->transactional(function()use($FansTable, $follower, $fans) {
-                    //开启事务
-                    return $FansTable->delete($fans)&&$FansTable->save($follower);
-                });
                 if(!$transRes) {
                     return $this->Util->ajaxReturn(false, '取消关注失败');
                 } else {

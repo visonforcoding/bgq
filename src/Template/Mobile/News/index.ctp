@@ -25,7 +25,7 @@
 <script type="text/html" id="listTpl">
     <section class='news-list-items '>
         <a href="javascript:void(0)">
-            <h1 class="origin">{#author#}
+            <h1 class="{#origin#}">{#author#}
                 <time>{#create_time#}</time>
             </h1>
         </a>
@@ -90,6 +90,7 @@
                 d.author = '<span><img src="'+ d.avatar +'"/></span>' + d.user.truename;
             } else {
                 d.author = '<div class="website">【'+ d.source +'】</div>';
+                d.origin = 'origin';
             }
             d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
             d.cover = d.thumb ? d.thumb : d.cover;

@@ -131,7 +131,7 @@ class MeetController extends AppController {
                 }]]);
             }
         }
-        $biggie = $this->User->get($id, ['contain' => ['Savant', 'Subjects','RecoUsers','RecoUsers.Users']]);
+        $biggie = $this->User->get($id, ['contain' => ['Savant', 'Industries', 'Subjects','RecoUsers','RecoUsers.Users']]);
         $this->set([
             'biggie' => $biggie,
             'isReco'=>$isReco,

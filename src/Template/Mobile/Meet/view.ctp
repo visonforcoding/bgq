@@ -88,7 +88,34 @@
             <?php endif; ?>
         </p>
     </section>
-
+    <div class="tabcon border bgff" >
+        <ul class="inner basicon" style="display: block;">
+            <li class="b-hy">
+                <span><i class="iconfont">&#xe654;</i>所在行业</span>
+                <div>
+                    <?php foreach ($biggie->industries as $k=>$v): ?>
+                    <em><?= $v['name'] ?></em>
+                    <?php endforeach; ?>
+                </div>
+            </li>
+            <li class="b-bq">
+                <span><i class="iconfont">&#xe653;</i>个人标签</span>
+                <div>
+                    <?php if(is_array(unserialize($biggie->grbq))): ?>
+                        <?php foreach (unserialize($biggie->grbq) as $k=>$v): ?>
+                            <em><?= $v ?></em>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+            </li>
+            <li class="b-yw nobottom">
+                <span><i class="iconfont">&#xe655;</i>擅长业务</span>
+                <div>
+                    <em><?= $biggie->goodat; ?></em>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
 <div style='height:1.2rem'></div>
 </div>
