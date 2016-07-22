@@ -371,7 +371,7 @@ ALTER TABLE `newscom` ADD COLUMN `is_delete` TINYINT(2) NOT NULL DEFAULT '0' COM
 ALTER TABLE `activitycom` ADD COLUMN `is_delete` TINYINT(2) NOT NULL DEFAULT '0' COMMENT '是否删除';
 
 
-#咨询来源
+#资讯来源
 ALTER TABLE `news`
 	ADD COLUMN `source` VARCHAR(50) NOT NULL COMMENT '来源' AFTER `user_id`;
 ALTER TABLE `news`
@@ -438,3 +438,7 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=3
 ;
+	CHANGE COLUMN `keywords` `keywords` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '关键字' AFTER `source`;
+
+#活动表增加活动过期时间字段
+ALTER TABLE `activity` ADD COLUMN `apply_end_time` INT(10) NOT NULL DEFAULT 0 COMMENT '活动过期时间';
