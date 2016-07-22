@@ -306,30 +306,25 @@ class UserController extends AppController {
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $phone = $this->request->data('phone');
-            $user = $this->User->findByPhone($phone)->first();
+            $user = $this->User->findByPhoneAndEnabled($phone,1)->first();
             if ($user) {
-                if($user->enabled==1){
-                        $vcode = $this->request->session()->read('UserLoginVcode');
-                  if ($vcode['code'] == $this->request->data('vcode')) {
+                $vcode = $this->request->session()->read('UserLoginVcode');
+               if ($vcode['code'] == $this->request->data('vcode')) {
                   if (time() - $vcode['time'] < 60 * 10) {
                 //10分钟验证码超时
-                $this->request->session()->write('User.mobile', $user);
-                $user_token = false;
-                if($this->request->is('lemon')){
-                    $this->request->session()->write('Login.login_token',$user->user_token);
-                    $user_token = $user->user_token;
-                }
-                return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,'token_uin'=>$user_token]);
+                    $this->request->session()->write('User.mobile', $user);
+                    $user_token = false;
+                    if($this->request->is('lemon')){
+                        $this->request->session()->write('Login.login_token',$user->user_token);
+                        $user_token = $user->user_token;
+                    }
+                         return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,'token_uin'=>$user_token]);
                     } else {
                         $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
                      }
                   } else {
                       $this->Util->ajaxReturn(false, '验证码验证错误');
                  } 
-                }elseif($user->register_status<3){
-                    //中断注册的情况
-                }
-            
             } else{
                 //不存在该手机号用户
                 return $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或不可用']);
