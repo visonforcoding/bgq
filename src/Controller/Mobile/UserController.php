@@ -171,15 +171,20 @@ class UserController extends AppController {
      * 注册首页 第一步
      */
     public function register() {
-//        if (!$this->request->session()->read('reg.phone')) {
-//            $this->redirect('/user/register-vphone');
-//        }
+        if (!$this->request->session()->read('reg.phone')) {
+            $this->redirect('/user/register-vphone');
+        }
         if ($this->request->is('ajax')) {
             $user = $this->User->newEntity();
             $data = $this->request->data();
             $data['enabled'] = 1;
             $data['phone'] = $this->request->session()->read('reg.phone');
             $data['user_token'] =  md5(uniqid());
+            //隐私设置
+            $data['secret'] =  [
+                'phone_set'=>2,
+                'email_set'=>2
+            ];
             if ($this->request->session()->read('reg.wx_bind') && $this->request->session()->check('reg.wx_openid')) {
                 //第一次微信登录的完善信息
                 if($this->request->session()->check('reg.wx_unionid')){
@@ -194,7 +199,9 @@ class UserController extends AppController {
                     $data['avatar'] = $this->request->session()->read('reg.avatar');
                 }
             }
-            $user = $this->User->patchEntity($user, $data);
+            $user = $this->User->patchEntity($user, $data,[
+                'associated'=> 'Secret'
+            ]);
             if ($this->User->save($user)) {
                 $jumpUrl = '/home/index';
                 $msg = '注册成功';
@@ -302,9 +309,9 @@ class UserController extends AppController {
             $user = $this->User->findByPhone($phone)->first();
             if ($user) {
                 if($user->enabled==1){
-                       // $vcode = $this->request->session()->read('UserLoginVcode');
-                //  if ($vcode['code'] == $this->request->data('vcode')) {
-                //  if (time() - $vcode['time'] < 60 * 10) {
+                        $vcode = $this->request->session()->read('UserLoginVcode');
+                  if ($vcode['code'] == $this->request->data('vcode')) {
+                  if (time() - $vcode['time'] < 60 * 10) {
                 //10分钟验证码超时
                 $this->request->session()->write('User.mobile', $user);
                 $user_token = false;
@@ -313,12 +320,12 @@ class UserController extends AppController {
                     $user_token = $user->user_token;
                 }
                 return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,'token_uin'=>$user_token]);
-                //    } else {
-                //        $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
-                //     }
-                //  } else {
-                //      $this->Util->ajaxReturn(false, '验证码验证错误');
-                // } 
+                    } else {
+                        $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
+                     }
+                  } else {
+                      $this->Util->ajaxReturn(false, '验证码验证错误');
+                 } 
                 }elseif($user->register_status<3){
                     //中断注册的情况
                 }

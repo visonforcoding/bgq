@@ -127,6 +127,7 @@ class WxController extends AppController {
                 //存储微信头像
                 $avatar = $this->Util->saveUrlImage($headimgurl,'user/avatar');
                 $user->avatar = $avatar;
+                $user->union_id = $userinfo->unionid;
                 $user->wx_openid = $open_id;
                 $UserTable->save($user);
                 return $this->redirect('/home/index');
