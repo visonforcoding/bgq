@@ -946,7 +946,7 @@ width:0.5rem;height:0.16rem;display: inline-block;transition: all .3s;float:righ
 }
 .smark{-webkit-animation: smark .1s ;animation: smark .1s ;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
 .nosmark{-webkit-animation: nosmark .1s ;animation: nosmark .1s ;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
-.disp{-webkit-animation: disp .3s ;animation: disp .3s ;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
+.disp{-webkit-animation: disp .5s ;animation: disp .5s ;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
 .block{-webkit-animation: block .3s ;animation: block .3s ;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
 .nblock{-webkit-animation: nblock .3s ;animation: nblock .3s ;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
 .toggle a{display: inline-block;margin-left:0.1rem;color:#333;font-size:.3rem;}
