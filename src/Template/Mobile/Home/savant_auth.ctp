@@ -13,13 +13,13 @@
 
         <form method="post" action="">
             <li class="no-right-ico changeflex">
-                <b>项目经验</b>
+                <b>项目经验<a href="javascript:void(0);" class="r-example" id="xmjyTap">样例</a></b>
                 <div >
                     <textarea name="xmjy" <?php if($user->savant_status==2 || $user->savant_status==3): ?>disabled style="background: gainsboro;"<?php endif; ?> placeholder="" ><?=isset($user->savant) ? $user->savant->xmjy : ''?></textarea>
                 </div>
             </li>
             <li class="nobottom no-right-ico changeflex">
-                <b>擅长话题</b>
+                <b>擅长话题<a href="javascript:void(0);" class="r-example" id="schtTap">样例</a></b>
                 <div >
                     <textarea name="zyys" <?php if($user->savant_status==2 || $user->savant_status==3): ?>disabled style="background: gainsboro;"<?php endif; ?> placeholder="" ><?= isset($user->savant)?$user->savant->zyys:''?></textarea>
                 </div>
@@ -40,6 +40,13 @@
     <?php endif; ?>
     <div style="color:red; text-align: center">我们的秘书会在两个工作日内联系您</div>
 </div>
+<div class="reg-shadow" id="shadow" hidden></div>
+<div class="tips" hidden id="xmjy" style="z-index: 999">
+    <p>项目经验样例</p>
+</div>
+<div class="tips" hidden id="scht" style="z-index: 999">
+    <p>擅长话题样例</p>
+</div>
 <?php $this->start('script') ?>
 <script>
     $(function () {
@@ -59,6 +66,23 @@
             });
             return false;
         });
+    });
+    
+    $('#xmjyTap').on('tap', function(){
+        $('#xmjy').show();
+        $('#shadow').show();
+    });
+    $('#schtTap').on('tap', function(){
+        $('#scht').show();
+        $('#shadow').show();
+    });
+    $('#shadow').on('tap', function(){
+        setTimeout(function(){
+            $('#scht').hide();
+            $('#xmjy').hide();
+            $('#shadow').hide();
+        },400);
+        
     });
 </script>
 <?php $this->end('script'); ?>
