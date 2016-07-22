@@ -79,7 +79,7 @@
             <span class='com-all' style="display:none;"><a href="#allcoment" id="showAllComment">查看更多评价</a></span>
         </section>
         <div style="height:.6rem"></div>
-        <div class="active-commond innercon">
+<!--        <div class="active-commond innercon">
             <section class="my-collection-info  nobottom">
                 <div>
                     <a href="activity-details.html" class="clearfix">
@@ -112,7 +112,7 @@
                     </a>
                 </div>
             </section>
-        </div>
+        </div>-->
         <!--专家推荐-->
         <?php if ($activity->savants): ?>
             <div class="expert-commond innercon">
