@@ -54,8 +54,10 @@
     }else {
         window.sid = a;
     }
+    $('input[name="series_id"]').val(<?= $sid?>);
 </script>
 <script>
+    
     $.ajax({
         type: 'POST',
         dataType: 'json',
