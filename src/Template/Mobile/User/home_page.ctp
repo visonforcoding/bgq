@@ -4,7 +4,7 @@
     </div>
     <div class="h-user">
         <h3><?= $user->truename ?></h3>
-        <div class="u-s-name"><span><?= $user->company ?> </span> / <span><?= $user->position ?></span></div>
+        <div class="u-s-name"><span><?= $user->company ?> </span><span><?= $user->position ? ' / '.$user->position : '' ?></span></div>
         <div class="mobile-number">
             <?php if(!$self): ?>
                 <?php if($user->secret): ?>
