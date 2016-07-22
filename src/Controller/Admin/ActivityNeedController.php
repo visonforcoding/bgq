@@ -9,10 +9,15 @@ use Wpadmin\Controller\AppController;
  *
  * @property \App\Model\Table\ActivityTable $Activity
  */
-class ActivityController extends AppController {
+class ActivityNeedController extends AppController {
     
     
     const SERIES_CONF = 'activitySeries';
+    
+    public function initialize() {
+        parent::initialize();
+        $this->loadModel('Activity');
+    }
 
     /**
      * Index method
@@ -141,7 +146,7 @@ class ActivityController extends AppController {
         $region_id = $this->request->data('region_id');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = ['from_user >'=>-1];
+        $where = ['from_user'=>-1];
         
         if (!empty($series_id)) {
             $where['and'] = ['series_id'=>$series_id];
@@ -201,7 +206,7 @@ class ActivityController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = ['from_user >'=>-1];
+         $where = ['from_user'=>-1];
         if (!empty($keywords)) {
             $where[' username like'] = "%$keywords%";
         }
