@@ -520,8 +520,10 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .u-s-name{color:#7a7d82;font-size:.26rem;line-height: .3rem;}
 .u-btn{font-size:0;margin-top:.3rem;}
 .u-btn a{display: inline-block;width:2.42rem;height:.73rem;line-height: .7rem;border-radius: .4rem;}
-.u-btn a.focusbtn{margin-right:.3rem;-webkit-box-shadow: 0 .04rem .12rem rgba(255,75,112,.5);box-shadow: 0 .04rem .12rem rgba(255,75,112,.5);background:linear-gradient(top,#ff567b,#ff4b70);background:-webkit-linear-gradient(top,#ff567b,#ff4b70);color:#ffffff;}
-.u-btn a.cardbtn{color:#ff5277;border:2px #ff5277 solid;box-sizing: border-box;}
+.u-btn .focusbtn{margin-right:.3rem;-webkit-box-shadow: 0 .04rem .12rem rgba(255,75,112,.5);box-shadow: 0 .04rem .12rem rgba(255,75,112,.5);background:linear-gradient(top,#ff567b,#ff4b70);background:-webkit-linear-gradient(top,#ff567b,#ff4b70);color:#fff;}
+.u-btn .focusgray{background:#7a7d82;-webkit-box-shadow: 0 .04rem .12rem rgba(255,75,112,.5);box-shadow: 0 .04rem .12rem rgba(122,125,130,.5);}
+.u-btn .cardbtn{color:#ff5277;border:2px #ff5277 solid;box-sizing: border-box;}
+.u-btn .cardgray{color:#7a7d82;border:2px #7a7d82 solid;}
 .basicinfo{overflow:hidden;margin-top:.36rem;}
 .basicinfo li{width:33.3%;float:left; text-align: center;height:1.07rem;display: table-cell;vertical-align: middle;}
 .basicinfo li:nth-of-type(2){border-left:1px #e5e5e5 solid;border-right:1px #e5e5e5 solid;}
@@ -636,7 +638,7 @@ border-radius: 50%;}
 /*.h-info-box li b{float:left;}*/
 .s-title-pass li h3{color:#e01a48;}
 .s-title-pass li p{color:#9ba4ad; line-height: 0.36rem;}
-.h-info-box .no-b-border a{display:block;background: url(img/right.png) no-repeat right center; background-size:0.18rem 0.25rem;font-size:0.3rem;}
+.h-info-box .no-b-border a{display:block;background: url(img/right.png) no-repeat right center; background-size:0.18rem 0.25rem;font-size:0.26rem;}
 .h-info-box .nobg-ele a{background: none;padding-right: 0;}
 .h-info-box h3 span{float:right;}
 .h-info-box li p span,.h-info-box li p i{display: block;}
