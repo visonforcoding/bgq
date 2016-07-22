@@ -161,7 +161,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 border-bottom:1px #e5e5e5 solid; padding:0 0.3rem;position:relative;font-weight:500}
 .newscomment-box .comment-title span{position:absolute;right:0.3rem;color:#7a7e83;font-size:0.26rem;}
 .newscomment-box .comment-title i{font-size:0.28rem;margin-right:0.1rem; vertical-align: middle;display:inline-block;}
-.newscomment-box .items{margin: 0.3rem 0.3rem 0 0.3rem;border-bottom:1px #e5e5e5 solid;padding-bottom:0.2rem;}
+.newscomment-box .items{margin: 0.3rem 0.3rem 0.3rem 0.3rem;border-bottom:1px #e5e5e5 solid;}
 .entrollist{padding:0.2rem 0.3rem;border-bottom:1px #e5e5e5 solid;}
 .entrollist:last-of-type{border-bottom:none;}
 .entrollist a{display: block;overflow: hide;}
