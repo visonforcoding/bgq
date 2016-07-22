@@ -5,30 +5,25 @@
     <div class="h-user">
         <h3><?= $user->truename ?></h3>
         <div class="u-s-name"><span><?= $user->company ?> </span> / <span><?= $user->position ?></span></div>
+        <div class="mobile-number">
+            <?php if(!$self): ?>
+                <?php if ($user->secret->phone_set == '1'): ?>
+                    <a href="tel:<?= $user->phone ?>" onclick="if($.util.isAPP){LEMON.event.tel(<?= $user->phone ?>);}"><span><i class="iconfont">&#xe657;</i><?= $user->phone ?></span></a>
+                <?php endif; ?>
+                <?php if ($user->secret->email_set == '1'): ?>
+                    <span><i class="iconfont">&#xe625;</i><?= $user->email ?></span>
+                <?php endif; ?>
+            <?php else: ?>
+                <span><i class="iconfont">&#xe657;</i><?= $user->phone ?></span>
+                <span><i class="iconfont">&#xe625;</i><?= $user->email ?></span>
+            <?php endif; ?>
+        </div>
         <div class="u-btn">
             <?php if(!$self): ?>
             <a href="javascript:void(0);" id="follow_btn" class="focusbtn <?php if($isFans): ?>focusgray<?php endif; ?>"><?php if($isFans): ?>取消关注<?php else: ?>关注<?php endif; ?></a>
             <a href="javascript:void(0);" id="giveCard" class="cardbtn <?php if($isGive): ?>cardgray<?php endif; ?>"><?php if($isGive): ?>已递名片<?php else: ?>递名片<?php endif; ?></a>
             <?php endif; ?>
         </div>
-        <ul class="basicinfo border">
-            <li><span><?= $user->city ? $user->city : '暂未填写' ?></span><i>地区</i></li>
-            <?php if(!$self): ?>
-                <?php if ($user->secret->phone_set == '1'): ?>
-                    <li><a href="tel:<?= $user->phone ?>" onclick="if($.util.isAPP){LEMON.event.tel(<?= $user->phone ?>);}"><span><?= $user->phone ?></span><i>电话</i></a></li>
-                <?php else: ?>
-                    <li><span>未公开</span><i>电话</i></li>
-                <?php endif; ?>
-                <?php if ($user->secret->email_set == '1'): ?>
-                    <li><span><?= $user->email ?></span><i>邮箱</i></li>
-                <?php else: ?>
-                    <li><span>未公开</span><i>邮箱</i></li>
-                <?php endif; ?>
-            <?php else: ?>
-                <li><span><?= $user->phone ?></span><i>电话</i></li>
-                <li><span><?= $user->email ? $user->email : '暂未填写' ?></span><i>邮箱</i></li>
-            <?php endif; ?>
-        </ul>
     </div>
     <div class="infotab">
         <ul class="h-tab bbottom clearfix">
@@ -38,6 +33,12 @@
         </ul>
         <div class="tabcon bbottom">
             <ul class="cur inner basicon">
+                <li class="b-dq">
+                    <span><i class="iconfont">&#xe660;</i>所在地区</span>
+                    <div>
+                        <em><?= $user->city ? $user->city : '暂未填写' ?></em>
+                    </div>
+                </li>
                 <li class="b-hy">
                     <span><i class="iconfont">&#xe654;</i>所在行业</span>
                     <div>

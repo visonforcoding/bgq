@@ -238,6 +238,16 @@ class HomeController extends AppController {
                                 $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
                                 $unReadFollowCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type' => 1])->count(); //未读关注消息
                                 $unReadSysCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type !=' => 1])->count(); //未读系统消息
+                                $this->set([
+                                    'pageTitle' => '关注消息',
+                                    'unReadSysCount' => $unReadSysCount,
+                                    'unReadFollowCount' => $unReadFollowCount
+                                ]);
+                            }
+                            
+                            public function getFansMessage(){
+                                $user_id = $this->user->id;
+                                $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
                                 $fans = $UsermsgTable->find()
                                                 ->hydrate(false)
                                                 ->select(['u.truename', 'u.avatar', 'u.id', 'create_time',
@@ -258,29 +268,37 @@ class HomeController extends AppController {
                                                 ->orderDesc('usermsg.create_time')->toArray();
                                 //看了之后 就更改状态了为已读
                                 $UsermsgTable->updateAll(['status' => 1], ['user_id' => $user_id, 'status' => 0]);
-                                $this->set([
-                                    'pageTitle' => '关注消息',
-                                    'fans' => $fans,
-                                    'unReadSysCount' => $unReadSysCount,
-                                    'unReadFollowCount' => $unReadFollowCount
-                                ]);
+                                if($fans){
+                                    return $this->Util->ajaxReturn(['status'=>true, 'data'=>$fans]);
+                                } elseif($fans == []) {
+                                    return $this->Util->ajaxReturn(false, '暂无消息');
+                                } else {
+                                    return $this->Util->ajaxReturn(false, '系统错误');
+                                }
                             }
 
                             /**
                              * 我的系统消息
                              */
-                            public function myMessageSys() {
+                            public function getSysMessage() {
                                 $user_id = $this->user->id;
                                 $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
-                                $unReadFollowCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type' => 1])->count(); //未读关注消息
-                                $unReadSysCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type !=' => 1])->count(); //未读系统消息
+//                                $unReadFollowCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type' => 1])->count(); //未读关注消息
+//                                $unReadSysCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type !=' => 1])->count(); //未读系统消息
                                 $msgs = $UsermsgTable->find()->where(['user_id' => $user_id, 'type !=' => 1])->orderDesc('create_time')->toArray();
-                                $this->set([
-                                    'pageTitle' => '系统消息',
-                                    'unReadFollowCount' => $unReadFollowCount,
-                                    'unReadSysCount' => $unReadSysCount
-                                ]);
-                                $this->set(compact('msgs', 'unReadCount'));
+//                                $this->set([
+//                                    'pageTitle' => '系统消息',
+//                                    'unReadFollowCount' => $unReadFollowCount,
+//                                    'unReadSysCount' => $unReadSysCount
+//                                ]);
+//                                $this->set(compact('msgs', 'unReadCount'));
+                                if($msgs){
+                                    return $this->Util->ajaxReturn(['status'=>true, 'data'=>$msgs]);
+                                } elseif($msgs == []) {
+                                    return $this->Util->ajaxReturn(false, '暂无消息');
+                                } else {
+                                    return $this->Util->ajaxReturn(false, '系统错误');
+                                }
                             }
                             
                             public function myXiaomi(){
