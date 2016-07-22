@@ -179,6 +179,7 @@ class UserController extends AppController {
             $data = $this->request->data();
             $data['enabled'] = 1;
             $data['phone'] = $this->request->session()->read('reg.phone');
+            $data['user_token'] =  md5(uniqid());
             if ($this->request->session()->read('reg.wx_bind') && $this->request->session()->check('reg.wx_openid')) {
                 //第一次微信登录的完善信息
                 if($this->request->session()->check('reg.wx_unionid')){
@@ -196,10 +197,19 @@ class UserController extends AppController {
             $user = $this->User->patchEntity($user, $data);
             if ($this->User->save($user)) {
                 $jumpUrl = '/home/index';
+                $msg = '注册成功';
                 if($this->request->is('weixin')){
                     $jumpUrl = '/wx/bindWx';
+                    $msg = '注册成功,前往绑定微信';
                 }
-                return $this->Util->ajaxReturn(['status' => true, 'url' => $jumpUrl]);
+                $this->request->session()->write('User.mobile', $user);
+                $this->user = $user;
+                $user_token = false;
+                if($this->request->is('lemon')){
+                    $this->request->session()->write('Login.login_token',$user->user_token);
+                    $user_token = $user->user_token;
+                }
+                return $this->Util->ajaxReturn(['status' => true,'msg'=>$msg, 'url' => $jumpUrl]);
             } else {
                \Cake\Log\Log::error($user->errors());
                return $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($user->errors())]);
