@@ -508,8 +508,9 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .m-info-card{height:4rem;padding:0 0.3rem;margin: 0 auto;}
 .m-info{margin-top:0.89rem;border-radius: 0.2rem;
 box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff;position:relative;padding:0.56rem 0.25rem 0.1rem;}
-.m-pic{position:absolute;left:50%;bottom:-1.01rem;width:2.02rem;height:2.02rem;margin-left:-1.01rem;border-radius: 50%;overflow:hidden;box-shadow: 0 0.06rem 0.12rem rgba(211,214,218,.5);}
-.m-pic img{width:2.02rem;height:2.02rem;}
+.m-pic{position:absolute;left:50%;bottom:-1.05rem;margin-left:-1.05rem;border-radius: 50%;overflow:hidden;box-shadow: 0 0.06rem 0.12rem rgba(211,214,218,.5);}
+.m-pic img{width:2.02rem;height:2.02rem;margin:0.04rem;border-radius: 50%;}
+.m-pic span{}
 .mt-info{}
 .mt-info h3{font-size:0.36rem;font-weight: bold;line-height: 0.74rem;font-size:.3rem;}
 .mt-info span{display: block;line-height: 0.32rem;font-size:0.28rem;}
@@ -580,7 +581,7 @@ background: url(img/mbg.jpg) no-repeat;background-size: contain;}
 color:#fff;background: #dd1f4b;}
 .c-padding{padding:0.9rem 0 0.2rem;}
 .h-home-bottom h4{text-align: center;padding:0.1rem 0;}
-.h-home-bottom div.t-home-top span{/*width:2.4rem;height:2.4rem;*/display:inline-block;position:relative;background-color: #fff;
+.h-home-bottom div.t-home-top span,.m-pic span{/*width:2.4rem;height:2.4rem;*/display:inline-block;position:relative;background-color: #fff;
 border-radius: 50%;}
 .info-desc{font-size:0;color:#fff;text-align: center;}
 .info-desc span{display:block;font-size:0.3rem;line-height:0.46rem;}
