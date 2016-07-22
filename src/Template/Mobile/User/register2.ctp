@@ -68,7 +68,7 @@
                 <ul	class="b-mark headmark mt1">
                     <?php foreach ($agencys as $key => $agency): ?>
                         <?php if ($key < 3): ?>
-                            <li data-target='car1tuli<?= $agency['id'] ?>' ><a href="#this"><?= $agency['name'] ?></a> <span class="icon-bottom"></span></li>
+                            <li data-target='car1tuli<?= $agency['id'] ?>' ><a href="javascript:void(0);"><?= $agency['name'] ?></a> <span class="icon-bottom"></span></li>
                         <?php else: ?>
                             <?php break; ?>
                         <?php endif; ?>
@@ -78,7 +78,7 @@
                     <?php if ($key < 3): ?>
                         <ul class="b-mark cart cart1 mt1" data-id='car1tuli<?= $agency['id'] ?>' id='u<?= $agency['id'] ?>'>
                             <?php foreach ($agency['children'] as $item): ?>
-                                <li data-val="<?= $item['id'] ?>" ><a href="#this" ><?= $item['name'] ?></a></li>
+                                <li data-val="<?= $item['id'] ?>" ><a href="javascript:void(0);" ><?= $item['name'] ?></a></li>
                             <?php endforeach; ?>
                         </ul>
                     <?php else: ?>
@@ -88,7 +88,7 @@
                 <ul	class="b-mark headmark mt1">
                     <?php foreach ($agencys as $key => $agency): ?>
                         <?php if ($key > 2): ?>
-                            <li data-target='car2tuli<?= $agency['id'] ?>' ><a href="#this"><?= $agency['name'] ?></a> <span class="icon-bottom"></span></li>
+                            <li data-target='car2tuli<?= $agency['id'] ?>' ><a href="javascript:void(0);"><?= $agency['name'] ?></a> <span class="icon-bottom"></span></li>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </ul>
@@ -96,7 +96,7 @@
                     <?php if ($key > 2): ?>
                         <ul class="b-mark cart cart1 mt1" data-id='car2tuli<?= $agency['id'] ?>' id='u<?= $agency['id'] ?>'>
                             <?php foreach ($agency['children'] as $item): ?>
-                                <li data-val="<?= $item['id'] ?>" ><a href="#this" ><?= $item['name'] ?></a></li>
+                                <li data-val="<?= $item['id'] ?>" ><a href="javascript:void(0);" ><?= $item['name'] ?></a></li>
                             <?php endforeach; ?>
                         </ul>
                     <?php endif; ?>
@@ -118,13 +118,13 @@
             <div class="mark-items">
                 <ul	class="b-mark classfymark">
                     <?php foreach ($industries as $industry): ?>
-                        <li  data-target='class1tuli<?= $industry['id'] ?>' ><a href="#this"><?= $industry['name'] ?></a> <span class="icon-bottom"></span></li>
+                        <li  data-target='class1tuli<?= $industry['id'] ?>' ><a href="javascript:void(0);"><?= $industry['name'] ?></a> <span class="icon-bottom"></span></li>
                     <?php endforeach; ?>
                 </ul>
                 <?php foreach ($industries as $industry): ?>
                     <ul class="b-mark cart cart1 mt1" data-id='class1tuli<?= $industry['id'] ?>' id='u1'>
                         <?php foreach ($industry['children'] as $item): ?>
-                            <li data-val="<?= $item['id'] ?>" ><a href="#this" ><?= $item['name'] ?></a></li>
+                            <li data-val="<?= $item['id'] ?>" ><a href="javascript:void(0);" ><?= $item['name'] ?></a></li>
                         <?php endforeach; ?>
                     </ul>
                 <?php endforeach; ?>
@@ -166,6 +166,7 @@
         });
         $('#classfy .cart>li').on('tap', function () {
             var industry_id = $(this).data('val');
+            $('#cart a').removeClass('active');
             $(this).children('a').addClass('active');
             $('.classfytext').append('<a class="industry_item" data-val="' + industry_id + '" href="javascript:void(0)">' + $(this)[0].innerText + '</a>');
         });
