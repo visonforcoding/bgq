@@ -41,7 +41,7 @@
 				</div>
 				<div class="a-search-box">
 					<div class="a-search">
-						<a href=""><i class="iconfont">&#xe613;</i></a>
+						<a href=""><i class="iconfont">&#xe618;</i></a>
 						<div class="s-con">
 							<input type="text" placeholder="请输入关键词" />
 						</div>
@@ -54,27 +54,27 @@
 				<div class="allmenu">
 					<div class="menulist clearfix" id="allsort">
 						<a href="#this">
-						<i class="iconfont">&#xe640;</i>
+						<i class="iconfont">&#xe636;</i>
 						<span>健康医疗</span>
 					</a>
 					<a href="#this">
-						<i class="iconfont">&#xe63f;</i>
+						<i class="iconfont">&#xe635;</i>
 						<span>互联网</span>
 					</a>
 					<a href="#this">
-						<i class="iconfont">&#xe63f;</i>
+						<i class="iconfont">&#xe637;</i>
 						<span>大消费</span>
 					</a>
 					<a href="#this">
-						<i class="iconfont">&#xe63f;</i>
+						<i class="iconfont">&#xe63b;</i>
 						<span>文化传媒</span>
 					</a>
 					<a href="#this">
-						<i class="iconfont">&#xe63f;</i>
+						<i class="iconfont">&#xe63c;</i>
 						<span>工业4.0</span>
 					</a>
 					<a href="#this">
-						<i class="iconfont">&#xe63f;</i>
+						<i class="iconfont">&#xe63d;</i>
 						<span>新能源</span>
 					</a>
 					<a href="#this">
@@ -82,13 +82,13 @@
 						<span>新材料</span>
 					</a>
 					<a href="#this">
-						<i class="iconfont">&#xe642;</i>
-						<span>金融</span>
+						<i class="iconfont">&#xe638;</i>
+						<span>节能环保</span>
 					</a>
 					
 					<a href="#this">
-						<i class="iconfont">&#xe643;</i>
-						<span>艺术</span>
+						<i class="iconfont">&#xe640;</i>
+						<span>定增基金</span>
 					</a>
 					
 					<a href="classify.html">
@@ -180,25 +180,25 @@
 		<ul class="navfooter clearfix">
 			<li>
 				
-				<a href="news.html"><span class="iconfont">&#xe609;</span>资讯</a>
+				<a href="news.html"><span class="iconfont">&#xe648;</span>资讯</a>
 			</li>
 			<li>
 				
-				<a href="activity.html"><span class="iconfont">&#xe601;</span>活动</a>
+				<a href="activity.html"><span class="iconfont">&#xe60c;</span>活动</a>
 			</li>
 			
-			<li class="active">
+			<li  class="active">
 				
-				<a href="meet.html"><span class="iconfont">&#xe60b;</span>大咖</a>
+				<a href="meet.html"><span class="iconfont">&#xe649;</span>大咖</a>
 			</li>
 			<li>
 				
-				<a href="myhome.html"><span class="iconfont">&#xe60d;</span>我</a>
+				<a href="myhome.html"><span class="iconfont">&#xe612;</span>我</a>
 			</li>
 		</ul>
 	</footer>
 	 <script>
-                var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'));
+          var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'),$('.a-banner'));
                  
 
             var sub = null;
@@ -209,7 +209,8 @@
 	                    moveChild: $('#items li'),
 	                    lockScrY: true,
 	                    loopScroll: true,
-//	                    autoTime:3000,
+	                    autoTime:0,
+	                    viewDom:$('.dk'),
 	                    
 	                });
            },0)
