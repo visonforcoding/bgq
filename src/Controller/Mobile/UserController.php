@@ -195,7 +195,11 @@ class UserController extends AppController {
             }
             $user = $this->User->patchEntity($user, $data);
             if ($this->User->save($user)) {
-                return $this->Util->ajaxReturn(['status' => true, 'url' => '/home/index']);
+                $jumpUrl = '/home/index';
+                if($this->request->is('weixin')){
+                    $jumpUrl = '/wx/bindWx';
+                }
+                return $this->Util->ajaxReturn(['status' => true, 'url' => $jumpUrl]);
             } else {
                \Cake\Log\Log::error($user->errors());
                return $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($user->errors())]);
