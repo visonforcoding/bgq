@@ -34,7 +34,7 @@
                 <h3>{#title#}</h3>
                 {#apply_msg#}
                 <span>{#address#}</span>
-                <span>{#time#}<i>{#appply_nums#}人报名</i></span>
+                <span>{#time#}<i>{#apply_nums#}人报名</i></span>
             </div>
         </a>
     </div>
