@@ -308,10 +308,10 @@ class UserController extends AppController {
             $phone = $this->request->data('phone');
             $user = $this->User->findByPhoneAndEnabled($phone,1)->first();
             if ($user) {
-                $vcode = $this->request->session()->read('UserLoginVcode');
-               if ($vcode['code'] == $this->request->data('vcode')) {
-                  if (time() - $vcode['time'] < 60 * 10) {
-                //10分钟验证码超时
+//                $vcode = $this->request->session()->read('UserLoginVcode');
+//               if ($vcode['code'] == $this->request->data('vcode')) {
+//                  if (time() - $vcode['time'] < 60 * 10) {
+//                //10分钟验证码超时
                     $this->request->session()->write('User.mobile', $user);
                     $user_token = false;
                     if($this->request->is('lemon')){
@@ -319,12 +319,12 @@ class UserController extends AppController {
                         $user_token = $user->user_token;
                     }
                          return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,'token_uin'=>$user_token]);
-                    } else {
-                        $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
-                     }
-                  } else {
-                      $this->Util->ajaxReturn(false, '验证码验证错误');
-                 } 
+//                    } else {
+//                        return $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
+//                     }
+//                  } else {
+//                      return $this->Util->ajaxReturn(false, '验证码验证错误');
+//                 } 
             } else{
                 //不存在该手机号用户
                 return $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或不可用']);
