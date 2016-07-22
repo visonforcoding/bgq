@@ -159,14 +159,16 @@
                             d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == - 1 ? '' : '<span class="is-apply">已报名</span>';
                             return d;
                         });
-                        $('.orgname').toggleClass('active');
-                        if($('.a-s-mark').hasClass('disp')){
-                            $('.a-s-mark').removeClass('disp').addClass('block');
-                        }else if($('.a-s-mark').hasClass('block')){
-                            $('.a-s-mark').removeClass('block').addClass('disp');
-                        }else{
-                            $('.a-s-mark').addClass('disp');
-                        }
+                        setTimeout(function(){
+                            $('.orgname').toggleClass('active');
+                            if($('.a-s-mark').hasClass('disp')){
+                                $('.a-s-mark').removeClass('disp').addClass('block');
+                            }else if($('.a-s-mark').hasClass('block')){
+                                $('.a-s-mark').removeClass('block').addClass('disp');
+                            }else{
+                                $('.a-s-mark').addClass('disp');
+                            }
+                        },400);
                     } else {
                         $('#search').html('');
                         $.util.alert(msg.msg);
