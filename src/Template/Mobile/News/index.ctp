@@ -84,7 +84,7 @@
     
     function dealData(data){
         var html = $.util.dataToTpl('', 'listTpl', data, function (d) {
-            if(d.source == ''){
+            if(d.user){
                 d.user_id = d.user.id;
                 d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                 d.author = '<span><img src="'+ d.avatar +'"/></span>' + d.user.truename;
