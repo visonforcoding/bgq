@@ -79,6 +79,8 @@
                 });
                 if($('.default').length != 0){
                     seriesTap($('.default').get(0));
+                } else {
+                    $('input[name="keyword"]').focus();
                 }
                 $('.regions').on('tap', function(){
                     $('#sellect').text($(this).text());
@@ -110,7 +112,7 @@
         }
     });
     
-    $('input[name="keyword"]').focus();
+    
     window.isApply = ',' + <?= $isApply ?> + ',';
     
     
