@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
                     <div class="databox bg-white radius-bordered">
                         <div class="databox-left bg-themesecondary ht">
                             专家认证          
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
                     <div class="databox bg-white radius-bordered">
                         <div class="databox-left bg-themethirdcolor ht">
                             小秘书          
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
                     <div class="databox bg-white radius-bordered">
                         <div class="databox-left bg-themeprimary ht">
                             提现        
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
+<!--                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
                     <div class="databox bg-white radius-bordered">
                         <div class="databox-left bg-palegreen ht">
                             会员          
@@ -140,7 +140,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
 
         </div>
