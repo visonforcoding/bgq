@@ -68,20 +68,34 @@
                 </li>
             </ul>
             <ul class="basicon worktab">
-                <?php foreach($user->careers as $career): ?>
-                <a class="bbottom">
-                    <li class="inner"><span><?= $career->company ?></span></li>
-                    <span class="worktime"><?= $career->start_date ?>～<?= $career->end_date ?>，<?= $career->position ?></span>
-                </a>
-                <?php endforeach; ?>
+                <?php if($user->careers): ?>
+                    <?php foreach($user->careers as $career): ?>
+                    <a class="bbottom">
+                        <li class="inner"><span><?= $career->company ?></span></li>
+                        <span class="worktime"><?= $career->start_date ?>～<?= $career->end_date ?>，<?= $career->position ?></span>
+                    </a>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <a class="bbottom">
+                        <li class="inner"><span>暂未填写</span></li>
+                        <span class="worktime">暂未填写</span>
+                    </a>
+                <?php endif; ?>
             </ul>
             <ul class="basicon worktab">
-                <?php foreach($user->educations as $education): ?>
-                <a class="bbottom">
-                    <li class="inner"><span><?= $education->school ?></span></li>
-                    <span class="worktime"><?= $education->start_date ?>～<?= $education->end_date ?>，<?= $education->major ?>，<?= $educationType[$education->education] ?></span>
-                </a>
-                <?php endforeach; ?>
+                <?php if($user->educations): ?>
+                    <?php foreach($user->educations as $education): ?>
+                    <a class="bbottom">
+                        <li class="inner"><span><?= $education->school ?></span></li>
+                        <span class="worktime"><?= $education->start_date ?>～<?= $education->end_date ?>，<?= $education->major ?>，<?= $educationType[$education->education] ?></span>
+                    </a>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <a class="bbottom">
+                        <li class="inner"><span>暂未填写</span></li>
+                        <span class="worktime">暂未填写</span>
+                    </a>
+                <?php endif; ?>
             </ul>
         </div>
         <div class="h2">
