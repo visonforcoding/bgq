@@ -700,297 +700,298 @@ class HomeController extends AppController {
         ]);
     }
 
-                                                                    /**
-                                                                     * 编辑教育经历
-                                                                     */
-                                                                    public function editEducation() {
-                                                                        $EducationTable = \Cake\ORM\TableRegistry::get('Education');
-                                                                        $educations = $EducationTable->find()->where(['user_id' => $this->user->id])->toArray();
-                                                                        $educationType = \Cake\Core\Configure::read('educationType');
-                                                                        $this->set([
-                                                                            'pageTitle' => '编辑教育经历',
-                                                                            'educations' => $educations,
-                                                                            'educationType' => $educationType
-                                                                        ]);
-                                                                    }
+    /**
+     * 编辑教育经历
+     */
+    public function editEducation() {
+        $EducationTable = \Cake\ORM\TableRegistry::get('Education');
+        $educations = $EducationTable->find()->where(['user_id' => $this->user->id])->toArray();
+        $educationType = \Cake\Core\Configure::read('educationType');
+        $this->set([
+            'pageTitle' => '编辑教育经历',
+            'educations' => $educations,
+            'educationType' => $educationType
+        ]);
+    }
 
-                                                                    /**
-                                                                     * 保存教育经历
-                                                                     */
-                                                                    public function saveEducation() {
-                                                                        $EducationTable = \Cake\ORM\TableRegistry::get('Education');
-                                                                        if ($this->request->is('post')) {
-                                                                            $data = $this->request->data();
-                                                                            if (!empty($data['id'])) {
-                                                                                $education = $EducationTable->get($data['id']);
-                                                                                if ($education) {
-                                                                                    $education = $EducationTable->patchEntity($education, $data);
-                                                                                    $res = $EducationTable->save($education);
-                                                                                } else {
-                                                                                    return $this->Util->ajaxReturn(false, '不存在的id');
-                                                                                }
-                                                                            } else {
-                                                                                $data['user_id'] = $this->user->id;
-                                                                                $education = $EducationTable->newEntity();
-                                                                                $education = $EducationTable->patchEntity($education, $data);
-                                                                                $res = $EducationTable->save($education);
-                                                                            }
-                                                                            if ($res) {
-                                                                                return $this->Util->ajaxReturn(['status' => true, 'msg' => '保存成功', 'id' => $res->id]);
-                                                                            } else {
-                                                                                return $this->Util->ajaxReturn(false, '保存失败');
-                                                                            }
-                                                                        }
-                                                                    }
+    /**
+     * 保存教育经历
+     */
+    public function saveEducation() {
+        $EducationTable = \Cake\ORM\TableRegistry::get('Education');
+        if ($this->request->is('post')) {
+            $data = $this->request->data();
+            if (!empty($data['id'])) {
+                $education = $EducationTable->get($data['id']);
+                if ($education) {
+                    $education = $EducationTable->patchEntity($education, $data);
+                    $res = $EducationTable->save($education);
+                } else {
+                    return $this->Util->ajaxReturn(false, '不存在的id');
+                }
+            } else {
+                $data['user_id'] = $this->user->id;
+                $education = $EducationTable->newEntity();
+                $education = $EducationTable->patchEntity($education, $data);
+                $res = $EducationTable->save($education);
+            }
+            if ($res) {
+                return $this->Util->ajaxReturn(['status' => true, 'msg' => '保存成功', 'id' => $res->id]);
+            } else {
+                return $this->Util->ajaxReturn(false, '保存失败');
+            }
+        }
+    }
 
-                                                                    /**
-                                                                     * 编辑工作经历
-                                                                     */
-                                                                    public function editWork() {
-                                                                        $CareerTable = \Cake\ORM\TableRegistry::get('Career');
-                                                                        $careers = $CareerTable->find()->where(['user_id' => $this->user->id])->toArray();
-                                                                        if ($this->request->is('post')) {
-                                                                            $data = $this->request->data();
+    /**
+     * 编辑工作经历
+     */
+    public function editWork() {
+        $CareerTable = \Cake\ORM\TableRegistry::get('Career');
+        $careers = $CareerTable->find()->where(['user_id' => $this->user->id])->toArray();
+        if ($this->request->is('post')) {
+            $data = $this->request->data();
 
-                                                                            $data['user_id'] = $this->user->id;
-                                                                            $career = $CareerTable->newEntity($data);
-                                                                            if ($CareerTable->save($career)) {
-                                                                                return $this->Util->ajaxReturn(true, '保存成功!');
-                                                                            } else {
-                                                                                return $this->Util->ajaxReturn(false, errorMsg($career, '保存失败'));
-                                                                            }
-                                                                        }
-                                                                        $this->set([
-                                                                            'pageTitle' => '编辑工作经历 ',
-                                                                            'careers' => $careers
-                                                                        ]);
-                                                                    }
+            $data['user_id'] = $this->user->id;
+            $career = $CareerTable->newEntity($data);
+            if ($CareerTable->save($career)) {
+                return $this->Util->ajaxReturn(true, '保存成功!');
+            } else {
+                return $this->Util->ajaxReturn(false, errorMsg($career, '保存失败'));
+            }
+        }
+        $this->set([
+            'pageTitle' => '编辑工作经历 ',
+            'careers' => $careers
+        ]);
+    }
 
-                                                                    /**
-                                                                     * 保存工作经历
-                                                                     */
-                                                                    public function saveWork() {
-                                                                        $CareerTable = \Cake\ORM\TableRegistry::get('Career');
-                                                                        if ($this->request->is('post')) {
-                                                                            $data = $this->request->data();
-                                                                            if (!empty($data['id'])) {
-                                                                                $career = $CareerTable->get($data['id']);
-                                                                                if ($career) {
-                                                                                    $career = $CareerTable->patchEntity($career, $data);
-                                                                                    $res = $CareerTable->save($career);
-                                                                                } else {
-                                                                                    return $this->Util->ajaxReturn(false, '不存在的id');
-                                                                                }
-                                                                            } else {
-                                                                                $data['user_id'] = $this->user->id;
-                                                                                $career = $CareerTable->newEntity();
-                                                                                $career = $CareerTable->patchEntity($career, $data);
-                                                                                $res = $CareerTable->save($career);
-                                                                            }
-                                                                            if ($res) {
-                                                                                return $this->Util->ajaxReturn(['status' => true, 'msg' => '保存成功', 'id' => $res->id]);
-                                                                            } else {
-                                                                                return $this->Util->ajaxReturn(false, errorMsg($career, '保存失败'));
-                                                                            }
-                                                                        }
-                                                                    }
+    /**
+     * 保存工作经历
+     */
+    public function saveWork() {
+        $CareerTable = \Cake\ORM\TableRegistry::get('Career');
+        if ($this->request->is('post')) {
+            $data = $this->request->data();
+            if (!empty($data['id'])) {
+                $career = $CareerTable->get($data['id']);
+                if ($career) {
+                    $career = $CareerTable->patchEntity($career, $data);
+                    $res = $CareerTable->save($career);
+                } else {
+                    return $this->Util->ajaxReturn(false, '不存在的id');
+                }
+            } else {
+                $data['user_id'] = $this->user->id;
+                $career = $CareerTable->newEntity();
+                $career = $CareerTable->patchEntity($career, $data);
+                $res = $CareerTable->save($career);
+            }
+            if ($res) {
+                return $this->Util->ajaxReturn(['status' => true, 'msg' => '保存成功', 'id' => $res->id]);
+            } else {
+                return $this->Util->ajaxReturn(false, errorMsg($career, '保存失败'));
+            }
+        }
+    }
 
-                                                                    /**
-                                                                     * 删除教育
-                                                                     * @param type $id
-                                                                     * @return type
-                                                                     */
-                                                                    public function delEducation($id) {
-                                                                        $EducationTable = \Cake\ORM\TableRegistry::get('Education');
-                                                                        $education = $EducationTable->find()->where(['user_id' => $this->user->id, 'id' => $id])->first();
-                                                                        if ($education) {
-                                                                            if ($EducationTable->delete($education)) {
-                                                                                return $this->Util->ajaxReturn(true, '删除成功');
-                                                                            } else {
-                                                                                return $this->Util->ajaxReturn(false, '删除失败');
-                                                                            }
-                                                                        } else {
-                                                                            return $this->Util->ajaxReturn(false, '记录不存在');
-                                                                        }
-                                                                    }
+    /**
+     * 删除教育
+     * @param type $id
+     * @return type
+     */
+    public function delEducation($id) {
+        $EducationTable = \Cake\ORM\TableRegistry::get('Education');
+        $education = $EducationTable->find()->where(['user_id' => $this->user->id, 'id' => $id])->first();
+        if ($education) {
+            if ($EducationTable->delete($education)) {
+                return $this->Util->ajaxReturn(true, '删除成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '删除失败');
+            }
+        } else {
+            return $this->Util->ajaxReturn(false, '记录不存在');
+        }
+    }
 
-                                                                    /**
-                                                                     * 删除工作经历
-                                                                     * @param type $id
-                                                                     * @return type
-                                                                     */
-                                                                    public function delWork($id) {
-                                                                        $CareerTable = \Cake\ORM\TableRegistry::get('Career');
-                                                                        $career = $CareerTable->find()->where(['user_id' => $this->user->id, 'id' => $id])->first();
-                                                                        if ($career) {
-                                                                            if ($CareerTable->delete($career)) {
-                                                                                return $this->Util->ajaxReturn(true, '删除成功');
-                                                                            } else {
-                                                                                return $this->Util->ajaxReturn(false, '删除失败');
-                                                                            }
-                                                                        } else {
-                                                                            return $this->Util->ajaxReturn(false, '记录不存在');
-                                                                        }
-                                                                    }
+    /**
+     * 删除工作经历
+     * @param type $id
+     * @return type
+     */
+    public function delWork($id) {
+        $CareerTable = \Cake\ORM\TableRegistry::get('Career');
+        $career = $CareerTable->find()->where(['user_id' => $this->user->id, 'id' => $id])->first();
+        if ($career) {
+            if ($CareerTable->delete($career)) {
+                return $this->Util->ajaxReturn(true, '删除成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '删除失败');
+            }
+        } else {
+            return $this->Util->ajaxReturn(false, '记录不存在');
+        }
+    }
 
-                                                                    /**
-                                                                     * 编辑名片
-                                                                     */
-                                                                    public function editCard() {
-                                                                        $user_id = $this->user->id;
-                                                                        $userInfo = $this->User->get($user_id);
-                                                                        if ($this->request->is('post')) {
-                                                                            $userInfo->card_path = $this->request->data('card_path');
-                                                                            if ($this->User->save($userInfo)) {
-                                                                                return $this->Util->ajaxReturn(true, '更改成功');
-                                                                            } else {
-                                                                                return $this->Util->ajaxReturn(false, '服务器开小差了');
-                                                                            }
-                                                                        }
-                                                                        $this->set([
-                                                                            'pageTitle' => '名片修改',
-                                                                            'user' => $userInfo
-                                                                        ]);
-                                                                    }
+    /**
+     * 编辑名片
+     */
+    public function editCard() {
+        $user_id = $this->user->id;
+        $userInfo = $this->User->get($user_id);
+        if ($this->request->is('post')) {
+            $userInfo->card_path = $this->request->data('card_path');
+            if ($this->User->save($userInfo)) {
+                return $this->Util->ajaxReturn(true, '更改成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '服务器开小差了');
+            }
+        }
+        $this->set([
+            'pageTitle' => '名片修改',
+            'user' => $userInfo
+        ]);
+    }
 
-                                                                    /**
-                                                                     * 编辑标签
-                                                                     */
-                                                                    public function editMark() {
-                                                                        $user_id = $this->user->id;
-                                                                        $userInfo = $this->User->get($user_id);
-                                                                        if ($this->request->is('post')) {
-                                                                            $userInfo->grbq = serialize($this->request->data('tags'));
-                                                                            if ($this->User->save($userInfo)) {
-                                                                                return $this->Util->ajaxReturn(true, '更新成功');
-                                                                            } else {
-                                                                                return $this->Util->ajaxReturn(false, '服务器开小差了');
-                                                                            }
-                                                                        }
-                                                                        $ProfiletagTable = \Cake\ORM\TableRegistry::get('Profiletag');
-                                                                        $profiletags = $ProfiletagTable->find('list')->select(['name'])->toArray();
-                                                                        $mark_ser = $userInfo->grbq;  //个人标签
-                                                                        $mark_arr = [];
-                                                                        $extra_arr = [];
-                                                                        if (is_array(unserialize($mark_ser))) {
-                                                                            $mark_arr = unserialize($mark_ser);
-                                                                            if ($mark_arr) {
-                                                                                foreach ($mark_arr as $mark) {
-                                                                                    if (!in_array($mark, $profiletags)) {
-                                                                                        $extra_arr[] = $mark;
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                        $this->set([
-                                                                            'pageTitle' => '个人标签',
-                                                                            'user' => $userInfo,
-                                                                            'mark_arr' => $mark_arr,
-                                                                            'profiletags' => $profiletags,
-                                                                            'extra_mark' => $extra_arr
-                                                                        ]);
-                                                                    }
+    /**
+     * 编辑标签
+     */
+    public function editMark() {
+        $user_id = $this->user->id;
+        $userInfo = $this->User->get($user_id);
+        if ($this->request->is('post')) {
+            $userInfo->grbq = serialize($this->request->data('tags'));
+            if ($this->User->save($userInfo)) {
+                return $this->Util->ajaxReturn(true, '更新成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '服务器开小差了');
+            }
+        }
+        $ProfiletagTable = \Cake\ORM\TableRegistry::get('Profiletag');
+        $profiletags = $ProfiletagTable->find('list')->select(['name'])->toArray();
+        $mark_ser = $userInfo->grbq;  //个人标签
+        $mark_arr = [];
+        $extra_arr = [];
+        if (is_array(unserialize($mark_ser))) {
+            $mark_arr = unserialize($mark_ser);
+            if ($mark_arr) {
+                foreach ($mark_arr as $mark) {
+                    if (!in_array($mark, $profiletags)) {
+                        $extra_arr[] = $mark;
+                    }
+                }
+            }
+        }
+        $this->set([
+            'pageTitle' => '个人标签',
+            'user' => $userInfo,
+            'mark_arr' => $mark_arr,
+            'profiletags' => $profiletags,
+            'extra_mark' => $extra_arr
+        ]);
+    }
 
-                                                                    /**
-                                                                     * 名片夹
-                                                                     */
-                                                                    public function cardcase() {
-                                                                        $this->handCheckLogin();
-                                                                        $card = $this
-                                                                                ->User
-                                                                                ->CardBoxes
-                                                                                ->find()
-                                                                                ->contain(['OtherCard'])
-                                                                                ->where(['ownerid' => $this->user->id, 'resend' => '2'])
-                                                                                ->orderDesc('CardBoxes.`create_time`')
-                                                                                ->limit($this->limit)
-                                                                                ->toArray();
-                                                                        $this->set('cardjson', json_encode($card));
-                                                                        $this->set('pageTitle', '名片夹');
-                                                                    }
+    /**
+     * 名片夹
+     */
+    public function cardcase() {
+        $this->handCheckLogin();
+        $card = $this
+                ->User
+                ->CardBoxes
+                ->find()
+                ->contain(['OtherCard'])
+                ->where(['ownerid' => $this->user->id, 'resend' => '2'])
+                ->orderDesc('CardBoxes.`create_time`')
+                ->limit($this->limit)
+                ->toArray();
+        $this->set('cardjson', json_encode($card));
+        $this->set('pageTitle', '名片夹');
+    }
 
-                                                                    /**
-                                                                     * 名片夹列表
-                                                                     * @param int $resend
-                                                                     */
-                                                                    public function getCrad($resend) {
-                                                                        $card = $this
-                                                                                ->User
-                                                                                ->CardBoxes
-                                                                                ->find()
-                                                                                ->contain(['OtherCard'])
-                                                                                ->where(['ownerid' => $this->user->id, 'resend' => $resend])
-                                                                                ->orderDesc('CardBoxes.`create_time`')
-                                                                                ->limit($this->limit)
-                                                                                ->toArray();
-                                                                        if ($card !== false) {
-                                                                            return $this->Util->ajaxReturn(['status' => true, 'data' => $card]);
-                                                                        } else {
-                                                                            return $this->Util->ajaxReturn(false, '系统错误');
-                                                                        }
-                                                                    }
+    /**
+     * 名片夹列表
+     * @param int $resend
+     */
+    public function getCrad($resend) {
+        $card = $this
+                ->User
+                ->CardBoxes
+                ->find()
+                ->contain(['OtherCard'])
+                ->where(['ownerid' => $this->user->id, 'resend' => $resend])
+                ->orderDesc('CardBoxes.`create_time`')
+                ->limit($this->limit)
+                ->toArray();
+        if ($card !== false) {
+            return $this->Util->ajaxReturn(['status' => true, 'data' => $card]);
+        } else {
+            return $this->Util->ajaxReturn(false, '系统错误');
+        }
+    }
 
-                                                                    /**
-                                                                     * 回赠动作
-                                                                     * @param int $id
-                                                                     */
-                                                                    public function sendBack($id) {
-                                                                        $sendMe = $this
-                                                                                ->User
-                                                                                ->CardBoxes
-                                                                                ->find()
-                                                                                ->where(['ownerid' => $this->user->id, 'uid' => $id])
-                                                                                ->first();
+    /**
+     * 回赠动作
+     * @param int $id
+     */
+    public function sendBack($id) {
+        $sendMe = $this
+                ->User
+                ->CardBoxes
+                ->find()
+                ->where(['ownerid' => $this->user->id, 'uid' => $id])
+                ->first();
 //                                                                        $sendMe = $this->User->CardBoxes->get($sendMe->id);
-                                                                        $sendMe->resend = 1;
-                                                                        $res = $this->User->CardBoxes->save($sendMe);
-                                                                        if ($res) {
-                                                                            $cardbox = $this->User->CardBoxes->newEntity();
-                                                                            $cardbox = $this->User->CardBoxes->patchEntity($cardbox, ['ownerid'=>$id, 'uid'=>$this->user->id, 'resend'=>1]);
-                                                                            $this->User->CardBoxes->save($cardbox);
-                                                                            return $this->Util->ajaxReturn(true, '回赠成功');
-                                                                        } else {
-                                                                            return $this->Util->ajaxReturn(false, '回赠失败');
-                                                                        }
-                                                                    }
+        $sendMe->resend = 1;
+        $res = $this->User->CardBoxes->save($sendMe);
+        if ($res) {
+            $cardbox = $this->User->CardBoxes->newEntity();
+            $cardbox = $this->User->CardBoxes->patchEntity($cardbox, ['ownerid'=>$id, 'uid'=>$this->user->id, 'resend'=>1]);
+            $this->User->CardBoxes->save($cardbox);
+            return $this->Util->ajaxReturn(true, '回赠成功');
+        } else {
+            return $this->Util->ajaxReturn(false, '回赠失败');
+        }
+    }
 
-                                                                    /**
-                                                                     * 编辑行业标签
-                                                                     */
-                                                                    public function editindustries() {
-                                                                        $userIndustryTable = \Cake\ORM\TableRegistry::get('user_industry');
-                                                                        $userindustry = $userIndustryTable->find()->where(['user_id' => $this->user->id])->hydrate(false)->toArray();
-                                                                        foreach ($userindustry as $k => $v) {
-                                                                            $industry_id[] = $v['industry_id'];
-                                                                        }
+    /**
+     * 编辑行业标签
+     */
+    public function editIndustries() {
+        $UserIndustryTable = \Cake\ORM\TableRegistry::get('UserIndustry');
+        $userindustry = $UserIndustryTable->find()->where(['user_id' => $this->user->id])->hydrate(false)->toArray();
+        $industry_id = [];
+        foreach ($userindustry as $k => $v) {
+            $industry_id[] = $v['industry_id'];
+        }
 
-                                                                        $IndustryTable = \Cake\ORM\TableRegistry::get('industry');
-                                                                        $industries = $IndustryTable->find('threaded', [
-                                                                                    'keyField' => 'id',
-                                                                                    'parentField' => 'pid'
-                                                                                ])->where("`id` != '3'")->hydrate(false)->toArray();
-                                                                        $this->set(array(
-                                                                            'userIndustry' => $industry_id,
-                                                                            'industries' => $industries,
-                                                                            'pageTitle' => '选择行业标签'
-                                                                        ));
-                                                                    }
+        $IndustryTable = \Cake\ORM\TableRegistry::get('industry');
+        $industries = $IndustryTable->find('threaded', [
+                    'keyField' => 'id',
+                    'parentField' => 'pid'
+                ])->where("`id` != '3'")->hydrate(false)->toArray();
+        $this->set(array(
+            'userIndustry' => $industry_id,
+            'industries' => $industries,
+            'pageTitle' => '选择行业标签'
+        ));
+    }
 
-                                                                    /**
-                                                                     * 保存行业标签
-                                                                     */
-                                                                    public function saveIndustries() {
-                                                                        if ($this->request->is('post')) {
-                                                                            $data = $this->request->data();
-                                                                            $user = $this->User->get($this->user->id);
-                                                                            $user = $this->User->patchEntity($user, $data);
-                                                                            if ($this->User->save($user)) {
-                                                                                return $this->Util->ajaxReturn(true, '保存成功');
-                                                                            } else {
-                                                                                return $this->Util->ajaxReturn(false, '保存失败');
-                                                                            }
-                                                                        }
-                                                                    }
+    /**
+     * 保存行业标签
+     */
+    public function saveIndustries() {
+        if ($this->request->is('post')) {
+            $data = $this->request->data();
+            $user = $this->User->get($this->user->id);
+            $user = $this->User->patchEntity($user, $data);
+            if ($this->User->save($user)) {
+                return $this->Util->ajaxReturn(true, '保存成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '保存失败');
+            }
+        }
+    }
 
     /**
      * 我的关注搜索
