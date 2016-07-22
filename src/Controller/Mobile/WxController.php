@@ -121,9 +121,11 @@ class WxController extends AppController {
             if ($res->isOk()) {
                 $user = $UserTable->get($user_id);
                 $userinfo = json_decode($res->body()); //微信用户信息
+                \Cake\Log\Log::debug('注册调试','devlog');
+                \Cake\Log\Log::debug($userinfo,'devlog');
                 $headimgurl = $userinfo->headimgurl;
                 //存储微信头像
-                $avatar = $this->Util->saveUrlImage($url,'user/avatar');
+                $avatar = $this->Util->saveUrlImage($headimgurl,'user/avatar');
                 $user->avatar = $avatar;
                 $user->wx_openid = $open_id;
                 $UserTable->save($user);
