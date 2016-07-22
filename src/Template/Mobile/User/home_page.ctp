@@ -7,10 +7,15 @@
         <div class="u-s-name"><span><?= $user->company ?> </span> / <span><?= $user->position ?></span></div>
         <div class="mobile-number">
             <?php if(!$self): ?>
-                <?php if ($user->secret->phone_set == '1'): ?>
+                <?php if($user->secret): ?>
+                    <?php if ($user->secret->phone_set == '1'): ?>
+                        <a href="tel:<?= $user->phone ?>" onclick="if($.util.isAPP){LEMON.event.tel(<?= $user->phone ?>);}"><span><i class="iconfont">&#xe657;</i><?= $user->phone ?></span></a>
+                    <?php endif; ?>
+                    <?php if ($user->secret->email_set == '1'): ?>
+                        <span><i class="iconfont">&#xe625;</i><?= $user->email ?></span>
+                    <?php endif; ?>
+                <?php else: ?>
                     <a href="tel:<?= $user->phone ?>" onclick="if($.util.isAPP){LEMON.event.tel(<?= $user->phone ?>);}"><span><i class="iconfont">&#xe657;</i><?= $user->phone ?></span></a>
-                <?php endif; ?>
-                <?php if ($user->secret->email_set == '1'): ?>
                     <span><i class="iconfont">&#xe625;</i><?= $user->email ?></span>
                 <?php endif; ?>
             <?php else: ?>
@@ -102,11 +107,13 @@
         <div class="h2">
 
         </div>
+        <?php if($user->level == 2): ?>
         <ul class="h-info-box">
             <li class="no-b-border">
                 <a href="/meet/view/<?= $user->id ?>">专家主页</a>
             </li>
         </ul>
+        <?php endif; ?>
         <?php if ($self): ?>
         <ul class="h-info-box">
             <li class="no-b-border">
