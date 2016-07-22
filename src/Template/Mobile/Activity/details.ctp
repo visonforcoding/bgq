@@ -396,22 +396,7 @@
             if (!em || !em.id)
                 return;
             switch (em.id) {
-                    // 点击评论
-                case 'article_comment':
-                    checkLogin(function(){
-                        $('.article-shadow').show();
-                        $('.article').removeClass('m-height').addClass('c-height');
-                    });
-                    break;
-                    // 回到顶部
-                case 'toTop':
-                    window.scrollTo(0,0);
-                    break;
-                    // 取消评论
-                case 'cancel':
-                    $('.reg-shadow').hide();
-                    $('.shadow-info').removeClass('c-height').addClass('m-height');
-                    break;
+                
                     // 喜欢
                 case 'like':
                     $('.like').toggleClass('changecolor');
@@ -672,6 +657,24 @@
                     var comid = $(em).attr('value');
                     $('#publish_reply').attr('value', comid);
                 });
+            }
+            switch (em.id) {
+                    // 点击评论
+                case 'article_comment':
+                    checkLogin(function(){
+                        $('.article-shadow').show();
+                        $('.article').removeClass('m-height').addClass('c-height');
+                    });
+                    break;
+                    // 回到顶部
+                case 'toTop':
+                    window.scrollTo(0,0);
+                    break;
+                    // 取消评论
+                case 'cancel':
+                    $('.reg-shadow').hide();
+                    $('.shadow-info').removeClass('c-height').addClass('m-height');
+                    break;
             }
         });
     
