@@ -97,7 +97,7 @@ $this->start('static') ?>
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
                 });
                 function actionFormatter(cellvalue, options, rowObject) {
-                    response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看招聘描述" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="编辑" href="/admin/jobs/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     return response;

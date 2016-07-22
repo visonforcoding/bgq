@@ -106,7 +106,7 @@
                 }
 
                 function actionFormatter(cellvalue, options, rowObject) {
-                    response = '<a title="删除" href="javascript:void(0)" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response = ''; // '<a title="删除" href="javascript:void(0)" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     if (rowObject.is_top == 0)
                     {
                         response += '<a title="置顶" href="javascript:void(0)" onClick="top(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">置顶</a>';
