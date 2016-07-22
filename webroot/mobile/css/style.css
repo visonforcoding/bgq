@@ -525,9 +525,9 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .u-btn .cardbtn{color:#ff5277;border:2px #ff5277 solid;box-sizing: border-box;}
 .u-btn .cardgray{color:#7a7d82;border:2px #7a7d82 solid;}
 .basicinfo{overflow:hidden;margin-top:.36rem;}
-.basicinfo li{width:33.3%;float:left; text-align: center;height:1.07rem;display: table-cell;vertical-align: middle;}
+.basicinfo li{width:33.3%;float:left; text-align: center;padding:0.1rem 0;}
 .basicinfo li:nth-of-type(2){border-left:1px #e5e5e5 solid;border-right:1px #e5e5e5 solid;}
-.basicinfo li span{display: block;font-size:.26rem;line-height: .5rem;margin-top:0.14rem;color:#171717;}
+.basicinfo li span{display: block;font-size:.26rem;height: .54rem;word-break:break-all;margin-top:0.14rem;color:#171717;overflow:hidden;}
 .basicinfo li i{color:#7a7d82;font-size:.24rem;}
 .h-tab{text-align: center;padding:0 1.6rem;}
 .h-tab li{float:left;line-height: 1.32rem;padding:0 .5rem;font-size:.34rem;color:#bcbec0;}
@@ -563,7 +563,8 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .f-bottom a{/*display: inline-block;*/float:left;width:50%;color:#fff;font-size:0.3rem;height:1rem;}
 .f-bottom a:first-of-type{border-right: 1px #fff solid;}
 /*个人主页*/
-.head-info{height:2rem;width:100%;max-width: 750px;position:relative;background: #e01b49;}
+.head-info{height:2rem;width:100%;max-width: 750px;position:relative;background: #e01b49;
+background: url(img/mbg.jpg) no-repeat;background-size: contain;}
 /*个人中心--2end*/
 .myhome,.myhome-h{background: #dd204b;position:fixed;}
 .myhome-h{height:3.6rem;}
