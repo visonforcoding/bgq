@@ -89,6 +89,52 @@ class WxController extends AppController {
     }
 
     /**
+     * 注册成功后的账号绑定微信
+     */
+    public function bindWx() {
+        if(!$this->user){
+            return $this->redirect('/user/login');
+        }
+        $wxconfig = \Cake\Core\Configure::read('weixin');
+        $code = $this->request->query('code');
+        if (empty($code)) {
+            $redirect_url = 'http://' . $_SERVER['SERVER_NAME'] . '/mobile/wx/bindWx';
+            $wx_code_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='
+                    . $wxconfig['appID'] . '&redirect_uri=' . urlencode($redirect_url) . '&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+            return $this->redirect($wx_code_url);
+        } else {
+            $httpClient = new \Cake\Network\Http\Client(['ssl_verify_peer' => false]);
+            $wx_accesstoken_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $wxconfig['appID'] . '&secret=' . $wxconfig['appsecret'] .
+                    '&code=' . $code . '&grant_type=authorization_code';
+            //取得openid
+            $response = $httpClient->get($wx_accesstoken_url);
+            if(!$response->isOk()||!isset(json_decode($response->body())->openid)) {
+                //绑定失败
+                return $this->redirect('/home/index');
+            }
+            $open_id = json_decode($response->body())->openid;
+            $access_token = json_decode($response->body())->access_token;
+            $wx_user_url = 'https://api.weixin.qq.com/sns/userinfo?access_token=' . $access_token . '&openid=' . $open_id . '&lang=zh_CN';
+            $res = $httpClient->get($wx_user_url);
+            $user_id = $this->user->id;
+            $UserTable = \Cake\ORM\TableRegistry::get('User');
+            if ($res->isOk()) {
+                $user = $UserTable->get($user_id);
+                $userinfo = json_decode($res->body()); //微信用户信息
+                $headimgurl = $userinfo->headimgurl;
+                //存储微信头像
+                $avatar = $this->Util->saveUrlImage($url,'user/avatar');
+                $user->avatar = $avatar;
+                $user->wx_openid = $open_id;
+                $UserTable->save($user);
+                return $this->redirect('/home/index');
+            }
+        }
+
+        //\Cake\Log\Log::debug($wx_accesstoken_url);
+    }
+
+    /**
      * 静默登录
      */
     public function getUserCodeBase() {
@@ -123,7 +169,7 @@ class WxController extends AppController {
      */
     public function meetPay($type = null, $id = null) {
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
-        if($type == 1){
+        if ($type == 1) {
             $order = $OrderTable->get($id, [
                 'contain' => ['SubjectBook', 'SubjectBook.Subjects']
             ]);
@@ -142,7 +188,7 @@ class WxController extends AppController {
         $out_trade_no = $order->order_no;
         $openid = $this->user->wx_openid;
         if (empty($openid)) {
-
+            
         }
         $fee = 0.01; //元
 //        $fee = $order->price;  //支付金额(分)
@@ -161,7 +207,7 @@ class WxController extends AppController {
             'isWx' => $this->request->is('weixin') ? true : false,
             'aliPayParameters' => $aliPayParameters,
         ));
-        
+
         $this->set(['pageTitle' => '订单支付']);
         $this->set(compact('order_detail'));
     }
@@ -179,10 +225,10 @@ class WxController extends AppController {
      * 支付宝异步回调通知
      */
     public function aliNotify() {
-        \Cake\Log\Log::debug('进入支付宝支付回调','devlog');
+        \Cake\Log\Log::debug('进入支付宝支付回调', 'devlog');
         $this->loadComponent('Alipay');
         if (!$this->Alipay->notifyVerify()) {
-            \Cake\Log\Log::error('验证失败','devlog');
+            \Cake\Log\Log::error('验证失败', 'devlog');
             echo 'fail';
         } else {
             $this->Alipay->notify();
@@ -235,6 +281,12 @@ class WxController extends AppController {
         ]);
     }
 
+    
+    /**
+     * 微信的上传图片接口
+     * @param type $id
+     * @return type
+     */
     public function wxUploadPic($id) {
         $path = $this->Wx->wxUpload($id);
         return $this->Util->ajaxReturn(['status' => true, 'msg' => '上传成功', 'path' => $path]);
@@ -254,8 +306,8 @@ class WxController extends AppController {
             return $this->Util->ajaxReturn(false, 'error');
         }
     }
-    
-    public function shareDownload(){
+
+    public function shareDownload() {
         $this->set('pageTitle', '下载并购帮');
     }
 

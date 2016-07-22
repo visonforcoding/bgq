@@ -10,14 +10,12 @@ use Cake\Controller\ComponentRegistry;
  */
 class UtilComponent extends Component {
 
-
     /**
      * Default configuration.
      *
      * @var array
      */
     protected $_defaultConfig = [];
-    
     protected $_flagConfig = [];
 
     /**
@@ -40,7 +38,6 @@ class UtilComponent extends Component {
         return $this->response;
     }
 
-    
     /**
      * 对重要信息的数据库日志记录，例如订单漏单
      * @param type $flag self:const
@@ -59,6 +56,28 @@ class UtilComponent extends Component {
             'msg' => $msg
         ]);
         $LogTable->save($log);
+    }
+
+    /**
+     * 存储网络图片
+     * @param type $url
+     * @param type $dir
+     */
+    public function saveUrlImage($url, $dir = null) {
+        $today = date('Y-m-d');
+        $urlpath = '/upload/tmp/' . $today . '/';
+        if (!empty($dir)) {
+            $urlpath = '/upload/' . $dir . '/' . $today . '/';
+        }
+        $savePath = ROOT . '/webroot' . $urlpath;
+        if (!is_dir($savePath)) {
+            mkdir($savePath, 0777, true);
+        }
+        $uniqid = uniqid();
+        $filename = $uniqid . '.jpg';
+        $image = \Intervention\Image\ImageManagerStatic::make($url);
+        $image->save($savePath . $filename);
+        return $urlpath.$filename;
     }
 
 }
