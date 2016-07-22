@@ -11,8 +11,8 @@
     <div id="user-login" class='login-area'>
         <form action="" method="post">
             <div class="loginbox">
-                <div class='username'><label class='label'><span>&#xe630;</span></label><input type='text' name="phone"    placeholder="请输入手机号"></div>
-                <div class='password'><label class='label'><span>&#xe631;</span></label><input name="vcode" type='text' placeholder="在此输入验证码" >
+                <div class='username'><label class='label'><span class='iconfont'>&#xe630;</span></label><input type='text' name="phone"    placeholder="请输入手机号"></div>
+                <div class='password'><label class='label'><span class='iconfont'>&#xe631;</span></label><input name="vcode" type='text' placeholder="在此输入验证码" >
                     <button class="clearfix" type="button"  id="getVcode" href='javascript:void(0);'>获取验证码</button>
                 </div>
             </div>
