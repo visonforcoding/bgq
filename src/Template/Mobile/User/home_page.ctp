@@ -15,7 +15,7 @@
             <li><span><?= $user->city ? $user->city : '暂未填写' ?></span><i>地区</i></li>
             <?php if(!$self): ?>
                 <?php if ($user->secret->phone_set == '1'): ?>
-                    <li><span><?= $user->phone ?></span><i>电话</i></li>
+                    <li><a href="tel:<?= $user->phone ?>" onclick="if($.util.isAPP){LEMON.event.tel(<?= $user->phone ?>);}"><span><?= $user->phone ?></span><i>电话</i></a></li>
                 <?php else: ?>
                     <li><span>未公开</span><i>电话</i></li>
                 <?php endif; ?>
