@@ -6,22 +6,7 @@
 
 <div class="wraper newswraper">
     <div class="h-home-bottom" id="user" >
-        <div class='inner h-home-top'>
-                    <a href='/home/my-message-fans' class='iconfont share' >&#xe625;</a>
-                      <!--<h1>个人中心</h1>-->
-                    <?php if(!$isWx): ?><a href="/home/my-install" class='iconfont share'>&#xe61e;</a><?php endif;?>
-                </div>
-        <a href="javascript:void(0)">
-            <div class="t-home-top">
-                <span>
-                    <img src='/mobile/images/touxiang.png'/>
-                </span>
-            </div>
-            <h3 id="username">张三
-                    <i class="v"></i>
-            </h3>
-            <div class="info-desc"><span><i class="iconfont">&#xe62a;</i>并购菁英有限公司</span><span><i class="iconfont">&#xe612;</i>技术主管</span></div>
-        </a>
+        
     </div>
     <div class="h-home-menu topnav">
         <ul class="clearfix">
@@ -96,6 +81,24 @@
     <div class="info-desc"><span><i></i>{#company#}</span><span><i></i>{#position#}</span></div>
     
 </script>
+<script type="text/html" id='defaultTpl'>
+    <div class='inner h-home-top'>
+                    <a href='/home/my-message-fans' class='iconfont share' >&#xe625;</a>
+                      <!--<h1>个人中心</h1>-->
+                    <?php if(!$isWx): ?><a href="/home/my-install" class='iconfont share'>&#xe61e;</a><?php endif;?>
+                </div>
+        <a href="javascript:void(0)">
+            <div class="t-home-top">
+                <span>
+                    <img src='/mobile/images/touxiang.png'/>
+                </span>
+            </div>
+            <h3 id="username">张三
+                <i class="v"></i>
+            </h3>
+            <div class="info-desc"><span><i class="iconfont">&#xe62a;</i>并购菁英有限公司</span><span><i class="iconfont">&#xe612;</i>技术主管</span></div>
+        </a>
+</script>
 <?= $this->element('footer') ?>
 <?php $this->start('script') ?>
 <script>
@@ -139,6 +142,7 @@
                 }
                 $('#user').html(user);
             } else {
+                $('#user').html($('#defaultTpl'));
                 $('#loginShadow').show();
                 $('.totips').show();
             }

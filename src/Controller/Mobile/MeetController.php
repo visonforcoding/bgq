@@ -129,6 +129,7 @@ class MeetController extends AppController {
                 $isReco = $this->User->get($id, ['contain' => ['RecoUsers'=>function($q)use($user_id){
                     return $q->where(['user_id'=>$user_id]);
                 }]]);
+                $isReco = $isReco->reco_users;
             }
         }
         $biggie = $this->User->get($id, ['contain' => ['Savant', 'Industries', 'Subjects','RecoUsers','RecoUsers.Users']]);

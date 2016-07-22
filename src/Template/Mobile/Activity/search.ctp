@@ -128,8 +128,10 @@
     
     $('.sel-area').on('tap',function(){
         if($('.arealist').hasClass('hide')){
-            $('.arealist').toggleClass('hide');
-            $('.arealist').hide();
+            setTimeout(function(){
+                $('.arealist').toggleClass('hide');
+                $('.arealist').hide();
+            },400);
         } else {
             $('.arealist').toggleClass('hide');
             $('.arealist').show();
