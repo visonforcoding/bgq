@@ -642,7 +642,6 @@ class ActivityController extends AppController {
                         ->page($page, $this->limit)
                         ->orderDesc('Activity.create_time')
                         ->toArray();
-        debug($activity);
         foreach($activity as $k=>$v){
             if($v['apply_end_time'] <= time()){
                 $activity[$k]['pass_time'] = 1;
@@ -650,7 +649,6 @@ class ActivityController extends AppController {
                 $activity[$k]['pass_time'] = 0;
             }
         }
-        debug($activity);die;
         if ($activity) {
             return $this->Util->ajaxReturn(['status' => true, 'data' => $activity]);
         } else {
