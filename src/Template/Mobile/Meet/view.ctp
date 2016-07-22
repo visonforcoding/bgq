@@ -49,6 +49,34 @@
         </li>
         <li class="conr"><a class="alink mr" href="/user/home-page/<?= $biggie->id ?>" class="tohome"><i class="iconfont">&#xe612;</i>个人主页</a></li>
     </ul>
+    <div class="tabcon border bgff" >
+        <ul class="inner basicon" style="display: block;">
+            <li class="b-hy">
+                <span><i class="iconfont">&#xe654;</i>所在行业</span>
+                <div>
+                    <?php foreach ($biggie->industries as $k=>$v): ?>
+                    <em><?= $v['name'] ?></em>
+                    <?php endforeach; ?>
+                </div>
+            </li>
+            <li class="b-bq">
+                <span><i class="iconfont">&#xe653;</i>个人标签</span>
+                <div>
+                    <?php if(is_array(unserialize($biggie->grbq))): ?>
+                        <?php foreach (unserialize($biggie->grbq) as $k=>$v): ?>
+                            <em><?= $v ?></em>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+            </li>
+            <li class="b-yw nobottom">
+                <span><i class="iconfont">&#xe655;</i>擅长业务</span>
+                <div>
+                    <em><?= $biggie->goodat; ?></em>
+                </div>
+            </li>
+        </ul>
+    </div>
     <div class="m-swiper-items">
         <?php if ($self): ?>
             <h3 class="s-eidt"><a href="/meet/my-subjects">编辑话题</a></h3>
@@ -88,41 +116,12 @@
             <?php endif; ?>
         </p>
     </section>
-    <div class="tabcon border bgff" >
-        <ul class="inner basicon" style="display: block;">
-            <li class="b-hy">
-                <span><i class="iconfont">&#xe654;</i>所在行业</span>
-                <div>
-                    <?php foreach ($biggie->industries as $k=>$v): ?>
-                    <em><?= $v['name'] ?></em>
-                    <?php endforeach; ?>
-                </div>
-            </li>
-            <li class="b-bq">
-                <span><i class="iconfont">&#xe653;</i>个人标签</span>
-                <div>
-                    <?php if(is_array(unserialize($biggie->grbq))): ?>
-                        <?php foreach (unserialize($biggie->grbq) as $k=>$v): ?>
-                            <em><?= $v ?></em>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </div>
-            </li>
-            <li class="b-yw nobottom">
-                <span><i class="iconfont">&#xe655;</i>擅长业务</span>
-                <div>
-                    <em><?= $biggie->goodat; ?></em>
-                </div>
-            </li>
-        </ul>
-    </div>
+    
 </div>
 <div style='height:1.2rem'></div>
 </div>
 <!--底部四个图-->
 <div class="iconlist">
-        <!--<span class="iconfont">&#xe618;</span>-->
-    <!--<span class="iconfont <?php if (!$isCollect): ?>active<?php endif; ?>" id="collect">&#xe610;</span>-->
     <span class="iconfont" id="share">&#xe612;</span>
     <span class="iconfont" >&#xe615;</span>
     <span class="iconfont" id='goTop'>&#xe606;</span>
