@@ -296,7 +296,7 @@ border-bottom:none;top:-1px;margin-top:-1px;margin-left:-1px;}
 .a-btn >a:nth-of-type(1){background: #3e82f7;margin-right:0.1rem;}
 .a-btn >a:nth-of-type(2){background: #e01a48;-webkit-box-shadow: 0 0.1rem 0.2rem rgba(224,26,72,0.2);box-shadow: 0 0.1rem 0.2rem rgba(224,26,72,0.2);}
 .fixed-btn{width:100%;position:fixed;max-width: 750px;margin:0 auto;height:.98rem;line-height: .98rem;bottom:0;box-shadow: 0 0 1px rgba(0,0,0,.3);font-size:0;}
-.fixed-btn .l-btn,.fixed-btn .r-btn{display: inline-block;font-size: .3rem;color:#fff;background: #3e82f7;width:49.86%;text-align: center;}
+.fixed-btn .l-btn,.fixed-btn .r-btn{display: inline-block;font-size: .3rem;color:#fff;background: #3e82f7;width:49.76%;text-align: center;}
 .fixed-btn .r-btn{background: #e01a48;margin-left: 1px;}
 .wraper .a-choose{background:#fff;}
 .a-form-box{overflow:hidden;background:#fff;border-bottom:1px #e5e5e5 solid;}
