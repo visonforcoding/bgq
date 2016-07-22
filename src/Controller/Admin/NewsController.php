@@ -49,6 +49,9 @@ class NewsController extends AppController {
             $news = $this->News->patchEntity($news, $this->request->data);
             $news->admin_id = $this->_user->id;
             $news->admin_name = $this->_user->truename;
+            if(empty($this->request->data('user_id'))&&empty($this->request->data('source'))){
+                $this->Util->ajaxReturn(false,'作者和来源必须要填一个');
+            }
             if ($this->News->save($news)) {
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {

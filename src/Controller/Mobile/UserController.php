@@ -129,11 +129,13 @@ class UserController extends AppController {
                 }
             }
         }
+        //机构标签
         $AgencyTable = \Cake\ORM\TableRegistry::get('agency');
         $agencies = $AgencyTable->find('threaded', [
                     'keyField' => 'id',
                     'parentField' => 'pid'
                 ])->hydrate(false)->toArray();
+        
         $this->set(array(
             'agencies' => $agencies,
             'pageTitle'=>'注册行业机构'
@@ -169,40 +171,55 @@ class UserController extends AppController {
      * 注册首页 第一步
      */
     public function register() {
-        if (!$this->request->session()->read('reg.phone')) {
-            $this->redirect('/user/register-vphone');
-        }
-        if ($this->request->is(['patch', 'post', 'put'])) {
+//        if (!$this->request->session()->read('reg.phone')) {
+//            $this->redirect('/user/register-vphone');
+//        }
+        if ($this->request->is('ajax')) {
             $user = $this->User->newEntity();
             $data = $this->request->data();
-            $data['enabled'] = 0;
+            $data['enabled'] = 1;
             $data['phone'] = $this->request->session()->read('reg.phone');
             if ($this->request->session()->read('reg.wx_bind') && $this->request->session()->check('reg.wx_openid')) {
                 //第一次微信登录的完善信息
-                $data['union_id'] = $this->request->session()->read('reg.wx_unionid');
+                if($this->request->session()->check('reg.wx_unionid')){
+                    $data['union_id'] = $this->request->session()->read('reg.wx_unionid');
+                }
                 if ($this->request->is('lemon')) {
                     $data['app_wx_openid'] = $this->request->session()->read('reg.wx_openid');
                 } else {
                     $data['wx_openid'] = $this->request->session()->read('reg.wx_openid');
                 }
-                $data['avatar'] = $this->request->session()->read('reg.avatar');
+                if($this->request->session()->check('reg.avatar')){
+                    $data['avatar'] = $this->request->session()->read('reg.avatar');
+                }
             }
-            $user->register_status = 1; //注册到第一步
             $user = $this->User->patchEntity($user, $data);
             if ($this->User->save($user)) {
-                //session 记录 注册手机号 和 注册步骤
-                $this->request->session()->write([
-                    'reg.step' => 'one',
-                ]);
-                return $this->Util->ajaxReturn(['status' => true, 'url' => '/user/register-org']);
+                return $this->Util->ajaxReturn(['status' => true, 'url' => '/home/index']);
             } else {
-                \Cake\Log\Log::error($user->errors());
+               \Cake\Log\Log::error($user->errors());
                return $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($user->errors())]);
             }
         }
+        //机构标签
+        $AgencyTable = \Cake\ORM\TableRegistry::get('agency');
+        $agencies = $AgencyTable->find('threaded', [
+                    'keyField' => 'id',
+                    'parentField' => 'pid'
+                ])->hydrate(false)->toArray();
+        //行业标签
+        $IndustryTable = \Cake\ORM\TableRegistry::get('industry');
+        $industries = $IndustryTable->find('threaded', [
+                    'keyField' => 'id',
+                    'parentField' => 'pid'
+                ])->where("`id` != '3'")->hydrate(false)->toArray();
+        
         $this->set([
+            'industries'=>$industries,
+            'agencys'=>$agencies,
             'pageTitle'=>'注册'
         ]);
+        $this->render('register2');
     }
 
     /**
