@@ -638,7 +638,9 @@ class ActivityController extends AppController {
         $activity = $this->Activity
                         ->find()
                         ->where(['is_check' => 1])
-                        ->contain(['Users', 'Industries'])
+                        ->contain(['Users'=>function($q){
+                            return $q->where(['enabled'=>1]);
+                        }, 'Industries'])
                         ->page($page, $this->limit)
                         ->orderDesc('Activity.create_time')
                         ->toArray();

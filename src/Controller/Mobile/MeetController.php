@@ -353,7 +353,7 @@ class MeetController extends AppController {
                     return $q;
                 })
                 ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%"])
-                ->orWhere(['Subjects.title like'=>"%$keyword%"])
+                ->orWhere(['Subjects.title like'=>"%$keyword%", 'enabled'=>'1'])
 //                ->limit(10)
                 ->toArray();
         if($users) {

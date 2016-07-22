@@ -30,7 +30,10 @@ class NewsController extends AppController {
      */
     public function getMoreNews($page) {
         $news = $this->News->find()
-                        ->contain(['Users', 'Industries'])->page($page, $this->newslimit)
+                        ->contain(['Users'=>function($q){
+                            return $q->where(['enabled'=>1]);
+                        }, 'Industries'])
+                        ->page($page, $this->newslimit)
                         ->orderDesc('News.create_time')->toArray();
         if ($news) {
             return $this->Util->ajaxReturn(['status' => true, 'data' => $news]);
