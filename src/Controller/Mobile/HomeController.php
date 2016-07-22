@@ -1066,33 +1066,33 @@ class HomeController extends AppController {
 //                                                                                        }
 //                                                                                    }
 
-                                                                                    public function searchcard() {
-                                                                                        if ($this->request->is('post')) {
-                                                                                            $data = $this->request->data;
-                                                                                            $keyword = $data['keyword'];
-                                                                                            $resend = $data['resend'];
-                                                                                            $card = $this
-                                                                                                    ->User
-                                                                                                    ->CardBoxes
-                                                                                                    ->find()
-                                                                                                    ->contain(['OtherCard' => function($q)use($keyword) {
-                                                                                                            return $q->where(['OtherCard.truename like' => "%$keyword%"]);
-                                                                                                        }])
-                                                                                                            ->where(['ownerid' => $this->user->id, 'resend' => $resend])
-                                                                                                            ->orderDesc('CardBoxes.`create_time`')
-                                                                                                            ->limit($this->limit)
-                                                                                                            ->toArray();
-                                                                                                    if ($card !== false) {
-                                                                                                        if ($card) {
-                                                                                                            return $this->Util->ajaxReturn(['status' => true, 'data' => $card]);
-                                                                                                        } else {
-                                                                                                            return $this->Util->ajaxReturn(false, '您的名片夹里无这个人');
-                                                                                                        }
-                                                                                                    } else {
-                                                                                                        return $this->Util->ajaxReturn(false, '系统错误');
-                                                                                                    }
-                                                                                                }
-                                                                                            }
+    public function searchcard() {
+        if ($this->request->is('post')) {
+            $data = $this->request->data;
+            $keyword = $data['keyword'];
+            $resend = $data['resend'];
+            $card = $this
+                    ->User
+                    ->CardBoxes
+                    ->find()
+                    ->contain(['OtherCard' => function($q)use($keyword) {
+                            return $q->where(['OtherCard.truename like' => "%$keyword%"]);
+                        }])
+                            ->where(['ownerid' => $this->user->id, 'resend' => $resend])
+                            ->orderDesc('CardBoxes.`create_time`')
+                            ->limit($this->limit)
+                            ->toArray();
+                    if ($card !== false) {
+                        if ($card) {
+                            return $this->Util->ajaxReturn(['status' => true, 'data' => $card]);
+                        } else {
+                            return $this->Util->ajaxReturn(false, '您的名片夹里无这个人');
+                        }
+                    } else {
+                        return $this->Util->ajaxReturn(false, '系统错误');
+                    }
+                }
+            }
 
-                                                                                        }
+    }
                                                                                         

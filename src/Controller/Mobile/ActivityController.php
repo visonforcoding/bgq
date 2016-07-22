@@ -282,6 +282,7 @@ class ActivityController extends AppController {
             $user = $users->get($this->user->id);
             $data = $this->request->data();
             $industries = $this->Activity->newEntity();
+            $industries->from_user = -1;
             $industry = $this->Activity->patchEntity($industries, $data);
             $industry->company = $user->company;
             $industry->user_id = $user->id;
@@ -375,7 +376,6 @@ class ActivityController extends AppController {
             }
         }
         $this->set('isApply', $isApply);
-        
         $region = $this->Activity->Regions->find()->hydrate(false)->all()->toArray();
 //        $industries = $this->Activity->Industries->find()->hydrate(false)->all()->toArray();
         $activitySeries = \Cake\Core\Configure::read('activitySeries');

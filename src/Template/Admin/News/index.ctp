@@ -51,6 +51,8 @@
                             {name: 'user.truename', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
                                     if(!cellvalue){
                                         return rowObject.source;
+                                    }else{
+                                        return rowObject.user.truename;
                                     }
                             }},
                             {name: 'title', editable: true, align: 'center'},
