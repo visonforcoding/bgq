@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="format-detection"content="telephone=no, email=no" />
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<title>并购圈-我的主页</title>
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<script src="../js/view.js"></script>
+		<script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<header class="myhome no-bottom" style="display: none;">
+			<div class='inner'>
+				<a href='javascript:history.go(-1);' class='toback'></a>
+				<h1>个人主页</h1>
+				
+				<!--<a href="#this" class='iconfont share h-regiser'>&#xe619;</a>-->
+			</div>
+			
+		</header>
+		
+		<div class="wraper bg-ff">
+			<div class="head-info">
+				<a href="#this" class="m-pic"><img src="../images/home-pic.png"/></a>
+			</div>
+			<div class="h-user">
+				<h3>杨涛</h3>
+				<div class="u-s-name"><span>中青投资管理有限公司 </span> / <span>互联网事业部副总经理</span></div>
+				<div class="u-btn"><a href="javascript:void(0);" class="focusbtn focusgray">已关注</a><a href="javascript:void(0);" class="cardbtn cardgray">已递名片</a></div>
+				<ul class="basicinfo border">
+					<li><span>广东 深圳</span><i>地区</i></li>
+					<li><span>13809861059</span><i>电话</i></li>
+					<li><span>idg@idg.com</span><i>邮箱 </i></li>
+				</ul>
+			</div>
+			<div class="infotab">
+				<ul class="h-tab bbottom clearfix">
+					<li class="iconfont active">&#xe650;</li>
+					<li class="iconfont">&#xe651;</li>
+					<li class="iconfont">&#xe652;</li>
+				</ul>
+				<div class="tabcon bbottom">
+					<ul class="cur inner basicon">
+						<li class="b-hy"><span><i class="iconfont">&#xe654;</i>所在行业</span><div><em>互联网+</em><em>文化传媒</em></div></li>
+						<li class="b-bq"><span><i class="iconfont">&#xe653;</i>个人标签</span><div><em>产品</em><em>设计</em><em>研发</em></div></li>
+						<li class="b-yw"><span><i class="iconfont">&#xe655;</i>擅长业务</span><div><em>互联网+</em><em>文化传媒</em></div></li>
+						<li class="b-gs nobottom"><span><i class="iconfont">&#xe656;</i>公司业务</span><div><em>互联网+</em><em>文化传媒</em></div></li>
+					</ul>
+					<ul class="basicon worktab">
+						<a class="bbottom">
+							<li class="inner"><span>美团网</span></li>
+							<span class="worktime">2000-2004，工商管理，本科</span>
+						</a>
+						
+						<a href="">
+							<li class="inner"><span>点点网</span></li>
+							<span class="worktime">2000-2004，工商管理，本科</span>
+						</a>
+						
+						
+					</ul>
+					<ul class="basicon worktab">
+						<a class="bbottom">
+							<li class="inner"><span>北京清华大学</span></li>
+							<span class="worktime">2000-2004，工商管理，本科</span>
+						</a>
+						
+						<a href="">
+							<li class="inner"><span>武汉理工大学</span></li>
+							<span class="worktime">2000-2004，工商管理，本科</span>
+						</a>
+					</ul>
+				</div>
+				<div class="h2">
+					
+				</div>
+				<ul class="h-info-box">
+					<li class="no-b-border">
+						<a href="meet-one.html">专家主页</a>
+					</li>
+				</ul>
+				<ul class="h-info-box">
+					<li class="no-b-border">
+						<a href="edit-user-info.html">编辑</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$('.h-tab>li').on('tap',function(){
+				var index =$(this).index();
+				$(this).addClass('active').siblings().removeClass('active');
+				$('.tabcon>ul').eq(index).addClass('cur').siblings().removeClass('cur');
+			})
+		</script>
+	</body>
+</html>
