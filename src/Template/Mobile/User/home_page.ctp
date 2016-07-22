@@ -1,203 +1,106 @@
-<div class="wraper">
-    <div class="m-info-card">
-        <div class="m-info">
-            <a <?php if($self):?>href="/home/edit-userinfo"<?php endif;?> class="m-pic"><img src="<?= $user->avatar ? getOriginAvatar($user->avatar) : '/mobile/images/touxiang.png' ?>"/></a>
-            <div class="mt-info">
-                <h3><?= $user->truename ?></h3>
-                <span class="job"><?= $user->company ?> <?= $user->position ?> </span>
-                <span class="mmark"><?php foreach($user->industries as $k=>$v): ?><?= $v['name'] ?> <?php endforeach; ?></span>
-            </div>
-            <div class="linkinfo">
-                <?php if(!$self): ?>
-                    <?php if (isset($user->secret)): ?>
-                        <?php if ($user->secret->phone_set == '1'): ?>
-                            <p><span>手机号:<a href="tel"><?= $user->phone ?></a></span></p>
-                        <?php endif; ?>
-                        <?php if ($user->secret->email_set == '1'): ?>
-                            <p><span>邮   &nbsp;&nbsp;箱:<i><?= $user->email ?></i></span></p>
-                        <?php endif; ?>
-                    <?php else: ?>
-                        <p><span>手机号:<a href="tel"><?= $user->phone ?></a></span></p>
-                        <p><span>邮   &nbsp;&nbsp;箱:<i><?= $user->email ?></i></span></p>
-                    <?php endif; ?>
-                <?php else: ?>
-                    <p><span>手机号:<a href="tel"><?= $user->phone ?></a></span></p>
-                    <p><span>邮   &nbsp;&nbsp;箱:<i><?= $user->email ?></i></span></p>
-                <?php endif; ?>
-                <p><span>地   &nbsp;&nbsp;区:<i><?= $user->city ?></i></span></p>
-            </div>
-        </div>
+<div class="wraper bg-ff">
+    <div class="head-info">
+        <a href="/home/edit-userinfo" class="m-pic"><img src="<?= $user->avatar ? $user->avatar : '/mobile/images/touxiang.png' ?>"/></a>
     </div>
-    <?php if(!$self): ?>
-        <?php if (isset($user->secret)): ?>
-            <?php if ($user->secret->profile_set == '1'): ?>
-                <?php if(is_array(unserialize($user->grbq))): ?>
-                    <div class="ul-list">
-                        <h3>个人标签：</h3>
-                        <div class="mmark">
-                            <span class="m-con">
-                                <?php foreach(unserialize($user->grbq) as $v): ?>
-                                    <?= $v ?> 
-                                <?php endforeach; ?>
-                            </span>
-                        </div>
-                    </div>
-                <?php endif; ?>
-                <ul class="ul-list">
-                    <?php if($user->educations): ?>
-                    <li>
-                        <h3>教育经历：</h3>
-                        <div class="mmark">
-                            <?php foreach($user->educations as $education): ?>
-                            <p>
-                                <span><?= $education->school ?></span>
-                                <em><?= $education->start_date ?>-<?= $education->end_date ?>，<?= $education->major ?>，<?= $educationType[$education->education] ?></em>
-                            </p>
-                            <?php endforeach; ?>
-                        </div>
-                    </li>
-                    <?php endif; ?>
-                    <?php if($user->careers): ?>
-                    <li>
-                        <h3>工作经历：</h3>
-                        <div class="mmark">
-                            <?php foreach($user->careers as $career): ?>
-                            <p>
-                                <span><?= $career->company ?></span>
-                                <em><?= $career->start_date ?>-<?= $career->end_date ?>，<?= $career->position ?></em>
-                            </p>
-                            <?php endforeach; ?>
-                        </div>
-                    </li>
-                    <?php endif; ?>
-                </ul>
+    <div class="h-user">
+        <h3><?= $user->truename ?></h3>
+        <div class="u-s-name"><span><?= $user->company ?> </span> / <span><?= $user->position ?></span></div>
+        <div class="u-btn">
+            <?php if(!$self): ?>
+            <a href="javascript:void(0);" id="follow_btn" class="focusbtn <?php if($isFans): ?>focusgray<?php endif; ?>"><?php if($isFans): ?>取消关注<?php else: ?>关注<?php endif; ?></a>
+            <a href="javascript:void(0);" id="giveCard" class="cardbtn <?php if($isGive): ?>cardgray<?php endif; ?>"><?php if($isGive): ?>已递名片<?php else: ?>递名片<?php endif; ?></a>
             <?php endif; ?>
-        <?php else: ?>
-            <div class="ul-list">
-                <h3>个人标签：</h3>
-                <div class="mmark">
-                    <span class="m-con">
-                        <?php if(is_array(unserialize($user->grbq))): ?>
-                            <?php foreach(unserialize($user->grbq) as $v): ?>
-                                <?= $v ?> 
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </span>
-                </div>
-            </div>
-            <ul class="ul-list">
-                <li>
-                    <h3>教育经历：</h3>
-                    <div class="mmark">
-                        <?php foreach ($user->educations as $education): ?>
-                            <p>
-                                <span><?= $education->school ?></span>
-                                <em><?= $education->start_date ?>-<?= $education->end_date ?>，<?= $education->major ?>，<?= $educationType[$education->education] ?></em>
-                            </p>
+        </div>
+        <ul class="basicinfo border">
+            <li><span><?= $user->city ? $user->city : '暂未填写' ?></span><i>地区</i></li>
+            <?php if(!$self): ?>
+                <?php if ($user->secret->phone_set == '1'): ?>
+                    <li><span><?= $user->phone ?></span><i>电话</i></li>
+                <?php else: ?>
+                    <li><span>未公开</span><i>电话</i></li>
+                <?php endif; ?>
+                <?php if ($user->secret->email_set == '1'): ?>
+                    <li><span><?= $user->email ?></span><i>邮箱</i></li>
+                <?php else: ?>
+                    <li><span>未公开</span><i>邮箱</i></li>
+                <?php endif; ?>
+            <?php else: ?>
+                <li><span><?= $user->phone ?></span><i>电话</i></li>
+                <li><span><?= $user->email ? $user->email : '暂未填写' ?></span><i>邮箱</i></li>
+            <?php endif; ?>
+        </ul>
+    </div>
+    <div class="infotab">
+        <ul class="h-tab bbottom clearfix">
+            <li class="iconfont active">&#xe650;</li>
+            <li class="iconfont">&#xe651;</li>
+            <li class="iconfont">&#xe652;</li>
+        </ul>
+        <div class="tabcon bbottom">
+            <ul class="cur inner basicon">
+                <li class="b-hy">
+                    <span><i class="iconfont">&#xe654;</i>所在行业</span>
+                    <div>
+                        <?php foreach ($user->industries as $k=>$v): ?>
+                            <em><?= $v['name'] ?></em>
                         <?php endforeach; ?>
                     </div>
                 </li>
-                <li>
-                    <h3>工作经历：</h3>
-                    <div class="mmark">
-                        <?php foreach ($user->careers as $career): ?>
-                            <p>
-                                <span><?= $career->company ?></span>
-                                <em><?= $career->start_date ?>-<?= $career->end_date ?>，<?= $career->position ?></em>
-                            </p>
-                        <?php endforeach; ?>
+                <li class="b-bq">
+                    <span><i class="iconfont">&#xe653;</i>个人标签</span>
+                    <div>
+                        <?php if(is_array(unserialize($user->grbq))): ?>
+                            <?php foreach (unserialize($user->grbq) as $k=>$v): ?>
+                                <em><?= $v ?></em>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </div>
+                </li>
+                <li class="b-yw"><span><i class="iconfont">&#xe655;</i>擅长业务</span>
+                    <div>
+                        <em><?= $user->goodat ? $user->goodat : '暂未填写' ?></em>
+                    </div>
+                </li>
+                <li class="b-gs nobottom"><span><i class="iconfont">&#xe656;</i>公司业务</span>
+                    <div>
+                        <em><?= $user->gsyw ? $user->gsyw : '暂未填写' ?></em>
                     </div>
                 </li>
             </ul>
-        <?php endif; ?>
-    <?php else: ?>
-        <div class="ul-list">
-            <h3>个人标签：</h3>
-            <div class="mmark">
-                <span class="m-con">
-                    <?php if(is_array(unserialize($user->grbq))): ?>
-                        <?php foreach(unserialize($user->grbq) as $v): ?>
-                            <?= $v ?> 
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </span>
-            </div>
+            <ul class="basicon worktab">
+                <?php foreach($user->careers as $career): ?>
+                <a class="bbottom">
+                    <li class="inner"><span><?= $career->company ?></span></li>
+                    <span class="worktime"><?= $career->start_date ?>～<?= $career->end_date ?>，<?= $career->position ?></span>
+                </a>
+                <?php endforeach; ?>
+            </ul>
+            <ul class="basicon worktab">
+                <?php foreach($user->educations as $education): ?>
+                <a class="bbottom">
+                    <li class="inner"><span><?= $education->school ?></span></li>
+                    <span class="worktime"><?= $education->start_date ?>～<?= $education->end_date ?>，<?= $education->major ?>，<?= $educationType[$education->education] ?></span>
+                </a>
+                <?php endforeach; ?>
+            </ul>
         </div>
-        <ul class="ul-list">
-            <li>
-                <h3>教育经历：</h3>
-                <div class="mmark">
-                    <?php foreach ($user->educations as $education): ?>
-                        <p>
-                            <span><?= $education->school ?></span>
-                            <em><?= $education->start_date ?>-<?= $education->end_date ?>，<?= $education->major ?>，<?= $educationType[$education->education] ?></em>
-                        </p>
-                    <?php endforeach; ?>
-                </div>
-            </li>
-            <li>
-                <h3>工作经历：</h3>
-                <div class="mmark">
-                    <?php foreach ($user->careers as $career): ?>
-                        <p>
-                            <span><?= $career->company ?></span>
-                            <em><?= $career->start_date ?>-<?= $career->end_date ?>，<?= $career->position ?></em>
-                        </p>
-                    <?php endforeach; ?>
-                </div>
-            </li>
-        </ul>
-    <?php endif; ?>
-    <?php if($user->goodat): ?>
-    <div class="ul-list">
-        <h3>擅长业务：</h3>
-        <div class="mmark">
-            <span class="m-con"><?= $user->goodat ?></span>
+        <div class="h2">
+
         </div>
-    </div>
-    <?php endif; ?>
-    <?php if($user->gsyw): ?>
-    <div class="ul-list">
-        <h3>公司业务：</h3>
-        <div class="mmark">
-            <span class="m-con"><?= $user->gsyw ?></span>
-        </div>
-    </div>
-    <?php endif; ?>
-    <?php if($user->level == 2): ?>
-    <ul class="h-info-box">
-        <li class="no-b-border">
-            <a href="/meet/view/<?= $user->id ?>">专家主页</a>
-        </li>
-    </ul>
-    <?php endif; ?>
-    <?php if ($self): ?>
         <ul class="h-info-box">
             <li class="no-b-border">
-                <a href="/home/edit-userinfo" class='no-ico'>编辑</a>
+                <a href="/meet/view/<?= $user->id ?>">专家主页</a>
             </li>
         </ul>
-    <?php endif; ?>
+        <?php if ($self): ?>
+        <ul class="h-info-box">
+            <li class="no-b-border">
+                <a href="/home/edit-userinfo">编辑</a>
+            </li>
+        </ul>
+        <?php endif; ?>
+    </div>
 </div>
-    <div style="height:1rem"></div>
-    <?php if (!$self): ?>
-        <div class="f-bottom">
-            <a href="javascript:void(0);" class="bgred" id="follow_btn">
-                <?php if($isFans): ?>
-                取消关注
-                <?php else: ?>
-                关注
-                <?php endif; ?>
-            </a>
-            <a href="javascript:void(0);" class="bggray" id="giveCard">
-                <?php if($isGive): ?>
-                已递名片
-                <?php else: ?>
-                递名片
-                <?php endif; ?>
-            </a>
-        </div>
-    <?php endif; ?>
 <?php $this->start('script') ?>
 <script>
     (function () {
@@ -211,6 +114,12 @@
 
 </script>
 <script>
+    $('.h-tab>li').on('tap',function(){
+        var index =$(this).index();
+        $(this).addClass('active').siblings().removeClass('active');
+        $('.tabcon>ul').eq(index).addClass('cur').siblings().removeClass('cur');
+    });
+    
     $(function () {
         $('#follow_btn').on('click', function () {
             //关注
@@ -222,8 +131,10 @@
                     if(res.status){
                         if(res.msg.indexOf('取消关注') != ''){
                             $('#follow_btn').text('取消关注');
+                            $('#follow_btn').addClass('focusgray');
                         } else {
                             $('#follow_btn').text('关注');
+                            $('#follow_btn').removeClass('focusgray');
                         }
                     }
                     
@@ -252,6 +163,7 @@
                         {
                             $.util.alert(msg.msg);
                             $('#giveCard').text('已递名片');
+                            $('#giveCard').addClass('cardgray');
                         }
                     }
                 });
