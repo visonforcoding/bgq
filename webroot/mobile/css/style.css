@@ -1,21 +1,21 @@
 /*登录主体 --start*/
 .login-area{padding:0.85rem 0.37rem 1.6rem; overflow:hidden;width:100%;position:relative;}
 .login-area .loginbox{border-radius:5px; background: #fff;box-sizing: border-box;line-height: 1.4rem;}
-.loginbox span{display:block;margin-top:0.5rem;}
-.loginbox input{border:none;outline:none;font-size:0.3rem;color:#222c38;height:0.8rem;}
-.loginbox .label{float:left;line-height:1.4rem;margin-left:-0.56rem;}
+.loginbox span{font-size:.3rem;color:#7a7e83;}
+.loginbox input{border:none;outline:none;font-size:0.3rem;color:#222c38;height:0.8rem;margin-top:.3rem;}
+.loginbox .label{float:left;margin-left:-0.56rem;}
 .loginbox .username,.loginbox .password{border-bottom:1px #c8c7cc solid;padding-left:1.2rem;
 /*display:-webkit-flex;display: flex;-webkit-align-items: center;align-items: center;*/}
 .loginbox .password{border-bottom:none;}
 .loginbox .username input{width:5.4rem;padding:0;}
-.loginbox .username span{background:url(img/ren.png) no-repeat;width:0.25rem;height:0.29rem;background-size:contain;margin-top:0.53rem;}
-.loginbox .password span{background: url(img/pass.png) no-repeat;width:0.27rem;height:0.34rem; background-size:contain;}
+.loginbox .username span{}
+.loginbox .password span{font-size:.34rem;}
 .loginbox .password input{width:3.4rem;padding:0;}
 .loginbox .password button{color:#e01a48;border: none;background-color: #fff;font-size:0.26rem;width:2rem;height:1.4rem;padding:0;}
 .login-area .submit{display:block;width:5.6rem;margin-left:0.58rem;background:#e01a48; color:#fff;text-align: center;border-radius: 0.2rem;margin:0 auto;margin-top:0.76rem;margin-bottom:0.56rem;font-size:0.32rem;
 outline:none;height:0.8rem;line-height: 0.78rem;}
 .tips{position:absolute;left:50%;top:50%; margin-left:-2.5rem;margin-top:-1.25rem;border-radius:0.05rem;color:#333;width:5rem;height:2.5rem;background: red;padding:0.2rem;overflow:hidden; background: #fff;box-shadow: 0 0 1px rgba(0,0,0,.5);border-radius: .1rem;}
-.tips p{font-size:0.28rem;line-height: .32rem;color:#7a7e83}
+.tips p{font-size:0.28rem;line-height: .32rem;color:#7a7e83;}
 .tips .closed{ display: block;padding:0.1rem;width:35%;background:#d62357;color:#fff;border-radius: 0.1rem; text-align: center;margin:0 auto;margin-top:0.8rem;}
 /*注册机构 --start*/
 .choose-org-type,.items .orgtitle{background: #f0eff5;border-bottom:1px solid #e5e5e5;height:0.65rem;line-height: 0.65rem;font-size:0.3rem;}
@@ -51,8 +51,8 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .mark-items .cart{margin-top:-2px;border:none; display: none;/*height:0;*/overflow:hidden;-webkit-transition: height .6s;transition:height:.6s;}
 /*.orgmark a:nth-of-type(4n){margin-right:0;}*/
 .nextstep,.s-btn{ display:block;text-align:center;height:0.78rem;width:80%;font-size:0.3rem;line-height:0.78rem;background: #e01a48;color:#fff;margin:0 auto;margin-top:0.4rem;margin-bottom:0.4rem;border-radius:0.2rem;}
-.f-bottom{position: fixed;width: 100%;height: 1rem;bottom: 0;left: 0;border-radius: 0;color: #fff;
-    font-size: 0.32rem;text-align: center;line-height: 1rem;background: #e01a48;}
+.f-bottom{position: fixed;width: 100%;height: 1rem;bottom: 0;border-radius: 0;color: #fff;
+    font-size: 0.32rem;text-align: center;line-height: 1rem;background: #e01a48;max-width: 750px;}
 .s-btn{margin:0.2rem auto;}
 .redshadow{box-shadow: 0 0.1rem 0.2rem rgba(224,26,72,.2);}
 .grayshadow{box-shadow: 0 0.1rem 0.2rem rgba(122,126,131,.2);}
@@ -519,7 +519,7 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .h-user h3{line-height: 0.92rem;font-weight: bold;}
 .u-s-name{color:#7a7d82;font-size:.26rem;line-height: .3rem;}
 .u-btn{font-size:0;margin-top:.3rem;}
-.u-btn a{display: inline-block;width:2.42rem;height:.73rem;line-height: .7rem;border-radius: .4rem;}
+.u-btn a{display: inline-block;width:2.42rem;height:.73rem;line-height: .73rem;border-radius: .4rem;}
 .u-btn .focusbtn{margin-right:.3rem;-webkit-box-shadow: 0 .04rem .12rem rgba(255,75,112,.5);box-shadow: 0 .04rem .12rem rgba(255,75,112,.5);background:linear-gradient(top,#ff567b,#ff4b70);background:-webkit-linear-gradient(top,#ff567b,#ff4b70);color:#fff;}
 .u-btn .focusgray{background:#7a7d82;-webkit-box-shadow: 0 .04rem .12rem rgba(255,75,112,.5);box-shadow: 0 .04rem .12rem rgba(122,125,130,.5);}
 .u-btn .cardbtn{color:#ff5277;border:2px #ff5277 solid;box-sizing: border-box;}
@@ -537,7 +537,7 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .tabcon ul.cur{display: block;}
 .linkinfo{margin-top:0.12rem;}
 .tabcon ul li{border-bottom: 1px #e5e5e5 solid;line-height: .9rem;}
-.tabcon ul div{float:right;}
+.tabcon ul div{float:right;max-width:70%;overflow:hidden;height:.9rem;}
 .tabcon div em{margin-left:.1rem;font-size:.26rem;}
 .basicon .b-hy i{color:#ff8897;}
 .basicon .b-bq i{color:#60bcff;}
