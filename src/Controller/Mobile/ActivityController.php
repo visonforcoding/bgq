@@ -445,7 +445,7 @@ class ActivityController extends AppController {
      */
     public function getMoreSearch($page){
         $data = $this->request->data();
-        $industry_id = $data['industry_id'];
+        $series_id = $data['series_id'];
         $isApply = [];
         if ($this->user) {
             // 用户已报名的活动
@@ -464,16 +464,7 @@ class ActivityController extends AppController {
         }
         $this->set('is_apply', $isApply);
         
-        $res = $this->Activity->find()->where(['title LIKE' => '%' . $data['keyword'] . '%']);
-        if ($industry_id) {
-            $res = $res->matching(
-                'Industries', function($q)use($industry_id) {
-                    return $q->where(['Industries.id' => $industry_id]);
-                }
-            );
-        } else {
-            $res = $res->contain(['Industries']);
-        }
+        $res = $this->Activity->find()->where(['title LIKE' => '%' . $data['keyword'] . '%', 'series_id' => $series_id]);
         $res = $res->orderDesc('create_time');
         $res = $res
                 ->page($page, $this->limit)
