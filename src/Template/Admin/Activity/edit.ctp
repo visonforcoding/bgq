@@ -133,9 +133,9 @@
         <label class="col-md-2 control-label">缩略图</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
-                <img  alt="请上传160*160大小的缩略图" src="<?= $activity->thumb; ?>"/>
+                <img  alt="请上传宽为380大小的缩略图" src="<?= $activity->thumb; ?>"/>
             </div>
-            <div style="color:red">请上传160*160大小的缩略图</div>
+            <div style="color:red">请上传宽为380大小的缩略图</div>
             <input name="thumb" value="<?= $activity->thumb; ?>"  type="hidden"/>
             <div id="thumb"   class="jqupload">上传</div>
         </div>
