@@ -138,7 +138,7 @@
                 if(res.data.user.avatar){
                     user = user.replace('{#avatar#}', res.data.user.avatar);
                 } else {
-                    user = user.replace('{#avatar#}', '/mobile/images/touxiang/png');
+                    user = user.replace('{#avatar#}', '/mobile/images/touxiang.png');
                 }
                 $('#user').html(user);
             } else {
