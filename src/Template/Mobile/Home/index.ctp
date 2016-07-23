@@ -6,7 +6,11 @@
 
 <div class="wraper newswraper">
     <div class="h-home-bottom" id="user" >
-        
+        <div class="t-home-top">
+            <span>
+                <img src="/mobile/images/touxiang.png">
+            </span>
+        </div>
     </div>
     <div class="h-home-menu topnav">
         <ul class="clearfix">
@@ -93,10 +97,6 @@
                     <img src='/mobile/images/touxiang.png'/>
                 </span>
             </div>
-            <h3 id="username">张三
-                <i class="v"></i>
-            </h3>
-            <div class="info-desc"><span><i class="iconfont">&#xe62a;</i>并购菁英有限公司</span><span><i class="iconfont">&#xe612;</i>技术主管</span></div>
         </a>
 </script>
 <?= $this->element('footer') ?>
@@ -142,7 +142,7 @@
                 }
                 $('#user').html(user);
             } else {
-                $('#user').html($('#defaultTpl'));
+                $('#user').html($('#defaultTpl').text());
                 $('#loginShadow').show();
                 $('.totips').show();
             }
