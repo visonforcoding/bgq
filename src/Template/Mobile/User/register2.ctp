@@ -148,6 +148,7 @@
         classfy.on('tap', function () {  //行业
             var that = $(this);
             fixed(that);
+            window.scrollTo(0,9999);
         });
         $('#industry .cart>li').on('tap', function () {  //行业sub
             var industry_id = $(this).data('val');
