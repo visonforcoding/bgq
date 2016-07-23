@@ -64,7 +64,7 @@
             <span class="orgname">请选择机构类型<i class="orgtext"></i></span>
         </div>
         <div class="markslider">
-            <div class="mark-items">
+            <div class="mark-items" id="org">
                 <ul	class="b-mark headmark mt1">
                     <?php foreach ($agencys as $key => $agency): ?>
                         <?php if ($key < 3): ?>
@@ -115,7 +115,7 @@
             <div class="classfytext">
 
             </div>
-            <div class="mark-items">
+            <div class="mark-items" id="industry">
                 <ul	class="b-mark classfymark">
                     <?php foreach ($industries as $industry): ?>
                         <li  data-target='class1tuli<?= $industry['id'] ?>' ><a href="javascript:void(0);"><?= $industry['name'] ?></a> <span class="icon-bottom"></span></li>
@@ -135,52 +135,43 @@
     <div style="height:1.6rem">
 
     </div>
-    <a href="javascript:void(0);" id="submit" class="f-bottom">下一步</a>
+    <a href="javascript:void(0);" id="submit" class="f-bottom">提交</a>
 </div>
 <?php $this->start('script') ?>
 <script type="text/javascript">
-
-//		$('.a-s-title .orgname').on('tap',function(){
-//			
-//			$(this).toggleClass('active');
-//			var mark = $(this).parents('.markbox').children('.markslider');
-//			if(mark.hasClass('smark')){
-//				mark.removeClass('smark').addClass('nosmark');
-//			}else if(mark.hasClass('nosmark')){
-//				mark.removeClass('nosmark').addClass('smark');
-//			}else{
-//				mark.addClass('smark');
-//			}
-//		})
-
-
     $(function () {
         var agency = null, formdata;
         var classfy = $('.classfymark>li');
         var cart = $('.headmark>li');
         var allUl = $('.markbox .cart');
         //console.log(allUl.length);
-        classfy.on('tap', function () {
+        classfy.on('tap', function () {  //行业
             var that = $(this);
             fixed(that);
         });
-        $('#classfy .cart>li').on('tap', function () {
+        $('#industry .cart>li').on('tap', function () {  //行业sub
             var industry_id = $(this).data('val');
-            $('#cart a').removeClass('active');
+            var choose = $('.classfytext [data-val="' + industry_id + '"]');
+            if(choose.length){
+                $(this).children('a').removeClass('active');
+                choose.remove();
+                return;
+            }
             $(this).children('a').addClass('active');
             $('.classfytext').append('<a class="industry_item" data-val="' + industry_id + '" href="javascript:void(0)">' + $(this)[0].innerText + '</a>');
         });
-        cart.on('tap', function () {
+        cart.on('tap', function () {//机构
             var that = $(this);
             fixed(that);
-            $('#cart .cart>li').on('tap', function () {
-                $(this).children('a').addClass('active')
-                $(this).siblings().children('a').removeClass('active');
-                $(this).parents('.cart1').hide();
-                agency = $(this).data('val');
-                $('.orgtext').html($(this)[0].innerText);
-                that.children('span').removeClass('active');
-            })
+        })
+
+        $('#org .cart>li').on('tap', function () {  //机构sub
+            $('#org a').removeClass('active');
+            $(this).children('a').addClass('active');
+            $(this).parents('.cart1').hide();
+            agency = $(this).data('val');
+            $('.orgtext').html($(this)[0].innerText);
+            $('#org span').removeClass('active');
         })
 
         function fixed(that) {
