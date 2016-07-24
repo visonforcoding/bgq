@@ -95,6 +95,8 @@ class HomeController extends AppController {
                 $myActivity = $applyTable->find()->contain(['Activities'])->where(['activityapply.user_id' => $this->user->id])->toArray();
                 if ($myActivity !== false) {
                     return $this->Util->ajaxReturn(['status' => true, 'data' => $myActivity]);
+                } elseif($myActivity == []){
+                    return $this->Util->ajaxReturn(false, '暂无报名活动');
                 } else {
                     return $this->Util->ajaxReturn(false, '系统错误');
                 }
@@ -108,6 +110,8 @@ class HomeController extends AppController {
                 $activities = $ActivityTable->findByUserId($this->user->id)->toArray();
                 if ($activities !== false) {
                     return $this->Util->ajaxReturn(['status' => true, 'data' => $activities]);
+                } elseif($activities == []){
+                    return $this->Util->ajaxReturn(false, '暂无发布活动');
                 } else {
                     return $this->Util->ajaxReturn(false, '系统错误');
                 }
@@ -205,6 +209,8 @@ class HomeController extends AppController {
                     ->toArray();
                 if($followings){
                     return $this->Util->ajaxReturn(['status'=>true, 'data'=>$followings]);
+                } else if($followings == []){
+                    return $this->Util->ajaxReturn(false, '暂无关注');
                 } else {
                     return $this->Util->ajaxReturn(false, '系统错误');
                 }
@@ -224,6 +230,8 @@ class HomeController extends AppController {
                                 ->toArray();
                         if($fans){
                             return $this->Util->ajaxReturn(['status'=>true, 'data'=>$fans]);
+                        } else if($fans == []){
+                            return $this->Util->ajaxReturn(false, '暂无粉丝');
                         } else {
                             return $this->Util->ajaxReturn(false, '系统错误');
                         }
@@ -365,6 +373,8 @@ class HomeController extends AppController {
                                         ->toArray();
                                 if($activity){
                                     return $this->Util->ajaxReturn(['status'=>true, 'data'=>$activity]);
+                                } else if($activity == []){
+                                    return $this->Util->ajaxReturn(false ,'暂无活动收藏');
                                 } else {
                                     return $this->Util->ajaxReturn(false, '系统错误');
                                 }
@@ -396,6 +406,8 @@ class HomeController extends AppController {
                                     ->toArray();
                                 if($collects){
                                     return $this->Util->ajaxReturn(['status'=>true, 'data'=>$collects]);
+                                } else if($collects == []){
+                                    return $this->Util->ajaxReturn(false, '暂无资讯收藏');
                                 } else {
                                     return $this->Util->ajaxReturn(false, '系统错误');
                                 }
@@ -925,6 +937,8 @@ class HomeController extends AppController {
                 ->toArray();
         if ($card !== false) {
             return $this->Util->ajaxReturn(['status' => true, 'data' => $card]);
+        } else if($card == []){
+            return $this->Util->ajaxReturn(false, '名片夹为空');
         } else {
             return $this->Util->ajaxReturn(false, '系统错误');
         }
