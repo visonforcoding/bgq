@@ -4,26 +4,11 @@
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($activitycom, ['class' => 'form-horizontal']) ?>
-        <div class="form-group">
-        <label class="col-md-2 control-label">父id</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('pid', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
              <div class="form-group">
             <label class="col-md-2 control-label">用户id</label>
                 <div class="col-md-8">
                 <?php echo $this->Form->input('user_id', ['label' => false,'options' => $users,'class'=>'form-control']);?>
                       </div>
-         </div>
-                 <div class="form-group">
-            <label class="col-md-2 control-label">回复人的id</label>
-                <div class="col-md-8">
-                 <?php echo $this->Form->input('reply_id', ['label' => false,'options' => $replyusers, 
-                'empty' => true,'class'=>'form-control']); ?>
-                    </div>
          </div>
                  <div class="form-group">
             <label class="col-md-2 control-label">活动id</label>
@@ -52,6 +37,21 @@
         <div class="col-md-8">
                         <?php
             echo $this->Form->input('create_time', ['label' => false, 'class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+             <div class="form-group">
+            <label class="col-md-2 control-label">å›žå¤ç”¨æˆ·id</label>
+                <div class="col-md-8">
+                 <?php echo $this->Form->input('reply_id', ['label' => false,'options' => $replyusers, 
+                'empty' => true,'class'=>'form-control']); ?>
+                    </div>
+         </div>
+            <div class="form-group">
+        <label class="col-md-2 control-label">¸¸id</label>
+        <div class="col-md-8">
+                        <?php
+            echo $this->Form->input('pid', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>

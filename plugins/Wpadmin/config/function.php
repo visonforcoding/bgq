@@ -37,3 +37,9 @@ function getPluginConfig($key){
 function templateDefault($val,$default){
     return empty($val)?$default:$val;
 }
+
+function randColor(){
+    $colors = ['muted','active','success','warning','danger'];
+    $rand = rand(0, 4);
+    return $colors[$rand];
+}
