@@ -166,7 +166,7 @@ border-bottom:1px #e5e5e5 solid; padding:0 0.3rem;position:relative;font-weight:
 .entrollist:last-of-type{border-bottom:none;}
 .entrollist a{display: block;overflow: hide;}
 .line{height:1px;background: -webkit-linear-gradient(left,#ededee 0%,#7a7d82 50%, #ededee 100%);  background: linear-gradient(left,#ededee 0%,#7a7d82 50%, #ededee 100%);margin:0.3rem 0.3rem .4rem; position:relative;}
-.line .mistips{position:absolute;width:4rem;left:50%;margin-left: -2rem;height:.6rem;top:50%;margin-top:-.3rem;background: #f0eff5;text-align: center;line-height: .6rem;
+.line .mistips{position:absolute;width:4rem;left:50%;margin-left: -2rem;height:.6rem;top:50%;margin-top:-.3rem;background: #fff;text-align: center;line-height: .6rem;
 color:#7a7d82;font-size:.24rem;}
 
 .newscomment-box .no-bottom{border-bottom:none;}
@@ -526,7 +526,7 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .u-btn .focusgray{background:#7a7d82;-webkit-box-shadow: 0 .04rem .12rem rgba(255,75,112,.5);box-shadow: 0 .04rem .12rem rgba(122,125,130,.5);}
 .mobile-number span{margin-right:.2rem;line-height: .8rem;color:#171717;font-size:.26rem;}
 .mobile-number .m-email i{font-size:.2rem;color:#ff7e53;margin-right: .1rem;}
-.mobile-number .m-phone i{color:#ff5579;font-size:.24rem;vertical-align: 3px;margin-right: 0;}
+.mobile-number .m-phone i{color:#ff5579;font-size:.24rem;vertical-align: 1px;margin-right: 0;}
 .u-btn .cardbtn{color:#ff5277;border:2px #ff5277 solid;box-sizing: border-box;}
 .u-btn .cardgray{color:#7a7d82;border:2px #7a7d82 solid;}
 .basicinfo{overflow:hidden;margin-top:.36rem;}
@@ -880,7 +880,7 @@ background-size:3.82rem 1.9rem;margin-top:1rem;}
 .btnlist a:nth-of-type(2) i{background: url(img/ho.png) no-repeat;width:0.38rem;height:0.37rem;background-size: contain;}
 .btnlist a:nth-of-type(3) i{background: url(img/ba.png) no-repeat;width:0.4rem;height:0.32rem;background-size: contain;}
 .dialogue{width:100%;padding-top:0.4rem;}
-.dialogue ul{padding:0 0.3rem;-webkit-overflow-scrolling: touch;overflow-y:scroll;height:9.8rem;}
+.dialogue ul{padding:0 0.3rem;/*-webkit-overflow-scrolling: touch;overflow-y:scroll;height:9rem;*/}
 .dialogue li{max-width: 80%;margin-top:0.3rem;display:block;clear:both;}
 .dialogue li span,.dialogue li time{display: block;}
 .dialogue li time{font-size:12px;color:#e01a48;margin-top:0.1rem;}
@@ -900,7 +900,7 @@ background-size:3.82rem 1.9rem;margin-top:1rem;}
 }
 .r-input{width:78%;float:left;padding-left:0.2rem;height:1.68rem;}
 .b-text{background: #fff; padding:0.2rem 0;box-shadow: 0 0 1px rgba(0,0,0,.1);}
-.todialogue{width:100%;position:fixed;bottom:0;line-height: 1.68rem;max-width: 750px;}
+.todialogue{width:100%;position:fixed;bottom:0;line-height: 1.68rem;max-width: 750px;background: #fff;}
 .todialogue textarea{width:100%;height:100%;background: none;border:none;overflow:hidden;font-size:.28rem;}
 .todialogue .r-submit{float:right;width:20%;font-size:.3rem;border-left: 1px #ccc solid;text-align:center;height:1.68rem;line-height: 1.68rem;}
 .s-label{width:100%;height:3rem;overflow:hidden;padding:0 0.3rem;margin-top:0.2rem;transform: translateY(10px);}
@@ -1006,3 +1006,8 @@ width:0.5rem;height:0.16rem;display: inline-block;transition: all .3s;float:righ
 .c-card{float:left; width:70%;margin-left:.2rem;background: url(../css/img/rico.png) left 1rem no-repeat;background-size: 0.2rem 0.3rem;height:3rem;padding-left:0.4rem;}
 .c-card img,.r-card img{width:100%;height:auto;}
 .r-card{float:left; width:70%;margin-left:.2rem;height:3rem;padding-left:0.4rem;}
+.e-info-box .install{padding-right:0;}
+.install span.btn{width:.68rem;height:34px;border-radius: .3rem;background: #e5e5e5;position:relative;}
+.btn i{width:34px;height:34px;border-radius: 50%;background: lightgreen;display: block;transition:all .6s;}
+.btn .on{margin-left:0.01rem;float:left;background: lightgreen;}
+.btn .off{margin-right:0.01rem;float:right;background: lightgray;}
