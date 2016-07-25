@@ -544,12 +544,14 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .linkinfo{margin-top:0.12rem;}
 .tabcon ul li{border-bottom: 1px #e5e5e5 solid;line-height: .9rem;}
 .tabcon ul div{display:inline-block;max-width:70%;height:.9rem;}
-.tabcon div em{margin-left:.1rem;font-size:.26rem;}
+.tabcon div em{margin-right:.1rem;font-size:.26rem;}
 .basicon .b-dq i{color:#ff7e53;font-size:.28rem;}
 .basicon .b-hy i{color:#ff8897;}
 .basicon .b-bq i{color:#60bcff;}
 .basicon .b-yw i{color:#89e075;}
 .basicon .b-gs i{color:#ffc874;}
+.tabcon .b-yw div,.tabcon .b-gs div{display: block;border-top: 1px #e5e5e5 solid;max-width: 100%;margin-left: .4rem;height: auto;line-height: .45rem;padding: .2rem 0;}
+    
 .b-bq em{padding:0.05rem .08rem;background: #4285f4;color:#fff;}
 .tabcon ul span{color:#808080;font-size:.26rem;width:25%;display: inline-block;}
 .tabcon ul i{margin-right:.2rem;font-size:.24rem;}
