@@ -56,7 +56,6 @@ $pk = "\$$singularVar->{$primaryKey[0]}";
 </head>
 <body>
 <div class="<%= $pluralVar %> view large-9 medium-8 columns content">
-    <h3><?= h($<%= $singularVar %>-><%= $displayField %>) ?></h3>
     <table class="vertical-table">
 <% if ($groupedFields['string']) : %>
 <% foreach ($groupedFields['string'] as $field) : %>

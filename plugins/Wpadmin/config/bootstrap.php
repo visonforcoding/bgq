@@ -13,6 +13,7 @@ use Cake\I18n\Time;
 
 //TimeType::$dateTimeClass = 'Admin\I18n\DateOnly';
 Time::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');
+\Cake\I18n\Date::setJsonEncodeFormat('yyyy-MM-dd');
 if (PHP_SAPI === 'cli') {
     // Attach bake events here.
     EventManager::instance()->on('Bake.beforeRender.Controller.controller', function (Event $event) {

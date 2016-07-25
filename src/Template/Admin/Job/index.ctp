@@ -39,17 +39,17 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['公司', '负责人','行业', '联系方式', '分成方式', '招聘职位', '薪资范围', '工作地点', '招聘简介', 'create_time', 'update_time', '操作'],
+                                ['公司', '负责人', '行业', '联系方式', '分成方式', '招聘职位', '薪资范围', '工作地点', '招聘简介', 'create_time', 'update_time', '操作'],
                         colModel: [
                             {name: 'company', editable: true, align: 'center'},
                             {name: 'admin.truename', editable: true, align: 'center'},
-                            {name: 'industries', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
+                            {name: 'industries', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     var industries_arr = [];
-                                     $.each(cellvalue,function(i,n){
-                                         industries_arr.push(n.name);
-                                     })
-                                     return industries_arr.join(',');
-                            }},
+                                    $.each(cellvalue, function (i, n) {
+                                        industries_arr.push(n.name);
+                                    })
+                                    return industries_arr.join(',');
+                                }},
                             {name: 'contact', editable: true, align: 'center'},
                             {name: 'earnings', editable: true, align: 'center'},
                             {name: 'position', editable: true, align: 'center'},
@@ -86,6 +86,7 @@
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
+                    response += '<a title="查看应聘者" href="/admin/candidate/index/' + rowObject.id + '"  data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-link"></i> </a>';
                     response += '<a title="编辑" href="/admin/job/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     return response;
                 }

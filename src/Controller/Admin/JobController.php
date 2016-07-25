@@ -30,7 +30,7 @@ class JobController extends AppController {
     public function view($id = null) {
         $this->viewBuilder()->autoLayout(false);
         $job = $this->Job->get($id, [
-            'contain' => ['Admins', 'Industry']
+            'contain' => ['Admins', 'Industries']
         ]);
         $this->set('job', $job);
         $this->set('_serialize', ['job']);
@@ -79,7 +79,7 @@ class JobController extends AppController {
         foreach ($job->industries as $industry) {
             $selIndustryIds[] = $industry->id;
         }
-        $this->set(compact('job','selIndustryIds'));
+        $this->set(compact('job', 'selIndustryIds'));
     }
 
     /**

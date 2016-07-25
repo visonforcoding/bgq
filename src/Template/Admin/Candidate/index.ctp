@@ -35,11 +35,11 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/candidate/getDataList",
+                        url: "/admin/candidate/getDataList<?php if(isset($job_id)):?>/<?=$job_id?><?php endif;?>",
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['招聘公司','招聘职位', '姓名', '生日', '电话', '邮箱', '地址', '期望薪水', 'create_time', 'update_time', '操作'],
+                                ['招聘公司','招聘职位', '姓名', '生日', '电话', '邮箱', '地址', '期望薪水', '创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'job.company', editable: true, align: 'center'},
                             {name: 'job.position', editable: true, align: 'center'},
@@ -124,7 +124,7 @@
                     searchData['sidx'] = sortColumnName;
                     searchData['sort'] = sortOrder;
                     var searchQueryStr = $.param(searchData);
-                    $("body").append("<iframe src='/admin/candidate/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                    $("body").append("<iframe src='/admin/candidate/exportExcel<?php if(isset($job_id)):?>/<?=$job_id?><?php endif;?>?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
 
                 function doView(id) {
