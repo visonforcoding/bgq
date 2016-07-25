@@ -32,12 +32,12 @@
         </div>
     </div>
     <div class="infotab">
-        <ul class="h-tab bbottom clearfix">
+        <ul class="h-tab bd1">
             <li class="iconfont active">&#xe650;</li>
             <li class="iconfont">&#xe651;</li>
             <li class="iconfont">&#xe652;</li>
         </ul>
-        <div class="tabcon bbottom">
+        <div class="tabcon bd1">
             <ul class="cur inner basicon">
                 <li class="b-dq">
                     <span><i class="iconfont">&#xe660;</i>所在地区</span>
@@ -55,7 +55,7 @@
                 </li>
                 <li class="b-bq">
                     <span><i class="iconfont">&#xe653;</i>个人标签</span>
-                    <div>
+                    <div class="bd2">
                         <?php if(is_array(unserialize($user->grbq))): ?>
                             <?php foreach (unserialize($user->grbq) as $k=>$v): ?>
                                 <em><?= $v ?></em>
@@ -69,7 +69,7 @@
                     </div>
                 </li>
                 <li class="b-gs nobottom"><span><i class="iconfont">&#xe656;</i>公司业务</span>
-                    <div>
+                    <div class="bd2">
                         <em><?= $user->gsyw ? $user->gsyw : '暂未填写' ?></em>
                     </div>
                 </li>
@@ -109,14 +109,14 @@
 
         </div>
         <?php if($user->level == 2): ?>
-        <ul class="h-info-box">
+        <ul class="h-info-box bd1 bd2">
             <li class="no-b-border">
                 <a href="/meet/view/<?= $user->id ?>">专家主页</a>
             </li>
         </ul>
         <?php endif; ?>
         <?php if ($self): ?>
-        <ul class="h-info-box">
+        <ul class="h-info-box bd1 bd2">
             <li class="no-b-border">
                 <a href="/home/edit-userinfo">编辑</a>
             </li>
