@@ -448,3 +448,11 @@ ALTER TABLE `activity`
 	ADD COLUMN `from_user` INT NULL DEFAULT '0' AFTER `is_top`;
 ALTER TABLE `activity`
 	CHANGE COLUMN `from_user` `from_user` INT(11) NOT NULL DEFAULT '0' COMMENT '-1需求0后台>1,copy' AFTER `is_top`;
+
+#user表增加专家主页浏览数
+ALTER TABLE `binggq`.`user`
+  ADD COLUMN `savant_read_nums` int(11) unsigned NOT NULL DEFAULT 0;
+
+#user表增加专家主页浏览数
+ALTER TABLE `binggq`.`user`
+  ADD COLUMN `homepage_read_nums` int(11) unsigned NOT NULL DEFAULT 0;
