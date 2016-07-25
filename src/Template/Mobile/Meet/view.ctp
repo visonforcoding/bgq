@@ -121,11 +121,11 @@
 <div style='height:1.2rem'></div>
 </div>
 <!--底部四个图-->
-<div class="iconlist">
+<!--<div class="iconlist">
     <span class="iconfont" id="share">&#xe619;</span>
     <span class="iconfont" >&#xe615;</span>
     <span class="iconfont" id='goTop'>&#xe606;</span>
-</div>
+</div>-->
 <!--底部四个图**end-->
 <!-- 微信分享 -->
 <div class="reg-shadow" style="display: none;" id="shadow"></div>
