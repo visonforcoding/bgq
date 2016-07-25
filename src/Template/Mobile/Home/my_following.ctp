@@ -94,6 +94,7 @@
             dataType: 'json',
             url: "/home/get-my-following",
             success: function (res) {
+                
                 if(res.status){
                     $.util.dataToTpl('follow', 'listTpl', res.data, function(d){
                         d.following_id = d.following.id;
@@ -106,6 +107,7 @@
                         return d;
                     });
                 } else {
+                    $('#follow').html('');
                     $.util.alert(res.msg);
                 }
             } 
@@ -124,6 +126,7 @@
             dataType: 'json',
             url: "/home/get-my-fans",
             success: function (res) {
+                
                 if(res.status){
                     $.util.dataToTpl('follow', 'listTpl', res.data, function(d){
                         d.following_id = d.user.id;
@@ -136,6 +139,7 @@
                         return d;
                     });
                 } else {
+                    $('#follow').html('');
                     $.util.alert(res.msg);
                 }
             }
@@ -179,6 +183,7 @@
                         });
                     }
                 } else {
+                    $('#follow').html('');
                     $.util.alert(res.msg);
                 }
             }
