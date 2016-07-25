@@ -9,10 +9,10 @@
             <?php if(!$self): ?>
                 <?php if($user->secret): ?>
                     <?php if ($user->secret->phone_set == '1'): ?>
-                        <a href="tel:<?= $user->phone ?>" onclick="if($.util.isAPP){LEMON.event.tel(<?= $user->phone ?>);}"><span><i class="iconfont">&#xe657;</i><?= $user->phone ?></span></a>
+                        <a href="tel:<?= $user->phone ?>" onclick="if($.util.isAPP){LEMON.event.tel(<?= $user->phone ?>);}"><span class='m-phone'><i class="iconfont">&#xe657;</i><?= $user->phone ?></span></a>
                     <?php endif; ?>
                     <?php if ($user->secret->email_set == '1'): ?>
-                        <span><i class="iconfont">&#xe625;</i><?= $user->email ?></span>
+                        <span class='m-email'><i class="iconfont">&#xe625;</i><?= $user->email ?></span>
                     <?php endif; ?>
                 <?php else: ?>
                     <a href="tel:<?= $user->phone ?>" onclick="if($.util.isAPP){LEMON.event.tel(<?= $user->phone ?>);}"><span><i class="iconfont">&#xe657;</i><?= $user->phone ?></span></a>
