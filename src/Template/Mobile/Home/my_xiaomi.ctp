@@ -12,7 +12,7 @@
     <!--<div class="h20">
             
     </div>-->
-    <div class="dialogue">
+    <div class="dialogue" id='xiaomi'>
         <ul>
             <?php if(!empty($conversation)): ?>
                 <?php foreach($conversation as $k=>$v): ?>
@@ -38,7 +38,7 @@
 </div>
 <?php $this->start('script') ?>
 <script>
-   window.scrollTo(0, 999999);
+    
     $(function(){
         $('#submit').click(function(){
             var content =  $('#content').val();
@@ -58,5 +58,9 @@
             });
         });
     });
+    setTimeout(function(){
+        window.scrollTo(0, 99999);
+    }, 200);
+    
 </script>
 <?php $this->end('script');

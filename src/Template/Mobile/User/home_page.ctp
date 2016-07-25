@@ -20,8 +20,8 @@
                     <span><i class="iconfont">&#xe625;</i><?= $user->email ?></span>
                 <?php endif; ?>
             <?php else: ?>
-                <span><i class="iconfont">&#xe657;</i><?= $user->phone ?></span>
-                <span><i class="iconfont">&#xe625;</i><?= $user->email ?></span>
+                <span class='m-phone'><i class="iconfont">&#xe657;</i><?= $user->phone ?></span>
+                <span class='m-email'><i class="iconfont">&#xe625;</i><?= $user->email ?></span>
             <?php endif; ?>
         </div>
         <div class="u-btn">
