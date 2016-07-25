@@ -109,14 +109,14 @@
 
         </div>
         <?php if($user->level == 2): ?>
-        <ul class="h-info-box bd1 bd2">
+        <ul class="h-info-box">
             <li class="no-b-border">
                 <a href="/meet/view/<?= $user->id ?>">专家主页</a>
             </li>
         </ul>
         <?php endif; ?>
         <?php if ($self): ?>
-        <ul class="h-info-box bd1 bd2">
+        <ul class="h-info-box">
             <li class="no-b-border">
                 <a href="/home/edit-userinfo">编辑</a>
             </li>
