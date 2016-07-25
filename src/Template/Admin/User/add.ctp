@@ -37,6 +37,12 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">负责人</label>
+        <div class="col-md-8">
+            <?= $this->cell('Admin', [[$user->admin_id]]) ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">公司</label>
         <div class="col-md-8">
             <?php
@@ -138,6 +144,10 @@
         $('#select-agency').select2({
             language: "zh-CN",
             placeholder: '选择一个标签'
+        });
+        $('#select-admin').select2({
+            language: "zh-CN",
+            placeholder: '选择一个管理员作为负责人'
         });
         $('form').submit(function () {
             var form = $(this);
