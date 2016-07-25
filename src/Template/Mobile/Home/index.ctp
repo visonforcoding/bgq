@@ -11,6 +11,7 @@
                 <img src="/mobile/images/touxiang.png">
             </span>
         </div>
+        <div class="todo"><a href="/user/login?redirect_url=/home/index">登录 / 注册</a></div>
     </div>
     <div class="h-home-menu topnav">
         <ul class="clearfix">
@@ -36,15 +37,6 @@
     <span></span>
     <p></p>
  </div>
-<div class="reg-shadow" style="display: none;" id="loginShadow"></div>
-<div class="totips" style="display: none;">
-    <h3>您还没有登录</h3>
-    <span></span>
-    <a href="/user/login?redirect_url=/home/index" class="nextstep">去登录</a>
-    <!--<span class='closed'>
-            &times;
-    </span>-->
-</div>
 </div>
 <script type="text/html" id="icoTpl">
     <div class="h-home-menu">
@@ -83,8 +75,6 @@
         {#v#}
     </h3>
     <div class="info-desc"><span><i class='iconfont'>&#xe62a;</i>{#company#}</span><span><i class='iconfont'>&#xe612;</i>{#position#}</span></div>
-    <div class="todo"><a href="/user/login?redirect_url=/home/index">登录 / 注册</a></div>
-    
 </script>
 <script type="text/html" id='defaultTpl'>
     <div class='inner h-home-top'>
@@ -110,6 +100,21 @@
         dataType: 'json',
         success: function (res) {
             if(res.status){
+//                if(LEMON.isAPP){
+//                    (LEMON.db.set('aaaaa', 123456));
+//                    (LEMON.db.set('bbbbb', JSON.stringify({"abc":123})));
+//                    alert('aaaaa'+LEMON.db.get('aaaaa'));
+//                    alert('bbbbb'+LEMON.db.get('bbbbb'));
+//                    
+//                    alert(JSON.stringify(res.data));
+//                    alert(LEMON.db.set('user_data', JSON.stringify(res.data)));
+//                    alert(LEMON.db.get('user_data'));
+//                    if(LEMON.db.get('user_data') == JSON.stringify(res.data)){
+//                        res.data = JSON.parse(LEMON.db.get('user_data'));
+//                    } else {
+//                        LEMON.db.set('user_data', JSON.stringify(res.data));
+//                    }
+//                }
                 var html = $('#savantTpl').text();
                 var user = $('#userTpl').text();
                 if(res.data.user.level == 2) {
@@ -142,10 +147,6 @@
                     user = user.replace('{#avatar#}', '/mobile/images/touxiang.png');
                 }
                 $('#user').html(user);
-            } else {
-                $('#user').html($('#defaultTpl').text());
-                $('#loginShadow').show();
-                $('.totips').show();
             }
        }
     });
