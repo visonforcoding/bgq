@@ -131,7 +131,7 @@
         <div style='height:1.2rem;'></div>
     </div>
 
-    <div class="wraper pd10" id="allcoment" style="display:none;">
+    <div class="wraper" id="allcoment" style="display:none;">
         <section class="newscomment-box">
             <h3 class="comment-title">
                 评论
@@ -297,8 +297,7 @@
     }
 
     $(window).on('hashchange', function () {
-        if (location.hash == '#allcoment')
-        {
+        if (location.hash == '#allcoment') {
             $('#activity_detail').hide('slow');
             $('#allcoment').show('slow');
             $.ajax({
@@ -327,6 +326,7 @@
                                 }
                                 return d;
                             });
+                            $('.fixed-btn').hide();
                         }
                     }
                 }
@@ -376,8 +376,8 @@
                     });
                 });
             }, 2000);
-        } else
-        {
+        } else {
+            $('.fixed-btn').show();
             $('#activity_detail').show('slow');
             $('#allcoment').hide('slow');
         }
