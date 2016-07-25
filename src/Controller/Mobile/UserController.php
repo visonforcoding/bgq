@@ -35,6 +35,11 @@ class UserController extends AppController {
             $id = $this->user->id;
             $self = true;
         }
+        if(!$self){
+            $user = $this->User->get($id);
+            $user->homepage_read_nums += 1;
+            $this->User->save($user);
+        }
         $user = $this->User->get($id,['contain'=>['Industries'=>function($q){
             return $q->hydrate(false)->select(['id','name']);
         }, 'Secret','Careers','Educations']]);

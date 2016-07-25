@@ -130,6 +130,9 @@ class MeetController extends AppController {
                     return $q->where(['user_id'=>$user_id]);
                 }]]);
                 $isReco = $isReco->reco_users;
+                $biggie = $this->User->get($id);
+                $biggie->savant_read_nums += 1;
+                $this->User->save($biggie);
             }
         }
         $biggie = $this->User->get($id, ['contain' => ['Savant', 'Industries', 'Subjects','RecoUsers','RecoUsers.Users']]);
