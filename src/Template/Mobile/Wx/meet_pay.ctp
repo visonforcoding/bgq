@@ -15,7 +15,7 @@
         </ul>
     </div>
     <div class="h20 no-t-border"></div>
-    <div class="infobox a-pay paytype">
+    <div class="infobox a-pay paytype bgff">
         <ul>
             <li><b></b>微信支付：<span id="pay_weixin" data-pay="wx" class='infocard'><input value="wx" type="radio" name='pay' checked="checked" /><i class='active'></i></span></li>
             <?php if(!$isWx):?>
