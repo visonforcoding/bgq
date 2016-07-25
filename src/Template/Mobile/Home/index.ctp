@@ -83,6 +83,7 @@
         {#v#}
     </h3>
     <div class="info-desc"><span><i></i>{#company#}</span><span><i></i>{#position#}</span></div>
+    <div class="todo"><a href="#this">登录 / 注册</a></div>
     
 </script>
 <script type="text/html" id='defaultTpl'>
