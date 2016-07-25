@@ -20,6 +20,7 @@
             <a href="#this" class='iconfont share h-regiser'>&#xe614;</a>-->
         </div>
         <div class="m-tomore-bottom">
+            <span><i class="iconfont">&#xe60b;</i>99</span>
             <span><i class="iconfont">&#xe629;</i><?= $biggie->city ?></span>
             <span><i class="iconfont">&#xe616;</i><?= $biggie->meet_nums ?>人约见过</span>
         </div>
@@ -118,7 +119,7 @@
     </section>
     
 </div>
-<div style='height:1.2rem'></div>
+<!-- <div style='height:1.2rem'></div> -->
 </div>
 <!--底部四个图-->
 <!--<div class="iconlist">
