@@ -122,7 +122,7 @@
 </div>
 <!--底部四个图-->
 <div class="iconlist">
-    <span class="iconfont" id="share">&#xe612;</span>
+    <span class="iconfont" id="share">&#xe619;</span>
     <span class="iconfont" >&#xe615;</span>
     <span class="iconfont" id='goTop'>&#xe606;</span>
 </div>
