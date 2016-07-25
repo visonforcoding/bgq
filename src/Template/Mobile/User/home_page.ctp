@@ -16,8 +16,8 @@
                         <span class='m-email'><i class="iconfont">&#xe625;</i><?= $user->email ?></span>
                     <?php endif; ?>
                 <?php else: ?>
-                    <a href="tel:<?= $user->phone ?>" onclick="if($.util.isAPP){LEMON.event.tel(<?= $user->phone ?>);}"><span><i class="iconfont">&#xe657;</i><?= $user->phone ?></span></a>
-                    <span><i class="iconfont">&#xe625;</i><?= $user->email ?></span>
+                    <a href="tel:<?= $user->phone ?>" onclick="if($.util.isAPP){LEMON.event.tel(<?= $user->phone ?>);}"><span class='m-phone'><i class="iconfont">&#xe657;</i><?= $user->phone ?></span></a>
+                    <span class='m-email'><i class="iconfont">&#xe625;</i><?= $user->email ?></span>
                 <?php endif; ?>
             <?php else: ?>
                 <span class='m-phone'><i class="iconfont">&#xe657;</i><?= $user->phone ?></span>
