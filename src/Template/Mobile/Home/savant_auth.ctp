@@ -9,16 +9,16 @@
 
 <div class="wraper">
 
-    <ul class="h-info-box e-info-box">
+    <ul class="h-info-box e-info-box nomargin">
 
         <form method="post" action="">
-            <li class="no-right-ico changeflex">
+            <li class="no-right-ico changeflex nopr">
                 <b>项目经验<a href="javascript:void(0);" class="r-example" id="xmjyTap">样例</a></b>
                 <div >
                     <textarea name="xmjy" <?php if($user->savant_status==2 || $user->savant_status==3): ?>disabled style="background: gainsboro;"<?php endif; ?> placeholder="" ><?=isset($user->savant) ? $user->savant->xmjy : ''?></textarea>
                 </div>
             </li>
-            <li class="nobottom no-right-ico changeflex">
+            <li class="nobottom no-right-ico changeflex nopr">
                 <b>擅长话题<a href="javascript:void(0);" class="r-example" id="schtTap">样例</a></b>
                 <div >
                     <textarea name="zyys" <?php if($user->savant_status==2 || $user->savant_status==3): ?>disabled style="background: gainsboro;"<?php endif; ?> placeholder="" ><?= isset($user->savant)?$user->savant->zyys:''?></textarea>
@@ -38,7 +38,7 @@
     <?php if($user->savant_status==0): ?>
         <a id="submit" class="nextstep">重新申请认证</a>
     <?php endif; ?>
-    <div style="color:red; text-align: center">我们的秘书会在两个工作日内联系您</div>
+   <div class="line"><span class="mistips">我们会在三个工作日内处理您的申请</span></div>
 </div>
 <div class="reg-shadow" id="shadow" hidden></div>
 <div class="tips" hidden id="xmjy" style="z-index: 999">
