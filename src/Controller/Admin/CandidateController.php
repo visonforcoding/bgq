@@ -5,7 +5,7 @@ namespace App\Controller\Admin;
 use Wpadmin\Controller\AppController;
 
 /**
- * Candidate Controller
+ * Candidate Controller  应聘者管理
  *
  * @property \App\Model\Table\CandidateTable $Candidate
  */
@@ -16,7 +16,12 @@ class CandidateController extends AppController {
      *
      * @return void
      */
-    public function index() {
+    public function index($id = null) {
+        if ($id) {
+            $this->set([
+                'job_id' => $id
+            ]);
+        }
         $this->set('candidate', $this->Candidate);
     }
 
@@ -104,7 +109,7 @@ class CandidateController extends AppController {
      *
      * @return json
      */
-    public function getDataList() {
+    public function getDataList($id = null) {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
@@ -114,6 +119,9 @@ class CandidateController extends AppController {
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
+        if ($id) {
+            $where['job_id'] = $id;
+        }
 
         if (!empty($keywords)) {
             $where['username like'] = "%$keywords%";
@@ -156,13 +164,16 @@ class CandidateController extends AppController {
      *
      * @return csv 
      */
-    public function exportExcel() {
+    public function exportExcel($id=null) {
         $sort = $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
+        if ($id) {
+            $where['job_id'] = $id;
+        }
         if (!empty($keywords)) {
             $where[' username like'] = "%$keywords%";
         }

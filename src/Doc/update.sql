@@ -446,6 +446,7 @@ ALTER TABLE `activity` ADD COLUMN `apply_end_time` INT(10) NOT NULL DEFAULT 0 CO
 
 ALTER TABLE `activity`
 	ADD COLUMN `from_user` INT NULL DEFAULT '0' AFTER `is_top`;
+	
 ALTER TABLE `activity`
 	CHANGE COLUMN `from_user` `from_user` INT(11) NOT NULL DEFAULT '0' COMMENT '-1需求0后台>1,copy' AFTER `is_top`;
 

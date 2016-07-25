@@ -26,6 +26,8 @@ class IndexController extends AppController {
         //$umengObj = new Umeng($key, $secret);
         //var_dump($umengObj);
         $this->autoRender = false;
+        $SomeTable = \Cake\ORM\TableRegistry::get('SomeTable');
+        debug($SomeTable);
         //debug($this->request);
 //        $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
 //        debug(Security::hash(uniqid()),'sha1',true);
