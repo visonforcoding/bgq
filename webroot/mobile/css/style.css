@@ -1011,3 +1011,4 @@ width:0.5rem;height:0.16rem;display: inline-block;transition: all .3s;float:righ
 .btn i{width:34px;height:34px;border-radius: 50%;background: lightgreen;display: block;transition:all .6s;}
 .btn .on{margin-left:0.01rem;float:left;background: lightgreen;}
 .btn .off{margin-right:0.01rem;float:right;background: lightgray;}
+.wraper .nopr{padding-right:0;}
