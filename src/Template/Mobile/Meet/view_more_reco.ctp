@@ -23,7 +23,7 @@
                     <span><img src="<?=$recom->user->avatar?>"/></span>
                     <div class="infor-comm">
                         <i class="username"><?=$recom->user->truename?> </i>
-                        <i class="job"><?=$recom->user->company?>   <?=$recom->user->position?></i>
+                        <i class="job j-width"><?=$recom->user->company?>   <?=$recom->user->position?></i>
                     </div>
                 </a>
             </div>
