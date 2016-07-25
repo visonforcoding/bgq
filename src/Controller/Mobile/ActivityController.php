@@ -675,19 +675,31 @@ class ActivityController extends AppController {
      * @param int $id 活动id
      */
     public function showAllComment($id){
-        $user_id = $this->user->id;
-        // 评论
-        $comment = $this
-                ->Activity
-                ->Activitycom
-                ->find()
-                ->contain(['Users', 'Replyusers', 'Likes'=>function($q)use($user_id){
-                        return $q->where(['type'=>0,'user_id'=>$user_id]);
-                    }])
-                ->where(['activity_id' => $id, 'is_delete'=>0])
-                ->order(['Activitycom.create_time' => 'DESC'])
-                ->limit(10)
-                ->toArray();
+        if($this->user){
+            $user_id = $this->user->id;
+            // 评论
+            $comment = $this
+                    ->Activity
+                    ->Activitycom
+                    ->find()
+                    ->contain(['Users', 'Replyusers', 'Likes'=>function($q)use($user_id){
+                            return $q->where(['type'=>0,'user_id'=>$user_id]);
+                        }])
+                    ->where(['activity_id' => $id, 'is_delete'=>0])
+                    ->order(['Activitycom.create_time' => 'DESC'])
+                    ->limit(10)
+                    ->toArray();
+        } else {
+            $comment = $this
+                    ->Activity
+                    ->Activitycom
+                    ->find()
+                    ->contain(['Users', 'Replyusers'])
+                    ->where(['activity_id' => $id, 'is_delete'=>0])
+                    ->order(['Activitycom.create_time' => 'DESC'])
+                    ->limit(10)
+                    ->toArray();
+        }
         if ($comment) {
             return $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
         } else {

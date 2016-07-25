@@ -327,19 +327,31 @@ class NewsController extends AppController {
      * @param type $id
      */
     public function showAllComment($id){
-        $user_id = $this->user->id;
-        // 评论
-        $comment = $this
-                ->News
-                ->Comments
-                ->find()
-                ->contain(['Users', 'Reply', 'Likes'=>function($q)use($user_id){
-                    return $q->where(['type'=>1,'user_id'=>$user_id]);
-                }])
-                ->where(['news_id' => $id, 'is_delete'=>0])
-                ->order(['Comments.create_time' => 'DESC'])
-                ->limit(10)
-                ->toArray();
+        if($this->user){
+            $user_id = $this->user->id;
+            // 评论
+            $comment = $this
+                    ->News
+                    ->Comments
+                    ->find()
+                    ->contain(['Users', 'Reply', 'Likes'=>function($q)use($user_id){
+                        return $q->where(['type'=>1,'user_id'=>$user_id]);
+                    }])
+                    ->where(['news_id' => $id, 'is_delete'=>0])
+                    ->order(['Comments.create_time' => 'DESC'])
+                    ->limit(10)
+                    ->toArray();
+        } else {
+            $comment = $this
+                    ->News
+                    ->Comments
+                    ->find()
+                    ->contain(['Users', 'Reply'])
+                    ->where(['news_id' => $id, 'is_delete'=>0])
+                    ->order(['Comments.create_time' => 'DESC'])
+                    ->limit(10)
+                    ->toArray();
+        }
         if ($comment) {
             return $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
         } else {
