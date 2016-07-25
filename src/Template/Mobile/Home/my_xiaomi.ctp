@@ -28,7 +28,7 @@
 </div>
 <div style="height:3.2rem"></div>
 <div class="todialogue">
-    <div class="line"><span class="mistips">我们会在三个工作日内处理您的申请</span></div>
+    <div class="line"><span class="mistips bgff">我们会在三个工作日内处理您的申请</span></div>
     <div class="clearfix b-text">
         <div class="r-input">
             <textarea placeholder="请输入内容" id="content"></textarea>
