@@ -73,6 +73,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
     var apiList = ["db.get",
         "db.set",
         "sys.version",
+        "sys.isUseLOC",  //是否使用缓存  on  off
         "sys.openLOC",  //开启缓存
         "sys.closeLOC", //关闭缓存
         "sys.showKeyboard",  //显示键盘
@@ -130,7 +131,8 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
 
                 case "sys.version":
                 case "sys.device":
-                    registerAPI(null, api, function () {
+                case "sys.isUseLOC":  //是否使用缓存  on  off
+                        registerAPI(null, api, function () {
                         var invokeResult = JSApiInvoke(api, '', '', 'string');
                         //alert(invokeResult);
                         var re = JSON.parse(invokeResult);
@@ -138,6 +140,8 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                     });
                     break;
                 //无参数   无回调
+                case "sys.openLOC":
+                case "sys.closeLOC":
                 case "share.banner":
                 case "show.shareIco":
                 case "sys.showKeyboard":
