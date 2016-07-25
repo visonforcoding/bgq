@@ -88,6 +88,7 @@
                         return d;
                     });
                 } else {
+                    $('#collect').html('');
                     $.util.alert(res.msg);
                 }
             }
@@ -116,6 +117,7 @@
                         return d;
                     });
                 } else {
+                    $('#collect').html('');
                     $.util.alert(res.msg);
                 }
             }
