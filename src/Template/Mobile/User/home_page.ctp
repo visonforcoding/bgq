@@ -55,7 +55,7 @@
                 </li>
                 <li class="b-bq">
                     <span><i class="iconfont">&#xe653;</i>个人标签</span>
-                    <div class="bd2">
+                    <div >
                         <?php if(is_array(unserialize($user->grbq))): ?>
                             <?php foreach (unserialize($user->grbq) as $k=>$v): ?>
                                 <em><?= $v ?></em>
@@ -64,7 +64,7 @@
                     </div>
                 </li>
                 <li class="b-yw"><span><i class="iconfont">&#xe655;</i>擅长业务</span>
-                    <div>
+                    <div class="bd2">
                         <em><?= $user->goodat ? $user->goodat : '暂未填写' ?></em>
                     </div>
                 </li>
