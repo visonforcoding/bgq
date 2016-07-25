@@ -553,7 +553,7 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .tabcon ul span{color:#808080;font-size:.26rem;width:25%;display: inline-block;}
 .tabcon ul i{margin-right:.2rem;font-size:.24rem;}
 .worktab a{display: block;}
-.worktab li span{color:#171717;}
+.worktab li span{color:#171717;width:100%;}
 .worktab .worktime{display: block;line-height: .9rem;text-indent: 5%;width:100%;}
 .linkinfo p{line-height: 0.46rem; }
 .linkinfo p span{/*width:1rem;*/}
