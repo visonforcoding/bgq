@@ -191,6 +191,7 @@ color:#7a7d82;font-size:.24rem;}
 .comm-info .username{font-size:0.3rem;line-height: 0.38rem;}
 .comm-info .username time{font-size:0.26rem;margin-left:0.3rem;color:#9ba4ad;}
 .comm-info .job{font-size:0.28rem;line-height: 0.3rem;margin-top:0.05rem;/*width:5.8rem;*/color:#9ba4ad;}
+.comm-info .j-width{width:5.8rem;}
 .newscomment-box p{width:100%;padding:0.2rem;padding-left:0.92rem;font-size:0.28rem;color:#9ba4ad;line-height: 0.4rem;clear:both;
 text-align: justify;}
 /*新闻搜索--start*/
@@ -575,7 +576,7 @@ background: url(img/mbg.jpg) no-repeat;background-size: contain;}
 /*个人中心--2end*/
 .myhome,.myhome-h{background: #dd204b;position:fixed;}
 .myhome-h{height:3.6rem;}
-.h-home-bottom{padding:0.5rem 0 0.14rem;
+.h-home-bottom{padding:0.4rem 0 0.2rem;
 /*display: -webkit-flex; display: flex;
 -webkit-justify-content: center;justify-content: center;
 -webkit-align-items: center;  align-items: center;
@@ -586,6 +587,8 @@ color:#fff;background: #dd1f4b;}
 .h-home-bottom div.t-home-top span,.m-pic span{/*width:2.4rem;height:2.4rem;*/display:inline-block;position:relative;background-color: #fff;
 border-radius: 50%;}
 .info-desc{font-size:0;color:#fff;text-align: center;}
+.todo{text-align: center;margin-top:.1rem;}
+.todo a{color:#fff;border:1px #fff solid;padding:0.2rem;border-radius: .3rem;display: inline-block;}
 .info-desc span{display:block;font-size:0.3rem;line-height:0.46rem;}
 .info-desc span:first-of-type{}
 .info-desc span i{margin-right: 0.1rem;font-size:.3rem;}
