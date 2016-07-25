@@ -17,8 +17,6 @@ class NewsController extends AppController {
      * @return void
      */
     public function index() {
-        $domain = $this->request->env('SERVER_NAME');
-        $this->set(compact('domain'));
         $this->set('news', $this->News);
     }
 
@@ -49,8 +47,8 @@ class NewsController extends AppController {
             $news = $this->News->patchEntity($news, $this->request->data);
             $news->admin_id = $this->_user->id;
             $news->admin_name = $this->_user->truename;
-            if(empty($this->request->data('user_id'))&&empty($this->request->data('source'))){
-                $this->Util->ajaxReturn(false,'作者和来源必须要填一个');
+            if (empty($this->request->data('user_id')) && empty($this->request->data('source'))) {
+                $this->Util->ajaxReturn(false, '作者和来源必须要填一个');
             }
             if ($this->News->save($news)) {
                 $this->Util->ajaxReturn(true, '添加成功');
@@ -73,14 +71,14 @@ class NewsController extends AppController {
      */
     public function edit($id = null) {
         $news = $this->News->get($id, [
-            'contain' => ['Industries','Savants']
+            'contain' => ['Industries', 'Savants']
         ]);
         if ($this->request->is(['post', 'put'])) {
             $news = $this->News->patchEntity($news, $this->request->data);
-             $news->admin_id = $this->_user->id;
+            $news->admin_id = $this->_user->id;
             $news->admin_name = $this->_user->truename;
-            if(empty($this->request->data('user_id'))&&empty($this->request->data('source'))){
-                $this->Util->ajaxReturn(false,'作者和来源必须要填一个');
+            if (empty($this->request->data('user_id')) && empty($this->request->data('source'))) {
+                $this->Util->ajaxReturn(false, '作者和来源必须要填一个');
             }
             if ($this->News->save($news)) {
                 $this->Util->ajaxReturn(true, '修改成功');
@@ -92,19 +90,17 @@ class NewsController extends AppController {
         $users = $this->News->Users->find('list', ['limit' => 200]);
         $this->set(compact('news', 'users'));
         $selIndustryIds = [];
-        foreach($news->industries as $industry){
+        foreach ($news->industries as $industry) {
             $selIndustryIds[] = $industry->id;
         }
         // 专家推荐
         $selSavantIds = [];
-        if($news->savants)
-        {
-            foreach ($news->savants as $savant)
-            {
+        if ($news->savants) {
+            foreach ($news->savants as $savant) {
                 $selSavantIds[] = $savant->id;
             }
         }
-        $this->set(compact('news','selIndustryIds', 'selSavantIds'));
+        $this->set(compact('news', 'selIndustryIds', 'selSavantIds'));
     }
 
     /**
@@ -153,77 +149,78 @@ class NewsController extends AppController {
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
         $query = $this->News->find();
-        $query->contain(['Users','Industries'=>function($q){
-                    return $q->hydrate(false)->select(['name']);
-         }]);
-        if(!empty($industry['_ids'][0])){
-            //过滤
-           $query->matching('Industries',function($q)use($industry){
-               return $q->where(['Industries.id'=>$industry['_ids'][0]]);
-           });
-        }
-       
-        //$query->hydrate(false);
-        if (!empty($where)) {
-            $query->where($where);
-        }
-        $nums = $query->count();
-        if (!empty($sort) && !empty($order)) {
-            $query->order([$sort => $order]);
-        }
+        $query->contain(['Users', 'Industries' => function($q) {
+                return $q->hydrate(false)->select(['name']);
+            }]);
+                if (!empty($industry['_ids'][0])) {
+                    //过滤
+                    $query->matching('Industries', function($q)use($industry) {
+                        return $q->where(['Industries.id' => $industry['_ids'][0]]);
+                    });
+                }
 
-        $query->limit(intval($rows))
-                ->page(intval($page));
-        $res = $query->toArray();
-        if (empty($res)) {
-            $res = array();
-        }
-        if ($nums > 0) {
-            $total_pages = ceil($nums / $rows);
-        } else {
-            $total_pages = 0;
-        }
-        $data = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $res);
-        $this->autoRender = false;
-        $this->response->type('json');
-        echo json_encode($data);
-    }
+                //$query->hydrate(false);
+                if (!empty($where)) {
+                    $query->where($where);
+                }
+                $nums = $query->count();
+                if (!empty($sort) && !empty($order)) {
+                    $query->order([$sort => $order]);
+                }
 
-    /**
-     * export csv
-     *
-     * @return csv 
-     */
-    public function exportExcel() {
-        $sort = $this->request->data('sidx');
-        $order = $this->request->data('sord');
-        $keywords = $this->request->data('keywords');
-        $begin_time = $this->request->data('begin_time');
-        $end_time = $this->request->data('end_time');
-        $where = [];
-        if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
-        }
-        if (!empty($begin_time) && !empty($end_time)) {
-            $begin_time = date('Y-m-d', strtotime($begin_time));
-            $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
-        }
-        $Table = $this->News;
-        $column = ['作者', '标题', '阅读数', '点赞数', '评论数', '封面', '内容', '摘要', '创建时间', '更新时间'];
-        $query = $Table->find();
-        $query->hydrate(false);
-        $query->select(['admin_id', 'title', 'read_nums', 'praise_nums', 'comment_nums', 'cover', 'body', 'summary', 'create_time', 'update_time']);
-        if (!empty($where)) {
-            $query->where($where);
-        }
-        if (!empty($sort) && !empty($order)) {
-            $query->order([$sort => $order]);
-        }
-        $res = $query->toArray();
-        $this->autoRender = false;
-        $filename = 'News_' . date('Y-m-d') . '.csv';
-        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
-    }
+                $query->limit(intval($rows))
+                        ->page(intval($page));
+                $res = $query->toArray();
+                if (empty($res)) {
+                    $res = array();
+                }
+                if ($nums > 0) {
+                    $total_pages = ceil($nums / $rows);
+                } else {
+                    $total_pages = 0;
+                }
+                $data = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $res);
+                $this->autoRender = false;
+                $this->response->type('json');
+                echo json_encode($data);
+            }
 
-}
+            /**
+             * export csv
+             *
+             * @return csv 
+             */
+            public function exportExcel() {
+                $sort = $this->request->data('sidx');
+                $order = $this->request->data('sord');
+                $keywords = $this->request->data('keywords');
+                $begin_time = $this->request->data('begin_time');
+                $end_time = $this->request->data('end_time');
+                $where = [];
+                if (!empty($keywords)) {
+                    $where[' username like'] = "%$keywords%";
+                }
+                if (!empty($begin_time) && !empty($end_time)) {
+                    $begin_time = date('Y-m-d', strtotime($begin_time));
+                    $end_time = date('Y-m-d', strtotime($end_time));
+                    $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
+                }
+                $Table = $this->News;
+                $column = ['作者', '标题', '阅读数', '点赞数', '评论数', '封面', '内容', '摘要', '创建时间', '更新时间'];
+                $query = $Table->find();
+                $query->hydrate(false);
+                $query->select(['admin_id', 'title', 'read_nums', 'praise_nums', 'comment_nums', 'cover', 'body', 'summary', 'create_time', 'update_time']);
+                if (!empty($where)) {
+                    $query->where($where);
+                }
+                if (!empty($sort) && !empty($order)) {
+                    $query->order([$sort => $order]);
+                }
+                $res = $query->toArray();
+                $this->autoRender = false;
+                $filename = 'News_' . date('Y-m-d') . '.csv';
+                \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+            }
+
+        }
+        

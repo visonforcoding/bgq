@@ -5,15 +5,14 @@ namespace App\Controller\Admin;
 use Wpadmin\Controller\AppController;
 
 /**
- * CollectLogs Controller
+ * Collect Controller
  *
- * @property \App\Model\Table\CollectLogsTable $CollectLogs
+ * @property \App\Model\Table\CollectTable $Collect
  */
-class CollectLogsController extends AppController {
+class CollectController extends AppController {
 
     public function initialize() {
         parent::initialize();
-        $this->loadModel('CollectLogs');
     }
 
     /**
@@ -23,7 +22,13 @@ class CollectLogsController extends AppController {
      */
     public function index($id = '') {
         $this->set('id', $id);
-        $this->set('collectLogs', $this->CollectLogs);
+        $type = $this->request->query('type');
+        if($type){
+            $this->set([
+                'type'=>$type
+            ]);
+        }
+        $this->set('collectLogs', $this->Collect);
     }
 
     /**
@@ -35,7 +40,7 @@ class CollectLogsController extends AppController {
      */
     public function view($id = null) {
         $this->viewBuilder()->autoLayout(false);
-        $collectLog = $this->CollectLogs->get($id, [
+        $collectLog = $this->Collect->get($id, [
             'contain' => ['Users', 'Activities']
         ]);
         $this->set('collectLog', $collectLog);
@@ -48,18 +53,18 @@ class CollectLogsController extends AppController {
      * @return void Redirects on successful add, renders view otherwise.
      */
     public function add() {
-        $collectLog = $this->CollectLogs->newEntity();
+        $collectLog = $this->Collect->newEntity();
         if ($this->request->is('post')) {
-            $collectLog = $this->CollectLogs->patchEntity($collectLog, $this->request->data);
-            if ($this->CollectLogs->save($collectLog)) {
+            $collectLog = $this->Collect->patchEntity($collectLog, $this->request->data);
+            if ($this->Collect->save($collectLog)) {
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {
                 $errors = $collectLog->errors();
                 $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
             }
         }
-        $users = $this->CollectLogs->Users->find('list', ['limit' => 200]);
-        $activities = $this->CollectLogs->Activities->find('list', ['limit' => 200]);
+        $users = $this->Collect->Users->find('list', ['limit' => 200]);
+        $activities = $this->Collect->Activities->find('list', ['limit' => 200]);
         $this->set(compact('collectLog', 'users', 'activities'));
     }
 
@@ -71,20 +76,20 @@ class CollectLogsController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
-        $collectLog = $this->CollectLogs->get($id, [
+        $collectLog = $this->Collect->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['post', 'put'])) {
-            $collectLog = $this->CollectLogs->patchEntity($collectLog, $this->request->data);
-            if ($this->CollectLogs->save($collectLog)) {
+            $collectLog = $this->Collect->patchEntity($collectLog, $this->request->data);
+            if ($this->Collect->save($collectLog)) {
                 $this->Util->ajaxReturn(true, '修改成功');
             } else {
                 $errors = $collectLog->errors();
                 $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
-        $users = $this->CollectLogs->Users->find('list', ['limit' => 200]);
-        $activities = $this->CollectLogs->Activities->find('list', ['limit' => 200]);
+        $users = $this->Collect->Users->find('list', ['limit' => 200]);
+        $activities = $this->Collect->Activities->find('list', ['limit' => 200]);
         $this->set(compact('collectLog', 'users', 'activities'));
     }
 
@@ -99,8 +104,8 @@ class CollectLogsController extends AppController {
         $this->request->allowMethod('post');
         $id = $this->request->data('id');
         if ($this->request->is('post')) {
-            $collectLog = $this->CollectLogs->get($id);
-            if ($this->CollectLogs->delete($collectLog)) {
+            $collectLog = $this->Collect->get($id);
+            if ($this->Collect->delete($collectLog)) {
                 $this->Util->ajaxReturn(true, '删除成功');
             } else {
                 $errors = $collectLog->errors();
@@ -118,7 +123,7 @@ class CollectLogsController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'collectlogs.' . $this->request->data('sidx');
+        $sort = 'collect.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
@@ -130,19 +135,27 @@ class CollectLogsController extends AppController {
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['collectlogs.`create_time` >' => $begin_time], ['collectlogs.`create_time` <' => $end_time]];
+            $where['and'] = [['collect.`create_time` >' => $begin_time], ['collect.`create_time` <' => $end_time]];
         }
         if ($id) {
-            $query = $this->CollectLogs->find()->where(['relate_id' => $id]);
+            $query = $this->Collect->find()->where(['relate_id' => $id]);
         } else {
-            $query = $this->CollectLogs->find();
+            $query = $this->Collect->find();
         }
         $query->hydrate(false);
+        $type = $this->request->query('type');
+        $type = empty($type)?'0':$type;
+        if($type=='1'){
+            $contain = 'News';
+        }else{
+            $contain = 'Activities';
+        }
+        $where['type'] = $type;
         if (!empty($where)) {
             $query->where($where);
         }
         $nums = $query->count();
-        $query->contain(['Users', 'Activities']);
+        $query->contain(['Users',$contain]);
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
@@ -184,7 +197,7 @@ class CollectLogsController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
-        $Table = $this->CollectLogs;
+        $Table = $this->Collect;
         $column = ['用户id', '关联id（活动id或资讯id）', '日志内容', '记录时间', '更新时间', '类型值：0：活动；1：资讯'];
         $query = $Table->find();
         $query->hydrate(false);
@@ -197,7 +210,7 @@ class CollectLogsController extends AppController {
         }
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = 'CollectLogs_' . date('Y-m-d') . '.csv';
+        $filename = 'Collect_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
 }

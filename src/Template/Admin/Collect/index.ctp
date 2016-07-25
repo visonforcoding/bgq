@@ -1,21 +1,16 @@
 <?php $this->start('static') ?>   
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
-<link href="/wpadmin/lib/select2/css/select2.min.css" rel="stylesheet">
 <?php $this->end() ?> 
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
-            <a href="/admin/news/add" class="btn btn-small btn-warning">
+            <a href="/admin/collectlogs/add" class="btn btn-small btn-warning">
                 <i class="icon icon-plus-sign"></i>添加
             </a>
             <div class="form-group">
                 <label for="keywords">关键字</label>
-                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="用户名、标题、摘要">
-            </div>
-            <div class="form-group">
-                <label for="keywords">行业标签</label>
-                  <?=$this->cell('Industry::news',[['single']])?>
+                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
             </div>
             <div class="form-group">
                 <label for="keywords">时间</label>
@@ -33,8 +28,6 @@
 <?php $this->start('script'); ?>
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
-<script src="/wpadmin/lib/zeroclipboard/dist/ZeroClipboard.js"></script>
-<script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
                 $(function () {
                     $('#main-content').bind('resize', function () {
@@ -42,32 +35,18 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/news/getDataList",
+                        url: "/admin/collect/getDataList/<?= $id; ?><?php if(isset($type)):?>?type=<?=$type?><?php endif;?>",
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['作者', '标题','行业标签', '阅读数', '点赞数', '评论数', '创建时间', '更新时间', '操作'],
+                                ['用户', '活动或资讯', '日志内容', '记录时间', '更新时间', '类型', '操作'],
                         colModel: [
-                            {name: 'user.truename', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
-                                    if(!cellvalue){
-                                        return rowObject.source;
-                                    }else{
-                                        return rowObject.user.truename;
-                                    }
-                            }},
-                            {name: 'title', editable: true, align: 'center'},
-                            {name: 'industries', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
-                                    var industries_arr = [];
-                                     $.each(cellvalue,function(i,n){
-                                         industries_arr.push(n.name);
-                                     })
-                                     return industries_arr.join(',');
-                            }},
-                            {name: 'read_nums', editable: true, align: 'center'},
-                            {name: 'praise_nums', editable: true, align: 'center'},
-                            {name: 'comment_nums', editable: true, align: 'center'},
+                            {name: 'user.truename', editable: true, align: 'center'},
+                            {name: 'relate_id', editable: true, align: 'center', formatter: titleFormatter},
+                            {name: 'msg', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
+                            {name: 'type', editable: true, align: 'center', formatter: typeFormatter},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: 30,
@@ -88,41 +67,36 @@
                             total: "total",
                             records: "records",
                             repeatitems: false,
-                            id: "0"
+                            id: "id"
                         },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
-                    
-                    $('#select-industry').select2({
-                        language: "zh-CN",
-                        placeholder: '选择一个标签'
-                    });
                 });
-                function actionFormatter(cellvalue, options, rowObject) {
-//                    response = '<div class="bigdiv" onmouseout=$(this).find(".showall").hide();$(this).find(".showallbtn").show(); ><a class="showallbtn" title="操作" onmouseover=$(this).hide();$(this).next(".showall").show();><i class="icon icon-resize-full"></i></a>';
-//                    response = '<div class="showall" hidden onmouseover=$(this).show();$(this).prev(".showallbtn").hide(); ><a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-                    response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-//                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-                    response += '<a title="复制" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
-                    response += '<a title="编辑" href="/admin/news/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
-//                    response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
-                    response += '<a title="评论详情" href="/admin/newscom/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-comment"></i> </a>';
-                    response += '<a title="点赞日志" href="/admin/likeLogs/index/' + rowObject.id + '?type=1" class="grid-btn "><i class="icon icon-heart"></i> </a>';
-                    response += '<a title="收藏日志" href="/admin/collect/index/' + rowObject.id + '?type=1" class="grid-btn "><i class="icon icon-star"></i> </a>';
-//                    response += '</div></div>';
+
+                function titleFormatter(cellvalue, options, rowObject) {
+                    if(rowObject.activity){
+                        return  rowObject.activity.title;
+                    }else{
+                        return rowObject.news.title;
+                    }
                     return response;
                 }
 
-                var clip = '';
-                setTimeout(function () {
-                    clip = new ZeroClipboard($('.copy'));
-                    console.log('可以复制了');
-                    clip.on('copy', function (event) {
-                        clip.setData('text/plain','/news/view/' + event.target.id);
-                    });
-                    clip.on("aftercopy", function (event) {
-                        alert("复制了: " + event.data["text/plain"]);
-                    });
-                }, 1000);
+                function typeFormatter(cellvalue, options, rowObject) {
+                    if (rowObject.type == 0)
+                    {
+                        response = '活动';
+                    }
+                    else
+                    {
+                        response = '资讯';
+                    }
+                    return response;
+                }
+
+                function actionFormatter(cellvalue, options, rowObject) {
+                    response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    return response;
+                }
 
                 function delRecord(id) {
                     layer.confirm('确定删除？', {
@@ -132,25 +106,28 @@
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/admin/news/delete',
+                            url: '/admin/collectlogs/delete',
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
                                     $('#list').trigger('reloadGrid');
                                 }
                             }
-                        });
+                        })
                     }, function () {
                     });
                 }
 
                 function doSearch() {
                     //搜索
-                    var postData = $('#table-bar-form').serialize();
-                    postData = decodeURI(postData);
-                    $.zui.store.pageSet('searchData', postData); //本地存储查询参数 供导出操作等调用
+                    var postData = $('#table-bar-form').serializeArray();
+                    var data = {};
+                    $.each(postData, function (i, n) {
+                        data[n.name] = n.value;
+                    });
+                    $.zui.store.pageSet('searchData', data); //本地存储查询参数 供导出操作等调用
                     $("#list").jqGrid('setGridParam', {
-                        postData: $.global.queryParam2Json(postData)
+                        postData: data
                     }).trigger("reloadGrid");
                 }
 
@@ -162,18 +139,18 @@
                     searchData['sidx'] = sortColumnName;
                     searchData['sort'] = sortOrder;
                     var searchQueryStr = $.param(searchData);
-                    $("body").append("<iframe src='/admin/news/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                    $("body").append("<iframe src='/admin/collectlogs/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
 
                 function doView(id) {
                     //查看明细
-                    url = '/admin/news/view/' + id;
+                    url = '/admin/collectlogs/view/' + id;
                     layer.open({
                         type: 2,
                         title: '查看详情',
                         shadeClose: true,
                         shade: 0.8,
-                        area: ['60%', '50%'],
+                        area: ['380px', '70%'],
                         content: url//iframe的url
                     });
                 }

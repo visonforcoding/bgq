@@ -15,13 +15,13 @@ class NewscomController extends AppController {
         parent::initialize();
         $this->loadModel('Newscom');
     }
-    
+
     /**
      * Index method
      *
      * @return void
      */
-    public function index($id = '') {
+    public function index($id = null) {
         $this->set('id', $id);
         $this->set('newscom', $this->Newscom);
     }
@@ -116,7 +116,7 @@ class NewscomController extends AppController {
      *
      * @return json
      */
-    public function getDataList($id = '') {
+    public function getDataList($id = null) {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
@@ -135,10 +135,9 @@ class NewscomController extends AppController {
             $where['and'] = [['Newscom.`create_time` >' => $begin_time], ['Newscom.`create_time` <' => $end_time]];
         }
         if ($id) {
-            $query = $this->Newscom->find()->where(['news_id' => $id]);
-        } else {
-            $query = $this->Newscom->find();
+            $where['news_id'] = $id;
         }
+        $query = $this->Newscom->find();
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
@@ -171,13 +170,16 @@ class NewscomController extends AppController {
      *
      * @return csv 
      */
-    public function exportExcel() {
+    public function exportExcel($id = null) {
         $sort = $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
+        if ($id) {
+            $where['news_id'] = $id;
+        }
         if (!empty($keywords)) {
             $where[' username like'] = "%$keywords%";
         }
@@ -202,9 +204,9 @@ class NewscomController extends AppController {
         $filename = 'Newscom_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
-    
-    public function reply($id){
-        if($this->request->is('post')){
+
+    public function reply($id) {
+        if ($this->request->is('post')) {
             $data = $this->request->data;
             $lastcom = $this->Newscom->get($id);
             $newsTable = \Cake\ORM\TableRegistry::get('news');
@@ -218,7 +220,7 @@ class NewscomController extends AppController {
             $newscom = $this->Newscom->newEntity();
             $newscom = $this->Newscom->patchEntity($newscom, $reply);
             $res = $this->Newscom->save($newscom);
-            if($res) {
+            if ($res) {
                 $news = $newsTable->get($newscom->news_id);
                 $news->comment_nums += 1;
                 $newsTable->save($news);

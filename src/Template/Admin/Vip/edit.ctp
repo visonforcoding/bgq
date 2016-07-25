@@ -149,7 +149,7 @@
         });
         $('#select-admin').select2({
             language: "zh-CN",
-            placeholder: '选择一个标签'
+            placeholder: '选择一个管理员作为负责人'
         });
         $('form').submit(function () {
             var form = $(this);

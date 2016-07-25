@@ -32,7 +32,7 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/newscom/getDataList/<?= $id ?>",
+                        url: "/admin/newscom/getDataList/<?= $id ?><?php if(isset($type)):?>?type=1<?php endif;?>",
                         datatype: "json",
                         mtype: "POST",
                         colNames:
@@ -44,8 +44,7 @@
                             {name: 'praise_nums', editable: true, align: 'center'},
                             {name: 'news.title', editable: true, align: 'center'},
                             {name: 'actionBtn', width: '200%', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
-                            
-                            pager: "#pager",
+                        pager: "#pager",
                         rowNum: 30,
                         rowList: [10, 20, 30],
                         sortname: "id",
@@ -150,7 +149,7 @@
                     searchData['sidx'] = sortColumnName;
                     searchData['sort'] = sortOrder;
                     var searchQueryStr = $.param(searchData);
-                    $("body").append("<iframe src='/admin/activity/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                    $("body").append("<iframe src='/admin/activity/exportExcel<?php if($id): ?>/<?=$id?><?php endif;?>?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
 
                 function doView(id) {

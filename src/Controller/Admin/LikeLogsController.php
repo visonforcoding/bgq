@@ -22,7 +22,13 @@ class LikeLogsController extends AppController {
      * @return void
      */
     public function index($id = '') {
+        $type = $this->request->query('type');
         $this->set('id', $id);
+        if($type){
+            $this->set([
+                'type'=>$type
+            ]);
+        }
         $this->set('likeLogs', $this->LikeLogs);
     }
 
@@ -119,7 +125,6 @@ class LikeLogsController extends AppController {
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
         $sort = 'likelogs.' . $this->request->data('sidx');
-        $sort = 'likelogs.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
@@ -143,7 +148,13 @@ class LikeLogsController extends AppController {
             $query->where($where);
         }
         $nums = $query->count();
-        $query->contain(['Users', 'Activities']);
+        $type = $this->request->query('type');
+        if($type=='1'){
+            $contain = 'News';
+        }else{
+            $contain = 'Activities';
+        }
+        $query->contain(['Users',$contain]);
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
