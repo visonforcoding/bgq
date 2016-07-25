@@ -1,5 +1,6 @@
 <div class="wraper bg-ff">
     <div class="head-info">
+        <div class="view">336人浏览过</div>
         <a href="/home/edit-userinfo" class="m-pic"><span><img src="<?= $user->avatar ? $user->avatar : '/mobile/images/touxiang.png' ?>"/></span></a>
     </div>
     <div class="h-user">
