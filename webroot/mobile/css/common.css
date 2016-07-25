@@ -48,6 +48,10 @@ button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);border:none;background:
 .wraper .mt1{margin-top:-1px;}
 .hf20{height:0.2rem;background: #fff;border-bottom:1px #e5e5e5 solid;}
 .wraper .texthide{word-break: break-all;display: -webkit-box;/*-webkit-line-clamp: 3;限制行数*/-webkit-box-orient: vertical;overflow: hidden;}
+/*1px border*/
+  .bd1,.bd2 {position:relative;}
+.bd1:after{width:200%;height:1px;position:absolute;bottom:0;left:0;z-index:0;content:"";-webkit-transform:scale(0.5);-webkit-transform-origin:0 0;transform:scale(0.5);transform-origin:0 0;background: #e5e5e5;}
+.bd2:before{width:200%;height:1px;position:absolute;top:0;left:0;z-index:0;content:"";-webkit-transform:scale(0.5);-webkit-transform-origin:0 0;transform:scale(0.5);transform-origin:0 0;background: #e5e5e5;}
 
 .bggray{background: #7a7d82;}
 .bgred{background: #e01a48;}
