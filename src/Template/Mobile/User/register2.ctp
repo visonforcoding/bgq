@@ -167,11 +167,12 @@
         })
 
         $('#org .cart>li').on('tap', function () {  //机构sub
+            agency = $(this).data('val');
+            $('.orgtext').html($(this)[0].innerText);
+            return;
             $('#org a').removeClass('active');
             $(this).children('a').addClass('active');
             $(this).parents('.cart1').hide();
-            agency = $(this).data('val');
-            $('.orgtext').html($(this)[0].innerText);
             $('#org span').removeClass('active');
         })
 
