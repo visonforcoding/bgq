@@ -62,7 +62,7 @@
     <div class='h2'></div>
     <div class="markbox border" id="cart">
         <div class="a-s-title bgff">
-            <span class="orgname">请选择机构类型<i class="orgtext"></i></span>
+            <span class="">请选择机构类型<i class="orgtext"></i></span>
         </div>
         <div class="markslider">
             <div class="mark-items" id="org">
@@ -110,7 +110,7 @@
     <!--行业标签-->
     <div class="markbox border" id="classfy">
         <div class="a-s-title bgff">
-            <span class="orgname">请选择行业标签(最多4个)<!--<i class="classfytext"></i>--></span>
+            <span class="">请选择行业标签(最多4个)<!--<i class="classfytext"></i>--></span>
         </div>
         <div class="markslider">
             <div class="classfytext">
