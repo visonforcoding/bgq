@@ -49,6 +49,13 @@ class ActivityTable extends Table {
             'targetForeignKey' => 'industry_id'
         ]);
         
+        $this->belongsToMany('Activity_recommends', [
+            'className' => 'Activity',
+            'joinTable' => 'Activity_recommend',
+            'foreignKey' => 'activity_id',
+            'targetForeignKey' => 'activity_recommend_id'
+        ]);
+        
         $this->belongsToMany('Savants', [
             'className' => 'User',
             'joinTable' => 'activity_savant',

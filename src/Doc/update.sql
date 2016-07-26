@@ -457,3 +457,14 @@ ALTER TABLE `binggq`.`user`
 #user表增加专家主页浏览数
 ALTER TABLE `binggq`.`user`
   ADD COLUMN `homepage_read_nums` int(11) unsigned NOT NULL DEFAULT 0;
+
+#活动推荐活动关系表
+CREATE TABLE `activity_recommend` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '活动推荐活动关系表',
+	`activity_id` INT NOT NULL COMMENT '活动id',
+	`activity_recommend_id` INT NOT NULL COMMENT '推荐活动id',
+	PRIMARY KEY (`id`)
+)
+COMMENT='活动推荐活动关系表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
