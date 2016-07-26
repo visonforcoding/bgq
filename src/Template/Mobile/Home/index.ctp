@@ -142,7 +142,7 @@
                 user = user.replace('{#company#}',res.data.user.company);
                 user = user.replace('{#position#}',res.data.user.position);
                 if(res.data.user.avatar){
-                    user = user.replace('{#avatar#}', res.data.user.avatar);
+                    user = user.replace('{#avatar#}', res.data.user.avatar.replace('thumb_',''));
                 } else {
                     user = user.replace('{#avatar#}', '/mobile/images/touxiang.png');
                 }
