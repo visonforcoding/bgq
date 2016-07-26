@@ -26,6 +26,7 @@ class IndexController extends AppController {
         //$umengObj = new Umeng($key, $secret);
         //var_dump($umengObj);
         $this->autoRender = false;
+        phpinfo();
         //debug($this->request);
 //        $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
 //        debug(Security::hash(uniqid()),'sha1',true);

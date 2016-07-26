@@ -32,12 +32,12 @@ class Util {
      * @param type $html
      * @return type
      */
-    public static function tree($list, $pid = 0, $key_val = 'id', $pid_val = 'pid', $level = 0, $html = '--') {
+    public static function tree($list, $pid = 0, $key_val = 'id', $pid_val = 'pid', $level = 0, $html = '----') {
         $tree = array();
         foreach ($list as $v) {
             if ($v[$pid_val] == $pid) {
                 $v['sort'] = $level;
-                $v['html'] = str_repeat($html, $level);
+                $v['html'] = '|-'.str_repeat($html, $level);
                 $tree[] = $v;
                 $tree = array_merge($tree, self::tree($list, $v[$key_val], $key_val, $pid_val, $level + 1, $html));
             }

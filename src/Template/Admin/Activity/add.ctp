@@ -8,13 +8,19 @@
     <div class="form-group">
         <label class="col-md-2 control-label">系列标签</label>
         <div class="col-md-8">
-            <?=$this->cell('Series')?>
+            <?= $this->cell('Series') ?>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">行业标签</label>
         <div class="col-md-8">
-            <?=$this->cell('Industry')?>
+            <?= $this->cell('Industry') ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">作者</label>
+        <div class="col-md-8">
+            <?= $this->cell('User', [[$activity->user_id]]) ?>
         </div>
     </div>
     <div class="form-group">
@@ -66,26 +72,26 @@
             ?>
         </div>
     </div>
-<!--    <div class="form-group">
-        <label class="col-md-2 control-label">是否众筹</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('is_crowdfunding', ['type' => 'select', 'options' => ['0' => '否','1' => '是'], 'label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>-->
+    <!--    <div class="form-group">
+            <label class="col-md-2 control-label">是否众筹</label>
+            <div class="col-md-8">
+    <?php
+    echo $this->Form->input('is_crowdfunding', ['type' => 'select', 'options' => ['0' => '否', '1' => '是'], 'label' => false, 'class' => 'form-control']);
+    ?>
+            </div>
+        </div>-->
     <div class="form-group">
         <label class="col-md-2 control-label">专家推荐</label>
         <div class="col-md-8">
-            <?=$this->cell('Savant')?>
+            <?= $this->cell('Savant') ?>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">费用</label>
         <div class="col-md-8">
-        <?php
+            <?php
             echo $this->Form->input('apply_fee', ['label' => false, 'class' => 'form-control']);
-        ?>
+            ?>
         </div>
     </div>
     <div class="form-group">
@@ -130,9 +136,9 @@
     <div class="form-group">
         <label class="col-md-2 control-label">分享描述</label>
         <div class="col-md-8">
-        <?php
+            <?php
             echo $this->Form->input('share_desc', ['label' => false, 'class' => 'form-control']);
-        ?>
+            ?>
         </div>
     </div>
     <div class="form-group">
@@ -153,59 +159,63 @@
 <script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>
 <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
-$(function () {
-    initJqupload('cover', '/wpadmin/util/doUpload?dir=activitycover', 'jpg,png,gif,jpeg'); //初始化图片上传
-    initJqupload('thumb', '/wpadmin/util/doUpload?dir=activitythumb', 'jpg,png,gif,jpeg'); //初始化图片上传
-    var ue = UE.getEditor('content'); //初始化富文本编辑器
-    UE.getEditor('summary');
-    $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
-    $('#select-series').select2({
-        language: "zh-CN",
-        placeholder: '选择一个标签',
-    });
-    var industrySelect2 = $('#select-industry').select2({
-        language: "zh-CN",
-        placeholder: '选择一个标签'
-    });
-    var savantSelect2 = $('#select-savant').select2({
-        language: "zh-CN",
-        placeholder: '选择一位专家'
-    });
-    $('#select-industry').on('change',function(evt){
-        var selOption = industrySelect2.val();
-        var changIds = [];
-        $.get('/admin/savant/get-random-savants',{'tags':selOption},function(res){
+    $(function () {
+        initJqupload('cover', '/wpadmin/util/doUpload?dir=activitycover', 'jpg,png,gif,jpeg'); //初始化图片上传
+        initJqupload('thumb', '/wpadmin/util/doUpload?dir=activitythumb', 'jpg,png,gif,jpeg'); //初始化图片上传
+        var ue = UE.getEditor('content'); //初始化富文本编辑器
+        UE.getEditor('summary');
+        $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
+        $('#select-user').select2({
+            language: "zh-CN",
+            placeholder: '选择一个发起人',
+        });
+        $('#select-series').select2({
+            language: "zh-CN",
+            placeholder: '选择一个标签',
+        });
+        var industrySelect2 = $('#select-industry').select2({
+            language: "zh-CN",
+            placeholder: '选择一个标签'
+        });
+        var savantSelect2 = $('#select-savant').select2({
+            language: "zh-CN",
+            placeholder: '选择一位专家'
+        });
+        $('#select-industry').on('change', function (evt) {
+            var selOption = industrySelect2.val();
+            var changIds = [];
+            $.get('/admin/savant/get-random-savants', {'tags': selOption}, function (res) {
                 console.log(res);
                 changIds = res.ids;
                 savantSelect2.val(changIds).trigger('change'); //set the value
-        },'json');
-    });
-    $('form').submit(function () {
-        var form = $(this);
-        $.ajax({
-            type: $(form).attr('method'),
-            url: $(form).attr('action'),
-            data: $(form).serialize(),
-            dataType: 'json',
-            success: function (res) {
-                if (typeof res === 'object') {
-                    if (res.status) {
-                        layer.confirm(res.msg, {
-                            btn: ['确认', '继续添加'] //按钮
-                        }, function () {
-                            window.location.href = '/admin/activity/index';
-                        }, function () {
-                            window.location.reload();
-                        });
-                    } else {
-                        layer.alert(res.msg, {icon: 5});
+            }, 'json');
+        });
+        $('form').submit(function () {
+            var form = $(this);
+            $.ajax({
+                type: $(form).attr('method'),
+                url: $(form).attr('action'),
+                data: $(form).serialize(),
+                dataType: 'json',
+                success: function (res) {
+                    if (typeof res === 'object') {
+                        if (res.status) {
+                            layer.confirm(res.msg, {
+                                btn: ['确认', '继续添加'] //按钮
+                            }, function () {
+                                window.location.href = '/admin/activity/index';
+                            }, function () {
+                                window.location.reload();
+                            });
+                        } else {
+                            layer.alert(res.msg, {icon: 5});
+                        }
                     }
                 }
-            }
+            });
+            return false;
         });
-        return false;
     });
-});
 </script>
 <?php
 $this->end();

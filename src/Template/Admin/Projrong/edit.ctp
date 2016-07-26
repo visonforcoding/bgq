@@ -6,9 +6,9 @@
 <div class="work-copy">
     <?= $this->Form->create($projrong, ['class' => 'form-horizontal']) ?>
     <div class="form-group">
-        <label class="col-md-2 control-label">发布人id</label>
+        <label class="col-md-2 control-label">发布人</label>
         <div class="col-md-8">
-            <?php echo $this->Form->input('user_id', ['label' => false, 'options' => $users, 'class' => 'form-control']); ?>
+            <?= $this->cell('User', [[$projrong->user_id]]) ?>
         </div>
     </div>
     <div class="form-group">
@@ -91,9 +91,11 @@
     <div class="form-group">
         <label class="col-md-2 control-label">封面</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('cover', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <div  class="img-thumbnail input-img"  single>
+                <img  alt="封面图片" src="<?= $projrong->cover ?>"/>
+            </div>
+            <input name="cover" value="<?= $projrong->cover ?>"  type="hidden"/>
+            <div id="cover" class="jqupload">上传</div>
         </div>
     </div>
     <div class="form-group">
@@ -131,43 +133,26 @@
     <div class="form-group">
         <label class="col-md-2 control-label">资料地址</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('attach', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">创建时间</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('create_time', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">更新时间</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('update_time', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <input name="attach" type="hidden" value="<?= $projrong->attach ?>"/>
+            <div id="attach" class="jqupload"></div>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">行业标签</label>
         <div class="col-md-8">
-            <?= $this->cell('Industry::news',[$selIndustryIds]) ?>
+            <?= $this->cell('Industry::news', [$selIndustryIds]) ?>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">跟进人</label>
         <div class="col-md-8">
-            <input class="form-control" name="follower" value="<?=$projrong->follower?>"/>
+            <input class="form-control" name="follower" value="<?= $projrong->follower ?>"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">进度描述</label>
         <div class="col-md-8">
-            <textarea class="form-control" rows="2" name="stage_remark"><?=$projrong->stage_remark?></textarea>
+            <textarea class="form-control" rows="2" name="stage_remark"><?= $projrong->stage_remark ?></textarea>
         </div>
     </div>
     <div class="form-group">
@@ -186,12 +171,16 @@
 <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
     $(function () {
-        // initJqupload('cover', '/wpadmin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
-        //var ue = UE.getEditor('content'); //初始化富文本编辑器
+        initJqupload('cover', '/wpadmin/util/doUpload?dir=proj/cover', 'jpg,png,gif,jpeg'); //初始化图片上传
+        initJquploadAttach('attach', '/wpadmin/util/doUpload?dir=proj/attach', 'jpg,png,gif,jpeg,ppt,pptx,doc,xls,xlsx,zip,rar'); //初始化附件上传
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-industry').select2({
             language: "zh-CN",
             placeholder: '选择一个标签'
+        });
+        $('#select-user').select2({
+            language: "zh-CN",
+            placeholder: '选择一个发布人'
         });
         $('form').submit(function () {
             var form = $(this);
