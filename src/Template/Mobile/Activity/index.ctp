@@ -15,7 +15,7 @@
             <ul class="pic-list-container" id="imgList"></ul>
             <div class="yd" id="imgTab"></div>
         </div>
-        <div id="activity"></div>
+        <div id="activity" style='border-bottom:1px #e5e5e5 solid;'></div>
         <div id="buttonLoading" class="loadingbox"></div>
         <div class="submitbtn subactivity" id="release">
             <a href="javascript:void(0)">
