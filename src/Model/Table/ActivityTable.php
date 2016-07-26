@@ -136,9 +136,9 @@ class ActivityTable extends Table {
 //         $validator
 //                 ->requirePresence('address', 'create')
 //                 ->notEmpty('address');
-//         $validator
-//                 ->requirePresence('scale', 'create')
-//                 ->notEmpty('scale');
+         $validator
+                 ->integer('scale','活动规模必须填数字')
+                 ->notEmpty('scale');
 
         $validator
                 ->integer('read_nums')

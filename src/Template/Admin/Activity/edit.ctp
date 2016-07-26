@@ -105,14 +105,13 @@
             ?>
         </div>
     </div>
-    <!--    <div class="form-group">
-            <label class="col-md-2 control-label">是否众筹</label>
-            <div class="col-md-8">
-    <?php
-    echo $this->Form->input('is_crowdfunding', ['type' => 'select', 'options' => ['0' => '否', '1' => '是'], 'label' => false, 'class' => 'form-control']);
-    ?>
-            </div>
-        </div>-->
+    <div class="form-group">
+        <label class="col-md-2 control-label">是否需要报名审核</label>
+        <div class="col-md-8">
+            <label class="radio-inline"> <input name="grade" value="0" <?php if ($activity->grade == 0): ?> checked="checked"<?php endif; ?>  type="radio"> 不需要</label>
+            <label class="radio-inline"> <input name="grade" value="1" <?php if ($activity->grade == 1): ?> checked="checked"<?php endif; ?>  type="radio"> 需要 </label>
+        </div>
+    </div>
     <div class="form-group">
         <label class="col-md-2 control-label">专家推荐</label>
         <div class="col-md-8">
