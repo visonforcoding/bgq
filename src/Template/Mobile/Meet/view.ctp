@@ -32,7 +32,7 @@
             <h3 class="mycustorm" ><?= $biggie->company ?></h3>
         </li>
         <li>
-            <a id="recom" href="javascript:void(0);" class="tocommend"><i class="iconfont f7 <?php if($isReco): ?>changecolor<?php endif; ?>">&#xe61a;</i>推荐他</a>
+            <a id="recom" href="javascript:void(0);" class="tocommend"><i class="iconfont f7 <?php if($isReco): ?>color-items<?php endif; ?>">&#xe61a;</i>推荐他</a>
             <span  class="commendnum">
                 <p id="recom_avatar">
                     <!-- 只推荐7条 -->
@@ -203,7 +203,7 @@
                             if (res.status === true) {
                                 $('#recom_avatar').prepend('<img src="' + res.avatar + '"/>');
                                 $('#meet_nums').text((parseInt($('#meet_nums').text()) + 1));
-                                $('.f7').addClass('changecolor');
+                                $('.f7').addClass('color-items');
                             }
                         }
                     }
