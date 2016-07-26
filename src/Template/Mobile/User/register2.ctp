@@ -59,6 +59,7 @@
         </ul>
     </form>
     <!--机构类型-->
+    <div class='h2'></div>
     <div class="markbox border" id="cart">
         <div class="a-s-title bgff">
             <span class="orgname">请选择机构类型<i class="orgtext"></i></span>
