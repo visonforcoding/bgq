@@ -62,7 +62,7 @@
                                     return '否';
                             }},
                             {name: 'remark', editable: true, align: 'center'},
-                            {name: 'actionBtn', viewable: false, sortable: false,width:260, formatter: actionFormatter}],
+                            {name: 'actionBtn',align: 'center', viewable: false, sortable: false,width:260, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: 30,
                         rowList: [10, 20, 30],
@@ -120,8 +120,8 @@
                 }
 
                 function actionFormatter(cellvalue, options, rowObject) {
-                    response = '<button onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-trash"></i> 删除</button>';
-                    response += '<a href="/admin/menu/edit/' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini"><i class="icon icon-pencil"></i> 修改</a>';
+                    response = '<a onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn"><i class="icon icon-trash"></i></a>';
+                    response += '<a href="/admin/menu/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i></a>';
                     return response;
                 }
 

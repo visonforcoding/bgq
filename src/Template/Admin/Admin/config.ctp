@@ -10,7 +10,7 @@
             <?php foreach($menus as $menu): ?>
                 <div>
                     <input type="checkbox" <?php if(in_array($menu['id'],$selMenuIds)):?>checked="chekced"<?php endif;?> value="<?=$menu['id']?>" name="menus[_ids][]" />
-                    <?=  str_repeat($menu['html'],2)?><?=$menu['name']?>
+                    <?=  $menu['html']?><?=$menu['name']?>
                 </div>
             <?php endforeach; ?>
         </div>

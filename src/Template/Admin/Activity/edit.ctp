@@ -8,11 +8,11 @@
     <div class="form-group">
         <label class="col-md-2 control-label">系列标签</label>
         <div class="col-md-8">
-            <?= $this->cell('Series',[[$activity->series_id]]) ?>
+            <?= $this->cell('Series', [[$activity->series_id]]) ?>
         </div>
     </div>
-    <?php if($activity->is_check == 2): ?>
-    	<div class="form-group">
+    <?php if ($activity->is_check == 2): ?>
+        <div class="form-group">
             <label class="col-md-2 control-label">未通过审核理由</label>
             <div class="col-md-8">
                 <?php
@@ -22,17 +22,15 @@
         </div>
     <?php endif; ?>
     <div class="form-group">
-        <label class="col-md-2 control-label">作者id</label>
+        <label class="col-md-2 control-label">作者</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('admin_id', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <?= $this->cell('User', [[$activity->user_id]]) ?>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">行业标签</label>
         <div class="col-md-8">
-            <?= $this->cell('Industry',[$selIndustryIds]) ?>
+            <?= $this->cell('Industry', [$selIndustryIds]) ?>
         </div>
     </div>
     <div class="form-group">
@@ -102,19 +100,19 @@
     <div class="form-group">
         <label class="col-md-2 control-label">评论数</label>
         <div class="col-md-8">
-        <?php
-            echo $this->Form->input('comment_nums', ['label' => false, 'class' => 'form-control']);
-        ?>
-        </div>
-    </div>
-<!--    <div class="form-group">
-        <label class="col-md-2 control-label">是否众筹</label>
-        <div class="col-md-8">
             <?php
-            echo $this->Form->input('is_crowdfunding', ['type' => 'select', 'options' => ['0' => '否','1' => '是'], 'label' => false, 'class' => 'form-control']);
+            echo $this->Form->input('comment_nums', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
-    </div>-->
+    </div>
+    <!--    <div class="form-group">
+            <label class="col-md-2 control-label">是否众筹</label>
+            <div class="col-md-8">
+    <?php
+    echo $this->Form->input('is_crowdfunding', ['type' => 'select', 'options' => ['0' => '否', '1' => '是'], 'label' => false, 'class' => 'form-control']);
+    ?>
+            </div>
+        </div>-->
     <div class="form-group">
         <label class="col-md-2 control-label">专家推荐</label>
         <div class="col-md-8">
@@ -124,9 +122,9 @@
     <div class="form-group">
         <label class="col-md-2 control-label">费用</label>
         <div class="col-md-8">
-        <?php
+            <?php
             echo $this->Form->input('apply_fee', ['label' => false, 'class' => 'form-control']);
-        ?>
+            ?>
         </div>
     </div>
     <div class="form-group">
@@ -142,7 +140,7 @@
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">封面</label>
-        
+
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
                 <img  alt="请上传宽为690，高小于388的封面图" src="<?= $activity->cover; ?>"/>
@@ -173,9 +171,9 @@
     <div class="form-group">
         <label class="col-md-2 control-label">分享描述</label>
         <div class="col-md-8">
-        <?php
+            <?php
             echo $this->Form->input('share_desc', ['label' => false, 'class' => 'form-control']);
-        ?>
+            ?>
         </div>
     </div>
     <div class="form-group">
@@ -202,12 +200,20 @@
 <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
     $(function () {
-    	initJqupload('cover', '/wpadmin/util/doUpload?dir=activitycover', 'jpg,png,gif,jpeg'); //初始化图片上传
-    	initJqupload('thumb', '/wpadmin/util/doUpload?dir=activitythumb', 'jpg,png,gif,jpeg'); //初始化图片上传
+        initJqupload('cover', '/wpadmin/util/doUpload?dir=activitycover', 'jpg,png,gif,jpeg'); //初始化图片上传
+        initJqupload('thumb', '/wpadmin/util/doUpload?dir=activitythumb', 'jpg,png,gif,jpeg'); //初始化图片上传
         var ue = UE.getEditor('body'); //初始化富文本编辑器
         UE.getEditor('summary');
         UE.getEditor('guest');
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
+        $('#select-series').select2({
+            language: "zh-CN",
+            placeholder: '选择一个标签',
+        });
+        $('#select-user').select2({
+            language: "zh-CN",
+            placeholder: '选择一个用户'
+        });
         $('#select-industry').select2({
             language: "zh-CN",
             placeholder: '选择一个标签'

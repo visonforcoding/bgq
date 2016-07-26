@@ -27,7 +27,7 @@
                 <option value="0">根节点</option>
                 <?php if ($menus): ?>
                     <?php foreach ($menus as $item): ?>
-                        <option value="<?=$item['id']?>"><?=$item['html'].$item['name']?></option>
+                        <option value="<?= $item['id'] ?>"><?= $item['html'] . $item['name'] ?></option>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </select>
@@ -95,10 +95,13 @@
             beforeSubmit: function (formData, jqForm, options) {
             },
             success: function (data) {
-                console.log(data);
                 if (data.status) {
-                    layer.alert(data.msg, function () {
+                    layer.confirm(data.msg, {
+                        btn: ['确认', '继续添加'] //按钮
+                    }, function () {
                         window.location.href = '/admin/menu/index';
+                    }, function () {
+                        window.location.reload();
                     });
                 } else {
                     layer.alert(data.msg, {icon: 5});

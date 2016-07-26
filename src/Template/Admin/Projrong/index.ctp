@@ -72,11 +72,15 @@
                             {name: 'read_nums', editable: true, align: 'center'},
                             {name: 'praise_nums', editable: true, align: 'center'},
                             {name: 'comment_nums', editable: true, align: 'center'},
-                            {name: 'cover', editable: true, align: 'center'},
+                            {name: 'cover', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
+                                return '<a title="查看" onClick="showCover(' +" ' "+rowObject.cover+" ' " + ');" class="grid-btn "><i class="icon icon-picture"></i></a>';
+                            }},
                             {name: 'summary', editable: true, align: 'center'},
                             {name: 'comp_desc', editable: true, align: 'center'},
                             {name: 'team', editable: true, align: 'center'},
-                            {name: 'attach', editable: true, align: 'center'},
+                            {name: 'attach', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
+                                return '<a title="查看" target="_blank" href="'+rowObject.attach+'" );" class="grid-btn "><i class="icon icon-paper-clip"></i></a>';
+                            }},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
@@ -172,6 +176,17 @@
                         content: url//iframe的url
                     });
                 }
+                
+               function showCover(cover){
+                    layer.open({
+                        type: 1,
+                        title: '封面',
+                        shadeClose: true,
+                        shade: 0.8,
+                        skin: 'layui-layer-nobg', //没有背景色
+                        content: '<img src=" '+cover+' ">'
+                    });
+               }
 </script>
 <?php
 $this->end();
