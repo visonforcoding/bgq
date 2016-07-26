@@ -23,7 +23,7 @@
 </div>
 
 <script type="text/html" id="listTpl">
-    <section class='news-list-items '>
+    <section class='news-list-items'>
         <a href="javascript:void(0)">
             <h1 class="{#origin#}">{#author#}
                 <time>{#create_time#}</time>
@@ -51,7 +51,7 @@
                 {#industries_html#}
             </div>
         </div>
-    </section>	
+    </section>
 </script>
 <script type="text/html" id="subTpl">
     <a href="/news/search/{#id#}">{#name#}</a>
