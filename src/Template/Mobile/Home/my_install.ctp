@@ -10,7 +10,7 @@
 </header>
 
 <div class="wraper">
-    <div class="h20"></div>
+    <div class="h2"></div>
 <!--    <div class="infoboxlist a-pay paytype installbox">
         <ul class='ulinfo'>
             <li>消息提醒：<span class='infocard'><input type="radio" name='pay' checked="checked" /><i class='active'></i></span></li>
@@ -24,10 +24,17 @@
         </ul>
     </div> -->
 
-    <ul class="h-info-box e-info-box no-t-border hli">
-
-        <li class="lh4 no-right-ico">
-            <a href="">
+    <ul class="h-info-box e-info-box hli">
+        <li class="no-right-ico install">
+            <a href="javascript:void(0);">
+                <span>设置</span>
+                <div>
+                    <span class="btn" id='btn'><i class="off"></i></span>
+                </div>
+            </a>
+        </li>
+        <li class="lh4 no-right-ico install">
+            <a href="javascript:void(0);">
                 <span>系统版本</span>
                 <div>
                     <span>Verson 1.0</span>
@@ -36,7 +43,7 @@
         </li>
             
         <li class="lh4">
-            <a href="">
+            <a href="javascript:void(0);">
                 <span>给我打分</span>
                 <div>
                     <span></span>
@@ -85,4 +92,18 @@
     });
     $('.ulinfo').find('li').text('系统版本：'+LEMON.sys.version());
 </script>
+<script type="text/javascript">
+                var flag=1;
+                $('#btn').on('tap',function(){
+                    if(flag){
+                        $(this).children('i').removeClass().addClass('on');
+                        flag=0;
+                    }else{
+                        $(this).children('i').removeClass().addClass('off');
+                        flag=1;
+                    }
+                    
+                        
+                })
+            </script>
 <?php $this->end('script');
