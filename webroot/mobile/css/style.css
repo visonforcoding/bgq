@@ -427,10 +427,13 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .m-info-box li .mycustorm{font-weight: 100;margin-top:0.1rem;font-size:0.32rem;color:#808080}
 .m-info-box li:first-of-type span{margin-top:0.1rem;}
 .m-info-box li:first-of-type span,.m-info-box li:nth-of-type(2) a{float:right;line-height:0.4rem;}
+.m-info-box .m-page i{color:#ff7e53;}
+.m-info-box .alink{color:#888;}
+.m-page span{font-size:.28rem;color:#888;}
 .m-info-box li a.tocommend{float:left;margin-right:0.2rem;}
 .m-info-box li h3 span{font-size:0.3rem;margin-left:0.3rem;}
 .m-info-box .identification i{border:1px #c8c7cc solid;border-radius: 0.1rem;padding:0.08rem;margin-left:0.1rem;color:#969fa9;font-size:0.26rem;}
-.m-info-box li p{display: inline-block;}
+.m-info-box li p{display: inline-block;margin-left:.1rem;}
 .m-info-box li p i{color:#7a7e83;font-size:0.32rem;margin-right:0.23rem;vertical-align: middle;}
 .m-info-box li p img{width:0.43rem;height:0.43rem;margin-right:0.06rem;vertical-align: middle;border-radius:50%;}
 .m-info-box li a{color:#e01a48;line-height: 0.38rem;}
@@ -450,7 +453,7 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .m-swiper-items li.active:before {-webkit-transform: skew(-15deg) rotate(-6deg);-moz-transform: skew(-15deg) rotate(-6deg);transform: skew(-15deg) rotate(-6deg);left: 0.34rem;}
 .m-swiper-items li.active:after {-webkit-transform: skew(15deg) rotate(6deg);-moz-transform: skew(15deg) rotate(6deg);transform: skew(15deg) rotate(6deg);right: 0.34rem;}
 .m-swiper-items li.active:before, .m-swiper-items li.active:after {width: 70%;height: 55%;content: ' ';-webkit-box-shadow: 0 0.15rem 0.2rem rgba(0, 0, 0, 0.3);-moz-box-shadow: 0 0.15rem 0.2rem rgba(0, 0, 0, 0.3);box-shadow: 0 0.15rem 0.2rem rgba(0, 0, 0, 0.3); position:absolute;bottom: 0.24rem;z-index: -1;}
-.m-swiper-items li h3{padding:0 0.23rem;background: #dc1e4e;line-height: 0.7rem;font-size:0.28rem;color:#fff; border-radius: 0.2rem 0.2rem 0 0;}
+.m-swiper-items li h3{padding:0 0.23rem;background: #dc1e4e;line-height: 0.7rem;font-size:0.32rem;color:#fff; border-radius: 0.2rem 0.2rem 0 0;text-align: center;}
 .m-swiper-items li h3 span{float: right;font-size:0.24rem;}
 .m-center-con{padding:0.28rem 0.32rem;border-bottom:1px dashed #c8c7cc;position:relative;min-height:3rem;}
 .m-center-con p{line-height: 0.36rem;font-size:0.26rem;color:#9ba4ad;}
@@ -513,14 +516,14 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .mt-info .mmark{color:#7a7d82;}
 .h-user{padding-top:1.13rem;text-align: center;}
 .h-user h3{line-height: 0.92rem;font-weight: bold;}
-.u-s-name{color:#7a7d82;font-size:.26rem;line-height: .3rem;}
+.u-s-name{color:#7a7d82;font-size:.28rem;line-height: .3rem;}
 .u-btn{font-size:0;}
 .u-btn a{display: inline-block;width:2.42rem;height:.73rem;line-height: .73rem;border-radius: .4rem;}
 .u-btn .focusbtn{margin-right:.3rem;-webkit-box-shadow: 0 .04rem .12rem rgba(255,75,112,.5);box-shadow: 0 .04rem .12rem rgba(255,75,112,.5);background:linear-gradient(top,#ff567b,#ff4b70);background:-webkit-linear-gradient(top,#ff567b,#ff4b70);color:#fff;}
 .u-btn .focusgray{background:#7a7d82;-webkit-box-shadow: 0 .04rem .12rem rgba(255,75,112,.5);box-shadow: 0 .04rem .12rem rgba(122,125,130,.5);}
-.mobile-number span{margin-right:.2rem;line-height: .8rem;color:#171717;font-size:.26rem;}
-.mobile-number .m-email i{font-size:.2rem;color:#ff7e53;margin-right: .1rem;}
-.mobile-number .m-phone i{color:#ff5579;font-size:.24rem;vertical-align: 1px;margin-right: 0;}
+.mobile-number span{margin-right:.2rem;line-height: .8rem;color:#171717;font-size:.28rem;}
+.mobile-number .m-email i{font-size:.28rem;color:#ff7e53;margin-right: .1rem;}
+.mobile-number .m-phone i{color:#ff5579;font-size:.28rem;vertical-align: 1px;margin-right: 0;}
 .u-btn .cardbtn{color:#ff5277;border:2px #ff5277 solid;box-sizing: border-box;}
 .u-btn .cardgray{color:#7a7d82;border:2px #7a7d82 solid;}
 .basicinfo{overflow:hidden;margin-top:.36rem;}
@@ -530,7 +533,7 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .basicinfo li i{color:#7a7d82;font-size:.24rem;}
 .h-tab{text-align: center;padding:0 1.6rem;min-height:1.4rem;width:100%;}
 .h-tab:after{}
-.h-tab li{float:left;line-height: 1.32rem;padding:0 .5rem;font-size:.34rem;color:#bcbec0;}
+.h-tab li{float:left;line-height: 1.32rem;padding:0 .5rem;font-size:.4rem;color:#bcbec0;}
 .h-tab li.active{color:#e01b49;}
 .tabcon{overflow: hidden;}
 .tabcon ul{display: none;}
@@ -538,6 +541,7 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .worktab a:last-of-type{border-bottom:none;}
 .linkinfo{margin-top:0.12rem;}
 .tabcon ul li{line-height: .9rem;position:relative;}
+.tabcon .noafter:after{height:0;content: '';}
 .tabcon ul li:after{width:200%;height:1px;position:absolute;bottom:0;left:0;z-index:0;content:"";-webkit-transform:scale(0.5);-webkit-transform-origin:0 0;transform:scale(0.5);transform-origin:0 0;background: #e5e5e5;}
 .tabcon ul div{display:inline-block;max-width:65%;}
 .tabcon div em{margin-right:.1rem;font-size:.28rem;}
@@ -570,7 +574,7 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .f-bottom a:first-of-type{border-right: 1px #fff solid;}
 /*个人主页*/
 .head-info{height:1.6rem;width:100%;max-width: 750px;position:relative;background: #e01b49;
-background: url(img/mbg.jpg) no-repeat;background-size: contain;}
+background: url(img/mbg.jpg) repeat-x;background-size: contain;}
 .view{position:absolute;bottom:0;left:0;background: rgba(0,0,0,.2);height:24px;color:#fff;font-size:12px;width:100%;line-height: 24px;text-align: right;}
 .view i{margin-right:.3rem;}
 /*个人中心--2end*/
@@ -649,7 +653,7 @@ border-radius: 50%;}
 /*.h-info-box li b{float:left;}*/
 .s-title-pass li h3{color:#e01a48;}
 .s-title-pass li p{color:#9ba4ad; line-height: 0.36rem;}
-.h-info-box .no-b-border a{display:block;background: url(img/right.png) no-repeat right center; background-size:0.18rem 0.25rem;font-size:0.26rem;}
+.h-info-box .no-b-border a{display:block;background: url(img/right.png) no-repeat right center; background-size:0.18rem 0.25rem;font-size:0.28rem;}
 .h-info-box .nobg-ele a{background: none;padding-right: 0;}
 .h-info-box h3 span{float:right;}
 .h-info-box li p span,.h-info-box li p i{display: block;}
