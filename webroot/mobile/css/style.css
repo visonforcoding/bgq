@@ -1007,7 +1007,7 @@ width:0.5rem;height:0.16rem;display: inline-block;transition: all .3s;float:righ
 .c-card img,.r-card img{width:100%;height:auto;}
 .r-card{float:left; width:70%;margin-left:.2rem;height:3rem;padding-left:0.4rem;}
 .e-info-box .install{padding-right:0;}
-.install span.btn{width:.68rem;height:34px;border-radius: .3rem;background: #e5e5e5;position:relative;}
+.install span.btn{width:1rem;height:34px;border-radius: .3rem;background: #e5e5e5;position:relative;}
 .btn i{width:34px;height:34px;border-radius: 50%;background: lightgreen;display: block;transition:all .6s;}
 .btn .on{margin-left:0.01rem;float:left;background: lightgreen;}
 .btn .off{margin-right:0.01rem;float:right;background: lightgray;}
