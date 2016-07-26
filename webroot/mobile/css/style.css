@@ -168,7 +168,7 @@ border-bottom:1px #e5e5e5 solid; padding:0 0.3rem;position:relative;font-weight:
 .line{height:1px;background: -webkit-linear-gradient(left,#ededee 0%,#7a7d82 50%, #ededee 100%);  background: linear-gradient(left,#ededee 0%,#7a7d82 50%, #ededee 100%);margin:0.3rem 0.3rem .4rem; position:relative;}
 .mistips{position:absolute;width:4rem;left:50%;margin-left: -2rem;height:.6rem;top:50%;margin-top:-.3rem;background: #f0eff5;text-align: center;line-height: .6rem;
 color:#7a7d82;font-size:.24rem;}
-.bgff{background: #fff;}
+.bg-ff{background: #fff;}
 .newscomment-box .no-bottom{border-bottom:none;}
 .t-ablock{font-size:0;}
 .t-ablock a{display:inline-block;width:0.62rem;height:0.62rem;overflow:hidden;border-radius:0.31rem;margin:0 0.07rem;}
