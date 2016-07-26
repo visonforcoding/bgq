@@ -68,18 +68,17 @@
         <label class="col-md-2 control-label">规模</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('scale', ['label' => false, 'class' => 'form-control']);
+            echo $this->Form->input('scale', ['label' => false,'type'=>'text', 'class' => 'form-control']);
             ?>
         </div>
     </div>
-    <!--    <div class="form-group">
-            <label class="col-md-2 control-label">是否众筹</label>
-            <div class="col-md-8">
-    <?php
-    echo $this->Form->input('is_crowdfunding', ['type' => 'select', 'options' => ['0' => '否', '1' => '是'], 'label' => false, 'class' => 'form-control']);
-    ?>
-            </div>
-        </div>-->
+    <div class="form-group">
+        <label class="col-md-2 control-label">是否需要报名审核</label>
+        <div class="col-md-8">
+            <label class="radio-inline"> <input name="must_check" value="0"  checked="checked" type="radio"> 不需要</label>
+            <label class="radio-inline"> <input name="must_check" value="1"   type="radio"> 需要 </label>
+        </div>
+    </div>
     <div class="form-group">
         <label class="col-md-2 control-label">专家推荐</label>
         <div class="col-md-8">
