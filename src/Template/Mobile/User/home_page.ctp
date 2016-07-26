@@ -1,7 +1,7 @@
 <div class="wraper bg-ff">
     <div class="head-info">
         <div class="view"><i><?= $user->homepage_read_nums ?>人浏览过</i></div>
-        <a href="/home/edit-userinfo" class="m-pic"><span><img src="<?= $user->avatar ? $user->avatar : '/mobile/images/touxiang.png' ?>"/></span></a>
+        <a href="/home/edit-userinfo" class="m-pic"><span><img src="<?= $user->avatar ? getOriginAvatar($user->avatar) : '/mobile/images/touxiang.png' ?>"/></span></a>
     </div>
     <div class="h-user">
         <h3><?= $user->truename ?></h3>
