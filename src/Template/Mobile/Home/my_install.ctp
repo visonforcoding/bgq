@@ -24,7 +24,7 @@
         </ul>
     </div> -->
 
-    <ul class="h-info-box e-info-box hli">
+    <ul class="h-info-box e-info-box">
         <li class="no-right-ico install">
             <a href="javascript:void(0);">
                 <span>设置</span>
