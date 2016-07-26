@@ -26,18 +26,16 @@
 
     <ul class="h-info-box e-info-box">
         <li class="no-right-ico install">
-            <a href="javascript:void(0);">
-                <span>设置</span>
-                <div>
-                    <span class="btn" id='btn'><i class="off"></i></span>
-                </div>
-            </a>
+            <span>使用缓存</span>
+            <div>
+                <span class="btn" id='checkBtn'><i class="off"></i></span>
+            </div>
         </li>
         <li class="lh4 no-right-ico install">
             <a href="javascript:void(0);">
                 <span>系统版本</span>
                 <div>
-                    <span>Verson 1.0</span>
+                    <span id="verson">Verson 1.0</span>
                 </div>
             </a>
         </li>
@@ -90,7 +88,26 @@
             }
         });
     });
-    $('.ulinfo').find('li').text('系统版本：'+LEMON.sys.version());
+    $('#verson').html('Verson '+LEMON.sys.version());
+
+    function setCheck(st){
+        if(st == 'on'){
+            $('#checkBtn i').get(0).className = 'on';
+        }
+        else{
+            $('#checkBtn i').get(0).className = 'off';
+        }
+    }
+
+    $('#checkBtn').on('tap',function(){
+        if(LEMON.sys.isUseLOC() == 'on'){
+            LEMON.sys.closeLOC();
+            setCheck('off');
+        }else{
+            LEMON.sys.openLOC();
+            setCheck('on');
+        }
+    })
 </script>
 <script type="text/javascript">
                 var flag=1;

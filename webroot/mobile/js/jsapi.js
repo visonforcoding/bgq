@@ -122,21 +122,27 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                         // ** db.set至少用到key value  LEMON.db.set  至少传入两个参数，字符串  **
                         // invoke可以多传几个变量 set  delete不会用到value和get
                         var invokeResult = JSApiInvoke(api, param, '', 'string');
-                        //alert(invokeResult);
-                        var re = JSON.parse(invokeResult);
-                        return re.data;
+                        if(invokeResult.indexOf('"data"') != -1){
+                            var re = JSON.parse(invokeResult);
+                            return re.data;
+                        }
+                        else{
+                            return invokeResult;
+                        }
                     });
                     break;
-
-
                 case "sys.version":
                 case "sys.device":
                 case "sys.isUseLOC":  //是否使用缓存  on  off
                         registerAPI(null, api, function () {
                         var invokeResult = JSApiInvoke(api, '', '', 'string');
-                        //alert(invokeResult);
-                        var re = JSON.parse(invokeResult);
-                        return re.data;
+                        if(invokeResult.indexOf('"data":') != -1){
+                            var re = JSON.parse(invokeResult);
+                            return re.data;
+                        }
+                        else{
+                            return invokeResult;
+                        }
                     });
                     break;
                 //无参数   无回调
