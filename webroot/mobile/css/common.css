@@ -60,7 +60,7 @@ button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);border:none;background:
 .innercon{margin:0 auto;padding:0 0.3rem;background: #fff;}
 .h20{height:0.2rem;border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid;}
 .wraper .border{border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid;}
-.wraper .color-items{color:#e01a48;}
+
 .wraper .f-color-gray{color:#bbc0c6;font-size:0.28rem;line-height: 0.32rem;}
 .wraper .f-color-black{color:#222c38;}
 .wraper .bgff{background: #fff;}
@@ -77,6 +77,7 @@ button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);border:none;background:
 .wraper .btop{border-top:1px solid #e5e5e5;}
 .wraper .h-info-box .lh4{line-height:0.4rem;}
 .wraper .nopr{padding-right:0;}
+.wraper .color-items{color:#e01a48;}
 .loading{width:1.27rem;height:0.31rem;background: url(img/loading.gif) center center; background-size:cover; margin:0 auto;}
 .loadingbox{width:100%;height:0.31rem;margin:0.2rem 0;font-size:0.28rem;color:#c8cbce;text-align: center;}
 .no-margin-b{padding-bottom:0;}
