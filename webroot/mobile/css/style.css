@@ -258,7 +258,7 @@ border-bottom:none;top:-1px;margin-top:-1px;margin-left:-1px;}
     height: .9rem;display: table-cell;border-radius: 50%;background: rgba(224,26,72,.9);text-align: center;color:#fff;font-size: .26rem;font-weight: 100;vertical-align: middle;line-height: .3rem;}
 .active-items{padding-bottom:0.4rem;border-bottom: 1px #e5e5e5 solid;}
 
-.a-wraper section{border-top:none;}
+.a-wraper section{border-bottom:none;}
 .tojudge,.crowdfunding span,.tochoose{line-height: 0.8rem;color:#222c38;font-size:0.28rem;}
 .tojudge span{display: block;float:right;width:0.8rem;height:0.52rem; margin-top:0.15rem;background: url(img/onoff.png) no-repeat center center;background-size:cover;}
 .crowdfunding{padding-bottom:0.27rem;/*border-top:1px #e5e5e5 solid;*/font-size:0.28rem;}
