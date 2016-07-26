@@ -240,7 +240,7 @@ border-bottom:none;top:-1px;margin-top:-1px;margin-left:-1px;}
 .a-head{display:block;}
 .a-head div.conbox{width: 6.9rem;max-height:3.88rem;overflow: hidden;min-height:1.2rem;position:relative;}
 .status{position:absolute;right:-30px;top:0;}
-.status span{display:block;background: #e01a48;width:100px;height:34px;border-radius: 0.5rem;line-height:34px;color:#fff;padding-left:15px;font-size:16px;margin-top:20px;}
+.status span{display:block;background: #e01a48;width:100px;height:32px;border-radius: 0.5rem;line-height:32px;color:#fff;padding-left:15px;font-size:14px;margin-top:20px;}
 .a-head img{width:100%;height:auto;display: block;}
 .a-head h3{line-height: 0.4rem; color:#222c38;font-size:0.3rem;margin:0.2rem 0;-webkit-line-clamp: 2;}
 .a-bottom .a-address{line-height: 0.28rem; display: block;font-size:0.28rem;color:#9ba4ad;margin-bottom:0.2rem;}
