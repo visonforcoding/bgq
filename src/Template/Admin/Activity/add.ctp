@@ -87,6 +87,12 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">活动推荐</label>
+        <div class="col-md-8">
+            <?=$this->cell('ActivityRecommend')?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">费用</label>
         <div class="col-md-8">
             <?php
@@ -167,15 +173,19 @@
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-user').select2({
             language: "zh-CN",
-            placeholder: '选择一个发起人',
+            placeholder: '选择一个发起人'
         });
         $('#select-series').select2({
             language: "zh-CN",
-            placeholder: '选择一个标签',
+            placeholder: '选择一个标签'
         });
         var industrySelect2 = $('#select-industry').select2({
             language: "zh-CN",
             placeholder: '选择一个标签'
+        });
+        var industrySelect2 = $('#select-activity').select2({
+            language: "zh-CN",
+            placeholder: '选择一个活动'
         });
         var savantSelect2 = $('#select-savant').select2({
             language: "zh-CN",

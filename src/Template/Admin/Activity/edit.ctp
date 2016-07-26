@@ -120,6 +120,12 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">活动推荐</label>
+        <div class="col-md-8">
+            <?= $this->cell('ActivityRecommend', [$selActivityIds]); ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">费用</label>
         <div class="col-md-8">
             <?php
@@ -179,11 +185,6 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' />
-<!--            <a href="/admin/activitycom/index/<?= $activity->id; ?>" id='' class='btn btn-primary' data-loading='稍候...'>评论详情</a>
-            <a href="/admin/likeLogs/index/<?= $activity->id; ?>" id='' class='btn btn-primary' data-loading='稍候...'>点赞日志</a>
-            <a href="/admin/collectLogs/index/<?= $activity->id; ?>" id='' class='btn btn-primary' data-loading='稍候...'>收藏日志</a>
-            <a href="/admin/activityapply/index/<?= $activity->id; ?>" id='' class='btn btn-primary' data-loading='稍候...'>报名用户</a>
-            <a href="/admin/sponsor/index/<?= $activity->id; ?>" id='' class='btn btn-primary' data-loading='稍候...'>赞助详情</a>-->
         </div>
     </div>
     <?= $this->Form->end() ?>
@@ -221,6 +222,10 @@
         $('#select-savant').select2({
             language: "zh-CN",
             placeholder: '选择一位专家'
+        });
+        $('#select-activity').select2({
+            language: "zh-CN",
+            placeholder: '选择一个活动'
         });
         $('form').submit(function () {
             var form = $(this);

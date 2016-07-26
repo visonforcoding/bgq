@@ -84,6 +84,7 @@ class ActivityController extends AppController {
                         'Industries',
                         'Regions',
                         'Savants',
+                        'Activity_recommends',
                         'Activityapply' => function($q)use($user_id){
                             return $q->where(['user_id'=>$user_id]);
                         },
@@ -111,6 +112,7 @@ class ActivityController extends AppController {
                         'Industries',
                         'Regions',
                         'Savants',
+                        'Activity_recommends',
                         'Activitycom' => function($q)use($id){
                             return $q->where(['activity_id'=>$id, 'is_delete' => 0])->orderDesc('Activitycom.create_time')->limit($this->limit);
                         },

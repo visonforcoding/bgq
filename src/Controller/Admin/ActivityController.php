@@ -79,7 +79,7 @@ class ActivityController extends AppController {
      */
     public function edit($id = null) {
         $activity = $this->Activity->get($id, [
-            'contain' => ['Industries', 'Savants'],
+            'contain' => ['Industries', 'Savants', 'Activity_recommends'],
         ]);
         if ($this->request->is(['post', 'put'])) {
             $activity = $this->Activity->patchEntity($activity, $this->request->data);
@@ -97,11 +97,17 @@ class ActivityController extends AppController {
                 $selSavantIds[] = $savant->id;
             }
         }
+        $selActivityIds = [];
+        if ($activity->activity_recommends) {
+            foreach ($activity->activity_recommends as $activityRecommend) {
+                $selActivityIds[] = $activityRecommend->id;
+            }
+        }
         foreach ($activity->industries as $industry) {
             $selIndustryIds[] = $industry->id;
         }
         $this->set(compact('regions'));
-        $this->set(compact('activity', 'selIndustryIds', 'selSavantIds'));
+        $this->set(compact('activity', 'selIndustryIds', 'selSavantIds', 'selActivityIds'));
     }
 
     /**

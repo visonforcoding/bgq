@@ -34,6 +34,7 @@ class IndustryTable extends Table {
             'className' => 'industry',
             'foreignKey' => 'pid',
         ]);
+        
     }
 
     /**

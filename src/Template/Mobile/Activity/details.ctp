@@ -79,40 +79,24 @@
             <span class='com-all' style="display:none;"><a href="#allcoment" id="showAllComment">查看更多评价</a></span>
         </section>
         <div style="height:.6rem"></div>
-<!--        <div class="active-commond innercon">
+        <?php if($activity->activity_recommends): ?>
+        <div class="active-commond innercon">
             <section class="my-collection-info  nobottom">
+                <?php foreach ($activity->activity_recommends as $k=>$v): ?>
                 <div>
-                    <a href="activity-details.html" class="clearfix">
-                        <span class="my-pic-acive"><img src="/mobile/images/newspic1.png"></span>
+                    <a href="/activity/details/<?= $v['id'] ?>" class="clearfix">
+                        <span class="my-pic-acive"><img src="<?= $v['thumb'] ? $v['thumb'] : $v['cover'] ?>"></span>
                         <div class="my-collection-items">
-                            <h3>2016年中国国际体育融资总裁年会</h3>
-                            <span>深圳市福田区东海国际公寓 <i>601人报名</i></span>
-                            <span>04月28日 - 04月30日 </span>
+                            <h3><?= $v['title'] ?></h3>
+                            <span><?= $v['company'] ?> <i><?= $v['apply_nums'] ?>人报名</i></span>
+                            <span><?= $v['time'] ?></span>
                         </div>
                     </a>
                 </div>
-                <div>
-                    <a href="activity-details.html" class="clearfix">
-                        <span class="my-pic-acive"><img src="/mobile/images/newspic1.png"></span>
-                        <div class="my-collection-items">
-                            <h3>2016年中国国际体育融资总裁年会</h3>
-                            <span>深圳市福田区东海国际公寓 <i>601人报名</i></span>
-                            <span>04月28日 - 04月30日 </span>
-                        </div>
-                    </a>
-                </div>
-                <div>
-                    <a href="activity-details.html" class="clearfix">
-                        <span class="my-pic-acive"><img src="/mobile/images/newspic1.png"></span>
-                        <div class="my-collection-items">
-                            <h3>2016年中国国际体育融资总裁年会</h3>
-                            <span>深圳市福田区东海国际公寓 <i>601人报名</i></span>
-                            <span>04月28日 - 04月30日 </span>
-                        </div>
-                    </a>
-                </div>
+                <?php endforeach; ?>
             </section>
-        </div>-->
+        </div>
+        <?php endif; ?>
         <!--专家推荐-->
         <?php if ($activity->savants): ?>
             <div class="expert-commond innercon">
