@@ -44,11 +44,11 @@
                     <?php endforeach; ?>
                 </p>
                 <!-- 等<i id="meet_nums"><?= $biggie->savant->reco_nums ?></i>人推荐 -->
-                <a href="/meet/view-more-reco/<?= $biggie->id ?>" class="fr">查看更多</a>
+               <!--  <a href="/meet/view-more-reco/<?= $biggie->id ?>" class="fr">更多</a> -->
             </span>
 
         </li>
-        <li class="conr"><a class="alink mr" href="/user/home-page/<?= $biggie->id ?>" class="tohome"><i class="iconfont">&#xe612;</i>个人主页</a></li>
+        <li class="m-page"><a class="alink mr" href="/user/home-page/<?= $biggie->id ?>" class="tohome"><i class="iconfont">&#xe66a;</i>个人主页<span class="iconfont fr">&#xe662;</span></a></li>
     </ul>
     <div class="tabcon border bgff" >
         <ul class="inner basicon" style="display: block;">
@@ -70,7 +70,7 @@
                     <?php endif; ?>
                 </div>
             </li>
-            <li class="b-yw nobottom">
+            <li class="b-yw noafter nobottom">
                 <span><i class="iconfont">&#xe655;</i>擅长业务</span>
                 <div>
                     <em><?= $biggie->goodat; ?></em>
@@ -86,7 +86,7 @@
             <?php foreach ($biggie->subjects as $v): ?>
                 <li>
                     <div class="inner-li-items">
-                        <h3><?= $v['title'] ?><span><?php if ($v['type'] == 1): ?>一对一面谈<?php else: ?>众筹约见<?php endif; ?></span></h3>
+                        <h3><?= $v['title'] ?><!-- <span><?php if ($v['type'] == 1): ?>一对一面谈<?php else: ?>众筹约见<?php endif; ?></span> --></h3>
                         <a class="alink" href="/meet/subject-detail/<?= $v->id ?>">
                             <div class='m-center-con'>
                                 <p>
