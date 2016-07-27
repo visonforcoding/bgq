@@ -7,7 +7,7 @@ use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 
 /**
- * @property  Wpadmin\Controller\Component\UtilComponent $Util 开发通用组件
+ * @property  \Wpadmin\Controller\Component\UtilComponent $Util 开发通用组件
  */
 class AppController extends Controller {
 

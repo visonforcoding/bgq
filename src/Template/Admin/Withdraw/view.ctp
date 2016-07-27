@@ -1,60 +1,63 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Withdraw'), ['action' => 'edit', $withdraw->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Withdraw'), ['action' => 'delete', $withdraw->id], ['confirm' => __('Are you sure you want to delete # {0}?', $withdraw->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Withdraw'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Withdraw'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'User', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'User', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
+<head>
+    <link rel="stylesheet" type="text/css" href="/wpadmin/lib/zui/css/zui.min.css"/>
+</head>
+<body>
 <div class="withdraw view large-9 medium-8 columns content">
-    <h3><?= h($withdraw->id) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th><?= __('User') ?></th>
-            <td><?= $withdraw->has('user') ? $this->Html->link($withdraw->user->truename, ['controller' => 'User', 'action' => 'view', $withdraw->user->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Cardno') ?></th>
-            <td><?= h($withdraw->cardno) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Bank') ?></th>
-            <td><?= h($withdraw->bank) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Truename') ?></th>
-            <td><?= h($withdraw->truename) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Remark') ?></th>
-            <td><?= h($withdraw->remark) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($withdraw->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Amount') ?></th>
-            <td><?= $this->Number->format($withdraw->amount) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Fee') ?></th>
-            <td><?= $this->Number->format($withdraw->fee) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Status') ?></th>
-            <td><?= $this->Number->format($withdraw->status) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Create Time') ?></th>
-            <td><?= h($withdraw->create_time) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Update Time') ?></th>
-            <td><?= h($withdraw->update_time) ?></td>
-        </tr>
-    </table>
+    <table class="vertical-table table table-hover table-bordered">
+    
+    <tr class="warning">
+        <th>对象id</th>
+        <td><?= h($withdraw->user_id) ?></td>
+    </tr>
+    
+    <tr class="success">
+        <th>提现金额</th>
+        <td><?= h($withdraw->amount) ?></td>
+    </tr>
+    
+    <tr class="muted">
+        <th>银行卡号</th>
+        <td><?= h($withdraw->cardno) ?></td>
+    </tr>
+    
+    <tr class="warning">
+        <th>银行</th>
+        <td><?= h($withdraw->bank) ?></td>
+    </tr>
+    
+    <tr class="active">
+        <th>持卡人姓名</th>
+        <td><?= h($withdraw->truename) ?></td>
+    </tr>
+    
+    <tr class="active">
+        <th>手续费</th>
+        <td><?= h($withdraw->fee) ?></td>
+    </tr>
+    
+    <tr class="danger">
+        <th>备注</th>
+        <td><?= h($withdraw->remark) ?></td>
+    </tr>
+    
+    <tr class="success">
+        <th>操作者id</th>
+        <td><?= h($withdraw->admin_id) ?></td>
+    </tr>
+    
+    <tr class="active">
+        <th>状态,0未审核，1审核通过2,审核不通过</th>
+        <td><?= h($withdraw->status) ?></td>
+    </tr>
+    
+    <tr class="active">
+        <th>create_time</th>
+        <td><?= h($withdraw->create_time) ?></td>
+    </tr>
+    
+    <tr class="warning">
+        <th>update_time</th>
+        <td><?= h($withdraw->update_time) ?></td>
+    </tr>
 </div>
+</body>

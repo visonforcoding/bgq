@@ -12,7 +12,7 @@
                 <input type="text"  value="<?=$userInfo->truename?>" />
             </div>
         </li>
-        <li>
+        <li class="no-right-ico">
             <span>银行：</span>
             <div>
                 <input type="text" name="bank"  />
@@ -33,7 +33,7 @@
 
     </ul>
     <div class='h2'></div>
-    <p class="inner ft26">钱包余额：¥<?=$userInfo->money?>，<i class="color-items">全部提现</i></p>
+    <p class="inner ft26">钱包余额：¥<?=$userInfo->money?></p>
     <a href="javascript:void(0);" id="submit" class="nextstep topull">确认提现</a>
     <p class="inner tocard">3个工作日到账</p>
 </div>

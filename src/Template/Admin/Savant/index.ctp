@@ -5,9 +5,9 @@
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
-            <a href="/admin/savant/add" class="btn btn-small btn-warning">
+<!--            <a href="/admin/savant/add" class="btn btn-small btn-warning">
                 <i class="icon icon-plus-sign"></i>添加
-            </a>
+            </a>-->
             <div class="form-group">
                 <label for="keywords">关键字</label>
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="用户名">
@@ -39,9 +39,10 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '推荐次数', '项目经验', '资源优势', '简介', '审核情况', '操作'],
+                                ['用户','约见次数', '推荐次数', '项目经验', '资源优势', '简介', '审核情况', '操作'],
                         colModel: [
                             {name: 'truename', editable: true, align: 'center'},
+                            {name: 'meet_nums', editable: true, align: 'center'},
                             {name: 'savant.reco_nums', editable: true, align: 'center'},
 //                            {name: 'cover', editable: true, align: 'center'},
                             {name: 'savant.xmjy', editable: true, align: 'left'},
@@ -88,7 +89,7 @@
 
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
+                    response += '<a title="查看话题" href="/admin/meet-subject/index/' + rowObject.id + '" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-rss"></i> </a>';
                     response += '<a title="编辑" href="/admin/savant/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     if (rowObject.savant_status == 2) {
                         response += '<a title="审核通过" href="javascript:void(0)" class="grid-btn release" onclick="pass(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';

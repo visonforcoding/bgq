@@ -33,6 +33,11 @@ class WithdrawTable extends Table {
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Admin', [
+            'className'=>'Wpadmin.Admin',
+            'foreignKey' => 'admin_id',
+            'joinType' => 'LEFT'
+        ]);
 
         $this->addBehavior('Timestamp', [
             'events' => [

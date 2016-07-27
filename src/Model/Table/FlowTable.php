@@ -29,6 +29,7 @@ class FlowTable extends Table {
         $this->primaryKey('id');
 
         $this->belongsTo('Users', [
+            'className'=>'User',
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
@@ -63,10 +64,6 @@ class FlowTable extends Table {
                 ->requirePresence('type_msg', 'create')
                 ->notEmpty('type_msg');
 
-        $validator
-                ->boolean('income')
-                ->requirePresence('income', 'create')
-                ->notEmpty('income');
 
         $validator
                 ->decimal('amount')

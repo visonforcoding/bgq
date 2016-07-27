@@ -23,10 +23,15 @@ class ReportController extends AppController {
     }
 
     public function logger() {
+//        $Mongo = new \MongoClient();
+//        $Bgqchart = $Mongo->selectDB('bgqchart');
+//        $pvlog = $Bgqchart->selectCollection('pvlog');
         $data = $this->request->query;
         $cookie = $this->request->cookies;
-        \Cake\Log\Log::debug($data, 'devlog');
-        \Cake\Log\Log::debug($cookie, 'devlog');
+        $res = $pvlog->insert($data);
+        debug($res);
+        //\Cake\Log\Log::debug($data, 'devlog');
+        //\Cake\Log\Log::debug($cookie, 'devlog');
     }
 
 }

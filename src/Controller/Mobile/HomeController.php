@@ -85,7 +85,7 @@ class HomeController extends AppController {
                     'pageTitle' => '个人主页'
                 ]);
                 $this->set(compact('user', 'industry_arr'));
-            }
+    }
 
             /**
              * ajax获取我的活动 报名
@@ -572,7 +572,7 @@ class HomeController extends AppController {
         $user_id = $this->user->id;
         $userInfo = $this->User->get($user_id);
         $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
-        $flows = $FlowTable->find()->where(['user_id' => $user_id, 'status' => '1'])->orderDesc('create_time')->toArray();
+        $flows = $FlowTable->find()->where(['user_id' => $user_id])->orderDesc('create_time')->toArray();
         $this->set(array(
             'userInfo' => $userInfo,
             'flows' => $flows,
@@ -586,6 +586,7 @@ class HomeController extends AppController {
     public function withdraw() {
         $user_id = $this->user->id;
         $userInfo = $this->User->get($user_id);
+        $UserTable = $this->User;
         if ($this->request->isAjax()) {
             $amount = $this->request->data('amount');
             $bank = $this->request->data('bank');
@@ -593,6 +594,7 @@ class HomeController extends AppController {
             if ($amount > $userInfo->money) {
                 return $this->Util->ajaxReturn(false, '提现金额不能大于钱包余额');
             }
+            //生成提现记录 余额扣除 生成流水记录
             $WithdrawTable = \Cake\ORM\TableRegistry::get('Withdraw');
             $withdraw = $WithdrawTable->newEntity([
                 'user_id' => $user_id,
@@ -601,10 +603,30 @@ class HomeController extends AppController {
                 'truename' => $userInfo->truename,
                 'bank' => $bank,
             ]);
-            if ($WithdrawTable->save($withdraw)) {
+            $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+            $transRes = $WithdrawTable->connection()->transactional(function()use($UserTable,$userInfo,$FlowTable,$WithdrawTable,$withdraw){
+                $preAmount = $userInfo->money;
+                $userInfo->money -= $withdraw->amount;
+                $withdrawRes = $WithdrawTable->save($withdraw);
+                $flow = $FlowTable->newEntity([
+                    'user_id'=>$userInfo->id,
+                    'type'=>3,
+                    'type_msg'=>'提现支出',
+                    'income'=>2,
+                    'relate_id'=>$withdraw->id,
+                    'amount'=>$withdraw->amount,
+                    'pre_amount'=>$preAmount,
+                    'after_amount'=>$userInfo->money,
+                    'status'=>0,
+                    'remark'=>'用户提现支出'
+                ]);
+                \Cake\Log\Log::error($flow->errors(),'devlog');
+                return $withdrawRes&&$UserTable->save($userInfo)&&$FlowTable->save($flow);
+            });
+            if ($transRes) {
                 return $this->Util->ajaxReturn(true, '提现申请成功');
             } else {
-                \Cake\Log\Log::error($withdraw->errors());
+                //\Cake\Log\Log::error($withdraw->errors());
                 return $this->Util->ajaxReturn(false, '提现申请失败');
             }
         }

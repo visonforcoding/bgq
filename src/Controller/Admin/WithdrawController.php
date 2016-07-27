@@ -117,7 +117,7 @@ class WithdrawController extends AppController {
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where['username like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
@@ -130,7 +130,7 @@ class WithdrawController extends AppController {
             $query->where($where);
         }
         $nums = $query->count();
-        $query->contain(['Users']);
+        $query->contain(['Users','Admin']);
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
@@ -187,6 +187,73 @@ class WithdrawController extends AppController {
         $this->autoRender = false;
         $filename = 'Withdraw_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+    }
+
+    /**
+     * 审核通过
+     * 1。该记录状态更改
+     * 2。流水记录状态更改
+     */
+    public function pass() {
+        $id = $this->request->data('id');
+        $withdraw = $this->Withdraw->get($id);
+        $withdraw->status = 1;
+        $withdraw->admin_id = $this->_user->id;
+        $WithdrawTable = $this->Withdraw;
+        $transRes = $this->Withdraw->connection()->transactional(function()use($withdraw, $WithdrawTable) {
+            $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+            $flow = $FlowTable->find()->where(['relate_id' => $withdraw->id, 'status' => 0])->first();
+            $flow->status = 1;
+            return $FlowTable->save($flow) && $WithdrawTable->save($withdraw);
+        });
+        if ($transRes) {
+            $this->Util->ajaxReturn(true, '保存成功');
+        } else {
+            $this->Util->ajaxReturn(false, '保存失败');
+        }
+    }
+
+    /**
+     * 审核不通过
+     * 1。该记录状态更改，记录失败原因
+     * 2。流水记录状态更改
+     * 3.返回余额
+     * 4.生成退回流水
+     */
+    public function unpass() {
+        $id = $this->request->data('id');
+        $remark = $this->request->data('remark');
+        $withdraw = $this->Withdraw->get($id);
+        $withdraw->status = 2; //不通过状态
+        $withdraw->remark = $remark; //不通过理由
+        $WithdrawTable = $this->Withdraw;
+        $transRes = $this->Withdraw->connection()->transactional(function()use($withdraw, $WithdrawTable) {
+            $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+            $flow = $FlowTable->find()->where(['relate_id' => $withdraw->id, 'status' => 0])->first();
+            $flow->status = 2; //记录作废
+            $UserTable = \Cake\ORM\TableRegistry::get('User');
+            $user = $UserTable->get($withdraw->user_id);
+            $preAmount = $user->money;
+            $user->money += $withdraw->amount; //金额退回
+            $backFlow = $FlowTable->newEntity([
+                    'user_id'=>$withdraw->user_id,
+                    'type'=>4,
+                    'type_msg'=>'提现失败退回',
+                    'income'=>1,
+                    'relate_id'=>$withdraw->id,
+                    'amount'=>$withdraw->amount,
+                    'pre_amount'=>$preAmount,
+                    'after_amount'=>$user->money,
+                    'status'=>1,
+                    'remark'=>'用户提现失败退回'
+            ]);
+            return $FlowTable->save($flow) && $WithdrawTable->save($withdraw)&&$UserTable->save($user)&&$FlowTable->save($backFlow);
+        });
+        if ($transRes) {
+            $this->Util->ajaxReturn(true, '保存成功');
+        } else {
+            $this->Util->ajaxReturn(false, '保存失败');
+        }
     }
 
 }

@@ -5,8 +5,8 @@
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($savant, ['class' => 'form-horizontal']) ?>
-    <?php if($savant->user->savant_status == 0): ?>
-    	<div class="form-group">
+    <?php if ($savant->savant_status == 0): ?>
+        <div class="form-group">
             <label class="col-md-2 control-label">未通过审核理由</label>
             <div class="col-md-8">
                 <?php
@@ -35,7 +35,7 @@
         <label class="col-md-2 control-label">项目经验</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('xmjy', ['label' => false, 'class' => 'form-control']);
+            echo $this->Form->input('savant.xmjy', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
@@ -43,7 +43,7 @@
         <label class="col-md-2 control-label">资源优势</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('zyys', ['label' => false, 'class' => 'form-control']);
+            echo $this->Form->input('savant.zyys', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
@@ -51,57 +51,62 @@
         <label class="col-md-2 control-label">简介</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('summary', ['label' => false, 'class' => 'form-control']);
+            echo $this->Form->input('savant.summary', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-    <?php if($savant->user->subjects): ?>
-    <?php foreach($savant->user->subjects as $k=>$v): ?>
-    <div class="form-group">
-        <label class="col-md-2 control-label">话题<?=$k+1?></label>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">标题</label>
-        <div class="col-md-8">
-            <input type="text" name="title" class="form-control" id="title" disabled value="<?=$v['title']?>">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">话题简介</label>
-        <div class="col-md-8">
-            <textarea name="title" class="form-control" id="title" disabled ><?=$v['summary']?></textarea>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">类型</label>
-        <div class="col-md-8">
-            <input type="text" name="title" class="form-control" id="title" disabled value="<?php switch($v['type']){case 1: echo '一对一';break;case 2: echo '一对多';break;} ?>">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">约见时间</label>
-        <div class="col-md-8">
-            <input type="text" name="title" class="form-control" id="title" disabled value="<?=$v['invite_time']?>">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">价格</label>
-        <div class="col-md-8">
-            <input type="text" name="title" class="form-control" id="title" disabled value="<?=$v['price']?>">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">地址</label>
-        <div class="col-md-8">
-            <input type="text" name="title" class="form-control" id="title" disabled value="<?=$v['address']?>">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">持续时间</label>
-        <div class="col-md-8">
-            <input type="text" name="title" class="form-control" id="title" disabled value="<?=$v['last_time']?>小时">
-        </div>
-    </div>
+    <?php if ($savant->subjects): ?>
+        <?php foreach ($savant->subjects as $k => $v): ?>
+            <div class="form-group">
+                <label class="col-md-2 control-label">话题<?= $k + 1 ?></label>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">标题</label>
+                <div class="col-md-8">
+                    <input type="text" name="title" class="form-control" id="title" disabled value="<?= $v['title'] ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">话题简介</label>
+                <div class="col-md-8">
+                    <textarea name="title" class="form-control" id="title" disabled ><?= $v['summary'] ?></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">类型</label>
+                <div class="col-md-8">
+                    <input type="text" name="title" class="form-control" id="title" disabled value="<?php switch ($v['type']) {
+            case 1: echo '一对一';
+                break;
+            case 2: echo '一对多';
+                break;
+        } ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">约见时间</label>
+                <div class="col-md-8">
+                    <input type="text" name="title" class="form-control" id="title" disabled value="<?= $v['invite_time'] ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">价格</label>
+                <div class="col-md-8">
+                    <input type="text" name="title" class="form-control" id="title" disabled value="<?= $v['price'] ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">地址</label>
+                <div class="col-md-8">
+                    <input type="text" name="title" class="form-control" id="title" disabled value="<?= $v['address'] ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">持续时间</label>
+                <div class="col-md-8">
+                    <input type="text" name="title" class="form-control" id="title" disabled value="<?= $v['last_time'] ?>小时">
+                </div>
+            </div>
     <?php endforeach; ?>
     <?php endif; ?>
     <div class="form-group">
@@ -109,7 +114,7 @@
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
         </div>
     </div>
-    <?= $this->Form->end() ?>
+<?= $this->Form->end() ?>
 </div>
 
 <?php $this->start('script'); ?>
@@ -123,7 +128,7 @@
 <script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>    -->
 <script>
     $(function () {
-         initJqupload('cover', '/wpadmin/util/doUpload?dir=savantcover', 'jpg,png,gif,jpeg'); //初始化图片上传
+        initJqupload('cover', '/wpadmin/util/doUpload?dir=savantcover', 'jpg,png,gif,jpeg'); //初始化图片上传
         //var ue = UE.getEditor('content'); //初始化富文本编辑器
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-user').select2({
