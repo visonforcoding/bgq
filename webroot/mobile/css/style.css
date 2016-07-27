@@ -562,7 +562,7 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
     
 .b-bq em{padding:0.05rem .08rem;background: #4285f4;color:#fff;}
 .tabcon ul span{color:#808080;font-size:.28rem;width:30%;display: inline-block;vertical-align: top;}
-.tabcon ul i{margin-right:.2rem;font-size:.24rem;}
+.tabcon ul i{font-size:.24rem;width:10%;display: inline-block;margin-right:.2rem;}
 .worktab a{display: block;}
 .worktab li span{color:#171717;width:100%;}
 .worktab .worktime{display: block;line-height: .9rem;text-indent: 5%;width:100%;}
@@ -1021,9 +1021,10 @@ width:0.5rem;height:0.16rem;display: inline-block;transition: all .3s;float:righ
 .c-card img,.r-card img{width:100%;height:auto;}
 .r-card{float:left; width:70%;margin-left:.2rem;height:3rem;padding-left:0.4rem;}
 .e-info-box .install{padding-right:0;}
-.install span.btn{width:1.2rem;height:.5rem;border-radius: .4rem;background: #54d76a;position:relative;}
-.btn i{width:28px;height:28px;border-radius: 50%;background: lightgreen;display: block;transition:all .6s;}
+.install span.btn{width:1.2rem;height:.5rem;border-radius: .4rem;position:relative;
+background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  background: linear-gradient(top,#54d76a 0%,#53d66a 50%, #53d569 100%);padding:.05rem;}
+.btn i{width:.4rem;height:.4rem;border-radius: 50%;background: lightgreen;display: block;transition:all .6s;}
 .btn .on{margin-left:0.01rem;float:left;background: lightgreen;}
-.btn .off{margin-right:0.01rem;float:right;background: lightgray;}
+.btn .off{margin-right:0.01rem;float:right;background: #fff;box-shadow: 0 0 1px rgba(0,0,0,.3);}
 .wraper .nopr{padding-right:0;}
 .classfytext .closed,.orgtext .closed{position:absolute;right:0.04rem;color:#888;font-size:0.24rem;font-weight: bold;}
