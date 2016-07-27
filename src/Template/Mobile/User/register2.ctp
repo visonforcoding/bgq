@@ -28,7 +28,9 @@
             </li>
             <li class="no-right-ico">
                 <a href="javascript:void(0);">
-                    <span>部门职务：</span>
+
+                    <span>部门/职务：</span>
+
                     <div >
                         <input name="position" type="text"  />
                     </div>
@@ -60,7 +62,9 @@
     <!--机构类型-->
     <div class="markbox border" id="cart">
         <div class="a-s-title bgff">
-            <span class="orgname">请选择机构类型<i class="orgtext"></i></span>
+
+            <span class="">请选择机构类型<a href="javascript:void(0);" onclick=closedft(this); class="orgtext"><i class="closed">&times;</i></a></span>
+
         </div>
         <div class="markslider">
             <div class="mark-items" id="org">
@@ -138,6 +142,16 @@
 </div>
 <?php $this->start('script') ?>
 <script type="text/javascript">
+    function closedfn(that){
+        that.remove();
+        var da = $(that).data('val');
+        console.log(da);
+        $('#industry li[data-val="'+da+'"]').children('a').removeClass('active');
+    }
+    function closedft(that){
+                $(that).text('').hide();
+                 $('#org li a').removeClass('active');
+        }
     $(function () {
         var agency = null, formdata;
         var classfy = $('.classfymark>li');
@@ -158,7 +172,10 @@
                 return;
             }
             $(this).children('a').addClass('active');
-            $('.classfytext').append('<a class="industry_item" data-val="' + industry_id + '" href="javascript:void(0)">' + $(this)[0].innerText + '</a>');
+
+            $('.classfytext').append('<a class="industry_item" onclick=closedfn(this); data-val="' + industry_id + '" href="javascript:void(0)">' + $(this).text() + '<i class="closed">&times;</i></a>');
+
+
         });
         cart.on('tap', function () {//机构
             var that = $(this);
@@ -167,7 +184,7 @@
 
         $('#org .cart>li').on('tap', function () {  //机构sub
             agency = $(this).data('val');
-            $('.orgtext').html($(this)[0].innerText);
+        $('.orgtext').html($(this).text()+'<i class="closed">&times;</i>').show();
             return;
             $('#org a').removeClass('active');
             $(this).children('a').addClass('active');
@@ -176,11 +193,12 @@
         })
 
         function fixed(that) {
-            allUl.hide();
+            allUl.removeClass('shows').addClass('hide');
+            var $value = that.attr('data-target');
             var $value = that.attr('data-target');
             cart.children('span').removeClass('active');
             classfy.children('span').removeClass('active');
-            $('.markbox ul[data-id = ' + $value + ']').show();
+            $('.markbox ul[data-id = ' + $value + ']').removeClass('hide').addClass('shows');
             that.children('span').addClass('active');
         }
         $('#submit').click(function () {
