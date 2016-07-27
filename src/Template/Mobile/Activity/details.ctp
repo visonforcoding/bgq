@@ -57,16 +57,20 @@
                 已报名
                 <!--<a href="/activity/allEnroll/<?= $activity->id ?>" class="allentrol">查看全部</a>-->
             </h3>
-            <div class="items  nobottom">
-                <div class="comm-info t-ablock" id="allEnroll">
-                    <?php if ($userApply): ?>
+            <div class="items  no-bottom">
+                <?php if ($userApply): ?>
+                <a href="/activity/allEnroll/<?= $activity->id ?>">
+                    <div class="comm-info t-ablock">
                         <?php foreach ($userApply as $k => $v): ?>
-                            <a href='javascript:void(0)'><img src="<?= $v['avatar'] ? $v['avatar'] : '/mobile/images/touxiang.png'; ?>"/></a>
+                            <img src="<?= $v['avatar'] ? $v['avatar'] : '/mobile/images/touxiang.png'; ?>"/>
                         <?php endforeach; ?>
-                    <?php else : ?>
+                    </div>
+                </a>
+                <?php else : ?>
+                    <div class="comm-info t-ablock" id="allEnroll">
                         <div style="font-size: 0.32rem;color: #7a7d82;text-align: center;line-height: 0.62rem;">暂时无人报名</div>
-                    <?php endif; ?>
-                </div>
+                    </div>
+                <?php endif; ?>
                 <!-- <span>显示全部</span> -->
             </div>
         </section>

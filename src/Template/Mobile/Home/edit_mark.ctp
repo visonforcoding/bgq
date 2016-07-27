@@ -29,7 +29,7 @@
                 <?php endforeach; ?>
                   <?php if($extra_mark):?>
                         <?php foreach ($extra_mark as $extra):?>
-                        <a href="#this" data-val="<?= $extra ?>" class="agency-item active"><?= $extra ?></a>
+                            <a href="#this" data-val="<?= $extra ?>" class="agency-item active"><?= $extra ?></a>
                         <?php endforeach;?>
                    <?php endif;?>
             <?php else: ?>

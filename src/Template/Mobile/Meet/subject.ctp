@@ -23,7 +23,7 @@
             </ul>
         </div>
         <div class="h20"></div>
-        <div class="infobox paytype m-subject">
+<!--        <div class="infobox paytype m-subject">
             <ul>
                 <li>一对一面谈：
                     <span class='infocard'>
@@ -53,7 +53,7 @@
                 <li>地点：<span class='infocard'><input type="text" name="address" value="<?php if(isset($subject)): ?><?=$subject->address?><?php endif; ?>" /></span></li>
                 <li>时间：<span class='infocard reg-repass'><input type="text" name="invite_time" value='<?php if(isset($subject)): ?><?=$subject->invite_time?><?php endif; ?>' /></span></li>
             </ul>
-        </div>
+        </div>-->
         <div class="infobox m-subject-info">
             <ul class="s-price">
                 <li>所需时间：<span class='infocard'>约<input type="text"  name="last_time" value="<?php if(isset($subject)): ?><?=$subject->last_time?><?php endif; ?>" />小时</span></li>

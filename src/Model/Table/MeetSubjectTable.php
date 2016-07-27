@@ -63,10 +63,10 @@ class MeetSubjectTable extends Table {
                 ->requirePresence('summary', 'create')
                 ->notEmpty('summary');
 
-        $validator
-                ->integer('type')
-                ->requirePresence('type', 'create')
-                ->notEmpty('type');
+//        $validator
+//                ->integer('type')
+//                ->requirePresence('type', 'create')
+//                ->notEmpty('type');
 
         $validator
                 ->decimal('price')
