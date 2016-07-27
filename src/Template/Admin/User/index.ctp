@@ -214,7 +214,8 @@
                 title: '会员名片',
                 shadeClose: true,
                 shade: 0.8,
-                 skin: 'layui-layer-nobg', //没有背景色
+                skin: 'layui-layer-nobg', //没有背景色
+                area: ['600px', '500px'],
                 content: '<img src=" '+obj+' ">'
             });
         }
