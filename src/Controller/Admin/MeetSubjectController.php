@@ -21,7 +21,10 @@ class MeetSubjectController extends AppController {
      *
      * @return void
      */
-    public function index() {
+    public function index($id=null) {
+        if($id){
+            $this->set('user_id',$id);
+        }
         $this->set('meetSubject', $this->MeetSubject);
     }
 
@@ -110,7 +113,7 @@ class MeetSubjectController extends AppController {
      *
      * @return json
      */
-    public function getDataList() {
+    public function getDataList($id=null) {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
@@ -120,6 +123,9 @@ class MeetSubjectController extends AppController {
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
+        if($id){
+            $where['MeetSubject.user_id'] = $id;
+        }
         if (!empty($keywords)) {
             $where['OR'] = [
                 ['User.`truename` like' => "%$keywords%"],
@@ -163,13 +169,16 @@ class MeetSubjectController extends AppController {
      *
      * @return csv 
      */
-    public function exportExcel() {
+    public function exportExcel($id=null) {
         $sort = $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
+        if($id){
+            $where['user_id'] = $id;
+        }
         if (!empty($keywords)) {
             $where[' username like'] = "%$keywords%";
         }

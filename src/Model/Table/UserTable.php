@@ -171,9 +171,9 @@ class UserTable extends Table {
         $validator
                 ->allowEmpty('goodat');
 
-        $validator
-                ->requirePresence('card_path', 'create', '请上传名片')
-                ->notEmpty('card_path', '请上传名片');
+//        $validator
+//                ->requirePresence('card_path', 'create', '请上传名片')
+//                ->notEmpty('card_path', '请上传名片');
 
 
         return $validator;

@@ -37,8 +37,8 @@ class SavantController extends AppController {
      */
     public function view($id = null) {
         $this->viewBuilder()->autoLayout(false);
-        $savant = $this->Savant->get($id, [
-            'contain' => ['Users', 'News', 'Activity']
+        $savant = $this->User->get($id, [
+            'contain' => ['Savant']
         ]);
         $this->set('savant', $savant);
         $this->set('_serialize', ['savant']);
@@ -72,10 +72,8 @@ class SavantController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
-        $savant = $this->Savant->get($id, [
-            'contain' => ['Users'=>function($q){
-                    return $q->contain(['Subjects']);
-                }]
+        $savant = $this->User->get($id, [
+            'contain' => ['Savant','Subjects']
         ]);
 //        debug($savant);die;
         if ($this->request->is(['post', 'put'])) {
@@ -87,7 +85,6 @@ class SavantController extends AppController {
                 $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
-        $users = $this->Savant->Users->find('list', ['limit' => 200]);
         $selUserIds = [];
         if($savant->user)
         {
@@ -140,7 +137,7 @@ class SavantController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $query = $this->User->find()->select(['User.id','User.truename','Savant.reco_nums','User.savant_status','Savant.xmjy','Savant.zyys','Savant.summary'])
+        $query = $this->User->find()->select(['User.id','User.meet_nums','User.truename','Savant.reco_nums','User.savant_status','Savant.xmjy','Savant.zyys','Savant.summary'])
                 ->contain(['Savant']);
         if (!empty($where)) {
             $query->where($where);
@@ -215,7 +212,7 @@ class SavantController extends AppController {
         $res = $this->User->save($user);
         if($res){
             $this->loadComponent('Business');
-            $this->Business->usermsg($savant->user_id, '专家申请新消息', '您的专家申请审核通过啦！', 5, $savant->id);
+            $this->Business->usermsg($user->user_id, '专家申请新消息', '您的专家申请审核通过啦！', 5, $user->id);
             return $this->Util->ajaxReturn(true, '审核通过');
         } else {
             return $this->Util->ajaReturn(false, '系统错误');

@@ -38,7 +38,7 @@ $this->start('static') ?>
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                [ '提现金额', '银行卡号', '银行', '持卡人姓名', '手续费', '备注', '状态', '创建时间', '更改时间', '操作'],
+                                [ '提现金额', '银行卡号', '银行', '持卡人姓名', '手续费', '备注', '状态','操作人', '创建时间', '更改时间', '操作'],
                         colModel: [
                             {name: 'amount', editable: true, align: 'center'},
                             {name: 'cardno', editable: true, align: 'center'},
@@ -46,14 +46,17 @@ $this->start('static') ?>
                             {name: 'truename', editable: true, align: 'center'},
                             {name: 'fee', editable: true, align: 'center'},
                             {name: 'remark', editable: true, align: 'center'},
-                            {name: 'status', editable: true, align: 'center',function(cellvalue, options, rowObject){
+                            {name: 'status', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
                                     switch(cellvalue){
                                         case 0:
                                             return '未审核';
                                         case 1:
                                             return '审核通过';
+                                        case 2:
+                                            return '审核不通过';
                                     }
                             }},
+                            {name: 'admin.truename', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
@@ -83,7 +86,8 @@ $this->start('static') ?>
 
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
+                    response = '<a title="审核通过" onClick="pass(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
+                    response += '<a title="审核不通过" onClick="unpass(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-remove-circle"></i> </a>';
                     response += '<a title="编辑" href="/admin/withdraw/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     return response;
                 }
@@ -142,6 +146,48 @@ $this->start('static') ?>
                         shade: 0.8,
                         area: ['380px', '70%'],
                         content: url//iframe的url
+                    });
+                }
+                
+                function pass(id) {
+                    layer.confirm('确定通过审核，打款给该用户？', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                        $.ajax({
+                            type: 'post',
+                            data: {id: id},
+                            dataType: 'json',
+                            url: '/admin/withdraw/pass',
+                            success: function (res) {
+                                layer.msg(res.msg);
+                                if (res.status) {
+                                    $('#list').trigger('reloadGrid');
+                                }
+                            }
+                        })
+                    }, function () {
+                    });
+                }
+                function unpass(id) {
+                    //需要引入layer.ext.js文件
+                    layer.prompt({
+                        title: '请输入审核不通过的理由',
+                        btn: ['确认', '取消'], //按钮
+                        formType: 2, // input.type 0:text,1:password,2:textarea
+                    }, function (pass) {
+                        $.ajax({
+                            type: 'post',
+                            data: {id:id,remark:pass},
+                            dataType: 'json',
+                            url: '/admin/withdraw/unpass',
+                            success: function (res) {
+                                layer.msg(res.msg);
+                                if (res.status) {
+                                    $('#list').trigger('reloadGrid');
+                                }
+                            }
+                        });
+                    }, function () {
                     });
                 }
 </script>

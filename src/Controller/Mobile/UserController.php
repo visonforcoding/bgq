@@ -239,10 +239,13 @@ class UserController extends AppController {
                     'keyField' => 'id',
                     'parentField' => 'pid'
                 ])->where("`id` != '3'")->hydrate(false)->toArray();
-        
+        //地区标签
+        $RegionTable = \Cake\ORM\TableRegistry::get('Region');
+        $regions = $RegionTable->find()->toArray();
         $this->set([
             'industries'=>$industries,
             'agencys'=>$agencies,
+            'regions'=>$regions,
             'pageTitle'=>'注册'
         ]);
         $this->render('register2');

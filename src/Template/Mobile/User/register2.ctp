@@ -5,24 +5,11 @@
             注册
         </h1>
     </div>
-    <!--<div class="h-home-bottom">
-        <div><span><img src="../images/home-pic.png"/></span><i class="iconfont">&#xe61e;</i></div>
-        <h3>杨涛<span>IDG资本 董事长</span></h3>
-    </div>-->
 </header>
 <div class="wraper">
     <div class="h2"></div>
     <form>
         <ul class="h-info-box e-info-box">
-            <li>
-                <a id="uploadPic" href="javascript:void(0);">
-                    <span>我的名片：</span>
-                    <div class="upload-user-img">
-                        <span class="mcard"><img src="../images/user-img.png"/></span>
-                    
-                    </div>
-                </a>
-            </li>
             <li class="no-right-ico">
                 <a href="javascript:void(0);">
                     <span>姓名：</span>
@@ -41,28 +28,39 @@
             </li>
             <li class="no-right-ico">
                 <a href="javascript:void(0);">
-                    <span>职务：</span>
+                    <span>部门职务：</span>
                     <div >
                         <input name="position" type="text"  />
                     </div>
                 </a>
             </li>
-
             <li class="no-right-ico">
                 <a href="javascript:void(0);">
-                    <span>邮箱：</span>
+                    <span>城市：</span>
                     <div>
-                        <input name="email" type="text"  />
+                        <select name="city">
+                        <?php foreach ($regions as $region):?>
+                            <option value="<?=$region->name?>"><?=$region->name?></option>
+                        <?php endforeach;?>
+                        </select>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a id="uploadPic" href="javascript:void(0);">
+                    <span>我的名片：</span>
+                    <div  class="upload-user-img">
+                        <input  name="card_path" type="hidden" value=""/>
+                        <span class="m-card"></span>
                     </div>
                 </a>
             </li>
         </ul>
     </form>
     <!--机构类型-->
-    <div class='h2'></div>
     <div class="markbox border" id="cart">
         <div class="a-s-title bgff">
-            <span class="">请选择机构类型<i class="orgtext"></i></span>
+            <span class="orgname">请选择机构类型<i class="orgtext"></i></span>
         </div>
         <div class="markslider">
             <div class="mark-items" id="org">
@@ -110,7 +108,7 @@
     <!--行业标签-->
     <div class="markbox border" id="classfy">
         <div class="a-s-title bgff">
-            <span class="">请选择行业标签(最多4个)<!--<i class="classfytext"></i>--></span>
+            <span class="orgname">请选择行业标签(最多4个)<!--<i class="classfytext"></i>--></span>
         </div>
         <div class="markslider">
             <div class="classfytext">
@@ -149,18 +147,18 @@
         classfy.on('tap', function () {  //行业
             var that = $(this);
             fixed(that);
-            window.scrollTo(0,9999);
+            window.scrollTo(0, 9999);
         });
         $('#industry .cart>li').on('tap', function () {  //行业sub
             var industry_id = $(this).data('val');
             var choose = $('.classfytext [data-val="' + industry_id + '"]');
-            if(choose.length){
+            if (choose.length) {
                 $(this).children('a').removeClass('active');
                 choose.remove();
                 return;
             }
             $(this).children('a').addClass('active');
-            $('.classfytext').append('<a class="industry_item" data-val="' + industry_id + '" href="javascript:void(0)">' + $(this).text() + '<i class="closed">&times;</i></a>');
+            $('.classfytext').append('<a class="industry_item" data-val="' + industry_id + '" href="javascript:void(0)">' + $(this)[0].innerText + '</a>');
         });
         cart.on('tap', function () {//机构
             var that = $(this);
@@ -170,10 +168,9 @@
         $('#org .cart>li').on('tap', function () {  //机构sub
             agency = $(this).data('val');
             $('.orgtext').html($(this)[0].innerText);
-             $('#org a').removeClass('active');
-             $(this).children('a').addClass('active');
             return;
-                     
+            $('#org a').removeClass('active');
+            $(this).children('a').addClass('active');
             $(this).parents('.cart1').hide();
             $('#org span').removeClass('active');
         })

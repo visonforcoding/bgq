@@ -35,7 +35,7 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/meetSubject/getDataList",
+                        url: "/admin/meetSubject/getDataList<?php if(isset($user_id)):?>/<?=$user_id?><?php endif;?>",
                         datatype: "json",
                         mtype: "POST",
                         colNames:
@@ -135,7 +135,7 @@
                     searchData['sidx'] = sortColumnName;
                     searchData['sort'] = sortOrder;
                     var searchQueryStr = $.param(searchData);
-                    $("body").append("<iframe src='/admin/meetSubject/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                    $("body").append("<iframe src='/admin/meetSubject/exportExcel<?php if(isset($user_id)):?>/<?=$user_id?><?php endif;?>?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
 
                 function doView(id) {
