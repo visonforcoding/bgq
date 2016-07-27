@@ -658,7 +658,9 @@ class HomeController extends AppController {
      */
     public function editUserinfo() {
         $user_id = $this->user->id;
-        $user = $this->User->get($user_id);
+        $user = $this->User->get($user_id, [
+            'contain' => ['Educations', 'Careers']
+        ]);
         if ($this->request->is('post')) {
             $user = $this->User->patchEntity($user, $this->request->data());
             if ($this->User->save($user)) {
@@ -872,7 +874,12 @@ class HomeController extends AppController {
         $user_id = $this->user->id;
         $userInfo = $this->User->get($user_id);
         if ($this->request->is('post')) {
-            $userInfo->grbq = serialize($this->request->data('tags'));
+            if(is_array($this->request->data('tags')))
+            {
+                $userInfo->grbq = serialize($this->request->data('tags'));
+            }else{
+                $userInfo->grbq = '';
+            }
             if ($this->User->save($userInfo)) {
                 return $this->Util->ajaxReturn(true, '更新成功');
             } else {

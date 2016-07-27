@@ -40,14 +40,6 @@
                 </div>
             </a>
         </li>
-        <li class="no-right-ico">
-            <a href="javascript:void(0)">
-                <span>职务：</span>
-                <div >
-                    <input type="position" name="position" value="<?=$user->position?>" />
-                </div>
-            </a>
-        </li>
         <li>
             <a href="javascript:void(0)">
                 <span>性别：</span>
@@ -61,6 +53,14 @@
                 </div>
             </a>
         </li>
+        <li class="no-right-ico">
+            <a href="javascript:void(0)">
+                <span>部门职务：</span>
+                <div >
+                    <input type="position" name="position" value="<?=$user->position?>" />
+                </div>
+            </a>
+        </li>
     </ul>
     <ul class="h-info-box e-info-box">
         <li class="no-right-ico">
@@ -71,20 +71,21 @@
                 </div>
             </a>
         </li>
-        <li class="no-right-ico">
+<!--        <li class="no-right-ico">
             <a href="javascript:void(0)">
                 <span>邮箱：</span>
                 <div>
                     <input type="email" name="email" value="<?=$user->email?>" />
                 </div>
             </a>
-        </li>
+        </li>-->
     </ul>
     <ul class="h-info-box e-info-box">
         <li>
             <a href="/home/edit_industries">
                 <span>行业：</span>
                 <div>
+                    <span></span>
                 </div>
             </a>
         </li>
@@ -100,7 +101,11 @@
             <a href="/home/my-business">
                 <span>擅长业务：</span>
                 <div>
-                    <span></span>
+                    <span>
+                        <?php if(!$user->goodat): ?>
+                        未完善
+                        <?php endif; ?>
+                    </span>
                 </div>
             </a>
         </li>
@@ -108,7 +113,11 @@
             <a href="/home/edit-company-business">
                 <span>公司业务：</span>
                 <div>
-                    <span></span>
+                    <span>
+                        <?php if(!$user->gsyw): ?>
+                        未完善
+                        <?php endif; ?>
+                    </span>
                 </div>
             </a>
         </li>
@@ -119,15 +128,23 @@
             <a href="/home/edit-education">
                 <span>教育经历：</span>
                 <div>
-                    <span></span>
+                    <span>
+                        <?php if(!$user->educations): ?>
+                        未完善
+                        <?php endif; ?>
+                    </span>
                 </div>
             </a>
         </li>
         <li>
-            <a  href="/home/edit-work">
+            <a href="/home/edit-work">
                 <span>工作经历：</span>
                 <div>
-                    <span></span>
+                    <span>
+                        <?php if(!$user->careers): ?>
+                        未完善
+                        <?php endif; ?>
+                    </span>
                 </div>
             </a>
         </li>
@@ -137,7 +154,7 @@
             <a href="/home/edit-card">
                 <span >我的名片：</span>
                 <div class="upload-user-img">
-                    <span class="m-card"><input type="text"/></span>
+                    <span class="mcard"><img src="<?= $user->card_path ?>"/></span>
                 </div>
             </a>
         </li>
@@ -145,7 +162,11 @@
             <a href="/home/edit-mark">
                 <span>个人标签：</span>
                 <div>
-                    <span></span>
+                    <span>
+                        <?php if(!$user->grbq): ?>
+                        未完善
+                        <?php endif; ?>
+                    </span>
                     </div>
                 </a>
             </li>

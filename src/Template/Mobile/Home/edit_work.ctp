@@ -104,8 +104,8 @@
         $('.wraper .education-items').eq(0).clone(true,true).insertBefore('.add-subject').show();
     }
 </script>
-<script src="/mobile/js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
-<script src="/mobile/js/mobiscroll.2.13.2.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="/mobile/js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+<script src="/mobile/js/mobiscroll.2.13.2.js" type="text/javascript" charset="utf-8"></script>-->
 <script src="/mobile/js/util.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript">
