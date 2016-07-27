@@ -358,7 +358,7 @@ class HomeController extends AppController {
                              * 活动收藏记录
                              */
                             public function myCollectActivity() {
-                                $this->set(['pageTitle' => '活动收藏']);
+                                $this->set(['pageTitle' => '我的收藏']);
                             }
                             
                             /**
