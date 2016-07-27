@@ -34,15 +34,13 @@
         <li>
             <a id="recom" href="javascript:void(0);" class="tocommend"><i class="iconfont f7 <?php if($isReco): ?>color-items<?php endif; ?>">&#xe61a;</i>推荐他</a>
             <span  class="commendnum">
-                <p id="recom_avatar">
+                <a href="/meet/view-more-reco/<?= $biggie->id ?>" class="alink-list">
                     <!-- 只推荐7条 -->
 
                     <?php foreach ($biggie->reco_users as $reco_user): ?>
-                        <a href="/user/home-page/<?= $reco_user->user->id; ?>">
-                            <img src="<?= empty($reco_user->user->avatar) ? '/mobile/images/touxiang.jpg' : $reco_user->user->avatar ?>"/>
-                        </a>
+                        <img src="<?= empty($reco_user->user->avatar) ? '/mobile/images/touxiang.jpg' : $reco_user->user->avatar ?>"/>
                     <?php endforeach; ?>
-                </p>
+                </a>
                 <!-- 等<i id="meet_nums"><?= $biggie->savant->reco_nums ?></i>人推荐 -->
                <!--  <a href="/meet/view-more-reco/<?= $biggie->id ?>" class="fr">更多</a> -->
             </span>

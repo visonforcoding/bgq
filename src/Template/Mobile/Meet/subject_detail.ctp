@@ -15,11 +15,6 @@
             <li >
                 <h3><?=$subject->title?><span><?=$subject->user->truename?> <?=$subject->user->company?> <?=$subject->user->position?></span></h3>
                 <span class="meet-type">
-                    <?php if($subject->type==2):?>
-                    一对多面谈
-                    <?php else:?>
-                    一对一面谈
-                    <?php endif;?>
                 </span>
             </li>
             <li>
@@ -30,12 +25,12 @@
                 <p><?=$subject->summary?>
                 </p>
             </li>
-            <li>
+<!--            <li>
                 <div>
                     <span>地点：<?=$subject->address?></span>
                     <span>时间：<?=$subject->invite_time?></span>
                 </div>
-            </li>
+            </li>-->
         </ul>
     </section>
     <a href="/meet/book/<?=$subject->id?>" id="submit" class="nextstep">预约</a>
