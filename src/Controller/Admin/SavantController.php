@@ -12,8 +12,7 @@ use Wpadmin\Controller\AppController;
  * @property \App\Model\Table\UserTable $User
  */
 class SavantController extends AppController {
-    
-    
+
     public function initialize() {
         parent::initialize();
         $this->loadModel('User');
@@ -73,24 +72,20 @@ class SavantController extends AppController {
      */
     public function edit($id = null) {
         $savant = $this->User->get($id, [
-            'contain' => ['Savant','Subjects']
+            'contain' => ['Savant', 'Subjects']
         ]);
 //        debug($savant);die;
         if ($this->request->is(['post', 'put'])) {
-            $savant = $this->Savant->patchEntity($savant, $this->request->data);
-            if ($this->Savant->save($savant)) {
+            $savant = $this->User->patchEntity($savant, $this->request->data);
+            $savant->dirty('savant', true);
+            if ($this->User->save($savant, ['associated' => ['Savant']])) {
                 $this->Util->ajaxReturn(true, '修改成功');
             } else {
                 $errors = $savant->errors();
                 $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
-        $selUserIds = [];
-        if($savant->user)
-        {
-            $selUserIds[] = $savant->user->id;
-        }
-        $this->set(compact('savant', 'users', 'selUserIds'));
+        $this->set(compact('savant', 'users'));
     }
 
     /**
@@ -126,9 +121,14 @@ class SavantController extends AppController {
         $sort = 'User.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
+        $savant_status = $this->request->data('savant_status');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = ['User.savant_status >'=>1];
+        $where = ['User.savant_status >' => 1];
+        if ($savant_status > 1) {
+            $where = ['User.savant_status' => $savant_status];
+        }
+
         if (!empty($keywords)) {
             $where[' User.truename like'] = "%$keywords%";
         }
@@ -137,7 +137,7 @@ class SavantController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $query = $this->User->find()->select(['User.id','User.meet_nums','User.truename','Savant.reco_nums','User.savant_status','Savant.xmjy','Savant.zyys','Savant.summary'])
+        $query = $this->User->find()->select(['User.id', 'User.meet_nums', 'User.truename', 'Savant.reco_nums', 'User.savant_status', 'Savant.xmjy', 'Savant.zyys', 'Savant.summary'])
                 ->contain(['Savant']);
         if (!empty($where)) {
             $query->where($where);
@@ -176,6 +176,11 @@ class SavantController extends AppController {
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
+        $savant_status = $this->request->data('savant_status');
+        if ($savant_status > 1) {
+            $where = ['User.savant_status' => $savant_status];
+        }
+
         if (!empty($keywords)) {
             $where[' username like'] = "%$keywords%";
         }
@@ -200,17 +205,17 @@ class SavantController extends AppController {
         $filename = 'Savant_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
-    
+
     /**
      * 审核通过
      * @param int $id 专家id
      */
-    public function pass($id){
+    public function pass($id) {
         $user = $this->User->get($id);
         $user->level = 2;
         $user->savant_status = 3;
         $res = $this->User->save($user);
-        if($res){
+        if ($res) {
             $this->loadComponent('Business');
             $this->Business->usermsg($user->user_id, '专家申请新消息', '您的专家申请审核通过啦！', 5, $user->id);
             return $this->Util->ajaxReturn(true, '审核通过');
@@ -218,12 +223,12 @@ class SavantController extends AppController {
             return $this->Util->ajaReturn(false, '系统错误');
         }
     }
-    
+
     /**
      * 审核不通过
      * @param int $id 专家id
      */
-    public function unpass($id){
+    public function unpass($id) {
         $data = $this->request->data;
         $user = $this->User->get($id);
         $user->level = 2;
@@ -232,7 +237,7 @@ class SavantController extends AppController {
         $user->savant_status = 0;
         $user->reason = $data['reason'];
         $res = $this->User->save($user);
-        if($res){
+        if ($res) {
             $this->loadComponent('Business');
             $this->Business->usermsg($id, '专家申请新消息', '您的专家申请审核不通过！原因为：' . $data['reason'], 5, $id);
             return $this->Util->ajaxReturn(true, '审核不通过');
@@ -240,27 +245,28 @@ class SavantController extends AppController {
             return $this->Util->ajaReturn(false, '系统错误');
         }
     }
-    
+
     /**
      * 
      */
-    public function getRandomSavants(){
+    public function getRandomSavants() {
         $tags = $this->request->query('tags');
         //拥有该标签的所有专家
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $UserTable->displayField('id');
         $savants = $UserTable->find('list')
-                        ->distinct(['User.id'])
-                        ->select(['id'])
-                        ->matching('Industries', function($q)use($tags) {
-                            return $q->where(['Industries.id in' =>$tags ]);
-                        })->where(['User.level'=>2])->order('rand()')->limit(4)
-                        ->toArray();
-        $savants = array_values($savants);               
-        $res = ['ids'=>$savants];
+                ->distinct(['User.id'])
+                ->select(['id'])
+                ->matching('Industries', function($q)use($tags) {
+                    return $q->where(['Industries.id in' => $tags]);
+                })->where(['User.level' => 2])->order('rand()')->limit(4)
+                ->toArray();
+        $savants = array_values($savants);
+        $res = ['ids' => $savants];
         $this->response->type('json');
         $this->response->body(json_encode($res));
         $this->response->send();
         $this->response->stop();
     }
+
 }

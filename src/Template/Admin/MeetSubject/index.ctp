@@ -39,15 +39,11 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['专家', '标题', '简介', '类型', '约见时间', '价格', '地址', '持续时间', '操作'],
+                                ['专家', '标题', '价格', '持续时间', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'title', editable: true, align: 'center'},
-                            {name: 'summary', editable: true, align: 'center'},
-                            {name: 'type', editable: true, align: 'center', formatter: typeFormatter},
-                            {name: 'invite_time', editable: true, align: 'center'},
                             {name: 'price', editable: true, align: 'center'},
-                            {name: 'address', editable: true, align: 'center'},
                             {name: 'last_time', editable: true, align: 'center', formatter: lasttimeFrormatter},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
@@ -146,7 +142,7 @@
                         title: '查看详情',
                         shadeClose: true,
                         shade: 0.8,
-                        area: ['380px', '70%'],
+                        area: ['35%', '70%'],
                         content: url//iframe的url
                     });
                 }
