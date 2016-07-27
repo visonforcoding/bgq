@@ -669,6 +669,8 @@ border-radius: 50%;}
 }
 .e-info-box li.u-img{line-height:1rem;height:auto;padding:0.1rem 0;}
 .e-info-box li.u-img .upload-user-img{height: 1rem;width: 1rem;border-radius: 0.3rem;}
+.upload-user-img .mcard{margin-top:.05rem;}
+.mcard img{width:0.46rem;height:auto;}
 .h-info-box li span{float:left;display: block;font-size:0.3rem;}
 .h-info-box li div{float:right;}
 .e-info-box .upload-user-img span.m-card{display:block;width:0.46rem;height:0.38rem;background: url(../images/user-img.png) no-repeat;background-size:contain;}
@@ -993,8 +995,12 @@ width:0.5rem;height:0.16rem;display: inline-block;transition: all .3s;float:righ
 	.a-search .s-con input{font-size:16px;height:34px;}
 }
 .orgtext{font-size:.26rem;color:#ccc;margin-left:.2rem;}
-.classfytext {padding:0 .3rem;background: #fff;overflow: hidden;}
-.classfytext a{background: #e1e1e1;padding:.1rem;font-size:.24rem;color:#222;border-radius: .1rem;margin:.1rem .03rem;display: inline-block;}
+.classfytext {padding:0 .4rem;background: #fff;overflow: hidden;font-size:0;}
+.classfytext a{background: #e1e1e1;height:.4rem;line-height:.4rem;font-size:.26rem;color:#222;border-radius: .06rem;margin:.1rem;display: inline-block;position:relative;width:22%;overflow:hidden;text-indent: .15rem;}
+.orgtext{background: #e1e1e1;padding:.05rem .3rem .05rem .1rem;font-size:.24rem;color:#222;position:relative;border-radius: .06rem;}
+/*@media only screen and (min-width: 414px){
+	.classfytext a{height:34px;line-height: 34px;}
+}*/
 /*上传名片*/
  .imgcut{width:100%;max-width: 750px;overflow: hidden;}
 .imgcut img{width:100%;height:auto;}
@@ -1010,3 +1016,4 @@ width:0.5rem;height:0.16rem;display: inline-block;transition: all .3s;float:righ
 .btn .on{margin-left:0.01rem;float:left;background: lightgreen;}
 .btn .off{margin-right:0.01rem;float:right;background: lightgray;}
 .wraper .nopr{padding-right:0;}
+.classfytext .closed,.orgtext .closed{position:absolute;right:0.04rem;color:#888;font-size:0.24rem;font-weight: bold;}
