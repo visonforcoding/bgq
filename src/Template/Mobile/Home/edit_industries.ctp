@@ -1,5 +1,5 @@
 <div id="app" class="wraper">
-    <h1 class='choose-org-type innerwaper'>请选择业务标签(可多选)</h1>
+    <h1 class='choose-org-type innerwaper'>请选择业务标签(最多4个)</h1>
         <?php foreach ($industries as $key => $industry): ?>
         <div class="items">
             <div class="orgtitle  innerwaper">
@@ -29,19 +29,23 @@
     <a href="javascript:void(0)" id="submit" class='nextstep'>保存</a>
 </div>
 <?php $this->start('script') ?>
-<script src="/mobile/js/jquery-1.6.1.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="/mobile/js/register.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="/mobile/js/jquery-1.6.1.min.js" type="text/javascript" charset="utf-8"></script>-->
+<!--<script src="/mobile/js/register.js" type="text/javascript" charset="utf-8"></script>-->
 <script src="/mobile/js/util.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var agency,formdata;
     $(function(){
-       $('#submit').click(function(){
-         agency = [];
-         formdata = {};
-           $('.agency-item.active').each(function(i,elm){
-               agency.push($(elm).data('val'));
-           });
-         formdata['industries[_ids]'] = agency;
+       $('#submit').on('tap', function(){
+        agency = [];
+        formdata = {};
+          $('.agency-item.active').each(function(i,elm){
+              agency.push($(elm).data('val'));
+          });
+        formdata['industries[_ids]'] = agency;
+        if(formdata['industries[_ids]'].length>4){
+           $.util.alert('行业标签最多只能选择4个');
+           return;
+        }
 //         formdata['industries'] = agency;
          var extra_industry = $('#extra_industry').val();
          if(extra_industry !==''&&$('#extra_industry').parent().hasClass('active')){
@@ -64,6 +68,24 @@
                $.util.alert('请先选择您所在行业标签');
            }
        });
+    });
+    
+    $('.items>.orgmark>a').on('tap', function(){
+        if($(this).hasClass('active')){
+            $(this).removeClass('active');
+        } else {
+            $(this).addClass('active');
+        }
+    });
+    
+    $('.orgname').on('tap', function(){
+        if($(this).hasClass('bgorgname')){
+            $(this).removeClass('bgorgname');
+            $(this).parents('.orgtitle').siblings().show(200);
+        } else {
+            $(this).addClass('bgorgname');
+            $(this).parents('.orgtitle').siblings().hide(200);
+        }
     });
 </script>
 <?php

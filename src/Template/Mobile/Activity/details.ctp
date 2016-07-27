@@ -13,7 +13,7 @@
             <p>主办单位：<?= $activity->company; ?></p>
             <p>时间：<?= $activity->time; ?></p>
             <p>地点：<?= $activity->address; ?></p>
-            <p>规模：<?= $activity->scale; ?></p>
+            <p>规模：<?= $activity->scale; ?>人</p>
             <div class="a-other-info innercon ac">
                 <a><?= $activity->region->name; ?></a>
                 <?php foreach ($activity->industries as $k => $v): ?>
@@ -55,13 +55,13 @@
         <section class="newscomment-box joinnumber">
             <h3 class="comment-title">
                 已报名
-                <a href="/activity/allEnroll/<?= $activity->id ?>" class="allentrol">查看全部</a>
+                <!--<a href="/activity/allEnroll/<?= $activity->id ?>" class="allentrol">查看全部</a>-->
             </h3>
             <div class="items  nobottom">
                 <div class="comm-info t-ablock" id="allEnroll">
                     <?php if ($userApply): ?>
                         <?php foreach ($userApply as $k => $v): ?>
-                            <a href='/user/home-page/<?= $v['id'] ?>'><img src="<?= $v['avatar'] ? $v['avatar'] : '/mobile/images/touxiang.png'; ?>"/></a>
+                            <a href='javascript:void(0)'><img src="<?= $v['avatar'] ? $v['avatar'] : '/mobile/images/touxiang.png'; ?>"/></a>
                         <?php endforeach; ?>
                     <?php else : ?>
                         <div style="font-size: 0.32rem;color: #7a7d82;text-align: center;line-height: 0.62rem;">暂时无人报名</div>
@@ -136,14 +136,36 @@
         <?php if($activity->apply_end_time < time()): ?>
             <a style="background:gray;" class="r-btn">我要报名</a>
         <?php else: ?>
-            <?php if (empty($activity->activityapply)): ?>
-                <a  class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
-            <?php else: ?>
-                <?php if($activity->activityapply['0']->is_pass == 0): ?>
-                    <a href="/wx/meet_pay/2/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
-                <?php elseif($activity->activityapply['0']->is_pass == 1): ?>
-                    <a class="r-btn">已报名</a>
+            <!--报名人数-->
+            <?php if($activity->apply_nums < $activity->scale): ?>
+                <!--是否要审核-->
+                <?php if($activity->must_check): ?>
+                    <?php if (empty($activity->activityapply)): ?>
+                        <a  class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                    <?php else: ?>
+                        <?php if($activity->activityapply['0']->is_pass == 0): ?>
+                            <?php if($activity->activityapply['0']->is_check): ?>;
+                                <a href="/wx/meet_pay/2/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
+                            <?php else: ?>
+                                <a class="r-btn">审核中</a>
+                            <?php endif; ?>
+                        <?php elseif($activity->activityapply['0']->is_pass == 1): ?>
+                            <a class="r-btn">已报名</a>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <?php if (empty($activity->activityapply)): ?>
+                        <a  class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                    <?php else: ?>
+                        <?php if($activity->activityapply['0']->is_pass == 0): ?>
+                            <a href="/wx/meet_pay/2/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
+                        <?php elseif($activity->activityapply['0']->is_pass == 1): ?>
+                            <a class="r-btn">已报名</a>
+                        <?php endif; ?>
+                    <?php endif; ?>
                 <?php endif; ?>
+            <?php else: ?>
+                <a class="r-btn">报名人数已满</a>
             <?php endif; ?>
         <?php endif; ?>
     </div>

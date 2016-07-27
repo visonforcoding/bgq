@@ -476,4 +476,7 @@ ALTER TABLE `activity`
 	CHANGE COLUMN `scale` `scale` INT NOT NULL COMMENT '规模' AFTER `address`;
 
 ALTER TABLE `activity`
+	ADD COLUMN `must_check` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '0不需要1需要 报名审核' AFTER `address`;
+
+ALTER TABLE `activity`
 	CHANGE COLUMN `must_check` `must_check` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '0不需要1需要 报名审核' AFTER `address`;

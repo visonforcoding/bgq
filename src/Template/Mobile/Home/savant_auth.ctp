@@ -38,7 +38,9 @@
     <?php if($user->savant_status==0): ?>
         <a id="submit" class="nextstep">重新申请认证</a>
     <?php endif; ?>
-   <div class="line"><span class="mistips">我们会在三个工作日内处理您的申请</span></div>
+    <?php if($user->savant_status!=3): ?>
+    <div class="line"><span class="mistips">我们会在三个工作日内处理您的申请</span></div>
+    <?php endif; ?>
 </div>
 <div class="reg-shadow" id="shadow" hidden></div>
 <div class="tips" hidden id="xmjy" style="z-index: 999">
@@ -51,6 +53,14 @@
 <script>
     $(function () {
         $('#submit').on('click', function () {
+            if($('textarea[name="xmjy"]').val() == ''){
+                $.util.alert('请填写项目经验');
+                return;
+            }
+            if($('textarea[name="zyys"]').val() == ''){
+                $.util.alert('请填写擅长话题');
+                return;
+            }
             $form = $('form');
             $.ajax({
                 type: 'post',
@@ -60,7 +70,11 @@
                 success: function (msg) {
                     if (typeof msg === 'object') {
                         $.util.alert(msg.msg);
-                        window.location.href = '/home/index';
+                        if(msg.status){
+                            setTimeout(function(){
+                                window.location.href = '/home/index';
+                            }, 2000);
+                        }
                     }
                 }
             });

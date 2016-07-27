@@ -59,7 +59,7 @@ class SavantTable extends Table
              ->notEmpty('xmjy','项目经验不可为空', 'create');
         
         $validator
-             ->notEmpty('zyys', '资源优势不可为空', 'create');
+             ->notEmpty('zyys', '擅长话题不可为空', 'create');
 
 
         return $validator;
