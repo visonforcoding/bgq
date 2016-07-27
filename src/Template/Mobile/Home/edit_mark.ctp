@@ -43,7 +43,7 @@
     <a  id="submit" href="#this" class='nextstep'>保存</a>
 </div>
 <?php $this->start('script') ?>
-<script src="/mobile/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="/mobile/js/jquery.js" type="text/javascript" charset="utf-8"></script>-->
 <script src="/mobile/js/util.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var agency, formdata;
