@@ -40,7 +40,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 
 .b-mark li:nth-of-type(3n){margin-right:0;}
 .b-mark li span.active{display: block;}
-.b-mark li a{display: block;border-right:1px #e5e5e5 solid;height:.58rem;line-height: .56rem;}
+.b-mark li a{display: block;border-right:1px #e5e5e5 solid;height:.6rem;line-height: .58rem;}
 .b-mark li:last-of-type a{border-right: 0;}
 .b-mark a.active{background: #e01b49;color:#fff;/*border:1px #e01b49 solid;*/}
 .b-mark .perli{width:100%;}
@@ -51,6 +51,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .mark-items .cart{margin-top:-2px;border:none;max-height:0; display: none;/*height:0;*/}
 .mark-items .shows{max-height:200px;-webkit-transition: max-height  2s ease;transition:max-height 2s ease-in-out;display: block;}
 .mark-items .hide{max-height: 0;-webkit-transition: max-height  .6s ease;transition:max-height 2s ease; display: none;}
+
 /*.orgmark a:nth-of-type(4n){margin-right:0;}*/
 .nextstep,.s-btn{ display:block;text-align:center;height:0.78rem;width:80%;font-size:0.3rem;line-height:0.78rem;background: #e01a48;color:#fff;margin:0 auto;margin-top:0.4rem;margin-bottom:0.4rem;border-radius:0.2rem;}
 .f-bottom{position: fixed;width: 100%;height: 1rem;bottom: 0;border-radius: 0;color: #fff;
@@ -173,7 +174,7 @@ color:#7a7d82;font-size:.24rem;}
 .line .bgff{background: #fff;}
 .newscomment-box .no-bottom{border-bottom:none;}
 .t-ablock{font-size:0;}
-.t-ablock a{display:inline-block;width:0.62rem;height:0.62rem;overflow:hidden;border-radius:0.31rem;margin:0 0.07rem;}
+.t-ablock a,.t-ablock img{display:inline-block;width:0.62rem;height:0.62rem;overflow:hidden;border-radius:0.31rem;margin:0 0.07rem;}
 .comm-info{height:0.62rem;color:#7a7e83;}
 .entrollist .comm-info{height:auto;}
 .comm-info span{ display: block;float:left;}
@@ -429,10 +430,12 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .m-info-box li .mycustorm{font-weight: 100;margin-top:0.1rem;font-size:0.32rem;color:#808080}
 .m-info-box li:first-of-type span{margin-top:0.1rem;}
 .m-info-box li:first-of-type span,.m-info-box li:nth-of-type(2) a{float:right;line-height:0.4rem;}
+.m-info-box li a.alink-list{float:left;}
+a.alink-list img{width:.5rem;height:.5rem;border-radius: 50%;}
 .m-info-box .m-page i{color:#ff7e53;}
 .m-info-box .alink{color:#888;}
 .m-page span{font-size:.28rem;color:#888;}
-.m-info-box li a.tocommend{float:left;margin-right:0.2rem;}
+.m-info-box li a.tocommend{float:left;margin-right:0.2rem;line-height: .5rem;}
 .m-info-box li h3 span{font-size:0.3rem;margin-left:0.3rem;}
 .m-info-box .identification i{border:1px #c8c7cc solid;border-radius: 0.1rem;padding:0.08rem;margin-left:0.1rem;color:#969fa9;font-size:0.26rem;}
 .m-info-box li p{display: inline-block;margin-left:.1rem;}
@@ -998,8 +1001,16 @@ width:0.5rem;height:0.16rem;display: inline-block;transition: all .3s;float:righ
 }
 .orgtext{font-size:.26rem;color:#ccc;margin-left:.2rem;}
 .classfytext {padding:0 .4rem;background: #fff;overflow: hidden;font-size:0;}
+<<<<<<< .mine
+.classfytext a{background: #e1e1e1;height:.4rem;line-height:.4rem;font-size:.26rem;color:#222;border-radius: .06rem;margin:.1rem;display: inline-block;position:relative;width:22%;overflow:hidden;text-indent: .15rem;}
+.orgtext{background: #e1e1e1;padding:.05rem .3rem .05rem .1rem;font-size:.24rem;color:#222;position:relative;border-radius: .06rem;display: none;}
+||||||| .r2237
+.classfytext a{background: #e1e1e1;height:.4rem;line-height:.4rem;font-size:.26rem;color:#222;border-radius: .06rem;margin:.1rem;display: inline-block;position:relative;width:22%;overflow:hidden;text-indent: .15rem;}
+.orgtext{background: #e1e1e1;padding:.05rem .3rem .05rem .1rem;font-size:.24rem;color:#222;position:relative;border-radius: .06rem;}
+=======
 .classfytext a{background: #e1e1e1;font-size:.26rem;color:#222;border-radius: .06rem;margin:.1rem;display: inline-block;position:relative;overflow:hidden;padding: 0.08rem 0.3rem 0.08rem .1rem;}
 .orgtext{display:none;background: #e1e1e1;padding:.05rem .3rem .05rem .1rem;font-size:.24rem;color:#222;position:relative;border-radius: .06rem;}
+>>>>>>> .r2240
 /*@media only screen and (min-width: 414px){
 	.classfytext a{height:34px;line-height: 34px;}
 }*/
