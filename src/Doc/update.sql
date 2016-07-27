@@ -468,3 +468,12 @@ CREATE TABLE `activity_recommend` (
 COMMENT='活动推荐活动关系表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
+
+
+ALTER TABLE `activity`
+	ALTER `scale` DROP DEFAULT;
+ALTER TABLE `activity`
+	CHANGE COLUMN `scale` `scale` INT NOT NULL COMMENT '规模' AFTER `address`;
+
+ALTER TABLE `activity`
+	CHANGE COLUMN `must_check` `must_check` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '0不需要1需要 报名审核' AFTER `address`;
