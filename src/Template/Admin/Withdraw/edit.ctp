@@ -4,85 +4,69 @@
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($withdraw, ['class' => 'form-horizontal']) ?>
-             <div class="form-group">
-            <label class="col-md-2 control-label">对象id</label>
-                <div class="col-md-8">
-                <?php echo $this->Form->input('user_id', ['label' => false,'options' => $users,'class'=>'form-control']);?>
-                      </div>
-         </div>
-            <div class="form-group">
+    <div class="form-group">
+        <label class="col-md-2 control-label">对象</label>
+        <div class="col-md-8">
+            <?php echo $this->Form->input('user_id', ['label' => false, 'options' => $users, 'class' => 'form-control']); ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">提现金额</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('amount', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">银行卡号</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('cardno', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">银行</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('bank', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">持卡人姓名</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('truename', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">手续费</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('fee', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">备注</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('remark', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
-        <label class="col-md-2 control-label">状态,0未审核，1审核通过</label>
+    <div class="form-group">
+        <label class="col-md-2 control-label">状态</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('status', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
-        <label class="col-md-2 control-label">create_time</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('create_time', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-        <div class="form-group">
-        <label class="col-md-2 control-label">update_time</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('update_time', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-        <div class="form-group">
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
         </div>
