@@ -31,13 +31,16 @@
 		<div class="wraper">
 			<div class="h2"></div>
 			<ul class="h-info-box e-info-box">
-				<li>
+				<li class="u-img">
 					<a href="edit-card.html">
 					<span>我的名片：</span>
+					
 					<div class="upload-user-img">
-						<span class="m-card"><input type="file"/></span>
-						
+						<span class="mcard"><img src="../images/user-img.png"/></span>
+					
 					</div>
+						
+					
 					</a>
 				</li>
 			<li class="no-right-ico">
@@ -74,13 +77,14 @@
 					</a>
 				</li>
 			</ul>
+			<div class="h2"></div>
 			<!--机构类型-->
 			<div class="markbox border" id="cart">
 				<div class="a-s-title bgff">
-					<span class="orgname">请选择机构类型<i class="orgtext"></i></span>
+					<span class="orgname">请选择机构类型<a href="javascript:void(0);" class="orgtext">融资机构<i class="closed">&times;</i></a></span>
 				</div>
 				<div class="markslider">
-					<div class="mark-items">
+					<div class="mark-items" id="org">
 						
 					<ul	class="b-mark headmark">
 						<li data-target='car1tuli1' ><a href="#this">投资机构</a> <span class="icon-bottom"></span></li>
@@ -145,8 +149,9 @@
 				
 				<div class="markslider">
 					<div class="classfytext">
-					
-				</div>
+						<a href="javascript:void(0);">投资机构<i class="closed">&times;</i></a>
+						<a href="javascript:void(0);">投资机构<i class="closed">&times;</i></a>
+					</div>
 					<div class="mark-items">
 						
 					<ul	class="b-mark classfymark">
@@ -210,26 +215,27 @@
 			var cart =$('.headmark>li');
 			var allUl = $('.markbox .cart');
 			//console.log(allUl.length);
-			classfy.on('tap',function(){
+			classfy.on('tap',function(){ //行业
 				var that = $(this);
 				fixed(that);
+				 window.scrollTo(0,9999);
 			});
-			$('#classfy .cart>li').on('tap',function(){
+			$('#classfy .cart>li').on('tap',function(){//行业sub
 				$(this).children('a').addClass('active');
-				$('.classfytext').append('<a href="javascript:void(0)">'+$(this)[0].innerText+'</a>');
+$('.classfytext').append('<a href="javascript:void(0);" onclick=remove>'+$(this).text()+'<i class="closed">&times;</i></a>');
 			});
-			cart.on('tap',function(){
+			cart.on('tap',function(){//机构
 				var that = $(this);
 				fixed(that);
-				$('#cart .cart>li').on('tap',function(){
+				
+			})
+			$('#cart .cart>li').on('tap',function(){//机构sub
 				$(this).children('a').addClass('active')
 				$(this).siblings().children('a').removeClass('active');
 				$(this).parents('.cart1').hide();
 				$('.orgtext').html($(this)[0].innerText);
 				that.children('span').removeClass('active');
 			})
-			})
-			
 			function fixed(that){
 				allUl.hide();
 				var $value = that.attr('data-target');
