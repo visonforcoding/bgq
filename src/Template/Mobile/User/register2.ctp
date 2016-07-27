@@ -17,9 +17,9 @@
             <li>
                 <a id="uploadPic" href="javascript:void(0);">
                     <span>我的名片：</span>
-                    <div  class="upload-user-img">
-                        <input  name="card_path" type="hidden" value=""/>
-                        <span class="m-card"></span>
+                    <div class="upload-user-img">
+                        <span class="mcard"><img src="../images/user-img.png"/></span>
+                    
                     </div>
                 </a>
             </li>
@@ -160,7 +160,7 @@
                 return;
             }
             $(this).children('a').addClass('active');
-            $('.classfytext').append('<a class="industry_item" data-val="' + industry_id + '" href="javascript:void(0)">' + $(this)[0].innerText + '</a>');
+            $('.classfytext').append('<a class="industry_item" data-val="' + industry_id + '" href="javascript:void(0)">' + $(this).text() + '<i class="closed">&times;</i></a>');
         });
         cart.on('tap', function () {//机构
             var that = $(this);
@@ -170,9 +170,10 @@
         $('#org .cart>li').on('tap', function () {  //机构sub
             agency = $(this).data('val');
             $('.orgtext').html($(this)[0].innerText);
+             $('#org a').removeClass('active');
+             $(this).children('a').addClass('active');
             return;
-            $('#org a').removeClass('active');
-            $(this).children('a').addClass('active');
+                     
             $(this).parents('.cart1').hide();
             $('#org span').removeClass('active');
         })
