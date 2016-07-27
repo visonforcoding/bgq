@@ -69,7 +69,9 @@
         }else if($('.a-s-mark').hasClass('nblock')){
             $('.a-s-mark').removeClass('nblock').addClass('disp');
         }else{
-            $('.a-s-mark').addClass('disp');
+            setTimeout(function(){
+                $('.a-s-mark').addClass('disp');
+            },400);
         }
 
         if(search_data[industry_id]){
