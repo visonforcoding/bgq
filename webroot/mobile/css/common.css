@@ -43,11 +43,13 @@ button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);border:none;background:
 .wraper .no-b-tb{border-bottom:none;margin-top:0;}
 .wraper .no-t-border{border-top:none;}
 .wraper .pd20{margin-bottom:0.2rem;}
+.wraper .p20{padding-top:0.2rem;}
 .wraper .tr{text-align: right;}
 .wraper .tc{text-align:center;}
 .wraper .mt1{margin-top:-1px;}
 .hf20{height:0.2rem;background: #fff;border-bottom:1px #e5e5e5 solid;}
 .wraper .texthide{word-break: break-all;display: -webkit-box;/*-webkit-line-clamp: 3;限制行数*/-webkit-box-orient: vertical;overflow: hidden;}
+
 /*1px border*/
   .bd1,.bd2 {position:relative;}
 .bd1:after{width:200%;height:1px;position:absolute;bottom:0;left:0;z-index:0;content:"";-webkit-transform:scale(0.5);-webkit-transform-origin:0 0;transform:scale(0.5);transform-origin:0 0;background: #e5e5e5;}
