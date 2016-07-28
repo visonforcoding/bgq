@@ -101,9 +101,11 @@
     function setCheck(st){
         if(st == 'on'){
             $('#checkBtn i').get(0).className = 'on';
+            $('#checkBtn').removeClass().addClass('c-btn');
         }
         else{
             $('#checkBtn i').get(0).className = 'off';
+             $('#checkBtn').removeClass().addClass('btn');
         }
     }
     alert(14)
