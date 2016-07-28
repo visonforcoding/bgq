@@ -21,15 +21,16 @@
         </div>
         <div class="m-tomore-bottom">
             <span><i class="iconfont">&#xe60b;</i><?= $biggie->savant_read_nums ?></span>
-            <span><i class="iconfont">&#xe629;</i><?= $biggie->city ?></span>
+            <!--<span><i class="iconfont">&#xe629;</i><?= $biggie->city ?></span>-->
             <span><i class="iconfont">&#xe616;</i><?= $biggie->meet_nums ?>人约见过</span>
         </div>
     </div>
     <ul class="m-info-box">
-        <li>
+        <li class='e-info'>
             <h3><?= $biggie->truename ?><em><?= $biggie->position ?></em></h3>
             <!-- <span class="identification"></span> -->
             <h3 class="mycustorm" ><?= $biggie->company ?></h3>
+            <div class="u-btn meetbtn"><a href="/meet/subject_list/<?= $biggie->id ?>" class="focusbtn">立即约见</a></div>
         </li>
         <li>
             <a id="recom" href="javascript:void(0);" class="tocommend"><i class="iconfont f7 <?php if($isReco): ?>color-items<?php endif; ?>">&#xe61a;</i>推荐他</a>
@@ -50,6 +51,7 @@
     </ul>
     <div class="tabcon border bgff" >
         <ul class="inner basicon" style="display: block;">
+            <li class="b-dq"><span><i class="iconfont">&#xe660;</i>所在地区</span><div><em><?= $biggie->city ?></em></div></li>
             <li class="b-hy">
                 <span><i class="iconfont">&#xe654;</i>所在行业</span>
                 <div>
@@ -68,7 +70,7 @@
                     <?php endif; ?>
                 </div>
             </li>
-            <li class="b-yw noafter nobottom">
+            <li class="b-yw noafter">
                 <span><i class="iconfont">&#xe655;</i>擅长业务</span>
                 <div>
                     <em><?= $biggie->goodat; ?></em>
@@ -76,11 +78,16 @@
             </li>
         </ul>
     </div>
+    <div class="h2">
+    </div>
     <div class="m-swiper-items">
         <?php if ($self): ?>
-            <h3 class="s-eidt"><a href="/meet/my-subjects">编辑话题</a></h3>
+        <div class="u-btn">
+            <div class="lbtn"><a href="/meet/my_subjects" class="focusbtn">编辑话题</a></div>
+            <div class="rbtn"><a href="/meet/edit-summary" class="cardbtn">编辑简介</a></div>
+        </div>
         <?php endif; ?>
-        <ul id="subject">
+        <ul id="subject" class='mt20'>
             <?php foreach ($biggie->subjects as $v): ?>
                 <li>
                     <div class="inner-li-items">
@@ -103,9 +110,6 @@
     </div>
     <section class="a-detail newscomment-box m-about-expert">
         <h3 class="comment-title">专家简介
-            <?php if ($self): ?>
-                <a href="/meet/edit-summary" class="fr color-items">编辑</a>
-            <?php endif; ?>
         </h3>
         <p>
             <?php if (!empty($biggie->savant->summary)): ?>
