@@ -14,7 +14,7 @@
         <ul class="d-list">
             <?php foreach($subjects as $subject): ?>
                 <li>
-                    <a class="alink clearfix" href="/meet/subject/<?=$subject->id?>">
+                    <a class="alink clearfix" href="/meet/subject-detail/<?=$subject->id?>">
                     <h3><?=$subject->title?></h3>
                     <span><?= $user->truename ?> <?= $user->company ?> <?= $user->position ?></span>
                     <i class="iconfont"></i>
@@ -24,9 +24,9 @@
         </ul>
     </section>
 </div>
-<div class="submitbtn c-width">
+<!--<div class="submitbtn c-width">
     <a href="/meet/subject"><img src="/mobile/images/add-s.png"/></a>
-</div>
+</div>-->
 
 <script>
     LEMON.sys.back('/meet/view/<?= $user->id ?>');

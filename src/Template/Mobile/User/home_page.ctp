@@ -77,14 +77,22 @@
             <ul class="basicon worktab">
                 <?php if($user->careers): ?>
                     <?php foreach($user->careers as $career): ?>
-                    <a class="bbottom">
-                        <li class="inner"><span><?= $career->company ?></span></li>
+                    <a class="bd1">
+                        <li class="inner">
+                            <span>
+                                <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div><?= $career->company ?>
+                            </span>
+                        </li>
                         <span class="worktime"><?= $career->start_date ?>～<?= $career->end_date ?>，<?= $career->position ?></span>
                     </a>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <a class="bbottom">
-                        <li class="inner"><span>暂未填写</span></li>
+                    <a class="bd1">
+                        <li class="inner">
+                            <span>
+                                <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>暂未填写
+                            </span>
+                        </li>
                         <span class="worktime">暂未填写</span>
                     </a>
                 <?php endif; ?>
@@ -92,14 +100,22 @@
             <ul class="basicon worktab">
                 <?php if($user->educations): ?>
                     <?php foreach($user->educations as $education): ?>
-                    <a class="bbottom">
-                        <li class="inner"><span><?= $education->school ?></span></li>
+                    <a class="bd1">
+                        <li class="inner">
+                            <span>
+                                <div class="h-tips"><i class="iconfont">&#xe652;</i>教育经历</div><?= $education->school ?>
+                            </span>
+                        </li>
                         <span class="worktime"><?= $education->start_date ?>～<?= $education->end_date ?>，<?= $education->major ?>，<?= $educationType[$education->education] ?></span>
                     </a>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <a class="bbottom">
-                        <li class="inner"><span>暂未填写</span></li>
+                    <a class="bd1">
+                        <li class="inner">
+                            <span>
+                                <div class="h-tips"><i class="iconfont">&#xe652;</i>教育经历</div>暂未填写
+                            </span>
+                        </li>
                         <span class="worktime">暂未填写</span>
                     </a>
                 <?php endif; ?>

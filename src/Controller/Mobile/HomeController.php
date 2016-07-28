@@ -1147,6 +1147,9 @@ class HomeController extends AppController {
         }
     }
     
+    /**
+     * 找同行
+     */
     public function searchSavant($id=null){
         $this->set([
             'pageTitle'=>'找同行',
@@ -1155,6 +1158,9 @@ class HomeController extends AppController {
         
     }
     
+    /**
+     * ajax获取地区和标签
+     */
     public function getRegionAndIndustries(){
         $regionTable = \Cake\ORM\TableRegistry::get('region');
         $industryTable = \Cake\ORM\TableRegistry::get('industry');
@@ -1176,6 +1182,9 @@ class HomeController extends AppController {
         ]);
     }
     
+    /**
+     * 找同行结果
+     */
     public function getSearchRes(){
         $where = [];
         $userTable = \Cake\ORM\TableRegistry::get('user');

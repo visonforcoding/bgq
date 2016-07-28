@@ -254,11 +254,29 @@ class MeetController extends AppController {
         $this->handCheckLogin();
         $user_id = $this->user->id;
         $SubjectTable = \Cake\ORM\TableRegistry::get('MeetSubject');
+        $userTable = \Cake\ORM\TableRegistry::get('user');
+        $user = $userTable->get($user_id);
         $subjects = $SubjectTable->find()->where(['user_id'=>$user_id])->orderDesc('create_time')->toArray();
         $this->set([
             'pageTitle'=>'我的话题',
             'subjects'=>$subjects,
-            'user_id' => $user_id
+            'user' => $user
+        ]);
+    }
+    
+    /**
+     * 话题列表
+     */
+    public function subjectList($id=null){
+        $user_id = $id;
+        $SubjectTable = \Cake\ORM\TableRegistry::get('MeetSubject');
+        $userTable = \Cake\ORM\TableRegistry::get('user');
+        $user = $userTable->get($user_id);
+        $subjects = $SubjectTable->find()->where(['user_id'=>$user_id])->orderDesc('create_time')->toArray();
+        $this->set([
+            'pageTitle'=>'我的话题',
+            'subjects'=>$subjects,
+            'user' => $user
         ]);
     }
 
