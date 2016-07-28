@@ -272,6 +272,7 @@
                 $.util.alert('还没选择机构哦');
             }
             formdata['industries[_ids]'] = industry_ids;
+            formdata['city'] = city;
             //对象长度判断
             $.post('/user/register', formdata, function (res) {
                 if (res.status === true) {
@@ -307,7 +308,7 @@
                         url: "/wx/wxUploadPic/" + id + '?dir=user/mp',
                         func: function (res) {
                             if (res.status === true) {
-                                $('#img').attr('src', data.path);
+                                $('#img').attr('src', res.path);
                                 $('input[name="card_path"]').val(res.path);
                             }
                         }
