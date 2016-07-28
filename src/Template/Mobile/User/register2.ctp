@@ -36,30 +36,48 @@
                     </div>
                 </a>
             </li>
-            <li class="no-right-ico">
-                <a href="javascript:void(0);">
-                    <span>城市：</span>
-                    <div>
-                        <select name="city">
-                        <?php foreach ($regions as $region):?>
-                            <option value="<?=$region->name?>"><?=$region->name?></option>
-                        <?php endforeach;?>
-                        </select>
-                    </div>
-                </a>
-            </li>
+
             <li>
                 <a id="uploadPic" href="javascript:void(0);">
                     <span>我的名片：</span>
-                    <div  class="upload-user-img">
+                    <div class="upload-user-img">
                         <input  name="card_path" type="hidden" value=""/>
-                        <span class="m-card"></span>
+                        <span class="mcard"><img id="img" src="/mobile/images/user-img.png"/></span>
                     </div>
                 </a>
             </li>
         </ul>
+        <div class="h2"></div>
+        <div class="markbox border" id="place">
+            <div class="a-s-title bgff">
+                <span class="">请选择地区<a href="javascript:void(0);" onclick=ft(this); class="orgtxt"></a></span>
+            </div>
+            <div class="markslider">
+                <div class="mark-items">
+                    <ul	class="b-mark headmark">
+                        <li><a data-val="北京" href="#this">北京</a> </li>
+                        <li><a data-val="上海" href="#this">上海</a> </li>
+                        <li><a data-val="深圳" href="#this">深圳</a> </li>
+                    </ul>
+                    <ul	class="b-mark headmark mt1">
+                        <li><a data-val="广州" href="#this">广州</a> </li>
+                        <li><a data-val="武汉" href="#this">武汉</a> </li>
+                        <li><a data-val="成都" href="#this">成都</a> </li>
+                    </ul>
+                    <ul	class="b-mark headmark mt1">
+                        <li><a data-val="重庆" href="#this">重庆</a> </li>
+                        <li><a data-val="杭州" href="#this">杭州</a> </li>
+                        <li class="r-place"><a href="#this">其它</a><span class="icon-bottom" ></span></li>
+                    </ul>
+                    <ul class="b-input mt1">
+                        <li ><input type="text" placeholder="请输入……" /></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </form>
     <!--机构类型-->
+    <div class="h2"></div>
     <div class="markbox border" id="cart">
         <div class="a-s-title bgff">
 
@@ -142,18 +160,29 @@
 </div>
 <?php $this->start('script') ?>
 <script type="text/javascript">
-    function closedfn(that){
+    function closedfn(that) {
         that.remove();
         var da = $(that).data('val');
         console.log(da);
-        $('#industry li[data-val="'+da+'"]').children('a').removeClass('active');
+        $('#industry li[data-val="' + da + '"]').children('a').removeClass('active');
     }
-    function closedft(that){
-                $(that).text('').hide();
-                 $('#org li a').removeClass('active');
+    function closedft(that) {
+        $(that).text('').hide();
+        $('#org li a').removeClass('active');
+    }
+    function fn(that) {
+        var industry_id = $(that).data('val');
+        var choose = $('#industry li[data-val="' + industry_id + '"]');
+        if (choose.length) {
+            choose.children('a').removeClass('active');
         }
+        that.remove();
+    }
+    function ft(that) {
+        $(that).text('').hide();
+    }
     $(function () {
-        var agency = null, formdata;
+        var agency = null, formdata,city;
         var classfy = $('.classfymark>li');
         var cart = $('.headmark>li');
         var allUl = $('.markbox .cart');
@@ -163,6 +192,16 @@
             fixed(that);
             window.scrollTo(0, 9999);
         });
+        $('#place .headmark li').on('tap', function () {//地区
+            $('.b-input').hide();
+            $('.orgtxt').html($(this).text() + '<i class="closed">&times;</i>').show();
+            city = $(this).find('a').data('val');
+            console.log(city);
+        })
+        $('.r-place').on('tap', function () {
+            $('.orgtxt').hide();
+            $('.b-input').show();
+        })
         $('#industry .cart>li').on('tap', function () {  //行业sub
             var industry_id = $(this).data('val');
             var choose = $('.classfytext [data-val="' + industry_id + '"]');
@@ -173,7 +212,7 @@
             }
             $(this).children('a').addClass('active');
 
-            $('.classfytext').append('<a class="industry_item" onclick=closedfn(this); data-val="' + industry_id + '" href="javascript:void(0)">' + $(this).text() + '<i class="closed">&times;</i></a>');
+            $('.classfytext').append('<a class="industry_item" onclick=fn(this); data-val="' + industry_id + '" href="javascript:void(0)">' + $(this).text() + '<i class="closed">&times;</i></a>');
 
 
         });
@@ -184,7 +223,7 @@
 
         $('#org .cart>li').on('tap', function () {  //机构sub
             agency = $(this).data('val');
-        $('.orgtext').html($(this).text()+'<i class="closed">&times;</i>').show();
+            $('.orgtext').html($(this).text() + '<i class="closed">&times;</i>').show();
             return;
             $('#org a').removeClass('active');
             $(this).children('a').addClass('active');
@@ -204,6 +243,13 @@
         $('#submit').click(function () {
             var industry_ids = [];
             var data = $('form').serializeArray()
+            if(!city){
+                city =  $('.b-input').find('input').val();
+                if(!city){
+                    $.util.alert('还未选择城市');
+                    return;
+                }
+            }
             formdata = {};
             $('.industry_item').each(function (i, elm) {
                 industry_ids.push($(elm).data('val'));
@@ -248,7 +294,7 @@
                     var data = JSON.parse(data);
 //                    $('#img').attr('src', data.path);
                     if (data.status === true) {
-//                        $('#img').attr('src', data.path);
+                        $('#img').attr('src', data.path);
                         $('input[name="card_path"]').val(data.path);
                     } else {
                         $.util.alert('app上传失败');
@@ -261,6 +307,7 @@
                         url: "/wx/wxUploadPic/" + id + '?dir=user/mp',
                         func: function (res) {
                             if (res.status === true) {
+                                $('#img').attr('src', data.path);
                                 $('input[name="card_path"]').val(res.path);
                             }
                         }
@@ -271,6 +318,7 @@
             }
         });
     });
+
 </script>
 <?php
 $this->end('script')?>

@@ -35,12 +35,17 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <?= $this->request->session()->read('User.admin.username'); ?>
                                 <span class="thumb-small avatar inline">
-                                    <img src="/wpadmin/img/avatar/avatar.jpg" alt="Mika Sokeil" class="img-circle">
+                                    <?php if(!empty($this->request->session()->read('User.admin.avatar'))): ?>
+                                        <?php $avatar = $this->request->session()->read('User.admin.avatar');  ?>
+                                        <?php else:?>
+                                        <?php $avatar = '/wpadmin/img/avatar/avatar.jpg'; ?>
+                                    <?php endif;?>
+                                    <img src="<?=$avatar?>" alt="Mika Sokeil" class="img-circle">
                                 </span>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="/wpadmin/admin/profile">修改个人信息</a></li>
+                                <li><a href="/admin/admin/profile">修改个人信息</a></li>
                                 <li class="divider"></li>
                                 <li><a href="/wpadmin/admin/logout"><i class="icon icon-off"></i> 注销</a></li>
                             </ul>

@@ -24,33 +24,13 @@ class IndexController extends AppController {
         //小秘书待处理个数
         $NeedTable = \Cake\ORM\TableRegistry::get('Need');
         $needCounts = $NeedTable->find()->where(['status' => 0])->count();
-
-        //会员总量
-        $today = date('Y-m-d');
-        $userCounts = $UserTable->find()->where("enabled = 1")->count();
-        //资讯总数
-        $NewsTable = \Cake\ORM\TableRegistry::get('News');
-        $newsTotalCounts = $NewsTable->find()->count();
-
-        //活动总数
-        $ActivityTable = \Cake\ORM\TableRegistry::get('Activity');
-        $activityCounts = $ActivityTable->find()->count();
-        
-        //报名总数
-        $ActivityApplyTable = \Cake\ORM\TableRegistry::get('Activityapply');
-        $activityApplyCounts = $ActivityApplyTable->find()->count();
-        
-        //约见总数
-        $SubjectBookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
-        $subjectbookCounts = $SubjectBookTable->find()->count();
+        //待处理提现总数
+        $WithdrawTable = \Cake\ORM\TableRegistry::get('Withdraw');
+        $withdrawCounts = $WithdrawTable->find()->where(['status' => 0])->count();
         $this->set([
             'savantCounts' => $savantCounts,
-            'userCounts' => $userCounts,
             'needCounts' => $needCounts,
-            'newsTotalCounts' => $newsTotalCounts,
-            'activityCounts' => $activityCounts,
-            'activityApplyCounts' => $activityApplyCounts,
-            'subjectbookCounts' => $subjectbookCounts,
+            'withdrawCounts' => $withdrawCounts,
         ]);
     }
 
