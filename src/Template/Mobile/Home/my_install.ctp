@@ -27,7 +27,7 @@
     <ul class="h-info-box e-info-box">
         <li class="no-right-ico install">
             <span>使用缓存</span>
-            <div>
+            <div class='iscache'>
                 <span class="btn" id='checkBtn'><i class="off"></i></span>
             </div>
         </li>
