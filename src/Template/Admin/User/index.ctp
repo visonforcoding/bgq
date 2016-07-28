@@ -1,6 +1,7 @@
 <?php $this->start('static') ?>   
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
+<link rel="stylesheet" type="text/css" href="/wpadmin/lib/lightbox/css/lightbox-rotate.css">
 <?php $this->end() ?> 
 <div class="col-xs-12">
     <form id="table-bar-form">
@@ -29,6 +30,9 @@
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
 <script src="/wpadmin/lib/zeroclipboard/dist/ZeroClipboard.js"></script>
+<!--查看大图-->
+<script src="/wpadmin/lib/jqueryrotate.js"></script>
+<script src="/wpadmin/lib/lightbox/js/lightbox-rotate.js"></script>
 <script>
         $(function () {
             $('#main-content').bind('resize', function () {
@@ -131,7 +135,7 @@
         function actionFormatter(cellvalue, options, rowObject) {
             response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
             response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn"><i class="icon icon-eye-open"></i> </a>';
-            response += '<a title="查看名片" onClick="showMp(' +" ' "+rowObject.card_path+" ' " + ');" data-id="' + rowObject.id + '" class="grid-btn"><i class="icon icon-picture"></i> </a>';
+            response += '<a title="查看名片" href="'+rowObject.card_path+'" data-lightbox="' + rowObject.truename + '" data-title="My caption"><i class="icon icon-picture"></i> </a>';
             response += '<a title="复制个人主页" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
             response += '<a title="修改" href="/admin/user/edit/' + rowObject.id + '" class="grid-btn"><i class="icon icon-pencil"></i> </a>';
             return response;
