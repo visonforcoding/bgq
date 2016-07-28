@@ -478,15 +478,19 @@ a.alink-list img{width:.5rem;height:.5rem;border-radius: 50%;}
 .wraper .m-about-expert h3{color:#222c38;}
 .m-about-expert p{padding:0.3rem;/*text-indent: 2em;*/font-size:0.28rem;}
 .toone .active h3{background: #e01a48;}
-.m-detail-box{background: #fff;}
-.m-detail-box li{padding:0.25rem 0.3rem;border-bottom:1px solid #e5e5e5;display: flex; justify-content:space-between;font-size:0.3rem;}
+.m-detail-box,.m-detail{background: #fff;}
+.m-detail-box li{padding:0.25rem 0.3rem;border-bottom:1px solid #e5e5e5;display:-webkit-flex;display: flex; -webkit-justify-content:space-between;justify-content:space-between;font-size:0.3rem;}
+.m-detail li{padding:0.25rem 0.3rem;border-bottom:1px solid #e5e5e5;font-size:0.3rem;}
 .sub-list-l{width:75%;}
-.m-detail-box li span{display: block;font-size:0.28rem;line-height: 0.4rem;}
-.m-detail-box li h3{width:75%;line-height: 0.4rem;font-size:0.3rem;}
-.m-detail-box li:first-child h3 span{font-size:0.26rem;margin-top:0.1rem;color:#9ba4ad;}
+.m-detail-box li span,.m-detail li span{display: block;font-size:0.28rem;line-height: 0.4rem;}
+.m-detail li span{display: inline-block;}
+.m-detail-box li h3,.m-detail li h3{width:75%;line-height: 0.4rem;font-size:0.3rem;}
+.m-detail li .t-tittle{width:100%;border-bottom:1px #e5e5e5 solid;padding-bottom:.2rem;}
+.m-detail li p{color:#222;margin-top:0.2rem;}
+.m-detail-box li:first-child h3 span,.m-detail li:first-child h3 span{font-size:0.26rem;margin-top:0.1rem;color:#9ba4ad;}
 .meet-type{font-size:0.28rem;}
-.m-detail-box li:nth-child(2){color:#e01a48;}
-.m-detail-box li:nth-child(3),.m-detail-box li:nth-child(4){font-size:0.24rem;line-height: 0.36rem;color:#9ba4ad;}
+.m-detail-box li:nth-child(2),.m-detail li:nth-child(2){color:#e01a48;}
+.m-detail-box li:nth-child(3),.m-detail-box li:nth-child(4),.m-detail li:nth-child(3),.m-detail li:nth-child(4){font-size:0.24rem;line-height: 0.36rem;color:#9ba4ad;}
 .sub-list h3 span{margin-bottom:0.1rem;}
 .sub-list li .meet-type i{display: block;text-align: right;}
 .sub-list li .meet-type i:nth-of-type(2){margin-top:0.4rem;color:#db1f4f;}
@@ -629,9 +633,8 @@ border-radius: 50%;}
 .typeselect,.c-select{width:1rem;overflow: hidden;}
 .typeselect select,.c-select select{width:1.3rem;border:none;padding-left:0.5rem;}
 .c-select select{width:1.5rem;padding-left:0;}
-.h-home-menu li{width:50%; padding:0.4rem 0 0.4rem 1rem;border:1px #e5e5e5 solid;border-bottom:none;border-right:none;float:left;/*向下兼容*/}
-.topnav li{width:33.3%;padding:0.3rem 0.2rem;}
-.topnav li{}
+.h-home-menu li{width:50%; padding:0.4rem 0 0.4rem 1rem;border:1px #e5e5e5 solid;border-bottom:none;border-right:none;float:left;/*向下兼容*/height:1rem;}
+.topnav li{width:33.3%;padding:0.3rem 0.2rem;height:1.5rem;}
 .topnav li a{display:block;text-align: center;}
 /*@media (min-width: 414px) and (max-width: 640px) {
 	.h-home-menu li{padding:0.38rem 0 0.38rem 1rem;}
