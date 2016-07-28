@@ -95,6 +95,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //iosé
         'login.wx',
         'pay.wx',
         'pay.ali',
+        "event.invite",
         "event.getLocation",
         "event.tel",
         "event.uploadPhoto",
@@ -150,6 +151,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //iosé
                 case "sys.closeLOC":
                 case "share.banner":
                 case "show.shareIco":
+                case "event.invite":
                 case "sys.showKeyboard":
                 case "sys.hideKeyboard":
                 case "sys.QRcode":

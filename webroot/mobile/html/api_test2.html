@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1, user-scalable=0" /><!--设置视窗宽为设备宽度，默认不缩放，不允许用户缩放-->
+    <meta name="apple-mobile-web-app-capable" content="yes" /><!--在iOS中 隐藏工具栏和菜单栏-->
+    <meta name="format-detection" content="email=no" /><!--忽略电话号码和邮箱识别-->
+    <title>TEST API</title>
+    <script>
+        /**
+         * JSAPI内部实现    JSApi.invoke("shareWX", JSON.stringify(msg), "callback");
+         */
+
+        /**
+         * 外部调用方法，如 ： var result = LEMON.shareWX(param, callback);
+         * @param json格式参数列表,默认为空
+         * @callback 回调函数，默认为空，回调执行时参数为{callback:'',data:{}},callback为当前函数名称，data为result.data
+         * @result
+         {
+           code:0,      //0表示正确执行，其他表示相应错误码
+           errorMsg:'', //错误信息
+           data:{}      //对于取结果的，数据会以json结构放在data里，否则data为空json
+         }
+         */
+
+        if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios需要先注入JSApi对象
+            document.write('<script src="http://jsapi.com/jsapi.js"><\/script>');
+        }
+        (function () {
+            var defaultConfig = {
+                imgUrl: 'http://m.chinamatop.com/mobile/images/bgq_logo.png',
+                link: 'http://m.chinamatop.com/',
+                title: '并购帮',
+                desc: '专注并购人的生活方式',
+                success:function(){},
+                cancel:function(){}
+            };
+            window.shareConfig = defaultConfig;
+            window.nativeShare = function (type) {
+                LEMON.share[type](window.shareConfig, function(){});
+            };
+            window.onBottom = window.onBottom || function () {
+                    };
+            window.onActiveView = window.onActiveView || function () {
+                    };
+            var LEMON = {};
+            window.__isAPP = LEMON.isAPP = window.JSApi || navigator.userAgent.toLowerCase().indexOf("smartlemon") >= 0;  //判断页面是否在app的环境中
+
+            var isAPP = LEMON.isAPP;
+            var registerAPI = function (obj, names, fun) {
+                var n = names.replace(/\..*/, '');
+                obj = obj || LEMON;
+                obj[n] = obj[n] || {};
+                n == names ? obj[n] = fun : registerAPI(obj[n], names.replace(n + '.', ''), fun);
+            };
+
+            //apiCB为空的时候  api不会执行回调
+            var JSApiInvoke = function (api, param, apiCB, reType) {
+                var re = reType == 'string' ? '{"data":""}' : '{"code": 1, "errorMsg": "invoke error", "data": ""}';  //约定的执行报错返回格式
+                if (isAPP) {
+                    try {
+                        return JSApi.invoke(api, JSON.stringify(param), apiCB);
+                    }
+                    catch (e) {
+                        return re;
+                    }
+                }
+                return re;
+            };
+
+            var apiCallback = function (func) {
+                if (!func) return '';
+                var apiCB = 'apiCB' + Math.ceil(Math.random() * 1000000000000);
+                window[apiCB] = function (param) {
+                    func && func(param);
+                    delete window[apiCB];
+                };
+                return apiCB;
+            };
+
+            //api名称列表
+            var apiList = ["db.get",
+                "db.set",
+                "sys.version",
+                "sys.isUseLOC",  //是否使用缓存  on  off
+                "sys.openLOC",  //开启缓存
+                "sys.closeLOC", //关闭缓存
+                "sys.showKeyboard",  //显示键盘
+                "sys.hideKeyboard",  //隐藏键盘
+                "sys.QRcode",  //二维码扫描
+                "sys.back",
+                "sys.logout",
+                "sys.device", //获取唯一设备id
+                "show.shareIco", //隐藏分享图标
+                "show.search", //显示搜索
+                "share.banner",
+                "share.QQ",
+                "share.QQfriend",
+                "share.WX",
+                "share.WXfriend",
+                "share.WB",
+                "env.hasQQ",
+                "env.hasWX",
+                'login.wx',
+                'pay.wx',
+                'pay.ali',
+                "event.getLocation",
+                "event.tel",
+                "event.uploadPhoto",
+                "event.reuploadPhoto"];
+
+            for (var i = 0, len = apiList.length; i < len && apiList[i]; i++) {
+                (function (api) { //api eg:'share.qq'
+                    switch (api) {
+                        case "db.get":
+                        case "db.set":
+                            registerAPI(null, api, function () {
+                                var param = {
+                                    'key': arguments[0],
+                                    'content': arguments[1] || '',
+                                    'expires': arguments[2] || 999999
+                                };
+                                if (!param['key']) return '';
+                                if (!isAPP) {
+                                    if (api == 'db.set') localStorage.setItem(param['key'], param['content']);
+                                    if (api == 'db.get') return localStorage.getItem(param['key']);
+                                    return '';
+                                }
+
+                                //db.get只用到key  LEMON.db.get 只需要传入一个字符串
+                                // ** db.set至少用到key value  LEMON.db.set  至少传入两个参数，字符串  **
+                                // invoke可以多传几个变量 set  delete不会用到value和get
+                                var invokeResult = JSApiInvoke(api, param, '', 'string');
+                                if(invokeResult.indexOf('"data"') != -1){
+                                    var re = JSON.parse(invokeResult);
+                                    return re.data;
+                                }
+                                else{
+                                    return invokeResult;
+                                }
+                            });
+                            break;
+                        case "sys.version":
+                        case "sys.device":
+                        case "sys.isUseLOC":  //是否使用缓存  on  off
+                            registerAPI(null, api, function () {
+                                var invokeResult = JSApiInvoke(api, '', '', 'string');
+                                if(invokeResult.indexOf('"data"') != -1){
+                                    var re = JSON.parse(invokeResult);
+                                    return re.data;
+                                }
+                                else{
+                                    return invokeResult;
+                                }
+                            });
+                            break;
+                            //无参数   无回调
+                        case "sys.openLOC":
+                        case "sys.closeLOC":
+                        case "share.banner":
+                        case "show.shareIco":
+                        case "sys.showKeyboard":
+                        case "sys.hideKeyboard":
+                        case "sys.QRcode":
+                        case "sys.logout":
+                            registerAPI(null, api, function () {
+                                return JSApiInvoke(api, {}, '');
+                            });
+                            break;
+                            //一个字符型参数   无回调
+                        case "sys.back":
+                        case "show.search":
+                            registerAPI(null, api, function () {
+                                return JSApiInvoke(api, {url:arguments[0]}, '');
+                            });
+                            break;
+                        case "event.tel":
+                            registerAPI(null, api, function () {
+                                return JSApiInvoke(api, {tel:arguments[0]}, '');
+                            });
+                            break;
+                            //无参数 只用到callback
+                        case 'login.wx':
+                        case "event.getLocation":
+                        case "event.reuploadPhoto":
+                            registerAPI(null, api, function () {
+                                window.reuploadPhotoCB = arguments[0];
+                                return JSApiInvoke(api, {}, apiCallback(arguments[0]));
+                                //var re = JSON.parse(JSApiInvoke(api, {}, '', 'string'));
+                                //return re.data;
+                            });
+                            break;
+                            //有参数 有callback
+                        case 'pay.wx':
+                        case 'pay.ali':
+                        case "event.uploadPhoto":
+                            registerAPI(null, api, function () {
+                                JSApiInvoke(api, {param:arguments[0]}, apiCallback(arguments[1]));
+                            });
+                            break;
+                        case "share.banner":
+                        case "share.QQ":
+                        case "share.QQfriend":
+                        case "share.WX":
+                        case "share.WXfriend":
+                        case "share.WB":
+                            registerAPI(null, api, function () {
+                                var param = arguments[0] || window.shareConfig, cb = arguments[1] || function () {
+                                        }; //这里ios一定要callback
+                                if (!param) return '';
+                                if (!isAPP) {
+                                    //register wx sq
+                                }
+                                return JSApiInvoke(api, {
+                                    title: param.title,
+                                    desc: param.desc,
+                                    imgUrl: param.imgUrl,
+                                    link: param.link
+                                }, apiCallback(cb));
+                            });
+                            break;
+                        default:
+                            registerAPI(null, api, function () {
+                                return JSApiInvoke(api, {}, '');
+                            });
+                            break;
+                    }
+                })(apiList[i]);
+            }
+            window.LEMON = LEMON;
+        })();
+
+        //LEMON.db.set('name','kate');
+
+        //setStringWithKey=>db.set------------key:value==>{key:str, content:str}
+        //getStringWithKey=>db.get------------key:value==>{key:value}
+        //getLocation=>db.set------------key:value==>{key:value}
+        //setStringWithKey=>db.set------------key:value==>{key:value}
+        //setStringWithKey=>db.set------------key:value==>{key:value}
+
+
+
+    </script>
+</head>
+<body>
+<style>
+
+    dl, dt, dd, a, ul, li, ol {
+        border: 1px solid #999;
+        list-style: outside none none;
+        padding: 5px;
+    }
+</style>
+
+<ul>
+    <li onclick="LEMON.db.set('name','kate');"> LEMON.db.set('name','kate')</li>
+    <li onclick="alert(2);testset();"> testset();</li>
+    <li onclick="alert(LEMON.db.get('name'))">LEMON.db.get('name')</li>
+    <li onclick="alert(LEMON.sys.isUseLOC())">LEMON.sys.isUseLOC(),  //是否使用缓存  on  off</li>
+    <li onclick="alert(LEMON.sys.version())">LEMON.sys.version() 当前版本号</li>
+    <li onclick="alert(LEMON.sys.device())">LEMON.sys.device() 当前设备id</li>
+    <li onclick="LEMON.sys.QRcode()">LEMON.sys.QRcode()扫二维码</li>
+    <li onclick="LEMON.login.wx(callback)">LEMON.login.wx(callback)</li>
+    <li onclick="LEMON.pay.wx('order_id', callback)">LEMON.pay.wx('order_id', callback)  微信支付</li>
+    <li onclick="LEMON.pay.ali('order_id', callback)">LEMON.pay.ali('order_id', callback)阿里支付</li>
+    <li onclick="LEMON.event.getLocation(callback)">LEMON.event.getLocation(callback)</li>
+    <li onclick="LEMON.event.tel(10086)">LEMON.event.tel(10086)</li>
+    <li onclick="LEMON.event.uploadPhoto('\'url_query\':\'?dir=user/avatar&zip=1\'', callback)">LEMON.event.uploadPhoto("'url_query':'?dir=user/avatar&zip=1'}",callback)</li>
+    <li onclick="LEMON.event.reuploadPhoto(callback)">LEMON.event.reuploadPhoto(callback)</li>
+
+    <li onclick="LEMON.login.wx(callback)">LEMON.login.wx(callback)  微信登录</li>
+    <!--<li onclick="LEMON.login.wx(function(code){alert(12);alert(code);alert('code:'+code)})">LEMON.login.wx(function(code){alert('code:'+code)})  微信登录</li>-->
+    <li onclick="LEMON.show.shareIco()">LEMON.show.shareIco()  显示分享图标</li>
+    <li onclick="LEMON.sys.back('http://m.chinamatop.com/')">LEMON.sys.back('http://m.chinamatop.com/') 设置点击返回的跳转链接</li>
+    <li onclick="LEMON.show.search('test url')">LEMON.show.search('test url') 显示搜索图标</li>
+
+    <li onclick="LEMON.share.banner()">LEMON.share.banner() 分享条</li>
+    <li onclick="LEMON.sys.openLOC()">LEMON.sys.openLOC()开启缓存</li>
+    <li onclick="LEMON.sys.closeLOC()">LEMON.sys.closeLOC()关闭缓存</li>
+    <li onclick="LEMON.sys.showKeyboard()">LEMON.sys.showKeyboard()显示键盘 </li>
+    <li onclick="LEMON.sys.hideKeyboard()">LEMON.sys.hideKeyboard() 关闭键盘</li>
+
+    <!--
+    <li onclick="LEMON.share.QQ(callback)">LEMON.share.QQ(callback) 分享QQ空间</li>
+    <li onclick="LEMON.share.QQfriend(callback)">LEMON.share.QQfriend(callback) 分享QQ好友</li>
+    <li onclick="LEMON.share.WX(callback)">LEMON.share.WX(callback) 分享微信朋友圈</li>
+    <li onclick="LEMON.share.WXfriend(callback)">LEMON.share.WXfriend(callback) 分享微信好友</li>
+    <li onclick="LEMON.share.WB(callback)">LEMON.share.WB(callback) 分享微博</li>
+    -->
+
+    <li><a href="/">跳资讯  href="/"</a></li>
+    <li><a href="http://m.chinamatop.com/">跳资讯  href="http://m.chinamatop.com/"</a></li>
+    <li><a href="/news/index?ptag=8">跳资讯  href="/news/index?ptag=8"</a></li>
+    <li><a href="/activity/index?share=1">跳活动 href="/activity/index?share=1"</a></li>
+    <li><a href="/meet/index">跳大咖 href="/meet/index"</a></li>
+    <li><a href="/home/index">跳个人中心  href="/home/index"</a></li>
+    <li><a href="com.chinamatop://main/param?url=http://m.chinamatop.com/activity/index">com.chinamatop://main/param?url=http://m.chinamatop.com/activity/index</a></li>
+
+</ul>
+
+<br>
+</body>
+</html>
+
+<script>
+    /**
+
+    "hide.share", //隐藏分享图标
+            "show.search", //显示搜索
+            "share.QQ",
+            "share.QQfriend",
+            "share.WX",
+            "share.WXfriend",
+            "env.hasQQ",
+            "env.hasWX",
+            'login.wx',
+            "event.getLocation",
+            "event.tel",
+            "event.uploadPhoto",
+            "event.reuploadPhoto"
+    */
+    function callback(re){
+		alert(re);
+    }
+
+    function testset()
+    {
+        LEMON.db.set('name','kate');
+        LEMON.db.set('name2','kate2');
+        LEMON.db.set('name3','kate3');
+        LEMON.db.set('name4','kate4');
+        LEMON.db.set('name5','kate5');
+        LEMON.db.set('name6','kate6');
+    }
+
+
+
+
+
+
+    window.onerror = function (a,b,c,d,e) {
+        function f(a) {
+            var b, c;
+            if ("object" == typeof a) {
+                if (null === a)
+                    return "null";
+                if (window.JSON && window.JSON.stringify)
+                    return JSON.stringify(a);
+                c = g(a), b = [];
+                for (var d in a)
+                    b.push(( c ? "" : '"' + d + '":') + f(a[d]));
+                return b = b.join(), c ? "[" + b + "]" : "{" + b + "}";
+            }
+            return "undefined" == typeof a ? "undefined" : "number" == typeof a || "function" == typeof a ? a.toString() : a ? '"' + a + '"' : '""';
+        }
+
+        function g(a) {
+            return "[object Array]" == Object.prototype.toString.call(a);
+        }
+
+        var h, i = window;
+        if ( d = d || i.event && i.event.errorCharacter || 0, e && e.stack){
+            a = e.stack.toString();
+        }
+        else if (arguments.callee) {
+            for (var j = [a], k = arguments.callee.caller, l = 3; k && --l > 0 && (j.push(k.toString()), k !== k.caller); )
+                k = k.caller;
+            j = j.join(","), a = j;
+        }
+        if ( h = f(a) + ( b ? ";URL:" + b : "") + ( c ? ";Line:" + c : "") + ( d ? ";Column:" + d : ""), i._last_err_msg) {
+            if (i._last_err_msg.indexOf(a) > -1)
+                return;
+            i._last_err_msg += "|" + a;
+        } else
+            i._last_err_msg = a;
+
+        setTimeout(function() {
+            console.log("ERROR:" + h);
+            alert(h);
+            //var a = encodeURIComponent(h), b = new Image;
+            //b.src = "//wq.jd.com/webmonitor/collect/badjs.json?Content=" + a + "&t=" + Math.random();
+            //当前用户登录ID、时间、手机号码、上报URL
+            //b.src = "/BadJS/index.html?Content=" + a + "&t=" + Math.random();
+
+        }, 500);
+
+        return !1
+    };
+
+
+    (function(){
+        var ifr = document.createElement('iframe');
+        ifr.src = '/user/login_status';
+        document.body.appendChild(ifr);
+
+        var ifr = document.createElement('iframe');
+        ifr.src = 'http://www.baidu.com';
+        document.body.appendChild(ifr);
+    })();
+</script>
+
+
+

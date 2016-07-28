@@ -39,7 +39,15 @@
                 </div>
             </a>
         </li>
-            
+
+        <li class="lh4">
+            <a href="/mobile/html/api_test.html">
+                <span>for api test</span>
+                <div>
+                    <span></span>
+                </div>
+            </a>
+        </li>
         <li class="lh4">
             <a href="javascript:void(0);">
                 <span>给我打分</span>
@@ -98,8 +106,10 @@
             $('#checkBtn i').get(0).className = 'off';
         }
     }
+    alert(14)
 
     $('#checkBtn').on('tap',function(){
+        alert(LEMON.sys.isUseLOC())
         if(LEMON.sys.isUseLOC() == 'on'){
             LEMON.sys.closeLOC();
             setCheck('off');
@@ -108,19 +118,7 @@
             setCheck('on');
         }
     })
+
+    setCheck(LEMON.sys.isUseLOC());
 </script>
-<script type="text/javascript">
-                var flag=1;
-                $('#btn').on('tap',function(){
-                    if(flag){
-                        $(this).children('i').removeClass().addClass('on');
-                        flag=0;
-                    }else{
-                        $(this).children('i').removeClass().addClass('off');
-                        flag=1;
-                    }
-                    
-                        
-                })
-            </script>
 <?php $this->end('script');
