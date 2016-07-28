@@ -586,7 +586,10 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .tabcon ul i{font-size:.24rem;width:12%;display: inline-block;margin-right:.2rem;}
 .worktab a{display: block;}
 .worktab li span{color:#171717;width:100%;}
-.worktab .worktime{display: block;line-height: .9rem;text-indent: 5%;width:100%;}
+.worktab .worktime{display: block;line-height: .9rem;text-indent: 32%;width:100%;}
+.gs-name{text-indent: 30%;}
+.h-tips{width:30%;}
+.h-tips i{color: #c490bf;}
 .linkinfo p{line-height: 0.46rem; }
 .linkinfo p span{/*width:1rem;*/}
 .linkinfo p i,.linkinfo p a{margin-left: 0.36rem;}
