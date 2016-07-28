@@ -10,7 +10,79 @@
 		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
 		<script src="../js/view.js"></script>
-		
+		<script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+		input{-webkit-tap-highlight-color:rgba(0,0,0,0);display: none;outline:none;}
+		.holder{-webkit-tap-highlight-color:rgba(0,0,0,0);outline: none;}
+	.label{
+	   
+	    background-color: #fafbfa;border-radius: 50px;display: inline-block;
+	    position: relative;
+	    margin-right: 3px;
+	    /*-webkit-transition: all 0.1s ease-in;
+	    transition: all 0.1s ease-in;*/
+	    width: 50px;height: 26px;}
+		[id^="checkbox"]:checked + label:before {
+	    content: ' ';
+	    position: absolute;
+	    left: 23px;
+	    border-radius: 100px;
+	    outline:none;
+	    -webkit-tap-highlight-color:rgba(0,0,0,0);
+	}
+	
+	.holder .label:before {
+	    content: ' ';
+	    position: absolute;
+	    background: white;
+	    top: 1px;
+	    left: 1px;
+	    z-index: 999999;
+	    width: 26px;
+	    -webkit-transition: all 0.1s ease-in;
+	    transition: all 0.1s ease-in;
+	    height: 26px;
+	    border-radius: 100px;
+	    box-shadow: 0 3px 1px rgba(0,0,0,0.05), 0 0px 1px rgba(0,0,0,0.3);*/
+	}
+	
+   .label:before{
+	    content: ' ';
+	    position: absolute;
+	    background: white;
+	    top: 1px;
+	    left: 1px;
+	    z-index: 999999;
+	    width: 31px;
+	    -webkit-transition: all 0.1s ease-in;
+	    transition: all 0.1s ease-in;
+	    height: 26px;
+	    border-radius: 100px;
+	   	box-shadow: 0 3px 1px rgba(0,0,0,0.05), 0 0px 1px rgba(0,0,0,0.1);
+	    position: absolute;
+	    left: 26px;
+	    border-radius: 100px;
+    }
+    [id^="checkbox"]:checked + label:after {
+    content: ' ';
+    
+    position: absolute;
+    background: #4cda60;
+    box-shadow: 0 0 1px #4cda60;
+}
+[id^="checkbox"] + label:after {
+    content: ' ';
+    position: absolute;
+    top: 1px;
+    -webkit-transition: box-shadow 0.1s ease-in;
+    transition: box-shadow 0.1s ease-in;
+    left: 0;
+    width: 50px;
+    height: 26px;
+    border-radius: 100px;
+    box-shadow: inset 0 0 0 0 #eee, 0 0 1px rgba(0,0,0,0.2);
+}
+	</style>
 	</head>
 	<body>
 		<header>
@@ -33,34 +105,44 @@
 				</ul>
 			</div>
 			
-			<ul class="h-info-box e-info-box no-t-border">
-				
-				<li class="btop">
-					<a href="">
-					<span>修改密码</span>
-					<div>
-						<span></span>
-					</div>
-					</a>
-				</li>
-				
-				<li>
-					<a href="">
-					<span>给我打分</span>
-					<div>
-						<span></span>
-					</div>
-					</a>
-				</li>
-				<li  class="nobottom">
-					<a href="mobile-number.html">
-					<span>修改手机号码</span>
-					<div>
-						<span></span>
-					</div>
-					</a>
-				</li>
-				</ul>
+			 <ul class="h-info-box e-info-box">
+        <li class="no-right-ico install">
+            <a href="javascript:void(0);">
+                <span>设置</span>
+                <div class="holder">
+					<!--<input type="checkbox" id="checkbox-10-1" />
+					<label for="checkbox-10-1"></label>-->
+					<input type="checkbox" id="checkbox" checked />
+					<label for="checkbox" class="label"></label>
+			</div>
+            </a>
+        </li>
+        <li class="lh4 no-right-ico install">
+            <a href="javascript:void(0);">
+                <span>系统版本</span>
+                <div>
+                    <span>Verson 1.0</span>
+                </div>
+            </a>
+        </li>
+            
+        <li class="lh4">
+            <a href="javascript:void(0);">
+                <span>给我打分</span>
+                <div>
+                    <span></span>
+                </div>
+            </a>
+        </li>
+        <li  class="nobottom lh4">
+            <a href="/user/change-phone">
+                <span>更换手机号码</span>
+                <div>
+                    <span></span>
+                </div>
+            </a>
+        </li>
+    </ul>
 				<a href="javascript:void(0);" class="nextstep redshadow">退出登录</a>
 			
 		</div>
@@ -75,5 +157,19 @@
 				<p>Copyright ©2012-2018</p>
 				<p>君汉控股（深圳）有限公司</p>
 			</div>
+			<script type="text/javascript">
+				var flag=1;
+				$('.btn').on('tap',function(){
+					if(flag){
+						$(this).children('i').removeClass().addClass('on');
+						flag=0;
+					}else{
+						$(this).children('i').removeClass().addClass('off');
+						flag=1;
+					}
+					
+						
+				})
+			</script>
 	</body>
 </html>
