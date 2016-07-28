@@ -31,7 +31,7 @@
             <a href="/meet/view/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
             <div class="vipinfo">
                 <a href="/meet/view/{#id#}">
-                    <h3>{#truename#}<i style='color:#bcbec0;font-size:.24rem;'> 深圳</i><span class="meetnum">{#meet_nums#}人见过</span></h3>
+                    <h3>{#truename#}<i style='color:#bcbec0;font-size:.2rem;'> 深圳</i><span class="meetnum">{#meet_nums#}人见过</span></h3>
                     <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
                 </a>
                 <div class="mark bgblue">
