@@ -54,7 +54,7 @@
                         </div>
                         <div class="databox-right">
                             <a class="a-link" href="/admin/withdraw/index">
-                                <span class="databox-number coseconda">90</span>
+                                <span class="databox-number coseconda"><?=$withdrawCounts?></span>
                                 <div class="databox-text darkgray">今日新增</div>
                                 <div class="databox-stat themesecondary radius-bordered">
                                     <i class="">more</i>

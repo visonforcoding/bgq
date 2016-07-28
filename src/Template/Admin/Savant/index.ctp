@@ -5,9 +5,9 @@
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
-<!--            <a href="/admin/savant/add" class="btn btn-small btn-warning">
-                <i class="icon icon-plus-sign"></i>添加
-            </a>-->
+            <!--            <a href="/admin/savant/add" class="btn btn-small btn-warning">
+                            <i class="icon icon-plus-sign"></i>添加
+                        </a>-->
             <div class="form-group">
                 <label for="keywords">关键字</label>
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="用户名">
@@ -47,9 +47,11 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户','约见次数', '推荐次数', '项目经验', '资源优势', '简介', '审核情况', '操作'],
+                                ['用户', '约见次数', '推荐次数', '项目经验', '资源优势', '简介', '审核情况', '操作'],
                         colModel: [
-                            {name: 'truename', editable: true, align: 'center'},
+                            {name: 'truename', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
+                                    return '<a title="查看" onClick="showSavant(' + " ' " + rowObject.id + " ' " + ');" class="grid-btn ">' + cellvalue + '</a>';
+                                }},
                             {name: 'meet_nums', editable: true, align: 'center'},
                             {name: 'savant.reco_nums', editable: true, align: 'center'},
 //                            {name: 'cover', editable: true, align: 'center'},
@@ -81,15 +83,14 @@
                         },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
                 });
-                
-                function statusFormatter(cellvalue, options, rowObject){
-                    if(rowObject.savant_status == 0){
+                function statusFormatter(cellvalue, options, rowObject) {
+                    if (rowObject.savant_status == 0) {
                         response = '未通过审核';
-                    } else if(rowObject.savant_status == 1) {
+                    } else if (rowObject.savant_status == 1) {
                         response = '未认证';
-                    } else if(rowObject.savant_status == 2) {
+                    } else if (rowObject.savant_status == 2) {
                         response = '待审核';
-                    } else if(rowObject.savant_status == 3) {
+                    } else if (rowObject.savant_status == 3) {
                         response = '已通过审核';
                     }
                     return response;
@@ -102,13 +103,13 @@
                     if (rowObject.savant_status == 2) {
                         response += '<a title="审核通过" href="javascript:void(0)" class="grid-btn release" onclick="pass(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
                     }
-                    if(rowObject.savant_status != 0){
+                    if (rowObject.savant_status != 0) {
                         response += '<a title="未通过审核" href="javascript:void(0)" class="grid-btn unrelease" onclick="unpass(' + rowObject.id + ')"><i class="icon icon-times"></i></a>';
                     }
                     return response;
                 }
-                
-                function pass(id){
+
+                function pass(id) {
                     layer.confirm('确定通过审核？', {
                         btn: ['确认', '取消'] //按钮
                     }, function () {
@@ -127,8 +128,8 @@
                     }, function () {
                     });
                 }
-                
-                function unpass(id){
+
+                function unpass(id) {
                     //需要引入layer.ext.js文件
                     layer.prompt({
                         title: '请输入审核不通过的理由',
@@ -207,6 +208,18 @@
                         shade: 0.8,
                         area: ['380px', '70%'],
                         content: url//iframe的url
+                    });
+                }
+                function showSavant(id) {
+                    url = '/mobile/meet/view/' + id;
+                    layer.open({
+                        type: 2,
+                        title: '专家主页',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['375px', '667px'],
+                        skin: 'layui-layer-lan', //没有背景色
+                        content: url
                     });
                 }
 </script>

@@ -203,7 +203,7 @@ class AdminController extends AppController {
         if ($this->request->is('post')) {
             $admin = $this->Admin->patchEntity($admin, $this->request->data());
             if ($this->Admin->save($admin)) {
-                \Cake\Cache\Cache::delete($admin->username.'_menus'); //更新菜单缓存文件
+                \Cake\Cache\Cache::delete($admin->username . '_menus'); //更新菜单缓存文件
                 $this->Util->ajaxReturn(true, '配置成功');
             } else {
                 $errors = $admin->errors();
@@ -222,6 +222,23 @@ class AdminController extends AppController {
             'menus' => $menus,
             'selMenuIds' => $selMenuIds
         ]);
+    }
+
+    public function profile() {
+        $id = $this->_user->id;
+        $admin = $this->Admin->get($id, [
+            'contain' => []
+        ]);
+        if ($this->request->is(['post', 'put'])) {
+            $admin = $this->Admin->patchEntity($admin, $this->request->data);
+            if ($this->Admin->save($admin)) {
+                $this->Util->ajaxReturn(true, '修改成功');
+            } else {
+                $errors = $admin->errors();
+                $this->Util->ajaxReturn(false, getMessage($errors));
+            }
+        }
+        $this->set(compact('admin'));
     }
 
 }

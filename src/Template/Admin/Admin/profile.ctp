@@ -13,6 +13,17 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">头像</label>
+        <div class="col-md-8">
+            <div style="width:60px;height:60px;padding:0px;"  class="img-thumbnail input-img img-circle"  single>
+                <img style="width:60px;height:60px" class="img-circle"  alt="" src="<?=$admin->avatar?>"/>
+            </div>
+            <div style="color:red">可不设置头像</div>
+            <input name="avatar" value="<?=$admin->avatar?>"  type="hidden"/>
+            <div id="avatar" class="jqupload">上传</div>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">真实姓名</label>
         <div class="col-md-8">
             <?php
@@ -41,9 +52,9 @@
         <div class="col-md-8">
             <?php
             echo $this->Form->radio('enabled', [
-                    ['value'=>'1','text'=>'启用'],
-                    ['value'=>'0','text'=>'禁用']
-                ]);
+                ['value' => '1', 'text' => '启用'],
+                ['value' => '0', 'text' => '禁用']
+            ]);
             ?>
         </div>
     </div>
@@ -65,7 +76,7 @@
 <script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>    -->
 <script>
     $(function () {
-        // initJqupload('cover', '/wpadmin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
+         initJqupload('avatar', '/wpadmin/util/doUpload?dir=admin/avatar&zip=1', 'jpg,png,gif,jpeg'); //初始化图片上传
         //var ue = UE.getEditor('content'); //初始化富文本编辑器
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('form').submit(function () {

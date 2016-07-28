@@ -89,7 +89,7 @@
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="权限配置" href="/admin/admin/config/' + rowObject.id + '" class="grid-btn "><i class="icon icon-cogs"></i> </a>';
-                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
+//                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="编辑" href="/admin/admin/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     return response;
                 }
@@ -146,7 +146,7 @@
                         title: '查看详情',
                         shadeClose: true,
                         shade: 0.8,
-                        area: ['380px', '70%'],
+                        area: ['400px', '70%'],
                         content: url//iframe的url
                     });
                 }
