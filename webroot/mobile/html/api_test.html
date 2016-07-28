@@ -20,13 +20,13 @@
 
 <ul>
     <li onclick="LEMON.db.set('name','kate');"> LEMON.db.set('name','kate')</li>
-    <li onclick="alert(2);testset();"> testset();</li>
     <li onclick="alert(LEMON.db.get('name'))">LEMON.db.get('name')</li>
     <li onclick="alert(LEMON.sys.isUseLOC())">LEMON.sys.isUseLOC(),  //是否使用缓存  on  off</li>
     <li onclick="alert(LEMON.sys.version())">LEMON.sys.version() 当前版本号</li>
     <li onclick="alert(LEMON.sys.device())">LEMON.sys.device() 当前设备id</li>
     <li onclick="LEMON.sys.QRcode()">LEMON.sys.QRcode()扫二维码</li>
     <li onclick="LEMON.login.wx(callback)">LEMON.login.wx(callback)</li>
+    <li onclick="LEMON.event.invite()">LEMON.event.invite()</li>
     <li onclick="LEMON.pay.wx('order_id', callback)">LEMON.pay.wx('order_id', callback)  微信支付</li>
     <li onclick="LEMON.pay.ali('order_id', callback)">LEMON.pay.ali('order_id', callback)阿里支付</li>
     <li onclick="LEMON.event.getLocation(callback)">LEMON.event.getLocation(callback)</li>
@@ -157,10 +157,6 @@
     (function(){
         var ifr = document.createElement('iframe');
         ifr.src = '/user/login_status';
-        document.body.appendChild(ifr);
-
-        var ifr = document.createElement('iframe');
-        ifr.src = 'http://www.baidu.com';
         document.body.appendChild(ifr);
     })();
 </script>
