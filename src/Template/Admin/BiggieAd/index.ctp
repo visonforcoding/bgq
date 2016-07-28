@@ -39,9 +39,11 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['大咖id', '图片地址', '创建时间', '操作'],
+                                ['大咖', '图片地址', '创建时间', '操作'],
                         colModel: [
-                            {name: 'savant.user.truename', editable: true, align: 'center'},
+                            {name: 'savant.user.truename', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
+                                return '<a title="查看" onClick="showSavant(' +" ' "+rowObject.savant.user.id+" ' " + ');" class="grid-btn ">'+cellvalue+'</a>';
+                            }},
                             {name: 'url', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
                                 return '<a title="查看" onClick="showCover(' +" ' "+rowObject.url+" ' " + ');" class="grid-btn "><i class="icon icon-picture"></i></a>';
                             }},
@@ -143,7 +145,19 @@
                         skin: 'layui-layer-nobg', //没有背景色
                         content: '<img src=" '+cover+' ">'
                     });
-            }    
+            }   
+            function showSavant(id){
+                  url = '/mobile/meet/view/' + id;
+                    layer.open({
+                        type: 2,
+                        title: '专家主页',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['375px', '667px'],
+                        skin: 'layui-layer-lan', //没有背景色
+                        content:url
+                    });
+            }  
 </script>
 <?php
 $this->end();

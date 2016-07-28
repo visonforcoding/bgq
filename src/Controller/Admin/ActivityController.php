@@ -153,7 +153,7 @@ class ActivityController extends AppController {
             $where['and'] = ['series_id'=>$series_id];
         }
         if (!empty($region_id)) {
-            $where['and'] = ['series_id'=>$series_id];
+            $where['and'] = ['region_id'=>$region_id];
         }
         if (!empty($keywords)) {
             $where['OR'] = [

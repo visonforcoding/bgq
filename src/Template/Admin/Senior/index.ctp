@@ -1,6 +1,7 @@
 <?php $this->start('static') ?>   
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
+<link rel="stylesheet" type="text/css" href="/wpadmin/lib/lightbox/css/lightbox-rotate.css">
 <?php $this->end() ?> 
 <div class="col-xs-12">
     <form id="table-bar-form">
@@ -26,19 +27,24 @@
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
 <script src="/wpadmin/lib/zeroclipboard/dist/ZeroClipboard.js"></script>
+<!--查看大图-->
+<script src="/wpadmin/lib/jqueryrotate.js"></script>
+<script src="/wpadmin/lib/lightbox/js/lightbox-rotate.js"></script>
 <script>
         $(function () {
-            
             $('#main-content').bind('resize', function () {
                 $("#list").setGridWidth($('#main-content').width() - 40);
             });
             $.zui.store.pageClear(); //刷新页面缓存清除
             $("#list").jqGrid({
-                url: "/admin/senior/getDataList",
+                url: "/admin/user/getDataList",
                 datatype: "json",
                 mtype: "POST",
+                cellEdit : false,
+                cellsubmit : 'remote',
+                cellurl: '/admin/user/hand-change',
                 colNames:
-                        ['手机号', '姓名', '类型','等级', '公司','职位',  '性别','专家认证','帐号状态','负责人', '创建时间',  '操作'],
+                        ['手机号', '姓名', '类型','等级', '公司','职位',  '性别','专家认证','帐号状态', '创建时间',  '操作'],
                 colModel: [
                     {name: 'phone', editable: false, align: 'center'},
                     {name: 'truename', editable: false, align: 'center'},
@@ -88,11 +94,10 @@
                                 return '<button onClick="ableUser('+rowObject.id+')" class="btn btn-mini"><i class="icon icon-remove-circle"></i><i style="color:red"> 已禁用</i></button>';
                             }
                     },edittype:'select',editoptions: { value:"1:正常;0:禁用" }},
-                    {name: 'customer.truename', editable: true, align: 'center'},
                     {name: 'create_time', editable: true, align: 'center'},
                     {name: 'actionBtn',align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                 pager: "#pager",
-                rowNum: 10,
+                rowNum: 30,
                 rowList: [10, 20, 30],
                 sortname: "id",
                 sortorder: "desc",
@@ -111,6 +116,13 @@
                     records: "records",
                     repeatitems: false,
                     id: 'id',
+                },
+                afterSubmitCell:function(serverresponse, rowid, cellname, value, iRow, iCol){
+                   var res = $.parseJSON(serverresponse.responseText);
+                    layer.msg(res.msg);
+                    if(res.status){
+                        $('#list').trigger('reloadGrid');
+                    }
                 }
             }).navGrid('#pager', {edit: false, add: false, del: false, view: true,search:false});
         });
@@ -120,9 +132,9 @@
         function actionFormatter(cellvalue, options, rowObject) {
             response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
             response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn"><i class="icon icon-eye-open"></i> </a>';
-            response += '<a title="查看名片" onClick="showMp(' +" ' "+rowObject.card_path+" ' " + ');" data-id="' + rowObject.id + '" class="grid-btn"><i class="icon icon-picture"></i> </a>';
+            response += '<a title="查看名片" href="'+rowObject.card_path+'" data-lightbox="' + rowObject.truename + '" data-title="My caption"><i class="icon icon-picture"></i> </a>';
             response += '<a title="复制个人主页" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
-            response += '<a title="修改" href="/admin/senior/edit/' + rowObject.id + '" class="grid-btn"><i class="icon icon-pencil"></i> </a>';
+            response += '<a title="修改" href="/admin/user/edit/' + rowObject.id + '" class="grid-btn"><i class="icon icon-pencil"></i> </a>';
             return response;
         }
         
@@ -146,7 +158,7 @@
                     type: 'post',
                     data: {id: id},
                     dataType: 'json',
-                    url: '/admin/senior/delete',
+                    url: '/admin/user/delete',
                     success: function (res) {
                         layer.msg(res.msg);
                         if (res.status) {
@@ -179,18 +191,18 @@
             searchData['sidx'] = sortColumnName;
             searchData['sort'] = sortOrder;
             var searchQueryStr = $.param(searchData);
-            $("body").append("<iframe src='/admin/senior/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+            $("body").append("<iframe src='/admin/user/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
         }
 
         function doView(id) {
             //查看明细
-            url = '/admin/senior/view/' + id;
+            url = '/admin/user/view/' + id;
             layer.open({
                 type: 2,
                 title: '查看详情',
                 shadeClose: true,
                 shade: 0.8,
-                area: ['580px', '70%'],
+                area: ['60%', '70%'],
                 content: url//iframe的url
             });
         }
@@ -203,7 +215,8 @@
                 title: '会员名片',
                 shadeClose: true,
                 shade: 0.8,
-                 skin: 'layui-layer-nobg', //没有背景色
+                skin: 'layui-layer-nobg', //没有背景色
+                area: ['600px', '500px'],
                 content: '<img src=" '+obj+' ">'
             });
         }
@@ -212,7 +225,7 @@
                     type: 'post',
                     data: {id: id},
                     dataType: 'json',
-                    url: '/admin/senior/able-user',
+                    url: '/admin/user/able-user',
                     success: function (res) {
                         layer.msg(res.msg);
                         if (res.status) {
