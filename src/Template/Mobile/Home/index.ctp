@@ -42,7 +42,8 @@
     <div class="h-home-menu">
         <ul class="clearfix">
             <li><a href="/home/my-secret"><i class="iconfont">&#xe624;</i>隐私策略</a></li>
-            <li><a id="shareTo" href="javascript:shareFriends();"><i class="iconfont">&#xe626;</i>邀请好友</a></li>
+            <li><a id="shareTo" href="javascript:shareFriends();"><i class="iconfont">&#xe635;</i>分享</a></li>
+            {#search_savant#}
         </ul>
     </div>
 </script>
@@ -117,16 +118,19 @@
 //                }
                 var html = $('#savantTpl').text();
                 var user = $('#userTpl').text();
+                var ico = $('#icoTpl').text();
                 if(res.data.user.level == 2) {
                     savant = '<li><a href="/home/my-purse"><i class="iconfont">&#xe620;</i>钱包</a></li>';
                     html += '<div class="h-home-menu"><ul class="clearfix"><li><a href="/meet/view/' + res.data.user.id + '"><i class="iconfont">&#xe621;</i>专家主页</a></li><li><a href="/home/savant-auth"><i class="iconfont">&#xe623;</i>专家认证</a></li></ul></div>';
                     user = user.replace('{#v#}','<i class="v"></i>');
+                    ico = ico.replace('{#search_savant#}', '<li><a href="/home/search-savant"><i class="iconfont">&#xe626;</i>找同行</a></li><li></li>');
                 } else {
                     savant = '<li><a href="/home/savant-auth"><i class="iconfont">&#xe623;</i>专家认证</a></li>';
-                    user = user.replace('{#v#}','');
+                    user = user.replace('{#v#}', '');
+                    ico = ico.replace('{#search_savant#}', '');
                 }
                 html = html.replace('{#savant#}', savant);
-                $('#res').html(html+$('#icoTpl').text());
+                $('#res').html(html+ico);
                 if(res.data.hasMsg){
                     user = user.replace('{#hasMsg#}','<span class="opci"></span>');
                 } else {
