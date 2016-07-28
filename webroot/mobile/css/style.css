@@ -479,6 +479,12 @@ a.alink-list img{width:.5rem;height:.5rem;border-radius: 50%;}
 .m-about-expert p{padding:0.3rem;/*text-indent: 2em;*/font-size:0.28rem;}
 .toone .active h3{background: #e01a48;}
 .m-detail-box,.m-detail{background: #fff;}
+.d-list{margin:0 .3rem;}
+.d-list li{position:relative;margin-top:.6rem;background: #fff;padding:0.4rem;border-left:.08rem #ff5176 solid;box-shadow: 0 0.01rem 0.2rem rgba(255,81,118,.1); }
+.d-list li h3{line-height: .42rem;margin-bottom:.2rem;width:85%;word-break: break-all;overflow: hidden;}
+.d-list li span,.d-list li i:after{color:#e01a48;font-size:.26rem;}
+.d-list li i{position:absolute;right:0.2rem;top:45%;}
+.d-list li i:after{content: '\e662';}
 .m-detail-box li{padding:0.25rem 0.3rem;border-bottom:1px solid #e5e5e5;display:-webkit-flex;display: flex; -webkit-justify-content:space-between;justify-content:space-between;font-size:0.3rem;}
 .m-detail li{padding:0.25rem 0.3rem;border-bottom:1px solid #e5e5e5;font-size:0.3rem;}
 .sub-list-l{width:75%;}
