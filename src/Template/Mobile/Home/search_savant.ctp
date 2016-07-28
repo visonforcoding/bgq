@@ -20,7 +20,7 @@
         <ul class="a-s-mark s-width" id="industry">
         </ul>
     </div>
-    <section class="my-collection-info" id="search"></section>
+    <section id="search"></section>
 </div>
 <div id="buttonLoading" class="loadingbox"></div>
 <?= $this->element('footer'); ?>
