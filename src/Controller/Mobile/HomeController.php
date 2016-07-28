@@ -64,7 +64,17 @@ class HomeController extends AppController {
         if ($unReadFollowCount || $unReadSysCount) {
             $hasMsg = true;
         }
-        $res = compact('user', 'isWx', 'hasMsg');
+        $unReadActivity = $UsermsgTable->find()->where(['user_id'=>$user_id, 'status'=>0, 'type'=>7])->count();
+        $activityMsg = false;
+        if($unReadActivity){
+            $activityMsg = true;
+        }
+        $unReadMeet = $UsermsgTable->find()->where(['user_id'=>$user_id, 'status'=>0, 'type'=>4])->count();
+        $MeetMsg = false;
+        if($unReadMeet){
+            $MeetMsg = true;
+        }
+        $res = compact('user', 'isWx', 'hasMsg', 'activityMsg', 'MeetMsg');
         return $this->Util->ajaxReturn(['status'=>true, 'data'=>$res]);
     }
 
@@ -1119,23 +1129,96 @@ class HomeController extends AppController {
                     ->CardBoxes
                     ->find()
                     ->contain(['OtherCard' => function($q)use($keyword) {
-                            return $q->where(['OtherCard.truename like' => "%$keyword%"]);
-                        }])
-                            ->where(['ownerid' => $this->user->id, 'resend' => $resend])
-                            ->orderDesc('CardBoxes.`create_time`')
-                            ->limit($this->limit)
-                            ->toArray();
-                    if ($card !== false) {
-                        if ($card) {
-                            return $this->Util->ajaxReturn(['status' => true, 'data' => $card]);
-                        } else {
-                            return $this->Util->ajaxReturn(false, '您的名片夹里无这个人');
-                        }
-                    } else {
-                        return $this->Util->ajaxReturn(false, '系统错误');
-                    }
+                        return $q->where(['OtherCard.truename like' => "%$keyword%"]);
+                    }])
+                    ->where(['ownerid' => $this->user->id, 'resend' => $resend])
+                    ->orderDesc('CardBoxes.`create_time`')
+                    ->limit($this->limit)
+                    ->toArray();
+            if ($card !== false) {
+                if ($card) {
+                    return $this->Util->ajaxReturn(['status' => true, 'data' => $card]);
+                } else {
+                    return $this->Util->ajaxReturn(false, '您的名片夹里无这个人');
                 }
+            } else {
+                return $this->Util->ajaxReturn(false, '系统错误');
             }
-
+        }
     }
+    
+    public function searchSavant($id=null){
+        $this->set([
+            'pageTitle'=>'找同行',
+            'sid' => $id,
+        ]);
+        
+    }
+    
+    public function getRegionAndIndustries(){
+        $regionTable = \Cake\ORM\TableRegistry::get('region');
+        $industryTable = \Cake\ORM\TableRegistry::get('industry');
+        $region = $regionTable->find()->hydrate(false)->all()->toArray();
+        $industries = $industryTable->find()->hydrate(false)->all()->toArray();
+        $industry = [];
+        foreach($industries as $k=>$v){
+            if($v['pid'] == 1){
+                $industry[] = [
+                    'id' => $v['id'],
+                    'name' => $v['name'],
+                ];
+            }
+        }
+        return $this->Util->ajaxReturn([
+            'status' => true,
+            'region' => $region,
+            'industries' => $industry,
+        ]);
+    }
+    
+    public function getSearchRes(){
+        $where = [];
+        $userTable = \Cake\ORM\TableRegistry::get('user');
+        $data = $this->request->data();
+        $user = $userTable->find()->contain(['Subjects']);
+        if($data['industry_id']){
+            $industry_id = $data['industry_id'];
+            $user = $user->matching('Industries', function($q)use($industry_id){
+                return $q;
+            });
+            $where['industry_id'] = $industry_id;
+        }
+        
+        if($data['region']){
+            $city = $data['region'];
+            if($city === '其他'){
+                $where['city NOT LIKE'] = '%北京%';
+                $where['city NOT LIKE'] = '%上海%';
+                $where['city NOT LIKE'] = '%广州%';
+                $where['city NOT LIKE'] = '%深圳%';
+                $where['city NOT LIKE'] = '%成都%';
+                $where['city NOT LIKE'] = '%杭州%';
+                $where['city NOT LIKE'] = '%香港%';
+                $where['city NOT LIKE'] = '%武汉%';
+            } else {
+                $where['city LIKE'] = '%' . $city . '%';
+            }
+        }
+        
+        if($data['keyword']){
+            $where['User.truename LIKE'] = '%' . $data['keyword'] . "%";
+        }
+        $user = $user->where($where)->toArray();
+        if($user !== false){
+            if($user == null){
+                return $this->Util->ajaxReturn(false, '暂无同行');
+            } else {
+                return $this->Util->ajaxReturn(['status'=>true, 'data'=>$user]);
+            }
+        } else {
+            return $this->Util->ajaxReturn(false, '系统错误');
+        }
+    }
+
+}
                                                                                         
