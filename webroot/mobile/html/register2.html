@@ -262,11 +262,12 @@
         $('#place .headmark li').on('tap',function(){//地区
         	$('.b-input').hide();
         	 $('.orgtxt').html($(this).text()+'<i class="closed">&times;</i>').show();
-        	  $('.r-place').on('tap',function(){
+        	  
+        })
+        $('.r-place').on('tap',function(){
         	  	$('.orgtxt').hide();
         	 		$('.b-input').show();
         	 })
-        })
        
         $('#industry .cart>li').on('tap', function () {  //行业sub
             var industry_id = $(this).data('val');
