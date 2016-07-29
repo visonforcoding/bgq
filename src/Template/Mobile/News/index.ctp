@@ -84,13 +84,13 @@
     
     function dealData(data){
         var html = $.util.dataToTpl('', 'listTpl', data, function (d) {
-            if(d.user){
+            if(d.source){
+                d.author = '<div class="website">'+ d.source +'</div>';
+                d.origin = 'origin';
+            } else {
                 d.user_id = d.user.id;
                 d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                 d.author = '<span><img src="'+ d.avatar +'"/></span>' + d.user.truename;
-            } else {
-                d.author = '<div class="website">【'+ d.source +'】</div>';
-                d.origin = 'origin';
             }
             d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
             d.cover = d.thumb ? d.thumb : d.cover;

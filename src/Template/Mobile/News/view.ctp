@@ -21,7 +21,7 @@
             <h3><?= $news->title ?></h3>
             <h1 class="con-des <?php if($news->source): ?>origin<?php endif; ?>">
                 <?php if($news->source): ?>
-                    <div class="website">【<?= $news->source ?>】</div>
+                    <div class="website"><?= $news->source ?></div>
                 <?php else: ?>
                     <a href="/user/home-page/<?= $news->user->id ?>">
                         <span>
