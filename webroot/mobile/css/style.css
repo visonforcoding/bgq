@@ -1030,7 +1030,7 @@ width:0.5rem;height:0.16rem;display: inline-block;transition: all .3s;float:righ
 .orgtext,.orgtxt{display:none;background: #e1e1e1;padding:.05rem .3rem .05rem .1rem;font-size:.24rem;color:#222;position:relative;border-radius: .06rem;}
 .b-input{background: #7a7d82;border:none;overflow:hidden;width:100%;display: none;}
 .b-input li{height:.6rem;}
-.b-input input{width:30%;height:.4rem;font-size:.26rem;margin-left:35%;margin-top:.1rem;color:#fff;}
+.b-input input{width:30%;height:.4rem;font-size:.26rem;margin-left:35%;margin-top:.1rem;color:#fff;text-align: center;}
 /*@media only screen and (min-width: 414px){
 	.classfytext a{height:34px;line-height: 34px;}
 }*/
