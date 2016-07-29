@@ -122,6 +122,12 @@ class UserTable extends Table {
             'joinType' => 'LEFT',
             'className' => 'Secret'
         ]);
+        
+        $this->hasMany('Activityapply', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER',
+            'className' => 'Activityapply'
+        ]);
         //联络人
         $this->belongsTo('Customer', [
             'className' => 'Wpadmin.Admin',

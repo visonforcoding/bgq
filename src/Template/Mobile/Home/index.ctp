@@ -22,9 +22,9 @@
     </div>
     <ul class="h-home-menu navlist clearfix">
         <li><a href="/home/my-following" class="clickbtn"><i class="iconfont">&#xe614;</i>我的关注</a></li>
-        <li><a href="/home/my_activity_submit" class="clickbtn"><i class="iconfont">&#xe617;</i>我的活动</a></li>
+        <li><a href="/home/my_activity_submit" class="clickbtn mtips"><i class="iconfont">&#xe617;</i>我的活动<span id='activityMsg'></span></a></li>
         <li><a href="/home/my-collect-activity" class="clickbtn"><i class="iconfont">&#xe615;</i>我的收藏</a></li>
-        <li><a href="/home/my-book" class="clickbtn"><i class="iconfont">&#xe616;</i>我的约见</a></li>
+        <li><a href="/home/my-book" class="clickbtn mtips"><i class="iconfont">&#xe616;</i>我的约见<span id="meetMsg"></span></a></li>
     </ul>
     <!--分类一-->
     
@@ -151,6 +151,12 @@
                     user = user.replace('{#avatar#}', '/mobile/images/touxiang.png');
                 }
                 $('#user').html(user);
+                if(res.data.activityMsg){
+                    $('#activityMsg').addClass('opic');
+                }
+                if(res.data.meetMsg){
+                    $('#meetMsg').addClass('opic');
+                }
             } else {
                 $('.clickbtn').on('click', function (){return false;});
             }

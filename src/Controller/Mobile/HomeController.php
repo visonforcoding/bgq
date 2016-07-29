@@ -1217,7 +1217,51 @@ class HomeController extends AppController {
         if($data['keyword']){
             $where['User.truename LIKE'] = '%' . $data['keyword'] . "%";
         }
-        $user = $user->where($where)->toArray();
+        $user = $user->where($where)->limit($this->limit)->toArray();
+        if($user !== false){
+            if($user == null){
+                return $this->Util->ajaxReturn(false, '暂无同行');
+            } else {
+                return $this->Util->ajaxReturn(['status'=>true, 'data'=>$user]);
+            }
+        } else {
+            return $this->Util->ajaxReturn(false, '系统错误');
+        }
+    }
+    
+    public function getMoreSearch($page){
+        $where = [];
+        $userTable = \Cake\ORM\TableRegistry::get('user');
+        $data = $this->request->data();
+        $user = $userTable->find()->contain(['Subjects']);
+        if($data['industry_id']){
+            $industry_id = $data['industry_id'];
+            $user = $user->matching('Industries', function($q)use($industry_id){
+                return $q;
+            });
+            $where['industry_id'] = $industry_id;
+        }
+        
+        if($data['region']){
+            $city = $data['region'];
+            if($city === '其他'){
+                $where['city NOT LIKE'] = '%北京%';
+                $where['city NOT LIKE'] = '%上海%';
+                $where['city NOT LIKE'] = '%广州%';
+                $where['city NOT LIKE'] = '%深圳%';
+                $where['city NOT LIKE'] = '%成都%';
+                $where['city NOT LIKE'] = '%杭州%';
+                $where['city NOT LIKE'] = '%香港%';
+                $where['city NOT LIKE'] = '%武汉%';
+            } else {
+                $where['city LIKE'] = '%' . $city . '%';
+            }
+        }
+        
+        if($data['keyword']){
+            $where['User.truename LIKE'] = '%' . $data['keyword'] . "%";
+        }
+        $user = $user->where($where)->page($page, $this->limit)->toArray();
         if($user !== false){
             if($user == null){
                 return $this->Util->ajaxReturn(false, '暂无同行');
