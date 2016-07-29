@@ -319,6 +319,9 @@ class NewsController extends AppController {
                 $news = $this->News->get($newscom->news_id);
                 $news->comment_nums += 1;
                 $this->News->save($news);
+                $this->loadComponent('Business');
+                $jump_url = '/news/view/'.  $lastcom->news_id.'#allcoment#common_'.$newscom->id;
+                $this->Business->usermsg($reply_com->user_id,'评论回复','有人回复了你的评论!', 3,$newComment->id,$jump_url);
                 return $this->Util->ajaxReturn(true, '回复成功');
             } else {
                 return $this->Util->ajaxReturn(false, '回复失败');
@@ -335,8 +338,8 @@ class NewsController extends AppController {
             $id = $this->request->data('id');
             $NewscomTable = \Cake\ORM\TableRegistry::get('Newscom');
             $com =  $NewscomTable->get($id);
-            $res = $NewscomTable->delete($com);
-            if ($res) {
+            $com->is_delete = 1;  //假删除处理
+            if ($NewscomTable->save($com)) {
                 $news = $this->News->get($com->news_id);
                 $news->comment_nums -= 1;
                 $this->News->save($news);

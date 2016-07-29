@@ -155,6 +155,7 @@
                         response += '<a title="报名用户" href="/admin/activityapply/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-user"></i> </a>';
                         response += '<a title="赞助详情" href="/admin/sponsor/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-dollar"></i> </a>';
                         response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(' + rowObject.id + ');"><i class="icon icon-qrcode"></i><div hidden id="code_' + rowObject.id + '" style="position:relative;top:0;"><img back_src="' + rowObject.qrcode + '" /></div> </a>';
+                        response += '<a title="下架" href="javascript:void(0)" class="grid-btn" onclick="ban(' + rowObject.id + ');"><i class="icon icon-arrow-down"></i></a>';
                     } else if (rowObject.is_top == 1 && rowObject.is_check == 1) {
                         response += '<a title="取消置顶" href="javascript:void(0)" class="grid-btn untop" onclick="untop(' + rowObject.id + ')"><i class="icon icon-long-arrow-down"></i></a>';
                         response += '<a title="评论详情" href="/admin/activitycom/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-comment"></i> </a>';
@@ -163,6 +164,7 @@
                         response += '<a title="报名用户" href="/admin/activityapply/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-user"></i> </a>';
                         response += '<a title="赞助详情" href="/admin/sponsor/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-dollar"></i> </a>';
                         response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(' + rowObject.id + ');"><i class="icon icon-qrcode"></i><div hidden id="code_' + rowObject.id + '" style="position:relative;top:0;"><img back_src="' + rowObject.qrcode + '" /></div> </a>';
+                        response += '<a title="下架" href="javascript:void(0)" class="grid-btn" onclick="ban(' + rowObject.id + ');"><i class="icon icon-arrow-down"></i></a>';
                     }
                     if (rowObject.is_check == 0) {
                         response += '<a title="发布" href="javascript:void(0)" class="grid-btn release" onclick="release(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
@@ -352,6 +354,26 @@
                         maxmin: true, //开启最大化最小化按钮
                         area: ['60%', '50%'],
                         content: url//iframe的url
+                    });
+                }
+                function ban(id){
+                    //下架
+                    layer.confirm('确定要下架该活动？将不会在应用中显示', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                        $.ajax({
+                            type: 'post',
+                            data: {id: id},
+                            dataType: 'json',
+                            url: '/admin/activity/ban',
+                            success: function (res) {
+                                layer.msg(res.msg);
+                                if (res.status) {
+                                    $('#list').trigger('reloadGrid');
+                                }
+                            }
+                        })
+                    }, function () {
                     });
                 }
 </script>
