@@ -69,7 +69,7 @@
                         <li><a data-val="杭州" href="#this">杭州</a> </li>
                         <li class="r-place"><a href="#this">其它</a><span class="icon-bottom" ></span></li>
                     </ul>
-                    <ul class="b-input mt1">
+                    <ul class="b-input mt1 cart">
                         <li ><input type="text" placeholder="请输入……" /></li>
                     </ul>
                 </div>
@@ -130,7 +130,7 @@
     <!--行业标签-->
     <div class="markbox border" id="classfy">
         <div class="a-s-title bgff">
-            <span class="orgname">请选择行业标签(最多4个)<!--<i class="classfytext"></i>--></span>
+            <span class="">请选择行业标签(最多4个)<!--<i class="classfytext"></i>--></span>
         </div>
         <div class="markslider">
             <div class="classfytext">
@@ -160,12 +160,12 @@
 </div>
 <?php $this->start('script') ?>
 <script type="text/javascript">
-    function closedfn(that) {
-        that.remove();
-        var da = $(that).data('val');
-        console.log(da);
-        $('#industry li[data-val="' + da + '"]').children('a').removeClass('active');
-    }
+    // function closedfn(that) {
+    //     that.remove();
+    //     var da = $(that).data('val');
+    //     console.log(da);
+    //     $('#industry li[data-val="' + da + '"]').children('a').removeClass('active');
+    // }
     function closedft(that) {
         $(that).text('').hide();
         $('#org li a').removeClass('active');
@@ -173,18 +173,20 @@
     function fn(that) {
         var industry_id = $(that).data('val');
         var choose = $('#industry li[data-val="' + industry_id + '"]');
-        if (choose.length) {
-            choose.children('a').removeClass('active');
-        }
+
+        // if (choose.length) {
+        //     choose.children('a').removeClass('active');
+
+        // }
         that.remove();
     }
-    function ft(that) {
-        $(that).text('').hide();
-    }
+    // function ft(that) {
+    //     $(that).text('').hide();
+    // }
     $(function () {
         var agency = null, formdata,city;
         var classfy = $('.classfymark>li');
-        var cart = $('.headmark>li');
+        var cart = $('#org .headmark>li,#industry .headmark>li');
         var allUl = $('.markbox .cart');
         //console.log(allUl.length);
         classfy.on('tap', function () {  //行业
@@ -193,14 +195,16 @@
             window.scrollTo(0, 9999);
         });
         $('#place .headmark li').on('tap', function () {//地区
-            $('.b-input').hide();
+            $('.b-input').removeClass('b-active').addClass('hide');
+            $('.r-place').children('span').removeClass('active');
             $('.orgtxt').html($(this).text() + '<i class="closed">&times;</i>').show();
             city = $(this).find('a').data('val');
             console.log(city);
         })
         $('.r-place').on('tap', function () {
             $('.orgtxt').hide();
-            $('.b-input').show();
+           $('.b-input').addClass('b-active');
+            $(this).children('span').addClass('active');
         })
         $('#industry .cart>li').on('tap', function () {  //行业sub
             var industry_id = $(this).data('val');
@@ -224,20 +228,21 @@
         $('#org .cart>li').on('tap', function () {  //机构sub
             agency = $(this).data('val');
             $('.orgtext').html($(this).text() + '<i class="closed">&times;</i>').show();
-            return;
+            $('.orgtext').attr('data-val',agency);
             $('#org a').removeClass('active');
             $(this).children('a').addClass('active');
+            return;
             $(this).parents('.cart1').hide();
             $('#org span').removeClass('active');
         })
 
         function fixed(that) {
-            allUl.removeClass('shows').addClass('hide');
+            allUl.removeClass('shows');
             var $value = that.attr('data-target');
-            var $value = that.attr('data-target');
+            // var $value = that.attr('data-target');
             cart.children('span').removeClass('active');
             classfy.children('span').removeClass('active');
-            $('.markbox ul[data-id = ' + $value + ']').removeClass('hide').addClass('shows');
+            $('.markbox ul[data-id = ' + $value + ']').addClass('shows');
             that.children('span').addClass('active');
         }
         $('#submit').click(function () {
@@ -264,6 +269,7 @@
                 $.util.alert('还没选择行业标签哦');
                 return false;
             }
+            
             if (industry_ids.length > 4) {
                 $.util.alert('行业标签最多只能选择4个');
                 return false;
