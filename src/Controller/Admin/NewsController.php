@@ -240,22 +240,6 @@ class NewsController extends AppController {
                 },'Reply'=>function($q){
                     return $q->select(['id','truename','avatar']);
                 }])->hydrate(true)->where(['news_id'=>$id])
-                        ->formatResults(function($items){
-                            //时间语义化转换
-                            return $items->map(function($item){
-                                                 //时间语义化转换
-                                $item['ctime_str'] =$item['create_time']->timeAgoInWords(
-                                   [ 'accuracy' => [
-                                             'year' => 'year',
-                                             'month' => 'month',
-                                             'week' => 'week',
-                                             'day'=>'day',
-                                             'hour' => 'hour'
-                                         ],'end' => '+10 year']
-                                );
-                             return $item;
-                           });
-                         })
                         ->toArray();
         $comsHtml = $this->recyOutputComs($coms); 
         $this->set([
@@ -276,9 +260,18 @@ class NewsController extends AppController {
          if($coms){
              foreach ($coms as $com){
                  $output .= '<div class="comment">';
-                 $output .= '<a href="###" class="avatar"><img class="img-circle" style="width:60px;height:60px;" src="'.$com->user->avatar.'"/></a>';
+                 $output .= '<a href="###" class="avatar"><img class="img-circle" style="width:60px;height:60px;" src="'.getAvatar($com->user->avatar).'"/></a>';
                  $output .= '<div class="content">
-                                <div class="pull-right"><span class="text-muted">'.$com->ctime_str.'</span> &nbsp;<strong>#3</strong></div>
+                                <div class="pull-right"><span class="text-muted">'.
+                                $com->create_time->timeAgoInWords(
+                                   [ 'accuracy' => [
+                                             'year' => 'year',
+                                             'month' => 'month',
+                                             'week' => 'week',
+                                             'day'=>'day',
+                                             'hour' => 'hour'
+                                         ],'end' => '+10 year']
+                                ).'</span> &nbsp;<strong>#3</strong></div>
                                 <span class="author">
                                 <a href="#"><strong>'.$com->user->truename.'</strong></a>';
                  if($com->reply){
@@ -288,9 +281,8 @@ class NewsController extends AppController {
                  $output .=  '</span>';
                  $output .='<div class="text">'.$com->body.'</div>
                             <div class="actions">
-                                <a href="##">回复</a>
-                                <a href="##">编辑</a>
-                                <a href="##">删除</a>
+                                <a class="reply" data-id="'.$com->id.'" href="##">回复</a>
+                                <a class="delete" data-id="'.$com->id.'" href="##">删除</a>
                             </div>
                            </div>';
                  if(!empty($com->children)){
@@ -302,5 +294,57 @@ class NewsController extends AppController {
        $output .= '</div>';  
        return $output;
      }
-  }
+     
+     /**
+      * 回复评论
+      * @return type
+      */
+    public function reply() {
+        if ($this->request->is('post')) {
+            $id = $this->request->data('id');
+            $body = $this->request->data('body');
+            $NewscomTable = \Cake\ORM\TableRegistry::get('Newscom');
+            $lastcom =  $NewscomTable->get($id);
+            $reply = [
+                'user_id' => -1, //并购帮官方用户
+                'news_id' => $lastcom->news_id,
+                'body' => $body,
+                'reply_user' => $lastcom->user_id,
+                'pid' => $lastcom->id,
+            ];
+            $newscom = $NewscomTable->newEntity();
+            $newscom = $NewscomTable->patchEntity($newscom, $reply);
+            $res = $NewscomTable->save($newscom);
+            if ($res) {
+                $news = $this->News->get($newscom->news_id);
+                $news->comment_nums += 1;
+                $this->News->save($news);
+                return $this->Util->ajaxReturn(true, '回复成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '回复失败');
+            }
+        }
+    }
+    
+    /**
+     * 评论的删除
+     * @return type
+     */
+    public function comsDelete(){
+         if ($this->request->is('post')) {
+            $id = $this->request->data('id');
+            $NewscomTable = \Cake\ORM\TableRegistry::get('Newscom');
+            $com =  $NewscomTable->get($id);
+            $res = $NewscomTable->delete($com);
+            if ($res) {
+                $news = $this->News->get($com->news_id);
+                $news->comment_nums -= 1;
+                $this->News->save($news);
+                return $this->Util->ajaxReturn(true, '回复成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '回复失败');
+            }
+        }
+    }
+}
         

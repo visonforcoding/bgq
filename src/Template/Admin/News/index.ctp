@@ -185,6 +185,7 @@
                         title: '查看详情',
                         shadeClose: true,
                         shade: 0.8,
+                        maxmin: true, //开启最大化最小化按钮
                         area: ['60%', '50%'],
                         content: url//iframe的url
                     });
