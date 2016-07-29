@@ -459,5 +459,21 @@ class ActivityController extends AppController {
             }
         }
     }
-
+    
+    /**
+     * 丢弃
+     * @return type
+     */
+    public function ban(){
+          if ($this->request->is('post')) {
+            $id = $this->request->data('id');
+            $activity = $this->Activity->get($id);
+            $activity->status = 0;
+            if ($this->Activity->save($activity)) {
+                return $this->Util->ajaxReturn(true, '下架成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '下架失败');
+            }
+        }
+    }
 }

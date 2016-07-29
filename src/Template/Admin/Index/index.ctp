@@ -54,7 +54,7 @@
                         </div>
                         <div class="databox-right">
                             <a class="a-link" href="/admin/withdraw/index">
-                                <span class="databox-number coseconda"><?=$withdrawCounts?></span>
+                                <span class="databox-number coseconda"><?= $withdrawCounts ?></span>
                                 <div class="databox-text darkgray">今日新增</div>
                                 <div class="databox-stat themesecondary radius-bordered">
                                     <i class="">more</i>
@@ -63,84 +63,84 @@
                         </div>
                     </div>
                 </div>
-<!--                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
-                    <div class="databox bg-white radius-bordered">
-                        <div class="databox-left bg-palegreen ht">
-                            会员          
-                        </div>
-                        <div class="databox-right">
-                            <a class="a-link" href="/admin/user/index">
-                                <span class="databox-number cosecond"><?= $userCounts ?></span>
-                                <div class="databox-text darkgray">会员总数</div>
-                                <div class="databox-stat themesecondary radius-bordered">
-                                    <i class="">more</i>
+                <!--                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
+                                    <div class="databox bg-white radius-bordered">
+                                        <div class="databox-left bg-palegreen ht">
+                                            会员          
+                                        </div>
+                                        <div class="databox-right">
+                                            <a class="a-link" href="/admin/user/index">
+                                                <span class="databox-number cosecond"><?= $userCounts ?></span>
+                                                <div class="databox-text darkgray">会员总数</div>
+                                                <div class="databox-stat themesecondary radius-bordered">
+                                                    <i class="">more</i>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
-                    <div class="databox bg-white radius-bordered">
-                        <div class="databox-left bg-themesecondary ht">
-                            资讯          
-                        </div>
-                        <div class="databox-right">
-                            <a class="a-link" href="/admin/news/index">
-                                <span class="databox-number themesecondary"><?= $newsTotalCounts ?></span>
-                                <div class="databox-text darkgray">资讯总数</div>
-                                <div class="databox-stat themesecondary radius-bordered">
-                                    <i class="">more</i>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
-                    <div class="databox bg-white radius-bordered">
-                        <div class="databox-left bg-themethirdcolor ht">
-                            活动          
-                        </div>
-                        <div class="databox-right">
-                            <a class="a-link" href="/admin/activity/index">
-                                <span class="databox-number cosecondar"><?= $activityCounts ?></span>
-                                <div class="databox-text darkgray">活动总数</div>
-                                <div class="databox-stat themesecondary radius-bordered">
-                                    <i class="">more</i>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
-                    <div class="databox bg-white radius-bordered">
-                        <div class="databox-left bg-themeprimary ht">
-                           活动报名        
-                        </div>
-                        <div class="databox-right">
-                            <span class="databox-number coseconda"><?=$activityApplyCounts?></span>
-                            <div class="databox-text darkgray">总数</div>
-                            <div class="databox-stat themesecondary radius-bordered">
-                                <i class="">more</i>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
-                    <div class="databox bg-white radius-bordered">
-                        <div class="databox-left bg-palegreen ht">
-                            约见          
-                        </div>
-                        <div class="databox-right">
-                            <span class="databox-number cosecond"><?=$subjectbookCounts?></span>
-                            <div class="databox-text darkgray">总数</div>
-                            <div class="databox-stat themesecondary radius-bordered">
-                                <i class="">more</i>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
+                                    <div class="databox bg-white radius-bordered">
+                                        <div class="databox-left bg-themesecondary ht">
+                                            资讯          
+                                        </div>
+                                        <div class="databox-right">
+                                            <a class="a-link" href="/admin/news/index">
+                                                <span class="databox-number themesecondary"><?= $newsTotalCounts ?></span>
+                                                <div class="databox-text darkgray">资讯总数</div>
+                                                <div class="databox-stat themesecondary radius-bordered">
+                                                    <i class="">more</i>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
+                                    <div class="databox bg-white radius-bordered">
+                                        <div class="databox-left bg-themethirdcolor ht">
+                                            活动          
+                                        </div>
+                                        <div class="databox-right">
+                                            <a class="a-link" href="/admin/activity/index">
+                                                <span class="databox-number cosecondar"><?= $activityCounts ?></span>
+                                                <div class="databox-text darkgray">活动总数</div>
+                                                <div class="databox-stat themesecondary radius-bordered">
+                                                    <i class="">more</i>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
+                                    <div class="databox bg-white radius-bordered">
+                                        <div class="databox-left bg-themeprimary ht">
+                                           活动报名        
+                                        </div>
+                                        <div class="databox-right">
+                                            <span class="databox-number coseconda"><?= $activityApplyCounts ?></span>
+                                            <div class="databox-text darkgray">总数</div>
+                                            <div class="databox-stat themesecondary radius-bordered">
+                                                <i class="">more</i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
+                                    <div class="databox bg-white radius-bordered">
+                                        <div class="databox-left bg-palegreen ht">
+                                            约见          
+                                        </div>
+                                        <div class="databox-right">
+                                            <span class="databox-number cosecond"><?= $subjectbookCounts ?></span>
+                                            <div class="databox-text darkgray">总数</div>
+                                            <div class="databox-stat themesecondary radius-bordered">
+                                                <i class="">more</i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>-->
             </div>
 
         </div>
@@ -185,7 +185,7 @@
         $.getJSON('/admin/index/get-user-industry-proportion', function (res) {
             new Chart(ctx, {
                 type: 'pie',
-                data: res.data
+                data: res.data,
             });
         }, 'json');
         var newUserChart = document.getElementById('new-user-chart').getContext('2d');
