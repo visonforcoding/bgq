@@ -52,10 +52,11 @@ button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);border:none;background:
 .wraper .texthide{word-break: break-all;display: -webkit-box;/*-webkit-line-clamp: 3;限制行数*/-webkit-box-orient: vertical;overflow: hidden;}
 
 /*1px border*/
-  .bd1,.bd2 {position:relative;}
+  .bd1,.bd2,.ld1,.rd1{position:relative;}
 .bd1:after{width:200%;height:1px;position:absolute;bottom:0;left:0;z-index:0;content:"";-webkit-transform:scale(0.5);-webkit-transform-origin:0 0;transform:scale(0.5);transform-origin:0 0;background: #e5e5e5;}
 .bd2:before{width:200%;height:1px;position:absolute;top:0;left:0;z-index:0;content:"";-webkit-transform:scale(0.5);-webkit-transform-origin:0 0;transform:scale(0.5);transform-origin:0 0;background: #e5e5e5;}
-
+.ld1:after{height:200%;width:1px;top:0;left:0;content:"";-webkit-transform:scale(0.5);-webkit-transform-origin:0 0;transform:scale(0.5);transform-origin:0 0;background: #e5e5e5;position:absolute;}
+.rd1:before{height:200%;width:1px;top:0;right:0;content:"";-webkit-transform:scale(0.5);-webkit-transform-origin:0 0;transform:scale(0.5);transform-origin:0 0;background: #e5e5e5;position:absolute;}
 .bggray{background: #7a7d82;}
 .bgred{background: #e01a48;}
 .bg-ff{background: #fff;}
