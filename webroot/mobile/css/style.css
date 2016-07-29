@@ -387,7 +387,11 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .head-img i{position: absolute;right:0.12rem;bottom:0;width:0.29rem;height:0.3rem;background: url(img/v.png) no-repeat;background-size: contain;}
 .mark{margin-top:0.2rem;}
 .vipinfo{width:5.3rem;float:left;}
-.vipinfo h3{font-size:0.32rem;color:#222c38;line-height: 0.46rem;}
+.vipinfo h3{font-size:0.32rem;color:#222c38;line-height: 0.46rem;height:.54rem;}
+.vipinfo h3 .l-name{float:left;}
+.l-name{}
+.l-place{margin-left:.1rem;color:#fff;padding:0 .15rem;background: #ff5176;display: inline-block;font-size:.24rem;border-radius: .5rem;line-height: .36rem;}
+.l-place i{font-size:.2rem;margin-right:.08rem;}
 .vipinfo h3 span{float:right;}
 .vipinfo span.job,.vipinfo span.c-info{line-height: 0.64rem;font-size:0.28rem;margin-top:0.06rem;color: #969fa9;}
 .vipinfo span.job{line-height: 0.4rem;}
