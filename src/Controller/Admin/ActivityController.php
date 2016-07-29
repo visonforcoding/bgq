@@ -336,5 +336,128 @@ class ActivityController extends AppController {
         }
         exit();
     }
+    
+      /**
+     * 资讯评论
+     * @param type $id
+     */
+    public function comments($id) {
+        $this->viewBuilder()->autoLayout(false);
+        $ActivitycomTable = \Cake\ORM\TableRegistry::get('Activitycom');
+        $activity= $this->Activity->find()->select(['id','title'])->first();
+        $comsCount = $ActivitycomTable->find()->where(['activity_id'=>$id])->count();
+        $coms = $ActivitycomTable->find('threaded', [
+                    'keyField' => 'id',
+                    'parentField' => 'pid'
+                ])->contain(['Users'=>function($q){
+                    return $q->select(['id','truename','avatar']);
+                },'Replyusers'=>function($q){
+                    return $q->select(['id','truename','avatar']);
+                }])->hydrate(true)->where(['activity_id'=>$id])
+                        ->toArray();
+        $comsHtml = $this->recyOutputComs($coms); 
+        $this->set([
+            'comsHtml'=>$comsHtml,
+            'comsCount'=>$comsCount,
+            'activity'=>$activity
+        ]);        
+     }
+     
+     
+     /**
+      * 递归输出评论html
+      * @param type $coms
+      * @return string
+      */
+     protected function recyOutputComs($coms){
+         $output = '<div class="comments-list">';
+         if($coms){
+             foreach ($coms as $com){
+                 $output .= '<div class="comment">';
+                 $output .= '<a href="###" class="avatar"><img class="img-circle" style="width:60px;height:60px;" src="'.getAvatar($com->user->avatar).'"/></a>';
+                 $output .= '<div class="content">
+                                <div class="pull-right"><span class="text-muted">'.
+                                $com->create_time->timeAgoInWords([ 'accuracy' => [
+                                             'year' => 'year',
+                                             'month' => 'month',
+                                             'week' => 'week',
+                                             'day'=>'day',
+                                             'hour' => 'hour'
+                                         ],'end' => '+10 year']
+                                ).'</span> &nbsp;<strong>#3</strong></div>
+                                <span class="author">
+                                <a href="#"><strong>'.$com->user->truename.'</strong></a>';
+                 if($com->reply){
+                     $output .= '<span class="text-muted"> 回复 </span>
+                                <a href="#">'.$com->replyusers->truename.'</a>';
+                 }
+                 $output .=  '</span>';
+                 $output .='<div class="text">'.$com->body.'</div>
+                            <div class="actions">
+                                <a class="reply" data-id="'.$com->id.'" href="##">回复</a>
+                                <a class="delete" data-id="'.$com->id.'" href="##">删除</a>
+                            </div>
+                           </div>';
+                 if(!empty($com->children)){
+                     $output .= $this->recyOutputComs($com->children);
+                 }
+                 $output .='</div>';
+             }
+         }
+       $output .= '</div>';  
+       return $output;
+     }
+     
+     /**
+      * 回复评论
+      * @return type
+      */
+    public function reply() {
+        if ($this->request->is('post')) {
+            $id = $this->request->data('id');
+            $body = $this->request->data('body');
+            $ActivitycomTable = \Cake\ORM\TableRegistry::get('Activitycom');
+            $lastcom =  $ActivitycomTable->get($id);
+            $reply = [
+                'user_id' => -1, //并购帮官方用户
+                'activity_id' => $lastcom->activity_id,
+                'body' => $body,
+                'reply_id' => $lastcom->user_id,
+                'pid' => $lastcom->id,
+            ];
+            $newscom = $ActivitycomTable->newEntity();
+            $newscom = $ActivitycomTable->patchEntity($newscom, $reply);
+            $res = $ActivitycomTable->save($newscom);
+            if ($res) {
+                $news = $this->Activity->get($newscom->activity_id);
+                $news->comment_nums += 1;
+                $this->Activity->save($news);
+                return $this->Util->ajaxReturn(true, '回复成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '回复失败');
+            }
+        }
+    }
+    
+    /**
+     * 评论的删除
+     * @return type
+     */
+    public function comsDelete(){
+         if ($this->request->is('post')) {
+            $id = $this->request->data('id');
+            $ActivitycomTable = \Cake\ORM\TableRegistry::get('Activitycom');
+            $com =  $ActivitycomTable->get($id);
+            $res = $ActivitycomTable->delete($com);
+            if ($res) {
+                $news = $this->Activity->get($com->activity_id);
+                $news->comment_nums -= 1;
+                $this->Activity->save($news);
+                return $this->Util->ajaxReturn(true, '回复成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '回复失败');
+            }
+        }
+    }
 
 }

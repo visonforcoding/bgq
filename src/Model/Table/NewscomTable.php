@@ -71,7 +71,7 @@ class NewscomTable extends Table {
                 ->allowEmpty('id', 'create');
 
         $validator
-                ->requirePresence('body', 'create','评论内容不可为空')
+                ->requirePresence('body', 'create', '评论内容不可为空')
                 ->notEmpty('body');
 
         return $validator;
@@ -88,6 +88,26 @@ class NewscomTable extends Table {
         $rules->add($rules->existsIn(['news_id'], 'News'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         return $rules;
+    }
+
+    /**
+     * 删除后事件
+     * @param type $event
+     * @param type $entity
+     * @param type $options
+     */
+    public function afterDelete($event, $entity, $options) {
+        $this->deleteChildren($entity->id);
+    }
+
+    private function deleteChildren($parentId) {
+        $children = $this->findByPid($parentId)->toArray();
+        \Cake\Log\Log::debug($children,'devlog');
+        if (!empty($children)) {
+            foreach ($children as $child) {
+                $this->delete($child);
+            }
+        }
     }
 
 }

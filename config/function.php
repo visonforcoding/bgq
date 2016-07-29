@@ -32,20 +32,19 @@ function createRandomCode($length, $type = 1) {
     return $randomCode;
 }
 
-
 /**
  * save 的验证错误信息
  * @param type $entity
  * @param type $msg
  * @return type
  */
-function errorMsg($entity,$msg) {
+function errorMsg($entity, $msg) {
     $errors = $entity->errors();
-    if(\Cake\Core\Configure::read('debug')) {
-        Cake\Log\Log::error($errors,'devlog');
+    if (\Cake\Core\Configure::read('debug')) {
+        Cake\Log\Log::error($errors, 'devlog');
     }
     $message = null;
-    if(is_array($errors)){
+    if (is_array($errors)) {
         foreach ($errors as $value) {
             foreach ($value as $val) {
                 $message = $val;
@@ -53,14 +52,27 @@ function errorMsg($entity,$msg) {
             }
         }
     }
-    return empty($message)?$msg:$message;
+    return empty($message) ? $msg : $message;
 }
 
 /**
- * 
+ *  获得原图
  * @param type $thumb
  * @return type
  */
-function getOriginAvatar($thumb){
-  return   preg_replace('/thumb_/', '',$thumb);
+function getOriginAvatar($thumb) {
+    return preg_replace('/thumb_/', '', $thumb);
+}
+
+/**
+ * 头像不存在或找不到时候设置为默认图
+ * @param type $avatar
+ * @return string
+ */
+function getAvatar($avatar) {
+    if (empty($avatar) || !file_exists(WWW_ROOT . $avatar)) {
+        return '/mobile/images/touxiang.jpg';
+    }else{
+        return $avatar;
+    }
 }

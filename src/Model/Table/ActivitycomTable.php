@@ -97,5 +97,24 @@ class ActivitycomTable extends Table {
         $rules->add($rules->existsIn(['reply_id'], 'Users'));
         return $rules;
     }
+    
+        /**
+     * 删除后事件
+     * @param type $event
+     * @param type $entity
+     * @param type $options
+     */
+    public function afterDelete($event, $entity, $options) {
+        $this->deleteChildren($entity->id);
+    }
+
+    private function deleteChildren($parentId) {
+        $children = $this->findByPid($parentId)->toArray();
+        if (!empty($children)) {
+            foreach ($children as $child) {
+                $this->delete($child);
+            }
+        }
+    }
 
 }

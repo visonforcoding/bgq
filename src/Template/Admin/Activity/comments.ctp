@@ -12,7 +12,7 @@
     </head>
     <body>
         <div class='container inner'>
-            <header><h3><?= $news->title ?></h3></header>
+            <header><h3><?= $activity->title ?></h3></header>
             <div contenteditable="true" spellcheck="false" class="example">
                 <div class="comments">
                     <header>
@@ -49,7 +49,7 @@
                                 type: 'post',
                                 data: {id: comId},
                                 dataType: 'json',
-                                url: '/admin/news/coms-delete',
+                                url: '/admin/activity/coms-delete',
                                 success: function (res) {
                                     layer.msg(res.msg);
                                     if (res.status) {
@@ -64,7 +64,7 @@
                         var comId = $(this).parents('div.reply-form').data('id');
                         var body = $('#msg').val();
                         $.ajax({
-                            url: '/admin/news/reply',
+                            url: '/admin/activity/reply',
                             data: {id: comId, body: body},
                             dataType: 'json',
                             type: 'post',
