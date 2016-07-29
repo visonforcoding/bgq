@@ -1052,4 +1052,4 @@ background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  ba
 .btn .off{margin-right:1px;float:right;background: #fff;box-shadow: 0 0 1px rgba(0,0,0,.6);}
 .iscache{overflow:hidden;padding:1px;}
 .wraper .nopr{padding-right:0;}
-.classfytext .closed,.orgtext .closed{position:absolute;right:0.04rem;color:#888;font-size:0.24rem;font-weight: bold;}
+.classfytext .closed,.orgtext .closed,.orgtxt .closed{position:absolute;right:0.04rem;color:#888;font-size:0.24rem;font-weight: bold;}
