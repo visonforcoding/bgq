@@ -105,7 +105,7 @@
                     response += '<a title="复制" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
                     response += '<a title="编辑" href="/admin/news/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
 //                    response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
-                    response += '<a title="评论详情" href="/admin/newscom/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-comment"></i> </a>';
+                    response += '<a title="评论详情" onClick="viewComs(' + rowObject.id + ');" class="grid-btn "><i class="icon icon-comment"></i> </a>';
                     response += '<a title="点赞日志" href="/admin/likeLogs/index/' + rowObject.id + '?type=1" class="grid-btn "><i class="icon icon-heart"></i> </a>';
                     response += '<a title="收藏日志" href="/admin/collect/index/' + rowObject.id + '?type=1" class="grid-btn "><i class="icon icon-star"></i> </a>';
 //                    response += '</div></div>';
@@ -168,6 +168,18 @@
                 function doView(id) {
                     //查看明细
                     url = '/admin/news/view/' + id;
+                    layer.open({
+                        type: 2,
+                        title: '查看详情',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['60%', '50%'],
+                        content: url//iframe的url
+                    });
+                }
+                function viewComs(id){
+                    //查看评论
+                    url = '/admin/news/comments/' + id;
                     layer.open({
                         type: 2,
                         title: '查看详情',

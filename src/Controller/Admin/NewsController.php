@@ -152,75 +152,155 @@ class NewsController extends AppController {
         $query->contain(['Users', 'Industries' => function($q) {
                 return $q->hydrate(false)->select(['name']);
             }]);
-                if (!empty($industry['_ids'][0])) {
-                    //过滤
-                    $query->matching('Industries', function($q)use($industry) {
-                        return $q->where(['Industries.id' => $industry['_ids'][0]]);
-                    });
-                }
 
-                //$query->hydrate(false);
-                if (!empty($where)) {
-                    $query->where($where);
-                }
-                $nums = $query->count();
-                if (!empty($sort) && !empty($order)) {
-                    $query->order([$sort => $order]);
-                }
-
-                $query->limit(intval($rows))
-                        ->page(intval($page));
-                $res = $query->toArray();
-                if (empty($res)) {
-                    $res = array();
-                }
-                if ($nums > 0) {
-                    $total_pages = ceil($nums / $rows);
-                } else {
-                    $total_pages = 0;
-                }
-                $data = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $res);
-                $this->autoRender = false;
-                $this->response->type('json');
-                echo json_encode($data);
-            }
-
-            /**
-             * export csv
-             *
-             * @return csv 
-             */
-            public function exportExcel() {
-                $sort = $this->request->data('sidx');
-                $order = $this->request->data('sord');
-                $keywords = $this->request->data('keywords');
-                $begin_time = $this->request->data('begin_time');
-                $end_time = $this->request->data('end_time');
-                $where = [];
-                if (!empty($keywords)) {
-                    $where[' username like'] = "%$keywords%";
-                }
-                if (!empty($begin_time) && !empty($end_time)) {
-                    $begin_time = date('Y-m-d', strtotime($begin_time));
-                    $end_time = date('Y-m-d', strtotime($end_time));
-                    $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
-                }
-                $Table = $this->News;
-                $column = ['作者', '标题', '阅读数', '点赞数', '评论数', '封面', '内容', '摘要', '创建时间', '更新时间'];
-                $query = $Table->find();
-                $query->hydrate(false);
-                $query->select(['admin_id', 'title', 'read_nums', 'praise_nums', 'comment_nums', 'cover', 'body', 'summary', 'create_time', 'update_time']);
-                if (!empty($where)) {
-                    $query->where($where);
-                }
-                if (!empty($sort) && !empty($order)) {
-                    $query->order([$sort => $order]);
-                }
-                $res = $query->toArray();
-                $this->autoRender = false;
-                $filename = 'News_' . date('Y-m-d') . '.csv';
-                \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
-            }
-
+        if (!empty($industry['_ids'][0])) {
+            //过滤
+            $query->matching('Industries', function($q)use($industry) {
+                return $q->where(['Industries.id' => $industry['_ids'][0]]);
+            });
         }
+
+        //$query->hydrate(false);
+        if (!empty($where)) {
+            $query->where($where);
+        }
+        $nums = $query->count();
+        if (!empty($sort) && !empty($order)) {
+            $query->order([$sort => $order]);
+        }
+
+        $query->limit(intval($rows))
+                ->page(intval($page));
+        $res = $query->toArray();
+        if (empty($res)) {
+            $res = array();
+        }
+        if ($nums > 0) {
+            $total_pages = ceil($nums / $rows);
+        } else {
+            $total_pages = 0;
+        }
+        $data = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $res);
+        $this->autoRender = false;
+        $this->response->type('json');
+        echo json_encode($data);
+    }
+
+    /**
+     * export csv
+     *
+     * @return csv 
+     */
+    public function exportExcel() {
+        $sort = $this->request->data('sidx');
+        $order = $this->request->data('sord');
+        $keywords = $this->request->data('keywords');
+        $begin_time = $this->request->data('begin_time');
+        $end_time = $this->request->data('end_time');
+        $where = [];
+        if (!empty($keywords)) {
+            $where[' username like'] = "%$keywords%";
+        }
+        if (!empty($begin_time) && !empty($end_time)) {
+            $begin_time = date('Y-m-d', strtotime($begin_time));
+            $end_time = date('Y-m-d', strtotime($end_time));
+            $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
+        }
+        $Table = $this->News;
+        $column = ['作者', '标题', '阅读数', '点赞数', '评论数', '封面', '内容', '摘要', '创建时间', '更新时间'];
+        $query = $Table->find();
+        $query->hydrate(false);
+        $query->select(['admin_id', 'title', 'read_nums', 'praise_nums', 'comment_nums', 'cover', 'body', 'summary', 'create_time', 'update_time']);
+        if (!empty($where)) {
+            $query->where($where);
+        }
+        if (!empty($sort) && !empty($order)) {
+            $query->order([$sort => $order]);
+        }
+        $res = $query->toArray();
+        $this->autoRender = false;
+        $filename = 'News_' . date('Y-m-d') . '.csv';
+        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+    }
+
+    /**
+     * 资讯评论
+     * @param type $id
+     */
+    public function comments($id) {
+        $this->viewBuilder()->autoLayout(false);
+        $NewscomTable = \Cake\ORM\TableRegistry::get('Newscom');
+        $news = $this->News->find()->select(['id','title'])->first();
+        $comsCount = $NewscomTable->find()->where(['news_id'=>$id])->count();
+        $coms = $NewscomTable->find('threaded', [
+                    'keyField' => 'id',
+                    'parentField' => 'pid'
+                ])->contain(['Users'=>function($q){
+                    return $q->select(['id','truename','avatar']);
+                },'Reply'=>function($q){
+                    return $q->select(['id','truename','avatar']);
+                }])->hydrate(true)->where(['news_id'=>$id])
+                        ->formatResults(function($items){
+                            //时间语义化转换
+                            return $items->map(function($item){
+                                                 //时间语义化转换
+                                $item['ctime_str'] =$item['create_time']->timeAgoInWords(
+                                   [ 'accuracy' => [
+                                             'year' => 'year',
+                                             'month' => 'month',
+                                             'week' => 'week',
+                                             'day'=>'day',
+                                             'hour' => 'hour'
+                                         ],'end' => '+10 year']
+                                );
+                             return $item;
+                           });
+                         })
+                        ->toArray();
+        $comsHtml = $this->recyOutputComs($coms); 
+        $this->set([
+            'comsHtml'=>$comsHtml,
+            'comsCount'=>$comsCount,
+            'news'=>$news
+        ]);        
+     }
+     
+     
+     /**
+      * 递归输出评论html
+      * @param type $coms
+      * @return string
+      */
+     protected function recyOutputComs($coms){
+         $output = '<div class="comments-list">';
+         if($coms){
+             foreach ($coms as $com){
+                 $output .= '<div class="comment">';
+                 $output .= '<a href="###" class="avatar"><img class="img-circle" style="width:60px;height:60px;" src="'.$com->user->avatar.'"/></a>';
+                 $output .= '<div class="content">
+                                <div class="pull-right"><span class="text-muted">'.$com->ctime_str.'</span> &nbsp;<strong>#3</strong></div>
+                                <span class="author">
+                                <a href="#"><strong>'.$com->user->truename.'</strong></a>';
+                 if($com->reply){
+                     $output .= '<span class="text-muted"> 回复 </span>
+                                <a href="#">'.$com->reply->truename.'</a>';
+                 }
+                 $output .=  '</span>';
+                 $output .='<div class="text">'.$com->body.'</div>
+                            <div class="actions">
+                                <a href="##">回复</a>
+                                <a href="##">编辑</a>
+                                <a href="##">删除</a>
+                            </div>
+                           </div>';
+                 if(!empty($com->children)){
+                     $output .= $this->recyOutputComs($com->children);
+                 }
+                 $output .='</div>';
+             }
+         }
+       $output .= '</div>';  
+       return $output;
+     }
+  }
         
