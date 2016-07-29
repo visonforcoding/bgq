@@ -211,7 +211,7 @@ class Umeng {
         $android_brocast->setPredefinedKeyValue("after_open", $after_open);  // 安卓之后动作
         $android_brocast->setPredefinedKeyValue("activity", 'com.chinamatop.club.app.activity.MainActivity'); // 对应的activity
         $android_brocast->setPredefinedKeyValue("production_mode", $production_mode); // 生产环境
-        $android_brocast->setCustomizedField("extra", $extra); // ios额外内容
+        $android_brocast->setExtraField("extra", $extra); // 安卓额外内容
         $android_upload = $android_brocast->uploadContents($file);
         $android_data = json_decode($android_upload);
         if ($android_data->ret == 'SUCCESS') {
@@ -225,7 +225,11 @@ class Umeng {
                 }
             }
         } else {
-            return false;
+            if ($production_mode) {
+                return false;
+            } else {
+                return $this->showError($ios_res->data->error_code);
+            }
         }
         // ios推送
         $ios_brocast = new \IOSNotification();
@@ -251,7 +255,11 @@ class Umeng {
                 }
             }
         } else {
-            return false;
+            if ($production_mode) {
+                return false;
+            } else {
+                return $this->showError($ios_res->data->error_code);
+            }
         }
         if($ios_res->ret == 'SUCCESS' && $android_res->ret == 'SUCCESS'){
             if ($production_mode) {

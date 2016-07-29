@@ -103,7 +103,7 @@
                     <a class="bd1">
                         <li class="inner">
                             <span>
-                                <div class="h-tips"><i class="iconfont">&#xe652;</i>教育经历</div><?= $education->school ?>
+                                <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div><?= $education->school ?>
                             </span>
                         </li>
                         <span class="worktime"><?= $education->start_date ?>～<?= $education->end_date ?>，<?= $education->major ?>，<?= $educationType[$education->education] ?></span>
@@ -113,7 +113,7 @@
                     <a class="bd1">
                         <li class="inner">
                             <span>
-                                <div class="h-tips"><i class="iconfont">&#xe652;</i>教育经历</div>暂未填写
+                                <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div>暂未填写
                             </span>
                         </li>
                         <span class="worktime">暂未填写</span>

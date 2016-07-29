@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title><?= $pageTitle ? $pageTitle : '并购圈'; ?></title>
+        <title><?= isset($pageTitle) ? $pageTitle : '并购帮'; ?></title>
         <link rel="stylesheet" type="text/css" href="/pc/css/basic.css"/>
         <link rel="stylesheet" type="text/css" href="/pc/css/style.css"/>
         <script type="text/javascript" src="/mobile/js/zepto.min.js"></script>

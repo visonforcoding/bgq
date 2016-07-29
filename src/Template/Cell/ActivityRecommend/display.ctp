@@ -1,4 +1,10 @@
-<select name="activity_recommends[_ids][]" id="select-activity" class=" form-control" multiple="multiple">
+<?php $single = false; ?>
+<?php if (isset($selIds)&&isset($selIds[0])): ?>
+    <?php if ($selIds[0] == 'single'): ?>
+        <?php $single = true; ?>
+    <?php endif; ?>
+<?php endif; ?>
+<select <?php if(!$single): ?>name="activity_recommends[_ids][]" <?php else: ?>name="activity_id"<?php endif; ?> id="select-activity" class=" form-control" <?php if(!$single): ?>multiple="multiple"<?php endif; ?>>
     <?php foreach ($activities as $activity): ?>
         <option></option>
         <option <?php if(isset($selIds)): ?>
