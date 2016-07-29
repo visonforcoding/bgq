@@ -575,7 +575,7 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .tabcon ul li{/*line-height: .9rem;*/position:relative;font-size:0;padding:.3rem 0;}
 .tabcon .noafter:after{height:0;content: '';}
 .tabcon ul li:after{width:200%;height:1px;position:absolute;bottom:0;left:0;z-index:0;content:"";-webkit-transform:scale(0.5);-webkit-transform-origin:0 0;transform:scale(0.5);transform-origin:0 0;background: #e5e5e5;}
-.tabcon ul div{display:inline-block;max-width:65%;font-size:0;}
+.tabcon ul div{display:inline-block;max-width:65%;}
 .tabcon div em{margin-right:.1rem;font-size:.28rem;}
 .basicon .b-dq i{color:#ff7e53;font-size:.28rem;}
 .basicon .b-hy i{color:#ff8897;}
@@ -592,7 +592,7 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .tabcon ul i{font-size:.24rem;width:12%;display: inline-block;margin-right:.2rem;}
 .worktab a{display: block;}
 .worktab li span{color:#171717;width:100%;}
-.worktab .worktime{display: block;line-height: .9rem;text-indent: 32%;width:100%;}
+.worktab .worktime{display: block;line-height: .34rem;margin-left: 32%;width:60%;}
 .gs-name{text-indent: 30%;}
 .h-tips{width:30%;}
 .h-tips i{color: #c490bf;}
