@@ -572,7 +572,7 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .tabcon ul.cur{display: block;}
 .worktab a:last-of-type{border-bottom:none;}
 .linkinfo{margin-top:0.12rem;}
-.tabcon ul li{/*line-height: .9rem;*/position:relative;font-size:0;}
+.tabcon ul li{/*line-height: .9rem;*/position:relative;font-size:0;padding:.3rem 0;}
 .tabcon .noafter:after{height:0;content: '';}
 .tabcon ul li:after{width:200%;height:1px;position:absolute;bottom:0;left:0;z-index:0;content:"";-webkit-transform:scale(0.5);-webkit-transform-origin:0 0;transform:scale(0.5);transform-origin:0 0;background: #e5e5e5;}
 .tabcon ul div{display:inline-block;max-width:65%;font-size:0;}
