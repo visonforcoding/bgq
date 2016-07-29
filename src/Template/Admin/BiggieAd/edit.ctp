@@ -41,7 +41,7 @@
 <script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>    -->
 <script>
     $(function () {
-         initJqupload('url', '/wpadmin/util/doUpload?dir=biggiead', 'jpg,png,gif,jpeg'); //初始化图片上传
+        initJqupload('url', '/wpadmin/util/doUpload?dir=biggiead', 'jpg,png,gif,jpeg'); //初始化图片上传
         //var ue = UE.getEditor('content'); //初始化富文本编辑器
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-biggie').select2({

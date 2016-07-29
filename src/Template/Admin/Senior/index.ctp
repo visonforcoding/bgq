@@ -37,12 +37,12 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/user/getDataList",
+                        url: "/admin/senior/getDataList",
                         datatype: "json",
                         mtype: "POST",
                         cellEdit: false,
                         cellsubmit: 'remote',
-                        cellurl: '/admin/user/hand-change',
+                        cellurl: '/admin/senior/hand-change',
                         colNames:
                                 ['手机号', '姓名', '类型', '等级', '公司', '职位', '性别', '专家认证', '帐号状态', '创建时间', '操作'],
                         colModel: [
@@ -136,7 +136,7 @@
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn"><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="查看名片" href="' + rowObject.card_path + '" data-lightbox="' + rowObject.id + '" data-title="' + rowObject.truename + '"><i class="icon icon-picture"></i> </a>';
                     response += '<a title="复制个人主页" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
-                    response += '<a title="修改" href="/admin/user/edit/' + rowObject.id + '" class="grid-btn"><i class="icon icon-pencil"></i> </a>';
+                    response += '<a title="修改" href="/admin/senior/edit/' + rowObject.id + '" class="grid-btn"><i class="icon icon-pencil"></i> </a>';
                     return response;
                 }
 
@@ -145,7 +145,7 @@
                     clip = new ZeroClipboard($('.copy'));
                     console.log('可以复制了');
                     clip.on('copy', function (event) {
-                        clip.setData('text/plain', '/user/home-page/' + event.target.id);
+                        clip.setData('text/plain', '/senior/home-page/' + event.target.id);
                     });
                     clip.on("aftercopy", function (event) {
                         alert("复制了: " + event.data["text/plain"]);
@@ -160,7 +160,7 @@
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/admin/user/delete',
+                            url: '/admin/senior/delete',
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
@@ -193,12 +193,12 @@
                     searchData['sidx'] = sortColumnName;
                     searchData['sort'] = sortOrder;
                     var searchQueryStr = $.param(searchData);
-                    $("body").append("<iframe src='/admin/user/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                    $("body").append("<iframe src='/admin/senior/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
 
                 function doView(id) {
                     //查看明细
-                    url = '/admin/user/view/' + id;
+                    url = '/admin/senior/view/' + id;
                     layer.open({
                         type: 2,
                         title: '查看详情',
@@ -227,7 +227,7 @@
                         type: 'post',
                         data: {id: id},
                         dataType: 'json',
-                        url: '/admin/user/able-user',
+                        url: '/admin/senior/able-user',
                         success: function (res) {
                             layer.msg(res.msg);
                             if (res.status) {
@@ -237,7 +237,7 @@
                     })
                 }
                 function showUser(id) {
-                    url = '/mobile/user/home-page/' + id;
+                    url = '/mobile/senior/home-page/' + id;
                     layer.open({
                         type: 2,
                         title: '个人主页',
