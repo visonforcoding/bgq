@@ -268,5 +268,17 @@ class SavantController extends AppController {
         $this->response->send();
         $this->response->stop();
     }
+    
+    /**
+     * 申请记录
+     */
+     public function showApply($id){
+         $this->viewBuilder()->autoLayout(false);
+         $SavantApplyTable = \Cake\ORM\TableRegistry::get('SavantApply');
+         $applys = $SavantApplyTable->find()->contain(['Users'])->where(['user_id'=>$id])->toArray();
+         $this->set([
+             'applys'=>$applys
+         ]);
+    }
 
 }

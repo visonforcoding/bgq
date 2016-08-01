@@ -25,10 +25,11 @@
         <label class="col-md-2 control-label">封面</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
-                <img  alt="封面图片" src="<?=$savant->savant->cover?>"/>
+                <img  alt="封面图片" src="<?= $savant->savant->cover ?>"/>
             </div>
             <input name="savant[cover]"  type="hidden"/>
             <div id="cover" class="jqupload">上传</div>
+             <span class="notice">类型为jpg,png,gif,jpeg</span>
         </div>
     </div>
     <div class="form-group">
@@ -51,7 +52,7 @@
         <label class="col-md-2 control-label">简介</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('savant.summary', ['label' => false,'type'=>'textarea', 'class' => 'form-control']);
+            echo $this->Form->input('savant.summary', ['label' => false, 'type' => 'textarea', 'class' => 'form-control']);
             ?>
         </div>
     </div>
@@ -75,12 +76,14 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">类型</label>
                 <div class="col-md-8">
-                    <input type="text" name="title" class="form-control" id="title" disabled value="<?php switch ($v['type']) {
-            case 1: echo '一对一';
-                break;
-            case 2: echo '一对多';
-                break;
-        } ?>">
+                    <input type="text" name="title" class="form-control" id="title" disabled value="<?php
+                    switch ($v['type']) {
+                        case 1: echo '一对一';
+                            break;
+                        case 2: echo '一对多';
+                            break;
+                    }
+                    ?>">
                 </div>
             </div>
             <div class="form-group">
@@ -108,7 +111,7 @@
                 </div>
             </div>
     <?php endforeach; ?>
-    <?php endif; ?>
+<?php endif; ?>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 

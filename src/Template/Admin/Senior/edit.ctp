@@ -97,6 +97,7 @@
             </div>
             <input name="card_path" value="<?= $user->card_path ?>" type="hidden"/>
             <div id="card_path" class="jqupload">上传</div>
+             <span class="notice">类型为jpg,png,gif,jpeg</span>
         </div>
     </div>
     <div class="form-group">

@@ -46,7 +46,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['作者', '标题','行业标签', '阅读数', '点赞数', '评论数', '创建时间', '更新时间', '操作'],
+                                ['作者', '标题','行业标签', '阅读数', '点赞数', '评论数','状态', '创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
                                     if(!cellvalue){
@@ -66,11 +66,19 @@
                             {name: 'read_nums', editable: true, align: 'center'},
                             {name: 'praise_nums', editable: true, align: 'center'},
                             {name: 'comment_nums', editable: true, align: 'center'},
+                            {name: 'status', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
+                                    switch (cellvalue) {
+                                        case 1:
+                                            return '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-check-circle"></i> 上线</button>';
+                                        case 0:
+                                            return '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-remove-circle"></i><i style="color:red"> 下线</i></button>';
+                                    }
+                            }},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
-                        rowNum: 30,
+                        rowNum: 10,
                         rowList: [10, 20, 30],
                         sortname: "id",
                         sortorder: "desc",
@@ -88,7 +96,7 @@
                             total: "total",
                             records: "records",
                             repeatitems: false,
-                            id: "0"
+                            id: "id"
                         },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
                     
@@ -100,7 +108,7 @@
                 function actionFormatter(cellvalue, options, rowObject) {
 //                    response = '<div class="bigdiv" onmouseout=$(this).find(".showall").hide();$(this).find(".showallbtn").show(); ><a class="showallbtn" title="操作" onmouseover=$(this).hide();$(this).next(".showall").show();><i class="icon icon-resize-full"></i></a>';
 //                    response = '<div class="showall" hidden onmouseover=$(this).show();$(this).prev(".showallbtn").hide(); ><a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-                    response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response =  '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
 //                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="复制" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
                     response += '<a title="编辑" href="/admin/news/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
@@ -188,6 +196,25 @@
                         maxmin: true, //开启最大化最小化按钮
                         area: ['60%', '50%'],
                         content: url//iframe的url
+                    });
+                }
+                function ableThis(id) {
+                     layer.confirm('确定更改上下线？', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                        $.ajax({
+                            type: 'post',
+                            data: {id: id},
+                            dataType: 'json',
+                            url: '/admin/news/able',
+                            success: function (res) {
+                                layer.msg(res.msg);
+                                if (res.status) {
+                                    $('#list').trigger('reloadGrid');
+                                }
+                            }
+                        });
+                    }, function () {
                     });
                 }
 </script>

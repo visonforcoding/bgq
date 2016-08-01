@@ -99,7 +99,8 @@ class MeetSubjectController extends AppController {
         $id = $this->request->data('id');
         if ($this->request->is('post')) {
             $meetSubject = $this->MeetSubject->get($id);
-            if ($this->MeetSubject->delete($meetSubject)) {
+            $meetSubject->is_del = 1;
+            if ($this->MeetSubject->save($meetSubject)) {
                 $this->Util->ajaxReturn(true, '删除成功');
             } else {
                 $errors = $meetSubject->errors();
@@ -122,7 +123,7 @@ class MeetSubjectController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = [];
+        $where = ['MeetSubject.is_del'=>0];
         if($id){
             $where['MeetSubject.user_id'] = $id;
         }
@@ -175,9 +176,9 @@ class MeetSubjectController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = [];
+        $where = ['MeetSubject.is_del'=>0];
         if($id){
-            $where['user_id'] = $id;
+            $where['MeetSubject.user_id'] = $id;
         }
         if (!empty($keywords)) {
             $where[' username like'] = "%$keywords%";

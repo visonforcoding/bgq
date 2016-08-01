@@ -482,3 +482,16 @@ ALTER TABLE `activity`
 #7月27
 ALTER TABLE `withdraw`
 	CHANGE COLUMN `remark` `remark` VARCHAR(200) NOT NULL DEFAULT '' COMMENT '备注' AFTER `fee`;
+
+#8月1日
+ALTER TABLE `news`
+	ADD COLUMN `status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '下线' AFTER `keywords`;	
+
+ALTER TABLE `news`
+	ADD COLUMN `is_delete` TINYINT NOT NULL DEFAULT '0' COMMENT '删除' AFTER `thumb`;
+
+ALTER TABLE `meet_subject`
+	ADD COLUMN `is_del` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '1删除0正常' AFTER `last_time`;
+	
+ALTER TABLE `activity`
+	ADD COLUMN `is_del` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '1删除0正常' AFTER `status`;

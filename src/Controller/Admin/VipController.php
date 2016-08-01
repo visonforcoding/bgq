@@ -99,8 +99,7 @@ class VipController extends AppController {
         $industries = $this->User->Industries->find('list', ['limit' => 200]);
         $this->set(compact('user', 'industries', 'isSuperAdmin'));
     }
-
-    /**
+ /**
      * Delete method
      *
      * @param string|null $id User id.
@@ -112,7 +111,9 @@ class VipController extends AppController {
         $id = $this->request->data('id');
         if ($this->request->is('post')) {
             $user = $this->User->get($id);
-            if ($this->User->delete($user)) {
+            $user->enabled = 0;
+            $user->softDelete();
+            if ($this->User->save($user)) {
                 $this->Util->ajaxReturn(true, '删除成功');
             } else {
                 $errors = $user->errors();
@@ -135,7 +136,7 @@ class VipController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = ['grade' => 3];
+        $where = ['grade' => 3,'is_del'=>0];
         if ($this->_user->username != 'admin') {
             $where['admin_id'] = $this->_user->id;
         }
