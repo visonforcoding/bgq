@@ -116,6 +116,7 @@ class UserController extends AppController {
         $id = $this->request->data('id');
         if ($this->request->is('post')) {
             $user = $this->User->get($id);
+            $user->enabled = 0;
             $user->softDelete();
             if ($this->User->save($user)) {
                 $this->Util->ajaxReturn(true, '删除成功');

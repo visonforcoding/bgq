@@ -100,6 +100,7 @@ class SeniorController extends AppController {
         $this->set(compact('user', 'industries','isSuperAdmin'));
     }
 
+    
     /**
      * Delete method
      *
@@ -112,7 +113,9 @@ class SeniorController extends AppController {
         $id = $this->request->data('id');
         if ($this->request->is('post')) {
             $user = $this->User->get($id);
-            if ($this->User->delete($user)) {
+            $user->enabled = 0;
+            $user->softDelete();
+            if ($this->User->save($user)) {
                 $this->Util->ajaxReturn(true, '删除成功');
             } else {
                 $errors = $user->errors();
@@ -135,7 +138,7 @@ class SeniorController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = ['grade' => 2];
+        $where = ['grade' => 2,'is_del'=>0];
         if ($this->_user->username != 'admin') {
             $where['admin_id'] = $this->_user->id;
         }

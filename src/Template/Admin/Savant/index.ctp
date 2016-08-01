@@ -100,11 +100,12 @@
                     response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看话题" href="/admin/meet-subject/index/' + rowObject.id + '" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-rss"></i> </a>';
                     response += '<a title="编辑" href="/admin/savant/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+                    response += '<a title="申请记录" onclick="showApply(' + rowObject.id + ')" class="grid-btn "><i class="icon icon-window-alt"></i> </a>';
                     if (rowObject.savant_status == 2) {
                         response += '<a title="审核通过" href="javascript:void(0)" class="grid-btn release" onclick="pass(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
                     }
                     if (rowObject.savant_status != 0) {
-                        response += '<a title="未通过审核" href="javascript:void(0)" class="grid-btn unrelease" onclick="unpass(' + rowObject.id + ')"><i class="icon icon-times"></i></a>';
+                        response += '<a title="审核不通过" href="javascript:void(0)" class="grid-btn unrelease" onclick="unpass(' + rowObject.id + ')"><i class="icon icon-times"></i></a>';
                     }
                     return response;
                 }
@@ -218,6 +219,19 @@
                         shadeClose: true,
                         shade: 0.8,
                         area: ['375px', '667px'],
+                        skin: 'layui-layer-lan', //没有背景色
+                        content: url
+                    });
+                }
+                
+                function showApply(id) {
+                    url = '/admin/savant/show-apply/' + id;
+                    layer.open({
+                        type: 2,
+                        title: '申请记录',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['50%', '70%'],
                         skin: 'layui-layer-lan', //没有背景色
                         content: url
                     });

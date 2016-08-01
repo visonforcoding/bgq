@@ -57,8 +57,6 @@ class NewsController extends AppController {
                 $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
             }
         }
-//        $savants = $this->News->Savants->find('list', ['limit' => 200]);
-//        $users = $this->News->Users->find('list', ['limit' => 200]);
         $this->set(compact('news'));
     }
 
@@ -115,7 +113,8 @@ class NewsController extends AppController {
         $id = $this->request->data('id');
         if ($this->request->is('post')) {
             $news = $this->News->get($id);
-            if ($this->News->delete($news)) {
+            $news->is_delete = 1;
+            if ($this->News->save($news)) {
                 $this->Util->ajaxReturn(true, '删除成功');
             } else {
                 $errors = $news->errors();
@@ -139,7 +138,7 @@ class NewsController extends AppController {
         $industry = $this->request->data('industries');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = [];
+        $where = ['is_delete'=>0];
         if (!empty($keywords)) {
             $where['or'] = [[' Users.truename like' => "%$keywords%"], ['(`title`) like' => "%$keywords%"], ['(`summary`) like' => "%$keywords%"]];
         }
@@ -197,7 +196,7 @@ class NewsController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = [];
+        $where = ['is_delete'=>0];
         if (!empty($keywords)) {
             $where[' username like'] = "%$keywords%";
         }
@@ -334,7 +333,7 @@ class NewsController extends AppController {
      * @return type
      */
     public function comsDelete(){
-         if ($this->request->is('post')) {
+        if ($this->request->is('post')) {
             $id = $this->request->data('id');
             $NewscomTable = \Cake\ORM\TableRegistry::get('Newscom');
             $com =  $NewscomTable->get($id);
@@ -346,6 +345,22 @@ class NewsController extends AppController {
                 return $this->Util->ajaxReturn(true, '回复成功');
             } else {
                 return $this->Util->ajaxReturn(false, '回复失败');
+            }
+        }
+    }
+    
+    /**
+     * 
+     */
+    public function able(){
+        if ($this->request->is('post')) {
+            $id = $this->request->data('id');
+            $news = $this->News->get($id);
+            $news->status = $news->status==1?0:1;
+            if ($this->News->save($news)) {
+                return $this->Util->ajaxReturn(true, '更改成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '更改失败');
             }
         }
     }

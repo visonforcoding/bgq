@@ -121,7 +121,9 @@ class ActivityNeedController extends AppController {
         $id = $this->request->data('id');
         if ($this->request->is('post')) {
             $activity = $this->Activity->get($id);
-            if ($this->Activity->delete($activity)) {
+            $activity->is_del = 1;
+            $activity->status = 0;
+            if ($this->Activity->save($activity)) {
                 return $this->Util->ajaxReturn(true, '删除成功');
             } else {
                 $errors = $activity->errors();

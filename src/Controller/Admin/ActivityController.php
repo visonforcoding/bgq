@@ -122,7 +122,9 @@ class ActivityController extends AppController {
         $id = $this->request->data('id');
         if ($this->request->is('post')) {
             $activity = $this->Activity->get($id);
-            if ($this->Activity->delete($activity)) {
+            $activity->is_del = 1;
+            $activity->status = 0;
+            if ($this->Activity->save($activity)) {
                 return $this->Util->ajaxReturn(true, '删除成功');
             } else {
                 $errors = $activity->errors();
@@ -147,7 +149,7 @@ class ActivityController extends AppController {
         $region_id = $this->request->data('region_id');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = ['from_user >'=>-1];
+        $where = ['from_user'=>0];
         
         if (!empty($series_id)) {
             $where['and'] = ['series_id'=>$series_id];
@@ -207,7 +209,7 @@ class ActivityController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = ['from_user >'=>-1];
+        $where = ['from_user'=>0];
         if (!empty($keywords)) {
             $where[' username like'] = "%$keywords%";
         }
