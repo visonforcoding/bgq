@@ -31,7 +31,7 @@
             <a href="/meet/view/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
             <div class="vipinfo">
                 <a href="/meet/view/{#id#}">
-                    <h3>{#truename#}<i style='color:#bcbec0;font-size:.2rem;'> 深圳</i><span class="meetnum">{#meet_nums#}人见过</span></h3>
+                    <h3>{#truename#}{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
                     <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
                 </a>
                 <div class="mark bgblue">
@@ -89,6 +89,7 @@
                                 if (msg.status === true) {
                                     $.util.dataToTpl('search', 'searchTpl', msg.data, function (d) {
                                         d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                                        d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
                                         d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
                                         return d;
                                     });
@@ -167,6 +168,7 @@
                     if (msg.status === true) {
                         search_data[industry_id] = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
                             d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                            d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
                             d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
                             return d;
                         });
@@ -208,6 +210,7 @@
                             if (msg.status === true) {
                                 var html = search_data[industry_id] = $.util.dataToTpl('', 'search_tpl', msg.data , function (d) {
                                     d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                                    d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
                                     d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
                                     return d;
                                 });
@@ -233,6 +236,7 @@
                     if (msg.status === true) {
                         $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
                             d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                            d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
                             d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
                             return d;
                         });
@@ -258,6 +262,7 @@
                     if (msg.status === true) {
                         $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
                             d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                            d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
                             d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
                             return d;
                         });

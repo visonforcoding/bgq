@@ -97,7 +97,7 @@
             <a href="/meet/view/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
             <div class="vipinfo">
                 <a href="/meet/view/{#id#}">
-                    <h3>{#truename#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
+                    <h3>{#truename#}{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
                     <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
                 </a>
                 <div class="mark bgblue">
@@ -124,6 +124,7 @@
 <script>
     $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
         d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+        d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
         d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
         return d;
     });
@@ -148,11 +149,10 @@
                 }
 
                 if(res.status){
-                    var html = $.util.dataToTpl('', 'listTpl', res.data, function (d) {
-                        d.user_id = d.user.id;
-                        d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                        d.author = d.user.truename;
-                        d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
+                    var html = $.util.dataToTpl('', 'biggie_tpl', res.data, function (d) {
+                        d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                        d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
+                        d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
                         return d;
                     });
                     $('#biggie').append(html);
