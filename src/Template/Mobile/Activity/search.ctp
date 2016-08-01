@@ -15,7 +15,7 @@
     </div>
     <div class="markbox">
         <div class="a-s-title">
-            <span class="orgname">活动系列</span>
+            <span class="orgname active">活动系列</span>
         </div>
         <ul class="a-s-mark" id="series">
             

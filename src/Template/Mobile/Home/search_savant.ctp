@@ -15,7 +15,7 @@
     </div>
     <div class="markbox">
         <div class="a-s-title">
-            <span class="orgname">选择行业标签</span>
+            <span class="orgname active">选择行业标签</span>
         </div>
         <ul class="a-s-mark s-width" id="industry">
         </ul>
