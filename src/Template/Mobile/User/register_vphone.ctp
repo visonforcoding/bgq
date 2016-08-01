@@ -40,28 +40,32 @@
     });
     $('#getVcode').on('click', function () {
         var $obj = $(this);
+        if($obj.hasClass('noTap')){
+            return;
+        }
+        $obj.addClass('noTap');
+        var text = '<i id="timer">' + 30 + '</i>秒后重新发送';
+        $obj.html(text);
+        t1 = setInterval(function () {
+            var timer = $('#timer').text();
+            timer--;
+            if (timer < 1) {
+                //$obj.removeAttr('disabled');
+                $obj.html('获取验证码');
+                $obj.removeClass('noTap');
+                clearInterval(t1);
+            } else {
+                $('#timer').text(timer);
+                
+            }
+        }, 1000);
         var phone = $('input[name="phone"]').val();
         if ($.util.isMobile(phone)) {
             $.post('/user/sendVcode', {phone: phone}, function (res) {
-                console.log(res);
                 if (res.status === true) {
                     //$obj.attr('disabled ','true');
-                    var text = '<i id="timer">' + 30 + '</i>s后重新发送';
-                    $obj.html(text);
-                    t1 = setInterval(function () {
-                        var timer = $('#timer').text();
-                        timer--;
-                        if (timer < 1) {
-                            //$obj.removeAttr('disabled');
-                            $obj.html('获取验证码');
-                            clearInterval(t1);
-                        } else {
-                            $('#timer').text(timer);
-                        }
-                    }, 1000);
-                }
-                else
-                {
+                    $.util.alert(res.msg);
+                } else {
                     $.util.alert('该手机号已注册');
                 }
             }, 'json');
