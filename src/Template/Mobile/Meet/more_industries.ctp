@@ -50,7 +50,7 @@
             <a href="/meet/view/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
             <div class="vipinfo">
                 <a href="/meet/view/{#id#}">
-                    <h3>{#truename#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
+                    <h3>{#truename#}{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
                     <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
                 </a>
                 <div class="mark">
@@ -83,6 +83,7 @@
     
     $.util.dataToTpl('biggies', 'biggie_tpl',<?= $biggiejson ?>, function (d) {
         d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+        d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
         d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
         return d;
     });
@@ -110,6 +111,7 @@
                         {
                             $.util.dataToTpl('biggies', 'biggie_tpl', msg.data, function (d) {
                                 d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                                d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
                                 d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
                                 return d;
                             });
@@ -144,6 +146,7 @@
                             {
                                 $.util.dataToTpl('biggies', 'biggie_tpl', msg.data, function (d) {
                                     d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                                    d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
                                     d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
                                     return d;
                                 });
@@ -177,8 +180,9 @@
                             {
                                 $.util.dataToTpl('biggies', 'biggie_tpl', msg.data, function (d) {
                                     d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                                    d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
                                     d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
-                                    return d;
+                                    return d;   
                                 });
                             }
                             else
@@ -224,6 +228,7 @@
                             {
                                 $.util.dataToTpl('biggies', 'biggie_tpl', msg.data, function (d) {
                                     d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                                    d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
                                     d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
                                     return d;
                                 });

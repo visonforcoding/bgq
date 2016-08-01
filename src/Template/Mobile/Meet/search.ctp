@@ -24,7 +24,7 @@
         <div class="innercon">
             <span class="head-img"><img src="{#avatar#}"/><i></i></span>
             <div class="vipinfo">
-                <h3>{#truename#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
+                <h3>{#truename#}{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
                 <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
                 <div class="mark">
                     {#subjects#}
@@ -67,6 +67,7 @@
                             if (msg.status === true) {
                                 var html = $.util.dataToTpl('', 'biggie_tpl', msg.data , function (d) {
                                     d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                                    d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
                                     d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
                                     return d;
                                 });
@@ -97,6 +98,7 @@
                     if (msg.status === true) {
                         $.util.dataToTpl('biggie', 'biggie_tpl', msg.data , function (d) {
                             d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                            d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
                             d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
                             return d;
                         });

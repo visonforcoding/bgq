@@ -30,7 +30,9 @@
             <h3><?= $biggie->truename ?><em><?= $biggie->position ?></em></h3>
             <!-- <span class="identification"></span> -->
             <h3 class="mycustorm" ><?= $biggie->company ?></h3>
+            <?php if(!$self): ?>
             <div class="u-btn meetbtn"><a href="/meet/subject_list/<?= $biggie->id ?>" class="focusbtn">立即约见</a></div>
+            <?php endif; ?>
         </li>
         <li>
             <a id="recom" href="javascript:void(0);" class="tocommend"><i class="iconfont f7 <?php if($isReco): ?>color-items<?php endif; ?>">&#xe61a;</i>推荐他</a>
@@ -91,8 +93,12 @@
             <?php foreach ($biggie->subjects as $v): ?>
                 <li>
                     <div class="inner-li-items">
-                        <h3><?= $v['title'] ?><!-- <span><?php if ($v['type'] == 1): ?>一对一面谈<?php else: ?>众筹约见<?php endif; ?></span> --></h3>
-                        <a class="alink" href="/meet/subject-detail/<?= $v->id ?>">
+                        <h3><?= $v['title'] ?></h3>
+                        <?php if(!$self): ?>
+                            <a class="alink" href="/meet/subject-detail/<?= $v->id ?>">
+                        <?php else: ?>
+                            <a class="alink" href="/meet/subject/<?= $v->id ?>">
+                        <?php endif; ?>
                             <div class='m-center-con'>
                                 <p>
                                     <?= $v['summary'] ?>

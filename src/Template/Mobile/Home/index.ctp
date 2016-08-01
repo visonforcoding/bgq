@@ -152,10 +152,10 @@
                 }
                 $('#user').html(user);
                 if(res.data.activityMsg){
-                    $('#activityMsg').addClass('opic');
+                    $('#activityMsg').addClass('opci');
                 }
                 if(res.data.meetMsg){
-                    $('#meetMsg').addClass('opic');
+                    $('#meetMsg').addClass('opci');
                 }
             } else {
                 $('.clickbtn').on('click', function (){return false;});
