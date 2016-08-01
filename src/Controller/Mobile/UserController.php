@@ -366,7 +366,6 @@ class UserController extends AppController {
      * 发送登录验证码
      */
     public function sendLoginCode() {
-        
         $this->loadComponent('Sms');
         $mobile = $this->request->data('phone');
         $user = $this->User->findByPhoneAndEnabled($mobile, 1)->first();
