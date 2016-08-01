@@ -7,8 +7,8 @@
 </header>
 <div class="wraper">
     <div class="inner my-home-menu" id="typeTab">
-        <span type="books" class="active">我是顾客</span>
-        <span type="savant_books">我是专家</span>
+        <span type="savant_books" class="active">我是专家</span>
+        <span type="books">我是顾客</span>
     </div>
     <div  class="inner my-home-slidemenu" id="statusTab">
         <span status="1">待付款</span>
@@ -41,7 +41,7 @@
 </div>
 <?php $this->start('script'); ?>
 <script>
-    var book_html = {books:[], savant_books:[]}, status='0', type='books';
+    var book_html = {books:[], savant_books:[]}, status='0', type='savant_books';
     var books = <?=  json_encode($books)?>; var savant_books = <?=  json_encode($savant_books)?>;
 </script>
 <script>

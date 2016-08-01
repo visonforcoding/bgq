@@ -158,7 +158,10 @@
                     $('#meetMsg').addClass('opci');
                 }
             } else {
-                $('.clickbtn').on('click', function (){return false;});
+                $('.clickbtn').on('click', function (){
+                    $.util.alert('请先登录');
+                    return false;
+                });
             }
        }
     });
