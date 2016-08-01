@@ -108,10 +108,8 @@
              $('#checkBtn').removeClass().addClass('btn');
         }
     }
-    alert(14)
 
     $('#checkBtn').on('tap',function(){
-        alert(LEMON.sys.isUseLOC())
         if(LEMON.sys.isUseLOC() == 'on'){
             LEMON.sys.closeLOC();
             setCheck('off');
