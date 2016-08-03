@@ -367,59 +367,66 @@
             }
         });
 
-        $('body').on('click', function (e) {
-            var target = e.srcElement || e.target, em = target, i = 1;
-            while (em && !em.id && i <= 3) {
-                em = em.parentNode;
-                i++;
+    if($.util.isIOS){
+        $.util.slowTap($('body'), doClick, 'solw');
+    }
+    else{
+        $('body').on('click', doClick);
+    }
+
+    function doClick(e) {
+        var target = e.srcElement || e.target, em = target, i = 1;
+        while (em && !em.id && i <= 3) {
+            em = em.parentNode;
+            i++;
+        }
+        if (!em || !em.id)
+            return;
+        if (em.id.indexOf('praise_') !== -1) {
+            //对评论的赞
+            var id = $(em).data('id');
+            var obj = $(em);
+            if (obj.data('disable') === '1') {
+                return false;
             }
-            if (!em || !em.id)
-                return;
-            if (em.id.indexOf('praise_') !== -1) {
-                //对评论的赞
-                var id = $(em).data('id');
-                var obj = $(em);
-                if (obj.data('disable') === '1') {
-                    return false;
-                }
-                checkLogin(function () {
-                    $.util.ajax({
-                        url: '/news/comment-praise',
-                        data: {id: id},
-                        func: function (res) {
-                            if (res.status) {
-                                console.log($('.praise_' + id));
-                                $('.praise_' + id).siblings('.addnum').show();
-                                $('.praise_' + id).siblings('em').html(parseInt(obj.find('em').text()) + 1);
-                                $('.praise_' + id).css('color', 'red');
-                                $('#praise_' + id).data('disable', '1');
-                                setTimeout(function () {
-                                    $('.praise_' + id).siblings('.addnum').hide();
-                                }, 1000);
-                            }
+            checkLogin(function () {
+                $.util.ajax({
+                    url: '/news/comment-praise',
+                    data: {id: id},
+                    func: function (res) {
+                        if (res.status) {
+                            console.log($('.praise_' + id));
+                            $('.praise_' + id).siblings('.addnum').show();
+                            $('.praise_' + id).siblings('em').html(parseInt(obj.find('em').text()) + 1);
+                            $('.praise_' + id).css('color', 'red');
+                            $('#praise_' + id).data('disable', '1');
+                            setTimeout(function () {
+                                $('.praise_' + id).siblings('.addnum').hide();
+                            }, 1000);
                         }
-                    });
+                    }
                 });
+            });
 
 
+        }
+        if (em.id.indexOf('common_') !== -1) {
+            //回复评论
+            var id = $(em).data('id');
+            var user_id = window.__user_id;
+            if ($(em).data('userid') == user_id) {
+                $('#shadow').show();
+                $('#isdel').show();
+                $('#isdel').attr('com_id', id);
+                return;
             }
-            if (em.id.indexOf('common_') !== -1) {
-                //回复评论
-                var id = $(em).data('id');
-                var user_id = window.__user_id;
-                if ($(em).data('userid') == user_id) {
-                    $('#shadow').show();
-                    $('#isdel').show();
-                    $('#isdel').attr('com_id', id);
-                    return;
-                }
-                
-                reply_id = id;
-                $('#content').attr('placeholder', '回复 ' + $(em).data('username') + '：');
-                $('#comment_shadow').show('slow');
-                $('.shadow-info').removeClass('m-height').addClass('c-height');
-            }
-        });
+
+            reply_id = id;
+            $('#content').attr('placeholder', '回复 ' + $(em).data('username') + '：');
+            $('#comment_shadow').show('slow');
+            $('.shadow-info').removeClass('m-height').addClass('c-height');
+        }
+    }
     
     $(window).on('hashchange', function(){
         if(location.hash == '#allcoment'){
