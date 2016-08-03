@@ -387,18 +387,18 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .head-img i{position: absolute;right:0.12rem;bottom:0;width:0.29rem;height:0.3rem;background: url(img/v.png) no-repeat;background-size: contain;}
 .mark{margin-top:0.2rem;}
 .vipinfo{width:5.3rem;float:left;}
-.vipinfo h3{font-size:0.32rem;color:#222c38;height:.5rem;overflow:hidden;}
-.vipinfo h3 .l-name{float:left;line-height: 0.5rem;}
+.vipinfo h3{font-size:0.32rem;color:#222c38;height:.5rem;overflow:hidden;line-height: .5rem;}
+.vipinfo h3 .l-name{float:left;}
 .l-name{}
 .l-place{margin-left:.1rem;color:#fff;padding-left:.1rem;padding-right:.1rem;background: #ff5176;font-size:.22rem;border-radius: .1rem;float:left;margin-top: .08rem;
 line-height: .34rem;height:.34rem;}
 .l-place i{font-size:.2rem;margin-right:.04rem;}
-.vipinfo h3 span{float:right;line-height: 0.5rem;}
+.vipinfo h3 span{float:right;}
 .vipinfo span.job,.vipinfo span.c-info{line-height: 0.64rem;font-size:0.28rem;margin-top:0.06rem;color: #969fa9;}
 .vipinfo span.job{line-height: 0.4rem;}
 .vipinfo span.c-info{line-height: 0.3rem;display: block;}
-.vipinfo .mark a{border:1px #969fa9 solid;border-radius: 0.1rem;line-height: 0.32rem;font-size:0.24rem;color:#969fa9;padding:0 0.1rem;margin-right:0.1rem;}
-.vipinfo .bgblue a{background: #4285f4;color:#fff;border:none;padding:0.06rem 0.1rem;}
+.vipinfo .mark a{border:1px #969fa9 solid;border-radius: 0.1rem;line-height: 0.32rem;font-size:0.24rem;color:#969fa9;padding:0 0.1rem;display:inline-block;}
+.vipinfo .bgblue a{background: #4285f4;color:#fff;border:none;padding:0.06rem 0.1rem;display:inline-block;}
 .meetnum{font-size:0.28rem;color:#969fa9;}
 .toc{text-align: center;display: block;color:#E01A48;}
 .toc i{background: url(img/ca.png) no-repeat;background-size:cover;width:0.32rem;height:0.26rem;display: block;margin:0.55rem auto 0.1rem;}
@@ -770,9 +770,10 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .my-collection-info .my-pic-acive{width:1.7rem;height:1.39rem;display: block;float:left;}
 .my-collection-info .my-pic-acive img{width:100%;height:auto;display: block;min-height:1.39rem;}
 .my-collection-items{float:left;margin-left:0.23rem;width:4.9rem;font-size:0.26rem;}
-.my-collection-items span{display:block;line-height: 0.36rem;color:#b4bac1;}
+.my-collection-items span{display:block;line-height: 0.32rem;color:#b4bac1;}
 .my-collection-items span i{float:right;color:#e01a48;}
-.my-collection-items h3{line-height: 0.43rem;color:#7a7e83;font-size:0.3rem;margin-bottom:0.23rem;}
+.my-collection-items h3{line-height: 0.36rem;color:#7a7e83;font-size:0.3rem;margin-bottom:0.1rem;-webkit-line-clamp:2;display: -webkit-box;
+    overflow: hidden;-webkit-box-orient: vertical;min-height:.68rem;}
 .my-news-items h3{height:0.84rem;overflow:hidden;width:100%;}
 .my-news-items span b{margin-left:0.2rem;}
 .my-meet-info .mark a{border:0;border-radius: 0;color:#e01a48;}
