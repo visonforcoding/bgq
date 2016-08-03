@@ -13,7 +13,7 @@
     <section>
         <ul class="m-detail">
             <li >
-                <h3><?=$subject->title?><span><?=$subject->user->truename?> <?=$subject->user->company?> <?=$subject->user->position?></span></h3>
+                <h3><?=$subject->title?><span class='m-block'><?=$subject->user->truename?> <?=$subject->user->company?> <?=$subject->user->position?></span></h3>
 <!--                <span class="meet-type">
                 </span>-->
             </li>
