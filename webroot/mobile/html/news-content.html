@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
 		<script src="../js/view.js"></script>
+		<script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<header>
@@ -147,10 +148,10 @@
 			<!--底部四个图-->
 			
 			<div class="iconlist icon-width">
-				<span class="iconfont">&#xe61d;</span>
+				<span class="iconfont" id='tap'>&#xe61d;</span>
 				<span class="iconfont">&#xe615;</span>
 				<span class="iconfont">&#xe619;</span>
-				<span class="iconfont">&#xe606;</span>
+				<span class="iconfont" id="share">&#xe606;</span>
 			</div>
 			<!--底部四个图**end-->
 			<div class="reg-shadow" style="display: none;"></div>
@@ -168,7 +169,20 @@
 		<!--<div class="alert">
 			已收藏
 		</div>-->
-	
+	<script type="text/javascript">
+		$('body').on('click',function(e){
+			var target = e.srcElement || e.target,
+			em = target,
+			i = 1;
+            $('#share').html('click'+em.tagName);  
+		})
+		$('body').on('tap',function(e){
+			var target = e.srcElement || e.target,
+			em = target, 
+			i = 1;
+             $('#tap').html('tap'+em.tagName);  
+		})
+	</script>
 	
 	</body>
 </html>
