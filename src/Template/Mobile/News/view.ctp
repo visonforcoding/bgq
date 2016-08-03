@@ -368,7 +368,7 @@
         });
 
     if($.util.isIOS){
-        $.util.slowTap($('body'), doClick, 'solw');
+        $.util.tap($('body'), doClick, 'solw');
     }
     else{
         $('body').on('click', doClick);

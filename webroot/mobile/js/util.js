@@ -279,20 +279,32 @@ $.util = {
      * func是要处理的方法, 防止点透可以return false;
      * tp默认norm  一般选默认
      */
-    slowTap: function (obj, func, tp) {
-        var limit = 0, range, ranges={norm:[50, 1000], solw:[200,400]};
+    tap: function (obj, func, tp) {
+        var limit = 0, max=8, //移动超出max像素忽略本次事件
+            range, p, ranges={norm:[50, 1000], solw:[200,1000]};
+
         tp = tp ? tp : 'norm';
         range = ranges[tp];
         obj.on('touchstart', function (e) {
             limit = (new Date()).getTime();
+            p = $.util.getPosition(e);
         });
         obj.on('touchend', function (e) {
+            var p2 = $.util.getPosition(e), x=Math.abs(p2.x-p.x), y=Math.abs(p2.y-p.y);
+            if(x > max || y > max) return;
+
             limit = (new Date()).getTime()-limit;
-            //console.log(limit);
             if(limit > range[0] && limit < range[1]){
                 return func(e);
             }
         });
+    },
+    getPosition : function(e) {
+        var touch = e.changedTouches ? e.changedTouches[0] : e;
+        return {
+            x : touch.pageX,
+            y : touch.pageY
+        };
     },
 
     report: function(ptag) {
