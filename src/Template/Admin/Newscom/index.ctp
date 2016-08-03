@@ -1,6 +1,7 @@
 <?php $this->start('static') ?>   
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
+<link href="/wpadmin/lib/select2/css/select2.min.css" rel="stylesheet">
 <?php $this->end() ?> 
 <div class="col-xs-12">
     <form id="table-bar-form">
@@ -8,6 +9,10 @@
             <div class="form-group">
                 <label for="keywords">关键字</label>
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入评论内容">
+            </div>
+            <div class="form-group">
+                <label for="keywords">用户</label>
+                <?=$this->cell('User')?>
             </div>
             <div class="form-group">
                 <label for="keywords">时间</label>
@@ -25,6 +30,7 @@
 <?php $this->start('script'); ?>
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
+<script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
                 $(function () {
                     $('#main-content').bind('resize', function () {
@@ -32,7 +38,7 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/newscom/getDataList/<?= $id ?><?php if(isset($type)):?>?type=1<?php endif;?>",
+                        url: "/admin/newscom/getDataList/<?= $id ?><?php if (isset($type)): ?>?type=1<?php endif; ?>",
                         datatype: "json",
                         mtype: "POST",
                         colNames:
@@ -67,9 +73,12 @@
                         },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
                 });
-
+                $('#select-user').select2({
+                      language: "zh-CN",
+                      placeholder: '选择一个用户'
+                  });
                 function crowdFormatter(cellvalue, options, rowObject) {
-                    if(rowObject.is_crowdfunding == 0){
+                    if (rowObject.is_crowdfunding == 0) {
                         response = '否';
                     } else {
                         response = '是';
@@ -82,7 +91,7 @@
                     //response += '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     return response;
                 }
-                
+
                 function reply(id) {
                     //需要引入layer.ext.js文件
                     layer.prompt({
@@ -149,7 +158,7 @@
                     searchData['sidx'] = sortColumnName;
                     searchData['sort'] = sortOrder;
                     var searchQueryStr = $.param(searchData);
-                    $("body").append("<iframe src='/admin/activity/exportExcel<?php if($id): ?>/<?=$id?><?php endif;?>?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                    $("body").append("<iframe src='/admin/activity/exportExcel<?php if ($id): ?>/<?= $id ?><?php endif; ?>?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
 
                 function doView(id) {
@@ -162,6 +171,26 @@
                         shade: 0.8,
                         area: ['380px', '70%'],
                         content: url//iframe的url
+                    });
+                }
+
+                function ableThis(id) {
+                    layer.confirm('确定更改上下线？', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                        $.ajax({
+                            type: 'post',
+                            data: {id: id},
+                            dataType: 'json',
+                            url: '/admin/activity/able',
+                            success: function (res) {
+                                layer.msg(res.msg);
+                                if (res.status) {
+                                    $('#list').trigger('reloadGrid');
+                                }
+                            }
+                        });
+                    }, function () {
                     });
                 }
 </script>

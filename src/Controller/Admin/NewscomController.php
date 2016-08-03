@@ -125,6 +125,7 @@ class NewscomController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
+        $user_id = $this->request->data('user_id');
         $where = [];
         if (!empty($keywords)) {
             $where[' Newscom.`body` like'] = "%$keywords%";
@@ -136,6 +137,9 @@ class NewscomController extends AppController {
         }
         if ($id) {
             $where['news_id'] = $id;
+        }
+        if($user_id){
+            $where['Newscom.user_id'] = $user_id;
         }
         $query = $this->Newscom->find();
         $query->hydrate(false);
@@ -176,12 +180,16 @@ class NewscomController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
+         $user_id = $this->request->data('user_id');
         $where = [];
         if ($id) {
             $where['news_id'] = $id;
         }
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where['username like'] = "%$keywords%";
+        }
+        if($user_id){
+            $where['Newscom.user_id'] = $user_id;
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));

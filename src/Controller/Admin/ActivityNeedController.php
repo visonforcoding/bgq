@@ -148,7 +148,7 @@ class ActivityNeedController extends AppController {
         $region_id = $this->request->data('region_id');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = ['from_user'=>-1];
+        $where = ['from_user'=>-1,'Activity.is_del'=>0];
         
         if (!empty($series_id)) {
             $where['and'] = ['series_id'=>$series_id];
@@ -208,7 +208,7 @@ class ActivityNeedController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-         $where = ['from_user'=>-1];
+        $where = ['from_user'=>-1,'Activity.is_del'=>0];
         if (!empty($keywords)) {
             $where[' username like'] = "%$keywords%";
         }

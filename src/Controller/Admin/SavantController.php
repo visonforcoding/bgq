@@ -216,6 +216,12 @@ class SavantController extends AppController {
         $user->savant_status = 3;
         $res = $this->User->save($user);
         if ($res) {
+                  //记录
+            $SavantApplyTable = \Cake\ORM\TableRegistry::get('SavantApply');
+            $apply = $SavantApplyTable->find()->where(['user_id'=>$id])->orderDesc('id')->first();
+            $apply->check_man = $this->_user->truename;
+            $apply->action = 1;
+            $SavantApplyTable->save($apply);
             $this->loadComponent('Business');
             $this->Business->usermsg($user->user_id, '专家申请新消息', '您的专家申请审核通过啦！', 5, $user->id);
             return $this->Util->ajaxReturn(true, '审核通过');
@@ -231,13 +237,19 @@ class SavantController extends AppController {
     public function unpass($id) {
         $data = $this->request->data;
         $user = $this->User->get($id);
-        $user->level = 2;
-        $user->savant_status = 3;
         $user->level = 1;
         $user->savant_status = 0;
-        $user->reason = $data['reason'];
         $res = $this->User->save($user);
         if ($res) {
+            //记录
+            $SavantApplyTable = \Cake\ORM\TableRegistry::get('SavantApply');
+            $apply = $SavantApplyTable->find()->where(['user_id'=>$id])->orderDesc('id')->first();
+            $reason = $data['reason'];
+            $apply->check_man = $this->_user->truename;
+            $apply->reason = $reason;
+            $apply->action = 0;
+            $SavantApplyTable->save($apply);
+            //消息
             $this->loadComponent('Business');
             $this->Business->usermsg($id, '专家申请新消息', '您的专家申请审核不通过！原因为：' . $data['reason'], 5, $id);
             return $this->Util->ajaxReturn(true, '审核不通过');
@@ -275,9 +287,17 @@ class SavantController extends AppController {
      public function showApply($id){
          $this->viewBuilder()->autoLayout(false);
          $SavantApplyTable = \Cake\ORM\TableRegistry::get('SavantApply');
-         $applys = $SavantApplyTable->find()->contain(['Users'])->where(['user_id'=>$id])->toArray();
+         $savantStatusConf = \Cake\Core\Configure::read('savantStatus');
+         $applys = $SavantApplyTable->find()->contain(['Users'])->where(['user_id'=>$id])
+                ->formatResults(function($items)use($savantStatusConf) {
+                    return $items->map(function($item)use($savantStatusConf) {
+                        $item['savant_str'] = $item->action=='1'?'通过':'不通过';
+                        return $item;
+                    });
+                })
+                 ->toArray();
          $this->set([
-             'applys'=>$applys
+             'applys'=>$applys,
          ]);
     }
 

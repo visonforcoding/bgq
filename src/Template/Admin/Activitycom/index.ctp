@@ -1,6 +1,7 @@
 <?php $this->start('static') ?>   
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
+<link href="/wpadmin/lib/select2/css/select2.min.css" rel="stylesheet">
 <?php $this->end() ?> 
 <div class="col-xs-12">
     <form id="table-bar-form">
@@ -8,6 +9,10 @@
             <div class="form-group">
                 <label for="keywords">关键字</label>
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
+            </div>
+            <div class="form-group">
+                <label for="keywords">用户</label>
+                <?= $this->cell('User') ?>
             </div>
             <div class="form-group">
                 <label for="keywords">时间</label>
@@ -25,6 +30,7 @@
 <?php $this->start('script'); ?>
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
+<script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
                 $(function () {
                     $('#main-content').bind('resize', function () {
@@ -36,7 +42,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '活动', '评论内容', '点赞数', '评论时间', '被回复人','被回复评论', '操作'],
+                                ['用户', '活动', '评论内容', '点赞数', '评论时间', '被回复人', '被回复评论', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'activity.title', editable: true, align: 'center'},
@@ -68,6 +74,10 @@
                             id: "id"
                         },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
+                  $('#select-user').select2({
+                      language: "zh-CN",
+                      placeholder: '选择一个用户'
+                  });
                 });
 
                 function actionFormatter(cellvalue, options, rowObject) {

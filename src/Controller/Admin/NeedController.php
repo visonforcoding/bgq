@@ -32,13 +32,14 @@ class NeedController extends AppController {
      */
     public function view($id = null) {
         $this->viewBuilder()->autoLayout(false);
-        $need = $this->Need->get($id, [
-            'contain' => ['User']
-        ]);
-        $need->is_read = 1; //修改为已读
-        $this->Need->save($need);
-        $this->set('need', $need);
-        $this->set('_serialize', ['need']);
+        $needs = $this->Need->find()
+                ->contain(['User'=>function($q){
+                    return $q->select(['truename','avatar']);
+                }])
+                ->where(['user_id' => $id])->orWhere(['reply_id'=>$id])->orderAsc('Need.create_time')
+                ->toArray();
+        $this->set('needs', $needs);
+        $this->set('id', $id);
     }
 
     /**
@@ -132,20 +133,15 @@ class NeedController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['Need.`create_time` >' => $begin_time], ['Need.`create_time` <' => $end_time]];
         }
-        $query = $this->Need->find()->contain(['User']);
-        $query->hydrate(false);
-        if (!empty($where)) {
-            $query->where($where);
-        }
-        $nums = $query->count();
-        if (!empty($sort) && !empty($order)) {
-            $query->order([$sort => $order]);
-        }
-
-        $query->limit(intval($rows))
-                ->page(intval($page));
-        $res = $query->toArray();
-        if (empty($res)) {
+        $offset = ($page - 1) * $rows;
+        $connection = \Cake\Datasource\ConnectionManager::get('default');
+        $result = $connection->execute('select u.truename,n.* from user u
+                        inner join 
+                        (select * from need order by create_time desc ) n
+                        on n.user_id = u.id
+                        group by u.id limit ' . $offset . ',' . $rows)->fetchAll('assoc');
+        $nums = count($result);
+        if (empty($result)) {
             $res = array();
         }
         if ($nums > 0) {
@@ -153,7 +149,7 @@ class NeedController extends AppController {
         } else {
             $total_pages = 0;
         }
-        $data = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $res);
+        $data = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $result);
         $this->autoRender = false;
         $this->response->type('json');
         echo json_encode($data);
@@ -195,26 +191,25 @@ class NeedController extends AppController {
         $filename = 'Need_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
+
     /**
      * 回复
-     * @param int $id
+     * @param int $user_id
      */
-    public function reply($id){
-        if($this->request->is('post')){
+    public function reply($user_id) {
+        if ($this->request->is('post')) {
             $data = $this->request->data;
-            $usermsg = $this->Need->get($id);
             $new = [
-                'pid' => $usermsg->id,
-                'user_id' => $this->_user->id,
-                'reply_id' => $usermsg->user_id,
-                'msg' => $data['reply'],
+                'user_id' =>-1, //后台回复
+                'reply_id' => $user_id,
+                'msg' => $data['msg'],
             ];
             $need = $this->Need->newEntity();
             $need = $this->Need->patchEntity($need, $new);
             $res = $this->Need->save($need);
-            if($res) {
+            if ($res) {
                 $this->loadComponent('Business');
-                $this->Business->usermsg($usermsg->user_id, '您有新的消息', '您有新的小秘书消息', '6', $usermsg->id);
+                $this->Business->usermsg($user_id, '您有新的消息', '您有新的小秘书消息', '6', $need->id);
                 return $this->Util->ajaxReturn(true, '回复成功');
             } else {
                 return $this->Util->ajaxReturn(false, '系统错误');

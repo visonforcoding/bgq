@@ -39,9 +39,9 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '内容', '创建时间', '修改时间', '操作'],
+                                ['用户', '最新消息', '创建时间', '修改时间', '操作'],
                         colModel: [
-                            {name: 'user.truename', editable: true, align: 'center'},
+                            {name: 'truename', editable: true, align: 'center'},
                             {name: 'msg', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
@@ -84,9 +84,8 @@
                 //}
 
                 function actionFormatter(cellvalue, options, rowObject) {
-                    response = '<a title="回复" onClick="reply(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-reply"></i> </a>';
                     //response += '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-//        response += '<a title="查看"  onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn"><i class="icon icon-eye-open"></i> </a>';
+                    response = '<a title="回复"  onClick="doView(' + rowObject.user_id + ');" data-id="' + rowObject.id + '" class="grid-btn"><i class="icon icon-comments-alt"></i> </a>';
                     //response += '<a title="编辑" href="/admin/need/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     return response;
                 }
@@ -168,11 +167,8 @@
                         title: '查看详情',
                         shadeClose: false,
                         shade: 0.8,
-                        area: ['380px', '70%'],
+                        area: ['40%', '60%'],
                         content: url, //iframe的url
-                        cancel: function () {//关闭弹框的回调函数，关闭弹框之后重新刷新
-                            $('#list').trigger('reloadGrid');
-                        }
                     });
                 }
 </script>

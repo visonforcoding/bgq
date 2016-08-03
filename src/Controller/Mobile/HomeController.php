@@ -191,6 +191,8 @@ class HomeController extends AppController {
                         $ApplyTable = \Cake\ORM\TableRegistry::get('SavantApply');
                         $apply = $ApplyTable->newEntity([
                             'user_id'=>  $user_id,
+                            'xmjy'=>  $this->request->data('xmjy'),
+                            'zyys'=>  $this->request->data('zyys'),
                         ]);
                         $ApplyTable->save($apply);
                         return $this->Util->ajaxReturn(true, '保存成功');
