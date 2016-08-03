@@ -170,17 +170,18 @@
 			已收藏
 		</div>-->
 	<script type="text/javascript">
+		cc = 1;
+		tt = 1;
 		$('body').on('click',function(e){
 			var target = e.srcElement || e.target,
-			em = target,
-			i = 1;
-            $('#share').html('click'+em.tagName);  
+			em = target;
+            $('#share').html((cc++)+'click'+em.tagName);
 		})
 		$('body').on('tap',function(e){
 			var target = e.srcElement || e.target,
 			em = target, 
 			i = 1;
-             $('#tap').html('tap'+em.tagName);  
+             $('#tap').html((tt++)+'tap'+em.tagName);
 		})
 	</script>
 	
