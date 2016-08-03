@@ -138,7 +138,7 @@ class MeetController extends AppController {
         $biggie = $this->User->get($id, [
             'contain' => [
                 'Savant', 'Industries', 'Subjects','RecoUsers'=>function($q){
-                    return $q->limit(10);
+                    return $q->limit(8);
                 },'RecoUsers.Users'
             ]
         ]);
