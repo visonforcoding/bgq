@@ -494,6 +494,7 @@ a.alink-list img{width:.5rem;height:.5rem;border-radius: 50%;}
 .m-detail li{padding:0.25rem 0.3rem;border-bottom:1px solid #e5e5e5;font-size:0.3rem;}
 .sub-list-l{width:75%;}
 .m-detail-box li span,.m-detail li span{display: block;font-size:0.28rem;line-height: 0.4rem;}
+.m-detail li .m-block{display: block;line-height: .34rem;}
 .m-detail li span{display: inline-block;}
 .m-detail-box li h3,.m-detail li h3{width:75%;line-height: 0.4rem;font-size:0.3rem;}
 .m-detail li .t-tittle{width:100%;border-bottom:1px #e5e5e5 solid;padding-bottom:.2rem;}
