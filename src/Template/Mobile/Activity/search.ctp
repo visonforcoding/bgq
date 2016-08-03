@@ -23,6 +23,7 @@
     </div>
     <section class="my-collection-info" id="search"></section>
 </div>
+<div style='height:1.2rem'></div>
 <div id="buttonLoading" class="loadingbox"></div>
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>
