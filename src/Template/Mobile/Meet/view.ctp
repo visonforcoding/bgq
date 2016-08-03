@@ -52,7 +52,7 @@
         <li class="m-page"><a class="alink mr" href="/user/home-page/<?= $biggie->id ?>" class="tohome"><i class="iconfont">&#xe66a;</i>个人主页<span class="iconfont fr">&#xe662;</span></a></li>
     </ul>
     <div class="tabcon border bgff" >
-        <ul class="inner basicon" style="display: block;">
+        <ul class="innercon basicon" style="display: block;">
             <li class="b-dq"><span><i class="iconfont">&#xe660;</i>所在地区</span><div><em><?= $biggie->city ?></em></div></li>
             <li class="b-hy">
                 <span><i class="iconfont">&#xe654;</i>所在行业</span>
