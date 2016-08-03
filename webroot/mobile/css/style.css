@@ -397,9 +397,21 @@ line-height: .34rem;height:.34rem;}
 .vipinfo span.job,.vipinfo span.c-info{line-height: 0.64rem;font-size:0.28rem;margin-top:0.06rem;color: #969fa9;}
 .vipinfo span.job{line-height: 0.4rem;}
 .vipinfo span.c-info{line-height: 0.3rem;display: block;}
-.vipinfo .mark a{border:1px #969fa9 solid;border-radius: 0.1rem;line-height: 0.32rem;font-size:0.24rem;color:#969fa9;padding:0 0.1rem;display:inline-block;}
+.vipinfo .mark a{border:1px #969fa9 solid;border-radius: 0.1rem;line-height: 0.32rem;font-size:0.26rem;color:#969fa9;padding:0 0.1rem;display:inline-block;}
 .vipinfo .bgblue a{background: #4285f4;color:#fff;border:none;padding:0.06rem 0.1rem;display:inline-block;}
 .meetnum{font-size:0.28rem;color:#969fa9;}
+.f-info{border-top:1px #e5e5e5 solid;line-height: .86rem;overflow:hidden; font-size:.28rem;}
+.f-box{padding:0 .3rem;margin-top:.1rem;}
+.f-type{color:#E01A48;}
+.f-type i{font-size:.32rem;color:#797e82;margin-right:.18rem;}
+.f-link i{margin-left:.1rem;font-size:.26rem;color:#797e82;font-weight: bold;}
+.nopd .mark a{padding:0;}
+.nopd .mark{margin-top:0;}
+.nopd time{font-size:.28rem;margin-left:.2rem;}
+.my-meet-info .mark a{border:0;border-radius: 0;color:#e01a48;}
+.f-complet .vipinfo h3,.f-complet .mark a,.f-complet .f-type{color:#7a7d84;}
+.f-btn{padding-top:.18rem;}
+.f-btn span{display:block;height:.44rem;color:#e01a48;border:1px #e01a48 solid;border-radius: .1rem;width:1.16rem;text-align: center;line-height: .42rem;font-size:.24rem;}
 .toc{text-align: center;display: block;color:#E01A48;}
 .toc i{background: url(img/ca.png) no-repeat;background-size:cover;width:0.32rem;height:0.26rem;display: block;margin:0.55rem auto 0.1rem;}
 .internet-v-info .lay-c h3{font-weight:bold;}
@@ -776,7 +788,7 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
     overflow: hidden;-webkit-box-orient: vertical;min-height:.68rem;}
 .my-news-items h3{height:0.84rem;overflow:hidden;width:100%;}
 .my-news-items span b{margin-left:0.2rem;}
-.my-meet-info .mark a{border:0;border-radius: 0;color:#e01a48;}
+
 .history-info li{padding:0.08rem 0 0.18rem;border-bottom:1px #e5e5e5 solid;background: #fff;}
 .history-info li span{line-height: 0.6rem;font-size:0.26rem;}
 .history-info li p{line-height: 0.36rem;color:#9ba4ad;font-size:0.26rem;}
@@ -1022,7 +1034,7 @@ width:0.5rem;height:0.16rem;display: inline-block;transition: all .3s;float:righ
 	.dk ul{width:800%;}
 	.loginbox .password input{width:300px;}
 	.loginbox .password button{width:200px;}
-	.vipinfo .mark a{font-size:22px;}
+	/*.vipinfo .mark a{font-size:22px;}*/
 	.a-other-info > *{font-size:24px;}
 	.a-s-mark li{height:60px;line-height: 58px;}
 	.a-search {height: 34px;line-height: 32px;}
