@@ -122,8 +122,8 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .news-list-items h1 span img,.con-des img{width:.5rem;height:.5rem;display: block;border-radius: 100%;}
 .newsbox{overflow:hidden;display: block; color:#969fa9;}
 .news-list-items .origin,.newscon-box .origin{padding-left:0;}
-.newscon-box .origin{text-indent: 0.1rem;}
-.origin div.website{display: inline-block;color:#222c38;font-size:.3rem;}
+.newscon-box .origin{text-indent: 0.18rem;}
+.origin div.website{display: inline-block;color:#969fa9;font-size:.3rem;}
 .origin time{margin-left:10px;}
 .newsbox .sec-news-l{float:left;width:5rem;}
 /*超出隐藏*/
@@ -387,12 +387,13 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .head-img i{position: absolute;right:0.12rem;bottom:0;width:0.29rem;height:0.3rem;background: url(img/v.png) no-repeat;background-size: contain;}
 .mark{margin-top:0.2rem;}
 .vipinfo{width:5.3rem;float:left;}
-.vipinfo h3{font-size:0.32rem;color:#222c38;line-height: 0.46rem;height:.54rem;}
-.vipinfo h3 .l-name{float:left;}
+.vipinfo h3{font-size:0.32rem;color:#222c38;height:.5rem;overflow:hidden;}
+.vipinfo h3 .l-name{float:left;line-height: 0.5rem;}
 .l-name{}
-.l-place{margin-left:.1rem;color:#fff;padding:0 .15rem;background: #ff5176;display: inline-block;font-size:.24rem;border-radius: .5rem;line-height: .36rem;}
-.l-place i{font-size:.2rem;margin-right:.08rem;}
-.vipinfo h3 span{float:right;}
+.l-place{margin-left:.1rem;color:#fff;padding-left:.1rem;padding-right:.1rem;background: #ff5176;font-size:.22rem;border-radius: .1rem;float:left;margin-top: .08rem;
+line-height: .34rem;height:.34rem;}
+.l-place i{font-size:.2rem;margin-right:.04rem;}
+.vipinfo h3 span{float:right;line-height: 0.5rem;}
 .vipinfo span.job,.vipinfo span.c-info{line-height: 0.64rem;font-size:0.28rem;margin-top:0.06rem;color: #969fa9;}
 .vipinfo span.job{line-height: 0.4rem;}
 .vipinfo span.c-info{line-height: 0.3rem;display: block;}
