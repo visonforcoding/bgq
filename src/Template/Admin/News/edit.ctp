@@ -19,6 +19,23 @@
             <?php
             echo $this->Form->input('title', ['label' => false, 'class' => 'form-control']);
             ?>
+            <span class="notice">已输入<i><?= mb_strlen($news->title, 'utf8') ?></i>个字</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">关键字</label>
+        <div class="col-md-8">
+            <?php
+            echo $this->Form->input('keywords', ['label' => false, 'class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">来源</label>
+        <div class="col-md-8">
+            <?php
+            echo $this->Form->input('source', ['label' => false, 'class' => 'form-control']);
+            ?>
         </div>
     </div>
     <div class="form-group">
@@ -36,6 +53,7 @@
             <div style="color:red">请上传160*160大小的缩略图</div>
             <input name="thumb" value="<?= $news->thumb; ?>"  type="hidden"/>
             <div id="thumb"   class="jqupload">上传</div>
+            <span class="notice">图片格式为jpg,png,gif,jpeg</span>
         </div>
     </div>
     <div class="form-group">
@@ -47,6 +65,7 @@
             <div style="color:red">请上传宽为690，高小于388的封面图</div>
             <input name="cover" value="<?= $news->cover; ?>"  type="hidden"/>
             <div id="cover"   class="jqupload">上传</div>
+            <span class="notice">图片格式为jpg,png,gif,jpeg</span>
         </div>
     </div>
     <div class="form-group">
@@ -58,7 +77,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">行业标签</label>
         <div class="col-md-8">
-                <?= $this->cell('Industry::news',[$selIndustryIds]) ?>
+            <?= $this->cell('Industry::news', [$selIndustryIds]) ?>
         </div>
     </div>
     <div class="form-group">
@@ -70,25 +89,9 @@
     <div class="form-group">
         <label class="col-md-2 control-label">分享描述</label>
         <div class="col-md-8">
-        <?php
+            <?php
             echo $this->Form->input('share_desc', ['label' => false, 'class' => 'form-control']);
-        ?>
-        </div>
-    </div>
-        <div class="form-group">
-        <label class="col-md-2 control-label">关键字</label>
-        <div class="col-md-8">
-        <?php
-            echo $this->Form->input('keywords', ['label' => false, 'class' => 'form-control']);
-        ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">来源</label>
-        <div class="col-md-8">
-        <?php
-            echo $this->Form->input('source', ['label' => false, 'class' => 'form-control']);
-        ?>
+            ?>
         </div>
     </div>
     <div class="form-group">
@@ -120,6 +123,10 @@
         $('#select-savant').select2({
             language: "zh-CN",
             placeholder: '选择一个标签'
+        });
+        $('#title').keyup(function () {
+            var len = $(this).val().length;
+            $(this).next('span').find('i').text(len);
         });
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('form').submit(function () {

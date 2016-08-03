@@ -16,7 +16,9 @@
                 <thead>
                     <tr>
                         <th>申请时间</th>
-                        <th>当前状态</th>
+                        <th>项目经验</th>
+                        <th>资源优势</th>
+                        <th>处理情况</th>
                         <th>审核员</th>
                         <th>审核意见</th>
                     </tr>
@@ -25,7 +27,9 @@
                     <?php foreach ($applys as $apply): ?>
                     <tr>
                         <td><?=$apply->create_time?></td>
-                        <td><?=$apply->user->savant_status?></td>
+                        <td><?=$apply->xmjy?></td>
+                        <td><?=$apply->zyys?></td>
+                        <td><?=$apply->savant_str?></td>
                         <td><?=$apply->check_man?></td>
                         <td><?=$apply->reason?></td>
                     </tr>

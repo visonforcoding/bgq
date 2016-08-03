@@ -74,28 +74,33 @@
                         url: "/admin/activity/getDataList",
                         datatype: "json",
                         mtype: "POST",
-                        colNames: [ '发布人', '主办单位', '活动名称', '活动时间', '地点', '规模', '城市','阅读数', '点赞数', '评论数', '报名人数', '报名费用', '创建时间', '更新时间', '操作'],
+                        colNames: [ '发布人', '主办单位', '活动名称', '活动时间', '地点', '规模', '城市','阅读数', '点赞数', '评论数', '报名人数', '报名费用','状态', '创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
-//                            {name: 'industries', editable: true, align: 'center', formatter: industryFormatter},
                             {name: 'company', editable: true, align: 'center'},
                             {name: 'title', editable: true, align: 'center'},
                             {name: 'time', editable: true, align: 'center'},
-//                            {name: 'region.name', editable: true, align: 'center'},
                             {name: 'address', editable: true, align: 'center'},
                             {name: 'scale', editable: true, align: 'center'},
                             {name: 'region.name', editable: true, align: 'center'},
                             {name: 'read_nums', editable: true, align: 'center'},
                             {name: 'praise_nums', editable: true, align: 'center'},
                             {name: 'comment_nums', editable: true, align: 'center'},
-//                            {name: 'is_crowdfunding', editable: true, align: 'center', formatter: crowdFormatter},
                             {name: 'apply_nums', editable: true, align: 'center'},
                             {name: 'apply_fee', editable: true, align: 'center'},
+                            {name: 'status', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
+                                    switch (cellvalue) {
+                                        case 1:
+                                            return '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-check-circle"></i> 上线</button>';
+                                        case 0:
+                                            return '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-remove-circle"></i><i style="color:red"> 下线</i></button>';
+                                    }
+                            }},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
                             {name: 'actionBtn', width: '200%', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
-                        rowNum: 30,
+                        rowNum: 10,
                         rowList: [10, 20, 30],
                         sortname: "id",
                         sortorder: "desc",
@@ -113,7 +118,7 @@
                             total: "total",
                             records: "records",
                             repeatitems: false,
-                            id: "0"
+                            id: 'id'
                         },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
                 });
@@ -143,34 +148,21 @@
                 function actionFormatter(cellvalue, options, rowObject) {
 //                    response = '<div class="bigdiv" onmouseout="$(this).find(\'.position\').hide()" onmouseover="$(this).find(\'.position\').show()">';
 //                    response += '<div class="position"><a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-                    response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
 //                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="编辑" href="/admin/activity/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     response += '<a title="复制" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
-                    if (rowObject.is_top == 0 && rowObject.is_check == 1) {
+                    if (rowObject.is_top == 0 ) {
                         response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
-                        response += '<a title="评论详情" onclick=viewComs(' + rowObject.id + ') class="grid-btn "><i class="icon icon-comment"></i> </a>';
-                        response += '<a title="点赞日志" href="/admin/likeLogs/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-heart"></i> </a>';
-                        response += '<a title="收藏日志" href="/admin/collect/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-star"></i> </a>';
-                        response += '<a title="报名用户" href="/admin/activityapply/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-user"></i> </a>';
-                        response += '<a title="赞助详情" href="/admin/sponsor/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-dollar"></i> </a>';
-                        response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(' + rowObject.id + ');"><i class="icon icon-qrcode"></i><div hidden id="code_' + rowObject.id + '" style="position:relative;top:0;"><img back_src="' + rowObject.qrcode + '" /></div> </a>';
-                        response += '<a title="下架" href="javascript:void(0)" class="grid-btn" onclick="ban(' + rowObject.id + ');"><i class="icon icon-arrow-down"></i></a>';
-                    } else if (rowObject.is_top == 1 && rowObject.is_check == 1) {
+                    } else if (rowObject.is_top == 1) {
                         response += '<a title="取消置顶" href="javascript:void(0)" class="grid-btn untop" onclick="untop(' + rowObject.id + ')"><i class="icon icon-long-arrow-down"></i></a>';
-                        response += '<a title="评论详情" href="/admin/activitycom/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-comment"></i> </a>';
-                        response += '<a title="点赞日志" href="/admin/likeLogs/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-heart"></i> </a>';
-                        response += '<a title="收藏日志" href="/admin/collect/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-star"></i> </a>';
-                        response += '<a title="报名用户" href="/admin/activityapply/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-user"></i> </a>';
-                        response += '<a title="赞助详情" href="/admin/sponsor/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-dollar"></i> </a>';
-                        response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(' + rowObject.id + ');"><i class="icon icon-qrcode"></i><div hidden id="code_' + rowObject.id + '" style="position:relative;top:0;"><img back_src="' + rowObject.qrcode + '" /></div> </a>';
-                        response += '<a title="下架" href="javascript:void(0)" class="grid-btn" onclick="ban(' + rowObject.id + ');"><i class="icon icon-arrow-down"></i></a>';
                     }
-                    if (rowObject.is_check == 0) {
-                        response += '<a title="发布" href="javascript:void(0)" class="grid-btn release" onclick="release(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
-                        response += '<a title="未通过审核" href="javascript:void(0)" class="grid-btn unrelease" onclick="unrelease(' + rowObject.id + ')"><i class="icon icon-times"></i></a>';
-                    }
-//                    response += '</div><a class="showallbtn" title="操作"><i class="icon icon-resize-full"></i></a></div>';
+                    response += '<a title="评论详情" href="/admin/activitycom/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-comment"></i> </a>';
+                    response += '<a title="点赞日志" href="/admin/likeLogs/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-heart"></i> </a>';
+                    response += '<a title="收藏日志" href="/admin/collect/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-star"></i> </a>';
+                    response += '<a title="报名用户" href="/admin/activityapply/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-user"></i> </a>';
+                    response += '<a title="赞助详情" href="/admin/sponsor/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-dollar"></i> </a>';
+                    response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(' + rowObject.id + ');"><i class="icon icon-qrcode"></i><div hidden id="code_' + rowObject.id + '" style="position:relative;top:0;"><img back_src="' + rowObject.qrcode + '" /></div> </a>';
                     return response;
                 }
 
@@ -356,23 +348,22 @@
                         content: url//iframe的url
                     });
                 }
-                function ban(id){
-                    //下架
-                    layer.confirm('确定要下架该活动？将不会在应用中显示', {
+                function ableThis(id) {
+                     layer.confirm('确定更改上下线？', {
                         btn: ['确认', '取消'] //按钮
                     }, function () {
                         $.ajax({
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/admin/activity/ban',
+                            url: '/admin/activity/able',
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
                                     $('#list').trigger('reloadGrid');
                                 }
                             }
-                        })
+                        });
                     }, function () {
                     });
                 }

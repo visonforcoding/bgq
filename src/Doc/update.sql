@@ -495,3 +495,30 @@ ALTER TABLE `meet_subject`
 	
 ALTER TABLE `activity`
 	ADD COLUMN `is_del` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '1删除0正常' AFTER `status`;
+
+
+#8月3日
+
+ALTER TABLE `savant_apply`
+	ADD COLUMN `xmjy` VARCHAR(550) NOT NULL DEFAULT '' COMMENT '项目经验' AFTER `check_man`,
+	ADD COLUMN `zyys` VARCHAR(550) NOT NULL DEFAULT '' COMMENT '资源优势' AFTER `xmjy`;
+
+CREATE TABLE `savant_apply` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+	`check_man` VARCHAR(50) NULL DEFAULT '' COMMENT '审核人',
+	`xmjy` VARCHAR(550) NOT NULL DEFAULT '' COMMENT '项目经验',
+	`zyys` VARCHAR(550) NOT NULL DEFAULT '' COMMENT '资源优势',
+	`reason` VARCHAR(50) NULL DEFAULT '' COMMENT '意见',
+	`create_time` DATETIME NOT NULL COMMENT '申请时间',
+	`update_time` DATETIME NOT NULL COMMENT '更新时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='专家认证'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=3
+;
+
+ALTER TABLE `savant_apply`
+	ADD COLUMN `action` TINYINT NOT NULL DEFAULT '0' COMMENT '1通过0不通过' AFTER `zyys`;

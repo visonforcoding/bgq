@@ -17,6 +17,23 @@
             <?php
             echo $this->Form->input('title', ['label' => false, 'class' => 'form-control']);
             ?>
+            <span class="notice">已输入<i><?= mb_strlen($news->title, 'utf8') ?></i>个字</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">关键字</label>
+        <div class="col-md-8">
+            <?php
+            echo $this->Form->input('keywords', ['label' => false, 'class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">来源</label>
+        <div class="col-md-8">
+            <?php
+            echo $this->Form->input('source', ['label' => false, 'class' => 'form-control']);
+            ?>
         </div>
     </div>
     <div class="form-group">
@@ -50,7 +67,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">行业标签</label>
         <div class="col-md-8">
-            <?=$this->cell('Industry::news')?>
+            <?= $this->cell('Industry::news') ?>
         </div>
     </div>
     <div class="form-group">
@@ -68,25 +85,9 @@
     <div class="form-group">
         <label class="col-md-2 control-label">分享描述</label>
         <div class="col-md-8">
-        <?php
+            <?php
             echo $this->Form->input('share_desc', ['label' => false, 'class' => 'form-control']);
-        ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">关键字</label>
-        <div class="col-md-8">
-        <?php
-            echo $this->Form->input('keywords', ['label' => false, 'class' => 'form-control']);
-        ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">来源</label>
-        <div class="col-md-8">
-        <?php
-            echo $this->Form->input('source', ['label' => false, 'class' => 'form-control']);
-        ?>
+            ?>
         </div>
     </div>
     <div class="form-group">
@@ -111,6 +112,10 @@
         initJqupload('cover', '/wpadmin/util/doUpload?dir=newscover', 'jpg,png,gif,jpeg'); //初始化图片上传
         initJqupload('thumb', '/wpadmin/util/doUpload?dir=newsthumb', 'jpg,png,gif,jpeg'); //初始化图片上传
         var ue = UE.getEditor('content'); //初始化富文本编辑器
+        $('#title').keyup(function () {
+            var len = $(this).val().length;
+            $(this).next('span').find('i').text(len);
+        });
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-industry').select2({
             language: "zh-CN",

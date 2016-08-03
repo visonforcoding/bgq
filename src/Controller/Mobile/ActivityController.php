@@ -31,10 +31,7 @@ class ActivityController extends AppController {
             $isCollect = '';
             $savant = '';
             // 已报名的人
-            $allApply = $this
-                    ->Activity
-                    ->Activityapply
-                    ->find()
+            $allApply = $this->Activity->Activityapply->find()
                     ->contain(['Users'])
                     ->where(['activity_id' => $id, 'is_pass'=>1])
                     ->order([
@@ -50,15 +47,10 @@ class ActivityController extends AppController {
                 }
                 $this->set('userApply', $userApply);
             }
-
-            
             $order = [];
             if ($this->user) {
                 // 是否已赞
-                $isLike = $this
-                        ->Activity
-                        ->Likelogs
-                        ->find()
+                $isLike = $this->Activity->Likelogs->find()
                         ->where(['user_id' => $this->user->id, 'relate_id' => $id])
                         ->first();
                 // 是否已收藏
@@ -75,15 +67,11 @@ class ActivityController extends AppController {
                 }
 
                 $this->set('user', $this->user->id);
-                
                 $user_id = $this->user->id;
                 // 活动详情
                 $activity = $this->Activity->get($id, [
                     'contain' => [
-                        'Admins',
-                        'Industries',
-                        'Regions',
-                        'Savants',
+                        'Admins','Industries','Regions','Savants',
                         'Activity_recommends',
                         'Activityapply' => function($q)use($user_id){
                             return $q->where(['user_id'=>$user_id]);
@@ -267,7 +255,6 @@ class ActivityController extends AppController {
                             }
                         }
                     }
-                    
                 }
             }
             $this->set('activity', $activity);
@@ -645,10 +632,10 @@ class ActivityController extends AppController {
         
         $activity = $this->Activity
                         ->find()
-                        ->where(['is_check' => 1])
                         ->contain(['Users'=>function($q){
                             return $q->where(['enabled'=>1]);
                         }, 'Industries'])
+                        ->where(['Activity.status' => 1,'Activity.is_del'=>0])
                         ->page($page, $this->limit)
                         ->orderDesc('Activity.create_time')
                         ->toArray();

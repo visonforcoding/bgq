@@ -149,7 +149,7 @@ class ActivityController extends AppController {
         $region_id = $this->request->data('region_id');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = ['from_user'=>0];
+        $where = ['from_user'=>0,'Activity.is_del'=>0];
         
         if (!empty($series_id)) {
             $where['and'] = ['series_id'=>$series_id];
@@ -209,7 +209,7 @@ class ActivityController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = ['from_user'=>0];
+        $where = ['from_user'=>0,'Activity.is_del'=>0];
         if (!empty($keywords)) {
             $where[' username like'] = "%$keywords%";
         }
@@ -466,15 +466,15 @@ class ActivityController extends AppController {
      * 丢弃
      * @return type
      */
-    public function ban(){
+    public function able(){
           if ($this->request->is('post')) {
             $id = $this->request->data('id');
             $activity = $this->Activity->get($id);
-            $activity->status = 0;
+            $activity->status = $activity->status==1?0:1;
             if ($this->Activity->save($activity)) {
-                return $this->Util->ajaxReturn(true, '下架成功');
+                return $this->Util->ajaxReturn(true, '更改成功');
             } else {
-                return $this->Util->ajaxReturn(false, '下架失败');
+                return $this->Util->ajaxReturn(false, '更改失败');
             }
         }
     }
