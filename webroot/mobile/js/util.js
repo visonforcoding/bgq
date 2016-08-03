@@ -274,6 +274,27 @@ $.util = {
         return reg.test(str);
     },
 
+    /**
+     * obj jq对象(最好不要写body,不要跟轮播的地方重合了,或是跟其他使用touch的地方重合)
+     * func是要处理的方法, 防止点透可以return false;
+     * tp默认norm  一般选默认
+     */
+    slowTap: function (obj, func, tp) {
+        var limit = 0, range, ranges={norm:[50, 1000], solw:[200,400]};
+        tp = tp ? tp : 'norm';
+        range = ranges[tp];
+        obj.on('touchstart', function (e) {
+            limit = (new Date()).getTime();
+        });
+        obj.on('touchend', function (e) {
+            limit = (new Date()).getTime()-limit;
+            //console.log(limit);
+            if(limit > range[0] && limit < range[1]){
+                return func(e);
+            }
+        });
+    },
+
     report: function(ptag) {
         var act = 'v', param = ['/admin/report/logger?',
             'screen=' + window.screen.height + '*' + window.screen.width,
@@ -294,3 +315,5 @@ $.util = {
 $.util.isWX = navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1;
 $.util.isQQ = navigator.userAgent.toLowerCase().indexOf('qq') != -1;
 $.util.isAPP = navigator.userAgent.toLowerCase().indexOf('smartlemon') != -1;
+$.util.isIOS = !!$.os.ios;
+$.util.isAndroid = !!$.os.android;
