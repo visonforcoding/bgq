@@ -147,7 +147,9 @@
         if($('.a-s-mark').hasClass('disp')){
             $('.a-s-mark').removeClass('disp').addClass('nblock');
         }else if($('.a-s-mark').hasClass('nblock')){
-            $('.a-s-mark').removeClass('nblock').addClass('disp');
+            setTimeout(function(){
+                $('.a-s-mark').removeClass('nblock').addClass('disp');
+            },400);
         }else{
             setTimeout(function(){
                 $('.a-s-mark').addClass('disp');
