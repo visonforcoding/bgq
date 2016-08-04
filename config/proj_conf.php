@@ -77,8 +77,8 @@ return [
         ],
         '11'=>[
             'table'=>'activityapply',
-            'remark'=>'提现申请',
-            'url'=>'/home/my-purse'
+            'remark'=>'活动报名',
+            'url'=>'/activity/detail/{#id}'
         ],
     ],
     'educationType'=>[

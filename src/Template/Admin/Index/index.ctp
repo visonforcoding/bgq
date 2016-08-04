@@ -84,12 +84,12 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
                     <div class="databox bg-white radius-bordered">
                         <div class="databox-left bg-themesecondary ht">
-                            资讯          
+                            活动报名         
                         </div>
                         <div class="databox-right">
-                            <a class="a-link" href="/admin/news/index">
-                                <span class="databox-number themesecondary"><?= $newsTotalCounts ?></span>
-                                <div class="databox-text darkgray">资讯总数</div>
+                            <a class="a-link" href="/admin/activityapply/index">
+                                <span class="databox-number themesecondary"><?= $applyCounts ?></span>
+                                <div class="databox-text darkgray">待处理</div>
                                 <div class="databox-stat themesecondary radius-bordered">
                                     <i class="">more</i>
                                 </div>
