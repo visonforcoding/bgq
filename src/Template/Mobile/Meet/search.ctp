@@ -13,7 +13,7 @@
     <div class='h-news-search'>
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe618;</a>
         <form id="searchForm">
-        <h1><input type="text" name="keyword" placeholder="请输入关键词"></h1>
+            <h1><input type="text" name="keyword" placeholder="请输入关键词"></h1>
         </form>
         <div class='h-regiser' id="doSearch">搜 索</div>
     </div>
@@ -22,10 +22,12 @@
 <script type='text/html' id='biggie_tpl'>
     <section class="internet-v-info">
         <div class="innercon">
-            <span class="head-img"><img src="{#avatar#}"/><i></i></span>
+            <a href="/meet/view/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
             <div class="vipinfo">
-                <h3>{#truename#}{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
-                <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
+                <a href="/meet/view/{#id#}">
+                    <h3><div class="l-name">{#truename#}</div>{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
+                    <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
+                </a>
                 <div class="mark">
                     {#subjects#}
                 </div>
@@ -37,7 +39,7 @@
     <a href="javascript:void(0)">{#title#}</a>
 </script>
 <?php $this->start('script'); ?>
-<script src='/mobile/js/meet_search.js'></script>
+<!--<script src='/mobile/js/meet_search.js'></script>-->
 <script>
     $('input[name="keyword"]').focus();
     var page = 3;
@@ -109,7 +111,38 @@
                 }
             }
         });
+        $('input[name="keyword"]').blur();
         return false;
+    });
+    
+    $('#doSearch').on('tap', function(){
+        if(!$('input[name="keyword"]').val) {
+            $.util.alert('请输入搜索内容');
+            return false;
+        }
+        $.ajax({
+            type: 'post',
+            url: '/meet/getSearchRes',
+            data: $('#searchForm').serialize(),
+            dataType: 'json',
+            success: function (msg) {
+                if (typeof msg === 'object') {
+                    console.log(msg.data);
+                    if (msg.status === true) {
+                        $.util.dataToTpl('biggie', 'biggie_tpl', msg.data , function (d) {
+                            d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+                            d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
+                            d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
+                            return d;
+                        });
+                    } else {
+                        $('#biggie').html('');
+                        $.util.alert(msg.msg);
+                    }
+                }
+            }
+        });
+        $('input[name="keyword"]').blur();
     });
 </script>
 <?php $this->end('script');

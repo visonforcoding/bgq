@@ -43,5 +43,14 @@ class IndustryCell extends Cell {
                 ])->where(['pid'=>1])->all()->toArray();
         $this->set(compact('industries','selIds'));
     }
+    
+    public function push($selIds=null){
+        $IndustryTable = \Cake\ORM\TableRegistry::get('Industry');
+        $industries = $IndustryTable->find('threaded', [
+                    'keyField' => 'id',
+                    'parentField' => 'pid'
+                ])->where(['pid'=>1])->all()->toArray();
+        $this->set(compact('industries','selIds'));
+    }
 
 }

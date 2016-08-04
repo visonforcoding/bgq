@@ -180,7 +180,7 @@
             $.util.alert('请填写开始时间');
             return;
         }
-        if(!form.start_date.value){
+        if(!form.end_date.value){
             $.util.alert('请填写结束时间,如果未结束,可填写"至今"');
             return;
         }

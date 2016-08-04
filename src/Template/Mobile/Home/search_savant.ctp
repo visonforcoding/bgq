@@ -31,7 +31,7 @@
             <a href="/meet/view/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
             <div class="vipinfo">
                 <a href="/meet/view/{#id#}">
-                    <h3>{#truename#}{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
+                    <h3><div class="l-name">{#truename#}</div>{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
                     <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
                 </a>
                 <div class="mark bgblue">
@@ -52,6 +52,7 @@
 </script>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    
     $.ajax({
         type: 'POST',
         dataType: 'json',
@@ -70,43 +71,27 @@
                     return d;
                 });
                 
-                $('.industry').on('tap', function(){
-                    industryTap(this);
+                $.util.slowTap($('.industry'), function(e){
+                    var target = e.srcElement || e.target;
+                    industryTap(target);
+                    return false;
                 });
-                $('.regions').on('tap', function(){
-                    $('#sellect').text($(this).text());
+                
+                $.util.slowTap($('.regions'), function(e){
+                    var target = e.srcElement || e.target;
+                    $('#sellect').text($(target).text());
                     setTimeout(function(){
                         $('.arealist').hide();
                     },400);
-                    $('input[name="region"]').val($(this).text());
-                    $.ajax({
-                        type: 'post',
-                        url: '/home/getSearchRes',
-                        data: $('#searchForm').serialize(),
-                        dataType: 'json',
-                        success: function (msg) {
-                            if (typeof msg === 'object') {
-                                if (msg.status === true) {
-                                    $.util.dataToTpl('search', 'searchTpl', msg.data, function (d) {
-                                        d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
-                                        d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
-                                        d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
-                                        return d;
-                                    });
-                                } else {
-                                    $('#search').html('');
-                                    $.util.alert(msg.msg);
-                                }
-                            }
-                        }
-                    });
+                    $('input[name="region"]').val($(target).text());
+                    getRes();
                 });
             }
         }
     });
     
-    $('.a-s-title .orgname').on('touchstart',function(){
-        $(this).toggleClass('active');
+    $('.a-s-title').on('touchstart',function(){
+        $('.orgname').toggleClass('active');
         if($('.a-s-mark').hasClass('disp')){
             $('.a-s-mark').removeClass('disp').addClass('nblock');
         }else if($('.a-s-mark').hasClass('nblock')){
@@ -146,41 +131,17 @@
         $('.orgname').toggleClass('active');
         if($('.a-s-mark').hasClass('disp')){
             $('.a-s-mark').removeClass('disp').addClass('nblock');
-        }else if($('.a-s-mark').hasClass('nblock')){
-            setTimeout(function(){
-                $('.a-s-mark').removeClass('nblock').addClass('disp');
-            },400);
-        }else{
-            setTimeout(function(){
-                $('.a-s-mark').addClass('disp');
-            },400);
+        } else if($('.a-s-mark').hasClass('nblock')) {
+            $('.a-s-mark').removeClass('nblock').addClass('disp');
+        } else {
+            $('.a-s-mark').addClass('disp');
         }
 
         if(search_data[industry_id]){
             $('#search').html(search_data[industry_id]);
             return;
         }
-        $.ajax({
-            type: 'post',
-            url: '/home/getSearchRes',
-            data: $('#searchForm').serialize(),
-            dataType: 'json',
-            success: function (msg) {
-                if (typeof msg === 'object') {
-                    if (msg.status === true) {
-                        search_data[industry_id] = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
-                            d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
-                            d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
-                            d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
-                            return d;
-                        });
-                    } else {
-                        $.util.hideLoading('buttonLoading');
-                        $.util.alert(msg.msg);
-                    }
-                }
-            }
-        });
+        getRes();
     }
     
     var page = 2;
@@ -228,32 +189,15 @@
     
     
     $('#searchForm').submit(function(){
-        $.ajax({
-            type: 'post',
-            url: '/home/getSearchRes',
-            data: $('#searchForm').serialize(),
-            dataType: 'json',
-            success: function (msg) {
-                if (typeof msg === 'object') {
-                    if (msg.status === true) {
-                        $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
-                            d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
-                            d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
-                            d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
-                            return d;
-                        });
-                    } else {
-                        $('#search').html('');
-                        $.util.hideLoading('buttonLoading');
-                        $.util.alert(msg.msg);
-                    }
-                }
-            }
-        });
+        getRes();
         return false;
     });
     
     $('#doSearch').on('tap', function(){
+        getRes();
+    });
+    
+    function getRes(){
         $.ajax({
             type: 'post',
             url: '/home/getSearchRes',
@@ -276,7 +220,7 @@
                 }
             }
         });
-    })
+    }
 </script>
 <?php
 $this->end('script');

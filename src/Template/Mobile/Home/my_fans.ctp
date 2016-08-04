@@ -16,7 +16,7 @@
     <div class="my-focus-box">
         <div class='inner my-search'>
             <a href='javascript:void(0)' class='toback iconfont news-serch'>&#xe613;</a>
-            <form id="searchForm" onsubmit="return false;" style="width: 100%" >
+            <form id="searchForm" onsubmit="return false;">
             <h1><input type="text" name="keyword" placeholder="请输入关键词" value=""></h1>
             </form>
             <div class='h-regiser' id="doSearch">搜索</div>

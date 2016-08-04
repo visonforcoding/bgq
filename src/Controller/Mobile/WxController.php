@@ -310,8 +310,16 @@ class WxController extends AppController {
         }
     }
 
-    public function shareDownload() {
-        $this->set('pageTitle', '下载并购帮');
+    public function shareDownload($controller, $id) {
+        if($controller == 'news'){
+            $url = '/news/view/'.$id;
+        } elseif($controller == 'activity'){
+            $url = '/activity/details/'.$id;
+        }
+        $this->set([
+            'pageTitle'=>'下载并购帮',
+            'url' => $url,
+        ]);
     }
 
 }

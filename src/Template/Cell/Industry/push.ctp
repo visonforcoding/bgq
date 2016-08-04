@@ -4,8 +4,7 @@
         <?php $single = true; ?>
     <?php endif; ?>
 <?php endif; ?>
-<select name="industries[_ids][]" id="select-industry" class=" form-control" <?php if (!$single): ?>multiple="multiple"<?php endif; ?>>
-    <?php if($single): ?><option value="0">全部</option><?php endif;?>
+<select name="industry_id" id="select-industry" class=" form-control" <?php if (!$single): ?>multiple="multiple"<?php endif; ?>>
     <?php foreach ($industries as $industry): ?>
     <option></option>
         <option <?php if (isset($selIds) && !$single): ?>
