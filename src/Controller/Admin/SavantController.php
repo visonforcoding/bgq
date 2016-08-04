@@ -231,7 +231,7 @@ class SavantController extends AppController {
     }
 
     /**
-     * 审核不通过
+     * 审核不通过 0未审核 1审核通过 -1审核不通过
      * @param int $id 专家id
      */
     public function unpass($id) {
@@ -247,7 +247,7 @@ class SavantController extends AppController {
             $reason = $data['reason'];
             $apply->check_man = $this->_user->truename;
             $apply->reason = $reason;
-            $apply->action = 0;
+            $apply->action = -1;
             $SavantApplyTable->save($apply);
             //消息
             $this->loadComponent('Business');
@@ -291,7 +291,19 @@ class SavantController extends AppController {
          $applys = $SavantApplyTable->find()->contain(['Users'])->where(['user_id'=>$id])
                 ->formatResults(function($items)use($savantStatusConf) {
                     return $items->map(function($item)use($savantStatusConf) {
-                        $item['savant_str'] = $item->action=='1'?'通过':'不通过';
+                        switch ($item->action) {
+                            case 1:
+                                $item['savant_str'] = '通过';
+                                break;
+                            case -1:
+                                $item['savant_str'] = '不通过';
+                                break;
+                            case 0:
+                                $item['savant_str'] = '未审核';
+                                break;
+                            default:
+                                break;
+                        }
                         return $item;
                     });
                 })
