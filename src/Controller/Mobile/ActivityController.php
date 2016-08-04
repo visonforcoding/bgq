@@ -639,7 +639,6 @@ class ActivityController extends AppController {
                         ->page($page, $this->limit)
                         ->orderDesc('Activity.create_time')
                         ->toArray();
-                debug($activity);die;
         foreach($activity as $k=>$v){
             if($v['apply_end_time'] <= time()){
                 $activity[$k]['pass_time'] = 1;
