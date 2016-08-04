@@ -86,7 +86,6 @@ class ActivityController extends AppController {
                         }
                     ],
                 ]);
-                
                 $orderTable = \Cake\ORM\TableRegistry::get('order');
                 if($activity->activityapply){
                     if($activity->activityapply['0']->is_pass == 0){
@@ -245,11 +244,19 @@ class ActivityController extends AppController {
                                 $order = $OrderTable->find()->where(['relate_id'=>$activityApply->id, 'type'=>2, 'user_id'=>$this->user->id])->first();
     //                            //短信和消息通知
                                 $this->loadComponent('Sms');
-                                $msg = "您报名的活动：《" . $activity->title . "》已确认通过，请及时登录平台支付报名费用。";
+                                if($activity->must_check){
+                                    $msg = "您报名的活动：《" . $activity->title . "》申请已提交，我们会在一个工作日之内审核。";
+                                } else {
+                                    $msg = "您报名的活动：《" . $activity->title . "》已确认通过，请及时登录平台支付报名费用。";
+                                }
                                 $this->Sms->sendByQf106($this->user->phone, $msg);
                                 $this->loadComponent('Business');
                                 $this->Business->usermsg($this->user->id, '报名通知', $msg, 7, $id);
-                                return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/Wx/meet_pay/2/'.$order->id]);
+                                if($activity->must_check){
+                                    return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/activity/index']);
+                                } else {
+                                    return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/Wx/meet_pay/2/'.$order->id]);
+                                }
                             } else {
                                 return $this->Util->ajaxReturn(false, $activityApply->errors());
                             }
@@ -646,7 +653,7 @@ class ActivityController extends AppController {
                 $activity[$k]['pass_time'] = 0;
             }
         }
-        if ($activity !== false) {
+        if ($activity) {
             return $this->Util->ajaxReturn(['status' => true, 'data' => $activity]);
         } else {
             return $this->Util->ajaxReturn(['status' => false]);

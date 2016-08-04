@@ -50,6 +50,13 @@
                         d.adress = d.activity.adress;
                         d.apply_nums = d.activity.apply_nums;
                         d.time = d.activity.time;
+                        if(d.is_check === 0 && d.is_pass === 0){
+                            d.check = '审核中';
+                        } else if(d.is_check === 1 && d.is_pass === 0){
+                            d.check = '未付款';
+                        } else if(d.is_pass === 1){
+                            d.check = '报名成功';
+                        }
                         return d;
                     });
                 }
@@ -123,6 +130,13 @@
                                     d.adress = d.activity.adress;
                                     d.apply_nums = d.activity.apply_nums;
                                     d.time = d.activity.time;
+                                    if(d.is_check === 0 && d.is_pass === 0){
+                                        d.check = '审核中';
+                                    } else if(d.is_check === 1 && d.is_pass === 0){
+                                        d.check = '未付款';
+                                    } else if(d.is_pass === 1){
+                                        d.check = '报名成功';
+                                    }
                                     return d;
                                 });
                             }
