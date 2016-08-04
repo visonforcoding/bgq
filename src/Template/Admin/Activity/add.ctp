@@ -116,6 +116,7 @@
             <div style="color:red">请上传宽为380大小的首页列表图</div>
             <input name="thumb"  type="hidden"/>
             <div id="thumb" class="jqupload">上传</div>
+            <span class="notice">支持格式jpg,png,gif,jpeg</span>
         </div>
     </div>
     <div class="form-group">
@@ -127,6 +128,7 @@
             <div style="color:red">请上传宽为690，高小于388的封面图</div>
             <input name="cover"  type="hidden"/>
             <div id="cover" class="jqupload">上传</div>
+            <span class="notice">支持格式jpg,png,gif,jpeg</span>
         </div>
     </div>
     <div class="form-group">

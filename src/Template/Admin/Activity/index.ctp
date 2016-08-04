@@ -74,13 +74,19 @@
                         url: "/admin/activity/getDataList",
                         datatype: "json",
                         mtype: "POST",
-                        colNames: [ '发布人', '主办单位', '活动名称', '活动时间', '地点', '规模', '城市','阅读数', '点赞数', '评论数', '报名人数', '报名费用','状态', '创建时间', '更新时间', '操作'],
+                        colNames: [ '发布人', '主办单位', '活动名称', '活动时间','是否需审核报名', '规模', '城市','阅读数', '点赞数', '评论数', '报名人数', '报名费用','状态', '创建时间', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'company', editable: true, align: 'center'},
                             {name: 'title', editable: true, align: 'center'},
                             {name: 'time', editable: true, align: 'center'},
-                            {name: 'address', editable: true, align: 'center'},
+                            {name: 'must_check', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
+                                    if(cellvalue=='1'){
+                                        return '是';
+                                    }else{
+                                        return '否';
+                                    }
+                            }},
                             {name: 'scale', editable: true, align: 'center'},
                             {name: 'region.name', editable: true, align: 'center'},
                             {name: 'read_nums', editable: true, align: 'center'},
@@ -97,7 +103,6 @@
                                     }
                             }},
                             {name: 'create_time', editable: true, align: 'center'},
-                            {name: 'update_time', editable: true, align: 'center'},
                             {name: 'actionBtn', width: '200%', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: 10,

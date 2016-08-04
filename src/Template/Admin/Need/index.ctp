@@ -39,9 +39,10 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '最新消息', '创建时间', '修改时间', '操作'],
+                                ['用户','手机号', '最新消息', '创建时间', '修改时间', '操作'],
                         colModel: [
                             {name: 'truename', editable: true, align: 'center'},
+                            {name: 'phone', editable: true, align: 'center'},
                             {name: 'msg', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},

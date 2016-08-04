@@ -86,8 +86,10 @@ $this->start('static') ?>
 
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-                    response = '<a title="审核通过" onClick="pass(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
-                    response += '<a title="审核不通过" onClick="unpass(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-remove-circle"></i> </a>';
+                   if(rowObject.status==0){
+                        response = '<a title="审核通过" onClick="pass(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
+                        response += '<a title="审核不通过" onClick="unpass(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-remove-circle"></i> </a>';
+                   }
                     response += '<a title="编辑" href="/admin/withdraw/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     return response;
                 }
