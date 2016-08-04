@@ -39,12 +39,29 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '活动', '提交时间', '更新时间', '是否置顶', '是否签到', '操作'],
+                                ['用户', '活动', '提交时间','是否需审核', '审核状态', '审核人','是否置顶', '是否签到', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'activity.title', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
-                            {name: 'update_time', editable: true, align: 'center'},
+                            {name: 'activity.must_check', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
+                                    if(cellvalue=='1'){
+                                        return '是';
+                                    }else{
+                                        return '否';
+                                    }
+                            }},
+                            {name: 'is_check', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
+                                    switch(cellvalue){
+                                        case 0:
+                                            return '未审核';
+                                        case 1:
+                                            return '审核通过';
+                                        case 2:
+                                            return '审核不通过';
+                                    }
+                            }},
+                            {name: 'check_man', editable: true, align: 'center'},
                             {name: 'is_top', editable: true, align: 'center', formatter: topFormatter},
                             {name: 'is_sign', editable: true, align: 'center', formatter: signFormatter},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
@@ -93,7 +110,7 @@
                     }
                     return response;
                 }
-                
+
                 function signFormatter(cellvalue, options, rowObject) {
                     if (rowObject.is_sign == 0)
                     {
@@ -107,12 +124,14 @@
 
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = ''; // '<a title="删除" href="javascript:void(0)" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-                    if (rowObject.is_top == 0)
-                    {
-                        response += '<a title="置顶" href="javascript:void(0)" onClick="top(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">置顶</a>';
-                    } else
-                    {
+                    if (rowObject.is_top == 0){
+                        response += '<a title="置顶" href="javascript:void(0)" onClick="topit(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">置顶</a>';
+                    } else{
                         response += '<a title="取消置顶" href="javascript:void(0)" onClick="untop(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">取消置顶</a>';
+                    }
+                   if(rowObject.activity.must_check==1){
+                        response += '<a title="审核通过" onClick="check(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
+                        response += '<a title="审核不通过" onClick="uncheck(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-remove-circle"></i> </a>';
                     }
                     return response;
                 }
@@ -137,7 +156,7 @@
                     });
                 }
 
-                function top(id) {
+                function topit(id) {
                     layer.confirm('确定置顶？', {
                         btn: ['确认', '取消'] //按钮
                     }, function () {
@@ -181,7 +200,7 @@
                     });
                 }
 
-                function pass(id) {
+                function check(id) {
                     layer.confirm('确定通过审核？', {
                         btn: ['确认', '取消'] //按钮
                     }, function () {
@@ -189,12 +208,12 @@
                             type: 'post',
                             data: '',
                             dataType: 'json',
-                            url: '/admin/activityapply/pass/' + id,
+                            url: '/admin/activityapply/check/' + id,
                             success: function (res) {
                                 if (res.status) {
                                     layer.msg(res.msg);
                                     setTimeout(function () {
-                                        window.location.reload();
+                                         $('#list').trigger('reloadGrid');
                                     }, 2000);
                                 }
                             }

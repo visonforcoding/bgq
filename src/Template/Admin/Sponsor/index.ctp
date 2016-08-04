@@ -39,22 +39,27 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '活动', '提交时间', '类型', '描述', '姓名', '公司/机构', '部门', '职务', '地址', '容纳人数', '操作'],
+                                ['用户', '活动', '提交时间', '类型', '描述', '公司/机构', '职务','状态','处理人', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'activity.title', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'type', editable: true, align: 'center', formatter: typeFormatter},
                             {name: 'description', editable: true, align: 'center'},
-                            {name: 'name', editable: true, align: 'center'},
-                            {name: 'company', editable: true, align: 'center'},
-                            {name: 'department', editable: true, align: 'center'},
-                            {name: 'position', editable: true, align: 'center'},
-                            {name: 'address', editable: true, align: 'center'},
-                            {name: 'people', editable: true, align: 'center'},
+                            {name: 'user.company', editable: true, align: 'center'},
+                            {name: 'user.position', editable: true, align: 'center'},
+                            {name: 'status', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
+                                    if(cellvalue=='0'){
+                                        return '未处理';
+                                    }
+                                    if(cellvalue=='1'){
+                                        return '已处理';
+                                    }
+                            }},
+                            {name: 'check_man', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
-                        rowNum: 30,
+                        rowNum: 10,
                         rowList: [10, 20, 30],
                         sortname: "id",
                         sortorder: "desc",
@@ -102,7 +107,7 @@
                 }
 
                 function actionFormatter(cellvalue, options, rowObject) {
-                    response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response = '<a title="标记已处理" onClick="check(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
                     return response;
                 }
 
@@ -160,6 +165,25 @@
                         shade: 0.8,
                         area: ['380px', '70%'],
                         content: url//iframe的url
+                    });
+                }
+                function check(id){
+                    layer.confirm('确定标记？', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                        $.ajax({
+                            type: 'post',
+                            data: {id: id},
+                            dataType: 'json',
+                            url: '/admin/sponsor/check/'+id,
+                            success: function (res) {
+                                layer.msg(res.msg);
+                                if (res.status) {
+                                    $('#list').trigger('reloadGrid');
+                                }
+                            }
+                        })
+                    }, function () {
                     });
                 }
 </script>

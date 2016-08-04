@@ -54,6 +54,7 @@ class ActivityController extends AppController {
         $activity = $this->Activity->newEntity();
         if ($this->request->is('post')) {
             $activity = $this->Activity->patchEntity($activity, $this->request->data);
+            $activity->apply_end_time = strtotime($this->request->data('apply_end_time'));
             $activity->admin_id = $this->_user->id;
             $activity->user_id = $this->_user->id;
             $activity->publisher = $this->_user->truename;
@@ -83,6 +84,7 @@ class ActivityController extends AppController {
         ]);
         if ($this->request->is(['post', 'put'])) {
             $activity = $this->Activity->patchEntity($activity, $this->request->data);
+            $activity->apply_end_time = strtotime($this->request->data('apply_end_time'));
             if ($this->Activity->save($activity)) {
                 return $this->Util->ajaxReturn(true, '修改成功');
             } else {

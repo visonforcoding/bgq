@@ -522,3 +522,13 @@ AUTO_INCREMENT=3
 
 ALTER TABLE `savant_apply`
 	ADD COLUMN `action` TINYINT NOT NULL DEFAULT '0' COMMENT '1通过0不通过' AFTER `zyys`;
+
+ALTER TABLE `activity`
+	ALTER `apply_end_time` DROP DEFAULT;
+
+#8月4日
+ALTER TABLE `sponsor`
+	ADD COLUMN `status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '未处理' AFTER `address`;	
+
+ALTER TABLE `activityapply`
+	ADD COLUMN `check_man` VARCHAR(50) NULL DEFAULT '' COMMENT '审核人' AFTER `is_check`;

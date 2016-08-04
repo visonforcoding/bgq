@@ -70,6 +70,16 @@ return [
             'remark'=>'活动评论回复消息',
             'url'=>'/activity/details/{#id#}#{#com_id#}'
         ],
+        '10'=>[
+            'table'=>'withdraw',
+            'remark'=>'提现申请',
+            'url'=>'/home/my-purse'
+        ],
+        '11'=>[
+            'table'=>'activityapply',
+            'remark'=>'提现申请',
+            'url'=>'/home/my-purse'
+        ],
     ],
     'educationType'=>[
         '1'=>'高中',

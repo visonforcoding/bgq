@@ -195,5 +195,21 @@ class SponsorController extends AppController {
         $filename = 'Sponsor_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
+    
+    /**
+     * 标记处理
+     */
+    public function check($id){
+        if($this->request->is('ajax')){
+            $sponsor = $this->Sponsor->get($id);
+            $sponsor->status = 1;
+            $sponsor->check_man = $this->_user->truename;
+            if($this->Sponsor->save($sponsor)){
+                $this->Util->ajaxReturn(true,'标注成功!');
+            }else{
+                $this->Util->ajaxReturn(false,'标记失败');
+            }
+        }
+    }
 
 }

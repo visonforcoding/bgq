@@ -8,6 +8,7 @@ use Wpadmin\Controller\AppController;
  * Activityapply Controller
  *
  * @property \App\Model\Table\ActivityapplyTable $Activityapply
+ * @property \App\Controller\Component\SmsComponent $Sms
  */
 class ActivityapplyController extends AppController {
 
@@ -255,5 +256,35 @@ class ActivityapplyController extends AppController {
             $this->Util->ajaxReturn(false, '操作失败');
         }
     }
-
+    
+    /**
+     * 审核通过
+     * @param type $id
+     */
+    public function check($id){
+        $apply = $this->Activityapply->get($id,[
+            'contain'=>'Users'
+        ]);
+        $ActivityTable = \Cake\ORM\TableRegistry::get('Activity');
+        $activity = $ActivityTable->get($apply->activity_id);
+        if($activity->apply_fee==0){
+            //无需付费的 直接通过
+            $apply->is_pass = 1;
+        }
+        $apply->is_check = 1;
+        $apply->check_man = $this->_user->truename;
+        $res = $this->Activityapply->save($apply);
+        if ($res) {
+            //消息
+            $this->loadComponent('Business');
+            $this->Business->usermsg($apply->user_id,'活动报名消息', '您报名的活动"'.$activity->title.'已审核通过', 11, $id,'/activity/details/'.$activity->id);
+            if($activity->apply_fee>0){
+                $this->loadComponent('Sms');
+                $this->Sms->sendByQf106($apply->user->phone,'您报名的活动"'.$activity->title.'"已审核通过，请及时登录平台支付费用，并购帮祝您生活愉快~' );
+            }
+            $this->Util->ajaxReturn(true, '操作成功');
+        } else {
+            $this->Util->ajaxReturn(false, '操作失败');
+        }
+    }
 }

@@ -135,11 +135,11 @@ class NeedController extends AppController {
         }
         $offset = ($page - 1) * $rows;
         $connection = \Cake\Datasource\ConnectionManager::get('default');
-        $result = $connection->execute('select u.truename,n.* from user u
+        $result = $connection->execute("select u.phone,u.truename,n.* from user u
                         inner join 
-                        (select * from need order by create_time desc ) n
-                        on n.user_id = u.id
-                        group by u.id limit ' . $offset . ',' . $rows)->fetchAll('assoc');
+                        (select * from need  order by create_time desc ) n
+                        on n.user_id = u.id where u.id != '-1'
+                        group by u.id limit  $offset, $rows")->fetchAll('assoc');
         $nums = count($result);
         if (empty($result)) {
             $res = array();

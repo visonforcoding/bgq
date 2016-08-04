@@ -27,10 +27,14 @@ class IndexController extends AppController {
         //待处理提现总数
         $WithdrawTable = \Cake\ORM\TableRegistry::get('Withdraw');
         $withdrawCounts = $WithdrawTable->find()->where(['status' => 0])->count();
+        //活动赞助待处理
+        $SponsorTable = \Cake\ORM\TableRegistry::get('Sponsor');
+        $sponsorCounts = $SponsorTable->find()->where(['status'=>0])->count();
         $this->set([
             'savantCounts' => $savantCounts,
             'needCounts' => $needCounts,
             'withdrawCounts' => $withdrawCounts,
+            'sponsorCounts' => $sponsorCounts,
         ]);
     }
 
