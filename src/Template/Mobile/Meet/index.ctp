@@ -97,7 +97,7 @@
             <a href="/meet/view/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
             <div class="vipinfo">
                 <a href="/meet/view/{#id#}">
-                    <h3>{#truename#}{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
+                    <h3><div class="l-name">{#truename#}</div>{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
                     <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
                 </a>
                 <div class="mark bgblue">
