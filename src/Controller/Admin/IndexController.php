@@ -28,6 +28,10 @@ class IndexController extends AppController {
         $WithdrawTable = \Cake\ORM\TableRegistry::get('Withdraw');
         $withdrawCounts = $WithdrawTable->find()->where(['status' => 0])->count();
         //活动赞助待处理
+        $ActivityapplyTable = \Cake\ORM\TableRegistry::get('activityapply');
+        $applyCounts = $ActivityapplyTable->find()->contain(['Activities'])->where(['status'=>0,'must_check'=>1])->count();
+        
+        //活动报名待处理
         $SponsorTable = \Cake\ORM\TableRegistry::get('Sponsor');
         $sponsorCounts = $SponsorTable->find()->where(['status'=>0])->count();
         $this->set([
@@ -35,6 +39,7 @@ class IndexController extends AppController {
             'needCounts' => $needCounts,
             'withdrawCounts' => $withdrawCounts,
             'sponsorCounts' => $sponsorCounts,
+            'applyCounts' => $applyCounts,
         ]);
     }
 

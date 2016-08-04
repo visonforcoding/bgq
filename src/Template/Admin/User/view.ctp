@@ -25,34 +25,84 @@
                     </div>
                     <div class='col-md-12 row mt20'>
                         <div class='numlist'>
-                            <div>
+                            <div class="col-md-3">
                                 <i><?= count($user->focus) ?></i>
                                 <span>关注</span>
                             </div>
-                            <div>
+                            <div class="col-md-3">
                                 <i><?= count($user->followers) ?></i>
                                 <span>粉丝</span>
                             </div>
-                            <div>
+                            <div class="col-md-3">
                                 <i><?= $newscom_count + $activitycom_count ?></i>
                                 <span>评论</span>
+                            </div>
+                            <div class="col-md-3">
+                                <i><?= $user->money ?></i>
+                                <span>余额</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
         <div class='container inner'>
-            <div class='row mt20'>
-                <table class="table table-bordered bx text-center">
-                    <tr class="active"><td>手机号</td><td>报名人数</td><td>报名人数</td><td>报名人数</td></tr>
-                    <tr><td><?=$user->phone?></td><td>报名人数</td><td>报名人数</td><td>报名人数</td></tr>
-                    <tr class="warning"><td>报名人数</td><td>报名人数</td><td>报名人数</td><td>报名人数</td></tr>
-                    <tr><td>报名人数</td><td>报名人数</td><td>报名人数</td><td>报名人数</td></tr>
-                    <tr class="info"><td>报名人数</td><td>报名人数</td><td>报名人数</td><td>报名人数</td></tr>
-                </table>
-
+            <div class='row mt20 bx'>
+                <h6 class='row-title before-themeprimary no-margin-top'>教育经历</h6>
+                <div class="row  p30">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>开始时间</th>
+                                <th>结束时间</th>
+                                <th>公司</th>
+                                <th>职位</th>
+                                <th>描述</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($user->careers as $career): ?>
+                                <tr>
+                                    <td><?= $career->start_date ?></td>
+                                    <td><?= $career->end_date ?></td>
+                                    <td><?= $career->company ?></td>
+                                    <td><?= $career->position ?></td>
+                                    <td><?= $career->descb ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>   
+            </div>
+        </div>
+        <div class='container inner'>
+            <div class='row mt20 bx'>
+                <h6 class='row-title before-themeprimary no-margin-top'>工作经历</h6>
+                <div class="row  p30">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>开始时间</th>
+                                <th>结束时间</th>
+                                <th>学校</th>
+                                <th>专业</th>
+                                <th>学历</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $educationConf = \Cake\Core\Configure::read('educationType'); ?>
+                            <?php foreach ($user->educations as $education): ?>
+                                <tr>
+                                    <td><?= $education->start_date ?></td>
+                                    <td><?= $education->end_date ?></td>
+                                    <td><?= $education->school ?></td>
+                                    <td><?= $education->major ?></td>
+                                    <td><?= $educationConf[$education->education] ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>   
             </div>
         </div>
         <div class='container inner'>
@@ -87,26 +137,6 @@
                         </div>
                     <?php endforeach; ?>
 
-                </div>
-            </div>
-        </div>
-        <div class='container inner'>
-            <div class='row mt20  bx'>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">已报名活动</h3>
-                    </div>
-                    <div class="panel-body">
-                        <table class="table">
-                            <tr><td>活动名称</td><td>付款</td><td>确认</td><td>备注</td></tr>
-                            <tr><td>22</td><td>222</td><td>22</td><td>222</td></tr>
-                            <tr><td>22</td><td>222</td><td>22</td><td>222</td></tr>
-                            <tr><td>22</td><td>222</td><td>22</td><td>222</td></tr>
-                            <tr><td>22</td><td>222</td><td>22</td><td>222</td></tr>
-                            <tr><td>22</td><td>222</td><td>22</td><td>222</td></tr>
-                        </table>
-                    </div>
-                    <div class="panel-footer">*注意。。。。</div>
                 </div>
             </div>
         </div>
