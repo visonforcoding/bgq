@@ -42,11 +42,22 @@
             </li>
         </ul>
     </section>
-    <a href="/meet/book/<?=$subject->id?>" id="submit" class="nextstep">立即预约</a>
+    <a href="javascript:void(0)" id="submit" class="nextstep" user_id="<?= $user_id ?>">立即预约</a>
 </div>
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    $('.nextstep').on('tap', function(){
+        if($(this).attr('user_id') == ''){
+            $.util.alert('请先登录');
+            setTimeout(function(){
+                location.href = '/user/login?redirect_url=/meet/subject-detail/<?=$subject->id?>';
+            },2000);
+        } else {
+            location.href = '/meet/book/<?=$subject->id?>';
+        }
+    });
+    
 </script>
 <?php
 $this->end('script');

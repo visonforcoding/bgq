@@ -120,8 +120,8 @@
     
     
     
-    $('.a-s-title .orgname').on('touchstart',function(){
-        $(this).toggleClass('active');
+    $('.a-s-title').on('touchstart',function(){
+        $('.orgname').toggleClass('active');
         if($('.a-s-mark').hasClass('disp')){
             $('.a-s-mark').removeClass('disp').addClass('block');
         }else if($('.a-s-mark').hasClass('block')){
@@ -245,7 +245,31 @@
                 }
             }
         });
+        $('input[name="keyword"]').blur();
         return false;
+    });
+    
+    $('#doSearch').on('tap', function(){
+        $.ajax({
+            type: 'post',
+            url: '/activity/getSearchRes',
+            data: $('#searchForm').serialize(),
+            dataType: 'json',
+            success: function (msg) {
+                if (typeof msg === 'object') {
+                    if (msg.status === true) {
+                        var html = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                            d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == - 1 ? '' : '<span class="is-apply">已报名</span>';
+                            return d;
+                        });
+                    } else {
+                        $('#search').html('');
+                        $.util.alert(msg.msg);
+                    }
+                }
+            }
+        });
+        $('input[name="keyword"]').blur();
     });
 </script>
 <?php

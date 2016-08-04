@@ -1,38 +1,68 @@
 <script src="/wpadmin/js/jquery.js"></script>
 <script src="/wpadmin/lib/layer/layer.js"></script>
 <script src="/wpadmin/lib/layer/extend/layer.ext.js"></script>
-<div class="activity view large-9 medium-8 columns content">
-    <form action="" method="post">
-        <table class="vertical-table">
-            <tr>
-                <th>标题</th>
-                <td><input type="text" name="title"/></td>
-            </tr>
-            <tr>
-                <th>内容</th>
-                <td><textarea name="content"></textarea></td>
-            </tr>
-            <tr>
-                <th>链接</th>
-                <td><input type="text" name="url"/></td>
-            </tr>
-        </table>
-        <!--<input type="hidden" name="choose" value=""/>-->
+<link href="/wpadmin/lib/zui/css/zui.min.css" rel="stylesheet">
+<link href="/wpadmin/lib/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
+<link href="/wpadmin/css/base.css" rel="stylesheet">
+<div class="work-copy">
+    <form action="" method="post" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-md-2 control-label"></label>
+            <div class="col-md-8"></div>
+        </div>
+        <div class="form-group">
+            <?php if ($type == 1): ?>
+                <label class="col-md-2 control-label">活动标题</label>
+                <div class="col-md-8"><input value="<?= $content->title ?>" class="form-control" readonly></div>
+            <?php elseif ($type == 2): ?>
+                <label class="col-md-2 control-label">标签</label>
+                <div class="col-md-8"><input value="<?= $content->name ?>" class="form-control" readonly></div>
+            <?php endif; ?>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">标题</label>
+            <div class="col-md-8"><input type="text" name="title" class="form-control"/></div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">内容</label>
+            <div class="col-md-8"><textarea name="content" class="form-control"></textarea></div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">链接</label>
+            <div class="col-md-8"><input type="text" name="url" class="form-control"/></div>
+        </div>
+        <input type="hidden" name="industry_id" value=""/>
+        <input type="hidden" name="type" value=""/>
         <input type="hidden" name="activity_id" value=""/>
         <input type="hidden" name="keyword" value=""/>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type='submit' id='push' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
+            </div>
+        </div>
     </form>
-    <button id="push">推送</button>
 </div>
+<script src="/wpadmin/js/jquery.js"></script>
+<!-- ZUI Javascript组件 -->
+<script src="/wpadmin/lib/zui/js/zui.min.plus.js"></script>
+<script src="/wpadmin/lib/datetimepicker/jquery.datetimepicker.js"></script>
+<script src="/wpadmin/js/global.js"></script>
 <script>
     var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
     $('#push').on('click', function () {
-        $('input[name="activity_id"]').val(parent.$('#select-activity').val());
         $('input[name="keyword"]').val(parent.$('input[name="keyword"]').val());
-        if($('input[name="title"]').val() == ''){
+        $('input[name="type"]').val(parent.$('#cate').val());
+        if ($('input[name="type"]').val() == 1) {
+            $('input[name="activity_id"]').val(parent.$('#select-activity').val());
+        } else if ($('input[name="type"]').val() == 2) {
+            $('input[name="industry_id"]').val(parent.$('#select-industry').val());
+        }
+        if ($('input[name="title"]').val() == '') {
             layer.alert('请输入推送标题');
             return;
         }
-        if($('input[name="content"]').val() == ''){
+        if ($('input[name="content"]').val() == '') {
             layer.alert('请输入推送内容');
             return;
         }
@@ -53,6 +83,6 @@
                 parent.layer.close(index);
             }
         });
-        
+
     });
 </script>

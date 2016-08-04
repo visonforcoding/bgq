@@ -6,6 +6,7 @@
 <?php endif;?>
 <select name="industries[_ids][]" id="select-industry" class=" form-control" <?php if(!$single): ?>multiple="multiple"<?php endif;?>>
     <?php foreach ($industries as $industry): ?>
+    <option></option>
         <optgroup label="<?= $industry->name ?>">
             <?php if (!empty($industry->children)): ?>
                 <?php foreach ($industry->children as $item): ?>

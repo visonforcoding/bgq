@@ -77,7 +77,7 @@
         <section class="newscomment-box">
             <h3 class="comment-title">
                 评论
-                <span id="article_comment" user_id="<?= $user; ?>"><i class="iconfont" >&#xe62e;</i>我要点评</span>
+                <span id="article_comment_1" user_id="<?= $user; ?>"><i class="iconfont" >&#xe62e;</i>我要点评</span>
             </h3>
             <div id="comment"><h4 id="noComment">还没任何评论</h4></div>
             <span class='com-all' style="display:none;"><a href="#allcoment" id="showAllComment">查看更多评价</a></span>
@@ -671,6 +671,12 @@
             switch (em.id) {
                     // 点击评论
                 case 'article_comment':
+                    checkLogin(function(){
+                        $('.article-shadow').show();
+                        $('.article').removeClass('m-height').addClass('c-height');
+                    });
+                    break;
+                case 'article_comment_1':
                     checkLogin(function(){
                         $('.article-shadow').show();
                         $('.article').removeClass('m-height').addClass('c-height');

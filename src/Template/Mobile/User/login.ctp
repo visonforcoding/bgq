@@ -16,7 +16,7 @@
                     <button class="clearfix" type="button"  id="getVcode" href='javascript:void(0);'>获取验证码</button>
                 </div>
             </div>
-            <a href="javascript:void(0);"  id="submit" class="submit redshadow" >确定</a>
+            <a href="javascript:void(0);"  id="submit" class="submit redshadow" >登录</a>
              <a href="/user/register-vphone" class='historyinfo colore01'>注册</a>
         </form>
 

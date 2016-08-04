@@ -165,7 +165,11 @@ class MeetController extends AppController {
         $this->set([
             'pageTitle'=>'话题详情'
         ]);
-        $this->set(compact('subject'));
+        $user_id = '';
+        if($this->user){
+            $user_id = $this->user->id;
+        }
+        $this->set(compact('subject', 'user_id'));
     }
 
     /**

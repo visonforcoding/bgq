@@ -8,7 +8,9 @@
     <div class="h-home-bottom" id="user" >
         <div class="t-home-top">
             <span>
-                <img src="/mobile/images/touxiang.png">
+                <a href="/user/login?redirect_url=/home/index">
+                    <img src="/mobile/images/touxiang.png">
+                </a>
             </span>
         </div>
         <div class="todo"><a href="/user/login?redirect_url=/home/index">登录 / 注册</a></div>

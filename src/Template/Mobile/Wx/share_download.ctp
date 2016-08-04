@@ -6,8 +6,8 @@
             <p>并购人的生活方式</p>
         </div>
         <div class="d-down block">
-            <a href="#this"><span></span>iphone 版下载</a>
-            <a href="#this"><span></span>android 版下载</a>
+            <a href="com.chinamatop://main/param?url=<?= $url ?>"><span></span>立刻打开</a>
+            <a href="javascript:void(0)" id="download"><span></span>立刻下载</a>
             <p>or</p>
         </div>
 
@@ -20,3 +20,10 @@
 
     </div>
 </div>
+<?php $this->start('script'); ?>
+<script>
+    $('download').on('tap', function(){
+        
+    });
+</script>
+<?php $this->end('script'); 

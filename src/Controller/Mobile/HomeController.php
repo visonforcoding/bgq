@@ -477,6 +477,22 @@ class HomeController extends AppController {
                 $this->set(compact('subject', 'book'));
                 $this->set('pageTitle', '我是顾客');
             }
+            
+            /**
+             * 取消预约
+             * @param int $id
+             */
+            public function cancelMeeting($id){
+                $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+                $book = $BookTable->get($id);
+                $book->status = -1;
+                $res = $BookTable->save($book);
+                if($res){
+                    return $this->Util->ajaxReturn(true, '取消预约成功');
+                } else {
+                    return $this->Util->ajaxReturn(false, '操作失败');
+                }
+            }
 
 
             /**

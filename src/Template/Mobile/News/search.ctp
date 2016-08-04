@@ -39,7 +39,7 @@
         <a href="javascript:void(0)" industry_id='{#id#}' class="industry {#default#}">{#name#}</a>
     </li>
 </script>
-<script src="/mobile/js/news_search.js"></script>
+<!--<script src="/mobile/js/news_search.js"></script>-->
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
     var a = <?= $id?>+'.';
@@ -127,8 +127,8 @@
         }
     });
     
-    $('.a-s-title .orgname').on('touchstart',function(){
-        $(this).toggleClass('active');
+    $('.a-s-title').on('touchstart',function(){
+        $('.orgname').toggleClass('active');
         if($('.a-s-mark').hasClass('disp')){
             $('.a-s-mark').removeClass('disp').addClass('nblock');
         }else if($('.a-s-mark').hasClass('nblock')){
@@ -208,7 +208,32 @@
                 }
             }
         });
+        $('input[name="keyword"]').blur();
         return false;
+    });
+    
+    $('#doSearch').on('tap', function(){
+        $.ajax({
+            type: 'post',
+            url: '/news/getSearchRes',
+            data: $('#searchForm').serialize(),
+            dataType: 'json',
+            success: function (msg) {
+                if (typeof msg === 'object') {
+                    if (msg.status === true) {
+                        var html = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                            d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                            d.author = d.user.truename;
+                            return d;
+                        });
+                    } else {
+                        $('#search').html('');
+                        $.util.alert(msg.msg);
+                    }
+                }
+            }
+        });
+        $('input[name="keyword"]').blur();
     });
     
 </script>

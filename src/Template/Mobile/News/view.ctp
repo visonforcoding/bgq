@@ -13,7 +13,7 @@
         <h1><img src="/mobile/images/logo-wx.png"></h1>
         <h3>并购圈<span>并购人的生活方式</span></h3>
     </div>
-    <a href="/Wx/share_download" id="share_download_link">立即下载</a>
+    <a href="/Wx/share_download/news/<?= $news->id ?>" id="share_download_link">立即下载</a>
 </div>
 <div class="wraper" id="news">
     <?php if (isset($news)): ?>
@@ -368,7 +368,7 @@
         });
 
     if($.util.isIOS){
-        $.util.tap($('body'), doClick, 'solw');
+        $.util.tap($('body'), doClick);
     }
     else{
         $('body').on('click', doClick);

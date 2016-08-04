@@ -128,6 +128,11 @@ class UserTable extends Table {
             'joinType' => 'INNER',
             'className' => 'Activityapply'
         ]);
+        $this->hasMany('UserIndustry', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER',
+            'className' => 'user_industry'
+        ]);
         //联络人
         $this->belongsTo('Customer', [
             'className' => 'Wpadmin.Admin',
