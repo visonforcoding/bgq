@@ -41,6 +41,12 @@ class ActivityTable extends Table {
             'joinType' => 'INNER',
             'className' => 'User',
         ]);
+        
+        $this->hasMany('Lmorder', [
+            'foreignKey' => 'relate_id',
+            'joinType' => 'INNER',
+            'className' => 'Order',
+        ]);
 
         $this->belongsToMany('Industries', [
             'className' => 'Industry',
