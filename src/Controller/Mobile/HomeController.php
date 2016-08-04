@@ -104,7 +104,11 @@ class HomeController extends AppController {
                 $applyTable = \Cake\ORM\TableRegistry::get('activityapply');
                 $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
                 $orderTable = \Cake\ORM\TableRegistry::get('order');
-                $myActivity = $applyTable->find()->contain(['Activities', 'Activities.Lmorder'])->where(['activityapply.user_id' => $this->user->id, 'Lmorder.type'=>2])->toArray();
+                $myActivity = $applyTable->find()
+                        ->contain(['Activities', 'Activities.Lmorder'=>function($q){
+                            return $q->where(['type'=>2]);
+                        }])
+                        ->where(['activityapply.user_id' => $this->user->id])->toArray();
                 debug($myActivity);die;
                 $UsermsgTable->updateAll(['status'=>1], ['user_id'=>$this->user->id, 'status'=>0, 'type'=>7]);
                 if ($myActivity !== false) {
