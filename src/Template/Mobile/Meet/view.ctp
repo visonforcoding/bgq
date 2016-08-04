@@ -31,7 +31,9 @@
             <!-- <span class="identification"></span> -->
             <h3 class="mycustorm" ><?= $biggie->company ?></h3>
             <?php if(!$self): ?>
-            <div class="u-btn meetbtn"><a href="/meet/subject_list/<?= $biggie->id ?>" class="focusbtn">立即约见</a></div>
+                <?php if($biggie->subjects): ?>
+                    <div class="u-btn meetbtn"><a href="/meet/subject_list/<?= $biggie->id ?>" class="focusbtn">立即约见</a></div>
+                <?php endif; ?>
             <?php endif; ?>
         </li>
         <li>
@@ -89,6 +91,7 @@
             <div class="rbtn"><a href="/meet/edit-summary" class="cardbtn">编辑简介</a></div>
         </div>
         <?php endif; ?>
+        <?php if($biggie->subjects): ?>
         <ul id="subject" class='mt20'>
             <?php foreach ($biggie->subjects as $v): ?>
                 <li>
@@ -113,6 +116,7 @@
                 </li>
             <?php endforeach; ?>
         </ul>
+        <?php endif; ?>
     </div>
     <section class="a-detail newscomment-box m-about-expert">
         <h3 class="comment-title">专家简介
