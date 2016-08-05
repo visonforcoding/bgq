@@ -39,7 +39,12 @@ class ActivityapplyTable extends Table {
             'joinType' => 'INNER',
             'className' => 'Activity'
         ]);
-
+        
+        $this->hasOne('Lmorder', [
+            'foreignKey' => 'relate_id',
+            'joinType' => 'INNER',
+            'className' => 'Order',
+        ]);
 
         $this->addBehavior('Timestamp', [
             'events' => [
