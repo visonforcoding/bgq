@@ -48,15 +48,25 @@
                         d.adress = d.activity.adress;
                         d.apply_nums = d.activity.apply_nums;
                         d.time = d.activity.time;
-                        if(d.is_check === 0 && d.is_pass === 0){
-                            d.check = '审核中';
-                            d.id = '/activity/details/' + d.activity.id;
-                        } else if(d.is_check === 1 && d.is_pass === 0){
-                            d.check = '未付款';
-                            d.id = '/Wx/meet_pay/2/' + d.order.id;
-                        } else if(d.is_pass === 1){
-                            d.check = '报名成功';
-                            d.id = '/activity/details/' + d.activity.id;
+                        if(d.must_check == 1){
+                            if(d.is_check === 0 && d.is_pass === 0){
+                                d.check = '审核中';
+                                d.id = '/activity/details/' + d.activity.id;
+                            } else if(d.is_check === 1 && d.is_pass === 0){
+                                d.check = '未付款';
+                                d.id = '/Wx/meet_pay/2/' + d.lmorder.id;
+                            } else if(d.is_pass === 1){
+                                d.check = '报名成功';
+                                d.id = '/activity/details/' + d.activity.id;
+                            }
+                        } else {
+                            if(d.is_pass === 0){
+                                d.check = '未付款';
+                                d.id = '/Wx/meet_pay/2/' + d.lmorder.id;
+                            } else if(d.is_pass === 1){
+                                d.check = '报名成功';
+                                d.id = '/activity/details/' + d.activity.id;
+                            }
                         }
                         return d;
                     });
@@ -115,12 +125,25 @@
                                     d.adress = d.activity.adress;
                                     d.apply_nums = d.activity.apply_nums;
                                     d.time = d.activity.time;
-                                    if(d.is_check === 0 && d.is_pass === 0){
-                                        d.check = '审核中';
-                                    } else if(d.is_check === 1 && d.is_pass === 0){
-                                        d.check = '未付款';
-                                    } else if(d.is_pass === 1){
-                                        d.check = '报名成功';
+                                    if(d.must_check == 1){
+                                        if(d.is_check === 0 && d.is_pass === 0){
+                                            d.check = '审核中';
+                                            d.id = '/activity/details/' + d.activity.id;
+                                        } else if(d.is_check === 1 && d.is_pass === 0){
+                                            d.check = '未付款';
+                                            d.id = '/Wx/meet_pay/2/' + d.lmorder.id;
+                                        } else if(d.is_pass === 1){
+                                            d.check = '报名成功';
+                                            d.id = '/activity/details/' + d.activity.id;
+                                        }
+                                    } else {
+                                        if(d.is_pass === 0){
+                                            d.check = '未付款';
+                                            d.id = '/Wx/meet_pay/2/' + d.lmorder.id;
+                                        } else if(d.is_pass === 1){
+                                            d.check = '报名成功';
+                                            d.id = '/activity/details/' + d.activity.id;
+                                        }
                                     }
                                     return d;
                                 });

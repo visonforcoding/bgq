@@ -10,7 +10,7 @@
     <div class="h20 nobottom"></div>
     <div class="infobox a-pay">
         <ul>
-            <li>标题名称：<span class='infocard'><input type="text" placeholder="<?=  $order_detail->title ?>" /></span></li>
+            <li>标题名称：<span class='infocard'><input type="text" placeholder="<?=  $order_detail->title ?>" readonly /></span></li>
             <li>费用：<span class='infocard reg-repass'><input type="text" value='<?=  $order_detail->price ?>元' readonly="readonly"/></span></li>
         </ul>
     </div>
@@ -27,6 +27,14 @@
 </div>
 
 <?php $this->start('script') ?>
+<script>
+    if(<?= $order_detail['type'] ?> == 2){
+        window.apply = false;
+        if(<?= $order_detail['apply_nums'] ?> < <?= $order_detail->scale ?>){
+            window.apply = true;
+        }
+    }
+</script>
 <script>
     var payMethod = 'wx';
     $('input[name="pay"]').on('click',function(){
@@ -45,6 +53,10 @@
                 return;
             switch (em.id) {
                 case 'submit':
+                    if(!window.apply){
+                        $.util.alert('报名人数已满');
+                        return;
+                    }
                     if (payMethod == 'wx') {
                         if($.util.isAPP){
                             LEMON.pay.wx(<?= json_encode($jsApiParameters) ?>,function(res){

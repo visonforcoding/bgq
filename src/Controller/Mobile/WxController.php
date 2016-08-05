@@ -188,6 +188,7 @@ class WxController extends AppController {
             $order_detail = $order->activityapply->activity;
         }
         $order_detail->price = $order->price;
+        $order_detail->type = $type;
         $out_trade_no = $order->order_no;
         $openid = $this->user->wx_openid;
         if (empty($openid)) {

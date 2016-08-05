@@ -104,12 +104,9 @@ class HomeController extends AppController {
                 $applyTable = \Cake\ORM\TableRegistry::get('activityapply');
                 $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
                 $orderTable = \Cake\ORM\TableRegistry::get('order');
-                $myActivity = $applyTable->find()
-                        ->contain(['Activities', 'Activities.Lmorder'=>function($q){
-                            return $q->where(['type'=>2]);
-                        }])
-                        ->where(['activityapply.user_id' => $this->user->id])->toArray();
-                debug($myActivity);die;
+                $myActivity = $applyTable->find()->contain(['Activities', 'Lmorder'=>function($q){
+                    return $q->where(['type'=>2]);
+                }])->where(['activityapply.user_id' => $this->user->id])->toArray();
                 $UsermsgTable->updateAll(['status'=>1], ['user_id'=>$this->user->id, 'status'=>0, 'type'=>7]);
                 if ($myActivity !== false) {
                     return $this->Util->ajaxReturn(['status' => true, 'data' => $myActivity]);
@@ -448,26 +445,28 @@ class HomeController extends AppController {
          */
         public function myBook() {
             $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+            $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
             $type = $this->request->query('type');
         //        $where['SubjectBook.status'] = in_array($type, ['0', '1', '3']) ? $type : 0;
             $where['SubjectBook.status !='] = 2;
             $where['SubjectBook.user_id'] = $this->user->id;
             $books = $BookTable->find()->contain(['Subjects', 'Subjects.User' => function($q) {
-                            return $q->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums']);
-                        }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
-                    $savant_books = $BookTable->find()->contain(['Subjects', 'Users' => function($q) {
-                                    return $q->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums']);
-                                }])->where([
-                                        'SubjectBook.status !=' => 2,
-                                        'SubjectBook.savant_id =' => $this->user->id,
-                                    ])->orderDesc('SubjectBook.update_time')->toArray();
-                            $this->set([
-                                'pageTitle' => '我的约见',
-                                'books' => $books,
-                                'savant_books' => $savant_books   //我是专家
-                            ]);
-                            $this->set(compact('books', 'type'));
-                        }
+                return $q->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums', 'level']);
+            }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
+            $savant_books = $BookTable->find()->contain(['Subjects', 'Users' => function($q) {
+                    return $q->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums', 'level']);
+                }])->where([
+                        'SubjectBook.status !=' => 2,
+                        'SubjectBook.savant_id =' => $this->user->id,
+                    ])->order('SubjectBook.update_time')->toArray();
+            $UsermsgTable->updateAll(['status'=>1], ['type'=>4, 'user_id'=>$this->user->id, 'status'=>0]);
+            $this->set([
+                'pageTitle' => '我的约见',
+                'books' => $books,
+                'savant_books' => $savant_books   //我是专家
+            ]);
+            $this->set(compact('books', 'type'));
+        }
 
     /**
      * 我的约见 我是顾客的详情
@@ -495,6 +494,18 @@ class HomeController extends AppController {
                 $res = $BookTable->save($book);
                 if($res){
                     return $this->Util->ajaxReturn(true, '取消预约成功');
+                } else {
+                    return $this->Util->ajaxReturn(false, '操作失败');
+                }
+            }
+            
+            public function changeSubjectStatus($id){
+                $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+                $book = $BookTable->get($id);
+                $book->is_done = 1;
+                $res = $BookTable->save($book);
+                if($res){
+                    return $this->Util->ajaxReturn(true, '操作成功');
                 } else {
                     return $this->Util->ajaxReturn(false, '操作失败');
                 }

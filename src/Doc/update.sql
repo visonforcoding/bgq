@@ -532,3 +532,7 @@ ALTER TABLE `sponsor`
 
 ALTER TABLE `activityapply`
 	ADD COLUMN `check_man` VARCHAR(50) NULL DEFAULT '' COMMENT '审核人' AFTER `is_check`;
+
+#话题约见表
+ALTER TABLE `subject_book`
+	ADD COLUMN `is_done` TINYINT(2) NOT NULL DEFAULT 0 COMMENT '专家标记是否已经完成约见' AFTER `status`;
