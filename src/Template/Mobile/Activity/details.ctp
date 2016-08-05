@@ -4,7 +4,7 @@
             <h1><img src="/mobile/images/logo-wx.png"></h1>
             <h3>并购圈<span>并购人的生活方式</span></h3>
         </div>
-        <a href="/Wx/share_download">立即下载</a>
+        <a href="/Wx/share_download/activity/<?= $activity->id ?>">立即下载</a>
     </div>
     <div class="wraper" id="activity_detail" >
         <section class="newscon-box a-detail">
