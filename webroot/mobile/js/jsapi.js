@@ -151,7 +151,6 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                 case "sys.closeLOC":
                 case "share.banner":
                 case "show.shareIco":
-                case "event.invite":
                 case "sys.showKeyboard":
                 case "sys.hideKeyboard":
                 case "sys.QRcode":
@@ -170,6 +169,11 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                 case "event.tel":
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {tel:arguments[0]}, '');
+                    });
+                    break;
+                case "event.invite":
+                    registerAPI(null, api, function () {
+                        return JSApiInvoke(api, {str:arguments[0]}, '');
                     });
                     break;
                 //无参数 只用到callback
