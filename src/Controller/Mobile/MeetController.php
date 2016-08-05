@@ -51,6 +51,11 @@ class MeetController extends AppController {
                 ->limit($this->limit)
                 ->toArray();
         $this->set('meetjson', json_encode($users));
+        $user_id = '';
+        if($this->user){
+            $user_id = $this->user->id;
+        }
+        $this->set('user_id', $user_id);
         $this->set('pageTitle', '约见');
     }
     
