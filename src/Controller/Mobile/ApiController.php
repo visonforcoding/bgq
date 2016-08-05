@@ -18,7 +18,7 @@ class ApiController extends AppController {
     const TOKEN = 'dBkuJtWzHuPJFtTjZqHJugGP';
 
     protected $noAcl = [
-        'upload','wxtoken'
+        'upload','wxtoken','ckregister'
     ];
 
     public function initialize() {
@@ -59,7 +59,7 @@ class ApiController extends AppController {
                 return $this->jsonResponse(false, '验证不通过', 401);
             }
         } else {
-            return $this->baseCheckAcl();
+            //return $this->baseCheckAcl();
         }
     }
 
@@ -197,6 +197,21 @@ class ApiController extends AppController {
         $this->response->body($en_token);
         $this->response->send();
         $this->response->stop();
+    }
+    
+    
+    /**
+     * 检测注册
+     */
+    public function ckRegister(){
+        $phones = $this->request->data('phones');
+        $phones_arr = explode('|', $phones);
+        $this->jsonResponse([
+           'status'=>true,
+            'results'=>[
+                'phones'=>[$phones_arr[0],$phones_arr[1]]
+            ]
+        ]);
     }
 
 }
