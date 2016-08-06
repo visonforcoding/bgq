@@ -20,6 +20,9 @@ class NeedController extends AppController {
      * @return void
      */
     public function index() {
+        if($this->request->query('do')){
+            $this->set('do','check');
+        }
         $this->set('need', $this->Need);
     }
 

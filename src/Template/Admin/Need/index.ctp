@@ -5,9 +5,6 @@
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
-            <!--             <a href="/admin/need/add" class="btn btn-small btn-warning"> -->
-            <!--                 <i class="icon icon-plus-sign"></i>添加 -->
-            <!--             </a> -->
             <div class="form-group">
                 <label for="keywords">关键字</label>
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
@@ -17,7 +14,7 @@
                 <select class="form-control" name="status">
                     <option value="">全部</option>
                     <option value="1">已查看</option>
-                    <option value="0">未查看</option>
+                    <option value="0" <?php if(isset($do)): ?>selected="selected"<?php endif;?>>未查看</option>
                 </select>
             </div>
             <div class="form-group">
@@ -43,7 +40,7 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/need/getDataList",
+                        url: "/admin/need/getDataList<?php if(isset($do)): ?>?do=check<?php endif;?>",
                         datatype: "json",
                         mtype: "POST",
                         colNames:

@@ -212,8 +212,13 @@ class ApiController extends AppController {
         $redis->connect($redis_conf['host'],$redis_conf['port']);
         $members = $redis->sGetMembers('phones');
         $register_phones = array_intersect($phones_arr,$members);
+        if($register_phones){
+            $status = true;
+        }else{
+            $status = false;
+        }
         $this->jsonResponse([
-           'status'=>true,
+           'status'=>$status,
             'results'=>[
                 'phones'=>$register_phones
             ]

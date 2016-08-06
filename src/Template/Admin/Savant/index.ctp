@@ -16,7 +16,7 @@
                 <label for="keywords">状态</label>
                 <select class="form-control" name="savant_status">
                     <option value="-1">全部</option>
-                    <option value="2">未审核</option>
+                    <option value="2" <?php if(isset($do)): ?>selected="selected"<?php endif;?>>未审核</option>
                     <option value="3">审核通过</option>
                 </select>
             </div>
@@ -43,7 +43,7 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/savant/getDataList",
+                        url: "/admin/savant/getDataList<?php if(isset($do)): ?>?do=check<?php endif;?>",
                         datatype: "json",
                         mtype: "POST",
                         colNames:

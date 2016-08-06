@@ -24,6 +24,9 @@ class SavantController extends AppController {
      * @return void
      */
     public function index() {
+        if($this->request->query('do')){
+            $this->set('do','check');
+        }
         $this->set('savant', $this->Savant);
     }
 
@@ -128,7 +131,9 @@ class SavantController extends AppController {
         if ($savant_status > 1) {
             $where = ['User.savant_status' => $savant_status];
         }
-
+        if($this->request->query('do')=='check'){
+            $where = ['User.savant_status' => 2];
+        }
         if (!empty($keywords)) {
             $where[' User.truename like'] = "%$keywords%";
         }
@@ -180,7 +185,9 @@ class SavantController extends AppController {
         if ($savant_status > 1) {
             $where = ['User.savant_status' => $savant_status];
         }
-
+        if($this->request->query('do')=='check'){
+            $where = ['User.savant_status' => 2];
+        }
         if (!empty($keywords)) {
             $where[' username like'] = "%$keywords%";
         }
