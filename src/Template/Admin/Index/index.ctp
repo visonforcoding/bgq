@@ -21,7 +21,7 @@
                             专家认证          
                         </div>
                         <div class="databox-right">
-                            <a class="a-link" href="/admin/savant/index">
+                            <a class="a-link" href="/admin/savant/index?do=check">
                                 <span class="databox-number themesecondary"><?= $savantCounts ?></span>
                                 <div class="databox-text darkgray">待处理</div>
                                 <div class="databox-stat themesecondary radius-bordered">
@@ -37,7 +37,7 @@
                             小秘书          
                         </div>
                         <div class="databox-right">
-                            <a class="a-link" href="/admin/need/index">
+                            <a class="a-link" href="/admin/need/index?do=check">
                                 <span class="databox-number cosecondar"><?= $needCounts ?></span>
                                 <div class="databox-text darkgray">待处理</div>
                                 <div class="databox-stat themesecondary radius-bordered">
@@ -53,7 +53,7 @@
                             提现        
                         </div>
                         <div class="databox-right">
-                            <a class="a-link" href="/admin/withdraw/index">
+                            <a class="a-link" href="/admin/withdraw/index?do=check">
                                 <span class="databox-number coseconda"><?= $withdrawCounts ?></span>
                                 <div class="databox-text darkgray">待处理</div>
                                 <div class="databox-stat themesecondary radius-bordered">
@@ -69,7 +69,7 @@
                             活动赞助          
                         </div>
                         <div class="databox-right">
-                            <a class="a-link" href="/admin/sponsor/index">
+                            <a class="a-link" href="/admin/sponsor/index?do=check">
                                 <span class="databox-number cosecond"><?= $sponsorCounts ?></span>
                                 <div class="databox-text darkgray">待处理</div>
                                 <div class="databox-stat themesecondary radius-bordered">
@@ -87,7 +87,7 @@
                             活动报名         
                         </div>
                         <div class="databox-right">
-                            <a class="a-link" href="/admin/activityapply/index">
+                            <a class="a-link" href="/admin/activityapply/index?do=check">
                                 <span class="databox-number themesecondary"><?= $applyCounts ?></span>
                                 <div class="databox-text darkgray">待处理</div>
                                 <div class="databox-stat themesecondary radius-bordered">
