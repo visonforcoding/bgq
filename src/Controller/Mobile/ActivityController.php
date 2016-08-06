@@ -644,7 +644,7 @@ class ActivityController extends AppController {
                         }, 'Industries'])
                         ->where(['Activity.status' => 1,'Activity.is_del'=>0])
                         ->page($page, $this->limit)
-                        ->orderDesc('Activity.create_time')
+                        ->order(['Activity.is_top'=>'desc', 'Activity.create_time'=>'desc'])
                         ->toArray();
         foreach($activity as $k=>$v){
             if($v['apply_end_time'] <= time()){
