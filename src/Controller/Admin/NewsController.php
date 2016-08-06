@@ -85,8 +85,6 @@ class NewsController extends AppController {
                 $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
-        $users = $this->News->Users->find('list', ['limit' => 200]);
-        $this->set(compact('news', 'users'));
         $selIndustryIds = [];
         foreach ($news->industries as $industry) {
             $selIndustryIds[] = $industry->id;
@@ -98,6 +96,7 @@ class NewsController extends AppController {
                 $selSavantIds[] = $savant->id;
             }
         }
+        $this->set(compact('news'));
         $this->set(compact('news', 'selIndustryIds', 'selSavantIds'));
     }
 
