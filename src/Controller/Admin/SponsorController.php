@@ -113,14 +113,14 @@ class SponsorController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'sponsor.' . $this->request->data('sidx');
+        $sort = 'Sponsor.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where['username like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
