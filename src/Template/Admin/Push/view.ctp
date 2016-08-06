@@ -20,15 +20,15 @@
             <?php endif; ?>
         </div>
         <div class="form-group">
-            <label class="col-md-2 control-label">标题</label>
+            <label class="col-md-2 control-label">推送标题</label>
             <div class="col-md-8"><input type="text" name="title" class="form-control"/></div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 control-label">内容</label>
+            <label class="col-md-2 control-label">推送内容</label>
             <div class="col-md-8"><textarea name="content" class="form-control"></textarea></div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 control-label">链接</label>
+            <label class="col-md-2 control-label">推送链接（可选）</label>
             <div class="col-md-8"><input type="text" name="url" class="form-control"/></div>
         </div>
         <input type="hidden" name="industry_id" value=""/>
