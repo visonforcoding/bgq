@@ -54,9 +54,7 @@ class ActivityapplyController extends AppController {
                 $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
             }
         }
-        $users = $this->Activityapply->Users->find('list', ['limit' => 200]);
-        $activities = $this->Activityapply->Activities->find('list', ['limit' => 200]);
-        $this->set(compact('activityapply', 'users', 'activities'));
+        $this->set(compact('activityapply'));
     }
 
     /**
@@ -79,9 +77,7 @@ class ActivityapplyController extends AppController {
                 $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
-        $users = $this->Activityapply->Users->find('list', ['limit' => 200]);
-        $activities = $this->Activityapply->Activities->find('list', ['limit' => 200]);
-        $this->set(compact('activityapply', 'users', 'activities'));
+        $this->set(compact('activityapply'));
     }
 
     /**
