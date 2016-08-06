@@ -53,7 +53,7 @@ return [
       '6'=>[
           'table'=>'need',
           'remark'=>'小秘书消息',
-          'url'=>'/home/my-history-need'
+          'url'=>'/home/my-xiaomi'
       ],
         '7'=>[
             'table'=>'activity',
