@@ -129,6 +129,11 @@ class NeedController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
+        $status = $this->request->data('status');
+        $where_need = '';
+        if(is_numeric($status)){
+            $where_need =  'where status = '.$status;
+        }
         $where = [];
         if (!empty($keywords)) {
             $where['OR'] = [
@@ -145,7 +150,7 @@ class NeedController extends AppController {
         $connection = \Cake\Datasource\ConnectionManager::get('default');
         $result = $connection->execute("select u.phone,u.truename,n.* from user u
                         inner join 
-                        (select * from need  order by create_time desc ) n
+                        (select * from need $where_need  order by create_time desc ) n
                         on n.user_id = u.id where u.id != '-1'
                         group by u.id limit  $offset, $rows")->fetchAll('assoc');
         $nums = count($result);

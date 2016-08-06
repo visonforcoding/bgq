@@ -13,6 +13,14 @@
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
             </div>
             <div class="form-group">
+                <label for="keywords">状态</label>
+                <select class="form-control" name="status">
+                    <option value="">全部</option>
+                    <option value="1">已查看</option>
+                    <option value="0">未查看</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="keywords">时间</label>
                 <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords" placeholder="开始时间">
                 <label for="keywords">到</label>
@@ -39,20 +47,20 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户','手机号', '最新消息', '创建时间', '修改时间','状态', '操作'],
+                                ['用户', '手机号', '最新消息', '创建时间', '修改时间', '状态', '操作'],
                         colModel: [
                             {name: 'truename', editable: true, align: 'center'},
                             {name: 'phone', editable: true, align: 'center'},
                             {name: 'msg', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
-                            {name: 'status', editable: true, align: 'center', formatter: function(cell,opt,obj){
-                                    if(cell==1){
+                            {name: 'status', editable: true, align: 'center', formatter: function (cell, opt, obj) {
+                                    if (cell == 1) {
                                         return '已查看';
-                                    }else{
+                                    } else {
                                         return '<span class="notice">未查看</span>';
                                     }
-                            }},
+                                }},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: 30,
@@ -176,7 +184,7 @@
                         shade: 0.8,
                         area: ['40%', '60%'],
                         content: url, //iframe的url
-                        cancel:function(){
+                        cancel: function () {
                             $('#list').trigger('reloadGrid');
                         }
                     });
