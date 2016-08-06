@@ -107,7 +107,11 @@
                 }
 
                 function actionFormatter(cellvalue, options, rowObject) {
+                    if(rowObject.status=='0'){
                     response = '<a title="标记已处理" onClick="check(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
+                    }else{
+                    response = '<a title="标记未处理" onClick="uncheck(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
+                    }
                     return response;
                 }
 
@@ -176,6 +180,25 @@
                             data: {id: id},
                             dataType: 'json',
                             url: '/admin/sponsor/check/'+id,
+                            success: function (res) {
+                                layer.msg(res.msg);
+                                if (res.status) {
+                                    $('#list').trigger('reloadGrid');
+                                }
+                            }
+                        })
+                    }, function () {
+                    });
+                }
+                function uncheck(id){
+                    layer.confirm('确定标记？', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                        $.ajax({
+                            type: 'post',
+                            data: {id: id},
+                            dataType: 'json',
+                            url: '/admin/sponsor/uncheck/'+id,
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {

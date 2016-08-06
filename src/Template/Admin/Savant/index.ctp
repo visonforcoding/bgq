@@ -135,7 +135,7 @@
                     layer.prompt({
                         title: '请输入审核不通过的理由',
                         btn: ['确认', '取消'], //按钮
-                        formType: 0, // input.type 0:text,1:password,2:textarea
+                        formType: 2, // input.type 0:text,1:password,2:textarea
                     }, function (pass) {
                         var msg = {};
                         msg.reason = pass;

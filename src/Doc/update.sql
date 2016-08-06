@@ -533,6 +533,17 @@ ALTER TABLE `sponsor`
 ALTER TABLE `activityapply`
 	ADD COLUMN `check_man` VARCHAR(50) NULL DEFAULT '' COMMENT '审核人' AFTER `is_check`;
 
+#8月5日
+ALTER TABLE `activity`
+	CHANGE COLUMN `comment_nums` `comment_nums` INT(11) NOT NULL DEFAULT '0' COMMENT '评论数' AFTER `praise_nums`;	
+
+ALTER TABLE `activity`
+	CHANGE COLUMN `read_nums` `read_nums` INT(11) NULL DEFAULT '0' COMMENT '阅读数' AFTER `scale`,
+	CHANGE COLUMN `praise_nums` `praise_nums` INT(11) NULL DEFAULT '0' COMMENT '点赞数' AFTER `read_nums`;
+	
+update activity a set a.praise_nums = 0 where a.praise_nums is null	=======
+	ADD COLUMN `check_man` VARCHAR(50) NULL DEFAULT '' COMMENT '审核人' AFTER `is_check`;
+
 #话题约见表
 ALTER TABLE `subject_book`
-	ADD COLUMN `is_done` TINYINT(2) NOT NULL DEFAULT 0 COMMENT '专家标记是否已经完成约见' AFTER `status`;
+	ADD COLUMN `is_done` TINYINT(2) NOT NULL DEFAULT 0 COMMENT '专家标记是否已经完成约见' AFTER `status`;>>>>>>> .r2367

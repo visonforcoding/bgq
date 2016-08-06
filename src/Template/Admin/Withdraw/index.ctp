@@ -89,8 +89,9 @@ $this->start('static') ?>
                    if(rowObject.status==0){
                         response = '<a title="审核通过" onClick="pass(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
                         response += '<a title="审核不通过" onClick="unpass(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-remove-circle"></i> </a>';
+                   }else{
+                        response += '<a><i class="icon icon-ban-circle"></i>已审核过</a>';
                    }
-                    response += '<a title="编辑" href="/admin/withdraw/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     return response;
                 }
 
