@@ -202,7 +202,7 @@ class ActivityController extends AppController {
                 } else {
                     if($activity->must_check){
                         $activityApply->is_check = 0;
-                        $activityApply->is_pass = 1;
+                        $activityApply->is_pass = 0;
                         if ($this->Activity->Activityapply->save($activityApply)) {
                             return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/activity/details/'.$id]);
                         } else {
