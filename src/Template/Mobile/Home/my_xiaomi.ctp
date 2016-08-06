@@ -16,7 +16,7 @@
         <ul>
             <?php if(!empty($conversation)): ?>
                 <?php foreach($conversation as $k=>$v): ?>
-                    <?php if($v['pid']!=0): ?>
+                    <?php if($v['reply_id']==0): ?>
                         <li class="fl"><span><?= $v['msg'] ?></span><time><?= $v['create_time']->i18nFormat('yyyy-MM-dd') ?></time></li>
                     <?php else: ?>
                         <li class="fr"><span><?= $v['msg'] ?></span><time><?= $v['create_time']->i18nFormat('yyyy-MM-dd') ?></time></li>
