@@ -91,7 +91,9 @@
                             {name: 'region.name', editable: true, align: 'center'},
                             {name: 'read_nums', editable: true, align: 'center'},
                             {name: 'praise_nums', editable: true, align: 'center'},
-                            {name: 'comment_nums', editable: true, align: 'center'},
+                            {name: 'comment_nums', editable: true, align: 'center',formatter:function(cell,opt,obj){
+                                    return '<a title="评论详情" onClick="viewComs('+obj.id+')">'+cell+'</a>';
+                            }},
                             {name: 'apply_nums', editable: true, align: 'center'},
                             {name: 'apply_fee', editable: true, align: 'center'},
                             {name: 'status', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
@@ -162,7 +164,7 @@
                     } else if (rowObject.is_top == 1) {
                         response += '<a title="取消置顶" href="javascript:void(0)" class="grid-btn untop" onclick="untop(' + rowObject.id + ')"><i class="icon icon-long-arrow-down"></i></a>';
                     }
-                    response += '<a title="评论详情" href="/admin/activitycom/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-comment"></i> </a>';
+//                    response += '<a title="评论详情" onClick="viewComs(' + rowObject.id + ')" class="grid-btn "><i class="icon icon-comment"></i> </a>';
                     response += '<a title="点赞日志" href="/admin/likeLogs/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-heart"></i> </a>';
                     response += '<a title="收藏日志" href="/admin/collect/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-star"></i> </a>';
                     response += '<a title="报名用户" href="/admin/activityapply/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-user"></i> </a>';
