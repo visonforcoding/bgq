@@ -275,18 +275,9 @@ class ActivityController extends AppController {
     /**
      * 发布活动
      */
-    public function release() {
+    public function release($id=null) {
         $this->handCheckLogin();
         $industries = '';
-        if ($this->request->param('pass')) {
-
-            $data = $this->request->param('pass');
-            $industry = \Cake\ORM\TableRegistry::get('industry');
-            foreach ($data as $k => $v) {
-                $industries[] = $industry->get($v);
-            }
-            $this->set('industries', $industries);
-        }
         if ($this->request->is('post')) {
             $this->handCheckLogin();
             $users = \Cake\ORM\TableRegistry::get('user');
@@ -308,7 +299,11 @@ class ActivityController extends AppController {
                 return $this->Util->ajaxReturn(false, '提交失败');
             }
         } else {
-            $this->set('industries', $industries);
+            $activity = [];
+            if($id){
+                $activity = $this->Activity->get($id);
+            }
+            $this->set('activity', $activity);
             $this->set('pageTitle', '发布活动');
         }
     }
@@ -647,7 +642,7 @@ class ActivityController extends AppController {
                         ->order(['Activity.is_top'=>'desc', 'Activity.create_time'=>'desc'])
                         ->toArray();
         foreach($activity as $k=>$v){
-            if($v['apply_end_time'] <= time()){
+            if(strtotime($v['time']) <= time()){
                 $activity[$k]['pass_time'] = 1;
             } else {
                 $activity[$k]['pass_time'] = 0;

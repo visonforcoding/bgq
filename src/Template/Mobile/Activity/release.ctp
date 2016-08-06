@@ -10,7 +10,7 @@
             选择行业标签
             <span></span>
         </div>-->
-        <div class="items">
+<!--        <div class="items">
             <div class="orgmark">
                 <?php if ($industries): ?>
                     <?php foreach ($industries as $k => $v): ?>
@@ -18,22 +18,23 @@
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
-        </div>
+        </div>-->
         <div class="h2"></div>
         <div class="crowdfunding innercon border">
-            <span>您想要发起的活动主题是</span><input type="text" name="title" />
-            <span>请描述您的大概需求</span><textarea name="body" rows="" cols=""></textarea>
+            <span>您想要发起的活动主题是</span><input type="text" name="title" <?php if($activity): ?>value="<?= $activity->title ?>" readonly<?php endif; ?> />
+            <span>请描述您的大概需求</span><textarea name="body" rows="" cols=""<?php if($activity): ?> readonly<?php endif; ?>><?php if($activity): ?><?= $activity->body ?><?php endif; ?></textarea>
         </div>
         <div class="h2"></div>
-
+        <?php if(!$activity): ?>
         <a href="javascript:void(0)" class='nextstep' id="submit">提交</a>
         <div class="line">
             <span class="mistips">我们会在三个工作日内处理您的申请</span>
         </div>
+        <?php endif; ?>
     </form>
     <div class='reg-shadow' hidden></div>
     <div class="totips" style="display:none;">
-        <h3>活动需求已提交，秘书会在三个工作日内联系您</h3>
+        <h3>活动需求已提交，秘书会尽快联系您</h3>
         <span></span>
         <a href="/activity/index" class="nextstep" id="comfirm">确认</a>
 <!--        <span class='closed'>
@@ -79,6 +80,7 @@
                                 if (msg.status === true) {
                                     $('.reg-shadow').show();
                                     $('.totips').show();
+                                    LEMON.sys.hideKeyboard();
                                 } else {
                                     $.util.alert(msg.msg);
                                 }
