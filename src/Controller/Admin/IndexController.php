@@ -22,8 +22,13 @@ class IndexController extends AppController {
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $savantCounts = $UserTable->find()->where(['savant_status' => 2])->count();
         //小秘书待处理个数
-        $NeedTable = \Cake\ORM\TableRegistry::get('Need');
-        $needCounts = $NeedTable->find()->where(['status' => 0])->count();
+        $needCountsRes = $UserTable->connection()->execute('select count(DISTINCT u.id) as nums from user u
+                        inner join 
+                        (select * from need  order by create_time desc ) n
+                        on n.user_id = u.id where u.id != -1 and n.`status` = 0 
+                      ')->fetchAll('assoc');
+        
+        $needCounts = $needCountsRes[0]['nums'];
         //待处理提现总数
         $WithdrawTable = \Cake\ORM\TableRegistry::get('Withdraw');
         $withdrawCounts = $WithdrawTable->find()->where(['status' => 0])->count();
