@@ -110,7 +110,7 @@
                     if(rowObject.status=='0'){
                     response = '<a title="标记已处理" onClick="check(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
                     }else{
-                    response = '<a title="标记未处理" onClick="uncheck(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
+                    response = '<a title="标记未处理" onClick="uncheck(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-times"></i> </a>';
                     }
                     return response;
                 }

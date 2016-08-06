@@ -13,6 +13,15 @@
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
             </div>
             <div class="form-group">
+                <label for="must_check">是否需要审核</label>
+                <select name="must_check" class="form-control">
+                    <option value="">全部</option>
+                    <option value="1">需要</option>
+                    <option value="0">不需要</option>
+                </select>
+                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
+            </div>
+            <div class="form-group">
                 <label for="keywords">时间</label>
                 <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords" placeholder="开始时间">
                 <label for="keywords">到</label>
@@ -209,6 +218,27 @@
                             data: '',
                             dataType: 'json',
                             url: '/admin/activityapply/check/' + id,
+                            success: function (res) {
+                                if (res.status) {
+                                    layer.msg(res.msg);
+                                    setTimeout(function () {
+                                         $('#list').trigger('reloadGrid');
+                                    }, 2000);
+                                }
+                            }
+                        });
+                    }, function () {
+                    });
+                }
+                function uncheck(id) {
+                    layer.confirm('确定不通过审核？', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                        $.ajax({
+                            type: 'post',
+                            data: '',
+                            dataType: 'json',
+                            url: '/admin/activityapply/uncheck/' + id,
                             success: function (res) {
                                 if (res.status) {
                                     layer.msg(res.msg);

@@ -15,7 +15,7 @@
             </div>
             <div class="form-group">
                 <label for="keywords">行业标签</label>
-                  <?=$this->cell('Industry::news',[['single']])?>
+                <?= $this->cell('Industry::news', [['single']]) ?>
             </div>
             <div class="form-group">
                 <label for="keywords">时间</label>
@@ -46,36 +46,38 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['作者', '标题','行业标签', '阅读数', '点赞数', '评论数','状态', '创建时间', '更新时间', '操作'],
+                                ['作者', '标题', '行业标签', '阅读数', '点赞数', '评论数', '状态', '创建时间', '更新时间', '操作'],
                         colModel: [
-                            {name: 'user.truename', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
-                                    if(!cellvalue){
+                            {name: 'user.truename', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
+                                    if (!cellvalue) {
                                         return rowObject.source;
-                                    }else{
+                                    } else {
                                         return rowObject.user.truename;
                                     }
-                            }},
+                                }},
                             {name: 'title', editable: true, align: 'center'},
-                            {name: 'industries', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
+                            {name: 'industries', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     var industries_arr = [];
-                                     $.each(cellvalue,function(i,n){
-                                         industries_arr.push(n.name);
-                                     })
-                                     return industries_arr.join(',');
-                            }},
+                                    $.each(cellvalue, function (i, n) {
+                                        industries_arr.push(n.name);
+                                    })
+                                    return industries_arr.join(',');
+                                }},
                             {name: 'read_nums', editable: true, align: 'center'},
-                            {name: 'praise_nums', editable: true, align: 'center'},
-                                 {name: 'comment_nums', editable: true, align: 'center',formatter:function(cell,opt,obj){
-                                    return '<a title="评论详情" onClick="viewComs('+obj.id+')">'+cell+'</a>';
-                            }},
-                            {name: 'status', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
+                            {name: 'praise_nums', editable: true, align: 'center', formatter: function (cell, opt, obj) {
+                                    return '<a title="评论详情" href="/admin/like-logs/index/' + obj.id + '?type=1">' + cell + '</a>';
+                                }},
+                            {name: 'comment_nums', editable: true, align: 'center', formatter: function (cell, opt, obj) {
+                                    return '<a title="评论详情" onClick="viewComs(' + obj.id + ')">' + cell + '</a>';
+                                }},
+                            {name: 'status', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     switch (cellvalue) {
                                         case 1:
                                             return '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-check-circle"></i> 上线</button>';
                                         case 0:
                                             return '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-remove-circle"></i><i style="color:red"> 下线</i></button>';
                                     }
-                            }},
+                                }},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
@@ -101,7 +103,7 @@
                             id: "id"
                         },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
-                    
+
                     $('#select-industry').select2({
                         language: "zh-CN",
                         placeholder: '选择一个标签'
@@ -110,13 +112,13 @@
                 function actionFormatter(cellvalue, options, rowObject) {
 //                    response = '<div class="bigdiv" onmouseout=$(this).find(".showall").hide();$(this).find(".showallbtn").show(); ><a class="showallbtn" title="操作" onmouseover=$(this).hide();$(this).next(".showall").show();><i class="icon icon-resize-full"></i></a>';
 //                    response = '<div class="showall" hidden onmouseover=$(this).show();$(this).prev(".showallbtn").hide(); ><a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-                    response =  '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
 //                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="复制" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
                     response += '<a title="编辑" href="/admin/news/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
 //                    response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
 //                    response += '<a title="评论详情" onClick="viewComs(' + rowObject.id + ');" class="grid-btn "><i class="icon icon-comment"></i> </a>';
-                    response += '<a title="点赞日志" href="/admin/likeLogs/index/' + rowObject.id + '?type=1" class="grid-btn "><i class="icon icon-heart"></i> </a>';
+//                    response += '<a title="点赞日志" href="/admin/likeLogs/index/' + rowObject.id + '?type=1" class="grid-btn "><i class="icon icon-heart"></i> </a>';
                     response += '<a title="收藏日志" href="/admin/collect/index/' + rowObject.id + '?type=1" class="grid-btn "><i class="icon icon-star"></i> </a>';
 //                    response += '</div></div>';
                     return response;
@@ -127,7 +129,7 @@
                     clip = new ZeroClipboard($('.copy'));
                     console.log('可以复制了');
                     clip.on('copy', function (event) {
-                        clip.setData('text/plain','/news/view/' + event.target.id);
+                        clip.setData('text/plain', '/news/view/' + event.target.id);
                     });
                     clip.on("aftercopy", function (event) {
                         alert("复制了: " + event.data["text/plain"]);
@@ -187,7 +189,7 @@
                         content: url//iframe的url
                     });
                 }
-                function viewComs(id){
+                function viewComs(id) {
                     //查看评论
                     url = '/admin/news/comments/' + id;
                     layer.open({
@@ -201,7 +203,7 @@
                     });
                 }
                 function ableThis(id) {
-                     layer.confirm('确定更改上下线？', {
+                    layer.confirm('确定更改上下线？', {
                         btn: ['确认', '取消'] //按钮
                     }, function () {
                         $.ajax({
