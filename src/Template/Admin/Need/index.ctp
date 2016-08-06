@@ -39,14 +39,20 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户','手机号', '最新消息', '创建时间', '修改时间', '操作'],
+                                ['用户','手机号', '最新消息', '创建时间', '修改时间','状态', '操作'],
                         colModel: [
                             {name: 'truename', editable: true, align: 'center'},
                             {name: 'phone', editable: true, align: 'center'},
                             {name: 'msg', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
-//                            {name: 'is_read', editable: true, align: 'center', formatter: readFormatter},
+                            {name: 'status', editable: true, align: 'center', formatter: function(cell,opt,obj){
+                                    if(cell==1){
+                                        return '已查看';
+                                    }else{
+                                        return '<span class="notice">未查看</span>';
+                                    }
+                            }},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: 30,
@@ -170,6 +176,9 @@
                         shade: 0.8,
                         area: ['40%', '60%'],
                         content: url, //iframe的url
+                        cancel:function(){
+                            $('#list').trigger('reloadGrid');
+                        }
                     });
                 }
 </script>
