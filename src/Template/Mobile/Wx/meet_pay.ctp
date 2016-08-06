@@ -17,9 +17,9 @@
     <div class="h20 no-t-border"></div>
     <div class="infobox a-pay paytype bgff">
         <ul>
-            <li><b></b>微信支付：<span id="pay_weixin" data-pay="wx" class='infocard'><input value="wx" type="radio" name='pay' checked="checked" /><i class='active'></i></span></li>
+            <li class="pay"><b></b>微信支付：<span id="pay_weixin" data-pay="wx" class='infocard'><input value="wx" type="radio" name='pay' checked="checked" /><i class='active'></i></span></li>
             <?php if(!$isWx):?>
-            <li><b></b>支付宝支付：<span id="pay_ali" data-pay="ali" class='infocard reg-repass'><input value="ali" type="radio" name='pay' /><i></i></span></li>
+            <li class="pay"><b></b>支付宝支付：<span id="pay_ali" data-pay="ali" class='infocard reg-repass'><input value="ali" type="radio" name='pay' /><i></i></span></li>
             <?php endif;?>
         </ul>
     </div>
@@ -37,11 +37,18 @@
 </script>
 <script>
     var payMethod = 'wx';
-    $('input[name="pay"]').on('click',function(){
-            payMethod = $(this).val();
-            $('input[name="pay"]').next('i').removeClass('active');
-            $(this).next('i').addClass('active');
-    })
+    $('.pay').on('click', function(){
+        payMethod = $(this).find('input[name="pay"]').val();
+        $('input[name="pay"]').next('i').removeClass('active');
+        $(this).find('input[name="pay"]').next('i').addClass('active');
+    });
+    
+//    $('input[name="pay"]').on('click',function(){
+//            payMethod = $(this).val();
+//            $('input[name="pay"]').next('i').removeClass('active');
+//            $(this).next('i').addClass('active');
+//    });
+    
     setTimeout(function () {
         $('body').on('tap', function (e) {
             var target = e.srcElement || e.target, em = target, i = 1;
