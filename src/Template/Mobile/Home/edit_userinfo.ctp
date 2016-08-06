@@ -215,6 +215,9 @@
 <!--<script src="/mobile/js/util.js" type="text/javascript" charset="utf-8"></script>-->
 
 <script>
+    if($.util.isAPP){
+        LEMON.sys.back('/user/home-page/<?= $user->id ?>');
+    }
     $(function () {
         $('#upload_pic').on('touchstart',function(){
             if($.util.isAPP){
