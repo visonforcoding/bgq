@@ -17,6 +17,15 @@ $this->start('static') ?>
                 <label for="keywords">到</label>
                 <input type="text" name="end_time" class="form-control date_timepicker_end" id="keywords" placeholder="结束时间">
             </div>
+              <div class="form-group">
+                <label for="keywords">状态</label>
+                <select class="form-control" name="status">
+                    <option value="">全部</option>
+                    <option value="0" <?php if(isset($do)): ?>selected="selected"<?php endif;?>>未审核</option>
+                    <option value="1">审核通过</option>
+                    <option value="2">审核不通过</option>
+                </select>
+            </div>
             <a onclick="doSearch();" class="btn btn-info"><i class="icon icon-search"></i>搜索</a>
             <a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>
         </div>
@@ -34,7 +43,7 @@ $this->start('static') ?>
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/withdraw/getDataList",
+                        url: "/admin/withdraw/getDataList<?php if(isset($do)): ?>?do=check<?php endif;?>",
                         datatype: "json",
                         mtype: "POST",
                         colNames:

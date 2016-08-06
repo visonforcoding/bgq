@@ -137,6 +137,9 @@ class NeedController extends AppController {
         if(is_numeric($status)){
             $where_need =  'where status = '.$status;
         }
+        if($this->request->query('do')=='check'){
+             $where_need =  'where status = 0';
+        }
         $where = [];
         if (!empty($keywords)) {
             $where['OR'] = [
