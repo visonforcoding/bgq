@@ -1,5 +1,5 @@
 <?php $single = false;?>
-<?php if(isset($selIds)):?>
+<?php if(isset($selIds)&&isset($selIds[0])):?>
     <?php if($selIds[0]=='single'): ?>
      <?php $single = true; ?>
     <?php endif;?>
