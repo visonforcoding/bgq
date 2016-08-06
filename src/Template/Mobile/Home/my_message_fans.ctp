@@ -45,7 +45,7 @@
             <span class='datetime'>{#create_time#}</span>
             </a>
         </div>
-        <a href="{#jump_url#}">查看详情</a>
+        <a href="{#jump_url#}" class="a">查看详情</a>
     </li>
 </script>
 <?php $this->start('script') ?>

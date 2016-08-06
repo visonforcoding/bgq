@@ -834,7 +834,7 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .systerm-info-box li h3{font-size:0.28rem;color:#da1f50;}
 .systerm-info-box li span:last-of-type{display: block;color:#969fa9;}
 .systerm-info-box li div{width:75%;}
-.systerm-info-box li a{display: block;background: url(img/right.png) no-repeat right center;background-size: 0.16rem 0.28rem;font-size:0.28rem;padding-right:0.3rem;}
+.systerm-info-box li .a{display: block;background: url(img/right.png) no-repeat right center;background-size: 0.16rem 0.28rem;font-size:0.28rem;padding-right:0.3rem;}
 .installbox{margin-bottom:0;border-bottom:none;}
 .bottom-logo h3{width:1.78rem;height:0.61rem;margin:0 auto;}
 .bottom-logo h3 img{width:100%;height:auto;display: block;}
