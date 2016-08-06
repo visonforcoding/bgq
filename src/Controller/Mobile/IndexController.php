@@ -25,8 +25,18 @@ class IndexController extends AppController {
     public function index() {
         //$umengObj = new Umeng($key, $secret);
         //var_dump($umengObj);
+
         $this->autoRender = false;
-        phpinfo();
+        $redis = new \Redis();
+        $redis->connect('192.168.1.7', 6379);
+        $test = $redis->get('test');
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $users = $UserTable->find()->hydrate(false)->select(['phone'])->where(['is_del' => 0, 'enabled' => '1'])->toArray();
+        debug($_SERVER);
+        debug($redis->sGetMembers('phones'));
+//        foreach ($users as $user){
+//            $redis->sAdd('phones',$user['phone']);
+//        }
         //debug($this->request);
 //        $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
 //        debug(Security::hash(uniqid()),'sha1',true);
@@ -60,10 +70,10 @@ class IndexController extends AppController {
 //                    'return_msg' => 'OK',
 //        ]);
 //        debug($xml);
-         $arr = ['foo'=>'bar','you'=>'done'];
-         $this->Util->dblog('order', '一个测试日志', $arr);
+        $arr = ['foo' => 'bar', 'you' => 'done'];
+        $this->Util->dblog('order', '一个测试日志', $arr);
         $arr = 'testnkad';
-        echo var_export($arr,true);
+        echo var_export($arr, true);
     }
 
     public function test() {
@@ -74,82 +84,19 @@ class IndexController extends AppController {
         debug($str);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Index id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null) {
-        $index = $this->Index->get($id, [
-            'contain' => []
-        ]);
-
-        $this->set('index', $index);
-        $this->set('_serialize', ['index']);
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
-     */
-    public function add() {
-        $index = $this->Index->newEntity();
-        if ($this->request->is('post')) {
-            $index = $this->Index->patchEntity($index, $this->request->data);
-            if ($this->Index->save($index)) {
-                $this->Flash->success(__('The index has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The index could not be saved. Please, try again.'));
+    public function setphone() {
+        $this->autoRender = false;
+        $redis = new \Redis();
+        $redis_conf = \Cake\Core\Configure::read('redis_server');
+        $redis->connect($redis_conf['host'], $redis_conf['port']);
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $users = $UserTable->find()->hydrate(false)->select(['phone'])->where(['is_del' => 0, 'enabled' => '1'])->toArray();
+        foreach ($users as $user) {
+            if(empty($user['phone'])){
+                continue;
             }
+            $redis->sAdd('phones', $user['phone']);
         }
-        $this->set(compact('index'));
-        $this->set('_serialize', ['index']);
+        debug($redis->sGetMembers('phones'));
     }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Index id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null) {
-        $index = $this->Index->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $index = $this->Index->patchEntity($index, $this->request->data);
-            if ($this->Index->save($index)) {
-                $this->Flash->success(__('The index has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The index could not be saved. Please, try again.'));
-            }
-        }
-        $this->set(compact('index'));
-        $this->set('_serialize', ['index']);
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Index id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null) {
-        $this->request->allowMethod(['post', 'delete']);
-        $index = $this->Index->get($id);
-        if ($this->Index->delete($index)) {
-            $this->Flash->success(__('The index has been deleted.'));
-        } else {
-            $this->Flash->error(__('The index could not be deleted. Please, try again.'));
-        }
-        return $this->redirect(['action' => 'index']);
-    }
-
 }

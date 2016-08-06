@@ -206,10 +206,15 @@ class ApiController extends AppController {
     public function ckRegister(){
         $phones = $this->request->data('phones');
         $phones_arr = explode('|', $phones);
+        $redis = new \Redis();
+        $redis_conf = \Cake\Core\Configure::read('redis_server');
+        $redis->connect($redis_conf['host'],$redis_conf['port']);
+        $members = $redis->sGetMembers('phones');
+        $register_phones = array_intersect($phones_arr,$members);
         $this->jsonResponse([
            'status'=>true,
             'results'=>[
-                'phones'=>[$phones_arr[0],$phones_arr[1]]
+                'phones'=>$register_phones
             ]
         ]);
     }
