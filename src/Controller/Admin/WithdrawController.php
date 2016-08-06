@@ -226,6 +226,7 @@ class WithdrawController extends AppController {
         $withdraw = $this->Withdraw->get($id);
         $withdraw->status = 2; //不通过状态
         $withdraw->remark = $remark; //不通过理由
+        $withdraw->admin_id = $this->_user->id;
         $WithdrawTable = $this->Withdraw;
         $transRes = $this->Withdraw->connection()->transactional(function()use($withdraw, $WithdrawTable) {
             $FlowTable = \Cake\ORM\TableRegistry::get('Flow');

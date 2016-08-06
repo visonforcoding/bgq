@@ -20,14 +20,6 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">类型（一对一或一对多）</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('type', ['type' => 'select', 'options' => ['1'=>'一对一', '2'=>'一对多'], 'label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-md-2 control-label">约见时间</label>
         <div class="col-md-8">
             <?php
@@ -40,14 +32,6 @@
         <div class="col-md-8">
             <?php
             echo $this->Form->input('price', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">地址</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('address', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>

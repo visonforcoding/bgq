@@ -5,6 +5,9 @@
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
+            <a href="/admin/activity/add" class="btn btn-small btn-warning">
+                <i class="icon icon-plus-sign"></i>添加
+            </a>
             <div class="form-group">
                 <label for="keywords">关键字</label>
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="用户、标题、公司、地址">
@@ -71,21 +74,31 @@
                         url: "/admin/activity-need/getDataList",
                         datatype: "json",
                         mtype: "POST",
-                        colNames: [ '发布人', '主办单位', '活动名称', '活动时间', '地点', '规模', '阅读数', '点赞数', '评论数', '报名人数', '报名费用','状态', '创建时间', '更新时间', '操作'],
+                        colNames: [ '发布人', '主办单位', '活动名称', '活动时间','是否需审核报名', '规模', '城市','阅读数', '点赞数', '评论数', '报名人数', '报名费用','状态', '创建时间', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
-//                            {name: 'industries', editable: true, align: 'center', formatter: industryFormatter},
                             {name: 'company', editable: true, align: 'center'},
                             {name: 'title', editable: true, align: 'center'},
                             {name: 'time', editable: true, align: 'center'},
-//                            {name: 'region.name', editable: true, align: 'center'},
-                            {name: 'address', editable: true, align: 'center'},
+                            {name: 'must_check', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
+                                    if(cellvalue=='1'){
+                                        return '是';
+                                    }else{
+                                        return '否';
+                                    }
+                            }},
                             {name: 'scale', editable: true, align: 'center'},
+                            {name: 'region.name', editable: true, align: 'center'},
                             {name: 'read_nums', editable: true, align: 'center'},
-                            {name: 'praise_nums', editable: true, align: 'center'},
-                            {name: 'comment_nums', editable: true, align: 'center'},
-//                            {name: 'is_crowdfunding', editable: true, align: 'center', formatter: crowdFormatter},
-                            {name: 'apply_nums', editable: true, align: 'center'},
+                            {name: 'praise_nums', editable: true, align: 'center',formatter:function(cell,opt,obj){
+                                    return '<a title="点赞详情" href="/admin/likeLogs/index/' + obj.id + '">'+cell+'</a>';
+                            }},
+                            {name: 'comment_nums', editable: true, align: 'center',formatter:function(cell,opt,obj){
+                                    return '<a title="评论详情" onClick="viewComs('+obj.id+')">'+cell+'</a>';
+                            }},
+                            {name: 'apply_nums', editable: true, align: 'center',formatter:function(cell,opt,obj){
+                                    return '<a title="报名详情" href="/admin/activityapply/index/' + obj.id + '">'+cell+'</a>';
+                            }},
                             {name: 'apply_fee', editable: true, align: 'center'},
                             {name: 'status', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
                                     switch (cellvalue) {
@@ -96,10 +109,9 @@
                                     }
                             }},
                             {name: 'create_time', editable: true, align: 'center'},
-                            {name: 'update_time', editable: true, align: 'center'},
                             {name: 'actionBtn', width: '200%', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
-                        rowNum: 30,
+                        rowNum: 10,
                         rowList: [10, 20, 30],
                         sortname: "id",
                         sortorder: "desc",
@@ -117,7 +129,7 @@
                             total: "total",
                             records: "records",
                             repeatitems: false,
-                            id: "0"
+                            id: 'id'
                         },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
                 });
@@ -156,10 +168,10 @@
                     } else if (rowObject.is_top == 1) {
                         response += '<a title="取消置顶" href="javascript:void(0)" class="grid-btn untop" onclick="untop(' + rowObject.id + ')"><i class="icon icon-long-arrow-down"></i></a>';
                     }
-                    response += '<a title="评论详情" href="/admin/activitycom/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-comment"></i> </a>';
-                    response += '<a title="点赞日志" href="/admin/likeLogs/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-heart"></i> </a>';
+//                    response += '<a title="评论详情" onClick="viewComs(' + rowObject.id + ')" class="grid-btn "><i class="icon icon-comment"></i> </a>';
+//                    response += '<a title="点赞日志" href="/admin/likeLogs/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-heart"></i> </a>';
                     response += '<a title="收藏日志" href="/admin/collect/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-star"></i> </a>';
-                    response += '<a title="报名用户" href="/admin/activityapply/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-user"></i> </a>';
+//                    response += '<a title="报名用户" href="/admin/activityapply/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-user"></i> </a>';
                     response += '<a title="赞助详情" href="/admin/sponsor/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-dollar"></i> </a>';
                     response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(' + rowObject.id + ');"><i class="icon icon-qrcode"></i><div hidden id="code_' + rowObject.id + '" style="position:relative;top:0;"><img back_src="' + rowObject.qrcode + '" /></div> </a>';
                     return response;
@@ -330,6 +342,20 @@
                         shadeClose: true,
                         shade: 0.8,
                         area: ['380px', '70%'],
+                        content: url//iframe的url
+                    });
+                }
+                
+                function viewComs(id){
+                    //查看评论
+                    url = '/admin/activity/comments/' + id;
+                    layer.open({
+                        type: 2,
+                        title: '查看详情',
+                        shadeClose: true,
+                        shade: 0.8,
+                        maxmin: true, //开启最大化最小化按钮
+                        area: ['60%', '50%'],
                         content: url//iframe的url
                     });
                 }
