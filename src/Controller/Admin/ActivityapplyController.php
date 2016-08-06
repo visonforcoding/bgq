@@ -19,6 +19,9 @@ class ActivityapplyController extends AppController {
      */
     public function index($id = '') {
         $this->set('id', $id);
+        if ($this->request->query('do')) {
+            $this->set('do', 'check');
+        }
         $this->set('activityapply', $this->Activityapply);
     }
 
@@ -115,12 +118,20 @@ class ActivityapplyController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
+        $is_check = $this->request->data('is_check');
+        $must_check = $this->request->data('must_check');
         $where = [];
+        if (is_numeric($is_check)) {
+            $where = ['Activityapply.is_check' => $is_check];
+        }
+        if ($this->request->query('do') == 'check') {
+            $must_check = 1;
+            $where = ['Activityapply.is_check' => 0];
+        }
         if (!empty($keywords)) {
             $where[' Users.truename like'] = "%$keywords%";
         }
-        $must_check = $this->request->data('must_check');
-        if(is_numeric($must_check)){
+        if (is_numeric($must_check)) {
             $where[' Activities.must_check'] = $must_check;
         }
         if (!empty($begin_time) && !empty($end_time)) {
@@ -256,47 +267,47 @@ class ActivityapplyController extends AppController {
             $this->Util->ajaxReturn(false, '操作失败');
         }
     }
-    
+
     /**
      * 审核通过
      * @param type $id
      */
-    public function check($id){
-        $apply = $this->Activityapply->get($id,[
-            'contain'=>'Users'
+    public function check($id) {
+        $apply = $this->Activityapply->get($id, [
+            'contain' => 'Users'
         ]);
         $ActivityapplyTable = \Cake\ORM\TableRegistry::get('Activityapply');
         $ActivityTable = \Cake\ORM\TableRegistry::get('Activity');
         $activity = $ActivityTable->get($apply->activity_id);
-        if($activity->apply_fee==0){
+        if ($activity->apply_fee == 0) {
             //无需付费的 直接通过
             $apply->is_pass = 1;
             $activity->apply_nums += 1;  //报名人数+1
         }
         $apply->is_check = 1;
         $apply->check_man = $this->_user->truename;
-        $trans = $this->Activityapply->connection()->transactional(function()use($ActivityTable,$activity,$ActivityapplyTable,$apply){
-             return $ActivityapplyTable->save($apply)&&$ActivityTable->save($activity);
+        $trans = $this->Activityapply->connection()->transactional(function()use($ActivityTable, $activity, $ActivityapplyTable, $apply) {
+            return $ActivityapplyTable->save($apply) && $ActivityTable->save($activity);
         });
         if ($trans) {
             //消息
             $this->loadComponent('Business');
-            $this->Business->usermsg($apply->user_id,'活动报名消息', '您报名的活动"'.$activity->title.'已审核通过', 11, $id,'/activity/details/'.$activity->id);
-            if($activity->apply_fee>0){
+            $this->Business->usermsg($apply->user_id, '活动报名消息', '您报名的活动"' . $activity->title . '已审核通过', 11, $id, '/activity/details/' . $activity->id);
+            if ($activity->apply_fee > 0) {
                 $this->loadComponent('Sms');
-                $this->Sms->sendByQf106($apply->user->phone,'您报名的活动"'.$activity->title.'"已审核通过，请及时登录平台支付费用，并购帮祝您生活愉快~' );
+                $this->Sms->sendByQf106($apply->user->phone, '您报名的活动"' . $activity->title . '"已审核通过，请及时登录平台支付费用，并购帮祝您生活愉快~');
             }
             $this->Util->ajaxReturn(true, '操作成功');
         } else {
             $this->Util->ajaxReturn(false, '操作失败');
         }
     }
-    
+
     /**
      * 审核不通过
      * @param type $id
      */
-    public function uncheck($id){
+    public function uncheck($id) {
         $apply = $this->Activityapply->get($id);
         $apply->is_check = 2;
         $apply->check_man = $this->_user->truename;
@@ -308,4 +319,5 @@ class ActivityapplyController extends AppController {
             $this->Util->ajaxReturn(false, '操作失败');
         }
     }
+
 }

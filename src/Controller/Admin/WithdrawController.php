@@ -17,6 +17,9 @@ class WithdrawController extends AppController {
      * @return void
      */
     public function index() {
+        if ($this->request->query('do')) {
+            $this->set('do', 'check');
+        }
         $this->set('withdraw', $this->Withdraw);
     }
 
@@ -115,7 +118,14 @@ class WithdrawController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
+        $status = $this->request->data('status');
         $where = [];
+        if (is_numeric($status)) {
+            $where = ['Withdraw.status' => $status];
+        }
+        if($this->request->query('do')=='check'){
+            $where = ['Withdraw.status' => 0];
+        }
         if (!empty($keywords)) {
             $where['username like'] = "%$keywords%";
         }
@@ -130,7 +140,7 @@ class WithdrawController extends AppController {
             $query->where($where);
         }
         $nums = $query->count();
-        $query->contain(['Users','Admin']);
+        $query->contain(['Users', 'Admin']);
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
@@ -163,7 +173,14 @@ class WithdrawController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
+        $status = $this->request->data('status');
         $where = [];
+        if (is_numeric($status)) {
+            $where = ['Withdraw.status' => $status];
+        }
+        if($this->request->query('do')=='check'){
+            $where = ['Withdraw.status' => 0];
+        }
         if (!empty($keywords)) {
             $where[' username like'] = "%$keywords%";
         }
@@ -237,21 +254,21 @@ class WithdrawController extends AppController {
             $preAmount = $user->money;
             $user->money += $withdraw->amount; //金额退回
             $backFlow = $FlowTable->newEntity([
-                    'user_id'=>$withdraw->user_id,
-                    'type'=>4,
-                    'type_msg'=>'提现失败退回',
-                    'income'=>1,
-                    'relate_id'=>$withdraw->id,
-                    'amount'=>$withdraw->amount,
-                    'pre_amount'=>$preAmount,
-                    'after_amount'=>$user->money,
-                    'status'=>1,
-                    'remark'=>'用户提现失败退回'
+                'user_id' => $withdraw->user_id,
+                'type' => 4,
+                'type_msg' => '提现失败退回',
+                'income' => 1,
+                'relate_id' => $withdraw->id,
+                'amount' => $withdraw->amount,
+                'pre_amount' => $preAmount,
+                'after_amount' => $user->money,
+                'status' => 1,
+                'remark' => '用户提现失败退回'
             ]);
-            return $FlowTable->save($flow) && $WithdrawTable->save($withdraw)&&$UserTable->save($user)&&$FlowTable->save($backFlow);
+            return $FlowTable->save($flow) && $WithdrawTable->save($withdraw) && $UserTable->save($user) && $FlowTable->save($backFlow);
         });
         if ($transRes) {
-             //消息
+            //消息
             $this->loadComponent('Business');
             $this->Business->usermsg($withdraw->user_id, '提现消息', '您的体现审核不通过！原因为：' . $remark, 10, $id);
             $this->Util->ajaxReturn(true, '保存成功');

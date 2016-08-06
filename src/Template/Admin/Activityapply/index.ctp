@@ -16,10 +16,17 @@
                 <label for="must_check">是否需要审核</label>
                 <select name="must_check" class="form-control">
                     <option value="">全部</option>
-                    <option value="1">需要</option>
+                    <option value="1"<?php if(isset($do)): ?>selected="selected"<?php endif;?>>需要</option>
                     <option value="0">不需要</option>
                 </select>
-                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
+            </div>
+            <div class="form-group">
+                <label for="status">是否审核</label>
+                <select name="must_check" class="form-control">
+                    <option value="">全部</option>
+                    <option value="1">已审核</option>
+                    <option value="0" <?php if(isset($do)): ?>selected="selected"<?php endif;?>>未审核</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="keywords">时间</label>
@@ -44,7 +51,7 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/activityapply/getDataList/<?= $id ?>",
+                        url: "/admin/activityapply/getDataList/<?= $id ?><?php if(isset($do)): ?>?do=check<?php endif;?>",
                         datatype: "json",
                         mtype: "POST",
                         colNames:

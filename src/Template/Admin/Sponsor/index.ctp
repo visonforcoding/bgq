@@ -13,6 +13,14 @@
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
             </div>
             <div class="form-group">
+                <label for="keywords">状态</label>
+                <select class="form-control" name="status">
+                    <option value="-1">全部</option>
+                    <option value="0" <?php if (isset($do)): ?>selected="selected"<?php endif; ?>>未处理</option>
+                    <option value="1">已处理</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="keywords">时间</label>
                 <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords" placeholder="开始时间">
                 <label for="keywords">到</label>
@@ -35,11 +43,11 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/sponsor/getDataList/<?= $id; ?>",
+                        url: "/admin/sponsor/getDataList/<?= $id; ?><?php if(isset($do)): ?>?do=check<?php endif;?>",
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '活动', '提交时间', '类型', '描述', '公司/机构', '职务','状态','处理人', '操作'],
+                                ['用户', '活动', '提交时间', '类型', '描述', '公司/机构', '职务', '状态', '处理人', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'activity.title', editable: true, align: 'center'},
@@ -48,14 +56,14 @@
                             {name: 'description', editable: true, align: 'center'},
                             {name: 'user.company', editable: true, align: 'center'},
                             {name: 'user.position', editable: true, align: 'center'},
-                            {name: 'status', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
-                                    if(cellvalue=='0'){
+                            {name: 'status', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
+                                    if (cellvalue == '0') {
                                         return '未处理';
                                     }
-                                    if(cellvalue=='1'){
+                                    if (cellvalue == '1') {
                                         return '已处理';
                                     }
-                            }},
+                                }},
                             {name: 'check_man', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
@@ -107,10 +115,10 @@
                 }
 
                 function actionFormatter(cellvalue, options, rowObject) {
-                    if(rowObject.status=='0'){
-                    response = '<a title="标记已处理" onClick="check(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
-                    }else{
-                    response = '<a title="标记未处理" onClick="uncheck(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-times"></i> </a>';
+                    if (rowObject.status == '0') {
+                        response = '<a title="标记已处理" onClick="check(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
+                    } else {
+                        response = '<a title="标记未处理" onClick="uncheck(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-times"></i> </a>';
                     }
                     return response;
                 }
@@ -171,7 +179,7 @@
                         content: url//iframe的url
                     });
                 }
-                function check(id){
+                function check(id) {
                     layer.confirm('确定标记？', {
                         btn: ['确认', '取消'] //按钮
                     }, function () {
@@ -179,7 +187,7 @@
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/admin/sponsor/check/'+id,
+                            url: '/admin/sponsor/check/' + id,
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
@@ -190,7 +198,7 @@
                     }, function () {
                     });
                 }
-                function uncheck(id){
+                function uncheck(id) {
                     layer.confirm('确定标记？', {
                         btn: ['确认', '取消'] //按钮
                     }, function () {
@@ -198,7 +206,7 @@
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/admin/sponsor/uncheck/'+id,
+                            url: '/admin/sponsor/uncheck/' + id,
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {

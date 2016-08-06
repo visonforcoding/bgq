@@ -18,6 +18,9 @@ class SponsorController extends AppController {
      */
     public function index($id = '') {
         $this->set('id', $id);
+        if ($this->request->query('do')) {
+            $this->set('do', 'check');
+        }
         $this->set('sponsor', $this->Sponsor);
     }
 
@@ -118,7 +121,14 @@ class SponsorController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
+         $status = $this->request->data('status');
         $where = [];
+        if (is_numeric($status)) {
+            $where = ['Sponsor.status' => $status];
+        }
+        if($this->request->query('do')=='check'){
+            $where = ['Sponsor.status' => 0];
+        }
         if (!empty($keywords)) {
             $where['username like'] = "%$keywords%";
         }
@@ -170,9 +180,16 @@ class SponsorController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
+         $status = $this->request->data('status');
         $where = [];
+        if (is_numeric($status)) {
+            $where = ['Sponsor.status' => $status];
+        }
+        if($this->request->query('do')=='check'){
+            $where = ['Sponsor.status' => 0];
+        }
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where['username like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
@@ -195,34 +212,35 @@ class SponsorController extends AppController {
         $filename = 'Sponsor_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
-    
+
     /**
      * 标记处理
      */
-    public function check($id){
-        if($this->request->is('ajax')){
+    public function check($id) {
+        if ($this->request->is('ajax')) {
             $sponsor = $this->Sponsor->get($id);
             $sponsor->status = 1;
             $sponsor->check_man = $this->_user->truename;
-            if($this->Sponsor->save($sponsor)){
-                $this->Util->ajaxReturn(true,'标注成功!');
-            }else{
-                $this->Util->ajaxReturn(false,'标记失败');
+            if ($this->Sponsor->save($sponsor)) {
+                $this->Util->ajaxReturn(true, '标注成功!');
+            } else {
+                $this->Util->ajaxReturn(false, '标记失败');
             }
         }
     }
+
     /**
      * 标记处理
      */
-    public function uncheck($id){
-        if($this->request->is('ajax')){
+    public function uncheck($id) {
+        if ($this->request->is('ajax')) {
             $sponsor = $this->Sponsor->get($id);
             $sponsor->status = 0;
             $sponsor->check_man = $this->_user->truename;
-            if($this->Sponsor->save($sponsor)){
-                $this->Util->ajaxReturn(true,'标注成功!');
-            }else{
-                $this->Util->ajaxReturn(false,'标记失败');
+            if ($this->Sponsor->save($sponsor)) {
+                $this->Util->ajaxReturn(true, '标注成功!');
+            } else {
+                $this->Util->ajaxReturn(false, '标记失败');
             }
         }
     }
