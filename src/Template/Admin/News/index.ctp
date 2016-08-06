@@ -65,7 +65,9 @@
                             }},
                             {name: 'read_nums', editable: true, align: 'center'},
                             {name: 'praise_nums', editable: true, align: 'center'},
-                            {name: 'comment_nums', editable: true, align: 'center'},
+                                 {name: 'comment_nums', editable: true, align: 'center',formatter:function(cell,opt,obj){
+                                    return '<a title="评论详情" onClick="viewComs('+obj.id+')">'+cell+'</a>';
+                            }},
                             {name: 'status', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
                                     switch (cellvalue) {
                                         case 1:
@@ -113,7 +115,7 @@
                     response += '<a title="复制" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
                     response += '<a title="编辑" href="/admin/news/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
 //                    response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
-                    response += '<a title="评论详情" onClick="viewComs(' + rowObject.id + ');" class="grid-btn "><i class="icon icon-comment"></i> </a>';
+//                    response += '<a title="评论详情" onClick="viewComs(' + rowObject.id + ');" class="grid-btn "><i class="icon icon-comment"></i> </a>';
                     response += '<a title="点赞日志" href="/admin/likeLogs/index/' + rowObject.id + '?type=1" class="grid-btn "><i class="icon icon-heart"></i> </a>';
                     response += '<a title="收藏日志" href="/admin/collect/index/' + rowObject.id + '?type=1" class="grid-btn "><i class="icon icon-star"></i> </a>';
 //                    response += '</div></div>';
