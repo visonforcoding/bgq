@@ -153,7 +153,7 @@
 
 </script>
 <script>
-    $('.h-tab>li').on('tap',function(){
+    $('.h-tab>li').on('click',function(){
         var index =$(this).index();
         $(this).addClass('active').siblings().removeClass('active');
         $('.tabcon>ul').eq(index).addClass('cur').siblings().removeClass('cur');

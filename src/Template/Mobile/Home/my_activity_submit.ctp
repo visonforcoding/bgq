@@ -32,6 +32,20 @@
         </div>
     </section>
 </script>
+<script type="text/html" id="myactTpl">
+    <section class="my-collection-info">
+        <div class="innercon">
+            <a href="{#id#}" class="clearfix nobottom">
+                <div class="my-collection-items">
+                    <h3>{#title#}</h3>
+                    <div style="color:red;line-height: .36rem;">{#check#}</div>
+                    <span>{#address#}</span>
+                    <span>{#time#}</span>
+                </div>
+            </a>
+        </div>
+    </section>
+</script>
 <?= $this->element('footer'); ?>
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
@@ -94,8 +108,15 @@
                     func: function(msg){
                         if(typeof msg == 'object') {
                             if(msg.status) {
-                                $.util.dataToTpl('dataBox', 'listTpl',msg.data, function(d){
+                                $.util.dataToTpl('dataBox', 'myactTpl',msg.data, function(d){
                                     d.cover = d.thumb ? d.thumb : d.cover;
+                                    if(d.is_check == 2){
+                                        d.check = '审核不通过';
+                                    } else if(d.is_check == 1) {
+                                        d.check = '审核通过';
+                                    } else {
+                                        d.check = '审核中';
+                                    }
                                     d.id = '/activity/release/' + d.id;
                                     return d;
                                 });
