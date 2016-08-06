@@ -119,6 +119,11 @@ class UserController extends AppController {
             $user->enabled = 0;
             $user->softDelete();
             if ($this->User->save($user)) {
+                //redis 删除该记录
+                $redis = new \Redis();
+                $redis_conf = \Cake\Core\Configure::read('redis_server');
+                $redis->connect($redis_conf['host'],$redis_conf['port']);
+                $redis->sRemove('phones',$user->phone);
                 $this->Util->ajaxReturn(true, '删除成功');
             } else {
                 $errors = $user->errors();
@@ -275,6 +280,13 @@ class UserController extends AppController {
           if ($this->request->is('post')) {
             $entity = $this->User->get($this->request->data('id'));
             $entity->enabled = $entity->enabled==1?0:1;
+            if($entity->enabled == 0){
+                 //redis 删除该记录
+                $redis = new \Redis();
+                $redis_conf = \Cake\Core\Configure::read('redis_server');
+                $redis->connect($redis_conf['host'],$redis_conf['port']);
+                $redis->sRemove('phones',$entity->phone);
+            }
             if ($this->User->save($entity)) {
                 $this->Util->ajaxReturn(true, '修改成功');
             } else {

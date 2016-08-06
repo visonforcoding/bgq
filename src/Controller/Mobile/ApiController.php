@@ -206,6 +206,7 @@ class ApiController extends AppController {
     public function ckRegister(){
         $phones = $this->request->data('phones');
         $phones_arr = explode('|', $phones);
+        //从redis中获取数据 集合
         $redis = new \Redis();
         $redis_conf = \Cake\Core\Configure::read('redis_server');
         $redis->connect($redis_conf['host'],$redis_conf['port']);

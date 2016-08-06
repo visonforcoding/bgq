@@ -221,6 +221,11 @@ class UserController extends AppController {
                     $this->request->session()->write('Login.login_token',$user->user_token);
                     $user_token = $user->user_token;
                 }
+                //redis push 记录
+                $redis = new \Redis();
+                $redis_conf = \Cake\Core\Configure::read('redis_server');
+                $redis->connect($redis_conf['host'],$redis_conf['port']);
+                $redis->sAdd('phones',$data['phone']);
                 return $this->Util->ajaxReturn(['status' => true,'msg'=>$msg, 'url' => $jumpUrl]);
             } else {
                \Cake\Log\Log::error($user->errors());
