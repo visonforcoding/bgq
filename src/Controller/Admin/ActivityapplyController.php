@@ -123,6 +123,10 @@ class ActivityapplyController extends AppController {
         if (!empty($keywords)) {
             $where[' Users.truename like'] = "%$keywords%";
         }
+        $must_check = $this->request->data('must_check');
+        if(is_numeric($must_check)){
+            $where[' Activities.must_check'] = $must_check;
+        }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
@@ -137,8 +141,8 @@ class ActivityapplyController extends AppController {
         if (!empty($where)) {
             $query->where($where);
         }
-        $nums = $query->count();
         $query->contain(['Users', 'Activities']);
+        $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }

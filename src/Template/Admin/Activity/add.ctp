@@ -41,11 +41,10 @@
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">活动时间</label>
-        <div class="col-md-8">
+        <div class="col-md-3">
             <?php
-            echo $this->Form->input('time', ['label' => false, 'class' => 'form-control']);
+            echo $this->Form->input('time', ['label' => false,'type'=>'text', 'class' => 'datetimepicker form-control']);
             ?>
-            <span class="notice">(例:2016-09-09 12:00-13:00)</span>
         </div>
     </div>
     <div class="form-group">
