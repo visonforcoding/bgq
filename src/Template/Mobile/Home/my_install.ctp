@@ -76,27 +76,38 @@
     <p>Copyright ©2012-2018</p>
     <p>君汉控股（深圳）有限公司</p>
 </div>
+<div class="reg-shadow" ontouchmove="return false;" hidden id="shadow"></div>
+<div class="totips" style="height:3.6rem;" hidden id="isLogout" >
+    <h3>确定要离开吗？</h3>
+    <span></span>
+    <a href="javascript:void(0)" class="tipsbtn" id="no">否</a><a href="javascript:void(0)" class="tipsbtn" id="yes">是</a>
+</div>
 <?php $this->start('script'); ?>
 <script>
     $('#logout').on('tap', function(){
+        $('#isLogout').show();
+        $('#shadow').show();
+    });
+    $('#yes').on('tap', function(){
         $.ajax({
             type: 'POST',
             url: '/user/login-out',
             dataType: 'json',
             success: function(msg){
                 if(msg.status) {
-                    $.util.alert(msg.msg);
                     $.util.setCookie('token_uin','');
                     $.util.setCookie('login_status', '');
                     LEMON.db.set('token_uin','');
-                    setTimeout(function(){
-                        location.href = '/home/index';
-                    }, 2000);
+                    location.href = '/home/index';
                 } else {
                     $.util.alert(msg.msg);
                 }
             }
         });
+    });
+    $('#no').on('tap', function(){
+        $('#isLogout').hide();
+        $('#shadow').hide();
     });
     $('#verson').html('Verson '+LEMON.sys.version());
 

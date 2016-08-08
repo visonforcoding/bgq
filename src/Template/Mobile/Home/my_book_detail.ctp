@@ -33,20 +33,32 @@
         <a href="javascript:void(0)" class="nextstep" id="cancel">取消预约</a>
     <?php endif;?>
 </div>
+<div class="reg-shadow" ontouchmove="return false;" hidden id="shadow"></div>
+<div class="totips" style="height:3.6rem;" hidden id="isCancel" >
+    <h3>确定要离开吗？</h3>
+    <span></span>
+    <a href="javascript:void(0)" class="tipsbtn" id="no">否</a><a href="javascript:void(0)" class="tipsbtn" id="yes">是</a>
+</div>
 <?php $this->start('script'); ?>
 <script>
-    $('#cancel').on('tap',function(){
+    $('#cancel').on('tap', function(){
+        $('#isCancel').show();
+        $('#shadow').show();
+    });
+    $('#yes').on('tap',function(){
         $.util.ajax({
             url: '/home/cancelMeeting/<?=$book->id?>',
             func: function(res){
                 $.util.alert(res.msg);
                 if(res.status){
-                    setTimeout(function(){
-                        location.href = '/home/my-book';
-                    }, 2000);
+                    location.href = '/home/my-book';
                 }
             }
         });
+    });
+    $('#no').on('tap', function(){
+        $('#isCancel').hide();
+        $('#shadow').hide();
     });
 </script>
 <?php $this->end('script');

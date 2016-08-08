@@ -22,12 +22,12 @@
     <div class="totips" style="display:none;">
         <h3>活动报名成功</h3>
         <span></span>
-        <a href="" class="nextstep" id="comfirm">确认</a>
+        <a href="" class="nextstep comfirm">确认</a>
     </div>
     <div class="totips check" style="display:none;">
         <h3>活动申请已提交</h3>
         <span>秘书会在三个工作日内审核</span>
-        <a href="" class="nextstep" id="comfirm">确认</a>
+        <a href="" class="nextstep checkComfirm">确认</a>
     </div>
 </body>
 <?php $this->start('script'); ?>
@@ -53,11 +53,13 @@
                         } else {
                             if(window.must_check){
                                 $('.check').show('slow');
+                                $('.checkComfirm').attr('href', msg.url);
                             } else {
                                 $('.totips').show('slow');
+                                $('.comfirm').attr('href', msg.url);
                             }
                             $('.reg-shadow').show('slow');
-                            $('#comfirm').attr('href', msg.url);
+                            
                         }
                     }
                 }

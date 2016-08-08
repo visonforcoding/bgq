@@ -240,11 +240,7 @@ class ActivityController extends AppController {
                                 $this->Sms->sendByQf106($this->user->phone, $msg);
                                 $this->loadComponent('Business');
                                 $this->Business->usermsg($this->user->id, '报名通知', $msg, 7, $id);
-                                if($activity->must_check){
-                                    return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/activity/index']);
-                                } else {
-                                    return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/Wx/meet_pay/2/'.$order->id]);
-                                }
+                                return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/activity/index']);
                             } else {
                                 return $this->Util->ajaxReturn(false, $activityApply->errors());
                             }
@@ -293,11 +289,7 @@ class ActivityController extends AppController {
                                 $this->Sms->sendByQf106($this->user->phone, $msg);
                                 $this->loadComponent('Business');
                                 $this->Business->usermsg($this->user->id, '报名通知', $msg, 7, $id);
-                                if($activity->must_check){
-                                    return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/activity/index']);
-                                } else {
-                                    return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/Wx/meet_pay/2/'.$order->id]);
-                                }
+                                return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/Wx/meet_pay/2/'.$order->id]);
                             } else {
                                 return $this->Util->ajaxReturn(false, $activityApply->errors());
                             }
