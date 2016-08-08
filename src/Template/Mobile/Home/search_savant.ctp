@@ -71,13 +71,13 @@
                     return d;
                 });
                 
-                $.util.slowTap($('.industry'), function(e){
+                $.util.tap($('.industry'), function(e){
                     var target = e.srcElement || e.target;
                     industryTap(target);
                     return false;
                 });
                 
-                $.util.slowTap($('.regions'), function(e){
+                $.util.tap($('.regions'), function(e){
                     var target = e.srcElement || e.target;
                     $('#sellect').text($(target).text());
                     setTimeout(function(){
