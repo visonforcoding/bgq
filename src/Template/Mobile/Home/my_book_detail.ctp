@@ -49,7 +49,6 @@
         $.util.ajax({
             url: '/home/cancelMeeting/<?=$book->id?>',
             func: function(res){
-                $.util.alert(res.msg);
                 if(res.status){
                     location.href = '/home/my-book';
                 }
