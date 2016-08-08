@@ -23,6 +23,12 @@
 <?php $this->start('script'); ?>
 <script>
     $('download').on('tap', function(){
+        if($.util.isAndroid){
+            this.href = '/mobile/app/bgq.apk';
+        }
+        else if($.util.isIOS){
+            alert('app即将上架,请耐心等待');
+        }
         
     });
 </script>
