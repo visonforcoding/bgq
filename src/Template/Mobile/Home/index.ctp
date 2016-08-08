@@ -6,6 +6,7 @@
 
 <div class="wraper newswraper">
     <div class="h-home-bottom" id="user" >
+        <div class='inner h-home-top'></div>
         <div class="t-home-top">
             <span>
                 <a href="/user/login?redirect_url=/home/index">
