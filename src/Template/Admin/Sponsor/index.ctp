@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label for="keywords">状态</label>
                 <select class="form-control" name="status">
-                    <option value="-1">全部</option>
+                    <option value="">全部</option>
                     <option value="0" <?php if (isset($do)): ?>selected="selected"<?php endif; ?>>未处理</option>
                     <option value="1">已处理</option>
                 </select>

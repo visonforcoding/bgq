@@ -131,7 +131,7 @@ class SavantController extends AppController {
         if ($savant_status > 1) {
             $where = ['User.savant_status' => $savant_status];
         }
-        if($this->request->query('do')=='check'){
+        if($this->request->query('do')=='check'&&$savant_status===NULL){
             $where = ['User.savant_status' => 2];
         }
         if (!empty($keywords)) {
@@ -185,11 +185,11 @@ class SavantController extends AppController {
         if ($savant_status > 1) {
             $where = ['User.savant_status' => $savant_status];
         }
-        if($this->request->query('do')=='check'){
+        if($this->request->query('do')=='check'&&$savant_status===NULL){
             $where = ['User.savant_status' => 2];
         }
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where['username like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));

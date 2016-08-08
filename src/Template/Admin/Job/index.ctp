@@ -39,7 +39,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['公司', '负责人', '行业', '联系方式', '分成方式', '招聘职位', '薪资范围', '工作地点', '招聘简介', 'create_time', 'update_time', '操作'],
+                                ['公司', '负责人', '行业', '联系方式', '分成方式', '招聘职位', '薪资范围', '工作地点', '招聘简介', '新建时间', '操作'],
                         colModel: [
                             {name: 'company', editable: true, align: 'center'},
                             {name: 'admin.truename', editable: true, align: 'center'},
@@ -57,7 +57,6 @@
                             {name: 'address', editable: true, align: 'center'},
                             {name: 'summary', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
-                            {name: 'update_time', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: 10,
@@ -86,7 +85,7 @@
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-                    response += '<a title="查看应聘者" href="/admin/candidate/index/' + rowObject.id + '"  data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-link"></i> </a>';
+                    response += '<a title="查看应聘者" href="/admin/candidate/index/' + rowObject.id + '"  data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-group"></i> </a>';
                     response += '<a title="编辑" href="/admin/job/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     return response;
                 }

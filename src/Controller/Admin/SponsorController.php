@@ -121,12 +121,12 @@ class SponsorController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-         $status = $this->request->data('status');
+        $status = $this->request->data('status');
         $where = [];
         if (is_numeric($status)) {
             $where = ['Sponsor.status' => $status];
         }
-        if($this->request->query('do')=='check'){
+        if($this->request->query('do')=='check'&&$status===NULL){
             $where = ['Sponsor.status' => 0];
         }
         if (!empty($keywords)) {
@@ -146,8 +146,8 @@ class SponsorController extends AppController {
         if (!empty($where)) {
             $query->where($where);
         }
-        $nums = $query->count();
         $query->contain(['Users', 'Activities']);
+        $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
@@ -185,7 +185,7 @@ class SponsorController extends AppController {
         if (is_numeric($status)) {
             $where = ['Sponsor.status' => $status];
         }
-        if($this->request->query('do')=='check'){
+        if($this->request->query('do')=='check'&&$status===NULL ){
             $where = ['Sponsor.status' => 0];
         }
         if (!empty($keywords)) {

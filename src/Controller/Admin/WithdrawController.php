@@ -123,7 +123,7 @@ class WithdrawController extends AppController {
         if (is_numeric($status)) {
             $where = ['Withdraw.status' => $status];
         }
-        if($this->request->query('do')=='check'){
+        if($this->request->query('do')=='check'&&$status===NULL){
             $where = ['Withdraw.status' => 0];
         }
         if (!empty($keywords)) {
@@ -178,7 +178,7 @@ class WithdrawController extends AppController {
         if (is_numeric($status)) {
             $where = ['Withdraw.status' => $status];
         }
-        if($this->request->query('do')=='check'){
+        if($this->request->query('do')=='check'&&$status===NULL){
             $where = ['Withdraw.status' => 0];
         }
         if (!empty($keywords)) {

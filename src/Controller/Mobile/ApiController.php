@@ -212,6 +212,7 @@ class ApiController extends AppController {
         $redis->connect($redis_conf['host'],$redis_conf['port']);
         $members = $redis->sGetMembers('phones');
         $register_phones = array_intersect($phones_arr,$members);
+        $register_phones = array_values($register_phones);
         if($register_phones){
             $status = true;
         }else{
