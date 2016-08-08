@@ -216,8 +216,11 @@
 
 <script>
     if($.util.isAPP){
-        alert(document.URL);
-        LEMON.sys.back('/user/home-page/<?= $user->id ?>');
+        if(document.URL.indexOf('#home') != -1){
+            LEMON.sys.back('/user/home-page/<?= $user->id ?>');
+        } else {
+            LEMON.sys.back('/home/index');
+        }
     }
     $(function () {
         $('#upload_pic').on('touchstart',function(){
