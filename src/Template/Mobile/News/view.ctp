@@ -35,7 +35,12 @@
             <img src="<?= $news->cover ?>"/>
             <p><?= $news->body ?></p>
             <div class="con-bottom clearfix pd20">
-                <span class="readnums"><i class="iconfont like">&#xe60b;</i><?= $this->Number->format($news->read_nums) ?></span>
+                <!--阅读数-->
+                <span class="readnums">
+                    <!--<i class="iconfont like">&#xe60b;</i>-->
+                    <i>阅读</i>
+                    <?= $this->Number->format($news->read_nums) ?>
+                </span>
                 <span  data-id="<?= $news->id ?>" <?php if (isset($news->praises) && !empty($news->praises)): ?> data-disable="1" class="liked"<?php endif; ?>
                        id="news-praise" >
                     <i class="iconfont like <?php if (isset($news->praises) && !empty($news->praises)): ?>changecolor scale<?php endif; ?>" >&#xe61b;</i><em><?= $this->Number->format($news->praise_nums) ?></em>

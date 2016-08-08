@@ -14,8 +14,8 @@
                     <li class='no-bottom'>费用：<span class='infocard reg-repass'><input type="text" name="apply_fee" placeholder="<?= $activity->apply_fee; ?>元" readonly/></span></li>
                 </ul>
             </div>
-            <div style="margin: 0.1rem 0 0 0.3rem;font-size: 0.3rem;color:red;">活动报名，费用不可退，请谨慎提交</div>
             <a href="javascript:void(0)" class="nextstep" id="submit">提交</a>
+            <div class="line"><span class="mistips">活动费用不可退哦</span></div>
         </form>
     </div>
     <div class='reg-shadow' hidden></div>
@@ -46,10 +46,7 @@
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
                         if(msg.url.indexOf('/Wx/') != -1){
-                            $.util.alert(msg.msg);
-                            setTimeout(function(){
-                                window.location.href = msg.url;
-                            },2000);
+                            window.location.href = msg.url;
                         } else {
                             if(window.must_check){
                                 $('.check').show('slow');
