@@ -124,7 +124,7 @@ class ActivityapplyController extends AppController {
         if (is_numeric($is_check)) {
             $where = ['Activityapply.is_check' => $is_check];
         }
-        if ($this->request->query('do') == 'check') {
+        if ($this->request->query('do') == 'check'&&$must_check===NULL) {
             $must_check = 1;
             $where = ['Activityapply.is_check' => 0];
         }
@@ -314,6 +314,10 @@ class ActivityapplyController extends AppController {
         $res = $this->Activityapply->save($apply);
         if ($res) {
             //消息
+            $ActivityTable = \Cake\ORM\TableRegistry::get('Activity');
+            $activity = $ActivityTable->get($apply->activity_id);
+            $this->loadComponent('Business');
+            $this->Business->usermsg($apply->user_id, '活动报名消息', '您报名的活动"' . $activity->title . '审核未通过', 11, $id, '/activity/details/' . $activity->id);
             $this->Util->ajaxReturn(true, '操作成功');
         } else {
             $this->Util->ajaxReturn(false, '操作失败');

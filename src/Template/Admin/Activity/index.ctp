@@ -35,6 +35,7 @@
             <a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>
         </div>
     </form>
+    <?= $this->element('actiondesc'); ?>
     <table id="list"><tr><td></td></tr></table> 
     <div id="pager"></div> 
 </div>

@@ -98,9 +98,9 @@
 
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-                    response += '<a title="查看话题" href="/admin/meet-subject/index/' + rowObject.id + '" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-rss"></i> </a>';
+                    response += '<a title="查看话题" href="/admin/meet-subject/index/' + rowObject.id + '" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-chat-line"></i> </a>';
                     response += '<a title="编辑" href="/admin/savant/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
-                    response += '<a title="申请记录" onclick="showApply(' + rowObject.id + ')" class="grid-btn "><i class="icon icon-window-alt"></i> </a>';
+                    response += '<a title="申请记录" onclick="showApply(' + rowObject.id + ')" class="grid-btn "><i class="icon icon-list-alt"></i> </a>';
                     if (rowObject.savant_status == 2) {
                         response += '<a title="审核通过" href="javascript:void(0)" class="grid-btn release" onclick="pass(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
                     }

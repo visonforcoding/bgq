@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label for="status">是否审核</label>
-                <select name="must_check" class="form-control">
+                <select name="is_check" class="form-control">
                     <option value="">全部</option>
                     <option value="1">已审核</option>
                     <option value="0" <?php if(isset($do)): ?>selected="selected"<?php endif;?>>未审核</option>

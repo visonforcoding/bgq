@@ -89,7 +89,7 @@ class UserController extends AppController {
      */
     public function edit($id = null) {
         $user = $this->User->get($id, [
-            'contain' => []
+            'contain' => ['Educations','Careers']
         ]);
         if ($this->request->is(['post', 'put'])) {
             $user = $this->User->patchEntity($user, $this->request->data);
@@ -100,8 +100,7 @@ class UserController extends AppController {
                 $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
-        $industries = $this->User->Industries->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'industries'));
+        $this->set(compact('user'));
     }
 
     /**
@@ -295,5 +294,20 @@ class UserController extends AppController {
         }
     }
     
+    public function education(){
+        if ($this->request->is('post')) {
+            $EducationTable = \Cake\ORM\TableRegistry::get('Education');
+            $education = $EducationTable->get($this->request->data('id'));
+            $data = $this->request->data();
+            unset($data['id']);
+            $education = $EducationTable->patchEntity($education, $data);
+            if ($EducationTable->save($education)) {
+                $this->Util->ajaxReturn(true, '修改成功');
+            } else {
+                $this->Util->ajaxReturn(false, '保存失败');
+            }
+        }
+    }
+
 
 }

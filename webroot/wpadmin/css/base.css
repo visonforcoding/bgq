@@ -14,7 +14,9 @@ body{
 .mt10{
     margin-top: 10px;
 }
-
+.mt20{
+    margin-top: 20px;
+}
 /*顶部菜单*/
 .navbar{
     margin-bottom: 0px;

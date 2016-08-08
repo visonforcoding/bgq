@@ -25,7 +25,7 @@
         <label class="col-md-2 control-label">封面</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
-                <img  alt="封面图片" src="<?= $savant->savant->cover ?>"/>
+                <img  alt="封面图片" src="<?= $savant->cover ?>"/>
             </div>
             <input name="savant[cover]"  type="hidden"/>
             <div id="cover" class="jqupload">上传</div>

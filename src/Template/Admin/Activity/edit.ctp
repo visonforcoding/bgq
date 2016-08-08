@@ -53,7 +53,7 @@
         <label class="col-md-2 control-label">活动时间</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('time', ['label' => false,'type'=>'text', 'class' => 'datetimepicker form-control']);
+            echo $this->Form->input('time', ['label' => false,'type'=>'text', 'class' => 'datepicker form-control']);
             ?>
         </div>
     </div>

@@ -125,8 +125,8 @@ class WxController extends AppController {
                 \Cake\Log\Log::debug($userinfo,'devlog');
                 $headimgurl = $userinfo->headimgurl;
                 //存储微信头像
-                $avatar = $this->Util->saveUrlImage($headimgurl,'user/avatar');
-                $user->avatar = $avatar;
+                //$avatar = $this->Util->saveUrlImage($headimgurl,'user/avatar');
+                $user->avatar = $headimgurl;
                 $user->union_id = $userinfo->unionid;
                 $user->wx_openid = $open_id;
                 $UserTable->save($user);
