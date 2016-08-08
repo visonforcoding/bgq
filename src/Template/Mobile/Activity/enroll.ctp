@@ -23,12 +23,17 @@
         <h3>活动报名成功</h3>
         <span></span>
         <a href="" class="nextstep" id="comfirm">确认</a>
-<!--        <span class='closed'>
-            &times;
-        </span>-->
+    </div>
+    <div class="totips check" style="display:none;">
+        <h3>活动申请已提交</h3>
+        <span>秘书会在三个工作日内审核</span>
+        <a href="" class="nextstep" id="comfirm">确认</a>
     </div>
 </body>
 <?php $this->start('script'); ?>
+<script>
+    window.must_check = <?= $activity->must_check; ?>;
+</script>
 <script>
     $('#submit').on('tap', function () {
         $form = $('form');
@@ -46,8 +51,12 @@
                                 window.location.href = msg.url;
                             },2000);
                         } else {
+                            if(window.must_check){
+                                $('.check').show('slow');
+                            } else {
+                                $('.totips').show('slow');
+                            }
                             $('.reg-shadow').show('slow');
-                            $('.totips').show('slow');
                             $('#comfirm').attr('href', msg.url);
                         }
                     }

@@ -201,12 +201,53 @@ class ActivityController extends AppController {
                     return $this->Util->ajaxReturn(false, '已经报名过了');
                 } else {
                     if($activity->must_check){
-                        $activityApply->is_check = 0;
-                        $activityApply->is_pass = 0;
-                        if ($this->Activity->Activityapply->save($activityApply)) {
-                            return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/activity/details/'.$id]);
+                        if($activity->apply_fee == 0){
+                            $activityApply->is_check = 0;
+                            $activityApply->is_pass = 0;
+                            if ($this->Activity->Activityapply->save($activityApply)) {
+                                return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/activity/details/'.$id]);
+                            } else {
+                                return $this->Util->ajaxReturn(false, $activityApply->errors());
+                            }
                         } else {
-                            return $this->Util->ajaxReturn(false, $activityApply->errors());
+                            $activityApply = $this->Activity->Activityapply->save($activityApply);
+                            $activityApply->is_check = 0;
+                            $activityApply->is_pass = 0;
+                            $OrderTable = \Cake\ORM\TableRegistry::get('order');
+                            $applyTable = \Cake\ORM\TableRegistry::get('activityapply');
+                            $order = $OrderTable->newEntity([
+                                'type' => 2, // 类型为活动报名
+                                'relate_id' => $activityApply->id, //预定表的id
+                                'user_id' => $this->user->id,
+                                'seller_id' => $activity->user_id,
+                                'order_no' => time() . $activity->user_id . $id . createRandomCode(2, 2),
+                                'fee' => 0, // 实际支付的默认值
+                                'price' => $activity->apply_fee,
+                                'remark' => '活动报名' . $activity->title
+                            ]);
+                            $transRes = $applyTable->connection()->transactional(function()use($activityApply, $applyTable, $order, $OrderTable) {
+                                return $applyTable->save($activityApply) && $OrderTable->save($order);
+                            });
+                            if($transRes){
+                                $order = $OrderTable->find()->where(['relate_id'=>$activityApply->id, 'type'=>2, 'user_id'=>$this->user->id])->first();
+    //                            //短信和消息通知
+                                $this->loadComponent('Sms');
+                                if($activity->must_check){
+                                    $msg = "您报名的活动：《" . $activity->title . "》申请已提交，我们会在一个工作日之内审核。";
+                                } else {
+                                    $msg = "您报名的活动：《" . $activity->title . "》已确认通过，请及时登录平台支付报名费用。";
+                                }
+                                $this->Sms->sendByQf106($this->user->phone, $msg);
+                                $this->loadComponent('Business');
+                                $this->Business->usermsg($this->user->id, '报名通知', $msg, 7, $id);
+                                if($activity->must_check){
+                                    return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/activity/index']);
+                                } else {
+                                    return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/Wx/meet_pay/2/'.$order->id]);
+                                }
+                            } else {
+                                return $this->Util->ajaxReturn(false, $activityApply->errors());
+                            }
                         }
                     } else {
                         if($activity->apply_fee == 0){

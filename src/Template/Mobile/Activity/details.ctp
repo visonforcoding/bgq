@@ -148,8 +148,10 @@
                         <a  class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
                     <?php else: ?>
                         <?php if($activity->activityapply['0']->is_pass == 0): ?>
-                            <?php if($activity->activityapply['0']->is_check): ?>;
+                            <?php if($activity->activityapply['0']->is_check == 1): ?>;
                                 <a href="/wx/meet_pay/2/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
+                            <?php elseif($activity->activityapply['0']->is_check == 2): ?>
+                                <a style="background:gray;" class="r-btn">审核未通过</a>
                             <?php else: ?>
                                 <a class="r-btn">审核中</a>
                             <?php endif; ?>
