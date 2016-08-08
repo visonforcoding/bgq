@@ -219,6 +219,7 @@
         alert(document.referrer);
         LEMON.sys.back('/user/home-page/<?= $user->id ?>');
     }
+    alert(document.URL);
     $(function () {
         $('#upload_pic').on('touchstart',function(){
             if($.util.isAPP){
