@@ -216,6 +216,7 @@
 
 <script>
     if($.util.isAPP){
+        alert(document.referrer);
         LEMON.sys.back('/user/home-page/<?= $user->id ?>');
     }
     $(function () {
@@ -268,7 +269,9 @@
                     if (typeof msg === 'object') {
                         if (msg.status) {
                             $.util.alert(msg.msg);
-                            location.href = '/home/index';
+                            setTimeout(function(){
+                                location.href = '/home/index';
+                            },2000);
                         } else {
                             $.util.alert(msg.msg);
                         }
