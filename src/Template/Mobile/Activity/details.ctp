@@ -1,11 +1,13 @@
 <body>
-    <div class="transmitpage clearfix" hidden id="share_download">
-        <div>
-            <h1><img src="/mobile/images/logo-wx.png"></h1>
-            <h3>并购圈<span>并购人的生活方式</span></h3>
+    <a href="/Wx/share_download/activity/<?= $activity->id ?>">
+        <div class="transmitpage clearfix" hidden id="share_download">
+            <div>
+                <h1><img src="/mobile/images/logo-wx.png"></h1>
+                <h3>并购圈<span>并购人的生活方式</span></h3>
+            </div>
+            <span class="green-btn">立即下载</span>
         </div>
-        <a href="/Wx/share_download/activity/<?= $activity->id ?>">立即下载</a>
-    </div>
+    </a>
     <div class="wraper" id="activity_detail" >
         <section class="newscon-box a-detail">
             <h3><?= $activity->title; ?></h3>
