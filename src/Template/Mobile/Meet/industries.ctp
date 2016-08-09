@@ -70,7 +70,7 @@
                             <span>军工/高端装备</span>
                         </a>
                     </div>
-                    <div>
+<!--                    <div>
                         <a href="/meet/moreIndustries/13">
                             <i class="iconfont">&#xe640;</i>
                             <span>定增基金</span>
@@ -117,7 +117,7 @@
                             <i class="iconfont">&#xe647;</i>
                             <span>研发</span>
                         </a>
-                    </div>
+                    </div>-->
                     <div class="no-b-right">
                     </div>
               
