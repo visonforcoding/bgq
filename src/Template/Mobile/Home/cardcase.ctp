@@ -12,8 +12,8 @@
                 <div class='inner my-search'>
                     <a href='#this' class='toback iconfont news-serch'>&#xe618;</a>
                     <form id="searchForm" style="width: 100%" >
-                    <h1><input type="text" name="keyword" placeholder="请输入关键词" value=""></h1>
-                    <input hidden name="resend" value="2" />
+                        <h1><input type="text" name="keyword" placeholder="请输入关键词" value="" /></h1>
+                        <input type="hidden" name="resend" value="2" />
                     </form>
                     <div class='h-regiser' id="doSearch">搜索</div>
                 </div>
