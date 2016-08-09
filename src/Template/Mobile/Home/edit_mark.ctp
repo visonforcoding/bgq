@@ -65,9 +65,12 @@
                 console.log(extra_industry);
                 formdata['tags'].push(extra_industry);
             }
-            if (Object.keys(formdata).length < 5) {
-                if (Object.keys(formdata).length = 0) {
+//            if (Object.keys(formdata).length < 5) {
+            if (formdata['tags'].length <= 5) {
+//                if (Object.keys(formdata).length = 0) {
+                if (formdata['tags'].length == 0) {
                     $.util.alert('至少要选一个');
+                    return;
                 }
                 //对象长度判断
                 $.util.ajax({
@@ -76,7 +79,7 @@
                         $.util.alert(res.msg);
                         if (res.status) {
                             setTimeout(function () {
-                                window.location.href = '/home/edit-userinfo'
+                                window.location.href = '/home/edit-userinfo';
                             }, 1500);
                         }
                     }
