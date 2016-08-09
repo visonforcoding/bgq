@@ -38,7 +38,7 @@
             <p><?= $news->body ?></p>
             <div class="con-bottom clearfix pd20">
                 <!--阅读数-->
-                <span class="readnums" style="width:1.5rem;">
+                <span class="readnums" style="width:1.8rem;">
                     <!--<i class="iconfont like">&#xe60b;</i>-->
                     <i>阅读</i>
                     <?= $this->Number->format($news->read_nums) ?>
