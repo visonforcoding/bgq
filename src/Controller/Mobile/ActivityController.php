@@ -456,7 +456,7 @@ class ActivityController extends AppController {
                 ->find()
                 ->where(['title LIKE' => '%' . $data['keyword'] . '%'])
                 ->orWhere(['body LIKE' => "%" . $data['keyword'] . "%"])
-                ->andWhere(['is_check'=>'1']);
+                ->andWhere(['Activity.status'=> 1, 'Activity.is_del' => 0]);
         if ($series_id) {
             $res = $res->andWhere(['series_id'=>$series_id]);
         }
@@ -503,7 +503,7 @@ class ActivityController extends AppController {
         }
         $this->set('is_apply', $isApply);
         
-        $res = $this->Activity->find()->where(['title LIKE' => '%' . $data['keyword'] . '%', 'series_id' => $series_id]);
+        $res = $this->Activity->find()->where(['title LIKE' => '%' . $data['keyword'] . '%', 'series_id' => $series_id, 'Activity.status'=> 1, 'Activity.is_del' => 0]);
         $res = $res->orderDesc('create_time');
         $res = $res
                 ->page($page, $this->limit)
