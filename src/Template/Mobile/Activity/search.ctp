@@ -84,6 +84,7 @@
                     seriesTap($('.default').get(0));
                 } else {
                     $('input[name="keyword"]').focus();
+                    LEMON.sys.showKeyboard();
                 }
                 $('.regions').on('tap', function(){
                     $('#sellect').text($(this).text());
