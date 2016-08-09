@@ -24,7 +24,7 @@
 <script type="text/html" id="listTpl">
     <section class="internet-v-info">
         <div class="innercon">
-            <a href='/user/home-page/{#following_id#}'><span class="head-img"><img src="{#following_avatar#}"/><i></i></span></a>
+            <a href='/user/home-page/{#following_id#}'><span class="head-img"><img src="{#following_avatar#}"/>{#v#}</span></a>
             <div class="vipinfo">
                 <a href="/user/home-page/{#following_id#}">
                     <h3>{#following_truename#}<span class="meetnum"></span></h3>
@@ -62,6 +62,9 @@
                     d.following_position = d.following.position;
                     d.following_fans = d.following.fans;
                     d.following_subject = $.util.dataToTpl('', 'tpl', d.following.subjects);
+                    if(d.following.level == 2){
+                        d.v = '<i></i>';
+                    }
                     return d;
                 });
             } else {
@@ -104,6 +107,9 @@
                         d.following_position = d.following.position;
                         d.following_fans = d.following.fans;
                         d.following_subject = $.util.dataToTpl('', 'tpl', d.following.subjects);
+                        if(d.following.level == 2){
+                            d.v = '<i></i>';
+                        }
                         return d;
                     });
                 } else {
@@ -136,6 +142,9 @@
                         d.following_position = d.user.position;
                         d.following_fans = d.user.fans;
                         d.following_subject = $.util.dataToTpl('', 'tpl', d.user.subjects);
+                        if(d.following.level == 2){
+                            d.v = '<i></i>';
+                        }
                         return d;
                     });
                 } else {
@@ -168,6 +177,9 @@
                             d.following_position = d.following.position;
                             d.following_fans = d.following.fans;
                             d.following_subject = $.util.dataToTpl('', 'tpl', d.following.subjects);
+                            if(d.following.level == 2){
+                                d.v = '<i></i>';
+                            }
                             return d;
                         });
                     } else {
@@ -179,6 +191,9 @@
                             d.following_position = d.user.position;
                             d.following_fans = d.user.fans;
                             d.following_subject = $.util.dataToTpl('', 'tpl', d.user.subjects);
+                            if(d.following.level == 2){
+                                d.v = '<i></i>';
+                            }
                             return d;
                         });
                     }
