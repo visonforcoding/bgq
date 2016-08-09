@@ -117,7 +117,7 @@
 <?php $this->start('script'); ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
-    window.user_id = <?= $user_id ?>;
+    window.user_id = "<?= $user_id ?>";
 </script>
 <script>
     if($.util.isAPP){
@@ -130,14 +130,11 @@
     $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
         d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
         d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
-        if(window.user_id){
-            if(window.user_id == d.id){
-                d.subjects = $.util.dataToTpl('', 'mySubTpl', d.subjects);
-            } else {
-                d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
-            }
+        if(window.user_id == d.id){
+            d.subjects = $.util.dataToTpl('', 'mySubTpl', d.subjects);
+        } else {
+            d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
         }
-        
         return d;
     });
     
