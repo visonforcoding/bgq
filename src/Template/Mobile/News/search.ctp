@@ -126,7 +126,8 @@
                 if($('.default').length != 0){
                     industryTap($('.default').get(0));
                 } else{
-                    setTimeout(function(){$('input[name="keyword"]').focus();}, 1000);
+                    $('input[name="keyword"]').focus();
+                    LEMON.sys.showKeyboard();
                 }
             }
         }
