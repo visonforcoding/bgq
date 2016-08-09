@@ -67,10 +67,14 @@
                     <i class="iconfont">&#xe638;</i>
                     <span>节能环保</span>
                 </a>
-                 <a href="/meet/moreIndustries/11">
+                <a href="/meet/moreIndustries/11">
+                    <i class="iconfont">&#xe63e;</i>
+                    <span>军工/高端装备</span>
+                </a>
+<!--                <a href="/meet/moreIndustries/11">
                     <i class="iconfont">&#xe640;</i>
                     <span>定增基金</span>
-                </a>
+                </a>-->
                 <a href="/meet/industries">
                     <i class="iconfont">&#xe64f;</i>
                     <span>更多</span>
