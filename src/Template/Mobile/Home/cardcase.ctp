@@ -11,7 +11,7 @@
     <div class="my-focus-box">
                 <div class='inner my-search'>
                     <a href='#this' class='toback iconfont news-serch'>&#xe618;</a>
-                    <form id="searchForm" onsubmit="return false;" style="width: 100%" >
+                    <form id="searchForm" style="width: 100%" >
                     <h1><input type="text" name="keyword" placeholder="请输入关键词" value=""></h1>
                     <input hidden name="resend" value="2" />
                     </form>
@@ -53,8 +53,7 @@
         d.user_position = d.other_card.position;
         d.user_phone = d.other_card.phone;
         d.user_email = d.other_card.email;
-        if(d.resend == 2)
-        {
+        if(d.resend == 2) {
             d.giveBack = '<div class="fr" id="giveBack_'+ d.other_card.id + '" uid="' + d.other_card.id + '"><span class="meetnum toc"><i></i>回赠</span></div>';
         }
         return d;
@@ -68,15 +67,11 @@
             $.util.ajax({
                 url: "/home/sendBack/" + $(em).attr('uid'),
                 func: function(msg){
-                    if(typeof msg == 'object')
-                    {
-                        if(msg.status)
-                        {
+                    if(typeof msg == 'object') {
+                        if(msg.status) {
                             $(em).children('span').text('已回赠');
                             $.util.alert(msg.msg);
-                        }
-                        else
-                        {
+                        } else {
                             $.util.alert(msg.msg);
                         }
                     }
@@ -85,8 +80,7 @@
         }
         switch(em.id){
             case 'send':
-                if($(em).hasClass('active'))
-                {
+                if($(em).hasClass('active')) {
                     return false;
                 }
                 $('#card').html('');
@@ -96,11 +90,8 @@
                 $.util.ajax({
                     url: "/home/getCrad/1",
                     func: function(msg){
-                        if(typeof msg == 'object')
-                        {
-                            if(msg.status)
-                            {
-                                
+                        if(typeof msg == 'object') {
+                            if(msg.status) {
                                 $.util.dataToTpl('card', 'card_tpl', msg.data, function (d) {
                                     d.user_id = d.other_card.id;
                                     d.user_truename = d.other_card.truename;
@@ -121,8 +112,7 @@
                 });
                 break;
             case 'noSend':
-                if($(em).hasClass('active'))
-                {
+                if($(em).hasClass('active')) {
                     return false;
                 }
                 $('#card').html('');
@@ -161,36 +151,7 @@
                 });
                 break;
             case 'doSearch':
-                if($('input[name="keyword"]').val() === ''){
-                    $.util.alert('请输入内容');
-                    return false;
-                }
-                $.ajax({
-                    type: 'POST',
-                    data: $('form').serialize(),
-                    dataType: 'json',
-                    url: "/home/search_card",
-                    success: function (res) {
-                        if(res.status){
-                            $.util.dataToTpl('card', 'card_tpl', res.data, function (d) {
-                                d.user_id = d.other_card.id;
-                                d.user_truename = d.other_card.truename;
-                                d.user_avatar = d.other_card.avatar ? d.other_card.avatar : '/mobile/images/touxiang.png';
-                                d.user_company = d.other_card.company;
-                                d.user_position = d.other_card.position;
-                                d.user_phone = d.other_card.phone;
-                                d.user_email = d.other_card.email;
-                                if(d.resend == 2)
-                                {
-                                    d.giveBack = '<div class="fr" id="giveBack_'+ d.other_card.id + '" uid="' + d.other_card.id + '"><span class="meetnum toc"><i></i>回赠</span></div>';
-                                }
-                                return d;
-                            });
-                        } else {
-                            $.util.alert(res.msg);
-                        }
-                    }
-                });
+                search();
                 break;
             case 'goTop':
                 window.scrollTo(0,0);
@@ -199,5 +160,43 @@
         }
     });
     
+    $('#searchForm').submit(function(){
+        search();
+        return false;
+    });
+    
+    function search(){
+        if($('input[name="keyword"]').val() === ''){
+            $.util.alert('请输入内容');
+            return false;
+        }
+        $.ajax({
+            type: 'POST',
+            data: $('form').serialize(),
+            dataType: 'json',
+            url: "/home/search_card",
+            success: function (res) {
+                if(res.status){
+                    $.util.dataToTpl('card', 'card_tpl', res.data, function (d) {
+                        d.user_id = d.other_card.id;
+                        d.user_truename = d.other_card.truename;
+                        d.user_avatar = d.other_card.avatar ? d.other_card.avatar : '/mobile/images/touxiang.png';
+                        d.user_company = d.other_card.company;
+                        d.user_position = d.other_card.position;
+                        d.user_phone = d.other_card.phone;
+                        d.user_email = d.other_card.email;
+                        if(d.resend == 2)
+                        {
+                            d.giveBack = '<div class="fr" id="giveBack_'+ d.other_card.id + '" uid="' + d.other_card.id + '"><span class="meetnum toc"><i></i>回赠</span></div>';
+                        }
+                        return d;
+                    });
+                } else {
+                    $.util.alert(res.msg);
+                }
+            }
+        });
+        $('input[name="keyword"]').blur();
+    };
 </script>
 <?php $this->end('script');

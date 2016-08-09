@@ -4,28 +4,30 @@
         <h1>
             资讯内容
         </h1>
-      <!--   <a href="#this" id="collect" class='iconfont collection h-regiser'>&#xe610;</a>
-        <a href="#this" class='iconfont share h-regiser'>&#xe614;</a> -->
+        <!--   <a href="#this" id="collect" class='iconfont collection h-regiser'>&#xe610;</a>
+          <a href="#this" class='iconfont share h-regiser'>&#xe614;</a> -->
     </div>
 </header>
-<div class="transmitpage clearfix" hidden id="share_download">
-    <div>
-        <h1><img src="/mobile/images/logo-wx.png"></h1>
-        <h3>并购圈<span>并购人的生活方式</span></h3>
+<a href="/Wx/share_download/news/<?= $news->id ?>" id="share_download_link">
+    <div class="transmitpage clearfix" hidden id="share_download">
+        <div>
+            <h1><img src="/mobile/images/logo-wx.png"></h1>
+            <h3>并购圈<span>并购人的生活方式</span></h3>
+        </div>
+        <span class="green-btn">立即下载</span>
     </div>
-    <a href="/Wx/share_download/news/<?= $news->id ?>" id="share_download_link">立即下载</a>
-</div>
+</a>
 <div class="wraper" id="news">
     <?php if (isset($news)): ?>
         <section class="newscon-box">
             <h3><?= $news->title ?></h3>
-            <h1 class="con-des <?php if($news->source): ?>origin<?php endif; ?>">
-                <?php if($news->source): ?>
+            <h1 class="con-des <?php if ($news->source): ?>origin<?php endif; ?>">
+                <?php if ($news->source): ?>
                     <div class="website"><?= $news->source ?></div>
                 <?php else: ?>
                     <a href="/user/home-page/<?= $news->user->id ?>">
                         <span>
-                            <img src="<?= $news->user->avatar ? $news->user->avatar : '/mobile/images/touxiang.png'  ?>" />
+                            <img src="<?= $news->user->avatar ? $news->user->avatar : '/mobile/images/touxiang.png' ?>" />
                         </span>
                     </a>
                     <?= $news->user->truename ?>
@@ -105,7 +107,7 @@
 <div class="wxshare" id="wxshare" hidden>
     <span></span>
     <p></p>
- </div>
+</div>
 <div class="totips" style="height:3.6rem;display:none;" id="isdel" >
     <h3>确定要删除本条评论？</h3>
     <span></span>
@@ -147,14 +149,13 @@
 </script>
 <script>
     window.location.hash = '';
-    if(location.href.indexOf('?share=1') != -1){
+    if (location.href.indexOf('?share=1') != -1) {
         $('#share_download').show();
     }
-    function checkLogin(func){
-        if(window.__user_id || $.util.getCookie('token_uin')){
+    function checkLogin(func) {
+        if (window.__user_id || $.util.getCookie('token_uin')) {
             func();
-        }
-        else{
+        } else {
             $.util.alert('请登录后操作');
             setTimeout(function () {
                 location.href = '/user/login?redirect_url=/news/view/' + window.__id;
@@ -164,17 +165,17 @@
 
     $('.com-all').hide();
     // 少于五条评论隐藏显示全部, 大于一条评论隐藏还没有任何评论
-    var circle = setInterval(function(){
-        if($('#comment').children('.items').length >= 5)
+    var circle = setInterval(function () {
+        if ($('#comment').children('.items').length >= 5)
         {
             $('.com-all').show();
             clearInterval(circle);
         }
-        if($('#comment').children('.items').length > 0) {
+        if ($('#comment').children('.items').length > 0) {
             $('#noComment').hide();
         }
-    },100);
-    
+    }, 100);
+
     var reply_id = 0;
     $.util.dataToTpl('comment', 'listTpl', window.__comments, function (d) {
         //d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
@@ -196,186 +197,185 @@
         }
         return d;
     });
-    
+
     $('body').on('tap', function (e) {
-            var target = e.srcElement || e.target, em = target, i = 1;
-            while (em && !em.id && i <= 3) {
-                em = em.parentNode;
-                i++;
-            }
-            if (!em || !em.id)
-                return;
-            switch (em.id) {
-                case 'commit':
-                    //弹出评论框
-                    checkLogin(function () {
-                        $('#comment_shadow').show('slow');
-                        $('.shadow-info').removeClass('m-height').addClass('c-height');
-                    });
-                    break;
-                case 'cancel':
-                    //关闭 评论框
-                    setTimeout(function (){
-                        $('#comment_shadow').hide('slow');
-                        $('.shadow-info').removeClass('c-height').addClass('m-height');
-                    }, 400);
-                    break;
-                case 'submit':
-                    //提交评论
-                    var content = $('#content').val();
-                    if (!content) {
-                        $.util.alert('评论内容不可为空');
-                        return false;
-                    }
-                    if(window.comme_submit == true)
-                    {
-                        setTimeout(function(){
-                            window.comme_submit = true;
-                        },2000);
-                        window.comme_submit = false;
-                        $.util.ajax({
-                            url: '/news/comment',
-                            data: {reply_id: reply_id, content: content, id:window.__id},
-                            func: function (res) {
-                                if (res.status == true) {
-                                    $.util.alert(res.msg);
-                                    console.log(res.data);
-                                    var html = $.util.dataToTpl('', 'listTpl', [res.data], function (d) {
-                                        //d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
-                                        d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                                        d.user_truename = d.user.truename;
-                                        d.user_company = d.user.company;
-                                        d.user_position = d.user.position;
-                                        if (d.pid > 0) {
-                                            d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.reply.truename + ' </span>：' + d.body;
-                                        }
-                                        d.style = '';
-                                        d.disable = '0';
-                                        if (d.hasOwnProperty('likes')) {
-                                            if (d['likes'].length) {
-                                                d.style = 'color:red';
-                                                d.disable = '1';
-                                            }
-                                        }
-                                        return d;
-                                    });
-                                    $('#comment').prepend(html);
-                                    $('#allComments').prepend(html);
-                                    setTimeout(function(){
-                                        $('#comment_shadow').hide('slow');
-                                        $('.shadow-info').removeClass('c-height').addClass('m-height');
-                                    }, 400);
-                                } else
-                                {
-                                    $.util.alert(res.msg);
-                                }
-                            }
-                        });
-                    }
-                    break;
-                case 'news-praise':
-                    //对文章的赞
-                    var obj = $(em);
-                    checkLogin(function () {
-                        obj.find('i.like').toggleClass('changecolor');
-                        obj.find('i.like').toggleClass('scale');
-                        $.util.ajax({
-                            url: '/news/news-praise',
-                            data: {id: window.__id},
-                            func: function (res) {
+        var target = e.srcElement || e.target, em = target, i = 1;
+        while (em && !em.id && i <= 3) {
+            em = em.parentNode;
+            i++;
+        }
+        if (!em || !em.id)
+            return;
+        switch (em.id) {
+            case 'commit':
+                //弹出评论框
+                checkLogin(function () {
+                    $('#comment_shadow').show('slow');
+                    $('.shadow-info').removeClass('m-height').addClass('c-height');
+                });
+                break;
+            case 'cancel':
+                //关闭 评论框
+                setTimeout(function () {
+                    $('#comment_shadow').hide('slow');
+                    $('.shadow-info').removeClass('c-height').addClass('m-height');
+                }, 400);
+                break;
+            case 'submit':
+                //提交评论
+                var content = $('#content').val();
+                if (!content) {
+                    $.util.alert('评论内容不可为空');
+                    return false;
+                }
+                if (window.comme_submit == true)
+                {
+                    setTimeout(function () {
+                        window.comme_submit = true;
+                    }, 2000);
+                    window.comme_submit = false;
+                    $.util.ajax({
+                        url: '/news/comment',
+                        data: {reply_id: reply_id, content: content, id: window.__id},
+                        func: function (res) {
+                            if (res.status == true) {
                                 $.util.alert(res.msg);
-                                console.log(res);
-                                if (res.status) {
-                                    if(obj.find('i.like').hasClass('changecolor')){
-                                        obj.find('em').html(parseInt(obj.find('em').text()) + 1);
-                                    } else {
-                                        obj.find('em').html(parseInt(obj.find('em').text()) - 1);
+                                console.log(res.data);
+                                var html = $.util.dataToTpl('', 'listTpl', [res.data], function (d) {
+                                    //d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
+                                    d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                                    d.user_truename = d.user.truename;
+                                    d.user_company = d.user.company;
+                                    d.user_position = d.user.position;
+                                    if (d.pid > 0) {
+                                        d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.reply.truename + ' </span>：' + d.body;
                                     }
-                                } else {
-                                    obj.find('i.like').toggleClass('changecolor');
-                                    obj.find('i.like').toggleClass('scale');
-                                }
-                            }
-                        });
-                    });
-                    break;
-                case 'collect':
-                    checkLogin(function () {
-                        var news_id = window.__id;
-                        $.util.ajax({
-                            url: '/news/collect',
-                            data: {id: news_id},
-                            func: function (res) {
+                                    d.style = '';
+                                    d.disable = '0';
+                                    if (d.hasOwnProperty('likes')) {
+                                        if (d['likes'].length) {
+                                            d.style = 'color:red';
+                                            d.disable = '1';
+                                        }
+                                    }
+                                    return d;
+                                });
+                                $('#comment').prepend(html);
+                                $('#allComments').prepend(html);
+                                setTimeout(function () {
+                                    $('#comment_shadow').hide('slow');
+                                    $('.shadow-info').removeClass('c-height').addClass('m-height');
+                                }, 400);
+                            } else
+                            {
                                 $.util.alert(res.msg);
-                                if (res.status) {
-                                    $(em).toggleClass('active');
-                                }
-                            }
-                        });
-                    });
-                    break;
-                case 'share':
-                    if(navigator.userAgent.toLowerCase().indexOf('micromessenger') == -1)
-                    {
-                        LEMON.share.banner();
-                    }
-                    else if($.util.isWX)
-                    {
-                        $('#wxshare').show();
-                        $('#shadow').show();
-                    }
-                    break;
-                case 'shadow':case 'wxshare':
-                    setTimeout(function(){
-                        $('#shadow').hide();
-                        $('#wxshare').hide();
-                        $('#isdel').hide();
-                        $('#isdel').attr('com_id', '');
-                    }, 400);
-                    break;
-                case 'comment_shadow':
-                    setTimeout(function(){
-                        $('#comment_shadow').hide('slow');
-                        $('.shadow-info').removeClass('c-height').addClass('m-height');
-                    },400);
-                    break;
-                case 'yes':
-                    var id = $('#isdel').attr('com_id');
-                    $.ajax({
-                        type: 'POST',
-                        dataType: 'json',
-                        url: "/news/del-comment/" + id,
-                        success: function (res) {
-                            $.util.alert(res.msg);
-                            if(res.status){
-                                $('#common_' + id).parent().remove();
-                                setTimeout(function(){
-                                    $('#shadow').hide();
-                                    $('#isdel').hide();
-                                    $('#isdel').attr('com_id','');
-                                },400);
                             }
                         }
                     });
-                    break;
-                case 'no':
-                    setTimeout(function(){
-                        $('#shadow').hide();
-                        $('#isdel').hide();
-                        $('#isdel').attr('com_id','');
-                    },400);
-                    break;
-                case 'goTop':
-                    window.scrollTo(0, 0);
-                    e.preventDefault();
-                    break;
-            }
-        });
+                }
+                break;
+            case 'news-praise':
+                //对文章的赞
+                var obj = $(em);
+                checkLogin(function () {
+                    obj.find('i.like').toggleClass('changecolor');
+                    obj.find('i.like').toggleClass('scale');
+                    $.util.ajax({
+                        url: '/news/news-praise',
+                        data: {id: window.__id},
+                        func: function (res) {
+                            $.util.alert(res.msg);
+                            console.log(res);
+                            if (res.status) {
+                                if (obj.find('i.like').hasClass('changecolor')) {
+                                    obj.find('em').html(parseInt(obj.find('em').text()) + 1);
+                                } else {
+                                    obj.find('em').html(parseInt(obj.find('em').text()) - 1);
+                                }
+                            } else {
+                                obj.find('i.like').toggleClass('changecolor');
+                                obj.find('i.like').toggleClass('scale');
+                            }
+                        }
+                    });
+                });
+                break;
+            case 'collect':
+                checkLogin(function () {
+                    var news_id = window.__id;
+                    $.util.ajax({
+                        url: '/news/collect',
+                        data: {id: news_id},
+                        func: function (res) {
+                            $.util.alert(res.msg);
+                            if (res.status) {
+                                $(em).toggleClass('active');
+                            }
+                        }
+                    });
+                });
+                break;
+            case 'share':
+                if (navigator.userAgent.toLowerCase().indexOf('micromessenger') == -1)
+                {
+                    LEMON.share.banner();
+                } else if ($.util.isWX)
+                {
+                    $('#wxshare').show();
+                    $('#shadow').show();
+                }
+                break;
+            case 'shadow':
+            case 'wxshare':
+                setTimeout(function () {
+                    $('#shadow').hide();
+                    $('#wxshare').hide();
+                    $('#isdel').hide();
+                    $('#isdel').attr('com_id', '');
+                }, 400);
+                break;
+            case 'comment_shadow':
+                setTimeout(function () {
+                    $('#comment_shadow').hide('slow');
+                    $('.shadow-info').removeClass('c-height').addClass('m-height');
+                }, 400);
+                break;
+            case 'yes':
+                var id = $('#isdel').attr('com_id');
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: "/news/del-comment/" + id,
+                    success: function (res) {
+                        $.util.alert(res.msg);
+                        if (res.status) {
+                            $('#common_' + id).parent().remove();
+                            setTimeout(function () {
+                                $('#shadow').hide();
+                                $('#isdel').hide();
+                                $('#isdel').attr('com_id', '');
+                            }, 400);
+                        }
+                    }
+                });
+                break;
+            case 'no':
+                setTimeout(function () {
+                    $('#shadow').hide();
+                    $('#isdel').hide();
+                    $('#isdel').attr('com_id', '');
+                }, 400);
+                break;
+            case 'goTop':
+                window.scrollTo(0, 0);
+                e.preventDefault();
+                break;
+        }
+    });
 
-    if($.util.isIOS){
+    if ($.util.isIOS) {
         $.util.tap($('body'), doClick);
-    }
-    else{
+    } else {
         $('body').on('click', doClick);
     }
 
@@ -432,9 +432,9 @@
             $('.shadow-info').removeClass('m-height').addClass('c-height');
         }
     }
-    
-    $(window).on('hashchange', function(){
-        if(location.hash == '#allcoment'){
+
+    $(window).on('hashchange', function () {
+        if (location.hash == '#allcoment') {
             $('#news').hide();
             $('#allcoment').show();
             $.ajax({
@@ -510,7 +510,7 @@
                     });
                 });
             }, 2000);
-        }else{
+        } else {
             $('#news').show();
             $('#allcoment').hide();
         }
