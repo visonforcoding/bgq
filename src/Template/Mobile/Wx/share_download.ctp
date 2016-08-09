@@ -22,7 +22,7 @@
 </div>
 <?php $this->start('script'); ?>
 <script>
-    $('download').on('tap', function(){
+    $('#download').on('tap', function(){
         if($.util.isAndroid){
             this.href = '/mobile/app/bgq.apk';
         }
