@@ -1,7 +1,7 @@
 $(function () {
 //    $.datetimepicker.setLocale('zh'); //日期选择器插件
-    $('.datetimepicker').datetimepicker({lang: 'zh',format:'Y-m-d H:i:s',timepicker:true});
-    $('.datepicker').datetimepicker({lang: 'zh',timepicker:false,format:'Y-m-d'});
+    $('.datetimepicker').datetimepicker({lang: 'zh', format: 'Y-m-d H:i:s', timepicker: true});
+    $('.datepicker').datetimepicker({lang: 'zh', timepicker: false, format: 'Y-m-d'});
     $('.date_timepicker_start').datetimepicker({
         format: 'Y/m/d',
         onShow: function (ct) {
@@ -48,6 +48,11 @@ $(function () {
             area: ['960px', '550px'],
             content: '/wpadmin/util/icon'
         });
+    });
+
+    //面板的隐藏和显示
+    $(".close-panel").on('click', function () {
+        $(this).parents('div.panel').find('div.panel-body,div.chart-bar').slideToggle("slow");
     });
 });
 
