@@ -6,8 +6,8 @@
             <p>并购人的生活方式</p>
         </div>
         <div class="d-down block">
-            <a href="com.chinamatop://main/param?url=<?= $url ?>"><span></span>立刻打开</a>
-            <a href="javascript:void(0)" id="download"><span></span>立刻下载</a>
+            <a id="download" href="com.chinamatop://main/param?url=<?= $url ?>"><span></span>在app中打开</a>
+            <!--<a href="javascript:void(0)" id="download"><span></span>立刻下载</a>-->
             <p>or</p>
         </div>
 
@@ -23,13 +23,21 @@
 <?php $this->start('script'); ?>
 <script>
     $('#download').on('tap', function(){
-        if($.util.isAndroid){
-            this.href = '/mobile/app/bgq.apk';
+        var em = this;
+        if($.util.isWX){
+            $.util.alert('请在浏览器中打开此页面');
+            return;
         }
-        else if($.util.isIOS){
-            alert('app即将上架,请耐心等待');
-        }
-        
+        setTimeout(function(){
+            $.util.alert('你还没有安装app,请先下载安装。');
+            $(em).html('立即下载');
+            if($.util.isAndroid){
+                em.href = '/mobile/app/bgq.apk';
+            }
+            else if($.util.isIOS){
+                $.util.alert('app即将上架app store,请耐心等待');
+            }
+        }, 300);
     });
 </script>
 <?php $this->end('script'); 
