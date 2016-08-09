@@ -67,7 +67,7 @@
                     <i class="iconfont">&#xe638;</i>
                     <span>节能环保</span>
                 </a>
-                <a href="/meet/moreIndustries/11">
+                <a href="/meet/moreIndustries/12">
                     <i class="iconfont">&#xe63e;</i>
                     <span>军工/高端装备</span>
                 </a>
