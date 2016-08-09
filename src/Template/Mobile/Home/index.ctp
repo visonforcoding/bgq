@@ -14,7 +14,7 @@
                 </a>
             </span>
         </div>
-        <div class="todo"><a href="/user/login?redirect_url=/home/index">登录 / 注册</a></div>
+        <div class="todo" style="height:1.48rem;"><a href="/user/login?redirect_url=/home/index">登录 / 注册</a></div>
     </div>
     <div class="h-home-menu topnav">
         <ul class="clearfix">
