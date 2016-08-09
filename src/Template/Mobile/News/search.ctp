@@ -89,8 +89,13 @@
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
                         search_data[industry_id] = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
-                            d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                            d.author = d.user.truename;
+                            if(d.user){
+                                d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                                d.author = d.user.truename;
+                            } else {
+                                d.avatar = '/mobile/images/touxiang.png';
+                                d.author = d.source;
+                            }
                             return d;
                         });
                         
