@@ -40,7 +40,7 @@
             <?php endif; ?>
             <div class="con-bottom clearfix">
                 <!--阅读数-->
-                <span class="readnums">
+                <span class="readnums" style="width:1.5rem;">
                     <!--<i class="iconfont ">&#xe60b;</i>-->
                     <i>阅读</i>
                     <?= $activity->read_nums; ?>
