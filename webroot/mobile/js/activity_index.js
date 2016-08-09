@@ -53,14 +53,13 @@ activity.prototype.bindEvent = function () {
 
 activity.prototype.scroll = function () {
 //    var obj = this;
+    window.hideRelease = false;
     $(window).on("scroll", function () {
         // 滚动一个屏幕长度，隐藏发布活动
-        if (document.body.scrollTop > $(window).height()) {
-            console.log(window.up);
-            $('#release').removeClass('moveleft').addClass('moveright');
-            window.up = true;
-        } else if(document.body.scrollTop < $(window).height() && window.up == true) {
-            $('#release').addClass('moveleft');
+        var lastSt = window.hideRelease;
+        window.hideRelease = document.body.scrollTop > $(window).height();
+        if(lastSt != window.hideRelease){
+            window.hideRelease ? $('#release').removeClass('moveleft').addClass('moveright') : $('#release').addClass('moveleft');
         }
     });
 };
