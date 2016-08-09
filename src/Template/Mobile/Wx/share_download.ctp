@@ -10,10 +10,8 @@
             <!--<a href="javascript:void(0)" id="download"><span></span>立刻下载</a>-->
             <p>or</p>
         </div>
-
-
+        
         <div class="block wxsao">
-
             <img src="/mobile/images/wx.png"/>
             <p>关注我们的微信公众号</p>
         </div>
@@ -35,7 +33,8 @@
                 em.href = '/mobile/app/bgq.apk';
             }
             else if($.util.isIOS){
-                $.util.alert('app即将上架app store,请耐心等待');
+                em.href = 'javascript:void(0)';
+                //$.util.alert('app即将上架app store,请耐心等待');
             }
         }, 300);
     });
