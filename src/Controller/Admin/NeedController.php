@@ -158,7 +158,7 @@ class NeedController extends AppController {
                         inner join 
                         (select * from need $where_need  order by create_time desc ) n
                         on n.user_id = u.id where u.id != '-1'
-                        group by u.id limit  $offset, $rows")->fetchAll('assoc');
+                        group by u.id order by create_time desc limit  $offset, $rows")->fetchAll('assoc');
         $nums = count($result);
         if (empty($result)) {
             $res = array();
