@@ -29,7 +29,7 @@
 <script type='text/html' id="card_tpl">
     <section class="internet-v-info">
         <div class="innercon">
-            <a href="/user/home-page/{#user_id#}" class="head-img"><img src="{#user_avatar#}"/><i></i></a>
+            <a href="/user/home-page/{#user_id#}" class="head-img"><img src="{#user_avatar#}"/>{#v#}</a>
             <div class="vipinfo lay-c">
                 <a href="/user/home-page/{#user_id#}" class='fl'>
                     <h3>{#user_truename#}</h3>
@@ -45,19 +45,26 @@
 </script>
 <?php $this->start('script'); ?>
 <script>
-    $.util.dataToTpl('card', 'card_tpl',<?= $cardjson ?>, function (d) {
-        d.user_id = d.other_card.id;
-        d.user_truename = d.other_card.truename;
-        d.user_avatar = d.other_card.avatar ? d.other_card.avatar : '/mobile/images/touxiang.png';
-        d.user_company = d.other_card.company;
-        d.user_position = d.other_card.position;
-        d.user_phone = d.other_card.phone;
-        d.user_email = d.other_card.email;
-        if(d.resend == 2) {
-            d.giveBack = '<div class="fr" id="giveBack_'+ d.other_card.id + '" uid="' + d.other_card.id + '"><span class="meetnum toc"><i></i>回赠</span></div>';
-        }
-        return d;
-    });
+    function dealData(data){
+        $.util.dataToTpl('card', 'card_tpl', data, function (d) {
+            d.user_id = d.other_card.id;
+            d.user_truename = d.other_card.truename;
+            d.user_avatar = d.other_card.avatar ? d.other_card.avatar : '/mobile/images/touxiang.png';
+            d.user_company = d.other_card.company;
+            d.user_position = d.other_card.position;
+            d.user_phone = d.other_card.phone;
+            d.user_email = d.other_card.email;
+            if(d.resend == 2) {
+                d.giveBack = '<div class="fr" id="giveBack_'+ d.other_card.id + '" uid="' + d.other_card.id + '"><span class="meetnum toc"><i></i>回赠</span></div>';
+            }
+            if(d.other_card.level == 2){
+                d.v = '<i></i>';
+            }
+            return d;
+        });
+    }
+    
+    dealData(<?= $cardjson ?>);
     
     $('body').on('tap', function(e){
         var target = e.srcElement || e.target, em=target, i=1;
@@ -92,20 +99,7 @@
                     func: function(msg){
                         if(typeof msg == 'object') {
                             if(msg.status) {
-                                $.util.dataToTpl('card', 'card_tpl', msg.data, function (d) {
-                                    d.user_id = d.other_card.id;
-                                    d.user_truename = d.other_card.truename;
-                                    d.user_avatar = d.other_card.avatar ? d.other_card.avatar : '/mobile/images/touxiang.png';
-                                    d.user_company = d.other_card.company;
-                                    d.user_position = d.other_card.position;
-                                    d.user_phone = d.other_card.phone;
-                                    d.user_email = d.other_card.email;
-                                    if(d.resend == 2)
-                                    {
-                                        d.giveBack = '<div class="fr" id="giveBack_'+ d.other_card.id + '" uid="' + d.other_card.id + '"><span class="meetnum toc"><i></i>回赠</span></div>';
-                                    }
-                                    return d;
-                                });
+                                dealData(msg.data);
                             }
                         }
                     }
@@ -122,28 +116,10 @@
                 $.util.ajax({
                     url: "/home/getCrad/2",
                     func: function(msg){
-                        if(typeof msg == 'object')
-                        {
-                            if(msg.status)
-                            {
-                                
-                                $.util.dataToTpl('card', 'card_tpl', msg.data, function (d) {
-                                    d.user_id = d.other_card.id;
-                                    d.user_truename = d.other_card.truename;
-                                    d.user_avatar = d.other_card.avatar ? d.other_card.avatar : '/mobile/images/touxiang.png';
-                                    d.user_company = d.other_card.company;
-                                    d.user_position = d.other_card.position;
-                                    d.user_phone = d.other_card.phone;
-                                    d.user_email = d.other_card.email;
-                                    if(d.resend == 2)
-                                    {
-                                        d.giveBack = '<div class="fr" id="giveBack_'+ d.other_card.id + '" uid="' + d.other_card.id + '"><span class="meetnum toc"><i></i>回赠</span></div>';
-                                    }
-                                    return d;
-                                });
-                            }
-                            else
-                            {
+                        if(typeof msg == 'object') {
+                            if(msg.status) {
+                                dealData(msg.data);
+                            } else {
                                 $.util.alert(msg.msg);
                             }
                         }
@@ -177,20 +153,7 @@
             url: "/home/search_card",
             success: function (res) {
                 if(res.status){
-                    $.util.dataToTpl('card', 'card_tpl', res.data, function (d) {
-                        d.user_id = d.other_card.id;
-                        d.user_truename = d.other_card.truename;
-                        d.user_avatar = d.other_card.avatar ? d.other_card.avatar : '/mobile/images/touxiang.png';
-                        d.user_company = d.other_card.company;
-                        d.user_position = d.other_card.position;
-                        d.user_phone = d.other_card.phone;
-                        d.user_email = d.other_card.email;
-                        if(d.resend == 2)
-                        {
-                            d.giveBack = '<div class="fr" id="giveBack_'+ d.other_card.id + '" uid="' + d.other_card.id + '"><span class="meetnum toc"><i></i>回赠</span></div>';
-                        }
-                        return d;
-                    });
+                    dealData(res.data);
                 } else {
                     $.util.alert(res.msg);
                 }
@@ -198,5 +161,7 @@
         });
         $('input[name="keyword"]').blur();
     };
+    
+    
 </script>
 <?php $this->end('script');
