@@ -10,7 +10,7 @@ use Wpadmin\Controller\AppController;
  * @property \App\Model\Table\IndexTable $Index
  * @property \App\Controller\Component\EchartComponent $Echart       
  */
-class UserChartController extends AppController {
+class SavantChartController extends AppController {
 
     /**
      * Index method
