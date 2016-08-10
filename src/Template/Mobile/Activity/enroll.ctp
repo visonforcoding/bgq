@@ -8,7 +8,7 @@
                     <li>时间：<span class='infocard'><input type="text" name="time" value="<?= $activity->time; ?>" readonly/></span></li>
                     <li>地点：<span class='infocard'><input type="text" name="address" value="<?= $activity->address; ?>" readonly/></span></li>
                     <li>参与人：<span class='infocard'><input type="text" name="truename" value="<?= $user->truename; ?>" readonly/></span></li>
-                    <li>公司：<span class='infocard'><input type="email" name="company" value="<?= $user->company; ?>" readonly/></span></li>
+                    <li>公司：<span class='infocard'><input type="text" name="company" value="<?= $user->company; ?>" readonly/></span></li>
                     <li>职务：<span class='infocard'><input type="text" name="position" value="<?= $user->position; ?>" readonly/></span></li>
                     <li>联系方式：<span class='infocard reg-pass'><input type="text" name="phone" value="<?= $user->phone; ?>" readonly/></span></li>
                     <li class='no-bottom'>费用：<span class='infocard reg-repass'><input type="text" name="apply_fee" placeholder="<?= $activity->apply_fee; ?>元" readonly/></span></li>
@@ -58,6 +58,8 @@
                             $('.reg-shadow').show('slow');
                             
                         }
+                    } else {
+                        $.util.alert(msg.status);
                     }
                 }
             }
