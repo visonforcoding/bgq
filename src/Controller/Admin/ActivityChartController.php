@@ -10,7 +10,7 @@ use Wpadmin\Controller\AppController;
  * @property \App\Model\Table\IndexTable $Index
  * @property \App\Controller\Component\EchartComponent $Echart       
  */
-class UserChartController extends AppController {
+class ActivityChartController extends AppController {
 
     /**
      * Index method
@@ -21,40 +21,82 @@ class UserChartController extends AppController {
         //待处理专家认证个数
     }
     
-    public function getRegisterChart(){
+    public function getApplyChart(){
         $date = $this->request->query('date');
         $date = date('Y-m-d H:i:s',  strtotime($date));
         $type = $this->request->query('type');
         $connection = \Cake\Datasource\ConnectionManager::get('default');
         if($type=='month'){
             $sql = "select count(u.id) as nums,day(u.create_time) as time_item,date(u.create_time) as date
-                            from `user` u where month(u.create_time) = month('".$date."')
+                            from `activityapply` u where month(u.create_time) = month('".$date."')
                             group by date(u.create_time)";
             $name = date('n',  strtotime($date)).'月';
         }
         if($type=='year'){
             $sql = "select count(u.id) as nums,month(u.create_time) as time_item
-                            from `user` u where year(u.create_time) = year('".$date."')
+                            from `activityapply` u where year(u.create_time) = year('".$date."')
                             group by month(u.create_time)";
             $name = date('Y',  strtotime($date)).'年';
         }
         if($type=='week'){
             $sql = "select count(u.id) as nums,weekday(u.create_time) as time_item
-                            from `user` u where week(u.create_time) = week('".$date."')
+                            from `activityapply` u where week(u.create_time) = week('".$date."')
                             group by weekday(u.create_time)";
             $name = date('Y',  strtotime($date)).'年第'.date('W',  strtotime($date)).'周';
         }
         $result = $connection->execute($sql)->fetchAll('assoc');
         $this->loadComponent('Echart');
-        $title['text'] = '注册用户统计';
-        echo $this->Echart->setLineChart($result,$type,$name,$title,'个');
+        $title['text'] = '活动报名统计';
+        echo $this->Echart->setLineChart($result,$type,$name,$title,'人次');
+        exit();
+    }
+    
+    /**
+     * 活动收入
+     */
+    public function getIncomeChart(){
+        $date = $this->request->query('date');
+        $date = date('Y-m-d H:i:s',  strtotime($date));
+        $type = $this->request->query('type');
+        $connection = \Cake\Datasource\ConnectionManager::get('default');
+        if($type=='month'){
+            $sql = "select count(aa.id),sum(a.apply_fee) as nums,day(aa.create_time) as time_item
+                            from activityapply aa 
+                            join activity a 
+                            on a.id = aa.activity_id
+                            where a.apply_fee > 0 and  month(aa.create_time) = month('".$date."')
+                            group by date(aa.create_time)";
+            $name = date('n',  strtotime($date)).'月';
+        }
+        if($type=='year'){
+            $sql = "select count(aa.id),sum(a.apply_fee) as nums,month(aa.create_time) as time_item
+                            from activityapply aa 
+                            join activity a 
+                            on a.id = aa.activity_id
+                            where a.apply_fee > 0 and  year(aa.create_time) = year('".$date."')
+                            group by month(aa.create_time)";
+            $name = date('Y',  strtotime($date)).'年';
+        }
+        if($type=='week'){
+            $sql = "select count(aa.id),sum(a.apply_fee) as nums,weekday(aa.create_time) as time_item
+                            from activityapply aa 
+                            join activity a 
+                            on a.id = aa.activity_id
+                            where a.apply_fee > 0  and week(aa.create_time) = week('".$date."')
+                            group by weekday(aa.create_time)";
+            $name = date('Y',  strtotime($date)).'年第'.date('W',  strtotime($date)).'周';
+        }
+        $result = $connection->execute($sql)->fetchAll('assoc');
+        $this->loadComponent('Echart');
+        $title['text'] = '活动收入统计';
+        echo $this->Echart->setLineChart($result,$type,$name,$title,'元');
         exit();
     }
     
     /**
      * 关注统计
      */
-    public function getFocusChart(){
+    public function getMpChart(){
         $date = $this->request->query('date');
         $date = date('Y-m-d H:i:s',  strtotime($date));
         $type = $this->request->query('type');
@@ -74,39 +116,6 @@ class UserChartController extends AppController {
         if($type=='week'){
             $sql = "select count(u.id) as nums,weekday(u.create_time) as time_item
                             from `user_fans` u where week(u.create_time) = week('".$date."')
-                            group by weekday(u.create_time)";
-            $name = date('Y',  strtotime($date)).'年第'.date('W',  strtotime($date)).'周';
-        }
-        $result = $connection->execute($sql)->fetchAll('assoc');
-        $this->loadComponent('Echart');
-        $title['text'] = '用户关注统计';
-        echo $this->Echart->setLineChart($result,$type,$name,$title,'次');
-        exit();
-    }
-    
-    /**
-     * 递名片统计
-     */
-    public function getMpChart(){
-        $date = $this->request->query('date');
-        $date = date('Y-m-d H:i:s',  strtotime($date));
-        $type = $this->request->query('type');
-        $connection = \Cake\Datasource\ConnectionManager::get('default');
-        if($type=='month'){
-            $sql = "select count(u.id) as nums,day(u.create_time) as time_item,date(u.create_time) as date
-                            from `card_box` u where month(u.create_time) = month('".$date."')
-                            group by date(u.create_time)";
-            $name = date('n',  strtotime($date)).'月';
-        }
-        if($type=='year'){
-            $sql = "select count(u.id) as nums,month(u.create_time) as time_item
-                            from `card_box` u where year(u.create_time) = year('".$date."')
-                            group by month(u.create_time)";
-            $name = date('Y',  strtotime($date)).'年';
-        }
-        if($type=='week'){
-            $sql = "select count(u.id) as nums,weekday(u.create_time) as time_item
-                            from `card_box` u where week(u.create_time) = week('".$date."')
                             group by weekday(u.create_time)";
             $name = date('Y',  strtotime($date)).'年第'.date('W',  strtotime($date)).'周';
         }
