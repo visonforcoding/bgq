@@ -59,7 +59,7 @@
                             
                         }
                     } else {
-                        $.util.alert(msg.status);
+                        $.util.alert(msg.msg);
                     }
                 }
             }
