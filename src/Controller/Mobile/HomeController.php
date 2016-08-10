@@ -1239,6 +1239,8 @@ class HomeController extends AppController {
      */
     public function getSearchRes(){
         $where = [];
+        $where['level'] = 2;
+        $where['enabled'] = 1;
         $userTable = \Cake\ORM\TableRegistry::get('user');
         $data = $this->request->data();
         $user = $userTable->find()->contain(['Subjects']);
