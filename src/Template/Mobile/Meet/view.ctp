@@ -45,7 +45,7 @@
                     <!-- 只推荐7条 -->
 
                     <?php foreach ($biggie->reco_users as $reco_user): ?>
-                        <img src="<?= empty($reco_user->user->avatar) ? '/mobile/images/touxiang.jpg' : $reco_user->user->avatar ?>"/>
+                        <img src="<?= empty($reco_user->user->avatar) ? '/mobile/images/touxiang.jpg' : getOriginAvatar($reco_user->user->avatar) ?>"/>
                     <?php endforeach; ?>
                 </a>
                 <!-- 等<i id="meet_nums"><?= $biggie->savant->reco_nums ?></i>人推荐 -->
