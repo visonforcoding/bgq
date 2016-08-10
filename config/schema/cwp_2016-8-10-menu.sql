@@ -22,9 +22,9 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态',
   `remark` varchar(100) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='菜单表';
 
--- 正在导出表  binggq.menu 的数据：~84 rows (大约)
+-- 正在导出表  binggq.menu 的数据：~65 rows (大约)
 DELETE FROM `menu`;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
 INSERT INTO `menu` (`id`, `name`, `node`, `pid`, `class`, `rank`, `is_menu`, `status`, `remark`) VALUES
@@ -111,7 +111,9 @@ INSERT INTO `menu` (`id`, `name`, `node`, `pid`, `class`, `rank`, `is_menu`, `st
 	(88, '点赞日志', '/admin/like-logs/index', 55, '', NULL, 0, 1, ''),
 	(89, '活动需求编辑', '/admin/activity-need/edit', 63, '', NULL, 0, 1, ''),
 	(90, '用户统计', '/admin/user-chart/index', 27, 'icon-bar-chart', NULL, 1, 1, ''),
-	(91, '活动统计', '/admin/activity-chart/index', 27, 'icon-area-chart', NULL, 1, 1, '');
+	(91, '活动统计', '/admin/activity-chart/index', 27, 'icon-area-chart', NULL, 1, 1, ''),
+	(92, '咨讯统计', '/admin/news-chart/index', 27, 'icon-line-chart', NULL, 1, 1, ''),
+	(93, '专家统计', '/admin/savant-chart/index', 27, 'icon-bar-chart', NULL, 1, 1, '');
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
