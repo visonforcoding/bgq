@@ -316,6 +316,8 @@ class WxController extends AppController {
             $url = '/news/view/'.$id;
         } elseif($controller == 'activity'){
             $url = '/activity/details/'.$id;
+        } elseif($controller == 'user') {
+            $url = '/meet/view/'.$id;
         }
         $this->set([
             'pageTitle'=>'下载并购帮',
