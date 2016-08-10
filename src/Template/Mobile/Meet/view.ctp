@@ -5,13 +5,15 @@
         <a href="#this" class='iconfont share h-regiser'>&#xe614;</a>-->
     </div>
 </header>
-<div class="transmitpage clearfix" hidden id="share_download">
-    <div>
-        <h1><img src="/mobile/images/logo-wx.png"></h1>
-        <h3>并购圈<span>并购人的生活方式</span></h3>
+<a href="/Wx/share_download/user/<?= $biggie->id ?>">
+    <div class="transmitpage clearfix" hidden id="share_download">
+        <div>
+            <h1><img src="/mobile/images/logo-wx.png"></h1>
+            <h3>并购圈<span>并购人的生活方式</span></h3>
+        </div>
+        <span class="green-btn">立即下载</span>
     </div>
-    <a href="/Wx/share_download">立即下载</a>
-</div>
+</a>
 <div class="wraper">
     <div class="m-to-more">
         <div class='inner'>

@@ -47,10 +47,16 @@
 <script type='text/html' id='subTpl'>
     <a href="/meet/subject_detail/{#id#}">{#title#}</a>
 </script>
+<script type='text/html' id='mySubTpl'>
+    <a href="/meet/subject/{#id#}">{#title#}</a>
+</script>
 <script type="text/html" id="industriesTpl">
     <li><a href="javascript:void(0)" industry_id="{#id#}" class="industry {#default#}">{#name#}</a></li>
 </script>
 <script src="/mobile/js/loopScroll.js"></script>
+<script>
+    window.user_id = "<?= $user_id ?>";
+</script>
 <script>
     
     $.ajax({
@@ -209,7 +215,12 @@
                         $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
                             d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
                             d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
-                            d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
+//                            d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
+                            if(window.user_id == d.id){
+                                d.subjects = $.util.dataToTpl('', 'mySubTpl', d.subjects);
+                            } else {
+                                d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
+                            }
                             return d;
                         });
                     } else {

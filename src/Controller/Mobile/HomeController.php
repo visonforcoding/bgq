@@ -1212,9 +1212,14 @@ class HomeController extends AppController {
      * 找同行
      */
     public function searchSavant($id=null){
+        $user_id = '';
+        if($this->user){
+            $user_id = $this->user->id;
+        }
         $this->set([
             'pageTitle'=>'找同行',
             'sid' => $id,
+            'user_id' => $user_id
         ]);
         
     }
