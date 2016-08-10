@@ -104,7 +104,8 @@ class HomeController extends AppController {
                 $applyTable = \Cake\ORM\TableRegistry::get('activityapply');
                 $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
                 $orderTable = \Cake\ORM\TableRegistry::get('order');
-                $myActivity = $applyTable->find()->distinct(['activityapply.id'])->contain(['Activities'=>function($q){
+                $myActivity = $applyTable->find()->distinct(['activityapply.id'])
+                        ->contain(['Activities'=>function($q){
                     return $q->where(['status'=>1, 'is_del'=>0]);
                 }, 'Lmorder'=>function($q){
                     return $q->where(['type'=>2]);
