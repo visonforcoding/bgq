@@ -42,7 +42,7 @@ class ActivityapplyTable extends Table {
         
         $this->hasOne('Lmorder', [
             'foreignKey' => 'relate_id',
-            'joinType' => 'INNER',
+            'joinType' => 'LEFT',
             'className' => 'Order',
         ]);
 
