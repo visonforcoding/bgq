@@ -54,6 +54,7 @@
         <ul class="clearfix">
             {#savant#}
             <li><a href="javascript:QRCode();"><i class="iconfont">&#xe60a;</i>扫一扫</a></li>
+            {#findSavant#}
         </ul>
     </div>
     
@@ -128,6 +129,7 @@
                     ico = ico.replace('{#search_savant#}', '<li><a href="/home/search-savant"><i class="iconfont">&#xe626;</i>找同行</a></li>');
                 } else {
                     savant = '<li><a href="/home/savant-auth"><i class="iconfont">&#xe623;</i>专家认证</a></li>';
+                    html = html.replace('{#findSavant#}', '<li><a href="/home/search-savant"><i class="iconfont">&#xe626;</i>找同行</a></li><li></li>');
                     user = user.replace('{#v#}', '');
                     ico = ico.replace('{#search_savant#}', '');
                 }
