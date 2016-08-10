@@ -105,9 +105,8 @@ class HomeController extends AppController {
                 $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
                 $orderTable = \Cake\ORM\TableRegistry::get('order');
                 $myActivity = $applyTable->find()->contain(['Activities', 'Lmorder'=>function($q){
-                    return $q->where(['type'=>2]);
+                    return $q;
                 }])->where(['activityapply.user_id' => $this->user->id])->toArray();
-                debug($myActivity);die;
                 $UsermsgTable->updateAll(['status'=>1], ['user_id'=>$this->user->id, 'status'=>0, 'type'=>7]);
                 if ($myActivity !== false) {
                     return $this->Util->ajaxReturn(['status' => true, 'data' => $myActivity]);
