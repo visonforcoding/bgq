@@ -72,7 +72,6 @@
 </script>
 <script>
     if($.util.isIOS){
-        alert(1);
         $('#iosBottom').show();
     }
     $.getJSON('/activity/get-banner',function(res){
