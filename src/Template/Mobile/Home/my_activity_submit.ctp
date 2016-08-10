@@ -146,7 +146,7 @@
                                     d.adress = d.activity.adress;
                                     d.apply_nums = d.activity.apply_nums;
                                     d.time = d.activity.time;
-                                    if(d.must_check == 1){
+                                    if(d.activity.must_check == 1){
                                         if(d.is_check === 0 && d.is_pass === 0){
                                             d.check = '审核中';
                                             d.id = '/activity/details/' + d.activity.id;
