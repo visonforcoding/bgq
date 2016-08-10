@@ -33,6 +33,7 @@ class NewsController extends AppController {
                         ->contain(['Users'=>function($q){
                             return $q->where(['enabled'=>1]);
                         }, 'Industries'])
+                        ->select(['id', 'source', 'title', 'user_id', 'create_time', 'cover', 'comment_nums', 'praise_nums', 'summary', 'Users.id', 'Users.truename'])
                         ->where(['News.status'=>1])
                         ->page($page, $this->newslimit)
                         ->orderDesc('News.create_time')->toArray();

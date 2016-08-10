@@ -87,7 +87,11 @@ activity.prototype.getData = function(){
                 if (res.status) {
                     var html = dealData(res.data);
                     $('#activity').append(html);
-                    obj.page++;
+                    if(res.data < 5){
+                        obj.page = 9999;
+                    } else {
+                        obj.page++;
+                    }
                 }
             });
         });

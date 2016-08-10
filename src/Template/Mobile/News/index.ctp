@@ -129,7 +129,11 @@
                 if(res.status){
                     var html = dealData(res.data);
                     $('#news').append(html);
-                    page++;
+                    if(res.data.length < 5){
+                        page = 9999;
+                    } else {
+                        page++;
+                    }
                 }
             });
         });
