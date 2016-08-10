@@ -19,7 +19,7 @@
         </form>
     </div>
     <div class='reg-shadow' hidden></div>
-    <div class="totips" style="display:none;">
+    <div class="totips suc" style="display:none;">
         <h3>活动报名成功</h3>
         <span></span>
         <a href="" class="nextstep comfirm">确认</a>
@@ -52,7 +52,7 @@
                                 $('.check').show('slow');
                                 $('.checkComfirm').attr('href', msg.url);
                             } else {
-                                $('.totips').show('slow');
+                                $('.suc').show('slow');
                                 $('.comfirm').attr('href', msg.url);
                             }
                             $('.reg-shadow').show('slow');
