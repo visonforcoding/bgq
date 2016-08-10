@@ -129,18 +129,48 @@
         </div>
         <div class="panel col-lg-6 col-md-12 col-sm-12 col-xs-12">
             <div class="panel-body">
-                <canvas id="myChart" height='170px' width='400px'></canvas>
+                <div id="industry_chart" style="width:100%;height:400px;" >
+
+                </div>
             </div>
         </div>
     </div>
 </div>
+<script src="/wpadmin/lib/echart/echarts.js"></script>    
 <script type="text/javascript">
     window.onload = function () {
-        var ctx = document.getElementById("myChart").getContext("2d");
-        $.getJSON('/admin/index/get-user-industry-proportion', function (res) {
-            new Chart(ctx, {
-                type: 'pie',
-                data: res.data,
+        var industry_chart = echarts.init(document.getElementById('industry_chart'));
+        $.get('/admin/user-chart/getIndustryPieChart', function (data) {
+            industry_chart.setOption({
+                title: {
+                    text: data.title.text,
+                    x: 'center'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: data.legend.data
+                },
+                series: [
+                    {
+                        name: data.series.name,
+                        type: 'pie',
+                        radius: '55%',
+                        center: ['50%', '60%'],
+                        data: data.series.data,
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
             });
         }, 'json');
         var newUserChart = document.getElementById('new-user-chart').getContext('2d');

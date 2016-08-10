@@ -13,7 +13,7 @@
                 <button data-val="income" class="btn  chart-column-btn"><i class="icon icon-dollar red"></i> 活动收入</button>
                 <button data-val="praise" class="btn  chart-column-btn"><i class="icon icon-heart red"></i> 活动点赞</button>
                 <button data-val="comment" class="btn  chart-column-btn"><i class="icon icon-comment red"></i> 活动回复</button>
-                <button data-val="sponsor" class="btn  chart-column-btn"><i class="icon icon-comment red"></i> 活动赞助</button>
+                <button data-val="sponsor" class="btn  chart-column-btn"><i class="icon icon-gift red"></i> 活动赞助</button>
             </div>
             <div class="input-group date   col-md-2 " style="float: left;margin-left:-120px;margin-right:10px;"  data-link-field="dtp_input1">
                 <input class="form-control form-date datepicker" id="choice_date" value="<?= date('Y-m-d') ?>"  data-date="" type="text"  readonly>

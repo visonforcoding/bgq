@@ -119,17 +119,28 @@
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-industry').select2({
             language: "zh-CN",
-            placeholder: '选择一个标签'
+            placeholder: '选择一个标签',
         });
         $('#select-savant').select2({
             language: "zh-CN",
-            placeholder: '选择一个专家'
+            placeholder: '选择一个专家',
+            maximumSelectionLength: 4
         });
         $('#select-user').select2({
             language: "zh-CN",
             placeholder: '选择一个用户'
         });
         $('form').submit(function () {
+            var user_id = $('#select-user').val();
+            var source = $('#source').val();
+            if(user_id&&source){
+                layer.alert('作者和来源只能填一个',{icon:5});
+                return false;
+            }
+            if(!user_id&&!source){
+                layer.alert('作者和来源必须填一个',{icon:5});
+                return false;
+            }
             var form = $(this);
             $.ajax({
                 type: $(form).attr('method'),

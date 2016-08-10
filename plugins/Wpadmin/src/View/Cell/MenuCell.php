@@ -76,7 +76,8 @@ class MenuCell extends Cell {
         $this->_menus = $menus;
         $controller = $this->request->param('controller');
         $controller = strtolower(preg_replace('/((?<=[a-z])(?=[A-Z]))/', '-', $controller));
-        $action = strtolower($this->request->param('action'));
+        $action = $this->request->param('action');
+        $action = strtolower(preg_replace('/((?<=[a-z])(?=[A-Z]))/', '-', $action));
         $url = '/admin/' . $controller . '/' . $action;
         $this->_url = $url;
         $active = null;
