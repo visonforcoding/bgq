@@ -7,10 +7,8 @@
     <?= $this->Form->create($news, ['class' => 'form-horizontal']) ?>
     <div class="form-group">
         <label class="col-md-2 control-label">作者</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('user_id', ['label' => false, 'class' => 'form-control']);
-            ?>
+          <div class="col-md-8">
+            <?= $this->cell('User',[[$news->user_id]]) ?>
         </div>
     </div>
     <div class="form-group">
@@ -116,6 +114,10 @@
         initJqupload('cover', '/wpadmin/util/doUpload?dir=newscover', 'jpg,png,gif,jpeg'); //初始化图片上传
         initJqupload('thumb', '/wpadmin/util/doUpload?dir=newsthumb', 'jpg,png,gif,jpeg'); //初始化图片上传
         var ue = UE.getEditor('content'); //初始化富文本编辑器
+        $('#select-user').select2({
+            language: "zh-CN",
+            placeholder: '选择一个用户'
+        });
         $('#select-industry').select2({
             language: "zh-CN",
             placeholder: '选择一个标签'

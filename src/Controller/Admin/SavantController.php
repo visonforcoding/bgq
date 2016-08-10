@@ -319,5 +319,14 @@ class SavantController extends AppController {
              'applys'=>$applys,
          ]);
     }
+    
+    /**
+     * 话题管理
+     */
+    public function showSubject($id=null){
+        if($id){
+            $this->set('user_id',$id);
+        }
+    }
 
 }

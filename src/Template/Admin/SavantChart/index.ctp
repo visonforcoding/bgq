@@ -10,7 +10,8 @@
             <div class="col-md-4">
                 <input type="hidden" id="chart-column" value="order" />
                 <button data-val="praise" class="btn btn-primary  chart-column-btn"><i class="icon icon-user red"></i> 专家认证</button>
-                <button data-val="comment" class="btn  chart-column-btn"><i class="icon icon-usecase red"></i> 专家话题</button>
+                <button data-val="subject" class="btn  chart-column-btn"><i class="icon icon-usecase red"></i> 专家话题</button>
+                <button data-val="meet" class="btn  chart-column-btn"><i class="icon icon-coffee red"></i> 专家约见</button>
             </div>
             <div class="input-group date   col-md-2 " style="float: left;margin-left:-120px;margin-right:10px;"  data-link-field="dtp_input1">
                 <input class="form-control form-date datepicker" id="choice_date" value="<?= date('Y-m-d') ?>"  data-date="" type="text"  readonly>
@@ -64,7 +65,7 @@
         var level_chart = echarts.init(document.getElementById('level_chart'));
         // 使用刚指定的配置项和数据显示图表。
         var date = $('#choice_date').val();
-        var url = '/admin/news-chart/getPraiseChart';
+        var url = '/admin/savant-chart/getAuthChart';
         var type = $('#choice-time-type').val();
         initLineChart(url + '?date=' + date + '&type=' + type, line_chart);
         $.get('/admin/user-chart/getIndustryPieChart', function (data) {
@@ -142,15 +143,15 @@
         $('#choice_date,#choice-time-type').change(function () {
             var date = $('#choice_date').val();
             var column = $('.chart-column-btn.btn-primary').data('val');
-            var url = '/admin/news-chart/getPraiseChart';
-            if (column == 'praise') {
-                url = '/admin/news-chart/getPraiseChart';
+            var url = '/admin/savant-chart/getAuthChart';
+            if (column == 'auth') {
+                url = '/admin/savant-chart/getAuthChart';
             }
-            if (column == 'comment') {
-                url = '/admin/news-chart/getCommentChart';
+            if (column == 'subject') {
+                url = '/admin/savant-chart/getSubjectChart';
             }
-            if (column == 'mp') {
-                url = '/admin/user-chart/getMpChart';
+            if (column == 'meet') {
+                url = '/admin/savant-chart/getMeetChart';
             }
             var type = $('#choice-time-type').val();
             url = url + '?date=' + date + '&type=' + type;

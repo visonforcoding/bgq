@@ -2,9 +2,9 @@
     <?php foreach ($savants as $savant): ?>
         <option></option>
         <option <?php if(isset($selIds)): ?>
-            <?php if (in_array($savant->user_id, $selIds)): ?>selected="selected"<?php endif; ?>
+            <?php if (in_array($savant->id, $selIds)): ?>selected="selected"<?php endif; ?>
                 <?php endif;?> 
-                  value="<?= $savant->user_id ?>"><?= $savant->user->truename ?> / <?=$savant->user->company?>
+                  value="<?= $savant->id ?>"><?= $savant->truename ?> / <?=$savant->company?>
         </option>
     <?php endforeach; ?>
 </select>
