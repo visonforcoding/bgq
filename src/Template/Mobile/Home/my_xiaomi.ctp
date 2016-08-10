@@ -13,16 +13,8 @@
             
     </div>-->
     <div class="dialogue" id='xiaomi'>
-        <ul>
-            <?php if(!empty($conversation)): ?>
-                <?php foreach($conversation as $k=>$v): ?>
-                    <?php if($v['reply_id']>0): ?>
-                        <li class="fl"><span><?= $v['msg'] ?></span><time><?= $v['create_time']->i18nFormat('yyyy-MM-dd') ?></time></li>
-                    <?php else: ?>
-                        <li class="fr"><span><?= $v['msg'] ?></span><time><?= $v['create_time']->i18nFormat('yyyy-MM-dd') ?></time></li>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            <?php endif; ?>
+        <ul id="content">
+            
         </ul>
     </div>
 </div>
@@ -36,8 +28,28 @@
         <span class="r-submit" id="submit">发送</span>
     </div>
 </div>
+<script type="text/html" id="tpl">
+    {#msg#}
+</script>
 <?php $this->start('script') ?>
 <script>
+    
+    $.util.ajax({
+        type: 'post',
+        url: '/home/get-xiaomi',
+        func: function(res){
+            if(res.status){
+                $.util.dataToTpl('content', 'tpl', res.data, function(d){
+                    if(d.reply_id){
+                        d.msg = '<li class="fl"><span>'+d.msg+'</span><time>'+d.create_time+'</time></li>';
+                    } else {
+                        d.msg = '<li class="fr"><span>'+d.msg+'</span><time>'+d.create_time+'</time></li>';
+                    }
+                    return d;
+                });
+            }
+        }
+    })
     
     $(function(){
         $('#submit').click(function(){

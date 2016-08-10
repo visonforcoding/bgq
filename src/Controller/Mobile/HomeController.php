@@ -336,17 +336,23 @@ class HomeController extends AppController {
             }
 
             public function myXiaomi(){
-                $NeedTable = \Cake\ORM\TableRegistry::get('need');
-                $where['OR'] = ['reply_id'=>$this->user->id, 'user_id'=>$this->user->id];
-                $res = $NeedTable->find()->where($where)->hydrate(false)->toArray();
-//                                debug($res);die;
-                if(!$res){
-                    $res = '';
-                }
                 $this->set([
                     'pageTitle' => '小秘书',
-                    'conversation' => $res,
                 ]);
+            }
+            
+            public function getXiaomi(){
+                $this->handCheckLogin();
+                if($this->request->is('post')){
+                    $NeedTable = \Cake\ORM\TableRegistry::get('need');
+                    $where['OR'] = ['reply_id'=>$this->user->id, 'user_id'=>$this->user->id];
+                    $res = $NeedTable->find()->where($where)->hydrate(false)->toArray();
+    //                                debug($res);die;
+                    if(!$res){
+                        $res = '';
+                    }
+                    return $this->Util->ajaxReturn(['status'=>true, 'data'=>$res]);
+                }
             }
 
         /**
