@@ -21,6 +21,10 @@ class ActivityChartController extends AppController {
         //待处理专家认证个数
     }
     
+    
+    /**
+     * 活动报名统计
+     */
     public function getApplyChart(){
         $date = $this->request->query('date');
         $date = date('Y-m-d H:i:s',  strtotime($date));
@@ -93,58 +97,107 @@ class ActivityChartController extends AppController {
         exit();
     }
     
+    
     /**
-     * 关注统计
+     * 点赞
      */
-    public function getMpChart(){
+   public function getPraiseChart(){
         $date = $this->request->query('date');
         $date = date('Y-m-d H:i:s',  strtotime($date));
         $type = $this->request->query('type');
         $connection = \Cake\Datasource\ConnectionManager::get('default');
         if($type=='month'){
             $sql = "select count(u.id) as nums,day(u.create_time) as time_item,date(u.create_time) as date
-                            from `user_fans` u where month(u.create_time) = month('".$date."')
+                            from `like_logs` u where u.type = 0 and month(u.create_time) = month('".$date."')
                             group by date(u.create_time)";
             $name = date('n',  strtotime($date)).'月';
         }
         if($type=='year'){
             $sql = "select count(u.id) as nums,month(u.create_time) as time_item
-                            from `user_fans` u where year(u.create_time) = year('".$date."')
+                            from `like_logs` u where u.type = 0 and year(u.create_time) = year('".$date."')
                             group by month(u.create_time)";
             $name = date('Y',  strtotime($date)).'年';
         }
         if($type=='week'){
             $sql = "select count(u.id) as nums,weekday(u.create_time) as time_item
-                            from `user_fans` u where week(u.create_time) = week('".$date."')
+                            from `like_logs` u where u.type = 0 and week(u.create_time) = week('".$date."')
                             group by weekday(u.create_time)";
             $name = date('Y',  strtotime($date)).'年第'.date('W',  strtotime($date)).'周';
         }
         $result = $connection->execute($sql)->fetchAll('assoc');
         $this->loadComponent('Echart');
-        $title['text'] = '用户赠名片统计';
-        echo $this->Echart->setLineChart($result,$type,$name,$title,'次');
+        $title['text'] = '资讯点赞统计';
+        echo $this->Echart->setLineChart($result,$type,$name,$title,'人次');
         exit();
     }
     
-    /**
-     * 用户行业分布
+    
+     /**
+     * 评论统计
      */
-    public function getIndustryPieChart(){
+    public function getCommentChart(){
+        $date = $this->request->query('date');
+        $date = date('Y-m-d H:i:s',  strtotime($date));
+        $type = $this->request->query('type');
         $connection = \Cake\Datasource\ConnectionManager::get('default');
-        $result = $connection->execute('select u.id,u.truename,i.name,count(u.id) as nums from `user` u
-                    left join user_industry ui
-                    on ui.user_id = u.id
-                    join industry i 
-                    on i.id = ui.industry_id
-                    where i.pid = 1
-                    group by i.id')->fetchAll('assoc');
+        if($type=='month'){
+            $sql = "select count(u.id) as nums,day(u.create_time) as time_item,date(u.create_time) as date
+                            from `activitycom` u where month(u.create_time) = month('".$date."')
+                            group by date(u.create_time)";
+            $name = date('n',  strtotime($date)).'月';
+        }
+        if($type=='year'){
+            $sql = "select count(u.id) as nums,month(u.create_time) as time_item
+                            from `activitycom` u where year(u.create_time) = year('".$date."')
+                            group by month(u.create_time)";
+            $name = date('Y',  strtotime($date)).'年';
+        }
+        if($type=='week'){
+            $sql = "select count(u.id) as nums,weekday(u.create_time) as time_item
+                            from `activitycom` u where week(u.create_time) = week('".$date."')
+                            group by weekday(u.create_time)";
+            $name = date('Y',  strtotime($date)).'年第'.date('W',  strtotime($date)).'周';
+        }
+        $result = $connection->execute($sql)->fetchAll('assoc');
         $this->loadComponent('Echart');
-        $name = '用户行业分布';
-        $title['text'] = '用户行业分布';
-        echo $this->Echart->setPieChart($result, $name,$title);
+        $title['text'] = '资讯评论统计';
+        echo $this->Echart->setLineChart($result,$type,$name,$title,'人次');
         exit();
     }
     
+    
+     /**
+     * 赞助
+     */
+    public function getSponsorChart(){
+        $date = $this->request->query('date');
+        $date = date('Y-m-d H:i:s',  strtotime($date));
+        $type = $this->request->query('type');
+        $connection = \Cake\Datasource\ConnectionManager::get('default');
+        if($type=='month'){
+            $sql = "select count(u.id) as nums,day(u.create_time) as time_item,date(u.create_time) as date
+                            from `sponsor` u where month(u.create_time) = month('".$date."')
+                            group by date(u.create_time)";
+            $name = date('n',  strtotime($date)).'月';
+        }
+        if($type=='year'){
+            $sql = "select count(u.id) as nums,month(u.create_time) as time_item
+                            from `sponsor` u where year(u.create_time) = year('".$date."')
+                            group by month(u.create_time)";
+            $name = date('Y',  strtotime($date)).'年';
+        }
+        if($type=='week'){
+            $sql = "select count(u.id) as nums,weekday(u.create_time) as time_item
+                            from `sponsor` u where week(u.create_time) = week('".$date."')
+                            group by weekday(u.create_time)";
+            $name = date('Y',  strtotime($date)).'年第'.date('W',  strtotime($date)).'周';
+        }
+        $result = $connection->execute($sql)->fetchAll('assoc');
+        $this->loadComponent('Echart');
+        $title['text'] = '资讯评论统计';
+        echo $this->Echart->setLineChart($result,$type,$name,$title,'人次');
+        exit();
+    }
     /**
      * 专家占比
      */
