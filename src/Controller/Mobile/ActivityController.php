@@ -134,7 +134,7 @@ class ActivityController extends AppController {
                     ->Activity
                     ->Activityapply
                     ->find()
-                    ->where(['user_id' => $this->user->id])
+                    ->where(['user_id' => $this->user->id, 'is_pass'=>1])
                     ->select(['activity_id'])
                     ->hydrate(false)
                     ->toArray();
@@ -655,7 +655,7 @@ class ActivityController extends AppController {
                             ->Activityapply
                             ->find()
                             ->contain(['Users'])
-                            ->where(['user_id' => $this->user->id])
+                            ->where(['user_id' => $this->user->id, 'is_pass' => 1])
                             ->hydrate(false)
                             ->toArray();
             foreach ($activityApply as $k => $v) {
