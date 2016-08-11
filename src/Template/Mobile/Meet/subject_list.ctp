@@ -12,15 +12,19 @@
     </div>
     <section>
         <ul class="d-list">
-            <?php foreach($subjects as $subject): ?>
-                <li>
-                    <a class="alink clearfix" href="/meet/subject-detail/<?=$subject->id?>">
-                    <h3><?=$subject->title?></h3>
-                    <span><?= $user->truename ?> <?= $user->company ?> <?= $user->position ?></span>
-                    <i class="iconfont"></i>
-                    </a>
-                </li>
-            <?php endforeach; ?>
+            <?php if($subjects): ?>
+                <?php foreach($subjects as $subject): ?>
+                    <li>
+                        <a class="alink clearfix" href="/meet/subject-detail/<?=$subject->id?>">
+                        <h3><?=$subject->title?></h3>
+                        <span><?= $user->truename ?> <?= $user->company ?> <?= $user->position ?></span>
+                        <i class="iconfont"></i>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <li>暂无话题</li>
+            <?php endif; ?>
         </ul>
     </section>
 </div>

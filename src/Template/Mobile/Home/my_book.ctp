@@ -7,8 +7,8 @@
 </header>
 <div class="wraper">
     <div class="inner my-home-menu" id="typeTab">
-        <span type="books" <?php if($savant_books == []): ?> class="active"<?php endif; ?>>我是顾客</span>
-        <span type="savant_books" <?php if($savant_books): ?> class="active"<?php endif; ?>>我是专家</span>
+        <span type="books" <?php if($savant_books == []): ?> class="active"<?php endif; ?>>我约见</span>
+        <span type="savant_books" <?php if($savant_books): ?> class="active"<?php endif; ?>>约见我</span>
     </div>
     <div  class="inner my-home-slidemenu" id="statusTab">
         <span status="1">待付款</span>

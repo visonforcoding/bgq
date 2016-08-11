@@ -5,7 +5,7 @@ namespace App\Controller\Mobile;
 use App\Controller\Mobile\AppController;
 
 /**
- * Meet Controller  专家约见栏目
+ * Meet Controller  会员约见栏目
  *
  * @property \App\Model\Table\UserTable $User Description
  * @property \App\Controller\Component\BusinessComponent $Business 通用业务处理组件
@@ -20,7 +20,7 @@ class MeetController extends AppController {
     protected $limit = '5'; // 分页条数
     
     /**
-     * Index method  专家约见首页
+     * Index method  会员约见首页
      *
      * @return \Cake\Network\Response|null
      */
@@ -101,11 +101,11 @@ class MeetController extends AppController {
     }
 
     /**
-     * 专家类别查看  eg:互联网、大消费
+     * 会员类别查看  eg:互联网、大消费
      * @param type $id 行业标签id
      */
     public function meetCat($id = null) {
-        //拥有该标签的所有专家
+        //拥有该标签的所有会员
         $savants = $this->User->find()
                         ->matching('Industries', function($q)use($id) {
                             return $q->where(['Industries.id' => $id])->orWhere(['pid' => $id]);
@@ -119,7 +119,7 @@ class MeetController extends AppController {
     }
 
     /**
-     * 专家详情页
+     * 会员详情页
      */
     public function view($id = null) {
         $self = false;
@@ -151,7 +151,7 @@ class MeetController extends AppController {
             'biggie' => $biggie,
             'isReco'=>$isReco,
             'self'=>$self,
-            'pageTitle'=>$biggie->truename.'的专家主页'
+            'pageTitle'=>$biggie->truename.'的会员主页'
         ]);
     }
 
@@ -232,7 +232,7 @@ class MeetController extends AppController {
 
 
     /**
-     * 专家简介编辑
+     * 会员简介编辑
      */
     public function editSummary(){
         $user_id =  $this->user->id;
@@ -372,7 +372,7 @@ class MeetController extends AppController {
      */
     public function search(){
         $this->set('search');
-        $this->set('pageTitle', '专家搜索');
+        $this->set('pageTitle', '会员搜索');
     }
 
     /**
@@ -534,7 +534,7 @@ class MeetController extends AppController {
     }
     
     /**
-     * 行业搜索专家页面
+     * 行业搜索会员页面
      * @param int $id 行业id
      */
     public function moreIndustries($id = ''){
@@ -577,7 +577,7 @@ class MeetController extends AppController {
     }
     
     /**
-     * ajax获取行业搜索专家结果
+     * ajax获取行业搜索会员结果
      */
     public function getIndustriesBiggie(){
         $data = $this->request->data();
@@ -645,7 +645,7 @@ class MeetController extends AppController {
     }
 
     /**
-     * 专家下拉加载更多
+     * 会员下拉加载更多
      * @param int $page 页数
      */
     public function getMoreBiggie($page){

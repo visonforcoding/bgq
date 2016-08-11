@@ -228,7 +228,7 @@ class HomeController extends AppController {
                 $user_id = $this->user->id;
                 $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
                 $followings = $FansTable->find()->contain(['Followings' => function($q) {
-                    return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
+                    return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans', 'level'])
                             ->where('enabled = 1')->contain(['Subjects']);
                 }])->hydrate(false)
                     ->where(['user_id' => $user_id])
@@ -249,7 +249,7 @@ class HomeController extends AppController {
                 $user_id = $this->user->id;
                 $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
                 $fans = $FansTable->find()->contain(['Users' => function($q) {
-                        return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
+                        return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans', 'level'])
                                 ->where('enabled = 1')->contain(['Subjects']);
                     }])->hydrate(false)
                         ->where(['following_id' => $user_id])

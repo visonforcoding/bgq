@@ -648,23 +648,6 @@ class ActivityController extends AppController {
      * @param int $page 分页
      */
     public function getMoreActivity($page) {
-        $isApply = [];
-        // 是否已报名
-        if ($this->user) {
-            $activityApply = $this->Activity
-                            ->Activityapply
-                            ->find()
-                            ->contain(['Users'])
-                            ->where(['user_id' => $this->user->id, 'is_pass' => 1])
-                            ->hydrate(false)
-                            ->toArray();
-            foreach ($activityApply as $k => $v) {
-                $isApply[] = $v['activity_id'];
-            }
-            $isApply = implode(',', $isApply);
-        }
-        $this->set('isApply', $isApply);
-        
         $activity = $this->Activity
                         ->find()
                         ->contain(['Users'=>function($q){

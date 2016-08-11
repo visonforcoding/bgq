@@ -32,7 +32,7 @@ class NewsController extends AppController {
         $news = $this->News->find()
                         ->contain(['Users'=>function($q){
                             return $q->where(['enabled'=>1]);
-                        }, 'Industries'])
+                        }, 'Newstags'])
                         ->select(['id', 'source', 'title', 'user_id', 'create_time', 'cover', 'comment_nums', 'praise_nums', 'summary', 'Users.id', 'Users.truename'])
                         ->where(['News.status'=>1])
                         ->page($page, $this->newslimit)
@@ -207,10 +207,10 @@ class NewsController extends AppController {
      * 资讯搜索
      */
     public function search($id=null) {
-        $industries = $this->News->Industries->find()->hydrate(false)->all()->toArray();
+        $newstags = $this->News->Newstags->find()->hydrate(false)->all()->toArray();
         $this->set([
             'pageTitle'=>'资讯搜索',
-            'industries'=>$industries,
+            'industries'=>$newstags,
             'id' => $id,
         ]);
     }
@@ -220,21 +220,21 @@ class NewsController extends AppController {
      */
     public function getSearchRes() {
         $data = $this->request->data();
-        $industry_id = $data['industry_id'];
+        $newstags_id = $data['newstags_id'];
         
         $res = $this
                 ->News
                 ->find()
                 ->where(['title LIKE' => '%' . $data['keyword'] . '%'])
                 ->Orwhere(['body LIKE' => '%' . $data['keyword'] . '%']);
-        if ($industry_id) {
+        if ($newstags_id) {
             $res = $res->matching(
-                'Industries', function($q)use($industry_id) {
-                    return $q->where(['Industries.id' => $industry_id]);
+                'Newstags', function($q)use($newstags_id) {
+                    return $q->where(['Newstags.id' => $newstags_id]);
                 }
             );
         } else {
-            $res = $res->contain(['Industries']);
+            $res = $res->contain(['Newstags']);
         }
         
         $res = $res->orderDesc('News.create_time'); // 默认按时间倒序排列
@@ -275,16 +275,16 @@ class NewsController extends AppController {
      */
     public function getMoreSearch($page){
         $data = $this->request->data();
-        $industry_id = $data['industry_id'];
+        $industry_id = $data['newstags_id'];
         $news = $this->News->find()->where(['title LIKE' => '%' . $data['keyword'] . '%']);
         if ($industry_id) {
             $news = $news->matching(
-                'Industries', function($q)use($industry_id) {
-                    return $q->where(['Industries.id' => $industry_id]);
+                'Newstags', function($q)use($industry_id) {
+                    return $q->where(['Newstags.id' => $industry_id]);
                 }
             )->contain(['Users']);
         } else {
-            $news = $news->contain(['Industries', 'Users']);
+            $news = $news->contain(['Newstags', 'Users']);
         }
         
         if ($data['sort']) {
@@ -408,12 +408,12 @@ class NewsController extends AppController {
         }
     }
     
-    public function getIndustry(){
-        $industries = $this->News->Industries->find()->hydrate(false)->all()->toArray();
-        $industry = [];
-        foreach($industries as $k=>$v){
+    public function getNewstags(){
+        $newstags = $this->News->Newstags->find()->hydrate(false)->all()->toArray();
+        $newstag = [];
+        foreach($newstags as $k=>$v){
             if($v['pid'] == 1){
-                $industry[] = [
+                $newstag[] = [
                     'id' => $v['id'],
                     'name' => $v['name'],
                 ];
@@ -421,7 +421,7 @@ class NewsController extends AppController {
         }
         return $this->Util->ajaxReturn([
             'status' => true,
-            'industries' => $industry,
+            'industries' => $newstag,
         ]);
     }
 }
