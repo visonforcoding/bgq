@@ -863,7 +863,7 @@ border-top:1px #e5e5e5 solid;line-height: 1rem;font-size:0;max-width: 750px;
 .my-home-slidemenu a,.my-home-slidemenu span{color:#9d9ea3;text-align: center;width:33%;display: inline-block;font-size:0.28rem;}
 .historyinfo{display: block;text-align: center;color:#7a7d82;height:0.4rem;font-size:0.3rem;}
 .datetime{font-size:0.26rem;}
-.systerm-info-box span{font-size:0.26rem;line-height:0.42rem;}
+.systerm-info-box span{font-size:0.26rem;line-height:0.42rem;color:#222;}
 .systerm-info-box h3{line-height: 0.42rem;}
 .expert-commond,.active-commond{background: #f0eff5;position: relative;margin-bottom:0.2rem;}
 .expert-commond:before,.active-commond:before{content:'专家推荐';color:#7a7e83;position: absolute;width:1.5rem;height:0.24rem;
