@@ -399,10 +399,10 @@ class UserController extends AppController {
         
         $this->loadComponent('Sms');
         $mobile = $this->request->data('phone');
-//        $user = $this->User->findByPhoneAndEnabled($mobile, 1)->first();
-//        if (!$user) {
-//            return $this->Util->ajaxReturn(['status' => false,'msg'=>'该用户不存在']);
-//        }
+        $user = $this->User->findByPhoneAndEnabled($mobile, 1)->first();
+        if ($user) {
+            return $this->Util->ajaxReturn(false, '该手机号已注册');
+        }
         $code = createRandomCode(4, 2); //创建随机验证码
         $content = '您的动态验证码为' . $code;
         $codeTable = \Cake\ORM\TableRegistry::get('smsmsg');

@@ -14,7 +14,7 @@
                 <a href="javascript:void(0);">
                     <span>姓名：</span>
                     <div>
-                        <input name="truename" type="text"  />
+                        <input name="truename" type="text" placeholder="请实名填写，姓名不可更改"  />
                     </div>
                 </a>
             </li>

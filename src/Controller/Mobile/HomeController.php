@@ -755,7 +755,10 @@ class HomeController extends AppController {
             'contain' => ['Educations', 'Careers']
         ]);
         if ($this->request->is('post')) {
-            $user = $this->User->patchEntity($user, $this->request->data());
+            $data['company'] = $this->request->data('company');
+            $data['gender'] = $this->request->data('gender');
+            $data['position'] = $this->request->data('position');
+            $user = $this->User->patchEntity($user, $data);
             if ($this->User->save($user)) {
                 return $this->Util->ajaxReturn(true, '保存成功');
             } else {
@@ -1089,6 +1092,43 @@ class HomeController extends AppController {
             'industries' => $industries,
             'pageTitle' => '选择行业标签'
         ));
+    }
+    
+    /**
+     * 编辑所在城市
+     */
+    public function editCity(){
+        $city = $this->User->find()->select(['city'])->where(['id'=>$this->user->id])->hydrate(false)->first();
+        $city = $city['city'];
+        if($city){
+            switch ($city){
+                case '北京':break;
+                case '上海':break;
+                case '广州':break;
+                case '深圳':break;
+                case '杭州':break;
+                case '重庆':break;
+                case '成都':break;
+                case '武汉':break;
+                default :$city = ['city'=>$city];
+            }
+        }
+        $this->set([
+            'pageTitle'=>'选择所在城市',
+            'city'=>$city
+        ]);
+    }
+    
+    public function saveCity(){
+        $city = $this->request->data('city');
+        $user = $this->User->get($this->user->id);
+        $user->city = $city;
+        $res = $this->User->save($user);
+        if($res){
+            return $this->Util->ajaxReturn(true, '保存成功');
+        } else {
+            return $this->Util->ajaxReturn(false, '保存失败');
+        }
     }
 
     /**

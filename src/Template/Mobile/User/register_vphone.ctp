@@ -72,6 +72,10 @@
         }
     });
     $('#submit').on('click', function () {
+        if($('input[name="vcode"]').val() == ''){
+            $.util.alert('请填写验证码');
+            return;
+        }
         $form = $('form');
         $.ajax({
             type: 'post',
