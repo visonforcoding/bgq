@@ -16,7 +16,7 @@
         <a href="javascript:void(0)" class="active" id="newFollow">新的关注<?php if ($unReadFollowCount): ?><i><?= $unReadFollowCount ?></i><?php endif; ?></a>
         <a href="javascript:void(0)" id="sysMes">系统消息<?php if ($unReadSysCount): ?><i><?= $unReadSysCount ?></i><?php endif; ?></a>
     </div>
-    <div id='follow' class="systerm-info-box"></div>
+    <ul id='follow' class="systerm-info-box"></ul>
 </div>
 <script type="text/html" id="fansTpl">
     <section class="internet-v-info no-margin-top">
@@ -45,7 +45,7 @@
             <span class='datetime'>{#create_time#}</span>
             </a>
         </div>
-        <a href="{#jump_url#}" class="a">查看详情</a>
+        <a href="{#jump_url#}" class="fr r-more">查看详情</a>
     </li>
 </script>
 <?php $this->start('script') ?>
