@@ -9,9 +9,9 @@
 
 <div class="wraper">
     <div class="my-focus-box">
-                <div class='inner my-search'>
-                    <a href='#this' class='toback iconfont news-serch'>&#xe618;</a>
-                    <form id="searchForm" style="width: 100%" >
+                <div class='h-news-search'>
+                    <a href='#this' class='iconfont news-serch'>&#xe618;</a>
+                    <form id="searchForm">
                         <h1><input type="text" name="keyword" placeholder="请输入关键词" value="" /></h1>
                         <input type="hidden" name="resend" value="2" />
                     </form>
