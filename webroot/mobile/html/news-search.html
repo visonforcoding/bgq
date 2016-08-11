@@ -10,7 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
 		<script src="../js/view.js"></script>
-		<script src="../js/zepto.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<header>
@@ -30,7 +30,7 @@
 				<div class="a-s-title">
 					<span class="orgname">并购沙龙系列</span>
 				</div>
-				<ul	class="a-s-mark s-width">
+				<ul	class="a-s-mark">
 					<li><a href="#this" class="active">并购沙龙系列</a></li>
 					<li><a href="#this">上市公司系列</a></li>
 					<li><a href="#this">菁英下午茶系列</a></li>
@@ -47,15 +47,13 @@
 			
 		</div>
 	<script type="text/javascript">
-		$('.a-s-title .orgname').on('touchstart',function(){
+		$('.a-s-title .orgname').on('tap',function(){
 			$(this).toggleClass('active');
 //			$('.a-s-mark').toggleClass('disp');
-			if($('.a-s-mark').hasClass('disp')){
-				$('.a-s-mark').removeClass('disp').addClass('nblock');
-			}else if($('.a-s-mark').hasClass('nblock')){
-				$('.a-s-mark').removeClass('nblock').addClass('disp');
+			if($('.a-s-mark').hasClass('a-s-width')){
+				$('.a-s-mark').removeClass('a-s-width');
 			}else{
-				$('.a-s-mark').addClass('disp');
+				$('.a-s-mark').addClass('a-s-width');
 			}
 		})
 	</script>
