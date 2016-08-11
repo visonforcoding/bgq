@@ -37,9 +37,22 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">行业标签</label>
+        <div class="col-md-8">
+            <?= $this->cell('Industry') ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">专家推荐</label>
         <div class="col-md-8">
             <?= $this->cell('Savant') ?>
+            <span class="notice">(*最多只能选4个)</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">资讯标签</label>
+        <div class="col-md-8">
+            <?= $this->cell('Newstag') ?>
         </div>
     </div>
     <div class="form-group">
@@ -62,12 +75,6 @@
             <div style="color:red">请上传宽为690，高小于388的封面图</div>
             <input name="cover"  type="hidden"/>
             <div id="cover" class="jqupload">上传</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">行业标签</label>
-        <div class="col-md-8">
-            <?= $this->cell('Industry::news') ?>
         </div>
     </div>
     <div class="form-group">
@@ -107,6 +114,7 @@
 <script src="/wpadmin/lib/ueditor/ueditor.all.js" ></script>
 <script src="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>
 <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
+<script src="/wpadmin/lib/select2/js/i18n/zh-CN.js" ></script>
 <script>
     $(function () {
         initJqupload('cover', '/wpadmin/util/doUpload?dir=newscover', 'jpg,png,gif,jpeg'); //初始化图片上传
@@ -121,7 +129,19 @@
             language: "zh-CN",
             placeholder: '选择一个标签',
         });
-        $('#select-savant').select2({
+        $('#select-newstag').select2({
+            language: "zh-CN",
+            placeholder: '选择一个资讯标签',
+        });
+        $('#select-industry').on('change', function (evt) {
+            var selOption = $('#select-industry').val();
+            var changIds = [];
+            $.get('/admin/savant/get-random-savants', {'tags': selOption}, function (res) {
+                changIds = res.ids;
+                savantSelect2.val(changIds).trigger('change'); //set the value
+            }, 'json');
+        });
+        var savantSelect2 = $('#select-savant').select2({
             language: "zh-CN",
             placeholder: '选择一个专家',
             maximumSelectionLength: 4
@@ -133,12 +153,12 @@
         $('form').submit(function () {
             var user_id = $('#select-user').val();
             var source = $('#source').val();
-            if(user_id&&source){
-                layer.alert('作者和来源只能填一个',{icon:5});
+            if (user_id && source) {
+                layer.alert('作者和来源只能填一个', {icon: 5});
                 return false;
             }
-            if(!user_id&&!source){
-                layer.alert('作者和来源必须填一个',{icon:5});
+            if (!user_id && !source) {
+                layer.alert('作者和来源必须填一个', {icon: 5});
                 return false;
             }
             var form = $(this);

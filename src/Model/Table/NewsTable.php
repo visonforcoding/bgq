@@ -43,6 +43,12 @@ class NewsTable extends Table {
             'foreignKey' => 'news_id',
             'targetForeignKey' => 'industry_id'
         ]);
+        $this->belongsToMany('Newstags', [
+            'className' => 'Newstag',
+            'joinTable' => 'news_newstag',
+            'foreignKey' => 'news_id',
+            'targetForeignKey' => 'tag_id'
+        ]);
         
         $this->belongsToMany('Savants', [
             'className' => 'User',

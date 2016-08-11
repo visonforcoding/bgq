@@ -550,4 +550,31 @@ ALTER TABLE `subject_book`
 
 #8月8日
 ALTER TABLE `activity`
-	CHANGE COLUMN `time` `time` DATE NOT NULL COMMENT '活动时间（3.2~4.1）' AFTER `title`;	
+	CHANGE COLUMN `time` `time` DATE NOT NULL COMMENT '活动时间（3.2~4.1）' AFTER `title`;
+
+
+
+#8月11日
+CREATE TABLE `news_newstag` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`news_id` INT(11) NOT NULL DEFAULT '0',
+	`tag_id` INT(11) NOT NULL DEFAULT '0',
+	PRIMARY KEY (`id`)
+)
+COMMENT='资讯对应标签表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `newstag` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(50) NOT NULL DEFAULT '',
+	PRIMARY KEY (`id`)
+)
+COMMENT='资讯标签'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=15
+;
+

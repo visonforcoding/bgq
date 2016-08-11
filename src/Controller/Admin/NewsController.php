@@ -149,6 +149,8 @@ class NewsController extends AppController {
         $query = $this->News->find();
         $query->contain(['Users', 'Industries' => function($q) {
                 return $q->hydrate(false)->select(['name']);
+            },'Newstags'=>function($q){
+                return $q->hydrate(false)->select(['name']);
             }]);
 
         if (!empty($industry['_ids'][0])) {

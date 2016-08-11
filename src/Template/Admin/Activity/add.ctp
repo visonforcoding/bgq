@@ -18,6 +18,12 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">专家推荐</label>
+        <div class="col-md-8">
+            <?= $this->cell('Savant') ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">作者</label>
         <div class="col-md-8">
             <?= $this->cell('User', [[$activity->user_id]]) ?>
@@ -43,7 +49,7 @@
         <label class="col-md-2 control-label">活动时间</label>
         <div class="col-md-3">
             <?php
-            echo $this->Form->input('time', ['label' => false,'type'=>'text', 'class' => 'datetimepicker form-control']);
+            echo $this->Form->input('time', ['label' => false, 'type' => 'text', 'class' => 'datetimepicker form-control']);
             ?>
         </div>
     </div>
@@ -51,7 +57,7 @@
         <label class="col-md-2 control-label">报名截止时间</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('apply_end_time', ['label' => false,'type'=>'text', 'class' => 'form-control datetimepicker']);
+            echo $this->Form->input('apply_end_time', ['label' => false, 'type' => 'text', 'class' => 'form-control datetimepicker']);
             ?>
         </div>
     </div>
@@ -75,7 +81,7 @@
         <label class="col-md-2 control-label">规模</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('scale', ['label' => false,'type'=>'text', 'class' => 'form-control']);
+            echo $this->Form->input('scale', ['label' => false, 'type' => 'text', 'class' => 'form-control']);
             ?>
         </div>
     </div>
@@ -86,16 +92,11 @@
             <label class="radio-inline"> <input name="must_check" value="1"   type="radio"> 需要 </label>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">专家推荐</label>
-        <div class="col-md-8">
-            <?= $this->cell('Savant') ?>
-        </div>
-    </div>
+
     <div class="form-group">
         <label class="col-md-2 control-label">活动推荐</label>
         <div class="col-md-8">
-            <?=$this->cell('ActivityRecommend')?>
+            <?= $this->cell('ActivityRecommend') ?>
         </div>
     </div>
     <div class="form-group">
@@ -200,10 +201,9 @@
             placeholder: '选择一位专家'
         });
         $('#select-industry').on('change', function (evt) {
-            var selOption = industrySelect2.val();
+            var selOption = $('#select-industry').val();
             var changIds = [];
             $.get('/admin/savant/get-random-savants', {'tags': selOption}, function (res) {
-                console.log(res);
                 changIds = res.ids;
                 savantSelect2.val(changIds).trigger('change'); //set the value
             }, 'json');
