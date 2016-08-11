@@ -13,7 +13,7 @@
             
     </div>-->
     <div class="dialogue" id='xiaomi'>
-        <ul id="content">
+        <ul id="msgContent">
             
         </ul>
     </div>
@@ -39,7 +39,7 @@
         url: '/home/get-xiaomi',
         func: function(res){
             if(res.status){
-                $.util.dataToTpl('content', 'tpl', res.data, function(d){
+                $.util.dataToTpl('msgContent', 'tpl', res.data, function(d){
                     if(d.reply_id){
                         d.msg = '<li class="fl"><span>'+d.msg+'</span><time>'+d.create_time+'</time></li>';
                     } else {
