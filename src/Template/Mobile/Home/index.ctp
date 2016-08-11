@@ -54,7 +54,6 @@
         <ul class="clearfix">
             {#savant#}
             <li><a href="javascript:QRCode();"><i class="iconfont">&#xe60a;</i>扫一扫</a></li>
-            {#findSavant#}
         </ul>
     </div>
     
@@ -124,13 +123,10 @@
                 var ico = $('#icoTpl').text();
                 if(res.data.user.level == 2) {
                     savant = '<li><a href="/home/my-purse"><i class="iconfont">&#xe620;</i>钱包</a></li>';
-                    html += '<div class="h-home-menu"><ul class="clearfix"><li><a href="/meet/view/' + res.data.user.id + '"><i class="iconfont">&#xe621;</i>专家主页</a></li><li><a href="/home/search-savant"><i class="iconfont">&#xe626;</i>找同行</a></li></ul></div>';
                     user = user.replace('{#v#}','<i class="v"></i>');
-                    html = html.replace('{#findSavant#}', '');
                     ico = ico.replace('{#search_savant#}', '<li><a href="/home/search-savant"><i class="iconfont">&#xe626;</i>找同行</a></li>');
                 } else {
-                    savant = '<li><a href="/home/savant-auth"><i class="iconfont">&#xe623;</i>专家认证</a></li>';
-                    html = html.replace('{#findSavant#}', '<li><a href="/home/search-savant"><i class="iconfont">&#xe626;</i>找同行</a></li><li></li>');
+                    savant = '<li><a href="/home/savant-auth"><i class="iconfont">&#xe623;</i>会员认证</a></li>';
                     user = user.replace('{#v#}', '');
                     ico = ico.replace('{#search_savant#}', '');
                 }
