@@ -19,7 +19,7 @@
         <form id="reg-form" action="" method="post">
             <ul>
                 <input name="card_path" type="hidden"/>
-                <li>姓名：<span class='infocard'><input type="text" name="truename"  /></span></li>
+                <li>姓名：<span class='infocard'><input type="text" name="truename" placeholder="请实名填写，姓名不可更改" /></span></li>
                 <li>公司：<span class='infocard'><input type="text" name="company"  /></span></li>
                 <li>职务：<span class='infocard'><input type="text" name="position"  /></span></li>
                 <!--<li>联系电话：<span class='infocard'><input type="text" name="phone" placeholder="13806159876" /></span></li>-->

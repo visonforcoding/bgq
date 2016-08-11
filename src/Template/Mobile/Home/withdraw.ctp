@@ -9,7 +9,7 @@
         <li class="no-right-ico">
             <span>姓名：</span>
             <div>
-                <input type="text"  value="<?=$userInfo->truename?>" />
+                <input type="text"  value="<?=$userInfo->truename?>" readonly />
             </div>
         </li>
         <li class="no-right-ico">

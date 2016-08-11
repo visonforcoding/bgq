@@ -24,14 +24,14 @@
                 </div>
             </a>
         </li>
-        <li class="no-right-ico">
+<!--        <li class="no-right-ico">
             <a href="javascript:void(0)">
                 <span>姓名：</span>
                 <div>
-                    <input type="truename" name="truename" value="<?=$user->truename?>" />
+                    <input type="truename" name="truename" value="<?=$user->truename?>" readonly />
                 </div>
             </a>
-        </li>
+        </li>-->
         <li class="no-right-ico">
             <a href="javascript:void(0)">
                 <span>公司：</span>
@@ -62,7 +62,7 @@
             </a>
         </li>
     </ul>
-    <ul class="h-info-box e-info-box">
+<!--    <ul class="h-info-box e-info-box">
         <li class="no-right-ico">
             <a href="javascript:void(0)">
                 <span>联系电话：</span>
@@ -71,15 +71,15 @@
                 </div>
             </a>
         </li>
-<!--        <li class="no-right-ico">
+        <li class="no-right-ico">
             <a href="javascript:void(0)">
                 <span>邮箱：</span>
                 <div>
                     <input type="email" name="email" value="<?=$user->email?>" />
                 </div>
             </a>
-        </li>-->
-    </ul>
+        </li>
+    </ul>-->
     <ul class="h-info-box e-info-box">
         <li>
             <a href="/home/edit_industries">
@@ -89,11 +89,11 @@
                 </div>
             </a>
         </li>
-        <li class="no-right-ico">
-            <a href="javascript:void(0)">
+        <li>
+            <a href="/home/edit-city">
                 <span>所在地：</span>
                 <div>
-                    <input name="city" type="text"  value="<?=$user->city?>" />
+                    <span></span>
                 </div>
             </a>
         </li>
