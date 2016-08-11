@@ -8,9 +8,9 @@
      </div>
             
     <div class="my-focus-box">
-        <div class='inner my-search'>
-            <a href='javascript:void(0)' class='toback iconfont news-serch'>&#xe601;</a>
-            <form id="searchForm" style="width: 100%" >
+        <div class='h-news-search'>
+            <a href='javascript:void(0)' class='iconfont news-serch'>&#xe601;</a>
+            <form id="searchForm">
             <h1><input type="text" name="keyword" placeholder="请输入关键词" value=""></h1>
             <input type="hidden" name="type" value="1" id="type" />
             </form>
