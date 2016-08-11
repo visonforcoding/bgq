@@ -67,6 +67,10 @@ button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);border:none;background:
 
 .wraper .f-color-gray{color:#bbc0c6;font-size:0.28rem;line-height: 0.32rem;}
 .wraper .f-color-black{color:#222c38;}
+.wraper .col-g{color:#22a69f;}
+.wraper .col-o{color:#f06c27;}
+.wraper .col-lg{color:#6baf44;}
+.wraper .col-y{color:#fdb94d;}
 .wraper .bgff{background: #fff;}
 .wraper .ft26{font-size:0.26rem;}
 .wraper .mt0{margin-top:0;}
