@@ -65,6 +65,9 @@
     </div>
     <div id='biggie'></div>
     <div id="buttonLoading" class="loadingbox"></div>
+    <div class="submitbtn">
+        <a href="/home/savant_auth"><span class="s-activ">会员<br>认证</span></a>
+    </div>
 </div>
 <script type='text/html' id='biggie_tpl'>
     <section class="internet-v-info">

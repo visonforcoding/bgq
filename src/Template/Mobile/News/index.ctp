@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="sec-b-r">
-                {#industries_html#}
+                {#newstags_html#}
             </div>
         </div>
     </section>
@@ -92,7 +92,7 @@
                 d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                 d.author = '<span><img src="'+ d.avatar +'"/></span>' + d.user.truename;
             }
-            d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
+            d.newstags = $.util.dataToTpl('', 'subTpl', d.newstags);
             d.cover = d.thumb ? d.thumb : d.cover;
             return d;
         });

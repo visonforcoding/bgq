@@ -13,17 +13,17 @@
     <section>
         <ul class="m-detail">
             <li class='mtitle'>
-                <h3><?=$subject->title?><span class='m-block'><?=$subject->user->truename?> <?=$subject->user->company?> <?=$subject->user->position?></span></h3>
+                <h3><?= $subject->title ?><span class='m-block'><?= $subject->user->truename ?> <?= $subject->user->company ?> <?= $subject->user->position ?></span></h3>
 <!--                <span class="meet-type">
                 </span>-->
             </li>
-            <li>
-                <span><?=$subject->price?>元/次</span>
-                <span class="fr">约<?=$subject->last_time?>小时</span>
-            </li>
+            <!--            <li>
+                            <span><?= $subject->price ?>元/次</span>
+                            <span class="fr">约<?= $subject->last_time ?>小时</span>
+                        </li>-->
             <li>
                 <h3 class="t-tittle">话题简介</h3>
-                <p><?=$subject->summary?>
+                <p><?= $subject->summary ?>
                 </p>
             </li>
             <li>
@@ -47,17 +47,17 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
-    $('.nextstep').on('tap', function(){
-        if($(this).attr('user_id') == ''){
+    $('.nextstep').on('tap', function () {
+        if ($(this).attr('user_id') == '') {
             $.util.alert('请先登录');
-            setTimeout(function(){
-                location.href = '/user/login?redirect_url=/meet/subject-detail/<?=$subject->id?>';
-            },2000);
+            setTimeout(function () {
+                location.href = '/user/login?redirect_url=/meet/subject-detail/<?= $subject->id ?>';
+            }, 2000);
         } else {
-            location.href = '/meet/book/<?=$subject->id?>';
+            location.href = '/meet/book/<?= $subject->id ?>';
         }
     });
-    
+
 </script>
 <?php
 $this->end('script');

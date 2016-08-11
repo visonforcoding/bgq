@@ -4,13 +4,13 @@
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe618;</a>
         <form id="searchForm" >
         <h1><input type="text" placeholder="请输入关键词" name="keyword"></h1>
-        <input type="hidden" name="industry_id" value="" />
+        <input type="hidden" name="newstag_id" value="" />
         </form>
         <div class='h-regiser' id="doSearch" >搜 索</div>
     </div>
     <div class="markbox">
         <div class="a-s-title">
-            <span class="orgname active">选择行业标签</span>
+            <span class="orgname active">选择标签</span>
         </div>
         <ul class="a-s-mark s-width" id="industry">
         </ul>
@@ -42,19 +42,14 @@
 <!--<script src="/mobile/js/news_search.js"></script>-->
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
-    var a = <?= $id?>+'.';
-    if( a === '.'){
-        window.sid = '';
-    }else {
-        window.sid = a;
-    }
+    window.sid = '<?= $id ?>';
 </script>
 <script>
     var search_data = {};
     function industryTap(em){
         if($(em).hasClass('active')){
             $(em).removeClass('active');
-            $('input[name="industry_id"]').val('');
+            $('input[name="newstag_id"]').val('');
             return;
         }
         $('.orgname').text($(em).text());
@@ -109,11 +104,11 @@
     $.ajax({
         type: 'POST',
         dataType: 'json',
-        url: "/news/getIndustry",
+        url: "/news/get-newstags",
         success: function (msg) {
             if(msg.status){
                 $.util.dataToTpl('industry', 'industryTpl', msg.industries, function(d){
-                    if(window.sid !== '.'){
+                    if(window.sid){
                         if(d.id == window.sid){
                             d.default = 'default';
                         }
