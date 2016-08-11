@@ -51,6 +51,11 @@ $pk = "\$$singularVar->{$primaryKey[0]}";
 %>
 <head>
     <link rel="stylesheet" type="text/css" href="/wpadmin/lib/zui/css/zui.min.css"/>
+    <style>
+        th{
+            width:120px;
+        }
+    </style>
 </head>
 <body>
 <div class="<%= $pluralVar %> view large-9 medium-8 columns content">
@@ -61,7 +66,7 @@ $pk = "\$$singularVar->{$primaryKey[0]}";
     }
 %>    
 <% $fieldData = $schema->column($field); %>
-    <tr class="<%=randColor();%>">
+    <tr>
         <th><%=$fieldData['comment']?$fieldData['comment']:$field%></th>
         <td><?= h($<%= $singularVar %>-><%= $field %>) ?></td>
     </tr>

@@ -30,7 +30,7 @@ class ProjrongController extends AppController {
     public function view($id = null) {
         $this->viewBuilder()->autoLayout(false);
         $projrong = $this->Projrong->get($id, [
-            'contain' => ['Users', 'tags']
+            'contain' => ['Users', 'Industries']
         ]);
         $this->set('projrong', $projrong);
         $this->set('_serialize', ['projrong']);

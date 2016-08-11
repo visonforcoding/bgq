@@ -34,6 +34,12 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">专家推荐</label>
+        <div class="col-md-8">
+            <?= $this->cell('Savant', [$selSavantIds]); ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">主办单位</label>
         <div class="col-md-8">
             <?php
@@ -53,7 +59,7 @@
         <label class="col-md-2 control-label">活动时间</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('time', ['label' => false,'type'=>'text', 'class' => 'datepicker form-control']);
+            echo $this->Form->input('time', ['label' => false, 'type' => 'text', 'class' => 'datepicker form-control']);
             ?>
         </div>
     </div>
@@ -118,12 +124,6 @@
         <div class="col-md-8">
             <label class="radio-inline"> <input name="must_check" value="0" <?php if ($activity->must_check == 0): ?> checked="checked"<?php endif; ?>  type="radio"> 不需要</label>
             <label class="radio-inline"> <input name="must_check" value="1" <?php if ($activity->must_check == 1): ?> checked="checked"<?php endif; ?>  type="radio"> 需要 </label>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">专家推荐</label>
-        <div class="col-md-8">
-            <?= $this->cell('Savant', [$selSavantIds]); ?>
         </div>
     </div>
     <div class="form-group">
@@ -226,7 +226,15 @@
             language: "zh-CN",
             placeholder: '选择一个标签'
         });
-        $('#select-savant').select2({
+        $('#select-industry').on('change', function (evt) {
+            var selOption = $('#select-industry').val();
+            var changIds = [];
+            $.get('/admin/savant/get-random-savants', {'tags': selOption}, function (res) {
+                changIds = res.ids;
+                savantSelect2.val(changIds).trigger('change'); //set the value
+            }, 'json');
+        });
+        var savantSelect2 = $('#select-savant').select2({
             language: "zh-CN",
             placeholder: '选择一位专家'
         });

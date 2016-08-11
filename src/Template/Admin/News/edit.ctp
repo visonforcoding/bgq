@@ -7,8 +7,8 @@
     <?= $this->Form->create($news, ['class' => 'form-horizontal']) ?>
     <div class="form-group">
         <label class="col-md-2 control-label">作者</label>
-          <div class="col-md-8">
-            <?= $this->cell('User',[[$news->user_id]]) ?>
+        <div class="col-md-8">
+            <?= $this->cell('User', [[$news->user_id]]) ?>
         </div>
     </div>
     <div class="form-group">
@@ -37,9 +37,16 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">行业标签</label>
+        <div class="col-md-8">
+            <?= $this->cell('Industry::news', [$selIndustryIds]) ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">专家推荐</label>
         <div class="col-md-8">
             <?= $this->cell('Savant', [$selSavantIds]) ?>
+            <span class="notice">(*最多选择4个)</span>
         </div>
     </div>
     <div class="form-group">
@@ -73,12 +80,6 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">行业标签</label>
-        <div class="col-md-8">
-            <?= $this->cell('Industry::news', [$selIndustryIds]) ?>
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-md-2 control-label">内容</label>
         <div class="col-md-8">
             <script name='body' id='content' rows='3' type="text/plain" class='form-control-editor'><?= $news->body ?></script>
@@ -109,6 +110,7 @@
 <script src="/wpadmin/lib/ueditor/ueditor.all.js" ></script>
 <script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>
 <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
+<script src="/wpadmin/lib/select2/js/i18n/zh-CN.js" ></script>
 <script>
     $(function () {
         initJqupload('cover', '/wpadmin/util/doUpload?dir=newscover', 'jpg,png,gif,jpeg'); //初始化图片上传
@@ -124,7 +126,8 @@
         });
         $('#select-savant').select2({
             language: "zh-CN",
-            placeholder: '选择一个标签'
+            placeholder: '选择一个标签',
+            maximumSelectionLength: 4
         });
         $('#title').keyup(function () {
             var len = $(this).val().length;

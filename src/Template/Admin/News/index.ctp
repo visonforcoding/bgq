@@ -46,7 +46,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['作者', '标题', '行业标签', '阅读数', '点赞数', '评论数', '状态', '创建时间', '更新时间', '操作'],
+                                ['作者', '标题', '行业标签','资讯标签', '阅读数', '点赞数', '评论数', '状态', '创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     if (!cellvalue) {
@@ -57,6 +57,13 @@
                                 }},
                             {name: 'title', editable: true, align: 'center'},
                             {name: 'industries', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
+                                    var industries_arr = [];
+                                    $.each(cellvalue, function (i, n) {
+                                        industries_arr.push(n.name);
+                                    })
+                                    return industries_arr.join(',');
+                                }},
+                            {name: 'newstags', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     var industries_arr = [];
                                     $.each(cellvalue, function (i, n) {
                                         industries_arr.push(n.name);

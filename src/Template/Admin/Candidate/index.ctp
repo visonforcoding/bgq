@@ -39,7 +39,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['招聘公司','招聘职位', '姓名', '生日', '电话', '邮箱', '地址', '期望薪水', '创建时间', '更新时间', '操作'],
+                                ['应聘公司','应聘职位', '姓名', '生日', '电话', '邮箱', '地址', '期望薪水', '创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'job.company', editable: true, align: 'center'},
                             {name: 'job.position', editable: true, align: 'center'},
@@ -135,7 +135,7 @@
                         title: '查看详情',
                         shadeClose: true,
                         shade: 0.8,
-                        area: ['380px', '70%'],
+                        area: ['45%', '70%'],
                         content: url//iframe的url
                     });
                 }
