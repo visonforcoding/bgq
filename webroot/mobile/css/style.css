@@ -398,7 +398,7 @@ line-height: .34rem;height:.34rem;}
 .vipinfo span.job{line-height: 0.4rem;}
 .vipinfo span.c-info{line-height: 0.3rem;display: block;}
 .vipinfo .mark a{border:1px #969fa9 solid;border-radius: 0.1rem;line-height: 0.32rem;font-size:0.26rem;color:#969fa9;padding:0 0.1rem;display:inline-block;}
-.vipinfo .bgblue a{background: #4285f4;color:#fff;border:none;padding:0.06rem 0.1rem;display:inline-block;}
+.vipinfo .bgblue a{background: #4285f4;color:#fff;border:none;padding:0.06rem 0.1rem;display:inline-block;margin-bottom:.05rem;}
 .meetnum{font-size:0.28rem;color:#969fa9;}
 .f-info{border-top:1px #e5e5e5 solid;line-height: .86rem;overflow:hidden; font-size:.28rem;}
 .f-box{padding:0 .3rem;margin-top:.1rem;}
