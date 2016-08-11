@@ -24,7 +24,6 @@ class SavantTable extends Table
     public function initialize(array $config)
     {
         parent::initialize($config);
-
         $this->table('savant');
         $this->displayField('id');
         $this->primaryKey('id');

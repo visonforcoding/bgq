@@ -1,6 +1,4 @@
-<?php
-
-$this->start('static') ?>   
+<?php $this->start('static') ?>   
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
 <?php $this->end() ?> 
@@ -14,8 +12,8 @@ $this->start('static') ?>
                 <label for="keywords">类型</label>
                 <select class="form-control" name="type" id="keywords">
                     <option value=''>全部</option>
-                    <?php foreach ($types as $key=>$type): ?>
-                    <option value="<?=$key?>"><?=$type?></option>
+<?php foreach ($types as $key => $type): ?>
+                        <option value="<?= $key ?>"><?= $type ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -52,14 +50,14 @@ $this->start('static') ?>
                         colNames:
                                 ['类型', '链接地址', '备注说明', '创建时间', '操作'],
                         colModel: [
-                            {name: 'type', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
-                                    var types = {'1':'资讯','2':'活动','3':'大咖'};
+                            {name: 'type', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
+                                    var types = {'1': '资讯', '2': '活动', '3': '大咖'};
                                     return types[cellvalue];
-                            }},
+                                }},
                             {name: 'url', editable: true, align: 'center'},
                             {name: 'remark', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
-                            {name: 'actionBtn', viewable: false, sortable: false, formatter: actionFormatter}],
+                            {name: 'actionBtn',align:'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: 30,
                         rowList: [10, 20, 30],
@@ -117,9 +115,9 @@ $this->start('static') ?>
                 }
 
                 function actionFormatter(cellvalue, options, rowObject) {
-                    response = '<button onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-trash"></i> 删除</button>';
-                    response += '<button onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-eyes"></i> 查看图片</button>';
-                    response += '<a href="/admin/banner/edit/' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini"><i class="icon icon-pencil"></i> 修改</a>';
+                    response = '<a onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn"><i class="icon icon-trash"></i></a>';
+                    response += '<a onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn"><i class="icon icon-eye-open"></i></a>';
+                    response += '<a href="/admin/banner/edit/' + rowObject.id + '" class="grid-btn"><i class="icon icon-pencil"></i></a>';
                     return response;
                 }
 

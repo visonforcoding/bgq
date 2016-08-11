@@ -480,4 +480,17 @@ class ActivityController extends AppController {
             }
         }
     }
+    
+    /**
+     * 查看收藏
+     */
+    public function viewCollect($id=null){
+        $this->set('id', $id);
+        $type = $this->request->query('type');
+        if($type){
+            $this->set([
+                'type'=>$type
+            ]);
+        }
+    }
 }
