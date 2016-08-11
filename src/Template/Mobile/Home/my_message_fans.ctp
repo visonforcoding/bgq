@@ -45,7 +45,7 @@
             <span class='datetime'>{#create_time#}</span>
             </a>
         </div>
-        <a href="{#jump_url#}" class="fr r-more">查看详情</a>
+        <a href="{#jump_url#}" class="fr r-more">查看详情<i class="iconfont">&#xe667;</i></a>
     </li>
 </script>
 <?php $this->start('script') ?>
