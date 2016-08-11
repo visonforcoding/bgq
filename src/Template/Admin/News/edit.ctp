@@ -50,6 +50,12 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">资讯标签</label>
+        <div class="col-md-8">
+            <?= $this->cell('Newstag',[$selNewstagsIds]) ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">缩略图</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
@@ -123,6 +129,10 @@
         $('#select-industry').select2({
             language: "zh-CN",
             placeholder: '选择一个标签'
+        });
+        $('#select-newstag').select2({
+            language: "zh-CN",
+            placeholder: '选择一个资讯标签',
         });
         $('#select-savant').select2({
             language: "zh-CN",

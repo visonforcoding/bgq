@@ -69,7 +69,7 @@ class NewsController extends AppController {
      */
     public function edit($id = null) {
         $news = $this->News->get($id, [
-            'contain' => ['Industries', 'Savants']
+            'contain' => ['Industries', 'Savants','Newstags']
         ]);
         if ($this->request->is(['post', 'put'])) {
             $news = $this->News->patchEntity($news, $this->request->data);
@@ -96,8 +96,14 @@ class NewsController extends AppController {
                 $selSavantIds[] = $savant->id;
             }
         }
-        $this->set(compact('news'));
-        $this->set(compact('news', 'selIndustryIds', 'selSavantIds'));
+        // 资讯标签
+        $selNewstagsIds = [];
+        if ($news->newstags) {
+            foreach ($news->newstags as $newstag) {
+                $selNewstagsIds[] = $newstag->id;
+            }
+        }
+        $this->set(compact('news', 'selIndustryIds', 'selSavantIds','selNewstagsIds'));
     }
 
     /**
