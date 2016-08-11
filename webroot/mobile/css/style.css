@@ -805,7 +805,7 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .pay-detail{width:100%;background: #fff;}
 .pay-detail h3{font-size:0.3rem;}
 .pay-detail li:nth-of-type(1){font-size:0.3rem;}
-.pay-detail li,.systerm-info-box li{display: flex;align-items: center; justify-content:space-between;border-bottom:1px #e5e5e5 solid;padding:0.2rem 0.3rem;}
+.pay-detail li{display: flex;align-items: center; justify-content:space-between;border-bottom:1px #e5e5e5 solid;padding:0.2rem 0.3rem;}
 .pay-detail div>*{display: block;line-height: 0.4rem;}
 .pay-detail div span{font-size:0.26rem;color:#222c38;}
 .pay-detail div i{color:#9ba4ad;font-size:0.2rem;}
@@ -831,11 +831,13 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .m-message-top a{position:relative;}
 .m-message-top a i{display: block;width:15px;height:15px;background: #e01a48;position:absolute;border-radius: 50%;line-height: 14px;text-align: center;color:#fff;right:0.8rem;top:0.06rem;font-size:12px;}
 .m-message-top a.active i{background: #fff;color:#d52457}
-.systerm-info-box li{margin-top:0.2rem;border-top:1px #e5e5e5 solid;background: #fff;}
+.systerm-info-box li{margin-top:0.2rem;border-top:1px #e5e5e5 solid;background: #fff;border-bottom: 1px #e5e5e5 solid;padding: 0.2rem 0.3rem;overflow: hidden;}
 .systerm-info-box li h3{font-size:0.28rem;color:#da1f50;}
 .systerm-info-box li span:last-of-type{display: block;color:#969fa9;}
-.systerm-info-box li div{width:75%;}
-.systerm-info-box li .a{display: block;background: url(img/right.png) no-repeat right center;background-size: 0.16rem 0.28rem;font-size:0.28rem;padding-right:0.3rem;}
+.systerm-info-box li div{width:75%;float:left;}
+.systerm-info-box li .a{float:right;background: url(img/right.png) no-repeat right center;background-size: 0.16rem 0.28rem;font-size:0.28rem;padding-right:0.3rem;}
+.systerm-info-box .r-more{margin-top:.5rem;}
+.systerm-info-box .r-more i{font-size:.26rem;margin-left:.1rem;}
 .installbox{margin-bottom:0;border-bottom:none;}
 .bottom-logo h3{width:1.78rem;height:0.61rem;margin:0 auto;}
 .bottom-logo h3 img{width:100%;height:auto;display: block;}
