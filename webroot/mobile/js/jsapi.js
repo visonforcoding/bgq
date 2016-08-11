@@ -79,11 +79,11 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
         "sys.showKeyboard",  //显示键盘
         "sys.hideKeyboard",  //隐藏键盘
         "sys.QRcode",  //二维码扫描
+        "sys.update",  //android系统更新
         "sys.back",
         "sys.logout",
         "sys.device", //获取唯一设备id
         "show.shareIco", //隐藏分享图标
-        "show.search", //显示搜索
         "share.banner",
         "share.QQ",
         "share.QQfriend",
@@ -161,7 +161,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                     break;
                 //一个字符型参数   无回调
                 case "sys.back":
-                case "show.search":
+                case "sys.update":
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {url:arguments[0]}, '');
                     });
