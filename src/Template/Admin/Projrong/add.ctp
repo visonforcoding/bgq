@@ -66,14 +66,14 @@
             <div id="cover" class="jqupload">上传</div>
         </div>
     </div>
-    <div class="form-group">
+<!--    <div class="form-group">
         <label class="col-md-2 control-label">活动内容</label>
         <div class="col-md-8">
             <?php
             echo $this->Form->input('body', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
-    </div>
+    </div>-->
     <div class="form-group">
         <label class="col-md-2 control-label">项目简介</label>
         <div class="col-md-8">
@@ -94,7 +94,7 @@
         <label class="col-md-2 control-label">核心团队</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('team', ['label' => false, 'class' => 'form-control']);
+            echo $this->Form->input('team', ['label' => false,'type'=>'textarea', 'class' => 'form-control']);
             ?>
         </div>
     </div>

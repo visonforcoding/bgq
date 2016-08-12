@@ -39,9 +39,11 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '活动', '记录时间', '更新时间', '类型', '操作'],
+                                ['用户','公司','职位', '活动', '记录时间', '更新时间', '类型', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
+                            {name: 'user.company', editable: true, align: 'center'},
+                            {name: 'user.position', editable: true, align: 'center'},
                             {name: 'relate_id', editable: true, align: 'center', formatter: titleFormatter},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},

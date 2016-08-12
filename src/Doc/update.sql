@@ -578,3 +578,18 @@ ENGINE=InnoDB
 AUTO_INCREMENT=15
 ;
 
+
+ALTER TABLE `phonelog`
+	CHANGE COLUMN `user_token` `user_token` VARCHAR(150) NULL DEFAULT '' AFTER `id`;
+
+#8月12
+ALTER TABLE `job`
+	ADD COLUMN `is_finish` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '是否已完成:1完成0未完成' AFTER `summary`;
+ALTER TABLE `job`
+	ADD COLUMN `remark` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '备注' AFTER `is_finish`;
+
+
+ALTER TABLE `projneed`
+	ADD COLUMN `contact` VARCHAR(50) NOT NULL DEFAULT '' AFTER `needer`;
+ALTER TABLE `projneed`
+	CHANGE COLUMN `contact` `contact` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '联系方式' AFTER `needer`;	

@@ -19,6 +19,12 @@
             <?= $this->cell('Admin') ?>
         </div>
     </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">行业标签</label>
+        <div class="col-md-8">
+            <?= $this->cell('Industry') ?>
+        </div>
+    </div>
     <div class="form-group">
         <label class="col-md-2 control-label">联系方式</label>
         <div class="col-md-8">
@@ -63,14 +69,8 @@
         <label class="col-md-2 control-label">招聘简介</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('summary', ['label' => false, 'class' => 'form-control']);
+            echo $this->Form->input('summary', ['label' => false,'type'=>'textarea', 'class' => 'form-control']);
             ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">Industry</label>
-        <div class="col-md-8">
-            <?= $this->cell('Industry') ?>
         </div>
     </div>
     <div class="form-group">

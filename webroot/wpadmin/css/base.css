@@ -17,6 +17,15 @@ body{
 .mt20{
     margin-top: 20px;
 }
+.w150{
+    width:150px;
+}
+.ml5{
+    margin-left:5px !important;
+}
+.ml20{
+    margin-left:20px !important;
+}
 /*顶部菜单*/
 .navbar{
     margin-bottom: 0px;

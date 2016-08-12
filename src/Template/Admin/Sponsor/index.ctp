@@ -47,9 +47,11 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '活动', '提交时间', '类型', '描述', '公司/机构', '职务', '状态', '处理人', '操作'],
+                                ['用户','公司','职位', '活动', '提交时间', '类型', '描述', '公司/机构', '职务', '状态', '处理人', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
+                            {name: 'user.company', editable: true, align: 'center'},
+                            {name: 'user.position', editable: true, align: 'center'},
                             {name: 'activity.title', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'type', editable: true, align: 'center', formatter: typeFormatter},
