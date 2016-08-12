@@ -190,5 +190,19 @@ class JobController extends AppController {
         $filename = 'Job_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
+    
+    /**
+     * 标记通过
+     */
+    public function check(){
+        $id = $this->request->data('id');
+        $job = $this->Job->get($id);
+        $job->is_finish = $job->is_finish == '1'?'0':'1';
+        if($this->Job->save($job)){
+            $this->Util->ajaxReturn(true,'保存成功');
+        }else{
+            $this->Util->ajaxReturn(false,'保存失败');
+        }
+    }
 
 }

@@ -127,7 +127,7 @@ class NeedController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'Need.' . $this->request->data('sidx');
+        $sort = $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
@@ -154,11 +154,11 @@ class NeedController extends AppController {
         }
         $offset = ($page - 1) * $rows;
         $connection = \Cake\Datasource\ConnectionManager::get('default');
-        $result = $connection->execute("select u.phone,u.truename,n.* from user u
+        $result = $connection->execute("select u.phone,u.truename,u.company,u.position,n.* from user u
                         inner join 
                         (select * from need $where_need  order by create_time desc ) n
                         on n.user_id = u.id where u.id != '-1'
-                        group by u.id order by create_time desc limit  $offset, $rows")->fetchAll('assoc');
+                        group by u.id order by $sort $order limit  $offset, $rows")->fetchAll('assoc');
         $nums = count($result);
         if (empty($result)) {
             $res = array();

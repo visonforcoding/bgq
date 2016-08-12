@@ -55,9 +55,11 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '活动', '提交时间','是否需审核', '审核状态', '审核人','是否置顶', '是否签到', '操作'],
+                                ['用户','公司','职位', '活动', '提交时间','是否需审核', '审核状态', '审核人','是否置顶', '是否签到', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
+                            {name: 'user.company', editable: true, align: 'center'},
+                            {name: 'user.position', editable: true, align: 'center'},
                             {name: 'activity.title', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'activity.must_check', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){

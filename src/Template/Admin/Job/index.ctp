@@ -39,7 +39,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['公司', '负责人', '行业', '联系方式', '分成方式', '招聘职位', '薪资范围', '工作地点', '招聘简介', '新建时间', '操作'],
+                                ['公司', '负责人', '行业', '联系方式', '分成方式', '招聘职位', '薪资范围', '工作地点', '招聘简介', '是否完成', '新建时间', '操作'],
                         colModel: [
                             {name: 'company', editable: true, align: 'center'},
                             {name: 'admin.truename', editable: true, align: 'center'},
@@ -56,6 +56,13 @@
                             {name: 'salary', editable: true, align: 'center'},
                             {name: 'address', editable: true, align: 'center'},
                             {name: 'summary', editable: true, align: 'center'},
+                            {name: 'is_finish', editable: true, align: 'center', formatter: function (cell, opt, row) {
+                                    if (cell) {
+                                        return '完成';
+                                    } else {
+                                        return '未完成';
+                                    }
+                                }},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
@@ -85,6 +92,11 @@
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
+                    if (rowObject.is_finish=='0') {
+                        response += '<a title="标记完成" onClick="doCheck(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
+                    } else {
+                        response += '<a title="标记未完成" onClick="doCheck(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-remove-circle"></i> </a>';
+                    }
                     response += '<a title="查看应聘者" href="/admin/candidate/index/' + rowObject.id + '"  data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-group"></i> </a>';
                     response += '<a title="编辑" href="/admin/job/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     return response;
@@ -144,6 +156,25 @@
                         shade: 0.8,
                         area: ['380px', '70%'],
                         content: url//iframe的url
+                    });
+                }
+                function doCheck(id) {
+                    layer.confirm('确定标记？', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                        $.ajax({
+                            type: 'post',
+                            data: {id: id},
+                            dataType: 'json',
+                            url: '/admin/job/check',
+                            success: function (res) {
+                                layer.msg(res.msg);
+                                if (res.status) {
+                                    $('#list').trigger('reloadGrid');
+                                }
+                            }
+                        })
+                    }, function () {
                     });
                 }
 </script>

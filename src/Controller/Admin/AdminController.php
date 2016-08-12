@@ -194,7 +194,7 @@ class AdminController extends AppController {
     }
 
     /**
-     * 
+     * 权限配置
      */
     public function config($id) {
         $admin = $this->Admin->get($id, [
@@ -216,14 +216,19 @@ class AdminController extends AppController {
             $selMenuIds[] = $value['id'];
         }
         $MenuTable = \Cake\ORM\TableRegistry::get('Menu');
-        $menus = $MenuTable->find()->hydrate(false)->all()->toArray();
-        $menus = \Wpadmin\Utils\Util::tree($menus, 0, 'id', 'pid');
+        $menus = $MenuTable->find('threaded', [
+                    'keyField' => 'id',
+                    'parentField' => 'pid'
+                ])->where(['status'=>1])->orderDesc('rank')->all()->toArray();
         $this->set([
             'menus' => $menus,
             'selMenuIds' => $selMenuIds
         ]);
     }
 
+    /**
+     * 修改信息
+     */
     public function profile() {
         $id = $this->_user->id;
         $admin = $this->Admin->get($id, [

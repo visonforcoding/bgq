@@ -20,6 +20,7 @@ class UtilController extends AppController {
     }
 
     public function doUpload() {
+        set_time_limit(0);
         $dir = $this->request->query('dir');
         $today = date('Y-m-d');
         $urlpath =  '/upload/tmp/' . $today . '/';

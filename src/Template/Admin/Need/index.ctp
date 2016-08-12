@@ -44,14 +44,16 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '手机号', '最新消息', '创建时间', '修改时间', '状态', '操作'],
+                                ['用户', '手机号','公司','职位', '最新消息', '创建时间', '修改时间', '状态', '操作'],
                         colModel: [
-                            {name: 'truename', editable: true, align: 'center'},
-                            {name: 'phone', editable: true, align: 'center'},
-                            {name: 'msg', editable: true, align: 'center'},
+                            {name: 'truename', editable: true, align: 'center',sortable: false},
+                            {name: 'phone', editable: true, align: 'center',sortable: false},
+                            {name: 'company', editable: true, align: 'center',sortable: false},
+                            {name: 'position', editable: true, align: 'center',sortable: false},
+                            {name: 'msg', editable: true, align: 'center',sortable: false},
                             {name: 'create_time', editable: true, align: 'center'},
-                            {name: 'update_time', editable: true, align: 'center'},
-                            {name: 'status', editable: true, align: 'center', formatter: function (cell, opt, obj) {
+                            {name: 'update_time', editable: true, align: 'center',sortable: false},
+                            {name: 'status', editable: true, align: 'center',sortable: false, formatter: function (cell, opt, obj) {
                                     if (cell == 1) {
                                         return '已查看';
                                     } else {
