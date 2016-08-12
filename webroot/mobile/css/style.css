@@ -155,7 +155,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .newscon-box p{width:90%;margin:0.1rem auto;line-height: 0.46rem;font-size:0.3rem;color:#222;text-align: justify; cursor: pointer;}
 .newscon-box p a,.body-con a{font-size:0.3rem;}
 .con-bottom{float:right;margin-right: .3rem;color:#9ba4ad;margin-top:0.2rem;font-size:0.28rem;}
-.con-bottom span{display: inline-block;width:1.2rem;font-size:0.24rem;}
+.con-bottom span{display: inline-block;width:1.2rem;font-size:0.24rem;-webkit-user-select: none;}
 .con-bottom .a-coll{width:0.6rem;}
 .a-coll i{font-size:0.34rem;}
 .readnums{}
@@ -306,11 +306,11 @@ border-bottom:none;top:-1px;margin-top:-1px;margin-left:-1px;}
 .fixed-btn .r-btn{background: #e01a48;margin-left: 1px;}
 .wraper .a-choose{background:#fff;}
 .a-form-box{overflow:hidden;background:#fff;border-bottom:1px #e5e5e5 solid;}
-.a-form-box li{height:0.52rem;margin:0.26rem;display: flex; justify-content: space-between;}
+.a-form-box li{height:0.52rem;margin:0.26rem;/*display: flex; */justify-content: space-between;}
 .a-form-box li input,.a-form-box li textarea{flex:3;border:1px #c8c7cc solid;border-radius: 0.1rem;padding:0.1rem;font-size:0.28rem;}
 .a-form-box li textarea{height:2.3rem;}
 .a-form-box li span{line-height: 0.52rem;flex:1;color:#222c38;font-size:0.28rem;}
-.a-form-box li i{line-height: 0.52rem;color:#222c38;font-size:0.28rem;}
+.a-form-box li i{line-height: 0.52rem;color:#222c38;font-size:0.28rem;display:block;}
 .a-form-box li:last-child{flex-direction:column;height:auto;}
 .a-shadow{width:100%;background: #fff;padding:0.65rem 0;overflow: hidden;max-width: 750px;border-radius: .1rem .1rem 0 0;}
 .a-shadow li{display: flex;justify-content: center;}
@@ -530,8 +530,8 @@ display: -webkit-box;-webkit-line-clamp: 1;}
 .a-form-box .m-tips{font-size:0.26rem;color:#85888d;line-height: 0.36rem;margin-top:0.13rem;}
 .a-form-box .m-tips b.iconfont:before{content: '\e623';line-height: 0.36rem; margin-right:0.2rem}
 .a-form-box .m-tips span{display: block;color:#e01a48; margin-left:0.5rem;}
-.wraper .m-form-box{padding-bottom:0;margin-top:0.2rem;border-top:1px solid #c8c7cc;}
-.m-form-box li textarea{height:6rem;}
+.wraper .m-form-box{padding-bottom:0;margin-top:0.2rem;border-top:1px solid #e5e5e5;}
+.m-form-box li textarea{height:6rem;width:100%;}
 .m-detail-box .booking-price{color:#e01a48; width:20%;}
 .m-detail-box .booking-price span{margin-top:0.2rem;}
 .wraper .m-subject{background: #fff;}

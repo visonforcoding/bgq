@@ -25,7 +25,7 @@
 				<!--<a href='javascript:void(0);' class='iconfont news-serch'>&#xe613;</a>-->
 				<span class="sel-area">
 					<span class="area-selected">深圳</span>
-					<div class="arealist" style="display: block;">
+					<div class="arealist" style="display: none;">
 						<span>北京</span>
 						<span>上海</span>
 						<span>深圳</span>
@@ -37,7 +37,7 @@
 			</div>
 			<div class="markbox">
 				<div class="a-s-title">
-					<span class="orgname">并购沙龙系列</span>
+					<span class="s-icon">并购沙龙系列<i class="iconfont fr" id="toggle-icon"></i></span>
 				</div>
 				<ul	 class="a-s-mark">
 					<li><a href="#this" class="active">并购沙龙系列</a></li>
@@ -50,16 +50,20 @@
 			
 		</div>
 	<script type="text/javascript">
-		$('.a-s-title .orgname').on('touchstart',function(){
+//		$('.a-s-title .orgname').on('touchstart',function(){
+//			$(this).toggleClass('active');
+////			$('.a-s-mark').toggleClass('disp');
+//			if($('.a-s-mark').hasClass('disp')){
+//				$('.a-s-mark').removeClass('disp').addClass('block');
+//			}else if($('.a-s-mark').hasClass('block')){
+//				$('.a-s-mark').removeClass('block').addClass('disp');
+//			}else{
+//				$('.a-s-mark').addClass('disp');
+//			}
+//		})
+		$('#toggle-icon').on('touchstart',function(){
 			$(this).toggleClass('active');
-//			$('.a-s-mark').toggleClass('disp');
-			if($('.a-s-mark').hasClass('disp')){
-				$('.a-s-mark').removeClass('disp').addClass('block');
-			}else if($('.a-s-mark').hasClass('block')){
-				$('.a-s-mark').removeClass('block').addClass('disp');
-			}else{
-				$('.a-s-mark').addClass('disp');
-			}
+			console.log(111);
 		})
 	</script>
 	</body>

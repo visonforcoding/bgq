@@ -11,7 +11,6 @@
 		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
 		<script src="../js/view.js"></script>
 		<script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
-		
 	</head>
 	<body>
 		<header>
@@ -38,12 +37,14 @@
         <li class="no-right-ico install">
             <a href="javascript:void(0);">
                 <span>设置</span>
-                <div class="holder">
-					<!--<input type="checkbox" id="checkbox-10-1" />
-					<label for="checkbox-10-1"></label>-->
+                <!--<div class="holder">
+					
 					<input type="checkbox" id="checkbox" checked />
-					<label for="checkbox" class="labels"></label>
-			</div>
+					<label for="checkbox" class="label"></label>
+			</div>-->
+			<div class="iscache">
+                <span class="btn" id='checkBtn'><i class="off"></i></span>
+            </div>
             </a>
         </li>
         <li class="lh4 no-right-ico install">
@@ -88,12 +89,14 @@
 			</div>
 			<script type="text/javascript">
 				var flag=1;
-				$('.btn').on('tap',function(){
+				$('#checkBtn').on('tap',function(){
 					if(flag){
 						$(this).children('i').removeClass().addClass('on');
 						flag=0;
+						$(this).removeClass().addClass('c-btn');
 					}else{
 						$(this).children('i').removeClass().addClass('off');
+						$(this).removeClass().addClass('btn');
 						flag=1;
 					}
 					
