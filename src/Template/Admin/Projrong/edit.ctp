@@ -65,30 +65,6 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">阅读数</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('read_nums', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">点赞数</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('praise_nums', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">评论数</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('comment_nums', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-md-2 control-label">封面</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
@@ -135,6 +111,7 @@
         <div class="col-md-8">
             <input name="attach" type="hidden" value="<?= $projrong->attach ?>"/>
             <div id="attach" class="jqupload"></div>
+             <span class="notice">(*文件大小在30M以内)</span>
         </div>
     </div>
     <div class="form-group">
