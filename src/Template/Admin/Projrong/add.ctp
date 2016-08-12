@@ -103,6 +103,7 @@
         <div class="col-md-8">
             <input name="attach" type="hidden" value=""/>
             <div id="attach" class="jqupload"></div>
+            <span class="notice">(*文件大小在30M以内)</span>
         </div>
     </div>
     <div class="form-group">
