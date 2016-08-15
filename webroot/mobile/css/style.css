@@ -1125,3 +1125,6 @@ background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  ba
 .dialogue .fr .m-online-r span{background: #00a2e6;}
 .dialogue .fr .m-online-r time{color:#333;}
 .dialogue .fr .m_online-pic{right:.3rem;}
+.m-service-con p{margin-bottom:.6rem;}
+.m-service-con h3,.m-service-t{font-weight: bold;}
+.m-service-con{margin-top:.6rem;}
