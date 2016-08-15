@@ -57,7 +57,7 @@
         $('.industry').removeClass('active');
         $(em).addClass('active');
         var industry_id = $(em).attr('industry_id');
-        $('input[name="industry_id"]').val(industry_id);
+        $('input[name="newstag_id"]').val(industry_id);
         $('.orgname').toggleClass('active');
         if($('.a-s-mark').hasClass('disp')){
             $('.a-s-mark').removeClass('disp').addClass('nblock');
