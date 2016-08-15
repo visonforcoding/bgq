@@ -46,7 +46,9 @@ class MeetController extends AppController {
         $users = $this
                 ->User
                 ->find()
-                ->contain(['Subjects'])
+                ->contain(['Subjects'=>function($q){
+                    return $q->where(['is_del'=>0]);
+                }])
                 ->where(['enabled'=>'1', 'level'=>'2'])
                 ->limit($this->limit)
                 ->toArray();
@@ -142,7 +144,9 @@ class MeetController extends AppController {
         }
         $biggie = $this->User->get($id, [
             'contain' => [
-                'Savant', 'Industries', 'Subjects','RecoUsers'=>function($q){
+                'Savant', 'Industries', 'Subjects'=>function($q){
+                    return $q->where(['is_del'=>0]);
+                },'RecoUsers'=>function($q){
                     return $q->limit(8);
                 },'RecoUsers.Users'
             ]
@@ -160,6 +164,12 @@ class MeetController extends AppController {
      * @param int $id
      */
     public function subjectDetail($id = null) {
+        $this->handCheckLogin();
+        $SubjectBookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+        $subjectBook = $SubjectBookTable->find()->where(['subject_id'=>$id, 'user_id'=>$this->user->id])->first();
+        if($subjectBook){
+            $this->redirect('/home/my-book-detail/'.$subjectBook->id);
+        }
         $SubjectTable = \Cake\ORM\TableRegistry::get('MeetSubject');
         $subject = $SubjectTable->find()
                 ->contain(['User'=>function($q){
@@ -652,7 +662,9 @@ class MeetController extends AppController {
         $biggies = $this
                 ->User
                 ->find()
-                ->contain(['Subjects'])
+                ->contain(['Subjects'=>function($q){
+                    return $q->where(['is_del'=>0]);
+                }])
                 ->where(['enabled'=>'1', 'level'=>'2'])
                 ->page($page, $this->limit)
                 ->toArray();

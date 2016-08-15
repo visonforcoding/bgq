@@ -13,7 +13,7 @@
             <h3><?= $activity->title; ?></h3>
            <div> <img src="<?= $activity->cover; ?>"/></div>
             <p>主办单位：<?= $activity->company; ?></p>
-            <p>时间：<?= $activity->time; ?></p>
+            <p>时间：<?= $activity->time->i18nFormat('yyyy-MM-dd'); ?></p>
             <p>地点：<?= $activity->address; ?></p>
             <p>规模：<?= $activity->scale; ?>人</p>
             <div class="a-other-info innercon ac">
@@ -244,7 +244,7 @@
     // 分享设置
     window.shareConfig.link = 'http://m.chinamatop.com/activity/details/<?= $activity->id ?>?share=1';
     window.shareConfig.title = '<?= $activity->title ?>';
-    var share_desc = '<?= $activity->share_desc ?>';
+    var share_desc = '<?= $activity->summary ?>';
     share_desc && (window.shareConfig.desc = share_desc);
     LEMON.show.shareIco();
     if($.util.isAPP){

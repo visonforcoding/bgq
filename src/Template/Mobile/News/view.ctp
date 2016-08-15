@@ -32,7 +32,7 @@
                     </a>
                     <?= $news->user->truename ?>
                 <?php endif; ?>
-                <time><?= $news->create_time->i18nFormat('yyyy-MM-dd HH:mm:ss') ?></time>
+                <time><?= $news->publish_time->i18nFormat('yyyy-MM-dd HH:mm:ss') ?></time>
             </h1>
             <img src="<?= $news->cover ?>"/>
             <p><?= $news->body ?></p>
@@ -137,7 +137,7 @@
     // 分享设置
     window.shareConfig.link = 'http://m.chinamatop.com/news/view/<?= $news->id ?>?share=1';
     window.shareConfig.title = '<?= $news->title ?>';
-    var share_desc = '<?= $news->share_desc ?>';
+    var share_desc = '<?= $news->summary ?>';
     share_desc && (window.shareConfig.desc = share_desc);
     LEMON.show.shareIco();
     //LEMON.sys.back('/news/index');
