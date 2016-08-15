@@ -16,10 +16,9 @@
 </a>
 <div class="wraper">
     <div class="m-to-more">
-        <div class='inner'>
-            <a href='javascript:history.go(-1);' class='toback'></a>
-            <!--<a href="#this" class='iconfont collection h-regiser'>&#xe610;</a>
-            <a href="#this" class='iconfont share h-regiser'>&#xe614;</a>-->
+        <div class="pic-expert">
+            <img src="/mobile/css/img/tomore.png">
+            <!--<img src="<?= $biggie->savant->cover; ?>">-->
         </div>
         <div class="m-tomore-bottom">
             <span><i class="iconfont">&#xe60b;</i><?= $biggie->savant_read_nums ?></span>
@@ -32,14 +31,14 @@
             <h3><?= $biggie->truename ?><em><?= $biggie->position ?></em></h3>
             <!-- <span class="identification"></span> -->
             <h3 class="mycustorm" ><?= $biggie->company ?></h3>
-            <?php if(!$self): ?>
-                <?php if($biggie->subjects): ?>
+            <?php if (!$self): ?>
+                <?php if ($biggie->subjects): ?>
                     <div class="u-btn meetbtn"><a href="/meet/subject_list/<?= $biggie->id ?>" class="focusbtn">立即约见</a></div>
                 <?php endif; ?>
             <?php endif; ?>
         </li>
         <li>
-            <a id="recom" href="javascript:void(0);" class="tocommend"><i class="iconfont f7 <?php if($isReco): ?>color-items<?php endif; ?>">&#xe61a;</i>推荐他</a>
+            <a id="recom" href="javascript:void(0);" class="tocommend"><i class="iconfont f7 <?php if ($isReco): ?>color-items<?php endif; ?>">&#xe61a;</i>推荐他</a>
             <span  class="commendnum">
                 <a href="/meet/view-more-reco/<?= $biggie->id ?>" class="alink-list">
                     <!-- 只推荐7条 -->
@@ -61,16 +60,16 @@
             <li class="b-hy">
                 <span><i class="iconfont">&#xe654;</i>所在行业</span>
                 <div>
-                    <?php foreach ($biggie->industries as $k=>$v): ?>
-                    <em><?= $v['name'] ?></em>
+                    <?php foreach ($biggie->industries as $k => $v): ?>
+                        <em><?= $v['name'] ?></em>
                     <?php endforeach; ?>
                 </div>
             </li>
             <li class="b-bq">
                 <span><i class="iconfont">&#xe653;</i>个人标签</span>
                 <div>
-                    <?php if(is_array(unserialize($biggie->grbq))): ?>
-                        <?php foreach (unserialize($biggie->grbq) as $k=>$v): ?>
+                    <?php if (is_array(unserialize($biggie->grbq))): ?>
+                        <?php foreach (unserialize($biggie->grbq) as $k => $v): ?>
                             <em><?= $v ?></em>
                         <?php endforeach; ?>
                     <?php endif; ?>
@@ -88,36 +87,36 @@
     </div>
     <div class="m-swiper-items">
         <?php if ($self): ?>
-        <div class="u-btn">
-            <div class="lbtn"><a href="/meet/my_subjects" class="focusbtn">编辑话题</a></div>
-            <div class="rbtn"><a href="/meet/edit-summary" class="cardbtn">编辑简介</a></div>
-        </div>
+            <div class="u-btn">
+                <div class="lbtn"><a href="/meet/my_subjects" class="focusbtn">编辑话题</a></div>
+                <div class="rbtn"><a href="/meet/edit-summary" class="cardbtn">编辑简介</a></div>
+            </div>
         <?php endif; ?>
-        <?php if($biggie->subjects): ?>
-        <ul id="subject" class='mt20'>
-            <?php foreach ($biggie->subjects as $v): ?>
-                <li>
-                    <div class="inner-li-items">
-                        <h3><?= $v['title'] ?></h3>
-                        <?php if(!$self): ?>
-                            <a class="alink" href="/meet/subject-detail/<?= $v->id ?>">
-                        <?php else: ?>
-                            <a class="alink" href="/meet/subject/<?= $v->id ?>">
-                        <?php endif; ?>
-                            <div class='m-center-con'>
-                                <p>
-                                    <?= $v['summary'] ?>
-                                </p>
-                            </div>
-                        </a>
-                        <div  class='m-bottom-con'>
-                            <span>价格<i><?= $v['price'] ?>元/次</i></span>
-                            <span>时间<i>约<?= $v['last_time'] ?>小时</i></span>
-                        </div>
-                    </div>	
-                </li>
-            <?php endforeach; ?>
-        </ul>
+        <?php if ($biggie->subjects): ?>
+            <ul id="subject" class='mt20'>
+                <?php foreach ($biggie->subjects as $v): ?>
+                    <li>
+                        <div class="inner-li-items">
+                            <h3><?= $v['title'] ?></h3>
+                            <?php if (!$self): ?>
+                                <a class="alink" href="/meet/subject-detail/<?= $v->id ?>">
+                                <?php else: ?>
+                                    <a class="alink" href="/meet/subject/<?= $v->id ?>">
+                                    <?php endif; ?>
+                                    <div class='m-center-con'>
+                                        <p>
+                                            <?= $v['summary'] ?>
+                                        </p>
+                                    </div>
+                                </a>
+                                <div  class='m-bottom-con'>
+                                    <span>价格<i><?= $v['price'] ?>元/次</i></span>
+                                    <span>时间<i>约<?= $v['last_time'] ?>小时</i></span>
+                                </div>
+                        </div>	
+                    </li>
+                <?php endforeach; ?>
+            </ul>
         <?php endif; ?>
     </div>
     <section class="a-detail newscomment-box m-about-expert">
@@ -131,7 +130,7 @@
             <?php endif; ?>
         </p>
     </section>
-    
+
 </div>
 <!-- <div style='height:1.2rem'></div> -->
 </div>
@@ -156,13 +155,15 @@
         if (imgUrl)
             window.shareConfig.imgUrl = location.origin + imgUrl;
         window.shareConfig.link = 'http://m.chinamatop.com/meet/view/<?= $biggie->id ?>?share=1';
-        window.shareConfig.title = '并购帮大咖';
-        window.shareConfig.desc = '<?= $biggie->company ?>  <?= $biggie->truename ?>';
+        window.shareConfig.title = <?= $biggie->truename ?>.'的个人主页';
+        window.shareConfig.desc = '公司：<?= $biggie->company ?> \n\
+                                    职位：<?= $biggie->position ?> \n\
+                                    点击查看更多';
                 LEMON.show.shareIco();
             })();
 </script>
 <script>
-    if(location.href.indexOf('?share=1') != -1){
+    if (location.href.indexOf('?share=1') != -1) {
         $('#share_download').show();
     }
     var subject = null;
@@ -174,7 +175,7 @@
             lockScrY: true,
             loopScroll: true,
             autoTime: 3000,
-            viewDom:$('.m-swiper-items'),
+            viewDom: $('.m-swiper-items'),
         });
     }, 0);
     $('body').on('tap', function (e) {
@@ -231,8 +232,9 @@
                     $('#shadow').show();
                 }
                 break;
-            case 'shadow':case 'wxshare':
-                setTimeout(function(){
+            case 'shadow':
+            case 'wxshare':
+                setTimeout(function () {
                     $('#shadow').hide();
                     $('#wxshare').hide();
                 }, 400);
