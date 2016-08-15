@@ -5,12 +5,6 @@
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($activity, ['class' => 'form-horizontal']) ?>
-    <div class="form-group">
-        <label class="col-md-2 control-label">系列标签</label>
-        <div class="col-md-8">
-            <?= $this->cell('Series', [[$activity->series_id]]) ?>
-        </div>
-    </div>
     <?php if ($activity->is_check == 2): ?>
         <div class="form-group">
             <label class="col-md-2 control-label">未通过审核理由</label>
@@ -22,21 +16,15 @@
         </div>
     <?php endif; ?>
     <div class="form-group">
+        <label class="col-md-2 control-label">系列标签</label>
+        <div class="col-md-8">
+            <?= $this->cell('Series', [[$activity->series_id]]) ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">作者</label>
         <div class="col-md-8">
             <?= $this->cell('User', [[$activity->user_id]]) ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">行业标签</label>
-        <div class="col-md-8">
-            <?= $this->cell('Industry', [$selIndustryIds]) ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">专家推荐</label>
-        <div class="col-md-8">
-            <?= $this->cell('Savant', [$selSavantIds]); ?>
         </div>
     </div>
     <div class="form-group">
@@ -172,7 +160,9 @@
     <div class="form-group">
         <label class="col-md-2 control-label">摘要</label>
         <div class="col-md-8">
-            <script name='summary' id='summary' rows='3' type="text/plain" class='form-control-editor'><?= $activity->summary ?></script>
+            <?php
+            echo $this->Form->input('summary', ['label' => false, 'type' => 'textarea', 'class' => 'form-control']);
+            ?>
         </div>
     </div>
     <div class="form-group">
@@ -182,11 +172,15 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">分享描述</label>
+        <label class="col-md-2 control-label">行业标签</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('share_desc', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <?= $this->cell('Industry', [$selIndustryIds]) ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">专家推荐</label>
+        <div class="col-md-8">
+            <?= $this->cell('Savant', [$selSavantIds]); ?>
         </div>
     </div>
     <div class="form-group">
@@ -211,7 +205,6 @@
         initJqupload('cover', '/wpadmin/util/doUpload?dir=activitycover', 'jpg,png,gif,jpeg'); //初始化图片上传
         initJqupload('thumb', '/wpadmin/util/doUpload?dir=activitythumb', 'jpg,png,gif,jpeg'); //初始化图片上传
         var ue = UE.getEditor('body'); //初始化富文本编辑器
-        UE.getEditor('summary');
         UE.getEditor('guest');
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-series').select2({

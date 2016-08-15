@@ -601,3 +601,13 @@ ALTER TABLE `projrong`
 
 ALTER TABLE `projrong`
 	ADD COLUMN `contact` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '联系方式' AFTER `publisher`;	
+
+ALTER TABLE `news`
+	ADD COLUMN `publish_time` DATETIME NOT NULL COMMENT '发布时间' AFTER `update_time`;
+
+ALTER TABLE `news`
+	ADD COLUMN `video` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '视频地址' AFTER `is_media`,
+	ADD COLUMN `mp3` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '音频' AFTER `video`;
+
+ALTER TABLE `news`
+	ADD COLUMN `is_media` TINYINT NOT NULL DEFAULT '0' COMMENT '0无1顶部2底部' AFTER `body`;		

@@ -37,22 +37,10 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">行业标签</label>
-        <div class="col-md-8">
-            <?= $this->cell('Industry') ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">专家推荐</label>
-        <div class="col-md-8">
-            <?= $this->cell('Savant') ?>
-            <span class="notice">(*最多只能选4个)</span>
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-md-2 control-label">资讯标签</label>
         <div class="col-md-8">
             <?= $this->cell('Newstag') ?>
+            <span class="notice">(*最多只能选4个)</span>
         </div>
     </div>
     <div class="form-group">
@@ -90,11 +78,53 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">分享描述</label>
+        <label class="col-md-2 control-label">多媒体</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('share_desc', ['label' => false, 'class' => 'form-control']);
+            <?=
+            $this->form->radio('is_media', [
+                ['value' => '0', 'text' => '无', 'checked' => 'true'],
+                ['value' => '1', 'text' => '顶部'],
+                ['value' => '2', 'text' => '底部'],
+            ])
             ?>
+        </div>
+    </div>
+    <div class="form-group media hide">
+        <label class="col-md-2 control-label">媒体文件</label>
+        <div class="col-md-8">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#tab1" data-toggle="tab">视频</a>
+                </li>
+                <li>
+                    <a href="#tab2" data-toggle="tab">音频</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane in active" id="tab1">
+                    <input name="video" type="hidden" value=""/>
+                    <div id="video" class="jqupload"></div>
+                    <span class="notice">(*文件大小在30M以内,支持格式为mp4、m4v)</span>
+                </div>
+                <div class="tab-pane in " id="tab2">
+                    <input name="mp3" type="hidden" value=""/>
+                    <div id="mp3" class="jqupload"></div>
+                    <span class="notice">(*文件大小在30M以内,支持格式为mp3)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">行业标签</label>
+        <div class="col-md-8">
+            <?= $this->cell('Industry') ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">专家推荐</label>
+        <div class="col-md-8">
+            <?= $this->cell('Savant') ?>
+            <span class="notice">(*最多只能选4个)</span>
         </div>
     </div>
     <div class="form-group">
@@ -119,10 +149,20 @@
     $(function () {
         initJqupload('cover', '/wpadmin/util/doUpload?dir=newscover', 'jpg,png,gif,jpeg'); //初始化图片上传
         initJqupload('thumb', '/wpadmin/util/doUpload?dir=newsthumb', 'jpg,png,gif,jpeg'); //初始化图片上传
+        initJquploadAttach('mp3', '/wpadmin/util/doUpload?dir=news/mp3', 'mp3'); //初始化附件上传
+        initJquploadAttach('video', '/wpadmin/util/doUpload?dir=news/video', 'mp4,m4v'); //初始化附件上传
         var ue = UE.getEditor('content'); //初始化富文本编辑器
         $('#title').keyup(function () {
             var len = $(this).val().length;
             $(this).next('span').find('i').text(len);
+        });
+        $('input[name="is_media"]').on('change', function () {
+            var is_media = $(this).val();
+            if (is_media > 0) {
+                $('div.form-group.media').removeClass('hide');
+            } else {
+                $('div.form-group.media').addClass('hide');
+            }
         });
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-industry').select2({
@@ -132,6 +172,7 @@
         $('#select-newstag').select2({
             language: "zh-CN",
             placeholder: '选择一个资讯标签',
+            maximumSelectionLength: 4
         });
         $('#select-industry').on('change', function (evt) {
             var selOption = $('#select-industry').val();
