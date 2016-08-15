@@ -1130,4 +1130,4 @@ background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  ba
 .m-service-con h3,.m-service-t{font-weight: bold;}
 .m-service-con{margin-top:.6rem;}
 .m_title_des{padding:.15rem .3rem;background: #fff;}
-.m_title_des h3{border-left:#e01a48 solid .04rem;padding-left:.12rem;line-height:.32rem;}
+.m_title_des h3{border-left:#e01a48 solid .04rem;padding-left:.12rem;line-height:.32rem;font-size: .3rem;}
