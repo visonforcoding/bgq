@@ -40,19 +40,19 @@
             <div class="menulist clearfix" id="allsort">
                 <a href="#this">
                     <i class="iconfont col-g">&#xe66e;</i>
-                    <span>找买家</span>
+                    <span>并购买家</span>
                 </a>
                 <a href="#this">
                     <i class="iconfont col-o">&#xe637;</i>
-                    <span>找投资</span>
+                    <span>产业投资</span>
                 </a>
                 <a href="#this">
                     <i class="iconfont col-lg">&#xe66f;</i>
-                    <span>找融资</span>
+                    <span>并购融资</span>
                 </a>
                 <a href="#this">
                     <i class="iconfont col-y">&#xe621;</i>
-                    <span>找顾问</span>
+                    <span>并购顾问</span>
                 </a>
             </div>
         </div>
