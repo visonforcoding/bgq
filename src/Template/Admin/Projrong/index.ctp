@@ -53,7 +53,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                [ '发布人', '公司', '项目名称','标签' ,'融资阶段', '地点', '融资规模', '股份', '阅读数', '点赞数', '评论数', '封面', '项目简介', '公司简介', '核心团队', '资料地址', '创建时间', '更新时间', '操作'],
+                                [ '发布人', '公司', '项目名称','标签' ,'融资阶段', '地点', '融资规模', '股份',  '封面', '项目简介', '公司简介', '核心团队', '资料地址', '创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'publisher', editable: true, align: 'center'},
                             {name: 'company', editable: true, align: 'center'},
@@ -69,9 +69,9 @@
                             {name: 'address', editable: true, align: 'center'},
                             {name: 'scale.name', editable: true, align: 'center'},
                             {name: 'stock', editable: true, align: 'center'},
-                            {name: 'read_nums', editable: true, align: 'center'},
-                            {name: 'praise_nums', editable: true, align: 'center'},
-                            {name: 'comment_nums', editable: true, align: 'center'},
+//                            {name: 'read_nums', editable: true, align: 'center'},
+//                            {name: 'praise_nums', editable: true, align: 'center'},
+//                            {name: 'comment_nums', editable: true, align: 'center'},
                             {name: 'cover', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
                                 return '<a title="查看" onClick="showCover(' +" ' "+rowObject.cover+" ' " + ');" class="grid-btn "><i class="icon icon-picture"></i></a>';
                             }},
