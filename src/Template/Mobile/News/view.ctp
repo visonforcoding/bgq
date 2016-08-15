@@ -32,7 +32,7 @@
                     </a>
                     <?= $news->user->truename ?>
                 <?php endif; ?>
-                <time><?= $news->publish_time ?></time>
+                <time><?= $news->publish_time->i18nFormat('yyyy-MM-dd HH:mm:ss') ?></time>
             </h1>
             <img src="<?= $news->cover ?>"/>
             <p><?= $news->body ?></p>
