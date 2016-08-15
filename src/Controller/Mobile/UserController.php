@@ -42,7 +42,11 @@ class UserController extends AppController {
         }
         $user = $this->User->get($id,['contain'=>['Industries'=>function($q){
             return $q->hydrate(false)->select(['id','name']);
-        }, 'Secret','Careers','Educations']]);
+        }, 'Secret','Careers','Educations', 'Savant', 'Subjects'=>function($q){
+            return $q->where(['is_del'=>0]);
+        }, 'RecoUsers'=>function($q){
+            return $q->limit(8)->orderDesc('RecoUsers.create_time');
+        },'RecoUsers.Users']]);
         $industries = $user->industries;
         $industry_arr = [];
         foreach($industries as $industry){
@@ -50,11 +54,18 @@ class UserController extends AppController {
         }
         $isFans = false;
         $isGive = false;
+        $isReco = '';
         if($this->user){
             $user_id = $this->user->id;
             $FansTable = \Cake\ORM\TableRegistry::get('UserFans');
             $isFans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$id'")->count();  //检测是否关注
             $isGive = $this->User->CardBoxes->find()->where(['ownerid'=>$id, 'uid'=>$this->user->id])->first();  //检测是否递过名片
+            if(!$self){
+                $isReco = $this->User->get($id, ['contain' => ['RecoUsers'=>function($q)use($user_id){
+                    return $q->where(['user_id'=>$user_id]);
+                }]]);
+                $isReco = $isReco->reco_users;
+            }
         }
         $educationType = \Cake\Core\Configure::read('educationType');
         $this->set([
@@ -62,7 +73,8 @@ class UserController extends AppController {
             'self'=>$self,
             'isFans'=>$isFans,
             'isGive' => $isGive,
-            'educationType' => $educationType
+            'educationType' => $educationType,
+            'isReco' => $isReco,
         ]);
         $this->set(compact('user','industry_arr'));
     }

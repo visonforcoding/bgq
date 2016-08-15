@@ -23,7 +23,7 @@
                     </div>
                 </a>
             </li>
-<!--            <li>
+            <li>
                 <a href="javascript:void(0)">
                     <span>邮箱：</span>
                     <div>
@@ -35,7 +35,7 @@
                          </span>
                     </div>
                 </a>
-            </li>-->
+            </li>
             <li class="nobottom">
                 <a href="javascript:void(0)">
                     <span>我的资料：</span>
