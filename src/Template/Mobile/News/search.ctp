@@ -3,8 +3,8 @@
     <div class='h-news-search'>
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe618;</a>
         <form id="searchForm" >
-        <h1><input type="text" placeholder="请输入关键词" name="keyword"></h1>
-        <input type="hidden" name="newstag_id" value="" />
+            <h1><input type="text" placeholder="请输入关键词" name="keyword"></h1>
+            <input type="hidden" name="newstag_id" value="" />
         </form>
         <div class='h-regiser' id="doSearch" >搜 索</div>
     </div>
@@ -22,7 +22,7 @@
 <?php $this->start('script'); ?>
 <script type="text/html" id="search_tpl">
     <section class="news-list-items" style="padding-bottom: 0.2rem;background: #fff;">
-    <h1><span><img src="{#avatar#}" /></span>{#author#}</h1>
+        <h1><span><img src="{#avatar#}" /></span>{#author#}</h1>
         <a href="/news/view/{#id#}" class="newsbox clearfix">
             <div class="sec-news-l">
                 <h3>{#title#}</h3>
@@ -46,8 +46,8 @@
 </script>
 <script>
     var search_data = {};
-    function industryTap(em){
-        if($(em).hasClass('active')){
+    function industryTap(em) {
+        if ($(em).hasClass('active')) {
             $(em).removeClass('active');
             $('input[name="newstag_id"]').val('');
             return;
@@ -59,19 +59,19 @@
         var industry_id = $(em).attr('industry_id');
         $('input[name="newstag_id"]').val(industry_id);
         $('.orgname').toggleClass('active');
-        if($('.a-s-mark').hasClass('disp')){
+        if ($('.a-s-mark').hasClass('disp')) {
             $('.a-s-mark').removeClass('disp').addClass('nblock');
-        }else if($('.a-s-mark').hasClass('nblock')){
-            setTimeout(function(){
+        } else if ($('.a-s-mark').hasClass('nblock')) {
+            setTimeout(function () {
                 $('.a-s-mark').removeClass('nblock').addClass('disp');
-            },400);
-        }else{
-            setTimeout(function(){
+            }, 400);
+        } else {
+            setTimeout(function () {
                 $('.a-s-mark').addClass('disp');
-            },400);
+            }, 400);
         }
 
-        if(search_data[industry_id]){
+        if (search_data[industry_id]) {
             $('#search').html(search_data[industry_id]);
             return;
         }
@@ -83,8 +83,8 @@
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
-                        search_data[industry_id] = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
-                            if(d.user){
+                        search_data[industry_id] = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
+                            if (d.user) {
                                 d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                                 d.author = d.user.truename;
                             } else {
@@ -93,7 +93,7 @@
                             }
                             return d;
                         });
-                        
+
                     } else {
                         $.util.alert(msg.msg);
                     }
@@ -106,44 +106,50 @@
         dataType: 'json',
         url: "/news/get-newstags",
         success: function (msg) {
-            if(msg.status){
-                $.util.dataToTpl('industry', 'industryTpl', msg.industries, function(d){
-                    if(window.sid){
-                        if(d.id == window.sid){
+            if (msg.status) {
+                $.util.dataToTpl('industry', 'industryTpl', msg.industries, function (d) {
+                    if (window.sid) {
+                        if (d.id == window.sid) {
                             d.default = 'default';
                         }
                     }
                     return d;
                 });
-                $('.industry').on('tap', function(){
+                $('.industry').on('tap', function () {
                     industryTap(this);
                 });
-                if($('.default').length != 0){
+                if ($('.default').length != 0) {
                     industryTap($('.default').get(0));
-                } else{
+                } else {
                     $('input[name="keyword"]').focus();
                     LEMON.sys.showKeyboard();
                 }
             }
         }
     });
-    
-    $('.a-s-title').on('touchstart',function(){
+
+    $('.a-s-title').on('tap', function () {
         $('.orgname').toggleClass('active');
-        if($('.a-s-mark').hasClass('disp')){
-            $('.a-s-mark').removeClass('disp').addClass('nblock');
-        }else if($('.a-s-mark').hasClass('nblock')){
-            $('.a-s-mark').removeClass('nblock').addClass('disp');
-        }else{
-            $('.a-s-mark').addClass('disp');
+//        if ($('.a-s-mark').hasClass('disp')) {
+//            $('.a-s-mark').removeClass('disp').addClass('nblock');
+//        } else if ($('.a-s-mark').hasClass('nblock')) {
+//            $('.a-s-mark').removeClass('nblock').addClass('disp');
+//        } else {
+//            $('.a-s-mark').addClass('disp');
+//        }
+        if ($('.a-s-mark').hasClass('a-s-width')) {
+            $('.a-s-mark').removeClass('a-s-width');
+        } else {
+            $('.a-s-mark').addClass('a-s-width');
         }
     });
-    
+
+
 
     var page = 2;
     setTimeout(function () {
         $(window).on("scroll", function () {
-            if($('.news-list-items').length == 0){
+            if ($('.news-list-items').length == 0) {
                 return;
             }
             $.util.listScroll('items', function () {
@@ -167,7 +173,7 @@
                         }
                         if (typeof msg === 'object') {
                             if (msg.status === true) {
-                                var html = $.util.dataToTpl('', 'search_tpl', msg.data , function (d) {
+                                var html = $.util.dataToTpl('', 'search_tpl', msg.data, function (d) {
                                     d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                                     d.author = d.user.truename;
                                     return d;
@@ -181,14 +187,14 @@
             });
         });
     }, 2000);
-    
-    
-    
-    
-    
-    
-    
-    $('#searchForm').submit(function(){
+
+
+
+
+
+
+
+    $('#searchForm').submit(function () {
         $.ajax({
             type: 'post',
             url: '/news/getSearchRes',
@@ -197,7 +203,7 @@
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
-                        var html = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                        var html = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
                             d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                             d.author = d.user.truename;
                             return d;
@@ -212,8 +218,8 @@
         $('input[name="keyword"]').blur();
         return false;
     });
-    
-    $('#doSearch').on('tap', function(){
+
+    $('#doSearch').on('tap', function () {
         $.ajax({
             type: 'post',
             url: '/news/getSearchRes',
@@ -222,7 +228,7 @@
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
-                        var html = $.util.dataToTpl('search', 'search_tpl', msg.data , function (d) {
+                        var html = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
                             d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                             d.author = d.user.truename;
                             return d;
@@ -236,7 +242,7 @@
         });
         $('input[name="keyword"]').blur();
     });
-    
+
 </script>
 <?php
 $this->end('script');
