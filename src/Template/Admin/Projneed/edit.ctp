@@ -36,6 +36,14 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">联系方式</label>
+        <div class="col-md-8">
+            <?php
+            echo $this->Form->input('contact', ['label' => false, 'class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">跟进人</label>
         <div class="col-md-8">
             <?php

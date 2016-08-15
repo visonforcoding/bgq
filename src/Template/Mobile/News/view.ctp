@@ -35,6 +35,9 @@
                 <time><?= $news->publish_time->i18nFormat('yyyy-MM-dd HH:mm:ss') ?></time>
             </h1>
             <img src="<?= $news->cover ?>"/>
+            <?php if ($news->is_media == 1 && $news->video): ?>
+                <?= $this->element('plyr', ['media' => $news->video]) ?>
+            <?php endif; ?>
             <p><?= $news->body ?></p>
             <div class="con-bottom clearfix pd20">
                 <!--阅读数-->

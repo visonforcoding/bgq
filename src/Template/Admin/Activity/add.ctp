@@ -12,18 +12,6 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">行业标签</label>
-        <div class="col-md-8">
-            <?= $this->cell('Industry') ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">专家推荐</label>
-        <div class="col-md-8">
-            <?= $this->cell('Savant') ?>
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-md-2 control-label">作者</label>
         <div class="col-md-8">
             <?= $this->cell('User', [[$activity->user_id]]) ?>
@@ -145,15 +133,27 @@
     <div class="form-group">
         <label class="col-md-2 control-label">摘要</label>
         <div class="col-md-8">
-            <script name='summary' id='summary' rows='3' type="text/plain" class='form-control-editor'><?= $activity->summary ?></script>
+            <?php
+            echo $this->Form->input('summary', ['label' => false,'type'=>'textarea', 'class' => 'form-control']);
+            ?>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">分享描述</label>
+        <label class="col-md-2 control-label">参与嘉宾</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('share_desc', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <script name='guest' id='guest' rows='3' type="text/plain" class='form-control-editor'><?= $activity->guest ?></script>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">行业标签</label>
+        <div class="col-md-8">
+            <?= $this->cell('Industry') ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">专家推荐</label>
+        <div class="col-md-8">
+            <?= $this->cell('Savant') ?>
         </div>
     </div>
     <div class="form-group">
@@ -178,7 +178,7 @@
         initJqupload('cover', '/wpadmin/util/doUpload?dir=activitycover', 'jpg,png,gif,jpeg'); //初始化图片上传
         initJqupload('thumb', '/wpadmin/util/doUpload?dir=activitythumb', 'jpg,png,gif,jpeg'); //初始化图片上传
         var ue = UE.getEditor('content'); //初始化富文本编辑器
-        UE.getEditor('summary');
+        var ue = UE.getEditor('guest'); //初始化富文本编辑器
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-user').select2({
             language: "zh-CN",
