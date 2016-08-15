@@ -155,7 +155,7 @@
         if (imgUrl)
             window.shareConfig.imgUrl = location.origin + imgUrl;
         window.shareConfig.link = 'http://m.chinamatop.com/meet/view/<?= $biggie->id ?>?share=1';
-        window.shareConfig.title = <?= $biggie->truename ?>.'的个人主页';
+        window.shareConfig.title = '<?= $biggie->truename ?>的个人主页';
         window.shareConfig.desc = '公司：<?= $biggie->company ?> \n\
                                     职位：<?= $biggie->position ?> \n\
                                     点击查看更多';
