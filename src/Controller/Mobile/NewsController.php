@@ -412,12 +412,10 @@ class NewsController extends AppController {
         $newstags = $this->News->Newstags->find()->hydrate(false)->all()->toArray();
         $newstag = [];
         foreach($newstags as $k=>$v){
-            if($v['pid'] == 1){
-                $newstag[] = [
-                    'id' => $v['id'],
-                    'name' => $v['name'],
-                ];
-            }
+            $newstag[] = [
+                'id' => $v['id'],
+                'name' => $v['name'],
+            ];
         }
         return $this->Util->ajaxReturn([
             'status' => true,

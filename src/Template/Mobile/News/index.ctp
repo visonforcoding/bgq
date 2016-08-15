@@ -26,7 +26,7 @@
     <section class='news-list-items'>
         <a href="javascript:void(0)">
             <h1 class="{#origin#}">{#author#}
-                <time>{#create_time#}</time>
+                <time>{#publish_time#}</time>
             </h1>
         </a>
         <a href="/news/view/{#id#}" class="newsbox clearfix">
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="sec-b-r">
-                {#newstags_html#}
+                {#newstags#}
             </div>
         </div>
     </section>
