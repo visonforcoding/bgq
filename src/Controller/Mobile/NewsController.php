@@ -220,23 +220,22 @@ class NewsController extends AppController {
      */
     public function getSearchRes() {
         $data = $this->request->data();
-        $newstags_id = $data['newstags_id'];
+        $newstag_id = $data['newstag_id'];
         
         $res = $this
                 ->News
                 ->find()
                 ->where(['title LIKE' => '%' . $data['keyword'] . '%'])
                 ->Orwhere(['body LIKE' => '%' . $data['keyword'] . '%']);
-        if ($newstags_id) {
+        if ($newstag_id) {
             $res = $res->matching(
-                'Newstags', function($q)use($newstags_id) {
-                    return $q->where(['Newstags.id' => $newstags_id]);
+                'Newstags', function($q)use($newstag_id) {
+                    return $q->where(['Newstags.id' => $newstag_id]);
                 }
             );
         } else {
             $res = $res->contain(['Newstags']);
         }
-        
         $res = $res->orderDesc('News.create_time'); // 默认按时间倒序排列
         $res = $res->contain(['Users'])
                 ->limit($this->newslimit)
