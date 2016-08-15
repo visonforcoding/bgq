@@ -12,7 +12,7 @@
         <div class="a-s-title">
             <span class="orgname active">选择标签</span>
         </div>
-        <ul class="a-s-mark s-width" id="industry">
+        <ul class="a-s-mark" id="industry">
         </ul>
     </div>
     <div id="search"></div>
@@ -72,6 +72,7 @@
 //        }
         
         if ($('.a-s-mark').hasClass('a-s-width')) {
+            setTimeout
             $('.a-s-mark').removeClass('a-s-width');
         } else {
             $('.a-s-mark').addClass('a-s-width');
