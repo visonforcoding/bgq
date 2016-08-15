@@ -26,38 +26,64 @@
                 <p><?= $subject->summary ?>
                 </p>
             </li>
-            <li>
-                <h3 class="t-tittle">约见保障计划</h3>
-                <div class="p20">
-                    <p>1.学员在申请约见时清楚写明自己的问题和个人相关背景；</p>
-                    <p>2.专家在约见前根据学员的问题提前做好准备；</p>
-                    <p>3.面谈时，专家以学员的问题为核心，从学员自身情况出发，
-                        为其答疑解惑、出谋划策、提出问题的解决之道；避免泛
-                        泛而谈或者脱离学员实际情况；</p>
-                    <p>4.双方见面不迟到，在面谈过程手机保持静音，不查收信息
-                        或接打电话；</p>
-                    <p>5.双方改期需提前24小时通知。
-                    </p>
-                </div>
-            </li>
         </ul>
     </section>
+    <div class="a-form-box m-form-box">
+        <ul>
+            <li>
+                <i>请简略介绍需求(300字以下)</i>
+                <textarea id="summary"></textarea>
+                <i class="m-tips"><b class="iconfont"></b>详细的介绍能让专家更加了解你<span>你填的信息只有专家能看到，不会公开给其它人</span></i>
+            </li>
+        </ul>
+    </div>
     <a href="javascript:void(0)" id="submit" class="nextstep" user_id="<?= $user_id ?>">立即预约</a>
 </div>
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
-    $('.nextstep').on('tap', function () {
+    window.subject_id = '<?= $subject->id ?>';
+</script>
+<script>
+//    $('.nextstep').on('tap', function () {
+//        if ($(this).attr('user_id') == '') {
+//            $.util.alert('请先登录');
+//            setTimeout(function () {
+//                location.href = '/user/login?redirect_url=/meet/subject-detail/<?= $subject->id ?>';
+//            }, 2000);
+//        } else {
+//            location.href = '/meet/book/<?= $subject->id ?>';
+//        }
+//    });
+
+    $('#submit').on('tap', function () {
         if ($(this).attr('user_id') == '') {
             $.util.alert('请先登录');
             setTimeout(function () {
                 location.href = '/user/login?redirect_url=/meet/subject-detail/<?= $subject->id ?>';
             }, 2000);
         } else {
-            location.href = '/meet/book/<?= $subject->id ?>';
+            var id = window.subject_id;
+            var summary = $('#summary').val();
+            if (!summary) {
+                $.util.alert('内容不可为空');
+                return false;
+            } else if (summary.length > 300) {
+                $.util.alert('');
+                return false;
+            }
+            $.util.ajax({
+                url: '/meet/book/<?= $subject->id ?>',
+                data: {id: id, summary: summary},
+                func: function (res) {
+                    $.util.alert(res.msg);
+                    if (res.status) {
+                        document.location.href = '/meet/book-success/<?= $subject->user->id ?>';
+                    }
+                }
+            });
         }
     });
-
 </script>
 <?php
 $this->end('script');

@@ -1119,6 +1119,9 @@ class HomeController extends AppController {
         ]);
     }
     
+    /**
+     * 保存所在城市
+     */
     public function saveCity(){
         $city = $this->request->data('city');
         $user = $this->User->get($this->user->id);
@@ -1220,6 +1223,9 @@ class HomeController extends AppController {
 //                                                                                        }
 //                                                                                    }
 
+    /**
+     * 名片夹搜索
+     */
     public function searchcard() {
         if ($this->request->is('post')) {
             $data = $this->request->data;
@@ -1353,14 +1359,24 @@ class HomeController extends AppController {
         if($data['region']){
             $city = $data['region'];
             if($city === '其他'){
-                $where['city NOT LIKE'] = '%北京%';
-                $where['city NOT LIKE'] = '%上海%';
-                $where['city NOT LIKE'] = '%广州%';
-                $where['city NOT LIKE'] = '%深圳%';
-                $where['city NOT LIKE'] = '%成都%';
-                $where['city NOT LIKE'] = '%杭州%';
-                $where['city NOT LIKE'] = '%香港%';
-                $where['city NOT LIKE'] = '%武汉%';
+                $where['and'] = [
+                    'city NOT LIKE'=>'%北京%',
+                    'city NOT LIKE'=>'%上海%',
+                    'city NOT LIKE'=>'%广州%',
+                    'city NOT LIKE'=>'%深圳%',
+                    'city NOT LIKE'=>'%成都%',
+                    'city NOT LIKE'=>'%杭州%',
+                    'city NOT LIKE'=>'%香港%',
+                    'city NOT LIKE'=>'%武汉%',
+                ];
+//                $where['city NOT LIKE'] = '%北京%';
+//                $where['city NOT LIKE'] = '%上海%';
+//                $where['city NOT LIKE'] = '%广州%';
+//                $where['city NOT LIKE'] = '%深圳%';
+//                $where['city NOT LIKE'] = '%成都%';
+//                $where['city NOT LIKE'] = '%杭州%';
+//                $where['city NOT LIKE'] = '%香港%';
+//                $where['city NOT LIKE'] = '%武汉%';
             } else {
                 $where['city LIKE'] = '%' . $city . '%';
             }
