@@ -593,3 +593,11 @@ ALTER TABLE `projneed`
 	ADD COLUMN `contact` VARCHAR(50) NOT NULL DEFAULT '' AFTER `needer`;
 ALTER TABLE `projneed`
 	CHANGE COLUMN `contact` `contact` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '联系方式' AFTER `needer`;	
+
+
+#8月15日
+ALTER TABLE `projrong`
+	CHANGE COLUMN `user_id` `user_id` INT(10) NOT NULL DEFAULT '0' COMMENT '发布人id' AFTER `id`;
+
+ALTER TABLE `projrong`
+	ADD COLUMN `contact` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '联系方式' AFTER `publisher`;	
