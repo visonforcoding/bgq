@@ -62,15 +62,15 @@
             </a>
         </li>
     </ul>
-<!--    <ul class="h-info-box e-info-box">
-        <li class="no-right-ico">
+    <ul class="h-info-box e-info-box">
+<!--        <li class="no-right-ico">
             <a href="javascript:void(0)">
                 <span>联系电话：</span>
                 <div>
                     <input type="phone" readonly value="<?=$user->phone?>" />
                 </div>
             </a>
-        </li>
+        </li>-->
         <li class="no-right-ico">
             <a href="javascript:void(0)">
                 <span>邮箱：</span>
@@ -79,7 +79,7 @@
                 </div>
             </a>
         </li>
-    </ul>-->
+    </ul>
     <ul class="h-info-box e-info-box">
         <li>
             <a href="/home/edit_industries">

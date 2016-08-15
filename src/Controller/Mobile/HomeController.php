@@ -758,6 +758,7 @@ class HomeController extends AppController {
             $data['company'] = $this->request->data('company');
             $data['gender'] = $this->request->data('gender');
             $data['position'] = $this->request->data('position');
+            $data['email'] = $this->request->data('email');
             $user = $this->User->patchEntity($user, $data);
             if ($this->User->save($user)) {
                 return $this->Util->ajaxReturn(true, '保存成功');
@@ -1395,6 +1396,19 @@ class HomeController extends AppController {
         } else {
             return $this->Util->ajaxReturn(false, '系统错误');
         }
+    }
+    
+    /**
+     * 服务条款
+     */
+    public function service(){
+        $this->set('pageTitle', '服务条款');
+    }
+    /**
+     * 免责声明
+     */
+    public function disclaimer(){
+        $this->set('pageTitle', '免责声明');
     }
 
 }

@@ -20,7 +20,7 @@
         <div class="entrollist">
             <div class="comm-info clearfix">
                 <a href="/user/home-page/<?=$recom->user->id; ?>">
-                    <span><img src="<?=$recom->user->avatar?>"/></span>
+                    <span><img src="<?= $recom->user->avatar ? $recom->user->avatar : '/mobile/images/touxiang.png' ?>"/></span>
                     <div class="infor-comm">
                         <i class="username"><?=$recom->user->truename?> </i>
                         <i class="job j-width"><?=$recom->user->company?>   <?=$recom->user->position?></i>
