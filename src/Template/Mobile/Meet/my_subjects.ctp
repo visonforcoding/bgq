@@ -29,5 +29,5 @@
 </div>
 
 <script>
-    LEMON.sys.back('/meet/view/<?= $user->id ?>');
+    LEMON.sys.back('/user/home_page/<?= $user->id ?>');
 </script>

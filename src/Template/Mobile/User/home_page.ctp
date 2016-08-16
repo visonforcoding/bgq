@@ -65,7 +65,7 @@
             </div>
         </div>
     </div>
-    <?php if($user->level === 2 && $user->subjects): ?>
+    <?php if($user->level == 2 && $user->subjects): ?>
         <!--话题-->
         <div class="m-subject-list">
             <div class="m-tomore-bottom m-pos-top">
@@ -78,7 +78,7 @@
             <div class="m-sub-con">
                 <?php foreach ($user->subjects as $k=>$v): ?>
                 <section>
-                    <a href="<?php if($self): ?>/meet/subject/<?= $v['id'] ?><?php else: ?>/meet/subject_detail/<?= $v['id'] ?><?php endif; ?>">
+                    <a href="<?php if($self): ?>/meet/subject/<?= $v['id'] ?><?php else: ?>/meet/subject_detail/<?= $v['id'] ?>/#homepage<?php endif; ?>">
                         <div class="m-sub-con-h">
                             <h3><?= $v['title'] ?></h3>
                         </div>

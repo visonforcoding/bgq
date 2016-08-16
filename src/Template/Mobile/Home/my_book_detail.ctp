@@ -15,10 +15,10 @@
             <li>
                 <h3><?=$subject->title?> <span><?=$subject->truename?> <?=$subject->company?> <?=$subject->position?></span></h3>
             </li>
-            <li>
+<!--            <li>
                 <span><?=$subject->price?>元/次</span>
                 <span>约<?=$subject->last_time?>小时</span>
-            </li>
+            </li>-->
             <li>
                 <p>
                     <?=$subject->summary?>
@@ -26,8 +26,8 @@
             </li>
         </ul>
     </section>
-    <?php if($book->status==1):?>
-    <a href="/wx/meet-pay/1/<?=$book->lmorder->id?>" class="nextstep">去付款</a>
+    <?php if($book->status==2):?>
+        <a href="javscript:void(0)" class="nextstep">预约没通过</a>
     <?php endif;?>
     <?php if($book->status==0):?>
         <a href="javascript:void(0)" class="nextstep" id="cancel">取消预约</a>
@@ -35,12 +35,17 @@
 </div>
 <div class="reg-shadow" ontouchmove="return false;" hidden id="shadow"></div>
 <div class="totips" style="height:3.6rem;" hidden id="isCancel" >
-    <h3>确定要离开吗？</h3>
+    <h3>确定要取消吗？</h3>
     <span></span>
     <a href="javascript:void(0)" class="tipsbtn" id="no">否</a><a href="javascript:void(0)" class="tipsbtn" id="yes">是</a>
 </div>
 <?php $this->start('script'); ?>
 <script>
+    if(document.URL.indexOf('#index') != -1){
+        LEMON.sys.back('/meet/index');
+    } else if(document.URL.indexOf('#homepage') != -1) {
+        LEMON.sys.back('/user/home_page');
+    }
     $('#cancel').on('tap', function(){
         $('#isCancel').show();
         $('#shadow').show();

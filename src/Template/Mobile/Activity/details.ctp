@@ -110,7 +110,7 @@
                 <ul>
                     <?php foreach ($activity->savants as $k => $v): ?>
                         <li>
-                            <a href="/meet/view/<?= $v['id'] ?>">
+                            <a href="/user/home_page/<?= $v['id'] ?>">
                                 <img src="<?= $v['avatar'] ? $v['avatar'] : '/mobile/images/touxiang.png' ?>" alt="<?= $v['truename'] ?>" />
                                 <h3><?= $v['truename'] ?><span><?= $v['company'] ?> <?= $v['position'] ?></span></h3>
                             </a>

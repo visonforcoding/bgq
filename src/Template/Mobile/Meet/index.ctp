@@ -96,7 +96,7 @@
     </section>
 </script>
 <script type='text/html' id='subTpl'>
-    <a href="/meet/subject_detail/{#id#}">{#title#}</a>
+    <a href="/meet/subject_detail/{#id#}/#index">{#title#}</a>
 </script>
 <script type='text/html' id='mySubTpl'>
     <a href="/meet/subject/{#id#}">{#title#}</a>
