@@ -135,12 +135,12 @@
 
     <!--吸底按钮-->
     <div class="fixed-btn">
-        <?php if (strtotime($activity->time) < time()): ?>
+        <?php if ($activity->apply_end_time < time()): ?>
             <a style="background:gray;" class="l-btn">我要赞助</a>
         <?php else: ?>
             <a href="/activity/recommend/<?= $activity->id; ?>" class="l-btn">我要赞助</a>
         <?php endif; ?>
-        <?php if(strtotime($activity->time) < time()): ?>
+        <?php if($activity->apply_end_time < time()): ?>
             <a style="background:gray;" class="r-btn">我要报名</a>
         <?php else: ?>
             <!--报名人数-->
