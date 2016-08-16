@@ -11,9 +11,8 @@
         <span type="savant_books" <?php if($savant_books): ?> class="active"<?php endif; ?>>约见我</span>
     </div>
     <div  class="inner my-home-slidemenu" id="statusTab">
-        <span status="1">待付款</span>
-        <span status="0" class="active">确认中</span>
-        <span status="3">已完成</span>
+        <span status="0" class="active">未确认</span>
+        <span status="1">已完成</span>
     </div>
 
     <div id="list">

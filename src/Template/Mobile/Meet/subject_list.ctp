@@ -15,7 +15,7 @@
             <?php if($subjects): ?>
                 <?php foreach($subjects as $subject): ?>
                     <li>
-                        <a class="alink clearfix" href="/meet/subject-detail/<?=$subject->id?>">
+                        <a class="alink clearfix" href="/meet/subject-detail/<?=$subject->id?>/#list">
                         <h3><?=$subject->title?></h3>
                         <span><?= $user->truename ?> <?= $user->company ?> <?= $user->position ?></span>
                         <i class="iconfont"></i>
@@ -33,5 +33,5 @@
 </div>-->
 
 <script>
-    LEMON.sys.back('/meet/view/<?= $user->id ?>');
+    LEMON.sys.back('/user/home_page/<?= $user->id ?>');
 </script>
