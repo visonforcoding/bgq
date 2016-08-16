@@ -1,10 +1,3 @@
-<link href="/mobile/lib/videojs/video-js.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/mobile/lib/videojs/video.min.js"></script>
-<style>
-    .video-js{
-        background-color:inherit;
-    }
-</style>
 <div class="wrapper">
     <div class="videocontent" style="width:80%;max-width:640px;margin:10px auto;">
         <video id="really-cool-video"  class="video-js vjs-default-skin  vjs-16-9" controls
