@@ -129,7 +129,7 @@
                                             <em><?= $v['name'] ?></em>
                                         <?php endforeach; ?>
                                     <?php else: ?>
-                                        <span>暂未填写</span>
+                                        <em>暂未填写</em>
                                     <?php endif; ?>
                                 </div>
                             </li>
@@ -140,7 +140,7 @@
                                             <em><?= $v ?></em>
                                         <?php endforeach; ?>
                                     <?php else: ?>
-                                        <span>暂未填写</span>
+                                        <em>暂未填写</em>
                                     <?php endif; ?>
                                 </div>
                             </li>
@@ -166,9 +166,13 @@
                     </li>
                     <li class="b-hy"><span><i class="iconfont">&#xe654;</i>所在行业</span>
                         <div>
-                            <?php foreach ($user->industries as $k => $v): ?>
-                                <em><?= $v['name'] ?></em>
-                            <?php endforeach; ?>
+                            <?php if($user->industries): ?>
+                                <?php foreach ($user->industries as $k => $v): ?>
+                                    <em><?= $v['name'] ?></em>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <em>暂未填写</em>
+                            <?php endif; ?>
                         </div>
                     </li>
                     <li class="b-bq"><span><i class="iconfont">&#xe653;</i>个人标签</span>
@@ -177,6 +181,8 @@
                                 <?php foreach (unserialize($user->grbq) as $k => $v): ?>
                                     <em><?= $v ?></em>
                                 <?php endforeach; ?>
+                            <?php else: ?>
+                                <em>暂未填写</em>
                             <?php endif; ?>
                         </div>
                     </li>
