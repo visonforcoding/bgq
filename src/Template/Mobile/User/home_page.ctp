@@ -65,7 +65,7 @@
             </div>
         </div>
     </div>
-    <?php if($user->subjects): ?>
+    <?php if($user->level === 2 && $user->subjects): ?>
         <!--话题-->
         <div class="m-subject-list">
             <div class="m-tomore-bottom m-pos-top">
