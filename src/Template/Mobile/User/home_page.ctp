@@ -297,11 +297,11 @@
         </div>
     </div>
     <div class="h2"></div>
-    <?php if($self): ?>
+</div>
+<?php if($self): ?>
         <div style="height:1rem"></div>
         <a href="/home/edit_userinfo" class="f-bottom">编辑个人资料</a>
     <?php endif; ?>
-</div>
 <?php $this->start('script') ?>
 <script>
 //    (function () {
