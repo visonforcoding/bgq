@@ -93,7 +93,11 @@
             <a href="/home/edit-city">
                 <span>所在地：</span>
                 <div>
-                    <span></span>
+                    <span>
+                        <?php if(!$user->city): ?>
+                        未完善
+                        <?php endif; ?>
+                    </span>
                 </div>
             </a>
         </li>
