@@ -45,11 +45,15 @@
                 </li>
                 <li>
                     <i class="iconfont">&#xe672;</i>
-                    <?php if ($user->secret): ?>
-                        <?php if ($user->secret->email_set == '1'): ?>
-                            <span><?= $user->email ?></span>
+                    <?php if (!$self): ?>
+                        <?php if ($user->secret): ?>
+                            <?php if ($user->secret->email_set == '1'): ?>
+                                <span><?= $user->email ?></span>
+                            <?php else: ?>
+                                <span>暂未公开</span>
+                            <?php endif; ?>
                         <?php else: ?>
-                            <span>暂未公开</span>
+                            <span><?= $user->email ?></span>
                         <?php endif; ?>
                     <?php else: ?>
                         <span><?= $user->email ?></span>
