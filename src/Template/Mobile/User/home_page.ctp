@@ -187,7 +187,7 @@
                         </div>
                     </li>
                     <li class="b-yw"><span><i class="iconfont">&#xe655;</i>擅长业务</span><div><em><?= $user->goodat ? $user->goodat : '暂未填写' ?></em></div></li>
-                    <li class="b-gs nobottom"><span><i class="iconfont">&#xe656;</i>公司业务</span><div><em><?= $user->gsyw ? $user->gsyw : '暂未填写' ?></em></div></li>
+                    <li class="b-gs noafter"><span><i class="iconfont">&#xe656;</i>公司业务</span><div><em><?= $user->gsyw ? $user->gsyw : '暂未填写' ?></em></div></li>
                 </ul>
             <?php endif; ?>
             <?php if (!$self): ?>
