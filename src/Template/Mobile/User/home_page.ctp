@@ -107,12 +107,12 @@
     <?php endif; ?>
     <!--基本资料-->
     <div class="infotab m-infotab-list">
-        <ul class="h-tab bd1">
+        <ul class="h-tab">
             <li class="active"><i class="iconfont">&#xe650;</i>基本资料</li>
             <li><i class="iconfont">&#xe651;</i>工作经历</li>
             <li><i class="iconfont">&#xe652;</i>教育经历</li>
         </ul>
-        <div class="tabcon bd1">
+        <div class="tabcon bd2">
             <?php if (!$self): ?>
                 <?php if ($user->secret): ?>
                     <?php if ($user->secret->profile_set == '1'): ?>
