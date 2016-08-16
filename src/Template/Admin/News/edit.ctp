@@ -106,10 +106,10 @@
             <span class="notice">(*文件大小在30M以内,支持格式为mp4、m4v)</span>
             <div class="row">
                 <div  class="img-thumbnail input-img"  single>
-                    <img  alt="这里上传视频的封面" src="<?=$news->media_cover?>"/>
+                    <img  alt="这里上传视频的封面" src="<?=$news->video_cover?>"/>
                 </div>
                 <div style="color:red">这里上传视频的封面</div>
-                <input name="video_cover" value="<?=$news->media_cover?>"  type="hidden"/>
+                <input name="video_cover" value="<?=$news->video_cover?>"  type="hidden"/>
                 <div id="video_cover" class="jqupload">上传</div>
             </div>
         </div>
