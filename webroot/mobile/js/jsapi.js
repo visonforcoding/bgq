@@ -30,10 +30,9 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
     window.nativeShare = function (type) {
         LEMON.share[type](window.shareConfig, function(){});
     };
-    window.onBottom = window.onBottom || function () {
-    };
-    window.onActiveView = window.onActiveView || function () {
-    };
+    window.onBottom = window.onBottom || function () {};
+    window.onBackView = window.onBackView || function () {};
+    window.onActiveView = window.onActiveView || function () {};
     var LEMON = {};
     window.__isAPP = LEMON.isAPP = window.JSApi || navigator.userAgent.toLowerCase().indexOf("smartlemon") >= 0;  //判断页面是否在app的环境中
 
@@ -95,7 +94,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
         'login.wx',
         'pay.wx',
         'pay.ali',
-        "event.invite",
+        "event.invite", //短信分享
         "event.getLocation",
         "event.tel",
         "event.uploadPhoto",
