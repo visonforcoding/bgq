@@ -65,7 +65,7 @@
     <div class="dk">
         <ul id='items'>
             <?php foreach ($biggieAd as $k => $v): ?>
-                <li><a href="/meet/view/<?= $v['savant']['user_id'] ?>"><img src="<?= $v['url'] ?>"/></a></li>
+                <li><a href="/user/home_page/<?= $v['savant']['user_id'] ?>"><img src="<?= $v['url'] ?>"/></a></li>
             <?php endforeach; ?>
         </ul>
     </div>
@@ -83,7 +83,7 @@
     <section class="internet-v-info">
         <div class="innercon">
             <a href="/user/home_page/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
-            <div class="vipinfo">
+            <div class="v ipinfo">
                 <a href="/user/home_page/{#id#}">
                     <h3><div class="l-name">{#truename#}</div>{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
                     <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
@@ -149,7 +149,8 @@
                     if (res.status) {
                         var html = $.util.dataToTpl('', 'biggie_tpl', res.data, function (d) {
                             d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
-                            d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
+//                            d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
+                            d.city = '';
                             d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
                             return d;
                         });
