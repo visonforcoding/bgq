@@ -97,7 +97,6 @@
             <span><i class="iconfont">&#xe62e;</i>我要点评</span>
         </h3>
         <div id="allComments"></div>
-        <div id="buttonLoading" class="loadingbox"></div>
     </section>
 </div>
 <!--底部四个图-->
