@@ -45,7 +45,7 @@
     <div class="h-home-menu">
         <ul class="clearfix">
             <li><a href="/home/my-secret"><i class="iconfont">&#xe624;</i>隐私策略</a></li>
-            <li><a id="shareTo" href="javascript:shareFriends();"><i class="iconfont">&#xe635;</i>分享</a></li>
+            <li><a id="shareTo" href="javascript:shareFriends();"><i class="iconfont">&#xe635;</i>邀请好友</a></li>
         </ul>
     </div>
 </script>
@@ -187,14 +187,7 @@
     
     function shareFriends(){
         // 分享设置
-        window.shareConfig.link = 'http://m.chinamatop.com/';
-        window.shareConfig.title = '并购帮';
-        if($.util.isAPP){
-            LEMON.share.banner();
-        } else if ($.util.isWX){
-            $('#wxshare').show();
-            $('#shadow').show();
-        }
+        LEMON.event.invite('向你推荐并购帮APP，里面有大量的并购资讯，并购活动，和很多并购大咖http://t.cn/RtSw8QS');
     }
     
     $('#wxshare').on('tap', function(){

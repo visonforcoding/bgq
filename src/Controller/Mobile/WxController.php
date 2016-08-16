@@ -311,13 +311,17 @@ class WxController extends AppController {
         }
     }
 
-    public function shareDownload($controller, $id) {
-        if($controller == 'news'){
-            $url = '/news/view/'.$id;
-        } elseif($controller == 'activity'){
-            $url = '/activity/details/'.$id;
-        } elseif($controller == 'user') {
-            $url = '/meet/view/'.$id;
+    public function shareDownload($controller=null, $id=null) {
+        if($controller && $id){
+            if($controller == 'news'){
+                $url = '/news/view/'.$id;
+            } elseif($controller == 'activity'){
+                $url = '/activity/details/'.$id;
+            } elseif($controller == 'user') {
+                $url = '/meet/view/'.$id;
+            }
+        } else {
+            $url = '/';
         }
         $this->set([
             'pageTitle'=>'下载并购帮',
