@@ -21,7 +21,7 @@
             <ul class="m-lilist-des">
                 <li>
                     <i class="iconfont">&#xe660;</i>
-                    <span><?= $user->city ?></span>
+                    <span><?= $user->city ? $user->city : '暂未填写' ?></span>
                 </li>
                 <li>
                     <i class="iconfont">&#xe671;</i>
@@ -30,17 +30,17 @@
                             <?php if ($user->secret->phone_set == '1'): ?>
                                 <a href="tel:<?= $user->phone ?>" onclick="if ($.util.isAPP) {
                                                         LEMON.event.tel(<?= $user->phone ?>);
-                                                    }"><span><?= $user->phone ?></span></a>
-                               <?php else: ?>
+                                                    }"><span><?= $user->phone ? $user->phone : '暂未填写' ?></span></a>
+                            <?php else: ?>
                                 <span>暂未公开</span>
                             <?php endif; ?>
                         <?php else: ?>
                             <a href="tel:<?= $user->phone ?>" onclick="if ($.util.isAPP) {
                                                 LEMON.event.tel(<?= $user->phone ?>);
-                                            }"><span><?= $user->phone ?></span></a>
+                                            }"><span><?= $user->phone ? $user->phone : '暂未填写' ?></span></a>
                            <?php endif; ?>
                        <?php else: ?>
-                        <span><?= $user->phone ?></span>
+                        <span><?= $user->phone ? $user->phone : '暂未填写' ?></span>
                     <?php endif; ?>
                 </li>
                 <li>
@@ -48,15 +48,15 @@
                     <?php if (!$self): ?>
                         <?php if ($user->secret): ?>
                             <?php if ($user->secret->email_set == '1'): ?>
-                                <span><?= $user->email ?></span>
+                                <span><?= $user->email ? $user->email : '暂未填写' ?></span>
                             <?php else: ?>
                                 <span>暂未公开</span>
                             <?php endif; ?>
                         <?php else: ?>
-                            <span><?= $user->email ?></span>
+                            <span><?= $user->email ? $user->email : '暂未填写' ?></span>
                         <?php endif; ?>
                     <?php else: ?>
-                        <span><?= $user->email ?></span>
+                        <span><?= $user->email ? $user->email : '暂未填写' ?></span>
                     <?php endif; ?>
                 </li>
             </ul>
@@ -124,9 +124,13 @@
                             </li>
                             <li class="b-hy"><span><i class="iconfont">&#xe654;</i>所在行业</span>
                                 <div>
-                                    <?php foreach ($user->industries as $k => $v): ?>
-                                        <em><?= $v['name'] ?></em>
-                                    <?php endforeach; ?>
+                                    <?php if($user->industries): ?>
+                                        <?php foreach ($user->industries as $k => $v): ?>
+                                            <em><?= $v['name'] ?></em>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <span>暂未填写</span>
+                                    <?php endif; ?>
                                 </div>
                             </li>
                             <li class="b-bq"><span><i class="iconfont">&#xe653;</i>个人标签</span>
@@ -135,6 +139,8 @@
                                         <?php foreach (unserialize($user->grbq) as $k => $v): ?>
                                             <em><?= $v ?></em>
                                         <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <span>暂未填写</span>
                                     <?php endif; ?>
                                 </div>
                             </li>
