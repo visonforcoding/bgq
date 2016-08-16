@@ -186,11 +186,20 @@ class ActivityController extends AppController {
      */
     public function enroll($id = '') {
         $this->handCheckLogin();
+        
         if ($id) {
             $activity = $this->Activity->get($id, [
                 'contain' => ['Users'],
             ]);
             if ($this->request->is('post')) {
+                $UserTable = \Cake\ORM\TableRegistry::get('user');
+                $user = $UserTable->get($this->user->id, [
+                    'contain' => ['Careers', 'Educations', 'Industries']
+                ]);
+                $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->educations && $user->careers && $user->card_path;
+                if(!$is_complete){
+                    return $this->Util->ajaxReturn(false, '请先去完善个人资料');
+                }
                 $activityApply = $this->Activity->Activityapply->newEntity();
                 $data = [
                     'user_id' => $this->user->id,
@@ -659,7 +668,8 @@ class ActivityController extends AppController {
                         ->order(['Activity.is_top'=>'desc', 'Activity.create_time'=>'desc'])
                         ->toArray();
         foreach($activity as $k=>$v){
-            if(strtotime($v['time']) <= time()){
+            $now = \Cake\I18n\Time::now();
+            if($v['time'] < $now){
                 $activity[$k]['pass_time'] = 1;
             } else {
                 $activity[$k]['pass_time'] = 0;

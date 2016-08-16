@@ -63,9 +63,11 @@
                data:{content:content},
                func:function(res){
                    $.util.alert(res.msg);
-                   setTimeout(function(){
-                       location.href = '/home/my_xiaomi';
-                   },2000);
+                   if(res.status){
+                        setTimeout(function(){
+                            location.href = '/home/my_xiaomi';
+                        },2000);
+                    }
                }
             });
         });
