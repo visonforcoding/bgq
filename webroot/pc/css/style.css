@@ -104,7 +104,7 @@ z-index:3;margin:0 auto;}
 .inputform div input,.formlist li{margin-right:10px;}
 .formlist label,.editcon h3{font-size:16px;color:#000;display: block;line-height: 42px;}
 .formlist label em{float:right;color:#c1c1c1;}
-.slectform div,.s-inputform div{width:275px;height:48px;border:1px #d2d2d2 solid;position:relative;background: #fff;}
+.slectform div,.s-inputform div.change-wd{width:275px;height:48px;border:1px #d2d2d2 solid;position:relative;background: #fff;}
 .slectform div:before,.s-inputform div:before{position:absolute;content:'';width:10px;height:10px;background: #E01B49;border-radius: 50%;right:20px;bottom:20px;}
 .slectform select{width:230px;height:100%;position:absolute;left:0;top:0;appearance:none;  
 -moz-appearance:none; /* Firefox */  
@@ -121,7 +121,7 @@ overflow:hidden;cursor: pointer;z-index: 999;}
 .inputform div input{border:1px #d2d2d2 solid;width:275px;height:46px;background: #fff;text-indent: 20px;font-size:14px;}
 .inputform div.change-wd input{width:560px;}
 .inputform .change-wd textarea{height:78px;resize: none;border:1px #d2d2d2 solid; padding:10px;width:540px;}
-.s-inputform div{border:1px #d2d2d2 solid;width:563px;height:48px;}
+.s-inputform div.change-wd{border:1px #d2d2d2 solid;width:563px;height:48px;}
 .s-inputform div input{height:44px;line-height: 44px;font-size:14px;text-indent: 20px;width:90%;}
 .editcon h3{line-height: 50px;}
 .editcon h3 em{font-size:14px;}
