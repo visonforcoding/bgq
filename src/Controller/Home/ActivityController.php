@@ -8,7 +8,7 @@ use Cake\Mailer\Email;
 /**
  * User Controller
  *
- * @property \App\Model\Table\UserTable $User
+ * @property \App\Model\Table\ActivityTable $Activity
  * @property \App\Controller\Component\HanvonComponent $Hanvon
  * @property \App\Controller\Component\SmsComponent $Sms
  * @property \App\Controller\Component\BusinessComponent $Business
@@ -17,9 +17,26 @@ use Cake\Mailer\Email;
 class ActivityController extends AppController {
     
     public function release(){
+        $activity = $this->Activity->newEntity();
+        $data = [];
         if($this->request->is('post')){
-            
+            $data['company'] = $this->request->data('company');
+            $data['scale'] = $this->request->data('scale');
+            $data['title'] = $this->request->data('title');
+            $data['time'] = $this->request->data('time');
+            $data['summary'] = $this->request->data('summary');
+            $data['address'] = $this->request->data('address');
+            $data['body'] = $this->request->data('body');
+            $data['from_user'] = -1;
+            $activity = $this->Activity->patchEntities($activity, $data);
+            $res = $this->Activity->save($activity);
+            if($res){
+                $this->Util->ajaxReturn(true, '提交成功，请下载APP查看');
+            } else {
+                $this->Util->ajaxReturn(false, '系统错误');
+            }
         }
+        
         $userTable = \Cake\ORM\TableRegistry::get('user');
         $industryTable = \Cake\ORM\TableRegistry::get('industry');
         $user = $userTable->get($this->user->id);
@@ -30,6 +47,7 @@ class ActivityController extends AppController {
             'user' => $user,
             'series' => $series,
             'industries' => $industries,
+            'activity' => $activity
         ]);
     }
 }
