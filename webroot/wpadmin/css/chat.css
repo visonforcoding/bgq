@@ -46,7 +46,7 @@ and open the template in the editor.
     padding: 10px 10px;
     display: inline-block;
     min-height: 30px;
-    position: relative;
+    /*position: relative;*/
 }
 /*.chat li .chat-body p:before{
     border-width: 6px;
