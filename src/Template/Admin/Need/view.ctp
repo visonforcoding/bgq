@@ -31,30 +31,32 @@
                                     <?php foreach ($needs as $need): ?>
                                         <?php if ($need->reply_id > 0): ?>
                                             <li class="right clearfix"><span class="chat-img pull-right">
-                                                    <img src="<?=  getAvatar($need->user->avatar)?>" alt="User Avatar" class="img-circle" />
+                                                    <img src="<?= getAvatar($need->user->avatar) ?>" alt="User Avatar" class="img-circle" />
                                                 </span>
                                                 <div class="chat-body clearfix">
                                                     <div class="header">
-                                                        <small class=" text-muted"><span class="glyphicon glyphicon-time"></span><?=$need->create_time?></small>
-                                                        <strong class="pull-right primary-font"><?=$need->user->truename?> <?=$need->user->company?> <?=$need->user->position?></strong>
+                                                        <!--<small class=" text-muted"><span class="glyphicon glyphicon-time"></span><?= $need->create_time ?></small>-->
+                                                        <strong class="pull-right primary-font"><?= $need->user->truename ?> <?= $need->user->company ?> <?= $need->user->position ?></strong>
                                                     </div>
                                                     <p class="pull-right">
-                                                       <?=$need->msg?>
+                                                        <?= $need->msg ?>
                                                     </p>
+                                                    <small style="display: block;float: right"  class=" text-muted"><span class="glyphicon glyphicon-time"></span><?= $need->create_time ?></small>
                                                 </div>
                                             </li>
                                         <?php else: ?>
                                             <li class="left clearfix"><span class="chat-img pull-left">
-                                                    <img src="<?=  getAvatar($need->user->avatar)?>" alt="User Avatar" class="img-circle" />
+                                                    <img src="<?= getAvatar($need->user->avatar) ?>" alt="User Avatar" class="img-circle" />
                                                 </span>
                                                 <div class="chat-body clearfix">
                                                     <div class="header">
-                                                        <strong class="primary-font"><?=$need->user->truename?> <?=$need->user->company?> <?=$need->user->position?></strong> <small class="pull-right text-muted">
-                                                            <span class="glyphicon glyphicon-time"></span><?=$need->create_time?></small>
+                                                        <strong class="primary-font"><?= $need->user->truename ?> <?= $need->user->company ?> <?= $need->user->position ?></strong> 
+                                                        <!--<small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span><?= $need->create_time ?></small>-->
                                                     </div>
                                                     <p>
-                                                       <?=$need->msg?>
+                                                        <?= $need->msg ?>
                                                     </p>
+                                                    <small style="display: block;" class="text-muted"><span class="glyphicon glyphicon-time"></span><?= $need->create_time ?></small>
                                                 </div>
                                             </li>
                                         <?php endif; ?>
@@ -76,25 +78,25 @@
             </div>
         </div>
         <script>
-                $(function () {
-                    $('#btn-chat').on('click', function () {
-                        var msg = $('#msg').val();
-                        if(!msg){
-                            layer.msg('回复的内容不可以回空哦');
-                            return;
+            $(function () {
+                $('#btn-chat').on('click', function () {
+                    var msg = $('#msg').val();
+                    if (!msg) {
+                        layer.msg('回复的内容不可以回空哦');
+                        return;
+                    }
+                    $.ajax({
+                        type: 'post',
+                        data: {msg: msg},
+                        dataType: 'json',
+                        url: '/admin/need/reply/<?= $id ?>',
+                        success: function (res) {
+                            window.location.reload();
                         }
-                        $.ajax({
-                            type: 'post',
-                            data: {msg:msg},
-                            dataType: 'json',
-                            url: '/admin/need/reply/<?=$id?>',
-                            success: function (res) {
-                                window.location.reload();
-                            }
-                        });
                     });
                 });
-            </script>
+            });
+        </script>
     </body>
 </html>
 
