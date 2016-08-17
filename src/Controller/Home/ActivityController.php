@@ -28,12 +28,12 @@ class ActivityController extends AppController {
             $data['address'] = $this->request->data('address');
             $data['body'] = $this->request->data('body');
             $data['from_user'] = -1;
-            $activity = $this->Activity->patchEntities($activity, $data);
+            $activity = $this->Activity->patchEntity($activity, $data);
             $res = $this->Activity->save($activity);
             if($res){
-                $this->Util->ajaxReturn(true, '提交成功，请下载APP查看');
+                return $this->Util->ajaxReturn(true, '提交成功，请下载APP查看');
             } else {
-                $this->Util->ajaxReturn(false, '系统错误');
+                return $this->Util->ajaxReturn(false, '系统错误');
             }
         }
         
