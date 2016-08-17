@@ -36,9 +36,9 @@
                                                 <div class="chat-body clearfix">
                                                     <div class="header">
                                                         <small class=" text-muted"><span class="glyphicon glyphicon-time"></span><?=$need->create_time?></small>
-                                                        <strong class="pull-right primary-font"><?=$need->user->truename?></strong>
+                                                        <strong class="pull-right primary-font"><?=$need->user->truename?> <?=$need->user->company?> <?=$need->user->position?></strong>
                                                     </div>
-                                                    <p>
+                                                    <p class="pull-right">
                                                        <?=$need->msg?>
                                                     </p>
                                                 </div>
@@ -49,7 +49,7 @@
                                                 </span>
                                                 <div class="chat-body clearfix">
                                                     <div class="header">
-                                                        <strong class="primary-font"><?=$need->user->truename?></strong> <small class="pull-right text-muted">
+                                                        <strong class="primary-font"><?=$need->user->truename?> <?=$need->user->company?> <?=$need->user->position?></strong> <small class="pull-right text-muted">
                                                             <span class="glyphicon glyphicon-time"></span><?=$need->create_time?></small>
                                                     </div>
                                                     <p>
