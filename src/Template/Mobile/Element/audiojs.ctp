@@ -1,6 +1,7 @@
 <style>
     .audio{
-        width: 90%;
+        max-width: 90%;
+        width: 300px;
         margin: 0.1rem auto;
         text-align: justify;
     }
