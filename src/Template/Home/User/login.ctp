@@ -49,10 +49,7 @@
             success: function (res) {
                 console.log(res);
                 if(res.status){
-                    $.util.alert(res.msg);
-                    setTimeout(function(){
-                        location.href = '/w/index/index';
-                    }, 2000);
+                    location.href = '/w/index/index';
                 }
             }
         });
