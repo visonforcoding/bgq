@@ -552,75 +552,69 @@ class MeetController extends AppController {
     }
     
     /**
-     * 行业搜索会员页面
+     * 约见中间栏搜索
      * @param int $id 行业id
      */
-    public function moreIndustries($id = ''){
-        $industriesTable = \Cake\ORM\TableRegistry::get('industry');
-        if($id)
-        {
-            $industry = $industriesTable->get($id);
-            $biggie = $this
-                    ->User
-                    ->find()
-                    ->matching('Industries', function($q)use($id){
-                        return $q->where(['Industries.id'=>$id]);
-                    })
-                    ->contain(['Subjects'])
-                    ->where(['enabled'=>'1', 'level'=>'2'])
-                    ->toArray();
-            $this->set([
-                'biggiejson'=>json_encode($biggie),
-                'pageTitle' => $industry->name,
-            ]);
+    public function searchByAgency($id = ''){
+        switch ($id){
+            case '1':
+                $title = '产业投资';
+                break;
+            case '2':
+                $title = '并购融资';
+                break;
+            case '3':
+                $title = '并购顾问';
+                break;
+            case '4':
+                $title = '并购买家';
+                break;
         }
-        else
-        {
-            $biggie = $this
-                    ->User
-                    ->find()
-                    ->contain(['Subjects'])
-                    ->where(['enabled'=>'1', 'level'=>'2'])
-                    ->toArray();
-            $this->set([
-                'biggiejson'=>json_encode($biggie),
-                'pageTitle' => '行业搜索',
-            ]);
-        }
-        $industries = $industriesTable->find()->where(['pid !='=>0])->toArray();
         $this->set([
-            'industries'=>$industries,
             'id' => $id,
+            'pageTitle' => $title
         ]);
+    }
+    
+    public function getAgency($id=''){
+        if(!in_array($id, ['1','2','3','4'])){
+            return $this->Util->ajaxReturn(false, '非法操作');
+        }
+        $AgencyTable = \Cake\ORM\TableRegistry::get('agency');
+        if($id == 4){
+            $agencies = $AgencyTable->find()->where(['id in'=>['22', '23', '24', '25']])->toArray();
+        } else {
+            $agencies = $AgencyTable->find()->where(['pid'=>$id])->toArray();
+        }
+        if($agencies){
+            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$agencies]);
+        } else {
+            return $this->Util->ajaxReturn(false, '系统错误');
+        }
     }
     
     /**
      * ajax获取行业搜索会员结果
      */
-    public function getIndustriesBiggie(){
+    public function getAgenciesBiggie(){
         $data = $this->request->data();
-        $industry_id = $data['industry_id'];
-        $sort = $data['sort'];
+        $agency_id = $data['agency_id'];
+        $keyword = $data['keyword'];
+        $where['enabled'] = '1';
+        $where['level'] = '2';
         $biggie = $this
                     ->User
                     ->find();
         // 选择标签再匹配
-        if($industry_id)
-        {
-            $biggie = $biggie->matching('Industries', function($q)use($industry_id){
-                            return $q->where(['Industries.id'=>$industry_id]);
-                        });
+        if($agency_id) {
+            $where['agency_id'] = $agency_id;
         }
-        if($sort) {
-            if($sort !== 'reco_nums'){
-                $biggie = $biggie->orderDesc($sort);
-            } else {
-                $biggie = $biggie->matching('Savants')->orderDesc('Savants.reco_nums');
-            }
+        if($keyword) {
+            $where['truename like'] = "%$keyword%";
         }
         $biggie = $biggie
                 ->contain(['Subjects'])
-                ->where(['enabled'=>'1', 'level'=>'2'])
+                ->where($where)
                 ->toArray();
         if($biggie !== false){
             if ($biggie) {
