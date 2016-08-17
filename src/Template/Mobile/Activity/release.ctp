@@ -30,6 +30,9 @@
         <div class="line">
             <span class="mistips">我们会在三个工作日内处理您的申请</span>
         </div>
+        <div class="line">
+            <span class="mistips" style="width:auto;left:44%;">到 http://t.cn/Rt8lDEA 可以填写更详细的内容</span>
+        </div>
         <?php endif; ?>
     </form>
     <div class='reg-shadow' hidden></div>
