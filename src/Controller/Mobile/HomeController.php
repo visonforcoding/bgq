@@ -782,7 +782,7 @@ class HomeController extends AppController {
                 return $this->Util->ajaxReturn(true, '保存成功');
             } else {
                 \Cake\Log\Log::error($user->errors(),'devlog');
-                return $this->Util->ajaxReturn(false, '保存失败');
+                return $this->Util->ajaxReturn(false,  errorMsg($user,'保存失败'));
             }
         }
         $this->set([
