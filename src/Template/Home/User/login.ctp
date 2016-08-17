@@ -2,7 +2,7 @@
     <div class="head">
         <h1 class="innerbox wxlogin">
             <a href="javascript:void(0)" class="cur login" id="login">登录</a>
-            <a href="/w/register" class="reg">注册</a>
+            <!--<a href="/w/register" class="reg">注册</a>-->
             <div class="wx" id="wx">
                 <img src="/<?= $code; ?>"/>
                 <i>打开并购圈APP，扫码登陆</i>

@@ -34,15 +34,18 @@ class UserController extends AppController {
      * @param string $guid
      */
     public function scanLogin($guid) {
-        $user_id = $this->user->id;
-        $user = $this->User->get($user_id);
-        $data['guid'] = $guid;
-        $user = $this->User->patchEntity($user, $data);
-        $res = $this->User->save($user);
-        if($res){
-            $this->set('res', '授权成功！');
+        if($this->user){
+            $user_id = $this->user->id;
+            $user = $this->User->get($user_id);
+            $user->guid = $guid;
+            $res = $this->User->save($user);
+            if($res){
+                $this->set('res', '授权成功');
+            } else {
+                $this->set('res', '授权失败');
+            }
         } else {
-            $this->set('res', '授权失败！');
+            $this->redirect('/home/index');
         }
         $this->set([
             'pageTitle'=>'扫码登录',
