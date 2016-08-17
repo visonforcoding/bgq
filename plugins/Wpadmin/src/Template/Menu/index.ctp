@@ -34,6 +34,11 @@
                     $('#main-content').bind('resize', function () {
                         $("#list").setGridWidth($('#main-content').width() - 40);
                     });
+                    $(document).keypress(function (e) {
+                        if (e.which == 13) {
+                            doSearch();
+                        }
+                    });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
                         url: "/wpadmin/menu/getDataList",
@@ -45,24 +50,24 @@
                             {name: 'name', editable: true, align: 'center'},
                             {name: 'node', editable: true, align: 'center'},
                             {name: 'pid', editable: true, align: 'center'},
-                            {name: 'class', editable: true, align: 'center',formatter:function(cell,option,row){
-                                    return '<i class="icon '+cell+' "></i>';
-                            }},
+                            {name: 'class', editable: true, align: 'center', formatter: function (cell, option, row) {
+                                    return '<i class="icon ' + cell + ' "></i>';
+                                }},
                             {name: 'rank', editable: true, align: 'center'},
-                            {name: 'is_menu', editable: true, align: 'center',formatter:function(cell,option,row){
-                                    if(cell){
+                            {name: 'is_menu', editable: true, align: 'center', formatter: function (cell, option, row) {
+                                    if (cell) {
                                         return '是';
                                     }
                                     return '否';
-                            }},
-                            {name: 'status', editable: true, align: 'center',formatter:function(cell,option,row){
-                                    if(cell){
+                                }},
+                            {name: 'status', editable: true, align: 'center', formatter: function (cell, option, row) {
+                                    if (cell) {
                                         return '是';
                                     }
                                     return '否';
-                            }},
+                                }},
                             {name: 'remark', editable: true, align: 'center'},
-                            {name: 'actionBtn',align: 'center', viewable: false, sortable: false,width:260, formatter: actionFormatter}],
+                            {name: 'actionBtn', align: 'center', viewable: false, sortable: false, width: 260, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: 30,
                         rowList: [10, 20, 30],
