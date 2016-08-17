@@ -41,7 +41,7 @@ and open the template in the editor.
 .chat li .chat-body p {
     margin: 0;
     color: #151414;
-    border-radius: 15px;
+    border-radius: 5px 5px 15px 5px;
     line-height: 30px;
     padding: 10px 10px;
     display: inline-block;

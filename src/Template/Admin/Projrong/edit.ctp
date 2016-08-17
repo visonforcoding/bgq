@@ -104,7 +104,7 @@
         <label class="col-md-2 control-label">核心团队</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('team', ['label' => false, 'class' => 'form-control']);
+            echo $this->Form->input('team', ['label' => false, 'type' => 'textarea', 'class' => 'form-control']);
             ?>
         </div>
     </div>
