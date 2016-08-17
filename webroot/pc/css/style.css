@@ -106,8 +106,17 @@ z-index:3;margin:0 auto;}
 .formlist label em{float:right;color:#c1c1c1;}
 .slectform div,.s-inputform div{width:275px;height:48px;border:1px #d2d2d2 solid;position:relative;background: #fff;}
 .slectform div:before,.s-inputform div:before{position:absolute;content:'';width:10px;height:10px;background: #E01B49;border-radius: 50%;right:20px;bottom:20px;}
-.slectform select{width:230px;height:100%;position:absolute;left:0;top:0;opacity: 0;}
-.slectform span{width:16px;height:9px;position:absolute;background: url(../img/select.png) no-repeat;right:46px;z-index:2;bottom:20px;}
+.slectform select{width:230px;height:100%;position:absolute;left:0;top:0;appearance:none;  
+-moz-appearance:none; /* Firefox */  
+-webkit-appearance:none; background: transparent;outline:none;border:none;}
+.a_type_list{width:100%;position:absolute;bottom:-199px;border:1px #ccc solid;z-index: 999;background: #fff;left:0;padding:5px 0;height:200px;overflow-y: auto;overflow-x:hidden;box-sizing: border-box;display:none;}
+.slectform{position:relative;}
+.a_type_list li{width:100%;height:22px;line-height: 22px;margin-right: 0;padding:0 10px;color:#222;margin:3px 0;
+cursor: pointer;}
+.a_type_list li:first-of-type{background: #e5e5e5;}
+.a_type_list li:hover{background: #e5e5e5;}
+.slectform span{width:16px;position:absolute;right:50px;height:auto;background: url(../img/select.png) no-repeat center right;background-size:16px 9px;display: block;height:48px;line-height: 48px;text-indent: 10px;color:#222;
+overflow:hidden;cursor: pointer;z-index: 999;}
 .inputform div{}
 .inputform div input{border:1px #d2d2d2 solid;width:275px;height:46px;background: #fff;text-indent: 20px;font-size:14px;}
 .inputform div.change-wd input{width:560px;}
@@ -150,3 +159,5 @@ margin:0 auto;margin-top:30px;}
 .my-join i{color:#fff;margin-right: 10px;font-size:20px;vertical-align: middle;}
 .mt10 a{display: inline-block;background: #E01B49;width:126px;height:50px;color:#fff;line-height: 50px;text-align: center;font-size:16px;}
 .mt10 a:last-of-type{background: #666666;margin-left:20px;}
+.editbtn textarea{border:1px #ccc solid;}
+
