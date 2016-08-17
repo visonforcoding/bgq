@@ -20,5 +20,16 @@ class ActivityController extends AppController {
         if($this->request->is('post')){
             
         }
+        $userTable = \Cake\ORM\TableRegistry::get('user');
+        $industryTable = \Cake\ORM\TableRegistry::get('industry');
+        $user = $userTable->get($this->user->id);
+        $series = \Cake\Core\Configure::read('activitySeries');
+        $industries = $industryTable->find()->where(['pid !='=>0])->toArray();
+        $this->set([
+            'pageTitle'=>'发布活动',
+            'user' => $user,
+            'series' => $series,
+            'industries' => $industries,
+        ]);
     }
 }
