@@ -34,13 +34,15 @@
                                                     <img src="<?= getAvatar($need->user->avatar) ?>" alt="User Avatar" class="img-circle" />
                                                 </span>
                                                 <div class="chat-body clearfix">
-                                                    <div class="header">
+                                                    <div style=" overflow:hidden" class="header">
                                                         <!--<small class=" text-muted"><span class="glyphicon glyphicon-time"></span><?= $need->create_time ?></small>-->
                                                         <strong class="pull-right primary-font"><?= $need->user->truename ?> <?= $need->user->company ?> <?= $need->user->position ?></strong>
                                                     </div>
-                                                    <p class="pull-right">
-                                                        <?= $need->msg ?>
-                                                    </p>
+                                                    <div style=" overflow: hidden">
+                                                        <p class="pull-right">
+                                                            <?= $need->msg ?>
+                                                        </p>
+                                                    </div>
                                                     <small style="display: block;float: right"  class=" text-muted"><span class="glyphicon glyphicon-time"></span><?= $need->create_time ?></small>
                                                 </div>
                                             </li>
@@ -53,9 +55,10 @@
                                                         <strong class="primary-font"><?= $need->user->truename ?> <?= $need->user->company ?> <?= $need->user->position ?></strong> 
                                                         <!--<small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span><?= $need->create_time ?></small>-->
                                                     </div>
-                                                    <p>
-                                                        <?= $need->msg ?>
-                                                    </p>
+                                                        <p>
+                                                            <?= $need->msg ?>
+                                                        </p>
+                                                        
                                                     <small style="display: block;" class="text-muted"><span class="glyphicon glyphicon-time"></span><?= $need->create_time ?></small>
                                                 </div>
                                             </li>
