@@ -29,7 +29,7 @@ class UtilController extends AppController {
         }
         $savePath = ROOT.'/webroot'.$urlpath;
         $upload = new UploadFile(); // 实例化上传类
-        $upload->maxSize = 31457280; // 设置附件上传大小
+//        $upload->maxSize = 31457280; // 设置附件上传大小
         $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg','zip','ppt',
             'pptx','doc','docx','xls','xlsx','webp','rar','mp3','mp4','m4v'); // 设置附件上传类型
         if($this->request->query('zip')){
