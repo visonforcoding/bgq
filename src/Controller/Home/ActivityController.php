@@ -28,6 +28,7 @@ class ActivityController extends AppController {
             $data['address'] = $this->request->data('address');
             $data['body'] = $this->request->data('body');
             $data['from_user'] = -1;
+            $data['user_id'] = $this->user->id;
             $activity = $this->Activity->patchEntity($activity, $data);
             $res = $this->Activity->save($activity);
             if($res){
