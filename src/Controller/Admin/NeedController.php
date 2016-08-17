@@ -37,13 +37,13 @@ class NeedController extends AppController {
         $this->viewBuilder()->autoLayout(false);
         $needs = $this->Need->find()
                 ->contain(['User'=>function($q){
-                    return $q->select(['truename','avatar']);
+                    return $q->select(['truename','avatar','company','position']);
                 }])
                 ->where(['user_id' => $id])->orWhere(['reply_id'=>$id])->orderAsc('Need.create_time')
                 ->toArray();
         $last_need = $this->Need->find()
                 ->contain(['User'=>function($q){
-                    return $q->select(['truename','avatar']);
+                    return $q->select(['truename','avatar','company','position']);
                 }])
                 ->where(['user_id' => $id])->orWhere(['reply_id'=>$id])->orderDesc('Need.create_time')
                 ->first();

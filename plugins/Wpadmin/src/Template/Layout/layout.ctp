@@ -92,6 +92,7 @@
                 });
                 $('.header-tooltip').tooltip();
                 $('#left-menu ul.nav-primary ul.nav li.active').parents('li').addClass('active show');
+                $('#left-menu ul.nav-primary ul.nav li.active').parents('li').find('i.icon-chevron-right').addClass('icon-rotate-90');
                 $('#switch-left-bar').on('click', function () {
                     $('#left-bar').toggleClass('hide');
                     var width = 200;

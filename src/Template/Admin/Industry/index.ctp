@@ -111,9 +111,9 @@
                 }
 
                 function actionFormatter(cellvalue, options, rowObject) {
-                    response = '<button onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-trash"></i> 删除</button>';
+                    response = '<a onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn del-record"><i class="icon icon-trash"></i></button>';
 //        response += '<button onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini del-record"><i class="icon icon-eyes"></i> 查看详情</button>';
-                    response += '<a href="/admin/industry/edit/' + rowObject.id + '" class="grid-btn btn btn-primary btn-mini"><i class="icon icon-pencil"></i> 修改</a>';
+                    response += '<a href="/admin/industry/edit/' + rowObject.id + '" class="grid-btn  btn-mini"><i class="icon icon-pencil"></i> </a>';
                     return response;
                 }
 
