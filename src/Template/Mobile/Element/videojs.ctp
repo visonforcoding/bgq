@@ -1,7 +1,7 @@
 <style>
     .video-js{
         background-color: #000;
-   		padding: .1rem 0;
+   		padding: 0 .1rem;
     }
 </style>
 <div class="wrapper">
