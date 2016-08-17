@@ -314,10 +314,12 @@
     </div>
     <div class="h2"></div>
 </div>
-<div style="height:1rem"></div>
+
 <?php if($self): ?>
+    <div style="height:1rem"></div>
     <a href="/home/edit_userinfo" class="f-bottom">编辑个人资料</a>
 <?php elseif($user->level == 2 && $user->subjects): ?>
+    <div style="height:1rem"></div>
     <a href="/meet/subject_list/<?= $user->id ?>" class="f-bottom">立即约见</a>
 <?php endif; ?>
 <?php $this->start('script') ?>
