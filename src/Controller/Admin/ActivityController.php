@@ -473,6 +473,17 @@ class ActivityController extends AppController {
             $id = $this->request->data('id');
             $activity = $this->Activity->get($id);
             $activity->status = $activity->status==1?0:1;
+            if ($activity->status == 1&&empty($activity->qrcode)) {
+                        // 生成二维码
+                $savePath = $folder . '/' . time() . $id . '.png';
+                \PHPQRCode\QRcode::png('http://' . $this->request->env('HTTP_HOST') . '/activity/sign/' . $id, WWW_ROOT . $savePath);
+                $activity = $this->Activity->get($id);
+                $activity->qrcode = $savePath;
+                $res = $this->Activity->save($activity);
+                if (!$res) {
+                    return $this->Util->ajaxReturn(false, '二维码生成失败');
+                }
+            }
             if ($this->Activity->save($activity)) {
                 return $this->Util->ajaxReturn(true, '更改成功');
             } else {
@@ -485,6 +496,19 @@ class ActivityController extends AppController {
      * 查看收藏
      */
     public function viewCollect($id=null){
+        $this->set('id', $id);
+        $type = $this->request->query('type');
+        if($type){
+            $this->set([
+                'type'=>$type
+            ]);
+        }
+    }
+    
+    /**
+     * 查看点赞
+     */
+    public function viewLike($id=null){
         $this->set('id', $id);
         $type = $this->request->query('type');
         if($type){
