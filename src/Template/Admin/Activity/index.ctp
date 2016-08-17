@@ -92,7 +92,7 @@
                             {name: 'region.name', editable: true, align: 'center'},
                             {name: 'read_nums', editable: true, align: 'center'},
                             {name: 'praise_nums', editable: true, align: 'center',formatter:function(cell,opt,obj){
-                                    return '<a title="点赞详情" href="/admin/like-logs/index/' + obj.id + '">'+cell+'</a>';
+                                    return '<a title="点赞详情" href="/admin/activity/view-like/' + obj.id + '">'+cell+'</a>';
                             }},
                             {name: 'comment_nums', editable: true, align: 'center',formatter:function(cell,opt,obj){
                                     return '<a title="评论详情" onClick="viewComs('+obj.id+')">'+cell+'</a>';
