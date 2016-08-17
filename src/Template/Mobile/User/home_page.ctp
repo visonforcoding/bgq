@@ -317,7 +317,7 @@
 <div style="height:1rem"></div>
 <?php if($self): ?>
     <a href="/home/edit_userinfo" class="f-bottom">编辑个人资料</a>
-<?php elseif($user->level == 2): ?>
+<?php elseif($user->level == 2 && $user->subjects): ?>
     <a href="/meet/subject_list/<?= $user->id ?>" class="f-bottom">立即约见</a>
 <?php endif; ?>
 <?php $this->start('script') ?>
