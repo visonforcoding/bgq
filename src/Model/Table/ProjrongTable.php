@@ -29,7 +29,7 @@ class ProjrongTable extends Table {
         $this->primaryKey('id');
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
-            'joinType' => 'INNER',
+            'joinType' => 'LEFT',
             'className' => 'User'
         ]);
         $this->belongsToMany('Industries', [
@@ -43,6 +43,12 @@ class ProjrongTable extends Table {
         ]);
         $this->belongsTo('Scale', [
             'className' => 'Scale',
+        ]);
+        $this->hasMany('Attachs', [
+            'className' => 'Attach',
+            'joinTable' => 'attach',
+            'joinType' => 'LEFT',
+            'foreignKey' => 'proj_id',
         ]);
         $this->addBehavior('Timestamp', [
             'events' => [

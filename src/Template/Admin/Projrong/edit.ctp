@@ -77,14 +77,6 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">活动内容</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('body', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-md-2 control-label">项目简介</label>
         <div class="col-md-8">
             <?php
@@ -110,8 +102,18 @@
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">资料地址</label>
-        <div class="col-md-8">
-            <input name="attach" type="hidden" value="<?= $projrong->attach ?>"/>
+        <div class="col-md-8 input-group-attach">
+            <?php foreach ($projrong->attachs as $key=>$attach):?>
+                <div class="input-group mt10"><span class="input-group-addon">文件</span>
+                    <input type="text" class="form-control" name="attachs[<?=$key?>][name]"  value="<?=$attach->name?>"/>
+                        <input type="hidden" class="form-control" name="attachs[<?=$key?>][path]"  value="<?=$attach->path?>"/>
+                        <input type="hidden" class="form-control" name="attachs[<?=$key?>][id]"  value="<?=$attach->id?>"/>
+                        <span data-id="<?=$attach->id?>" class="del input-group-addon"><i class="icon icon-trash"></i></span>
+                        <span data-id="<?=$attach->id?>" class="input-group-addon">
+                            <a  href="/do-download?path=<?=$attach->path?>&name=<?=$attach->name?>"><i class="icon icon-download-alt"></i></a>
+                        </span>
+                </div>
+            <?php endforeach;?>
             <div id="attach" class="jqupload"></div>
             <span class="notice">(*文件大小在30M以内)</span>
         </div>
@@ -119,7 +121,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">行业标签</label>
         <div class="col-md-8">
-            <?= $this->cell('Industry::news', [$selIndustryIds]) ?>
+            <?= $this->cell('Industry', [$selIndustryIds]) ?>
         </div>
     </div>
     <div class="form-group">
@@ -151,7 +153,33 @@
 <script>
     $(function () {
         initJqupload('cover', '/wpadmin/util/doUpload?dir=proj/cover', 'jpg,png,gif,jpeg'); //初始化图片上传
-        initJquploadAttach('attach', '/wpadmin/util/doUpload?dir=proj/attach', 'jpg,png,gif,jpeg,ppt,pptx,doc,xls,xlsx,zip,rar'); //初始化附件上传
+        var count = <?=  count($projrong->attachs)?>;
+        initJquploadAttachMulti('attach', '/wpadmin/util/doUpload?dir=proj/attach', 
+        'jpg,png,gif,jpeg,ppt,pptx,doc,xls,xlsx,zip,rar,pdf,docx',function (files, data, xhr, pd) {
+            if (data.status) {
+                var elm = '<div class="input-group mt10"><span class="input-group-addon">文件</span>'+
+                        '<input type="text" class="form-control" name="attachs['+count+'][name]"  value="'+data.name+'"/>'+
+                        '<input type="hidden" class="form-control" name="attachs['+count+'][path]"  value="'+data.path+'"/>'+
+                        ' <span class="del input-group-addon"><i class="icon icon-trash"></i></span></div>';
+                $(elm).insertBefore($('#attach'));
+                count++;
+                //$('#' + id).prev().val(data.path);
+                layer.alert(data.msg);
+            } else {
+                //uploadObj.reset();
+                layer.alert(data.msg);
+            }
+        }); //初始化附件上传
+        $('.input-group-attach').find('.del').on('click',function(){
+            var id = $(this).data('id');
+            var obj = $(this);
+            $.getJSON('/admin/projrong/del-attach/'+id,function(res){
+               if(res.status){
+                layer.alert(res.msg);
+                obj.parent('.input-group').remove();
+               } 
+            });
+        });
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-industry').select2({
             language: "zh-CN",

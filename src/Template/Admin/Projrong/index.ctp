@@ -79,7 +79,7 @@
                             {name: 'comp_desc', editable: true, align: 'center'},
                             {name: 'team', editable: true, align: 'center'},
                             {name: 'attach', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
-                                return '<a title="查看" target="_blank" href="'+rowObject.attach+'" );" class="grid-btn "><i class="icon icon-paper-clip"></i></a>';
+                                return '<a title="查看"  onClick ="viewAttatch('+" '"+rowObject.id+"'"+' );" class="grid-btn "><i class="icon icon-paper-clip"></i></a>';
                             }},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
@@ -170,6 +170,19 @@
                     layer.open({
                         type: 2,
                         title: '查看详情',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['45%', '70%'],
+                        content: url//iframe的url
+                    });
+                }
+                
+                function viewAttatch(id) {
+                    //查看明细
+                    url = '/admin/projrong/view-attach/' + id;
+                    layer.open({
+                        type: 2,
+                        title: '查看附件',
                         shadeClose: true,
                         shade: 0.8,
                         area: ['45%', '70%'],

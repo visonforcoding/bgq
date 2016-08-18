@@ -111,7 +111,6 @@
     <div class="form-group">
         <label class="col-md-2 control-label">资料地址</label>
         <div class="col-md-8">
-            <input name="attach" type="hidden" value=""/>
             <div id="attach" class="jqupload"></div>
             <span class="notice">(*文件大小在30M以内)</span>
         </div>
@@ -119,7 +118,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">行业标签</label>
         <div class="col-md-8">
-            <?= $this->cell('Industry::news') ?>
+            <?= $this->cell('Industry') ?>
         </div>
     </div>
     <div class="form-group">
@@ -152,7 +151,26 @@
 <script>
     $(function () {
         initJqupload('cover', '/wpadmin/util/doUpload?dir=proj/cover', 'jpg,png,gif,jpeg'); //初始化图片上传
-        initJquploadAttach('attach', '/wpadmin/util/doUpload?dir=proj/attach', 'jpg,png,gif,jpeg,ppt,pptx,doc,xls,xlsx,zip,rar'); //初始化附件上传
+        var count = 0;
+        initJquploadAttachMulti('attach', '/wpadmin/util/doUpload?dir=proj/attach', 
+        'jpg,png,gif,jpeg,ppt,pptx,doc,xls,xlsx,zip,rar,pdf,docx',function (files, data, xhr, pd) {
+            if (data.status) {
+                var elm = '<div class="input-group mt10"><span class="input-group-addon">文件</span>'+
+                        '<input type="text" class="form-control" name="attachs['+count+'][name]"  value="'+data.name+'"/>'+
+                        '<input type="hidden" class="form-control" name="attachs['+count+'][path]"  value="'+data.path+'"/>'+
+                        ' <span class="del input-group-addon"><i class="icon icon-trash"></i></span></div>';
+                $(elm).insertBefore($('#attach'));
+                count++;
+                //$('#' + id).prev().val(data.path);
+                layer.alert(data.msg);
+            } else {
+                //uploadObj.reset();
+                layer.alert(data.msg);
+            }
+        }); //初始化附件上传
+        $('.input-group-attach').find('.del').on('click',function(){
+            $(this).parent('.input-group').remove();
+        });
         $('#select-industry').select2({
             language: "zh-CN",
             placeholder: '选择一个标签'

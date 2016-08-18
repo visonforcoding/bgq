@@ -100,7 +100,7 @@
     <div class="form-group media video hide">
         <label class="col-md-2 control-label">视频</label>
         <div class="col-md-8">
-            <input name="video" type="hidden" value=""/>
+            <input name="video" type="text" readonly class="form-control" />
             <div id="video" class="jqupload"></div>
             <span class="notice">(*文件大小在30M以内,支持格式为mp4、m4v)</span>
             <div class="row">
