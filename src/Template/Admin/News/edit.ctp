@@ -101,7 +101,7 @@
     <div class="form-group media video <?php if($news->is_media!=1): ?>hide<?php endif;?>">
         <label class="col-md-2 control-label">视频</label>
         <div class="col-md-8">
-            <input name="video" type="hidden" value="<?=$news->video?>"/>
+            <input name="video" type="text" readonly class="form-control" value="<?=$news->video?>"/>
             <div id="video" class="jqupload"></div>
             <span class="notice">(*文件大小在30M以内,支持格式为mp4、m4v)</span>
             <div class="row">
@@ -117,11 +117,13 @@
     <div class="form-group media audio <?php if($news->is_media!=2): ?>hide<?php endif;?>">
         <label class="col-md-2 control-label">音频</label>
         <div class="col-md-8">
-            <div class="tab-pane in " id="tab2">
-                <input name="mp3" type="hidden" value="<?=$news->mp3?>"/>
+                <input name="mp3" type="text" readonly class="form-control" value="<?=$news->mp3?>"/>
                 <div id="mp3"  class="jqupload"></div>
-                <span class="notice">(*文件大小在30M以内,支持格式为mp3)</span>
-            </div>
+                <span class="notice" style=" display: block">(*文件大小在30M以内,支持格式为mp3)</span>
+                <div class="col-md-8 form-group mt10">
+                    <label style=" display: inline-block;">音频标题</label>
+                    <input name="mp3_title" type="text"  placeholder="音频标题" class="inner-input"  value="<?=$news->mp3_title?>"/>
+                </div>
         </div>
     </div>
     <div class="form-group media pos <?php if($news->is_media==0): ?>hide<?php endif;?>">
