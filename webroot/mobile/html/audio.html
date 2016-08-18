@@ -1,0 +1,87 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta charset="utf-8">
+<meta name="format-detection"content="telephone=no, email=no" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title></title> 
+<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+<script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+<style type="text/css"> 
+
+    
+   
+</style>  
+</head>  
+<body>  
+<div class="loadout">
+	<div class="m-audio">
+		<div class="audio stop" id="mc_play" onclick="play_music()">
+		<audio id="myMusic" height='1' width='1' loop="loop">
+			<source src="/upload/news/mp3/2016-08-16/57b2ef22c8be3.mp3" type="audio/ogg">
+		</audio>
+	</div>
+	</div>
+	
+	<div class="mc_title">
+		<h3>这是一首主打歌，唱出了你和我。。。</h3>
+	</div>
+	<time><span class="cur_time">0</span>/<span class="total_time"></span></time>
+<div>  
+<script type="text/javascript">
+   
+	function play_music(){
+		
+		var audio = $('#myMusic').get(0);
+		var total = fixedSeconds(audio.duration);
+		var cur;
+		$('.total_time').html(total);
+		
+		setInterval(function(){
+			cur =  fixedSeconds(audio.currentTime);
+			$('.cur_time').html(cur);
+		},1000);
+		
+		if(audio.currentTime >= audio.duration){
+			$('#myMusic').get(0).pause();
+			 $('#mc_play').removeClass('on').addClass('stop');
+		}
+			
+		if($('#mc_play').hasClass('on')){
+			$('#myMusic').get(0).pause();
+			 $('#mc_play').removeClass('on').addClass('stop');
+		}else{
+            $('#myMusic').get(0).play();
+            $('#mc_play').removeClass('stop').addClass('on');
+        }
+	}
+	
+	function fixedSeconds(value) {
+    var theTime = parseInt(value);// s
+    var theTime1 = 0;// m
+    var theTime2 = 0;// h
+    if(theTime > 60) {
+        theTime1 = parseInt(theTime/60);
+        theTime = parseInt(theTime%60);
+            if(theTime1 > 60) {
+            theTime2 = parseInt(theTime1/60);
+            theTime1 = parseInt(theTime1%60);
+            }
+    }
+        var result = ""+parseInt(theTime);
+        if(theTime1 > 0) {
+        result = ""+parseInt(theTime1)+":"+result;
+        }
+        if(theTime2 > 0) {
+        result = ""+parseInt(theTime2)+":"+result;
+        }
+    return result;
+}
+</script>
+  
+</div>  
+</body>  
+</html>  
