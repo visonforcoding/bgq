@@ -77,11 +77,11 @@
 
 				if($('#mc_play').hasClass('on')){
 					audio.pause();
-					mc_play.className = 'stop';
+					mc_play.className = 'audio stop';
 					clearInterval(window[jid].timer);
 				}else{
 					audio.play();
-					mc_play.className = 'on';
+					mc_play.className = 'audio on';
 					window[jid].timer = setInterval(function(){
 						cur =  fixedSeconds(audio.currentTime);
 						window[jid].cur_time.html(cur);
