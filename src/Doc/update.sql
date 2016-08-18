@@ -617,4 +617,7 @@ ALTER TABLE `news`
 
 ALTER TABLE `news`
 	CHANGE COLUMN `is_media` `is_media` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '0无1视频2音频' AFTER `body`,
-	ADD COLUMN `media_pos` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '1顶部2底部' AFTER `is_media`;			
+	ADD COLUMN `media_pos` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '1顶部2底部' AFTER `is_media`;		
+
+ALTER TABLE `news`
+	ADD COLUMN `mp3_title` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '音频标题' AFTER `mp3`;	

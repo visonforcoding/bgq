@@ -116,10 +116,12 @@
     <div class="form-group media audio hide">
         <label class="col-md-2 control-label">音频</label>
         <div class="col-md-8">
-            <div class="tab-pane in " id="tab2">
-                <input name="mp3" type="hidden" value=""/>
-                <div id="mp3" class="jqupload"></div>
-                <span class="notice">(*文件大小在30M以内,支持格式为mp3)</span>
+            <input name="mp3" type="text" readonly class="form-control" />
+            <div id="mp3"  class="jqupload"></div>
+            <span class="notice" style=" display: block">(*文件大小在30M以内,支持格式为mp3)</span>
+            <div class="col-md-8 form-group mt10">
+                <label style=" display: inline-block;">音频标题</label>
+                <input name="mp3_title" type="text"  placeholder="音频标题" class="inner-input" />
             </div>
         </div>
     </div>
@@ -128,7 +130,7 @@
         <div class="col-md-8">
             <?=
             $this->form->radio('media_pos', [
-                ['value' => '1', 'text' => '顶部', 'checked'=>true],
+                ['value' => '1', 'text' => '顶部', 'checked' => true],
                 ['value' => '2', 'text' => '底部'],
             ])
             ?>
@@ -182,8 +184,8 @@
             var is_media = $(this).val();
             if (is_media == 1) {
                 $('div.form-group.media.video,div.form-group.media.pos').removeClass('hide');
-            } 
-            if(is_media == 2 ){
+            }
+            if (is_media == 2) {
                 $('div.form-group.media.audio,div.form-group.media.pos').removeClass('hide');
             }
         });
