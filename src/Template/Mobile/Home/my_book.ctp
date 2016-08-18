@@ -12,7 +12,7 @@
     </div>
     <div  class="inner my-home-slidemenu" id="statusTab">
         <span status="0" class="active">未确认</span>
-        <span status="1">已完成</span>
+        <span status="1">已确认</span>
     </div>
 
     <div id="list">
@@ -20,7 +20,7 @@
     </div>
 <script type="text/html" id="tpl">
     <section class="internet-v-info nopd">
-        <a href="{#link#}{#id#}">
+        <a href="{#link#}">
             <div class="innercon">
                 <span class="head-img"><img src="{#user_logo#}"/>{#v#}</span>
                 <div class="vipinfo my-meet-info">
@@ -60,7 +60,7 @@
         }
         else {
             book_html[type][status] = $.util.dataToTpl('', 'tpl', cdata, function(d){
-                d.link = type == 'books' ? '/home/my-book-detail/' :'/home/my-book_savant_detail/';
+                d.link = status === '0' ? '/home/my-book-detail/'+d.id :'/home/book-chat/'+d.id;
 //                d.subject.user = d.subject.user || {};
                 var user = d.subject.user?d.subject.user:d.user;
                 d.user_logo = user.avatar;
@@ -74,20 +74,26 @@
                     d.v = '<i></i>';
                 }
                 if(type == 'books'){
-                    if(status === '3'){
+                    if(status === '1'){
+                        d.link = '/home/book-chat/'+d.id+'/1';
                         if(d.is_done){
                             d.subject_status = '<div class="f-box"><div class="f-info"><span class="fl f-type"><i class="iconfont">&#xe62f;</i>已完成</span><a class="fr f-link" href="/home/my-book-detail/'+d.id+'">查看<i class="iconfont">&#xe667;</i></a></div>';
                         } else {
                             d.subject_status = '<div class="f-box"><div class="f-info"><span class="fl f-type"><i class="iconfont">&#xe62f;</i>约见中</span><a class="fr f-link" href="/home/my-book-detail/'+d.id+'">查看<i class="iconfont">&#xe667;</i></a></div>';
                         }
+                    } else {
+                        d.link = '/home/my-book-detail/'+d.id;
                     }
                 } else {
-                    if(status === '3'){
+                    if(status === '1'){
+                        d.link = '/home/book-chat/'+d.id+'/2';
                         if(d.is_done){
                             d.subject_status = '<div class="f-box"><div class="f-info"><span class="fl f-type"><i class="iconfont">&#xe62f;</i>已完成</span><a class="fr f-link" href="/home/my-book_savant_detail/'+d.id+'">查看<i class="iconfont">&#xe667;</i></a></div>';
                         } else {
                             d.subject_status = '<div class="f-box"><div class="f-info"><span class="fl f-type"><i class="iconfont">&#xe62f;</i>约见中</span><a class="fr f-btn done"><span subject_id="'+d.id+'" id="subjectId_'+d.id+'">完成</span></a></div>';
                         }
+                    } else {
+                        d.link = '/home/my-book-savant-detail/'+d.id;
                     }
                 }
                 return d;

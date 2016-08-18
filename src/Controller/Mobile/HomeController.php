@@ -78,25 +78,6 @@ class HomeController extends AppController {
         return $this->Util->ajaxReturn(['status'=>true, 'data'=>$res]);
     }
 
-    /**
-     * 个人主页
-     */
-    public function homepage($id = null) {
-        $user_id = isset($id) ? $id : $this->user->id;
-        $user = $this->User->get($user_id, ['contain' => ['Industries' => function($q) {
-                    return $q->hydrate(false)->select(['id', 'name']);
-                }]]);
-                $industries = $user->industries;
-                $industry_arr = [];
-                foreach ($industries as $industry) {
-                    $industry_arr[] = $industry['name'];
-                }
-                $this->set([
-                    'pageTitle' => '个人主页'
-                ]);
-                $this->set(compact('user', 'industry_arr'));
-    }
-
             /**
              * ajax获取我的活动 报名
              */
@@ -599,24 +580,25 @@ class HomeController extends AppController {
                 ]
             ]);
             $book->status = 1; //更改
-            $OrderTable = \Cake\ORM\TableRegistry::get('order');
-            $order = $OrderTable->newEntity([
-                'type' => 1,
-                'relate_id' => $id, //预定表的id
-                'user_id' => $book->user_id,
-                'seller_id' => $book->savant_id,
-                'order_no' => time() . $book->user_id . $id . createRandomCode(2, 2),
-                'fee' => 0, // 实际支付的默认值
-                'price' => $book->subject->price,
-                'remark' => '预约话题' . $book->subject->title
-            ]);
-            $transRes = $BookTable->connection()->transactional(function()use($book, $BookTable, $order, $OrderTable) {
-                return $BookTable->save($book) && $OrderTable->save($order);
-            });
+//            $OrderTable = \Cake\ORM\TableRegistry::get('order');
+//            $order = $OrderTable->newEntity([
+//                'type' => 1,
+//                'relate_id' => $id, //预定表的id
+//                'user_id' => $book->user_id,
+//                'seller_id' => $book->savant_id,
+//                'order_no' => time() . $book->user_id . $id . createRandomCode(2, 2),
+//                'fee' => 0, // 实际支付的默认值
+//                'price' => $book->subject->price,
+//                'remark' => '预约话题' . $book->subject->title
+//            ]);
+//            $transRes = $BookTable->connection()->transactional(function()use($book, $BookTable, $order, $OrderTable) {
+//                return $BookTable->save($book) && $OrderTable->save($order);
+//            });
+            $transRes = $BookTable->save($book);
             if ($transRes) {
                 //短信和消息通知
                 $this->loadComponent('Sms');
-                $msg = "您预约的话题：《" . $book->subject->title . "》已确认通过，请及时登录平台支付预约款。";
+                $msg = "您预约的话题：《" . $book->subject->title . "》已确认通过。";
                 $this->Sms->sendByQf106($book->user->phone, $msg);
                 $this->loadComponent('Business');
                 $this->Business->usermsg($book->user_id, '预约通知', $msg, 4, $id);
@@ -627,8 +609,8 @@ class HomeController extends AppController {
         }
     }
 
-    /*                                                                     * *
-     * 取笑预约
+    /**
+     * 取消预约
      */
 
     public function bookNo($id) {
@@ -652,8 +634,91 @@ class HomeController extends AppController {
             }
         }
     }
-
-    /*                                                                     * *
+    
+    /**
+     * 约见聊天
+     * @param int $book_id 约见id
+     * @param int $type 类型，1约见;2被约见
+     */
+    public function bookChat($book_id, $type){
+        $this->handCheckLogin();
+        $uid = $this->user->id;
+        $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+        $book = $BookTable->get($book_id, [
+            'contain' => ['Subjects']
+        ]);
+        $this->set([
+            'pageTitle'=>'约见聊天',
+            'book' => $book,
+            'uid' => $uid,
+            'type' => $type
+        ]);
+    }
+    
+    /**
+     * 获得聊天记录
+     * @param int $book_id 约见id
+     * @param int $type 类型，1约见;2被约见
+     */
+    public function getChat($book_id, $type){
+        $this->handCheckLogin();
+        $user_id = $this->user->id;
+        $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+        $book = $BookTable->get($book_id);
+        $bookChatTable = \Cake\ORM\TableRegistry::get('bookChat');
+        $where = [];
+        if($type == '1'){
+            $where['BookChat.user_id in'] = [$user_id, $book->savant_id];
+            $where['reply_id in'] = [$user_id, $book->savant_id];
+        } else {
+            $where['BookChat.user_id in'] = [$user_id, $book->user_id];
+            $where['reply_id in'] = [$user_id, $book->user_id];
+        }
+        $where['book_id'] = $book_id;
+        $bookChat = $bookChatTable
+                ->find()
+                ->where($where)
+                ->contain(['Users', 'ReplyUsers', 'SubjectBooks'])
+                ->hydrate(false)
+                ->toArray();
+        if($bookChat !== false){
+            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$bookChat]);
+        } else {
+            return $this->Util->ajaxReturn(false, '系统错误');
+        }
+    }
+    
+    /**
+     * 发送消息
+     * @param int $book_id 约见id
+     * @param int $type 类型，1约见;2被约见
+     */
+    public function replyChat($book_id, $type){
+        $user_id = $this->user->id;
+        $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+        $book = $BookTable->get($book_id);
+        $data['content'] = $this->request->data('content');
+        if($type == '1'){
+            $data['user_id'] = $user_id;
+            $data['reply_id'] = $book->savant_id;
+        } else {
+            $data['user_id'] = $user_id;
+            $data['reply_id'] = $book->user_id;
+        }
+        $data['book_id'] = $book_id;
+        $bookChatTable = \Cake\ORM\TableRegistry::get('bookChat');
+        $chat = $bookChatTable->newEntity();
+        $chat = $bookChatTable->patchEntity($chat, $data);
+        $res = $bookChatTable->save($chat);
+        if($res){
+            return $this->Util->ajaxReturn(true, '发送成功');
+        } else {
+            return $this->Util->ajaxReturn(false, '系统错误');
+        }
+    }
+    
+    
+    /**
      * 我的钱包
      */
 
