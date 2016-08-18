@@ -11,7 +11,7 @@
             </a>
             <div class="form-group">
                 <label for="keywords">关键字</label>
-                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
+                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="项目标题、地点">
             </div>
             <div class="form-group">
                 <label>融资规模</label>

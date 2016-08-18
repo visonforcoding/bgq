@@ -42,7 +42,7 @@ public function getDataList()
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
+            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
         <% if(!$allAssociations):%>
         $data = $this->getJsonForJqrid($page, $rows, '', $sort, $order,$where);
@@ -52,8 +52,8 @@ public function getDataList()
         if (!empty($where)) {
             $query->where($where);
         }
-        $nums = $query->count();
         $query->contain([<%= $this->Bake->stringifyList($allAssociations, ['indent' => false]) %>]);
+        $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }

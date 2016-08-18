@@ -27,5 +27,12 @@ class RegionCell extends Cell {
         $items = $IndustryTable->find('list')->all()->toArray();
         $this->set(compact('items', 'selId'));
     }
+    
+    
+    public function base($selId=null) {
+        $IndustryTable = \Cake\ORM\TableRegistry::get('Region');
+        $items = $IndustryTable->find('list')->all()->toArray();
+        $this->set(compact('items', 'selId'));
+    }
 
 }

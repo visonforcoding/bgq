@@ -10,7 +10,7 @@
             </a>
             <div class="form-group">
                 <label for="keywords">关键字</label>
-                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
+                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="名称">
             </div>
             <a onclick="doSearch();" class="btn btn-info"><i class="icon icon-search"></i>搜索</a>
         </div>
