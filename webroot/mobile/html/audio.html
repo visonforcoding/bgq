@@ -35,7 +35,7 @@
 <div class="loadout" id="audioCell2">
 	<div class="m-audio">
 		<div class="audio stop" onclick="play_music('audioCell2', this)">
-			<audio class="myMusic" height='1' width='1' loop="loop">
+			<audio class="myMusic" height='1' width='1' preload="auto">
 				<source src="/upload/news/mp3/2016-08-16/57b2ef22c8be3.mp3" type="audio/ogg">
 			</audio>
 		</div>
@@ -75,7 +75,7 @@
 				}
 				var audio = window[jid].audio, mc_play=window[jid].mc_play;
 
-				if($('#mc_play').hasClass('on')){
+				if($(mc_play).hasClass('on')){
 					audio.pause();
 					mc_play.className = 'audio stop';
 					clearInterval(window[jid].timer);
