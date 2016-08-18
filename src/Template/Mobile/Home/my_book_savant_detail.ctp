@@ -62,45 +62,45 @@
 <?php $this->start('script') ?>
 <script>
     setTimeout(function(){
-    $('body').on('tap', function (e) {
-        var target = e.srcElement || e.target, em = target, i = 1;
-        while (em && !em.id && i <= 3) {
-            em = em.parentNode;
-            i++;
-        }
-        if (!em || !em.id)
-            return;
-        var book_id = <?=$book->id?>;
-        switch (em.id) {
-            case 'meetOk':
-                $.util.ajax({
-                   url:'/home/book-ok',
-                   data:{id:book_id},
-                   func:function(res){
-                       $.util.alert(res.msg);
-                       setTimeout(function(){
-                           window.location.href = '/home/my-book-savant';
-                       },1500);
-                   }
-                });
-                break;
-            case 'meetNo':
-                $.util.ajax({
-                   url:'/home/book-no/'+book_id,
-                   func:function(res){
-                     $.util.alert(res.msg);
-                     setTimeout(function(){
-                          window.location.href = '/home/my-book-savant';
-                       },1500);
-                   }
-                });
-                break;
-            case 'goTop':
-                window.scroll(0, 0);
-                e.preventDefault();
-                break;
-        }
-    });
+        $('body').on('tap', function (e) {
+            var target = e.srcElement || e.target, em = target, i = 1;
+            while (em && !em.id && i <= 3) {
+                em = em.parentNode;
+                i++;
+            }
+            if (!em || !em.id)
+                return;
+            var book_id = <?=$book->id?>;
+            switch (em.id) {
+                case 'meetOk':
+                    $.util.ajax({
+                       url:'/home/book-ok',
+                       data:{id:book_id},
+                       func:function(res){
+                           $.util.alert(res.msg);
+                           setTimeout(function(){
+                               window.location.href = '/home/my-book';
+                           },1500);
+                       }
+                    });
+                    break;
+                case 'meetNo':
+                    $.util.ajax({
+                       url:'/home/book-no/'+book_id,
+                       func:function(res){
+                         $.util.alert(res.msg);
+                         setTimeout(function(){
+                              window.location.href = '/home/my-book';
+                           },1500);
+                       }
+                    });
+                    break;
+                case 'goTop':
+                    window.scroll(0, 0);
+                    e.preventDefault();
+                    break;
+            }
+        });
     },0);
 </script>
 <?php $this->end('script'); ?>

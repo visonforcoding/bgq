@@ -121,14 +121,13 @@
                 var html = $('#savantTpl').text();
                 var user = $('#userTpl').text();
                 var ico = $('#icoTpl').text();
+                savant = '<li><a href="/home/savant-auth"><i class="iconfont">&#xe623;</i>会员认证</a></li>';
                 if(res.data.user.level == 2) {
-                    savant = '<li><a href="/home/my-purse"><i class="iconfont">&#xe620;</i>钱包</a></li>';
+//                    savant = '<li><a href="/home/my-purse"><i class="iconfont">&#xe620;</i>钱包</a></li>';
                     user = user.replace('{#v#}','<i class="v"></i>');
-                    ico = ico.replace('{#search_savant#}', '<li><a href="/home/search-savant"><i class="iconfont">&#xe626;</i>找同行</a></li>');
                 } else {
-                    savant = '<li><a href="/home/savant-auth"><i class="iconfont">&#xe623;</i>会员认证</a></li>';
+                    
                     user = user.replace('{#v#}', '');
-                    ico = ico.replace('{#search_savant#}', '');
                 }
                 html = html.replace('{#savant#}', savant);
                 $('#res').html(html+ico);

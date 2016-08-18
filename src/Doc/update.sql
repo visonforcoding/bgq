@@ -604,7 +604,7 @@ ALTER TABLE `projrong`
 
 ALTER TABLE `news`
 	ADD COLUMN `publish_time` DATETIME NOT NULL COMMENT '发布时间' AFTER `update_time`;
-	
+
 #8月16
 ALTER TABLE `news`
 	ADD COLUMN `is_media` TINYINT NOT NULL DEFAULT '0' COMMENT '0无1顶部2底部' AFTER `body`;	
@@ -621,3 +621,20 @@ ALTER TABLE `news`
 
 ALTER TABLE `news`
 	ADD COLUMN `mp3_title` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '音频标题' AFTER `mp3`;	
+	ADD COLUMN `media_pos` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '1顶部2底部' AFTER `is_media`;
+
+#约见聊天表
+CREATE TABLE `book_chat` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	#`pid` INT NOT NULL DEFAULT 0 COMMENT '父id',
+	`user_id` INT NOT NULL COMMENT '用户id',
+	`reply_id` INT NOT NULL COMMENT '回复用户id',
+	`book_id` INT NOT NULL COMMENT '约见id',
+	`content` VARCHAR(140) NOT NULL COMMENT '内容',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='约见聊天表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
