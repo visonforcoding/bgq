@@ -121,7 +121,7 @@ class ProjrongController extends AppController {
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where['username like'] = "%$keywords%";
+              $where['or'] = [['title like' => "%$keywords%"], ['address like' => "%$keywords%"]];
         }
         if (!empty($stage_id)) {
             $where['stage_id'] = "$stage_id";
@@ -133,7 +133,7 @@ class ProjrongController extends AppController {
             //时间筛选
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`cteate_time`) <' => $end_time]];
+            $where['and'] = [['date(Projrong.`create_time`) >' => $begin_time], ['date(Projrong.`create_time`) <' => $end_time]];
         }
         $query = $this->Projrong->find();
         $query->hydrate(false);
@@ -184,12 +184,12 @@ class ProjrongController extends AppController {
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+              $where['or'] = [['title like' => "%$keywords%"], ['address like' => "%$keywords%"]];
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
+            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
         $Table = $this->Projrong;
         $column = ['发布人id', '发布人', '公司', '项目名称', '融资阶段', '地点', '融资规模', '股份', '阅读数', '点赞数', '评论数', '封面', '活动内容', '项目简介', '公司简介', '核心团队', '资料地址', '创建时间', '更新时间'];

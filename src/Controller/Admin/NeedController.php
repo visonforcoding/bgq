@@ -134,6 +134,7 @@ class NeedController extends AppController {
         $end_time = $this->request->data('end_time');
         $status = $this->request->data('status');
         $where_need = '';
+        $where_user = '';
         if(is_numeric($status)){
             $where_need =  'where status = '.$status;
         }
@@ -146,6 +147,7 @@ class NeedController extends AppController {
                 ['User.`truename` like' => "%$keywords%"],
                 ['msg like' => "%$keywords%"],
             ]; //搜索关键字为用户名和内容
+            $where_user = 'and u.truename like '."'%$keywords%'";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
@@ -157,7 +159,7 @@ class NeedController extends AppController {
         $result = $connection->execute("select u.phone,u.truename,u.company,u.position,n.* from user u
                         inner join 
                         (select * from need $where_need  order by create_time desc ) n
-                        on n.user_id = u.id where u.id != '-1'
+                        on n.user_id = u.id where u.id != '-1' $where_user
                         group by u.id order by $sort $order limit  $offset, $rows")->fetchAll('assoc');
         $nums = count($result);
         if (empty($result)) {

@@ -30,7 +30,7 @@ class ProjneedController extends AppController {
     public function view($id = null) {
         $this->viewBuilder()->autoLayout(false);
         $projneed = $this->Projneed->get($id, [
-            'contain' => ['Industry']
+            'contain' => ['Industries']
         ]);
         $this->set('projneed', $projneed);
         $this->set('_serialize', ['projneed']);

@@ -39,12 +39,12 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['专家', '标题', '价格', '持续时间', '操作'],
+                                ['专家','公司','职位', '标题', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
+                            {name: 'user.company', editable: true, align: 'center'},
+                            {name: 'user.position', editable: true, align: 'center'},
                             {name: 'title', editable: true, align: 'center'},
-                            {name: 'price', editable: true, align: 'center'},
-                            {name: 'last_time', editable: true, align: 'center', formatter: lasttimeFrormatter},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: 10,

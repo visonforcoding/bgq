@@ -642,3 +642,19 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ALTER TABLE `projrong`
 	DROP COLUMN `attach`;
+
+
+-- //附件表
+CREATE TABLE `attach` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`proj_id` INT(11) NOT NULL DEFAULT '0' COMMENT '项目id',
+	`name` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '名称',
+	`path` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '路径',
+	`create_time` DATETIME NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COMMENT='项目附件'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+	

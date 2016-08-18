@@ -108,9 +108,7 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">常驻城市</label>
                 <div class="col-md-8">
-                    <?php
-                    echo $this->Form->input('city', ['label' => false, 'class' => 'form-control']);
-                    ?>
+                    <?= $this->cell('Region::base',[$user->city])?>
                 </div>
             </div>
             <div class="form-group">

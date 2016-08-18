@@ -122,22 +122,21 @@ class CandidateController extends AppController {
         if ($id) {
             $where['job_id'] = $id;
         }
-
         if (!empty($keywords)) {
-            $where['username like'] = "%$keywords%";
+              $where['or'] = [['Candidate.truename like' => "%$keywords%"], ['Job.company like' => "%$keywords%"],['Job.position like' => "%$keywords%"]];
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
+            $where['and'] = [['date(Candidate.`create_time`) >' => $begin_time], ['date(Candidate.`create_time`) <' => $end_time]];
         }
         $query = $this->Candidate->find();
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
         }
-        $nums = $query->count();
         $query->contain(['Job']);
+        $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
