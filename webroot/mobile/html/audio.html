@@ -67,13 +67,13 @@
 					};
 					$(jid + ' .timeCell').html('<span class="cur_time">0</span>/<span class="total_time">'+fixedSeconds(window[jid].audio.duration)+'</span>');
 					window[jid].cur_time= $(jid+' .cur_time');
+					window[jid].audio.onended = function(){
+						audio.pause();
+						mc_play.className = 'audio stop';
+						clearInterval(window[jid].timer);
+					}
 				}
 				var audio = window[jid].audio, mc_play=window[jid].mc_play;
-
-				if(audio.currentTime >= audio.duration){
-					audio.pause();
-					mc_play.removeClass('on').addClass('stop');
-				}
 
 				if($('#mc_play').hasClass('on')){
 					audio.pause();
