@@ -45,9 +45,6 @@ class ProjrongController extends AppController {
         $projrong = $this->Projrong->newEntity();
         if ($this->request->is('post')) {
             $projrong = $this->Projrong->patchEntity($projrong, $this->request->data);
-            $user_id = $this->request->data('user_id');
-            $user = $this->Projrong->Users->find()->where("`id`= '$user_id'")->first();
-            $projrong->publisher = $user->truename;
             if ($this->Projrong->save($projrong)) {
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {
@@ -67,7 +64,7 @@ class ProjrongController extends AppController {
      */
     public function edit($id = null) {
         $projrong = $this->Projrong->get($id, [
-            'contain' => ['Industries']
+            'contain' => ['Industries','Attachs']
         ]);
         if ($this->request->is(['post', 'put'])) {
             $projrong = $this->Projrong->patchEntity($projrong, $this->request->data);
@@ -209,6 +206,36 @@ class ProjrongController extends AppController {
         $this->autoRender = false;
         $filename = 'Projrong_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+    }
+    
+    
+    
+    /**
+     * 删除单个附件
+     * @param type $id
+     */
+    public function delAttach($id){
+        $AttachTable = \Cake\ORM\TableRegistry::get('Attach');
+        $attatch = $AttachTable->get($id);
+        if($AttachTable->delete($attatch)){
+            $this->Util->ajaxReturn(true, '删除成功');
+        }else{
+            $this->Util->ajaxReturn(false,  errorMsg($attatch, '删除失败'));
+        }
+    }
+    
+    
+    /**
+     * 删除单个附件
+     * @param type $id
+     */
+    public function viewAttach($id){
+        $this->viewBuilder()->autoLayout(false);
+        $AttachTable = \Cake\ORM\TableRegistry::get('Attach');
+        $attatchs = $AttachTable->find()->where(['proj_id'=>$id])->toArray();
+        $this->set([
+            'items'=>$attatchs
+        ]);
     }
 
 }

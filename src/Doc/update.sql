@@ -619,9 +619,12 @@ ALTER TABLE `news`
 	CHANGE COLUMN `is_media` `is_media` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '0无1视频2音频' AFTER `body`,
 	ADD COLUMN `media_pos` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '1顶部2底部' AFTER `is_media`;		
 
+
+#8月18日
 ALTER TABLE `news`
-	ADD COLUMN `mp3_title` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '音频标题' AFTER `mp3`;	
-	ADD COLUMN `media_pos` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '1顶部2底部' AFTER `is_media`;
+ADD COLUMN `mp3_title` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '音频标题' AFTER `mp3`;	
+
+
 
 #约见聊天表
 CREATE TABLE `book_chat` (
@@ -637,4 +640,5 @@ CREATE TABLE `book_chat` (
 COMMENT='约见聊天表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
-;
+ALTER TABLE `projrong`
+	DROP COLUMN `attach`;
