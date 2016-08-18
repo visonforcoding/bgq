@@ -198,6 +198,32 @@ function initJquploadAttach(id, url, allowedTypes) {
     });
     return uploadObj;
 }
+function initJquploadAttachMulti(id, url, allowedTypes,func) {
+    var uploadObj = $('#' + id).uploadFile({
+        url: url,
+        returnType: 'json',
+        allowedTypes: allowedTypes,
+        doneStr: "上传完成",
+        dragDrop: true,
+        multiple: true,
+        showDone: true,
+        uploadStr: "上传",
+        showStatusAfterSuccess: true,
+        dragDropStr: "<span><b>试试拖动文件上传</b></span>",
+        extErrorStr: "类型不允许,允许类型如下:",
+        multiDragErrorStr: '这里只能一次上传一张',
+        customErrorKeyStr: '上传发生了错误',
+        onSuccess: func,
+        onSelect: function (files)
+        {
+            //uploadObj.reset();  //单个图片上传的 委曲求全的办法
+        },
+        onError: function (files, status, errMsg, pd) {
+            console.log(status);
+        }
+    });
+    return uploadObj;
+}
 
 $.global = {
     /**
