@@ -1138,7 +1138,7 @@ background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  ba
 .audio-js{background: #fff;}
 .loadout{ background:#666; height:40px;width:300px;border-radius: 5px;color:#fff;margin:20px auto;} 
 .m-audio{float:left;}
-.m-audio .on{background-size:contain;background: url(../css/img/aoff.png);}
+.m-audio .on{background: url(../css/img/aoff.png);background-size:contain;}
 .m-audio .stop{background: url(../css/img/aon.png) no-repeat;background-size:contain;}
 .audio{width:32px;height:32px;margin-top:5px;margin-left:5px;} 
 .mc_title{height:40px;width:190px;float:left;overflow:hidden;}
