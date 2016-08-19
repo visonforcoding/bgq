@@ -14,7 +14,7 @@
                 <a href="javascript:void(0);">
                     <span>姓名：</span>
                     <div>
-                        <input name="truename" type="text" placeholder="请实名填写，姓名不可更改"  />
+                        <input name="truename" type="text" placeholder="请实名填写，姓名不可更改"/>
                     </div>
                 </a>
             </li>
@@ -22,7 +22,7 @@
                 <a href="javascript:void(0);">
                     <span>公司：</span>
                     <div>
-                        <input name="company" type="text"  />
+                        <input name="company" type="text" placeholder="请填写公司名称" />
                     </div>
                 </a>
             </li>
@@ -32,7 +32,7 @@
                     <span>部门/职务：</span>
 
                     <div >
-                        <input name="position" type="text"  />
+                        <input name="position" type="text" placeholder="请填写您的职务" />
                     </div>
                 </a>
             </li>
