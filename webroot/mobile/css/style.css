@@ -744,7 +744,7 @@ border-left:1px #e5e5e5 solid;width:33.3%;}
 .h-info-box{background: #fff;border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid; padding:0 0.3rem; margin-top:0.2rem;}
 .h-info-box a{color:#222c38;}
 .s-title-pass{padding:0;}
-.h-info-box li{line-height:0.4rem;border-bottom:1px #e5e5e5 solid;font-size:0.3rem;}
+.h-info-box li{line-height:0.4rem;border-bottom:1px #e5e5e5 solid;font-size:0.3rem;padding:.2rem 0;}
 .h-info-box li:last-of-type{border-bottom:none;}
 .s-title-pass li{padding:0.25rem 0.3rem;}
 .s-title-pass li:last-of-type{border-bottom:none;}
