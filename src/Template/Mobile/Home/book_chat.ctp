@@ -66,7 +66,7 @@
     if(is_done == '0'){
         setInterval(function(){
             getChat();
-        },2000);
+        },8000);
     }
     
 

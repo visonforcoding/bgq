@@ -665,7 +665,7 @@ class HomeController extends AppController {
         $user_id = $this->user->id;
         $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
         $book = $BookTable->get($book_id);
-        $bookChatTable = \Cake\ORM\TableRegistry::get('bookChat');
+        $bookChatTable = \Cake\ORM\TableRegistry::get('BookChat');  
         $where = [];
         if($type == '1'){
             $where['BookChat.user_id in'] = [$user_id, $book->savant_id];
