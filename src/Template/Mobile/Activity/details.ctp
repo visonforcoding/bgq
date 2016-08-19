@@ -616,10 +616,11 @@
                     break;
             }
         });
-    
+
+    ii=0;
     $('body').on('click', function (e) {
             var target = e.srcElement || e.target, em = target, i = 1;
-            //$('#article_comment').html((ii++)+em.id+'~~'+em.className)
+            $('#article_comment').html((ii++)+em.id+'~~'+em.className)
             while (em && !em.id && i <= 3) {
                 em = em.parentNode;
                 i++;
