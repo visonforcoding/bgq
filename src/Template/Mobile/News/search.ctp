@@ -122,9 +122,16 @@
                     }
                     return d;
                 });
-                $('.industry').on('tap', function () {
-                    industryTap(this);
+                $.util.tap($('#industry'), function(e){
+                    var em = e.srcElement || e.target;
+                    if(em.tagName == 'LI') em = $(em).find('a').get(0);
+                    if(em && em.className == 'industry '){
+                        industryTap(em);
+                    }
                 });
+//                $('.industry').on('tap', function () {
+//                    industryTap(this);
+//                });
                 if ($('.default').length != 0) {
                     industryTap($('.default').get(0));
                 } else {
