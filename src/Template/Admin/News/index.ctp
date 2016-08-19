@@ -234,7 +234,7 @@
                     url = '/mobile/news/view/' + id;
                     layer.open({
                         type: 2,
-                        title: '个人主页',
+                        title: '资讯预览',
                         shadeClose: true,
                         shade: 0.8,
                         area: ['375px', '667px'],
