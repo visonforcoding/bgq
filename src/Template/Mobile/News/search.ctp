@@ -125,7 +125,7 @@
                 $.util.tap($('#industry'), function(e){
                     var em = e.srcElement || e.target;
                     if(em.tagName == 'LI') em = $(em).find('a').get(0);
-                    if(em && em.className == 'industry '){
+                    if(em && em.tagName == 'A '){
                         industryTap(em);
                     }
                 });
