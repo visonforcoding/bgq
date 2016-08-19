@@ -30,7 +30,7 @@
                     </h3>
                     <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
                     <div class="mark">
-                        <span class='color-items'>约见话题：{#title#}</span>
+                        <span class='color-items m_sub-title'>约见话题：{#title#}</span>
                     </div>
                 </div>
             </div>
