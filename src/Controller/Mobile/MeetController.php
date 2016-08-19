@@ -165,11 +165,6 @@ class MeetController extends AppController {
      */
     public function subjectDetail($id = null) {
         $this->handCheckLogin();
-        $SubjectBookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
-        $subjectBook = $SubjectBookTable->find()->where(['subject_id'=>$id, 'user_id'=>$this->user->id])->first();
-        if($subjectBook){
-            $this->redirect('/home/my-book-detail/'.$subjectBook->id);
-        }
         $SubjectTable = \Cake\ORM\TableRegistry::get('MeetSubject');
         $subject = $SubjectTable->find()
                 ->contain(['User'=>function($q){
@@ -325,7 +320,9 @@ class MeetController extends AppController {
             $user = $UserTable->get($this->user->id, [
                 'contain' => ['Careers', 'Educations', 'Industries']
             ]);
-            $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->educations && $user->careers && $user->card_path;
+            $is_complete = $user->company && $user->gender && $user->position && $user->email && 
+                    $user->industries && $user->city && $user->goodat && $user->gsyw && $user->educations 
+                    && $user->careers && $user->card_path;
             if(!$is_complete){
                 return $this->Util->ajaxReturn(false, '请先去完善个人资料');
             }
@@ -336,6 +333,12 @@ class MeetController extends AppController {
             $data['status']  = 0;  //默认状态
             if($this->user->id==$subject->user->id){
                 return $this->Util->ajaxReturn(false,'不可约见自己');
+            }
+            $SubjectBookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+            $subjectBook = $SubjectBookTable->find()->where(['subject_id'=>$id, 'user_id'=>$this->user->id,'status <'=>2])->first();
+            if($subjectBook){
+                //该话题约见过了
+                return $this->Util->ajaxReturn(false,'该话题您已约见过正在进行中');
             }
             $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
             $book = $BookTable->newEntity($data);

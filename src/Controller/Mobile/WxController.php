@@ -48,7 +48,7 @@ class WxController extends AppController {
         $this->redirect($wx_code_url);
     }
 
-    /*     *
+    /* *
      * 获取code->获取openid user 信息 业务处理
      */
 
