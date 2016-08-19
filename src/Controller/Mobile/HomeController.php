@@ -420,7 +420,7 @@ class HomeController extends AppController {
             $CollectTable = \Cake\ORM\TableRegistry::get('Collect');
             $collects = $CollectTable->find()->hydrate(false)
                 ->contain(['News'])
-                ->where(['is_delete' => 0, 'Collect.user_id' => $user_id])
+                ->where(['News.is_delete' => 0, 'Collect.user_id' => $user_id])
                 ->orderDesc('Collect.create_time')
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
