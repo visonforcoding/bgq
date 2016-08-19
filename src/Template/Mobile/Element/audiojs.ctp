@@ -23,6 +23,7 @@
             function play_music(id, em){
                 var jid='#'+id;
                 if(!window[jid]){
+                    LEMON.sys.mediaPlay();
                     window[jid] = {
                         timer:null,
                         audio: $(jid+' .myMusic').get(0),
