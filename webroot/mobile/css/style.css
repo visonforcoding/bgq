@@ -423,6 +423,7 @@ line-height: .34rem;height:.34rem;}
 .m-fixed-top li{line-height: 0.8rem;font-size:0.3rem;border-bottom:1px #e5e5e5 solid;text-indent: 0.65rem;}
 .m-fixed-top li.active{background: #eee;}
 .m-fixed-top li a{color:#7a7e83;display:block;}
+.mark .m_sub_title{line-height: .3rem;}
 /*大咖约见--start*/
 .m-to-more{position:absolute;height:4rem;/*background: url(img/tomore.png) center center no-repeat;*//*background-size: cover;*/width:100%;max-width: 750px;}
 .pic-expert{height:4rem;width:100%;overflow:hidden;}
@@ -1131,7 +1132,7 @@ background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  ba
 .m-service-con h3,.m-service-t{font-weight: bold;}
 .m-service-con{margin-top:.6rem;}
 .m_title_des{padding:.15rem .3rem;background: #fff;}
-.m_title_des h3{border-left:#e01a48 solid .04rem;padding-left:.12rem;line-height:.32rem;font-size: .3rem;}
+.m_title_des h3{border-left:#e01a48 solid .04rem;padding-left:.12rem;line-height:.32rem;font-size: .3rem;height:.34rem;}
 /*audio*/
 .video-js{background: #000;padding:.1rem;}
 .audio-js{background: #fff;}
