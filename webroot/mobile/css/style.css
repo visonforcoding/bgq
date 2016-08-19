@@ -507,7 +507,7 @@ display: -webkit-box;-webkit-line-clamp: 1;}
 .d-list li span,.d-list li i:after{color:#e01a48;font-size:.26rem;}
 .d-list li i{position:absolute;right:0.2rem;top:45%;}
 .d-list li i:after{content: '\e662';}
-.m-detail-box li{padding:0.25rem 0.3rem;border-bottom:1px solid #e5e5e5;display:-webkit-flex;display: flex; -webkit-justify-content:space-between;justify-content:space-between;font-size:0.3rem;}
+.m-detail-box li{padding:0.25rem 0.3rem;border-bottom:1px solid #e5e5e5;display:-webkit-flex;display: flex; -webkit-justify-content:space-between;justify-content:space-between;font-size:0.3rem;line-height: .32rem;}
 .m-detail li{padding:0.25rem 0.3rem;border-bottom:1px solid #e5e5e5;font-size:0.3rem;}
 .sub-list-l{width:75%;}
 .m-detail-box li span,.m-detail li span{display: block;font-size:0.28rem;line-height: 0.4rem;}
@@ -519,7 +519,8 @@ display: -webkit-box;-webkit-line-clamp: 1;}
 .m-detail li p{color:#222;margin-top:0.2rem;line-height: .32rem;}
 .m-detail-box li:first-child h3 span,.m-detail li:first-child h3 span{font-size:0.26rem;margin-top:0.1rem;color:#9ba4ad;}
 .meet-type{font-size:0.28rem;}
-.m-detail-box li:nth-child(2),.m-detail li:nth-child(2){color:#e01a48;}
+/*.m-detail-box li:nth-child(2),*/
+.m-detail li:nth-child(2){color:#e01a48;}
 .m-detail-box li:nth-child(3),.m-detail-box li:nth-child(4),.m-detail li:nth-child(3),.m-detail li:nth-child(4){font-size:0.24rem;line-height: 0.36rem;color:#9ba4ad;}
 .sub-list h3 span{margin-bottom:0.1rem;}
 .sub-list li .meet-type i{display: block;text-align: right;}
@@ -716,9 +717,9 @@ border-radius: 50%;}
 .m-sub-con-h,.m-sub-con-c{padding:.1rem 0;}
 .m-sub-con-c p{line-height: .42rem;}
 .m-sub-con-h h3{font-weight: bold;line-height:.4rem;font-size:.3rem;font-weight: 800;}
-.m_right_btn span{width:1.5rem;display:block;text-align:center;color:#fff;border-radius: .5rem;box-shadow: 0 .01rem .02rem rgba(255,75,112,.5);height:.6rem;}
-.m_right_btn .r-focus{line-height:.6rem;background: linear-gradient(top,#ff567b,#ff4b70);background: -webkit-linear-gradient(top,#ff567b,#ff4b70);border:.04rem #fff solid;margin-bottom:.15rem;}
-.m_right_btn .g-card{border:.02rem #ff6283 solid; color:#ff6283;line-height:.6rem;}
+.m_right_btn span{width:1.5rem;display:block;text-align:center;color:#fff;border-radius: 10px;box-shadow: 0 0 1px rgba(255,75,112,.5);height:28px;font-size:12px;line-height: 28px;}
+.m_right_btn .r-focus{line-height:24px;background: linear-gradient(top,#ff567b,#ff4b70);background: -webkit-linear-gradient(top,#ff567b,#ff4b70);border: 2px #fff solid;/*border:.04rem #fff solid;*/margin-bottom:.15rem;}
+.m_right_btn .g-card{border:1px #ff6283 solid; color:#ff6283;line-height:26px;}
 .m_right_btn .cardgray,.m_right_btn .focusgray{color:#7a7d82;border:1px solid #7a7d82;-webkit-box-shadow: 0 1px 1px rgba(255,75,112,.5);box-shadow: 0 1px 1px rgba(122,125,130,.5);}
 .m_right_btn .cardgray{color:#7a7d82;}
 .m_right_btn .focusgray{background:#7a7d82;color:#fff;}
@@ -1109,8 +1110,8 @@ width:0.5rem;height:0.16rem;display: inline-block;transition: all .3s;float:righ
 background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  background: linear-gradient(top,#54d76a 0%,#53d66a 50%, #53d569 100%);padding:.5px;}
 .btn i,.c-btn i{width:25px;height:25px;border-radius: 50%;background: lightgreen;display: block;}
 .install span.c-btn{background: #fff;/*box-shadow: 0 0 1px rgba(0,0,0,.5);*/border:1px #e5e5e5 solid;}
-.c-btn .on{float:left;background: #fff;box-shadow: 0 0 1px rgba(0,0,0,.6);transition:width height  .6s;}
-.btn .off{/*margin-right:1px;*/float:right;background: #fff;box-shadow: 0 0 1px rgba(0,0,0,.6);width:24px;height:24px;margin:1px;box-shadow: 0 0 1px rgba(0,0,0,.6);transition:width height  .6s;}
+.c-btn .off{float:left;background: #fff;box-shadow: 0 0 1px rgba(0,0,0,.6);transition:width height  .6s;}
+.btn .on{/*margin-right:1px;*/float:right;background: #fff;box-shadow: 0 0 1px rgba(0,0,0,.6);width:24px;height:24px;margin:1px;box-shadow: 0 0 1px rgba(0,0,0,.6);transition:width height  .6s;}
 .iscache{overflow:hidden;padding:1px;}
 .wraper .nopr{padding-right:0;}
 .classfytext .closed,.orgtext .closed,.orgtxt .closed{position:absolute;right:0.04rem;color:#888;font-size:0.24rem;font-weight: bold;}
