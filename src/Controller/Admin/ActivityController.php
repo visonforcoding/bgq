@@ -354,9 +354,9 @@ class ActivityController extends AppController {
                     'keyField' => 'id',
                     'parentField' => 'pid'
                 ])->contain(['Users'=>function($q){
-                    return $q->select(['id','truename','avatar']);
+                    return $q->select(['id','truename','avatar','company','position']);
                 },'Replyusers'=>function($q){
-                    return $q->select(['id','truename','avatar']);
+                    return $q->select(['id','truename','avatar','company','position']);
                 }])->hydrate(true)->where(['activity_id'=>$id])
                         ->toArray();
         $comsHtml = $this->recyOutputComs($coms); 
@@ -389,11 +389,11 @@ class ActivityController extends AppController {
                                              'hour' => 'hour'
                                          ],'end' => '+10 year']
                                 ).'</span> &nbsp;<strong>#3</strong></div>
-                                <span class="author">
-                                <a href="#"><strong>'.$com->user->truename.'</strong></a>';
+                                <a href="#"><span class="author"><a href="#"><strong>'.
+                        $com->user->truename.'&nbsp;'.$com->user->company.'&nbsp;'.$com->user->position.'</strong></a>';
                  if($com->reply){
                      $output .= '<span class="text-muted"> 回复 </span>
-                                <a href="#">'.$com->replyusers->truename.'</a>';
+                                <a href="#">'.$com->user->truename.'&nbsp;'.$com->user->company.'&nbsp;'.$com->user->position.'</a>';
                  }
                  $output .=  '</span>';
                  $output .='<div class="text">'.$com->body.'</div>

@@ -258,7 +258,7 @@ class UserController extends AppController {
         $industries = $IndustryTable->find('threaded', [
                     'keyField' => 'id',
                     'parentField' => 'pid'
-                ])->where("`id` != '3'")->hydrate(false)->toArray();
+                ])->hydrate(false)->toArray();
         //地区标签
         $RegionTable = \Cake\ORM\TableRegistry::get('Region');
         $regions = $RegionTable->find()->toArray();

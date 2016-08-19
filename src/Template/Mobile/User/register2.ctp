@@ -117,7 +117,7 @@
                     <?php if ($key > 2): ?>
                         <ul class="b-mark cart cart1 mt1" data-id='car2tuli<?= $agency['id'] ?>' id='u<?= $agency['id'] ?>'>
                             <?php foreach ($agency['children'] as $item): ?>
-                                <li data-val="<?= $item['id'] ?>" ><a href="javascript:void(0);" ><?= $item['name'] ?></a></li>
+                            <li <?php if(count($agency['children'])==1): ?>class="perli"<?php endif;?> data-val="<?= $item['id'] ?>" ><a href="javascript:void(0);" ><?= $item['name'] ?></a></li>
                             <?php endforeach; ?>
                         </ul>
                     <?php endif; ?>
@@ -145,7 +145,7 @@
                 <?php foreach ($industries as $industry): ?>
                     <ul class="b-mark cart cart1 mt1" data-id='class1tuli<?= $industry['id'] ?>' id='u1'>
                         <?php foreach ($industry['children'] as $item): ?>
-                            <li data-val="<?= $item['id'] ?>" ><a href="javascript:void(0);" ><?= $item['name'] ?></a></li>
+                            <li <?php if(count($industry['children'])==1): ?>class="perli"<?php endif;?>  data-val="<?= $item['id'] ?>" ><a href="javascript:void(0);" ><?= $item['name'] ?></a></li>
                         <?php endforeach; ?>
                     </ul>
                 <?php endforeach; ?>

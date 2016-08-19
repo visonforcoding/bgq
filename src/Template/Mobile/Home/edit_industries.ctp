@@ -17,15 +17,6 @@
             <div class='h20'></div>
         <?php endif; ?>
     <?php endforeach; ?>
-    <div class='h20'></div>
-    <div class="items">
-        <div class="orgtitle  innerwaper">
-            <span class="orgname">其它</span>
-        </div>
-        <div class="orgmark myselfmark">
-            <a href="javascript:void(0)"><input type='text' id="extra_industry" placeholder="请输入" /></a>
-        </div>
-    </div>
     <a href="javascript:void(0)" id="submit" class='nextstep'>保存</a>
 </div>
 <?php $this->start('script') ?>
