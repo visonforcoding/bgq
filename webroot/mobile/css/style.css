@@ -1140,7 +1140,7 @@ background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  ba
 .m-audio{float:left;}
 .m-audio .on{background: url(../css/img/aoff.png);background-size:contain;}
 .m-audio .stop{background: url(../css/img/aon.png) no-repeat;background-size:contain;}
-.audio{width:32px;height:32px;margin-top:5px;margin-left:5px;} 
+.audio{width:32px;height:32px;margin-top:4px;margin-left:5px;} 
 .mc_title{height:40px;width:190px;float:left;overflow:hidden;}
 .mc_title h3{line-height: 40px;font-size:12px;margin:0;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;overflow: hidden;color:#e5e5e5;padding:0 .1rem;}
 .loadout time{float:right;line-height: 40px;margin-right: 5px;color:lightgray;}
