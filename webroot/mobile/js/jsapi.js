@@ -69,7 +69,8 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
     };
 
     //api名称列表
-    var apiList = ["db.get",
+    var apiList = [
+        "db.get",
         "db.set",
         "sys.version",
         "sys.isUseLOC",  //是否使用缓存  on  off
@@ -79,11 +80,12 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
         "sys.hideKeyboard",  //隐藏键盘
         "sys.QRcode",  //二维码扫描
         "sys.update",  //android系统更新
+        "sys.mediaPlay", //开始播放多媒体
         "sys.back",
         "sys.logout",
         "sys.device", //获取唯一设备id
         "show.shareIco", //隐藏分享图标
-        "share.banner",
+        "share.banner",  //调出分享的层
         "share.QQ",
         "share.QQfriend",
         "share.WX",
@@ -147,6 +149,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                     break;
                 //无参数   无回调
                 case "sys.openLOC":
+                case "sys.mediaPlay":
                 case "sys.closeLOC":
                 case "share.banner":
                 case "show.shareIco":
