@@ -1171,7 +1171,7 @@ class HomeController extends AppController {
         $industries = $IndustryTable->find('threaded', [
                     'keyField' => 'id',
                     'parentField' => 'pid'
-                ])->where("`id` != '3'")->hydrate(false)->toArray();
+                ])->hydrate(false)->toArray();
         $this->set(array(
             'userIndustry' => $industry_id,
             'industries' => $industries,

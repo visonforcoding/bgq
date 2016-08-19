@@ -242,9 +242,9 @@ class NewsController extends AppController {
                     'keyField' => 'id',
                     'parentField' => 'pid'
                 ])->contain(['Users'=>function($q){
-                    return $q->select(['id','truename','avatar']);
+                    return $q->select(['id','truename','avatar','company','position']);
                 },'Reply'=>function($q){
-                    return $q->select(['id','truename','avatar']);
+                    return $q->select(['id','truename','avatar','company','position']);
                 }])->hydrate(true)->where(['news_id'=>$id])
                         ->toArray();
         $comsHtml = $this->recyOutputComs($coms); 
@@ -279,10 +279,10 @@ class NewsController extends AppController {
                                          ],'end' => '+10 year']
                                 ).'</span> &nbsp;<strong>#3</strong></div>
                                 <span class="author">
-                                <a href="#"><strong>'.$com->user->truename.'</strong></a>';
+                                <a href="#"><strong>'.$com->user->truename.'&nbsp;'.$com->user->company.'&nbsp;'.$com->user->position.'</strong></a>';
                  if($com->reply){
                      $output .= '<span class="text-muted"> 回复 </span>
-                                <a href="#">'.$com->reply->truename.'</a>';
+                                <a href="#">'.$com->reply->truename.'&nbsp;'.$com->reply->company.'&nbsp;'.$com->reply->position.'</a>';
                  }
                  $output .=  '</span>';
                  $output .='<div class="text">'.$com->body.'</div>
@@ -291,7 +291,7 @@ class NewsController extends AppController {
                                 <a class="delete" data-id="'.$com->id.'" href="##">删除</a>
                             </div>
                            </div>';
-                 if(!empty($com->children)){
+                if(!empty($com->children)){
                      $output .= $this->recyOutputComs($com->children);
                  }
                  $output .='</div>';

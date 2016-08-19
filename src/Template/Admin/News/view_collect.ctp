@@ -5,9 +5,6 @@
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
-            <a href="/admin/collectlogs/add" class="btn btn-small btn-warning">
-                <i class="icon icon-plus-sign"></i>添加
-            </a>
             <div class="form-group">
                 <label for="keywords">关键字</label>
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
