@@ -55,7 +55,9 @@
                                         return rowObject.user.truename;
                                     }
                                 }},
-                            {name: 'title', editable: true, align: 'center'},
+                            {name: 'title', editable: true, align: 'center',formatter: function (cellvalue, options, rowObject) {
+                                    return '<a title="查看" onClick="showNews(' +" ' "+rowObject.id+" ' " + ');" class="grid-btn ">'+cellvalue+'</a>';
+                            }},
                             {name: 'industries', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     var industries_arr = [];
                                     $.each(cellvalue, function (i, n) {
@@ -226,6 +228,18 @@
                             }
                         });
                     }, function () {
+                    });
+                }
+                function showNews(id) {
+                    url = '/mobile/news/view/' + id;
+                    layer.open({
+                        type: 2,
+                        title: '个人主页',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['375px', '667px'],
+                        skin: 'layui-layer-lan', //没有背景色
+                        content: url
                     });
                 }
 </script>
