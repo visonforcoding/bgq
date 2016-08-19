@@ -741,7 +741,7 @@ border-left:1px #e5e5e5 solid;width:33.3%;}
 .m-commond-list p{padding-top:.26rem;padding-left: .6rem;}
 .m-commond-list p img{margin-right: .1rem;width: .42rem;height: .42rem;border-radius: 50%;}
 /*个人主页*/
-.h-info-box{background: #fff;border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid; padding:0.1rem 0.3rem; margin-top:0.2rem;}
+.h-info-box{background: #fff;border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid; padding:0 0.3rem; margin-top:0.2rem;}
 .h-info-box a{color:#222c38;}
 .s-title-pass{padding:0;}
 .h-info-box li{line-height:0.4rem;border-bottom:1px #e5e5e5 solid;font-size:0.3rem;padding:0.2rem 0;}
@@ -770,7 +770,7 @@ border-left:1px #e5e5e5 solid;width:33.3%;}
 .e-info-box li.u-img .upload-user-img{height: 1rem;width: 1rem;border-radius: 0.3rem;}
 .upload-user-img .mcard{/*margin-top:.05rem;*/}
 .mcard img{width:0.46rem;height:auto;}
-.h-info-box li span{float:left;display: block;font-size:0.3rem;}
+.h-info-box li span{float:left;display: block;font-size:0.28rem;}
 .h-info-box li div{float:right;}
 .e-info-box .upload-user-img span.m-card{display:block;width:0.46rem;height:0.38rem;background: url(../images/user-img.png) no-repeat;background-size:contain;}
 .e-info-box .upload-user-img .tx{width:0.6rem;height:0.5rem;}
@@ -778,7 +778,7 @@ border-left:1px #e5e5e5 solid;width:33.3%;}
 .upload-user-img{width:0.46rem;height:0.38rem;/*background: url(../images/user-img.png) no-repeat;background-size:contain;*/}
 .upload-user-img span{position: relative;}
 .upload-user-img span input{border:1px #ccc solid;position: absolute; width:0.46rem;height:0.38rem;opacity: 0;}
-.e-info-box input{width:4.5rem; text-align: right; border:none;outline:none;font-size:0.28rem;}
+.e-info-box input{width:4.5rem; text-align: right; border:none;outline:none;font-size:0.3rem;}
 .e-info-box input[readonly],.cogray{color:gray;}
 .e-info-box .no-right-ico{background: none;padding-right:0.3rem;}
 .h-info-box a.no-ico{background:none;color:#E01A48;text-align: center;}
