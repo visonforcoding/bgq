@@ -778,7 +778,7 @@ border-left:1px #e5e5e5 solid;width:33.3%;}
 .upload-user-img{width:0.46rem;height:0.38rem;/*background: url(../images/user-img.png) no-repeat;background-size:contain;*/}
 .upload-user-img span{position: relative;}
 .upload-user-img span input{border:1px #ccc solid;position: absolute; width:0.46rem;height:0.38rem;opacity: 0;}
-.e-info-box input{width:4.5rem; text-align: right; border:none;outline:none;font-size:0.3rem;height:.4rem;line-height: .4rem;padding:0;
+.e-info-box input{width:4.5rem; text-align: right; border:none;outline:none;height:.4rem;line-height: .4rem;padding:0;
 margin-top:.1rem;}
 .e-info-box input[readonly],.cogray{color:gray;}
 .e-info-box .no-right-ico{background: none;padding-right:0.3rem;}
