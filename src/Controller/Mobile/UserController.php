@@ -202,6 +202,9 @@ class UserController extends AppController {
                 'phone_set'=>2,
                 'email_set'=>2
             ];
+            if($this->request->is('weixin')){
+                $data['device'] = 'weixin';
+            }
             if ($this->request->session()->read('reg.wx_bind') && $this->request->session()->check('reg.wx_openid')) {
                 //第一次微信登录的完善信息
                 if($this->request->session()->check('reg.wx_unionid')){
@@ -217,7 +220,7 @@ class UserController extends AppController {
                 }
             }
             $user = $this->User->patchEntity($user, $data,[
-                'associated'=> 'Secret'
+                'associated'=> ['Secret','Industries']
             ]);
             if ($this->User->save($user)) {
                 $jumpUrl = '/home/index';
