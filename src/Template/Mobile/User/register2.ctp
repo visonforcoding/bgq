@@ -50,7 +50,7 @@
         <div class="h2"></div>
         <div class="markbox border" id="place">
             <div class="a-s-title bgff">
-                <span class="">请选择地区<a href="javascript:void(0);" onclick=ft(this); class="orgtxt"></a></span>
+                <span class="">请选择地区<a href="javascript:void(0);" onclick=closed_city(this); class="orgtxt"></a></span>
             </div>
             <div class="markslider">
                 <div class="mark-items">
@@ -160,29 +160,24 @@
 </div>
 <?php $this->start('script') ?>
 <script type="text/javascript">
-    // function closedfn(that) {
-    //     that.remove();
-    //     var da = $(that).data('val');
-    //     console.log(da);
-    //     $('#industry li[data-val="' + da + '"]').children('a').removeClass('active');
-    // }
+   
     function closedft(that) {
+         var industry_id = $(that).data('val');
+         var choose = $('#org li[data-val="' + industry_id + '"]');
+         choose.children('a').removeClass('active');
+         $(that).text('').hide();
+    }
+     function closed_city(that) {
         $(that).text('').hide();
-        $('#org li a').removeClass('active');
+       $('#place li a').removeClass('active');
     }
     function fn(that) {
         var industry_id = $(that).data('val');
         var choose = $('#industry li[data-val="' + industry_id + '"]');
-
-        // if (choose.length) {
-        //     choose.children('a').removeClass('active');
-
-        // }
+        choose.children('a').removeClass('active');
         that.remove();
     }
-    // function ft(that) {
-    //     $(that).text('').hide();
-    // }
+   
     $(function () {
         var agency = null, formdata,city;
         var classfy = $('.classfymark>li');
@@ -195,6 +190,8 @@
             window.scrollTo(0, 9999);
         });
         $('#place .headmark li').on('tap', function () {//地区
+             $('#place a').removeClass('active');
+             $(this).children('a').addClass('active');
             $('.b-input').removeClass('b-active').addClass('hide');
             $('.r-place').children('span').removeClass('active');
             $('.orgtxt').html($(this).text() + '<i class="closed">&times;</i>').show();
