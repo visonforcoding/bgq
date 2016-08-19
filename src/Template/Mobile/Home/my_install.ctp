@@ -28,7 +28,7 @@
         <li class="no-right-ico install">
             <span>使用缓存</span>
             <div class='iscache'>
-                <span class="btn" id='checkBtn'><i class="off"></i></span>
+                <span class="btn" id='checkBtn'><i class="on"></i></span>
             </div>
         </li>
         <li class="lh4 no-right-ico install">
@@ -114,11 +114,11 @@
     function setCheck(st){
         if(st == 'on'){
             $('#checkBtn i').get(0).className = 'on';
-            $('#checkBtn').removeClass().addClass('c-btn');
+            $('#checkBtn').removeClass().addClass('btn');
         }
         else{
             $('#checkBtn i').get(0).className = 'off';
-             $('#checkBtn').removeClass().addClass('btn');
+             $('#checkBtn').removeClass().addClass('c-btn');
         }
     }
 
