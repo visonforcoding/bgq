@@ -775,9 +775,10 @@ div.ui-jqgrid-view table.ui-jqgrid-btable th
 /*鼠标放上去的颜色*/
 tr.ui-state-hover {
    border : 1px solid blue;
-   background: #78EDD2 !important;
+   /*background: #78EDD2 !important;*/
 }
 /*选定的颜色*/
 .ui-jqgrid-btable .ui-widget-content.ui-state-highlight {
-    background-color: #4CC03B;
+    /*background-color: #4CC03B;*/
+    background-color: #b8e2b2;
 }

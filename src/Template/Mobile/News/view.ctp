@@ -39,7 +39,7 @@
                 <?php if($news->is_media ==1): ?>
                 <?= $this->element('videojs', ['media' => $news->video,'poster'=>$news->video_cover]) ?>
                 <?php else:?>
-                <?= $this->element('audiojs', ['media' => $news->mp3]) ?>
+                <?= $this->element('audiojs', ['media' => $news->mp3,'title'=>$news->mp3_title]) ?>
                 <?php endif;?>
             <?php endif; ?>
             <p><?= $news->body ?></p>
@@ -47,7 +47,7 @@
                 <?php if($news->is_media==1): ?>
                 <?= $this->element('videojs', ['media' => $news->video,'poster'=>$news->video_cover]) ?>
                 <?php else:?>
-                <?= $this->element('audiojs', ['media' => $news->mp3]) ?>
+                <?= $this->element('audiojs', ['media' => $news->mp3,'title'=>$news->mp3_title]) ?>
                 <?php endif;?>
             <?php endif; ?>
             <div class="con-bottom clearfix pd20">
