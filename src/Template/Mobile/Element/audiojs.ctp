@@ -1,51 +1,16 @@
-<!--<style>
-    .audio{
-        max-width: 90%;
-        width: 300px;
-        margin: 0.1rem auto;
-        text-align: justify;
-        position:relative;
-    }
-    .isapple{position:absolute;max-width:60%;left:20%;}
-</style>
-<div class="audio">
-    <audio preload="auto" style="margin:10px auto;" width="100%" controls="controls">
-        <source src="<?= $media ?>" type="audio/mpeg">
-    </audio>
-    <div class='isapple'><h3>这是一首歌。。。。。</h3></div>
-</div>
--->
-<!-- <div class="loadout" id="audioCell">
-    <div class="m-audio">
-        <div class="audio stop" onclick="play_music('audioCell', this)">
-        <audio class="myMusic" height='1' width='1' loop="loop">
-            <source src="/upload/news/mp3/2016-08-16/57b2ef22c8be3.mp3" type="audio/ogg">
-        </audio>
-    </div>
-    </div>
-
-    <div class="mc_title">
-        <h3>这是一首主打歌，唱出了你和我。。。</h3>
-    </div>
-    <time class="timeCell"></time>
-</div> -->
-
 <div class="loadout" id="audioCell2">
     <div class="m-audio">
         <div class="audio stop" onclick="play_music('audioCell2', this)">
             <audio class="myMusic" height='1' width='1' preload="auto">
-                <source src="/upload/news/mp3/2016-08-16/57b2ef22c8be3.mp3" type="audio/ogg">
+                <source src="<?= $media ?>" type="audio/mpeg">
             </audio>
         </div>
     </div>
-
     <div class="mc_title">
-        <h3>这是一首主打歌，唱出了你和我。。。</h3>
+        <h3><?=$title?></h3>
     </div>
     <time class="timeCell"></time>
 </div>
-
-
         <script type="text/javascript">
             function fixedSeconds(value) {
                 var hs='', ms='', ss='', n = parseInt(value), h=parseInt(n/3600), m=parseInt(n/60)%60, s=parseInt(n%60);
