@@ -70,7 +70,7 @@
                                 if(res=='0'){
                                     $.util.alert('支付成功');
                                     setTimeout(function(){
-                                        window.location.href = '/wx/pay-success';
+                                        window.location.href = '/wx/pay-success/<?=$order_detail->id?>';
                                     },1000);
                                 }else{
                                     $.util.alert('支付未成功');
@@ -83,11 +83,10 @@
                     if(payMethod=='ali'){
                         if($.util.isAPP){
                             LEMON.pay.ali('<?=$aliPayParameters?>',function(res){
-                                alert(res);
                                 if(res=='9000'){
                                     $.util.alert('支付成功');
                                     setTimeout(function(){
-                                        window.location.href = '/wx/pay-success';
+                                        window.location.href = '/wx/pay-success/<?=$order_detail->id?>';
                                     },1000);
                                 }else{
                                     $.util.alert('支付未成功');
