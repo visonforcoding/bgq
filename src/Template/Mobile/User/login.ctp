@@ -102,7 +102,7 @@
     });
     $('#wxlogin').on('click', function () {
         if ($.util.isAPP) {
-            LEMON.login.wx('login',function (code) {
+            LEMON.login.wx(function (code) {
             $.util.ajax({   //获取open id,比对是否存在,登录或是注册  生成token
                 data:{code:code},
                 url: '/wx/appLogin',
