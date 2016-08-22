@@ -194,17 +194,17 @@ class WxpayComponent extends Component {
     public function notify() {
         $data = $this->request->input('Cake\Utility\Xml::build');
         if ($data->result_code != 'SUCCESS') {
-            (new \Cake\Mailer\Email())
-                    ->to('caowenpeng1990@126.com')
-                    ->subject('微信回调失败')
-                    ->send('微信回调失败:' . $data->result_msg);
+//            (new \Cake\Mailer\Email())
+//                    ->to('caowenpeng1990@126.com')
+//                    ->subject('微信回调失败')
+//                    ->send('微信回调失败:' . $data->result_msg);
             \Cake\Log\Log::error('微信回调失败', 'devlog');
             \Cake\Log\Log::error($data->result_msg, 'devlog');
             return false;
         }
         $order_no = $data->out_trade_no;
         $out_trade_no = $data->transaction_id;
-        $realFee = $data->total_fee;
+        $realFee = $data->total_fee/100;
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
         $order = $OrderTable->find()->contain(['Sellers', 'Users'])->where(['Lmorder.status' => 0, 'order_no' => $order_no])->first();
         $resXml = $this->arr2xml([
