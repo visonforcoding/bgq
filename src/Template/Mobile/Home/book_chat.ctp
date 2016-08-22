@@ -49,8 +49,8 @@
                                 d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                                 d.msg = '<li class="fr"><div class="m-online-r"><span>' + d.content + '</span><time>' + d.create_time + '</time></div><img src="' + d.user_avatar + '" class="m_online-pic" /></li>';
                             } else {
-                                d.reply_user_avatar = d.reply_user.avatar ? d.reply_user.avatar : '/mobile/images/touxiang.png';
-                                d.msg = '<li class="fl"><img src="' + d.reply_user_avatar + '" class="m_online-pic" /><div class="m-online-r"><span>' + d.content + '</span><time>' + d.create_time + '</time></div></li>';
+                                d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                                d.msg = '<li class="fl"><img src="' + d.user_avatar + '" class="m_online-pic" /><div class="m-online-r"><span>' + d.content + '</span><time>' + d.create_time + '</time></div></li>';
                             }
 //                        }
                         return d;
