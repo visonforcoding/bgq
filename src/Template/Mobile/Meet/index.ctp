@@ -75,9 +75,12 @@
     <div class="h2"></div>
     <div id='biggie'></div>
     <div id="buttonLoading" class="loadingbox"></div>
-    <div class="submitbtn">
+    <?php if(!$is_savant): ?>
+    <div class="submitbtn" id="auth">
         <a href="/home/savant_auth"><span class="s-activ">会员<br>认证</span></a>
     </div>
+    <?php endif; ?>
+    
 </div>
 <script type='text/html' id='biggie_tpl'>
     <section class="internet-v-info">
@@ -115,6 +118,17 @@
     }
 </script>
 <script>
+    
+    window.hideRelease = false;
+    $(window).on("scroll", function () {
+        // 滚动一个屏幕长度，隐藏发布活动
+        var lastSt = window.hideRelease;
+        window.hideRelease = document.body.scrollTop > $(window).height();
+        if(lastSt != window.hideRelease){
+            window.hideRelease ? $('#auth').removeClass('moveleft').addClass('moveright') : $('#auth').addClass('moveleft');
+        }
+    });
+    
     $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
         d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
 //        d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
