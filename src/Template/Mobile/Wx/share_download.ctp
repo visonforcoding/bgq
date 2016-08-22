@@ -6,11 +6,11 @@
             <p>并购人的生活方式</p>
         </div>
         <div class="d-down block">
-            <a id="download" href="com.chinamatop://main/param?url=<?= $url ?>"><span></span>在app中打开</a>
+            <a id="download" href="com.chinamatop://main/param?url=http://m.chinamatop.com/<?= $url ?>"><span></span>在app中打开</a>
             <!--<a href="javascript:void(0)" id="download"><span></span>立刻下载</a>-->
             <p>or</p>
         </div>
-        
+
         <div class="block wxsao">
             <img src="/mobile/images/wx.png"/>
             <p>关注我们的微信公众号</p>
@@ -34,7 +34,7 @@
             }
             else if($.util.isIOS){
                 em.href = 'javascript:void(0)';
-                //$.util.alert('app即将上架app store,请耐心等待');
+                $.util.alert('app即将上架app store,请耐心等待');
             }
         }, 300);
     });
