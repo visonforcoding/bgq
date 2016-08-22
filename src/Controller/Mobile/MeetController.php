@@ -54,11 +54,21 @@ class MeetController extends AppController {
                 ->toArray();
         $this->set('meetjson', json_encode($users));
         $user_id = '';
+        $is_savant = false;
         if($this->user){
             $user_id = $this->user->id;
+            $UserTable = \Cake\ORM\TableRegistry::get('user');
+            $user = $UserTable->get($user_id);
+            if($user->level == 2){
+                $is_savant = true;
+            }
         }
         $this->set('user_id', $user_id);
-        $this->set('pageTitle', '约见');
+        $this->set([
+            'pageTitle'=>'约见',
+            'user_id'=>$user_id,
+            'is_savant'=>$is_savant,
+        ]);
     }
     
     /**
