@@ -31,6 +31,7 @@
         if($obj.hasClass('noTap')){
             return;
         }
+        var phone = $('input[name="phone"]').val();
         if(phone == ''){
             $.util.alert('请输入手机号码');
             return;
@@ -51,7 +52,6 @@
                 
             }
         }, 1000);
-        var phone = $('input[name="phone"]').val();
         
         if ($.util.isMobile(phone)) {
             $.post('/user/changePhoneVcode', {phone: phone}, function (res) {
