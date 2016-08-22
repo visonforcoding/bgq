@@ -76,6 +76,7 @@
             url: "/home/reply-chat/" + book_id + '/' + type,
             success: function (res) {
                 if(res.status){
+                    $('#content').val('');
                     $.ajax({
                         type: 'POST',
                         dataType: 'json',
