@@ -26,7 +26,7 @@
         <section class="a-detail newscomment-box">
             <h3 class="comment-title">活动介绍</h3>
             <div class="innercon">
-                <?= $activity->summary; ?>
+                <p><?= $activity->summary; ?></p>
             </div>
         </section>
         <section class="a-detail newscomment-box">
