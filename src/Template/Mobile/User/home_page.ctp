@@ -371,7 +371,9 @@
     })();
 </script>
 <script>
-
+    if (location.href.indexOf('?share=1') != -1) {
+        $('#share_download').show();
+    }
 
     $('.h-tab>li').on('click', function () {
         var index = $(this).index();
