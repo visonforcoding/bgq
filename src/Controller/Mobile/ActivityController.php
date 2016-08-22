@@ -672,6 +672,7 @@ class ActivityController extends AppController {
                         ->toArray();
         foreach($activity as $k=>$v){
             $now = \Cake\I18n\Time::now();
+            $v->time = $v->time->format('Y-m-d');
             if($v['time'] < $now){
                 $activity[$k]['pass_time'] = 1;
             } else {
