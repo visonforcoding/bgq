@@ -76,6 +76,7 @@
     </div>
 
     <!--话题-->
+    <?php if ($user->level == 2): ?>
     <div class="m-subject-list">
         <div class="m-tomore-bottom m-pos-top">
             <span><i class="iconfont">&#xe61b;</i><span id="meet_nums"><?= $user->savant->reco_nums ?></span>人推荐</span>
@@ -85,7 +86,7 @@
             <h3><i class="iconfont">&#xe670;</i>话题列表<?php if ($self): ?><a href="/meet/my_subjects"><span class="fr">话题管理</span></a><?php endif; ?></h3>
         </div>
         <div class="m-sub-con">
-            <?php if ($user->level == 2 && $user->subjects): ?>
+            <?php if ($user->subjects): ?>
                 <?php foreach ($user->subjects as $k => $v): ?>
                     <section>
                         <a href="<?php if ($self): ?>/meet/subject/<?= $v['id'] ?><?php else: ?>/meet/subject_detail/<?= $v['id'] ?>/#homepage<?php endif; ?>">
@@ -119,7 +120,7 @@
             </a>
         </div>
     </div>
-
+    <?php endif; ?>
 
     <!--基本资料-->
     <div class="infotab m-infotab-list">
