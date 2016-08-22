@@ -35,7 +35,7 @@
                 <p>{#summary#}</p>
             </div>	
             <div class="sec-news-r">
-                <img src="{#cover#}"/>
+                <img src="{#thumb#}"/>
             </div>
         </a>
         <div class="news-bottom clearfix">
