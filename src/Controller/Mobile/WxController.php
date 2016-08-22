@@ -234,12 +234,12 @@ class WxController extends AppController {
             return $this->Util->ajaxReturn(['status' => false, 'msg' => '与微信服务器交互出现问题']);
         }
         $union_id = $res->unionid;
-        $open_id = $res->openid;
+        $openid = $res->openid;
         $user_id = $this->user->id;
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $user = $UserTable->get($user_id);
         $user->union_id = $union_id;
-        $union_id->app_wx_openid = $open_id;
+        $user->app_wx_openid = $openid;
         $UserTable->save($user); //记录open_id 等微信信息
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
         $order = $OrderTable->get($id);
