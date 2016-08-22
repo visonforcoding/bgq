@@ -48,7 +48,7 @@ class WxController extends AppController {
         $this->redirect($wx_code_url);
     }
 
-    /* *
+    /*     *
      * 获取code->获取openid user 信息 业务处理
      */
 
@@ -92,7 +92,7 @@ class WxController extends AppController {
      * 注册成功后的账号绑定微信
      */
     public function bindWx() {
-        if(!$this->user){
+        if (!$this->user) {
             return $this->redirect('/user/login');
         }
         $wxconfig = \Cake\Core\Configure::read('weixin');
@@ -108,7 +108,7 @@ class WxController extends AppController {
                     '&code=' . $code . '&grant_type=authorization_code';
             //取得openid
             $response = $httpClient->get($wx_accesstoken_url);
-            if(!$response->isOk()||!isset(json_decode($response->body())->openid)) {
+            if (!$response->isOk() || !isset(json_decode($response->body())->openid)) {
                 //绑定失败
                 return $this->redirect('/home/index');
             }
@@ -121,8 +121,8 @@ class WxController extends AppController {
             if ($res->isOk()) {
                 $user = $UserTable->get($user_id);
                 $userinfo = json_decode($res->body()); //微信用户信息
-                \Cake\Log\Log::debug('注册调试','devlog');
-                \Cake\Log\Log::debug($userinfo,'devlog');
+                \Cake\Log\Log::debug('注册调试', 'devlog');
+                \Cake\Log\Log::debug($userinfo, 'devlog');
                 $headimgurl = $userinfo->headimgurl;
                 //存储微信头像
                 //$avatar = $this->Util->saveUrlImage($headimgurl,'user/avatar');
@@ -199,13 +199,16 @@ class WxController extends AppController {
         $this->loadComponent('Wxpay');
         $isApp = false;
         $aliPayParameters = '';
+        $jsApiParameters = '';
         if ($this->request->is('lemon')) {
             $isApp = true;
             $openid = $this->user->app_wx_openid;
             $this->loadComponent('Alipay');
             $aliPayParameters = $this->Alipay->setPayParameter($out_trade_no, $title, $fee, $body);
         }
-        $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, null, $isApp);
+        if ($openid) {
+            $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, null, $isApp);
+        }
         $this->set(array(
             'jsApiParameters' => $jsApiParameters,
             'isWx' => $this->request->is('weixin') ? true : false,
@@ -213,7 +216,53 @@ class WxController extends AppController {
         ));
 
         $this->set(['pageTitle' => '订单支付']);
-        $this->set(compact('order_detail'));
+        $this->set(compact('order_detail', 'order'));
+    }
+
+    /**
+     * ajax 获取微信支付参数
+     * @param type $id
+     * @return type
+     */
+    public function paywx($id = null) {
+        //用户第一次在平台 用微信支付
+        $code = $this->request->data('code');
+        $res = $this->Wx->getUser($code, true);
+        \Cake\Log\Log::debug($res, 'devlog');
+        if (!$res) {
+            //获取到openid 有问题
+            return $this->Util->ajaxReturn(['status' => false, 'msg' => '与微信服务器交互出现问题']);
+        }
+        $union_id = $res->unionid;
+        $open_id = $res->openid;
+        $user_id = $this->user->id;
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $user = $UserTable->get($user_id);
+        $user->union_id = $union_id;
+        $union_id->app_wx_openid = $open_id;
+        $UserTable->save($user); //记录open_id 等微信信息
+        $OrderTable = \Cake\ORM\TableRegistry::get('Order');
+        $order = $OrderTable->get($id);
+        if ($order->type == 1) {
+            $body = '预约话题《' . $order->subject_book->subject->title . '》支付';
+        } else {
+            $body = '活动报名《' . $order->activityapply->activity->title . '》支付';
+        }
+        $out_trade_no = $order->order_no;
+        $fee = 0.01; //元
+//        $fee = $order->price;  //支付金额(分)
+        $this->loadComponent('Wxpay');
+        $isApp = false;
+        $jsApiParameters = '';
+        if ($this->request->is('lemon')) {
+            $isApp = true;
+        }
+        if ($openid) {
+            $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, null, $isApp);
+        }
+        return $this->Util->ajaxReturn([
+            'jsApiParameters' => $jsApiParameters
+        ]);
     }
 
     /**
@@ -279,13 +328,17 @@ class WxController extends AppController {
     /**
      * 支付成功
      */
-    public function paySuccess() {
+    public function paySuccess($id = null) {
+        if ($id) {
+            $OrderTable = \Cake\ORM\TableRegistry::get('Order');
+            $order = $OrderTable->get($id);
+        }
         $this->set([
+            'order' => $order,
             'pageTitle' => '支付结果页'
         ]);
     }
 
-    
     /**
      * 微信的上传图片接口
      * @param type $id
@@ -311,20 +364,20 @@ class WxController extends AppController {
         }
     }
 
-    public function shareDownload($controller=null, $id=null) {
-        if($controller && $id){
-            if($controller == 'news'){
-                $url = '/news/view/'.$id;
-            } elseif($controller == 'activity'){
-                $url = '/activity/details/'.$id;
-            } elseif($controller == 'user') {
-                $url = '/meet/view/'.$id;
+    public function shareDownload($controller = null, $id = null) {
+        if ($controller && $id) {
+            if ($controller == 'news') {
+                $url = '/news/view/' . $id;
+            } elseif ($controller == 'activity') {
+                $url = '/activity/details/' . $id;
+            } elseif ($controller == 'user') {
+                $url = '/meet/view/' . $id;
             }
         } else {
             $url = '/';
         }
         $this->set([
-            'pageTitle'=>'下载并购帮',
+            'pageTitle' => '下载并购帮',
             'url' => $url,
         ]);
     }
