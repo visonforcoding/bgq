@@ -36,6 +36,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .r-t-head{text-indent: .3rem;border-bottom:1px #e5e5e5 solid;height:.6rem;line-height: .58rem;}
 .mark-items .b-mark{overflow:hidden;/*border:1px #e5e5e5 solid;*/margin-bottom:1px;}
 .b-mark li{float:left;width:33%;text-align: center;position:relative;margin-right:1px;margin-bottom:1px;}/*三个级标签*/
+.b-mark li{border:1px red solid;}
 .outerul{}
 .b-mark li.w100{width:100%;}/*一个二级标签*/
 .b-mark li.w50{width:50%;}/*二个级标签*/
