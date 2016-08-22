@@ -51,14 +51,14 @@ class ActivityController extends AppController {
             if ($this->user) {
                 // 是否已赞
                 $isLike = $this->Activity->Likelogs->find()
-                        ->where(['user_id' => $this->user->id, 'relate_id' => $id])
+                        ->where(['user_id' => $this->user->id, 'relate_id' => $id, 'type' => 0])
                         ->first();
                 // 是否已收藏
                 $isCollect = $this
                         ->Activity
                         ->Collect
                         ->find()
-                        ->where(['user_id' => $this->user->id, 'relate_id' => $id])
+                        ->where(['user_id' => $this->user->id, 'relate_id' => $id, 'type' => 0])
                         ->first();
                 if ($isCollect) {
                     $isCollect = !$isCollect['is_delete'];
