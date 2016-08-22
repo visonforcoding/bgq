@@ -65,7 +65,7 @@
             </div>
         </div>
     </div>
-    <?php if($user->level == 2 && $user->subjects): ?>
+    
         <!--话题-->
         <div class="m-subject-list">
             <div class="m-tomore-bottom m-pos-top">
@@ -73,22 +73,28 @@
                 <span><i class="iconfont">&#xe610;</i><?= $user->meet_nums ?>人聊过</span>
             </div>
             <div class="m-sub-header">
-                <h3><i class="iconfont">&#xe670;</i>话题列表<?php if($self): ?><a href="/meet/my_subjects"><span class="fr">编辑话题</span></a><?php endif; ?></h3>
+                <h3><i class="iconfont">&#xe670;</i>话题列表<?php if($self): ?><a href="/meet/my_subjects"><span class="fr">话题管理</span></a><?php endif; ?></h3>
             </div>
             <div class="m-sub-con">
-                <?php foreach ($user->subjects as $k=>$v): ?>
-                <section>
-                    <a href="<?php if($self): ?>/meet/subject/<?= $v['id'] ?><?php else: ?>/meet/subject_detail/<?= $v['id'] ?>/#homepage<?php endif; ?>">
-                        <div class="m-sub-con-h">
-                            <h3><?= $v['title'] ?></h3>
-                        </div>
-                        <div class="m-sub-con-c">
-                            <p><?= $v['summary'] ?>
-                            </p>
-                        </div>
-                    </a>
-                </section>
-                <?php endforeach; ?>
+                <?php if($user->level == 2 && $user->subjects): ?>
+                    <?php foreach ($user->subjects as $k=>$v): ?>
+                    <section>
+                        <a href="<?php if($self): ?>/meet/subject/<?= $v['id'] ?><?php else: ?>/meet/subject_detail/<?= $v['id'] ?>/#homepage<?php endif; ?>">
+                            <div class="m-sub-con-h">
+                                <h3><?= $v['title'] ?></h3>
+                            </div>
+                            <div class="m-sub-con-c">
+                                <p><?= $v['summary'] ?>
+                                </p>
+                            </div>
+                        </a>
+                    </section>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="m-sub-con-h">
+                        <h3>暂无话题</h3>
+                    </div>
+                <?php endif; ?>
             </div>
             <!--推荐-->
             <div class="m-commond-list clearfix">
@@ -104,7 +110,8 @@
                 </a>
             </div>
         </div>
-    <?php endif; ?>
+        
+    
     <!--基本资料-->
     <div class="infotab m-infotab-list">
         <ul class="h-tab">
@@ -324,15 +331,6 @@
 <?php endif; ?>
 <?php $this->start('script') ?>
 <script>
-//    (function () {
-//        var imgUrl = '<?= $user->avatar ?>';
-//        if (imgUrl)
-//            window.shareConfig.imgUrl = location.origin + imgUrl;
-//        window.shareConfig.link = location.href;
-//        window.shareConfig.title = '<?= $user->truename ?>的会员主页';
-//        window.shareConfig.desc = '<?= $user->company ?>  <?= $user->truename ?>';
-//                LEMON.show.shareIco();
-//            })();
     (function () {
         var imgUrl = '<?= $user->avatar ?>';
         if (imgUrl)
