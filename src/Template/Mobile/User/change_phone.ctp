@@ -2,7 +2,7 @@
     <div class="h2"></div>
     <ul class="h-info-box">
         <form action="" method="post">
-            <li class="l-input"><input type="text" name="phone" placeholder="请输入手机号码"></li>
+            <li class="l-input"><input type="text" name="phone" placeholder="请输入新手机号码"></li>
             <li class="l-input"><input type="text" name="vcode" placeholder="验证码"><i class="color-items getnum" id="getVcode">获取验证码</i></li>
         </form>
     </ul>
@@ -33,7 +33,7 @@
         }
         var phone = $('input[name="phone"]').val();
         if(phone == ''){
-            $.util.alert('请输入手机号码');
+            $.util.alert('请输入新手机号码');
             return;
         }
         $obj.addClass('noTap');
