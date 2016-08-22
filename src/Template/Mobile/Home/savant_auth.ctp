@@ -51,6 +51,19 @@
 </div>
 <?php $this->start('script') ?>
 <script>
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: "/home/get-userinfo-status",
+        success: function (res) {
+            if(res.status){
+                
+            } else {
+                $.util.alert(res.msg);
+            }
+        }
+    });
+    
     $(function () {
         $('#submit').on('click', function () {
             if($('textarea[name="xmjy"]').val() == ''){
