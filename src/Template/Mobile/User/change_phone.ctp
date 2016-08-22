@@ -31,6 +31,10 @@
         if($obj.hasClass('noTap')){
             return;
         }
+        if(phone == ''){
+            $.util.alert('请输入手机号码');
+            return;
+        }
         $obj.addClass('noTap');
         var text = '<i id="timer">' + 30 + '</i>秒后重新发送';
         $obj.html(text);
@@ -48,10 +52,7 @@
             }
         }, 1000);
         var phone = $('input[name="phone"]').val();
-        if(phone == ''){
-            $.util.alert('请输入手机号码');
-            return;
-        }
+        
         if ($.util.isMobile(phone)) {
             $.post('/user/changePhoneVcode', {phone: phone}, function (res) {
                 if (res.status === true) {
