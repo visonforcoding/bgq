@@ -79,7 +79,7 @@
                                     }
                                 });
                             } else {
-                                LEMON.login.wx('pay',function (code) {
+                                LEMON.login.wx(function (code) {
                                     $.util.ajax({//获取open id,比对是否存在,登录或是注册  生成token
                                         data: {code: code},
                                         url: '/wx/paywx/<?= $order->id ?>',
