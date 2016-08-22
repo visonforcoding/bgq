@@ -18,7 +18,7 @@
     <ul class="h-info-box e-info-box max_width">
         <li class='u-img no-right-ico'>
             <a href="javascript:void(0)">
-                <span class="e_img">头像：</span>
+                <span>头像：</span>
                 <div class="upload-user-img">
                     <span id="upload_pic" class='tx'><img src="<?= $user->avatar ? getOriginAvatar($user->avatar) : '/mobile/images/touxiang.png' ?>"/><input type="hidden" name="avatar" value="<?=$user->avatar?>" ></span>
                 </div>
@@ -42,7 +42,7 @@
         </li>
         <li>
             <a href="javascript:void(0)">
-                <span class="e_img">性别：</span>
+                <span>性别：</span>
                 <div>
                     <span class='typeselect'>
                     <select name="gender" class='checkedsex'>
@@ -55,7 +55,7 @@
         </li>
         <li class="no-right-ico">
             <a href="javascript:void(0)">
-                <span class="e_img">部门职务：</span>
+                <span>部门职务：</span>
                 <div >
                     <input type="position" name="position" value="<?=$user->position?>" />
                 </div>
@@ -83,7 +83,7 @@
     <ul class="h-info-box e-info-box max_width">
         <li>
             <a href="/home/edit_industries">
-                <span class="e_img">行业：</span>
+                <span>行业：</span>
                 <div>
                     <span id="industry"></span>
                 </div>
@@ -91,7 +91,7 @@
         </li>
         <li>
             <a href="/home/edit-city">
-                <span class="e_img">所在地：</span>
+                <span>所在地：</span>
                 <div>
                     <span id="city">
                         <?php if(!$user->city): ?>
@@ -103,7 +103,7 @@
         </li>
         <li>
             <a href="/home/my-business">
-                <span class="e_img">擅长业务：</span>
+                <span>擅长业务：</span>
                 <div>
                     <span id="goodat">
                         <?php if(!$user->goodat): ?>
@@ -115,7 +115,7 @@
         </li>
         <li>
             <a href="/home/edit-company-business">
-                <span class="e_img">公司业务：</span>
+                <span>公司业务：</span>
                 <div>
                     <span id="gsyw">
                         <?php if(!$user->gsyw): ?>
@@ -130,7 +130,7 @@
         <ul class="h-info-box e-info-box max_width">
             <li>
             <a href="/home/edit-education">
-                <span class="e_img">教育经历：</span>
+                <span>教育经历：</span>
                 <div>
                     <span id="educations">
                         <?php if(!$user->educations): ?>
@@ -142,7 +142,7 @@
         </li>
         <li>
             <a href="/home/edit-work">
-                <span class="e_img">工作经历：</span>
+                <span>工作经历：</span>
                 <div>
                     <span id="careers">
                         <?php if(!$user->careers): ?>
@@ -164,7 +164,7 @@
         </li>
         <li class="nobottom">
             <a href="/home/edit-mark">
-                <span class="e_img">个人标签：</span>
+                <span>个人标签：</span>
                 <div>
                     <span id="grbq">
                         <?php if(!$user->grbq): ?>
