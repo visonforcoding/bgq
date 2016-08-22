@@ -36,23 +36,13 @@
             success: function (res) {
                 if (res.status) {
                     $.util.dataToTpl('chat', 'tpl', res.data, function (d) {
-//                        if(type == '1'){
-//                            if (d.reply_user.id == uid) {
-//                                d.reply_user_avatar = d.reply_user.avatar ? d.reply_user.avatar : '/mobile/images/touxiang.png';
-//                                d.msg = '<li class="fr"><div class="m-online-r"><span>' + d.content + '</span><time>' + d.create_time + '</time></div><img src="' + d.reply_user_avatar + '" class="m_online-pic" /></li>';
-//                            } else {
-//                                d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-//                                d.msg = '<li class="fl"><img src="' + d.user_avatar + '" class="m_online-pic" /><div class="m-online-r"><span>' + d.content + '</span><time>' + d.create_time + '</time></div></li>';
-//                            }
-//                        } else {
-                            if (d.user.id == uid) {
-                                d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                                d.msg = '<li class="fr"><div class="m-online-r"><span>' + d.content + '</span><time>' + d.create_time + '</time></div><img src="' + d.user_avatar + '" class="m_online-pic" /></li>';
-                            } else {
-                                d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                                d.msg = '<li class="fl"><img src="' + d.user_avatar + '" class="m_online-pic" /><div class="m-online-r"><span>' + d.content + '</span><time>' + d.create_time + '</time></div></li>';
-                            }
-//                        }
+                        if (d.user.id == uid) {
+                            d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                            d.msg = '<li class="fr"><div class="m-online-r"><span>' + d.content + '</span><time>' + d.create_time + '</time></div><img src="' + d.user_avatar + '" class="m_online-pic" /></li>';
+                        } else {
+                            d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                            d.msg = '<li class="fl"><img src="' + d.user_avatar + '" class="m_online-pic" /><div class="m-online-r"><span>' + d.content + '</span><time>' + d.create_time + '</time></div></li>';
+                        }
                         return d;
                     });
                 } else {
@@ -86,7 +76,27 @@
             url: "/home/reply-chat/" + book_id + '/' + type,
             success: function (res) {
                 if(res.status){
-                    location.reload();
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        url: "/home/get-chat/" + book_id + '/' + type,
+                        success: function (res) {
+                            if (res.status) {
+                                $.util.dataToTpl('chat', 'tpl', res.data, function (d) {
+                                    if (d.user.id == uid) {
+                                        d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                                        d.msg = '<li class="fr"><div class="m-online-r"><span>' + d.content + '</span><time>' + d.create_time + '</time></div><img src="' + d.user_avatar + '" class="m_online-pic" /></li>';
+                                    } else {
+                                        d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                                        d.msg = '<li class="fl"><img src="' + d.user_avatar + '" class="m_online-pic" /><div class="m-online-r"><span>' + d.content + '</span><time>' + d.create_time + '</time></div></li>';
+                                    }
+                                    return d;
+                                });
+                            } else {
+                                $.util.alert(res.msg);
+                            }
+                        }
+                    });
                 } else {
                     $.util.alert(res.msg);
                 }
