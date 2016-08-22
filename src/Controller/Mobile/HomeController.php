@@ -198,7 +198,7 @@ class HomeController extends AppController {
                     }
                 }
                 $this->set([
-                    'pageTitle' => '专家认证'
+                    'pageTitle' => '会员认证'
                 ]);
                 $this->set(compact('user'));
             }
@@ -1499,6 +1499,9 @@ class HomeController extends AppController {
         $this->set('pageTitle', '免责声明');
     }
     
+    /**
+     * ajax获取用户个人资料状态
+     */
     public function userinfoStatus(){
         $this->handCheckLogin();
         $user = $this->User->get($this->user->id, [
@@ -1509,13 +1512,32 @@ class HomeController extends AppController {
             $data['city'] = $user->city ? $user->city : '未完善';
             $data['gsyw'] = $user->gsyw ? $user->gsyw : '未完善';
             $data['goodat'] = $user->goodat ? $user->goodat : '未完善';
-            $data['industry'] = $user->industries ? $user->industries : '未完善';
+            $industry = [];
+            if($user->industries){
+                foreach($user->industries as $k=>$v){
+                    $industry[] = $v->name;
+                }
+            }
+            $data['industry'] = $industry ? implode('、', $industry) : '未完善';
             $data['educations'] = $user->educations ? '已填写' : '未完善';
             $data['careers'] = $user->careers ? '已填写' : '未完善';
-            $data['grbq'] = $user->grbq ? $user->grbq : '未完善';
+            $data['grbq'] = $user->grbq ? implode('、', unserialize($user->grbq)) : '未完善';
             return $this->Util->ajaxReturn(['status'=>true, 'data'=>$data]);
         } else {
             return $this->Util->ajaxReturn(false, '系统错误');
+        }
+    }
+    
+    public function getUserinfoStatus(){
+        $UserTable = \Cake\ORM\TableRegistry::get('user');
+        $user = $UserTable->get($this->user->id, [
+            'contain' => ['Careers', 'Educations', 'Industries']
+        ]);
+        $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->educations && $user->careers && $user->card_path;
+        if($is_complete){
+            return $this->Util->ajaxReturn(true);
+        } else {
+            return $this->Util->ajaxReturn(false, '请先去完善个人资料');
         }
     }
 
