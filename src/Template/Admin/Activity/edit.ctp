@@ -55,7 +55,7 @@
         <label class="col-md-2 control-label">报名截止时间</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('apply_end_time', ['label' => false, 'type' => 'text', 'class' => 'form-control datetimepicker']);
+            echo $this->Form->input('apply_end_time', ['label' => false,'value'=>date('Y-m-d H:i:s',$activity->apply_end_time), 'type' => 'text', 'class' => 'form-control datetimepicker']);
             ?>
         </div>
     </div>
