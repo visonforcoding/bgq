@@ -1,4 +1,4 @@
-<a href="/Wx/share_download/user/<?= $user->id ?>">
+<a href="/Wx/share-download/user/<?= $user->id ?>">
     <div class="transmitpage clearfix" hidden id="share_download">
         <div>
             <h1><img src="/mobile/images/logo-wx.png"></h1>
@@ -33,23 +33,23 @@
                     <span><?= $user->city ? $user->city : '暂未填写' ?></span>
                 </li>
                 <li>
-                    <i class="iconfont">&#xe671;</i>
+                    
                     <?php if (!$self): ?>
                         <?php if ($user->secret): ?>
                             <?php if ($user->secret->phone_set == '1'): ?>
                                 <a href="tel:<?= $user->phone ?>" onclick="if ($.util.isAPP) {
                                                         LEMON.event.tel(<?= $user->phone ?>);
-                                                    }"><span><?= $user->phone ? $user->phone : '暂未填写' ?></span></a>
+                                                    }"><i class="iconfont">&#xe671;</i><span><?= $user->phone ? $user->phone : '暂未填写' ?></span></a>
                                <?php else: ?>
-                                <span>暂未公开</span>
+                                <i class="iconfont">&#xe671;</i><span>暂未公开</span>
                             <?php endif; ?>
                         <?php else: ?>
                             <a href="tel:<?= $user->phone ?>" onclick="if ($.util.isAPP) {
                                                 LEMON.event.tel(<?= $user->phone ?>);
-                                            }"><span><?= $user->phone ? $user->phone : '暂未填写' ?></span></a>
+                                            }"><i class="iconfont">&#xe671;</i><span><?= $user->phone ? $user->phone : '暂未填写' ?></span></a>
                            <?php endif; ?>
                        <?php else: ?>
-                        <span><?= $user->phone ? $user->phone : '暂未填写' ?></span>
+                        <i class="iconfont">&#xe671;</i><span><?= $user->phone ? $user->phone : '暂未填写' ?></span>
                     <?php endif; ?>
                 </li>
                 <li>
@@ -354,10 +354,10 @@
 
 <?php if ($self): ?>
     <div style="height:1rem"></div>
-    <a href="/home/edit_userinfo" class="f-bottom">编辑个人资料</a>
+    <a href="/home/edit-userinfo" class="f-bottom">编辑个人资料</a>
 <?php elseif ($user->level == 2 && $user->subjects): ?>
     <div style="height:1rem"></div>
-    <a href="/meet/subject_list/<?= $user->id ?>" class="f-bottom">立即约见</a>
+    <a href="/meet/subject-list/<?= $user->id ?>" class="f-bottom">立即约见</a>
 <?php endif; ?>
 <?php $this->start('script') ?>
 <script>
@@ -365,7 +365,7 @@
         var imgUrl = '<?= $user->avatar ?>';
         if (imgUrl)
             window.shareConfig.imgUrl = location.origin + imgUrl;
-        window.shareConfig.link = 'http://m.chinamatop.com/user/home_page/<?= $user->id ?>?share=1';
+        window.shareConfig.link = 'http://m.chinamatop.com/user/home-page/<?= $user->id ?>?share=1';
         window.shareConfig.title = '<?= $user->truename ?>的个人主页';
         window.shareConfig.desc = '公司：<?= $user->company ?>\n\r职位：<?= $user->position ?>\n\r点击查看更多';
         LEMON.show.shareIco();

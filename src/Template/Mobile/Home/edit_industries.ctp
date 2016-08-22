@@ -45,11 +45,11 @@
 //         console.log(formdata.industries);
            if(formdata['industries[_ids]'].length>0){
                //对象长度判断
-               $.post('/home/save_industries',formdata,function(res){
+               $.post('/home/save-industries',formdata,function(res){
                    if(res.status===true){
                        $.util.alert(res.msg);
                        setTimeout(function(){
-                           window.location.href = '/home/edit_userinfo';
+                           window.location.href = '/home/edit-userinfo';
                        },2000);
                    }else{
                        $.util.alert(res.msg);

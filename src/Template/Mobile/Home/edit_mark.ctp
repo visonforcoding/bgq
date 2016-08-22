@@ -37,10 +37,10 @@
                     <a href="#this" data-val="<?= $tag ?>" class="agency-item"><?= $tag ?></a>
                 <?php endforeach; ?>
             <?php endif; ?>
-            <a href="#this" class='a-mark agency-item'><input style="border: none" type="" name="" id="extra_industry" value="" placeholder="输入自定义新标签" /></a>
+            <a href="javascript:void(0)" class='a-mark agency-item'><input style="border: none" type="" name="" id="extra_industry" value="" placeholder="输入自定义新标签" /></a>
         </div>
     </div>
-    <a  id="submit" href="#this" class='nextstep'>保存</a>
+    <a  id="submit" href="javascript:void(0)" class='nextstep'>保存</a>
 </div>
 <?php $this->start('script') ?>
 <!--<script src="/mobile/js/jquery.js" type="text/javascript" charset="utf-8"></script>-->

@@ -1,5 +1,5 @@
 <body>
-    <a href="/Wx/share_download/activity/<?= $activity->id ?>">
+    <a href="/Wx/share-download/activity/<?= $activity->id ?>">
         <div class="transmitpage clearfix" hidden id="share_download">
             <div>
                 <h1><img src="/mobile/images/logo-wx.png"></h1>
@@ -110,7 +110,7 @@
                 <ul>
                     <?php foreach ($activity->savants as $k => $v): ?>
                         <li>
-                            <a href="/user/home_page/<?= $v['id'] ?>">
+                            <a href="/user/home-page/<?= $v['id'] ?>">
                                 <img src="<?= $v['avatar'] ? $v['avatar'] : '/mobile/images/touxiang.png' ?>" alt="<?= $v['truename'] ?>" />
                                 <h3><?= $v['truename'] ?><span><?= $v['company'] ?> <?= $v['position'] ?></span></h3>
                             </a>
@@ -152,7 +152,7 @@
                     <?php else: ?>
                         <?php if($activity->activityapply['0']->is_pass == 0): ?>
                             <?php if($activity->activityapply['0']->is_check == 1): ?>;
-                                <a href="/wx/meet_pay/2/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
+                                <a href="/wx/meet-pay/2/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
                             <?php elseif($activity->activityapply['0']->is_check == 2): ?>
                                 <a style="background:gray;" class="r-btn">审核未通过</a>
                             <?php else: ?>

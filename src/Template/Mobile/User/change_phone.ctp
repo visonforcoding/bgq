@@ -76,7 +76,7 @@
         $form = $('form');
         $.ajax({
             type: 'post',
-            url: '/user/change_phone',
+            url: '/user/change-phone',
             data: $form.serialize(),
             dataType: 'json',
             success: function (msg) {

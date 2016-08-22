@@ -45,7 +45,7 @@
     <span class="regions" region_id="{#id#}">{#name#}</span>
 </script>
 <script type='text/html' id='subTpl'>
-    <a href="/meet/subject_detail/{#id#}">{#title#}</a>
+    <a href="/meet/subject-detail/{#id#}">{#title#}</a>
 </script>
 <script type='text/html' id='mySubTpl'>
     <a href="/meet/subject/{#id#}">{#title#}</a>

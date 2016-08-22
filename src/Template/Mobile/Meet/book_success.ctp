@@ -12,9 +12,9 @@
         <p>您的预约已经生效,请等待专家确认</p>
     </div>
     <a href="/home/my-book" class="nextstep paybtn">查看预约</a>
-    <a href="/user/home_page/<?=$id?>" class="nextstep paybtn">返回主页</a>
+    <a href="/user/home-page/<?=$id?>" class="nextstep paybtn">返回主页</a>
 </div>
 
 <script>
-    LEMON.sys.back('/user/home_page/<?=$id?>');
+    LEMON.sys.back('/user/home-page/<?=$id?>');
 </script>

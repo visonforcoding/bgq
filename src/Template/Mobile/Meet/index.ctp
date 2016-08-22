@@ -65,7 +65,7 @@
     <div class="dk">
         <ul id='items'>
             <?php foreach ($biggieAd as $k => $v): ?>
-                <li><a href="/user/home_page/<?= $v['savant']['user_id'] ?>"><img src="<?= $v['url'] ?>"/></a></li>
+                <li><a href="/user/home-page/<?= $v['savant']['user_id'] ?>"><img src="<?= $v['url'] ?>"/></a></li>
             <?php endforeach; ?>
         </ul>
     </div>
@@ -77,7 +77,7 @@
     <div id="buttonLoading" class="loadingbox"></div>
     <?php if(!$is_savant): ?>
     <div class="submitbtn" id="auth">
-        <a href="/home/savant_auth"><span class="s-activ">会员<br>认证</span></a>
+        <a href="/home/savant-auth"><span class="s-activ">会员<br>认证</span></a>
     </div>
     <?php endif; ?>
     
@@ -85,9 +85,9 @@
 <script type='text/html' id='biggie_tpl'>
     <section class="internet-v-info">
         <div class="innercon">
-            <a href="/user/home_page/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
+            <a href="/user/home-page/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
             <div class="vipinfo">
-                <a href="/user/home_page/{#id#}">
+                <a href="/user/home-page/{#id#}">
                     <h3><div class="l-name">{#truename#}</div>{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
                     <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
                 </a>
@@ -99,7 +99,7 @@
     </section>
 </script>
 <script type='text/html' id='subTpl'>
-    <a href="/meet/subject_detail/{#id#}/#index">{#title#}</a>
+    <a href="/meet/subject-detail/{#id#}/#index">{#title#}</a>
 </script>
 <script type='text/html' id='mySubTpl'>
     <a href="/meet/subject/{#id#}">{#title#}</a>

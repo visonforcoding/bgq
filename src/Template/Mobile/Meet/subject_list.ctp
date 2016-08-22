@@ -33,5 +33,5 @@
 </div>-->
 
 <script>
-    LEMON.sys.back('/user/home_page/<?= $user->id ?>');
+    LEMON.sys.back('/user/home-page/<?= $user->id ?>');
 </script>

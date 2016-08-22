@@ -44,7 +44,7 @@
     if(document.URL.indexOf('#index') != -1){
         LEMON.sys.back('/meet/index');
     } else if(document.URL.indexOf('#homepage') != -1) {
-        LEMON.sys.back('/user/home_page');
+        LEMON.sys.back('/user/home-page');
     }
     $('#cancel').on('tap', function(){
         $('#isCancel').show();

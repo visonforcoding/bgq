@@ -38,11 +38,11 @@
                     return;
                 }
             }
-            $.post('/home/save_city', {city:city}, function (res) {
+            $.post('/home/save-city', {city:city}, function (res) {
                 if (res.status === true) {
                     $.util.alert(res.msg);
                     setTimeout(function () {
-                        window.location.href = '/home/edit_userinfo';
+                        window.location.href = '/home/edit-userinfo';
                     }, 2000);
                 } else {
                     $.util.alert(res.msg);

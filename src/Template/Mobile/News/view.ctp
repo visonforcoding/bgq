@@ -8,7 +8,7 @@
           <a href="#this" class='iconfont share h-regiser'>&#xe614;</a> -->
     </div>
 </header>
-<a href="/Wx/share_download/news/<?= $news->id ?>" id="share_download_link">
+<a href="/Wx/share-download/news/<?= $news->id ?>" id="share_download_link">
     <div class="transmitpage clearfix" hidden id="share_download">
         <div>
             <h1><img src="/mobile/images/logo-wx.png"></h1>
@@ -77,7 +77,7 @@
             <ul>
                 <?php foreach ($news->savants as $k => $v): ?>
                     <li>
-                        <a href="/user/home_page/<?= $v['id'] ?>">
+                        <a href="/user/home-page/<?= $v['id'] ?>">
                             <img src="<?= $v['avatar'] ? $v['avatar'] : '/mobile/images/touxiang.png' ?>" alt="<?= $v['truename'] ?>" />
                             <h3><?= $v['truename'] ?><span><?= $v['company'] ?> <?= $v['position'] ?></span></h3>
                         </a>

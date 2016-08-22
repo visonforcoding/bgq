@@ -34,7 +34,7 @@
                $.util.alert(res.msg);
                if(res.status){
                    setTimeout(function(){
-                       location.href = "/user/home_page/<?= $id ?>";
+                       location.href = "/user/home-page/<?= $id ?>";
                    },1000);
                }
            }

@@ -126,13 +126,13 @@
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: "/home/change_subject_status/"+id,
+                url: "/home/change-subject-status/"+id,
                 success: function (res) {
                     $.util.alert(res.msg);
                     if(res.status){
                         $(em).parent('a').prev('span').html('<i class="iconfont">&#xe62f;</i>已完成');
                         $(em).parent('a').removeClass().addClass('f-link').addClass('fr');
-                        $(em).parent('a').attr('href', '/home/my-book_savant_detail/'+id);
+                        $(em).parent('a').attr('href', '/home/my-book-savant-detail/'+id);
                         $(em).parent('a').html('查看<i class="iconfont">&#xe667;</i>');
                     }
                 }
