@@ -152,7 +152,7 @@
                                             d.id = '/activity/details/' + d.activity.id;
                                         } else if(d.is_check === 1 && d.is_pass === 0){
                                             d.check = '未付款';
-                                            d.id = '/Wx/meet_pay/2/' + d.lmorder.id;
+                                            d.id = '/Wx/meet-pay/2/' + d.lmorder.id;
                                         } else if(d.is_pass === 1){
                                             d.check = '报名成功';
                                             d.id = '/activity/details/' + d.activity.id;
@@ -160,7 +160,7 @@
                                     } else {
                                         if(d.is_pass === 0){
                                             d.check = '未付款';
-                                            d.id = '/Wx/meet_pay/2/' + d.lmorder.id;
+                                            d.id = '/Wx/meet-pay/2/' + d.lmorder.id;
                                         } else if(d.is_pass === 1){
                                             d.check = '报名成功';
                                             d.id = '/activity/details/' + d.activity.id;

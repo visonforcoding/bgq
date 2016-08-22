@@ -18,14 +18,14 @@
     </div>
     <div class="h-home-menu topnav">
         <ul class="clearfix">
-            <li><a href="/home/my_xiaomi" class="clickbtn"><i></i>小秘书</a></li>
+            <li><a href="/home/my-xiaomi" class="clickbtn"><i></i>小秘书</a></li>
             <li><a href="/home/edit-userinfo" class="clickbtn"><i></i>个人资料</a></li>
             <li><a href="/home/cardcase" class="clickbtn"><i></i>名片夹</a></li>
         </ul>
     </div>
     <ul class="h-home-menu navlist clearfix">
         <li><a href="/home/my-following" class="clickbtn"><i class="iconfont">&#xe614;</i>我的关注</a></li>
-        <li><a href="/home/my_activity_submit" class="clickbtn mtips"><i class="iconfont">&#xe617;</i>我的活动<span id='activityMsg'></span></a></li>
+        <li><a href="/home/my-activity-submit" class="clickbtn mtips"><i class="iconfont">&#xe617;</i>我的活动<span id='activityMsg'></span></a></li>
         <li><a href="/home/my-collect-activity" class="clickbtn"><i class="iconfont">&#xe615;</i>我的收藏</a></li>
         <li><a href="/home/my-book" class="clickbtn mtips"><i class="iconfont">&#xe616;</i>我的约见<span id="meetMsg"></span></a></li>
     </ul>

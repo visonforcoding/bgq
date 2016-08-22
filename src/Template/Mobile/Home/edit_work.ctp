@@ -172,7 +172,7 @@
         }
         $.util.ajax({
             data : data,
-            url:'save_work',
+            url:'save-work',
             func : function(res){
                 $.util.alert(res.msg);
                 if(res.id){

@@ -5,7 +5,7 @@
         <a href="#this" class='iconfont share h-regiser'>&#xe614;</a>-->
     </div>
 </header>
-<a href="/Wx/share_download/user/<?= $biggie->id ?>">
+<a href="/Wx/share-download/user/<?= $biggie->id ?>">
     <div class="transmitpage clearfix" hidden id="share_download">
         <div>
             <h1><img src="/mobile/images/logo-wx.png"></h1>
@@ -33,7 +33,7 @@
             <h3 class="mycustorm" ><?= $biggie->company ?></h3>
             <?php if (!$self): ?>
                 <?php if ($biggie->subjects): ?>
-                    <div class="u-btn meetbtn"><a href="/meet/subject_list/<?= $biggie->id ?>" class="focusbtn">立即约见</a></div>
+                    <div class="u-btn meetbtn"><a href="/meet/subject-list/<?= $biggie->id ?>" class="focusbtn">立即约见</a></div>
                 <?php endif; ?>
             <?php endif; ?>
         </li>
@@ -88,7 +88,7 @@
     <div class="m-swiper-items">
         <?php if ($self): ?>
             <div class="u-btn">
-                <div class="lbtn"><a href="/meet/my_subjects" class="focusbtn">编辑话题</a></div>
+                <div class="lbtn"><a href="/meet/my-subjects" class="focusbtn">编辑话题</a></div>
                 <div class="rbtn"><a href="/meet/edit-summary" class="cardbtn">编辑简介</a></div>
             </div>
         <?php endif; ?>

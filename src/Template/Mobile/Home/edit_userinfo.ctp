@@ -82,7 +82,7 @@
     </ul>
     <ul class="h-info-box e-info-box max_width">
         <li>
-            <a href="/home/edit_industries">
+            <a href="/home/edit-industries">
                 <span>行业：</span>
                 <div>
                     <span id="industry"></span>

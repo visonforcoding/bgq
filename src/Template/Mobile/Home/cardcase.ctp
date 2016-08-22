@@ -150,7 +150,7 @@
             type: 'POST',
             data: $('form').serialize(),
             dataType: 'json',
-            url: "/home/search_card",
+            url: "/home/search-card",
             success: function (res) {
                 if(res.status){
                     dealData(res.data);

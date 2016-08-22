@@ -12,7 +12,7 @@
 </header>
 <div class="m-wraper edit-education-bottom wraper">
     <div class="education-items" style="display: none">
-        <form action="/home/save_education" method="post">
+        <form action="/home/save-education" method="post">
         <div class="education-title">
             <h3>
                 教育经历<i></i></span>
@@ -67,7 +67,7 @@
     <?php foreach($educations as $education): ?>
     <?php $k++;?>
     <div class="education-items oldlist">
-        <form action="/home/save_education" method="post">
+        <form action="/home/save-education" method="post">
         <!--    <input type="hidden" name="id" value="<?=$education->id?>">  -->
         <div class="education-title">
             <h3 data-id="<?=$education->id?>">
@@ -198,7 +198,7 @@
         }
         $.util.ajax({
             data : data,
-            url:'save_education',
+            url:'save-education',
             func : function(res){
                 $.util.alert(res.msg);
                 if(res.id){

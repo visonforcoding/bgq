@@ -33,7 +33,7 @@
     </section>
 </script>
 <script type='text/html' id='subTpl'>
-    <a href="/meet/subject_detail/{#id#}">{#title#}</a>
+    <a href="/meet/subject-detail/{#id#}">{#title#}</a>
 </script>
 <script src="/mobile/js/loopScroll.js"></script>
 <?php $this->start('script') ?>
@@ -48,7 +48,7 @@
     $.ajax({
         type: 'POST',
         dataType: 'json',
-        url: "/meet/get_agency/<?= $id ?>",
+        url: "/meet/get-agency/<?= $id ?>",
         success: function (res) {
             if (res.status) {
                 $.util.dataToTpl('agencies', 'agenciesTpl', res.data);
@@ -91,7 +91,7 @@
     function dealData() {
         $.ajax({
             type: 'POST',
-            url: '/meet/get_agencies_biggie',
+            url: '/meet/get-agencies-biggie',
             dataType: 'json',
             data: $('#searchForm').serialize(),
             success: function (msg) {

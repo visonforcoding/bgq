@@ -59,13 +59,13 @@
                 return false;
             }
             $.util.ajax({
-               url: '/home/reply_xiaomi',
+               url: '/home/reply-xiaomi',
                data:{content:content},
                func:function(res){
                    $.util.alert(res.msg);
                    if(res.status){
                         setTimeout(function(){
-                            location.href = '/home/my_xiaomi';
+                            location.href = '/home/my-xiaomi';
                         },2000);
                     }
                }

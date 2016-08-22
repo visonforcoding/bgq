@@ -23,7 +23,7 @@
             <span class="orgname">其它</span>
         </div>
         <div class="orgmark myselfmark">
-            <a href="#this"><input type='text' id="extra_industry" placeholder="请输入" /></a>
+            <a href="javascript:void(0)"><input type='text' id="extra_industry" placeholder="请输入" /></a>
         </div>
     </div>
     <a href="javascript:void(0)" id="submit" class='nextstep'>确定</a>
