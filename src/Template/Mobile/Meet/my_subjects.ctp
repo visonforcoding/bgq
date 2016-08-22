@@ -10,17 +10,26 @@
 <div class="wraper">
     <div class="h2">
     </div>
+    <?php if (empty($subjects)): ?>
+    <div class="a-sj" style="display: block;">
+        <span><img src="/mobile/images/subj.png"/></span>
+        <p>很抱歉，你还未添加话题！</p>
+        <a href="/meet/subject" class="nextstep">添加话题</a>
+    </div>
+    <?php endif; ?>
     <section>
         <ul class="d-list">
-            <?php foreach($subjects as $subject): ?>
-                <li>
-                    <a class="alink clearfix" href="/meet/subject/<?=$subject->id?>">
-                    <h3><?=$subject->title?></h3>
-                    <span><?= $user->truename ?> <?= $user->company ?> <?= $user->position ?></span>
-                    <i class="iconfont"></i>
-                    </a>
-                </li>
-            <?php endforeach; ?>
+            <?php if ($subjects): ?>
+                <?php foreach ($subjects as $subject): ?>
+                    <li>
+                        <a class="alink clearfix" href="/meet/subject/<?= $subject->id ?>">
+                            <h3><?= $subject->title ?></h3>
+                            <span><?= $user->truename ?> <?= $user->company ?> <?= $user->position ?></span>
+                            <i class="iconfont"></i>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </ul>
     </section>
 </div>

@@ -72,7 +72,6 @@
 //        }
         
         if ($('.a-s-mark').hasClass('a-s-width')) {
-            setTimeout
             $('.a-s-mark').removeClass('a-s-width');
         } else {
             $('.a-s-mark').addClass('a-s-width');
