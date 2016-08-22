@@ -665,7 +665,7 @@ class ActivityController extends AppController {
                         ->contain(['Users'=>function($q){
                             return $q->where(['enabled'=>1]);
                         }, 'Industries'])
-                        ->select(['id', 'cover', 'title', 'address', 'apply_nums', 'time', 'region_id', 'series_id'])
+                        ->select(['Activity.id', 'cover', 'title', 'address', 'apply_nums', 'time', 'region_id', 'series_id'])
                         ->where(['Activity.status' => 1,'Activity.is_del'=>0])
                         ->page($page, $this->limit)
                         ->order(['Activity.is_top'=>'desc', 'Activity.create_time'=>'desc'])
