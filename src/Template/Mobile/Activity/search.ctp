@@ -123,14 +123,12 @@
     
     $('.a-s-title').on('touchstart',function(){
         $('.orgname').toggleClass('active');
-        if($('.a-s-mark').hasClass('disp')){
-            $('.a-s-mark').removeClass('disp').addClass('block');
-        }else if($('.a-s-mark').hasClass('block')){
-            $('.a-s-mark').removeClass('block').addClass('disp');
-        }else{
-            $('.a-s-mark').addClass('disp');
+        if ($('.a-s-mark').hasClass('a-s-width')) {
+            $('.a-s-mark').removeClass('a-s-width');
+        } else {
+            $('.a-s-mark').addClass('a-s-width');
         }
-    })
+    });
     
     $('.sel-area').on('tap',function(){
         if($('.arealist').hasClass('hide')){
