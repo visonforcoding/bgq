@@ -24,7 +24,7 @@ class ActivityRecommendCell extends Cell {
      */
     public function display($selIds = null) {
         $ActivityTable = \Cake\ORM\TableRegistry::get('Activity');
-        $activities = $ActivityTable->find()->all()->toArray();
+        $activities = $ActivityTable->find()->where(['is_del'=>0, 'status'=>1, 'from_user >'=>-1])->all()->toArray();
         $this->set(compact('activities', 'selIds'));
     }
 }
