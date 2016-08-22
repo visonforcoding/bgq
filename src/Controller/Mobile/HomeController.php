@@ -594,6 +594,10 @@ class HomeController extends AppController {
 //            $transRes = $BookTable->connection()->transactional(function()use($book, $BookTable, $order, $OrderTable) {
 //                return $BookTable->save($book) && $OrderTable->save($order);
 //            });
+            $UserTable = \Cake\ORM\TableRegistry::get('user');
+            $savant = $UserTable->get($book->savant_id);
+            $savant->meet_nums += 1;
+            $UserTable->save($savant);
             $transRes = $BookTable->save($book);
             if ($transRes) {
                 //短信和消息通知
@@ -1493,6 +1497,26 @@ class HomeController extends AppController {
      */
     public function disclaimer(){
         $this->set('pageTitle', '免责声明');
+    }
+    
+    public function userinfoStatus(){
+        $this->handCheckLogin();
+        $user = $this->User->get($this->user->id, [
+            'contain' => ['Industries', 'Educations', 'Careers'],
+        ]);
+        $data = [];
+        if($user){
+            $data['city'] = $user->city ? $user->city : '未完善';
+            $data['gsyw'] = $user->gsyw ? $user->gsyw : '未完善';
+            $data['goodat'] = $user->goodat ? $user->goodat : '未完善';
+            $data['industry'] = $user->industries ? $user->industries : '未完善';
+            $data['educations'] = $user->educations ? '已填写' : '未完善';
+            $data['careers'] = $user->careers ? '已填写' : '未完善';
+            $data['grbq'] = $user->grbq ? $user->grbq : '未完善';
+            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$data]);
+        } else {
+            return $this->Util->ajaxReturn(false, '系统错误');
+        }
     }
 
 }
