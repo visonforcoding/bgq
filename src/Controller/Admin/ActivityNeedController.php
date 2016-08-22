@@ -62,6 +62,7 @@ class ActivityNeedController extends AppController {
             $activity->admin_id = $this->_user->id;
             $activity->user_id = $this->_user->id;
             $activity->publisher = $this->_user->truename;
+            $activity->from_user = -1;
             $res = $this->Activity->save($activity);
             if ($res) {
                 return $this->Util->ajaxReturn(true, '添加成功');
