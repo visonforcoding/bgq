@@ -53,6 +53,9 @@ class ActivityController extends AppController {
                 $isLike = $this->Activity->Likelogs->find()
                         ->where(['user_id' => $this->user->id, 'relate_id' => $id])
                         ->first();
+                if($this->user->id == 22){
+                    debug($isLike);die;
+                }
                 // 是否已收藏
                 $isCollect = $this
                         ->Activity
