@@ -43,7 +43,7 @@
               formdata.ext_industry = extra_industry;
          }
 //         console.log(formdata.industries);
-           if(Object.keys(formdata).length>0){
+           if(formdata['industries[_ids]'].length>0){
                //对象长度判断
                $.post('/home/save_industries',formdata,function(res){
                    if(res.status===true){
