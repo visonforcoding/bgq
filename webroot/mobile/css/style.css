@@ -70,7 +70,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .markslider{overflow: hidden;}
 /*注册--上传名片--start*/
 .uploadbox{/*display:flex;flex-direction:column;justify-content:center;align-items: center;*//*border-bottom:1px #c8c7cc solid;*/padding:0.62rem 0.8rem;}
-.uploadbox .imgcard{display:block;background:#9ba4ad;width:100%;height:3.11rem;overflow:hidden;}
+.uploadbox .imgcard{display:block;background:#9ba4ad;width:100%;min-height:3.11rem;}
 .uploadbox .imgcard img{ width:100%;height:auto;display: block;}
 .uploadbox .uploadbtn{display: block; color:#fff;font-size:0.3rem;text-align:center;width:100%;height:0.78rem;line-height:0.78rem;background: #3e82f7;border-radius: 0.2rem;margin:0.45rem 0 0.2rem;box-shadow: 0 0 0.3rem rgba(0,0,0,0.5);}
 .uploadbox  p{width:100%;text-align:center;font-size:0.28rem;color:#222c38;line-height: 0.46rem;}
@@ -970,7 +970,7 @@ background-size:3.82rem 1.9rem;margin-top:1rem;}
 .a-sj span{display: block;margin:0 auto;width:1.39rem;height:1.43rem;}
 .a-sj span img{width:100%;height:auto;display: block;}
 .a-sj p{text-align: center;margin-top:0.3rem;font-size:0.32rem;line-height: 0.4rem;}
-.a-sj p a{font-size:0.32rem;text-decoration: underline;}
+.a-sj p a{font-size:0.32rem;/*text-decoration: underline;*/}
 .x-width{bottom: 2rem;right: 0.2rem;width: 1.06rem;height: 1.01rem;}
 .errorpage{width:100%;}
 .errorpage a{display:block;background: url(../images/404.png) no-repeat center center; width:6.91rem;height:4.59rem;background-size: contain;margin:0.3rem auto 0.5rem;}
@@ -1148,3 +1148,4 @@ background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  ba
 .mc_title{height:40px;width:190px;float:left;overflow:hidden;}
 .mc_title h3{line-height: 40px;font-size:12px;margin:0;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;overflow: hidden;color:#e5e5e5;padding:0 .1rem;}
 .loadout time{float:right;line-height: 40px;margin-right: 5px;color:lightgray;}
+.h-info-box li .e_img{line-height: 1rem;}
