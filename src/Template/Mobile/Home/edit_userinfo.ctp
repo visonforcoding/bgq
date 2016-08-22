@@ -18,7 +18,7 @@
     <ul class="h-info-box e-info-box max_width">
         <li class='u-img no-right-ico'>
             <a href="javascript:void(0)">
-                <span>头像：</span>
+                <span class="e_img">头像：</span>
                 <div class="upload-user-img">
                     <span id="upload_pic" class='tx'><img src="<?= $user->avatar ? getOriginAvatar($user->avatar) : '/mobile/images/touxiang.png' ?>"/><input type="hidden" name="avatar" value="<?=$user->avatar?>" ></span>
                 </div>
@@ -34,7 +34,7 @@
         </li>-->
         <li class="no-right-ico">
             <a href="javascript:void(0)">
-                <span class="e_img">公司：</span>
+                <span>公司：</span>
                 <div>
                     <input type="company" name="company" value="<?=$user->company?>" />
                 </div>
