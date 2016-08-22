@@ -15,10 +15,10 @@
 </header>
 <div class="wraper m-fixed-bottom">
     <form method="post">
-    <ul class="h-info-box e-info-box">
+    <ul class="h-info-box e-info-box max_width">
         <li class='u-img no-right-ico'>
             <a href="javascript:void(0)">
-                <span>头像：</span>
+                <span class="e_img">头像：</span>
                 <div class="upload-user-img">
                     <span id="upload_pic" class='tx'><img src="<?= $user->avatar ? getOriginAvatar($user->avatar) : '/mobile/images/touxiang.png' ?>"/><input type="hidden" name="avatar" value="<?=$user->avatar?>" ></span>
                 </div>
@@ -34,7 +34,7 @@
         </li>-->
         <li class="no-right-ico">
             <a href="javascript:void(0)">
-                <span>公司：</span>
+                <span class="e_img">公司：</span>
                 <div>
                     <input type="company" name="company" value="<?=$user->company?>" />
                 </div>
@@ -42,7 +42,7 @@
         </li>
         <li>
             <a href="javascript:void(0)">
-                <span>性别：</span>
+                <span class="e_img">性别：</span>
                 <div>
                     <span class='typeselect'>
                     <select name="gender" class='checkedsex'>
@@ -55,14 +55,14 @@
         </li>
         <li class="no-right-ico">
             <a href="javascript:void(0)">
-                <span>部门职务：</span>
+                <span class="e_img">部门职务：</span>
                 <div >
                     <input type="position" name="position" value="<?=$user->position?>" />
                 </div>
             </a>
         </li>
     </ul>
-    <ul class="h-info-box e-info-box">
+    <ul class="h-info-box e-info-box max_width">
 <!--        <li class="no-right-ico">
             <a href="javascript:void(0)">
                 <span>联系电话：</span>
@@ -75,25 +75,25 @@
             <a href="javascript:void(0)">
                 <span>邮箱：</span>
                 <div>
-                    <input type="email" name="email" value="<?=$user->email?>" />
+                    <input type="email" name="email" value="<?=$user->email?>" placeholder="请填写邮箱" />
                 </div>
             </a>
         </li>
     </ul>
-    <ul class="h-info-box e-info-box">
+    <ul class="h-info-box e-info-box max_width">
         <li>
             <a href="/home/edit_industries">
-                <span>行业：</span>
+                <span class="e_img">行业：</span>
                 <div>
-                    <span></span>
+                    <span id="industry"></span>
                 </div>
             </a>
         </li>
         <li>
             <a href="/home/edit-city">
-                <span>所在地：</span>
+                <span class="e_img">所在地：</span>
                 <div>
-                    <span>
+                    <span id="city">
                         <?php if(!$user->city): ?>
                         未完善
                         <?php endif; ?>
@@ -103,9 +103,9 @@
         </li>
         <li>
             <a href="/home/my-business">
-                <span>擅长业务：</span>
+                <span class="e_img">擅长业务：</span>
                 <div>
-                    <span>
+                    <span id="goodat">
                         <?php if(!$user->goodat): ?>
                         未完善
                         <?php endif; ?>
@@ -115,9 +115,9 @@
         </li>
         <li>
             <a href="/home/edit-company-business">
-                <span>公司业务：</span>
+                <span class="e_img">公司业务：</span>
                 <div>
-                    <span>
+                    <span id="gsyw">
                         <?php if(!$user->gsyw): ?>
                         未完善
                         <?php endif; ?>
@@ -127,12 +127,12 @@
         </li>
        
         </ul>
-             <ul class="h-info-box e-info-box">
-                 <li>
+        <ul class="h-info-box e-info-box max_width">
+            <li>
             <a href="/home/edit-education">
-                <span>教育经历：</span>
+                <span class="e_img">教育经历：</span>
                 <div>
-                    <span>
+                    <span id="educations">
                         <?php if(!$user->educations): ?>
                         未完善
                         <?php endif; ?>
@@ -142,9 +142,9 @@
         </li>
         <li>
             <a href="/home/edit-work">
-                <span>工作经历：</span>
+                <span class="e_img">工作经历：</span>
                 <div>
-                    <span>
+                    <span id="careers">
                         <?php if(!$user->careers): ?>
                         未完善
                         <?php endif; ?>
@@ -153,7 +153,7 @@
             </a>
         </li>
          </ul>
-             <ul class="h-info-box e-info-box">
+             <ul class="h-info-box e-info-box max_width">
         <li>
             <a href="/home/edit-card">
                 <span >我的名片：</span>
@@ -164,9 +164,9 @@
         </li>
         <li class="nobottom">
             <a href="/home/edit-mark">
-                <span>个人标签：</span>
+                <span class="e_img">个人标签：</span>
                 <div>
-                    <span>
+                    <span id="grbq">
                         <?php if(!$user->grbq): ?>
                         未完善
                         <?php endif; ?>
@@ -226,6 +226,27 @@
             LEMON.sys.back('/home/index');
         }
     }
+    
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: "/home/userinfo-status",
+        success: function (res) {
+            console.log(res.data);
+            if(res.status){
+                $('#city').html(res.data.city);
+                $('#goodat').html(res.data.goodat);
+                $('#gsyw').html(res.data.gsyw);
+                $('#educations').html(res.data.educations);
+                $('#careers').html(res.data.careers);
+                $('#grbq').html(res.data.grbq);
+                $('#industry').html(res.data.industry);
+            } else {
+                $.util.alert(res.msg);
+            }
+        }
+    });
+    
     $(function () {
         $('#upload_pic').on('touchstart',function(){
             if($.util.isAPP){

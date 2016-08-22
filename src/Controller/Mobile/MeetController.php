@@ -52,6 +52,7 @@ class MeetController extends AppController {
                 ->where(['enabled'=>'1', 'level'=>'2'])
                 ->limit($this->limit)
                 ->toArray();
+//        debug($users);die;
         $this->set('meetjson', json_encode($users));
         $user_id = '';
         $is_savant = false;
