@@ -34,24 +34,25 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 /*修改*/
 .mark-items{background: #fff;border-top:1px #e5e5e5 solid;overflow:hidden;padding:0.2rem .3rem;}
 .r-t-head{text-indent: .3rem;border-bottom:1px #e5e5e5 solid;height:.6rem;line-height: .58rem;}
-.mark-items .b-mark{overflow:hidden;/*border:1px #e5e5e5 solid;*/margin-bottom:1px;}
-.b-mark li{float:left;width:33%;text-align: center;position:relative;margin-right:1px;margin-bottom:1px;}/*三个级标签*/
-.b-mark li{border:1px red solid;}
+.mark-items .b-mark{overflow:hidden;max-height:999;}
+.headmark li,.classfymark li{position:relative;}
+.b-mark li{float:left;width:33%;text-align: center;
+	padding-bottom:1px;padding-right:1px;}/*三个级标签*/
 .outerul{}
-.b-mark li.w100{width:100%;}/*一个二级标签*/
+#place li{margin-bottom:1px;padding-bottom:0;}
+.b-mark li.w100{width:99%;}/*一个二级标签*/
 .b-mark li.w50{width:50%;}/*二个级标签*/
 .icon-bottom{position:absolute;left: 45%;bottom: -0.14rem;content: '';max-height:0;width: .2rem;height: .2rem;background: #7a7d82;-webkit-transform: rotate(45deg);transform: rotate(45deg);z-index: 999;z-index:0;}
 
-.b-mark li:nth-of-type(3n){margin-right:0;}
-.b-mark li a{display: block;/*border-right:1px #e5e5e5 solid;*/height:.6rem;line-height: .6rem;background: #f0eff5;cursor: pointer;}
-.b-mark li:last-of-type a{border-right: 0;}
+.b-mark li a{display: block;width:100%;line-height: .6rem;background: #f0eff5;cursor: pointer;}
+
 .b-mark a.active{background: #e01b49;color:#fff;/*border:1px #e01b49 solid;*/-webkit-transition: all .2s ease;transition: all .2s ease;}
 .b-mark .perli{width:100%;}
 .perli input{width:100%;border:none;border:1px #e5e5e5 solid;background: none;text-align: center;line-height: .58rem;font-size:.28rem;}
 .cart li a{background:#7a7d82; color:#fff;cursor: pointer;}
 /*.cart li:nth-of-type(3n) a{border-right: none;}*/
 /*.cart li:last-of-type a{border-right:1px #fff solid;}*/
-.mark-items .cart{margin-top:-1px;border:none;max-height:0;-webkit-transition: max-height .1s ease;transition:max-height .1s ease;}
+.mark-items .cart{max-height:0;clear:both;-webkit-transition: max-height .1s ease;transition:max-height .1s ease;}
 .mark-items .shows,.b-mark li span.active{max-height:999px;-webkit-transition:max-height .6s .1s ease-in;transition:max-height .6s .1s ease-in;}
 /*.b-mark li span.active{-webkit-transition:max-height .3s ease-in;transition:max-height .3s ease-in;}*/
 .mark-items .hide{max-height: 0;-webkit-transition: max-height .2s ease;transition:max-height .2s ease;}
@@ -69,8 +70,8 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .markslider{overflow: hidden;}
 /*注册--上传名片--start*/
 .uploadbox{/*display:flex;flex-direction:column;justify-content:center;align-items: center;*//*border-bottom:1px #c8c7cc solid;*/padding:0.62rem 0.8rem;}
-.uploadbox .imgcard{display:block;background:#9ba4ad;width:5.57rem;height:3.11rem;overflow:hidden;}
-.uploadbox .imgcard img{ width:auto;height:100%;display: block;}
+.uploadbox .imgcard{display:block;background:#9ba4ad;width:100%;height:3.11rem;overflow:hidden;}
+.uploadbox .imgcard img{ width:100%;height:auto;display: block;}
 .uploadbox .uploadbtn{display: block; color:#fff;font-size:0.3rem;text-align:center;width:100%;height:0.78rem;line-height:0.78rem;background: #3e82f7;border-radius: 0.2rem;margin:0.45rem 0 0.2rem;box-shadow: 0 0 0.3rem rgba(0,0,0,0.5);}
 .uploadbox  p{width:100%;text-align:center;font-size:0.28rem;color:#222c38;line-height: 0.46rem;}
 .infobox{padding:0.08rem 0.3rem 0; background: #FFFFFF;border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid;}
@@ -1097,7 +1098,7 @@ width:0.5rem;height:0.16rem;display: inline-block;transition: all .3s;float:righ
 .classfytext {padding:0 .4rem;background: #fff;overflow: hidden;font-size:0;}
 .classfytext a{background: #e1e1e1;font-size:.26rem;color:#222;border-radius: .06rem;margin:.1rem;display: inline-block;position:relative;overflow:hidden;padding: 0.08rem 0.3rem 0.08rem .1rem;}
 .orgtext,.orgtxt{display:none;background: #e1e1e1;padding:.05rem .3rem .05rem .1rem;font-size:.24rem;color:#222;position:relative;border-radius: .06rem;}
-.b-input{background: #7a7d82;border:none;overflow:hidden;width:100%;max-height:0;}
+.b-input{background: #7a7d82;border:none;overflow:hidden;width:99%;max-height:0;}
 .mark-items .b-active{max-height:.6rem;-webkit-transition:max-height .2s ease-in;transition:max-height .2s ease-in;overflow:hidden;}
 .b-input input{width:30%;height:.4rem;font-size:.26rem;margin-left:35%;margin-top:.1rem;margin-bottom:.1rem;color:#fff;text-align: center;}
 /*上传名片*/
