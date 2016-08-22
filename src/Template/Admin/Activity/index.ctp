@@ -101,7 +101,9 @@
                                     return '<a title="报名详情" href="/admin/activityapply/index/' + obj.id + '">'+cell+'</a>';
                             }},
                             {name: 'activityapply', editable: true, align: 'center',formatter:function(cell,opt,obj){
-                                    return '<a title="报名详情" href="/admin/activityapply/index/' + obj.id + '">'+cell[0].total+'</a>';
+                                    if(cell.length > 0){
+                                        return '<a title="报名详情" href="/admin/activityapply/index/' + obj.id + '">'+cell[0].total+'</a>';
+                                    }
                             }},
                             {name: 'apply_fee', editable: true, align: 'center'},
                             {name: 'status', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
