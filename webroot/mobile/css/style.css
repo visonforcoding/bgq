@@ -42,7 +42,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .icon-bottom{position:absolute;left: 45%;bottom: -0.14rem;content: '';max-height:0;width: .2rem;height: .2rem;background: #7a7d82;-webkit-transform: rotate(45deg);transform: rotate(45deg);z-index: 999;z-index:0;}
 
 .b-mark li:nth-of-type(3n){margin-right:0;}
-.b-mark li a{display: block;/*border-right:1px #e5e5e5 solid;*/height:.6rem;line-height: .58rem;background: #f0eff5;cursor: pointer;}
+.b-mark li a{display: block;/*border-right:1px #e5e5e5 solid;*/height:.6rem;line-height: .6rem;background: #f0eff5;cursor: pointer;}
 .b-mark li:last-of-type a{border-right: 0;}
 .b-mark a.active{background: #e01b49;color:#fff;/*border:1px #e01b49 solid;*/-webkit-transition: all .2s ease;transition: all .2s ease;}
 .b-mark .perli{width:100%;}
