@@ -65,7 +65,7 @@
                         return;
                     }
                     if (payMethod == 'wx') {
-                        var wxConfig = '<?= json_encode($jsApiParameters) ?>';
+                        var wxConfig = '<?= $jsApiParameters ?>';
                         if ($.util.isAPP) {
                             if (wxConfig) {
                                 LEMON.pay.wx(<?= json_encode($jsApiParameters) ?>, function (res) {
