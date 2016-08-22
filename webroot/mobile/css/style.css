@@ -47,8 +47,8 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .b-mark a.active{background: #e01b49;color:#fff;/*border:1px #e01b49 solid;*/-webkit-transition: all .2s ease;transition: all .2s ease;}
 .b-mark .perli{width:100%;}
 .perli input{width:100%;border:none;border:1px #e5e5e5 solid;background: none;text-align: center;line-height: .58rem;font-size:.28rem;}
-.cart li a{background:#7a7d82; color:#fff;/*border-bottom:1px #fff solid;*/cursor: pointer;}
-.cart li:nth-of-type(3n) a{border-right: none;}
+.cart li a{background:#7a7d82; color:#fff;cursor: pointer;}
+/*.cart li:nth-of-type(3n) a{border-right: none;}*/
 /*.cart li:last-of-type a{border-right:1px #fff solid;}*/
 .mark-items .cart{margin-top:-1px;border:none;max-height:0;-webkit-transition: max-height .1s ease;transition:max-height .1s ease;}
 .mark-items .shows,.b-mark li span.active{max-height:999px;-webkit-transition:max-height .6s .1s ease-in;transition:max-height .6s .1s ease-in;}
