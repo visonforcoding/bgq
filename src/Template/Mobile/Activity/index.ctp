@@ -30,7 +30,7 @@
         <div class="active-items">
             <a href="/activity/details/{#id#}" class="a-head">
                 <div class="conbox">
-                   <img src="{#cover#}"/>
+                   <img src="{#thumb#}"/>
                    <div class="status">{#apply_msg#}{#pass_msg#}</div>
                </div>
                 <h3>{#title#}</h3>
@@ -38,7 +38,6 @@
             <div class="a-bottom">
                 <span class="a-address">
                     {#address#}
-                    
                 </span>
                 <div class="a-other-info">
                     <span class="a-number">{#apply_nums#}人报名</span>
