@@ -31,7 +31,7 @@
                                 <a href="tel:<?= $user->phone ?>" onclick="if ($.util.isAPP) {
                                                         LEMON.event.tel(<?= $user->phone ?>);
                                                     }"><span><?= $user->phone ? $user->phone : '暂未填写' ?></span></a>
-                            <?php else: ?>
+                               <?php else: ?>
                                 <span>暂未公开</span>
                             <?php endif; ?>
                         <?php else: ?>
@@ -65,21 +65,21 @@
             </div>
         </div>
     </div>
-    
-        <!--话题-->
-        <div class="m-subject-list">
-            <div class="m-tomore-bottom m-pos-top">
-                <span><i class="iconfont">&#xe61b;</i><span id="meet_nums"><?= $user->savant->reco_nums ?></span>人推荐</span>
-                <span><i class="iconfont">&#xe610;</i><?= $user->meet_nums ?>人聊过</span>
-            </div>
-            <div class="m-sub-header">
-                <h3><i class="iconfont">&#xe670;</i>话题列表<?php if($self): ?><a href="/meet/my_subjects"><span class="fr">话题管理</span></a><?php endif; ?></h3>
-            </div>
-            <div class="m-sub-con">
-                <?php if($user->level == 2 && $user->subjects): ?>
-                    <?php foreach ($user->subjects as $k=>$v): ?>
+
+    <!--话题-->
+    <div class="m-subject-list">
+        <div class="m-tomore-bottom m-pos-top">
+            <span><i class="iconfont">&#xe61b;</i><span id="meet_nums"><?= $user->savant->reco_nums ?></span>人推荐</span>
+            <span><i class="iconfont">&#xe610;</i><?= $user->meet_nums ?>人聊过</span>
+        </div>
+        <div class="m-sub-header">
+            <h3><i class="iconfont">&#xe670;</i>话题列表<?php if ($self): ?><a href="/meet/my_subjects"><span class="fr">话题管理</span></a><?php endif; ?></h3>
+        </div>
+        <div class="m-sub-con">
+            <?php if ($user->level == 2 && $user->subjects): ?>
+                <?php foreach ($user->subjects as $k => $v): ?>
                     <section>
-                        <a href="<?php if($self): ?>/meet/subject/<?= $v['id'] ?><?php else: ?>/meet/subject_detail/<?= $v['id'] ?>/#homepage<?php endif; ?>">
+                        <a href="<?php if ($self): ?>/meet/subject/<?= $v['id'] ?><?php else: ?>/meet/subject_detail/<?= $v['id'] ?>/#homepage<?php endif; ?>">
                             <div class="m-sub-con-h">
                                 <h3><?= $v['title'] ?></h3>
                             </div>
@@ -89,29 +89,29 @@
                             </div>
                         </a>
                     </section>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <div class="m-sub-con-h">
-                        <h3>暂无话题</h3>
-                    </div>
-                <?php endif; ?>
-            </div>
-            <!--推荐-->
-            <div class="m-commond-list clearfix">
-                <span class="fl <?php if($isReco): ?>color-items<?php endif; ?>" id="recom"><i class="iconfont <?php if($isReco): ?>hover<?php endif; ?>"><?php if($isReco): ?>&#xe61c;<?php else: ?>&#xe61b;<?php endif; ?></i>推荐他</span>
-                <a href="/meet/view-more-reco/<?= $user->id ?>">
-                    <p class="fl" id="recom_avatar">
-                        <?php if($user->reco_users): ?>
-                            <?php foreach ($user->reco_users as $k=>$v): ?>
-                                <img src="<?= $v->user->avatar ? getOriginAvatar($v->user->avatar) : '/mobile/images/touxiang.png'; ?>"/>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </p>
-                </a>
-            </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="m-sub-con-h">
+                    <h3>暂无话题</h3>
+                </div>
+            <?php endif; ?>
         </div>
-        
-    
+        <!--推荐-->
+        <div class="m-commond-list clearfix">
+            <span class="fl <?php if ($isReco): ?>color-items<?php endif; ?>" id="recom"><i class="iconfont <?php if ($isReco): ?>hover<?php endif; ?>"><?php if ($isReco): ?>&#xe61c;<?php else: ?>&#xe61b;<?php endif; ?></i>推荐他</span>
+            <a href="/meet/view-more-reco/<?= $user->id ?>">
+                <p class="fl" id="recom_avatar">
+                    <?php if ($user->reco_users): ?>
+                        <?php foreach ($user->reco_users as $k => $v): ?>
+                            <img src="<?= $v->user->avatar ? getOriginAvatar($v->user->avatar) : '/mobile/images/touxiang.png'; ?>"/>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </p>
+            </a>
+        </div>
+    </div>
+
+
     <!--基本资料-->
     <div class="infotab m-infotab-list">
         <ul class="h-tab">
@@ -131,7 +131,7 @@
                             </li>
                             <li class="b-hy"><span><i class="iconfont">&#xe654;</i>所在行业</span>
                                 <div>
-                                    <?php if($user->industries): ?>
+                                    <?php if ($user->industries): ?>
                                         <?php foreach ($user->industries as $k => $v): ?>
                                             <em><?= $v['name'] ?></em>
                                         <?php endforeach; ?>
@@ -173,7 +173,7 @@
                     </li>
                     <li class="b-hy"><span><i class="iconfont">&#xe654;</i>所在行业</span>
                         <div>
-                            <?php if($user->industries): ?>
+                            <?php if ($user->industries): ?>
                                 <?php foreach ($user->industries as $k => $v): ?>
                                     <em><?= $v['name'] ?></em>
                                 <?php endforeach; ?>
@@ -204,8 +204,18 @@
                             <?php if ($user->careers): ?>
                                 <?php foreach ($user->careers as $career): ?>
                                     <a class="bd1">
-                                        <li class="inner"> <span><div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div><?= $career->company ?></span></li>
-                                        <span class="worktime"><?= $career->start_date ?>～<?= $career->end_date ?>，<?= $career->position ?></span>
+                                        <li class="inner">
+                                            <span>
+                                                <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>
+                                                <?= $career->company ?>
+                                            </span>
+                                        </li>
+                                        <li class="inner bd1">
+                                            <span class="worktime m_des"><?= $career->start_date ?>～<?= $career->end_date ?>，<?= $career->position ?></span>
+                                        </li>
+                                        <span class="worktime">
+                                            <?= $career->descb; ?>
+                                        </span>
                                     </a>
                                 <?php endforeach; ?>
                             <?php else: ?>
@@ -237,8 +247,18 @@
                     <?php if ($user->careers): ?>
                         <?php foreach ($user->careers as $career): ?>
                             <a class="bd1">
-                                <li class="inner"> <span><div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div><?= $career->company ?></span></li>
-                                <span class="worktime"><?= $career->start_date ?>～<?= $career->end_date ?>，<?= $career->position ?></span>
+                                <li class="inner">
+                                    <span>
+                                        <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>
+                                        <?= $career->company ?>
+                                    </span>
+                                </li>
+                                <li class="inner bd1">
+                                    <span class="worktime m_des"><?= $career->start_date ?>～<?= $career->end_date ?>，<?= $career->position ?></span>
+                                </li>
+                                <span class="worktime">
+                                    <?= $career->descb; ?>
+                                </span>
                             </a>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -322,10 +342,10 @@
     <div class="h2"></div>
 </div>
 
-<?php if($self): ?>
+<?php if ($self): ?>
     <div style="height:1rem"></div>
     <a href="/home/edit_userinfo" class="f-bottom">编辑个人资料</a>
-<?php elseif($user->level == 2 && $user->subjects): ?>
+<?php elseif ($user->level == 2 && $user->subjects): ?>
     <div style="height:1rem"></div>
     <a href="/meet/subject_list/<?= $user->id ?>" class="f-bottom">立即约见</a>
 <?php endif; ?>
@@ -338,12 +358,12 @@
         window.shareConfig.link = 'http://m.chinamatop.com/user/home_page/<?= $user->id ?>?share=1';
         window.shareConfig.title = '<?= $user->truename ?>的个人主页';
         window.shareConfig.desc = '公司：<?= $user->company ?>\n\r职位：<?= $user->position ?>\n\r点击查看更多';
-                LEMON.show.shareIco();
-            })();
+        LEMON.show.shareIco();
+    })();
 </script>
 <script>
-    
-    
+
+
     $('.h-tab>li').on('click', function () {
         var index = $(this).index();
         $(this).addClass('active').siblings().removeClass('active');
