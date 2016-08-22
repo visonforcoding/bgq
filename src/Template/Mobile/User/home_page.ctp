@@ -1,3 +1,12 @@
+<a href="/Wx/share_download/user/<?= $user->id ?>">
+    <div class="transmitpage clearfix" hidden id="share_download">
+        <div>
+            <h1><img src="/mobile/images/logo-wx.png"></h1>
+            <h3>并购帮<span>并购人的生活方式</span></h3>
+        </div>
+        <span class="green-btn">立即下载</span>
+    </div>
+</a>
 <div class="wraper content_inner">
     <div class="h2"></div>
     <div class="bg-ff">
