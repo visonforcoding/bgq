@@ -95,35 +95,41 @@
 				</div>
 				<!--推荐-->
 				<div class="m-commond-list clearfix">
-					<span class="fl"><i class="iconfont hover"><!--&#xe61b;-->&#xe61c;</i>推荐他</span>
+					<span class="fl" id="commond"><i class="iconfont hover"><!--&#xe61b;-->&#xe61c;</i>推荐他</span>
 					<p class="fl"><img src="../images/user.png"/><img src="../images/user.png"/><img src="../images/user.png"/><img src="../images/user.png"/><img src="../images/user.png"/><img src="../images/user.png"/><img src="../images/user.png"/><img src="../images/user.png"/></p>
 				</div>
 			</div>
 			<!--基本资料-->
 			<div class="infotab m-infotab-list">
-				<ul class="h-tab bd1">
+				<ul class="h-tab">
 					<li class="active"><i class="iconfont">&#xe650;</i>基本资料</li>
 					<li><i class="iconfont">&#xe651;</i>工作经历</li>
 					<li><i class="iconfont">&#xe652;</i>教育经历</li>
 				</ul>
-				<div class="tabcon bd1">
+				<div class="tabcon bd2">
 					<ul class="cur inner basicon">
 						<li class="b-dq"><span><i class="iconfont">&#xe660;</i>所在地区</span><div><em>广东 深圳</em></div></li>
 						<li class="b-hy"><span><i class="iconfont">&#xe654;</i>所在行业</span><div><em>互联网+</em><em>文化传媒</em></div></li>
 						<li class="b-bq"><span><i class="iconfont">&#xe653;</i>个人标签</span><div><em>产品</em><em>设计</em><em>研发</em></div></li>
 						<li class="b-yw"><span><i class="iconfont">&#xe655;</i>擅长业务</span><div><em>基于企业现有的资源及模式，运用互联网思维对商业模式进行改造或者重塑，全方位商业解决方案打造出类拔萃的互联网行业咨询服务平台</em></div></li>
-						<li class="b-gs nobottom"><span><i class="iconfont">&#xe656;</i>公司业务</span><div><em>互联网+</em><em>文化传媒</em></div></li>
+						<li class="b-gs noafter"><span><i class="iconfont">&#xe656;</i>公司业务</span><div><em>互联网+</em><em>文化传媒</em></div></li>
 					</ul>
 					<ul class="basicon worktab">
 						<a class="bd1">
 							<li class="inner"> <span><div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>美团网</span></li>
-							<span class="worktime">2000-2004，工商管理，本科</span>
+							<li class="inner bd1"><span class="worktime m_des">2000-2004，工商管理，本科</span></li>
+							<span class="worktime">
+								工作描述，全方位商业解决方案打造出类拔萃的互联网行业咨询服务平台
+							</span>
 						</a>
 						
 						
 						<a class="bbottom">
 							<li class="inner"> <span class="gs-name">美团网</span></li>
-							<span class="worktime">2000-2004，工商管理，本科</span>
+							<li class="inner bd1"><span class="worktime m_des">2000-2004，工商管理，本科</span></li>
+							<span class="worktime">
+								工作描述，全方位商业解决方案打造出类拔萃的互联网行业咨询服务平台
+							</span>
 						</a>
 						
 					</ul>
@@ -151,6 +157,9 @@
 				var index =$(this).index();
 				$(this).addClass('active').siblings().removeClass('active');
 				$('.tabcon>ul').eq(index).addClass('cur').siblings().removeClass('cur');
+			})
+			$('#commond').on('tap',function(){
+				$(this).children('i').html('&#xe61b;')
 			})
 		</script>
 	</body>
