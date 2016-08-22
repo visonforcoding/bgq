@@ -172,7 +172,12 @@ class ActivityController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['Activity.`create_time` >' => $begin_time], ['Activity.`create_time` <' => $end_time]];
         }
-        $query = $this->Activity->find()->contain(['Users','Regions']);
+        $query = $this->Activity->find()->contain(['Users', 'Regions', 'Activityapply' => function($q) {
+                return $q->select([
+                    'activity_id',
+                    'total' => $q->func()->count('id')
+                ]);
+            }]);
 
         $query->hydrate(false);
         if (!empty($where)) {
@@ -197,6 +202,7 @@ class ActivityController extends AppController {
         $data = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $res);
         $this->autoRender = false;
         $this->response->type('json');
+        
         echo json_encode($data);
     }
 

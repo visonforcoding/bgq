@@ -75,7 +75,7 @@
                         url: "/admin/activity/getDataList",
                         datatype: "json",
                         mtype: "POST",
-                        colNames: [ '发布人', '主办单位', '活动名称', '活动时间','是否需审核报名', '规模', '城市','阅读数', '点赞数', '评论数', '报名人数', '报名费用','状态', '创建时间', '操作'],
+                        colNames: [ '发布人', '主办单位', '活动名称', '活动时间','是否需审核报名', '规模', '城市','阅读数', '点赞数', '评论数', '报名最终人数','报名实际人数', '报名费用','状态', '创建时间', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'company', editable: true, align: 'center'},
@@ -99,6 +99,9 @@
                             }},
                             {name: 'apply_nums', editable: true, align: 'center',formatter:function(cell,opt,obj){
                                     return '<a title="报名详情" href="/admin/activityapply/index/' + obj.id + '">'+cell+'</a>';
+                            }},
+                            {name: 'activityapply', editable: true, align: 'center',formatter:function(cell,opt,obj){
+                                    return '<a title="报名详情" href="/admin/activityapply/index/' + obj.id + '">'+cell[0].total+'</a>';
                             }},
                             {name: 'apply_fee', editable: true, align: 'center'},
                             {name: 'status', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
