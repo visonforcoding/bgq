@@ -68,19 +68,19 @@ class MeetSubjectTable extends Table {
 //                ->requirePresence('type', 'create')
 //                ->notEmpty('type');
 
-        $validator
-                ->decimal('price')
-                ->requirePresence('price', 'create')
-                ->notEmpty('price');
+//        $validator
+//                ->decimal('price')
+//                ->requirePresence('price', 'create')
+//                ->notEmpty('price');
 
 //        $validator
 //                ->requirePresence('address', 'create')
 //                ->notEmpty('address');
 
-        $validator
-                ->integer('last_time')
-                ->requirePresence('last_time', 'create')
-                ->notEmpty('last_time');
+//        $validator
+//                ->integer('last_time')
+//                ->requirePresence('last_time', 'create')
+//                ->notEmpty('last_time');
 
         return $validator;
     }
