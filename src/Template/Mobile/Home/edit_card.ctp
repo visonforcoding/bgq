@@ -11,7 +11,9 @@
     <div class="uploadbox nobottom">
         <input type="hidden" name="card_path" value="<?= $user->card_path ?>" />
 
-        <a href='javascript:void(0);' class='imgcard'><div class="scroller"><img id="img" src='<?= $user->card_path ?>' /></div></a>
+        <!-- <a href='javascript:void(0);' class='imgcard'><div class="scroller"> -->
+            <img id="img" class='upload_pic' src='<?= $user->card_path ?>' />
+        <!-- </div></a> -->
 
         <a href="javascript:void(0)" id="uploadPic" class="uploadbtn">上传名片</a>
         <!--<a href="#this" style="width:100%" id="save" class="nextstep">保存</a>-->
