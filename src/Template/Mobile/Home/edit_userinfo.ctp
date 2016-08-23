@@ -237,15 +237,16 @@
     
     
     $('#pData input').on('blur', function(){
-        var name = $(this).get(0).name;
-        var val = $(this).val();
+        var name = this.name;
+        var val = this.value;
+        if(val == this.defaultValue) return;
         $.ajax({
             type: 'POST',
             dataType: 'json',
             url: "/home/save-userinfo",
             data: {name:name,val:val},
             success: function (res) {
-                $.util.alert(res.msg);
+                $.util.alert(res.msg, 1000);
             }
         });
     });
