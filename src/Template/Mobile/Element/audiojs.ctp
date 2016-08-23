@@ -25,10 +25,12 @@
                 if(!window[jid]){
                     LEMON.sys.mediaPlay();
                     window[jid] = {
+                        duration:0,
                         timer:null,
                         audio: $(jid+' .myMusic').get(0),
                         mc_play: em
                     };
+                    window[jid].duration = window[jid].audio.duration;
                     $(jid + ' .timeCell').html('<span class="cur_time">0</span>/<span class="total_time">'+fixedSeconds(window[jid].audio.duration)+'</span>');
                     window[jid].cur_time= $(jid+' .cur_time');
                     window[jid].audio.onended = function(){
@@ -47,6 +49,10 @@
                     audio.play();
                     mc_play.className = 'audio on';
                     window[jid].timer = setInterval(function(){
+                        if(!window[jid].duration){
+                            window[jid].duration = audio.duration;
+                            $(jid+' .total_time').html(fixedSeconds(audio.duration));
+                        }
                         cur =  fixedSeconds(audio.currentTime);
                         window[jid].cur_time.html(cur);
                     },1000);
