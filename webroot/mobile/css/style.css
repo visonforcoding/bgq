@@ -442,7 +442,7 @@ line-height: .34rem;height:.34rem;}
 .mtips {position:relative;}
 .h-home-top a:nth-of-type(1) span,.mtips span{position:absolute;right:-8px;width:6px;height:6px;border-radius: 3px;background: #fff;top:1px; opacity: 0;}
 .mtips span{background: red;}
-.opci{-webkit-animation: 1.5s opaci linear;animation: 1.5s opaci linear infinite;}
+.opci{-webkit-animation:opaci .5s infinite linear;animation:opaci .5s infinite linear;}
 @-webkit-keyframes opaci{
 	100%{opacity:1;}
 }
@@ -617,7 +617,7 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .tabcon ul i{font-size:.24rem;width:12%;display: inline-block;margin-right:.2rem;}
 .worktab a{display: block;}
 .worktab li span{color:#171717;width:100%;}
-.worktab .worktime{display: block;line-height: .34rem;margin-left: 32%;width:60%;padding:.2rem 0;}
+.worktab .worktime{display: block;line-height: .34rem;margin-left: 32%;width:70%;padding:.2rem 0;}
 .worktab .m_des{padding:0;color:#808080;}
 .gs-name{text-indent: 30%;}
 .h-tips{width:30%;color:#808080;}
