@@ -191,7 +191,7 @@
                             d.following_position = d.user.position;
                             d.following_fans = d.user.fans;
                             d.following_subject = $.util.dataToTpl('', 'tpl', d.user.subjects);
-                            if(d.following.level == 2){
+                            if(d.user.level == 2){
                                 d.v = '<i></i>';
                             }
                             return d;
