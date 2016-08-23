@@ -64,7 +64,7 @@
         } else {
             $('.a-s-mark').addClass('a-s-width');
         }
-        LEMON.sys.hideKeyboard();
+        LEMON.sys.hideKeyboard(); //收起键盘
         if (search_data[industry_id]) {
             $('#search').html(search_data[industry_id]);
             return;
