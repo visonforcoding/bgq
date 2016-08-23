@@ -121,10 +121,10 @@
                 function actionFormatter(cellvalue, options, rowObject) {
                         response = '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     if (rowObject.status == '0') {
-                        response += '<a title="标记已处理" onClick="check(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
+                        response += '<a title="标记已处理" onClick="check(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i>标记已处理</a>';
                         
                     } else {
-                        response += '<a title="标记未处理" onClick="uncheck(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-times"></i> </a>';
+                        response += '<a title="标记未处理" onClick="uncheck(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-times"></i>标记未处理</a>';
                     }
                     return response;
                 }

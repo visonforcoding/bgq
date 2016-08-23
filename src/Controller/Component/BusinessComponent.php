@@ -460,7 +460,7 @@ class BusinessComponent extends Component {
         }
     }
     /**
-     * 处理预约订单 1.预约状态更改 2.订单状态更改 3.专家 余额更改 4.交易流水记录生成
+     * 处理活动报名  1.报名状态更改 2.报名人数+1 3.并购帮用户余额+ 4.交易流水
      * @param \App\Model\Entity\Order $order
      */
     protected function handApplyOrder(\App\Model\Entity\Order $order,$realFee,$payType,$out_trade_no) {
@@ -476,7 +476,8 @@ class BusinessComponent extends Component {
         $order->out_trade_no = $out_trade_no;  //第三方订单号
         $pre_amount = $order->seller->money;
         $order->seller->money += $order->price;    //余额+
-        $order->activity->apply_nums += 1;    // 报名次数+1
+        $Activityapply->activity->apply_nums += 1;    // 报名次数+1
+        $Activityapply->dirty('activity',true);   // 报名次数+1
         $order->dirty('seller', true);  //这里的seller 一定得是关联属性 不是关联模型名称 可以理解为实体
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
         $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
@@ -492,8 +493,10 @@ class BusinessComponent extends Component {
             'status' => 1,
             'remark' => '活动获取收入-' . $order->user->truename
         ]);
-        $transRes = $ActivityapplyTable->connection()->transactional(function()use($order, $ActivityapplyTable, $Activityapply, $OrderTable, $FlowTable, $flow) {
-            return $OrderTable->save($order, ['associated' => ['Sellers']]) && $ActivityapplyTable->save($Activityapply) && $FlowTable->save($flow);
+        $transRes = $ActivityapplyTable->connection()->transactional(function()use($order, $ActivityapplyTable,
+                $Activityapply, $OrderTable, $FlowTable, $flow) {
+            return $OrderTable->save($order, ['associated' => ['Sellers']]) && 
+                    $ActivityapplyTable->save($Activityapply,['associated' => ['Activities']]) && $FlowTable->save($flow);
         });
         if ($transRes) {
             //向专家和买家发送一条短信
