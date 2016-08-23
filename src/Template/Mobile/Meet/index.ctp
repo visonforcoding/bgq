@@ -1,12 +1,3 @@
-<header>
-    <div class='inner'>
-        <h1>
-            专家约见
-        </h1>
-        <a href="#this" class='iconfont news-serch h-regiser'>&#xe618;</a>
-    </div>
-</header>
-
 <div class="wraper newswraper">
     <div class="a-search-box" id="search">
         <a href="/meet/search">
@@ -33,7 +24,7 @@
     <!--分类--start-->
     <div class="h2"></div>
         <div class="m_title_des" >
-        <h3>找专家</h3>
+        <h3>找会员</h3>
      </div>
     <div class="menusort clearfix">
         <div class="allmenu">
@@ -70,7 +61,7 @@
         </ul>
     </div>
     <div class="m_title_des">
-        <h3>全部专家</h3>
+        <h3>全部会员</h3>
     </div>
     <div class="h2"></div>
     <div id='biggie'></div>

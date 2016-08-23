@@ -1,12 +1,3 @@
-<header class="myhome">
-    <div class='inner'>
-        <a href='#this' class='toback'></a>
-        <h1>
-            专家认证
-        </h1>
-    </div>
-</header>
-
 <div class="wraper">
 
     <ul class="h-info-box e-info-box nomargin">

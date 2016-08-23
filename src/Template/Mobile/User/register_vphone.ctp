@@ -39,36 +39,47 @@
         checkPhone(phone);
     });
     $('#getVcode').on('click', function () {
+        var phone = $('input[name="phone"]').val();
+        if(phone == ''){
+            $.util.alert('请填写手机号码');
+            return false;
+        }
         var $obj = $(this);
         if($obj.hasClass('noTap')){
-            return;
+            return false;
         }
         $obj.addClass('noTap');
-        var text = '<i id="timer">' + 30 + '</i>秒后重新发送';
-        $obj.html(text);
-        t1 = setInterval(function () {
-            var timer = $('#timer').text();
-            timer--;
-            if (timer < 1) {
-                //$obj.removeAttr('disabled');
-                $obj.html('获取验证码');
-                $obj.removeClass('noTap');
-                clearInterval(t1);
-            } else {
-                $('#timer').text(timer);
-                
-            }
-        }, 1000);
-        var phone = $('input[name="phone"]').val();
         if ($.util.isMobile(phone)) {
-            $.post('/user/sendVcode', {phone: phone}, function (res) {
+            $.post('/user/sendLoginCode', {phone: phone}, function (res) {
                 if (res.status === true) {
-                    //$obj.attr('disabled ','true');
                     $.util.alert(res.msg);
-                } else {
-                    $.util.alert('该手机号已注册');
+                    var text = '<i id="timer">' + 30 + '</i>秒后重新发送';
+                    $obj.html(text);
+                    t1 = setInterval(function () {
+                        var timer = $('#timer').text();
+                        timer--;
+                        if (timer < 1) {
+                            $obj.html('获取验证码');
+                            $obj.removeClass('noTap');
+                            clearInterval(t1);
+                        } else {
+                            $('#timer').text(timer);
+                        }
+                    }, 1000);
+                }else{
+                    if(res.status===false&&res.errCode===1){
+                        if(window.confirm(res.msg)){
+                            location.href = '/user/register-vphone?rephone='+phone;
+                        };
+                    } else {
+                        $obj.removeClass('noTap');
+                    }
                 }
             }, 'json');
+        } else {
+            $.util.alert('请填写合法的手机号码');
+            $obj.removeClass('noTap');
+            return false;
         }
     });
     $('#submit').on('click', function () {

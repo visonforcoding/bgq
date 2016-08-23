@@ -120,7 +120,7 @@
         <?php endif; ?>
     </div>
     <section class="a-detail newscomment-box m-about-expert">
-        <h3 class="comment-title">专家简介
+        <h3 class="comment-title">会员简介
         </h3>
         <p>
             <?php if (!empty($biggie->savant->summary)): ?>
