@@ -773,7 +773,7 @@ border-left:1px #e5e5e5 solid;width:33.3%;}
 .mcard img{width:0.46rem;height:auto;}
 .h-info-box li span{float:left;display: block;font-size:0.28rem;line-height:.6rem;}
 .max_width li span{max-width:100%;max-height:.6rem;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;}
-.h-info-div li div{float:right;}
+.h-info-box li div{float:right;}
 .max_width li div{float:right;max-width:70%;overflow:hidden;}
 .e-info-box .upload-user-img span.m-card{display:block;width:0.46rem;height:0.38rem;background: url(../images/user-img.png) no-repeat;background-size:contain;}
 .e-info-box .upload-user-img .tx{width:0.6rem;height:0.5rem;}
