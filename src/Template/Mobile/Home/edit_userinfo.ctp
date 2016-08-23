@@ -282,7 +282,7 @@
             }
         }
     });
-    window.onBackView(function(){
+    window.onBackView = function(){
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -301,7 +301,7 @@
                 }
             }
         });
-    });
+    };
     
     $(function () {
         $('#upload_pic').on('touchstart',function(){
