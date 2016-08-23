@@ -157,6 +157,7 @@
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
+                        LEMON.sys.hideKeyboard();
                         var html = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
                             d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
                             return d;
