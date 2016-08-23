@@ -125,7 +125,7 @@
 //                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="复制" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
                     response += '<a title="编辑" href="/admin/news/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
-//                    response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
+                    response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="topit(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
 //                    response += '<a title="评论详情" onClick="viewComs(' + rowObject.id + ');" class="grid-btn "><i class="icon icon-comment"></i> </a>';
 //                    response += '<a title="点赞日志" href="/admin/likeLogs/index/' + rowObject.id + '?type=1" class="grid-btn "><i class="icon icon-heart"></i> </a>';
                     response += '<a title="收藏日志" href="/admin/news/view-collect/' + rowObject.id + '?type=1" class="grid-btn "><i class="icon icon-star"></i> </a>';
@@ -147,6 +147,25 @@
 
                 function delRecord(id) {
                     layer.confirm('确定删除？', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                        $.ajax({
+                            type: 'post',
+                            data: {id: id},
+                            dataType: 'json',
+                            url: '/admin/news/delete',
+                            success: function (res) {
+                                layer.msg(res.msg);
+                                if (res.status) {
+                                    $('#list').trigger('reloadGrid');
+                                }
+                            }
+                        });
+                    }, function () {
+                    });
+                }
+                function topit(id) {
+                    layer.confirm('确定置顶？', {
                         btn: ['确认', '取消'] //按钮
                     }, function () {
                         $.ajax({
