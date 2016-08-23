@@ -175,7 +175,6 @@ class ActivityController extends AppController {
         $query = $this->Activity->find()->contain(['Users', 'Regions', 'Activityapply' => function($q) {
                 return $q->select([
                     'activity_id',
-                    'total' => $q->func()->count('id')
                 ]);
             }]);
 
