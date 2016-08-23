@@ -146,7 +146,7 @@ class NewsController extends AppController {
         $this->set('news', $news);
         $this->set('user', $this->user);
         $this->set('_serialize', ['news']);
-        $this->set('pageTitle', '资讯内容');
+        $this->set('pageTitle', '并购帮');
     }
     
     
