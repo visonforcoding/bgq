@@ -15,8 +15,9 @@
     <body>
         <div class="wraper">
 
-            <p class="ptips inner" style="margin-top:180px;margin-bottom:50px;">请在浏览器中打开该页面，安装完成后请前往<br />
+            <p class="ptips inner" style="margin-top:180px;margin-bottom:50px;">请在浏览器中打开该页面，下载完成后请前往<br />
                 ‘设置’——‘通用’——‘设备管理’，选择‘信任 JUN HAN HOLDING’
+                <br>
                 <br>
                 <span id="notice"></span>
             </p>
@@ -29,7 +30,7 @@
 
  function checkBrowser() {
      var iswx = navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1;
-     document.getElementById('notice').innerHTML = iswx ? '在浏览器打开该页面才能进行下载' : '正在下载应用,请稍后回到桌面激活。';
+     document.getElementById('notice').innerHTML = iswx ? '在浏览器打开该页面才能进行下载' : '正在下载应用...';
  }
 </script>
 </html>
