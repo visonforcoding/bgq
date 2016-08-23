@@ -112,7 +112,7 @@ class ActivityController extends AppController {
             $activity->read_nums += 1; // 阅读加1
             $this->Activity->save($activity);
             $this->set([
-                'pageTitle'=>'活动详情',
+                'pageTitle'=>'并购帮',
                 'activity'=>$activity,
                 'isCollect'=>$isCollect,
                 'isLike'=>$isLike,
