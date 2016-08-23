@@ -27,39 +27,36 @@
         checkPhone(phone);
     });
     $('#getVcode').on('click', function () {
-        var $obj = $(this);
-        if($obj.hasClass('noTap')){
-            return;
-        }
         var phone = $('input[name="phone"]').val();
         if(phone == ''){
             $.util.alert('请输入新手机号码');
             return;
         }
+        var $obj = $(this);
+        if($obj.hasClass('noTap')){
+            return;
+        }
         $obj.addClass('noTap');
-        var text = '<i id="timer">' + 30 + '</i>秒后重新发送';
-        $obj.html(text);
-        t1 = setInterval(function () {
-            var timer = $('#timer').text();
-            timer--;
-            if (timer < 1) {
-                //$obj.removeAttr('disabled');
-                $obj.html('获取验证码');
-                $obj.removeClass('noTap');
-                clearInterval(t1);
-            } else {
-                $('#timer').text(timer);
-                
-            }
-        }, 1000);
-        
         if ($.util.isMobile(phone)) {
             $.post('/user/changePhoneVcode', {phone: phone}, function (res) {
+                $.util.alert(res.msg);
                 if (res.status === true) {
-                    //$obj.attr('disabled ','true');
-                    $.util.alert(res.msg);
+                    var text = '<i id="timer">' + 30 + '</i>秒后重新发送';
+                    $obj.html(text);
+                    t1 = setInterval(function () {
+                        var timer = $('#timer').text();
+                        timer--;
+                        if (timer < 1) {
+                            $obj.html('获取验证码');
+                            $obj.removeClass('noTap');
+                            clearInterval(t1);
+                        } else {
+                            $('#timer').text(timer);
+
+                        }
+                    }, 1000);
                 } else {
-                    $.util.alert(res.msg);
+                    $obj.removeClass('noTap');
                 }
             }, 'json');
         }

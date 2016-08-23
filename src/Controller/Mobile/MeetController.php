@@ -620,6 +620,9 @@ class MeetController extends AppController {
                     ->User
                     ->find();
         // 选择标签再匹配
+        if($this->request->data('pid')){
+            $where['Agencies.pid'] = $this->request->data('pid');
+        }
         if($agency_id) {
             $where['agency_id'] = $agency_id;
         }
@@ -627,7 +630,7 @@ class MeetController extends AppController {
             $where['truename like'] = "%$keyword%";
         }
         $biggie = $biggie
-                ->contain(['Subjects'])
+                ->contain(['Subjects', 'Agencies'])
                 ->where($where)
                 ->toArray();
         if($biggie !== false){

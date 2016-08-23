@@ -1,12 +1,3 @@
-<header>
-    <div class='inner'>
-        <a href='javascript:history.go(-1);' class='toback'></a>
-        <h1>
-            专家简介
-        </h1>
-
-    </div>
-</header>
 <div class="wraper">
     <div class="h20">
     </div>
