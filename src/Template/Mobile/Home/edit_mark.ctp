@@ -19,22 +19,22 @@
                     <?php $flag = false; ?>
                     <?php foreach ($mark_arr as $mark): ?>
                         <?php if ($tag == $mark): ?>
-                            <a href="#this" data-val="<?= $tag ?>" class="agency-item active"><?= $tag ?></a>
+                            <a href="javascript:void(0)" data-val="<?= $tag ?>" class="agency-item active"><?= $tag ?></a>
                             <?php $flag = true; ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
                     <?php if (!$flag): ?>
-                        <a href="#this" data-val="<?= $tag ?>" class="agency-item"><?= $tag ?></a>
+                        <a href="javascript:void(0)" data-val="<?= $tag ?>" class="agency-item"><?= $tag ?></a>
                     <?php endif; ?>
                 <?php endforeach; ?>
                   <?php if($extra_mark):?>
                         <?php foreach ($extra_mark as $extra):?>
-                            <a href="#this" data-val="<?= $extra ?>" class="agency-item active"><?= $extra ?></a>
+                            <a href="javascript:void(0)" data-val="<?= $extra ?>" class="agency-item active"><?= $extra ?></a>
                         <?php endforeach;?>
                    <?php endif;?>
             <?php else: ?>
                 <?php foreach ($profiletags as $tag): ?>
-                    <a href="#this" data-val="<?= $tag ?>" class="agency-item"><?= $tag ?></a>
+                    <a href="javascript:void(0)" data-val="<?= $tag ?>" class="agency-item"><?= $tag ?></a>
                 <?php endforeach; ?>
             <?php endif; ?>
             <a href="javascript:void(0)" class='a-mark agency-item'><input style="border: none" type="" name="" id="extra_industry" value="" placeholder="输入自定义新标签" /></a>

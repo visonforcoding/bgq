@@ -98,6 +98,14 @@
             </a>
         </li>
         <li>
+            <a href="/home/edit-agencies">
+                <span>机构：</span>
+                <div>
+                    <span id="agency"></span>
+                </div>
+            </a>
+        </li>
+        <li>
             <a href="/home/edit-city">
                 <span>所在地：</span>
                 <div>
@@ -279,6 +287,7 @@
                 $('#careers').html(res.data.careers);
                 $('#grbq').html(res.data.grbq);
                 $('#industry').html(res.data.industry);
+                $('#agency').html(res.data.agency);
             } else {
                 $.util.alert(res.msg);
             }
@@ -298,6 +307,7 @@
                     $('#careers').html(res.data.careers);
                     $('#grbq').html(res.data.grbq);
                     $('#industry').html(res.data.industry);
+                    $('#agency').html(res.data.agency);
                 } else {
                     $.util.alert(res.msg);
                 }
