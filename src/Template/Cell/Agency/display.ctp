@@ -1,5 +1,6 @@
 <select name="agency_id" id="select-agency" class=" form-control">
     <?php foreach ($agencies as $agency): ?>
+    <option>请选择</option>
         <optgroup label="<?= $agency->name ?>">
             <?php if (!empty($agency->children)): ?>
                 <?php foreach ($agency->children as $item): ?>

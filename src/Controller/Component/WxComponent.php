@@ -205,9 +205,9 @@ class WxComponent extends Component {
      * 如若开发服a、b和线上服务器c .其中有任意1个在另一个获取access_token后获取了，由于使用的是相同的appid 等信息，
      * 所以前一个获取的服务器的token便会在，5分钟之后失效，由于没有超出7200秒的过期时间又不会重新获取，所以便会出现
      * 经常性的有access_token 失效的情况。
-     * 中控服务器用来解决此问题，原理是保证线上和开发服务器使用的access_token是同一份。开发服务器取本地的文件缓存，非
-     * 开发服务器便采取接口形式从开发服务器获取access_token .
-     * 其中为了保证access_token安全，接口调用会有token 和时效验证，并且token还会背rsa加密，需用相同salt和key解密。
+     * 中控服务器用来解决此问题，原理是保证线上和开发服务器使用的access_token是同一份。正式服务器取(或中控服务器)本地的文件缓存，非
+     * 正式(中控)服务器便采取接口形式从中控(线上)服务器获取access_token .
+     * 其中为了保证access_token安全，接口调用会有token 和时效验证，并且token还会被rsa加密，需用相同salt和key解密。
      * 防止http 抓包盗用。
      * @author caowenpeng <caowenpeng1990@126.com>
      * @return boolean

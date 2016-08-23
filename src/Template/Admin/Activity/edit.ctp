@@ -35,6 +35,15 @@
             ?>
         </div>
     </div>
+        <div class="form-group">
+        <label class="col-md-2 control-label">协办</label>
+        <div class="input-group col-md-6">
+            <span class="input-group-addon">名称</span>
+            <input type="text" name="org_key" value="<?=$activity->org_key?>" placeholder="协办单位" class="form-control" />
+            <span  class="input-group-addon">值</span>
+            <input type="text" name="org_val" value="<?=$activity->org_val?>" class="form-control" placeholder="XXX公司">
+        </div>
+    </div>
     <div class="form-group">
         <label class="col-md-2 control-label">活动名称</label>
         <div class="col-md-8">
@@ -141,7 +150,6 @@
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">封面</label>
-
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
                 <img  alt="请上传宽为690，高小于388的封面图" src="<?= $activity->cover; ?>"/>
@@ -152,9 +160,15 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">内容</label>
+        <label class="col-md-2 control-label">流程介绍</label>
         <div class="col-md-8">
-            <script name='body' id='body' rows='3' type="text/plain" class='form-control-editor'><?= $activity->body ?></script>
+            <script name='body' id='content' rows='2' type="text/plain" class='form-control-editor'><?=$activity->body?></script>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">联系方式</label>
+        <div class="col-md-8">
+            <script name='contact' id='contact' rows='2' type="text/plain" class='form-control-editor'><?=$activity->contact?></script>
         </div>
     </div>
     <div class="form-group">
@@ -168,7 +182,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">参与嘉宾</label>
         <div class="col-md-8">
-            <script name='guest' id='guest' rows='3' type="text/plain" class='form-control-editor'><?= $activity->guest ?></script>
+            <script name='guest' id='guest' rows='2' type="text/plain" class='form-control-editor'><?= $activity->guest ?></script>
         </div>
     </div>
     <div class="form-group">
@@ -202,10 +216,24 @@
 <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
     $(function () {
+          var toolbars =   [[
+            'source', '|', 'undo', 'redo', '|',
+            'bold', 'italic', 'underline', 'fontborder', 'strikethrough',
+            'pasteplain', '|', 'forecolor', 'backcolor',
+            'selectall', 'cleardoc', '|',
+            'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+            'indent', '|',
+            'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+            'simpleupload', 'insertimage', 'emotion', 'background', '|',
+            'horizontal', 'spechars', 'wordimage',
+        ]];
         initJqupload('cover', '/wpadmin/util/doUpload?dir=activitycover', 'jpg,png,gif,jpeg'); //初始化图片上传
         initJqupload('thumb', '/wpadmin/util/doUpload?dir=activitythumb', 'jpg,png,gif,jpeg'); //初始化图片上传
-        var ue = UE.getEditor('body'); //初始化富文本编辑器
-        UE.getEditor('guest');
+        var ue = UE.getEditor('content', {
+            toolbars: toolbars
+        }); //初始化富文本编辑器
+        var contact = UE.getEditor('contact',{toolbars:toolbars}); //初始化富文本编辑器
+        var guest_UE = UE.getEditor('guest',{toolbars:toolbars}); //初始化富文本编辑器
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-series').select2({
             language: "zh-CN",

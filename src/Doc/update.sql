@@ -658,3 +658,12 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 	
+-- 8月23日
+ALTER TABLE `activity`
+	DROP COLUMN `industry_id`;	
+
+ALTER TABLE `activity`
+	ADD COLUMN `org_key` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '协办名称' AFTER `company`,
+	ADD COLUMN `org_val` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '协办名称' AFTER `org_key`,
+	CHANGE COLUMN `body` `body` TEXT NULL COMMENT '流程介绍' AFTER `cover`,
+	ADD COLUMN `contact` TEXT NULL COMMENT '联系方式' AFTER `body`;	

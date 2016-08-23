@@ -55,7 +55,9 @@
                             {name: 'activity.title', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'type', editable: true, align: 'center', formatter: typeFormatter},
-                            {name: 'description', editable: true, align: 'center'},
+                            {name: 'description', editable: true, align: 'center',formatter:function(cell, options, rowObject){
+                                    return cell.substring(0,10)+'..';
+                            }},
                             {name: 'user.company', editable: true, align: 'center'},
                             {name: 'user.position', editable: true, align: 'center'},
                             {name: 'status', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
@@ -117,10 +119,12 @@
                 }
 
                 function actionFormatter(cellvalue, options, rowObject) {
+                        response = '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     if (rowObject.status == '0') {
-                        response = '<a title="标记已处理" onClick="check(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
+                        response += '<a title="标记已处理" onClick="check(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
+                        
                     } else {
-                        response = '<a title="标记未处理" onClick="uncheck(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-times"></i> </a>';
+                        response += '<a title="标记未处理" onClick="uncheck(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-times"></i> </a>';
                     }
                     return response;
                 }
@@ -177,7 +181,7 @@
                         title: '查看详情',
                         shadeClose: true,
                         shade: 0.8,
-                        area: ['380px', '70%'],
+                        area: ['480px', '70%'],
                         content: url//iframe的url
                     });
                 }

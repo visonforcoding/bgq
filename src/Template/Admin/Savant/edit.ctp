@@ -5,16 +5,6 @@
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($savant, ['class' => 'form-horizontal']) ?>
-    <?php if ($savant->savant_status == 0): ?>
-        <div class="form-group">
-            <label class="col-md-2 control-label">未通过审核理由</label>
-            <div class="col-md-8">
-                <?php
-                echo $this->Form->input('user.reason', ['label' => false, 'class' => 'form-control']);
-                ?>
-            </div>
-        </div>
-    <?php endif; ?>
     <div class="form-group">
         <label class="col-md-2 control-label">用户</label>
         <div class="col-md-8">
@@ -36,7 +26,7 @@
         <label class="col-md-2 control-label">项目经验</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('savant.xmjy', ['label' => false, 'class' => 'form-control']);
+            echo $this->Form->input('xmjy', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
@@ -44,7 +34,7 @@
         <label class="col-md-2 control-label">资源优势</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('savant.zyys', ['label' => false, 'class' => 'form-control']);
+            echo $this->Form->input('zyys', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
@@ -52,66 +42,10 @@
         <label class="col-md-2 control-label">简介</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('savant.summary', ['label' => false, 'type' => 'textarea', 'class' => 'form-control']);
+            echo $this->Form->input('summary', ['label' => false, 'type' => 'textarea', 'class' => 'form-control']);
             ?>
         </div>
     </div>
-    <?php if ($savant->subjects): ?>
-        <?php foreach ($savant->subjects as $k => $v): ?>
-            <div class="form-group">
-                <label class="col-md-2 control-label">话题<?= $k + 1 ?></label>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">标题</label>
-                <div class="col-md-8">
-                    <input type="text" name="title" class="form-control" id="title" disabled value="<?= $v['title'] ?>">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">话题简介</label>
-                <div class="col-md-8">
-                    <textarea name="title" class="form-control" id="title" disabled ><?= $v['summary'] ?></textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">类型</label>
-                <div class="col-md-8">
-                    <input type="text" name="title" class="form-control" id="title" disabled value="<?php
-                    switch ($v['type']) {
-                        case 1: echo '一对一';
-                            break;
-                        case 2: echo '一对多';
-                            break;
-                    }
-                    ?>">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">约见时间</label>
-                <div class="col-md-8">
-                    <input type="text" name="title" class="form-control" id="title" disabled value="<?= $v['invite_time'] ?>">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">价格</label>
-                <div class="col-md-8">
-                    <input type="text" name="title" class="form-control" id="title" disabled value="<?= $v['price'] ?>">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">地址</label>
-                <div class="col-md-8">
-                    <input type="text" name="title" class="form-control" id="title" disabled value="<?= $v['address'] ?>">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">持续时间</label>
-                <div class="col-md-8">
-                    <input type="text" name="title" class="form-control" id="title" disabled value="<?= $v['last_time'] ?>小时">
-                </div>
-            </div>
-    <?php endforeach; ?>
-<?php endif; ?>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 

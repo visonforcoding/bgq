@@ -74,14 +74,11 @@ class SavantController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
-        $savant = $this->User->get($id, [
-            'contain' => ['Savant', 'Subjects']
-        ]);
-//        debug($savant);die;
+        $SavantTable = \Cake\ORM\TableRegistry::get('Savant');
+        $savant = $SavantTable->find()->where(['user_id'=>$id])->first();
         if ($this->request->is(['post', 'put'])) {
-            $savant = $this->User->patchEntity($savant, $this->request->data);
-            $savant->dirty('savant', true);
-            if ($this->User->save($savant, ['associated' => ['Savant']])) {
+            $savant = $SavantTable->patchEntity($savant,  $this->request->data());
+            if ($SavantTable->save($savant)) {
                 $this->Util->ajaxReturn(true, '修改成功');
             } else {
                 $errors = $savant->errors();
