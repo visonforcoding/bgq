@@ -96,6 +96,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
         'login.wx',
         'pay.wx',
         'pay.ali',
+        "event.getWXCode",
         "event.invite", //短信分享
         "event.getLocation",
         "event.tel",
@@ -180,6 +181,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                     break;
                 //无参数 只用到callback
                 case 'login.wx':
+                case "event.getWXCode":
                 case "event.getLocation":
                 case "event.reuploadPhoto":
                     registerAPI(null, api, function () {
