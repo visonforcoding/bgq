@@ -106,5 +106,20 @@ class IndexController extends AppController {
         exit();
     }
     
+    /**
+     * 资金收入
+     */
+    public function getFlowByDayWithMonth() {
+        $connection = \Cake\Datasource\ConnectionManager::get('default');
+        $result = $connection->execute('select sum(case when f.income = 2 then f.amount * -1 else f.amount end ) as nums,day(f.create_time) as day,date(f.create_time) as date from flow f
+                    where month(f.create_time) = month(now()) and f.user_id = -1
+                    group by date(f.create_time)')->fetchAll('assoc');
+        $this->loadComponent('Chart');
+        $month = date('m');
+        $label = $month.'平台资金收入';
+        echo $this->Chart->setLineChartByDayWithMonth($result,$label,['backgroundColor'=>11,'borderCapStyle'=>'round']);
+        exit();
+    }
+    
 
 }
