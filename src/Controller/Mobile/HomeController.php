@@ -1184,6 +1184,24 @@ class HomeController extends AppController {
     }
     
     /**
+     * 编辑机构标签
+     */
+    public function editAgencies() {
+        $UserTable = \Cake\ORM\TableRegistry::get('user');
+        $user = $UserTable->get($this->user->id);
+        $AgencyTable = \Cake\ORM\TableRegistry::get('agency');
+        $agencies = $AgencyTable->find('threaded', [
+                    'keyField' => 'id',
+                    'parentField' => 'pid'
+                ])->hydrate(false)->toArray();
+        $this->set(array(
+            'user' => $user,
+            'agencies' => $agencies,
+            'pageTitle' => '选择行业标签'
+        ));
+    }
+    
+    /**
      * 编辑所在城市
      */
     public function editCity(){
@@ -1231,6 +1249,22 @@ class HomeController extends AppController {
             $data = $this->request->data();
             $user = $this->User->get($this->user->id);
             $user = $this->User->patchEntity($user, $data);
+            if ($this->User->save($user)) {
+                return $this->Util->ajaxReturn(true, '保存成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '保存失败');
+            }
+        }
+    }
+    
+    /**
+     * 保存行业标签
+     */
+    public function saveAgency() {
+        if ($this->request->is('post')) {
+            $agency_id = $this->request->data('agency');
+            $user = $this->User->get($this->user->id);
+            $user->agency_id = $agency_id;
             if ($this->User->save($user)) {
                 return $this->Util->ajaxReturn(true, '保存成功');
             } else {
@@ -1505,13 +1539,14 @@ class HomeController extends AppController {
     public function userinfoStatus(){
         $this->handCheckLogin();
         $user = $this->User->get($this->user->id, [
-            'contain' => ['Industries', 'Educations', 'Careers'],
+            'contain' => ['Industries', 'Educations', 'Careers', 'Agencies'],
         ]);
         $data = [];
         if($user){
             $data['city'] = $user->city ? $user->city : '未完善';
             $data['gsyw'] = $user->gsyw ? $user->gsyw : '未完善';
             $data['goodat'] = $user->goodat ? $user->goodat : '未完善';
+            $data['agency'] = $user->agency ? $user->agency->name : '未完善';
             $industry = [];
             if($user->industries){
                 foreach($user->industries as $k=>$v){
