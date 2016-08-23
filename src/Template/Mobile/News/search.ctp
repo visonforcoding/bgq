@@ -64,6 +64,7 @@
         } else {
             $('.a-s-mark').addClass('a-s-width');
         }
+        LEMON.sys.hideKeyboard();
         if (search_data[industry_id]) {
             $('#search').html(search_data[industry_id]);
             return;
@@ -76,7 +77,6 @@
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
-                        LEMON.sys.hideKeyboard();
                         search_data[industry_id] = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
                             if (d.user) {
                                 d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
