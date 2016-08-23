@@ -389,7 +389,7 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .internet-v-info .head-img{width:1.21rem;height:1.21rem;display: block;border-radius: 50%;position:relative;margin-right:0.3rem;float:left;}
 .head-img img{width:100%;height:auto;border-radius: 50%;}
 .head-img i{position: absolute;right:0.12rem;bottom:0;width:0.29rem;height:0.3rem;background: url(img/v.png) no-repeat;background-size: contain;}
-.mark{margin-top:0.2rem;}
+.mark{margin-top:0.1rem;}
 .vipinfo{width:5.3rem;float:left;}
 .vipinfo h3{font-size:0.32rem;color:#222c38;height:.5rem;overflow:hidden;line-height: .5rem;}
 .vipinfo h3 .l-name{float:left;}
@@ -401,7 +401,7 @@ line-height: .34rem;height:.34rem;}
 .vipinfo span.job,.vipinfo span.c-info{line-height: 0.64rem;font-size:0.28rem;margin-top:0.06rem;color: #969fa9;}
 .vipinfo span.job{line-height: 0.4rem;}
 .vipinfo span.c-info{line-height: 0.3rem;display: block;}
-.vipinfo .mark a{border:1px #969fa9 solid;border-radius: 0.1rem;line-height: 0.32rem;font-size:0.26rem;color:#969fa9;padding:0 0.1rem;display:inline-block;}
+.vipinfo .mark a{border:1px #969fa9 solid;border-radius: 0.1rem;line-height: 0.32rem;font-size:0.26rem;color:#969fa9;padding:0 0.1rem;display:inline-block;margin-bottom:.1rem;}
 .vipinfo .bgblue a{background: #4285f4;color:#fff;border:none;padding:0.06rem 0.1rem;display:inline-block;margin-bottom:.05rem;}
 .meetnum{font-size:0.28rem;color:#969fa9;}
 .f-info{border-top:1px #e5e5e5 solid;line-height: .86rem;overflow:hidden; font-size:.28rem;}
