@@ -1528,6 +1528,9 @@ class HomeController extends AppController {
         }
     }
     
+    /**
+     * 用户的资料完整状态
+     */
     public function getUserinfoStatus(){
         $UserTable = \Cake\ORM\TableRegistry::get('user');
         $user = $UserTable->get($this->user->id, [
@@ -1538,6 +1541,24 @@ class HomeController extends AppController {
             return $this->Util->ajaxReturn(true);
         } else {
             return $this->Util->ajaxReturn(false, '请先去完善个人资料');
+        }
+    }
+    
+    public function saveUserinfo(){
+        if($this->user){
+            $name = $this->request->data('name');
+            $val = $this->request->data('val');
+            $data = [];
+            $UserTable = \Cake\ORM\TableRegistry::get('user');
+            $user = $UserTable->get($this->user->id);
+            $data[$name] = $val;
+            $user = $UserTable->patchEntity($user, $data);
+            $res = $UserTable->save($user);
+            if($res){
+                return $this->Util->ajaxReturn(true, '修改成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '修改失败');
+            }
         }
     }
 

@@ -15,7 +15,7 @@
 </header>
 <div class="wraper m-fixed-bottom">
     <form method="post">
-    <ul class="h-info-box e-info-box max_width">
+    <ul class="h-info-box e-info-box max_width" id="pData">
         <li class='u-img no-right-ico'>
             <a href="javascript:void(0)">
                 <span class="e_img">头像：</span>
@@ -45,10 +45,10 @@
                 <span>性别：</span>
                 <div>
                     <span class='typeselect'>
-                    <select name="gender" class='checkedsex'>
-                        <option value="1" <?php if($user->gender==1):?>selected="selected"<?php endif; ?>>男</option>
-                        <option value="2" <?php if($user->gender==2):?>selected="selected"<?php endif; ?>>女</option>
-                    </select>
+                        <select name="gender" class='checkedsex' id="gender">
+                            <option value="1" <?php if($user->gender==1):?>selected="selected"<?php endif; ?>>男</option>
+                            <option value="2" <?php if($user->gender==2):?>selected="selected"<?php endif; ?>>女</option>
+                        </select>
                     </span>
                 </div>
             </a>
@@ -61,16 +61,6 @@
                 </div>
             </a>
         </li>
-    </ul>
-    <ul class="h-info-box e-info-box max_width">
-<!--        <li class="no-right-ico">
-            <a href="javascript:void(0)">
-                <span>联系电话：</span>
-                <div>
-                    <input type="phone" readonly value="<?=$user->phone?>" />
-                </div>
-            </a>
-        </li>-->
         <li class="no-right-ico">
             <a href="javascript:void(0)">
                 <span>邮箱：</span>
@@ -80,6 +70,24 @@
             </a>
         </li>
     </ul>
+<!--    <ul class="h-info-box e-info-box max_width">
+        <li class="no-right-ico">
+            <a href="javascript:void(0)">
+                <span>联系电话：</span>
+                <div>
+                    <input type="phone" readonly value="<?=$user->phone?>" />
+                </div>
+            </a>
+        </li>
+        <li class="no-right-ico">
+            <a href="javascript:void(0)">
+                <span>邮箱：</span>
+                <div>
+                    <input type="email" name="email" value="<?=$user->email?>" placeholder="请填写邮箱" />
+                </div>
+            </a>
+        </li>
+    </ul>-->
     <ul class="h-info-box e-info-box max_width">
         <li>
             <a href="/home/edit-industries">
@@ -176,8 +184,8 @@
             </li>
     </ul>
     </form>
-    <div style='height:1rem;'></div>
-    <a id="submit" href="javascript:void(0);" class="f-bottom">完成</a>
+<!--    <div style='height:1rem;'></div>
+    <a id="submit" href="javascript:void(0);" class="f-bottom">完成</a>-->
 </div>
 <div class='reg-shadow' style="display: none;"></div>
 <div class="shadow-info" style="display: none;">
@@ -227,12 +235,40 @@
         }
     }
     
+    
+    $('#pData input').on('blur', function(){
+        var name = $(this).get(0).name;
+        var val = $(this).val();
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: "/home/save-userinfo",
+            data: {name:name,val:val},
+            success: function (res) {
+                $.util.alert(res.msg);
+            }
+        });
+    });
+    
+    $('#gender').on('change', function(){
+        var name = $(this).get(0).name;
+        var val = $(this).val();
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: "/home/save-userinfo",
+            data: {name:name,val:val},
+            success: function (res) {
+                $.util.alert(res.msg);
+            }
+        });
+    });
+    
     $.ajax({
         type: 'POST',
         dataType: 'json',
         url: "/home/userinfo-status",
         success: function (res) {
-            console.log(res.data);
             if(res.status){
                 $('#city').html(res.data.city);
                 $('#goodat').html(res.data.goodat);
@@ -245,6 +281,26 @@
                 $.util.alert(res.msg);
             }
         }
+    });
+    window.onBackView(function(){
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: "/home/userinfo-status",
+            success: function (res) {
+                if(res.status){
+                    $('#city').html(res.data.city);
+                    $('#goodat').html(res.data.goodat);
+                    $('#gsyw').html(res.data.gsyw);
+                    $('#educations').html(res.data.educations);
+                    $('#careers').html(res.data.careers);
+                    $('#grbq').html(res.data.grbq);
+                    $('#industry').html(res.data.industry);
+                } else {
+                    $.util.alert(res.msg);
+                }
+            }
+        });
     });
     
     $(function () {
