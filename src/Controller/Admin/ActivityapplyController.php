@@ -292,10 +292,10 @@ class ActivityapplyController extends AppController {
         if ($trans) {
             //消息
             $this->loadComponent('Business');
-            $this->Business->usermsg($apply->user_id, '活动报名消息', '您报名的活动"' . $activity->title . '已审核通过', 11, $id, '/activity/details/' . $activity->id);
+            $this->Business->usermsg($apply->user_id, '活动报名消息', '您报名的活动《' . $activity->title . '》已审核通过', 11, $id, '/activity/details/' . $activity->id);
             if ($activity->apply_fee > 0) {
                 $this->loadComponent('Sms');
-                $this->Sms->sendByQf106($apply->user->phone, '您报名的活动"' . $activity->title . '"已审核通过，请及时登录平台支付费用，并购帮祝您生活愉快~');
+                $this->Sms->sendByQf106($apply->user->phone, '您报名的活动《' . $activity->title . '》已审核通过，请及时登录平台支付费用，并购帮祝您生活愉快~');
             }
             $this->Util->ajaxReturn(true, '操作成功');
         } else {
@@ -317,7 +317,7 @@ class ActivityapplyController extends AppController {
             $ActivityTable = \Cake\ORM\TableRegistry::get('Activity');
             $activity = $ActivityTable->get($apply->activity_id);
             $this->loadComponent('Business');
-            $this->Business->usermsg($apply->user_id, '活动报名消息', '您报名的活动"' . $activity->title . '审核未通过', 11, $id, '/activity/details/' . $activity->id);
+            $this->Business->usermsg($apply->user_id, '活动报名消息', '您报名的活动《' . $activity->title . '》审核未通过', 11, $id, '/activity/details/' . $activity->id);
             $this->Util->ajaxReturn(true, '操作成功');
         } else {
             $this->Util->ajaxReturn(false, '操作失败');
