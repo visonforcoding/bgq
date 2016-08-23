@@ -21,7 +21,7 @@
             </div>
             <div class="m_right_btn fr">
                 <?php if (!$self): ?>
-                    <span class="r-focus <?php if ($isFans): ?>focusgray<?php endif; ?>" id="follow_btn"><?php if ($isFans): ?>取消关注<?php else: ?>关注<?php endif; ?></span>
+                    <span class="r-focus" id="follow_btn"><?php if ($isFans): ?>取消关注<?php else: ?>关注<?php endif; ?></span>
                     <span class="g-card <?php if ($isGive): ?>cardgray<?php endif; ?>" id="giveCard"><?php if ($isGive): ?>已递名片<?php else: ?>递名片<?php endif; ?></span>    
                 <?php endif; ?>
             </div>
@@ -393,10 +393,10 @@
                     if (res.status) {
                         if (res.msg.indexOf('取消关注') != '') {
                             $('#follow_btn').text('取消关注');
-                            $('#follow_btn').addClass('focusgray');
+//                            $('#follow_btn').addClass('focusgray');
                         } else {
                             $('#follow_btn').text('关注');
-                            $('#follow_btn').removeClass('focusgray');
+//                            $('#follow_btn').removeClass('focusgray');
                         }
                     }
 
@@ -421,8 +421,7 @@
                 $.util.ajax({
                     url: '/user/giveCard/<?= $user->id ?>',
                     func: function (msg) {
-                        if (typeof msg == 'object')
-                        {
+                        if (typeof msg == 'object') {
                             $.util.alert(msg.msg);
                             $('#giveCard').text('已递名片');
                             $('#giveCard').addClass('cardgray');

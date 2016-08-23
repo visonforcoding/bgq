@@ -192,9 +192,9 @@ class HomeController extends AppController {
                             'zyys'=>  $this->request->data('zyys'),
                         ]);
                         $ApplyTable->save($apply);
-                        return $this->Util->ajaxReturn(true, '保存成功');
+                        return $this->Util->ajaxReturn(true, '提交成功');
                     } else {
-                        return $this->Util->ajaxReturn(false, errorMsg($savant, '保存失败'));
+                        return $this->Util->ajaxReturn(false, errorMsg($savant, '提交失败'));
                     }
                 }
                 $this->set([
