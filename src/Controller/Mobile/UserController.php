@@ -578,38 +578,35 @@ class UserController extends AppController {
         $cardBoxTable = \Cake\ORM\TableRegistry::get('CardBox');
 //        $a = $cardBoxTable->find()->all();
 //        debug($a);die;
-        if($this->user->id == $id)
-        {
+        if($this->user->id == $id) {
             return $this->Util->ajaxReturn(false, '不可给自己递名片');
         }
         $data['ownerid'] = $id;
         $data['uid'] = $this->user->id;
         $isGive = $cardBoxTable->find()->where($data)->first();
-        if($isGive)
-        {
+        if($isGive) {
             return $this->Util->ajaxReturn(false, '已递名片');
-        }
-        else
-        {
+        } else {
             // 查询是否给我递过名片
             $isGiveMe = $cardBoxTable->find()->where(['ownerid'=>$this->user->id, 'uid'=>$id])->first();
-            if($isGiveMe)
-            {
+            if($isGiveMe) {
                 $data['resend'] = 1;
-            }
-            else
-            {
+                $cardcase = $cardBoxTable->newEntity();
+                $cardcase = $cardBoxTable->patchEntity($cardcase, $data);
+                $other = $cardBoxTable->get($isGiveMe->id);
+                $other->resend = 1;
+                $res = $cardBoxTable->connection()->transactional(function()use($cardBoxTable, $other, $cardcase){
+                    return $cardBoxTable->save($other) && $cardBoxTable->save($cardcase);
+                });
+            } else {
                 $data['resend'] = 2;
+                $cardcase = $cardBoxTable->newEntity();
+                $cardcase = $cardBoxTable->patchEntity($cardcase, $data);
+                $res = $cardBoxTable->save($cardcase);
             }
-            $cardcase = $cardBoxTable->newEntity();
-            $cardcase = $cardBoxTable->patchEntity($cardcase, $data);
-            $res = $cardBoxTable->save($cardcase);
-            if($res)
-            {
+            if($res) {
                 return $this->Util->ajaxReturn(true, '递名片成功');
-            }
-            else
-            {
+            } else {
                 return $this->Util->ajaxReturn(false, '系统错误');
             }
         }
