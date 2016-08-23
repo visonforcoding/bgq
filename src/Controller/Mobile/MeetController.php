@@ -631,7 +631,7 @@ class MeetController extends AppController {
         }
         $biggie = $biggie
                 ->contain(['Subjects', 'Agencies'])
-                ->limit($this->limit)
+//                ->limit($this->limit)
                 ->where($where)
                 ->toArray();
         if($biggie !== false){
