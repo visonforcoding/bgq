@@ -143,13 +143,6 @@
 
     $('.a-s-title').on('tap', function () {
         $('.orgname').toggleClass('active');
-//        if ($('.a-s-mark').hasClass('disp')) {
-//            $('.a-s-mark').removeClass('disp').addClass('nblock');
-//        } else if ($('.a-s-mark').hasClass('nblock')) {
-//            $('.a-s-mark').removeClass('nblock').addClass('disp');
-//        } else {
-//            $('.a-s-mark').addClass('disp');
-//        }
         if ($('.a-s-mark').hasClass('a-s-width')) {
             $('.a-s-mark').removeClass('a-s-width');
         } else {
