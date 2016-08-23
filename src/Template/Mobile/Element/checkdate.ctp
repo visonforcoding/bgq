@@ -47,7 +47,7 @@
 	         	<div class="l_box">
 	         		
 	         		<ul class="year">
-                        <li val='1990'  class="select">1990年</li>
+                        <li val='1990'>1990年</li>
                         <li val='1992'>1992年</li>
                         <li val='1993'>1993年</li>
                         <li val='1994'>1994年</li>
@@ -84,7 +84,7 @@
 	            	<div class="r_box">
 	            		
 	            		<ul class="month">
-		            		<li val='01' class="select">1月</li>
+		            		<li val='01'>1月</li>
 		            		<li val='02'>2月</li>
 		            		<li val='03'>3月</li>
 		            		<li val='04'>4月</li>
