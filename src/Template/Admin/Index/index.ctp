@@ -113,6 +113,9 @@
                     <li class="dropdown">
                         <a href="#tab3" data-toggle="tab">专家约见数</a>
                     </li>
+                    <li class="dropdown">
+                        <a href="#tab4" data-toggle="tab">平台收入</a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane in active" id="tab1">
@@ -123,6 +126,9 @@
                     </div>
                     <div class="tab-pane" id="tab3">
                         <canvas id="meet-chart" height='170px' width='400px'></canvas>
+                    </div>
+                    <div class="tab-pane" id="tab4">
+                        <canvas id="flow-chart" height='170px' width='400px'></canvas>
                     </div>
                 </div>
             </div>
@@ -190,6 +196,13 @@
         var meetChart = document.getElementById('meet-chart').getContext('2d');
         $.getJSON('/admin/index/getMeetByDayWithMonth', function (res) {
             new Chart(meetChart, {
+                type: 'bar',
+                data: res.data
+            });
+        }, 'json');
+        var flowChart = document.getElementById('flow-chart').getContext('2d');
+        $.getJSON('/admin/index/getFlowByDayWithMonth', function (res) {
+            new Chart(flowChart, {
                 type: 'bar',
                 data: res.data
             });
