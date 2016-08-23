@@ -60,7 +60,7 @@ class ChartComponent extends Component {
         foreach ($intdata as $k => $v) {
             foreach ($data as $key => $value) {
                 if ($k + 1 == $value['day']) {
-                    $intdata[$k] = intval($value['nums']);
+                    $intdata[$k] = $value['nums'];
                 }
             }
         }
