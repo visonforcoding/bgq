@@ -55,7 +55,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户','公司','职位', '活动', '提交时间','是否需审核', '审核状态', '审核人','是否置顶', '是否签到', '操作'],
+                                ['用户','公司','职位', '活动', '提交时间','是否需审核', '审核状态', '报名状态','审核人','是否置顶', '是否签到', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'user.company', editable: true, align: 'center'},
@@ -77,6 +77,16 @@
                                             return '审核通过';
                                         case 2:
                                             return '审核不通过';
+                                    }
+                            }},
+                            {name: 'is_pass', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
+                                    console.log(+rowObject.activity.apply_fee>0?'<i class="notice">(已付款)</i>':'');
+                                    if(cellvalue){
+                                       if(rowObject.activity.apply_fee>0){
+                                           return '通过<span class="notice">(已付款)</span>';
+                                       }
+                                    }else{
+                                        return '未通过';
                                     }
                             }},
                             {name: 'check_man', editable: true, align: 'center'},
