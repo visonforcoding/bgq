@@ -912,7 +912,7 @@ border-top:1px #e5e5e5 solid;line-height: 1rem;font-size:0;max-width: 750px;
 .systerm-info-box span{font-size:0.26rem;line-height:0.42rem;color:#222;}
 .systerm-info-box h3{line-height: 0.42rem;}
 .expert-commond,.active-commond{background: #f0eff5;position: relative;margin-bottom:0.2rem;}
-.expert-commond:before,.active-commond:before{content:'专家推荐';color:#7a7e83;position: absolute;width:1.5rem;height:0.24rem;
+.expert-commond:before,.active-commond:before{content:'会员推荐';color:#7a7e83;position: absolute;width:1.5rem;height:0.24rem;
 top:-0.1rem;left:50%;margin-left:-0.52rem;background: #f0eff5;text-align: center;font-size:0.3rem;}
 .active-commond:before{content:'活动推荐';}
 .expert-commond ul{background: #f0eff5;border-top:#e5e5e5 1px solid;font-size:0;padding-top:0.2rem;}
