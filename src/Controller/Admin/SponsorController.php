@@ -36,6 +36,8 @@ class SponsorController extends AppController {
         $sponsor = $this->Sponsor->get($id, [
             'contain' => ['Users', 'Activities']
         ]);
+        $recommendTypes = \Cake\Core\Configure::read('recommendTypes');
+        $sponsor->recommendTypes = $recommendTypes[$sponsor->type];
         $this->set('sponsor', $sponsor);
         $this->set('_serialize', ['sponsor']);
     }
