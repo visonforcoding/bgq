@@ -181,7 +181,7 @@ class MeetSubjectController extends AppController {
             $where['MeetSubject.user_id'] = $id;
         }
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where['username like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));

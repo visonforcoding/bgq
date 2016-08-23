@@ -225,7 +225,7 @@ class SeniorController extends AppController {
                                 $item['level'] = '普通';
                                 break;
                             case '2':
-                                $item['level'] = '专家';
+                                $item['level'] = '会员';
                                 break;
                             default:
                                 $item['level'] = '普通';
