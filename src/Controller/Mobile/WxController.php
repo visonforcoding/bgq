@@ -241,11 +241,18 @@ class WxController extends AppController {
         $user->union_id = $union_id;
         $user->app_wx_openid = $openid;
         $UserTable->save($user); //记录open_id 等微信信息
+        $this->request->session()->write('User.mobile', $user);//并更新session
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
         $order = $OrderTable->get($id);
         if ($order->type == 1) {
+             $order = $OrderTable->get($id, [
+                'contain' => ['SubjectBook', 'SubjectBook.Subjects']
+            ]);
             $body = '预约话题《' . $order->subject_book->subject->title . '》支付';
         } else {
+            $order = $OrderTable->get($id, [
+                'contain' => ['Activityapplys', 'Activityapplys.Activities']
+            ]);
             $body = '活动报名《' . $order->activityapply->activity->title . '》支付';
         }
         $out_trade_no = $order->order_no;

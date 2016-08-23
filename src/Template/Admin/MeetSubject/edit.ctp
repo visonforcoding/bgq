@@ -16,31 +16,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">简介</label>
         <div class="col-md-8">
-            <textarea class="form-control" name="summary"><?=$meetSubject->summary?></textarea>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">约见时间</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('invite_time', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">价格（元）</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('price', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">持续时间（小时）</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('last_time', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <textarea class="form-control" rows="5" name="summary"><?=$meetSubject->summary?></textarea>
         </div>
     </div>
     <div class="form-group">

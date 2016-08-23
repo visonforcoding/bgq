@@ -212,7 +212,7 @@
                     });
                 }
                 function showSavant(id) {
-                    url = '/mobile/meet/view/' + id;
+                    url = '/mobile/user/home-page/' + id;
                     layer.open({
                         type: 2,
                         title: '专家主页',

@@ -384,5 +384,9 @@ class NewsController extends AppController {
             ]);
         }
     }
+    
+    public function top($id=null){
+        
+    }
 }
         
