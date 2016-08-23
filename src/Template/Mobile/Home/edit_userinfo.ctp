@@ -240,6 +240,7 @@
         var name = this.name;
         var val = this.value;
         if(val == this.defaultValue) return;
+        this.defaultValue = val;
         $.ajax({
             type: 'POST',
             dataType: 'json',
