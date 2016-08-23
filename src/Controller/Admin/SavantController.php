@@ -227,7 +227,7 @@ class SavantController extends AppController {
             $apply->action = 1;
             $SavantApplyTable->save($apply);
             $this->loadComponent('Business');
-            $this->Business->usermsg($user->user_id, '专家申请新消息', '您的专家申请审核通过啦！', 5, $user->id);
+            $this->Business->usermsg($user->user_id, '会员申请新消息', '您的会员申请审核通过啦！', 5, $user->id);
             return $this->Util->ajaxReturn(true, '审核通过');
         } else {
             return $this->Util->ajaReturn(false, '系统错误');
@@ -255,7 +255,7 @@ class SavantController extends AppController {
             $SavantApplyTable->save($apply);
             //消息
             $this->loadComponent('Business');
-            $this->Business->usermsg($id, '专家申请新消息', '您的专家申请审核不通过！原因为：' . $data['reason'], 5, $id);
+            $this->Business->usermsg($id, '会员申请新消息', '您的会员申请审核不通过！原因为：' . $data['reason'], 5, $id);
             return $this->Util->ajaxReturn(true, '审核不通过');
         } else {
             return $this->Util->ajaReturn(false, '系统错误');

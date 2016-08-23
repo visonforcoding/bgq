@@ -49,7 +49,7 @@ class SavantChartController extends AppController {
         }
         $result = $connection->execute($sql)->fetchAll('assoc');
         $this->loadComponent('Echart');
-        $title['text'] = '专家认证统计';
+        $title['text'] = '会员认证统计';
         echo $this->Echart->setLineChart($result,$type,$name,$title,'个');
         exit();
     }
@@ -82,7 +82,7 @@ class SavantChartController extends AppController {
         }
         $result = $connection->execute($sql)->fetchAll('assoc');
         $this->loadComponent('Echart');
-        $title['text'] = '专家话题统计';
+        $title['text'] = '会员话题统计';
         echo $this->Echart->setLineChart($result,$type,$name,$title,'个');
         exit();
     }
@@ -115,7 +115,7 @@ class SavantChartController extends AppController {
         }
         $result = $connection->execute($sql)->fetchAll('assoc');
         $this->loadComponent('Echart');
-        $title['text'] = '专家约见统计';
+        $title['text'] = '会员约见统计';
         echo $this->Echart->setLineChart($result,$type,$name,$title,'个');
         exit();
     }

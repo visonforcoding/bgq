@@ -207,11 +207,11 @@ class ActivityChartController extends AppController {
                 . 'and u.is_del = 0 and  (u.`level` = 1 or u.`level` = 2) group by u.`level`')
                 ->fetchAll('assoc');
         foreach ($result as $key=>$item){
-            $result[$key]['name'] = $item['level']=='1'?'普通用户':'专家';
+            $result[$key]['name'] = $item['level']=='1'?'普通用户':'会员';
         }
         $this->loadComponent('Echart');
         $name = '用户行业分布';
-        $title['text'] = '专家占比';
+        $title['text'] = '会员占比';
         echo $this->Echart->setPieChart($result, $name,$title);
         exit();
     }

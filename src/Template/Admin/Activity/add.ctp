@@ -131,13 +131,13 @@
     <div class="form-group">
         <label class="col-md-2 control-label">流程介绍</label>
         <div class="col-md-8">
-            <script name='body' id='content' rows='2' type="text/plain" class='form-control-editor'><?=$activity->body?></script>
+            <script name='body' id='content' rows='2' type="text/plain" class='form-control-editor'><?= $activity->body ?></script>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">联系方式</label>
         <div class="col-md-8">
-            <script name='contact' id='contact' rows='2' type="text/plain" class='form-control-editor'><?=$activity->contact?></script>
+            <script name='contact' id='contact' rows='2' type="text/plain" class='form-control-editor'><?= $activity->contact ?></script>
         </div>
     </div>
     <div class="form-group">
@@ -185,24 +185,24 @@
 <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
     $(function () {
-        var toolbars =   [[
-            'source', '|', 'undo', 'redo', '|',
-            'bold', 'italic', 'underline', 'fontborder', 'strikethrough',
-            'pasteplain', '|', 'forecolor', 'backcolor',
-            'selectall', 'cleardoc', '|',
-            'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
-            'indent', '|',
-            'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-            'simpleupload', 'insertimage', 'emotion', 'background', '|',
-            'horizontal', 'spechars', 'wordimage',
-        ]];
+        var toolbars = [[
+                'source', '|', 'undo', 'redo', '|',
+                'bold', 'italic', 'underline', 'fontborder', 'strikethrough',
+                'pasteplain', '|', 'forecolor', 'backcolor',
+                'selectall', 'cleardoc', '|',
+                'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+                'indent', '|',
+                'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+                'simpleupload', 'insertimage', 'emotion', 'background', '|',
+                'horizontal', 'spechars', 'wordimage',
+            ]];
         initJqupload('cover', '/wpadmin/util/doUpload?dir=activitycover', 'jpg,png,gif,jpeg'); //初始化图片上传
         initJqupload('thumb', '/wpadmin/util/doUpload?dir=activitythumb', 'jpg,png,gif,jpeg'); //初始化图片上传
         var ue = UE.getEditor('content', {
             toolbars: toolbars
         }); //初始化富文本编辑器
-        var contact = UE.getEditor('contact',{toolbars:toolbars}); //初始化富文本编辑器
-        var guest_UE = UE.getEditor('guest',{toolbars:toolbars}); //初始化富文本编辑器
+        var contact = UE.getEditor('contact', {toolbars: toolbars}); //初始化富文本编辑器
+        var guest_UE = UE.getEditor('guest', {toolbars: toolbars}); //初始化富文本编辑器
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-user').select2({
             language: "zh-CN",
