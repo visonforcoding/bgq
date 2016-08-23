@@ -308,6 +308,17 @@ class UserController extends AppController {
             }
         }
     }
-
-
+    
+    
+    /**
+     * 获取消息
+     */
+    public function getUserProfile(){
+        $id = $this->request->query('id');
+        $user = $this->User->find()
+                ->select(['id','truename','company','avatar','position'])
+                ->where(['id'=>$id])
+                ->first();
+        $this->Util->ajaxReturn(['user'=>$user]);
+    }
 }

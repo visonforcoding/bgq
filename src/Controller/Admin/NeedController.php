@@ -41,14 +41,7 @@ class NeedController extends AppController {
                 }])
                 ->where(['user_id' => $id])->orWhere(['reply_id'=>$id])->orderAsc('Need.create_time')
                 ->toArray();
-        $last_need = $this->Need->find()
-                ->contain(['User'=>function($q){
-                    return $q->select(['truename','avatar','company','position']);
-                }])
-                ->where(['user_id' => $id])->orWhere(['reply_id'=>$id])->orderDesc('Need.create_time')
-                ->first();
-        $last_need->status = 1;
-        $this->Need->save($last_need);
+        $this->Need->updateAll(['status'=>1],['user_id'=>$id]);
         $this->set('needs', $needs);
         $this->set('id', $id);
     }

@@ -4,21 +4,24 @@
 <link href="/wpadmin/lib/select2/css/select2.min.css" rel="stylesheet">
 <?php $this->end() ?> 
 <div class="work-copy">
-    <?= $this->Form->create($activity, ['class' => 'form-horizontal']) ?>
+    <?= $this->Form->create($activityneed, ['class' => 'form-horizontal']) ?>
     <div class="form-group">
-        <label class="col-md-2 control-label">系列标签</label>
+        <label class="col-md-2 control-label">用户</label>
         <div class="col-md-8">
-            <?=$this->cell('Series')?>
+            <?=$this->cell('User');?>
+            <span class="notice">留空则可填写非注册用户</span>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">行业标签</label>
+        <label class="col-md-2 control-label">姓名</label>
         <div class="col-md-8">
-            <?=$this->cell('Industry')?>
+            <?php
+            echo $this->Form->input('truename', ['label' => false, 'class' => 'form-control']);
+            ?>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">主办单位</label>
+        <label class="col-md-2 control-label">公司</label>
         <div class="col-md-8">
             <?php
             echo $this->Form->input('company', ['label' => false, 'class' => 'form-control']);
@@ -26,7 +29,23 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">活动名称</label>
+        <label class="col-md-2 control-label">职位</label>
+        <div class="col-md-8">
+            <?php
+            echo $this->Form->input('position', ['label' => false, 'class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">联系方式</label>
+        <div class="col-md-8">
+            <?php
+            echo $this->Form->input('contact', ['label' => false, 'class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">活动</label>
         <div class="col-md-8">
             <?php
             echo $this->Form->input('title', ['label' => false, 'class' => 'form-control']);
@@ -34,105 +53,11 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">活动时间</label>
+        <label class="col-md-2 control-label">内容</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('time', ['label' => false, 'class' => 'form-control']);
+            echo $this->Form->input('body', ['label' => false, 'class' => 'form-control']);
             ?>
-            <span class="notice">(例:2016-09-09 12:00-13:00)</span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">地区</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('region_id', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">地点</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('address', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">规模</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('scale', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-<!--    <div class="form-group">
-        <label class="col-md-2 control-label">是否众筹</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('is_crowdfunding', ['type' => 'select', 'options' => ['0' => '否','1' => '是'], 'label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>-->
-    <div class="form-group">
-        <label class="col-md-2 control-label">专家推荐</label>
-        <div class="col-md-8">
-            <?=$this->cell('Savant')?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">费用</label>
-        <div class="col-md-8">
-        <?php
-            echo $this->Form->input('apply_fee', ['label' => false, 'class' => 'form-control']);
-        ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">缩略图</label>
-        <div class="col-md-8">
-            <div  class="img-thumbnail input-img"  single>
-                <img  alt="请上传160*160大小的缩略图" src=""/>
-            </div>
-            <div style="color:red">请上传160*160大小的缩略图</div>
-            <input name="thumb"  type="hidden"/>
-            <div id="thumb" class="jqupload">上传</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">封面</label>
-        <div class="col-md-8">
-            <div  class="img-thumbnail input-img"  single>
-                <img  alt="请上传宽为690，高小于388的封面图" src=""/>
-            </div>
-            <div style="color:red">请上传宽为690，高小于388的封面图</div>
-            <input name="cover"  type="hidden"/>
-            <div id="cover" class="jqupload">上传</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">活动内容</label>
-        <div class="col-md-8">
-            <script name='body' id='content' rows='3' type="text/plain" class='form-control-editor'>
-                <p>流程介绍：</p>
-                <p><br/></p>
-                <p><br/></p>
-                <p>联系方式：<br/></p>
-            </script>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">摘要</label>
-        <div class="col-md-8">
-            <script name='summary' id='summary' rows='3' type="text/plain" class='form-control-editor'><?= $activity->summary ?></script>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">分享描述</label>
-        <div class="col-md-8">
-        <?php
-            echo $this->Form->input('share_desc', ['label' => false, 'class' => 'form-control']);
-        ?>
         </div>
     </div>
     <div class="form-group">
@@ -148,64 +73,53 @@
 <script type="text/javascript" src="/wpadmin/lib/jqupload/jquery.uploadfile.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/jquery.validationEngine.js"></script>
-<script src="/wpadmin/lib/ueditor/ueditor.config.js" ></script>
-<script src="/wpadmin/lib/ueditor/ueditor.all.js" ></script>
-<script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>
 <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
+<!--<script src="/wpadmin/lib/ueditor/ueditor.config.js" ></script>
+    <script src="/wpadmin/lib/ueditor/ueditor.all.js" ></script>
+    <script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>-->
 <script>
-$(function () {
-    initJqupload('cover', '/wpadmin/util/doUpload?dir=activitycover', 'jpg,png,gif,jpeg'); //初始化图片上传
-    initJqupload('thumb', '/wpadmin/util/doUpload?dir=activitythumb', 'jpg,png,gif,jpeg'); //初始化图片上传
-    var ue = UE.getEditor('content'); //初始化富文本编辑器
-    UE.getEditor('summary');
-    $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
-    $('#select-series').select2({
-        language: "zh-CN",
-        placeholder: '选择一个标签',
-    });
-    var industrySelect2 = $('#select-industry').select2({
-        language: "zh-CN",
-        placeholder: '选择一个标签'
-    });
-    var savantSelect2 = $('#select-savant').select2({
-        language: "zh-CN",
-        placeholder: '选择一位专家'
-    });
-    $('#select-industry').on('change',function(evt){
-        var selOption = industrySelect2.val();
-        var changIds = [];
-        $.get('/admin/savant/get-random-savants',{'tags':selOption},function(res){
-                console.log(res);
-                changIds = res.ids;
-                savantSelect2.val(changIds).trigger('change'); //set the value
-        },'json');
-    });
-    $('form').submit(function () {
-        var form = $(this);
-        $.ajax({
-            type: $(form).attr('method'),
-            url: $(form).attr('action'),
-            data: $(form).serialize(),
-            dataType: 'json',
-            success: function (res) {
-                if (typeof res === 'object') {
-                    if (res.status) {
-                        layer.confirm(res.msg, {
-                            btn: ['确认', '继续添加'] //按钮
-                        }, function () {
-                            window.location.href = '/admin/activity/index';
-                        }, function () {
-                            window.location.reload();
-                        });
-                    } else {
-                        layer.alert(res.msg, {icon: 5});
+    $(function () {
+        // initJqupload('cover', '/wpadmin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
+        //var ue = UE.getEditor('content'); //初始化富文本编辑器
+        $('#select-user').select2({
+            language: "zh-CN",
+            placeholder: '选择一个发起人'
+        });
+        $('#select-user').on('change', function (evt) {
+            var selOption = $(this).val();
+            $.get('/admin/user/get-user-profile', {'id': selOption}, function (res) {
+                $('#truename').val(res.user.truename);
+                $('#company').val(res.user.company);
+                $('#position').val(res.user.position);
+            }, 'json');
+        });
+        $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
+        $('form').submit(function () {
+            var form = $(this);
+            $.ajax({
+                type: $(form).attr('method'),
+                url: $(form).attr('action'),
+                data: $(form).serialize(),
+                dataType: 'json',
+                success: function (res) {
+                    if (typeof res === 'object') {
+                        if (res.status) {
+                            layer.confirm(res.msg, {
+                                btn: ['确认', '继续添加'] //按钮
+                            }, function () {
+                                window.location.href = '/admin/activityneed/index';
+                            }, function () {
+                                window.location.reload();
+                            });
+                        } else {
+                            layer.alert(res.msg, {icon: 5});
+                        }
                     }
                 }
-            }
+            });
+            return false;
         });
-        return false;
     });
-});
 </script>
 <?php
 $this->end();
