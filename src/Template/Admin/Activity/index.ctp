@@ -106,7 +106,7 @@
                             }},
                             {name: 'activityapply', editable: true, align: 'center',formatter:function(cell,opt,obj){
                                     if(cell.length > 0){
-                                        return '<a title="报名详情" href="/admin/activityapply/index/' + obj.id + '">'+cell[0].total+'</a>';
+                                        return '<a title="报名详情" href="/admin/activityapply/index/' + obj.id + '">'+cell.length+'</a>';
                                     }else{
                                         return 0;
                                     }
