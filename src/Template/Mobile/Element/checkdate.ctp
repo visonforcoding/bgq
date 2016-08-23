@@ -136,13 +136,13 @@
             		_cInput = input;
                     $('.r_box li').each(function(i){
                         if($(this).attr('val') == _month){
-                            $('.r_box').scrollToP(i*40);
+                            $('.r_box li').eq(i).scrollToView();
                         }
                     });
 
                     $('.l_box li').each(function(i){
                         if($(this).attr('val') == _year){
-                             $('.l_box').scrollToP(i*40);
+                             $('.l_box li').eq(i).scrollToView();
                         }
                     });
             		
