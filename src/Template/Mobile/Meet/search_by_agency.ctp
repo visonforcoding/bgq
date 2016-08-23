@@ -7,6 +7,9 @@
         <div class='h-regiser' id="doSearch">搜索</div>
     </div>
     <div class="markbox">
+        <div class="a-s-title">
+            <span class="orgname active">选择标签</span>
+        </div>
         <ul class="a-s-mark" id="agencies">
             <li><a href="javascript:void(0)" agency_id="0" class="agency" id="agency_">全部</a></li>
         </ul>
@@ -56,9 +59,19 @@
             }
         }
     });
-    
-    $('#searchForm').on('submit', function(){
-        if($('input[name="keyword"]').val() == ''){
+
+
+    $('.a-s-title').on('tap', function () {
+        $('.orgname').toggleClass('active');
+        if ($('.a-s-mark').hasClass('a-s-width')) {
+            $('.a-s-mark').removeClass('a-s-width');
+        } else {
+            $('.a-s-mark').addClass('a-s-width');
+        }
+    });
+
+    $('#searchForm').on('submit', function () {
+        if ($('input[name="keyword"]').val() == '') {
             $.util.alert('请填写内容再搜索');
             return false;
         }
@@ -85,7 +98,7 @@
         }
         switch (em.id) {
             case 'doSearch':
-                if($('input[name="keyword"]').val() == ''){
+                if ($('input[name="keyword"]').val() == '') {
                     $.util.alert('请填写内容再搜索');
                     return false;
                 }
@@ -101,8 +114,8 @@
 
     function dealData(em) {
         var data = '';
-        if($(em).attr('agency_id') === '0'){
-            data = $('#searchForm').serialize()+'&pid=<?= $id ?>';
+        if ($(em).attr('agency_id') === '0') {
+            data = $('#searchForm').serialize() + '&pid=<?= $id ?>';
         } else {
             data = $('#searchForm').serialize();
         }
@@ -114,6 +127,11 @@
             success: function (msg) {
                 if (typeof msg == 'object') {
                     if (msg.status) {
+                        if ($('.a-s-mark').hasClass('a-s-width')) {
+                            $('.a-s-mark').removeClass('a-s-width');
+                        } else {
+                            $('.a-s-mark').addClass('a-s-width');
+                        }
                         $.util.dataToTpl('biggies', 'biggie_tpl', msg.data, function (d) {
                             d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
 //                            d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
@@ -129,9 +147,6 @@
         });
     }
 
-//    if ($('#biggies').children('.internet-v-info').length == 0) {
-//        $.util.alert('暂无该行业专家', 300000);
-//    }
 </script>
 <?php
 $this->end('script');
