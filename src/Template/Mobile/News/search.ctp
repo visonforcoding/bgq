@@ -59,24 +59,11 @@
         var industry_id = $(em).attr('industry_id');
         $('input[name="newstag_id"]').val(industry_id);
         $('.orgname').toggleClass('active');
-//        if ($('.a-s-mark').hasClass('disp')) {
-//            $('.a-s-mark').removeClass('disp').addClass('nblock');
-//        } else if ($('.a-s-mark').hasClass('nblock')) {
-//            setTimeout(function () {
-//                $('.a-s-mark').removeClass('nblock').addClass('disp');
-//            }, 400);
-//        } else {
-//            setTimeout(function () {
-//                $('.a-s-mark').addClass('disp');
-//            }, 400);
-//        }
-        
         if ($('.a-s-mark').hasClass('a-s-width')) {
             $('.a-s-mark').removeClass('a-s-width');
         } else {
             $('.a-s-mark').addClass('a-s-width');
         }
-        
         if (search_data[industry_id]) {
             $('#search').html(search_data[industry_id]);
             return;
@@ -89,6 +76,7 @@
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
+                        LEMON.sys.hideKeyboard();
                         search_data[industry_id] = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
                             if (d.user) {
                                 d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
