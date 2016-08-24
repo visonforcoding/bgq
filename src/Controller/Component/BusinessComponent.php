@@ -504,7 +504,7 @@ class BusinessComponent extends Component {
         if ($transRes) {
             //向专家和买家发送一条短信
             //资金流水记录
-            $buyer_msg = '您已成功报名' . $Activityapply->activity->title . '，详情请打开并购帮APP查看';
+            $buyer_msg = '您已成功报名活动《' . $Activityapply->activity->title . '》，详情请打开并购帮APP查看';
             $this->Sms->sendByQf106($order->user->phone, $buyer_msg);
             return true;
         }else{

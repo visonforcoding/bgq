@@ -98,7 +98,7 @@
                                     return '<a title="评论详情" onClick="viewComs('+obj.id+')">'+cell+'</a>';
                             }},
                             {name: 'apply_nums', editable: true, align: 'center',formatter:function(cell,opt,obj){
-                                    if(obj.must_check==1){
+                                    if(obj.apply_fee>0){
                                         return '<a title="报名详情" href="/admin/activityapply/index/' + obj.id + '">'+cell+'</a>';
                                     }else{
                                         return 0;
