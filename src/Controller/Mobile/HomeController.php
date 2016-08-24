@@ -920,6 +920,13 @@ class HomeController extends AppController {
         $EducationTable = \Cake\ORM\TableRegistry::get('Education');
         if ($this->request->is('post')) {
             $data = $this->request->data();
+            $start = $data['start_date'];
+            $end = $data['end_date'];
+            $this->loadComponent('Business');
+            $checkDate = $this->Business->checkDate($start, $end);
+            if(!$checkDate){
+                return $this->Util->ajaxReturn(false, '请选择正确的时间段');
+            }
             if (!empty($data['id'])) {
                 $education = $EducationTable->get($data['id']);
                 if ($education) {
@@ -972,6 +979,13 @@ class HomeController extends AppController {
         $CareerTable = \Cake\ORM\TableRegistry::get('Career');
         if ($this->request->is('post')) {
             $data = $this->request->data();
+            $start = $data['start_date'];
+            $end = $data['end_date'];
+            $this->loadComponent('Business');
+            $checkDate = $this->Business->checkDate($start, $end);
+            if(!$checkDate){
+                return $this->Util->ajaxReturn(false, '请选择正确的时间段');
+            }
             if (!empty($data['id'])) {
                 $career = $CareerTable->get($data['id']);
                 if ($career) {
@@ -1205,24 +1219,14 @@ class HomeController extends AppController {
      * 编辑所在城市
      */
     public function editCity(){
+        $RegionTable = \Cake\ORM\TableRegistry::get('region');
+        $region = $RegionTable->find()->all()->toArray();
         $city = $this->User->find()->select(['city'])->where(['id'=>$this->user->id])->hydrate(false)->first();
         $city = $city['city'];
-        if($city){
-            switch ($city){
-                case '北京':break;
-                case '上海':break;
-                case '广州':break;
-                case '深圳':break;
-                case '杭州':break;
-                case '重庆':break;
-                case '成都':break;
-                case '武汉':break;
-                default :$city = ['city'=>$city];
-            }
-        }
         $this->set([
             'pageTitle'=>'选择所在城市',
-            'city'=>$city
+            'city'=>$city,
+            'region'=>$region
         ]);
     }
     

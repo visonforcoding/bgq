@@ -55,22 +55,17 @@
             <div class="markslider">
                 <div class="mark-items">
                     <ul	class="b-mark headmark">
-                        <li><a data-val="北京" href="#this">北京</a> </li>
+<!--                        <li><a data-val="北京" href="#this">北京</a> </li>
                         <li><a data-val="上海" href="#this">上海</a> </li>
                         <li><a data-val="深圳" href="#this">深圳</a> </li>
-                    </ul>
-                    <ul	class="b-mark headmark">
                         <li><a data-val="广州" href="#this">广州</a> </li>
                         <li><a data-val="武汉" href="#this">武汉</a> </li>
                         <li><a data-val="成都" href="#this">成都</a> </li>
-                    </ul>
-                    <ul	class="b-mark headmark">
                         <li><a data-val="重庆" href="#this">重庆</a> </li>
-                        <li><a data-val="杭州" href="#this">杭州</a> </li>
-                        <li class="r-place"><a href="#this">其它</a><span class="icon-bottom" ></span></li>
-                    </ul>
-                    <ul class="b-input cart">
-                        <li ><input type="text" placeholder="请输入……" /></li>
+                        <li><a data-val="杭州" href="#this">杭州</a> </li>-->
+                        <?php foreach($regions as $k=>$v): ?>
+                            <li><a data-val="<?= $v->name; ?>" href="javascript:void(0)"><?= $v->name; ?></a> </li>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
             </div>

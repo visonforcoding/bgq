@@ -511,5 +511,16 @@ class BusinessComponent extends Component {
             return false;
         }
     }
+    
+    public function checkDate($start, $end){
+        if($start === '' && $end === ''){
+            return false;
+        } elseif($start === '至今') {
+            return false;
+        } elseif($end !== '至今' && $end < $start) {
+            return false;
+        }
+        return true;
+    }
 
 }

@@ -13,6 +13,9 @@
             <h3><?= $activity->title; ?></h3>
            <div> <img src="<?= $activity->cover; ?>"/></div>
             <p>主办单位：<?= $activity->company; ?></p>
+            <?php if($activity->org_key && $activity->org_val): ?>
+                <p><?= $activity->org_key ?>：<?= $activity->org_val; ?></p>
+            <?php endif; ?>
             <p>时间：<?= $activity->time->i18nFormat('yyyy-MM-dd'); ?></p>
             <p>地点：<?= $activity->address; ?></p>
             <p>规模：<?= $activity->scale; ?>人</p>
@@ -33,6 +36,12 @@
             <h3  class="comment-title">活动流程</h3>
             <div class="innercon"><?= $activity->body; ?></div>
         </section>
+        <?php if($activity->contact): ?>
+            <section class="a-detail newscomment-box">
+                <h3  class="comment-title">联系方式</h3>
+                <div class="innercon"><?= $activity->contact; ?></div>
+            </section>
+        <?php endif; ?>
         <section class="a-detail newscomment-box guests">
             <?php if ($activity->guest): ?>
                 <h3 class="comment-title">参与嘉宾</h3>

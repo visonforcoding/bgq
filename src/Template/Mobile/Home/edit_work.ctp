@@ -33,13 +33,13 @@
             <li  class="no-right-ico">
                 <span>开始日期：</span>
                 <div>
-                    <input type="text" name="start_date" placeholder="<?php echo date('Y-m-d'); ?>" class="checktime" />
+                    <input onclick="showDialog(this);" onblur="hideDialog();" type="text" name="start_date" placeholder="<?php echo date('Y-m-d'); ?>" class="checktime" />
                 </div>
             </li>
             <li  class="no-right-ico">
                 <span>结束日期：</span>
                 <div>
-                    <input type="text" name="end_date" placeholder="<?php echo date('Y-m-d'); ?>" class="checktime" />
+                    <input onclick="showDialog(this);" onblur="hideDialog();" type="text" name="end_date" placeholder="<?php echo date('Y-m-d'); ?>" class="checktime" />
                 </div>
             </li>
             <li  class="no-b-border textareabox no-right-ico">
@@ -73,13 +73,13 @@
             <li  class="no-right-ico">
                 <span>开始日期：</span>
                 <div>
-                    <input type="text" name="start_date" value="<?=$career->start_date ?>"  />
+                    <input onclick="showDialog(this);" onblur="hideDialog();" type="text" name="start_date" value="<?=$career->start_date ?>"  />
                 </div>
             </li>
             <li  class="no-right-ico">
                 <span>结束日期：</span>
                 <div>
-                    <input type="text" name="end_date" value="<?=$career->end_date ?>" />
+                    <input onclick="showDialog(this);" onblur="hideDialog();" type="text" name="end_date" value="<?=$career->end_date ?>" />
                 </div>
             </li>
             <li  class="no-b-border textareabox no-right-ico">
@@ -94,6 +94,7 @@
         <span id="addwork">添加工作经历</span>
     </div>
 </div>
+<?= $this->element('checkdate'); ?>
 <script type="text/javascript">
     $('#addwork').on('touchstart', function () {
         $('.wraper .education-items').eq(0).clone(true).insertBefore('.add-subject').show();
