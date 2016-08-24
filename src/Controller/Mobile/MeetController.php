@@ -47,7 +47,7 @@ class MeetController extends AppController {
                 ->User
                 ->find()
                 ->contain(['Subjects'=>function($q){
-                    return $q->where(['is_del'=>0]);
+                    return $q->where(['is_del'=>0])->orderDesc('Subjects.create_time');
                 }])
                 ->where(['enabled'=>'1', 'level'=>'2'])
                 ->limit($this->limit)
