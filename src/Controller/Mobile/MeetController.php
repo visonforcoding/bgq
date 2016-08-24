@@ -46,7 +46,7 @@ class MeetController extends AppController {
         $users = $this
                 ->User
                 ->find()
-                ->group('id')
+                ->group('User.id')
                 ->matching('Subjects', function($q){
                     return $q->where(['Subjects.is_del'=>0])->orderDesc('Subjects.create_time');
                 })
