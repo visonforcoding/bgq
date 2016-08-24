@@ -36,7 +36,8 @@ class NewsController extends AppController {
                         ->select(['id', 'source', 'title', 'user_id', 'publish_time', 'thumb', 'comment_nums', 'praise_nums', 'summary', 'Users.id', 'Users.truename'])
                         ->where(['News.status'=>1])
                         ->page($page, $this->newslimit)
-                        ->order(['News.is_top'=>'desc', 'News.publish_time'=>'desc'])->toArray();
+                        ->order(['News.publish_time'=>'desc'])->toArray();
+//                        ->order(['News.is_top'=>'desc', 'News.publish_time'=>'desc'])->toArray();
         if ($news) {
             return $this->Util->ajaxReturn(['status' => true, 'data' => $news]);
         } else {
