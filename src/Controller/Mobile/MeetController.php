@@ -70,7 +70,7 @@ class MeetController extends AppController {
 //                ->group('user_id')
 //                ->having(['meetSubject.create_time'=>desc])
 //                ->toArray();
-//        debug($users);die;
+        debug($users);die;
         $this->set('meetjson', json_encode($users));
         $user_id = '';
         $is_savant = false;
