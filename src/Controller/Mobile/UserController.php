@@ -43,7 +43,7 @@ class UserController extends AppController {
         $user = $this->User->get($id,['contain'=>['Industries'=>function($q){
             return $q->hydrate(false)->select(['id','name']);
         }, 'Secret','Careers','Educations', 'Savant', 'Subjects'=>function($q){
-            return $q->where(['is_del'=>0]);
+            return $q->where(['is_del'=>0])->orderDesc('Subjects.create_time');
         }, 'RecoUsers'=>function($q){
             return $q->limit(8)->orderDesc('RecoUsers.create_time');
         },'RecoUsers.Users']]);
