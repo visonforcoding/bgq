@@ -50,7 +50,7 @@
         }
         $obj.addClass('noTap');
         if ($.util.isMobile(phone)) {
-            $.post('/user/sendLoginCode', {phone: phone}, function (res) {
+            $.post('/user/sendVCode', {phone: phone}, function (res) {
                 if (res.status === true) {
                     $.util.alert(res.msg);
                     var text = '<i id="timer">' + 30 + '</i>秒后重新发送';
