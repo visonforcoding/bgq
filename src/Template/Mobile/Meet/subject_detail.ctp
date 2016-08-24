@@ -23,8 +23,7 @@
                         </li>-->
             <li>
                 <h3 class="t-tittle">话题简介</h3>
-                <p><?= $subject->summary ?>
-                </p>
+                <p><pre><?= $subject->summary ?></pre></p>
             </li>
         </ul>
     </section>
@@ -39,6 +38,13 @@
     </div>
     <a href="javascript:void(0)" id="submit" class="nextstep" user_id="<?= $user_id ?>">立即预约</a>
 </div>
+<div class="reg-shadow" ontouchmove="return false;" id="shadow" hidden></div>
+<div class="totips" style="height: 3.6rem;" hidden id="checkBtn">
+    <h3 id="msg">请先去完善个人资料</h3>
+    <span></span>
+    <a href="javascript:void(0)" class="tipsbtn" id="no">取消</a><a href="/home/edit_userinfo" class="tipsbtn" id="yes">去完善</a>
+</div>
+
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
@@ -55,6 +61,13 @@
 //            location.href = '/meet/book/<?= $subject->id ?>';
 //        }
 //    });
+
+    $('#no, #yes').on('tap', function () {
+        setTimeout(function(){
+            $('#shadow').hide();
+            $('#checkBtn').hide();
+        }, 301);
+    });
 
     $('#submit').on('tap', function () {
         if ($(this).attr('user_id') == '') {
@@ -76,9 +89,17 @@
                 url: '/meet/book/<?= $subject->id ?>',
                 data: {id: id, summary: summary},
                 func: function (res) {
-                    $.util.alert(res.msg);
                     if (res.status) {
+                        $.util.alert(res.msg);
                         document.location.href = '/meet/book-success/<?= $subject->user->id ?>';
+                    } else {
+                        if (res.msg.indexOf('请先去完善个人资料') != -1) {
+                            $('#msg').html(res.msg);
+                            $('#shadow').show();
+                            $('#checkBtn').show();
+                        } else {
+                            $.util.alert(res.msg);
+                        }
                     }
                 }
             });

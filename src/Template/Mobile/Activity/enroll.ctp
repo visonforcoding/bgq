@@ -18,7 +18,7 @@
             <div class="line"><span class="mistips">活动费用不可退哦</span></div>
         </form>
     </div>
-    <div class='reg-shadow' hidden></div>
+    <div class='reg-shadow' hidden id="shadow"></div>
     <div class="totips suc" style="display:none;">
         <h3>活动报名成功</h3>
         <span></span>
@@ -29,12 +29,24 @@
         <span>秘书会在三个工作日内审核</span>
         <a href="" class="nextstep checkComfirm">确认</a>
     </div>
+    <div class="totips" style="height: 3.6rem;" hidden id="checkBtn">
+        <h3 id="msg">请先去完善个人资料</h3>
+        <span></span>
+        <a href="javascript:void(0)" class="tipsbtn" id="no">取消</a><a href="/home/edit_userinfo" class="tipsbtn" id="yes">去完善</a>
+    </div>
 </body>
 <?php $this->start('script'); ?>
 <script>
     window.must_check = <?= $activity->must_check; ?>;
 </script>
 <script>
+    $('#no, #yes').on('tap', function () {
+        setTimeout(function(){
+            $('#shadow').hide();
+            $('#checkBtn').hide();
+        }, 301);
+    });
+    
     $('#submit').on('tap', function () {
         $form = $('form');
         $.ajax({
@@ -55,11 +67,16 @@
                                 $('.suc').show('slow');
                                 $('.comfirm').attr('href', msg.url);
                             }
-                            $('.reg-shadow').show('slow');
-                            
+                            $('#shadow').show('slow');
                         }
                     } else {
-                        $.util.alert(msg.msg);
+                        if (msg.msg.indexOf('请先去完善个人资料') != -1) {
+                            $('#msg').html(msg.msg);
+                            $('#shadow').show();
+                            $('#checkBtn').show();
+                        } else {
+                            $.util.alert(msg.msg);
+                        }
                     }
                 }
             }
@@ -67,7 +84,7 @@
         return false;
     });
     $('.closed').on('click', function(){
-        $('.reg-shadow').hide('slow');
+        $('#shadow').hide('slow');
         $('.totips').hide('slow');
     });
 </script>

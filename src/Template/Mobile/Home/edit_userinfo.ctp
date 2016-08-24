@@ -235,13 +235,13 @@
 <!--<script src="/mobile/js/util.js" type="text/javascript" charset="utf-8"></script>-->
 
 <script>
-    if($.util.isAPP){
-        if(document.URL.indexOf('#home') != -1){
-            LEMON.sys.back('/user/home-page/<?= $user->id ?>');
-        } else {
-            LEMON.sys.back('/home/index');
-        }
-    }
+//    if($.util.isAPP){
+//        if(document.URL.indexOf('#home') != -1){
+//            LEMON.sys.back('/user/home-page/<?= $user->id ?>');
+//        } else {
+//            LEMON.sys.back('/home/index');
+//        }
+//    }
     
     
     $('#pData input').on('blur', function(){
