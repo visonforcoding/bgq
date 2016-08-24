@@ -7,7 +7,7 @@
         </ul>
     </div>
 </div>
-<?php if($book->is_done == 1): ?>
+<?php if($book->is_done != 1): ?>
 <div style="height:2.8rem"></div>
 <div class="todialogue">
     <div class="clearfix b-text">
