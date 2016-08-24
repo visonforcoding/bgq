@@ -47,7 +47,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '约见次数', '推荐次数', '项目经验', '资源优势', '简介', '审核情况', '操作'],
+                                ['用户', '约见次数', '推荐次数', '项目经验', '资源优势', '简介', '审核情况','置顶', '操作'],
                         colModel: [
                             {name: 'truename', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     return '<a title="查看" onClick="showSavant(' + " ' " + rowObject.id + " ' " + ');" class="grid-btn ">' + cellvalue + '</a>';
@@ -59,6 +59,13 @@
                             {name: 'savant.zyys', editable: true, align: 'left'},
                             {name: 'savant.summary', editable: true, align: 'center'},
                             {name: 'savant_status', editable: true, align: 'center', formatter: statusFormatter},
+                            {name: 'is_top', editable: true, align: 'center', formatter: function(cell,opt,row){
+                                    if(cell==1){
+                                        return '<span class="notice">已置顶</span>'
+                                    }else{
+                                        return '<span>未置顶</span>';
+                                    }
+                            }},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: 10,
@@ -101,6 +108,7 @@
                     response += '<a title="查看话题" href="/admin/savant/show-subject/' + rowObject.id + '" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-chat-line"></i> </a>';
                     response += '<a title="编辑" href="/admin/savant/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     response += '<a title="申请记录" onclick="showApply(' + rowObject.id + ')" class="grid-btn "><i class="icon icon-list-alt"></i> </a>';
+                    response += '<a title="专家置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
                     if (rowObject.savant_status == 2) {
                         response += '<a title="审核通过" href="javascript:void(0)" class="grid-btn release" onclick="pass(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
                     }
@@ -119,6 +127,25 @@
                             data: {id: id},
                             dataType: 'json',
                             url: '/admin/savant/pass/' + id,
+                            success: function (res) {
+                                layer.msg(res.msg);
+                                if (res.status) {
+                                    $('#list').trigger('reloadGrid');
+                                }
+                            }
+                        });
+                    }, function () {
+                    });
+                }
+                function istop(id) {
+                    layer.confirm('确定通过审核？', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                        $.ajax({
+                            type: 'post',
+                            data: {id: id},
+                            dataType: 'json',
+                            url: '/admin/savant/top/' + id,
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {

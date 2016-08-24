@@ -139,7 +139,7 @@ class SavantController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $query = $this->User->find()->select(['User.id', 'User.meet_nums', 'User.truename', 'Savant.reco_nums', 'User.savant_status', 'Savant.xmjy', 'Savant.zyys', 'Savant.summary'])
+        $query = $this->User->find()->select(['User.id','User.is_top', 'User.meet_nums', 'User.truename', 'Savant.reco_nums', 'User.savant_status', 'Savant.xmjy', 'Savant.zyys', 'Savant.summary'])
                 ->contain(['Savant']);
         if (!empty($where)) {
             $query->where($where);
@@ -231,6 +231,21 @@ class SavantController extends AppController {
             return $this->Util->ajaxReturn(true, '审核通过');
         } else {
             return $this->Util->ajaReturn(false, '系统错误');
+        }
+    }
+    
+    /**
+     * 置顶
+     * @param type $id
+     */
+    public function top($id){
+        $user = $this->User->get($id);
+        $user->is_top = 1;
+        $res = $this->User->save($user); 
+        if ($res) {
+            return $this->Util->ajaxReturn(true, '置顶成功');
+        } else {
+            return $this->Util->ajaReturn(false, '置顶失败');
         }
     }
 

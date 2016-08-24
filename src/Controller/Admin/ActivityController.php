@@ -185,7 +185,7 @@ class ActivityController extends AppController {
         $nums = $query->count();
 //        $query->contain(['Industries', 'Regions']);
         if (!empty($sort) && !empty($order)) {
-            $query->order(['is_top' => 'desc', $sort => $order]);
+            $query->order(['Activity.is_top' => 'desc', $sort => $order]);
         }
         $query->limit(intval($rows))
                 ->page(intval($page));

@@ -678,6 +678,36 @@ ALTER TABLE `flow`
 	CHANGE COLUMN `buy_id` `buyer_id` INT(11) NOT NULL DEFAULT '0' COMMENT '支付方' AFTER `user_id`;
 ALTER TABLE `flow`
 	ADD COLUMN `paytype` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '支付方式' AFTER `after_amount`;
+ALTER TABLE `flow`
+	CHANGE COLUMN `amount` `amount` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '支付金额' AFTER `income`,
+	ADD COLUMN `price` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '订单金额' AFTER `amount`;		
+
+ALTER TABLE `user`
+	ADD COLUMN `is_top` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '是否置顶:1是0否' AFTER `is_del`;
+
+#活动需求表
+CREATE TABLE `activityneed` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL DEFAULT '0',
+	`truename` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '姓名',
+	`company` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '公司',
+	`position` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '职位',
+	`contact` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '联系方式',
+	`title` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '活动',
+	`body` TEXT NOT NULL COMMENT '内容',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	`update_time` DATETIME NOT NULL COMMENT '修改时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='活动需求'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=3
+;
+
+ALTER TABLE `book_chat`
+	CHANGE COLUMN `content` `content` VARCHAR(550) NOT NULL COMMENT '内容' AFTER `book_id`;
+
 
 #话题更新时间
 ALTER TABLE `binggq`.`user`

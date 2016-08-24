@@ -6,7 +6,7 @@
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
-            <a href="/admin/news/add" class="btn btn-small btn-warning">
+            <a  href="/admin/news/add" class="btn btn-small btn-warning">
                 <i class="icon icon-plus-sign"></i>添加
             </a>
             <div class="form-group">
@@ -46,7 +46,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['作者', '标题', '行业标签','资讯标签', '阅读数', '点赞数', '评论数', '状态', '创建时间', '更新时间', '操作'],
+                                ['作者', '标题', '行业标签','资讯标签', '阅读数', '点赞数', '评论数', '状态','置顶' ,'创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     if (!cellvalue) {
@@ -56,7 +56,7 @@
                                     }
                                 }},
                             {name: 'title', editable: true, align: 'center',formatter: function (cellvalue, options, rowObject) {
-                                    return '<a title="查看" onClick="showNews(' +" ' "+rowObject.id+" ' " + ');" class="grid-btn ">'+cellvalue+'</a>';
+                                    return '<a  data-toggle="tooltip" title="这是提示消息内容" onClick="showNews(' +" ' "+rowObject.id+" ' " + ');" class="grid-btn ">'+cellvalue+'</a>';
                             }},
                             {name: 'industries', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     var industries_arr = [];
@@ -87,6 +87,13 @@
                                             return '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-remove-circle"></i><i style="color:red"> 下线</i></button>';
                                     }
                                 }},
+                            {name: 'is_top', editable: true, align: 'center', formatter: function(cell,opt,row){
+                                    if(cell==1){
+                                        return '<span class="notice">已置顶</span>'
+                                    }else{
+                                        return '<span>未置顶</span>';
+                                    }
+                            }},    
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
@@ -125,7 +132,11 @@
 //                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="复制" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
                     response += '<a title="编辑" href="/admin/news/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
-                    response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="topit(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
+                    if(rowObject.is_top==0){
+                        response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="topit(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
+                    }else{
+                        response += '<a title="取消置顶" href="javascript:void(0)" class="grid-btn top" onclick="topit(' + rowObject.id + ')"><i class="icon icon-long-arrow-down"></i> </a>';
+                    }
 //                    response += '<a title="评论详情" onClick="viewComs(' + rowObject.id + ');" class="grid-btn "><i class="icon icon-comment"></i> </a>';
 //                    response += '<a title="点赞日志" href="/admin/likeLogs/index/' + rowObject.id + '?type=1" class="grid-btn "><i class="icon icon-heart"></i> </a>';
                     response += '<a title="收藏日志" href="/admin/news/view-collect/' + rowObject.id + '?type=1" class="grid-btn "><i class="icon icon-star"></i> </a>';
@@ -165,14 +176,14 @@
                     });
                 }
                 function topit(id) {
-                    layer.confirm('确定置顶？', {
+                    layer.confirm('确定进行此操作？', {
                         btn: ['确认', '取消'] //按钮
                     }, function () {
                         $.ajax({
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/admin/news/delete',
+                            url: '/admin/news/top/'+id,
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
