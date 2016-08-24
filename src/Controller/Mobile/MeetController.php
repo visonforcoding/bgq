@@ -46,31 +46,13 @@ class MeetController extends AppController {
         $users = $this
                 ->User
                 ->find()
-                ->group('User.id')
-                ->matching('Subjects', function($q){
-                    return $q->where(['Subjects.is_del'=>0])->orderDesc('Subjects.create_time');
-                })
+                ->contain(['Subjects'=>function($exp){
+                    return $exp->where(['is_del'=>0])->orderDesc('create_time');
+                }])
                 ->where(['enabled'=>'1', 'level'=>'2'])
-                ->orderDesc('Subjects.create_time')
+                ->orderDesc('subject_update_time')
                 ->limit($this->limit)
                 ->toArray();
-//        $SubjectTable = \Cake\ORM\TableRegistry::get('meetSubject');
-//        $users = $SubjectTable
-//                ->find()
-////                ->distinct('user_id')
-//                ->contain(['User'=>function($q){
-//                    return $q
-//                            ->where(['enabled'=>'1', 'level'=>'2'])
-//                            ->contain(['Subjects'=>function($w){
-//                                return $w->where(['is_del'=>0])->orderDesc('Subjects.create_time');
-//                            }]);
-//                }])
-//                ->where(['meetSubject.is_del'=>0])
-//                ->orderDesc('meetSubject.create_time')
-//                ->group('user_id')
-//                ->having(['meetSubject.create_time'=>desc])
-//                ->toArray();
-        debug($users);die;
         $this->set('meetjson', json_encode($users));
         $user_id = '';
         $is_savant = false;
@@ -106,12 +88,9 @@ class MeetController extends AppController {
                 ->where(['enabled'=>'1', 'level'=>'2'])
 //                ->limit($this->limit)
                 ->toArray();
-        if($users)
-        {
+        if($users) {
             return $this->Util->ajaxReturn(['status'=>true, 'data'=>$users]);
-        }
-        else
-        {
+        } else {
             return $this->Util->ajaxReturn(false, '暂无结果');
         }
     }
@@ -216,6 +195,7 @@ class MeetController extends AppController {
      */
     public function subject($id = null) {
         $SubjectTable = \Cake\ORM\TableRegistry::get('meet_subject');
+        $UserTable = \Cake\ORM\TableRegistry::get('user');
         if ($this->request->is('post')) {
             $this->handCheckLogin();
             if(empty($id)){
@@ -226,9 +206,14 @@ class MeetController extends AppController {
                 $subject = $SubjectTable->get($id);
 //                $subject->type = $this->request->data('type');
                 $subject = $SubjectTable->patchEntity($subject, $this->request->data());
-                
             }
-            if ($SubjectTable->save($subject)) {
+            $now = \Cake\I18n\Time::now();
+            $user = $UserTable->get($this->user->id);
+            $user->subject_update_time = $now;
+            $res = $SubjectTable->connection()->transactional(function()use($SubjectTable, $subject, $user, $UserTable){
+                return $SubjectTable->save($subject) && $UserTable->save($user);
+            });
+            if ($res) {
                 return $this->Util->ajaxReturn(true, '保存成功');
             } else {
                 return $this->Util->ajaxReturn(false, errorMsg($subject, '保存失败'));
