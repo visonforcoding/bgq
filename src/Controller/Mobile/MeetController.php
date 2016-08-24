@@ -48,7 +48,7 @@ class MeetController extends AppController {
                 ->find()
                 ->group('id')
                 ->matching('Subjects', function($q){
-                    return $q->where(['is_del'=>0])->orderDesc('Subjects.create_time');
+                    return $q->where(['Subjects.is_del'=>0])->orderDesc('Subjects.create_time');
                 })
                 ->where(['enabled'=>'1', 'level'=>'2'])
                 ->orderDesc('Subjects.create_time')
