@@ -203,7 +203,7 @@
         var flowChart = document.getElementById('flow-chart').getContext('2d');
         $.getJSON('/admin/index/getFlowByDayWithMonth', function (res) {
             new Chart(flowChart, {
-                type: 'bar',
+                type: 'line',
                 data: res.data
             });
         }, 'json');
