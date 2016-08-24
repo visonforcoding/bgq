@@ -56,11 +56,11 @@
                 </span>
                 <!--喜欢按钮-->
                 <span >
-                    <i class="iconfont like <?php if ($isLike): ?> changecolor scale<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like">&#xe61b;</i><em class='like_num'><?= $activity->praise_nums ? $activity->praise_nums : '0' ?></em>
+                    <i class="iconfont like color-items <?php if ($isLike): ?>hover<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="like"><?php if ($isLike): ?>&#xe61c;<?php else: ?>&#xe61b;<?php endif; ?></i><em class='like_num'><?= $activity->praise_nums ? $activity->praise_nums : '0' ?></em>
                 </span>
                 <!--收藏按钮-->
                 <span >
-                    <i class="iconfont <?php if ($isCollect): ?> changecolor scale<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="collect">&#xe615;</i>
+                    <i class="iconfont <?php if ($isCollect): ?> color-items<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="collect">&#xe615;</i>
                 </span>
             </div>
         </section>
@@ -421,25 +421,24 @@
             if (!em || !em.id)
                 return;
             switch (em.id) {
-                
                     // 喜欢
                 case 'like':
-                    $('.like').toggleClass('changecolor');
-                    $('.like').toggleClass('scale');
                     $.util.ajax({
                         url: '/activity/artLike/' + $(em).attr('artid'),
                         func: function (msg) {
                             if (typeof msg === 'object') {
                                 $.util.alert(msg.msg);
                                 if (msg.status) {
-                                    if($('.like').hasClass('changecolor')){
+                                    $('.like').toggleClass('hover');
+                                    if($('.like').hasClass('hover')){
+                                        $('.like').html('&#xe61c;');
                                         $('.like_num').html(parseInt($('.like_num').html())+1);
                                     } else {
+                                        $('.like').html('&#xe61b;');
                                         $('.like_num').html(parseInt($('.like_num').html())-1);
                                     }
                                 } else {
-                                    $('.like').toggleClass('scale');
-                                    $('.like').toggleClass('changecolor');
+                                    
                                 }
                             }
                         }
@@ -455,8 +454,8 @@
                                 if (typeof msg === 'object') {
                                     $.util.alert(msg.msg);
                                     if (msg.status === true) {
-                                        $(em).toggleClass('changecolor');
-                                        $(em).toggleClass('scale');
+                                        $(em).toggleClass('color-items');
+//                                        $(em).toggleClass('scale');
                                     }
                                 }
                             }

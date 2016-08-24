@@ -57,9 +57,10 @@
                     <i>阅读</i>
                     <?= $this->Number->format($news->read_nums) ?>
                 </span>
+                <!--喜欢-->
                 <span  data-id="<?= $news->id ?>" <?php if (isset($news->praises) && !empty($news->praises)): ?> data-disable="1" class="liked"<?php endif; ?>
                        id="news-praise" >
-                    <i class="iconfont like <?php if (isset($news->praises) && !empty($news->praises)): ?>changecolor scale<?php endif; ?>" >&#xe61b;</i><em><?= $this->Number->format($news->praise_nums) ?></em>
+                    <i class="iconfont like color-items <?php if (isset($news->praises) && !empty($news->praises)): ?>hover<?php endif; ?>" ><?php if (isset($news->praises) && !empty($news->praises)): ?>&#xe61c;<?php else: ?>&#xe61b;<?php endif; ?></i><em><?= $this->Number->format($news->praise_nums) ?></em>
                 </span>
             </div>
         </section>
@@ -291,8 +292,8 @@
                 //对文章的赞
                 var obj = $(em);
                 checkLogin(function () {
-                    obj.find('i.like').toggleClass('changecolor');
-                    obj.find('i.like').toggleClass('scale');
+//                    obj.find('i.like').toggleClass('changecolor');
+//                    obj.find('i.like').toggleClass('scale');
                     $.util.ajax({
                         url: '/news/news-praise',
                         data: {id: window.__id},
@@ -300,14 +301,17 @@
                             $.util.alert(res.msg);
                             console.log(res);
                             if (res.status) {
-                                if (obj.find('i.like').hasClass('changecolor')) {
+                                obj.find('i.like').toggleClass('hover');
+                                if (obj.find('i.like').hasClass('hover')) {
+                                    obj.find('i.like').html('&#xe61c;');
                                     obj.find('em').html(parseInt(obj.find('em').text()) + 1);
                                 } else {
+                                    obj.find('i.like').html('&#xe61b;');
                                     obj.find('em').html(parseInt(obj.find('em').text()) - 1);
                                 }
                             } else {
-                                obj.find('i.like').toggleClass('changecolor');
-                                obj.find('i.like').toggleClass('scale');
+//                                obj.find('i.like').toggleClass('changecolor');
+//                                obj.find('i.like').toggleClass('scale');
                             }
                         }
                     });
