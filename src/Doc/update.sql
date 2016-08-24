@@ -677,4 +677,8 @@ ALTER TABLE `flow`
 ALTER TABLE `flow`
 	CHANGE COLUMN `buy_id` `buyer_id` INT(11) NOT NULL DEFAULT '0' COMMENT '支付方' AFTER `user_id`;
 ALTER TABLE `flow`
-	ADD COLUMN `paytype` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '支付方式' AFTER `after_amount`;		
+	ADD COLUMN `paytype` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '支付方式' AFTER `after_amount`;
+
+#话题更新时间
+ALTER TABLE `binggq`.`user`
+  ADD COLUMN `subject_update_time` datetime DEFAULT '' COMMENT '话题更新时间' COMMENT '话题更新时间' AFTER `update_time`;
