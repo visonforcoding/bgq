@@ -482,7 +482,7 @@ class BusinessComponent extends Component {
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
         $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
         $flow = $FlowTable->newEntity([
-            'user_id' => $order->seller_id,
+            'user_id' => -1,
             'buyer_id'=>$order->user->id,
             'type' => 2,
             'relate_id'=>$order->id,   //关联的订单id

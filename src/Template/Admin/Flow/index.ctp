@@ -41,7 +41,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户','公司','职位',  '交易类型', '是否收入', '订单金额','交易金额', '交易前金额', '交易后金额','支付方式',  '备注', '创建时间',  '操作'],
+                                ['支付方','公司','职位',  '交易类型', '是否收入', '订单金额','交易金额', '交易前金额', '交易后金额','支付方式',  '备注', '创建时间',  '操作'],
                         colModel: [
                             {name: 'buyer.truename', editable: true, align: 'center'},
                             {name: 'buyer.company', editable: true, align: 'center'},
