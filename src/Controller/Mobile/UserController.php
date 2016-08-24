@@ -55,16 +55,20 @@ class UserController extends AppController {
         $isFans = false;
         $isGive = false;
         $isReco = '';
+        $follows = '';
+        $fans = '';
         if($this->user){
             $user_id = $this->user->id;
             $FansTable = \Cake\ORM\TableRegistry::get('UserFans');
-            $isFans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$id'")->count();  //检测是否关注
-            $isGive = $this->User->CardBoxes->find()->where(['ownerid'=>$id, 'uid'=>$this->user->id])->first();  //检测是否递过名片
+            $follows = $FansTable->find()->where(['user_id'=>$this->user->id])->count('id');
+            $fans = $FansTable->find()->where(['following_id'=>$this->user->id])->count('id');
             if(!$self){
                 $isReco = $this->User->get($id, ['contain' => ['RecoUsers'=>function($q)use($user_id){
                     return $q->where(['user_id'=>$user_id]);
                 }]]);
                 $isReco = $isReco->reco_users;
+                $isFans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$id'")->count();  //检测是否关注
+                $isGive = $this->User->CardBoxes->find()->where(['ownerid'=>$id, 'uid'=>$this->user->id])->first();  //检测是否递过名片
             }
         }
         $educationType = \Cake\Core\Configure::read('educationType');
@@ -75,6 +79,8 @@ class UserController extends AppController {
             'isGive' => $isGive,
             'educationType' => $educationType,
             'isReco' => $isReco,
+            'follows' => $follows,
+            'fans' => $fans
         ]);
         $this->set(compact('user','industry_arr'));
     }
