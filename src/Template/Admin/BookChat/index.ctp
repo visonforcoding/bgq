@@ -40,7 +40,7 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/bookchat/getDataList",
+                        url: "/admin/book-chat/getDataList",
                         datatype: "json",
                         mtype: "POST",
                         colNames:
