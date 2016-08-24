@@ -33,6 +33,12 @@ class FlowTable extends Table {
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+        
+        $this->belongsTo('Buyer', [
+            'className'=>'User',
+            'foreignKey' => 'buyer_id',
+            'joinType' => 'INNER'
+        ]);
 
         $this->addBehavior('Timestamp', [
             'events' => [

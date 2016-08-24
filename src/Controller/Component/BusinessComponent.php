@@ -483,15 +483,18 @@ class BusinessComponent extends Component {
         $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
         $flow = $FlowTable->newEntity([
             'user_id' => $order->seller_id,
+            'buyer_id'=>$order->user->id,
             'type' => 2,
             'relate_id'=>$order->id,   //关联的订单id
             'type_msg' => '报名收入',
             'income' => 1,
-            'amount' => $order->price,
+            'amount' => $order->fee,
+            'price'=>$order->price,
             'pre_amount' => $pre_amount,
+            'paytype'=>$order->paytype,
             'after_amount' => $order->seller->money,
             'status' => 1,
-            'remark' => '活动获取收入-' . $order->user->truename
+            'remark' => '报名活动《'.$Activityapply->activity->title.'》获取收入'
         ]);
         $transRes = $ActivityapplyTable->connection()->transactional(function()use($order, $ActivityapplyTable,
                 $Activityapply, $OrderTable, $FlowTable, $flow) {

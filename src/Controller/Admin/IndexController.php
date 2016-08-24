@@ -116,7 +116,7 @@ class IndexController extends AppController {
                     group by date(f.create_time)')->fetchAll('assoc');
         $this->loadComponent('Chart');
         $month = date('m');
-        $label = $month.'平台资金收入';
+        $label = $month.'月平台资金收入';
         echo $this->Chart->setLineChartByDayWithMonth($result,$label,['backgroundColor'=>11,'borderCapStyle'=>'round']);
         exit();
     }

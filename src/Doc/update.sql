@@ -667,3 +667,14 @@ ALTER TABLE `activity`
 	ADD COLUMN `org_val` VARCHAR(250) NOT NULL DEFAULT '' COMMENT '协办名称' AFTER `org_key`,
 	CHANGE COLUMN `body` `body` TEXT NULL COMMENT '流程介绍' AFTER `cover`,
 	ADD COLUMN `contact` TEXT NULL COMMENT '联系方式' AFTER `body`;	
+
+
+
+#8月24日
+ALTER TABLE `flow`
+	CHANGE COLUMN `user_id` `user_id` INT(11) NOT NULL DEFAULT '0' COMMENT '收款方' AFTER `id`,
+	ADD COLUMN `buy_id` INT(11) NOT NULL DEFAULT '0' COMMENT '支付方' AFTER `user_id`;	
+ALTER TABLE `flow`
+	CHANGE COLUMN `buy_id` `buyer_id` INT(11) NOT NULL DEFAULT '0' COMMENT '支付方' AFTER `user_id`;
+ALTER TABLE `flow`
+	ADD COLUMN `paytype` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '支付方式' AFTER `after_amount`;		
