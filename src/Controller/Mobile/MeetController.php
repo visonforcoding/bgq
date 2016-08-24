@@ -50,6 +50,7 @@ class MeetController extends AppController {
                     return $q->where(['is_del'=>0])->orderDesc('Subjects.create_time');
                 }])
                 ->where(['enabled'=>'1', 'level'=>'2'])
+                ->orderDesc('Subjects.create_time')
                 ->limit($this->limit)
                 ->toArray();
 //        debug($users);die;
