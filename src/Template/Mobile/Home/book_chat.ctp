@@ -7,16 +7,17 @@
         </ul>
     </div>
 </div>
+<?php if($book->is_done == 1): ?>
 <div style="height:2.8rem"></div>
 <div class="todialogue">
-    <!--<div class='line'><span class="mistips bgff">我们会在三个工作日内处理您的申请</span></div>-->
     <div class="clearfix b-text">
         <div class="r-input">
-            <textarea id="content" <?php if($book->is_done == 1): ?>readonly<?php endif; ?>></textarea>
+            <textarea id="content" ></textarea>
         </div>
         <span class="r-submit" >发送</span>
     </div>
 </div>
+<?php endif; ?>
 <script type="text/html" id="tpl">
     {#msg#}
 </script>
