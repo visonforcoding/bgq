@@ -46,12 +46,30 @@ class MeetController extends AppController {
         $users = $this
                 ->User
                 ->find()
-                ->contain(['Subjects'=>function($q){
+                ->group('id')
+                ->matching('Subjects', function($q){
                     return $q->where(['is_del'=>0])->orderDesc('Subjects.create_time');
-                }])
+                })
                 ->where(['enabled'=>'1', 'level'=>'2'])
+                ->orderDesc('Subjects.create_time')
                 ->limit($this->limit)
                 ->toArray();
+//        $SubjectTable = \Cake\ORM\TableRegistry::get('meetSubject');
+//        $users = $SubjectTable
+//                ->find()
+////                ->distinct('user_id')
+//                ->contain(['User'=>function($q){
+//                    return $q
+//                            ->where(['enabled'=>'1', 'level'=>'2'])
+//                            ->contain(['Subjects'=>function($w){
+//                                return $w->where(['is_del'=>0])->orderDesc('Subjects.create_time');
+//                            }]);
+//                }])
+//                ->where(['meetSubject.is_del'=>0])
+//                ->orderDesc('meetSubject.create_time')
+//                ->group('user_id')
+//                ->having(['meetSubject.create_time'=>desc])
+//                ->toArray();
 //        debug($users);die;
         $this->set('meetjson', json_encode($users));
         $user_id = '';
@@ -683,17 +701,14 @@ class MeetController extends AppController {
                 ->User
                 ->find()
                 ->contain(['Subjects'=>function($q){
-                    return $q->where(['is_del'=>0]);
+                    return $q->where(['is_del'=>0])->orderDesc('Subjects.create_time');
                 }])
                 ->where(['enabled'=>'1', 'level'=>'2'])
                 ->page($page, $this->limit)
                 ->toArray();
-        if($biggies)
-        {
+        if($biggies) {
             return $this->Util->ajaxReturn(['status'=>true, 'data'=>$biggies]);
-        }
-        else
-        {
+        } else {
             return $this->Util->ajaxReturn(false);
         }
     }
