@@ -20,9 +20,12 @@
                 <span><?= $user->position ?> </span>
             </div>
             <div class="m_right_btn fr">
-                <?php if (!$self): ?>
+                <?php if ($self): ?>
+                    <span class="r-focus" >关注 <?= $follows ?></span>
+                    <span class="r-focus" >粉丝 <?= $fans ?></span>
+                <?php else: ?>
                     <span class="r-focus" id="follow_btn"><?php if ($isFans): ?>取消关注<?php else: ?>关注<?php endif; ?></span>
-                    <span class="g-card <?php if ($isGive): ?>cardgray<?php endif; ?>" id="giveCard"><?php if ($isGive): ?>已递名片<?php else: ?>递名片<?php endif; ?></span>    
+                    <span class="g-card <?php if ($isGive): ?>cardgray<?php endif; ?>" id="giveCard"><?php if ($isGive): ?>已递名片<?php else: ?>递名片<?php endif; ?></span>
                 <?php endif; ?>
             </div>
         </div>
