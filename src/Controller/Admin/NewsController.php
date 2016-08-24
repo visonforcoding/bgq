@@ -229,6 +229,22 @@ class NewsController extends AppController {
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
 
+    
+    /**
+     * 置顶或取消置顶
+     * @param type $id
+     */
+    public function top($id=null){
+        $news = $this->News->get($id);
+        $news->is_top = $news->is_top==1?'0':'1';
+        if($this->News->save($news)){
+            $this->Util->ajaxReturn(true,'操作成功');
+        }else{
+            $this->Util->ajaxReturn(false,'操作失败');
+        }
+    }
+
+
     /**
      * 资讯评论
      * @param type $id
@@ -385,8 +401,5 @@ class NewsController extends AppController {
         }
     }
     
-    public function top($id=null){
-        
-    }
 }
         
