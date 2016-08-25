@@ -88,12 +88,14 @@
                                     setTimeout(function(){
                                         $('.reg-shadow').show();
                                         $('.totips').show();
+                                        $('#submit').removeClass('noTap');
                                     }, 400);
                                     LEMON.sys.hideKeyboard();
                                 } else {
                                     $.util.alert(msg.msg);
+                                    $('#submit').removeClass('noTap');
                                 }
-//                                $('#submit').removeClass('noTap');
+                                
                             }
                         }
                     });
