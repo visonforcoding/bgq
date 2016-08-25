@@ -300,7 +300,20 @@ class MeetController extends AppController {
         $SubjectTable = \Cake\ORM\TableRegistry::get('MeetSubject');
         $userTable = \Cake\ORM\TableRegistry::get('user');
         $user = $userTable->get($user_id);
-        $subjects = $SubjectTable->find()->where(['user_id'=>$user_id])->orderDesc('create_time')->toArray();
+        $subjects = $SubjectTable->find();
+        if($this->user){
+            $uid = $this->user->id;
+            $subjects = $subjects->contain(['SubjectBooks'=>function($q)use($uid){
+                return $q->where(['SubjectBooks.user_id'=>$uid]);
+            }]);
+        } else {
+            $subjects = $subjects->contain('SubjectBooks');
+        }
+        $subjects = $subjects
+                ->where(['MeetSubject.user_id'=>$user_id])
+                ->orderDesc('MeetSubject.create_time')
+                ->toArray();
+//        debug($subjects);die;
         $this->set([
             'pageTitle'=>'我的话题',
             'subjects'=>$subjects,
@@ -689,6 +702,7 @@ class MeetController extends AppController {
                     return $q->where(['is_del'=>0])->orderDesc('Subjects.create_time');
                 }])
                 ->where(['enabled'=>'1', 'level'=>'2'])
+                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
                 ->page($page, $this->limit)
                 ->toArray();
         if($biggies) {
