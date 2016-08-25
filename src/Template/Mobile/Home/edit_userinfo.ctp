@@ -174,7 +174,7 @@
             <a href="/home/edit-card">
                 <span >我的名片：</span>
                 <div class="upload-user-img">
-                    <span class="mcard"><img src="<?= $user->card_path ?>"/></span>
+                    <span class="mcard"><img src="<?= $user->card_path ?>" id="card" /></span>
                 </div>
             </a>
         </li>
@@ -289,6 +289,7 @@
                     $('#grbq').html(res.data.grbq);
                     $('#industry').html(res.data.industry);
                     $('#agency').html(res.data.agency);
+                    $('#card').attr('src', res.data.card_path);
                 } else {
                     $.util.alert(res.msg);
                 }

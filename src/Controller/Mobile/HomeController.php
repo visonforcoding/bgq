@@ -1565,6 +1565,7 @@ class HomeController extends AppController {
             $data['educations'] = $user->educations ? '已填写' : '未完善';
             $data['careers'] = $user->careers ? '已填写' : '未完善';
             $data['grbq'] = $user->grbq ? implode('、', unserialize($user->grbq)) : '未完善';
+            $data['card_path'] = $user->card_path;
             return $this->Util->ajaxReturn(['status'=>true, 'data'=>$data]);
         } else {
             return $this->Util->ajaxReturn(false, '系统错误');
