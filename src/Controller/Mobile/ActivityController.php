@@ -35,7 +35,7 @@ class ActivityController extends AppController {
                     ->contain(['Users'])
                     ->where(['activity_id' => $id, 'is_pass'=>1])
                     ->order([
-                        'is_top' => 'DESC',
+                        'Activityapply.is_top' => 'DESC',
                         'Activityapply.create_time' => 'DESC'
                     ])
                     ->hydrate(false)
