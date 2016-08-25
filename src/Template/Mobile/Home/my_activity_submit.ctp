@@ -40,7 +40,7 @@
                     <h3>{#title#}</h3>
                     <!--<div style="color:red;line-height: .36rem;">{#check#}</div>-->
                     <span class="line2">{#body#}</span>
-                    <span>{#time#}</span>
+                    <span>{#create_time#}</span>
                 </div>
             </a>
         </div>
