@@ -814,7 +814,7 @@ margin-top:.1rem;}
 .edit-education-bottom .education-title{line-height: 0.79rem;font-size:0.28rem;color:#d3265b; padding:0 0.3rem;}}
 .edit-education-bottom h3{width:100%;}
 .edit-education-bottom h3 a{color:#3e82f7;padding-right: .3rem;}
-.edit-education-bottom .deletbtn{padding-right: 0;font-size: .3rem;color: darkgray;vertical-align: top;margin-left:-.2rem;}
+.edit-education-bottom .deletbtn{padding-right: 0;font-size: .3rem;color: darkgray;vertical-align: top;/*margin-left:-.2rem;*/}
 .edit-education-bottom li.textareabox{flex-direction: column;}
 /*.edit-education-bottom li:last-of-type span,.edit-education-bottom li:last-of-type .edit-textarea{width:100%; margin-bottom:0.2rem;margin-top:0.1rem;}*/
 .bbottom .orgtitle .orgname{background: none;}
