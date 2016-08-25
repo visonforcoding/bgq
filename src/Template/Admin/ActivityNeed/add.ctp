@@ -8,7 +8,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">用户</label>
         <div class="col-md-8">
-            <?=$this->cell('User');?>
+            <?= $this->cell('User'); ?>
             <span class="notice">留空则可填写非注册用户</span>
         </div>
     </div>
@@ -87,6 +87,14 @@
         });
         $('#select-user').on('change', function (evt) {
             var selOption = $(this).val();
+            if (selOption != 0) {
+                $('#truename,#company,#position').prop('readonly', true);
+            } else {
+                $('#truename,#company,#position').prop('readonly', false);
+                $('#truename').val('');
+                $('#company').val('');
+                $('#position').val('');
+            }
             $.get('/admin/user/get-user-profile', {'id': selOption}, function (res) {
                 $('#truename').val(res.user.truename);
                 $('#company').val(res.user.company);

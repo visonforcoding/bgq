@@ -32,11 +32,11 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/collect/getDataList/<?= $id; ?><?php if(isset($type)):?>?type=<?=$type?><?php endif;?>",
+                        url: "/admin/collect/getDataList/<?= $id; ?><?php if (isset($type)): ?>?type=<?= $type ?><?php endif; ?>",
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户','公司','职位', '资讯', '记录时间', '更新时间', '类型', '操作'],
+                                ['用户', '公司', '职位', '资讯', '记录时间', '更新时间', '类型', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'user.company', editable: true, align: 'center'},
@@ -71,9 +71,9 @@
                 });
 
                 function titleFormatter(cellvalue, options, rowObject) {
-                    if(rowObject.activity){
+                    if (rowObject.activity) {
                         return  rowObject.activity.title;
-                    }else{
+                    } else {
                         return rowObject.news.title;
                     }
                     return response;

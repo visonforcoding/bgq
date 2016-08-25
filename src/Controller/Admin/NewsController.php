@@ -401,5 +401,18 @@ class NewsController extends AppController {
         }
     }
     
+        /**
+     * 查看点赞
+     */
+    public function viewLike($id=null){
+        $this->set('id', $id);
+        $type = $this->request->query('type');
+        if($type){
+            $this->set([
+                'type'=>$type
+            ]);
+        }
+    }
+    
 }
         

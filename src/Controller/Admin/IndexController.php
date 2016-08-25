@@ -27,17 +27,17 @@ class IndexController extends AppController {
                         (select * from need  order by create_time desc ) n
                         on n.user_id = u.id where u.id != -1 and n.`status` = 0 
                       ')->fetchAll('assoc');
-        
+
         $needCounts = $needCountsRes[0]['nums'];
         //待处理提现总数
         $WithdrawTable = \Cake\ORM\TableRegistry::get('Withdraw');
         $withdrawCounts = $WithdrawTable->find()->where(['status' => 0])->count();
         //活动赞助待处理
         $ActivityapplyTable = \Cake\ORM\TableRegistry::get('Activityapply');
-        $applyCounts = $ActivityapplyTable->find()->contain(['Activities'])->where(['Activityapply.is_check'=>0,'must_check'=>1])->count();
+        $applyCounts = $ActivityapplyTable->find()->contain(['Activities'])->where(['Activityapply.is_check' => 0, 'must_check' => 1])->count();
         //活动报名待处理
         $SponsorTable = \Cake\ORM\TableRegistry::get('Sponsor');
-        $sponsorCounts = $SponsorTable->find()->where(['status'=>0])->count();
+        $sponsorCounts = $SponsorTable->find()->where(['status' => 0])->count();
         $this->set([
             'savantCounts' => $savantCounts,
             'needCounts' => $needCounts,
@@ -70,56 +70,74 @@ class IndexController extends AppController {
         exit();
     }
 
-    public function getNewUserByDayWithMonth() {
+    /**
+     * 
+     * @param type $month
+     */
+    public function getNewUserByDayWithMonth($month = null) {
+        if (!$month) {
+            $month = date('m');
+        }
         $connection = \Cake\Datasource\ConnectionManager::get('default');
         $result = $connection->execute('select count(u.id) as nums,day(u.create_time) as day,date(u.create_time) as date
-                        from `user` u where month(u.create_time) = month(now()) 
+                        from `user` u where month(u.create_time) = ' . $month . ' 
                         group by date(u.create_time)')->fetchAll('assoc');
         $this->loadComponent('Chart');
         $month = date('m');
-        $label = $month.'月用户注册数';
-        echo $this->Chart->setLineChartByDayWithMonth($result,$label);
+        $label = $month . '月用户注册数';
+        echo $this->Chart->setLineChartByDayWithMonth($result, $label);
         exit();
     }
-    
-    public function getActivityApplyByDayWithMonth() {
+
+    /**
+     * 
+     */
+    public function getActivityApplyByDayWithMonth($month = null) {
+        if (!$month) {
+            $month = date('m');
+        }
         $connection = \Cake\Datasource\ConnectionManager::get('default');
         $result = $connection->execute('select count(id) as nums,date(aa.create_time) as date,day(aa.create_time) as day from activityapply aa
-                    where month(aa.create_time) = month(now())
+                    where month(aa.create_time) = ' . $month . '
                     group by date(aa.create_time)')->fetchAll('assoc');
         $this->loadComponent('Chart');
         $month = date('m');
-        $label = $month.'月活动报名数';
-        echo $this->Chart->setLineChartByDayWithMonth($result,$label,['backgroundColor'=>4,'borderCapStyle'=>'round']);
+        $label = $month . '月活动报名数';
+        echo $this->Chart->setLineChartByDayWithMonth($result, $label, ['backgroundColor' => 4, 'borderCapStyle' => 'round']);
         exit();
     }
-    
-    public function getMeetByDayWithMonth() {
+
+    public function getMeetByDayWithMonth($month=null) {
+        if (!$month) {
+            $month = date('m');
+        }
         $connection = \Cake\Datasource\ConnectionManager::get('default');
         $result = $connection->execute('select count(*) as nums,day(sb.create_time) as day,date(sb.create_time) as date from subject_book sb
-                    where month(sb.create_time) = month(now())
+                    where month(sb.create_time) = ' . $month . '
                     group by date(sb.create_time)')->fetchAll('assoc');
         $this->loadComponent('Chart');
         $month = date('m');
-        $label = $month.'月用户约见数';
-        echo $this->Chart->setLineChartByDayWithMonth($result,$label,['backgroundColor'=>11,'borderCapStyle'=>'round']);
+        $label = $month . '月用户约见数';
+        echo $this->Chart->setLineChartByDayWithMonth($result, $label, ['backgroundColor' => 11, 'borderCapStyle' => 'round']);
         exit();
     }
-    
+
     /**
      * 资金收入
      */
-    public function getFlowByDayWithMonth() {
+    public function getFlowByDayWithMonth($month=null) {
+        if (!$month) {
+            $month = date('m');
+        }
         $connection = \Cake\Datasource\ConnectionManager::get('default');
         $result = $connection->execute('select sum(case when f.income = 2 then f.amount * -1 else f.amount end ) as nums,day(f.create_time) as day,date(f.create_time) as date from flow f
-                    where month(f.create_time) = month(now()) and f.user_id = -1
+                    where month(f.create_time) =  ' . $month . ' and f.user_id = -1
                     group by date(f.create_time)')->fetchAll('assoc');
         $this->loadComponent('Chart');
         $month = date('m');
-        $label = $month.'月平台资金收入';
-        echo $this->Chart->setLineChartByDayWithMonth($result,$label,['backgroundColor'=>11,'borderCapStyle'=>'round']);
+        $label = $month . '月平台资金收入';
+        echo $this->Chart->setLineChartByDayWithMonth($result, $label, ['backgroundColor' => 11, 'borderCapStyle' => 'round']);
         exit();
     }
-    
 
 }

@@ -31,8 +31,9 @@ class BookChatController extends AppController {
         $this->viewBuilder()->autoLayout(false);
         
         $bookChat = $this->BookChat->get($id, [
-            'contain' => ['Users', 'ReplyUsers', 'SubjectBooks']
+            'contain' => ['Users', 'ReplyUsers', 'SubjectBooks.Subjects']
         ]);
+        debug($bookChat);exit();
         $this->set('bookChat', $bookChat);
         $this->set('_serialize', ['bookChat']);
     }

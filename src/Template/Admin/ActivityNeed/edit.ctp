@@ -87,6 +87,14 @@
         });
         $('#select-user').on('change', function (evt) {
             var selOption = $(this).val();
+            if (selOption != 0) {
+                $('#truename,#company,#position').prop('readonly', true);
+            } else {
+                $('#truename,#company,#position').prop('readonly', false);
+                $('#truename').val('');
+                $('#company').val('');
+                $('#position').val('');
+            }
             $.get('/admin/user/get-user-profile', {'id': selOption}, function (res) {
                 $('#truename').val(res.user.truename);
                 $('#company').val(res.user.company);
