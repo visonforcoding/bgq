@@ -70,6 +70,7 @@
             return false;
         }
         var content = $('#content').val();
+        LEMON.sys.hideKeyboard();
         $.ajax({
             type: 'POST',
             data: {content: content},
