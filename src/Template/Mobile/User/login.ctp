@@ -33,8 +33,7 @@
 <?php $this->start('script') ?>
 <script>
     window.onBackView = function(){
-        alert('test');
-        history.back();
+        history.go(-1);
     }
     if(location.href.indexOf('loginout=1')>0){
         $.util.setCookie('token_uin','');
