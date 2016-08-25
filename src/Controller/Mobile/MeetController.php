@@ -194,10 +194,10 @@ class MeetController extends AppController {
      * 话题 添加 与 编辑 与删除
      */
     public function subject($id = null) {
+        $this->handCheckLogin();
         $SubjectTable = \Cake\ORM\TableRegistry::get('meet_subject');
         $UserTable = \Cake\ORM\TableRegistry::get('user');
         if ($this->request->is('post')) {
-            $this->handCheckLogin();
             if(empty($id)){
                 $subject = $SubjectTable->newEntity();
                 $subject = $SubjectTable->patchEntity($subject, $this->request->data());
@@ -315,7 +315,7 @@ class MeetController extends AppController {
                 ->toArray();
 //        debug($subjects);die;
         $this->set([
-            'pageTitle'=>'我的话题',
+            'pageTitle'=>'话题列表',
             'subjects'=>$subjects,
             'user' => $user
         ]);
