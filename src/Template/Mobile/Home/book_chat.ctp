@@ -7,16 +7,16 @@
         </ul>
     </div>
 </div>
-<?php if($book->is_done != 1): ?>
-<div style="height:2.8rem"></div>
-<div class="todialogue">
-    <div class="clearfix b-text">
-        <div class="r-input">
-            <textarea id="content" ></textarea>
+<?php if ($book->is_done != 1): ?>
+    <div style="height:2.8rem"></div>
+    <div class="todialogue">
+        <div class="clearfix b-text">
+            <div class="r-input">
+                <textarea id="content" ></textarea>
+            </div>
+            <span class="r-submit" >发送</span>
         </div>
-        <span class="r-submit" >发送</span>
     </div>
-</div>
 <?php endif; ?>
 <script type="text/html" id="tpl">
     {#msg#}
@@ -29,7 +29,7 @@
     var is_done = '<?= $book->is_done ?>';
 </script>
 <script type="text/javascript">
-    function getChat(){
+    function getChat() {
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -52,31 +52,31 @@
             }
         });
     }
-    
+
     getChat();
-    if(is_done == '0'){
-        setInterval(function(){
+    if (is_done == '0') {
+        setInterval(function () {
             getChat();
-        },8000);
+        }, 8000);
     }
-    
+
 
     $('.r-submit').on('tap', function () {
-        if(is_done == '1'){
+        if (is_done == '1') {
             return false;
         }
-        if($('#content').val() == ''){
+        if ($('#content').val() == '') {
             $.util.alert('请填写内容');
             return false;
         }
         var content = $('#content').val();
         $.ajax({
             type: 'POST',
-            data: {content:content},
+            data: {content: content},
             dataType: 'json',
             url: "/home/reply-chat/" + book_id + '/' + type,
             success: function (res) {
-                if(res.status){
+                if (res.status) {
                     $('#content').val('');
                     $.ajax({
                         type: 'POST',
@@ -104,6 +104,10 @@
                 }
             }
         });
+        
+        setTimeout(function () {
+            window.scrollTo(0, 99999);
+        }, 200);
 //        $('.dialogue ul').append('<li class="fr mm"><span>b是的。</span><time>2015-8-20</time></li>');
     });
 </script>
