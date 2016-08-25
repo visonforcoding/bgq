@@ -8,7 +8,7 @@
 <div class="wraper">
     <div class="inner my-home-menu" >
         <a href="/home/my-book">我是顾客</a>
-        <a href="javascript:void(0);"  class="active">我是专家</a>
+        <a href="javascript:void(0);"  class="active">我是会员</a>
     </div>
     <div class="inner my-home-slidemenu" >
         <a href="?type=1" <?php if ($type == 1): ?>class="active"<?php endif; ?>>待付款</a>

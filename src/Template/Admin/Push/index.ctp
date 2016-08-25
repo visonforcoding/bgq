@@ -72,7 +72,7 @@
                                     if (cellvalue == '1') {
                                         return '普通';
                                     } else {
-                                        return '专家';
+                                        return '会员';
                                     }
                                 }},
                             {name: 'grade', editable: false, align: 'center', formatter: function (cellvalue, options, rowObject) {

@@ -41,7 +41,7 @@
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'user.company', editable: true, align: 'center'},
                             {name: 'user.position', editable: true, align: 'center'},
-                            {name: 'relate_id', editable: true, align: 'center', formatter: titleFormatter},
+                            {name: 'activity.title', editable: true, align: 'center'},
                             {name: 'msg', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
@@ -71,17 +71,6 @@
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
                 });
 
-                function titleFormatter(cellvalue, options, rowObject) {
-                    if (rowObject.type == 0)
-                    {
-                        response = rowObject.activity.title;
-                    }
-                    else if (rowObject.type == 1)
-                    {
-                        response = rowObject.news.title;
-                    }
-                    return response;
-                }
 
                 function typeFormatter(cellvalue, options, rowObject) {
                     if (rowObject.type == 0)
