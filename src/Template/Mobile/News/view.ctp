@@ -103,7 +103,7 @@
 <!--底部四个图-->
 <div class="iconlist icon-width">
     <span class="iconfont" id="commit">&#xe61d;</span>
-    <span class="iconfont <?php if (!$isCollect): ?>active<?php endif; ?>" id="collect">&#xe615;</span>
+    <span class="iconfont color-items <?php if ($isCollect): ?>hover<?php endif; ?>" id="collect"><?php if ($isCollect): ?>&#xe67c;<?php else: ?>&#xe615;<?php endif; ?></span>
     <span class="iconfont" id="share">&#xe619;</span>
     <span class="iconfont" id="goTop">&#xe606;</span>
 </div>
@@ -317,6 +317,7 @@
                     });
                 });
                 break;
+            // 收藏
             case 'collect':
                 checkLogin(function () {
                     var news_id = window.__id;
@@ -326,7 +327,13 @@
                         func: function (res) {
                             $.util.alert(res.msg);
                             if (res.status) {
-                                $(em).toggleClass('active');
+                                if($(em).hasClass('hover')){
+                                    $(em).html('&#xe615;');
+                                    $(em).removeClass('hover');
+                                } else {
+                                    $(em).html('&#xe67c;');
+                                    $(em).addClass('hover');
+                                }
                             }
                         }
                     });
