@@ -711,4 +711,4 @@ ALTER TABLE `book_chat`
 
 #话题更新时间
 ALTER TABLE `binggq`.`user`
-  ADD COLUMN `subject_update_time` datetime DEFAULT '' COMMENT '话题更新时间' COMMENT '话题更新时间' AFTER `update_time`;
+  ADD COLUMN `subject_update_time` datetime COMMENT '话题更新时间' COMMENT '话题更新时间' AFTER `update_time`;
