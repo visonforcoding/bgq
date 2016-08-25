@@ -104,12 +104,11 @@
                 }
             }
         });
-        
-        setTimeout(function () {
-            window.scrollTo(0, 99999);
-        }, 200);
 //        $('.dialogue ul').append('<li class="fr mm"><span>b是的。</span><time>2015-8-20</time></li>');
     });
+    setTimeout(function () {
+        window.scrollTo(0, 99999);
+    }, 200);
 </script>
 <?php
 $this->end('script');
