@@ -458,7 +458,7 @@ class HomeController extends AppController {
             $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
             $type = $this->request->query('type');
         //        $where['SubjectBook.status'] = in_array($type, ['0', '1', '3']) ? $type : 0;
-            $where['SubjectBook.status !='] = 2;
+//            $where['SubjectBook.status !='] = 2;
             $where['SubjectBook.user_id'] = $this->user->id;
             $books = $BookTable->find()->contain(['Subjects', 'Subjects.User' => function($q) {
                 return $q->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums', 'level']);
