@@ -41,7 +41,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '回复', '话题', '内容', '创建时间', '操作'],
+                                ['用户', '对象', '话题', '内容', '创建时间', '操作'],
                         colModel: [
                             {name: 'user', editable: true, align: 'center',formatter:function(cell,opt,obj){
                                     return cell.truename+'-'+cell.company+'-'+cell.position;
@@ -94,7 +94,7 @@
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/admin/bookchat/delete',
+                            url: '/admin/book-chat/delete',
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
@@ -132,7 +132,7 @@
 
                 function doView(id) {
                     //查看明细
-                    url = '/admin/bookchat/view/' + id;
+                    url = '/admin/book-chat/view/' + id;
                     layer.open({
                         type: 2,
                         title: '查看详情',
