@@ -127,7 +127,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .newsbox .sec-news-l{float:left;width:5rem;}
 /*超出隐藏*/
 .newsbox .sec-news-l h3,.newsbox .sec-news-l p,.newscon-box h3{word-break: break-all;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}
-.newsbox .sec-news-l h3{line-height: 0.4rem;margin:0.1rem 0;font-size:0.34rem;color:#222c38;-webkit-line-clamp: 2;font-weight:600;}
+.newsbox .sec-news-l h3{line-height: 0.4rem;margin:0.1rem 0;font-size:0.34rem;color:#222c38;-webkit-line-clamp: 2;font-weight:400;}
 .newsbox .sec-news-l p{line-height:0.38rem;font-size:0.28rem;-webkit-line-clamp: 2;}
 .newsbox .sec-news-r{float:right;width:1.6rem;height:1.6rem;margin-top:0.14rem;overflow:hidden;}
 .newsbox .sec-news-r img{width:100%;display: block;min-height:1.6rem;}
@@ -246,7 +246,7 @@ border-bottom:none;top:-1px;margin-top:-1px;margin-left:-1px;}
 .status{position:absolute;right:-30px;top:0;}
 .status span{display:block;background: #e01a48;width:100px;height:32px;border-radius: 0.5rem;line-height:32px;color:#fff;padding-left:15px;font-size:14px;margin-top:20px;}
 .a-head img{width:100%;height:auto;display: block;}
-.a-head h3{line-height: 0.4rem; color:#222c38;font-size:0.32rem;margin:0.2rem 0;-webkit-line-clamp: 2;font-weight:600;}
+.a-head h3{line-height: 0.4rem; color:#222c38;font-size:0.32rem;margin:0.2rem 0;-webkit-line-clamp: 2;font-weight:400;}
 .a-bottom .a-address{line-height: 0.28rem; display: block;font-size:0.28rem;color:#9ba4ad;margin-bottom:0.2rem;}
 .a-other-info{color:#9ba4ad;}
 .is-apply{color:red;float:right;}
@@ -386,7 +386,7 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .internet-v-info .head-img{width:1.21rem;height:1.21rem;display: block;border-radius: 50%;position:relative;margin-right:0.3rem;float:left;}
 .head-img img{width:100%;height:100%;border-radius: 50%;}
 .head-img i{position: absolute;right:0.12rem;bottom:0;width:0.29rem;height:0.3rem;background: url(img/v.png) no-repeat;background-size: contain;}
-.mark{margin-top:0.1rem;}
+.mark{margin-top:0.1rem;max-height:.94rem;overflow:hidden;}
 .vipinfo{width:5.3rem;float:left;}
 .vipinfo h3{font-size:0.32rem;color:#222c38;height:.5rem;overflow:hidden;line-height: .5rem;}
 .vipinfo h3 .l-name{float:left;}
