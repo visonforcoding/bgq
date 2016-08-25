@@ -28,7 +28,7 @@
                     <h3><div class="l-name">{#truename#}</div>{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
                     <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
                 </a>
-                <div class="mark line2">
+                <div class="mark s_mark_h">
                     {#subjects#}
                 </div>
             </div>
