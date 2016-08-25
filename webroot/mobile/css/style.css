@@ -715,22 +715,32 @@ border-radius: 50%;}
 .m-pos-top{width:3.6rem;margin-left:-1.8rem;border:1px #e5e5e5 solid;/*-webkit-box-shadow: 0 0 1px rgba(0,0,0,.5); */
     /*box-shadow: 0 0 1px rgba(0,0,0,.5);*/border-radius: .3rem;}
 .m-pos-top span:first-of-type{margin-right: .1rem;}
-.m-sub-header i{color:#22a69f;margin-right:.15rem;font-size:.24rem;}
+.m-sub-header i{color:#22a69f;margin-right:.15rem;font-size:.26rem;}
 .m-sub-header h3{color:#808080;font-size:.3rem; line-height: .9rem;border-bottom:1px #e5e5e5 solid;}
-.m-sub-header span{color:#e01b49;}
-.m-sub-con section{overflow:hidden;border-bottom:1px #e5e5e5 solid;padding:.1rem 0;}
-.m-sub-con-h,.m-sub-con-c{padding:.1rem 0;}
+/*.m-sub-header span{color:#e01b49;}*/
+.m-sub-con section{overflow:hidden;padding:.1rem 0;}
+.m-sub-con{padding:.25rem 0;}
+.m_sub_items{background: #ff5176;border-radius: .1rem;margin-bottom:.2rem;}
+.m_sub_items:last-of-type{margin-bottom:0;}
+.m_sub_items a{color:#fff;}
+.m-sub-con-h,.m-sub-con-c{padding:.15rem;}
+.m-sub-con-h{position:relative;}
+.m-sub-con-h span{position:absolute;right:.15rem;top:.2rem;font-size:.34rem;max-width:10%;height:.34rem;}
 .m-sub-con-c p{line-height: .42rem;}
-.m-sub-con-h h3{font-weight: bold;line-height:.4rem;font-size:.3rem;font-weight: 800;}
-.m_right_btn span{width:1.5rem;display:block;text-align:center;color:#fff;border-radius: 10px;box-shadow: 0 0 1px rgba(255,75,112,.5);height:28px;font-size:12px;line-height: 28px;}
-.m_right_btn .r-focus{line-height:24px;background: linear-gradient(top,#ff567b,#ff4b70);background: -webkit-linear-gradient(top,#ff567b,#ff4b70);border: 2px #fff solid;/*border:.04rem #fff solid;*/margin-bottom:.15rem;}
+.m-sub-con-h h3{font-weight: bold;line-height:.4rem;font-size:.3rem;font-weight: 800;max-width:90%;}
+.m_right_btn span,.m_edit_items{width:1.5rem;display:block;text-align:center;color:#fff;border-radius: .3rem;-webkit-box-shadow: 0 2px 5px rgba(255,75,112,.2);box-shadow: 0 2px 5px rgba(255,75,112,.2);height:28px;font-size:12px;line-height: 28px;}
+.m_right_btn .r-focus,.m_edit_items{line-height:24px;background: linear-gradient(top,#ff567b,#ff4b70);background: -webkit-linear-gradient(top,#ff567b,#ff4b70);border: 2px #fff solid;/*border:.04rem #fff solid;*/margin-bottom:.15rem;}
 .m_right_btn .g-card{border:1px #ff6283 solid; color:#ff6283;line-height:26px;}
 .m_right_btn .cardgray,.m_right_btn .focusgray{color:#7a7d82;border:1px solid #7a7d82;-webkit-box-shadow: 0 1px 1px rgba(255,75,112,.5);box-shadow: 0 1px 1px rgba(122,125,130,.5);}
 .m_right_btn .cardgray{color:#7a7d82;}
 .m_right_btn .focusgray{background:#7a7d82;color:#fff;}
 .m-listinfo-des{position: relative;border-top:1px #e5e5e5 solid;}
 .m-listinfo-des li{float:left;height:1.48rem;text-align: center;overflow:hidden;padding-top:.37rem;
-border-left:1px #e5e5e5 solid;width:33.3%;}
+border-left:1px #e5e5e5 solid;width:50%;}
+.m_info_name{position:relative;}
+.m_info_name span{font-size:.26rem;display: inline-block;margin-left:.2rem;font-weight: 100;}
+.m_info_name span i{color:#bcbec0;margin-right: .06rem;font-size:.24rem;}
+.m_edit_items{margin:.15rem 0;color:#fff;}
 .m-lilist-des li:first-of-type{border-left: none;/*width:25%;*/}
 /*.m-lilist-des li:nth-of-type(2){width:30%;}
 .m-lilist-des li:last-of-type{width:45%;}*/
@@ -738,9 +748,9 @@ border-left:1px #e5e5e5 solid;width:33.3%;}
 .m-lilist-des{overflow:hidden;}
 .m-lilist-des li span{font-size:.26rem;color:#222c38;display:block;width:90%;margin:0 auto;word-break: break-all;}
 .pos-top{position:absolute;z-index:99;}
-.m-commond-list{height:.96rem;overflow: hidden;}
-.m-commond-list span{color:#808080;font-size:.26rem;line-height: .96rem;text-indent:.03rem;}
-.m-commond-list span i{margin-right: .2rem;font-size: .24rem;}
+.m-commond-list{overflow: hidden;border-bottom:1px #e5e5e5 solid;padding:.1rem 0;}
+.m-commond-list span{color:#808080;font-size:.3rem;line-height: .96rem;text-indent:.03rem;}
+.m-commond-list span i{margin-right: .2rem;font-size: .26rem;}
 .m-commond-list .hover{color:#e01b49;}
 .m-commond-list p{padding-top:.26rem;padding-left: .6rem;}
 .m-commond-list p img{margin-right: .1rem;width: .42rem;height: .42rem;border-radius: 50%;}
