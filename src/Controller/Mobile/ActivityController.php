@@ -321,24 +321,20 @@ class ActivityController extends AppController {
      * 发布活动
      */
     public function release($id=null) {
+        $ActivityNeed = \Cake\ORM\TableRegistry::get('activityneed');
         $this->handCheckLogin();
-        $industries = '';
         if ($this->request->is('post')) {
             $this->handCheckLogin();
             $users = \Cake\ORM\TableRegistry::get('user');
             $user = $users->get($this->user->id);
             $data = $this->request->data();
-            $industries = $this->Activity->newEntity();
-            $industries->from_user = -1;
-            $industry = $this->Activity->patchEntity($industries, $data);
+            $activityNeed = $ActivityNeed->newEntity();
+            $industry = $ActivityNeed->patchEntity($activityNeed, $data);
             $industry->company = $user->company;
             $industry->user_id = $user->id;
-            if ($data['pay']) {
-                $industry->is_crowdfunding = 1;
-            } else {
-                $industry->is_crowdfunding = 0;
-            }
-            if ($this->Activity->save($industry)) {
+            $industry->truename = $user->truename;
+            $industry->position = $user->position;
+            if ($ActivityNeed->save($industry)) {
                 return $this->Util->ajaxReturn(true, '提交成功');
             } else {
                 return $this->Util->ajaxReturn(false, '提交失败');
@@ -346,7 +342,7 @@ class ActivityController extends AppController {
         } else {
             $activity = [];
             if($id){
-                $activity = $this->Activity->get($id);
+                $activity = $ActivityNeed->get($id);
             }
             $this->set('activity', $activity);
             $this->set('pageTitle', '发布活动');
