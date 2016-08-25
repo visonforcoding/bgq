@@ -310,7 +310,7 @@ class MeetController extends AppController {
             $subjects = $subjects->contain('SubjectBooks');
         }
         $subjects = $subjects
-                ->where(['MeetSubject.user_id'=>$user_id])
+                ->where(['MeetSubject.user_id'=>$user_id, 'MeetSubject.is_del'=>0])
                 ->orderDesc('MeetSubject.create_time')
 //                ->distinct('MeetSubject.id')
                 ->toArray();
