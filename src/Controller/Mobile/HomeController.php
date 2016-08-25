@@ -605,7 +605,8 @@ class HomeController extends AppController {
                 $msg = "您预约的话题：《" . $book->subject->title . "》已确认通过。";
                 $this->Sms->sendByQf106($book->user->phone, $msg);
                 $this->loadComponent('Business');
-                $this->Business->usermsg($book->user_id, '预约通知', $msg, 4, $id);
+                $jump_url = '/home/my-book/#2';
+                $this->Business->usermsg($book->user_id, '预约通知', $msg, 4, $id, $jump_url);
                 return $this->Util->ajaxReturn(true, '处理成功!');
             } else {
                 return $this->Util->ajaxReturn(false, '服务器出错!');
@@ -631,7 +632,8 @@ class HomeController extends AppController {
             $book->status = 2;
             if ($BookTable->save($book)) {
                 $this->loadComponent('Business');
-                $this->Business->usermsg($book->user_id, '预约通知', '您的预约未被通过', 4, $id);
+                $jump_url = '/home/my-book/#3';
+                $this->Business->usermsg($book->user_id, '预约通知', '您的预约未被通过', 4, $id, $jump_url);
                 return $this->Util->ajaxReturn(true, '操作成功');
             } else {
                 return $this->Util->ajaxReturn(false, '操作失败');

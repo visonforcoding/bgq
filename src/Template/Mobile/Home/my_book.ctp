@@ -7,11 +7,12 @@
 </header>
 <div class="wraper">
     <div class="inner my-home-menu" id="typeTab">
-        <span type="books" <?php if($savant_books == []): ?> class="active"<?php endif; ?>>我约见</span>
-        <span type="savant_books" <?php if($savant_books): ?> class="active"<?php endif; ?>>约见我</span>
+        <span type="books">我约见</span>
+        <span type="savant_books">约见我</span>
     </div>
     <div  class="inner my-home-slidemenu" id="statusTab">
-        <span status="0" class="active">未确认</span>
+        <span status="2">未通过</span>
+        <span status="0">未确认</span>
         <span status="1">已确认</span>
     </div>
 
@@ -42,7 +43,51 @@
 </div>
 <?php $this->start('script'); ?>
 <script>
-    var book_html = {books:[], savant_books:[]}, status='0', type='<?php if($savant_books == []): ?>books<?php else: ?>savant_books<?php endif; ?>';
+    if(location.hash){
+        switch(location.hash){
+            // 我约见的未确认
+            case '#1':
+                var book_html = {books:[], savant_books:[]}, status='0', type='books';
+                $('span[status="0"]').addClass('active');
+                $('span[type="books"]').addClass('active');
+                break;
+            // 我约见的已确认
+            case '#2':
+                var book_html = {books:[], savant_books:[]}, status='1', type='books';
+                $('span[status="1"]').addClass('active');
+                $('span[type="books"]').addClass('active');
+                break;
+            // 我约见的未通过
+            case '#3':
+                var book_html = {books:[], savant_books:[]}, status='2', type='books';
+                $('span[status="2"]').addClass('active');
+                $('span[type="books"]').addClass('active');
+                break;
+            // 约见我的未确认
+            case '#4':
+                var book_html = {books:[], savant_books:[]}, status='0', type='savant_books';
+                $('span[status="0"]').addClass('active');
+                $('span[type="savant_books"]').addClass('active');
+                break;
+            // 约见我的已确认
+            case '#5':
+                var book_html = {books:[], savant_books:[]}, status='1', type='savant_books';
+                $('span[status="1"]').addClass('active');
+                $('span[type="savant_books"]').addClass('active');
+                break;
+            // 约见我的未通过
+            case '#6':
+                var book_html = {books:[], savant_books:[]}, status='2', type='savant_books';
+                $('span[status="2"]').addClass('active');
+                $('span[type="savant_books"]').addClass('active');
+                break;
+        }
+        
+    } else {
+        var book_html = {books:[], savant_books:[]}, status='0', type='<?php if($savant_books == []): ?>books<?php else: ?>savant_books<?php endif; ?>';
+        $('span[status="0"]').addClass('active');
+        $('span[type="<?php if($savant_books == []): ?>books<?php else: ?>savant_books<?php endif; ?>"]').addClass('active');
+    }
     var books = <?=  json_encode($books)?>; var savant_books = <?=  json_encode($savant_books)?>;
 </script>
 <script>
@@ -60,7 +105,7 @@
         }
         else {
             book_html[type][status] = $.util.dataToTpl('', 'tpl', cdata, function(d){
-                d.link = status === '0' ? '/home/my-book-detail/'+d.id :'/home/book-chat/'+d.id;
+                d.link = status === '1' ? '/home/book-chat/'+d.id : '/home/my-book-detail/'+d.id;
 //                d.subject.user = d.subject.user || {};
                 var user = d.subject.user?d.subject.user:d.user;
                 d.user_logo = user.avatar;
