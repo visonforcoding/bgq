@@ -33,6 +33,7 @@
 <?php $this->start('script') ?>
 <script>
     window.onBackView = function(){
+        alert('test');
         history.back();
     }
     if(location.href.indexOf('loginout=1')>0){
