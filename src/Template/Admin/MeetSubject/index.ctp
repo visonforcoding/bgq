@@ -10,7 +10,7 @@
             </a>
             <div class="form-group">
                 <label for="keywords">关键字</label>
-                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="专家、标题">
+                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="会员、标题">
             </div>
             <div class="form-group">
                 <label for="keywords">时间</label>
@@ -39,7 +39,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['专家','公司','职位', '标题', '操作'],
+                                ['会员','公司','职位', '标题', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'user.company', editable: true, align: 'center'},

@@ -7,17 +7,15 @@
             </div>
         </div>
         <div id="intChart" class="chart-bar row" style="margin:10px;">
-            <div class="col-md-4">
+            <div class="col-md-3 btn-group">
                 <input type="hidden" id="chart-column" value="order" />
                 <button data-val="register" class="btn btn-primary  chart-column-btn"><i class="icon icon-user red"></i> 注册</button>
                 <button data-val="focus" class="btn  chart-column-btn"><i class="icon icon-usecase red"></i> 关注</button>
                 <button data-val="mp" class="btn  chart-column-btn"><i class="icon icon-hand-right red"></i> 递名片</button>
             </div>
-            <div class="input-group date   col-md-2 " style="float: left;margin-left:-120px;margin-right:10px;"  data-link-field="dtp_input1">
+            <div class="input-group date  col-md-3" data-link-field="dtp_input1">
                 <input class="form-control form-date datepicker" id="choice_date" value="<?= date('Y-m-d') ?>"  data-date="" type="text"  readonly>
                 <span class="input-group-addon"><span class="icon-calendar"></span></span>
-            </div>
-            <div class="input-group col-md-1">
                 <span class="input-group-addon">按</span>
                 <select id="choice-time-type" class="form-control" >
                     <option value="year" selected="selected">年</option>
@@ -25,7 +23,6 @@
                     <option value="week">周</option>
                 </select>
             </div>
-            <div class="clearfix"></div>
         </div>
         <div class="panel-body">
             <div id="register_chart" style="width:100%;height:400px;" >

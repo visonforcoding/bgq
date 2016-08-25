@@ -6,7 +6,7 @@
 <div class="work-copy">
     <?= $this->Form->create($meetSubject, ['class' => 'form-horizontal']) ?>
     <div class="form-group">
-        <label class="col-md-2 control-label">专家</label>
+        <label class="col-md-2 control-label">会员</label>
         <div class="col-md-8">
             <?= $this->cell('Biggie'); ?>
         </div>
@@ -49,7 +49,7 @@
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-biggie').select2({
             language: "zh-CN",
-            placeholder: '选择一位专家',
+            placeholder: '选择一位会员',
             allowClear: true,
         });
         $('form').submit(function () {

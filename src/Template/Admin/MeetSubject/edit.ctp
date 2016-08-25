@@ -41,7 +41,7 @@
         $('#select-biggie').select2({
             language: "zh-CN",
             allowClear: true,
-            placeholder: '选择一位专家'
+            placeholder: '选择一位会员'
         });
         $('form').submit(function () {
             var form = $(this);

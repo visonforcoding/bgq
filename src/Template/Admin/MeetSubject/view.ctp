@@ -11,7 +11,7 @@
         <table class="vertical-table table table-hover table-bordered">
 
             <tr class="danger">
-                <th>专家</th>
+                <th>会员</th>
                 <td><?= h($meetSubject->user->truename) ?></td>
             </tr>
 

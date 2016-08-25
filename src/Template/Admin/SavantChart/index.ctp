@@ -9,9 +9,9 @@
         <div id="intChart" class="chart-bar row" style="margin:10px;">
             <div class="col-md-4">
                 <input type="hidden" id="chart-column" value="order" />
-                <button data-val="praise" class="btn btn-primary  chart-column-btn"><i class="icon icon-user red"></i> 专家认证</button>
-                <button data-val="subject" class="btn  chart-column-btn"><i class="icon icon-usecase red"></i> 专家话题</button>
-                <button data-val="meet" class="btn  chart-column-btn"><i class="icon icon-coffee red"></i> 专家约见</button>
+                <button data-val="praise" class="btn btn-primary  chart-column-btn"><i class="icon icon-user red"></i> 会员认证</button>
+                <button data-val="subject" class="btn  chart-column-btn"><i class="icon icon-usecase red"></i> 会员话题</button>
+                <button data-val="meet" class="btn  chart-column-btn"><i class="icon icon-coffee red"></i> 会员约见</button>
             </div>
             <div class="input-group date   col-md-2 " style="float: left;margin-left:-120px;margin-right:10px;"  data-link-field="dtp_input1">
                 <input class="form-control form-date datepicker" id="choice_date" value="<?= date('Y-m-d') ?>"  data-date="" type="text"  readonly>

@@ -138,7 +138,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">专家推荐</label>
+        <label class="col-md-2 control-label">会员推荐</label>
         <div class="col-md-8">
             <?= $this->cell('Savant', [$selSavantIds]) ?>
             <span class="notice">(*最多选择4个)</span>
