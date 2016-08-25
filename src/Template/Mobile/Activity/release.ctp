@@ -37,7 +37,7 @@
     </form>
     <div class='reg-shadow' hidden></div>
     <div class="totips" style="display:none;">
-        <h3>活动需求已提交，秘书会尽快联系您</h3>
+        <h3>已提交申请，小秘书会尽快联系您</h3>
         <span></span>
         <a href="/activity/index" class="nextstep" id="comfirm">确认</a>
 <!--        <span class='closed'>
@@ -59,6 +59,10 @@
             return;
         switch (em.id) {
             case 'submit':
+                if($('#submit').hasClass('noTap')){
+                    return false;
+                }
+                $('#submit').addClass('noTap');
                 var form = $('form');
                 var formData = {};
                 var agency = [];
@@ -89,6 +93,7 @@
                                 } else {
                                     $.util.alert(msg.msg);
                                 }
+                                $('#submit').removeClass('noTap');
                             }
                         }
                     });
