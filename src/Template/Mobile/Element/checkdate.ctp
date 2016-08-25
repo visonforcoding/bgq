@@ -9,6 +9,8 @@
         background: #fff url(/mobile/css/img/line.png) repeat-x  0 40px;
         -webkit-transition: height .2s ease;
         transition: height .2s ease;
+        -webkit-box-shadow: 0 0 1px rgba(0,0,0,.2);
+        box-shadow: 0 0 1px rgba(0,0,0,.2);
     }
     .hide_date{
         height:0;
