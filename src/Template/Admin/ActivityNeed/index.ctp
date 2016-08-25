@@ -5,7 +5,7 @@
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
-            <a href="/admin/activityneed/add" class="btn btn-small btn-warning">
+            <a href="/admin/activity-need/add" class="btn btn-small btn-warning">
                 <i class="icon icon-plus-sign"></i>添加
             </a>
             <div class="form-group">
@@ -80,7 +80,7 @@
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-                    response += '<a title="编辑" href="/admin/activityneed/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+                    response += '<a title="编辑" href="/admin/activity-need/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     return response;
                 }
 
