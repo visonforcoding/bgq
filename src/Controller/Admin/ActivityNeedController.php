@@ -10,6 +10,11 @@ use Wpadmin\Controller\AppController;
  * @property \App\Model\Table\ActivityneedTable $Activityneed
  */
 class ActivityneedController extends AppController {
+    
+    public function initialize() {
+        parent::initialize();
+        $this->Activityneed = \Cake\ORM\TableRegistry::get('Activityneed');
+    }
 
     /**
      * Index method
