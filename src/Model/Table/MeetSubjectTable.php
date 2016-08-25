@@ -33,6 +33,12 @@ class MeetSubjectTable extends Table {
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+        
+        $this->hasOne('SubjectBooks', [
+            'className'=>'SubjectBook',
+            'foreignKey' => 'subject_id',
+            'joinType' => 'INNER'
+        ]);
 
         $this->addBehavior('Timestamp', [
             'events' => [
