@@ -1123,11 +1123,11 @@ width:0.5rem;height:0.16rem;display: inline-block;transition: all .3s;float:righ
 .c-card img,.r-card img{width:100%;height:auto;}
 .r-card{float:left; width:70%;margin-left:.2rem;height:3rem;padding-left:0.4rem;}
 .e-info-box .install{padding-right:0;}
-.install span.btn,.install span.c-btn{width:50px;height:26px;border-radius: 100px;position:relative;
+.install span.btn,.install span.c-btn{width:50px;height:27px;border-radius: 100px;position:relative;
 background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  background: linear-gradient(top,#54d76a 0%,#53d66a 50%, #53d569 100%);padding:.5px;}
 .btn i,.c-btn i{width:25px;height:25px;border-radius: 50%;background: lightgreen;display: block;}
 .install span.c-btn{background: #fff;/*box-shadow: 0 0 1px rgba(0,0,0,.5);*/border:1px #e5e5e5 solid;}
-.c-btn .off{float:left;background: #fff;box-shadow: 0 0 1px rgba(0,0,0,.6);transition:width height  .6s;}
+.c-btn .off{float:left;background: #fff;-webkit-box-shadow: 0 0 1px rgba(0,0,0,.6);box-shadow: 0 0 1px rgba(0,0,0,.6);-webkit-transition:width height .6s;transition:width height .6s;}
 .btn .on{/*margin-right:1px;*/float:right;background: #fff;box-shadow: 0 0 1px rgba(0,0,0,.6);width:24px;height:24px;margin:1px;box-shadow: 0 0 1px rgba(0,0,0,.6);transition:width height  .6s;}
 .iscache{overflow:hidden;padding:1px;}
 .wraper .nopr{padding-right:0;}
