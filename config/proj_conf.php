@@ -43,7 +43,7 @@ return [
       '4'=>[
             'table'=>'subject_book',
             'remark'=>'话题预约',
-            'url'=>'/home/my-book'
+            'url'=>'/home/my-book/{#type#}'
         ],
       '5'=>[
             'table'=>'savant',
