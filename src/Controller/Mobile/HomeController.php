@@ -105,8 +105,8 @@ class HomeController extends AppController {
              * ajax获取我的发布活动
              */
             public function getMyActivity() {
-                $ActivityTable = \Cake\ORM\TableRegistry::get('activity');
-                $activities = $ActivityTable->findByUserId($this->user->id)->toArray();
+                $ActivityNeedTable = \Cake\ORM\TableRegistry::get('activityneed');
+                $activities = $ActivityNeedTable->findByUserId($this->user->id)->toArray();
                 if ($activities !== false) {
                     return $this->Util->ajaxReturn(['status' => true, 'data' => $activities]);
                 } elseif($activities == []){
