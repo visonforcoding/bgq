@@ -255,7 +255,7 @@
             url: "/home/save-userinfo",
             data: {name:name,val:val},
             success: function (res) {
-                $.util.alert(res.msg, 1000);
+                $.util.alert(res.msg, 700);
             }
         });
     });
@@ -269,30 +269,11 @@
             url: "/home/save-userinfo",
             data: {name:name,val:val},
             success: function (res) {
-                $.util.alert(res.msg);
+                $.util.alert(res.msg, 700);
             }
         });
     });
     
-    $.ajax({
-        type: 'POST',
-        dataType: 'json',
-        url: "/home/userinfo-status",
-        success: function (res) {
-            if(res.status){
-                $('#city').html(res.data.city);
-                $('#goodat').html(res.data.goodat);
-                $('#gsyw').html(res.data.gsyw);
-                $('#educations').html(res.data.educations);
-                $('#careers').html(res.data.careers);
-                $('#grbq').html(res.data.grbq);
-                $('#industry').html(res.data.industry);
-                $('#agency').html(res.data.agency);
-            } else {
-                $.util.alert(res.msg);
-            }
-        }
-    });
     window.onBackView = function(){
         $.ajax({
             type: 'POST',
@@ -314,6 +295,8 @@
             }
         });
     };
+    window.onBackView();
+
     
     $(function () {
         $('#upload_pic').on('touchstart',function(){
