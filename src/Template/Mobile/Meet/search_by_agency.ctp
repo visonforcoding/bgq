@@ -11,7 +11,7 @@
             <span class="orgname active">选择标签</span>
         </div>
         <ul class="a-s-mark" id="agencies">
-            <li><a href="javascript:void(0)" agency_id="0" class="agency" id="agency_">全部</a></li>
+            <li><a href="javascript:void(0)" agency_id="0" class="agency active" id="agency_">全部</a></li>
         </ul>
     </div>
     <div id='biggies'></div>
@@ -79,6 +79,8 @@
         dealData();
         return false;
     });
+//    console.log($('a[agency_id="0"]'));
+    dealData($('a[agency_id="0"]').get(0));
 
     $('body').on('tap', function (e) {
         var target = e.srcElement || e.target, em = target, i = 1;
