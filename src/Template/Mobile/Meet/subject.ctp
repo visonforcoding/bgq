@@ -61,7 +61,7 @@
             </ul>
         </div>-->
     </form>
-    <a id="submit" href="#this" class="nextstep">提交</a>
+    <a id="submit" href="javascript:void(0)" class="nextstep">提交</a>
     <?php if(isset($subject)): ?>
     <a href="#this" id="del" class="s-btn colorbg">删除</a>
     <?php endif;?>
@@ -84,13 +84,17 @@
                      $.util.alert(res.msg);
                      if(res.status){
                          setTimeout(function(){
-                             window.location.href = '/meet/my-subjects'
-                         },1500)
+                             window.location.href = '/meet/my-subjects';
+                         },1500);
                      }
                  }
              });
     });
     $('#submit').on('click', function () {
+        if($('#submit').hasClass('noTap')){
+            return false;
+        }
+        $('#submit').addClass('noTap');
         $form = $('form');
         $.util.ajax({
             type: 'post',
@@ -102,8 +106,11 @@
                     if (msg.status === true) {
                         setTimeout(function(){
                             window.location.href = '/meet/my-subjects';
+                            $('#submit').removeClass('noTap');
                         },1500);
-                    } 
+                    } else {
+                        $('#submit').removeClass('noTap');
+                    }
                 }
             }
         });

@@ -106,7 +106,7 @@ class HomeController extends AppController {
              */
             public function getMyActivity() {
                 $ActivityNeedTable = \Cake\ORM\TableRegistry::get('activityneed');
-                $activities = $ActivityNeedTable->findByUserId($this->user->id)->toArray();
+                $activities = $ActivityNeedTable->findByUserId($this->user->id)->orderDesc('create_time')->toArray();
                 if ($activities !== false) {
                     return $this->Util->ajaxReturn(['status' => true, 'data' => $activities]);
                 } elseif($activities == []){
