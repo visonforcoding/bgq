@@ -107,7 +107,7 @@
                             layer.confirm(res.msg, {
                                 btn: ['确认', '继续添加'] //按钮
                             }, function () {
-                                window.location.href = '/admin/activityneed/index';
+                                window.location.href = '/admin/activity-need/index';
                             }, function () {
                                 window.location.reload();
                             });
