@@ -32,6 +32,9 @@
 </div>
 <?php $this->start('script') ?>
 <script>
+    window.onBackView = function(){
+        history.back();
+    }
     if(location.href.indexOf('loginout=1')>0){
         $.util.setCookie('token_uin','');
         LEMON.db.set('token_uin','');
