@@ -124,19 +124,19 @@ class LikeLogsController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'likelogs.' . $this->request->data('sidx');
+        $sort = 'LikeLogs.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where['user.`truename` like'] = "%$keywords%";
+            $where['User.`truename` like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['likelogs.`create_time` >' => $begin_time], ['likelogs.`create_time` <' => $end_time]];
+            $where['and'] = [['LikeLogs.`create_time` >' => $begin_time], ['LikeLogs.`create_time` <' => $end_time]];
         }
         if ($id) {
             $query = $this->LikeLogs->find()->where(['relate_id' => $id]);
