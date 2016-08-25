@@ -15,9 +15,10 @@
         <form action="/home/save-education" method="post">
             <div class="education-title">
                 <h3>
+                     <a onclick="deleteEd(this);" class="deletbtn iconfont">&#xe67a;</a>
                     教育经历<i></i></span>
-                    <a onclick="deleteEd(this);" class="deletbtn ml20">删除</a>
-                    <a onclick="checkForm(this);" class="savetbtn">保存</a>
+                   
+                    <a onclick="checkForm(this);" class="savetbtn fr">保存</a>
                 </h3>
             </div>
             <ul class="h-info-box e-info-box">
@@ -73,7 +74,7 @@
             <!--    <input type="hidden" name="id" value="<?= $education->id ?>">  -->
                 <div class="education-title">
                     <h3 data-id="<?= $education->id ?>">
-                        <a onclick="deleteEd(this);"  class="deletbtn ml20">删除</a>
+                        <a onclick="deleteEd(this);"  class="deletbtn iconfont">&#xe67a;</a>
                         教育经历<i><?= $k ?></i></span>
 
                         <a onclick="checkForm(this);" class="savebtn fr">保存</a>
