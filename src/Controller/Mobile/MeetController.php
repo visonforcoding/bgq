@@ -300,19 +300,9 @@ class MeetController extends AppController {
         $SubjectTable = \Cake\ORM\TableRegistry::get('MeetSubject');
         $userTable = \Cake\ORM\TableRegistry::get('user');
         $user = $userTable->get($user_id);
-        $subjects = $SubjectTable->find();
-        if($this->user){
-            $uid = $this->user->id;
-            $subjects = $subjects->contain(['SubjectBooks'=>function($q)use($uid){
-                return $q->where(['SubjectBooks.user_id'=>$uid]);
-            }]);
-        } else {
-            $subjects = $subjects->contain('SubjectBooks');
-        }
-        $subjects = $subjects
+        $subjects = $SubjectTable->find()
                 ->where(['MeetSubject.user_id'=>$user_id, 'MeetSubject.is_del'=>0])
-                ->orderDesc('MeetSubject.create_time')
-//                ->distinct('MeetSubject.id')
+                ->order(['MeetSubject.create_time'=>'desc'])
                 ->toArray();
 //        debug($subjects);die;
         $this->set([
