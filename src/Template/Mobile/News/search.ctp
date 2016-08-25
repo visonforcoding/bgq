@@ -12,7 +12,7 @@
         <div class="a-s-title">
             <span class="orgname active">选择标签</span>
         </div>
-        <ul class="a-s-mark" id="industry">
+        <ul class="a-s-mark news_s_mark" id="industry">
         </ul>
     </div>
     <div id="search"></div>
