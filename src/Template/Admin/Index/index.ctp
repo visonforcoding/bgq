@@ -102,6 +102,16 @@
     </div>
     <div class="row">
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <div class="input-group date col-md-5 "  data-link-field="dtp_input1">
+                <input class="form-control form-date datepicker" id="choice_date" value="<?= date('Y-m-d') ?>"  data-date="" type="text"  readonly>
+                <span class="input-group-addon"><span class="icon-calendar"></span></span>
+                <span class="input-group-addon">按</span>
+                <select id="choice-time-type" class="form-control" >
+                    <option value="year" selected="selected">年</option>
+                    <option value="month" >月</option>
+                    <option value="week">周</option>
+                </select>
+            </div>
             <div class="datacontainer">
                 <ul id="myTab" class="nav nav-tabs nav-justified">
                     <li class="active">
