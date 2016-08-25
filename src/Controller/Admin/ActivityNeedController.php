@@ -122,7 +122,8 @@ class ActivityneedController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $query = $this->Activityneed->find();
+        $ActivityTable = \Cake\ORM\TableRegistry::get('Activityneed');
+        $query = $ActivityTable->find();
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
