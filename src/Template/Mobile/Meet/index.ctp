@@ -82,7 +82,7 @@
                     <h3><div class="l-name">{#truename#}</div>{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
                     <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
                 </a>
-                <div class="mark bgblue">
+                <div class="mark bgblue line2">
                     {#subjects#}
                 </div>
             </div>
