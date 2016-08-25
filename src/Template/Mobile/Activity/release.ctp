@@ -93,7 +93,7 @@
                                 } else {
                                     $.util.alert(msg.msg);
                                 }
-                                $('#submit').removeClass('noTap');
+//                                $('#submit').removeClass('noTap');
                             }
                         }
                     });
