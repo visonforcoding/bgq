@@ -138,7 +138,7 @@
                     });
                 }
                 function istop(id) {
-                    layer.confirm('确定通过审核？', {
+                    layer.confirm('确定此操作？', {
                         btn: ['确认', '取消'] //按钮
                     }, function () {
                         $.ajax({
