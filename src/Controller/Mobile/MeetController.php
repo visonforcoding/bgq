@@ -50,7 +50,7 @@ class MeetController extends AppController {
                     return $exp->where(['is_del'=>0])->orderDesc('create_time');
                 }])
                 ->where(['enabled'=>'1', 'level'=>'2'])
-                ->orderDesc('subject_update_time')
+                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
                 ->limit($this->limit)
                 ->toArray();
         $this->set('meetjson', json_encode($users));
