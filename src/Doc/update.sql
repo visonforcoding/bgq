@@ -712,3 +712,8 @@ ALTER TABLE `book_chat`
 #话题更新时间
 ALTER TABLE `binggq`.`user`
   ADD COLUMN `subject_update_time` datetime COMMENT '话题更新时间' COMMENT '话题更新时间' AFTER `update_time`;
+
+#ptag
+ALTER TABLE `pvlog`
+	ADD COLUMN `ptag` INT NOT NULL AFTER `id`,
+	ADD INDEX `ptag` (`ptag`);  

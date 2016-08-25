@@ -11,18 +11,16 @@
     <table class="vertical-table table table-hover table-bordered">
     
     <tr>
-        <th>用户id</th>
-        <td><?= h($bookChat->user_id) ?></td>
+        <th>用户</th>
+        <td><?= $bookChat->user->truename ?>-<?=$bookChat->user->company?>-<?=$bookChat->user->position?></td>
     </tr>
-    
     <tr>
-        <th>回复用户id</th>
-        <td><?= h($bookChat->reply_id) ?></td>
+        <th>对象</th>
+        <td><?= $bookChat->reply_user->truename ?>-<?=$bookChat->reply_user->company?>-<?=$bookChat->reply_user->position?></td>
     </tr>
-    
     <tr>
-        <th>约见id</th>
-        <td><?= h($bookChat->book_id) ?></td>
+        <th>话题</th>
+        <td><?= h($bookChat->subject_book->subject->title) ?></td>
     </tr>
     
     <tr>

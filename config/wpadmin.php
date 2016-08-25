@@ -7,6 +7,6 @@
 
 return [
     'project'=>[
-        'name'=>'并购圈'
+        'name'=>'并购帮'
     ]
 ];
