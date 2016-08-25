@@ -66,7 +66,7 @@
                     <td><?= $user->gender ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('专家认证状态') ?></th>
+                    <th><?= __('会员认证状态') ?></th>
                     <td><?= $user->savant_status ?></td>
                 </tr>
                 <tr>

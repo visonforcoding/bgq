@@ -44,7 +44,7 @@
                         cellsubmit: 'remote',
                         cellurl: '/admin/senior/hand-change',
                         colNames:
-                                ['手机号', '姓名', '类型', '等级', '公司', '职位', '性别', '专家认证', '帐号状态', '创建时间', '操作'],
+                                ['手机号', '姓名', '类型', '等级', '公司', '职位', '性别', '会员认证', '帐号状态', '创建时间', '操作'],
                         colModel: [
                             {name: 'phone', editable: false, align: 'center'},
                             {name: 'truename', editable: false, align: 'center', formatter: function (cellvalue, options, rowObject) {
@@ -54,7 +54,7 @@
                                     if (cellvalue == '1') {
                                         return '普通';
                                     } else {
-                                        return '专家';
+                                        return '会员';
                                     }
                                 }},
                             {name: 'grade', editable: false, align: 'center', formatter: function (cellvalue, options, rowObject) {

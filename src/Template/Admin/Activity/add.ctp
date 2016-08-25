@@ -161,7 +161,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">专家推荐</label>
+        <label class="col-md-2 control-label">会员推荐</label>
         <div class="col-md-8">
             <?= $this->cell('Savant') ?>
         </div>
@@ -222,7 +222,7 @@
         });
         var savantSelect2 = $('#select-savant').select2({
             language: "zh-CN",
-            placeholder: '选择一位专家'
+            placeholder: '选择一位会员'
         });
         $('#select-industry').on('change', function (evt) {
             var selOption = $('#select-industry').val();

@@ -108,7 +108,7 @@
                     response += '<a title="查看话题" href="/admin/savant/show-subject/' + rowObject.id + '" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-chat-line"></i> </a>';
                     response += '<a title="编辑" href="/admin/savant/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     response += '<a title="申请记录" onclick="showApply(' + rowObject.id + ')" class="grid-btn "><i class="icon icon-list-alt"></i> </a>';
-                    response += '<a title="专家置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
+                    response += '<a title="会员置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
                     if (rowObject.savant_status == 2) {
                         response += '<a title="审核通过" href="javascript:void(0)" class="grid-btn release" onclick="pass(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
                     }
@@ -242,7 +242,7 @@
                     url = '/mobile/user/home-page/' + id;
                     layer.open({
                         type: 2,
-                        title: '专家主页',
+                        title: '会员主页',
                         shadeClose: true,
                         shade: 0.8,
                         area: ['375px', '667px'],

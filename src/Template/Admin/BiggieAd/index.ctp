@@ -150,7 +150,7 @@
                   url = '/mobile/meet/view/' + id;
                     layer.open({
                         type: 2,
-                        title: '专家主页',
+                        title: '会员主页',
                         shadeClose: true,
                         shade: 0.8,
                         area: ['375px', '667px'],

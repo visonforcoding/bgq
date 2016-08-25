@@ -44,7 +44,7 @@
                             if(cellvalue=='1'){
                                 return '普通';
                             }else{
-                                return '专家';
+                                return '会员';
                             }
                     }},
                     {name: 'idcard', editable: true, align: 'center'},

@@ -143,7 +143,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">专家推荐</label>
+        <label class="col-md-2 control-label">会员推荐</label>
         <div class="col-md-8">
             <?= $this->cell('Savant') ?>
             <span class="notice">(*最多只能选4个)</span>
@@ -209,7 +209,7 @@
         });
         var savantSelect2 = $('#select-savant').select2({
             language: "zh-CN",
-            placeholder: '选择一个专家',
+            placeholder: '选择一个会员',
             maximumSelectionLength: 4
         });
         $('#select-user').select2({

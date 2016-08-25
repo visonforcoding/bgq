@@ -18,7 +18,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ">
                     <div class="databox bg-white radius-bordered">
                         <div class="databox-left bg-themesecondary ht">
-                            专家认证          
+                            会员认证          
                         </div>
                         <div class="databox-right">
                             <a class="a-link" href="/admin/savant/index?do=check">
@@ -111,7 +111,7 @@
                         <a href="#tab2" data-toggle="tab">活动报名数</a>
                     </li>
                     <li class="dropdown">
-                        <a href="#tab3" data-toggle="tab">专家约见数</a>
+                        <a href="#tab3" data-toggle="tab">会员约见数</a>
                     </li>
                     <li class="dropdown">
                         <a href="#tab4" data-toggle="tab">平台收入</a>

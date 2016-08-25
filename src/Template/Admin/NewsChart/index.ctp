@@ -24,7 +24,6 @@
                     <option value="week">周</option>
                 </select>
             </div>
-            <div class="clearfix"></div>
         </div>
         <div class="panel-body">
             <div id="line_chart" style="width:100%;height:400px;" >
