@@ -34,6 +34,7 @@ class UserController extends AppController {
      * @param string $guid
      */
     public function scanLogin($guid) {
+        $this->viewBuilder()->autoLayout(false);
         if($this->user){
             $user_id = $this->user->id;
             $user = $this->User->get($user_id);
