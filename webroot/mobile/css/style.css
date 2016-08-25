@@ -851,7 +851,7 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .my-collection-items span i{float:right;color:#e01a48;}
 .my-collection-items h3{line-height: 0.36rem;color:#7a7e83;font-size:0.3rem;margin-bottom:0.1rem;-webkit-line-clamp:2;display: -webkit-box;
     overflow: hidden;-webkit-box-orient: vertical;min-height:.68rem;}
-.my-news-items h3{height:0.84rem;overflow:hidden;width:100%;}
+.my-news-items h3{/*height:0.84rem;*/overflow:hidden;width:100%;}
 .my-news-items span b{margin-left:0.2rem;}
 
 .history-info li{padding:0.08rem 0 0.18rem;border-bottom:1px #e5e5e5 solid;background: #fff;}
@@ -932,7 +932,7 @@ top:-0.1rem;left:50%;margin-left:-0.52rem;background: #f0eff5;text-align: center
 .expert-commond h3{float:left;font-size:0.3rem;margin-left:0.3rem;color:#7a7e83;line-height: 0.3rem;width: 65%;height: 0.92rem;overflow: hidden;}
 .expert-commond h3 span{display: block;font-size:.24rem;color:#9ba4ad;line-height: 0.3rem;
     margin-top: 0.05rem;}
-.companyinfo{width:100%;max-width: 750px;}
+.companyinfo{width:100%;max-width: 750px;margin-bottom:.2rem;}
 .companyinfo p{line-height: 0.3rem;font-size:0.22rem;color:#c8ccd3;text-align: center;}
 .tohome i{margin-right: 0.2rem;font-size:.28rem;}
 /*引导页*/
