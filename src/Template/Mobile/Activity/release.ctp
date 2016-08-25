@@ -81,8 +81,10 @@
                         func: function (msg) {
                             if (typeof msg === 'object') {
                                 if (msg.status === true) {
-                                    $('.reg-shadow').show();
-                                    $('.totips').show();
+                                    setTimeout(function(){
+                                        $('.reg-shadow').show();
+                                        $('.totips').show();
+                                    }, 400);
                                     LEMON.sys.hideKeyboard();
                                 } else {
                                     $.util.alert(msg.msg);
