@@ -330,7 +330,7 @@ class UserController extends AppController {
             $redirect_url = '/home/index';
         }
         if($this->user){
-            return $this->redirect($redirect_url);
+           // return $this->redirect($redirect_url);
         }
         $this->response->cookie([
             'name' => 'login_url',
