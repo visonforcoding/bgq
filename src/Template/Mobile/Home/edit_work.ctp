@@ -10,13 +10,13 @@
     </div>
 </header>
 <div class="m-wraper edit-education-bottom wraper">
-    <div class="education-items" style="display: none;">
+    <div class="education-items" style="display: none; margin-bottom: 10px">
         <form action="" method="post">
         <div class="education-title">
             <h3>
-                工作经历<i></i></span>
                 <a onclick="deleteEd(this);" class="deletbtn ml20">删除</a>
-                <a onclick="checkForm(this);" class="savetbtn">保存</a>
+                工作经历<i></i></span>
+                <a onclick="checkForm(this);" class="savetbtn fr">保存</a>
             </h3>
         </div>
         <ul class="h-info-box e-info-box">
@@ -33,13 +33,15 @@
             <li  class="no-right-ico">
                 <span>开始日期：</span>
                 <div>
-                    <input onclick="showDialog(this);" onblur="hideDialog();" type="text" name="start_date" placeholder="<?php echo date('Y-m-d'); ?>" class="checktime" />
+                    <span name="start_date" onclick="_choose=this; showDialog(choosedate);"><?php echo date('Y-m-d'); ?></span>
+                    <input style="display: none" type="text" name="start_date" maxlength="10" value="<?php echo date('Y-m'); ?>"/>
                 </div>
             </li>
             <li  class="no-right-ico">
                 <span>结束日期：</span>
                 <div>
-                    <input onclick="showDialog(this);" onblur="hideDialog();" type="text" name="end_date" placeholder="<?php echo date('Y-m-d'); ?>" class="checktime" />
+                    <span name="end_date" onclick="_choose=this; showDialog(choosedate);"><?php echo date('Y-m-d'); ?></span>
+                    <input style="display: none" type="text" name="end_date" maxlength="10" value="<?php echo date('Y-m'); ?>"/>
                 </div>
             </li>
             <li  class="no-b-border textareabox no-right-ico">
@@ -50,13 +52,13 @@
         </form>
     </div>
     <?php $key=1; foreach($careers as $career):?>
-        <div class="education-items oldlist">
+        <div class="education-items oldlist" style="margin-bottom: 10px">
         <form action="" method="post">
         <div class="education-title">
             <h3 data-id="<?=$career->id?>">
-                工作经历<?php echo $key;$key++;?><i></i></span>
                 <a onclick="deleteEd(this);" class="deletbtn ml20">删除</a>
-                <a onclick="checkForm(this);" class="savetbtn">保存</a>
+                工作经历<?php echo $key;$key++;?><i></i></span>
+                <a onclick="checkForm(this);" class="savetbtn fr">保存</a>
             </h3>
         </div>
         <ul class="h-info-box e-info-box">
@@ -73,13 +75,15 @@
             <li  class="no-right-ico">
                 <span>开始日期：</span>
                 <div>
-                    <input onclick="showDialog(this);" onblur="hideDialog();" type="text" name="start_date" value="<?=$career->start_date ?>"  />
+                    <span name="start_date" onclick="_choose=this; showDialog(choosedate);"><?= $career->start_date ?></span>
+                    <input style="display: none" type="text" name="start_date" maxlength="10" value="<?= $career->start_date ?>" />
                 </div>
             </li>
             <li  class="no-right-ico">
                 <span>结束日期：</span>
                 <div>
-                    <input onclick="showDialog(this);" onblur="hideDialog();" type="text" name="end_date" value="<?=$career->end_date ?>" />
+                    <span name="end_date" onclick="_choose=this; showDialog(choosedate);"><?= $career->end_date ?></span>
+                    <input type="text" style="display: none"  name="end_date" maxlength="10" value="<?= $career->end_date ?>" />
                 </div>
             </li>
             <li  class="no-b-border textareabox no-right-ico">
@@ -137,6 +141,13 @@
         }
     }
 
+
+    var _choose = null;
+    function choosedate(value) {
+        _choose.innerHTML = value;
+        $(_choose.parentNode).find('input').val(value);
+    }
+
     function msg(str) {
         $.util.alert(str);
     }
@@ -155,14 +166,22 @@
             $.util.alert('请填职位');
             return;
         }
-        if(!form.start_date.value){
-            $.util.alert('请填写开始时间');
+        if (form.start_date.value == '至今') {
+            $.util.alert('开始时间不能是至今');
             return;
         }
-        if(!form.end_date.value){
-            $.util.alert('请填写结束时间,如果未结束,可填写"至今"');
+        if (form.end_date.value != '至今' && form.start_date.value > form.end_date.value) {
+            $.util.alert('开始时间不能大于结束时间');
             return;
         }
+//        if(!form.start_date.value){
+//            $.util.alert('请填写开始时间');
+//            return;
+//        }
+//        if(!form.end_date.value){
+//            $.util.alert('请填写结束时间,如果未结束,可填写"至今"');
+//            return;
+//        }
 
 
         var data_id =  $(em.parentNode).data('id');

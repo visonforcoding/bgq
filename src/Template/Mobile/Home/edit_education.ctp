@@ -11,7 +11,7 @@
     </div>
 </header>
 <div class="m-wraper edit-education-bottom wraper">
-    <div class="education-items" style="display: none">
+    <div class="education-items" style="display: none;margin-bottom: 10px">
         <form action="/home/save-education" method="post">
             <div class="education-title">
                 <h3>
@@ -23,7 +23,7 @@
             <ul class="h-info-box e-info-box">
                 <li  class="no-right-ico">
                     <span>学校：</span>
-                    <div><input name="school" type="text" readonly /></div>
+                    <div><input name="school" type="text"/></div>
                 </li>
                 <li  class="no-right-ico">
                     <span>院系/专业：</span>
@@ -50,13 +50,15 @@
                 <li class='no-right-ico'>
                     <span>开始日期：</span>
                     <div>
-                        <input onclick="showDialog(this);" onblur="hideDialog()" name="start_date" maxlength="10" type="text" placeholder="<?php echo date('Y-m-d'); ?>" class="checktime" />
+                        <span name="start_date" onclick="_choose=this; showDialog(choosedate);"><?php echo date('Y-m-d'); ?></span>
+                        <input style="display: none" type="text" name="start_date" maxlength="10" value="<?php echo date('Y-m'); ?>"/>
                     </div>
                 </li>
                 <li class="no-b-border no-right-ico">
                     <span>结束日期：</span>
                     <div>
-                        <input onclick="showDialog(this);" onblur="hideDialog()" name="end_date" maxlength="10" type="text" placeholder="<?php echo date('Y-m-d'); ?>" class="checktime" />
+                        <span name="end_date" onclick="_choose=this; showDialog(choosedate);"><?php echo date('Y-m-d'); ?></span>
+                        <input style="display: none" type="text" name="end_date" maxlength="10" value="<?php echo date('Y-m'); ?>"/>
                     </div>
                 </li>
 
@@ -66,20 +68,21 @@
     <?php $k = 0 ?>
     <?php foreach ($educations as $education): ?>
         <?php $k++; ?>
-        <div class="education-items oldlist">
+        <div class="education-items oldlist" style="margin-bottom: 10px">
             <form action="/home/save-education" method="post">
             <!--    <input type="hidden" name="id" value="<?= $education->id ?>">  -->
                 <div class="education-title">
                     <h3 data-id="<?= $education->id ?>">
-                        教育经历<i><?= $k ?></i></span>
                         <a onclick="deleteEd(this);"  class="deletbtn ml20">删除</a>
-                        <a onclick="checkForm(this);" class="savebtn">保存</a>
+                        教育经历<i><?= $k ?></i></span>
+
+                        <a onclick="checkForm(this);" class="savebtn fr">保存</a>
                     </h3>
                 </div>
                 <ul class="h-info-box e-info-box">
                     <li  class="no-right-ico">
                         <span>学校：</span>
-                        <div><input name="school" type="text" value="<?= $education->school ?>" readonly /></div>
+                        <div><input name="school" type="text" value="<?= $education->school ?>" /></div>
                     </li>
                     <li  class="no-right-ico">
                         <span>院系/专业：</span>
@@ -107,13 +110,15 @@
                     <li  class="no-right-ico">
                         <span>开始日期：</span>
                         <div>
-                            <input type="text" name="start_date" onclick="showDialog(this);" onblur="hideDialog();" maxlength="10" value="<?= $education->start_date ?>" />
+                            <span name="start_date" onclick="_choose=this; showDialog(choosedate);"><?= $education->start_date ?></span>
+                            <input style="display: none" type="text" name="start_date" maxlength="10" value="<?= $education->start_date ?>" />
                         </div>
                     </li>
                     <li  class="no-right-ico">
                         <span>结束日期：</span>
                         <div>
-                            <input type="text" name="end_date" onclick="showDialog(this);" onblur="hideDialog()" maxlength="10" value="<?= $education->end_date ?>" />
+                            <span name="end_date" onclick="_choose=this; showDialog(choosedate);"><?= $education->end_date ?></span>
+                            <input type="text" style="display: none"  name="end_date" maxlength="10" value="<?= $education->end_date ?>" />
                         </div>
                     </li>
                 </ul>
@@ -138,6 +143,12 @@
 
     if ($('.oldlist').length == 0) {
         $('.wraper .education-items').eq(0).clone(true, true).insertBefore('.add-subject').show();
+    }
+
+    var _choose = null;
+    function choosedate(value) {
+        _choose.innerHTML = value;
+        $(_choose.parentNode).find('input').val(value);
     }
 
     function deleteEd(em) {
@@ -183,14 +194,22 @@
             $.util.alert('请填写院系/专业');
             return;
         }
-        if (!form.start_date.value) {
-            $.util.alert('请选择开始时间');
+        if (form.start_date.value == '至今') {
+            $.util.alert('开始时间不能是至今');
             return;
         }
-        if (!form.end_date.value) {
-            $.util.alert('请填写结束时间,如果未结束,可选择"至今"');
+        if (form.end_date.value != '至今' && form.start_date.value > form.end_date.value) {
+            $.util.alert('开始时间不能大于结束时间');
             return;
         }
+//        if (!form.start_date.value) {
+//            $.util.alert('请选择开始时间');
+//            return;
+//        }
+//        if (!form.end_date.value) {
+//            $.util.alert('请填写结束时间,如果未结束,可选择"至今"');
+//            return;
+//        }
 
 
         var data_id = $(em.parentNode).data('id');

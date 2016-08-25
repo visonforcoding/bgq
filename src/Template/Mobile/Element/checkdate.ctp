@@ -82,7 +82,7 @@
 </div>
 <script type="text/javascript">
 
-    var _year = '2016', _month = '01', _cInput;
+    var _year = '2016', _month = '01', _func;
     // 年
     $('.r_box').on('scroll', function () {
         var scrollTop = $(this).get(0).scrollTop;
@@ -102,16 +102,10 @@
         console.log(_year + '-' + _month);
     })
     // 显示
-    function showDialog(input) {
+    function showDialog(func) {
         LEMON.sys.hideKeyboard();
         $('.checkdate').removeClass('hide_date');
-        _cInput = input;
-//        if(input.value){
-//            _cInput = input;
-//        } else {
-//            _year = '2016', _month = '01',
-//                    _cInput = input;
-//        }
+        _cfunc = func;
         $('.r_box li').each(function (i) {
             if ($(this).attr('val') == _month) {
                 this.scrollIntoView(true);
@@ -128,11 +122,11 @@
     }
     // 确定
     function submitDialog() {
-        if(_cInput){
+        if(_cfunc){
             if(_year === '至今'){
-                _cInput.value = '至今';
+                _cfunc('至今');
             } else {
-                _cInput.value = _year + '-' + _month;
+                _cfunc(_year + '-' + _month);
             }
         }
         hideDialog();

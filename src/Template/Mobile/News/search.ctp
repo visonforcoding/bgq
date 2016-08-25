@@ -115,6 +115,7 @@
                     if(em && em.tagName == 'A'){
                         industryTap(em);
                     }
+                    return false;
                 });
 //                $('.industry').on('tap', function () {
 //                    industryTap(this);
