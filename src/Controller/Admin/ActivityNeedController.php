@@ -9,7 +9,7 @@ use Wpadmin\Controller\AppController;
  *
  * @property \App\Model\Table\ActivityneedTable $Activityneed
  */
-class ActivityneedController extends AppController {
+class ActivityNeedController extends AppController {
     
     public function initialize() {
         parent::initialize();
