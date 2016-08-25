@@ -466,7 +466,7 @@ class HomeController extends AppController {
             $savant_books = $BookTable->find()->contain(['Subjects', 'Users' => function($q) {
                     return $q->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums', 'level']);
                 }])->where([
-                        'SubjectBook.status !=' => 2,
+//                        'SubjectBook.status !=' => 2,
                         'SubjectBook.savant_id =' => $this->user->id,
                     ])->order('SubjectBook.update_time')->toArray();
             $UsermsgTable->updateAll(['status'=>1], ['type'=>4, 'user_id'=>$this->user->id, 'status'=>0]);
