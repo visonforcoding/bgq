@@ -50,7 +50,9 @@
                             {name: 'phone', editable: true, align: 'center',sortable: false},
                             {name: 'company', editable: true, align: 'center',sortable: false},
                             {name: 'position', editable: true, align: 'center',sortable: false},
-                            {name: 'msg', editable: true, align: 'center',sortable: false},
+                            {name: 'msg', editable: true, align: 'center',sortable: false,formatter:function(cell,opt,obj){
+                                    return cell.substring(0,10)+'...';
+                            }},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center',sortable: false},
                             {name: 'status', editable: true, align: 'center',sortable: false, formatter: function (cell, opt, obj) {
