@@ -144,16 +144,18 @@ class LikeLogsController extends AppController {
             $query = $this->LikeLogs->find();
         }
         $query->hydrate(false);
-        if (!empty($where)) {
-            $query->where($where);
-        }
-        $nums = $query->count();
-        $type = $this->request->query('type');
+         $type = $this->request->query('type');
         if($type=='1'){
             $contain = 'News';
         }else{
             $contain = 'Activities';
         }
+        $where['type'] = $type;
+        if (!empty($where)) {
+            $query->where($where);
+        }
+        $nums = $query->count();
+    
         $query->contain(['Users',$contain]);
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
