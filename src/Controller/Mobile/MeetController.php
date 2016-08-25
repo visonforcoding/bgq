@@ -312,7 +312,7 @@ class MeetController extends AppController {
         $subjects = $subjects
                 ->where(['MeetSubject.user_id'=>$user_id])
                 ->orderDesc('MeetSubject.create_time')
-                ->distinct('MeetSubject.id')
+//                ->distinct('MeetSubject.id')
                 ->toArray();
 //        debug($subjects);die;
         $this->set([
