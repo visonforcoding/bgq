@@ -362,7 +362,7 @@ class HomeController extends AppController {
                 $user_id = $this->user->id;
                 $NeedTable = \Cake\ORM\TableRegistry::get('need');
                 $content = $this->request->data('content');
-                \Cake\Log\Log::debug($content,'devlog');
+                \Cake\Log\Log::debug(json_encode($content),'devlog');
                 \Cake\Log\Log::debug($_POST['content'],'devlog');
                 $need = $NeedTable->newEntity(['user_id' => $user_id, 'msg' => $content]);
                 if ($NeedTable->save($need)) {
