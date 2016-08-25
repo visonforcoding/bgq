@@ -30,7 +30,7 @@
                     <h3>{#following_truename#}<span class="meetnum"></span></h3>
                     <span class="job">{#following_company#}&nbsp;&nbsp;{#following_position#}</span>
                 </a>
-                <div class="mark">
+                <div class="mark line2">
                     {#following_subject#}
                     <span class="meetnum">{#following_fans#}人关注</span>
                 </div>
