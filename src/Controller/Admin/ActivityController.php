@@ -503,7 +503,7 @@ class ActivityController extends AppController {
     public function viewCollect($id=null){
         $this->set('id', $id);
         $type = $this->request->query('type');
-        if($type){
+        if(isset($type)){
             $this->set([
                 'type'=>$type
             ]);
@@ -516,7 +516,7 @@ class ActivityController extends AppController {
     public function viewLike($id=null){
         $this->set('id', $id);
         $type = $this->request->query('type');
-        if($type){
+        if(isset($type)){
             $this->set([
                 'type'=>$type
             ]);
