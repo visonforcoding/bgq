@@ -63,7 +63,7 @@
     </form>
     <a id="submit" href="javascript:void(0)" class="nextstep">提交</a>
     <?php if(isset($subject)): ?>
-    <a href="#this" id="del" class="s-btn colorbg">删除</a>
+    <a href="javascript:void(0)" id="del" class="s-btn colorbg">删除</a>
     <?php endif;?>
 </div>
 <?php $this->start('script') ?>
