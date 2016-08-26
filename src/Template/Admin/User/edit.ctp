@@ -194,11 +194,11 @@
             </form>
         </div>
         <div class="tab-pane in " id="tab3">
+                <?php $educationConf = \Cake\Core\Configure::read('educationType'); ?>
                 <?php if ($user->educations): ?>
                     <?php $k = 1; ?>
-                    <?php $educationConf = \Cake\Core\Configure::read('educationType'); ?>
                     <?php foreach ($user->educations as $education): ?>
-                        <div class="input-group col-md-8 col-md-offset-1">
+                        <div class="input-group col-md-8 col-md-offset-1 mt20">
                             <span class="input-group-addon">开始时间</span>
                             <input type="text" name="start_date" value="<?= $education->start_date ?>" class="form-control" placeholder="2009-9">
                             <span class="input-group-addon">结束时间</span>
@@ -209,8 +209,8 @@
                             <input type="text" name="major" value="<?= $education->major ?>" class="form-control" placeholder="经济管理">
                             <span class="input-group-addon">学历</span>
                             <?php echo $this->form->select('education', $educationConf, ['class' => 'form-control','value'=>$education->education]) ?>
-                            <span class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
-                            <span class="input-group-addon save"><i style="color:blue" class="icon icon-save"></i></span>
+                            <span data-id="<?=$education->id?>" class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
+                            <span data-id="<?=$education->id?>" class="input-group-addon save"><i style="color:blue" class="icon icon-save"></i></span>
                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
@@ -225,7 +225,6 @@
                     <input type="text" name="major" class="form-control" placeholder="经济管理">
                     <span class="input-group-addon">学历</span>
                     <?php echo $this->form->select('education', $educationConf, ['class' => 'form-control']) ?>
-                    <span class="input-group-addon"><i style="color:blue" class="icon icon-trash"></i></span>
                     <span class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
                 </div>
         </div>
@@ -266,12 +265,18 @@
                 });
                 return false;
             });
-            $('.add').submit(function () {
+            $('.add').click(function () {
                 var form = $(this).parent('.input-group');
+                var formdata = {};
+                formdata['start_date'] = $(form).find('input[name="start_date"]').val();
+                formdata['end_date'] = $(form).find('input[name="end_date"]').val();
+                formdata['school'] = $(form).find('input[name="school"]').val();
+                formdata['major'] = $(form).find('input[name="major"]').val();
+                formdata['education'] = $(form).find('select[name="education"]').val();
                 $.ajax({
                     type:'post',
-                    url: '/admin/user/addEducation',
-                    data: $(form).serialize(),
+                    url: '/admin/user/addEducation/'+<?=$user->id?>,
+                    data: formdata,
                     dataType: 'json',
                     success: function (res) {
                         if (typeof res === 'object') {
