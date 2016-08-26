@@ -40,10 +40,10 @@
 <div class="tips" hidden id="scht" style="z-index: 999">
     <p>擅长话题样例</p>
 </div>
-<div class="totips" style="height: 3.6rem;" hidden id="checkBtn">
+<div class="totips" hidden id="checkBtn">
     <h3 id="msg">请先去完善个人资料</h3>
-    <span></span>
-    <a href="javascript:void(0)" class="tipsbtn" id="no">取消</a><a href="/home/edit_userinfo" class="tipsbtn" id="yes">去完善</a>
+    <span style="display:none;"></span>
+    <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="/home/edit_userinfo" class="tipsbtn bgred" id="yes">去完善</a>
 </div>
 <?php $this->start('script') ?>
 <script>
