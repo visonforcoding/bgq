@@ -32,7 +32,7 @@
                     <span>部门/职务：</span>
 
                     <div >
-                        <input name="position" type="text" placeholder="请填写您的职务" />
+                        <input name="position" type="text" placeholder="请填写您的部门/职务" />
                     </div>
                 </a>
             </li>

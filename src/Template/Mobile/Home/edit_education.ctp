@@ -51,14 +51,14 @@
                 <li class='no-right-ico'>
                     <span>开始日期：</span>
                     <div>
-                        <span name="start_date" onclick="_choose=this; showDialog(choosedate);"><?php echo date('Y-m-d'); ?></span>
+                        <span name="start_date" onclick="_choose=this; showDialog(choosedate);"><?php echo date('Y-m'); ?></span>
                         <input style="display: none" type="text" name="start_date" maxlength="10" value="<?php echo date('Y-m'); ?>"/>
                     </div>
                 </li>
                 <li class="no-b-border no-right-ico">
                     <span>结束日期：</span>
                     <div>
-                        <span name="end_date" onclick="_choose=this; showDialog(choosedate);"><?php echo date('Y-m-d'); ?></span>
+                        <span name="end_date" onclick="_choose=this; showDialog(choosedate);"><?php echo date('Y-m'); ?></span>
                         <input style="display: none" type="text" name="end_date" maxlength="10" value="<?php echo date('Y-m'); ?>"/>
                     </div>
                 </li>
