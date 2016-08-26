@@ -28,14 +28,14 @@
                 <label class="radio-inline"> <input name="level" value="2"  type="radio"> 专家 </label>
             </div>
         </div>-->
-    <div class="form-group">
+<!--    <div class="form-group">
         <label class="col-md-2 control-label">身份证</label>
         <div class="col-md-8">
             <?php
             echo $this->Form->input('idcard', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
-    </div>
+    </div>-->
     <div class="form-group">
         <label class="col-md-2 control-label">负责人</label>
         <div class="col-md-8">
