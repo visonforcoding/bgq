@@ -388,6 +388,7 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .head-img i{position: absolute;right:0.12rem;bottom:0;width:0.29rem;height:0.3rem;background: url(img/v.png) no-repeat;background-size: contain;}
 .mark,.s_mark_h{margin-top:0.1rem;max-height:52px;overflow:hidden;}
 .s_mark_h{max-height:.85rem;}
+.s_mark_h a{border:1px #969fa9 solid;}
 .vipinfo{width:5.3rem;float:left;}
 .vipinfo h3{font-size:0.32rem;color:#222c38;height:.5rem;overflow:hidden;line-height: .5rem;}
 .vipinfo h3 .l-name{float:left;}
