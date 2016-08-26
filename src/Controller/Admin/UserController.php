@@ -336,4 +336,76 @@ class UserController extends AppController {
             $this->Util->ajaxReturn(false,  errorMsg($education, '添加失败'));
         }
     }
+    /**
+     * 添加教育经历
+     */
+    public function delEducation(){
+        $id = $this->request->query('id');
+        $EducationTable = \Cake\ORM\TableRegistry::get('Education');
+        $education = $EducationTable->get($id);
+        if($EducationTable->delete($education)){
+            $this->Util->ajaxReturn(true,'删除成功');
+        }else{
+            $this->Util->ajaxReturn(false,'删除失败');
+        }
+    }
+    /**
+     * 添加教育经历
+     */
+    public function saveEducation($id=null){
+        $EducationTable = \Cake\ORM\TableRegistry::get('Education');
+        $education = $EducationTable->get($id);
+        $data = $this->request->data();
+        $education = $EducationTable->patchEntity($education,$data);
+        if($EducationTable->save($education)){
+            $this->Util->ajaxReturn(true,'修改成功');
+        }else{
+            $this->Util->ajaxReturn(false,  errorMsg($education, '修改失败'));
+        }
+    }
+    
+    /**
+     * 添加教育经历
+     */
+    public function addCareer($id=null){
+        $EducationTable = \Cake\ORM\TableRegistry::get('Career');
+        $data = $this->request->data();
+        $data['user_id'] = $id;
+        $education = $EducationTable->newEntity($data);
+        if($EducationTable->save($education)){
+            $this->Util->ajaxReturn(true,'添加成功');
+        }else{
+            $this->Util->ajaxReturn(false,  errorMsg($education, '添加失败'));
+        }
+    }
+    
+    
+        /**
+     * 添加教育经历
+     */
+    public function saveCareer($id=null){
+        $EducationTable = \Cake\ORM\TableRegistry::get('Career');
+        $education = $EducationTable->get($id);
+        $data = $this->request->data();
+        $education = $EducationTable->patchEntity($education,$data);
+        if($EducationTable->save($education)){
+            $this->Util->ajaxReturn(true,'修改成功');
+        }else{
+            $this->Util->ajaxReturn(false,  errorMsg($education, '修改失败'));
+        }
+    }
+    
+    /**
+     * 添加教育经历
+     */
+    public function delCareer(){
+        $id = $this->request->query('id');
+        $EducationTable = \Cake\ORM\TableRegistry::get('Career');
+        $education = $EducationTable->get($id);
+        if($EducationTable->delete($education)){
+            $this->Util->ajaxReturn(true,'删除成功');
+        }else{
+            $this->Util->ajaxReturn(false,'删除失败');
+        }
+    }
 }

@@ -89,6 +89,12 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-md-2 control-label">负责人</label>
+                <div class="col-md-8">
+                    <?= $this->cell('Admin', [[$user->admin_id]]) ?>
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-md-2 control-label">机构标签</label>
                 <div class="col-md-8">
                     <?= $this->cell('Agency', [$user->agency_id]) ?>
@@ -137,96 +143,81 @@
             <?= $this->Form->end() ?>
         </div>
         <div class="tab-pane in " id="tab2">
-            <form  action="/admin/user/education" class="form-horizontal mt20 education" method="post">
-                <?php if ($user->educations): ?>
-                    <?php $k = 1; ?>
-                    <?php $educationConf = \Cake\Core\Configure::read('educationType'); ?>
-                    <?php foreach ($user->educations as $education): ?>
-                        <fieldset>
-                            <legend>教育经历<?= $k ?></legend>
-                            <?php $k++; ?>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">开始时间</label>
-                                <div class="col-md-3">
-                                    <input name="id"  value="<?= $education->id ?>" type="hidden" class="form-control">
-                                    <input name="start_date" value="<?= $education->start_date ?>" class="datepicker form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">结束时间</label>
-                                <div class="col-md-3">
-                                    <input name="end_date" value="<?= $education->start_date ?>" class="datepicker form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">毕业院校</label>
-                                <div class="col-md-3">
-                                    <input name="school" value="<?= $education->school ?>" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">专业</label>
-                                <div class="col-md-3">
-                                    <input name="major" value="<?= $education->major ?>" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">学历</label>
-                                <div class="col-md-3">
-                                    <select name="education" class="form-control">
-                                        <?php foreach ($educationConf as $key => $value): ?>
-                                            <option value="<?= $key ?>" <?php if ($key == $education->education): ?>selected="selected"<?php endif; ?>><?= $value ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon">@</span>
-                                <input type="text" class="form-control" placeholder="用户名">
-                                <span class="input-group-addon"><i class="icon icon-heart"></i></span>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                </fieldset>
-            </form>
-        </div>
-        <div class="tab-pane in " id="tab3">
-                <?php $educationConf = \Cake\Core\Configure::read('educationType'); ?>
-                <?php if ($user->educations): ?>
-                    <?php $k = 1; ?>
-                    <?php foreach ($user->educations as $education): ?>
+            <?php if ($user->careers): ?>
+                <?php $k = 1; ?>
+                <?php foreach ($user->careers as $career): ?>
+                    <div class="career">
                         <div class="input-group col-md-8 col-md-offset-1 mt20">
+                            <span class="input-group-addon">公司</span>
+                            <input type="text" name="company" value="<?= $career->company ?>" class="form-control" placeholder="2009-9">
+                            <span class="input-group-addon">职位</span>
+                            <input type="text" name="position" value="<?= $career->position ?>" class="form-control" placeholder="2009-9">
                             <span class="input-group-addon">开始时间</span>
-                            <input type="text" name="start_date" value="<?= $education->start_date ?>" class="form-control" placeholder="2009-9">
+                            <input type="text" name="start_date" value="<?= $career->start_date ?>" class="form-control" placeholder="2009-9">
                             <span class="input-group-addon">结束时间</span>
-                            <input type="text" name="end_date" value="<?= $education->end_date ?>" class="form-control" placeholder="2009-9">
-                            <span class="input-group-addon">学校</span>
-                            <input type="text" name="school" value="<?= $education->school ?>" class="form-control" placeholder="2009-9">
-                            <span class="input-group-addon">专业</span>
-                            <input type="text" name="major" value="<?= $education->major ?>" class="form-control" placeholder="经济管理">
-                            <span class="input-group-addon">学历</span>
-                            <?php echo $this->form->select('education', $educationConf, ['class' => 'form-control','value'=>$education->education]) ?>
-                            <span data-id="<?=$education->id?>" class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
-                            <span data-id="<?=$education->id?>" class="input-group-addon save"><i style="color:blue" class="icon icon-save"></i></span>
+                            <input type="text" name="end_date" value="<?= $career->end_date ?>" class="form-control" placeholder="经济管理">
                         </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+                        <div class="input-group col-md-8 col-md-offset-1 mt20">
+                            <span class="input-group-addon">工作描述</span>
+                            <input type="text" name="descb" value="<?= $career->descb ?>" class="form-control" placeholder="经济管理">
+                            <span data-id="<?= $career->id ?>" class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
+                            <span data-id="<?= $career->id ?>" class="input-group-addon save"><i style="color:blue" class="icon icon-save"></i></span>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <div class="career">
                 <div class="input-group col-md-8 col-md-offset-1 mt20">
+                    <span class="input-group-addon">公司</span>
+                    <input type="text" name="company"  class="form-control" >
+                    <span class="input-group-addon">职位</span>
+                    <input type="text" name="position"  class="form-control" >
                     <span class="input-group-addon">开始时间</span>
-                    <input type="text"  name="start_date" class="form-control" placeholder="2009-9">
+                    <input type="text" name="start_date"  class="form-control" >
                     <span class="input-group-addon">结束时间</span>
-                    <input type="text" name="end_date" class="form-control" placeholder="2013-6">
-                    <span class="input-group-addon">学校</span>
-                    <input type="text" name="school" class="form-control" placeholder="X大学">
-                    <span class="input-group-addon">专业</span>
-                    <input type="text" name="major" class="form-control" placeholder="经济管理">
-                    <span class="input-group-addon">学历</span>
-                    <?php echo $this->form->select('education', $educationConf, ['class' => 'form-control']) ?>
+                    <input type="text" name="end_date"  class="form-control" >
+                </div>
+                <div class="input-group col-md-8 col-md-offset-1 mt20">
+                    <span class="input-group-addon">工作描述</span>
+                    <input type="text" name="descb"  class="form-control" >
                     <span class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
                 </div>
+            </div>
+        </div>
+        <div class="tab-pane in " id="tab3">
+            <?php $educationConf = \Cake\Core\Configure::read('educationType'); ?>
+            <?php if ($user->educations): ?>
+                <?php $k = 1; ?>
+                <?php foreach ($user->educations as $education): ?>
+                    <div class="education input-group col-md-8 col-md-offset-1 mt20">
+                        <span class="input-group-addon">开始时间</span>
+                        <input type="text" name="start_date" value="<?= $education->start_date ?>" class="form-control" placeholder="2009-9">
+                        <span class="input-group-addon">结束时间</span>
+                        <input type="text" name="end_date" value="<?= $education->end_date ?>" class="form-control" placeholder="2009-9">
+                        <span class="input-group-addon">学校</span>
+                        <input type="text" name="school" value="<?= $education->school ?>" class="form-control" placeholder="2009-9">
+                        <span class="input-group-addon">专业</span>
+                        <input type="text" name="major" value="<?= $education->major ?>" class="form-control" placeholder="经济管理">
+                        <span class="input-group-addon">学历</span>
+                        <?php echo $this->form->select('education', $educationConf, ['class' => 'form-control', 'value' => $education->education]) ?>
+                        <span data-id="<?= $education->id ?>" class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
+                        <span data-id="<?= $education->id ?>" class="input-group-addon save"><i style="color:blue" class="icon icon-save"></i></span>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <div class="education input-group col-md-8 col-md-offset-1 mt20">
+                <span class="input-group-addon">开始时间</span>
+                <input type="text"  name="start_date" class="form-control" placeholder="2009-9">
+                <span class="input-group-addon">结束时间</span>
+                <input type="text" name="end_date" class="form-control" placeholder="2013-6">
+                <span class="input-group-addon">学校</span>
+                <input type="text" name="school" class="form-control" placeholder="X大学">
+                <span class="input-group-addon">专业</span>
+                <input type="text" name="major" class="form-control" placeholder="经济管理">
+                <span class="input-group-addon">学历</span>
+                <?php echo $this->form->select('education', $educationConf, ['class' => 'form-control']) ?>
+                <span class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
+            </div>
         </div>
     </div>
 
@@ -243,6 +234,10 @@
             $('#select-agency').select2({
                 language: "zh-CN",
                 placeholder: '选择一个标签'
+            });
+            $('#select-admin').select2({
+                language: "zh-CN",
+                placeholder: '选择一个管理员作为负责人'
             });
             $('#profile').submit(function () {
                 var form = $(this);
@@ -265,7 +260,37 @@
                 });
                 return false;
             });
-            $('.add').click(function () {
+            $('.education .del').click(function () {
+                var id = $(this).data('id');
+                $.getJSON('/admin/user/delEducation', {'id': id}, function (res) {
+                    if (typeof res === 'object') {
+                        if (res.status) {
+                            layer.alert(res.msg, function () {
+                                // window.location.href = '/admin/user/index';
+                                window.location.reload();
+                            });
+                        } else {
+                            layer.alert(res.msg, {icon: 5});
+                        }
+                    }
+                });
+            });
+            $('.career .del').click(function () {
+                var id = $(this).data('id');
+                $.getJSON('/admin/user/delCareer', {'id': id}, function (res) {
+                    if (typeof res === 'object') {
+                        if (res.status) {
+                            layer.alert(res.msg, function () {
+                                // window.location.href = '/admin/user/index';
+                                window.location.reload();
+                            });
+                        } else {
+                            layer.alert(res.msg, {icon: 5});
+                        }
+                    }
+                });
+            });
+            $('.education .add').click(function () {
                 var form = $(this).parent('.input-group');
                 var formdata = {};
                 formdata['start_date'] = $(form).find('input[name="start_date"]').val();
@@ -274,8 +299,94 @@
                 formdata['major'] = $(form).find('input[name="major"]').val();
                 formdata['education'] = $(form).find('select[name="education"]').val();
                 $.ajax({
-                    type:'post',
-                    url: '/admin/user/addEducation/'+<?=$user->id?>,
+                    type: 'post',
+                    url: '/admin/user/addEducation/' +<?= $user->id ?>,
+                    data: formdata,
+                    dataType: 'json',
+                    success: function (res) {
+                        if (typeof res === 'object') {
+                            if (res.status) {
+                                layer.alert(res.msg, function () {
+                                    // window.location.href = '/admin/user/index';
+                                    window.location.reload();
+                                });
+                            } else {
+                                layer.alert(res.msg, {icon: 5});
+                            }
+                        }
+                    }
+                });
+                return false;
+            });
+            $('.career .add').click(function () {
+                var form = $(this).parents('.career');
+                var formdata = {};
+                formdata['company'] = $(form).find('input[name="company"]').val();
+                formdata['position'] = $(form).find('input[name="position"]').val();
+                formdata['start_date'] = $(form).find('input[name="start_date"]').val();
+                formdata['end_date'] = $(form).find('input[name="end_date"]').val();
+                formdata['descb'] = $(form).find('input[name="descb"]').val();
+                $.ajax({
+                    type: 'post',
+                    url: '/admin/user/addCareer/' +<?= $user->id ?>,
+                    data: formdata,
+                    dataType: 'json',
+                    success: function (res) {
+                        if (typeof res === 'object') {
+                            if (res.status) {
+                                layer.alert(res.msg, function () {
+                                    // window.location.href = '/admin/user/index';
+                                    window.location.reload();
+                                });
+                            } else {
+                                layer.alert(res.msg, {icon: 5});
+                            }
+                        }
+                    }
+                });
+                return false;
+            });
+            $('.career .save').click(function () {
+                var id = $(this).data('id');
+                var form = $(this).parents('.career');
+                var formdata = {};
+                formdata['company'] = $(form).find('input[name="company"]').val();
+                formdata['position'] = $(form).find('input[name="position"]').val();
+                formdata['start_date'] = $(form).find('input[name="start_date"]').val();
+                formdata['end_date'] = $(form).find('input[name="end_date"]').val();
+                formdata['descb'] = $(form).find('input[name="descb"]').val();
+                $.ajax({
+                    type: 'post',
+                    url: '/admin/user/saveCareer/' + id,
+                    data: formdata,
+                    dataType: 'json',
+                    success: function (res) {
+                        if (typeof res === 'object') {
+                            if (res.status) {
+                                layer.alert(res.msg, function () {
+                                    // window.location.href = '/admin/user/index';
+                                    window.location.reload();
+                                });
+                            } else {
+                                layer.alert(res.msg, {icon: 5});
+                            }
+                        }
+                    }
+                });
+                return false;
+            });
+            $('.education .save').click(function () {
+                var id = $(this).data('id');
+                var form = $(this).parent('.input-group');
+                var formdata = {};
+                formdata['start_date'] = $(form).find('input[name="start_date"]').val();
+                formdata['end_date'] = $(form).find('input[name="end_date"]').val();
+                formdata['school'] = $(form).find('input[name="school"]').val();
+                formdata['major'] = $(form).find('input[name="major"]').val();
+                formdata['education'] = $(form).find('select[name="education"]').val();
+                $.ajax({
+                    type: 'post',
+                    url: '/admin/user/saveEducation/' + id,
                     data: formdata,
                     dataType: 'json',
                     success: function (res) {
