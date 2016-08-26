@@ -295,7 +295,7 @@ class HomeController extends AppController {
                                 ->where(['usermsg.`user_id`' => $user_id, 'usermsg.status'=>0])
                                 ->orderDesc('usermsg.create_time')->toArray();
                 //看了之后 就更改状态了为已读
-                $UsermsgTable->updateAll(['status' => 1], ['user_id' => $user_id, 'status' => 0]);
+                $UsermsgTable->updateAll(['status' => 1], ['user_id' => $user_id, 'status' => 0, 'type'=>1]);
                 if($fans){
                     return $this->Util->ajaxReturn(['status'=>true, 'data'=>$fans]);
                 } elseif($fans == []) {
@@ -1564,8 +1564,8 @@ class HomeController extends AppController {
                 }
             }
             $data['industry'] = $industry ? implode('、', $industry) : '未完善';
-            $data['educations'] = $user->educations ? '已填写' : '未完善';
-            $data['careers'] = $user->careers ? '已填写' : '未完善';
+            $data['educations'] = $user->educations ? $user->educations['0']->school : '未完善';
+            $data['careers'] = $user->careers ? $user->careers['0']->company : '未完善';
             $data['grbq'] = $user->grbq ? implode('、', unserialize($user->grbq)) : '未完善';
             $data['card_path'] = $user->card_path;
             return $this->Util->ajaxReturn(['status'=>true, 'data'=>$data]);
