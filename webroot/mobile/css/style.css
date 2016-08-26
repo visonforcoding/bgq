@@ -601,8 +601,8 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .worktab a:last-of-type{border-bottom:none;}
 .linkinfo{margin-top:0.12rem;}
 .tabcon ul li{/*line-height: .9rem;*/position:relative;font-size:0;padding:.3rem 0;}
-.tabcon .noafter:after{height:0;content: '';}
 .tabcon ul li:after{width:200%;height:1px;position:absolute;bottom:0;left:0;z-index:0;content:"";-webkit-transform:scale(0.5);-webkit-transform-origin:0 0;transform:scale(0.5);transform-origin:0 0;background: #e5e5e5;}
+.tabcon .noafter:after,.worktab li:last-of-type:after{height:0;content: '';}
 .tabcon ul div{display:inline-block;max-width:70%;}
 .tabcon div em{margin-right:.1rem;font-size:.28rem;}
 .basicon .b-dq i{color:#ff7e53;font-size:.28rem;}
