@@ -45,7 +45,7 @@
                 <span>性别：</span>
                 <div>
                     <span class='typeselect'>
-                        <select name="gender" class='checkedsex' id="gender">
+                        <select name="gender" class='checkedsex' id="gender" style='height:.6rem;'>
                             <option value="1" <?php if($user->gender==1):?>selected="selected"<?php endif; ?>>男</option>
                             <option value="2" <?php if($user->gender==2):?>selected="selected"<?php endif; ?>>女</option>
                         </select>
@@ -173,8 +173,10 @@
         <li>
             <a href="/home/edit-card">
                 <span >我的名片：</span>
+
                 <div>
                     <span class="mcard"><img src="<?= $user->card_path ?>" id="card" /></span>
+
                 </div>
             </a>
         </li>
