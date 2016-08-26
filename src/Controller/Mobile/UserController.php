@@ -187,7 +187,7 @@ class UserController extends AppController {
                 return $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
             }
         }
-        $this->set('pageTitle', '验证手机号');
+        $this->set('pageTitle', '注册');
     }
 
     /**
