@@ -157,7 +157,7 @@
                     } else{
                         response += '<a title="取消置顶" href="javascript:void(0)" onClick="untop(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">取消置顶</a>';
                     }
-                   if(rowObject.activity.must_check==1){
+                   if(rowObject.activity.must_check==1&&rowObject.is_check ==0){
                         response += '<a title="审核通过" onClick="check(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
                         response += '<a title="审核不通过" onClick="uncheck(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-remove-circle"></i> </a>';
                     }
