@@ -96,6 +96,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
         'login.wx',
         'pay.wx',
         'pay.ali',
+        "event.back", //后退事件
         "event.getWXCode",
         "event.invite", //短信分享
         "event.getLocation",
@@ -149,6 +150,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                     });
                     break;
                 //无参数   无回调
+                case "event.back":
                 case "sys.openLOC":
                 case "sys.mediaPlay":
                 case "sys.closeLOC":
