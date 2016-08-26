@@ -77,10 +77,10 @@
     <p>君汉控股（深圳）有限公司</p>
 </div>
 <div class="reg-shadow" ontouchmove="return false;" hidden id="shadow"></div>
-<div class="totips" style="height:3.6rem;" hidden id="isLogout" >
+<div class="totips" hidden id="isLogout" >
     <h3>确定要离开吗？</h3>
-    <span></span>
-    <a href="javascript:void(0)" class="tipsbtn" id="no">否</a><a href="javascript:void(0)" class="tipsbtn" id="yes">是</a>
+    <span style="display: none"></span>
+    <a href="javascript:void(0)" class="tipsbtn bggray" id="no">否</a><a href="javascript:void(0)" class="tipsbtn bgred" id="yes">是</a>
 </div>
 <?php $this->start('script'); ?>
 <script>

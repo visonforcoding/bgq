@@ -39,13 +39,13 @@
 <script type="text/html" id="sysTpl">
     <li>
         <div>
-            <a href="{#jump_url#}" style="background: none;">
-            <h3>{#title#}</h3>
-            <span>{#msg#}</span>
-            <span class='datetime'>{#create_time#}</span>
+            <a href="{#jump_url#}" style="background: none;" msg_id='{#id#}' class="read">
+                <h3>{#title#}</h3>
+                <span class="msg_color {#color#}">{#msg#}</span>
+                <span class='datetime'>{#create_time#}</span>
             </a>
         </div>
-        <a href="{#jump_url#}" class="fr r-more">查看详情<i class="iconfont">&#xe667;</i></a>
+        <a href="{#jump_url#}" class="fr r-more read" status="{#status#}" msg_id='{#id#}'>{#status_msg#}<i class="iconfont">&#xe667;</i></a>
     </li>
 </script>
 <?php $this->start('script') ?>
@@ -147,12 +147,34 @@
                 if(res.status){
                     $.util.dataToTpl('follow', 'sysTpl', res.data, function (d) {     
                         d.jump_url  = d.url?d.url:'#this';
+                        if(d.status){
+                            d.status_msg = '已读';
+                            d.color = 'f-color-gray';
+                        } else {
+                            d.status_msg = '未读';
+                            d.color = 'f-color-black';
+                        }
                         return d;
                     });
                 } else {
                     $('#follow').html('');
                     $.util.alert(res.msg);
                 }
+            }
+        });
+    });
+    
+    $('.read').on('tap', function(){
+        var id = $(this).attr('msg_id');
+        var obj = $(this);
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: "/home/read_msg/"+id,
+            success: function (res) {
+                var num = $('#sysMes').children('i').html();
+                $('#sysMes').children('i').html(parseInt(num)-1);
+                obj.find('.msg_color').removeClass('f-color-black').addClass('f-color-gray');
             }
         });
     });

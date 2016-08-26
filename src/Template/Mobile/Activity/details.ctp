@@ -218,10 +218,10 @@
             </li>
         </ul>
     </div>
-    <div class="totips" style="height:3.6rem;" hidden id="isdel" >
+    <div class="totips" hidden id="isdel" >
         <h3>确定要删除本条评论？</h3>
-        <span></span>
-        <a href="javascript:void(0)" class="tipsbtn" id="no">取消</a><a href="javascript:void(0)" class="tipsbtn" id="yes">确认</a>
+        <span style="display:none;"></span>
+        <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="javascript:void(0)" class="tipsbtn bgred" id="yes">确认</a>
     </div>
 </body>
 <?php $this->start('script'); ?>
