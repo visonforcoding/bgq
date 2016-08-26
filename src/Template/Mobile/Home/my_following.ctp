@@ -27,12 +27,12 @@
             <a href='/user/home-page/{#following_id#}'><span class="head-img"><img src="{#following_avatar#}"/>{#v#}</span></a>
             <div class="vipinfo">
                 <a href="/user/home-page/{#following_id#}">
-                    <h3>{#following_truename#}<span class="meetnum"></span></h3>
+                    <h3>{#following_truename#}<span class="meetnum">{#following_fans#}人关注</span></h3>
                     <span class="job">{#following_company#}&nbsp;&nbsp;{#following_position#}</span>
                 </a>
-                <div class="mark line2">
+                <div class="mark s-mark-h">
                     {#following_subject#}
-                    <span class="meetnum">{#following_fans#}人关注</span>
+                  
                 </div>
             </div>
         </div>
