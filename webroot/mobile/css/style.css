@@ -388,7 +388,7 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .head-img i{position: absolute;right:0.12rem;bottom:0;width:0.29rem;height:0.3rem;background: url(img/v.png) no-repeat;background-size: contain;}
 .mark,.s_mark_h{margin-top:0.1rem;max-height:52px;overflow:hidden;}
 .s_mark_h{max-height:.85rem;}
-.s_mark_h a{border:1px #969fa9 solid;}
+/*.s_mark_h a{border:1px #969fa9 solid;}*/
 .vipinfo{width:5.3rem;float:left;}
 .vipinfo h3{font-size:0.32rem;color:#222c38;height:.5rem;overflow:hidden;line-height: .5rem;}
 .vipinfo h3 .l-name{float:left;}
@@ -401,8 +401,8 @@ line-height: .34rem;height:.34rem;}
 .vipinfo span.job{line-height: 0.4rem;}
 .vipinfo span.c-info{line-height: 0.3rem;display: block;}
 /*.vipinfo .mark a{border:1px #969fa9 solid;border-radius: 0.1rem;line-height: 0.32rem;font-size:0.26rem;color:#969fa9;padding:0 0.1rem;display:inline-block;margin-bottom:.1rem;}*/
-.vipinfo .mark a{border:1px #969fa9;border-radius: 0.1rem;line-height: 24px;font-size:12px;color:#969fa9;padding:0 0.1rem;display:inline-block;margin-bottom:.1rem;}
-.vipinfo .bgblue a{background: #4285f4;color:#fff;border:none;display:inline-block;margin-bottom:5px;}
+.vipinfo .mark a{border:1px #969fa9 solid;border-radius: 0.1rem;line-height: 24px;font-size:12px;color:#969fa9;padding:0 0.1rem;display:inline-block;margin-bottom:.1rem;}
+.vipinfo .bgblue a{background: #4285f4;border:1px #4285f4 solid;color:#fff;border:none;display:inline-block;margin-bottom:5px;}
 .meetnum{font-size:0.28rem;color:#969fa9;}
 .f-info{border-top:1px #e5e5e5 solid;line-height: .86rem;overflow:hidden; font-size:.28rem;}
 .f-box{padding:0 .3rem;margin-top:.1rem;}
