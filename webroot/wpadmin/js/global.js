@@ -54,7 +54,21 @@ $(function () {
     $(".close-panel").on('click', function () {
         $(this).parents('div.panel').find('div.panel-body,div.chart-bar').slideToggle("slow");
     });
+    $('[toggle="tooltip"]').tooltip();
 });
+$.global = {
+    simpleTool: [[
+            'source', '|', 'undo', 'redo', '|',
+            'bold', 'italic', 'underline', 'fontborder', 'strikethrough',
+            'pasteplain', '|', 'forecolor', 'backcolor',
+            'selectall', 'cleardoc', '|',
+            'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+            'indent', '|',
+            'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+            'simpleupload', 'insertimage', 'emotion', 'background', '|',
+            'horizontal', 'spechars', 'wordimage',
+        ]],
+};
 
 //图片选择
 function  choiceImg(path) {
@@ -198,7 +212,7 @@ function initJquploadAttach(id, url, allowedTypes) {
     });
     return uploadObj;
 }
-function initJquploadAttachMulti(id, url, allowedTypes,func) {
+function initJquploadAttachMulti(id, url, allowedTypes, func) {
     var uploadObj = $('#' + id).uploadFile({
         url: url,
         returnType: 'json',

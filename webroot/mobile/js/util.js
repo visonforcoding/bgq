@@ -85,10 +85,10 @@ $.util = {
         };
         obj.statusCode= {
             404:function(){$.util.alert('请求页面不存在');},
-            500:function(){$.util.alert('服务器出错');}
+            500:function(){$.util.alert('服务器繁忙');}
         };
         obj.error = function(XMLHttpRequest, textStatus, errorThrown){
-          $.util.alert('服务器出错');
+          $.util.alert('服务器繁忙');
           console.log(errorThrown);
         };
         $.ajax(obj);
