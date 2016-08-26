@@ -25,7 +25,7 @@
                 <span class="head-img"><img src="{#follower_avatar#}"/><i></i></span>
             </a>
             <div class="vipinfo my-meet-info">
-                <h3>{#follower_truename#}{#type#}</h3>
+                <h3>{#follower_truename#}</h3>
                 <a class="alink" href="/user/home-page/{#follower_id#}">
                     <span class="job">{#follower_company#}&nbsp;&nbsp;{#follower_position#}</span>
                     <div class="mark">
@@ -41,7 +41,7 @@
         <div>
             <a href="{#jump_url#}" style="background: none;">
             <h3>{#title#}</h3>
-            <!--<span>{#msg#}</span>-->
+            <span>{#msg#}</span>
             <span class='datetime'>{#create_time#}</span>
             </a>
         </div>

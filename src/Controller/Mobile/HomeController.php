@@ -277,6 +277,7 @@ class HomeController extends AppController {
                 $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
                 $fans = $UsermsgTable->find()
                                 ->hydrate(false)
+                                ->distinct('u.id')
                                 ->select(['u.truename', 'u.avatar', 'u.id', 'create_time',
                                     'u.company', 'u.position', 'u.fans', 'uf.type'])
                                 ->join([
@@ -291,7 +292,7 @@ class HomeController extends AppController {
                                         'conditions' => 'u.id = uf.user_id',
                                     ]
                                 ])
-                                ->where("usermsg.`user_id` = '$user_id'")
+                                ->where(['usermsg.`user_id`' => $user_id, 'usermsg.status'=>0])
                                 ->orderDesc('usermsg.create_time')->toArray();
                 //看了之后 就更改状态了为已读
                 $UsermsgTable->updateAll(['status' => 1], ['user_id' => $user_id, 'status' => 0]);
