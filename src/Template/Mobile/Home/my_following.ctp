@@ -76,10 +76,10 @@
 //        }
 //    });
 
-    if(type == 1){
-        myFollowingTap($('#myFollowing').get(0));
-    } else {
+    if(type == 2){
         myFansTap($('#myFans').get(0));
+    } else {
+        myFollowingTap($('#myFollowing').get(0));
     }
     
     $('#doSearch').on('tap', function(){
