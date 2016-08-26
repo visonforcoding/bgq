@@ -235,6 +235,7 @@
 <!--<script src="/mobile/js/util.js" type="text/javascript" charset="utf-8"></script>-->
 
 <script>
+    alert(document.referrer);
     var ref = document.referrer ? document.referrer : '/home/index';
     LEMON.sys.back(ref);
 //    if($.util.isAPP){
