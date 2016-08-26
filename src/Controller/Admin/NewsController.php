@@ -172,7 +172,7 @@ class NewsController extends AppController {
         }
         $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
-            $query->order([$sort => $order]);
+            $query->order(['News.is_top'=>'desc',$sort => $order]);
         }
 
         $query->limit(intval($rows))
