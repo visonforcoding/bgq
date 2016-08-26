@@ -759,7 +759,7 @@ border-left:1px #e5e5e5 solid;width:50%;}
 .m-commond-list p img{margin-right: .1rem;width: .42rem;height: .42rem;border-radius: 50%;}
 /*个人主页*/
 .h-info-box,.book-info-box{background: #fff;border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid; padding:0 0.3rem;}
-.max_width{border-bottom:none;}
+.max_width{margin-bottom:.2rem;}
 .h-info-box a{color:#222c38;}
 .s-title-pass{padding:0;}
 .h-info-box li{line-height:0.4rem;border-bottom:1px #e5e5e5 solid;font-size:0.3rem;padding:.2rem 0;}
