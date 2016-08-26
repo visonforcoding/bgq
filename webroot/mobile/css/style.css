@@ -819,7 +819,7 @@ margin-top:.1rem;}
 .edit-education-bottom .education-title{line-height: 0.79rem;font-size:0.28rem;color:#d3265b; padding:0 0.3rem;}}
 .edit-education-bottom h3{width:100%;}
 .edit-education-bottom h3 a{color:#3e82f7;padding-right: .3rem;}
-.edit-education-bottom .deletbtn{padding-right: 0;font-size: .3rem;color: darkgray;vertical-align: top;/*margin-left:-.2rem;*/}
+.edit-education-bottom .deletbtn{padding-right: 0;font-size: .38rem;color: darkgray;vertical-align: top;/*margin-left:-.2rem;*/}
 .edit-education-bottom li.textareabox{flex-direction: column;}
 /*.edit-education-bottom li:last-of-type span,.edit-education-bottom li:last-of-type .edit-textarea{width:100%; margin-bottom:0.2rem;margin-top:0.1rem;}*/
 .bbottom .orgtitle .orgname{background: none;}
@@ -877,11 +877,11 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .pay-detail .dollars{font-size:0.3rem;color:#e01a48;}
 .topull{margin-bottom:0.2rem;}
 .wraper .tocard{font-size:0.26rem; text-align: center;line-height: 0.32rem;}
-.totips{width:5.8rem;height:4.1rem;background: #fff;border-radius: 0.2rem; position:fixed;left:50%;top:50%;margin-left:-2.9rem;margin-top:-2.5rem;
-/*display: flex; flex-direction: column;justify-content: center; align-items: center;*/ box-shadow: 0 0 0.5rem rgba(0,0,0,.6);z-index:999;text-align: center;padding:0 0.2rem;}
+.totips{width:5.8rem;/*height:4.1rem;*/background: #fff;border-radius: 0.2rem; position:fixed;left:50%;top:35%;margin-left:-2.9rem;/*margin-top:-2.5rem;*/
+/*display: flex; flex-direction: column;justify-content: center; align-items: center;*/ box-shadow: 0 0 0.5rem rgba(0,0,0,.6);z-index:999;text-align: center;padding:0 0.2rem .5rem;}
 .totips .closed{position:absolute;display:block;right:-0.25rem;top:-0.25rem;width:0.66rem;height:0.66rem;background: #e01b49;border:0.04rem solid #fff;border-radius: 50%;line-height: 0.55rem;text-align: center;font-size:0.5rem;color:#fff;}
 .totips h3{line-height: 0.8rem;font-size:0.32rem;color:#e01b49;margin-top:0.4rem;}
-.totips span:nth-of-type(1){line-height: 0.4rem;font-size:0.28rem;display:block;margin-bottom:0.1rem;min-height: 0.8rem;}
+.totips span:nth-of-type(1){line-height: 0.4rem;font-size:0.28rem;display:block;margin-bottom:0.2rem;min-height: 0.8rem;}
 .topush{margin:0.5rem 0;}
 .paytype .ulinfo{background: #fff;}
 .paytype .ulinfo li{text-indent: 0; }
@@ -1010,9 +1010,13 @@ background-size:3.82rem 1.9rem;margin-top:1rem;}
 	.dialogue li span{font-size:16px;}
 	.dialogue li time{font-size:14px;}
 }
-.tipsbtn{display: inline-block;width:40%;height:30px;line-height: 28px;color:#fff;background: red;margin:0 0.1rem;border-radius: 3px;font-size:14px;}
-.tipsbtn:nth-of-type(1){background: gray;}
-.tipsbtn:nth-of-type(2){background: #E01A48;}
+.tipsbtn{display: inline-block;width:40%;height:30px;line-height: 28px;color:#fff;background: red;margin:0 0.1rem;border-radius: .1rem;font-size:14px;}
+/*.tipsbtn:nth-of-type(1){background: gray;}
+.tipsbtn:nth-of-type(2){background: #E01A48;}*/
+.bgred{background: #e01a48;}
+.bgblue{background: #3f82f7;}
+.bggray{background: #7a7e83;}
+.tips_con{margin-bottom:.1rem;}
 @media only screen and (min-width: 414px) {
 	.tipsbtn{height:40px;line-height: 38px;font-size:16px;}
 }
@@ -1129,7 +1133,7 @@ width:0.5rem;height:0.16rem;display: inline-block;transition: all .3s;float:righ
 .r-card{float:left; width:70%;margin-left:.2rem;height:3rem;padding-left:0.4rem;}
 .e-info-box .install{padding-right:0;}
 .install span.btn,.install span.c-btn{width:50px;height:27px;border-radius: 100px;position:relative;
-background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  background: linear-gradient(top,#54d76a 0%,#53d66a 50%, #53d569 100%);padding:.5px;}
+background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  background: linear-gradient(top,#54d76a 0%,#53d66a 50%, #53d569 100%);}
 .btn i,.c-btn i{width:25px;height:25px;border-radius: 50%;background: lightgreen;display: block;}
 .install span.c-btn{background: #fff;/*box-shadow: 0 0 1px rgba(0,0,0,.5);*/border:1px #e5e5e5 solid;}
 .c-btn .off{float:left;background: #fff;-webkit-box-shadow: 0 0 1px rgba(0,0,0,.6);box-shadow: 0 0 1px rgba(0,0,0,.6);-webkit-transition:width height .6s;transition:width height .6s;}
