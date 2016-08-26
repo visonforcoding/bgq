@@ -15,14 +15,28 @@
                 <img src="<?= $user->avatar ? getOriginAvatar($user->avatar) : '/mobile/images/touxiang.png' ?>"/>
             </div>
             <div class="m_center_des fl">
-                <h3><?= $user->truename ?></h3>
+                <h3 class="m_info_name"><?= $user->truename ?>
+                    <?php if ($self): ?>
+                        <span>
+                            <i class="iconfont">&#xe660;</i>
+                            <?= $user->city ? $user->city : '暂未填写' ?>
+                        </span>
+                    <?php else: ?>
+                        <?php if ($user->city): ?>
+                            <span>
+                                <i class="iconfont">&#xe660;</i>
+                                <?= $user->city ?>
+                            </span>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </h3>
                 <span><?= $user->company ?></span>
                 <span><?= $user->position ?> </span>
             </div>
             <div class="m_right_btn fr">
                 <?php if ($self): ?>
-                    <span class="r-focus" >关注 <?= $follows ?></span>
-                    <span class="r-focus" >粉丝 <?= $fans ?></span>
+                    <a href="/home/my-following/1" class="g-card mb20" >关注 <?= $follows ?></a>
+                    <a href="/home/my-following/2" class="g-card" >粉丝 <?= $fans ?></a>
                 <?php else: ?>
                     <span class="r-focus" id="follow_btn"><?php if ($isFans): ?>取消关注<?php else: ?>关注<?php endif; ?></span>
                     <span class="g-card <?php if ($isGive): ?>cardgray<?php endif; ?>" id="giveCard"><?php if ($isGive): ?>已递名片<?php else: ?>递名片<?php endif; ?></span>
@@ -31,12 +45,11 @@
         </div>
         <div class="m-listinfo-des">
             <ul class="m-lilist-des">
+                <!--                <li>
+                                    <i class="iconfont">&#xe660;</i>
+                                    <span><?= $user->city ? $user->city : '暂未填写' ?></span>
+                                </li>-->
                 <li>
-                    <i class="iconfont">&#xe660;</i>
-                    <span><?= $user->city ? $user->city : '暂未填写' ?></span>
-                </li>
-                <li>
-                    
                     <?php if (!$self): ?>
                         <?php if ($user->secret): ?>
                             <?php if ($user->secret->phone_set == '1'): ?>
@@ -80,49 +93,60 @@
 
     <!--话题-->
     <?php if ($user->level == 2): ?>
-    <div class="m-subject-list">
-        <div class="m-tomore-bottom m-pos-top">
-            <span><i class="iconfont">&#xe61b;</i><span id="meet_nums"><?= $user->savant->reco_nums ?></span>人推荐</span>
-            <span><i class="iconfont">&#xe610;</i><?= $user->meet_nums ?>人聊过</span>
-        </div>
-        <div class="m-sub-header">
-            <h3><i class="iconfont">&#xe670;</i>话题列表<?php if ($self): ?><a href="/meet/my_subjects"><span class="fr">话题管理</span></a><?php endif; ?></h3>
-        </div>
-        <div class="m-sub-con">
-            <?php if ($user->subjects): ?>
-                <?php foreach ($user->subjects as $k => $v): ?>
-                    <section>
-                        <a href="<?php if ($self): ?>/meet/subject/<?= $v['id'] ?><?php else: ?>/meet/subject_detail/<?= $v['id'] ?>/#homepage<?php endif; ?>">
-                            <div class="m-sub-con-h">
-                                <h3><?= $v['title'] ?></h3>
-                            </div>
-                            <div class="m-sub-con-c">
-                                <p><?= $v['summary'] ?>
-                                </p>
-                            </div>
+        <div class="m-subject-list">
+            <div class="m-tomore-bottom m-pos-top">
+                <span><i class="iconfont">&#xe61b;</i><span id="meet_nums"><?= $user->savant->reco_nums ?></span>人推荐</span>
+                <span><i class="iconfont">&#xe610;</i><?= $user->meet_nums ?>人聊过</span>
+            </div>
+            <!--推荐-->
+            <div class="m-commond-list clearfix">
+                <span class="fl <?php if ($isReco): ?>color-items<?php endif; ?>" id="recom"><i class="iconfont <?php if ($isReco): ?>hover<?php endif; ?>"><?php if ($isReco): ?>&#xe61c;<?php else: ?>&#xe61b;<?php endif; ?></i>推荐他</span>
+                <a href="/meet/view-more-reco/<?= $user->id ?>">
+                    <p class="fl" id="recom_avatar">
+                        <?php if ($user->reco_users): ?>
+                            <?php foreach ($user->reco_users as $k => $v): ?>
+                                <img src="<?= $v->user->avatar ? getOriginAvatar($v->user->avatar) : '/mobile/images/touxiang.png'; ?>"/>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </p>
+                </a>
+            </div>
+
+            <div class="m-sub-header">
+                <h3>
+                    <i class="iconfont">&#xe670;</i>话题列表
+                    <?php if ($self): ?>
+                        <a href="/meet/my_subjects">
+                            <span class="fr m_edit_items">话题管理</span>
                         </a>
-                    </section>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <div class="m-sub-con-h">
-                    <h3>暂无话题</h3>
-                </div>
-            <?php endif; ?>
-        </div>
-        <!--推荐-->
-        <div class="m-commond-list clearfix">
-            <span class="fl <?php if ($isReco): ?>color-items<?php endif; ?>" id="recom"><i class="iconfont <?php if ($isReco): ?>hover<?php endif; ?>"><?php if ($isReco): ?>&#xe61c;<?php else: ?>&#xe61b;<?php endif; ?></i>推荐他</span>
-            <a href="/meet/view-more-reco/<?= $user->id ?>">
-                <p class="fl" id="recom_avatar">
-                    <?php if ($user->reco_users): ?>
-                        <?php foreach ($user->reco_users as $k => $v): ?>
-                            <img src="<?= $v->user->avatar ? getOriginAvatar($v->user->avatar) : '/mobile/images/touxiang.png'; ?>"/>
-                        <?php endforeach; ?>
                     <?php endif; ?>
-                </p>
-            </a>
+                </h3>
+            </div>
+            <div class="m-sub-con">
+                <?php if ($user->subjects): ?>
+                    <?php foreach ($user->subjects as $k => $v): ?>
+                        <section class="m_sub_items">
+                            <a href="<?php if ($self): ?>/meet/subject/<?= $v['id'] ?><?php else: ?>/meet/subject_detail/<?= $v['id'] ?>/#homepage<?php endif; ?>">
+                                <div class="m-sub-con-h">
+                                    <h3 class="line2"><?= $v['title'] ?></h3>
+                                    <span class="iconfont">&#xe678;</span>
+                                </div>
+                                <div class="m-sub-con-c">
+                                    <p class="line2">
+                                        <?= $v['summary'] ?>
+                                    </p>
+                                </div>
+                            </a>
+                        </section>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="m-sub-con-h">
+                        <h3>暂无话题</h3>
+                    </div>
+                <?php endif; ?>
+            </div>
+
         </div>
-    </div>
     <?php endif; ?>
 
     <!--基本资料-->

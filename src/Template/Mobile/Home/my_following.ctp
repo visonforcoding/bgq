@@ -3,7 +3,7 @@
         <img src="/mobile/images/add1.png" alt="" />
     </div>-->
      <div  class="inner my-home-menu" >
-        <a href="javascript:void(0)" class="active" id="myFollowing">我的关注</a>
+        <a href="javascript:void(0)" id="myFollowing">我的关注</a>
         <a href="javascript:void(0)" id="myFans">我的粉丝</a>     
      </div>
             
@@ -44,36 +44,43 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    var type = '<?= $type ?>';
+</script>
+<script>
     if(LEMON.isAPP) {
         LEMON.sys.back('/home/index');
     }
     
-    $.ajax({
-        type: 'POST',
-        dataType: 'json',
-        url: "/home/get-my-following",
-        success: function (res) {
-            if(res.status){
-                $.util.dataToTpl('follow', 'listTpl', res.data, function(d){
-                    d.following_id = d.following.id;
-                    d.following_truename = d.following.truename;
-                    d.following_company = d.following.company;
-                    d.following_avatar = d.following.avatar ? d.following.avatar : '/mobile/images/touxiang.png';
-                    d.following_position = d.following.position;
-                    d.following_fans = d.following.fans;
-                    d.following_subject = $.util.dataToTpl('', 'tpl', d.following.subjects);
-                    if(d.following.level == 2){
-                        d.v = '<i></i>';
-                    }
-                    return d;
-                });
-            } else {
-                $.util.alert(res.msg);
-            }
-        }
-    });
-    
-    
+//    $.ajax({
+//        type: 'POST',
+//        dataType: 'json',
+//        url: "/home/get-my-following",
+//        success: function (res) {
+//            if(res.status){
+//                $.util.dataToTpl('follow', 'listTpl', res.data, function(d){
+//                    d.following_id = d.following.id;
+//                    d.following_truename = d.following.truename;
+//                    d.following_company = d.following.company;
+//                    d.following_avatar = d.following.avatar ? d.following.avatar : '/mobile/images/touxiang.png';
+//                    d.following_position = d.following.position;
+//                    d.following_fans = d.following.fans;
+//                    d.following_subject = $.util.dataToTpl('', 'tpl', d.following.subjects);
+//                    if(d.following.level == 2){
+//                        d.v = '<i></i>';
+//                    }
+//                    return d;
+//                });
+//            } else {
+//                $.util.alert(res.msg);
+//            }
+//        }
+//    });
+
+    if(type == 1){
+        myFollowingTap($('#myFollowing').get(0));
+    } else {
+        myFansTap($('#myFans').get(0));
+    }
     
     $('#doSearch').on('tap', function(){
         search();
@@ -85,11 +92,15 @@
     });
     
     $('#myFollowing').on('tap', function (){
-        if($(this).hasClass('active')){
+        myFollowingTap(this);
+    });
+    
+    function myFollowingTap(em){
+        if($(em).hasClass('active')){
             return;
         } else {
             $('#myFans').removeClass('active');
-            $(this).addClass('active');
+            $(em).addClass('active');
             $('input[name="type"]').val(1);
         }
         $.ajax({
@@ -118,13 +129,18 @@
                 }
             } 
         });
-    });
+    }
+    
     $('#myFans').on('tap', function (){
-        if($(this).hasClass('active')){
+        myFansTap(this);
+    });
+    
+    function myFansTap(em){
+        if($(em).hasClass('active')){
             return;
         } else {
             $('#myFollowing').removeClass('active');
-            $(this).addClass('active');
+            $(em).addClass('active');
             $('input[name="type"]').val(2);
         }
         $.ajax({
@@ -153,7 +169,7 @@
                 }
             }
         });
-    });
+    }
     
     // 搜索
     function search(){
