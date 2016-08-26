@@ -219,7 +219,7 @@
         $('form').submit(function () {
             var user_id = $('#select-user').val();
             var source = $('#source').val();
-            if (user_id && source) {
+            if (user_id >0 && source) {
                 layer.alert('作者和来源只能填一个', {icon: 5});
                 return false;
             }

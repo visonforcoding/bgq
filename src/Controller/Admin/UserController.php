@@ -321,4 +321,19 @@ class UserController extends AppController {
                 ->first();
         $this->Util->ajaxReturn(['user'=>$user]);
     }
+    
+    /**
+     * 添加教育经历
+     */
+    public function addEducation($id=null){
+        $EducationTable = \Cake\ORM\TableRegistry::get('Education');
+        $data = $this->request->data();
+        $data['user_id'] = $id;
+        $education = $EducationTable->newEntity($data);
+        if($EducationTable->save($education)){
+            $this->Util->ajaxReturn(true,'添加成功');
+        }else{
+            $this->Util->ajaxReturn(false,  errorMsg($education, '添加失败'));
+        }
+    }
 }
