@@ -35,20 +35,27 @@
         </div>
         <?php endif; ?>
     </form>
-    <div class='reg-shadow' hidden></div>
+    <div class='reg-shadow' id="shadow" hidden></div>
     <div class="totips" style="display:none;">
-        <h3>已提交申请，小秘书会尽快联系您</h3>
-        <span></span>
-        <a href="/activity/index" class="nextstep" id="comfirm">确认</a>
+        <h3>提交成功</h3>
+        <span>您可到"我-我的活动-活动需求"中查看已提交的需求</span>
+        <a href="/activity/index" class="tipsbtn">返回主页</a><a href="/home/my-activity-submit/2" class="tipsbtn">查看需求</a>
 <!--        <span class='closed'>
             &times;
         </span>-->
+    </div>
+    <div class="totips" style="height: 3.6rem;" hidden id="checkBtn">
+        <h3 id="msg">请先去完善个人资料</h3>
+        <span></span>
+        <a href="javascript:void(0)" class="tipsbtn" id="no">取消</a><a href="/home/edit_userinfo" class="tipsbtn" id="yes">去完善</a>
     </div>
 </div>
 <?= $this->element('footer'); ?>
 <?php $this->start('script') ?>
 <!--<script src="/mobile/js/activity_release.js"></script>-->
 <script type="text/javascript">
+    $.util.checkUserinfoStatus();
+    
     $('body').on('tap', function (e) {
         var target = e.srcElement || e.target, em = target, i = 1;
         while (em && !em.id && i <= 3) {
@@ -68,8 +75,10 @@
                 var agency = [];
                 if ($('input[name="title"]').val() == '') {
                     $.util.alert('主题不能为空');
+                    $('#submit').removeClass('noTap');
                 } else if ($('textarea[name="body"]').val() == '') {
                     $.util.alert('请填写需求');
+                    $('#submit').removeClass('noTap');
                 } else {
                     for (i = 0; i < $('.industries').length; i++)
                     {
@@ -92,8 +101,16 @@
                                     }, 400);
                                     LEMON.sys.hideKeyboard();
                                 } else {
-                                    $.util.alert(msg.msg);
-                                    $('#submit').removeClass('noTap');
+                                    if(msg.msg.indexOf('请先去完善个人资料') != -1){
+                                        setTimeout(function(){
+                                            $('#shadow').show();
+                                            $('#checkBtn').show();
+                                            $('#submit').removeClass('noTap');
+                                        }, 301);
+                                    } else {
+                                        $.util.alert(msg.msg);
+                                        $('#submit').removeClass('noTap');
+                                    }
                                 }
                                 
                             }

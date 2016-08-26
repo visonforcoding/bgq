@@ -119,9 +119,10 @@ class HomeController extends AppController {
             /**
              * 我的活动 发布
              */
-            public function myActivitySubmit() {
+            public function myActivitySubmit($type=null) {
                 $this->set([
-                    'pageTitle' => '我的活动'
+                    'pageTitle' => '我的活动',
+                    'type' => $type
                 ]);
             }
 
@@ -339,7 +340,6 @@ class HomeController extends AppController {
                     $NeedTable = \Cake\ORM\TableRegistry::get('need');
                     $where['OR'] = ['reply_id'=>$this->user->id, 'user_id'=>$this->user->id];
                     $res = $NeedTable->find()->where($where)->hydrate(false)->toArray();
-    //                                debug($res);die;
                     if(!$res){
                         $res = '';
                     }

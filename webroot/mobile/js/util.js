@@ -321,6 +321,29 @@ $.util = {
         }
         param.push('act='+act);
         (new Image).src = param.join('&');
+    },
+    
+    checkUserinfoStatus: function(){
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: "/home/get-userinfo-status",
+            success: function (res) {
+                if(res.status){
+                    $('#shadow').hide();
+                    $('#checkBtn').hide();
+                } else {
+                    $('#shadow').show();
+                    $('#checkBtn').show();
+                    $('#no, #yes, #shadow').on('click', function () {
+                        setTimeout(function(){
+                            $('#shadow').hide();
+                            $('#checkBtn').hide();
+                        }, 301);
+                    });
+                }
+            }
+        });
     }
 };
 
