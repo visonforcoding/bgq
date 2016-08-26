@@ -41,7 +41,7 @@
         <div>
             <a href="{#jump_url#}" style="background: none;">
             <h3>{#title#}</h3>
-            <span>{#msg#}</span>
+            <!--<span>{#msg#}</span>-->
             <span class='datetime'>{#create_time#}</span>
             </a>
         </div>
