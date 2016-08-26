@@ -621,7 +621,7 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .tabcon ul i{font-size:.24rem;width:12%;display: inline-block;margin-right:.2rem;}
 .worktab a{display: block;}
 .worktab li span{color:#171717;width:100%;}
-.worktab .worktime{display: block;line-height: .34rem;margin-left: 32%;width:70%;padding:.2rem 0;}
+.worktab .worktime{display: block;line-height: .34rem;margin-left: 32%;width:70%;/*padding:.2rem 0;*/}
 .worktab .m_des{padding:0;color:#808080;}
 .gs-name{text-indent: 30%;}
 .h-tips{width:30%;color:#808080;}
