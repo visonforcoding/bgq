@@ -60,7 +60,7 @@
 </script>
 <script type="text/html" id="userTpl">
     <div class='inner h-home-top'>
-        <a href='/home/my-message-fans' class='iconfont share' style="display: block;width: 20px;height:30px;">&#xe625;
+        <a href='/home/my-message-fans'><div class="iconfont share">&#xe625;</div>
             {#hasMsg#}
         </a>
         <!--<h1>个人中心</h1>-->
@@ -137,7 +137,7 @@
                     user = user.replace('{#hasMsg#}','');
                 }
                 if(!res.data.isWx){
-                    user = user.replace('{#setUp#}','<a href="/home/my-install" class="iconfont share" style="display: block;width: 20px;height:30px;">&#xe61e;</a>');
+                    user = user.replace('{#setUp#}','<a href="/home/my-install" class="iconfont share" >&#xe61e;</a>');
                 } else {
                     user = user.replace('{#setUp#}','');
                 }
