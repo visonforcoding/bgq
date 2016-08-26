@@ -133,7 +133,7 @@
                 </div>
                 <div class="input-group col-md-3">
                     <span class="input-group-addon">选择月份</span>
-                    <?= $this->Form->month('month', ['value' => date('M'), 'class' => 'form-control','id'=>'month']) ?>
+                    <?= $this->Form->month('month', ['value' => date('M'), 'class' => 'form-control', 'id' => 'month']) ?>
                 </div>
             </div>
         </div>
@@ -184,59 +184,29 @@
             });
         }, 'json');
         var newUserChart = document.getElementById('new-user-chart').getContext('2d');
-        $.getJSON('/admin/index/getNewUserByDayWithMonth', function (res) {
-            new Chart(newUserChart, {
-                type: 'line',
-                data: res.data
-            });
-        }, 'json');
+        initChart('/admin/index/getNewUserByDayWithMonth',newUserChart,'line');
         var activityApplyChart = document.getElementById('activity-apply-chart').getContext('2d');
-        $.getJSON('/admin/index/getActivityApplyByDayWithMonth', function (res) {
-            new Chart(activityApplyChart, {
-                type: 'line',
-                data: res.data
-            });
-        }, 'json');
+        initChart('/admin/index/getActivityApplyByDayWithMonth',activityApplyChart,'line');
         var meetChart = document.getElementById('meet-chart').getContext('2d');
-        $.getJSON('/admin/index/getMeetByDayWithMonth', function (res) {
-            new Chart(meetChart, {
-                type: 'bar',
-                data: res.data
-            });
-        }, 'json');
+        initChart('/admin/index/getMeetByDayWithMonth',meetChart,'bar');
         var flowChart = document.getElementById('flow-chart').getContext('2d');
-        $.getJSON('/admin/index/getFlowByDayWithMonth', function (res) {
-            new Chart(flowChart, {
-                type: 'line',
+        initChart('/admin/index/getFlowByDayWithMonth',flowChart,'line');
+        $('#month').change(function () {
+            var month = $('#month').val();
+            initChart('/admin/index/getNewUserByDayWithMonth/'+month,newUserChart,'line');
+            initChart('/admin/index/getActivityApplyByDayWithMonth/'+month,activityApplyChart,'line');
+            initChart('/admin/index/getMeetByDayWithMonth/'+month,meetChart,'bar');
+            initChart('/admin/index/getFlowByDayWithMonth/'+month,flowChart,'line');
+        });
+    }
+
+    function initChart(url, chart, type) {
+        var chartObj;
+        $.getJSON(url, function (res) {
+           chartObj = new Chart(chart, {
+                type: type,
                 data: res.data
             });
         }, 'json');
-        $('#month').change(function(){
-            var month = $('#month').val();
-            $.getJSON('/admin/index/getNewUserByDayWithMonth/'+month, function (res) {
-                new Chart(newUserChart, {
-                    type: 'line',
-                    data: res.data
-                });
-            }, 'json');
-            $.getJSON('/admin/index/getActivityApplyByDayWithMonth/'+month, function (res) {
-                new Chart(activityApplyChart, {
-                    type: 'line',
-                    data: res.data
-                });
-            }, 'json');
-            $.getJSON('/admin/index/getMeetByDayWithMonth/'+month, function (res) {
-                new Chart(meetChart, {
-                    type: 'bar',
-                    data: res.data
-                });
-            }, 'json');
-            $.getJSON('/admin/index/getFlowByDayWithMonth/'+month, function (res) {
-                new Chart(flowChart, {
-                    type: 'line',
-                    data: res.data
-                });
-            }, 'json');
-        });
     }
 </script>

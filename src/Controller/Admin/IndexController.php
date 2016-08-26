@@ -75,7 +75,7 @@ class IndexController extends AppController {
      * @param type $month
      */
     public function getNewUserByDayWithMonth($month = null) {
-        if (!$month) {
+        if(!$month) {
             $month = date('m');
         }
         $connection = \Cake\Datasource\ConnectionManager::get('default');
@@ -83,7 +83,6 @@ class IndexController extends AppController {
                         from `user` u where month(u.create_time) = ' . $month . ' 
                         group by date(u.create_time)')->fetchAll('assoc');
         $this->loadComponent('Chart');
-        $month = date('m');
         $label = $month . '月用户注册数';
         echo $this->Chart->setLineChartByDayWithMonth($result, $label);
         exit();
@@ -101,7 +100,6 @@ class IndexController extends AppController {
                     where month(aa.create_time) = ' . $month . '
                     group by date(aa.create_time)')->fetchAll('assoc');
         $this->loadComponent('Chart');
-        $month = date('m');
         $label = $month . '月活动报名数';
         echo $this->Chart->setLineChartByDayWithMonth($result, $label, ['backgroundColor' => 4, 'borderCapStyle' => 'round']);
         exit();
@@ -116,7 +114,6 @@ class IndexController extends AppController {
                     where month(sb.create_time) = ' . $month . '
                     group by date(sb.create_time)')->fetchAll('assoc');
         $this->loadComponent('Chart');
-        $month = date('m');
         $label = $month . '月用户约见数';
         echo $this->Chart->setLineChartByDayWithMonth($result, $label, ['backgroundColor' => 11, 'borderCapStyle' => 'round']);
         exit();
@@ -134,7 +131,6 @@ class IndexController extends AppController {
                     where month(f.create_time) =  ' . $month . ' and f.user_id = -1
                     group by date(f.create_time)')->fetchAll('assoc');
         $this->loadComponent('Chart');
-        $month = date('m');
         $label = $month . '月平台资金收入';
         echo $this->Chart->setLineChartByDayWithMonth($result, $label, ['backgroundColor' => 11, 'borderCapStyle' => 'round']);
         exit();

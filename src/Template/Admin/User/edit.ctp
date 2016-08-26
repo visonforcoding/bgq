@@ -17,7 +17,7 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane in active" id="tab1">
-            <?= $this->Form->create($user, ['class' => 'form-horizontal' ,'id'=>'profile']) ?>
+            <?= $this->Form->create($user, ['class' => 'form-horizontal', 'id' => 'profile']) ?>
             <div class="form-group mt20">
                 <label class="col-md-2 control-label">手机号</label>
                 <div class="col-md-8">
@@ -108,7 +108,7 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">常驻城市</label>
                 <div class="col-md-8">
-                    <?= $this->cell('Region::base',[$user->city])?>
+                    <?= $this->cell('Region::base', [$user->city]) ?>
                 </div>
             </div>
             <div class="form-group">
@@ -137,56 +137,97 @@
             <?= $this->Form->end() ?>
         </div>
         <div class="tab-pane in " id="tab2">
-            <?php $k = 1; ?>
-            <?php $educationConf = \Cake\Core\Configure::read('educationType'); ?>
-            <?php foreach ($user->educations as $education): ?>
             <form  action="/admin/user/education" class="form-horizontal mt20 education" method="post">
-                    <fieldset>
-                        <legend>教育经历<?= $k ?></legend>
-                        <?php $k++; ?>
+                <?php if ($user->educations): ?>
+                    <?php $k = 1; ?>
+                    <?php $educationConf = \Cake\Core\Configure::read('educationType'); ?>
+                    <?php foreach ($user->educations as $education): ?>
+                        <fieldset>
+                            <legend>教育经历<?= $k ?></legend>
+                            <?php $k++; ?>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">开始时间</label>
+                                <div class="col-md-3">
+                                    <input name="id"  value="<?= $education->id ?>" type="hidden" class="form-control">
+                                    <input name="start_date" value="<?= $education->start_date ?>" class="datepicker form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">结束时间</label>
+                                <div class="col-md-3">
+                                    <input name="end_date" value="<?= $education->start_date ?>" class="datepicker form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">毕业院校</label>
+                                <div class="col-md-3">
+                                    <input name="school" value="<?= $education->school ?>" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">专业</label>
+                                <div class="col-md-3">
+                                    <input name="major" value="<?= $education->major ?>" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">学历</label>
+                                <div class="col-md-3">
+                                    <select name="education" class="form-control">
+                                        <?php foreach ($educationConf as $key => $value): ?>
+                                            <option value="<?= $key ?>" <?php if ($key == $education->education): ?>selected="selected"<?php endif; ?>><?= $value ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
                         <div class="form-group">
-                            <label class="col-md-2 control-label">开始时间</label>
-                            <div class="col-md-3">
-                                <input name="id"  value="<?= $education->id ?>" type="hidden" class="form-control">
-                                <input name="start_date" value="<?= $education->start_date ?>" class="datepicker form-control">
+                            <div class="input-group">
+                                <span class="input-group-addon">@</span>
+                                <input type="text" class="form-control" placeholder="用户名">
+                                <span class="input-group-addon"><i class="icon icon-heart"></i></span>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">结束时间</label>
-                            <div class="col-md-3">
-                                <input name="end_date" value="<?= $education->start_date ?>" class="datepicker form-control">
-                            </div>
+                    <?php endif; ?>
+                </fieldset>
+            </form>
+        </div>
+        <div class="tab-pane in " id="tab3">
+                <?php if ($user->educations): ?>
+                    <?php $k = 1; ?>
+                    <?php $educationConf = \Cake\Core\Configure::read('educationType'); ?>
+                    <?php foreach ($user->educations as $education): ?>
+                        <div class="input-group col-md-8 col-md-offset-1">
+                            <span class="input-group-addon">开始时间</span>
+                            <input type="text" name="start_date" value="<?= $education->start_date ?>" class="form-control" placeholder="2009-9">
+                            <span class="input-group-addon">结束时间</span>
+                            <input type="text" name="end_date" value="<?= $education->end_date ?>" class="form-control" placeholder="2009-9">
+                            <span class="input-group-addon">学校</span>
+                            <input type="text" name="school" value="<?= $education->school ?>" class="form-control" placeholder="2009-9">
+                            <span class="input-group-addon">专业</span>
+                            <input type="text" name="major" value="<?= $education->major ?>" class="form-control" placeholder="经济管理">
+                            <span class="input-group-addon">学历</span>
+                            <?php echo $this->form->select('education', $educationConf, ['class' => 'form-control','value'=>$education->education]) ?>
+                            <span class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
+                            <span class="input-group-addon save"><i style="color:blue" class="icon icon-save"></i></span>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">毕业院校</label>
-                            <div class="col-md-3">
-                                <input name="school" value="<?= $education->school ?>" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">专业</label>
-                            <div class="col-md-3">
-                                <input name="major" value="<?= $education->major ?>" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">学历</label>
-                            <div class="col-md-3">
-                                <select name="education" class="form-control">
-                                    <?php foreach ($educationConf as $key=>$value): ?>
-                                    <option value="<?=$key?>" <?php if($key==$education->education):?>selected="selected"<?php endif;?>><?=$value?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
-            <?php endforeach; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                <div class="input-group col-md-8 col-md-offset-1 mt20">
+                    <span class="input-group-addon">开始时间</span>
+                    <input type="text"  name="start_date" class="form-control" placeholder="2009-9">
+                    <span class="input-group-addon">结束时间</span>
+                    <input type="text" name="end_date" class="form-control" placeholder="2013-6">
+                    <span class="input-group-addon">学校</span>
+                    <input type="text" name="school" class="form-control" placeholder="X大学">
+                    <span class="input-group-addon">专业</span>
+                    <input type="text" name="major" class="form-control" placeholder="经济管理">
+                    <span class="input-group-addon">学历</span>
+                    <?php echo $this->form->select('education', $educationConf, ['class' => 'form-control']) ?>
+                    <span class="input-group-addon"><i style="color:blue" class="icon icon-trash"></i></span>
+                    <span class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
+                </div>
         </div>
     </div>
 
@@ -225,19 +266,19 @@
                 });
                 return false;
             });
-            $('.education').submit(function(){
-                var form = $(this);
+            $('.add').submit(function () {
+                var form = $(this).parent('.input-group');
                 $.ajax({
-                    type: $(form).attr('method'),
-                    url: $(form).attr('action'),
+                    type:'post',
+                    url: '/admin/user/addEducation',
                     data: $(form).serialize(),
                     dataType: 'json',
                     success: function (res) {
                         if (typeof res === 'object') {
                             if (res.status) {
                                 layer.alert(res.msg, function () {
-                                   // window.location.href = '/admin/user/index';
-                                   window.location.reload();
+                                    // window.location.href = '/admin/user/index';
+                                    window.location.reload();
                                 });
                             } else {
                                 layer.alert(res.msg, {icon: 5});
@@ -245,7 +286,7 @@
                         }
                     }
                 });
-               return false; 
+                return false;
             });
         });
     </script>
