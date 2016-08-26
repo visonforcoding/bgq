@@ -83,7 +83,7 @@ class HomeController extends AppController {
              */
             public function myActivityApply() {
                 $applyTable = \Cake\ORM\TableRegistry::get('activityapply');
-                $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
+//                $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
                 $orderTable = \Cake\ORM\TableRegistry::get('order');
                 $myActivity = $applyTable->find()->distinct(['activityapply.id'])
                         ->contain(['Activities'=>function($q){
@@ -91,7 +91,7 @@ class HomeController extends AppController {
                 }, 'Lmorder'=>function($q){
                     return $q->where(['type'=>2]);
                 }])->where(['activityapply.user_id' => $this->user->id])->toArray();
-                $UsermsgTable->updateAll(['status'=>1], ['user_id'=>$this->user->id, 'status'=>0, 'type'=>7]);
+//                $UsermsgTable->updateAll(['status'=>1], ['user_id'=>$this->user->id, 'status'=>0, 'type'=>7]);
                 if ($myActivity !== false) {
                     return $this->Util->ajaxReturn(['status' => true, 'data' => $myActivity]);
                 } elseif($myActivity == []){
@@ -313,7 +313,7 @@ class HomeController extends AppController {
                 $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
 //                                $unReadFollowCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type' => 1])->count(); //未读关注消息
 //                                $unReadSysCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type !=' => 1])->count(); //未读系统消息
-                $msgs = $UsermsgTable->find()->where(['user_id' => $user_id, 'type !=' => 1])->orderDesc('create_time')->toArray();
+                $msgs = $UsermsgTable->find()->where(['user_id' => $user_id, 'type !=' => 1])->order(['status'=>'asc', 'create_time'=>'desc'])->toArray();
 //                                $this->set([
 //                                    'pageTitle' => '系统消息',
 //                                    'unReadFollowCount' => $unReadFollowCount,
@@ -471,7 +471,7 @@ class HomeController extends AppController {
 //                        'SubjectBook.status !=' => 2,
                         'SubjectBook.savant_id =' => $this->user->id,
                     ])->order('SubjectBook.update_time')->toArray();
-            $UsermsgTable->updateAll(['status'=>1], ['type'=>4, 'user_id'=>$this->user->id, 'status'=>0]);
+//            $UsermsgTable->updateAll(['status'=>1], ['type'=>4, 'user_id'=>$this->user->id, 'status'=>0]);
             $this->set([
                 'pageTitle' => '我的约见',
                 'books' => $books,
@@ -1590,6 +1590,9 @@ class HomeController extends AppController {
         }
     }
     
+    /**
+     * 保存用户资料
+     */
     public function saveUserinfo(){
         if($this->user){
             $name = $this->request->data('name');
@@ -1605,6 +1608,21 @@ class HomeController extends AppController {
             } else {
                 return $this->Util->ajaxReturn(false, '修改失败');
             }
+        }
+    }
+    
+    /**
+     * 消息已读
+     */
+    public function readMsg($id){
+        $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
+        $msg = $UsermsgTable->get($id);
+        $msg->status = 1;
+        $res = $UsermsgTable->save($msg);
+        if($res){
+            return $this->Util->ajaxReturn(true, '操作成功');
+        } else {
+            return $this->Util->ajaxReturn(false , '操作失败');
         }
     }
 
