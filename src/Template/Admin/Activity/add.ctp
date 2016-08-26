@@ -29,7 +29,7 @@
         <label class="col-md-2 control-label">协办</label>
         <div class="input-group col-md-6">
             <span class="input-group-addon">名称</span>
-            <input type="text" name="org_key" placeholder="协办单位" class="form-control" />
+            <input type="text" name="org_key" value="协办单位" class="form-control" />
             <span  class="input-group-addon">值</span>
             <input type="text" class="form-control" placeholder="XXX公司">
         </div>

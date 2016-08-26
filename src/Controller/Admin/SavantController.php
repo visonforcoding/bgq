@@ -73,19 +73,20 @@ class SavantController extends AppController {
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null) {
-        $SavantTable = \Cake\ORM\TableRegistry::get('Savant');
-        $savant = $SavantTable->find()->where(['user_id'=>$id])->first();
+     public function edit($id = null) {
+        $user = $this->User->get($id, [
+            'contain' => ['Educations','Careers','Savant']
+        ]);
         if ($this->request->is(['post', 'put'])) {
-            $savant = $SavantTable->patchEntity($savant,  $this->request->data());
-            if ($SavantTable->save($savant)) {
+            $user = $this->User->patchEntity($user, $this->request->data);
+            if ($this->User->save($user)) {
                 $this->Util->ajaxReturn(true, '修改成功');
             } else {
-                $errors = $savant->errors();
+                $errors = $user->errors();
                 $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
-        $this->set(compact('savant', 'users'));
+        $this->set(compact('user'));
     }
 
     /**
@@ -338,6 +339,17 @@ class SavantController extends AppController {
     public function showSubject($id=null){
         if($id){
             $this->set('user_id',$id);
+        }
+    }
+    
+    public function saveSavant($id=null){
+        $SavantTable = \Cake\ORM\TableRegistry::get('Savant');
+        $savant = $SavantTable->find()->where(['user_id'=>$id])->first();
+        $savant = $SavantTable->patchEntity($savant,  $this->request->data());
+        if($SavantTable->save($savant)){
+            $this->Util->ajaxReturn(true,'修改成功');
+        }else{
+            $this->Util->ajaxReturn(false, '修改失败');
         }
     }
 
