@@ -226,7 +226,7 @@ class UserController extends AppController {
                 }
             }
             $user = $this->User->patchEntity($user, $data,[
-                'associated'=> ['Secret','Industries','Agencies']
+                'associated'=> ['Secret','Industries']
             ]);
             if ($this->User->save($user)) {
                 $jumpUrl = '/home/index';

@@ -271,6 +271,7 @@
             }
             formdata['industries[_ids]'] = industry_ids;
             formdata['city'] = city;
+            formdata['agency_id'] = agency;
             //对象长度判断
             $.post('/user/register', formdata, function (res) {
                 if (res.status === true) {
