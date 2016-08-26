@@ -402,6 +402,9 @@
     if (location.href.indexOf('?share=1') != -1) {
         $('#share_download').show();
     }
+    window.onBackView = function(){
+        location.reload();
+    };
 
     $('.h-tab>li').on('click', function () {
         var index = $(this).index();
