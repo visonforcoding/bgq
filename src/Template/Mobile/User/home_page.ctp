@@ -30,7 +30,7 @@
                         <?php endif; ?>
                     <?php endif; ?>
                 </h3>
-                <span class="line2"><?= $user->company ?></span>
+                <span><?= $user->company ?></span>
                 <span><?= $user->position ?> </span>
             </div>
             <div class="m_right_btn fr">
