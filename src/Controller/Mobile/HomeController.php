@@ -206,9 +206,10 @@ class HomeController extends AppController {
             /**
              * 我的关注
              */
-            public function myFollowing() {
+            public function myFollowing($type=null) {
                 $this->set([
-                    'pageTitle' => '我的关注'
+                    'pageTitle' => '我的关注',
+                    'type' => $type,
                 ]);
             }
             
