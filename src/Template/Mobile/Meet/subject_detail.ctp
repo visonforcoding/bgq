@@ -61,7 +61,10 @@
 //            location.href = '/meet/book/<?= $subject->id ?>';
 //        }
 //    });
-    $.util.checkUserinfoStatus();
+    window.onBackView = function(){
+        $.util.checkUserinfoStatus();
+    };
+    window.onBackView();
     
     $('#submit').on('tap', function () {
         if ($(this).attr('user_id') == '') {

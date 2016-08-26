@@ -47,7 +47,10 @@
 </div>
 <?php $this->start('script') ?>
 <script>
-    $.util.checkUserinfoStatus();
+    window.onBackView = function(){
+        $.util.checkUserinfoStatus();
+    };
+    window.onBackView();
     
     $(function () {
         $('#submit').on('click', function () {
