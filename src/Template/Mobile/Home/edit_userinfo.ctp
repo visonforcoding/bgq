@@ -173,7 +173,7 @@
         <li>
             <a href="/home/edit-card">
                 <span >我的名片：</span>
-                <div class="upload-user-img">
+                <div>
                     <span class="mcard"><img src="<?= $user->card_path ?>" id="card" /></span>
                 </div>
             </a>
