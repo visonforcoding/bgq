@@ -134,9 +134,6 @@
 <div class='reg-shadow'  style="display: none;"></div>
 <?= $this->element('checkdate'); ?>
 <script type="text/javascript">
-    if ($.util.isAPP) {
-        LEMON.sys.back('/home/edit-userinfo');
-    }
     
     $('#addwork').on('touchstart', function () {
         $('.wraper .education-items').eq(0).clone(true, true).insertBefore('.add-subject').show();

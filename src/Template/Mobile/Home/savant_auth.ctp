@@ -43,7 +43,7 @@
 <div class="totips" hidden id="checkBtn">
     <h3 id="msg">请先去完善个人资料</h3>
     <span style="display:none;"></span>
-    <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="/home/edit_userinfo" class="tipsbtn bgred" id="yes">去完善</a>
+    <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="javascript:location.href = ('/home/edit-userinfo?ref='+encodeURI(location.href))" class="tipsbtn bgred" id="yes">去完善</a>
 </div>
 <?php $this->start('script') ?>
 <script>

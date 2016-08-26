@@ -114,9 +114,6 @@
 <script src="/mobile/js/util.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript">
-    if($.util.isAPP){
-        LEMON.sys.back('/home/edit-userinfo');
-    }
 
     function deleteEd(em) {
         var id = $(em.parentNode).data('id'), form=em;
