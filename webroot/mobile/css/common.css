@@ -82,6 +82,9 @@ textarea::-webkit-scrollbar{display: none;}/*隐藏多文本框滚动条*/
 .wraper .col-lg{color:#6baf44;}
 .wraper .col-y{color:#fdb94d;}
 .wraper .bgff{background: #fff;}
+.bgred{background: #e01a48;}
+.bgblue{background: #3f82f7;}
+.bggray{background: #7a7e83;}
 .wraper .ft26{font-size:0.26rem;}
 .wraper .mt0{margin-top:0;}
 .wraper .mb50{margin-bottom:0.5rem;margin-top:0.2rem;}
