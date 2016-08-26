@@ -219,7 +219,7 @@ color:#7a7d82;font-size:.24rem;}
 .h-news-search form{width:60%;float:left;line-height: 0.78rem;margin-left:0.24rem; float:left;}
 #doSearch{float:right;line-height: 0.8rem;font-size:0.28rem;width:0.7rem;}
 .h-news-search h1{/*width:100%;*/}
-.h-news-search h1 input{width:90%;font-size:0.28rem;border:none;color:#afafaf;background: transparent;}
+.h-news-search h1 input{width:90%;font-size:0.32rem;border:none;color:#afafaf;background: transparent;}
 .classify-l,.classify-r,.place-l{width:50%;text-align: center;position:relative;}
 .place-l{width:50%;}
 .ml{border-right:1px #ccc solid;}
