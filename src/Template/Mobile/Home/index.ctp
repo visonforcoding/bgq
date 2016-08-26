@@ -30,16 +30,16 @@
         <li><a href="/home/my-book" class="clickbtn mtips"><i class="iconfont">&#xe616;</i>我的约见<span id="meetMsg"></span></a></li>
     </ul>
     <!--分类一-->
-    
+
     <div id="res"></div>
-    
-    
+
+
     <!-- 微信分享 -->
-<div class="reg-shadow" style="display: none;" id="shadow"></div>
-<div class="wxshare" id="wxshare" hidden>
-    <span></span>
-    <p></p>
- </div>
+    <div class="reg-shadow" style="display: none;" id="shadow"></div>
+    <div class="wxshare" id="wxshare" hidden>
+        <span></span>
+        <p></p>
+    </div>
 </div>
 <script type="text/html" id="icoTpl">
     <div class="h-home-menu">
@@ -56,7 +56,7 @@
             <li><a href="javascript:QRCode();"><i class="iconfont">&#xe60a;</i>扫一扫</a></li>
         </ul>
     </div>
-    
+
 </script>
 <script type="text/html" id="userTpl">
     <div class='inner h-home-top'>
@@ -66,7 +66,7 @@
         <!--<h1>个人中心</h1>-->
         {#setUp#}
     </div>
-    
+
     <div class="t-home-top">
         <a href="/user/home-page/{#user_id#}">
             <span>
@@ -81,28 +81,29 @@
 </script>
 <script type="text/html" id='defaultTpl'>
     <div class='inner h-home-top'>
-                    <a href='/home/my-message-fans' class='iconfont share' >&#xe625;</a>
-                      <!--<h1>个人中心</h1>-->
-                    <?php if(!$isWx): ?><a href="/home/my-install" class='iconfont share'>&#xe61e;</a><?php endif;?>
-                </div>
-        <a href="javascript:void(0)">
-            <div class="t-home-top">
-                <span>
-                    <img src='/mobile/images/touxiang.png'/>
-                </span>
-            </div>
-        </a>
+        <a href='/home/my-message-fans' class='iconfont share' >&#xe625;</a>
+        <!--<h1>个人中心</h1>-->
+        <?php if (!$isWx): ?><a href="/home/my-install" class='iconfont share'>&#xe61e;</a><?php endif; ?>
+    </div>
+    <a href="javascript:void(0)">
+        <div class="t-home-top">
+            <span>
+                <img src='/mobile/images/touxiang.png'/>
+            </span>
+        </div>
+    </a>
 </script>
 <?= $this->element('footer') ?>
 <?php $this->start('script') ?>
 <script>
-    var savant = '';
-    $.ajax({
-        type: 'POST',
-        url: '/home/get-userinfo',
-        dataType: 'json',
-        success: function (res) {
-            if(res.status){
+    window.onBackView = function () {
+        var savant = '';
+        $.ajax({
+            type: 'POST',
+            url: '/home/get-userinfo',
+            dataType: 'json',
+            success: function (res) {
+                if (res.status) {
 //                if(LEMON.isAPP){
 //                    (LEMON.db.set('aaaaa', 123456));
 //                    (LEMON.db.set('bbbbb', JSON.stringify({"abc":123})));
@@ -118,59 +119,60 @@
 //                        LEMON.db.set('user_data', JSON.stringify(res.data));
 //                    }
 //                }
-                var html = $('#savantTpl').text();
-                var user = $('#userTpl').text();
-                var ico = $('#icoTpl').text();
-                savant = '<li><a href="/home/savant-auth"><i class="iconfont">&#xe623;</i>会员认证</a></li>';
-                if(res.data.user.level == 2) {
+                    var html = $('#savantTpl').text();
+                    var user = $('#userTpl').text();
+                    var ico = $('#icoTpl').text();
+                    savant = '<li><a href="/home/savant-auth"><i class="iconfont">&#xe623;</i>会员认证</a></li>';
+                    if (res.data.user.level == 2) {
 //                    savant = '<li><a href="/home/my-purse"><i class="iconfont">&#xe620;</i>钱包</a></li>';
-                    user = user.replace('{#v#}','<i class="v"></i>');
+                        user = user.replace('{#v#}', '<i class="v"></i>');
+                    } else {
+
+                        user = user.replace('{#v#}', '');
+                    }
+                    html = html.replace('{#savant#}', savant);
+                    $('#res').html(html + ico);
+                    if (res.data.hasMsg) {
+                        user = user.replace('{#hasMsg#}', '<span class="opci"></span>');
+                    } else {
+                        user = user.replace('{#hasMsg#}', '');
+                    }
+                    if (!res.data.isWx) {
+                        user = user.replace('{#setUp#}', '<a href="/home/my-install" class="iconfont share" >&#xe61e;</a>');
+                    } else {
+                        user = user.replace('{#setUp#}', '');
+                    }
+                    user = user.replace('{#user_id#}', res.data.user.id);
+                    user = user.replace('{#truename#}', res.data.user.truename);
+                    user = user.replace('{#company#}', res.data.user.company);
+                    user = user.replace('{#position#}', res.data.user.position);
+                    if (res.data.user.avatar) {
+                        user = user.replace('{#avatar#}', res.data.user.avatar.replace('thumb_', ''));
+                    } else {
+                        user = user.replace('{#avatar#}', '/mobile/images/touxiang.png');
+                    }
+                    $('#user').html(user);
+                    if (res.data.activityMsg) {
+                        $('#activityMsg').addClass('opci');
+                    }
+                    if (res.data.meetMsg) {
+                        $('#meetMsg').addClass('opci');
+                    }
                 } else {
-                    
-                    user = user.replace('{#v#}', '');
+                    $('.clickbtn').on('click', function () {
+                        $.util.alert('请先登录');
+                        return false;
+                    });
                 }
-                html = html.replace('{#savant#}', savant);
-                $('#res').html(html+ico);
-                if(res.data.hasMsg){
-                    user = user.replace('{#hasMsg#}','<span class="opci"></span>');
-                } else {
-                    user = user.replace('{#hasMsg#}','');
-                }
-                if(!res.data.isWx){
-                    user = user.replace('{#setUp#}','<a href="/home/my-install" class="iconfont share" >&#xe61e;</a>');
-                } else {
-                    user = user.replace('{#setUp#}','');
-                }
-                user = user.replace('{#user_id#}',res.data.user.id);
-                user = user.replace('{#truename#}',res.data.user.truename);
-                user = user.replace('{#company#}',res.data.user.company);
-                user = user.replace('{#position#}',res.data.user.position);
-                if(res.data.user.avatar){
-                    user = user.replace('{#avatar#}', res.data.user.avatar.replace('thumb_',''));
-                } else {
-                    user = user.replace('{#avatar#}', '/mobile/images/touxiang.png');
-                }
-                $('#user').html(user);
-                if(res.data.activityMsg){
-                    $('#activityMsg').addClass('opci');
-                }
-                if(res.data.meetMsg){
-                    $('#meetMsg').addClass('opci');
-                }
-            } else {
-                $('.clickbtn').on('click', function (){
-                    $.util.alert('请先登录');
-                    return false;
-                });
             }
-       }
-    });
-    
+        });
+    };
+    window.onBackView();
+
     function QRCode() {
         if ($.util.isAPP) {
             LEMON.sys.QRcode();
-        }
-        else if ($.util.isWX) {
+        } else if ($.util.isWX) {
             wx.scanQRCode({
                 needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
                 scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
@@ -178,32 +180,31 @@
                     //var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
                 }
             });
-        }
-        else {
+        } else {
             $.util.alert('请在APP或是微信使用扫一扫功能');
         }
     }
-    
-    function shareFriends(){
+
+    function shareFriends() {
         // 分享设置
         LEMON.event.invite('向你推荐并购帮APP，里面有大量的并购资讯，并购活动，和很多并购大咖http://t.cn/RtSw8QS');
     }
-    
-    $('#wxshare').on('tap', function(){
-        setTimeout(function(){
+
+    $('#wxshare').on('tap', function () {
+        setTimeout(function () {
             $('#wxshare').hide();
             $('#shadow').hide();
-        },400);
+        }, 400);
     });
-    
-    $('#shadow').on('tap', function(){
-        setTimeout(function(){
+
+    $('#shadow').on('tap', function () {
+        setTimeout(function () {
             $('#wxshare').hide();
             $('#shadow').hide();
-        },400);
+        }, 400);
     });
     if ($.util.isAPP) {
-        $('.h-home-bottom').css({'padding-top':'0.8rem'});
+        $('.h-home-bottom').css({'padding-top': '0.8rem'});
     }
 </script>
 <?php $this->end('script'); ?>
