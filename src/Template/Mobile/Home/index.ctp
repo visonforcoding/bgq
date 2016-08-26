@@ -14,7 +14,7 @@
                 </a>
             </span>
         </div>
-        <div class="todo" style="height:1.48rem;padding:0.25rem;"><a href="/user/login?redirect_url=/home/index">登录 / 注册</a></div>
+        <div class="todo" style="height:1.48rem;padding:0.25rem;visibility: hidden" id="loginBtn"><a href="/user/login?redirect_url=/home/index">登录 / 注册</a></div>
     </div>
     <div class="h-home-menu topnav">
         <ul class="clearfix">
@@ -159,6 +159,7 @@
                         $('#meetMsg').addClass('opci');
                     }
                 } else {
+                    $('#loginBtn').css("visibility","visible");
                     $('.clickbtn').on('click', function () {
                         $.util.alert('请先登录');
                         return false;
