@@ -61,14 +61,8 @@
 //            location.href = '/meet/book/<?= $subject->id ?>';
 //        }
 //    });
-
-    $('#no, #yes').on('click', function () {
-        setTimeout(function(){
-            $('#shadow').hide();
-            $('#checkBtn').hide();
-        }, 301);
-    });
-
+    $.util.checkUserinfoStatus();
+    
     $('#submit').on('tap', function () {
         if ($(this).attr('user_id') == '') {
             $.util.alert('请先登录');

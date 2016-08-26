@@ -40,12 +40,7 @@
     window.must_check = <?= $activity->must_check; ?>;
 </script>
 <script>
-    $('#no, #yes').on('tap', function () {
-        setTimeout(function(){
-            $('#shadow').hide();
-            $('#checkBtn').hide();
-        }, 301);
-    });
+    $.util.checkUserinfoStatus();
     
     $('#submit').on('tap', function () {
         $form = $('form');

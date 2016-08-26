@@ -39,12 +39,7 @@
 </script>
 <?php $this->start('script') ?>
 <script>
-    $('#no, #yes').on('click', function () {
-        setTimeout(function(){
-            $('#shadow').hide();
-            $('#checkBtn').hide();
-        }, 301);
-    });
+    $.util.checkUserinfoStatus();
 
     $.util.ajax({
         type: 'post',
@@ -92,6 +87,7 @@
             });
         });
     });
+    
     setTimeout(function () {
         window.scrollTo(0, 99999);
     }, 200);
