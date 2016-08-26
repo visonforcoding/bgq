@@ -443,7 +443,8 @@ line-height: .34rem;height:.34rem;}
 .h-home-top a{padding:.1rem;}
 .mtips {position:relative;}
 
-.h-home-top a:nth-of-type(1) span,.mtips span{position:absolute;right:-8px;width:6px;height:6px;border-radius: 3px;background: #fff;top:1px; opacity: 0;}
+.h-home-top a:nth-of-type(1) span{position:absolute;right:-3px;top:-3px;width:6px;height:6px;border-radius: 3px;background: #fff;opacity: 0;}
+.mtips span{position:absolute;right:-8px;width:6px;height:6px;border-radius: 3px;background: #fff;top:1px; opacity: 0;}
 .mtips span{background: red;}
 .opci{-webkit-animation:opaci 1.5s infinite linear;animation:opaci 1.5s infinite linear;}
 @-webkit-keyframes opaci{
