@@ -131,7 +131,7 @@
             <div class="classfytext">
 
             </div>
-            <div class="mark-items" id="industry">
+            <div class="mark-items min_height" id="industry">
                 <ul	class="b-mark classfymark clearfix">
                     <?php foreach ($industries as $industry): ?>
                         <li  data-target='class1tuli<?= $industry['id'] ?>' ><a href="javascript:void(0);"><?= $industry['name'] ?></a> <span class="icon-bottom"></span></li>
