@@ -39,15 +39,15 @@
     <div class="totips" style="display:none;">
         <h3>提交成功</h3>
         <span>您可到"我-我的活动-活动需求"中查看已提交的需求</span>
-        <a href="/activity/index" class="tipsbtn">返回主页</a><a href="/home/my-activity-submit/2" class="tipsbtn">查看需求</a>
+        <a href="/activity/index" class="tipsbtn bgred">返回主页</a><a href="/home/my-activity-submit/2" class="tipsbtn bg_blue">查看需求</a>
 <!--        <span class='closed'>
             &times;
         </span>-->
     </div>
-    <div class="totips" style="height: 3.6rem;" hidden id="checkBtn">
+    <div class="totips" hidden id="checkBtn">
         <h3 id="msg">请先去完善个人资料</h3>
-        <span></span>
-        <a href="javascript:void(0)" class="tipsbtn" id="no">取消</a><a href="/home/edit_userinfo" class="tipsbtn" id="yes">去完善</a>
+        <span style="display:none;"></span>
+        <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="/home/edit_userinfo" class="tipsbtn bgred" id="yes">去完善</a>
     </div>
 </div>
 <?= $this->element('footer'); ?>
