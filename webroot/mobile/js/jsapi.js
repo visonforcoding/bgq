@@ -166,6 +166,12 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                     break;
                 //一个字符型参数   无回调
                 case "sys.back":
+                    registerAPI(null, api, function () {
+                        var jump = arguments[0];
+                        jump = jump.replace('http://', '').replace('m.chinamatop.com','');
+                        return JSApiInvoke(api, {url:jump}, '');
+                    });
+                    break;
                 case "sys.update":
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {url:arguments[0]}, '');
