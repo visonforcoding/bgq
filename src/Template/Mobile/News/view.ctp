@@ -103,7 +103,7 @@
 <!--底部四个图-->
 <div class="iconlist icon-width">
     <span class="iconfont" id="commit">&#xe61d;</span>
-    <span class="iconfont color-items <?php if ($isCollect): ?>hover<?php endif; ?>" id="collect"><?php if ($isCollect): ?>&#xe67c;<?php else: ?>&#xe615;<?php endif; ?></span>
+    <span class="iconfont color-items <?php if ($isCollect): ?>hover<?php endif; ?>" id="collect"><?php if ($isCollect): ?>&#xe681;<?php else: ?>&#xe615;<?php endif; ?></span>
     <span class="iconfont" id="share">&#xe619;</span>
     <span class="iconfont" id="goTop">&#xe606;</span>
 </div>
@@ -331,7 +331,7 @@
                                     $(em).html('&#xe615;');
                                     $(em).removeClass('hover');
                                 } else {
-                                    $(em).html('&#xe67c;');
+                                    $(em).html('&#xe681;');
                                     $(em).addClass('hover');
                                 }
                             }
