@@ -39,7 +39,7 @@
 </script>
 <?php $this->start('script') ?>
 <script>
-    $('#no, #yes').on('tap', function () {
+    $('#no, #yes').on('click', function () {
         setTimeout(function(){
             $('#shadow').hide();
             $('#checkBtn').hide();
