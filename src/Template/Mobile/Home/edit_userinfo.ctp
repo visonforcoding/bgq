@@ -208,6 +208,7 @@
 
 <script>
     var ref = $.util.getParam('ref') ? $.util.getParam('ref') : '/home/index';
+    alert(ref);
     LEMON.sys.back(ref);
 //    if($.util.isAPP){
 //        if(document.URL.indexOf('#home') != -1){
