@@ -60,7 +60,7 @@
 </script>
 <script type="text/html" id="userTpl">
     <div class='inner h-home-top'>
-        <a href='/home/my-message-fans'><div class="iconfont share">&#xe625;</div>
+        <a href='/home/my-message-fans'><div class="iconfont share" style='width:.4rem;'>&#xe625;<span class='opci' style='right:-3px;top:-3px;'></span></div>
             {#hasMsg#}
         </a>
         <!--<h1>个人中心</h1>-->
@@ -81,7 +81,7 @@
 </script>
 <script type="text/html" id='defaultTpl'>
     <div class='inner h-home-top'>
-        <a href='/home/my-message-fans' class='iconfont share' >&#xe625;</a>
+        <a href='/home/my-message-fans' class='iconfont share'><div class="iconfont share">&#xe625;</div></a>
         <!--<h1>个人中心</h1>-->
         <?php if (!$isWx): ?><a href="/home/my-install" class='iconfont share'>&#xe61e;</a><?php endif; ?>
     </div>
