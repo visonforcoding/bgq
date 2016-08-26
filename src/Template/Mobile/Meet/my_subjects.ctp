@@ -24,7 +24,7 @@
                     <li>
                         <a class="alink clearfix" href="/meet/subject/<?= $subject->id ?>">
                             <h3><?= $subject->title ?></h3>
-                            <span><?= $user->truename ?> <?= $user->company ?> <?= $user->position ?></span>
+                            <span><?= $user->truename ?> | <?= $user->company ?> | <?= $user->position ?></span>
                             <i class="iconfont"></i>
                         </a>
                     </li>
