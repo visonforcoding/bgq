@@ -205,39 +205,10 @@
         <span>取消</span>
     </div>
 </div>
-<!-- <div class="checked-sex shadow-info" style="display: none;">
-    <div class="h-checked-sex">
-        <a href="javascript:void(0);">取消</a>
-
-        <h3>性别</h3>
-        <a  href="javascript:void(0);">完成</a>
-    </div>
-    <span>女</span>
-    <span>男</span>
-</div>
-<div class="checked-sex shadow-info" style="display: none;">
-    <div class="h-checked-sex">
-        <a href="javascript:void(0);">取消</a>
-
-        <h3>所在地</h3>
-        <a href="javascript:void(0);">完成</a>
-    </div>
-    <span class="f-color-gray">山东  珠海</span>
-    <span>广西   广州</span>
-    <span class="f-color-gray">广东   深圳</span>
-    <span class="f-color-gray">海南 佛山</span>
-</div> -->
-<!--<script src="/mobile/js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>-->
-
-<!--<script src="/mobile/js/lib/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>-->
-<!--<script src="/mobile/js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>-->
-<!--<script src="/mobile/js/mobiscroll.2.13.2.js" type="text/javascript" charset="utf-8"></script>-->
-<!--<script src="/mobile/js/util.js" type="text/javascript" charset="utf-8"></script>-->
 
 <script>
-//    alert(document.referrer);
-//    var ref = document.referrer ? document.referrer : '/home/index';
-//    LEMON.sys.back(ref);
+    var ref = $.util.getParam('ref') ? $.util.getParam('ref') : '/home/index';
+    LEMON.sys.back(ref);
 //    if($.util.isAPP){
 //        if(document.URL.indexOf('#home') != -1){
 //            LEMON.sys.back('/user/home-page/<?= $user->id ?>');
