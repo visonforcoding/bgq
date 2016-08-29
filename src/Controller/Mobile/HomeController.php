@@ -1610,6 +1610,35 @@ class HomeController extends AppController {
             }
         }
     }
+
+    
+    /**
+     * 评论消息详情
+     */
+    public function commentView($id=null){
+        $type = $this->request->query('type');
+        $commentTable = $type=='1'?'Newscom':'Activitycom';
+        $table = $type=='1'?'News':'Activity';
+        $relate_id = $type=='1'?'news_id':'activity_id';
+        $reply_id = $type=='1'?'reply_user':'reply_id';
+        $liketype = $type=='1'?'1':'0';
+        $CommentTable = \Cake\ORM\TableRegistry::get($commentTable);
+        $comment = $CommentTable->find()->contain(['Users'])->select()->where([$commentTable.'.id'=>$id])->first();
+        $replys = $CommentTable->find()->contain(['Users'])
+                ->where(["$relate_id"=>$comment->$relate_id,"$reply_id"=>$comment->user_id,'is_delete'=>0])->toArray();
+        $Table = \Cake\ORM\TableRegistry::get($table);
+        $table = $Table->find()->contain(['Users'])->where([$table.'.id'=>$comment->$relate_id])->first();
+        $LikeTable = \Cake\ORM\TableRegistry::get('CommentLike');
+        $likes = $LikeTable->find()->contain(['Users'])->where(['relate_id'=>$id,'type'=>$liketype])->toArray();
+        $this->set([
+            'table'=>$table,
+            'comment'=>$comment,
+            'replys'=>$replys,
+            'likes'=>$likes
+        ]);
+        
+    }
+
     
     /**
      * 消息已读
@@ -1625,6 +1654,7 @@ class HomeController extends AppController {
             return $this->Util->ajaxReturn(false , '操作失败');
         }
     }
+
 
 }
                                                                                         

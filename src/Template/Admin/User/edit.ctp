@@ -229,7 +229,7 @@
     <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
     <script>
         $(function () {
-            initJqupload('card_path', '/admin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
+            initJqupload('card_path', '/wpadmin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
             $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
             $('#select-agency').select2({
                 language: "zh-CN",
