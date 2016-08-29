@@ -30,18 +30,7 @@ activity.prototype.bindEvent = function () {
             return;
         switch (em.id) {
             case 'release':
-                location.href = "/activity/release";
-                /**
-                if ($(em).attr('user'))
-                {
-                    location.href = "/activity/release";
-                } else {
-                    $.util.alert('请先登录');
-                    setTimeout(function(){
-                        location.href = "/user/login?redirect_url=/activity/index";
-                    },2000);
-                }
-                 */
+                
                 break;
             case 'goTop':
                 window.scrollTo(0, 0);

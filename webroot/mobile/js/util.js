@@ -344,6 +344,21 @@ $.util = {
                 }
             }
         });
+    },
+    
+    /**
+     * 检查登录态
+     * @param string url 如果已登录，跳转的页面
+     */
+    checkLogin: function(url){
+        if($.util.isLogin()){
+            location.href = url;
+        } else {
+            $.util.alert('请登录后再操作', 1000);
+            setTimeout(function(){
+                location.href = '/user/login?redirect_url=' + encodeURI(document.URL);
+            }, 1000);
+        }
     }
 };
 
