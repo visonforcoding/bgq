@@ -40,7 +40,7 @@
         <label class="col-md-2 control-label">发布时间</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('publish_time', ['label' => false,'type'=>'text', 'class' => 'form-control datetimepicker']);
+            echo $this->Form->input('publish_time', ['label' => false,'type'=>'text','value'=>$news->publish_time->i18nFormat('yyyy-MM-dd HH:mm:ss'), 'class' => 'form-control datetimepicker']);
             ?>
         </div>
     </div>
