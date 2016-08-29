@@ -38,6 +38,9 @@ class NewsController extends AppController {
                         ->page($page, $this->newslimit)
 //                        ->order(['News.publish_time'=>'desc'])->toArray();
                         ->order(['News.is_top'=>'desc', 'News.publish_time'=>'desc'])->toArray();
+        foreach ($news as $k=>$v){
+            $news[$k]['publish_time'] = $v->publish_time->format('Y-m-d H:i');
+        }
         if ($news) {
             return $this->Util->ajaxReturn(['status' => true, 'data' => $news]);
         } else {
