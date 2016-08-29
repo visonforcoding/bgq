@@ -169,6 +169,7 @@
         });
     };
     window.onBackView();
+    window.onActiveView = window.onBackView();
 
     function QRCode() {
         if ($.util.isAPP) {
