@@ -147,7 +147,7 @@ class SavantController extends AppController {
         }
         $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
-            $query->order([$sort => $order]);
+            $query->order(['is_top'=>'desc',$sort => $order]);
         }
 
         $query->limit(intval($rows))
@@ -203,7 +203,7 @@ class SavantController extends AppController {
             $query->where($where);
         }
         if (!empty($sort) && !empty($order)) {
-            $query->order([$sort => $order,'is_top'=>'desc']);
+            $query->order(['is_top'=>'desc',$sort => $order]);
         }
         $res = $query->toArray();
         $this->autoRender = false;
