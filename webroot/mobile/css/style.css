@@ -151,6 +151,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .newscon-box,.newscomment-box{background: #fff;overflow:hidden;/*padding-bottom:0.2rem;*/border-bottom:1px #e5e5e5 solid;}
 .newscon-box h3{line-height:0.46rem;width:100%;font-size:0.4rem;color:#222c38; margin:0.3rem 0 0.2rem;padding:0 0.3rem;}
 .newscon-box img{max-width:90%;height:auto;display: block;margin:0.3rem auto;}
+.newscon-box p img{width:100%;}
 .body-con img{min-height:.1rem;}
 .newscon-box p{width:90%;margin:0.1rem auto;line-height: 0.46rem;font-size:0.3rem;color:#222;text-align: justify; cursor: pointer;}
 .newscon-box p a,.body-con a{font-size:0.3rem;}
