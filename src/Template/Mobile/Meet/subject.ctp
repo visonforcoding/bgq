@@ -78,19 +78,27 @@
             }
     });
     $('#del').on('click',function(){
-             $.util.ajax({
-                 url:'/meet/del-subject/'<?php if(isset($subject)):?>+<?=$subject->id?><?php endif;?>,
-                 func:function(res){
-                     $.util.alert(res.msg);
-                     if(res.status){
-                         setTimeout(function(){
-                             window.location.href = '/meet/my-subjects';
-                         },1500);
-                     }
-                 }
-             });
+        $.util.ajax({
+            url:'/meet/del-subject/'<?php if(isset($subject)):?>+<?=$subject->id?><?php endif;?>,
+            func:function(res){
+                $.util.alert(res.msg);
+                if(res.status){
+                    setTimeout(function(){
+                        window.location.href = '/meet/my-subjects';
+                    },1500);
+                }
+            }
+        });
     });
     $('#submit').on('click', function () {
+        if($('input[name="title"]').val() == ''){
+            $.util.alert('请填写题目');
+            return false;
+        }
+        if($('textarea[name="summary"]').val() == ''){
+            $.util.alert('请填写话题简介');
+            return false;
+        }
         if($('#submit').hasClass('noTap')){
             return false;
         }
