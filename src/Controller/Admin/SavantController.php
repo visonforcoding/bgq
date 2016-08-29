@@ -203,7 +203,7 @@ class SavantController extends AppController {
             $query->where($where);
         }
         if (!empty($sort) && !empty($order)) {
-            $query->order([$sort => $order]);
+            $query->order([$sort => $order,'is_top'=>'desc']);
         }
         $res = $query->toArray();
         $this->autoRender = false;
