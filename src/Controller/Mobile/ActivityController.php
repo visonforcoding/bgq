@@ -596,7 +596,7 @@ class ActivityController extends AppController {
                 if ($data['pid']) {
                     //对评论的回复
                     $this->loadComponent('Business');
-                    $jump_url = '/activity/details/'.$id.'#allcoment#reply_'.$doComment->id;
+                    $jump_url = '/activity/details/'.$id;
                     $this->Business->usermsg($comment->user_id, '评论回复', '有人回复了你的评论!', 9, $doComment->id, $jump_url);
                 }
                 $activity = $this->Activity->get($id);
@@ -816,10 +816,15 @@ class ActivityController extends AppController {
     }
     
     public function delComment($id){
-        $activitycomTable = \Cake\ORM\TableRegistry::get('activitycom');
-        $activitycom = $activitycomTable->get($id);
+        $ActivitycomTable = \Cake\ORM\TableRegistry::get('activitycom');
+        $ActivityTable = \Cake\ORM\TableRegistry::get('activity');
+        $activitycom = $ActivitycomTable->get($id);
         $activitycom->is_delete = 1;
-        $res = $activitycomTable->save($activitycom);
+        $activity = $ActivityTable->get($activitycom->activity_id);
+        $activity->comment_nums -= 1;
+        $res = $ActivitycomTable->connection()->transactional(function()use($ActivitycomTable, $activitycom, $ActivityTable, $activity){
+            return $ActivitycomTable->save($activitycom) && $ActivityTable->save($activity);
+        });
         if($res) {
             return $this->Util->ajaxReturn(true, '删除成功');
         } else {
