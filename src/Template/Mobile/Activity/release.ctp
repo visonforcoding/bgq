@@ -39,7 +39,7 @@
     <div class="totips" style="display:none;" id="success">
         <h3>提交成功</h3>
         <span>您可到"我-我的活动-活动需求"中查看已提交的需求</span>
-        <a href="/activity/index" class="tipsbtn bgred">返回主页</a><a href="/home/my-activity-submit/2" class="tipsbtn bg_blue">查看需求</a>
+        <a href="/activity/index" class="tipsbtn bgred hide_tips">返回主页</a><a href="/home/my-activity-submit/2" class="tipsbtn bg_blue hide_tips">查看需求</a>
 <!--        <span class='closed'>
             &times;
         </span>-->
@@ -129,6 +129,11 @@
                 e.preventDefault();
                 break;
         }
+    });
+    
+    $('.hide_tips').on('tap', function(){
+        $('#shadow').hide();
+        $('#success').hide();
     });
 </script>
 <?php
