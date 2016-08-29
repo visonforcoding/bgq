@@ -241,12 +241,12 @@ class SavantController extends AppController {
      */
     public function top($id){
         $user = $this->User->get($id);
-        $user->is_top = 1;
+        $user->is_top = $user->is_top==1?0:1;
         $res = $this->User->save($user); 
         if ($res) {
-            return $this->Util->ajaxReturn(true, '置顶成功');
+            return $this->Util->ajaxReturn(true, '操作成功');
         } else {
-            return $this->Util->ajaReturn(false, '置顶失败');
+            return $this->Util->ajaReturn(false, '操作失败');
         }
     }
 
