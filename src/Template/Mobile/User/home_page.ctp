@@ -126,7 +126,7 @@
                 <?php if ($user->subjects): ?>
                     <?php foreach ($user->subjects as $k => $v): ?>
                         <section class="m_sub_items">
-                            <a href="<?php if ($self): ?>/meet/subject/<?= $v['id'] ?><?php else: ?>/meet/subject_detail/<?= $v['id'] ?>/#homepage<?php endif; ?>">
+                            <a href="<?php if ($self): ?>/meet/subject/<?= $v['id'] ?><?php else: ?>javascript:$.util.checkLogin('/meet/subject_detail/<?= $v['id'] ?>/#homepage')<?php endif; ?>">
                                 <div class="m-sub-con-h">
                                     <h3 class="line2"><?= $v['title'] ?></h3>
                                     <span class="iconfont">&#xe678;</span>
