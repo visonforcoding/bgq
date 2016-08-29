@@ -54,7 +54,7 @@
                 <!--阅读数-->
                 <span class="readnums" >
                     <!--<i class="iconfont like">&#xe60b;</i>-->
-                    <i>阅读</i>
+                    阅读
                     <?= $this->Number->format($news->read_nums) ?>
                 </span>
                 <!--喜欢-->
