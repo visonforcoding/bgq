@@ -106,8 +106,10 @@
         });
     });
     $('#no, #shadow').on('tap', function(){
-        $('#isLogout').hide();
-        $('#shadow').hide();
+        setTimeout(function(){
+            $('#isLogout').hide();
+            $('#shadow').hide();
+        }, 301);
     });
     $('#verson').html('Verson '+LEMON.sys.version());
 
