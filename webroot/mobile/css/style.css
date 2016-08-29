@@ -167,11 +167,21 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .con-bottom i.like{font-size:0.32rem;}
 .con-bottom i.collect{font-size:0.3rem;}
 .newscomment-box{border-top:1px #e5e5e5 solid;}
+.com_img_pic{border-top:none;border-bottom:none;background: transparent;}
+.com_img_pic .items,.comm_bottom_des .items{background: transparent;}
+.com_img_pic .items img{width:.42rem;height:.42rem;}
+.com_img_pic .comm-info{height:.42rem;}
+.total_number{line-height: .42rem;}
+.comm_bottom_des{background: transparent;}
 .newscomment-box .comment-title{width:100%;line-height: 0.8rem;font-size:0.3rem;color:#e01a48;height:0.8rem;
 border-bottom:1px #e5e5e5 solid; padding:0 0.3rem;position:relative;font-weight:500}
+.comm_bottom_des .comment-title{border-bottom:none;}
+
 .newscomment-box .comment-title span{position:absolute;right:0.3rem;color:#7a7e83;font-size:0.26rem;cursor: pointer;}
 .newscomment-box .comment-title i{font-size:0.28rem;margin-right:0.1rem; vertical-align: middle;display:inline-block;}
 .newscomment-box .items{margin: 0.3rem 0.3rem 0.3rem 0.3rem;border-bottom:1px #e5e5e5 solid;}
+.comm_bottom_des .items{}
+.comm_bottom_des .items:last-of-type{border-bottom: none;}
 .com_con_des .items{border-bottom:none;}
 .entrollist{padding:0.2rem 0.3rem;border-bottom:1px #e5e5e5 solid;}
 .entrollist:last-of-type{border-bottom:none;}
@@ -1021,7 +1031,7 @@ background-size:3.82rem 1.9rem;margin-top:1rem;}
 	.dialogue li span{font-size:16px;}
 	.dialogue li time{font-size:14px;}
 }
-.tipsbtn{display: inline-block;width:40%;height:30px;line-height: 28px;color:#fff;background: red;margin:0 0.1rem;border-radius: .1rem;font-size:14px;}
+.tipsbtn{display: inline-block;width:40%;height:30px;line-height: 30px;color:#fff;background: red;margin:0 0.1rem;border-radius: .1rem;font-size:14px;}
 /*.tipsbtn:nth-of-type(1){background: gray;}
 .tipsbtn:nth-of-type(2){background: #E01A48;}*/
 .bgred{background: #e01a48;}
@@ -1029,7 +1039,7 @@ background-size:3.82rem 1.9rem;margin-top:1rem;}
 .bggray{background: #7a7e83;}
 .tips_con{margin-bottom:.1rem;}
 @media only screen and (min-width: 414px) {
-	.tipsbtn{height:40px;line-height: 38px;font-size:16px;}
+	.tipsbtn{height:40px;line-height: 40px;font-size:16px;}
 }
 .r-input{width:78%;float:left;padding-left:0.2rem;height:1.68rem;}
 .b-text{background: #fff; padding:0.2rem 0;box-shadow: 0 0 1px rgba(0,0,0,.1);}
