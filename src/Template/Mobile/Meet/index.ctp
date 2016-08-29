@@ -68,7 +68,7 @@
     <div id="buttonLoading" class="loadingbox"></div>
     <?php if(!$is_savant): ?>
     <div class="submitbtn" id="auth">
-        <a href="/home/savant-auth"><span class="s-activ">会员<br>认证</span></a>
+        <a href="javascript:$.util.checkLogin('/home/savant-auth');"><span class="s-activ">会员<br>认证</span></a>
     </div>
     <?php endif; ?>
     
@@ -90,7 +90,7 @@
     </section>
 </script>
 <script type='text/html' id='subTpl'>
-    <a href="/meet/subject-detail/{#id#}/#index">{#title#}</a>
+    <a href="javascript:$.util.checkLogin('/meet/subject-detail/{#id#}/#index')">{#title#}</a>
 </script>
 <script type='text/html' id='mySubTpl'>
     <a href="/meet/subject/{#id#}">{#title#}</a>
@@ -169,7 +169,7 @@
                 });
             });
         });
-    }, 2000);
+    }, 1000);
 
     //轮播
     var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'), $('.a-banner'));
