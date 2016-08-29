@@ -47,11 +47,11 @@
                 <h3 class="comment-title">参与嘉宾</h3>
                 <?= $activity->guest; ?>
             <?php endif; ?>
-            <div class="con-bottom clearfix">
+            <div class="con-bottom a-con-bottom clearfix">
                 <!--阅读数-->
-                <span class="readnums" style="width:1.8rem;">
+                <span class="readnums">
                     <!--<i class="iconfont ">&#xe60b;</i>-->
-                    <i>阅读</i>
+                   阅读
                     <?= $activity->read_nums; ?>
                 </span>
                 <!--喜欢按钮-->
