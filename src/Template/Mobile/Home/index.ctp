@@ -60,8 +60,8 @@
 </script>
 <script type="text/html" id="userTpl">
     <div class='inner h-home-top'>
-        <a href='/home/my-message-fans'><div class="iconfont share" style='width:.4rem;'>&#xe625;</div>
-            {#hasMsg#}
+        <a href='/home/my-message-fans'><div class="iconfont share" style='width:.4rem;'>&#xe625;{#hasMsg#}</div>
+            
         </a>
         <!--<h1>个人中心</h1>-->
         {#setUp#}
