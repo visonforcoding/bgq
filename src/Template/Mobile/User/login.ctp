@@ -101,6 +101,7 @@
                             $.util.setCookie('token_uin',msg.token_uin,10*365*24*60);
                             LEMON.db.set('token_uin',msg.token_uin);
                         }
+                        $.util.setCookie('login_status','yes');
                         document.location.href = msg.redirect_url;
                     } else {
                         $.util.alert(msg.msg);
