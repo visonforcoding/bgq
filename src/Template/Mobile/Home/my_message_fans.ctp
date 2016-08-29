@@ -39,13 +39,13 @@
 <script type="text/html" id="sysTpl">
     <li>
         <div>
-            <a href="{#jump_url#}" style="background: none;" msg_id='{#id#}' class="read">
+            <a url="{#jump_url#}" style="background: none;" msg_id='{#id#}' class="read">
                 <h3>{#title#}</h3>
                 <span class="msg_color {#color#}">{#msg#}</span>
                 <span class='datetime'>{#create_time#}</span>
             </a>
         </div>
-        <a href="{#jump_url#}" class="fr r-more read" status="{#status#}" msg_id='{#id#}'>{#status_msg#}<i class="iconfont">&#xe667;</i></a>
+        <a url="{#jump_url#}" class="fr r-more read" status="{#status#}" msg_id='{#id#}'>{#status_msg#}<i class="iconfont">&#xe667;</i></a>
     </li>
 </script>
 <?php $this->start('script') ?>
@@ -59,7 +59,7 @@
         dataType: 'json',
         url: "/home/get-fans-message",
         success: function (res) {
-            if(res.status){
+            if (res.status) {
                 $.util.dataToTpl('follow', 'fansTpl', res.data, function (d) {
                     d.follower_truename = d.u.truename;
                     d.follower_company = d.u.company;
@@ -90,13 +90,13 @@
             func: function (res) {
                 $.util.alert(res.msg);
                 obj.text('√已关注')
-                obj.attr('style','color:green');
+                obj.attr('style', 'color:green');
             }
         });
     });
-    
-    $('#newFollow').on('tap', function(){
-        if($(this).hasClass('active')){
+
+    $('#newFollow').on('tap', function () {
+        if ($(this).hasClass('active')) {
             return;
         } else {
             $(this).addClass('active');
@@ -107,7 +107,7 @@
             dataType: 'json',
             url: "/home/get-fans-message",
             success: function (res) {
-                if(res.status){
+                if (res.status) {
                     $.util.dataToTpl('follow', 'fansTpl', res.data, function (d) {
                         d.follower_truename = d.u.truename;
                         d.follower_company = d.u.company;
@@ -123,7 +123,7 @@
                         d.follower_fans = d.u.fans;
                         return d;
                     });
-                    
+
                 } else {
                     $('#follow').html('');
                     $.util.alert(res.msg);
@@ -131,9 +131,9 @@
             }
         });
     });
-    
-    $('#sysMes').on('tap', function(){
-        if($(this).hasClass('active')){
+
+    $('#sysMes').on('tap', function () {
+        if ($(this).hasClass('active')) {
             return;
         } else {
             $(this).addClass('active');
@@ -144,10 +144,10 @@
             dataType: 'json',
             url: "/home/get-sys-message",
             success: function (res) {
-                if(res.status){
-                    $.util.dataToTpl('follow', 'sysTpl', res.data, function (d) {     
-                        d.jump_url  = d.url?d.url:'#this';
-                        if(d.status){
+                if (res.status) {
+                    $.util.dataToTpl('follow', 'sysTpl', res.data, function (d) {
+                        d.jump_url = d.url ? d.url : '#this';
+                        if (d.status) {
                             d.status_msg = '已读';
                             d.color = 'f-color-gray';
                         } else {
@@ -156,6 +156,21 @@
                         }
                         return d;
                     });
+                    $('.read').on('tap', function () {
+                        var id = $(this).attr('msg_id');
+                        var obj = $(this);
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            url: "/home/read_msg/" + id,
+                            success: function (res) {
+                                var num = $('#sysMes').children('i').html();
+                                $('#sysMes').children('i').html(parseInt(num) - 1);
+                                obj.find('.msg_color').removeClass('f-color-black').addClass('f-color-gray');
+                                location.href = obj.attr('url');
+                            }
+                        });
+                    });
                 } else {
                     $('#follow').html('');
                     $.util.alert(res.msg);
@@ -163,20 +178,7 @@
             }
         });
     });
-    
-    $('.read').on('tap', function(){
-        var id = $(this).attr('msg_id');
-        var obj = $(this);
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            url: "/home/read_msg/"+id,
-            success: function (res) {
-                var num = $('#sysMes').children('i').html();
-                $('#sysMes').children('i').html(parseInt(num)-1);
-                obj.find('.msg_color').removeClass('f-color-black').addClass('f-color-gray');
-            }
-        });
-    });
+
+
 </script>
 <?php $this->end('script'); ?>
