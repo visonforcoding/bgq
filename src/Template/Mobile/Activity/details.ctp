@@ -147,7 +147,7 @@
         <?php if ($activity->apply_end_time < time()): ?>
             <a style="background:gray;" class="l-btn">我要赞助</a>
         <?php else: ?>
-            <a href="/activity/recommend/<?= $activity->id; ?>" class="l-btn">我要赞助</a>
+            <a href="javascript:$.util.checkLogin('/activity/recommend/<?= $activity->id; ?>')" class="l-btn">我要赞助</a>
         <?php endif; ?>
         <?php if($activity->apply_end_time < time()): ?>
             <a style="background:gray;" class="r-btn">我要报名</a>
@@ -157,7 +157,7 @@
                 <!--是否要审核-->
                 <?php if($activity->must_check): ?>
                     <?php if (empty($activity->activityapply)): ?>
-                        <a  class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                        <a  class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="javascript:$.util.checkLogin('/activity/enroll/<?= $activity->id; ?>')">我要报名(<?= $activity->apply_fee; ?>元)</a>
                     <?php else: ?>
                         <?php if($activity->activityapply['0']->is_pass == 0): ?>
                             <?php if($activity->activityapply['0']->is_check == 1): ?>;
@@ -173,7 +173,7 @@
                     <?php endif; ?>
                 <?php else: ?>
                     <?php if (empty($activity->activityapply)): ?>
-                        <a  class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="/activity/enroll/<?= $activity->id; ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                        <a  class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="javascript:$.util.checkLogin('/activity/enroll/<?= $activity->id; ?>')">我要报名(<?= $activity->apply_fee; ?>元)</a>
                     <?php else: ?>
                         <?php if($activity->activityapply['0']->is_pass == 0): ?>
                             <a href="/wx/meet_pay/2/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
@@ -507,6 +507,7 @@
                                         $('.reg-shadow').hide();
                                         $('.shadow-info').removeClass('c-height');
                                         $('.shadow-info').addClass('m-height');
+                                        $('textarea[name="comment-content-article"]').val('');
                                     } else {
                                         $.util.alert(msg.msg);
                                     }
@@ -553,6 +554,7 @@
                                         $('#allComments').prepend(html);
                                         $('.reg-shadow').hide();
                                         $('.shadow-info').removeClass('c-height').addClass('m-height');
+                                        $('textarea[name="comment-content-reply"]').val('');
                                     } else {
                                         $.util.alert(msg.msg);
                                     }
@@ -567,12 +569,9 @@
                     });
                     break;
                 case 'share':
-                    if(navigator.userAgent.toLowerCase().indexOf('micromessenger') == -1)
-                    {
+                    if(navigator.userAgent.toLowerCase().indexOf('micromessenger') == -1) {
                         LEMON.share.banner();
-                    }
-                    else if($.util.isWX)
-                    {
+                    } else if($.util.isWX) {
                         $('#wxshare').show();
                         $('#shadow').show();
                     }
@@ -708,6 +707,7 @@
                     break;
                     // 取消评论
                 case 'cancel':
+                    LEMON.sys.hideKeyboard();
                     $('.reg-shadow').hide();
                     $('.shadow-info').removeClass('c-height').addClass('m-height');
                     break;
