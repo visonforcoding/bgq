@@ -100,7 +100,7 @@
             </div>
             <!--推荐-->
             <div class="m-commond-list clearfix">
-                <span class="fl <?php if ($isReco): ?>color-items<?php endif; ?>" id="recom"><i class="iconfont <?php if ($isReco): ?>hover<?php endif; ?>"><?php if ($isReco): ?>&#xe61c;<?php else: ?>&#xe61b;<?php endif; ?></i>推荐他</span>
+                <span class="fl <?php if ($isReco): ?>color-items<?php endif; ?>" id="recom"><i class="iconfont <?php if ($isReco): ?>hover<?php endif; ?>"><?php if ($isReco): ?>&#xe61c;<?php else: ?>&#xe61b;<?php endif; ?></i>推荐Ta</span>
                 <a href="/meet/view-more-reco/<?= $user->id ?>">
                     <p class="fl" id="recom_avatar">
                         <?php if ($user->reco_users): ?>
