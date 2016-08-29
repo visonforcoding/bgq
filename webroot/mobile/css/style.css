@@ -172,6 +172,7 @@ border-bottom:1px #e5e5e5 solid; padding:0 0.3rem;position:relative;font-weight:
 .newscomment-box .comment-title span{position:absolute;right:0.3rem;color:#7a7e83;font-size:0.26rem;cursor: pointer;}
 .newscomment-box .comment-title i{font-size:0.28rem;margin-right:0.1rem; vertical-align: middle;display:inline-block;}
 .newscomment-box .items{margin: 0.3rem 0.3rem 0.3rem 0.3rem;border-bottom:1px #e5e5e5 solid;}
+.com_con_des .items{border-bottom:none;}
 .entrollist{padding:0.2rem 0.3rem;border-bottom:1px #e5e5e5 solid;}
 .entrollist:last-of-type{border-bottom:none;}
 .entrollist a{display: block;overflow: hide;}
@@ -184,8 +185,11 @@ color:#7a7d82;font-size:.24rem;}
 .t-ablock a,.t-ablock img{display:inline-block;width:0.62rem;height:0.62rem;overflow:hidden;border-radius:0.31rem;margin:0 0.07rem;}
 .comm-info{height:0.62rem;color:#7a7e83;}
 .entrollist .comm-info{height:auto;}
+
 .comm-info span{ display: block;float:left;}
+.comm-info .etrol_pic{position:absolute;}
 .infor-comm{width:4.5rem;}
+.etrol_con_des .infor-comm{padding-left:.8rem;width:100%;}
 .comm-info span:first-child{width:0.62rem;height:0.62rem;margin-right:0.3rem;}
 .comm-info span:last-child{float:right;margin-top:0.14rem;position:relative;padding-top:0.2rem;cursor: pointer;}
 .comm-info span .addnum{position:absolute;top:-0.1rem;left:0;width:0.3rem;height;0.3rem;padding-top:0.1rem;display: none;color:#da2051;font-size:0.28rem;font-weight: bold;}
