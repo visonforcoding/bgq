@@ -10,7 +10,7 @@
         <div class="t-home-top">
             <span>
                 <a href="/user/login?redirect_url=/home/index">
-                    <img src="/mobile/images/touxiang.png">
+                    <img id='avatar'/>
                 </a>
             </span>
         </div>
@@ -159,6 +159,7 @@
                         $('#meetMsg').addClass('opci');
                     }
                 } else {
+                    $('#avatar').attr('src', '/mobile/images/touxiang.png');
                     $('#loginBtn').css("visibility","visible");
                     $('.clickbtn').on('click', function () {
                         $.util.alert('请先登录');
