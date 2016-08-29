@@ -194,8 +194,7 @@ class WxController extends AppController {
         if (empty($openid)) {
             
         }
-        $fee = 0.01; //元
-//        $fee = $order->price;  //支付金额(分)
+        $fee = $order->price;  //支付金额(分)
         $this->loadComponent('Wxpay');
         $isApp = false;
         $aliPayParameters = '';
