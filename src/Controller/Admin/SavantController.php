@@ -125,7 +125,7 @@ class SavantController extends AppController {
         $savant_status = $this->request->data('savant_status');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = ['User.savant_status >' => 1];
+        $where = ['User.savant_status >' => 1,'is_del'=>0];
         if ($savant_status > 1) {
             $where = ['User.savant_status' => $savant_status];
         }
