@@ -626,7 +626,7 @@ box-shadow: 0 10px 10px rgba(201,201,206,.5);min-height:3.72rem;background: #fff
 .tabcon ul i{font-size:.24rem;width:12%;display: inline-block;margin-right:.2rem;}
 .worktab a{display: block;}
 .worktab li span{color:#171717;width:100%;}
-.worktab .worktime{display: block;line-height: .34rem;margin-left: 32%;width:70%;color:#808080;}
+.worktab .worktime{display: block;line-height: .34rem;margin-left: 30%;width:70%;color:#808080;}
 .worktab .m_des{padding:0;color:#808080;}
 .gs-name{text-indent: 30%;}
 .h-tips{width:30%;color:#808080;}
@@ -927,7 +927,8 @@ border-top:1px #e5e5e5 solid;line-height: 1rem;font-size:0;max-width: 750px;
 .icon-width span,.icon-width span:last-of-type{width:25%;}
 .my-home-slidemenu{font-size:0;padding:0.2rem 0;}
 .my-home-slidemenu a.active,.my-home-slidemenu span.active{color:#e01a48;}
-.my-home-slidemenu a,.my-home-slidemenu span{color:#9d9ea3;text-align: center;width:33%;display: inline-block;font-size:0.28rem;}
+.my-home-slidemenu span i,.my-home-slidemenu a i{position:absolute;top:-.1rem;width:16px;height:16px;background: #E01A48;color:#fff;font-size:12px;line-height: 14px;border-radius: 50%;}
+.my-home-slidemenu a,.my-home-slidemenu span{color:#9d9ea3;text-align: center;width:33%;display: inline-block;font-size:0.28rem;position:relative;}
 .historyinfo{display: block;text-align: center;color:#7a7d82;height:0.4rem;font-size:0.3rem;}
 .datetime{font-size:0.26rem;}
 .systerm-info-box span{font-size:0.26rem;line-height:0.42rem;color:#222;}
