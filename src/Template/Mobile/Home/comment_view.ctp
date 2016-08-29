@@ -24,7 +24,7 @@
                     <i class="iconfont">&#xe61a;</i><?= $comment->praise_nums ?>
                 </span>
             </div>
-            <p><?= $comment->msg ?></p>
+            <p><?= $comment->body ?></p>
         </div>
     </section>
 
@@ -64,7 +64,7 @@
                             <i class="iconfont">&#xe61a;</i><?= $item->praise_nums ?>
                         </span>
                     </div>
-                    <p><?= $item->msg ?></p>
+                    <p><?= $item->body ?></p>
                 </div>    
             <?php endforeach; ?>
         <?php else: ?>
