@@ -8,8 +8,8 @@
 <script type="text/html" id="usersTpl">
     <div class="entrollist">
         <a href="/user/home-page/{#id#}">
-            <div class="comm-info clearfix">
-                <span><img src="{#avatar#}"/></span>
+            <div class="comm-info etrol_con_des clearfix">
+                <span class='etrol_pic'><img src="{#avatar#}"/></span>
                 <div class="infor-comm">
                     <i class="username">{#truename#} </i>
                     <i class="job">{#company#} {#position#}</i>
