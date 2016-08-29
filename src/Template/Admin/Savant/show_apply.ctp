@@ -27,8 +27,8 @@
                     <?php foreach ($applys as $apply): ?>
                     <tr>
                         <td><?=$apply->create_time?></td>
-                        <td><?=$apply->xmjy?></td>
-                        <td><?=$apply->zyys?></td>
+                        <td><?=  preg_replace('/\r|\n/', '', $apply->xmjy)?></td>
+                        <td><?=  preg_replace('/\r|\n/', '', $apply->zyys)?></td>
                         <td><?=$apply->savant_str?></td>
                         <td><?=$apply->check_man?></td>
                         <td><?=$apply->reason?></td>
