@@ -70,6 +70,9 @@ function getOriginAvatar($thumb) {
  * @return string
  */
 function getAvatar($avatar) {
+    if(preg_match('/(http|https).*/', $avatar)){
+        return $avatar;
+    }
     if (empty($avatar) || !file_exists(WWW_ROOT . $avatar)) {
         return '/mobile/images/touxiang.jpg';
     }else{
