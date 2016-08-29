@@ -351,7 +351,7 @@ class ActivityController extends AppController {
                 $activity = $ActivityNeed->get($id);
             }
             $this->set('activity', $activity);
-            $this->set('pageTitle', '活动需求');
+            $this->set('pageTitle', '提交需求');
         }
     }
 
