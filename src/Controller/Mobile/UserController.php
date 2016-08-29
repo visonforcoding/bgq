@@ -207,6 +207,10 @@ class UserController extends AppController {
             $data = $this->request->data();
             $data['enabled'] = 1;
             $data['phone'] = $this->request->session()->read('reg.phone');
+            $ckReg = $this->User->find()->where(['phone'=>$data['phone'],'is_del'=>0])->first();
+            if($ckReg){
+                return $this->Util->ajaxReturn(false,'该手机号已经注册过');
+            }
             $data['user_token'] =  md5(uniqid());
             //隐私设置
             $data['secret'] =  [
@@ -347,26 +351,31 @@ class UserController extends AppController {
             $phone = $this->request->data('phone');
             $user = $this->User->findByPhoneAndEnabled($phone,1)->first();
             if ($user) {
-//                $vcode = $this->request->session()->read('UserLoginVcode');
-//               if ($vcode['code'] == $this->request->data('vcode')) {
-//                  if (time() - $vcode['time'] < 60 * 10) {
-//                //10分钟验证码超时
+                if(\Cake\Core\Configure::read('debug')&&$_SERVER['SERVER_ADDR']=='127.0.0.1'){
+                    //方便本地调试
+                    $this->request->session()->write('User.mobile', $user);
+                    return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,'token_uin'=>$user->user_token]);
+                }
+                $vcode = $this->request->session()->read('UserLoginVcode');
+               if ($vcode['code'] == $this->request->data('vcode')) {
+                  if (time() - $vcode['time'] < 60 * 10) {
+                //10分钟验证码超时
                     $this->request->session()->write('User.mobile', $user);
                     $user_token = false;
                     if($this->request->is('lemon')){
                         $this->request->session()->write('Login.login_token',$user->user_token);
                         $user_token = $user->user_token;
                     }
-                         return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,'token_uin'=>$user_token]);
-//                    } else {
-//                        return $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
-//                     }
-//                  } else {
-//                      return $this->Util->ajaxReturn(false, '验证码验证错误');
-//                 } 
+                    return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,'token_uin'=>$user_token]);
+                    } else {
+                        return $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
+                     }
+                  } else {
+                      return $this->Util->ajaxReturn(false, '验证码验证错误');
+                 } 
             } else{
                 //不存在该手机号用户
-                return $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或不可用']);
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '改手机号未注册或被禁用']);
             }
         }
         $this->set(array(
@@ -385,7 +394,7 @@ class UserController extends AppController {
             if ($user) {
                 return $this->Util->ajaxReturn(['status' => true]);
             } else {
-                return $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或不可用']);
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或被禁用']);
             }
         }
     }

@@ -717,3 +717,6 @@ ALTER TABLE `binggq`.`user`
 ALTER TABLE `pvlog`
 	ADD COLUMN `ptag` INT NOT NULL AFTER `id`,
 	ADD INDEX `ptag` (`ptag`);  
+#删除索引
+ALTER TABLE `user`
+	DROP INDEX `phone`;	
