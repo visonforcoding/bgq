@@ -36,7 +36,12 @@ class UserController extends AppController {
             $self = true;
         }
         if(!$self){
-            $user = $this->User->get($id);
+            $user = $this->User->get($id, [
+                'conditions' => [
+                    'is_del' => 0,
+                    'enabled' => 1
+                ]
+            ]);
             $user->homepage_read_nums += 1;
             $this->User->save($user);
         }

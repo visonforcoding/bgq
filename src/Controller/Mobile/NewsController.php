@@ -400,10 +400,15 @@ class NewsController extends AppController {
      * @param type $id
      */
     public function delComment($id){
-        $newscomTable = \Cake\ORM\TableRegistry::get('newscom');
-        $newscom = $newscomTable->get($id);
+        $NewscomTable = \Cake\ORM\TableRegistry::get('newscom');
+        $NewsTable = \Cake\ORM\TableRegistry::get('news');
+        $newscom = $NewscomTable->get($id);
         $newscom->is_delete = 1;
-        $res = $newscomTable->save($newscom);
+        $news = $NewsTable->get($newscom->news_id);
+        $news->comment_nums -= 1;
+        $res = $NewscomTable->connection()->transactional(function()use($NewsTable, $news, $NewscomTable, $newscom){
+            return $NewsTable->save($news) && $NewscomTable->save($newscom);
+        });
         if($res){
             return $this->Util->ajaxReturn(true, '删除成功');
         } else {
