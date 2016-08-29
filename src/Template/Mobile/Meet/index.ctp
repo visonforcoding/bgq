@@ -162,6 +162,7 @@
                         $('#biggie').append(html);
                         if (res.data.length < 5) {
                             page = 9999;
+                            $('#buttonLoading').html('亲，没有更多条目了，请看看其他的栏目吧');
                         } else {
                             page++;
                         }

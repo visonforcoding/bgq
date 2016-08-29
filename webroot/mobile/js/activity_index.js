@@ -78,6 +78,7 @@ activity.prototype.getData = function(){
                     $('#activity').append(html);
                     if(res.data < 5){
                         obj.page = 9999;
+                        $('#buttonLoading').html('亲，没有更多活动了，请看看其他的栏目吧');
                     } else {
                         obj.page++;
                     }
