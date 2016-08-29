@@ -105,7 +105,7 @@
             }
         });
     });
-    $('#no').on('tap', function(){
+    $('#no, #shadow').on('tap', function(){
         $('#isLogout').hide();
         $('#shadow').hide();
     });
