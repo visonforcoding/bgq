@@ -208,7 +208,7 @@ class BusinessComponent extends Component {
             $user = $userTable->get($user_id);
             if($type == 1){
                 $data = [
-                   'url' => 'http://m.chinamatop.com/home/my-message-fans' 
+                   'url' => 'http://m.chinamatop.com/home/my-message-fans'
                 ];
                 $this->Push->sendAlias($user->user_token, '您有1位新的关注者', '', '您有新的关注者', true, $data, 'go_app');
             } else {
