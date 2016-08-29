@@ -430,7 +430,7 @@ class MeetController extends AppController {
                 ->matching('Subjects', function($q)use($keyword){
                     return $q;
                 })
-                ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%"])
+                ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%", 'is_del'=>0])
                 ->orWhere(['Subjects.title like'=>"%$keyword%", 'enabled'=>'1'])
 //                ->limit(10)
                 ->toArray();
@@ -456,7 +456,7 @@ class MeetController extends AppController {
                 ->matching('Subjects', function($q)use($keyword){
                     return $q;
                 })
-                ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%"])
+                ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%", 'is_del'=>0])
                 ->orWhere(['Subjects.title like'=>"%$keyword%"])
                 ->limit(10)
                 ->toArray();
@@ -625,6 +625,7 @@ class MeetController extends AppController {
         $keyword = $data['keyword'];
         $where['enabled'] = '1';
         $where['level'] = '2';
+        $where['is_del'] = '0';
         $biggie = $this
                     ->User
                     ->find();
@@ -694,7 +695,7 @@ class MeetController extends AppController {
                 ->contain(['Subjects'=>function($q){
                     return $q->where(['is_del'=>0])->orderDesc('Subjects.create_time');
                 }])
-                ->where(['enabled'=>'1', 'level'=>'2'])
+                ->where(['enabled'=>'1', 'level'=>'2', 'is_del'=>0])
                 ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
                 ->page($page, $this->limit)
                 ->toArray();
