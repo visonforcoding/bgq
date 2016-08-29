@@ -294,7 +294,7 @@ class ActivityController extends AppController {
     //                            //短信和消息通知
                                 $this->loadComponent('Sms');
                                 if($activity->must_check){
-                                    $msg = "您报名的活动：《" . $activity->title . "》申请已提交，我们会在一个工作日之内审核。";
+                                    $msg = "您报名的活动：《" . $activity->title . "》申请已提交，我们会在三个工作日之内审核。";
                                 } else {
                                     $msg = "您报名的活动：《" . $activity->title . "》已确认通过，请及时登录平台支付报名费用。";
                                 }
