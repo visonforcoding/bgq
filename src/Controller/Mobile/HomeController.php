@@ -1625,11 +1625,15 @@ class HomeController extends AppController {
         $CommentTable = \Cake\ORM\TableRegistry::get($commentTable);
         $comment = $CommentTable->find()->contain(['Users'])->select()->where([$commentTable.'.id'=>$id])->first();
         $replys = $CommentTable->find()->contain(['Users'])
-                ->where(["$relate_id"=>$comment->$relate_id,"$reply_id"=>$comment->user_id,'is_delete'=>0])->toArray();
+                ->where(["$relate_id"=>$comment->$relate_id,"$reply_id"=>$comment->user_id,'is_delete'=>0])
+                ->orderDesc($commentTable.'.create_time')
+                ->toArray();
         $Table = \Cake\ORM\TableRegistry::get($table);
         $table = $Table->find()->contain(['Users'])->where([$table.'.id'=>$comment->$relate_id])->first();
         $LikeTable = \Cake\ORM\TableRegistry::get('CommentLike');
-        $likes = $LikeTable->find()->contain(['Users'])->where(['relate_id'=>$id,'type'=>$liketype])->toArray();
+        $likes = $LikeTable->find()->contain(['Users'])->where(['relate_id'=>$id,'type'=>$liketype])
+                ->orderDesc('CommentLike.create_time')
+                ->toArray();
         $this->set([
             'table'=>$table,
             'comment'=>$comment,
