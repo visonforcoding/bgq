@@ -18,8 +18,8 @@
         <div id="activity" style='border-bottom:1px #e5e5e5 solid;'></div>
         <div id="buttonLoading" class="loadingbox"></div>
         <div style="height: 1.2rem; display: none;" id="iosBottom"></div>
-        <div class="submitbtn subactivity" id="release">
-            <a href="javascript:void(0)">
+        <div class="submitbtn subactivity">
+            <a href="javascript:$.util.checkLogin('/activity/release');">
                 <span class="s-activ">活动<br>需求</span>
             </a>
         </div>
