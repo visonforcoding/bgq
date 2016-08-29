@@ -155,8 +155,10 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .body-con img{min-height:.1rem;}
 .newscon-box p{width:90%;margin:0.1rem auto;line-height: 0.46rem;font-size:0.3rem;color:#222;text-align: justify; cursor: pointer;}
 .newscon-box p a,.body-con a{font-size:0.3rem;}
-.con-bottom{float:right;margin-right: .3rem;color:#9ba4ad;margin-top:0.2rem;font-size:0.28rem;}
+.con-bottom{margin-right: .3rem;color:#9ba4ad;margin-top:0.2rem;font-size:0.28rem;}
 .con-bottom span{display: inline-block;width:1.2rem;font-size:0.24rem;}
+.con-bottom:last-of-type{width:12%;text-align: right;}
+.readnums{width:80%;text-align: right;}
 .con-bottom .a-coll{width:0.6rem;}
 .a-coll i{font-size:0.34rem;}
 .readnums i{font-size:.24rem;vertical-align: top;margin-right:.05rem;}
