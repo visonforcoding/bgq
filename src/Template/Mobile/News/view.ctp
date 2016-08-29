@@ -151,7 +151,7 @@
     // 分享设置
     window.shareConfig.link = 'http://m.chinamatop.com/news/view/<?= $news->id ?>?share=1';
     window.shareConfig.title = '<?= $news->title ?>';
-    var share_desc = '<?= $news->summary ?>';
+    var share_desc = '<?= preg_replace('/\r|\n/','',$news->summary) ?>';
     share_desc && (window.shareConfig.desc = share_desc);
     LEMON.show.shareIco();
     //LEMON.sys.back('/news/index');
