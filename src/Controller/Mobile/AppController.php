@@ -114,7 +114,7 @@ class AppController extends Controller {
             //如果是APP，获取user_token 自动登录
             $user_token = $this->request->cookie('token_uin');
             $UserTable = \Cake\ORM\TableRegistry::get('User');
-            $user = $UserTable->findByUser_tokenAndEnabled($user_token, 1)->first();
+            $user = $UserTable->find()->where(['user_token'=>$open_id,'enabled'=>1,'is_del'=>0])->first();
             if ($user) {
                 $this->request->session()->write('User.mobile', $user);
                 $this->response->cookie([
@@ -152,7 +152,6 @@ class AppController extends Controller {
             if ($this->request->isWeixin() && empty($this->user) && !$this->request->session()->check('Login.wxbase')) {
                 if ($this->request->query('code')) {
                     //若是来自于微信的回传
-                    \Cake\Log\Log::debug('微信回跳', 'devlog');
                     $this->loadComponent('Wx');
                     $res = $this->Wx->getUser();
                     //微信静默登录
@@ -166,8 +165,8 @@ class AppController extends Controller {
 //        }elseif (isset($res->openid)) {
                     $open_id = $res->openid;
                     $UserTable = \Cake\ORM\TableRegistry::get('User');
-                    $user = $UserTable->findByWx_openidAndEnabled($open_id, 1)->first();
 //        }
+                    $user = $UserTable->find()->where(['wx_openid'=>$open_id,'enabled'=>1,'is_del'=>0])->first();
                     if ($user) {
                         //通过微信 获取到 在平台上有绑定的用户  就默认登录
                         if (empty($user->union_id) && isset($res->unionid)) {

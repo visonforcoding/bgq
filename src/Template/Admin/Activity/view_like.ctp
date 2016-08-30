@@ -36,11 +36,12 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '公司','职位','活动或资讯名称', '日志内容', '记录时间', '更新时间', '类型', '操作'],
+                                ['用户', '公司','职位','手机号','活动或资讯名称', '日志内容', '记录时间', '更新时间', '类型', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'user.company', editable: true, align: 'center'},
                             {name: 'user.position', editable: true, align: 'center'},
+                            {name: 'user.phone', editable: true, align: 'center'},
                             {name: 'activity.title', editable: true, align: 'center'},
                             {name: 'msg', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},

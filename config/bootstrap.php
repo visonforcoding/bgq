@@ -214,6 +214,14 @@ Log::config('devlog', [
     'scopes' => ['devlog'],
     'file' => 'devlog',
 ]);
+//js 日志文件
+Log::config('jslog', [
+    'className' => 'Cake\Log\Engine\FileLog',
+    'path' => LOGS,
+    'levels' => [],
+    'scopes' => ['jslog'],
+    'file' => 'jslog',
+]);
 
 /**
  * Connect middleware/dispatcher filters.

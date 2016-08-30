@@ -480,6 +480,10 @@ class ActivityController extends AppController {
             $activity->status = $activity->status==1?0:1;
             if ($activity->status == 1&&empty($activity->qrcode)) {
                         // 生成二维码
+                  $folder = 'upload/qrcode/activitycode/' . date('Y-m-d');
+                if (!file_exists(WWW_ROOT . $folder)) {
+                    $res = mkdir(WWW_ROOT . $folder,0777,true);
+                }
                 $savePath = $folder . '/' . time() . $id . '.png';
                 \PHPQRCode\QRcode::png('http://' . $this->request->env('HTTP_HOST') . '/activity/sign/' . $id, WWW_ROOT . $savePath);
                 $activity = $this->Activity->get($id);
