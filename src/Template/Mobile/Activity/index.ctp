@@ -33,7 +33,7 @@
                     <img src="{#thumb#}"/>
                     <div class="status">{#apply_msg#}{#pass_msg#}</div>
                 </div>
-                <h3>{#title#}<time>{#create_time#}</time></h3>
+                <h3>{#title#}</h3>
                 
             </a>
             <div class="a-bottom">

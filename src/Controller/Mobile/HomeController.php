@@ -465,7 +465,8 @@ class HomeController extends AppController {
 //            $where['SubjectBook.status !='] = 2;
             $where['SubjectBook.user_id'] = $this->user->id;
             $books = $BookTable->find()->contain(['Subjects', 'Subjects.User' => function($q) {
-                return $q->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums', 'level']);
+                return $q->where(['Subjects.User.enabled'=>1, 'Subjects.User.is_del'=>0])
+                        ->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums', 'level']);
             }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
             $savant_books = $BookTable->find()->contain(['Subjects', 'Users' => function($q) {
                     return $q->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums', 'level']);
@@ -506,6 +507,8 @@ class HomeController extends AppController {
                 $book = $BookTable->get($id);
                 $book->status = -1;
                 $res = $BookTable->save($book);
+                $this->loadComponent('Business');
+                $this->Business->usermsg($book->user_id, '话题预约', '您预约的话题状态更新了', 11, $book->id, '/home/my-book/#3');
                 if($res){
                     return $this->Util->ajaxReturn(true, '取消预约成功');
                 } else {

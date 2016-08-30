@@ -45,7 +45,7 @@
                 <span class='datetime'>{#create_time#}</span>
             </a>
         </div>
-        <a url="{#jump_url#}" class="fr r-more read" status="{#status#}" msg_id='{#id#}'><span style='display:inline;'>{#status_msg#}</span><i class="iconfont">&#xe667;</i></a>
+        <a url="{#jump_url#}" class="fr r-more read" status="{#status#}" msg_id='{#id#}'><span style='display:inline;' id="msg_{#id#}">{#status_msg#}</span><i class="iconfont">&#xe667;</i></a>
     </li>
 </script>
 <?php $this->start('script') ?>
@@ -167,6 +167,7 @@
                                 var num = $('#sysMes').children('i').html();
                                 $('#sysMes').children('i').html(parseInt(num) - 1);
                                 obj.find('.msg_color').removeClass('f-color-black').addClass('f-color-gray');
+                                $('span#msg_'+id).html('已读');
                                 location.href = obj.attr('url');
                             }
                         });
