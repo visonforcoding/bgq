@@ -131,7 +131,7 @@
                             d.title = d.activity.title;
                             d.adress = d.activity.adress;
                             d.apply_nums = d.activity.apply_nums;
-                            d.time = d.activity.time;
+                            d.time = d.create_time;
                             if (d.activity.must_check == 1) {
                                 if (d.is_check === 0 && d.is_pass === 0) {
                                     d.check = '审核中';
