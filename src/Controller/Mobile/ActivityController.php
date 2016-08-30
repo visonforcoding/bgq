@@ -217,7 +217,7 @@ class ActivityController extends AppController {
                             $activityApply->is_check = 0;
                             $activityApply->is_pass = 0;
                             if ($this->Activity->Activityapply->save($activityApply)) {
-                                return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/activity/details/'.$id]);
+                                return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/activity/details/'.$id.'/enroll']);
                             } else {
                                 return $this->Util->ajaxReturn(false, $activityApply->errors());
                             }
@@ -264,7 +264,7 @@ class ActivityController extends AppController {
                                 if ($this->Activity->Activityapply->save($activityApply)) {
                                     $activity->apply_nums += 1;
                                     $this->Activity->save($activity);
-                                    return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/activity/details/'.$id]);
+                                    return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/activity/details/'.$id.'/enroll']);
                                 } else {
                                     return $this->Util->ajaxReturn(false, $activityApply->errors());
                                 }
