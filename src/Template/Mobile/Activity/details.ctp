@@ -60,7 +60,7 @@
                 </span>
                 <!--收藏按钮-->
                 <span >
-                    <i class="iconfont color-items <?php if ($isCollect): ?>hover<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="collect"><?php if ($isCollect): ?>&#xe67c;<?php else: ?>&#xe615;<?php endif; ?></i>
+                    <i class="iconfont color-items <?php if ($isCollect): ?>hover<?php endif; ?>" artid="<?= $activity->id; ?>" type="0" id="collect"><?php if ($isCollect): ?>&#xe681;<?php else: ?>&#xe615;<?php endif; ?></i>
                 </span>
             </div>
         </section>
@@ -458,7 +458,7 @@
                                             $(em).html('&#xe615;');
                                             $(em).removeClass('hover');
                                         } else {
-                                            $(em).html('&#xe67c;');
+                                            $(em).html('&#xe681;');
                                             $(em).addClass('hover');
                                         }
                                     }

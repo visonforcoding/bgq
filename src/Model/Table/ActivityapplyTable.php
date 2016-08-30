@@ -45,6 +45,13 @@ class ActivityapplyTable extends Table {
             'joinType' => 'LEFT',
             'className' => 'Order',
         ]);
+        
+        $this->hasOne('Usermsg', [
+            'foreignKey' => 'table_id',
+            'bindingKey' => 'activity_id',
+            'className' => 'Usermsg',
+            'joinType' => 'left'
+        ]);
 
         $this->addBehavior('Timestamp', [
             'events' => [
