@@ -115,8 +115,8 @@ class PushController extends AppController {
                 return $this->Util->ajaxReturn(false, '用户为空');
             } else {
                 foreach($res as $k=>$v){
-                    $user .= $v->user_token . '\n';
-                } 
+                    $user .= $v['user_token'] . '\n';
+                }
                 $this->loadComponent('Push');
                 if($url){
                     $extra['url'] = $url;
