@@ -42,6 +42,7 @@
         <script type="text/javascript" src="/mobile/js/jsapi.js"></script>
         <script type="text/javascript" src="/mobile/js/zepto.min.js"></script>
         <script type="text/javascript" src="/mobile/js/util.js"></script>
+        <script> var __wxConfig = <?= json_encode($wxConfig) ?>;</script>
         <script>
             (function () {  //微信分享
                 if (navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1) {
@@ -52,7 +53,7 @@
                             clearInterval(wxReadTimmer);
                         if (window.wx) {
                             clearInterval(wxReadTimmer);
-                            wx.config(<?= json_encode($wxConfig) ?>);
+                            wx.config(__wxConfig);
                             wx.ready(function () {
                                 wx.onMenuShareTimeline(window.shareConfig);
                                 wx.onMenuShareAppMessage(window.shareConfig);
@@ -113,6 +114,7 @@
                     return;
                 var apptk = LEMON.db.get('token_uin'), cookietk = $.util.getCookie('token_uin');
                 if (apptk && cookietk) {
+                    $.util.setCookie('login_status', 'yes', 99999999);
                     return;
                 } else if (apptk) {
                     $.util.setCookie('token_uin', apptk, 99999999);
