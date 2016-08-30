@@ -1,6 +1,4 @@
-<?php
-
-$this->start('static') ?>   
+<?php $this->start('static') ?>   
 <link href="/wpadmin/lib/jqupload/uploadfile.css" rel="stylesheet">
 <link href="/wpadmin/lib/jqvalidation/css/validationEngine.jquery.css" rel="stylesheet">
 <?php $this->end() ?> 
@@ -10,8 +8,8 @@ $this->start('static') ?>
         <label class="col-md-2 control-label">类型</label>
         <div class="col-md-8">
             <select name="type" class="form-control">
-                <?php foreach ($types as $key=>$type): ?>
-                <option value="<?=$key?>" <?php if($banner->type == $key): ?>selected<?php endif; ?>><?=$type?></option>
+                <?php foreach ($types as $key => $type): ?>
+                    <option value="<?= $key ?>" <?php if ($banner->type == $key): ?>selected<?php endif; ?>><?= $type ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -22,7 +20,7 @@ $this->start('static') ?>
             <div  class="img-thumbnail input-img"  single>
                 <img  alt="请上传750*400大小的图片" src="<?= $banner->img; ?>"/>
             </div>
-            <div style="color:red">请上传750*400大小的图片</div>
+            <div style="color:red">请上传750*380大小的图片</div>
             <input name="img" value="<?= $banner->img; ?>"  type="hidden"/>
             <div id="cover"   class="jqupload">上传</div>
         </div>
@@ -30,7 +28,7 @@ $this->start('static') ?>
     <div class="form-group">
         <label class="col-md-2 control-label">链接地址</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('url', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
@@ -38,7 +36,7 @@ $this->start('static') ?>
     <div class="form-group">
         <label class="col-md-2 control-label">备注说明</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('remark', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>

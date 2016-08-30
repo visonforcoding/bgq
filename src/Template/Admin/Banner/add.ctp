@@ -8,19 +8,19 @@
         <label class="col-md-2 control-label">类型</label>
         <div class="col-md-8">
             <select name="type" class="form-control">
-                <?php foreach ($types as $key=>$type): ?>
-                <option value="<?=$key?>"><?=$type?></option>
+                <?php foreach ($types as $key => $type): ?>
+                    <option value="<?= $key ?>"><?= $type ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">图片</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
                 <img  alt="请上传750*400大小的图片" src=""/>
             </div>
-            <div style="color:red">请上传750*400大小的图片</div>
+            <div style="color:red">请上传750*380大小的图片</div>
             <input name="img"  type="hidden"/>
             <div id="img" class="jqupload">上传</div>
         </div>
@@ -28,7 +28,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">链接地址</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('url', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
@@ -36,7 +36,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">备注说明</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('remark', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
@@ -59,30 +59,30 @@
     $(function () {
         initJqupload('img', '/wpadmin/util/doUpload?dir=banner', 'jpg,png,gif,jpeg,webp'); //初始化图片上传
         $('form').submit(function () {
-        var form = $(this);
-        $.ajax({
-            type: $(form).attr('method'),
-            url: $(form).attr('action'),
-            data: $(form).serialize(),
-            dataType: 'json',
-            success: function (res) {
-                if (typeof res === 'object') {
-                    if (res.status) {
-                        layer.confirm(res.msg, {
-                            btn: ['确认', '继续添加'] //按钮
-                        }, function () {
-                            window.location.href = '/admin/banner/index';
-                        }, function () {
-                            window.location.reload();
-                        });
-                    } else {
-                        layer.alert(res.msg, {icon: 5});
+            var form = $(this);
+            $.ajax({
+                type: $(form).attr('method'),
+                url: $(form).attr('action'),
+                data: $(form).serialize(),
+                dataType: 'json',
+                success: function (res) {
+                    if (typeof res === 'object') {
+                        if (res.status) {
+                            layer.confirm(res.msg, {
+                                btn: ['确认', '继续添加'] //按钮
+                            }, function () {
+                                window.location.href = '/admin/banner/index';
+                            }, function () {
+                                window.location.reload();
+                            });
+                        } else {
+                            layer.alert(res.msg, {icon: 5});
+                        }
                     }
                 }
-            }
+            });
+            return false;
         });
-        return false;
-      });
     });
 </script>
 <?php

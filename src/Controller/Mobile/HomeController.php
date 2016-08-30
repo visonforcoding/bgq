@@ -92,7 +92,7 @@ class HomeController extends AppController {
                     return $q->where(['type'=>2]);
                 }, 'Usermsg'=>function($q){
                     return $q->where(['Usermsg.status'=>0, 'Usermsg.type'=>7]);
-                }])->where(['activityapply.user_id' => $this->user->id])->toArray();
+                }])->where(['activityapply.user_id' => $this->user->id])->orderDesc('activityapply.create_time')->toArray();
 //                $UsermsgTable->updateAll(['status'=>1], ['user_id'=>$this->user->id, 'status'=>0, 'type'=>7]);
                 if ($myActivity !== false) {
                     return $this->Util->ajaxReturn(['status' => true, 'data' => $myActivity]);
