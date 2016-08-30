@@ -6,6 +6,14 @@
 <div class="work-copy">
     <?= $this->Form->create($activity, ['class' => 'form-horizontal']) ?>
     <div class="form-group">
+        <label class="col-md-2 control-label">活动名称</label>
+        <div class="col-md-8">
+            <?php
+            echo $this->Form->input('title', ['label' => false, 'class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">系列标签</label>
         <div class="col-md-8">
             <?= $this->cell('Series') ?>
@@ -34,14 +42,7 @@
             <input type="text" class="form-control" placeholder="XXX公司">
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">活动名称</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('title', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
+
     <div class="form-group">
         <label class="col-md-2 control-label">活动时间</label>
         <div class="col-md-3">
@@ -108,9 +109,9 @@
         <label class="col-md-2 control-label">首页列表图</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
-                <img  alt="请上传宽为380大小的首页列表图" src=""/>
+                <img  alt="请上传宽为388px高690px大小的首页列表图" src=""/>
             </div>
-            <div style="color:red">请上传宽为380大小的首页列表图</div>
+            <div style="color:red">请上传宽为388px高690px大小的首页列表图</div>
             <input name="thumb"  type="hidden"/>
             <div id="thumb" class="jqupload">上传</div>
             <span class="notice">支持格式jpg,png,gif,jpeg</span>

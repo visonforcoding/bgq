@@ -361,7 +361,7 @@ class WxController extends AppController {
      */
     public function jsLog() {
         $content = $this->request->query('content');
-        \Cake\Log\Log::error('js错误', 'devlog');
+        \Cake\Log\Log::error('js错误', 'jslog');
         $res = \Cake\Log\Log::error($content, 'devlog');
         if ($res) {
             return $this->Util->ajaxReturn(true, 'ok');

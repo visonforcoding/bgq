@@ -79,7 +79,9 @@
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'company', editable: true, align: 'center'},
-                            {name: 'title', editable: true, align: 'center'},
+                            {name: 'title', editable: true, align: 'center',formatter:function(cell,opt,row){
+                                    return '<a  data-toggle="tooltip" title="这是提示消息内容" onClick="showActivity(' +" ' "+row.id+" ' " + ');" class="grid-btn ">'+cell+'</a>';
+                            }},
                             {name: 'time', editable: true, align: 'center'},
                             {name: 'must_check', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
                                     if(cellvalue=='1'){
@@ -390,6 +392,19 @@
                     }, function () {
                     });
                 }
+                
+                function showActivity(id) {
+                    url = '/mobile/activity/details/' + id;
+                    layer.open({
+                        type: 2,
+                        title: '活动预览',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['375px', '667px'],
+                        skin: 'layui-layer-lan', //没有背景色
+                        content: url
+                    });
+                }    
 </script>
 <?php
 $this->end();
