@@ -142,7 +142,7 @@
                 <em>{#praise_nums#}</em>
             </span>
         </div>
-        <p data-id="{#id#}" data-userid="{#user_id#}" data-username="{#user_truename#}" id="common_{#id#}">{#body#}</p>
+        <p class='a_bottom_comm' data-id="{#id#}" data-userid="{#user_id#}" data-username="{#user_truename#}" id="common_{#id#}">{#body#}</p>
     </div>
 </script>
 <?php $this->start('script') ?>
