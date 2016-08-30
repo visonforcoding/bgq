@@ -17,7 +17,14 @@ class IndustryController extends AppController {
      * @return void
      */
     public function index() {
-        $this->set('industry', $this->Industry);
+        $IndustryTable = \Cake\ORM\TableRegistry::get('Industry');
+        $industries = $IndustryTable->find('threaded', [
+                    'keyField' => 'id',
+                    'parentField' => 'pid'
+                ])->all()->toArray();
+        $this->set([
+            'industries'=>$industries
+        ]);
     }
 
     /**
