@@ -92,14 +92,13 @@
                                     }
                             }},
                             {name: 'is_pass', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
-                                    console.log(+rowObject.activity.apply_fee>0?'<i class="notice">(已付款)</i>':'');
                                     if(cellvalue){
                                        if(rowObject.activity.apply_fee>0){
                                            return '通过<span class="notice">(已付款)</span>';
                                        }
                                     }else{
                                        if(rowObject.activity.apply_fee>0){
-                                           return '未通过<span class="notice">(已付款)</span>';
+                                           return '未通过<span class="notice">(未付款)</span>';
                                        }else{
                                             return '未通过';
                                        }
