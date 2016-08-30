@@ -120,6 +120,7 @@ class ActivityapplyController extends AppController {
         $end_time = $this->request->data('end_time');
         $is_check = $this->request->data('is_check');
         $must_check = $this->request->data('must_check');
+        $is_sign = $this->request->data('is_sign');
         $where = [];
         if (is_numeric($is_check)) {
             $where = ['Activityapply.is_check' => $is_check];
@@ -129,10 +130,13 @@ class ActivityapplyController extends AppController {
             $where = ['Activityapply.is_check' => 0];
         }
         if (!empty($keywords)) {
-            $where[' Users.truename like'] = "%$keywords%";
+            $where['Users.truename like'] = "%$keywords%";
         }
         if (is_numeric($must_check)) {
-            $where[' Activities.must_check'] = $must_check;
+            $where['Activities.must_check'] = $must_check;
+        }
+        if ($is_sign>=0) {
+            $where['is_sign'] = $is_sign;
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));

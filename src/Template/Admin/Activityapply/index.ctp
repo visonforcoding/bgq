@@ -29,6 +29,14 @@
                 </select>
             </div>
             <div class="form-group">
+                <label for="status">签到</label>
+                <select name="is_sign" class="form-control">
+                    <option value="-1">全部</option>
+                    <option value="0">未签到</option>
+                    <option value="1">已签到</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="keywords">时间</label>
                 <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords" placeholder="开始时间">
                 <label for="keywords">到</label>
