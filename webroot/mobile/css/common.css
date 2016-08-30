@@ -4,7 +4,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 html{background:#f0eff5;}
 ol, ul{ list-style: none; }
 a{text-decoration: none; /*color:#7a7e83;*/color:#222c38;outline:none;font-size:0.28rem;}
-img{border:0;max-width:100%;}
+img{border:0;}
 blockquote, q { quotes: none; }
 blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
 table { border-collapse: collapse; border-spacing: 0; }
