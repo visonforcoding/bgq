@@ -85,7 +85,16 @@ class ActivityController extends AppController {
         if ($this->request->is(['post', 'put'])) {
             $activity = $this->Activity->patchEntity($activity, $this->request->data);
             $activity->apply_end_time = strtotime($this->request->data('apply_end_time'));
+            $OrderTable = \Cake\ORM\TableRegistry::get('Order');
+            $updateOrder = false;
+            if($activity->dirty('apply_fee')){
+                //更改了报名费用，未付款的订单的订单价格也要更改!!!
+                $updateOrder = TRUE;
+            }
             if ($this->Activity->save($activity)) {
+                if($updateOrder){
+                   $OrderTable->updateAll(['price'=>$activity->apply_fee], ['type'=>2,'relate_id'=>$id,'status'=>0]);
+                }
                 return $this->Util->ajaxReturn(true, '修改成功');
             } else {
                 $errors = $activity->errors();

@@ -78,13 +78,17 @@
                                     }
                             }},
                             {name: 'is_check', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
-                                    switch(cellvalue){
-                                        case 0:
-                                            return '未审核';
-                                        case 1:
-                                            return '审核通过';
-                                        case 2:
-                                            return '审核不通过';
+                                    if(rowObject.activity.must_check=='1'){
+                                        switch(cellvalue){
+                                            case 0:
+                                                return '未审核';
+                                            case 1:
+                                                return '审核通过';
+                                            case 2:
+                                                return '审核不通过';
+                                        }
+                                    }else{
+                                        return '无需审核'
                                     }
                             }},
                             {name: 'is_pass', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
@@ -94,7 +98,11 @@
                                            return '通过<span class="notice">(已付款)</span>';
                                        }
                                     }else{
-                                        return '未通过';
+                                       if(rowObject.activity.apply_fee>0){
+                                           return '未通过<span class="notice">(已付款)</span>';
+                                       }else{
+                                            return '未通过';
+                                       }
                                     }
                             }},
                             {name: 'check_man', editable: true, align: 'center'},
