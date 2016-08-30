@@ -125,7 +125,7 @@
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/wpadmin/industry/delete',
+                            url: '/admin/industry/delete',
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
