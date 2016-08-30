@@ -10,16 +10,15 @@
     </a>
     <div class="wraper" id="activity_detail" >
         <section class="newscon-box a-detail">
-            <h3><?= $activity->title; ?></h3>
-            <span><?= $activity->create_time->format('Y-m-d H:i:s'); ?></span>
+            <h3><?= $activity->title; ?><time class='a_title_time'><?= $activity->create_time->format('Y-m-d H:i:s'); ?></time></h3>
             <div> <img src="<?= $activity->cover; ?>"/></div>
-            <p>主办单位：<?= $activity->company; ?></p>
+            <p>主办单位：<?= $activity->company; ?> 
             <?php if ($activity->org_key && $activity->org_val): ?>
-                <p><?= $activity->org_key ?>：<?= $activity->org_val; ?></p>
+                <br /><?= $activity->org_key ?>：<?= $activity->org_val; ?>
             <?php endif; ?>
-            <p>时间：<?= $activity->time->i18nFormat('yyyy-MM-dd'); ?></p>
-            <p>地点：<?= $activity->address; ?></p>
-            <p>规模：<?= $activity->scale; ?>人</p>
+            <br />时间：<?= $activity->time->i18nFormat('yyyy-MM-dd'); ?>
+            <br />地点：<?= $activity->address; ?>
+            <br />规模：<?= $activity->scale; ?>人</p>
             <div class="a-other-info innercon ac">
                 <a><?= $activity->region->name; ?></a>
                 <?php foreach ($activity->industries as $k => $v): ?>
@@ -29,25 +28,27 @@
         </section>
         <section class="a-detail newscomment-box">
             <h3 class="comment-title">活动介绍</h3>
-            <div class="innercon">
+            <div class="innercon a_process_pic">
                 <p><?= $activity->summary; ?></p>
             </div>
         </section>
         <section class="a-detail newscomment-box">
             <h3  class="comment-title">活动流程</h3>
-            <div class="innercon"><?= $activity->body; ?></div>
+            <div class="innercon a_process_pic"><?= $activity->body; ?></div>
         </section>
         <?php if ($activity->contact): ?>
             <section class="a-detail newscomment-box">
                 <h3  class="comment-title">联系方式</h3>
-                <div class="innercon"><?= $activity->contact; ?></div>
+                <div class="innercon a_process_pic"><?= $activity->contact; ?></div>
             </section>
         <?php endif; ?>
         <section class="a-detail newscomment-box guests">
-            <?php if ($activity->guest): ?>
+             <?php if ($activity->guest): ?>
                 <h3 class="comment-title">参与嘉宾</h3>
+             <div class="innercon a_process_pic">
                 <?= $activity->guest; ?>
             <?php endif; ?>
+            </div>
             <div class="con-bottom a-con-bottom clearfix">
                 <!--阅读数-->
                 <span class="readnums">
@@ -246,7 +247,7 @@
                 <b class="praise_num">{#praise_nums#}</b>
             </span>
         </div>
-        <p class="infor-comm reply_{#id#}" id="reply_{#id#}" value="{#id#}" user_id="{#user_id#}">{#body#}</p>
+        <p class="a_bottom_comm reply_{#id#}" id="reply_{#id#}" value="{#id#}" user_id="{#user_id#}">{#body#}</p>
     </div>
 </script>
 <!--<script src="/mobile/js/activity_details.js"></script>-->
