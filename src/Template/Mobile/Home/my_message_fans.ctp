@@ -45,7 +45,7 @@
                 <span class='datetime'>{#create_time#}</span>
             </a>
         </div>
-        <a url="{#jump_url#}" class="fr r-more read" status="{#status#}" msg_id='{#id#}'>{#status_msg#}<i class="iconfont">&#xe667;</i></a>
+        <a url="{#jump_url#}" class="fr r-more read" status="{#status#}" msg_id='{#id#}'><span style='display:inline;'>{#status_msg#}</span><i class="iconfont">&#xe667;</i></a>
     </li>
 </script>
 <?php $this->start('script') ?>
