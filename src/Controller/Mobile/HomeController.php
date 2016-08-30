@@ -90,6 +90,8 @@ class HomeController extends AppController {
                     return $q->where(['status'=>1, 'is_del'=>0]);
                 }, 'Lmorder'=>function($q){
                     return $q->where(['type'=>2]);
+                }, 'Usermsg'=>function($q){
+                    return $q->where(['Usermsg.status'=>0, 'Usermsg.type'=>7]);
                 }])->where(['activityapply.user_id' => $this->user->id])->toArray();
 //                $UsermsgTable->updateAll(['status'=>1], ['user_id'=>$this->user->id, 'status'=>0, 'type'=>7]);
                 if ($myActivity !== false) {
