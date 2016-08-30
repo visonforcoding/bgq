@@ -11,9 +11,10 @@
     <div class="wraper" id="activity_detail" >
         <section class="newscon-box a-detail">
             <h3><?= $activity->title; ?></h3>
-           <div> <img src="<?= $activity->cover; ?>"/></div>
+            <span><?= $activity->create_time->format('Y-m-d H:i:s'); ?></span>
+            <div> <img src="<?= $activity->cover; ?>"/></div>
             <p>主办单位：<?= $activity->company; ?></p>
-            <?php if($activity->org_key && $activity->org_val): ?>
+            <?php if ($activity->org_key && $activity->org_val): ?>
                 <p><?= $activity->org_key ?>：<?= $activity->org_val; ?></p>
             <?php endif; ?>
             <p>时间：<?= $activity->time->i18nFormat('yyyy-MM-dd'); ?></p>
@@ -36,7 +37,7 @@
             <h3  class="comment-title">活动流程</h3>
             <div class="innercon"><?= $activity->body; ?></div>
         </section>
-        <?php if($activity->contact): ?>
+        <?php if ($activity->contact): ?>
             <section class="a-detail newscomment-box">
                 <h3  class="comment-title">联系方式</h3>
                 <div class="innercon"><?= $activity->contact; ?></div>
@@ -51,7 +52,7 @@
                 <!--阅读数-->
                 <span class="readnums">
                     <!--<i class="iconfont ">&#xe60b;</i>-->
-                   阅读
+                    阅读
                     <?= $activity->read_nums; ?>
                 </span>
                 <!--喜欢按钮-->
@@ -71,19 +72,19 @@
             </h3>
             <div class="items  no-bottom">
                 <?php if ($userApply): ?>
-                <a href="/activity/allEnroll/<?= $activity->id ?>">
-                    <div class="comm-info t-ablock">
-                        <?php foreach ($userApply as $k => $v): ?>
-                            <img src="<?= $v['avatar'] ? $v['avatar'] : '/mobile/images/touxiang.png'; ?>"/>
-                        <?php endforeach; ?>
-                    </div>
-                </a>
+                    <a href="/activity/allEnroll/<?= $activity->id ?>">
+                        <div class="comm-info t-ablock">
+                            <?php foreach ($userApply as $k => $v): ?>
+                                <img src="<?= $v['avatar'] ? $v['avatar'] : '/mobile/images/touxiang.png'; ?>"/>
+                            <?php endforeach; ?>
+                        </div>
+                    </a>
                 <?php else : ?>
                     <div class="comm-info t-ablock" id="allEnroll">
                         <div style="font-size: 0.32rem;color: #7a7d82;text-align: center;line-height: 0.62rem;">暂时无人报名</div>
                     </div>
                 <?php endif; ?>
-                <!-- <span>显示全部</span> -->
+            <!-- <span>显示全部</span> -->
             </div>
         </section>
         <section class="newscomment-box">
@@ -95,23 +96,23 @@
             <span class='com-all' style="display:none;"><a href="#allcoment" id="showAllComment">查看更多评价</a></span>
         </section>
         <div style="height:.6rem"></div>
-        <?php if($activity->activity_recommends): ?>
-        <div class="active-commond innercon">
-            <section class="my-collection-info  nobottom">
-                <?php foreach ($activity->activity_recommends as $k=>$v): ?>
-                <div>
-                    <a href="/activity/details/<?= $v['id'] ?>" class="clearfix">
-                        <span class="my-pic-acive"><img src="<?= $v['thumb'] ? $v['thumb'] : $v['cover'] ?>"></span>
-                        <div class="my-collection-items">
-                            <h3><?= $v['title'] ?></h3>
-                            <span><?= $v['company'] ?> <i><?= $v['apply_nums'] ?>人报名</i></span>
-                            <span><?= $v['time'] ?></span>
+        <?php if ($activity->activity_recommends): ?>
+            <div class="active-commond innercon">
+                <section class="my-collection-info  nobottom">
+                    <?php foreach ($activity->activity_recommends as $k => $v): ?>
+                        <div>
+                            <a href="/activity/details/<?= $v['id'] ?>" class="clearfix">
+                                <span class="my-pic-acive"><img src="<?= $v['thumb'] ? $v['thumb'] : $v['cover'] ?>"></span>
+                                <div class="my-collection-items">
+                                    <h3><?= $v['title'] ?></h3>
+                                    <span><?= $v['company'] ?> <i><?= $v['apply_nums'] ?>人报名</i></span>
+                                    <span><?= $v['time'] ?></span>
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                </div>
-                <?php endforeach; ?>
-            </section>
-        </div>
+                    <?php endforeach; ?>
+                </section>
+            </div>
         <?php endif; ?>
         <!--专家推荐-->
         <?php if ($activity->savants): ?>
@@ -149,25 +150,25 @@
         <?php else: ?>
             <a href="javascript:$.util.checkLogin('/activity/recommend/<?= $activity->id; ?>')" class="l-btn">我要赞助</a>
         <?php endif; ?>
-        <?php if($activity->apply_end_time < time()): ?>
+        <?php if ($activity->apply_end_time < time()): ?>
             <a style="background:gray;" class="r-btn">我要报名</a>
         <?php else: ?>
             <!--报名人数-->
-            <?php if($activity->apply_nums < $activity->scale): ?>
+            <?php if ($activity->apply_nums < $activity->scale): ?>
                 <!--是否要审核-->
-                <?php if($activity->must_check): ?>
+                <?php if ($activity->must_check): ?>
                     <?php if (empty($activity->activityapply)): ?>
                         <a  class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="javascript:$.util.checkLogin('/activity/enroll/<?= $activity->id; ?>')">我要报名(<?= $activity->apply_fee; ?>元)</a>
                     <?php else: ?>
-                        <?php if($activity->activityapply['0']->is_pass == 0): ?>
-                            <?php if($activity->activityapply['0']->is_check == 1): ?>;
+                        <?php if ($activity->activityapply['0']->is_pass == 0): ?>
+                            <?php if ($activity->activityapply['0']->is_check == 1): ?>;
                                 <a href="/wx/meet-pay/2/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
-                            <?php elseif($activity->activityapply['0']->is_check == 2): ?>
+                            <?php elseif ($activity->activityapply['0']->is_check == 2): ?>
                                 <a style="background:gray;" class="r-btn">审核未通过</a>
                             <?php else: ?>
                                 <a class="r-btn">审核中</a>
                             <?php endif; ?>
-                        <?php elseif($activity->activityapply['0']->is_pass == 1): ?>
+                        <?php elseif ($activity->activityapply['0']->is_pass == 1): ?>
                             <a class="r-btn">已报名</a>
                         <?php endif; ?>
                     <?php endif; ?>
@@ -175,9 +176,9 @@
                     <?php if (empty($activity->activityapply)): ?>
                         <a  class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="javascript:$.util.checkLogin('/activity/enroll/<?= $activity->id; ?>')">我要报名(<?= $activity->apply_fee; ?>元)</a>
                     <?php else: ?>
-                        <?php if($activity->activityapply['0']->is_pass == 0): ?>
+                        <?php if ($activity->activityapply['0']->is_pass == 0): ?>
                             <a href="/wx/meet_pay/2/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
-                        <?php elseif($activity->activityapply['0']->is_pass == 1): ?>
+                        <?php elseif ($activity->activityapply['0']->is_pass == 1): ?>
                             <a class="r-btn">已报名</a>
                         <?php endif; ?>
                     <?php endif; ?>
@@ -256,7 +257,7 @@
     var share_desc = '<?= $activity->summary ?>';
     share_desc && (window.shareConfig.desc = share_desc);
     LEMON.show.shareIco();
-    if($.util.isAPP && document.URL.indexOf('/enroll') != -1){
+    if ($.util.isAPP && document.URL.indexOf('/enroll') != -1) {
         LEMON.sys.back('/activity/index');
     }
 
@@ -265,7 +266,7 @@
     window.activitycom = <?= json_encode($activity->activitycom); ?>;
 </script>
 <script>
-    if(location.href.indexOf('?share=1') != -1){
+    if (location.href.indexOf('?share=1') != -1) {
         $('#share_download').show();
     }
     window.article = true;
@@ -277,7 +278,7 @@
         d.user_company = d.user.company;
         d.user_position = d.user.position;
         d.user_id = d.user.id;
-        if(d.pid>0) {
+        if (d.pid > 0) {
             d.body = '回复<span style="color:#222"> ' + d.replyuser.truename + ' </span>：' + d.body;
         }
         d.style = '';
@@ -289,7 +290,7 @@
         }
         return d;
     });
-    
+
 //    // 报名的人数多余9个显示查看更多
 //    var showMoreEnroll = setInterval(function(){
 //        if($('#allEnroll').children('a').length > 9){
@@ -297,23 +298,22 @@
 //            clearInterval(showMoreEnroll);
 //        }
 //    }, 100);
-    
+
     // 少于五条评论隐藏显示全部，大于一条评论隐藏还没有评论
-    var circle = setInterval(function(){
-        if($('#comment').children('.items').length >= 5){
+    var circle = setInterval(function () {
+        if ($('#comment').children('.items').length >= 5) {
             $('.com-all').show();
             clearInterval(circle);
         }
-        if($('#comment').children('.items').length > 0) {
+        if ($('#comment').children('.items').length > 0) {
             $('#noComment').hide();
         }
     }, 100);
 
-    function checkLogin(func){
-        if(window.__user_id || $.util.getCookie('token_uin')){
+    function checkLogin(func) {
+        if (window.__user_id || $.util.getCookie('token_uin')) {
             func();
-        }
-        else{
+        } else {
             $.util.alert('请登录后操作');
             setTimeout(function () {
                 location.href = '/user/login?redirect_url=/activity/details/' + window.__id;
@@ -332,13 +332,13 @@
                 success: function (res) {
                     if (typeof res === 'object') {
                         if (res.status === true) {
-                            $.util.dataToTpl('allComments', 'comment_tpl',res.data, function (d) {
+                            $.util.dataToTpl('allComments', 'comment_tpl', res.data, function (d) {
                                 d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                                 d.user_truename = d.user.truename;
                                 d.user_company = d.user.company;
                                 d.user_position = d.user.position;
                                 d.user_id = d.user.id;
-                                if(d.pid>0) {
+                                if (d.pid > 0) {
                                     d.body = '回复<span style="color:#222;"> ' + d.replyuser.truename + ' </span>：' + d.body;
                                 }
                                 d.style = '';
@@ -381,7 +381,7 @@
                                     d.user_company = d.user.company; // 公司
                                     d.user_position = d.user.position; // 职务
                                     d.user_id = d.user.id;
-                                    if(d.pid>0) {
+                                    if (d.pid > 0) {
                                         d.body = '回复<span style="color:#222;"> ' + d.reply.truename + ' </span>：' + d.body;
                                     }
                                     d.style = '';
@@ -409,313 +409,314 @@
     });
 
 
-        //ii=0;
-        //$('body').on('touchstart', function(e){
-        $('body').on('tap', function (e) {
-            var target = e.srcElement || e.target, em = target, i = 1;
-            //$('#article_comment').html((ii++)+em.id+'~~'+em.className)
-            while (em && !em.id && i <= 3) {
-                em = em.parentNode;
-                i++;
-            }
-            if (!em || !em.id)
-                return;
-            switch (em.id) {
-                    // 喜欢
-                case 'like':
+    //ii=0;
+    //$('body').on('touchstart', function(e){
+    $('body').on('tap', function (e) {
+        var target = e.srcElement || e.target, em = target, i = 1;
+        //$('#article_comment').html((ii++)+em.id+'~~'+em.className)
+        while (em && !em.id && i <= 3) {
+            em = em.parentNode;
+            i++;
+        }
+        if (!em || !em.id)
+            return;
+        switch (em.id) {
+            // 喜欢
+            case 'like':
+                $.util.ajax({
+                    url: '/activity/artLike/' + $(em).attr('artid'),
+                    func: function (msg) {
+                        if (typeof msg === 'object') {
+                            $.util.alert(msg.msg);
+                            if (msg.status) {
+                                $('.like').toggleClass('hover');
+                                if ($('.like').hasClass('hover')) {
+                                    $('.like').html('&#xe61c;');
+                                    $('.like_num').html(parseInt($('.like_num').html()) + 1);
+                                } else {
+                                    $('.like').html('&#xe61b;');
+                                    $('.like_num').html(parseInt($('.like_num').html()) - 1);
+                                }
+                            } else {
+
+                            }
+                        }
+                    }
+                });
+                break;
+
+                // 收藏
+            case 'collect':
+                checkLogin(function () {
                     $.util.ajax({
-                        url: '/activity/artLike/' + $(em).attr('artid'),
+                        url: '/activity/collect/' + $(em).attr('artid'),
                         func: function (msg) {
                             if (typeof msg === 'object') {
                                 $.util.alert(msg.msg);
-                                if (msg.status) {
-                                    $('.like').toggleClass('hover');
-                                    if($('.like').hasClass('hover')){
-                                        $('.like').html('&#xe61c;');
-                                        $('.like_num').html(parseInt($('.like_num').html())+1);
+                                if (msg.status === true) {
+                                    if ($(em).hasClass('hover')) {
+                                        $(em).html('&#xe615;');
+                                        $(em).removeClass('hover');
                                     } else {
-                                        $('.like').html('&#xe61b;');
-                                        $('.like_num').html(parseInt($('.like_num').html())-1);
+                                        $(em).html('&#xe681;');
+                                        $(em).addClass('hover');
                                     }
-                                } else {
-                                    
                                 }
                             }
                         }
                     });
-                    break;
-
-                    // 收藏
-                case 'collect':
-                    checkLogin(function() {
-                        $.util.ajax({
-                            url: '/activity/collect/' + $(em).attr('artid'),
-                            func: function (msg) {
-                                if (typeof msg === 'object') {
-                                    $.util.alert(msg.msg);
-                                    if (msg.status === true) {
-                                        if($(em).hasClass('hover')){
-                                            $(em).html('&#xe615;');
-                                            $(em).removeClass('hover');
-                                        } else {
-                                            $(em).html('&#xe681;');
-                                            $(em).addClass('hover');
-                                        }
-                                    }
-                                }
-                            }
-                        });
-                    });
-                    break;
-
-                    // 评论文章
-                case 'publish_article':
-                    if (window.article == true)
-                    {
-                        setTimeout(function(){
-                            window.article = true;
-                        },2000);
-                        window.article = false;
-                        var data = {};
-                        var body = $('textarea[name="comment-content-article"]').val();
-                        if (!body) {
-                            $.util.alert('内容不可为空');
-                            return false;
-                        }
-                        data.body = body;
-                        data.pid = 0;
-                        var activity_id = $('#publish_article').attr('activity_id');
-                        $.util.ajax({
-                            url: '/activity/doComment/' + activity_id,
-                            data: data,
-                            func: function (msg) {
-                                if (typeof msg === 'object') {
-                                    if (msg.status === true) {
-                                        $.util.alert(msg.msg);
-                                        var html = $.util.dataToTpl('', 'comment_tpl', msg.data, function (d) {
-                                            d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                                            d.user_truename = d.user.truename; // 名字
-                                            d.user_company = d.user.company; // 公司
-                                            d.user_position = d.user.position; // 职务
-                                            if (d.pid > 0) {
-                                                d.body = '回复<span style="color:#222"> ' + d.replyuser.truename + ' </span>：' + d.body;
-                                            }
-                                            return d;
-                                        });
-                                        $('#comment').prepend(html);
-                                        $('#allComments').prepend(html);
-                                        $('.reg-shadow').hide();
-                                        $('.shadow-info').removeClass('c-height');
-                                        $('.shadow-info').addClass('m-height');
-                                        $('textarea[name="comment-content-article"]').val('');
-                                    } else {
-                                        $.util.alert(msg.msg);
-                                    }
-                                }
-                            }
-                        });
-                    }
-                    break;
-                    // 回复评论
-                case 'publish_reply':
-                    if(window.reply == true)
-                    {
-                        setTimeout(function(){
-                            window.reply = true;
-                        },2000);
-                        window.reply == false;
-                        var data = {};
-                        var body = $('textarea[name="comment-content-reply"]').val();
-                        if (!body) {
-                            $.util.alert('内容不可为空');
-                            return false;
-                        }
-                        data.body = body;
-                        data.pid = $('#publish_reply').attr('value');
-                        var activity_id = $('#publish_reply').attr('activity_id');
-                        $.util.ajax({
-                            url: '/activity/doComment/' + activity_id,
-                            data: data,
-                            func: function (msg) {
-                                if (typeof msg === 'object') {
-                                    if (msg.status === true) {
-                                        $.util.alert(msg.msg);
-                                        var html = $.util.dataToTpl('', 'comment_tpl', msg.data, function (d) {
-                                            d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                                            d.user_truename = d.user.truename; // 名字
-                                            d.user_company = d.user.company; // 公司
-                                            d.user_position = d.user.position; // 职务
-                                            if (d.pid > 0) {
-                                                d.body = '回复<span style="color:#222;"> ' + d.replyuser.truename + ' </span>：' + d.body;
-                                            }
-                                            return d;
-                                        });
-                                        $('#comment').prepend(html);
-                                        $('#allComments').prepend(html);
-                                        $('.reg-shadow').hide();
-                                        $('.shadow-info').removeClass('c-height').addClass('m-height');
-                                        $('textarea[name="comment-content-reply"]').val('');
-                                    } else {
-                                        $.util.alert(msg.msg);
-                                    }
-                                }
-                            }
-                        });
-                    }
-                    break;
-                case 'enroll':
-                    checkLogin(function(){
-                        location.href = '/activity/enroll/' + $(em).attr('activity_id');
-                    });
-                    break;
-                case 'share':
-                    if(navigator.userAgent.toLowerCase().indexOf('micromessenger') == -1) {
-                        LEMON.share.banner();
-                    } else if($.util.isWX) {
-                        $('#wxshare').show();
-                        $('#shadow').show();
-                    }
-                    break;
-                case 'shadow':case 'wxshare':
-                    setTimeout(function(){
-                        $('#shadow').hide();
-                        $('#wxshare').hide();
-                        $('#isdel').hide();
-                        $('#isdel').attr('com_id','');
-                    }, 400);
+                });
                 break;
-                case 'reply_shadow':
-                    setTimeout(function () {
-                        $('.reg-shadow').hide();
-                        $('.shadow-info').removeClass('c-height').addClass('m-height');
-                    }, 301);
-                    break;
-                case 'article_shadow':
-                    setTimeout(function () {
-                        $('.reg-shadow').hide();
-                        $('.shadow-info').removeClass('c-height').addClass('m-height');
-                    },301);
-                    break;
-                case 'yes':
-                    var id = $('#isdel').attr('com_id');
-                    $.ajax({
-                        type: 'POST',
-                        dataType: 'json',
-                        url: "/activity/del-comment/" + id,
-                        success: function (res) {
-                            $.util.alert(res.msg);
-                            if(res.status){
-                                $('.reply_' + id).parent().remove();
-                                setTimeout(function(){
-                                    $('#shadow').hide();
-                                    $('#isdel').hide();
-                                    $('#isdel').attr('com_id','');
-                                },301);
-                            }
-                        }
-                    });
-                    break;
-                case 'no':
-                    setTimeout(function(){
-                        $('#shadow').hide();
-                        $('#isdel').hide();
-                        $('#isdel').attr('com_id','');
-                    },301);
-                    break;
-                case 'goTop':
-                    window.scroll(0, 0);
-                    e.preventDefault();
-                    break;
-            }
-        });
 
-    ii=0;
-    $('body').on('click', function (e) {
-            var target = e.srcElement || e.target, em = target, i = 1;
-            $('#article_comment').html((ii++)+em.id+'~~'+em.className)
-            while (em && !em.id && i <= 3) {
-                em = em.parentNode;
-                i++;
-            }
-            if (!em || !em.id)
-                return;
-            // 评论点赞
-            if (em.id.indexOf('likecom_') != -1) {
-                if ($(em).attr('disabled') == '1') {
-                    return false;
-                }
-                $.util.ajax({
-                    url: '/activity/comLike/' + $(em).attr('comid'),
-                    func: function (msg) {
-                        console.log(msg);
-                        if (typeof msg === 'object') {
-                            if (msg.status === true) {
-                                var num = $('.addnum_' + $(em).attr('comid')).siblings('.praise_num').text();
-                                num = parseInt(num) + 1;
-                                $('.addnum_' + $(em).attr('comid')).siblings('.praise_num').text(num);
-                                $('.addnum_' + $(em).attr('comid')).siblings('.addnum').addClass('show');
-                                // 动画结束前只能点击一次
-                                var addnum = $('.addnum_' + $(em).attr('comid'))[0];
-                                addnum.addEventListener("webkitAnimationEnd", function () {
-                                    $('.show').removeClass('show');
-                                });
-                                $('.addnum_' + $(em).attr('comid')).css('color', '#e01a48');
-                                $('.addnum_' + $(em).attr('comid')).attr('disable', '1');
-                            } else {
-                                $.util.alert(msg.msg);
+                // 评论文章
+            case 'publish_article':
+                if (window.article == true)
+                {
+                    setTimeout(function () {
+                        window.article = true;
+                    }, 2000);
+                    window.article = false;
+                    var data = {};
+                    var body = $('textarea[name="comment-content-article"]').val();
+                    if (!body) {
+                        $.util.alert('内容不可为空');
+                        return false;
+                    }
+                    data.body = body;
+                    data.pid = 0;
+                    var activity_id = $('#publish_article').attr('activity_id');
+                    $.util.ajax({
+                        url: '/activity/doComment/' + activity_id,
+                        data: data,
+                        func: function (msg) {
+                            if (typeof msg === 'object') {
+                                if (msg.status === true) {
+                                    $.util.alert(msg.msg);
+                                    var html = $.util.dataToTpl('', 'comment_tpl', msg.data, function (d) {
+                                        d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                                        d.user_truename = d.user.truename; // 名字
+                                        d.user_company = d.user.company; // 公司
+                                        d.user_position = d.user.position; // 职务
+                                        if (d.pid > 0) {
+                                            d.body = '回复<span style="color:#222"> ' + d.replyuser.truename + ' </span>：' + d.body;
+                                        }
+                                        return d;
+                                    });
+                                    $('#comment').prepend(html);
+                                    $('#allComments').prepend(html);
+                                    $('.reg-shadow').hide();
+                                    $('.shadow-info').removeClass('c-height');
+                                    $('.shadow-info').addClass('m-height');
+                                    $('textarea[name="comment-content-article"]').val('');
+                                } else {
+                                    $.util.alert(msg.msg);
+                                }
                             }
                         }
-                    }
-                });
-            }
-            // 回复评论
-            if (em.id.indexOf('reply_') != -1) {
-                var id = $(em).attr('value');
-                checkLogin(function(){
-                    if($(em).attr('user_id') == $('#article_comment').attr('user_id')) {
-                        $('#shadow').show();
-                        $('#isdel').show();
-                        $('#isdel').attr('com_id', id);
-                        return;
-                    }
-                    var reply_id = id;
-                    var msg = '回复 ' + $('#comment_username_' + reply_id).attr('user_name') + ' :';
-                    $('#r_textarea').attr('placeholder', msg);
-                    $('.reply-shadow').show();
-                    $('.reply').removeClass('m-height').addClass('c-height');
-                    var comid = $(em).attr('value');
-                    $('#publish_reply').attr('value', comid);
-                });
-            }
-            switch (em.id) {
-                    // 点击评论
-                case 'article_comment':
-                    checkLogin(function(){
-                        $('.article-shadow').show();
-                        $('.article').removeClass('m-height').addClass('c-height');
                     });
-                    break;
-                case 'article_comment_1':
-                    checkLogin(function(){
-                        $('.article-shadow').show();
-                        $('.article').removeClass('m-height').addClass('c-height');
+                }
+                break;
+                // 回复评论
+            case 'publish_reply':
+                if (window.reply == true)
+                {
+                    setTimeout(function () {
+                        window.reply = true;
+                    }, 2000);
+                    window.reply == false;
+                    var data = {};
+                    var body = $('textarea[name="comment-content-reply"]').val();
+                    if (!body) {
+                        $.util.alert('内容不可为空');
+                        return false;
+                    }
+                    data.body = body;
+                    data.pid = $('#publish_reply').attr('value');
+                    var activity_id = $('#publish_reply').attr('activity_id');
+                    $.util.ajax({
+                        url: '/activity/doComment/' + activity_id,
+                        data: data,
+                        func: function (msg) {
+                            if (typeof msg === 'object') {
+                                if (msg.status === true) {
+                                    $.util.alert(msg.msg);
+                                    var html = $.util.dataToTpl('', 'comment_tpl', msg.data, function (d) {
+                                        d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                                        d.user_truename = d.user.truename; // 名字
+                                        d.user_company = d.user.company; // 公司
+                                        d.user_position = d.user.position; // 职务
+                                        if (d.pid > 0) {
+                                            d.body = '回复<span style="color:#222;"> ' + d.replyuser.truename + ' </span>：' + d.body;
+                                        }
+                                        return d;
+                                    });
+                                    $('#comment').prepend(html);
+                                    $('#allComments').prepend(html);
+                                    $('.reg-shadow').hide();
+                                    $('.shadow-info').removeClass('c-height').addClass('m-height');
+                                    $('textarea[name="comment-content-reply"]').val('');
+                                } else {
+                                    $.util.alert(msg.msg);
+                                }
+                            }
+                        }
                     });
-                    break;
-                    // 回到顶部
-                case 'toTop':
-                    window.scrollTo(0,0);
-                    break;
-                    // 取消评论
-                case 'cancel':
-                    LEMON.sys.hideKeyboard();
+                }
+                break;
+            case 'enroll':
+                checkLogin(function () {
+                    location.href = '/activity/enroll/' + $(em).attr('activity_id');
+                });
+                break;
+            case 'share':
+                if (navigator.userAgent.toLowerCase().indexOf('micromessenger') == -1) {
+                    LEMON.share.banner();
+                } else if ($.util.isWX) {
+                    $('#wxshare').show();
+                    $('#shadow').show();
+                }
+                break;
+            case 'shadow':
+            case 'wxshare':
+                setTimeout(function () {
+                    $('#shadow').hide();
+                    $('#wxshare').hide();
+                    $('#isdel').hide();
+                    $('#isdel').attr('com_id', '');
+                }, 400);
+                break;
+            case 'reply_shadow':
+                setTimeout(function () {
                     $('.reg-shadow').hide();
                     $('.shadow-info').removeClass('c-height').addClass('m-height');
-                    break;
+                }, 301);
+                break;
+            case 'article_shadow':
+                setTimeout(function () {
+                    $('.reg-shadow').hide();
+                    $('.shadow-info').removeClass('c-height').addClass('m-height');
+                }, 301);
+                break;
+            case 'yes':
+                var id = $('#isdel').attr('com_id');
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: "/activity/del-comment/" + id,
+                    success: function (res) {
+                        $.util.alert(res.msg);
+                        if (res.status) {
+                            $('.reply_' + id).parent().remove();
+                            setTimeout(function () {
+                                $('#shadow').hide();
+                                $('#isdel').hide();
+                                $('#isdel').attr('com_id', '');
+                            }, 301);
+                        }
+                    }
+                });
+                break;
+            case 'no':
+                setTimeout(function () {
+                    $('#shadow').hide();
+                    $('#isdel').hide();
+                    $('#isdel').attr('com_id', '');
+                }, 301);
+                break;
+            case 'goTop':
+                window.scroll(0, 0);
+                e.preventDefault();
+                break;
+        }
+    });
+
+    ii = 0;
+    $('body').on('click', function (e) {
+        var target = e.srcElement || e.target, em = target, i = 1;
+        $('#article_comment').html((ii++) + em.id + '~~' + em.className)
+        while (em && !em.id && i <= 3) {
+            em = em.parentNode;
+            i++;
+        }
+        if (!em || !em.id)
+            return;
+        // 评论点赞
+        if (em.id.indexOf('likecom_') != -1) {
+            if ($(em).attr('disabled') == '1') {
+                return false;
             }
-        });
-    
-    
-    
+            $.util.ajax({
+                url: '/activity/comLike/' + $(em).attr('comid'),
+                func: function (msg) {
+                    console.log(msg);
+                    if (typeof msg === 'object') {
+                        if (msg.status === true) {
+                            var num = $('.addnum_' + $(em).attr('comid')).siblings('.praise_num').text();
+                            num = parseInt(num) + 1;
+                            $('.addnum_' + $(em).attr('comid')).siblings('.praise_num').text(num);
+                            $('.addnum_' + $(em).attr('comid')).siblings('.addnum').addClass('show');
+                            // 动画结束前只能点击一次
+                            var addnum = $('.addnum_' + $(em).attr('comid'))[0];
+                            addnum.addEventListener("webkitAnimationEnd", function () {
+                                $('.show').removeClass('show');
+                            });
+                            $('.addnum_' + $(em).attr('comid')).css('color', '#e01a48');
+                            $('.addnum_' + $(em).attr('comid')).attr('disable', '1');
+                        } else {
+                            $.util.alert(msg.msg);
+                        }
+                    }
+                }
+            });
+        }
+        // 回复评论
+        if (em.id.indexOf('reply_') != -1) {
+            var id = $(em).attr('value');
+            checkLogin(function () {
+                if ($(em).attr('user_id') == $('#article_comment').attr('user_id')) {
+                    $('#shadow').show();
+                    $('#isdel').show();
+                    $('#isdel').attr('com_id', id);
+                    return;
+                }
+                var reply_id = id;
+                var msg = '回复 ' + $('#comment_username_' + reply_id).attr('user_name') + ' :';
+                $('#r_textarea').attr('placeholder', msg);
+                $('.reply-shadow').show();
+                $('.reply').removeClass('m-height').addClass('c-height');
+                var comid = $(em).attr('value');
+                $('#publish_reply').attr('value', comid);
+            });
+        }
+        switch (em.id) {
+            // 点击评论
+            case 'article_comment':
+                checkLogin(function () {
+                    $('.article-shadow').show();
+                    $('.article').removeClass('m-height').addClass('c-height');
+                });
+                break;
+            case 'article_comment_1':
+                checkLogin(function () {
+                    $('.article-shadow').show();
+                    $('.article').removeClass('m-height').addClass('c-height');
+                });
+                break;
+                // 回到顶部
+            case 'toTop':
+                window.scrollTo(0, 0);
+                break;
+                // 取消评论
+            case 'cancel':
+                LEMON.sys.hideKeyboard();
+                $('.reg-shadow').hide();
+                $('.shadow-info').removeClass('c-height').addClass('m-height');
+                break;
+        }
+    });
+
+
+
 </script>
 <?php
 $this->end('script');

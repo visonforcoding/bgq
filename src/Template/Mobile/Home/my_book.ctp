@@ -20,7 +20,7 @@
 
     </div>
 <script type="text/html" id="tpl">
-    <section class="internet-v-info nopd">
+    <section class="internet-v-info">
         <a href="{#link#}">
             <div class="innercon">
                 <span class="head-img"><img src="{#user_logo#}"/>{#v#}</span>
