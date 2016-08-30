@@ -286,7 +286,7 @@ class MeetController extends AppController {
         $SubjectTable = \Cake\ORM\TableRegistry::get('MeetSubject');
         $userTable = \Cake\ORM\TableRegistry::get('user');
         $user = $userTable->get($user_id);
-        $subjects = $SubjectTable->find()->where(['user_id'=>$user_id])->orderDesc('create_time')->toArray();
+        $subjects = $SubjectTable->find()->where(['user_id'=>$user_id, 'is_del'=>0])->orderDesc('create_time')->toArray();
         $this->set([
             'pageTitle'=>'我的话题',
             'subjects'=>$subjects,
