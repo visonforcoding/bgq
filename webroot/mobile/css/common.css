@@ -15,7 +15,7 @@ html{ outline: 0;-webkit-text-size-adjust:none;}
 html,body { width: 100%;}
 i{font-style: normal;}
 h1,h2,h3,h4,h5,h6{font-size:0.32rem;}
-p{background-color: transparent;word-break: break-all;font-size:.28rem;}
+p{background-color: transparent;word-break: break-all;font-size:.3rem;line-height: .34rem;}
 /*app*/
 a,button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);border:none;background: none;}
 input[type='text'],textarea{-webkit-appearance: none;}/*iphone内阴影*/
