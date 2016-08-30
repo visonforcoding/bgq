@@ -155,14 +155,14 @@ class PushController extends AppController {
     public function test(){
         $this->loadComponent('Push');
         $res = $this->Push->sendFile('1', '2', '3', 'ca1c217f4f351cb2bff7\n', 'BGB', false);
-        debug($res);die;
+        echo $res;die;
     }
     
     public function check($a, $i){
         $this->loadComponent('Push');
         $res1 = $this->Push->android_check($a);
         $res2 = $this->Push->ios_check($i);
-        debug($res1);
-        debug($res2);die;
+        echo $res1;
+        echo $res2;die;
     }
 }
