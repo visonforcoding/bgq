@@ -116,7 +116,7 @@ class PushController extends AppController {
             } else {
                 foreach($res as $k=>$v){
                     $user .= $v->user_token . '\n';
-                }
+                } 
                 $this->loadComponent('Push');
                 if($url){
                     $extra['url'] = $url;
