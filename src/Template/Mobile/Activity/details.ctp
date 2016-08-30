@@ -256,7 +256,7 @@
     var share_desc = '<?= $activity->summary ?>';
     share_desc && (window.shareConfig.desc = share_desc);
     LEMON.show.shareIco();
-    if($.util.isAPP){
+    if($.util.isAPP && document.URL.indexOf('/enroll') != -1){
         LEMON.sys.back('/activity/index');
     }
 
