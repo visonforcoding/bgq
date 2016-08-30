@@ -135,7 +135,7 @@ class ActivityapplyController extends AppController {
         if (is_numeric($must_check)) {
             $where['Activities.must_check'] = $must_check;
         }
-        if ($is_sign>=0) {
+        if ($is_sign>-1) {
             $where['is_sign'] = $is_sign;
         }
         if (!empty($begin_time) && !empty($end_time)) {
