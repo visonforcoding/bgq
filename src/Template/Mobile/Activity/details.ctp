@@ -13,12 +13,12 @@
             <h3><?= $activity->title; ?><time class='a_title_time'><?= $activity->create_time->format('Y-m-d H:i:s'); ?></time></h3>
             <div> <img src="<?= $activity->cover; ?>"/></div>
             <p>主办单位：<?= $activity->company; ?> 
-            <?php if ($activity->org_key && $activity->org_val): ?>
-                <br /><?= $activity->org_key ?>：<?= $activity->org_val; ?>
-            <?php endif; ?>
-            <br />时间：<?= $activity->time->i18nFormat('yyyy-MM-dd'); ?>
-            <br />地点：<?= $activity->address; ?>
-            <br />规模：<?= $activity->scale; ?>人</p>
+                <?php if ($activity->org_key && $activity->org_val): ?>
+                    <br /><?= $activity->org_key ?>：<?= $activity->org_val; ?>
+                <?php endif; ?>
+                <br />时间：<?= $activity->time->i18nFormat('yyyy-MM-dd'); ?>
+                <br />地点：<?= $activity->address; ?>
+                <br />规模：<?= $activity->scale; ?>人</p>
             <div class="a-other-info innercon ac">
                 <a><?= $activity->region->name; ?></a>
                 <?php foreach ($activity->industries as $k => $v): ?>
@@ -42,15 +42,15 @@
                 <div class="innercon a_process_pic"><?= $activity->contact; ?></div>
             </section>
         <?php endif; ?>
-        <section class="a-detail newscomment-box guests">
-             <?php if ($activity->guest): ?>
+        <?php if ($activity->guest): ?>
+            <section class="a-detail newscomment-box guests">
                 <h3 class="comment-title">参与嘉宾</h3>
-            <div class="innercon a_process_pic">
-                <?= $activity->guest; ?>
-            </div>
-            <?php endif; ?>
-         </section>
-          <section class="newscomment-box no-t-border"> 
+                <div class="innercon a_process_pic">
+                    <?= $activity->guest; ?>
+                </div>
+            </section>
+        <?php endif; ?>
+        <section class="newscomment-box no-t-border"> 
             <div class="con-bottom a-con-bottom clearfix">
                 <!--阅读数-->
                 <span class="readnums">
@@ -87,7 +87,7 @@
                         <div style="font-size: 0.32rem;color: #7a7d82;text-align: center;line-height: 0.62rem;">暂时无人报名</div>
                     </div>
                 <?php endif; ?>
-            <!-- <span>显示全部</span> -->
+        <!-- <span>显示全部</span> -->
             </div>
         </section>
         <section class="newscomment-box">

@@ -465,7 +465,7 @@ class HomeController extends AppController {
 //            $where['SubjectBook.status !='] = 2;
             $where['SubjectBook.user_id'] = $this->user->id;
             $books = $BookTable->find()->contain(['Subjects', 'Subjects.User' => function($q) {
-                return $q
+                return $q->where(['enabled'=>1, 'User.is_del'=>0])
                         ->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums', 'level']);
             }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
             $savant_books = $BookTable->find()->contain(['Subjects', 'Users' => function($q) {
@@ -474,7 +474,7 @@ class HomeController extends AppController {
 //                        'SubjectBook.status !=' => 2,
                         'SubjectBook.savant_id =' => $this->user->id,
                     ])->order('SubjectBook.update_time')->toArray();
-//            $UsermsgTable->updateAll(['status'=>1], ['type'=>4, 'user_id'=>$this->user->id, 'status'=>0]);
+            $unReadBook = $UsermsgTable->find()->where(['type'=>4, 'user_id'=>$this->user->id, 'status'=>0]);
             $this->set([
                 'pageTitle' => '我的约见',
                 'books' => $books,
@@ -490,7 +490,7 @@ class HomeController extends AppController {
         $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
         $book = $BookTable->get($id, [
             'contain' => ['Users' => function($q) {
-                    return $q->select(['truename', 'id', 'avatar', 'company', 'position']);
+                    return $q->where(['enabled'=>1, 'Users.is_del'=>0])->select(['truename', 'id', 'avatar', 'company', 'position']);
                 }, 'Subjects', 'Lmorder']
                 ]);
                 $subject = $book->subject;
@@ -538,7 +538,7 @@ class HomeController extends AppController {
                 $where['SubjectBook.status'] = in_array($type, ['0', '1', '3']) ? $type : 0;
                 $where['SubjectBook.savant_id'] = $this->user->id;
                 $books = $BookTable->find()->contain(['Subjects', 'Users' => function($q) {
-                                return $q->select(['truename', 'avatar', 'id', 'company', 'position']);
+                                return $q->where(['enabled'=>1, 'Users.is_del'=>0])->select(['truename', 'avatar', 'id', 'company', 'position']);
                             }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
                         $this->set(compact('books', 'type'));
                         $this->set('pageTitle', '我是专家');
@@ -553,7 +553,7 @@ class HomeController extends AppController {
 
         $book = $BookTable->get($id, [
             'contain' => ['Users' => function($q) {
-                    return $q->where(['enabled'=>1])->select(['truename', 'id', 'avatar', 'company', 'position', 'phone', 'email']);
+                    return $q->where(['enabled'=>1, 'Users.is_del'=>0])->select(['truename', 'id', 'avatar', 'company', 'position', 'phone', 'email']);
                 }, 'Subjects', 'Users.Industries']
                 ]);
                 $subject = $book->subject;
