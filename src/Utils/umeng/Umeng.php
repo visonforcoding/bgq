@@ -204,7 +204,6 @@ class Umeng {
         $android_brocast->setPredefinedKeyValue("timestamp", $this->timestamp); // 时间戳
         $android_brocast->setPredefinedKeyValue('type', 'filecast'); // 类型为群播
         $android_brocast->setPredefinedKeyValue('alias_type', $alias_type); // 用户类型
-
         $android_brocast->setPredefinedKeyValue("ticker", $ticker); // 提示信息
         $android_brocast->setPredefinedKeyValue("title", $title); // 标题
         $android_brocast->setPredefinedKeyValue("text", $content); // 内容
@@ -215,8 +214,9 @@ class Umeng {
         $android_upload = $android_brocast->uploadContents($file);
         $android_data = json_decode($android_upload);
         if ($android_data->ret == 'SUCCESS') {
-            $android_brocast->setPredefinedKeyValue("file_id", $android_data->data->file_id); // 设置上传的file_id
+            $android_brocast->setPredefinedKeyValue("file_id", $android_data->data->file_id); // 设置上传的file_id]
             $android_res = json_decode($android_brocast->send());
+            
             if ($android_res->ret == 'FAIL') {
                 if ($production_mode) {
                     return false;
@@ -228,7 +228,7 @@ class Umeng {
             if ($production_mode) {
                 return false;
             } else {
-                return $this->showError($ios_res->data->error_code);
+                return $this->showError($android_res->data->error_code);
             }
         }
         // ios推送
@@ -265,7 +265,7 @@ class Umeng {
             if ($production_mode) {
                 return true;
             } else {
-                return 'ios任务id' . $ios_res->data->task_id . '|android任务id' . $android_res->data->task_id;
+                return 'ios任务id:' . $ios_res->data->task_id . '|android任务id:' . $android_res->data->task_id;
             }
         }
     }

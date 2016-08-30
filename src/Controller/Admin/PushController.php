@@ -115,15 +115,16 @@ class PushController extends AppController {
                 return $this->Util->ajaxReturn(false, '用户为空');
             } else {
                 foreach($res as $k=>$v){
-                    $user .= $v['user_token'] . '\n';
+                    $user .= $v->user_token . '\n';
                 }
                 $this->loadComponent('Push');
                 if($url){
                     $extra['url'] = $url;
-                    $res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', 'false', $extra);
+                    $res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', false, $extra);
                 } else {
-                    $res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', 'false');
+                    $res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', false);
                 }
+                
                 if($res){
                     return $this->Util->ajaxReturn(true, '推送成功');
                 } else {
@@ -153,7 +154,7 @@ class PushController extends AppController {
     
     public function test(){
         $this->loadComponent('Push');
-        $res = $this->Push->android_check('uf33150146979460780401');
+        $res = $this->Push->android_check('uf02452147255932334001');
         debug($res);die;
     }
 }
