@@ -465,7 +465,7 @@ class HomeController extends AppController {
 //            $where['SubjectBook.status !='] = 2;
             $where['SubjectBook.user_id'] = $this->user->id;
             $books = $BookTable->find()->contain(['Subjects', 'Subjects.User' => function($q) {
-                return $q->where(['Subjects.User.enabled'=>1, 'Subjects.User.is_del'=>0])
+                return $q
                         ->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums', 'level']);
             }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
             $savant_books = $BookTable->find()->contain(['Subjects', 'Users' => function($q) {
