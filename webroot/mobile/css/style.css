@@ -293,6 +293,7 @@ border-bottom:none;top:-1px;margin-top:-1px;margin-left:-1px;}
 .tochoose{line-height: 0.8rem;/*border-bottom:1px #e5e5e5 solid;*/}
 .tochoose span{background: url(img/right.png) no-repeat center center;background-size:cover;width:0.16rem;height:0.25rem;margin-top:0.27rem;}
 .a-detail p{text-indent: 0;font-size:0.3rem;line-height: 0.4rem;padding-left:0;}
+.a-detail p img,.a-detail img{max-width:100%;}
 .newscomment-box p{font-size:.3rem;}
 .wraper .a-detail{margin-top:0;border-bottom: none;padding-bottom:0.2rem;}
 .timenode{position:relative;font-size:0.26rem;}
@@ -1194,3 +1195,7 @@ background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  ba
 .loadout time{float:right;line-height: 40px;margin-right: 5px;color:lightgray;}
 .h-info-box li .e_img{line-height: 1rem;}
 .book-info-box li em{width:70%;}
+
+.m_sign{position:absolute;right:0;bottom:0;height:0;width:0;border:24px #E01A48 solid;border-left:24px solid transparent;
+border-top:24px solid transparent;color:#fff;text-align: center;font-style: italic;font-size:12px;line-height: 14px;}
+.m_sign i{display: block;transform: rotate(40deg);position:absolute;top:-8px;right:-20px;}
