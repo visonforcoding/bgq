@@ -30,10 +30,11 @@
         <div class="active-items">
             <a href="/activity/details/{#id#}" class="a-head">
                 <div class="conbox">
-                   <img src="{#thumb#}"/>
-                   <div class="status">{#apply_msg#}{#pass_msg#}</div>
-               </div>
-                <h3>{#title#}</h3>
+                    <img src="{#thumb#}"/>
+                    <div class="status">{#apply_msg#}{#pass_msg#}</div>
+                </div>
+                <h3>{#title#}<time>{#create_time#}</time></h3>
+                
             </a>
             <div class="a-bottom">
                 <span class="a-address">
@@ -59,10 +60,10 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script src="/mobile/js/activity_index.js"></script>
 <script>
-    if($.util.isAPP){
-        $('#search').css({'top':'0.6rem'});
-    } else if($.util.isWX) {
-        $('#search').css({'top':'0.2rem'});
+    if ($.util.isAPP) {
+        $('#search').css({'top': '0.6rem'});
+    } else if ($.util.isWX) {
+        $('#search').css({'top': '0.2rem'});
     }
 </script>
 <script>
@@ -70,12 +71,12 @@
     window.series = <?= json_encode($activityseries) ?>;
 </script>
 <script>
-    if($.util.isIOS){
+    if ($.util.isIOS) {
         $('#iosBottom').show();
     }
-    $.getJSON('/activity/get-banner',function(res){
-        if(res.status){
-            var tab=[], html = $.util.dataToTpl('', 'bannerTpl', res.data, function (d) {
+    $.getJSON('/activity/get-banner', function (res) {
+        if (res.status) {
+            var tab = [], html = $.util.dataToTpl('', 'bannerTpl', res.data, function (d) {
                 tab.push('<span></span>');
                 return d;
             });
@@ -84,15 +85,15 @@
             var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'), $('.a-banner'));
         }
     });
-    
+
     $.getJSON('/activity/getMoreActivity/1', function (res) {
         if (res.status) {
             var html = dealData(res.data);
             $('#activity').append(html);
         }
     });
-    
-    function dealData(data){
+
+    function dealData(data) {
         var html = $.util.dataToTpl('', 'activity_tpl', data, function (d) {
             d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="registered">已报名</span>';
             d.pass_msg = d.pass_time ? '<span class="registered colorbg">已过期</span>' : '';
@@ -103,7 +104,7 @@
         });
         return html;
     }
-    
+
     $.util.searchHide();
 </script>
 <?php
