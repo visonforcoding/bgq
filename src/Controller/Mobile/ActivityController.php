@@ -664,7 +664,7 @@ class ActivityController extends AppController {
     public function getMoreActivity($page) {
         $activity = $this->Activity
                         ->find()
-                        ->select(['id', 'thumb', 'title', 'address', 'apply_nums', 'time', 'region_id', 'series_id', 'create_time'])
+                        ->select(['id', 'thumb', 'title', 'address', 'apply_nums', 'time', 'region_id', 'series_id'])
                         ->contain(['Users'=>function($q){
                             return $q->where(['enabled'=>1]);
                         }, 'Industries'])
