@@ -45,10 +45,12 @@
         <section class="a-detail newscomment-box guests">
              <?php if ($activity->guest): ?>
                 <h3 class="comment-title">参与嘉宾</h3>
-             <div class="innercon a_process_pic">
+            <div class="innercon a_process_pic">
                 <?= $activity->guest; ?>
-            <?php endif; ?>
             </div>
+            <?php endif; ?>
+         </section>
+          <section class="newscomment-box no-t-border"> 
             <div class="con-bottom a-con-bottom clearfix">
                 <!--阅读数-->
                 <span class="readnums">
