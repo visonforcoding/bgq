@@ -88,9 +88,14 @@
                 d.author = '<div class="website">'+ d.source +'</div>';
                 d.origin = 'origin';
             } else {
-                d.user_id = d.user.id;
-                d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                d.author = '<span><img src="'+ d.avatar +'"/></span>' + d.user.truename;
+                if(d.user){
+                    d.user_id = d.user.id;
+                    d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                    d.author = '<span><img src="'+ d.avatar +'"/></span>' + d.user.truename;
+                } else {
+                    d.avatar = '/mobile/images/touxiang.png';
+                    d.author = '<span><img src="'+ d.avatar +'"/></span><i style="color:red;">已封禁</i>';
+                }
             }
             d.newstags = $.util.dataToTpl('', 'subTpl', d.newstags);
             d.cover = d.thumb ? d.thumb : d.cover;

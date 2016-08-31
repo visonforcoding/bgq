@@ -32,7 +32,9 @@ class ActivityController extends AppController {
             $savant = '';
             // 已报名的人
             $allApply = $this->Activity->Activityapply->find()
-                    ->contain(['Users'])
+                    ->contain(['Users'=>function($q){
+                        return $q->where(['Users.enabled'=>1]);
+                    }])
                     ->where(['activity_id' => $id, 'is_pass'=>1])
                     ->order([
                         'Activityapply.is_top' => 'DESC',
@@ -79,8 +81,12 @@ class ActivityController extends AppController {
                         'Activitycom' => function($q)use($id){
                             return $q->where(['activity_id'=>$id, 'is_delete'=>0])->orderDesc('Activitycom.create_time')->limit($this->limit);
                         },
-                        'Activitycom.Users',
-                        'Activitycom.Replyusers',
+                        'Activitycom.Users'=>function($q){
+                            return $q->where(['Users.enabled'=>1]);
+                        },
+                        'Activitycom.Replyusers'=>function($q){
+                            return $q->where(['Replyusers.enabled'=>1]);
+                        },
                         'Activitycom.Likes'=>function($q)use($user_id){
                             return $q->where(['type'=>0,'user_id'=>$user_id]);
                         }
@@ -103,8 +109,12 @@ class ActivityController extends AppController {
                         'Activitycom' => function($q)use($id){
                             return $q->where(['activity_id'=>$id, 'is_delete' => 0])->orderDesc('Activitycom.create_time')->limit($this->limit);
                         },
-                        'Activitycom.Users',
-                        'Activitycom.Replyusers',
+                        'Activitycom.Users'=>function($q){
+                            return $q->where(['Users.enabled'=>1]);
+                        },
+                        'Activitycom.Replyusers'=>function($q){
+                            return $q->where(['Replyusers.enabled'=>1]);
+                        },
                     ],
                 ]);
                 $this->set('user', '');
@@ -189,7 +199,9 @@ class ActivityController extends AppController {
         
         if ($id) {
             $activity = $this->Activity->get($id, [
-                'contain' => ['Users'],
+                'contain' => ['Users'=>function($q){
+                            return $q->where(['enabled'=>1]);
+                        }],
             ]);
             if ($this->request->is('post')) {
                 $UserTable = \Cake\ORM\TableRegistry::get('user');
@@ -591,7 +603,11 @@ class ActivityController extends AppController {
 //                $this->Business->usermsg();
             }
             $res = $this->Activity->Activitycom->save($doComment);
-            $newComment[] = $this->Activity->Activitycom->get($res->id, ['contain'=>["Users", "Replyusers"]])->toArray();
+            $newComment[] = $this->Activity->Activitycom->get($res->id, ['contain'=>["Users"=>function($q){
+                            return $q->where(['Users.enabled'=>1]);
+                        }, "Replyusers"=>function($q){
+                            return $q->where(['Replyusers.enabled'=>1]);
+                        }]])->toArray();
             if ($res) {
                 if ($data['pid']) {
                     //对评论的回复
@@ -620,7 +636,7 @@ class ActivityController extends AppController {
     public function likeLog($id, $user_id) {
         $activity = $this->Activity->get($id);
         $userTable = \Cake\ORM\TableRegistry::get('user');
-        $user = $userTable->find()->where(['id' => $user_id])->hydrate(false)->first();
+        $user = $userTable->find()->where(['id' => $user_id, 'enabled'=>1])->hydrate(false)->first();
         $msg = $user['truename'] . ' 于' . date('Y-m-d H:i:s', time()) . '对 ' . $activity->title . ' 点了赞';
         $data = [
             'relate_id' => $id,
@@ -643,7 +659,7 @@ class ActivityController extends AppController {
     public function collectLog($id, $user_id) {
         $activity = $this->Activity->get($id);
         $userTable = \Cake\ORM\TableRegistry::get('user');
-        $user = $userTable->find()->where(['id' => $user_id])->hydrate(false)->first();
+        $user = $userTable->find()->where(['id' => $user_id, 'enabled'=>1])->hydrate(false)->first();
         $msg = $user['truename'] . ' 于' . date('Y-m-d H:i:s', time()) . '收藏了 ' . $activity->title;
         $data = [
             'relate_id' => $id,
@@ -665,9 +681,7 @@ class ActivityController extends AppController {
         $activity = $this->Activity
                         ->find()
                         ->select(['id', 'thumb', 'title', 'address', 'apply_nums', 'time', 'region_id', 'series_id'])
-                        ->contain(['Users'=>function($q){
-                            return $q->where(['enabled'=>1]);
-                        }, 'Industries'])
+                        ->contain(['Industries'])
                         ->where(['Activity.status' => 1,'Activity.is_del'=>0, 'Activity.from_user >'=>-1])
                         ->page($page, $this->limit)
                         ->order(['Activity.is_top'=>'desc', 'Activity.create_time'=>'desc'])
@@ -698,7 +712,11 @@ class ActivityController extends AppController {
                         ->Activitycom
                         ->find()
                         ->where(['activity_id' => $id, 'is_delete' => 0])
-                        ->contain(['Users', 'Replyusers'])
+                        ->contain(['Users'=>function($q){
+                            return $q->where(['Users.enabled'=>1]);
+                        }, 'Replyusers'=>function($q){
+                            return $q->where(['Replyusers.enabled'=>1]);
+                        }])
                         ->page($page, $this->limit)
                         ->orderDesc('Activitycom.create_time')
                         ->toArray();
@@ -721,7 +739,11 @@ class ActivityController extends AppController {
                     ->Activity
                     ->Activitycom
                     ->find()
-                    ->contain(['Users', 'Replyusers', 'Likes'=>function($q)use($user_id){
+                    ->contain(['Users'=>function($q){
+                            return $q->where(['Users.enabled'=>1]);
+                        }, 'Replyusers'=>function($q){
+                            return $q->where(['Replyusers.enabled'=>1]);
+                        }, 'Likes'=>function($q)use($user_id){
                             return $q->where(['type'=>0,'user_id'=>$user_id]);
                         }])
                     ->where(['activity_id' => $id, 'is_delete'=>0])
@@ -733,7 +755,11 @@ class ActivityController extends AppController {
                     ->Activity
                     ->Activitycom
                     ->find()
-                    ->contain(['Users', 'Replyusers'])
+                    ->contain(['Users'=>function($q){
+                            return $q->where(['Users.enabled'=>1]);
+                        }, 'Replyusers'=>function($q){
+                            return $q->where(['Replyusers.enabled'=>1]);
+                        }])
                     ->where(['activity_id' => $id, 'is_delete'=>0])
                     ->order(['Activitycom.create_time' => 'DESC'])
                     ->limit(10)
@@ -792,7 +818,9 @@ class ActivityController extends AppController {
      */
     public function allEnroll($id){
         $activityApplyTable = \Cake\ORM\TableRegistry::get('activityapply');
-        $user = $activityApplyTable->find()->where(['activity_id' => $id, 'is_pass'=>1])->contain(['Users'])->toArray();
+        $user = $activityApplyTable->find()->where(['activity_id' => $id, 'is_pass'=>1])->contain(['Users'=>function($q){
+            return $q->where(['Users.enabled'=>1]);
+        }])->toArray();
         $activity = $this->Activity->get($id);
         $this->set([
             'pageTitle'=>$activity->title,

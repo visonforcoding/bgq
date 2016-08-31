@@ -202,7 +202,7 @@ class Umeng {
         $android_brocast->setAppMasterSecret($this->android_appMasterSecret);
         $android_brocast->setPredefinedKeyValue("appkey", $this->android_appkey);
         $android_brocast->setPredefinedKeyValue("timestamp", $this->timestamp); // 时间戳
-        $android_brocast->setPredefinedKeyValue('type', 'filecast'); // 类型为群播
+        $android_brocast->setPredefinedKeyValue('type', 'customizedcast'); // 类型为群播
         $android_brocast->setPredefinedKeyValue('alias_type', $alias_type); // 用户类型
         $android_brocast->setPredefinedKeyValue("ticker", $ticker); // 提示信息
         $android_brocast->setPredefinedKeyValue("title", $title); // 标题
@@ -216,7 +216,6 @@ class Umeng {
         if ($android_data->ret == 'SUCCESS') {
             $android_brocast->setPredefinedKeyValue("file_id", $android_data->data->file_id); // 设置上传的file_id]
             $android_res = json_decode($android_brocast->send());
-            
             if ($android_res->ret == 'FAIL') {
                 if ($production_mode) {
                     return false;
@@ -237,7 +236,7 @@ class Umeng {
         $ios_brocast->setPredefinedKeyValue("appkey", $this->ios_appkey);
         $ios_brocast->setPredefinedKeyValue("timestamp", $this->timestamp); // 时间戳
         $ios_brocast->setPredefinedKeyValue("production_mode", $production_mode); // 生产环境
-        $ios_brocast->setPredefinedKeyValue('type', 'filecast'); // 类型为单播
+        $ios_brocast->setPredefinedKeyValue('type', 'customizedcast'); // 类型为群播
         $ios_brocast->setPredefinedKeyValue("alert", $title); // ios提示信息
         $ios_brocast->setPredefinedKeyValue("badge", $badge); // ios信息数量提示
         $ios_brocast->setPredefinedKeyValue("sound", $sound); // ios声音提示
