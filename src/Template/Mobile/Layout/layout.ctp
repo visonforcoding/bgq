@@ -109,7 +109,7 @@
                 }
             })();
 
-            if(!$.util.isLogin()){
+            if(!document.getElementById('login_status_page') && !$.util.isLogin()){  //不是login_status页面时   没有登录cookie的情况下  会再次请求
                 $.util.staticLogin();
             }
 
