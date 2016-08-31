@@ -30,8 +30,15 @@
         </a>
     </div>
 </div>
+<div class="reg-shadow" ontouchmove="return false;" hidden id="shadow"></div>
+<div class="totips" hidden id="isLogout" >
+    <h3>绑定此微信号？</h3>
+    <span style="display: none"></span>
+    <a href="javascript:void(0)" class="tipsbtn bggray" id="no">否</a><a href="javascript:void(0)" class="tipsbtn bgred" id="yes">是</a>
+</div>
 <?php $this->start('script') ?>
 <script>
+    var redirect_url = '/home/index';
     window.onBackView = function(){
         LEMON.event.back();
     }
@@ -102,6 +109,12 @@
                             LEMON.db.set('token_uin',msg.token_uin);
                         }
                         $.util.setCookie('login_status','yes');
+                        if($.util.isWX&&msg.bind_wx){
+                           $('#isLogout').show();
+                           $('#shadow').show();
+                           redirect_url = msg.redirect_url;
+                           return;
+                        }
                         document.location.href = msg.redirect_url;
                     } else {
                         $.util.alert(msg.msg);
@@ -111,6 +124,13 @@
         });
         return false;
     });
+    $('#yes').on('tap', function(){
+         $.get('/user/asyn-bindwx');
+          document.location.href = redirect_url; 
+    }); 
+    $('#no').on('tap', function(){
+          document.location.href = redirect_url; 
+    }); 
     $('#wxlogin').on('click', function () {
         if ($.util.isAPP) {
             LEMON.login.wx(function (code) {

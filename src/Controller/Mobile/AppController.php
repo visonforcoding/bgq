@@ -184,6 +184,8 @@ class AppController extends Controller {
                             'path' => '/',
                             'expire' => time() + 1200
                         ]);
+                    }else{
+                        $this->request->session()->write('Login.wxinfo',$res);
                     }
                 }
                 //如果是微信 静默授权页获取openid

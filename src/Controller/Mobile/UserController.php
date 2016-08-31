@@ -366,11 +366,15 @@ class UserController extends AppController {
                 //10分钟验证码超时
                     $this->request->session()->write('User.mobile', $user);
                     $user_token = false;
+                    $bind_wx = false;
                     if($this->request->is('lemon')){
                         $this->request->session()->write('Login.login_token',$user->user_token);
                         $user_token = $user->user_token;
                     }
-                    return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,'token_uin'=>$user_token]);
+                    if($this->request->is('weixin')&&!$user->wx_openid){
+                       $bind_wx = true;
+                    }
+                    return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,'token_uin'=>$user_token,'bind_wx'=>$bind_wx]);
                     } else {
                         return $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
                      }
@@ -743,6 +747,22 @@ class UserController extends AppController {
             }
         } else {
             return $this->Util->ajaxReturn(false, '30秒后再发送');
+        }
+    }
+    
+    /**
+     * ajax绑定微信
+     */
+    public function asynBindwx(){
+        $wxinfo = $this->request->session()->read('Login.wxinfo');
+        if($this->user&&$wxinfo){
+            \Cake\Log\Log::notice('微信异步绑定','devlog');
+            $user = $this->User->get($this->user->id);
+            if(!$user->union_id){
+                $user->union_id = $wxinfo->unionid;
+            }
+            $user->wx_openid = $wxinfo->openid;
+            $this->User->save($user);
         }
     }
 }
