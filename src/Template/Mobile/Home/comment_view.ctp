@@ -24,7 +24,7 @@
                     <i class="iconfont">&#xe61a;</i><?= $comment->praise_nums ?>
                 </span>
             </div>
-            <p><?= $comment->body ?></p>
+            <p class="a_bottom_comm"><?= $comment->body ?></p>
         </div>
     </section>
 
