@@ -42,7 +42,10 @@
         <script type="text/javascript" src="/mobile/js/jsapi.js"></script>
         <script type="text/javascript" src="/mobile/js/zepto.min.js"></script>
         <script type="text/javascript" src="/mobile/js/util.js"></script>
-        <script> var __wxConfig = <?= json_encode($wxConfig) ?>;</script>
+        <script>
+            var __wxConfig = <?= json_encode($wxConfig) ?>;
+            var __loginStatus = '<?=$isLogin ?>';
+        </script>
         <script>
             (function () {  //微信分享
                 if (navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1) {
@@ -109,11 +112,12 @@
                 }
             })();
 
-            //不是login_status页面时   没有登录cookie的情况下  会再次请求
-            //if(!document.getElementById('login_status_page') && !$.util.isLogin()){
-            if(!document.getElementById('login_status_page')){
-                $.util.staticLogin();
-            }
+            (function () {
+                $.util.setCookie('login_status', window.__loginStatus == 'yes'?'yes':'', 99999999);
+                if(location.href.indexOf('login') == -1){
+                    //$.util.staticLogin();  // 静态页面登录
+                }
+            })();
 
             (function () {  //cookie和jsapi直接互相设置token_uin
                 if (!$.util.isAPP)
