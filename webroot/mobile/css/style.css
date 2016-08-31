@@ -167,7 +167,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .con-bottom i.like{font-size:0.32rem;}
 .con-bottom i.collect{font-size:0.3rem;}
 .newscomment-box{border-top:1px #e5e5e5 solid;}
-.com_img_pic{border-top:none;border-bottom:none;background: transparent;}
+.com_img_pic{border-top:none;background: transparent;}
 .com_img_pic .items,.comm_bottom_des .items{background: transparent;}
 .com_img_pic .items img{width:.42rem;height:.42rem;}
 .com_img_pic .comm-info{height:.42rem;}
