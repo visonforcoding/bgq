@@ -63,7 +63,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户','公司','职位', '活动', '提交时间','是否需审核', '审核状态', '报名状态','审核人','是否置顶', '是否签到', '操作'],
+                                ['用户','公司','职位', '活动', '提交时间','是否需审核', '审核状态', '报名状态','付款','审核人','是否置顶', '是否签到', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'user.company', editable: true, align: 'center'},
@@ -95,6 +95,8 @@
                                     if(cellvalue){
                                        if(rowObject.activity.apply_fee>0){
                                            return '通过<span class="notice">(已付款)</span>';
+                                       }else{
+                                           return '通过</span>';
                                        }
                                     }else{
                                        if(rowObject.activity.apply_fee>0){
@@ -103,6 +105,13 @@
                                             return '未通过';
                                        }
                                     }
+                            }},
+                            {name: 'activity.apply_fee', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
+                                if(rowObject.is_pass&&cellvalue>0){
+                                    return '已付款';
+                                }else{
+                                    return '未付款';
+                                }
                             }},
                             {name: 'check_man', editable: true, align: 'center'},
                             {name: 'is_top', editable: true, align: 'center', formatter: topFormatter},
