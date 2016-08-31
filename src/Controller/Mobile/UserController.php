@@ -683,11 +683,10 @@ class UserController extends AppController {
      */
     public function loginStatus(){
 //        $this->viewBuilder()->autoLayout(false);
+        $this->handCheckLogin();
         $isLogin = 'no';
         if($this->user){
             $isLogin = 'yes';
-        }else{
-            
         }
         $this->set([
             'isLogin'=>$isLogin
