@@ -539,9 +539,5 @@
             $('#allcoment').hide();
         }
     });
-
-    $.util.staticLogin();
-
-
 </script>
 <?php $this->end('script'); ?>
