@@ -162,7 +162,36 @@ class PushController extends AppController {
         $this->loadComponent('Push');
         $res1 = $this->Push->android_check($a);
         $res2 = $this->Push->ios_check($i);
+        $res1 = json_encode($res1);
+        $res2 = json_encode($res2);
+        if($res1->ret == 'SUCCESS'){
+            echo '安卓' . $this->showMsg($res1->data->status);
+        }
+        if($res2->ret == 'SUCCESS'){
+            echo '苹果' . $this->showMsg($res2->data->status);
+        }
         echo $res1;
         echo $res2;die;
+    }
+    
+    public function showMsg($id){
+        switch ($id){
+            case 0:
+                return '排队中';
+            case 1:
+                return '发送中';
+            case 2:
+                return '发送完成';
+            case 3:
+                return '发送失败';
+            case 4:
+                return '消息被撤销';
+            case 5:
+                return '消息过期';
+            case 6:
+                return '筛选结果为空';
+            case 7:
+                return '定时任务尚未开始处理';
+        }
     }
 }
