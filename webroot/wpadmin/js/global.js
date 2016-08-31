@@ -1,6 +1,6 @@
 $(function () {
 //    $.datetimepicker.setLocale('zh'); //日期选择器插件
-    $('.datetimepicker').datetimepicker({lang: 'zh', format: 'Y-m-d H:i:s', timepicker: true});
+    $('.datetimepicker').datetimepicker({lang: 'zh', format: 'Y-m-d H:i:s', timepicker: true,scrollInput: false});
     $('.datepicker').datetimepicker({lang: 'zh', timepicker: false, format: 'Y-m-d'});
     $('.date_timepicker_start').datetimepicker({
         format: 'Y/m/d',
@@ -10,6 +10,7 @@ $(function () {
             })
         },
         timepicker: false,
+        scrollInput: false,
         lang: 'zh'
     });
     $('.date_timepicker_end').datetimepicker({

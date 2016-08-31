@@ -96,6 +96,10 @@ body{
     max-width: 100%;
     vertical-align: middle;
 }
+.form-group .img-thumbnail{
+    width:30%;
+    height:30%;
+}
 .navbar-avatar > li > a {
     padding: 5px 10px;
 }
