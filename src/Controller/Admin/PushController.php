@@ -164,6 +164,7 @@ class PushController extends AppController {
 //        $res = $this->Push->sendAll('1', '2', '3');
         
 //        $res = $this->Push->sendAlias('ca1c217f4f351cb2bff7', '1', '2', '3');
+        echo $a;
         echo $res;die;
     }
     
