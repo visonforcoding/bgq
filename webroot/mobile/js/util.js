@@ -262,12 +262,12 @@ $.util = {
         return !!$.util.getCookie('login_status');
     },
     staticLogin:function(){
-        if($.util.isAPP){
+        //if($.util.isAPP){
             var ifr = document.createElement('iframe');
             ifr.style.display = 'none';
             ifr.src = '/user/login_status';
             document.body.appendChild(ifr);
-        }
+        //}
     },
     isMobile:function(str) {
         var reg = /^0?1[3|4|5|7|8][0-9]\d{8}$/;
