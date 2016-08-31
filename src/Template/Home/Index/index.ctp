@@ -21,7 +21,7 @@
         </div>
 
         <div class="fixedcenter">
-            <a href="submit-news.html">
+            <a href="javascript:alert('施工中……')">
                 <div class="submita">
                     <span></span>
                     <i></i>
@@ -33,7 +33,7 @@
                     <i></i>
                 </div>
             </a>
-            <a href="submit-news.html">
+            <a href="javascript:alert('施工中……')">
                 <div class="submita">
                     <span></span>
                     <i></i>
