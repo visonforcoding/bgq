@@ -64,7 +64,7 @@
                             <i class="iconfont">&#xe61a;</i><?= $item->praise_nums ?>
                         </span>
                     </div>
-                    <p><?= $item->body ?></p>
+                    <p class="a_bottom_comm"><?= $item->body ?></p>
                 </div>    
             <?php endforeach; ?>
         <?php else: ?>
