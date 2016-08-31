@@ -45,7 +45,11 @@ class Export {
                 $cnt = 0;
             }
             foreach ($value as $i => $v) {
+                if(is_numeric($v)){
+                   $v = '"'.$v.'"';
+                } 
                 $value[$i] = iconv('utf-8', 'gbk', $v);
+                
             }
             fputcsv($fp, $value);
         }

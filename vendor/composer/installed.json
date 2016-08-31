@@ -53,7 +53,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/cakephp/plugin-installer/8e84898b44df50e88b5109bb7d4d28de845e9bf8.zip",
+            "url": "https://api.github.com/repos/cakephp/plugin-installer/zipball/8e84898b44df50e88b5109bb7d4d28de845e9bf8",
             "reference": "8e84898b44df50e88b5109bb7d4d28de845e9bf8",
             "shasum": ""
         },
@@ -95,7 +95,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/aferrandini/PHPQRCode/3c1c0454d43710ab5bbe19a51ad4cb41c22e3d46.zip",
+            "url": "https://api.github.com/repos/aferrandini/PHPQRCode/zipball/3c1c0454d43710ab5bbe19a51ad4cb41c22e3d46",
             "reference": "3c1c0454d43710ab5bbe19a51ad4cb41c22e3d46",
             "shasum": ""
         },
@@ -221,7 +221,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/cakephp/chronos/39db65d38488d6edd88bab5f33e19b1205ceeeda.zip",
+            "url": "https://api.github.com/repos/cakephp/chronos/zipball/39db65d38488d6edd88bab5f33e19b1205ceeeda",
             "reference": "39db65d38488d6edd88bab5f33e19b1205ceeeda",
             "shasum": ""
         },
@@ -278,7 +278,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/symfony/yaml/c5a7e7fc273c758b92b85dcb9c46149ccda89623.zip",
+            "url": "https://api.github.com/repos/symfony/yaml/zipball/c5a7e7fc273c758b92b85dcb9c46149ccda89623",
             "reference": "c5a7e7fc273c758b92b85dcb9c46149ccda89623",
             "shasum": ""
         },
@@ -329,7 +329,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/symfony/polyfill-mbstring/dff51f72b0706335131b00a7f49606168c582594.zip",
+            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/dff51f72b0706335131b00a7f49606168c582594",
             "reference": "dff51f72b0706335131b00a7f49606168c582594",
             "shasum": ""
         },
@@ -390,7 +390,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/symfony/console/64a4d43b045f07055bb197650159769604cb2a92.zip",
+            "url": "https://api.github.com/repos/symfony/console/zipball/64a4d43b045f07055bb197650159769604cb2a92",
             "reference": "64a4d43b045f07055bb197650159769604cb2a92",
             "shasum": ""
         },
@@ -452,7 +452,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/symfony/filesystem/5751e80d6f94b7c018f338a4a7be0b700d6f3058.zip",
+            "url": "https://api.github.com/repos/symfony/filesystem/zipball/5751e80d6f94b7c018f338a4a7be0b700d6f3058",
             "reference": "5751e80d6f94b7c018f338a4a7be0b700d6f3058",
             "shasum": ""
         },
@@ -503,7 +503,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/symfony/config/048dc47e07f92333203c3b7045868bbc864fc40e.zip",
+            "url": "https://api.github.com/repos/symfony/config/zipball/048dc47e07f92333203c3b7045868bbc864fc40e",
             "reference": "048dc47e07f92333203c3b7045868bbc864fc40e",
             "shasum": ""
         },
@@ -558,7 +558,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/robmorgan/phinx/4e7fee7792f4bf3dbf55ee29001850ba26c86a88.zip",
+            "url": "https://api.github.com/repos/robmorgan/phinx/zipball/4e7fee7792f4bf3dbf55ee29001850ba26c86a88",
             "reference": "4e7fee7792f4bf3dbf55ee29001850ba26c86a88",
             "shasum": ""
         },
@@ -661,7 +661,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/cakephp/cakephp/2c1463f4f80ec138f65a87a9c7d95d466a051e6f.zip",
+            "url": "https://api.github.com/repos/cakephp/cakephp/zipball/2c1463f4f80ec138f65a87a9c7d95d466a051e6f",
             "reference": "2c1463f4f80ec138f65a87a9c7d95d466a051e6f",
             "shasum": ""
         },
@@ -735,7 +735,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/cakephp/migrations/71850bdce921998c4b6aebadbb8a7b4a0a5864a8.zip",
+            "url": "https://api.github.com/repos/cakephp/migrations/zipball/71850bdce921998c4b6aebadbb8a7b4a0a5864a8",
             "reference": "71850bdce921998c4b6aebadbb8a7b4a0a5864a8",
             "shasum": ""
         },
@@ -898,7 +898,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/Intervention/image/22088b04728a039bd1fc32f7e79a89a118b78698.zip",
+            "url": "https://api.github.com/repos/Intervention/image/zipball/22088b04728a039bd1fc32f7e79a89a118b78698",
             "reference": "22088b04728a039bd1fc32f7e79a89a118b78698",
             "shasum": ""
         },
@@ -962,7 +962,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/serbanghita/Mobile-Detect/53cddae0c272a478b24a4b5fb60d0f838caf70b6.zip",
+            "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/53cddae0c272a478b24a4b5fb60d0f838caf70b6",
             "reference": "53cddae0c272a478b24a4b5fb60d0f838caf70b6",
             "shasum": ""
         },
@@ -1018,7 +1018,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/cakephp/bake/a98e988b154b30e20a5cfe917dcda5ae918bec85.zip",
+            "url": "https://api.github.com/repos/cakephp/bake/zipball/a98e988b154b30e20a5cfe917dcda5ae918bec85",
             "reference": "a98e988b154b30e20a5cfe917dcda5ae918bec85",
             "shasum": ""
         },
@@ -1118,7 +1118,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/cakephp/debug_kit/5c351136576b05a386eb2bbb02267529123edf7b.zip",
+            "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/5c351136576b05a386eb2bbb02267529123edf7b",
             "reference": "5c351136576b05a386eb2bbb02267529123edf7b",
             "shasum": ""
         },
@@ -1221,7 +1221,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/symfony/var-dumper/436195b421e8c0493ca3e390c1fbecd8ee08c546.zip",
+            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/436195b421e8c0493ca3e390c1fbecd8ee08c546",
             "reference": "436195b421e8c0493ca3e390c1fbecd8ee08c546",
             "shasum": ""
         },
@@ -1286,7 +1286,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/nikic/PHP-Parser/47b254ea51f1d6d5dc04b9b299e88346bf2369e3.zip",
+            "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
             "reference": "47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
             "shasum": ""
         },
@@ -1481,6 +1481,65 @@
             "console",
             "interactive",
             "shell"
+        ]
+    },
+    {
+        "name": "phpoffice/phpexcel",
+        "version": "1.8.1",
+        "version_normalized": "1.8.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PHPOffice/PHPExcel.git",
+            "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+            "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+            "shasum": ""
+        },
+        "require": {
+            "ext-xml": "*",
+            "ext-xmlwriter": "*",
+            "php": ">=5.2.0"
+        },
+        "time": "2015-05-01 07:00:55",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "PHPExcel": "Classes/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL"
+        ],
+        "authors": [
+            {
+                "name": "Maarten Balliauw",
+                "homepage": "http://blog.maartenballiauw.be"
+            },
+            {
+                "name": "Mark Baker"
+            },
+            {
+                "name": "Franck Lefevre",
+                "homepage": "http://blog.rootslabs.net"
+            },
+            {
+                "name": "Erik Tilt"
+            }
+        ],
+        "description": "PHPExcel - OpenXML - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
+        "homepage": "http://phpexcel.codeplex.com",
+        "keywords": [
+            "OpenXML",
+            "excel",
+            "php",
+            "spreadsheet",
+            "xls",
+            "xlsx"
         ]
     }
 ]

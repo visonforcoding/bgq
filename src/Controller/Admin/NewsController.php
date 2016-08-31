@@ -282,7 +282,7 @@ class NewsController extends AppController {
          if($coms){
              foreach ($coms as $com){
                  $output .= '<div class="comment">';
-                 $output .= '<a href="###" class="avatar"><img class="img-circle" style="width:60px;height:60px;" src="'.getAvatar($com->user->avatar).'"/></a>';
+                 $output .= '<a href="###" class="avatar" style="width:70px;"><img class="img-circle" style="max-width:60px;width:60px;height:60px;" src="'.getAvatar($com->user->avatar).'"/></a>';
                  $output .= '<div class="content">
                                 <div class="pull-right"><span class="text-muted">'.
                                 $com->create_time->timeAgoInWords(
@@ -301,7 +301,7 @@ class NewsController extends AppController {
                                 <a href="#">'.$com->reply->truename.'&nbsp;'.$com->reply->company.'&nbsp;'.$com->reply->position.'</a>';
                  }
                  $output .=  '</span>';
-                 $output .='<div class="text">'.$com->body.'</div>
+                 $output .='<div class="text" style="padding-top:0px;">'.$com->body.'</div>
                             <div class="actions">
                                 <a class="reply" data-id="'.$com->id.'" href="##">回复</a>
                                 <a class="delete" data-id="'.$com->id.'" href="##">删除</a>

@@ -14,12 +14,16 @@ class Export {
      * @param type $columnArr
      * @param type $data
      * @param type $filename 
+     * @param type $name Description
      */
-    public static function exportCsv($columnArr, $data, $filename) {
-        header('Content-Type: application/vnd.ms-excel');
+    public static function exportCsv($columnArr, $data, $filename,$debug =false) {
+        if(!$debug){
 //        header( 'Content-Type: text/csv' );
+        header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
         header('Cache-Control: max-age=0');
+            
+        }
         // 从数据库中获取数据，为了节省内存，不要把数据一次性读到内存，从句柄中一行一行读即可  
         // 打开PHP文件句柄，php://output 表示直接输出到浏览器  
         $fp = fopen('php://output', 'w');

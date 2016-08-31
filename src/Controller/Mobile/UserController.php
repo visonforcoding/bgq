@@ -211,7 +211,7 @@ class UserController extends AppController {
             $data = $this->request->data();
             $data['enabled'] = 1;
             $data['phone'] = $this->request->session()->read('reg.phone');
-            $ckReg = $this->User->find()->where(['phone'=>$data['phone'],'is_del'=>0])->first();
+            $ckReg = $this->User->find()->where(['phone'=>$data['phone']])->first();
             if($ckReg){
                 return $this->Util->ajaxReturn(false,'该手机号已经注册过');
             }

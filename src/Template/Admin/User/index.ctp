@@ -14,6 +14,24 @@
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="姓名、手机号、email">
             </div>
             <div class="form-group">
+                <label for="keywords">等级</label>
+                <select name="grade" class="form-control">
+                    <option value="">全部</option>
+                    <option value="1">普通</option>
+                    <option value="2">高级</option>
+                    <option value="3">vip</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="keywords">状态</label>
+                <select name="account_status" class="form-control">
+                    <option value="">全部</option>
+                    <option value="2">正常</option>
+                    <option value="1">禁用</option>
+                    <option value="3">删除</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="keywords">时间</label>
                 <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords" placeholder="开始时间">
                 <label for="keywords">到</label>
