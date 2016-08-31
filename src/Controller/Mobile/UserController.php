@@ -353,7 +353,8 @@ class UserController extends AppController {
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $phone = $this->request->data('phone');
-            $user = $this->User->findByPhoneAndEnabled($phone,1)->first();
+             $UserTable = \Cake\ORM\TableRegistry::get('User');
+             $user = $UserTable->find()->where(['phone' => $phone, 'enabled' => 1, 'is_del' => 0])->first();
             if ($user) {
                 if((\Cake\Core\Configure::read('debug')&&$_SERVER['SERVER_ADDR']=='127.0.0.1')||$this->request->query('adminlogin')){
                     //方便本地调试
