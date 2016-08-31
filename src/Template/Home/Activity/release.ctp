@@ -7,7 +7,7 @@
     </h1>
 </div>
 <div class="containner inner">
-    <h4 class="pagetitle">发布活动列表<a href="javascript:void(0)" class="active">发布活动</a><a href="submit-news.html">发布资讯</a><a href="submit-job.html">发布招聘</a></h4>
+    <h4 class="pagetitle">发布活动列表<a href="javascript:void(0)" class="active">发布活动</a><a href="javascript:alert('施工中……')">发布资讯</a><a href="javascript:alert('施工中……')">发布招聘</a></h4>
     <?= $this->Form->create($activity) ?>
     <ul class="formlist clearfix">
 <!--        <li class="slectform">
