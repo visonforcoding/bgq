@@ -262,6 +262,7 @@ $.util = {
         return !!$.util.getCookie('login_status');
     },
     staticLogin:function(){
+        return;
         //if($.util.isAPP){
             var ifr = document.createElement('iframe');
             ifr.style.display = 'none';
