@@ -431,13 +431,7 @@ class HomeController extends AppController {
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
                         //时间语义化转换
-                        $item['create_str'] = $item['create_time']->timeAgoInWords(
-                                [ 'accuracy' => [
-                                        'year' => 'year',
-                                        'month' => 'month',
-                                        'hour' => 'hour'
-                                    ], 'end' => '+10 year']
-                        );
+                        $item['create_str'] = $item['create_time']->format('Y-m-d H:i:s');
                         return $item;
                     });
                 })
