@@ -154,7 +154,9 @@ class PushController extends AppController {
     
     public function test(){
         $this->loadComponent('Push');
-        $res = $this->Push->sendFile('1', '2', '3', 'ca1c217f4f351cb2bff7', 'BGB', false);
+        $res = $this->Push->sendFile('2', '3', '4', 'ca1c217f4f351cb2bff7', 'BGB', false);
+//        $res = $this->Push->sendAll('1', '2', '3');
+        
 //        $res = $this->Push->sendAlias('ca1c217f4f351cb2bff7', '1', '2', '3');
         echo $res;die;
     }

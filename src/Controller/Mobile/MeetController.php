@@ -387,7 +387,7 @@ class MeetController extends AppController {
     public function viewMoreReco($id=null){
         $RecomTable = \Cake\ORM\TableRegistry::get('SavantReco');
         $recoms = $RecomTable->find()->contain(['Users'=>function($q){
-            return $q->select(['id','avatar','truename','company','position']);
+            return $q->where(['enabled'=>1, 'is_del'=>0])->select(['id','avatar','truename','company','position']);
         }])->where(['savant_id'=>$id])
                 ->orderDesc('SavantReco.create_time')
                 ->toArray();
