@@ -148,7 +148,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 /*新闻详情页--start*/
 .inner .collection{right:0.6rem;font-size:0.32rem;color:#fff;}
 .inner .share{font-size:0.34rem;color:#fff;}
-.newscon-box,.newscomment-box{background: #fff;overflow:hidden;padding-bottom:0.2rem;border-bottom:1px #e5e5e5 solid;}
+.newscon-box,.newscomment-box{background: #fff;overflow:hidden;border-bottom:1px #e5e5e5 solid;}
 .newscon-box h3{line-height:0.46rem;width:100%;font-size:0.4rem;color:#222c38; margin:0.3rem 0 0.2rem;padding:0 0.3rem;}
 .newscon-box img{max-width:90%;height:auto;display: block;margin:0.3rem auto;}
 .newscon-box p img{max-width:100%;}
