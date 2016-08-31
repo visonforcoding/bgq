@@ -255,8 +255,7 @@ class WxController extends AppController {
             $body = '活动报名《' . $order->activityapply->activity->title . '》支付';
         }
         $out_trade_no = $order->order_no;
-        $fee = 0.01; //元
-//        $fee = $order->price;  //支付金额(分)
+        $fee = $order->price;  //支付金额(分)
         $this->loadComponent('Wxpay');
         $isApp = false;
         $jsApiParameters = '';
