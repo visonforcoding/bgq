@@ -220,14 +220,14 @@ class ActivityController extends AppController {
      * @return csv 
      */
     public function exportExcel() {
-        $sort = $this->request->data('sidx');
-        $order = $this->request->data('sord');
-        $keywords = $this->request->data('keywords');
-        $begin_time = $this->request->data('begin_time');
-        $end_time = $this->request->data('end_time');
+        $sort = $this->request->query('sidx');
+        $order = $this->request->query('sord');
+        $keywords = $this->request->query('keywords');
+        $begin_time = $this->request->query('begin_time');
+        $end_time = $this->request->query('end_time');
         $where = ['from_user'=>0,'Activity.is_del'=>0];
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where['username like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
@@ -392,7 +392,7 @@ class ActivityController extends AppController {
          if($coms){
              foreach ($coms as $com){
                  $output .= '<div class="comment">';
-                 $output .= '<a href="###" class="avatar"><img class="img-circle" style="width:60px;height:60px;" src="'.getAvatar($com->user->avatar).'"/></a>';
+                 $output .= '<a href="###" class="avatar" style="width:70px;"><img class="img-circle" style="max-width:60px;width:60px;height:60px;" src="'.getAvatar($com->user->avatar).'"/></a>';
                  $output .= '<div class="content">
                                 <div class="pull-right"><span class="text-muted">'.
                                 $com->create_time->timeAgoInWords([ 'accuracy' => [
@@ -410,7 +410,7 @@ class ActivityController extends AppController {
                                 <a href="#">'.$com->user->truename.'&nbsp;'.$com->user->company.'&nbsp;'.$com->user->position.'</a>';
                  }
                  $output .=  '</span>';
-                 $output .='<div class="text">'.$com->body.'</div>
+                 $output .='<div class="text" style="padding-top:0">'.$com->body.'</div>
                             <div class="actions">
                                 <a class="reply" data-id="'.$com->id.'" href="##">回复</a>
                                 <a class="delete" data-id="'.$com->id.'" href="##">删除</a>

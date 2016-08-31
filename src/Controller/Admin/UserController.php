@@ -8,6 +8,7 @@ use Wpadmin\Controller\AppController;
  * User Controller
  *
  * @property \App\Model\Table\UserTable $User
+ * @property \App\Controller\Component\ExportComponent $Export 导出组件
  */
 class UserController extends AppController {
 
@@ -154,6 +155,17 @@ class UserController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
+        $grade = $this->request->data('grade');
+        if(!empty($grade)){
+            $where['grade'] = $grade;
+        }
+        $account_status = $this->request->data('account_status');
+        if($account_status=='1'||$account_status=='2'){
+            $where['enabled'] = $account_status -1;
+        }
+        if($account_status == '3'){
+            $where['is_del'] = 1;
+        }
         if ($this->request->query('type') == '1') {
             $where['status'] = 1;
         }
@@ -191,14 +203,14 @@ class UserController extends AppController {
      * @return csv 
      */
     public function exportExcel() {
-        $sort = $this->request->data('sidx');
-        $order = $this->request->data('sord');
-        $keywords = $this->request->data('keywords');
-        $begin_time = $this->request->data('begin_time');
-        $end_time = $this->request->data('end_time');
+        $sort = $this->request->query('sidx');
+        $order = $this->request->query('sord');
+        $keywords = $this->request->query('keywords');
+        $begin_time = $this->request->query('begin_time');
+        $end_time = $this->request->query('end_time');
         $where = ['is_del'=>0];
         if (!empty($keywords)) {
-            $where[' truename like'] = "%$keywords%";
+            $where['or'] = [['truename like' => "%$keywords%"], ['email like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
@@ -206,10 +218,10 @@ class UserController extends AppController {
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
         $Table = $this->User;
-        $column = ['手机号', '姓名', '等级', '身份证', '公司', '职位', '邮箱', '性别', '擅长业务', '常驻城市', '项目经验', '业务能力', '审核意见', '审核状态', '创建时间'];
+        $column = ['手机号', '姓名', '等级', '公司', '职位', '邮箱', '性别', '擅长业务', '常驻城市',  '注册时间'];
         $query = $Table->find();
         $query->hydrate(false);
-        $query->select(['phone', 'truename', 'level', 'idcard', 'company', 'position', 'email', 'gender', 'goodat', 'city', 'ymjy', 'ywnl', 'reason', 'status', 'create_time']);
+        $query->select(['phone', 'truename', 'level', 'company', 'position', 'email', 'gender', 'goodat', 'city', 'create_time']);
         if (!empty($where)) {
             $query->where($where);
         }
@@ -237,8 +249,9 @@ class UserController extends AppController {
         });
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = '会员_' . date('Y-m-d') . '.csv';
-        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+        $filename = '会员_' . date('Y-m-d') . '.xlsx';
+        $this->loadComponent('Export');
+        $this->Export->phpexcelExport($filename, $column, $res);
     }
 
     /**

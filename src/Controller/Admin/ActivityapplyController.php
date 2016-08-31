@@ -179,26 +179,36 @@ class ActivityapplyController extends AppController {
      *
      * @return csv 
      */
-    public function exportExcel() {
-        $sort = $this->request->data('sidx');
-        $order = $this->request->data('sord');
-        $keywords = $this->request->data('keywords');
-        $begin_time = $this->request->data('begin_time');
-        $end_time = $this->request->data('end_time');
+    public function exportExcel($id=null) {
+        $sort = $this->request->query('sidx');
+        $order = $this->request->query('sord');
+        $keywords = $this->request->query('keywords');
+        $begin_time = $this->request->query('begin_time');
+        $end_time = $this->request->query('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where['username like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
+        $is_sign = $this->request->query('is_sign');
+        if ($is_sign>-1) {
+            $where['is_sign'] = $is_sign;
+        }
         $Table = $this->Activityapply;
-        $column = ['用户id', '活动id', '提交时间', '更新时间', '审核是否通过', '是否置顶'];
-        $query = $Table->find();
+        $column = ['用户','公司','职位','手机号', '活动','报名时间'];
+        if ($id) {
+            $query = $Table->find()->where(['activity_id' => $id]);
+        } else {
+            $query = $Table->find();
+        }
         $query->hydrate(false);
-        $query->select(['user_id', 'activity_id', 'create_time', 'update_time', 'is_pass', 'is_top']);
+        $query->contain(['Users', 'Activities']);
+        $query->select(['user_truename'=>'Users.truename','user_company'=>'Users.company','user_position'=>'Users.position',
+            'user_phone'=>'Users.phone', 'activity_title'=>'Activities.title','create_time' ]);
         if (!empty($where)) {
             $query->where($where);
         }
@@ -207,7 +217,7 @@ class ActivityapplyController extends AppController {
         }
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = 'Activityapply_' . date('Y-m-d') . '.csv';
+        $filename = '活动报名' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
 

@@ -133,14 +133,15 @@ class SavantController extends AppController {
             $where = ['User.savant_status' => 2];
         }
         if (!empty($keywords)) {
-            $where[' User.truename like'] = "%$keywords%";
+            $where['or'] = [['truename like' => "%$keywords%"], ['company like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $query = $this->User->find()->select(['User.id','User.is_top', 'User.meet_nums', 'User.truename', 'Savant.reco_nums', 'User.savant_status', 'Savant.xmjy', 'Savant.zyys', 'Savant.summary'])
+        $query = $this->User->find()->select(['User.id','User.phone','User.grade','User.truename','User.company','User.position','User.is_top',
+            'User.meet_nums', 'User.truename', 'Savant.reco_nums', 'User.savant_status', 'Savant.xmjy', 'Savant.zyys', 'Savant.summary'])
                 ->contain(['Savant']);
         if (!empty($where)) {
             $query->where($where);
@@ -173,11 +174,11 @@ class SavantController extends AppController {
      * @return csv 
      */
     public function exportExcel() {
-        $sort = $this->request->data('sidx');
-        $order = $this->request->data('sord');
-        $keywords = $this->request->data('keywords');
-        $begin_time = $this->request->data('begin_time');
-        $end_time = $this->request->data('end_time');
+        $sort = $this->request->query('sidx');
+        $order = $this->request->query('sord');
+        $keywords = $this->request->query('keywords');
+        $begin_time = $this->request->query('begin_time');
+        $end_time = $this->request->query('end_time');
         $where = [];
         $savant_status = $this->request->data('savant_status');
         if ($savant_status > 1) {

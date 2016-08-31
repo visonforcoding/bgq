@@ -23,7 +23,7 @@
             </div>
             <div class="reply-form" id="commentReplyForm" hidden="true">
                 <div class="form">
-                    <form role="form">
+                    <form role="form" style="padding-left:15px;">
                         <div class="form-group">
                             <textarea id="msg" class="form-control new-comment-text" rows="2" placeholder="写上你的内容..."></textarea>
                         </div>

@@ -93,17 +93,9 @@
                             }},
                             {name: 'is_pass', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
                                     if(cellvalue){
-                                       if(rowObject.activity.apply_fee>0){
-                                           return '通过<span class="notice">(已付款)</span>';
-                                       }else{
-                                           return '通过</span>';
-                                       }
+                                       return '通过';
                                     }else{
-                                       if(rowObject.activity.apply_fee>0){
-                                           return '未通过<span class="notice">(未付款)</span>';
-                                       }else{
-                                            return '未通过';
-                                       }
+                                        return '未通过';
                                     }
                             }},
                             {name: 'activity.apply_fee', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
@@ -338,7 +330,7 @@
                     searchData['sidx'] = sortColumnName;
                     searchData['sort'] = sortOrder;
                     var searchQueryStr = $.param(searchData);
-                    $("body").append("<iframe src='/admin/activityapply/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                    $("body").append("<iframe src='/admin/activityapply/exportExcel/<?= $id ?>?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
 
                 function doView(id) {

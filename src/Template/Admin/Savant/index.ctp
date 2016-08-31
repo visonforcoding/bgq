@@ -10,7 +10,7 @@
                         </a>-->
             <div class="form-group">
                 <label for="keywords">关键字</label>
-                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="用户名">
+                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="用户名、手机号、公司">
             </div>
             <div class="form-group">
                 <label for="keywords">状态</label>
@@ -47,11 +47,24 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '约见次数', '推荐次数', '项目经验', '资源优势', '简介', '审核情况','置顶', '操作'],
+                                ['用户','手机号','公司','职位','等级', '约见次数', '推荐次数', '项目经验', '资源优势', '简介', '审核情况','置顶', '操作'],
                         colModel: [
                             {name: 'truename', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     return '<a title="查看" onClick="showSavant(' + " ' " + rowObject.id + " ' " + ');" class="grid-btn ">' + cellvalue + '</a>';
                                 }},
+                            {name: 'phone', editable: true, align: 'center'},
+                            {name: 'company', editable: true, align: 'center'},
+                            {name: 'position', editable: true, align: 'center'},
+                            {name: 'grade', editable: true, align: 'center',formatter:function(cell,opt,row){
+                                    switch(cell){
+                                        case 1:
+                                            return '普通';
+                                        case 2:
+                                            return '高级';
+                                        case 3:
+                                            return 'vip';
+                                    }
+                            }},
                             {name: 'meet_nums', editable: true, align: 'center'},
                             {name: 'savant.reco_nums', editable: true, align: 'center'},
 //                            {name: 'cover', editable: true, align: 'center'},
