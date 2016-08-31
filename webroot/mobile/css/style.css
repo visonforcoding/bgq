@@ -1188,8 +1188,8 @@ background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  ba
 /*
 .m_sign{position:absolute;right:0;bottom:0;height:0;width:0;border:24px #E01A48 solid;border-left:24px solid transparent;
 border-top:24px solid transparent;color:#fff;text-align: center;font-style: italic;font-size:12px;line-height: 14px;}
-.m_sign i{display: block;transform: rotate(40deg);position:absolute;top:-8px;right:-20px;}
-.a_title_time{display: block;font-size:.26rem;color:#707070;}*/
+.m_sign i{display: block;transform: rotate(40deg);position:absolute;top:-8px;right:-20px;}*/
+.a_title_time{display: block;font-size:.26rem;color:#707070;}
 .meet_title_con{position: relative;}
 .meet_title_con .m_sub_title{max-width:80%;font-size:.28rem;}
 .meet_tips{position:absolute;right:.1rem;top:.05rem;}
