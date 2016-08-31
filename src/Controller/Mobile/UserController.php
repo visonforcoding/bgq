@@ -682,7 +682,7 @@ class UserController extends AppController {
      * 静态页用于请求登陆
      */
     public function loginStatus(){
-//        $this->viewBuilder()->autoLayout(false);
+        $this->viewBuilder()->autoLayout(false);
         $this->handCheckLogin();
         $isLogin = 'no';
         if($this->user){
