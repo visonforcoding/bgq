@@ -115,7 +115,7 @@ class PushController extends AppController {
                 return $this->Util->ajaxReturn(false, '用户为空');
             } else {
                 foreach($res as $k=>$v){
-                    $user .= $v['user_token'] . '\n';
+                    $user .= $v['user_token'] . "\n";
                 }
                 $this->loadComponent('Push');
                 if($url){
@@ -158,7 +158,7 @@ class PushController extends AppController {
         $user = $UserTable->find()->where(['phone'=>'13560627825'])->toArray();
         $a = '';
         foreach($user as $k=>$v){
-            $a .= $v['user_token'];
+            $a .= $v['user_token'] . "\n";
         }
         $res = $this->Push->sendFile('2', '3', '4', $a, 'BGB', false);
 //        $res = $this->Push->sendAll('1', '2', '3');
