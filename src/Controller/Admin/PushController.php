@@ -162,8 +162,8 @@ class PushController extends AppController {
         $this->loadComponent('Push');
         $res1 = $this->Push->android_check($a);
         $res2 = $this->Push->ios_check($i);
-        $res1 = json_encode($res1);
-        $res2 = json_encode($res2);
+        $res1 = json_decode($res1);
+        $res2 = json_decode($res2);
         if($res1->ret == 'SUCCESS'){
             echo '安卓' . $this->showMsg($res1->data->status);
         }
