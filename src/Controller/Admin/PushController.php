@@ -86,7 +86,7 @@ class PushController extends AppController {
         $activity_id = $this->request->data('activity_id');
         $industry_id = $this->request->data('industry_id');
         $keyword = $this->request->data('keyword');
-        $where = ['is_del'=>0];
+        $where = ['enabled'=>1];
         if (!empty($keywords)) {
             $where['or'] = [['truename like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
         }
@@ -120,9 +120,9 @@ class PushController extends AppController {
                 $this->loadComponent('Push');
                 if($url){
                     $extra['url'] = $url;
-                    $res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true, $extra);
+                    $res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', false, $extra);
                 } else {
-                    $res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true);
+                    $res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', false);
                 }
                 
                 if($res){
@@ -154,7 +154,13 @@ class PushController extends AppController {
     
     public function test(){
         $this->loadComponent('Push');
-        $res = $this->Push->sendFile('2', '3', '4', 'ca1c217f4f351cb2bff7', 'BGB', false);
+        $UserTable = \Cake\ORM\TableRegistry::get('user');
+        $user = $UserTable->find()->where(['phone'=>'13560627825'])->toArray();
+        $a = '';
+        foreach($user as $k=>$v){
+            $a .= $v['user_token'].'\n';
+        }
+        $res = $this->Push->sendFile('2', '3', '4', $a, 'BGB', false);
 //        $res = $this->Push->sendAll('1', '2', '3');
         
 //        $res = $this->Push->sendAlias('ca1c217f4f351cb2bff7', '1', '2', '3');
