@@ -76,7 +76,7 @@ class Umeng {
             if ($production_mode) {
                 return false;
             } else {
-                return $this->showError($android_res->data->error_code);
+                return '安卓:' . $this->showError($android_res->data->error_code);
             }
         }
         // ios推送
@@ -95,14 +95,14 @@ class Umeng {
             if ($production_mode) {
                 return false;
             } else {
-                return $this->showError($ios_res->data->error_code);
+                return '苹果:' . $this->showError($ios_res->data->error_code);
             }
         }
         if($ios_res->ret == 'SUCCESS' && $android_res->ret == 'SUCCESS'){
             if ($production_mode) {
                 return true;
             } else {
-                return 'ios任务id' . $ios_res->data->task_id . '|android任务id' . $android_res->data->task_id;
+                return 'ios任务id:' . $ios_res->data->task_id . '|android任务id:' . $android_res->data->task_id;
             }
         }
     }
@@ -148,7 +148,7 @@ class Umeng {
             if ($production_mode) {
                 return false;
             } else {
-                return $this->showError($android_res->data->error_code);
+                return '安卓:' . $this->showError($android_res->data->error_code);
             }
         }
         // ios推送
@@ -167,14 +167,14 @@ class Umeng {
             if ($production_mode) {
                 return false;
             } else {
-                return $this->showError($ios_res->data->error_code);
+                return '苹果:' . $this->showError($ios_res->data->error_code);
             }
         }
         if($ios_res->ret == 'SUCCESS' && $android_res->ret == 'SUCCESS'){
             if ($production_mode) {
                 return true;
             } else {
-                return 'ios任务id' . $ios_res->data->task_id . '|android任务id' . $android_res->data->task_id;
+                return 'ios任务id:' . $ios_res->data->task_id . '|android任务id:' . $android_res->data->task_id;
             }
         }
     }
@@ -221,14 +221,14 @@ class Umeng {
                 if ($production_mode) {
                     return false;
                 } else {
-                    return $this->showError($android_res->data->error_code);
+                    return '安卓:' . $this->showError($android_res->data->error_code);
                 }
             }
         } else {
             if ($production_mode) {
                 return false;
             } else {
-                return $this->showError($android_res->data->error_code);
+                return '安卓:' . $this->showError($android_res->data->error_code);
             }
         }
         // ios推送
@@ -251,14 +251,14 @@ class Umeng {
                 if ($production_mode) {
                     return false;
                 } else {
-                    return $this->showError($ios_res->data->error_code);
+                    return '苹果:' . $this->showError($ios_res->data->error_code);
                 }
             }
         } else {
             if ($production_mode) {
                 return false;
             } else {
-                return $this->showError($ios_res->data->error_code);
+                return '苹果:' . $this->showError($ios_res->data->error_code);
             }
         }
         if($ios_res->ret == 'SUCCESS' && $android_res->ret == 'SUCCESS'){
