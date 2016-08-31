@@ -73,6 +73,11 @@ class AppController extends Controller {
             $this->loadComponent('Wx');
             $wxConfig = $this->Wx->wxconfig(['onMenuShareTimeline', 'onMenuShareAppMessage', 'scanQRCode', 'chooseImage', 'uploadImage'], false);
         }
+         $isLogin = 'no';
+        if($this->user){
+            $isLogin = 'yes';
+        }
+        $this->set(compact('isLogin'));
         $this->set(compact('wxConfig'));
     }
 
