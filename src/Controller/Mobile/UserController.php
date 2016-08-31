@@ -682,12 +682,16 @@ class UserController extends AppController {
      * 静态页用于请求登陆
      */
     public function loginStatus(){
+//        $this->viewBuilder()->autoLayout(false);
+        $isLogin = 'no';
         if($this->user){
-            echo 'yes';
+            $isLogin = 'yes';
         }else{
-            echo 'no';
+            
         }
-        exit();
+        $this->set([
+            'isLogin'=>$isLogin
+        ]);
     }
     
     public function changePhone(){

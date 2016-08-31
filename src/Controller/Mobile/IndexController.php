@@ -27,13 +27,19 @@ class IndexController extends AppController {
         //var_dump($umengObj);
 
         $this->autoRender = false;
-        $redis = new \Redis();
-        $redis->connect('192.168.1.7', 6379);
-        $test = $redis->get('test');
-        //$UserTable = \Cake\ORM\TableRegistry::get('User');
-        //$users = $UserTable->find()->hydrate(false)->select(['phone'])->where(['is_del' => 0, 'enabled' => '1'])->toArray();
-        debug($redis->sGetMembers('phones'));
-        $res = $redis->sRemove('phones','1');
+                $this->response->cookie([
+                            'name' => 'login_stauts',
+                            'value' => 'yes3',
+                            'path' => '/',
+                            'expire' => time() + 1200
+                        ]);
+//        $redis = new \Redis();
+//        $redis->connect('192.168.1.7', 6379);
+//        $test = $redis->get('test');
+//        //$UserTable = \Cake\ORM\TableRegistry::get('User');
+//        //$users = $UserTable->find()->hydrate(false)->select(['phone'])->where(['is_del' => 0, 'enabled' => '1'])->toArray();
+//        debug($redis->sGetMembers('phones'));
+//        $res = $redis->sRemove('phones','1');
 //        foreach ($users as $user){
 //            $redis->sAdd('phones',$user['phone']);
 //        }
