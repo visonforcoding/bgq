@@ -763,6 +763,10 @@ class UserController extends AppController {
                 $user->union_id = $wxinfo->unionid;
             }
             $user->wx_openid = $wxinfo->openid;
+            if(empty($user->avatar)||$user->avatar=='/mobile/images/touxiang.jpg'){
+                //使用微信头像
+                $user->avatar = $wxinfo->headimgurl;
+            }
             $this->User->save($user);
         }
     }

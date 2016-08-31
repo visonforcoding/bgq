@@ -169,7 +169,6 @@ class AppController extends Controller {
 //        }elseif (isset($res->openid)) {
                     $open_id = $res->openid;
                     $UserTable = \Cake\ORM\TableRegistry::get('User');
-//        }
                     $user = $UserTable->find()->where(['wx_openid' => $open_id, 'enabled' => 1, 'is_del' => 0])->first();
                     if ($user) {
                         //通过微信 获取到 在平台上有绑定的用户  就默认登录
