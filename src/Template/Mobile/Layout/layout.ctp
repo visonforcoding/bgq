@@ -109,6 +109,10 @@
                 }
             })();
 
+            if(!$.util.isLogin()){
+                $.util.staticLogin();
+            }
+
             (function () {  //cookie和jsapi直接互相设置token_uin
                 if (!$.util.isAPP)
                     return;
