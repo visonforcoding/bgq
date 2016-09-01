@@ -156,6 +156,8 @@
                 $('body').tap(rpClick);  //页面ptag上报
                 $.util.report();  //页面访问上报
             })();
+
+            LEMON.sys.closeLOC();
         </script>
 
 
