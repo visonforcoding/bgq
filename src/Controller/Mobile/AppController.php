@@ -112,13 +112,14 @@ class AppController extends Controller {
      * 
      */
     protected function baseLogin() {
+        \Cake\Log\Log::debug('进入APP登录自动登录','devlog');
         $user = $this->request->session()->check('User.mobile');
         $url = '/' . $this->request->url;
         if ($this->request->isLemon() && $this->request->cookie('token_uin') && !$user) {
             //如果是APP，获取user_token 自动登录
             $user_token = $this->request->cookie('token_uin');
             $UserTable = \Cake\ORM\TableRegistry::get('User');
-            $user = $UserTable->find()->where(['user_token' => $open_id, 'enabled' => 1, 'is_del' => 0])->first();
+            $user = $UserTable->find()->where(['user_token' => $user_token, 'enabled' => 1, 'is_del' => 0])->first();
             if ($user) {
                 $this->request->session()->write('User.mobile', $user);
                 $this->response->cookie([
@@ -143,7 +144,7 @@ class AppController extends Controller {
             //如果是APP，获取user_token 自动登录
             $user_token = $this->request->cookie('token_uin');
             $UserTable = \Cake\ORM\TableRegistry::get('User');
-            $user = $UserTable->find()->where(['user_token' => $open_id, 'enabled' => 1, 'is_del' => 0])->first();
+            $user = $UserTable->find()->where(['user_token' => $user_token, 'enabled' => 1, 'is_del' => 0])->first();
             if ($user) {
                 $this->request->session()->write('User.mobile', $user);
                 $this->response->cookie([
