@@ -30,7 +30,7 @@ class PushController extends AppController {
         $sort = 'User.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
-        $where = ['is_del'=>0];
+        $where = ['enabled'=>1];
         if (!empty($keywords)) {
             $where['or'] = [['truename like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
         }
