@@ -865,7 +865,7 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .my-collection-info a{overflow:hidden;padding:0.29rem 0;display:block;border-bottom:1px #e5e5e5 solid;}
 .my-collection-info .my-pic-acive{width:1.7rem;height:1.39rem;display: block;float:left;}
 .my-collection-info .my-pic-acive img{width:100%;height:auto;display: block;min-height:1.39rem;}
-.my-collection-items{float:left;margin-left:0.23rem;width:4.9rem;font-size:0.26rem;}
+.my-collection-items{float:left;width:4.5rem;font-size:0.26rem;margin-left:.2rem;}
 .my-collection-items span{display:block;line-height: 0.32rem;color:#b4bac1;}
 .my-collection-items span i{float:right;color:#e01a48;}
 .my-collection-items h3{line-height: 0.36rem;color:#7a7e83;font-size:0.3rem;margin-bottom:0.1rem;-webkit-line-clamp:2;display: -webkit-box;
