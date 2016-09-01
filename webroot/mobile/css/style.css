@@ -154,7 +154,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .newscon-box br{display: inline;line-height: 10px;}
 .body-con{margin:.3rem 0;}
 .body-con img{min-height:.1rem;}
-.newscon-box p{/*line-height: 0.46rem;*/color:#222;text-align: justify; cursor: pointer;}
+.newscon-box p{line-height: 0.46rem;color:#222;text-align: justify; cursor: pointer;}
 .newscon-box p a,.body-con a{font-size:0.3rem;}
 .con-bottom{color:#9ba4ad;font-size:0.28rem;background: #fff;padding:.2rem 0;}
 .con-bottom span{display: inline-block;font-size:0.24rem;overflow: hidden;height: .4rem;line-height: .4rem;}
