@@ -72,13 +72,7 @@ class Umeng {
         $android_brocast->setPredefinedKeyValue('type', 'broadcast'); // 类型为广播
         $android_brocast->setExtraField("extra", $extra); // 安卓额外内容
         $android_res = json_decode($android_brocast->send());
-        if ($android_res->ret == 'FAIL') {
-            if ($production_mode) {
-                return false;
-            } else {
-                return '安卓:' . $this->showError($android_res->data->error_code);
-            }
-        }
+
         // ios推送
         $ios_brocast = new \IOSNotification();
         $ios_brocast->setAppMasterSecret($this->ios_appMasterSecret);
@@ -91,14 +85,14 @@ class Umeng {
         $ios_brocast->setPredefinedKeyValue("sound", $sound); // ios声音
         $ios_brocast->setCustomizedField("extra", $extra); // ios额外内容
         $ios_res = json_decode($ios_brocast->send());
-        if ($ios_res->ret == 'FAIL') {
+        if ($ios_res->ret == 'FAIL' && $android_res->ret == 'FAIL') {
             if ($production_mode) {
                 return false;
             } else {
-                return '苹果:' . $this->showError($ios_res->data->error_code);
+                return '安卓:' . $this->showError($android_res->data->error_code) . '|苹果:' . $this->showError($ios_res->data->error_code);
             }
         }
-        if($ios_res->ret == 'SUCCESS' || $android_res->ret == 'SUCCESS'){
+        if ($ios_res->ret == 'SUCCESS' || $android_res->ret == 'SUCCESS') {
             if ($production_mode) {
                 return true;
             } else {
@@ -144,13 +138,7 @@ class Umeng {
         $android_brocast->setPredefinedKeyValue('type', 'customizedcast'); // 类型为单播
         $android_brocast->setExtraField("extra", $extra); // 安卓额外内容
         $android_res = json_decode($android_brocast->send());
-        if ($android_res->ret == 'FAIL') {
-            if ($production_mode) {
-                return false;
-            } else {
-                return '安卓:' . $this->showError($android_res->data->error_code);
-            }
-        }
+
         // ios推送
         $ios_brocast = new \IOSNotification();
         $ios_brocast->setAppMasterSecret($this->ios_appMasterSecret);
@@ -163,14 +151,14 @@ class Umeng {
         $ios_brocast->setPredefinedKeyValue("sound", $sound); // ios声音
         $ios_brocast->setCustomizedField("extra", $extra); // ios额外内容
         $ios_res = json_decode($ios_brocast->send());
-        if ($ios_res->ret == 'FAIL') {
+        if ($ios_res->ret == 'FAIL' && $android_res->ret == 'FAIL') {
             if ($production_mode) {
                 return false;
             } else {
-                return '苹果:' . $this->showError($ios_res->data->error_code);
+                return '安卓:' . $this->showError($android_res->data->error_code) . '|苹果:' . $this->showError($ios_res->data->error_code);
             }
         }
-        if($ios_res->ret == 'SUCCESS' || $android_res->ret == 'SUCCESS'){
+        if ($ios_res->ret == 'SUCCESS' || $android_res->ret == 'SUCCESS') {
             if ($production_mode) {
                 return true;
             } else {
@@ -198,6 +186,8 @@ class Umeng {
      */
     function sendFile($title, $content, $ticker, $file, $alias_type, $production_mode = 'true', $extra = '', $badge = '', $after_open = '', $sound = '') {
         // 安卓推送
+        $android_data = '';
+        $android_res = '';
         $android_brocast = new \AndroidNotification();
         $android_brocast->setAppMasterSecret($this->android_appMasterSecret);
         $android_brocast->setPredefinedKeyValue("appkey", $this->android_appkey);
@@ -216,21 +206,10 @@ class Umeng {
         if ($android_data->ret == 'SUCCESS') {
             $android_brocast->setPredefinedKeyValue("file_id", $android_data->data->file_id); // 设置上传的file_id]
             $android_res = json_decode($android_brocast->send());
-            if ($android_res->ret == 'FAIL') {
-                if ($production_mode) {
-                    return false;
-                } else {
-                    return '安卓:' . $this->showError($android_res->data->error_code);
-                }
-            }
-        } else {
-            if ($production_mode) {
-                return false;
-            } else {
-                return '安卓:' . $this->showError($android_res->data->error_code);
-            }
         }
         // ios推送
+        $ios_data = '';
+        $ios_res = '';
         $ios_brocast = new \IOSNotification();
         $ios_brocast->setAppMasterSecret($this->ios_appMasterSecret);
         $ios_brocast->setPredefinedKeyValue("appkey", $this->ios_appkey);
@@ -246,21 +225,23 @@ class Umeng {
         if ($ios_data->ret == 'SUCCESS') {
             $ios_brocast->setPredefinedKeyValue("file_id", $ios_data->data->file_id); // 设置上传的file_id
             $ios_res = json_decode($ios_brocast->send());
-            if ($ios_res->ret == 'FAIL') {
-                if ($production_mode) {
-                    return false;
-                } else {
-                    return '苹果:' . $this->showError($ios_res->data->error_code);
-                }
-            }
-        } else {
+        }
+        
+        if ($ios_data->ret == 'FAIL' && $android_data->ret == 'FAIL') {
             if ($production_mode) {
                 return false;
             } else {
-                return '苹果:' . $this->showError($ios_res->data->error_code);
+                return '安卓:' . $this->showError($android_res->data->error_code) . '|苹果:' . $this->showError($ios_res->data->error_code);
             }
         }
-        if($ios_res->ret == 'SUCCESS' || $android_res->ret == 'SUCCESS'){
+        if ($ios_res->ret == 'FAIL' && $android_res->ret == 'FAIL') {
+            if ($production_mode) {
+                return false;
+            } else {
+                return '安卓:' . $this->showError($android_res->data->error_code) . '|苹果:' . $this->showError($ios_res->data->error_code);
+            }
+        }
+        if ($ios_res->ret == 'SUCCESS' || $android_res->ret == 'SUCCESS') {
             if ($production_mode) {
                 return true;
             } else {
@@ -294,6 +275,7 @@ class Umeng {
         curl_close($ch);
         return $result;
     }
+
     /**
      * 任务状态查询
      * @param string $task_id 发送信息成功后返回的task_id
