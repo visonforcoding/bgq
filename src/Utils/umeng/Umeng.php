@@ -98,7 +98,7 @@ class Umeng {
                 return '苹果:' . $this->showError($ios_res->data->error_code);
             }
         }
-        if($ios_res->ret == 'SUCCESS' && $android_res->ret == 'SUCCESS'){
+        if($ios_res->ret == 'SUCCESS' || $android_res->ret == 'SUCCESS'){
             if ($production_mode) {
                 return true;
             } else {
@@ -170,7 +170,7 @@ class Umeng {
                 return '苹果:' . $this->showError($ios_res->data->error_code);
             }
         }
-        if($ios_res->ret == 'SUCCESS' && $android_res->ret == 'SUCCESS'){
+        if($ios_res->ret == 'SUCCESS' || $android_res->ret == 'SUCCESS'){
             if ($production_mode) {
                 return true;
             } else {
@@ -260,7 +260,7 @@ class Umeng {
                 return '苹果:' . $this->showError($ios_res->data->error_code);
             }
         }
-        if($ios_res->ret == 'SUCCESS' && $android_res->ret == 'SUCCESS'){
+        if($ios_res->ret == 'SUCCESS' || $android_res->ret == 'SUCCESS'){
             if ($production_mode) {
                 return true;
             } else {
