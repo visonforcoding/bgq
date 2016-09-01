@@ -34,7 +34,7 @@ class NewsController extends AppController {
                             return $q->where(['enabled'=>1]);
                         }, 'Newstags'])
                         ->select(['id', 'source', 'title', 'user_id', 'publish_time', 'thumb', 'comment_nums', 'praise_nums', 'summary', 'Users.id', 'Users.truename'])
-                        ->where(['News.status'=>1])
+                        ->where(['News.status'=>1, 'News.is_delete'=>0])
                         ->page($page, $this->newslimit)
 //                        ->order(['News.publish_time'=>'desc'])->toArray();
                         ->order(['News.is_top'=>'desc', 'News.publish_time'=>'desc'])->toArray();
@@ -230,7 +230,8 @@ class NewsController extends AppController {
                 ->News
                 ->find()
                 ->where(['title LIKE' => '%' . $data['keyword'] . '%'])
-                ->Orwhere(['body LIKE' => '%' . $data['keyword'] . '%']);
+                ->Orwhere(['body LIKE' => '%' . $data['keyword'] . '%'])
+                ->andWhere(['News.is_delete'=>0]);
         if ($newstag_id) {
             $res = $res->matching(
                 'Newstags', function($q)use($newstag_id) {
@@ -241,7 +242,9 @@ class NewsController extends AppController {
             $res = $res->contain(['Newstags']);
         }
         $res = $res->orderDesc('News.create_time'); // 默认按时间倒序排列
-        $res = $res->contain(['Users'])
+        $res = $res->contain(['Users'=>function($q){
+                    return $q->where(['Users.enabled'=>1]);
+                }])
                 ->limit($this->newslimit)
                 ->toArray();
         if ($res!==false) {
