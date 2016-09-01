@@ -7,7 +7,7 @@
         <div class="table-bar form-inline">
             <div class="form-group">
                 <label for="keywords">关键字</label>
-                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="用户姓名">
+                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="用户姓名、内容">
             </div>
             <div class="form-group">
                 <label for="keywords">状态</label>

@@ -12,7 +12,7 @@
                 <label for="keywords">类型</label>
                 <select class="form-control" name="type" id="keywords">
                     <option value=''>全部</option>
-<?php foreach ($types as $key => $type): ?>
+                    <?php foreach ($types as $key => $type): ?>
                         <option value="<?= $key ?>"><?= $type ?></option>
                     <?php endforeach; ?>
                 </select>
@@ -54,10 +54,13 @@
                                     var types = {'1': '资讯', '2': '活动', '3': '大咖'};
                                     return types[cellvalue];
                                 }},
-                            {name: 'url', editable: true, align: 'center'},
+                            {name: 'url', editable: true, align: 'center',formatter:function(cell,opt,row){
+                                    var s  = '<a  data-toggle="tooltip" title="预览" onClick="show(' +" ' "+cell+" ' " + ');" class="grid-btn ">'+cell+'</a>';
+                                    return s;
+                            }},
                             {name: 'remark', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
-                            {name: 'actionBtn',align:'center', viewable: false, sortable: false, formatter: actionFormatter}],
+                            {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: 30,
                         rowList: [10, 20, 30],
@@ -177,6 +180,18 @@
                         content: url//iframe的url
                     });
                 }
+              function show(id) {
+                    url = id;
+                    layer.open({
+                        type: 2,
+                        title: '预览',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['375px', '667px'],
+                        skin: 'layui-layer-lan', //没有背景色
+                        content: url
+                    });
+                }    
 </script>
 <?php
 $this->end();

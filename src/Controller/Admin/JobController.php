@@ -119,7 +119,7 @@ class JobController extends AppController {
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where['or'] = [['company like' => "%$keywords%"], ['position like' => "%$keywords%"]];
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
@@ -160,14 +160,14 @@ class JobController extends AppController {
      * @return csv 
      */
     public function exportExcel() {
-        $sort = $this->request->data('sidx');
-        $order = $this->request->data('sord');
-        $keywords = $this->request->data('keywords');
-        $begin_time = $this->request->data('begin_time');
-        $end_time = $this->request->data('end_time');
+        $sort = $this->request->query('sidx');
+        $order = $this->request->query('sord');
+        $keywords = $this->request->query('keywords');
+        $begin_time = $this->request->query('begin_time');
+        $end_time = $this->request->query('end_time');
         $where = [];
-        if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+       if (!empty($keywords)) {
+            $where['or'] = [['company like' => "%$keywords%"], ['position like' => "%$keywords%"]];
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
@@ -175,10 +175,10 @@ class JobController extends AppController {
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
         $Table = $this->Job;
-        $column = ['公司', '负责人id', '联系方式', '分成方式', '招聘职位', '薪资范围', '工作地点', '招聘简介', 'create_time', 'update_time'];
+        $column = ['公司',  '联系方式', '分成方式', '招聘职位', '薪资范围', '工作地点',  '录入时间'];
         $query = $Table->find();
         $query->hydrate(false);
-        $query->select(['company', 'admin_id', 'contact', 'earnings', 'position', 'salary', 'address', 'summary', 'create_time', 'update_time']);
+        $query->select(['company', 'contact', 'earnings', 'position', 'salary', 'address', 'create_time']);
         if (!empty($where)) {
             $query->where($where);
         }
@@ -187,8 +187,9 @@ class JobController extends AppController {
         }
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = 'Job_' . date('Y-m-d') . '.csv';
-        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+        $filename = '招聘信息_' . date('Y-m-d') . '.xls';
+        $this->loadComponent('Export');
+        $this->Export->phpexcelExport($filename, $column, $res);
     }
     
     /**

@@ -16,7 +16,7 @@
                 <label for="must_check">是否需要审核</label>
                 <select name="must_check" class="form-control">
                     <option value="">全部</option>
-                    <option value="1"<?php if(isset($do)): ?>selected="selected"<?php endif;?>>需要</option>
+                    <option value="1"<?php if (isset($do)): ?>selected="selected"<?php endif; ?>>需要</option>
                     <option value="0">不需要</option>
                 </select>
             </div>
@@ -25,7 +25,7 @@
                 <select name="is_check" class="form-control">
                     <option value="">全部</option>
                     <option value="1">已审核</option>
-                    <option value="0" <?php if(isset($do)): ?>selected="selected"<?php endif;?>>未审核</option>
+                    <option value="0" <?php if (isset($do)): ?>selected="selected"<?php endif; ?>>未审核</option>
                 </select>
             </div>
             <div class="form-group">
@@ -46,6 +46,11 @@
             <a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>
         </div>
     </form>
+    <div>
+        <button type="button" class="btn btn-primary">报名数<span class="label label-badge"><?=$apply_nums?></span></button>
+        <button type="button" class="btn btn-warning">审核通过数<span class="label label-badge"><?=$check_nums?></span></button>
+        <button type="button" class="btn btn-danger">付款数<span class="label label-badge"><?=$pay_nums?></span></button>
+    </div>
     <table id="list"><tr><td></td></tr></table> 
     <div id="pager"></div> 
 </div>
@@ -59,27 +64,26 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/activityapply/getDataList/<?= $id ?><?php if(isset($do)): ?>?do=check<?php endif;?>",
+                        url: "/admin/activityapply/getDataList/<?= $id ?><?php if (isset($do)): ?>?do=check<?php endif; ?>",
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户','公司','职位', '活动', '提交时间','是否需审核', '审核状态', '报名状态','付款','审核人','是否置顶', '是否签到', '操作'],
+                                ['用户', '公司', '职位', '提交时间', '是否需审核', '审核状态', '报名状态', '付款', '审核人', '是否置顶', '是否签到', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'user.company', editable: true, align: 'center'},
                             {name: 'user.position', editable: true, align: 'center'},
-                            {name: 'activity.title', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
-                            {name: 'activity.must_check', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
-                                    if(cellvalue=='1'){
+                            {name: 'activity.must_check', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
+                                    if (cellvalue == '1') {
                                         return '是';
-                                    }else{
+                                    } else {
                                         return '否';
                                     }
-                            }},
-                            {name: 'is_check', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
-                                    if(rowObject.activity.must_check=='1'){
-                                        switch(cellvalue){
+                                }},
+                            {name: 'is_check', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
+                                    if (rowObject.activity.must_check == '1') {
+                                        switch (cellvalue) {
                                             case 0:
                                                 return '未审核';
                                             case 1:
@@ -87,24 +91,24 @@
                                             case 2:
                                                 return '审核不通过';
                                         }
-                                    }else{
+                                    } else {
                                         return '无需审核'
                                     }
-                            }},
-                            {name: 'is_pass', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
-                                    if(cellvalue){
-                                       return '通过';
-                                    }else{
+                                }},
+                            {name: 'is_pass', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
+                                    if (cellvalue) {
+                                        return '通过';
+                                    } else {
                                         return '未通过';
                                     }
-                            }},
-                            {name: 'activity.apply_fee', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
-                                if(rowObject.is_pass&&cellvalue>0){
-                                    return '已付款';
-                                }else{
-                                    return '未付款';
-                                }
-                            }},
+                                }},
+                            {name: 'activity.apply_fee', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
+                                    if (rowObject.is_pass && cellvalue > 0) {
+                                        return '已付款';
+                                    } else {
+                                        return '未付款';
+                                    }
+                                }},
                             {name: 'check_man', editable: true, align: 'center'},
                             {name: 'is_top', editable: true, align: 'center', formatter: topFormatter},
                             {name: 'is_sign', editable: true, align: 'center', formatter: signFormatter},
@@ -168,12 +172,12 @@
 
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = ''; // '<a title="删除" href="javascript:void(0)" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-                    if (rowObject.is_top == 0){
+                    if (rowObject.is_top == 0) {
                         response += '<a title="置顶" href="javascript:void(0)" onClick="topit(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">置顶</a>';
-                    } else{
+                    } else {
                         response += '<a title="取消置顶" href="javascript:void(0)" onClick="untop(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">取消置顶</a>';
                     }
-                   if(rowObject.activity.must_check==1&&rowObject.is_check ==0){
+                    if (rowObject.activity.must_check == 1 && rowObject.is_check == 0) {
                         response += '<a title="审核通过" onClick="check(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
                         response += '<a title="审核不通过" onClick="uncheck(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-remove-circle"></i> </a>';
                     }
@@ -257,7 +261,7 @@
                                 if (res.status) {
                                     layer.msg(res.msg);
                                     setTimeout(function () {
-                                         $('#list').trigger('reloadGrid');
+                                        $('#list').trigger('reloadGrid');
                                     }, 2000);
                                 }
                             }
@@ -278,7 +282,7 @@
                                 if (res.status) {
                                     layer.msg(res.msg);
                                     setTimeout(function () {
-                                         $('#list').trigger('reloadGrid');
+                                        $('#list').trigger('reloadGrid');
                                     }, 2000);
                                 }
                             }

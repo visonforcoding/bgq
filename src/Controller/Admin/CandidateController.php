@@ -182,10 +182,11 @@ class CandidateController extends AppController {
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
         $Table = $this->Candidate;
-        $column = ['招聘信息id', '姓名', '生日', '电话', '邮箱', '地址', '工作经历', '教育经历', '期望薪水', '创建时间'];
+        $column = ['应聘公司','应聘职位', '姓名', '生日', '电话', '邮箱', '地址', '工作经历', '教育经历', '期望薪水', '创建时间'];
         $query = $Table->find();
+        $query->contain(['Job']);
         $query->hydrate(false);
-        $query->select(['job_id', 'truename', 'birthday', 'phone', 'email', 'address', 'career', 'education', 'salary', 'create_time']);
+        $query->select(['company'=>'Job.company','position'=>'Job.position', 'truename', 'birthday', 'phone', 'email', 'address', 'career', 'education', 'salary', 'create_time']);
         if (!empty($where)) {
             $query->where($where);
         }
@@ -194,8 +195,9 @@ class CandidateController extends AppController {
         }
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = 'Candidate_' . date('Y-m-d') . '.csv';
-        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+        $filename = '应聘数据' . date('Y-m-d') . '.xls';
+          $this->loadComponent('Export');
+        $this->Export->phpexcelExport($filename, $column, $res);
     }
 
 }

@@ -21,7 +21,7 @@ class ActivityController extends AppController {
      */
     public function index() {
         $series = \Cake\Core\Configure::read(self::SERIES_CONF);
-        $domain = $this->request->env('SERVER_NAME');
+        $domain = $this->request->scheme().'://'.$this->request->env('SERVER_NAME');
         $this->set(compact('domain'));
         $this->set('activity', $this->Activity);
         $this->set([
@@ -134,7 +134,7 @@ class ActivityController extends AppController {
         if ($this->request->is('post')) {
             $activity = $this->Activity->get($id);
             $activity->is_del = 1;
-            $activity->status = 0;
+            $activity->status = 0;  //活动禁用
             if ($this->Activity->save($activity)) {
                 return $this->Util->ajaxReturn(true, '删除成功');
             } else {
@@ -235,10 +235,10 @@ class ActivityController extends AppController {
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
         $Table = $this->Activity;
-        $column = ['作者id', '标签id', '主办单位', '活动名称', '活动时间（3.2~4.1）', '地点', '规模', '阅读数', '点赞数', '评论数', '封面', '活动内容', '摘要', '创建时间', '更新时间'];
+        $column = [ '主办单位', '活动名称', '活动时间', '地点', '规模','报名费用', '阅读数', '点赞数', '评论数',  '创建时间'];
         $query = $Table->find();
         $query->hydrate(false);
-        $query->select(['admin_id', 'industry_id', 'company', 'title', 'time', 'address', 'scale', 'read_nums', 'praise_nums', 'comment_nums', 'cover', 'body', 'summary', 'create_time', 'update_time']);
+        $query->select(['company', 'title', 'time', 'address', 'scale','apply_fee' ,'read_nums', 'praise_nums', 'comment_nums',  'create_time']);
         if (!empty($where)) {
             $query->where($where);
         }
@@ -247,8 +247,9 @@ class ActivityController extends AppController {
         }
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = 'Activity_' . date('Y-m-d') . '.csv';
-        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+        $filename = '活动数据_' . date('Y-m-d') . '.xls';
+        $this->loadComponent('Export');
+        $this->Export->phpexcelExport($filename, $column, $res);
     }
 
     /**

@@ -45,7 +45,10 @@ class MenuCell extends Cell {
         $this->set('breadSecond', $this->_breadSecond);
     }
 
-    public function title() {
+    public function title($header=null) {
+        if(isset($header)){
+            $this->_pageTitle = $header;
+        }
         $this->set('pageTitle', $this->_pageTitle);
     }
 
