@@ -143,6 +143,8 @@ class Umeng {
         $ios_brocast = new \IOSNotification();
         $ios_brocast->setAppMasterSecret($this->ios_appMasterSecret);
         $ios_brocast->setPredefinedKeyValue("appkey", $this->ios_appkey);
+        $ios_brocast->setPredefinedKeyValue("alias", $alias); // 用户自定义标识
+        $ios_brocast->setPredefinedKeyValue("alias_type", $alias_type); // 用户类型
         $ios_brocast->setPredefinedKeyValue("timestamp", $this->timestamp); // 时间戳
         $ios_brocast->setPredefinedKeyValue("production_mode", $production_mode); // 生产环境
         $ios_brocast->setPredefinedKeyValue('type', 'customizedcast'); // 类型为单播
@@ -214,6 +216,7 @@ class Umeng {
         $ios_brocast->setAppMasterSecret($this->ios_appMasterSecret);
         $ios_brocast->setPredefinedKeyValue("appkey", $this->ios_appkey);
         $ios_brocast->setPredefinedKeyValue("timestamp", $this->timestamp); // 时间戳
+        $ios_brocast->setPredefinedKeyValue('alias_type', $alias_type); // 用户类型
         $ios_brocast->setPredefinedKeyValue("production_mode", $production_mode); // 生产环境
         $ios_brocast->setPredefinedKeyValue('type', 'customizedcast'); // 类型为群播
         $ios_brocast->setPredefinedKeyValue("alert", $title); // ios提示信息
