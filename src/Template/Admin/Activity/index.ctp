@@ -152,7 +152,7 @@
                     clip = new ZeroClipboard($('.copy'));
                     console.log('可以复制了');
                     clip.on('copy', function (event) {
-                        clip.setData('text/plain', '/activity/view/' + event.target.id);
+                        clip.setData('text/plain', '/activity/details/' + event.target.id);
                     });
                     clip.on("aftercopy", function (event) {
                         alert("复制了: " + event.data["text/plain"]);
