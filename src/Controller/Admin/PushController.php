@@ -154,16 +154,16 @@ class PushController extends AppController {
     
     public function test(){
         $this->loadComponent('Push');
-        $UserTable = \Cake\ORM\TableRegistry::get('user');
-        $user = $UserTable->find()->where(['phone'=>'13560627825'])->toArray();
-        $a = '';
-        foreach($user as $k=>$v){
-            $a .= $v['user_token']. "\n";
-        }
-        $res = $this->Push->sendFile('2', '3', '4', $a, 'BGB', false);
+//        $UserTable = \Cake\ORM\TableRegistry::get('user');
+//        $user = $UserTable->find()->where(['phone'=>'13560627825'])->toArray();
+//        $a = '';
+//        foreach($user as $k=>$v){
+//            $a .= $v['user_token']. "\n";
+//        }
+//        $res = $this->Push->sendFile('2', '3', '4', $a, 'BGB', false);
 //        $res = $this->Push->sendAll('1', '2', '3');
         
-//        $res = $this->Push->sendAlias('ca1c217f4f351cb2bff7', '1', '2', '3');
+        $res = $this->Push->sendAlias('ca1c217f4f351cb2bff7', '1', '2', '3');
         echo $a;
         echo $res;die;
     }
