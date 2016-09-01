@@ -43,7 +43,7 @@
                     <?= $this->element('audiojs', ['media' => $news->mp3,'title'=>$news->mp3_title]) ?>
                     <?php endif;?>
                 <?php endif; ?>
-                <p><?= $news->body ?></p>
+                <p><?= str_replace(["<p><br/></p>",'<br/>', '<br>'], '<div class="brline"></div>', $news->body) ?></p>
                 <?php if ($news->is_media != 0 && $news->media_pos ==2): ?>
                     <?php if($news->is_media==1): ?>
                     <?= $this->element('videojs', ['media' => $news->video,'poster'=>$news->video_cover]) ?>
