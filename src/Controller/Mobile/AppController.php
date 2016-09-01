@@ -73,8 +73,8 @@ class AppController extends Controller {
             $this->loadComponent('Wx');
             $wxConfig = $this->Wx->wxconfig(['onMenuShareTimeline', 'onMenuShareAppMessage', 'scanQRCode', 'chooseImage', 'uploadImage'], false);
         }
-         $isLogin = 'no';
-        if($this->user){
+        $isLogin = 'no';
+        if ($this->user) {
             $isLogin = 'yes';
         }
         $this->set(compact('isLogin'));
@@ -89,6 +89,7 @@ class AppController extends Controller {
             //debug($this->request->cookie('login_token'));
         }
         $this->wxBaseLogin();
+        $this->baseLogin();
         return $this->checkLogin();
     }
 
@@ -105,6 +106,30 @@ class AppController extends Controller {
             return true;
         }
         return $this->handCheckLogin();
+    }
+
+    /**
+     * 
+     */
+    protected function baseLogin() {
+        $user = $this->request->session()->check('User.mobile');
+        $url = '/' . $this->request->url;
+        if ($this->request->isLemon() && $this->request->cookie('token_uin') && !$user) {
+            //如果是APP，获取user_token 自动登录
+            $user_token = $this->request->cookie('token_uin');
+            $UserTable = \Cake\ORM\TableRegistry::get('User');
+            $user = $UserTable->find()->where(['user_token' => $open_id, 'enabled' => 1, 'is_del' => 0])->first();
+            if ($user) {
+                $this->request->session()->write('User.mobile', $user);
+                $this->response->cookie([
+                    'name' => 'login_stauts',
+                    'value' => 'yes',
+                    'path' => '/',
+                    'expire' => time() + 1200
+                ]);
+                $this->user = $this->request->session()->read('User.mobile');
+            }
+        }
     }
 
     /**
@@ -183,8 +208,8 @@ class AppController extends Controller {
                             'path' => '/',
                             'expire' => time() + 1200
                         ]);
-                    }else{
-                        $this->request->session()->write('Login.wxinfo',$res);
+                    } else {
+                        $this->request->session()->write('Login.wxinfo', $res);
                     }
                 }
                 //如果是微信 静默授权页获取openid
