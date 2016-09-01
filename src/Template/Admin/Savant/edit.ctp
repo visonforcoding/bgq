@@ -225,7 +225,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">资源优势</label>
+                    <label class="col-md-2 control-label">擅长话题</label>
                     <div class="col-md-8">
                         <input name="zyys" class="form-control" type="text" value="<?= $user->savant->zyys ?>"/>
                     </div>
