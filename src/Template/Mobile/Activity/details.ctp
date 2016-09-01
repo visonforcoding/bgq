@@ -11,14 +11,15 @@
     <div class="wraper" id="activity_detail" >
         <section class="newscon-box a-detail">
             <h3><?= $activity->title; ?><time class='a_title_time'><?= $activity->create_time->format('Y-m-d H:i:s'); ?></time></h3>
-            <div> <img src="<?= $activity->cover; ?>"/></div>
-            <p>主办单位：<?= $activity->company; ?> 
-                <?php if ($activity->org_key && $activity->org_val): ?>
-                    <br /><?= $activity->org_key ?>：<?= $activity->org_val; ?>
-                <?php endif; ?>
-                <br />时间：<?= $activity->time->i18nFormat('yyyy-MM-dd'); ?>
-                <br />地点：<?= $activity->address; ?>
-                <br />规模：<?= $activity->scale; ?>人</p>
+            <div class='innercon'> <img src="<?= $activity->cover; ?>"/>
+                <p>主办单位：<?= $activity->company; ?> 
+                    <?php if ($activity->org_key && $activity->org_val): ?>
+                        <br /><?= $activity->org_key ?>：<?= $activity->org_val; ?>
+                    <?php endif; ?>
+                    <br />时间：<?= $activity->time->i18nFormat('yyyy-MM-dd'); ?>
+                    <br />地点：<?= $activity->address; ?>
+                    <br />规模：<?= $activity->scale; ?>人</p>
+            </div>
             <div class="a-other-info innercon ac">
                 <a><?= $activity->region->name; ?></a>
                 <?php foreach ($activity->industries as $k => $v): ?>
