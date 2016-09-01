@@ -258,7 +258,7 @@
     // 分享设置
     window.shareConfig.link = 'http://m.chinamatop.com/activity/details/<?= $activity->id ?>?share=1';
     window.shareConfig.title = '<?= $activity->title ?>';
-    var share_desc = '<?= str_replace("\r\n", '', $activity->summary) ?>';
+    var share_desc = '<?= str_replace(["\r\n", "\r", "\n"], '', $activity->summary) ?>';
     share_desc && (window.shareConfig.desc = share_desc);
     LEMON.show.shareIco();
     if ($.util.isAPP && document.URL.indexOf('/enroll') != -1) {
