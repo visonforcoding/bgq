@@ -34,22 +34,24 @@
                 <?php endif; ?>
                 <time><?= $news->publish_time->i18nFormat('yyyy-MM-dd HH:mm:ss') ?></time>
             </h1>
-            <img src="<?= $news->cover ?>"/>
-            <?php if ($news->is_media != 0 && $news->media_pos ==1): ?>
-                <?php if($news->is_media ==1): ?>
-                <?= $this->element('videojs', ['media' => $news->video,'poster'=>$news->video_cover]) ?>
-                <?php else:?>
-                <?= $this->element('audiojs', ['media' => $news->mp3,'title'=>$news->mp3_title]) ?>
-                <?php endif;?>
-            <?php endif; ?>
-            <p><?= $news->body ?></p>
-            <?php if ($news->is_media != 0 && $news->media_pos ==2): ?>
-                <?php if($news->is_media==1): ?>
-                <?= $this->element('videojs', ['media' => $news->video,'poster'=>$news->video_cover]) ?>
-                <?php else:?>
-                <?= $this->element('audiojs', ['media' => $news->mp3,'title'=>$news->mp3_title]) ?>
-                <?php endif;?>
-            <?php endif; ?>
+            <div class="body-con innercon">
+                <img src="<?= $news->cover ?>"/>
+                <?php if ($news->is_media != 0 && $news->media_pos ==1): ?>
+                    <?php if($news->is_media ==1): ?>
+                    <?= $this->element('videojs', ['media' => $news->video,'poster'=>$news->video_cover]) ?>
+                    <?php else:?>
+                    <?= $this->element('audiojs', ['media' => $news->mp3,'title'=>$news->mp3_title]) ?>
+                    <?php endif;?>
+                <?php endif; ?>
+                <p><?= $news->body ?></p>
+                <?php if ($news->is_media != 0 && $news->media_pos ==2): ?>
+                    <?php if($news->is_media==1): ?>
+                    <?= $this->element('videojs', ['media' => $news->video,'poster'=>$news->video_cover]) ?>
+                    <?php else:?>
+                    <?= $this->element('audiojs', ['media' => $news->mp3,'title'=>$news->mp3_title]) ?>
+                    <?php endif;?>
+                <?php endif; ?>
+            </div>
             <div class="con-bottom clearfix pd20">
                 <!--阅读数-->
                 <span class="readnums" >
