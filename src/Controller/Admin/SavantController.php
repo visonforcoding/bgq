@@ -196,10 +196,12 @@ class SavantController extends AppController {
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
         $Table = $this->Savant;
-        $column = ['user_id', '推荐次数', '封面', '项目经验', '资源优势', '简洁'];
+        $column = ['姓名','公司','职位','手机号' ,'约见次数','推荐次数','注册时间'];
         $query = $Table->find();
+        $query->contain(['Users']);
         $query->hydrate(false);
-        $query->select(['user_id', 'reco_nums', 'cover', 'xmjy', 'zyys', 'summary']);
+        $query->select(['user_truename'=>'Users.truename','user_company'=>'Users.company','user_position'=>'Users.position',
+            'user_phone'=>'Users.phone','meet_nums'=>'Users.meet_nums','reco_nums'=>'reco_nums','create_time'=>'Users.create_time' ]);
         if (!empty($where)) {
             $query->where($where);
         }
@@ -208,8 +210,9 @@ class SavantController extends AppController {
         }
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = 'Savant_' . date('Y-m-d') . '.csv';
-        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+        $filename = '会员数据_' . date('Y-m-d') . '.xls';
+        $this->loadComponent('Export');
+        $this->Export->phpexcelExport($filename, $column, $res);
     }
 
     /**

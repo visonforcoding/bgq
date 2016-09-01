@@ -177,10 +177,10 @@ class ActivityNeedController extends AppController {
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
         $Table = $this->Activityneed;
-        $column = ['user_id', '姓名', '公司', '职位', '活动', '内容', '创建时间', '修改时间'];
+        $column = [ '姓名', '公司', '职位', '活动', '内容', '提交时间',];
         $query = $Table->find();
         $query->hydrate(false);
-        $query->select(['user_id', 'truename', 'company', 'position', 'title', 'body', 'create_time', 'update_time']);
+        $query->select(['truename', 'company', 'position', 'title', 'body', 'create_time']);
         if (!empty($where)) {
             $query->where($where);
         }
@@ -189,8 +189,9 @@ class ActivityNeedController extends AppController {
         }
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = 'Activityneed_' . date('Y-m-d') . '.csv';
-        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+        $filename = '活动需求_' . date('Y-m-d') . '.xls';
+        $this->loadComponent('Export');
+        $this->Export->phpexcelExport($filename, $column, $res);
     }
 
 }

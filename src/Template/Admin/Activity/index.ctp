@@ -35,7 +35,6 @@
             <a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>
         </div>
     </form>
-    <?= $this->element('actiondesc'); ?>
     <table id="list"><tr><td></td></tr></table> 
     <div id="pager"></div> 
 </div>
@@ -80,7 +79,8 @@
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'company', editable: true, align: 'center'},
                             {name: 'title', editable: true, align: 'center',formatter:function(cell,opt,row){
-                                    return '<a  data-toggle="tooltip" title="这是提示消息内容" onClick="showActivity(' +" ' "+row.id+" ' " + ');" class="grid-btn ">'+cell+'</a>';
+                                     var s  = '<a  data-toggle="tooltip" title="这是提示消息内容" onClick="showActivity(' +" ' "+row.id+" ' " + ');" class="grid-btn ">'+cell+'</a>';
+                                     return s;
                             }},
                             {name: 'time', editable: true, align: 'center'},
                             {name: 'must_check', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
@@ -115,12 +115,19 @@
                             }},
                             {name: 'apply_fee', editable: true, align: 'center'},
                             {name: 'status', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
+                                    var s;
                                     switch (cellvalue) {
                                         case 1:
-                                            return '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-check-circle"></i> 上线</button>';
+                                            s = '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-check-circle"></i> 上线</button>';
+                                            break;
                                         case 0:
-                                            return '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-remove-circle"></i><i style="color:red"> 下线</i></button>';
+                                            s = '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-remove-circle"></i><i style="color:red"> 下线</i></button>';
+                                            break;
                                     }
+                                    if(rowObject.is_top){
+                                       s += '<span class="notice">(置顶)<span>'  
+                                     }
+                                     return s;
                             }},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'actionBtn', width: '200%', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
@@ -152,10 +159,10 @@
                     clip = new ZeroClipboard($('.copy'));
                     console.log('可以复制了');
                     clip.on('copy', function (event) {
-                        clip.setData('text/plain', '/activity/details/' + event.target.id);
+                        clip.setData('text/plain', '<?=$domain?>'+'/activity/details/' + event.target.id);
                     });
                     clip.on("aftercopy", function (event) {
-                        alert("复制了: " + event.data["text/plain"]);
+                        layer.msg("复制了: " + event.data["text/plain"]);
                     });
                 }, 1000);
                 function crowdFormatter(cellvalue, options, rowObject) {
@@ -176,7 +183,7 @@
                     response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
 //                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="编辑" href="/admin/activity/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
-                    response += '<a title="复制" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
+                    response += '<a title="复制链接" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
                     if (rowObject.is_top == 0 ) {
                         response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
                     } else if (rowObject.is_top == 1) {
@@ -349,7 +356,7 @@
 
                 function doView(id) {
                     //查看明细
-                    url = '/admin/activity/view/' + id;
+                    url = '/admin/activity/view/' + id+'?from=back';
                     layer.open({
                         type: 2,
                         title: '查看详情',

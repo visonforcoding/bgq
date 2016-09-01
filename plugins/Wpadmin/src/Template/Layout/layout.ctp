@@ -63,7 +63,11 @@
             </div>
             <div id="page-content">
                 <div class="page-header" >
+                    <?php if(isset($PageHeader)):?>
+                    <?= $this->cell('Wpadmin.Menu::title',[$PageHeader]) ?>
+                    <?php else:?>
                     <?= $this->cell('Wpadmin.Menu::title') ?>
+                    <?php endif;?>
                 </div>
                 <div class="page-main" style="margin-top: 10px;">
                     <?php if (isset($NO_PERMISSION)): ?>

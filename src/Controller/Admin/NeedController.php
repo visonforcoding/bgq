@@ -140,7 +140,7 @@ class NeedController extends AppController {
                 ['User.`truename` like' => "%$keywords%"],
                 ['msg like' => "%$keywords%"],
             ]; //搜索关键字为用户名和内容
-            $where_user = 'and u.truename like '."'%$keywords%'";
+            $where_user = 'and u.truename like '."'%$keywords%' or msg like '%$keywords%'";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));

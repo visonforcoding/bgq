@@ -46,7 +46,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['作者', '标题', '行业标签','资讯标签', '阅读数', '点赞数', '评论数', '状态','置顶' ,'创建时间', '更新时间', '操作'],
+                                ['作者', '标题', '行业标签','资讯标签', '阅读数', '点赞数', '评论数', '状态' ,'创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     if (!cellvalue) {
@@ -80,20 +80,20 @@
                                     return '<a title="评论详情" onClick="viewComs(' + obj.id + ')">' + cell + '</a>';
                                 }},
                             {name: 'status', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
+                                    var s;
                                     switch (cellvalue) {
                                         case 1:
-                                            return '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-check-circle"></i> 上线</button>';
+                                            s =  '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-check-circle"></i> 上线</button>';
+                                            break;
                                         case 0:
-                                            return '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-remove-circle"></i><i style="color:red"> 下线</i></button>';
+                                            s =  '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-remove-circle"></i><i style="color:red"> 下线</i></button>';
+                                            break;
                                     }
-                                }},
-                            {name: 'is_top', editable: true, align: 'center', formatter: function(cell,opt,row){
-                                    if(cell==1){
-                                        return '<span class="notice">已置顶</span>'
-                                    }else{
-                                        return '<span>未置顶</span>';
+                                    if(rowObject.is_top==1){
+                                        s += '<span class="notice">(已置顶)</span>'
                                     }
-                            }},    
+                                    return s;
+                            }},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
@@ -149,10 +149,10 @@
                     clip = new ZeroClipboard($('.copy'));
                     console.log('可以复制了');
                     clip.on('copy', function (event) {
-                        clip.setData('text/plain', '/news/view/' + event.target.id);
+                        clip.setData('text/plain', '<?=$domain?>'+'/news/view/' + event.target.id);
                     });
                     clip.on("aftercopy", function (event) {
-                        alert("复制了: " + event.data["text/plain"]);
+                        layer.msg("复制了: " + event.data["text/plain"]);
                     });
                 }, 1000);
 
@@ -218,7 +218,7 @@
 
                 function doView(id) {
                     //查看明细
-                    url = '/admin/news/view/' + id;
+                    url = '/admin/news/view/' + id+'?from=back';
                     layer.open({
                         type: 2,
                         title: '查看详情',

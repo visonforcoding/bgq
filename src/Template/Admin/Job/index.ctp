@@ -10,7 +10,7 @@
             </a>
             <div class="form-group">
                 <label for="keywords">关键字</label>
-                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
+                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="职位、公司名">
             </div>
             <div class="form-group">
                 <label for="keywords">时间</label>

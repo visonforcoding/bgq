@@ -204,11 +204,11 @@ class VipController extends AppController {
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
         $Table = $this->User;
-        $column = ['手机号', '姓名', '等级', '身份证', '公司', '职位', '邮箱', '性别', '擅长业务', '常驻城市', '项目经验', '业务能力', '审核意见', '负责人', '审核状态', '创建时间'];
+        $column = ['手机号', '姓名', '等级', '身份证', '公司', '职位', '邮箱', '性别', '擅长业务', '常驻城市', '项目经验', '业务能力',  '负责人', '创建时间'];
         $query = $Table->find();
         $query->contain(['Customer']);
         $query->hydrate(false);
-        $query->select(['phone', 'truename', 'level', 'idcard', 'company', 'position', 'email', 'gender', 'goodat', 'city', 'ymjy', 'ywnl', 'reason', 'Customer.truename', 'status', 'create_time']);
+        $query->select(['phone', 'truename', 'level', 'idcard', 'company', 'position', 'email', 'gender', 'goodat', 'city', 'ymjy', 'ywnl',  'Customer.truename',  'create_time']);
         if (!empty($where)) {
             $query->where($where);
         }
@@ -236,8 +236,9 @@ class VipController extends AppController {
         });
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = '会员_' . date('Y-m-d') . '.csv';
-        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+        $filename = 'vip会员数据_' . date('Y-m-d') . '.xls';
+        $this->loadComponent('Export');
+        $this->Export->phpexcelExport($filename, $column, $res);
     }
 
     /**

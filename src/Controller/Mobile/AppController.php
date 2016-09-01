@@ -109,10 +109,10 @@ class AppController extends Controller {
     }
 
     /**
-     * 
+     * app 的静默(自动)登录
      */
     protected function baseLogin() {
-        \Cake\Log\Log::debug('进入APP登录自动登录','devlog');
+        //\Cake\Log\Log::debug('进入APP登录自动登录','devlog');
         $user = $this->request->session()->check('User.mobile');
         $url = '/' . $this->request->url;
         if ($this->request->isLemon() && $this->request->cookie('token_uin') && !$user) {

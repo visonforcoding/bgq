@@ -17,6 +17,8 @@ class NewsController extends AppController {
      * @return void
      */
     public function index() {
+        $domain = $this->request->scheme().'://'.$this->request->env('SERVER_NAME');
+        $this->set(compact('domain'));
         $this->set('news', $this->News);
     }
 
@@ -119,6 +121,7 @@ class NewsController extends AppController {
         if ($this->request->is('post')) {
             $news = $this->News->get($id);
             $news->is_delete = 1;
+            $news->status = 0;  //状态禁用掉
             if ($this->News->save($news)) {
                 $this->Util->ajaxReturn(true, '删除成功');
             } else {
@@ -177,6 +180,7 @@ class NewsController extends AppController {
 
         $query->limit(intval($rows))
                 ->page(intval($page));
+
         $res = $query->toArray();
         if (empty($res)) {
             $res = array();
@@ -213,20 +217,28 @@ class NewsController extends AppController {
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
         $Table = $this->News;
-        $column = ['作者', '标题', '阅读数', '点赞数', '评论数', '封面', '内容', '摘要', '创建时间', '更新时间'];
+        $column = ['标题', '阅读数', '点赞数', '评论数','摘要','状态', '创建时间'];
         $query = $Table->find();
         $query->hydrate(false);
-        $query->select(['admin_id', 'title', 'read_nums', 'praise_nums', 'comment_nums', 'cover', 'body', 'summary', 'create_time', 'update_time']);
+        $query->select(['title', 'read_nums', 'praise_nums', 'comment_nums', 'summary','status', 'create_time']);
         if (!empty($where)) {
             $query->where($where);
         }
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
+        $query->formatResults(function($items) {
+            return $items->map(function($item) {
+                        //时间语义化转换
+                    $item['status'] = $item['status'] == '1' ? '上线' : '下线';
+                        return $item;
+                    });
+        });
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = 'News_' . date('Y-m-d') . '.csv';
-        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+        $filename = '资讯数据_' . date('Y-m-d') . '.xls';
+        $this->loadComponent('Export');
+        $this->Export->phpexcelExport($filename, $column, $res);
     }
 
     
