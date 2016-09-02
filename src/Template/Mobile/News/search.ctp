@@ -22,7 +22,7 @@
 <?php $this->start('script'); ?>
 <script type="text/html" id="search_tpl">
     <section class="news-list-items" style="padding-bottom: 0.2rem;background: #fff;">
-        <h1><span><img src="{#avatar#}" /></span>{#author#}</h1>
+<!--        <h1><span><img src="{#avatar#}" /></span>{#author#}</h1>-->
         <a href="/news/view/{#id#}" class="newsbox clearfix">
             <div class="sec-news-l">
                 <h3>{#title#}</h3>
