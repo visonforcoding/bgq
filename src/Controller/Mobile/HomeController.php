@@ -466,13 +466,15 @@ class HomeController extends AppController {
             }, 'Usermsgs'=>function($q)use($user_id){
                 return $q->where(['Usermsgs.type'=>4, 'Usermsgs.status'=>0, 'Usermsgs.user_id'=>$user_id]);
             }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
+            
             $savant_books = $BookTable->find()->contain(['Subjects', 'Users' => function($q) {
                 return $q->where(['Users.enabled'=>1])
                         ->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums', 'level']);
             }, 'Usermsgs'=>function($q)use($user_id){
                 return $q->where(['Usermsgs.type'=>4, 'Usermsgs.status'=>0, 'Usermsgs.user_id'=>$user_id]);
             }])->where(['SubjectBook.savant_id =' => $this->user->id])->order('SubjectBook.update_time')->toArray();
-            $unReadBook = $UsermsgTable->find()->where(['type'=>4, 'user_id'=>$this->user->id, 'status'=>0])->contain(['']);
+//        debug($savant_books);die;
+//            $unReadBook = $UsermsgTable->find()->where(['type'=>4, 'user_id'=>$this->user->id, 'status'=>0])->contain(['']);
             $this->set([
                 'pageTitle' => '我的约见',
                 'books' => $books,
