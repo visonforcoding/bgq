@@ -119,6 +119,9 @@ class ActivityController extends AppController {
                 ]);
                 $this->set('user', '');
             }
+            foreach($activity->activitycom as $k=>$v){
+                $activity->activitycom[$k]->user->avatar = getSmallAvatar($v->user->avatar);
+            }
             $activity->read_nums += 1; // 阅读加1
             $this->Activity->save($activity);
             $this->set([
