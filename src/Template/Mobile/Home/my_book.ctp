@@ -21,7 +21,7 @@
     </div>
 <script type="text/html" id="tpl">
     <section class="internet-v-info">
-        <a href="{#link#}">
+        <a link="{#link#}"  id='msgId_{#msg_id#}' msg_id='{#msg_id#}' onclick="read(this);">
             <div class="innercon">
                 <span class="head-img"><img src="{#user_logo#}"/>{#v#}</span>
                 <div class="vipinfo my-meet-info">
@@ -30,8 +30,9 @@
                         <span class="meetnum">{#meet_nums#}</span>
                     </h3>
                     <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
-                    <div class="mark">
-                        <span class='color-items m_sub-title'>约见话题：{#title#}</span>
+                    <div class="mark meet_title_con">
+                        <span class='color-items m_sub_title line1'>约见话题：{#title#}</span>
+                        <em class="meet_tips">{#msg#}{#arrow#}</em>
                     </div>
                 </div>
             </div>
@@ -128,6 +129,9 @@
                         }
                     } else {
                         d.link = '/home/my-book-detail/'+d.id;
+                        d.msg = d.usermsgs.length ? '<span class="l_tips opci"></span>':'';
+                        d.msg_id = d.usermsgs.length ? d.usermsgs.id : '';
+                        d.arrow = '<i class="iconfont fr">&#xe667;</i>';
                     }
                 } else {
                     if(status === '1'){
@@ -139,6 +143,10 @@
                         }
                     } else {
                         d.link = '/home/my-book-savant-detail/'+d.id;
+                        console.log();
+                        d.msg = d.usermsgs.length ? '<span class="l_tips opci"></span>':'';
+                        d.msg_id = d.usermsgs.length ? d.usermsgs[0].id : '';
+                        d.arrow = '<i class="iconfont fr">&#xe667;</i>';
                     }
                 }
                 return d;
@@ -147,10 +155,6 @@
         $('#list').html(book_html[type][status]);
     };
     
-    $('.done').on('tap', function(){
-        
-    });
-
     $('body').on('tap', function (e) {
         var em = e.srcElement || e.target, tp=$(em).attr('type'), st=$(em).attr('status');
         if(tp && tp != type){
@@ -165,7 +169,6 @@
             $(em).addClass('active');
             setList();
         }
-        console.log(em.id);
         if(em.id.indexOf('subjectId_') != -1){
             var id = $(em).attr('subject_id');
             $.ajax({
@@ -186,9 +189,33 @@
     });
     setList();
 
-    if(LEMON.isAPP)
-    {
-        LEMON.sys.back('/home/index');
+    if(LEMON.isAPP) {
+        if(location.hash){
+        
+        } else {
+            LEMON.sys.back('/home/index');
+        }
+    }
+    
+    function read(em){
+        var obj = $(em);
+        if(obj.attr('msg_id')){
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: "/home/read-msg/" + obj.attr('msg_id'),
+                success: function (res) {
+                    if(res.status){
+                        obj.find('em').children('.opic').remove();
+                        location.href = obj.attr('link');
+                    } else {
+                        $.util.alert(res.msg);
+                    }
+                }
+            });
+        } else {
+            location.href = obj.attr('link');
+        }
     }
 </script>
 <?php $this->end('script');
