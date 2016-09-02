@@ -70,7 +70,12 @@ function getOriginAvatar($thumb) {
  * @return type
  */
 function getSmallAvatar($thumb){
-    return preg_replace('/thumb_/', 'small_', $thumb);
+    $small = preg_replace('/thumb_/', 'small_', $thumb);
+    if(!file_exists(WWW_ROOT.$small)){
+        return getOriginAvatar($thumb);
+    }else{
+        return $small;
+    }
 }
 
 /**
