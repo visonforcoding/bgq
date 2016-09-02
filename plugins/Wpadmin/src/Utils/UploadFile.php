@@ -130,6 +130,7 @@ class UploadFile {//类定义开始
                     } else {
                         $prefix = isset($thumbPrefix[$i]) ? $thumbPrefix[$i] : $thumbPrefix[0];
                         $suffix = isset($thumbSuffix[$i]) ? $thumbSuffix[$i] : $thumbSuffix[0];
+                        $basename =  basename($filename, '.' . $file['extension']);
                         $thumbname = $prefix . basename($filename, '.' . $file['extension']) . $suffix;
                     }
                     \Intervention\Image\ImageManagerStatic::make($filename)
@@ -138,7 +139,7 @@ class UploadFile {//类定义开始
                     
                     \Intervention\Image\ImageManagerStatic::make($filename)
                             ->resize(intval($image[0]*0.4), intval($image[1]*0.4))
-                            ->save($thumbPath .'small_' .$thumbname . '.' . $thumbExt);
+                            ->save($thumbPath .'small_' .$basename . '.' . $thumbExt);
                 }
                 if ($this->thumbRemoveOrigin) {
                     // 生成缩略图之后删除原图
