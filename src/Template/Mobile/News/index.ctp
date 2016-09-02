@@ -24,11 +24,11 @@
 
 <script type="text/html" id="listTpl">
     <section class='news-list-items'>
-        <a href="javascript:void(0)">
+<!--        <a href="javascript:void(0)">
             <h1 class="{#origin#}">{#author#}
                 <time>{#publish_time#}</time>
             </h1>
-        </a>
+        </a>-->
         <a href="/news/view/{#id#}" class="newsbox clearfix">
             <div class="sec-news-l">
                 <h3>{#title#}</h3>
