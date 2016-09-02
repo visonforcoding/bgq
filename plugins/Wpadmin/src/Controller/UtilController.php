@@ -53,8 +53,7 @@ class UtilController extends AppController {
         }
         $this->Util->ajaxReturn($response);
     }
-     
-    
+
     /**
      * 供下载
      */
@@ -62,7 +61,7 @@ class UtilController extends AppController {
         $file = $this->request->query('path');
         $name = $this->request->query('name');
         $this->response->file(
-                WWW_ROOT.$file, ['download' => true, 'name' => $name]
+                WWW_ROOT . $file, ['download' => true, 'name' => $name]
         );
         return $this->response;
     }

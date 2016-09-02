@@ -1,3 +1,7 @@
+<?php $this->start('static') ?>   
+<link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
+<link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
+<?php $this->end() ?> 
 <div class="row">
     <div class="panel">
         <div class="panel-heading">
@@ -55,146 +59,148 @@
 </div>
 <?php $this->start('script'); ?>
 <script src="/wpadmin/lib/echart/echarts.js"></script>
+<script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
+<script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
 <script>
-    $(function () {
-        var register_chart = echarts.init(document.getElementById('register_chart'));
-        var industry_chart = echarts.init(document.getElementById('industry_chart'));
-        var level_chart = echarts.init(document.getElementById('level_chart'));
-        // 使用刚指定的配置项和数据显示图表。
-        var date = $('#choice_date').val();
-        var url = '/admin/user-chart/getRegisterChart';
-        var type = $('#choice-time-type').val();
-        initLineChart(url + '?date=' + date + '&type=' + type, register_chart);
-        $.get('/admin/user-chart/getIndustryPieChart', function (data) {
-            industry_chart.setOption({
-                title: {
-                    text: data.title.text,
-                    x: 'center'
-                },
-                tooltip: {
-                    trigger: 'item',
-                    formatter: "{a} <br/>{b} : {c} ({d}%)"
-                },
-                legend: {
-                    orient: 'vertical',
-                    left: 'left',
-                    data: data.legend.data
-                },
-                series: [
-                    {
-                        name: data.series.name,
-                        type: 'pie',
-                        radius: '55%',
-                        center: ['50%', '60%'],
-                        data:data.series.data,
-                        itemStyle: {
-                            emphasis: {
-                                shadowBlur: 10,
-                                shadowOffsetX: 0,
-                                shadowColor: 'rgba(0, 0, 0, 0.5)'
-                            }
-                        }
-                    }
-                ]
-            });
-        }, 'json');
-        $.get('/admin/user-chart/getLevelPieChart', function (data) {
-            level_chart.setOption({
-                title: {
-                    text: data.title.text,
-                    x: 'center'
-                },
-                tooltip: {
-                    trigger: 'item',
-                    formatter: "{a} <br/>{b} : {c} ({d}%)"
-                },
-                legend: {
-                    orient: 'vertical',
-                    left: 'left',
-                    data: data.legend.data
-                },
-                series: [
-                    {
-                        name: data.series.name,
-                        type: 'pie',
-                        radius: '55%',
-                        center: ['50%', '60%'],
-                        data:data.series.data,
-                        itemStyle: {
-                            emphasis: {
-                                shadowBlur: 10,
-                                shadowOffsetX: 0,
-                                shadowColor: 'rgba(0, 0, 0, 0.5)'
-                            }
-                        }
-                    }
-                ]
-            });
-        }, 'json');
+        $(function () {
+                    var register_chart = echarts.init(document.getElementById('register_chart'));
+                    var industry_chart = echarts.init(document.getElementById('industry_chart'));
+                    var level_chart = echarts.init(document.getElementById('level_chart'));
+                    // 使用刚指定的配置项和数据显示图表。
+                    var date = $('#choice_date').val();
+                    var url = '/admin/user-chart/getRegisterChart';
+                    var type = $('#choice-time-type').val();
+                    initLineChart(url + '?date=' + date + '&type=' + type, register_chart);
+                    $.get('/admin/user-chart/getIndustryPieChart', function (data) {
+                        industry_chart.setOption({
+                            title: {
+                                text: data.title.text,
+                                x: 'center'
+                            },
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                left: 'left',
+                                data: data.legend.data
+                            },
+                            series: [
+                                {
+                                    name: data.series.name,
+                                    type: 'pie',
+                                    radius: '55%',
+                                    center: ['50%', '60%'],
+                                    data: data.series.data,
+                                    itemStyle: {
+                                        emphasis: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ]
+                        });
+                    }, 'json');
+                    $.get('/admin/user-chart/getLevelPieChart', function (data) {
+                        level_chart.setOption({
+                            title: {
+                                text: data.title.text,
+                                x: 'center'
+                            },
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                left: 'left',
+                                data: data.legend.data
+                            },
+                            series: [
+                                {
+                                    name: data.series.name,
+                                    type: 'pie',
+                                    radius: '55%',
+                                    center: ['50%', '60%'],
+                                    data: data.series.data,
+                                    itemStyle: {
+                                        emphasis: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ]
+                        });
+                    }, 'json');
 
-        $('.chart-column-btn').click(function () {
-            $('.chart-column-btn').removeClass('btn-primary');
-            $(this).addClass('btn-primary');
-            $('#choice_date').trigger('change');
-        });
-        $('#choice_date,#choice-time-type').change(function () {
-            var date = $('#choice_date').val();
-            var column = $('.chart-column-btn.btn-primary').data('val');
-            var url = '/admin/user-chart/getRegisterChart';
-            if (column == 'register') {
-                url = '/admin/user-chart/getRegisterChart';
-            }
-            if (column == 'focus') {
-                url = '/admin/user-chart/getFocusChart';
-            }
-            if (column == 'mp') {
-                url = '/admin/user-chart/getMpChart';
-            }
-            var type = $('#choice-time-type').val();
-            url = url + '?date=' + date + '&type=' + type;
-            initLineChart(url, register_chart);
-        });
-    });
-    function initLineChart(url, chartObj) {
-        $.get(url, function (data) {
-            chartObj.setOption({
-                title: {
-                    text: data.title.text,
-                },
-                tooltip: {
-                    trigger: 'axis'
-                },
-                legend: {
-                    data: data.legend.data
-                },
-                toolbox: {
-                    show: true,
-                    feature: {
-                        dataZoom: {
-                            yAxisIndex: 'none'
-                        },
-                        dataView: {readOnly: false},
-                        magicType: {type: ['line', 'bar']},
-                        restore: {},
-                        saveAsImage: {}
-                    }
-                },
-                xAxis: {
-                    type: 'category',
-                    boundaryGap: false,
-                    data: data.xAxis.data
-                },
-                yAxis: {
-                    type: 'value',
-                    axisLabel: {
-                        formatter: '{value}' + data.yAxis
-                    }
-                },
-                series: data.series
-            });
-        }, 'json');
-        chartObj.clear(); //清除缓存，防止下次获取而 面板未刷新
-    }
+                    $('.chart-column-btn').click(function () {
+                        $('.chart-column-btn').removeClass('btn-primary');
+                        $(this).addClass('btn-primary');
+                        $('#choice_date').trigger('change');
+                    });
+                    $('#choice_date,#choice-time-type').change(function () {
+                        var date = $('#choice_date').val();
+                        var column = $('.chart-column-btn.btn-primary').data('val');
+                        var url = '/admin/user-chart/getRegisterChart';
+                        if (column == 'register') {
+                            url = '/admin/user-chart/getRegisterChart';
+                        }
+                        if (column == 'focus') {
+                            url = '/admin/user-chart/getFocusChart';
+                        }
+                        if (column == 'mp') {
+                            url = '/admin/user-chart/getMpChart';
+                        }
+                        var type = $('#choice-time-type').val();
+                        url = url + '?date=' + date + '&type=' + type;
+                        initLineChart(url, register_chart);
+                    });
+                });
+                function initLineChart(url, chartObj) {
+                    $.get(url, function (data) {
+                        chartObj.setOption({
+                            title: {
+                                text: data.title.text,
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                data: data.legend.data
+                            },
+                            toolbox: {
+                                show: true,
+                                feature: {
+                                    dataZoom: {
+                                        yAxisIndex: 'none'
+                                    },
+                                    dataView: {readOnly: false},
+                                    magicType: {type: ['line', 'bar']},
+                                    restore: {},
+                                    saveAsImage: {}
+                                }
+                            },
+                            xAxis: {
+                                type: 'category',
+                                boundaryGap: false,
+                                data: data.xAxis.data
+                            },
+                            yAxis: {
+                                type: 'value',
+                                axisLabel: {
+                                    formatter: '{value}' + data.yAxis
+                                }
+                            },
+                            series: data.series
+                        });
+                    }, 'json');
+                    chartObj.clear(); //清除缓存，防止下次获取而 面板未刷新
+                }
 </script>
 <?php
 $this->end('script');

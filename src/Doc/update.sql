@@ -720,3 +720,9 @@ ALTER TABLE `pvlog`
 #删除索引
 ALTER TABLE `user`
 	DROP INDEX `phone`;	
+
+#编辑索引
+ALTER TABLE `user`
+	ADD COLUMN `focus_nums` INT(11) UNSIGNED NOT NULL DEFAULT '0' COMMENT '关注数' AFTER `fans`,
+	ADD COLUMN `post_card_nums` INT(11) UNSIGNED NOT NULL DEFAULT '0' COMMENT '递名片数' AFTER `focus_nums`,
+	ADD COLUMN `get_card_nums` INT(11) UNSIGNED NOT NULL DEFAULT '0' COMMENT '收名片数' AFTER `post_card_nums`;	
