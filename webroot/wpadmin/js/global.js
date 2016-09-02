@@ -150,9 +150,22 @@ function initJqupload(id, url, allowedTypes) {
         customErrorKeyStr: '上传发生了错误',
         onSuccess: function (files, data, xhr, pd) {
             if (data.status) {
-                $('#' + id).prevAll('.img-thumbnail').removeClass('input-img');
-                $('#' + id).prevAll('.img-thumbnail').find('img').attr('src', data.path);
-                $('#' + id).prev().val(data.path);
+                var dom = $('#' + id), h=dom.attr('h'), w=dom.attr('w');
+                dom.prevAll('.img-thumbnail').removeClass('input-img');
+                dom.prevAll('.img-thumbnail').find('img').attr('src', data.path);
+                dom.prev().val(data.path);
+                if(h || w){
+                    dom.find('[tag="imgNotice"]').remove();
+                    var img = new Image();
+                    img.onload = function(){
+                        var str = '';
+                        if(img.width > w) str += '图片实际宽度为'+img.width;
+                        if(img.height > h) str += '图片实际高度为'+img.height;
+                        if(str) str += ' 超出限制!!';
+                        if(str) dom.prepend('<div tag="imgNotice" style="color:red">'+str+'</div>');
+                    }
+                    img.src = data.path;
+                }
             } else {
                 uploadObj.reset();
                 layer.alert(data.msg);
