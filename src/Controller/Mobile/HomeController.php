@@ -261,7 +261,7 @@ class HomeController extends AppController {
             /**
              * 我的关注消息
              */
-            public function myMessageFans() {
+            public function myMessageFans($type=null) {
                 //查找type 为1 的消息
                 $user_id = $this->user->id;
                 $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
@@ -270,7 +270,8 @@ class HomeController extends AppController {
                 $this->set([
                     'pageTitle' => '关注消息',
                     'unReadSysCount' => $unReadSysCount,
-                    'unReadFollowCount' => $unReadFollowCount
+                    'unReadFollowCount' => $unReadFollowCount,
+                    'type' => $type
                 ]);
             }
 
@@ -457,18 +458,21 @@ class HomeController extends AppController {
             $type = $this->request->query('type');
         //        $where['SubjectBook.status'] = in_array($type, ['0', '1', '3']) ? $type : 0;
 //            $where['SubjectBook.status !='] = 2;
-            $where['SubjectBook.user_id'] = $this->user->id;
+            $user_id = $this->user->id;
+            $where['SubjectBook.user_id'] = $user_id;
             $books = $BookTable->find()->contain(['Subjects', 'Subjects.User' => function($q) {
-                return $q->where(['enabled'=>1, 'User.is_del'=>0])
+                return $q->where(['enabled'=>1])
                         ->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums', 'level']);
+            }, 'Usermsgs'=>function($q)use($user_id){
+                return $q->where(['Usermsgs.type'=>4, 'Usermsgs.status'=>0, 'Usermsgs.user_id'=>$user_id]);
             }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
             $savant_books = $BookTable->find()->contain(['Subjects', 'Users' => function($q) {
-                    return $q->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums', 'level']);
-                }])->where([
-//                        'SubjectBook.status !=' => 2,
-                        'SubjectBook.savant_id =' => $this->user->id,
-                    ])->order('SubjectBook.update_time')->toArray();
-            $unReadBook = $UsermsgTable->find()->where(['type'=>4, 'user_id'=>$this->user->id, 'status'=>0]);
+                return $q->where(['Users.enabled'=>1])
+                        ->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums', 'level']);
+            }, 'Usermsgs'=>function($q)use($user_id){
+                return $q->where(['Usermsgs.type'=>4, 'Usermsgs.status'=>0, 'Usermsgs.user_id'=>$user_id]);
+            }])->where(['SubjectBook.savant_id =' => $this->user->id])->order('SubjectBook.update_time')->toArray();
+            $unReadBook = $UsermsgTable->find()->where(['type'=>4, 'user_id'=>$this->user->id, 'status'=>0])->contain(['']);
             $this->set([
                 'pageTitle' => '我的约见',
                 'books' => $books,

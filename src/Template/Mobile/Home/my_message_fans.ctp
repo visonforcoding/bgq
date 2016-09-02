@@ -13,7 +13,7 @@
 </header>
 <div class="wraper">
     <div class="inner my-home-menu m-message-top" >
-        <a href="javascript:void(0)" class="active" id="newFollow">新的关注<?php if ($unReadFollowCount): ?><i><?= $unReadFollowCount ?></i><?php endif; ?></a>
+        <a href="javascript:void(0)" id="newFollow">新的关注<?php if ($unReadFollowCount): ?><i><?= $unReadFollowCount ?></i><?php endif; ?></a>
         <a href="javascript:void(0)" id="sysMes">系统消息<?php if ($unReadSysCount): ?><i><?= $unReadSysCount ?></i><?php endif; ?></a>
     </div>
     <ul id='follow' class="systerm-info-box"></ul>
@@ -51,55 +51,18 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    var type = '<?= $type ?>';
+</script>
+<script>
     if ($.util.isAPP) {
         LEMON.sys.back('/home/index');
     }
-    $.ajax({
-        type: 'POST',
-        dataType: 'json',
-        url: "/home/get-fans-message",
-        success: function (res) {
-            if (res.status) {
-                $.util.dataToTpl('follow', 'fansTpl', res.data, function (d) {
-                    d.follower_truename = d.u.truename;
-                    d.follower_company = d.u.company;
-                    d.follower_avatar = d.u.avatar ? d.u.avatar : '/mobile/images/touxiang.png';
-                    d.follower_position = d.u.position;
-                    d.follower_id = d.u.id;
-                    if (d.uf.type == '2') {
-                        d.type = '<span style="color:green" class="meetnum f-color-black">√已关注</span>';
-                    }
-                    if (d.uf.type == '1') {
-                        d.type = '<span style="color:red" data-id="' + d.u.id + '" class="meetnum follow_btn color-items">+加关注</span>';
-                    }
-                    d.follower_fans = d.u.fans;
-                    return d;
-                });
-            } else {
-                $.util.alert(res.msg)
-            }
-        }
-    });
-    $('.follow_btn').on('click', function () {
-        //关注
-        var user_id = $(this).data('id');
-        var obj = $(this);
-        $.util.ajax({
-            url: '/user/follow',
-            data: {id: user_id},
-            func: function (res) {
-                $.util.alert(res.msg);
-                obj.text('√已关注')
-                obj.attr('style', 'color:green');
-            }
-        });
-    });
-
-    $('#newFollow').on('tap', function () {
-        if ($(this).hasClass('active')) {
+    
+    function followTap(em){
+        if ($(em).hasClass('active')) {
             return;
         } else {
-            $(this).addClass('active');
+            $(em).addClass('active');
             $('#sysMes').removeClass('active');
         }
         $.ajax({
@@ -130,13 +93,13 @@
                 }
             }
         });
-    });
+    }
 
-    $('#sysMes').on('tap', function () {
-        if ($(this).hasClass('active')) {
+    function sysTap(em){
+        if ($(em).hasClass('active')) {
             return;
         } else {
-            $(this).addClass('active');
+            $(em).addClass('active');
             $('#newFollow').removeClass('active');
         }
         $.ajax({
@@ -178,8 +141,37 @@
                 }
             }
         });
+    }
+    
+    if(type == 1){
+        followTap($('#newFollow').get(0));
+    } else {
+        sysTap($('#sysMes').get(0));
+    }
+    
+    $('.follow_btn').on('click', function () {
+        //关注
+        var user_id = $(this).data('id');
+        var obj = $(this);
+        $.util.ajax({
+            url: '/user/follow',
+            data: {id: user_id},
+            func: function (res) {
+                $.util.alert(res.msg);
+                obj.text('√已关注')
+                obj.attr('style', 'color:green');
+            }
+        });
     });
 
+    $('#newFollow').on('tap', function () {
+        followTap(this);
+    });
 
+    $('#sysMes').on('tap', function () {
+        sysTap(this);
+    });
+    
+    
 </script>
 <?php $this->end('script'); ?>
