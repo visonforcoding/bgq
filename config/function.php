@@ -65,6 +65,15 @@ function getOriginAvatar($thumb) {
 }
 
 /**
+ * 获40% 缩略图
+ * @param type $thumb
+ * @return type
+ */
+function getSmallAvatar($thumb){
+    return preg_replace('/thumb_/', 'small_', $thumb);
+}
+
+/**
  * 头像不存在或找不到时候设置为默认图
  * @param type $avatar
  * @return string
