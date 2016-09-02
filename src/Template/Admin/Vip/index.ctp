@@ -160,7 +160,7 @@
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/admin/vip/delete',
+                            url: '/admin/user/delete',
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
@@ -227,7 +227,7 @@
                         type: 'post',
                         data: {id: id},
                         dataType: 'json',
-                        url: '/admin/vip/able-user',
+                        url: '/admin/user/able-user',
                         success: function (res) {
                             layer.msg(res.msg);
                             if (res.status) {
