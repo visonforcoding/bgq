@@ -130,6 +130,14 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">摘要(活动介绍)</label>
+        <div class="col-md-8">
+            <?php
+            echo $this->Form->input('summary', ['label' => false, 'type' => 'textarea', 'class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">流程介绍</label>
         <div class="col-md-8">
             <script name='body' id='content' rows='2' type="text/plain" class='form-control-editor'><?= $activity->body ?></script>
@@ -141,14 +149,7 @@
             <script name='contact' id='contact' rows='2' type="text/plain" class='form-control-editor'><?= $activity->contact ?></script>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">摘要</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('summary', ['label' => false, 'type' => 'textarea', 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
+
     <div class="form-group">
         <label class="col-md-2 control-label">参与嘉宾</label>
         <div class="col-md-8">
