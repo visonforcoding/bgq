@@ -119,7 +119,7 @@ class PushController extends AppController {
                 }
                 $this->loadComponent('Push');
                 if($url){
-                    $extra['extra']['url'] = 'http://m.chinamatop.com' . $url;
+                    $extra['url'] = 'http://m.chinamatop.com' . $url;
                     $res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true, $extra);
                 } else {
                     $res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true);
