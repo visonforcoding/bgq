@@ -105,7 +105,7 @@
                     <p class="fl" id="recom_avatar">
                         <?php if ($user->reco_users): ?>
                             <?php foreach ($user->reco_users as $k => $v): ?>
-                                <img src="<?= $v->user->avatar ? getOriginAvatar($v->user->avatar) : '/mobile/images/touxiang.png'; ?>"/>
+                                <img src="<?= $v->user->avatar ? $v->user->avatar : '/mobile/images/touxiang.png'; ?>"/>
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </p>

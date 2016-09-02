@@ -54,6 +54,13 @@ class MeetController extends AppController {
                 ->where(['enabled'=>'1', 'level'=>'2'])
                 ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
                 ->limit($this->limit)
+                ->formatResults(function($items) {
+                        return $items->map(function($item) {
+                        //时间语义化转换
+                        $item['avatar'] = getOriginAvatar($item['avatar']);
+                        return $item;
+                    });
+                 })           
                 ->toArray();
         $this->set('meetjson', json_encode($users));
         $user_id = '';
@@ -698,6 +705,13 @@ class MeetController extends AppController {
                 ->where(['enabled'=>'1', 'level'=>'2', 'is_del'=>0])
                 ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
                 ->page($page, $this->limit)
+                ->formatResults(function($items) {
+                        return $items->map(function($item) {
+                        //时间语义化转换
+                        $item['avatar'] = getOriginAvatar($item['avatar']);
+                        return $item;
+                    });
+                 })        
                 ->toArray();
         if($biggies) {
             return $this->Util->ajaxReturn(['status'=>true, 'data'=>$biggies]);
