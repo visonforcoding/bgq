@@ -57,7 +57,7 @@ class MeetController extends AppController {
                 ->formatResults(function($items) {
                         return $items->map(function($item) {
                         //时间语义化转换
-                        $item['avatar'] = getOriginAvatar($item['avatar']);
+                        $item['avatar'] = getSmallAvatar($item['avatar']);
                         return $item;
                     });
                  })           
