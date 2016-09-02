@@ -143,6 +143,9 @@ class NewsController extends AppController {
                 },'Savants'],
             ]);
         }
+        foreach($news->comments as $k=>$v){
+            $news->comments[$k]->user->avatar = getSmallAvatar($v->user->avatar);
+        }
         $this->set('isCollect', $isCollect);
         //阅读数+1
         $news->read_nums +=1;
