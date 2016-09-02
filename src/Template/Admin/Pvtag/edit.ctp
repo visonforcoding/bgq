@@ -3,40 +3,24 @@
 <link href="/wpadmin/lib/jqvalidation/css/validationEngine.jquery.css" rel="stylesheet">
 <?php $this->end() ?> 
 <div class="work-copy">
-    <?= $this->Form->create($ptag, ['class' => 'form-horizontal']) ?>
-        <div class="form-group">
+    <?= $this->Form->create($pvtag, ['class' => 'form-horizontal']) ?>
+    <div class="form-group">
         <label class="col-md-2 control-label">ptag</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('ptag', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">描述</label>
         <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('desc', ['label' => false, 'class' => 'form-control']);
+            <?php
+            echo $this->Form->input('descb', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
-        <label class="col-md-2 control-label">create_time</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('create_time', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-        <div class="form-group">
-        <label class="col-md-2 control-label">update_time</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('update_time', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-        <div class="form-group">
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
         </div>

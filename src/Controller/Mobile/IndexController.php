@@ -27,12 +27,15 @@ class IndexController extends AppController {
         //var_dump($umengObj);
 
         $this->autoRender = false;
-                $this->response->cookie([
-                            'name' => 'login_stauts',
-                            'value' => 'yes3',
-                            'path' => '/',
-                            'expire' => time() + 1200
-                        ]);
+        $filename = WWW_ROOT.'/upload/user/avatar/test.jpg';
+        \Intervention\Image\ImageManagerStatic::make($filename)
+                ->save('test.jpg',20);
+//                $this->response->cookie([
+//                            'name' => 'login_stauts',
+//                            'value' => 'yes3',
+//                            'path' => '/',
+//                            'expire' => time() + 1200
+//                        ]);
 //        $redis = new \Redis();
 //        $redis->connect('192.168.1.7', 6379);
 //        $test = $redis->get('test');
@@ -98,11 +101,12 @@ class IndexController extends AppController {
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $users = $UserTable->find()->hydrate(false)->select(['phone'])->where(['is_del' => 0, 'enabled' => '1'])->toArray();
         foreach ($users as $user) {
-            if(empty($user['phone'])){
+            if (empty($user['phone'])) {
                 continue;
             }
             $redis->sAdd('phones', $user['phone']);
         }
         debug($redis->sGetMembers('phones'));
     }
+
 }
