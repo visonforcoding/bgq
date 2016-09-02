@@ -50,6 +50,12 @@ class SubjectBookTable extends Table {
             'foreignKey' => 'savant_id',
             'joinType' => 'INNER'
         ]);
+        $this->hasMany('Usermsgs', [
+            'className' => 'Usermsg',
+            'foreignKey' => 'table_id',
+            'joinType' => 'LEFT'
+        ]);
+        
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [

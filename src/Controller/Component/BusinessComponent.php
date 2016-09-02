@@ -207,13 +207,13 @@ class BusinessComponent extends Component {
             $userTable = \Cake\ORM\TableRegistry::get('user');
             $user = $userTable->get($user_id);
             if($type == 1){
-                $data['extra'] = [
-                   'url' => 'http://m.chinamatop.com/home/my-message-fans'
+                $data = [
+                   'url' => 'http://m.chinamatop.com/home/my-message-fans/1'
                 ];
                 $this->Push->sendAlias($user->user_token, '您有1位新的关注者', '', '您有新的关注者', 'BGB', true, $data);
             } else {
-                $data['extra'] = [
-                   'url' => 'http://m.chinamatop.com/home/my-message-sys' 
+                $data = [
+                   'url' => 'http://m.chinamatop.com/home/my-message-fans/2' 
                 ];
                 $this->Push->sendAlias($user->user_token, $title, $msg, $title, 'BGB', true, $data);
             }
