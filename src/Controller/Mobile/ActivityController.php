@@ -823,7 +823,13 @@ class ActivityController extends AppController {
         $activityApplyTable = \Cake\ORM\TableRegistry::get('activityapply');
         $user = $activityApplyTable->find()->where(['activity_id' => $id, 'is_pass'=>1])->contain(['Users'=>function($q){
             return $q->where(['Users.enabled'=>1]);
-        }])->toArray();
+        }])->formatResults(function($items) {
+                        return $items->map(function($item) {
+                        //时间语义化转换
+                        $item['avatar'] = getSmallAvatar($item['avatar']);
+                        return $item;
+                    });
+                 })->toArray();
         $activity = $this->Activity->get($id);
         $this->set([
             'pageTitle'=>$activity->title,
