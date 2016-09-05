@@ -1545,14 +1545,6 @@ class HomeController extends AppController {
                     'city NOT LIKE'=>'%香港%',
                     'city NOT LIKE'=>'%武汉%',
                 ];
-//                $where['city NOT LIKE'] = '%北京%';
-//                $where['city NOT LIKE'] = '%上海%';
-//                $where['city NOT LIKE'] = '%广州%';
-//                $where['city NOT LIKE'] = '%深圳%';
-//                $where['city NOT LIKE'] = '%成都%';
-//                $where['city NOT LIKE'] = '%杭州%';
-//                $where['city NOT LIKE'] = '%香港%';
-//                $where['city NOT LIKE'] = '%武汉%';
             } else {
                 $where['city LIKE'] = '%' . $city . '%';
             }
