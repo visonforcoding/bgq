@@ -1397,7 +1397,7 @@ class HomeController extends AppController {
                     ->CardBoxes
                     ->find()
                     ->contain(['OtherCard' => function($q)use($keyword) {
-                        return $q->where(['OtherCard.truename like' => "%$keyword%"]);
+                        return $q->where(['OtherCard.truename like' => "%$keyword%", 'OtherCard.enabled'=>1]);
                     }])
                     ->where(['ownerid' => $this->user->id, 'resend' => $resend])
                     ->orderDesc('CardBoxes.`create_time`')
