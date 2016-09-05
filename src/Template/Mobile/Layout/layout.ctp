@@ -7,8 +7,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title><?= isset($pageTitle) ? $pageTitle : '并购帮'; ?></title>
-        <link rel="stylesheet" type="text/css" href="/mobile/css/common.css"/>
-        <link rel="stylesheet" type="text/css" href="/mobile/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="/mobile/css/common.css?0905"/>
+        <link rel="stylesheet" type="text/css" href="/mobile/css/style.css?0905"/>
         <script type="text/javascript">
             (function (win) {
                 var h;
@@ -39,9 +39,9 @@
         </script>
         <?= $this->fetch('css') ?>
         <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-        <script type="text/javascript" src="/mobile/js/jsapi.js"></script>
+        <script type="text/javascript" src="/mobile/js/jsapi.js?0905"></script>
         <script type="text/javascript" src="/mobile/js/zepto.min.js"></script>
-        <script type="text/javascript" src="/mobile/js/util.js"></script>
+        <script type="text/javascript" src="/mobile/js/util.js?0905"></script>
         <script>
             var __wxConfig = <?= json_encode($wxConfig) ?>;
             var __loginStatus = '<?=$isLogin ?>';
@@ -76,18 +76,6 @@
                 return url + (url.indexOf('?') > 0 ? '&' : '?') + param;
             }
 
-
-
-            $.util.checkLogin = function (url) {
-                if ($.util.isLogin()) {
-                    location.href = url;
-                } else {
-                    $.util.alert('请登录后再操作', 1000);
-                    setTimeout(function () {
-                        location.href = '/user/login?redirect_url=' + encodeURI(document.URL);
-                    }, 1000);
-                }
-            }
         </script>
         <?= $this->fetch('static') ?>
     </head>
@@ -124,7 +112,11 @@
                     return;
                 var apptk = LEMON.db.get('token_uin'), cookietk = $.util.getCookie('token_uin');
                 if (apptk && cookietk) {
-                    $.util.setCookie('login_status', 'yes', 99999999);
+                    if((new Date()).getDay() != LEMON.db.get('tokenset')){  //每天一次  检查一下
+                        LEMON.db.set('tokenset', (new Date()).getDay());
+                        LEMON.db.set('token_uin', cookietk);
+                    }
+
                     return;
                 } else if (apptk) {
                     $.util.setCookie('token_uin', apptk, 99999999);
