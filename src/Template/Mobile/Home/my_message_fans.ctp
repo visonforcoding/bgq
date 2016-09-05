@@ -165,10 +165,12 @@
     });
 
     $('#newFollow').on('tap', function () {
+        $('#newFollow').find('i').remove();
         followTap(this);
     });
 
     $('#sysMes').on('tap', function () {
+        $('#newFollow').find('i').remove();
         sysTap(this);
     });
     
