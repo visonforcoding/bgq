@@ -580,6 +580,10 @@ class UserController extends AppController {
                 $fansCount = $FansTable->find()->where("`following_id` = '$following_id'")->count();
                 $follower_user->fans = $fansCount;
                 $this->User->save($follower_user);
+                $me = $this->User->get($user_id);
+                $followCount = $FansTable->find()->where(['user_id'=>$user_id])->count();
+                $me->focus_nums = $followCount;
+                $this->User->save($me);
                 return $this->Util->ajaxReturn(true, '关注成功');
             }
         }
@@ -633,6 +637,13 @@ class UserController extends AppController {
                 $res = $cardBoxTable->save($cardcase);
             }
             if($res) {
+                $UserTable = \Cake\ORM\TableRegistry::get('user');
+                $user = $UserTable->get($id);
+                $user->get_card_nums += 1;
+                $UserTable->save($user);
+                $me = $UserTable->get($this->user->id);
+                $me->post_card_nums +=1 ;
+                $UserTable->save($me);
                 return $this->Util->ajaxReturn(true, '递名片成功');
             } else {
                 return $this->Util->ajaxReturn(false, '系统错误');
