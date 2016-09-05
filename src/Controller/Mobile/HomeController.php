@@ -228,9 +228,17 @@ class HomeController extends AppController {
                 $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
                 $followings = $FansTable->find()->contain(['Followings' => function($q) {
                     return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans', 'level'])
-                            ->where(['enabled' => 1, 'is_del'=>0])->contain(['Subjects']);
+                            ->where(['enabled' => 1])->contain(['Subjects'=>function($q){
+                                return $q->where(['Subjects.is_del'=>0]);
+                            }]);
                 }])->hydrate(false)
                     ->where(['user_id' => $user_id])
+                    ->formatResults(function($items) {
+                        return $items->map(function($item) {
+                            $item['following']['avatar'] = getSmallAvatar($item['following']['avatar']);
+                            return $item;
+                        });
+                    })
                     ->toArray();
                 if($followings){
                     return $this->Util->ajaxReturn(['status'=>true, 'data'=>$followings]);
@@ -249,9 +257,17 @@ class HomeController extends AppController {
                 $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
                 $fans = $FansTable->find()->contain(['Users' => function($q) {
                         return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans', 'level'])
-                                ->where('enabled = 1')->contain(['Subjects']);
+                                ->where('enabled = 1')->contain(['Subjects'=>function($q){
+                                    return $q->where(['Subjects.is_del'=>0]);
+                                }]);
                     }])->hydrate(false)
                         ->where(['following_id' => $user_id])
+                        ->formatResults(function($items) {
+                            return $items->map(function($item) {
+                                $item['user']['avatar'] = getSmallAvatar($item['user']['avatar']);
+                                return $item;
+                            });
+                        })
                         ->toArray();
                 if($fans){
                     return $this->Util->ajaxReturn(['status'=>true, 'data'=>$fans]);
@@ -418,7 +434,9 @@ class HomeController extends AppController {
             $activity = $collectTable
                     ->find()
                     ->where(['type' => 0, 'is_delete' => 0, 'collect.user_id' => $this->user->id])
-                    ->contain(['Activities'])
+                    ->contain(['Activities'=>function($q){
+                        return $q->where(['Activities.is_del'=>0]);
+                    }])
                     ->toArray();
             if($activity){
                 return $this->Util->ajaxReturn(['status'=>true, 'data'=>$activity]);
@@ -437,8 +455,10 @@ class HomeController extends AppController {
             $user_id = $this->user->id;
             $CollectTable = \Cake\ORM\TableRegistry::get('Collect');
             $collects = $CollectTable->find()->hydrate(false)
-                ->contain(['News'])
-                ->where(['News.is_delete' => 0, 'Collect.user_id' => $user_id])
+                ->contain(['News'=>function($q){
+                    return $q->where(['News.is_delete' => 0]);
+                }])
+                ->where(['Collect.is_delete' => 0, 'Collect.user_id' => $user_id])
                 ->orderDesc('Collect.create_time')
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
@@ -1323,9 +1343,17 @@ class HomeController extends AppController {
                 $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
                 $followings = $FansTable->find()->contain(['Followings' => function($q)use($keyword) {
                         return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
-                                ->where(['truename like' => "%$keyword%", 'enabled' => 1])->contain(['Subjects']);
+                                ->where(['truename like' => "%$keyword%", 'enabled' => 1])->contain(['Subjects'=>function($q){
+                                    return $q->where(['Subjects.is_del'=>0]);
+                                }]);
                     }])->hydrate(false)
                         ->where(['user_id' => $user_id])
+                        ->formatResults(function($items) {
+                            return $items->map(function($item) {
+                                $item['following']['avatar'] = getSmallAvatar($item['following']['avatar']);
+                                return $item;
+                            });
+                        })
                         ->toArray();
                 if ($followings !== false) {
                     if ($followings) {
@@ -1340,9 +1368,17 @@ class HomeController extends AppController {
                 $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
                 $fans = $FansTable->find()->contain(['Users' => function($q)use($keyword) {
                         return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
-                                ->where(['enabled' => 1, 'truename like' => "%$keyword%"])->contain(['Subjects']);
+                                ->where(['enabled' => 1, 'truename like' => "%$keyword%"])->contain(['Subjects'=>function($q){
+                                    return $q->where(['Subjects.is_del'=>0]);
+                                }]);
                     }])->hydrate(false)
                         ->where(['following_id' => $user_id])
+                        ->formatResults(function($items) {
+                            return $items->map(function($item) {
+                                $item['user']['avatar'] = getSmallAvatar($item['user']['avatar']);
+                                return $item;
+                            });
+                        })
                         ->toArray();
                 if ($fans !== false) {
                     if ($fans) {
@@ -1356,33 +1392,6 @@ class HomeController extends AppController {
             }
         }
     }
-
-//                                                                            /**
-//                                                                             * 搜索我的粉丝
-//                                                                             */
-//                                                                            public function searchFans() {
-//                                                                                if ($this->request->is('post')) {
-//                                                                                    $data = $this->request->data;
-//                                                                                    $keyword = $data['keyword'];
-//                                                                                    $user_id = $this->user->id;
-//                                                                                    $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
-//                                                                                    $fans = $FansTable->find()->contain(['Users' => function($q)use($keyword) {
-//                                                                                                    return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
-//                                                                                                            ->where(['enabled' => 1, 'truename like' => "%$keyword%"])->contain(['Subjects']);
-//                                                                                                }])->hydrate(false)
-//                                                                                                    ->where(['following_id' => $user_id])
-//                                                                                                    ->toArray();
-//                                                                                            if ($fans !== false) {
-//                                                                                                if ($fans) {
-//                                                                                                    return $this->Util->ajaxReturn(['status' => true, 'data' => $fans]);
-//                                                                                                } else {
-//                                                                                                    return $this->Util->ajaxReturn(false, '您的粉丝里无这个人');
-//                                                                                                }
-//                                                                                            } else {
-//                                                                                                return $this->Util->ajaxReturn(false, '系统错误');
-//                                                                                            }
-//                                                                                        }
-//                                                                                    }
 
     /**
      * 名片夹搜索
