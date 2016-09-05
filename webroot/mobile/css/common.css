@@ -10,7 +10,7 @@ blockquote:before, blockquote:after, q:before, q:after { content: ''; content: n
 table { border-collapse: collapse; border-spacing: 0; }
 *{-webkit-tap-highlight-color: rgba(0, 0, 0, 0);tap-highlight-color: rgba(0, 0, 0, 0);   -webkit-box-sizing: border-box;box-sizing: border-box;}
 body {font: 14px / 0.24rem 'Microsoft YaHei',Helvetica,Arial,sans-serif; min-width:320px;max-width: 750px;width:100%;margin:0 auto; -webkit-overflow-scrolling: touch;  overflow-scrolling: touch;}
-input, textarea, button,select{ outline: 0; resize: none;font-size:100%;/*font:inherit;*/background: rgba(255,255,255,0);font-family: 'Microsoft YaHei', 'STHeiti',Helvetica,Arial,sans-serif;}
+input, textarea, button,select{ outline: 0; resize: none;font-size:100%;/*font:inherit;*/background: rgba(255,255,255,0);font-family: STHeiti,'Microsoft YaHei',Helvetica,Arial,sans-serif;}
 html{ outline: 0;-webkit-text-size-adjust:none;}
 html,body { width: 100%;}
 i{font-style: normal;}
@@ -102,6 +102,8 @@ textarea::-webkit-scrollbar{display: none;}/*隐藏多文本框滚动条*/
 .loading{width:1.27rem;height:0.31rem;background: url(img/loading.gif) center center; background-size:cover; margin:0 auto;}
 .loadingbox{width:100%;height:0.31rem;margin:0.2rem 0;font-size:0.28rem;color:#c8cbce;text-align: center;}
 .no-margin-b{padding-bottom:0;}
+/*最大宽度*/
+.wraper .w88{max-width: 88%;}
 /*common css end*/
 /*placeholder reset--*/
 input::-webkit-input-placeholder { /* WebKit browsers */ color: #7a7d82; } 
