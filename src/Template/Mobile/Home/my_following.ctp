@@ -51,31 +51,6 @@
         LEMON.sys.back('/home/index');
     }
     
-//    $.ajax({
-//        type: 'POST',
-//        dataType: 'json',
-//        url: "/home/get-my-following",
-//        success: function (res) {
-//            if(res.status){
-//                $.util.dataToTpl('follow', 'listTpl', res.data, function(d){
-//                    d.following_id = d.following.id;
-//                    d.following_truename = d.following.truename;
-//                    d.following_company = d.following.company;
-//                    d.following_avatar = d.following.avatar ? d.following.avatar : '/mobile/images/touxiang.png';
-//                    d.following_position = d.following.position;
-//                    d.following_fans = d.following.fans;
-//                    d.following_subject = $.util.dataToTpl('', 'tpl', d.following.subjects);
-//                    if(d.following.level == 2){
-//                        d.v = '<i></i>';
-//                    }
-//                    return d;
-//                });
-//            } else {
-//                $.util.alert(res.msg);
-//            }
-//        }
-//    });
-
     if(type == 2){
         myFansTap($('#myFans').get(0));
     } else {
