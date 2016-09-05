@@ -31,7 +31,7 @@
         <div class="innercon">
             <a href="/user/home-page/{#user_id#}" class="head-img"><img src="{#user_avatar#}"/>{#v#}</a>
             <div class="vipinfo lay-c">
-                <a href="/user/home-page/{#user_id#}" class='fl'>
+                <a href="/user/home-page/{#user_id#}" class='fl w88'>
                     <h3>{#user_truename#}</h3>
                     <span class="c-info">{#user_company#}  {#user_position#}</span>
                     <span class="c-info">{#user_phone#}</span>

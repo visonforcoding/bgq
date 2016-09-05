@@ -299,7 +299,7 @@ class HomeController extends AppController {
                                         'conditions' => 'u.id = uf.user_id',
                                     ]
                                 ])
-                                ->where(['usermsg.`user_id`' => $user_id])
+                                ->where(['usermsg.`user_id`' => $user_id, 'usermsg.status'=>0])
                                 ->orderDesc('usermsg.create_time')
                                 ->formatResults(function($items) {
                                     return $items->map(function($item) {
@@ -1401,7 +1401,13 @@ class HomeController extends AppController {
                     }])
                     ->where(['ownerid' => $this->user->id, 'resend' => $resend])
                     ->orderDesc('CardBoxes.`create_time`')
-                    ->limit($this->limit)
+//                    ->limit($this->limit)
+                    ->formatResults(function($items) {
+                        return $items->map(function($item) {
+                            $item->other_card->avatar = getSmallAvatar($item->other_card->avatar);
+                            return $item;
+                        });
+                    })
                     ->toArray();
             if ($card !== false) {
                 if ($card) {
