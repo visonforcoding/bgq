@@ -35,23 +35,22 @@ class UserController extends AppController {
             $id = $this->user->id;
             $self = true;
         }
+        $user = $this->User->get($id,[
+            'contain'=>['Industries'=>function($q){
+                return $q->hydrate(false)->select(['id','name']);
+            }, 'Secret','Careers','Educations', 'Savant', 'Subjects'=>function($q){
+                return $q->where(['is_del'=>0])->orderDesc('Subjects.create_time');
+            }, 'RecoUsers'=>function($q){
+                return $q->limit(8)->orderDesc('RecoUsers.create_time');
+            },'RecoUsers.Users'],
+            'conditions' => [
+                'enabled' => 1
+            ]
+        ]);
         if(!$self){
-            $user = $this->User->get($id, [
-                'conditions' => [
-                    'is_del' => 0,
-                    'enabled' => 1
-                ]
-            ]);
             $user->homepage_read_nums += 1;
             $this->User->save($user);
         }
-        $user = $this->User->get($id,['contain'=>['Industries'=>function($q){
-            return $q->hydrate(false)->select(['id','name']);
-        }, 'Secret','Careers','Educations', 'Savant', 'Subjects'=>function($q){
-            return $q->where(['is_del'=>0])->orderDesc('Subjects.create_time');
-        }, 'RecoUsers'=>function($q){
-            return $q->limit(8)->orderDesc('RecoUsers.create_time');
-        },'RecoUsers.Users']]);
         $industries = $user->industries;
         $industry_arr = [];
         foreach($industries as $industry){

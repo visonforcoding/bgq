@@ -55,12 +55,11 @@ class MeetController extends AppController {
                 ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
                 ->limit($this->limit)
                 ->formatResults(function($items) {
-                        return $items->map(function($item) {
-                        //时间语义化转换
+                    return $items->map(function($item) {
                         $item['avatar'] = getSmallAvatar($item['avatar']);
                         return $item;
                     });
-                 })           
+                })
                 ->toArray();
         $this->set('meetjson', json_encode($users));
         $user_id = '';
@@ -394,7 +393,7 @@ class MeetController extends AppController {
     public function viewMoreReco($id=null){
         $RecomTable = \Cake\ORM\TableRegistry::get('SavantReco');
         $recoms = $RecomTable->find()->contain(['Users'=>function($q){
-            return $q->where(['enabled'=>1, 'is_del'=>0])->select(['id','avatar','truename','company','position']);
+            return $q->where(['enabled'=>1])->select(['id', 'avatar', 'truename', 'company', 'position']);
         }])->where(['savant_id'=>$id])
                 ->orderDesc('SavantReco.create_time')
                 ->toArray();
@@ -432,14 +431,22 @@ class MeetController extends AppController {
         $users = $this
                 ->User
                 ->find()
-                ->contain(['Subjects'])
+                ->contain(['Subjects'=>function($q){
+                    return $q->where(['Subjects.is_del'=>0]);
+                }])
                 ->distinct(['User.id'])
                 ->matching('Subjects', function($q)use($keyword){
-                    return $q;
+                    return $q->where(['Subjects.is_del'=>0]);
                 })
-                ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%", 'is_del'=>0])
+                ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%"])
                 ->orWhere(['Subjects.title like'=>"%$keyword%", 'enabled'=>'1'])
-//                ->limit(10)
+                ->limit(10)
+                ->formatResults(function($items) {
+                    return $items->map(function($item) {
+                        $item['avatar'] = getSmallAvatar($item['avatar']);
+                        return $item;
+                    });
+                })
                 ->toArray();
         if($users) {
             return $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $users]);
@@ -458,14 +465,22 @@ class MeetController extends AppController {
         $users = $this
                 ->User
                 ->find()
-                ->contain(['Subjects'])
+                ->contain(['Subjects'=>function($q){
+                    return $q->where(['Subjects.is_del'=>0]);
+                }])
                 ->distinct(['User.id'])
                 ->matching('Subjects', function($q)use($keyword){
-                    return $q;
+                    return $q->where(['Subjects.is_del'=>0]);
                 })
-                ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%", 'is_del'=>0])
+                ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%"])
                 ->orWhere(['Subjects.title like'=>"%$keyword%"])
-                ->limit(10)
+                ->page($page, $this->limit)
+                ->formatResults(function($items) {
+                    return $items->map(function($item) {
+                        $item['avatar'] = getSmallAvatar($item['avatar']);
+                        return $item;
+                    });
+                })
                 ->toArray();
         if($users) {
             return $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $users]);
@@ -647,9 +662,18 @@ class MeetController extends AppController {
             $where['truename like'] = "%$keyword%";
         }
         $biggie = $biggie
-                ->contain(['Subjects', 'Agencies'])
+                ->contain(['Subjects'=>function($q){
+                    return $q->where(['is_del'=>0])->orderDesc('Subjects.create_time');
+                }, 'Agencies'])
 //                ->limit($this->limit)
+                ->order(['subject_update_time'=>'desc'])
                 ->where($where)
+                ->formatResults(function($items) {
+                    return $items->map(function($item) {
+                        $item['avatar'] = getSmallAvatar($item['avatar']);
+                        return $item;
+                    });
+                 })
                 ->toArray();
         if($biggie !== false){
             if ($biggie) {
@@ -700,18 +724,17 @@ class MeetController extends AppController {
                 ->User
                 ->find()
                 ->contain(['Subjects'=>function($q){
-                    return $q->where(['is_del'=>0])->orderDesc('Subjects.create_time');
+                    return $q->where(['Subjects.is_del'=>0])->orderDesc('Subjects.create_time');
                 }])
-                ->where(['enabled'=>'1', 'level'=>'2', 'is_del'=>0])
+                ->where(['enabled'=>'1', 'level'=>'2'])
                 ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
                 ->page($page, $this->limit)
                 ->formatResults(function($items) {
-                        return $items->map(function($item) {
-                        //时间语义化转换
-                        $item['avatar'] = getOriginAvatar($item['avatar']);
+                    return $items->map(function($item) {
+                        $item['avatar'] = getSmallAvatar($item['avatar']);
                         return $item;
                     });
-                 })        
+                })
                 ->toArray();
         if($biggies) {
             return $this->Util->ajaxReturn(['status'=>true, 'data'=>$biggies]);

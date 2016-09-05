@@ -18,6 +18,7 @@
         <div class='h-regiser' id="doSearch">搜 索</div>
     </div>
     <div id='biggie'></div>
+    <div id="buttonLoading" class="loadingbox"></div>
 </div>
 <script type='text/html' id='biggie_tpl'>
     <section class="internet-v-info">
@@ -25,7 +26,7 @@
             <a href="/user/home-page/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
             <div class="vipinfo">
                 <a href="/user/home-page/{#id#}">
-                    <h3><div class="l-name">{#truename#}</div>{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
+                    <h3><div class="l-name">{#truename#}</div><span class="meetnum">{#meet_nums#}人见过</span></h3>
                     <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
                 </a>
                 <div class="mark s_mark_h">
@@ -47,7 +48,7 @@
         $(window).on("scroll", function () {
             $.util.listScroll('items', function () {
                 if (page === 9999) {
-                    $('#buttonLoading').html('亲，没有更多资讯了');
+                    $('#buttonLoading').html('亲，没有更多搜索结果了');
                     return;
                 }
                 $.util.showLoading('buttonLoading');
@@ -65,7 +66,6 @@
                             return;
                         }
                         if (typeof msg === 'object') {
-                            
                             if (msg.status === true) {
                                 var html = $.util.dataToTpl('', 'biggie_tpl', msg.data , function (d) {
                                     d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
@@ -74,14 +74,20 @@
                                     return d;
                                 });
                                 $('#biggie').append(html);
-                                page++;
+                                if(msg.data.length < 5){
+                                    page = 9999;
+                                } else {
+                                    page++;
+                                }
+                            } else {
+                                $.util.alert(msg.msg);
                             }
                         }
                     }
                 });
             });
         });
-    }, 2000);
+    }, 1000);
     
     $('#searchForm').on('submit', function(){
         if(!$('input[name="keyword"]').val)

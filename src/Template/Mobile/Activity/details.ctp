@@ -30,7 +30,7 @@
         <section class="a-detail newscomment-box">
             <h3 class="comment-title">活动介绍</h3>
             <div class="innercon a_process_pic">
-                <p><?= $activity->summary; ?></p>
+                <p><?= str_replace(["\r\n", "\n"], '<br />', $activity->summary); ?></p>
             </div>
         </section>
         <section class="a-detail newscomment-box">

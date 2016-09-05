@@ -91,6 +91,9 @@ class ActivityController extends AppController {
                             return $q->where(['type'=>0,'user_id'=>$user_id]);
                         }
                     ],
+                    'conditions' => [
+                        'status' => 1,
+                    ]
                 ]);
                 $orderTable = \Cake\ORM\TableRegistry::get('order');
                 if($activity->activityapply){
@@ -116,6 +119,9 @@ class ActivityController extends AppController {
                             return $q->where(['Replyusers.enabled'=>1]);
                         },
                     ],
+                    'conditions' => [
+                        'status' => 1
+                    ]
                 ]);
                 $this->set('user', '');
             }

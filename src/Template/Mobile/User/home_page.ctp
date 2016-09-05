@@ -12,7 +12,7 @@
     <div class="bg-ff">
         <div class="m_top_des clearfix">
             <div class="m_left-pic fl">
-                <img src="<?= $user->avatar ? getOriginAvatar($user->avatar) : '/mobile/images/touxiang.png' ?>"/>
+                <img src="<?= $user->avatar ? getSmallAvatar($user->avatar) : '/mobile/images/touxiang.png' ?>"/>
             </div>
             <div class="m_center_des fl">
                 <h3 class="m_info_name"><?= $user->truename ?>

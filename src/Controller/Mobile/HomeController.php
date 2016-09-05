@@ -52,10 +52,14 @@ class HomeController extends AppController {
         ]);
     }
     
+    /**
+     * 个人中心拉取数据
+     */
     public function getUserinfo(){
         $this->handCheckLogin();
         $user_id = $this->user->id;
         $user = $this->User->get($user_id);
+        $user->avatar = getOriginAvatar($user->avatar);
         $isWx = $this->request->is('weixin') ? true : false;
         $UsermsgTable = \Cake\ORM\TableRegistry::get('Usermsg');
         $unReadFollowCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type' => 1])->count(); //未读关注消息
@@ -295,8 +299,15 @@ class HomeController extends AppController {
                                         'conditions' => 'u.id = uf.user_id',
                                     ]
                                 ])
-                                ->where(['usermsg.`user_id`' => $user_id, 'usermsg.status'=>0])
-                                ->orderDesc('usermsg.create_time')->toArray();
+                                ->where(['usermsg.`user_id`' => $user_id])
+                                ->orderDesc('usermsg.create_time')
+                                ->formatResults(function($items) {
+                                    return $items->map(function($item) {
+                                        $item['u']['avatar'] = getSmallAvatar($item['u']['avatar']);
+                                        return $item;
+                                    });
+                                })
+                                ->toArray();
                 //看了之后 就更改状态了为已读
                 $UsermsgTable->updateAll(['status' => 1], ['user_id' => $user_id, 'status' => 0, 'type'=>1]);
                 if($fans){
@@ -1132,7 +1143,13 @@ class HomeController extends AppController {
                 ->contain(['OtherCard'])
                 ->where(['ownerid' => $this->user->id, 'resend' => '2'])
                 ->orderDesc('CardBoxes.`create_time`')
-                ->limit($this->limit)
+//                ->limit($this->limit)
+                ->formatResults(function($items) {
+                    return $items->map(function($item) {
+                        $item->other_card->avatar = getSmallAvatar($item->other_card->avatar);
+                        return $item;
+                    });
+                })
                 ->toArray();
         $this->set('cardjson', json_encode($card));
         $this->set('pageTitle', '名片夹');
@@ -1148,11 +1165,17 @@ class HomeController extends AppController {
                 ->CardBoxes
                 ->find()
                 ->contain(['OtherCard'])
-                ->where(['ownerid' => $this->user->id, 'resend' => $resend])
+                ->where(['ownerid' => $this->user->id, 'resend' => $resend, 'enabled'=>1])
                 ->orderDesc('CardBoxes.`create_time`')
-                ->limit($this->limit)
+//                ->limit($this->limit)
+                ->formatResults(function($items) {
+                    return $items->map(function($item) {
+                        $item->other_card->avatar = getSmallAvatar($item->other_card->avatar);
+                        return $item;
+                    });
+                })
                 ->toArray();
-        if ($card !== false) {
+        if ($card) {
             return $this->Util->ajaxReturn(['status' => true, 'data' => $card]);
         } else if($card == []){
             return $this->Util->ajaxReturn(false, '名片夹为空');

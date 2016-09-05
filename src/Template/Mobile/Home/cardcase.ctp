@@ -100,6 +100,8 @@
                         if(typeof msg == 'object') {
                             if(msg.status) {
                                 dealData(msg.data);
+                            } else {
+                                $.util.alert(msg.msg);
                             }
                         }
                     }
