@@ -140,6 +140,7 @@
         <label class="col-md-2 control-label">行业标签</label>
         <div class="col-md-8">
             <?= $this->cell('Industry') ?>
+            <span class="notice">(用于会员推荐)</span>
         </div>
     </div>
     <div class="form-group">
