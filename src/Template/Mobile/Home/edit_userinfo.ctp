@@ -20,7 +20,7 @@
             <a href="javascript:void(0)">
                 <span class="e_img">头像：</span>
                 <div class="upload-user-img">
-                    <span id="upload_pic" class='tx'><img src="<?= $user->avatar ? getOriginAvatar($user->avatar) : '/mobile/images/touxiang.png' ?>"/><input type="hidden" name="avatar" value="<?=$user->avatar?>" ></span>
+                    <span id="upload_pic" class='tx'><img src="<?= $user->avatar ? getSmallAvatar($user->avatar) : '/mobile/images/touxiang.png' ?>"/><input type="hidden" name="avatar" value="<?=$user->avatar?>" ></span>
                 </div>
             </a>
         </li>
