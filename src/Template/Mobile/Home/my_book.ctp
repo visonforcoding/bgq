@@ -196,6 +196,7 @@
     
     function read(em){
         var obj = $(em);
+        obj.find('em').children('.opic').remove();
         if(obj.attr('msg_id')){
             $.ajax({
                 type: 'POST',
@@ -203,7 +204,6 @@
                 url: "/home/read-msg/" + obj.attr('msg_id'),
                 success: function (res) {
                     if(res.status){
-                        obj.find('em').children('.opic').remove();
                         location.href = obj.attr('link');
                     } else {
                         $.util.alert(res.msg);
