@@ -55,6 +55,11 @@ class SubjectBookTable extends Table {
             'foreignKey' => 'table_id',
             'joinType' => 'LEFT'
         ]);
+        $this->hasMany('BookChats', [
+            'className' => 'BookChat',
+            'foreignKey' => 'book_id',
+            'joinType' => 'INNER'
+        ]);
         
         $this->addBehavior('Timestamp', [
             'events' => [

@@ -119,6 +119,8 @@
                 if(user.level == 2){
                     d.v = '<i></i>';
                 }
+                d.msg = d.usermsgs.length || d.book_chats.length ? '<span class="l_tips opci"></span>':'';
+                d.msg_id = d.usermsgs.length ? d.usermsgs[0].id : '';
                 if(type == 'books'){
                     if(status === '1'){
                         d.link = '/home/book-chat/'+d.id+'/1';
@@ -129,8 +131,6 @@
                         }
                     } else {
                         d.link = '/home/my-book-detail/'+d.id;
-                        d.msg = d.usermsgs.length ? '<span class="l_tips opci"></span>':'';
-                        d.msg_id = d.usermsgs.length ? d.usermsgs.id : '';
                         d.arrow = '<i class="iconfont fr">&#xe667;</i>';
                     }
                 } else {
@@ -143,9 +143,6 @@
                         }
                     } else {
                         d.link = '/home/my-book-savant-detail/'+d.id;
-                        console.log();
-                        d.msg = d.usermsgs.length ? '<span class="l_tips opci"></span>':'';
-                        d.msg_id = d.usermsgs.length ? d.usermsgs[0].id : '';
                         d.arrow = '<i class="iconfont fr">&#xe667;</i>';
                     }
                 }

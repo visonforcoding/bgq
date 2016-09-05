@@ -151,6 +151,14 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                     break;
                 //无参数   无回调
                 case "event.back":
+                    registerAPI(null, api, function () {
+                        if (!isAPP) {
+                            history.back();
+                            return;
+                        }
+                        return JSApiInvoke(api, {}, '');
+                    });
+                    break;
                 case "sys.openLOC":
                 case "sys.mediaPlay":
                 case "sys.closeLOC":

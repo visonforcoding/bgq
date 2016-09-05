@@ -62,6 +62,7 @@ class HomeController extends AppController {
         $user->avatar = getOriginAvatar($user->avatar);
         $isWx = $this->request->is('weixin') ? true : false;
         $UsermsgTable = \Cake\ORM\TableRegistry::get('Usermsg');
+        $BookChatTable = \Cake\ORM\TableRegistry::get('book_chat');
         $unReadFollowCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type' => 1])->count(); //未读关注消息
         $unReadSysCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type !=' => 1])->count(); //未读系统消息
         $hasMsg = false;
@@ -74,8 +75,9 @@ class HomeController extends AppController {
             $activityMsg = true;
         }
         $unReadMeet = $UsermsgTable->find()->where(['user_id'=>$user_id, 'status'=>0, 'type'=>4])->count();
+        $unReadChat = $BookChatTable->find()->where(['reply_id'=>$user_id, 'is_read'=>0])->count();
         $meetMsg = false;
-        if($unReadMeet){
+        if($unReadMeet || $unReadChat){
             $meetMsg = true;
         }
         $res = compact('user', 'isWx', 'hasMsg', 'activityMsg', 'meetMsg');
@@ -477,9 +479,6 @@ class HomeController extends AppController {
             }
         }
 
-
-
-
         /**
          * 我的约见 （我是顾客）
          */
@@ -487,25 +486,33 @@ class HomeController extends AppController {
             $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
             $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
             $type = $this->request->query('type');
-        //        $where['SubjectBook.status'] = in_array($type, ['0', '1', '3']) ? $type : 0;
-//            $where['SubjectBook.status !='] = 2;
             $user_id = $this->user->id;
-            $where['SubjectBook.user_id'] = $user_id;
-            $books = $BookTable->find()->contain(['Subjects', 'Subjects.User' => function($q) {
+            $books = $BookTable->find()->contain(['Subjects'=>function($q){
+                return $q->where(['Subjects.is_del'=>0]);
+            }, 'Subjects.User' => function($q) {
                 return $q->where(['enabled'=>1])
                         ->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums', 'level']);
             }, 'Usermsgs'=>function($q)use($user_id){
                 return $q->where(['Usermsgs.type'=>4, 'Usermsgs.status'=>0, 'Usermsgs.user_id'=>$user_id]);
-            }])->where($where)->orderDesc('SubjectBook.update_time')->toArray();
-            
-            $savant_books = $BookTable->find()->contain(['Subjects', 'Users' => function($q) {
+            }, 'BookChats'=>function($q)use($user_id){
+                return $q->where(['reply_id'=>$user_id, 'is_read'=>0]);
+            }])->where(['SubjectBook.user_id'=>$user_id])->orderDesc('SubjectBook.update_time')->toArray();
+//        debug($books);die;
+            $savant_books = $BookTable->find()->contain(['Subjects'=>function($q){
+                return $q->where(['Subjects.is_del'=>0]);
+            }, 'Users' => function($q) {
                 return $q->where(['Users.enabled'=>1])
                         ->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums', 'level']);
             }, 'Usermsgs'=>function($q)use($user_id){
                 return $q->where(['Usermsgs.type'=>4, 'Usermsgs.status'=>0, 'Usermsgs.user_id'=>$user_id]);
-            }])->where(['SubjectBook.savant_id =' => $this->user->id])->order('SubjectBook.update_time')->toArray();
-//        debug($savant_books);die;
-//            $unReadBook = $UsermsgTable->find()->where(['type'=>4, 'user_id'=>$this->user->id, 'status'=>0])->contain(['']);
+            }, 'BookChats'=>function($q)use($user_id){
+                return $q->where(['reply_id'=>$user_id, 'is_read'=>0]);
+            }])->where(['SubjectBook.savant_id =' => $user_id])->order('SubjectBook.update_time')->toArray();
+            $BookChatTable = \Cake\ORM\TableRegistry::get('book_chat');
+            $chat = $BookChatTable->find()->where()->count();
+            if($chat){
+                
+            }
             $this->set([
                 'pageTitle' => '我的约见',
                 'books' => $books,
@@ -691,8 +698,13 @@ class HomeController extends AppController {
         $uid = $this->user->id;
         $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
         $book = $BookTable->get($book_id, [
-            'contain' => ['Subjects']
+            'contain' => ['Subjects'=>function($q){
+                return $q->where(['Subjects.is_del'=>0]);
+            }]
         ]);
+        $BookChatTable = \Cake\ORM\TableRegistry::get('book_chat');
+//        $chat = $BookChatTable->find()->where(['reply_id'=>$uid, 'book_id'=>$book_id])->toArray();
+        $BookChatTable->updateAll(['is_read'=>1], ['reply_id'=>$uid, 'book_id'=>$book_id, 'is_read'=>0]);
         $this->set([
             'pageTitle'=>'约见聊天',
             'book' => $book,

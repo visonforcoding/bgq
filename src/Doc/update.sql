@@ -726,3 +726,6 @@ ALTER TABLE `user`
 	ADD COLUMN `focus_nums` INT(11) UNSIGNED NOT NULL DEFAULT '0' COMMENT '关注数' AFTER `fans`,
 	ADD COLUMN `post_card_nums` INT(11) UNSIGNED NOT NULL DEFAULT '0' COMMENT '递名片数' AFTER `focus_nums`,
 	ADD COLUMN `get_card_nums` INT(11) UNSIGNED NOT NULL DEFAULT '0' COMMENT '收名片数' AFTER `post_card_nums`;	
+
+#约见聊天表增加是否已读
+ALTER TABLE `book_chat` ADD COLUMN `is_read` TINYINT(2) UNSIGNED DEFAULT 0 COMMENT '是否已读';
