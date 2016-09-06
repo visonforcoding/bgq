@@ -439,7 +439,7 @@
                             $('#follow_btn').html('<i class="iconfont">&#xe614;</i>取消关注');
 //                            $('#follow_btn').addClass('focusgray');
                         } else {
-                            $('#follow_btn').html('<i class="iconfont">&#xe614;</i>关注');
+                            $('#follow_btn').html('<i class="iconfont">&#xe614;</i>加关注');
 //                            $('#follow_btn').removeClass('focusgray');
                         }
                     }
