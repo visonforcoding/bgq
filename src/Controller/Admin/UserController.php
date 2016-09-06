@@ -70,7 +70,8 @@ class UserController extends AppController {
             $user->user_token = md5(uniqid());
             $user->avatar = '/mobile/images/touxiang.jpg';
             $data = $this->request->data();
-                //隐私设置
+            //隐私设置
+            $data['grbq'] = serialize($this->request->data('grbq'));
             $data['secret'] =  [
                 'phone_set'=>2,
                 'email_set'=>2,
@@ -85,7 +86,6 @@ class UserController extends AppController {
                 $this->Util->ajaxReturn(['stauts' => false, 'msg' => errorMsg($user, '添加失败'), 'errors' => $errors]);
             }
         }
-        $industries = $this->User->Industries->find('list', ['limit' => 200]);
         $this->set(compact('user', 'industries'));
     }
 
@@ -98,10 +98,12 @@ class UserController extends AppController {
      */
     public function edit($id = null) {
         $user = $this->User->get($id, [
-            'contain' => ['Educations','Careers']
+            'contain' => ['Educations','Careers','Industries']
         ]);
         if ($this->request->is(['post', 'put'])) {
-            $user = $this->User->patchEntity($user, $this->request->data);
+            $data = $this->request->data();
+            $data['grbq'] = serialize($this->request->data('grbq'));
+            $user = $this->User->patchEntity($user, $data);
             if ($this->User->save($user)) {
                 $this->Util->ajaxReturn(true, '修改成功');
             } else {
@@ -109,7 +111,11 @@ class UserController extends AppController {
                 $this->Util->ajaxReturn(false, getMessage($errors));
             }
         }
-        $this->set(compact('user'));
+        $selIndustryIds = [];
+        foreach ($user->industries as $k => $v) {
+            $selIndustryIds[] = $v['id'];
+        }
+        $this->set(compact('user','selIndustryIds'));
     }
 
     /**
