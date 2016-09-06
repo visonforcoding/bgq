@@ -24,8 +24,8 @@ class SavantController extends AppController {
      * @return void
      */
     public function index() {
-        if($this->request->query('do')){
-            $this->set('do','check');
+        if ($this->request->query('do')) {
+            $this->set('do', 'check');
         }
         $this->set('savant', $this->Savant);
     }
@@ -54,8 +54,17 @@ class SavantController extends AppController {
     public function add() {
         $savant = $this->Savant->newEntity();
         if ($this->request->is('post')) {
-            $savant = $this->Savant->patchEntity($savant, $this->request->data);
-            if ($this->Savant->save($savant)) {
+            $user_id = $this->request->data('user_id');
+            $user = $this->User->get($user_id);
+            $user->level = 2;
+            $user->savant_status  = 3;
+            $SavantTable = \Cake\ORM\TableRegistry::get('Savant');
+            $savant = $SavantTable->newEntity($this->request->data());
+            $UserTable = $this->User;
+            $trans = $this->User->connection()->transactional(function()use($UserTable,$user,$SavantTable,$savant){
+                return $SavantTable->save($savant)&&$UserTable->save($user);
+            });
+            if ($trans) {
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {
                 $errors = $savant->errors();
@@ -73,9 +82,9 @@ class SavantController extends AppController {
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-     public function edit($id = null) {
+    public function edit($id = null) {
         $user = $this->User->get($id, [
-            'contain' => ['Educations','Careers','Savant']
+            'contain' => ['Educations', 'Careers', 'Savant']
         ]);
         if ($this->request->is(['post', 'put'])) {
             $user = $this->User->patchEntity($user, $this->request->data);
@@ -125,11 +134,11 @@ class SavantController extends AppController {
         $savant_status = $this->request->data('savant_status');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = ['User.savant_status >' => 1,'is_del'=>0];
+        $where = ['User.savant_status >' => 1, 'is_del' => 0];
         if ($savant_status > 1) {
             $where = ['User.savant_status' => $savant_status];
         }
-        if($this->request->query('do')=='check'&&$savant_status===NULL){
+        if ($this->request->query('do') == 'check' && $savant_status === NULL) {
             $where = ['User.savant_status' => 2];
         }
         if (!empty($keywords)) {
@@ -140,15 +149,15 @@ class SavantController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $query = $this->User->find()->select(['User.id','User.phone','User.grade','User.truename','User.company','User.position','User.is_top',
-            'User.meet_nums', 'User.truename', 'Savant.reco_nums', 'User.savant_status', 'Savant.xmjy', 'Savant.zyys', 'Savant.summary'])
+        $query = $this->User->find()->select(['User.id', 'User.phone', 'User.grade', 'User.truename', 'User.company', 'User.position', 'User.is_top',
+                    'User.meet_nums', 'User.truename', 'Savant.reco_nums', 'User.savant_status', 'Savant.xmjy', 'Savant.zyys', 'Savant.summary'])
                 ->contain(['Savant']);
         if (!empty($where)) {
             $query->where($where);
         }
         $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
-            $query->order(['is_top'=>'desc',$sort => $order]);
+            $query->order(['is_top' => 'desc', $sort => $order]);
         }
 
         $query->limit(intval($rows))
@@ -184,7 +193,7 @@ class SavantController extends AppController {
         if ($savant_status > 1) {
             $where = ['User.savant_status' => $savant_status];
         }
-        if($this->request->query('do')=='check'&&$savant_status===NULL){
+        if ($this->request->query('do') == 'check' && $savant_status === NULL) {
             $where = ['User.savant_status' => 2];
         }
         if (!empty($keywords)) {
@@ -196,17 +205,17 @@ class SavantController extends AppController {
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
         $Table = $this->Savant;
-        $column = ['姓名','公司','职位','手机号' ,'约见次数','推荐次数','注册时间'];
+        $column = ['姓名', '公司', '职位', '手机号', '约见次数', '推荐次数', '注册时间'];
         $query = $Table->find();
         $query->contain(['Users']);
         $query->hydrate(false);
-        $query->select(['user_truename'=>'Users.truename','user_company'=>'Users.company','user_position'=>'Users.position',
-            'user_phone'=>'Users.phone','meet_nums'=>'Users.meet_nums','reco_nums'=>'reco_nums','create_time'=>'Users.create_time' ]);
+        $query->select(['user_truename' => 'Users.truename', 'user_company' => 'Users.company', 'user_position' => 'Users.position',
+            'user_phone' => 'Users.phone', 'meet_nums' => 'Users.meet_nums', 'reco_nums' => 'reco_nums', 'create_time' => 'Users.create_time']);
         if (!empty($where)) {
             $query->where($where);
         }
         if (!empty($sort) && !empty($order)) {
-            $query->order(['is_top'=>'desc',$sort => $order]);
+            $query->order(['is_top' => 'desc', $sort => $order]);
         }
         $res = $query->toArray();
         $this->autoRender = false;
@@ -225,9 +234,9 @@ class SavantController extends AppController {
         $user->savant_status = 3;
         $res = $this->User->save($user);
         if ($res) {
-                  //记录
+            //记录
             $SavantApplyTable = \Cake\ORM\TableRegistry::get('SavantApply');
-            $apply = $SavantApplyTable->find()->where(['user_id'=>$id])->orderDesc('id')->first();
+            $apply = $SavantApplyTable->find()->where(['user_id' => $id])->orderDesc('id')->first();
             $apply->check_man = $this->_user->truename;
             $apply->action = 1;
             $SavantApplyTable->save($apply);
@@ -238,15 +247,15 @@ class SavantController extends AppController {
             return $this->Util->ajaReturn(false, '系统错误');
         }
     }
-    
+
     /**
      * 置顶
      * @param type $id
      */
-    public function top($id){
+    public function top($id) {
         $user = $this->User->get($id);
-        $user->is_top = $user->is_top==1?0:1;
-        $res = $this->User->save($user); 
+        $user->is_top = $user->is_top == 1 ? 0 : 1;
+        $res = $this->User->save($user);
         if ($res) {
             return $this->Util->ajaxReturn(true, '操作成功');
         } else {
@@ -267,7 +276,7 @@ class SavantController extends AppController {
         if ($res) {
             //记录
             $SavantApplyTable = \Cake\ORM\TableRegistry::get('SavantApply');
-            $apply = $SavantApplyTable->find()->where(['user_id'=>$id])->orderDesc('id')->first();
+            $apply = $SavantApplyTable->find()->where(['user_id' => $id])->orderDesc('id')->first();
             $reason = $data['reason'];
             $apply->check_man = $this->_user->truename;
             $apply->reason = $reason;
@@ -304,55 +313,55 @@ class SavantController extends AppController {
         $this->response->send();
         $this->response->stop();
     }
-    
+
     /**
      * 申请记录
      */
-     public function showApply($id){
-         $this->viewBuilder()->autoLayout(false);
-         $SavantApplyTable = \Cake\ORM\TableRegistry::get('SavantApply');
-         $savantStatusConf = \Cake\Core\Configure::read('savantStatus');
-         $applys = $SavantApplyTable->find()->contain(['Users'])->where(['user_id'=>$id])
+    public function showApply($id) {
+        $this->viewBuilder()->autoLayout(false);
+        $SavantApplyTable = \Cake\ORM\TableRegistry::get('SavantApply');
+        $savantStatusConf = \Cake\Core\Configure::read('savantStatus');
+        $applys = $SavantApplyTable->find()->contain(['Users'])->where(['user_id' => $id])
                 ->formatResults(function($items)use($savantStatusConf) {
                     return $items->map(function($item)use($savantStatusConf) {
-                        switch ($item->action) {
-                            case 1:
-                                $item['savant_str'] = '通过';
-                                break;
-                            case -1:
-                                $item['savant_str'] = '不通过';
-                                break;
-                            case 0:
-                                $item['savant_str'] = '未审核';
-                                break;
-                            default:
-                                break;
-                        }
-                        return $item;
-                    });
+                                switch ($item->action) {
+                                    case 1:
+                                        $item['savant_str'] = '通过';
+                                        break;
+                                    case -1:
+                                        $item['savant_str'] = '不通过';
+                                        break;
+                                    case 0:
+                                        $item['savant_str'] = '未审核';
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                return $item;
+                            });
                 })
-                 ->toArray();
-         $this->set([
-             'applys'=>$applys,
-         ]);
+                ->toArray();
+        $this->set([
+            'applys' => $applys,
+        ]);
     }
-    
+
     /**
      * 话题管理
      */
-    public function showSubject($id=null){
-        if($id){
-            $this->set('user_id',$id);
+    public function showSubject($id = null) {
+        if ($id) {
+            $this->set('user_id', $id);
         }
     }
-    
-    public function saveSavant($id=null){
+
+    public function saveSavant($id = null) {
         $SavantTable = \Cake\ORM\TableRegistry::get('Savant');
-        $savant = $SavantTable->find()->where(['user_id'=>$id])->first();
-        $savant = $SavantTable->patchEntity($savant,  $this->request->data());
-        if($SavantTable->save($savant)){
-            $this->Util->ajaxReturn(true,'修改成功');
-        }else{
+        $savant = $SavantTable->find()->where(['user_id' => $id])->first();
+        $savant = $SavantTable->patchEntity($savant, $this->request->data());
+        if ($SavantTable->save($savant)) {
+            $this->Util->ajaxReturn(true, '修改成功');
+        } else {
             $this->Util->ajaxReturn(false, '修改失败');
         }
     }

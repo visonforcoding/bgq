@@ -8,17 +8,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">用户</label>
         <div class="col-md-8">
-            <?= $this->cell('User'); ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">封面</label>
-        <div class="col-md-8">
-            <div  class="img-thumbnail input-img"  single>
-                <img  alt="封面图片" src=""/>
-            </div>
-            <input name="cover"  type="hidden"/>
-            <div id="cover" class="jqupload">上传</div>
+            <?= $this->cell('User::not'); ?>
         </div>
     </div>
     <div class="form-group">
@@ -30,7 +20,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">资源优势</label>
+        <label class="col-md-2 control-label">擅长话题</label>
         <div class="col-md-8">
             <?php
             echo $this->Form->input('zyys', ['label' => false, 'class' => 'form-control']);
@@ -40,9 +30,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">简介</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('summary', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <textarea name="summary" class="form-control"></textarea>
         </div>
     </div>
     <div class="form-group">
@@ -64,7 +52,7 @@
     <script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>-->
 <script>
     $(function () {
-         initJqupload('cover', '/wpadmin/util/doUpload?dir=savantcover', 'jpg,png,gif,jpeg'); //初始化图片上传
+        initJqupload('cover', '/wpadmin/util/doUpload?dir=savantcover', 'jpg,png,gif,jpeg'); //初始化图片上传
         //var ue = UE.getEditor('content'); //初始化富文本编辑器
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-user').select2({

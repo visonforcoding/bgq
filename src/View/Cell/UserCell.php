@@ -22,10 +22,19 @@ class UserCell extends Cell {
      *
      * @return void
      */
-    public function display($selIds=null) {
+    public function display($selIds = null) {
         $UserTable = \Cake\ORM\TableRegistry::get('User');
-        $users = $UserTable->find()->where(['enabled'=>1])->all()->toArray();
-        $this->set(compact('users','selIds'));
+        $users = $UserTable->find()->where(['enabled' => 1])->all()->toArray();
+        $this->set(compact('users', 'selIds'));
+    }
+
+    /**
+     * 非专家用户
+     */
+    public function not($selIds = null) {
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $users = $UserTable->find()->where(['enabled' => 1,'level'=>1])->all()->toArray();
+        $this->set(compact('users', 'selIds'));
     }
 
 }

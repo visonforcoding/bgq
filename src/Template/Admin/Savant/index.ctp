@@ -5,9 +5,9 @@
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
-            <!--            <a href="/admin/savant/add" class="btn btn-small btn-warning">
-                            <i class="icon icon-plus-sign"></i>添加
-                        </a>-->
+            <a href="/admin/savant/add" class="btn btn-small btn-warning">
+                <i class="icon icon-plus-sign"></i>添加
+            </a>
             <div class="form-group">
                 <label for="keywords">关键字</label>
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="用户名、手机号、公司">
@@ -16,7 +16,7 @@
                 <label for="keywords">状态</label>
                 <select class="form-control" name="savant_status">
                     <option value="-1">全部</option>
-                    <option value="2" <?php if(isset($do)): ?>selected="selected"<?php endif;?>>未审核</option>
+                    <option value="2" <?php if (isset($do)): ?>selected="selected"<?php endif; ?>>未审核</option>
                     <option value="3">审核通过</option>
                 </select>
             </div>
@@ -43,11 +43,11 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/savant/getDataList<?php if(isset($do)): ?>?do=check<?php endif;?>",
+                        url: "/admin/savant/getDataList<?php if (isset($do)): ?>?do=check<?php endif; ?>",
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户','手机号','公司','职位','等级', '约见次数', '推荐次数', '项目经验', '资源优势', '简介', '审核情况','置顶', '操作'],
+                                ['用户', '手机号', '公司', '职位', '等级', '约见次数', '推荐次数', '项目经验', '资源优势', '简介', '审核情况', '置顶', '操作'],
                         colModel: [
                             {name: 'truename', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     return '<a title="查看" onClick="showSavant(' + " ' " + rowObject.id + " ' " + ');" class="grid-btn ">' + cellvalue + '</a>';
@@ -55,8 +55,8 @@
                             {name: 'phone', editable: true, align: 'center'},
                             {name: 'company', editable: true, align: 'center'},
                             {name: 'position', editable: true, align: 'center'},
-                            {name: 'grade', editable: true, align: 'center',formatter:function(cell,opt,row){
-                                    switch(cell){
+                            {name: 'grade', editable: true, align: 'center', formatter: function (cell, opt, row) {
+                                    switch (cell) {
                                         case 1:
                                             return '普通';
                                         case 2:
@@ -64,7 +64,7 @@
                                         case 3:
                                             return 'vip';
                                     }
-                            }},
+                                }},
                             {name: 'meet_nums', editable: true, align: 'center'},
                             {name: 'savant.reco_nums', editable: true, align: 'center'},
 //                            {name: 'cover', editable: true, align: 'center'},
@@ -72,13 +72,13 @@
                             {name: 'savant.zyys', editable: true, align: 'left'},
                             {name: 'savant.summary', editable: true, align: 'center'},
                             {name: 'savant_status', editable: true, align: 'center', formatter: statusFormatter},
-                            {name: 'is_top', editable: true, align: 'center', formatter: function(cell,opt,row){
-                                    if(cell==1){
+                            {name: 'is_top', editable: true, align: 'center', formatter: function (cell, opt, row) {
+                                    if (cell == 1) {
                                         return '<span class="notice">已置顶</span>'
-                                    }else{
+                                    } else {
                                         return '<span>未置顶</span>';
                                     }
-                            }},
+                                }},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: 10,
@@ -121,9 +121,9 @@
                     response += '<a title="查看话题" href="/admin/savant/show-subject/' + rowObject.id + '" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-chat-line"></i> </a>';
                     response += '<a title="编辑" href="/admin/savant/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     response += '<a title="申请记录" onclick="showApply(' + rowObject.id + ')" class="grid-btn "><i class="icon icon-list-alt"></i> </a>';
-                     if(rowObject.is_top==0){
+                    if (rowObject.is_top == 0) {
                         response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
-                    }else{
+                    } else {
                         response += '<a title="取消置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-down"></i> </a>';
                     }
                     if (rowObject.savant_status == 2) {
@@ -267,7 +267,7 @@
                         content: url
                     });
                 }
-                
+
                 function showApply(id) {
                     url = '/admin/savant/show-apply/' + id;
                     layer.open({
