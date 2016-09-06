@@ -4,15 +4,8 @@
     </div>
 </header>
 <div class="wraper newswraper">
-    <div class="a-search-box" id="search">
-        <a href="/news/search">
-            <div class="a-search">
-                <i class="iconfont">&#xe618;</i>
-                <div class="s-con">
-                    <input type="text" placeholder="请输入关键词" readonly class="search" />
-                </div>
-            </div>
-        </a>
+   <div class="a_search_box" id="search">
+        <span class="iconfont">&#xe683;</span>
     </div>
     <div class="a-banner">
         <ul class="pic-list-container" id="imgList"></ul>
