@@ -20,13 +20,13 @@
 
     </div>
 <script type="text/html" id="tpl">
-    <section class="internet-v-info">
+    <section class="internet-v-info mt20">
         <a link="{#link#}"  id='msgId_{#msg_id#}' msg_id='{#msg_id#}' onclick="read(this);">
             <div class="innercon">
                 <span class="head-img"><img src="{#user_logo#}"/>{#v#}</span>
                 <div class="vipinfo my-meet-info">
                     <h3>{#truename#}
-                        <time>{#time#}</time>
+                        <time style='font-size:.26rem;color:#7a7e83; margin-left:.1rem;'>{#time#}</time>
                         <span class="meetnum">{#meet_nums#}</span>
                     </h3>
                     <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
