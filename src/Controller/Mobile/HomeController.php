@@ -759,10 +759,10 @@ class HomeController extends AppController {
         $data['content'] = $this->request->data('content');
         if($type == '1'){
             $data['reply_id'] = $book->savant_id;
-            $extra['url'] = 'http://m.chinamatop.com/home/my-book/#2';
+            $extra['url'] = 'http://m.chinamatop.com/home/my-book/#5';
         } else {
             $data['reply_id'] = $book->user_id;
-            $extra['url'] = 'http://m.chinamatop.com/home/my-book/#5';
+            $extra['url'] = 'http://m.chinamatop.com/home/my-book/#2';
         }
         $data['user_id'] = $user_id;
         $data['book_id'] = $book_id;
@@ -773,8 +773,9 @@ class HomeController extends AppController {
         if($res){
             $UserTable = \Cake\ORM\TableRegistry::get('user');
             $user = $UserTable->get($data['reply_id']);
+            $me = $UserTable->get($user_id);
             $this->loadComponent('Push');
-            $this->Push->sendAlias($user->user_token, '你有一条新的约见消息', $data['content'], $data['content'], 'BGB', true, $extra);
+            $this->Push->sendAlias($user->user_token, $me->truename.'给你发了一条消息', $data['content'], $data['content'], 'BGB', true, $extra);
             return $this->Util->ajaxReturn(true, '发送成功');
         } else {
             return $this->Util->ajaxReturn(false, '系统错误');
