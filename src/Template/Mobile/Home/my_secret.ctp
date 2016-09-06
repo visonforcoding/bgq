@@ -36,7 +36,7 @@
                     </div>
                 </a>
             </li>
-            <li class="nobottom">
+            <li>
                 <a href="javascript:void(0)">
                     <span>工作经历：</span>
                     <div>
