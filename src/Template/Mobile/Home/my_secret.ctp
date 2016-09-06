@@ -76,7 +76,7 @@
                 </a>
             </li>-->
         </ul>
-        <p class="inner f-color-gray mt20">资料包括行业、擅长业务、标签、工作经历、教育经历等</p>
+        <!--<p class="inner f-color-gray mt20">资料包括行业、擅长业务、标签、工作经历、教育经历等</p>-->
         <a id="submit" href="javascript:void(0);" class="nextstep">保存</a>
     </form>
 </div>
@@ -101,7 +101,9 @@
             func: function (res) {
                 $.util.alert(res.msg);
                 if (res) {
-                    window.location.href = '/home/index';
+                    setTimeout(function(){
+                        window.location.href = '/home/index';
+                    }, 1000);
                 }
             }
         });
