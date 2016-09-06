@@ -29,7 +29,7 @@ class PushController extends AppController {
         $type = $this->request->data('type');
         $sort = 'User.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
-        $keywords = $this->request->data('keywords');
+        $keywords = $this->request->data('keyword');
         $where = ['enabled'=>1];
         if (!empty($keywords)) {
             $where['or'] = [['truename like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
@@ -79,11 +79,11 @@ class PushController extends AppController {
     
     public function doPush(){
         $title = $this->request->data('title');
-        $type = $this->request->data('type');
+//        $type = $this->request->data('type');
         $content = $this->request->data('content');
         $url = $this->request->data('url');
-        $choose = $this->request->data('choose');
-        $activity_id = $this->request->data('activity_id');
+//        $choose = $this->request->data('choose');
+//        $activity_id = $this->request->data('activity_id');
         $industry_id = $this->request->data('industry_id');
         $keyword = $this->request->data('keyword');
         $where = ['enabled'=>1];
@@ -95,20 +95,21 @@ class PushController extends AppController {
         if (!empty($where)) {
             $query->where($where);
         }
-        if($type == 1){
-            if($activity_id){
-                $query->matching('Activityapply', function($q)use($activity_id){
-                    return $q->where(['Activityapply.activity_id'=>$activity_id]);
-                });
-            }
-        } else if($type == 2){
+//        if($type == 1){
+//            if($activity_id){
+//                $query->matching('Activityapply', function($q)use($activity_id){
+//                    return $q->where(['Activityapply.activity_id'=>$activity_id]);
+//                });
+//            }
+//        } else if($type == 2){
             if($industry_id){
                 $query->matching('UserIndustry', function($q)use($industry_id){
                     return $q->where(['UserIndustry.industry_id' => $industry_id]);
                 });
             }
-        }
+//        }
         $res = $query->toArray();
+        
         $user = '';
         if($res !== false){
             if($res === null){
@@ -120,12 +121,11 @@ class PushController extends AppController {
                 $this->loadComponent('Push');
                 if($url){
                     $extra['url'] = 'http://m.chinamatop.com' . $url;
-                    $res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true, $extra);
+                    $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true, $extra);
                 } else {
-                    $res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true);
+                    $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true);
                 }
-                
-                if($res){
+                if($push_res){
                     return $this->Util->ajaxReturn(true, '推送成功');
                 } else {
                     return $this->Util->ajaxReturn(false, '推送失败');
@@ -137,18 +137,18 @@ class PushController extends AppController {
         
     }
     
-    public function view($type, $id){
+    public function view($id){
         $this->viewBuilder()->autoLayout(false);
-        if($type == 1){
-            $activityTable = \Cake\ORM\TableRegistry::get('activity');
-            $res = $activityTable->get($id);
-        } else {
+//        if($type == 1){
+//            $activityTable = \Cake\ORM\TableRegistry::get('activity');
+//            $res = $activityTable->get($id);
+//        } else {
             $industryTable = \Cake\ORM\TableRegistry::get('industry');
             $res = $industryTable->get($id);
-        }
+//        }
         $this->set([
             'content'=>$res,
-            'type' => $type
+//            'type' => $type
         ]);
     }
     

@@ -6,7 +6,7 @@
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
-            <div class="form-group">
+<!--            <div class="form-group">
                 <label for="keywords">类别</label>
                 <select id="cate" class="form-control" name="type">
                     <option></option>
@@ -17,14 +17,14 @@
             <div class="form-group">
                 <label for="keywords">活动</label>
                 <?= $this->cell('ActivityRecommend', [['single']]); ?>
-            </div>
+            </div>-->
             <div class="form-group">
                 <label for="keywords">标签</label>
                 <?=$this->cell('Industry::push',[['single']])?>
             </div>
             <div class="form-group">
-                <label for="keywords">关键字</label>
-                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="用户名、电话">
+                <label for="keyword">关键字</label>
+                <input type="text" name="keyword" class="form-control" id="keywords" placeholder="用户名、电话">
             </div>
             <a onclick="doSearch();" class="btn btn-info">预览用户</a>
             <a onclick="doPush();" class="btn btn-info">推送</a>
@@ -168,13 +168,14 @@
                 }
 
                 function doSearch() {
-                    if($('#cate').val() == ''){
-                        layer.alert('请先选择一个类别');
-                        return;
-                    } else if($('#cate').val() == 1 && $('#select-activity').val() == ''){
-                        layer.alert('请选择一个活动');
-                        return;
-                    } else if($('#cate').val() == 2 && $('#select-industry').val() == ''){
+//                    if($('#cate').val() == ''){
+//                        layer.alert('请先选择一个类别');
+//                        return;
+//                    } else if($('#cate').val() == 1 && $('#select-activity').val() == ''){
+//                        layer.alert('请选择一个活动');
+//                        return;
+//                    } else if($('#cate').val() == 2 && $('#select-industry').val() == ''){
+                    if($('#select-industry').val() == ''){
                         layer.alert('请选择一个标签');
                         return;
                     }
@@ -215,23 +216,24 @@
                 }
 
                 function doPush() {
-                    if($('#cate').val() == ''){
-                        layer.alert('请先选择一个类别');
-                        return;
-                    } else if($('#cate').val() == 1 && $('#select-activity').val() == ''){
-                        layer.alert('请选择一个活动');
-                        return;
-                    } else if($('#cate').val() == 2 && $('#select-industry').val() == ''){
+//                    if($('#cate').val() == ''){
+//                        layer.alert('请先选择一个类别');
+//                        return;
+//                    } else if($('#cate').val() == 1 && $('#select-activity').val() == ''){
+//                        layer.alert('请选择一个活动');
+//                        return;
+//                    } else if($('#cate').val() == 2 && $('#select-industry').val() == ''){
+                    if($('#select-industry').val() == ''){
                         layer.alert('请选择一个标签');
                         return;
                     }
-                    var type = $('#cate').val();
-                    var id = '';
-                    if(type == 1){
-                        id = $('#select-activity').val();
-                    } else if(type == 2) {
-                        id = $('#select-industry').val();
-                    }
+//                    var type = $('#cate').val();
+//                    var id = '';
+//                    if(type == 1){
+//                        id = $('#select-activity').val();
+//                    } else if(type == 2) {
+                    var id = $('#select-industry').val();
+//                    }
                     //iframe层-父子操作
                     layer.open({
                         type: 2,
@@ -239,7 +241,7 @@
                         area: ['70%', '50%'],
                         shadeClose: true,
                         shade: 0.8,
-                        content: '/admin/push/view/'+type+'/'+id
+                        content: '/admin/push/view/'+id
                     });
                 }
                 
