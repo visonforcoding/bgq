@@ -13,9 +13,11 @@
             <a href="javascript:void(0)" id="news">资讯</a>
         </div>
     </div>
-    <section class="my-collection-info" id="collect"></section>
+    <div id="collect"></div>
+    
 </div>
 <script type="text/html" id="activityTpl">
+    <section class="my-collection-info">
     <div class="innercon">
         <a href="/activity/details/{#id#}" class="clearfix nobottom">
             <span class="my-pic-acive"><img src="{#cover#}"/></span>
@@ -25,8 +27,10 @@
             </div>
         </a>
     </div>
+       </section> 
 </script>
 <script type="text/html" id="newsTpl">
+    <section class="my-collection-info">
     <div class="innercon">
         <a href="/news/view/{#news_id#}" class="clearfix nobottom">
             <span class="my-pic-acive"><img src="{#news_cover#}"/></span>
@@ -36,6 +40,7 @@
             </div>
         </a>
     </div>
+        </section>
 </script>
 <?php $this->start('script'); ?>
 <script>
@@ -58,7 +63,7 @@
                     return d;
                 });
             } else {
-                $.util.alert(res.msg);
+                $('#collect').html('<div class="nocontent"><i class="iconfont">&#xe60d;</i><span>你还没有任何活动收藏</span></div>');
             }
         }
     });
@@ -85,8 +90,7 @@
                         return d;
                     });
                 } else {
-                    $('#collect').html('');
-                    $.util.alert(res.msg);
+                    $('#collect').html('<div class="nocontent"><i class="iconfont">&#xe60d;</i><span>你还没有任何活动收藏</span></div>');
                 }
             }
         });
@@ -114,8 +118,7 @@
                         return d;
                     });
                 } else {
-                    $('#collect').html('');
-                    $.util.alert(res.msg);
+                    $('#collect').html('<div class="nocontent"><i class="iconfont">&#xe648;</i><span>你还没有任何资讯收藏</span></div>');
                 }
             }
         });

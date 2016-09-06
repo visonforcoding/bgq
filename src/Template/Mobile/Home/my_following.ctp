@@ -32,7 +32,6 @@
                 </a>
                 <div class="mark s_mark_h">
                     {#following_subject#}
-                  
                 </div>
             </div>
         </div>
@@ -83,7 +82,6 @@
             dataType: 'json',
             url: "/home/get-my-following",
             success: function (res) {
-                
                 if(res.status){
                     $.util.dataToTpl('follow', 'listTpl', res.data, function(d){
                         d.following_id = d.following.id;
@@ -99,8 +97,7 @@
                         return d;
                     });
                 } else {
-                    $('#follow').html('');
-                    $.util.alert(res.msg);
+                    $('#follow').html('<div class="nocontent"><i class="iconfont">&#xe687;</i><span>你还没有任何关注</span></div>');
                 }
             } 
         });
@@ -139,8 +136,7 @@
                         return d;
                     });
                 } else {
-                    $('#follow').html('');
-                    $.util.alert(res.msg);
+                    $('#follow').html('<div class="nocontent"><i class="iconfont">&#xe688;</i><span>你还没有任何粉丝</span></div>');
                 }
             }
         });
