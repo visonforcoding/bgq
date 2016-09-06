@@ -41,14 +41,14 @@
                         <label class="radio-inline"> <input name="level" value="2"  type="radio"> 专家 </label>
                     </div>
                 </div>-->
-<!--            <div class="form-group">
-                <label class="col-md-2 control-label">身份证</label>
-                <div class="col-md-8">
-                    <?php
-                    echo $this->Form->input('idcard', ['label' => false, 'class' => 'form-control']);
-                    ?>
-                </div>
-            </div>-->
+            <!--            <div class="form-group">
+                            <label class="col-md-2 control-label">身份证</label>
+                            <div class="col-md-8">
+            <?php
+            echo $this->Form->input('idcard', ['label' => false, 'class' => 'form-control']);
+            ?>
+                            </div>
+                        </div>-->
             <div class="form-group">
                 <label class="col-md-2 control-label">公司</label>
                 <div class="col-md-8">
@@ -98,6 +98,18 @@
                 <label class="col-md-2 control-label">机构标签</label>
                 <div class="col-md-8">
                     <?= $this->cell('Agency', [$user->agency_id]) ?>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">所在行业</label>
+                <div class="col-md-8">
+                    <?= $this->cell('Industry',[$selIndustryIds]) ?>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">个人标签</label>
+                <div class="col-md-8">
+                    <?= $this->cell('Protag',[unserialize($user->grbq)]) ?>
                 </div>
             </div>
             <div class="form-group">
@@ -232,6 +244,14 @@
             initJqupload('card_path', '/wpadmin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
             $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
             $('#select-agency').select2({
+                language: "zh-CN",
+                placeholder: '选择一个标签'
+            });
+            $('#select-industry').select2({
+                language: "zh-CN",
+                placeholder: '选择一个标签'
+            });
+            $('#select-grbq').select2({
                 language: "zh-CN",
                 placeholder: '选择一个标签'
             });
