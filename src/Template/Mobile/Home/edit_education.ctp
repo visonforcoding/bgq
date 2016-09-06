@@ -1,5 +1,4 @@
 <?php $this->start('css') ?>
-<link rel="stylesheet" type="text/css" href="/mobile/css/mobiscroll.css"/>
 <?php $this->end('css') ?>
 <header>
     <div class='inner'>
@@ -15,9 +14,8 @@
         <form action="/home/save-education" method="post">
             <div class="education-title">
                 <h3>
-                     <a onclick="deleteEd(this);" class="deletbtn iconfont">&#xe67a;</a>
-                    教育经历<i></i></span>
-                   
+                     <a onclick="deleteEd(this);" class="deletbtn iconfont">&#xe67a;</a>教育经历
+                  
                     <a onclick="checkForm(this);" class="savetbtn fr">保存</a>
                 </h3>
             </div>
