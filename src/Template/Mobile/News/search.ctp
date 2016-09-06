@@ -13,6 +13,7 @@
             <span class="orgname active">选择标签</span>
         </div>
         <ul class="a-s-mark news_s_mark" id="industry">
+            <li><a href="javascript:void(0)" industry_id='' class="industry ">全部</a></li>
         </ul>
     </div>
     <div id="search"></div>
@@ -59,12 +60,9 @@
         var industry_id = $(em).attr('industry_id');
         $('input[name="newstag_id"]').val(industry_id);
         $('.orgname').toggleClass('active');
-        if ($('.a-s-mark').hasClass('a-s-width')) {
-            $('.a-s-mark').removeClass('a-s-width');
-        } else {
-            $('.a-s-mark').addClass('a-s-width');
-        }
+
         LEMON.sys.hideKeyboard(); //收起键盘
+        $.util.hideLoading('buttonLoading');
         if (search_data[industry_id]) {
             $('#search').html(search_data[industry_id]);
             return;
@@ -87,7 +85,11 @@
                             }
                             return d;
                         });
-
+                        if ($('.a-s-mark').hasClass('a-s-width')) {
+                            $('.a-s-mark').removeClass('a-s-width');
+                        } else {
+                            $('.a-s-mark').addClass('a-s-width');
+                        }
                     } else {
                         $.util.alert(msg.msg);
                     }
@@ -101,7 +103,7 @@
         url: "/news/get-newstags",
         success: function (msg) {
             if (msg.status) {
-                $.util.dataToTpl('industry', 'industryTpl', msg.industries, function (d) {
+                var html = $.util.dataToTpl('', 'industryTpl', msg.industries, function (d) {
                     if (window.sid) {
                         if (d.id == window.sid) {
                             d.default = 'default';
@@ -109,10 +111,14 @@
                     }
                     return d;
                 });
-                $.util.tap($('#industry'), function(e){
+
+                $('#industry').append(html);
+
+                $.util.tap($('#industry'), function (e) {
                     var em = e.srcElement || e.target;
-                    if(em.tagName == 'LI') em = $(em).find('a').get(0);
-                    if(em && em.tagName == 'A'){
+                    if (em.tagName == 'LI')
+                        em = $(em).find('a').get(0);
+                    if (em && em.tagName == 'A') {
                         industryTap(em);
                     }
                     return false;
@@ -169,8 +175,8 @@
                         if (typeof msg === 'object') {
                             if (msg.status === true) {
                                 var html = $.util.dataToTpl('', 'search_tpl', msg.data, function (d) {
-                                    d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                                    d.author = d.user.truename;
+//                                    d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+//                                    d.author = d.user.truename;
                                     return d;
                                 });
                                 $('#search').append(html);

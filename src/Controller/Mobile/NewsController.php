@@ -13,7 +13,7 @@ use App\Controller\Mobile\AppController;
  */
 class NewsController extends AppController {
 
-    protected $newslimit = 5;
+    protected $newslimit = '10';
 
     /**
      * Index method
@@ -244,8 +244,8 @@ class NewsController extends AppController {
         } else {
             $res = $res->contain(['Newstags']);
         }
-        $res = $res->orderDesc('News.create_time'); // 默认按时间倒序排列
-        $res = $res->contain(['Users'=>function($q){
+        $res = $res->orderDesc('News.create_time') // 默认按时间倒序排列
+                ->contain(['Users'=>function($q){
                     return $q->where(['Users.enabled'=>1]);
                 }])
                 ->limit($this->newslimit)
@@ -284,25 +284,22 @@ class NewsController extends AppController {
      */
     public function getMoreSearch($page){
         $data = $this->request->data();
-        $industry_id = $data['newstags_id'];
+        $newstag_id = $data['newstag_id'];
         $news = $this->News->find()->where(['title LIKE' => '%' . $data['keyword'] . '%']);
-        if ($industry_id) {
+        if ($newstag_id) {
             $news = $news->matching(
-                'Newstags', function($q)use($industry_id) {
-                    return $q->where(['Newstags.id' => $industry_id]);
+                'Newstags', function($q)use($newstag_id) {
+                    return $q->where(['Newstags.id' => $newstag_id]);
                 }
-            )->contain(['Users']);
+            )->contain(['Users'=>function($q){
+                return $q->where(['Users.enabled'=>1]);
+            }]);
         } else {
-            $news = $news->contain(['Newstags', 'Users']);
+            $news = $news->contain(['Newstags', 'Users'=>function($q){
+                return $q->where(['Users.enabled'=>1]);
+            }]);
         }
-        
-        if ($data['sort']) {
-            $news = $news->orderDesc('News.' . $data['sort']);
-        } else {
-            $news = $news->orderDesc('News.create_time');
-        }
-
-        $news = $news
+        $news = $news->orderDesc('News.create_time')
                 ->page($page, $this->newslimit)
                 ->toArray();
         if ($news) {
