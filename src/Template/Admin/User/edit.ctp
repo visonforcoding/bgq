@@ -201,7 +201,7 @@
             <?php if ($user->educations): ?>
                 <?php $k = 1; ?>
                 <?php foreach ($user->educations as $education): ?>
-                    <div class="education input-group col-md-8 col-md-offset-1 mt20">
+                    <div class="education input-group col-md-10 col-md-offset-1 mt20">
                         <span class="input-group-addon">开始时间</span>
                         <input type="text" name="start_date" value="<?= $education->start_date ?>" class="form-control" placeholder="2009-9">
                         <span class="input-group-addon">结束时间</span>
@@ -217,7 +217,7 @@
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
-            <div class="education input-group col-md-8 col-md-offset-1 mt20">
+            <div class="education input-group col-md-10 col-md-offset-1 mt20">
                 <span class="input-group-addon">开始时间</span>
                 <input type="text"  name="start_date" class="form-control" placeholder="2009-9">
                 <span class="input-group-addon">结束时间</span>
