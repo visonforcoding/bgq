@@ -77,8 +77,8 @@
                     <span class="job w7 line2">{#company#}&nbsp;&nbsp;{#position#}</span>
                 </a>
                 <div class="mark">
-                    <!-- {#subjects#}-->
-                    <a href="#this" class="line1 w7"><i class="iconfont">&#xe67c;</i>演员的自我修养演员的自我修养</a>
+                     {#subjects#}
+                    <!--<a href="#this" class="line1 w7"><i class="iconfont">&#xe67c;</i>演员的自我修养演员的自我修养</a>-->
                 </div>
                               
                 <div class="m_focus_r color-items">
@@ -90,10 +90,10 @@
     </section>
 </script>
 <script type='text/html' id='subTpl'>
-    <a href="javascript:$.util.checkLogin('/meet/subject-detail/{#id#}/#index')">{#title#}</a>
+    <a href="javascript:$.util.checkLogin('/meet/subject-detail/{#id#}/#index')" class="line1 w7"><i class="iconfont">&#xe67c;</i>{#title#}</a>
 </script>
 <script type='text/html' id='mySubTpl'>
-    <a href="/meet/subject/{#id#}">{#title#}</a>
+    <a href="/meet/subject/{#id#}" class="line1 w7"><i class="iconfont">&#xe67c;</i>{#title#}</a>
 </script>
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>

@@ -25,7 +25,7 @@
                         <?php if ($user->city): ?>
                             <span>
                                 <i class="iconfont">&#xe660;</i>
-                                 <?= $user->city ?> 
+                                <?= $user->city ?> 
                             </span>
                         <?php endif; ?>
                     <?php endif; ?>
@@ -35,8 +35,8 @@
             </div>
             <div class="m_right_btn fr">
                 <?php if ($self): ?>
-                    <!-- <a href="/home/my-following/1" class="g-card color-items" >关注 <?= $follows ?></a> -->
-                    <!-- <a href="/home/my-following/2" class="g-card bottom_btn" >粉丝<?= $fans ?></a> -->
+                            <!-- <a href="/home/my-following/1" class="g-card color-items" >关注 <?= $follows ?></a> -->
+                            <!-- <a href="/home/my-following/2" class="g-card bottom_btn" >粉丝<?= $fans ?></a> -->
                 <?php else: ?>
                     <span class="g-card color-items" id="follow_btn"><i class="iconfont">&#xe614;</i><?php if ($isFans): ?>取消关注<?php else: ?>加关注<?php endif; ?></span>
                     <span class="g-card bottom_btn" id="giveCard"><i class="iconfont">&#xe686;</i><?php if ($isGive): ?>已递名片<?php else: ?>递名片<?php endif; ?></span>
@@ -45,21 +45,23 @@
         </div>
         <div class="m-listinfo-des">
             <ul class="m-lilist-des">
-                    <li>
-                        <a>
-                            <i><?= $follows ?></i>
-                            <span>关注</span>
-                        </a>
-                    </li>
-                    <li>
+                <li>
+                    <a href="/home/my-following/1">
+                        <i><?= $follows ?></i>
+                        <span>关注</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/home/my-following/2">
                         <i><?= $fans ?></i>
                         <span>粉丝</span>
-                    </li>
-                </ul>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 
-   
+
     <!--基本资料-->
     <div class="infotab m-infotab-list">
         <ul class="h-tab">
@@ -142,7 +144,6 @@
                         <ul class="basicon worktab">
                             <?php if ($user->careers): ?>
                                 <?php foreach ($user->careers as $career): ?>
-
                                     <li class="inner">
                                         <span>
                                             <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>
@@ -157,10 +158,8 @@
                                             <?= $career->descb; ?>
                                         </span>
                                     </li>
-
                                 <?php endforeach; ?>
                             <?php else: ?>
-
                                 <li class="inner">
                                     <span>
                                         <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>暂未填写
@@ -169,7 +168,6 @@
                                 <li class="inner">
                                     <span class="worktime">暂未填写</span>
                                 </li>
-
                             <?php endif; ?>
                         </ul>
                     <?php else: ?>
@@ -229,7 +227,7 @@
                                     <?= $career->descb; ?>
                                 </span>
                             </li>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
                     <?php else: ?>
                         <li class="inner">
                             <span>
@@ -336,7 +334,7 @@
         </div>
     </div>
     <div class="h2"></div>
-     <!--话题-->
+    <!--话题-->
     <?php if ($user->level == 2): ?>
         <div class="m-subject-list">
             <div class="m-tomore-bottom m-pos-top">
