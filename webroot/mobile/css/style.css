@@ -92,7 +92,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .a-banner{width:100%;height:3.8rem;position:relative;}
 .a-search-box{position:fixed;top:0.6rem;width:100%; padding:0 0.68rem;z-index:3;max-width:750px;}
 .a_search_box{position:fixed;right:.3rem;top:.5rem;color:#031015;z-index:999;}
-.a_search_box span{font-size:.5rem;}
+.a_search_box span{font-size:.5rem;height: .6rem;width: .6rem;display: block;line-height: .6rem;}
 .a-search{/*display: flex;align-items: center;*/background:rgba(255,255,255,.5); width:100%;border-radius: 4px;height:30px;line-height: 30px;}
 .a-search a{}
 .a-search i{color:#fff;font-size:16px;margin-left:0.2rem;float:left;}
