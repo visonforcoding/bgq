@@ -396,6 +396,7 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .head-img img{width:100%;height:100%;border-radius: 50%;}
 .head-img i{position: absolute;right:0.12rem;bottom:0;width:0.29rem;height:0.3rem;background: url(img/v.png) no-repeat;background-size: contain;}
 .mark,.s_mark_h{margin-top:0.1rem;max-height:50px;overflow:hidden;}
+.mark{min-height: .3rem;}
 .s_mark_h{min-height:.4rem;}
 
 /*.s_mark_h a{border:1px #969fa9 solid;}*/
