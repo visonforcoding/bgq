@@ -19,10 +19,9 @@
     <div class="innercon">
         <a href="/activity/details/{#id#}" class="clearfix nobottom">
             <span class="my-pic-acive"><img src="{#cover#}"/></span>
-            <div class="my-collection-items">
+            <div class="my-collection-items my-news-items">
                 <h3>{#title#}</h3>
-                <span>{#address#}</span>
-                <span>{#time#} <i>{#apply_nums#}人报名</i></span>
+                <span>{#address#}<b>{#create_time#}</b> <i>{#apply_nums#}人报名</i></span>
             </div>
         </a>
     </div>
@@ -33,7 +32,7 @@
             <span class="my-pic-acive"><img src="{#news_cover#}"/></span>
             <div class="my-collection-items my-news-items">
                 <h3>{#news_title#}</h3>
-                <span>{#news_user#}<b>{#create_str#}</b> <i>{#news_read#}人阅读</i></span>
+                <span>{#news_user#}<b>{#create_time#}</b> <i>{#news_read#}人阅读</i></span>
             </div>
         </a>
     </div>
@@ -55,7 +54,6 @@
                     d.cover = d.activity.thumb ? d.activity.thumb : d.activity.cover;
                     d.title = d.activity.title;
                     d.address = d.activity.address;
-                    d.time = d.activity.time;
                     d.apply_nums = d.activity.apply_nums;
                     return d;
                 });
@@ -83,7 +81,6 @@
                         d.cover = d.activity.thumb ? d.activity.thumb : d.activity.cover;
                         d.title = d.activity.title;
                         d.address = d.activity.address;
-                        d.time = d.activity.time;
                         d.apply_nums = d.activity.apply_nums;
                         return d;
                     });

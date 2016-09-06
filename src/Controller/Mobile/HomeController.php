@@ -440,6 +440,12 @@ class HomeController extends AppController {
                     ->contain(['Activities'=>function($q){
                         return $q->where(['Activities.is_del'=>0]);
                     }])
+                    ->formatResults(function($items) {
+                        return $items->map(function($item) {
+                            $item->create_time = $item->create_time->format('Y-m-d');
+                            return $item;
+                        });
+                    })
                     ->toArray();
             if($activity){
                 return $this->Util->ajaxReturn(['status'=>true, 'data'=>$activity]);
@@ -466,7 +472,7 @@ class HomeController extends AppController {
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
                         //时间语义化转换
-                        $item['create_str'] = $item['create_time']->format('Y-m-d H:i:s');
+                        $item['create_time'] = $item['create_time']->format('Y-m-d');
                         return $item;
                     });
                 })
@@ -509,11 +515,6 @@ class HomeController extends AppController {
             }, 'BookChats'=>function($q)use($user_id){
                 return $q->where(['reply_id'=>$user_id, 'is_read'=>0]);
             }])->where(['SubjectBook.savant_id =' => $user_id])->order('SubjectBook.update_time')->toArray();
-            $BookChatTable = \Cake\ORM\TableRegistry::get('book_chat');
-            $chat = $BookChatTable->find()->where()->count();
-            if($chat){
-                
-            }
             $this->set([
                 'pageTitle' => '我的约见',
                 'books' => $books,
