@@ -46,9 +46,6 @@
     var type = '<?= $type ?>';
 </script>
 <script>
-    if(LEMON.isAPP) {
-        LEMON.sys.back('/home/index');
-    }
     
     if(type == 2){
         myFansTap($('#myFans').get(0));

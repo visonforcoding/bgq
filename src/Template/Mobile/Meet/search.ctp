@@ -74,7 +74,7 @@
                                     return d;
                                 });
                                 $('#biggie').append(html);
-                                if(msg.data.length < 5){
+                                if(msg.data.length < 10){
                                     page = 9999;
                                 } else {
                                     page++;
@@ -111,6 +111,7 @@
                             return d;
                         });
                     } else {
+                        $.util.hideLoading('buttonLoading');
                         $('#biggie').html('');
                         $.util.alert(msg.msg);
                     }
@@ -142,6 +143,7 @@
                             return d;
                         });
                     } else {
+                        $.util.hideLoading('buttonLoading');
                         $('#biggie').html('');
                         $.util.alert(msg.msg);
                     }

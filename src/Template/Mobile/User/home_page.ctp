@@ -436,10 +436,10 @@
                     $.util.alert(res.msg);
                     if (res.status) {
                         if (res.msg.indexOf('取消关注') != '') {
-                            $('#follow_btn').text('取消关注');
+                            $('#follow_btn').html('<i class="iconfont">&#xe614;</i>取消关注');
 //                            $('#follow_btn').addClass('focusgray');
                         } else {
-                            $('#follow_btn').text('关注');
+                            $('#follow_btn').html('<i class="iconfont">&#xe614;</i>关注');
 //                            $('#follow_btn').removeClass('focusgray');
                         }
                     }
@@ -467,7 +467,7 @@
                     func: function (msg) {
                         if (typeof msg == 'object') {
                             $.util.alert(msg.msg);
-                            $('#giveCard').text('已递名片');
+                            $('#giveCard').html('<i class="iconfont">&#xe686;</i>已递名片');
                             $('#giveCard').addClass('cardgray');
                         }
                     }
