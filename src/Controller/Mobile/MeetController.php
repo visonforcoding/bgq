@@ -49,7 +49,7 @@ class MeetController extends AppController {
                 ->User
                 ->find()
                 ->contain(['Subjects'=>function($exp){
-                    return $exp->where(['is_del'=>0])->orderDesc('create_time');
+                    return $exp->where(['is_del'=>0])->orderDesc('create_time')->limit(1);
                 }])
                 ->where(['enabled'=>'1', 'level'=>'2'])
                 ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
@@ -436,7 +436,7 @@ class MeetController extends AppController {
                 }])
                 ->distinct(['User.id'])
                 ->matching('Subjects', function($q)use($keyword){
-                    return $q->where(['Subjects.is_del'=>0]);
+                    return $q;
                 })
                 ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%"])
                 ->orWhere(['Subjects.title like'=>"%$keyword%", 'enabled'=>'1'])
@@ -724,7 +724,7 @@ class MeetController extends AppController {
                 ->User
                 ->find()
                 ->contain(['Subjects'=>function($q){
-                    return $q->where(['Subjects.is_del'=>0])->orderDesc('Subjects.create_time');
+                    return $q->where(['Subjects.is_del'=>0])->orderDesc('Subjects.create_time')->limit(1);
                 }])
                 ->where(['enabled'=>'1', 'level'=>'2'])
                 ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
