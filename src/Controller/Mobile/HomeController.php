@@ -11,6 +11,7 @@ use Cake\I18n\Time;
  * @property \App\Model\Table\HomeTable $Home
  * @property \App\Model\Table\UserTable $User
  * @property \App\Controller\Component\BusinessComponent $Business
+ * @property \App\Controller\Component\PushComponent $Push
  * @property \App\Controller\Component\WxComponent $Wx
  * @property \App\Controller\Component\WxpayComponent $Wxpay
  * @property \App\Controller\Component\SmsComponent $Sms
@@ -757,18 +758,23 @@ class HomeController extends AppController {
         $book = $BookTable->get($book_id);
         $data['content'] = $this->request->data('content');
         if($type == '1'){
-            $data['user_id'] = $user_id;
             $data['reply_id'] = $book->savant_id;
+            $extra['url'] = 'http://m.chinamatop.com/home/my-book/#2';
         } else {
-            $data['user_id'] = $user_id;
             $data['reply_id'] = $book->user_id;
+            $extra['url'] = 'http://m.chinamatop.com/home/my-book/#5';
         }
+        $data['user_id'] = $user_id;
         $data['book_id'] = $book_id;
         $bookChatTable = \Cake\ORM\TableRegistry::get('bookChat');
         $chat = $bookChatTable->newEntity();
         $chat = $bookChatTable->patchEntity($chat, $data);
         $res = $bookChatTable->save($chat);
         if($res){
+            $UserTable = \Cake\ORM\TableRegistry::get('user');
+            $user = $UserTable->get($data['reply_id']);
+            $this->loadComponent('Push');
+            $this->Push->sendAlias($user->user_token, '你有一条新的约见消息', $data['content'], $data['content'], 'BGB', true, $extra);
             return $this->Util->ajaxReturn(true, '发送成功');
         } else {
             return $this->Util->ajaxReturn(false, '系统错误');

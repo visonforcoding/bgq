@@ -15,10 +15,10 @@
                     <span>联系电话：</span>
                     <div>
                         <span class='c-select'>
-                        <select name="phone_set" class='choice'>
-                            <option value="1" <?php if (isset($secret)): ?><?php if ($secret->phone_set == '1'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>公开</option>
-                            <option value="2" <?php if (isset($secret)): ?><?php if ($secret->phone_set == '2'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>不公开</option>
-                        </select>
+                            <select name="phone_set" class='choice'>
+                                <option value="1" <?php if (isset($secret)): ?><?php if ($secret->phone_set == '1'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>公开</option>
+                                <option value="2" <?php if (isset($secret)): ?><?php if ($secret->phone_set == '2'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>不公开</option>
+                            </select>
                         </span>
                     </div>
                 </a>
@@ -27,12 +27,12 @@
                 <a href="javascript:void(0)">
                     <span>邮箱：</span>
                     <div>
-                       <span class='c-select'>
-                        <select name="email_set" class='choice'>
-                           <option value="1" <?php if (isset($secret)): ?><?php if ($secret->email_set == '1'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>公开</option>
-                            <option value="2" <?php if (isset($secret)): ?><?php if ($secret->email_set == '2'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>不公开</option>
-                        </select>
-                         </span>
+                        <span class='c-select'>
+                            <select name="email_set" class='choice'>
+                                <option value="1" <?php if (isset($secret)): ?><?php if ($secret->email_set == '1'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>公开</option>
+                                <option value="2" <?php if (isset($secret)): ?><?php if ($secret->email_set == '2'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>不公开</option>
+                            </select>
+                        </span>
                     </div>
                 </a>
             </li>
@@ -41,11 +41,11 @@
                     <span>工作经历：</span>
                     <div>
                         <span class='c-select'>
-                        <select name="career_set" class='choice'>
-                            <option value="1" <?php if (isset($secret)): ?><?php if ($secret->career_set == '1'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>公开</option>
-                            <option value="2" <?php if (isset($secret)): ?><?php if ($secret->career_set == '2'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>不公开</option>
-                        </select>
-                         </span>
+                            <select name="career_set" class='choice'>
+                                <option value="1" <?php if (isset($secret)): ?><?php if ($secret->career_set == '1'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>公开</option>
+                                <option value="2" <?php if (isset($secret)): ?><?php if ($secret->career_set == '2'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>不公开</option>
+                            </select>
+                        </span>
                     </div>
                 </a>
             </li>
@@ -54,27 +54,14 @@
                     <span>教育经历：</span>
                     <div>
                         <span class='c-select'>
-                        <select name="education_set" class='choice'>
-                            <option value="1" <?php if (isset($secret)): ?><?php if ($secret->education_set == '1'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>公开</option>
-                            <option value="2" <?php if (isset($secret)): ?><?php if ($secret->education_set == '2'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>不公开</option>
-                        </select>
-                         </span>
+                            <select name="education_set" class='choice'>
+                                <option value="1" <?php if (isset($secret)): ?><?php if ($secret->education_set == '1'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>公开</option>
+                                <option value="2" <?php if (isset($secret)): ?><?php if ($secret->education_set == '2'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>不公开</option>
+                            </select>
+                        </span>
                     </div>
                 </a>
             </li>
-<!--            <li class="nobottom">
-                <a href="javascript:void(0)">
-                    <span>我的资料：</span>
-                    <div>
-                        <span class='c-select'>
-                        <select name="profile_set" class='choice'>
-                            <option value="1" <?php if (isset($secret)): ?><?php if ($secret->profile_set == '1'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>公开</option>
-                            <option value="2" <?php if (isset($secret)): ?><?php if ($secret->profile_set == '2'): ?>selected="selected"<?php endif; ?> <?php endif; ?>>不公开</option>
-                        </select>
-                         </span>
-                    </div>
-                </a>
-            </li>-->
         </ul>
         <!--<p class="inner f-color-gray mt20">资料包括行业、擅长业务、标签、工作经历、教育经历等</p>-->
         <a id="submit" href="javascript:void(0);" class="nextstep">保存</a>
@@ -101,7 +88,7 @@
             func: function (res) {
                 $.util.alert(res.msg);
                 if (res) {
-                    setTimeout(function(){
+                    setTimeout(function () {
                         window.location.href = '/home/index';
                     }, 1000);
                 }
