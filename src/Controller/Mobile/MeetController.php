@@ -17,7 +17,7 @@ class MeetController extends AppController {
         $this->loadModel('User');
     }
 
-    protected $limit = '5'; // 分页条数
+    protected $limit = '10'; // 分页条数
     
     /**
      * Index method  会员约见首页
@@ -440,7 +440,7 @@ class MeetController extends AppController {
                 })
                 ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%"])
                 ->orWhere(['Subjects.title like'=>"%$keyword%", 'enabled'=>'1'])
-                ->limit(10)
+                ->limit($this->limit)
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
                         $item['avatar'] = getSmallAvatar($item['avatar']);

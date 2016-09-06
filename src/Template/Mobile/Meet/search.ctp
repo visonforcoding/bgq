@@ -13,7 +13,7 @@
     <div class='h-news-search'>
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe618;</a>
         <form id="searchForm">
-            <h1><input type="text" name="keyword" placeholder="请输入关键词"></h1>
+            <h1><input type="text" name="keyword" placeholder="姓名、话题"></h1>
         </form>
         <div class='h-regiser' id="doSearch">搜 索</div>
     </div>
@@ -43,7 +43,7 @@
 <!--<script src='/mobile/js/meet_search.js'></script>-->
 <script>
     $('input[name="keyword"]').focus();
-    var page = 3;
+    var page = 2;
     setTimeout(function () {
         $(window).on("scroll", function () {
             $.util.listScroll('items', function () {

@@ -11,13 +11,8 @@
             <div class="col-md-8"></div>
         </div>
         <div class="form-group">
-            <?php if ($type == 1): ?>
-                <label class="col-md-2 control-label">活动标题</label>
-                <div class="col-md-8"><input value="<?= $content->title ?>" class="form-control" readonly></div>
-            <?php elseif ($type == 2): ?>
-                <label class="col-md-2 control-label">标签</label>
-                <div class="col-md-8"><input value="<?= $content->name ?>" class="form-control" readonly></div>
-            <?php endif; ?>
+            <label class="col-md-2 control-label">标签</label>
+            <div class="col-md-8"><input value="<?= $content->name ?>" class="form-control" readonly></div>
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">推送标题</label>
@@ -32,8 +27,8 @@
             <div class="col-md-8"><input type="text" name="url" class="form-control"/></div>
         </div>
         <input type="hidden" name="industry_id" value=""/>
-        <input type="hidden" name="type" value=""/>
-        <input type="hidden" name="activity_id" value=""/>
+        <!--<input type="hidden" name="type" value=""/>-->
+        <!--<input type="hidden" name="activity_id" value=""/>-->
         <input type="hidden" name="keyword" value=""/>
 
         <div class="form-group">
@@ -52,12 +47,12 @@
     var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
     $('#push').on('click', function () {
         $('input[name="keyword"]').val(parent.$('input[name="keyword"]').val());
-        $('input[name="type"]').val(parent.$('#cate').val());
-        if ($('input[name="type"]').val() == 1) {
-            $('input[name="activity_id"]').val(parent.$('#select-activity').val());
-        } else if ($('input[name="type"]').val() == 2) {
+//        $('input[name="type"]').val(parent.$('#cate').val());
+//        if ($('input[name="type"]').val() == 1) {
+//            $('input[name="activity_id"]').val(parent.$('#select-activity').val());
+//        } else if ($('input[name="type"]').val() == 2) {
             $('input[name="industry_id"]').val(parent.$('#select-industry').val());
-        }
+//        }
         if ($('input[name="title"]').val() == '') {
             layer.alert('请输入推送标题');
             return;
