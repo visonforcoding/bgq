@@ -703,9 +703,6 @@ class HomeController extends AppController {
                 return $q->where(['Subjects.is_del'=>0]);
             }]
         ]);
-        $BookChatTable = \Cake\ORM\TableRegistry::get('book_chat');
-//        $chat = $BookChatTable->find()->where(['reply_id'=>$uid, 'book_id'=>$book_id])->toArray();
-        $BookChatTable->updateAll(['is_read'=>1], ['reply_id'=>$uid, 'book_id'=>$book_id, 'is_read'=>0]);
         $this->set([
             'pageTitle'=>'约见聊天',
             'book' => $book,
@@ -741,6 +738,8 @@ class HomeController extends AppController {
                 ->hydrate(false)
                 ->toArray();
         if($bookChat !== false){
+            $BookChatTable = \Cake\ORM\TableRegistry::get('book_chat');
+            $BookChatTable->updateAll(['is_read'=>1], ['reply_id'=>$user_id, 'book_id'=>$book_id, 'is_read'=>0]);
             return $this->Util->ajaxReturn(['status'=>true, 'data'=>$bookChat]);
         } else {
             return $this->Util->ajaxReturn(false, '系统错误');
