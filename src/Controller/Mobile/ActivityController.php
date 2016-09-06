@@ -19,7 +19,7 @@ use App\Controller\Mobile\AppController;
  */
 class ActivityController extends AppController {
 
-    protected $limit = '5'; // 分页条数
+    protected $limit = '10'; // 分页条数
 
     /**
      * 活动详情
@@ -492,7 +492,7 @@ class ActivityController extends AppController {
                 ->where(['title LIKE' => '%' . $data['keyword'] . '%'])
                 ->orWhere(['body LIKE' => "%" . $data['keyword'] . "%"])
                 ->andWhere(['Activity.status'=> 1, 'Activity.is_del' => 0]);
-        if ($series_id) {
+        if ($series_id !== '') {
             $res = $res->andWhere(['series_id'=>$series_id]);
         }
         if($data['region']){
@@ -503,8 +503,7 @@ class ActivityController extends AppController {
                 ->limit($this->limit)
                 ->toArray();
         if ($res!==false) {
-            if($res == [])
-            {
+            if($res == []) {
                 return $this->Util->ajaxReturn(false, '暂无搜索结果');
             }
             return $this->Util->ajaxReturn(['status' => true, 'data' => $res]);
@@ -539,8 +538,7 @@ class ActivityController extends AppController {
         $this->set('is_apply', $isApply);
         
         $res = $this->Activity->find()->where(['title LIKE' => '%' . $data['keyword'] . '%', 'series_id' => $series_id, 'Activity.status'=> 1, 'Activity.is_del' => 0]);
-        $res = $res->orderDesc('create_time');
-        $res = $res
+        $res = $res->orderDesc('create_time')
                 ->page($page, $this->limit)
                 ->toArray();
         if ($res) {

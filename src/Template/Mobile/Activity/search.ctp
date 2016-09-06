@@ -18,12 +18,11 @@
             <span class="orgname active">活动系列</span>
         </div>
         <ul class="a-s-mark" id="series">
-
+            <li><a href="javascript:void(0)" series_id="" class="series">全部</a></li>
         </ul>
     </div>
     <section class="my-collection-info" id="search"></section>
 </div>
-<div style='height:1.2rem'></div>
 <div id="buttonLoading" class="loadingbox"></div>
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>
@@ -68,7 +67,7 @@
                 $.util.dataToTpl('region', 'regionTpl', msg.region, function (d) {
                     return d;
                 });
-                $.util.dataToTpl('series', 'seriesTpl', msg.series, function (d) {
+                var html = $.util.dataToTpl('', 'seriesTpl', msg.series, function (d) {
                     if (window.sid !== '.') {
                         if (d.id == window.sid) {
                             d.default = 'default';
@@ -77,6 +76,8 @@
                     return d;
                 });
 
+                $('#series').append(html);
+                
                 $('.series').on('tap', function () {
                     seriesTap(this);
                 });
@@ -149,6 +150,7 @@
         $(em).addClass('active');
         $('input[name="series_id"]').val($(em).attr('series_id'));
         $('.orgname').text($(em).text());
+        $.util.hideLoading('buttonLoading');
         $.ajax({
             type: 'post',
             url: '/activity/getSearchRes',
