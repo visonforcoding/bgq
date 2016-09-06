@@ -22,7 +22,7 @@
 </div>
 
 <script type="text/html" id="listTpl">
-    <section class="internet-v-info">
+    <section class="internet-v-info mt20">
         <div class="innercon">
             <a href='/user/home-page/{#following_id#}'><span class="head-img"><img src="{#following_avatar#}"/>{#v#}</span></a>
             <div class="vipinfo">
@@ -30,7 +30,7 @@
                     <h3>{#following_truename#}<span class="meetnum">{#following_fans#}人关注</span></h3>
                     <span class="job">{#following_company#}&nbsp;&nbsp;{#following_position#}</span>
                 </a>
-                <div class="mark s-mark-h">
+                <div class="mark s_mark_h">
                     {#following_subject#}
                   
                 </div>
