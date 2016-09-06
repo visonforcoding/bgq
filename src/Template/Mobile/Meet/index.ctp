@@ -1,12 +1,7 @@
 <div class="wraper newswraper">
-    <div class="a-search-box" id="search">
+    <div class="a_search_box" id="search">
         <a href="/meet/search">
-            <div class="a-search">
-                <i class="iconfont">&#xe618;</i>
-                <div class="s-con">
-                    <input type="text" placeholder="请输入关键词" readonly class='search'/>
-                </div>
-            </div>
+            <span class="iconfont">&#xe683;</span>
         </a>
     </div>
     <div class="a-banner" >
@@ -30,40 +25,39 @@
         <div class="allmenu">
             <div class="menulist clearfix" id="allsort">
                 <a href="/meet/search-by-agency/4">
-                    <i class="iconfont col-g">&#xe66e;</i>
+                    <i class="iconfont">&#xe66e;</i>
                     <span>并购买家</span>
                 </a>
                 <a href="/meet/search-by-agency/1">
-                    <i class="iconfont col-o">&#xe637;</i>
+                    <i class="iconfont">&#xe637;</i>
                     <span>产业投资</span>
                 </a>
                 <a href="/meet/search-by-agency/2">
-                    <i class="iconfont col-lg">&#xe66f;</i>
+                    <i class="iconfont">&#xe66f;</i>
                     <span>并购融资</span>
                 </a>
                 <a href="/meet/search-by-agency/3">
-                    <i class="iconfont col-y">&#xe621;</i>
+                    <i class="iconfont">&#xe621;</i>
                     <span>并购顾问</span>
                 </a>
             </div>
         </div>
-        <!-- <a href="javascript:void(0);" class="sele-r" id="toRight"></a> -->
     </div>
     <!--分类--end-->
-    <div class="m_title_des">
-        <h3>为您推荐</h3>
-    </div>
     <div class="dk">
+         <div class="m_title_des">
+            <h3>为您推荐</h3>
+        </div>
         <ul id='items'>
             <?php foreach ($biggieAd as $k => $v): ?>
                 <li><a href="/user/home-page/<?= $v['savant']['user_id'] ?>"><img src="<?= $v['url'] ?>"/></a></li>
             <?php endforeach; ?>
         </ul>
     </div>
+    <div class="h2"></div>
     <div class="m_title_des">
         <h3>全部会员</h3>
     </div>
-    <div class="h2"></div>
     <div id='biggie'></div>
     <div id="buttonLoading" class="loadingbox"></div>
     <?php if(!$is_savant): ?>
@@ -77,13 +71,19 @@
     <section class="internet-v-info">
         <div class="innercon">
             <a href="/user/home-page/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
-            <div class="vipinfo">
+            <div class="vipinfo  bbottom fixedwraper">
                 <a href="/user/home-page/{#id#}">
                     <h3><div class="l-name">{#truename#}</div>{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
-                    <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
+                    <span class="job w7 line2">{#company#}&nbsp;&nbsp;{#position#}</span>
                 </a>
-                <div class="mark bgblue">
-                    {#subjects#}
+                <div class="mark">
+                    <!-- {#subjects#}-->
+                    <a href="#this" class="line1 w7"><i class="iconfont">&#xe67c;</i>演员的自我修养演员的自我修养</a>
+                </div>
+                              
+                <div class="m_focus_r color-items">
+                    <i class="iconfont">&#xe614;<!--&#xe680;--></i>
+                    <span>加关注</span>
                 </div>
             </div>
         </div>
