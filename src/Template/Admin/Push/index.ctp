@@ -128,7 +128,7 @@
                         height: 'auto',
                         rownumbers: true,
                         fixed: true,
-                        multiselect: true,
+                        multiselect: false,
                         jsonReader: {
                             root: "rows",
                             page: "page",
