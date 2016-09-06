@@ -29,6 +29,14 @@
                 </select>
             </div>
             <div class="form-group">
+                <label for="status">是否付款</label>
+                <select name="is_pay" class="form-control">
+                    <option value="">全部</option>
+                    <option value="1">已付款</option>
+                    <option value="0">未付款</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="status">签到</label>
                 <select name="is_sign" class="form-control">
                     <option value="-1">全部</option>
@@ -42,14 +50,15 @@
                 <label for="keywords">到</label>
                 <input type="text" name="end_time" class="form-control date_timepicker_end" id="keywords" placeholder="结束时间">
             </div>
-            <a onclick="doSearch();" class="btn btn-info"><i class="icon icon-search"></i>搜索</a>
-            <a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>
+            <a onclick="doSearch();" class="btn btn-info"><i class="icon icon-search"></i> 搜索</a>
+            <a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i> 导出</a>
+            <a onclick="doPush();" class="btn btn-warning"><i class="icon icon-android"></i> 推送内容</a>
         </div>
     </form>
     <div>
-        <button type="button" class="btn btn-primary">报名数<span class="label label-badge"><?=$apply_nums?></span></button>
-        <button type="button" class="btn btn-warning">审核通过数<span class="label label-badge"><?=$check_nums?></span></button>
-        <button type="button" class="btn btn-danger">付款数<span class="label label-badge"><?=$pay_nums?></span></button>
+        <button type="button" class="btn btn-primary">报名数<span class="label label-badge"><?= $apply_nums ?></span></button>
+        <button type="button" class="btn btn-warning">审核通过数<span class="label label-badge"><?= $check_nums ?></span></button>
+        <button type="button" class="btn btn-danger">付款数<span class="label label-badge"><?= $pay_nums ?></span></button>
     </div>
     <table id="list"><tr><td></td></tr></table> 
     <div id="pager"></div> 
@@ -346,6 +355,19 @@
                         shadeClose: true,
                         shade: 0.8,
                         area: ['380px', '70%'],
+                        content: url//iframe的url
+                    });
+                }
+                function doPush() {
+                     var searchData = $.zui.store.pageGet('searchData') ? $.zui.store.pageGet('searchData') : {};
+                    var searchQueryStr = $.param(searchData);
+                    url = '/admin/activityapply/push/<?= $id ?>?'+searchQueryStr;
+                    layer.open({
+                        type: 2,
+                        title: '查看详情',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['70%', '50%'],
                         content: url//iframe的url
                     });
                 }
