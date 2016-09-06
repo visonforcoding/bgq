@@ -1,14 +1,9 @@
 
 <body>
-    <div class="wraper a-wraper">
-        <div class="a-search-box" id="search">
+    <div class="wraper" style=''>
+        <div class="a_search_box" id="search">
             <a href="/activity/search"> 
-                <div class="a-search">
-                    <i class="iconfont">&#xe618;</i>
-                    <div class="s-con">
-                        <input type="text" placeholder="请输入关键词" readonly class="search" />
-                    </div>
-                </div>
+                <span class="iconfont">&#xe683;</span>
             </a>
         </div>
         <div class="a-banner">
@@ -60,10 +55,23 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script src="/mobile/js/activity_index.js"></script>
 <script>
+<<<<<<< .mine
+    if($.util.isAPP){
+        $('#search').css({'top':'0.6rem'});
+
+    } else if($.util.isWX) {
+        $('#search').css({'top':'0.2rem'});
+||||||| .r2988
+    if($.util.isAPP){
+        $('#search').css({'top':'0.6rem'});
+    } else if($.util.isWX) {
+        $('#search').css({'top':'0.2rem'});
+=======
     if ($.util.isAPP) {
         $('#search').css({'top': '0.6rem'});
     } else if ($.util.isWX) {
         $('#search').css({'top': '0.2rem'});
+>>>>>>> .r2993
     }
 </script>
 <script>
