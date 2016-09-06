@@ -157,50 +157,39 @@
             <li><i class="iconfont">&#xe652;</i>教育经历</li>
         </ul>
         <div class="tabcon bd2">
+            <!--基本资料-->
             <?php if (!$self): ?>
-                <?php if ($user->secret): ?>
-                    <?php if ($user->secret->profile_set == '1'): ?>
-                        <ul class="cur inner basicon">
-                            <li class="b-dq"><span><i class="iconfont">&#xe660;</i>所在地区</span>
-                                <div>
-                                    <em><?= $user->city ? $user->city : '暂未填写' ?></em>
-                                </div>
-                            </li>
-                            <li class="b-hy"><span><i class="iconfont">&#xe654;</i>所在行业</span>
-                                <div>
-                                    <?php if ($user->industries): ?>
-                                        <?php foreach ($user->industries as $k => $v): ?>
-                                            <em><?= $v['name'] ?></em>
-                                        <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <em>暂未填写</em>
-                                    <?php endif; ?>
-                                </div>
-                            </li>
-                            <li class="b-bq"><span><i class="iconfont">&#xe653;</i>个人标签</span>
-                                <div>
-                                    <?php if (is_array(unserialize($user->grbq))): ?>
-                                        <?php foreach (unserialize($user->grbq) as $k => $v): ?>
-                                            <em><?= $v ?></em>
-                                        <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <em>暂未填写</em>
-                                    <?php endif; ?>
-                                </div>
-                            </li>
-                            <li class="b-yw"><span><i class="iconfont">&#xe655;</i>擅长业务</span><div><em><?= $user->goodat ? $user->goodat : '暂未填写' ?></em></div></li>
-                            <li class="b-gs nobottom"><span><i class="iconfont">&#xe656;</i>公司业务</span><div><em><?= $user->gsyw ? $user->gsyw : '暂未填写' ?></em></div></li>
-                        </ul>
-                    <?php else: ?>
-                        <ul class="cur inner basicon">
-                            <li class="b-dq"><span><i class="iconfont">&#xe660;</i>所在地区</span>
-                                <div>
-                                    <em>暂未公开</em>
-                                </div>
-                            </li>
-                        </ul>
-                    <?php endif; ?>
-                <?php endif; ?>
+                <ul class="cur inner basicon">
+                    <li class="b-dq"><span><i class="iconfont">&#xe660;</i>所在地区</span>
+                        <div>
+                            <em><?= $user->city ? $user->city : '暂未填写' ?></em>
+                        </div>
+                    </li>
+                    <li class="b-hy"><span><i class="iconfont">&#xe654;</i>所在行业</span>
+                        <div>
+                            <?php if ($user->industries): ?>
+                                <?php foreach ($user->industries as $k => $v): ?>
+                                    <em><?= $v['name'] ?></em>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <em>暂未填写</em>
+                            <?php endif; ?>
+                        </div>
+                    </li>
+                    <li class="b-bq"><span><i class="iconfont">&#xe653;</i>个人标签</span>
+                        <div>
+                            <?php if (is_array(unserialize($user->grbq))): ?>
+                                <?php foreach (unserialize($user->grbq) as $k => $v): ?>
+                                    <em><?= $v ?></em>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <em>暂未填写</em>
+                            <?php endif; ?>
+                        </div>
+                    </li>
+                    <li class="b-yw"><span><i class="iconfont">&#xe655;</i>擅长业务</span><div><em><?= $user->goodat ? $user->goodat : '暂未填写' ?></em></div></li>
+                    <li class="b-gs nobottom"><span><i class="iconfont">&#xe656;</i>公司业务</span><div><em><?= $user->gsyw ? $user->gsyw : '暂未填写' ?></em></div></li>
+                </ul>
             <?php else: ?>
                 <ul class="cur inner basicon">
                     <li class="b-dq"><span><i class="iconfont">&#xe660;</i>所在地区</span>
@@ -234,62 +223,60 @@
                     <li class="b-gs noafter"><span><i class="iconfont">&#xe656;</i>公司业务</span><div><em><?= $user->gsyw ? $user->gsyw : '暂未填写' ?></em></div></li>
                 </ul>
             <?php endif; ?>
+
+            <!--工作经历-->
             <?php if (!$self): ?>
                 <?php if ($user->secret): ?>
-                    <?php if ($user->secret->profile_set == '1'): ?>
+                    <?php if ($user->secret->career_set == '1'): ?>
                         <ul class="basicon worktab">
                             <?php if ($user->careers): ?>
                                 <?php foreach ($user->careers as $career): ?>
-                                   
-                                        <li class="inner">
-                                            <span>
-                                                <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>
-                                                <?= $career->company ?>
-                                            </span>
-                                        </li>
-                                        <li class="inner bd1">
-                                            <span class="worktime"><?= $career->start_date ?>～<?= $career->end_date ?>，<?= $career->position ?></span>
-                                        </li>
-                                        <li class="inner">
-                                            <span class="worktime">
-                                                <?= $career->descb; ?>
-                                            </span>
-                                        </li>
-                                    
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                              
+
                                     <li class="inner">
                                         <span>
-                                            <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>暂未填写
+                                            <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>
+                                            <?= $career->company ?>
                                         </span>
                                     </li>
-                                    <li class="inner">
-                                        <span class="worktime">暂未填写</span>
+                                    <li class="inner bd1">
+                                        <span class="worktime"><?= $career->start_date ?>～<?= $career->end_date ?>，<?= $career->position ?></span>
                                     </li>
-                               
+                                    <li class="inner">
+                                        <span class="worktime">
+                                            <?= $career->descb; ?>
+                                        </span>
+                                    </li>
+
+                                <?php endforeach; ?>
+                            <?php else: ?>
+
+                                <li class="inner">
+                                    <span>
+                                        <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>暂未填写
+                                    </span>
+                                </li>
+                                <li class="inner">
+                                    <span class="worktime">暂未填写</span>
+                                </li>
+
                             <?php endif; ?>
                         </ul>
                     <?php else: ?>
                         <ul class="basicon worktab">
-                           
-                                <li class="inner">
-                                    <span>
-                                        <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>暂未公开
-                                    </span>
-                                </li>
-                                <li class="inner">
-                                    <span class="worktime">暂未公开</span>
-                                </li>
-                           
+                            <li class="inner">
+                                <span>
+                                    <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>暂未公开
+                                </span>
+                            </li>
+                            <li class="inner">
+                                <span class="worktime">暂未公开</span>
+                            </li>
                         </ul>
                     <?php endif; ?>
-                <?php endif; ?>
-            <?php else: ?>
-                <ul class="basicon worktab">
-                    <?php if ($user->careers): ?>
-                        <?php foreach ($user->careers as $career): ?>
-                           
+                <?php else: ?>
+                    <ul class="basicon worktab">
+                        <?php if ($user->careers): ?>
+                            <?php foreach ($user->careers as $career): ?>
                                 <li class="inner">
                                     <span>
                                         <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>
@@ -304,70 +291,95 @@
                                         <?= $career->descb; ?>
                                     </span>
                                 </li>
-                            
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                       
+                            <?php endforeach; ?>
+                        <?php else: ?>
                             <li class="inner">
                                 <span>
                                     <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>暂未填写
                                 </span>
                             </li>
                             <li class="inner">
-                                <span class="worktime  ">暂未填写</span>
-                             </li>
-                        
+                                <span class="worktime">暂未填写</span>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                <?php endif; ?>
+            <?php else: ?>
+                <ul class="basicon worktab">
+                    <?php if ($user->careers): ?>
+                        <?php foreach ($user->careers as $career): ?>
+                            <li class="inner">
+                                <span>
+                                    <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>
+                                    <?= $career->company ?>
+                                </span>
+                            </li>
+                            <li class="inner bd1">
+                                <span class="worktime"><?= $career->start_date ?>～<?= $career->end_date ?>，<?= $career->position ?></span>
+                            </li>
+                            <li class="inner">
+                                <span class="worktime">
+                                    <?= $career->descb; ?>
+                                </span>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <li class="inner">
+                            <span>
+                                <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>暂未填写
+                            </span>
+                        </li>
+                        <li class="inner">
+                            <span class="worktime  ">暂未填写</span>
+                        </li>
                     <?php endif; ?>
                 </ul>
             <?php endif; ?>
+
+            <!--教育经历-->
             <?php if (!$self): ?>
                 <?php if ($user->secret): ?>
-                    <?php if ($user->secret->profile_set == '1'): ?>
+                    <?php if ($user->secret->education_set == '1'): ?>
                         <ul class="basicon worktab">
                             <?php if ($user->educations): ?>
                                 <?php foreach ($user->educations as $education): ?>
-                                    
-                                        <li class="inner">
-                                            <span>
-                                                <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div><?= $education->school ?>
-                                            </span>
-                                        </li>
-                                         <li class="inner">
-                                            <span class="worktime"><?= $education->start_date ?>～<?= $education->end_date ?>，<?= $education->major ?>，<?= $educationType[$education->education] ?></span>
-                                        </li>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                
                                     <li class="inner">
                                         <span>
-                                            <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div>暂未填写
+                                            <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div><?= $education->school ?>
                                         </span>
                                     </li>
-                                     <li class="inner">
-                                         <span class="worktime">暂未填写</span>
+                                    <li class="inner">
+                                        <span class="worktime"><?= $education->start_date ?>～<?= $education->end_date ?>，<?= $education->major ?>，<?= $educationType[$education->education] ?></span>
                                     </li>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <li class="inner">
+                                    <span>
+                                        <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div>暂未填写
+                                    </span>
+                                </li>
+                                <li class="inner">
+                                    <span class="worktime">暂未填写</span>
+                                </li>
                             <?php endif; ?>
                         </ul>
                     <?php else: ?>
                         <ul class="basicon worktab">
-                           
-                                <li class="inner">
-                                    <span>
-                                        <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div>暂未公开
-                                    </span>
-                                </li>
-                                <li class="inner">
-                                    <span class="worktime">暂未公开</span>
-                                </li>
-                           
+                            <li class="inner">
+                                <span>
+                                    <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div>暂未公开
+                                </span>
+                            </li>
+                            <li class="inner">
+                                <span class="worktime">暂未公开</span>
+                            </li>
                         </ul>
                     <?php endif; ?>
-                <?php endif; ?>
-            <?php else: ?>
-                <ul class="basicon worktab">
-                    <?php if ($user->educations): ?>
-                        <?php foreach ($user->educations as $education): ?>
-                           
+                <?php else: ?>
+                    <ul class="basicon worktab">
+                        <?php if ($user->educations): ?>
+                            <?php foreach ($user->educations as $education): ?>
+
                                 <li class="inner">
                                     <span>
                                         <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div><?= $education->school ?>
@@ -376,10 +388,8 @@
                                 <li class="inner">
                                     <span class="worktime"><?= $education->start_date ?>～<?= $education->end_date ?>，<?= $education->major ?>，<?= $educationType[$education->education] ?></span>
                                 </li>
-                           
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                       
+                            <?php endforeach; ?>
+                        <?php else: ?>
                             <li class="inner">
                                 <span>
                                     <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div>暂未填写
@@ -388,7 +398,31 @@
                             <li class="inner">
                                 <span class="worktime">暂未填写</span>
                             </li>
-                        
+                        <?php endif; ?>
+                    </ul>
+                <?php endif; ?>
+            <?php else: ?>
+                <ul class="basicon worktab">
+                    <?php if ($user->educations): ?>
+                        <?php foreach ($user->educations as $education): ?>
+                            <li class="inner">
+                                <span>
+                                    <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div><?= $education->school ?>
+                                </span>
+                            </li>
+                            <li class="inner">
+                                <span class="worktime"><?= $education->start_date ?>～<?= $education->end_date ?>，<?= $education->major ?>，<?= $educationType[$education->education] ?></span>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <li class="inner">
+                            <span>
+                                <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div>暂未填写
+                            </span>
+                        </li>
+                        <li class="inner">
+                            <span class="worktime">暂未填写</span>
+                        </li>
                     <?php endif; ?>
                 </ul>
             <?php endif; ?>
@@ -420,7 +454,7 @@
     if (location.href.indexOf('?share=1') != -1) {
         $('#share_download').show();
     }
-    window.onBackView = function(){
+    window.onBackView = function () {
         location.reload();
     };
 
