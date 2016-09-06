@@ -466,14 +466,14 @@ class MeetController extends AppController {
                 ->User
                 ->find()
                 ->contain(['Subjects'=>function($q){
-                    return $q->where(['Subjects.is_del'=>0]);
+                    return $q;
                 }])
                 ->distinct(['User.id'])
                 ->matching('Subjects', function($q)use($keyword){
                     return $q->where(['Subjects.is_del'=>0]);
                 })
                 ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%"])
-                ->orWhere(['Subjects.title like'=>"%$keyword%"])
+                ->orWhere(['Subjects.title like'=>"%$keyword%", 'enabled'=>'1'])
                 ->page($page, $this->limit)
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
