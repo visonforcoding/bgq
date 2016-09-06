@@ -1189,12 +1189,11 @@ background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  ba
 .loadout time{float:right;line-height: 40px;margin-right: 5px;color:lightgray;}
 .h-info-box li .e_img{line-height: 1rem;}
 .book-info-box li em{width:70%;}
-/*
-.m_sign{position:absolute;right:0;bottom:0;height:0;width:0;border:24px #E01A48 solid;border-left:24px solid transparent;
-border-top:24px solid transparent;color:#fff;text-align: center;font-style: italic;font-size:12px;line-height: 14px;}
-.m_sign i{display: block;transform: rotate(40deg);position:absolute;top:-8px;right:-20px;}*/
 .a_title_time{display: block;font-size:.26rem;color:#707070;}
 .meet_title_con{position: relative;}
 .meet_title_con .m_sub_title{max-width:80%;font-size:.24rem;}
 .meet_tips{position:absolute;right:.1rem;top:.05rem;}
 .l_tips{background: #E01A48;width:8px;height:8px;border-radius: 50%;display: inline-block;opacity: 0;}
+.nocontent{width:100%;margin-top:40%;text-align: center;color:#7A7E83;}
+.nocontent i{display: block;font-size:.6rem;line-height: .8rem;}
+.nocontent{line-height: .46rem;font-size:.32rem;}
