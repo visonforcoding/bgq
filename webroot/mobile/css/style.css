@@ -106,7 +106,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 -webkit-justify-content: center;-moz-justify-content:center;-ms-justify-content:center;}
 .a-banner .yd span{width:.1rem;height:.1rem;border-radius: 50%;background: #929292;display: inline-block;margin:0 0.05rem;}
 .a-banner .yd span.cur{background: #fff;}
-.news-list-items{border-bottom:1px #e5e5e5 solid;padding:0.16rem 0.3rem;background: #fff;overflow:hidden;/*position:relative;*/}
+.news-list-items{/*border-bottom:1px #e5e5e5 solid;*/padding:0.16rem 0.3rem;background: #fff;overflow:hidden;/*position:relative;*/}
 .news-list-items:last-of-type .active-items{border-bottom:none;}
 .news-list-items time,.con-des time{margin-left:20px;color:#969fa9;font-size:0.26rem;line-height: 0.4rem;}
 .news-list-items h1,.con-des{width:100%;color:#969fa9;font-size:0.28rem;line-height: 0.5rem;position:relative;padding-left:0.7rem;height:0.52rem;}
