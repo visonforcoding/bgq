@@ -69,7 +69,15 @@ class UserController extends AppController {
         if ($this->request->is('post')) {
             $user->user_token = md5(uniqid());
             $user->avatar = '/mobile/images/touxiang.jpg';
-            $user = $this->User->patchEntity($user, $this->request->data);
+            $data = $this->request->data();
+                //隐私设置
+            $data['secret'] =  [
+                'phone_set'=>2,
+                'email_set'=>2,
+                'career_set'=>1,
+                'education_set'=>1
+            ];
+            $user = $this->User->patchEntity($user,$data);
             if ($this->User->save($user)) {
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {

@@ -729,3 +729,8 @@ ALTER TABLE `user`
 
 #约见聊天表增加是否已读
 ALTER TABLE `book_chat` ADD COLUMN `is_read` TINYINT(2) UNSIGNED DEFAULT 0 COMMENT '是否已读';
+
+
+ALTER TABLE `secret`
+ ADD COLUMN `career_set` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '工作经历' AFTER `profile_set`,
+ ADD COLUMN `education_set` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '教育经历' AFTER `career_set`;

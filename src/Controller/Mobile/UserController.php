@@ -218,7 +218,9 @@ class UserController extends AppController {
             //隐私设置
             $data['secret'] =  [
                 'phone_set'=>2,
-                'email_set'=>2
+                'email_set'=>2,
+                'career_set'=>1,
+                'education_set'=>1
             ];
             if($this->request->is('weixin')){
                 $data['device'] = 'weixin';
