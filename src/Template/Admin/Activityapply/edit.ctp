@@ -4,51 +4,51 @@
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($activityapply, ['class' => 'form-horizontal']) ?>
-             <div class="form-group">
-            <label class="col-md-2 control-label">用户id</label>
-                <div class="col-md-8">
-                <?php echo $this->Form->input('user_id', ['label' => false,'options' => $users,'class'=>'form-control']);?>
-                      </div>
-         </div>
-                 <div class="form-group">
-            <label class="col-md-2 control-label">活动id</label>
-                <div class="col-md-8">
-                <?php echo $this->Form->input('activity_id', ['label' => false,'options' => $activities,'class'=>'form-control']);?>
-                      </div>
-         </div>
-            <div class="form-group">
+    <div class="form-group">
+        <label class="col-md-2 control-label">用户id</label>
+        <div class="col-md-8">
+            <?php echo $this->Form->input('user_id', ['label' => false, 'options' => $users, 'class' => 'form-control']); ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">活动id</label>
+        <div class="col-md-8">
+            <?php echo $this->Form->input('activity_id', ['label' => false, 'options' => $activities, 'class' => 'form-control']); ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">提交时间</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('create_time', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">更新时间</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('update_time', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">审核是否通过</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('is_pass', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">是否置顶</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('is_top', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
         </div>
