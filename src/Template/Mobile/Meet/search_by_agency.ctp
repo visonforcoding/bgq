@@ -15,6 +15,7 @@
         </ul>
     </div>
     <div id='biggies'></div>
+    <div id="buttonLoading" class="loadingbox"></div>
 </div>
 <script type="text/html" id="agenciesTpl">
     <li><a href="javascript:void(0)" agency_id="{#id#}" class="agency" id="agency_{#id#}">{#name#}</a></li>
@@ -149,6 +150,49 @@
         });
     }
 
+    var page = 2;
+    setTimeout(function () {
+        $(window).on("scroll", function () {
+            $.util.listScroll('items', function () {
+                console.log(page);
+                if (page == 9999) {
+                    $('#buttonLoading').html('亲，没有更多搜索结果了，请看看其他的栏目吧');
+                    return;
+                }
+                $.util.showLoading('buttonLoading');
+                data = $('#searchForm').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: '/meet/get-more-agencies-biggie/'+page,
+                    dataType: 'json',
+                    data: data,
+                    success: function (msg) {
+                        $.util.hideLoading('buttonLoading');
+                        window.holdLoad = false;  //打开加载锁  可以开始再次加载
+
+                        if (!msg.status) {  //拉不到数据了  到底了
+                            page = 9999;
+                            return;
+                        }
+                        if (typeof msg == 'object') {
+                            if (msg.status) {
+                                var html = $.util.dataToTpl('', 'biggie_tpl', msg.data, function (d) {
+                                    d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+        //                            d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
+                                    d.city = '';
+                                    d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
+                                    return d;
+                                });
+                                $('#biggies').append(html);
+                            } else {
+                                $.util.alert(msg.msg);
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    }, 1000);
 </script>
 <?php
 $this->end('script');

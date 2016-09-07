@@ -436,8 +436,6 @@ class MeetController extends AppController {
                     return $q->where(['Subjects.is_del'=>0]);
                 }])
                 ->distinct(['User.id'])
-//                ->notMatching('Subjects')
-//                ->Matching('Subjects')
                 ->leftJoinWith('Subjects')
                 ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%"])
                 ->orWhere(['Subjects.title like'=>"%$keyword%", 'enabled'=>'1', 'level'=>'2'])
@@ -449,7 +447,6 @@ class MeetController extends AppController {
                     });
                 })
                 ->toArray();
-//        debug($users);die;
         if($users) {
             return $this->Util->ajaxReturn(['status' => true, 'msg' => '', 'data' => $users]);
         } else {
@@ -468,14 +465,12 @@ class MeetController extends AppController {
                 ->User
                 ->find()
                 ->contain(['Subjects'=>function($q){
-                    return $q;
+                    return $q->where(['Subjects.is_del'=>0]);
                 }])
                 ->distinct(['User.id'])
-                ->matching('Subjects', function($q)use($keyword){
-                    return $q->where(['Subjects.is_del'=>0]);
-                })
+                ->leftJoinWith('Subjects')
                 ->Where(['enabled'=>'1', 'level'=>'2','truename like'=>"%$keyword%"])
-                ->orWhere(['Subjects.title like'=>"%$keyword%", 'enabled'=>'1'])
+                ->orWhere(['Subjects.title like'=>"%$keyword%", 'enabled'=>'1', 'level'=>'2'])
                 ->page($page, $this->limit)
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
@@ -667,7 +662,52 @@ class MeetController extends AppController {
                 ->contain(['Subjects'=>function($q){
                     return $q->where(['is_del'=>0])->orderDesc('Subjects.create_time');
                 }, 'Agencies'])
-//                ->limit($this->limit)
+                ->limit($this->limit)
+                ->order(['subject_update_time'=>'desc'])
+                ->where($where)
+                ->formatResults(function($items) {
+                    return $items->map(function($item) {
+                        $item['avatar'] = getSmallAvatar($item['avatar']);
+                        return $item;
+                    });
+                 })
+                ->toArray();
+        if($biggie !== false){
+            if ($biggie) {
+                return $this->Util->ajaxReturn(['status' => true, 'data' => $biggie]);
+            } else {
+                return $this->Util->ajaxReturn(false, '暂无搜索结果');
+            }
+        } else {
+            return $this->Util->ajaxReturn(false, '系统错误');
+        }
+    }
+    
+    public function getMoreAgenciesBiggie($page){
+        $data = $this->request->data();
+        $agency_id = $data['agency_id'];
+        $keyword = $data['keyword'];
+        $where['enabled'] = '1';
+        $where['level'] = '2';
+        $where['is_del'] = '0';
+        $biggie = $this
+                    ->User
+                    ->find();
+        // 选择标签再匹配
+        if($this->request->data('pid')){
+            $where['Agencies.pid'] = $this->request->data('pid');
+        }
+        if($agency_id) {
+            $where['agency_id'] = $agency_id;
+        }
+        if($keyword) {
+            $where['truename like'] = "%$keyword%";
+        }
+        $biggie = $biggie
+                ->contain(['Subjects'=>function($q){
+                    return $q->where(['is_del'=>0])->orderDesc('Subjects.create_time');
+                }, 'Agencies'])
+                ->page($page, $this->limit)
                 ->order(['subject_update_time'=>'desc'])
                 ->where($where)
                 ->formatResults(function($items) {
