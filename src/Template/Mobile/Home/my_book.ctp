@@ -109,7 +109,7 @@
                 d.link = status === '1' ? '/home/book-chat/'+d.id : '/home/my-book-detail/'+d.id;
 //                d.subject.user = d.subject.user || {};
                 var user = d.subject.user?d.subject.user:d.user;
-                d.user_logo = user.avatar;
+                d.user_logo = user.avatar ? user.avatar : '/mobile/images/touxiang.png';
                 d.truename = user.truename;
                 d.meet_nums = user.meet_nums+'人见过';
                 d.company = user.company;
