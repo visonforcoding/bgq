@@ -109,7 +109,7 @@ $.util = {
             moveChild: child, //$('#loopImgUl li')
             tab:tab, //$('#loopImgBar li')
             loopScroll: this.loopImg.length > 1 ,
-            autoTime:false,
+            autoTime:5000,
             lockScrY:true,
             imgInitLazy:1000,
             //loopScroll:true,
@@ -226,16 +226,16 @@ $.util = {
         $(window).on('scroll', function(){
             // 滚动一定距离，搜索隐藏
             if (document.body.scrollTop > ($('#imgList').height() + $('.inner').height())) {
-                $('.a-search-box').removeClass('movedown');
-                $('.a-search-box').removeClass('moveto');
-                $('.a-search-box').addClass('moveup');
+                $('.a_search_box').removeClass('movedown');
+                $('.a_search_box').removeClass('moveto');
+                $('.a_search_box').addClass('moveup');
                 window.up = true;
             }
             if(document.body.scrollTop < ($('#imgList').height() + $('.inner').height()) && window.up == true){
                 if(!$.util.isWX){
-                    $('.a-search-box').addClass('movedown');
+                    $('.a_search_box').addClass('movedown');
                 } else if($.util.isWX) {
-                    $('.a-search-box').addClass('moveto');
+                    $('.a_search_box').addClass('moveto');
                 }
             }
         });
