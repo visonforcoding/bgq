@@ -1,7 +1,7 @@
 <div class="wraper newswraper">
     <div class="a_search_box" id="search">
         <a href="/meet/search">
-            <span class="iconfont">&#xe683;</span>
+            <i class="iconfont">&#xe618;</i>
         </a>
     </div>
     <div class="a-banner" >
