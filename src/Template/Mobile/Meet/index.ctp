@@ -18,7 +18,7 @@
     </div>
     <!--分类--start-->
     <div class="h2"></div>
-    <div class="m_title_des" >
+    <div class="m_title_des bd1" >
         <h3>找会员</h3>
     </div>
     <div class="menusort clearfix">
@@ -45,7 +45,7 @@
     </div>
     <!--分类--end-->
     <div class="dk">
-        <div class="m_title_des">
+        <div class="m_title_des bd1">
             <h3>为您推荐</h3>
         </div>
         <ul id='items'>
@@ -55,7 +55,7 @@
         </ul>
     </div>
     <div class="h2"></div>
-    <div class="m_title_des">
+    <div class="m_title_des bd1">
         <h3>全部会员</h3>
     </div>
     <div id='biggie'></div>
@@ -71,7 +71,7 @@
     <section class="internet-v-info">
         <div class="innercon">
             <a href="/user/home-page/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
-            <div class="vipinfo  bbottom fixedwraper">
+            <div class="vipinfo bd1">
                 <a href="/user/home-page/{#id#}">
                     <h3><div class="l-name">{#truename#}</div>{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
                     <span class="job w7 line2">{#company#}&nbsp;&nbsp;{#position#}</span>
