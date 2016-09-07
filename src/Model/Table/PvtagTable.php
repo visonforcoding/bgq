@@ -12,7 +12,7 @@ use Cake\Validation\Validator;
  * Ptag Model
  *
  */
-class PtagTable extends Table {
+class PvtagTable extends Table {
 
     /**
      * Initialize method
@@ -53,8 +53,8 @@ class PtagTable extends Table {
                 ->notEmpty('ptag');
 
         $validator
-                ->requirePresence('desc', 'create')
-                ->notEmpty('desc','请输入描述');
+                ->requirePresence('descb', 'create')
+                ->notEmpty('descb','请输入描述');
 
 
         return $validator;

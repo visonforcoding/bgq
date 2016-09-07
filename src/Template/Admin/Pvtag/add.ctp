@@ -16,7 +16,7 @@
         <label class="col-md-2 control-label">描述</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('desc', ['label' => false, 'class' => 'form-control']);
+            echo $this->Form->input('descb', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
