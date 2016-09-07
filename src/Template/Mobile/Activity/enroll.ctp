@@ -58,20 +58,24 @@
                         if(msg.url.indexOf('/Wx/') != -1){
                             window.location.href = msg.url;
                         } else {
-                            if(window.must_check){
-                                $('.check').show('slow');
-                                $('.checkComfirm').attr('href', msg.url);
-                            } else {
-                                $('.suc').show('slow');
-                                $('.comfirm').attr('href', msg.url);
-                            }
-                            $('#shadow').show('slow');
+                            setTimeout(function(){
+                                if(window.must_check){
+                                    $('.check').show('slow');
+                                    $('.checkComfirm').attr('href', msg.url);
+                                } else {
+                                    $('.suc').show('slow');
+                                    $('.comfirm').attr('href', msg.url);
+                                }
+                                $('#shadow').show('slow');
+                            }, 400);
                         }
                     } else {
                         if (msg.msg.indexOf('请先去完善个人资料') != -1) {
-                            $('#msg').html(msg.msg);
-                            $('#shadow').show();
-                            $('#checkBtn').show();
+                            setTimeout(function(){
+                                $('#msg').html(msg.msg);
+                                $('#shadow').show();
+                                $('#checkBtn').show();
+                            }, 400);
                         } else {
                             $.util.alert(msg.msg);
                         }
@@ -82,8 +86,10 @@
         return false;
     });
     $('.closed').on('click', function(){
-        $('#shadow').hide('slow');
-        $('.totips').hide('slow');
+        setTimeout(function(){
+            $('#shadow').hide('slow');
+            $('.totips').hide('slow');
+        }, 400);
     });
 </script>
 <?php
