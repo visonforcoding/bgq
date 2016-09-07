@@ -84,7 +84,9 @@ class SavantController extends AppController {
      */
     public function edit($id = null) {
         $user = $this->User->get($id, [
-            'contain' => ['Educations', 'Careers', 'Savant']
+            'contain' => ['Educations', 'Careers', 'Savant','Subjects'=>[
+                'conditions'=>['is_del'=>0]
+            ]]
         ]);
         if ($this->request->is(['post', 'put'])) {
             $user = $this->User->patchEntity($user, $this->request->data);
@@ -363,6 +365,48 @@ class SavantController extends AppController {
             $this->Util->ajaxReturn(true, '修改成功');
         } else {
             $this->Util->ajaxReturn(false, '修改失败');
+        }
+    }
+    
+    /**
+     * 修改话题
+     */
+    public function saveSubject($id){
+        $SubjectTable = \Cake\ORM\TableRegistry::get('MeetSubject');
+        $subject = $SubjectTable->get($id);
+        $subject = $SubjectTable->patchEntity($subject, $this->request->data());
+        if ($SubjectTable->save($subject)) {
+            $this->Util->ajaxReturn(true, '修改成功');
+        } else {
+            $this->Util->ajaxReturn(false, '修改失败');
+        }
+    }
+    /**
+     * 修改话题
+     */
+    public function delSubject(){
+        $id = $this->request->query('id');
+        $SubjectTable = \Cake\ORM\TableRegistry::get('MeetSubject');
+        $subject = $SubjectTable->get($id);
+        $subject->is_del = 1;
+        if ($SubjectTable->save($subject)) {
+            $this->Util->ajaxReturn(true, '删除成功');
+        } else {
+            $this->Util->ajaxReturn(false, '删除失败');
+        }
+    }
+    /**
+     * 修改话题
+     */
+    public function addSubject($id=null){
+        $SubjectTable = \Cake\ORM\TableRegistry::get('MeetSubject');
+        $subject = $SubjectTable->newEntity();
+        $subject = $SubjectTable->patchEntity($subject, $this->request->data());
+        $subject->user_id = $id;
+        if ($SubjectTable->save($subject)) {
+            $this->Util->ajaxReturn(true, '添加成功');
+        } else {
+            $this->Util->ajaxReturn(false, '添加失败');
         }
     }
 

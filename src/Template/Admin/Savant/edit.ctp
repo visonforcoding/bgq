@@ -17,6 +17,9 @@
         <li>
             <a href="#tab4" data-toggle="tab">会员信息</a>
         </li>
+        <li>
+            <a href="#tab5" data-toggle="tab">会员话题</a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane in active" id="tab1">
@@ -243,6 +246,36 @@
                 </div>
             </form>
         </div>
+        <div class="tab-pane in " id="tab5">
+            <?php if ($user->subjects): ?>
+                <?php $k = 1; ?>
+                <?php foreach ($user->subjects as $subject): ?>
+                    <div class="subject">
+                        <div class="input-group col-md-8 col-md-offset-1 mt20">
+                            <span class="input-group-addon">标题</span>
+                            <input type="text" name="title" value="<?= $subject->title ?>" class="form-control">
+                        </div>
+                        <div class="input-group col-md-8 col-md-offset-1 mt20">
+                            <span class="input-group-addon">话题简介</span>
+                            <textarea  name="summary"  class="form-control" ><?= $subject->summary ?></textarea>
+                            <span data-id="<?= $subject->id ?>" class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
+                            <span data-id="<?= $subject->id ?>" class="input-group-addon save"><i style="color:blue" class="icon icon-save"></i></span>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <div class="subject">
+                <div class="input-group col-md-8 col-md-offset-1 mt20">
+                    <span class="input-group-addon">标题</span>
+                    <input type="text" name="title" value="" class="form-control">
+                </div>
+                <div class="input-group col-md-8 col-md-offset-1 mt20">
+                    <span class="input-group-addon">话题简介</span>
+                    <textarea  name="summary"  class="form-control" ></textarea>
+                    <span class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <?php $this->start('script'); ?>
@@ -284,7 +317,7 @@
                 var form = $(this);
                 $.ajax({
                     type: 'post',
-                    url: '/admin/savant/saveSavant/'+<?=$user->id?>,
+                    url: '/admin/savant/saveSavant/' +<?= $user->id ?>,
                     data: $(form).serialize(),
                     dataType: 'json',
                     success: function (res) {
@@ -319,6 +352,21 @@
             $('.career .del').click(function () {
                 var id = $(this).data('id');
                 $.getJSON('/admin/user/delCareer', {'id': id}, function (res) {
+                    if (typeof res === 'object') {
+                        if (res.status) {
+                            layer.alert(res.msg, function () {
+                                // window.location.href = '/admin/user/index';
+                                window.location.reload();
+                            });
+                        } else {
+                            layer.alert(res.msg, {icon: 5});
+                        }
+                    }
+                });
+            });
+            $('.subject .del').click(function () {
+                var id = $(this).data('id');
+                $.getJSON('/admin/savant/delSubject', {'id': id}, function (res) {
                     if (typeof res === 'object') {
                         if (res.status) {
                             layer.alert(res.msg, function () {
@@ -366,10 +414,35 @@
                 formdata['position'] = $(form).find('input[name="position"]').val();
                 formdata['start_date'] = $(form).find('input[name="start_date"]').val();
                 formdata['end_date'] = $(form).find('input[name="end_date"]').val();
-                formdata['descb'] = $(form).find('input[name="descb"]').val();
+                formdata['descb'] = $(form).find('textarea[name="descb"]').val();
                 $.ajax({
                     type: 'post',
                     url: '/admin/user/addCareer/' +<?= $user->id ?>,
+                    data: formdata,
+                    dataType: 'json',
+                    success: function (res) {
+                        if (typeof res === 'object') {
+                            if (res.status) {
+                                layer.alert(res.msg, function () {
+                                    // window.location.href = '/admin/user/index';
+                                    window.location.reload();
+                                });
+                            } else {
+                                layer.alert(res.msg, {icon: 5});
+                            }
+                        }
+                    }
+                });
+                return false;
+            });
+            $('.subject .add').click(function () {
+                var form = $(this).parents('.subject');
+                var formdata = {};
+                formdata['title'] = $(form).find('input[name="title"]').val();
+                formdata['summary'] = $(form).find('textarea[name="summary"]').val();
+                $.ajax({
+                    type: 'post',
+                    url: '/admin/savant/addSubject/' +<?= $user->id ?>,
                     data: formdata,
                     dataType: 'json',
                     success: function (res) {
@@ -395,7 +468,7 @@
                 formdata['position'] = $(form).find('input[name="position"]').val();
                 formdata['start_date'] = $(form).find('input[name="start_date"]').val();
                 formdata['end_date'] = $(form).find('input[name="end_date"]').val();
-                formdata['descb'] = $(form).find('input[name="descb"]').val();
+                formdata['descb'] = $(form).find('textarea[name="descb"]').val();
                 $.ajax({
                     type: 'post',
                     url: '/admin/user/saveCareer/' + id,
@@ -428,6 +501,32 @@
                 $.ajax({
                     type: 'post',
                     url: '/admin/user/saveEducation/' + id,
+                    data: formdata,
+                    dataType: 'json',
+                    success: function (res) {
+                        if (typeof res === 'object') {
+                            if (res.status) {
+                                layer.alert(res.msg, function () {
+                                    // window.location.href = '/admin/user/index';
+                                    window.location.reload();
+                                });
+                            } else {
+                                layer.alert(res.msg, {icon: 5});
+                            }
+                        }
+                    }
+                });
+                return false;
+            });
+            $('.subject .save').click(function () {
+                var id = $(this).data('id');
+                var form = $(this).parents('.subject');
+                var formdata = {};
+                formdata['title'] = $(form).find('input[name="title"]').val();
+                formdata['summary'] = $(form).find('textarea[name="summary"]').val();
+                $.ajax({
+                    type: 'post',
+                    url: '/admin/savant/saveSubject/' + id,
                     data: formdata,
                     dataType: 'json',
                     success: function (res) {
