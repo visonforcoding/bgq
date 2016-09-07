@@ -4,10 +4,10 @@
     </div>
 </header>
 <div class="wraper newswraper">
-   <div class="a_search_box" id="search">
-    <a href="/news/search"> 
-       <i class="iconfont">&#xe618;</i>
-    </a> 
+    <div class="a_search_box" id="search" ptag="10000">
+        <a href="/news/search"> 
+            <i class="iconfont">&#xe618;</i>
+        </a> 
     </div>
     <div class="a-banner">
         <ul class="pic-list-container" id="imgList"></ul>
