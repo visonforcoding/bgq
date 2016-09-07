@@ -92,6 +92,10 @@
     var books = <?=  json_encode($books)?>; var savant_books = <?=  json_encode($savant_books)?>;
 </script>
 <script>
+    window.onBackView = function(){
+        location.reload();
+    };
+    
     function setList(){
         if(book_html[type][status]) {
             $('#list').html(book_html[type][status]);
