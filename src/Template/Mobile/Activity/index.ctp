@@ -55,23 +55,10 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script src="/mobile/js/activity_index.js"></script>
 <script>
-<<<<<<< .mine
-    if($.util.isAPP){
-        $('#search').css({'top':'0.6rem'});
-
-    } else if($.util.isWX) {
-        $('#search').css({'top':'0.2rem'});
-||||||| .r2988
     if($.util.isAPP){
         $('#search').css({'top':'0.6rem'});
     } else if($.util.isWX) {
         $('#search').css({'top':'0.2rem'});
-=======
-    if ($.util.isAPP) {
-        $('#search').css({'top': '0.6rem'});
-    } else if ($.util.isWX) {
-        $('#search').css({'top': '0.2rem'});
->>>>>>> .r2993
     }
 </script>
 <script>
