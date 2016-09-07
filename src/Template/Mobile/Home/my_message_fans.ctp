@@ -128,7 +128,11 @@
                             url: "/home/read_msg/" + id,
                             success: function (res) {
                                 var num = $('#sysMes').children('i').html();
-                                $('#sysMes').children('i').html(parseInt(num) - 1);
+                                if(parseInt(num) - 1 == 0){
+                                    $('#sysMes').children('i').remove();
+                                } else {
+                                    $('#sysMes').children('i').html(parseInt(num) - 1);
+                                }
                                 obj.find('.msg_color').removeClass('f-color-black').addClass('f-color-gray');
                                 $('span#msg_'+id).html('已读');
                                 location.href = obj.attr('url');

@@ -528,6 +528,9 @@ class UserController extends AppController {
         if ($this->request->is('post')) {
             $following_id = $this->request->data('id');
             $user_id = $this->user->id;
+            if($following_id == $user_id){
+                return $this->Util->ajaxReturn(false, '不可关注自己');
+            }
             $FansTable = \Cake\ORM\TableRegistry::get('user_fans');
             //判断是否关注过
             $fans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$following_id'")->first();

@@ -18,9 +18,9 @@
     </div>
     <!--分类--start-->
     <div class="h2"></div>
-        <div class="m_title_des" >
+    <div class="m_title_des" >
         <h3>找会员</h3>
-     </div>
+    </div>
     <div class="menusort clearfix">
         <div class="allmenu">
             <div class="menulist clearfix" id="allsort">
@@ -45,7 +45,7 @@
     </div>
     <!--分类--end-->
     <div class="dk">
-         <div class="m_title_des">
+        <div class="m_title_des">
             <h3>为您推荐</h3>
         </div>
         <ul id='items'>
@@ -60,12 +60,12 @@
     </div>
     <div id='biggie'></div>
     <div id="buttonLoading" class="loadingbox"></div>
-    <?php if(!$is_savant): ?>
-    <div class="submitbtn" id="auth">
-        <a href="javascript:$.util.checkLogin('/home/savant-auth');"><span class="s-activ">会员<br>认证</span></a>
-    </div>
+    <?php if (!$is_savant): ?>
+        <div class="submitbtn" id="auth">
+            <a href="javascript:$.util.checkLogin('/home/savant-auth');"><span class="s-activ">会员<br>认证</span></a>
+        </div>
     <?php endif; ?>
-    
+
 </div>
 <script type='text/html' id='biggie_tpl'>
     <section class="internet-v-info">
@@ -77,13 +77,13 @@
                     <span class="job w7 line2">{#company#}&nbsp;&nbsp;{#position#}</span>
                 </a>
                 <div class="mark">
-                     {#subjects#}
-                    <!--<a href="#this" class="line1 w7"><i class="iconfont">&#xe67c;</i>演员的自我修养演员的自我修养</a>-->
+                    {#subjects#}
+                   <!--<a href="#this" class="line1 w7"><i class="iconfont">&#xe67c;</i>演员的自我修养演员的自我修养</a>-->
                 </div>
-                              
-                <div class="m_focus_r color-items">
+
+                <div class="m_focus_r color-items focus" user_id="{#id#}">
                     <i class="iconfont">&#xe614;<!--&#xe680;--></i>
-                    <span>加关注</span>
+                    <span>{#focus_msg#}</span>
                 </div>
             </div>
         </div>
@@ -109,17 +109,17 @@
     }
 </script>
 <script>
-    
+
     window.hideRelease = false;
     $(window).on("scroll", function () {
         // 滚动一个屏幕长度，隐藏发布活动
         var lastSt = window.hideRelease;
         window.hideRelease = document.body.scrollTop > $(window).height();
-        if(lastSt != window.hideRelease){
+        if (lastSt != window.hideRelease) {
             window.hideRelease ? $('#auth').removeClass('moveleft').addClass('moveright') : $('#auth').addClass('moveleft');
         }
     });
-    
+
     $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
         d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
 //        d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
@@ -129,6 +129,7 @@
         } else {
             d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
         }
+        d.focus_msg = d.followers.length ? '取消关注' : '加关注';
         return d;
     });
 
@@ -174,15 +175,8 @@
 
     //轮播
     var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'), $('.a-banner'));
-    //var loop2 = $.util.loopImg($('#items'), $('#imgList li'));
-
-
-    // setTimeout(function(){
-    //     var iconLoop = new simpleScroll({viewDom:$('#icons'),  moveDom:$('#allsort'), right:$('#toRight'), fix:25});
-    // },1000);
 
     var sub = null;
-
     setTimeout(function () {
         sub = $.util.loop({
             min: 3,
@@ -191,11 +185,31 @@
             lockScrY: true,
             loopScroll: true,
             autoTime: 0,
-            viewDom: $('.dk'),
+            viewDom: $('.dk')
         });
-    }, 0)
+    }, 0);
 
     $.util.searchHide();
+
+    $('.focus').on('tap', function () {
+        var obj = $(this);
+        var user_id = obj.attr('user_id');
+        $.util.ajax({
+            url: '/user/follow',
+            data: {id: user_id},
+            func: function (res) {
+                $.util.alert(res.msg);
+                if (res.status) {
+                    if (res.msg.indexOf('取消关注') != '') {
+                        obj.find('span').html('取消关注');
+                    } else {
+                        obj.find('span').html('加关注');
+                    }
+                }
+
+            }
+        });
+    });
 </script>
 <?php
 $this->end('script');
