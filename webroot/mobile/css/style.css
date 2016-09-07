@@ -91,8 +91,9 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .inner .news-serch{ width:0.32rem;height:0.32rem;font-size:0.32rem;top:0.29rem;}
 .a-banner{width:100%;height:3.8rem;position:relative;}
 .a-search-box{position:fixed;top:0.6rem;width:100%; padding:0 0.68rem;z-index:3;max-width:750px;}
-.a_search_box{position:fixed;right:.3rem;top:.8rem;color:#031015;z-index:9999;}
-.a_search_box span{font-size:.68rem;height: .8rem;width: .8rem;display: block;line-height: .8rem;}
+.a_search_box{position:fixed;right:.3rem;top:.8rem;z-index:9999;}
+.a_search_box a{display: block;height:32px;width:32px;border-radius: 50%;background: rgba(0,0,0,.8);display:-webkit-box;-webkit-box-align:center;-webkit-box-pack:center;  -webkit-box-orient: vertical; }
+.a_search_box i{color:#fff;font-size:17px;display: block;font-weight: 100;}
 .a-search{/*display: flex;align-items: center;*/background:rgba(255,255,255,.5); width:100%;border-radius: 4px;height:30px;line-height: 30px;}
 .a-search a{}
 .a-search i{color:#fff;font-size:16px;margin-left:0.2rem;float:left;}
