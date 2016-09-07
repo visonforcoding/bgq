@@ -43,7 +43,7 @@ class PvtagController extends AppController {
      */
     public function add() {
         $pvtag = $this->Pvtag->newEntity();
-        if ($this->request->is('post')) {
+        if ($this->request->is(['post', 'put'])) {
             $pvtag = $this->Pvtag->patchEntity($pvtag, $this->request->data);
             if ($this->Pvtag->save($pvtag)) {
                 $this->Util->ajaxReturn(true, '添加成功');
