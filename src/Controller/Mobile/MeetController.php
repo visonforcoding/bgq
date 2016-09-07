@@ -721,11 +721,17 @@ class MeetController extends AppController {
      * @param int $page 页数
      */
     public function getMoreBiggie($page){
+        $user_id = '';
+        if($this->user){
+            $user_id = $this->user->id;
+        }
         $biggies = $this
                 ->User
                 ->find()
                 ->contain(['Subjects'=>function($q){
                     return $q->where(['Subjects.is_del'=>0])->orderDesc('Subjects.create_time')->limit(1);
+                }, 'Followers'=>function($q)use($user_id){
+                    return $q->where(['user_id'=>$user_id]);
                 }])
                 ->where(['enabled'=>'1', 'level'=>'2'])
                 ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])

@@ -157,7 +157,12 @@
                             d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
 //                            d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
                             d.city = '';
-                            d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
+                            if (window.user_id == d.id) {
+                                d.subjects = $.util.dataToTpl('', 'mySubTpl', d.subjects);
+                            } else {
+                                d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
+                            }
+                            d.focus_msg = d.followers.length ? '取消关注' : '加关注';
                             return d;
                         });
                         $('#biggie').append(html);
