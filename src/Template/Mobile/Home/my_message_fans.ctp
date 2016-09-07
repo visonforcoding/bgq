@@ -86,10 +86,8 @@
                         d.follower_fans = d.u.fans;
                         return d;
                     });
-
                 } else {
-                    $('#follow').html('');
-                    $.util.alert(res.msg);
+                    $('#follow').html('<div class="nocontent"><i class="iconfont">&#xe688;</i><span>你还没有任何粉丝</span></div>');
                 }
             }
         });
