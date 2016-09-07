@@ -166,6 +166,25 @@
                             return d;
                         });
                         $('#biggie').append(html);
+                        $('.focus').on('tap', function () {
+                            var obj = $(this);
+                            var user_id = obj.attr('user_id');
+                            $.util.ajax({
+                                url: '/user/follow',
+                                data: {id: user_id},
+                                func: function (res) {
+                                    $.util.alert(res.msg);
+                                    if (res.status) {
+                                        if (res.msg.indexOf('取消关注') != '') {
+                                            obj.find('span').html('取消关注');
+                                        } else {
+                                            obj.find('span').html('加关注');
+                                        }
+                                    }
+
+                                }
+                            });
+                        });
                         if (res.data.length < 5) {
                             page = 9999;
                             $('#buttonLoading').html('亲，没有更多条目了，请看看其他的栏目吧');
