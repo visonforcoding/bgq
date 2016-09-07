@@ -146,8 +146,7 @@
                                 <?php foreach ($user->careers as $career): ?>
                                     <li class="inner">
                                         <span>
-                                            <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>
-                                            <?= $career->company ?>
+                                            <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div><?= $career->company ?>
                                         </span>
                                     </li>
                                     <li class="inner bd1">
@@ -188,8 +187,7 @@
                             <?php foreach ($user->careers as $career): ?>
                                 <li class="inner">
                                     <span>
-                                        <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>
-                                        <?= $career->company ?>
+                                        <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div><?= $career->company ?>
                                     </span>
                                 </li>
                                 <li class="inner bd1">
@@ -217,8 +215,7 @@
                         <?php foreach ($user->careers as $career): ?>
                             <li class="inner">
                                 <span>
-                                    <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>
-                                    <?= $career->company ?>
+                                    <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div><?= $career->company ?>
                                 </span>
                             </li>
                             <li class="inner bd1">
