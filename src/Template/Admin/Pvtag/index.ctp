@@ -90,7 +90,7 @@
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/admin/ptag/delete',
+                            url: '/admin/pvtag/delete',
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
