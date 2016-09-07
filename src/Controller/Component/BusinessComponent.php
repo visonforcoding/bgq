@@ -257,7 +257,7 @@ class BusinessComponent extends Component {
             $comlike = $ComLikeTable->newEntity($data);
         }
          $transRes = $ComLikeTable->connection()->transactional(function()use($ComLikeTable, $comlike, $relate, $RelateTable) {
-             \Cake\Log\Log::debug($comlike,'devlog');
+            //\Cake\Log\Log::debug($comlike,'devlog');
             $relate->praise_nums +=1;
             return $ComLikeTable->save($comlike)&&$RelateTable->save($relate);
         });
@@ -266,11 +266,11 @@ class BusinessComponent extends Component {
             $com_userid = $relate->user->id;
             if($type==0){
                 $table_id = $relate->activity_id; 
-                $redirect_url = '/activity/details/'.$table_id.'#allcoment'.'#common_'.$relate_id;
+                $redirect_url = '/home/comment-view/'.$table_id.'?type=2';
                 $this->usermsg($com_userid, '您有新的点赞', '您的评论获得新的点赞', 8, $relate_id,$redirect_url);
             }else{
                 $table_id = $relate->news_id; 
-                $redirect_url = '/news/view/'.$table_id.'#allcoment'.'#common_'.$relate_id;
+                $redirect_url = '/home/comment-view/'.$table_id.'?type=1';
                 $this->usermsg($com_userid, '您有新的点赞', '您的评论获得新的点赞', 2, $relate_id,$redirect_url);
             }
             return true;
