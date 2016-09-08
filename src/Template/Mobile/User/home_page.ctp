@@ -46,13 +46,13 @@
         <div class="m-listinfo-des">
             <ul class="m-lilist-des">
                 <li>
-                    <a href="/home/my-following/1">
+                    <a href="<?php if($follows == 0): ?>javascript:void(0)<?php else: ?><?php if($self): ?>/home/my-following/1<?php else: ?>/home/follow/<?= $user->id ?><?php endif; ?><?php endif; ?>">
                         <i><?= $follows ?></i>
                         <span>关注</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/home/my-following/2">
+                    <a href="<?php if($fans == 0): ?>javascript:void(0)<?php else: ?><?php if($self): ?>/home/my-following/2<?php else: ?>/home/fans/<?= $user->id ?><?php endif; ?><?php endif; ?>">
                         <i><?= $fans ?></i>
                         <span>粉丝</span>
                     </a>
