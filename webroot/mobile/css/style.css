@@ -159,7 +159,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .newscon-box p a,.body-con a{font-size:0.3rem;}
 .con-bottom{color:#9ba4ad;font-size:0.28rem;background: #fff;padding:.2rem 0;}
 .con-bottom span{display: inline-block;font-size:0.24rem;overflow: hidden;height: .4rem;line-height: .4rem;}
-.con-bottom span:nth-of-type(2){width:12%;text-align: right;}
+.con-bottom span:nth-of-type(2){max-width:15%;text-align: center;}
 .con-bottom .readnums{width:80%;text-align: right;}
 .a-con-bottom .readnums{width:70%;}
 .con-bottom .a-coll{width:0.6rem;}
