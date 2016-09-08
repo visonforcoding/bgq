@@ -298,6 +298,9 @@ class HomeController extends AppController {
                 ]);
             }
 
+            /**
+             * ajax获取新的关注
+             */
             public function getFansMessage(){
                 $user_id = $this->user->id;
                 $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
@@ -305,7 +308,7 @@ class HomeController extends AppController {
                                 ->hydrate(false)
                                 ->distinct('u.id')
                                 ->select(['u.truename', 'u.avatar', 'u.id', 'create_time',
-                                    'u.company', 'u.position', 'u.fans', 'uf.type'])
+                                    'u.company', 'u.position', 'u.fans', 'uf.type', 'u.level'])
                                 ->join([
                                     'uf' => [
                                         'table' => 'user_fans',
