@@ -23,6 +23,9 @@
     <div class="line">
         <span class="mistips">我们会在三个工作日内处理您的申请</span>
     </div>
+    <p class='inner areap' >如果您有媒体或者赞助资源需要可以直接联系我们的小秘书
+电话：13806868688&nbsp;&nbsp;邮箱：xms@chinamatop.com
+</p>
     <div class='reg-shadow' hidden></div>
     <div class="totips" style="display:none;">
         <h3>非常感谢你的推荐或赞助</h3>
