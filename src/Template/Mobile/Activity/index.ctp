@@ -31,16 +31,16 @@
                             <span>并购沙龙</span>
                         </a>
                         <a href="#this">
-                            <i class="iconfont">&#xe68e;</i>
-                            <span>晚餐会</span>
-                        </a>
-                        <a href="#this">
                             <i class="iconfont">&#xe68d;</i>
                             <span>论坛</span>
                         </a>
                         <a href="#this">
                             <i class="iconfont">&#xe617;</i>
                             <span>定制活动</span>
+                        </a>
+                        <a href="#this">
+                            <i class="iconfont">&#xe68e;</i>
+                            <span>晚餐会</span>
                         </a>
                     </div>
                     </div>

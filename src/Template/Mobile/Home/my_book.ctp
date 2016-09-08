@@ -89,7 +89,9 @@
         $('span[status="0"]').addClass('active');
         $('span[type="<?php if($savant_books == []): ?>books<?php else: ?>savant_books<?php endif; ?>"]').addClass('active');
     }
-    var books = <?=  json_encode($books)?>; var savant_books = <?=  json_encode($savant_books)?>;
+    var books = <?=  json_encode($books)?>;
+    var savant_books = <?=  json_encode($savant_books)?>;
+    var status0 = 0, status1 = 0, status2 = 0;
 </script>
 <script>
     window.onBackView = function(){

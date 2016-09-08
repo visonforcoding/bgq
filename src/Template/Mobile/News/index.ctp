@@ -129,7 +129,7 @@
                 if(res.status){
                     var html = dealData(res.data);
                     $('#news').append(html);
-                    if(res.data.length < 5){
+                    if(res.data.length < 10){
                         page = 9999;
                         $('#buttonLoading').html('亲，没有更多资讯了，请看看其他的栏目吧');
                     } else {
