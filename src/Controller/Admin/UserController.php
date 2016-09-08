@@ -67,9 +67,14 @@ class UserController extends AppController {
     public function add() {
         $user = $this->User->newEntity();
         if ($this->request->is('post')) {
+            $data = $this->request->data();
+            $data['device'] = 'backend';
+            $ckReg = $this->User->find()->where(['phone'=>$data['phone']])->first();
+            if($ckReg){
+                $this->Util->ajaxReturn(false,'该手机号已经注册过');
+            }
             $user->user_token = md5(uniqid());
             $user->avatar = '/mobile/images/touxiang.jpg';
-            $data = $this->request->data();
             //隐私设置
             $data['grbq'] = serialize($this->request->data('grbq'));
             $data['secret'] =  [

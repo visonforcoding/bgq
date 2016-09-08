@@ -48,7 +48,7 @@
         </div>
         <div class='container inner'>
             <div class='row mt20 bx'>
-                <h6 class='row-title before-themeprimary no-margin-top'>教育经历</h6>
+                <h6 class='row-title before-themeprimary no-margin-top'>工作经历</h6>
                 <div class="row  p30">
                     <table class="table">
                         <thead>
@@ -77,7 +77,7 @@
         </div>
         <div class='container inner'>
             <div class='row mt20 bx'>
-                <h6 class='row-title before-themeprimary no-margin-top'>工作经历</h6>
+                <h6 class='row-title before-themeprimary no-margin-top'>教育经历</h6>
                 <div class="row  p30">
                     <table class="table">
                         <thead>
