@@ -81,7 +81,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
         "sys.QRcode",  //二维码扫描
         "sys.update",  //android系统更新
         "sys.mediaPlay", //开始播放多媒体
-        "sys.back",
+        "sys.back",  //设置返回链接
         "sys.logout",
         "sys.device", //获取唯一设备id
         "show.shareIco", //隐藏分享图标

@@ -41,7 +41,7 @@
         <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
         <script type="text/javascript" src="/mobile/js/jsapi.js?0905"></script>
         <script type="text/javascript" src="/mobile/js/zepto.min.js"></script>
-        <script type="text/javascript" src="/mobile/js/util.js?0905"></script>
+        <script type="text/javascript" src="/mobile/js/util.js?0908"></script>
         <script>
             var __wxConfig = <?= json_encode($wxConfig) ?>;
             var __loginStatus = '<?=$isLogin ?>';
@@ -149,7 +149,7 @@
                 $.util.report();  //页面访问上报
             })();
 
-            LEMON.sys.closeLOC();
+            LEMON.sys.closeLOC();  //临时的   关闭缓存
         </script>
 
 
