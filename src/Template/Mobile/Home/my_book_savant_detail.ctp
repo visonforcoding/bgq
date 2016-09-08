@@ -17,16 +17,16 @@
     </div>
     <ul class="h-info-box">
         <li>
-            <h3>标签：<em><?=$industries_str?></em></h3>
+            <h3>标 签：<em><?=$industries_str?></em></h3>
         </li>
         <li>
-            <h3>联系电话：<em><?=$book->user->phone?></em></h3>
+            <h3>电 话：<em><?=$book->user->phone?></em></h3>
         </li>
         <li>
-            <h3>邮箱：<em><?=$book->user->email?></em></h3>
+            <h3>邮 箱：<em><?=$book->user->email?></em></h3>
         </li>
         <li>
-            <h3>行业：
+            <h3>行 业：
                 <em style="margin-left:5px;">
                 <?php foreach($book->user->industries as $industry): ?>
                     <?=$industry->name?>
