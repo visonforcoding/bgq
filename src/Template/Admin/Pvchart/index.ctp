@@ -44,11 +44,18 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['ptag', '访问量', '动作', '描述','操作'],
+                                ['ptag', '量次', '动作', '描述','操作'],
                         colModel: [
                             {name: 'ptag', editable: true, align: 'center'},
                             {name: 'counts', editable: true, align: 'center'},
-                            {name: 'act', editable: true, align: 'center'},
+                            {name: 'act', editable: true, align: 'center',formatter:function(cell,opt,obj){
+                                    switch(cell){
+                                        case 'v':
+                                            return '访问';
+                                        case 'c':
+                                            return '点击';
+                                    }
+                            }},
                             {name: 'pvtag.descb', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
