@@ -160,8 +160,8 @@
                         <div class="input-group col-md-8 col-md-offset-1 mt20">
                             <span class="input-group-addon">工作描述</span>
                             <textarea  name="descb"  class="form-control" ><?= $career->descb ?></textarea>
-                            <span data-id="<?= $career->id ?>" class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
-                            <span data-id="<?= $career->id ?>" class="input-group-addon save"><i style="color:blue" class="icon icon-save"></i></span>
+                            <span title="删除" data-id="<?= $career->id ?>" class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
+                            <span title="保存" data-id="<?= $career->id ?>" class="input-group-addon save"><i style="color:blue" class="icon icon-save"></i></span>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -180,7 +180,7 @@
                 <div class="input-group col-md-8 col-md-offset-1 mt20">
                     <span class="input-group-addon">工作描述</span>
                     <textarea  name="descb"  class="form-control" ></textarea>
-                    <span class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
+                    <span title="添加" class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
                 </div>
             </div>
         </div>
@@ -200,8 +200,8 @@
                         <input type="text" name="major" value="<?= $education->major ?>" class="form-control" placeholder="经济管理">
                         <span class="input-group-addon">学历</span>
                         <?php echo $this->form->select('education', $educationConf, ['class' => 'form-control', 'value' => $education->education]) ?>
-                        <span data-id="<?= $education->id ?>" class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
-                        <span data-id="<?= $education->id ?>" class="input-group-addon save"><i style="color:blue" class="icon icon-save"></i></span>
+                        <span title="删除" data-id="<?= $education->id ?>" class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
+                        <span title="保存" data-id="<?= $education->id ?>" class="input-group-addon save"><i style="color:blue" class="icon icon-save"></i></span>
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -216,7 +216,7 @@
                 <input type="text" name="major" class="form-control" placeholder="经济管理">
                 <span class="input-group-addon">学历</span>
                 <?php echo $this->form->select('education', $educationConf, ['class' => 'form-control']) ?>
-                <span class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
+                <span title="添加" class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
             </div>
         </div>
         <div class="tab-pane in " id="tab4">
@@ -233,12 +233,12 @@
                         <input name="zyys" class="form-control" type="text" value="<?= $user->savant->zyys ?>"/>
                     </div>
                 </div>
-                <div class="form-group">
+<!--                <div class="form-group">
                     <label class="col-md-2 control-label">简介</label>
                     <div class="col-md-8">
                         <textarea name="summary" class="form-control"><?= $user->savant->summary ?></textarea>
                     </div>
-                </div>
+                </div>-->
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
@@ -258,8 +258,8 @@
                         <div class="input-group col-md-8 col-md-offset-1 mt20">
                             <span class="input-group-addon">话题简介</span>
                             <textarea  name="summary"  class="form-control" ><?= $subject->summary ?></textarea>
-                            <span data-id="<?= $subject->id ?>" class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
-                            <span data-id="<?= $subject->id ?>" class="input-group-addon save"><i style="color:blue" class="icon icon-save"></i></span>
+                            <span title="删除" data-id="<?= $subject->id ?>" class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
+                            <span title="保存" data-id="<?= $subject->id ?>" class="input-group-addon save"><i style="color:blue" class="icon icon-save"></i></span>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -272,7 +272,7 @@
                 <div class="input-group col-md-8 col-md-offset-1 mt20">
                     <span class="input-group-addon">话题简介</span>
                     <textarea  name="summary"  class="form-control" ></textarea>
-                    <span class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
+                    <span title="添加" class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
                 </div>
             </div>
         </div>

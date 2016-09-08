@@ -172,8 +172,8 @@
                         <div class="input-group col-md-8 col-md-offset-1 mt20">
                             <span class="input-group-addon">工作描述</span>
                             <input type="text" name="descb" value="<?= $career->descb ?>" class="form-control" placeholder="经济管理">
-                            <span data-id="<?= $career->id ?>" class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
-                            <span data-id="<?= $career->id ?>" class="input-group-addon save"><i style="color:blue" class="icon icon-save"></i></span>
+                            <span title="删除" data-id="<?= $career->id ?>" class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
+                            <span title="保存" data-id="<?= $career->id ?>" class="input-group-addon save"><i style="color:blue" class="icon icon-save"></i></span>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -192,7 +192,7 @@
                 <div class="input-group col-md-8 col-md-offset-1 mt20">
                     <span class="input-group-addon">工作描述</span>
                     <input type="text" name="descb"  class="form-control" >
-                    <span class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
+                    <span title="添加" class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
                 </div>
             </div>
         </div>
@@ -212,8 +212,8 @@
                         <input type="text" name="major" value="<?= $education->major ?>" class="form-control" placeholder="经济管理">
                         <span class="input-group-addon">学历</span>
                         <?php echo $this->form->select('education', $educationConf, ['class' => 'form-control', 'value' => $education->education]) ?>
-                        <span data-id="<?= $education->id ?>" class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
-                        <span data-id="<?= $education->id ?>" class="input-group-addon save"><i style="color:blue" class="icon icon-save"></i></span>
+                        <span title="删除" data-id="<?= $education->id ?>" class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
+                        <span title="保存" data-id="<?= $education->id ?>" class="input-group-addon save"><i style="color:blue" class="icon icon-save"></i></span>
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -228,7 +228,7 @@
                 <input type="text" name="major" class="form-control" placeholder="经济管理">
                 <span class="input-group-addon">学历</span>
                 <?php echo $this->form->select('education', $educationConf, ['class' => 'form-control']) ?>
-                <span class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
+                <span title="保存" class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
             </div>
         </div>
     </div>
