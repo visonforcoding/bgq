@@ -420,6 +420,7 @@
             if (obj.data('disable') === '1') {
                 return false;
             }
+            $('#praise_' + id).data('disable', '1');
             checkLogin(function () {
                 $.util.ajax({
                     url: '/news/comment-praise',
@@ -430,10 +431,11 @@
                             $('.praise_' + id).siblings('.addnum').show();
                             $('.praise_' + id).siblings('em').html(parseInt(obj.find('em').text()) + 1);
                             $('.praise_' + id).css('color', 'red');
-                            $('#praise_' + id).data('disable', '1');
                             setTimeout(function () {
                                 $('.praise_' + id).siblings('.addnum').hide();
                             }, 1000);
+                        } else {
+                            $('#praise_' + id).data('disable', '0');
                         }
                     }
                 });
