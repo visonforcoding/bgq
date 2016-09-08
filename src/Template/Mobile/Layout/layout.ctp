@@ -7,8 +7,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title><?= isset($pageTitle) ? $pageTitle : '并购帮'; ?></title>
-        <link rel="stylesheet" type="text/css" href="/mobile/css/common.css?0905"/>
-        <link rel="stylesheet" type="text/css" href="/mobile/css/style.css?0905"/>
+        <link rel="stylesheet" type="text/css" href="/mobile/css/common.css?<?= time(); ?>"/>
+        <link rel="stylesheet" type="text/css" href="/mobile/css/style.css?<?= time(); ?>"/>
         <script type="text/javascript">
             (function (win) {
                 var h;
