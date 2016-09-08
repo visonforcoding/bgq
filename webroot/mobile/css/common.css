@@ -75,7 +75,7 @@ textarea::-webkit-scrollbar{display: none;}/*隐藏多文本框滚动条*/
 .innercon{margin:0 auto;padding:0 0.3rem;background: #fff;}
 .h20{height:0.2rem;border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid;}
 .wraper .border{border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid;}
-
+.wraper .areap{font-size:.24rem;color:#7a7e83;text-align: center;}
 .wraper .f-color-gray{color:#bbc0c6;font-size:0.28rem;line-height: 0.32rem;}
 .wraper .f-color-black{color:#222c38;}/*字体颜色*/
 .wraper .col-g{color:#22a69f;}
