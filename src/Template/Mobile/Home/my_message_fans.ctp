@@ -23,7 +23,7 @@
     <section class="internet-v-info no-margin-top">
         <div class="innercon">
             <a href="/user/home-page/{#follower_id#}">
-                <span class="head-img"><img src="{#follower_avatar#}"/><i></i></span>
+                <span class="head-img"><img src="{#follower_avatar#}"/>{#v#}</span>
             </a>
             <div class="vipinfo my-meet-info">
                 <h3>{#follower_truename#}</h3>
@@ -85,6 +85,7 @@
                         if (d.uf.type == '1') {
                             d.type = '<span style="color:red" data-id="' + d.u.id + '" class="meetnum follow_btn color-items">+加关注</span>';
                         }
+                        d.v = d.u.level == 2 ? '<i></i>' : '';
                         d.follower_fans = d.u.fans;
                         return d;
                     });
