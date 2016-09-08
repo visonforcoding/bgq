@@ -55,11 +55,13 @@
             <a onclick="doPush();" class="btn btn-warning"><i class="icon icon-android"></i> 推送内容</a>
         </div>
     </form>
-    <div>
-        <button type="button" class="btn btn-primary">报名数<span class="label label-badge"><?= $apply_nums ?></span></button>
-        <button type="button" class="btn btn-warning">审核通过数<span class="label label-badge"><?= $check_nums ?></span></button>
-        <button type="button" class="btn btn-danger">付款数<span class="label label-badge"><?= $pay_nums ?></span></button>
-    </div>
+    <?php if (!isset($do)): ?>
+        <div>
+            <button type="button" class="btn btn-primary">报名数<span class="label label-badge"><?= $apply_nums ?></span></button>
+            <button type="button" class="btn btn-warning">审核通过数<span class="label label-badge"><?= $check_nums ?></span></button>
+            <button type="button" class="btn btn-danger">付款数<span class="label label-badge"><?= $pay_nums ?></span></button>
+        </div>
+    <?php endif; ?>
     <table id="list"><tr><td></td></tr></table> 
     <div id="pager"></div> 
 </div>
@@ -359,9 +361,9 @@
                     });
                 }
                 function doPush() {
-                     var searchData = $.zui.store.pageGet('searchData') ? $.zui.store.pageGet('searchData') : {};
+                    var searchData = $.zui.store.pageGet('searchData') ? $.zui.store.pageGet('searchData') : {};
                     var searchQueryStr = $.param(searchData);
-                    url = '/admin/activityapply/push/<?= $id ?>?'+searchQueryStr;
+                    url = '/admin/activityapply/push/<?= $id ?>?' + searchQueryStr;
                     layer.open({
                         type: 2,
                         title: '查看详情',
