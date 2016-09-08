@@ -1757,6 +1757,25 @@ class HomeController extends AppController {
         }
     }
 
+    public function follow($id=null){
+        $FansTable = \Cake\ORM\TableRegistry::get('UserFans');
+        $follows = $FansTable->find()->contain(['Followings'=>function($q){
+            return $q->where(['enabled'=>1, 'is_del'=>0]);
+        }])->where(['user_id'=>$id])->toArray();
+        $this->set([
+            'userjson' => json_encode($follows)
+        ]);
+    }
+    
+    public function fans($id=null){
+        $FansTable = \Cake\ORM\TableRegistry::get('UserFans');
+        $fans = $FansTable->find()->contain(['Users'=>function($q){
+            return $q->where(['enabled'=>1, 'is_del'=>0]);
+        }])->where(['following_id'=>$id])->toArray();
+        $this->set([
+            'userjson' => json_encode($fans)
+        ]);
+    }
 
 }
                                                                                         

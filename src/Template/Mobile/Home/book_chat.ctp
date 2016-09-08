@@ -105,6 +105,7 @@
                 }
             }
         });
+        LEMON.sys.hideKeyboard();
 //        $('.dialogue ul').append('<li class="fr mm"><span>b是的。</span><time>2015-8-20</time></li>');
     });
     setTimeout(function () {

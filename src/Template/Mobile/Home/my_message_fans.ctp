@@ -40,9 +40,9 @@
 <script type="text/html" id="sysTpl">
     <li>
         <div>
-            <a url="{#jump_url#}" style="background: none;" msg_id='{#id#}' class="read">
+            <a url="{#jump_url#}" style="background: none;" msg_id='{#id#}' class="read ablock">
                 <h3>{#title#}</h3>
-                <span class="msg_color {#color#}">{#msg#}</span>
+                <span class="msg_color line2 {#color#}">{#msg#}</span>
                 <span class='datetime'>{#create_time#}</span>
             </a>
         </div>
