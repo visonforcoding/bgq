@@ -11,9 +11,9 @@
         <span type="savant_books">约见我</span>
     </div>
     <div  class="inner my-home-slidemenu" id="statusTab">
-        <span status="2">未通过</span>
-        <span status="0">未确认</span>
-        <span status="1">已确认</span>
+        <span status="2">未通过<i id="nopass"></i></span>
+        <span status="0">未确认<i id="nocomfirm"></i></span>
+        <span status="1">已确认<i id="comfirm"></i></span>
     </div>
 
     <div id="list">
@@ -91,7 +91,52 @@
     }
     var books = <?=  json_encode($books)?>;
     var savant_books = <?=  json_encode($savant_books)?>;
-    var status0 = 0, status1 = 0, status2 = 0;
+    var book_nocomfirm = '<?= $book_nocomfirm ?>';
+    var book_comfirm = '<?= $book_comfirm ?>';
+    var book_nopass = '<?= $book_nopass ?>';
+    var savant_nocomfirm = '<?= $savant_nocomfirm ?>';
+    var savant_comfirm = '<?= $savant_comfirm ?>';
+    var savant_nopass = '<?= $savant_nopass ?>';
+    if(type == 'books'){
+        if(book_nocomfirm != 0){
+            $('#nocomfirm').html(book_nocomfirm);
+            $('#nocomfirm').show();
+        } else {
+            $('#nocomfirm').hide();
+        }
+        if(book_comfirm != 0){
+            $('#comfirm').html(book_comfirm);
+            $('#comfirm').show();
+        } else {
+            $('#comfirm').hide();
+        }
+        if(book_nopass != 0){
+            $('#nopass').html(book_nopass);
+            $('#nopass').show();
+        } else {
+            $('#nopass').hide();
+        }
+        
+    } else {
+        if(savant_nocomfirm != 0){
+            $('#nocomfirm').show();
+            $('#nocomfirm').html(savant_nocomfirm);
+        } else {
+            $('#nocomfirm').hide();
+        }
+        if(savant_comfirm != 0){
+            $('#comfirm').show();
+            $('#comfirm').html(savant_comfirm);
+        } else {
+            $('#comfirm').hide();
+        }
+        if(savant_nopass != 0){
+            $('#nopass').show();
+            $('#nopass').html(savant_nopass);
+        } else {
+            $('#nopass').hide();
+        }
+    }
 </script>
 <script>
     window.onBackView = function(){
@@ -104,6 +149,7 @@
             return;
         }
         var data = type == 'books' ? books : savant_books, cdata=[];
+        
         $.each(data, function(i,d){
             if(d.status == status) cdata.push(d);
         });
@@ -155,7 +201,9 @@
                 return d;
             });
         }
+        
         $('#list').html(book_html[type][status]);
+        
     };
     
     $('body').on('tap', function (e) {
@@ -172,6 +220,45 @@
             $(em).addClass('active');
             setList();
         }
+        if(type == 'books'){
+                if(book_nocomfirm != 0){
+                    $('#nocomfirm').html(book_nocomfirm);
+                    $('#nocomfirm').show();
+                } else {
+                    $('#nocomfirm').hide();
+                }
+                if(book_comfirm != 0){
+                    $('#comfirm').html(book_comfirm);
+                    $('#comfirm').show();
+                } else {
+                    $('#comfirm').hide();
+                }
+                if(book_nopass != 0){
+                    $('#nopass').html(book_nopass);
+                    $('#nopass').show();
+                } else {
+                    $('#nopass').hide();
+                }
+            } else {
+                if(savant_nocomfirm != 0){
+                    $('#nocomfirm').show();
+                    $('#nocomfirm').html(savant_nocomfirm);
+                } else {
+                    $('#nocomfirm').hide();
+                }
+                if(savant_comfirm != 0){
+                    $('#comfirm').show();
+                    $('#comfirm').html(savant_comfirm);
+                } else {
+                    $('#comfirm').hide();
+                }
+                if(savant_nopass != 0){
+                    $('#nopass').show();
+                    $('#nopass').html(savant_nopass);
+                } else {
+                    $('#nopass').hide();
+                }
+            }
         if(em.id.indexOf('subjectId_') != -1){
             var id = $(em).attr('subject_id');
             $.ajax({
