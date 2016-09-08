@@ -5,11 +5,17 @@ namespace App\Controller\Admin;
 use Wpadmin\Controller\AppController;
 
 /**
- * Agency Controller
+ * Industry Controller
  *
- * @property \App\Model\Table\AgencyTable $Agency
+ * @property \App\Model\Table\IndustryTable $Industry
  */
 class AgencyController extends AppController {
+    
+    
+    public function initialize() {
+        parent::initialize();
+        $this->Industry = \Cake\ORM\TableRegistry::get('Agency');
+    }
 
     /**
      * Index method
@@ -17,23 +23,30 @@ class AgencyController extends AppController {
      * @return void
      */
     public function index() {
-        $this->set('agency', $this->Agency);
+        $IndustryTable = \Cake\ORM\TableRegistry::get('Agency');
+        $industries = $IndustryTable->find('threaded', [
+                    'keyField' => 'id',
+                    'parentField' => 'pid'
+                ])->all()->toArray();
+        $this->set([
+            'industries'=>$industries
+        ]);
     }
 
     /**
      * View method
      *
-     * @param string|null $id Agency id.
+     * @param string|null $id Industry id.
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function view($id = null) {
         $this->viewBuilder()->autoLayout(false);
-        $agency = $this->Agency->get($id, [
-            'contain' => []
+        $industry = $this->Industry->get($id, [
+            'contain' => ['User']
         ]);
-        $this->set('agency', $agency);
-        $this->set('_serialize', ['agency']);
+        $this->set('industry', $industry);
+        $this->set('_serialize', ['industry']);
     }
 
     /**
@@ -42,58 +55,59 @@ class AgencyController extends AppController {
      * @return void Redirects on successful add, renders view otherwise.
      */
     public function add() {
-        $agency = $this->Agency->newEntity();
+        $industry = $this->Industry->newEntity();
         if ($this->request->is('post')) {
             $this->autoRender = false;
             $this->response->type('json');
-            $agency = $this->Agency->patchEntity($agency, $this->request->data);
-            if ($this->Agency->save($agency)) {
+            $industry = $this->Industry->patchEntity($industry, $this->request->data);
+            if ($this->Industry->save($industry)) {
                 echo json_encode(array('status' => true, 'msg' => '添加成功'));
             } else {
-                $errors = $agency->errors();
+                $errors = $industry->errors();
                 echo json_encode(array('status' => false, 'msg' => getMessage($errors), 'errors' => $errors));
             }
             return;
         }
-        $agencys = $this->Agency->find()->hydrate(false)->all()->toArray();
-        $agencys = \Wpadmin\Utils\Util::tree($agencys, 0, 'id', 'pid');
-        $this->set(compact('agency'));
-        $this->set(compact('agencys'));
+        $industrys = $this->Industry->find()->hydrate(false)->all()->toArray();
+        $industrys = \Wpadmin\Utils\Util::tree($industrys, 0, 'id', 'pid');
+        $this->set(compact('industry'));
+        $this->set(compact('industrys'));
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id Agency id.
+     * @param string|null $id Industry id.
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
-        $agency = $this->Agency->get($id, [
+        $industry = $this->Industry->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['post', 'put'])) {
             $this->autoRender = false;
             $this->response->type('json');
-            $agency = $this->Agency->patchEntity($agency, $this->request->data);
-            if ($this->Agency->save($agency)) {
+            $industry = $this->Industry->patchEntity($industry, $this->request->data);
+            if ($this->Industry->save($industry)) {
                 echo json_encode(array('status' => true, 'msg' => '修改成功'));
             } else {
-                $errors = $agency->errors();
+                $errors = $industry->errors();
                 echo json_encode(array('status' => false, 'msg' => getMessage($errors)));
             }
             return;
         }
-        $agencys = $this->Agency->find()->hydrate(false)->all()->toArray();
-        $agencys = \Wpadmin\Utils\Util::tree($agencys, 0, 'id', 'pid');
-        $this->set(compact('agency'));
-        $this->set(compact('agencys'));
+        $industrys = $this->Industry->find()->hydrate(false)->all()->toArray();
+        $industrys = \Wpadmin\Utils\Util::tree($industrys, 0, 'id', 'pid');
+
+        $this->set(compact('industry'));
+        $this->set(compact('industrys'));
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id Agency id.
+     * @param string|null $id Industry id.
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
@@ -103,11 +117,11 @@ class AgencyController extends AppController {
         if ($this->request->is('post')) {
             $this->autoRender = false;
             $this->response->type('json');
-            $agency = $this->Agency->get($id);
-            if ($this->Agency->delete($agency)) {
+            $industry = $this->Industry->get($id);
+            if ($this->Industry->delete($industry)) {
                 echo json_encode(array('status' => true, 'msg' => '删除成功'));
             } else {
-                $errors = $agency->errors();
+                $errors = $industry->errors();
                 echo json_encode(array('status' => false, 'msg' => getMessage($errors)));
             }
         }
@@ -123,7 +137,7 @@ class AgencyController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'Agency.' . $this->request->data('sidx');
+        $sort = 'Industries.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
@@ -135,9 +149,9 @@ class AgencyController extends AppController {
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
+            $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
-        $query = $this->Agency->find()->contain(['Agencies']);
+        $query = $this->Industry->find()->contain(['Industries']);
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
@@ -185,7 +199,7 @@ class AgencyController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
-        $Table = $this->Agency;
+        $Table = $this->Industry;
         $column = ['父id', '名称'];
         $query = $Table->find();
         $query->hydrate(false);
@@ -198,8 +212,32 @@ class AgencyController extends AppController {
         }
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = 'Agency_' . date('Y-m-d') . '.csv';
+        $filename = 'Industry_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+    }
+
+    /**
+     * 为select2提供数据
+     */
+    public function getIndustryForSelect() {
+        $keyword = $this->request->query('search');
+        $query = $this->Industry->find('threaded', [
+                    'keyField' => $this->Industry->primaryKey(),
+                    'parentField' => 'pid'
+                ])->hydrate(false)->select(['id', 'text' => 'name', 'pid']);
+        if (!empty($keyword)) {
+            $query->where("`name` like '%$keyword%'");
+        }
+        $industries = $query->toArray();
+        if ($industries) {
+            foreach ($industries as $key => $value) {
+                if ($value['pid'] == 0) {
+                    $industries[$key]['id'] = '';
+                    unset($industries[$key]['pid']);
+                }
+            }
+        }
+        $this->Util->ajaxReturn($industries);
     }
 
 }
