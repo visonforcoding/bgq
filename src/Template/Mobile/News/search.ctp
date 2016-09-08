@@ -216,12 +216,8 @@
 //                            d.author = d.user.truename;
                             return d;
                         });
-                        $('.orgname').toggleClass('active');
-                        if ($('.a-s-mark').hasClass('a-s-width')) {
-                            $('.a-s-mark').removeClass('a-s-width');
-                        } else {
-                            $('.a-s-mark').addClass('a-s-width');
-                        }
+                        $('.orgname').removeClass('active');
+                        $('.a-s-mark').addClass('a-s-width');
                     } else {
                         $('#search').html('');
                         $.util.alert(msg.msg);
@@ -247,12 +243,8 @@
 //                            d.author = d.user.truename;
                             return d;
                         });
-                        $('.orgname').toggleClass('active');
-                        if ($('.a-s-mark').hasClass('a-s-width')) {
-                            $('.a-s-mark').removeClass('a-s-width');
-                        } else {
-                            $('.a-s-mark').addClass('a-s-width');
-                        }
+                        $('.orgname').removeClass('active');
+                        $('.a-s-mark').addClass('a-s-width');
                     } else {
                         $('#search').html('');
                         $.util.alert(msg.msg);
