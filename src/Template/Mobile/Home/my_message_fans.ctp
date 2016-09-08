@@ -17,6 +17,7 @@
         <a href="javascript:void(0)" id="sysMes">系统消息<?php if ($unReadSysCount): ?><i><?= $unReadSysCount ?></i><?php endif; ?></a>
     </div>
     <ul id='follow' class="systerm-info-box"></ul>
+    <div id="buttonLoading" class="loadingbox"></div>
 </div>
 <script type="text/html" id="fansTpl">
     <section class="internet-v-info no-margin-top">
@@ -57,14 +58,15 @@
     if ($.util.isAPP) {
         LEMON.sys.back('/home/index');
     }
-    
-    function followTap(em){
+    var page = 2;
+    function followTap(em) {
         if ($(em).hasClass('active')) {
             return;
         } else {
             $(em).addClass('active');
             $('#sysMes').removeClass('active');
         }
+        $.util.hideLoading('buttonLoading');
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -93,17 +95,18 @@
         });
     }
 
-    function sysTap(em){
+    function sysTap(em) {
         if ($(em).hasClass('active')) {
             return;
         } else {
             $(em).addClass('active');
             $('#newFollow').removeClass('active');
         }
+        page = 2;
         $.ajax({
             type: 'POST',
             dataType: 'json',
-            url: "/home/get-sys-message",
+            url: "/home/get-sys-message/1",
             success: function (res) {
                 if (res.status) {
                     $.util.dataToTpl('follow', 'sysTpl', res.data, function (d) {
@@ -126,13 +129,13 @@
                             url: "/home/read_msg/" + id,
                             success: function (res) {
                                 var num = $('#sysMes').children('i').html();
-                                if(parseInt(num) - 1 == 0){
+                                if (parseInt(num) - 1 == 0) {
                                     $('#sysMes').children('i').remove();
                                 } else {
                                     $('#sysMes').children('i').html(parseInt(num) - 1);
                                 }
                                 obj.find('.msg_color').removeClass('f-color-black').addClass('f-color-gray');
-                                $('span#msg_'+id).html('已读');
+                                $('span#msg_' + id).html('已读');
                                 location.href = obj.attr('url');
                             }
                         });
@@ -143,14 +146,15 @@
                 }
             }
         });
+        
     }
-    
-    if(type == 1){
+
+    if (type == 1) {
         followTap($('#newFollow').get(0));
     } else {
         sysTap($('#sysMes').get(0));
     }
-    
+
     $('.follow_btn').on('click', function () {
         //关注
         var user_id = $(this).data('id');
@@ -175,7 +179,74 @@
         $('#newFollow').find('i').remove();
         sysTap(this);
     });
-    
-    
+
+    function scroll(){
+        $(window).on("scroll", function () {
+            $.util.listScroll('items', function () {
+                if (page == 9999) {
+                    $('#buttonLoading').html('亲，没有更多条目了，请看看其他的栏目吧');
+                    return;
+                }
+                $.util.showLoading('buttonLoading');
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: "/home/get-sys-message/" + page,
+                    success: function (res) {
+                        $.util.hideLoading('buttonLoading');
+                        window.holdLoad = false;  //打开加载锁  可以开始再次加载
+
+                        if (!res.status) {  //拉不到数据了  到底了
+                            page = 9999;
+                            return;
+                        }
+                        if (res.status) {
+                            var html = $.util.dataToTpl('', 'sysTpl', res.data, function (d) {
+                                d.jump_url = d.url ? d.url : '#this';
+                                if (d.status) {
+                                    d.status_msg = '已读';
+                                    d.color = 'f-color-gray';
+                                } else {
+                                    d.status_msg = '未读';
+                                    d.color = 'f-color-black';
+                                }
+                                return d;
+                            });
+                            $('#follow').append(html);
+                            if (res.data.length < 10) {
+                                page = 9999;
+                                $('#buttonLoading').html('亲，没有更多消息了');
+                            } else {
+                                page++;
+                            }
+                            $('.read').on('tap', function () {
+                                var id = $(this).attr('msg_id');
+                                var obj = $(this);
+                                $.ajax({
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    url: "/home/read_msg/" + id,
+                                    success: function (res) {
+                                        var num = $('#sysMes').children('i').html();
+                                        if (parseInt(num) - 1 == 0) {
+                                            $('#sysMes').children('i').remove();
+                                        } else {
+                                            $('#sysMes').children('i').html(parseInt(num) - 1);
+                                        }
+                                        obj.find('.msg_color').removeClass('f-color-black').addClass('f-color-gray');
+                                        $('span#msg_' + id).html('已读');
+                                        location.href = obj.attr('url');
+                                    }
+                                });
+                            });
+                        } else {
+                            $('#follow').html('');
+                            $.util.alert(res.msg);
+                        }
+                    }
+                });
+            });
+        });
+    }
 </script>
 <?php $this->end('script'); ?>
