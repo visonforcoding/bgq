@@ -35,8 +35,8 @@ class ActivityapplyController extends AppController {
                             ->where(['Activities.id' => $id])->count();
             $check_nums = $this->Activityapply->find()->contain(['Activities'])
                             ->where(['Activities.id' => $id, 'Activityapply.is_check' => 1])->count();
+            $this->set('PageHeader', $activity->title . '-活动报名管理');
         }
-        $this->set('PageHeader', $activity->title . '-活动报名管理');
         $this->set('activityapply', $this->Activityapply);
         $this->set([
             'pay_nums' => $pay_nums,
