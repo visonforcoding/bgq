@@ -125,12 +125,12 @@ class PvchartController extends AppController {
         $Table =  \Cake\ORM\TableRegistry::get('Pvlog');
         $query = $Table->find();
         $query->contain(['Pvtag']);
-        $query->select(['counts'=>$query->func()->count('*'),'ptag','act','Pvtag.descb']);
+        $query->select(['counts'=>$query->func()->count('*'),'ptag','act','Pvtag.descb','url']);
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
         }
-        $query->group(['Pvlog.ptag','act']);
+        $query->group(['Pvlog.ptag','act','url']);
         $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
