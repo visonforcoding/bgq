@@ -84,12 +84,16 @@
     });
     
     $('#xmjyTap').on('tap', function(){
-        $('#xmjy').show();
-        $('#shadow').show();
+        setTimeout(function(){
+            $('#xmjy').show();
+            $('#shadow').show();
+        },400);
     });
     $('#schtTap').on('tap', function(){
-        $('#scht').show();
-        $('#shadow').show();
+        setTimeout(function(){
+            $('#scht').show();
+            $('#shadow').show();
+        },400);
     });
     $('#shadow').on('tap', function(){
         setTimeout(function(){
@@ -97,7 +101,6 @@
             $('#xmjy').hide();
             $('#shadow').hide();
         },400);
-        
     });
 </script>
 <?php $this->end('script'); ?>
