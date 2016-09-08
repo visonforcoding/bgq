@@ -10,6 +10,42 @@
             <ul class="pic-list-container" id="imgList"></ul>
             <div class="yd" id="imgTab"></div>
         </div>
+         <!--分类--start-->
+                <div class="h2"></div>
+                <div class="m_title_des  bd1" >
+                    <h3>并购系列</h3>
+                </div>
+                <div class="menusort a_menusort clearfix">
+                    <div class="allmenu">
+                        <div class="menulist clearfix" id="allsort">
+                            <a href="#this">
+                                <i class="iconfont">&#xe68b;</i>
+                                <span>上市公司</span>
+                            </a>
+                        <a href="#this">
+                            <i class="iconfont">&#xe68a;</i>
+                            <span>培训</span>
+                        </a>
+                        <a href="#this">
+                            <i class="iconfont">&#xe689;</i>
+                            <span>并购沙龙</span>
+                        </a>
+                        <a href="#this">
+                            <i class="iconfont">&#xe68e;</i>
+                            <span>晚餐会</span>
+                        </a>
+                        <a href="#this">
+                            <i class="iconfont">&#xe68d;</i>
+                            <span>论坛</span>
+                        </a>
+                        <a href="#this">
+                            <i class="iconfont">&#xe617;</i>
+                            <span>定制活动</span>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            <!--分类--end-->
         <div id="activity" style='border-bottom:1px #e5e5e5 solid;'></div>
         <div id="buttonLoading" class="loadingbox"></div>
         <div style="height: 1.2rem; display: none;" id="iosBottom"></div>
