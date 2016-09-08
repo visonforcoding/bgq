@@ -26,6 +26,12 @@ class PvlogTable extends Table {
         $this->table('pvlog');
         $this->displayField('id');
         $this->primaryKey('id');
+        $this->belongsTo('Pvtag', [
+            'bindingKey'=>'ptag',
+            'foreignKey' => 'ptag',
+            'className' => 'Pvtag',
+            'joinType'=>'LEFT'
+        ]);
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [
