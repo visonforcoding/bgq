@@ -310,7 +310,8 @@ $.util = {
     report: function(ptag) {
         var act = 'v', param = ['/admin/report/logger?',
             'screen=' + window.screen.height + '*' + window.screen.width,
-            'refer=' + (document.referrer||document.domain).replace(/http:\/\/|https:\/\//, '').replace(/\/.*|\?.*/, '')
+            //'refer=' + (document.referrer||document.domain).replace(/http:\/\/|https:\/\//, '').replace(/\/.*|\?.*/, '')
+            'refer=' + encodeURI(document.referrer||document.domain)
         ];
         if (ptag) {
             act = 'c';
