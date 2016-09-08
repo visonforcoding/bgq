@@ -1,9 +1,10 @@
-<div class="panel" style="height:500px;overflow-x:hidden;overflow-y:scroll">
+<div class="panel" >
     <div class="panel-heading">
         业务标签结构
     </div>
-    <div class="panel-body">
+    <div class="panel-body" style="height:500px;overflow-x:hidden;overflow-y:scroll">
         <ul class="tree treeview">
+            <li><a class="add tree-plus" data-id="0"><i class="icon icon-plus-sign"></i></a></li>
             <?php foreach ($industries as $item): ?>
                 <li>
                 <?= $item->name ?><a class="add tree-plus" data-id="<?= $item->id ?>"><i class="icon icon-plus-sign"></i></a>
