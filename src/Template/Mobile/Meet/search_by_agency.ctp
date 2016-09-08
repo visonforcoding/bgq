@@ -21,7 +21,7 @@
     <li><a href="javascript:void(0)" agency_id="{#id#}" class="agency" id="agency_{#id#}">{#name#}</a></li>
 </script>
 <script type='text/html' id='biggie_tpl'>
-    <section class="internet-v-info">
+    <section class="internet-v-info bbottom">
         <div class="innercon">
             <a href="/user/home-page/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
             <div class="vipinfo">
