@@ -489,6 +489,12 @@ class HomeController extends AppController {
          * 我的约见 （我是顾客）
          */
         public function myBook() {
+            $savant_nocomfirm = 0;
+            $savant_comfirm = 0;
+            $savant_nopass = 0;
+            $book_nocomfirm = 0;
+            $book_comfirm = 0;
+            $book_nopass = 0;
             $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
             $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
             $type = $this->request->query('type');
@@ -503,7 +509,22 @@ class HomeController extends AppController {
             }, 'BookChats'=>function($q)use($user_id){
                 return $q->where(['reply_id'=>$user_id, 'is_read'=>0]);
             }])->where(['SubjectBook.user_id'=>$user_id])->orderDesc('SubjectBook.update_time')->toArray();
-//        debug($books);die;
+            foreach($books as $k=>$v){
+                if($v->status == 0){
+                    if($v->usermsgs){
+                        $book_nocomfirm += 1;
+                    }
+                } elseif($v->status == 1){
+                    if($v->usermsgs){
+                        $book_comfirm += 1;
+                    }
+                } elseif($v->status == 2){
+                    if($v->usermsgs){
+                        $book_nopass += 1;
+                    }
+                }
+            }
+            
             $savant_books = $BookTable->find()->contain(['Subjects'=>function($q){
                 return $q->where(['Subjects.is_del'=>0]);
             }, 'Users' => function($q) {
@@ -514,10 +535,31 @@ class HomeController extends AppController {
             }, 'BookChats'=>function($q)use($user_id){
                 return $q->where(['reply_id'=>$user_id, 'is_read'=>0]);
             }])->where(['SubjectBook.savant_id =' => $user_id])->order('SubjectBook.update_time')->toArray();
+            foreach($savant_books as $k=>$v){
+                if($v->status == 0){
+                    if($v->usermsgs){
+                        $savant_nocomfirm += 1;
+                    }
+                } elseif($v->status == 1){
+                    if($v->usermsgs){
+                        $savant_comfirm += 1;
+                    }
+                } elseif($v->status == 2){
+                    if($v->usermsgs){
+                        $savant_nopass += 1;
+                    }
+                }
+            }
             $this->set([
                 'pageTitle' => '我的约见',
                 'books' => $books,
-                'savant_books' => $savant_books   //我是专家
+                'savant_books' => $savant_books,   //我是专家
+                'savant_nocomfirm'=>$savant_nocomfirm,
+                'savant_comfirm'=>$savant_comfirm,
+                'savant_nopass'=>$savant_nopass,
+                'book_nocomfirm'=>$book_nocomfirm,
+                'book_comfirm'=>$book_comfirm,
+                'book_nopass'=>$book_nopass,
             ]);
             $this->set(compact('books', 'type'));
         }
