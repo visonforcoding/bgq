@@ -226,6 +226,7 @@
             }
         });
         $('input[name="keyword"]').blur();
+        LEMON.sys.hideKeyboard();
         return false;
     });
 
@@ -253,6 +254,7 @@
             }
         });
         $('input[name="keyword"]').blur();
+        LEMON.sys.hideKeyboard();
     });
 
 </script>
