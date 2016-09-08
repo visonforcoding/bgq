@@ -82,13 +82,13 @@
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
                         search_data[industry_id] = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
-                            if (d.user) {
-                                d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                                d.author = d.user.truename;
-                            } else {
-                                d.avatar = '/mobile/images/touxiang.png';
-                                d.author = d.source;
-                            }
+//                            if (d.user) {
+//                                d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+//                                d.author = d.user.truename;
+//                            } else {
+//                                d.avatar = '/mobile/images/touxiang.png';
+//                                d.author = d.source;
+//                            }
                             return d;
                         });
                         $('.orgname').toggleClass('active');
@@ -212,8 +212,8 @@
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
                         var html = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
-                            d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                            d.author = d.user.truename;
+//                            d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+//                            d.author = d.user.truename;
                             return d;
                         });
                     } else {
@@ -237,8 +237,8 @@
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
                         var html = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
-                            d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                            d.author = d.user.truename;
+//                            d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+//                            d.author = d.user.truename;
                             return d;
                         });
                     } else {
