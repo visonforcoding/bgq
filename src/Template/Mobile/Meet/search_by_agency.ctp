@@ -187,6 +187,7 @@
                                 page++;
                             } else {
                                 $.util.alert(msg.msg);
+                                page = 9999;
                             }
                         }
                     }
