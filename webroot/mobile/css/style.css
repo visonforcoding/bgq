@@ -769,7 +769,7 @@ border-radius: 50%;}
 border-left:1px #e5e5e5 solid;width:50%;}
 .m_info_name{position:relative;}
 .m_info_name span{font-size:.22rem;display: inline-block;margin-left:.2rem;font-weight: 400;color:#222c38;}
-.m_info_name span i{color:#bcbec0;margin-right: .06rem;font-size:.24rem;}
+.m_info_name span i{color:#bcbec0;font-size:.24rem;}
 .m-lilist-des li:first-of-type{border-left: none;/*width:25%;*/}
 .m-lilist-des li i{display: block;font-size:.32rem;margin-bottom:.2rem;color:#222c38;line-height: .34rem;}
 .m-lilist-des{overflow:hidden;}
