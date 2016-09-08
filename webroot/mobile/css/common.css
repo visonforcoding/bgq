@@ -80,14 +80,17 @@ textarea::-webkit-scrollbar{display: none;}/*隐藏多文本框滚动条*/
 .wraper .f-color-black{color:#222c38;}/*字体颜色*/
 .wraper .col-g{color:#22a69f;}
 .wraper .col-o{color:#f06c27;}
-.wraper .col-lg{color:#6baf44;}
+.wraper .col-lg{color:#6baf44;3e82f7}
+.wraper .col-lblue{color:#3e82f7}
 .wraper .col-y{color:#fdb94d;}
 .wraper .bgff{background: #fff;}
 .wraper .ft26{font-size:0.26rem;}
 .wraper .mt0{margin-top:0;}
 .wraper .mb50{margin-bottom:0.5rem;margin-top:0.2rem;}
 .wraper .mt20{margin-top:0.2rem;}
+.wraper .p20{padding-top:.2rem;padding-bottom:.2rem;}
 .wraper .mr i{margin-right:0.2rem;font-size:.3rem;}
+.wraper a.ablock{width:100%;display: block;}
 .wraper .colorbg{background: #7a7e83;}
 .wraper a.colorbg{background: #7a7e83;}
 .wraper .f7{color:#7a7e83;margin-right:0.1rem;font-size:.3rem;}
