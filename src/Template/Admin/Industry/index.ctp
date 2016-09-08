@@ -5,7 +5,10 @@
     <div class="panel-body">
         <ul class="tree treeview">
             <?php foreach ($industries as $item): ?>
-                <li><?= $item->name ?><a class="add tree-plus" data-id="<?= $item->id ?>"><i class="icon icon-plus-sign"></i></a></li>
+                <li>
+                <?= $item->name ?><a class="add tree-plus" data-id="<?= $item->id ?>"><i class="icon icon-plus-sign"></i></a>
+                <a class="edit" data-val="<?= $item->name ?>" data-id="<?= $item->id ?>"><i class="icon icon-pencil"></i></a>
+                </li>
                 <?php if ($item->children): ?>
                     <ul>
                         <?php foreach ($item->children as $i): ?>

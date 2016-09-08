@@ -123,7 +123,7 @@ class CollectController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'collect.' . $this->request->data('sidx');
+        $sort = 'Collect.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
@@ -135,7 +135,7 @@ class CollectController extends AppController {
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['collect.`create_time` >' => $begin_time], ['collect.`create_time` <' => $end_time]];
+            $where['and'] = [['Collect.`create_time` >' => $begin_time], ['Collect.`create_time` <' => $end_time]];
         }
         if ($id) {
             $query = $this->Collect->find()->where(['relate_id' => $id]);
