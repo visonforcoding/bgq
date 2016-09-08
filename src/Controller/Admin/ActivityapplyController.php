@@ -23,14 +23,19 @@ class ActivityapplyController extends AppController {
             $this->set('do', 'check');
         }
         $ActivityTable = \Cake\ORM\TableRegistry::get('Activity');
-        $activity = $ActivityTable->get($id);
-        //活动报名人数 付款数 审核通过
-        $pay_nums = $this->Activityapply->find()->contain(['Activities'])
-                        ->where(['Activities.id' => $id, 'Activities.apply_fee >' => 0, 'is_pass' => 1])->count();
-        $apply_nums = $this->Activityapply->find()->contain(['Activities'])
-                        ->where(['Activities.id' => $id])->count();
-        $check_nums = $this->Activityapply->find()->contain(['Activities'])
-                        ->where(['Activities.id' => $id, 'Activityapply.is_check' => 1])->count();
+        $pay_nums = 0;
+        $apply_nums = 0;
+        $check_nums = 0;
+        if($id){
+            $activity = $ActivityTable->get($id);
+            //活动报名人数 付款数 审核通过
+            $pay_nums = $this->Activityapply->find()->contain(['Activities'])
+                            ->where(['Activities.id' => $id, 'Activities.apply_fee >' => 0, 'is_pass' => 1])->count();
+            $apply_nums = $this->Activityapply->find()->contain(['Activities'])
+                            ->where(['Activities.id' => $id])->count();
+            $check_nums = $this->Activityapply->find()->contain(['Activities'])
+                            ->where(['Activities.id' => $id, 'Activityapply.is_check' => 1])->count();
+        }
         $this->set('PageHeader', $activity->title . '-活动报名管理');
         $this->set('activityapply', $this->Activityapply);
         $this->set([
