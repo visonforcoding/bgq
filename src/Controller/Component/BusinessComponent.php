@@ -266,11 +266,11 @@ class BusinessComponent extends Component {
             $com_userid = $relate->user->id;
             if($type==0){
                 $table_id = $relate->activity_id; 
-                $redirect_url = '/home/comment-view/'.$table_id.'?type=2';
+                $redirect_url = '/home/comment-view/'.$relate_id.'?type=2';
                 $this->usermsg($com_userid, '您有新的点赞', '您的评论获得新的点赞', 8, $relate_id,$redirect_url);
             }else{
                 $table_id = $relate->news_id; 
-                $redirect_url = '/home/comment-view/'.$table_id.'?type=1';
+                $redirect_url = '/home/comment-view/'.$relate_id.'?type=1';
                 $this->usermsg($com_userid, '您有新的点赞', '您的评论获得新的点赞', 2, $relate_id,$redirect_url);
             }
             return true;
