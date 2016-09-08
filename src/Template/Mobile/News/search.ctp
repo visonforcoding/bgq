@@ -59,12 +59,18 @@
         $(em).addClass('active');
         var industry_id = $(em).attr('industry_id');
         $('input[name="newstag_id"]').val(industry_id);
-        $('.orgname').toggleClass('active');
+        
 
         LEMON.sys.hideKeyboard(); //收起键盘
         $.util.hideLoading('buttonLoading');
         if (search_data[industry_id]) {
             $('#search').html(search_data[industry_id]);
+            $('.orgname').toggleClass('active');
+            if ($('.a-s-mark').hasClass('a-s-width')) {
+                $('.a-s-mark').removeClass('a-s-width');
+            } else {
+                $('.a-s-mark').addClass('a-s-width');
+            }
             return;
         }
         $.ajax({
@@ -85,6 +91,7 @@
                             }
                             return d;
                         });
+                        $('.orgname').toggleClass('active');
                         if ($('.a-s-mark').hasClass('a-s-width')) {
                             $('.a-s-mark').removeClass('a-s-width');
                         } else {
