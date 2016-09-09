@@ -85,7 +85,7 @@ class NewsController extends AppController {
                 if(is_numeric($reply_id)&&$reply_id>0){
                     $this->loadComponent('Business');
                     $jump_url = '/home/comment-view/'.$data['pid'].'?type=1';
-                    $this->Business->usermsg($reply_com->user_id,'评论回复','有人回复了你的评论!', 3,$newComment->id,$jump_url);
+                    $this->Business->usermsg($this->user->id, $reply_com->user_id,'评论回复','有人回复了你的评论!', 3,$newComment->id,$jump_url);
                 }
                 $user_id = $this->user->id;
                 $res = $this->News->Comments->get($newComment->id, [

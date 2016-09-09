@@ -117,6 +117,17 @@ class PushController extends AppController {
             } else {
                 foreach($res as $k=>$v){
                     $user .= $v['user_token'] . "\n";
+                    $PushlogTable = \Cake\ORM\TableRegistry::get('pushlog');
+                    $pushlog = $PushlogTable->newEntity();
+                    $data = [
+                        'push_id' => -1,
+                        'receive_id' => $v['id'],
+                        'title' => $title,
+                        'body' => $content,
+                        'type' => '3',
+                    ];
+                    $pushlog = $PushlogTable->patchEntity($pushlog, $data);
+                    $PushlogTable->save($pushlog);
                 }
                 $this->loadComponent('Push');
                 if($url){
