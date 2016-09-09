@@ -15,6 +15,7 @@ use Cake\ORM\Entity;
  * @property string $body
  * @property int $type
  * @property int $is_success
+ * @property string $remark
  * @property \Cake\I18n\Time $create_time
  */
 class Pushlog extends Entity

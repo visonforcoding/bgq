@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use Wpadmin\Controller\AppController;
-
+use Cake\Filesystem\File;
 /**
  * Index Controller
  *
@@ -44,7 +44,10 @@ class SetController extends AppController {
                 }
             }
             $res = \Cake\Cache\Cache::write('zhy', $conf, 'redis');
-            \Cake\Cache\Cache::write('zhy', $conf);
+            $file = new File(ROOT.'/config/zhy.json', true, 0644);
+            $file->create();
+            $file->write(json_encode($conf));
+            $file->close();
             if($res){
                 $this->Util->ajaxReturn(true,'修改成功');
             }else{

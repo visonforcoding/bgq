@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use App\Model\Entity\Pushlog;
@@ -13,8 +14,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Pushes
  * @property \Cake\ORM\Association\BelongsTo $Receives
  */
-class PushlogTable extends Table
-{
+class PushlogTable extends Table {
 
     /**
      * Initialize method
@@ -22,8 +22,7 @@ class PushlogTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->table('pushlog');
@@ -32,12 +31,15 @@ class PushlogTable extends Table
 
         $this->belongsTo('Pushes', [
             'foreignKey' => 'push_id',
-            'joinType' => 'INNER'
+            'className' => 'User',
+            'joinType' => 'LEFT'
         ]);
         $this->belongsTo('Receives', [
             'foreignKey' => 'receive_id',
-            'joinType' => 'INNER'
+            'className' => 'User',
+            'joinType' => 'LEFT'
         ]);
+
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [
@@ -53,34 +55,23 @@ class PushlogTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
-
-        $validator
-            ->requirePresence('title', 'create')
-            ->notEmpty('title');
+                ->integer('id')
+                ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('body', 'create')
-            ->notEmpty('body');
+                ->requirePresence('title', 'create')
+                ->notEmpty('title');
 
         $validator
-            ->integer('type')
-            ->requirePresence('type', 'create')
-            ->notEmpty('type');
+                ->requirePresence('body', 'create')
+                ->notEmpty('body');
 
-//        $validator
-//            ->integer('is_success')
-//            ->requirePresence('is_success', 'create')
-//            ->notEmpty('is_success');
-
-//        $validator
-//            ->dateTime('create_time')
-//            ->requirePresence('create_time', 'create')
-//            ->notEmpty('create_time');
+        $validator
+                ->integer('type')
+                ->requirePresence('type', 'create')
+                ->notEmpty('type');
 
         return $validator;
     }
@@ -92,10 +83,10 @@ class PushlogTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
-//        $rules->add($rules->existsIn(['push_id'], 'Users'));
-//        $rules->add($rules->existsIn(['receive_id'], 'Users'));
+    public function buildRules(RulesChecker $rules) {
+        $rules->add($rules->existsIn(['push_id'], 'Pushes'));
+        $rules->add($rules->existsIn(['receive_id'], 'Receives'));
         return $rules;
     }
+
 }

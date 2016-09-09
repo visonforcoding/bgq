@@ -27,7 +27,7 @@ class IndexController extends AppController {
         //var_dump($umengObj);
 
         $this->autoRender = false;
-        //$res = \Cake\Cache\Cache::write('foo', 'bar', 'redis');
+        $res = \Cake\Cache\Cache::write('foo', 'bar2', 'redis');
         //debug($res);
         debug(\Cake\Cache\Cache::read('foo', 'redis'));
         //$filename = WWW_ROOT.'/upload/user/avatar/test.jpg';
