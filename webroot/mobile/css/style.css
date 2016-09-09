@@ -363,7 +363,7 @@ border-bottom:none;top:-1px;margin-top:-1px;margin-left:-1px;}
 .menulist a span{line-height: 0.48rem;display: block;font-size:0.28rem;color:#222c38;}
 .menulist a i{display: block; font-size:0.44rem;margin:0 auto;height:.5rem;line-height: .5rem;color:#7a7e83;
 }
-.a_menusort a i{font-size:.76rem;height:.82rem;line-height: .82rem;}
+.a_menusort a i{font-size:.76rem;height:.8rem;line-height: .8rem;}
 .dk{width:100%;}
 .dk ul{width:500%;overflow:hidden;font-size:0;background: #fff;}
 .dk li{display: inline-block;overflow:hidden;border-radius: 0.1rem;padding:0.2rem 0.1rem;}
