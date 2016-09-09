@@ -32,13 +32,11 @@ activity.prototype.bindEvent = function () {
         }
         switch (em.id) {
             case 'submit':
-                if($('textarea[name="description"]').val() == '')
-                {
+                if($('textarea[name="description"]').val() == '') {
                     $.util.alert('请输入内容');
                     return false;
                 }
-                if($('input[name="type"]').attr('value') == '')
-                {
+                if($('input[name="type"]').attr('value') == '') {
                     $.util.alert('请选择一个类别');
                     return false;
                 }
@@ -49,11 +47,10 @@ activity.prototype.bindEvent = function () {
                     func: function (msg) {
                         if (typeof msg === 'object') {
                             if (msg.status === true) {
-                                $('.reg-shadow').show('slow');
-                                $('.totips').show('slow');
-//                                setTimeout(function () {
-//                                    window.location.href = '/activity/details/' + $('input[name="activity_id"]').val();
-//                                }, 3000);
+                                setTimeout(function(){
+                                    $('.reg-shadow').show('slow');
+                                    $('.totips').show('slow');
+                                }, 400);
                             } else {
                                 $.util.alert(msg.msg);
                             }
@@ -62,8 +59,10 @@ activity.prototype.bindEvent = function () {
                 });
                 break;
             case 'closed':
-                $('.reg-shadow').hide('slow');
-                $('.totips').hide('slow');
+                setTimeout(function(){
+                    $('.reg-shadow').hide('slow');
+                    $('.totips').hide('slow');
+                }, 400);
                 break;
             case 'goTop':
                 window.scroll(0, 0);

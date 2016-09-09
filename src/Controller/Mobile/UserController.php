@@ -72,10 +72,10 @@ class UserController extends AppController {
             }])->where(['following_id'=>$id])->count('id');
             if(!$self){
                 $isReco = $this->User->get($id, ['contain' => ['RecoUsers'=>function($q)use($id){
-                    return $q->where(['user_id'=>$id]);
+                    return $q->where(['user_id'=>$user_id]);
                 }]]);
                 $isReco = $isReco->reco_users;
-                $isFans = $FansTable->find()->where("`user_id` = '$id' and `following_id` = '$id'")->count();  //检测是否关注
+                $isFans = $FansTable->find()->where("`user_id` = '$user_id' and `following_id` = '$id'")->count();  //检测是否关注
                 $isGive = $this->User->CardBoxes->find()->where(['ownerid'=>$id, 'uid'=>$this->user->id])->first();  //检测是否递过名片
             }
         }
