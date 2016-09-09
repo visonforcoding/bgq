@@ -11,37 +11,25 @@
             <div class="yd" id="imgTab"></div>
         </div>
          <!--分类--start-->
-                <div class="h2"></div>
-                <div class="m_title_des  bd1" >
-                    <h3>并购系列</h3>
-                </div>
                 <div class="menusort a_menusort clearfix">
                     <div class="allmenu">
                         <div class="menulist clearfix" id="allsort">
                             <a href="#this">
-                                <i class="iconfont">&#xe68b;</i>
-                                <span>上市公司</span>
+                                <i class="iconfont">&#xe68c;</i>
+                                <span>沙龙论坛</span>
                             </a>
-                        <a href="#this">
-                            <i class="iconfont">&#xe68a;</i>
-                            <span>培训</span>
-                        </a>
-                        <a href="#this">
-                            <i class="iconfont">&#xe689;</i>
-                            <span>并购沙龙</span>
-                        </a>
-                        <a href="#this">
-                            <i class="iconfont">&#xe68d;</i>
-                            <span>论坛</span>
-                        </a>
-                        <a href="#this">
-                            <i class="iconfont">&#xe617;</i>
-                            <span>定制活动</span>
-                        </a>
-                        <a href="#this">
-                            <i class="iconfont">&#xe68e;</i>
-                            <span>晚餐会</span>
-                        </a>
+                            <a href="#this">
+                                <i class="iconfont">&#xe68f;</i>
+                                <span>生活聚会</span>
+                            </a>
+                            <a href="#this">
+                                <i class="iconfont">&#xe690;</i>
+                                <span>学习培训</span>
+                            </a>
+                            <a href="#this">
+                                <i class="iconfont">&#xe691;</i>
+                                <span>会务服务</span>
+                            </a>
                     </div>
                     </div>
                 </div>
