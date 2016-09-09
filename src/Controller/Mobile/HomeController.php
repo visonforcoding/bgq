@@ -378,6 +378,8 @@ class HomeController extends AppController {
                     $res = $NeedTable->find()->where($where)->hydrate(false)->toArray();
                     if(!$res){
                         $res = '';
+                    } else {
+                        $NeedTable->updateAll(['status'=>1], ['status'=>0, 'reply_id'=>$this->user->id]);
                     }
                     return $this->Util->ajaxReturn(['status'=>true, 'data'=>$res]);
                 }

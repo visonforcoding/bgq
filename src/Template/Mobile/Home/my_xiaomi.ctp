@@ -43,7 +43,7 @@
         $.util.checkUserinfoStatus();
     };
     window.onBackView();
-
+function get_xiaomi(){
     $.util.ajax({
         type: 'post',
         url: '/home/get-xiaomi',
@@ -59,8 +59,9 @@
                 });
             }
         }
-    })
-
+    });
+}
+get_xiaomi();
     $(function () {
         $('#submit').click(function () {
             var content = $('#content').val();
@@ -73,10 +74,7 @@
                 data: {content: content},
                 func: function (res) {
                     if (res.status) {
-                        $.util.alert(res.msg);
-                        setTimeout(function () {
-                            location.href = '/home/my-xiaomi';
-                        }, 2000);
+                        get_xiaomi();
                     } else {
                         if (res.msg.indexOf('请先去完善个人资料') != -1) {
                             $('#msg').html(res.msg);

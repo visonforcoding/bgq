@@ -30,7 +30,7 @@
     <div class="totips" style="display:none;">
         <h3>非常感谢你的推荐或赞助</h3>
         <span></span>
-        <a href="/activity/details/<?= $activity_id ?>" class="nextstep" id="comfirm">确认</a>
+        <a href="/activity/index" class="nextstep" id="comfirm">确认</a>
 <!--        <span class='closed' id='closed'>
             &times;
         </span>-->
