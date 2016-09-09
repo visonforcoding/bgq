@@ -71,7 +71,7 @@ class UserController extends AppController {
                 return $q->where(['enabled'=>1, 'is_del'=>0]);
             }])->where(['following_id'=>$id])->count('id');
             if(!$self){
-                $isReco = $this->User->get($id, ['contain' => ['RecoUsers'=>function($q)use($id){
+                $isReco = $this->User->get($id, ['contain' => ['RecoUsers'=>function($q)use($user_id){
                     return $q->where(['user_id'=>$user_id]);
                 }]]);
                 $isReco = $isReco->reco_users;
