@@ -19,6 +19,10 @@ class SetController extends AppController {
      */
     public function index() {
         $conf = \Cake\Cache\Cache::read('zhy','redis');
+        if(!$conf){
+            $conf = file_get_contents(ROOT.'/config/zhy');
+            $conf = unserialize($conf);
+        }
         if ($this->request->isAjax()) {
             $data = $this->request->data();
             $conf = [
@@ -44,9 +48,9 @@ class SetController extends AppController {
                 }
             }
             $res = \Cake\Cache\Cache::write('zhy', $conf, 'redis');
-            $file = new File(ROOT.'/config/zhy.json', true, 0644);
+            $file = new File(ROOT.'/config/zhy', true, 0644);
             $file->create();
-            $file->write(json_encode($conf));
+            $file->write(serialize($conf));
             $file->close();
             if($res){
                 $this->Util->ajaxReturn(true,'修改成功');
