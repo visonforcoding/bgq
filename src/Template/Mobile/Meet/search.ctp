@@ -21,7 +21,7 @@
     <div id="buttonLoading" class="loadingbox"></div>
 </div>
 <script type='text/html' id='biggie_tpl'>
-    <section class="internet-v-info">
+    <section class="internet-v-info bbottom">
         <div class="innercon">
             <a href="/user/home-page/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
             <div class="vipinfo">
