@@ -27,9 +27,12 @@ class IndexController extends AppController {
         //var_dump($umengObj);
 
         $this->autoRender = false;
-        $filename = WWW_ROOT.'/upload/user/avatar/test.jpg';
-        \Intervention\Image\ImageManagerStatic::make($filename)
-                ->save('test.jpg',20);
+        //$res = \Cake\Cache\Cache::write('foo', 'bar', 'redis');
+        //debug($res);
+        debug(\Cake\Cache\Cache::read('foo', 'redis'));
+        //$filename = WWW_ROOT.'/upload/user/avatar/test.jpg';
+        //\Intervention\Image\ImageManagerStatic::make($filename)
+                //->save('test.jpg',20);
 //                $this->response->cookie([
 //                            'name' => 'login_stauts',
 //                            'value' => 'yes3',
