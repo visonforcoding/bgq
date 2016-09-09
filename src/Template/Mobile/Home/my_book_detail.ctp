@@ -47,8 +47,10 @@
         LEMON.sys.back('/user/home-page');
     }
     $('#cancel').on('tap', function(){
-        $('#isCancel').show();
-        $('#shadow').show();
+        setTimeout(function(){
+            $('#isCancel').show();
+            $('#shadow').show();
+        }, 400);
     });
     $('#yes').on('tap',function(){
         $.util.ajax({
@@ -61,8 +63,10 @@
         });
     });
     $('#no').on('tap', function(){
-        $('#isCancel').hide();
-        $('#shadow').hide();
+        setTimeout(function(){
+            $('#isCancel').hide();
+            $('#shadow').hide();
+        }, 400);
     });
 </script>
 <?php $this->end('script');
