@@ -750,3 +750,12 @@ CREATE TABLE `pushlog` (
 COMMENT='推送日志表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
+
+ALTER TABLE `pushlog`
+	CHANGE COLUMN `receive_id` `receive_id` INT(11) NOT NULL DEFAULT '0' COMMENT '接收推送id' AFTER `push_id`;
+
+ALTER TABLE `pushlog`
+	ADD COLUMN `remark` VARCHAR(250) NOT NULL COMMENT '备注' AFTER `is_success`;
+	
+ALTER TABLE `pushlog`
+	CHANGE COLUMN `is_success` `is_success` TINYINT(2) NOT NULL DEFAULT '1' COMMENT '是否成功' AFTER `type`;		
