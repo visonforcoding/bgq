@@ -48,10 +48,10 @@
             <label class="col-md-2 control-label">并购顾问</label>
             <div class="col-md-8">
                 <div>
-                <?= $this->cell('Agency::multi',[$conf['bgrz']['agency']]) ?>
+                <?= $this->cell('Agency::multi',[$conf['bggw']['agency']]) ?>
                 </div>
                 <div class="mt20">
-                <?= $this->cell('Industry',[$conf['bgrz']['industry']]) ?>
+                <?= $this->cell('Industry',[$conf['bggw']['industry']]) ?>
                 </div>
             </div>
         </div>
