@@ -81,6 +81,7 @@ class PushController extends AppController {
         $title = $this->request->data('title');
 //        $type = $this->request->data('type');
         $content = $this->request->data('content');
+        $remark = $this->request->data('remark');
         $url = $this->request->data('url');
 //        $choose = $this->request->data('choose');
 //        $activity_id = $this->request->data('activity_id');
@@ -117,17 +118,6 @@ class PushController extends AppController {
             } else {
                 foreach($res as $k=>$v){
                     $user .= $v['user_token'] . "\n";
-                    $PushlogTable = \Cake\ORM\TableRegistry::get('pushlog');
-                    $pushlog = $PushlogTable->newEntity();
-                    $data = [
-                        'push_id' => -1,
-                        'receive_id' => $v['id'],
-                        'title' => $title,
-                        'body' => $content,
-                        'type' => '3',
-                    ];
-                    $pushlog = $PushlogTable->patchEntity($pushlog, $data);
-                    $PushlogTable->save($pushlog);
                 }
                 $this->loadComponent('Push');
                 if($url){
@@ -137,6 +127,17 @@ class PushController extends AppController {
                     $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true);
                 }
                 if($push_res){
+                    $PushlogTable = \Cake\ORM\TableRegistry::get('pushlog');
+                    $pushlog = $PushlogTable->newEntity();
+                    $data = [
+                        'push_id' => -1,
+                        'title' => $title,
+                        'body' => $content,
+                        'type' => '3',
+                        'remark' => $remark
+                    ];
+                    $pushlog = $PushlogTable->patchEntity($pushlog, $data);
+                    $PushlogTable->save($pushlog);
                     return $this->Util->ajaxReturn(true, '推送成功');
                 } else {
                     return $this->Util->ajaxReturn(false, '推送失败');
