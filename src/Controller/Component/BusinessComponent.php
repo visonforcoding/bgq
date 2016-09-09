@@ -211,12 +211,12 @@ class BusinessComponent extends Component {
                 $data = [
                    'url' => 'http://m.chinamatop.com/home/my-message-fans/1'
                 ];
-                $this->Push->sendAlias($user->user_token, '您有1位新的关注者', $user->truename, '您有新的关注者', 'BGB', true, $data);
+                $this->Push->sendAlias($user->user_token, $user->truename . '关注了您', ' ', $user->truename . '关注了您', 'BGB', true, $data);
                 $pushlog = $PushlogTable->newEntity();
                 $pushlog->push_id = $push_id;
                 $pushlog->receive_id = $user_id;
-                $pushlog->title = '您有1位新的关注者';
-                $pushlog->body = $user->truename;
+                $pushlog->title = $user->truename . '关注了您';
+                $pushlog->body = ' ';
                 $pushlog->type = 2;
                 $PushlogTable->save($pushlog);
             } else {
