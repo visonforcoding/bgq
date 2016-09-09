@@ -30,5 +30,18 @@ class AgencyCell extends Cell {
                 ])->all()->toArray();
         $this->set(compact('agencies', 'selId'));
     }
+    /**
+     * Default display method.
+     *
+     * @return void
+     */
+    public function multi($selId=null) {
+        $IndustryTable = \Cake\ORM\TableRegistry::get('Agency');
+        $agencies = $IndustryTable->find('threaded', [
+                    'keyField' => 'id',
+                    'parentField' => 'pid'
+                ])->all()->toArray();
+        $this->set(compact('agencies', 'selId'));
+    }
 
 }
