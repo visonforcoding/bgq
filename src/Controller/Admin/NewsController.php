@@ -355,7 +355,7 @@ class NewsController extends AppController {
                 $this->News->save($news);
                 $this->loadComponent('Business');
                 $jump_url = '/news/view/'.  $lastcom->news_id.'#allcoment#common_'.$newscom->id;
-                $this->Business->usermsg($reply_com->user_id,'评论回复','有人回复了你的评论!', 3,$newComment->id,$jump_url);
+                $this->Business->usermsg('-1', $reply_com->user_id,'评论回复','有人回复了你的评论!', 3,$newComment->id,$jump_url);
                 return $this->Util->ajaxReturn(true, '回复成功');
             } else {
                 return $this->Util->ajaxReturn(false, '回复失败');

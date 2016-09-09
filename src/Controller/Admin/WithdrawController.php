@@ -270,7 +270,7 @@ class WithdrawController extends AppController {
         if ($transRes) {
             //消息
             $this->loadComponent('Business');
-            $this->Business->usermsg($withdraw->user_id, '提现消息', '您的体现审核不通过！原因为：' . $remark, 10, $id);
+            $this->Business->usermsg('-1', $withdraw->user_id, '提现消息', '您的体现审核不通过！原因为：' . $remark, 10, $id);
             $this->Util->ajaxReturn(true, '保存成功');
         } else {
             $this->Util->ajaxReturn(false, '保存失败');

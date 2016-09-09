@@ -272,7 +272,7 @@ class ActivityController extends AppController {
                                 }
                                 $this->Sms->sendByQf106($this->user->phone, $msg);
                                 $this->loadComponent('Business');
-                                $this->Business->usermsg($this->user->id, '报名通知', $msg, 7, $id);
+                                $this->Business->usermsg('-1', $this->user->id, '报名通知', $msg, 7, $id);
                                 return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/activity/index']);
                             } else {
                                 return $this->Util->ajaxReturn(false, $activityApply->errors());
@@ -321,7 +321,7 @@ class ActivityController extends AppController {
                                 }
                                 $this->Sms->sendByQf106($this->user->phone, $msg);
                                 $this->loadComponent('Business');
-                                $this->Business->usermsg($this->user->id, '报名通知', $msg, 7, $id);
+                                $this->Business->usermsg('-1', $this->user->id, '报名通知', $msg, 7, $id);
                                 return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/Wx/meet_pay/2/'.$order->id]);
                             } else {
                                 return $this->Util->ajaxReturn(false, $activityApply->errors());
@@ -620,7 +620,7 @@ class ActivityController extends AppController {
                     //对评论的回复
                     $this->loadComponent('Business');
                     $jump_url = '/home/comment-view/'.$data['pid'].'?type=2';
-                    $this->Business->usermsg($comment->user_id, '评论回复', '有人回复了你的评论!', 9, $doComment->id, $jump_url);
+                    $this->Business->usermsg($this->user->id, $comment->user_id, '评论回复', '有人回复了你的评论!', 9, $doComment->id, $jump_url);
                 }
                 $activity = $this->Activity->get($id);
                 $activity->comment_nums += 1;

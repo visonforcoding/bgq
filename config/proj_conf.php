@@ -33,7 +33,7 @@ return [
         '2'=>[
             'table'=>'newscom',
             'remark'=>'资讯评论点赞消息',
-            'url'=>'/news/view/{#id#}#{#com_id#}'
+            'url'=>'/news/view/details'
         ],
       '3'=>[
             'table'=>'newscom',

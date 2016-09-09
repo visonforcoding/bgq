@@ -223,7 +223,7 @@ class NeedController extends AppController {
             $res = $this->Need->save($need);
             if ($res) {
                 $this->loadComponent('Business');
-                $this->Business->usermsg($user_id, '您有新的消息', '您有新的小秘书消息', '6', $need->id);
+                $this->Business->usermsg('-1', $user_id, '您有新的消息', '您有新的小秘书消息', '6', $need->id);
                 return $this->Util->ajaxReturn(true, '回复成功');
             } else {
                 return $this->Util->ajaxReturn(false, errorMsg($need, '系统错误'));

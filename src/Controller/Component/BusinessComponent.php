@@ -167,8 +167,9 @@ class BusinessComponent extends Component {
      * @param type $type  类型
      * @param type $id  对象id
      */
-    public function usermsg($user_id, $title, $msg, $type = 0, $id = 0,$redirect_url = null) {
+    public function usermsg($push_id, $user_id, $title, $msg, $type = 0, $id = 0,$redirect_url = null) {
         $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
+        $PushlogTable = \Cake\ORM\TableRegistry::get('pushlog');
         $data = [
             'user_id' => $user_id,
             'type' => $type,
@@ -210,12 +211,26 @@ class BusinessComponent extends Component {
                 $data = [
                    'url' => 'http://m.chinamatop.com/home/my-message-fans/1'
                 ];
-                $this->Push->sendAlias($user->user_token, '您有1位新的关注者', '', '您有新的关注者', 'BGB', true, $data);
+                $this->Push->sendAlias($user->user_token, '您有1位新的关注者', $user->truename, '您有新的关注者', 'BGB', true, $data);
+                $pushlog = $PushlogTable->newEntity();
+                $pushlog->push_id = $push_id;
+                $pushlog->receive_id = $user_id;
+                $pushlog->title = '您有1位新的关注者';
+                $pushlog->body = $user->truename;
+                $pushlog->type = 2;
+                $PushlogTable->save($pushlog);
             } else {
                 $data = [
                    'url' => 'http://m.chinamatop.com/home/my-message-fans/2' 
                 ];
                 $this->Push->sendAlias($user->user_token, $title, $msg, $title, 'BGB', true, $data);
+                $pushlog = $PushlogTable->newEntity();
+                $pushlog->push_id = $push_id;
+                $pushlog->receive_id = $user_id;
+                $pushlog->title = $title;
+                $pushlog->body = $msg;
+                $pushlog->type = 2;
+                $PushlogTable->save($pushlog);
             }
         }
     }
@@ -267,11 +282,11 @@ class BusinessComponent extends Component {
             if($type==0){
                 $table_id = $relate->activity_id; 
                 $redirect_url = '/home/comment-view/'.$relate_id.'?type=2';
-                $this->usermsg($com_userid, '您有新的点赞', '您的评论获得新的点赞', 8, $relate_id,$redirect_url);
+                $this->usermsg($user_id, $com_userid, '您有新的点赞', '您的评论获得新的点赞', 8, $relate_id,$redirect_url);
             }else{
                 $table_id = $relate->news_id; 
                 $redirect_url = '/home/comment-view/'.$relate_id.'?type=1';
-                $this->usermsg($com_userid, '您有新的点赞', '您的评论获得新的点赞', 2, $relate_id,$redirect_url);
+                $this->usermsg($user_id, $com_userid, '您有新的点赞', '您的评论获得新的点赞', 2, $relate_id,$redirect_url);
             }
             return true;
         }else{

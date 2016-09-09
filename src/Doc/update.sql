@@ -734,3 +734,19 @@ ALTER TABLE `book_chat` ADD COLUMN `is_read` TINYINT(2) UNSIGNED DEFAULT 0 COMME
 ALTER TABLE `secret`
  ADD COLUMN `career_set` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '工作经历' AFTER `profile_set`,
  ADD COLUMN `education_set` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '教育经历' AFTER `career_set`;
+
+#推送日志表
+CREATE TABLE `pushlog` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`push_id` INT(11) NOT NULL COMMENT '推送用户id',
+	`receive_id` INT(11) NOT NULL COMMENT '接收推送id',
+	`title` VARCHAR(50) NOT NULL COMMENT '推送标题',
+	`body` TEXT NOT NULL COMMENT '推送内容',
+	`type` TINYINT(2) NOT NULL COMMENT '推送类型：1：广播；2：单播；3：群播',
+	`is_success` TINYINT(2) NOT NULL COMMENT '是否成功',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='推送日志表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
