@@ -423,6 +423,15 @@ class ActivityapplyController extends AppController {
                 $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true);
             }
             if ($push_res) {
+                $Pushlog = \Cake\ORM\TableRegistry::get('Pushlog');
+                $pushlog = $Pushlog->newEntity([
+                    'push_id'=>'-1',
+                    'title'=>$title,
+                    'body'=>$body,
+                    'type'=>'3',
+                    'remark'=>  $this->request->data('remark')
+                ]);
+                $Pushlog->save($pushlog);
                 return $this->Util->ajaxReturn(true, '推送成功');
             } else {
                 return $this->Util->ajaxReturn(false, '推送失败');

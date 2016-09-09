@@ -22,6 +22,10 @@
             <label class="col-md-2 control-label">推送链接（可选）</label>
             <div class="col-md-8"><input type="text" name="url" class="form-control"/></div>
         </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">备注（记录下推送的目的）</label>
+            <div class="col-md-8"><input type="text" name="remark" class="form-control"/></div>
+        </div>
         <input type="hidden" name="industry_id" value=""/>
         <!--<input type="hidden" name="type" value=""/>-->
         <!--<input type="hidden" name="activity_id" value=""/>-->
