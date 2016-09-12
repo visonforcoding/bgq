@@ -14,7 +14,7 @@
             <div class="m_left-pic fl">
                 <img src="<?= $user->avatar ? getSmallAvatar($user->avatar) : '/mobile/images/touxiang.png' ?>"/>
             </div>
-            <div class="m_center_des fl">
+            <div class="<?php if ($self): ?><?php else: ?><?php endif; ?>m_center_des fl">
                 <h3 class="m_info_name"><?= $user->truename ?>
                     <?php if ($self): ?>
                         <span>
@@ -33,15 +33,13 @@
                 <span><?= $user->company ?></span>
                 <span><?= $user->position ?> </span>
             </div>
+            <?php if ($self): ?><?php else: ?>
             <div class="m_right_btn fr">
-                <?php if ($self): ?>
-                            <!-- <a href="/home/my-following/1" class="g-card color-items" >关注 <?= $follows ?></a> -->
-                            <!-- <a href="/home/my-following/2" class="g-card bottom_btn" >粉丝<?= $fans ?></a> -->
-                <?php else: ?>
+                
                     <span class="g-card color-items" id="follow_btn"><i class="iconfont">&#xe614;</i><?php if ($isFans): ?>取消关注<?php else: ?>加关注<?php endif; ?></span>
                     <span class="g-card bottom_btn" id="giveCard"><i class="iconfont">&#xe686;</i><?php if ($isGive): ?>已递名片<?php else: ?>递名片<?php endif; ?></span>
-                <?php endif; ?>
-            </div>
+                
+            </div><?php endif; ?>
         </div>
         <div class="m-listinfo-des">
             <ul class="m-lilist-des">
@@ -209,7 +207,7 @@
                         <?php endif; ?>
                     </ul>
                 <?php endif; ?>
-            <?php else: ?>
+            
                 <ul class="basicon worktab">
                     <?php if ($user->careers): ?>
                         <?php foreach ($user->careers as $career): ?>
