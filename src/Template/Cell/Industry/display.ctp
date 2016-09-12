@@ -5,7 +5,7 @@
     <?php endif;?>
 <?php endif;?>
 <select name="industries[_ids][]" id="select-industry" class="select-industry form-control" <?php if(!$single): ?>multiple="multiple"<?php endif;?>>
-    <option>请选择</option>
+    <option></option>
     <?php foreach ($industries as $industry): ?>
         <optgroup label="<?= $industry->name ?>">
             <?php if (!empty($industry->children)): ?>

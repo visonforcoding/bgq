@@ -47,7 +47,12 @@ class UserTable extends Table {
             'foreignKey' => 'user_id',
             'targetForeignKey' => 'industry_id'
         ]);
-
+        
+        $this->hasMany('UserIndustries', [
+            'className' => 'user_industry',
+            'foreignKey' => 'user_id',
+            'joinType' => 'LEFT'
+        ]);
 
         $this->hasOne('Savants', [
             'foreignKey' => 'user_id',
