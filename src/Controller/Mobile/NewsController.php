@@ -129,6 +129,9 @@ class NewsController extends AppController {
                 },'Comments.Reply'=>function($q){
                     return $q->select(['id','truename']);
                 },'Savants'],
+                'conditions' => [
+                    'status' => 1
+                ]
             ]);
             $collectTable = \Cake\ORM\TableRegistry::get('collect');
             $isCollect = $collectTable->find()->where(['user_id'=>$user_id, 'relate_id'=>$id, 'type'=>1, 'is_delete'=>0])->toArray();
@@ -141,6 +144,9 @@ class NewsController extends AppController {
                 },'Comments.Reply'=>function($q){
                     return $q->select(['id','truename']);
                 },'Savants'],
+                'conditions' => [
+                    'status' => 1
+                ]
             ]);
         }
         foreach($news->comments as $k=>$v){
