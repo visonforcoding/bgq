@@ -525,7 +525,7 @@ class HomeController extends AppController {
                         $book_nocomfirm += 1;
                     }
                 } elseif($v->status == 1){
-                    if($v->usermsgs || $v->bookchats){
+                    if($v->usermsgs || $v->book_chats){
                         $book_comfirm += 1;
                     }
                 } elseif($v->status == 2){
@@ -534,7 +534,6 @@ class HomeController extends AppController {
                     }
                 }
             }
-            
             $savant_books = $BookTable->find()->contain(['Subjects'=>function($q){
                 return $q->where(['Subjects.is_del'=>0]);
             }, 'Users' => function($q) {
@@ -551,7 +550,7 @@ class HomeController extends AppController {
                         $savant_nocomfirm += 1;
                     }
                 } elseif($v->status == 1){
-                    if($v->usermsgs || $v->bookchats){
+                    if($v->usermsgs || $v->book_chats){
                         $savant_comfirm += 1;
                     }
                 } elseif($v->status == 2){
