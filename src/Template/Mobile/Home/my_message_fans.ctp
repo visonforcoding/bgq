@@ -90,7 +90,7 @@
                         return d;
                     });
                 } else {
-                    $('#follow').html('<div class="nocontent"><i class="iconfont">&#xe688;</i><span>你还没有任何粉丝</span></div>');
+                    $('#follow').html('<div class="nocontent"><i class="iconfont">&#xe688;</i><span>暂未收到新的关注信息</span></div>');
                 }
             }
         });
@@ -136,6 +136,7 @@
                                     $('#sysMes').children('i').html(parseInt(num) - 1);
                                 }
                                 obj.find('.msg_color').removeClass('f-color-black').addClass('f-color-gray');
+                                obj.siblings('div').find('.msg_color').removeClass('f-color-black').addClass('f-color-gray');
                                 $('span#msg_' + id).html('已读');
                                 location.href = obj.attr('url');
                             }
@@ -235,6 +236,7 @@
                                             $('#sysMes').children('i').html(parseInt(num) - 1);
                                         }
                                         obj.find('.msg_color').removeClass('f-color-black').addClass('f-color-gray');
+                                        obj.siblings('div').find('.msg_color').removeClass('f-color-black').addClass('f-color-gray');
                                         $('span#msg_' + id).html('已读');
                                         location.href = obj.attr('url');
                                     }
