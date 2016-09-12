@@ -26,7 +26,7 @@ use Cake\Error\Debugger;
         <div class="errorpage n_err">
             <a href="javascript:void(0);"></a>
         </div>
-        <p class="ptips">您所查看的内容已经不存在或被删除
+        <p class="ptips">您所查看的内容已下线或被删除
         </p>
 
         <div class="btnlist n_err_btn">
