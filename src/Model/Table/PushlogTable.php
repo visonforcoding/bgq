@@ -29,12 +29,12 @@ class PushlogTable extends Table {
         $this->displayField('title');
         $this->primaryKey('id');
 
-        $this->belongsTo('Pushes', [
+        $this->belongsTo('Pusher', [
             'foreignKey' => 'push_id',
             'className' => 'User',
             'joinType' => 'LEFT'
         ]);
-        $this->belongsTo('Receives', [
+        $this->belongsTo('Receiver', [
             'foreignKey' => 'receive_id',
             'className' => 'User',
             'joinType' => 'LEFT'
