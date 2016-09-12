@@ -13,7 +13,7 @@
             <span class="orgname active">选择标签</span>
         </div>
         <ul class="a-s-mark" id="agencies">
-            <li><a href="javascript:void(0)" agency_id="0" class="label active" id="agency_">全部</a></li>
+            <li><a href="javascript:void(0)" class="label active" id="all">全部</a></li>
         </ul>
     </div>
     <div id='biggies'></div>
@@ -129,6 +129,9 @@
                     return false;
                 }
                 $('#biggies').html('');
+                dealData();
+                break;
+            case 'all':
                 dealData();
                 break;
             case 'goTop':
