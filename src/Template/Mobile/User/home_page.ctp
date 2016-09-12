@@ -14,7 +14,7 @@
             <div class="m_left-pic fl">
                 <img src="<?= $user->avatar ? getSmallAvatar($user->avatar) : '/mobile/images/touxiang.png' ?>"/>
             </div>
-            <div class="<?php if ($self): ?><?php else: ?><?php endif; ?>m_center_des fl">
+            <div class="<?php if ($self): ?><?php else: ?>w75<?php endif; ?>m_center_des fl">
                 <h3 class="m_info_name"><?= $user->truename ?>
                     <?php if ($self): ?>
                         <span>
