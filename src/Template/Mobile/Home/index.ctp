@@ -66,15 +66,12 @@
         <!--<h1>个人中心</h1>-->
         {#setUp#}
     </div>
-
+<a href="/user/home-page/{#user_id#}">
     <div class="t-home-top">
-        
-            <span>
-                <img src="{#avatar#}"/>
-            </span>
-        
+        <span>
+            <img src="{#avatar#}"/>
+        </span>
     </div>
-    <a href="/user/home-page/{#user_id#}">
         <h3>{#truename#}
             {#v#}
         </h3>
