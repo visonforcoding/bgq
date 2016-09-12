@@ -14,7 +14,7 @@
             <div class="m_left-pic fl">
                 <img src="<?= $user->avatar ? getSmallAvatar($user->avatar) : '/mobile/images/touxiang.png' ?>"/>
             </div>
-            <div class="<?php if ($self): ?><?php else: ?>w75<?php endif; ?>m_center_des fl">
+            <div class="<?php if ($self): ?>w75<?php else: ?><?php endif; ?>m_center_des fl">
                 <h3 class="m_info_name"><?= $user->truename ?>
                     <?php if ($self): ?>
                         <span>
@@ -33,24 +33,26 @@
                 <span><?= $user->company ?></span>
                 <span><?= $user->position ?> </span>
             </div>
-            <?php if ($self): ?><?php else: ?>
-            <div class="m_right_btn fr">
-                
+            <?php if ($self): ?>
+            <?php else: ?>
+                <div class="m_right_btn fr">
+
                     <span class="g-card color-items" id="follow_btn"><i class="iconfont">&#xe614;</i><?php if ($isFans): ?>取消关注<?php else: ?>加关注<?php endif; ?></span>
                     <span class="g-card bottom_btn" id="giveCard"><i class="iconfont">&#xe686;</i><?php if ($isGive): ?>已递名片<?php else: ?>递名片<?php endif; ?></span>
-                
-            </div><?php endif; ?>
+
+                </div>
+            <?php endif; ?>
         </div>
         <div class="m-listinfo-des">
             <ul class="m-lilist-des">
                 <li>
-                    <a href="<?php if($follows == 0): ?>javascript:void(0)<?php else: ?><?php if($self): ?>/home/my-following/1<?php else: ?>/home/follow/<?= $user->id ?><?php endif; ?><?php endif; ?>">
+                    <a href="<?php if ($follows == 0): ?>javascript:void(0)<?php else: ?><?php if ($self): ?>/home/my-following/1<?php else: ?>/home/follow/<?= $user->id ?><?php endif; ?><?php endif; ?>">
                         <i><?= $follows ?></i>
                         <span>关注</span>
                     </a>
                 </li>
                 <li>
-                    <a href="<?php if($fans == 0): ?>javascript:void(0)<?php else: ?><?php if($self): ?>/home/my-following/2<?php else: ?>/home/fans/<?= $user->id ?><?php endif; ?><?php endif; ?>">
+                    <a href="<?php if ($fans == 0): ?>javascript:void(0)<?php else: ?><?php if ($self): ?>/home/my-following/2<?php else: ?>/home/fans/<?= $user->id ?><?php endif; ?><?php endif; ?>">
                         <i><?= $fans ?></i>
                         <span>粉丝</span>
                     </a>
@@ -207,7 +209,7 @@
                         <?php endif; ?>
                     </ul>
                 <?php endif; ?>
-            
+
                 <ul class="basicon worktab">
                     <?php if ($user->careers): ?>
                         <?php foreach ($user->careers as $career): ?>
