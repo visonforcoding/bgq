@@ -153,7 +153,7 @@ class NewsController extends AppController {
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
+            $where['and'] = [['date(News.`create_time`) >' => $begin_time], ['date(News.`create_time`) <' => $end_time]];
         }
         $query = $this->News->find();
         $query->contain(['Users', 'Industries' => function($q) {
@@ -167,6 +167,10 @@ class NewsController extends AppController {
             $query->matching('Industries', function($q)use($industry) {
                 return $q->where(['Industries.id' => $industry['_ids'][0]]);
             });
+        }
+        $status = $this->request->data('status');
+        if(is_numeric($status)){
+            $where = ['News.status'=>$status];
         }
 
         //$query->hydrate(false);
@@ -216,6 +220,12 @@ class NewsController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
+        
+        $status = $this->request->data('status');
+        if(is_numeric($status)){
+            $where = ['News.status'=>$status];
+        }
+
         $Table = $this->News;
         $column = ['标题', '阅读数', '点赞数', '评论数','摘要','状态', '创建时间'];
         $query = $Table->find();

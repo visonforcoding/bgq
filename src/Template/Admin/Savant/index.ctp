@@ -47,7 +47,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '手机号', '公司', '职位', '等级', '约见次数', '推荐次数', '项目经验', '资源优势', '简介', '审核情况', '置顶', '操作'],
+                                ['用户', '手机号', '公司', '职位', '等级', '约见次数', '推荐次数', '项目经验', '资源优势', '审核情况', '置顶', '操作'],
                         colModel: [
                             {name: 'truename', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     return '<a title="查看" onClick="showSavant(' + " ' " + rowObject.id + " ' " + ');" class="grid-btn ">' + cellvalue + '</a>';
@@ -68,13 +68,12 @@
                             {name: 'meet_nums', editable: true, align: 'center'},
                             {name: 'savant.reco_nums', editable: true, align: 'center'},
 //                            {name: 'cover', editable: true, align: 'center'},
-                            {name: 'savant.xmjy', editable: true, align: 'left',formatter:function(cell,opt,row){
-                                    return cell.substr(0,10);
-                            }},
-                            {name: 'savant.zyys', editable: true, align: 'left',formatter:function(cell,opt,row){
-                                    return cell.substr(0,10);
-                            }},
-                            {name: 'savant.summary', editable: true, align: 'center'},
+                            {name: 'savant.xmjy', editable: true, align: 'left', formatter: function (cell, opt, row) {
+                                    return cell.substr(0, 15) + '<a class="grid-popover" onclick="showTips(this)" data-content="' + cell + '">[查看更多]<a>';
+                                }},
+                            {name: 'savant.zyys', editable: true, align: 'left', formatter: function (cell, opt, row) {
+                                    return cell.substr(0, 15)+ '<a class="grid-popover" onclick="showTips(this)" data-content="' + cell + '">[查看更多]<a>';;
+                                }},
                             {name: 'savant_status', editable: true, align: 'center', formatter: statusFormatter},
                             {name: 'is_top', editable: true, align: 'center', formatter: function (cell, opt, row) {
                                     if (cell == 1) {
@@ -107,6 +106,14 @@
                         },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
                 });
+                function showTips(em) {
+                    var content = $(em).data('content');
+                    layer.tips(content, em, {
+                        tips: [1, '#3595CC'],
+                        time: 0,
+                        closeBtn:2
+                    });
+                }
                 function statusFormatter(cellvalue, options, rowObject) {
                     if (rowObject.savant_status == 0) {
                         response = '未通过审核';
