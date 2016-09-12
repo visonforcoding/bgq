@@ -69,10 +69,18 @@
                             {name: 'savant.reco_nums', editable: true, align: 'center'},
 //                            {name: 'cover', editable: true, align: 'center'},
                             {name: 'savant.xmjy', editable: true, align: 'left', formatter: function (cell, opt, row) {
-                                    return cell.substr(0, 15) + '<a class="grid-popover" onclick="showTips(this)" data-content="' + cell + '">[查看更多]<a>';
+                                    if (cell.length > 15) {
+                                        return cell.substr(0, 15) + '<a class="grid-popover" onclick="showTips(this)" data-content="' + cell + '">[查看更多]<a>';
+                                    } else {
+                                        return cell;
+                                    }
                                 }},
                             {name: 'savant.zyys', editable: true, align: 'left', formatter: function (cell, opt, row) {
-                                    return cell.substr(0, 15)+ '<a class="grid-popover" onclick="showTips(this)" data-content="' + cell + '">[查看更多]<a>';;
+                                    if (cell.length > 15) {
+                                        return cell.substr(0, 15) + '<a class="grid-popover" onclick="showTips(this)" data-content="' + cell + '">[查看更多]<a>';
+                                    } else {
+                                        return cell;
+                                    }
                                 }},
                             {name: 'savant_status', editable: true, align: 'center', formatter: statusFormatter},
                             {name: 'is_top', editable: true, align: 'center', formatter: function (cell, opt, row) {
@@ -111,7 +119,7 @@
                     layer.tips(content, em, {
                         tips: [1, '#3595CC'],
                         time: 0,
-                        closeBtn:2
+                        closeBtn: 2
                     });
                 }
                 function statusFormatter(cellvalue, options, rowObject) {
