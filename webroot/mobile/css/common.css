@@ -109,6 +109,7 @@ textarea::-webkit-scrollbar{display: none;}/*隐藏多文本框滚动条*/
 /*最大宽度*/
 .wraper .w88{max-width: 88%;}
 .wraper .w7{max-width:70%;}
+.wraper .w75{width:75%;}
 /*common css end*/
 /*placeholder reset--*/
 input::-webkit-input-placeholder { /* WebKit browsers */ color: #7a7d82; } 
