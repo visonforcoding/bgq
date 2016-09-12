@@ -132,7 +132,13 @@
                 dealData();
                 break;
             case 'all':
-                dealData();
+                $('.label').removeClass('active');
+                var industry_id = $(em).attr('industry_id');
+                $(em).addClass('active');
+                $('input[name="industry_id"]').val(industry_id);
+                $('input[name="agency_id"]').val('');
+                $('#biggies').html('');
+                dealData($('a[agency_id="0"]').get(0));
                 break;
             case 'goTop':
                 window.scrollTo(0, 0);
