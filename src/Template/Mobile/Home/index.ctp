@@ -68,16 +68,18 @@
     </div>
 
     <div class="t-home-top">
-        <a href="/user/home-page/{#user_id#}">
+        
             <span>
                 <img src="{#avatar#}"/>
             </span>
-        </a>
+        
     </div>
-    <h3>{#truename#}
-        {#v#}
-    </h3>
-    <div class="info-desc"><span><i class='iconfont'>&#xe62a;</i>{#company#}</span><span><i class='iconfont'>&#xe612;</i>{#position#}</span></div>
+    <a href="/user/home-page/{#user_id#}">
+        <h3>{#truename#}
+            {#v#}
+        </h3>
+        <div class="info-desc"><span><i class='iconfont'>&#xe62a;</i>{#company#}</span><span><i class='iconfont'>&#xe612;</i>{#position#}</span></div>
+    </a>
 </script>
 <script type="text/html" id='defaultTpl'>
     <div class='inner h-home-top'>
