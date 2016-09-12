@@ -68,8 +68,12 @@
                             {name: 'meet_nums', editable: true, align: 'center'},
                             {name: 'savant.reco_nums', editable: true, align: 'center'},
 //                            {name: 'cover', editable: true, align: 'center'},
-                            {name: 'savant.xmjy', editable: true, align: 'left'},
-                            {name: 'savant.zyys', editable: true, align: 'left'},
+                            {name: 'savant.xmjy', editable: true, align: 'left',formatter:function(cell,opt,row){
+                                    return cell.substr(0,10);
+                            }},
+                            {name: 'savant.zyys', editable: true, align: 'left',formatter:function(cell,opt,row){
+                                    return cell.substr(0,10);
+                            }},
                             {name: 'savant.summary', editable: true, align: 'center'},
                             {name: 'savant_status', editable: true, align: 'center', formatter: statusFormatter},
                             {name: 'is_top', editable: true, align: 'center', formatter: function (cell, opt, row) {
