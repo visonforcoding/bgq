@@ -70,12 +70,17 @@ class HomeController extends AppController {
         if ($unReadFollowCount || $unReadSysCount) {
             $hasMsg = true;
         }
-        $unReadActivity = $UsermsgTable->find()->where(['user_id'=>$user_id, 'status'=>0, 'type'=>7])->count();
+        $unReadActivity = $UsermsgTable->find()->contain(['Activities'=>function($q){
+            return $q->where(['Activities.status'=>1]);
+        }])->where(['Usermsg.user_id'=>$user_id, 'Usermsg.status'=>0, 'type'=>7])->count();
         $activityMsg = false;
         if($unReadActivity){
             $activityMsg = true;
         }
-        $unReadMeet = $UsermsgTable->find()->where(['user_id'=>$user_id, 'status'=>0, 'type'=>4])->count();
+        $unReadMeet = $UsermsgTable->find()
+                ->contain(['SubjectBook','SubjectBook.Subjects'])
+                ->where(['Usermsg.user_id'=>$user_id, 'Usermsg.status'=>0, 'Usermsg.type'=>4])
+                ->count();
         $unReadChat = $BookChatTable->find()->where(['reply_id'=>$user_id, 'is_read'=>0])->count();
         $meetMsg = false;
         if($unReadMeet || $unReadChat){

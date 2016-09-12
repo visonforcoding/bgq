@@ -34,6 +34,16 @@ class UsermsgTable extends Table {
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Activities', [
+            'className' => 'Activity',
+            'foreignKey' => 'table_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('SubjectBook', [
+            'className' => 'SubjectBook',
+            'foreignKey' => 'table_id',
+            'joinType' => 'INNER'
+        ]);
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [
