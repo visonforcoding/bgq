@@ -597,39 +597,48 @@ class MeetController extends AppController {
      * 约见中间栏搜索
      * @param int $id 行业id
      */
-    public function searchByAgency($id = ''){
-        switch ($id){
-            case '1':
+    public function searchByAgency($type=''){
+        switch ($type){
+            case 'bgtz':
                 $title = '产业投资';
                 break;
-            case '2':
+            case 'bgrz':
                 $title = '并购融资';
                 break;
-            case '3':
+            case 'bggw':
                 $title = '并购顾问';
                 break;
-            case '4':
+            case 'bgmj':
                 $title = '并购买家';
+                break;
+            default :
+                $title = '并购帮';
                 break;
         }
         $this->set([
-            'id' => $id,
+            'type' => $type,
             'pageTitle' => $title
         ]);
     }
     
-    public function getAgency($id=''){
-        if(!in_array($id, ['1','2','3','4'])){
+    public function getAgency($type=''){
+        //验证参数
+        if(!in_array($type, ['bgmj','bgrz','cytz','bggw'])){
             return $this->Util->ajaxReturn(false, '非法操作');
         }
         $AgencyTable = \Cake\ORM\TableRegistry::get('agency');
-        if($id == 4){
-            $agencies = $AgencyTable->find()->where(['id in'=>['22', '23', '24', '25']])->toArray();
-        } else {
-            $agencies = $AgencyTable->find()->where(['pid'=>$id])->toArray();
+        $IndustryTable = \Cake\ORM\TableRegistry::get('industry');
+        $data = \Cake\Cache\Cache::read('zhy', 'redis');
+        if($data[$type]['agency']){
+            $agency = $AgencyTable->find()->where(['id in'=>$data[$type]['agency']])->toArray();
+            $data[$type]['agency'] = $agency;
         }
-        if($agencies){
-            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$agencies]);
+        if($data[$type]['industry']){
+            $industry = $IndustryTable->find()->where(['id in'=>$data[$type]['industry']])->toArray();
+            $data[$type]['industry'] = $industry;
+        }
+        if($data){
+            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$data[$type]]);
         } else {
             return $this->Util->ajaxReturn(false, '系统错误');
         }
@@ -641,6 +650,9 @@ class MeetController extends AppController {
     public function getAgenciesBiggie(){
         $data = $this->request->data();
         $agency_id = $data['agency_id'];
+        $industry_id = $data['industry_id'];
+        $type = $data['type'];
+        $label = \Cake\Cache\Cache::read('zhy', 'redis');
         $keyword = $data['keyword'];
         $where['enabled'] = '1';
         $where['level'] = '2';
@@ -649,28 +661,41 @@ class MeetController extends AppController {
                     ->User
                     ->find();
         // 选择标签再匹配
-        if($this->request->data('pid')){
-            $where['Agencies.pid'] = $this->request->data('pid');
-        }
         if($agency_id) {
             $where['agency_id'] = $agency_id;
         }
         if($keyword) {
             $where['truename like'] = "%$keyword%";
         }
+        if($industry_id){
+            $biggie = $biggie->matching('Industries', function($d)use($industry_id){
+                return $d->where(['Industries.id'=>$industry_id]);
+            });
+        }
+        $biggie = $biggie->where($where);
+        if($industry_id == '' && $agency_id == ''){
+            $industry = $label[$type]['industry'];
+            $andwhere['or'] = [
+                'agency_id in' => $label[$type]['agency'],
+                'UserIndustries.industry_id in'=>$industry
+            ];
+            $biggie = $biggie->leftJoinWith('UserIndustries')
+            ->distinct('User.id')
+            ->andWhere($andwhere);
+        }
         $biggie = $biggie
                 ->contain(['Subjects'=>function($q){
                     return $q->where(['is_del'=>0])->orderDesc('Subjects.create_time');
-                }, 'Agencies'])
+                }])
                 ->limit($this->limit)
                 ->order(['subject_update_time'=>'desc'])
-                ->where($where)
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
                         $item['avatar'] = getSmallAvatar($item['avatar']);
                         return $item;
                     });
                  })
+//                 debug($biggie);die;
                 ->toArray();
         if($biggie !== false){
             if ($biggie) {

@@ -25,7 +25,6 @@ class IndexController extends AppController {
     public function index() {
         //$umengObj = new Umeng($key, $secret);
         //var_dump($umengObj);
-
         $this->autoRender = false;
         $res = \Cake\Cache\Cache::write('foo', 'bar2', 'redis');
         //debug($res);

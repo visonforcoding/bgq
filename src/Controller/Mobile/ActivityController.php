@@ -695,12 +695,12 @@ class ActivityController extends AppController {
                         ->toArray();
         foreach($activity as $k=>$v){
             $now = \Cake\I18n\Time::now();
-            $v->time = $v->time->format('Y-m-d');
-            if($v['time'] < $now){
+            if($v->time < $now){
                 $activity[$k]['pass_time'] = 1;
             } else {
                 $activity[$k]['pass_time'] = 0;
             }
+            $v->time = $v->time->format('Y-m-d');
         }
         if ($activity) {
             return $this->Util->ajaxReturn(['status' => true, 'data' => $activity]);

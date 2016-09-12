@@ -3,6 +3,8 @@
         <form id="searchForm" >
             <h1><input type="text" name="keyword" placeholder="请输入关键词"></h1>
             <input type="hidden" name="agency_id" value="" />
+            <input type="hidden" name="industry_id" value="" />
+            <input type="hidden" name="type" value="<?= $type ?>" />
         </form>
         <div class='h-regiser' id="doSearch">搜索</div>
     </div>
@@ -11,14 +13,20 @@
             <span class="orgname active">选择标签</span>
         </div>
         <ul class="a-s-mark" id="agencies">
-            <li><a href="javascript:void(0)" agency_id="0" class="agency active" id="agency_">全部</a></li>
+            <li><a href="javascript:void(0)" agency_id="0" class="label active" id="agency_">全部</a></li>
         </ul>
     </div>
     <div id='biggies'></div>
     <div id="buttonLoading" class="loadingbox"></div>
 </div>
+<script type="text/html" id="tpl">
+    {#label#}
+</script>
 <script type="text/html" id="agenciesTpl">
-    <li><a href="javascript:void(0)" agency_id="{#id#}" class="agency" id="agency_{#id#}">{#name#}</a></li>
+    <li><a href="javascript:void(0)" agency_id="{#id#}" class="label" id="agency_{#id#}">{#name#}</a></li>
+</script>
+<script type="text/html" id="industriesTpl">
+    <li><a href="javascript:void(0)" industry_id="{#id#}" class="label" id="industry_{#id#}">{#name#}</a></li>
 </script>
 <script type='text/html' id='biggie_tpl'>
     <section class="internet-v-info bbottom">
@@ -48,14 +56,19 @@
         viewDom: $('#outer'),
         right: $('#toRight')
     });
-
     $.ajax({
         type: 'POST',
         dataType: 'json',
-        url: "/meet/get-agency/<?= $id ?>",
+        url: "/meet/get-agency/<?= $type ?>",
         success: function (res) {
             if (res.status) {
-                var html = $.util.dataToTpl('', 'agenciesTpl', res.data);
+                var html = '';
+                if(res.data.agency){
+                    html += $.util.dataToTpl('', 'agenciesTpl', res.data.agency);
+                }
+                if(res.data.industry){
+                    html += $.util.dataToTpl('', 'industriesTpl', res.data.industry);
+                }
                 $('#agencies').append(html);
             }
         }
@@ -92,10 +105,20 @@
         if (!em || !em.id)
             return;
         if (em.id.indexOf('agency_') != -1) {
-            $('.agency').removeClass('active');
+            $('.label').removeClass('active');
             var agency_id = $(em).attr('agency_id');
             $(em).addClass('active');
-            $('input[name="agency_id"]').attr('value', agency_id);
+            $('input[name="agency_id"]').val(agency_id);
+            $('input[name="industry_id"]').val('');
+            $('#biggies').html('');
+            dealData(em);
+        }
+        if (em.id.indexOf('industry_') != -1) {
+            $('.label').removeClass('active');
+            var industry_id = $(em).attr('industry_id');
+            $(em).addClass('active');
+            $('input[name="industry_id"]').val(industry_id);
+            $('input[name="agency_id"]').val('');
             $('#biggies').html('');
             dealData(em);
         }
@@ -116,12 +139,8 @@
     });
 
     function dealData(em) {
-        var data = '';
-        if ($(em).attr('agency_id') === '0') {
-            data = $('#searchForm').serialize() + '&pid=<?= $id ?>';
-        } else {
-            data = $('#searchForm').serialize();
-        }
+        var data = $('#searchForm').serialize();
+        $.util.hideLoading('buttonLoading');
         $.ajax({
             type: 'POST',
             url: '/meet/get-agencies-biggie',
@@ -130,6 +149,7 @@
             success: function (msg) {
                 if (typeof msg == 'object') {
                     if (msg.status) {
+                        $('.orgname').toggleClass('active');
                         if ($('.a-s-mark').hasClass('a-s-width')) {
                             $('.a-s-mark').removeClass('a-s-width');
                         } else {
