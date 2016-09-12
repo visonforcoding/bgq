@@ -14,6 +14,14 @@
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="用户名、标题、摘要">
             </div>
             <div class="form-group">
+                <label for="status">上线状态</label>
+                <select name="status" class="form-control">
+                    <option value="">全部</option>
+                    <option value="1">上线</option>
+                    <option value="0">下线</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="keywords">行业标签</label>
                 <?= $this->cell('Industry::news', [['single']]) ?>
             </div>
@@ -46,7 +54,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['作者', '标题', '行业标签','资讯标签', '阅读数', '点赞数', '评论数', '状态' ,'创建时间', '更新时间', '操作'],
+                                ['作者', '标题', '行业标签', '资讯标签', '阅读数', '点赞数', '评论数', '状态', '创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     if (!cellvalue) {
@@ -55,9 +63,9 @@
                                         return rowObject.user.truename;
                                     }
                                 }},
-                            {name: 'title', editable: true, align: 'center',formatter: function (cellvalue, options, rowObject) {
-                                    return '<a  data-toggle="tooltip" title="这是提示消息内容" onClick="showNews(' +" ' "+rowObject.id+" ' " + ');" class="grid-btn ">'+cellvalue+'</a>';
-                            }},
+                            {name: 'title', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
+                                    return '<a  data-toggle="tooltip" title="这是提示消息内容" onClick="showNews(' + " ' " + rowObject.id + " ' " + ');" class="grid-btn ">' + cellvalue + '</a>';
+                                }},
                             {name: 'industries', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     var industries_arr = [];
                                     $.each(cellvalue, function (i, n) {
@@ -83,17 +91,17 @@
                                     var s;
                                     switch (cellvalue) {
                                         case 1:
-                                            s =  '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-check-circle"></i> 上线</button>';
+                                            s = '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-check-circle"></i> 上线</button>';
                                             break;
                                         case 0:
-                                            s =  '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-remove-circle"></i><i style="color:red"> 下线</i></button>';
+                                            s = '<button onClick="ableThis(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-remove-circle"></i><i style="color:red"> 下线</i></button>';
                                             break;
                                     }
-                                    if(rowObject.is_top==1){
+                                    if (rowObject.is_top == 1) {
                                         s += '<span class="notice">(已置顶)</span>'
                                     }
                                     return s;
-                            }},
+                                }},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
@@ -132,9 +140,9 @@
 //                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="复制" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
                     response += '<a title="编辑" href="/admin/news/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
-                    if(rowObject.is_top==0){
+                    if (rowObject.is_top == 0) {
                         response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="topit(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
-                    }else{
+                    } else {
                         response += '<a title="取消置顶" href="javascript:void(0)" class="grid-btn top" onclick="topit(' + rowObject.id + ')"><i class="icon icon-long-arrow-down"></i> </a>';
                     }
 //                    response += '<a title="评论详情" onClick="viewComs(' + rowObject.id + ');" class="grid-btn "><i class="icon icon-comment"></i> </a>';
@@ -149,7 +157,7 @@
                     clip = new ZeroClipboard($('.copy'));
                     console.log('可以复制了');
                     clip.on('copy', function (event) {
-                        clip.setData('text/plain', '<?=$domain?>'+'/news/view/' + event.target.id);
+                        clip.setData('text/plain', '<?= $domain ?>' + '/news/view/' + event.target.id);
                     });
                     clip.on("aftercopy", function (event) {
                         layer.msg("复制了: " + event.data["text/plain"]);
@@ -183,7 +191,7 @@
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/admin/news/top/'+id,
+                            url: '/admin/news/top/' + id,
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
@@ -197,11 +205,14 @@
 
                 function doSearch() {
                     //搜索
-                    var postData = $('#table-bar-form').serialize();
-                    postData = decodeURI(postData);
-                    $.zui.store.pageSet('searchData', postData); //本地存储查询参数 供导出操作等调用
+                    var postData = $('#table-bar-form').serializeArray();
+                    var data = {};
+                    $.each(postData, function (i, n) {
+                        data[n.name] = n.value;
+                    });
+                    $.zui.store.pageSet('searchData', data); //本地存储查询参数 供导出操作等调用
                     $("#list").jqGrid('setGridParam', {
-                        postData: $.global.queryParam2Json(postData)
+                        postData: data
                     }).trigger("reloadGrid");
                 }
 
@@ -218,7 +229,7 @@
 
                 function doView(id) {
                     //查看明细
-                    url = '/admin/news/view/' + id+'?from=back';
+                    url = '/admin/news/view/' + id + '?from=back';
                     layer.open({
                         type: 2,
                         title: '查看详情',

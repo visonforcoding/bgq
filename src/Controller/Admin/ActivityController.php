@@ -186,6 +186,11 @@ class ActivityController extends AppController {
                     'activity_id',
                 ]);
             }]);
+        
+        $status = $this->request->data('status');
+        if(is_numeric($status)){
+            $where = ['Activity.status'=>$status];
+        }
 
         $query->hydrate(false);
         if (!empty($where)) {
@@ -233,6 +238,10 @@ class ActivityController extends AppController {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
+        }
+        $status = $this->request->data('status');
+        if(is_numeric($status)){
+            $where = ['Activity.status'=>$status];
         }
         $Table = $this->Activity;
         $column = [ '主办单位', '活动名称', '活动时间', '地点', '规模','报名费用', '阅读数', '点赞数', '评论数',  '创建时间'];
