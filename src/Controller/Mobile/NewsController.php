@@ -130,7 +130,7 @@ class NewsController extends AppController {
                     return $q->select(['id','truename']);
                 },'Savants'],
                 'conditions' => [
-                    'status' => 1
+                    'News.status' => 1
                 ]
             ]);
             $collectTable = \Cake\ORM\TableRegistry::get('collect');
@@ -145,7 +145,7 @@ class NewsController extends AppController {
                     return $q->select(['id','truename']);
                 },'Savants'],
                 'conditions' => [
-                    'status' => 1
+                    'News.status' => 1
                 ]
             ]);
         }
