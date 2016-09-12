@@ -525,7 +525,7 @@ class HomeController extends AppController {
                         $book_nocomfirm += 1;
                     }
                 } elseif($v->status == 1){
-                    if($v->usermsgs){
+                    if($v->usermsgs || $v->bookchats){
                         $book_comfirm += 1;
                     }
                 } elseif($v->status == 2){
@@ -551,7 +551,7 @@ class HomeController extends AppController {
                         $savant_nocomfirm += 1;
                     }
                 } elseif($v->status == 1){
-                    if($v->usermsgs){
+                    if($v->usermsgs || $v->bookchats){
                         $savant_comfirm += 1;
                     }
                 } elseif($v->status == 2){
