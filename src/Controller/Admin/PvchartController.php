@@ -109,13 +109,16 @@ class PvchartController extends AppController {
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
         $sort = 'Pvlog.' . $this->request->data('sidx');
+        if($this->request->data('sidx')=='counts'){
+            $sort = $this->request->data('sidx');
+        }
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where[' username like'] = "%$keywords%";
+            $where['url like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
