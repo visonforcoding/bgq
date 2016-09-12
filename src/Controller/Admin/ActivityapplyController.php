@@ -222,7 +222,7 @@ class ActivityapplyController extends AppController {
             $where['is_sign'] = $is_sign;
         }
         $Table = $this->Activityapply;
-        $column = ['用户', '公司', '职位', '手机号', '活动', '报名时间'];
+        $column = ['用户', '公司', '职位', '手机号', '活动', '报名时间','是否需审核','审核状态','报名状态','签到','置顶'];
         if ($id) {
             $query = $Table->find()->where(['activity_id' => $id]);
         } else {
@@ -231,17 +231,30 @@ class ActivityapplyController extends AppController {
         $query->hydrate(false);
         $query->contain(['Users', 'Activities']);
         $query->select(['user_truename' => 'Users.truename', 'user_company' => 'Users.company', 'user_position' => 'Users.position',
-            'user_phone' => 'Users.phone', 'activity_title' => 'Activities.title', 'create_time']);
+            'user_phone' => 'Users.phone', 'activity_title' => 'Activities.title', 'create_time',
+            'must_check'=>'Activities.must_check','is_check','is_pass','is_sign','is_top']);
         if (!empty($where)) {
             $query->where($where);
         }
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
+        $query->formatResults(function($items) {
+            return $items->map(function($item) {
+                        //时间语义化转换
+                        $item['must_check'] = $item['must_check'] == '1' ? '是' : '否';
+                        $item['is_check'] = $item['is_check'] == '1' ? '已审核' : '未审核';
+                        $item['is_pass'] = $item['is_pass'] == '1' ? '通过' : '不通过';
+                        $item['is_sign'] = $item['is_sign'] == '1' ? '是' : '否';
+                        $item['is_top'] = $item['is_top'] == '1' ? '是' : '否';
+                        return $item;
+                    });
+        });
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = '活动报名' . date('Y-m-d') . '.csv';
-        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+        $filename = '活动报名' . date('Y-m-d') . '.xls';
+        $this->loadComponent('Export');
+        $this->Export->phpexcelExport($filename, $column, $res);
     }
 
     /**
