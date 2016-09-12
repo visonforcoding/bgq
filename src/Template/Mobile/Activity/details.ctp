@@ -512,7 +512,7 @@
                                         $('.reg-shadow').hide();
                                         $('.shadow-info').removeClass('c-height').addClass('m-height');
                                         $('textarea[name="comment-content-article"]').val('');
-                                    }, 301);
+                                    }, 400);
                                     
                                 } else {
                                     $.util.alert(msg.msg);
@@ -562,7 +562,7 @@
                                         $('.reg-shadow').hide();
                                         $('.shadow-info').removeClass('c-height').addClass('m-height');
                                         $('textarea[name="comment-content-reply"]').val('');
-                                    }, 301);
+                                    }, 400);
                                     
                                 } else {
                                     $.util.alert(msg.msg);
@@ -598,13 +598,13 @@
                 setTimeout(function () {
                     $('.reg-shadow').hide();
                     $('.shadow-info').removeClass('c-height').addClass('m-height');
-                }, 301);
+                }, 400);
                 break;
             case 'article_shadow':
                 setTimeout(function () {
                     $('.reg-shadow').hide();
                     $('.shadow-info').removeClass('c-height').addClass('m-height');
-                }, 301);
+                }, 400);
                 break;
             case 'yes':
                 var id = $('#isdel').attr('com_id');
@@ -620,7 +620,7 @@
                                 $('#shadow').hide();
                                 $('#isdel').hide();
                                 $('#isdel').attr('com_id', '');
-                            }, 301);
+                            }, 400);
                         }
                     }
                 });
@@ -630,7 +630,7 @@
                     $('#shadow').hide();
                     $('#isdel').hide();
                     $('#isdel').attr('com_id', '');
-                }, 301);
+                }, 400);
                 break;
             case 'goTop':
                 window.scroll(0, 0);
@@ -718,8 +718,10 @@
                 // 取消评论
             case 'cancel':
                 LEMON.sys.hideKeyboard();
-                $('.reg-shadow').hide();
-                $('.shadow-info').removeClass('c-height').addClass('m-height');
+                setTimeout(function(){
+                    $('.reg-shadow').hide();
+                    $('.shadow-info').removeClass('c-height').addClass('m-height');
+                }, 400);
                 break;
         }
     });

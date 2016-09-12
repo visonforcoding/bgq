@@ -282,8 +282,7 @@
                                     $('#comment_shadow').hide('slow');
                                     $('.shadow-info').removeClass('c-height').addClass('m-height');
                                 }, 400);
-                            } else
-                            {
+                            } else {
                                 $.util.alert(res.msg);
                             }
                         }
@@ -453,7 +452,6 @@
                 $('#isdel').attr('com_id', id);
                 return;
             }
-
             reply_id = id;
             $('#content').attr('placeholder', '回复 ' + $(em).data('username') + '：');
             $('#comment_shadow').show('slow');
