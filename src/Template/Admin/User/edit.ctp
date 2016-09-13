@@ -374,7 +374,7 @@
                 formdata['position'] = $(form).find('input[name="position"]').val();
                 formdata['start_date'] = $(form).find('input[name="start_date"]').val();
                 formdata['end_date'] = $(form).find('input[name="end_date"]').val();
-                formdata['descb'] = $(form).find('textarea[name="descb"]').val();
+                formdata['descb'] = $(form).find('input[name="descb"]').val();
                 $.ajax({
                     type: 'post',
                     url: '/admin/user/saveCareer/' + id,
