@@ -32,7 +32,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户名', '真实姓名', '手机号', '账号状态', '创建时间', '已获取权限', '登录时间', '登录ip', '操作'],
+                                ['用户名', '真实姓名', '手机号', '账号状态', '创建时间', '登录时间', '登录ip', '操作'],
                         colModel: [
                             {name: 'username', editable: true, align: 'center'},
                             {name: 'truename', editable: true, align: 'center'},
@@ -45,13 +45,13 @@
                                     }
                             }},
                             {name: 'ctime', editable: true, align: 'center'},
-                            {name: 'menus', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
-                                    var industries_arr = [];
-                                     $.each(cellvalue,function(i,n){
-                                         industries_arr.push(n.name);
-                                     })
-                                     return industries_arr.join(',');
-                            }},
+//                            {name: 'menus', editable: true, align: 'center',formatter:function(cellvalue, options, rowObject){
+//                                    var industries_arr = [];
+//                                     $.each(cellvalue,function(i,n){
+//                                         industries_arr.push(n.name);
+//                                     })
+//                                     return industries_arr.join(',');
+//                            }},
                             {name: 'login_time', editable: true, align: 'center'},
                             {name: 'login_ip', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
@@ -80,7 +80,7 @@
                 });
 
                 function actionFormatter(cellvalue, options, rowObject) {
-                    response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="权限配置" href="/admin/admin/config/' + rowObject.id + '" class="grid-btn "><i class="icon icon-cogs"></i> </a>';
 //                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="编辑" href="/admin/admin/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
