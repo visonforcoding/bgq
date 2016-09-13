@@ -143,8 +143,7 @@
                         });
                     });
                 } else {
-                    $('#follow').html('');
-                    $.util.alert(res.msg);
+                    $('#follow').html('<div class="nocontent"><i class="iconfont">&#xe672;</i><span>暂未收到新的系统消息</span></div>');
                 }
             }
         });
