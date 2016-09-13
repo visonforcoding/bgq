@@ -83,6 +83,10 @@ textarea::-webkit-scrollbar{display: none;}/*隐藏多文本框滚动条*/
 .wraper .col-lg{color:#6baf44;3e82f7}
 .wraper .col-lblue{color:#3e82f7}
 .wraper .col-y{color:#fdb94d;}
+.wraper .col_y{color:#ff9f00;}
+.wraper .col_r{color:#ff1e84;}
+.wraper .col_b{color:#009eff;}
+.wraper .col_g{color:#00bc6f;}
 .wraper .bgff{background: #fff;}
 .wraper .ft26{font-size:0.26rem;}
 .wraper .mt0{margin-top:0;}
