@@ -139,10 +139,6 @@
     }
 </script>
 <script>
-    window.onBackView = function(){
-        location.reload();
-    };
-    
     function setList(){
         if(book_html[type][status]) {
             $('#list').html(book_html[type][status]);
