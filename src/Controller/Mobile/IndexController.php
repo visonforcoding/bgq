@@ -26,9 +26,12 @@ class IndexController extends AppController {
         //$umengObj = new Umeng($key, $secret);
         //var_dump($umengObj);
         $this->autoRender = false;
-        $res = \Cake\Cache\Cache::write('foo', 'bar2', 'redis');
-        //debug($res);
-        debug(\Cake\Cache\Cache::read('foo', 'redis'));
+//        $res = \Cake\Cache\Cache::write('foo', 'bar2', 'redis');
+//        //debug($res);
+//        debug(\Cake\Cache\Cache::read('foo', 'redis'));
+        $wordstr = file_get_contents(ROOT.'/config/words');
+        $words = preg_match_all('/(.*?)\n/', $wordstr,$matches);
+        debug($matches);
         //$filename = WWW_ROOT.'/upload/user/avatar/test.jpg';
         //\Intervention\Image\ImageManagerStatic::make($filename)
                 //->save('test.jpg',20);

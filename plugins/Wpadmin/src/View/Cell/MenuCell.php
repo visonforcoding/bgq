@@ -55,8 +55,6 @@ class MenuCell extends Cell {
     protected function initData() {
         $admin = $this->request->session()->read('User.admin');
         $menus = \Cake\Cache\Cache::read($admin->username . '_menus');
-        \Cake\Log\Log::debug($admin,'devlog');
-        \Cake\Log\Log::debug($menus,'devlog');
         if ($menus === false) {
             $Menu = \Cake\ORM\TableRegistry::get('menu');
             if ($admin->username == 'admin') {

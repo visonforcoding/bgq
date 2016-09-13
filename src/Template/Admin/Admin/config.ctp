@@ -21,7 +21,8 @@
                     <?php if ($key % 3 == 1): ?>
                         <tr>
                         <?php endif; ?>
-                        <th class="text-right w150"><?= $menu->name ?><input class="ml5" type="checkbox" name="allchecker[]" onclick="selectAll(this,'next')"></th>
+                        <th class="text-right w150"><?= $menu->name ?><input class="ml5" type="checkbox" value="<?=$menu->id?>" name="menus[_ids][]" 
+                               <?php if (in_array($menu->id, $selMenuIds)): ?>checked="true"<?php endif; ?> onclick="selectAll(this,'next')"></th>
                         <td class="col-md-3">
                             <?php if ($menu->children): ?>
                                 <?php foreach ($menu->children as $sub_menu): ?>
