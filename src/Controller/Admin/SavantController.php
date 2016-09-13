@@ -207,18 +207,43 @@ class SavantController extends AppController {
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
         $Table = $this->Savant;
-        $column = ['姓名', '公司', '职位', '手机号', '约见次数', '推荐次数', '注册时间'];
+        $column = ['姓名', '公司', '职位', '手机号','性别', '约见次数', '推荐次数', '审核情况','注册时间'];
         $query = $Table->find();
         $query->contain(['Users']);
         $query->hydrate(false);
         $query->select(['user_truename' => 'Users.truename', 'user_company' => 'Users.company', 'user_position' => 'Users.position',
-            'user_phone' => 'Users.phone', 'meet_nums' => 'Users.meet_nums', 'reco_nums' => 'reco_nums', 'create_time' => 'Users.create_time']);
+            'user_phone' => 'Users.phone','gender'=>'Users.gender', 'meet_nums' => 'Users.meet_nums', 'reco_nums' => 'reco_nums',
+            'savant_status'=>'Users.savant_status','create_time' => 'Users.create_time']);
         if (!empty($where)) {
             $query->where($where);
         }
         if (!empty($sort) && !empty($order)) {
             $query->order(['is_top' => 'desc', $sort => $order]);
         }
+        $query->formatResults(function($items) {
+            return $items->map(function($item) {
+                        //时间语义化转换
+                        $item['gender'] = $item['gender'] == '1' ? '男' : '女';
+                        switch ($item['savant_status']) {
+                            case '1':
+                                $item['savant_status'] = '未认证';
+                                break;
+                            case '2':
+                                $item['savant_status'] = '待审核';
+                                break;
+                            case '3':
+                                $item['savant_status'] = '审核通过';
+                                break;
+                            case '0':
+                                $item['savant_status'] = '审核不通过';
+                                break;
+                            default:
+                                $item['savant_status'] = '普通';
+                                break;
+                        }
+                        return $item;
+                    });
+        });
         $res = $query->toArray();
         $this->autoRender = false;
         $filename = '会员数据_' . date('Y-m-d') . '.xls';
