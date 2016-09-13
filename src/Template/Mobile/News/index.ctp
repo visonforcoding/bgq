@@ -39,7 +39,8 @@
                     <span class="iconfont">&#xe61b;</span>{#praise_nums#}
                 </div>
                 <div class="sec-comment">
-                    <span class="iconfont">&#xe61d;</span>{#comment_nums#}
+                    <!--<span class="iconfont">&#xe61d;</span>{#comment_nums#}-->
+                    <span class="iconfont">&#xe61d;</span>0
                 </div>
             </div>
             <div class="sec-b-r">
