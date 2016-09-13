@@ -596,6 +596,11 @@ class ActivityController extends AppController {
             } elseif(mb_strlen($data['body']) > 300){
                 return $this->Util->ajaxReturn(false, '请控制评论内容300字以下');
             }
+            $patt = $this->Util->loadWordPatt();
+            if(preg_match($patt, $data['body'])){
+                $data['body_origin'] = $data['body'];
+                $data['body'] = preg_replace($patt, '**', $data['body']);
+            }
             $data['user_id'] = $this->user->id;
             $data['activity_id'] = $id;
             $activitycom = $this->Activity->Activitycom->newEntity();

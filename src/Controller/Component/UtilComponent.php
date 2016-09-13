@@ -77,7 +77,26 @@ class UtilComponent extends Component {
         $filename = $uniqid . '.jpg';
         $image = \Intervention\Image\ImageManagerStatic::make($url);
         $image->save($savePath . $filename);
-        return $urlpath.$filename;
+        return $urlpath . $filename;
+    }
+
+    /**
+     * 获取匹配模型
+     * @return string
+     */
+    public function loadWordPatt() {
+        $pattern = \Cake\Cache\Cache::read('wordpatt', 'redis');
+        if (!$pattern) {
+            $words = $WordTable->find('list', [
+                        'keyField' => 'id',
+                        'valueField' => 'body'
+                    ])->hydrate(false)->toList();
+            $pattern = '';
+            $patt = implode('|', array_values($words));
+            $pattern = '/' . $patt . '/';
+            \Cake\Cache\Cache::write('wordpatt', $pattern, 'redis');
+        }
+        return $pattern;
     }
 
 }

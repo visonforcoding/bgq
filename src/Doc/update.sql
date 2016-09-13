@@ -758,4 +758,10 @@ ALTER TABLE `pushlog`
 	ADD COLUMN `remark` VARCHAR(250) NOT NULL COMMENT '备注' AFTER `is_success`;
 	
 ALTER TABLE `pushlog`
-	CHANGE COLUMN `is_success` `is_success` TINYINT(2) NOT NULL DEFAULT '1' COMMENT '是否成功' AFTER `type`;		
+	CHANGE COLUMN `is_success` `is_success` TINYINT(2) NOT NULL DEFAULT '1' COMMENT '是否成功' AFTER `type`;
+
+ALTER TABLE `activitycom`
+	ADD COLUMN `body_origin` VARCHAR(550) NULL DEFAULT '' COMMENT '原始内容' AFTER `body`;
+
+ALTER TABLE `newscom`
+	ADD COLUMN `body_origin` VARCHAR(500) NULL DEFAULT '' COMMENT '原始内容' AFTER `body`;				
