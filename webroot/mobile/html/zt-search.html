@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="format-detection"content="telephone=no, email=no" />
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<title>并购圈</title>
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/zt.css"/>
+		<script src="../js/view.js"></script>
+		<script src="../js/zepto.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<header>
+			<div class='inner'>
+				<a href='javascript:history.go(-1);' class='toback'></a>
+				<h1>搜索</h1>
+			</div>
+		</header>
+		
+		<div class="fixedwraper">
+			<div class='h-news-search'>
+				<a href='javascript:void(0);' class='iconfont news-serch'>&#xe618;</a>
+				<form action="" ><h1><input type="text" placeholder="请输入关键词"></h1></form>
+				<div class="h-regiser" id="doSearch">搜 索</div>
+			</div>
+			<section class="z_items content_inner">
+				<dl>
+					<dt class="posi_top"><img src="../images/nv01.png" alt="" /><span></span><i>001</i></dt>
+					<dd class="zt_name mt10"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+					<dd class="zt_commpany">君汉控股（深圳）有限公司</dd>
+					<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+				</dl>
+				<dl>
+					<dt class="posi_top"><img src="../images/nv02.png" alt="" /><span></span><i>002</i></dt>
+					<dd class="zt_name"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+					<dd class="zt_commpany">君汉控股（深圳）有限公司</dd>
+					<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+				</dl>
+				</section>
+		</div>
+	<script type="text/javascript">
+//		$('.a-s-title .orgname').on('touchstart',function(){
+//			$(this).toggleClass('active');
+////			$('.a-s-mark').toggleClass('disp');
+//			if($('.a-s-mark').hasClass('disp')){
+//				$('.a-s-mark').removeClass('disp').addClass('block');
+//			}else if($('.a-s-mark').hasClass('block')){
+//				$('.a-s-mark').removeClass('block').addClass('disp');
+//			}else{
+//				$('.a-s-mark').addClass('disp');
+//			}
+//		})
+		$('#toggle-icon').on('touchstart',function(){
+			$(this).toggleClass('active');
+			console.log(111);
+		})
+	</script>
+	</body>
+</html>
