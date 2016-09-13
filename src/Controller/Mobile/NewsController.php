@@ -63,6 +63,11 @@ class NewsController extends AppController {
             } elseif(mb_strlen($com['content']) > 300){
                 return $this->Util->ajaxReturn(false, '请控制评论内容300字以下');
             }
+            $patt = $this->Util->loadWordPatt();
+            if(preg_match($patt, $com['content'])){
+                $data['body_origin'] = $com['content'];
+                $data['body'] = preg_replace($patt, '**', $com['content']);
+            }
             $reply_id = $this->request->data('reply_id');
             $CommentTable = \Cake\ORM\TableRegistry::get('newscom');
             if(is_numeric($reply_id)&&$reply_id>0){
@@ -74,7 +79,8 @@ class NewsController extends AppController {
             $comment = $CommentTable->newEntity(array_merge($data,[
                 'user_id'=>  $this->user->id,
                 'news_id'=>  $this->request->data('id'),
-                'body'=>  $this->request->data('content')
+                'body'=>  $data['body'],
+                'body_origin'=>$data['body_origin']
             ]));
             $newComment = $CommentTable->save($comment);
             if ($newComment) {
