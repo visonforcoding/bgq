@@ -19,7 +19,7 @@
                 <input type="text" name="end_time" class="form-control date_timepicker_end" id="keywords" placeholder="结束时间">
             </div>
             <a onclick="doSearch();" class="btn btn-info"><i class="icon icon-search"></i>搜索</a>
-            <a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>
+            <!--<a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>-->
         </div>
     </form>
     <table id="list"><tr><td></td></tr></table> 

@@ -206,10 +206,10 @@ class SeniorController extends AppController {
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
         $Table = $this->User;
-        $column = ['手机号', '姓名', '等级', '身份证', '公司', '职位', '邮箱', '性别', '擅长业务', '常驻城市', '项目经验', '业务能力',  '创建时间'];
+        $column = ['手机号', '姓名', '会员','等级', '公司', '职位', '邮箱', '性别', '常驻城市', '会员认证','账号状态', '注册时间'];
         $query = $Table->find();
         $query->hydrate(false);
-        $query->select(['phone', 'truename', 'level', 'idcard', 'company', 'position', 'email', 'gender', 'goodat', 'city', 'ymjy', 'ywnl',  'create_time']);
+        $query->select(['phone', 'truename', 'level','grade', 'company', 'position', 'email', 'gender', 'city','savant_status','enabled', 'create_time']);
         if (!empty($where)) {
             $query->where($where);
         }
@@ -220,6 +220,21 @@ class SeniorController extends AppController {
             return $items->map(function($item) {
                         //时间语义化转换
                         $item['gender'] = $item['gender'] == '1' ? '男' : '女';
+                        $item['enabled'] = $item['enabled'] == '1' ? '正常' : '禁用';
+                        switch ($item['grade']) {
+                            case '1':
+                                $item['grade'] = '普通';
+                                break;
+                            case '2':
+                                $item['grade'] = '高级';
+                                break;
+                            case '3':
+                                $item['grade'] = 'vip';
+                                break;
+                            default:
+                                $item['grade'] = '普通';
+                                break;
+                        }
                         switch ($item['level']) {
                             case '1':
                                 $item['level'] = '普通';
@@ -231,13 +246,29 @@ class SeniorController extends AppController {
                                 $item['level'] = '普通';
                                 break;
                         }
-                        $item['gender'] = $item['gender'] == '1' ? '男' : '女';
+                        switch ($item['savant_status']) {
+                            case '1':
+                                $item['savant_status'] = '未认证';
+                                break;
+                            case '2':
+                                $item['savant_status'] = '待审核';
+                                break;
+                            case '3':
+                                $item['savant_status'] = '审核通过';
+                                break;
+                            case '0':
+                                $item['savant_status'] = '审核不通过';
+                                break;
+                            default:
+                                $item['savant_status'] = '普通';
+                                break;
+                        }
                         return $item;
                     });
         });
         $res = $query->toArray();
         $this->autoRender = false;
-        $filename = '会员_' . date('Y-m-d') . '.xls';
+        $filename = '高级会员_' . date('Y-m-d') . '.xlsx';
         $this->loadComponent('Export');
         $this->Export->phpexcelExport($filename, $column, $res);
     }
