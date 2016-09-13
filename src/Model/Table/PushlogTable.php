@@ -64,9 +64,9 @@ class PushlogTable extends Table {
                 ->requirePresence('title', 'create')
                 ->notEmpty('title');
 
-        $validator
-                ->requirePresence('body', 'create')
-                ->notEmpty('body');
+//        $validator
+//                ->requirePresence('body', 'create')
+//                ->notEmpty('body');
 
         $validator
                 ->integer('type')
