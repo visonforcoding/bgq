@@ -1,13 +1,5 @@
 <body>
-    <a href="/Wx/share-download/activity/<?= $activity->id ?>">
-        <div class="transmitpage clearfix" hidden id="share_download">
-            <div>
-                <h1><img src="/mobile/images/logo-wx.png"></h1>
-                <h3>并购帮<span>并购人的生活方式</span></h3>
-            </div>
-            <span class="green-btn">立即下载</span>
-        </div>
-    </a>
+    <?= $this->element('share', ['table'=>'activity', 'id'=>$activity->id]); ?>
     <div class="wraper" id="activity_detail" >
         <section class="newscon-box a-detail">
             <h3><?= $activity->title; ?><time class='a_title_time'><?= $activity->create_time->format('Y-m-d H:i:s'); ?></time></h3>

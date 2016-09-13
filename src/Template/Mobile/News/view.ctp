@@ -8,15 +8,7 @@
           <a href="#this" class='iconfont share h-regiser'>&#xe614;</a> -->
     </div>
 </header>
-<a href="/Wx/share-download/news/<?= $news->id ?>" id="share_download_link">
-    <div class="transmitpage clearfix" hidden id="share_download">
-        <div>
-            <h1><img src="/mobile/images/logo-wx.png"></h1>
-            <h3>并购帮<span>并购人的生活方式</span></h3>
-        </div>
-        <span class="green-btn">立即下载</span>
-    </div>
-</a>
+<?= $this->element('share', ['table'=>'news', 'id'=>$news->id]); ?>
 <div class="wraper" id="news">
     <?php if (isset($news)): ?>
         <section class="newscon-box">
