@@ -87,6 +87,7 @@ class UtilComponent extends Component {
     public function loadWordPatt() {
         $pattern = \Cake\Cache\Cache::read('wordpatt', 'redis');
         if (!$pattern) {
+            $WordTable = \Cake\ORM\TableRegistry::get('Word');
             $words = $WordTable->find('list', [
                         'keyField' => 'id',
                         'valueField' => 'body'
