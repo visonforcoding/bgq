@@ -262,9 +262,12 @@
     window.activitycom = <?= json_encode($activity->activitycom); ?>;
 </script>
 <script>
-    if (location.href.indexOf('?share=1') != -1) {
-        $('#share_download').show();
-    }
+    setTimeout(function(){
+        if (location.href.indexOf('?share=1') != -1) {
+            $('#share_download').show();
+        }
+    }, 1000);
+    
     window.article = true;
     window.reply = true;
     window.location.hash = '';
