@@ -559,6 +559,8 @@ class HomeController extends AppController {
                     }
                 }
             }
+            $my_meet = $book_nocomfirm + $book_comfirm + $book_nopass;
+            $meet_me = $savant_comfirm + $savant_nocomfirm + $savant_nopass;
             $this->set([
                 'pageTitle' => '我的约见',
                 'books' => $books,
@@ -569,6 +571,8 @@ class HomeController extends AppController {
                 'book_nocomfirm'=>$book_nocomfirm,
                 'book_comfirm'=>$book_comfirm,
                 'book_nopass'=>$book_nopass,
+                'my_meet' => $my_meet,
+                'meet_me' => $meet_me,
             ]);
             $this->set(compact('books', 'type'));
         }

@@ -6,9 +6,9 @@
     </div>
 </header>
 <div class="wraper">
-    <div class="inner my-home-menu" id="typeTab">
-        <span type="books">我约见</span>
-        <span type="savant_books">约见我</span>
+    <div class="inner my-home-menu m-message-top" id="typeTab">
+        <span type="books">我约见<?php if($my_meet): ?><i><?= $my_meet ?></i><?php endif; ?></span>
+        <span type="savant_books">约见我<?php if($meet_me): ?><i><?= $meet_me ?></i><?php endif; ?></span>
     </div>
     <div  class="inner my-home-slidemenu" id="statusTab">
         <span status="2">未通过<i id="nopass"></i></span>
