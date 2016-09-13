@@ -180,7 +180,7 @@
                 <div class="input-group col-md-8 col-md-offset-1 mt20">
                     <span class="input-group-addon">工作描述</span>
                     <textarea  name="descb"  class="form-control" ></textarea>
-                    <span title="添加" class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
+                    <span title="添加" class="input-group-addon add"><i style="color:blue" class="icon icon-save"></i></span>
                 </div>
             </div>
         </div>
@@ -216,7 +216,7 @@
                 <input type="text" name="major" class="form-control" placeholder="经济管理">
                 <span class="input-group-addon">学历</span>
                 <?php echo $this->form->select('education', $educationConf, ['class' => 'form-control']) ?>
-                <span title="添加" class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
+                <span title="添加" class="input-group-addon add"><i style="color:blue" class="icon icon-save"></i></span>
             </div>
         </div>
         <div class="tab-pane in " id="tab4">
