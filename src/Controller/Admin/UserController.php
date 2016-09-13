@@ -85,6 +85,11 @@ class UserController extends AppController {
             ];
             $user = $this->User->patchEntity($user,$data);
             if ($this->User->save($user)) {
+                 //redis 删除该记录
+                $redis = new \Redis();
+                $redis_conf = \Cake\Core\Configure::read('redis_server');
+                $redis->connect($redis_conf['host'],$redis_conf['port']);
+                $redis->sAdd('phones',$user->phone);
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {
                 $errors = $user->errors();
