@@ -915,9 +915,9 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .e-info-box .changeflex div{width:100%;margin-top:0.2rem;}
 .e-info-box .changeflex p{line-height: 0.36rem;color:#9ba4ad;font-size:0.24rem;}
 .no-pass b,.no-pass p{line-height: 0.36rem;}
-.m-message-top a{position:relative;}
-.m-message-top a i{display: block;width:14px;height:14px;background: #e01a48;position:absolute;border-radius: 50%;line-height: 14px;text-align: center;color:#fff;right:0.8rem;top:0.06rem;font-size:12px;}
-.m-message-top a.active i{background: #fff;color:#d52457}
+.m-message-top a,.m-message-top span{position:relative;}
+.m-message-top a i,.m-message-top span i{display: block;width:14px;height:14px;background: #e01a48;position:absolute;border-radius: 50%;line-height: 14px;text-align: center;color:#fff;right:0.8rem;top:0.06rem;font-size:12px;}
+.m-message-top a.active i,.m-message-top span.active i{background: #fff;color:#d52457}
 .systerm-info-box li{margin-top:0.2rem;border-top:1px #e5e5e5 solid;background: #fff;border-bottom: 1px #e5e5e5 solid;padding: 0.2rem 0.3rem;overflow: hidden;}
 .systerm-info-box li h3{font-size:0.28rem;color:#da1f50;}
 .systerm-info-box li span:last-of-type{display: block;color:#969fa9;}
