@@ -15,19 +15,19 @@
                     <div class="allmenu">
                         <div class="menulist clearfix" id="allsort">
                             <a href="/activity/search/0">
-                                <i class="iconfont">&#xe68c;</i>
+                                <i class="iconfont col_y">&#xe68c;</i>
                                 <span>沙龙论坛</span>
                             </a>
                             <a href="/activity/search/1">
-                                <i class="iconfont">&#xe68f;</i>
+                                <i class="iconfont col_r">&#xe68f;</i>
                                 <span>生活聚会</span>
                             </a>
                             <a href="/activity/search/2">
-                                <i class="iconfont">&#xe690;</i>
+                                <i class="iconfont col_b">&#xe690;</i>
                                 <span>学习培训</span>
                             </a>
                             <a href="/activity/search/3">
-                                <i class="iconfont">&#xe691;</i>
+                                <i class="iconfont col_g">&#xe691;</i>
                                 <span>会务服务</span>
                             </a>
                     </div>
