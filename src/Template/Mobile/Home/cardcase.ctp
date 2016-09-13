@@ -62,6 +62,9 @@
             }
             return d;
         });
+        if($('#card').html() == ''){
+            $('#card').html('<div class="nocontent"><i class="iconfont">&#xe622;</i><span>暂无未回赠的人</span></div>');
+        }
     }
     
     dealData(<?= $cardjson ?>);
@@ -75,11 +78,9 @@
                 url: "/home/sendBack/" + $(em).attr('uid'),
                 func: function(msg){
                     if(typeof msg == 'object') {
+                        $.util.alert(msg.msg);
                         if(msg.status) {
                             $(em).children('span').text('已回赠');
-                            $.util.alert(msg.msg);
-                        } else {
-                            $.util.alert(msg.msg);
                         }
                     }
                 }
@@ -101,7 +102,7 @@
                             if(msg.status) {
                                 dealData(msg.data);
                             } else {
-                                $.util.alert(msg.msg);
+                                $('#card').html('<div class="nocontent"><i class="iconfont">&#xe622;</i><span>暂无已回赠的人</span></div>');
                             }
                         }
                     }
@@ -122,7 +123,7 @@
                             if(msg.status) {
                                 dealData(msg.data);
                             } else {
-                                $.util.alert(msg.msg);
+                                $('#card').html('<div class="nocontent"><i class="iconfont">&#xe622;</i><span>暂无未回赠的人</span></div>');
                             }
                         }
                     }
