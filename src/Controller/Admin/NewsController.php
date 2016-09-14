@@ -283,7 +283,7 @@ class NewsController extends AppController {
                     return $q->select(['id','truename','avatar','company','position']);
                 },'Reply'=>function($q){
                     return $q->select(['id','truename','avatar','company','position']);
-                }])->hydrate(true)->where(['news_id'=>$id])
+                }])->hydrate(true)->where(['news_id'=>$id,'is_delete'=>0])
                         ->toArray();
         $comsHtml = $this->recyOutputComs($coms); 
         $this->set([
@@ -387,9 +387,9 @@ class NewsController extends AppController {
                 $news = $this->News->get($com->news_id);
                 $news->comment_nums -= 1;
                 $this->News->save($news);
-                return $this->Util->ajaxReturn(true, '回复成功');
+                return $this->Util->ajaxReturn(true, '删除成功');
             } else {
-                return $this->Util->ajaxReturn(false, '回复失败');
+                return $this->Util->ajaxReturn(false, '删除失败');
             }
         }
     }
