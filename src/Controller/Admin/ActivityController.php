@@ -373,7 +373,7 @@ class ActivityController extends AppController {
         $this->viewBuilder()->autoLayout(false);
         $ActivitycomTable = \Cake\ORM\TableRegistry::get('Activitycom');
         $activity= $this->Activity->find()->select(['id','title'])->first();
-        $comsCount = $ActivitycomTable->find()->where(['activity_id'=>$id])->count();
+        $comsCount = $ActivitycomTable->find()->where(['activity_id'=>$id,'is_delete'=>0])->count();
         $coms = $ActivitycomTable->find('threaded', [
                     'keyField' => 'id',
                     'parentField' => 'pid'
