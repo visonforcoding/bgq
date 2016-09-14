@@ -58,9 +58,12 @@ class UtilComponent extends Component {
         $actionlog->useragent = $this->request->header('User-Agent');
         $actionlog->action = strtolower($this->request->param('action'));
         $actionlog->param = $param;
+        if($actionlog->action=='login'){
+            $actionlog->param = '';
+        }
         $actionlog->create_time = date('Y-m-d H:i:s');
         $ck = $actionlogTable->save($actionlog);
-        \Cake\Log\Log::debug($ck);
+        //\Cake\Log\Log::debug($ck);
     }
 
 }

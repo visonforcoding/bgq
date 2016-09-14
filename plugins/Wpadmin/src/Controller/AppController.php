@@ -41,24 +41,24 @@ class AppController extends Controller {
     }
 
     public function beforeFilter(Event $event) {
-       return  $this->checkLogin();
-        //$this->autoLog();
+       $this->checkLogin();
+       $this->autoLog();
     }
 
     public function beforeRender(\Cake\Event\Event $event) {
         $this->viewBuilder()->layout('Wpadmin.layout');
         $this->viewBuilder()->className('Wpadmin.App');
-        $action = strtolower($this->request->param('action'));
-        if (in_array($action, ['add','edit', 'delete', 'exportexcel'])) {
-            \Cake\Log\Log::debug($this->request->method());
-            if($this->request->is(['post', 'put'])){
-                \Cake\Log\Log::debug($action);
-                $msgArray = ['add'=>'添加','edit'=>'修改','delete'=>'删除','exportexcel'=>'导出excel'];
-                $msg = $msgArray[$action];
-                $user = $this->_user->username;
-                $this->Util->actionLog($msg,$user);
-            }
-        }
+//        $action = strtolower($this->request->param('action'));
+//        if (in_array($action, ['add','edit', 'delete', 'exportexcel'])) {
+//            \Cake\Log\Log::debug($this->request->method());
+//            if($this->request->is(['post', 'put'])){
+//                \Cake\Log\Log::debug($action);
+//                $msgArray = ['add'=>'添加','edit'=>'修改','delete'=>'删除','exportexcel'=>'导出excel'];
+//                $msg = $msgArray[$action];
+//                $user = $this->_user->username;
+//                $this->Util->actionLog($msg,$user);
+//            }
+//        }
     }
 
     /**
@@ -92,7 +92,8 @@ class AppController extends Controller {
         $admin = $this->request->session()->check('User.admin');
         if (!$admin) {
             $this->failAccess('请重新登录!');
-            return $this->redirect(['controller' => 'admin', 'action' => 'login']);
+            $this->redirect(['controller' => 'admin', 'action' => 'login']);
+            return;
         }
         // return;
         $this->_user = $this->request->session()->read('User.admin');
