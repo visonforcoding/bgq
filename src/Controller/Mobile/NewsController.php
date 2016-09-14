@@ -63,6 +63,7 @@ class NewsController extends AppController {
             } elseif(mb_strlen($com['content']) > 300){
                 return $this->Util->ajaxReturn(false, '请控制评论内容300字以下');
             }
+            $data['body'] = $com['content'];
             $patt = $this->Util->loadWordPatt();
             if(preg_match($patt, $com['content'])){
                 $data['body_origin'] = $com['content'];
