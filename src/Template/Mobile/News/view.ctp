@@ -275,6 +275,7 @@
                                 setTimeout(function () {
                                     $('#comment_shadow').hide('slow');
                                     $('.shadow-info').removeClass('c-height').addClass('m-height');
+                                    $('#content').val('');
                                 }, 400);
                             } else {
                                 $.util.alert(res.msg);
@@ -335,11 +336,9 @@
                 });
                 break;
             case 'share':
-                if (navigator.userAgent.toLowerCase().indexOf('micromessenger') == -1)
-                {
+                if (navigator.userAgent.toLowerCase().indexOf('micromessenger') == -1) {
                     LEMON.share.banner();
-                } else if ($.util.isWX)
-                {
+                } else if ($.util.isWX) {
                     $('#wxshare').show();
                     $('#shadow').show();
                 }
