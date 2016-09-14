@@ -381,7 +381,7 @@ class ActivityController extends AppController {
                     return $q->select(['id','truename','avatar','company','position']);
                 },'Replyusers'=>function($q){
                     return $q->select(['id','truename','avatar','company','position']);
-                }])->hydrate(true)->where(['activity_id'=>$id])
+                }])->hydrate(true)->where(['activity_id'=>$id,'is_delete'=>0])
                         ->toArray();
         $comsHtml = $this->recyOutputComs($coms); 
         $this->set([
@@ -481,9 +481,9 @@ class ActivityController extends AppController {
                 $news = $this->Activity->get($com->activity_id);
                 $news->comment_nums -= 1;
                 $this->Activity->save($news);
-                return $this->Util->ajaxReturn(true, '回复成功');
+                return $this->Util->ajaxReturn(true, '删除成功');
             } else {
-                return $this->Util->ajaxReturn(false, '回复失败');
+                return $this->Util->ajaxReturn(false, '删除失败');
             }
         }
     }
