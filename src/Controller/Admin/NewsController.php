@@ -275,7 +275,7 @@ class NewsController extends AppController {
         $this->viewBuilder()->autoLayout(false);
         $NewscomTable = \Cake\ORM\TableRegistry::get('Newscom');
         $news = $this->News->find()->select(['id','title'])->first();
-        $comsCount = $NewscomTable->find()->where(['news_id'=>$id])->count();
+        $comsCount = $NewscomTable->find()->where(['news_id'=>$id,'is_delete'=>'0'])->count();
         $coms = $NewscomTable->find('threaded', [
                     'keyField' => 'id',
                     'parentField' => 'pid'
