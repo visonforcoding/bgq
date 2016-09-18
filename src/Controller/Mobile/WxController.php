@@ -309,7 +309,7 @@ class WxController extends AppController {
             }
             $union_id = $res->unionid;
             $open_id = $res->openid;
-            $user = $this->User->findByUnion_id($union_id)->first();
+            //$user = $this->User->findByUnion_id($union_id)->first();
             $user = $this->User->find()->where(['union_id'=>$union_id,'enabled'=>1,'is_del'=>0])->first();
             if ($user) {
                 //直接登陆
