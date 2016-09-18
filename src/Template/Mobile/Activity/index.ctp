@@ -108,6 +108,7 @@
 
         $.getJSON('/activity/getMoreActivity/1', function (res) {
             if (res.status) {
+                $('#activity').html('');
                 var html = dealData(res.data);
                 $('#activity').append(html);
             }
