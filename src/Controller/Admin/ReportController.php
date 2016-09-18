@@ -78,10 +78,8 @@ class ReportController extends AppController {
                 $pv->os = 1;
             }
             $pv->os_version = $this->osVersion($pv->useragent);
-            print_r($PvlogTable->save($pv));
-            exit();
+            $PvlogTable->save($pv);
         }
-        exit();
     }
 
 }
