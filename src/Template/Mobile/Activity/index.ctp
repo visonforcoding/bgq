@@ -93,25 +93,27 @@
     if ($.util.isIOS) {
         $('#iosBottom').show();
     }
-    $.getJSON('/activity/get-banner', function (res) {
-        if (res.status) {
-            var tab = [], html = $.util.dataToTpl('', 'bannerTpl', res.data, function (d) {
-                tab.push('<span></span>');
-                return d;
-            });
-            $('#imgList').html(html);
-            $('#imgTab').html(tab.join(''));
-            var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'), $('.a-banner'));
-        }
-    });
+    window.onActiveView = function(){
+        $.getJSON('/activity/get-banner', function (res) {
+            if (res.status) {
+                var tab = [], html = $.util.dataToTpl('', 'bannerTpl', res.data, function (d) {
+                    tab.push('<span></span>');
+                    return d;
+                });
+                $('#imgList').html(html);
+                $('#imgTab').html(tab.join(''));
+                var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'), $('.a-banner'));
+            }
+        });
 
-    $.getJSON('/activity/getMoreActivity/1', function (res) {
-        if (res.status) {
-            var html = dealData(res.data);
-            $('#activity').append(html);
-        }
-    });
-
+        $.getJSON('/activity/getMoreActivity/1', function (res) {
+            if (res.status) {
+                var html = dealData(res.data);
+                $('#activity').append(html);
+            }
+        });
+    };
+    window.onActiveView();
     function dealData(data) {
         var html = $.util.dataToTpl('', 'activity_tpl', data, function (d) {
             d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="registered">已报名</span>';
