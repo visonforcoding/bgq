@@ -102,6 +102,7 @@
     window.onActiveView = function(){
         $.getJSON('/news/get-more-news/1',function(res){
             if(res.status){
+                $('#news').html('');
                 var html = dealData(res.data);
                 $('#news').append(html);
             }
