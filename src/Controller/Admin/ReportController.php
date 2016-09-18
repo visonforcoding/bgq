@@ -33,6 +33,19 @@ class ReportController extends AppController {
         if ($user) {
             $pv->user_id = $user->id;
         }
+        if ($this->isApp($pv->useragent)) {
+            $pv->is_app = 1;
+        }
+        if ($this->isWeixin($pv->useragent)) {
+            $pv->is_app = 2;
+        }
+        if ($this->isAndroid($pv->useragent)) {
+            $pv->os = 2;
+        }
+        if ($this->isIphone($pv->useragent)) {
+            $pv->os = 1;
+        }
+        $pv->os_version = $this->osVersion($pv->useragent);
         $pv->useragent = $this->request->header('User-Agent');
         $PvlogTable->save($pv);
         exit();
@@ -53,8 +66,9 @@ class ReportController extends AppController {
     protected function isWeixin($ua) {
         return preg_match('/MicroMessenger/i', $ua);
     }
+
     protected function osVersion($ua) {
-        return preg_match('/(?:Android|iPhone\sOS)\s([0-9_\.]+)/i', $ua,$matches)?$matches[1]:'';
+        return preg_match('/(?:Android|iPhone\sOS)\s([0-9_\.]+)/i', $ua, $matches) ? $matches[1] : '';
     }
 
     /**
@@ -65,16 +79,16 @@ class ReportController extends AppController {
         $PvlogTable = \Cake\ORM\TableRegistry::get('Pvlog');
         $pvlogs = $PvlogTable->find()->toArray();
         foreach ($pvlogs as $pv) {
-            if($this->isApp($pv->useragent)){
+            if ($this->isApp($pv->useragent)) {
                 $pv->is_app = 1;
             }
-            if($this->isWeixin($pv->useragent)){
+            if ($this->isWeixin($pv->useragent)) {
                 $pv->is_app = 2;
             }
-            if($this->isAndroid($pv->useragent)){
+            if ($this->isAndroid($pv->useragent)) {
                 $pv->os = 2;
             }
-            if($this->isIphone($pv->useragent)){
+            if ($this->isIphone($pv->useragent)) {
                 $pv->os = 1;
             }
             $pv->os_version = $this->osVersion($pv->useragent);
