@@ -99,13 +99,15 @@
         return html;
     }
     
-    
-    $.getJSON('/news/get-more-news/1',function(res){
-        if(res.status){
-            var html = dealData(res.data);
-            $('#news').append(html);
-        }
-    });
+    window.onActiveView = function(){
+        $.getJSON('/news/get-more-news/1',function(res){
+            if(res.status){
+                var html = dealData(res.data);
+                $('#news').append(html);
+            }
+        });
+    };
+    window.onActiveView();
 
     var page = 2;
     setTimeout(function(){
