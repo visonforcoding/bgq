@@ -156,6 +156,8 @@
                     }
                     if (res.data.meetMsg) {
                         $('#meetMsg').addClass('opci');
+                    } else {
+                        $('#meetMsg').removeClass('opci');
                     }
                 } else {
                     $('#avatar').attr('src', '/mobile/images/touxiang.png');

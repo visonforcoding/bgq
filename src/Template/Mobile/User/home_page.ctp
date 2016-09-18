@@ -433,7 +433,6 @@
 //                            $('#follow_btn').removeClass('focusgray');
                         }
                     }
-
                 }
             });
         });
