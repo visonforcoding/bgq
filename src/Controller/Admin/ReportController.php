@@ -64,6 +64,7 @@ class ReportController extends AppController {
         set_time_limit(0);
         $PvlogTable = \Cake\ORM\TableRegistry::get('Pvlog');
         $pvlogs = $PvlogTable->find()->toArray();
+        debug($pvlogs);
         foreach ($pvlogs as $pv) {
             if($this->isApp($pv->useragent)){
                 $pv->is_app = 1;
