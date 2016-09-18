@@ -189,17 +189,23 @@ class AppController extends Controller {
                     \Cake\Log\Log::debug($res, 'devlog');
                     $this->request->session()->write('Login.wxbase', true);
                     $user = false;
-//        if (isset($res->unionid)) {
-//            $union_id = $res->unionid;
-//            $user = $this->User->findByUnion_idAndEnabled($union_id,1)->first();
-//        }elseif (isset($res->openid)) {
-                    $open_id = $res->openid;
                     $UserTable = \Cake\ORM\TableRegistry::get('User');
-                    $user = $UserTable->find()->where(['wx_openid' => $open_id, 'enabled' => 1, 'is_del' => 0])->first();
+                    if (isset($res->unionid)) {
+                        $union_id = $res->unionid;
+                        $user = $UserTable->find()->where(['union_id' => $union_id, 'enabled' => 1, 'is_del' => 0])->first();
+                    }
+                    if (!isset($res->unionid) && isset($res->openid)) {
+                        $open_id = $res->openid;
+                        $user = $UserTable->find()->where(['wx_openid' => $open_id, 'enabled' => 1, 'is_del' => 0])->first();
+                    }
                     if ($user) {
                         //通过微信 获取到 在平台上有绑定的用户  就默认登录
                         if (empty($user->union_id) && isset($res->unionid)) {
                             $user->union_id = $res->unionid;
+                            $UserTable->save($user);
+                        }
+                        if (empty($user->wx_openid) && isset($res->openid)) {
+                            $user->wx_openid = $res->openid;
                             $UserTable->save($user);
                         }
                         $this->request->session()->write('User.mobile', $user);
