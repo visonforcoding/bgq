@@ -93,19 +93,18 @@
     if ($.util.isIOS) {
         $('#iosBottom').show();
     }
+    $.getJSON('/activity/get-banner', function (res) {
+        if (res.status) {
+            var tab = [], html = $.util.dataToTpl('', 'bannerTpl', res.data, function (d) {
+                tab.push('<span></span>');
+                return d;
+            });
+            $('#imgList').html(html);
+            $('#imgTab').html(tab.join(''));
+            var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'), $('.a-banner'));
+        }
+    });
     window.onActiveView = function(){
-        $.getJSON('/activity/get-banner', function (res) {
-            if (res.status) {
-                var tab = [], html = $.util.dataToTpl('', 'bannerTpl', res.data, function (d) {
-                    tab.push('<span></span>');
-                    return d;
-                });
-                $('#imgList').html(html);
-                $('#imgTab').html(tab.join(''));
-                var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'), $('.a-banner'));
-            }
-        });
-
         $.getJSON('/activity/getMoreActivity/1', function (res) {
             if (res.status) {
                 $('#activity').html('');
