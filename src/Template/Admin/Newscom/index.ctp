@@ -21,7 +21,7 @@
                 <input type="text" name="end_time" class="form-control date_timepicker_end" id="keywords" placeholder="结束时间">
             </div>
             <a onclick="doSearch();" class="btn btn-info"><i class="icon icon-search"></i>搜索</a>
-            <a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>
+            <!--<a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>-->
         </div>
     </form>
     <table id="list"><tr><td></td></tr></table> 
@@ -125,7 +125,7 @@
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/admin/activity/delete',
+                            url: '/admin/newscom/delete',
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
@@ -158,7 +158,7 @@
                     searchData['sidx'] = sortColumnName;
                     searchData['sort'] = sortOrder;
                     var searchQueryStr = $.param(searchData);
-                    $("body").append("<iframe src='/admin/activity/exportExcel<?php if ($id): ?>/<?= $id ?><?php endif; ?>?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                    $("body").append("<iframe src='/admin/newscom/exportExcel<?php if ($id): ?>/<?= $id ?><?php endif; ?>?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
 
                 function doView(id) {

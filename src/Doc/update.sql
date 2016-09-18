@@ -764,4 +764,14 @@ ALTER TABLE `activitycom`
 	ADD COLUMN `body_origin` VARCHAR(550) NULL DEFAULT '' COMMENT '原始内容' AFTER `body`;
 
 ALTER TABLE `newscom`
-	ADD COLUMN `body_origin` VARCHAR(500) NULL DEFAULT '' COMMENT '原始内容' AFTER `body`;				
+	ADD COLUMN `body_origin` VARCHAR(500) NULL DEFAULT '' COMMENT '原始内容' AFTER `body`;		
+
+
+#9.18
+ALTER TABLE `pvlog`
+	ADD COLUMN `os` TINYINT(4) NOT NULL DEFAULT '3' COMMENT '1:iphone2:android3:其他' AFTER `act`,
+	ADD COLUMN `is_app` TINYINT(4) NOT NULL DEFAULT '3' COMMENT '1:app2:微信3其他' AFTER `os`,
+	ADD COLUMN `os_version` VARCHAR(10) NOT NULL DEFAULT '3' COMMENT '系统版本号' AFTER `is_app`;
+
+ALTER TABLE `pvlog`
+	CHANGE COLUMN `os_version` `os_version` VARCHAR(10) NOT NULL DEFAULT '' COMMENT '系统版本号' AFTER `is_app`;
