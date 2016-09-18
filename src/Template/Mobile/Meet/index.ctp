@@ -120,21 +120,22 @@
         }
     });
 
-    $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
-        d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
-//        d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
-        d.city = '';
-        var subject = d.subjects.length ? d.subjects[0] : '';
-        if (window.user_id == d.id) {
-//            d.subjects = $.util.dataToTpl('', 'mySubTpl', d.subjects);
-            d.subjects = subject ? '<a href="/meet/subject/'+ subject.id +'" class="line1 w7"><i class="iconfont">&#xe67c;</i>'+ subject.title +'</a>' : '';
-        } else {
-//            d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
-            d.subjects = subject ? '<a href="javascript:$.util.checkLogin(\'/meet/subject-detail/'+ subject.id +'/#index\')" class="line1 w7"><i class="iconfont">&#xe67c;</i>'+ subject.title +'</a>' : '';
-        }
-        d.focus_msg = d.followers.length ? '取消关注' : '加关注';
-        return d;
-    });
+    window.onActiveView = function(){
+        $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
+            d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+    //        d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
+            d.city = '';
+            var subject = d.subjects.length ? d.subjects[0] : '';
+            if (window.user_id == d.id) {
+                d.subjects = subject ? '<a href="/meet/subject/'+ subject.id +'" class="line1 w7"><i class="iconfont">&#xe67c;</i>'+ subject.title +'</a>' : '';
+            } else {
+                d.subjects = subject ? '<a href="javascript:$.util.checkLogin(\'/meet/subject-detail/'+ subject.id +'/#index\')" class="line1 w7"><i class="iconfont">&#xe67c;</i>'+ subject.title +'</a>' : '';
+            }
+            d.focus_msg = d.followers.length ? '取消关注' : '加关注';
+            return d;
+        });
+    };
+    window.onActiveView();
 
     var page = 2;
     setTimeout(function () {
