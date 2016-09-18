@@ -1,4 +1,4 @@
-<?= $this->element('share', ['table'=>'user', 'id'=>$user->id]); ?>
+<?= $this->element('share', ['table' => 'user', 'id' => $user->id]); ?>
 <div class="wraper content_inner">
     <div class="h2"></div>
     <div class="bg-ff">
@@ -201,7 +201,7 @@
                         <?php endif; ?>
                     </ul>
                 <?php endif; ?>
-
+            <?php else: ?>
                 <ul class="basicon worktab">
                     <?php if ($user->careers): ?>
                         <?php foreach ($user->careers as $career): ?>
@@ -273,7 +273,6 @@
                     <ul class="basicon worktab">
                         <?php if ($user->educations): ?>
                             <?php foreach ($user->educations as $education): ?>
-
                                 <li class="inner">
                                     <span>
                                         <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div><?= $education->school ?>
@@ -402,7 +401,7 @@
     })();
 </script>
 <script>
-    setTimeout(function(){
+    setTimeout(function () {
         if (location.href.indexOf('?share=1') != -1) {
             $('#share_download').show();
         }
