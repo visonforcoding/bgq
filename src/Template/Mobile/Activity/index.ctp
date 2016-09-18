@@ -90,6 +90,9 @@
     window.series = <?= json_encode($activityseries) ?>;
 </script>
 <script>
+    window.onActiveView = function(){
+        location.reload();
+    };
     if ($.util.isIOS) {
         $('#iosBottom').show();
     }
