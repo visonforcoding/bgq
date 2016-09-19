@@ -191,7 +191,8 @@
                 'source', '|', 'undo', 'redo', '|',
                 'bold', 'italic', 'underline', 'fontborder', 'strikethrough',
                 'pasteplain', '|', 'forecolor', 'backcolor',
-                'selectall', 'cleardoc', '|',
+                'selectall', 'cleardoc', '|', 'rowspacingtop', //段前距
+                'rowspacingbottom', //段后距
                 'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
                 'indent', '|',
                 'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
