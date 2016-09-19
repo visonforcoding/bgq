@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>并购圈-已登录</title>
-        <link rel="stylesheet" type="text/css" href="../css/basic.css"/>
-        <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="/pc/css/basic.css"/>
+        <link rel="stylesheet" type="text/css" href="/pc/css/style.css"/>
     </head>
     <body>
         <div class="wraper">
