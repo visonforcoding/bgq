@@ -14,7 +14,7 @@
                 <h1 class="innerbox">
                     <a href="#this" class="logo"><img src="/pc/img/logo.png"/></a>
 
-                    <a href="#this" class="myhome"><img src="<?= $user->avatar ? $user->avatar : '/mobile/images/touxiang.png' ?>"/></a>
+                    <a href="#this" class="myhome"><img src="<?= $user->avatar ? getSmallAvatar($user->avatar) : '/mobile/images/touxiang.png' ?>"/></a>
                     <a href="#this" class="upload"><img src="/pc/img/upload.png"/></a>
                 </h1>
             </div>
