@@ -44,12 +44,19 @@
             </div>
         </li>
         <li class="inputform">
-            <label for="scale">规模：</label>
+            <label for="address">联系方式：</label>
             <div>
-                <!--<input type="number" name="scale" id="scale" value="" placeholder="请输入大概人数" />-->
-                <?php echo $this->Form->input('scale', ['label'=>false, 'placeholder'=>'请输入大概人数']) ?>
+                <!--<input type="text" name='address' id="address" placeholder="原作者" />-->
+                <?php echo $this->Form->input('contact', ['label'=>false, 'placeholder'=>'请输入联系方式']) ?>
             </div>
         </li>
+<!--        <li class="inputform">
+            <label for="scale">规模：</label>
+            <div>
+                <input type="number" name="scale" id="scale" value="" placeholder="请输入大概人数" />
+                <?php echo $this->Form->input('scale', ['label'=>false, 'placeholder'=>'请输入大概人数']) ?>
+            </div>
+        </li>-->
 
     </ul>
     <ul class="formlist clearfix">
@@ -60,23 +67,23 @@
                 <?php echo $this->Form->input('title', ['label'=>false, 'placeholder'=>'请输入标题']) ?>
             </div>
         </li>
-        <li class="inputform">
+<!--        <li class="inputform">
             <label for="time">活动时间：</label>
             <div>
-                <!--<input type="date" name="time" id="time" placeholder="请输入活动时间" />-->
+                <input type="date" name="time" id="time" placeholder="请输入活动时间" />
                 <?php echo $this->Form->input('time', ['label'=>false, 'type'=>'text', 'placeholder'=>'请输入活动时间', 'class'=>'datepicker']) ?>
             </div>
-        </li>
+        </li>-->
 
     </ul>
     <ul class="formlist clearfix">
-        <li class="s-inputform">
+<!--        <li class="s-inputform">
             <label for="summary">活动摘要：</label>
             <div class="change-wd">
-                <!--<input type="text" name='summary' id="summary" placeholder="请输入标题" />-->
+                <input type="text" name='summary' id="summary" placeholder="请输入标题" />
                 <?php echo $this->Form->input('summary', ['label'=>false, 'placeholder'=>'请输入活动摘要']) ?>
             </div>
-        </li>
+        </li>-->
         <li class="inputform">
             <label for="address">主办地点：</label>
             <div>
