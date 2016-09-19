@@ -248,8 +248,8 @@ class PvchartController extends AppController {
             }
         }
         $this->loadComponent('Echart');
-        $name = '访问用户操作系统占比';
-        $title['text'] = '访问用户操作系统占比';
+        $name = '访问渠道占比';
+        $title['text'] = '访问渠道占比';
         echo $this->Echart->setPieChart($result, $name, $title);
         exit();
     }
