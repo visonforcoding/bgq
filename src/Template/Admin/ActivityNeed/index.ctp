@@ -92,7 +92,7 @@
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/admin/activityneed/delete',
+                            url: '/admin/activity-need/delete',
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
