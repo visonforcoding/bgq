@@ -87,6 +87,8 @@ textarea::-webkit-scrollbar{display: none;}/*隐藏多文本框滚动条*/
 .wraper .col_r{color:#ff1e84;}
 .wraper .col_b{color:#009eff;}
 .wraper .col_g{color:#00bc6f;}
+.wraper .col_darkblue{color:#2b4660;}
+.wraper .col_yellow{color:#f19715;}
 .wraper .bgff{background: #fff;}
 .wraper .ft26{font-size:0.26rem;}
 .wraper .mt0{margin-top:0;}
@@ -123,7 +125,7 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #7a7d82; }
 .loginbox input::-webkit-input-placeholder {color:#222;}
 .alert{position:fixed;	z-index: 999;color:#fff;font-size:0.28rem;left:0;top:40%;right:0;margin:auto;width:50%;height:30%;font-size:0.3rem;
 	/*display: -webkit-flex;display: flex;-webkit-justify-content: center;justify-content: center;-webkit-align-items:center;align-items: center;*/}
-.alert span{line-height: 0.38rem;text-align: center;background: rgba(0,0,0,0.5);border-radius: 0.15rem;padding:0.3rem;display:block;}
+.alert span{line-height: 0.38rem;text-align: center;background: rgba(0,0,0,0.8);border-radius: 0.15rem;padding:0.3rem;display:block;}
 /*web字体图标*/
  @font-face {font-family: 'iconfont';
     src: url('../font/iconfont.eot'); /* IE9*/
