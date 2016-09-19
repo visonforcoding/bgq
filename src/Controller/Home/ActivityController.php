@@ -18,17 +18,21 @@ class ActivityController extends AppController {
     
     public function release(){
         $Activityneed = \Cake\ORM\TableRegistry::get('activityneed');
+        $UserTable = \Cake\ORM\TableRegistry::get('user');
+        $user = $UserTable->get($this->user->id);
         $activity = $Activityneed->newEntity();
         $data = [];
         if($this->request->is('post')){
+            $data['truename'] = $user->truename;
             $data['company'] = $this->request->data('company');
-            $data['scale'] = $this->request->data('scale');
+            $data['position'] = $user->position;
+//            $data['scale'] = $this->request->data('scale');
             $data['title'] = $this->request->data('title');
-            $data['time'] = $this->request->data('time');
-            $data['summary'] = $this->request->data('summary');
-            $data['address'] = $this->request->data('address');
+//            $data['time'] = $this->request->data('time');
+//            $data['summary'] = $this->request->data('summary');
+//            $data['address'] = $this->request->data('address');
             $data['body'] = $this->request->data('body');
-            $data['from_user'] = -1;
+            $data['contact'] = $this->request->data('contact');
             $data['user_id'] = $this->user->id;
             $activity = $Activityneed->patchEntity($activity, $data);
             $res = $Activityneed->save($activity);
