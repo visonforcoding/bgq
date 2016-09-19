@@ -2,7 +2,7 @@
 <div class="head newshead">
     <h1 class="innerbox">
         <a href="/w/index/index" class="logo"><img src="/pc/img/logo1.png"/></a>
-        <a href="#this" class="myhome"><img src="<?= $user->avatar ? $user->avatar : '/mobile/images/touxiang.png' ?>"/></a>
+        <a href="#this" class="myhome"><img style="width:60px;" src="<?= $user->avatar ? $user->avatar : '/mobile/images/touxiang.png' ?>"/></a>
         <a href="#this" class="upload"><img src="/pc/img/upload.png"/></a>
     </h1>
 </div>
