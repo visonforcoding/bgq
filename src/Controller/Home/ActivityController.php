@@ -17,7 +17,8 @@ use Cake\Mailer\Email;
 class ActivityController extends AppController {
     
     public function release(){
-        $activity = $this->Activity->newEntity();
+        $Activityneed = \Cake\ORM\TableRegistry::get('activityneed');
+        $activity = $Activityneed->newEntity();
         $data = [];
         if($this->request->is('post')){
             $data['company'] = $this->request->data('company');
@@ -29,8 +30,8 @@ class ActivityController extends AppController {
             $data['body'] = $this->request->data('body');
             $data['from_user'] = -1;
             $data['user_id'] = $this->user->id;
-            $activity = $this->Activity->patchEntity($activity, $data);
-            $res = $this->Activity->save($activity);
+            $activity = $Activityneed->patchEntity($activity, $data);
+            $res = $Activityneed->save($activity);
             if($res){
                 return $this->Util->ajaxReturn(true, '提交成功，请下载APP查看');
             } else {
