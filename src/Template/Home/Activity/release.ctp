@@ -76,23 +76,23 @@
         </li>-->
 
     </ul>
-    <ul class="formlist clearfix">
-<!--        <li class="s-inputform">
+<!--    <ul class="formlist clearfix">
+        <li class="s-inputform">
             <label for="summary">活动摘要：</label>
             <div class="change-wd">
                 <input type="text" name='summary' id="summary" placeholder="请输入标题" />
                 <?php echo $this->Form->input('summary', ['label'=>false, 'placeholder'=>'请输入活动摘要']) ?>
             </div>
-        </li>-->
+        </li>
         <li class="inputform">
             <label for="address">主办地点：</label>
             <div>
-                <!--<input type="text" name='address' id="address" placeholder="原作者" />-->
+                <input type="text" name='address' id="address" placeholder="原作者" />
                 <?php echo $this->Form->input('address', ['label'=>false, 'placeholder'=>'请输入主办地点']) ?>
             </div>
         </li>
 
-    </ul>
+    </ul>-->
     <div class="editcon">
         <h3>活动需求：<em>在这里填写详细的活动需求</em></h3>
         <div class="editbtn">
