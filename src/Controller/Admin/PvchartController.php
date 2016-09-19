@@ -109,7 +109,7 @@ class PvchartController extends AppController {
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
         $sort = 'Pvlog.' . $this->request->data('sidx');
-        if($this->request->data('sidx')=='counts'){
+        if ($this->request->data('sidx') == 'counts') {
             $sort = $this->request->data('sidx');
         }
         $order = $this->request->data('sord');
@@ -125,15 +125,15 @@ class PvchartController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $Table =  \Cake\ORM\TableRegistry::get('Pvlog');
+        $Table = \Cake\ORM\TableRegistry::get('Pvlog');
         $query = $Table->find();
         $query->contain(['Pvtag']);
-        $query->select(['counts'=>$query->func()->count('*'),'ptag','act','Pvtag.descb','url']);
+        $query->select(['counts' => $query->func()->count('*'), 'ptag', 'act', 'Pvtag.descb', 'url']);
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
         }
-        $query->group(['Pvlog.ptag','act','url']);
+        $query->group(['Pvlog.ptag', 'act', 'url']);
         $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
@@ -190,6 +190,96 @@ class PvchartController extends AppController {
         $this->autoRender = false;
         $filename = 'Pvlog_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+    }
+
+    public function chart() {
+        
+    }
+
+    /**
+     * 安卓ios 占比
+     */
+    public function getPieChart1() {
+        $connection = \Cake\Datasource\ConnectionManager::get('default');
+        $result = $connection->execute('select u.os as name,count(u.id) as nums from `pvlog` u
+                 group by u.os')->fetchAll('assoc');
+        foreach($result as $k=>$v){
+            switch ($v['name']) {
+                case 1:
+                    $result[$k]['name'] = 'iphone';
+                    break;
+                case 2:
+                    $result[$k]['name'] = 'android';
+                    break;
+                case 3:
+                    $result[$k]['name'] = '其他';
+                    break;
+                default:
+                    break;
+            }
+        }
+        $this->loadComponent('Echart');
+        $name = '访问用户操作系统占比';
+        $title['text'] = '访问用户操作系统占比';
+        echo $this->Echart->setPieChart($result, $name, $title);
+        exit();
+    }
+    
+    /**
+     * 安卓ios 占比
+     */
+    public function getPieChart2() {
+        $connection = \Cake\Datasource\ConnectionManager::get('default');
+        $result = $connection->execute('select u.is_app as name,count(u.id) as nums from `pvlog` u
+                 group by u.is_app')->fetchAll('assoc');
+        foreach($result as $k=>$v){
+            switch ($v['name']) {
+                case 1:
+                    $result[$k]['name'] = 'app';
+                    break;
+                case 2:
+                    $result[$k]['name'] = '微信';
+                    break;
+                case 3:
+                    $result[$k]['name'] = '其他';
+                    break;
+                default:
+                    break;
+            }
+        }
+        $this->loadComponent('Echart');
+        $name = '访问用户操作系统占比';
+        $title['text'] = '访问用户操作系统占比';
+        echo $this->Echart->setPieChart($result, $name, $title);
+        exit();
+    }
+    /**
+     * 安卓ios 占比
+     */
+    public function getPieChart3() {
+        $connection = \Cake\Datasource\ConnectionManager::get('default');
+        $result = $connection->execute('select u.os_version as name,u.os,count(u.id) as nums from `pvlog` u
+                 group by u.os_version,u.os')->fetchAll('assoc');
+        foreach($result as $k=>$v){
+            switch ($v['os']) {
+                case 1:
+                    $result[$k]['name'] = 'ios '.$v['name'];
+                    break;
+                case 2:
+                    $result[$k]['name'] = 'android '.$v['name'];
+                    break;
+                case 3:
+                    $result[$k]['name'] = '其他';
+                    break;
+                default:
+                    break;
+            }
+        }
+        $this->loadComponent('Echart');
+        $name = '访问用户操作系统版本占比';
+        $title['text'] = '访问用户操作系统版本占比';
+        echo $this->Echart->setPieChart($result, $name, $title);
+        exit();
     }
 
 }
