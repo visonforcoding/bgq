@@ -84,8 +84,8 @@ class PushlogTable extends Table {
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules) {
-        $rules->add($rules->existsIn(['push_id'], 'Pusher'));
-        $rules->add($rules->existsIn(['receive_id'], 'Receiver'));
+//        $rules->add($rules->existsIn(['push_id'], 'Pusher'));
+//        $rules->add($rules->existsIn(['receive_id'], 'Receiver'));
         return $rules;
     }
 
