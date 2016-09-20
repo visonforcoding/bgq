@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -14,8 +15,7 @@ use Cake\ORM\Entity;
  * @property string $useragent
  * @property \Cake\I18n\Time $create_time
  */
-class Pvlog extends Entity
-{
+class Pvlog extends Entity {
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -30,4 +30,6 @@ class Pvlog extends Entity
         '*' => true,
         'id' => false,
     ];
+    
+
 }

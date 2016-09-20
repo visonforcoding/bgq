@@ -27,5 +27,11 @@ class SavantCell extends Cell {
         $savants = $UserTable->find()->select(['id','truename','company'])->where(['level'=>2,'enabled'=>1])->all()->toArray();
         $this->set(compact('savants', 'selIds'));
     }
+    
+    public function single($selIds = null) {
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $savants = $UserTable->find()->select(['id','truename','company'])->where(['level'=>2,'enabled'=>1])->all()->toArray();
+        $this->set(compact('savants', 'selIds'));
+    }
 }
         

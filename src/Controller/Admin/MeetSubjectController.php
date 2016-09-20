@@ -52,7 +52,11 @@ class MeetSubjectController extends AppController {
         $meetSubject = $this->MeetSubject->newEntity();
         if ($this->request->is('post')) {
             $meetSubject = $this->MeetSubject->patchEntity($meetSubject, $this->request->data);
+            $UserTable = \Cake\ORM\TableRegistry::get('User');
+            $user = $UserTable->get($this->request->data('user_id'));
             if ($this->MeetSubject->save($meetSubject)) {
+                $user->subject_update_time = date('Y-m-d H:i:s');
+                $UserTable->save($user);
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {
                 $errors = $meetSubject->errors();
@@ -76,7 +80,11 @@ class MeetSubjectController extends AppController {
         ]);
         if ($this->request->is(['post', 'put'])) {
             $meetSubject = $this->MeetSubject->patchEntity($meetSubject, $this->request->data);
+            $UserTable = \Cake\ORM\TableRegistry::get('User');
+            $user = $UserTable->get($meetSubject->user_id);
             if ($this->MeetSubject->save($meetSubject)) {
+                $user->subject_update_time = date('Y-m-d H:i:s');
+                $UserTable->save($user);
                 $this->Util->ajaxReturn(true, '修改成功');
             } else {
                 $errors = $meetSubject->errors();
