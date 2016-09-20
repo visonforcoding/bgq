@@ -18,7 +18,7 @@
         <label class="col-md-2 control-label">图片</label>
         <div class="col-md-8">
             <div  class="img-thumbnail input-img"  single>
-                <img  alt="请上传750*400大小的图片" src="<?= $banner->img; ?>"/>
+                <img  alt="请上传750*380大小的图片" src="<?= $banner->img; ?>"/>
             </div>
             <div style="color:red">请上传750*380大小的图片</div>
             <input name="img" value="<?= $banner->img; ?>"  type="hidden"/>
