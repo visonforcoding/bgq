@@ -69,6 +69,7 @@ get_xiaomi();
                 $.util.alert('内容不可为空');
                 return false;
             }
+            LEMON.sys.hideKeyboard();
             $.util.ajax({
                 url: '/home/reply-xiaomi',
                 data: {content: content},
