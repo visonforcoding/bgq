@@ -220,7 +220,7 @@ color:#7a7d82;font-size:.24rem;}
 .comm-info .username time{font-size:0.26rem;margin-left:0.3rem;color:#9ba4ad;}
 .comm-info .job{font-size:0.28rem;line-height: 0.3rem;margin-top:0.05rem;/*width:5.8rem;*/color:#9ba4ad;}
 .comm-info .j-width{width:5.8rem;}
-.newscomment-box p{margin:0.2rem 0;cursor: pointer;}
+.newscomment-box p{margin:0.2rem 0;cursor: pointer;text-align: justify;line-height: .4rem;}
 /*新闻搜索--start*/
 .inner .news-serch{background:none;}
 .inner h1 input{width: 80%;background: #d52458; border: none;font-size: 0.28rem;color: #fff;}
