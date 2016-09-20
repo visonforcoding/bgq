@@ -1688,9 +1688,9 @@ class HomeController extends AppController {
     public function getUserinfoStatus(){
         $UserTable = \Cake\ORM\TableRegistry::get('user');
         $user = $UserTable->get($this->user->id, [
-            'contain' => ['Careers', 'Educations', 'Industries']
+            'contain' => ['Industries']
         ]);
-        $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->educations && $user->careers && $user->card_path;
+        $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
         if($is_complete){
             return $this->Util->ajaxReturn(true);
         } else {

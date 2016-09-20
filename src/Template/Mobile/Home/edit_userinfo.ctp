@@ -150,7 +150,7 @@
                 <div>
                     <span id="educations">
                         <?php if(!$user->educations): ?>
-                        未完善
+                        未完善(选填)
                         <?php endif; ?>
                     </span>
                 </div>
@@ -162,7 +162,7 @@
                 <div>
                     <span id="careers">
                         <?php if(!$user->careers): ?>
-                        未完善
+                        未完善（选填）
                         <?php endif; ?>
                     </span>
                 </div>
