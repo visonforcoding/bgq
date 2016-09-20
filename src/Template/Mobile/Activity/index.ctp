@@ -49,7 +49,7 @@
         <div class="active-items">
             <a href="/activity/details/{#id#}" class="a-head">
                 <div class="conbox">
-                    <img src="{#thumb#}"/>
+                    {#img#}
                     <div class="status">{#apply_msg#}{#pass_msg#}</div>
                 </div>
                 <h3>{#title#}</h3>
@@ -104,7 +104,7 @@
             var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'), $('.a-banner'));
         }
     });
-    window.onActiveView = function(){
+    window.firstpage = function(){
         $.getJSON('/activity/getMoreActivity/1', function (res) {
             if (res.status) {
                 $('#activity').html('');
@@ -113,7 +113,7 @@
             }
         });
     };
-    window.onActiveView();
+    window.firstpage();
     function dealData(data) {
         var html = $.util.dataToTpl('', 'activity_tpl', data, function (d) {
             d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="registered">已报名</span>';
@@ -121,6 +121,9 @@
             d.series_name = window.series[d.series_id];
             d.region_name = d.region ? '<a>' + d.region.name + '</a>' : '';
             d.cover = d.thumb ? d.thumb : d.cover;
+            if(d.cover){
+                d.img = '<img src="' + d.cover + '"/>';
+            }
             return d;
         });
         return html;
