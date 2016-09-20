@@ -1,13 +1,16 @@
-<header>
+<!--<header>
     <div class='inner'>
         <a href='#this' class='toback'></a>
         <h1>
             资讯内容
         </h1>
-        <!--   <a href="#this" id="collect" class='iconfont collection h-regiser'>&#xe610;</a>
-          <a href="#this" class='iconfont share h-regiser'>&#xe614;</a> -->
+           <a href="#this" id="collect" class='iconfont collection h-regiser'>&#xe610;</a>
+          <a href="#this" class='iconfont share h-regiser'>&#xe614;</a> 
     </div>
-</header>
+</header>-->
+<style>
+    tr, td{text-align: left;}
+</style>
 <?= $this->element('share', ['table'=>'news', 'id'=>$news->id]); ?>
 <div class="wraper" id="news">
     <?php if (isset($news)): ?>
@@ -157,6 +160,7 @@
 </script>
 <script>
     window.location.hash = '';
+    $('table').removeAttr('width');
     setTimeout(function(){
         if (location.href.indexOf('?share=1') != -1) {
             $('#share_download').show();

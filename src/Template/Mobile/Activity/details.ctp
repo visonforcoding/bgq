@@ -1,4 +1,7 @@
 <body>
+    <style>
+        tr, td{text-align: left;}
+    </style>
     <?= $this->element('share', ['table'=>'activity', 'id'=>$activity->id]); ?>
     <div class="wraper" id="activity_detail" >
         <section class="newscon-box a-detail">
@@ -271,6 +274,7 @@
     window.article = true;
     window.reply = true;
     window.location.hash = '';
+    $('table').removeAttr('width');
     $.util.dataToTpl('comment', 'comment_tpl', window.activitycom, function (d) {
         d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
         d.user_truename = d.user.truename;
