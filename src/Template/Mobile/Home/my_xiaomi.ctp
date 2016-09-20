@@ -44,6 +44,7 @@
     };
     window.onBackView();
 function get_xiaomi(){
+    $('#content').val('');
     $.util.ajax({
         type: 'post',
         url: '/home/get-xiaomi',

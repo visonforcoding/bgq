@@ -55,14 +55,6 @@
             <div class="markslider">
                 <div class="mark-items">
                     <ul	class="b-mark headmark">
-<!--                        <li><a data-val="北京" href="#this">北京</a> </li>
-                        <li><a data-val="上海" href="#this">上海</a> </li>
-                        <li><a data-val="深圳" href="#this">深圳</a> </li>
-                        <li><a data-val="广州" href="#this">广州</a> </li>
-                        <li><a data-val="武汉" href="#this">武汉</a> </li>
-                        <li><a data-val="成都" href="#this">成都</a> </li>
-                        <li><a data-val="重庆" href="#this">重庆</a> </li>
-                        <li><a data-val="杭州" href="#this">杭州</a> </li>-->
                         <?php foreach($regions as $k=>$v): ?>
                             <li><a data-val="<?= $v->name; ?>" href="javascript:void(0)"><?= $v->name; ?></a> </li>
                         <?php endforeach; ?>
@@ -81,7 +73,7 @@
         </div>
         <div class="markslider">
             <div class="mark-items" id="org">
-                <ul	class="b-mark headmark">
+                <ul class="b-mark headmark">
                     <?php foreach ($agencys as $key => $agency): ?>
                         <?php if ($key < 3): ?>
                             <li data-target='car1tuli<?= $agency['id'] ?>' ><a href="javascript:void(0);"><?= $agency['name'] ?></a> <span class="icon-bottom"></span></li>
@@ -94,22 +86,38 @@
                     <?php if ($key < 3): ?>
                         <ul class="b-mark cart cart1" data-id='car1tuli<?= $agency['id'] ?>' id='u<?= $agency['id'] ?>'>
                             <?php foreach ($agency['children'] as $item): ?>
-                                <li data-val="<?= $item['id'] ?>" ><a href="javascript:void(0);" ><?= $item['name'] ?></a></li>
+                                <li data-val="<?= $item['id'] ?>" ><a style="overflow:hidden;height:0.6rem;" href="javascript:void(0);" ><?= $item['name'] ?></a></li>
                             <?php endforeach; ?>
                         </ul>
                     <?php else: ?>
                         <?php break; ?>
                     <?php endif; ?>
                 <?php endforeach; ?>
-                <ul	class="b-mark headmark">
+                <ul class="b-mark headmark">
                     <?php foreach ($agencys as $key => $agency): ?>
-                        <?php if ($key > 2): ?>
-                            <li data-target='car2tuli<?= $agency['id'] ?>' ><a href="javascript:void(0);"><?= $agency['name'] ?></a> <span class="icon-bottom"></span></li>
+                        <?php if ($key > 2 && $key < 6): ?>
+                            <li data-target='car2tuli<?= $agency['id'] ?>' ><a style="overflow:hidden;height:0.6rem;" href="javascript:void(0);"><?= $agency['name'] ?></a> <span class="icon-bottom"></span></li>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </ul>
                 <?php foreach ($agencys as $key => $agency): ?>
-                    <?php if ($key > 2): ?>
+                    <?php if ($key > 2 && $key < 6): ?>
+                        <ul class="b-mark cart cart1" data-id='car2tuli<?= $agency['id'] ?>' id='u<?= $agency['id'] ?>'>
+                            <?php foreach ($agency['children'] as $item): ?>
+                            <li <?php if(count($agency['children'])==1): ?>class="perli"<?php endif;?> data-val="<?= $item['id'] ?>" ><a href="javascript:void(0);" ><?= $item['name'] ?></a></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                <ul class="b-mark headmark">
+                    <?php foreach ($agencys as $key => $agency): ?>
+                        <?php if ($key > 5): ?>
+                            <li data-target='car2tuli<?= $agency['id'] ?>' ><a style="overflow:hidden;height:0.6rem;" href="javascript:void(0);"><?= $agency['name'] ?></a> <span class="icon-bottom"></span></li>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </ul>
+                <?php foreach ($agencys as $key => $agency): ?>
+                    <?php if ($key > 5): ?>
                         <ul class="b-mark cart cart1" data-id='car2tuli<?= $agency['id'] ?>' id='u<?= $agency['id'] ?>'>
                             <?php foreach ($agency['children'] as $item): ?>
                             <li <?php if(count($agency['children'])==1): ?>class="perli"<?php endif;?> data-val="<?= $item['id'] ?>" ><a href="javascript:void(0);" ><?= $item['name'] ?></a></li>
@@ -125,24 +133,46 @@
     <!--行业标签-->
     <div class="markbox border" id="classfy">
         <div class="a-s-title bgff">
-            <span class="">请选择行业标签(最多4个)<!--<i class="classfytext"></i>--></span>
+            <span class="">请选择业务标签(最多4个)<!--<i class="classfytext"></i>--></span>
         </div>
         <div class="markslider">
             <div class="classfytext">
 
             </div>
             <div class="mark-items min_height" id="industry">
-                <ul	class="b-mark classfymark clearfix">
-                    <?php foreach ($industries as $industry): ?>
-                        <li  data-target='class1tuli<?= $industry['id'] ?>' ><a href="javascript:void(0);"><?= $industry['name'] ?></a> <span class="icon-bottom"></span></li>
+                <ul class="b-mark classfymark clearfix">
+                    <?php foreach ($industries as $key=>$industry): ?>
+                        <?php if ($key < 3): ?>
+                            <li data-target='class1tuli<?= $industry['id'] ?>' ><a href="javascript:void(0);"><?= $industry['name'] ?></a> <span class="icon-bottom"></span></li>
+                        <?php else: ?>
+                            <?php break; ?>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </ul>
-                <?php foreach ($industries as $industry): ?>
-                    <ul class="b-mark cart cart1clearfix" data-id='class1tuli<?= $industry['id'] ?>' id='u1'>
-                        <?php foreach ($industry['children'] as $item): ?>
-                            <li <?php if(count($industry['children'])==1): ?>class="perli"<?php endif;?>  data-val="<?= $item['id'] ?>" ><a href="javascript:void(0);" ><?= $item['name'] ?></a></li>
-                        <?php endforeach; ?>
-                    </ul>
+                <?php foreach ($industries as $key=>$industry): ?>
+                    <?php if ($key < 3): ?>
+                        <ul class="b-mark cart cart1clearfix" data-id='class1tuli<?= $industry['id'] ?>' id='u1'>
+                            <?php foreach ($industry['children'] as $item): ?>
+                                <li <?php if(count($industry['children'])==1): ?>class="perli"<?php endif;?>  data-val="<?= $item['id'] ?>" ><a href="javascript:void(0);" ><?= $item['name'] ?></a></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                <ul class="b-mark classfymark clearfix">
+                    <?php foreach ($industries as $key=>$industry): ?>
+                        <?php if ($key > 2): ?>
+                            <li data-target='class1tuli<?= $industry['id'] ?>' ><a href="javascript:void(0);"><?= $industry['name'] ?></a> <span class="icon-bottom"></span></li>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </ul>
+                <?php foreach ($industries as $key=>$industry): ?>
+                    <?php if ($key > 2): ?>
+                        <ul class="b-mark cart cart1clearfix" data-id='class1tuli<?= $industry['id'] ?>' id='u1'>
+                            <?php foreach ($industry['children'] as $item): ?>
+                                <li <?php if(count($industry['children'])==1): ?>class="perli"<?php endif;?>  data-val="<?= $item['id'] ?>" ><a href="javascript:void(0);" ><?= $item['name'] ?></a></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </div>
 
