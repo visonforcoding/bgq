@@ -60,7 +60,6 @@
         }, 8000);
     }
 
-
     $('.r-submit').on('tap', function () {
         if (is_done == '1') {
             return false;
@@ -70,7 +69,7 @@
             return false;
         }
         var content = $('#content').val();
-        LEMON.sys.hideKeyboard();
+        $('#content').blur();
         $.ajax({
             type: 'POST',
             data: {content: content},
@@ -105,9 +104,8 @@
                 }
             }
         });
-        LEMON.sys.hideKeyboard();
-//        $('.dialogue ul').append('<li class="fr mm"><span>b是的。</span><time>2015-8-20</time></li>');
     });
+    
     setTimeout(function () {
         window.scrollTo(0, 99999);
     }, 200);
