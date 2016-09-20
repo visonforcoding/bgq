@@ -775,3 +775,10 @@ ALTER TABLE `pvlog`
 
 ALTER TABLE `pvlog`
 	CHANGE COLUMN `os_version` `os_version` VARCHAR(10) NOT NULL DEFAULT '' COMMENT '系统版本号' AFTER `is_app`;
+
+ALTER TABLE `pvlog`
+	ADD COLUMN `user_id` INT(11) NOT NULL DEFAULT '0' AFTER `ptag`;	
+
+
+	ALTER TABLE `savant`
+	ADD COLUMN `check_time` DATETIME NOT NULL COMMENT '审核通过时间' AFTER `summary`;

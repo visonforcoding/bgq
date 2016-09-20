@@ -267,6 +267,10 @@ class SavantController extends AppController {
             $apply->check_man = $this->_user->truename;
             $apply->action = 1;
             $SavantApplyTable->save($apply);
+            $SavantTable = \Cake\ORM\TableRegistry::get('Savant');
+            $savant = $SavantTable->find()->where(['user_id'=>$id])->first();
+            $savant->check_time = date('Y-m-d H:i:s');
+            $SavantTable->save($savant);
             $this->loadComponent('Business');
             $this->Business->usermsg('-1', $user->user_id, '会员申请新消息', '您的会员申请审核通过啦！', 5, $user->id);
             return $this->Util->ajaxReturn(true, '审核通过');
