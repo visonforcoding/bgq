@@ -124,37 +124,65 @@ class NewsController extends AppController {
         $isCollect = [];
         if(!empty($this->user)){
             $user_id = $this->user->id;
-            $news = $this->News->get($id, [
-                'contain' => ['Users', 'Comments'=>function($q){
-                    return $q->where(['is_delete'=>0])->orderDesc('Comments.create_time')->limit($this->newslimit);
-                },'Comments.Users'=>function($q){
-                    return $q->select(['id','avatar','truename','company','position']);
-                },'Comments.Likes'=>function($q)use($user_id){
-                    return $q->where(['type'=>1,'user_id'=>$user_id]);
-                },'Praises'=>function($q)use($user_id){
-                    return $q->where(['type'=>1,'user_id'=>$user_id]);
-                },'Comments.Reply'=>function($q){
-                    return $q->select(['id','truename']);
-                },'Savants'],
-                'conditions' => [
-                    'News.status' => 1
-                ]
-            ]);
+            if(strpos($this->request->referer(), 'admin') === false){
+                $news = $this->News->get($id, [
+                    'contain' => ['Users', 'Comments'=>function($q){
+                        return $q->where(['is_delete'=>0])->orderDesc('Comments.create_time')->limit($this->newslimit);
+                    },'Comments.Users'=>function($q){
+                        return $q->select(['id','avatar','truename','company','position']);
+                    },'Comments.Likes'=>function($q)use($user_id){
+                        return $q->where(['type'=>1,'user_id'=>$user_id]);
+                    },'Praises'=>function($q)use($user_id){
+                        return $q->where(['type'=>1,'user_id'=>$user_id]);
+                    },'Comments.Reply'=>function($q){
+                        return $q->select(['id','truename']);
+                    },'Savants'],
+                    'conditions' => [
+                        'News.status' => 1
+                    ]
+                ]);
+            } else {
+                $news = $this->News->get($id, [
+                    'contain' => ['Users', 'Comments'=>function($q){
+                        return $q->where(['is_delete'=>0])->orderDesc('Comments.create_time')->limit($this->newslimit);
+                    },'Comments.Users'=>function($q){
+                        return $q->select(['id','avatar','truename','company','position']);
+                    },'Comments.Likes'=>function($q)use($user_id){
+                        return $q->where(['type'=>1,'user_id'=>$user_id]);
+                    },'Praises'=>function($q)use($user_id){
+                        return $q->where(['type'=>1,'user_id'=>$user_id]);
+                    },'Comments.Reply'=>function($q){
+                        return $q->select(['id','truename']);
+                    },'Savants'],
+                ]);
+            }
             $collectTable = \Cake\ORM\TableRegistry::get('collect');
             $isCollect = $collectTable->find()->where(['user_id'=>$user_id, 'relate_id'=>$id, 'type'=>1, 'is_delete'=>0])->toArray();
         }else{
-            $news = $this->News->get($id, [
-                'contain' => ['Users', 'Comments'=>function($q){
-                    return $q->where(['is_delete'=>0])->orderDesc('Comments.create_time')->limit($this->newslimit);
-                },'Comments.Users'=>function($q){
-                    return $q->select(['id','avatar','truename','company','position']);
-                },'Comments.Reply'=>function($q){
-                    return $q->select(['id','truename']);
-                },'Savants'],
-                'conditions' => [
-                    'News.status' => 1
-                ]
-            ]);
+            if(strpos($this->request->referer(), 'admin') === false){
+                $news = $this->News->get($id, [
+                    'contain' => ['Users', 'Comments'=>function($q){
+                        return $q->where(['is_delete'=>0])->orderDesc('Comments.create_time')->limit($this->newslimit);
+                    },'Comments.Users'=>function($q){
+                        return $q->select(['id','avatar','truename','company','position']);
+                    },'Comments.Reply'=>function($q){
+                        return $q->select(['id','truename']);
+                    },'Savants'],
+                    'conditions' => [
+                        'News.status' => 1
+                    ]
+                ]);
+            } else {
+                $news = $this->News->get($id, [
+                    'contain' => ['Users', 'Comments'=>function($q){
+                        return $q->where(['is_delete'=>0])->orderDesc('Comments.create_time')->limit($this->newslimit);
+                    },'Comments.Users'=>function($q){
+                        return $q->select(['id','avatar','truename','company','position']);
+                    },'Comments.Reply'=>function($q){
+                        return $q->select(['id','truename']);
+                    },'Savants'],
+                ]);
+            }
         }
         foreach($news->comments as $k=>$v){
             $news->comments[$k]->user->avatar = getSmallAvatar($v->user->avatar);
