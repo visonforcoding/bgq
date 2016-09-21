@@ -26,8 +26,8 @@
             <a href="/user/home-page/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
             <div class="vipinfo">
                 <a href="/user/home-page/{#id#}">
-                    <h3><div class="l-name">{#truename#}</div><span class="meetnum">{#meet_nums#}人见过</span></h3>
-                    <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
+                    <h3><div class="l-name">{#truename#}<span class="job">&nbsp;&nbsp;{#position#}</span></div><span class="meetnum">{#meet_nums#}人见过</span></h3>
+                    <span class="job">{#company#}</span>
                 </a>
                 <div class="mark s_mark_h">
                     {#subjects#}

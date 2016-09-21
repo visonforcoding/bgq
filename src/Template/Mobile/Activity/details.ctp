@@ -8,10 +8,12 @@
             <h3><?= $activity->title ? $activity->title : ''; ?><time class='a_title_time'><?= $activity->create_time->format('Y-m-d H:i:s'); ?></time></h3>
             <div class='innercon'> <img src="<?= $activity->cover; ?>"/>
                 <p>主办单位：<?= $activity->company ? $activity->company : ''; ?> 
-                    <?php if ($activity->org_key && $activity->org_val): ?>
-                        <br /><?= $activity->org_key ?>：<?= $activity->org_val; ?>
+                    <?php if ($activity->org): ?>
+                        <?php foreach(unserialize($activity->org) as $k=>$v): ?>
+                            <br /><?= $v['org_key'] ?>：<?= $v['org_val']; ?>
+                        <?php endforeach; ?>
                     <?php endif; ?>
-                    <br />时间：<?= $activity->time ? $activity->time->i18nFormat('yyyy-MM-dd') : ''; ?>
+                    <br />时间：<?= $activity->activity_time ? $activity->activity_time : ''; ?>
                     <br />地点：<?= $activity->address ? $activity->address : ''; ?>
                     <br />规模：<?= $activity->scale ? $activity->scale : ''; ?>人</p>
             </div>
