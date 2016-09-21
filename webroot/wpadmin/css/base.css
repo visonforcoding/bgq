@@ -365,3 +365,15 @@ body{
 span.notice{
     color: #ff0066;
 }
+
+
+/*按钮组*/
+.input-group-addon.add,
+.input-group-addon.del,
+.input-group-addon.save{
+    cursor: pointer;
+}
+
+.layer-tips{
+    padding:10px;
+}
