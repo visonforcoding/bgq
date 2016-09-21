@@ -779,6 +779,12 @@ ALTER TABLE `pvlog`
 ALTER TABLE `pvlog`
 	ADD COLUMN `user_id` INT(11) NOT NULL DEFAULT '0' AFTER `ptag`;	
 
-
-	ALTER TABLE `savant`
+ALTER TABLE `savant`
 	ADD COLUMN `check_time` DATETIME NOT NULL COMMENT '审核通过时间' AFTER `summary`;
+
+
+ALTER TABLE `activity`
+	CHANGE COLUMN `org_key` `org` TEXT NOT NULL DEFAULT '' COMMENT '协办名称' AFTER `company`,
+	ADD COLUMN `activity_time` VARCHAR(250) NOT NULL COMMENT '活动时间,用于显示' AFTER `title`,
+	CHANGE COLUMN `time` `time` DATE NOT NULL COMMENT '过期时间' AFTER `activity_time`,
+	DROP COLUMN `org_val`;	

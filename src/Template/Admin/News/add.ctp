@@ -102,7 +102,7 @@
         <div class="col-md-8">
             <input name="video" type="text" readonly class="form-control" />
             <div id="video" class="jqupload"></div>
-            <span class="notice">(*文件大小在30M以内,支持格式为mp4、m4v)</span>
+            <span class="notice">(*文件大小在100M以内,支持格式为mp4、m4v)</span>
             <div class="row">
                 <div  class="img-thumbnail input-img"  single>
                     <img  alt="这里上传视频的封面" src=""/>

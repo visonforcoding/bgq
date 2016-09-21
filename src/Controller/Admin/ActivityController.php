@@ -58,6 +58,13 @@ class ActivityController extends AppController {
             $activity->admin_id = $this->_user->id;
             $activity->user_id = $this->_user->id;
             $activity->publisher = $this->_user->truename;
+            $org = [];
+            $org_val = $this->request->data('org_val');
+            foreach($this->request->data('org_key') as $key=>$org_key){
+                $org[$key]['org_key'] = $org_key;
+                $org[$key]['org_val'] = $org_val[$key];
+            }
+            $activity->org = serialize($org);
             $res = $this->Activity->save($activity);
             if ($res) {
                 return $this->Util->ajaxReturn(true, '添加成功');
@@ -91,6 +98,13 @@ class ActivityController extends AppController {
                 //更改了报名费用，未付款的订单的订单价格也要更改!!!
                 $updateOrder = TRUE;
             }
+             $org = [];
+            $org_val = $this->request->data('org_val');
+            foreach($this->request->data('org_key') as $key=>$org_key){
+                $org[$key]['org_key'] = $org_key;
+                $org[$key]['org_val'] = $org_val[$key];
+            }
+              $activity->org = serialize($org);
             if ($this->Activity->save($activity)) {
                 if($updateOrder){
                    $OrderTable->updateAll(['price'=>$activity->apply_fee], ['type'=>2,'relate_id'=>$id,'status'=>0]);
@@ -117,8 +131,9 @@ class ActivityController extends AppController {
         foreach ($activity->industries as $industry) {
             $selIndustryIds[] = $industry->id;
         }
+        $orgs = unserialize($activity->org);
         $this->set(compact('regions'));
-        $this->set(compact('activity', 'selIndustryIds', 'selSavantIds', 'selActivityIds'));
+        $this->set(compact('activity', 'selIndustryIds', 'selSavantIds', 'selActivityIds','orgs'));
     }
 
     /**
