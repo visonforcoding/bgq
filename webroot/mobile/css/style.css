@@ -416,11 +416,12 @@ line-height: .34rem;height:.34rem;}
 .l-place i{font-size:.2rem;margin-right:.04rem;}
 .vipinfo h3 span{float:right;}
 .vipinfo span.job,.vipinfo span.c-info{line-height: 0.64rem;font-size:0.26rem;margin-top:0.06rem;color: #7a7e83;}
-.vipinfo span.job{line-height: 0.3rem;text-align: justify;}
+.vipinfo span.job{line-height: 0.3rem;}
+.l-name .job{margin-left:.1rem;}
 .vipinfo span.c-info{line-height: 0.3rem;display: block;}
 .vipinfo .mark a{line-height: .26rem;font-size:.22rem;color:#9ba4ad;/*padding:0 0.1rem;margin-bottom:4px*/}
 .vipinfo .s_mark_h a {border: 1px #969fa9 solid;border-radius: 0.1rem;line-height: 20px;font-size: 12px;color: #969fa9;padding: 0 0.1rem;display: inline-block;margin-bottom: 4px;}
-.vipinfo .mark i{font-size:.26rem;margin-right: .05rem;line-height: .3rem;}
+.vipinfo .mark i{font-size:.26rem;margin-right: .05rem;line-height: .34rem;padding-left:2px;}
 .m_focus_r{position: absolute;right:0;bottom:.26rem;;width:20%;text-align: center;font-size:.22rem;
 -webkit-transition: color .2s ease-in;transition: color .2s ease-in;}
 .m_focus_r span{display: block;margin-top:.1rem;}
