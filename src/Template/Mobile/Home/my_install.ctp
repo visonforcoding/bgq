@@ -25,7 +25,7 @@
     </div> -->
 
     <ul class="h-info-box e-info-box">
-        <li class="no-right-ico install">
+        <li class="no-right-ico install" style="display: none">
             <span>使用缓存</span>
             <div class='iscache'>
                 <span class="btn" id='checkBtn'><i class="on"></i></span>
@@ -40,7 +40,7 @@
             </a>
         </li>
 
-        <li class="lh4">
+        <li class="lh4" style="display: none">
             <a href="/mobile/html/api_test.html">
                 <span>for api test</span>
                 <div>
@@ -48,7 +48,7 @@
                 </div>
             </a>
         </li>
-        <li class="lh4">
+        <li class="lh4" style="display: none">
             <a href="javascript:void(0);">
                 <span>给我打分</span>
                 <div>
