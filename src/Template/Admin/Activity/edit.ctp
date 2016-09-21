@@ -47,7 +47,7 @@
                 </div>
             </div>
         <?php endforeach; ?>
-    <?php endif; ?>
+    <?php else: ?>
     <div class="form-group xb">
         <label class="col-md-2 control-label">协办</label>
         <div class="input-group col-md-6">
@@ -59,6 +59,7 @@
             <span title="添加" class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
         </div>
     </div>
+    <?php endif;?>
     <div class="form-group">
         <label class="col-md-2 control-label">活动时间</label>
         <div class="col-md-3">
