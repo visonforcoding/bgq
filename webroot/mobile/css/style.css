@@ -963,7 +963,7 @@ top:-0.1rem;left:50%;margin-left:-0.52rem;background: #f0eff5;text-align: center
 .expert-commond ul li{width:50%;display: inline-block;margin-top:0.3rem;}
 .expert-commond li a{display: block;overflow:hidden;}
 .expert-commond img{float:left;width:0.62rem;height:0.62rem;border-radius: 50%;}
-.expert-commond h3{float:left;font-size:0.3rem;margin-left:0.3rem;color:#7a7e83;line-height: 0.3rem;width: 65%;height: 0.92rem;overflow: hidden;}
+.expert-commond h3{float:left;font-size:0.3rem;margin-left:0.3rem;color:#7a7e83;line-height: 0.32rem;width: 65%;height: 0.92rem;overflow: hidden;}
 .expert-commond h3 span{display: block;font-size:.24rem;color:#9ba4ad;line-height: 0.3rem;
     margin-top: 0.05rem;}
 .companyinfo{width:100%;max-width: 750px;margin-bottom:.2rem;}
