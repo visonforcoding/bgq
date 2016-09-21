@@ -29,6 +29,8 @@ class ReportController extends AppController {
         $pv = $PvlogTable->newEntity($data);
         $pv->ip = $this->request->clientIp();
         $pv->url = $this->request->referer();
+        debug($this->request);
+                exit();
         $user = $this->request->session()->read('User.mobile');
         if ($user) {
             $pv->user_id = $user->id;
@@ -94,6 +96,28 @@ class ReportController extends AppController {
             $pv->os_version = $this->osVersion($pv->useragent);
             $PvlogTable->save($pv);
         }
+    }
+    
+    public function initData(){
+        set_time_limit(0);
+        $PvlogTable = \Cake\ORM\TableRegistry::get('Pvlog');
+        $flag = 100000;
+        $pvlog = $PvlogTable->find()->where(['url !='=>''])->order('rand()')->first();
+        $data['ip']=$pvlog->ip;
+        $data['screen']=$pvlog->screen;
+        $data['refer']=$pvlog->refer;
+        $data['url']=$pvlog->url;
+        $data['act']=$pvlog->act;
+        $data['os']=$pvlog->os;
+        $data['is_app']=$pvlog->is_app;
+        $data['os_version']=$pvlog->os_version;
+        $data['useragent']=$pvlog->useragent;
+        while ($flag>0){
+            $flag--;
+            $newpv = $PvlogTable->newEntity($data);
+            $PvlogTable->save($newpv);
+        }
+                exit();
     }
 
 }

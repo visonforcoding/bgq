@@ -70,7 +70,7 @@
             </div>
             <div style="color:red">请上传宽为690，高小于388的封面图</div>
             <input name="cover"  type="hidden"/>
-            <div id="cover" class="jqupload">上传</div>
+            <div id="cover" w="690" h="388" class="jqupload">上传</div>
         </div>
     </div>
     <div class="form-group">

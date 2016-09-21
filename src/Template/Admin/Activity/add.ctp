@@ -109,9 +109,9 @@
             <div  class="img-thumbnail input-img"  single>
                 <img  alt="请上传宽为388px高690px大小的首页列表图" src=""/>
             </div>
-            <div style="color:red">请上传宽为388px高690px大小的首页列表图</div>
+            <div style="color:red">请上传宽为388px大小的首页列表图</div>
             <input name="thumb"  type="hidden"/>
-            <div id="thumb" class="jqupload">上传</div>
+            <div id="thumb" w="388" class="jqupload">上传</div>
             <span class="notice">支持格式jpg,png,gif,jpeg</span>
         </div>
     </div>
@@ -123,7 +123,7 @@
             </div>
             <div style="color:red">请上传宽为690，高小于388的封面图</div>
             <input name="cover"  type="hidden"/>
-            <div id="cover" class="jqupload">上传</div>
+            <div id="cover" w="690" h="388" class="jqupload">上传</div>
             <span class="notice">支持格式jpg,png,gif,jpeg</span>
         </div>
     </div>
@@ -194,7 +194,7 @@
                 'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
                 'indent', '|',
                 'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-                'simpleupload', 'insertimage', 'emotion', 'background', '|',
+                'simpleupload', 'insertimage', 'emotion', 'background', '|', 'inserttable', //插入表格
                 'horizontal', 'spechars', 'wordimage',
             ]];
         initJqupload('cover', '/wpadmin/util/doUpload?dir=activitycover', 'jpg,png,gif,jpeg'); //初始化图片上传
