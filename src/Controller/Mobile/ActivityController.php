@@ -265,8 +265,7 @@ class ActivityController extends AppController {
                 ]);
                 //公司、性别、职位、邮箱、行业标签、城市、擅长业务、公司业务、教育经历、工作经历、名片
                 $is_complete = $user->company && $user->gender && $user->position && $user->email 
-                        && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->educations 
-                        && $user->careers && $user->card_path;
+                        && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
                 if(!$is_complete){
                     return $this->Util->ajaxReturn(false, '请先去完善个人资料');
                 }
@@ -396,7 +395,7 @@ class ActivityController extends AppController {
             $user = $UserTable->get($this->user->id, [
                 'contain' => ['Careers', 'Educations', 'Industries']
             ]);
-            $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->educations && $user->careers && $user->card_path;
+            $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
             if(!$is_complete){
                 return $this->Util->ajaxReturn(false, '请先去完善个人资料');
             }
