@@ -47,6 +47,7 @@ class UtilController extends AppController {
             $info = $upload->getUploadFileInfo();
             $response['status'] = true;
             $response['name'] = $info[0]['name'];
+            $response['info'] = $info[0];
             $response['path'] = $urlpath . $info[0]['savename'];
             $response['thumbpath'] = $urlpath . $upload->thumbPrefix . $info[0]['savename'];
             $response['msg'] = '上传成功!';
