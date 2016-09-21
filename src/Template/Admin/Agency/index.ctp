@@ -14,7 +14,7 @@
                     <ul>
                         <?php foreach ($item->children as $i): ?>
                             <li><?= $i->name ?>
-                                <a class="del" data-id="<?= $i->id ?>"><i class="icon icon-trash"></i></a>
+                                <!--<a class="del" data-id="<?= $i->id ?>"><i class="icon icon-trash"></i></a>-->
                                 <a class="edit" data-val="<?= $i->name ?>" data-id="<?= $i->id ?>"><i class="icon icon-pencil"></i></a>
                             </li>
                         <?php endforeach; ?>
