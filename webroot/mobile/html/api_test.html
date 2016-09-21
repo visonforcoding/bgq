@@ -41,7 +41,7 @@
     <!--<li onclick="LEMON.login.wx(function(code){alert(12);alert(code);alert('code:'+code)})">LEMON.login.wx(function(code){alert('code:'+code)})  微信登录</li>-->
     <li onclick="LEMON.show.shareIco()">LEMON.show.shareIco()  显示分享图标</li>
     <li onclick="LEMON.sys.back('http://m.chinamatop.com/')">LEMON.sys.back('http://m.chinamatop.com/') 设置点击返回的跳转链接</li>
-    <li onclick="LEMON.sys.update('http://m.chinamatop.com/mobile/app/bgq.apk')">LEMON.sys.update('test url') 显示搜索图标</li>
+    <li onclick="LEMON.sys.update(window.isAndroid ? 'http://m.chinamatop.com/mobile/app/bgq.apk':'https://itunes.apple.com/cn/app/che-jing-ling/id1011007241?mt=8')">LEMON.sys.update('test url') 更新app</li>
 
     <li onclick="LEMON.share.banner()">LEMON.share.banner() 分享条</li>
     <li onclick="LEMON.sys.openLOC()">LEMON.sys.openLOC()开启缓存</li>
@@ -171,6 +171,8 @@
     window.onBackView = function(){
         alert('pop by onBackView');
     };
+
+    window.isAndroid = navigator.userAgent.toLowerCase().indexOf('android') != -1;
 
 
 //    (function(){
