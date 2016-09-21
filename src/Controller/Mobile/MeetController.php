@@ -675,10 +675,18 @@ class MeetController extends AppController {
         $biggie = $biggie->where($where);
         if($industry_id == '' && $agency_id == ''){
             $industry = $label[$type]['industry'];
-            $andwhere['or'] = [
-                'agency_id in' => $label[$type]['agency'],
-                'UserIndustries.industry_id in'=>$industry
-            ];
+            $agency = $label[$type]['agency'];
+            if($industry && $agency){
+                $andwhere['or'] = [
+                    'agency_id in' => $label[$type]['agency'],
+                    'UserIndustries.industry_id in'=>$industry
+                ];
+            }
+            if($industry && empty($agency)){
+                $andwhere = ['UserIndustries.industry_id in'=>$industry];
+            } elseif(empty ($industry) && $agency){
+                $andwhere = ['agency_id in' => $label[$type]['agency']];
+            }
             $biggie = $biggie->leftJoinWith('UserIndustries')
             ->distinct('User.id')
             ->andWhere($andwhere);
