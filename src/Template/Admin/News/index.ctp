@@ -42,6 +42,7 @@
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
 <script src="/wpadmin/lib/zeroclipboard/dist/ZeroClipboard.js"></script>
+<script src="/wpadmin/lib/clipboard.min.js"></script>
 <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
                 $(function () {
@@ -126,6 +127,19 @@
                             repeatitems: false,
                             id: "id"
                         },
+                        loadComplete: function (data) {
+                            console.log(data);
+                            var clip = '';
+                            clip = new ZeroClipboard($('.copy'));
+                            console.log('可以复制了');
+                            clip.on('copy', function (event) {
+                                console.log('re');
+                                clip.setData('text/plain', '<?= $domain ?>' + '/news/view/' + event.target.id);
+                            });
+                            clip.on("aftercopy", function (event) {
+                                layer.msg("复制了: " + event.data["text/plain"]);
+                            });
+                        },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
 
                     $('#select-industry').select2({
@@ -152,17 +166,7 @@
                     return response;
                 }
 
-                var clip = '';
-                setTimeout(function () {
-                    clip = new ZeroClipboard($('.copy'));
-                    console.log('可以复制了');
-                    clip.on('copy', function (event) {
-                        clip.setData('text/plain', '<?= $domain ?>' + '/news/view/' + event.target.id);
-                    });
-                    clip.on("aftercopy", function (event) {
-                        layer.msg("复制了: " + event.data["text/plain"]);
-                    });
-                }, 1000);
+
 
                 function delRecord(id) {
                     layer.confirm('确定删除？', {
