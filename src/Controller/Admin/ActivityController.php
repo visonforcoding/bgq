@@ -61,8 +61,10 @@ class ActivityController extends AppController {
             $org = [];
             $org_val = $this->request->data('org_val');
             foreach($this->request->data('org_key') as $key=>$org_key){
-                $org[$key]['org_key'] = $org_key;
-                $org[$key]['org_val'] = $org_val[$key];
+                if(!empty($org_key)){
+                    $org[$key]['org_key'] = $org_key;
+                    $org[$key]['org_val'] = $org_val[$key];
+                }
             }
             $activity->org = serialize($org);
             $res = $this->Activity->save($activity);
@@ -101,8 +103,10 @@ class ActivityController extends AppController {
              $org = [];
             $org_val = $this->request->data('org_val');
             foreach($this->request->data('org_key') as $key=>$org_key){
-                $org[$key]['org_key'] = $org_key;
-                $org[$key]['org_val'] = $org_val[$key];
+                if(!empty($org_key)){
+                    $org[$key]['org_key'] = $org_key;
+                    $org[$key]['org_val'] = $org_val[$key];
+                }
             }
               $activity->org = serialize($org);
             if ($this->Activity->save($activity)) {
