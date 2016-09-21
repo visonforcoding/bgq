@@ -1672,9 +1672,9 @@ class HomeController extends AppController {
                 }
             }
             $data['industry'] = $industry ? implode('、', $industry) : '未完善';
-            $data['educations'] = $user->educations ? $user->educations['0']->school : '未完善';
-            $data['careers'] = $user->careers ? $user->careers['0']->company : '未完善';
-            $data['grbq'] = $user->grbq ? implode('、', unserialize($user->grbq)) : '未完善';
+            $data['educations'] = $user->educations ? $user->educations['0']->school : '未完善（选填）';
+            $data['careers'] = $user->careers ? $user->careers['0']->company : '未完善（选填）';
+            $data['grbq'] = $user->grbq ? implode('、', unserialize($user->grbq)) : '未完善（选填）';
             $data['card_path'] = $user->card_path;
             return $this->Util->ajaxReturn(['status'=>true, 'data'=>$data]);
         } else {

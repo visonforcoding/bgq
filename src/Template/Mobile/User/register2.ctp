@@ -39,7 +39,7 @@
 
             <li>
                 <a id="uploadPic" href="javascript:void(0);">
-                    <span>我的名片：</span>
+                    <span>我的名片(可选)：</span>
                     <div class="upload-user-img">
                         <input  name="card_path" type="hidden" value=""/>
                         <span class="mcard"><img id="img" src="/mobile/images/user-img.png"/></span>
