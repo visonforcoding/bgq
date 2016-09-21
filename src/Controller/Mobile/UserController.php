@@ -58,9 +58,9 @@ class UserController extends AppController {
         }
         $isFans = false;
         $isGive = false;
-        $isReco = 0;
+        $isReco = '';
         $follows = 0;
-        $fans = '';
+        $fans = 0;
         if($this->user){
             $user_id = $this->user->id;
             $FansTable = \Cake\ORM\TableRegistry::get('UserFans');
