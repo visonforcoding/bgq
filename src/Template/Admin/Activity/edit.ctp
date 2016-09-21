@@ -33,18 +33,42 @@
             ?>
         </div>
     </div>
-    <div class="form-group">
+    <?php if (is_array($orgs)): ?>
+        <?php foreach ($orgs as $org): ?>
+            <div class="form-group xb">
+                <label class="col-md-2 control-label">协办</label>
+                <div class="input-group col-md-6">
+                    <span class="input-group-addon">单位</span>
+                    <input type="text" name="org_key[]" value="<?= $org['org_key'] ?>" class="form-control" />
+                    <span  class="input-group-addon">名称</span>
+                    <input type="text" name="org_val[]" value="<?= $org['org_val'] ?>" class="form-control">
+                    <span title="删除" class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
+                    <span title="添加" class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+    <div class="form-group xb">
         <label class="col-md-2 control-label">协办</label>
         <div class="input-group col-md-6">
-            <span class="input-group-addon">名称</span>
-            <input type="text" name="org_key" value="<?= $activity->org_key ?>" placeholder="协办单位" class="form-control" />
-            <span  class="input-group-addon">值</span>
-            <input type="text" name="org_val" value="<?= $activity->org_val ?>" class="form-control" placeholder="XXX公司">
+            <span class="input-group-addon">单位</span>
+            <input type="text" name="org_key[]"  class="form-control" />
+            <span  class="input-group-addon">名称</span>
+            <input type="text" name="org_val[]" class="form-control">
+            <span title="删除" class="input-group-addon del"><i style="color:blue" class="icon icon-trash"></i></span>
+            <span title="添加" class="input-group-addon add"><i style="color:blue" class="icon icon-plus-sign"></i></span>
         </div>
     </div>
-
     <div class="form-group">
         <label class="col-md-2 control-label">活动时间</label>
+        <div class="col-md-3">
+            <?php
+            echo $this->Form->input('activity_time', ['label' => false, 'type' => 'text','class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">过期时间</label>
         <div class="col-md-8">
             <?php
             echo $this->Form->input('time', ['label' => false, 'type' => 'text', 'class' => 'datepicker form-control']);
@@ -54,7 +78,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">报名截止时间</label>
         <div class="col-md-8">
-            <input type="text" class="form-control datetimepicker" value="<?=date('Y-m-d H:i:s', $activity->apply_end_time)?>" name="apply_end_time" />
+            <input type="text" class="form-control datetimepicker" value="<?= date('Y-m-d H:i:s', $activity->apply_end_time) ?>" name="apply_end_time" />
         </div>
     </div>
     <div class="form-group">
@@ -125,7 +149,7 @@
             <div id="cover" w="690" h="388"   class="jqupload">上传</div>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">摘要(活动介绍)</label>
         <div class="col-md-8">
             <?php
@@ -183,25 +207,23 @@
 <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
     $(function () {
-        var toolbars = [[
-                'source', '|', 'undo', 'redo', '|',
-                'bold', 'italic', 'underline', 'fontborder', 'strikethrough',
-                'pasteplain', '|', 'forecolor', 'backcolor',
-                'selectall', 'cleardoc', '|', 'rowspacingtop', //段前距
-                'rowspacingbottom', //段后距
-                'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
-                'indent', '|',
-                'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-                'simpleupload', 'insertimage', 'emotion', 'background', '|', 'inserttable', //插入表格
-                'horizontal', 'spechars', 'wordimage',
-            ]];
+//        var toolbars = [[
+//                'source', '|', 'undo', 'redo', '|',
+//                'bold', 'italic', 'underline', 'fontborder', 'strikethrough',
+//                'pasteplain', '|', 'forecolor', 'backcolor',
+//                'selectall', 'cleardoc', '|', 'rowspacingtop', //段前距
+//                'rowspacingbottom', //段后距
+//                'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+//                'indent', '|',
+//                'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+//                'simpleupload', 'insertimage', 'emotion', 'background', '|', 'inserttable', //插入表格
+//                'horizontal', 'spechars', 'wordimage',
+//            ]];
         initJqupload('cover', '/wpadmin/util/doUpload?dir=activitycover', 'jpg,png,gif,jpeg'); //初始化图片上传
         initJqupload('thumb', '/wpadmin/util/doUpload?dir=activitythumb', 'jpg,png,gif,jpeg'); //初始化图片上传
-        var ue = UE.getEditor('content', {
-            toolbars: toolbars
-        }); //初始化富文本编辑器
-        var contact = UE.getEditor('contact', {toolbars: toolbars}); //初始化富文本编辑器
-        var guest_UE = UE.getEditor('guest', {toolbars: toolbars}); //初始化富文本编辑器
+        var ue = UE.getEditor('content'); //初始化富文本编辑器
+        var contact = UE.getEditor('contact'); //初始化富文本编辑器
+        var guest_UE = UE.getEditor('guest'); //初始化富文本编辑器
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-series').select2({
             language: "zh-CN",
@@ -214,6 +236,14 @@
         $('#select-industry').select2({
             language: "zh-CN",
             placeholder: '选择一个标签'
+        });
+        $('.xb .add').click(function () {
+            var obj = $(this).parents('div.xb').clone(true);
+            $(obj).find('input').val('');
+            $(this).parents('div.xb').after(obj);
+        });
+        $('.xb .del').click(function () {
+            $(this).parents('div.xb').remove();
         });
         $('#select-industry').on('change', function (evt) {
             var selOption = $('#select-industry').val();

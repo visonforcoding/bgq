@@ -303,7 +303,7 @@
                         if (typeof res === 'object') {
                             if (res.status) {
                                 layer.alert(res.msg, function () {
-                                    window.location.href = '/admin/user/index';
+                                    window.location.reload();
                                 });
                             } else {
                                 layer.alert(res.msg, {icon: 5});
@@ -324,7 +324,7 @@
                         if (typeof res === 'object') {
                             if (res.status) {
                                 layer.alert(res.msg, function () {
-                                    window.location.href = '/admin/savant/index';
+                                      window.location.reload();
                                 });
                             } else {
                                 layer.alert(res.msg, {icon: 5});
