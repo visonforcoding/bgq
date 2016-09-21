@@ -58,8 +58,8 @@ class UserController extends AppController {
         }
         $isFans = false;
         $isGive = false;
-        $isReco = '';
-        $follows = '';
+        $isReco = 0;
+        $follows = 0;
         $fans = '';
         if($this->user){
             $user_id = $this->user->id;
