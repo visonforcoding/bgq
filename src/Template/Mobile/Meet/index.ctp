@@ -73,8 +73,8 @@
             <a href="/user/home-page/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
             <div class="vipinfo bd1">
                 <a href="/user/home-page/{#id#}">
-                    <h3><div class="l-name">{#truename#}</div>{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
-                    <span class="job w7 line2">{#company#}&nbsp;&nbsp;{#position#}</span>
+                    <h3><div class="l-name">{#truename#}<span class="job">&nbsp;&nbsp;{#position#}</span></div>{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
+                    <span class="job w7 line2">{#company#}</span>
                 </a>
                 <div class="mark">
                     {#subjects#}
