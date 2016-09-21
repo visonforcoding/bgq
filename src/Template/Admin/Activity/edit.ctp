@@ -111,7 +111,7 @@
             </div>
             <div style="color:red">请上传宽为380大小的首页列表图</div>
             <input name="thumb" value="<?= $activity->thumb; ?>"  type="hidden"/>
-            <div id="thumb"   class="jqupload">上传</div>
+            <div id="thumb" w="380"   class="jqupload">上传</div>
         </div>
     </div>
     <div class="form-group">
@@ -122,7 +122,7 @@
             </div>
             <div style="color:red">请上传宽为690，高小于388的封面图</div>
             <input name="cover" value="<?= $activity->cover; ?>"  type="hidden"/>
-            <div id="cover"   class="jqupload">上传</div>
+            <div id="cover" w="690" h="388"   class="jqupload">上传</div>
         </div>
     </div>
         <div class="form-group">
@@ -192,7 +192,7 @@
                 'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
                 'indent', '|',
                 'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-                'simpleupload', 'insertimage', 'emotion', 'background', '|',
+                'simpleupload', 'insertimage', 'emotion', 'background', '|', 'inserttable', //插入表格
                 'horizontal', 'spechars', 'wordimage',
             ]];
         initJqupload('cover', '/wpadmin/util/doUpload?dir=activitycover', 'jpg,png,gif,jpeg'); //初始化图片上传
