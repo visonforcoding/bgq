@@ -30,7 +30,7 @@
                 <p>{#summary#}</p>
             </div>	
             <div class="sec-news-r">
-                <img src="{#thumb#}"/>
+                {#img#}
             </div>
         </a>
         <div class="news-bottom clearfix">
@@ -94,6 +94,9 @@
             }
             d.newstags = $.util.dataToTpl('', 'subTpl', d.newstags);
             d.cover = d.thumb ? d.thumb : d.cover;
+            if(d.cover){
+                d.img = '<img src="' + d.cover + '"/>';
+            }
             return d;
         });
         return html;
