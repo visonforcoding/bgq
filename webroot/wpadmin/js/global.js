@@ -161,8 +161,11 @@ function initJqupload(id, url, allowedTypes) {
                         var str = '';
                         if(img.width > w) str += '图片实际宽度为'+img.width;
                         if(img.height > h) str += '图片实际高度为'+img.height;
-                        if(str) str += ' 超出限制!!';
-                        if(str) dom.prepend('<div tag="imgNotice" style="color:red">'+str+'</div>');
+                        //if(str) str += ' 超出限制!!';
+                        //if(str) dom.prepend('<div tag="imgNotice" style="color:red">'+str+'</div>');
+                        if(str){
+                            layer.alert('您上传的图片已经超出限制，将会降低体验效果',{icon: 5});
+                        }
                     }
                     img.src = data.path;
                 }
