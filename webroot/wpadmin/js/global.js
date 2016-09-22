@@ -1,3 +1,8 @@
+window._config = {
+    pages:[10,20,30,40],
+    showDef:30
+};
+
 $(function () {
 //    $.datetimepicker.setLocale('zh'); //日期选择器插件
     $('.datetimepicker').datetimepicker({lang: 'zh', format: 'Y-m-d H:i:s', timepicker: true,scrollInput: false});
