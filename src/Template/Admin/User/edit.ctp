@@ -131,7 +131,7 @@
                     </div>
                     <div style="color:red">可不设置头像</div>
                     <input name="avatar" value="<?=$user->avatar?>"  type="hidden"/>
-                    <div id="avatar" class="jqupload">上传</div>
+                    <div id="avatar"  class="jqupload">上传</div>
                 </div>
             </div>
             <div class="form-group">

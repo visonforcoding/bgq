@@ -788,3 +788,17 @@ ALTER TABLE `activity`
 	ADD COLUMN `activity_time` VARCHAR(250) NOT NULL COMMENT '活动时间,用于显示' AFTER `title`,
 	CHANGE COLUMN `time` `time` DATE NOT NULL COMMENT '过期时间' AFTER `activity_time`,
 	DROP COLUMN `org_val`;	
+
+
+CREATE TABLE `urlmap` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`url` VARCHAR(550) NOT NULL DEFAULT '' COMMENT 'url',
+	`map` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '映射',
+	PRIMARY KEY (`id`)
+)
+COMMENT='url映射'
+COLLATE='utf8mb4_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=6
+;
+	
