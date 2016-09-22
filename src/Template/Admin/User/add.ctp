@@ -96,6 +96,17 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">头像</label>
+        <div class="col-md-8">
+            <div style="width:60px;height:60px;padding:0px;"  class="img-thumbnail input-img img-circle"  single>
+                <img style="width:60px;height:60px" class="img-circle"  alt="" src=""/>
+            </div>
+            <div style="color:red">可不设置头像</div>
+            <input name="avatar" value=""  type="hidden"/>
+            <div id="avatar" class="jqupload">上传</div>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">常驻城市</label>
         <div class="col-md-8">
             <?= $this->cell('Region::base') ?>
@@ -107,18 +118,18 @@
             <textarea name="goodat" class="form-control" rows="2"></textarea>
         </div>
     </div>
-<!--    <div class="form-group">
-        <label class="col-md-2 control-label">项目经验</label>
-        <div class="col-md-8">
-            <textarea name="ymjy" class="form-control" rows="2"></textarea>
+    <!--    <div class="form-group">
+            <label class="col-md-2 control-label">项目经验</label>
+            <div class="col-md-8">
+                <textarea name="ymjy" class="form-control" rows="2"></textarea>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">业务能力</label>
-        <div class="col-md-8">
-            <textarea class="form-control" name="ywnl" rows="2"></textarea>
-        </div>
-    </div>-->
+        <div class="form-group">
+            <label class="col-md-2 control-label">业务能力</label>
+            <div class="col-md-8">
+                <textarea class="form-control" name="ywnl" rows="2"></textarea>
+            </div>
+        </div>-->
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
@@ -136,6 +147,7 @@
 <script>
     $(function () {
         initJqupload('card_path', '/wpadmin/util/doUpload?dir=/user/mp', 'jpg,png,gif,jpeg'); //初始化图片上传
+        initJqupload('avatar', '/wpadmin/util/doUpload?dir=user/avatar&zip=1', 'jpg,png,gif,jpeg'); //初始化图片上传
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('#select-agency').select2({
             language: "zh-CN",
