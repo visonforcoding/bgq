@@ -30,7 +30,7 @@
                 <p>{#summary#}</p>
             </div>
             <div class="sec-news-r">
-                <img src="{#cover#}"/>
+                {#img#}
             </div>
         </a>
     </section>
@@ -89,6 +89,10 @@
 //                                d.avatar = '/mobile/images/touxiang.png';
 //                                d.author = d.source;
 //                            }
+                            d.cover = d.thumb ? d.thumb : d.cover;
+                            if(d.cover){
+                                d.img = '<img src="' + d.cover + '"/>';
+                            }
                             return d;
                         });
                         $('.orgname').toggleClass('active');
