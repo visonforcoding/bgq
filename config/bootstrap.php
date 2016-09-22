@@ -222,6 +222,14 @@ Log::config('jslog', [
     'scopes' => ['jslog'],
     'file' => 'jslog',
 ]);
+//crontab 日志文件
+Log::config('cron', [
+    'className' => 'Cake\Log\Engine\FileLog',
+    'path' => LOGS,
+    'levels' => [],
+    'scopes' => ['cron'],
+    'file' => 'cron',
+]);
 
 /**
  * Connect middleware/dispatcher filters.
