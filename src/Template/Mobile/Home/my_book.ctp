@@ -21,7 +21,7 @@
     </div>
 <script type="text/html" id="tpl">
     <section class="internet-v-info mt20">
-        <a link="{#link#}"  id='msgId_{#msg_id#}' msg_id='{#msg_id#}' onclick="read(this);">
+        <div link="{#link#}"  id='msgId_{#msg_id#}' msg_id='{#msg_id#}' onclick="read(this);">
             <div class="innercon">
                 <span class="head-img"><img src="{#user_logo#}"/>{#v#}</span>
                 <div class="vipinfo my-meet-info">
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-        </a>
+        </div>
         {#subject_status#}
         </div>
     </section>
