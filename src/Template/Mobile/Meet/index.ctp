@@ -68,7 +68,7 @@
 
 </div>
 <script type='text/html' id='biggie_tpl'>
-    <section class="internet-v-info">
+<!--    <section class="internet-v-info">
         <div class="innercon">
             <a href="/user/home-page/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
             <div class="vipinfo bd1">
@@ -78,12 +78,34 @@
                 </a>
                 <div class="mark">
                     {#subjects#}
-                   <!--<a href="#this" class="line1 w7"><i class="iconfont">&#xe67c;</i>演员的自我修养演员的自我修养</a>-->
+                   <a href="#this" class="line1 w7"><i class="iconfont">&#xe67c;</i>演员的自我修养演员的自我修养</a>
                 </div>
 
                 <div class="m_focus_r color-items focus" user_id="{#id#}">
-                    <i class="iconfont">&#xe614;<!--&#xe680;--></i>
+                    <i class="iconfont">&#xe614;&#xe680;</i>
                     <span>{#focus_msg#}</span>
+                </div>
+            </div>
+        </div>
+    </section>-->
+    <section class="internet-v-info">
+        <div class="innercon">
+            <a href="/user/home-page/{#id#}"><span class="head-img"><img src="{#avatar#}"><i></i></span></a>
+            <div class="vipinfo bd1">
+                <div class="fl c_info_list">
+                    <a href="/user/home-page/{#id#}">
+                        <h3><div class="l-name">{#truename#}</div><div class="job line1">{#position#}</div></h3>
+                        <div class="job">{#company#}</div>
+                    </a>
+                    <div class="mark line1">
+                        {#subjects#}
+                        <!--<a href="#this"><i class="iconfont"></i>演员的自我修养演员的自我修养演员的自我修养演员的自我修养</a>-->
+                    </div>
+                </div>
+                <div class="m_focus_r r_focus_num fl color-items focus" user_id="{#id#}">
+                    <span class="meetnum">{#meet_nums#}人聊过</span>
+                    <i class="iconfont">&#xe614;</i>
+                    <span class="msg">{#focus_msg#}</span>
                 </div>
             </div>
         </div>
@@ -120,16 +142,16 @@
         }
     });
 
-    window.onActiveView = function(){
+    window.onActiveView = function () {
         $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
             d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
-    //        d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
+            //        d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
             d.city = '';
             var subject = d.subjects.length ? d.subjects[0] : '';
             if (window.user_id == d.id) {
-                d.subjects = subject ? '<a href="/meet/subject/'+ subject.id +'" class="line1 w7"><i class="iconfont">&#xe67c;</i>'+ subject.title +'</a>' : '';
+                d.subjects = subject ? '<a href="/meet/subject/' + subject.id + '"><i class="iconfont">&#xe67c;</i>' + subject.title + '</a>' : '';
             } else {
-                d.subjects = subject ? '<a href="javascript:$.util.checkLogin(\'/meet/subject-detail/'+ subject.id +'/#index\')" class="line1 w7"><i class="iconfont">&#xe67c;</i>'+ subject.title +'</a>' : '';
+                d.subjects = subject ? '<a href="javascript:$.util.checkLogin(\'/meet/subject-detail/' + subject.id + '/#index\')"><i class="iconfont">&#xe67c;</i>' + subject.title + '</a>' : '';
             }
             d.focus_msg = d.followers.length ? '取消关注' : '加关注';
             return d;
@@ -163,11 +185,11 @@
                             d.city = '';
                             var subject = d.subjects.length ? d.subjects[0] : '';
                             if (window.user_id == d.id) {
-                    //            d.subjects = $.util.dataToTpl('', 'mySubTpl', d.subjects);
-                                d.subjects = subject ? '<a href="/meet/subject/'+ subject.id +'" class="line1 w7"><i class="iconfont">&#xe67c;</i>'+ subject.title +'</a>' : '';
+                                //            d.subjects = $.util.dataToTpl('', 'mySubTpl', d.subjects);
+                                d.subjects = subject ? '<a href="/meet/subject/' + subject.id + '" class="line1 w7"><i class="iconfont">&#xe67c;</i>' + subject.title + '</a>' : '';
                             } else {
-                    //            d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
-                                d.subjects = subject ? '<a href="javascript:$.util.checkLogin(\'/meet/subject-detail/'+ subject.id +'/#index\')" class="line1 w7"><i class="iconfont">&#xe67c;</i>'+ subject.title +'</a>' : '';
+                                //            d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
+                                d.subjects = subject ? '<a href="javascript:$.util.checkLogin(\'/meet/subject-detail/' + subject.id + '/#index\')" class="line1 w7"><i class="iconfont">&#xe67c;</i>' + subject.title + '</a>' : '';
                             }
                             d.focus_msg = d.followers.length ? '取消关注' : '加关注';
                             return d;
@@ -224,7 +246,7 @@
 
     $('.focus').on('tap', function () {
         var obj = $(this);
-        if(obj.hasClass('notap')){
+        if (obj.hasClass('notap')) {
             return false;
         }
         obj.addClass('notap');
@@ -236,9 +258,9 @@
                 $.util.alert(res.msg);
                 if (res.status) {
                     if (res.msg.indexOf('取消关注') != '') {
-                        obj.find('span').html('取消关注');
+                        obj.find('span.msg').html('取消关注');
                     } else {
-                        obj.find('span').html('加关注');
+                        obj.find('span.msg').html('加关注');
                     }
                     obj.removeClass('notap');
                 }
