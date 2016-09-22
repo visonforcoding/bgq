@@ -546,7 +546,7 @@ display: -webkit-box;-webkit-line-clamp: 1;}
 .m-detail-box li h3,.m-detail li h3{width:75%;line-height: 0.4rem;font-size:0.3rem;}
 .m-detail .mtitle h3{width:100%;}
 .m-detail li .t-tittle{width:100%;border-bottom:1px #e5e5e5 solid;padding-bottom:.2rem;}
-.m-detail li p{color:#222;margin-top:0.2rem;line-height: .32rem;}
+.m-detail li p{color:#7A7E83;margin-top:0.2rem;line-height: .32rem;}
 .m-detail-box li:first-child h3 span,.m-detail li:first-child h3 span{font-size:0.26rem;margin-top:0.1rem;color:#9ba4ad;}
 .meet-type{font-size:0.28rem;}
 .m-detail-box li:nth-child(2),
