@@ -186,8 +186,6 @@
                         if (typeof msg === 'object') {
                             if (msg.status === true) {
                                 var html = $.util.dataToTpl('', 'search_tpl', msg.data, function (d) {
-//                                    d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-//                                    d.author = d.user.truename;
                                     d.cover = d.thumb ? d.thumb : d.cover;
                                     if(d.cover){
                                         d.img = '<img src="' + d.cover + '"/>';
@@ -220,8 +218,10 @@
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
                         var html = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
-//                            d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-//                            d.author = d.user.truename;
+                            d.cover = d.thumb ? d.thumb : d.cover;
+                            if(d.cover){
+                                d.img = '<img src="' + d.cover + '"/>';
+                            }
                             return d;
                         });
                         $('.orgname').removeClass('active');
@@ -248,8 +248,10 @@
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
                         var html = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
-//                            d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-//                            d.author = d.user.truename;
+                            d.cover = d.thumb ? d.thumb : d.cover;
+                            if(d.cover){
+                                d.img = '<img src="' + d.cover + '"/>';
+                            }
                             return d;
                         });
                         $('.orgname').removeClass('active');
