@@ -224,6 +224,10 @@
 
     $('.focus').on('tap', function () {
         var obj = $(this);
+        if(obj.hasClass('notap')){
+            return false;
+        }
+        obj.addClass('notap');
         var user_id = obj.attr('user_id');
         $.util.ajax({
             url: '/user/follow',
@@ -236,6 +240,7 @@
                     } else {
                         obj.find('span').html('加关注');
                     }
+                    obj.removeClass('notap');
                 }
 
             }

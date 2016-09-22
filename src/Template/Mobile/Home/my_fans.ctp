@@ -49,8 +49,7 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
-    if(LEMON.isAPP)
-    {
+    if(LEMON.isAPP) {
         LEMON.sys.back('/home/index');
     }
     $.util.dataToTpl('follow', 'listTpl',<?= json_encode($fans) ?>, function (d) {
