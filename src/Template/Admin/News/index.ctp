@@ -42,7 +42,7 @@
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
 <script src="/wpadmin/lib/zeroclipboard/dist/ZeroClipboard.js"></script>
-<script src="/wpadmin/lib/clipboard.min.js"></script>
+<!--<script src="/wpadmin/lib/clipboard.min.js"></script>-->
 <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
                 $(function () {
@@ -107,8 +107,8 @@
                             {name: 'update_time', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
-                        rowNum: 10,
-                        rowList: [10, 20, 30],
+                        rowNum: window._config.showDef,
+                        rowList: window._config.pages,
                         sortname: "id",
                         sortorder: "desc",
                         viewrecords: true,
