@@ -74,11 +74,12 @@
                 });
 
                 function actionFormatter(cellvalue, options, rowObject) {
-                    response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
 //                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="编辑" href="/admin/biggieAd/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     return response;
                 }
+                
 
                 function delRecord(id) {
                     layer.confirm('确定删除？', {
@@ -147,7 +148,7 @@
                     });
             }   
             function showSavant(id){
-                  url = '/mobile/meet/view/' + id;
+                  url = '/mobile/user/home-page/' + id;
                     layer.open({
                         type: 2,
                         title: '会员主页',
