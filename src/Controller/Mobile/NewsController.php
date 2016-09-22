@@ -129,13 +129,13 @@ class NewsController extends AppController {
                     'contain' => ['Users', 'Comments'=>function($q){
                         return $q->where(['is_delete'=>0])->orderDesc('Comments.create_time')->limit($this->newslimit);
                     },'Comments.Users'=>function($q){
-                        return $q->select(['id','avatar','truename','company','position']);
+                        return $q->select(['id','avatar','truename','company','position'])->where(['Users.enabled'=>1]);
                     },'Comments.Likes'=>function($q)use($user_id){
                         return $q->where(['type'=>1,'user_id'=>$user_id]);
                     },'Praises'=>function($q)use($user_id){
                         return $q->where(['type'=>1,'user_id'=>$user_id]);
                     },'Comments.Reply'=>function($q){
-                        return $q->select(['id','truename']);
+                        return $q->select(['id','truename'])->where(['Reply.enabled'=>1]);
                     },'Savants'],
                     'conditions' => [
                         'News.status' => 1
@@ -146,13 +146,13 @@ class NewsController extends AppController {
                     'contain' => ['Users', 'Comments'=>function($q){
                         return $q->where(['is_delete'=>0])->orderDesc('Comments.create_time')->limit($this->newslimit);
                     },'Comments.Users'=>function($q){
-                        return $q->select(['id','avatar','truename','company','position']);
+                        return $q->select(['id','avatar','truename','company','position'])->where(['Users.enabled'=>1]);
                     },'Comments.Likes'=>function($q)use($user_id){
                         return $q->where(['type'=>1,'user_id'=>$user_id]);
                     },'Praises'=>function($q)use($user_id){
                         return $q->where(['type'=>1,'user_id'=>$user_id]);
                     },'Comments.Reply'=>function($q){
-                        return $q->select(['id','truename']);
+                        return $q->select(['id','truename'])->where(['Reply.enabled'=>1]);
                     },'Savants'],
                 ]);
             }
@@ -164,9 +164,9 @@ class NewsController extends AppController {
                     'contain' => ['Users', 'Comments'=>function($q){
                         return $q->where(['is_delete'=>0])->orderDesc('Comments.create_time')->limit($this->newslimit);
                     },'Comments.Users'=>function($q){
-                        return $q->select(['id','avatar','truename','company','position']);
+                        return $q->select(['id','avatar','truename','company','position'])->where(['Users.enabled'=>1]);
                     },'Comments.Reply'=>function($q){
-                        return $q->select(['id','truename']);
+                        return $q->select(['id','truename'])->where(['Reply.enabled'=>1]);
                     },'Savants'],
                     'conditions' => [
                         'News.status' => 1
@@ -177,9 +177,9 @@ class NewsController extends AppController {
                     'contain' => ['Users', 'Comments'=>function($q){
                         return $q->where(['is_delete'=>0])->orderDesc('Comments.create_time')->limit($this->newslimit);
                     },'Comments.Users'=>function($q){
-                        return $q->select(['id','avatar','truename','company','position']);
+                        return $q->select(['id','avatar','truename','company','position'])->where(['Users.enabled'=>1]);
                     },'Comments.Reply'=>function($q){
-                        return $q->select(['id','truename']);
+                        return $q->select(['id','truename'])->where(['Reply.enabled'=>1]);
                     },'Savants'],
                 ]);
             }
