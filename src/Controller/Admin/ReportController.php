@@ -67,6 +67,7 @@ class ReportController extends AppController {
             $pv->user_id = $user->id;
         }
         $pv->is_app = 3;
+        $pv->useragent = $this->request->header('User-Agent');
         if ($this->isApp($pv->useragent)) {
             $pv->is_app = 1;
         }
@@ -81,7 +82,6 @@ class ReportController extends AppController {
             $pv->os = 1;
         }
         $pv->os_version = $this->osVersion($pv->useragent);
-        $pv->useragent = $this->request->header('User-Agent');
         $pv->create_time = date('Y-m-d H:i:s');
         $pvdata = $pv->toArray();
         $pvdata_str = serialize($pvdata);
