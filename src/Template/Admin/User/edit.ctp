@@ -103,13 +103,13 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">所在行业</label>
                 <div class="col-md-8">
-                    <?= $this->cell('Industry',[$selIndustryIds]) ?>
+                    <?= $this->cell('Industry', [$selIndustryIds]) ?>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">个人标签</label>
                 <div class="col-md-8">
-                    <?= $this->cell('Protag',[unserialize($user->grbq)]) ?>
+                    <?= $this->cell('Protag', [unserialize($user->grbq)]) ?>
                 </div>
             </div>
             <div class="form-group">
@@ -124,6 +124,17 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-md-2 control-label">头像</label>
+                <div class="col-md-8">
+                    <div style="width:60px;height:60px;padding:0px;"  class="img-thumbnail input-img img-circle"  single>
+                        <img style="width:60px;height:60px" class="img-circle"  alt="" src="<?=$user->avatar?>"/>
+                    </div>
+                    <div style="color:red">可不设置头像</div>
+                    <input name="avatar" value="<?=$user->avatar?>"  type="hidden"/>
+                    <div id="avatar" class="jqupload">上传</div>
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-md-2 control-label">常驻城市</label>
                 <div class="col-md-8">
                     <?= $this->cell('Region::base', [$user->city]) ?>
@@ -135,18 +146,18 @@
                     <textarea name="goodat" class="form-control" rows="2"><?= $user->goodat ?></textarea>
                 </div>
             </div>
-<!--            <div class="form-group">
-                <label class="col-md-2 control-label">项目经验</label>
-                <div class="col-md-8">
-                    <textarea name="ymjy" class="form-control" rows="2"><?= $user->ymjy ?></textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">业务能力</label>
-                <div class="col-md-8">
-                    <textarea class="form-control" name="ywnl" rows="2"><?= $user->ywnl ?></textarea>
-                </div>
-            </div>-->
+            <!--            <div class="form-group">
+                            <label class="col-md-2 control-label">项目经验</label>
+                            <div class="col-md-8">
+                                <textarea name="ymjy" class="form-control" rows="2"><?= $user->ymjy ?></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">业务能力</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" name="ywnl" rows="2"><?= $user->ywnl ?></textarea>
+                            </div>
+                        </div>-->
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
@@ -242,6 +253,7 @@
     <script>
         $(function () {
             initJqupload('card_path', '/wpadmin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
+            initJqupload('avatar', '/wpadmin/util/doUpload?dir=user/avatar&zip=1', 'jpg,png,gif,jpeg'); //初始化图片上传
             $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
             $('#select-agency').select2({
                 language: "zh-CN",
