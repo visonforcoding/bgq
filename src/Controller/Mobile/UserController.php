@@ -579,7 +579,7 @@ class UserController extends AppController {
                 }
                 //发送一条关注消息给被关注者
                 $this->loadComponent('Business');
-                $this->Business->usermsg($this->user->id, $following_id, '您有新的关注者', '', 1, $newfans->id);
+                $this->Business->usermsg($following_id, $this->user->id, '您有新的关注者', '', 1, $newfans->id);
                 //更新被关注者粉丝数  列表方便显示
                 $follower_user = $this->User->get($following_id);
                 $fansCount = $FansTable->find()->where("`following_id` = '$following_id'")->count();
