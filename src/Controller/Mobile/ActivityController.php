@@ -251,7 +251,7 @@ class ActivityController extends AppController {
      */
     public function enroll($id = '') {
         $this->handCheckLogin();
-        
+        $UserTable = \Cake\ORM\TableRegistry::get('user');
         if ($id) {
             $activity = $this->Activity->get($id, [
                 'contain' => ['Users'=>function($q){
@@ -259,7 +259,6 @@ class ActivityController extends AppController {
                         }],
             ]);
             if ($this->request->is('post')) {
-                $UserTable = \Cake\ORM\TableRegistry::get('user');
                 $user = $UserTable->get($this->user->id, [
                     'contain' => ['Careers', 'Educations', 'Industries']
                 ]);
