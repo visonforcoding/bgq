@@ -35,10 +35,15 @@
 </div>
 <div class="reg-shadow" id="shadow" hidden></div>
 <div class="tips" hidden id="xmjy" style="z-index: 999">
-    <p>项目经验样例</p>
+    <p>
+        1、**公司私有化，并拆除红筹架构回归国内A股上市 的方案设计，融资方案等。<br>
+        2、**公司收购德国**，担任买方顾问，包括谈判、交易结构设计、支付方式、融资安排等。
+    </p>
 </div>
 <div class="tips" hidden id="scht" style="z-index: 999">
-    <p>擅长话题样例</p>
+    <p>
+        医疗健康领域的投资与并购；海外并购与中概股私有化
+    </p>
 </div>
 <div class="totips" hidden id="checkBtn">
     <h3 id="msg">请先去完善个人资料</h3>
