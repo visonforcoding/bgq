@@ -43,7 +43,7 @@
                 <div class="fl c_info_list">
                     <a href="/user/home-page/{#following_id#}">
                         <h3><div class="l-name">{#following_truename#}</div><div class="job line1">{#following_position#}</div></h3>
-                        <div class="job">{#following_company#}</div>
+                        <span class="job">{#following_company#}</span>
                     </a>
                     <div class="mark s_mark_h">
                         {#following_subject#}

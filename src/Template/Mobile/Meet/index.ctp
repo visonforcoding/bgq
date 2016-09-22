@@ -75,7 +75,7 @@
                 <div class="fl c_info_list">
                     <a href="/user/home-page/{#id#}">
                         <h3><div class="l-name">{#truename#}</div><div class="job line1">{#position#}</div></h3>
-                        <div class="job">{#company#}</div>
+                        <span class="job">{#company#}</span>
                     </a>
                     <div class="mark line1">
                         {#subjects#}
@@ -194,8 +194,9 @@
                                             obj.find('span.msg').html('加关注');
                                         }
                                         obj.removeClass('notap');
+                                    } else {
+                                        obj.removeClass('notap');
                                     }
-
                                 }
                             });
                         });
@@ -248,8 +249,9 @@
                         obj.find('span.msg').html('加关注');
                     }
                     obj.removeClass('notap');
+                } else {
+                    obj.removeClass('notap');
                 }
-
             }
         });
     });
