@@ -293,7 +293,33 @@ class HomeController extends AppController {
                 //查找type 为1 的消息
                 $user_id = $this->user->id;
                 $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
-                $unReadFollowCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type' => 1])->count(); //未读关注消息
+//                $unReadFollowCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type' => 1])->count(); //未读关注消息
+                $unReadFollowCount = $UsermsgTable->find()
+                                ->hydrate(false)
+                                ->distinct('u.id')
+                                ->select(['u.truename', 'u.avatar', 'u.id', 'usermsg.create_time',
+                                    'u.company', 'u.position', 'u.fans', 'uf.type', 'u.level'])
+                                ->join([
+                                    'uf' => [
+                                        'table' => 'user_fans',
+                                        'type' => 'inner',
+                                        'conditions' => 'uf.id = usermsg.table_id',
+                                    ],
+                                    'u' => [
+                                        'table' => 'user',
+                                        'type' => 'inner',
+                                        'conditions' => 'u.id = uf.user_id',
+                                    ]
+                                ])
+                                ->where(['usermsg.`user_id`' => $user_id, 'usermsg.status'=>0])
+                                ->orderDesc('usermsg.create_time')
+                                ->formatResults(function($items) {
+                                    return $items->map(function($item) {
+                                        $item['u']['avatar'] = getSmallAvatar($item['u']['avatar']);
+                                        return $item;
+                                    });
+                                })
+                                ->count();
                 $unReadSysCount = $UsermsgTable->find()->where(['user_id' => $user_id, 'status' => 0, 'type !=' => 1])->count(); //未读系统消息
                 $this->set([
                     'pageTitle' => '关注消息',
@@ -312,7 +338,7 @@ class HomeController extends AppController {
                 $fans = $UsermsgTable->find()
                                 ->hydrate(false)
                                 ->distinct('u.id')
-                                ->select(['u.truename', 'u.avatar', 'u.id', 'create_time',
+                                ->select(['u.truename', 'u.avatar', 'u.id', 'usermsg.create_time',
                                     'u.company', 'u.position', 'u.fans', 'uf.type', 'u.level'])
                                 ->join([
                                     'uf' => [
@@ -365,7 +391,7 @@ class HomeController extends AppController {
                     return $this->Util->ajaxReturn(false, '系统错误');
                 }
             }
-
+            
             public function myXiaomi(){
                 $this->set([
                     'pageTitle' => '小秘书',
