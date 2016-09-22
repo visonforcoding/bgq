@@ -275,7 +275,7 @@ class NewsController extends AppController {
                 ->find()
                 ->where(['title LIKE' => '%' . $data['keyword'] . '%'])
                 ->Orwhere(['body LIKE' => '%' . $data['keyword'] . '%'])
-                ->andWhere(['News.is_delete'=>0]);
+                ->andWhere(['News.is_delete'=>0, 'News.status'=>1]);
         if ($newstag_id) {
             $res = $res->matching(
                 'Newstags', function($q)use($newstag_id) {
@@ -326,7 +326,7 @@ class NewsController extends AppController {
     public function getMoreSearch($page){
         $data = $this->request->data();
         $newstag_id = $data['newstag_id'];
-        $news = $this->News->find()->where(['title LIKE' => '%' . $data['keyword'] . '%']);
+        $news = $this->News->find()->where(['title LIKE' => '%' . $data['keyword'] . '%', 'News.is_delete'=>0, 'News.status'=>1]);
         if ($newstag_id) {
             $news = $news->matching(
                 'Newstags', function($q)use($newstag_id) {
