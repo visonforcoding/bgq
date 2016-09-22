@@ -132,9 +132,9 @@ class ActivityTable extends Table {
                 ->requirePresence('title', 'create')
                 ->notEmpty('title');
 
-//         $validator
-//                 ->requirePresence('time', 'create')
-//                 ->notEmpty('time');
+         $validator
+                 ->requirePresence('time', 'create')
+                 ->notEmpty('time', '过期时间不可为空');
 //         $validator
 //                 ->requirePresence('address', 'create')
 //                 ->notEmpty('address');
@@ -158,10 +158,14 @@ class ActivityTable extends Table {
                 ->allowEmpty('cover');
 
         $validator
-                ->allowEmpty('body');
+                ->notEmpty('body', '流程介绍不可为空');
+        $validator
+                ->notEmpty('activity_time', '活动时间不可为空');
+        $validator
+                ->notEmpty('company', '主办单位不可为空');
 
         $validator
-                ->allowEmpty('summary');
+                ->notEmpty('summary', '摘要（活动介绍）不可为空');
 
 
         return $validator;
