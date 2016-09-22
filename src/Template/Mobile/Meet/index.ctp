@@ -197,6 +197,10 @@
                         $('#biggie').append(html);
                         $('.focus').on('tap', function () {
                             var obj = $(this);
+                            if (obj.hasClass('notap')) {
+                                return false;
+                            }
+                            obj.addClass('notap');
                             var user_id = obj.attr('user_id');
                             $.util.ajax({
                                 url: '/user/follow',
@@ -205,10 +209,11 @@
                                     $.util.alert(res.msg);
                                     if (res.status) {
                                         if (res.msg.indexOf('取消关注') != '') {
-                                            obj.find('span').html('取消关注');
+                                            obj.find('span.msg').html('取消关注');
                                         } else {
-                                            obj.find('span').html('加关注');
+                                            obj.find('span.msg').html('加关注');
                                         }
+                                        obj.removeClass('notap');
                                     }
 
                                 }
