@@ -133,7 +133,7 @@ class PvchartController extends AppController {
         if (!empty($where)) {
             $query->where($where);
         }
-        $query->group(['Pvlog.ptag', 'act', 'url']);
+        $query->group(['Pvlog.ptag', 'act', 'urlmap']);
         $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
