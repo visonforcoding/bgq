@@ -1193,7 +1193,7 @@ background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  ba
 .m-service-con{margin-top:.6rem;}
 .m_title_des{padding:.15rem .3rem;background: #fff;}
 .m_title_des h3{/*border-left:#e01a48 solid 2px;*/padding-left:20px;line-height:.32rem;font-size: .3rem;height:.34rem;position:relative;}
-.m_title_des h3:before{content: '';position:absolute;left:0;height:0;width:0;border:10px transparent solid;border-left:10px #e01a48 solid;top:50%;margin-top:-10px;}
+.m_title_des h3:before{content: '';position:absolute;left:0;height:0;width:0;border:8px transparent solid;border-left:8px #e01a48 solid;top:50%;margin-top:-8px;}
 .m_sub-title{line-height: .34rem;}
 /*audio*/
 .video-js{background: #000;padding:.1rem;}
