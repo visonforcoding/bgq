@@ -207,12 +207,13 @@ class BusinessComponent extends Component {
             \Cake\Log\Log::error($usermsg->errors(),'devlog');
         } else {
             $userTable = \Cake\ORM\TableRegistry::get('user');
-            $user = $userTable->get($push_id);
+            $push = $userTable->get($push_id);
+            $user = $userTable->get($user_id);
             if($type == 1){
                 $data = [
                    'url' => 'http://m.chinamatop.com/home/my-message-fans/1'
                 ];
-                $this->Push->sendAlias($user->user_token, $user->truename . '关注了您', ' ', $user->truename . '关注了您', 'BGB', true, $data);
+                $this->Push->sendAlias($user->user_token, $push->truename . '关注了您', ' ', $user->truename . '关注了您', 'BGB', true, $data);
                 $pushlog = $PushlogTable->newEntity();
                 $pushlog->push_id = $push_id;
                 $pushlog->receive_id = $user_id;
