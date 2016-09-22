@@ -143,7 +143,7 @@
                     } else {
                         user = user.replace('{#setUp#}', '');
                     }
-                    user = user.replace('{#user_id#}', res.data.user.id);
+                    user = user.replace(/{#user_id#}/g, res.data.user.id);
                     user = user.replace('{#truename#}', res.data.user.truename);
                     user = user.replace('{#company#}', res.data.user.company);
                     user = user.replace('{#position#}', res.data.user.position);
