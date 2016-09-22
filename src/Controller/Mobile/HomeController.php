@@ -509,9 +509,7 @@ class HomeController extends AppController {
             $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
             $type = $this->request->query('type');
             $user_id = $this->user->id;
-            $books = $BookTable->find()->contain(['Subjects'=>function($q){
-                return $q->where(['Subjects.is_del'=>0]);
-            }, 'Subjects.User' => function($q) {
+            $books = $BookTable->find()->contain(['Subjects', 'Subjects.User' => function($q) {
                 return $q->where(['enabled'=>1])
                         ->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums', 'level']);
             }, 'Usermsgs'=>function($q)use($user_id){

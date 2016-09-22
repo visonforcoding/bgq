@@ -18,7 +18,7 @@ p{font-size:14px;line-height: 24px;}
 .zt_commpany{font-size:13px;line-height: 20px;}
 .p_job{font-size:13px;}
 .zt_num{font-size:15px;font-weight: 400;}
-.zt_r_btn{width:60px;height:24px;background: #e01a48;color:#fff;text-align: center;margin-right:.3rem;}
+.zt_r_btn{width:60px;height:24px;background: #e01a48;color:#fff;text-align: center;margin-right:.3rem;line-height: 24px;}
 .posi_top{position: relative;}
 .posi_top span{position: absolute;top:0;left:0;width:0;height:0;border-top:26px #e01a48 solid;border-left:26px #e01a48 solid;border-right:26px solid transparent;border-bottom:26px solid transparent;}
 .posi_top  i{position: absolute;top:5px;left:4px;color:#fff;font-size: 13px;font-weight: bold;}
