@@ -161,8 +161,8 @@ class BusinessComponent extends Component {
 
     /**
      * 用户消息
-     * @param type $push_id  接收id
-     * @param type $user_id  发送id
+     * @param type $push_id  发送id
+     * @param type $user_id  接收id
      * @param type $title  标题
      * @param type $msg   内容
      * @param type $type  类型
@@ -207,7 +207,7 @@ class BusinessComponent extends Component {
             \Cake\Log\Log::error($usermsg->errors(),'devlog');
         } else {
             $userTable = \Cake\ORM\TableRegistry::get('user');
-            $user = $userTable->get($user_id);
+            $user = $userTable->get($push_id);
             if($type == 1){
                 $data = [
                    'url' => 'http://m.chinamatop.com/home/my-message-fans/1'

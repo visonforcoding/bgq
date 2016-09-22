@@ -82,13 +82,6 @@
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
                         search_data[industry_id] = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
-//                            if (d.user) {
-//                                d.avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-//                                d.author = d.user.truename;
-//                            } else {
-//                                d.avatar = '/mobile/images/touxiang.png';
-//                                d.author = d.source;
-//                            }
                             d.cover = d.thumb ? d.thumb : d.cover;
                             if(d.cover){
                                 d.img = '<img src="' + d.cover + '"/>';
@@ -202,43 +195,16 @@
         });
     }, 2000);
 
-
-
-
-
-
-
     $('#searchForm').submit(function () {
-        $.ajax({
-            type: 'post',
-            url: '/news/getSearchRes',
-            data: $('#searchForm').serialize(),
-            dataType: 'json',
-            success: function (msg) {
-                if (typeof msg === 'object') {
-                    if (msg.status === true) {
-                        var html = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
-                            d.cover = d.thumb ? d.thumb : d.cover;
-                            if(d.cover){
-                                d.img = '<img src="' + d.cover + '"/>';
-                            }
-                            return d;
-                        });
-                        $('.orgname').removeClass('active');
-                        $('.a-s-mark').addClass('a-s-width');
-                    } else {
-                        $('#search').html('');
-                        $.util.alert(msg.msg);
-                    }
-                }
-            }
-        });
-        $('input[name="keyword"]').blur();
-        LEMON.sys.hideKeyboard();
+        search();
         return false;
     });
 
     $('#doSearch').on('tap', function () {
+        search();
+    });
+
+    function search(){
         $.ajax({
             type: 'post',
             url: '/news/getSearchRes',
@@ -265,8 +231,7 @@
         });
         $('input[name="keyword"]').blur();
         LEMON.sys.hideKeyboard();
-    });
-
+    }
 </script>
 <?php
 $this->end('script');

@@ -559,7 +559,7 @@ class UserController extends AppController {
                 }
             } else {
                 //查看是否被该用户关注过
-                $follower = $FansTable->find()->where("`user_id` = '$following_id' and `following_id` = '$user_id'")->first();
+                $follower = $FansTable->find()->where("`user_id` = '$following_id' and `following_id` = '$user_id'")->orderDesc('id')->first();
                 $newfans = $FansTable->newEntity();
                 $newfans->user_id = $user_id;
                 $newfans->following_id = $following_id;
@@ -583,7 +583,7 @@ class UserController extends AppController {
                 }
                 //发送一条关注消息给被关注者
                 $this->loadComponent('Business');
-                $this->Business->usermsg($following_id, $this->user->id, '您有新的关注者', '', 1, $newfans->id);
+                $this->Business->usermsg($this->user->id, $following_id, '您有新的关注者', '', 1, $newfans->id);
                 //更新被关注者粉丝数  列表方便显示
                 $follower_user = $this->User->get($following_id);
                 $fansCount = $FansTable->find()->where("`following_id` = '$following_id'")->count();
