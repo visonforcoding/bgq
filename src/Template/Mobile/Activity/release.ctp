@@ -132,8 +132,10 @@
     });
     
     $('.hide_tips').on('tap', function(){
-        $('#shadow').hide();
-        $('#success').hide();
+        setTimeout(function(){
+            $('#shadow').hide();
+            $('#success').hide();
+        }, 500);
     });
 </script>
 <?php
