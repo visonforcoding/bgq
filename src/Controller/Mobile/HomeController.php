@@ -532,9 +532,7 @@ class HomeController extends AppController {
                     }
                 }
             }
-            $savant_books = $BookTable->find()->contain(['Subjects'=>function($q){
-                return $q->where(['Subjects.is_del'=>0]);
-            }, 'Users' => function($q) {
+            $savant_books = $BookTable->find()->contain(['Subjects', 'Users' => function($q) {
                 return $q->where(['Users.enabled'=>1])
                         ->select(['truename', 'avatar', 'id', 'company', 'position', 'meet_nums', 'level']);
             }, 'Usermsgs'=>function($q)use($user_id){
