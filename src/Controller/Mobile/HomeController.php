@@ -475,6 +475,8 @@ class HomeController extends AppController {
             $collects = $CollectTable->find()->hydrate(false)
                 ->contain(['News'=>function($q){
                     return $q->where(['News.is_delete' => 0]);
+                }, 'News.Users'=>function($q){
+                    return $q->where(['Users.enabled'=>1]);
                 }])
                 ->where(['Collect.is_delete' => 0, 'Collect.user_id' => $user_id])
                 ->orderDesc('Collect.create_time')
@@ -1229,7 +1231,9 @@ class HomeController extends AppController {
                 ->User
                 ->CardBoxes
                 ->find()
-                ->contain(['OtherCard'])
+                ->contain(['OtherCard'=>function($q){
+                    return $q->where(['OtherCard.enabled'=>1]);
+                }])
                 ->where(['ownerid' => $this->user->id, 'resend' => '2'])
                 ->orderDesc('CardBoxes.`create_time`')
 //                ->limit($this->limit)
