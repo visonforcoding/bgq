@@ -69,7 +69,7 @@
 </div>
 <div class='bottom-logo'>
     <h3><a href="#this"><img src="/mobile/images/logo.png"/></a></h3>
-    <p>V1.0</p>
+    <!--<p>V1.0</p>-->
     <p><a href="/home/service">服务条款</a> | <a href="/home/disclaimer">免责声明</a></p>
 </div>
 <div class="companyinfo">
