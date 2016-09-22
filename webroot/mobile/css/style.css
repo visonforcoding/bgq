@@ -361,7 +361,7 @@ border-bottom:none;top:-1px;margin-top:-1px;margin-left:-1px;}
 .sele-r{float:right;background: url(img/right.png) no-repeat;width:0.16rem;height:0.25rem;background-size: cover;}
 .menulist a{width:25%;text-align: center;font-size:0.28rem;float:left;overflow:hidden;padding:.2rem 0;color:#606060;}
 .menulist a span{line-height: 0.48rem;display: block;font-size:0.28rem;color:#222c38;font-weight: 100;}
-.menulist a i{display: block; font-size:0.46rem;margin:0 auto;height:.5rem;line-height: .5rem;color:#c7403d;
+.menulist a i{display: block; font-size:0.46rem;margin:0 auto;height:.5rem;line-height: .5rem;color:#e01a48;
 }
 .a_menusort a i{font-size:.76rem;height:.8rem;line-height: .8rem;}
 .dk{width:100%;}
@@ -427,9 +427,9 @@ line-height: .34rem;height:.34rem;}
 .vipinfo .mark i{font-size:.26rem;margin-right: .05rem;line-height: .34rem;padding-left:2px;}
 .m_focus_r{position: absolute;right:0;/*bottom:.26rem;*/width:20%;text-align: center;font-size:.22rem;
 -webkit-transition: color .2s ease-in;transition: color .2s ease-in;}
-.r_focus_num{width:25%;overflow: hidden;}
+.r_focus_num{width:25%;overflow: hidden;text-align: right;}
 .m_focus_r span{display: block;margin-top:.1rem;}
-.m_focus_r i{font-size:.32rem;line-height: .34rem;}
+.m_focus_r i{font-size:.32rem;line-height: .34rem;margin-right:.2rem;}
 .meetnum{font-size:0.26rem;color:#7a7e83;}
 .f-info{border-top:1px #e5e5e5 solid;line-height: .86rem;overflow:hidden; font-size:.28rem;}
 .f-box{padding:0 .3rem;margin-top:.1rem;}
@@ -1193,7 +1193,7 @@ background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  ba
 .m-service-con{margin-top:.6rem;}
 .m_title_des{padding:.15rem .3rem;background: #fff;}
 .m_title_des h3{/*border-left:#e01a48 solid 2px;*/padding-left:20px;line-height:.32rem;font-size: .3rem;height:.34rem;position:relative;}
-.m_title_des h3:before{content: '';position:absolute;left:0;height:0;width:0;border:10px transparent solid;border-left:10px #c23433 solid;top:50%;margin-top:-10px;}
+.m_title_des h3:before{content: '';position:absolute;left:0;height:0;width:0;border:10px transparent solid;border-left:10px #e01a48 solid;top:50%;margin-top:-10px;}
 .m_sub-title{line-height: .34rem;}
 /*audio*/
 .video-js{background: #000;padding:.1rem;}
