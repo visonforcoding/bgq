@@ -113,8 +113,8 @@
                         d.news_id = d.news.id;
                         d.news_title = d.news.title;
                         d.news_read = d.news.read_nums;
-                        d.news_user = d.news.admin_name;
-                        d.news_cover = d.news.cover;
+                        d.news_user = d.news.source ? d.news.source : d.news.user.truename;
+                        d.news_cover = d.news.thumb ? d.news.thumb : d.news.cover;
                         return d;
                     });
                 } else {
