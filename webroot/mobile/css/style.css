@@ -428,7 +428,7 @@ line-height: .34rem;height:.34rem;}
 .m_focus_r{position: absolute;right:0;/*bottom:.26rem;*/width:20%;text-align: center;font-size:.22rem;
 -webkit-transition: color .2s ease-in;transition: color .2s ease-in;}
 .r_focus_num{width:25%;overflow: hidden;text-align: right;}
-.m_focus_r span{display: block;margin-top:.1rem;}
+.m_focus_r span{display: block;margin-top:.05rem;line-height: .3rem;}
 .m_focus_r i{font-size:.32rem;line-height: .34rem;margin-right:.2rem;}
 .meetnum{font-size:0.26rem;color:#7a7e83;}
 .f-info{border-top:1px #e5e5e5 solid;line-height: .86rem;overflow:hidden; font-size:.28rem;}
@@ -443,7 +443,7 @@ line-height: .34rem;height:.34rem;}
 .f-complet .vipinfo h3,.f-complet .mark a,.f-complet .f-type{color:#7a7d84;}
 .f-btn{padding-top:.18rem;}
 .f-btn span{display:block;height:.44rem;color:#e01a48;border:1px #e01a48 solid;border-radius: .1rem;width:1.16rem;text-align: center;line-height: .42rem;font-size:.24rem;}
-.toc{text-align: center;display: block;color:#E01A48;}
+.toc{text-align: center;display: block;color:#E01A48;line-height: .32rem;}
 .toc i{background: url(img/ca.png) no-repeat;background-size:cover;width:0.32rem;height:0.26rem;display: block;margin:0.55rem auto 0.1rem;}
 .internet-v-info .lay-c h3{font-weight:bold;}
 .internet-v-info .lay-c span:first-of-type{color:#7a7e83;font-size:0.28rem;}
