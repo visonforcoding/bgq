@@ -22,7 +22,7 @@
 </div>
 
 <script type="text/html" id="listTpl">
-    <section class="internet-v-info mt20">
+<!--    <section class="internet-v-info mt20">
         <div class="innercon">
             <a href='/user/home-page/{#following_id#}'><span class="head-img"><img src="{#following_avatar#}"/>{#v#}</span></a>
             <div class="vipinfo">
@@ -35,7 +35,28 @@
                 </div>
             </div>
         </div>
-    </section>	
+    </section>-->
+    <section class="internet-v-info">
+        <div class="innercon">
+            <a href="/user/home-page/{#following_id#}"><span class="head-img"><img src="{#following_avatar#}"><i></i></span></a>
+            <div class="vipinfo bd1">
+                <div class="fl c_info_list">
+                    <a href="/user/home-page/{#following_id#}">
+                        <h3><div class="l-name">{#following_truename#}</div><div class="job line1">{#following_position#}</div></h3>
+                        <div class="job">{#following_company#}</div>
+                    </a>
+                    <div class="mark s_mark_h">
+                        {#following_subject#}
+                    </div>
+                </div>
+                <div class="m_focus_r r_focus_num fl">
+                    <span class="meetnum">{#following_fans#}人关注</span>
+                    <i class="iconfont" style="visibility: hidden;">&#xe614;</i>
+                    <span class="msg"  style="visibility: hidden;">{#focus_msg#}</span>
+                </div>
+            </div>
+        </div>
+    </section>
 </script>
 <script type="text/html" id="tpl">
     <a href="javascript:void(0)">{#title#}</a>
