@@ -409,7 +409,7 @@ background-size: 0.16rem 0.25rem;width:5%;height:100%;}
 .vipinfo{width:5.3rem;float:left;padding-bottom:.25rem;}
 .internet-v-info:last-of-type .bbottom{border-bottom:none;}
 .vipinfo h3{font-size:0.32rem;color:#222c38;height:.5rem;overflow:hidden;line-height: .4rem;height:.44rem;}
-.vipinfo h3 .l-name{float:left;}
+.vipinfo h3 .l-name{float:left;margin-right:.1rem;}
 .l-name{}
 .l-place{margin-left:.1rem;color:#fff;padding-left:.1rem;padding-right:.1rem;background: #ff5176;font-size:.22rem;border-radius: .1rem;float:left;margin-top: .08rem;
 line-height: .34rem;height:.34rem;}
@@ -417,6 +417,9 @@ line-height: .34rem;height:.34rem;}
 .vipinfo h3 span{float:right;}
 .vipinfo span.job,.vipinfo span.c-info{line-height: 0.64rem;font-size:0.26rem;margin-top:0.06rem;color: #7a7e83;}
 .vipinfo span.job{line-height: 0.3rem;}
+.c_info_list{max-width: 75%;overflow:hidden;}
+.c_info_list div.job{font-size: 0.26rem;margin-top: 0.06rem;color: #7a7e83;}
+.m_focus_r .meetnum{margin-bottom:.2rem;}
 .l-name .job{margin-left:.1rem;}
 .vipinfo span.c-info{line-height: 0.3rem;display: block;}
 .vipinfo .mark a{line-height: .26rem;font-size:.22rem;color:#9ba4ad;/*padding:0 0.1rem;margin-bottom:4px*/}
@@ -424,6 +427,7 @@ line-height: .34rem;height:.34rem;}
 .vipinfo .mark i{font-size:.26rem;margin-right: .05rem;line-height: .34rem;padding-left:2px;}
 .m_focus_r{position: absolute;right:0;bottom:.26rem;;width:20%;text-align: center;font-size:.22rem;
 -webkit-transition: color .2s ease-in;transition: color .2s ease-in;}
+.r_focus_num{width:25%;overflow: hidden;}
 .m_focus_r span{display: block;margin-top:.1rem;}
 .m_focus_r i{font-size:.32rem;line-height: .34rem;}
 .meetnum{font-size:0.26rem;color:#7a7e83;}
