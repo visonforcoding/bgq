@@ -248,7 +248,8 @@ class MeetController extends AppController {
         if ($this->request->is('post')) {
             $subject = $SubjectTable->find()->where(['user_id'=>$user_id,'id'=>$id])->first();
             if($subject){
-                if($SubjectTable->delete($subject)){
+                $subject->is_del = 1;
+                if($SubjectTable->save($subject)){
                     return $this->Util->ajaxReturn(true,'删除成功');
                 }
             }
