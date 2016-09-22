@@ -1,9 +1,9 @@
-<header>
+<!--<header>
     <div class='inner'>
         <a href='javascript:history.go(-1);' class='toback'></a>
         <h1>活动详情</h1>
     </div>
-</header>
+</header>-->
 <div class="wraper pd10" style="display: block;">
     <section class="newscon-box a-detail">
         <h3><?= $table->title ?></h3>
@@ -20,7 +20,7 @@
                     <i class="username"><?= $comment->user->truename ?><time><?= $comment->create_time->i18nFormat('yyyy-MM-dd HH:mm') ?></time></i>
                     <i class="job"><?= $comment->user->company ?> <?= $comment->user->position ?></i>
                 </span>
-                <span>
+                <span style="display:none;">
                     <i class="iconfont">&#xe61a;</i><?= $comment->praise_nums ?>
                 </span>
             </div>
