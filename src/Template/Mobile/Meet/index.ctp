@@ -82,7 +82,7 @@
                         <!--<a href="#this"><i class="iconfont"></i>演员的自我修养演员的自我修养演员的自我修养演员的自我修养</a>-->
                     </div>
                 </div>
-                <div class="m_focus_r r_focus_num fl color-items focus" user_id="{#id#}">
+                <div class="m_focus_r r_focus_num fl color-items" user_id="{#id#}" id="focus_{#id#}">
                     <span class="meetnum">{#meet_nums#}人聊过</span>
                     <i class="iconfont">&#xe614;</i>
                     <span class="msg">{#focus_msg#}</span>
@@ -175,31 +175,6 @@
                             return d;
                         });
                         $('#biggie').append(html);
-                        $('.focus').on('tap', function () {
-                            var obj = $(this);
-                            if (obj.hasClass('notap')) {
-                                return false;
-                            }
-                            obj.addClass('notap');
-                            var user_id = obj.attr('user_id');
-                            $.util.ajax({
-                                url: '/user/follow',
-                                data: {id: user_id},
-                                func: function (res) {
-                                    $.util.alert(res.msg);
-                                    if (res.status) {
-                                        if (res.msg.indexOf('取消关注') != '') {
-                                            obj.find('span.msg').html('取消关注');
-                                        } else {
-                                            obj.find('span.msg').html('加关注');
-                                        }
-                                        obj.removeClass('notap');
-                                    } else {
-                                        obj.removeClass('notap');
-                                    }
-                                }
-                            });
-                        });
                         if (res.data.length < 10) {
                             page = 9999;
                             $('#buttonLoading').html('亲，没有更多条目了，请看看其他的栏目吧');
@@ -230,30 +205,38 @@
 
     $.util.searchHide();
 
-    $('.focus').on('tap', function () {
-        var obj = $(this);
-        if (obj.hasClass('notap')) {
-            return false;
+    
+    $('body').on('tap', function (e) {
+        var target = e.srcElement || e.target, em = target, i = 1;
+        while (em && !em.id && i <= 3) {
+            em = em.parentNode;
+            i++;
         }
-        obj.addClass('notap');
-        var user_id = obj.attr('user_id');
-        $.util.ajax({
-            url: '/user/follow',
-            data: {id: user_id},
-            func: function (res) {
-                $.util.alert(res.msg);
-                if (res.status) {
-                    if (res.msg.indexOf('取消关注') != '') {
-                        obj.find('span.msg').html('取消关注');
-                    } else {
-                        obj.find('span.msg').html('加关注');
+        if (!em || !em.id)
+            return;
+        if(em.id.indexOf('focus_') != -1){
+            var obj = $(em);
+            if (obj.hasClass('notap')) {
+                return false;
+            }
+            obj.addClass('notap');
+            var user_id = obj.attr('user_id');
+            $.util.ajax({
+                url: '/user/follow',
+                data: {id: user_id},
+                func: function (res) {
+                    $.util.alert(res.msg);
+                    if (res.status) {
+                        if (res.msg.indexOf('取消关注') != '') {
+                            obj.find('span.msg').html('取消关注');
+                        } else {
+                            obj.find('span.msg').html('加关注');
+                        }
                     }
                     obj.removeClass('notap');
-                } else {
-                    obj.removeClass('notap');
                 }
-            }
-        });
+            });
+        }
     });
 </script>
 <?php

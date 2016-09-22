@@ -375,8 +375,9 @@ class ActivityController extends AppController {
                     }
                 }
             }
+            $user = $UserTable->get($this->user->id);
             $this->set('activity', $activity);
-            $this->set('user', $this->user);
+            $this->set('user', $user);
             $this->set('pageTitle', '我要报名');
         } else {
             return $this->Util->ajaxReturn(false, '传值错误');
