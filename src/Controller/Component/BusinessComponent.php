@@ -161,7 +161,8 @@ class BusinessComponent extends Component {
 
     /**
      * 用户消息
-     * @param type $user_id  用户id
+     * @param type $push_id  接收id
+     * @param type $user_id  发送id
      * @param type $title  标题
      * @param type $msg   内容
      * @param type $type  类型

@@ -385,7 +385,7 @@ class UserController extends AppController {
                  } 
             } else{
                 //不存在该手机号用户
-                return $this->Util->ajaxReturn(['status' => false, 'msg' => '改手机号未注册或被禁用']);
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或被禁用']);
             }
         }
         $this->set(array(
@@ -418,9 +418,13 @@ class UserController extends AppController {
     public function sendLoginCode() {
         $this->loadComponent('Sms');
         $mobile = $this->request->data('phone');
-        $user = $this->User->findByPhoneAndEnabled($mobile, 1)->first();
+        $user = $this->User->findByPhone($mobile)->first();
         if (!$user) {
             return $this->Util->ajaxReturn(['status' => false,'msg'=>'该手机未注册,是否前往注册','phone'=>$mobile,'errCode'=>1]);
+        }
+        if ($user->enabled==0||$user->is_del ==1) {
+            //账号删除或禁用
+            return $this->Util->ajaxReturn(['status' => false,'msg'=>'该手机已经被禁用，请联系客服','phone'=>$mobile,'errCode'=>2]);
         }
         $code = createRandomCode(4, 2); //创建随机验证码
         $content = '您的动态验证码为' . $code;
