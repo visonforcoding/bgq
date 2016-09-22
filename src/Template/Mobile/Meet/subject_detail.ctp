@@ -23,7 +23,9 @@
                         </li>-->
             <li>
                 <h3 class="t-tittle">话题简介</h3>
-                <p><pre><?= $subject->summary ?></pre></p>
+                <p>
+                    <?= str_replace(['/r/n', '/n'], '<br>', $subject->summary) ?>
+                </p>
             </li>
         </ul>
     </section>
