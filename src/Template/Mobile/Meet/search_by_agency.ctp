@@ -8,7 +8,7 @@
         </form>
         <div class='h-regiser' id="doSearch">搜索</div>
     </div>
-    <div class="markbox">
+    <div class="markbox" hidden>
         <div class="a-s-title">
             <span class="orgname active">选择标签</span>
         </div>
