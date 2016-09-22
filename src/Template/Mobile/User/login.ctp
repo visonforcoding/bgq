@@ -81,10 +81,15 @@
                         }
                     }, 1000);
                 }else{
-                    if(res.status===false&&res.errCode===1){
-                        if(window.confirm(res.msg)){
-                            location.href = '/user/register-vphone?rephone='+phone;
-                        };
+                    if(res.status===false){
+                        if(res.errCode===1){
+                            if(window.confirm(res.msg)){
+                                location.href = '/user/register-vphone?rephone='+phone;
+                            };
+                        }
+                        if(res.errCode===2){
+                            $.util.alert(res.msg);
+                        }
                     } else {
                         $obj.removeClass('noTap');
                     }
