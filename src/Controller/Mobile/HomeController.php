@@ -1704,7 +1704,7 @@ class HomeController extends AppController {
             $data = [];
             $UserTable = \Cake\ORM\TableRegistry::get('user');
             $user = $UserTable->get($this->user->id);
-            $data[$name] = $val;
+            $data[$name] = trim($val);
             $user = $UserTable->patchEntity($user, $data);
             $res = $UserTable->save($user);
             if($res){
