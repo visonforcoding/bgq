@@ -285,7 +285,7 @@ class NewsController extends AppController {
         } else {
             $res = $res->contain(['Newstags']);
         }
-        $res = $res->orderDesc('News.create_time') // 默认按时间倒序排列
+        $res = $res->orderDesc('News.publish_time') // 默认按时间倒序排列
                 ->contain(['Users'=>function($q){
                     return $q->where(['Users.enabled'=>1]);
                 }])
@@ -340,7 +340,7 @@ class NewsController extends AppController {
                 return $q->where(['Users.enabled'=>1]);
             }]);
         }
-        $news = $news->orderDesc('News.create_time')
+        $news = $news->orderDesc('News.publish_time')
                 ->page($page, $this->newslimit)
                 ->toArray();
         if ($news) {
