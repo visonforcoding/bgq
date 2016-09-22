@@ -29,7 +29,7 @@
 <script type="text/html" id="search_tpl">
     <div class="innercon">
         <a href="/activity/details/{#id#}" class="clearfix">
-            <span class="my-pic-acive"><img src="{#cover#}"/></span>
+            <span class="my-pic-acive">{#img#}</span>
             <div class="my-collection-items">
                 <h3>{#title#}</h3>
                 {#apply_msg#}
@@ -162,6 +162,10 @@
                         LEMON.sys.hideKeyboard();
                         var html = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
                             d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
+                            d.cover = d.thumb ? d.thumb : d.cover;
+                            if(d.cover){
+                                d.img = '<img src="' + d.cover + '"/>';
+                            }
                             return d;
                         });
                         $('.orgname').toggleClass('active');
@@ -210,6 +214,10 @@
                             if (msg.status === true) {
                                 var html = $.util.dataToTpl('', 'search_tpl', msg.data, function (d) {
                                     d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
+                                    d.cover = d.thumb ? d.thumb : d.cover;
+                                    if(d.cover){
+                                        d.img = '<img src="' + d.cover + '"/>';
+                                    }
                                     return d;
                                 });
                                 $('#search').append(html);
