@@ -251,6 +251,10 @@
                     if (msg.status === true) {
                         var html = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
                             d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
+                            d.cover = d.thumb ? d.thumb : d.cover;
+                            if(d.cover){
+                                d.img = '<img src="' + d.cover + '"/>';
+                            }
                             return d;
                         });
                     } else {
