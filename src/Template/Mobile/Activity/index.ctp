@@ -1,6 +1,6 @@
 
 <body>
-    <div class="wraper" style=''>
+    <div class="wraper">
         <div class="a_search_box" id="search">
             <a href="/activity/search"> 
                 <i class="iconfont">&#xe618;</i>
@@ -11,28 +11,28 @@
             <div class="yd" id="imgTab"></div>
         </div>
          <!--分类--start-->
-                <div class="menusort a_menusort clearfix">
-                    <div class="allmenu">
-                        <div class="menulist clearfix" id="allsort">
-                            <a href="/activity/search/0">
-                                <i class="iconfont col_y">&#xe68c;</i>
-                                <span>沙龙论坛</span>
-                            </a>
-                            <a href="/activity/search/1">
-                                <i class="iconfont col_r">&#xe68f;</i>
-                                <span>生活聚会</span>
-                            </a>
-                            <a href="/activity/search/2">
-                                <i class="iconfont col_b">&#xe690;</i>
-                                <span>学习培训</span>
-                            </a>
-                            <a href="/activity/search/3">
-                                <i class="iconfont col_g">&#xe691;</i>
-                                <span>会务服务</span>
-                            </a>
-                    </div>
-                    </div>
-                </div>
+        <div class="menusort a_menusort clearfix">
+            <div class="allmenu">
+                <div class="menulist clearfix" id="allsort">
+                    <a href="/activity/search/0">
+                        <i class="iconfont">&#xe698;</i>
+                        <span>沙龙论坛</span>
+                    </a>
+                    <a href="/activity/search/1">
+                        <i class="iconfont">&#xe699;</i>
+                        <span>生活聚会</span>
+                    </a>
+                    <a href="/activity/search/2">
+                       <i class="iconfont">&#xe69a;</i>
+                        <span>学习培训</span>
+                    </a>
+                    <a href="/activity/search/3">
+                        <i class="iconfont">&#xe69b;</i>
+                        <span>会务服务</span>
+                    </a>
+            </div>
+            </div>
+        </div>
             <!--分类--end-->
         <div id="activity" style='border-bottom:1px #e5e5e5 solid;'></div>
         <div id="buttonLoading" class="loadingbox"></div>
