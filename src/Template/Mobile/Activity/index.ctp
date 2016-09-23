@@ -62,7 +62,7 @@
                 <div class="a-other-info">
                     <span class="a-number">{#apply_nums#}人报名</span>
                     {#region_name#}<a href="/activity/search/{#series_id#}">{#series_name#}</a>
-                    <span class="a-date">{#time#}</span>
+                    <span class="a-date">{#activity_time#}</span>
                 </div>
             </div>
         </div>
