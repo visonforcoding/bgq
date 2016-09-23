@@ -17,7 +17,7 @@
                 </div>
             </div>
             <a href="javascript:void(0);"  id="submit" class="submit redshadow" >登录</a>
-             <a href="/user/register-vphone" class='historyinfo colore01'>注册</a>
+            <a href="/user/register-vphone" class='historyinfo colore01'>注册</a>
         </form>
 
     </div>
