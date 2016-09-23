@@ -82,7 +82,7 @@
                         <!--<a href="#this"><i class="iconfont"></i>演员的自我修养演员的自我修养演员的自我修养演员的自我修养</a>-->
                     </div>
                 </div>
-                <div class="m_focus_r r_focus_num fl color-items" user_id="{#id#}" id="focus_{#id#}">
+                <div class="m_focus_r r_focus_num fl {#focus_class#}" user_id="{#id#}" {#focus_id_str#}>
                     <span class="meetnum">{#meet_nums#}人聊过</span>
                     <i class="iconfont">&#xe614;</i>
                     <span class="msg">{#focus_msg#}</span>
@@ -133,7 +133,9 @@
             } else {
                 d.subjects = subject ? '<a href="javascript:$.util.checkLogin(\'/meet/subject-detail/' + subject.id + '/#index\')"><i class="iconfont">&#xe67c;</i>' + subject.title + '</a>' : '';
             }
-            d.focus_msg = d.followers.length ? '取消关注' : '加关注';
+            d.focus_msg = d.followers.length ? '已关注' : '加关注';
+            d.focus_class = d.followers.length ? '' : 'color-items';
+            d.focus_id_str = d.followers.length ? '' : 'id="focus_'+ d.id +'"';
             return d;
         });
     };
@@ -165,13 +167,13 @@
                             d.city = '';
                             var subject = d.subjects.length ? d.subjects[0] : '';
                             if (window.user_id == d.id) {
-                                //            d.subjects = $.util.dataToTpl('', 'mySubTpl', d.subjects);
                                 d.subjects = subject ? '<a href="/meet/subject/' + subject.id + '" class="line1 w7"><i class="iconfont">&#xe67c;</i>' + subject.title + '</a>' : '';
                             } else {
-                                //            d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
                                 d.subjects = subject ? '<a href="javascript:$.util.checkLogin(\'/meet/subject-detail/' + subject.id + '/#index\')" class="line1 w7"><i class="iconfont">&#xe67c;</i>' + subject.title + '</a>' : '';
                             }
-                            d.focus_msg = d.followers.length ? '取消关注' : '加关注';
+                            d.focus_msg = d.followers.length ? '已关注' : '加关注';
+                            d.focus_class = d.followers.length ? '' : 'color-items';
+                            d.focus_id_str = d.followers.length ? '' : 'id="focus_'+ d.id +'"';
                             return d;
                         });
                         $('#biggie').append(html);
@@ -228,12 +230,12 @@
                     $.util.alert(res.msg);
                     if (res.status) {
                         if (res.msg.indexOf('取消关注') != '') {
-                            obj.find('span.msg').html('取消关注');
+                            obj.removeClass('color-items').find('span.msg').html('已关注');
                         } else {
                             obj.find('span.msg').html('加关注');
+                            obj.removeClass('notap');
                         }
                     }
-                    obj.removeClass('notap');
                 }
             });
         }
