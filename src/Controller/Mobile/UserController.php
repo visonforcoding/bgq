@@ -559,7 +559,7 @@ class UserController extends AppController {
                 }
             } else {
                 //查看是否被该用户关注过
-                $follower = $FansTable->find()->where("`user_id` = '$following_id' and `following_id` = '$user_id'")->orderDesc('id')->first();
+                $follower = $FansTable->find()->where("`user_id` = '$following_id' and `following_id` = '$user_id'")->first();
                 $newfans = $FansTable->newEntity();
                 $newfans->user_id = $user_id;
                 $newfans->following_id = $following_id;
