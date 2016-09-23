@@ -168,6 +168,13 @@ class NewsController extends AppController {
                 return $q->where(['Industries.id' => $industry['_ids'][0]]);
             });
         }
+        $newstag = $this->request->data('newstag');
+        if (!empty($newstag)) {
+            //过滤
+            $query->matching('Newstags', function($q)use($newstag) {
+                return $q->where(['Newstags.id' =>$newstag]);
+            });
+        }
         $status = $this->request->data('status');
         if(is_numeric($status)){
             $where = ['News.status'=>$status];
@@ -206,11 +213,12 @@ class NewsController extends AppController {
      * @return csv 
      */
     public function exportExcel() {
-        $sort = $this->request->data('sidx');
-        $order = $this->request->data('sord');
-        $keywords = $this->request->data('keywords');
-        $begin_time = $this->request->data('begin_time');
-        $end_time = $this->request->data('end_time');
+        $sort = $this->request->query('sidx');
+        $order = $this->request->query('sord');
+        $keywords = $this->request->query('keywords');
+        $begin_time = $this->request->query('begin_time');
+        $end_time = $this->request->query('end_time');
+        $industry = $this->request->query('industries');
         $where = ['is_delete'=>0];
         if (!empty($keywords)) {
             $where['username like'] = "%$keywords%";
@@ -221,15 +229,33 @@ class NewsController extends AppController {
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
         
-        $status = $this->request->data('status');
+        $status = $this->request->query('status');
         if(is_numeric($status)){
             $where = ['News.status'=>$status];
         }
-
+        
+        if (!empty($industry['_ids'][0])) {
+            //过滤
+            $query->matching('Industries', function($q)use($industry) {
+                return $q->where(['Industries.id' => $industry['_ids'][0]]);
+            });
+        }
+        $newstag = $this->request->query('newstag');
+        if (!empty($newstag)) {
+            //过滤
+            $query->matching('Newstags', function($q)use($newstag) {
+                return $q->where(['Newstags.id' =>$newstag]);
+            });
+        }
         $Table = $this->News;
         $column = ['标题', '阅读数', '点赞数', '评论数','摘要','状态', '创建时间'];
         $query = $Table->find();
         $query->hydrate(false);
+        $query->contain(['Users', 'Industries' => function($q) {
+                return $q->hydrate(false)->select(['name']);
+            },'Newstags'=>function($q){
+                return $q->hydrate(false)->select(['name']);
+            }]);
         $query->select(['title', 'read_nums', 'praise_nums', 'comment_nums', 'summary','status', 'create_time']);
         if (!empty($where)) {
             $query->where($where);

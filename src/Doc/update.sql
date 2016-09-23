@@ -801,4 +801,7 @@ COLLATE='utf8mb4_general_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=6
 ;
-	
+
+
+ALTER TABLE `activity`
+	CHANGE COLUMN `summary` `summary` VARCHAR(550) NULL DEFAULT NULL COMMENT '摘要' AFTER `contact`;
