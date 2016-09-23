@@ -129,7 +129,7 @@
                     <div style="width:60px;height:60px;padding:0px;"  class="img-thumbnail input-img img-circle"  single>
                         <img style="width:60px;height:60px" class="img-circle"  alt="" src="<?=$user->avatar?>"/>
                     </div>
-                    <div style="color:red">可不设置头像</div>
+                    <div style="color:red">(tips:头像尺寸不要太大，正方形最佳)</div>
                     <input name="avatar" value="<?=$user->avatar?>"  type="hidden"/>
                     <div id="avatar"  class="jqupload">上传</div>
                 </div>

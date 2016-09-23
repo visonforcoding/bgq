@@ -491,12 +491,12 @@ class ActivityController extends AppController {
      * @return type
      */
     public function comsDelete(){
-         if ($this->request->is('post')) {
+        if ($this->request->is('post')) {
             $id = $this->request->data('id');
-            $ActivitycomTable = \Cake\ORM\TableRegistry::get('Activitycom');
+           $ActivitycomTable = \Cake\ORM\TableRegistry::get('Activitycom');
             $com =  $ActivitycomTable->get($id);
-            $res = $ActivitycomTable->delete($com);
-            if ($res) {
+            $com->is_delete = 1;  //假删除处理
+            if ($ActivitycomTable->save($com)) {
                 $news = $this->Activity->get($com->activity_id);
                 $news->comment_nums -= 1;
                 $this->Activity->save($news);

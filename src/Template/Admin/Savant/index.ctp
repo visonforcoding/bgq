@@ -94,7 +94,7 @@
                         pager: "#pager",
                         rowNum: window._config.showDef,
                         rowList: window._config.pages,
-                        sortname: "id",
+                        sortname: "savant.check_time",
                         sortorder: "desc",
                         viewrecords: true,
                         gridview: true,
