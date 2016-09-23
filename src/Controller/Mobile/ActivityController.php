@@ -737,7 +737,7 @@ class ActivityController extends AppController {
     public function getMoreActivity($page) {
         $activity = $this->Activity
                         ->find()
-                        ->select(['id', 'thumb', 'title', 'address', 'apply_nums', 'time', 'region_id', 'series_id'])
+                        ->select(['id', 'thumb', 'title', 'address', 'apply_nums', 'activity_time', 'region_id', 'series_id'])
                         ->contain(['Industries'])
                         ->where(['Activity.status' => 1,'Activity.is_del'=>0, 'Activity.from_user >'=>-1])
                         ->page($page, $this->limit)
