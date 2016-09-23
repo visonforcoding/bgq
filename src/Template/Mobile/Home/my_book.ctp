@@ -286,13 +286,13 @@
     function read(em){
         var obj = $(em);
         obj.find('em').children('.opci').remove();
-        var status_nums = $('#statusTab').find('.active').find('i');
+        var status_nums = $('#statusTab').find('.active').find('i').html();
         if(parseInt(status_nums)-1 <= 0){
             $('#statusTab').find('.active').find('i').remove();
         } else {
             $('#statusTab').find('.active').find('i').html(parseInt(status_nums)-1);
         }
-        var type_nums = $('#typeTab').find('.active').find('i');
+        var type_nums = $('#typeTab').find('.active').find('i').html();
         if(parseInt(type_nums)-1 <= 0){
             $('#typeTab').find('.active').find('i').remove();
         } else {
