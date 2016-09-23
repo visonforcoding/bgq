@@ -1750,6 +1750,8 @@ class HomeController extends AppController {
      * 评论消息详情
      */
     public function commentView($id=null){
+        $this->handCheckLogin();
+        $user_id = $this->user->id;
         $type = $this->request->query('type');
         $commentTable = $type=='1'?'Newscom':'Activitycom';
         $table = $type=='1'?'News':'Activity';
@@ -1758,7 +1760,9 @@ class HomeController extends AppController {
         $liketype = $type=='1'?'1':'0';
         $CommentTable = \Cake\ORM\TableRegistry::get($commentTable);
         $comment = $CommentTable->find()->contain(['Users'])->select()->where([$commentTable.'.id'=>$id])->first();
-        $replys = $CommentTable->find()->contain(['Users'])
+        $replys = $CommentTable->find()->contain(['Users', 'Likes'=>function($q)use($user_id){
+            return $q->where(['type'=>1,'user_id'=>$user_id]);
+        }])
                 ->where(["$relate_id"=>$comment->$relate_id,"$reply_id"=>$comment->user_id,'is_delete'=>0])
                 ->orderDesc($commentTable.'.create_time')
                 ->toArray();
@@ -1772,9 +1776,25 @@ class HomeController extends AppController {
             'table'=>$table,
             'comment'=>$comment,
             'replys'=>$replys,
-            'likes'=>$likes
+            'likes'=>$likes,
+            'id'=>$id,
+            'type'=>$type,
+            'table'=>$table,
+            'relate_id'=>$comment->$relate_id,
+            'user_id'=>$user_id
         ]);
-        
+    }
+    
+    public function allLike($id=null){
+        $type = $this->request->query('type');
+        $liketype = $type=='1'?'1':'0';
+        $LikeTable = \Cake\ORM\TableRegistry::get('CommentLike');
+        $likes = $LikeTable->find()->contain(['Users'])->where(['relate_id'=>$id,'type'=>$liketype])
+                ->orderDesc('CommentLike.create_time')
+                ->toArray();
+        $this->set([
+            'likes'=>$likes,
+        ]);
     }
 
     
