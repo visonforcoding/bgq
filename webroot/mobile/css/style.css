@@ -6,12 +6,19 @@
 .loginbox .label{float:left;margin-left:-0.56rem;}
 .loginbox .username,.loginbox .password{border-bottom:1px #e5e5e5 solid;padding-left:1.2rem;
 /*display:-webkit-flex;display: flex;-webkit-align-items: center;align-items: center;*/}
+/**/
+.tabbox{overflow: hidden;background: #fff;}
+.tabhead{height:.76rem;line-height: .74rem;font-size: 0;background: #f9f9f9;border-bottom:1px #e5e5e5 solid;}
+.tabhead span{width:50%;display: inline-block;font-size:.32rem;text-align: center;}
+.tabhead span:first-of-type{border-right:1px #e5e5e5 solid;}
+.tabhead span.active{height:.76rem;background: #fff;}
+.pwd_login{display: none;}
 .loginbox .password{border-bottom:none;}
 .loginbox .username input{width:5rem;padding:0;}
 .loginbox .username span{}
 .loginbox .password span{font-size:.34rem;}
 .loginbox .password input{width:3rem;padding:0;}
-.loginbox .password button{color:#b71c2d;border: none;background-color: #fff;font-size:0.26rem;width:2rem;height:1.4rem;padding:0;}
+.loginbox .password button,.loginbox .password a{background:red;color:#b71c2d;border: none;background-color: #fff;font-size:0.26rem;width:2rem;height:1.4rem;padding:0;text-align: center;}
 .login-area .submit{display:block;width:5.6rem;margin-left:0.58rem;background:#b71c2d; color:#fff;text-align: center;border-radius: 0.2rem;margin:0 auto;margin-top:0.76rem;margin-bottom:0.56rem;font-size:0.32rem;
 outline:none;height:0.8rem;line-height: 0.78rem;}
 .tips{position:absolute;left:50%;top:50%; margin-left:-2.5rem;margin-top:-1.25rem;border-radius:0.05rem;color:#333;width:5rem;height:2.5rem;background: red;padding:0.2rem;overflow:hidden; background: #fff;box-shadow: 0 0 1px rgba(0,0,0,.5);border-radius: .1rem;}
@@ -74,7 +81,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .infobox{padding:0.08rem 0.3rem 0; background: #FFFFFF;border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid;}
 .infobox li,.infoboxlist li{position:relative;height:0.8rem;line-height: 0.8rem;border-bottom:1px #e5e5e5 solid;font-size:0.28rem;color:#222c38;}
 .infobox li span.infocard,.infoboxlist li span.infocard{position:absolute;right:0.1rem;line-height: 0.8rem;}
-.infobox li input{border:none;outline: none;text-align: right;width:5rem;height:.5rem;/**/}
+.infobox li input{border:none;outline: none;text-align: right;width:5.2rem;height:.4rem;/**/text-overflow : ellipsis }
 .uploadbox .filebtn{overflow:hidden;position:relative;}
 .uploadbox .filebtn input[type='file']{position:absolute;top:0;left:0;position: absolute;top: 0;left: 0;width: 100%;height: 0.78rem;border: 1px #ccc solid;
     margin: 0.45rem 0 0.2rem; opacity: 0;}
@@ -128,7 +135,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .newsbox .sec-news-l{float:left;width:5rem;}
 /*超出隐藏*/
 .newsbox .sec-news-l h3,.newsbox .sec-news-l p,.newscon-box h3{word-break: break-all;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}
-.newsbox .sec-news-l h3{line-height: 0.36rem;margin:0.1rem 0;font-size:0.32rem;color:#222c38;-webkit-line-clamp: 2;font-weight:400;}
+.newsbox .sec-news-l h3{line-height: 0.37rem;margin:0.1rem 0;font-size:0.32rem;color:#222c38;-webkit-line-clamp: 2;font-weight:400;}
 .newsbox .sec-news-l p{line-height:0.32rem;font-size:0.26rem;-webkit-line-clamp: 2;}
 .newsbox .sec-news-r{float:right;width:1.6rem;height:1.6rem;margin-top:0.14rem;overflow:hidden;}
 .newsbox .sec-news-r img{width:100%;display: block;min-height:1.6rem;}
