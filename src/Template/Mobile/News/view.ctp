@@ -211,15 +211,6 @@
         }
         return d;
     });
-    $('#news img').click(function () {
-        var url = $(this).attr('url');
-        if(url){
-            wx.previewImage({
-                current: url,
-                urls: [url]
-            });
-        }
-    });
     $('body').on('tap', function (e) {
         var target = e.srcElement || e.target, em = target, i = 1;
         while (em && !em.id && i <= 3) {

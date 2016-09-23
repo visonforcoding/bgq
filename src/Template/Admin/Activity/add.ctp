@@ -22,7 +22,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">作者</label>
         <div class="col-md-8">
-            <?= $this->cell('User', [[$activity->user_id]]) ?>
+            <?= $this->cell('User') ?>
         </div>
     </div>
     <div class="form-group">
