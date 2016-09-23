@@ -205,7 +205,7 @@
         d.disable = '0';
         if (d.hasOwnProperty('likes')) {
             if (d['likes'].length) {
-                d.style = 'color:red';
+                d.style = 'color:#b71c2d';
                 d.disable = '1';
             }
         }
