@@ -11,7 +11,7 @@
 <style>
     tr, td{text-align: left;}
 </style>
-<?= $this->element('share', ['table'=>'news', 'id'=>$news->id]); ?>
+<?= $this->element('share', ['table' => 'news', 'id' => $news->id]); ?>
 <div class="wraper" id="news">
     <?php if (isset($news)): ?>
         <section class="newscon-box">
@@ -31,20 +31,20 @@
             </h1>
             <div class="body-con innercon">
                 <img src="<?= $news->cover ?>"/>
-                <?php if ($news->is_media != 0 && $news->media_pos ==1): ?>
-                    <?php if($news->is_media ==1): ?>
-                    <?= $this->element('videojs', ['media' => $news->video,'poster'=>$news->video_cover]) ?>
-                    <?php else:?>
-                    <?= $this->element('audiojs', ['media' => $news->mp3,'title'=>$news->mp3_title]) ?>
-                    <?php endif;?>
+                <?php if ($news->is_media != 0 && $news->media_pos == 1): ?>
+                    <?php if ($news->is_media == 1): ?>
+                        <?= $this->element('videojs', ['media' => $news->video, 'poster' => $news->video_cover]) ?>
+                    <?php else: ?>
+                        <?= $this->element('audiojs', ['media' => $news->mp3, 'title' => $news->mp3_title]) ?>
+                    <?php endif; ?>
                 <?php endif; ?>
-                <p><?= str_replace(["<p><br/></p>",'<br/>', '<br>'], '<div class="brline"></div>', $news->body) ?></p>
-                <?php if ($news->is_media != 0 && $news->media_pos ==2): ?>
-                    <?php if($news->is_media==1): ?>
-                    <?= $this->element('videojs', ['media' => $news->video,'poster'=>$news->video_cover]) ?>
-                    <?php else:?>
-                    <?= $this->element('audiojs', ['media' => $news->mp3,'title'=>$news->mp3_title]) ?>
-                    <?php endif;?>
+                <p><?= str_replace(["<p><br/></p>", '<br/>', '<br>'], '<div class="brline"></div>', $news->body) ?></p>
+                <?php if ($news->is_media != 0 && $news->media_pos == 2): ?>
+                    <?php if ($news->is_media == 1): ?>
+                        <?= $this->element('videojs', ['media' => $news->video, 'poster' => $news->video_cover]) ?>
+                    <?php else: ?>
+                        <?= $this->element('audiojs', ['media' => $news->mp3, 'title' => $news->mp3_title]) ?>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
             <div class="con-bottom clearfix pd20">
@@ -148,7 +148,7 @@
     // 分享设置
     window.shareConfig.link = 'http://m.chinamatop.com/news/view/<?= $news->id ?>?share=1';
     window.shareConfig.title = '<?= $news->title ?>';
-    var share_desc = '<?= preg_replace('/\r|\n/','',$news->summary) ?>';
+    var share_desc = '<?= preg_replace('/\r|\n/', '', $news->summary) ?>';
     share_desc && (window.shareConfig.desc = share_desc);
     LEMON.show.shareIco();
     //LEMON.sys.back('/news/index');
@@ -161,7 +161,7 @@
 <script>
     window.location.hash = '';
     $('table').removeAttr('width');
-    setTimeout(function(){
+    setTimeout(function () {
         if (location.href.indexOf('?share=1') != -1) {
             $('#share_download').show();
         }
@@ -211,7 +211,15 @@
         }
         return d;
     });
-
+    $('#news img').click(function () {
+        var url = $(this).attr('url');
+        if(url){
+            wx.previewImage({
+                current: url,
+                urls: [url]
+            });
+        }
+    });
     $('body').on('tap', function (e) {
         var target = e.srcElement || e.target, em = target, i = 1;
         while (em && !em.id && i <= 3) {
@@ -317,7 +325,7 @@
                     });
                 });
                 break;
-            // 收藏
+                // 收藏
             case 'collect':
                 checkLogin(function () {
                     var news_id = window.__id;
@@ -327,7 +335,7 @@
                         func: function (res) {
                             $.util.alert(res.msg);
                             if (res.status) {
-                                if($(em).hasClass('hover')){
+                                if ($(em).hasClass('hover')) {
                                     $(em).html('&#xe615;');
                                     $(em).removeClass('hover');
                                 } else {
