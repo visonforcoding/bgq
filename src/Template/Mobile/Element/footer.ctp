@@ -18,20 +18,20 @@
 
     if(!/smartlemon/.test(navigator.userAgent.toLowerCase())) {
         if (window.location.href.indexOf('activity') != -1) {
-            $('.activity_icon').css({color: '#dd204b'});
-            $('.activity_icon span').css({color: '#dd204b'});
+            $('.activity_icon').css({color: '#b71c2d'});
+            $('.activity_icon span').css({color: '#b71c2d'});
         }
         else if (window.location.href.indexOf('meet') != -1) {
-            $('.meet_icon').css({color: '#dd204b'});
-            $('.meet_icon span').css({color: '#dd204b'});
+            $('.meet_icon').css({color: '#b71c2d'});
+            $('.meet_icon span').css({color: '#b71c2d'});
         }
         else if (window.location.href.indexOf('home') != -1) {
-            $('.home_icon').css({color: '#dd204b'});
-            $('.home_icon span').css({color: '#dd204b'});
+            $('.home_icon').css({color: '#b71c2d'});
+            $('.home_icon span').css({color: '#b71c2d'});
         }
         else {
-            $('.news_icon').css({color: '#dd204b'});
-            $('.news_icon span').css({color: '#dd204b'});
+            $('.news_icon').css({color: '#b71c2d'});
+            $('.news_icon span').css({color: '#b71c2d'});
         }
         if (window.location.href.indexOf('index') != -1) {
             $('.toback').hide();
