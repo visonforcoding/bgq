@@ -82,6 +82,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
         "sys.update",  //android系统更新
         "sys.mediaPlay", //开始播放多媒体
         "sys.back",  //设置返回链接
+        "sys.clearWebCatch",
         "sys.logout",
         "sys.device", //获取唯一设备id
         "show.shareIco", //隐藏分享图标
@@ -159,6 +160,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                         return JSApiInvoke(api, {}, '');
                     });
                     break;
+                case "sys.clearWebCatch":
                 case "sys.openLOC":
                 case "sys.mediaPlay":
                 case "sys.closeLOC":
