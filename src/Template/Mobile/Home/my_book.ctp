@@ -139,6 +139,10 @@
     }
 </script>
 <script>
+    if(document.URL.indexOf('?check=1') != -1){
+        LEMON.sys.back('/home/index');
+    }
+    
     function setList(){
         if(book_html[type][status]) {
             $('#list').html(book_html[type][status]);
