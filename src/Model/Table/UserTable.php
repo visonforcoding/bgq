@@ -25,6 +25,7 @@ class UserTable extends Table {
      * @param array $config The configuration for the Table.
      * @return void
      */
+    protected $_hidden = ['pwd'];
     public function initialize(array $config) {
         parent::initialize($config);
 
@@ -47,7 +48,7 @@ class UserTable extends Table {
             'foreignKey' => 'user_id',
             'targetForeignKey' => 'industry_id'
         ]);
-        
+
         $this->hasMany('UserIndustries', [
             'className' => 'user_industry',
             'foreignKey' => 'user_id',
@@ -127,7 +128,7 @@ class UserTable extends Table {
             'joinType' => 'LEFT',
             'className' => 'Secret'
         ]);
-        
+
         $this->hasMany('Activityapply', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
@@ -205,6 +206,11 @@ class UserTable extends Table {
     public function buildRules(RulesChecker $rules) {
         $rules->add($rules->existsIn(['industry_id'], 'Industries'));
         return $rules;
+    }
+
+
+    protected function _setPwd($password) {
+        return (new DefaultPasswordHasher)->hash($password);
     }
 
 }

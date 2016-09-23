@@ -10,31 +10,14 @@
 <div class="wraper">
     <div id="user-login" class='login-area'>
         <form action="" method="post">
-            <div class="tabbox">
-                <div class="tabhead">
-                    <span class="phone_head active">手机快捷登录</span>
-                    <span class="pwd_head">账号密码登录</span>
+            <div class="loginbox">
+                <div class='username'><label class="label"><span class='iconfont'>&#xe630;</span></label><input type='text' name="phone" placeholder="请输入手机号"></div>
+                <div class='password'><label class="label"><span class='iconfont'>&#xe631;</span></label><input name="vcode" type='text' placeholder="在此输入验证码" >
+                    <button class="clearfix" type="button"  id="getVcode" href='javascript:void(0);'>获取验证码</button>
                 </div>
-                <div class="tabconbox">
-                    <!--tab1-->
-                    <div class="loginbox">
-                        <div class='username'><label class="label"><span class='iconfont'>&#xe630;</span></label><input type='text' name="phone" placeholder="请输入手机号"></div>
-                        <div class='password'><label class="label"><span class='iconfont'>&#xe631;</span></label><input name="vcode" type='text' placeholder="在此输入验证码" >
-                            <button class="clearfix fr" type="button"  id="getVcode" href='javascript:void(0);'>获取验证码</button>
-                        </div>
-                    </div>
-                    <!--tab2-->
-                    <div class="loginbox pwd_login">
-                        <div class='username'><label class="label"><span class="iconfont">&#xe630;</span></label><input type='text' placeholder="请输入手机号"></div>
-                            <div class='password'><label class="label"><span class="iconfont">&#xe631;</span></label><input type='password' value="123456">
-                            <a href='#this' class="clearfix fr">忘记密码</a>
-                        </div>
-                    </div>
             </div>
-                
-        </div>
             <a href="javascript:void(0);"  id="submit" class="submit redshadow" >登录</a>
-             <a href="/user/register-vphone" class='historyinfo colore01'>注册</a>
+            <a href="/user/register-vphone" class='historyinfo colore01'>注册</a>
         </form>
 
     </div>
@@ -56,12 +39,6 @@
 <?php $this->start('script') ?>
 <script>
     var redirect_url = '/home/index';
-    $('.tabhead span').on('click',function(){
-            $(this).addClass('active').siblings().removeClass('active');
-            var index = $(this).index();
-            $('.loginbox').eq(index).show().siblings().hide();
-            
-        })
     window.onBackView = function(){
         LEMON.event.back();
     }

@@ -215,6 +215,7 @@ class UserController extends AppController {
                 return $this->Util->ajaxReturn(false,'该手机号已经注册过');
             }
             $data['user_token'] =  md5(uniqid());
+            $data['pwd'] = $this->request->session()->read('reg.pwd');
             //隐私设置
             $data['secret'] =  [
                 'phone_set'=>2,
@@ -354,7 +355,28 @@ class UserController extends AppController {
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $phone = $this->request->data('phone');
-             $UserTable = \Cake\ORM\TableRegistry::get('User');
+            $mobile = $this->request->data('mobile');
+            $UserTable = \Cake\ORM\TableRegistry::get('User');
+             if($mobile){
+                 //密码登录
+                 $user = $UserTable->find()->where(['phone' => $mobile, 'enabled' => 1, 'is_del' => 0])->first();
+                 $pwd = $this->request->data('pwd');
+                if (!(new \Cake\Auth\DefaultPasswordHasher)->check($pwd, $user->pwd)) {
+                    return $this->Util->ajaxReturn(false,'密码不正确');
+                }else{
+                    $this->request->session()->write('User.mobile', $user);
+                    $user_token = false;
+                    $bind_wx = false;
+                    if($this->request->is('lemon')){
+                        $this->request->session()->write('Login.login_token',$user->user_token);
+                        $user_token = $user->user_token;
+                    }
+                    if($this->request->is('weixin')&&!$user->wx_openid){
+                       $bind_wx = true;
+                    }
+                    return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,'token_uin'=>$user_token,'bind_wx'=>$bind_wx]);
+                }
+             }
              $user = $UserTable->find()->where(['phone' => $phone, 'enabled' => 1, 'is_del' => 0])->first();
             if ($user) {
                 if((\Cake\Core\Configure::read('debug')&&$_SERVER['SERVER_ADDR']=='127.0.0.1')||$this->request->query('adminlogin')){
@@ -365,7 +387,7 @@ class UserController extends AppController {
                 $vcode = $this->request->session()->read('UserLoginVcode');
                if ($vcode['code'] == $this->request->data('vcode')) {
                   if (time() - $vcode['time'] < 60 * 10) {
-                //10分钟验证码超时
+                    //10分钟验证码超时
                     $this->request->session()->write('User.mobile', $user);
                     $user_token = false;
                     $bind_wx = false;
@@ -393,6 +415,48 @@ class UserController extends AppController {
         ));
     }
     
+    /**
+     * 忘记密码
+     */
+    public function  forgotPwd(){
+        if($this->request->is('post')){
+            $vcode = $this->request->data('vcode');
+            $code = $this->request->session()->read('UserLoginVcode');
+            if($vcode==$code['code']){
+                $this->request->session()->write('UserForgotPhone',$this->request->data('phone'));
+                return $this->Util->ajaxReturn(true,'验证通过');
+            }else{
+               return $this->Util->ajaxReturn(false,'验证码错误');
+            }
+        }
+    }
+    
+    /**
+     * 重置密码
+     */
+    public function resetPwd(){
+        if($this->request->is('post')){
+            $phone = $this->request->session()->read('UserForgotPhone');
+            $user = $this->User->findByPhone($phone)->first();
+            if(!$user){
+                return $this->Util->ajaxReturn(false,'您要重置密码的手机号未注册');
+            }
+            $pwd1 = $this->request->data('pwd1');
+            $pwd2 = $this->request->data('pwd2');
+            if($pwd1==$pwd2){
+                $user->pwd = $pwd2;
+                if($this->User->save($user)){
+                    return $this->Util->ajaxReturn(true,'设置成功');
+                }else{
+                    return $this->Util->ajaxReturn(false,'服务器忙..');
+                }
+            }else{
+                return $this->Util->ajaxReturn(false,'2次密码输入不一致');
+            }
+        }
+    }
+
+
 
     /**
      * 检查手机号是否存在
@@ -770,6 +834,23 @@ class UserController extends AppController {
         }
     }
     
+    /**
+     * 设置密码
+     */
+    public function setPwd(){
+        if($this->request->is('post')){
+            $pwd1 = $this->request->data('pwd1');
+            $pwd2 = $this->request->data('pwd2');
+            if($pwd1==$pwd2){
+                $this->request->session()->write('reg.pwd', $pwd2);
+                return $this->Util->ajaxReturn(true,'设置成功');
+            }else{
+                return $this->Util->ajaxReturn(false,'2次密码输入不一致');
+            }
+        }
+    }
+
+
     /**
      * ajax绑定微信
      */
