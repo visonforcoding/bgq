@@ -1,24 +1,12 @@
-<header>
-    <div class='inner'>
-        <a href='#this' class='toback'></a>
-        <h1>
-            第一步--验证手机号
-        </h1>
-    </div>
-</header>
 <div class="wraper">
-    <div id="user-login" class='login-area'>
+    <div class="h2"></div>
+    <ul class="h-info-box">
         <form action="" method="post">
-            <div class="loginbox">
-                <div class='username'><label class='label'><span class='iconfont'>&#xe630;</span></label><input type='text' name="phone"    placeholder="请输入手机号"></div>
-                <div class='password'><label class='label'><span class='iconfont'>&#xe631;</span></label><input name="vcode" type='text' placeholder="在此输入验证码" >
-                    <button class="clearfix" type="button"  id="getVcode" href='javascript:void(0);'>获取验证码</button>
-                </div>
-            </div>
-            <a href="javascript:void(0);"  id="submit" class="submit" >下一步</a>
+            <li class="l-input"><input type="text" name="phone" placeholder="请输入您手机号码"></li>
+            <li class="l-input"><input type="text" name="vcode" placeholder="验证码"><i class="color-items getnum" id="getVcode">获取验证码</i></li>
         </form>
-
-    </div>
+    </ul>
+    <a href="javascript:void(0);" class="nextstep redshadow" id="submit">下一步</a>
 </div>
 <?php $this->start('script') ?>
 <script>
@@ -41,18 +29,18 @@
     $('#getVcode').on('click', function () {
         var phone = $('input[name="phone"]').val();
         if(phone == ''){
-            $.util.alert('请填写手机号码');
-            return false;
+            $.util.alert('请输入您的手机号码');
+            return;
         }
         var $obj = $(this);
         if($obj.hasClass('noTap')){
-            return false;
+            return;
         }
         $obj.addClass('noTap');
         if ($.util.isMobile(phone)) {
-            $.post('/user/sendVCode', {phone: phone}, function (res) {
+            $.post('/user/sendLoginCode', {phone: phone}, function (res) {
+                $.util.alert(res.msg);
                 if (res.status === true) {
-                    $.util.alert(res.msg);
                     var text = '<i id="timer">' + 30 + '</i>秒后重新发送';
                     $obj.html(text);
                     t1 = setInterval(function () {
@@ -64,25 +52,20 @@
                             clearInterval(t1);
                         } else {
                             $('#timer').text(timer);
+
                         }
                     }, 1000);
-                }else{
-                    if(res.status===false&&res.errCode===1){
-                        if(window.confirm(res.msg)){
-                            location.href = '/user/register-vphone?rephone='+phone;
-                        };
-                    } else {
-                        $obj.removeClass('noTap');
-                    }
+                } else {
+                    $obj.removeClass('noTap');
                 }
             }, 'json');
-        } else {
-            $.util.alert('请填写合法的手机号码');
-            $obj.removeClass('noTap');
-            return false;
         }
     });
     $('#submit').on('click', function () {
+        if($('input[name="phone"]').val() == ''){
+            $.util.alert('请填写手机');
+            return;
+        }
         if($('input[name="vcode"]').val() == ''){
             $.util.alert('请填写验证码');
             return;
@@ -90,15 +73,17 @@
         $form = $('form');
         $.ajax({
             type: 'post',
-            url: $form.attr('action'),
+            url: '',
             data: $form.serialize(),
             dataType: 'json',
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
-                        window.location.href = '/user/set-pwd';
-                    } else {
-                        alert(msg.msg);
+                        setTimeout(function(){
+                            window.location.href = '/user/reset-pwd';
+                        },2000);
+                    }else{
+                        $.util.alert(msg.msg);
                     }
                 }
             }
@@ -109,8 +94,8 @@
         if (phone !== '') {
             if ($.util.isMobile(phone)) {
                 $.post('/user/ckUserPhoneExist', {phone: phone}, function (res) {
-                    if (res.status === true) {
-                         $.util.alert('该手机号已注册');
+                    if (res.status === false) {
+                         $.util.alert('该手机未注册');
                     }
                 }, 'json');
             } else {
