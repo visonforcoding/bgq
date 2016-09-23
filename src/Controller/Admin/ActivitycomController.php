@@ -85,27 +85,6 @@ class ActivitycomController extends AppController {
     }
 
     /**
-     * Delete method
-     *
-     * @param string|null $id Activitycom id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function delete($id = null) {
-        $this->request->allowMethod('post');
-        $id = $this->request->data('id');
-        if ($this->request->is('post')) {
-            $activitycom = $this->Activitycom->get($id);
-            if ($this->Activitycom->delete($activitycom)) {
-                $this->Util->ajaxReturn(true, '删除成功');
-            } else {
-                $errors = $activitycom->errors();
-                $this->Util->ajaxReturn(true, getMessage($errors));
-            }
-        }
-    }
-
-    /**
      * get jqgrid data 
      *
      * @return json
@@ -119,7 +98,7 @@ class ActivitycomController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-        $where = [];
+        $where = ['Activitycom.is_delete'=>0];
         if (!empty($keywords)) {
             $where['Activitycom.body like'] = "%$keywords%";
         }
@@ -129,8 +108,8 @@ class ActivitycomController extends AppController {
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
         $user_id = $this->request->data('user_id');
-        if($user_id){
-            $where['Activitycom.user_id'] = $user_id; 
+        if ($user_id) {
+            $where['Activitycom.user_id'] = $user_id;
         }
         $query = $this->Activitycom->find();
         $query->hydrate(false);
@@ -181,8 +160,8 @@ class ActivitycomController extends AppController {
             $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
         }
         $user_id = $this->request->data('user_id');
-        if($user_id){
-            $where['Activitycom.user_id'] = $user_id; 
+        if ($user_id) {
+            $where['Activitycom.user_id'] = $user_id;
         }
         $Table = $this->Activitycom;
         $column = ['用户id', '活动id', '评论内容', '点赞数', '评论时间', 'å›žå¤ç”¨æˆ·id', '¸¸id'];
@@ -199,6 +178,59 @@ class ActivitycomController extends AppController {
         $this->autoRender = false;
         $filename = 'Activitycom_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+    }
+
+    /**
+     * 回复评论
+     * @return type
+     */
+    public function reply($id) {
+        if ($this->request->is('post')) {
+            $body = $this->request->data('reply');
+            $ActivitycomTable = \Cake\ORM\TableRegistry::get('Activitycom');
+            $lastcom = $ActivitycomTable->get($id);
+            $reply = [
+                'user_id' => -1, //并购帮官方用户
+                'activity_id' => $lastcom->activity_id,
+                'body' => $body,
+                'reply_id' => $lastcom->user_id,
+                'pid' => $lastcom->id,
+            ];
+            $newscom = $ActivitycomTable->newEntity();
+            $newscom = $ActivitycomTable->patchEntity($newscom, $reply);
+            $res = $ActivitycomTable->save($newscom);
+            if ($res) {
+                $ActivityTable = \Cake\ORM\TableRegistry::get('Activity');
+                $news = $ActivityTable->get($newscom->activity_id);
+                $news->comment_nums += 1;
+                $ActivityTable->save($news);
+                return $this->Util->ajaxReturn(true, '回复成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '回复失败');
+            }
+        }
+    }
+
+    /**
+     * 评论的删除
+     * @return type
+     */
+    public function delete() {
+        if ($this->request->is('post')) {
+            $id = $this->request->data('id');
+            $ActivitycomTable = \Cake\ORM\TableRegistry::get('Activitycom');
+            $com = $ActivitycomTable->get($id);
+            $com->is_delete = 1;  //假删除处理
+            if ($ActivitycomTable->save($com)) {
+                $ActivityTable = \Cake\ORM\TableRegistry::get('Activity');
+                $news = $ActivityTable->get($com->activity_id);
+                $news->comment_nums -= 1;
+                $ActivityTable->save($news);
+                return $this->Util->ajaxReturn(true, '删除成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '删除失败');
+            }
+        }
     }
 
 }

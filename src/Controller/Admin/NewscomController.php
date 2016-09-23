@@ -90,26 +90,6 @@ class NewscomController extends AppController {
         $this->set(compact('newscom', 'activities', 'users', 'replyusers'));
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Newscom id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function delete($id = null) {
-        $this->request->allowMethod('post');
-        $id = $this->request->data('id');
-        if ($this->request->is('post')) {
-            $newscom = $this->Newscom->get($id);
-            if ($this->Newscom->delete($newscom)) {
-                $this->Util->ajaxReturn(true, '删除成功');
-            } else {
-                $errors = $newscom->errors();
-                $this->Util->ajaxReturn(true, getMessage($errors));
-            }
-        }
-    }
 
     /**
      * get jqgrid data 
@@ -126,7 +106,7 @@ class NewscomController extends AppController {
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $user_id = $this->request->data('user_id');
-        $where = [];
+        $where = ['Newscom.is_delete'=>0];
         if (!empty($keywords)) {
             $where[' Newscom.`body` like'] = "%$keywords%";
         }
@@ -138,7 +118,7 @@ class NewscomController extends AppController {
         if ($id) {
             $where['news_id'] = $id;
         }
-        if($user_id){
+        if ($user_id) {
             $where['Newscom.user_id'] = $user_id;
         }
         $query = $this->Newscom->find();
@@ -180,7 +160,7 @@ class NewscomController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
-         $user_id = $this->request->data('user_id');
+        $user_id = $this->request->data('user_id');
         $where = [];
         if ($id) {
             $where['news_id'] = $id;
@@ -188,7 +168,7 @@ class NewscomController extends AppController {
         if (!empty($keywords)) {
             $where['username like'] = "%$keywords%";
         }
-        if($user_id){
+        if ($user_id) {
             $where['Newscom.user_id'] = $user_id;
         }
         if (!empty($begin_time) && !empty($end_time)) {
@@ -219,7 +199,7 @@ class NewscomController extends AppController {
             $lastcom = $this->Newscom->get($id);
             $newsTable = \Cake\ORM\TableRegistry::get('news');
             $reply = [
-                'user_id' => $this->_user->id,
+                'user_id' => -1,
                 'news_id' => $lastcom->news_id,
                 'body' => $data['reply'],
                 'reply_user' => $lastcom->user_id,
@@ -235,6 +215,28 @@ class NewscomController extends AppController {
                 return $this->Util->ajaxReturn(true, '回复成功');
             } else {
                 return $this->Util->ajaxReturn(false, '回复失败');
+            }
+        }
+    }
+
+    /**
+     * 评论的删除
+     * @return type
+     */
+    public function delete() {
+        if ($this->request->is('post')) {
+            $id = $this->request->data('id');
+            $NewscomTable = \Cake\ORM\TableRegistry::get('Newscom');
+            $com = $NewscomTable->get($id);
+            $com->is_delete = 1;  //假删除处理
+            if ($NewscomTable->save($com)) {
+                $newsTable = \Cake\ORM\TableRegistry::get('news');
+                $news = $newsTable->get($com->news_id);
+                $news->comment_nums -= 1;
+                $newsTable->save($news);
+                return $this->Util->ajaxReturn(true, '删除成功');
+            } else {
+                return $this->Util->ajaxReturn(false, '删除失败');
             }
         }
     }

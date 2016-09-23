@@ -130,7 +130,12 @@ class SavantController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $sort = 'User.' . $this->request->data('sidx');
+        $sort = $this->request->data('sidx');
+        if(preg_match('/\./', $sort)){
+            $sort = ucfirst($sort);
+        }else{
+            $sort = 'User.' . $this->request->data('sidx');
+        }
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $savant_status = $this->request->data('savant_status');
