@@ -168,28 +168,26 @@
                         func: function (res) {
                             if (res.status == true) {
                                 $.util.alert(res.msg);
-                                console.log(res.data);
-                                var html = $.util.dataToTpl('', 'tpl', [res.data], function (d) {
-                                    //d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
-                                    d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                                    d.user_truename = d.user.truename;
-                                    d.user_company = d.user.company;
-                                    d.user_position = d.user.position;
-                                    if (d.pid > 0) {
-                                        d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.reply.truename + ' </span>：' + d.body;
-                                    }
-                                    d.style = '';
-                                    d.disable = '0';
-                                    if (d.hasOwnProperty('likes')) {
-                                        if (d['likes'].length) {
-                                            d.style = 'color:#b71c2d';
-                                            d.disable = '1';
-                                        }
-                                    }
-                                    return d;
-                                });
-                                $('#comment').prepend(html);
-                                $('#allComments').prepend(html);
+//                                var html = $.util.dataToTpl('', 'tpl', [res.data], function (d) {
+//                                    //d.industries_html = $.util.dataToTpl('', 'subTpl', d.industries);
+//                                    d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+//                                    d.user_truename = d.user.truename;
+//                                    d.user_company = d.user.company;
+//                                    d.user_position = d.user.position;
+//                                    if (d.pid > 0) {
+//                                        d.body = '回复<span style="color:rgba(31, 27, 206, 0.95);"> ' + d.reply.truename + ' </span>：' + d.body;
+//                                    }
+//                                    d.style = '';
+//                                    d.disable = '0';
+//                                    if (d.hasOwnProperty('likes')) {
+//                                        if (d['likes'].length) {
+//                                            d.style = 'color:#b71c2d';
+//                                            d.disable = '1';
+//                                        }
+//                                    }
+//                                    return d;
+//                                });
+//                                $('#comment').prepend(html);
                                 setTimeout(function () {
                                     $('#shadow').hide('slow');
                                     $('.shadow-info').removeClass('c-height').addClass('m-height');
