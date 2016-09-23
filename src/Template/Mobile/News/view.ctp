@@ -268,7 +268,7 @@
                                     d.disable = '0';
                                     if (d.hasOwnProperty('likes')) {
                                         if (d['likes'].length) {
-                                            d.style = 'color:red';
+                                            d.style = 'color:#b71c2d';
                                             d.disable = '1';
                                         }
                                     }
@@ -426,7 +426,7 @@
                             console.log($('.praise_' + id));
                             $('.praise_' + id).siblings('.addnum').show();
                             $('.praise_' + id).siblings('em').html(parseInt(obj.find('em').text()) + 1);
-                            $('.praise_' + id).css('color', 'red');
+                            $('.praise_' + id).css('color', '#b71c2d');
                             setTimeout(function () {
                                 $('.praise_' + id).siblings('.addnum').hide();
                             }, 1000);
