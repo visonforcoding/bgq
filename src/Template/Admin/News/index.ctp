@@ -26,6 +26,10 @@
                 <?= $this->cell('Industry::news', [['single']]) ?>
             </div>
             <div class="form-group">
+                <label for="keywords">资讯标签</label>
+                <?= $this->cell('Newstag::single') ?>
+            </div>
+            <div class="form-group">
                 <label for="keywords">时间</label>
                 <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords" placeholder="开始时间">
                 <label for="keywords">到</label>

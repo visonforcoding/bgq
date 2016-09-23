@@ -27,5 +27,12 @@ class NewstagCell extends Cell {
         $tags = $TagTable->find()->hydrate(true)->all()->toArray();
         $this->set(compact('tags', 'selIds'));
     }
+    
+    public function single($selIds = null) {
+        $TagTable = \Cake\ORM\TableRegistry::get('Newstag');
+        $tags = $TagTable->find()->hydrate(true)->all()->toArray();
+        $this->set(compact('tags', 'selIds'));
+    }
+    
 
 }
