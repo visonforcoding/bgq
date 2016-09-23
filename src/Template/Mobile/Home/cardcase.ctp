@@ -55,7 +55,7 @@
             d.user_phone = d.other_card.phone;
             d.user_email = d.other_card.email;
             if(d.resend == 2) {
-                d.giveBack = '<div class="fr" id="giveBack_'+ d.other_card.id + '" uid="' + d.other_card.id + '"><span class="meetnum toc"><i></i>回赠</span></div>';
+                d.giveBack = '<div class="fr" id="giveBack_'+ d.other_card.id + '" uid="' + d.other_card.id + '"><span class="meetnum toc"><i class="iconfont">&#xe64e;</i>回赠</span></div>';
             }
             if(d.other_card.level == 2){
                 d.v = '<i></i>';
