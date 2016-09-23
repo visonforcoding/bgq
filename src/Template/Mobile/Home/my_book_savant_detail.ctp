@@ -79,7 +79,7 @@
                        func:function(res){
                            $.util.alert(res.msg);
                            setTimeout(function(){
-                               window.location.href = '/home/my-book/#5?check=1';
+                               window.location.href = '/home/my-book/?check=1#5';
                            },1500);
                        }
                     });
@@ -90,7 +90,7 @@
                        func:function(res){
                          $.util.alert(res.msg);
                          setTimeout(function(){
-                              window.location.href = '/home/my-book/#4?check=1';
+                              window.location.href = '/home/my-book/?check=1#4';
                            },1500);
                        }
                     });
