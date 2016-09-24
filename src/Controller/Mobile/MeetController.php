@@ -824,7 +824,7 @@ class MeetController extends AppController {
                     return $q->where(['user_id'=>$user_id]);
                 }, 'Savants'])
                 ->where(['enabled'=>'1', 'level'=>'2'])
-                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc', 'Savant.check_time'=>'desc'])
+                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc', 'Savants.check_time'=>'desc'])
                 ->page($page, $this->limit)
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
