@@ -62,7 +62,7 @@ class MeetController extends AppController {
                 ->contain(['Subjects'=>function($exp){
                     return $exp->where(['is_del'=>0])->orderDesc('create_time');
                 }, 'Followers'=>function($q)use($user_id){
-                    return $q->where(['user_id'=;>$user_id]);
+                    return $q->where(['user_id'=>$user_id]);
                 }, 'Savants'=>function($q){
                     return $q->orderDesc('Savants.check_time')
                 }])
