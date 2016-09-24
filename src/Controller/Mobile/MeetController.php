@@ -62,10 +62,12 @@ class MeetController extends AppController {
                 ->contain(['Subjects'=>function($exp){
                     return $exp->where(['is_del'=>0])->orderDesc('create_time');
                 }, 'Followers'=>function($q)use($user_id){
-                    return $q->where(['user_id'=>$user_id]);
-                }, 'Savants'])
+                    return $q->where(['user_id'=;>$user_id]);
+                }, 'Savants'=>function($q){
+                    return $q->orderDesc('Savants.check_time')
+                }])
                 ->where(['enabled'=>'1', 'level'=>'2'])
-                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc', 'Savants.check_time'=>'desc'])
+                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
                 ->limit($this->limit)
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
@@ -822,9 +824,11 @@ class MeetController extends AppController {
                     return $q->where(['Subjects.is_del'=>0])->orderDesc('Subjects.create_time')->limit(1);
                 }, 'Followers'=>function($q)use($user_id){
                     return $q->where(['user_id'=>$user_id]);
-                }, 'Savants'])
+                }, 'Savants'=>function($q){
+                    return $q->orderDesc('Savants.check_time');
+                }])
                 ->where(['enabled'=>'1', 'level'=>'2'])
-                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc', 'Savants.check_time'=>'desc'])
+                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
                 ->page($page, $this->limit)
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
