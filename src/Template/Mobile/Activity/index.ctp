@@ -28,7 +28,7 @@
                     </a>
                     <a href="/activity/search/3">
                         <i class="iconfont">&#xe69b;</i>
-                        <span>会务服务</span>
+                        <span>招聘服务</span>
                     </a>
             </div>
             </div>
