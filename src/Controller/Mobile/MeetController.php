@@ -817,13 +817,14 @@ class MeetController extends AppController {
         $biggies = $this
                 ->User
                 ->find()
+                ->distinct('User.id')
                 ->contain(['Subjects'=>function($q){
                     return $q->where(['Subjects.is_del'=>0])->orderDesc('Subjects.create_time')->limit(1);
                 }, 'Followers'=>function($q)use($user_id){
                     return $q->where(['user_id'=>$user_id]);
-                }])
+                }, 'Savants'])
                 ->where(['enabled'=>'1', 'level'=>'2'])
-                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
+                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc', 'Savant.check_time'=>'desc'])
                 ->page($page, $this->limit)
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
