@@ -63,7 +63,8 @@ class MeetController extends AppController {
                     return $exp->where(['is_del'=>0])->orderDesc('create_time');
                 }, 'Followers'=>function($q)use($user_id){
                     return $q->where(['user_id'=>$user_id]);
-                }, 'Savants'])
+                }])
+                ->leftJoin('Savants')
                 ->where(['enabled'=>'1', 'level'=>'2'])
                 ->order(['is_top'=>'desc', 'subject_update_time'=>'desc', 'Savants.check_time'=>'desc'])
                 ->limit($this->limit)
