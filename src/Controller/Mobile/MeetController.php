@@ -58,6 +58,7 @@ class MeetController extends AppController {
         $users = $this
                 ->User
                 ->find()
+                ->distinct('User.id')
                 ->contain(['Subjects'=>function($exp){
                     return $exp->where(['is_del'=>0])->orderDesc('create_time');
                 }, 'Followers'=>function($q)use($user_id){
