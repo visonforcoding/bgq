@@ -193,7 +193,7 @@
 
     function shareFriends() {
         // 分享设置
-        LEMON.event.invite('向你推荐并购帮APP，里面有大量的并购资讯，并购活动，和很多并购大咖http://t.cn/RtSw8QS');
+        LEMON.event.invite('向你推荐并购帮APP，里面有大量的并购资讯，并购活动，和很多并购大咖http://t.cn/RtHB8Rq');
     }
 
     $('#wxshare').on('tap', function () {
