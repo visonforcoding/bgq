@@ -26,15 +26,15 @@
                     <!--tab2-->
                     <div class="loginbox pwd_login">
                         <div class='username'><label class="label"><span class="iconfont">&#xe630;</span></label><input name="mobile" type='text' placeholder="请输入手机号"></div>
-                            <div class='password'><label class="label"><span class="iconfont">&#xe631;</span></label><input name="pwd" type='password' placeholder="在此输入密码" >
+                        <div class='password'><label class="label"><span class="iconfont">&#xe631;</span></label><input name="pwd" type='password' placeholder="在此输入密码" >
                             <a href='/user/forgot-pwd' class="clearfix fr">忘记密码</a>
                         </div>
                     </div>
+                </div>
+
             </div>
-                
-        </div>
             <a href="javascript:void(0);"  id="submit" class="submit redshadow" >登录</a>
-             <a href="/user/register-vphone" class='historyinfo colore01'>注册</a>
+            <a href="/user/register-vphone" class='historyinfo colore01'>注册</a>
         </form>
 
     </div>
@@ -55,19 +55,20 @@
 </div>
 <?php $this->start('script') ?>
 <script>
+    var login_type = 0;
     var redirect_url = '/home/index';
-    $('.tabhead span').on('click',function(){
-            $(this).addClass('active').siblings().removeClass('active');
-            var index = $(this).index();
-            $('.loginbox').eq(index).show().siblings().hide();
-            
-        })
-    window.onBackView = function(){
+    $('.tabhead span').on('click', function () {
+        $(this).addClass('active').siblings().removeClass('active');
+        var index = $(this).index();
+        $('.loginbox').eq(index).show().siblings().hide();
+        login_type = index;
+    })
+    window.onBackView = function () {
         LEMON.event.back();
     }
-    if(location.href.indexOf('loginout=1')>0){
-        $.util.setCookie('token_uin','');
-        LEMON.db.set('token_uin','');
+    if (location.href.indexOf('loginout=1') > 0) {
+        $.util.setCookie('token_uin', '');
+        LEMON.db.set('token_uin', '');
         //$.util.setCookie('login_url','/home/index',99999);
     }
     var t1 = null;
@@ -77,12 +78,12 @@
     });
     $('#getVcode').on('click', function () {
         var phone = $('input[name="phone"]').val();
-        if(phone == ''){
+        if (phone == '') {
             $.util.alert('请填写手机号码');
             return false;
         }
         var $obj = $(this);
-        if($obj.hasClass('noTap')){
+        if ($obj.hasClass('noTap')) {
             return false;
         }
         $obj.addClass('noTap');
@@ -103,14 +104,15 @@
                             $('#timer').text(timer);
                         }
                     }, 1000);
-                }else{
-                    if(res.status===false){
-                        if(res.errCode===1){
-                            if(window.confirm(res.msg)){
-                                location.href = '/user/register-vphone?rephone='+phone;
-                            };
+                } else {
+                    if (res.status === false) {
+                        if (res.errCode === 1) {
+                            if (window.confirm(res.msg)) {
+                                location.href = '/user/register-vphone?rephone=' + phone;
+                            }
+                            ;
                         }
-                        if(res.errCode===2){
+                        if (res.errCode === 2) {
                             $.util.alert(res.msg);
                         }
                     } else {
@@ -126,22 +128,24 @@
     });
     $('#submit').on('click', function () {
         $form = $('form');
+        var data = $form.serialize();
+        data += '&login_type='+login_type;
         $.util.ajax({
             url: $form.attr('action'),
-            data: $form.serialize(),
+            data:data,
             func: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
-                        if($.util.isAPP){
-                            $.util.setCookie('token_uin',msg.token_uin,10*365*24*60);
-                            LEMON.db.set('token_uin',msg.token_uin);
+                        if ($.util.isAPP) {
+                            $.util.setCookie('token_uin', msg.token_uin, 10 * 365 * 24 * 60);
+                            LEMON.db.set('token_uin', msg.token_uin);
                         }
-                        $.util.setCookie('login_status','yes');
-                        if($.util.isWX&&msg.bind_wx){
-                           $('#isLogout').show();
-                           $('#shadow').show();
-                           redirect_url = msg.redirect_url;
-                           return;
+                        $.util.setCookie('login_status', 'yes');
+                        if ($.util.isWX && msg.bind_wx) {
+                            $('#isLogout').show();
+                            $('#shadow').show();
+                            redirect_url = msg.redirect_url;
+                            return;
                         }
                         document.location.href = msg.redirect_url;
                     } else {
@@ -152,31 +156,31 @@
         });
         return false;
     });
-    $('#yes').on('tap', function(){
-         $.get('/user/asyn-bindwx');
-          document.location.href = redirect_url; 
-    }); 
-    $('#no').on('tap', function(){
-          document.location.href = redirect_url; 
-    }); 
+    $('#yes').on('tap', function () {
+        $.get('/user/asyn-bindwx');
+        document.location.href = redirect_url;
+    });
+    $('#no').on('tap', function () {
+        document.location.href = redirect_url;
+    });
     $('#wxlogin').on('click', function () {
         if ($.util.isAPP) {
             LEMON.login.wx(function (code) {
-            $.util.ajax({   //获取open id,比对是否存在,登录或是注册  生成token
-                data:{code:code},
-                url: '/wx/appLogin',
-                func:function(res){
-                    //res = JSON.parse(res);
-                    $.util.alert(res.msg);
-                    if(res.status){
-                        $.util.setCookie('token_uin',res.token_uin,10*365*24*60);
-                        $.util.setCookie('login_status', 'yes', 20*60);
-                        LEMON.db.set('token_uin',res.token_uin);
-                        document.location.href = res.redirect_url;
+                $.util.ajax({//获取open id,比对是否存在,登录或是注册  生成token
+                    data: {code: code},
+                    url: '/wx/appLogin',
+                    func: function (res) {
+                        //res = JSON.parse(res);
+                        $.util.alert(res.msg);
+                        if (res.status) {
+                            $.util.setCookie('token_uin', res.token_uin, 10 * 365 * 24 * 60);
+                            $.util.setCookie('login_status', 'yes', 20 * 60);
+                            LEMON.db.set('token_uin', res.token_uin);
+                            document.location.href = res.redirect_url;
+                        }
                     }
-                }
+                });
             });
-          });
         } else {
             document.location.href = '/wx/get-user-jump';
         }
