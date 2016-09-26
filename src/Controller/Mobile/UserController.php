@@ -356,11 +356,15 @@ class UserController extends AppController {
         if ($this->request->is(['patch', 'post', 'put'])) {
             $phone = $this->request->data('phone');
             $mobile = $this->request->data('mobile');
+            $login_type = $this->request->data('login_type');
             $UserTable = \Cake\ORM\TableRegistry::get('User');
-             if($mobile){
+            if($mobile&&$login_type==1){
                  //密码登录
                  $user = $UserTable->find()->where(['phone' => $mobile, 'enabled' => 1, 'is_del' => 0])->first();
                  $pwd = $this->request->data('pwd');
+                 if(!$user){
+                     return $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或被禁用']); 
+                 }
                 if (!(new \Cake\Auth\DefaultPasswordHasher)->check($pwd, $user->pwd)) {
                     return $this->Util->ajaxReturn(false,'密码不正确');
                 }else{
