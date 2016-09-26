@@ -163,6 +163,8 @@ class ActivityTable extends Table {
                 ->notEmpty('activity_time', '活动时间不可为空');
         $validator
                 ->notEmpty('company', '主办单位不可为空');
+        $validator
+                ->notEmpty('region_id', '地区不可为空');
 
         $validator
                 ->notEmpty('summary', '摘要（活动介绍）不可为空');
