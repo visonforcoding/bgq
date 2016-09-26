@@ -33,8 +33,8 @@
                 em.href = '/mobile/app/bgq.apk';
             }
             else if($.util.isIOS){
-                em.href = 'javascript:void(0)';
-                $.util.alert('app即将上架app store,请耐心等待');
+                em.href = 'https://itunes.apple.com/us/app/bing-gou-bang/id1156402644';
+//                $.util.alert('app即将上架app store,请耐心等待');
             }
         }, 300);
     });
