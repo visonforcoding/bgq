@@ -101,6 +101,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
         "event.getWXCode",
         "event.invite", //短信分享
         "event.getLocation",
+        "event.viewImg",
         "event.tel",
         "event.uploadPhoto",
         "event.reuploadPhoto"];
@@ -158,6 +159,18 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                             return;
                         }
                         return JSApiInvoke(api, {}, '');
+                    });
+                    break;
+                case "event.viewImg":
+                    registerAPI(null, api, function () {
+                        var imgs = arguments[1], cImg=arguments[0], index=1, i=0;
+                        for(;i<imgs.length;i++){
+                            if(imgs[i] == cimg) {
+                                index = i+1;
+                                break;
+                            }
+                        }
+                        return JSApiInvoke(api, {imgs:imgs, index:index}, '');
                     });
                     break;
                 case "sys.clearWebCatch":
