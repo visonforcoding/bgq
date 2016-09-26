@@ -242,7 +242,7 @@ class UserController extends AppController {
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`ctime`) >' => $begin_time], ['date(`ctime`) <' => $end_time]];
+            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
         $Table = $this->User;
         $column = ['手机号', '姓名', '会员','等级', '公司', '职位', '邮箱', '性别', '常驻城市', '会员认证','账号状态', '注册时间'];
