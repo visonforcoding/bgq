@@ -65,6 +65,7 @@
     }
 </script>
 <script>
+    var page = 2;
     $.getJSON('/news/get-banner',function(res){
         if(res.status){
             var tab=[], html = $.util.dataToTpl('', 'bannerTpl', res.data, function (d) {
@@ -78,6 +79,8 @@
     });
     
     function dealData(data){
+        page = 2;
+        $.util.hideLoading('#buttonLoading');
         var html = $.util.dataToTpl('', 'listTpl', data, function (d) {
             if(d.source){
                 d.author = '<div class="website">'+ d.source +'</div>';
@@ -113,7 +116,7 @@
     };
     window.onActiveView();
 
-    var page = 2;
+    
     setTimeout(function(){
     $(window).on("scroll", function () {
         $.util.listScroll('items', function () {

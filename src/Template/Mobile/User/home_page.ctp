@@ -383,7 +383,7 @@
 
 <?php if ($self): ?>
     <div style="height:1.2rem"></div>
-    <a href="javascript:location.href = ('/home/edit-userinfo?ref='+encodeURI(location.href))" class="f-bottom">编辑个人资料</a>
+    <a href="/home/edit-userinfo" class="f-bottom">编辑个人资料</a>
 <?php elseif ($user->level == 2 && $user->subjects): ?>
     <div style="height:1.2rem"></div>
     <a href="/meet/subject-list/<?= $user->id ?>" class="f-bottom">立即约见</a>
