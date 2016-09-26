@@ -111,7 +111,7 @@
     }
 </script>
 <script>
-
+var page = 2;
     window.hideRelease = false;
     $(window).on("scroll", function () {
         // 滚动一个屏幕长度，隐藏发布活动
@@ -123,6 +123,8 @@
     });
 
     window.onActiveView = function () {
+        page = 2;
+        $.util.hideLoading('#buttonLoading');
         $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
             d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
             //        d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
@@ -141,7 +143,7 @@
     };
     window.onActiveView();
 
-    var page = 2;
+    
     setTimeout(function () {
         $(window).on("scroll", function () {
             $.util.listScroll('items', function () {
