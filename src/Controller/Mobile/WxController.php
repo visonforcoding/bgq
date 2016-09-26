@@ -380,7 +380,7 @@ class WxController extends AppController {
                 $url = '/meet/view/' . $id;
             }
         } else {
-            $url = '/';
+            $url = '/meet/index';
         }
         $this->set([
             'pageTitle' => '下载并购帮',

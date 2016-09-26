@@ -29,7 +29,7 @@
                 <?php endif; ?>
                 <time><?= $news->publish_time->i18nFormat('yyyy-MM-dd HH:mm:ss') ?></time>
             </h1>
-            <div class="body-con innercon">
+            <div class="body-con innercon" id="content">
                 <img src="<?= $news->cover ?>"/>
                 <?php if ($news->is_media != 0 && $news->media_pos == 1): ?>
                     <?php if ($news->is_media == 1): ?>
@@ -536,6 +536,10 @@
             $('#news').show();
             $('#allcoment').hide();
         }
+    });
+    
+    $('#content img').on('click', function(){
+        alert(1);
     });
 </script>
 <?php $this->end('script'); ?>
