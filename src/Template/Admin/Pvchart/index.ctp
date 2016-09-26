@@ -51,7 +51,7 @@
                                     return '<a href="/admin/pvchart/tagchart/'+cell+'">'+cell+'</a>';
                             }},
                             {name: 'url', editable: true, align: 'center',formatter:function(cell,opt,obj){
-                                    return '<a href="/admin/pvchart/urlchart/'+obj.urlmap+'">'+obj.urlmap+'</a>';
+                                    return '<a href="/admin/pvchart/urlchart/'+obj.urlmap+'">'+cell+'</a>';
                             }},
                             {name: 'counts', editable: true, align: 'center'},
                             {name: 'act', editable: true, align: 'center', formatter: function (cell, opt, obj) {
