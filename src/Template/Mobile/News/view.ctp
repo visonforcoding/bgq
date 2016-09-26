@@ -539,7 +539,14 @@
     });
     
     $('#content img').on('click', function(){
-        alert(1);
+        var imgs = $('#content img');
+        var srcs = [];
+        var i = 0;
+        for(;i<imgs.length;i++){
+            srcs[i] = imgs[i].src;
+        }
+//        console.log(srcs);
+        $.util.viewImg($(this).attr('src'), srcs);
     });
 </script>
 <?php $this->end('script'); ?>
