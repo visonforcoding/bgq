@@ -128,7 +128,7 @@ class PvchartController extends AppController {
         $Table = \Cake\ORM\TableRegistry::get('Pvlog');
         $query = $Table->find();
         $query->contain(['Pvtag']);
-        $query->select(['counts' => $query->func()->count('*'), 'ptag', 'act', 'Pvtag.descb', 'url']);
+        $query->select(['counts' => $query->func()->count('*'), 'ptag', 'act', 'Pvtag.descb', 'url','urlmap']);
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
@@ -279,6 +279,88 @@ class PvchartController extends AppController {
         $name = '访问用户操作系统版本占比';
         $title['text'] = '访问用户操作系统版本占比';
         echo $this->Echart->setPieChart($result, $name, $title);
+        exit();
+    }
+    
+    /**
+     * ptag统计
+     * @param type $tag
+     */
+    public function tagchart($ptag){
+        $this->set(compact('ptag'));
+    }
+    
+    /**
+     * ptag统计
+     * @param type $tag
+     */
+    public function urlchart($ptag){
+        $this->set(compact('ptag'));
+    }
+    
+    public function getTagChart($ptag){
+        $date = $this->request->query('date');
+        $date = date('Y-m-d H:i:s',  strtotime($date));
+        $type = $this->request->query('type');
+        $connection = \Cake\Datasource\ConnectionManager::get('default');
+        if($type=='month'){
+            $sql = "select count(u.id) as nums,day(u.create_time) as time_item,date(u.create_time) as date
+                            from `pvlog` u where month(u.create_time) = month('".$date."')
+                            and u.ptag = '$ptag'
+                            group by date(u.create_time)";
+            $name = date('n',  strtotime($date)).'月';
+        }
+        if($type=='year'){
+            $sql = "select count(u.id) as nums,month(u.create_time) as time_item
+                            from `pvlog` u where year(u.create_time) = year('".$date."')
+                            and u.ptag = '$ptag'
+                            group by month(u.create_time)";
+            $name = date('Y',  strtotime($date)).'年';
+        }
+        if($type=='week'){
+            $sql = "select count(u.id) as nums,weekday(u.create_time) as time_item
+                            from `pvlog` u where week(u.create_time) = week('".$date."')
+                            and u.ptag = '$ptag'    
+                            group by weekday(u.create_time)";
+            $name = date('Y',  strtotime($date)).'年第'.date('W',  strtotime($date)).'周';
+        }
+        $result = $connection->execute($sql)->fetchAll('assoc');
+        $this->loadComponent('Echart');
+        $title['text'] = 'ptag访问统计';
+        echo $this->Echart->setLineChart($result,$type,$name,$title,'次');
+        exit();
+    }
+    
+    public function getUrlChart($ptag){
+        $date = $this->request->query('date');
+        $date = date('Y-m-d H:i:s',  strtotime($date));
+        $type = $this->request->query('type');
+        $connection = \Cake\Datasource\ConnectionManager::get('default');
+        if($type=='month'){
+            $sql = "select count(u.id) as nums,day(u.create_time) as time_item,date(u.create_time) as date
+                            from `pvlog` u where month(u.create_time) = month('".$date."')
+                            and u.urlmap = '$ptag'
+                            group by date(u.create_time)";
+            $name = date('n',  strtotime($date)).'月';
+        }
+        if($type=='year'){
+            $sql = "select count(u.id) as nums,month(u.create_time) as time_item
+                            from `pvlog` u where year(u.create_time) = year('".$date."')
+                            and u.urlmap = '$ptag'
+                            group by month(u.create_time)";
+            $name = date('Y',  strtotime($date)).'年';
+        }
+        if($type=='week'){
+            $sql = "select count(u.id) as nums,weekday(u.create_time) as time_item
+                            from `pvlog` u where week(u.create_time) = week('".$date."')
+                            and u.urlmap = '$ptag'    
+                            group by weekday(u.create_time)";
+            $name = date('Y',  strtotime($date)).'年第'.date('W',  strtotime($date)).'周';
+        }
+        $result = $connection->execute($sql)->fetchAll('assoc');
+        $this->loadComponent('Echart');
+        $title['text'] = 'url访问统计';
+        echo $this->Echart->setLineChart($result,$type,$name,$title,'次');
         exit();
     }
 
