@@ -45,19 +45,23 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['ptag','页面', '量次', '动作', '描述','操作'],
+                                ['ptag', '页面', '量次', '动作', '描述', '操作'],
                         colModel: [
-                            {name: 'ptag', editable: true, align: 'center'},
-                            {name: 'url', editable: true, align: 'center'},
+                            {name: 'ptag', editable: true, align: 'center',formatter:function(cell,opt,obj){
+                                    return '<a href="/admin/pvchart/tagchart/'+cell+'">'+cell+'</a>';
+                            }},
+                            {name: 'url', editable: true, align: 'center',formatter:function(cell,opt,obj){
+                                    return '<a href="/admin/pvchart/urlchart/'+obj.urlmap+'">'+obj.urlmap+'</a>';
+                            }},
                             {name: 'counts', editable: true, align: 'center'},
-                            {name: 'act', editable: true, align: 'center',formatter:function(cell,opt,obj){
-                                    switch(cell){
+                            {name: 'act', editable: true, align: 'center', formatter: function (cell, opt, obj) {
+                                    switch (cell) {
                                         case 'v':
                                             return '访问';
                                         case 'c':
                                             return '点击';
                                     }
-                            }},
+                                }},
                             {name: 'pvtag.descb', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
