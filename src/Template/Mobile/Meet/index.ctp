@@ -124,6 +124,7 @@
 
     window.onActiveView = function () {
         page = 2;
+        window.holdLoad = false;
         $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
             d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
             //        d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
