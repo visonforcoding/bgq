@@ -805,3 +805,54 @@ AUTO_INCREMENT=6
 
 ALTER TABLE `activity`
 	CHANGE COLUMN `summary` `summary` VARCHAR(550) NULL DEFAULT NULL COMMENT '摘要' AFTER `contact`;
+	
+	DROP COLUMN `org_val`;	
+	ALTER TABLE `savant`
+	ADD COLUMN `check_time` DATETIME NOT NULL COMMENT '审核通过时间' AFTER `summary`;
+	CHANGE COLUMN `os_version` `os_version` VARCHAR(10) NOT NULL DEFAULT '' COMMENT '系统版本号' AFTER `is_app`;
+	ADD COLUMN `body_origin` VARCHAR(500) NULL DEFAULT '' COMMENT '原始内容' AFTER `body`;
+
+#选美表
+CREATE TABLE `beauty` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL COMMENT '用户id',
+	`vote_nums` INT(11) DEFAULT 0 COMMENT '票数',
+	`constellation` VARCHAR(20) DEFAULT '' COMMENT '星座',
+	`brief` VARCHAR(150) DEFAULT '' COMMENT '个人简介',
+	`declaration` VARCHAR(50) DEFAULT '' COMMENT '参赛宣言',
+	`hobby` VARCHAR(100) DEFAULT '' COMMENT '兴趣爱好',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	`update_time` DATETIME NOT NULL COMMENT '更新时间',
+	`is_pass` TINYINT(2) NOT NULL COMMENT '是否审核通过：0：未审核；1：审核通过；2：审核未通过',
+	PRIMARY KEY (`id`)
+)
+COMMENT='选美表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+#投票表
+CREATE TABLE `vote` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL COMMENT '用户id',
+	`vote_user_id` INT(11) NOT NULL COMMENT '投票对象id',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='投票表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+ALTER TABLE `binggq`.`user`
+  ADD COLUMN `is_judge` tinyint(2) NOT NULL DEFAULT 0 COMMENT '是否评委' COMMENT '是否评委' AFTER `is_top`;
+
+#选美图片表
+CREATE TABLE `beauty_pic` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL COMMENT '用户id',
+	`pic_url` VARCHAR(250) NOT NULL COMMENT '图片路径',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='选美图片表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;

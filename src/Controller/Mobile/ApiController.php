@@ -165,6 +165,7 @@ class ApiController extends AppController {
             $response['path'] = $urlpath . $info[0]['savename'];
             if ($isZip) {
                 $response['thumbpath'] = $urlpath . $upload->thumbPrefix . $info[0]['savename'];
+                $response['smallpath'] = $urlpath . $upload->smallPrefix . $info[0]['savename'];
             }
             $response['msg'] = '上传成功!';
         }

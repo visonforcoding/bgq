@@ -197,8 +197,8 @@
 </div>
 
 <script>
-    var ref = $.util.getParam('ref') ? $.util.getParam('ref') : '/home/index';
-    LEMON.sys.back(ref);
+//    var ref = $.util.getParam('ref') ? $.util.getParam('ref') : '/home/index';
+    LEMON.sys.back(document.referrer);
 //    if($.util.isAPP){
 //        if(document.URL.indexOf('#home') != -1){
 //            LEMON.sys.back('/user/home-page/<?= $user->id ?>');
@@ -290,6 +290,7 @@
                 return false;
             } else if ($.util.isWX) {
                 $.util.wxUploadPic(function (id) {
+                    alert(id);
                     $.util.ajax({
                         url: "/user/getWxPic/" + id,
                         func: function (msg) {

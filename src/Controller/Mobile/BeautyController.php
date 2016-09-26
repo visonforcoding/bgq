@@ -137,6 +137,7 @@ class BeautyController extends AppController {
     public function enroll(){
         $this->handCheckLogin();
         $BeautyTable = \Cake\ORM\TableRegistry::get('beauty');
+        $BeautyPicTable = \Cake\ORM\TableRegistry::get('beauty_pic');
         if($this->request->is('post')){
             $data = $this->request->data;
             $beauty = $BeautyTable->newEntity();
@@ -152,11 +153,22 @@ class BeautyController extends AppController {
                 return $this->Util->ajaxReturn(false, '系统错误');
             }
         }
-        $UserTable = \Cake\ORM\TableRegistry::get('user');
-        $user = $UserTable->get($this->user->id);
+        $user = $BeautyTable->find()->contain(['Users'=>function($q){
+            return $q->where(['enabled'=>1]);
+        }])->where(['user_id'=>$this->user->id])->first();
+        $pic = $BeautyPicTable->find()->where(['user_id'=>$this->user->id])->toArray();
+        if($user){
+            $is_apply = true;
+        } else {
+            $is_apply = false;
+            $UserTable = \Cake\ORM\TableRegistry::get('user');
+            $user = $UserTable->get($this->user->id);
+        }
         $this->set([
             'pageTitle' => '报名',
-            'user' => $user
+            'user' => $user,
+            'pic' => $pic,
+            'is_apply' => $is_apply
         ]);
     }
     
@@ -378,5 +390,63 @@ class BeautyController extends AppController {
             'rank' => $rank,
             'self' => $self,
         ]);
+    }
+    
+    /**
+     * 微信上传图片
+     * @param int $id 微信上传图片id
+     */
+    public function getWxPic($id=''){
+        $this->handCheckLogin();
+        $this->loadComponent('Wx');
+        $token = $this->Wx->getAccessToken();
+        $url = 'http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=' . $token . '&media_id=' . $id;
+        $httpClient = new \Cake\Network\Http\Client();
+        $response = $httpClient->get($url);
+        if($response->isOk()){
+            $res = $response->body();
+        }
+        \Cake\Log\Log::debug($res,'devlog');
+        $today = date('Y-m-d');
+        $path = 'upload/beauty/pic/'.$today;
+        $file_name = uniqid().'.jpg';
+        if(!is_dir($path)){
+            mkdir($path,0777,true);
+        }
+        $img = \Intervention\Image\ImageManagerStatic::make($res)
+                ->save(WWW_ROOT . $path . '/' . $file_name);
+        $image = getimagesize(WWW_ROOT . $path . '/' . $file_name);
+        if ($image === false){
+            return $this->Util->ajaxReturn(false, '系统错误');
+        }
+        \Intervention\Image\ImageManagerStatic::make($res)
+                ->resize(intval($image[0]*0.4), intval($image[1]*0.4))
+                ->save(WWW_ROOT . $path . '/small_' . $file_name);
+        $file_name = '/' . $path . '/small_' . $file_name;
+        $BeautyPicTable = \Cake\ORM\TableRegistry::get('beauty_pic');
+        $pic = $BeautyPicTable->newEntity();
+        $pic->user_id = $this->user->id;
+        $pic->pic_url = $file_name;
+        $res = $BeautyPicTable->save($pic);
+        if($res){
+            return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'图片上传成功', 'smallpath'=>$file_name]);
+        } else {
+            return $this->Util->ajaxReturn(false, '图片上传失败');
+        }
+    }
+
+    public function getAppPic(){
+        $this->handCheckLogin();
+        $data = $this->request->data;
+        $BeautyPicTable = \Cake\ORM\TableRegistry::get('beauty_pic');
+        $pic = $BeautyPicTable->newEntity();
+        $pic->user_id = $this->user->id;
+        $pic->pic_url = $data['url'];
+        $res = $BeautyPicTable->save($pic);
+        if ($res) {
+            return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'图片上传成功']);
+        } else {
+            return $this->Util->ajaxReturn(false, '图片上传失败');
+        }
     }
 }

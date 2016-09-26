@@ -41,6 +41,7 @@ class UploadFile {//类定义开始
         'thumbFile' => '', // 缩略图文件名
         'thumbExt' => '', // 缩略图扩展名        
         'thumbRemoveOrigin' => false, // 是否移除原图
+        'smallPrefix' => 'small_', // 中图前缀
         'zipImages' => false, // 压缩图片文件上传
         'autoSub' => false, // 启用子目录保存文件
         'subType' => 'hash', // 子目录创建方式 可以使用hash date custom

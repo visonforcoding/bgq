@@ -43,7 +43,7 @@
     <div class="fixed-btn">
         <a href="/beauty/want-vote" class="l-btn">我要投票</a>
         <?php if($user): ?>
-            <a href="javascript:$.util.checkLogin('/beauty/userinfo');" class="r-btn" >我的报名</a>
+            <a href="javascript:$.util.checkLogin('/beauty/enroll');" class="r-btn" >我的报名</a>
         <?php else: ?>
             <a href="javascript:$.util.checkLogin('/beauty/enroll');" class="r-btn" >我要报名</a>
         <?php endif; ?>
