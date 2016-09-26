@@ -29,7 +29,7 @@
                 <?php endif; ?>
                 <time><?= $news->publish_time->i18nFormat('yyyy-MM-dd HH:mm:ss') ?></time>
             </h1>
-            <div class="body-con innercon" id="content">
+            <div class="body-con innercon" id="article_content">
                 <img src="<?= $news->cover ?>"/>
                 <?php if ($news->is_media != 0 && $news->media_pos == 1): ?>
                     <?php if ($news->is_media == 1): ?>
@@ -538,9 +538,9 @@
         }
     });
     
-    $('#content img').on('click', function(){
+    $('#article_content img').on('click', function(){
         var imgs = [];
-        $('#content img').each(function(){imgs.push(this.src)});
+        $('#content img').each(function(){imgs.push(this.src);});
         $.util.viewImg(this.src, imgs);
     });
 </script>
