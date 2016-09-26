@@ -1,6 +1,7 @@
 <?php $this->start('static') ?>   
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
+<link rel="stylesheet" type="text/css" href="/wpadmin/lib/lightbox/css/lightbox-rotate.css">
 <?php $this->end() ?> 
 <div class="col-xs-12">
     <form id="table-bar-form">
@@ -36,6 +37,9 @@
 <?php $this->start('script'); ?>
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
+<!--查看大图-->
+<script src="/wpadmin/lib/jqueryrotate.js"></script>
+<script src="/wpadmin/lib/lightbox/js/lightbox-rotate.js"></script>
 <script>
                 $(function () {
                     $('#main-content').bind('resize', function () {
@@ -139,6 +143,7 @@
                     response = ''; // '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看话题" href="/admin/savant/show-subject/' + rowObject.id + '" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-chat-line"></i> </a>';
                     response += '<a title="编辑" href="/admin/savant/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+                    response += '<a title="查看名片" href="' + rowObject.card_path + '" data-lightbox="' + rowObject.id + '" data-title="' + rowObject.truename + '"><i class="icon icon-picture"></i> </a>';
                     response += '<a title="申请记录" onclick="showApply(' + rowObject.id + ')" class="grid-btn "><i class="icon icon-list-alt"></i> </a>';
                     if (rowObject.is_top == 0) {
                         response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
