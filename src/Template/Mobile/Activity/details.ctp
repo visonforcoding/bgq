@@ -727,7 +727,11 @@
         }
     });
 
-
+    $('.a-detail img').on('click', function(){
+        var imgs = [];
+        $('.a-detail img').each(function(){imgs.push(this.src)});
+        $.util.viewImg(this.src, imgs);
+    });
 
 </script>
 <?php
