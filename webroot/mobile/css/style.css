@@ -81,7 +81,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .infobox{padding:0.08rem 0.3rem 0; background: #FFFFFF;border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid;}
 .infobox li,.infoboxlist li{position:relative;height:0.8rem;line-height: 0.8rem;border-bottom:1px #e5e5e5 solid;font-size:0.28rem;color:#222c38;}
 .infobox li span.infocard,.infoboxlist li span.infocard{position:absolute;right:0.1rem;line-height: 0.8rem;}
-.infobox li input{border:none;outline: none;text-align: right;width:5.2rem;height:.4rem;/**/text-overflow : ellipsis }
+.infobox li input{border:none;outline: none;text-align: right;width:5.2rem;line-height:.52rem;/**/text-overflow : ellipsis }
 .uploadbox .filebtn{overflow:hidden;position:relative;}
 .uploadbox .filebtn input[type='file']{position:absolute;top:0;left:0;position: absolute;top: 0;left: 0;width: 100%;height: 0.78rem;border: 1px #ccc solid;
     margin: 0.45rem 0 0.2rem; opacity: 0;}
@@ -716,7 +716,7 @@ border-radius: 50%;}
 .h-home-bottom .tofocus-m span{color:#fff;border:1px #fff solid;padding:0.03rem 0.1rem;border-radius: 0.1rem; margin-right: 0.35rem;}
 .h-home-menu{/*display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap: wrap;flex-wrap: wrap;*/background: #fff;border-bottom:1px #e5e5e5 solid;margin-bottom:0.2rem;overflow:hidden;/*向下兼容*/}
 .typeselect,.c-select{width:1rem;overflow: hidden;}
-.typeselect select,.c-select select{width:1.3rem;border:none;padding-left:0.5rem;}
+.typeselect select,.c-select select{width:1.3rem;border:none;padding-left:0.6rem;}/*安卓*/
 .c-select select{width:1.5rem;padding-left:0;font-size:.28rem;}
 .c-select{margin-right:.1rem;}
 .h-home-menu li{width:50%; padding:0.4rem 0 0.4rem 1rem;border:1px #e5e5e5 solid;border-bottom:none;border-right:none;float:left;/*向下兼容*/height:1rem;}
