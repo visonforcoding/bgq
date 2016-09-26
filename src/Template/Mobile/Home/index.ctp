@@ -19,7 +19,7 @@
     <div class="h-home-menu topnav">
         <ul class="clearfix">
             <li><a href="/home/my-xiaomi" class="clickbtn"><i></i>小秘书</a></li>
-            <li><a href="javascript:location.href = ('/home/edit-userinfo?ref='+encodeURI(location.href))" class="clickbtn"><i></i>个人资料</a></li>
+            <li><a href="/home/edit-userinfo" class="clickbtn"><i></i>个人资料</a></li>
             <li><a href="/home/cardcase" class="clickbtn"><i></i>名片夹</a></li>
         </ul>
     </div>
@@ -173,7 +173,9 @@
         });
     };
     window.onBackView();
-    window.onActiveView = window.onBackView;
+    window.onActiveView = function(){
+        location.reload();
+    };
 
     function QRCode() {
         if ($.util.isAPP) {
