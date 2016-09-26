@@ -80,7 +80,7 @@
     
     function dealData(data){
         page = 2;
-        $.util.hideLoading('#buttonLoading');
+        window.holdLoad = false;
         var html = $.util.dataToTpl('', 'listTpl', data, function (d) {
             if(d.source){
                 d.author = '<div class="website">'+ d.source +'</div>';
