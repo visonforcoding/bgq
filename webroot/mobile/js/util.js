@@ -307,6 +307,20 @@ $.util = {
         };
     },
 
+    viewImg:function(csrc, imgs){
+        if($.util.isWX){
+            if(window.WeixinJSBridge){
+                WeixinJSBridge.invoke('imagePreview',{
+                    'current':csrc,
+                    'urls':imgs}
+                );
+            }
+        }
+        else if($.util.isAPP){
+            LEMON.event.viewImg(csrc, imgs);
+        }
+    },
+
     report: function(ptag) {
         var act = 'v', param = ['/admin/report/logger?',
             'screen=' + window.screen.height + '*' + window.screen.width,
