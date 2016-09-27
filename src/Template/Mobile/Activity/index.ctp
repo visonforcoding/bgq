@@ -104,9 +104,7 @@
             var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'), $('.a-banner'));
         }
     });
-    window.onActiveView = function(){
-        page = 2;
-        window.holdLoad = false;
+    window.firstpage = function(){
         $.getJSON('/activity/getMoreActivity/1', function (res) {
             if (res.status) {
                 $('#activity').html('');
@@ -115,7 +113,7 @@
             }
         });
     };
-    window.onActiveView();
+    window.firstpage();
     function dealData(data) {
         var html = $.util.dataToTpl('', 'activity_tpl', data, function (d) {
             d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="registered">已报名</span>';
