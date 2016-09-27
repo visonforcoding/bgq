@@ -3,7 +3,7 @@ body{font-size:14px;/*box-shadow: 0 0 1px rgba(0,0,0,.5);*/}
 p{font-size:14px;line-height: 24px;}
 .jusitify{text-align: justify;word-break: break-all;}
 .z_top_title{line-height:36px;height:36px;}
-.z_top_title h3{font-size:17px;}
+.z_top_title h3{font-size:16px;}
 .z_top_title span{font-size:13px;cursor: pointer;}
 .z_top_con{}
 .z_top_con p{font-size:14px;line-height: 20px;color:#7A7E83;text-align: justify;word-break: break-all;}
