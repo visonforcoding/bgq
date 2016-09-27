@@ -95,22 +95,24 @@
     <span>修改资料需要再次审核，请慎重考虑</span>
     <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="javascript:void(0)" class="tipsbtn bgred" id="confirm">确认</a>
 </div>
-<?php if ($user->is_pass == 0): ?>
-    <a href="javascript:void(0);" class="f-bottom" id="submit">
-        修改资料
-    </a>
-<?php elseif ($user->is_pass == 1): ?>
-    <a href="javascript:void(0);" class="f-bottom" id="submit_confirm">
-        修改资料
-    </a>
-<?php elseif ($user->is_pass == 2): ?>
-    <a href="javascript:void(0);" class="f-bottom" id="submit">
-        重新提交申请
-    </a>
+<?php if ($is_apply): ?>
+    <?php if ($user->is_pass == 0): ?>
+        <a href="javascript:void(0);" class="f-bottom" id="submit">
+            修改资料
+        </a>
+    <?php elseif ($user->is_pass == 1): ?>
+        <a href="javascript:void(0);" class="f-bottom" id="submit_confirm">
+            修改资料
+        </a>
+    <?php elseif ($user->is_pass == 2): ?>
+        <a href="javascript:void(0);" class="f-bottom" id="submit">
+            重新提交申请
+        </a>
+    <?php endif; ?>
 <?php endif; ?>
 <?php $this->start('script'); ?>
 <script>
-    function submit(){
+    function submit() {
         $.util.ajax({
             url: $('form').attr('action'),
             data: $('form').serialize(),
@@ -124,21 +126,21 @@
             }
         });
     }
-    
+
     $('#submit').on('click', function () {
-        if(!check())
+        if (!check())
             return;
         submit();
     });
-    
+
     $('#submit_confirm').on('click', function () {
-        if(!check())
+        if (!check())
             return;
         $('#confirmbox').show();
         $('#shadow').show();
     });
-    
-    $('#confirm').on('click',function(){
+
+    $('#confirm').on('click', function () {
         submit();
     });
 
@@ -221,8 +223,8 @@
         $('#shadow').hide();
         $('#confirmbox').hide();
     });
-    
-    function check(){
+
+    function check() {
         if ($('select[name="constellation"]').val() == '') {
             $.util.alert('请选择星座');
             return false;
