@@ -219,7 +219,6 @@ class BeautyController extends AppController {
                 ->contain(['Users'])
                 ->where(['user_id'=>$user_id, 'vote_user_id'=>$id])
                 ->orderDesc('Vote.create_time')->first();
-\Cake\Log\Log::debug($last_vote, 'devlog');
         if($last_vote){
             // 有投票记录
             if($last_vote->user->is_judge == 1){
@@ -396,7 +395,7 @@ class BeautyController extends AppController {
                 }, 'BeautyPics'=>function($q){
                     return $q->orderDesc('BeautyPics.create_time');
                 }])
-                ->where(['is_pass'=>1, 'Beauty.id'=>$id])
+                ->where(['is_pass'=>1, 'beauty.id'=>$id])
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
                         $item->user->avatar = getSmallAvatar($item->user->avatar);
