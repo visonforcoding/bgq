@@ -105,6 +105,8 @@
         }
     });
     window.onActiveView = function(){
+        page = 2;
+        window.holdLoad = false;
         $.getJSON('/activity/getMoreActivity/1', function (res) {
             if (res.status) {
                 $('#activity').html('');
