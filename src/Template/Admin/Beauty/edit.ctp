@@ -2,6 +2,7 @@
 <link href="/wpadmin/lib/jqupload/uploadfile.css" rel="stylesheet">
 <link href="/wpadmin/lib/jqvalidation/css/validationEngine.jquery.css" rel="stylesheet">
 <link href="/wpadmin/lib/select2/css/select2.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/wpadmin/lib/lightbox/css/lightbox-rotate.css">
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($beauty, ['class' => 'form-horizontal']) ?>
@@ -69,7 +70,7 @@
         <label class="col-md-2 control-label">照片</label>
         <div class="col-md-8">
             <?php foreach ($beauty->beauty_pics as $k=>$v): ?>
-                <img src='<?= $v['pic_url'] ?>' />
+                <a href="<?= str_replace('small_', '', $v['pic_url']) ?>" data-lightbox="roadtrip"><img src='<?= $v['pic_url'] ?>' /></a>
             <?php endforeach; ?>
         </div>
     </div>
@@ -87,6 +88,8 @@
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/jquery.validationEngine.js"></script>
 <script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
+<script src="/wpadmin/lib/jqueryrotate.js"></script>
+<script src="/wpadmin/lib/lightbox/js/lightbox-rotate.js"></script>
 <!--<script src="/wpadmin/lib/ueditor/ueditor.config.js" ></script>
 <script src="/wpadmin/lib/ueditor/ueditor.all.js" ></script>
 <script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>    -->
