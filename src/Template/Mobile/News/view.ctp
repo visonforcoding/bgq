@@ -540,7 +540,7 @@
     
     $('#article_content img').on('click', function(){
         var imgs = [];
-        $('#content img').each(function(){imgs.push(this.src);});
+        $('#article_content img').each(function(){imgs.push(this.src);});
         $.util.viewImg(this.src, imgs);
     });
 </script>
