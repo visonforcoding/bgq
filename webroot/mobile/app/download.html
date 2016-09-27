@@ -6,7 +6,7 @@
     </head>
     <body>
     <script>
-        if(navigator.userAgent.toLocaleLowerCase().indexOf('ios') != -1){
+        if(/iphone|mac|ipod|ipad/i.test(navigator.userAgent.toLocaleLowerCase())){
             location.href = 'https://itunes.apple.com/us/app/bing-gou-bang/id1156402644';
         }
         else{
