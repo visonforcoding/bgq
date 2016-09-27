@@ -23,24 +23,24 @@
         <label class="col-md-2 control-label">星座</label>
         <div class="col-md-8">
             <?php
-                echo $this->Form->input('constellation', ['type'=>'select', 'options'=>[
-                    '白羊座'=>'白羊座',
-                    '金牛座'=>'金牛座',
-                    '双子座'=>'双子座',
-                    '巨蟹座'=>'巨蟹座',
-                    '狮子座'=>'狮子座',
-                    '处女座'=>'处女座',
-                    '天秤座'=>'天秤座',
-                    '天蝎座'=>'天蝎座',
-                    '射手座'=>'射手座',
-                    '摩羯座'=>'摩羯座',
-                    '水瓶座'=>'水瓶座',
-                    '双鱼座'=>'双鱼座',
+            echo $this->Form->input('constellation', ['type' => 'select', 'options' => [
+                    '白羊座' => '白羊座',
+                    '金牛座' => '金牛座',
+                    '双子座' => '双子座',
+                    '巨蟹座' => '巨蟹座',
+                    '狮子座' => '狮子座',
+                    '处女座' => '处女座',
+                    '天秤座' => '天秤座',
+                    '天蝎座' => '天蝎座',
+                    '射手座' => '射手座',
+                    '摩羯座' => '摩羯座',
+                    '水瓶座' => '水瓶座',
+                    '双鱼座' => '双鱼座',
                 ], 'label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-    
+
     <div class="form-group">
         <label class="col-md-2 control-label">参赛宣言</label>
         <div class="col-md-8">
@@ -61,8 +61,16 @@
         <label class="col-md-2 control-label">个人简介</label>
         <div class="col-md-8">
             <?php
-                echo $this->Form->input('brief', ['type'=>'textarea', 'label' => false, 'class' => 'form-control']);
+            echo $this->Form->input('brief', ['type' => 'textarea', 'label' => false, 'class' => 'form-control']);
             ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">照片</label>
+        <div class="col-md-8">
+            <?php foreach ($beauty->beauty_pics as $k=>$v): ?>
+                <img <?= $v['pic_url'] ?> />
+            <?php endforeach; ?>
         </div>
     </div>
     <div class="form-group">

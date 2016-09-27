@@ -65,7 +65,7 @@ class BeautyController extends AppController {
      */
     public function edit($id = null) {
         $beauty = $this->Beauty->get($id, [
-            'contain' => []
+            'contain' => ['BeautyPics']
         ]);
         if ($this->request->is(['post', 'put'])) {
             $beauty = $this->Beauty->patchEntity($beauty, $this->request->data);
