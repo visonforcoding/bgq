@@ -174,7 +174,9 @@
     };
     window.onBackView();
     window.onActiveView = function(){
-        location.reload();
+        if(!$.util.isLogin()){
+            location.reload();
+        }
     };
 
     function QRCode() {
