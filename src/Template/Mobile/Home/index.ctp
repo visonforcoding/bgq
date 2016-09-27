@@ -161,6 +161,7 @@
                     } else {
                         $('#meetMsg').removeClass('opci');
                     }
+                    $('.clickbtn').removeClass('clickbtn');
                 } else {
                     $('#avatar').attr('src', '/mobile/images/touxiang.png');
                     $('#loginBtn').css("visibility","visible");
