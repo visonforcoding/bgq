@@ -79,7 +79,7 @@
                     return;
                 }
                 $.util.showLoading('buttonLoading');
-                $.getJSON('/news/get-search-res/' + page, function (res) {
+                $.getJSON('/beauty/get-search-res/' + page, function (res) {
                     console.log('page~~~' + page);
                     $.util.hideLoading('buttonLoading');
                     window.holdLoad = false;  //打开加载锁  可以开始再次加载
