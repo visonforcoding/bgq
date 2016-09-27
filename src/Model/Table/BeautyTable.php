@@ -40,6 +40,12 @@ class BeautyTable extends Table
             'joinType' => 'LEFT',
             'className' => 'Vote'
         ]);
+        $this->hasMany('BeautyPics', [
+            'foreignKey' => 'user_id',
+            'bindingKey' => 'user_id',
+            'joinType' => 'inner',
+            'className' => 'BeautyPic'
+        ]);
         
         $this->addBehavior('Timestamp', [
             'events' => [
