@@ -19,19 +19,19 @@
     if(!/smartlemon/.test(navigator.userAgent.toLowerCase())) {
         if (window.location.href.indexOf('activity') != -1) {
             $('.activity_icon').css({color: '#b71c2d'});
-            $('.activity_icon span').css({color: '#b71c2d'});
+            $('.activity_icon span').html('&#xe693;').css({color: '#b71c2d'});
         }
         else if (window.location.href.indexOf('meet') != -1) {
             $('.meet_icon').css({color: '#b71c2d'});
-            $('.meet_icon span').css({color: '#b71c2d'});
+            $('.meet_icon span').html('&#xe6a2;').css({color: '#b71c2d'});
         }
         else if (window.location.href.indexOf('home') != -1) {
             $('.home_icon').css({color: '#b71c2d'});
-            $('.home_icon span').css({color: '#b71c2d'});
+            $('.home_icon span').html('&#xe6a1;').css({color: '#b71c2d'});
         }
         else {
             $('.news_icon').css({color: '#b71c2d'});
-            $('.news_icon span').css({color: '#b71c2d'});
+            $('.news_icon span').html('&#xe6a3;').css({color: '#b71c2d'});
         }
         if (window.location.href.indexOf('index') != -1) {
             $('.toback').hide();
