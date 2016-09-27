@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href="/mobile/css/zt.css"/>
-<div class="fixedwraper">
+<div class="fixedwraper wraper">
     <div class='h-news-search'>
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe618;</a>
         <form action="/beauty/get-search-res/1" method="post" >
@@ -13,7 +13,7 @@
 <script type="text/html" id="tpl">
     <dl>
         <a href="/beauty/homepage/{#id#}">
-            <dt class="posi_top"><img src="{#user_avatar#}" alt="" /><span></span><i>{#beauty_id#}</i></dt>
+            <dt class="posi_top"><img src="{#pic#}" alt="" /><span></span><i>{#beauty_id#}</i></dt>
             <dd class="zt_name"><span class="p_name color-items mr10">{#username#}</span><span class="p_job color-gray">{#position#}</span></dd>
             <dd class="zt_commpany">{#company#}</dd>
         </a>
@@ -31,13 +31,13 @@
         }
         search();
     });
-    
-    $('form').on('submit', function(){
+
+    $('form').on('submit', function () {
         search();
         return false;
     });
-    
-    function search(){
+
+    function search() {
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -45,14 +45,8 @@
             data: $('form').serialize(),
             success: function (res) {
                 if (res.status) {
-                    $.util.dataToTpl('beauty', 'tpl', res.data, function (d) {
-                        d.position = d.user.position;
-                        d.company = d.user.company;
-                        d.username = d.user.truename;
-                        d.user_id = d.user.id;
-                        d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                        return d;
-                    });
+                    var html = dealData(res.data);
+                    $('#beauty').append(html);
                     $('.vote').on('tap', function () {
                         var obj = $(this);
                         $.util.ajax({
@@ -71,6 +65,66 @@
                 }
             }
         });
+    }
+
+    var page = 2;
+    setTimeout(function () {
+        $(window).on("scroll", function () {
+            $.util.listScroll('items', function () {
+                if (page == 9999) {
+                    $('#buttonLoading').html('亲，没有更多资讯了，请看看其他的栏目吧');
+                    return;
+                }
+                $.util.showLoading('buttonLoading');
+                $.getJSON('/news/get-search-res/' + page, function (res) {
+                    console.log('page~~~' + page);
+                    $.util.hideLoading('buttonLoading');
+                    window.holdLoad = false;  //打开加载锁  可以开始再次加载
+
+                    if (!res.status) {  //拉不到数据了  到底了
+                        page = 9999;
+                        return;
+                    }
+
+                    if (res.status) {
+                        var html = dealData(res.data);
+                        $('#beauty').append(html);
+                        $('.vote').on('tap', function () {
+                            var obj = $(this);
+                            $.util.ajax({
+                                url: '/beauty/vote/' + obj.attr('user_id'),
+                                func: function (res) {
+                                    if (res.status) {
+                                        obj.prev('span.zt_num').html(parseInt(obj.prev('span.zt_num').html()) + 1 + '票');
+                                    } else {
+                                        $.util.alert(res.msg);
+                                    }
+                                }
+                            });
+                        });
+                        if (res.data.length < 10) {
+                            page = 9999;
+                            $('#buttonLoading').html('亲，没有更多搜索结果了');
+                        } else {
+                            page++;
+                        }
+                    }
+                });
+            });
+        });
+    }, 2000);
+
+    function dealData(data) {
+        var html = $.util.dataToTpl('', 'tpl', data, function (d) {
+            d.position = d.user.position;
+            d.company = d.user.company;
+            d.username = d.user.truename;
+            d.user_id = d.user.id;
+            d.pic = d.beauty_pics.length ? d.beauty_pics[0].pic_url : '';
+            return d;
+        });
+
+        return html;
     }
 </script>
 <?php

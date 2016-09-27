@@ -57,7 +57,7 @@
         <div class="p_title  innercon"><h3><i class="iconfont">&#xe685;</i>你的照片</h3></div>
         <div class="photo_list bgff">
             <ul id="uploadPic">
-                <?php foreach ($pic as $k => $v): ?>
+                <?php foreach ($user->beauty_pics as $k => $v): ?>
                     <li onclick="isDel(this, '<?= $v['id'] ?>')"><img src="<?= $v['pic_url'] ?>"/></li>
                 <?php endforeach; ?>
                 <li id="upload_pic">
@@ -70,6 +70,19 @@
             <h3 class="tc poto_tips">( 至少上传1张，最多上传6张 )</h3>
         </div>
     </div>
+    <div class="photo_type innercon mt20">
+        <h3><i class="iconfont">&#xe683;</i>审核状态
+            <span class="color-items">
+                <?php if ($user->is_pass == 0): ?>
+                    审核中
+                <?php elseif ($user->is_pass == 1): ?>
+                    审核通过
+                <?php elseif ($user->is_pass == 2): ?>
+                    审核未通过
+                <?php endif; ?>
+            </span>
+        </h3>
+    </div>
 </div>
 <div class="reg-shadow" style="display: none;" id="shadow"></div>
 <div class="totips" hidden id="isdel" >
@@ -77,30 +90,27 @@
     <span style="display:none;"></span>
     <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="javascript:void(0)" class="tipsbtn bgred" id="yes">确认</a>
 </div>
-<a href="javascript:void(0);" class="f-bottom" id="submit"><?= $is_apply ? '保存资料' : '提交申请' ?></a>
+<div class="totips" hidden id="confirmbox" >
+    <h3>确定要修改资料？</h3>
+    <span>修改资料需要再次审核，请慎重考虑</span>
+    <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="javascript:void(0)" class="tipsbtn bgred" id="confirm">确认</a>
+</div>
+<?php if ($user->is_pass == 0): ?>
+    <a href="javascript:void(0);" class="f-bottom" id="submit">
+        修改资料
+    </a>
+<?php elseif ($user->is_pass == 1): ?>
+    <a href="javascript:void(0);" class="f-bottom" id="submit_confirm">
+        修改资料
+    </a>
+<?php elseif ($user->is_pass == 2): ?>
+    <a href="javascript:void(0);" class="f-bottom" id="submit">
+        重新提交申请
+    </a>
+<?php endif; ?>
 <?php $this->start('script'); ?>
 <script>
-    $('#submit').on('tap', function () {
-        if ($('select[name="constellation"]').val() == '') {
-            $.util.alert('请选择星座');
-            return false;
-        }
-        if ($('input[name="declaration"]').val() == '') {
-            $.util.alert('请填写参赛宣言');
-            return false;
-        }
-        if ($('input[name="hobby"]').val() == '') {
-            $.util.alert('请填写兴趣爱好');
-            return false;
-        }
-        if ($('textarea[name="brief"]').val() == '') {
-            $.util.alert('请填写个人简介');
-            return false;
-        }
-        if ($('#uploadPic li').length <= 1) {
-            $.util.alert('请至少上传一张照片');
-            return false;
-        }
+    function submit(){
         $.util.ajax({
             url: $('form').attr('action'),
             data: $('form').serialize(),
@@ -113,6 +123,23 @@
                 }
             }
         });
+    }
+    
+    $('#submit').on('click', function () {
+        if(!check())
+            return;
+        submit();
+    });
+    
+    $('#submit_confirm').on('click', function () {
+        if(!check())
+            return;
+        $('#confirmbox').show();
+        $('#shadow').show();
+    });
+    
+    $('#confirm').on('click',function(){
+        submit();
     });
 
     if ($('#uploadPic').children('li').length > 6) {
@@ -179,20 +206,45 @@
             }
         });
     }
-    
-    function isDel(em, id){
+
+    function isDel(em, id) {
         $('#isdel').show();
         $('#shadow').show();
-        $('#yes').on('click', function(){
+        $('#yes').on('click', function () {
             delPic(em, id);
         });
     }
-    
-    $('#no, #shadow').on('click', function(){
+
+    $('#no, #shadow').on('click', function () {
         $('#yes').unbind('click');
         $('#isdel').hide();
         $('#shadow').hide();
+        $('#confirmbox').hide();
     });
+    
+    function check(){
+        if ($('select[name="constellation"]').val() == '') {
+            $.util.alert('请选择星座');
+            return false;
+        }
+        if ($('input[name="declaration"]').val() == '') {
+            $.util.alert('请填写参赛宣言');
+            return false;
+        }
+        if ($('input[name="hobby"]').val() == '') {
+            $.util.alert('请填写兴趣爱好');
+            return false;
+        }
+        if ($('textarea[name="brief"]').val() == '') {
+            $.util.alert('请填写个人简介');
+            return false;
+        }
+        if ($('#uploadPic li').length <= 1) {
+            $.util.alert('请至少上传一张照片');
+            return false;
+        }
+        return true;
+    }
 </script>
 <?php
 $this->end('script');

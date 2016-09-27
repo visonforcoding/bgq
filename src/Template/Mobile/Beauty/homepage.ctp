@@ -56,19 +56,18 @@
             </div>
         </div>
         <!--照片-->
+        <?php if($beauty->beauty_pics): ?>
         <div class='photo_album mt20'>
             <div class="p_title  innercon"><h3><i class="iconfont">&#xe685;</i>Ta的照片</h3></div>
             <div class="photo_list bgff">
                 <ul>
-                    <li><img src="/mobile/images/nv02.png"/></li>
-                    <li><img src="/mobile/images/nv02.png"/></li>
-                    <li><img src="/mobile/images/nv02.png"/></li>
-                    <li><img src="/mobile/images/nv02.png"/></li>
-                    <li><img src="/mobile/images/nv02.png"/></li>
-                    <li><img src="/mobile/images/nv02.png"/></li>
+                    <?php foreach ($beauty->beauty_pics as $k=>$v): ?>
+                        <li><img src="<?= $v['pic_url'] ?>"/></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </div>
+        <?php endif; ?>
         <!--基本资料-->
         <div class="infotab m-infotab-list">
         <ul class="h-tab">
