@@ -218,7 +218,7 @@ class BeautyController extends AppController {
         $last_vote = $VoteTable->find()
                 ->contain(['Users'])
                 ->where(['user_id'=>$user_id, 'vote_user_id'=>$id])
-                ->order('Vote.create_time')->first();
+                ->orderDesc('Vote.create_time')->first();
         if($last_vote){
             // 有投票记录
             if($last_vote->user->is_judge == 1){
