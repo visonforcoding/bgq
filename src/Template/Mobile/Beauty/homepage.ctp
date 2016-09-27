@@ -367,8 +367,8 @@
         
         $('#viewImg img').on('click', function(){
             var imgs = [];
-            $('#viewImg img').each(function(){imgs.push(this.src.replace('', 'small_'));});
-            $.util.viewImg(this.src.replace('', 'small_'), imgs);
+            $('#viewImg img').each(function(){imgs.push(this.src.replace('small_', ''));});
+            $.util.viewImg(this.src.replace('small_', ''), imgs);
         });
     </script>
 <?php $this->end('script') ?>
