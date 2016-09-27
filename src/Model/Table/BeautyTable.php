@@ -43,7 +43,7 @@ class BeautyTable extends Table
         $this->hasMany('BeautyPics', [
             'foreignKey' => 'user_id',
             'bindingKey' => 'user_id',
-            'joinType' => 'inner',
+            'joinType' => 'INNER',
             'className' => 'BeautyPic'
         ]);
         

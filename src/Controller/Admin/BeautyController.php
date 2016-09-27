@@ -115,9 +115,13 @@ class BeautyController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
+        $is_pass = $this->request->data('is_pass');
         $where = [];
         if (!empty($keywords)) {
             $where[' users.truename like'] = "%$keywords%";
+        }
+        if ($is_pass !== '' && $is_pass !== null) {
+            $where['is_pass'] = $is_pass;
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
@@ -191,7 +195,7 @@ class BeautyController extends AppController {
     public function check($id){
         $beauty = $this->Beauty->get($id);
         if($beauty->is_pass == 1){
-            $beauty->is_pass = 0;
+            $beauty->is_pass = 2;
         } else {
             $beauty->is_pass = 1;
         }

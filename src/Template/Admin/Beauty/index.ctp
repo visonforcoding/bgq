@@ -10,14 +10,23 @@
             </a>-->
             <div class="form-group">
                 <label for="keywords">关键字</label>
-                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
+                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="名字">
             </div>
             <div class="form-group">
+                <label for="is_pass">审核状态</label>
+                <select name=is_pass class="form-control">
+                    <option value="">全部</option>
+                    <option value="0">未审核</option>
+                    <option value="1">审核通过</option>
+                    <option value="2">审核未通过</option>
+                </select>
+            </div>
+<!--            <div class="form-group">
                 <label for="keywords">时间</label>
                 <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords" placeholder="开始时间">
                 <label for="keywords">到</label>
                 <input type="text" name="end_time" class="form-control date_timepicker_end" id="keywords" placeholder="结束时间">
-            </div>
+            </div>-->
             <a onclick="doSearch();" class="btn btn-info"><i class="icon icon-search"></i>搜索</a>
             <!--<a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>-->
         </div>
@@ -57,7 +66,7 @@
                             {name: 'is_pass', editable: true, align: 'center', formatter: function(cellvalue, options, rowObject){
                                     console.log(cellvalue);
                                     switch (cellvalue) {
-                                        case 0:
+                                        case 0:case 2:
                                             return '<button onClick="check(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-remove-circle"></i><i style="color:red"> 审核未通过</i></button>';
                                         case 1:
                                             return '<button onClick="check(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-check-circle"></i> 审核通过</button>';
@@ -68,8 +77,8 @@
                         pager: "#pager",
                         rowNum: 10,
                         rowList: [10, 20, 30],
-                        sortname: "id",
-                        sortorder: "desc",
+                        sortname: "is_pass",
+                        sortorder: "asc",
                         viewrecords: true,
                         gridview: true,
                         autoencode: true,

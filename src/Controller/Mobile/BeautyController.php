@@ -110,7 +110,7 @@ class BeautyController extends AppController {
     }
     
     /**
-     * 搜索结果
+     * 分页获得搜索结果
      * @param int $page 分页
      */
     public function getSearchRes($page){
@@ -120,9 +120,24 @@ class BeautyController extends AppController {
                     ->find()
                     ->contain(['Users'=>function($q)use($keyword){
                         return $q->where(['Users.truename like'=>"%$keyword%", 'enabled'=>1]);
+                    }, 'BeautyPics'=>function($q){
+                        return $q->limit(1)->orderDesc('BeautyPics.create_time');
                     }])
                     ->where(['is_pass'=>1])
                     ->page($page, $this->limit)
+                    ->formatResults(function($items){
+                        return $items->map(function($item) {
+                            if($item->vote){
+                                $items->vote->create_time = $items->vote->create_time->format('Y-m-d');
+                            }
+                            if(strlen($item->id) == 1){
+                                $item->beauty_id = '00' . $item->id;
+                            } else if(strlen($items->id) == 2){
+                                $item->beauty_id = '0' . $item->id;
+                            }
+                            return $item;
+                        });
+                    })
                     ->toArray();
         if($user){
             return $this->Util->ajaxReturn(['status'=>true, 'data'=>$user]);
@@ -144,7 +159,7 @@ class BeautyController extends AppController {
             $data = $this->request->data;
             $beauty = $BeautyTable->find()->where(['user_id'=>$this->user->id])->first();
             if($beauty) {
-                
+                $beauty->is_pass = 0;
             } else {
                 $beauty = $BeautyTable->newEntity();
             }
@@ -162,8 +177,9 @@ class BeautyController extends AppController {
         }
         $user = $BeautyTable->find()->contain(['Users'=>function($q){
             return $q->where(['enabled'=>1]);
+        }, 'BeautyPics'=>function($q){
+            return $q->orderDesc('BeautyPics.create_time');
         }])->where(['user_id'=>$this->user->id])->first();
-        $pic = $BeautyPicTable->find()->where(['user_id'=>$this->user->id])->orderDesc('create_time')->toArray();
         if($user){
             $is_apply = true;
         } else {
@@ -174,7 +190,6 @@ class BeautyController extends AppController {
         $this->set([
             'pageTitle' => '报名',
             'user' => $user,
-            'pic' => $pic,
             'is_apply' => $is_apply
         ]);
     }
@@ -377,6 +392,8 @@ class BeautyController extends AppController {
         $beauty = $BeautyTable->find()
                 ->contain(['Users'=>function($q){
                     return $q->where(['enabled'=>1]);
+                }, 'BeautyPics'=>function($q){
+                    return $q->orderDesc('BeautyPics.create_time');
                 }])
                 ->where(['is_pass'=>1, 'Beauty.id'=>$id])
                 ->formatResults(function($items) {

@@ -99,7 +99,7 @@
                     d.company = d.user.company;
                     d.username = d.user.truename;
                     d.user_id = d.user.id;
-                    d.pic = d.beauty_pics ? d.beauty_pics[0].pic_url : '';
+                    d.pic = d.beauty_pics.length ? d.beauty_pics[0].pic_url : '';
                     return d;
                 });
                 $('.vote').on('tap', function(){
