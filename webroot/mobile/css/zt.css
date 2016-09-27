@@ -25,6 +25,7 @@ p{font-size:14px;line-height: 24px;}
 .zt_tips{display:none;max-height:0;z-index:10000;width:0;background: #fff;border-radius: 6px;position: fixed;top:5%;left:50%;margin-left:-40%;box-shadow: 0 0 1px rgba(0,0,0,.5);-webkit-transition:width 5s ease;transition:width 5s ease-in-out;}
 .zt_tips_show{max-height: 999px;width:80%;display: block;-webkit-transition:width 5s ease-in-out;transition:width 5s ease-in-out;}
 .zt_tips_box{margin:.3rem;overflow-y: scroll;max-height: 400px;}
+.zt_tips_box h3{line-height: .36rem;}
 .zt_tips_box::-webkit-scrollbar{display: none;}
 .zt_r_closed{width:24px;height:24px;background: #E01A48;border:2px #fff solid;line-height: 18px;text-align: center;color:#fff;position:absolute;right:-8px;border-radius:50%;top:-8px;box-shadow: 0 1px 1px rgba(0,0,0,.5);font-size:22px;font-weight: bold;}
 /*投票*/
