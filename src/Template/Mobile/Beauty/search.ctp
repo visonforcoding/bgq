@@ -9,6 +9,7 @@
     </div>
     <section class="z_items content_inner" id="beauty">
     </section>
+    <div id="buttonLoading" class="loadingbox"></div>
 </div>
 <script type="text/html" id="tpl">
     <dl>
@@ -29,10 +30,12 @@
         if ($('input[name="keyword"]').val() == '') {
             $.util.alert('请输入内容后再搜索');
         }
+        $('#beauty').html('');
         search();
     });
 
     $('form').on('submit', function () {
+        $('#beauty').html('');
         search();
         return false;
     });
@@ -123,7 +126,6 @@
             d.pic = d.beauty_pics.length ? d.beauty_pics[0].pic_url : '';
             return d;
         });
-
         return html;
     }
 </script>
