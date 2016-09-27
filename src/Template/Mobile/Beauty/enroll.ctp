@@ -70,19 +70,21 @@
             <h3 class="tc poto_tips">( 至少上传1张，最多上传6张 )</h3>
         </div>
     </div>
-    <div class="photo_type innercon mt20">
-        <h3><i class="iconfont">&#xe683;</i>审核状态
-            <span class="color-items">
-                <?php if ($user->is_pass == 0): ?>
-                    审核中
-                <?php elseif ($user->is_pass == 1): ?>
-                    审核通过
-                <?php elseif ($user->is_pass == 2): ?>
-                    审核未通过
-                <?php endif; ?>
-            </span>
-        </h3>
-    </div>
+    <?php if ($is_apply): ?>
+        <div class="photo_type innercon mt20">
+            <h3><i class="iconfont">&#xe683;</i>审核状态
+                <span class="color-items">
+                    <?php if ($user->is_pass == 0): ?>
+                        审核中
+                    <?php elseif ($user->is_pass == 1): ?>
+                        审核通过
+                    <?php elseif ($user->is_pass == 2): ?>
+                        审核未通过
+                    <?php endif; ?>
+                </span>
+            </h3>
+        </div>
+    <?php endif; ?>
 </div>
 <div class="reg-shadow" style="display: none;" id="shadow"></div>
 <div class="totips" hidden id="isdel" >
@@ -109,6 +111,10 @@
             重新提交申请
         </a>
     <?php endif; ?>
+<?php else: ?>
+    <a href="javascript:void(0);" class="f-bottom" id="submit">
+        提交申请
+    </a>
 <?php endif; ?>
 <?php $this->start('script'); ?>
 <script>
