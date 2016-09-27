@@ -8,7 +8,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label">用户</label>
         <div class="col-md-8">
-            <?= $this->cell('user', [[$beauty->user_id]]); ?>
+            <?= $this->cell('User', [[$beauty->user_id]]); ?>
         </div>
     </div>
     <div class="form-group">
