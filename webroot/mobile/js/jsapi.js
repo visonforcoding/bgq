@@ -163,10 +163,10 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //iosé
                     break;
                 case "event.viewImg":
                     registerAPI(null, api, function () {
-                        var imgs = arguments[1], cImg=arguments[0], index=1, i=0;
+                        var imgs = arguments[1], cImg=arguments[0], index=0, i=0;
                         for(;i<imgs.length;i++){
                             if(imgs[i] == cImg) {
-                                index = i+1;
+                                index = i;
                                 break;
                             }
                         }
