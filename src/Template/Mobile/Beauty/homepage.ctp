@@ -60,7 +60,7 @@
         <div class='photo_album mt20'>
             <div class="p_title  innercon"><h3><i class="iconfont">&#xe685;</i>Ta的照片</h3></div>
             <div class="photo_list bgff">
-                <ul>
+                <ul id='viewImg'>
                     <?php foreach ($beauty->beauty_pics as $k=>$v): ?>
                         <li><img src="<?= $v['pic_url'] ?>"/></li>
                     <?php endforeach; ?>
@@ -360,13 +360,15 @@
             $.util.ajax({
                 url: '/beauty/vote/'+obj.attr('user_id'),
                 func: function(res){
-                    if(res.status){
-                        obj.prev('span.zt_num').html(parseInt(obj.prev('span.zt_num').html())+1+'票');
-                    } else {
-                        $.util.alert(res.msg);
-                    }
+                    $.util.alert(res.msg);
                 }
             });
+        });
+        
+        $('#viewImg img').on('click', function(){
+            var imgs = [];
+            $('#viewImg img').each(function(){imgs.push(this.src);});
+            $.util.viewImg(this.src, imgs);
         });
     </script>
 <?php $this->end('script') ?>
