@@ -79,8 +79,6 @@
     });
     
     function dealData(data){
-        page = 2;
-        window.holdLoad = false;
         var html = $.util.dataToTpl('', 'listTpl', data, function (d) {
             if(d.source){
                 d.author = '<div class="website">'+ d.source +'</div>';
@@ -106,6 +104,8 @@
     }
     
     window.onActiveView = function(){
+        page = 2;
+        window.holdLoad = false;
         $.getJSON('/news/get-more-news/1',function(res){
             if(res.status){
                 $('#news').html('');
