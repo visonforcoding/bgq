@@ -121,13 +121,35 @@
                 }
             }, 'json');
         } else {
-            $.util.alert('请填写合法的手机号码');
+            $.util.alert('请填写正确的手机号码');
             $obj.removeClass('noTap');
             return false;
         }
     });
     $('#submit').on('click', function () {
         $form = $('form');
+        var fd = $form.get(0);
+        if(login_type == 1){
+            if(!$.util.isMobile(fd.mobile.value)){
+                $.util.alert('请填写正确的手机号码', 1500);
+                return false;
+            }
+            if(!(fd.pwd.value)){
+                $.util.alert('密码不能为空', 1500);
+                return false;
+            }
+        }
+        else{
+            if(!$.util.isMobile(fd.phone.value)){
+                $.util.alert('请填写正确的手机号码', 1500);
+                return false;
+            }
+            if(!(fd.vcode.value)){
+                $.util.alert('验证码不能为空', 1500);
+                return false;
+            }
+        }
+
         var data = $form.serialize();
         data += '&login_type='+login_type;
         $.util.ajax({
