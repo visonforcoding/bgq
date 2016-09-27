@@ -24,7 +24,7 @@
                 <a href="javascript:void(0)">
                     <span><i class="color-items">*</i>公司：</span>
                     <div>
-                        <input type="company" name="company" value="<?= $user->company ?>" />
+                        <input type="company" name="company" value="<?= $user->company ?>" placeholder="请填写公司" />
                     </div>
                 </a>
             </li>
@@ -45,7 +45,7 @@
                 <a href="javascript:void(0)">
                     <span><i class="color-items">*</i>部门职务：</span>
                     <div >
-                        <input type="position" name="position" value="<?= $user->position ?>" />
+                        <input type="position" name="position" value="<?= $user->position ?>" placeholder="请填写部门职务" />
                     </div>
                 </a>
             </li>
@@ -212,6 +212,10 @@
         var val = this.value;
         if (val == this.defaultValue)
             return;
+        if (val == ''){
+            $.util.alert('请填入内容');
+            return;
+        }
         this.defaultValue = val;
         $.ajax({
             type: 'POST',
