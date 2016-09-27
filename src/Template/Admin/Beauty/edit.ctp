@@ -69,7 +69,7 @@
         <label class="col-md-2 control-label">照片</label>
         <div class="col-md-8">
             <?php foreach ($beauty->beauty_pics as $k=>$v): ?>
-                <img <?= $v['pic_url'] ?> />
+                <img src='<?= $v['pic_url'] ?>' />
             <?php endforeach; ?>
         </div>
     </div>
