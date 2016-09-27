@@ -218,7 +218,7 @@ class BeautyController extends AppController {
         $last_vote = $VoteTable->find()
                 ->contain(['Users'])
                 ->where(['user_id'=>$user_id, 'vote_user_id'=>$id])
-                ->orderDesc('Vote.create_time')->first();
+                ->orderDesc('vote.create_time')->first();
         if($last_vote){
             // 有投票记录
             if($last_vote->user->is_judge == 1){
@@ -254,7 +254,7 @@ class BeautyController extends AppController {
                         return $q->where(['enabled'=>1, 'gender'=>$vote_user->gender]);
                     }])
                     ->where(['user_id'=>$user_id])
-                    ->orderDesc('Vote.create_time')
+                    ->orderDesc('vote.create_time')
                     ->first();
             if($last_vote){
                 $now = \Cake\I18n\Time::now();
