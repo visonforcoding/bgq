@@ -73,10 +73,8 @@
     <p><a href="/home/service">服务条款</a> | <a href="/home/disclaimer">免责声明</a></p>
 </div>
 <div class="companyinfo">
-    <a href="/beauty/index">
     <p>Copyright ©2012-2018</p>
     <p>君汉控股（深圳）有限公司</p>
-    </a>
 </div>
 <div class="reg-shadow" ontouchmove="return false;" hidden id="shadow"></div>
 <div class="totips" hidden id="isLogout" >
