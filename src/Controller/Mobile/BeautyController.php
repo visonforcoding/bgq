@@ -412,7 +412,7 @@ class BeautyController extends AppController {
                 ->contain(['Users'=>function($q){
                     return $q->where(['enabled'=>1]);
                 }])
-                ->where(['is_pass'=>1, 'Beauty.id'=>$id, 'vote_nums >='=>$beauty->vote_nums])
+                ->where(['is_pass'=>1, 'beauty.id'=>$id, 'vote_nums >='=>$beauty->vote_nums])
                 ->count();
 //        debug($beauty);die;
         $this->set([
