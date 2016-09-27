@@ -367,7 +367,7 @@
         
         $('#viewImg img').on('click', function(){
             var imgs = [];
-            $('#viewImg img').each(function(){imgs.push(this.src);});
+            $('#viewImg img').each(function(){imgs.push(this.src.replace('', 'small_'));});
             $.util.viewImg(this.src, imgs);
         });
     </script>
