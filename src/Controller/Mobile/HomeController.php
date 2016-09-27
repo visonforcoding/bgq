@@ -177,7 +177,8 @@ class HomeController extends AppController {
                     $user = $UserTable->get($this->user->id, [
                         'contain' => ['Careers', 'Educations', 'Industries']
                     ]);
-                    $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
+                    $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->agency_id
+                            && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
                     if(!$is_complete){
                         return $this->Util->ajaxReturn(false, '请先去完善个人资料');
                     }
@@ -425,7 +426,8 @@ class HomeController extends AppController {
                 $user = $UserTable->get($this->user->id, [
                     'contain' => ['Careers', 'Educations', 'Industries']
                 ]);
-                $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
+                $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->agency_id
+                        && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
                 if(!$is_complete){
                     return $this->Util->ajaxReturn(false, '请先去完善个人资料');
                 }
@@ -1716,7 +1718,8 @@ class HomeController extends AppController {
         $user = $UserTable->get($this->user->id, [
             'contain' => ['Industries']
         ]);
-        $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
+        $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->agency_id
+                && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
         if($is_complete){
             return $this->Util->ajaxReturn(true);
         } else {

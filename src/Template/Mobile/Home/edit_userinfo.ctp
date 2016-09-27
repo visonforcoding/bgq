@@ -22,7 +22,7 @@
             </li>
             <li class="no-right-ico">
                 <a href="javascript:void(0)">
-                    <span>公司：</span>
+                    <span><i class="color-items">*</i>公司：</span>
                     <div>
                         <input type="company" name="company" value="<?= $user->company ?>" />
                     </div>
@@ -30,7 +30,7 @@
             </li>
             <li>
                 <a href="javascript:void(0)">
-                    <span>性别：</span>
+                    <span><i class="color-items">*</i>性别：</span>
                     <div>
                         <span class='typeselect'>
                             <select name="gender" class='checkedsex' id="gender" style='height:.6rem;'>
@@ -43,7 +43,7 @@
             </li>
             <li class="no-right-ico">
                 <a href="javascript:void(0)">
-                    <span>部门职务：</span>
+                    <span><i class="color-items">*</i>部门职务：</span>
                     <div >
                         <input type="position" name="position" value="<?= $user->position ?>" />
                     </div>
@@ -51,7 +51,7 @@
             </li>
             <li class="no-right-ico">
                 <a href="javascript:void(0)">
-                    <span>邮箱：</span>
+                    <span><i class="color-items">*</i>邮箱：</span>
                     <div>
                         <input type="email" name="email" value="<?= $user->email ?>" placeholder="请填写邮箱" />
                     </div>
@@ -59,8 +59,7 @@
             </li>
             <li>
                 <a href="/home/edit-card">
-                    <span >我的名片：</span>
-
+                    <span><i class="color-items">*</i>我的名片：</span>
                     <div>
                         <span class="mcard"><img src="<?= $user->card_path ?>" id="card" /></span>
                     </div>
@@ -88,7 +87,7 @@
         <ul class="h-info-box e-info-box max_width">
             <li>
                 <a href="/home/edit-industries">
-                    <span>行业：</span>
+                    <span><i class="color-items">*</i>行业：</span>
                     <div>
                         <span id="industry"></span>
                     </div>
@@ -96,7 +95,7 @@
             </li>
             <li>
                 <a href="/home/edit-agencies">
-                    <span>机构：</span>
+                    <span><i class="color-items">*</i>机构：</span>
                     <div>
                         <span id="agency"></span>
                     </div>
@@ -104,7 +103,7 @@
             </li>
             <li>
                 <a href="/home/edit-city">
-                    <span>所在地：</span>
+                    <span><i class="color-items">*</i>所在地：</span>
                     <div>
                         <span id="city">
                             <?php if (!$user->city): ?>
@@ -116,7 +115,7 @@
             </li>
             <li>
                 <a href="/home/my-business">
-                    <span>擅长业务：</span>
+                    <span><i class="color-items">*</i>擅长业务：</span>
                     <div>
                         <span id="goodat">
                             <?php if (!$user->goodat): ?>
@@ -128,7 +127,7 @@
             </li>
             <li>
                 <a href="/home/edit-company-business">
-                    <span>公司业务：</span>
+                    <span><i class="color-items">*</i>公司业务：</span>
                     <div>
                         <span id="gsyw">
                             <?php if (!$user->gsyw): ?>
