@@ -79,7 +79,7 @@
 <script type="text/html" id="tpl">
     <dl>
         <a href="/beauty/homepage/{#id#}">
-            <dt class="posi_top"><img src="{#user_avatar#}" alt="" /><span></span><i>{#beauty_id#}</i></dt>
+            <dt class="posi_top"><img src="{#pic#}" alt="" /><span></span><i>{#beauty_id#}</i></dt>
             <dd class="zt_name"><span class="p_name color-items mr10">{#username#}</span><span class="p_job color-gray">{#position#}</span></dd>
             <dd class="zt_commpany">{#company#}</dd>
         </a>
@@ -99,7 +99,7 @@
                     d.company = d.user.company;
                     d.username = d.user.truename;
                     d.user_id = d.user.id;
-                    d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
+                    d.pic = d.beauty_pics ? d.beauty_pics[0].pic_url : '';
                     return d;
                 });
                 $('.vote').on('tap', function(){

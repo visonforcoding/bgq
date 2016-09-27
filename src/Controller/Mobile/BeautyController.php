@@ -53,6 +53,8 @@ class BeautyController extends AppController {
                         return $q->where(['enabled'=>1]);
                     }, 'Votes'=>function($q)use($user_id){
                         return $q->where(['Votes.user_id'=>$user_id]);
+                    }, 'BeautyPics'=>function($q){
+                        return $q->limit(1)->orderDesc('BeautyPics.create_time');
                     }])
                     ->where(['is_pass'=>1])
                     ->limit(10)
@@ -132,7 +134,7 @@ class BeautyController extends AppController {
     }
     
     /**
-     * 报名活动
+     * 报名活动和修改报名信息
      */
     public function enroll(){
         $this->handCheckLogin();
@@ -140,7 +142,12 @@ class BeautyController extends AppController {
         $BeautyPicTable = \Cake\ORM\TableRegistry::get('beauty_pic');
         if($this->request->is('post')){
             $data = $this->request->data;
-            $beauty = $BeautyTable->newEntity();
+            $beauty = $BeautyTable->find()->where(['user_id'=>$this->user->id])->first();
+            if($beauty) {
+                
+            } else {
+                $beauty = $BeautyTable->newEntity();
+            }
             $beauty->user_id = $this->user->id;
             $beauty->constellation = $data['constellation'];
             $beauty->brief = $data['brief'];
@@ -148,7 +155,7 @@ class BeautyController extends AppController {
             $beauty->hobby = $data['hobby'];
             $res = $BeautyTable->save($beauty);
             if($res){
-                return $this->Util->ajaxReturn(true, '报名成功');
+                return $this->Util->ajaxReturn(true, '提交成功');
             } else {
                 return $this->Util->ajaxReturn(false, '系统错误');
             }
@@ -156,7 +163,7 @@ class BeautyController extends AppController {
         $user = $BeautyTable->find()->contain(['Users'=>function($q){
             return $q->where(['enabled'=>1]);
         }])->where(['user_id'=>$this->user->id])->first();
-        $pic = $BeautyPicTable->find()->where(['user_id'=>$this->user->id])->toArray();
+        $pic = $BeautyPicTable->find()->where(['user_id'=>$this->user->id])->orderDesc('create_time')->toArray();
         if($user){
             $is_apply = true;
         } else {
@@ -284,6 +291,8 @@ class BeautyController extends AppController {
         $female = $BeautyTable->find()
                 ->contain(['Users'=>function($q){
                     return $q->where(['enabled'=>1, 'gender'=>2]);
+                }, 'BeautyPics'=>function($q){
+                    return $q->limit(1)->orderDesc('BeautyPics.create_time');
                 }])
                 ->where(['is_pass'=>1])
                 ->limit(10)
@@ -319,6 +328,8 @@ class BeautyController extends AppController {
         $male = $BeautyTable->find()
                 ->contain(['Users'=>function($q){
                     return $q->where(['enabled'=>1, 'gender'=>1]);
+                }, 'BeautyPics'=>function($q){
+                    return $q->limit(1)->orderDesc('BeautyPics.create_time');
                 }])
                 ->where(['is_pass'=>1])
                 ->limit(10)
@@ -346,6 +357,9 @@ class BeautyController extends AppController {
         }
     }
     
+    /**
+     * 个人主页
+     */
     public function homepage($id=null){
         $self = false;
         if($this->user){
@@ -422,6 +436,9 @@ class BeautyController extends AppController {
         \Intervention\Image\ImageManagerStatic::make($res)
                 ->resize(intval($image[0]*0.4), intval($image[1]*0.4))
                 ->save(WWW_ROOT . $path . '/small_' . $file_name);
+        \Intervention\Image\ImageManagerStatic::make($res)
+                ->resize(60, 60)
+                ->save(WWW_ROOT . $path . '/thumb_' . $file_name);
         $file_name = '/' . $path . '/small_' . $file_name;
         $BeautyPicTable = \Cake\ORM\TableRegistry::get('beauty_pic');
         $pic = $BeautyPicTable->newEntity();
@@ -429,12 +446,15 @@ class BeautyController extends AppController {
         $pic->pic_url = $file_name;
         $res = $BeautyPicTable->save($pic);
         if($res){
-            return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'图片上传成功', 'smallpath'=>$file_name]);
+            return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'照片上传成功', 'smallpath'=>$file_name]);
         } else {
-            return $this->Util->ajaxReturn(false, '图片上传失败');
+            return $this->Util->ajaxReturn(false, '照片上传失败');
         }
     }
 
+    /**
+     * app上传照片
+     */
     public function getAppPic(){
         $this->handCheckLogin();
         $data = $this->request->data;
@@ -444,9 +464,23 @@ class BeautyController extends AppController {
         $pic->pic_url = $data['url'];
         $res = $BeautyPicTable->save($pic);
         if ($res) {
-            return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'图片上传成功']);
+            return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'照片上传成功', 'data'=>$res]);
         } else {
-            return $this->Util->ajaxReturn(false, '图片上传失败');
+            return $this->Util->ajaxReturn(false, '照片上传失败');
+        }
+    }
+    
+    public function delPic($id=null){
+        if(empty($id)){
+            return $this->Util->ajaxReturn(false, '请选择一张照片');
+        }
+        $BeautyPicTable = \Cake\ORM\TableRegistry::get('beauty_pic');
+        $pic = $BeautyPicTable->get($id);
+        $res = $BeautyPicTable->delete($pic);
+        if($res){
+            return $this->Util->ajaxReturn(true, '删除成功');
+        } else {
+            return $this->Util->ajaxReturn(false, '删除失败');
         }
     }
 }

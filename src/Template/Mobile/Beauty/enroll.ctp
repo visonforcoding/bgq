@@ -10,32 +10,32 @@
                             <em class="hid_wid">
                                 <select name="constellation" style="overflow: scroll;">
                                     <option value="">请选择</option>
-                                    <?php if($is_apply): ?>
-                                    <option value="白羊座" <?php if($user->constellation == '白羊座'): ?>selected<?php endif; ?>>白羊座</option>
-                                    <option value="金牛座" <?php if($user->constellation == '金牛座'): ?>selected<?php endif; ?>>金牛座</option>
-                                    <option value="双子座" <?php if($user->constellation == '双子座'): ?>selected<?php endif; ?>>双子座</option>
-                                    <option value="巨蟹座" <?php if($user->constellation == '巨蟹座'): ?>selected<?php endif; ?>>巨蟹座</option>
-                                    <option value="狮子座" <?php if($user->constellation == '狮子座'): ?>selected<?php endif; ?>>狮子座</option>
-                                    <option value="处女座" <?php if($user->constellation == '处女座'): ?>selected<?php endif; ?>>处女座</option>
-                                    <option value="天秤座" <?php if($user->constellation == '天秤座'): ?>selected<?php endif; ?>>天秤座</option>
-                                    <option value="天蝎座" <?php if($user->constellation == '天蝎座'): ?>selected<?php endif; ?>>天蝎座</option>
-                                    <option value="射手座" <?php if($user->constellation == '射手座'): ?>selected<?php endif; ?>>射手座</option>
-                                    <option value="摩羯座" <?php if($user->constellation == '摩羯座'): ?>selected<?php endif; ?>>摩羯座</option>
-                                    <option value="水瓶座" <?php if($user->constellation == '水瓶座'): ?>selected<?php endif; ?>>水瓶座</option>
-                                    <option value="双鱼座" <?php if($user->constellation == '双鱼座'): ?>selected<?php endif; ?>>双鱼座</option>
+                                    <?php if ($is_apply): ?>
+                                        <option value="白羊座" <?php if ($user->constellation == '白羊座'): ?>selected<?php endif; ?>>白羊座</option>
+                                        <option value="金牛座" <?php if ($user->constellation == '金牛座'): ?>selected<?php endif; ?>>金牛座</option>
+                                        <option value="双子座" <?php if ($user->constellation == '双子座'): ?>selected<?php endif; ?>>双子座</option>
+                                        <option value="巨蟹座" <?php if ($user->constellation == '巨蟹座'): ?>selected<?php endif; ?>>巨蟹座</option>
+                                        <option value="狮子座" <?php if ($user->constellation == '狮子座'): ?>selected<?php endif; ?>>狮子座</option>
+                                        <option value="处女座" <?php if ($user->constellation == '处女座'): ?>selected<?php endif; ?>>处女座</option>
+                                        <option value="天秤座" <?php if ($user->constellation == '天秤座'): ?>selected<?php endif; ?>>天秤座</option>
+                                        <option value="天蝎座" <?php if ($user->constellation == '天蝎座'): ?>selected<?php endif; ?>>天蝎座</option>
+                                        <option value="射手座" <?php if ($user->constellation == '射手座'): ?>selected<?php endif; ?>>射手座</option>
+                                        <option value="摩羯座" <?php if ($user->constellation == '摩羯座'): ?>selected<?php endif; ?>>摩羯座</option>
+                                        <option value="水瓶座" <?php if ($user->constellation == '水瓶座'): ?>selected<?php endif; ?>>水瓶座</option>
+                                        <option value="双鱼座" <?php if ($user->constellation == '双鱼座'): ?>selected<?php endif; ?>>双鱼座</option>
                                     <?php else: ?>
-                                    <option value="白羊座">白羊座</option>
-                                    <option value="金牛座">金牛座</option>
-                                    <option value="双子座">双子座</option>
-                                    <option value="巨蟹座">巨蟹座</option>
-                                    <option value="狮子座">狮子座</option>
-                                    <option value="处女座">处女座</option>
-                                    <option value="天秤座">天秤座</option>
-                                    <option value="天蝎座">天蝎座</option>
-                                    <option value="射手座">射手座</option>
-                                    <option value="摩羯座">摩羯座</option>
-                                    <option value="水瓶座">水瓶座</option>
-                                    <option value="双鱼座">双鱼座</option>
+                                        <option value="白羊座">白羊座</option>
+                                        <option value="金牛座">金牛座</option>
+                                        <option value="双子座">双子座</option>
+                                        <option value="巨蟹座">巨蟹座</option>
+                                        <option value="狮子座">狮子座</option>
+                                        <option value="处女座">处女座</option>
+                                        <option value="天秤座">天秤座</option>
+                                        <option value="天蝎座">天蝎座</option>
+                                        <option value="射手座">射手座</option>
+                                        <option value="摩羯座">摩羯座</option>
+                                        <option value="水瓶座">水瓶座</option>
+                                        <option value="双鱼座">双鱼座</option>
                                     <?php endif; ?>
                                 </select>
                             </em>
@@ -58,7 +58,7 @@
         <div class="photo_list bgff">
             <ul id="uploadPic">
                 <?php foreach ($pic as $k => $v): ?>
-                <li onclick=""><img src="<?= $v['pic_url'] ?>"/></li>
+                    <li onclick="isDel(this, '<?= $v['id'] ?>')"><img src="<?= $v['pic_url'] ?>"/></li>
                 <?php endforeach; ?>
                 <li id="upload_pic">
                     <div class="uploadfile">
@@ -71,24 +71,34 @@
         </div>
     </div>
 </div>
+<div class="reg-shadow" style="display: none;" id="shadow"></div>
+<div class="totips" hidden id="isdel" >
+    <h3>确定要删除本张照片？</h3>
+    <span style="display:none;"></span>
+    <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="javascript:void(0)" class="tipsbtn bgred" id="yes">确认</a>
+</div>
 <a href="javascript:void(0);" class="f-bottom" id="submit"><?= $is_apply ? '保存资料' : '提交申请' ?></a>
 <?php $this->start('script'); ?>
 <script>
     $('#submit').on('tap', function () {
-        if($('select[name="constellation"]').val() == ''){
+        if ($('select[name="constellation"]').val() == '') {
             $.util.alert('请选择星座');
             return false;
         }
-        if($('input[name="declaration"]').val() == ''){
+        if ($('input[name="declaration"]').val() == '') {
             $.util.alert('请填写参赛宣言');
             return false;
         }
-        if($('input[name="hobby"]').val() == ''){
+        if ($('input[name="hobby"]').val() == '') {
             $.util.alert('请填写兴趣爱好');
             return false;
         }
-        if($('textarea[name="brief"]').val() == ''){
+        if ($('textarea[name="brief"]').val() == '') {
             $.util.alert('请填写个人简介');
+            return false;
+        }
+        if ($('#uploadPic li').length <= 1) {
+            $.util.alert('请至少上传一张照片');
             return false;
         }
         $.util.ajax({
@@ -114,17 +124,16 @@
             LEMON.event.uploadPhoto('{"dir":"beauty/pic","zip":"1"}', function (data) {
                 var data = JSON.parse(data);
                 if (data.status === true) {
-                    $('#uploadPic').prepend('<li onclick=""><img src="' + data.smallpath + '"/></li>');
-                    if ($('#uploadPic').children('li').length > 6) {
-                        $('#upload_pic').remove();
-                    }
-                    alert(data.smallpath);
                     $.util.ajax({
                         url: '/beauty/getAppPic',
                         data: {url: data.smallpath},
                         func: function (msg) {
                             if (msg.status) {
                                 $.util.alert(msg.msg);
+                                $('#uploadPic').prepend('<li onclick="isDel(this, ' + msg.data.id + ')"><img src="' + data.smallpath + '"/></li>');
+                                if ($('#uploadPic').children('li').length > 6) {
+                                    $('#upload_pic').remove();
+                                }
                             } else {
                                 $.util.alert(msg.msg);
                             }
@@ -153,6 +162,36 @@
         } else {
             $.util.alert('请在微信或APP上传图片');
         }
+    });
+
+    function delPic(em, id) {
+        var obj = $(em);
+        $.util.ajax({
+            url: '/beauty/del-pic/' + id,
+            func: function (res) {
+                $.util.alert(res.msg, 1000);
+                if (res.status) {
+                    $(em).remove();
+                    $('#isdel').hide();
+                    $('#shadow').hide();
+                    $('#yes').unbind('click');
+                }
+            }
+        });
+    }
+    
+    function isDel(em, id){
+        $('#isdel').show();
+        $('#shadow').show();
+        $('#yes').on('click', function(){
+            delPic(em, id);
+        });
+    }
+    
+    $('#no, #shadow').on('click', function(){
+        $('#yes').unbind('click');
+        $('#isdel').hide();
+        $('#shadow').hide();
     });
 </script>
 <?php
