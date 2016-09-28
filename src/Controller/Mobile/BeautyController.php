@@ -73,19 +73,19 @@ class BeautyController extends AppController {
                         });
                     })
                     ->toArray();
-            $now = \Cake\I18n\Time::now();
-            $today = $now->format('Y-m-d');
-            if($user->is_judge == 1){
-
-            } else {
-                foreach($beauty as $k=>$v){
-                    if($v->create_time == $today){
-                        $beauty[$k]->vote = false;
-                    } else {
-                        $beauty[$k]->vote = true;
-                    }
-                }
-            }
+//            $now = \Cake\I18n\Time::now();
+//            $today = $now->format('Y-m-d');
+//            if($user->is_judge == 1){
+//
+//            } else {
+//                foreach($beauty as $k=>$v){
+//                    if($v->create_time == $today){
+//                        $beauty[$k]->vote = false;
+//                    } else {
+//                        $beauty[$k]->vote = true;
+//                    }
+//                }
+//            }
         } else {
             $beauty = $BeautyTable
                     ->find()
