@@ -240,6 +240,11 @@ class BeautyController extends AppController {
     }
 
     public function uploadpic($user_id) {
+        $PicTable = \Cake\ORM\TableRegistry::get('BeautyPic');
+        $counts = $PicTable->find()->where(['user_id'=>$user_id])->count();
+        if($counts>=6){
+            return $this->Util->ajaxReturn(false,'最多上传6张');
+        }
         $today = date('Y-m-d');
         $urlpath = '/upload/beauty/pic/' . $today . '/';
         $savePath = ROOT . '/webroot' . $urlpath;
@@ -257,19 +262,17 @@ class BeautyController extends AppController {
         } else {// 上传成功 获取上传文件信息
             $info = $upload->getUploadFileInfo();
             $response['name'] = $info[0]['name'];
-            $response['info'] = $info[0];
             $response['path'] = $urlpath . $info[0]['savename'];
             $response['smallpath'] = $urlpath .'small_'. $info[0]['savename'];
-            $PicTable = \Cake\ORM\TableRegistry::get('BeautyPic');
             $pic = $PicTable->newEntity([
                 'pic_url'=>$response['smallpath'],
                 'user_id'=>$user_id
             ]);
             if($PicTable->save($pic)){
-                $response['stauts'] = true;
+                $response['status'] = true;
                 $response['msg'] = '上传成功!';
             }else{
-                $response['stauts'] = false;
+                $response['status'] = false;
                 $response['msg'] = '上传失败!';
             }
         }

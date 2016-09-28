@@ -86,13 +86,13 @@
             <?php foreach ($beauty->beauty_pics as $k => $v): ?>
                 <div style="width:200px;height:200px;" class="pic col-md-3 col-sm-6 col-lg-3">
                     <a class="card" href="<?= str_replace('small_', '', $v['pic_url']) ?>" data-lightbox="roadtrip">
-                        <img src="<?= $v['pic_url'] ?>" alt="">
+                        <img style="max-height:200px;" src="<?= $v['pic_url'] ?>" alt="">
                         <div data-id="<?= $v->id ?>"  class="del-pic card-heading"><strong><i class="icon icon-trash"></i>删除</strong></div>
                     </a>
                 </div>
             <?php endforeach; ?>
         </div>
-        <div class="col-md-2 col-sm-6 col-lg-3 col-md-offset-2">
+        <div class="col-sm-6 col-lg-3 col-md-offset-2">
             <a class="card" href="">
                 <img src="" alt="">
                 <div data-id="<?= $beauty->user_id ?>" id="pic"  class="add-pic card-heading"><strong><i class="icon icon-trash"></i></strong></div>
@@ -144,12 +144,14 @@
             multiDragErrorStr: '这里只能一次上传一张',
             customErrorKeyStr: '上传发生了错误',
             onSuccess: function (files, data, xhr, pd) {
+                console.log(data);
                 if (data.status) {
                     layer.msg(data.msg);
                     setTimeout(function () {
                         window.location.reload();
                     }, '1000');
                 } else {
+                    console.log(data.status);
                     uploadObj.reset();
                     layer.alert(data.msg);
                 }
