@@ -54,10 +54,10 @@
 <?php $this->start('script') ?>
 <!--<script src="/mobile/js/activity_release.js"></script>-->
 <script type="text/javascript">
-    window.onBackView = function(){
-        $.util.checkUserinfoStatus();
-    };
-    window.onBackView();
+//    window.onBackView = function(){
+//        $.util.checkUserinfoStatus();
+//    };
+//    window.onBackView();
     
     $('body').on('tap', function (e) {
         var target = e.srcElement || e.target, em = target, i = 1;
