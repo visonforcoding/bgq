@@ -469,7 +469,7 @@ class BeautyController extends AppController {
                     return $q->contain(['Educations', 'Careers', 'Industries'])->where(['enabled'=>1]);
                 }, 'BeautyPics'=>function($q){
                     return $q->orderDesc('BeautyPics.create_time');
-                }])
+                }, 'Secret'])
                 ->where(['is_pass'=>1, 'beauty.id'=>$id])
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
