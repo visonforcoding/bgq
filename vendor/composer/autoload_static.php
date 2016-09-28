@@ -4,11 +4,11 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitda4399bf25892f36da0d6ec657055921
+class ComposerStaticInit8abc8752710c9921c37ce65eae790f6b
 {
     public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '34122c0574b76bf21c9a8db62b5b9cf3' => __DIR__ . '/..' . '/cakephp/chronos/src/carbon_compat.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'c720f792236cd163ece8049879166850' => __DIR__ . '/..' . '/cakephp/cakephp/src/Core/functions.php',
         'ede59e3a405fb689cd1cebb7bb1db3fb' => __DIR__ . '/..' . '/cakephp/cakephp/src/Collection/functions.php',
         '90236b492da7ca2983a2ad6e33e4152e' => __DIR__ . '/..' . '/cakephp/cakephp/src/I18n/functions.php',
@@ -48,6 +48,11 @@ class ComposerStaticInitda4399bf25892f36da0d6ec657055921
         array (
             'Migrations\\' => 11,
         ),
+        'L' => 
+        array (
+            'League\\Glide\\' => 13,
+            'League\\Flysystem\\' => 17,
+        ),
         'I' => 
         array (
             'Intervention\\Image\\' => 19,
@@ -77,6 +82,7 @@ class ComposerStaticInitda4399bf25892f36da0d6ec657055921
             'Aura\\Intl\\_Config\\' => 18,
             'App\\Test\\' => 9,
             'App\\' => 4,
+            'ADmad\\Glide\\' => 12,
         ),
     );
 
@@ -137,6 +143,14 @@ class ComposerStaticInitda4399bf25892f36da0d6ec657055921
         array (
             0 => __DIR__ . '/..' . '/cakephp/migrations/src',
         ),
+        'League\\Glide\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/glide/src',
+        ),
+        'League\\Flysystem\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/flysystem/src',
+        ),
         'Intervention\\Image\\' => 
         array (
             0 => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image',
@@ -184,6 +198,10 @@ class ComposerStaticInitda4399bf25892f36da0d6ec657055921
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'ADmad\\Glide\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/admad/cakephp-glide/src',
         ),
     );
 
@@ -242,10 +260,10 @@ class ComposerStaticInitda4399bf25892f36da0d6ec657055921
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitda4399bf25892f36da0d6ec657055921::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitda4399bf25892f36da0d6ec657055921::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitda4399bf25892f36da0d6ec657055921::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitda4399bf25892f36da0d6ec657055921::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit8abc8752710c9921c37ce65eae790f6b::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit8abc8752710c9921c37ce65eae790f6b::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit8abc8752710c9921c37ce65eae790f6b::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit8abc8752710c9921c37ce65eae790f6b::$classMap;
 
         }, null, ClassLoader::class);
     }
