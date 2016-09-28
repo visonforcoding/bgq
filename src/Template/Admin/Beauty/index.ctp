@@ -21,6 +21,15 @@
                     <option value="2">审核未通过</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="type_id">评选类型</label>
+                <select name=type_id class="form-control">
+                    <option value="">全部</option>
+                    <?php foreach ($votingType as $k=>$v): ?>
+                    <option value="<?= $k ?>"><?= $v ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
 <!--            <div class="form-group">
                 <label for="keywords">时间</label>
                 <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords" placeholder="开始时间">
@@ -38,6 +47,9 @@
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
 <script>
+    var votingType = <?= json_encode($votingType) ?>;
+</script>
+<script>
                 $(function () {
                     $('#main-content').bind('resize', function () {
                         $("#list").setGridWidth($('#main-content').width() - 40);
@@ -53,11 +65,14 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户id', '票数', '星座', '报名时间', '审核是否通过', '操作'],
+                                ['用户id', '票数', '星座', '类型', '报名时间', '审核是否通过', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'vote_nums', editable: true, align: 'center'},
                             {name: 'constellation', editable: true, align: 'center'},
+                            {name: 'type_id', editable: true, align: 'center', formatter: function(cellvalue, options, rowObject){
+                                    return votingType[cellvalue];
+                            }},
 //                            {name: 'brief', editable: true, align: 'center'},
 //                            {name: 'declaration', editable: true, align: 'center'},
 //                            {name: 'hobby', editable: true, align: 'center'},

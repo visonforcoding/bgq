@@ -17,7 +17,11 @@ class BeautyController extends AppController {
      * @return void
      */
     public function index() {
-        $this->set('beauty', $this->Beauty);
+        $votingType = \Cake\Core\Configure::read('votingType');
+        $this->set([
+            'beauty'=>$this->Beauty,
+            'votingType' => $votingType,
+        ]);
     }
 
     /**
@@ -64,12 +68,18 @@ class BeautyController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
+        $SavantTable = \Cake\ORM\TableRegistry::get('savant');
         $beauty = $this->Beauty->get($id, [
             'contain' => ['BeautyPics']
         ]);
+        $savant = $SavantTable->find()->where(['user_id'=>$beauty->user_id])->first();
         if ($this->request->is(['post', 'put'])) {
             $beauty = $this->Beauty->patchEntity($beauty, $this->request->data);
-            if ($this->Beauty->save($beauty)) {
+            $savant->xmjy = $this->request->data('xmjy');
+            $res = $this->Beauty->connection()->transactional(function()use($beauty, $SavantTable, $savant){
+                return $this->Beauty->save($beauty) && $SavantTable->save($savant);
+            });
+            if ($res) {
                 $this->Util->ajaxReturn(true, '修改成功');
             } else {
                 $errors = $beauty->errors();
@@ -77,7 +87,9 @@ class BeautyController extends AppController {
             }
         }
         $users = $this->Beauty->Users->find('list', ['limit' => 200]);
-        $this->set(compact('beauty', 'users'));
+        $votintType = \Cake\Core\Configure::read('votingType');
+        $this->set('votingType', $votintType);
+        $this->set(compact('beauty', 'users', 'savant'));
     }
 
     /**
@@ -116,12 +128,16 @@ class BeautyController extends AppController {
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $is_pass = $this->request->data('is_pass');
+        $type_id = $this->request->data('type_id');
         $where = [];
         if (!empty($keywords)) {
             $where[' users.truename like'] = "%$keywords%";
         }
         if ($is_pass !== '' && $is_pass !== null) {
             $where['is_pass'] = $is_pass;
+        }
+        if (!empty($type_id)) {
+            $where['type_id'] = $type_id;
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
@@ -191,16 +207,16 @@ class BeautyController extends AppController {
         $filename = 'Beauty_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
-    
-    public function check($id){
+
+    public function check($id) {
         $beauty = $this->Beauty->get($id);
-        if($beauty->is_pass == 1){
+        if ($beauty->is_pass == 1) {
             $beauty->is_pass = 2;
         } else {
             $beauty->is_pass = 1;
         }
         $res = $this->Beauty->save($beauty);
-        if($res){
+        if ($res) {
             return $this->Util->ajaxReturn(true, '修改成功');
         } else {
             return $this->Util->ajaxReturn(false, '修改失败');

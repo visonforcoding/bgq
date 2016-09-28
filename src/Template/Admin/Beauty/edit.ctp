@@ -43,6 +43,14 @@
     </div>
 
     <div class="form-group">
+        <label class="col-md-2 control-label">类型</label>
+        <div class="col-md-8">
+            <?php
+            echo $this->Form->input('type_id', ['type'=>'select', 'options'=>$votingType, 'label' => false, 'class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">参赛宣言</label>
         <div class="col-md-8">
             <?php
@@ -64,6 +72,12 @@
             <?php
             echo $this->Form->input('brief', ['type' => 'textarea', 'label' => false, 'class' => 'form-control']);
             ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">项目经验</label>
+        <div class="col-md-8">
+            <textarea name="xmjy" class="form-control" maxlength="150" id="xmjy" rows="5"><?= $savant->xmjy ?></textarea>
         </div>
     </div>
     <div class="form-group">

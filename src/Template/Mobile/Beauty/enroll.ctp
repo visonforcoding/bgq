@@ -43,12 +43,26 @@
                         </div>
 
                     </li>
+                    <li class="b-hy">
+                        <span><i class="iconfont col_yellow">&#xe684;</i>类型</span>
+                        <div>
+                            <em>
+                                <select name="type_id" style="overflow: scroll;">
+                                    <option value="">请选择</option>
+                                    <?php foreach ($votingType as $k=>$v): ?>
+                                    <option value="<?= $k ?>" <?php if($user->type_id == $k): ?>selected<?php endif; ?>><?= $v ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </em>
+                        </div>
+                    </li>
                     <li class="b-yw">
                         <span><i class="iconfont col_cyan">&#xe670;</i>参赛宣言</span>
                         <div><em><input name="declaration" type="text" placeholder="请输入" value="<?= $is_apply ? $user->declaration : '' ?>" /></em></div>
                     </li>
                     <li class="b-gs"><span><i class="iconfont color-items">&#xe61c;</i>兴趣爱好</span><div><em><input name="hobby" type="text" placeholder="请输入" value="<?= $is_apply ? $user->hobby : '' ?>" /></em></div></li>
                     <li class="b-gs noafter"><span class="zt_self"><i class="iconfont col_blue">&#xe67e;</i>个人简介</span><div><em class="zt_text"><textarea name="brief" placeholder="请输入"><?= $is_apply ? $user->brief : '' ?></textarea></em></div></li>
+                    <li class="b-gs noafter"><span class="zt_self"><i class="iconfont col_blue">&#xe67e;</i>项目经验</span><div><em class="zt_text"><textarea name="xmjy" placeholder="请输入"><?= $xmjy ?></textarea></em></div></li>
                 </ul>
             </form>
         </div>
@@ -225,6 +239,10 @@
             $.util.alert('请选择星座');
             return false;
         }
+        if ($('select[name="type_id"]').val() == '') {
+            $.util.alert('请选择类型');
+            return false;
+        }
         if ($('input[name="declaration"]').val() == '') {
             $.util.alert('请填写参赛宣言');
             return false;
@@ -235,6 +253,10 @@
         }
         if ($('textarea[name="brief"]').val() == '') {
             $.util.alert('请填写个人简介');
+            return false;
+        }
+        if ($('textarea[name="xmjy"]').val() == '') {
+            $.util.alert('请填写项目经验');
             return false;
         }
         if ($('#uploadPic li').length <= 1) {

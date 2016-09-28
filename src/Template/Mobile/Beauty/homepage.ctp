@@ -52,6 +52,13 @@
                             </em>
                         </div>
                     </li>
+                    <li class="b-gs noafter"><span><i class="iconfont col_blue">&#xe67e;</i>项目经验</span>
+                        <div>
+                            <em>
+                                <?= $xmjy ?>
+                            </em>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -348,7 +355,14 @@
     <?php endif; ?>
 <?php $this->start('script') ?>
 <script>
-    
+    window.shareConfig.link = 'http://m.chinamatop.com/beauty/homepage/<?= $beauty->id ?>?share=1';
+    window.shareConfig.title = '<?= $beauty->user->truename ?>的参选主页';
+    var share_desc = '<?= str_replace(["\r\n", "\r", "\n"], '', $activity->summary) ?>';
+    share_desc && (window.shareConfig.desc = share_desc);
+    LEMON.show.shareIco();
+    if ($.util.isAPP && document.URL.indexOf('/enroll') != -1) {
+        LEMON.sys.back('/activity/index');
+    }
 </script>
 <script type="text/javascript">
     $('.h-tab>li').on('click', function () {

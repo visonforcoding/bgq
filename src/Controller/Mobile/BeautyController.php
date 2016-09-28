@@ -30,17 +30,18 @@ class BeautyController extends AppController {
             $BeautyTable = \Cake\ORM\TableRegistry::get('beauty');
             $user = $BeautyTable->find()->where(['user_id'=>$this->user->id])->first();
         }
-        
+        $votingType = \Cake\Core\Configure::read('votingType');
         $this->set([
             'pageTitle' => '选美活动',
-            'user' => $user
+            'user' => $user,
+            'votingType' => $votingType,
         ]);
     }
     
     /**
      * ajax获取选美活动首页票数前10的选手
      */
-    public function getTopUser(){
+    public function getVoteUser($type_id=null){
         $BeautyTable = \Cake\ORM\TableRegistry::get('beauty');
         $UserTable = \Cake\ORM\TableRegistry::get('user');
         $user_id = '';
@@ -56,8 +57,8 @@ class BeautyController extends AppController {
                     }, 'BeautyPics'=>function($q){
                         return $q->orderDesc('BeautyPics.create_time');
                     }])
-                    ->where(['is_pass'=>1])
-                    ->limit(10)
+                    ->where(['is_pass'=>1, 'type_id'=>$type_id])
+//                    ->limit(10)
                     ->orderDesc('vote_nums')
                     ->formatResults(function($items){
                         return $items->map(function($item) {
@@ -220,7 +221,7 @@ class BeautyController extends AppController {
     public function enroll(){
         $this->handCheckLogin();
         $BeautyTable = \Cake\ORM\TableRegistry::get('beauty');
-        $BeautyPicTable = \Cake\ORM\TableRegistry::get('beauty_pic');
+        $SavantTable = \Cake\ORM\TableRegistry::get('savant');
         if($this->request->is('post')){
             $UserTable = \Cake\ORM\TableRegistry::get('user');
             $user = $UserTable->get($this->user->id, [
@@ -243,7 +244,18 @@ class BeautyController extends AppController {
             $beauty->brief = $data['brief'];
             $beauty->declaration = $data['declaration'];
             $beauty->hobby = $data['hobby'];
-            $res = $BeautyTable->save($beauty);
+            $beauty->type_id = $data['type_id'];
+            $savant = $SavantTable->find()->where(['user_id'=>$this->user->id])->first();
+            if(empty($savant)){
+                $savant = $SavantTable->newEntity();
+                $savant->xmjy = $data['xmjy'];
+                $savant->user_id = $this->user->id;
+            } else {
+                $savant->xmjy = $data['xmjy'];
+            }
+            $res = $BeautyTable->connection()->transactional(function()use($BeautyTable, $beauty, $SavantTable, $savant){
+                return $BeautyTable->save($beauty) && $SavantTable->save($savant);
+            });
             if($res){
                 return $this->Util->ajaxReturn(true, '提交成功');
             } else {
@@ -262,10 +274,20 @@ class BeautyController extends AppController {
             $UserTable = \Cake\ORM\TableRegistry::get('user');
             $user = $UserTable->get($this->user->id);
         }
+        $SavantTable = \Cake\ORM\TableRegistry::get('savant');
+        $savant = $SavantTable->find()->where(['user_id'=>$this->user->id])->first();
+        if(empty($savant)){
+            $xmjy = '';
+        } else {
+            $xmjy = $savant->xmjy;
+        }
+        $votingType = \Cake\Core\Configure::read('votingType');
         $this->set([
             'pageTitle' => '报名',
             'user' => $user,
-            'is_apply' => $is_apply
+            'is_apply' => $is_apply,
+            'xmjy' => $xmjy,
+            'votingType' => $votingType
         ]);
     }
     
@@ -462,8 +484,8 @@ class BeautyController extends AppController {
      */
     public function homepage($id=null){
         $self = false;
-        
         $BeautyTable = \Cake\ORM\TableRegistry::get('beauty');
+        $SavantTable = \Cake\ORM\TableRegistry::get('savant');
         $beauty = $BeautyTable->find()
                 ->contain(['Users'=>function($q){
                     return $q->contain(['Educations', 'Careers', 'Industries', 'Secret'])->where(['enabled'=>1]);
@@ -495,12 +517,14 @@ class BeautyController extends AppController {
                 ->where(['is_pass'=>1, 'vote_nums >='=>$beauty->vote_nums])
                 ->count();
         $educationType = \Cake\Core\Configure::read('educationType');
+        $savant = $SavantTable->find()->where(['user_id'=>$beauty->user->id])->first();
         $this->set([
             'pageTitle' => $beauty->user->truename . '的参选主页',
             'beauty' => $beauty,
             'rank' => $rank,
             'self' => $self,
-            'educationType' => $educationType
+            'educationType' => $educationType,
+            'xmjy' => $savant->xmjy
         ]);
     }
     
