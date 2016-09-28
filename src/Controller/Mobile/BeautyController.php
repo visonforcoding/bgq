@@ -61,8 +61,8 @@ class BeautyController extends AppController {
                     ->orderDesc('vote_nums')
                     ->formatResults(function($items){
                         return $items->map(function($item) {
-                            if($item->votes){
-                                $items->votes->create_time = $items->votes->create_time->format('Y-m-d');
+                            if($item->vote){
+                                $item->vote->create_time = $item->vote->create_time->format('Y-m-d');
                             }
                             if(strlen($item->id) == 1){
                                 $item->beauty_id = '00' . $item->id;
@@ -102,7 +102,7 @@ class BeautyController extends AppController {
                     ->formatResults(function($items){
                         return $items->map(function($item) {
                             if($item->vote){
-                                $items->vote->create_time = $items->vote->create_time->format('Y-m-d');
+                                $item->vote->create_time = $item->vote->create_time->format('Y-m-d');
                             }
                             if(strlen($item->id) == 1){
                                 $item->beauty_id = '00' . $item->id;
@@ -175,7 +175,7 @@ class BeautyController extends AppController {
         if($this->request->is('post')){
             $UserTable = \Cake\ORM\TableRegistry::get('user');
             $user = $UserTable->get($this->user->id, [
-                'contain' => ['Careers', 'Educations', 'Industries']
+                'contain' => ['Careers', 'Educations', 'Industries'],
             ]);
             $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->agency_id
                     && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
@@ -185,7 +185,7 @@ class BeautyController extends AppController {
             $data = $this->request->data;
             $beauty = $BeautyTable->find()->where(['user_id'=>$this->user->id])->first();
             if($beauty) {
-                $beauty->is_pass = 0;
+                
             } else {
                 $beauty = $BeautyTable->newEntity();
             }
@@ -255,7 +255,7 @@ class BeautyController extends AppController {
                 $now = \Cake\I18n\Time::now();
                 $today = $now->format('Y-m-d');
                 if($last_vote->create_time->format('Y-m-d') == $today){
-                    return $this->Util->ajaxReturn(false, '您今天已经投过票了');
+                    return $this->Util->ajaxReturn(false, '您今天已经投过Ta的票');
                 }
                 $beauty = $BeautyTable->find()->where(['user_id'=>$id])->first();
                 $beauty->vote_nums += 1;
@@ -272,23 +272,23 @@ class BeautyController extends AppController {
                 }
             }
         } else {
-            // 无投票记录查找最新一个投票记录
-            $user = $UserTable->get($user_id);
-            $last_vote = $VoteTable
-                    ->find()
-                    ->contain(['Users'=>function($q)use($vote_user){
-                        return $q->where(['enabled'=>1, 'gender'=>$vote_user->gender]);
-                    }])
-                    ->where(['user_id'=>$user_id])
-                    ->orderDesc('vote.create_time')
-                    ->first();
-            if($last_vote){
-                $now = \Cake\I18n\Time::now();
-                $today = $now->format('Y-m-d');
-                if($last_vote->create_time->format('Y-m-d') == $today){
-                    return $this->Util->ajaxReturn(false, '您今天已经投过票了');
-                }
-            }
+//            // 无投票记录查找最新一个投票记录
+//            $user = $UserTable->get($user_id);
+//            $last_vote = $VoteTable
+//                    ->find()
+//                    ->contain(['Users'=>function($q)use($vote_user){
+//                        return $q->where(['enabled'=>1, 'gender'=>$vote_user->gender]);
+//                    }])
+//                    ->where(['user_id'=>$user_id])
+//                    ->orderDesc('vote.create_time')
+//                    ->first();
+//            if($last_vote){
+//                $now = \Cake\I18n\Time::now();
+//                $today = $now->format('Y-m-d');
+//                if($last_vote->create_time->format('Y-m-d') == $today){
+//                    return $this->Util->ajaxReturn(false, '您今天已经投过票了');
+//                }
+//            }
             $beauty = $BeautyTable->find()->where(['user_id'=>$id])->first();
             $beauty->vote_nums += 1;
             $vote = $VoteTable->newEntity();

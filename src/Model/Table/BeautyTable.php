@@ -36,7 +36,7 @@ class BeautyTable extends Table
         ]);
         
         $this->hasOne('Votes', [
-            'foreignKey' => 'user_id',
+            'foreignKey' => 'vote_user_id',
             'joinType' => 'LEFT',
             'className' => 'Vote'
         ]);
