@@ -146,7 +146,7 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
     // 分享设置
-    window.shareConfig.link = 'http://m.chinamatop.com/news/view/<?= $news->id ?>?share=1';
+    window.shareConfig.link = 'http://m.chinamatop.com/news/view/<?= $news->id ?>?share=1&ptag=10001';
     window.shareConfig.title = '<?= $news->title ?>';
     var share_desc = '<?= preg_replace('/\r|\n/', '', $news->summary) ?>';
     share_desc && (window.shareConfig.desc = share_desc);
