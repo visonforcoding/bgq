@@ -54,7 +54,7 @@ class BeautyController extends AppController {
                     }, 'Votes'=>function($q)use($user_id){
                         return $q->where(['Votes.user_id'=>$user_id]);
                     }, 'BeautyPics'=>function($q){
-                        return $q->limit(1)->orderDesc('BeautyPics.create_time');
+                        return $q->orderDesc('BeautyPics.create_time');
                     }])
                     ->where(['is_pass'=>1])
                     ->limit(10)
@@ -121,7 +121,7 @@ class BeautyController extends AppController {
                     ->contain(['Users'=>function($q)use($keyword){
                         return $q->where(['Users.truename like'=>"%$keyword%", 'enabled'=>1]);
                     }, 'BeautyPics'=>function($q){
-                        return $q->limit(1)->orderDesc('BeautyPics.create_time');
+                        return $q->orderDesc('BeautyPics.create_time');
                     }])
                     ->where(['is_pass'=>1])
                     ->page($page, $this->limit)
@@ -156,6 +156,15 @@ class BeautyController extends AppController {
         $BeautyTable = \Cake\ORM\TableRegistry::get('beauty');
         $BeautyPicTable = \Cake\ORM\TableRegistry::get('beauty_pic');
         if($this->request->is('post')){
+            $UserTable = \Cake\ORM\TableRegistry::get('user');
+            $user = $UserTable->get($this->user->id, [
+                'contain' => ['Careers', 'Educations', 'Industries']
+            ]);
+            $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->agency_id
+                    && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
+            if(!$is_complete){
+                return $this->Util->ajaxReturn(false, '请先去完善个人资料');
+            }
             $data = $this->request->data;
             $beauty = $BeautyTable->find()->where(['user_id'=>$this->user->id])->first();
             if($beauty) {
@@ -307,7 +316,7 @@ class BeautyController extends AppController {
                 ->contain(['Users'=>function($q){
                     return $q->where(['enabled'=>1, 'gender'=>2]);
                 }, 'BeautyPics'=>function($q){
-                    return $q->limit(1)->orderDesc('BeautyPics.create_time');
+                    return $q->orderDesc('BeautyPics.create_time');
                 }])
                 ->where(['is_pass'=>1])
                 ->limit(10)
@@ -344,7 +353,7 @@ class BeautyController extends AppController {
                 ->contain(['Users'=>function($q){
                     return $q->where(['enabled'=>1, 'gender'=>1]);
                 }, 'BeautyPics'=>function($q){
-                    return $q->limit(1)->orderDesc('BeautyPics.create_time');
+                    return $q->orderDesc('BeautyPics.create_time');
                 }])
                 ->where(['is_pass'=>1])
                 ->limit(10)
@@ -391,7 +400,7 @@ class BeautyController extends AppController {
         $BeautyTable = \Cake\ORM\TableRegistry::get('beauty');
         $beauty = $BeautyTable->find()
                 ->contain(['Users'=>function($q){
-                    return $q->where(['enabled'=>1]);
+                    return $q->contain(['Educations', 'Careers', 'Industries'])->where(['enabled'=>1]);
                 }, 'BeautyPics'=>function($q){
                     return $q->orderDesc('BeautyPics.create_time');
                 }])
@@ -414,12 +423,14 @@ class BeautyController extends AppController {
                 }])
                 ->where(['is_pass'=>1, 'beauty.id'=>$id, 'vote_nums >='=>$beauty->vote_nums])
                 ->count();
+        $educationType = \Cake\Core\Configure::read('educationType');
 //        debug($beauty);die;
         $this->set([
             'pageTitle' => $beauty->user->truename . '的选美主页',
             'beauty' => $beauty,
             'rank' => $rank,
             'self' => $self,
+            'educationType' => $educationType
         ]);
     }
     
