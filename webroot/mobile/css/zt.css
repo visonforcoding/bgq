@@ -55,7 +55,7 @@ p{font-size:14px;line-height: 24px;}
 .uploadfile{position:relative;width:100%;height:100%;}
 .type_file{position:absolute;width:1rem;height:.6rem;top:50%;left:50%;margin-top:-.3rem;margin-left:-.5rem;opacity: 0;cursor: pointer;}
 .photo_list h3.poto_tips{font-size: .24rem;color:#9ba4ad;}
-.tabcon input, .tabcon textarea, .tabcon select{/*line-height: inherit;*/background: pink;}
+.tabcon input, .tabcon textarea, .tabcon select{line-height: inherit;/*background: pink;*/}
 .zt_tab_con ul li{padding:.3rem 0 .2rem;}
 .r_more{float:right;margin-top:.13rem;font-size:.3rem;}
 .infototal li{width:33%;}
