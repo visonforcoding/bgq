@@ -55,25 +55,64 @@
 			</div>
 		<!--活动介绍 end-->
 		<!--top 10-->
-			<div class="z_top10 z_top_title bd1">
+			<!--<div class="z_top10 z_top_title bd1">
 				<h3 class="tc">Top 10</h3>
-			</div>
+			</div>-->
 		<!--top 10-end->
 			<!---->
-			<section class="z_items content_inner">
-				<dl>
-					<dt class="posi_top"><img src="../images/nv01.png" alt="" /><span></span><i>001</i></dt>
-					<dd class="zt_name mt10"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
-					<dd class="zt_commpany">君汉控股（深圳）有限公司</dd>
-					<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
-				</dl>
-				<dl>
-					<dt class="posi_top"><img src="../images/nv02.png" alt="" /><span></span><i>002</i></dt>
-					<dd class="zt_name"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
-					<dd class="zt_commpany">君汉控股（深圳）有限公司</dd>
-					<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
-				</dl>
-				<dl>
+			<!--选男神女神-->
+			
+			<div class="z_tab_head">
+				<ul>
+					<li  class="active">
+						<span>选女神</span>
+						
+					</li>
+					<li><span>选男神</span></li>
+					<li><span>选男/女神</span></li>
+				</ul>
+				<span class="z_line"></span>
+			</div>
+			
+			<script type="text/javascript">
+				var tabheight = $('.z_tab_head').offset().top;
+				$('.z_tab_head li').on('tap',function(){
+					var index = $(this).index();
+					var hei = $('.z_items').eq(index).height();
+					var minHeight = window.screen.height - $('.z_tab_head').height()-30;
+					$(this).addClass('active').siblings().removeClass();
+					$('.z_line').css('left',index*33.33+'%');
+					$('.z_tab_box').css({'left':-index*100+'%'});
+					$('.z_tab_con').css({'height':hei+'px','min-height':minHeight});
+					if(document.scrollTop > tabheight) window.scrollTo(0,tabheight);
+				});
+				//tab选项卡固定
+				$(window).on('scroll',function(){
+					var scrollTop =document.body.scrollTop;
+					if(scrollTop >= tabheight){
+						$('.z_tab_head').addClass('z_tab_head_fix');
+					}else{
+						$('.z_tab_head').removeClass('z_tab_head_fix');
+					}
+					
+				});
+			</script>
+			<div class="z_tab_con">
+				<div class="z_tab_box">
+					<section class="z_items content_inner">
+						<dl>
+							<dt class="posi_top"><img src="../images/nv01.png" alt="" /><span></span><i>001</i></dt>
+							<dd class="zt_name mt10"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+							<dd class="zt_commpany">君汉控股（深圳）有限公司</dd>
+							<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+						</dl>
+						<dl>
+							<dt class="posi_top"><img src="../images/nv02.png" alt="" /><span></span><i>002</i></dt>
+							<dd class="zt_name"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+							<dd class="zt_commpany">君汉控股（深圳）有限公司</dd>
+							<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+						</dl>
+						<dl>
 					<dt class="posi_top"><img src="../images/nv06.png" alt="" /><span></span><i>003</i></dt>
 					<dd class="zt_name mt10"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
 					<dd class="zt_commpany">君汉控股（深圳）有限公司</dd>
@@ -97,12 +136,105 @@
 					<dd class="zt_commpany">君汉控股（深圳）有限公司</dd>
 					<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
 				</dl>
-			</section>
+					</section>
+					<section class="z_items content_inner">
+						<dl>
+							<dt class="posi_top"><img src="../images/nv01.png" alt="" /><span></span><i>001</i></dt>
+							<dd class="zt_name mt10"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+							<dd class="zt_commpany">君汉</dd>
+							<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+						</dl>
+						<dl>
+							<dt class="posi_top"><img src="../images/nv02.png" alt="" /><span></span><i>002</i></dt>
+							<dd class="zt_name"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+							<dd class="zt_commpany">控股（深圳）</dd>
+							<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+						</dl>
+						
+					</section>
+					<section class="z_items content_inner">
+						<dl>
+							<dt class="posi_top"><img src="../images/nv05.png" alt="" /><span></span><i>001</i></dt>
+							<dd class="zt_name mt10"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+							<dd class="zt_commpany">君汉</dd>
+							<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+						</dl>
+						<dl>
+							<dt class="posi_top"><img src="../images/nv05.png" alt="" /><span></span><i>002</i></dt>
+							<dd class="zt_name"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+							<dd class="zt_commpany">控股（深圳）</dd>
+							<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+						</dl>
+						<dl>
+							<dt class="posi_top"><img src="../images/nv05.png" alt="" /><span></span><i>001</i></dt>
+							<dd class="zt_name mt10"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+							<dd class="zt_commpany">君汉</dd>
+							<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+						</dl>
+						<dl>
+							<dt class="posi_top"><img src="../images/nv05.png" alt="" /><span></span><i>002</i></dt>
+							<dd class="zt_name"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+							<dd class="zt_commpany">控股（深圳）</dd>
+							<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+						</dl>
+						<dl>
+							<dt class="posi_top"><img src="../images/nv05.png" alt="" /><span></span><i>001</i></dt>
+							<dd class="zt_name mt10"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+							<dd class="zt_commpany">君汉</dd>
+							<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+						</dl>
+						<dl>
+							<dt class="posi_top"><img src="../images/nv05.png" alt="" /><span></span><i>002</i></dt>
+							<dd class="zt_name"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+							<dd class="zt_commpany">控股（深圳）</dd>
+							<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+						</dl>
+					</section>
+				</div>
+			</div>
+			<!--<section class="z_items content_inner">
+				<dl>
+					<dt class="posi_top"><img src="../images/nv01.png" alt="" /><span></span><i>001</i></dt>
+					<dd class="zt_name mt10"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+					<dd class="zt_commpany">君汉控股（深圳）有限公司</dd>
+					<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+				</dl>
+				<dl>
+					<dt class="posi_top"><img src="../images/small_57eb668012659.jpg" alt="" /><span></span><i>002</i></dt>
+					<dd class="zt_name"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+					<dd class="zt_commpany">君汉控股（深圳）有限公司</dd>
+					<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+				</dl>
+				<dl>
+					<dt class="posi_top"><img src="../images/nv06.png" alt="" /><span></span><i>003</i></dt>
+					<dd class="zt_name mt10"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+					<dd class="zt_commpany">君汉控股（深圳）有限公司</dd>
+					<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+				</dl>
+				<dl>
+					<dt class="posi_top"><img src="../images/33.jpg" alt="" /><span></span><i>104</i></dt>
+					<dd class="zt_name"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+					<dd class="zt_commpany">君汉控股（深圳）有限公司</dd>
+					<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+				</dl>
+				<dl>
+					<dt class="posi_top"><img src="../images/nv05.png" alt="" /><span></span><i>005</i></dt>
+					<dd class="zt_name mt10"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+					<dd class="zt_commpany">君汉控股（深圳）有限公司</dd>
+					<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+				</dl>
+				<dl>
+					<dt class="posi_top"><img src="../images/nv06.png" alt="" /><span></span><i>522</i></dt>
+					<dd class="zt_name"><span class="p_name color-items mr10">陈小丽</span><span class="p_job color-gray">投资顾问经理人</span></dd>
+					<dd class="zt_commpany">君汉控股（深圳）有限公司</dd>
+					<dd class="mt20"><span class="zt_num color-items fl">1100票</span><span class="fr zt_r_btn" >投 票</span></dd>
+				</dl>
+			</section>-->
 			<div style='height:1.2rem;'></div>
-			<div class="fixed-btn">
-			<a href="activity-guest.html" class="l-btn">我要报名</a>
-			<a href="activity-pay.html" class="r-btn">我要投票</a>
-		</div>
+			
+				<a href="activity-guest.html" class="f-bottom">我要报名</a>
+			<!--<a href="activity-pay.html" class="r-btn">我要投票</a>-->
+		
 		<div class="zt_tips">
 			<span class="zt_r_closed">&times;</span>
 			<div class="zt_tips_box">
