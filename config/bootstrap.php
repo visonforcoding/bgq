@@ -255,7 +255,43 @@ DispatcherFactory::add('ControllerFactory');
 //    ->useLocaleParser();
 
 Plugin::load('Wpadmin', ['bootstrap' => true, 'routes' => true]);
+Plugin::load('ADmad/Glide');
 
+Configure::write('Glide', [
+    // Value of 'serverConfig' is passed as argument to Glide's ServerFactory::create() call.
+    // http://glide.thephpleague.com/1.0/config/setup/
+    'serverConfig' => [
+        // Path or League\Flysystem adapter instance to read images from.
+        // http://glide.thephpleague.com/1.0/config/source-and-cache/
+        'source' => WWW_ROOT . 'upload/',
+
+        // Path or League\Flysystem adapter instance to write cached images to.
+        'cache' => WWW_ROOT . 'cache',
+
+        // Optional: URL part to be omitted from source path
+        // http://glide.thephpleague.com/1.0/config/source-and-cache/#set-a-base-url
+        'base_url' => '/img/',
+
+        // Optional: Response class for serving images. You normally don't need
+        // to change this. By default an instance of \ADmad\Glide\Responses\CakeResponseFactory()
+        // will be used.
+        // http://glide.thephpleague.com/1.0/config/responses/
+        'response' => null,
+    ],
+
+    // Optional: Use secure URLs to prevent URL parameter manipulation.
+    // http://glide.thephpleague.com/1.0/config/security/
+    'secureUrls' => false,
+
+    // Optional: Cache duration. This makes GlideFilter set appropriate cache headers.
+    'cache' => '+1 days',
+
+    // Optional: Any response headers you may want to set
+    'headers' => [
+        'X-Custom' => 'some-value',
+    ]
+]);
+DispatcherFactory::add('ADmad/Glide.Glide', ['for' => '/img']);
 //载入自定义配置文件
 Configure::load('wpadmin');
 Configure::load('dataconf');
