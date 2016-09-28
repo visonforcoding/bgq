@@ -50,7 +50,7 @@
             <dd class="zt_name"><span class="p_name color-items mr10">{#username#}</span><span class="p_job color-gray">{#position#}</span></dd>
             <dd class="zt_commpany">{#company#}</dd>
         </a>
-        <dd class="mt20"><span class="zt_num color-items fl">{#vote_nums#}票</span><span class="fr zt_r_btn vote" user_id="{#user_id#}">投 票</span></dd>
+        <dd class="mt20"><span class="zt_num color-items fl">{#vote_nums#}票</span><span class="fr zt_r_btn {#vote_class#}" user_id="{#user_id#}">{#vote_word#}</span></dd>
     </dl>
 </script>
 <?php $this->start('script'); ?>
@@ -69,7 +69,7 @@
     $.ajax({
         type: 'POST',
         dataType: 'json',
-        url: "/beauty/get-female-beauty",
+        url: "/beauty/get-gender-beauty/2",
         success: function (res) {
             if (res.status) {
                 $.util.dataToTpl('female', 'tpl', res.data, function (d) {
@@ -78,6 +78,13 @@
                     d.username = d.user.truename;
                     d.user_id = d.user.id;
                     d.pic = d.beauty_pics.length ? d.beauty_pics[0].pic_url : '';
+                    if(d.vote){
+                        d.vote_class = 'bggray';
+                        d.vote_word = '已投票';
+                    } else {
+                        d.vote_class = 'vote';
+                        d.vote_word = '投 票';
+                    }
                     return d;
                 });
                 $('.vote').on('tap', function(){
@@ -99,7 +106,7 @@
     $.ajax({
         type: 'POST',
         dataType: 'json',
-        url: "/beauty/get-male-beauty",
+        url: "/beauty/get-gender-beauty/1",
         success: function (res) {
             if (res.status) {
                 $.util.dataToTpl('male', 'tpl', res.data, function (d) {
@@ -108,6 +115,13 @@
                     d.username = d.user.truename;
                     d.user_id = d.user.id;
                     d.pic = d.beauty_pics.length ? d.beauty_pics[0].pic_url : '';
+                    if(d.vote){
+                        d.vote_class = 'bggray';
+                        d.vote_word = '已投票';
+                    } else {
+                        d.vote_class = 'vote';
+                        d.vote_word = '投 票';
+                    }
                     return d;
                 });
                 $('.vote').on('tap', function(){

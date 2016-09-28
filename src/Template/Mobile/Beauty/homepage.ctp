@@ -347,33 +347,36 @@
         <a href="javascript:void(0);" class="f-bottom" id="vote" user_id="<?= $beauty->user->id ?>">投TA一票</a>
     <?php endif; ?>
 <?php $this->start('script') ?>
-    <script type="text/javascript">
-        $('.h-tab>li').on('click', function () {
-            var index = $(this).index() + 1;
-            console.log($('.tabcon>ul').eq(index));
-            $(this).addClass('active').siblings().removeClass('active');
-            $('.tabcon>ul').eq(index).addClass('cur').siblings().removeClass('cur');
+<script>
+    
+</script>
+<script type="text/javascript">
+    $('.h-tab>li').on('click', function () {
+        var index = $(this).index() + 1;
+        console.log($('.tabcon>ul').eq(index));
+        $(this).addClass('active').siblings().removeClass('active');
+        $('.tabcon>ul').eq(index).addClass('cur').siblings().removeClass('cur');
+    });
+
+    $('#commond').on('tap', function () {
+        $(this).children('i').html('&#xe61b;');
+    });
+
+    $('#vote').on('tap', function(){
+        var obj = $(this);
+        $.util.ajax({
+            url: '/beauty/vote/'+obj.attr('user_id'),
+            func: function(res){
+                $.util.alert(res.msg);
+            }
         });
-        
-        $('#commond').on('tap', function () {
-            $(this).children('i').html('&#xe61b;');
-        });
-        
-        $('#vote').on('tap', function(){
-            var obj = $(this);
-            $.util.ajax({
-                url: '/beauty/vote/'+obj.attr('user_id'),
-                func: function(res){
-                    $.util.alert(res.msg);
-                }
-            });
-        });
-        
-        $('#viewImg img').on('click', function(){
-            var imgs = [];
-            $('#viewImg img').each(function(){imgs.push(this.src.replace('small_', ''));});
-            $.util.viewImg(this.src.replace('small_', ''), imgs);
-        });
-    </script>
+    });
+
+    $('#viewImg img').on('click', function(){
+        var imgs = [];
+        $('#viewImg img').each(function(){imgs.push(this.src.replace('small_', ''));});
+        $.util.viewImg(this.src.replace('small_', ''), imgs);
+    });
+</script>
 <?php $this->end('script') ?>
 </html>
