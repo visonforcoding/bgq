@@ -11,7 +11,7 @@ p{font-size:14px;line-height: 24px;}
 .z_items{padding-bottom:.2rem;}
 .z_items dl{float:left;width:3.35rem;overflow:hidden;margin-right:.2rem;margin-top:.3rem;}
 .z_items dl:nth-of-type(2n){margin-right:0;}
-.z_items dl img{width:100%;height:4rem;display: block;}
+.z_items dl img{width:auto;height:4rem;display: block;}
 .z_items{overflow: hidden;}
 .z_items .zt_name{line-height: 20px;margin-top:.2rem;}
 .z_items .p_name{font-size:15px;}
