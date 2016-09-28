@@ -274,7 +274,6 @@ class BeautyController extends AppController {
             $UserTable = \Cake\ORM\TableRegistry::get('user');
             $user = $UserTable->get($this->user->id);
         }
-        $SavantTable = \Cake\ORM\TableRegistry::get('savant');
         $savant = $SavantTable->find()->where(['user_id'=>$this->user->id])->first();
         if(empty($savant)){
             $xmjy = '';
