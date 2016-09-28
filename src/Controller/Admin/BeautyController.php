@@ -78,6 +78,7 @@ class BeautyController extends AppController {
             $beauty = $this->Beauty->patchEntity($beauty, $this->request->data);
             if(empty($savant)){
                 $savant = $SavantTable->newEntity();
+                $savant->user_id = $beauty->user_id;
             }
             $savant->xmjy = $this->request->data('xmjy');
             $res = $this->Beauty->connection()->transactional(function()use($beauty, $SavantTable, $savant){
