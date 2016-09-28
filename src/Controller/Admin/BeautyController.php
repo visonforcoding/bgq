@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use Wpadmin\Controller\AppController;
+use Wpadmin\Utils\UploadFile;
 
 /**
  * Beauty Controller
@@ -221,6 +222,54 @@ class BeautyController extends AppController {
         } else {
             return $this->Util->ajaxReturn(false, '修改失败');
         }
+    }
+
+    public function delpic() {
+        $id = $this->request->query('id');
+        $PicTable = \Cake\ORM\TableRegistry::get('BeautyPic');
+        $pic = $PicTable->get($id);
+        if ($PicTable->delete($pic)) {
+            return $this->Util->ajaxReturn(true, '删除成功');
+        } else {
+            return $this->Util->ajaxReturn(false, '删除失败');
+        }
+    }
+
+    public function uploadpic($user_id) {
+        $today = date('Y-m-d');
+        $urlpath = '/upload/beauty/pic/' . $today . '/';
+        $savePath = ROOT . '/webroot' . $urlpath;
+        $upload = new UploadFile(); // 实例化上传类
+        $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg', 'zip', 'ppt',
+            'pptx', 'doc', 'docx', 'xls', 'xlsx', 'webp', 'rar', 'mp3', 'mp4', 'm4v', 'pdf'); // 设置附件上传类型
+        //缩略图处理
+        $upload->thumb = true;
+        $upload->thumbMaxWidth = '60';
+        $upload->thumbMaxHeight = '60';
+        $upload->savePath = $savePath; // 设置附件上传目录
+        if (!$upload->upload()) {// 上传错误提示错误信息
+            $response['status'] = false;
+            $response['msg'] = $upload->getErrorMsg();
+        } else {// 上传成功 获取上传文件信息
+            $info = $upload->getUploadFileInfo();
+            $response['name'] = $info[0]['name'];
+            $response['info'] = $info[0];
+            $response['path'] = $urlpath . $info[0]['savename'];
+            $response['smallpath'] = $urlpath .'small_'. $info[0]['savename'];
+            $PicTable = \Cake\ORM\TableRegistry::get('BeautyPic');
+            $pic = $PicTable->newEntity([
+                'pic_url'=>$response['smallpath'],
+                'user_id'=>$user_id
+            ]);
+            if($PicTable->save($pic)){
+                $response['stauts'] = true;
+                $response['msg'] = '上传成功!';
+            }else{
+                $response['stauts'] = false;
+                $response['msg'] = '上传失败!';
+            }
+        }
+        $this->Util->ajaxReturn($response);
     }
 
 }

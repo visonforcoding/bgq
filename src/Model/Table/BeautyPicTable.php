@@ -57,7 +57,6 @@ class BeautyPicTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->integer('pic_url')
             ->requirePresence('pic_url', 'create')
             ->notEmpty('pic_url');
 
