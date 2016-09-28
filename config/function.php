@@ -93,3 +93,11 @@ function getAvatar($avatar) {
         return $avatar;
     }
 }
+
+/**
+ * 
+ * @param type $url
+ */
+function createImg($url){
+    return preg_replace('/upload/','img',$url);
+}
