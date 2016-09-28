@@ -57,7 +57,7 @@ p{font-size:14px;line-height: 24px;}
 .photo_list h3.poto_tips{font-size: .24rem;color:#9ba4ad;}
 .tabcon input, .tabcon textarea, .tabcon select{/*line-height: inherit;background: pink;*/}
 .zt_tab_con ul li{padding:.3rem 0 ;}
-.r_more{font-size:.3rem;position:absolute;right:.3rem;top:0.08rem;}
+.r_more{font-size:.3rem;position:absolute;right:.3rem;top:0.06rem;}
 .r_potion{position:relative;}
 .infototal li{width:33%;}
 .zt_tab_con ul span{vertical-align: baseline;}
