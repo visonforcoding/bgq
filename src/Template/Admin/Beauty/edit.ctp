@@ -82,10 +82,21 @@
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">照片</label>
-        <div class="col-md-8">
-            <?php foreach ($beauty->beauty_pics as $k=>$v): ?>
-                <a href="<?= str_replace('small_', '', $v['pic_url']) ?>" data-lightbox="roadtrip"><img src='<?= $v['pic_url'] ?>' /></a>
+        <div class="col-md-8 cards cards-borderless">
+            <?php foreach ($beauty->beauty_pics as $k => $v): ?>
+                <div style="width:200px;height:200px;" class="pic col-md-3 col-sm-6 col-lg-3">
+                    <a class="card" href="<?= str_replace('small_', '', $v['pic_url']) ?>" data-lightbox="roadtrip">
+                        <img src="<?= $v['pic_url'] ?>" alt="">
+                        <div data-id="<?= $v->id ?>"  class="del-pic card-heading"><strong><i class="icon icon-trash"></i>删除</strong></div>
+                    </a>
+                </div>
             <?php endforeach; ?>
+        </div>
+        <div class="col-md-2 col-sm-6 col-lg-3 col-md-offset-2">
+            <a class="card" href="">
+                <img src="" alt="">
+                <div data-id="<?= $beauty->user_id ?>" id="pic"  class="add-pic card-heading"><strong><i class="icon icon-trash"></i></strong></div>
+            </a>
         </div>
     </div>
     <div class="form-group">
@@ -116,6 +127,52 @@
             language: "zh-CN",
             placeholder: '选择一个用户'
         });
+        var uploadObj = $('#pic').uploadFile({
+            url: '/admin/beauty/uploadpic/<?= $beauty->user_id ?>',
+            returnType: 'json',
+            maxFileCount: 1,
+            allowedTypes: 'jpg,png,gif,jpeg',
+            doneStr: "上传完成",
+            dragDrop: false,
+            multiple: false,
+            showDone: true,
+            uploadStr: "添加照片",
+            showStatusAfterSuccess: false,
+            maxFileCountErrorStr: "不被允许,允许的最大数量为",
+            dragDropStr: "<span><b>试试拖动文件上传</b></span>",
+            extErrorStr: "类型不允许,允许类型如下:",
+            multiDragErrorStr: '这里只能一次上传一张',
+            customErrorKeyStr: '上传发生了错误',
+            onSuccess: function (files, data, xhr, pd) {
+                if (data.status) {
+                    layer.msg(data.msg);
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, '1000');
+                } else {
+                    uploadObj.reset();
+                    layer.alert(data.msg);
+                }
+            },
+            onSelect: function (files)
+            {
+                uploadObj.reset();  //单个图片上传的 委曲求全的办法
+            },
+            onError: function (files, status, errMsg, pd) {
+                console.log(status);
+            }
+        });
+        $('.del-pic').on('click', function (event) {
+            var id = $(this).data('id');
+            var obj = $(this);
+            $.getJSON('/admin/beauty/delpic', {id: id}, function (res) {
+                if (res.status) {
+                    layer.alert(res.msg);
+                    obj.parents('div.pic').remove();
+                }
+            });
+            return false;
+        })
         $('form').submit(function () {
             var form = $(this);
             $.ajax({
