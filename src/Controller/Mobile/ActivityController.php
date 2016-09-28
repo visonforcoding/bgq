@@ -259,15 +259,15 @@ class ActivityController extends AppController {
                         }],
             ]);
             if ($this->request->is('post')) {
-                $user = $UserTable->get($this->user->id, [
-                    'contain' => ['Careers', 'Educations', 'Industries']
-                ]);
+//                $user = $UserTable->get($this->user->id, [
+//                    'contain' => ['Careers', 'Educations', 'Industries']
+//                ]);
                 //公司、性别、职位、邮箱、行业标签、城市、擅长业务、公司业务、教育经历、工作经历、名片
-                $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->agency_id
-                        && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
-                if(!$is_complete){
-                    return $this->Util->ajaxReturn(false, '请先去完善个人资料');
-                }
+//                $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->agency_id
+//                        && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
+//                if(!$is_complete){
+//                    return $this->Util->ajaxReturn(false, '请先去完善个人资料');
+//                }
                 $activityApply = $this->Activity->Activityapply->newEntity();
                 $data = [
                     'user_id' => $this->user->id,
@@ -395,11 +395,11 @@ class ActivityController extends AppController {
             $user = $UserTable->get($this->user->id, [
                 'contain' => ['Careers', 'Educations', 'Industries']
             ]);
-            $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->agency_id
-                    && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
-            if(!$is_complete){
-                return $this->Util->ajaxReturn(false, '请先去完善个人资料');
-            }
+//            $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->agency_id
+//                    && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
+//            if(!$is_complete){
+//                return $this->Util->ajaxReturn(false, '请先去完善个人资料');
+//            }
             $data = $this->request->data();
             $activityNeed = $ActivityNeed->newEntity();
             $industry = $ActivityNeed->patchEntity($activityNeed, $data);

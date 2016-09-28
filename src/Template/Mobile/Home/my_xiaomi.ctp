@@ -39,10 +39,10 @@
 </script>
 <?php $this->start('script') ?>
 <script>
-    window.onBackView = function(){
-        $.util.checkUserinfoStatus();
-    };
-    window.onBackView();
+//    window.onBackView = function(){
+//        $.util.checkUserinfoStatus();
+//    };
+//    window.onBackView();
 function get_xiaomi(){
     $('#content').val('');
     $.util.ajax({

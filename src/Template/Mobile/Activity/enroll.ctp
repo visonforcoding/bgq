@@ -40,10 +40,10 @@
     window.must_check = <?= $activity->must_check; ?>;
 </script>
 <script>
-    window.onBackView = function(){
-        $.util.checkUserinfoStatus();
-    };
-    window.onBackView();
+//    window.onBackView = function(){
+//        $.util.checkUserinfoStatus();
+//    };
+//    window.onBackView();
     
     $('#submit').on('tap', function () {
         $form = $('form');

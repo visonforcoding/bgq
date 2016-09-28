@@ -422,15 +422,15 @@ class HomeController extends AppController {
          */
         public function replyXiaomi() {
             if ($this->request->is('post')) {
-                $UserTable = \Cake\ORM\TableRegistry::get('user');
-                $user = $UserTable->get($this->user->id, [
-                    'contain' => ['Careers', 'Educations', 'Industries']
-                ]);
-                $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->agency_id
-                        && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
-                if(!$is_complete){
-                    return $this->Util->ajaxReturn(false, '请先去完善个人资料');
-                }
+//                $UserTable = \Cake\ORM\TableRegistry::get('user');
+//                $user = $UserTable->get($this->user->id, [
+//                    'contain' => ['Careers', 'Educations', 'Industries']
+//                ]);
+//                $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->agency_id
+//                        && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
+//                if(!$is_complete){
+//                    return $this->Util->ajaxReturn(false, '请先去完善个人资料');
+//                }
                 $user_id = $this->user->id;
                 $NeedTable = \Cake\ORM\TableRegistry::get('need');
                 $content = $this->request->data('content');
