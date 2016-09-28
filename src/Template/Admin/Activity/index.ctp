@@ -180,7 +180,7 @@
                     response += '<a title="收藏日志" href="/admin/activity/view-collect/' + rowObject.id + '" class="grid-btn "><i class="icon icon-star"></i> </a>';
 //                    response += '<a title="报名用户" href="/admin/activityapply/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-user"></i> </a>';
                     response += '<a title="赞助详情" href="/admin/sponsor/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-dollar"></i> </a>';
-                    response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(' + rowObject.id + ');"><i class="icon icon-qrcode"></i><div hidden id="code_' + rowObject.id + '" style="position:relative;top:0;"><img back_src="' + rowObject.qrcode + '" /></div> </a>';
+                    response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(' + rowObject.id + ');"><i class="icon icon-qrcode"></i><div hidden id="code_' + rowObject.id + '" style="position:relative;top:0;"><img back_src="/' + rowObject.qrcode + '" /></div> </a>';
                     return response;
                 }
 

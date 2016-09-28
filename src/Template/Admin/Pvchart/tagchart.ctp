@@ -16,8 +16,8 @@
                 <span class="input-group-addon"><span class="icon-calendar"></span></span>
                 <span class="input-group-addon">按</span>
                 <select id="choice-time-type" class="form-control" >
-                    <option value="year" selected="selected">年</option>
-                    <option value="month" >月</option>
+                    <option value="year">年</option>
+                    <option value="month" selected="selected" >月</option>
                     <option value="week">周</option>
                 </select>
             </div>
