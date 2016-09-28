@@ -6,7 +6,7 @@
                 <ul class="cur inner basicon">
                     <li class="b-dq"><span><i class="iconfont col_darkblue">&#xe66a;</i>姓 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span><div><em><?= $is_apply ? $user->user->truename : $user->truename; ?></em></div></li>
                     <li class="b-hy"><span><i class="iconfont col_yellow">&#xe684;</i>我的星座</span>
-                        <div >
+                        <div class="r_potion">
                             <em class="hid_wid">
                                 <select name="constellation" style="overflow: scroll;">
                                     <option value="">请选择</option>
