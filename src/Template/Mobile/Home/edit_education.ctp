@@ -62,8 +62,8 @@
 
             </ul>
             <div class="e_bottom_btn">
-                    <a class="deletbtn" onclick="deleteEd(this);">删除</a>
-                    <a class="savetbtn" onclick="checkForm(this);">保存</a>
+                <a class="deletbtn" onclick="deleteEd(this);">删除</a>
+                <a class="savetbtn" onclick="checkForm(this);">保存</a>
             </div>
         </form>
     </div>
@@ -74,11 +74,11 @@
             <form action="/home/save-education" method="post">
             <!--    <input type="hidden" name="id" value="<?= $education->id ?>">  -->
                 <div class="education-title">
-                    <h3 data-id="<?= $education->id ?>">
-                        <a onclick="deleteEd(this);"  class="deletbtn iconfont">&#xe67a;</a>
+                    <h3>
+                        <!--<a onclick="deleteEd(this);"  class="deletbtn iconfont">&#xe67a;</a>-->
                         教育经历<i><?= $k ?></i></span>
 
-                        <a onclick="checkForm(this);" class="savebtn fr">保存</a>
+                        <!--<a onclick="checkForm(this);" class="savebtn fr">保存</a>-->
                     </h3>
                 </div>
                 <ul class="h-info-box e-info-box">
@@ -124,6 +124,10 @@
                         </div>
                     </li>
                 </ul>
+                <div class="e_bottom_btn" data-id="<?= $education->id ?>">
+                    <a class="deletbtn" onclick="deleteEd(this);">删除</a>
+                    <a class="savetbtn" onclick="checkForm(this);">保存</a>
+                </div>
             </form>
         </div>
     <?php endforeach; ?>
