@@ -61,8 +61,8 @@ class BeautyController extends AppController {
                     ->orderDesc('vote_nums')
                     ->formatResults(function($items){
                         return $items->map(function($item) {
-                            if($item->vote){
-                                $items->vote->create_time = $items->vote->create_time->format('Y-m-d');
+                            if($item->votes){
+                                $items->votes->create_time = $items->votes->create_time->format('Y-m-d');
                             }
                             if(strlen($item->id) == 1){
                                 $item->beauty_id = '00' . $item->id;
@@ -73,19 +73,19 @@ class BeautyController extends AppController {
                         });
                     })
                     ->toArray();
-//            $now = \Cake\I18n\Time::now();
-//            $today = $now->format('Y-m-d');
-//            if($user->is_judge == 1){
-//
-//            } else {
-//                foreach($beauty as $k=>$v){
-//                    if($v->create_time == $today){
-//                        $beauty[$k]->vote = false;
-//                    } else {
-//                        $beauty[$k]->vote = true;
-//                    }
-//                }
-//            }
+            $now = \Cake\I18n\Time::now();
+            $today = $now->format('Y-m-d');
+            if($user->is_judge == 1){
+
+            } else {
+                foreach($beauty as $k=>$v){
+                    if($v->create_time == $today){
+                        $beauty[$k]->vote = false;
+                    } else {
+                        $beauty[$k]->vote = true;
+                    }
+                }
+            }
         } else {
             $beauty = $BeautyTable
                     ->find()
