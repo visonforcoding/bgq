@@ -97,6 +97,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
         'login.wx',
         'pay.wx',
         'pay.ali',
+        "event.unrefresh",
         "event.back", //后退事件
         "event.getWXCode",
         "event.invite", //短信分享
@@ -173,6 +174,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                         return JSApiInvoke(api, {imgs:imgs, index:index}, '');
                     });
                     break;
+                case "event.unrefresh":
                 case "sys.clearWebCatch":
                 case "sys.openLOC":
                 case "sys.mediaPlay":
