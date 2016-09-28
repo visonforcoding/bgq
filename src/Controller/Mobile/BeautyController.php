@@ -425,7 +425,7 @@ class BeautyController extends AppController {
                 ->contain(['Users'=>function($q){
                     return $q->where(['enabled'=>1]);
                 }])
-                ->where(['is_pass'=>1, 'beauty.id'=>$id, 'vote_nums >='=>$beauty->vote_nums])
+                ->where(['is_pass'=>1, 'vote_nums >='=>$beauty->vote_nums])
                 ->count();
         $educationType = \Cake\Core\Configure::read('educationType');
 //        debug($beauty);die;
