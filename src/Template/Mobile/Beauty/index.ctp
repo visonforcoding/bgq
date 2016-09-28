@@ -7,7 +7,7 @@
     <div class="a-banner" >
         <ul class="pic-list-container" id="imgList">
                 <!--<li><a href="#this"><img src="/mobile/images/a-banner.png"/></a></li>-->
-            <li><a href="javascript:void(0)"><img src="/upload/banner/2016-09-22/57e38e4ad7cb6.jpg"/></a></li>
+            <li><a href="javascript:void(0)"><img src="/upload/banner/2016-09-22/57e3ac3c6526d.jpg"/></a></li>
             <!--<li><a href="#this"><img src="/mobile/images/a-banner.png"/></a></li>-->
         </ul>
     </div>
