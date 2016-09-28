@@ -91,6 +91,10 @@ class BeautyController extends AppController {
                     ->find()
                     ->contain(['Users'=>function($q){
                         return $q->where(['enabled'=>1]);
+                    }, 'Votes'=>function($q)use($user_id){
+                        return $q->where(['Votes.user_id'=>$user_id]);
+                    }, 'BeautyPics'=>function($q){
+                        return $q->orderDesc('BeautyPics.create_time');
                     }])
                     ->where(['is_pass'=>1])
                     ->limit(10)
