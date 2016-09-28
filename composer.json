@@ -12,7 +12,8 @@
         "cakephp/plugin-installer": "*",
         "intervention/image": "^2.3",
         "aferrandini/phpqrcode": "1.0.1",
-        "phpoffice/phpexcel": "^1.8"
+        "phpoffice/phpexcel": "^1.8",
+        "admad/cakephp-glide": "1.*"
     },
     "require-dev": {
         "psy/psysh": "@stable",
