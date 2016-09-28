@@ -7,7 +7,7 @@
     <div class="a-banner" >
         <ul class="pic-list-container" id="imgList">
                 <!--<li><a href="#this"><img src="/mobile/images/a-banner.png"/></a></li>-->
-            <li><a href="javascript:void(0)"><img src="/upload/banner/2016-09-22/57e3ac3c6526d.jpg"/></a></li>
+            <li><a href="javascript:void(0)"><img src="<?=createImg('/upload/banner/2016-09-22/57e3ac3c6526d.jpg')?>?w=414&h=210"/></a></li>
             <!--<li><a href="#this"><img src="/mobile/images/a-banner.png"/></a></li>-->
         </ul>
     </div>
@@ -48,19 +48,14 @@
         <div class="zt_tips_box">
             <h3 class="color-items tc">规则说明</h3>
             <p class="jusitify"><strong>1.投票说明</strong><br />
-                •只有已注册并购帮的用户才能成为参赛选手。<br />
+                •只有已注册并购帮并且认证会员的用户才能成为参赛选手。<br />
                 •只有登录并购帮的用户才能投票。<br /> 
-                •投票要进行限制，一个用户24小时内只能对一个
-                选手投一票，但可以投票给多个选手，不做限制。<br />
-                •评审专家只有30票（男女各15票）的额度，每人
-                限投一票。</p>
+                •投票要进行限制，一个用户每天只能对一个选手投一票，但可以投票给多个选手，不做限制。<br />
+                •评审专家只有30票（男女各15票）的额度，每人限投一票。</p>
             <br />
             <p class="jusitify"><strong>2.评选方式</strong><br />
-                •线上投票。可以是并购帮独家投票，也可以联合
-                第三方。海选评审团投票。<br />
-                •最终评选结果由组委会根据评审团、网络票选综
-                合决定。通过线上投票(60%)+评审团投票(40%)的
-                方式评出获奖名单，选择得分排名前十的选手。
+                •线上投票。可以是并购帮独家投票，也可以联合第三方。海选评审团投票。<br />
+                •最终评选结果由组委会根据评审团、网络票选综合决定。通过线上投票(60%)+评审团投票(40%)的方式评出获奖名单，选择得分排名前十的选手。
             </p>
             <br />
             <p>

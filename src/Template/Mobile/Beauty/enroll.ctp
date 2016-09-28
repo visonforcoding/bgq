@@ -93,35 +93,14 @@
     <span style="display:none;"></span>
     <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="javascript:void(0)" class="tipsbtn bgred" id="yes">确认</a>
 </div>
-<div class="totips" hidden id="confirmbox" >
-    <h3>确定要修改资料？</h3>
-    <span>修改资料需要再次审核，请慎重考虑</span>
-    <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="javascript:void(0)" class="tipsbtn bgred" id="confirm">确认</a>
-</div>
 <div class="totips" hidden id="checkBtn">
     <h3 id="msg">请先去完善个人资料</h3>
     <span style="display:none;"></span>
     <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="/home/edit-userinfo" class="tipsbtn bgred" id="yes">去完善</a>
 </div>
-<?php if ($is_apply): ?>
-    <?php if ($user->is_pass == 0): ?>
-        <a href="javascript:void(0);" class="f-bottom" id="submit">
-            修改资料
-        </a>
-    <?php elseif ($user->is_pass == 1): ?>
-        <a href="javascript:void(0);" class="f-bottom" id="submit_confirm">
-            修改资料
-        </a>
-    <?php elseif ($user->is_pass == 2): ?>
-        <a href="javascript:void(0);" class="f-bottom" id="submit">
-            重新提交申请
-        </a>
-    <?php endif; ?>
-<?php else: ?>
-    <a href="javascript:void(0);" class="f-bottom" id="submit">
-        提交申请
-    </a>
-<?php endif; ?>
+<a href="javascript:void(0);" class="f-bottom" id="submit">
+    <?php if ($is_apply): ?>修改资料<?php else: ?>提交申请<?php endif; ?>
+</a>
 <?php $this->start('script'); ?>
 <script>
     window.onBackView = function () {
@@ -157,17 +136,6 @@
     $('#submit').on('click', function () {
         if (!check())
             return;
-        submit();
-    });
-
-    $('#submit_confirm').on('click', function () {
-        if (!check())
-            return;
-        $('#confirmbox').show();
-        $('#shadow').show();
-    });
-
-    $('#confirm').on('click', function () {
         submit();
     });
 

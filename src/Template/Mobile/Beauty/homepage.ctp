@@ -336,12 +336,16 @@
         </div>
     </div>
         <a href="/user/home-page/<?= $beauty->user->id ?>">
-            <div class="photo_type innercon mt20"><h3>投票不尽兴？想约TA吗？请猛戳这里 <i class="iconfont">&#xe667;</i></h3></div>
+            <div class="photo_type innercon mt20"><h3>投票不尽兴？想约会员吗？请戳这里 <i class="iconfont">&#xe667;</i></h3></div>
         </a>
     </div>
     <div class="h2"></div>
     <div style="height:1rem"></div>
-    <a href="javascript:void(0);" class="f-bottom" id="vote" user_id="<?= $beauty->user->id ?>">投TA一票</a>
+    <?php if($self): ?>
+        <a href="/beauty/enroll" class="f-bottom">编辑资料</a>
+    <?php else: ?>
+        <a href="javascript:void(0);" class="f-bottom" id="vote" user_id="<?= $beauty->user->id ?>">投TA一票</a>
+    <?php endif; ?>
 <?php $this->start('script') ?>
     <script type="text/javascript">
         $('.h-tab>li').on('click', function () {
