@@ -99,6 +99,19 @@ class BeautyController extends AppController {
                     ->where(['is_pass'=>1])
                     ->limit(10)
                     ->orderDesc('vote_nums')
+                    ->formatResults(function($items){
+                        return $items->map(function($item) {
+                            if($item->vote){
+                                $items->vote->create_time = $items->vote->create_time->format('Y-m-d');
+                            }
+                            if(strlen($item->id) == 1){
+                                $item->beauty_id = '00' . $item->id;
+                            } else if(strlen($items->id) == 2){
+                                $item->beauty_id = '0' . $item->id;
+                            }
+                            return $item;
+                        });
+                    })
                     ->toArray();
         }
         return $this->Util->ajaxReturn(['status'=>true, 'data'=>$beauty]);
