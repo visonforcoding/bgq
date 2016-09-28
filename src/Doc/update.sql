@@ -856,3 +856,6 @@ CREATE TABLE `beauty_pic` (
 COMMENT='选美图片表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
+
+ALTER TABLE `binggq`.`beauty`
+  ADD COLUMN `type_id` tinyint(2) unsigned NULL DEFAULT NULL COMMENT '类型id' COMMENT '类型id';
