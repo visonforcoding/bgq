@@ -1,20 +1,15 @@
 <link rel="stylesheet" type="text/css" href="/mobile/css/zt.css"/>
 <div class="wraper">
     <!--banner-->
-    <div class="a_search_box">
+<!--    <div class="a_search_box">
         <a href="/beauty/search"><i class="iconfont">&#xe618;</i></a>
-    </div>
+    </div>-->
     <div class="a-banner" >
         <ul class="pic-list-container" id="imgList">
                 <!--<li><a href="#this"><img src="/mobile/images/a-banner.png"/></a></li>-->
-            <li><a href="#this"><img src="/mobile/images/zhti.png"/></a></li>
+            <li><a href="javascript:void(0)"><img src="/upload/banner/2016-09-22/57e38e4ad7cb6.jpg"/></a></li>
             <!--<li><a href="#this"><img src="/mobile/images/a-banner.png"/></a></li>-->
         </ul>
-        <div class="yd" id="imgTab">
-            <span class="cur"></span>
-            <span></span>
-            <span></span>
-        </div>
     </div>
     <!--banner__end-->
     <!--活动介绍-->

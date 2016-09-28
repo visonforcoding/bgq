@@ -41,7 +41,7 @@
                             </em>
                             <b class="iconfont r_more">&#xe667;</b>
                         </div>
-                      
+
                     </li>
                     <li class="b-yw">
                         <span><i class="iconfont col_cyan">&#xe670;</i>参赛宣言</span>
@@ -98,6 +98,11 @@
     <span>修改资料需要再次审核，请慎重考虑</span>
     <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="javascript:void(0)" class="tipsbtn bgred" id="confirm">确认</a>
 </div>
+<div class="totips" hidden id="checkBtn">
+    <h3 id="msg">请先去完善个人资料</h3>
+    <span style="display:none;"></span>
+    <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="/home/edit-userinfo" class="tipsbtn bgred" id="yes">去完善</a>
+</div>
 <?php if ($is_apply): ?>
     <?php if ($user->is_pass == 0): ?>
         <a href="javascript:void(0);" class="f-bottom" id="submit">
@@ -119,16 +124,31 @@
 <?php endif; ?>
 <?php $this->start('script'); ?>
 <script>
+    window.onBackView = function () {
+        $.util.checkUserinfoStatus();
+    };
+    window.onBackView();
+</script>
+<script>
     function submit() {
         $.util.ajax({
             url: $('form').attr('action'),
             data: $('form').serialize(),
             func: function (res) {
-                $.util.alert(res.msg);
                 if (res.status) {
+                    $.util.alert(res.msg);
                     setTimeout(function () {
                         location.href = '/beauty/index';
                     }, 1000);
+                } else {
+                    if (res.msg.indexOf('请先去完善个人资料') != -1) {
+                        $('#msg').html(res.msg);
+                        $('#confirmbox').hide();
+                        $('#shadow').show();
+                        $('#checkBtn').show();
+                    } else {
+                        $.util.alert(res.msg);
+                    }
                 }
             }
         });
@@ -229,6 +249,7 @@
         $('#isdel').hide();
         $('#shadow').hide();
         $('#confirmbox').hide();
+        $('#checkBtn').hide();
     });
 
     function check() {

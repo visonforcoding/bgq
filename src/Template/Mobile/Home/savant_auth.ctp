@@ -75,11 +75,19 @@
                 dataType: 'json',
                 success: function (msg) {
                     if (typeof msg === 'object') {
-                        $.util.alert(msg.msg);
                         if(msg.status){
+                            $.util.alert(msg.msg);
                             setTimeout(function(){
                                 window.location.href = '/home/index';
                             }, 2000);
+                        } else {
+                            if (msg.msg.indexOf('请先去完善个人资料') != -1) {
+                                $('#msg').html(msg.msg);
+                                $('#shadow').show();
+                                $('#checkBtn').show();
+                            } else {
+                                $.util.alert(msg.msg);
+                            }
                         }
                     }
                 }
