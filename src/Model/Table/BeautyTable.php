@@ -35,8 +35,9 @@ class BeautyTable extends Table
             'className' => 'User'
         ]);
         
-        $this->hasOne('Votes', [
+        $this->hasMany('Votes', [
             'foreignKey' => 'vote_user_id',
+            'bindingKey' => 'user_id',
             'joinType' => 'LEFT',
             'className' => 'Vote'
         ]);

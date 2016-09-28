@@ -52,7 +52,7 @@ class BeautyController extends AppController {
                     ->contain(['Users'=>function($q){
                         return $q->where(['enabled'=>1]);
                     }, 'Votes'=>function($q)use($user_id){
-                        return $q->where(['Votes.user_id'=>$user_id]);
+                        return $q->where(['Votes.user_id'=>$user_id])->orderDesc('Votes.create_time');
                     }, 'BeautyPics'=>function($q){
                         return $q->orderDesc('BeautyPics.create_time');
                     }])
@@ -61,9 +61,6 @@ class BeautyController extends AppController {
                     ->orderDesc('vote_nums')
                     ->formatResults(function($items){
                         return $items->map(function($item) {
-                            if($item->vote){
-                                $item->vote->create_time = $item->vote->create_time->format('Y-m-d');
-                            }
                             if(strlen($item->id) == 1){
                                 $item->beauty_id = '00' . $item->id;
                             } else if(strlen($items->id) == 2){
@@ -73,16 +70,24 @@ class BeautyController extends AppController {
                         });
                     })
                     ->toArray();
+//            debug($beauty);die;
             $now = \Cake\I18n\Time::now();
             $today = $now->format('Y-m-d');
             if($user->is_judge == 1){
-
+                foreach($beauty as $k=>$v){
+                    if($v->votes){
+                        $beauty[$k]->vote = true;
+                    }
+                }
             } else {
                 foreach($beauty as $k=>$v){
-                    if($v->create_time == $today){
-                        $beauty[$k]->vote = false;
-                    } else {
-                        $beauty[$k]->vote = true;
+                    if($v->votes){
+                        $v->votes[0]->create_time = $v->votes[0]->create_time->format('Y-m-d');
+                        if($v->votes[0]->create_time == $today){
+                            $beauty[$k]->vote = true;
+                        } else {
+                            $beauty[$k]->vote = false;
+                        }
                     }
                 }
             }
@@ -91,8 +96,6 @@ class BeautyController extends AppController {
                     ->find()
                     ->contain(['Users'=>function($q){
                         return $q->where(['enabled'=>1]);
-                    }, 'Votes'=>function($q)use($user_id){
-                        return $q->where(['Votes.user_id'=>$user_id]);
                     }, 'BeautyPics'=>function($q){
                         return $q->orderDesc('BeautyPics.create_time');
                     }])
@@ -133,7 +136,55 @@ class BeautyController extends AppController {
     public function getSearchRes($page){
         $keyword = $this->request->data('keyword');
         $BeautyTable = \Cake\ORM\TableRegistry::get('beauty');
-        $user = $BeautyTable
+        $UserTable = \Cake\ORM\TableRegistry::get('user');
+        $user_id = '';
+        if($this->user){
+            $user_id = $this->user->id;
+            $user = $UserTable->get($user_id);
+            $res = $BeautyTable
+                    ->find()
+                    ->contain(['Users'=>function($q)use($keyword){
+                        return $q->where(['Users.truename like'=>"%$keyword%", 'enabled'=>1]);
+                    }, 'Votes'=>function($q)use($user_id){
+                        return $q->where(['Votes.user_id'=>$user_id])->orderDesc('Votes.create_time');
+                    }, 'BeautyPics'=>function($q){
+                        return $q->orderDesc('BeautyPics.create_time');
+                    }])
+                    ->where(['is_pass'=>1])
+                    ->page($page, $this->limit)
+                    ->formatResults(function($items){
+                        return $items->map(function($item) {
+                            if(strlen($item->id) == 1){
+                                $item->beauty_id = '00' . $item->id;
+                            } else if(strlen($items->id) == 2){
+                                $item->beauty_id = '0' . $item->id;
+                            }
+                            return $item;
+                        });
+                    })
+                    ->toArray();
+            $now = \Cake\I18n\Time::now();
+            $today = $now->format('Y-m-d');
+            if($user->is_judge == 1){
+                foreach($res as $k=>$v){
+                    if($v->votes){
+                        $res[$k]->vote = true;
+                    }
+                }
+            } else {
+                foreach($res as $k=>$v){
+                    if($v->votes){
+                        $v->votes[0]->create_time = $v->votes[0]->create_time->format('Y-m-d');
+                        if($v->votes[0]->create_time == $today){
+                            $res[$k]->vote = true;
+                        } else {
+                            $res[$k]->vote = false;
+                        }
+                    }
+                }
+            }
+        } else {
+            $res = $BeautyTable
                     ->find()
                     ->contain(['Users'=>function($q)use($keyword){
                         return $q->where(['Users.truename like'=>"%$keyword%", 'enabled'=>1]);
@@ -144,9 +195,6 @@ class BeautyController extends AppController {
                     ->page($page, $this->limit)
                     ->formatResults(function($items){
                         return $items->map(function($item) {
-                            if($item->vote){
-                                $items->vote->create_time = $items->vote->create_time->format('Y-m-d');
-                            }
                             if(strlen($item->id) == 1){
                                 $item->beauty_id = '00' . $item->id;
                             } else if(strlen($items->id) == 2){
@@ -156,9 +204,10 @@ class BeautyController extends AppController {
                         });
                     })
                     ->toArray();
-        if($user){
-            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$user]);
-        } else if($user == []){
+        }
+        if($res){
+            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$res]);
+        } else if($res == []){
             return $this->Util->ajaxReturn(false, '暂无搜索结果');
         } else {
             return $this->Util->ajaxReturn(false, '系统错误');
@@ -325,13 +374,21 @@ class BeautyController extends AppController {
     }
     
     /**
-     * ajax获取女神前十
+     * ajax按性别获取获取前10
+     * @param int $gender 性别 1：男；2：女
      */
-    public function getFemaleBeauty(){
+    public function getGenderBeauty($gender=null){
         $BeautyTable = \Cake\ORM\TableRegistry::get('beauty');
-        $female = $BeautyTable->find()
-                ->contain(['Users'=>function($q){
-                    return $q->where(['enabled'=>1, 'gender'=>2]);
+        $UserTable = \Cake\ORM\TableRegistry::get('user');
+        $user_id = '';
+        if($this->user){
+            $user_id = $this->user->id;
+            $user = $UserTable->get($user_id);
+            $gender = $BeautyTable->find()
+                ->contain(['Users'=>function($q)use($gender){
+                    return $q->where(['enabled'=>1, 'gender'=>$gender]);
+                }, 'Votes'=>function($q)use($user_id){
+                    return $q->where(['Votes.user_id'=>$user_id])->orderDesc('Votes.create_time');
                 }, 'BeautyPics'=>function($q){
                     return $q->orderDesc('BeautyPics.create_time');
                 }])
@@ -340,9 +397,6 @@ class BeautyController extends AppController {
                 ->orderDesc('vote_nums')
                 ->formatResults(function($items){
                     return $items->map(function($item) {
-                        if($item->vote){
-                            $items->vote->create_time = $items->vote->create_time->format('Y-m-d');
-                        }
                         if(strlen($item->id) == 1){
                             $item->beauty_id = '00' . $item->id;
                         } else if(strlen($items->id) == 2){
@@ -352,21 +406,28 @@ class BeautyController extends AppController {
                     });
                 })
                 ->toArray();
-        if($female){
-            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$female]);
-        } else if($female == []){
-            return $this->Util->ajaxReturn(false, '暂无女神');
+            $now = \Cake\I18n\Time::now();
+            $today = $now->format('Y-m-d');
+            if($user->is_judge == 1){
+                foreach($gender as $k=>$v){
+                    if($v->votes){
+                        $gender[$k]->vote = true;
+                    }
+                }
+            } else {
+                foreach($gender as $k=>$v){
+                    if($v->votes){
+                        $v->votes[0]->create_time = $v->votes[0]->create_time->format('Y-m-d');
+                        if($v->votes[0]->create_time == $today){
+                            $gender[$k]->vote = true;
+                        } else {
+                            $gender[$k]->vote = false;
+                        }
+                    }
+                }
+            }
         } else {
-            return $this->Util->ajaxReturn(false, '系统错误');
-        }
-    }
-    
-    /**
-     * ajax获取男神前10
-     */
-    public function getMaleBeauty(){
-        $BeautyTable = \Cake\ORM\TableRegistry::get('beauty');
-        $male = $BeautyTable->find()
+            $gender = $BeautyTable->find()
                 ->contain(['Users'=>function($q){
                     return $q->where(['enabled'=>1, 'gender'=>1]);
                 }, 'BeautyPics'=>function($q){
@@ -377,9 +438,6 @@ class BeautyController extends AppController {
                 ->orderDesc('vote_nums')
                 ->formatResults(function($items){
                     return $items->map(function($item) {
-                        if($item->vote){
-                            $items->vote->create_time = $items->vote->create_time->format('Y-m-d');
-                        }
                         if(strlen($item->id) == 1){
                             $item->beauty_id = '00' . $item->id;
                         } else if(strlen($items->id) == 2){
@@ -389,9 +447,10 @@ class BeautyController extends AppController {
                     });
                 })
                 ->toArray();
-        if($male){
-            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$male]);
-        } else if($male == []){
+        }
+        if($gender){
+            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$gender]);
+        } else if($gender == []){
             return $this->Util->ajaxReturn(false, '暂无男神');
         } else {
             return $this->Util->ajaxReturn(false, '系统错误');
@@ -403,17 +462,7 @@ class BeautyController extends AppController {
      */
     public function homepage($id=null){
         $self = false;
-        if($this->user){
-            if($id ==$this->user->id){
-                $self = true;
-            }
-        }
-        if(empty($id)){
-            //自己看自己的
-            $this->handCheckLogin();
-            $id = $this->user->id;
-            $self = true;
-        }
+        
         $BeautyTable = \Cake\ORM\TableRegistry::get('beauty');
         $beauty = $BeautyTable->find()
                 ->contain(['Users'=>function($q){
@@ -434,6 +483,11 @@ class BeautyController extends AppController {
                     });
                 })
                 ->first();
+        if($this->user){
+            if($beauty->user->id == $this->user->id){
+                $self = true;
+            }
+        }
         $rank = $BeautyTable->find()
                 ->contain(['Users'=>function($q){
                     return $q->where(['enabled'=>1]);
@@ -441,9 +495,8 @@ class BeautyController extends AppController {
                 ->where(['is_pass'=>1, 'vote_nums >='=>$beauty->vote_nums])
                 ->count();
         $educationType = \Cake\Core\Configure::read('educationType');
-//        debug($beauty);die;
         $this->set([
-            'pageTitle' => $beauty->user->truename . '的选美主页',
+            'pageTitle' => $beauty->user->truename . '的参选主页',
             'beauty' => $beauty,
             'rank' => $rank,
             'self' => $self,
@@ -453,7 +506,7 @@ class BeautyController extends AppController {
     
     /**
      * 微信上传图片
-     * @param int $id 微信上传图片id
+     * @param int $id 微信上传图片media_id
      */
     public function getWxPic($id=''){
         $this->handCheckLogin();
@@ -515,6 +568,10 @@ class BeautyController extends AppController {
         }
     }
     
+    /**
+     * 删除照片
+     * @param int $id 照片id
+     */
     public function delPic($id=null){
         if(empty($id)){
             return $this->Util->ajaxReturn(false, '请选择一张照片');
