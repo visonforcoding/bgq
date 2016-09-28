@@ -30,14 +30,16 @@ p{font-size:14px;line-height: 24px;}
 .zt_tips_box::-webkit-scrollbar{display: none;}
 .zt_r_closed{width:24px;height:24px;background: #E01A48;border:2px #fff solid;line-height: 18px;text-align: center;color:#fff;position:absolute;right:-8px;border-radius:50%;top:-8px;box-shadow: 0 1px 1px rgba(0,0,0,.5);font-size:22px;font-weight: bold;}
 /*投票*/
-.z_tab_head{width:100%;position:relative;border-bottom:1px #e5e5e5 solid;}
+
+.z_tab_head{width:100%;position:relative;border-bottom:1px #e5e5e5 solid;background: #fff;}
+.z_tab_head_fix{position:fixed;left:0;top:0;z-index: 3;transition: all .6s ease-in; }
 .z_tab_head ul{overflow:hidden;}
-.z_tab_head li{height:36px;float:left;width:50%;text-align: center;line-height: 36px;font-size: 15px;}
+.z_tab_head li{height:36px;float:left;width:33.3%;text-align: center;line-height: 36px;font-size: 15px;}
 .z_tab_head li.active{color:#e01a48;transition: all .6s ease;}
-.z_tab_head .z_line{position: absolute;bottom:-1px;left:0;width:50%;height:2px;background: #e01a48;transition:left .6s ease;}
+.z_tab_head .z_line{position: absolute;bottom:-1px;left:0;width:33.3%;height:2px;background: #e01a48;transition:left .6s ease;}
 .z_tab_con{width:100%;overflow:hidden;}
-.z_tab_con section{float:left;width:50%;}
-.z_tab_box{width:200%;position:relative;left:0;transition:all .6s ease;}
+.z_tab_con section{float:left;width:33.333%;}
+.z_tab_box{width:300%;position:relative;left:0;transition:all .6s ease;}
 .photo_album .p_title,.photo_type{height:.92rem;line-height: .92rem;color:#808080;}
 .p_title i,.photo_type i{color:#2baa3f;margin-right: .2rem;font-size:.3rem;}
 .photo_type i{color:#000;}
