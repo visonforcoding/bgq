@@ -14,9 +14,9 @@
         <form action="" method="post">
         <div class="education-title">
             <h3>
-                <a onclick="deleteEd(this);" class="deletbtn iconfont">&#xe67a;</a>
-                工作经历<i></i></span>
-                <a onclick="checkForm(this);" class="savetbtn fr">保存</a>
+                <!-- <a onclick="deleteEd(this);" class="deletbtn iconfont">&#xe67a;</a> -->
+                工作经历
+                <!-- <a onclick="checkForm(this);" class="savetbtn fr">保存</a> -->
             </h3>
         </div>
         <ul class="h-info-box e-info-box">
@@ -49,6 +49,10 @@
                 <textarea name="descb"></textarea>
             </li>
         </ul>
+         <div class="e_bottom_btn">
+            <a class="deletbtn" onclick="deleteEd(this);">删除</a>
+            <a class="savetbtn" onclick="checkForm(this);">保存</a>
+          </div>
         </form>
     </div>
     <?php $key=1; foreach($careers as $career):?>
