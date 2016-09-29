@@ -22,7 +22,7 @@
             </li>
             <li class="no-right-ico">
                 <a href="javascript:void(0)">
-                    <span><i class="color-items">*</i>公司：</span>
+                    <span><i class="color-items">*</i>公司<i class="color-items"><?= $user->company ? '' : '(未完善)' ?></i>：</span>
                     <div>
                         <input type="company" name="company" value="<?= $user->company ?>" placeholder="请填写公司" />
                     </div>
@@ -43,7 +43,7 @@
             </li>
             <li class="no-right-ico">
                 <a href="javascript:void(0)">
-                    <span><i class="color-items">*</i>部门职务：</span>
+                    <span><i class="color-items">*</i>部门职务<i class="color-items"><?= $user->position ? '' : '(未完善)' ?></i>：</span>
                     <div >
                         <input type="position" name="position" value="<?= $user->position ?>" placeholder="请填写部门职务" />
                     </div>
@@ -51,7 +51,7 @@
             </li>
             <li class="no-right-ico">
                 <a href="javascript:void(0)">
-                    <span><i class="color-items">*</i>邮箱：</span>
+                    <span><i class="color-items">*</i>邮箱<i class="color-items"><?= $user->email ? '' : '(未完善)' ?></i>：</span>
                     <div>
                         <input type="email" name="email" value="<?= $user->email ?>" placeholder="请填写邮箱" />
                     </div>
@@ -59,9 +59,9 @@
             </li>
             <li>
                 <a href="/home/edit-card">
-                    <span><i class="color-items">*</i>我的名片：</span>
+                    <span id="card"><i class="color-items">*</i>我的名片<i class="color-items"><?= $user->card_path ? '' : '(未完善)' ?></i>：</span>
                     <div>
-                        <span class="mcard"><img src="<?= $user->card_path ?>" id="card" /></span>
+                        <span class="mcard"><img src="<?= $user->card_path ?>" /></span>
                     </div>
                 </a>
             </li>
@@ -86,53 +86,44 @@
             </ul>-->
         <ul class="h-info-box e-info-box max_width">
             <li>
-                <a href="/home/edit-industries">
-                    <span><i class="color-items">*</i>行业：</span>
+                <a href="/home/edit-agencies">
+                    <span id="agency"><i class="color-items">*</i>机构<i class="color-items"><?= $user->agency ? '' : '(未完善)' ?></i>：</span>
                     <div>
-                        <span id="industry"></span>
+                        <span></span>
                     </div>
                 </a>
             </li>
             <li>
-                <a href="/home/edit-agencies">
-                    <span><i class="color-items">*</i>机构：</span>
+                <a href="/home/edit-industries">
+                    <span id="industry"><i class="color-items">*</i>业务<i class="color-items"><?= $user->industries ? '' : '(未完善)' ?></i>：</span>
                     <div>
-                        <span id="agency"></span>
+                        <span></span>
                     </div>
                 </a>
             </li>
             <li>
                 <a href="/home/edit-city">
-                    <span><i class="color-items">*</i>所在地：</span>
+                    <span id="city"><i class="color-items">*</i>所在地<i class="color-items"><?= $user->city ? '' : '(未完善)' ?></i>：</span>
                     <div>
-                        <span id="city">
-                            <?php if (!$user->city): ?>
-                                未完善
-                            <?php endif; ?>
+                        <span>
                         </span>
                     </div>
                 </a>
             </li>
             <li>
                 <a href="/home/my-business">
-                    <span><i class="color-items">*</i>擅长业务：</span>
+                    <span id="goodat"><i class="color-items">*</i>擅长业务<i class="color-items"><?= $user->goodat ? '' : '(未完善)' ?></i>：</span>
                     <div>
-                        <span id="goodat">
-                            <?php if (!$user->goodat): ?>
-                                未完善
-                            <?php endif; ?>
+                        <span>
                         </span>
                     </div>
                 </a>
             </li>
             <li>
                 <a href="/home/edit-company-business">
-                    <span><i class="color-items">*</i>公司业务：</span>
+                    <span id="gsyw"><i class="color-items">*</i>公司业务<i class="color-items"><?= $user->gsyw ? '' : '(未完善)' ?></i>：</span>
                     <div>
-                        <span id="gsyw">
-                            <?php if (!$user->gsyw): ?>
-                                未完善
-                            <?php endif; ?>
+                        <span>
                         </span>
                     </div>
                 </a>
@@ -145,36 +136,27 @@
         <ul class="h-info-box e-info-box max_width">
             <li>
                 <a href="/home/edit-education">
-                    <span>教育经历：</span>
+                    <span id="educations">教育经历<i class="color-items"><?= $user->educations ? '' : '(未完善)' ?></i>：</span>
                     <div>
-                        <span id="educations">
-                            <?php if (!$user->educations): ?>
-                                未完善(选填)
-                            <?php endif; ?>
+                        <span>
                         </span>
                     </div>
                 </a>
             </li>
             <li>
                 <a href="/home/edit-work">
-                    <span>工作经历：</span>
+                    <span id="careers">工作经历<i class="color-items"><?= $user->careers ? '' : '(未完善)' ?></i>：</span>
                     <div>
-                        <span id="careers">
-                            <?php if (!$user->careers): ?>
-                                未完善（选填）
-                            <?php endif; ?>
+                        <span>
                         </span>
                     </div>
                 </a>
             </li>
             <li class="nobottom">
                 <a href="/home/edit-mark">
-                    <span>个人标签：</span>
+                    <span id="grbq">个人标签<i class="color-items"><?= $user->grbq ? '' : '(未完善)' ?></i>：</span>
                     <div>
-                        <span id="grbq">
-                            <?php if (!$user->grbq): ?>
-                                未完善(选填)
-                            <?php endif; ?>
+                        <span>
                         </span>
                     </div>
                 </a>
@@ -249,15 +231,68 @@
             url: "/home/userinfo-status",
             success: function (res) {
                 if (res.status) {
-                    $('#city').html(res.data.city);
-                    $('#goodat').html(res.data.goodat);
-                    $('#gsyw').html(res.data.gsyw);
-                    $('#educations').html(res.data.educations);
-                    $('#careers').html(res.data.careers);
-                    $('#grbq').html(res.data.grbq);
-                    $('#industry').html(res.data.industry);
-                    $('#agency').html(res.data.agency);
-                    $('#card').attr('src', res.data.card_path);
+                    if(res.data.city){
+                        $('#city').find('i').eq('1').html('');
+                    } else {
+                        $('#city').find('i').eq('1').html('(未完善)');
+                    }
+                    $('#city').next('div').find('span').html(res.data.city);
+                    
+                    if(res.data.goodat){
+                        $('#goodat').find('i').eq('1').html('');
+                    } else {
+                        $('#goodat').find('i').eq('1').html('(未完善)');
+                    }
+                    $('#goodat').next('div').find('span').html(res.data.goodat);
+                    
+                    if(res.data.gsyw){
+                        $('#gsyw').find('i').eq('1').html('');
+                    } else {
+                        $('#gsyw').find('i').eq('1').html('(未完善)');
+                    }
+                    $('#gsyw').next('div').find('span').html(res.data.gsyw);
+                    
+                    if(res.data.gsyw){
+                        $('#gsyw').find('i').eq('1').html('');
+                    } else {
+                        $('#gsyw').find('i').eq('1').html('(未完善)(选填)');
+                    }
+                    $('#educations').next('div').find('span').html(res.data.educations);
+                    
+                    if(res.data.gsyw){
+                        $('#gsyw').find('i').eq('1').html('');
+                    } else {
+                        $('#gsyw').find('i').eq('1').html('(未完善)(选填)');
+                    }
+                    $('#careers').next('div').find('span').html(res.data.careers);
+                    
+                    if(res.data.gsyw){
+                        $('#gsyw').find('i').eq('1').html('');
+                    } else {
+                        $('#gsyw').find('i').eq('1').html('(未完善)(选填)');
+                    }
+                    $('#grbq').next('div').find('span').html(res.data.grbq);
+                    
+                    if(res.data.industry){
+                        $('#industry').find('i').eq('1').html('');
+                    } else {
+                        $('#industry').find('i').eq('1').html('(未完善)');
+                    }
+                    $('#industry').next('div').find('span').html(res.data.industry);
+                    
+                    if(res.data.agency){
+                        $('#agency').find('i').eq('1').html('');
+                    } else {
+                        $('#agency').find('i').eq('1').html('(未完善)');
+                    }
+                    $('#agency').next('div').find('span').html(res.data.agency);
+                    
+                    if(res.data.card_path){
+                        $('#card').find('i').eq('1').html('');
+                    } else {
+                        $('#card').find('i').eq('1').html('(未完善)');
+                    }
+                    $('#card').next('div').find('span').attr('src', res.data.card_path);
                 } else {
                     $.util.alert(res.msg);
                 }

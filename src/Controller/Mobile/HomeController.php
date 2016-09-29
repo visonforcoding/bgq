@@ -980,7 +980,7 @@ class HomeController extends AppController {
     public function editUserinfo() {
         $user_id = $this->user->id;
         $user = $this->User->get($user_id, [
-            'contain' => ['Educations', 'Careers']
+            'contain' => ['Educations', 'Careers', 'Industries', 'Agencies']
         ]);
         if ($this->request->is('post')) {
             $data['company'] = $this->request->data('company');
@@ -1689,21 +1689,21 @@ class HomeController extends AppController {
         ]);
         $data = [];
         if($user){
-            $data['city'] = $user->city ? $user->city : '未完善';
-            $data['gsyw'] = $user->gsyw ? $user->gsyw : '未完善';
-            $data['goodat'] = $user->goodat ? $user->goodat : '未完善';
-            $data['agency'] = $user->agency ? $user->agency->name : '未完善';
+            $data['city'] = $user->city ? $user->city : '';
+            $data['gsyw'] = $user->gsyw ? $user->gsyw : '';
+            $data['goodat'] = $user->goodat ? $user->goodat : '';
+            $data['agency'] = $user->agency ? $user->agency->name : '';
             $industry = [];
             if($user->industries){
                 foreach($user->industries as $k=>$v){
                     $industry[] = $v->name;
                 }
             }
-            $data['industry'] = $industry ? implode('、', $industry) : '未完善';
-            $data['educations'] = $user->educations ? $user->educations['0']->school : '未完善（选填）';
-            $data['careers'] = $user->careers ? $user->careers['0']->company : '未完善（选填）';
-            $data['grbq'] = $user->grbq ? implode('、', unserialize($user->grbq)) : '未完善（选填）';
-            $data['card_path'] = $user->card_path;
+            $data['industry'] = $industry ? implode('、', $industry) : '';
+            $data['educations'] = $user->educations ? $user->educations['0']->school : '';
+            $data['careers'] = $user->careers ? $user->careers['0']->company : '';
+            $data['grbq'] = $user->grbq ? implode('、', unserialize($user->grbq)) : '';
+            $data['card_path'] = $user->card_path ? $user->card_path : '';
             return $this->Util->ajaxReturn(['status'=>true, 'data'=>$data]);
         } else {
             return $this->Util->ajaxReturn(false, '系统错误');
