@@ -859,3 +859,5 @@ ENGINE=InnoDB;
 
 ALTER TABLE `binggq`.`beauty`
   ADD COLUMN `type_id` tinyint(2) unsigned NULL DEFAULT NULL COMMENT '类型id' COMMENT '类型id';
+
+ALTER TABLE `activity` ADD COLUMN `apply_start_time` INT(10) NOT NULL DEFAULT 0 COMMENT '活动开始时间';
