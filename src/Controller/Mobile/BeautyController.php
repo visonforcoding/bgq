@@ -504,6 +504,7 @@ class BeautyController extends AppController {
                     });
                 })
                 ->first();
+//        debug($beauty);die;
         if($this->user){
             if($beauty->user->id == $this->user->id){
                 $self = true;
