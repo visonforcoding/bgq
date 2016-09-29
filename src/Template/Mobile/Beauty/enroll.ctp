@@ -118,7 +118,7 @@
 <?php $this->start('script'); ?>
 <script>
     window.shareConfig.link = 'http://m.chinamatop.com/beauty/index?share=1';
-    window.shareConfig.title = '评选活动';
+    window.shareConfig.title = '并购菁英评选';
     var share_desc = '你的真正优秀，请让众所周知！！！“寻找菁英代言人”活动，请你来为并购帮代言，成为并购帮的响亮会员和专家智库！';
     share_desc && (window.shareConfig.desc = share_desc);
     LEMON.show.shareIco();
