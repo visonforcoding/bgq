@@ -403,6 +403,8 @@
         window.shareConfig.desc = '公司：<?= $user->company ?>\n\r职位：<?= $user->position ?>\n\r点击查看更多';
         LEMON.show.shareIco();
     })();
+    
+    
 </script>
 <script>
     setTimeout(function () {
@@ -422,6 +424,7 @@
 
     $(function () {
         $('#follow_btn').on('click', function () {
+            var user_follow = $.util.getCookie('user_follow');
             //关注
             $.util.ajax({
                 url: '/user/follow',
@@ -431,10 +434,18 @@
                     if (res.status) {
                         if (res.msg.indexOf('取消关注') != '') {
                             $('#follow_btn').html('<i class="iconfont">&#xe614;</i>取消关注');
-//                            $('#follow_btn').addClass('focusgray');
+                            if(user_follow){
+                                $.util.setCookie('user_follow', user_follow+'a'+<?= $user->id ?>, '60');
+                            } else {
+                                $.util.setCookie('user_follow', 'a'+<?= $user->id ?>+',', '60');
+                            }
                         } else {
                             $('#follow_btn').html('<i class="iconfont">&#xe614;</i>加关注');
-//                            $('#follow_btn').removeClass('focusgray');
+                            if(user_follow){
+                                $.util.setCookie('user_follow', user_follow+'d'+<?= $user->id ?>, '60');
+                            } else {
+                                $.util.setCookie('user_follow', 'd'+<?= $user->id ?>+',', '60');
+                            }
                         }
                     }
                 }

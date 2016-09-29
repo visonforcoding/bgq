@@ -103,18 +103,13 @@
         return html;
     }
     
-    window.onActiveView = function(){
-        page = 2;
-        window.holdLoad = false;
-        $.getJSON('/news/get-more-news/1',function(res){
-            if(res.status){
-                $('#news').html('');
-                var html = dealData(res.data);
-                $('#news').append(html);
-            }
-        });
-    };
-    window.onActiveView();
+    $.getJSON('/news/get-more-news/1',function(res){
+        if(res.status){
+            $('#news').html('');
+            var html = dealData(res.data);
+            $('#news').append(html);
+        }
+    });
 
     
     setTimeout(function(){

@@ -111,6 +111,34 @@
     }
 </script>
 <script>
+    window.onBackView = function(){
+        var user_follow = $.util.getCookie('user_follow');
+        if(user_follow){
+            setFollow(user_follow);
+            $.util.setCookie('user_follow', '');
+        }
+    };
+    window.onActiveView = window.onBackView;
+    
+    function setFollow(str){
+        var tmp = str.split(',');
+        for(var i=0; i< tmp.length;i++){
+            if(!tmp[i]) continue;
+            // 检查id前缀，添加取消不同处理
+            if(tmp[i].indexOf('a') === 0){
+                var id = tmp[i].replace('a', '');
+                var obj = $('[user_id="'+id+'"]');
+                obj.removeClass('color-items').addClass('noTap').find('span.msg').html('已关注');
+            }           
+            else if(tmp[i].indexOf('d') === 0){
+                var id = tmp[i].replace('d', '');
+                var obj = $('[user_id="'+id+'"]');
+                obj.addClass('color-items').removeClass('noTap').find('span.msg').html('加关注');
+                obj.attr('id', 'focus_'+id);
+            }
+        }
+    }
+    
     var page = 2;
     window.hideRelease = false;
     $(window).on("scroll", function () {
@@ -122,27 +150,22 @@
         }
     });
 
-    window.onActiveView = function () {
-        page = 2;
-        window.holdLoad = false;
-        $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
-            d.id = d.id ? d.id : '';
-            d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
-            //        d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
-            d.city = '';
-            var subject = d.subjects.length ? d.subjects[0] : '';
-            if (window.user_id == d.id) {
-                d.subjects = subject ? '<a href="/meet/subject/' + subject.id + '"><i class="iconfont">&#xe67c;</i>' + subject.title + '</a>' : '';
-            } else {
-                d.subjects = subject ? '<a href="javascript:$.util.checkLogin(\'/meet/subject-detail/' + subject.id + '/#index\')"><i class="iconfont">&#xe67c;</i>' + subject.title + '</a>' : '';
-            }
-            d.focus_msg = d.followers.length ? '已关注' : '加关注';
-            d.focus_class = d.followers.length ? '' : 'color-items';
-            d.focus_id_str = d.followers.length ? '' : 'id="focus_'+ d.id +'"';
-            return d;
-        });
-    };
-    window.onActiveView();
+    $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
+        d.id = d.id ? d.id : '';
+        d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
+        //        d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
+        d.city = '';
+        var subject = d.subjects.length ? d.subjects[0] : '';
+        if (window.user_id == d.id) {
+            d.subjects = subject ? '<a href="/meet/subject/' + subject.id + '"><i class="iconfont">&#xe67c;</i>' + subject.title + '</a>' : '';
+        } else {
+            d.subjects = subject ? '<a href="javascript:$.util.checkLogin(\'/meet/subject-detail/' + subject.id + '/#index\')"><i class="iconfont">&#xe67c;</i>' + subject.title + '</a>' : '';
+        }
+        d.focus_msg = d.followers.length ? '已关注' : '加关注';
+        d.focus_class = d.followers.length ? '' : 'color-items';
+        d.focus_id_str = d.followers.length ? '' : 'id="focus_'+ d.id +'"';
+        return d;
+    });
 
     
     setTimeout(function () {
