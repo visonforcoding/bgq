@@ -3,7 +3,7 @@
     <div class='h-news-search'>
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe618;</a>
         <form action="/beauty/get-search-res/1" method="post" >
-            <h1><input type="text" name="keyword" placeholder="请输入关键词"></h1>
+            <h1><input type="text" name="keyword" placeholder="用户名"></h1>
         </form>
         <div class="h-regiser" id="doSearch">搜 索</div>
     </div>
