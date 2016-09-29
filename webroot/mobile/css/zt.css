@@ -33,7 +33,7 @@ p{font-size:14px;line-height: 24px;}
 /*投票*/
 
 .z_tab_head{width:100%;position:relative;border-bottom:1px #e5e5e5 solid;background: #fff;}
-.z_tab_head_fix{position:fixed;left:0;top:0;z-index: 3;transition: all .6s ease-in; }
+.z_tab_head_fix{position:fixed;left:0;top:0;z-index: 3; }
 .z_tab_head ul{overflow:hidden;}
 .z_tab_head li{height:36px;float:left;width:33.3%;text-align: center;line-height: 36px;font-size: 15px;}
 .z_tab_head li.active{color:#e01a48;transition: all .6s ease;}
