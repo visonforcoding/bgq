@@ -46,7 +46,9 @@
                         colNames:
                                 ['ptag', '描述', '添加时间', '修改时间', '操作'],
                         colModel: [
-                            {name: 'ptag', editable: true, align: 'center'},
+                            {name: 'ptag', editable: true, align: 'center', formatter: function (cell, opt, obj) {
+                                    return '<a href="/admin/pvchart/tagchart/' + cell + '">' + cell + '</a>';
+                                }},
                             {name: 'descb', editable: true, align: 'center'},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
@@ -74,7 +76,6 @@
                         },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
                 });
-
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
