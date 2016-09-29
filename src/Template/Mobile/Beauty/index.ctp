@@ -1,9 +1,9 @@
 <link rel="stylesheet" type="text/css" href="/mobile/css/zt.css"/>
 <div class="wraper">
     <!--banner-->
-    <!--    <div class="a_search_box">
-            <a href="/beauty/search"><i class="iconfont">&#xe618;</i></a>
-        </div>-->
+    <div class="a_search_box">
+        <a href="/beauty/search"><i class="iconfont">&#xe618;</i></a>
+    </div>
     <div class="a-banner" >
         <ul class="pic-list-container" id="imgList">
                 <!--<li><a href="#this"><img src="/mobile/images/a-banner.png"/></a></li>-->
