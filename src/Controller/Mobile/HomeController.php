@@ -855,7 +855,7 @@ class HomeController extends AppController {
             $user = $UserTable->get($data['reply_id']);
             $me = $UserTable->get($user_id);
             $this->loadComponent('Push');
-            $this->Push->sendAlias($user->user_token, $me->truename.'给你发了一条消息', $data['content'], $data['content'], 'BGB', true, $extra);
+            $this->Push->sendAlias($user->user_token, $me->truename.'给你发了一条消息', $data['content'], $me->truename.'给你发了一条消息', 'BGB', true, $extra);
             return $this->Util->ajaxReturn(true, '发送成功');
         } else {
             return $this->Util->ajaxReturn(false, '系统错误');
