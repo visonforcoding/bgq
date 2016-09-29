@@ -20,7 +20,8 @@
         </div>
         <div class='z_top_con p20 bd2 bd1'>
             <div class="content_inner">
-                <p>选美大赛是由美女和媒体联合，帮助美女提升知名度，带动美丽产业发展的一种娱乐活动。选美自古就有，广泛存在于宫庭之中。选美大赛是由美女和媒体联合参与，帮助美女提升知名度，带动美丽产业发展的一种娱乐活动。
+                <p>【并购帮】是专注并购领域的产业与金融菁英的服务平台 ，APP涵盖并购领域的顶尖人才的精准社交、并购培训、以及并购资讯等服务 。<br />
+       你的真正优秀，请让众所周知！！！ “寻找菁英代言人”活动，请你来为并购帮代言，成为并购帮的响亮会员和专家智库！ 
                 </p></div>
         </div>
     </div>
@@ -44,13 +45,13 @@
             $('.z_line').css('left', index * 33.33 + '%');
             $('.z_tab_box').css({'left': -index * 100 + '%'});
             $('.z_tab_con').css({'height': hei + 'px', 'min-height': minHeight});
-            if (document.scrollTop > tabheight)
-                window.scrollTo(0, tabheight);
+//            if (document.scrollTop > tabheight)
+//                window.scrollTo(0, tabheight);
         });
         //tab选项卡固定
         $(window).on('scroll', function () {
             var scrollTop = document.body.scrollTop;
-            if (scrollTop >= tabheight) {
+            if (scrollTop >= tabheight-10) {
                 $('.z_tab_head').addClass('z_tab_head_fix');
             } else {
                 $('.z_tab_head').removeClass('z_tab_head_fix');
@@ -112,7 +113,7 @@
 <script>
     window.shareConfig.link = 'http://m.chinamatop.com/beauty/index?share=1';
     window.shareConfig.title = '评选活动';
-    var share_desc = '评选活动';
+    var share_desc = '你的真正优秀，请让众所周知！！！“寻找菁英代言人”活动，请你来为并购帮代言，成为并购帮的响亮会员和专家智库！';
     share_desc && (window.shareConfig.desc = share_desc);
     LEMON.show.shareIco();
 </script>
