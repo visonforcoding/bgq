@@ -33,7 +33,7 @@
             ?>
         </div>
     </div>
-    <?php if (is_array($orgs)): ?>
+    <?php if (is_array($orgs)&&$orgs): ?>
         <?php foreach ($orgs as $org): ?>
             <div class="form-group xb">
                 <label class="col-md-2 control-label">协办</label>
@@ -74,6 +74,12 @@
             <?php
             echo $this->Form->input('time', ['label' => false, 'type' => 'text', 'class' => 'datepicker form-control']);
             ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">报名开始时间</label>
+        <div class="col-md-8">
+            <input type="text" class="form-control datetimepicker" value="<?= date('Y-m-d H:i:s', $activity->apply_start_time) ?>" name="apply_start_time" />
         </div>
     </div>
     <div class="form-group">

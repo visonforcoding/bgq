@@ -55,6 +55,7 @@ class ActivityController extends AppController {
         if ($this->request->is('post')) {
             $activity = $this->Activity->patchEntity($activity, $this->request->data);
             $activity->apply_end_time = strtotime($this->request->data('apply_end_time'));
+            $activity->apply_start_time = strtotime($this->request->data('apply_start_time'));
             $activity->admin_id = $this->_user->id;
             //$activity->user_id = $this->_user->id;
             $activity->publisher = $this->_user->truename;
@@ -94,6 +95,7 @@ class ActivityController extends AppController {
         if ($this->request->is(['post', 'put'])) {
             $activity = $this->Activity->patchEntity($activity, $this->request->data);
             $activity->apply_end_time = strtotime($this->request->data('apply_end_time'));
+            $activity->apply_start_time = strtotime($this->request->data('apply_start_time'));
             $OrderTable = \Cake\ORM\TableRegistry::get('Order');
             $updateOrder = false;
             if($activity->dirty('apply_fee')){
