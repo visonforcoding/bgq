@@ -7,7 +7,7 @@
     <div class="a-banner" >
         <ul class="pic-list-container" id="imgList">
                 <!--<li><a href="#this"><img src="/mobile/images/a-banner.png"/></a></li>-->
-            <li><a href="javascript:void(0)"><img src="<?= createImg('/upload/banner/2016-09-22/57e3ac3c6526d.jpg') ?>?w=414&h=210"/></a></li>
+            <li><a href="javascript:void(0)"><img src="<?= createImg('/upload/beauty/550912168776455995.jpg') ?>?w=414&h=210"/></a></li>
             <!--<li><a href="#this"><img src="/mobile/images/a-banner.png"/></a></li>-->
         </ul>
     </div>
@@ -53,10 +53,12 @@
             var scrollTop = document.body.scrollTop;
             if (scrollTop >= tabheight-10) {
                 $('.z_tab_head').addClass('z_tab_head_fix');
+                $('.wraper').css({'padding-top':'.8rem'})
             } else {
                 $('.z_tab_head').removeClass('z_tab_head_fix');
+                $('.wraper').css({'padding-top':'0'})
             }
-
+            
         });
     </script>
     <!--top 10-end->
