@@ -44,7 +44,7 @@
 </div>
 <?php $this->start('script'); ?>
 <script>
-    if(location.hash){
+    if(location.hash && 0){
         switch(location.hash){
             // 我约见的未确认
             case '#1':
@@ -85,11 +85,13 @@
         }
         
     } else {
-        var book_html = {books:[], savant_books:[]}, status='0', type='<?php if($savant_books == []): ?>books<?php else: ?>savant_books<?php endif; ?>';
-        $('span[status="0"]').addClass('active');
-        $('span[type="<?php if($savant_books == []): ?>books<?php else: ?>savant_books<?php endif; ?>"]').addClass('active');
+//        var book_html = {books:[], savant_books:[]}, status='0', type='<?php if($savant_books == []): ?>books<?php else: ?>savant_books<?php endif; ?>';
+//        $('span[status="0"]').addClass('active');
+//        $('span[type="<?php if($savant_books == []): ?>books<?php else: ?>savant_books<?php endif; ?>"]').addClass('active');
     }
+    var book_html = {books:[], savant_books:[]}, status, type='<?php if($savant_books == []): ?>books<?php else: ?>savant_books<?php endif; ?>';
     var books = <?=  json_encode($books)?>;
+    
     var savant_books = <?=  json_encode($savant_books)?>;
     var book_nocomfirm = '<?= $book_nocomfirm ?>';
     var book_comfirm = '<?= $book_comfirm ?>';
@@ -98,6 +100,11 @@
     var savant_comfirm = '<?= $savant_comfirm ?>';
     var savant_nopass = '<?= $savant_nopass ?>';
     if(type == 'books'){
+        if(books.length){
+            status = books[0].status;
+        }
+        $('span[type="books"]').addClass('active');
+        $('span[status="'+status+'"]').addClass('active');
         if(book_nocomfirm != 0){
             $('#nocomfirm').html(book_nocomfirm);
             $('#nocomfirm').show();
@@ -118,6 +125,11 @@
         }
         
     } else {
+        if(savant_books.length){
+            status = savant_books[0].status;
+        }
+        $('span[status="'+status+'"]').addClass('active');
+        $('span[type="savant_books"]').addClass('active');
         if(savant_nocomfirm != 0){
             $('#nocomfirm').show();
             $('#nocomfirm').html(savant_nocomfirm);
