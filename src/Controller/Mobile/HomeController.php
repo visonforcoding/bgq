@@ -238,7 +238,7 @@ class HomeController extends AppController {
                 $followings = $FansTable->find()->contain(['Followings' => function($q) {
                     return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans', 'level'])
                             ->where(['enabled' => 1])->contain(['Subjects'=>function($q){
-                                return $q->where(['Subjects.is_del'=>0]);
+                                return $q->where(['Subjects.is_del'=>0])->orderDesc('Subjects.create_time');
                             }]);
                 }])->hydrate(false)
                     ->where(['user_id' => $user_id])
@@ -1445,7 +1445,7 @@ class HomeController extends AppController {
                 $followings = $FansTable->find()->contain(['Followings' => function($q)use($keyword) {
                         return $q->select(['id', 'truename', 'company', 'position', 'avatar', 'fans'])
                                 ->where(['truename like' => "%$keyword%", 'enabled' => 1])->contain(['Subjects'=>function($q){
-                                    return $q->where(['Subjects.is_del'=>0]);
+                                    return $q->where(['Subjects.is_del'=>0])->orderDesc('Subjects.create_time');
                                 }]);
                     }])->hydrate(false)
                         ->where(['user_id' => $user_id])

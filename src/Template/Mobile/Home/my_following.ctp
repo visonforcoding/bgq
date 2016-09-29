@@ -108,7 +108,8 @@
                         d.following_avatar = d.following.avatar ? d.following.avatar : '/mobile/images/touxiang.png';
                         d.following_position = d.following.position;
                         d.following_fans = d.following.fans;
-                        d.following_subject = $.util.dataToTpl('', 'tpl', d.following.subjects);
+                        d.following.subjects = d.following.subjects.length ? d.following.subjects[0] : '';
+                        d.following_subject = d.following.subjects ? '<a href="javascript:void(0)">'+d.following.subjects.title+'</a>' : '';
                         if(d.following.level == 2){
                             d.v = '<i></i>';
                         }
@@ -138,7 +139,6 @@
             dataType: 'json',
             url: "/home/get-my-fans",
             success: function (res) {
-                
                 if(res.status){
                     $.util.dataToTpl('follow', 'listTpl', res.data, function(d){
                         d.following_id = d.user.id;
@@ -147,7 +147,8 @@
                         d.following_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                         d.following_position = d.user.position;
                         d.following_fans = d.user.fans;
-                        d.following_subject = $.util.dataToTpl('', 'tpl', d.user.subjects);
+                        d.user.subjects = d.user.subjects.length ? d.user.subjects[0] : '';
+                        d.following_subject = d.user.subjects ? '<a href="javascript:void(0)">'+d.user.subjects.title+'</a>' : '';
                         if(d.user.level == 2){
                             d.v = '<i></i>';
                         }
@@ -181,7 +182,8 @@
                             d.following_avatar = d.following.avatar ? d.following.avatar : '/mobile/images/touxiang.png';
                             d.following_position = d.following.position;
                             d.following_fans = d.following.fans;
-                            d.following_subject = $.util.dataToTpl('', 'tpl', d.following.subjects);
+                            d.following.subjects = d.following.subjects.length ? d.following.subjects[0] : '';
+                            d.following_subject = d.following.subjects ? '<a href="javascript:void(0)">'+d.following.subjects.title+'</a>' : '';
                             if(d.following.level == 2){
                                 d.v = '<i></i>';
                             }
@@ -195,7 +197,8 @@
                             d.following_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
                             d.following_position = d.user.position;
                             d.following_fans = d.user.fans;
-                            d.following_subject = $.util.dataToTpl('', 'tpl', d.user.subjects);
+                            d.user.subjects = d.user.subjects.length ? d.user.subjects[0] : '';
+                            d.following_subject = d.user.subjects ? '<a href="javascript:void(0)">'+d.user.subjects.title+'</a>' : '';
                             if(d.user.level == 2){
                                 d.v = '<i></i>';
                             }
