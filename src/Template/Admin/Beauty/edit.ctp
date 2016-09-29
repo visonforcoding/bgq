@@ -86,7 +86,7 @@
             <?php foreach ($beauty->beauty_pics as $k => $v): ?>
                 <div style="width:200px;height:200px;" class="pic col-md-3 col-sm-6 col-lg-3">
                     <a class="card" href="<?= str_replace('small_', '', $v['pic_url']) ?>" data-lightbox="roadtrip">
-                        <img style="max-height:200px;" src="<?= $v['pic_url'] ?>" alt="">
+                        <img style="max-height:170px;" src="<?= $v['pic_url'] ?>" alt="">
                         <div data-id="<?= $v->id ?>"  class="del-pic card-heading"><strong><i class="icon icon-trash"></i>删除</strong></div>
                     </a>
                 </div>

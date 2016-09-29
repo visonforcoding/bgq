@@ -268,6 +268,9 @@
             that.children('span').addClass('active');
         }
         $('#submit').click(function () {
+            if($(this).hasClass('submited')){
+                return false;
+            }
             var industry_ids = [];
             var data = $('form').serializeArray()
             if(!city){
@@ -302,6 +305,8 @@
             formdata['industries[_ids]'] = industry_ids;
             formdata['city'] = city;
             formdata['agency_id'] = agency;
+            
+            $('#submit').addClass('submited');
             //对象长度判断
             $.post('/user/register', formdata, function (res) {
                 if (res.status === true) {
@@ -314,6 +319,7 @@
                     }, '1000')
                     window.location.href = res.url;
                 } else {
+                    $('#submit').removeClass('submited');
                     $.util.alert(res.msg);
                 }
             }, 'json');
