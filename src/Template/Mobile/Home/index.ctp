@@ -19,7 +19,7 @@
     <div class="h-home-menu topnav">
         <ul class="clearfix">
             <li><a href="/home/my-xiaomi" class="clickbtn"><i></i>小秘书</a></li>
-            <li><a href="/home/edit-userinfo" class="clickbtn"><i></i>个人资料</a></li>
+            <li><a href="javascript:void(0)" class="clickbtn" id="personal_file"><i></i>个人资料</a></li>
             <li><a href="/home/cardcase" class="clickbtn"><i></i>名片夹</a></li>
         </ul>
     </div>
@@ -161,6 +161,7 @@
                     } else {
                         $('#meetMsg').removeClass('opci');
                     }
+                    $('#personal_file').attr('href', '/user/home-page/' + res.data.user.id);
                     $('.clickbtn').unbind('click');
                 } else {
                     $('#avatar').attr('src', '/mobile/images/touxiang.png');
