@@ -81,7 +81,7 @@ class UserController extends AppController {
         }
         $educationType = \Cake\Core\Configure::read('educationType');
         $this->set([
-            'pageTitle'=>'个人主页',
+            'pageTitle'=>$user->truename . '的个人主页',
             'self'=>$self,
             'isFans'=>$isFans,
             'isGive' => $isGive,

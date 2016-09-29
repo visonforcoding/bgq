@@ -395,7 +395,7 @@
         if (imgUrl)
             window.shareConfig.imgUrl = location.origin + imgUrl;
         window.shareConfig.link = 'http://m.chinamatop.com/user/home-page/<?= $user->id ?>?share=1';
-        window.shareConfig.title = '<?= $user->truename ?>的个人主页';
+        window.shareConfig.title = '<?= $user->truename ?>的个人主页—并购帮';
         window.shareConfig.desc = '公司：<?= $user->company ?>\n\r职位：<?= $user->position ?>\n\r点击查看更多';
         LEMON.show.shareIco();
     })();
