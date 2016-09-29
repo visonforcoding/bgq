@@ -49,6 +49,10 @@
                         <span>粉丝</span>
                     </a>
                 </li>
+                <li>
+                    <i class="iconfont">&#xe6a5;</i>
+                    <span>分享</span>
+                </li>
             </ul>
         </div>
     </div>
