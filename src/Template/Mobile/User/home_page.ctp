@@ -49,7 +49,7 @@
                         <span>粉丝</span>
                     </a>
                 </li>
-                <li>
+                <li id="share">
                     <i class="iconfont">&#xe6a5;</i>
                     <span>分享</span>
                 </li>
@@ -392,6 +392,11 @@
     <div style="height:.9rem"></div>
     <a href="/meet/subject-list/<?= $user->id ?>" class="f-bottom">立即约见</a>
 <?php endif; ?>
+<div class="reg-shadow" style="display: none;" id="shadow"></div>
+<div class="wxshare" id="wxshare" hidden>
+    <span></span>
+    <p></p>
+</div>
 <?php $this->start('script') ?>
 <script>
     (function () {
@@ -403,8 +408,6 @@
         window.shareConfig.desc = '公司：<?= $user->company ?>\n\r职位：<?= $user->position ?>\n\r点击查看更多';
         LEMON.show.shareIco();
     })();
-    
-    
 </script>
 <script>
     setTimeout(function () {
@@ -492,6 +495,23 @@
                         }
                     }
                 });
+                break;
+            case 'share':
+                if (navigator.userAgent.toLowerCase().indexOf('micromessenger') == -1) {
+                    LEMON.share.banner();
+                } else if ($.util.isWX) {
+                    setTimeout(function(){
+                        $('#wxshare').show();
+                        $('#shadow').show();
+                    }, 400);
+                }
+                break;
+            case 'shadow':
+            case 'wxshare':
+                setTimeout(function () {
+                    $('#shadow').hide();
+                    $('#wxshare').hide();
+                }, 400);
                 break;
             case 'goTop':
                 window.scrollTo(0, 0);
