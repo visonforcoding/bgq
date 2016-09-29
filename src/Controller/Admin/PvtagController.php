@@ -52,11 +52,12 @@ class PvtagController extends AppController {
                 $this->Util->ajaxReturn(['status' => false, 'msg' => getMessage($errors), 'errors' => $errors]);
             }
         }
+        $counts = $this->Pvtag->find()->count();
         $pvtag = $this->Pvtag->find()->orderDesc('ptag')->first();
         if(!$pvtag){
             $tag = 10000;
         }else{
-            $tag = $pvtag->ptag+1;
+            $tag = $counts+10000;
         }
         $this->set(compact('tag'));
         $this->set(compact('pvtag'));

@@ -48,16 +48,20 @@ class PvtagTable extends Table {
                 ->allowEmpty('id', 'create');
 
         $validator
-                ->integer('ptag')
                 ->requirePresence('ptag', 'create')
                 ->notEmpty('ptag');
 
         $validator
                 ->requirePresence('descb', 'create')
-                ->notEmpty('descb','请输入描述');
+                ->notEmpty('descb', '请输入描述');
 
 
         return $validator;
+    }
+
+    public function buildRules(RulesChecker $rules) {
+        $rules->add($rules->isUnique(['ptag'],'该ptag已经被使用了'));
+        return $rules;
     }
 
 }
