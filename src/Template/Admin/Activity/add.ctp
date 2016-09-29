@@ -61,6 +61,12 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">报名开始时间</label>
+        <div class="col-md-8">
+            <input type="text" name="apply_start_time" class="form-control datetimepicker" />
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">报名截止时间</label>
         <div class="col-md-8">
             <input type="text" name="apply_end_time" class="form-control datetimepicker" />
