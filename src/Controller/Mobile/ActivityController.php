@@ -241,7 +241,7 @@ class ActivityController extends AppController {
                 return $this->Util->ajaxReturn(false, '系统错误');
             }
         } else {
-            $this->set('pageTitle', '我要推荐');
+            $this->set('pageTitle', '我要赞助');
             $this->set('activity_id', $id);
         }
     }
