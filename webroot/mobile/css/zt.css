@@ -9,9 +9,10 @@ p{font-size:14px;line-height: 24px;}
 .z_top_con p{font-size:14px;line-height: 18px;color:#7A7E83;text-align: justify;word-break: break-all;}
 .z_top10{line-height: 40px;height:42px;}
 .z_items{padding-bottom:.2rem;}
-.z_items dl{float:left;width:3.35rem;overflow:hidden;margin-right:.2rem;margin-top:.3rem;background: #f9f9f9;}
+.z_items dl{float:left;width:3.3rem;overflow:hidden;margin-right:.2rem;margin-top:.3rem;background: #f9f9f9;padding-bottom:.1rem;}
 .z_items dl:nth-of-type(2n){margin-right:0;}
 .z_items dl img{width:auto;height:4rem;display: block;}
+.z_items dd{padding-left:.1rem;}
 .z_items{overflow: hidden;}
 .z_items .zt_name{line-height: 20px;margin-top:.2rem;}
 .z_items .p_name{font-size:15px;}
