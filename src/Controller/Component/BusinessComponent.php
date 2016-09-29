@@ -213,7 +213,7 @@ class BusinessComponent extends Component {
                 $data = [
                    'url' => 'http://m.chinamatop.com/home/my-message-fans/1'
                 ];
-                $this->Push->sendAlias($user->user_token, $push->truename . '关注了您', ' ', $user->truename . '关注了您', 'BGB', true, $data);
+                $this->Push->sendAlias($user->user_token, $push->truename . '关注了您', ' ', $push->truename . '关注了您', 'BGB', true, $data);
                 $pushlog = $PushlogTable->newEntity();
                 $pushlog->push_id = $push_id;
                 $pushlog->receive_id = $user_id;
