@@ -1734,6 +1734,9 @@ class HomeController extends AppController {
         if($this->user){
             $name = $this->request->data('name');
             $val = $this->request->data('val');
+            if(trim($val) == ''){
+                return $this->Util->ajaxReturn(false, '请填入内容');
+            }
             $data = [];
             $UserTable = \Cake\ORM\TableRegistry::get('user');
             $user = $UserTable->get($this->user->id);
