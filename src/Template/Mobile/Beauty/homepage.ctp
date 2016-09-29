@@ -43,6 +43,7 @@
             <div class="tabcon bd2">
                 <ul class="cur inner basicon">
                     <li class="b-hy"><span><i class="iconfont col_yellow">&#xe684;</i>我的星座</span><div><em><?= $beauty->constellation ?></em></div></li>
+                    <li class="b-hy"><span><i class="iconfont col_yellow">&#xe654;</i>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</span><div><em><?= $votingType[$beauty->type_id] ?></em></div></li>
                     <li class="b-yw"><span><i class="iconfont col_cyan">&#xe670;</i>参赛宣言</span><div><em><?= $beauty->declaration ?></em></div></li>
                     <li class="b-gs"><span><i class="iconfont color-items">&#xe61c;</i>兴趣爱好</span><div><em><?= $beauty->hobby ?></em></div></li>
                     <li class="b-gs noafter"><span><i class="iconfont col_blue">&#xe67e;</i>个人简介</span>
@@ -52,7 +53,7 @@
                             </em>
                         </div>
                     </li>
-                    <li class="b-gs noafter"><span><i class="iconfont col_blue">&#xe67e;</i>项目经验</span>
+                    <li class="b-gs noafter"><span><i class="iconfont col_blue">&#xe6a4;</i>项目经验</span>
                         <div>
                             <em>
                                 <?= $xmjy ?>
@@ -355,14 +356,15 @@
     <?php endif; ?>
 <?php $this->start('script') ?>
 <script>
-    window.shareConfig.link = 'http://m.chinamatop.com/beauty/homepage/<?= $beauty->id ?>?share=1';
-    window.shareConfig.title = '<?= $beauty->user->truename ?>的参选主页';
-    var share_desc = '<?= str_replace(["\r\n", "\r", "\n"], '', $activity->summary) ?>';
-    share_desc && (window.shareConfig.desc = share_desc);
-    LEMON.show.shareIco();
-    if ($.util.isAPP && document.URL.indexOf('/enroll') != -1) {
-        LEMON.sys.back('/activity/index');
-    }
+    (function () {
+        var imgUrl = '<?= $beauty->user->avatar ?>';
+        if (imgUrl)
+            window.shareConfig.imgUrl = location.origin + imgUrl;
+        window.shareConfig.link = 'http://m.chinamatop.com/beauty/homepage/<?= $beauty->user->id ?>?share=1';
+        window.shareConfig.title = '<?= $beauty->user->truename ?>的参选主页—并购帮';
+        window.shareConfig.desc = '公司：<?= $beauty->user->company ?>\n\r职位：<?= $beauty->user->position ?>\n\r点击查看更多';
+        LEMON.show.shareIco();
+    })();
 </script>
 <script type="text/javascript">
     $('.h-tab>li').on('click', function () {

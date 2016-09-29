@@ -104,16 +104,13 @@
             var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'), $('.a-banner'));
         }
     });
-    window.firstpage = function(){
-        $.getJSON('/activity/getMoreActivity/1', function (res) {
-            if (res.status) {
-                $('#activity').html('');
-                var html = dealData(res.data);
-                $('#activity').append(html);
-            }
-        });
-    };
-    window.firstpage();
+    $.getJSON('/activity/getMoreActivity/1', function (res) {
+        if (res.status) {
+            $('#activity').html('');
+            var html = dealData(res.data);
+            $('#activity').append(html);
+        }
+    });
     function dealData(data) {
         var html = $.util.dataToTpl('', 'activity_tpl', data, function (d) {
             d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="registered">已报名</span>';

@@ -109,6 +109,13 @@
     </dl>
 </script>
 <?php $this->start('script'); ?>
+<script>
+    window.shareConfig.link = 'http://m.chinamatop.com/beauty/index?share=1';
+    window.shareConfig.title = '评选活动';
+    var share_desc = '评选活动';
+    share_desc && (window.shareConfig.desc = share_desc);
+    LEMON.show.shareIco();
+</script>
 <script type="text/javascript">
     $.ajax({
         type: 'POST',

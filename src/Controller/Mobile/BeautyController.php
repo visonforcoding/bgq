@@ -32,7 +32,7 @@ class BeautyController extends AppController {
         }
         $votingType = \Cake\Core\Configure::read('votingType');
         $this->set([
-            'pageTitle' => '选美活动',
+            'pageTitle' => '评选活动',
             'user' => $user,
             'votingType' => $votingType,
         ]);
@@ -516,6 +516,7 @@ class BeautyController extends AppController {
                 ->where(['is_pass'=>1, 'vote_nums >='=>$beauty->vote_nums])
                 ->count();
         $educationType = \Cake\Core\Configure::read('educationType');
+        $votingType = \Cake\Core\Configure::read('votingType');
         $savant = $SavantTable->find()->where(['user_id'=>$beauty->user->id])->first();
         $this->set([
             'pageTitle' => $beauty->user->truename . '的参选主页',
@@ -523,7 +524,8 @@ class BeautyController extends AppController {
             'rank' => $rank,
             'self' => $self,
             'educationType' => $educationType,
-            'xmjy' => $savant->xmjy
+            'xmjy' => $savant->xmjy,
+            'votingType' => $votingType
         ]);
     }
     
