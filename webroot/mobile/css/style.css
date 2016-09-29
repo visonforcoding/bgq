@@ -575,7 +575,7 @@ display: -webkit-box;-webkit-line-clamp: 1;}
 .a-form-box .m-tips b.iconfont:before{content: '\e623';line-height: 0.36rem; margin-right:0.2rem}
 .a-form-box .m-tips span{display: block;color:#b71c2d; margin-left:0.5rem;}
 .wraper .m-form-box{padding-bottom:0;margin-top:0.2rem;border-top:1px solid #e5e5e5;}
-.m-form-box li textarea{height:6rem;width:100%;}
+.m-form-box li textarea{height:3rem;width:100%;}
 .m-detail-box .booking-price{color:#b71c2d; width:20%;}
 .m-detail-box .booking-price span{margin-top:0.2rem;}
 .wraper .m-subject{background: #fff;}
