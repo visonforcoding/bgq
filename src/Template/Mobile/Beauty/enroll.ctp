@@ -39,7 +39,6 @@
                                     <?php endif; ?>
                                 </select>
                             </em>
-                            <b class="iconfont r_more">&#xe667;</b>
                         </div>
 
                     </li>
