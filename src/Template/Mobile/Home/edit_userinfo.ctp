@@ -44,7 +44,7 @@
             <li class="no-right-ico">
                 <a href="javascript:void(0)">
                     <span><i class="color-items">*</i>部门职务<i class="color-items"><?= $user->position ? '' : '(未完善)' ?></i>：</span>
-                    <div >
+                    <div class="edit_job">
                         <input type="position" name="position" value="<?= $user->position ?>" placeholder="请填写部门职务" />
                     </div>
                 </a>
