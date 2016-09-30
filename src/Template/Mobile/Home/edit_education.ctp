@@ -237,4 +237,5 @@
         //form.submit();
     }
 
+    LEMON.event.unrefresh();
 </script>
