@@ -361,8 +361,8 @@
         if (imgUrl)
             window.shareConfig.imgUrl = location.origin + imgUrl;
         window.shareConfig.link = 'http://m.chinamatop.com/beauty/homepage/<?= $beauty->id ?>?share=1';
-        window.shareConfig.title = '<?= $beauty->user->truename ?>的参选主页—并购帮';
-        window.shareConfig.desc = '公司：<?= $beauty->user->company ?>\n\r职位：<?= $beauty->user->position ?>\n\r点击查看更多';
+        window.shareConfig.title = '我在参加由并购帮主办的2016并购菁英评选活动';
+        window.shareConfig.desc = '本次活动将评选出“十大产业菁英”、“十大金融菁英”和“十大顾问菁英\n\r点击查看更多';
         LEMON.show.shareIco();
     })();
 </script>
