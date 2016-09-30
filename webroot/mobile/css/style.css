@@ -829,6 +829,8 @@ border-left:1px #e5e5e5 solid;width:33.3%;}
 .max_width li span{max-width:100%;max-height:.6rem;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;}
 .h-info-box li div{float:right;}
 .max_width li div{float:right;max-width:70%;overflow:hidden;}
+.max_width .edit_job{max-width:60%;}
+.max_width .edit_job input{width:100%;}
 .e-info-box .upload-user-img span.m-card{display:block;width:0.46rem;height:0.38rem;background: url(../images/user-img.png) no-repeat;background-size:contain;}
 .e-info-box .upload-user-img .tx{width:0.6rem;height:0.5rem;}
 .tx img{width:1rem;height:1rem;border-radius: 0.5rem;overflow:hidden;}
