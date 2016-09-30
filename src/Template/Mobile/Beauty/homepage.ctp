@@ -344,7 +344,7 @@
         </div>
     </div>
         <a href="/meet/index">
-            <div class="photo_type innercon mt20"><h3>投票不尽兴？想约会员吗？请戳这里 <i class="iconfont">&#xe667;</i></h3></div>
+            <div class="photo_type innercon mt20"><h3>投票不尽兴？想约并购菁英吗？请戳这里 <i class="iconfont">&#xe667;</i></h3></div>
         </a>
         <a href="/beauty/index">
             <div class="photo_type innercon mt20"><h3>投票不尽兴？想参与报名? 请戳这里 <i class="iconfont">&#xe667;</i></h3></div>
