@@ -67,7 +67,7 @@
                         pager: "#pager",
                         rowNum: window._config.showDef,
                         rowList: window._config.pages,
-                        sortname: "id",
+                        sortname: "counts",
                         sortorder: "desc",
                         viewrecords: true,
                         gridview: true,
