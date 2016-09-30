@@ -11,18 +11,18 @@
 
 <div class="wraper">
     <div class="h2"></div>
-<!--    <div class="infoboxlist a-pay paytype installbox">
-        <ul class='ulinfo'>
-            <li>消息提醒：<span class='infocard'><input type="radio" name='pay' checked="checked" /><i class='active'></i></span></li>
-
-        </ul>
-    </div>-->
-   <!--  <div class="infoboxlist a-pay paytype installbox">
-        <ul class='ulinfo'>
-            <li>系统版本：</li>
-
-        </ul>
-    </div> -->
+    <!--    <div class="infoboxlist a-pay paytype installbox">
+            <ul class='ulinfo'>
+                <li>消息提醒：<span class='infocard'><input type="radio" name='pay' checked="checked" /><i class='active'></i></span></li>
+    
+            </ul>
+        </div>-->
+    <!--  <div class="infoboxlist a-pay paytype installbox">
+         <ul class='ulinfo'>
+             <li>系统版本：</li>
+ 
+         </ul>
+     </div> -->
 
     <ul class="h-info-box e-info-box">
         <li class="no-right-ico install" style="display: none">
@@ -56,6 +56,14 @@
                 </div>
             </a>
         </li>
+        <li  class="lh4">
+            <a href='/user/forgot-pwd'>
+            <span>重设密码</span>
+            <div>
+                <span></span>
+            </div>
+            </a>
+        </li>
         <li  class="nobottom lh4">
             <a href="/user/change-phone">
                 <span>更换手机号码</span>
@@ -65,7 +73,7 @@
             </a>
         </li>
     </ul>
-   <a href="javascript:void(0);" class="nextstep redshadow" id="logout">退出登录</a>
+    <a href="javascript:void(0);" class="nextstep redshadow" id="logout">退出登录</a>
 </div>
 <div class='bottom-logo'>
     <h3><a href="#this"><img src="/mobile/images/logo.png"/></a></h3>
@@ -84,20 +92,20 @@
 </div>
 <?php $this->start('script'); ?>
 <script>
-    $('#logout').on('tap', function(){
+    $('#logout').on('tap', function () {
         $('#isLogout').show();
         $('#shadow').show();
     });
-    $('#yes').on('tap', function(){
+    $('#yes').on('tap', function () {
         $.ajax({
             type: 'POST',
             url: '/user/login-out',
             dataType: 'json',
-            success: function(msg){
-                if(msg.status) {
-                    $.util.setCookie('token_uin','');
+            success: function (msg) {
+                if (msg.status) {
+                    $.util.setCookie('token_uin', '');
                     $.util.setCookie('login_status', '');
-                    LEMON.db.set('token_uin','');
+                    LEMON.db.set('token_uin', '');
                     location.href = '/home/index';
                 } else {
                     $.util.alert(msg.msg);
@@ -105,30 +113,30 @@
             }
         });
     });
-    $('#no, #shadow').on('tap', function(){
-        setTimeout(function(){
+    $('#no, #shadow').on('tap', function () {
+        setTimeout(function () {
             $('#isLogout').hide();
             $('#shadow').hide();
         }, 301);
     });
-    $('#verson').html('Verson '+LEMON.sys.version());
+    $('#verson').html('Verson ' + LEMON.sys.version());
 
-    function setCheck(st){
-        if(st == 'on'){
+    function setCheck(st) {
+        if (st == 'on') {
             $('#checkBtn i').get(0).className = 'on';
             $('#checkBtn').removeClass().addClass('btn');
         }
-        else{
+        else {
             $('#checkBtn i').get(0).className = 'off';
-             $('#checkBtn').removeClass().addClass('c-btn');
+            $('#checkBtn').removeClass().addClass('c-btn');
         }
     }
 
-    $('#checkBtn').on('tap',function(){
-        if(LEMON.sys.isUseLOC() == 'on'){
+    $('#checkBtn').on('tap', function () {
+        if (LEMON.sys.isUseLOC() == 'on') {
             LEMON.sys.closeLOC();
             setCheck('off');
-        }else{
+        } else {
             LEMON.sys.openLOC();
             setCheck('on');
         }
@@ -136,4 +144,5 @@
 
     setCheck(LEMON.sys.isUseLOC());
 </script>
-<?php $this->end('script');
+<?php
+$this->end('script');

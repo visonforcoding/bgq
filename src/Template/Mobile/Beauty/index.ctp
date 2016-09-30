@@ -20,7 +20,7 @@
         </div>
         <div class='z_top_con p20 bd2 bd1'>
             <div class="content_inner">
-                <p>由并购帮主办的《2016并购菁英评选》活动于10月8日启动，本次活动将评选出“十大产业菁英”和“十大金融菁英”，参与并购项目各个环节的角色，如上市公司、投资机构、银行、券商、投行等，都可以报名参加。
+                <p>由并购帮主办的《2016并购菁英评选》活动于10月8日启动，本次活动将评选出“十大产业菁英”、“十大金融菁英”和“十大顾问菁英”，参与并购项目各个环节的角色，如上市公司、投资机构、银行、券商、投行等，都可以报名参加。
                 </p></div>
         </div>
     </div>
@@ -108,10 +108,10 @@
 </script>
 <?php $this->start('script'); ?>
 <script>
-    window.shareConfig.link = 'http://m.chinamatop.com/beauty/index?share=1';
+    window.shareConfig.link = 'http://m.chinamatop.com/beauty/index?share=1&ptag=10003';
     window.shareConfig.title = '并购菁英评选';
-    var share_desc = '你的真正优秀，请让众所周知！！！“寻找菁英代言人”活动，请你来为并购帮代言，成为并购帮的响亮会员和专家智库！';
-    share_desc && (window.shareConfig.desc = share_desc);
+    var share_desc = '由并购帮主办的《2016并购菁英评选》活动于10月8日启动，本次活动将评选出“十大产业菁英”、“十大金融菁英”和“十大顾问菁英” ';
+    window.shareConfig.desc = share_desc;
     LEMON.show.shareIco();
 </script>
 <script type="text/javascript">
