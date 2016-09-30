@@ -57,7 +57,7 @@ class PvtagController extends AppController {
         if(!$pvtag){
             $tag = 10000;
         }else{
-            $tag = $pvtag['ptag']+$counts+10000;
+            $tag = $counts+10000;
         }
         $this->set(compact('tag'));
         $this->set(compact('pvtag'));
