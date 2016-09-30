@@ -92,7 +92,7 @@
                             <em><?= $beauty->user->city ? $beauty->user->city : '暂未填写' ?></em>
                         </div>
                     </li>
-                    <li class="b-hy"><span><i class="iconfont">&#xe654;</i>所在行业</span>
+                    <li class="b-hy"><span><i class="iconfont">&#xe654;</i>行业标签</span>
                         <div>
                             <?php if ($beauty->user->industries): ?>
                                 <?php foreach ($beauty->user->industries as $k => $v): ?>
@@ -124,7 +124,7 @@
                             <em><?= $beauty->user->city ? $beauty->user->city : '暂未填写' ?></em>
                         </div>
                     </li>
-                    <li class="b-hy"><span><i class="iconfont">&#xe654;</i>所在行业</span>
+                    <li class="b-hy"><span><i class="iconfont">&#xe654;</i>行业标签</span>
                         <div>
                             <?php if ($beauty->user->industries): ?>
                                 <?php foreach ($beauty->user->industries as $k => $v): ?>
