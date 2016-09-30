@@ -1366,7 +1366,7 @@ class HomeController extends AppController {
         $this->set(array(
             'user' => $user,
             'agencies' => $agencies,
-            'pageTitle' => '选择行业标签'
+            'pageTitle' => '选择机构标签'
         ));
     }
     
