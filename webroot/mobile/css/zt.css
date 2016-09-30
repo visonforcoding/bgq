@@ -24,7 +24,7 @@ p{font-size:14px;line-height: 24px;}
 .posi_top{position: relative;max-height:4rem;max-width:100%;overflow:hidden;}
 .posi_top span{position: absolute;top:0;left:0;width:0;height:0;border-top:26px #e01a48 solid;border-left:26px #e01a48 solid;border-right:26px solid transparent;border-bottom:26px solid transparent;}
 .posi_top  i{position: absolute;top:5px;left:4px;color:#fff;font-size: 13px;font-weight: bold;}
-.zt_tips{display:none;max-height:0;z-index:10000;width:0;background: #fff;border-radius: 6px;position: fixed;top:5%;left:50%;margin-left:-40%;box-shadow: 0 0 1px rgba(0,0,0,.5);-webkit-transition:width 5s ease;transition:width 5s ease-in-out;}
+.zt_tips{display:none;max-height:0;z-index:10000;width:0;background: #fff;border-radius: 6px;position: fixed;top:15%;left:50%;margin-left:-40%;box-shadow: 0 0 1px rgba(0,0,0,.5);-webkit-transition:width 5s ease;transition:width 5s ease-in-out;}
 .zt_tips_show{max-height: 999px;width:80%;display: block;-webkit-transition:width 5s ease-in-out;transition:width 5s ease-in-out;}
 .zt_tips_box{margin:.3rem;overflow-y: scroll;max-height: 400px;}
 .zt_tips_box h3{line-height: .36rem;}
