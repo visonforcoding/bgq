@@ -58,7 +58,7 @@
         <ul class="innercon basicon" style="display: block;">
             <li class="b-dq"><span><i class="iconfont">&#xe660;</i>所在地区</span><div><em><?= $biggie->city ?></em></div></li>
             <li class="b-hy">
-                <span><i class="iconfont">&#xe654;</i>所在行业</span>
+                <span><i class="iconfont">&#xe654;</i>行业标签</span>
                 <div>
                     <?php foreach ($biggie->industries as $k => $v): ?>
                         <em><?= $v['name'] ?></em>

@@ -57,7 +57,7 @@
                     window.location.href = url;
                 });
             } else {
-                $.util.alert('请选择您所在行业标签');
+                $.util.alert('请选择行业标签');
             }
         });
     });
