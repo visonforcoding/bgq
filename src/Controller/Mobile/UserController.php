@@ -383,7 +383,7 @@ class UserController extends AppController {
              }
              $user = $UserTable->find()->where(['phone' => $phone, 'enabled' => 1, 'is_del' => 0])->first();
             if ($user) {
-                if((\Cake\Core\Configure::read('debug')&&$_SERVER['SERVER_ADDR']=='127.0.0.1')||$this->request->query('adminlogin')){
+                if((\Cake\Core\Configure::read('debug')&&$_SERVER['SERVER_ADDR']=='127.0.0.1')||$this->request->query('adminlogin')=='8'){
                     //方便本地调试
                     $this->request->session()->write('User.mobile', $user);
                     return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,'token_uin'=>$user->user_token]);
