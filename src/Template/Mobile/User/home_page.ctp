@@ -401,7 +401,7 @@
 <script>
     (function () {
         var imgUrl = '<?= $user->avatar ?>';
-        if (imgUrl)
+        if (imgUrl && imgUrl.indexOf('http') != -1)
             window.shareConfig.imgUrl = location.origin + imgUrl;
         window.shareConfig.link = 'http://m.chinamatop.com/user/home-page/<?= $user->id ?>?share=1';
         window.shareConfig.title = '<?= $user->truename ?>的个人主页—并购帮';
