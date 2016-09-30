@@ -91,7 +91,8 @@
 <p class="jusitify"><strong>2.评选方式</strong><br />
 •网络投票时间为10月01日-10月23日；<br />
 •专家评审团投票时间10月25日-10月28日。
-</p>
+</p><br />
+<p><strong>解释权归属主办方所有。</strong></p>
         </div>
     </div>
 </div>
