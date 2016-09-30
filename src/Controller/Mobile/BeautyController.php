@@ -118,6 +118,13 @@ class BeautyController extends AppController {
                     })
                     ->toArray();
         }
+//        foreach($beauty as $key=>$value){
+//            if($value->beauty_pics){
+//                foreach($value->beauty_pics as $k=>$v){
+//                    $beauty[$key]->beauty_pics[$k]->pic_url= createImg(preg_replace('/small_/','',$v->pic_url)).'?w=182&fit=crop';
+//                }
+//            }
+//        }
         return $this->Util->ajaxReturn(['status'=>true, 'data'=>$beauty]);
     }
     

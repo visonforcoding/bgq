@@ -163,6 +163,8 @@
             return d;
         });
         $('.vote').on('tap', function () {
+            $.util.alert('10月8日开放投票');
+            return;
             var obj = $(this);
             $.util.ajax({
                 url: '/beauty/vote/' + obj.attr('user_id'),
