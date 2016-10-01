@@ -163,7 +163,7 @@
                     <?php else: ?>
                         <?php if ($activity->activityapply['0']->is_pass == 0): ?>
                             <?php if ($activity->activityapply['0']->is_check == 1): ?>;
-                                <a href="/wx/meet-pay/2/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
+                                <a href="/wx/meet-pay/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
                             <?php elseif ($activity->activityapply['0']->is_check == 2): ?>
                                 <a style="background:gray;" class="r-btn">审核未通过</a>
                             <?php else: ?>
@@ -178,7 +178,7 @@
                         <a  class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="javascript:$.util.checkLogin('/activity/enroll/<?= $activity->id; ?>')">我要报名(<?= $activity->apply_fee; ?>元)</a>
                     <?php else: ?>
                         <?php if ($activity->activityapply['0']->is_pass == 0): ?>
-                            <a href="/wx/meet_pay/2/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
+                            <a href="/wx/meet-pay/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
                         <?php elseif ($activity->activityapply['0']->is_pass == 1): ?>
                             <a class="r-btn">已报名</a>
                         <?php endif; ?>
