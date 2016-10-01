@@ -170,8 +170,10 @@ class WxController extends AppController {
      * 预约支付页  此页面URL 需在微信公众号的微信支付那里配置 支付域
      * @param int $id  订单id
      */
-    public function meetPay($type = null, $id = null) {
+    public function meetPay($id = null) {
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
+        $theorder = $OrderTable->get($id);
+        $type = $theorder->type;
         if ($type == 1) {
             $order = $OrderTable->get($id, [
                 'contain' => ['SubjectBook', 'SubjectBook.Subjects']
