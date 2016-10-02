@@ -266,6 +266,21 @@
             });
         }
     });
+
+    (function () {
+        if(!($.util.isAPP && $.util.isIOS)) return;
+        if(LEMON.sys.version() == '1.03') return;
+        var daa = (new Date()).getDate();
+        if(daa == LEMON.db.get('daa')) return; //每天一次
+        LEMON.db.set('daa', daa);
+
+        if(window.confirm('尊敬的用户,您当前的APP版本存在部分页面无法加载的情况,请前往更新。\r\n并购帮祝您节日快乐!!')){
+            LEMON.sys.update('https://itunes.apple.com/us/app/bing-gou-bang/id1156402644');
+        }
+        else {
+            $.util.alert('如果您感到影响使用,可以前往appstore,搜索并购帮', 4000);
+        }
+    })();
 </script>
 <?php
 $this->end('script');
