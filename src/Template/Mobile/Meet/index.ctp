@@ -274,7 +274,7 @@
         if(daa == LEMON.db.get('daa')) return; //每天一次
         LEMON.db.set('daa', daa);
 
-        if(window.confirm('尊敬的用户,您当前的APP版本存在部分页面无法加载的情况,请前往更新。\r\n并购帮祝您节日快乐!!')){
+        if(window.confirm('尊敬的用户,您当前的APP版本存在部分页面无法加载的情况,请前往更新。')){
             LEMON.sys.update('https://itunes.apple.com/us/app/bing-gou-bang/id1156402644');
         }
         else {
