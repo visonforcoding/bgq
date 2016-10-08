@@ -4,10 +4,10 @@
         <h1 class="m-message-top">
             我的消息
         </h1>
-        <!--   <h1 class="m-message-top">
-              <a href="javascript:void(0);" class="active">新的关注<i><?= $unReadCount ?></i></a>|
+           <h1 class="m-message-top">
+              <!--<a href="javascript:void(0);" class="active">新的关注<i><?//= $unReadCount ?></i></a>|-->
               <a href="/home/my-message-sys">系统消息<i>3</i></a>
-          </h1> -->
+          </h1> 
         <!-- <a href="javascript:void(0);" class="h-regiser h-add"></a> -->
     </div>
 </header>
