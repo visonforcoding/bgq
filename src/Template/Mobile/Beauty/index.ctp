@@ -167,6 +167,7 @@
     
     
     function dealData(data, id) {
+    if(!data)return;
         $.util.dataToTpl('beauty_'+id, 'tpl', data, function (d) {
             d.position = d.user.position;
             d.company = d.user.company;
