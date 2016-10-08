@@ -739,10 +739,20 @@ class UserController extends AppController {
         }
         $today = date('Y-m-d');
         $path = 'upload/user/avatar/'.$today;
-        $file_name = $path.'/thumb_'.  uniqid().'.jpg';
+        $uniqid = uniqid();
+        $file_name = $path.'/thumb_'.  $uniqid.'.jpg';
         if(!is_dir($path)){
             mkdir($path,0777,true);
         }
+        \Intervention\Image\ImageManagerStatic::make($res)
+                        ->save($path.'/'.$uniqid.'.jpg');
+        $filename = $path.'/'.$uniqid.'.jpg';
+        $img = \Intervention\Image\Image::make($filename);
+        $info = $img->exif();
+        \Cake\Log\Log::debug($info,'devlog');
+//        \Intervention\Image\ImageManagerStatic::make($filename)
+//                ->resize(intval($image[0]*0.4), intval($image[1]*0.4))
+//                ->save($thumbPath .'small_' .$basename . '.' . $thumbExt);
         \Intervention\Image\ImageManagerStatic::make($res)
                 ->resize(60,60)
                 ->save(WWW_ROOT . $file_name);
