@@ -52,6 +52,9 @@
                     $('#beauty').append(html);
                     $('.vote').on('tap', function () {
                         var obj = $(this);
+                        if(!obj.hasClass('vote')){
+                            return false;
+                        }
                         $.util.ajax({
                             url: '/beauty/vote/' + obj.attr('user_id'),
                             func: function (res) {
@@ -61,6 +64,7 @@
                                     obj.prev('span.zt_num').html(parseInt(obj.prev('span.zt_num').html()) + 1 + '票');
                                 } else {
                                     $.util.alert(res.msg);
+                                    obj.removeClass('vote');
                                 }
                             }
                         });
@@ -96,6 +100,9 @@
                         $('#beauty').append(html);
                         $('.vote').on('tap', function () {
                             var obj = $(this);
+                            if(!obj.hasClass('vote')){
+                                return false;
+                            }
                             $.util.ajax({
                                 url: '/beauty/vote/' + obj.attr('user_id'),
                                 func: function (res) {
@@ -105,6 +112,7 @@
                                         obj.prev('span.zt_num').html(parseInt(obj.prev('span.zt_num').html()) + 1 + '票');
                                     } else {
                                         $.util.alert(res.msg);
+                                        obj.removeClass('vote');
                                     }
                                 }
                             });
