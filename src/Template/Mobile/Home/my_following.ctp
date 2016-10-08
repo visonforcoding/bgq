@@ -49,10 +49,9 @@
                         {#following_subject#}
                     </div>
                 </div>
-                <div class="m_focus_r r_focus_num fl">
+                <div class="m_focus_r r_focus_num fl {#focus_class#}" user_id="{#following_id#}" {#focus_id_str#}>
                     <span class="meetnum">{#following_fans#}人关注</span>
-                    <i class="iconfont" style="visibility: hidden;">&#xe614;</i>
-                    <span class="msg"  style="visibility: hidden;">{#focus_msg#}</span>
+                    {#focus_msg#}
                 </div>
             </div>
         </div>
@@ -152,6 +151,13 @@
                         if(d.user.level == 2){
                             d.v = '<i></i>';
                         }
+                        if(d.type == 1){
+                            d.focus_class = 'color-items';
+                            d.focus_msg = '<i class="iconfont">&#xe614;</i><span class="msg">加关注</span>';
+                            d.focus_id_str = 'id="focus_'+ d.following_id +'"';
+                        } else if(d.type == 2) {
+                            d.focus_msg = '<i class="iconfont">&#xe614;</i><span class="msg">已关注</span>';
+                        }
                         return d;
                     });
                 } else {
@@ -202,6 +208,13 @@
                             if(d.user.level == 2){
                                 d.v = '<i></i>';
                             }
+                            if(d.type == 1){
+                                d.focus_class = 'color-items';
+                                d.focus_msg = '<i class="iconfont">&#xe614;</i><span class="msg">加关注</span>';
+                                d.focus_id_str = 'id="focus_'+ d.following_id +'"';
+                            } else if(d.type == 2) {
+                                d.focus_msg = '<i class="iconfont">&#xe614;</i><span class="msg">已关注</span>';
+                            }
                             return d;
                         });
                     }
@@ -213,6 +226,38 @@
         });
     }
     
+    $('body').on('tap', function (e) {
+        var target = e.srcElement || e.target, em = target, i = 1;
+        while (em && !em.id && i <= 3) {
+            em = em.parentNode;
+            i++;
+        }
+        if (!em || !em.id)
+            return;
+        if(em.id.indexOf('focus_') != -1){
+            var obj = $(em);
+            if (obj.hasClass('notap')) {
+                return false;
+            }
+            obj.addClass('notap');
+            var user_id = obj.attr('user_id');
+            $.util.ajax({
+                url: '/user/follow',
+                data: {id: user_id},
+                func: function (res) {
+                    $.util.alert(res.msg);
+                    if (res.status) {
+                        if (res.msg.indexOf('取消关注') != '') {
+                            obj.removeClass('color-items').find('span.msg').html('已关注');
+                        } else {
+                            obj.find('span.msg').html('加关注');
+                            obj.removeClass('notap');
+                        }
+                    }
+                }
+            });
+        }
+    });
     
 </script>
 <?php $this->end('script');
