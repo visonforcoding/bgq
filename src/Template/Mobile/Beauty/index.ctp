@@ -188,6 +188,7 @@
             if(!obj.hasClass('vote')){
                 return false;
             }
+            obj.removeClass('vote');
             $.util.ajax({
                 url: '/beauty/vote/' + obj.attr('user_id'),
                 func: function (res) {
@@ -197,7 +198,7 @@
                         obj.prev('span.zt_num').html(parseInt(obj.prev('span.zt_num').html()) + 1 + '票');
                     } else {
                         $.util.alert(res.msg);
-                        obj.removeClass('vote');
+                        obj.addClass('vote');
                     }
                 }
             });
