@@ -383,8 +383,6 @@
 
     $('#vote').on('tap', function(){
         var obj = $(this);
-        $.util.alert('10月8日开放投票');
-        return;
         $.util.ajax({
             url: '/beauty/vote/'+obj.attr('user_id'),
             func: function(res){
