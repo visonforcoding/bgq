@@ -753,7 +753,7 @@ class UserController extends AppController {
         $image = $info['COMPUTED'];
         \Intervention\Image\ImageManagerStatic::make($filename)
                 ->resize(intval($image['Width']*0.4), intval($image['Height']*0.4))
-                ->save($thumbPath .'small_' .$basename . '.' . $thumbExt);
+                ->save($thumbPath .'small_' .$uniqid . '.jpg');
         \Intervention\Image\ImageManagerStatic::make($res)
                 ->resize(60,60)
                 ->save(WWW_ROOT . $file_name);
