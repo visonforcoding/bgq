@@ -747,7 +747,7 @@ class UserController extends AppController {
         \Intervention\Image\ImageManagerStatic::make($res)
                         ->save($path.'/'.$uniqid.'.jpg');
         $filename = $path.'/'.$uniqid.'.jpg';
-        $img = \Intervention\Image\Image::make($filename);
+        $img = \Intervention\Image\ImageManagerStatic::make($filename);
         $info = $img->exif();
         \Cake\Log\Log::debug($info,'devlog');
 //        \Intervention\Image\ImageManagerStatic::make($filename)
