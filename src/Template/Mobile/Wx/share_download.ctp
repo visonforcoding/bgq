@@ -5,7 +5,7 @@
             <p>并购圈</p>
             <p>并购人的生活方式</p>
         </div>
-        <div class="d-down block">
+        <div class="d-down block" id="downbtn">
             <a id="download" href="com.chinamatop://main/param?url=http://m.chinamatop.com/<?= $url ?>"><span></span>在app中打开</a>
             <!--<a href="javascript:void(0)" id="download"><span></span>立刻下载</a>-->
             <p>or</p>
@@ -38,5 +38,7 @@
             }
         }, 300);
     });
+
+    if($.util.getParam('downbtn')) $('#downbtn').html('<a href="https://itunes.apple.com/us/app/bing-gou-bang/id1156402644"><span>IOS下载</span></a><a href="/mobile/app/bgq.apk"><span>安卓下载</span></a>');
 </script>
 <?php $this->end('script'); 
