@@ -177,16 +177,7 @@
 </div>
 
 <script>
-//    var ref = $.util.getParam('ref') ? $.util.getParam('ref') : '/home/index';
-    LEMON.sys.back(document.referrer);
-//    if($.util.isAPP){
-//        if(document.URL.indexOf('#home') != -1){
-//            LEMON.sys.back('/user/home-page/<?= $user->id ?>');
-//        } else {
-//            LEMON.sys.back('/home/index');
-//        }
-//    }
-
+//    LEMON.sys.back(document.referrer);
 
     $('#pData input').on('blur', function () {
         var name = this.name;
