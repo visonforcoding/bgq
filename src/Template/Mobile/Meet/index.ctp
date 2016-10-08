@@ -128,12 +128,12 @@
             if(tmp[i].indexOf('a') === 0){
                 var id = tmp[i].replace('a', '');
                 var obj = $('[user_id="'+id+'"]');
-                obj.removeClass('color-items').addClass('noTap').find('span.msg').html('已关注');
+                obj.removeClass('color-items').addClass('notap').find('span.msg').html('已关注');
             }           
             else if(tmp[i].indexOf('d') === 0){
                 var id = tmp[i].replace('d', '');
                 var obj = $('[user_id="'+id+'"]');
-                obj.addClass('color-items').removeClass('noTap').find('span.msg').html('加关注');
+                obj.addClass('color-items').removeClass('notap').find('span.msg').html('加关注');
                 obj.attr('id', 'focus_'+id);
             }
         }
