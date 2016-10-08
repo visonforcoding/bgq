@@ -749,10 +749,11 @@ class UserController extends AppController {
         $filename = $path.'/'.$uniqid.'.jpg';
         $img = \Intervention\Image\ImageManagerStatic::make($filename);
         $info = $img->exif();
-        \Cake\Log\Log::debug($info,'devlog');
-//        \Intervention\Image\ImageManagerStatic::make($filename)
-//                ->resize(intval($image[0]*0.4), intval($image[1]*0.4))
-//                ->save($thumbPath .'small_' .$basename . '.' . $thumbExt);
+//        \Cake\Log\Log::debug($info,'devlog');
+        $image = $info['COMPUTED'];
+        \Intervention\Image\ImageManagerStatic::make($filename)
+                ->resize(intval($image['Width']*0.4), intval($image['Height']*0.4))
+                ->save($thumbPath .'small_' .$basename . '.' . $thumbExt);
         \Intervention\Image\ImageManagerStatic::make($res)
                 ->resize(60,60)
                 ->save(WWW_ROOT . $file_name);
