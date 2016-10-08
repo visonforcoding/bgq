@@ -128,7 +128,7 @@ class PvchartController extends AppController {
         $Table = \Cake\ORM\TableRegistry::get('Pvlog');
         $query = $Table->find();
         $query->contain(['Pvtag']);
-        $query->select(['counts' => $query->func()->count('*'), 'ptag', 'act', 'Pvtag.descb', 'url','urlmap']);
+        $query->select(['counts' => $query->func()->count('*'), 'ptag', 'act', 'Pvtag.descb', 'url', 'urlmap']);
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
@@ -203,7 +203,7 @@ class PvchartController extends AppController {
         $connection = \Cake\Datasource\ConnectionManager::get('default');
         $result = $connection->execute('select u.os as name,count(u.id) as nums from `pvlog` u
                  group by u.os')->fetchAll('assoc');
-        foreach($result as $k=>$v){
+        foreach ($result as $k => $v) {
             switch ($v['name']) {
                 case 1:
                     $result[$k]['name'] = 'iphone';
@@ -224,7 +224,7 @@ class PvchartController extends AppController {
         echo $this->Echart->setPieChart($result, $name, $title);
         exit();
     }
-    
+
     /**
      * 安卓ios 占比
      */
@@ -232,7 +232,7 @@ class PvchartController extends AppController {
         $connection = \Cake\Datasource\ConnectionManager::get('default');
         $result = $connection->execute('select u.is_app as name,count(u.id) as nums from `pvlog` u
                  group by u.is_app')->fetchAll('assoc');
-        foreach($result as $k=>$v){
+        foreach ($result as $k => $v) {
             switch ($v['name']) {
                 case 1:
                     $result[$k]['name'] = 'app';
@@ -253,6 +253,7 @@ class PvchartController extends AppController {
         echo $this->Echart->setPieChart($result, $name, $title);
         exit();
     }
+
     /**
      * 安卓ios 占比
      */
@@ -260,13 +261,13 @@ class PvchartController extends AppController {
         $connection = \Cake\Datasource\ConnectionManager::get('default');
         $result = $connection->execute('select u.os_version as name,u.os,count(u.id) as nums from `pvlog` u
                  group by u.os_version,u.os')->fetchAll('assoc');
-        foreach($result as $k=>$v){
+        foreach ($result as $k => $v) {
             switch ($v['os']) {
                 case 1:
-                    $result[$k]['name'] = 'ios '.$v['name'];
+                    $result[$k]['name'] = 'ios ' . $v['name'];
                     break;
                 case 2:
-                    $result[$k]['name'] = 'android '.$v['name'];
+                    $result[$k]['name'] = 'android ' . $v['name'];
                     break;
                 case 3:
                     $result[$k]['name'] = '其他';
@@ -281,86 +282,120 @@ class PvchartController extends AppController {
         echo $this->Echart->setPieChart($result, $name, $title);
         exit();
     }
-    
+
     /**
      * ptag统计
      * @param type $tag
      */
-    public function tagchart($ptag){
+    public function tagchart($ptag) {
         $this->set(compact('ptag'));
     }
-    
+
     /**
      * ptag统计
      * @param type $tag
      */
-    public function urlchart($ptag){
-        $this->set(compact('ptag'));
+    public function urlchart($ptag = null) {
+        $url = null;
+        if (!isset($ptag)) {
+            $url = $this->request->query('url');
+        }
+        $this->set(compact('ptag', 'url'));
     }
-    
-    public function getTagChart($ptag){
+
+    public function getTagChart($ptag) {
         $date = $this->request->query('date');
-        $date = date('Y-m-d H:i:s',  strtotime($date));
+        $date = date('Y-m-d H:i:s', strtotime($date));
         $type = $this->request->query('type');
         $connection = \Cake\Datasource\ConnectionManager::get('default');
-        if($type=='month'){
+        if ($type == 'month') {
             $sql = "select count(u.id) as nums,day(u.create_time) as time_item,date(u.create_time) as date
-                            from `pvlog` u where month(u.create_time) = month('".$date."')
+                            from `pvlog` u where month(u.create_time) = month('" . $date . "')
                             and u.ptag = '$ptag'
                             group by date(u.create_time)";
-            $name = date('n',  strtotime($date)).'月';
+            $name = date('n', strtotime($date)) . '月';
         }
-        if($type=='year'){
+        if ($type == 'year') {
             $sql = "select count(u.id) as nums,month(u.create_time) as time_item
-                            from `pvlog` u where year(u.create_time) = year('".$date."')
+                            from `pvlog` u where year(u.create_time) = year('" . $date . "')
                             and u.ptag = '$ptag'
                             group by month(u.create_time)";
-            $name = date('Y',  strtotime($date)).'年';
+            $name = date('Y', strtotime($date)) . '年';
         }
-        if($type=='week'){
+        if ($type == 'week') {
             $sql = "select count(u.id) as nums,weekday(u.create_time) as time_item
-                            from `pvlog` u where week(u.create_time) = week('".$date."')
+                            from `pvlog` u where week(u.create_time) = week('" . $date . "')
                             and u.ptag = '$ptag'    
                             group by weekday(u.create_time)";
-            $name = date('Y',  strtotime($date)).'年第'.date('W',  strtotime($date)).'周';
+            $name = date('Y', strtotime($date)) . '年第' . date('W', strtotime($date)) . '周';
         }
         $result = $connection->execute($sql)->fetchAll('assoc');
         $this->loadComponent('Echart');
         $title['text'] = 'ptag访问统计';
-        echo $this->Echart->setLineChart($result,$type,$name,$title,'次');
+        echo $this->Echart->setLineChart($result, $type, $name, $title, '次');
         exit();
     }
-    
-    public function getUrlChart($ptag){
+
+    public function getUrlChart($ptag = null) {
         $date = $this->request->query('date');
-        $date = date('Y-m-d H:i:s',  strtotime($date));
+        $date = date('Y-m-d H:i:s', strtotime($date));
         $type = $this->request->query('type');
         $connection = \Cake\Datasource\ConnectionManager::get('default');
-        if($type=='month'){
+        if ($type == 'month') {
             $sql = "select count(u.id) as nums,day(u.create_time) as time_item,date(u.create_time) as date
-                            from `pvlog` u where month(u.create_time) = month('".$date."')
+                            from `pvlog` u where month(u.create_time) = month('" . $date . "')
                             and u.urlmap = '$ptag'
                             group by date(u.create_time)";
-            $name = date('n',  strtotime($date)).'月';
+            if (!$ptag) {
+                $url = $this->request->query('url');
+                if (preg_match('/http:\/\/.*\/(.*\/.*\/).*/', $url, $matches)) {
+                    $patt = $matches[1];
+                }
+                $sql = "select count(u.id) as nums,day(u.create_time) as time_item,date(u.create_time) as date
+                            from `pvlog` u where month(u.create_time) = month('" . $date . "')
+                            and u.url REGEXP BINARY '.*/" . $patt . "[0-9]*'
+                            group by date(u.create_time)";
+            }
+            $name = date('n', strtotime($date)) . '月';
         }
-        if($type=='year'){
+        if ($type == 'year') {
             $sql = "select count(u.id) as nums,month(u.create_time) as time_item
-                            from `pvlog` u where year(u.create_time) = year('".$date."')
+                            from `pvlog` u where year(u.create_time) = year('" . $date . "')
                             and u.urlmap = '$ptag'
                             group by month(u.create_time)";
-            $name = date('Y',  strtotime($date)).'年';
+            if (!$ptag) {
+                $url = $this->request->query('url');
+                if (preg_match('/http:\/\/.*\/(.*\/.*\/).*/', $url, $matches)) {
+                    $patt = $matches[1];
+                }
+                $sql = "select count(u.id) as nums,month(u.create_time) as time_item
+                            from `pvlog` u where year(u.create_time) = year('" . $date . "')
+                            and u.url REGEXP BINARY '.*/" . $patt . "[0-9]*'
+                            group by month(u.create_time)";
+            }
+            $name = date('Y', strtotime($date)) . '年';
         }
-        if($type=='week'){
+        if ($type == 'week') {
             $sql = "select count(u.id) as nums,weekday(u.create_time) as time_item
-                            from `pvlog` u where week(u.create_time) = week('".$date."')
+                            from `pvlog` u where week(u.create_time) = week('" . $date . "')
                             and u.urlmap = '$ptag'    
                             group by weekday(u.create_time)";
-            $name = date('Y',  strtotime($date)).'年第'.date('W',  strtotime($date)).'周';
+            if (!$ptag) {
+                $url = $this->request->query('url');
+                if (preg_match('/http:\/\/.*\/(.*\/.*\/).*/', $url, $matches)) {
+                    $patt = $matches[1];
+                }
+                $sql = "select count(u.id) as nums,weekday(u.create_time) as time_item
+                            from `pvlog` u where week(u.create_time) = week('" . $date . "')
+                            and u.url REGEXP BINARY '.*/" . $patt . "[0-9]*' 
+                            group by weekday(u.create_time)";
+            }
+            $name = date('Y', strtotime($date)) . '年第' . date('W', strtotime($date)) . '周';
         }
         $result = $connection->execute($sql)->fetchAll('assoc');
         $this->loadComponent('Echart');
         $title['text'] = 'url访问统计';
-        echo $this->Echart->setLineChart($result,$type,$name,$title,'次');
+        echo $this->Echart->setLineChart($result, $type, $name, $title, '次');
         exit();
     }
 

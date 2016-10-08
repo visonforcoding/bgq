@@ -38,9 +38,20 @@
                     var ptag_chart = echarts.init(document.getElementById('register_chart'));
                     // 使用刚指定的配置项和数据显示图表。
                     var date = $('#choice_date').val();
+                    var turl = null;
+                    <?php if(isset($url)):  ?>
+                       turl = '<?=$url?>';
+                    <?php endif;?>
                     var url = '/admin/pvchart/get-url-chart/<?=$ptag?>';
+                    if(turl){
+                        url = '/admin/pvchart/get-url-chart?url='+encodeURIComponent(turl);
+                    }
                     var type = $('#choice-time-type').val();
-                    initLineChart(url + '?date=' + date + '&type=' + type, ptag_chart);
+                    if(turl){
+                        initLineChart(url + '&date=' + date + '&type=' + type, ptag_chart);
+                    }else{
+                        initLineChart(url + '?date=' + date + '&type=' + type, ptag_chart);
+                    }
                     $('.chart-column-btn').click(function () {
                         $('.chart-column-btn').removeClass('btn-primary');
                         $(this).addClass('btn-primary');
@@ -50,7 +61,12 @@
                         var date = $('#choice_date').val();
                         var url = '/admin/pvchart/get-url-chart/<?=$ptag?>';
                         var type = $('#choice-time-type').val();
-                        url = url + '?date=' + date + '&type=' + type;
+                        if(turl){
+                            url = '/admin/pvchart/get-url-chart?url='+encodeURIComponent(turl);
+                            url = url + '&date=' + date + '&type=' + type;
+                        }else{
+                            url = url + '?date=' + date + '&type=' + type;
+                        }
                         initLineChart(url, ptag_chart);
                     });
                 });

@@ -865,3 +865,8 @@ ALTER TABLE `activity` ADD COLUMN `apply_start_time` INT(10) NOT NULL DEFAULT 0 
 
 ALTER TABLE `pvtag`
 	CHANGE COLUMN `ptag` `ptag` VARCHAR(50) NOT NULL AFTER `id`;
+
+
+ALTER TABLE `user`
+	CHANGE COLUMN `goodat` `goodat` VARCHAR(2000) NULL DEFAULT '' COMMENT '擅长业务' AFTER `ext_industry`,
+	CHANGE COLUMN `gsyw` `gsyw` VARCHAR(2000) NULL DEFAULT NULL COMMENT '公司业务' AFTER `ywnl`;	
