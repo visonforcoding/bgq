@@ -111,15 +111,6 @@
                 </a>
             </li>
             <li>
-                <a href="/home/my-business">
-                    <span id="goodat"><i class="color-items">*</i>擅长业务<i class="color-items"><?= $user->goodat ? '' : '(未完善)' ?></i>：</span>
-                    <div>
-                        <span>
-                        </span>
-                    </div>
-                </a>
-            </li>
-            <li>
                 <a href="/home/edit-company-business">
                     <span id="gsyw"><i class="color-items">*</i>公司业务<i class="color-items"><?= $user->gsyw ? '' : '(未完善)' ?></i>：</span>
                     <div>
@@ -128,7 +119,15 @@
                     </div>
                 </a>
             </li>
-
+            <li>
+                <a href="/home/my-business">
+                    <span id="goodat"><i class="color-items">*</i>擅长业务<i class="color-items"><?= $user->goodat ? '' : '(未完善)' ?></i>：</span>
+                    <div>
+                        <span>
+                        </span>
+                    </div>
+                </a>
+            </li>
         </ul>
 <!--        <ul class="h-info-box e-info-box max_width">
             

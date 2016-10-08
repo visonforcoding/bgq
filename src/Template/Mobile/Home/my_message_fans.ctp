@@ -20,22 +20,26 @@
     <div id="buttonLoading" class="loadingbox"></div>
 </div>
 <script type="text/html" id="fansTpl">
-    <section class="internet-v-info no-margin-top">
+    <section class="internet-v-info">
         <div class="innercon">
-            <a href="/user/home-page/{#follower_id#}">
-                <span class="head-img"><img src="{#follower_avatar#}"/>{#v#}</span>
-            </a>
-            <div class="vipinfo my-meet-info">
-                <h3>{#follower_truename#}</h3>
-                <a class="alink" href="/user/home-page/{#follower_id#}">
-                    <span class="job">{#follower_company#}&nbsp;&nbsp;{#follower_position#}</span>
-                    <div class="mark">
-                        <span class="datetime">{#create_time#} <span class="meetnum">{#follower_fans#}人已关注</span></span>
+            <a href="/user/home-page/{#following_id#}"><span class="head-img"><img src="{#following_avatar#}"><i></i></span></a>
+            <div class="vipinfo bd1">
+                <div class="fl c_info_list">
+                    <a href="/user/home-page/{#following_id#}">
+                        <h3><div class="l-name">{#following_truename#}</div><div class="job line1">{#following_position#}</div></h3>
+                        <span class="job">{#following_company#}</span>
+                    </a>
+                    <div class="mark s_mark_h">
+                        {#following_subject#}
                     </div>
-                </a>
+                </div>
+                <div class="m_focus_r r_focus_num fl {#focus_class#}" user_id="{#following_id#}" {#focus_id_str#}>
+                    <span class="meetnum">{#following_fans#}人关注</span>
+                    {#focus_msg#}
+                </div>
             </div>
         </div>
-    </section>	
+    </section>
 </script>
 <script type="text/html" id="sysTpl">
     <li>
@@ -74,19 +78,20 @@
             success: function (res) {
                 if (res.status) {
                     $.util.dataToTpl('follow', 'fansTpl', res.data, function (d) {
-                        d.follower_truename = d.u.truename;
-                        d.follower_company = d.u.company;
-                        d.follower_avatar = d.u.avatar ? d.u.avatar : '/mobile/images/touxiang.png';
-                        d.follower_position = d.u.position;
-                        d.follower_id = d.u.id;
-                        if (d.uf.type == '2') {
-                            d.type = '<span style="color:green" class="meetnum f-color-black">√已关注</span>';
-                        }
-                        if (d.uf.type == '1') {
-                            d.type = '<span style="color:red" data-id="' + d.u.id + '" class="meetnum follow_btn color-items">+加关注</span>';
+                        d.following_truename = d.u.truename;
+                        d.following_company = d.u.company;
+                        d.following_avatar = d.u.avatar ? d.u.avatar : '/mobile/images/touxiang.png';
+                        d.following_position = d.u.position;
+                        d.following_id = d.u.id;
+                        if(d.uf.type == 1){
+                            d.focus_class = 'color-items';
+                            d.focus_msg = '<i class="iconfont">&#xe614;</i><span class="msg color-items">加关注</span>';
+                            d.focus_id_str = 'id="focus_'+ d.following_id +'"';
+                        } else if(d.uf.type == 2) {
+                            d.focus_msg = '<i class="iconfont">&#xe614;</i><span class="msg color-gray">已关注</span>';
                         }
                         d.v = d.u.level == 2 ? '<i></i>' : '';
-                        d.follower_fans = d.u.fans;
+                        d.following_fans = d.u.fans;
                         return d;
                     });
                 } else {
@@ -250,5 +255,38 @@
             });
         });
     }
+    
+    $('body').on('tap', function (e) {
+        var target = e.srcElement || e.target, em = target, i = 1;
+        while (em && !em.id && i <= 3) {
+            em = em.parentNode;
+            i++;
+        }
+        if (!em || !em.id)
+            return;
+        if(em.id.indexOf('focus_') != -1){
+            var obj = $(em);
+            if (obj.hasClass('notap')) {
+                return false;
+            }
+            obj.addClass('notap');
+            var user_id = obj.attr('user_id');
+            $.util.ajax({
+                url: '/user/follow',
+                data: {id: user_id},
+                func: function (res) {
+                    $.util.alert(res.msg);
+                    if (res.status) {
+                        if (res.msg.indexOf('取消关注') != '') {
+                            obj.removeClass('color-items').find('span.msg').removeClass('color-items').addClass('color-gray').html('已关注');
+                        } else {
+                            obj.find('span.msg').html('加关注');
+                            obj.removeClass('notap');
+                        }
+                    }
+                }
+            });
+        }
+    });
 </script>
 <?php $this->end('script'); ?>
