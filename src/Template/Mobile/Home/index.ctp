@@ -155,6 +155,8 @@
                     $('#user').html(user);
                     if (res.data.activityMsg) {
                         $('#activityMsg').addClass('opci');
+                    } else {
+                        $('#activityMsg').removeClass('opci');
                     }
                     if (res.data.meetMsg) {
                         $('#meetMsg').addClass('opci');
