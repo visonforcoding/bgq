@@ -37,16 +37,19 @@
     <script type="text/javascript">
         var tabheight = $('.z_tab_head').offset().top;
         $('.z_tab_head li').on('tap', function () {
-            var index = $(this).index();
+            tap(this);
+        });
+        
+        function tap(em){
+            var index = $(em).index();
             var hei = $('.z_items').eq(index).height();
             var minHeight = window.screen.height - $('.z_tab_head').height() - 30;
-            $(this).addClass('active').siblings().removeClass();
+            $(em).addClass('active').siblings().removeClass();
             $('.z_line').css('left', index * 33.33 + '%');
             $('.z_tab_box').css({'left': -index * 100 + '%'});
             $('.z_tab_con').css({'height': hei + 'px', 'min-height': minHeight});
-//            if (document.scrollTop > tabheight)
-//                window.scrollTo(0, tabheight);
-        });
+        }
+        
         //tab选项卡固定
         $(window).on('scroll', function () {
             var scrollTop = document.body.scrollTop;
@@ -118,34 +121,51 @@
     $.ajax({
         type: 'POST',
         dataType: 'json',
-        url: "/beauty/get-vote-user/1",
+        url: "/beauty/get-vote-user",
         success: function (res) {
             if (res.status) {
-                dealData(res.data, 1);
+                var d = {};
+                for(var i=0;i<res.data.length;i++){
+                    var id = res.data[i].type_id;
+                    if(!d[id]){
+                        d[id] = [];
+                    }
+                    d[id].push(res.data[i]);
+                }
+                console.log(d);
+                dealData(d[1], 1);
+                dealData(d[2], 2);
+                dealData(d[3], 3);
+                tap($('.z_tab_head li').get(1));
             }
         }
     });
-    $.ajax({
-        type: 'POST',
-        dataType: 'json',
-        url: "/beauty/get-vote-user/2",
-        success: function (res) {
-            if (res.status) {
-                dealData(res.data, 2);
-            }
-        }
-    });
-    $.ajax({
-        type: 'POST',
-        dataType: 'json',
-        url: "/beauty/get-vote-user/3",
-        success: function (res) {
-            if (res.status) {
-                dealData(res.data, 3);
-            }
-        }
-    });
-
+//    $.ajax({
+//        type: 'POST',
+//        dataType: 'json',
+//        url: "/beauty/get-vote-user/2",
+//        success: function (res) {
+//            if (res.status) {
+//                dealData(res.data, 2);
+//                tap($('.z_tab_head li').get(1));
+//            }
+//        }
+//    });
+//    
+//    
+//    $.ajax({
+//        type: 'POST',
+//        dataType: 'json',
+//        url: "/beauty/get-vote-user/3",
+//        success: function (res) {
+//            if (res.status) {
+//                dealData(res.data, 3);
+//            }
+//        }
+//    });
+    
+    
+    
     function dealData(data, id) {
         $.util.dataToTpl('beauty_'+id, 'tpl', data, function (d) {
             d.position = d.user.position;
@@ -164,6 +184,9 @@
         });
         $('.vote').on('tap', function () {
             var obj = $(this);
+            if(!obj.hasClass('vote')){
+                return false;
+            }
             $.util.ajax({
                 url: '/beauty/vote/' + obj.attr('user_id'),
                 func: function (res) {
@@ -173,6 +196,7 @@
                         obj.prev('span.zt_num').html(parseInt(obj.prev('span.zt_num').html()) + 1 + '票');
                     } else {
                         $.util.alert(res.msg);
+                        obj.removeClass('vote');
                     }
                 }
             });
@@ -195,7 +219,7 @@
 //    $('#enroll').on('tap', function () {
 //        $.util.checkLogin('/beauty/enroll');
 //    });
-
+    
     $.util.searchHide();
 </script>
 <?php

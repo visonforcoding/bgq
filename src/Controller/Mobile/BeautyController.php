@@ -41,7 +41,7 @@ class BeautyController extends AppController {
     /**
      * ajax获取选美活动首页票数前10的选手
      */
-    public function getVoteUser($type_id=null){
+    public function getVoteUser(){
         $BeautyTable = \Cake\ORM\TableRegistry::get('beauty');
         $UserTable = \Cake\ORM\TableRegistry::get('user');
         $user_id = '';
@@ -57,7 +57,7 @@ class BeautyController extends AppController {
                     }, 'BeautyPics'=>function($q){
                         return $q->orderDesc('BeautyPics.create_time');
                     }])
-                    ->where(['is_pass'=>1, 'type_id'=>$type_id])
+                    ->where(['is_pass'=>1])
 //                    ->limit(10)
                     ->orderDesc('vote_nums')
                     ->formatResults(function($items){
@@ -71,7 +71,6 @@ class BeautyController extends AppController {
                         });
                     })
                     ->toArray();
-//            debug($beauty);die;
             $now = \Cake\I18n\Time::now();
             $today = $now->format('Y-m-d');
             if($user->is_judge == 1){
@@ -101,7 +100,6 @@ class BeautyController extends AppController {
                         return $q->orderDesc('BeautyPics.create_time');
                     }])
                     ->where(['is_pass'=>1])
-                    ->limit(10)
                     ->orderDesc('vote_nums')
                     ->formatResults(function($items){
                         return $items->map(function($item) {
@@ -118,13 +116,6 @@ class BeautyController extends AppController {
                     })
                     ->toArray();
         }
-//        foreach($beauty as $key=>$value){
-//            if($value->beauty_pics){
-//                foreach($value->beauty_pics as $k=>$v){
-//                    $beauty[$key]->beauty_pics[$k]->pic_url= createImg(preg_replace('/small_/','',$v->pic_url)).'?w=182&fit=crop';
-//                }
-//            }
-//        }
         return $this->Util->ajaxReturn(['status'=>true, 'data'=>$beauty]);
     }
     
