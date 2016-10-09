@@ -51,12 +51,13 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '手机号', '公司', '职位', '等级', '约见次数', '推荐次数', '项目经验', '资源优势', '审核情况', '置顶', '操作'],
+                                ['ID', '用户', '手机号', '公司', '职位', '等级', '约见次数', '推荐次数', '项目经验', '资源优势', '审核情况', '置顶', '操作'],
                         colModel: [
+                            {name: 'id', editable: true, align: 'center', width:'40px'},
                             {name: 'truename', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     return '<a title="查看" onClick="showSavant(' + " ' " + rowObject.id + " ' " + ');" class="grid-btn ">' + cellvalue + '</a>';
                                 }},
-                            {name: 'phone', editable: true, align: 'center'},
+                            {name: 'phone', editable: true, align: 'center', width:'100px'},
                             {name: 'company', editable: true, align: 'center'},
                             {name: 'position', editable: true, align: 'center'},
                             {name: 'grade', editable: true, align: 'center', formatter: function (cell, opt, row) {
@@ -106,7 +107,7 @@
                         caption: '',
                         autowidth: true,
                         height: 'auto',
-                        rownumbers: true,
+                        rownumbers: false,
                         fixed: true,
                         jsonReader: {
                             root: "rows",
