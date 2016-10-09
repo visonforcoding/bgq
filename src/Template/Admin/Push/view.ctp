@@ -72,13 +72,13 @@
             return false;
         }
         var form = $('form').serialize();
-        console.log(form);
         $.ajax({
             type: 'POST',
             dataType: 'json',
             data: form,
             url: "/admin/push/do_push",
             success: function (res) {
+                console.log(res);
                 layer.alert(res.msg);
                 if (res.status) {
                     parent.layer.alert('推送成功');
