@@ -32,5 +32,5 @@
     </section>
 </div>
 <script>
-    console.log(<?= json_encode($recom) ?>);
+    console.log(<?= json_encode($recoms) ?>);
 </script>
