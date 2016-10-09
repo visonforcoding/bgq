@@ -10,10 +10,12 @@
             <label class="col-md-2 control-label"></label>
             <div class="col-md-8"></div>
         </div>
+        <?php if($content): ?>
         <div class="form-group">
             <label class="col-md-2 control-label">标签</label>
             <div class="col-md-8"><input value="<?= $content->name ?>" class="form-control" readonly></div>
         </div>
+        <?php endif; ?>
         <div class="form-group">
             <label class="col-md-2 control-label">推送标题</label>
             <div class="col-md-8"><input type="text" name="title" class="form-control"/></div>
@@ -59,15 +61,15 @@
 //        }
         if ($('input[name="title"]').val() == '') {
             layer.alert('请输入推送标题');
-            return;
+            return false;
         }
         if ($('input[name="content"]').val() == '') {
             layer.alert('请输入推送内容');
-            return;
+            return false;
         }
         if ($('input[name="remark"]').val() == '') {
             layer.alert('请输入备注内容');
-            return;
+            return false;
         }
         var form = $('form').serialize();
         console.log(form);

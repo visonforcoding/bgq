@@ -6,7 +6,7 @@
 <?php endif; ?>
 <select name="industry_id" id="select-industry" class=" form-control" <?php if (!$single): ?>multiple="multiple"<?php endif; ?>>
     <?php foreach ($industries as $industry): ?>
-    <option></option>
+    <option value="all">全部</option>
         <option <?php if (isset($selIds) && !$single): ?>
                 <?php if (in_array($industry->id, $selIds)): ?>selected="selected"<?php endif; ?>
             <?php endif; ?> 
