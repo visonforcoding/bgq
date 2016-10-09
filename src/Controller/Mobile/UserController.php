@@ -42,7 +42,9 @@ class UserController extends AppController {
                 return $q->where(['is_del'=>0])->orderDesc('Subjects.create_time');
             }, 'RecoUsers'=>function($q){
                 return $q->limit(8)->orderDesc('RecoUsers.create_time');
-            },'RecoUsers.Users'],
+            },'RecoUsers.Users'=>function($q){
+                return $q->where(['enabled'=>1]);
+            }],
             'conditions' => [
                 'enabled' => 1
             ]
