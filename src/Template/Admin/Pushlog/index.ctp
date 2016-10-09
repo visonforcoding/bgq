@@ -47,7 +47,7 @@
                                     return cell+' '+row.pusher.company+' '+row.pusher.position;
                             }},
                             {name: 'receiver.truename', editable: true, align: 'center',formatter:function(cell,opt,row){
-                                    if(row.type == 3) return;
+                                    if(row.type == 3) return '';
                                     return cell+' '+row.receiver.company+' '+row.receiver.position;
                             }},
                             {name: 'title', editable: true, align: 'center'},
