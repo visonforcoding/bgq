@@ -65,9 +65,10 @@
                         cellsubmit: 'remote',
                         cellurl: '/admin/user/hand-change',
                         colNames:
-                                ['手机号', '姓名', '类型', '等级', '公司', '职位', '性别', '会员认证', '帐号状态', '创建时间', '操作'],
+                                ['ID', '手机号', '姓名', '类型', '等级', '公司', '职位', '性别', '会员认证', '帐号状态', '创建时间', '操作'],
                         colModel: [
-                            {name: 'phone', editable: false, align: 'center'},
+                            {name: 'id', editable: false, align: 'center', width:'40px'},
+                            {name: 'phone', editable: false, align: 'center', width:'100px'},
                             {name: 'truename', editable: false, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     return '<a title="查看" onClick="showUser(' +" ' "+rowObject.id+" ' " + ');" class="grid-btn ">'+cellvalue+'</a>';
                             }},
@@ -130,7 +131,7 @@
                         caption: '',
                         autowidth: true,
                         height: 'auto',
-                        rownumbers: true,
+                        rownumbers: false,
                         fixed: true,
                         jsonReader: {
                             root: "rows",
