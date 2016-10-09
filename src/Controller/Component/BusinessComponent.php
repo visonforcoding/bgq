@@ -217,7 +217,7 @@ class BusinessComponent extends Component {
                 $pushlog = $PushlogTable->newEntity();
                 $pushlog->push_id = $push_id;
                 $pushlog->receive_id = $user_id;
-                $pushlog->title = $user->truename . '关注了您';
+                $pushlog->title = $push->truename . '关注了您';
                 $pushlog->body = ' ';
                 $pushlog->type = 2;
                 $PushlogTable->save($pushlog);
