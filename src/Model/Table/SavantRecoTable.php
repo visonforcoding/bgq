@@ -35,7 +35,8 @@ class SavantRecoTable extends Table {
         ]);
         $this->belongsTo('Users', [
             'className' => 'User',
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
         ]);
 
         $this->addBehavior('Timestamp', [
