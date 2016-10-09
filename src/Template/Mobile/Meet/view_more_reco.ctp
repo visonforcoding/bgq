@@ -31,3 +31,6 @@
         <?php endforeach;?>
     </section>
 </div>
+<script>
+    console.log(<?= json_encode($recom) ?>);
+</script>
