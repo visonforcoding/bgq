@@ -558,7 +558,7 @@ display: -webkit-box;-webkit-line-clamp: 1;}
 .m-detail-box li h3,.m-detail li h3{width:75%;line-height: 0.4rem;font-size:0.3rem;}
 .m-detail .mtitle h3{width:100%;}
 .m-detail li .t-tittle{width:100%;border-bottom:1px #e5e5e5 solid;padding-bottom:.2rem;}
-.m-detail li p{color:#7A7E83;margin-top:0.2rem;line-height: .32rem;}
+.m-detail li p{color:#7A7E83;margin-top:0.2rem;line-height: .44rem;text-align: justify;}
 .m-detail-box li:first-child h3 span,.m-detail li:first-child h3 span{font-size:0.26rem;margin-top:0.1rem;color:#9ba4ad;}
 .meet-type{font-size:0.28rem;}
 .m-detail-box li:nth-child(2),
@@ -893,7 +893,7 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .my-home-menu a.active,.my-home-menu span.active{background: #b71c2d;color:#fff;}
 .my-collection-info{border-bottom:1px #e5e5e5 solid;border-top:1px #e5e5e5 solid;margin-top:-1px;}
 .my-collection-info .innercon:last-of-type a{border-bottom:none;}
-.my-collection-info a{overflow:hidden;padding:0.29rem 0;display:block;border-bottom:1px #e5e5e5 solid;}
+.my-collection-info a{overflow:hidden;padding:0.29rem 0;display:block;/*border-bottom:1px #e5e5e5 solid;*/}
 .my-collection-info .my-pic-acive{width:1.7rem;height:1.39rem;display: block;float:left;}
 .my-collection-info .my-pic-acive img{width:100%;height:auto;display: block;min-height:1.39rem;}
 .my-collection-items{float:left;width:4.5rem;font-size:0.26rem;margin-left:.2rem;}
@@ -973,8 +973,9 @@ border-top:1px #e5e5e5 solid;line-height: 1rem;font-size:0;max-width: 750px;
 .systerm-info-box span{font-size:0.26rem;line-height:0.42rem;color:#222;}
 .systerm-info-box h3{line-height: 0.42rem;}
 .expert-commond,.active-commond{background: #f0eff5;position: relative;margin-bottom:0.2rem;}
+.expert-commond{margin-top:.5rem;}
 .expert-commond:before,.active-commond:before{content:'会员推荐';color:#7a7e83;position: absolute;width:1.5rem;height:0.24rem;
-top:-0.1rem;left:50%;margin-left:-0.52rem;background: #f0eff5;text-align: center;font-size:0.3rem;}
+top:-0.1rem;left:50%;margin-left:-0.525rem;background: #f0eff5;text-align: center;font-size:0.3rem;}
 .active-commond:before{content:'活动推荐';}
 .expert-commond ul{background: #f0eff5;border-top:#e5e5e5 1px solid;font-size:0;padding-top:0.2rem;}
 .expert-commond ul li{width:50%;display: inline-block;margin-top:0.3rem;}
