@@ -47,8 +47,10 @@
                                     return cell+' '+row.pusher.company+' '+row.pusher.position;
                             }},
                             {name: 'receiver.truename', editable: true, align: 'center',formatter:function(cell,opt,row){
-                                    var company = row.receiver.company ? row.receiver.company : '';
-                                    var position = row.receiver.position ? row.receiver.position : '';
+                                    var company = '';
+                                    if(row.receiver.company) company = row.receiver.company;
+                                    var position = '';
+                                    if(row.receiver.position) position = row.receiver.position;
                                     return cell+' '+company+' '+position;
                             }},
                             {name: 'title', editable: true, align: 'center'},
