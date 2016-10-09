@@ -47,7 +47,9 @@
                                     return cell+' '+row.pusher.company+' '+row.pusher.position;
                             }},
                             {name: 'receiver.truename', editable: true, align: 'center',formatter:function(cell,opt,row){
-                                    return cell+' '+row.receiver.company+' '+row.receiver.position;
+                                    var company = row.receiver.company ? row.receiver.company : '';
+                                    var position = row.receiver.position ? row.receiver.position : '';
+                                    return cell+' '+company+' '+position;
                             }},
                             {name: 'title', editable: true, align: 'center'},
                             {name: 'type', editable: true, align: 'center',formatter:function(cell,opt,row){
