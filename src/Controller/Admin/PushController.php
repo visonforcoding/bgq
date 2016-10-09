@@ -96,44 +96,45 @@ class PushController extends AppController {
         if (!empty($where)) {
             $query->where($where);
         }
-//        if($type == 1){
-//            if($activity_id){
-//                $query->matching('Activityapply', function($q)use($activity_id){
-//                    return $q->where(['Activityapply.activity_id'=>$activity_id]);
-//                });
-//            }
-//        } else if($type == 2){
-            if($industry_id){
+        if($industry_id){
+            if($industry_id === 'all'){
+                
+            } else {
                 $query->matching('UserIndustry', function($q)use($industry_id){
                     return $q->where(['UserIndustry.industry_id' => $industry_id]);
                 });
             }
-//        }
+        }
         $res = $query->toArray();
-        
         $user = '';
+        $PushlogTable = \Cake\ORM\TableRegistry::get('pushlog');
         if($res !== false){
             if($res === null){
                 return $this->Util->ajaxReturn(false, '用户为空');
             } else {
-                foreach($res as $k=>$v){
-                    $user .= $v['user_token'] . "\n";
-                }
-                $this->loadComponent('Push');
                 if($url){
                     $extra['url'] = 'http://m.chinamatop.com' . $url;
-                    $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true, $extra);
                 } else {
-                    $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true);
+                    $extra = [];
+                }
+                $this->loadComponent('Push');
+                if($industry_id === 'all' && empty($keyword)){
+                    $push_res = $this->Push->sendAll($title, $content, $title, true, $extra);
+                    $type = 1;
+                } else {
+                    foreach($res as $k=>$v){
+                        $user .= $v['user_token'] . "\n";
+                    }
+                    $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true, $extra);
+                    $type = 3;
                 }
                 if($push_res){
-                    $PushlogTable = \Cake\ORM\TableRegistry::get('pushlog');
                     $pushlog = $PushlogTable->newEntity();
                     $data = [
                         'push_id' => -1,
                         'title' => $title,
                         'body' => $content,
-                        'type' => '3',
+                        'type' => $type,
                         'remark' => $remark
                     ];
                     $pushlog = $PushlogTable->patchEntity($pushlog, $data);
@@ -151,13 +152,13 @@ class PushController extends AppController {
     
     public function view($id){
         $this->viewBuilder()->autoLayout(false);
-//        if($type == 1){
-//            $activityTable = \Cake\ORM\TableRegistry::get('activity');
-//            $res = $activityTable->get($id);
-//        } else {
+        $res = '';
+        if($id === 'all'){
+            
+        } else {
             $industryTable = \Cake\ORM\TableRegistry::get('industry');
             $res = $industryTable->get($id);
-//        }
+        }
         $this->set([
             'content'=>$res,
 //            'type' => $type
