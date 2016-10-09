@@ -248,6 +248,7 @@ class HomeController extends AppController {
                             return $item;
                         });
                     })
+                    ->orderDesc('user_fans.create_time')
                     ->toArray();
                 if($followings){
                     return $this->Util->ajaxReturn(['status'=>true, 'data'=>$followings]);
@@ -277,6 +278,7 @@ class HomeController extends AppController {
                                 return $item;
                             });
                         })
+                        ->orderDesc('user_fans.create_time')
                         ->toArray();
                 if($fans){
                     return $this->Util->ajaxReturn(['status'=>true, 'data'=>$fans]);
