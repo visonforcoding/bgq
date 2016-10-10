@@ -8,6 +8,7 @@ use Wpadmin\Controller\AppController;
  * Rd Controller
  *
  * @property \App\Controller\Component\PushComponent $Push
+ * @property \App\Controller\Component\SmsComponent $Sms
  */
 class PushController extends AppController {
     
@@ -24,15 +25,16 @@ class PushController extends AppController {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
-        $activity_id = $this->request->data('activity_id');
+//        $activity_id = $this->request->data('activity_id');
         $industry_id = $this->request->data('industry_id');
-        $type = $this->request->data('type');
+//        $type = $this->request->data('type');
         $sort = 'User.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
-        $keywords = $this->request->data('keyword');
+        $keyword = $this->request->data('keyword');
+        
         $where = ['enabled'=>1];
-        if (!empty($keywords)) {
-            $where['or'] = [['truename like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
+        if (!empty($keyword)) {
+            $where['or'] = [['truename like' => "%$keyword%"], ['phone like' => "%$keyword%"]];
         }
 //        if ($this->request->query('type') == '1') {
 //            $where['status'] = 1;
@@ -71,6 +73,9 @@ class PushController extends AppController {
         echo json_encode($data);
     }
     
+    /**
+     * 推送
+     */
     public function doPush(){
         $title = $this->request->data('title');
 //        $type = $this->request->data('type');
@@ -81,6 +86,8 @@ class PushController extends AppController {
 //        $activity_id = $this->request->data('activity_id');
         $industry_id = $this->request->data('industry_id');
         $keyword = $this->request->data('keyword');
+        $push = $this->request->data('push');
+        $text = $this->request->data('text');
         $where = ['enabled'=>1];
         if (!empty($keyword)) {
             $where['or'] = [['truename like' => "%$keyword%"], ['phone like' => "%$keyword%"]];
@@ -99,8 +106,10 @@ class PushController extends AppController {
         }
         $res = $query->toArray();
         $user = '';
+        $uid = [];
         $PushlogTable = \Cake\ORM\TableRegistry::get('pushlog');
-        if($res !== false){
+        $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
+        if($res !== false && $push === 'true'){
             if($res === null){
                 return $this->Util->ajaxReturn(false, '用户为空');
             } else {
@@ -109,38 +118,66 @@ class PushController extends AppController {
                 } else {
                     $extra = [];
                 }
+                $query = $UsermsgTable->query()->insert(['user_id', 'title', 'msg', 'url', 'create_time']);
+                $data = [
+                    'title' => $title,
+                    'msg' => $content,
+                    'url' => !empty($extra) ? $extra['url'] : 'javascript:void(0)',
+                    'create_time' => date('Y-m-d H:i:s')
+                ];
+                foreach($res as $k=>$v){
+                    $user .= $v['user_token'] . "\n";
+                    $uid[] = $v['id'];
+                    $data['user_id'] = $v['id'];
+                    $query->values($data);
+                }
                 $this->loadComponent('Push');
                 if($industry_id === 'all' && empty($keyword)){
                     $push_res = $this->Push->sendAll($title, $content, $title, true, $extra);
                     $type = 1;
                 } else {
-                    foreach($res as $k=>$v){
-                        $user .= $v['user_token'] . "\n";
-                    }
-                    
                     $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true, $extra);
                     $type = 3;
                 }
+                $query->execute();
                 if($push_res){
-                    $pushlog = $PushlogTable->newEntity();
-                    $data = [
-                        'push_id' => -1,
-                        'title' => $title,
-                        'body' => $content,
-                        'type' => $type,
-                        'remark' => $remark
-                    ];
-                    $pushlog = $PushlogTable->patchEntity($pushlog, $data);
-                    $PushlogTable->save($pushlog);
-                    return $this->Util->ajaxReturn(true, '推送成功');
+                    $is_success = 1;
                 } else {
-                    return $this->Util->ajaxReturn(false, '推送失败');
+                    $is_success = 0;
+                }
+                $pushlog = $PushlogTable->newEntity();
+                $data = [
+                    'push_id' => -1,
+                    'title' => $title,
+                    'get_message_uid' => serialize($uid),
+                    'body' => $content,
+                    'extra' => $extra,
+                    'type' => $type,
+                    'remark' => $remark,
+                    'is_success' => $is_success
+                ]; 
+                $pushlog = $PushlogTable->patchEntity($pushlog, $data);
+                $PushlogTable->save($pushlog);
+            }
+        }
+        if($text === 'true' && $res !== false){
+            if($res === null){
+                return $this->Util->ajaxReturn(false, '用户为空');
+            } else {
+                $this->loadComponent('Sms');
+                $mobile_arr = [];
+                foreach($res as $k=>$v){
+                    $mobile_arr[] = $v['phone'];
+                }
+                $mobile = implode(',', $mobile_arr); 
+                $res = $this->Sms->sendManyByQf106($mobile, $content);
+                if($res){
+                    $this->Util->ajaxReturn(true, '发送成功');
+                } else {
+                    $this->Util->ajaxReturn(false, '发送失败');
                 }
             }
-        } else {
-            return $this->Util->ajaxReturn(false, '系统错误');
         }
-        
     }
     
     public function view($id){

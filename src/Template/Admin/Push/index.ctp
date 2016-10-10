@@ -26,6 +26,12 @@
                 <label for="keyword">关键字</label>
                 <input type="text" name="keyword" class="form-control" id="keywords" placeholder="用户名、电话">
             </div>
+            <div class="form-group">
+                <label for="push">推送+站内信</label>
+                <input type="checkbox" name="push" class="form-control" id="push" checked />
+                <label for="text">短信</label>
+                <input type="checkbox" name="text" class="form-control" id="text" />
+            </div>
             <a onclick="doSearch();" class="btn btn-info">预览用户</a>
             <a onclick="doPush();" class="btn btn-info">推送</a>
             <input type="hidden" name="val" value="">
@@ -216,9 +222,10 @@
                 }
 
                 function doPush() {
-//                    if($('#cate').val() == ''){
-//                        layer.alert('请先选择一个类别');
-//                        return;
+                    if(!$('input[name="push"]').get(0).checked && !$('input[name="text"]').get(0).checked){
+                        layer.alert('请先选择一个推送方式');
+                        return;
+                    }
 //                    } else if($('#cate').val() == 1 && $('#select-activity').val() == ''){
 //                        layer.alert('请选择一个活动');
 //                        return;

@@ -862,11 +862,14 @@ ALTER TABLE `binggq`.`beauty`
 
 ALTER TABLE `activity` ADD COLUMN `apply_start_time` INT(10) NOT NULL DEFAULT 0 COMMENT '活动开始时间';
 
-
 ALTER TABLE `pvtag`
 	CHANGE COLUMN `ptag` `ptag` VARCHAR(50) NOT NULL AFTER `id`;
 
-
 ALTER TABLE `user`
 	CHANGE COLUMN `goodat` `goodat` VARCHAR(2000) NULL DEFAULT '' COMMENT '擅长业务' AFTER `ext_industry`,
-	CHANGE COLUMN `gsyw` `gsyw` VARCHAR(2000) NULL DEFAULT NULL COMMENT '公司业务' AFTER `ywnl`;	
+	CHANGE COLUMN `gsyw` `gsyw` VARCHAR(2000) NULL DEFAULT NULL COMMENT '公司业务' AFTER `ywnl`;
+
+ALTER TABLE `binggq`.`pushlog`
+  ADD COLUMN `extra` text NULL COMMENT '额外内容' AFTER `body`;
+ALTER TABLE `binggq`.`pushlog`
+  ADD COLUMN `get_message_uid` text NULL COMMENT '群播的用户id集合' AFTER `receive_id`;

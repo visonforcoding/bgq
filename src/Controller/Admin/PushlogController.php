@@ -29,11 +29,12 @@ class PushlogController extends AppController {
      */
     public function view($id = null) {
         $this->viewBuilder()->autoLayout(false);
-        $pushlog = $this->Pushlog->get($id, [
-            'contain' => ['Pushes', 'Receives']
-        ]);
-        $this->set('pushlog', $pushlog);
-        $this->set('_serialize', ['pushlog']);
+        $pushlog = $this->Pushlog->get($id);
+        $id = unserialize($pushlog->get_message_uid);
+        $UserTable = \Cake\ORM\TableRegistry::get('user');
+        $user = $UserTable->find()->where(['id in'=>$id, 'enabled'=>1])->toArray();
+        $this->set('user', $user);
+//        $this->set('_serialize', ['pushlog']);
     }
 
     /**
