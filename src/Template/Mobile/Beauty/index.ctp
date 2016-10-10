@@ -20,8 +20,7 @@
         </div>
         <div class='z_top_con p20 bd2 bd1'>
             <div class="content_inner">
-                <p>由并购帮主办的“2016并购菁英评选”活动于10月8日启动，本次活动将评选出“十大产业菁英”、“十大金融菁英”和“十大顾问菁英”，参与并购项目各个环节的角色，如上市公司、投资机构、银行、券商、投行等，都可以报名参加。
-                </p></div>
+                <p>由并购帮主办的“并购帮2016十佳菁英奖”活动于2016年10月10日正式启动，本次活动将评选出“产业菁英”、“金融菁英”、“顾问菁英”，参与投资与并购项目各个环节的角色，如上市公司、投资机构、银行、券商、投行等，都可以报名参加。</p></div>
         </div>
     </div>
     <!--活动介绍 end-->
@@ -92,8 +91,8 @@
 •本次投票分为网络投票和专家评审团投票两个阶段，最终评选结果由主办方根据网络投票、专家投票综合决定。<br /></p>
 <br />
 <p class="jusitify"><strong>2.评选方式</strong><br />
-•网络投票时间为10月08日-10月23日；<br />
-•专家评审团投票时间10月25日-10月28日。
+•网络投票时间为10月10日-10月31日；<br />
+•专家评审团投票时间11月1日到11月3日。
 </p><br />
 <p><strong>解释权归属主办方所有。</strong></p>
         </div>
@@ -112,8 +111,8 @@
 <?php $this->start('script'); ?>
 <script>
     window.shareConfig.link = 'http://m.chinamatop.com/beauty/index?share=1&ptag=10003';
-    window.shareConfig.title = '2016并购菁英评选';
-    var share_desc = '由并购帮主办的“2016并购菁英评选 ”10月8日启动';
+    window.shareConfig.title = '并购帮2016十佳菁英奖';
+    var share_desc = '由并购帮主办的“2016并购菁英评选 ”10月10日启动';
     window.shareConfig.desc = share_desc;
     LEMON.show.shareIco();
 </script>
