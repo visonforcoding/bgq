@@ -29,7 +29,6 @@ class SmsComponent extends Component {
      * @return bool true 成功 false 失败
      */
     public function sendByQf106($mobile, $content,$code='') {
-
         $smsConfig = Configure::read('sms');
         if (!$smsConfig) {
             throw new \Exception('未配置短信平台信息');
