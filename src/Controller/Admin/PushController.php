@@ -34,27 +34,21 @@ class PushController extends AppController {
         if (!empty($keywords)) {
             $where['or'] = [['truename like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
         }
-        if ($this->request->query('type') == '1') {
-            $where['status'] = 1;
-        }
+//        if ($this->request->query('type') == '1') {
+//            $where['status'] = 1;
+//        }
         $query = $this->User->find();
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
         }
         $nums = $query->count();
-        if($type == 1){
-            if($activity_id){
-                $query->matching('Activityapply', function($q)use($activity_id){
-                    return $q->where(['Activityapply.activity_id'=>$activity_id]);
-                });
-            }
-        } elseif($type == 2){
-            if($industry_id){
-                $query->matching('UserIndustry', function($q)use($industry_id){
-                    return $q->where(['UserIndustry.industry_id' => $industry_id]);
-                });
-            }
+        if($industry_id === 'all'){
+            
+        } elseif($industry_id){
+            $query->matching('UserIndustry', function($q)use($industry_id){
+                return $q->where(['UserIndustry.industry_id' => $industry_id]);
+            });
         }
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
@@ -88,22 +82,20 @@ class PushController extends AppController {
         $industry_id = $this->request->data('industry_id');
         $keyword = $this->request->data('keyword');
         $where = ['enabled'=>1];
-        if (!empty($keywords)) {
-            $where['or'] = [['truename like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
+        if (!empty($keyword)) {
+            $where['or'] = [['truename like' => "%$keyword%"], ['phone like' => "%$keyword%"]];
         }
         $query = $this->User->find();
         $query->hydrate(false);
         if (!empty($where)) {
             $query->where($where);
         }
-        if($industry_id){
-            if($industry_id === 'all'){
-                
-            } else {
-                $query->matching('UserIndustry', function($q)use($industry_id){
-                    return $q->where(['UserIndustry.industry_id' => $industry_id]);
-                });
-            }
+        if($industry_id === 'all'){
+            
+        } elseif($industry_id){
+            $query->matching('UserIndustry', function($q)use($industry_id){
+                return $q->where(['UserIndustry.industry_id' => $industry_id]);
+            });
         }
         $res = $query->toArray();
         $user = '';
@@ -125,6 +117,7 @@ class PushController extends AppController {
                     foreach($res as $k=>$v){
                         $user .= $v['user_token'] . "\n";
                     }
+                    
                     $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true, $extra);
                     $type = 3;
                 }
