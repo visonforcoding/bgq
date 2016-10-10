@@ -192,6 +192,8 @@
                     if (rowObject.activity.must_check == 1 && rowObject.is_check == 0) {
                         response += '<a title="审核通过" onClick="check(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
                         response += '<a title="审核不通过" onClick="uncheck(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-remove-circle"></i> </a>';
+                    }else{
+                        response += '<a title="改为未通过" onClick="resue(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-undo"></i> </a>';
                     }
                     return response;
                 }
@@ -269,6 +271,27 @@
                             data: '',
                             dataType: 'json',
                             url: '/admin/activityapply/check/' + id,
+                            success: function (res) {
+                                if (res.status) {
+                                    layer.msg(res.msg);
+                                    setTimeout(function () {
+                                        $('#list').trigger('reloadGrid');
+                                    }, 2000);
+                                }
+                            }
+                        });
+                    }, function () {
+                    });
+                }
+                function resue(id) {
+                    layer.confirm('确定撤销？', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                        $.ajax({
+                            type: 'post',
+                            data: '',
+                            dataType: 'json',
+                            url: '/admin/activityapply/resue/' + id,
                             success: function (res) {
                                 if (res.status) {
                                     layer.msg(res.msg);

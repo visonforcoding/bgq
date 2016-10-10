@@ -75,11 +75,11 @@ return [
             'remark'=>'提现申请',
             'url'=>'/home/my-purse'
         ],
-//        '11'=>[
-//            'table'=>'activityapply',
-//            'remark'=>'活动报名',
-//            'url'=>'/activity/detail/{#id}'
-//        ],
+        '11'=>[
+            'table'=>'activityapply',
+            'remark'=>'活动报名审核',
+            'url'=>'/activity/detail/{#id}'
+        ],
     ],
     'educationType'=>[
         '1'=>'高中',

@@ -352,6 +352,29 @@ class ActivityapplyController extends AppController {
             $this->Util->ajaxReturn(false, '操作失败');
         }
     }
+    
+    
+    public function resue($id) {
+        $apply = $this->Activityapply->get($id, [
+            'contain' => 'Users'
+        ]);
+        $ActivityapplyTable = \Cake\ORM\TableRegistry::get('Activityapply');
+        $ActivityTable = \Cake\ORM\TableRegistry::get('Activity');
+        $activity = $ActivityTable->get($apply->activity_id);
+        //无需付费的 直接通过
+        $apply->is_pass = 0;
+        $activity->apply_nums -= 1;  //报名人数+1
+        $apply->is_check = 0;
+        $apply->check_man = $this->_user->truename;
+        $trans = $this->Activityapply->connection()->transactional(function()use($ActivityTable, $activity, $ActivityapplyTable, $apply) {
+            return $ActivityapplyTable->save($apply) && $ActivityTable->save($activity);
+        });
+        if($trans){
+            $this->Util->ajaxReturn(true,'还原成功');
+        }  else {
+            $this->Util->ajaxReturn(true,'还原成功');
+        }
+    }
 
     /**
      * 审核不通过
