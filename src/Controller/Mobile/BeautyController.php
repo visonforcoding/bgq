@@ -32,7 +32,7 @@ class BeautyController extends AppController {
         }
         $votingType = \Cake\Core\Configure::read('votingType');
         $this->set([
-            'pageTitle' => '2016并购菁英评选',
+            'pageTitle' => '并购帮2016十佳菁英奖',
             'user' => $user,
             'votingType' => $votingType,
         ]);
