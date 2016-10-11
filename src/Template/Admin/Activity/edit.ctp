@@ -127,11 +127,12 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">费用<span style="color:red">（请注意：从免费改为付费会导致已报名的人去付款时会报错）</span></label>
+        <label class="col-md-2 control-label">费用</label>
         <div class="col-md-8">
             <?php
             echo $this->Form->input('apply_fee', ['label' => false, 'class' => 'form-control']);
             ?>
+            <span style="color:red">（请注意：从免费改为付费会导致已报名的人去付款时会报错）</span>
         </div>
     </div>
     <div class="form-group">

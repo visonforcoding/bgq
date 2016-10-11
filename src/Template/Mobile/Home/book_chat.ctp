@@ -12,7 +12,7 @@
     <div class="todialogue">
         <div class="clearfix b-text">
             <div class="r-input">
-                <textarea id="content" ></textarea>
+                <textarea id="content" placeholder="请在这里输入你想发送的话"></textarea>
             </div>
             <span class="r-submit" >发送</span>
         </div>
