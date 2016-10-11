@@ -41,7 +41,8 @@ class ActivityapplyController extends AppController {
         $this->set([
             'pay_nums' => $pay_nums,
             'apply_nums' => $apply_nums,
-            'check_nums' => $check_nums
+            'check_nums' => $check_nums,
+            'activity_id' => $id
         ]);
     }
 
@@ -66,10 +67,19 @@ class ActivityapplyController extends AppController {
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add() {
+    public function add($activity_id=null) {
         $activityapply = $this->Activityapply->newEntity();
         if ($this->request->is('post')) {
-            $activityapply = $this->Activityapply->patchEntity($activityapply, $this->request->data);
+            $data = $this->request->data();
+            if($this->Activityapply->find()->where(['user_id'=>$data['user_id'], 'activity_id'=>$activity_id])->first()){
+                $this->Util->ajaxReturn(false, '此人已经报过名了');
+            }
+            $activityapply->user_id = $data['user_id'];
+            $activityapply->activity_id = $activity_id;
+            $activityapply->is_pass = 1;
+            $activityapply->is_check = 1;
+            $activityapply->is_top = $data['is_top'];
+            $activityapply->check_man = $this->_user->truename;
             if ($this->Activityapply->save($activityapply)) {
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {
@@ -78,6 +88,9 @@ class ActivityapplyController extends AppController {
             }
         }
         $this->set(compact('activityapply'));
+        $this->set([
+            'activity_id' => $activity_id
+        ]);
     }
 
     /**

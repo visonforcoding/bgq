@@ -1,54 +1,33 @@
 <?php $this->start('static') ?>   
 <link href="/wpadmin/lib/jqupload/uploadfile.css" rel="stylesheet">
 <link href="/wpadmin/lib/jqvalidation/css/validationEngine.jquery.css" rel="stylesheet">
+<link href="/wpadmin/lib/select2/css/select2.min.css" rel="stylesheet">
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($activityapply, ['class' => 'form-horizontal']) ?>
-             <div class="form-group">
-            <label class="col-md-2 control-label">用户id</label>
-                <div class="col-md-8">
-                <?php echo $this->Form->input('user_id', ['label' => false,'options' => $users,'class'=>'form-control']);?>
-                      </div>
-         </div>
-                 <div class="form-group">
-            <label class="col-md-2 control-label">活动id</label>
-                <div class="col-md-8">
-                <?php echo $this->Form->input('activity_id', ['label' => false,'options' => $activities,'class'=>'form-control']);?>
-                      </div>
-         </div>
-            <div class="form-group">
-        <label class="col-md-2 control-label">提交时间</label>
+    <div class="form-group">
+        <label class="col-md-2 control-label">用户id</label>
         <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('create_time', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <?= $this->cell('User') ?>
         </div>
     </div>
-        <div class="form-group">
-        <label class="col-md-2 control-label">更新时间</label>
+<!--    <div class="form-group">
+        <label class="col-md-2 control-label">是否直接通过（只有需要付款）</label>
         <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('update_time', ['label' => false, 'class' => 'form-control']);
+            <?php
+            echo $this->Form->input('is_pass', ['type'=>'select', 'options'=>['0'=>'否', '1'=>'是'], 'label' => false, 'class' => 'form-control']);
             ?>
         </div>
-    </div>
-        <div class="form-group">
-        <label class="col-md-2 control-label">审核是否通过</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('is_pass', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-        <div class="form-group">
+    </div>-->
+    <div class="form-group">
         <label class="col-md-2 control-label">是否置顶</label>
         <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('is_top', ['label' => false, 'class' => 'form-control']);
+            <?php
+            echo $this->Form->input('is_top', ['type'=>'select', 'options'=>['0'=>'否', '1'=>'是'], 'label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
         </div>
@@ -61,6 +40,7 @@
 <script type="text/javascript" src="/wpadmin/lib/jqupload/jquery.uploadfile.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/jquery.validationEngine.js"></script>
+<script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <!--<script src="/wpadmin/lib/ueditor/ueditor.config.js" ></script>
     <script src="/wpadmin/lib/ueditor/ueditor.all.js" ></script>
     <script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>-->
@@ -69,6 +49,10 @@
         // initJqupload('cover', '/wpadmin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
         //var ue = UE.getEditor('content'); //初始化富文本编辑器
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
+        $('#select-user').select2({
+            language: "zh-CN",
+            placeholder: '选择一个人'
+        });
         $('form').submit(function () {
             var form = $(this);
             $.ajax({
@@ -82,7 +66,7 @@
                             layer.confirm(res.msg, {
                                 btn: ['确认', '继续添加'] //按钮
                             }, function () {
-                                window.location.href = '/admin/activityapply/index';
+                                window.location.href = '/admin/activityapply/index/<?= $activity_id ?>';
                             }, function () {
                                 window.location.reload();
                             });
