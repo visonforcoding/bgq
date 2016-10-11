@@ -203,7 +203,7 @@
                         if(d.is_done){
                             d.subject_status = '<div class="f-box"><div class="f-info"><span class="fl f-type"><i class="iconfont">&#xe62f;</i>已完成</span><a class="fr f-link" href="/home/my-book_savant_detail/'+d.id+'">查看<i class="iconfont">&#xe667;</i></a></div>';
                         } else {
-                            d.subject_status = '<div class="f-box"><div class="f-info"><span class="fl f-type"><i class="iconfont">&#xe62f;</i>约见中</span><a class="fr f-btn done"><span subject_id="'+d.id+'" id="subjectId_'+d.id+'">完成</span></a></div>';
+                            d.subject_status = '<div class="f-box"><div class="f-info"><a href="/home/my-book_savant_detail/'+d.id+'" class="fl f-type"><i class="iconfont">&#xe62f;</i>约见中</a><a class="fr f-btn done"><span subject_id="'+d.id+'" id="subjectId_'+d.id+'">完成</span></a></div>';
                         }
                     } else {
                         d.link = '/home/my-book-savant-detail/'+d.id;
