@@ -5,7 +5,7 @@
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
-            <a href="/admin/activityapply/add" class="btn btn-small btn-warning">
+            <a href="/admin/activityapply/add/<?= $activity_id ?>" class="btn btn-small btn-warning">
                 <i class="icon icon-plus-sign"></i>添加
             </a>
             <div class="form-group">
