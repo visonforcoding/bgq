@@ -65,8 +65,9 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户id', '票数', '星座', '类型', '报名时间', '审核是否通过', '操作'],
+                                ['编号', '用户名', '票数', '星座', '类型', '报名时间', '审核是否通过', '操作'],
                         colModel: [
+                            {name: 'id', editable: true, align: 'center'},
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'vote_nums', editable: true, align: 'center'},
                             {name: 'constellation', editable: true, align: 'center'},
@@ -100,7 +101,7 @@
                         caption: '',
                         autowidth: true,
                         height: 'auto',
-                        rownumbers: true,
+                        rownumbers: false,
                         fixed: true,
                         jsonReader: {
                             root: "rows",
