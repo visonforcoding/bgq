@@ -94,7 +94,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .picinfo span{display: block;color:#007aff;font-size:0.38rem;height:1.14rem;line-height: 1.14rem;text-align: center;}
 .reg-sucess a,.notexpert a{display: block;width:1.69rem;height:1.69rem;background: url(img/sucess.png) no-repeat;background-size: cover; margin:0.3rem auto;}
 .notexpert a{background: url(../images/cry.png) no-repeat;background-size: cover;}
-.reg-sucess p{line-height: 1.38rem;font-size:0.3rem;color:#222c38;}
+.reg-sucess p{margin-bottom: .5rem;font-size:0.3rem;color:#222c38;}
 /*news --start--*/
 .inner .news-serch{ width:0.32rem;height:0.32rem;font-size:0.32rem;top:0.29rem;}
 .a-banner{width:100%;height:3.8rem;position:relative;}
@@ -900,7 +900,7 @@ header h1 a.active{border-bottom:0.04rem #fff solid;color:#fff;}
 .my-collection-items span{display:block;line-height: 0.32rem;color:#b4bac1;}
 .my-collection-items span i{float:right;color:#b71c2d;}
 .my-collection-items h3{line-height: 0.36rem;color:#7a7e83;font-size:0.3rem;margin-bottom:0.1rem;-webkit-line-clamp:2;display: -webkit-box;
-    overflow: hidden;-webkit-box-orient: vertical;min-height:.68rem;}
+    overflow: hidden;-webkit-box-orient: vertical;min-height:.4rem;/*.68rem*/}
 .my-news-items h3{/*height:0.84rem;*/overflow:hidden;width:100%;}
 .my-news-items span b{margin-left:0.2rem;}
 
@@ -985,7 +985,7 @@ top:-0.1rem;left:50%;margin-left:-0.525rem;background: #f0eff5;text-align: cente
 .expert-commond h3 span{display: block;font-size:.24rem;color:#9ba4ad;line-height: 0.3rem;
     margin-top: 0.05rem;}
 .companyinfo{width:100%;max-width: 750px;margin-bottom:.2rem;}
-.companyinfo p{line-height: 0.3rem;font-size:0.22rem;color:#c8ccd3;text-align: center;}
+.companyinfo p{line-height: 0.4rem;font-size:0.22rem;color:#c8ccd3;text-align: center;}
 .tohome i{margin-right: 0.2rem;font-size:.28rem;}
 /*引导页*/
 .indexwraper{width:100%;height:100%;overflow:hidden;background: #fff;position:relative;}
@@ -1230,3 +1230,54 @@ background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  ba
 .nocontent{width:100%;margin-top:40%;text-align: center;color:#7A7E83;}
 .nocontent i{display: block;font-size:.6rem;line-height: .8rem;}
 .nocontent{line-height: .46rem;font-size:.32rem;}
+/*开发票*/
+.invoic_month{line-height: .6rem;}
+.invoic_moth_con{background: #fff;}
+.invoic_moth_con ul{overflow: hidden;}
+.invoic_moth_con li{overflow: hidden;padding:.3rem 0;}
+.invoic_left_btn{display: block; position:absolute;width:.5rem;overflow:hidden; padding-top:.5rem;padding-bottom:.1rem;}
+.invoic_left_btn i,.all_invoic i{vertical-align: middle;color:#e6e6e6;font-size:.4rem;line-height:.4rem;height:.4rem;margin-left:.01rem;}
+.invoic_right_con{padding-left:.6rem;}
+.invoic_con_left{max-width:72%;}
+.invoic_con_left time{color:#7a7e83;font-size:.28rem;}
+.invoic_con_left{font-size:.3rem;}
+.invoic_con_left p{line-height: .38rem;}
+.invoic_right_price{padding-top:.8rem;display: block;font-size:.28rem;}
+.invoic_con_left p.invoic_active{margin:.24rem 0 .12rem;}
+.invoic_right_price i{color:#b71c2d;}
+.invoic_total_fixed{position:fixed;bottom:0;background: #fff;padding:.2rem 0;width:100%;max-width:750px;margin:0 auto;border-top:1px #e5e5e5 solid;height:1.2rem;}
+.all_invoic{display: block;margin-bottom:.1rem;color:#222c38;font-size: .3rem;}
+.all_invoic i{margin-right:.2rem;vertical-align:-.05rem;}
+.invoic_next{background: #b71c2d;display: block;width:2.26rem;height:34px;color:#fff;line-height: 32px;text-align: center;border-radius: 5px;font-size:13px;margin-top:.05rem;}
+.invo_total_pice{font-size: .28rem;}
+/*付款*/
+.invoic_type_header{position:fixed;width:100%;max-width: 750px;margin:0 auto; top:0;font-size:0;height:.8rem;line-height: .8rem;
+-webkit-box-shadow: 0 0 1px rgba(0,0,0,.5);box-shadow: 0 0 1px rgba(0,0,0,.5);z-index: 999;}
+.invoic_type{position:relative;height:.8rem;}
+.invoic_type span{display:inline-block;width:50%;font-size: .3rem;text-align: center;}
+.invoic_type span.cur{color:#b71c2d;}
+.invoic_type .botttomline{height:2px;width:50%;background: #B71C2D;position:absolute;bottom:-1px;left:0;-webkit-transition: all .3s ease;transition: all .3s ease;}
+.invoic_tab li{width:100%;overflow:hidden;line-height: .88rem;font-size:.3rem;}
+.invoic_tab .pay_left_block{float:left;width:35%;}
+.invoic_tab .pay_right_info{float:left;width:65%;}
+.invoic_tab .pay_right_info input{width:100%;overflow:hidden;}
+.pay_right_info .price{color:#b71c2d;}
+.invoic_choose_pay {font-size:.26rem;color:#676767;height:.6rem;line-height: .6rem;}
+.weixinpay .iconfont{color:#26cc72;font-size:.34rem; margin-right:.26rem}
+.alipay .iconfont{color:#5aace2;font-size:.34rem;margin-right:.26rem}
+.cashpay .iconfont{color:#5dd7bb;font-size:.34rem;margin-right:.26rem}
+.invoic_pay_type .invoic_choosebtn{width:.5rem;}
+.invoic_pay_type .invoic_choosebtn .iconfont{color:#7d8186;}
+.invoic_pay_type .invoic_choosebtn .color-items{color:#B71C2D;}
+.invoic_tab_box{width:200%;position:relative;overflow:hidden;left:0;-webkit-transition: all .3s ease;transition: all .3s ease;}
+.invoic_tab_box section{width:50%;overflow:hidden;float:left;}
+.invoic_history{overflow: hidden;}
+.invoic_history li{width:100%;margin-top:.2rem;background: #fff;padding:.2rem .3rem;overflow: hidden;font-size:.26rem;}
+.invoic_history li .invoic_h_left{float:left;overflow: hidden;}
+.invoic_history li .invoic_h_right{float:right;overflow: hidden; line-height: .76rem;}
+.invoic_history li .invoic_h_right span{color:#B71C2D;margin-right:.2rem;}
+.invoic_history li .invoic_h_right i{font-size:.26rem}
+.invoic_history .invoic_h_left time{color:#7a7e83;}
+.invoic_history .invoic_h_left div{line-height: .42rem;margin-bottom:.08rem;}
+.invoic_history .invoic_h_left .price{font-size:.32rem;margin-right:.2rem;}
+.toinvoic{font-size:.28rem;text-align: center;background: #ecdee5;box-shadow: 0 0 0;height:.6rem;line-height: .6rem;}
