@@ -191,8 +191,9 @@
 
                     if (res.status) {
                         var html = $.util.dataToTpl('', 'biggie_tpl', res.data, tpldate);
+                        $.util.initLoadImg('biggie');
                         $('#biggie').append(html);
-                        if (res.data.length < 10) {
+                        if (res.data.length < 100) {
                             page = 9999;
                             $('#buttonLoading').html('亲，没有更多条目了，请看看其他的栏目吧');
                         } else {
