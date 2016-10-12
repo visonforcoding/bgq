@@ -66,6 +66,7 @@ class MeetController extends AppController {
                 }, 'Savants'=>function($q){
                     return $q->orderDesc('Savants.check_time');
                 }])
+                ->select(['id', 'truename', 'position', 'company', 'avatar', 'meet_nums'])
                 ->where(['enabled'=>'1', 'level'=>'2'])
                 ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
                 ->limit($this->limit)
@@ -827,6 +828,7 @@ class MeetController extends AppController {
                 }, 'Savants'=>function($q){
                     return $q->orderDesc('Savants.check_time');
                 }])
+                ->select(['id', 'truename', 'position', 'company', 'avatar', 'meet_nums'])
                 ->where(['enabled'=>'1', 'level'=>'2'])
                 ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
                 ->page($page, $this->limit)
