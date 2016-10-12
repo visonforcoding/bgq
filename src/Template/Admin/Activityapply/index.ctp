@@ -104,7 +104,7 @@
                                                 return '审核不通过';
                                         }
                                     } else {
-                                        return '无需审核'
+                                        return '无需审核';
                                     }
                                 }},
                             {name: 'is_pass', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
@@ -192,7 +192,7 @@
                     if (rowObject.activity.must_check == 1 && rowObject.is_check == 0) {
                         response += '<a title="审核通过" onClick="check(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
                         response += '<a title="审核不通过" onClick="uncheck(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-remove-circle"></i> </a>';
-                    }else{
+                    }else if (rowObject.is_pass == 1){
                         response += '<a title="改为未通过" onClick="resue(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-undo"></i> </a>';
                     }
                     return response;
@@ -231,7 +231,7 @@
                                 if (res.status) {
                                     layer.msg(res.msg);
                                     setTimeout(function () {
-                                        window.location.reload();
+                                        $('#list').trigger('reloadGrid');
                                     }, 2000);
                                 }
                             }
@@ -253,7 +253,7 @@
                                 if (res.status) {
                                     layer.msg(res.msg);
                                     setTimeout(function () {
-                                        window.location.reload();
+                                        $('#list').trigger('reloadGrid');
                                     }, 2000);
                                 }
                             }
@@ -339,7 +339,7 @@
                                 if (res.status) {
                                     layer.msg(res.msg);
                                     setTimeout(function () {
-                                        window.location.reload();
+                                        $('#list').trigger('reloadGrid');
                                     }, 2000);
                                 }
                             }

@@ -374,9 +374,12 @@ class ActivityapplyController extends AppController {
         $ActivityapplyTable = \Cake\ORM\TableRegistry::get('Activityapply');
         $ActivityTable = \Cake\ORM\TableRegistry::get('Activity');
         $activity = $ActivityTable->get($apply->activity_id);
+        
         //无需付费的 直接通过
         $apply->is_pass = 0;
-        $activity->apply_nums -= 1;  //报名人数+1
+        if($activity->apply_nums <= 0){
+            $activity->apply_nums -= 1;  //报名人数-1
+        }
         $apply->is_check = 0;
         $apply->check_man = $this->_user->truename;
         $trans = $this->Activityapply->connection()->transactional(function()use($ActivityTable, $activity, $ActivityapplyTable, $apply) {
