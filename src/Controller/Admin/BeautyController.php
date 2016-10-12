@@ -280,5 +280,22 @@ class BeautyController extends AppController {
         }
         $this->Util->ajaxReturn($response);
     }
+    
+    public function getVote(){
+        $VoteTable = \Cake\ORM\TableRegistry::get('vote');
+        $vote = $VoteTable->find()->contain(['Users', 'VoteUsers'])->hydrate(false)->toArray();
+        $res = [];
+        foreach($vote as $k=>$v){
+            $res[$k]['id'] = $v['id'];
+            $res[$k]['user'] = $v['user']['truename'];
+            $res[$k]['vote_user'] = $v['vote_user']['truename'];
+            $res[$k]['time'] = $v['create_time']->format('Y-m-d H:i:s');
+        }
+        $column = ['id', '投票人', '被投票人', '投票时间'];
+        $this->autoRender = false;
+        $filename = '投票记录_' . date('Y-m-d') . '.xlsx';
+        $this->loadComponent('Export');
+        $this->Export->phpexcelExport($filename, $column, $res);
+    }
 
 }
