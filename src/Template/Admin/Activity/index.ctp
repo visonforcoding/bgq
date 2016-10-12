@@ -111,7 +111,7 @@
                                             break;
                                     }
                                     if (rowObject.is_top) {
-                                        s += '<span class="notice">(置顶)<span>'
+                                        s += '<span class="notice">(置顶)<span>';
                                     }
                                     return s;
                                 }},
