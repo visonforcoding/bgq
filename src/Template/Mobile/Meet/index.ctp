@@ -151,9 +151,9 @@
         } else {
             d.subjects = subject ? '<a href="javascript:$.util.checkLogin(\'/meet/subject-detail/' + subject.id + '/#index\')"><i class="iconfont color-items">&#xe6aa;</i>' + subject.title + '</a>' : '';
         }
-        d.focus_msg = d.followers.length ? '已关注' : '加关注';
-        d.focus_class = d.followers.length ? '' : 'color-items';
-        d.focus_id_str = d.followers.length ? '' : 'id="focus_'+ d.id +'"';
+        d.focus_msg = d.followers ? '已关注' : '加关注';
+        d.focus_class = d.followers ? '' : 'color-items';
+        d.focus_id_str = d.followers ? '' : 'id="focus_'+ d.id +'"';
         return d;
     }
     
