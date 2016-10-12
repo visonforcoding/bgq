@@ -135,35 +135,9 @@
                 dealData(d[1], 1);
                 dealData(d[2], 2);
                 dealData(d[3], 3);
-                tap($('.z_tab_head li').get(1));
             }
         }
     });
-//    $.ajax({
-//        type: 'POST',
-//        dataType: 'json',
-//        url: "/beauty/get-vote-user/2",
-//        success: function (res) {
-//            if (res.status) {
-//                dealData(res.data, 2);
-//                tap($('.z_tab_head li').get(1));
-//            }
-//        }
-//    });
-//    
-//    
-//    $.ajax({
-//        type: 'POST',
-//        dataType: 'json',
-//        url: "/beauty/get-vote-user/3",
-//        success: function (res) {
-//            if (res.status) {
-//                dealData(res.data, 3);
-//            }
-//        }
-//    });
-    
-    
     
     function dealData(data, id) {
     if(!data)return;
