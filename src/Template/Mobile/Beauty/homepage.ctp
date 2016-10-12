@@ -1,7 +1,7 @@
 <html style="background: #f0eff5;">
     <link rel="stylesheet" type="text/css" href="/mobile/css/zt.css"/>
     <script src="/mobile/js/view.js"></script>
-    <?= $this->element('share', ['table'=>'beauty', 'id'=>$beauty->id]); ?>
+    <?= $this->element('share', ['table' => 'beauty', 'id' => $beauty->id]); ?>
     <div class="wraper content_inner">
         <div class="h2"></div>
         <div class="bg-ff">
@@ -65,97 +65,138 @@
             </div>
         </div>
         <!--照片-->
-        <?php if($beauty->beauty_pics): ?>
-        <div class='photo_album mt20'>
-            <div class="p_title  innercon"><h3><i class="iconfont">&#xe685;</i>Ta的照片</h3></div>
-            <div class="photo_list bgff">
-                <ul id='viewImg'>
-                    <?php foreach ($beauty->beauty_pics as $k=>$v): ?>
-                        <li><img src="<?= $v['pic_url'] ?>"/></li>
-                    <?php endforeach; ?>
-                </ul>
+        <?php if ($beauty->beauty_pics): ?>
+            <div class='photo_album mt20'>
+                <div class="p_title  innercon"><h3><i class="iconfont">&#xe685;</i>Ta的照片</h3></div>
+                <div class="photo_list bgff">
+                    <ul id='viewImg'>
+                        <?php foreach ($beauty->beauty_pics as $k => $v): ?>
+                            <li><img src="<?= $v['pic_url'] ?>"/></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
             </div>
-        </div>
         <?php endif; ?>
         <!--基本资料-->
         <div class="infotab m-infotab-list">
-        <ul class="h-tab">
-            <li class="active"><i class="iconfont">&#xe650;</i>基本资料</li>
-            <li><i class="iconfont">&#xe651;</i>工作经历</li>
-            <li><i class="iconfont">&#xe652;</i>教育经历</li>
-        </ul>
-        <div class="tabcon bd2">
-            <!--基本资料-->
-            <?php if (!$self): ?>
-                <ul class="cur inner basicon">
-                    <li class="b-dq"><span><i class="iconfont">&#xe660;</i>所在地区</span>
-                        <div>
-                            <em><?= $beauty->user->city ? $beauty->user->city : '暂未填写' ?></em>
-                        </div>
-                    </li>
-                    <li class="b-hy"><span><i class="iconfont">&#xe654;</i>行业标签</span>
-                        <div>
-                            <?php if ($beauty->user->industries): ?>
-                                <?php foreach ($beauty->user->industries as $k => $v): ?>
-                                    <em><?= $v['name'] ?></em>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <em>暂未填写</em>
-                            <?php endif; ?>
-                        </div>
-                    </li>
-                    <li class="b-bq"><span><i class="iconfont">&#xe653;</i>个人标签</span>
-                        <div>
-                            <?php if (is_array(unserialize($beauty->user->grbq))): ?>
-                                <?php foreach (unserialize($beauty->user->grbq) as $k => $v): ?>
-                                    <em><?= $v ?></em>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <em>暂未填写</em>
-                            <?php endif; ?>
-                        </div>
-                    </li>
-                    <li class="b-yw"><span><i class="iconfont">&#xe655;</i>擅长业务</span><div><em><?= $beauty->user->goodat ? $beauty->user->goodat : '暂未填写' ?></em></div></li>
-                    <li class="b-gs nobottom"><span><i class="iconfont">&#xe656;</i>公司业务</span><div><em><?= $beauty->user->gsyw ? $beauty->user->gsyw : '暂未填写' ?></em></div></li>
-                </ul>
-            <?php else: ?>
-                <ul class="cur inner basicon">
-                    <li class="b-dq"><span><i class="iconfont">&#xe660;</i>所在地区</span>
-                        <div>
-                            <em><?= $beauty->user->city ? $beauty->user->city : '暂未填写' ?></em>
-                        </div>
-                    </li>
-                    <li class="b-hy"><span><i class="iconfont">&#xe654;</i>行业标签</span>
-                        <div>
-                            <?php if ($beauty->user->industries): ?>
-                                <?php foreach ($beauty->user->industries as $k => $v): ?>
-                                    <em><?= $v['name'] ?></em>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <em>暂未填写</em>
-                            <?php endif; ?>
-                        </div>
-                    </li>
-                    <li class="b-bq"><span><i class="iconfont">&#xe653;</i>个人标签</span>
-                        <div>
-                            <?php if (is_array(unserialize($beauty->user->grbq))): ?>
-                                <?php foreach (unserialize($beauty->user->grbq) as $k => $v): ?>
-                                    <em><?= $v ?></em>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <em>暂未填写</em>
-                            <?php endif; ?>
-                        </div>
-                    </li>
-                    <li class="b-yw"><span><i class="iconfont">&#xe655;</i>擅长业务</span><div><em><?= $beauty->user->goodat ? $beauty->user->goodat : '暂未填写' ?></em></div></li>
-                    <li class="b-gs noafter"><span><i class="iconfont">&#xe656;</i>公司业务</span><div><em><?= $beauty->user->gsyw ? $beauty->user->gsyw : '暂未填写' ?></em></div></li>
-                </ul>
-            <?php endif; ?>
+            <ul class="h-tab">
+                <li class="active"><i class="iconfont">&#xe650;</i>基本资料</li>
+                <li><i class="iconfont">&#xe651;</i>工作经历</li>
+                <li><i class="iconfont">&#xe652;</i>教育经历</li>
+            </ul>
+            <div class="tabcon bd2">
+                <!--基本资料-->
+                <?php if (!$self): ?>
+                    <ul class="cur inner basicon">
+                        <li class="b-dq"><span><i class="iconfont">&#xe660;</i>所在地区</span>
+                            <div>
+                                <em><?= $beauty->user->city ? $beauty->user->city : '暂未填写' ?></em>
+                            </div>
+                        </li>
+                        <li class="b-hy"><span><i class="iconfont">&#xe654;</i>行业标签</span>
+                            <div>
+                                <?php if ($beauty->user->industries): ?>
+                                    <?php foreach ($beauty->user->industries as $k => $v): ?>
+                                        <em><?= $v['name'] ?></em>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <em>暂未填写</em>
+                                <?php endif; ?>
+                            </div>
+                        </li>
+                        <li class="b-bq"><span><i class="iconfont">&#xe653;</i>个人标签</span>
+                            <div>
+                                <?php if (is_array(unserialize($beauty->user->grbq))): ?>
+                                    <?php foreach (unserialize($beauty->user->grbq) as $k => $v): ?>
+                                        <em><?= $v ?></em>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <em>暂未填写</em>
+                                <?php endif; ?>
+                            </div>
+                        </li>
+                        <li class="b-yw"><span><i class="iconfont">&#xe655;</i>擅长业务</span><div><em><?= $beauty->user->goodat ? $beauty->user->goodat : '暂未填写' ?></em></div></li>
+                        <li class="b-gs nobottom"><span><i class="iconfont">&#xe656;</i>公司业务</span><div><em><?= $beauty->user->gsyw ? $beauty->user->gsyw : '暂未填写' ?></em></div></li>
+                    </ul>
+                <?php else: ?>
+                    <ul class="cur inner basicon">
+                        <li class="b-dq"><span><i class="iconfont">&#xe660;</i>所在地区</span>
+                            <div>
+                                <em><?= $beauty->user->city ? $beauty->user->city : '暂未填写' ?></em>
+                            </div>
+                        </li>
+                        <li class="b-hy"><span><i class="iconfont">&#xe654;</i>行业标签</span>
+                            <div>
+                                <?php if ($beauty->user->industries): ?>
+                                    <?php foreach ($beauty->user->industries as $k => $v): ?>
+                                        <em><?= $v['name'] ?></em>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <em>暂未填写</em>
+                                <?php endif; ?>
+                            </div>
+                        </li>
+                        <li class="b-bq"><span><i class="iconfont">&#xe653;</i>个人标签</span>
+                            <div>
+                                <?php if (is_array(unserialize($beauty->user->grbq))): ?>
+                                    <?php foreach (unserialize($beauty->user->grbq) as $k => $v): ?>
+                                        <em><?= $v ?></em>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <em>暂未填写</em>
+                                <?php endif; ?>
+                            </div>
+                        </li>
+                        <li class="b-yw"><span><i class="iconfont">&#xe655;</i>擅长业务</span><div><em><?= $beauty->user->goodat ? $beauty->user->goodat : '暂未填写' ?></em></div></li>
+                        <li class="b-gs noafter"><span><i class="iconfont">&#xe656;</i>公司业务</span><div><em><?= $beauty->user->gsyw ? $beauty->user->gsyw : '暂未填写' ?></em></div></li>
+                    </ul>
+                <?php endif; ?>
 
-            <!--工作经历-->
-            <?php if (!$self): ?>
-                <?php if ($beauty->user->secret): ?>
-                    <?php if ($beauty->user->secret->career_set == '1'): ?>
+                <!--工作经历-->
+                <?php if (!$self): ?>
+                    <?php if ($beauty->user->secret): ?>
+                        <?php if ($beauty->user->secret->career_set == '1'): ?>
+                            <ul class="basicon worktab">
+                                <?php if ($beauty->user->careers): ?>
+                                    <?php foreach ($beauty->user->careers as $career): ?>
+                                        <li class="inner">
+                                            <span>
+                                                <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div><?= $career->company ?>
+                                            </span>
+                                        </li>
+                                        <li class="inner bd1">
+                                            <span class="worktime"><?= $career->start_date ?>～<?= $career->end_date ?>，<?= $career->position ?></span>
+                                        </li>
+                                        <li class="inner">
+                                            <span class="worktime">
+                                                <?= $career->descb; ?>
+                                            </span>
+                                        </li>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <li class="inner">
+                                        <span>
+                                            <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>暂未填写
+                                        </span>
+                                    </li>
+                                    <li class="inner">
+                                        <span class="worktime">暂未填写</span>
+                                    </li>
+                                <?php endif; ?>
+                            </ul>
+                        <?php else: ?>
+                            <ul class="basicon worktab">
+                                <li class="inner">
+                                    <span>
+                                        <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>暂未公开
+                                    </span>
+                                </li>
+                                <li class="inner">
+                                    <span class="worktime">暂未公开</span>
+                                </li>
+                            </ul>
+                        <?php endif; ?>
+                    <?php else: ?>
                         <ul class="basicon worktab">
                             <?php if ($beauty->user->careers): ?>
                                 <?php foreach ($beauty->user->careers as $career): ?>
@@ -166,9 +207,7 @@
                                     </li>
                                     <li class="inner bd1">
                                         <span class="worktime"><?= $career->start_date ?>～<?= $career->end_date ?>，<?= $career->position ?></span>
-                                    </li>
-                                    <li class="inner">
-                                        <span class="worktime">
+                                        <span class="worktime mt20">
                                             <?= $career->descb; ?>
                                         </span>
                                     </li>
@@ -183,17 +222,6 @@
                                     <span class="worktime">暂未填写</span>
                                 </li>
                             <?php endif; ?>
-                        </ul>
-                    <?php else: ?>
-                        <ul class="basicon worktab">
-                            <li class="inner">
-                                <span>
-                                    <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>暂未公开
-                                </span>
-                            </li>
-                            <li class="inner">
-                                <span class="worktime">暂未公开</span>
-                            </li>
                         </ul>
                     <?php endif; ?>
                 <?php else: ?>
@@ -219,44 +247,52 @@
                                 </span>
                             </li>
                             <li class="inner">
-                                <span class="worktime">暂未填写</span>
+                                <span class="worktime  ">暂未填写</span>
                             </li>
                         <?php endif; ?>
                     </ul>
                 <?php endif; ?>
-            <?php else: ?>
-                <ul class="basicon worktab">
-                    <?php if ($beauty->user->careers): ?>
-                        <?php foreach ($beauty->user->careers as $career): ?>
-                            <li class="inner">
-                                <span>
-                                    <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div><?= $career->company ?>
-                                </span>
-                            </li>
-                            <li class="inner bd1">
-                                <span class="worktime"><?= $career->start_date ?>～<?= $career->end_date ?>，<?= $career->position ?></span>
-                                <span class="worktime mt20">
-                                    <?= $career->descb; ?>
-                                </span>
-                            </li>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <li class="inner">
-                            <span>
-                                <div class="h-tips"><i class="iconfont">&#xe651;</i>工作经历</div>暂未填写
-                            </span>
-                        </li>
-                        <li class="inner">
-                            <span class="worktime  ">暂未填写</span>
-                        </li>
-                    <?php endif; ?>
-                </ul>
-            <?php endif; ?>
 
-            <!--教育经历-->
-            <?php if (!$self): ?>
-                <?php if ($beauty->user->secret): ?>
-                    <?php if ($beauty->user->secret->education_set == '1'): ?>
+                <!--教育经历-->
+                <?php if (!$self): ?>
+                    <?php if ($beauty->user->secret): ?>
+                        <?php if ($beauty->user->secret->education_set == '1'): ?>
+                            <ul class="basicon worktab">
+                                <?php if ($beauty->user->educations): ?>
+                                    <?php foreach ($beauty->user->educations as $education): ?>
+                                        <li class="inner">
+                                            <span>
+                                                <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div><?= $education->school ?>
+                                            </span>
+                                        </li>
+                                        <li class="inner">
+                                            <span class="worktime"><?= $education->start_date ?>～<?= $education->end_date ?>，<?= $education->major ?>，<?= $educationType[$education->education] ?></span>
+                                        </li>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <li class="inner">
+                                        <span>
+                                            <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div>暂未填写
+                                        </span>
+                                    </li>
+                                    <li class="inner">
+                                        <span class="worktime">暂未填写</span>
+                                    </li>
+                                <?php endif; ?>
+                            </ul>
+                        <?php else: ?>
+                            <ul class="basicon worktab">
+                                <li class="inner">
+                                    <span>
+                                        <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div>暂未公开
+                                    </span>
+                                </li>
+                                <li class="inner">
+                                    <span class="worktime">暂未公开</span>
+                                </li>
+                            </ul>
+                        <?php endif; ?>
+                    <?php else: ?>
                         <ul class="basicon worktab">
                             <?php if ($beauty->user->educations): ?>
                                 <?php foreach ($beauty->user->educations as $education): ?>
@@ -279,17 +315,6 @@
                                     <span class="worktime">暂未填写</span>
                                 </li>
                             <?php endif; ?>
-                        </ul>
-                    <?php else: ?>
-                        <ul class="basicon worktab">
-                            <li class="inner">
-                                <span>
-                                    <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div>暂未公开
-                                </span>
-                            </li>
-                            <li class="inner">
-                                <span class="worktime">暂未公开</span>
-                            </li>
                         </ul>
                     <?php endif; ?>
                 <?php else: ?>
@@ -317,33 +342,8 @@
                         <?php endif; ?>
                     </ul>
                 <?php endif; ?>
-            <?php else: ?>
-                <ul class="basicon worktab">
-                    <?php if ($beauty->user->educations): ?>
-                        <?php foreach ($beauty->user->educations as $education): ?>
-                            <li class="inner">
-                                <span>
-                                    <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div><?= $education->school ?>
-                                </span>
-                            </li>
-                            <li class="inner">
-                                <span class="worktime"><?= $education->start_date ?>～<?= $education->end_date ?>，<?= $education->major ?>，<?= $educationType[$education->education] ?></span>
-                            </li>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <li class="inner">
-                            <span>
-                                <div class="h-tips"><i class="iconfont green">&#xe652;</i>教育经历</div>暂未填写
-                            </span>
-                        </li>
-                        <li class="inner">
-                            <span class="worktime">暂未填写</span>
-                        </li>
-                    <?php endif; ?>
-                </ul>
-            <?php endif; ?>
+            </div>
         </div>
-    </div>
         <a href="/meet/index">
             <div class="photo_type innercon mt20"><h3>投票不尽兴？想约并购菁英吗？请戳这里 <i class="iconfont">&#xe667;</i></h3></div>
         </a>
@@ -353,66 +353,73 @@
     </div>
     <div class="h2"></div>
     <div style="height:1rem"></div>
-    <?php if($self): ?>
-        <a href="/beauty/enroll" class="f-bottom">编辑资料</a>
-    <?php else: ?>
-        <a href="javascript:void(0);" class="f-bottom" id="vote" user_id="<?= $beauty->user->id ?>">投TA一票</a>
-    <?php endif; ?>
-<?php $this->start('script') ?>
-<script>
-    (function () {
-        var imgUrl = '<?= $beauty->user->avatar ?>';
-        if(imgUrl){
-            if(imgUrl.indexOf('http') === 0){
-                if($.util.isWX) window.shareConfig.imgUrl = imgUrl;
-            }
-            else{
-                window.shareConfig.imgUrl =  location.origin + imgUrl;
-            }
-        }
-        if($.util.getParam('ss') == 'ok') window.shareConfig.imgUrl = imgUrl;
-        window.shareConfig.link = 'http://m.chinamatop.com/beauty/homepage/<?= $beauty->id ?>?share=1';
-        window.shareConfig.title = '<?= $beauty->user->truename ?>的参选主页';
-        window.shareConfig.desc = '我正在参加并购帮主办的2016并购菁英评选活动，快来投票吧';
-        LEMON.show.shareIco();
-    })();
-</script>
-<script type="text/javascript">
-    setTimeout(function(){
-        if (location.href.indexOf('?share=1') != -1) {
-            $('#share_download').show();
-        }
-    }, 1000);
-    
-    $('.h-tab>li').on('click', function () {
-        var index = $(this).index() + 1;
-        console.log($('.tabcon>ul').eq(index));
-        $(this).addClass('active').siblings().removeClass('active');
-        $('.tabcon>ul').eq(index).addClass('cur').siblings().removeClass('cur');
-    });
 
-    $('#commond').on('tap', function () {
-        $(this).children('i').html('&#xe61b;');
-    });
-
-    $('#vote').on('tap', function(){
-        var obj = $(this);
-        $.util.ajax({
-            url: '/beauty/vote/'+obj.attr('user_id'),
-            func: function(res){
-                $.util.alert(res.msg);
-                if(res.status){
-                    $('#vote_nums').html(parseInt($('#vote_nums').html())+1);
+    <div class="fixed-btn">
+        <a href="javascript:$.util.checkLogin('/beauty/enroll');" class="l-btn">我要报名</a>
+        <?php if ($self): ?>
+            <a href="/beauty/enroll" class="r-btn">编辑资料</a>
+        <?php else: ?>
+            <a href="javascript:void(0);" class="r-btn" id="vote" user_id="<?= $beauty->user->id ?>">投TA一票</a>
+        <?php endif; ?>
+    </div>
+    <?php $this->start('script') ?>
+    <script>
+        (function () {
+            var imgUrl = '<?= $beauty->user->avatar ?>';
+            if (imgUrl) {
+                if (imgUrl.indexOf('http') === 0) {
+                    if ($.util.isWX)
+                        window.shareConfig.imgUrl = imgUrl;
+                } else {
+                    window.shareConfig.imgUrl = location.origin + imgUrl;
                 }
             }
-        });
-    });
+            if ($.util.getParam('ss') == 'ok')
+                window.shareConfig.imgUrl = imgUrl;
+            window.shareConfig.link = 'http://m.chinamatop.com/beauty/homepage/<?= $beauty->id ?>?share=1';
+            window.shareConfig.title = '<?= $beauty->user->truename ?>的参选主页';
+            window.shareConfig.desc = '我正在参加并购帮主办的2016并购菁英评选活动，快来投票吧';
+            LEMON.show.shareIco();
+        })();
+    </script>
+    <script type="text/javascript">
+        setTimeout(function () {
+            if (location.href.indexOf('?share=1') != -1) {
+                $('#share_download').show();
+            }
+        }, 1000);
 
-    $('#viewImg img').on('click', function(){
-        var imgs = [];
-        $('#viewImg img').each(function(){imgs.push(this.src.replace('small_', ''));});
-        $.util.viewImg(this.src.replace('small_', ''), imgs);
-    });
-</script>
-<?php $this->end('script') ?>
+        $('.h-tab>li').on('click', function () {
+            var index = $(this).index() + 1;
+            console.log($('.tabcon>ul').eq(index));
+            $(this).addClass('active').siblings().removeClass('active');
+            $('.tabcon>ul').eq(index).addClass('cur').siblings().removeClass('cur');
+        });
+
+        $('#commond').on('tap', function () {
+            $(this).children('i').html('&#xe61b;');
+        });
+
+        $('#vote').on('tap', function () {
+            var obj = $(this);
+            $.util.ajax({
+                url: '/beauty/vote/' + obj.attr('user_id'),
+                func: function (res) {
+                    $.util.alert(res.msg);
+                    if (res.status) {
+                        $('#vote_nums').html(parseInt($('#vote_nums').html()) + 1);
+                    }
+                }
+            });
+        });
+
+        $('#viewImg img').on('click', function () {
+            var imgs = [];
+            $('#viewImg img').each(function () {
+                imgs.push(this.src.replace('small_', ''));
+            });
+            $.util.viewImg(this.src.replace('small_', ''), imgs);
+        });
+    </script>
+    <?php $this->end('script') ?>
 </html>
