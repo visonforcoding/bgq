@@ -99,7 +99,7 @@ table,tbody,tr,td,th,thead,tfoot{border:1px #e5e5e5 solid;}
 .wraper .mt20{margin-top:0.2rem;}
 .wraper .p20{padding-top:.2rem;padding-bottom:.2rem;}
 .wraper .mr i{margin-right:0.2rem;font-size:.3rem;}
-.wraper a.ablock{width:100%;display: block;}
+.wraper a.ablock{width:100%;display: block;overflow:hidden;}
 .wraper .colorbg{background: #7a7e83;}
 .wraper a.colorbg{background: #7a7e83;}
 .wraper .f7{color:#7a7e83;margin-right:0.1rem;font-size:.3rem;}
