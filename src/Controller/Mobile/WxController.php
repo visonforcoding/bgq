@@ -380,6 +380,8 @@ class WxController extends AppController {
                 $url = '/activity/details/' . $id;
             } elseif ($controller == 'user') {
                 $url = '/meet/view/' . $id;
+            } elseif ($controller == 'beauty'){
+                $url = '/beauty/homgpage/' . $id;
             }
         } else {
             $url = '/meet/index';
