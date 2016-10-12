@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="format-detection"content="telephone=no, email=no" />
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<title>并购圈-开具发票</title>
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<script src="../js/view.js"></script>
+		<script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<header>
+			<div class='inner'>
+				<a href='javascript:history.go(-1);' class='toback'></a>
+				<h1>开具发票</h1>
+			</div>
+		</header>
+		
+		<div class="wraper">
+			<div class="invoic_type_header bgff">
+				<div class="invoic_type" id="invoictab">
+					<span>普通发票</span>
+					<span>增值税发票</span>
+					<div class='botttomline'></div>
+				</div>
+				
+			</div>
+			<div class='invoic_tab' style="padding-top:1rem;">
+				<div class="invoic_tab_box">
+				<section>
+					<div class="invoic_company_detail bgff border">
+						<div class="innerwaper">
+							<ul>
+								<li class="bd1">
+									<span class="pay_left_block">公司名称</span>
+									<div class="pay_right_info">
+										<input type="text" placeholder="请填写公司名称" />
+									</div>
+								</li>
+								<li>
+									<span class="pay_left_block">发票金额</span>
+									<div class="pay_right_info">
+										<i class="color-items">100.00</i>元
+									</div>
+								</li>
+							</ul>
+						</div>
+					 </div>
+					 <div class="h2"></div>
+					 <div class="invoic_self_detail bgff border">
+						<div class="innerwaper">
+							<ul>
+								<li class="bd1">
+									<span class="pay_left_block">收件人</span>
+									<div class="pay_right_info">
+										<input type="text" placeholder="请填写收件人" />
+									</div>
+								</li>
+								<li class="bd1">
+									<span class="pay_left_block">联系电话</span>
+									<div class="pay_right_info">
+										<input type="text" value='15013797469' readonly="readonly"  />
+									</div>
+								</li>
+								<li>
+									<span class="pay_left_block">收件地址</span>
+									<div class="pay_right_info">
+										<input type="text" placeholder="请填写收件地址"  />
+									</div>
+								</li>
+							</ul>
+						</div>
+					 </div>
+					  <div class="invoic_pay_type">
+					  		<div class="title innerwaper">
+					  			<h3 class="invoic_choose_pay">选择邮费支付方式</h3>
+					  		</div>
+					  		<div class="invoic_pay_con bgff border">
+					  			<div class="innerwaper">
+					  				<ul>
+					  				<li class="bd1" data-type = "0">
+					  					<div class="fl weixinpay">
+					  						<i class="iconfont">&#xe65e;</i>
+					  						<span>微信支付<i class="color-items"> (全国8元)</i></span>
+					  				    </div>
+					  				    <span class="fr invoic_choosebtn"><i class="iconfont">&#xe6a8;</i></span>
+					  				</li>
+					  				<li class="bd1" data-type = "0">
+					  					<div class="fl alipay">
+					  						<i class="iconfont">&#xe65a;</i>
+					  						<span>支付宝支付<i class="color-items"> (全国8元)</i></span>
+					  				    </div>
+					  				    <span class="fr invoic_choosebtn"><i class="iconfont">&#xe6a8;</i></span>
+					  				</li>
+					  				<li data-type = "0">
+					  					<div class="fl cashpay">
+					  						<i class="iconfont">&#xe6a6;</i>
+					  						<span>货到付款</span>
+					  				    </div>
+					  				    <span class="fr invoic_choosebtn"><i class="iconfont">&#xe6a8;</i></span>
+					  				</li>
+					  			</ul>
+					  			</div>
+					  		</div>
+					  </div>
+				</section>
+				<section>
+					<div class="invoic_company_detail bgff border">
+						<div class="innerwaper">
+							<ul>
+								<li class="bd1">
+									<span class="pay_left_block">公司名称</span>
+									<div class="pay_right_info">
+										<input type="text" placeholder="请填写公司名称" />
+									</div>
+								</li>
+								<li class="bd1">
+									<span class="pay_left_block">纳税人识别号</span>
+									<div class="pay_right_info">
+										<input type="text" placeholder="请填写纳税人识别号" />
+									</div>
+								</li>
+								<li class="bd1">
+									<span class="pay_left_block">公司地址</span>
+									<div class="pay_right_info">
+										<input type="text" placeholder="请填写公司地址" />
+									</div>
+								</li>
+								<li class="bd1">
+									<span class="pay_left_block">公司电话</span>
+									<div class="pay_right_info">
+										<input type="text" placeholder="请填写公司电话" />
+									</div>
+								</li>
+								<li class="bd1">
+									<span class="pay_left_block">开户行</span>
+									<div class="pay_right_info">
+										<input type="text" placeholder="请填写开户银行" />
+									</div>
+								</li>
+								<li class="bd1">
+									<span class="pay_left_block">开户账号</span>
+									<div class="pay_right_info">
+										<input type="text" placeholder="请填写开户账号" />
+									</div>
+								</li>
+								<li>
+									<span class="pay_left_block">发票金额</span>
+									<div class="pay_right_info">
+										<i class="color-items">100.00</i>元
+									</div>
+								</li>
+							</ul>
+						</div>
+					 </div>
+					 <div class="h2"></div>
+					 <div class="invoic_self_detail bgff border">
+						<div class="innerwaper">
+							<ul>
+								<li class="bd1">
+									<span class="pay_left_block">收件人</span>
+									<div class="pay_right_info">
+										<input type="text" placeholder="请填写收件人" />
+									</div>
+								</li>
+								<li class="bd1">
+									<span class="pay_left_block">联系电话</span>
+									<div class="pay_right_info">
+										<input type="text" value='15013797469' readonly="readonly"  />
+									</div>
+								</li>
+								<li>
+									<span class="pay_left_block">收件地址</span>
+									<div class="pay_right_info">
+										<input type="text" placeholder="请填写收件地址"  />
+									</div>
+								</li>
+							</ul>
+						</div>
+					 </div>
+					  <div class="invoic_pay_type">
+					  		<div class="title innerwaper">
+					  			<h3 class="invoic_choose_pay">选择邮费支付方式</h3>
+					  		</div>
+					  		<div class="invoic_pay_con bgff border">
+					  			<div class="innerwaper">
+					  				<ul>
+					  				<li class="bd1">
+					  					<div class="fl weixinpay">
+					  						<i class="iconfont">&#xe65e;</i>
+					  						<span>微信支付<i class="color-items"> (全国8元)</i></span>
+					  				    </div>
+					  				    <span class="fr invoic_choosebtn"><i class="iconfont">&#xe6a8;</i></span>
+					  				</li>
+					  				<li class="bd1">
+					  					<div class="fl alipay">
+					  						<i class="iconfont">&#xe65a;</i>
+					  						<span>支付宝支付<i class="color-items"> (全国8元)</i></span>
+					  				    </div>
+					  				    <span class="fr invoic_choosebtn"><i class="iconfont">&#xe6a8;</i></span>
+					  				</li>
+					  				<li>
+					  					<div class="fl cashpay">
+					  						<i class="iconfont">&#xe6a6;</i>
+					  						<span>货到付款</span>
+					  				    </div>
+					  				    <span class="fr invoic_choosebtn"><i class="iconfont">&#xe6a8;</i></span>
+					  				</li>
+					  			</ul>
+					  			</div>
+					  		</div>
+					  </div>
+				</section>
+			  </div>
+			</div>
+			<div style='height:1.2rem;'></div>
+			
+				<a href="my_f_invoicepay-success.html" class="f-bottom">提 交</a>
+	 	</div>
+	 	<script type="text/javascript">
+	 		$('#invoictab span').on('tap',function(){
+				var index = $(this).index();
+				$('#invoictab .botttomline').css('left',index*50+'%');
+				$('.invoic_tab_box').css({'left':-index*100+'%'});
+
+			});
+//			$('.invoic_pay_type .invoic_pay_con li').on('tap',function(){
+//				$(this).children('.invoic_choosebtn').html('<i class="iconfont color-items">&#xe6a9;</i>');
+//				$(this).siblings().children('.invoic_choosebtn').html('<i class="iconfont">&#xe6a8;</i>');
+//			});
+	 	</script>
+	 	
+	</body>
+</html>
