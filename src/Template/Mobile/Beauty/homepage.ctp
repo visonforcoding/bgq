@@ -362,8 +362,15 @@
 <script>
     (function () {
         var imgUrl = '<?= $beauty->user->avatar ?>';
-        if (imgUrl)
-            window.shareConfig.imgUrl = location.origin + imgUrl;
+        if(imgUrl){
+            if(imgUrl.indexOf('http') === 0){
+                if($.util.isWX) window.shareConfig.imgUrl = imgUrl;
+            }
+            else{
+                window.shareConfig.imgUrl =  location.origin + imgUrl;
+            }
+        }
+        if($.util.getParam('ss') == 'ok') window.shareConfig.imgUrl = imgUrl;
         window.shareConfig.link = 'http://m.chinamatop.com/beauty/homepage/<?= $beauty->id ?>?share=1';
         window.shareConfig.title = '<?= $beauty->user->truename ?>的参选主页';
         window.shareConfig.desc = '我正在参加并购帮主办的2016并购菁英评选活动，快来投票吧';

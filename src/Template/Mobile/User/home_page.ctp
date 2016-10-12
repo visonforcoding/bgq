@@ -408,7 +408,6 @@
             else{
                 window.shareConfig.imgUrl =  location.origin + imgUrl;
             }
-
         }
         if($.util.getParam('ss') == 'ok') window.shareConfig.imgUrl = imgUrl;
         window.shareConfig.link = 'http://m.chinamatop.com/user/home-page/<?= $user->id ?>?share=1';
