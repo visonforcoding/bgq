@@ -70,7 +70,7 @@
 <script type='text/html' id='biggie_tpl'>
     <section class="internet-v-info">
         <div class="innercon">
-            <a href="/user/home-page/{#id#}"><span class="head-img"><img src="{#avatar#}"><i></i></span></a>
+            <a href="/user/home-page/{#id#}"><span class="head-img"><img init_src="{#avatar#}"><i></i></span></a>
             <div class="vipinfo bd1">
                 <div class="fl c_info_list">
                     <a href="/user/home-page/{#id#}">
@@ -102,6 +102,7 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
     window.user_id = "<?= $user_id ?>";
+    window.initList = <?= $meetjson ?>;
 </script>
 <script>
     if ($.util.isAPP) {
@@ -138,19 +139,8 @@
             }
         }
     }
-    
-    var page = 2;
-    window.hideRelease = false;
-    $(window).on("scroll", function () {
-        // 滚动一个屏幕长度，隐藏发布活动
-        var lastSt = window.hideRelease;
-        window.hideRelease = document.body.scrollTop > $(window).height();
-        if (lastSt != window.hideRelease) {
-            window.hideRelease ? $('#auth').removeClass('moveleft').addClass('moveright') : $('#auth').addClass('moveleft');
-        }
-    });
 
-    $.util.dataToTpl('biggie', 'biggie_tpl',<?= $meetjson ?>, function (d) {
+    function tpldate(d){
         d.id = d.id ? d.id : '';
         d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
         //        d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
@@ -165,12 +155,25 @@
         d.focus_class = d.followers.length ? '' : 'color-items';
         d.focus_id_str = d.followers.length ? '' : 'id="focus_'+ d.id +'"';
         return d;
+    }
+    
+    var page = 2;
+    window.hideRelease = false;
+    $(window).on("scroll", function () {
+        // 滚动一个屏幕长度，隐藏发布活动
+        var lastSt = window.hideRelease;
+        window.hideRelease = document.body.scrollTop > $(window).height();
+        if (lastSt != window.hideRelease) {
+            window.hideRelease ? $('#auth').removeClass('moveleft').addClass('moveright') : $('#auth').addClass('moveleft');
+        }
     });
 
-    
+    $.util.dataToTpl('biggie', 'biggie_tpl', window.initList, tpldate);
+    $.util.initLoadImg('biggie');
+
     setTimeout(function () {
         $(window).on("scroll", function () {
-            $.util.listScroll('items', function () {
+            $.util.listScroll('biggie', function () {
                 if (page == 9999) {
                     $('#buttonLoading').html('亲，没有更多条目了，请看看其他的栏目吧');
                     return;
@@ -187,21 +190,7 @@
                     }
 
                     if (res.status) {
-                        var html = $.util.dataToTpl('', 'biggie_tpl', res.data, function (d) {
-                            d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
-//                            d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
-                            d.city = '';
-                            var subject = d.subjects.length ? d.subjects[0] : '';
-                            if (window.user_id == d.id) {
-                                d.subjects = subject ? '<a href="/meet/subject/' + subject.id + '" class="line1 w7"><i class="iconfont">&#xe67c;</i>' + subject.title + '</a>' : '';
-                            } else {
-                                d.subjects = subject ? '<a href="javascript:$.util.checkLogin(\'/meet/subject-detail/' + subject.id + '/#index\')" class="line1 w7"><i class="iconfont">&#xe67c;</i>' + subject.title + '</a>' : '';
-                            }
-                            d.focus_msg = d.followers.length ? '已关注' : '加关注';
-                            d.focus_class = d.followers.length ? '' : 'color-items';
-                            d.focus_id_str = d.followers.length ? '' : 'id="focus_'+ d.id +'"';
-                            return d;
-                        });
+                        var html = $.util.dataToTpl('', 'biggie_tpl', res.data, tpldate);
                         $('#biggie').append(html);
                         if (res.data.length < 10) {
                             page = 9999;
