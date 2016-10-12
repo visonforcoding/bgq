@@ -17,7 +17,7 @@ class MeetController extends AppController {
         $this->loadModel('User');
     }
 
-    protected $limit = '10'; // 分页条数
+    protected $limit = '100'; // 分页条数
     
     /**
      * Index method  会员约见首页
@@ -73,6 +73,7 @@ class MeetController extends AppController {
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
                         $item['avatar'] = getSmallAvatar($item['avatar']);
+                        $item['followers'] = count($item['followers']) ? 1 : 0;
                         return $item;
                     });
                 })
@@ -835,6 +836,7 @@ class MeetController extends AppController {
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
                         $item['avatar'] = getSmallAvatar($item['avatar']);
+                        $item['followers'] = count($item['followers']) ? 1 : 0;
                         return $item;
                     });
                 })
