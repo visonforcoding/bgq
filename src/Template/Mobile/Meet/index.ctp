@@ -92,10 +92,10 @@
     </section>
 </script>
 <script type='text/html' id='subTpl'>
-    <a href="javascript:$.util.checkLogin('/meet/subject-detail/{#id#}/#index')" class="line1 w7"><i class="iconfont">&#xe67c;</i>{#title#}</a>
+    <a href="javascript:$.util.checkLogin('/meet/subject-detail/{#id#}/#index')" class="line1 w7"><i class="iconfont color-items">&#xe6aa;</i>{#title#}</a>
 </script>
 <script type='text/html' id='mySubTpl'>
-    <a href="/meet/subject/{#id#}" class="line1 w7"><i class="iconfont">&#xe67c;</i>{#title#}</a>
+    <a href="/meet/subject/{#id#}" class="line1 w7"><i class="iconfont color-items">&#xe6aa;</i>{#title#}</a>
 </script>
 <?= $this->element('footer'); ?>
 <?php $this->start('script'); ?>
@@ -149,7 +149,7 @@
         if (window.user_id == d.id) {
             d.subjects = subject ? '<a href="/meet/subject/' + subject.id + '"><i class="iconfont">&#xe67c;</i>' + subject.title + '</a>' : '';
         } else {
-            d.subjects = subject ? '<a href="javascript:$.util.checkLogin(\'/meet/subject-detail/' + subject.id + '/#index\')"><i class="iconfont">&#xe67c;</i>' + subject.title + '</a>' : '';
+            d.subjects = subject ? '<a href="javascript:$.util.checkLogin(\'/meet/subject-detail/' + subject.id + '/#index\')"><i class="iconfont color-items">&#xe6aa;</i>' + subject.title + '</a>' : '';
         }
         d.focus_msg = d.followers.length ? '已关注' : '加关注';
         d.focus_class = d.followers.length ? '' : 'color-items';
