@@ -71,9 +71,11 @@
         <div class="p_title  innercon"><h3><i class="iconfont">&#xe685;</i>你的照片</h3></div>
         <div class="photo_list bgff">
             <ul id="uploadPic">
+                <?php if($user->beauty_pics): ?>
                 <?php foreach ($user->beauty_pics as $k => $v): ?>
                     <li onclick="isDel(this, '<?= $v['id'] ?>')"><img src="<?= $v['pic_url'] ?>"/></li>
                 <?php endforeach; ?>
+                <?php endif; ?>
                 <li id="upload_pic">
                     <div class="uploadfile">
                         <span class="addpoto"><i class="iconfont">&#xe692;</i></span>
