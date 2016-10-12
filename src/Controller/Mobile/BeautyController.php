@@ -495,7 +495,7 @@ class BeautyController extends AppController {
                         $item->user->avatar = getSmallAvatar($item->user->avatar);
                         if(strlen($item->id) == 1){
                             $item->beauty_id = '00' . $item->id;
-                        } else if(strlen($items->id) == 2){
+                        } else if(strlen($item->id) == 2){
                             $item->beauty_id = '0' . $item->id;
                         }
                         return $item;
