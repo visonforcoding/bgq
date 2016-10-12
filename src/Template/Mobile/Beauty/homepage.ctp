@@ -1,6 +1,7 @@
 <html style="background: #f0eff5;">
     <link rel="stylesheet" type="text/css" href="/mobile/css/zt.css"/>
     <script src="/mobile/js/view.js"></script>
+    <?= $this->element('share', ['table'=>'beauty', 'id'=>$beauty->id]); ?>
     <div class="wraper content_inner">
         <div class="h2"></div>
         <div class="bg-ff">
@@ -24,7 +25,7 @@
                         </a>
                     </li>
                     <li>
-                        <i><?= $beauty->vote_nums ?></i>
+                        <i id="vote_nums"><?= $beauty->vote_nums ?></i>
                         <span>票数</span>
                     </li>
                     <li>
@@ -347,7 +348,7 @@
             <div class="photo_type innercon mt20"><h3>投票不尽兴？想约并购菁英吗？请戳这里 <i class="iconfont">&#xe667;</i></h3></div>
         </a>
         <a href="/beauty/index">
-            <div class="photo_type innercon mt20"><h3>投票不尽兴？想参与报名? 请戳这里 <i class="iconfont">&#xe667;</i></h3></div>
+            <div class="photo_type innercon mt20"><h3>投票不尽兴？<span style="color: #b71c2d;margin-left: 0;">想参与报名? 请戳这里</span> <i class="iconfont">&#xe667;</i></h3></div>
         </a>
     </div>
     <div class="h2"></div>
@@ -364,12 +365,18 @@
         if (imgUrl)
             window.shareConfig.imgUrl = location.origin + imgUrl;
         window.shareConfig.link = 'http://m.chinamatop.com/beauty/homepage/<?= $beauty->id ?>?share=1';
-        window.shareConfig.title = '我在参加由并购帮主办的2016并购菁英评选活动';
+        window.shareConfig.title = '<?= $beauty->user->truename ?>的参选主页';
         window.shareConfig.desc = '我正在参加并购帮主办的2016并购菁英评选活动，快来投票吧';
         LEMON.show.shareIco();
     })();
 </script>
 <script type="text/javascript">
+    setTimeout(function(){
+        if (location.href.indexOf('?share=1') != -1) {
+            $('#share_download').show();
+        }
+    }, 1000);
+    
     $('.h-tab>li').on('click', function () {
         var index = $(this).index() + 1;
         console.log($('.tabcon>ul').eq(index));
@@ -387,6 +394,9 @@
             url: '/beauty/vote/'+obj.attr('user_id'),
             func: function(res){
                 $.util.alert(res.msg);
+                if(res.status){
+                    $('#vote_nums').html(parseInt($('#vote_nums').html())+1);
+                }
             }
         });
     });
