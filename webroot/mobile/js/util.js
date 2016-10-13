@@ -325,7 +325,8 @@ $.util = {
         var act = 'v', param = ['/admin/report/logger?',
             'screen=' + window.screen.height + '*' + window.screen.width,
             //'refer=' + (document.referrer||document.domain).replace(/http:\/\/|https:\/\//, '').replace(/\/.*|\?.*/, '')
-            'refer=' + encodeURI(document.referrer||document.domain)
+            'refer=' + encodeURI(document.referrer||document.domain),
+            'title=' + encodeURI(document.title)
         ];
         if (ptag) {
             act = 'c';
