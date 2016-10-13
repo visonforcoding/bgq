@@ -123,7 +123,7 @@ class PvchartController extends AppController {
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
+            $where['and'] = [['Pvlog.create_time >' => $begin_time], ['Pvlog.create_time <' => $end_time]];
         }
         $Table = \Cake\ORM\TableRegistry::get('Pvlog');
         $query = $Table->find();
