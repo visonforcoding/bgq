@@ -242,24 +242,24 @@
                     }
                     $('#gsyw').next('div').find('span').html(res.data.gsyw);
                     
-                    if(res.data.gsyw){
-                        $('#gsyw').find('i').eq('1').html('');
+                    if(res.data.educations){
+                        $('#educations').find('i').eq('1').html('');
                     } else {
-                        $('#gsyw').find('i').eq('1').html('(未完善)(选填)');
+                        $('#educations').find('i').eq('1').html('(未完善)(选填)');
                     }
                     $('#educations').next('div').find('span').html(res.data.educations);
                     
-                    if(res.data.gsyw){
-                        $('#gsyw').find('i').eq('1').html('');
+                    if(res.data.careers){
+                        $('#careers').find('i').eq('1').html('');
                     } else {
-                        $('#gsyw').find('i').eq('1').html('(未完善)(选填)');
+                        $('#careers').find('i').eq('1').html('(未完善)(选填)');
                     }
                     $('#careers').next('div').find('span').html(res.data.careers);
                     
-                    if(res.data.gsyw){
-                        $('#gsyw').find('i').eq('1').html('');
+                    if(res.data.grbq){
+                        $('#grbq').find('i').eq('1').html('');
                     } else {
-                        $('#gsyw').find('i').eq('1').html('(未完善)(选填)');
+                        $('#grbq').find('i').eq('1').html('(未完善)(选填)');
                     }
                     $('#grbq').next('div').find('span').html(res.data.grbq);
                     
