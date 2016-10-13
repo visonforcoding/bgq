@@ -46,7 +46,7 @@
                         colNames:
                                 ['url', '映射', '描述', '操作'],
                         colModel: [
-                            {name: 'url', editable: true, align: 'center',formatter:function(cell,opt,obj){
+                            {name: 'url', editable: true, align: 'center', width:'800px', formatter:function(cell,opt,obj){
                                     var res = '';
                                     res +='<a href="/admin/pvchart/urlchart/'+obj.map+'">'+cell+'</a>';
                                     if(cell.match(/http:\/\/.*\/.*\.*\/[0-9]+.*/)){
