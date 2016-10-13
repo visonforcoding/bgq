@@ -16,6 +16,7 @@
                 </div>
             </div>
             <a href="javascript:void(0);"  id="submit" class="submit" >下一步</a>
+            <a href="/user/foreign-register" class="historyinfo colore01">国外手机号码请点这里</a>
         </form>
 
     </div>
@@ -85,7 +86,7 @@
     $('#submit').on('click', function () {
         if($('input[name="vcode"]').val() == ''){
             $.util.alert('请填写验证码');
-            return;
+            return false;
         }
         $form = $('form');
         $.ajax({
@@ -98,7 +99,7 @@
                     if (msg.status === true) {
                         window.location.href = '/user/set-pwd';
                     } else {
-                        alert(msg.msg);
+                        $.util.alert(msg.msg);
                     }
                 }
             }
