@@ -159,9 +159,9 @@ class BookChatController extends AppController {
     }
 
     /**
-     * export csv
+     * export xls
      *
-     * @return csv 
+     * @return xls
      */
     public function exportExcel() {
         $sort = $this->request->data('sidx');
