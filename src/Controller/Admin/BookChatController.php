@@ -164,7 +164,7 @@ class BookChatController extends AppController {
      * @return xls
      */
     public function exportExcel() {
-        $sort = $this->request->data('sidx');
+        $sort = 'BookChat.' . $this->request->data('sidx');
         $order = $this->request->data('sord');
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
