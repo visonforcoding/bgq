@@ -269,9 +269,11 @@ class SavantController extends AppController {
             //记录
             $SavantApplyTable = \Cake\ORM\TableRegistry::get('SavantApply');
             $apply = $SavantApplyTable->find()->where(['user_id' => $id])->orderDesc('id')->first();
-            $apply->check_man = $this->_user->truename;
-            $apply->action = 1;
-            $SavantApplyTable->save($apply);
+            if($apply){
+                $apply->check_man = $this->_user->truename;
+                $apply->action = 1;
+                $SavantApplyTable->save($apply);
+            }
             $SavantTable = \Cake\ORM\TableRegistry::get('Savant');
             $savant = $SavantTable->find()->where(['user_id'=>$id])->first();
             $savant->check_time = date('Y-m-d H:i:s');
