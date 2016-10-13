@@ -173,6 +173,7 @@ class UserController extends AppController {
         $keywords = $this->request->data('keywords');
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
+        $agency_id = $this->request->data('agency_id');
         $where = ['is_del'=>0];
         if (!empty($keywords)) {
             $where['or'] = [['truename like' => "%$keywords%"], ['email like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
@@ -185,6 +186,9 @@ class UserController extends AppController {
         $grade = $this->request->data('grade');
         if(!empty($grade)){
             $where['grade'] = $grade;
+        }
+        if(!empty($agency_id)){
+            $where['agency_id'] = $agency_id;
         }
         $account_status = $this->request->data('account_status');
         if($account_status=='1'||$account_status=='2'){
