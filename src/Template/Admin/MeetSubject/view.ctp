@@ -25,7 +25,7 @@
                 <td><?= h($meetSubject->summary) ?></td>
             </tr>
 
-            <tr class="success">
+<!--            <tr class="success">
                 <th>价格</th>
                 <td><?= h($meetSubject->price) ?></td>
             </tr>
@@ -33,7 +33,7 @@
             <tr class="danger">
                 <th>持续时间</th>
                 <td><?= h($meetSubject->last_time) ?></td>
-            </tr>
+            </tr>-->
 
             <tr class="warning">
                 <th>创建于</th>

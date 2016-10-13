@@ -39,12 +39,20 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['会员','公司','职位', '标题', '操作'],
+                                ['会员','公司','职位', '标题', '简介', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'user.company', editable: true, align: 'center'},
                             {name: 'user.position', editable: true, align: 'center'},
                             {name: 'title', editable: true, align: 'center'},
+                            {name: 'summary', editable: true, align: 'left', formatter: function (cell, opt, row) {
+                                    if (cell.length > 30) {
+                                        return cell.substr(0, 30) + '<a class="grid-popover" onclick="showTips(this)" data-content="' + cell + '">[查看更多]<a>';
+                                    } else {
+                                        return cell;
+                                    }
+                                }
+                            },
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: window._config.showDef,
@@ -69,6 +77,15 @@
                         },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
                 });
+                
+                function showTips(em) {
+                    var content = $(em).data('content');
+                    layer.tips(content, em, {
+                        tips: [1, '#3595CC'],
+                        time: 0,
+                        closeBtn: 2
+                    });
+                }
                 
                 function typeFormatter(cellvalue, options, rowObject){
                     if(rowObject.type == 1){
