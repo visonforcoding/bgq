@@ -11,8 +11,10 @@
 </header>
 <div class="wraper">
     <div class="h-home-bottom">
-        <div class="t-home-top"><span><img src="<?=  empty($book->user->avatar)?'/mobile/images/touxiang.jpg':$book->user->avatar?>"/></span></div>
-        <h3><?=$book->user->truename?><i class="v"></i></h3>
+        <a href="/user/home-page/<?=$book->user->id?>">
+            <div class="t-home-top"><span><img src="<?=  empty($book->user->avatar)?'/mobile/images/touxiang.jpg':$book->user->avatar?>"/></span></div>
+        </a>
+        <h3><?=$book->user->truename?><?php if($book->user->level == 2): ?><i class="v"></i><?php endif; ?></h3>
         <div class="info-desc"><span><i></i><?= $book->user->company ?></span><span><i></i><?= $book->user->position ?></span></div>
     </div>
     <ul class="h-info-box">
