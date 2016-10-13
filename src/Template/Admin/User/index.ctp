@@ -2,6 +2,7 @@
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/lightbox/css/lightbox-rotate.css">
+<link href="/wpadmin/lib/select2/css/select2.min.css" rel="stylesheet">
 <?php $this->end() ?> 
 <div class="col-xs-12">
     <form id="table-bar-form">
@@ -32,6 +33,10 @@
                 </select>
             </div>
             <div class="form-group">
+                <label for="agency">机构</label>
+                <?= $this->cell('Agency'); ?>
+            </div>
+            <div class="form-group">
                 <label for="keywords">时间</label>
                 <input type="text" name="begin_time" class="form-control date_timepicker_start" id="keywords" placeholder="开始时间">
                 <label for="keywords">到</label>
@@ -51,7 +56,12 @@
 <!--查看大图-->
 <script src="/wpadmin/lib/jqueryrotate.js"></script>
 <script src="/wpadmin/lib/lightbox/js/lightbox-rotate.js"></script>
+<script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <script>
+    $('#select-agency').select2({
+        language: "zh-CN",
+        placeholder: '选择一个机构'
+    });
                 $(function () {
                     $('#main-content').bind('resize', function () {
                         $("#list").setGridWidth($('#main-content').width() - 40);

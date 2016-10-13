@@ -1,5 +1,5 @@
 <select name="agency_id" id="select-agency"  class="select-agency form-control">
-    <option>请选择</option>
+    <option></option>
     <?php foreach ($agencies as $agency): ?>
         <optgroup label="<?= $agency->name ?>">
             <?php if (!empty($agency->children)): ?>
