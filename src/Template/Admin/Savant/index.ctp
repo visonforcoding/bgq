@@ -75,6 +75,7 @@
                             {name: 'savant.reco_nums', editable: true, align: 'center'},
 //                            {name: 'cover', editable: true, align: 'center'},
                             {name: 'savant.xmjy', editable: true, align: 'left', formatter: function (cell, opt, row) {
+                                    if(!cell)return'';
                                     if (cell.length > 15) {
                                         return cell.substr(0, 15) + '<a class="grid-popover" onclick="showTips(this)" data-content="' + cell + '">[查看更多]<a>';
                                     } else {
@@ -82,6 +83,7 @@
                                     }
                                 }},
                             {name: 'savant.zyys', editable: true, align: 'left', formatter: function (cell, opt, row) {
+                                    if(!cell)return'';
                                     if (cell.length > 15) {
                                         return cell.substr(0, 15) + '<a class="grid-popover" onclick="showTips(this)" data-content="' + cell + '">[查看更多]<a>';
                                     } else {
