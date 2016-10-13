@@ -128,7 +128,7 @@ class BookChatController extends AppController {
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
             $end_time = date('Y-m-d', strtotime($end_time));
-            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
+            $where['and'] = [['BookChat.create_time >' => $begin_time], ['BookChat.create_time <' => $end_time]];
         }
         $query = $BookTable->find();
         $query->hydrate(false);
@@ -178,7 +178,7 @@ class BookChatController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $Table = $this->BookChat;
+        $Table = \Cake\ORM\TableRegistry::get('BookChat');
         $column = ['用户id', '回复用户id', '约见id', '内容', '创建时间'];
         $query = $Table->find();
         $query->hydrate(false);
