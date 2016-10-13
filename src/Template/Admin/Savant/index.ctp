@@ -19,6 +19,7 @@
                     <option value="-1">全部</option>
                     <option value="2" <?php if (isset($do)): ?>selected="selected"<?php endif; ?>>未审核</option>
                     <option value="3">审核通过</option>
+                    <option value="0">审核未通过</option>
                 </select>
             </div>
             <div class="form-group">
@@ -151,7 +152,7 @@
                     } else {
                         response += '<a title="取消置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-down"></i> </a>';
                     }
-                    if (rowObject.savant_status == 2) {
+                    if (rowObject.savant_status == 2 || rowObject.savant_status == 0) {
                         response += '<a title="审核通过" href="javascript:void(0)" class="grid-btn release" onclick="pass(' + rowObject.id + ')"><i class="icon icon-check"></i></a>';
                     }
                     if (rowObject.savant_status != 0) {
