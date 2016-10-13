@@ -218,6 +218,7 @@ class UserController extends AppController {
             }
             $data['user_token'] =  md5(uniqid());
             $data['pwd'] = $this->request->session()->read('reg.pwd');
+            $data['email'] = $this->request->session()->read('reg.email');
             //隐私设置
             $data['secret'] =  [
                 'phone_set'=>2,
@@ -886,5 +887,25 @@ class UserController extends AppController {
             }
             $this->User->save($user);
         }
+    }
+    
+    public function foreignRegister(){
+        if($this->request->is('post')){
+            $data = $this->request->data;
+            $user = $this->User->findByPhoneAndEnabled($data['phone'], 1)->first();
+            if($user){
+                return $this->Util->ajaxReturn(false, '该手机号已注册过您可前往登录');
+            }
+            $email_v = \Cake\Validation\Validation::email($data['email']);
+            if($email_v == false){
+                return $this->Util->ajaxReturn(false, '邮箱格式不对');
+            }
+            $this->request->session()->write('reg.phone', $data['phone']);
+            $this->request->session()->write('reg.email', $data['email']);
+            return $this->Util->ajaxReturn(true);
+        }
+        $this->set([
+            'pageTitle' => '国外用户注册'
+        ]);
     }
 }
