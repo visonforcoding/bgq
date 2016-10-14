@@ -174,6 +174,7 @@ class UserController extends AppController {
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $agency_id = $this->request->data('agency_id');
+        $industry_id = $this->request->data('industry_id');
         $where = ['is_del'=>0];
         if (!empty($keywords)) {
             $where['or'] = [['truename like' => "%$keywords%"], ['email like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
@@ -190,6 +191,7 @@ class UserController extends AppController {
         if(!empty($agency_id) && $agency_id !== '请选择'){
             $where['agency_id'] = $agency_id;
         }
+        
         $account_status = $this->request->data('account_status');
         if($account_status=='1'||$account_status=='2'){
             $where['enabled'] = $account_status -1;
@@ -202,6 +204,11 @@ class UserController extends AppController {
         }
         $query = $this->User->find();
         $query->hydrate(false);
+        if($industry_id !== 'all' && !empty($industry_id)){
+            $query->matching('UserIndustries', function($q)use($industry_id){
+                return $q->where(['industry_id' => $industry_id]);
+            });
+        }
         if (!empty($where)) {
             $query->where($where);
         }

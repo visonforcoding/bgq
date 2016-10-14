@@ -33,7 +33,11 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="agency">机构</label>
+                <label for="industry">业务标签</label>
+                <?= $this->cell('Industry::push', [['single']]); ?>
+            </div>
+            <div class="form-group">
+                <label for="agency">机构标签</label>
                 <?= $this->cell('Agency'); ?>
             </div>
             <div class="form-group">
@@ -61,6 +65,10 @@
     $('#select-agency').select2({
         language: "zh-CN",
         placeholder: '选择一个机构'
+    });
+    $('#select-industry').select2({
+        language: "zh-CN",
+        placeholder: '选择一个业务'
     });
                 $(function () {
                     $('#main-content').bind('resize', function () {
