@@ -170,14 +170,10 @@ class PushController extends AppController {
                     $mobile_arr[] = $v['phone'];
                 }
                 $mobile = implode(',', $mobile_arr); 
-                $res = $this->Sms->sendManyByQf106($mobile, $content);
-                if($res){
-                    $this->Util->ajaxReturn(true, '发送成功');
-                } else {
-                    $this->Util->ajaxReturn(false, '发送失败');
-                }
+                $text_res = $this->Sms->sendManyByQf106($mobile, $content);
             }
         }
+        $this->Util->ajaxReturn(true, '推送成功');
     }
     
     public function view($id){
