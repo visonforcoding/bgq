@@ -218,7 +218,9 @@ class UserController extends AppController {
             }
             $data['user_token'] =  md5(uniqid());
             $data['pwd'] = $this->request->session()->read('reg.pwd');
-            $data['email'] = $this->request->session()->read('reg.email');
+            if($this->request->session()->read('reg.email')){
+                $data['email'] = $this->request->session()->read('reg.email');
+            }
             //隐私设置
             $data['secret'] =  [
                 'phone_set'=>2,
