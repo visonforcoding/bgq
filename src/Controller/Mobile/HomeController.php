@@ -59,7 +59,9 @@ class HomeController extends AppController {
     public function getUserinfo(){
         $this->handCheckLogin();
         $user_id = $this->user->id;
-        $user = $this->User->get($user_id);
+        $user = $this->User->get($user_id, [
+            'fields' => ['id', 'truename', 'avatar', 'company', 'position']
+        ]);
         $user->avatar = getOriginAvatar($user->avatar);
         $isWx = $this->request->is('weixin') ? true : false;
         $UsermsgTable = \Cake\ORM\TableRegistry::get('Usermsg');
@@ -1536,7 +1538,7 @@ class HomeController extends AppController {
     /**
      * 找同行
      */
-    public function searchSavant($id=null){
+    public function searchPeople($id=null){
         $user_id = '';
         if($this->user){
             $user_id = $this->user->id;
@@ -1589,6 +1591,8 @@ class HomeController extends AppController {
                 return $q;
             });
             $where['industry_id'] = $industry_id;
+        } else {
+            
         }
         
         if($data['region']){
