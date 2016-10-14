@@ -41,7 +41,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['推送用户', '接收用户', '推送标题', '推送类型', '是否成功', '备注', '创建时间', '操作'],
+                                ['推送用户', '接收用户', '推送标题', '推送内容', '推送类型', '是否成功', '备注', '创建时间', '操作'],
                         colModel: [
                             {name: 'pusher.truename', editable: true, align: 'center',formatter:function(cell,opt,row){
                                     return cell+' '+row.pusher.company+' '+row.pusher.position;
@@ -51,6 +51,7 @@
                                     return cell+' '+row.receiver.company+' '+row.receiver.position;
                             }},
                             {name: 'title', editable: true, align: 'center'},
+                            {name: 'body', editable: true, align: 'center'},
                             {name: 'type', editable: true, align: 'center',formatter:function(cell,opt,row){
                                     switch(cell){
                                         case 1:
