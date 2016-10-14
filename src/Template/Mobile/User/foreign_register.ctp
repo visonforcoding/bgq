@@ -11,17 +11,17 @@
 <script>
     $('input[name="phone"]').focusout(function () {
         var phone = $(this).val();
-        checkPhone(phone);
+        //checkPhone(phone);
     });
     $('#submit').on('click', function () {
         if ($('input[name="phone"]').val() == '') {
             $.util.alert('请输入手机号码', 1000);
             return false;
         }
-        if (!$.util.isMobile($('input[name="phone"]').val())) {
-            $.util.alert('请输入正确的手机号码', 1000);
-            return false;
-        }
+        //if (!$.util.isMobile($('input[name="phone"]').val())) {
+        //    $.util.alert('请输入正确的手机号码', 1000);
+        //    return false;
+        //}
         if ($('input[name="email"]').val() == '') {
             $.util.alert('请输入邮箱地址', 1000);
             return false;
