@@ -488,7 +488,7 @@
                     }
                 }
             });
-            var page = 3;
+            var page = 2;
             setTimeout(function () {
                 $(window).on("scroll", function () {
                     $.util.listScroll('items', function () {
