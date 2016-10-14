@@ -173,7 +173,7 @@ class PushController extends AppController {
                 $text_res = $this->Sms->sendManyByQf106($mobile, $content);
             }
         }
-        $this->Util->ajaxReturn(true, '推送成功');
+        $this->Util->ajaxReturn(true, '发送成功');
     }
     
     public function view($id){
