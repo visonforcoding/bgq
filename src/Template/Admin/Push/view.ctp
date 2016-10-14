@@ -39,7 +39,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type='submit' id='push' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
+                <input type='text' id='push' class='btn btn-primary' value='保存' data-loading='稍候...' readonly /> 
             </div>
         </div>
     </form>
