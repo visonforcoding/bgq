@@ -242,13 +242,18 @@ class UserController extends AppController {
      */
     public function exportExcel() {
         $sort = $this->request->query('sidx');
-        $order = $this->request->query('sord');
+        $order = $this->request->query('sort');
         $keywords = $this->request->query('keywords');
         $begin_time = $this->request->query('begin_time');
         $end_time = $this->request->query('end_time');
+        $agency_id = $this->request->query('agency_id');
+        $industry_id = $this->request->query('industry_id');
         $where = ['is_del'=>0];
         if (!empty($keywords)) {
             $where['or'] = [['truename like' => "%$keywords%"], ['email like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
+        }
+        if(!empty($agency_id) && $agency_id !== '请选择'){
+            $where['agency_id'] = $agency_id;
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
@@ -259,6 +264,11 @@ class UserController extends AppController {
         $column = ['手机号', '姓名', '会员','等级', '公司', '职位', '邮箱', '性别', '常驻城市', '会员认证','账号状态', '注册时间'];
         $query = $Table->find();
         $query->hydrate(false);
+        if($industry_id !== 'all' && !empty($industry_id)){
+            $query->matching('UserIndustries', function($q)use($industry_id){
+                return $q->where(['industry_id' => $industry_id]);
+            });
+        }
         $query->select(['phone', 'truename', 'level','grade', 'company', 'position', 'email', 'gender', 'city','savant_status','enabled', 'create_time']);
         if (!empty($where)) {
             $query->where($where);
