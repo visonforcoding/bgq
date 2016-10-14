@@ -21,7 +21,7 @@
             <div class="col-md-8"><input type="text" name="title" class="form-control"/></div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 control-label">推送内容</label>
+            <label class="col-md-2 control-label">推送(短信)内容</label>
             <div class="col-md-8"><textarea name="content" class="form-control"></textarea></div>
         </div>
         <div class="form-group">
@@ -73,9 +73,9 @@
             type: 'POST',
             dataType: 'json',
             data: form,
-            url: "/admin/push/do_push",
+            url: "/admin/push/do-push",
             success: function (res) {
-                layer.alert(res.msg);
+                parent.layer.alert(res.msg);
                 parent.layer.close(index);
             }
         });
