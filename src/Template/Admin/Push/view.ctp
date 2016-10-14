@@ -75,7 +75,7 @@
             data: form,
             url: "/admin/push/do-push",
             success: function (res) {
-                parent.layer.alert(res.msg);
+                parent.layer.alert('发送成功');
                 parent.layer.close(index);
             }
         });
