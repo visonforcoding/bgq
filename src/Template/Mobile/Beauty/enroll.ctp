@@ -113,9 +113,7 @@
     <span style="display:none;"></span>
     <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="/home/edit-userinfo" class="tipsbtn bgred" id="yes">去完善</a>
 </div>
-<a href="javascript:void(0);" class="f-bottom" id="submit">
-    <?php if ($is_apply): ?>修改资料<?php else: ?>提交申请<?php endif; ?>
-</a>
+<a href="javascript:void(0);" class="f-bottom" id="submit"><?php if ($is_apply): ?>修改资料<?php else: ?>提交申请<?php endif; ?></a>
 <?php $this->start('script'); ?>
 <script>
     window.shareConfig.link = 'http://m.chinamatop.com/beauty/index?share=1';
@@ -123,6 +121,7 @@
     var share_desc = '由并购帮主办的“2016并购菁英评选 ”10月10日启动';
     share_desc && (window.shareConfig.desc = share_desc);
     LEMON.show.shareIco();
+    if($('#submit').text() == '提交申请') $('#submit').attr('ptag','10004');
 </script>
 <script>
     window.onBackView = function () {
