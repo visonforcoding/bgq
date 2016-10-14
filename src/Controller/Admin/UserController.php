@@ -187,7 +187,7 @@ class UserController extends AppController {
         if(!empty($grade)){
             $where['grade'] = $grade;
         }
-        if(!empty($agency_id)){
+        if(!empty($agency_id) && $agency_id !== '请选择'){
             $where['agency_id'] = $agency_id;
         }
         $account_status = $this->request->data('account_status');
