@@ -5,6 +5,9 @@
         <div class="m_top_des clearfix">
             <div class="m_left-pic fl">
                 <img src="<?= $user->avatar ? getSmallAvatar($user->avatar) : '/mobile/images/touxiang.png' ?>"/>
+                <?php if($user->level == 2): ?>
+                    <div class="bgb_vip"></div>
+                <?php endif; ?>
             </div>
             <div class="<?php if ($self): ?>w75<?php else: ?><?php endif; ?> m_center_des fl">
                 <h3 class="m_info_name"><?= $user->truename ?>
