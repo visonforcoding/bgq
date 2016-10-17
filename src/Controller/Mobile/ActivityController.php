@@ -800,9 +800,9 @@ class ActivityController extends AppController {
                     ->Activitycom
                     ->find()
                     ->contain(['Users'=>function($q){
-                            return $q->where(['Users.enabled'=>1]);
+                            return $q->where(['Users.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
                         }, 'Replyusers'=>function($q){
-                            return $q->where(['Replyusers.enabled'=>1]);
+                            return $q->where(['Replyusers.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
                         }, 'Likes'=>function($q)use($user_id){
                             return $q->where(['type'=>0,'user_id'=>$user_id]);
                         }])
@@ -816,9 +816,9 @@ class ActivityController extends AppController {
                     ->Activitycom
                     ->find()
                     ->contain(['Users'=>function($q){
-                            return $q->where(['Users.enabled'=>1]);
+                            return $q->where(['Users.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
                         }, 'Replyusers'=>function($q){
-                            return $q->where(['Replyusers.enabled'=>1]);
+                            return $q->where(['Replyusers.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
                         }])
                     ->where(['activity_id' => $id, 'is_delete'=>0])
                     ->order(['Activitycom.create_time' => 'DESC'])

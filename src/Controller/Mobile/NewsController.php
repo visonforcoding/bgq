@@ -126,7 +126,9 @@ class NewsController extends AppController {
             $user_id = $this->user->id;
             if(strpos($this->request->referer(), 'admin') === false){
                 $news = $this->News->get($id, [
-                    'contain' => ['Users', 'Comments'=>function($q){
+                    'contain' => ['Users' => function($q){
+                        return $q->where(['Users.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
+                    }, 'Comments'=>function($q){
                         return $q->where(['is_delete'=>0])->orderDesc('Comments.create_time')->limit($this->newslimit);
                     },'Comments.Users'=>function($q){
                         return $q->select(['id','avatar','truename','company','position'])->where(['Users.enabled'=>1]);
@@ -143,7 +145,9 @@ class NewsController extends AppController {
                 ]);
             } else {
                 $news = $this->News->get($id, [
-                    'contain' => ['Users', 'Comments'=>function($q){
+                    'contain' => ['Users' => function($q){
+                        return $q->where(['Users.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
+                    }, 'Comments'=>function($q){
                         return $q->where(['is_delete'=>0])->orderDesc('Comments.create_time')->limit($this->newslimit);
                     },'Comments.Users'=>function($q){
                         return $q->select(['id','avatar','truename','company','position'])->where(['Users.enabled'=>1]);
@@ -161,7 +165,9 @@ class NewsController extends AppController {
         }else{
             if(strpos($this->request->referer(), 'admin') === false){
                 $news = $this->News->get($id, [
-                    'contain' => ['Users', 'Comments'=>function($q){
+                    'contain' => ['Users' => function($q){
+                        return $q->where(['Users.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
+                    }, 'Comments'=>function($q){
                         return $q->where(['is_delete'=>0])->orderDesc('Comments.create_time')->limit($this->newslimit);
                     },'Comments.Users'=>function($q){
                         return $q->select(['id','avatar','truename','company','position'])->where(['Users.enabled'=>1]);
@@ -174,7 +180,9 @@ class NewsController extends AppController {
                 ]);
             } else {
                 $news = $this->News->get($id, [
-                    'contain' => ['Users', 'Comments'=>function($q){
+                    'contain' => ['Users' => function($q){
+                        return $q->where(['Users.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
+                    }, 'Comments'=>function($q){
                         return $q->where(['is_delete'=>0])->orderDesc('Comments.create_time')->limit($this->newslimit);
                     },'Comments.Users'=>function($q){
                         return $q->select(['id','avatar','truename','company','position'])->where(['Users.enabled'=>1]);
@@ -383,7 +391,11 @@ class NewsController extends AppController {
                     ->News
                     ->Comments
                     ->find()
-                    ->contain(['Users', 'Reply', 'Likes'=>function($q)use($user_id){
+                    ->contain(['Users' => function($q){
+                        return $q->where(['Users.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
+                    }, 'Reply' => function($q){
+                        return $q->where(['Reply.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
+                    }, 'Likes'=>function($q)use($user_id){
                         return $q->where(['type'=>1,'user_id'=>$user_id]);
                     }])
                     ->where(['news_id' => $id, 'is_delete'=>0])
@@ -395,7 +407,11 @@ class NewsController extends AppController {
                     ->News
                     ->Comments
                     ->find()
-                    ->contain(['Users', 'Reply'])
+                    ->contain(['Users' => function($q){
+                        return $q->where(['Users.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
+                    }, 'Reply' => function($q){
+                        return $q->where(['Reply.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
+                    }])
                     ->where(['news_id' => $id, 'is_delete'=>0])
                     ->order(['Comments.create_time' => 'DESC'])
                     ->limit(10)
