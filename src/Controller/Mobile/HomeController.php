@@ -60,7 +60,7 @@ class HomeController extends AppController {
         $this->handCheckLogin();
         $user_id = $this->user->id;
         $user = $this->User->get($user_id, [
-            'fields' => ['id', 'truename', 'avatar', 'company', 'position']
+            'fields' => ['id', 'truename', 'avatar', 'company', 'position', 'level']
         ]);
         $user->avatar = getOriginAvatar($user->avatar);
         $isWx = $this->request->is('weixin') ? true : false;
