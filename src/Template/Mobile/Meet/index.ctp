@@ -102,7 +102,6 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
     window.user_id = "<?= $user_id ?>";
-    window.initList = <?= $meetjson ?>;
 </script>
 <script>
     if ($.util.isAPP) {
@@ -168,7 +167,12 @@
         }
     });
 
-    $.util.dataToTpl('biggie', 'biggie_tpl', window.initList, tpldate);
+    $.getJSON('/meet/getMoreBiggie/1', function (res) {
+        if (res.status) {
+            var html = $.util.dataToTpl('', 'biggie_tpl', res.data, tpldate);
+            $('#biggie').append(html);
+        }
+    });
     $.util.initLoadImg('biggie');
 
     setTimeout(function () {

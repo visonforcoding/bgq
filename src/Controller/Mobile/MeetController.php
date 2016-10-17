@@ -54,31 +54,31 @@ class MeetController extends AppController {
                 $is_savant = true;
             }
         }
-        // 默认用户
-        $users = $this
-                ->User
-                ->find()
-                ->distinct('User.id')
-                ->contain(['Subjects'=>function($exp){
-                    return $exp->where(['is_del'=>0])->orderDesc('create_time');
-                }, 'Followers'=>function($q)use($user_id){
-                    return $q->where(['user_id'=>$user_id]);
-                }, 'Savants'=>function($q){
-                    return $q->orderDesc('Savants.check_time');
-                }])
-                ->select(['id', 'truename', 'position', 'company', 'avatar', 'meet_nums'])
-                ->where(['enabled'=>'1', 'level'=>'2'])
-                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
-                ->limit($this->limit)
-                ->formatResults(function($items) {
-                    return $items->map(function($item) {
-                        $item['avatar'] = getSmallAvatar($item['avatar']);
-                        $item['followers'] = count($item['followers']) ? 1 : 0;
-                        return $item;
-                    });
-                })
-                ->toArray();
-        $this->set('meetjson', json_encode($users));
+//        // 默认用户
+//        $users = $this
+//                ->User
+//                ->find()
+//                ->distinct('User.id')
+//                ->contain(['Subjects'=>function($exp){
+//                    return $exp->where(['is_del'=>0])->orderDesc('create_time');
+//                }, 'Followers'=>function($q)use($user_id){
+//                    return $q->where(['user_id'=>$user_id]);
+//                }, 'Savants'=>function($q){
+//                    return $q->orderDesc('Savants.check_time');
+//                }])
+//                ->select(['id', 'truename', 'position', 'company', 'avatar', 'meet_nums'])
+//                ->where(['enabled'=>'1', 'level'=>'2'])
+//                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
+//                ->limit($this->limit)
+//                ->formatResults(function($items) {
+//                    return $items->map(function($item) {
+//                        $item['avatar'] = getSmallAvatar($item['avatar']);
+//                        $item['followers'] = count($item['followers']) ? 1 : 0;
+//                        return $item;
+//                    });
+//                })
+//                ->toArray();
+//        $this->set('meetjson', json_encode($users));
         $this->set([
             'pageTitle'=>'约见',
             'user_id'=>$user_id,
