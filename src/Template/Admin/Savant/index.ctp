@@ -58,7 +58,7 @@
                             {name: 'truename', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     return '<a title="查看" onClick="showSavant(' + " ' " + rowObject.id + " ' " + ');" class="grid-btn ">' + cellvalue + '</a>';
                                 }},
-                            {name: 'phone', editable: true, align: 'center', width:'100px'},
+                            {name: 'phone', editable: true, align: 'center', width:'150px'},
                             {name: 'company', editable: true, align: 'center'},
                             {name: 'position', editable: true, align: 'center'},
                             {name: 'grade', editable: true, align: 'center', formatter: function (cell, opt, row) {
