@@ -69,7 +69,7 @@
                                     }
                                 }},
                             {name: 'title', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
-                                    return '<a  data-toggle="tooltip" title="这是提示消息内容" onClick="showNews(' + " ' " + rowObject.id + " ' " + ');" class="grid-btn ">' + cellvalue + '</a>';
+                                    return '<a  data-toggle="tooltip" title="这是提示消息内容" onClick="showNews(' + "'" + rowObject.id + "'" + ');" class="grid-btn ">' + cellvalue + '</a>';
                                 }},
                             {name: 'industries', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     var industries_arr = [];
