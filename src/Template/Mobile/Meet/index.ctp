@@ -171,9 +171,10 @@
         if (res.status) {
             var html = $.util.dataToTpl('', 'biggie_tpl', res.data, tpldate);
             $('#biggie').append(html);
+            $.util.initLoadImg('biggie');
         }
     });
-    $.util.initLoadImg('biggie');
+//    $.util.initLoadImg('biggie');
 
     setTimeout(function () {
         $(window).on("scroll", function () {
