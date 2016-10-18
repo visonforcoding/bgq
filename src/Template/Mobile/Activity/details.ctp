@@ -272,7 +272,7 @@
 </script>
 <script>
     if(window.__id == '32'){
-        $('#want_enroll').attr('href', 'javascript:$.util.checkLogin("/beauty/enroll")');
+        $('#want_enroll').attr('href', '/beauty/index');
     }
     
     setTimeout(function(){
