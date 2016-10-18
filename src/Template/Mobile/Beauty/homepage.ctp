@@ -355,7 +355,7 @@
     <div style="height:1rem"></div>
 
     <div class="fixed-btn">
-        <a href="javascript:$.util.checkLogin('/beauty/enroll');" class="l-btn">我要报名</a>
+        <a href="javascript:$.util.checkLogin('/beauty/enroll');" class="l-btn" id="enroll">我要报名</a>
         <?php if ($self): ?>
             <a href="/beauty/enroll" class="r-btn">编辑资料</a>
         <?php else: ?>
@@ -401,6 +401,9 @@
         });
 
         $('#vote').on('tap', function () {
+            if(!$.util.isLogin()){
+                $.util.setCookie('regist_ref', document.URL, '15');
+            }
             var obj = $(this);
             $.util.ajax({
                 url: '/beauty/vote/' + obj.attr('user_id'),
@@ -419,6 +422,12 @@
                 imgs.push(this.src.replace('small_', ''));
             });
             $.util.viewImg(this.src.replace('small_', ''), imgs);
+        });
+        
+        $('#enroll').on('tap', function () {
+            if(!$.util.isLogin()){
+                $.util.setCookie('regist_ref', document.URL, '15');
+            }
         });
     </script>
     <?php $this->end('script') ?>

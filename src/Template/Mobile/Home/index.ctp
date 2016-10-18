@@ -97,6 +97,12 @@
 <?= $this->element('footer') ?>
 <?php $this->start('script') ?>
 <script>
+    if($.util.getCookie('regist_ref')){
+        var url = $.util.getCookie('regist_ref');
+        $.util.setCookie('regist_ref', '');
+        location.href = url;
+    }
+    
     window.onBackView = function () {
         var savant = '';
         $.ajax({

@@ -51,6 +51,9 @@
                     var html = dealData(res.data);
                     $('#beauty').append(html);
                     $('.vote').on('tap', function () {
+                        if(!$.util.isLogin()){
+                            $.util.setCookie('regist_ref', document.URL, '15');
+                        }
                         var obj = $(this);
                         if(!obj.hasClass('vote')){
                             return false;
@@ -100,6 +103,9 @@
                         var html = dealData(res.data);
                         $('#beauty').append(html);
                         $('.vote').on('tap', function () {
+                            if(!$.util.isLogin()){
+                                $.util.setCookie('regist_ref', document.URL, '15');
+                            }
                             var obj = $(this);
                             if(!obj.hasClass('vote')){
                                 return false;
