@@ -1253,7 +1253,7 @@ background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  ba
 .invo_total_pice{font-size: .28rem;}
 /*付款*/
 .invoic_type_header{position:fixed;width:100%;max-width: 750px;margin:0 auto; top:0;font-size:0;height:.8rem;line-height: .8rem;
--webkit-box-shadow: 0 0 1px rgba(0,0,0,.5);box-shadow: 0 0 1px rgba(0,0,0,.5);z-index: 999;}
+-webkit-box-shadow: 0 0 1px rgba(0,0,0,.5);box-shadow: 0 0 1px rgba(0,0,0,.5);z-index: 99;}
 .invoic_type{position:relative;height:.8rem;}
 .invoic_type span{display:inline-block;width:50%;font-size: .3rem;text-align: center;}
 .invoic_type span.cur{color:#b71c2d;}
@@ -1282,3 +1282,11 @@ background:-webkit-linear-gradient(top,#54d76a 0%,#53d66a 50%,#53d569 100%);  ba
 .invoic_history .invoic_h_left div{line-height: .42rem;margin-bottom:.08rem;}
 .invoic_history .invoic_h_left .price{font-size:.32rem;margin-right:.2rem;}
 .toinvoic{font-size:.28rem;text-align: center;background: #ecdee5;box-shadow: 0 0 0;height:.6rem;line-height: .6rem;}
+.invoic_dialog{position:fixed;left:0;right:0;top:0;bottom:0;width:90%;z-index:999;max-width:675px;margin:auto;display: -webkit-box;display: box;
+box-align:center;-webkit-box-align:center;}
+.invoic_dialog h3{line-height: .9rem;text-align: center;color:#222c38;font-size:.34rem;}
+.invoic_dialog_footer{font-size:0;padding:.4rem .62rem;}
+.invoic_dialog_footer span{display: inline-block;width:2.5rem;height:40px;text-align: center;line-height: 40px;font-size:14px;color:#fff;border-radius: .2rem;}
+.invoic_dialog_footer .quitbtn{background: #7a7e83;margin-right:.36rem;}
+.invoic_dialog_footer .surebtn{background: #b71c2c;}
+.dialog_inner{background: #fff;border-radius: .2rem;}
