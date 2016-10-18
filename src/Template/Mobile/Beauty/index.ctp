@@ -74,9 +74,9 @@
     <div style='height:1.2rem;'></div>
     <div class="fixed-btn">
         <?php if ($user): ?>
-            <a href="javascript:$.util.checkLogin('/beauty/enroll');" class="f-bottom" >我的报名</a>
+            <a href="javascript:$.util.checkLogin('/beauty/enroll');" class="f-bottom" id="enroll" >我的报名</a>
         <?php else: ?>
-            <a href="javascript:$.util.checkLogin('/beauty/enroll');" class="f-bottom" >我要报名</a>
+            <a href="javascript:$.util.checkLogin('/beauty/enroll');" class="f-bottom" id="enroll" >我要报名</a>
         <?php endif; ?>
     </div>
     <div class="zt_tips">
@@ -157,6 +157,9 @@
             return d;
         });
         $('.vote').on('tap', function () {
+            if(!$.util.isLogin()){
+                $.util.setCookie('regist_ref', document.URL, '15');
+            }
             var obj = $(this);
             if(!obj.hasClass('vote')){
                 return false;
@@ -191,9 +194,11 @@
     });
 
 
-//    $('#enroll').on('tap', function () {
-//        $.util.checkLogin('/beauty/enroll');
-//    });
+    $('#enroll').on('tap', function () {
+        if(!$.util.isLogin()){
+            $.util.setCookie('regist_ref', document.URL, '15');
+        }
+    });
     
     $.util.searchHide();
 </script>
