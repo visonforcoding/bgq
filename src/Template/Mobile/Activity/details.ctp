@@ -66,6 +66,7 @@
                 </span>
             </div>
         </section>
+        <?php if ($activity->is_show_apply): ?>
         <section class="newscomment-box joinnumber">
             <h3 class="comment-title">
                 已报名
@@ -88,7 +89,8 @@
         <!-- <span>显示全部</span> -->
             </div>
         </section>
-        <section class="newscomment-box">
+        <?php endif; ?>
+        <section class="newscomment-box <?php if (!$activity->is_show_apply): ?>joinnumber<?php endif; ?>" >
             <h3 class="comment-title">
                 评论
                 <span id="article_comment_1" user_id="<?= $user; ?>"><i class="iconfont" >&#xe62e;</i>我要点评</span>
@@ -97,6 +99,7 @@
             <span class='com-all' style="display:none;"><a href="#allcoment" id="showAllComment">查看更多评价</a></span>
         </section>
         <div style="height:.6rem"></div>
+        
         <?php if ($activity->activity_recommends): ?>
             <div class="active-commond innercon">
                 <section class="my-collection-info  nobottom">
@@ -115,6 +118,7 @@
                 </section>
             </div>
         <?php endif; ?>
+        
         <!--专家推荐-->
         <?php if ($activity->savants): ?>
             <div class="expert-commond innercon">
@@ -159,7 +163,7 @@
                 <!--是否要审核-->
                 <?php if ($activity->must_check): ?>
                     <?php if (empty($activity->activityapply)): ?>
-                        <a  class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="javascript:$.util.checkLogin('/activity/enroll/<?= $activity->id; ?>')">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                        <a id="want_enroll" class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="javascript:$.util.checkLogin('/activity/enroll/<?= $activity->id; ?>')">我要报名(<?= $activity->apply_fee; ?>元)</a>
                     <?php else: ?>
                         <?php if ($activity->activityapply['0']->is_pass == 0): ?>
                             <?php if ($activity->activityapply['0']->is_check == 1): ?>;
@@ -175,7 +179,7 @@
                     <?php endif; ?>
                 <?php else: ?>
                     <?php if (empty($activity->activityapply)): ?>
-                        <a  class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="javascript:$.util.checkLogin('/activity/enroll/<?= $activity->id; ?>')">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                        <a id="want_enroll" class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="javascript:$.util.checkLogin('/activity/enroll/<?= $activity->id; ?>')">我要报名(<?= $activity->apply_fee; ?>元)</a>
                     <?php else: ?>
                         <?php if ($activity->activityapply['0']->is_pass == 0): ?>
                             <a href="/wx/meet-pay/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
@@ -263,10 +267,14 @@
     }
 
     window.__user_id = <?= !empty($user) ? $user : '0' ?>;
-    window.__id = <?= $activity->id ?>;
+    window.__id = '<?= $activity->id ?>';
     window.activitycom = <?= json_encode($activity->activitycom); ?>;
 </script>
 <script>
+    if(window.__id == '32'){
+        $('#want_enroll').attr('href', 'javascript:$.util.checkLogin("/beauty/enroll")');
+    }
+    
     setTimeout(function(){
         if (location.href.indexOf('?share=1') != -1) {
             $('#share_download').show();
