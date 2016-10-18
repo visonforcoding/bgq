@@ -75,7 +75,7 @@
             <div class="items  no-bottom">
                 <?php if ($userApply): ?>
                     <a href="/activity/allEnroll/<?= $activity->id ?>">
-                        <div class="comm-info t-ablock">
+                        <div class="comm-info t-ablock" style="height:.62rem;">
                             <?php foreach ($userApply as $k => $v): ?>
                                 <img src="<?= $v['avatar'] ? $v['avatar'] : '/mobile/images/touxiang.png'; ?>"/>
                             <?php endforeach; ?>
