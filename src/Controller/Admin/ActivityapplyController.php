@@ -80,7 +80,13 @@ class ActivityapplyController extends AppController {
             $activityapply->is_check = 1;
             $activityapply->is_top = $data['is_top'];
             $activityapply->check_man = $this->_user->truename;
-            if ($this->Activityapply->save($activityapply)) {
+            $ActivityTable = \Cake\ORM\TableRegistry::get('activity');
+            $activity = $ActivityTable->get($activity_id);
+            $activity->apply_nums += 1;
+            $res = $this->Activityapply->connection()->transactional(function()use($ActivityTable, $activity, $activityapply){
+                return $this->Activityapply->save($activityapply) && $ActivityTable->save($activity);
+            });
+            if ($res) {
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {
                 $errors = $activityapply->errors();

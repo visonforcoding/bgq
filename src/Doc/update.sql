@@ -893,7 +893,7 @@ CREATE TABLE `invoice` (
 	`company_phone` VARCHAR(20) NULL COMMENT '公司电话',
 	`bank` VARCHAR(50) NULL COMMENT '开户行',
 	`bank_account` VARCHAR(20) NULL COMMENT '开户账号',
-	`is_shipment` TINYINT(2) NOT NULL DEFAULT 0 COMMENT '是否发货',
+	`is_shipment` TINYINT(2) NULL DEFAULT 0 COMMENT '是否发货',
 	`shipment_express` VARCHAR(30) NULL COMMENT '快递',
 	`shipment_number` VARCHAR(50) NULL COMMENT '快递单号',
  	`create_time` DATETIME NOT NULL COMMENT '创建时间',
