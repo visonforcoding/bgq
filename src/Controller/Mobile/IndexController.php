@@ -26,10 +26,11 @@ class IndexController extends AppController {
     public function index() {
         //$umengObj = new Umeng($key, $secret);
         //var_dump($umengObj);
-        set_time_limit(0);
+        //set_time_limit(0);
         $this->autoRender = false;
 //        $res = \Cake\Cache\Cache::write('foo', 'bar2', 'redis');
 //        //debug($res);
+        debug(date('Y-m-d H:i:s'));exit();
         debug(\Cake\Cache\Cache::read('foo', 'redis'));
         //$wordstr = file_get_contents(ROOT.'/config/words');
         //$words = preg_match_all('/(.*?)\n/', $wordstr,$matches);
