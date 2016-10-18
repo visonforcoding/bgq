@@ -103,6 +103,20 @@
             <label class="radio-inline"> <input name="must_check" value="1"   type="radio"> 需要 </label>
         </div>
     </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">是否显示报名人</label>
+        <div class="col-md-8">
+            <label class="radio-inline"> <input name="is_show_apply" value="0" type="radio"> 否</label>
+            <label class="radio-inline"> <input name="is_show_apply" value="1" checked="checked" type="radio"> 是 </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">是否可以开发票</label>
+        <div class="col-md-8">
+            <label class="radio-inline"> <input name="is_invoice" value="0" checked="checked" type="radio"> 否</label>
+            <label class="radio-inline"> <input name="is_invoice" value="1" type="radio"> 是 </label>
+        </div>
+    </div>
 
     <div class="form-group">
         <label class="col-md-2 control-label">活动推荐</label>

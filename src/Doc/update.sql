@@ -873,3 +873,43 @@ ALTER TABLE `binggq`.`pushlog`
   ADD COLUMN `extra` text NULL COMMENT '额外内容' AFTER `body`;
 ALTER TABLE `binggq`.`pushlog`
   ADD COLUMN `get_message_uid` text NULL COMMENT '群播的用户id集合' AFTER `receive_id`;
+
+ALTER TABLE `binggq`.`activity`
+  ADD COLUMN `is_show_apply` tinyint(2) unsigned NOT NULL DEFAULT 1 COMMENT '是否显示报名人';
+ALTER TABLE `binggq`.`activity`
+  ADD COLUMN `is_invoice` tinyint(2) unsigned NOT NULL DEFAULT 0 COMMENT '是否可以开发票';
+
+CREATE TABLE `invoice` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL COMMENT '用户id',
+	`is_VAT` TINYINT(2) NOT NULL COMMENT '是否是增值税发票',
+	`company` VARCHAR(50) NOT NULL COMMENT '公司名称',
+	`sum` Numeric(10,2) NOT NULL COMMENT '总金额',
+	`recipient` VARCHAR(20) NOT NULL COMMENT '收件人',
+	`recipient_phone` VARCHAR(20) NOT NULL COMMENT '收件人电话',
+	`recipient_address` VARCHAR(100) NOT NULL COMMENT '收件人地址',
+	`registration_num` VARCHAR(30) NULL COMMENT '纳税人识别号',
+	`company_address` VARCHAR(100) NULL COMMENT '公司地址',
+	`company_phone` VARCHAR(20) NULL COMMENT '公司电话',
+	`bank` VARCHAR(50) NULL COMMENT '开户行',
+	`bank_account` VARCHAR(20) NULL COMMENT '开户账号',
+	`is_shipment` TINYINT(2) NOT NULL DEFAULT 0 COMMENT '是否发货',
+	`shipment_express` VARCHAR(30) NULL COMMENT '快递',
+	`shipment_number` VARCHAR(50) NULL COMMENT '快递单号',
+ 	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	`update_time` DATETIME NOT NULL COMMENT '更新时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='发票表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `invoice_order` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`invoice_id` INT(11) NOT NULL COMMENT '发票id',
+	`order_id` INT(11) NOT NULL COMMENT '订单id',
+	PRIMARY KEY (`id`)
+)
+COMMENT='发票订单对应表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;

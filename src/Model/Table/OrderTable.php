@@ -41,6 +41,11 @@ class OrderTable extends Table {
             'foreignKey' => 'relate_id',
             'joinType' => 'INNER'
         ]);
+        $this->hasMany('InvoiceOrders', [
+            'className'=>'InvoiceOrder',
+            'foreignKey' => 'order_id',
+            'joinType' => 'INNER'
+        ]);
         
         $this->belongsTo('Users', [
             'className' => 'User',

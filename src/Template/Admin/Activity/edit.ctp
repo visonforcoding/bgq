@@ -121,6 +121,20 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">是否显示报名人</label>
+        <div class="col-md-8">
+            <label class="radio-inline"> <input name="is_show_apply" value="0" <?php if ($activity->is_show_apply == 0): ?> checked="checked"<?php endif; ?>  type="radio"> 否</label>
+            <label class="radio-inline"> <input name="is_show_apply" value="1" <?php if ($activity->is_show_apply == 1): ?> checked="checked"<?php endif; ?>  type="radio"> 是 </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">是否可以开发票</label>
+        <div class="col-md-8">
+            <label class="radio-inline"> <input name="is_invoice" value="0" <?php if ($activity->is_invoice == 0): ?> checked="checked"<?php endif; ?>  type="radio"> 否</label>
+            <label class="radio-inline"> <input name="is_invoice" value="1" <?php if ($activity->is_invoice == 1): ?> checked="checked"<?php endif; ?>  type="radio"> 是 </label>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 control-label">活动推荐</label>
         <div class="col-md-8">
             <?= $this->cell('ActivityRecommend', [$selActivityIds]); ?>
