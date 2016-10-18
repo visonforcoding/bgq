@@ -823,7 +823,7 @@ class MeetController extends AppController {
                 ->find()
                 ->distinct('User.id')
                 ->contain(['Subjects'=>function($q){
-                    return $q->where(['Subjects.is_del'=>0])->orderDesc('Subjects.create_time')->limit(1);
+                    return $q->where(['Subjects.is_del'=>0])->orderDesc('Subjects.create_time');
                 }, 'Followers'=>function($q)use($user_id){
                     return $q->where(['user_id'=>$user_id]);
                 }, 'Savants'=>function($q){
