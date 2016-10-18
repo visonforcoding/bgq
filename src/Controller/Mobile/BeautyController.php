@@ -51,7 +51,7 @@ class BeautyController extends AppController {
             $beauty = $BeautyTable
                     ->find()
                     ->contain(['Users'=>function($q){
-                        return $q->where(['enabled'=>1]);
+                        return $q->where(['enabled'=>1])->select(['id', 'truename', 'company', 'position']);
                     }, 'Votes'=>function($q)use($user_id){
                         return $q->where(['Votes.user_id'=>$user_id])->orderDesc('Votes.create_time');
                     }, 'BeautyPics'=>function($q){
@@ -64,7 +64,7 @@ class BeautyController extends AppController {
                         return $items->map(function($item) {
                             if(strlen($item->id) == 1){
                                 $item->beauty_id = '00' . $item->id;
-                            } else if(strlen($items->id) == 2){
+                            } else if(strlen($item->id) == 2){
                                 $item->beauty_id = '0' . $item->id;
                             }
                             return $item;
@@ -95,7 +95,7 @@ class BeautyController extends AppController {
             $beauty = $BeautyTable
                     ->find()
                     ->contain(['Users'=>function($q){
-                        return $q->where(['enabled'=>1]);
+                        return $q->where(['enabled'=>1])->select(['id', 'truename', 'company', 'position']);
                     }, 'BeautyPics'=>function($q){
                         return $q->orderDesc('BeautyPics.create_time');
                     }])
@@ -108,7 +108,7 @@ class BeautyController extends AppController {
                             }
                             if(strlen($item->id) == 1){
                                 $item->beauty_id = '00' . $item->id;
-                            } else if(strlen($items->id) == 2){
+                            } else if(strlen($item->id) == 2){
                                 $item->beauty_id = '0' . $item->id;
                             }
                             return $item;
@@ -143,7 +143,7 @@ class BeautyController extends AppController {
             $res = $BeautyTable
                     ->find()
                     ->contain(['Users'=>function($q)use($keyword){
-                        return $q->where(['Users.truename like'=>"%$keyword%", 'enabled'=>1]);
+                        return $q->where(['Users.truename like'=>"%$keyword%", 'enabled'=>1])->select(['id', 'truename', 'company', 'position']);
                     }, 'Votes'=>function($q)use($user_id){
                         return $q->where(['Votes.user_id'=>$user_id])->orderDesc('Votes.create_time');
                     }, 'BeautyPics'=>function($q){
@@ -155,7 +155,7 @@ class BeautyController extends AppController {
                         return $items->map(function($item) {
                             if(strlen($item->id) == 1){
                                 $item->beauty_id = '00' . $item->id;
-                            } else if(strlen($items->id) == 2){
+                            } else if(strlen($item->id) == 2){
                                 $item->beauty_id = '0' . $item->id;
                             }
                             return $item;
@@ -186,7 +186,7 @@ class BeautyController extends AppController {
             $res = $BeautyTable
                     ->find()
                     ->contain(['Users'=>function($q)use($keyword){
-                        return $q->where(['Users.truename like'=>"%$keyword%", 'enabled'=>1]);
+                        return $q->where(['Users.truename like'=>"%$keyword%", 'enabled'=>1])->select(['id', 'truename', 'company', 'position']);
                     }, 'BeautyPics'=>function($q){
                         return $q->orderDesc('BeautyPics.create_time');
                     }])
@@ -196,7 +196,7 @@ class BeautyController extends AppController {
                         return $items->map(function($item) {
                             if(strlen($item->id) == 1){
                                 $item->beauty_id = '00' . $item->id;
-                            } else if(strlen($items->id) == 2){
+                            } else if(strlen($item->id) == 2){
                                 $item->beauty_id = '0' . $item->id;
                             }
                             return $item;
