@@ -4,143 +4,128 @@
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($invoice, ['class' => 'form-horizontal']) ?>
-             <div class="form-group">
-            <label class="col-md-2 control-label">用户id</label>
-                <div class="col-md-8">
-                <?php echo $this->Form->input('user_id', ['label' => false,'options' => $users,'class'=>'form-control']);?>
-                      </div>
-         </div>
-            <div class="form-group">
-        <label class="col-md-2 control-label">是否是增值税发票</label>
+    <div class="form-group">
+        <label class="col-md-2 control-label">用户</label>
         <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('is_VAT', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <input type="text" class="form-control" required="required" maxlength="50" value="<?= $invoice->user->truename ?>" >
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">公司名称</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('company', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">总金额</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('sum', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">收件人</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('recipient', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">收件人电话</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('recipient_phone', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">收件人地址</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('recipient_address', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <?php if($invoice->is_VAT == 1): ?>
+    <div class="form-group">
         <label class="col-md-2 control-label">纳税人识别号</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('registration_num', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">公司地址</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('company_address', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">公司电话</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('company_phone', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">开户行</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('bank', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">开户账号</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('bank_account', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
-        <label class="col-md-2 control-label">是否发货</label>
+    <?php endif; ?>
+    <div class="form-group">
+        <label class="col-md-2 control-label">发货情况</label>
         <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('is_shipment', ['label' => false, 'class' => 'form-control']);
+            <?php
+            echo $this->Form->input('is_shipment', ['type'=>'select', 'options'=>['0'=>'待发货', '1'=>'已发货'], 'label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <?php if($invoice->is_shipment): ?>
+    <div class="form-group">
         <label class="col-md-2 control-label">快递</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('shipment_express', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">快递单号</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('shipment_number', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
-        <label class="col-md-2 control-label">创建时间</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('create_time', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-        <div class="form-group">
-        <label class="col-md-2 control-label">更新时间</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('update_time', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-        <div class="form-group">
+    <?php endif; ?>
+<!--    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
+        </div>
+    </div>-->
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <a href="javascript:history.back();" class='btn btn-primary' data-loading='稍候...' >返回</a> 
         </div>
     </div>
     <?= $this->Form->end() ?>
