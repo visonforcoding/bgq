@@ -38,12 +38,16 @@ class IndexController extends AppController {
         //活动报名待处理
         $SponsorTable = \Cake\ORM\TableRegistry::get('Sponsor');
         $sponsorCounts = $SponsorTable->find()->where(['status' => 0])->count();
+        //发票申请待处理
+        $InvoiceTable = \Cake\ORM\TableRegistry::get('invoice');
+        $invoiceCounts = $InvoiceTable->find()->where(['is_shipment' =>'0'])->count();
         $this->set([
             'savantCounts' => $savantCounts,
             'needCounts' => $needCounts,
             'withdrawCounts' => $withdrawCounts,
             'sponsorCounts' => $sponsorCounts,
             'applyCounts' => $applyCounts,
+            'invoiceCounts' => $invoiceCounts,
         ]);
     }
 

@@ -1,7 +1,7 @@
 <?php $this->start('static') ?>   
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
-<link href="/wpadmin/lib/select2/css/select2.min.css" rel="stylesheet">
+
 <?php $this->end() ?> 
 <div class="col-xs-12">
     <form id="table-bar-form">
@@ -45,12 +45,9 @@
 <?php $this->start('script'); ?>
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
-<script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
+
 <script>
-                $('#select-user').select2({
-                    language: "zh-CN",
-                    placeholder: '选择一个用户'
-                });
+                
                 $(function () {
                     $('#main-content').bind('resize', function () {
                         $("#list").setGridWidth($('#main-content').width() - 40);
@@ -120,9 +117,9 @@
                 });
 
                 function actionFormatter(cellvalue, options, rowObject) {
-//                    response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-//                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-                    response = '<a title="查看" href="/admin/invoice/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+                    response = '<a title="删除" href="javascript:void(0)" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response += '<a title="订单详情" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
+                    response += '<a title="查看" href="/admin/invoice/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     if (rowObject.is_shipment != 1) {
                         response += '<a title="发货" href="javascript:void(0)" onClick="doShipment(' + rowObject.id + ');" class="grid-btn "><i class="icon icon-cube"></i> </a>';
                     }
@@ -175,10 +172,10 @@
 
                 function doView(id) {
                     //查看明细
-                    url = '/admin/invoice/view/' + id;
+                    url = '/admin/invoice/order/' + id;
                     layer.open({
                         type: 2,
-                        title: '查看详情',
+                        title: '订单详情',
                         shadeClose: true,
                         shade: 0.8,
                         area: ['45%', '70%'],

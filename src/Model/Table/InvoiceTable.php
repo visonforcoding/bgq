@@ -39,7 +39,8 @@ class InvoiceTable extends Table
             'foreignKey' => 'invoice_id',
             'targetForeignKey' => 'order_id',
             'joinTable' => 'invoice_order',
-            'className' => 'Order'
+            'className' => 'Order',
+            'dependent' => true,
         ]);
         
         $this->addBehavior('Timestamp', [
