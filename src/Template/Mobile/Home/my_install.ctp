@@ -64,6 +64,14 @@
             </div>
             </a>
         </li>
+        <li  class="lh4">
+            <a href='/invoice/index'>
+            <span>发票管理</span>
+            <div>
+                <span></span>
+            </div>
+            </a>
+        </li>
         <li  class="nobottom lh4">
             <a href="/user/change-phone">
                 <span>更换手机号码</span>
