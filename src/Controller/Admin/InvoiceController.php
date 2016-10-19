@@ -220,4 +220,16 @@ class InvoiceController extends AppController {
         }
     }
 
+    public function order($id=NULL){
+        $this->viewBuilder()->autoLayout(false);
+        $InvoiceOrderTable = \Cake\ORM\TableRegistry::get('invoice_order');
+        $order = $InvoiceOrderTable
+                ->find()
+                ->contain(['Lmorder', 'Lmorder.Activityapplys', 'Lmorder.Activityapplys.Activities'])
+                ->where(['invoice_id'=>$id])
+                ->toArray();
+        $this->set([
+            'order' => $order
+        ]);
+    }
 }
