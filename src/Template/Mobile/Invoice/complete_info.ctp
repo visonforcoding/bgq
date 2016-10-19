@@ -138,6 +138,38 @@
             </section>
         </div>
     </div>
+    <div class="reg-shadow" id="shadow" hidden></div>
+    <div class="invoic_dialog" style="display:none">
+        <div class="dialog_inner" hidden>
+            <div class="invoic_dialog_head">
+                <h3>确认发票信息</h3>
+            </div>
+            <div class="invoic_tab">
+                <div class="invoic_self_detail bgff border">
+                    <div class="innerwaper">
+                        <ul>
+                            <li class="bd1">
+                                <span class="pay_left_block">公司名称</span>
+                                <div class="pay_right_info">
+                                    <input type="text" value="<?= $user->company ?>" readonly="readonly">
+                                </div>
+                            </li>
+                            <li>
+                                <span class="pay_left_block">发票金额</span>
+                                <div class="pay_right_info">
+                                    <i class="color-items"><?= $user->invoice_money ?></i>元
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="invoic_dialog_footer">
+                <span class="quitbtn" id="no">取消</span>
+                <span class="surebtn" id="yes">确认</span>
+            </div>
+        </div>
+    </div>
     <div style='height:1.2rem;'></div>
     <a href="javascript:void(0)" class="f-bottom" id="submit" type="0">提 交</a>
 </div>
@@ -149,37 +181,56 @@
         $('.invoic_tab_box').css({'left': -index * 100 + '%'});
         $('#submit').attr('type', index);
     });
-    
-    $('#submit').on('tap', function(){
-        
-        var formData = '';
-        if($(this).attr('type') == 0){
-            $('#general').find('input').each(function(){
-                if($(this).val() == ''){
+    var formData = '';
+    $('#submit').on('tap', function () {
+        var alert = 0;
+        if ($(this).attr('type') == 0) {
+            $('#general').find('input').each(function () {
+                if ($(this).val() == '') {
                     $.util.alert('请填写全部内容');
+                    alert ++;
                 }
             });
             formData = $('#general').serialize();
         } else {
-            $('#not_general').find('input').each(function(){
-                if($(this).val() == ''){
+            $('#not_general').find('input').each(function () {
+                if ($(this).val() == '') {
                     $.util.alert('请填写全部内容');
+                    alert ++;
                 }
             });
             formData = $('#not_general').serialize();
         }
+        if(!alert){
+            $('#shadow').show();
+            $('.invoic_dialog').show();
+            $('.dialog_inner').show();
+        }
+    });
+    
+    $('#yes').on('tap', function(){
+        console.log(formData);
         $.ajax({
             type: 'POST',
             dataType: 'json',
             data: formData,
             url: '/invoice/save-invoice',
             success: function (res) {
-                if(res.status){
+                if (res.status) {
                     window.location.href = '/invoice/success';
                 } else {
                     $.util.alert(res.msg);
                 }
+                $('#shadow').hide();
+                $('.invoic_dialog').hide();
+                $('.dialog_inner').hide();
             }
         });
+    });
+    
+    $('#no').on('tap', function(){
+        $('#shadow').hide();
+        $('.invoic_dialog').hide();
+        $('.dialog_inner').hide();
     });
 </script>
