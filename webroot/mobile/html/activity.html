@@ -27,13 +27,8 @@
 		</header>
 		
 		<div class="wraper newswraper a-wraper" id="wraper">
-			<div class="a-search-box">
-					<div class="a-search clearfix">
-						<a href="news-search.html"><i class="iconfont">&#xe618;</i></a>
-						<div class="s-con">
-							<input type="text" placeholder="请输入关键词" />
-						</div>
-					</div>
+			<div class="a_search_box">
+				<a><i class="iconfont">&#xe618;</i></a>
 			</div>
 			<div class="a-banner">
 				<ul class="pic-list-container" id="imgList">
@@ -64,9 +59,31 @@
                 	$('.a-banner')
                 	);
             </script>
-
-            <div id="items">
-            	
+            <!--分类--start-->
+				<div class="menusort a_menusort clearfix">
+					<div class="allmenu">
+						<div class="menulist clearfix" id="allsort">
+							<a href="#this">
+								<i class="iconfont">&#xe698;</i>
+								<span>沙龙论坛</span>
+							</a>
+							<a href="#this">
+								<i class="iconfont">&#xe699;</i>
+								<span>生活聚会</span>
+							</a>
+							<a href="#this">
+								<i class="iconfont">&#xe69a;</i>
+								<span>学习培训</span>
+							</a>
+							<a href="#this">
+								<i class="iconfont">&#xe69b;</i>
+								<span>会务服务</span>
+							</a>
+					</div>
+					</div>
+				</div>
+			<!--分类--end-->
+            <div id="activity">
 			<section class='news-list-items'>
 				<div class="active-items">
 					<a href="activity-details.html" class="a-head">
@@ -77,7 +94,6 @@
 								<span class="registered colorbg">已过期</span>
 							</div>
 						</div>
-						
 						<h3>2006年中国国际体育融资总裁年会</h3>
 					</a>
 					<div class="a-bottom">
@@ -256,26 +272,27 @@
             });
         </script>
         <div class="submitbtn">
-            <a href="release-activity.html"><span class="s-activ">发布<br />需求</span></a>
+        	 <div class="back_to_top"><i class="iconfont">&#xe664;</i></div>
+            <div class="submit_require"><a href="release-activity.html">发布<br />需求</a></div>
         </div>
 	<footer class="footer">
 		<ul class="navfooter clearfix">
 			<li>
 				
-				<a href="news.html"><span class="iconfont">&#xe648;</span>资讯</a>
+				<a href="news.html"><span class="iconfont">&#xe69f;</span>资讯</a>
 			</li>
 			<li  class="active">
 				
-				<a href="activity.html"><span class="iconfont">&#xe60c;</span>活动</a>
+				<a href="activity.html"><span class="iconfont">&#xe693;</span>活动</a>
 			</li>
 			
 			<li>
 				
-				<a href="meet.html"><span class="iconfont">&#xe649;</span>大咖</a>
+				<a href="meet.html"><span class="iconfont">&#xe6a0;</span>大咖</a>
 			</li>
 			<li>
 				
-				<a href="myhome.html"><span class="iconfont">&#xe612;</span>我</a>
+				<a href="myhome.html"><span class="iconfont">&#xe69e;</span>我</a>
 			</li>
 		</ul>
 	</footer>
