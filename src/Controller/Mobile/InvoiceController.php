@@ -92,6 +92,14 @@ class InvoiceController extends AppController {
                 }
             }
             $order_id['invoice_orders'] = $this->request->session()->read('reg.invoice_order_id');
+            if(empty($order_id)){
+                return $this->Util->ajaxReturn(false, '请不要重复提交');
+            }
+            $InvoiceOrderTable = \Cake\ORM\TableRegistry::get('invoice_order');
+            $order = $InvoiceOrderTable->find()->where(['order_id in'=>$order_id['invoice_orders']['_ids']])->toArray();
+            if(!empty($order)){
+                return $this->Util->ajaxReturn(false, '请不要重复提交');
+            }
             $InvoiceTable = \Cake\ORM\TableRegistry::get('invoice');
             $invoice = $InvoiceTable->newEntity();
             $invoice = $InvoiceTable->patchEntity($invoice, array_merge($data, $order_id));
