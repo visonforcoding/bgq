@@ -15,6 +15,9 @@
     </div>
     <div id="news"></div>
     <div id="buttonLoading" class="loadingbox"></div>
+    <div class="submitbtn subactivity">
+        <div class="back_to_top moveright" id="toTop" onclick="javascript:window.scrollTo(0, 0);"><i class="iconfont">&#xe664;</i></div>
+    </div>
 </div>
 
 <script type="text/html" id="listTpl">
@@ -65,6 +68,15 @@
     }
 </script>
 <script>
+    window.hideToTop = false;
+    $(window).on("scroll", function () {
+        var lastTo = window.hideToTop;
+        window.hideToTop = document.body.scrollTop > '2000';
+        if(lastTo != window.hideToTop){
+            window.hideToTop ? $('#toTop').addClass('moveleft') : $('#toTop').removeClass('moveleft').addClass('moveright');
+        }
+    });
+    
     var page = 2;
     $.getJSON('/news/get-banner',function(res){
         if(res.status){

@@ -33,11 +33,11 @@
                     <span>产业投资</span>
                 </a>
                 <a href="/meet/search-by-agency/bgrz">
-                   <i class="iconfont">&#xe696;</i>
+                    <i class="iconfont">&#xe696;</i>
                     <span>并购融资</span>
                 </a>
                 <a href="/meet/search-by-agency/bggw">
-                   <i class="iconfont">&#xe695;</i>
+                    <i class="iconfont">&#xe695;</i>
                     <span>并购顾问</span>
                 </a>
             </div>
@@ -60,11 +60,12 @@
     </div>
     <div id='biggie'></div>
     <div id="buttonLoading" class="loadingbox"></div>
-    <?php if (!$is_savant): ?>
-        <div class="submitbtn" id="auth">
-            <a href="javascript:$.util.checkLogin('/home/savant-auth');"><span class="s-activ">会员<br>认证</span></a>
-        </div>
-    <?php endif; ?>
+    <div class="submitbtn subactivity">
+        <div class="back_to_top moveright" id="toTop" onclick="javascript:window.scrollTo(0, 0);"><i class="iconfont">&#xe664;</i></div>
+        <?php if (!$is_savant): ?>
+            <div class="submit_require" id="auth"><a href="javascript:$.util.checkLogin('/home/savant-auth');"><span class="s-activ">会员<br>认证</span></a></div>
+        <?php endif; ?>
+    </div>
 
 </div>
 <script type='text/html' id='biggie_tpl'>
@@ -111,35 +112,35 @@
     }
 </script>
 <script>
-    window.onBackView = function(){
+    window.onBackView = function () {
         var user_follow = $.util.getCookie('user_follow');
-        if(user_follow){
+        if (user_follow) {
             setFollow(user_follow);
             $.util.setCookie('user_follow', '');
         }
     };
     window.onActiveView = window.onBackView;
-    
-    function setFollow(str){
+
+    function setFollow(str) {
         var tmp = str.split(',');
-        for(var i=0; i< tmp.length;i++){
-            if(!tmp[i]) continue;
+        for (var i = 0; i < tmp.length; i++) {
+            if (!tmp[i])
+                continue;
             // 检查id前缀，添加取消不同处理
-            if(tmp[i].indexOf('a') === 0){
+            if (tmp[i].indexOf('a') === 0) {
                 var id = tmp[i].replace('a', '');
-                var obj = $('[user_id="'+id+'"]');
+                var obj = $('[user_id="' + id + '"]');
                 obj.removeClass('color-items').addClass('notap').find('span.msg').html('已关注');
-            }           
-            else if(tmp[i].indexOf('d') === 0){
+            } else if (tmp[i].indexOf('d') === 0) {
                 var id = tmp[i].replace('d', '');
-                var obj = $('[user_id="'+id+'"]');
+                var obj = $('[user_id="' + id + '"]');
                 obj.addClass('color-items').removeClass('notap').find('span.msg').html('加关注');
-                obj.attr('id', 'focus_'+id);
+                obj.attr('id', 'focus_' + id);
             }
         }
     }
 
-    function tpldate(d){
+    function tpldate(d) {
         d.id = d.id ? d.id : '';
         d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
         //        d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
@@ -152,18 +153,24 @@
         }
         d.focus_msg = d.followers ? '已关注' : '加关注';
         d.focus_class = d.followers ? '' : 'color-items';
-        d.focus_id_str = d.followers ? '' : 'id="focus_'+ d.id +'"';
+        d.focus_id_str = d.followers ? '' : 'id="focus_' + d.id + '"';
         return d;
     }
-    
+
     var page = 2;
     window.hideRelease = false;
+    window.hideToTop = false;
     $(window).on("scroll", function () {
         // 滚动一个屏幕长度，隐藏发布活动
         var lastSt = window.hideRelease;
         window.hideRelease = document.body.scrollTop > $(window).height();
+        var lastTo = window.hideToTop;
+        window.hideToTop = document.body.scrollTop > '2000';
         if (lastSt != window.hideRelease) {
             window.hideRelease ? $('#auth').removeClass('moveleft').addClass('moveright') : $('#auth').addClass('moveleft');
+        }
+        if(lastTo != window.hideToTop){
+            window.hideToTop ? $('#toTop').addClass('moveleft') : $('#toTop').removeClass('moveleft').addClass('moveright');
         }
     });
 
@@ -228,7 +235,7 @@
 
     $.util.searchHide();
 
-    
+
     $('body').on('tap', function (e) {
         var target = e.srcElement || e.target, em = target, i = 1;
         while (em && !em.id && i <= 3) {
@@ -237,7 +244,7 @@
         }
         if (!em || !em.id)
             return;
-        if(em.id.indexOf('focus_') != -1){
+        if (em.id.indexOf('focus_') != -1) {
             var obj = $(em);
             if (obj.hasClass('notap')) {
                 return false;
