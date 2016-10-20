@@ -136,7 +136,12 @@
     </div>
     <!--<a href="javascript:void(0);" id="submit" class="nextstep">完成</a>-->
 </div>
-<div class='reg-shadow'  style="display: none;"></div>
+<div class='reg-shadow'  style="display: none;" id="shadow"></div>
+<div class="totips" hidden id="isdel" >
+    <h3>确定要删除本条记录？</h3>
+    <span style="display:none;"></span>
+    <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="javascript:void(0)" class="tipsbtn bgred" id="yes">确认</a>
+</div>
 <?= $this->element('checkdate'); ?>
 <script type="text/javascript">
     
@@ -153,9 +158,9 @@
         _choose.innerHTML = value;
         $(_choose.parentNode).find('input').val(value);
     }
-
+    var id, form;
     function deleteEd(em) {
-        var id = $(em.parentNode).data('id'), form = em;
+        id = $(em.parentNode).data('id'), form = em;
         while (form && form.tagName != 'FORM') {
             form = form.parentNode;
         }
@@ -165,18 +170,29 @@
             $(form.parentNode).remove();
             return false;
         }
-        if (window.confirm('您确认要删除这段教育经历吗?')) {
-            $.util.ajax({
-                url: '/home/del-education/' + id,
-                func: function (res) {
-                    $.util.alert(res.msg);
-                    if (res.status) {
-                        $(form.parentNode).remove();
-                    }
-                }
-            });
-        }
+        $('#isdel').show();
+        $('#shadow').show();
+        
     }
+    
+    $('#no, #shadow').on('click', function(){
+        $('#isdel').hide();
+        $('#shadow').hide();
+    });
+    
+    $('#yes').on('click', function(){
+        $.util.ajax({
+            url: '/home/del-education/' + id,
+            func: function (res) {
+                $.util.alert(res.msg);
+                if (res.status) {
+                    $(form.parentNode).remove();
+                }
+                $('#isdel').hide();
+                $('#shadow').hide();
+            }
+        });
+    });
 
     function msg(str) {
         $.util.alert(str);
