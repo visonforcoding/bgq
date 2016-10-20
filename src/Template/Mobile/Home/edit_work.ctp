@@ -55,7 +55,8 @@
             </div>
         </form>
     </div>
-    <?php $key = 1;
+    <?php
+    $key = 1;
     foreach ($careers as $career):
         ?>
         <div class="education-items oldlist" style="margin-bottom: 10px">
@@ -64,7 +65,8 @@
                     <h3>
                         <!--<a onclick="deleteEd(this);" class="deletbtn iconfont">&#xe67a;</a>-->
                         工作经历<?php echo $key;
-    $key++; ?><i></i></span>
+        $key++;
+        ?><i></i></span>
                         <!--<a onclick="checkForm(this);" class="savetbtn fr">保存</a>-->
                     </h3>
                 </div>
@@ -109,6 +111,12 @@
         <span id="addwork">添加工作经历</span>
     </div>
 </div>
+<div class='reg-shadow'  style="display: none;" id="shadow"></div>
+<div class="totips" hidden id="isdel" >
+    <h3>确定要删除本条记录？</h3>
+    <span style="display:none;"></span>
+    <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="javascript:void(0)" class="tipsbtn bgred" id="yes">确认</a>
+</div>
 <?= $this->element('checkdate'); ?>
 <script type="text/javascript">
     $('#addwork').on('touchstart', function () {
@@ -125,9 +133,9 @@
 <script src="/mobile/js/util.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript">
-
+    var id, form;
     function deleteEd(em) {
-        var id = $(em.parentNode).data('id'), form = em;
+        id = $(em.parentNode).data('id'), form = em;
         while (form && form.tagName != 'FORM') {
             form = form.parentNode;
         }
@@ -137,18 +145,29 @@
             $(form.parentNode).remove();
             return false;
         }
-        if (window.confirm('您确认要删除这段工作经历吗?')) {
-            $.util.ajax({
-                url: '/home/del-work/' + id,
-                func: function (res) {
-                    $.util.alert(res.msg);
-                    if (res.status) {
-                        $(form.parentNode).remove();
-                    }
-                }
-            });
-        }
+        $('#isdel').show();
+        $('#shadow').show();
+
     }
+
+    $('#no, #shadow').on('click', function () {
+        $('#isdel').hide();
+        $('#shadow').hide();
+    });
+
+    $('#yes').on('click', function () {
+        $.util.ajax({
+            url: '/home/del-work/' + id,
+            func: function (res) {
+                $.util.alert(res.msg);
+                if (res.status) {
+                    $(form.parentNode).remove();
+                }
+                $('#isdel').hide();
+                $('#shadow').hide();
+            }
+        });
+    });
 
 
     var _choose = null;
