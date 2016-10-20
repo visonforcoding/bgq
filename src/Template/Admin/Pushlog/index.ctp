@@ -41,19 +41,29 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['推送用户', '接收用户', '推送标题', '推送内容', '推送类型', '是否成功', '备注', '创建时间', '操作'],
+                                ['推送用户', '接收用户', '推送标题', '推送内容', '推送类型', '是否成功', '备注', '创建时间'],
                         colModel: [
-                            {name: 'pusher.truename', editable: true, align: 'center',formatter:function(cell,opt,row){
-                                    return cell+' '+row.pusher.company+' '+row.pusher.position;
-                            }},
-                            {name: 'receiver.truename', editable: true, align: 'center',formatter:function(cell,opt,row){
-                                    if(row.type != 2) return '';
-                                    return cell+' '+row.receiver.company+' '+row.receiver.position;
-                            }},
+                            {name: 'pusher.truename', editable: true, align: 'center', formatter: function (cell, opt, row) {
+                                    return cell + ' ' + row.pusher.company + ' ' + row.pusher.position;
+                                }},
+                            {name: 'receiver.truename', editable: true, align: 'center', formatter: function (cell, opt, row) {
+                                    switch(row.type){
+                                        case 1:
+                                            return '';
+                                            break;
+                                        case 2:
+                                            return cell + ' ' + row.receiver.company + ' ' + row.receiver.position;
+                                            break;
+                                        case 3:
+                                            return '<a title="查看推送人" onClick="doView(' + row.id + ');" data-id="' + row.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
+                                            break;
+                                    }
+//                                    return cell + ' ' + row.receiver.company + ' ' + row.receiver.position;
+                                }},
                             {name: 'title', editable: true, align: 'center'},
                             {name: 'body', editable: true, align: 'center'},
-                            {name: 'type', editable: true, align: 'center',formatter:function(cell,opt,row){
-                                    switch(cell){
+                            {name: 'type', editable: true, align: 'center', formatter: function (cell, opt, row) {
+                                    switch (cell) {
                                         case 1:
                                             return '广播';
                                         case 2:
@@ -61,18 +71,18 @@
                                         case 3:
                                             return '群播';
                                     }
-                            }},
-                            {name: 'is_success', editable: true, align: 'center',formatter:function(cell,opt,row){
-                                    switch(cell){
+                                }},
+                            {name: 'is_success', editable: true, align: 'center', formatter: function (cell, opt, row) {
+                                    switch (cell) {
                                         case 1:
                                             return '正常';
                                         case 0:
                                             return '失败';
                                     }
-                            }},
+                                }},
                             {name: 'remark', editable: true, align: 'center'},
-                            {name: 'create_time', editable: true, align: 'center'},
-                            {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
+                            {name: 'create_time', editable: true, align: 'center'}],
+//                            {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
                         pager: "#pager",
                         rowNum: window._config.showDef,
                         rowList: window._config.pages,
@@ -99,7 +109,7 @@
 
                 function actionFormatter(cellvalue, options, rowObject) {
                     var response = '';
-                    if(rowObject.type == 3){
+                    if (rowObject.type == 3) {
                         response += '<a title="查看推送人" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     }
 //                    response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
