@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>并购圈-已登录</title>
+        <title>并购帮-已登录</title>
         <link rel="stylesheet" type="text/css" href="/pc/css/basic.css"/>
         <link rel="stylesheet" type="text/css" href="/pc/css/style.css"/>
     </head>

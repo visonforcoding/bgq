@@ -2,7 +2,7 @@
     <div class="d-page">
         <div class="block">
             <h1><img src="/mobile/images/logo-wx.png" alt="" /></h1>
-            <p>并购圈</p>
+            <p>并购帮</p>
             <p>并购人的生活方式</p>
         </div>
         <div class="d-down block" id="downbtn">
