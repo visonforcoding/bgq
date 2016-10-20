@@ -55,20 +55,14 @@
     window.subject_id = '<?= $subject->id ?>';
 </script>
 <script>
-//    $('.nextstep').on('tap', function () {
-//        if ($(this).attr('user_id') == '') {
-//            $.util.alert('请先登录');
-//            setTimeout(function () {
-//                location.href = '/user/login?redirect_url=/meet/subject-detail/<?= $subject->id ?>';
-//            }, 2000);
-//        } else {
-//            location.href = '/meet/book/<?= $subject->id ?>';
-//        }
-//    });
-//    window.onBackView = function(){
-//        $.util.checkUserinfoStatus();
-//    };
-//    window.onBackView();
+    $('#summary').on('focus', function(){
+        if ($('#submit').attr('user_id') == '') {
+            $.util.alert('请先登录');
+            setTimeout(function () {
+                location.href = '/user/login?redirect_url=/meet/subject-detail/<?= $subject->id ?>';
+            }, 1000);
+        }
+    });
     
     $('#submit').on('tap', function () {
         if ($(this).attr('user_id') == '') {
