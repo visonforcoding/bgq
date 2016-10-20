@@ -49,7 +49,7 @@
                             {name: 'receiver.truename', editable: true, align: 'center', formatter: function (cell, opt, row) {
                                     switch(row.type){
                                         case 1:
-                                            return '';
+                                            return '所有手机';
                                             break;
                                         case 2:
                                             return cell + ' ' + row.receiver.company + ' ' + row.receiver.position;
