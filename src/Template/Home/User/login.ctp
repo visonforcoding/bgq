@@ -5,7 +5,7 @@
             <!--<a href="/w/register" class="reg">注册</a>-->
             <div class="wx" id="wx">
                 <img src="/<?= $code; ?>"/>
-                <i>打开并购圈APP，扫码登陆</i>
+                <i>打开并购帮APP，扫码登陆</i>
             </div>
         </h1>
     </div>
