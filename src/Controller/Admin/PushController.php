@@ -151,7 +151,7 @@ class PushController extends AppController {
                     'title' => $title,
                     'get_message_uid' => serialize($uid),
                     'body' => $content,
-                    'extra' => $extra,
+                    'extra' => $extra['url'],
                     'type' => $type,
                     'remark' => $remark,
                     'is_success' => $is_success
