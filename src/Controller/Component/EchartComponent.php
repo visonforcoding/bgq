@@ -60,11 +60,11 @@ class EchartComponent extends Component {
             foreach ($data as $key => $value) {
                 if($type=='week'){
                     if ($k == $value['time_item']) {
-                        $intdata[$k] = intval($value['nums']);
+                        $intdata[$k] = $value['nums'];
                     }
                 }else{
                     if ($k+1 == $value['time_item']) {
-                        $intdata[$k] = intval($value['nums']);
+                        $intdata[$k] = $value['nums'];
                     }
                 }
             }
