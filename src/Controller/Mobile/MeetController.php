@@ -200,6 +200,9 @@ class MeetController extends AppController {
         $user_id = '';
         if($this->user){
             $user_id = $this->user->id;
+            if($subject->user_id == $user_id){
+                $this->redirect('/meet/subject/'.$subject->id);
+            }
         }
         $this->set(compact('subject', 'user_id'));
     }
