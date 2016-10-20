@@ -64,29 +64,23 @@ class ActivityChartController extends AppController {
         $type = $this->request->query('type');
         $connection = \Cake\Datasource\ConnectionManager::get('default');
         if($type=='month'){
-            $sql = "select count(aa.id),sum(a.apply_fee) as nums,day(aa.create_time) as time_item
-                            from activityapply aa 
-                            join activity a 
-                            on a.id = aa.activity_id
-                            where a.apply_fee > 0 and  month(aa.create_time) = month('".$date."')
+            $sql = "select count(aa.id),sum(aa.fee) as nums,day(aa.create_time) as time_item
+                            from `order` aa  
+                            where aa.type = 2 and aa.status = 1 and  month(aa.create_time) = month('".$date."')
                             group by date(aa.create_time)";
             $name = date('n',  strtotime($date)).'月';
         }
         if($type=='year'){
-            $sql = "select count(aa.id),sum(a.apply_fee) as nums,month(aa.create_time) as time_item
-                            from activityapply aa 
-                            join activity a 
-                            on a.id = aa.activity_id
-                            where a.apply_fee > 0 and  year(aa.create_time) = year('".$date."')
+            $sql = "select count(aa.id),sum(aa.fee) as nums,month(aa.create_time) as time_item
+                            from `order` aa 
+                            where aa.type = 2 and aa.status = 1 and  year(aa.create_time) = year('".$date."')
                             group by month(aa.create_time)";
             $name = date('Y',  strtotime($date)).'年';
         }
         if($type=='week'){
-            $sql = "select count(aa.id),sum(a.apply_fee) as nums,weekday(aa.create_time) as time_item
-                            from activityapply aa 
-                            join activity a 
-                            on a.id = aa.activity_id
-                            where a.apply_fee > 0  and week(aa.create_time) = week('".$date."')
+            $sql = "select count(aa.id),sum(aa.fee) as nums,weekday(aa.create_time) as time_item
+                            from `order` aa 
+                            where aa.type = 2 and aa.status = 1  and week(aa.create_time) = week('".$date."')
                             group by weekday(aa.create_time)";
             $name = date('Y',  strtotime($date)).'年第'.date('W',  strtotime($date)).'周';
         }
