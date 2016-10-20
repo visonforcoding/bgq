@@ -52,6 +52,13 @@
 <?php $this->start('script') ?>
 <script src="/mobile/js/loopScroll.js"></script>
 <script>
+    // 分享设置
+    window.shareConfig.link = 'http://m.chinamatop.com/meet/subject-detail/<?= $subject->id ?>?share=1';
+    window.shareConfig.title = '<?= $subject->title ?>';
+    var share_desc = '<?= str_replace(["\r\n", "\r", "\n"], '', $subject->summary) ?>';
+    share_desc && (window.shareConfig.desc = share_desc);
+    LEMON.show.shareIco();
+    
     window.subject_id = '<?= $subject->id ?>';
 </script>
 <script>
