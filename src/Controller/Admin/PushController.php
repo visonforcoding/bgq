@@ -114,7 +114,11 @@ class PushController extends AppController {
                 return $this->Util->ajaxReturn(false, '用户为空');
             } else {
                 if($url){
-                    $extra['url'] = 'http://m.chinamatop.com' . $url;
+                    if(strstr('m.chinamatop.com', $url) !== false){
+                        $extra['url'] = $url;
+                    } else {
+                        $extra['url'] = 'http://m.chinamatop.com' . $url;
+                    }
                 } else {
                     $extra = [];
                 }
