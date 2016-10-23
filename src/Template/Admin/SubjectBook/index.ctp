@@ -58,6 +58,9 @@
                             {name: 'summary', editable: true, align: 'center'},
                             {name: 'status', editable: true, align: 'center',formatter:function(cell,opt,row){
                                     switch(cell){
+                                        case -1:
+                                            return '已取消';
+                                            break;
                                         case 0:
                                             return '未确认';
                                             break;
