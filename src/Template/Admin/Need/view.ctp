@@ -31,7 +31,7 @@
                                     <?php foreach ($needs as $need): ?>
                                         <?php if ($need->reply_id > 0): ?>
                                             <li class="right clearfix"><span class="chat-img pull-right">
-                                                    <img src="<?= getAvatar($need->user->avatar) ?>" alt="User Avatar" class="img-circle" />
+                                                    <img src="<?= getAvatar($need->user->avatar) ?>" alt="User Avatar" class="img-circle" width="60" height="60" />
                                                 </span>
                                                 <div class="chat-body clearfix">
                                                     <div style=" overflow:hidden" class="header">
@@ -48,7 +48,7 @@
                                             </li>
                                         <?php else: ?>
                                             <li class="left clearfix"><span class="chat-img pull-left">
-                                                    <img src="<?= getAvatar($need->user->avatar) ?>" alt="User Avatar" class="img-circle" />
+                                                    <img src="<?= getAvatar($need->user->avatar) ?>" alt="User Avatar" class="img-circle" width="60" height="60" />
                                                 </span>
                                                 <div class="chat-body clearfix">
                                                     <div class="header">
