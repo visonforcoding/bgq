@@ -39,10 +39,10 @@
                     $.util.dataToTpl('chat', 'tpl', res.data, function (d) {
                         if (d.user.id == uid) {
                             d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                            d.msg = '<li class="fr"><div class="m-online-r"><span>' + d.content + '</span><time>' + d.create_time + '</time></div><img src="' + d.user_avatar + '" class="m_online-pic" /></li>';
+                            d.msg = '<li class="fr"><div class="m-online-r"><span>' + d.content + '</span><time>' + d.create_time + '</time></div><a href="/user/home-page/'+ d.user.id +'"><img src="' + d.user_avatar + '" class="m_online-pic" /></a></li>';
                         } else {
                             d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                            d.msg = '<li class="fl"><img src="' + d.user_avatar + '" class="m_online-pic" /><div class="m-online-r"><span>' + d.content + '</span><time>' + d.create_time + '</time></div></li>';
+                            d.msg = '<li class="fl"><a href="/user/home-page/'+ d.user.id +'"><img src="' + d.user_avatar + '" class="m_online-pic" /></a><div class="m-online-r"><span>' + d.content + '</span><time>' + d.create_time + '</time></div></li>';
                         }
                         return d;
                     });
