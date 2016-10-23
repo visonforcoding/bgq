@@ -182,7 +182,7 @@
                     if(rowObject.card_path){
                         response += '<a title="查看名片" href="' + rowObject.card_path + '" data-lightbox="' + rowObject.id + '" data-title="' + rowObject.truename + '"><i class="icon icon-picture"></i> </a>';
                     } else {
-                        response += '<a title="查看名片" href="javascript:layer.alert(\'此人没有上传名片\')" data-lightbox="' + rowObject.id + '" data-title="' + rowObject.truename + '"><i class="icon icon-picture"></i> </a>';
+                        response += '<a title="查看名片" href="javascript:layer.alert(\'此人没有上传名片\')"><i class="icon icon-picture"></i> </a>';
                     }
                     response += '<a title="复制个人主页" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
                     response += '<a title="修改" href="/admin/user/edit/' + rowObject.id + '" class="grid-btn"><i class="icon icon-pencil"></i> </a>';
