@@ -941,8 +941,7 @@ class ActivityController extends AppController {
     }
     
     public function test(){
-        $a = stripos('http://m.chinamatop.com/admin/pushlog/index', 'm.chinamatop.com');
-        debug($a);die;
+        echo $_GET['callback'] . '(' . "{'fullname' : 'Jeff Hansen'}" . ')';
         exit();
     }
 
