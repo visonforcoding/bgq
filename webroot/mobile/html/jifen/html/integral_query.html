@@ -1,68 +1,51 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="format-detection" content="telephone=no, email=no" />
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-		<title>积分查询</title>
-		<link rel="stylesheet" type="text/css" href="../css/basic.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
-	</head>
-	<body>
-		<header>
-			<div class="inner">
-				<h1 class="logintitle">积分查询</h1>
-			</div>
-		</header>
-		<div class="wraper">
-			<!--移动积分-->
-			<div class="ct">
-				<div class="title"><h3 class="inner"><span>中国移动</span>发送JF到1065899查询您的积分</h3></div>
-				<ul class="con">
-					<li>
-						<span class="get_gift">20.00</span>
-						<span>发送JF到1065899<i class="des">可获得中国移动20元话费大礼包</i></span>
-					</li>
-					<li>
-						<span class="get_gift">20.00</span>
-						<span>发送JF到1065899<i class="des">可获得中国移动20元话费大礼包</i></span>
-					</li>
-					
-				</ul>
-			</div>
-			<!--电信积分-->
-			<div class="ct cucc">
-				<div class="title"><h3 class="inner"><span>中国电信</span>发送106到10659858查询您的积分</h3></div>
-				<ul class="con">
-					<li>
-						<span class="get_gift">50.00</span>
-						<span>发送JF到1065899<i class="des">可获得中国移动20元话费大礼包</i></span>
-					</li>
-					<li>
-						<span class="get_gift">20.00</span>
-						<span>发送JF到1065899<i class="des">可获得中国移动20元话费大礼包</i></span>
-					</li>
-					
-				</ul>
-			</div>
-			<!--联通积分-->
-			<div class="ct cmcc">
-				<div class="title"><h3 class="inner"><span>中国联通</span>发送105到cxjf查询您的积分</h3></div>
-				<ul class="con">
-					<li>
-						<span class="get_gift">20.00</span>
-						<span>发送JF到1065899<i class="des">可获得中国移动20元话费大礼包</i></span>
-					</li>
-					<li>
-						<span class="get_gift">20.00</span>
-						<span>发送JF到1065899<i class="des">可获得中国移动20元话费大礼包</i></span>
-					</li>
-					
-				</ul>
-			</div>
-		</div>
-		
-	</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="format-detection" content="telephone=no, email=no" />
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <title>积分查询</title>
+        <link rel="stylesheet" type="text/css" href="../css/basic.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+        <script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/style.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+        <header>
+            <div class="inner">
+                <h1 class="logintitle">积分查询</h1>
+            </div>
+        </header>
+        <div class="wraper">
+            <!--移动积分-->
+            <div class="ct">
+                <div class="title"><h3 class="inner"><span>中国移动</span>发送JF到1065899查询您的积分</h3></div>
+                <ul class="con" id="CMCC">
+                </ul>
+            </div>
+            <!--电信积分-->
+            <div class="ct cucc">
+                <div class="title"><h3 class="inner"><span>中国电信</span>发送JF到10659858查询您的积分</h3></div>
+                <ul class="con" id="CT">
+                </ul>
+            </div>
+            <!--联通积分-->
+            <div class="ct cmcc">
+                <div class="title"><h3 class="inner"><span>中国联通</span>发送105或cxjf到10010查询您的积分</h3></div>
+                <ul class="con" id="CU">
+                </ul>
+            </div>
+        </div>
+        <script type="text/html" id="tpl">
+            <li>
+                <span class="get_gift">{#money#}</span>
+                <span>{#smsContent#}<i class="des">{#cmdDetails#}</i></span>
+            </li>
+        </script>
+        <script>
+            $.func.getJiFen();
+        </script>
+    </body>
 </html>
