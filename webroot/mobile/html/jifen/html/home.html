@@ -40,10 +40,10 @@
             <div class="home_infolist mt25 mb10">
                 <div class="inner home_top_con clearfix" id="exchange">
                     <span class="home_leftcon fl change">兑换</span>
-                     <div class="changeinfo fr">
-                        <input type="text" placeholder="输入串码(发送短信可接收串码)" class="point" name="" />
-                        <a href="choose_good.html" class="submitbtn" onClick="javascript:$.func">提交</a>
-                </div>
+                    <div class="changeinfo fr">
+                        <input type="text" placeholder="输入串码(发送短信可接收串码)" class="point" name="chargeNo" />
+                        <a href="javascript:void(0)" class="submitbtn" >提交</a>
+                    </div>
                 </div>
             </div>
             <div class="home_infolist  mb10">
@@ -63,15 +63,14 @@
                 </a>
             </div>
             <!--<div style="height:50px;"></div>-->
-
         </div>
-        <!--<div class="tips">
-                <div class="tips_des">
-                        <h1>兑换失败</h1>
-                        <p>请重新发送短信</p>
-                        <span class="closed"></span>
-                </div>
-        </div>-->
+        <div class="tips" style="display:none">
+            <div class="tips_des">
+                <h1 id="chargeStatus">兑换失败</h1>
+                <p id="chargeTips">请重新发送短信</p>
+                <span class="closed"></span>
+            </div>
+        </div>
         <script type="text/html" id="tpl">
             <dl>
                 <dt><img src="{#img#}"/></dt>
@@ -84,6 +83,15 @@
             var src = $.func.getCookie('headImgUrl') === null ? $.func.getCookie('headImgUrl') : '../images/tx.png';
             $('#avatar').attr('src', src);
             $.func.homePageProduct();
+            
+            $('.submitbtn').on('click', function(){
+                var chargeNo = $('input[name="chargeNo"]').val();
+                $.func.chargeNo(chargeNo);
+            });
+            
+            $('.close').on('click', function(){
+                $('.tips').hide();
+            });
         </script>
     </body>
 </html>
