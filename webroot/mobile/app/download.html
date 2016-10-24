@@ -8,12 +8,14 @@
         <style>
         	html,body{height:100%;font-family: 'STHeiti','Microsoft YaHei',Helvetica,Arial,sans-serif;overflow: hidden;}
         	*{margin:0;padding:0;}
-        	.download_des{text-align: center;padding-top: 20px;font-size: 14px;background:rgba(0,0,0,.6) url(../css/img/wx-t.png) no-repeat 90% 20px;height:100%}
-        	.download_des span{display: block;font-size: 15px;line-height: 26px;color:#fff;margin-top:200px;}
+        	.download_des{text-align: center;padding-top: 20px;font-size: 14px;height:100%}
+            .cover{background:rgba(0,0,0,.6) url(../css/img/wx-t.png) no-repeat 90% 20px;}
+            .cover span{color:#fff;}
+            .download_des span{display: block;font-size: 15px;line-height: 26px;margin-top:200px;}
         </style>
     </head>
     <body>
-    <div class="download_des">
+    <div class="download_des" id="download_des">
         <span onclick="'https://itunes.apple.com/us/app/bing-gou-bang/id1156402644?l=zh&ls=1&mt=8'">如果没有下载,请在浏览器上打开此页面<br>(点击右上角,使用浏览器打开)<br><br><br><br></span>
         <span id="msg"></span>
     </div>
@@ -25,6 +27,10 @@
         }
         else{
             location.href = 'http://m.chinamatop.com/mobile/app/bgq.apk';
+        }
+
+        if(/micromessenger/i.test(navigator.userAgent.toLocaleLowerCase())){
+            document.getElementById('download_des').className = 'download_des cover';
         }
     </script>
 
