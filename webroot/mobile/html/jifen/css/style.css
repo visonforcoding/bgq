@@ -13,7 +13,7 @@ header h1.logintitle{background: url(icon/allbgs.png) no-repeat 0 -175px;height:
 .home_title{background: url(icon/allbgs.png) no-repeat -606px 0;display: block;width:74px;margin:0 auto;height:28px;}
 .quit_login{position:absolute;right:0;top:3px;}
 .home_user_info{padding:31px 0 24px;}
-.home_user_info .imginfo{background: url(icon/allbgs.png) no-repeat -782px -5px; width:76px;height:75px;display: inline-block;margin-left:-6px;vertical-align: middle;overflow: hidden;}
+.home_user_info .imginfo{/*background: url(icon/allbgs.png) no-repeat -782px -5px;*/ width:76px;height:75px;display: inline-block;margin-left:-6px;vertical-align: middle;overflow: hidden;}
 .home_user_info a.mobilenum{color:#fff;font-size:18px;margin-left:14px;}
 .itemtitle{height:40px;line-height: 40px;border-bottom:1px #ddd solid;}
 .item_title_r_name{color:#525151;}
