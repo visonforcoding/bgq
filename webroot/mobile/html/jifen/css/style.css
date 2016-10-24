@@ -32,12 +32,12 @@ header h1.logintitle{background: url(icon/allbgs.png) no-repeat 0 -175px;height:
 .home_infolist span.change{background-position: 0px -327px;}
 .home_infolist span.bind{background-position: 0px -512px;}
 .home_top_con{background: #fff;height:48px;line-height: 48px;background: #fff;}
-.home_infolist .current i{background-position:0 -35px;}
-.home_infolist .downcon{font-size: 14px;max-height:999px;transition: all .3s ease;}
-.changeinfo{padding:30px 0;}
-.home_infolist .upcon{max-height: 0;transition: all .5s ease;}
-.downcon .point{color:#919191;width:60%;box-shadow: 0 1px 0 rgba(0,0,0,.1);text-align: center;padding-bottom:4px;}
-.downcon .submitbtn{display: inline-block;background: #ff7564;padding:2px 25px;border-radius: 10px;color:#fff;margin-left:40px;}
+/*.home_infolist .current i{background-position:0 -35px;}
+.home_infolist .downcon{font-size: 14px;max-height:999px;transition: all .3s ease;}*/
+.changeinfo{width:76%;}
+/*.home_infolist .upcon{max-height: 0;transition: all .5s ease;}*/
+.changeinfo .point{color:#919191;width:65%;text-align: center;height:35px;line-height: 35px;border-bottom:1px #ccc solid;}
+.changeinfo .submitbtn{display: inline-block;background: #ff7564;padding:0 25px;border-radius: 10px;color:#fff;margin-left:10px;height:32px;line-height: 32px;}
 
 .ct .title h3{font-size:12px;height:48px;line-height: 48px;overflow: hidden;}
 .ct .title{border-bottom:1px #d5d5d5 solid;}
