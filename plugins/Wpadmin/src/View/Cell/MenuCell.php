@@ -34,7 +34,6 @@ class MenuCell extends Cell {
      * @return void
      */
     public function display() {
-
         $this->set('menus', $this->_menus);
         $this->set('active', $this->_active);
         $this->set('url', $this->_url);
@@ -57,7 +56,7 @@ class MenuCell extends Cell {
         $menus = \Cake\Cache\Cache::read($admin->username . '_menus');
         if ($menus === false) {
             $Menu = \Cake\ORM\TableRegistry::get('menu');
-            if ($admin->username == 'admin') {
+            if ($admin->username == 'boss') {
                 $menus = $Menu->find('threaded', [
                             'keyField' => 'id',
                             'parentField' => 'pid'
