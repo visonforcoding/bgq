@@ -21,12 +21,12 @@
                 </h1>
                 <div class="home_user_info">
                     <span class="imginfo"><img src="../images/tx.png" id="avatar"/></span>
-                   
-                   <div class="home_head_info">
-                   	<a href="javascript:void(0)" class="mobilenum" id="nickName">15013797469</a>
-                   	<h1><span></span>20000 <i>积分</i></h1>
-                   </div>
-                    
+
+                    <div class="home_head_info">
+                        <a href="javascript:void(0)" class="mobilenum" id="nickName">15013797469</a>
+                        <h1><span id="jifen">0</span> 积分</h1>
+                    </div>
+
                 </div>
             </div>
         </header>
@@ -42,34 +42,30 @@
                     <a href="allgoods.html" id="product"></a>
                 </div>
             </div>
-			<div class="home_exchange">
-				<div class="inner">
-					<div class="title">
-						<h1>兑换</h1></div>
-					<div class="con clearfix">
-						<div class="home_select_type">
-							<span>手机号码</span>
-							<input type="text" value="15013797469" />
-						</div>
-						<div class="home_select_type">
-							<span class="cm">串码</span>
-							<input type="text" value="aaaaaaaaaaa" />
-						</div>
-						<div class="home_select_type">
-							<span>选择金额</span>
-							<select name="mobile">
-								<option value="">20.0</option>
-								<option value="">100.0</option>
-								<option value="">20.0</option>
-								<option value="">100.0</option>
-							</select>
-						</div>
-					</div>
-					<div class="textcenter">
-						<a href="javascript:void(0)" class="submitbtn" >提交</a>
-					</div>
-				</div>
-			</div>
+            <div class="home_exchange">
+                <div class="inner">
+                    <div class="title">
+                        <h1>兑换</h1></div>
+                    <div class="con clearfix">
+                        <div class="home_select_type">
+                            <span>手机号码</span>
+                            <input type="text" value="" name="chargePhone" />
+                        </div>
+                        <div class="home_select_type">
+                            <span class="cm">串码</span>
+                            <input type="text" value="" name="chargeNo" />
+                        </div>
+                        <div class="home_select_type">
+                            <span>选择金额</span>
+                            <select name="mobile" id="chargeMoney">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="textcenter">
+                        <a href="javascript:void(0)" class="submitbtn" >提交</a>
+                    </div>
+                </div>
+            </div>
             <!--<div class="home_infolist mt25 mb10">
                 <div class="inner home_top_con clearfix" id="exchange">
                     <span class="home_leftcon fl change">兑换</span>
@@ -111,18 +107,24 @@
                 <dd>{#productName#}</dd>
             </dl>
         </script>
+        <script type="text/html" id="mtpl">
+            <option value="{##}">20.0</option>
+        </script>
         <script type="text/javascript">
             $('#nickName').html($.func.getCookie('nickName'));
+            $('#jifen').html($.func.getCookie('userJiFen'));
             var src = $.func.getCookie('headImgUrl') === null ? $.func.getCookie('headImgUrl') : '../images/tx.png';
             $('#avatar').attr('src', src);
             $.func.homePageProduct();
-            
-            $('.submitbtn').on('click', function(){
+            $.func.chargeMoney();
+            $('.submitbtn').on('click', function () {
                 var chargeNo = $('input[name="chargeNo"]').val();
-                $.func.chargeNo(chargeNo);
+                var chargePhone = $('input[name="chargePhone"]').val();
+                var chargeMoney = $('select').val();
+                $.func.chargeNo(chargePhone, chargeNo, chargeMoney);
             });
-            
-            $('.close').on('click', function(){
+
+            $('.close').on('click', function () {
                 $('.tips').hide();
             });
         </script>

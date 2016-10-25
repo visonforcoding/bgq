@@ -52,20 +52,43 @@ $.func = {
     },
     
     /**
-     * 获取串码号
-     * @param {type} chargeNo 短信返回的串码
+     * 获取兑换金额
      */
-    chargeNo:function(chargeNo){
+    chargeMoney: function(){
         var phone = $.func.getCookie('phone');
         if(!phone) return;
         $.ajax({
             type: 'post',
-            url: 'http://182.48.107.222:8080/IntegralStore/charge/charge?channelId=toprays&chargeNumber='+chargeNo+'&chargePhone='+phone+'&userName='+phone,
+            url: 'http://182.48.107.222:8080/IntegralStore/charge/getAvailMoneyByPhone?channelId=toprays&phone='+phone,
+            success: function (res) {
+                res = JSON.parse(res);
+                console.log(res);
+                if (res.status !== 0) return false;
+                if(res.data.moneys.length === 0) return false;
+                for(var i=0;i<res.data.moneys.length;i++){
+                    $('#chargeMoney').append('<option value="'+res.data.moneys[i]+'">'+res.data.moneys[i]+'</option>');
+                };
+            }
+        });
+    },
+    
+    /**
+     * 获取串码号
+     * @param {type} chargeNo 短信返回的串码
+     */
+    chargeNo:function(chargePhone, chargeNo, chargeMoney){
+        var phone = $.func.getCookie('phone');
+        if(!phone) return;
+        $.ajax({
+            type: 'post',
+            url: 'http://182.48.107.222:8080/IntegralStore/charge?channelId=toprays&userName='+phone+'&chargePhone='+chargePhone+'&money='+chargeMoney+'&chargeNumber='+chargeNo,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
                 if (res.status == 0) {
                     $.func.chargeStatus(res.data.chargeNo);
+                } else {
+                    $('.tips').show();
                 }
             }
         });
