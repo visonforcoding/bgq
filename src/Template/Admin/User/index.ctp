@@ -12,7 +12,7 @@
             </a>
             <div class="form-group">
                 <label for="keywords">关键字</label>
-                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="姓名、手机号、email">
+                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="姓名、公司、职务">
             </div>
             <div class="form-group">
                 <label for="keywords">等级</label>
@@ -90,7 +90,7 @@
                         colNames:
                                 ['ID', '手机号', '姓名', '类型', '等级', '公司', '职位', '性别', '会员认证', '帐号状态', '创建时间', '操作'],
                         colModel: [
-                            {name: 'id', editable: false, align: 'center', width:'40px'},
+                            {name: 'id', editable: false, align: 'center', width:'80px'},
                             {name: 'phone', editable: false, align: 'center', width:'150px'},
                             {name: 'truename', editable: false, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     return '<a title="查看" onClick="showUser(' +" ' "+rowObject.id+" ' " + ');" class="grid-btn ">'+cellvalue+'</a>';
