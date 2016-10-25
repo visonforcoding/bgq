@@ -297,6 +297,15 @@ $.func = {
         });
     },
     
+    checkjifen: function(jifen, url){
+        if(jifen == 0){
+            alert('您的积分为0');
+            return false;
+        } else {
+            location.href = url;
+        }
+    },
+    
     /**
      * 读取COOKIE
      */
