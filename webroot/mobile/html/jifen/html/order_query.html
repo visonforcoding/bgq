@@ -49,19 +49,15 @@
     </script>
     <script>
         var page = 1;
-        if($.func.getOrders(page) === false) page = 9999;
+        $.func.getOrders(page, 8);
         $(window).on("scroll", function () {
             if(window.holdLoad) return;
             window.holdLoad = true;
             var st = document.body.scrollTop;
             if (st >= (($(document).height() - $(window).height()) - 300)) {
-                if(page === 9999){
-                    return false;
-                }
+                $.func.getOrders(page, 8);
                 page++;
-                if($.func.getOrders(page) === false) page = 9999;
-            }
-            else{
+            } else{
                 window.holdLoad = false;
             }
         });

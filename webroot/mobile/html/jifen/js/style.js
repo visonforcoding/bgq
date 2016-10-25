@@ -33,9 +33,10 @@ $.func = {
      * 首页商品展示
      */
     homePageProduct: function () {
+        var phone = $.func.getCookie('phone');
         $.ajax({
             type: 'post',
-            url: 'http://182.48.107.222:8080/IntegralStore/goods/indexlist?channelId=toprays',
+            url: 'http://182.48.107.222:8080/IntegralStore/goods/indexlist?channelId=toprays&pageSize=6&userName='+phone,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
@@ -57,7 +58,7 @@ $.func = {
         var phone = $.func.getCookie('phone');
         $.ajax({
             type: 'post',
-            url: 'http://182.48.107.222:8080/IntegralStore/charge/buy?channelId=toprays&chargeNumber='+chargeNo+'&chargePhone='+phone+'&userName='+phone,
+            url: 'http://182.48.107.222:8080/IntegralStore/charge/charge?channelId=toprays&chargeNumber='+chargeNo+'&chargePhone='+phone+'&userName='+phone,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
@@ -97,22 +98,21 @@ $.func = {
      * 分页获取全部商品
      * @param {type} page 页数
      */
-    getProducts: function(page){
+    getProducts: function(page, size){
         $.ajax({
             type: 'post',
-            url: 'http://182.48.107.222:8080/IntegralStore/goods/list?channelId=toprays&pageIndex='+page+'&pageSize=30',
+            url: 'http://182.48.107.222:8080/IntegralStore/goods/list?channelId=toprays&pageIndex='+page+'&pageSize='+size,
             success: function (res) {
+                window.holdLoad = false;
                 res = JSON.parse(res);
                 console.log(res.data);
-                if (res.status == 0) {
-                    var html = $.func.dataToTpl('', 'tpl', res.data.products, function(d){
-                        d.img = d.images[0];
-                        return d;
-                    });
-                    $('#allGoods').append(html);
-                } else {
-                    return false;
-                }
+                if (res.status !== 0) window.holdLoad = true;
+                if (res.data.products.length === 0) window.holdLoad = true;
+                var html = $.func.dataToTpl('', 'tpl', res.data.products, function(d){
+                    d.img = d.images[0];
+                    return d;
+                });
+                $('#allGoods').append(html);
             }
         });
     },
@@ -121,45 +121,46 @@ $.func = {
      * 分页获取订单
      * @param {type} page 页数
      */
-    getOrders: function(page){
+    getOrders: function(page, size){
         var phone = $.func.getCookie('phone');
         $.ajax({
             type: 'post',
-            url: 'http://182.48.107.222:8080/IntegralStore/goods/order?channelId=toprays&userName='+phone+'&pageIndex='+page+'&pageSize=8',
+            url: 'http://182.48.107.222:8080/IntegralStore/goods/order?channelId=toprays&userName='+phone+'&pageIndex='+page+'&pageSize='+size,
             success: function (res) {
+                window.holdLoad = false;
                 res = JSON.parse(res);
                 console.log(res.data);
-                if (res.status == 0) {
-                    $('#totalOrders').html(res.data.totalCount);
-                    $('#totalMoney').html(res.data.totalMoney);
-                    if(res.data.totalCount == 0){
-                        $('.wraper').html($('#noOrder').html());
-                    } else {
-                        var html = $.func.dataToTpl('', 'tpl', res.data.orders, function(d){
-                            d.img = d.images[0];
-                            switch (d.orderStatus){
-                                case 1:
-                                    d.order_status = '购买成功';
-                                    break;
-                                case 2:
-                                    d.order_status = '未付款';
-                                    break;
-                                case 3:
-                                    d.order_status = '支付失败';
-                                    break;
-                            }
-                            return d;
-                        });
-                        $('#order').append(html);
-                    }
-                } else{
+                if (res.status !== 0) window.holdLoad = true;
+                $('#totalOrders').html(res.data.totalCount);
+                $('#totalMoney').html(res.data.totalMoney);
+                if(res.data.totalCount == 0){
                     $('.wraper').html($('#noOrder').html());
-                    return false;
+                } else {
+                    if (res.data.orders.length === 0) window.holdLoad = true;
+                    var html = $.func.dataToTpl('', 'tpl', res.data.orders, function(d){
+                        d.img = d.images[0];
+                        switch (d.orderStatus){
+                            case 1:
+                                d.order_status = '购买成功';
+                                break;
+                            case 2:
+                                d.order_status = '未付款';
+                                break;
+                            case 3:
+                                d.order_status = '支付失败';
+                                break;
+                        }
+                        return d;
+                    });
+                    $('#order').append(html);
                 }
             }
         });
     },
     
+    /**
+     * 指令查询
+     */
     getJiFen: function(){
         $.ajax({
             type: 'post',
@@ -191,6 +192,40 @@ $.func = {
                     });
                 }
             }
+        });
+    },
+    
+    submitOrder: function(products){
+        var phone = $.func.getCookie('phone');
+        $.ajax({
+            type: 'post',
+            url: 'http://182.48.107.222:8080/IntegralStore/goods/buy?channelId=toprays&userName='+phone+'&productsId='+products,
+            success: function (res) {
+                res = JSON.parse(res);
+                console.log(res.data);
+                if (res.status !== 0) return false;
+                location.href = 'order_query.html';
+            }
+        });
+    },
+    
+    choose: function (){
+        $('.order_detail_item li').on('tap', function () {
+            var dataType = $(this).attr('data-type');
+            if (dataType == '0') {
+                $(this).find('.choosebtn').addClass('choosed');
+                $(this).attr('data-type', 1);
+            } else {
+                $(this).find('.choosebtn').removeClass('choosed');
+                $(this).attr('data-type', 0);
+            }
+            $('.invo_total_pice').find('i').eq(0).html($('#allinvoic li[data-type ="1"]').length);
+            var total_price = 0;
+            for (var i = 0; i < $('#allinvoic li[data-type ="1"]').length; i++) {
+                total_price += parseInt($('#allinvoic li[data-type ="1"]').eq(i).find('#money').html() * 100);
+            }
+            total_price /= 100;
+            $('.invo_total_pice').find('i').eq(1).html(total_price);
         });
     },
     

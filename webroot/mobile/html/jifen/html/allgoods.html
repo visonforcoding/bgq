@@ -34,19 +34,15 @@
         </script>
         <script>
             var page = 1;
-            if($.func.getProducts(page) === false) page = 9999;
+            $.func.getProducts(page, 30);
             $(window).on("scroll", function () {
                 if(window.holdLoad) return;
                 window.holdLoad = true;
                 var st = document.body.scrollTop;
                 if (st >= (($(document).height() - $(window).height()) - 300)) {
-                    if(page === 9999){
-                        return false;
-                    }
+                    $.func.getProducts(page, 30);
                     page++;
-                    if($.func.getProducts(page) === false) page = 9999;
-                }
-                else{
+                } else{
                     window.holdLoad = false;
                 }
             });
