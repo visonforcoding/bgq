@@ -30,6 +30,7 @@ table,tbody,tr,td,th,thead,tfoot{border:1px #e5e5e5 solid;}
 .inner{padding:0 20px;}
 input::-webkit-input-placeholder { /* WebKit browsers */ color: #b5b5b5; } 
 .ablock{display: block;}
+.textcenter{text-align: center;}
 /*color*/
 
 .color_gray{color:#9f9f9f;}
