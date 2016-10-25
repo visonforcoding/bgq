@@ -79,7 +79,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '公司', '职位','报名活动', '提交时间', '是否需审核', '审核状态', '报名状态', '付款', '审核人', '是否置顶', '是否签到', '操作'],
+                                ['用户', '公司', '职位','报名活动', '提交时间', '是否需审核', '审核状态', '报名状态', '付款', '操作人', '是否置顶', '是否签到', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'user.company', editable: true, align: 'center'},
