@@ -111,6 +111,9 @@
             <option value="{##}">20.0</option>
         </script>
         <script type="text/javascript">
+            if(!$.func.getCookie('phone')){
+                location.href = 'login.html';
+            }
             $('#nickName').html($.func.getCookie('nickName'));
             var src = $.func.getCookie('headImgUrl') === null ? $.func.getCookie('headImgUrl') : '../images/tx.png';
             $('#avatar').attr('src', src);
