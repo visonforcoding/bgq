@@ -120,11 +120,19 @@
             $.func.homePageProduct();
             $.func.chargeMoney();
             $('.submitbtn').on('click', function () {
-                var chargeNo = $('input[name="chargeNo"]').val();
                 var chargePhone = $('input[name="chargePhone"]').val();
+                if(!chargePhone){
+                    alert('请填写手机');
+                    return;
+                }
                 var reg = /^0?1[3|4|5|7|8][0-9]\d{8}$/;
                 if(!reg.test(chargePhone)){
                     alert('请填写正确的手机号码');
+                    return;
+                }
+                var chargeNo = $('input[name="chargeNo"]').val();
+                if(!chargeNo){
+                    alert('请填写串码')；
                     return;
                 }
                 var chargeMoney = $('select').val();
