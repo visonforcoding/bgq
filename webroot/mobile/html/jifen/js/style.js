@@ -269,9 +269,7 @@ $.func = {
                     return d;
                 });
                 $('#goods').append(html);
-                $('.order_detail_item li').on('tap', function () {
-                    $.func.choose();
-                });
+                $.func.choose();
             }
         });
     },
@@ -280,27 +278,33 @@ $.func = {
      * 选择商品动作
      */
     choose: function (){
-        var dataType = $(this).attr('data-type');
-        if (dataType == '0') {
-            $(this).find('.choosebtn').addClass('choosed');
-            $(this).attr('data-type', 1);
-            $(this).find('input').val($(this).attr('product_id'));
-        } else {
-            $(this).find('.choosebtn').removeClass('choosed');
-            $(this).attr('data-type', 0);
-            $(this).find('input').val('');
-        }
-        var total_price = 0;
-        var userJiFen = $.func.getCookie('userJiFen');
-        for (var i = 0; i < $('.order_detail_item li[data-type ="1"]').length; i++) {
-            total_price += parseInt($('.order_detail_item li[data-type ="1"]').eq(i).find('#money').attr('money')) * 100;
-        }
-        total_price /= 100;
-        if(total_price > userJiFen){
-            $('.order_detail_item li[data-type ="0"]').unbind('tap');
-        } else {
-            $.func.choose();
-        }
+        $('.order_detail_item li').on('tap', function () {
+            if($(this).hasClass('noTap')){
+                return;
+            }
+            $(this).addClass('noTap');
+            var dataType = $(this).attr('data-type');
+            if (dataType == '0') {
+                $(this).find('.choosebtn').addClass('choosed');
+                $(this).attr('data-type', 1);
+                $(this).find('input').val($(this).attr('product_id'));
+            } else {
+                $(this).find('.choosebtn').removeClass('choosed');
+                $(this).attr('data-type', 0);
+                $(this).find('input').val('');
+            }
+            var total_price = 0;
+            var userJiFen = $.func.getCookie('userJiFen');
+            for (var i = 0; i < $('.order_detail_item li[data-type ="1"]').length; i++) {
+                total_price += parseInt($('.order_detail_item li[data-type ="1"]').eq(i).find('#money').attr('money')) * 100;
+            }
+            total_price /= 100;
+            if(total_price > userJiFen){
+                $('.order_detail_item li[data-type ="0"]').addClass('noTap');
+            } else {
+                $('.order_detail_item li[data-type ="0"]').removeClass('noTap');
+            }
+        });
     },
     
     checkjifen: function(jifen, url){
