@@ -195,6 +195,10 @@ $.func = {
         });
     },
     
+    /**
+     * 提交订单
+     * @param {type} products 商品id以,分开的字符串
+     */
     submitOrder: function(products){
         var phone = $.func.getCookie('phone');
         $.ajax({
@@ -209,23 +213,58 @@ $.func = {
         });
     },
     
+    /**
+     * 可以兑换的商品
+     * @param {type} page 页数
+     * @param {type} size 每页条数
+     */
+    canChargeGoods: function(page, size){
+        var phone = $.func.getCookie('phone');
+        $.ajax({
+            type: 'post',
+            url: 'http://182.48.107.222:8080/IntegralStore/canchargegoods/list?channelId=toprays&pageIndex='+page+'&pageSize='+size+'&userName='+phone,
+            success: function (res) {
+                window.holdLoad = false;
+                res = JSON.parse(res);
+                console.log(res.data);
+                if (res.status !== 0) window.holdLoad = true;
+                if (res.data.products.length === 0) window.holdLoad = true;
+                var html = $.func.dataToTpl('', 'tpl', res.data.products, function(d){
+                    d.img = d.images[0];
+                    return d;
+                });
+                $('#goods').append(html);
+                $.func.choose();
+            }
+        });
+    },
+    
+    /**
+     * 选择商品动作
+     */
     choose: function (){
         $('.order_detail_item li').on('tap', function () {
             var dataType = $(this).attr('data-type');
             if (dataType == '0') {
                 $(this).find('.choosebtn').addClass('choosed');
                 $(this).attr('data-type', 1);
+                $(this).find('input').val($(this).attr('product_id'));
             } else {
                 $(this).find('.choosebtn').removeClass('choosed');
                 $(this).attr('data-type', 0);
+                $(this).find('input').val('');
             }
-            $('.invo_total_pice').find('i').eq(0).html($('#allinvoic li[data-type ="1"]').length);
             var total_price = 0;
-            for (var i = 0; i < $('#allinvoic li[data-type ="1"]').length; i++) {
-                total_price += parseInt($('#allinvoic li[data-type ="1"]').eq(i).find('#money').html() * 100);
+            var userJiFen = $.func.getCookie('userJiFen');
+            for (var i = 0; i < $('.order_detail_item li[data-type ="1"]').length; i++) {
+                total_price += parseInt($('.order_detail_item li[data-type ="1"]').eq(i).find('#money').attr('money')) * 100;
             }
             total_price /= 100;
-            $('.invo_total_pice').find('i').eq(1).html(total_price);
+            if(total_price > userJiFen){
+                $('.order_detail_item li[data-type ="0"]').unbind('tap');
+            } else {
+                $.func.choose();
+            }
         });
     },
     
