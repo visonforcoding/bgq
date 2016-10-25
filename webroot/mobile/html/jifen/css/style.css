@@ -35,10 +35,20 @@ header h1.logintitle{background: url(icon/allbgs.png) no-repeat 0 -175px;height:
 /*.home_infolist .current i{background-position:0 -35px;}
 .home_infolist .downcon{font-size: 14px;max-height:999px;transition: all .3s ease;}*/
 .changeinfo{width:76%;}
+
 /*.home_infolist .upcon{max-height: 0;transition: all .5s ease;}*/
 .changeinfo .point{color:#919191;width:65%;text-align: center;height:35px;line-height: 35px;border-bottom:1px #ccc solid;}
 .changeinfo .submitbtn{display: inline-block;background: #ff7564;padding:0 25px;border-radius: 10px;color:#fff;margin-left:10px;height:32px;line-height: 32px;}
-
+@media (min-width: 320px) and (max-width: 374px) {
+	.changeinfo{width:73%;font-size:12px;}
+	.changeinfo .point{width:78%;}
+	.changeinfo .submitbtn{margin-left:5px; padding:0 5px;}
+}
+@media (min-width: 375px) and (max-width: 413px) {
+	.changeinfo{width:73%;font-size:12px;}
+	.changeinfo .point{width:74%;}
+	.changeinfo .submitbtn{margin-left:5px; padding:0 15px;}
+}
 .ct .title h3{font-size:12px;height:48px;line-height: 48px;overflow: hidden;}
 .ct .title{border-bottom:1px #d5d5d5 solid;}
 .ct .title h3 span{font-size: 15px;display: inline-block;width:120px;background: url(icon/allbgs.png) no-repeat -230px -185px;padding-left:27px;}
