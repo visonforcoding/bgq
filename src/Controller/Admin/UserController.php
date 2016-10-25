@@ -177,7 +177,12 @@ class UserController extends AppController {
         $industry_id = $this->request->data('industry_id');
         $where = ['is_del'=>0];
         if (!empty($keywords)) {
-            $where['or'] = [['truename like' => "%$keywords%"], ['email like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
+            $where['or'] = [
+                ['truename like' => "%$keywords%"],
+                ['position like' => "%$keywords%"],
+//                ['phone like' => "%$keywords%"],
+                ['company like' => "%$keywords%"],
+            ];
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
@@ -241,7 +246,7 @@ class UserController extends AppController {
      * @return csv 
      */
     public function exportExcel() {
-        $sort = $this->request->query('sidx');
+        $sort = 'User.' . $this->request->query('sidx');
         $order = $this->request->query('sort');
         $keywords = $this->request->query('keywords');
         $begin_time = $this->request->query('begin_time');
@@ -250,7 +255,12 @@ class UserController extends AppController {
         $industry_id = $this->request->query('industry_id');
         $where = ['is_del'=>0];
         if (!empty($keywords)) {
-            $where['or'] = [['truename like' => "%$keywords%"], ['email like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
+            $where['or'] = [
+                ['truename like' => "%$keywords%"],
+                ['position like' => "%$keywords%"],
+//                ['phone like' => "%$keywords%"],
+                ['company like' => "%$keywords%"],
+            ];
         }
         if(!empty($agency_id) && $agency_id !== '请选择'){
             $where['agency_id'] = $agency_id;
