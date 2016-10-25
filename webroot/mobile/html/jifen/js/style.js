@@ -269,7 +269,9 @@ $.func = {
                     return d;
                 });
                 $('#goods').append(html);
-                $.func.choose();
+                $('.order_detail_item li').on('tap', function () {
+                    $.func.choose();
+                });
             }
         });
     },
