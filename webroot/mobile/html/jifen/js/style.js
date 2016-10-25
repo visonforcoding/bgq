@@ -10,6 +10,7 @@ $.func = {
             var jsoninfo = {};
             if (user == '') {
                 alert('请输入手机号！');
+                return;
             }
             $.ajax({
                 type: 'post',
@@ -19,10 +20,10 @@ $.func = {
                     console.log(res);
                     if (res.status == 0) {
                         $.func.setCookie('nickName', res.data.nickName);
-                        $.func.setCookie('userJiFen', res.data.userJiFen);
+//                        $.func.setCookie('userJiFen', res.data.userJiFen);
                         $.func.setCookie('headImgUrl', res.data.headImgUrl);
                         $.func.setCookie('phone', user);
-                        location.href = 'home.html';
+//                        location.href = 'home.html';
                     }
                 }
             });
