@@ -319,6 +319,7 @@ class ActivityapplyController extends AppController {
             $activity->is_pass = 0;
             $activity->is_check = 0;
         }
+        $activity->check_man = $this->_user->truename;
         $res = $this->Activityapply->save($activity);
         if ($res) {
             $this->Util->ajaxReturn(true, '操作成功');
