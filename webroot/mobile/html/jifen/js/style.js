@@ -304,6 +304,7 @@ $.func = {
             } else {
                 $('.order_detail_item li[data-type ="0"]').removeClass('noTap');
             }
+            $(this).removeClass('noTap');
         });
     },
     
