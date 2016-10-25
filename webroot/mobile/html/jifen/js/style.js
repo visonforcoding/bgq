@@ -24,7 +24,7 @@ $.func = {
                             return;
                         }
                         $.func.setCookie('nickName', res.data.nickName);
-//                        $.func.setCookie('userJiFen', res.data.userJiFen);
+                        $.func.setCookie('userJiFen', res.data.userJiFen);
                         $.func.setCookie('headImgUrl', res.data.headImgUrl);
                         $.func.setCookie('phone', user);
                         location.href = 'home.html';
@@ -51,6 +51,7 @@ $.func = {
                         d.img = d.images[0];
                         return d;
                     });
+                    $.func.setCookie('userJiFen', res.data.userjifen);
                     $('#jifen').html(res.data.userjifen);
                 }
             }
@@ -277,29 +278,27 @@ $.func = {
      * 选择商品动作
      */
     choose: function (){
-        $('.order_detail_item li').on('tap', function () {
-            var dataType = $(this).attr('data-type');
-            if (dataType == '0') {
-                $(this).find('.choosebtn').addClass('choosed');
-                $(this).attr('data-type', 1);
-                $(this).find('input').val($(this).attr('product_id'));
-            } else {
-                $(this).find('.choosebtn').removeClass('choosed');
-                $(this).attr('data-type', 0);
-                $(this).find('input').val('');
-            }
-            var total_price = 0;
-            var userJiFen = $.func.getCookie('userJiFen');
-            for (var i = 0; i < $('.order_detail_item li[data-type ="1"]').length; i++) {
-                total_price += parseInt($('.order_detail_item li[data-type ="1"]').eq(i).find('#money').attr('money')) * 100;
-            }
-            total_price /= 100;
-            if(total_price > userJiFen){
-                $('.order_detail_item li[data-type ="0"]').unbind('tap');
-            } else {
-                $.func.choose();
-            }
-        });
+        var dataType = $(this).attr('data-type');
+        if (dataType == '0') {
+            $(this).find('.choosebtn').addClass('choosed');
+            $(this).attr('data-type', 1);
+            $(this).find('input').val($(this).attr('product_id'));
+        } else {
+            $(this).find('.choosebtn').removeClass('choosed');
+            $(this).attr('data-type', 0);
+            $(this).find('input').val('');
+        }
+        var total_price = 0;
+        var userJiFen = $.func.getCookie('userJiFen');
+        for (var i = 0; i < $('.order_detail_item li[data-type ="1"]').length; i++) {
+            total_price += parseInt($('.order_detail_item li[data-type ="1"]').eq(i).find('#money').attr('money')) * 100;
+        }
+        total_price /= 100;
+        if(total_price > userJiFen){
+            $('.order_detail_item li[data-type ="0"]').unbind('tap');
+        } else {
+            $.func.choose();
+        }
     },
     
     checkjifen: function(jifen, url){

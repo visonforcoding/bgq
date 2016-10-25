@@ -70,6 +70,10 @@
             var products = products.join(',');
             $.func.submitOrder(products);
         });
+        
+        $('.order_detail_item li').on('tap', function () {
+            $.func.choose();
+        }
     </script>
 </body>
 </html>
