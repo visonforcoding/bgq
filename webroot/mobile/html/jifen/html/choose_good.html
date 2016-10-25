@@ -20,7 +20,7 @@
         </header>
         <div class="wraper mt8">
             <ul class="order_detail_item" id="goods">
-                <li>
+                <li data-type=1>
                     <div class="order_l_pic">
                         <img src="../images/choose04.png" alt="" />
                     </div>
@@ -68,5 +68,27 @@
                 <a href="home1.html" class='btn bg_items mt33 inner'>提交</a>
             </div>
         </div>
+        <script type="text/html" id="tpl">
+            <li data-type=0 product_id="{#productId#}">
+                <input type="hidden" name="product_id[]" class="product_id" />
+                <div class="order_l_pic">
+                    <img src="{#img#}" alt="" />
+                </div>
+                <div class="order_r_box clearfix">
+                    <div class="l_order_des fl">
+                        <h3>{#productName#}</h3>
+                        <span>虚拟货币 &nbsp;&nbsp;: <i class="color_org">￥ {#exchangePrice#}</i></span>
+                        <span><i class="color_org"></i></span>
+                        <span><i class="color_gray"></i></span>
+<!--                        <span>订单状态 &nbsp;&nbsp;: <i class="color_org">已完成</i></span>
+                        <span>订单日期  &nbsp;&nbsp;: <i class="color_gray">2016-10-20</i></span>-->
+                    </div>
+                    <div class="choosebtn fr"></div>
+                </div>
+            </li>
+        </script>
+        <script>
+            $.func.choose();
+        </script>
     </body>
 </html>
