@@ -40,12 +40,13 @@ $.func = {
             url: 'http://182.48.107.222:8080/IntegralStore/goods/indexlist?channelId=toprays&pageSize=6&userName='+phone,
             success: function (res) {
                 res = JSON.parse(res);
-                console.log(res.data);
+                console.log(res);
                 if (res.status == 0) {
                     $.func.dataToTpl('product', 'tpl', res.data.homePageProductResults, function(d){
                         d.img = d.images[0];
                         return d;
                     });
+                    $('#jifen').html(res.data.userjifen);
                 }
             }
         });
