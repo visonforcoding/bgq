@@ -19,76 +19,57 @@
             </div>
         </header>
         <div class="wraper mt8">
-            <ul class="order_detail_item" id="goods">
-                <li data-type=1>
-                    <div class="order_l_pic">
-                        <img src="../images/choose04.png" alt="" />
-                    </div>
-                    <div class="order_r_box clearfix">
-                        <div class="l_order_des fl">
-                            <h3>爱奇艺会员一个月</h3>
-                            <span>虚拟货币 &nbsp;&nbsp;: <i class="color_org">￥ 15.00</i></span>
-                            <span>订单状态 &nbsp;&nbsp;: <i class="color_org">已完成</i></span>
-                            <span>订单日期  &nbsp;&nbsp;: <i class="color_gray">2016-10-20</i></span>
-                        </div>
-                        <div class="choosebtn choosed fr"></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="order_l_pic">
-                        <img src="../images/choose01.png" alt="" />
-                    </div>
-                    <div class="order_r_box clearfix">
-                        <div class="l_order_des fl">
-                            <h3>爱奇艺会员一个月</h3>
-                            <span>虚拟货币 &nbsp;&nbsp;: <i class="color_org">￥ 15.00</i></span>
-                            <span>订单状态 &nbsp;&nbsp;: <i class="color_org">已完成</i></span>
-                            <span>订单日期  &nbsp;&nbsp;: <i class="color_gray">2016-10-20</i></span>
-                        </div>
-                        <div class="choosebtn fr"></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="order_l_pic">
-                        <img src="../images/choose02.png" alt="" />
-                    </div>
-                    <div class="order_r_box clearfix">
-                        <div class="l_order_des fl">
-                            <h3>爱奇艺会员一个月</h3>
-                            <span>虚拟货币 &nbsp;&nbsp;: <i class="color_org">￥ 15.00</i></span>
-                            <span>订单状态 &nbsp;&nbsp;: <i class="color_org">已完成</i></span>
-                            <span>订单日期  &nbsp;&nbsp;: <i class="color_gray">2016-10-20</i></span>
-                        </div>
-                        <div class="choosebtn fr"></div>
-                    </div>
-                </li>
-            </ul>
-
+            <form action="" method="post">
+                <ul class="order_detail_item" id="goods">
+                </ul>
+            </form>
             <div class="inner">
-                <a href="home1.html" class='btn bg_items mt33 inner'>提交</a>
+                <a href="javascript:void(0)" class='btn bg_items mt33 inner' id="submit">提交</a>
             </div>
         </div>
         <script type="text/html" id="tpl">
-            <li data-type=0 product_id="{#productId#}">
-                <input type="hidden" name="product_id[]" class="product_id" />
-                <div class="order_l_pic">
-                    <img src="{#img#}" alt="" />
+        <li data-type=0 product_id="{#productId#}">
+            <input type="hidden" name="product_id" class="product_id" />
+            <div class="order_l_pic">
+                <img src="{#img#}" alt="" />
+            </div>
+            <div class="order_r_box clearfix">
+                <div class="l_order_des fl">
+                    <h3>{#productName#}</h3>
+                    <span>虚拟货币 &nbsp;&nbsp;: <i class="color_org" id="money" money="{#exchangePrice#}">￥ {#exchangePrice#}</i></span>
+                    <span>商品描述 &nbsp;&nbsp;: <i class="color_org">{#productDetails#}</i></span>
+                    <span><i class="color_gray"></i></span>
+                    <!--                        <span>订单状态 &nbsp;&nbsp;: <i class="color_org">已完成</i></span>
+                                            <span>订单日期  &nbsp;&nbsp;: <i class="color_gray">2016-10-20</i></span>-->
                 </div>
-                <div class="order_r_box clearfix">
-                    <div class="l_order_des fl">
-                        <h3>{#productName#}</h3>
-                        <span>虚拟货币 &nbsp;&nbsp;: <i class="color_org">￥ {#exchangePrice#}</i></span>
-                        <span><i class="color_org"></i></span>
-                        <span><i class="color_gray"></i></span>
-<!--                        <span>订单状态 &nbsp;&nbsp;: <i class="color_org">已完成</i></span>
-                        <span>订单日期  &nbsp;&nbsp;: <i class="color_gray">2016-10-20</i></span>-->
-                    </div>
-                    <div class="choosebtn fr"></div>
-                </div>
-            </li>
-        </script>
-        <script>
-            $.func.choose();
-        </script>
-    </body>
+                <div class="choosebtn fr"></div>
+            </div>
+        </li>
+    </script>
+    <script>
+        var page = 1;
+        $.func.canChargeGoods(page, 10);
+        $(window).on("scroll", function () {
+            if(window.holdLoad) return;
+            window.holdLoad = true;
+            var st = document.body.scrollTop;
+            if (st >= (($(document).height() - $(window).height()) - 300)) {
+                $.func.canChargeGoods(page, 10);
+                page++;
+            } else{
+                window.holdLoad = false;
+            }
+        });
+        $('#submit').on('tap', function(){
+            var choose = $('input');
+            var products = [];
+            for(var i=0;i<choose.length;i++){
+                if(choose.eq(i).val() == '')continue;
+                products.push(choose.eq(i).val());
+            }
+            var products = products.join(',');
+            $.func.submitOrder(products);
+        });
+    </script>
+</body>
 </html>
