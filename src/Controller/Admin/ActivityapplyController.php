@@ -312,7 +312,13 @@ class ActivityapplyController extends AppController {
      */
     public function pass($id) {
         $activity = $this->Activityapply->get($id);
-        $activity->is_pass = 1;
+        if($activity->is_pass == 0){
+            $activity->is_pass = 1;
+            $activity->is_check = 1;
+        } else {
+            $activity->is_pass = 0;
+            $activity->is_check = 0;
+        }
         $res = $this->Activityapply->save($activity);
         if ($res) {
             $this->Util->ajaxReturn(true, '操作成功');

@@ -108,10 +108,11 @@
                                     }
                                 }},
                             {name: 'is_pass', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
-                                    if (cellvalue) {
-                                        return '通过';
-                                    } else {
-                                        return '未通过';
+                                    switch (cellvalue) {
+                                        case 1:
+                                            return '<button onClick="pass(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-check-circle"></i> 通过</button>';
+                                        case 0:
+                                            return '<button onClick="pass(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-remove-circle"></i><i style="color:red"> 未通过</i></button>';
                                     }
                                 }},
                             {name: 'activity.apply_fee', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
@@ -396,6 +397,21 @@
                         area: ['70%', '50%'],
                         content: url//iframe的url
                     });
+                }
+                
+                function pass(id) {
+                    $.ajax({
+                        type: 'post',
+                        data: {id: id},
+                        dataType: 'json',
+                        url: '/admin/activityapply/pass/'+id,
+                        success: function (res) {
+                            layer.msg(res.msg);
+                            if (res.status) {
+                                $('#list').trigger('reloadGrid');
+                            }
+                        }
+                    })
                 }
 </script>
 <?php
