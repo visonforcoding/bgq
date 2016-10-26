@@ -264,7 +264,6 @@ $.func = {
                     return d;
                 });
                 $('#goods').append(html);
-                $.func.choose();
             }
         });
     },
@@ -273,43 +272,51 @@ $.func = {
      * 选择商品动作
      */
     choose: function (){
-        $('.order_detail_item li').on('click', function () {
-            if($(this).hasClass('noTap')){
-                return;
+        $('body').on('tap', function (e) {
+            var target = e.srcElement || e.target, em = target, i = 1;
+            while (em && !em.id && i <= 3) {
+                em = em.parentNode;
+                i++;
             }
-            $(this).addClass('noTap');
-            var userJiFen = $.func.getCookie('userJiFen');
-            var clickMoney = parseInt($(this).eq(i).find('#money').attr('money')) * 100;
-            clickMoney /= 100;
-            if(userJiFen < clickMoney){
-                alert('兑换余额不足');
-                $('.order_detail_item li[data-type ="0"]').addClass('noTap');
+            if (!em || !em.id) return;
+            if(em.id.indexOf('product_') != -1){
+                if($(em).hasClass('noTap')){
+                    return;
+                }
+                $(em).addClass('noTap');
+                var userJiFen = $.func.getCookie('userJiFen');
+                var clickMoney = parseInt($(em).eq(i).find('#money').attr('money')) * 100;
+                clickMoney /= 100;
+                if(userJiFen < clickMoney){
+                    alert('兑换余额不足');
+                    $('.order_detail_item li[data-type ="0"]').addClass('noTap');
+                }
+                var dataType = $(em).attr('data-type');
+                if (dataType == '0') {
+                    $(em).find('.choosebtn').addClass('choosed');
+                    $(em).attr('data-type', 1);
+                    $(em).find('input').val($(em).attr('product_id'));
+                } else {
+                    $(em).find('.choosebtn').removeClass('choosed');
+                    $(em).attr('data-type', 0);
+                    $(em).find('input').val('');
+                }
+                var total_price = 0;
+                for (var i = 0; i < $('.order_detail_item li[data-type ="1"]').length; i++) {
+                    total_price += parseInt($('.order_detail_item li[data-type ="1"]').eq(i).find('#money').attr('money')) * 100;
+                }
+                total_price /= 100;
+                if(total_price > userJiFen){
+                    alert('兑换余额不足');
+                    $('.order_detail_item li[data-type ="0"]').addClass('noTap');
+                    $(em).find('.choosebtn').removeClass('choosed');
+                    $(em).attr('data-type', 0);
+                    $(em).find('input').val('');
+                } else {
+                    $('.order_detail_item li[data-type ="0"]').removeClass('noTap');
+                }
+                $(em).removeClass('noTap');
             }
-            var total_price = 0;
-            for (var i = 0; i < $('.order_detail_item li[data-type ="1"]').length; i++) {
-                total_price += parseInt($('.order_detail_item li[data-type ="1"]').eq(i).find('#money').attr('money')) * 100;
-            }
-            total_price /= 100;
-            if(total_price > userJiFen){
-                alert('兑换余额不足');
-                $('.order_detail_item li[data-type ="0"]').addClass('noTap');
-                $(this).find('.choosebtn').removeClass('choosed');
-                $(this).attr('data-type', 0);
-                $(this).find('input').val('');
-            } else {
-                $('.order_detail_item li[data-type ="0"]').removeClass('noTap');
-            }
-            var dataType = $(this).attr('data-type');
-            if (dataType == '0') {
-                $(this).find('.choosebtn').addClass('choosed');
-                $(this).attr('data-type', 1);
-                $(this).find('input').val($(this).attr('product_id'));
-            } else {
-                $(this).find('.choosebtn').removeClass('choosed');
-                $(this).attr('data-type', 0);
-                $(this).find('input').val('');
-            }
-            $(this).removeClass('noTap');
         });
     },
     
