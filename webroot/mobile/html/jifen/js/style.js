@@ -19,11 +19,6 @@ $.func = {
                     res = JSON.parse(res);
                     console.log(res);
                     if (res.status == 0) {
-                        if(!res.data.nickName){
-                            alert('登录失败');
-                            return;
-                        }
-                        $.func.setCookie('nickName', res.data.nickName);
                         $.func.setCookie('userJiFen', res.data.userJiFen);
                         $.func.setCookie('headImgUrl', res.data.headImgUrl);
                         $.func.setCookie('phone', user);
