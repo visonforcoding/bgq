@@ -303,6 +303,9 @@ $.func = {
             if(total_price > userJiFen){
                 alert('兑换余额不足');
                 $('.order_detail_item li[data-type ="0"]').addClass('noTap');
+                $(this).find('.choosebtn').removeClass('choosed');
+                $(this).attr('data-type', 0);
+                $(this).find('input').val('');
             } else {
                 $('.order_detail_item li[data-type ="0"]').removeClass('noTap');
             }
