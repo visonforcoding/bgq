@@ -61,9 +61,14 @@
     }
 
     $('.r-submit').on('tap', function () {
+    var obj = $(this);
         if (is_done == '1') {
             return false;
         }
+        if(obj.hasClass('noTap')){
+            return false;
+        }
+        obj.addClass('noTap');
         if ($('#content').val() == '') {
             $.util.alert('请填写内容');
             return false;
@@ -102,6 +107,7 @@
                 } else {
                     $.util.alert(res.msg);
                 }
+                obj.removeClass('noTap');
             }
         });
     });
