@@ -279,7 +279,7 @@ $.func = {
             }
             $(this).addClass('noTap');
             var userJiFen = $.func.getCookie('userJiFen');
-            var clickMoney = parseInt($('.order_detail_item li[data-type ="1"]').eq(i).find('#money').attr('money')) * 100;
+            var clickMoney = parseInt($(this).eq(i).find('#money').attr('money')) * 100;
             clickMoney /= 100;
             if(userJiFen < clickMoney){
                 alert('兑换余额不足');
