@@ -273,7 +273,7 @@ $.func = {
      * 选择商品动作
      */
     choose: function (){
-        $('.order_detail_item li').on('tap', function () {
+        $('.order_detail_item li').on('click', function () {
             if($(this).hasClass('noTap')){
                 return;
             }
