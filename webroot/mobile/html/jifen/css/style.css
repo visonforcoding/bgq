@@ -39,7 +39,7 @@ header h1.logintitle{background: url(icon/allbgs.png) no-repeat 0 -175px;height:
 .home_exchange{margin-top:10px;}
 .home_exchange .title{color:#fdb245;font-size:16px;}
 .home_exchange .con{overflow:hidden;}
-.home_exchange .home_select_type{float:left;width:48%;line-height: 20px;margin-top:10px;margin-right:10px;}
+.home_exchange .home_select_type{float:left;width:70%;line-height: 20px;margin-top:10px;margin-right:10px;}
 .home_exchange .home_select_type:nth-of-type(2n){margin-right:0;}
 .home_select_type select{width:60%;border:1px #e5e5e5 solid;}
 .home_select_type span{}
