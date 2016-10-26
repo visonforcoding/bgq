@@ -40,8 +40,8 @@
                 window.holdLoad = true;
                 var st = document.body.scrollTop;
                 if (st >= (($(document).height() - $(window).height()) - 300)) {
-                    $.func.getProducts(page, 30);
                     page++;
+                    $.func.getProducts(page, 30);
                 } else{
                     window.holdLoad = false;
                 }

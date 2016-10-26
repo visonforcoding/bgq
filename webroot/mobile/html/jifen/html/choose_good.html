@@ -54,8 +54,8 @@
             window.holdLoad = true;
             var st = document.body.scrollTop;
             if (st >= (($(document).height() - $(window).height()) - 300)) {
-                $.func.canChargeGoods(page, 10);
                 page++;
+                $.func.canChargeGoods(page, 10);
             } else{
                 window.holdLoad = false;
             }
