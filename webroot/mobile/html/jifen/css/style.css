@@ -80,8 +80,8 @@ header h1.logintitle{background: url(icon/allbgs.png) no-repeat 0 -175px;}
 .order_r_box .l_order_des span i{margin-left:10px;}
 .order_r_box .l_order_des h3{color:#525151;font-size: 16px;margin-bottom:6px;}
 .order_r_box{padding-left:103px;}
-.order_r_box .choosebtn{background: url(icon/allbgs.png) no-repeat 12px -601px; width:40px;margin-top:25px;height:34px;}
-.order_r_box .choosed{background-position: 12px -633px;margin-top:20px;}
+.order_r_box .choosebtn span{ display:block;background: url(icon/allbgs.png) no-repeat 0 -610px; width:23px;height:23px;margin-top:25px;}
+.order_r_box .choosed span{background-position: 0 -635px;margin-top:25px;}
 /*查询订单*/
 .noorder{background: url(icon/allbgs.png) no-repeat -769px -135px;height:100px;width:100%;margin:150px auto 20px;width:100px;}
 .noorder_tips p{color:#919191;font-size: 14px;text-align: center;}
