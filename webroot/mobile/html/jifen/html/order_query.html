@@ -55,8 +55,8 @@
             window.holdLoad = true;
             var st = document.body.scrollTop;
             if (st >= (($(document).height() - $(window).height()) - 300)) {
-                $.func.getOrders(page, 8);
                 page++;
+                $.func.getOrders(page, 8);
             } else{
                 window.holdLoad = false;
             }
