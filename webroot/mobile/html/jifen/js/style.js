@@ -204,9 +204,10 @@ $.func = {
                         if(!d[vendor]){
                             d[vendor] = [];
                         }
+                        if(res.data.cmds[i].cmdType != 2)
                         d[vendor].push(res.data.cmds[i]);
                     }
-                    if(d['中国移动'])
+                    if(d['中国移动'] && d['中国移动'])
                     $.func.dataToTpl('CMCC', 'tpl', d['中国移动'], function(q){
                         return q;
                     });
