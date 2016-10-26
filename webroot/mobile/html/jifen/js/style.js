@@ -201,11 +201,13 @@ $.func = {
                     var d = {};
                     for(var i=0;i<res.data.cmds.length;i++){
                         var vendor = res.data.cmds[i].vendorName;
-                        if(!d[vendor]){
+                        if(!d[vendor])
                             d[vendor] = [];
+                        if(res.data.cmds[i].cmdType != 2){
+                            d[vendor].push(res.data.cmds[i]);
+                        } else {
+                            $('#'+vendor).html(res.data.cmds[i].smsContent);
                         }
-                        if(res.data.cmds[i].cmdType != 2)
-                        d[vendor].push(res.data.cmds[i]);
                     }
                     if(d['中国移动'] && d['中国移动'])
                     $.func.dataToTpl('CMCC', 'tpl', d['中国移动'], function(q){
