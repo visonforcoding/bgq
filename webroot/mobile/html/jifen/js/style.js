@@ -285,16 +285,6 @@ $.func = {
                 alert('兑换余额不足');
                 $('.order_detail_item li[data-type ="0"]').addClass('noTap');
             }
-            var dataType = $(this).attr('data-type');
-            if (dataType == '0') {
-                $(this).find('.choosebtn').addClass('choosed');
-                $(this).attr('data-type', 1);
-                $(this).find('input').val($(this).attr('product_id'));
-            } else {
-                $(this).find('.choosebtn').removeClass('choosed');
-                $(this).attr('data-type', 0);
-                $(this).find('input').val('');
-            }
             var total_price = 0;
             for (var i = 0; i < $('.order_detail_item li[data-type ="1"]').length; i++) {
                 total_price += parseInt($('.order_detail_item li[data-type ="1"]').eq(i).find('#money').attr('money')) * 100;
@@ -308,6 +298,16 @@ $.func = {
                 $(this).find('input').val('');
             } else {
                 $('.order_detail_item li[data-type ="0"]').removeClass('noTap');
+            }
+            var dataType = $(this).attr('data-type');
+            if (dataType == '0') {
+                $(this).find('.choosebtn').addClass('choosed');
+                $(this).attr('data-type', 1);
+                $(this).find('input').val($(this).attr('product_id'));
+            } else {
+                $(this).find('.choosebtn').removeClass('choosed');
+                $(this).attr('data-type', 0);
+                $(this).find('input').val('');
             }
             $(this).removeClass('noTap');
         });
