@@ -28,7 +28,7 @@
             </div>
         </div>
         <script type="text/html" id="tpl">
-        <li data-type=0 product_id="{#productId#}">
+        <li data-type=0 product_id="{#productId#}" id="product_{#productId#}">
             <input type="hidden" name="product_id" class="product_id" />
             <div class="order_l_pic">
                 <img src="{#img#}" alt="" />
@@ -70,7 +70,7 @@
             var products = products.join(',');
             $.func.submitOrder(products);
         });
-        
+        $.func.choose();
     </script>
 </body>
 </html>
