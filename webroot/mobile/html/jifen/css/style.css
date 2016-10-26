@@ -15,7 +15,7 @@ header h1.logintitle{background: url(icon/allbgs.png) no-repeat 0 -175px;}
 .home_user_info{padding:31px 0 24px;}
 .home_user_info .imginfo{/*background: url(icon/allbgs.png) no-repeat -782px -5px;*/ width:76px;height:75px;display: inline-block;margin-left:-6px;vertical-align: top;overflow: hidden;}
 .home_head_info{font-size:18px;margin-left:14px;display: inline-block;padding-top:15px;}
-.home_head_info h1{line-height: 26px;}
+.home_head_info h1{line-height: 26px;height:26px;}
 .home_head_info h1 {background: url(icon/allbgs.png) no-repeat -841px -336px;}
 .home_user_info .mobilenum{color:#fff;}
 .itemtitle{height:40px;line-height: 40px;border-bottom:1px #ddd solid;}
