@@ -65,6 +65,7 @@ header h1.logintitle{background: url(icon/allbgs.png) no-repeat 0 -175px;height:
 .ct .con span{display: inline-block;color:#545353;font-size:13px;vertical-align: top;}
 .ct .con .get_gift{color:#fe8c5a;font-size:24px;padding-left:34px;width:130px;line-height: 35px;}
 .ct .con i{display: block;color:#8a8a8a;font-size: 11px;margin-top:5px;}
+.f_potion{position:fixed;width:100%;max-width:750px;margin:0 auto;bottom:0;background: #fff;}
 /*查询订单*/
 .order_total{padding:25px 0;font-size:0;}
 .order_total span{display: inline-block;color:#fff;font-size: 14px;width:49.6%;text-align: center;}
