@@ -114,7 +114,7 @@
             if(!$.func.getCookie('phone')){
                 location.href = 'login.html';
             }
-            $('#nickName').html($.func.getCookie('nickName'));
+            $('#nickName').html($.func.getCookie('phone'));
             var src = $.func.getCookie('headImgUrl') === null ? $.func.getCookie('headImgUrl') : '../images/tx.png';
             $('#avatar').attr('src', src);
             $.func.homePageProduct();
