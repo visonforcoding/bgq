@@ -278,6 +278,13 @@ $.func = {
                 return;
             }
             $(this).addClass('noTap');
+            var userJiFen = $.func.getCookie('userJiFen');
+            var clickMoney = parseInt($('.order_detail_item li[data-type ="1"]').eq(i).find('#money').attr('money')) * 100;
+            clickMoney /= 100;
+            if(userJiFen < clickMoney){
+                alert('兑换余额不足');
+                $('.order_detail_item li[data-type ="0"]').addClass('noTap');
+            }
             var dataType = $(this).attr('data-type');
             if (dataType == '0') {
                 $(this).find('.choosebtn').addClass('choosed');
@@ -289,12 +296,12 @@ $.func = {
                 $(this).find('input').val('');
             }
             var total_price = 0;
-            var userJiFen = $.func.getCookie('userJiFen');
             for (var i = 0; i < $('.order_detail_item li[data-type ="1"]').length; i++) {
                 total_price += parseInt($('.order_detail_item li[data-type ="1"]').eq(i).find('#money').attr('money')) * 100;
             }
             total_price /= 100;
             if(total_price > userJiFen){
+                alert('兑换余额不足');
                 $('.order_detail_item li[data-type ="0"]').addClass('noTap');
             } else {
                 $('.order_detail_item li[data-type ="0"]').removeClass('noTap');
