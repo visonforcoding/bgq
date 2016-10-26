@@ -1,6 +1,6 @@
 header{background: #29bbb1;width:100%;max-width: 720px;margin:0 auto;padding:14px 0;border-bottom:1px #f0f0f0 solid;}
 header h1{text-align: center;color:#fff;font-size:16px;}
-header h1.logintitle{background: url(icon/allbgs.png) no-repeat 0 -175px;height:20px;}
+header h1.logintitle{background: url(icon/allbgs.png) no-repeat 0 -175px;}
 .login_box{padding-top:13px;font-size:15px;}
 .login_box li{margin-top:15px;height:45px;line-height: 43px;border:1px #ddd solid;background: #fff;text-indent: 12px;}
 .login_box li span{width:76px;display: inline-block;}
@@ -29,7 +29,7 @@ header h1.logintitle{background: url(icon/allbgs.png) no-repeat 0 -175px;height:
 .items_con dl dd{font-size: 10px;margin-bottom:3px;}
 .items_price{color:#ff6c4a;}
 .items_con{overflow: hidden;background: #fff;min-height:130px;}
-.home_infolist{overflow: hidden;border-top:1px #dedede solid;}
+.home_infolist{overflow: hidden;/*border-top:1px #dedede solid;*/}
 .home_infolist span{background: url(icon/allbgs.png) no-repeat 0 -437px;padding-left:40px;color:#525151}
 .home_infolist i{background: url(icon/allbgs.png) no-repeat 0 -100px;width:12px;height:40px;}
 .home_infolist span.change{background-position: 0px -327px;}
@@ -42,11 +42,11 @@ header h1.logintitle{background: url(icon/allbgs.png) no-repeat 0 -175px;height:
 .home_exchange .home_select_type{float:left;width:100%;line-height: 20px;margin-top:10px;margin-right:10px;}
 .home_exchange .home_select_type:nth-of-type(2n){margin-right:0;}
 .home_select_type select{width:60%;border:1px #e5e5e5 solid;margin-left: 1rem;padding: 0.3rem 0 0.3rem 0.5rem;}
-.home_select_type span{}
+.home_select_type span{display:inline-block;width:20%;}
 .home_select_type input{border:1px #e5e5e5 solid;width:60%;line-height: 18px;margin-left: 1rem;padding: 0.3rem 0 0.3rem 0.5rem;}
 @media only screen and (max-width: 374px) {
 	.home_exchange .home_select_type{width:100%;}
-	.home_select_type .cm{letter-spacing: 13px;}
+	/*.home_select_type .cm{letter-spacing: 13px;}*/
 }
 /*.home_infolist .current i{background-position:0 -35px;}
 .home_infolist .downcon{font-size: 14px;max-height:999px;transition: all .3s ease;}*/
