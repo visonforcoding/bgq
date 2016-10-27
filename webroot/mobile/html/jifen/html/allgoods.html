@@ -21,7 +21,7 @@
         <div class="wraper">
             <div class="home_item btop mt10">
                 <div class="items_con">
-                    <a href="choose_good.html" id="allGoods"></a>
+                    <a href="javascript:void(0)" id="allGoods"></a>
                 </div>
             </div>
         </div>
@@ -45,6 +45,10 @@
                 } else{
                     window.holdLoad = false;
                 }
+            });
+            
+            $('#allGoods').on('click', function(){
+                $.func.checkjifen($.func.getCookie('userJiFen'), 'choose_good.html');
             });
         </script>
     </body>
