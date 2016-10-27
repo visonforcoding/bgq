@@ -1,5 +1,5 @@
 header{background: #29bbb1;width:100%;max-width: 720px;margin:0 auto;padding:14px 0;border-bottom:1px #f0f0f0 solid;}
-header h1{text-align: center;color:#fff;font-size:16px;height:21px;line-height:21px;}
+header h1{text-align: center;color:#fff;font-size:16px;height:21px;line-height:22px;}
 header h1.logintitle{background: url(icon/toback.png) no-repeat left center;background-size: 12px auto;}
 .login_box{padding-top:13px;font-size:15px;}
 .login_box li{margin-top:15px;height:45px;line-height: 43px;border:1px #ddd solid;background: #fff;text-indent: 12px;}
