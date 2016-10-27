@@ -573,7 +573,7 @@ class HomeController extends AppController {
                 return $q->where(['Usermsgs.type'=>4, 'Usermsgs.status'=>0, 'Usermsgs.user_id'=>$user_id]);
             }, 'BookChats'=>function($q)use($user_id){
                 return $q->where(['reply_id'=>$user_id, 'is_read'=>0]);
-            }])->where(['SubjectBook.savant_id =' => $user_id])->order(['SubjectBook.update_time'=>'desc'])->toArray();
+            }])->where(['SubjectBook.savant_id =' => $user_id,  'SubjectBook.status >'=>'-1'])->order(['SubjectBook.update_time'=>'desc'])->toArray();
             foreach($savant_books as $k=>$v){
                 if($v->status == 0){
                     if($v->usermsgs){
