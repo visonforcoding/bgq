@@ -7,6 +7,16 @@ header h1.logintitle{background: url(icon/toback.png) no-repeat left center;back
 .login_box ul{overflow: hidden;}
 /*按钮*/
 .btn{width:100%;display: block;text-align: center;color:#fff;font-size:15px;height:41px;line-height: 41px;}
+/*提现*/
+.withdraw_cash_box h3{color:#585858;margin-top:15px;}
+.withdraw_cash_box ul{font-size:16px;margin-top:37px;}
+.withdraw_cash_box li{border:none;background: none;text-indent: 10px;margin-bottom:27px;margin-top:0;position:relative;}
+.withdraw_cash_box li span{width:38%;position:absolute;bottom:-1px;}
+.withdraw_text{padding-left:38%;width:100%;}
+.withdraw_cash_box li input{border-bottom:1px #aeaeae solid;width:90%;color:#454545;text-align: center;color:#969696}
+.withdraw_cash_box li span{background: url(icon/nochoose1.png) no-repeat left center;background-size: 15px 15px;padding-left:15px;color:#969696}
+.withdraw_cash_box li.choose span{background: url(icon/choose1.png) no-repeat left center;background-size: 15px 15px;color:#454545;}
+.withdraw_cash_box li.choose input{color:#454545;}
 /*主页*/
 .quit_login{color:#fff;font-size:14px;}
 .home_head{position:relative;height:28px;line-height: 28px;}
