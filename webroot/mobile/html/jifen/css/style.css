@@ -1,6 +1,6 @@
 header{background: #29bbb1;width:100%;max-width: 720px;margin:0 auto;padding:14px 0;border-bottom:1px #f0f0f0 solid;}
-header h1{text-align: center;color:#fff;font-size:16px;height:21px;}
-header h1.logintitle{background: url(icon/allbgs.png) no-repeat 0 -175px;}
+header h1{text-align: center;color:#fff;font-size:16px;height:21px;line-height:21px;}
+header h1.logintitle{background: url(icon/toback.png) no-repeat left center;background-size: 12px auto;}
 .login_box{padding-top:13px;font-size:15px;}
 .login_box li{margin-top:15px;height:45px;line-height: 43px;border:1px #ddd solid;background: #fff;text-indent: 12px;}
 .login_box li span{width:76px;display: inline-block;}
@@ -16,12 +16,13 @@ header h1.logintitle{background: url(icon/allbgs.png) no-repeat 0 -175px;}
 .home_user_info .imginfo{/*background: url(icon/allbgs.png) no-repeat -782px -5px;*/ width:76px;height:75px;display: inline-block;margin-left:-6px;vertical-align: top;overflow: hidden;}
 .home_head_info{font-size:18px;margin-left:14px;display: inline-block;padding-top:15px;}
 .home_head_info h1{line-height: 26px;}
-.home_head_info h1 {background: url(icon/allbgs.png) no-repeat -837px -292px;}
+.home_head_info h1 {/*background: url(icon/allbgs.png) no-repeat -837px -292px;*/background: url(icon/icon01.png) no-repeat left center;
+background-size:20px 20px;}
 .home_user_info .mobilenum{color:#fff;}
 .itemtitle{height:40px;line-height: 40px;border-bottom:1px #ddd solid;}
 .item_title_r_name{color:#525151;}
 .home_item{}
-.itemtitle .more{font-size: 12px;background: url(icon/allbgs.png) no-repeat  60px -259px;width:70px;}
+.itemtitle .more{font-size: 12px;background: url(icon/more.png) no-repeat  right center;width:65px;background-size:auto 12px;}
 .items_con dl{float:left;width:33%;text-align: center;padding-top:10px;border-right:1px #dedede solid;padding-bottom:10px;border-bottom:1px #dedede solid;}
 .items_con dl:nth-of-type(3n){border-right:1px transparent solid;}
 .items_con dl dt{width:76%;margin:0 auto;margin-bottom:8px;}
@@ -30,10 +31,10 @@ header h1.logintitle{background: url(icon/allbgs.png) no-repeat 0 -175px;}
 .items_price{color:#ff6c4a;}
 .items_con{overflow: hidden;background: #fff;min-height:130px;}
 .home_infolist{overflow: hidden;/*border-top:1px #dedede solid;*/}
-.home_infolist span{background: url(icon/allbgs.png) no-repeat 0 -437px;padding-left:40px;color:#525151}
-.home_infolist i{background: url(icon/allbgs.png) no-repeat 0 -100px;width:12px;height:40px;}
+.home_infolist span{background: url(icon/jf.png) no-repeat left center;background-size:20px 20px;padding-left:40px;color:#525151}
+.home_infolist i{background: url(icon/rgray.png) no-repeat center center;background-size:6px 10px;width:6px;height:48px;}
 .home_infolist span.change{background-position: 0px -327px;}
-.home_infolist span.bind{background-position: 0px -512px;}
+.home_infolist span.bind{background: url(icon/bind.png) no-repeat left center;background-size:22px 22px;}
 .home_top_con{background: #fff;height:48px;line-height: 48px;background: #fff;}
 /*兑换*/
 .home_exchange{margin-top:10px;}
@@ -57,10 +58,13 @@ header h1.logintitle{background: url(icon/allbgs.png) no-repeat 0 -175px;}
 .home_exchange .submitbtn{display: inline-block;background: #fe9f1f;width:140px;text-align:center;color:#fff;margin:15px auto 0;height:35px;line-height: 35px;}
 .ct .title h3{font-size:12px;height:48px;line-height: 48px;overflow: hidden;}
 .ct .title{border-bottom:1px #d5d5d5 solid;}
-.ct .title h3 span{font-size: 15px;display: inline-block;width:120px;background: url(icon/allbgs.png) no-repeat -230px -185px;padding-left:27px;}
+.ct .title h3 span{font-size: 15px;display: inline-block;width:120px;background: url(icon/yd.png) no-repeat left center;
+background-size:18px 18px;padding-left:27px;}
 .ct .con{overflow: hidden;background: #fff;}
-.cucc .title h3 span{background-position:-232px -367px ;}
-.cmcc .title h3 span{background-position:-231px -34px ;}
+.cucc .title h3 span{;background: url(icon/dx.png) no-repeat left center;
+background-size:18px 18px;}
+.cmcc .title h3 span{background: url(icon/lt.png) no-repeat left center;
+background-size:18px 18px;}
 .ct .con li{padding:15px 0;border-bottom:1px #d5d5d5 solid;}
 .ct .con span{display: inline-block;color:#545353;font-size:13px;vertical-align: top;}
 .ct .con .get_gift{color:#fe8c5a;font-size:24px;padding-left:34px;width:130px;line-height: 35px;}
@@ -80,16 +84,16 @@ header h1.logintitle{background: url(icon/allbgs.png) no-repeat 0 -175px;}
 .order_r_box .l_order_des span i{margin-left:10px;}
 .order_r_box .l_order_des h3{color:#525151;font-size: 16px;margin-bottom:6px;}
 .order_r_box{padding-left:103px;}
-.order_r_box .choosebtn span{ display:block;background: url(icon/allbgs.png) no-repeat 0 -610px; width:23px;height:23px;margin-top:25px;}
-.order_r_box .choosed span{background-position: 0 -635px;margin-top:25px;}
+.order_r_box .choosebtn span{ display:block;background: url(icon/nochoose.png) no-repeat center center;width:48px;height:68px;background-size:24px 24px;}
+.order_r_box .choosed span{display:block;background: url(icon/choose.png) no-repeat  center center;width:48px;height:68px;background-size:24px 24px;}
 /*查询订单*/
-.noorder{background: url(icon/allbgs.png) no-repeat -769px -135px;height:100px;width:100%;margin:150px auto 20px;width:100px;}
+.noorder{background: url(icon/noorder.jpg) no-repeat;height:100px;width:100%;margin:150px auto 20px;width:100px;background-size: 84px auto;}
 .noorder_tips p{color:#919191;font-size: 14px;text-align: center;}
 .tips{width:100%;height:100%;overflow: hidden;background: rgba(0,0,0,.3);position:fixed;top:0;left:0;z-index: 99;display: -webkit-box;
 -webkit-box-align: center;-webkit-box-pack: center;}
 .tips_des{padding:25px 20px;background: #fff;width:80%;text-align: center;border-radius: 10px;font-size:35px;color:#ff6c4a;position: relative;
 max-width: 600px;}
-.tips_des .closed{position:absolute;top:-25px;right:-25px;background: url(icon/allbgs.png) no-repeat  0 -728px;width:30px;height:30px;}
+.tips_des .closed{position:absolute;top:-25px;right:-25px;background: url(icon/closed.png) no-repeat center center;width:30px;height:30px;background-size:24px 24px;}
 .tips_des p{color:#919191;font-size: 14px;line-height: 26px;}
 @media only screen and (max-width:340px ) {
 	.downcon .point{width:70%;}
