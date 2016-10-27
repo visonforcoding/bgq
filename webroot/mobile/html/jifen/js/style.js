@@ -158,7 +158,10 @@ $.func = {
                 window.holdLoad = false;
                 res = JSON.parse(res);
                 console.log(res.data);
-                if (res.status !== 0) window.holdLoad = true;
+                if (res.status !== 0){
+                    window.holdLoad = true;
+                    $('.wraper').html($('#noOrder').html());
+                }
                 $('#totalOrders').html(res.data.totalCount);
                 $('#totalMoney').html(res.data.totalMoney);
                 if(res.data.totalCount == 0){
