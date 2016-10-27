@@ -21,23 +21,52 @@
         <div class="wraper">
             <div class="withdraw_cash_box">
                 <div class="inner">
-                	<h3>请填写收款账号</h3>
+                    <h3>请填写收款账号</h3>
                     <ul>
-                        <li class="wx_user nochoose choose">
-                        	<span>微信账号</span>
-                        	<div class="withdraw_text">
-                        		<input type="number" id="username"  placeholder="请输入手机号" style="line-height: 21px;" />
-                        	</div>
+                        <li class="wx_user nochoose choose" payType="1">
+                            <span>微信账号</span>
+                            <div class="withdraw_text">
+                                <input type="text" id="username" name="wx" placeholder="请输入您的微信账号" style="line-height: 21px;" />
+                            </div>
                         </li>
-                        <li class="ali_user nochoose"><span>支付宝账号</span>
-                        	<div class="withdraw_text">
-                        		<input type="number" id="valid" style="line-height: 21px;" />
-                       		</div>
+                        <li class="ali_user nochoose" payType="2">
+                            <span>支付宝账号</span>
+                            <div class="withdraw_text">
+                                <input type="text" id="valid" name="ali" placeholder="请输入您的支付宝账号" style="line-height: 21px;" />
+                            </div>
                         </li>
                     </ul>
-                    <a href="javascript:void(0);" class="btn bg_items mt37" id="loginbtn">提交</a>
+                    <input type="hidden" name="type" value="1" />
+                    <a href="javascript:void(0);" class="btn bg_items mt37" id="submit">提交</a>
                 </div>
             </div>
         </div>
+        <script>
+            $('.nochoose').on('click', function(){
+                if($(this).hasClass('choose')){
+                    return false;
+                } else {
+                    $(this).addClass('choose');
+                    $(this).siblings().removeClass('choose');
+                    $('input[name="type"]').val($(this).attr('payType'));
+                }
+            });
+            
+            $('#submit').on('click', function(){
+                if($('input[name="type"]').val() == 1 && $('input[name="wx"]').val() == ''){
+                    alert('请输入您的微信账号');
+                    return false;
+                }
+                if($('input[name="type"]').val() == 2 && $('input[name="ali"]').val() == ''){
+                    alert('请输入您的微支付宝账号');
+                    return false;
+                }
+                if($('input[name="type"]').val() == 1){
+                    $.func.exchangeCash($.func.getUrlParam('id'), $('input[name="wx"]').val());
+                } else {
+                    $.func.exchangeCash($('input[name="ali"]').val());
+                }
+            });
+        </script>
     </body>
 </html>

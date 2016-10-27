@@ -44,10 +44,18 @@ $.func = {
                 if (res.status == 0) {
                     $.func.dataToTpl('product', 'tpl', res.data.homePageProductResults, function(d){
                         d.img = d.images[0];
+                        if(d.productType == 8){
+                            d.link = 'exchange_cash.html?id='+d.productId;
+                        } else {
+                            d.link = 'choose_good.html';
+                        }
                         return d;
                     });
                     $.func.setCookie('userJiFen', res.data.userjifen);
                     $('#jifen').html(res.data.userjifen);
+                    $('.product').on('click', function () {
+                        $.func.checkjifen($('#jifen').html(), $(this).attr('link'));
+                    });
                 }
             }
         });
@@ -137,9 +145,17 @@ $.func = {
                 if (res.data.products.length === 0) window.holdLoad = true;
                 var html = $.func.dataToTpl('', 'tpl', res.data.products, function(d){
                     d.img = d.images[0];
+                    if(d.productType == 8){
+                        d.link = 'exchange_cash.html?id='+d.productId;
+                    } else {
+                        d.link = 'choose_good.html';
+                    }
                     return d;
                 });
                 $('#allGoods').append(html);
+                $('.product').on('click', function () {
+                    $.func.checkjifen($.func.getCookie('userJiFen'), $(this).attr('link'));
+                });
             }
         });
     },
@@ -328,6 +344,11 @@ $.func = {
         });
     },
     
+    /**
+     * 检查积分是否为0
+     * @param {type} jifen 积分
+     * @param {type} url 不为0跳转的页面
+     */
     checkjifen: function(jifen, url){
         if(jifen == 0){
             alert('您的积分为0');
@@ -335,6 +356,25 @@ $.func = {
         } else {
             location.href = url;
         }
+    },
+    
+    exchangeCash: function(id, account){
+        var phone = $.func.getCookie('phone');
+        if(!phone) return;
+        $.ajax({
+            type: 'post',
+            url: 'http://182.48.107.222:8080/IntegralStore/cash?channelId=toprays&userName='+phone+'&productId='+id+'&cashAccount='+account,
+            success: function (res) {
+                window.holdLoad = false;
+                res = JSON.parse(res);
+                console.log(res.data);
+                if (res.status !== 0) {
+                    alert(res.msg);
+                    return false;
+                };
+                alert('您的订单号为：'+res.data.orderNo);
+            }
+        });
     },
     
     /**
@@ -407,4 +447,14 @@ $.func = {
     jsonToTpl:function (json,tpl){
         return tpl.replace(/{#(\w+)#}/g,function(a,b){return json[b]===0?'0':(json[b]||'');});
     },
+    
+    /**
+     * 获取链接的参数
+     * @param {type} name 参数名
+     */
+    getUrlParam: function(name) {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r != null)return unescape(r[2]); return null;
+   }
 };
