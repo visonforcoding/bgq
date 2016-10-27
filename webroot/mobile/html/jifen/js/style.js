@@ -282,7 +282,7 @@ $.func = {
     choose: function (){
         $('body').on('tap', function (e) {
             var target = e.srcElement || e.target, em = target, i = 1;
-            while (em && !em.id && i <= 3) {
+            while (em && !em.id && i <= 5) {
                 em = em.parentNode;
                 i++;
             }
