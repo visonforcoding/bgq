@@ -161,6 +161,7 @@ $.func = {
                 if (res.status !== 0){
                     window.holdLoad = true;
                     $('.wraper').html($('#noOrder').html());
+                    return false;
                 }
                 $('#totalOrders').html(res.data.totalCount);
                 $('#totalMoney').html(res.data.totalMoney);
