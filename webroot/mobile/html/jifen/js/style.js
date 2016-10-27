@@ -358,6 +358,11 @@ $.func = {
         }
     },
     
+    /**
+     * 兑换现金
+     * @param {type} id 产品id
+     * @param {type} account 微信或支付宝账号
+     */
     exchangeCash: function(id, account){
         var phone = $.func.getCookie('phone');
         if(!phone) return;
@@ -372,7 +377,31 @@ $.func = {
                     alert(res.msg);
                     return false;
                 };
-                alert('您的订单号为：'+res.data.orderNo);
+                location.href = 'order_query.html';
+            }
+        });
+    },
+    
+    /**
+     * 流量充值
+     * @param {type} id 产品id
+     * @param {type} rechargePhone 充值的手机号
+     */
+    flowRecharge: function (id, rechargePhone){
+        var phone = $.func.getCookie('phone');
+        if(!phone) return;
+        $.ajax({
+            type: 'post',
+            url: 'http://182.48.107.222:8080/IntegralStore/flow/buy?channelId=toprays&userName='+phone+'&productId='+id+'&flowPhone='+rechargePhone,
+            success: function (res) {
+                window.holdLoad = false;
+                res = JSON.parse(res);
+                console.log(res.data);
+                if (res.status !== 0) {
+                    alert(res.msg);
+                    return false;
+                };
+                location.href = 'order_query.html';
             }
         });
     },
