@@ -25,7 +25,7 @@ background-size:20px 20px;}
 .itemtitle .more{font-size: 15px;background: url(icon/more.png) no-repeat  right center;width:80px;background-size:auto 12px;}
 .items_con dl{float:left;width:33%;text-align: center;padding-top:10px;border-right:1px #dedede solid;padding-bottom:10px;border-bottom:1px #dedede solid;}
 .items_con dl:nth-of-type(3n){border-right:1px transparent solid;}
-.items_con dl dt{width:76%;margin:0 auto;margin-bottom:8px;}
+.items_con dl dt{width:76%;margin:0 auto;margin-bottom:8px;height:53px;}
 .items_con dl dt img{width:100%;display: block;height:auto;}
 .items_con dl dd{font-size: 11px;margin-bottom:3px;}
 .items_price{color:#ff6c4a;}
@@ -66,7 +66,7 @@ background-size:18px 18px;}
 .cmcc .title h3 span{background: url(icon/lt.png) no-repeat left center;
 background-size:18px 18px;}
 .ct .con li{padding:15px 0;border-bottom:1px #d5d5d5 solid;}
-.ct .con span{display: inline-block;color:#545353;font-size:13px;vertical-align: top;}
+.ct .con span{display: inline-block;color:#545353;font-size:13px;vertical-align: top;max-width:55%;}
 .ct .con .get_gift{color:#fe8c5a;font-size:24px;padding-left:34px;width:130px;line-height: 35px;}
 .ct .con i{display: block;color:#8a8a8a;font-size: 11px;margin-top:5px;}
 .f_potion{position:fixed;width:100%;max-width:750px;margin:0 auto;bottom:0;background: #fff;}
