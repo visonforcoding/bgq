@@ -185,6 +185,7 @@ $.func = {
                         return d;
                     });
                     $('#order').append(html);
+                    $('#order_detail').show();
                 }
             }
         });
