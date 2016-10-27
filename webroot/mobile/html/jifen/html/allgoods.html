@@ -20,36 +20,36 @@
         </header>
         <div class="wraper">
             <div class="home_item btop mt10">
-                <div class="items_con">
-                    <a href="javascript:void(0)" id="allGoods"></a>
+                <div class="items_con" id="allGoods">
                 </div>
             </div>
         </div>
         <script type="text/html" id="tpl">
-            <dl>
-                <dt><img src="{#img#}"/></dt>
-                <dd class="items_price">￥ {#exchangePrice#}</dd>
-                <dd>{#productName#}</dd>
-            </dl>
+            <div link="{#link#}" class="product" style="width: 33.3%;float: left;">
+                <dl>
+                    <dt><img src="{#img#}"/></dt>
+                    <dd class="items_price">￥ {#exchangePrice#}</dd>
+                    <dd>{#productName#}</dd>
+                </dl>
+            </div>
         </script>
         <script>
             var page = 1;
             $.func.getProducts(page, 30);
             $(window).on("scroll", function () {
-                if(window.holdLoad) return;
+                if (window.holdLoad)
+                    return;
                 window.holdLoad = true;
                 var st = document.body.scrollTop;
                 if (st >= (($(document).height() - $(window).height()) - 300)) {
                     page++;
                     $.func.getProducts(page, 30);
-                } else{
+                } else {
                     window.holdLoad = false;
                 }
             });
+
             
-            $('#allGoods').on('click', function(){
-                $.func.checkjifen($.func.getCookie('userJiFen'), 'choose_good.html');
-            });
         </script>
     </body>
 </html>
