@@ -65,7 +65,7 @@ background-size:18px 18px;padding-left:27px;}
 background-size:18px 18px;}
 .cmcc .title h3 span{background: url(icon/lt.png) no-repeat left center;
 background-size:18px 18px;}
-.ct .con li{padding:15px 0;border-bottom:1px #d5d5d5 solid;padding-left:20px;font-size:0;}
+.ct .con li{padding:15px 0;border-bottom:1px #d5d5d5 solid;padding-left:20px;font-size:0;display:-webkit-flex;display: flex;-webkit-align-items: center;align-items: center;}
 .ct .con span{display: inline-block;color:#545353;font-size:13px;vertical-align: top;max-width:55%;word-break:break-all}
 .ct .con .get_gift{color:#fe8c5a;font-size:24px;width:120px;line-height: 35px;text-align: center;}
 .ct .con i{display: block;color:#8a8a8a;font-size: 12px;margin-top:5px;}
