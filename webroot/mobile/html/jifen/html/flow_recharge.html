@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="format-detection" content="telephone=no, email=no" />
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <title>积分换-流量充值</title>
+        <link rel="stylesheet" type="text/css" href="../css/basic.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+        <script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/style.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+        <header>
+            <div class="inner">
+                <h1 class="logintitle" style="float: left;width: 1.2rem;" onclick="history.go(-1)"></h1>
+                <h1>流量充值</h1>
+            </div>
+        </header>
+        <div class="wraper">
+            <div class="withdraw_cash_box">
+                <div class="inner">
+                    <h3><img src="../images/flow.png" style="width:100%;height:auto;" /></h3>
+                    <div style="width:290px;height: 45px;background-color: white;margin: 21px auto 0;border: 1px solid #e5e5e5;text-align: center">
+                        <input class="fz16" type="number" name="recharge_phone" placeholder="请输入你的手机号码" style="text-align: center;line-height: 45px;" />
+                    </div>
+                    <a href="javascript:void(0);" class="btn bg_items mt37" id="submit" style="width:290px;margin: 18px auto 0;">确定</a>
+                </div>
+            </div>
+        </div>
+        <script>
+            $('#submit').on('click', function(){
+                if($('input[name="recharge_phone"]').val() == ''){
+                    alert('请输入您需要充值的手机号码');
+                    return false;
+                }
+                $.func.flowRecharge($.func.getUrlParam('id'), $('input[name="recharge_phone"]').val());
+            });
+        </script>
+    </body>
+</html>

@@ -47,10 +47,20 @@ $.func = {
                 if (res.status == 0) {
                     $.func.dataToTpl('product', 'tpl', res.data.homePageProductResults, function(d){
                         d.img = d.images[0];
-                        if(d.productType == 8){
-                            d.link = 'exchange_cash.html?id='+d.productId;
-                        } else {
-                            d.link = 'choose_good.html';
+//                        if(d.productType == 8){
+//                            d.link = 'exchange_cash.html?id='+d.productId;
+//                        } else {
+//                            d.link = 'choose_good.html';
+//                        }
+                        switch (d.productType){
+                            case 6:
+                                d.link = 'flow_recharge.html?id='+d.productId;
+                                break;
+                            case 8:
+                                d.link = 'exchange_cash.html?id='+d.productId;
+                                break;
+                            default :
+                                d.link = 'choose_good.html';
                         }
                         return d;
                     });
