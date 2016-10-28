@@ -1,9 +1,6 @@
 <div class="wraper">
-        <div style="width: 100%;">
-<!--            <h1><img src="../images/logo-wx.png"/></h1>
-            <h3 style="display: inline-block;"><span>来这里 ，圈子就活了！</span></h3>
-            <a href="wx-download.html" class="green-btn">立即下载</a>-->
-        </div>
+    <div style="width: 100%;height: 1.4rem;">
+    </div>
     <div class="bgb_down_des">
         <div class="down_app">
             <div class="down_logo"><img src="/mobile/images/logo-wx1.png"/></div>
