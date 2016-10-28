@@ -1,4 +1,6 @@
 <div class="wraper">
+    <div class="transmitpage clearfix">
+    </div>
     <div class="bgb_down_des">
         <div class="down_app">
             <div class="down_logo"><img src="/mobile/images/logo-wx1.png"/></div>
