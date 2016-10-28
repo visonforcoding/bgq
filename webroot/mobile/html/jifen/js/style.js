@@ -493,7 +493,7 @@ $.func = {
         return html.join('');
     },
     
-    //返回id查找原素，没有找到时，防止为空，会构造一个
+    //返回id查找元素，没有找到时，防止为空，会构造一个
     id:function(str){
         return document.getElementById(str) || document.createElement('span');
     },
