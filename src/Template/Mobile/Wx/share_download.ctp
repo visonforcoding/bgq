@@ -1,5 +1,5 @@
 <div class="wraper">
-    <div style="width: 100%;height: 1.4rem;">
+    <div style="width: 100%;height: 1.4rem;background-color: white;">
     </div>
     <div class="bgb_down_des">
         <div class="down_app">
