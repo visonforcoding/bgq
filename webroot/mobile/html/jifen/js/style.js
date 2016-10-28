@@ -14,7 +14,7 @@ $.func = {
             }
             $.ajax({
                 type: 'post',
-                url: 'http://182.48.107.222:8080/IntegralStore/user/login?channelId=toprays&userName=' + user + '&inviterAccount=' + inviterAccount,
+                url: 'http://183.62.161.181:8080/IntegralStore/user/login?channelId=toprays&userName=' + user + '&inviterAccount=' + inviterAccount,
                 success: function (res) {
                     res = JSON.parse(res);
                     console.log(res);
@@ -40,7 +40,7 @@ $.func = {
         if(!phone) return;
         $.ajax({
             type: 'post',
-            url: 'http://182.48.107.222:8080/IntegralStore/goods/indexlist?channelId=toprays&pageSize=6&userName='+phone,
+            url: 'http://183.62.161.181:8080/IntegralStore/goods/indexlist?channelId=toprays&pageSize=6&userName='+phone,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res);
@@ -85,7 +85,7 @@ $.func = {
         if(!phone) return;
         $.ajax({
             type: 'post',
-            url: 'http://182.48.107.222:8080/IntegralStore/charge/getAvailMoneyByPhone?channelId=toprays&phone='+phone,
+            url: 'http://183.62.161.181:8080/IntegralStore/charge/getAvailMoneyByPhone?channelId=toprays&phone='+phone,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res);
@@ -107,7 +107,7 @@ $.func = {
         if(!phone) return;
         $.ajax({
             type: 'post',
-            url: 'http://182.48.107.222:8080/IntegralStore/charge?channelId=toprays&userName='+phone+'&chargePhone='+chargePhone+'&money='+chargeMoney+'&chargeNumber='+chargeNo,
+            url: 'http://183.62.161.181:8080/IntegralStore/charge?channelId=toprays&userName='+phone+'&chargePhone='+chargePhone+'&money='+chargeMoney+'&chargeNumber='+chargeNo,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
@@ -127,7 +127,7 @@ $.func = {
     chargeStatus: function(chargeNo){
         $.ajax({
             type: 'post',
-            url: 'http://182.48.107.222:8080/IntegralStore/charge/query?channelId=toprays&chargeNo='+chargeNo,
+            url: 'http://183.62.161.181:8080/IntegralStore/charge/query?channelId=toprays&chargeNo='+chargeNo,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
@@ -155,7 +155,7 @@ $.func = {
     getProducts: function(page, size){
         $.ajax({
             type: 'post',
-            url: 'http://182.48.107.222:8080/IntegralStore/goods/list?channelId=toprays&pageIndex='+page+'&pageSize='+size,
+            url: 'http://183.62.161.181:8080/IntegralStore/goods/list?channelId=toprays&pageIndex='+page+'&pageSize='+size,
             success: function (res) {
                 window.holdLoad = false;
                 res = JSON.parse(res);
@@ -191,7 +191,7 @@ $.func = {
         if(!phone) return;
         $.ajax({
             type: 'post',
-            url: 'http://182.48.107.222:8080/IntegralStore/goods/order?channelId=toprays&userName='+phone+'&pageIndex='+page+'&pageSize='+size,
+            url: 'http://183.62.161.181:8080/IntegralStore/goods/order?channelId=toprays&userName='+phone+'&pageIndex='+page+'&pageSize='+size,
             success: function (res) {
                 window.holdLoad = false;
                 res = JSON.parse(res);
@@ -235,7 +235,7 @@ $.func = {
     getJiFen: function(){
         $.ajax({
             type: 'post',
-            url: 'http://182.48.107.222:8080/IntegralStore/cmd/query?channelId=toprays',
+            url: 'http://183.62.161.181:8080/IntegralStore/cmd/query?channelId=toprays',
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
@@ -280,7 +280,7 @@ $.func = {
         if(!phone) return;
         $.ajax({
             type: 'post',
-            url: 'http://182.48.107.222:8080/IntegralStore/goods/buy?channelId=toprays&userName='+phone+'&productsId='+products,
+            url: 'http://183.62.161.181:8080/IntegralStore/goods/buy?channelId=toprays&userName='+phone+'&productsId='+products,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
@@ -303,7 +303,7 @@ $.func = {
         if(!phone) return;
         $.ajax({
             type: 'post',
-            url: 'http://182.48.107.222:8080/IntegralStore/canchargegoods/list?channelId=toprays&pageIndex='+page+'&pageSize='+size+'&userName='+phone,
+            url: 'http://183.62.161.181:8080/IntegralStore/canchargegoods/list?channelId=toprays&pageIndex='+page+'&pageSize='+size+'&userName='+phone,
             success: function (res) {
                 window.holdLoad = false;
                 res = JSON.parse(res);
@@ -399,7 +399,7 @@ $.func = {
         if(!phone) return;
         $.ajax({
             type: 'post',
-            url: 'http://182.48.107.222:8080/IntegralStore/cash?channelId=toprays&userName='+phone+'&productId='+id+'&cashAccount='+account,
+            url: 'http://183.62.161.181:8080/IntegralStore/cash?channelId=toprays&userName='+phone+'&productId='+id+'&cashAccount='+account,
             success: function (res) {
                 window.holdLoad = false;
                 res = JSON.parse(res);
@@ -423,7 +423,7 @@ $.func = {
         if(!phone) return;
         $.ajax({
             type: 'post',
-            url: 'http://182.48.107.222:8080/IntegralStore/flow/buy?channelId=toprays&userName='+phone+'&productId='+id+'&flowPhone='+rechargePhone,
+            url: 'http://183.62.161.181:8080/IntegralStore/flow/buy?channelId=toprays&userName='+phone+'&productId='+id+'&flowPhone='+rechargePhone,
             success: function (res) {
                 window.holdLoad = false;
                 res = JSON.parse(res);
