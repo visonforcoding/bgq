@@ -62,9 +62,9 @@
                     return false;
                 }
                 if($('input[name="type"]').val() == 1){
-                    $.func.exchangeCash($.func.getUrlParam('id'), $('input[name="wx"]').val());
+                    $.func.exchangeCash($.func.getUrlParam('id'), '微信:'+$('input[name="wx"]').val());
                 } else {
-                    $.func.exchangeCash($('input[name="ali"]').val());
+                    $.func.exchangeCash($.func.getUrlParam('id'), '支付宝:'+$('input[name="ali"]').val());
                 }
             });
         </script>

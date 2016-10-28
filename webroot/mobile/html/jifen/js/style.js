@@ -23,6 +23,9 @@ $.func = {
                         $.func.setCookie('headImgUrl', res.data.headImgUrl);
                         $.func.setCookie('phone', user);
                         location.href = 'home.html';
+                    } else {
+                        alert(res.msg);
+                        return false;
                     }
                 }
             });
@@ -56,6 +59,9 @@ $.func = {
                     $('.product').on('click', function () {
                         $.func.checkjifen($('#jifen').html(), $(this).attr('link'));
                     });
+                } else {
+                    alert(res.msg);
+                    return false;
                 }
             }
         });
@@ -124,6 +130,9 @@ $.func = {
                     } else {
                         $.func.chargeStatus(chargeNo);
                     }
+                } else {
+                    alert(res.msg);
+                    return false;
                 }
             }
         });
@@ -141,7 +150,10 @@ $.func = {
                 window.holdLoad = false;
                 res = JSON.parse(res);
                 console.log(res.data);
-                if (res.status !== 0) window.holdLoad = true;
+                if (res.status !== 0) {
+                    window.holdLoad = true;
+                    return false;
+                }
                 if (res.data.products.length === 0) window.holdLoad = true;
                 var html = $.func.dataToTpl('', 'tpl', res.data.products, function(d){
                     d.img = d.images[0];
@@ -217,32 +229,34 @@ $.func = {
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
-                if (res.status == 0) {
-                    if(!res.data.cmds.length) return;
-                    var d = {};
-                    for(var i=0;i<res.data.cmds.length;i++){
-                        var vendor = res.data.cmds[i].vendorName;
-                        if(!d[vendor])
-                            d[vendor] = [];
-                        if(res.data.cmds[i].cmdType != 2){
-                            d[vendor].push(res.data.cmds[i]);
-                        } else {
-                            $('#'+vendor).html(res.data.cmds[i].smsContent);
-                        }
-                    }
-                    if(d['中国移动'] && d['中国移动'])
-                    $.func.dataToTpl('CMCC', 'tpl', d['中国移动'], function(q){
-                        return q;
-                    });
-                    if(d['中国联通'])
-                    $.func.dataToTpl('CU', 'tpl', d['中国联通'], function(q){
-                        return q;
-                    });
-                    if(d['中国电信'])
-                    $.func.dataToTpl('CT', 'tpl', d['中国电信'], function(q){
-                        return q;
-                    });
+                if (res.status !== 0) {
+                    alert(res.msg);
+                    return false;
                 }
+                if(!res.data.cmds.length) return;
+                var d = {};
+                for(var i=0;i<res.data.cmds.length;i++){
+                    var vendor = res.data.cmds[i].vendorName;
+                    if(!d[vendor])
+                        d[vendor] = [];
+                    if(res.data.cmds[i].cmdType != 2){
+                        d[vendor].push(res.data.cmds[i]);
+                    } else {
+                        $('#'+vendor).html(res.data.cmds[i].smsContent);
+                    }
+                }
+                if(d['中国移动'] && d['中国移动'])
+                $.func.dataToTpl('CMCC', 'tpl', d['中国移动'], function(q){
+                    return q;
+                });
+                if(d['中国联通'])
+                $.func.dataToTpl('CU', 'tpl', d['中国联通'], function(q){
+                    return q;
+                });
+                if(d['中国电信'])
+                $.func.dataToTpl('CT', 'tpl', d['中国电信'], function(q){
+                    return q;
+                });
             }
         });
     },
@@ -260,7 +274,10 @@ $.func = {
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
-                if (res.status !== 0) return false;
+                if (res.status !== 0) {
+                    alert(res.msg);
+                    return false;
+                }
                 location.href = 'order_query.html';
             }
         });
@@ -281,7 +298,11 @@ $.func = {
                 window.holdLoad = false;
                 res = JSON.parse(res);
                 console.log(res.data);
-                if (res.status !== 0) window.holdLoad = true;
+                if (res.status !== 0) {
+                    window.holdLoad = true;
+                    alert(res.msg);
+                    return false;
+                }
                 if (res.data.products.length === 0) window.holdLoad = true;
                 var html = $.func.dataToTpl('', 'tpl', res.data.products, function(d){
                     d.img = d.images[0];
@@ -485,5 +506,6 @@ $.func = {
         var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
         if(r != null)return unescape(r[2]); return null;
-   }
+   },
+   
 };
