@@ -6,7 +6,7 @@
         </div>
         <span class="green-btn">立即下载</span>
     </div>-->
-    <div class="transmitpage clearfix">
+    <div class="transmitpage clearfix" hidden id="share_download">
         <div>
             <h1><img src="/mobile/images/logo-wx.png"/></h1>
             <h3><span>来这里 ，圈子就活了！</span></h3>
