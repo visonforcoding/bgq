@@ -33,7 +33,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="industry">业务标签</label>
+                <label for="industry">行业标签</label>
                 <?= $this->cell('Industry::push', [['single']]); ?>
             </div>
             <div class="form-group">
