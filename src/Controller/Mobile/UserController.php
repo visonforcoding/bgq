@@ -210,6 +210,14 @@ class UserController extends AppController {
         if ($this->request->is('ajax')) {
             $user = $this->User->newEntity();
             $data = $this->request->data();
+            $data['company'] = trim($data['company']);
+            if($data['company'] == ''){
+                return $this->Util->ajaxReturn(false, '请填写公司名称');
+            }
+            $data['position'] = trim($data['position']);
+            if($data['position'] == ''){
+                return $this->Util->ajaxReturn(false, '请填写部门/职务');
+            }
             $data['enabled'] = 1;
             $data['phone'] = $this->request->session()->read('reg.phone');
             $ckReg = $this->User->find()->where(['phone'=>$data['phone']])->first();
