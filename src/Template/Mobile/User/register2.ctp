@@ -245,7 +245,7 @@
         cart.on('tap', function () {//机构
             var that = $(this);
             fixed(that);
-        })
+        });
 
         $('#org .cart>li').on('tap', function () {  //机构sub
             agency = $(this).data('val');
@@ -267,12 +267,25 @@
             $('.markbox ul[data-id = ' + $value + ']').addClass('shows');
             that.children('span').addClass('active');
         }
+        
         $('#submit').click(function () {
             if($(this).hasClass('submited')){
                 return false;
             }
             var industry_ids = [];
-            var data = $('form').serializeArray()
+            var data = $('form').serializeArray();
+            if($('input[name="truename"]').val() == ''){
+                $.util.alert('请填写姓名');
+                return false;
+            }
+            if($('input[name="company"]').val() == ''){
+                $.util.alert('请填写公司名称');
+                return false;
+            }
+            if($('input[name="position"]').val() == ''){
+                $.util.alert('请填写部门/职务');
+                return false;
+            }
             if(!city){
                 city =  $('.b-input').find('input').val();
                 if(!city){
@@ -289,18 +302,17 @@
                     formdata[elm.name] = elm.value;
                 }
             });
-
+            if (!agency) {
+                $.util.alert('还没选择机构哦');
+                return false;
+            }
             if (industry_ids.length == 0) {
                 $.util.alert('还没选择行业标签哦');
                 return false;
             }
-            
             if (industry_ids.length > 4) {
                 $.util.alert('行业标签最多只能选择4个');
                 return false;
-            }
-            if (!agency) {
-                $.util.alert('还没选择机构哦');
             }
             formdata['industries[_ids]'] = industry_ids;
             formdata['city'] = city;
@@ -316,7 +328,7 @@
                     }
                     setTimeout(function () {
                         $.util.alert(res.msg);
-                    }, '1000')
+                    }, '1000');
                     window.location.href = res.url;
                 } else {
                     $('#submit').removeClass('submited');

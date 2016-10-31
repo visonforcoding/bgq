@@ -17,7 +17,7 @@
         <div class="a-s-title">
             <span class="orgname active">选择行业标签</span>
         </div>
-        <ul class="a-s-mark s-width" id="industry">
+        <ul class="a-s-mark" id="industry">
         </ul>
     </div>
     <section id="search"></section>
@@ -31,7 +31,7 @@
             <a href="/meet/view/{#id#}"><span class="head-img"><img src="{#avatar#}"/><i></i></span></a>
             <div class="vipinfo">
                 <a href="/meet/view/{#id#}">
-                    <h3><div class="l-name">{#truename#}</div>{#city#}<span class="meetnum">{#meet_nums#}人见过</span></h3>
+                    <h3><div class="l-name">{#truename#}</div><span class="meetnum">{#meet_nums#}人见过</span></h3>
                     <span class="job">{#company#}&nbsp;&nbsp;{#position#}</span>
                 </a>
                 <div class="mark bgblue">
@@ -96,23 +96,21 @@
         }
     });
     
-    $('.a-s-title').on('touchstart',function(){
+    $('.a-s-title').on('touchstart', function () {
         $('.orgname').toggleClass('active');
-        if($('.a-s-mark').hasClass('disp')){
-            $('.a-s-mark').removeClass('disp').addClass('nblock');
-        }else if($('.a-s-mark').hasClass('nblock')){
-            $('.a-s-mark').removeClass('nblock').addClass('disp');
-        }else{
-            $('.a-s-mark').addClass('disp');
+        if ($('.a-s-mark').hasClass('a-s-width')) {
+            $('.a-s-mark').removeClass('a-s-width');
+        } else {
+            $('.a-s-mark').addClass('a-s-width');
         }
     });
     
-    $('.sel-area').on('tap',function(){
-        if($('.arealist').hasClass('hide')){
-            setTimeout(function(){
+    $('.sel-area').on('tap', function () {
+        if ($('.arealist').hasClass('hide')) {
+            setTimeout(function () {
                 $('.arealist').toggleClass('hide');
                 $('.arealist').hide();
-            },400);
+            }, 400);
         } else {
             $('.arealist').toggleClass('hide');
             $('.arealist').show();
@@ -122,6 +120,7 @@
     
     
     var search_data = {};
+    var industry_id;
     function industryTap(em){
         if($(em).hasClass('active')){
             $(em).removeClass('active');
@@ -132,15 +131,13 @@
         $('#search').html('');
         $('.industry').removeClass('active');
         $(em).addClass('active');
-        var industry_id = $(em).attr('industry_id');
+        industry_id = $(em).attr('industry_id');
         $('input[name="industry_id"]').val(industry_id);
         $('.orgname').toggleClass('active');
-        if($('.a-s-mark').hasClass('disp')){
-            $('.a-s-mark').removeClass('disp').addClass('nblock');
-        } else if($('.a-s-mark').hasClass('nblock')) {
-            $('.a-s-mark').removeClass('nblock').addClass('disp');
+        if ($('.a-s-mark').hasClass('a-s-width')) {
+            $('.a-s-mark').removeClass('a-s-width');
         } else {
-            $('.a-s-mark').addClass('disp');
+            $('.a-s-mark').addClass('a-s-width');
         }
 
         if(search_data[industry_id]){

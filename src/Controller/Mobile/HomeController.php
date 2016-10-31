@@ -1663,7 +1663,7 @@ class HomeController extends AppController {
         $user = $user->where($where)->page($page, $this->limit)->toArray();
         if($user !== false){
             if($user == null){
-                return $this->Util->ajaxReturn(false, '暂无同行');
+                return $this->Util->ajaxReturn(false, '暂无结果');
             } else {
                 return $this->Util->ajaxReturn(['status'=>true, 'data'=>$user]);
             }
