@@ -297,7 +297,7 @@ class ActivityController extends AppController {
                                 'relate_id' => $activityApply->id, //预定表的id
                                 'user_id' => $this->user->id,
                                 'seller_id' => -1,     //活动报名的收入 固定给-1 的用户
-                                'order_no' => time() . $activity->user_id . $id . createRandomCode(2, 2),
+                                'order_no' => time() . $activity->user_id . $id . createRandomCode(4, 1),
                                 'fee' => 0, // 实际支付的默认值
                                 'price' => $activity->apply_fee,
                                 'remark' => '活动报名' . $activity->title
@@ -346,7 +346,7 @@ class ActivityController extends AppController {
                                 'relate_id' => $activityApply->id, //预定表的id
                                 'user_id' => $this->user->id,
                                 'seller_id' => $activity->user_id,
-                                'order_no' => time() . $activity->user_id . $id . createRandomCode(2, 2),
+                                'order_no' => time() . $activity->user_id . $id . createRandomCode(4, 1),
                                 'fee' => 0, // 实际支付的默认值
                                 'price' => $activity->apply_fee,
                                 'remark' => '活动报名' . $activity->title
