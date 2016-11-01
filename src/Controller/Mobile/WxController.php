@@ -193,6 +193,7 @@ class WxController extends AppController {
         $order_detail->type = $type;
         $out_trade_no = $order->order_no;
         $openid = $this->user->wx_openid;
+        \Cake\Log\Log::error('数据库openid为:'.$openid,'devlog');
         if (empty($openid)) {
             
         }
@@ -207,6 +208,7 @@ class WxController extends AppController {
             $this->loadComponent('Alipay');
             $aliPayParameters = $this->Alipay->setPayParameter($out_trade_no, $title, $fee, $body);
         }
+        
         if ($openid) {
             $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, null, $isApp);
         }
