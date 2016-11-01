@@ -834,7 +834,7 @@ class MeetController extends AppController {
                 }])
                 ->select(['id', 'truename', 'position', 'company', 'avatar', 'meet_nums'])
                 ->where(['enabled'=>'1', 'level'=>'2'])
-                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
+                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc', 'meet_nums'])
                 ->page($page, $this->limit)
                 ->formatResults(function($items) {
                     return $items->map(function($item) {

@@ -59,8 +59,9 @@
                     {#address#}
                 </span>
                 <div class="a-other-info">
-                    <span class="a-number">{#apply_nums#}人报名</span>
-                    {#region_name#}<a href="/activity/search/{#series_id#}">{#series_name#}</a>
+                    <a href="/activity/search/{#series_id#}">{#series_name#}</a>
+                    <span class="a-number" style="{#display#}">{#apply_nums#}人报名</span>
+                    {#region_name#}
                     <span class="a-date">{#activity_time#}</span>
                 </div>
             </div>
@@ -117,6 +118,7 @@
             d.series_name = d.series_id !== '' ? window.series[d.series_id] : '';
             d.region_name = d.region ? '<a>' + d.region.name + '</a>' : '';
             d.cover = d.thumb ? d.thumb : d.cover;
+            d.display = d.is_show_apply ? '' : 'display:none;';
             if(d.cover){
                 d.img = '<img src="' + d.cover + '"/>';
             }
