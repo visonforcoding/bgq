@@ -186,8 +186,8 @@ class AppController extends Controller {
                     $this->loadComponent('Wx');
                     $res = $this->Wx->getUser();
                     //微信静默登录
-                    \Cake\Log\Log::debug('静默登录', 'devlog');
-                    \Cake\Log\Log::debug($res, 'devlog');
+//                    \Cake\Log\Log::debug('静默登录', 'devlog');
+//                    \Cake\Log\Log::debug($res, 'devlog');
                     $this->request->session()->write('Login.wxbase', true);
                     $user = false;
                     $UserTable = \Cake\ORM\TableRegistry::get('User');
@@ -221,7 +221,7 @@ class AppController extends Controller {
                     }
                 }
                 //如果是微信 静默授权页获取openid
-                \Cake\Log\Log::debug('进行静默登陆', 'devlog');
+//                \Cake\Log\Log::debug('进行静默登陆', 'devlog');
                 $this->loadComponent('Wx');
                 //$this->request->session()->delete('Login.wxbase');  //每次还是会进行静默登陆，但是不会死循环
                 return $this->Wx->getUserJump(true, true);  //跳转至微信服务器
