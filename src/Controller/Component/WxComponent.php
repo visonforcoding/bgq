@@ -333,7 +333,7 @@ class WxComponent extends Component {
         $response = $httpClient->get($url);
         if($response->isOk()){
             $res = $response->body();
-            \Cake\Log\Log::debug($res,'devlog');
+//            \Cake\Log\Log::debug($res,'devlog');
         }
        $image = \Intervention\Image\ImageManagerStatic::make($res);
         if($zip){
