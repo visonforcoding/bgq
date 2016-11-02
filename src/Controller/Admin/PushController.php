@@ -115,18 +115,18 @@ class PushController extends AppController {
             } else {
                 if($url){
                     if(stripos($url, 'm.chinamatop.com') !== false){
-                        $extra['extra']['url'] = $url;
+                        $extra['url'] = $url;
                     } else {
-                        $extra['extra']['url'] = 'http://m.chinamatop.com' . $url;
+                        $extra['url'] = 'http://m.chinamatop.com' . $url;
                     }
                 } else {
-                    $extra['extra'] = [];
+                    $extra = [];
                 }
                 $query = $UsermsgTable->query()->insert(['user_id', 'title', 'msg', 'url', 'create_time']);
                 $data = [
                     'title' => $title,
                     'msg' => $content,
-                    'url' => !empty($extra['extra']) ? $extra['extra']['url'] : 'javascript:void(0)',
+                    'url' => !empty($extra) ? $extra['url'] : 'javascript:void(0)',
                     'create_time' => date('Y-m-d H:i:s')
                 ];
                 foreach($res as $k=>$v){
@@ -137,10 +137,10 @@ class PushController extends AppController {
                 }
                 $this->loadComponent('Push');
                 if($industry_id === 'all' && empty($keyword)){
-                    $push_res = $this->Push->sendAll($title, $content, $title, true, $extra);
+                    $push_res = $this->Push->sendAll($title, $content, $title, false, $extra);
                     $type = 1;
                 } else {
-                    $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true, $extra);
+                    $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', false, $extra);
                     $type = 3;
                 }
                 $query->execute();
@@ -155,7 +155,7 @@ class PushController extends AppController {
                     'title' => $title,
                     'get_message_uid' => serialize($uid),
                     'body' => $content,
-                    'extra' => $extra['extra']['url'],
+                    'extra' => $extra['url'],
                     'type' => $type,
                     'remark' => $remark,
                     'is_success' => $is_success
