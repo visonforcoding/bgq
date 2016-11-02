@@ -195,7 +195,10 @@ class WxController extends AppController {
         $openid = $this->user->wx_openid;
         \Cake\Log\Log::error('数据库openid为:'.$openid,'devlog');
         if (empty($openid)) {
-            
+            $UserTable = \Cake\ORM\TableRegistry::get('User');
+            $user = $UserTable->get($this->user->id);
+            $openid = $user->wx_openid;
+            \Cake\Log\Log::error('重新获取数据库openid为:'.$openid,'devlog');
         }
         $fee = $order->price;  //支付金额(分)
         $this->loadComponent('Wxpay');
