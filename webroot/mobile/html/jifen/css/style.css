@@ -19,7 +19,7 @@ header h1.logintitle{background: url(icon/toback.png) no-repeat left center;back
 .withdraw_cash_box li.choose input{color:#454545;}
 /*主页*/
 .quit_login{color:#fff;font-size:14px;}
-.home_head{position:relative;height:28px;line-height: 28px;}
+.home_head{position:relative;height:42px;line-height: 42px;}
 .home_title{background: url(icon/allbgs.png) no-repeat -606px 0;display: block;width:74px;margin:0 auto;height:28px;}
 .quit_login{position:absolute;right:0;}
 .home_user_info{padding:31px 0 24px;}
