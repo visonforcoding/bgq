@@ -6,11 +6,12 @@
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <title>积分换-登录</title>
+        <title>换积分了-登录</title>
         <link rel="stylesheet" type="text/css" href="../css/basic.css"/>
         <link rel="stylesheet" type="text/css" href="../css/style.css"/>
         <script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../js/style.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" src="../js/des.js"></script>
     </head>
     <body>
         <header>
@@ -33,6 +34,7 @@
             $.func.setCookie('userJiFen', '');
             $.func.setCookie('headImgUrl', '');
             $.func.setCookie('phone', '');
+//            $.func.setCookie('channelId', $.func.getUrlParam('channelId')?$.func.getUrlParam('channelId'):'');
             $.func.login();
         </script>
     </body>

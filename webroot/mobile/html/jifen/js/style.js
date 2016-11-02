@@ -1,3 +1,4 @@
+var key = 'encrypt';
 $.func = {
     /**
      * 登录
@@ -12,9 +13,11 @@ $.func = {
                 alert('请输入手机号！');
                 return;
             }
+            var str = '?channelId=' + $.func.getCookie('channelId') + '&userName=' + user + '&inviterAccount=' + inviterAccount;
+            var code = strEnc(str, key);
             $.ajax({
                 type: 'post',
-                url: 'http://183.62.161.181:8080/IntegralStore/user/login?channelId=toprays&userName=' + user + '&inviterAccount=' + inviterAccount,
+                url: 'http://183.62.161.181:8080/IntegralStore/user/login?content='+code,
                 success: function (res) {
                     res = JSON.parse(res);
                     console.log(res);
@@ -22,7 +25,7 @@ $.func = {
                         $.func.setCookie('userJiFen', res.data.userJiFen);
                         $.func.setCookie('headImgUrl', res.data.headImgUrl);
                         $.func.setCookie('phone', user);
-                        location.href = 'home.html';
+//                        location.href = 'home.html';
                     } else {
                         alert(res.msg);
                         return false;
@@ -38,9 +41,11 @@ $.func = {
     homePageProduct: function () {
         var phone = $.func.getCookie('phone');
         if(!phone) return;
+        var str = '?channelId=' + $.func.getCookie('channelId') + '&pageSize=6&userName='+phone;
+        var code = strEnc(str, key);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/goods/indexlist?channelId=toprays&pageSize=6&userName='+phone,
+            url: 'http://183.62.161.181:8080/IntegralStore/goods/indexlist?content='+code,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res);
@@ -80,18 +85,23 @@ $.func = {
     /**
      * 获取兑换金额
      */
-    chargeMoney: function(){
-        var phone = $.func.getCookie('phone');
-        if(!phone) return;
+    chargeMoney: function(phone){
+        var str = '?channelId=' + $.func.getCookie('channelId') + '&phone='+phone;
+        var code = strEnc(str, key);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/charge/getAvailMoneyByPhone?channelId=toprays&phone='+phone,
+            url: 'http://183.62.161.181:8080/IntegralStore/charge/getAvailMoneyByPhone?content='+code,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res);
                 if (res.status !== 0) return false;
                 if(res.data.moneys.length === 0) return false;
+				//$('#chargeMoney').find("option").remove();
+				$('#chargeMoney').empty();
+				console.info(res);
+				//alert('kkkk');
                 for(var i=0;i<res.data.moneys.length;i++){
+					
                     $('#chargeMoney').append('<option value="'+res.data.moneys[i]+'">'+res.data.moneys[i]+'</option>');
                 };
             }
@@ -105,9 +115,11 @@ $.func = {
     chargeNo:function(chargePhone, chargeNo, chargeMoney){
         var phone = $.func.getCookie('phone');
         if(!phone) return;
+        var str = '?channelId=' + $.func.getCookie('channelId') + '&userName='+phone+'&chargePhone='+chargePhone+'&money='+chargeMoney+'&chargeNumber='+chargeNo;
+        var code = strEnc(str, key);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/charge?channelId=toprays&userName='+phone+'&chargePhone='+chargePhone+'&money='+chargeMoney+'&chargeNumber='+chargeNo,
+            url: 'http://183.62.161.181:8080/IntegralStore/charge?content='+code,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
@@ -125,18 +137,22 @@ $.func = {
      * @param {type} chargeNo 串码号
      */
     chargeStatus: function(chargeNo){
+        var str = '?channelId=' + $.func.getCookie('channelId') + '&chargeNo='+chargeNo;
+        var code = strEnc(str, key);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/charge/query?channelId=toprays&chargeNo='+chargeNo,
+            url: 'http://183.62.161.181:8080/IntegralStore/charge/query?content='+code,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
                 if (res.status == 0) {
+                    $('.tips').show();
                     if(res.data.chargeStatus == 4){
-                        $('.tips').show();
+                        
                     } else if(res.data.chargeStatus == 1){
                         $('#chargeStatus').html('兑换成功');
                         $('#chargeTips').hide();
+                        $('#jifen').html(res.data.userJiFen);
                     } else {
                         $.func.chargeStatus(chargeNo);
                     }
@@ -153,9 +169,11 @@ $.func = {
      * @param {type} page 页数
      */
     getProducts: function(page, size){
+        var str = '?channelId=' + $.func.getCookie('channelId') + '&pageIndex='+page+'&pageSize='+size;
+        var code = strEnc(str, key);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/goods/list?channelId=toprays&pageIndex='+page+'&pageSize='+size,
+            url: 'http://183.62.161.181:8080/IntegralStore/goods/list?content='+code,
             success: function (res) {
                 window.holdLoad = false;
                 res = JSON.parse(res);
@@ -189,9 +207,11 @@ $.func = {
     getOrders: function(page, size){
         var phone = $.func.getCookie('phone');
         if(!phone) return;
+        var str = '?channelId=' + $.func.getCookie('channelId') + '&userName='+phone+'&pageIndex='+page+'&pageSize='+size;
+        var code = strEnc(str, key);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/goods/order?channelId=toprays&userName='+phone+'&pageIndex='+page+'&pageSize='+size,
+            url: 'http://183.62.161.181:8080/IntegralStore/goods/order?content='+code,
             success: function (res) {
                 window.holdLoad = false;
                 res = JSON.parse(res);
@@ -233,9 +253,11 @@ $.func = {
      * 指令查询
      */
     getJiFen: function(){
+        var str = '?channelId=' + $.func.getCookie('channelId');
+        var code = strEnc(str, key);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/cmd/query?channelId=toprays',
+            url: 'http://183.62.161.181:8080/IntegralStore/cmd/query?content='+code,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
@@ -278,9 +300,11 @@ $.func = {
     submitOrder: function(products){
         var phone = $.func.getCookie('phone');
         if(!phone) return;
+        var str = '?channelId=' + $.func.getCookie('channelId') + '&userName='+phone+'&productsId='+products;
+        var code = strEnc(str, key);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/goods/buy?channelId=toprays&userName='+phone+'&productsId='+products,
+            url: 'http://183.62.161.181:8080/IntegralStore/goods/buy?content='+code,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
@@ -301,9 +325,11 @@ $.func = {
     canChargeGoods: function(page, size){
         var phone = $.func.getCookie('phone');
         if(!phone) return;
+        var str = '?channelId=' + $.func.getCookie('channelId') + '&pageIndex='+page+'&pageSize='+size+'&userName='+phone;
+        var code = strEnc(str, key);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/canchargegoods/list?channelId=toprays&pageIndex='+page+'&pageSize='+size+'&userName='+phone,
+            url: 'http://183.62.161.181:8080/IntegralStore/canchargegoods/list?content='+code,
             success: function (res) {
                 window.holdLoad = false;
                 res = JSON.parse(res);
@@ -397,9 +423,11 @@ $.func = {
     exchangeCash: function(id, account){
         var phone = $.func.getCookie('phone');
         if(!phone) return;
+        var str = '?channelId=' + $.func.getCookie('channelId') + '&userName='+phone+'&productId='+id+'&cashAccount='+account;
+        var code = strEnc(str, key);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/cash?channelId=toprays&userName='+phone+'&productId='+id+'&cashAccount='+account,
+            url: 'http://183.62.161.181:8080/IntegralStore/cash?content='+code,
             success: function (res) {
                 window.holdLoad = false;
                 res = JSON.parse(res);
@@ -421,9 +449,11 @@ $.func = {
     flowRecharge: function (id, rechargePhone){
         var phone = $.func.getCookie('phone');
         if(!phone) return;
+        var str = '?channelId=' + $.func.getCookie('channelId') + '&userName='+phone+'&productId='+id+'&flowPhone='+rechargePhone;
+        var code = strEnc(str, key);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/flow/buy?channelId=toprays&userName='+phone+'&productId='+id+'&flowPhone='+rechargePhone,
+            url: 'http://183.62.161.181:8080/IntegralStore/flow/buy?content='+code,
             success: function (res) {
                 window.holdLoad = false;
                 res = JSON.parse(res);
