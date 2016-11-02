@@ -830,7 +830,7 @@ class MeetController extends AppController {
                 }, 'Followers'=>function($q)use($user_id){
                     return $q->where(['user_id'=>$user_id]);
                 }, 'Savants'=>function($q){
-                    return $q->orderDesc('Savants.check_time');
+                    return $q->order(['Savants.check_time'=>'desc', 'reco_nums'=>'desc']);
                 }])
                 ->select(['id', 'truename', 'position', 'company', 'avatar', 'meet_nums'])
                 ->where(['enabled'=>'1', 'level'=>'2'])

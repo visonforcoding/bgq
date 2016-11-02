@@ -115,18 +115,18 @@ class PushController extends AppController {
             } else {
                 if($url){
                     if(stripos($url, 'm.chinamatop.com') !== false){
-                        $extra['url'] = $url;
+                        $extra['extra']['url'] = $url;
                     } else {
-                        $extra['url'] = 'http://m.chinamatop.com' . $url;
+                        $extra['extra']['url'] = 'http://m.chinamatop.com' . $url;
                     }
                 } else {
-                    $extra = [];
+                    $extra['extra'] = [];
                 }
                 $query = $UsermsgTable->query()->insert(['user_id', 'title', 'msg', 'url', 'create_time']);
                 $data = [
                     'title' => $title,
                     'msg' => $content,
-                    'url' => !empty($extra) ? $extra['url'] : 'javascript:void(0)',
+                    'url' => !empty($extra['extra']) ? $extra['extra']['url'] : 'javascript:void(0)',
                     'create_time' => date('Y-m-d H:i:s')
                 ];
                 foreach($res as $k=>$v){
@@ -155,7 +155,7 @@ class PushController extends AppController {
                     'title' => $title,
                     'get_message_uid' => serialize($uid),
                     'body' => $content,
-                    'extra' => $extra['url'],
+                    'extra' => $extra['extra']['url'],
                     'type' => $type,
                     'remark' => $remark,
                     'is_success' => $is_success
