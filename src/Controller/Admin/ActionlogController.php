@@ -115,7 +115,11 @@ class ActionlogController extends AppController {
         $end_time = $this->request->data('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where['user like'] = "%$keywords%";
+//            $where['user like'] = "%$keywords%";
+            $where['or'] = [
+                'user like' => "%$keywords%",
+                'url like' => "%$keywords%",
+            ];
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
