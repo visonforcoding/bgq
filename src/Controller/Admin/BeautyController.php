@@ -281,6 +281,9 @@ class BeautyController extends AppController {
         $this->Util->ajaxReturn($response);
     }
     
+    /**
+     * 导出投票数据
+     */
     public function getVote(){
         $VoteTable = \Cake\ORM\TableRegistry::get('vote');
         $vote = $VoteTable->find()->contain(['Users', 'VoteUsers'])->hydrate(false)->toArray();
