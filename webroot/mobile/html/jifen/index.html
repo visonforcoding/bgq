@@ -8,7 +8,6 @@
 </head>
 <body>
     <script>
-        $.func.setCookie('channelId', $.func.getUrlParam('channelId')?$.func.getUrlParam('channelId'):'');
-        location.href = 'html/home.html';
+        location.href = 'html/home.html?channelId='+$.func.getUrlParam('channelId');
     </script>
 </body>
