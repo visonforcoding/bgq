@@ -489,7 +489,7 @@ class SavantController extends AppController {
             $res[$k]['reason'] = $v->reason;
         }
         $this->autoRender = false;
-        $filename = '会员数据_' . date('Y-m-d') . '.xls';
+        $filename = '会员审核记录_' . date('Y-m-d') . '.xls';
         $this->loadComponent('Export');
         $column = ['姓名', '公司', '职位', '手机号', '申请时间', '项目经验', '资源优势','处理情况', '审核员', '审核意见'];
         $this->Export->phpexcelExport($filename, $column, $res);
