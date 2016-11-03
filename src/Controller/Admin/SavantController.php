@@ -196,7 +196,7 @@ class SavantController extends AppController {
         $begin_time = $this->request->query('begin_time');
         $end_time = $this->request->query('end_time');
         $where = [];
-        $savant_status = $this->request->data('savant_status');
+        $savant_status = $this->request->query('savant_status');
         if ($savant_status > 1) {
             $where = ['User.savant_status' => $savant_status];
         }
@@ -444,6 +444,55 @@ class SavantController extends AppController {
         } else {
             $this->Util->ajaxReturn(false, '添加失败');
         }
+    }
+    
+    /**
+     * 到处审核记录
+     */
+    public function exportExcelCheck(){
+        $SavantApplyTable = \Cake\ORM\TableRegistry::get('SavantApply');
+        $savantStatusConf = \Cake\Core\Configure::read('savantStatus');
+        $applys = $SavantApplyTable->find()
+                ->contain(['Users' => function($q){
+                    return $q->where(['enabled'=>1]);
+                }])
+                ->formatResults(function($items)use($savantStatusConf) {
+                    return $items->map(function($item)use($savantStatusConf) {
+                                switch ($item->action) {
+                                    case 1:
+                                        $item['savant_str'] = '通过';
+                                        break;
+                                    case -1:
+                                        $item['savant_str'] = '不通过';
+                                        break;
+                                    case 0:
+                                        $item['savant_str'] = '未审核';
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                return $item;
+                            });
+                })
+                ->toArray();
+        $res = [];
+        foreach ($applys as $k=>$v){
+            $res[$k]['username'] = $v->user->truename;
+            $res[$k]['company'] = $v->user->company;
+            $res[$k]['position'] = $v->user->position;
+            $res[$k]['phone'] = $v->user->phone;
+            $res[$k]['create_time'] = $v->create_time->format('Y-m-d H:i:s');
+            $res[$k]['xmjy'] = $v->xmjy;
+            $res[$k]['zyys'] = $v->zyys;
+            $res[$k]['action'] = $v->action == 1 ? '通过' : '不通过';
+            $res[$k]['check_man'] = $v->check_man;
+            $res[$k]['reason'] = $v->reason;
+        }
+        $this->autoRender = false;
+        $filename = '会员数据_' . date('Y-m-d') . '.xls';
+        $this->loadComponent('Export');
+        $column = ['姓名', '公司', '职位', '手机号', '申请时间', '项目经验', '资源优势','处理情况', '审核员', '审核意见'];
+        $this->Export->phpexcelExport($filename, $column, $res);
     }
 
 }
