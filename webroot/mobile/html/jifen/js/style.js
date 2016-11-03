@@ -1,4 +1,6 @@
-var key = 'encrypt';
+var key1 = 'toprays';
+var key2 = "dasdjmuji232eda";
+var key3 = "casdas232r21edsadaswd";
 $.func = {
     /**
      * 登录
@@ -13,8 +15,14 @@ $.func = {
                 alert('请输入手机号！');
                 return;
             }
-            var str = '?channelId=' + $.func.getCookie('channelId') + '&userName=' + user + '&inviterAccount=' + inviterAccount;
-            var code = strEnc(str, key);
+            if(inviterAccount == ''){
+                var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName=' + user;
+            } else {
+                var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName=' + user + '&inviterAccount=' + inviterAccount;
+            }
+            console.info(str);
+            var code = strEnc(str, key1, key2, key3);
+            console.log(code);
             $.ajax({
                 type: 'post',
                 url: 'http://183.62.161.181:8080/IntegralStore/user/login?content='+code,
@@ -25,7 +33,7 @@ $.func = {
                         $.func.setCookie('userJiFen', res.data.userJiFen);
                         $.func.setCookie('headImgUrl', res.data.headImgUrl);
                         $.func.setCookie('phone', user);
-//                        location.href = 'home.html';
+                        location.href = 'home.html?channelId='+$.func.getUrlParam('channelId');
                     } else {
                         alert(res.msg);
                         return false;
@@ -41,8 +49,8 @@ $.func = {
     homePageProduct: function () {
         var phone = $.func.getCookie('phone');
         if(!phone) return;
-        var str = '?channelId=' + $.func.getCookie('channelId') + '&pageSize=6&userName='+phone;
-        var code = strEnc(str, key);
+        var str = 'channelId=' + $.func.getUrlParam('channelId') + '&pageSize=6&userName='+phone;
+        var code = strEnc(str, key1, key2, key3);
         $.ajax({
             type: 'post',
             url: 'http://183.62.161.181:8080/IntegralStore/goods/indexlist?content='+code,
@@ -59,13 +67,16 @@ $.func = {
 //                        }
                         switch (d.productType){
                             case 6:
-                                d.link = 'flow_recharge.html?id='+d.productId;
+                                d.link = 'flow_recharge.html?channelId='+ $.func.getUrlParam('channelId') +'&id='+d.productId;
                                 break;
                             case 8:
-                                d.link = 'exchange_cash.html?id='+d.productId;
+                                d.link = 'exchange_cash.html?channelId='+ $.func.getUrlParam('channelId') +'&id='+d.productId;
+                                break;
+                            case 9:
+                                d.link = 'phone_charge.html?channelId='+ $.func.getUrlParam('channelId') +'&id='+d.productId;
                                 break;
                             default :
-                                d.link = 'choose_good.html';
+                                d.link = 'choose_good.html?channelId='+$.func.getUrlParam('channelId');
                         }
                         return d;
                     });
@@ -86,8 +97,8 @@ $.func = {
      * 获取兑换金额
      */
     chargeMoney: function(phone){
-        var str = '?channelId=' + $.func.getCookie('channelId') + '&phone='+phone;
-        var code = strEnc(str, key);
+        var str = 'channelId=' + $.func.getUrlParam('channelId') + '&phone='+phone;
+        var code = strEnc(str, key1, key2, key3);
         $.ajax({
             type: 'post',
             url: 'http://183.62.161.181:8080/IntegralStore/charge/getAvailMoneyByPhone?content='+code,
@@ -115,38 +126,40 @@ $.func = {
     chargeNo:function(chargePhone, chargeNo, chargeMoney){
         var phone = $.func.getCookie('phone');
         if(!phone) return;
-        var str = '?channelId=' + $.func.getCookie('channelId') + '&userName='+phone+'&chargePhone='+chargePhone+'&money='+chargeMoney+'&chargeNumber='+chargeNo;
-        var code = strEnc(str, key);
+        var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName='+phone+'&chargePhone='+chargePhone+'&money='+chargeMoney+'&chargeNumber='+chargeNo;
+        console.log(str);
+        var code = strEnc(str, key1, key2, key3);
         $.ajax({
             type: 'post',
             url: 'http://183.62.161.181:8080/IntegralStore/charge?content='+code,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
+                $('.tips').show();
                 if (res.status == 0) {
-                    $.func.chargeStatus(res.data.chargeNo);
-                } else {
-                    $('.tips').show();
+                    $('#chargeStatus').html('兑换成功');
+                    $('#chargeTips').hide();
+                    $('#jifen').html(res.data.userJiFen);
                 }
             }
         });
     },
     
     /**
-     * 串码兑换状态
+     * 串码兑换状态(弃用)
      * @param {type} chargeNo 串码号
      */
     chargeStatus: function(chargeNo){
-        var str = '?channelId=' + $.func.getCookie('channelId') + '&chargeNo='+chargeNo;
-        var code = strEnc(str, key);
+        var str = 'channelId=' + $.func.getUrlParam('channelId') + '&chargeNo='+chargeNo;
+        var code = strEnc(str, key1, key2, key3);
         $.ajax({
             type: 'post',
             url: 'http://183.62.161.181:8080/IntegralStore/charge/query?content='+code,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
+                $('.tips').show();
                 if (res.status == 0) {
-                    $('.tips').show();
                     if(res.data.chargeStatus == 4){
                         
                     } else if(res.data.chargeStatus == 1){
@@ -169,8 +182,8 @@ $.func = {
      * @param {type} page 页数
      */
     getProducts: function(page, size){
-        var str = '?channelId=' + $.func.getCookie('channelId') + '&pageIndex='+page+'&pageSize='+size;
-        var code = strEnc(str, key);
+        var str = 'channelId=' + $.func.getUrlParam('channelId') + '&pageIndex='+page+'&pageSize='+size;
+        var code = strEnc(str, key1, key2, key3);
         $.ajax({
             type: 'post',
             url: 'http://183.62.161.181:8080/IntegralStore/goods/list?content='+code,
@@ -186,9 +199,9 @@ $.func = {
                 var html = $.func.dataToTpl('', 'tpl', res.data.products, function(d){
                     d.img = d.images[0];
                     if(d.productType == 8){
-                        d.link = 'exchange_cash.html?id='+d.productId;
+                        d.link = 'exchange_cash.html?channelId='+$.func.getUrlParam('channelId')+'&id='+d.productId;
                     } else {
-                        d.link = 'choose_good.html';
+                        d.link = 'choose_good.html?channelId='+$.func.getUrlParam('channelId');
                     }
                     return d;
                 });
@@ -207,8 +220,9 @@ $.func = {
     getOrders: function(page, size){
         var phone = $.func.getCookie('phone');
         if(!phone) return;
-        var str = '?channelId=' + $.func.getCookie('channelId') + '&userName='+phone+'&pageIndex='+page+'&pageSize='+size;
-        var code = strEnc(str, key);
+        var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName='+phone+'&pageIndex='+page+'&pageSize='+size;
+        console.log(str);
+        var code = strEnc(str, key1, key2, key3);
         $.ajax({
             type: 'post',
             url: 'http://183.62.161.181:8080/IntegralStore/goods/order?content='+code,
@@ -253,8 +267,8 @@ $.func = {
      * 指令查询
      */
     getJiFen: function(){
-        var str = '?channelId=' + $.func.getCookie('channelId');
-        var code = strEnc(str, key);
+        var str = 'channelId=' + $.func.getUrlParam('channelId');
+        var code = strEnc(str, key1, key2, key3);
         $.ajax({
             type: 'post',
             url: 'http://183.62.161.181:8080/IntegralStore/cmd/query?content='+code,
@@ -300,8 +314,8 @@ $.func = {
     submitOrder: function(products){
         var phone = $.func.getCookie('phone');
         if(!phone) return;
-        var str = '?channelId=' + $.func.getCookie('channelId') + '&userName='+phone+'&productsId='+products;
-        var code = strEnc(str, key);
+        var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName='+phone+'&productsId='+products;
+        var code = strEnc(str, key1, key2, key3);
         $.ajax({
             type: 'post',
             url: 'http://183.62.161.181:8080/IntegralStore/goods/buy?content='+code,
@@ -312,7 +326,7 @@ $.func = {
                     alert(res.msg);
                     return false;
                 }
-                location.href = 'order_query.html';
+                location.href = 'order_query.html?channelId='+$.func.getUrlParam('channelId');
             }
         });
     },
@@ -325,8 +339,8 @@ $.func = {
     canChargeGoods: function(page, size){
         var phone = $.func.getCookie('phone');
         if(!phone) return;
-        var str = '?channelId=' + $.func.getCookie('channelId') + '&pageIndex='+page+'&pageSize='+size+'&userName='+phone;
-        var code = strEnc(str, key);
+        var str = 'channelId=' + $.func.getUrlParam('channelId') + '&pageIndex='+page+'&pageSize='+size+'&userName='+phone;
+        var code = strEnc(str, key1, key2, key3);
         $.ajax({
             type: 'post',
             url: 'http://183.62.161.181:8080/IntegralStore/canchargegoods/list?content='+code,
@@ -423,8 +437,8 @@ $.func = {
     exchangeCash: function(id, account){
         var phone = $.func.getCookie('phone');
         if(!phone) return;
-        var str = '?channelId=' + $.func.getCookie('channelId') + '&userName='+phone+'&productId='+id+'&cashAccount='+account;
-        var code = strEnc(str, key);
+        var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName='+phone+'&productId='+id+'&cashAccount='+account;
+        var code = strEnc(str, key1, key2, key3);
         $.ajax({
             type: 'post',
             url: 'http://183.62.161.181:8080/IntegralStore/cash?content='+code,
@@ -436,7 +450,7 @@ $.func = {
                     alert(res.msg);
                     return false;
                 };
-                location.href = 'order_query.html';
+                location.href = 'order_query.html?channelId='+$.func.getUrlParam('channelId');
             }
         });
     },
@@ -449,20 +463,44 @@ $.func = {
     flowRecharge: function (id, rechargePhone){
         var phone = $.func.getCookie('phone');
         if(!phone) return;
-        var str = '?channelId=' + $.func.getCookie('channelId') + '&userName='+phone+'&productId='+id+'&flowPhone='+rechargePhone;
-        var code = strEnc(str, key);
+        var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName='+phone+'&productId='+id+'&flowPhone='+rechargePhone;
+        var code = strEnc(str, key1, key2, key3);
         $.ajax({
             type: 'post',
             url: 'http://183.62.161.181:8080/IntegralStore/flow/buy?content='+code,
             success: function (res) {
-                window.holdLoad = false;
                 res = JSON.parse(res);
                 console.log(res.data);
                 if (res.status !== 0) {
                     alert(res.msg);
                     return false;
                 };
-                location.href = 'order_query.html';
+                location.href = 'order_query.html?channelId='+$.func.getUrlParam('channelId');
+            }
+        });
+    },
+    
+    /**
+     * 话费充值
+     * @param {type} id 商品id
+     * @param {type} rechargePhone 充值号码
+     */
+    phoneCharge: function (id, rechargePhone){
+        var phone = $.func.getCookie('phone');
+        if(!phone) return;
+        var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName='+phone+'&productId='+id+'&billPhone='+rechargePhone;
+        var code = strEnc(str, key1, key2, key3);
+        $.ajax({
+            type: 'post',
+            url: 'http://183.62.161.181:8080/IntegralStore/bill?content='+code,
+            success: function (res) {
+                res = JSON.parse(res);
+                console.log(res.data);
+                if (res.status !== 0) {
+                    alert(res.msg);
+                    return false;
+                };
+                location.href = 'order_query.html?channelId='+$.func.getUrlParam('channelId');
             }
         });
     },
