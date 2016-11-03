@@ -220,6 +220,22 @@ $.util = {
         $.util.loadImg();
     },
     
+    /**
+     * type == 'zp'的时候使用zepto的tap  否则用util的tap
+     */
+    onbody: function (func, type) {
+        var tapfun = function(e){
+            var target = e.srcElement || e.target, em = target, i = 1;
+            while (em && !em.id && i <= 3) {
+                em = em.parentNode;
+                i++;
+            }
+            if (!em || !em.id)  return;
+            return func(em, target);
+        };
+        type == 'zp' ? $('body').on('tap', tapfun) : $.util.tap($('body'), tapfun);
+    },
+    
     // 搜索框滚动隐藏
     searchHide: function() {
         window.up = false;

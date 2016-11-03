@@ -198,10 +198,18 @@ $.func = {
                 if (res.data.products.length === 0) window.holdLoad = true;
                 var html = $.func.dataToTpl('', 'tpl', res.data.products, function(d){
                     d.img = d.images[0];
-                    if(d.productType == 8){
-                        d.link = 'exchange_cash.html?channelId='+$.func.getUrlParam('channelId')+'&id='+d.productId;
-                    } else {
-                        d.link = 'choose_good.html?channelId='+$.func.getUrlParam('channelId');
+                    switch (d.productType){
+                        case 6:
+                            d.link = 'flow_recharge.html?channelId='+ $.func.getUrlParam('channelId') +'&id='+d.productId;
+                            break;
+                        case 8:
+                            d.link = 'exchange_cash.html?channelId='+ $.func.getUrlParam('channelId') +'&id='+d.productId;
+                            break;
+                        case 9:
+                            d.link = 'phone_charge.html?channelId='+ $.func.getUrlParam('channelId') +'&id='+d.productId;
+                            break;
+                        default :
+                            d.link = 'choose_good.html?channelId='+$.func.getUrlParam('channelId');
                     }
                     return d;
                 });
@@ -253,7 +261,17 @@ $.func = {
                             case 3:
                                 d.order_status = '支付失败';
                                 break;
+                            case 4:
+                                d.order_status = '上游失败';
+                                break;
+                            case 5:
+                                d.order_status = '正在处理';
+                                break;
+                            case 9:
+                                d.order_status = '提现成功';
+                                break;
                         }
+                        d.orderTime = new Date(d.orderTime).toLocaleDateString();
                         return d;
                     });
                     $('#order').append(html);

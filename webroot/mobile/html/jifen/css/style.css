@@ -38,7 +38,7 @@ background-size:20px 20px;}
 .items_con dl dt{width:76%;margin:0 auto;margin-bottom:6px;min-height:70px;max-height: 70px;}
 .items_con dl dt img{width:100%;display: block;height:auto;}
 .items_con dl dd{font-size: 11px;margin-bottom:3px;line-height: 11px;}
-.items_con dl dd.productName{ max-width: 90%; margin: 0 auto;word-break: break-all;display: -webkit-box;-webkit-box-orient: vertical;overflow: hidden; -webkit-line-clamp: 1;line-height: 14px;}
+.items_con dl dd.productName{ max-width: 90%; margin: 0 auto;word-break: break-all;display: -webkit-box;-webkit-box-orient: vertical;overflow: hidden; -webkit-line-clamp: 1;line-height: 15px;}
 .items_price{color:#ff6c4a;}
 .items_con{overflow: hidden;background: #fff;min-height:130px;}
 .home_infolist{overflow: hidden;/*border-top:1px #dedede solid;*/}
