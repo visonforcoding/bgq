@@ -2,8 +2,13 @@ header{background: #29bbb1;width:100%;max-width: 720px;margin:0 auto;padding:14p
 header h1{text-align: center;color:#fff;font-size:16px;height:21px;line-height:22px;}
 header h1.logintitle{background: url(icon/toback.png) no-repeat left center;background-size: 12px auto;}
 .login_box{padding-top:13px;font-size:15px;}
-.login_box li{margin-top:15px;height:45px;line-height: 43px;border:1px #ddd solid;background: #fff;text-indent: 12px;}
-.login_box li span{width:76px;display: inline-block;}
+.login_box .username,.login_box .validate{display: -webkit-box;-webkit-box-pack: start;}
+.login_box .username .validate span,.login_box .username .validate input{font-size: 14px;}
+.login_box li{margin-top:15px;height:45px;line-height: 43px;border:1px #ddd solid;background: #fff;padding-left:15px;}
+.login_box li span{/*width:76px;*/display: inline-block;}
+.maxwidth{width:75px;}
+.flex{text-align: justify;display: -webkit-flex;display: flex;-webkit-justify-content: space-between;justify-content: space-between;}
+.login_box input{}
 .login_box ul{overflow: hidden;}
 /*按钮*/
 .btn{width:100%;display: block;text-align: center;color:#fff;font-size:15px;height:41px;line-height: 41px;}
