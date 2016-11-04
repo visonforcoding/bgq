@@ -140,7 +140,7 @@ class InvoiceController extends AppController {
             $InvoiceTable = \Cake\ORM\TableRegistry::get('invoice');
             $invoice = $InvoiceTable
                     ->find()
-                    ->where()
+                    ->where(['user_id'=>$this->user->id])
                     ->formatResults(function($items){
                         return $items->map(function($item) {
                             $item->create_time = $item->create_time->format('Y-m-d H:i');
