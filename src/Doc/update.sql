@@ -913,3 +913,9 @@ CREATE TABLE `invoice_order` (
 COMMENT='发票订单对应表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
+
+ALTER TABLE `binggq`.`order`
+  ADD COLUMN `title` varchar(100) NOT NULL DEFAULT '' COMMENT '订单标题' AFTER `seller_id`;
+
+ALTER TABLE `binggq`.`user`
+  ADD COLUMN `is_foreigner` tinyint(2) unsigned NOT NULL DEFAULT 2 COMMENT '是否是国外注册，1国外2国内' AFTER `is_judge`;

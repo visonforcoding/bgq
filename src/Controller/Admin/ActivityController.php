@@ -113,7 +113,7 @@ class ActivityController extends AppController {
               $activity->org = serialize($org);
             if ($this->Activity->save($activity)) {
                 if($updateOrder){
-                   $OrderTable->updateAll(['price'=>$activity->apply_fee], ['type'=>2,'relate_id'=>$id,'status'=>0]);
+//                   $OrderTable->updateAll(['price'=>$activity->apply_fee], ['type'=>2,'relate_id'=>$id,'status'=>0]);
                 }
                 return $this->Util->ajaxReturn(true, '修改成功');
             } else {
