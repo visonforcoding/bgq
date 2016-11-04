@@ -47,7 +47,7 @@ class InvoiceController extends AppController {
                     return $q->where(['is_invoice'=>1, 'Activities.status'=>1]);
                 }])
                 ->notMatching('InvoiceOrders')
-                ->where(['Lmorder.user_id'=>$user_id])
+                ->where(['Lmorder.user_id'=>$user_id, 'Lmorder.status'=>1])
                 ->toArray();
         if($order !== false){
             return $this->Util->ajaxReturn(['status'=>true, 'data'=>$order]);
