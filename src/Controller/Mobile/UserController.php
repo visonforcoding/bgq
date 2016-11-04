@@ -228,6 +228,7 @@ class UserController extends AppController {
             $data['pwd'] = $this->request->session()->read('reg.pwd');
             if($this->request->session()->read('reg.email')){
                 $data['email'] = $this->request->session()->read('reg.email');
+                $data['is_foreigner'] = 1;
             }
             //隐私设置
             $data['secret'] =  [
