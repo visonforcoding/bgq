@@ -28,8 +28,9 @@
                 <select name="account_status" class="form-control">
                     <option value="">全部</option>
                     <option value="2">正常</option>
-                    <option value="1">禁用</option>
-                    <option value="3">删除</option>
+                    <option value="3">禁用</option>
+                    <!--<option value="1">禁用</option>-->
+                    <!--<option value="3">删除</option>-->
                 </select>
             </div>
             <div class="form-group">
