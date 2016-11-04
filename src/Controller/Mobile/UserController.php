@@ -374,10 +374,14 @@ class UserController extends AppController {
             $UserTable = \Cake\ORM\TableRegistry::get('User');
             if($mobile&&$login_type==1){
                  //密码登录
-                 $user = $UserTable->find()->where(['phone' => $mobile, 'enabled' => 1, 'is_del' => 0])->first();
+                 $user = $UserTable->find()->where(['phone' => $mobile, 'is_del' => 0])->first();
+                 
                  $pwd = $this->request->data('pwd');
                  if(!$user){
-                     return $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或被禁用']); 
+                     return $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册']); 
+                 }
+                 if($user->enabled == 0){
+                     return $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号已被禁用,如有疑问请加微信号：xiaoyingma_club']); 
                  }
                 if (!(new \Cake\Auth\DefaultPasswordHasher)->check($pwd, $user->pwd)) {
                     return $this->Util->ajaxReturn(false,'密码不正确');
@@ -395,7 +399,13 @@ class UserController extends AppController {
                     return $this->Util->ajaxReturn(['status' => true, 'redirect_url' => $redirect_url,'token_uin'=>$user_token,'bind_wx'=>$bind_wx]);
                 }
              }
-             $user = $UserTable->find()->where(['phone' => $phone, 'enabled' => 1, 'is_del' => 0])->first();
+             $user = $UserTable->find()->where(['phone' => $phone, 'is_del' => 0])->first();
+             if(!$user){
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册']); 
+            }
+            if($user->enabled == 0){
+                return $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号已被禁用,如有疑问请加微信号：xiaoyingma_club']); 
+            }
             if ($user) {
                 if((\Cake\Core\Configure::read('debug')&&$_SERVER['SERVER_ADDR']=='127.0.0.1')||$this->request->query('adminlogin')=='8'){
                     //方便本地调试
