@@ -221,15 +221,15 @@ class BeautyController extends AppController {
         $BeautyTable = \Cake\ORM\TableRegistry::get('beauty');
         $SavantTable = \Cake\ORM\TableRegistry::get('savant');
         if($this->request->is('post')){
-            $UserTable = \Cake\ORM\TableRegistry::get('user');
-            $user = $UserTable->get($this->user->id, [
-                'contain' => ['Careers', 'Educations', 'Industries'],
-            ]);
-            $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->agency_id
-                    && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
-            if(!$is_complete){
-                return $this->Util->ajaxReturn(false, '请先去完善个人资料');
-            }
+//            $UserTable = \Cake\ORM\TableRegistry::get('user');
+//            $user = $UserTable->get($this->user->id, [
+//                'contain' => ['Careers', 'Educations', 'Industries'],
+//            ]);
+//            $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->agency_id
+//                    && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
+//            if(!$is_complete){
+//                return $this->Util->ajaxReturn(false, '请先去完善个人资料');
+//            }
             $data = $this->request->data;
             $beauty = $BeautyTable->find()->where(['user_id'=>$this->user->id])->first();
             if($beauty) {
