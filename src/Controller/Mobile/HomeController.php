@@ -280,7 +280,7 @@ class HomeController extends AppController {
                                 return $item;
                             });
                         })
-                        ->orderDesc('user_fans.create_time')
+                        ->orderDesc('user_fans.update_time')
                         ->toArray();
                 if($fans){
                     return $this->Util->ajaxReturn(['status'=>true, 'data'=>$fans]);
@@ -317,7 +317,7 @@ class HomeController extends AppController {
                                     ]
                                 ])
                                 ->where(['usermsg.`user_id`' => $user_id, 'usermsg.status'=>0])
-                                ->orderDesc('usermsg.create_time')
+                                ->orderDesc('usermsg.update_time')
                                 ->formatResults(function($items) {
                                     return $items->map(function($item) {
                                         $item['u']['avatar'] = getSmallAvatar($item['u']['avatar']);
