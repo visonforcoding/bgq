@@ -6,7 +6,7 @@
 </header>-->
 <div class="wraper pd10" style="display: block;">
     <section class="newscon-box a-detail">
-        <a href="<?php if ($table == 'Activity'): ?>/activity/details/<?php else: ?>/news/view/<?php endif; ?><?= $relate_id ?>">
+        <a href="<?php if ($tableName == 'Activity'): ?>/activity/details/<?php else: ?>/news/view/<?php endif; ?><?= $relate_id ?>">
             <h3><?= $table->title ?></h3>
         </a>
         <!--add-->
