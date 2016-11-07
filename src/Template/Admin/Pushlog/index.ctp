@@ -41,7 +41,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['推送用户', '接收用户', '推送标题', '推送内容', '推送类型', '是否成功', '备注', '创建时间'],
+                                ['推送用户', '接收用户', '推送标题', '推送内容', '推送类型', '推送链接', '推送状态', '备注', '创建时间'],
                         colModel: [
                             {name: 'pusher.truename', editable: true, align: 'center', formatter: function (cell, opt, row) {
                                     return cell + ' ' + row.pusher.company + ' ' + row.pusher.position;
@@ -72,6 +72,7 @@
                                             return '群播';
                                     }
                                 }},
+                            {name: 'extra', editable: true, align: 'center'},
                             {name: 'is_success', editable: true, align: 'center', formatter: function (cell, opt, row) {
                                     switch (cell) {
                                         case 1:
