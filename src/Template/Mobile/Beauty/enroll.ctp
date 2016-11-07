@@ -124,10 +124,10 @@
     if($('#submit').text() == '提交申请') $('#submit').attr('ptag','10004');
 </script>
 <script>
-    window.onBackView = function () {
-        $.util.checkUserinfoStatus();
-    };
-    window.onBackView();
+//    window.onBackView = function () {
+//        $.util.checkUserinfoStatus();
+//    };
+//    window.onBackView();
 </script>
 <script>
     function submit() {
