@@ -15,7 +15,7 @@
             <div class="col-md-8"><input type="text" name="title" class="form-control"/></div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 control-label">推送内容</label>
+            <label class="col-md-2 control-label">推送(短信)内容</label>
             <div class="col-md-8"><textarea name="content" class="form-control"></textarea></div>
         </div>
         <div class="form-group">
@@ -23,17 +23,22 @@
             <div class="col-md-8"><input type="text" name="url" class="form-control"/></div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 control-label">备注（记录下推送的目的）</label>
+            <label class="col-md-2 control-label">备注（记录用）</label>
             <div class="col-md-8"><input type="text" name="remark" class="form-control"/></div>
         </div>
-        <input type="hidden" name="industry_id" value=""/>
+        <!--<input type="hidden" name="industry_id" value=""/>-->
         <!--<input type="hidden" name="type" value=""/>-->
         <!--<input type="hidden" name="activity_id" value=""/>-->
         <input type="hidden" name="keyword" value=""/>
-
+        <input type="hidden" name="must_check" value=""/>
+        <input type="hidden" name="is_check" value=""/>
+        <input type="hidden" name="is_pay" value=""/>
+        <input type="hidden" name="is_sign" value=""/>
+        <input type="hidden" name="push" value=""/>
+        <input type="hidden" name="text" value=""/>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type='submit' id='push' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
+                <input type='text' id='push' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
             </div>
         </div>
     </form>
@@ -46,6 +51,15 @@
 <script>
     var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
     $('#push').on('click', function () {
+//        $('input[name="keyword"]').val(parent.$('input[name="keywords"]').val());
+//        $('input[name="must_check"]').val(parent.$('select[name="must_check"]').val());
+//        $('input[name="is_check"]').val(parent.$('select[name="is_check"]').val());
+//        $('input[name="is_pay"]').val(parent.$('select[name="is_pay"]').val());
+//        $('input[name="is_sign"]').val(parent.$('select[name="is_sign"]').val());
+        $('input[name="push"]').val(parent.$('input[name="push"]').get(0).checked);
+        $('input[name="text"]').val(parent.$('input[name="text"]').get(0).checked);
+        var select_arr = parent.window.select;
+        var select_str = select_arr.join(',');
         if ($('input[name="title"]').val() == '') {
             layer.alert('请输入推送标题');
             return;
@@ -54,20 +68,18 @@
             layer.alert('请输入推送内容');
             return;
         }
-        var form = $('form').serialize();
-        console.log(form);
+        if ($('input[name="remark"]').val() == '') {
+            layer.alert('请输入备注内容');
+            return;
+        }
+        var form = $('form').serialize() + '&select_id=' + select_str;
         $.ajax({
             type: 'POST',
             dataType: 'json',
             data: form,
             url: "",
             success: function (res) {
-                layer.alert(res.msg);
-                if (res.status) {
-                    parent.layer.alert('推送成功');
-                } else {
-                    parent.layer.alert('推送失败');
-                }
+                parent.layer.alert('保存成功');
                 parent.layer.close(index);
             }
         });

@@ -429,79 +429,107 @@ class ActivityapplyController extends AppController {
     public function push($id=null) {
         $this->viewBuilder()->autoLayout(false);
         if ($this->request->is('post')) {
-            $keywords = $this->request->query('keywords');
-            $begin_time = $this->request->query('begin_time');
-            $end_time = $this->request->query('end_time');
-            $is_check = $this->request->query('is_check');
-            $must_check = $this->request->query('must_check');
-            $is_sign = $this->request->query('is_sign');
-            $is_pay = $this->request->query('is_pay');
-            $where = [];
-            if (is_numeric($is_check)) {
-                $where = ['Activityapply.is_check' => $is_check];
+//            $keywords = $this->request->data('keyword');
+//            $begin_time = $this->request->data('begin_time');
+//            $end_time = $this->request->data('end_time');
+//            $is_check = $this->request->data('is_check');
+//            $must_check = $this->request->data('must_check');
+//            $is_sign = $this->request->data('is_sign');
+//            $is_pay = $this->request->data('is_pay');
+            $text = $this->request->data('text');
+            $push = $this->request->data('push');
+            $select_id = $this->request->data('select_id');
+            if($select_id){
+                $select_id = explode(',', $select_id);
             }
-            if ($this->request->query('do') == 'check' && $must_check === NULL) {
-                $must_check = 1;
-                $where = ['Activityapply.is_check' => 0];
-            }
-            if (!empty($keywords)) {
-                $where['Users.truename like'] = "%$keywords%";
-            }
-            if (is_numeric($must_check)) {
-                $where['Activities.must_check'] = $must_check;
-            }
-            if (is_numeric($is_pay)) {
-                $where['Activityapply.is_pass'] = $is_pay;
-            }
-            if ($is_sign > -1) {
-                $where['is_sign'] = $is_sign;
-            }
-            if (!empty($begin_time) && !empty($end_time)) {
-                $begin_time = date('Y-m-d', strtotime($begin_time));
-                $end_time = date('Y-m-d', strtotime($end_time));
-                $where['and'] = [['Activityapply.`create_time` >' => $begin_time], ['Activityapply.`create_time` <' => $end_time]];
-            }
-            if ($id) {
-                $query = $this->Activityapply->find()->where(['activity_id' => $id]);
-            } else {
-                $query = $this->Activityapply->find();
-            }
-            $query->select(['Users.user_token']);
+//            $where = [];
+//            if (is_numeric($is_check)) {
+//                $where = ['Activityapply.is_check' => $is_check];
+//            }
+//            if ($this->request->query('do') == 'check' && $must_check === NULL) {
+//                $must_check = 1;
+//                $where = ['Activityapply.is_check' => 0];
+//            }
+//            if (!empty($keywords)) {
+//                $where['Users.truename like'] = "%$keywords%";
+//            }
+//            if (is_numeric($must_check)) {
+//                $where['Activities.must_check'] = $must_check;
+//            }
+//            if (is_numeric($is_pay)) {
+//                $where['Activityapply.is_pass'] = $is_pay;
+//            }
+//            if ($is_sign > -1) {
+//                $where['is_sign'] = $is_sign;
+//            }
+//            if (!empty($begin_time) && !empty($end_time)) {
+//                $begin_time = date('Y-m-d', strtotime($begin_time));
+//                $end_time = date('Y-m-d', strtotime($end_time));
+//                $where['and'] = [['Activityapply.`create_time` >' => $begin_time], ['Activityapply.`create_time` <' => $end_time]];
+//            }
+//            if ($id) {
+//                $query = $this->Activityapply->find()->where(['activity_id' => $id]);
+//            } else {
+//                $query = $this->Activityapply->find();
+//            }
+            $query = $this->Activityapply->find()->where(['Activityapply.id in'=>$select_id]);
+            $query->select(['Users.user_token', 'Users.phone', 'Users.id', 'Users.truename']);
             $query->hydrate(false);
-            if (!empty($where)) {
-                $query->where($where);
-            }
+//            if (!empty($where)) {
+//                $query->where($where);
+//            }
             $query->contain(['Users', 'Activities']);
             $res = $query->toArray();
             $user = '';
+            $mobile_arr = [];
             foreach ($res as $k => $v) {
                 $user .= $v['Users']['user_token'] . "\n";
+                $uid[] = $v['Users']['id'];
+                $mobile_arr[]  = $v['Users']['phone'];
             }
-            $this->loadComponent('Push');
             $title = $this->request->data('title');
             $content = $this->request->data('content');
             $url = $this->request->data('url');
-            if ($url) {
-                $extra['url'] = 'http://m.chinamatop.com' . $url;
-                $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true, $extra);
-            } else {
-                $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true);
+            // 选择短信
+            if($text !== 'false'){
+                $this->loadComponent('Sms');
+                $mobile = implode(',', $mobile_arr); 
+                $text_res = $this->Sms->sendManyByQf106($mobile, $content);
             }
-            if ($push_res) {
+            // 选择推送
+            if($push !== 'false'){
+                $this->loadComponent('Push');
+                if ($url) {
+                    if(stripos($url, 'm.chinamatop.com') !== false){
+                        $extra['url'] = $url;
+                    } else {
+                        $extra['url'] = 'http://m.chinamatop.com' . $url;
+                    }
+                } else {
+                    $extra = [];
+                }
+                $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true, $extra);
+                if ($push_res) {
+                    $is_success = 1;
+                } else {
+                    $is_success = 0;
+                }
                 $Pushlog = \Cake\ORM\TableRegistry::get('Pushlog');
                 $pushlog = $Pushlog->newEntity([
                     'push_id'=>'-1',
+                    'get_message_uid' => serialize($uid),
                     'title'=>$title,
-                    'body'=>$body,
+                    'body'=>$content,
+                    'extra' => $extra['url'],
                     'type'=>'3',
-                    'remark'=>  $this->request->data('remark')
+                    'remark'=>  $this->request->data('remark'),
+                    'is_success' => $is_success,
                 ]);
                 $Pushlog->save($pushlog);
-                return $this->Util->ajaxReturn(true, '推送成功');
-            } else {
-                return $this->Util->ajaxReturn(false, '推送失败');
             }
+            return $this->Util->ajaxReturn(true, '保存成功');
         }
     }
+    
 
 }
