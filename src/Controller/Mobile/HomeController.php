@@ -1779,19 +1779,19 @@ class HomeController extends AppController {
                 ->orderDesc($commentTable.'.create_time')
                 ->toArray();
         $Table = \Cake\ORM\TableRegistry::get($table);
-        $table = $Table->find()->contain(['Users'])->where([$table.'.id'=>$comment->$relate_id])->first();
+        $table_data = $Table->find()->contain(['Users'])->where([$table.'.id'=>$comment->$relate_id])->first();
         $LikeTable = \Cake\ORM\TableRegistry::get('CommentLike');
         $likes = $LikeTable->find()->contain(['Users'])->where(['relate_id'=>$id,'type'=>$liketype])
                 ->orderDesc('CommentLike.create_time')
                 ->toArray();
         $this->set([
-            'table'=>$table,
+            'table'=>$table_data,
             'comment'=>$comment,
             'replys'=>$replys,
             'likes'=>$likes,
             'id'=>$id,
             'type'=>$type,
-            'table'=>$table,
+            'tableName'=>$table,
             'relate_id'=>$comment->$relate_id,
             'user_id'=>$user_id
         ]);
