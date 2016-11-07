@@ -35,8 +35,9 @@ header h1.logintitle{background: url(icon/toback.png) no-repeat left center;back
 background-size:20px 20px;}
 .home_user_info .mobilenum{color:#fff;}
 .itemtitle{height:42px;line-height: 40px;/*border-bottom:1px #ddd solid;*/}
-.item_title_r_name{color:#525151;}
+.item_title_r_name{color:#525151;display: inline-block;background: url(icon/gift.png) no-repeat left center;background-size:20px 20px;padding-left:30px;}
 .home_item{}
+.home_exchange .title h1{background: url(icon/dh.png) left center no-repeat;background-size:20px 20px;padding-left:30px;}
 .itemtitle .more{font-size: 15px;background: url(icon/more.png) no-repeat  right center;width:80px;background-size:auto 12px;}
 .items_con dl{float:left;width:100%;text-align: center;padding-top:10px;border-right:1px #dedede solid;padding-bottom:10px;border-bottom:1px #dedede solid;}
 .items_con dl:nth-of-type(3n){border-right:1px transparent solid;}
