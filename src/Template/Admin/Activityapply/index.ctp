@@ -50,7 +50,15 @@
                 <label for="keywords">到</label>
                 <input type="text" name="end_time" class="form-control date_timepicker_end" id="keywords" placeholder="结束时间">
             </div>
-            <a onclick="doSearch();" class="btn btn-info"><i class="icon icon-search"></i> 搜索</a>
+            <div class="form-group">
+                <label for="push">推送+站内信</label>
+                <input type="checkbox" name="push" class="form-control" id="push" checked />
+                <label for="text">短信</label>
+                <input type="checkbox" name="text" class="form-control" id="text" />
+                <label for="is_choose">反选</label>
+                <input type="checkbox" name="is_choose" class="form-control" id="is_choose" />
+            </div>
+            <a onclick="doSearch();" class="btn btn-info"><i class="icon icon-search"></i>搜索/预览</a>
             <a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i> 导出</a>
             <a onclick="doPush();" class="btn btn-warning"><i class="icon icon-android"></i> 推送内容</a>
         </div>
@@ -69,6 +77,7 @@
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
 <script>
+    window.select = [];
                 $(function () {
                     $('#main-content').bind('resize', function () {
                         $("#list").setGridWidth($('#main-content').width() - 40);
@@ -131,9 +140,9 @@
                             {name: 'is_top', editable: true, align: 'center', formatter: topFormatter},
                             {name: 'is_sign', editable: true, align: 'center', formatter: signFormatter},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
-                        pager: "#pager",
-                        rowNum: window._config.showDef,
-                        rowList: window._config.pages,
+//                        pager: "#pager",
+//                        rowNum: window._config.showDef,
+//                        rowList: window._config.pages,
                         sortname: "id",
                         sortorder: "desc",
                         viewrecords: true,
@@ -143,6 +152,7 @@
                         autowidth: true,
                         height: 'auto',
                         rownumbers: true,
+                        multiselect: true, // 多选支持
                         fixed: true,
                         jsonReader: {
                             root: "rows",
@@ -349,7 +359,7 @@
                                     }, 2000);
                                 }
                             }
-                        })
+                        });
                     }, function () {
                     });
                 }
@@ -391,6 +401,11 @@
                     });
                 }
                 function doPush() {
+                    window.select = $("#list").jqGrid('getGridParam', 'selarrrow');
+                    if(window.select.length == 0){
+                        layer.alert('请选择至少一个对象');
+                        return false;
+                    }
                     var searchData = $.zui.store.pageGet('searchData') ? $.zui.store.pageGet('searchData') : {};
                     var searchQueryStr = $.param(searchData);
                     url = '/admin/activityapply/push/<?= $id ?>?' + searchQueryStr;
@@ -416,8 +431,15 @@
                                 $('#list').trigger('reloadGrid');
                             }
                         }
-                    })
+                    });
                 }
+                
+                // 反选操作
+                $('#is_choose').click(function(){
+                    var allRowIds = $('#list').jqGrid('getDataIDs');
+                    for(var i=0;i<allRowIds.length;i++){
+                        $('#list').jqGrid('setSelection', allRowIds[i]);
+                    }
+                });
 </script>
-<?php
-$this->end();
+<?php $this->end();
