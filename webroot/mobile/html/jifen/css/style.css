@@ -51,6 +51,7 @@ background-size:20px 20px;}
 .home_infolist i{background: url(icon/rgray.png) no-repeat center center;background-size:6px 10px;width:6px;height:48px;}
 .home_infolist span.change{background-position: 0px -327px;}
 .home_infolist span.bind{background: url(icon/bind.png) no-repeat left center;background-size:22px 22px;}
+.home_infolist span.help{background: url(icon/help.png) no-repeat left center;background-size:22px 22px;}
 .home_top_con{background: #fff;height:48px;line-height: 48px;background: #fff;}
 /*兑换*/
 .home_exchange{margin-top:5px;}
