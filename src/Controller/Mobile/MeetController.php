@@ -253,11 +253,20 @@ class MeetController extends AppController {
         $this->handCheckLogin();
         $user_id = $this->user->id;
         $SubjectTable = \Cake\ORM\TableRegistry::get('meet_subject');
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $user = $UserTable->get($user_id);
         if ($this->request->is('post')) {
             $subject = $SubjectTable->find()->where(['user_id'=>$user_id,'id'=>$id])->first();
             if($subject){
                 $subject->is_del = 1;
                 if($SubjectTable->save($subject)){
+                    $remainSubject = $SubjectTable->find()->where(['user_id'=>$user_id, 'is_del'=>0])->orderDesc('update_time')->first();
+                    if($remainSubject){
+                        $user->subject_update_time = $remainSubject->update_time;
+                    } else {
+                        $user->subject_update_time = 0;
+                    }
+                    $UserTable->save($user);
                     return $this->Util->ajaxReturn(true,'删除成功');
                 }
             }
