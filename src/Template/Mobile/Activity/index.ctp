@@ -38,7 +38,7 @@
         <div id="buttonLoading" class="loadingbox"></div>
         <div style="height: 1.2rem; display: none;" id="iosBottom"></div>
         <div class="submitbtn subactivity">
-            <div class="back_to_top moveright" id="toTop" onclick="javascript:window.scrollTo(0, 0);"><i class="iconfont">&#xe664;</i></div>
+            <div class="back_to_top" id="toTop" onclick="javascript:window.scrollTo(0, 0);" style="display: none"><i class="iconfont">&#xe664;</i></div>
             <div class="submit_require" id="release"><a href="javascript:$.util.checkLogin('/activity/release');">发布<br />需求</a></div>
         </div>
     </div>

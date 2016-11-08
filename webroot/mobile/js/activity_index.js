@@ -51,10 +51,11 @@ activity.prototype.scroll = function () {
         var lastTo = window.hideToTop;
         window.hideToTop = document.body.scrollTop > '2000';
         if(lastSt != window.hideRelease){
-            window.hideRelease ? $('#release').removeClass('moveleft').addClass('moveright') : $('#release').addClass('moveleft');
+//            window.hideRelease ? $('#release').removeClass('moveleft').addClass('moveright').css('display', 'none') : $('#release').addClass('moveleft').css('display', '');
+            window.hideRelease ? $('#release').hide() : $('#release').show();
         }
         if(lastTo != window.hideToTop){
-            window.hideToTop ? $('#toTop').addClass('moveleft') : $('#toTop').removeClass('moveleft').addClass('moveright');
+            window.hideToTop ? $('#toTop').show() : $('#toTop').hide();
         }
     });
 };
