@@ -177,7 +177,7 @@ class NewsController extends AppController {
         }
         $status = $this->request->data('status');
         if(is_numeric($status)){
-            $where = ['News.status'=>$status];
+            $where['News.status'] = $status;
         }
 
         //$query->hydrate(false);
