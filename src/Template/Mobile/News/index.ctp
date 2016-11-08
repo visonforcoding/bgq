@@ -16,7 +16,7 @@
     <div id="news"></div>
     <div id="buttonLoading" class="loadingbox"></div>
     <div class="submitbtn subactivity">
-        <div class="back_to_top moveright" id="toTop" onclick="javascript:window.scrollTo(0, 0);"><i class="iconfont">&#xe664;</i></div>
+        <div class="back_to_top" id="toTop" onclick="javascript:window.scrollTo(0, 0);" style="display: none"><i class="iconfont">&#xe664;</i></div>
     </div>
 </div>
 
@@ -73,7 +73,7 @@
         var lastTo = window.hideToTop;
         window.hideToTop = document.body.scrollTop > '2000';
         if(lastTo != window.hideToTop){
-            window.hideToTop ? $('#toTop').addClass('moveleft') : $('#toTop').removeClass('moveleft').addClass('moveright');
+            window.hideToTop ? $('#toTop').show() : $('#toTop').hide();
         }
     });
     

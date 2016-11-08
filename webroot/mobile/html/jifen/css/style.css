@@ -94,8 +94,8 @@ background-size:18px 18px;}
 .order_total span:first-of-type{border-right:1px #fff solid;}
 .order_total span i{display: block;font-size: 25px;margin-bottom:10px;}
 .order_detail_item{overflow: hidden;margin-top:10px;}
-.order_detail_item .order_l_pic{width:100px;position:absolute;padding-top:5px;}
-.order_detail_item li{padding:10px 25px;overflow: hidden;margin-bottom:8px;background: #fff;border-bottom:1px #d5d5d5 solid;border-top:1px #d5d5d5 solid;}
+.order_detail_item .order_l_pic{width:120px;position:absolute;padding-top:5px;}
+.order_detail_item li{padding:10px 13px;overflow: hidden;margin-bottom:8px;background: #fff;border-bottom:1px #d5d5d5 solid;border-top:1px #d5d5d5 solid;}
 .order_l_pic img{width:100%;height:auto;}
 .order_r_box .l_order_des span{display: block;font-size:12px;line-height: 12px;}
 .order_r_box .l_order_des span:first-of-type i{font-size: 14px;}
