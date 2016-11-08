@@ -124,7 +124,7 @@ class NewsController extends AppController {
         $isCollect = [];
         if(!empty($this->user)){
             $user_id = $this->user->id;
-            if(strpos($this->request->referer(), 'admin') === false){
+            if($this->request->is('lemon') || $this->request->is('Weixin')){
                 $news = $this->News->get($id, [
                     'contain' => ['Users' => function($q){
                         return $q->where(['Users.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
@@ -163,7 +163,7 @@ class NewsController extends AppController {
             $collectTable = \Cake\ORM\TableRegistry::get('collect');
             $isCollect = $collectTable->find()->where(['user_id'=>$user_id, 'relate_id'=>$id, 'type'=>1, 'is_delete'=>0])->toArray();
         }else{
-            if(strpos($this->request->referer(), 'admin') === false){
+            if($this->request->is('lemon') || $this->request->is('Weixin')){
                 $news = $this->News->get($id, [
                     'contain' => ['Users' => function($q){
                         return $q->where(['Users.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
