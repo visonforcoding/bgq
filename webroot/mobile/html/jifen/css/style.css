@@ -94,14 +94,14 @@ background-size:18px 18px;}
 .order_total span:first-of-type{border-right:1px #fff solid;}
 .order_total span i{display: block;font-size: 25px;margin-bottom:10px;}
 .order_detail_item{overflow: hidden;margin-top:10px;}
-.order_detail_item .order_l_pic{width:88px;position:absolute;padding-top:5px;}
+.order_detail_item .order_l_pic{width:100px;position:absolute;padding-top:5px;}
 .order_detail_item li{padding:10px 25px;overflow: hidden;margin-bottom:8px;background: #fff;border-bottom:1px #d5d5d5 solid;border-top:1px #d5d5d5 solid;}
 .order_l_pic img{width:100%;height:auto;}
 .order_r_box .l_order_des span{display: block;font-size:12px;line-height: 12px;}
 .order_r_box .l_order_des span:first-of-type i{font-size: 14px;}
 .order_r_box .l_order_des span i{margin-left:10px;}
 .order_r_box .l_order_des h3{color:#525151;font-size: 15px;margin-bottom:6px;line-height: 15px;}
-.order_r_box{padding-left:103px;}
+.order_r_box{padding-left:120px;}
 .order_r_box .choosebtn span{ display:block;background: url(icon/nochoose.png) no-repeat center center;width:48px;height:68px;background-size:24px 24px;}
 .order_r_box .choosed span{display:block;background: url(icon/choose.png) no-repeat  center center;width:48px;height:68px;background-size:24px 24px;}
 /*查询订单*/
