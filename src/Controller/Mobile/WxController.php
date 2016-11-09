@@ -171,6 +171,7 @@ class WxController extends AppController {
      * @param int $id  订单id
      */
     public function meetPay($id = null) {
+        $this->handCheckLogin();
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
         $theorder = $OrderTable->get($id);
         $type = $theorder->type;
@@ -198,14 +199,24 @@ class WxController extends AppController {
         $order_detail->price = $order->price;
         $order_detail->type = $type;
         $out_trade_no = $order->order_no;
-        $openid = $this->user->wx_openid;
-        \Cake\Log\Log::error('数据库openid为:'.$openid,'devlog');
-        if (empty($openid)) {
-            $UserTable = \Cake\ORM\TableRegistry::get('User');
-            $user = $UserTable->get($this->user->id);
-            $openid = $user->wx_openid;
-            \Cake\Log\Log::error('重新获取数据库openid为:'.$openid,'devlog');
+//        $openid = $this->user->wx_openid;
+//        \Cake\Log\Log::error('数据库openid为:'.$openid,'devlog');
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $user = $UserTable->get($this->user->id);
+        $openid = $user->wx_openid;
+        if(!$openid&&!$this->request->session()->check('Pay.getopenid')){
+            \Cake\Log\Log::error('数据库openid为空重新获取openid','devlog');
+            $this->request->session()->write('Pay.getopenid',true);
+            $this->Wx->getUserJump(true, true);
         }
+        if($code=$this->request->query('code')){
+            $res = $this->Wx->getUser($code);
+            $openid = $res->openid;
+            $user->wx_openid = $openid;
+            $user->union_id = $res->unionid;
+            $UserTable->save($user);
+        }
+        
         $fee = $order->price;  //支付金额(分)
         $this->loadComponent('Wxpay');
         $isApp = false;
