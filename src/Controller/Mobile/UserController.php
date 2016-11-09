@@ -197,7 +197,7 @@ class UserController extends AppController {
                 return $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
             }
         }
-        $this->set('pageTitle', '注册');
+        $this->set('pageTitle', '并购帮-注册');
     }
 
     /**
@@ -301,7 +301,7 @@ class UserController extends AppController {
             'industries'=>$industries,
             'agencys'=>$agencies,
             'regions'=>$regions,
-            'pageTitle'=>'注册'
+            'pageTitle'=>'并购帮-注册'
         ]);
         $this->render('register2');
     }
@@ -439,7 +439,7 @@ class UserController extends AppController {
             }
         }
         $this->set(array(
-            'pageTitle' => '登录'
+            'pageTitle' => '并购帮-登录'
         ));
     }
     
@@ -611,7 +611,7 @@ class UserController extends AppController {
             }
         }
         $this->set([
-            'pageTitle' => '验证手机号',
+            'pageTitle' => '并购帮-验证手机号',
         ]);
     }
 
@@ -844,7 +844,7 @@ class UserController extends AppController {
                 return $this->Util->ajaxReturn(false, '验证码已过期，请重新获取');
             }
         }
-        $this->set('pageTitle', '修改手机号');
+        $this->set('pageTitle', '并购帮-修改手机号');
     }
     
     /**
@@ -926,7 +926,7 @@ class UserController extends AppController {
             return $this->Util->ajaxReturn(true);
         }
         $this->set([
-            'pageTitle' => '国外用户注册'
+            'pageTitle' => '并购帮-国外用户注册'
         ]);
     }
 }
