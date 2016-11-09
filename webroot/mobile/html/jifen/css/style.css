@@ -111,6 +111,7 @@ background-size:18px 18px;}
 -webkit-box-align: center;-webkit-box-pack: center;}
 .tips_des{padding:25px 20px;background: #fff;width:80%;text-align: center;border-radius: 10px;font-size:35px;color:#ff6c4a;position: relative;
 max-width: 600px;}
+.tips_des h1{background:url(icon/order_sucess.png) no-repeat;background-size:154px 32px;height:32px;margin-bottom:10px;}
 .tips_des .closed{position:absolute;top:-25px;right:-25px;background: url(icon/closed.png) no-repeat center center;width:30px;height:30px;background-size:24px 24px;}
 .tips_des p{color:#919191;font-size: 14px;line-height: 26px;}
 @media only screen and (max-width:340px ) {
