@@ -129,6 +129,7 @@ max-width: 600px;}
 .flex{display:-webkit-box;display:box;-webkit-box-pack: justify;-webkit-box-align: center;}
 .help_list ul{overflow: hidden;}
 .help_list ul .title{height:42px;background: #fff;line-height: 42px;font-size:15px;color:#525151;border-top:1px #e5e5e5 solid;}
+.help_list ul{border-bottom:1px #e5e5e5 solid;}
 .help_list ul .title .arrow{background: url(icon/hdown.png) no-repeat center center;background-size:contain;width:13px;height:7px;display:block;-webkit-transition: all .3s ease;transition: all .3s ease;}
 .help_list ul .con{max-height:0;-webkit-transition:max-height  .3s  ease-in;transition:max-height  .3s  ease;overflow:hidden;}
 .help_list ul .show{max-height:9999px;-webkit-transition:max-height .3s ease-in;transition:max-height  .3s  ease;}
