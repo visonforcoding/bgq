@@ -49,3 +49,4 @@ input::-webkit-input-placeholder { /* WebKit browsers */ color: #b5b5b5; }
 .btop{border-top: 1px #d5d5d5 solid;}
 .fz16{font-size: 16px;}
 .fz14{font-size: 14px;}
+.pd10{padding:10px 0;}

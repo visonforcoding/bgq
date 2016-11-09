@@ -125,3 +125,13 @@ max-width: 600px;}
 }
 .home_head .title{position: absolute;width:130px;left:50%;margin-left:-65px;padding-left:15px;background: url('../images/logo.png') no-repeat left center;background-size:20px 25px;}
 .cash-tips{font-size: 13px;line-height: 16px;color: #525151;margin-top: 15px;}
+/*帮助中心*/
+.flex{display:-webkit-box;display:box;-webkit-box-pack: justify;-webkit-box-align: center;}
+.help_list ul{overflow: hidden;}
+.help_list ul .title{height:42px;background: #fff;line-height: 42px;font-size:15px;color:#525151;border-top:1px #e5e5e5 solid;}
+.help_list ul .title .arrow{background: url(icon/hdown.png) no-repeat center center;background-size:contain;width:13px;height:7px;display:block;-webkit-transition: all .3s ease;transition: all .3s ease;}
+.help_list ul .con{max-height:0;-webkit-transition:max-height  .3s  ease-in;transition:max-height  .3s  ease;overflow:hidden;}
+.help_list ul .show{max-height:9999px;-webkit-transition:max-height .3s ease-in;transition:max-height  .3s  ease;}
+.help_list ul .hide{max-height:0;-webkit-transition:max-height .3s ease-in;transition:max-height  .3s  ease;}
+.help_list ul .scale{-webkit-transform: rotate(180deg);transform: rotate(180deg);-webkit-transition: all .1s ease-out;transition: all .1s ease-out;}
+.help_list ul .con p{font-size: 14px;color:#8a8a8a;margin:5px 0;}
