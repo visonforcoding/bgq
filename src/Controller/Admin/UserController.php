@@ -180,7 +180,7 @@ class UserController extends AppController {
             $where['or'] = [
                 ['truename like' => "%$keywords%"],
                 ['position like' => "%$keywords%"],
-//                ['phone like' => "%$keywords%"],
+                ['phone like' => "%$keywords%"],
                 ['company like' => "%$keywords%"],
             ];
         }
