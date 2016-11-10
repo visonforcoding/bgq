@@ -12,7 +12,7 @@
             </a>
             <div class="form-group">
                 <label for="keywords">关键字</label>
-                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="姓名、公司、职务">
+                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="手机、姓名、公司、职务">
             </div>
             <div class="form-group">
                 <label for="keywords">等级</label>
