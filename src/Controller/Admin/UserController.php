@@ -258,7 +258,7 @@ class UserController extends AppController {
             $where['or'] = [
                 ['truename like' => "%$keywords%"],
                 ['position like' => "%$keywords%"],
-//                ['phone like' => "%$keywords%"],
+                ['phone like' => "%$keywords%"],
                 ['company like' => "%$keywords%"],
             ];
         }
@@ -341,6 +341,34 @@ class UserController extends AppController {
         $filename = '会员_' . date('Y-m-d') . '.xlsx';
         $this->loadComponent('Export');
         $this->Export->phpexcelExport($filename, $column, $res);
+    }
+    
+    /**
+     * 
+     */
+    public function exportCardExcel(){
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $user = $UserTable->find()
+                ->where(['enabled'=>1])
+                ->contain(['GetCards'=>function($q){
+                    return $q->select(['uid', 'ownerid']);
+                }, 'GiveCards'=>function($q){
+                    return $q->select(['uid', 'ownerid']);
+                }])
+                ->select(['User.phone','User.truename', 'User.position', 'User.company', 'User.id', 'User.fans'])
+                ->hydrate(false)
+                ->toArray();
+        foreach ($user as $k=>$v){
+            $user[$k]['get_nums'] = count($v['get_cards']);
+            $user[$k]['give_nums'] = count($v['give_cards']);
+            unset($user[$k]['get_cards']);
+            unset($user[$k]['give_cards']);
+            unset($user[$k]['id']);
+        }
+        $column = ['手机号', '姓名', '职位', '公司', '粉丝数', '收到名片', '发出名片'];
+        $filename = '会员_' . date('Y-m-d') . '.xlsx';
+        $this->loadComponent('Export');
+        $this->Export->phpexcelExport($filename, $column, $user);
     }
 
     /**
