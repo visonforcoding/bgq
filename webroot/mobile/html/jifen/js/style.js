@@ -7,7 +7,7 @@ $.func = {
      */
     login: function () {
         var submit = $('#loginbtn');
-        $('#loginbtn').on('tap', function () {
+        $('#loginbtn').on('click', function () {
             var user = $('#username').val();
             var inviterAccount = $('#valid').val();
             var jsoninfo = {};
@@ -385,7 +385,7 @@ $.func = {
      * 选择商品动作
      */
     choose: function (){
-        $('body').on('tap', function (e) {
+        $('body').on('click', function (e) {
             var target = e.srcElement || e.target, em = target, i = 1;
             while (em && !em.id && i <= 5) {
                 em = em.parentNode;
@@ -468,7 +468,10 @@ $.func = {
                     alert(res.msg);
                     return false;
                 };
-                location.href = 'order_query.html?channelId='+$.func.getUrlParam('channelId');
+                $('.tips').show();
+//                setTimeout(function(){
+//                    location.href = 'order_query.html?channelId='+$.func.getUrlParam('channelId');
+//                }, 2000);
             }
         });
     },

@@ -344,7 +344,7 @@ class UserController extends AppController {
     }
     
     /**
-     * 
+     * 导出名片数据
      */
     public function exportCardExcel(){
         $UserTable = \Cake\ORM\TableRegistry::get('User');
