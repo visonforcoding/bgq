@@ -231,7 +231,7 @@ class BeautyController extends AppController {
             }
         }
         $this->autoRender = false;
-        $filename = 'Beauty_' . date('Y-m-d') . '.xlsx';
+        $filename = '菁英评选活动_' . date('Y-m-d') . '.xlsx';
         $this->loadComponent('Export');
         $this->Export->phpexcelExport($filename, $column, $arr);
     }
