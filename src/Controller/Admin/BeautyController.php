@@ -191,7 +191,7 @@ class BeautyController extends AppController {
         $end_time = $this->request->query('end_time');
         $where = [];
         if (!empty($keywords)) {
-            $where['username like'] = "%$keywords%";
+            $where['User.truename like'] = "%$keywords%";
         }
         if (!empty($begin_time) && !empty($end_time)) {
             $begin_time = date('Y-m-d', strtotime($begin_time));
@@ -199,10 +199,10 @@ class BeautyController extends AppController {
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
         $Table = $this->Beauty;
-        $column = ['用户id', '票数', '星座', '个人简介', '参赛宣言', '兴趣爱好', '创建时间', '更新时间', '是否审核通过：0：未审核；1：审核通过；2：审核未通过'];
-        $query = $Table->find();
+        $column = ['姓名', '手机', '职位', '公司', '个人简介', '申请时间', '审核状态'];
+        $query = $Table->find()->contain(['Users']);
         $query->hydrate(false);
-        $query->select(['user_id', 'vote_nums', 'constellation', 'brief', 'declaration', 'hobby', 'create_time', 'update_time', 'is_pass']);
+        $query->select(['user_id', 'Users.truename', 'Users.phone', 'Users.position', 'Users.company', 'brief', 'create_time', 'is_pass']);
         if (!empty($where)) {
             $query->where($where);
         }
@@ -210,9 +210,30 @@ class BeautyController extends AppController {
             $query->order([$sort => $order]);
         }
         $res = $query->toArray();
+        $arr = [];
+        foreach ($res as $k=>$v){
+            $arr[$k]['user_name'] = $v['user']['truename'];
+            $arr[$k]['user_phone'] = $v['user']['phone'];
+            $arr[$k]['user_position'] = $v['user']['position'];
+            $arr[$k]['user_company'] = $v['user']['company'];
+            $arr[$k]['brief'] = $v['brief'];
+            $arr[$k]['create_time'] = $v['create_time']->format('Y-m-d H:i');
+            switch ($v['is_pass']){
+                case 0:
+                    $arr[$k]['is_pass'] = '未审核';
+                    break;
+                case 1:
+                    $arr[$k]['is_pass'] = '审核通过';
+                    break;
+                case 2:
+                    $arr[$k]['is_pass'] = '审核未通过';
+                    break;
+            }
+        }
         $this->autoRender = false;
-        $filename = 'Beauty_' . date('Y-m-d') . '.csv';
-        \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
+        $filename = 'Beauty_' . date('Y-m-d') . '.xlsx';
+        $this->loadComponent('Export');
+        $this->Export->phpexcelExport($filename, $column, $arr);
     }
 
     public function check($id) {
@@ -300,5 +321,6 @@ class BeautyController extends AppController {
         $this->loadComponent('Export');
         $this->Export->phpexcelExport($filename, $column, $res);
     }
+    
 
 }
