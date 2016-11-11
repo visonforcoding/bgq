@@ -111,6 +111,14 @@ class UserTable extends Table {
             'className' => 'CardBox',
             'foreignKey' => 'ownerid',
         ]);
+        $this->hasMany('GetCards', [
+            'className' => 'CardBox',
+            'foreignKey' => 'ownerid',
+        ]);
+        $this->hasMany('GiveCards', [
+            'className' => 'CardBox',
+            'foreignKey' => 'uid',
+        ]);
 
         $this->belongsTo('Collect', [
             'foreignKey' => 'relate_id',
