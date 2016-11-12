@@ -1,6 +1,22 @@
-var key1 = 'toprays';
-var key2 = "dasdjmuji232eda";
-var key3 = "casdas232r21edsadaswd";
+
+window._config = {
+    key1 : 'toprays',
+    key2 : 'dasdjmuji232eda',
+    key3 : 'casdas232r21edsadaswd',
+    url_login : 'http://183.62.161.181:8080/IntegralStore/user/login?content=',
+    url_homePageProduct : 'http://183.62.161.181:8080/IntegralStore/goods/indexlist?content=',
+    url_chargeMoney : 'http://183.62.161.181:8080/IntegralStore/charge/getAvailMoneyByPhone?content=',
+    url_chargeNo : 'http://183.62.161.181:8080/IntegralStore/charge?content=',
+    url_chargeStatus : 'http://183.62.161.181:8080/IntegralStore/charge/query?content=',
+    url_getProducts : 'http://183.62.161.181:8080/IntegralStore/goods/list?content=',
+    url_getOrders : 'http://183.62.161.181:8080/IntegralStore/goods/order?content=',
+    url_getJiFen : 'http://183.62.161.181:8080/IntegralStore/cmd/query?content=',
+    url_submitOrder : 'http://183.62.161.181:8080/IntegralStore/cmd/query?content=',
+    url_canChargeGoods : 'http://183.62.161.181:8080/IntegralStore/canchargegoods/list?content=',
+    url_exchangeCash : 'http://183.62.161.181:8080/IntegralStore/cash?content=',
+    url_flowRecharge : 'http://183.62.161.181:8080/IntegralStore/flow/buy?content=',
+    url_phoneCharge : 'http://183.62.161.181:8080/IntegralStore/bill?content='
+};
 $.func = {
     /**
      * 登录
@@ -21,11 +37,11 @@ $.func = {
                 var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName=' + user + '&inviterAccount=' + inviterAccount;
             }
             console.info(str);
-            var code = strEnc(str, key1, key2, key3);
+            var code = strEnc(str, _config.key1, _config.key2, _config.key3);
             console.log(code);
             $.ajax({
                 type: 'post',
-                url: 'http://183.62.161.181:8080/IntegralStore/user/login?content='+code,
+                url: _config.url_login + code,
                 success: function (res) {
                     res = JSON.parse(res);
                     console.log(res);
@@ -50,10 +66,10 @@ $.func = {
         var phone = $.func.getCookie('phone');
         if(!phone) return;
         var str = 'channelId=' + $.func.getUrlParam('channelId') + '&pageSize=6&userName='+phone;
-        var code = strEnc(str, key1, key2, key3);
+        var code = strEnc(str, _config.key1, _config.key2, _config.key3);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/goods/indexlist?content='+code,
+            url: _config.url_homePageProduct + code,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res);
@@ -98,10 +114,10 @@ $.func = {
      */
     chargeMoney: function(phone){
         var str = 'channelId=' + $.func.getUrlParam('channelId') + '&phone='+phone;
-        var code = strEnc(str, key1, key2, key3);
+        var code = strEnc(str, _config.key1, _config.key2, _config.key3);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/charge/getAvailMoneyByPhone?content='+code,
+            url: _config.url_chargeMoney + code,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res);
@@ -128,10 +144,10 @@ $.func = {
         if(!phone) return;
         var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName='+phone+'&chargePhone='+chargePhone+'&money='+chargeMoney+'&chargeNumber='+chargeNo;
         console.log(str);
-        var code = strEnc(str, key1, key2, key3);
+        var code = strEnc(str, _config.key1, _config.key2, _config.key3);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/charge?content='+code,
+            url: _config.url_chargeNo + code,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
@@ -151,10 +167,10 @@ $.func = {
      */
     chargeStatus: function(chargeNo){
         var str = 'channelId=' + $.func.getUrlParam('channelId') + '&chargeNo='+chargeNo;
-        var code = strEnc(str, key1, key2, key3);
+        var code = strEnc(str, _config.key1, _config.key2, _config.key3);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/charge/query?content='+code,
+            url: _config.url_chargeStatus + code,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
@@ -183,10 +199,10 @@ $.func = {
      */
     getProducts: function(page, size){
         var str = 'channelId=' + $.func.getUrlParam('channelId') + '&pageIndex='+page+'&pageSize='+size;
-        var code = strEnc(str, key1, key2, key3);
+        var code = strEnc(str, _config.key1, _config.key2, _config.key3);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/goods/list?content='+code,
+            url: _config.url_getProducts + code,
             success: function (res) {
                 window.holdLoad = false;
                 res = JSON.parse(res);
@@ -230,10 +246,10 @@ $.func = {
         if(!phone) return;
         var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName='+phone+'&pageIndex='+page+'&pageSize='+size;
         console.log(str);
-        var code = strEnc(str, key1, key2, key3);
+        var code = strEnc(str, _config.key1, _config.key2, _config.key3);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/goods/order?content='+code,
+            url: _config.url_getOrders + code,
             success: function (res) {
                 window.holdLoad = false;
                 res = JSON.parse(res);
@@ -286,10 +302,10 @@ $.func = {
      */
     getJiFen: function(){
         var str = 'channelId=' + $.func.getUrlParam('channelId');
-        var code = strEnc(str, key1, key2, key3);
+        var code = strEnc(str, _config.key1, _config.key2, _config.key3);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/cmd/query?content='+code,
+            url: ''+code,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
@@ -333,10 +349,10 @@ $.func = {
         var phone = $.func.getCookie('phone');
         if(!phone) return;
         var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName='+phone+'&productsId='+products;
-        var code = strEnc(str, key1, key2, key3);
+        var code = strEnc(str, _config.key1, _config.key2, _config.key3);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/goods/buy?content='+code,
+            url: _config.url_submitOrder+code,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
@@ -358,10 +374,10 @@ $.func = {
         var phone = $.func.getCookie('phone');
         if(!phone) return;
         var str = 'channelId=' + $.func.getUrlParam('channelId') + '&pageIndex='+page+'&pageSize='+size+'&userName='+phone;
-        var code = strEnc(str, key1, key2, key3);
+        var code = strEnc(str, _config.key1, _config.key2, _config.key3);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/canchargegoods/list?content='+code,
+            url: _config.url_canChargeGoods+code,
             success: function (res) {
                 window.holdLoad = false;
                 res = JSON.parse(res);
@@ -456,10 +472,10 @@ $.func = {
         var phone = $.func.getCookie('phone');
         if(!phone) return;
         var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName='+phone+'&productId='+id+'&cashAccount='+account;
-        var code = strEnc(str, key1, key2, key3);
+        var code = strEnc(str, _config.key1, _config.key2, _config.key3);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/cash?content='+code,
+            url: _config.url_exchangeCash + code,
             success: function (res) {
                 window.holdLoad = false;
                 res = JSON.parse(res);
@@ -485,10 +501,10 @@ $.func = {
         var phone = $.func.getCookie('phone');
         if(!phone) return;
         var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName='+phone+'&productId='+id+'&flowPhone='+rechargePhone;
-        var code = strEnc(str, key1, key2, key3);
+        var code = strEnc(str, _config.key1, _config.key2, _config.key3);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/flow/buy?content='+code,
+            url: _config.url_flowRecharge+code,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
@@ -510,10 +526,10 @@ $.func = {
         var phone = $.func.getCookie('phone');
         if(!phone) return;
         var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName='+phone+'&productId='+id+'&billPhone='+rechargePhone;
-        var code = strEnc(str, key1, key2, key3);
+        var code = strEnc(str, _config.key1, _config.key2, _config.key3);
         $.ajax({
             type: 'post',
-            url: 'http://183.62.161.181:8080/IntegralStore/bill?content='+code,
+            url: _config.url_phoneCharge+code,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
