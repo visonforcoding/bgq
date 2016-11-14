@@ -264,7 +264,7 @@ class MeetController extends AppController {
                     if($remainSubject){
                         $user->subject_update_time = $remainSubject->update_time;
                     } else {
-                        $user->subject_update_time = 0;
+                        $user->subject_update_time = null;
                     }
                     $UserTable->save($user);
                     return $this->Util->ajaxReturn(true,'删除成功');
