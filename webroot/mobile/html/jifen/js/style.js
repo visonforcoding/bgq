@@ -1,9 +1,10 @@
-
 window._config = {
     key1 : 'toprays',
     key2 : 'dasdjmuji232eda',
     key3 : 'casdas232r21edsadaswd',
-    url_login : 'http://183.62.161.181:8080/IntegralStore/user/login?content=',
+    url_login : 'http://183.62.161.181:8080/IntegralStore/login?content=',
+    url_register : 'http://183.62.161.181:8080/IntegralStore/user/register?content=',
+    url_getVcode : 'http://183.62.161.181:8080/IntegralStore/getcode?content=',
     url_homePageProduct : 'http://183.62.161.181:8080/IntegralStore/goods/indexlist?content=',
     url_chargeMoney : 'http://183.62.161.181:8080/IntegralStore/charge/getAvailMoneyByPhone?content=',
     url_chargeNo : 'http://183.62.161.181:8080/IntegralStore/charge?content=',
@@ -22,23 +23,19 @@ $.func = {
      * 登录
      */
     login: function () {
-        var submit = $('#loginbtn');
         $('#loginbtn').on('click', function () {
             var user = $('#username').val();
-            var inviterAccount = $('#valid').val();
-            var jsoninfo = {};
+            var pwd = $('#valid').val();
             if (user == '') {
                 alert('请输入手机号！');
                 return;
             }
-            if(inviterAccount == ''){
-                var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName=' + user;
-            } else {
-                var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName=' + user + '&inviterAccount=' + inviterAccount;
+            if(pwd == ''){
+                alert('请输入密码');
+                return;
             }
-            console.info(str);
+            var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName=' + user + '&loginPwd=' + pwd;
             var code = strEnc(str, _config.key1, _config.key2, _config.key3);
-            console.log(code);
             $.ajax({
                 type: 'post',
                 url: _config.url_login + code,
@@ -60,12 +57,89 @@ $.func = {
     },
     
     /**
+     * 注册
+     * @param {type} phone 手机
+     * @param {type} pwd 密码
+     * @param {type} vcode 验证码
+     */
+    register: function(phone, pwd, vcode){
+        if(phone == ''){
+            alert('请输入手机号！');
+            return;
+        }
+        if(vcode == ''){
+            alert('请输入验证码！');
+            return;
+        }
+        if(vcode.length < 4){
+            alert('请填写正确的验证码！');
+            return;
+        }
+        if(pwd == ''){
+            alert('请输入密码！');
+            return;
+        }
+        var str = 'userName=' + phone + '&userPwd=' + pwd + '&verificationCode=' + vcode + '&channelId=' + $.func.getUrlParam('channelId');
+        var code = strEnc(str, _config.key1, _config.key2, _config.key3);
+        $.ajax({
+            type: 'post',
+            url: _config.url_register + code,
+            success: function (res) {
+                res = JSON.parse(res);
+                console.log(res);
+                if (res.status == 0) {
+                    $.func.setCookie('userJiFen', res.data.userJiFen);
+                    $.func.setCookie('headImgUrl', res.data.headImgUrl);
+                    $.func.setCookie('phone', phone);
+                    location.href = 'home.html?channelId='+$.func.getUrlParam('channelId');
+                } else {
+                    alert(res.msg);
+                    return false;
+                }
+            }
+        });
+    },
+    
+    /**
+     * 获取验证码
+     * @param {type} phone 手机号码
+     */
+    getVcode: function(phone){
+        if(phone == '') {
+            alert('请输入手机号码');
+            return;
+        }
+        var str = 'userName=' + phone + '&userPwd=' + pwd + '&verificationCode=' + vcode + '&channelId=' + $.func.getUrlParam('channelId');
+        var code = strEnc(str, _config.key1, _config.key2, _config.key3);
+        $.ajax({
+            type: 'post',
+            url: _config.url_getVcode + code,
+            success: function (res) {
+                res = JSON.parse(res);
+                console.log(res);
+                if (res.status == 0) {
+                    $.func.setCookie('userJiFen', res.data.userJiFen);
+                    $.func.setCookie('headImgUrl', res.data.headImgUrl);
+                    $.func.setCookie('phone', phone);
+                    location.href = 'home.html?channelId='+$.func.getUrlParam('channelId');
+                } else {
+                    alert(res.msg);
+                    return false;
+                }
+            }
+        });
+    },
+    
+    /**
      * 首页商品展示
      */
     homePageProduct: function () {
         var phone = $.func.getCookie('phone');
-        if(!phone) return;
-        var str = 'channelId=' + $.func.getUrlParam('channelId') + '&pageSize=6&userName='+phone;
+        if(!phone) {
+            var str = 'channelId=' + $.func.getUrlParam('channelId') + '&pageSize=6';
+        } else {
+            var str = 'channelId=' + $.func.getUrlParam('channelId') + '&pageSize=6&userName='+phone;
+        }
         var code = strEnc(str, _config.key1, _config.key2, _config.key3);
         $.ajax({
             type: 'post',
@@ -76,11 +150,6 @@ $.func = {
                 if (res.status == 0) {
                     $.func.dataToTpl('product', 'tpl', res.data.homePageProductResults, function(d){
                         d.img = d.images[0];
-//                        if(d.productType == 8){
-//                            d.link = 'exchange_cash.html?id='+d.productId;
-//                        } else {
-//                            d.link = 'choose_good.html';
-//                        }
                         switch (d.productType){
                             case 6:
                                 d.link = 'flow_recharge.html?channelId='+ $.func.getUrlParam('channelId') +'&id='+d.productId;
@@ -96,8 +165,10 @@ $.func = {
                         }
                         return d;
                     });
-                    $.func.setCookie('userJiFen', res.data.userjifen);
-                    $('#jifen').html(res.data.userjifen);
+                    if(phone) {
+                        $.func.setCookie('userJiFen', res.data.userjifen);
+                        $('#jifen').html(res.data.userjifen);
+                    }
                     $('.product').on('click', function () {
                         $.func.checkjifen($('#jifen').html(), $(this).attr('link'));
                     });
@@ -128,7 +199,6 @@ $.func = {
 				console.info(res);
 				//alert('kkkk');
                 for(var i=0;i<res.data.moneys.length;i++){
-					
                     $('#chargeMoney').append('<option value="'+res.data.moneys[i]+'">'+res.data.moneys[i]+'</option>');
                 };
             }
@@ -455,6 +525,11 @@ $.func = {
      * @param {type} url 不为0跳转的页面
      */
     checkjifen: function(jifen, url){
+        if (!$.func.getCookie('phone')) {
+            alert('请先登录');
+            location.href = 'login.html?channelId=' + $.func.getUrlParam('channelId');
+            return false;
+        }
         if(jifen == 0){
             alert('您的积分为0');
             return false;

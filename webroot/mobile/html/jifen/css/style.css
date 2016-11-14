@@ -26,7 +26,7 @@ header h1.logintitle{background: url(icon/toback.png) no-repeat left center;back
 .quit_login{color:#fff;font-size:14px;}
 .home_head{position:relative;height:42px;line-height: 42px;}
 .home_title{background: url(icon/allbgs.png) no-repeat -606px 0;display: block;width:74px;margin:0 auto;height:28px;}
-.quit_login{position:absolute;right:0;}
+.quit_login{position:relative;right:0;}
 .home_user_info{padding:31px 0 24px;}
 .home_user_info .imginfo{/*background: url(icon/allbgs.png) no-repeat -782px -5px;*/ width:76px;height:75px;display: inline-block;margin-left:-6px;vertical-align: top;overflow: hidden;}
 .home_head_info{font-size:18px;margin-left:14px;display: inline-block;padding-top:5px;}
