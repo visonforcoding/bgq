@@ -163,7 +163,7 @@
                 <!--是否要审核-->
                 <?php if ($activity->must_check): ?>
                     <?php if (empty($activity->activityapply)): ?>
-                        <a id="want_enroll" class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="javascript:$.util.checkLogin('/activity/enroll/<?= $activity->id; ?>')">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                        <a id="want_enroll" class="r-btn" href="javascript:void(0);" is_three="<?= $activity->triple_fee ? 1 : 0 ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
                     <?php else: ?>
                         <?php if ($activity->activityapply['0']->is_pass == 0): ?>
                             <?php if ($activity->activityapply['0']->is_check == 1): ?>;
@@ -179,7 +179,7 @@
                     <?php endif; ?>
                 <?php else: ?>
                     <?php if (empty($activity->activityapply)): ?>
-                        <a id="want_enroll" class="r-btn" activity_id="<?= $activity->id; ?>" user_id="<?= $user; ?>" href="javascript:$.util.checkLogin('/activity/enroll/<?= $activity->id; ?>')">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                        <a id="want_enroll" class="r-btn" href="javascript:void(0);" is_three="<?= $activity->triple_fee ? 1 : 0 ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
                     <?php else: ?>
                         <?php if ($activity->activityapply['0']->is_pass == 0): ?>
                             <a href="/wx/meet-pay/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
@@ -254,7 +254,7 @@
         <p class="a_bottom_comm reply_{#id#}" id="reply_{#id#}" value="{#id#}" user_id="{#user_id#}">{#body#}</p>
     </div>
 </script>
-<!--<script src="/mobile/js/activity_details.js"></script>-->
+<script src="/wpadmin/lib/layer_mobile/layer.js"></script>
 <script>
     // 分享设置
     window.shareConfig.link = 'http://m.chinamatop.com/activity/details/<?= $activity->id ?>?share=1';
@@ -303,14 +303,6 @@
         }
         return d;
     });
-
-//    // 报名的人数多余9个显示查看更多
-//    var showMoreEnroll = setInterval(function(){
-//        if($('#allEnroll').children('a').length > 9){
-//            $('.allentrol').show();
-//            clearInterval(showMoreEnroll);
-//        }
-//    }, 100);
 
     // 少于五条评论隐藏显示全部，大于一条评论隐藏还没有评论
     var circle = setInterval(function () {
@@ -731,6 +723,23 @@
                     $('.reg-shadow').hide();
                     $('.shadow-info').removeClass('c-height').addClass('m-height');
                 }, 400);
+                break;
+            case 'want_enroll':
+                if($(em).attr('is_three') == 1){
+                    layer.open({
+                        anim: 'up',
+                        content: '您的选择？',
+                        btn: ['三人行(<?= $activity->triple_fee ?>元)', '单人行(<?= $activity->apply_fee ?>元)'],
+                        yes: function(index){
+                            alert('施工中……');
+                        },
+                        no: function(index){
+                            $.util.checkLogin('/activity/enroll/<?= $activity->id; ?>');
+                        }
+                    });
+                } else {
+                    $.util.checkLogin('/activity/enroll/<?= $activity->id; ?>');
+                }
                 break;
         }
     });
