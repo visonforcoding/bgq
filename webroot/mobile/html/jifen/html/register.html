@@ -6,7 +6,7 @@
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <title>换积分了-登录</title>
+        <title>换积分了-注册</title>
         <link rel="stylesheet" type="text/css" href="../css/basic.css"/>
         <link rel="stylesheet" type="text/css" href="../css/style.css"/>
         <script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
@@ -16,10 +16,7 @@
     <body>
         <header>
             <div class="inner">
-                <h1>
-                    <span style="padding-left: 42px;">登录</span>
-                    <a href="javascript:location.href='login.html?channelId='+$.func.getUrlParam('channelId')" class="quit_login fr">去登录</a>
-                </h1>
+                <h1 class="logintitle" style="float: left;width: 1.2rem;" onclick="history.go(-1)"></h1><h1>注册</h1>
             </div>
         </header>
         <div class="wraper">
@@ -31,20 +28,22 @@
                         	<input type="number" id="username"  placeholder="请输入手机号" style="line-height: 21px;" />
                         </li>
                         <li class="validate">
+                        	<div class="maxwidth"><span>验证码：</span></div>
+                        	<input type="number" id="vcode" placeholder="请输入验证码" style="line-height: 21px;" />
+                        </li>
+                        <li class="validate">
                         	<div class="maxwidth"><span>密码：</span></div>
-                        	<input type="number" id="valid" placeholder="请输入密码" style="line-height: 21px;" />
+                        	<input type="password" id="valid" placeholder="请输入密码" style="line-height: 21px;" />
                         </li>
                     </ul>
-                    <a href="javascript:void(0);" class="btn bg_items mt33" id="loginbtn">登 录</a>
-                    <a href="javascript:location.href='register.html?channelId='+$.func.getUrlParam('channelId')" class="btn bg_items" style="margin-top: 20px;">注册</a>
+                    <a href="javascript:void(0);" class="btn bg_items mt33" id="registerbtn">注 册</a>
                 </div>
             </div>
         </div>
         <script type="text/javascript">
-            $.func.setCookie('userJiFen', '');
-            $.func.setCookie('headImgUrl', '');
-            $.func.setCookie('phone', '');
-            $.func.login();
+            $('#registerbtn').click(function(){
+                $.func.register($('#username').val(), $('#valid').val(), $('#vcode').val());
+            });
         </script>
     </body>
 </html>
