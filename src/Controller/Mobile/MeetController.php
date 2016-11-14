@@ -843,7 +843,7 @@ class MeetController extends AppController {
                 }])
                 ->select(['id', 'truename', 'position', 'company', 'avatar', 'fans'])
                 ->where(['enabled'=>'1', 'level'=>'2'])
-                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc', 'fans'])
+                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc', 'fans'=>'desc'])
                 ->page($page, $this->limit)
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
