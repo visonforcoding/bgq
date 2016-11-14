@@ -112,7 +112,8 @@ $.func = {
      */
     getVcode: function(phone){
         if(phone == '') {
-            alert('请输入手机号码');
+            $('#msg').html('请输入手机号');
+            $('.tips').show();
             return;
         }
         var str = 'userName=' + phone + '&channelId=' + $.func.getUrlParam('channelId');
@@ -126,7 +127,7 @@ $.func = {
                 if (res.status == 0) {
                     
                 } else {
-                    $('#msg').html('请输入手机号');
+                    $('#msg').html(res.msg);
                     $('.tips').show();
                     return false;
                 }
