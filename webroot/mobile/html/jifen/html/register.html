@@ -24,15 +24,18 @@
                 <div class="inner">
                     <ul>
                         <li class="username">
-                        	<div class="maxwidth flex"><span>账</span><span>号：</span></div>
+                        	<div class="flex"><span>账</span><span>号：</span></div>
                         	<input type="number" id="username"  placeholder="请输入手机号" style="line-height: 21px;" />
                         </li>
-                        <li class="validate">
-                        	<div class="maxwidth"><span>验证码：</span></div>
-                        	<input type="number" id="vcode" placeholder="请输入验证码" style="line-height: 21px;" />
+                        <li class="validate flexbile" >
+                        	<div class="validate_left">
+	                        	<span>验证码：</span>
+	                        	<input type="number" id="vcode" placeholder="输入验证码" />
+                        	</div>
+                        		<button id="getvalide" class="validecode">获取验证码</button>
                         </li>
                         <li class="validate">
-                        	<div class="maxwidth"><span>密码：</span></div>
+                        	<div class="flex"><span>密</span><span>码：</span></div>
                         	<input type="password" id="valid" placeholder="请输入密码" style="line-height: 21px;" />
                         </li>
                     </ul>
@@ -44,6 +47,19 @@
             $('#registerbtn').click(function(){
                 $.func.register($('#username').val(), $('#valid').val(), $('#vcode').val());
             });
+             $('#getvalide').click(function(){
+             	$(this).addClass('validebg').html('倒计时60s');
+             	var $that = $(this);
+             	var second= 60;
+             	var timer = setInterval(function(){
+             		$that.html('倒计时'+(second--)+'s');
+             		if(second == '0'){
+             			clearInterval(timer);
+             			$that.removeClass('validebg').html('重新获取验证码');
+             		}
+             	},1000)
+             });
+             
         </script>
     </body>
 </html>

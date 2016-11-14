@@ -4,12 +4,26 @@ header h1.logintitle{background: url(icon/toback.png) no-repeat left center;back
 .login_box{padding-top:13px;font-size:15px;}
 .login_box .username,.login_box .validate{display: -webkit-box;-webkit-box-pack: start;}
 .login_box .username .validate span,.login_box .username .validate input{font-size: 14px;}
-.login_box li{margin-top:15px;height:45px;line-height: 43px;border:1px #ddd solid;background: #fff;padding-left:15px;}
+.login_box li{margin-top:15px;height:45px;line-height: 43px;border:1px #ddd solid;background: #fff;padding-left:10px;}
 .login_box li span{/*width:76px;*/display: inline-block;}
 .maxwidth{width:75px;}
 .flex{text-align: justify;display: -webkit-flex;display: flex;-webkit-justify-content: space-between;justify-content: space-between;}
+ .login_box  .flexbile{display: box;display: -webkit-box;-webkit-box-align: center;-webkit-box-pack: justify;border:none;padding-left:0;}
 .login_box input{}
 .login_box ul{overflow: hidden;}
+.validecode{background: #02cded;width:110px;text-align: center;color:#fff;font-size: 13px;padding:0;color:#fff;height:45px;line-height: 45px;}
+.validebg{background: #ddd;}
+.validecode button{}
+.validate_left{width:68%;border:1px #ddd solid; padding-left:10px;}
+.validate_left input{width:150px;line-height: 21px;}
+@media (min-width:321px) and (max-width: 375px) {
+	.validate_left{width:64%;}
+	.validate_left input{width:100px;}
+}
+@media only screen and (max-width: 320px) {
+	.validate_left{width:58%;}
+	.validate_left input{width:80px;}
+}
 /*按钮*/
 .btn{width:100%;display: block;text-align: center;color:#fff;font-size:15px;height:41px;line-height: 41px;}
 /*提现*/
@@ -127,6 +141,7 @@ max-width: 600px;}
 .cash-tips{font-size: 13px;line-height: 16px;color: #525151;margin-top: 15px;}
 /*帮助中心*/
 .flex{display:-webkit-box;display:box;-webkit-box-pack: justify;-webkit-box-align: center;}
+.flexbile{}
 .help_list ul{overflow: hidden;}
 .help_list ul .title{height:42px;background: #fff;line-height: 42px;font-size:15px;color:#525151;border-top:1px #e5e5e5 solid;}
 .help_list ul{border-bottom:1px #e5e5e5 solid;}
