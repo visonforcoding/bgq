@@ -6,7 +6,7 @@
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <title>换积分了-注册</title>
+        <title>换积分了-重置密码</title>
         <link rel="stylesheet" type="text/css" href="../css/basic.css"/>
         <link rel="stylesheet" type="text/css" href="../css/style.css"/>
         <script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
@@ -16,7 +16,7 @@
     <body>
         <header>
             <div class="inner">
-                <h1 class="logintitle" style="float: left;width: 1.2rem;" onclick="history.go(-1)"></h1><h1>注册</h1>
+                <h1 class="logintitle" style="float: left;width: 1.2rem;" onclick="history.go(-1)"></h1><h1>重置密码</h1>
             </div>
         </header>
         <div class="wraper">
@@ -36,10 +36,10 @@
                         </li>
                         <li class="validate">
                             <div class="flex"><span>密</span><span>码：</span></div>
-                            <input type="password" id="valid" placeholder="请输入密码" style="line-height: 21px;" />
+                            <input type="password" id="valid" placeholder="请输入新密码" style="line-height: 21px;" />
                         </li>
                     </ul>
-                    <a href="javascript:void(0);" class="btn bg_items mt33" id="registerbtn">注 册</a>
+                    <a href="javascript:void(0);" class="btn bg_items mt33" id="registerbtn">确 定</a>
                 </div>
             </div>
             <div class="tips" style="display: none;">
@@ -52,7 +52,7 @@
         </div>
         <script type="text/javascript">
             $('#registerbtn').click(function () {
-                $.func.register($('#username').val(), $('#valid').val(), $('#vcode').val());
+                $.func.resetPwd($('#username').val(), $('#valid').val(), $('#vcode').val());
             });
             $('#getvalide').click(function () {
                 if($('#username').val() == ''){

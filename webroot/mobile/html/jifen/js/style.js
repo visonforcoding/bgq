@@ -5,6 +5,7 @@ window._config = {
     url_login : 'http://183.62.161.181:8080/IntegralStore/login?content=',
     url_register : 'http://183.62.161.181:8080/IntegralStore/user/register?content=',
     url_getVcode : 'http://183.62.161.181:8080/IntegralStore/getcode?content=',
+    url_resetPwd : 'http://183.62.161.181:8080/IntegralStore/resetpwd?content=',
     url_homePageProduct : 'http://183.62.161.181:8080/IntegralStore/goods/indexlist?content=',
     url_chargeMoney : 'http://183.62.161.181:8080/IntegralStore/charge/getAvailMoneyByPhone?content=',
     url_chargeNo : 'http://183.62.161.181:8080/IntegralStore/charge?content=',
@@ -64,19 +65,23 @@ $.func = {
      */
     register: function(phone, pwd, vcode){
         if(phone == ''){
-            alert('请输入手机号！');
+            $('#msg').html('请输入手机号');
+            $('.tips').show();
             return;
         }
         if(vcode == ''){
-            alert('请输入验证码！');
+            $('#msg').html('请输入验证码');
+            $('.tips').show();
             return;
         }
-        if(vcode.length < 4){
-            alert('请填写正确的验证码！');
+        if(vcode.length < 6){
+            $('#msg').html('请输入正确的验证码');
+            $('.tips').show();
             return;
         }
         if(pwd == ''){
-            alert('请输入密码！');
+            $('#msg').html('请输入密码');
+            $('.tips').show();
             return;
         }
         var str = 'userName=' + phone + '&userPwd=' + pwd + '&verificationCode=' + vcode + '&channelId=' + $.func.getUrlParam('channelId');
@@ -93,7 +98,8 @@ $.func = {
                     $.func.setCookie('phone', phone);
                     location.href = 'home.html?channelId='+$.func.getUrlParam('channelId');
                 } else {
-                    alert(res.msg);
+                    $('#msg').html(res.msg);
+                    $('.tips').show();
                     return false;
                 }
             }
@@ -109,7 +115,7 @@ $.func = {
             alert('请输入手机号码');
             return;
         }
-        var str = 'userName=' + phone + '&userPwd=' + pwd + '&verificationCode=' + vcode + '&channelId=' + $.func.getUrlParam('channelId');
+        var str = 'userName=' + phone + '&channelId=' + $.func.getUrlParam('channelId');
         var code = strEnc(str, _config.key1, _config.key2, _config.key3);
         $.ajax({
             type: 'post',
@@ -118,12 +124,51 @@ $.func = {
                 res = JSON.parse(res);
                 console.log(res);
                 if (res.status == 0) {
-                    $.func.setCookie('userJiFen', res.data.userJiFen);
-                    $.func.setCookie('headImgUrl', res.data.headImgUrl);
-                    $.func.setCookie('phone', phone);
-                    location.href = 'home.html?channelId='+$.func.getUrlParam('channelId');
+                    
                 } else {
-                    alert(res.msg);
+                    $('#msg').html('请输入手机号');
+                    $('.tips').show();
+                    return false;
+                }
+            }
+        });
+    },
+    
+    
+    resetPwd: function(phone, pwd, vcode){
+        if(phone == ''){
+            $('#msg').html('请输入手机号');
+            $('.tips').show();
+            return;
+        }
+        if(vcode == ''){
+            $('#msg').html('请输入验证码');
+            $('.tips').show();
+            return;
+        }
+        if(vcode.length < 6){
+            $('#msg').html('请输入正确的验证码');
+            $('.tips').show();
+            return;
+        }
+        if(pwd == ''){
+            $('#msg').html('请输入密码');
+            $('.tips').show();
+            return;
+        }
+        var str = 'userName=' + phone + '&channelId=' + $.func.getUrlParam('channelId') + '&verificationCode=' + vcode + '&pwd=' + pwd;
+        var code = strEnc(str, _config.key1, _config.key2, _config.key3);
+        $.ajax({
+            type: 'post',
+            url: _config.url_resetPwd + code,
+            success: function (res) {
+                res = JSON.parse(res);
+                console.log(res);
+                if (res.status == 0) {
+                    location.href = 'login.html?channelId='+$.func.getUrlParam('channelId');
+                } else {
+                    $('#msg').html(res.msg);
+                    $('.tips').show();
                     return false;
                 }
             }
