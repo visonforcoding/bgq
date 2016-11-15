@@ -33,7 +33,7 @@ class NewsController extends AppController {
                         ->contain(['Users'=>function($q){
                             return $q->where(['enabled'=>1]);
                         }, 'Newstags'])
-                        ->select(['id', 'source', 'title', 'user_id', 'publish_time', 'thumb', 'comment_nums', 'praise_nums', 'summary', 'Users.id', 'Users.truename'])
+                        ->select(['id', 'source', 'title', 'user_id', 'publish_time', 'thumb', 'comment_nums', 'praise_nums', 'summary', 'Users.id', 'Users.truename', 'is_top'])
                         ->where(['News.status'=>1, 'News.is_delete'=>0, 'News.is_show'=>1])
                         ->page($page, $this->newslimit)
                         ->order(['News.is_top'=>'desc', 'News.publish_time'=>'desc'])->toArray();

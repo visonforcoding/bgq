@@ -34,6 +34,7 @@
             </div>	
             <div class="sec-news-r">
                 {#img#}
+                {#top_msg#}
             </div>
         </a>
         <div class="news-bottom clearfix">
@@ -109,6 +110,9 @@
             d.cover = d.thumb ? d.thumb : d.cover;
             if(d.cover){
                 d.img = '<img src="' + d.cover + '"/>';
+            }
+            if(d.is_top){
+                d.top_msg = '<span class="firstnews">置顶</span>';
             }
             return d;
         });
