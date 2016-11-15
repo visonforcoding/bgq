@@ -462,5 +462,20 @@ class NewsController extends AppController {
         }
     }
     
+    /**
+     * 修改展示状态
+     * @param type $id 资讯id
+     */
+    public function changeShowStatus($id=null){
+        $news = $this->News->get($id);
+        $news->is_show = $news->is_show ? 0 : 1;
+        $res = $this->News->save($news);
+        if($res){
+            return $this->Util->ajaxReturn(true, '修改成功');
+        } else {
+            return $this->Util->ajaxReturn(false, '修改失败');
+        }
+    }
+    
 }
         

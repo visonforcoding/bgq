@@ -919,3 +919,9 @@ ALTER TABLE `binggq`.`order`
 
 ALTER TABLE `binggq`.`user`
   ADD COLUMN `is_foreigner` tinyint(2) unsigned NOT NULL DEFAULT 2 COMMENT '是否是国外注册，1国外2国内' AFTER `is_judge`;
+
+ALTER TABLE `binggq`.`activity`
+  ADD COLUMN `triple_fee` float NULL DEFAULT NULL AFTER `apply_fee`;
+
+ALTER TABLE `binggq`.`news`
+  ADD COLUMN `is_show` tinyint(2) unsigned NOT NULL DEFAULT 1 COMMENT '是否展示,：1展示0不展示' COMMENT '是否展示,：1展示0不展示';

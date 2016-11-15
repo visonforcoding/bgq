@@ -34,9 +34,8 @@ class NewsController extends AppController {
                             return $q->where(['enabled'=>1]);
                         }, 'Newstags'])
                         ->select(['id', 'source', 'title', 'user_id', 'publish_time', 'thumb', 'comment_nums', 'praise_nums', 'summary', 'Users.id', 'Users.truename'])
-                        ->where(['News.status'=>1, 'News.is_delete'=>0])
+                        ->where(['News.status'=>1, 'News.is_delete'=>0, 'News.is_show'=>1])
                         ->page($page, $this->newslimit)
-//                        ->order(['News.publish_time'=>'desc'])->toArray();
                         ->order(['News.is_top'=>'desc', 'News.publish_time'=>'desc'])->toArray();
         foreach ($news as $k=>$v){
             $news[$k]['publish_time'] = $v->publish_time->format('Y-m-d H:i');
@@ -122,10 +121,7 @@ class NewsController extends AppController {
      */
     public function view($id = null) {
         $isCollect = [];
-        $condition = [];
-        if($this->request->is('lemon')){
-            $condition = ['News.status' => 1];
-        }
+        $condition = ['News.status' => 1];
         if(!empty($this->user)){
             $user_id = $this->user->id;
             $news = $this->News->get($id, [
