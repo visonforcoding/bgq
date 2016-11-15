@@ -138,7 +138,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .newsbox .sec-news-l h3,.newsbox .sec-news-l p,.newscon-box h3{word-break: break-all;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}
 .newsbox .sec-news-l h3{line-height: 0.37rem;margin:0.1rem 0;font-size:0.32rem;color:#222c38;-webkit-line-clamp: 2;font-weight:400;}
 .newsbox .sec-news-l p{line-height:0.32rem;font-size:0.26rem;-webkit-line-clamp: 2;}
-.newsbox .sec-news-r{float:right;width:1.6rem;height:1.6rem;margin-top:0.14rem;overflow:hidden;}
+.newsbox .sec-news-r{float:right;width:1.6rem;height:1.6rem;margin-top:0.14rem;overflow:hidden;position:relative;}
 .newsbox .sec-news-r img{width:100%;display: block;min-height:1.6rem;}
 .news-bottom{margin-top:0.15rem;}
 .news-bottom .sec-b-l{float:left; margin-top:0.07rem;}
@@ -152,7 +152,8 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .navfooter li span{display: block;line-height:0.48rem;font-size:0.44rem;color:#7a7e83;margin-bottom:.1rem;}
 .navfooter li a{display: block;line-height: 0.32rem;color:#7a7e83; text-align: center;}
 .navfooter li:hover span,.navfooter li:hover a{color:#dd204b;}
-.firstnews:after{content:'置顶';color:#dd204b;position:absolute;right:0.1rem;top:0;line-height: 0.5rem;}
+/*.firstnews:after{content:'置顶';color:#dd204b;position:absolute;right:0.1rem;top:0;line-height: 0.5rem;}*/
+.firstnews{position: absolute;top:0;color:#fff;font-size: 10px;width:.3rem;height:.64rem;background: #DB1F4F;display: block;line-height: .3rem;text-align: center;}
 
 /*新闻详情页--start*/
 .inner .collection{right:0.6rem;font-size:0.32rem;color:#fff;}
