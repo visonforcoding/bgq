@@ -82,8 +82,8 @@
                     </div>
                 </a>
             </div>
-            <div class="home_infolist mb5" style="border-top: 1px solid #dcdcdc;border-bottom: 1px solid #dcdcdc">
-                <a href="javascript:location.href='order_query.html?channelId='+$.func.getUrlParam('channelId')" class="ablock">
+            <div class="home_infolist mb5" style="border-top: 1px solid #dcdcdc;border-bottom: 1px solid #dcdcdc" id="order">
+                <a href="javascript:void(0)" class="ablock">
                     <div class="inner home_top_con clearfix">
                         <span class="home_leftcon fl bind fz16">订单查询</span>
                         <i class="home_rightico fr"></i>
@@ -172,6 +172,15 @@
                     $.func.chargeMoney($(this).val());
                 }
             });
+        });
+        
+        $('#order').click(function(){
+            if(!$.func.getCookie('phone')){
+                alert('请先登录');
+                location.href = 'login.html?channelId=' + $.func.getUrlParam('channelId');
+                return;
+            }
+            location.href = 'order_query.html?channelId='+$.func.getUrlParam('channelId');
         });
     </script>
 </body>

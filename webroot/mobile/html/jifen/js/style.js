@@ -28,11 +28,13 @@ $.func = {
             var user = $('#username').val();
             var pwd = $('#valid').val();
             if (user == '') {
-                alert('请输入手机号！');
+                $('#msg').html('请输入手机号');
+                $('.tips').show();
                 return;
             }
             if(pwd == ''){
-                alert('请输入密码');
+                $('#msg').html('请输入密码');
+                $('.tips').show();
                 return;
             }
             var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName=' + user + '&loginPwd=' + pwd;
@@ -49,7 +51,8 @@ $.func = {
                         $.func.setCookie('phone', user);
                         location.href = 'home.html?channelId='+$.func.getUrlParam('channelId');
                     } else {
-                        alert(res.msg);
+                        $('#msg').html(res.msg);
+                        $('.tips').show();
                         return false;
                     }
                 }
@@ -421,7 +424,7 @@ $.func = {
         var code = strEnc(str, _config.key1, _config.key2, _config.key3);
         $.ajax({
             type: 'post',
-            url: ''+code,
+            url: _config.url_getJiFen + code,
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);

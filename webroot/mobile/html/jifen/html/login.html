@@ -16,6 +16,7 @@
     <body>
         <header>
             <div class="inner">
+                <h1 class="logintitle" style="float: left;width: 1.2rem;" onclick="history.go(-1)"></h1>
                 <h1>
                     <span style="padding-left: 42px;">登录</span>
                     <a href="javascript:location.href='register.html?channelId='+$.func.getUrlParam('channelId')" class="quit_login fr">去注册</a>
@@ -35,8 +36,15 @@
                         	<input type="password" id="valid" placeholder="请输入密码" style="line-height: 21px;" />
                         </li>
                     </ul>
-                    <a href="javascript:void(0);" class="btn bg_items mt33" id="loginbtn">登 录</a>
-                    <a href="javascript:location.href='reset_pwd.html?channelId='+$.func.getUrlParam('channelId')" class="btn" style="color: #5e5e5e;">忘记密码？</a>
+                    <a href="javascript:void(0);" class="btn bg_items mt33" id="loginbtn">登录</a>
+                    <a href="javascript:location.href='reset_pwd.html?channelId='+$.func.getUrlParam('channelId')" class="btn" style="color: #5e5e5e;">忘记密码</a>
+                </div>
+            </div>
+            <div class="tips" style="display: none;">
+                <div class="tips_des">
+                    <h1 id="msg" style="color: #525151;" class="warning">系统错误</h1>
+                    <p id="chargeTips"></p>
+                    <span class="closed"></span>
                 </div>
             </div>
         </div>
@@ -45,6 +53,9 @@
             $.func.setCookie('headImgUrl', '');
             $.func.setCookie('phone', '');
             $.func.login();
+            $(".closed").click(function(){
+                $('.tips').hide();
+            });
         </script>
     </body>
 </html>
