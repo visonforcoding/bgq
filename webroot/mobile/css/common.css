@@ -210,3 +210,5 @@ header{display:none;}
 .indexboxlist{width:2000%;height:100%;}
 .indexboxlist section{float:left;overflow:hidden;}
 .indexboxlist section img{width:50%;height:auto;display: block;margin:0 auto;}
+.flex{display:-webkit-box;display:box;-webkit-box-align: center;-webkit-box-pack:start;}
+.flex_jusitify{-webkit-box-pack:justify;}
