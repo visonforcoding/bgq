@@ -153,7 +153,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .navfooter li a{display: block;line-height: 0.32rem;color:#7a7e83; text-align: center;}
 .navfooter li:hover span,.navfooter li:hover a{color:#dd204b;}
 /*.firstnews:after{content:'置顶';color:#dd204b;position:absolute;right:0.1rem;top:0;line-height: 0.5rem;}*/
-.firstnews{position: absolute;top:0;color:#fff;font-size: 10px;width:.3rem;height:.64rem;background: #DB1F4F;display: block;line-height: .3rem;text-align: center;}
+.firstnews{position: absolute;top:0;color:#fff;font-size: 10px;width:15px;height:32px;background: #DB1F4F;display: block;line-height: 15px;text-align: center;}
 
 /*新闻详情页--start*/
 .inner .collection{right:0.6rem;font-size:0.32rem;color:#fff;}
@@ -1075,7 +1075,7 @@ background-size:3.82rem 1.9rem;margin-top:1rem;}
 .dialogue li.fl time{text-align: left;text-indent: 0.2rem;color:#333;}
 .dialogue li.fr time{text-align: right;margin-right:0.2rem;}
 .dialogue li.fl span{background: #fff;color:#333;border-radius: 0.1rem 0.1rem 0.1rem 0.3rem;}
-.dialogue li span{padding:0.15rem;background: #b71c2d;line-height: 0.36rem;color:#fff;border-radius: 0.1rem 0.1rem 0.3rem 0.1rem;font-size:14px;word-break: break-all;}
+.dialogue li span{padding:0.15rem;background: #b71c2d;line-height: 0.38rem;color:#fff;border-radius: 0.1rem 0.1rem 0.3rem 0.1rem;font-size:14px;word-break: break-all;}
 @media only screen and (min-width: 450px) {
 	.dialogue li span{font-size:16px;}
 	.dialogue li time{font-size:14px;}
@@ -1310,3 +1310,20 @@ box-align:center;-webkit-box-align:center;}
 .invoic_dialog_footer .quitbtn{background: #7a7e83;margin-right:.36rem;}
 .invoic_dialog_footer .surebtn{background: #b71c2c;}
 .dialog_inner{background: #fff;border-radius: .2rem;}
+.dialogue .chatbox .avatar{width:1.3rem;height:1.3rem;overflow: hidden;border-radius: 50%;}
+.dialogue .fr .chatbox a{color:#fff;text-decoration: underline;}
+.dialogue .fl .chatbox a{color:#B71C2D;text-decoration: underline;margin-right:.2rem;}
+.dialogue .fr .chatbox .avatar{margin-left:10px;}
+.dialogue .fl .chatbox .avatar{margin-right:10px;}
+.chatbox .avatar img{width:100%;height:100%;display: block;}
+.dialogue  .chatbox .chat_text{max-width: 5rem;}
+.dialogue .desc{text-align: center;clear:both;}
+.dialogue .desc time{color:#d2d2d2;font-size: 13px;margin:.2rem 0;display: inline-block;}
+.dialogue .desc span{padding:.1rem .2rem;background: #ccc;color:#fff;border-radius: 5px;display: inline-block;margin:.2rem 0;}
+.chatbottom{height:50px;width:100%;max-width: 750px;position:fixed;bottom:0;background: #eceded;box-shadow: 0 -1px 0 rgba(0,0,0,.1);}
+.chatbottom .chatcon{border:1px #ccc solid;height:32px;width:90%;margin:0 auto;margin-top:9px;border-radius: 10px;text-indent:.2rem;line-height: 30px;}
+.chatbottom .chatcon button{display: block;width:60px;background: #B71C2D;color:#fff;height:32px;border-radius: 0 10px 10px 0;margin-top:-1px;}
+.chatbottom .chatcon input{width:5rem;}
+.dialog_entrol{height:auto;}
+.dialog_entrol .entrol_group{background: #fff;text-align: center;color:#B71C2D;}
+.dialog_entrol .entrol_group div{height:.9rem;font-size: .26rem;}
