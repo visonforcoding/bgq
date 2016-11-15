@@ -59,7 +59,7 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['作者', '标题', '行业标签', '资讯标签', '阅读数', '点赞数', '评论数', '状态', '创建时间', '更新时间', '操作'],
+                                ['作者', '标题', '行业标签', '资讯标签', '阅读数', '点赞数', '评论数', '状态', '列表是否展示', '创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     if (!cellvalue) {
@@ -69,7 +69,7 @@
                                     }
                                 }},
                             {name: 'title', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
-                                    return '<a  data-toggle="tooltip" title="这是提示消息内容" onClick="showNews(' + "'" + rowObject.id + "'" + ');" class="grid-btn ">' + cellvalue + '</a>';
+                                    return '<a href="javascript:void(0)" data-toggle="tooltip" title="预览" onClick="showNews(' + "'" + rowObject.id + "'" + ');" class="grid-btn ">' + cellvalue + '</a>';
                                 }},
                             {name: 'industries', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     var industries_arr = [];
@@ -90,7 +90,7 @@
                                     return '<a title="点赞详情" href="/admin/news/view-like/' + obj.id + '?type=1">' + cell + '</a>';
                                 }},
                             {name: 'comment_nums', editable: true, align: 'center', formatter: function (cell, opt, obj) {
-                                    return '<a title="评论详情" onClick="viewComs(' + obj.id + ')">' + cell + '</a>';
+                                    return '<a title="评论详情" href="javascript:void(0)" onClick="viewComs(' + obj.id + ')">' + cell + '</a>';
                                 }},
                             {name: 'status', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     var s;
@@ -104,6 +104,18 @@
                                     }
                                     if (rowObject.is_top == 1) {
                                         s += '<span class="notice">(已置顶)</span>'
+                                    }
+                                    return s;
+                                }},
+                            {name: 'is_show', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
+                                    var s;
+                                    switch (cellvalue) {
+                                        case 1:
+                                            s = '<button onClick="show(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-check-circle"></i> 展示</button>';
+                                            break;
+                                        case 0:
+                                            s = '<button onClick="show(' + rowObject.id + ')" class="btn btn-mini"><i class="icon icon-remove-circle"></i><i style="color:red"> 不展示</i></button>';
+                                            break;
                                     }
                                     return s;
                                 }},
@@ -154,7 +166,7 @@
                 function actionFormatter(cellvalue, options, rowObject) {
 //                    response = '<div class="bigdiv" onmouseout=$(this).find(".showall").hide();$(this).find(".showallbtn").show(); ><a class="showallbtn" title="操作" onmouseover=$(this).hide();$(this).next(".showall").show();><i class="icon icon-resize-full"></i></a>';
 //                    response = '<div class="showall" hidden onmouseover=$(this).show();$(this).prev(".showallbtn").hide(); ><a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-                    response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
+                    response = '<a title="删除" href="javascript:void(0)" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
 //                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="复制" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
                     response += '<a title="编辑" href="/admin/news/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
@@ -289,6 +301,27 @@
                         area: ['375px', '667px'],
                         skin: 'layui-layer-lan', //没有背景色
                         content: url
+                    });
+                }
+                
+                // 更改展示状态
+                function show(id){
+                    layer.confirm('确定更改展示状态？', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                        $.ajax({
+                            type: 'post',
+                            data: {id: id},
+                            dataType: 'json',
+                            url: '/admin/news/change-show-status/'+id,
+                            success: function (res) {
+                                layer.msg(res.msg);
+                                if (res.status) {
+                                    $('#list').trigger('reloadGrid');
+                                }
+                            }
+                        });
+                    }, function () {
                     });
                 }
 </script>
