@@ -140,7 +140,7 @@
                             {name: 'is_top', editable: true, align: 'center', formatter: topFormatter},
                             {name: 'is_sign', editable: true, align: 'center', formatter: signFormatter},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
-                        pager: "#pager",
+//                        pager: "#pager",
                         rowNum: 1000,
                         //rowList: [10,1000],
                         sortname: "id",
