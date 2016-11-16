@@ -276,7 +276,7 @@
     }
     
     setTimeout(function(){
-        if (location.href.indexOf('?share=1') != -1) {
+        if ($.util.getParam('share') == 1 && !$.util.isAPP) {
             $('#share_download').show();
         }
     }, 1000);
