@@ -121,7 +121,9 @@ class NewsController extends AppController {
      */
     public function view($id = null) {
         $isCollect = [];
-        $condition = ['News.status' => 1];
+        if(strpos($this->request->referer(), 'admin') === false){
+            $condition = ['News.status' => 1];
+        }
         if(!empty($this->user)){
             $user_id = $this->user->id;
             $news = $this->News->get($id, [
