@@ -15,6 +15,11 @@
     </div>
 </a>
 <script>
+    setTimeout(function(){
+        if ($.util.getParam('share') == 1 && !$.util.isAPP) {
+            $('#share_download').show();
+        }
+    }, 1000);
     $('#open_app').on('click', function(){
         location.href = 'com.chinamatop://main/param?url='+encodeURI(document.URL);
         setTimeout(function(){
