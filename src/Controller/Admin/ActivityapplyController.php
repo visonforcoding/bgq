@@ -311,16 +311,22 @@ class ActivityapplyController extends AppController {
      * @param int $id 活动id
      */
     public function pass($id) {
-        $activity = $this->Activityapply->get($id);
-        if($activity->is_pass == 0){
-            $activity->is_pass = 1;
-            $activity->is_check = 1;
+        $activityapply = $this->Activityapply->get($id);
+        $ActivityTable = \Cake\ORM\TableRegistry::get('Activity');
+        $activity = $ActivityTable->get($activityapply->activity_id);
+        if($activityapply->is_pass == 0){
+            $activityapply->is_pass = 1;
+            $activityapply->is_check = 1;
+            $activity->apply_nums += 1;
         } else {
-            $activity->is_pass = 0;
-            $activity->is_check = 0;
+            $activityapply->is_pass = 0;
+            $activityapply->is_check = 0;
+            $activity->apply_nums -= 1;
         }
-        $activity->check_man = $this->_user->truename;
-        $res = $this->Activityapply->save($activity);
+        $activityapply->check_man = $this->_user->truename;
+        $res = $this->Activityapply->connection()->transactional(function()use($activityapply, $activity, $ActivityTable){
+            return $this->Activityapply->save($activityapply) && $ActivityTable->save($activity);
+        });
         if ($res) {
             $this->Util->ajaxReturn(true, '操作成功');
         } else {
@@ -519,16 +525,15 @@ class ActivityapplyController extends AppController {
                 foreach ($res as $k => $v) {
                     $uid[] = $v['Users']['id'];
                     $data['user_id'] = $v['Users']['id'];
-                    $a = $usermsg->values($data);
-                    debug($a);
+                    $usermsg->values($data);
                 }
-                die;
                 $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true, $extra);
                 if ($push_res) {
                     $is_success = 1;
                 } else {
                     $is_success = 0;
                 }
+                $usermsg->execute();
                 $Pushlog = \Cake\ORM\TableRegistry::get('Pushlog');
                 $pushlog = $Pushlog->newEntity([
                     'push_id'=>'-1',
