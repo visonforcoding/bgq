@@ -62,6 +62,11 @@
                     $('#main-content').bind('resize', function () {
                         $("#list").setGridWidth($('#main-content').width() - 40);
                     });
+                    $(document).keypress(function (e) {
+                        if (e.which == 13) {
+                            doSearch();
+                        }
+                    });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
                         url: "/admin/push/getDataList",
