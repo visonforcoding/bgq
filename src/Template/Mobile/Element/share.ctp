@@ -19,15 +19,16 @@
         if ($.util.getParam('share') == 1 && !$.util.isAPP) {
             $('#share_download').show();
         }
+        $('#open_app').on('click', function(){
+            location.href = 'com.chinamatop://main/param?url='+encodeURI(document.URL);
+            setTimeout(function(){
+                $('#open_app_url').attr('href', '/Wx/share-download/<?= $table ?>/<?= $id ?>');
+                $('#open_app').html('立即下载');
+            }, 500);
+        });
+        if($.util.getParam('jump')){
+            location.href = 'com.chinamatop://main/param?url='+encodeURI(document.URL);
+        }
     }, 1000);
-    $('#open_app').on('click', function(){
-        location.href = 'com.chinamatop://main/param?url='+encodeURI(document.URL);
-        setTimeout(function(){
-            $('#open_app_url').attr('href', '/Wx/share-download/<?= $table ?>/<?= $id ?>');
-            $('#open_app').html('立即下载');
-        }, 500);
-    });
-    if($.util.getParam('jump')){
-        location.href = 'com.chinamatop://main/param?url='+encodeURI(document.URL);
-    }
+    
 </script>
