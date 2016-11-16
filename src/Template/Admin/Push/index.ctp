@@ -4,22 +4,10 @@
 <link href="/wpadmin/lib/select2/css/select2.min.css" rel="stylesheet">
 <?php $this->end() ?> 
 <div class="col-xs-12">
-    <form id="table-bar-form">
+    <form id="table-bar-form" onsubmit="return false;">
         <div class="table-bar form-inline">
-<!--            <div class="form-group">
-                <label for="keywords">类别</label>
-                <select id="cate" class="form-control" name="type">
-                    <option></option>
-                    <option value="1" id="cate_activity">活动</option>
-                    <option value="2" id="cate_industry">标签</option>
-                </select>
-            </div>
             <div class="form-group">
-                <label for="keywords">活动</label>
-                <?= $this->cell('ActivityRecommend', [['single']]); ?>
-            </div>-->
-            <div class="form-group">
-                <label for="keywords">标签</label>
+                <label for="industry">标签</label>
                 <?=$this->cell('Industry::push',[['single']])?>
             </div>
             <div class="form-group">
@@ -179,13 +167,6 @@
                 }
 
                 function doSearch() {
-//                    if($('#cate').val() == ''){
-//                        layer.alert('请先选择一个类别');
-//                        return;
-//                    } else if($('#cate').val() == 1 && $('#select-activity').val() == ''){
-//                        layer.alert('请选择一个活动');
-//                        return;
-//                    } else if($('#cate').val() == 2 && $('#select-industry').val() == ''){
                     if($('#select-industry').val() == ''){
                         layer.alert('请选择一个标签');
                         return;
