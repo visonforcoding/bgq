@@ -161,11 +161,6 @@
 <script>
     window.location.hash = '';
     $('table').removeAttr('width');
-    setTimeout(function () {
-        if (location.href.indexOf('?share=1') != -1) {
-            $('#share_download').show();
-        }
-    }, 1000);
     function checkLogin(func) {
         if (window.__user_id || $.util.getCookie('token_uin')) {
             func();
