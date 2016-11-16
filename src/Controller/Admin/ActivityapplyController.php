@@ -472,6 +472,18 @@ class ActivityapplyController extends AppController {
 //            } else {
 //                $query = $this->Activityapply->find();
 //            }
+            $title = $this->request->data('title');
+            $content = $this->request->data('content');
+            $url = $this->request->data('url');
+            if ($url) {
+                if(stripos($url, 'm.chinamatop.com') !== false){
+                    $extra['url'] = $url;
+                } else {
+                    $extra['url'] = 'http://m.chinamatop.com' . $url;
+                }
+            } else {
+                $extra = [];
+            }
             $query = $this->Activityapply->find()->where(['Activityapply.id in'=>$select_id]);
             $query->select(['Users.user_token', 'Users.phone', 'Users.id', 'Users.truename']);
             $query->hydrate(false);
@@ -480,6 +492,7 @@ class ActivityapplyController extends AppController {
 //            }
             $query->contain(['Users', 'Activities']);
             $res = $query->toArray();
+            
             $user = '';
             $mobile_arr = [];
             foreach ($res as $k => $v) {
@@ -487,9 +500,6 @@ class ActivityapplyController extends AppController {
                 $uid[] = $v['Users']['id'];
                 $mobile_arr[]  = $v['Users']['phone'];
             }
-            $title = $this->request->data('title');
-            $content = $this->request->data('content');
-            $url = $this->request->data('url');
             // 选择短信
             if($text !== 'false'){
                 $this->loadComponent('Sms');
@@ -499,14 +509,16 @@ class ActivityapplyController extends AppController {
             // 选择推送
             if($push !== 'false'){
                 $this->loadComponent('Push');
-                if ($url) {
-                    if(stripos($url, 'm.chinamatop.com') !== false){
-                        $extra['url'] = $url;
-                    } else {
-                        $extra['url'] = 'http://m.chinamatop.com' . $url;
-                    }
-                } else {
-                    $extra = [];
+                $UsermsgTable = \Cake\ORM\TableRegistry::get('Usermsg');
+                $usermsg = $UsermsgTable->query()->insert(['user_id', 'title', 'msg', 'url', 'create_time']);
+                $data = [
+                    'title' => $title,
+                    'msg' => $content,
+                    'url' => !empty($extra) ? $extra['url'] : 'javascript:void(0)',
+                    'create_time' => date('Y-m-d H:i:s')
+                ];
+                foreach ($res as $k => $v) {
+                    $usermsg->values($data);
                 }
                 $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true, $extra);
                 if ($push_res) {
@@ -520,7 +532,7 @@ class ActivityapplyController extends AppController {
                     'get_message_uid' => serialize($uid),
                     'title'=>$title,
                     'body'=>$content,
-                    'extra' => $extra['url'],
+                    'extra' => empty($extra) ? '' : $extra['url'],
                     'type'=>'3',
                     'remark'=>  $this->request->data('remark'),
                     'is_success' => $is_success,
