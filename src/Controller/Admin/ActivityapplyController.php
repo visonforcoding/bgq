@@ -200,7 +200,7 @@ class ActivityapplyController extends AppController {
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
         }
-        $query->limit(intval($rows))->page(intval($page));
+//        $query->limit(intval($rows))->page(intval($page));
         $res = $query->toArray();
         if (empty($res)) {
             $res = array();
@@ -497,7 +497,6 @@ class ActivityapplyController extends AppController {
             $mobile_arr = [];
             foreach ($res as $k => $v) {
                 $user .= $v['Users']['user_token'] . "\n";
-                $uid[] = $v['Users']['id'];
                 $mobile_arr[]  = $v['Users']['phone'];
             }
             // 选择短信
@@ -518,8 +517,12 @@ class ActivityapplyController extends AppController {
                     'create_time' => date('Y-m-d H:i:s')
                 ];
                 foreach ($res as $k => $v) {
-                    $usermsg->values($data);
+                    $uid[] = $v['Users']['id'];
+                    $data['user_id'] = $v['Users']['id'];
+                    $a = $usermsg->values($data);
+                    debug($a);
                 }
+                die;
                 $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true, $extra);
                 if ($push_res) {
                     $is_success = 1;
