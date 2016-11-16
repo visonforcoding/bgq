@@ -137,10 +137,10 @@ class PushController extends AppController {
                 }
                 $this->loadComponent('Push');
                 if($industry_id === 'all' && empty($keyword)){
-                    $push_res = $this->Push->sendAll($title, $content, $title, false, $extra);
+                    $push_res = $this->Push->sendAll($title, $content, $title, true, $extra);
                     $type = 1;
                 } else {
-                    $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', false, $extra);
+                    $push_res = $this->Push->sendFile($title, $content, $title, $user, 'BGB', true, $extra);
                     $type = 3;
                 }
                 $query->execute();
