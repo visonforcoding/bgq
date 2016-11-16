@@ -275,12 +275,6 @@
         $('#want_enroll').attr('href', '/beauty/index');
     }
     
-    setTimeout(function(){
-        if ($.util.getParam('share') == 1 && !$.util.isAPP) {
-            $('#share_download').show();
-        }
-    }, 1000);
-    
     window.article = true;
     window.reply = true;
     window.location.hash = '';
