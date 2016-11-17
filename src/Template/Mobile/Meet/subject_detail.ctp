@@ -32,13 +32,14 @@
     <div class="a-form-box m-form-box">
         <ul>
             <li>
-                <i>请简略介绍需求(300字以下)</i>
-                <textarea id="summary"></textarea>
+                <i>请简略介绍需求</i>
+                <!--<textarea id="summary"></textarea>-->
+                <input type="text" placeholder='若有提前说明事项，请输入' id="summary" />
                 <i class="m-tips"><b class="iconfont"></b>详细的介绍能让会员更加了解你<span>你填的信息只有会员能看到，不会公开给其它人</span></i>
             </li>
         </ul>
     </div>
-    <a href="javascript:void(0)" id="submit" class="nextstep" user_id="<?= $user_id ?>">立即预约</a>
+    <a href="javascript:void(0)" id="submit" class="f-bottom" user_id="<?= $user_id ?>">立即约见</a>
 </div>
 <div class="reg-shadow" ontouchmove="return false;" id="shadow" hidden></div>
 <div class="totips" hidden id="checkBtn">
@@ -84,7 +85,7 @@
                 $.util.alert('内容不可为空');
                 return false;
             } else if (summary.length > 300) {
-                $.util.alert('请填写300字以下的简介');
+                $.util.alert('请填写300字以下');
                 return false;
             }
             $.util.ajax({

@@ -784,9 +784,7 @@ class HomeController extends AppController {
         $uid = $this->user->id;
         $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
         $book = $BookTable->get($book_id, [
-            'contain' => ['Subjects'=>function($q){
-                return $q->where(['Subjects.is_del'=>0]);
-            }]
+            'contain' => ['Subjects']
         ]);
         $this->set([
             'pageTitle'=>'约见聊天',
