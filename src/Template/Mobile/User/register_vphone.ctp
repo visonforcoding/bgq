@@ -35,9 +35,11 @@
     }
 
     var t1 = null;
-    $('input[name="phone"]').focusout(function () {
-        var phone = $(this).val();
-        checkPhone(phone);
+    $('input[name="phone"]').bind('input propertychange', function () {
+        if ($(this).val().length >= 11) {
+            var phone = $(this).val();
+            checkPhone(phone);
+        }
     });
     $('#getVcode').on('click', function () {
         var phone = $('input[name="phone"]').val();
@@ -106,12 +108,16 @@
         });
         return false;
     });
+    
     function checkPhone(phone) {
         if (phone !== '') {
             if ($.util.isMobile(phone)) {
                 $.post('/user/ckUserPhoneExist', {phone: phone}, function (res) {
                     if (res.status === true) {
                          $.util.alert('该手机号已注册');
+                         $('#getVcode').addClass('noTap');
+                    } else {
+                        $('#getVcode').removeClass('noTap');
                     }
                 }, 'json');
             } else {
