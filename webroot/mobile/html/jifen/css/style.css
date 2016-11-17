@@ -123,7 +123,7 @@ background-size:18px 18px;}
 .noorder_tips p{color:#919191;font-size: 14px;text-align: center;}
 .tips{width:100%;height:100%;overflow: hidden;background: rgba(0,0,0,.3);position:fixed;top:0;left:0;z-index: 99;display: -webkit-box;
 -webkit-box-align: center;-webkit-box-pack: center;}
-.tips_des{padding:25px 20px;background: #fff;width:80%;text-align: center;border-radius: 10px;font-size:35px;color:#ff6c4a;position: relative;
+.tips_des{padding:25px 20px;background: #fff;width:80%;text-align: center;border-radius: 10px;color:#ff6c4a;position: relative;
 max-width: 600px;}
 .ft0{font-size:0;}
 .tips_des h1.success{background:url(icon/order_sucess.png) no-repeat center center;background-size:154px 32px;height:32px;margin-bottom:10px;}
@@ -153,3 +153,4 @@ max-width: 600px;}
 .help_list ul .hide{max-height:0;-webkit-transition:max-height .3s ease-in;transition:max-height  .3s  ease;}
 .help_list ul .scale{-webkit-transform: rotate(180deg);transform: rotate(180deg);-webkit-transition: all .1s ease-out;transition: all .1s ease-out;}
 .help_list ul .con p{font-size: 14px;color:#8a8a8a;margin:5px 0;}
+.wraper div ul li.mt25 a.a_icon{display: inline-block;text-align: center;}
