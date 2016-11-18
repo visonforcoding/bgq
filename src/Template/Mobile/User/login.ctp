@@ -62,10 +62,10 @@
         var index = $(this).index();
         $('.loginbox').eq(index).show().siblings().hide();
         login_type = index;
-    })
+    });
     window.onBackView = function () {
         LEMON.event.back();
-    }
+    };
     if (location.href.indexOf('loginout=1') > 0) {
         $.util.setCookie('token_uin', '');
         LEMON.db.set('token_uin', '');
