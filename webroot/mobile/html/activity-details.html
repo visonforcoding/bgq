@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
 		<script src="../js/view.js"></script>
+		<script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<header>
@@ -422,20 +423,23 @@
 			<span class="iconfont"></span>
 		</div>-->
 		<!--赞助报名-->
-		<div class="fixed-btn">
-			<a href="activity-guest.html" class="l-btn">我要推荐</a>
-			<a href="activity-pay.html" class="r-btn">我要报名(400元)</a>
+		<div class="a_fixed_group">
+			<div class="entrol_group" id="choose">
+				<span class="choose_num">单人行（100）</span>
+				<span class="choose_num">三人行（400）</span>
+			</div>
+			<div class="bottombtn flex">
+				<a href="activity-guest.html" class="l-btn">我要推荐</a>
+				<a href="javascript:void(0);" class="r-btn" id="entrol">我要报名(400元)</a>
+			</div>
 		</div>
-		<div class="reg-shadow" style='display:none'>
-			
-		</div>
+		<div class="reg-shadow" style='display:none'></div>
 		<div class="shadow-info a-shadow a-forword" style='display:none'>
 			<ul style='display:block'>
 				<li><textarea type="text" placeholder="请输入评论"></textarea></li>
-				
 				<li><a href="javascript:void(0);">取消</a><a href="javascript:void(0);">发表</a></li>
 			</ul>
-			<div>
+		<div>
 			<h3>通过以下渠道转发</h3>
 			<div class="forword">
 				<a href="#this"><span></span>微信好友</a>
@@ -443,6 +447,10 @@
 			</div>
 			</div>
 		</div>
-		
+		<script type="text/javascript">
+			$('#entrol').on('tap',function(){
+				$('#choose').toggleClass('hide_group');
+			})
+		</script>
 	</body>
 </html>
