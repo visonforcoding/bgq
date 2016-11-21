@@ -63,7 +63,13 @@
     <div class="submitbtn subactivity">
         <div class="back_to_top" id="toTop" onclick="javascript:window.scrollTo(0, 0);" style="display: none"><i class="iconfont">&#xe664;</i></div>
         <?php if (!$is_savant): ?>
-            <div class="submit_require" id="auth"><a href="javascript:$.util.checkLogin('/home/savant-auth');"><span class="s-activ">会员<br>认证</span></a></div>
+            <div class="submit_require" id="auth"><a href="javascript:$.util.checkLogin('/home/savant-auth');">
+                <span class="s-activ">会员<br>认证</span></a>
+            </div>
+        <?php else: ?>
+            <div class="submit_require" id="auth"><a href="javascript:$.util.checkLogin('/meet/subject');">
+                <span class="s-activ">发布<br>话题</span></a>
+            </div>
         <?php endif; ?>
     </div>
 
