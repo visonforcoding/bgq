@@ -103,13 +103,22 @@ class MeetSubjectController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function delete($id = null) {
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
         $this->request->allowMethod('post');
         $id = $this->request->data('id');
         if ($this->request->is('post')) {
             $meetSubject = $this->MeetSubject->get($id);
             $meetSubject->is_del = 1;
-            if ($this->MeetSubject->save($meetSubject)) {
-                $this->Util->ajaxReturn(true, '删除成功');
+            if($this->MeetSubject->save($meetSubject)){
+                $remainSubject = $this->MeetSubject->find()->where(['user_id'=>$meetSubject->user_id, 'is_del'=>0])->orderDesc('update_time')->first();
+                $user = $UserTable->get($meetSubject->user_id);
+                if($remainSubject){
+                    $user->subject_update_time = $remainSubject->update_time;
+                } else {
+                    $user->subject_update_time = null;
+                }
+                $UserTable->save($user);
+                return $this->Util->ajaxReturn(true,'删除成功');
             } else {
                 $errors = $meetSubject->errors();
                 $this->Util->ajaxReturn(true, getMessage($errors));

@@ -487,6 +487,7 @@ class BusinessComponent extends Component {
             'contain' => ['Activities'],
         ]);
         $Activityapply->is_pass = 1; //报名通过
+        $Activityapply->is_check = 1; //审核通过
         $order->status = 1;  //订单完成
         $order->fee = $realFee;  //实际支付金额
         $order->paytype = $payType;  //实际支付金额

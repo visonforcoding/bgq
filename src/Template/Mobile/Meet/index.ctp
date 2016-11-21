@@ -6,14 +6,14 @@
     </div>
     <div class="a-banner" >
         <ul class="pic-list-container" id="imgList">
-            <?php foreach ($banners as $k => $v): ?>
-                <li><a href="<?= $v['url'] ?>"><img src="<?= $v['img'] ?>"/></a></li>
-            <?php endforeach; ?>
+            <?php //foreach ($banners as $k => $v): ?>
+                <!--<li><a href="<?= $v['url'] ?>"><img src="<?= $v['img'] ?>"/></a></li>-->
+            <?php // endforeach; ?>
         </ul>
         <div class="yd" id="imgTab">
-            <?php foreach ($banners as $v): ?>
-                <span></span>
-            <?php endforeach; ?>
+            <?php // foreach ($banners as $v): ?>
+                <!--<span></span>-->
+            <?php // endforeach; ?>
         </div>
     </div>
     <!--分类--start-->
@@ -49,9 +49,9 @@
             <h3>为您推荐</h3>
         </div>
         <ul id='items'>
-            <?php foreach ($biggieAd as $k => $v): ?>
-                <li><a href="/user/home-page/<?= $v['savant']['user_id'] ?>"><img src="<?= $v['url'] ?>"/></a></li>
-            <?php endforeach; ?>
+            <?php //foreach ($biggieAd as $k => $v): ?>
+                <!--<li><a href="/user/home-page/////<?= $v['savant']['user_id'] ?>"><img src="<?= $v['url'] ?>"/></a></li>-->
+            <?php //endforeach; ?>
         </ul>
     </div>
     <div class="h2"></div>
@@ -74,6 +74,12 @@
     </div>
 
 </div>
+<script id="itemsTpl" type="text/html">
+    <li><a href="/user/home-page/{#user_id#} ?>"><img src="{#url#}"/></a></li>
+</script>
+<script type="text/html" id="bannerTpl">
+    <li><a href="{#url#}"><img src="{#img#}"/></a></li>
+</script>
 <script type='text/html' id='biggie_tpl'>
     <section class="internet-v-info">
         <div class="innercon">
@@ -118,63 +124,150 @@
     }
 </script>
 <script>
-//    var meet = function(o){
-//        this.opt = {
-//            init_vip: LEMON.db.get('vip'), // 页面初始直接获取的数据
-//            init_banner: LEMON.db.get('banner'),
-//            init_biggieAd: LEMON.db.get('biggieAd'),
-//        };
-//        $.extend(this, this.opt, o);
-//    };
-//    
-//    $.extend(activity.prototype, {
-//        init:function(){
-//            this.getData();
-//        },
-//        
-//        getData: function(){
-//            var obj = this;
-//            if(!obj.init_data){
-//                $.getJSON('/meet/getMoreBiggie/1', function (res) {
-//                    if (res.status) {
-//                        staticData(res.data);
-//                    }
-//                });
-//            } else {
-//                var html = $.util.dataToTpl('', 'biggie_tpl', JSON.parse(data), tpldate);
-//                $('#biggie').append(html);
-//            }
-//        },
-//    });
+    var meet = function(o){
+        this.opt = {
+            init_vip: LEMON.db.get('vip'), // 页面初始直接获取的数据
+            init_banner: LEMON.db.get('banner'),
+            init_biggieAd: LEMON.db.get('biggieAd')
+        };
+        $.extend(this, this.opt, o);
+    };
     
-    
-    var data = LEMON.db.get('vip');
-    if(!data){
-        $.getJSON('/meet/getMoreBiggie/1', function (res) {
-            if (res.status) {
-                staticData(res.data);
+    $.extend(meet.prototype, {
+        init:function(){
+            this.getBanner();
+            this.getRecommend();
+            this.getData();
+        },
+        
+        getBanner: function(){
+            var obj = this;
+            if(!obj.init_banner){
+                $.getJSON('/meet/get-banner', function (res) {
+                    if (res.status) {
+                        obj.staticBanner(res.data);
+                    }
+                    var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'), $('.a-banner'));
+                });
+            } else {
+                this.setHeader(JSON.parse(obj.init_banner));
             }
-        });
-    } else {
-        $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(data), tpldate);
-        $.getJSON('/meet/getMoreBiggie/1', function (res) {
-            if (res.status) {
-                staticData(res.data);
+        },
+        getRecommend: function(){
+            var obj = this;
+            if(!obj.init_recommend){
+                $.getJSON('/meet/get-recommend', function (res) {
+                    if (res.status) {
+                        obj.staticRecommend(res.data);
+                    }
+                    var sub = null;
+                    setTimeout(function () {
+                        sub = $.util.loop({
+                            min: 3,
+                            moveDom: $('#items'),
+                            moveChild: $('#items li'),
+                            lockScrY: true,
+                            loopScroll: true,
+                            autoTime: 0,
+                            viewDom: $('.dk')
+                        });
+                    }, 0);
+                });
+            } else {
+                this.setRecommend(JSON.parse(obj.init_recommend));
             }
-        });
-    }
-    
-    function staticData(netData){
-        var data_str = JSON.stringify(netData);
-        if(data_str == data){
-            $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(data), tpldate);
-            $.util.initLoadImg('biggie');
-        } else {
-            LEMON.db.set('vip', data_str);
-            $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(data_str), tpldate);
-            $.util.initLoadImg('biggie');
+        },
+        getData: function(){
+            var obj = this;
+            if(!obj.init_data){
+                $.getJSON('/meet/getMoreBiggie/1', function (res) {
+                    if (res.status) {
+                        obj.staticData(res.data);
+                    }
+                });
+            } else {
+                var html = $.util.dataToTpl('', 'biggie_tpl', JSON.parse(data), tpldate);
+                $('#biggie').append(html);
+            }
+        },
+        setHeader: function (data){
+            var tab = [], html = $.util.dataToTpl('', 'bannerTpl', data, function (d) {
+                tab.push('<span></span>');
+                return d;
+            });
+            $('#imgList').html(html);
+            $('#imgTab').html(tab.join(''));
+            var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'), $('.a-banner'));
+        },
+        setRecommend: function (data){
+            $.util.dataToTpl('items', 'itemsTpl', data, function(d){
+                d.user_id = d.savant.user_id;
+                return d;
+            });
+        },
+        staticBanner: function (netBanner){
+            var obj = this;
+            var str = JSON.stringify(netBanner);
+            if(str == obj.init_banner){
+                this.setHeader(JSON.parse(obj.init_banner));
+            } else {
+                LEMON.db.set('banner', str);
+                this.setHeader(JSON.parse(str));
+            }
+        },
+        staticRecommend: function (netRecommend){
+            var str = JSON.stringify(netRecommend);
+            if(str == this.init_recommend){
+                this.setRecommend(JSON.parse(this.init_recommend));
+            } else {
+                LEMON.db.set('biggieAd', str);
+                this.setRecommend(JSON.parse(str));
+            }
+        },
+        staticData: function (netData){
+            var str = JSON.stringify(netData);
+            if(str == this.init_data){
+                $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(this.init_data), tpldate);
+                $.util.initLoadImg('biggie');
+            } else {
+                LEMON.db.set('vip', str);
+                $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(str), tpldate);
+                $.util.initLoadImg('biggie');
+            }
         }
-    }
+    });
+    var meetobj = new meet();
+    meetobj.init();
+    
+    
+    
+//    var data = LEMON.db.get('vip');
+//    if(!data){
+//        $.getJSON('/meet/getMoreBiggie/1', function (res) {
+//            if (res.status) {
+//                staticData(res.data);
+//            }
+//        });
+//    } else {
+//        $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(data), tpldate);
+//        $.getJSON('/meet/getMoreBiggie/1', function (res) {
+//            if (res.status) {
+//                staticData(res.data);
+//            }
+//        });
+//    }
+//    
+//    function staticData(netData){
+//        var data_str = JSON.stringify(netData);
+//        if(data_str == data){
+//            $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(data), tpldate);
+//            $.util.initLoadImg('biggie');
+//        } else {
+//            LEMON.db.set('vip', data_str);
+//            $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(data_str), tpldate);
+//            $.util.initLoadImg('biggie');
+//        }
+//    }
     
     
     
@@ -279,20 +372,21 @@
     }, 1000);
 
     //轮播
-    var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'), $('.a-banner'));
+//    var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'), $('.a-banner'));
 
-    var sub = null;
-    setTimeout(function () {
-        sub = $.util.loop({
-            min: 3,
-            moveDom: $('#items'),
-            moveChild: $('#items li'),
-            lockScrY: true,
-            loopScroll: true,
-            autoTime: 0,
-            viewDom: $('.dk')
-        });
-    }, 0);
+    // 会员推荐轮播
+//    var sub = null;
+//    setTimeout(function () {
+//        sub = $.util.loop({
+//            min: 3,
+//            moveDom: $('#items'),
+//            moveChild: $('#items li'),
+//            lockScrY: true,
+//            loopScroll: true,
+//            autoTime: 0,
+//            viewDom: $('.dk')
+//        });
+//    }, 0);
 
     $.util.searchHide();
 

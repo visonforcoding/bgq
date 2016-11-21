@@ -26,23 +26,23 @@ class MeetController extends AppController {
      */
     public function index() {
         // 轮播图
-        $bannerTable = \Cake\ORM\TableRegistry::get('banner');
-        $banners = $bannerTable
-                ->find()
-                ->where("`enabled` = '1' and `type` = '3'")
-                ->orderDesc('create_time')
-                ->limit(3)
-                ->toArray();
-        $this->set(compact('banners'));
+//        $bannerTable = \Cake\ORM\TableRegistry::get('banner');
+//        $banners = $bannerTable
+//                ->find()
+//                ->where("`enabled` = '1' and `type` = '3'")
+//                ->orderDesc('create_time')
+//                ->limit(3)
+//                ->toArray();
+//        $this->set(compact('banners'));
         
         // 广告
-        $biggieAdTable = \Cake\ORM\TableRegistry::get('BiggieAd');
-        $biggieAds = $biggieAdTable->find()->contain(['Savants'=>function($q){
-                return $q->contain(['Users'=>function($w){
-                    return $w->where(['enabled'=>1, 'is_del'=>0]);
-                }]);
-            }])->all();
-        $this->set('biggieAd', $biggieAds);
+//        $biggieAdTable = \Cake\ORM\TableRegistry::get('BiggieAd');
+//        $biggieAds = $biggieAdTable->find()->contain(['Savants'=>function($q){
+//                return $q->contain(['Users'=>function($w){
+//                    return $w->where(['enabled'=>1, 'is_del'=>0]);
+//                }]);
+//            }])->all();
+//        $this->set('biggieAd', $biggieAds);
         
         $user_id = '';
         $is_savant = false;
@@ -54,36 +54,39 @@ class MeetController extends AppController {
                 $is_savant = true;
             }
         }
-//        // 默认用户
-//        $users = $this
-//                ->User
-//                ->find()
-//                ->distinct('User.id')
-//                ->contain(['Subjects'=>function($exp){
-//                    return $exp->where(['is_del'=>0])->orderDesc('create_time');
-//                }, 'Followers'=>function($q)use($user_id){
-//                    return $q->where(['user_id'=>$user_id]);
-//                }, 'Savants'=>function($q){
-//                    return $q->orderDesc('Savants.check_time');
-//                }])
-//                ->select(['id', 'truename', 'position', 'company', 'avatar', 'meet_nums'])
-//                ->where(['enabled'=>'1', 'level'=>'2'])
-//                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc'])
-//                ->limit($this->limit)
-//                ->formatResults(function($items) {
-//                    return $items->map(function($item) {
-//                        $item['avatar'] = getSmallAvatar($item['avatar']);
-//                        $item['followers'] = count($item['followers']) ? 1 : 0;
-//                        return $item;
-//                    });
-//                })
-//                ->toArray();
-//        $this->set('meetjson', json_encode($users));
         $this->set([
             'pageTitle'=>'约见',
             'user_id'=>$user_id,
             'is_savant'=>$is_savant,
         ]);
+    }
+    
+    /**
+     * ajax获取banner图
+     */
+    public function getBanner(){
+        // 轮播图
+        $bannerTable = \Cake\ORM\TableRegistry::get('banner');
+        $banners = $bannerTable
+                ->find()
+                ->where("`enabled` = '1' and `type` = '3'")
+                ->orderDesc('create_time')
+                ->limit(3)
+                ->toArray();
+        return $this->Util->ajaxReturn(['status'=>true, 'data'=>$banners]);
+    }
+    
+    /**
+     * ajax获取会员推荐图
+     */
+    public function getRecommend(){
+        $biggieAdTable = \Cake\ORM\TableRegistry::get('BiggieAd');
+        $biggieAds = $biggieAdTable->find()->contain(['Savants'=>function($q){
+                return $q->contain(['Users'=>function($w){
+                    return $w->where(['enabled'=>1, 'is_del'=>0]);
+                }]);
+            }])->all();
+        return $this->Util->ajaxReturn(['status'=>true, 'data'=>$biggieAds]);
     }
     
     /**
@@ -386,16 +389,16 @@ class MeetController extends AppController {
             }
             $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
             $book = $BookTable->newEntity($data);
-            if($BookTable->save($book)){
+            $book_res = $BookTable->save($book);
+            if($book_res){
                 $this->loadComponent('Business');
                 $user_id = $subject->user->id;
                 $this->Business->usermsg($this->user->id, $user_id,'话题预约','您有新的话题预约请求', 4, $book->id, '/home/my-book/#4');
-                return $this->Util->ajaxReturn(true,'预定成功');
+                return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'约见成功', 'data'=>['book_id'=>$book_res->id]]);
             }else{
                 $error = errorMsg($book,'预定失败');
                 return $this->Util->ajaxReturn(false,$error);
             }
-            
         }
         $this->set([
             'pageTitle'=>'话题预约',
