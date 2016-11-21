@@ -118,6 +118,36 @@
     }
 </script>
 <script>
+//    var meet = function(o){
+//        this.opt = {
+//            init_vip: LEMON.db.get('vip'), // 页面初始直接获取的数据
+//            init_banner: LEMON.db.get('banner'),
+//            init_biggieAd: LEMON.db.get('biggieAd'),
+//        };
+//        $.extend(this, this.opt, o);
+//    };
+//    
+//    $.extend(activity.prototype, {
+//        init:function(){
+//            this.getData();
+//        },
+//        
+//        getData: function(){
+//            var obj = this;
+//            if(!obj.init_data){
+//                $.getJSON('/meet/getMoreBiggie/1', function (res) {
+//                    if (res.status) {
+//                        staticData(res.data);
+//                    }
+//                });
+//            } else {
+//                var html = $.util.dataToTpl('', 'biggie_tpl', JSON.parse(data), tpldate);
+//                $('#biggie').append(html);
+//            }
+//        },
+//    });
+    
+    
     var data = LEMON.db.get('vip');
     if(!data){
         $.getJSON('/meet/getMoreBiggie/1', function (res) {
@@ -126,21 +156,22 @@
             }
         });
     } else {
-        var html = $.util.dataToTpl('', 'biggie_tpl', JSON.parse(data), tpldate);
-        $('#biggie').append(html);
-        $.util.initLoadImg('biggie');
+        $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(data), tpldate);
+        $.getJSON('/meet/getMoreBiggie/1', function (res) {
+            if (res.status) {
+                staticData(res.data);
+            }
+        });
     }
     
     function staticData(netData){
         var data_str = JSON.stringify(netData);
         if(data_str == data){
-            var html = $.util.dataToTpl('', 'biggie_tpl', JSON.parse(data), tpldate);
-            $('#biggie').append(html);
+            $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(data), tpldate);
             $.util.initLoadImg('biggie');
         } else {
             LEMON.db.set('vip', data_str);
-            var html = $.util.dataToTpl('', 'biggie_tpl', JSON.parse(data_str), tpldate);
-            $('#biggie').append(html);
+            $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(data_str), tpldate);
             $.util.initLoadImg('biggie');
         }
     }
