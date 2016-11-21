@@ -34,7 +34,7 @@
             <li>
                 <i>请简略介绍需求</i>
                 <!--<textarea id="summary"></textarea>-->
-                <input type="text" placeholder='若有提前说明事项，请输入' id="summary" />
+                <input type="text" placeholder='请输入说明事项' id="summary" />
                 <i class="m-tips"><b class="iconfont"></b>详细的介绍能让会员更加了解你<span>你填的信息只有会员能看到，不会公开给其它人</span></i>
             </li>
         </ul>
