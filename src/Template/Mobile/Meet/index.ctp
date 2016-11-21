@@ -118,6 +118,35 @@
     }
 </script>
 <script>
+    var data = LEMON.db.get('vip');
+    if(!data){
+        $.getJSON('/meet/getMoreBiggie/1', function (res) {
+            if (res.status) {
+                staticData(res.data);
+            }
+        });
+    } else {
+        var html = $.util.dataToTpl('', 'biggie_tpl', JSON.parse(data), tpldate);
+        $('#biggie').append(html);
+        $.util.initLoadImg('biggie');
+    }
+    
+    function staticData(netData){
+        var data_str = JSON.stringify(netData);
+        if(data_str == data){
+            var html = $.util.dataToTpl('', 'biggie_tpl', JSON.parse(data), tpldate);
+            $('#biggie').append(html);
+            $.util.initLoadImg('biggie');
+        } else {
+            LEMON.db.set('vip', data_str);
+            var html = $.util.dataToTpl('', 'biggie_tpl', JSON.parse(data_str), tpldate);
+            $('#biggie').append(html);
+            $.util.initLoadImg('biggie');
+        }
+    }
+    
+    
+    
     window.onBackView = function () {
         var user_follow = $.util.getCookie('user_follow');
         if (user_follow) {
@@ -181,13 +210,7 @@
         }
     });
 
-    $.getJSON('/meet/getMoreBiggie/1', function (res) {
-        if (res.status) {
-            var html = $.util.dataToTpl('', 'biggie_tpl', res.data, tpldate);
-            $('#biggie').append(html);
-            $.util.initLoadImg('biggie');
-        }
-    });
+    
 //    $.util.initLoadImg('biggie');
 
     setTimeout(function () {
