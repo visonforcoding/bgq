@@ -19,7 +19,7 @@
             </div>
             <div style="color:red">请上传423*244的图片</div>
             <input name="url" value="<?= $biggieAd->url; ?>"  type="hidden"/>
-            <div id="url"   class="jqupload">上传</div>
+            <div id="url" w="423" h="244" class="jqupload">上传</div>
         </div>
     </div>
     <div class="form-group">

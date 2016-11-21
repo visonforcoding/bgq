@@ -22,7 +22,7 @@
             </div>
             <div style="color:red">请上传750*380大小的图片</div>
             <input name="img" value="<?= $banner->img; ?>"  type="hidden"/>
-            <div id="cover"   class="jqupload">上传</div>
+            <div id="cover" w="750" h="380" class="jqupload">上传</div>
         </div>
     </div>
     <div class="form-group">
