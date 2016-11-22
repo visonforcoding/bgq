@@ -19,7 +19,7 @@
     <!--分类--start-->
     <div class="h2"></div>
     <div class="m_title_des bd1" >
-        <h3>找会员.</h3>
+        <h3>找会员</h3>
     </div>
     <div class="menusort clearfix">
         <div class="allmenu">
