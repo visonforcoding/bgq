@@ -306,7 +306,7 @@
         d.city = '';
         var subject = d.subjects.length ? d.subjects[0] : '';
         if (window.user_id == d.id) {
-            d.subjects = subject ? '<a href="/meet/subject/' + subject.id + '"><i class="iconfont">&#xe6aa;</i>' + subject.title + '</a>' : '';
+            d.subjects = subject ? '<a href="/meet/subject/' + subject.id + '"><i class="iconfont color-items">&#xe6aa;</i>' + subject.title + '</a>' : '';
         } else {
             d.subjects = subject ? '<a href="javascript:$.util.checkLogin(\'/meet/subject-detail/' + subject.id + '/#index\')"><i class="iconfont color-items">&#xe6aa;</i>' + subject.title + '</a>' : '';
         }
