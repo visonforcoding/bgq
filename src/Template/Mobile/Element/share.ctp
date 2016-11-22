@@ -26,7 +26,7 @@
                 $('#open_app').html('立即下载');
             }, 500);
         });
-        if($.util.getParam('jump')){
+        if($.util.getParam('jump') && !$.util.isAPP){
             location.href = 'com.chinamatop://main/param?url='+encodeURI(document.URL);
         }
     }, 1000);
