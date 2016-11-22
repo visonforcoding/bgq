@@ -59,7 +59,7 @@
             </div>
             <div style="color:red">请上传160*160大小的缩略图</div>
             <input name="thumb" value="<?= $news->thumb; ?>"  type="hidden"/>
-            <div id="thumb"   class="jqupload">上传</div>
+            <div id="thumb" w="160" h="160" class="jqupload">上传</div>
             <span class="notice">图片格式为jpg,png,gif,jpeg</span>
         </div>
     </div>
@@ -71,7 +71,7 @@
             </div>
             <div style="color:red">请上传宽为690，高小于388的封面图</div>
             <input name="cover" value="<?= $news->cover; ?>"  type="hidden"/>
-            <div id="cover"   class="jqupload">上传</div>
+            <div id="cover" w="690" h="388" class="jqupload">上传</div>
             <span class="notice">图片格式为jpg,png,gif,jpeg</span>
         </div>
     </div>
