@@ -17,6 +17,9 @@ class InvoiceController extends AppController {
      * @return void
      */
     public function index() {
+        if ($this->request->query('do')) {
+            $this->set('do', 'check');
+        }
         $this->set('invoice', $this->Invoice);
     }
 
