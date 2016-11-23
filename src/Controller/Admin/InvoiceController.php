@@ -123,7 +123,7 @@ class InvoiceController extends AppController {
         if ($is_VAT !== 'all_VAT' && !empty($is_VAT)) {
             $where['is_VAT'] = $is_VAT;
         }
-        if ($is_shipment !== 'all_shipment' && !empty($is_shipment)) {
+        if ($is_shipment !== 'all_shipment' && isset($is_shipment)) {
             $where['is_shipment'] = $is_shipment;
         }
         if (!empty($keywords)) {
