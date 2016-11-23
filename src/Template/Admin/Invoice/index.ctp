@@ -59,7 +59,7 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/invoice/getDataList",
+                        url: "/admin/invoice/getDataList/<?php if (isset($do)): ?>?do=check<?php endif; ?>",
                         datatype: "json",
                         mtype: "POST",
                         colNames:
