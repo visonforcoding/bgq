@@ -103,7 +103,7 @@
                             发票申请         
                         </div>
                         <div class="databox-right">
-                            <a class="a-link" href="/admin/invoice/index">
+                            <a class="a-link" href="/admin/invoice/index?do=check">
                                 <span class="databox-number themesecondary"><?= $invoiceCounts ?></span>
                                 <div class="databox-text darkgray">待处理</div>
                                 <div class="databox-stat themesecondary radius-bordered">
