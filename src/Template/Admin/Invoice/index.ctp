@@ -25,7 +25,7 @@
                 <label for="is_shipment">发货情况</label>
                 <select class="form-control" name="is_shipment">
                     <option value="all_shipment">全部</option>
-                    <option value="0">未发货</option>
+                    <option value="0" <?php if (isset($do)): ?>selected="selected"<?php endif; ?>>未发货</option>
                     <option value="1">已发货</option>
                 </select>
             </div>

@@ -92,7 +92,6 @@
                     </a>
                     <div class="mark line1">
                         {#subjects#}
-                        <!--<a href="#this"><i class="iconfont"></i>演员的自我修养演员的自我修养演员的自我修养演员的自我修养</a>-->
                     </div>
                 </div>
                 <div class="m_focus_r r_focus_num fl {#focus_class#}" user_id="{#id#}" {#focus_id_str#}>
@@ -238,38 +237,6 @@
     });
     var meetobj = new meet();
     meetobj.init();
-    
-    
-    
-//    var data = LEMON.db.get('vip');
-//    if(!data){
-//        $.getJSON('/meet/getMoreBiggie/1', function (res) {
-//            if (res.status) {
-//                staticData(res.data);
-//            }
-//        });
-//    } else {
-//        $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(data), tpldate);
-//        $.getJSON('/meet/getMoreBiggie/1', function (res) {
-//            if (res.status) {
-//                staticData(res.data);
-//            }
-//        });
-//    }
-//    
-//    function staticData(netData){
-//        var data_str = JSON.stringify(netData);
-//        if(data_str == data){
-//            $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(data), tpldate);
-//            $.util.initLoadImg('biggie');
-//        } else {
-//            LEMON.db.set('vip', data_str);
-//            $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(data_str), tpldate);
-//            $.util.initLoadImg('biggie');
-//        }
-//    }
-    
-    
     
     window.onBackView = function () {
         var user_follow = $.util.getCookie('user_follow');
