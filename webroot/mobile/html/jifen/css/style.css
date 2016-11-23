@@ -42,7 +42,8 @@ header h1.logintitle{background: url(icon/toback.png) no-repeat left center;back
 .home_title{background: url(icon/allbgs.png) no-repeat -606px 0;display: block;width:74px;margin:0 auto;height:28px;}
 .quit_login{position:relative;right:0;}
 .home_user_info{padding:31px 0 24px;}
-.home_user_info .imginfo{/*background: url(icon/allbgs.png) no-repeat -782px -5px;*/ width:76px;height:75px;display: inline-block;margin-left:-6px;vertical-align: top;overflow: hidden;}
+.home_user_info .imginfo{/*background: url(icon/allbgs.png) no-repeat -782px -5px;*/ width:76px;height:76px;display: inline-block;margin-left:-6px;vertical-align: top;overflow: hidden;border-radius: 50%;}
+.home_user_info .imginfo img{width:100%;height:100%;overflow: hidden;}
 .home_head_info{font-size:18px;margin-left:14px;display: inline-block;padding-top:5px;}
 /*.home_head_info h1{line-height: 34px;}*/
 .home_head_info h1 {/*background: url(icon/allbgs.png) no-repeat -837px -292px;*/background: url(icon/icon01.png) no-repeat left center;
