@@ -165,6 +165,17 @@
                             repeatitems: false,
                             id: 'id',
                         },
+                        loadComplete: function (data) {
+                            var clip = '';
+                            clip = new ZeroClipboard($('.copy'));
+                            console.log('可以复制了');
+                            clip.on('copy', function (event) {
+                                clip.setData('text/plain', '/user/home-page/' + event.target.id);
+                            });
+                            clip.on("aftercopy", function (event) {
+                                layer.msg("复制了: " + event.data["text/plain"]);
+                            });
+                        },
                         afterSubmitCell: function (serverresponse, rowid, cellname, value, iRow, iCol) {
                             var res = $.parseJSON(serverresponse.responseText);
                             layer.msg(res.msg);
@@ -190,17 +201,17 @@
                     return response;
                 }
 
-                var clip = '';
-                setTimeout(function () {
-                    clip = new ZeroClipboard($('.copy'));
-                    console.log('可以复制了');
-                    clip.on('copy', function (event) {
-                        clip.setData('text/plain', '/user/home-page/' + event.target.id);
-                    });
-                    clip.on("aftercopy", function (event) {
-                        alert("复制了: " + event.data["text/plain"]);
-                    });
-                }, 1000);
+//                var clip = '';
+//                setTimeout(function () {
+//                    clip = new ZeroClipboard($('.copy'));
+//                    console.log('可以复制了');
+//                    clip.on('copy', function (event) {
+//                        clip.setData('text/plain', '/user/home-page/' + event.target.id);
+//                    });
+//                    clip.on("aftercopy", function (event) {
+//                        alert("复制了: " + event.data["text/plain"]);
+//                    });
+//                }, 1000);
 
                 function delRecord(id) {
                     layer.confirm('确定删除？', {
