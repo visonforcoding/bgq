@@ -129,6 +129,9 @@ class InvoiceController extends AppController {
         if ($is_shipment !== 'all_shipment' && isset($is_shipment)) {
             $where['is_shipment'] = $is_shipment;
         }
+        if($this->request->query('do')){
+            $where['is_shipment'] = 0;
+        }
         if (!empty($keywords)) {
             $where['or'] = [
                 'Users.truename like' => "%$keywords%",
