@@ -113,13 +113,14 @@ $.func = {
      * 获取验证码
      * @param {type} phone 手机号码
      */
-    getVcode: function(phone){
+    getVcode: function(phone, type){
         if(phone == '') {
             $('#msg').html('请输入手机号');
             $('.tips').show();
             return;
         }
-        var str = 'userName=' + phone + '&channelId=' + $.func.getUrlParam('channelId');
+        var str = 'userName=' + phone + '&channelId=' + $.func.getUrlParam('channelId') + '&type=' + type;
+        console.log(str);
         var code = strEnc(str, _config.key1, _config.key2, _config.key3);
         $.ajax({
             type: 'post',
