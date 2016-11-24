@@ -82,9 +82,9 @@ class SubjectBookTable extends Table {
                 ->integer('id')
                 ->allowEmpty('id', 'create');
 
-        $validator
-                ->requirePresence('summary', 'create')
-                ->notEmpty('summary');
+//        $validator
+//                ->requirePresence('summary', 'create')
+//                ->notEmpty('summary');
 
 
         return $validator;

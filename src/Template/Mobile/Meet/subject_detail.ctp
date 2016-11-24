@@ -82,8 +82,8 @@
             var id = window.subject_id;
             var summary = $('#summary').val();
             if (!summary) {
-                $.util.alert('内容不可为空');
-                return false;
+//                $.util.alert('内容不可为空');
+//                return false;
             } else if (summary.length > 300) {
                 $.util.alert('请填写300字以下');
                 return false;
@@ -94,7 +94,7 @@
                 func: function (res) {
                     if (res.status) {
                         $.util.alert(res.msg);
-                        document.location.href = '/meet/book-success/<?= $subject->user->id ?>';
+                        document.location.href = '/meet/book-chat/'+res.data+'/1';
                     } else {
                         if (res.msg.indexOf('请先去完善个人资料') != -1) {
                             $('#msg').html(res.msg);

@@ -21,7 +21,9 @@
                         </div>
                     </div>
                 </li>
-                <div class="desc"><span><?= $book->summary ?></span></div>
+                <?php if($book->summary): ?>
+                    <div class="desc"><span><?= $book->summary ?></span></div>
+                <?php endif; ?>
             <?php else: ?>
                 <li class="fr">
                     <div class="flex chatbox">
