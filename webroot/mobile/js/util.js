@@ -45,6 +45,24 @@ $.util = {
         return html.join('');
     },
     /**
+     * 批量处理json列表数据, 后面的数据加在头部
+     * @param contentId string   容器id , 传入空字符串‘’的话，会返回组装好的html
+     * @param tplId string 模板id
+     * @param data json数据列表  array
+     * @param func  处理json数据的方法，可选 会传入当前json对象
+     * @returns {string}
+     */
+    topDataToTpl:function(contentId, tplId, data, func){
+        if(!data.length) return '';
+        var html=[], tpl = $.util.id(tplId).text;
+        $.each(data, function(i,d){
+            if(func) d=func(d);
+            html.unshift($.util.jsonToTpl(d,$.util.id(tplId).text));
+        });
+        if(contentId) $('#'+contentId).html(html.join(''));
+        return html.join('');
+    },
+    /**
      * 去掉字符串两端空格
      * @param str
      */
