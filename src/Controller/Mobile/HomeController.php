@@ -958,7 +958,7 @@ class HomeController extends AppController {
             $this->Push->sendAlias($user->user_token, $me->truename.'给你发了一条消息', $data['content'], $me->truename.'给你发了一条消息', 'BGB', true, $extra);
             $reply_res = $bookChatTable
                 ->find()
-                ->where(['bookChat.id'=>$res->id])
+                ->where(['BookChat.id'=>$res->id])
                 ->contain(['Users', 'ReplyUsers', 'SubjectBooks'])
                 ->select(['book_id', 'content', 'id', 'reply_id', 'Users.id', 'Users.avatar', 'create_time', 'is_show_time'])
                 ->formatResults(function($items) {
