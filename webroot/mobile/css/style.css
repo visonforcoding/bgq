@@ -1369,7 +1369,7 @@ box-align:center;-webkit-box-align:center;}
 .chatinfo_list li .avatar img{width:100%;height:100%;display: block;}
 .chatinfo_list li .l_info{height:1.12rem;}
 .chatinfo_list li .l_text{padding-left:1.22rem;padding-top:.1rem;}
-.chatinfo_list li .l_text .title{line-height: .5rem;}
+.chatinfo_list li .l_text .title{line-height: .5rem;max-width:4rem;}
 .chatinfo_list li .title span{font-size: .22rem;color:#999;margin-left:.2rem;}
 .chatinfo_list li .cont{font-size: .22rem;color:#666;}
 .chatinfo_list li .cont .iconfont{color:#B71C2D;margin-right:.05rem;font-size: .24rem;}
