@@ -71,8 +71,6 @@
     if($.util.isAPP){
         if($.util.getParam('book')){
             LEMON.sys.back('/meet/index');
-        } else {
-            LEMON.sys.back('meet/chat-list');
         }
     }
     
