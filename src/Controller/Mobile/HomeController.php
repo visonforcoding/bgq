@@ -916,7 +916,7 @@ class HomeController extends AppController {
     public function replyChat($book_id, $type){
         $user_id = $this->user->id;
         $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
-        $bookChatTable = \Cake\ORM\TableRegistry::get('bookChat');
+        $bookChatTable = \Cake\ORM\TableRegistry::get('BookChat');
         $book = $BookTable->get($book_id);
         $where = [];
         $where['BookChat.user_id in'] = [$book->savant_id, $book->user_id];
