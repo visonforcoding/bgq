@@ -25,25 +25,6 @@ class MeetController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        // 轮播图
-//        $bannerTable = \Cake\ORM\TableRegistry::get('banner');
-//        $banners = $bannerTable
-//                ->find()
-//                ->where("`enabled` = '1' and `type` = '3'")
-//                ->orderDesc('create_time')
-//                ->limit(3)
-//                ->toArray();
-//        $this->set(compact('banners'));
-        
-        // 广告
-//        $biggieAdTable = \Cake\ORM\TableRegistry::get('BiggieAd');
-//        $biggieAds = $biggieAdTable->find()->contain(['Savants'=>function($q){
-//                return $q->contain(['Users'=>function($w){
-//                    return $w->where(['enabled'=>1, 'is_del'=>0]);
-//                }]);
-//            }])->all();
-//        $this->set('biggieAd', $biggieAds);
-        
         $user_id = '';
         $is_savant = false;
         if($this->user){
@@ -59,6 +40,18 @@ class MeetController extends AppController {
             'user_id'=>$user_id,
             'is_savant'=>$is_savant,
         ]);
+    }
+    
+    public function unReadMsg(){
+        if($this->user){
+            $BookChatTable = \Cake\ORM\TableRegistry::get('BookChat');
+            $bookChat = $BookChatTable->find()->where([
+                'reply_id'=>$this->user->id,
+                'is_read'=>0
+            ])->toArray();
+            $unReadMsg = count($bookChat);
+        }
+        return $this->Util->ajaxReturn(['status'=>true, 'data'=>$unReadMsg]);
     }
     
     /**
@@ -863,5 +856,50 @@ class MeetController extends AppController {
         }
     }
     
+    /**
+     * 消息列表
+     */
+    public function chatList(){
+        $this->handCheckLogin();
+        $user_id = $this->user->id;
+        $BookChatTable = \Cake\ORM\TableRegistry::get('BookChat');
+        $SubjectBookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+        $subjectBook = $SubjectBookTable
+                ->find()
+                ->distinct('SubjectBook.id')
+                ->contain(['Users', 'Savants', 'Subjects', 'BookChats'=>function($q){
+                    return $q->where(['is_read'=>0]);
+                }])
+                ->leftJoinWith('BookChats')
+                ->where([
+                    'or'=>[
+                        'SubjectBook.user_id'=>$user_id,
+                        'SubjectBook.savant_id'=>$user_id
+                    ]
+                ])
+                ->orderDesc('BookChats.create_time')
+                ->formatResults(function($items){
+                    return $items->map(function($item){
+                        if($item->book_chats){
+                            $now = \Cake\I18n\Time::now();
+                            if($item->book_chats[0]->create_time->format('d') == $now->format('d')){
+                                $item->last_msg_time = $item->book_chats[0]->create_time->format('H:i');
+                            } else {
+                                $item->last_msg_time = $item->book_chats[0]->create_time->format('Y月d日');
+                            }
+                        }
+                        return $item;
+                    });
+                })
+                ->toArray();
+        foreach($subjectBook as $k=>$v){
+            $subjectBook[$k]['unReadMsg'] = count($v['book_chats']);
+        }
+        $this->set([
+            'pageTitle' => '消息列表',
+            'uid' => $user_id,
+            'subjectBook' => $subjectBook,
+        ]);
+    }
 
 }
