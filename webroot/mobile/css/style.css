@@ -1356,7 +1356,7 @@ box-align:center;-webkit-box-align:center;}
 .enrolled_choose .ulblock .userinfo .bominfo{margin-top:10px;color:#999;font-size: 13px;}
 .enrolled_choose .ulblock .userinfo .bominfo .color-items{font-size: 14px;margin-right:5px;vertical-align: middle;}
 /*约见*/
-.meet_search_box{background: #B71C2D;height:48px;position: fixed;top:0;width:100%;max-width: 750px;z-index: 999;}
+.meet_search_box{background: #B71C2D;height:88px;position: fixed;top:0;width:100%;max-width: 750px;z-index: 999;padding-top:40px;}
 .meet_search_box .search-content{width:6rem;height:28px;background: #fff;border-radius: 15px;line-height: 28px;padding-left:8px;}
 .meet_search_box .search-content .iconfont{color:#B71C2D;}
 .meet_search_box .rico{color:#e2a4ab;margin-left:15px;font-size: 20px;width:20px;height:28px;line-height: 28px;position: relative}
