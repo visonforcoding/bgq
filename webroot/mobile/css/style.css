@@ -1321,9 +1321,11 @@ box-align:center;-webkit-box-align:center;}
 .dialogue .desc time{color:#d2d2d2;font-size: 13px;margin:.2rem 0;display: inline-block;}
 .dialogue .desc span{padding:.1rem .2rem;background: #ccc;color:#fff;border-radius: 5px;display: inline-block;margin:.2rem 0;}
 .chatbottom{height:50px;width:100%;max-width: 750px;position:fixed;bottom:0;background: #eceded;box-shadow: 0 -1px 0 rgba(0,0,0,.1);}
+.chatbottom .chatcon .sub-text{width:5rem;height:30px;border:none;}
 .chatbottom .chatcon{border:1px #ccc solid;height:32px;width:90%;margin:0 auto;margin-top:9px;border-radius: 10px;text-indent:.2rem;line-height: 30px;}
 .chatbottom .chatcon button{display: block;width:60px;background: #B71C2D;color:#fff;height:32px;border-radius: 0 10px 10px 0;margin-top:-1px;}
 .chatbottom .chatcon input{width:5rem;}
+.over-meet{position: fixed;bottom:80px;left:0;width:40px;height:40px;background: rgba(0,0,0,.6);color:#f2f2f2;text-align: center;line-height: 16px;padding-top:4px;}
 /*活动详情修改*/
 .a_fixed_group{position: fixed;width:100%;max-width: 750px;bottom:0;}
 .a_fixed_group .bottombtn .l-btn,.a_fixed_group .bottombtn .r-btn{display: block;width:50%;text-align: center;height:45px;line-height: 45px;font-size: 15px;color:#fff;}
