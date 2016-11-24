@@ -55,13 +55,14 @@ background-size:20px 20px;}
 .home_exchange .title h1{background: url(icon/dh.png) left center no-repeat;background-size:20px 20px;padding-left:30px;}
 .itemtitle .more{font-size: 15px;background: url(icon/more.png) no-repeat  right center;width:80px;background-size:auto 12px;}
 .items_con .dl{width:100%;text-align: center;padding-top:10px;border-right:1px #dedede solid;padding-bottom:10px;border-bottom:1px #dedede solid;}
-.items_con .dl:nth-of-type(3n){border-right:1px transparent solid;}
+.items_con .dl:nth-of-type(3n){border-right:0;}
 .items_con .dl .dt{width:76%;margin:0 auto;margin-bottom:6px;height:70px;max-height:70px;overflow:hidden;}
 .items_con .dl .dt img{width:100%;display: block;height:auto;}
 .items_con .dl .dd{font-size: 11px;margin-bottom:3px;line-height: 11px;}
 .items_con .dl .dd.productName{ max-width: 90%; margin: 0 auto;word-break: break-all;display: -webkit-box;-webkit-box-orient: vertical;overflow: hidden; -webkit-line-clamp: 1;line-height: 15px;}
 .items_price{color:#ff6c4a;}
 .items_con{overflow: hidden;background: #fff;min-height:130px;width:100%;clear:both;}
+.items_con .product{float:left;width:33.3%;}
 .home_infolist{overflow: hidden;/*border-top:1px #dedede solid;*/}
 .home_infolist span{background: url(icon/jf.png) no-repeat left center;background-size:20px 20px;padding-left:40px;color:#525151}
 .home_infolist i{background: url(icon/rgray.png) no-repeat center center;background-size:6px 10px;width:6px;height:48px;}
