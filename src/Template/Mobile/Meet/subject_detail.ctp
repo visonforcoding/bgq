@@ -94,7 +94,7 @@
                 func: function (res) {
                     if (res.status) {
                         $.util.alert(res.msg);
-                        document.location.href = '/meet/book-chat/'+res.data+'/1';
+                        document.location.href = '/home/book-chat/'+res.data+'/1';
                     } else {
                         if (res.msg.indexOf('请先去完善个人资料') != -1) {
                             $('#msg').html(res.msg);

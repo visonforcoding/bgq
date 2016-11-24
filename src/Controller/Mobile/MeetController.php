@@ -386,7 +386,7 @@ class MeetController extends AppController {
             if($book_res){
                 $this->loadComponent('Business');
                 $user_id = $subject->user->id;
-                $this->Business->usermsg($this->user->id, $user_id,'话题预约','您有新的话题预约请求', 4, $book->id, '/meet/book-chat'.$book_res->id.'/2');
+                $this->Business->usermsg($this->user->id, $user_id,'话题预约','您有新的话题预约请求', 4, $book->id, '/home/book-chat'.$book_res->id.'/2');
                 return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'约见成功', 'data'=>$book_res->id]);
             }else{
                 $error = errorMsg($book,'预定失败');
