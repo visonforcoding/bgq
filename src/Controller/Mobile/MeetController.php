@@ -867,8 +867,8 @@ class MeetController extends AppController {
         $subjectBook = $SubjectBookTable
                 ->find()
                 ->distinct('SubjectBook.id')
-                ->contain(['Users', 'Savants', 'Subjects', 'BookChats'=>function($q){
-                    return $q->where(['is_read'=>0]);
+                ->contain(['Users', 'Savants', 'Subjects', 'BookChats'=>function($q)use($user_id){
+                    return $q->where(['is_read'=>0, 'reply_id'=>$user_id]);
                 }])
                 ->leftJoinWith('BookChats')
                 ->where([
