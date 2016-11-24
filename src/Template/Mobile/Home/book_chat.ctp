@@ -131,7 +131,6 @@
             url: "/home/reply-chat/" + book_id + '/' + type,
             success: function (res) {
                 if (res.status) {
-//                    $('#chat').append('<li class="fr"><div class="flex chatbox"><div class="chat_text"><span>'+content+'</span></div><div class="avatar"><a href="/user/home-page/<?= $user->id ?>"><img src="<?= $user->avatar ?>"></a></div></div></li>');
                     var html = $.util.topDataToTpl('', 'tpl', res.data, function (d) {
                         var msg = '';
                         if(d.is_show_time){
