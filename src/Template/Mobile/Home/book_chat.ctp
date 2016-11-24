@@ -66,6 +66,10 @@
     var is_done = '<?= $book->is_done ?>';
 </script>
 <script type="text/javascript">
+    if($.util.isAPP){
+        LEMON.sys.back('meet/chat-list');
+    }
+    
     window.is_circle = false;
     function getChat(stat) {
         var url;
@@ -172,6 +176,8 @@
     }
     
     function bookNo(id){
+        if(window.bookNo == false){
+            
         $.util.ajax({
             url:'/home/book-no/'+id,
             func:function(res){
