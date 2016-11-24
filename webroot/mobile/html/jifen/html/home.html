@@ -7,8 +7,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>换积分了-个人主页</title>
-        <link rel="stylesheet" type="text/css" href="../css/basic.css?t=1"/>
-        <link rel="stylesheet" type="text/css" href="../css/style.css?t=1"/>
+        <link rel="stylesheet" type="text/css" href="../css/basic.css?t=2"/>
+        <link rel="stylesheet" type="text/css" href="../css/style.css?t=2"/>
         <script src="../js/zepto.min.js?t=1" type="text/javascript" charset="utf-8"></script>
         <script src="../js/style.js?t=1" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript" src="../js/des.js"></script>
@@ -37,7 +37,7 @@
                         <a href="javascript:location.href='allgoods.html?channelId='+$.func.getUrlParam('channelId')" class="fr color_items more" >查看更多</a>
                     </div>
                 </div>
-                <div class="items_con" id="product">
+                <div class="items_con" id="product" style="width: 100%;">
                 </div>
             </div>
             <div class="home_exchange" style="background-color: white;">
@@ -182,6 +182,8 @@
             }
             location.href = 'order_query.html?channelId='+$.func.getUrlParam('channelId');
         });
+        
+        $('header, .wraper').css('width', $(window).width())
     </script>
 </body>
 </html>
