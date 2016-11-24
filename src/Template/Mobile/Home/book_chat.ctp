@@ -66,8 +66,14 @@
     var is_done = '<?= $book->is_done ?>';
 </script>
 <script type="text/javascript">
+    window.bookOk_noTap = false;
+    window.bookNo_noTap = false;
     if($.util.isAPP){
-        LEMON.sys.back('meet/chat-list');
+        if($.util.getParam('book')){
+            LEMON.sys.back('/meet/index');
+        } else {
+            LEMON.sys.back('meet/chat-list');
+        }
     }
     
     window.is_circle = false;
@@ -163,28 +169,42 @@
     });
     
     function bookOk(id){
+        if(window.bookOk_noTap){
+            return;
+        }
+        window.bookOk_noTap = true;
         $.util.ajax({
             url:'/home/book-ok',
             data:{id:id},
             func:function(res){
                 $.util.alert(res.msg);
-                setTimeout(function(){
-                    location.reload();
-                },1500);
+                if(res.status){
+                    setTimeout(function(){
+                        location.reload();
+                    },1500);
+                } else {
+                    window.bookOk_noTap = false;
+                }
             }
          });
     }
     
     function bookNo(id){
-        if(window.bookNo == false){
-            
+        if(window.bookNo_noTap){
+            return;
+        }
+        window.bookNo_noTap = true;
         $.util.ajax({
             url:'/home/book-no/'+id,
             func:function(res){
               $.util.alert(res.msg);
-              setTimeout(function(){
-                   location.reload();
-                },1500);
+              if(res.stauts){
+                setTimeout(function(){
+                     location.reload();
+                  },1500);
+              } else {
+                  window.bookNo_noTap = false;
+              }
             }
          });
     }
