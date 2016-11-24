@@ -69,6 +69,7 @@ table,tbody,tr,td,th,thead,tfoot{border:1px #e5e5e5 solid;}
 .ld1:after{height:200%;width:1px;top:0;left:0;content:"";-webkit-transform:scale(0.5);-webkit-transform-origin:0 0;transform:scale(0.5);transform-origin:0 0;background: #e5e5e5;position:absolute;}
 .rd1:before{height:200%;width:1px;top:0;right:0;content:"";-webkit-transform:scale(0.5);-webkit-transform-origin:0 0;transform:scale(0.5);transform-origin:0 0;background: #e5e5e5;position:absolute;}
 /*--主题背景色--*/
+.eleblock{display: block;}
 .bggray{background: #7a7d82;}
 .bgred{background: #e01a48;}
 .bg-ff{background: #fff;}
