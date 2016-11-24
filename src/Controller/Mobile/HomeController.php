@@ -779,15 +779,26 @@ class HomeController extends AppController {
      * @param int $book_id 约见id
      * @param int $type 类型，1约见;2被约见
      */
-    public function bookChat($book_id, $type){
+    public function bookChat($book_id, $type=NULL){
         $this->handCheckLogin();
         $uid = $this->user->id;
         $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
         $book = $BookTable->get($book_id, [
             'contain' => ['Subjects']
         ]);
+        if($type == 1){
+            $user = $UserTable->get($book->savant_id, [
+                'fields' => ['id', 'truename', 'avatar']
+            ]);
+        } else {
+            $user = $UserTable->get($book->user_id, [
+                'fields' => ['id', 'truename', 'avatar']
+            ]);
+        }
         $this->set([
-            'pageTitle'=>'约见聊天',
+            'pageTitle'=>$user->truename,
+            'user' => $user,
             'book' => $book,
             'uid' => $uid,
             'type' => $type
@@ -799,26 +810,38 @@ class HomeController extends AppController {
      * @param int $book_id 约见id
      * @param int $type 类型，1约见;2被约见
      */
-    public function getChat($book_id, $type){
+    public function getChat($book_id){
         $this->handCheckLogin();
         $user_id = $this->user->id;
         $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
         $book = $BookTable->get($book_id);
         $bookChatTable = \Cake\ORM\TableRegistry::get('BookChat');  
         $where = [];
-        if($type == '1'){
-            $where['BookChat.user_id in'] = [$user_id, $book->savant_id];
-            $where['reply_id in'] = [$user_id, $book->savant_id];
-        } else {
-            $where['BookChat.user_id in'] = [$user_id, $book->user_id];
-            $where['reply_id in'] = [$user_id, $book->user_id];
-        }
+        $where['BookChat.user_id in'] = [$book->savant_id, $book->user_id];
+        $where['reply_id in'] = [$book->savant_id, $book->user_id];
         $where['book_id'] = $book_id;
         $bookChat = $bookChatTable
                 ->find()
                 ->where($where)
                 ->contain(['Users', 'ReplyUsers', 'SubjectBooks'])
-                ->hydrate(false)
+                ->orderDesc('BookChat.create_time')
+                ->select(['book_id', 'content', 'id', 'reply_id', 'Users.id', 'Users.avatar', 'BookChat.create_time', 'BookChat.is_show_time'])
+                ->formatResults(function($items) {
+                    return $items->map(function($item) {
+//                        $item->create_time = $item->create_time->timeAgoInWords([
+//                            'accuracy' => [
+//                                'year' => 'year',
+//                                'month' => 'month',
+//                                'week' => 'week',
+//                                'day' => 'day',
+//                                'hour' => 'hour',
+//                            ],
+//                            'end' => '1 minute'
+//                        ]);
+                        $item->create_time = $item->create_time->format('m月d日 H:i');
+                        return $item;
+                    });
+                })
                 ->toArray();
         if($bookChat !== false){
             $BookChatTable = \Cake\ORM\TableRegistry::get('book_chat');
@@ -826,6 +849,62 @@ class HomeController extends AppController {
             return $this->Util->ajaxReturn(['status'=>true, 'data'=>$bookChat]);
         } else {
             return $this->Util->ajaxReturn(false, '系统错误');
+        }
+    }
+    /**
+     * 获得聊天记录
+     * @param int $book_id 约见id
+     * @param int $type 类型，1约见;2被约见
+     */
+    public function getNewChat($book_id, $type){
+        $this->handCheckLogin();
+        $user_id = $this->user->id;
+        $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+        $book = $BookTable->get($book_id);
+        $bookChatTable = \Cake\ORM\TableRegistry::get('BookChat');  
+        $where = [];
+        $where['BookChat.user_id in'] = [$book->savant_id, $book->user_id];
+//        $where['reply_id in'] = [$book->savant_id, $book->user_id];
+        $where['reply_id'] = $user_id;
+        $where['book_id'] = $book_id;
+        $where['is_read'] = 0;
+//        if($type == '1'){
+//            $where['BookChat.user_id'] = $book->savant_id;
+//        } else {
+//            $where['BookChat.user_id'] = $book->user_id;
+//        }
+        $bookChat = $bookChatTable
+                ->find()
+                ->where($where)
+                ->contain(['Users', 'ReplyUsers', 'SubjectBooks'])
+                ->orderDesc('BookChat.create_time')
+                ->select(['book_id', 'content', 'id', 'reply_id', 'Users.id', 'Users.avatar', 'BookChat.create_time', 'BookChat.is_show_time'])
+//                ->limit($this->limit)
+                ->formatResults(function($items) {
+                    return $items->map(function($item) {
+//                        $item->create_time = $item->create_time->timeAgoInWords([
+//                            'accuracy' => [
+//                                'year' => 'year',
+//                                'month' => 'month',
+//                                'week' => 'week',
+//                                'day' => 'day',
+//                                'hour' => 'hour',
+//                                'minute' => 'minute',
+//                                'secend' => 'secend'
+//                            ],
+//                            'end' => '1 minute'
+//                        ]);
+                        $item->create_time = $item->create_time->format('m月d日 H:i');
+                        return $item;
+                    });
+                })
+                ->toArray();
+        if($bookChat){
+            $BookChatTable = \Cake\ORM\TableRegistry::get('book_chat');
+            $BookChatTable->updateAll(['is_read'=>1], ['reply_id'=>$user_id, 'book_id'=>$book_id, 'is_read'=>0]);
+            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$bookChat]);
+        } else {
+            return $this->Util->ajaxReturn(false);
         }
     }
     
@@ -837,7 +916,27 @@ class HomeController extends AppController {
     public function replyChat($book_id, $type){
         $user_id = $this->user->id;
         $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
+        $bookChatTable = \Cake\ORM\TableRegistry::get('bookChat');
         $book = $BookTable->get($book_id);
+        $where = [];
+        $where['BookChat.user_id in'] = [$book->savant_id, $book->user_id];
+        $where['reply_id in'] = [$book->savant_id, $book->user_id];
+        $where['book_id'] = $book_id;
+        $last_msg = $bookChatTable
+                ->find()
+                ->where($where)
+                ->orderDesc('BookChat.create_time')
+                ->select(['book_id', 'content', 'id', 'reply_id', 'create_time'])
+                ->first();
+        $now = Time::now();
+        if($last_msg){
+            if($last_msg->create_time->modify('5 minutes') < $now){
+                $data['is_show_time'] = 1;
+            }
+        } else {
+            $data['is_show_time'] = 1;
+        }
+        
         $data['content'] = $this->request->data('content');
         if($type == '1'){
             $data['reply_id'] = $book->savant_id;
@@ -848,7 +947,6 @@ class HomeController extends AppController {
         }
         $data['user_id'] = $user_id;
         $data['book_id'] = $book_id;
-        $bookChatTable = \Cake\ORM\TableRegistry::get('bookChat');
         $chat = $bookChatTable->newEntity();
         $chat = $bookChatTable->patchEntity($chat, $data);
         $res = $bookChatTable->save($chat);
@@ -858,7 +956,19 @@ class HomeController extends AppController {
             $me = $UserTable->get($user_id);
             $this->loadComponent('Push');
             $this->Push->sendAlias($user->user_token, $me->truename.'给你发了一条消息', $data['content'], $me->truename.'给你发了一条消息', 'BGB', true, $extra);
-            return $this->Util->ajaxReturn(true, '发送成功');
+            $reply_res = $bookChatTable
+                ->find()
+                ->where(['bookChat.id'=>$res->id])
+                ->contain(['Users', 'ReplyUsers', 'SubjectBooks'])
+                ->select(['book_id', 'content', 'id', 'reply_id', 'Users.id', 'Users.avatar', 'create_time', 'is_show_time'])
+                ->formatResults(function($items) {
+                    return $items->map(function($item) {
+                        $item->create_time = $item->create_time->format('m月d日 H:i');
+                        return $item;
+                    });
+                })
+                ->toArray();
+            return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'发送成功', 'data'=>$reply_res]);
         } else {
             return $this->Util->ajaxReturn(false, '系统错误');
         }
