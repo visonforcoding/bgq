@@ -1,23 +1,27 @@
 <div class="wraper newswraper">
-    <div class="a_search_box" id="search">
-        <a href="/meet/search">
-            <i class="iconfont">&#xe618;</i>
+    <div class="meet_search_box flex innercon">
+        <a href="/meet/search" class="eleblock">
+            <div class="search-content">
+                <i class="iconfont">&#xe602;</i>
+                <input type="text" placeholder="搜索" readonly/>
+            </div>
+        </a>
+        <a href="/meet/chat-list">
+            <div class="rico">
+                <i class="iconfont">&#xe6ab;</i>
+                <span id="un_read_msg"></span>
+            </div>
         </a>
     </div>
+    <div style="height:68px;"></div>
     <div class="a-banner" >
         <ul class="pic-list-container" id="imgList">
-            <?php //foreach ($banners as $k => $v): ?>
-                <!--<li><a href="<?= $v['url'] ?>"><img src="<?= $v['img'] ?>"/></a></li>-->
-            <?php // endforeach; ?>
         </ul>
         <div class="yd" id="imgTab">
-            <?php // foreach ($banners as $v): ?>
-                <!--<span></span>-->
-            <?php // endforeach; ?>
         </div>
     </div>
     <!--分类--start-->
-    <div class="h2"></div>
+    <!--<div class="h2"></div>-->
     <div class="m_title_des bd1" >
         <h3>找会员</h3>
     </div>
@@ -49,9 +53,6 @@
             <h3>为您推荐</h3>
         </div>
         <ul id='items'>
-            <?php //foreach ($biggieAd as $k => $v): ?>
-                <!--<li><a href="/user/home-page/////<?= $v['savant']['user_id'] ?>"><img src="<?= $v['url'] ?>"/></a></li>-->
-            <?php //endforeach; ?>
         </ul>
     </div>
     <div class="h2"></div>
@@ -137,6 +138,7 @@
             this.getBanner();
             this.getRecommend();
             this.getData();
+            this.getUnReadMsg();
         },
         
         getBanner: function(){
@@ -233,6 +235,18 @@
                 $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(str), tpldate);
                 $.util.initLoadImg('biggie');
             }
+        },
+        getUnReadMsg: function (){
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: "/meet/un-read-msg",
+                success: function (res) {
+                    if(res.data){
+                        $('#un_read_msg').addClass('num').html(res.data);
+                    }
+                }
+            })
         }
     });
     var meetobj = new meet();

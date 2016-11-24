@@ -921,7 +921,16 @@ ALTER TABLE `binggq`.`user`
   ADD COLUMN `is_foreigner` tinyint(2) unsigned NOT NULL DEFAULT 2 COMMENT '是否是国外注册，1国外2国内' AFTER `is_judge`;
 
 ALTER TABLE `binggq`.`activity`
-  ADD COLUMN `triple_fee` float NULL DEFAULT NULL AFTER `apply_fee`;
+  ADD COLUMN `triple_fee` float NULL DEFAULT NULL COMMENT '三人行费用' AFTER `apply_fee`;
 
 ALTER TABLE `binggq`.`news`
   ADD COLUMN `is_show` tinyint(2) unsigned NOT NULL DEFAULT 1 COMMENT '是否展示,：1展示0不展示' COMMENT '是否展示,：1展示0不展示';
+
+ALTER TABLE `binggq`.`book_chat`
+  ADD COLUMN `is_show_time` tinyint(2) unsigned NOT NULL DEFAULT 0 COMMENT '是否显示时间：1显示0不显示' COMMENT '是否显示时间：1显示0不显示';
+
+ALTER TABLE `binggq`.`activityapply`
+  ADD COLUMN `is_offline_pay` tinyint(2) unsigned NOT NULL DEFAULT 0 COMMENT '是否线下付款' COMMENT '是否线下付款';
+
+ALTER TABLE `binggq`.`activityapply`
+  ADD COLUMN `triple_pid` int(11) unsigned NULL DEFAULT NULL COMMENT '发出三人行的报名表id' COMMENT '发出三人行的报名表id' AFTER `is_sign`;
