@@ -214,3 +214,4 @@ header{display:none;}
 .flex{display:-webkit-box;display:box;-webkit-box-align: center;-webkit-box-pack:start;}
 .flex_jusitify{-webkit-box-pack:justify;}
 .flex_center{-webkit-box-pack:center;}
+.rmore{font-size: .28rem;}
