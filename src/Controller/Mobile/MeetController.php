@@ -58,7 +58,7 @@ class MeetController extends AppController {
                     ->find()
                     ->where(['user_id'=>$this->user->id, 'type'=>4, 'status'=>0])
                     ->toArray();
-            $unReadMsg += $usermsg;
+            $unReadMsg += count($usermsg);
         }
         return $this->Util->ajaxReturn(['status'=>true, 'data'=>$unReadMsg]);
     }
