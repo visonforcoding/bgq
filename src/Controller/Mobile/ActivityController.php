@@ -290,6 +290,7 @@ class ActivityController extends AppController {
                     if($activity->must_check){
                         if($activity->apply_fee == 0){
                             if($triple){
+                                $activityapply->is_triple = 1;
                                 $mainApply = $ActivityapplyTable->save($activityapply); 
                                 if(!$mainApply) {
                                     return $this->Util->ajaxReturn(false. '系统错误');
@@ -299,10 +300,12 @@ class ActivityController extends AppController {
                                         'user_id'=>$post['user1'],
                                         'activity_id' => $id,
                                         'triple_pid' => $mainApply->id,
+                                        'is_triple' => 1
                                     ], [
                                         'user_id'=>$post['user2'],
                                         'activity_id' => $id,
                                         'triple_pid' => $mainApply->id,
+                                        'is_triple' => 1
                                     ],
                                 ]);
                                 $res = $ActivityapplyTable->saveMany($nextApplies);
@@ -316,6 +319,7 @@ class ActivityController extends AppController {
                             }
                         } else {
                             if($triple){
+                                $activityapply->is_triple = 1;
                                 $mainApply = $ActivityapplyTable->save($activityapply); 
                                 if(!$mainApply) {
                                     return $this->Util->ajaxReturn(false. '系统错误');
@@ -325,10 +329,12 @@ class ActivityController extends AppController {
                                         'user_id'=>$post['user1'],
                                         'activity_id' => $id,
                                         'triple_pid' => $mainApply->id,
+                                        'is_triple' => 1
                                     ], [
                                         'user_id'=>$post['user2'],
                                         'activity_id' => $id,
                                         'triple_pid' => $mainApply->id,
+                                        'is_triple' => 1
                                     ],
                                 ]);
                                 $res = $ActivityapplyTable->saveMany($nextApplies);
@@ -385,6 +391,7 @@ class ActivityController extends AppController {
                             }
                         } else {
                             if($triple){
+                                $activityapply->is_triple = 1;
                                 $mainApply = $ActivityapplyTable->save($activityapply); 
                                 if(!$mainApply) {
                                     return $this->Util->ajaxReturn(false. '系统错误');
@@ -394,12 +401,14 @@ class ActivityController extends AppController {
                                         'user_id'=>$post['user1'],
                                         'activity_id' => $id,
                                         'triple_pid' => $mainApply->id,
-                                        'is_check' => 1
+                                        'is_check' => 1,
+                                        'is_triple' => 1,
                                     ], [
                                         'user_id'=>$post['user2'],
                                         'activity_id' => $id,
                                         'triple_pid' => $mainApply->id,
-                                        'is_check' => 1
+                                        'is_check' => 1,
+                                        'is_triple' => 1,
                                     ],
                                 ]);
                                 $res = $ActivityapplyTable->saveMany($nextApplies);
