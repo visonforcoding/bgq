@@ -133,20 +133,32 @@
                             d.apply_nums = d.activity.apply_nums;
                             d.time = d.create_time;
                             if (d.activity.must_check == 1) {
-                                if (d.is_check === 0 && d.is_pass === 0) {
-                                    d.check = '审核中';
-                                    d.id = '/activity/details/' + d.activity.id;
-                                } else if (d.is_check === 1 && d.is_pass === 0) {
-                                    d.check = '未付款';
-                                    d.id = '/wx/meet-pay/' + d.lmorder.id;
-                                } else if (d.is_pass === 1) {
+                                if (d.is_pass === 1) {
                                     d.check = '报名成功';
                                     d.id = '/activity/details/' + d.activity.id;
+                                } else {
+                                    if(d.triple_pid){
+                                        d.check = '报名中';
+                                        d.id = '/activity/details/' + d.activity.id;
+                                    } else {
+                                        if (d.is_check === 0 && d.is_pass === 0) {
+                                            d.check = '审核中';
+                                            d.id = '/activity/details/' + d.activity.id;
+                                        } else if (d.is_check === 1 && d.is_pass === 0) {
+                                            d.check = '未付款';
+                                            d.id = '/wx/meet-pay/' + d.lmorder.id;
+                                        }
+                                    }
                                 }
                             } else {
                                 if (d.is_pass === 0) {
-                                    d.check = '未付款';
-                                    d.id = '/wx/meet-pay/' + d.lmorder.id;
+                                    if(d.triple_pid){
+                                        d.check = '报名中';
+                                        d.id = '/activity/details/' + d.activity.id;
+                                    } else {
+                                        d.check = '未付款';
+                                        d.id = '/wx/meet-pay/' + d.lmorder.id;
+                                    }
                                 } else if (d.is_pass === 1) {
                                     d.check = '报名成功';
                                     d.id = '/activity/details/' + d.activity.id;
