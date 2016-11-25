@@ -187,9 +187,14 @@ class WxController extends AppController {
                 'contain' => ['Activityapplys', 'Activityapplys.Activities']
             ]);
             $body = '活动报名《' . $order->activityapply->activity->title . '》支付';
-            if($order->title != $body || $order->price != $order->activityapply->activity->apply_fee){
+            if($order->activityapply->is_triple){
+                $price = $order->activityapply->activity->triple_fee;
+            } else {
+                $price = $order->activityapply->activity->apply_fee;
+            }
+            if($order->title != $body || $order->price != $price){
                 $order->title = $body;
-                $order->price = $order->activityapply->activity->apply_fee;
+                $order->price = $price;
                 $order->order_no = time() . $order->activityapply->activity->user_id . $id . createRandomCode(4, 1);
                 $order = $OrderTable->save($order);
             }
