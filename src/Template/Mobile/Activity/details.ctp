@@ -171,8 +171,12 @@
                             <a id="want_enroll" class="r-btn" href="javascript:void(0);" is_three="<?= $activity->triple_fee ? 1 : 0 ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
                         <?php else: ?>
                             <?php if ($activity->activityapply['0']->is_pass == 0): ?>
-                                <?php if ($activity->activityapply['0']->is_check == 1): ?>;
-                                    <a href="/wx/meet-pay/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->activityapply['0']->is_triple ? $activity->triple_fee : $activity->apply_fee; ?>元)</a>
+                                <?php if ($activity->activityapply['0']->is_check == 1): ?>
+                                    <?php if ($activity->activityapply['0']->triple_pid): ?>
+                                        <a class="r-btn">报名中</a>
+                                    <?php else: ?>
+                                        <a href="/wx/meet-pay/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->activityapply['0']->is_triple ? $activity->triple_fee : $activity->apply_fee; ?>元)</a>
+                                    <?php endif; ?>
                                 <?php elseif ($activity->activityapply['0']->is_check == 2): ?>
                                     <a style="background:gray;" class="r-btn">审核未通过</a>
                                 <?php else: ?>
@@ -187,7 +191,11 @@
                             <a id="want_enroll" class="r-btn" href="javascript:void(0);" is_three="<?= $activity->triple_fee ? 1 : 0 ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
                         <?php else: ?>
                             <?php if ($activity->activityapply['0']->is_pass == 0): ?>
-                                <a href="/wx/meet-pay/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->activityapply['0']->is_triple ? $activity->triple_fee : $activity->apply_fee; ?>元)</a>
+                                <?php if ($activity->activityapply['0']->triple_pid): ?>
+                                    <a class="r-btn">报名中</a>
+                                <?php else: ?>
+                                    <a href="/wx/meet-pay/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->activityapply['0']->is_triple ? $activity->triple_fee : $activity->apply_fee; ?>元)</a>
+                                <?php endif; ?>
                             <?php elseif ($activity->activityapply['0']->is_pass == 1): ?>
                                 <a class="r-btn">已报名</a>
                             <?php endif; ?>
