@@ -57,7 +57,8 @@
     </div>
     <div class="h2"></div>
     <div class="m_title_des bd1">
-        <h3>菁英推荐</h3>
+        <!--<h3>菁英推荐</h3><a href="/meet/all-elite"><i class="more iconfont fr rmore">&#xe667;</i></a>-->
+        <a class="title" href="/meet/all-elite">菁英推荐 <i class="more iconfont fr rmore">&#xe667;</i></a>
     </div>
     <div id='elite'></div>
     <div class="h2"></div>
@@ -189,7 +190,7 @@
         getElite: function(){
             var obj = this;
             if(!obj.init_elite || obj.no_cache){
-                $.getJSON('/meet/get-elite', function (res) {
+                $.getJSON('/meet/get-elite/3', function (res) {
                     if (res.status) {
                         obj.staticElite(res.data);
                     }
