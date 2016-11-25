@@ -142,7 +142,7 @@ class SavantController extends AppController {
         $begin_time = $this->request->data('begin_time');
         $end_time = $this->request->data('end_time');
         $where = ['enabled'=>1];
-        if ($savant_status > -1) {
+        if ($savant_status > 1) {
             $where['User.savant_status'] = $savant_status;
         }
         if ($this->request->query('do') == 'check' && $savant_status === NULL) {
