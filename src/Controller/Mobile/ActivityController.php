@@ -249,9 +249,10 @@ class ActivityController extends AppController {
     /**
      * 我要报名
      */
-    public function enroll($id = '') {
+    public function enroll($id = null, $triple=null) {
         $this->handCheckLogin();
         $UserTable = \Cake\ORM\TableRegistry::get('user');
+        $ActivityapplyTable = \Cake\ORM\TableRegistry::get('Activityapply');
         if ($id) {
             $activity = $this->Activity->get($id, [
                 'contain' => ['Users'=>function($q){
@@ -259,54 +260,99 @@ class ActivityController extends AppController {
                         }],
             ]);
             if ($this->request->is('post')) {
-//                $user = $UserTable->get($this->user->id, [
-//                    'contain' => ['Careers', 'Educations', 'Industries']
-//                ]);
-                //公司、性别、职位、邮箱、行业标签、城市、擅长业务、公司业务、教育经历、工作经历、名片
-//                $is_complete = $user->company && $user->gender && $user->position && $user->email && $user->agency_id
-//                        && $user->industries && $user->city && $user->goodat && $user->gsyw && $user->card_path;
-//                if(!$is_complete){
-//                    return $this->Util->ajaxReturn(false, '请先去完善个人资料');
-//                }
-                $activityApply = $this->Activity->Activityapply->newEntity();
-                $data = [
-                    'user_id' => $this->user->id,
-                    'activity_id' => $id,
-                ];
-                $activityApply = $this->Activity->Activityapply->patchEntity($activityApply, $data);
-                if ($this->Activity->Activityapply->find()->where($data)->first()) { // 查找数据库是否有对应数据，即是否已报名
+                $post = $this->request->data;
+                
+                if($triple){
+                    $user_id = [$this->user->id, $post['user1'], $post['user2']];
+                } else {
+                    $user_id = [$this->user->id];
+                }
+                
+                $data = [];
+                $data['is_pass'] = 1;
+                $data['activity_id'] = $id;
+                
+                $where = [];
+                foreach($user_id as $k=>$v){
+                    $where['user_id'] = $v;
+                    $where['activity_id'] = $id;
+                    $where['is_pass'] = 1;
+                }
+                
+                if ($ActivityapplyTable->find()->where($where)->toArray()) { // 查找数据库是否有对应数据，即是否已报名
                     return $this->Util->ajaxReturn(false, '已经报名过了');
                 } else {
+                    // 主要报名人
+                    $activityapply = $ActivityapplyTable->newEntity([
+                        'user_id' => $this->user->id,
+                        'activity_id' => $id,
+                    ]);
                     if($activity->must_check){
                         if($activity->apply_fee == 0){
-                            $activityApply->is_check = 0;
-                            $activityApply->is_pass = 0;
-                            if ($this->Activity->Activityapply->save($activityApply)) {
+                            if($triple){
+                                $mainApply = $ActivityapplyTable->save($activityapply); 
+                                if(!$mainApply) {
+                                    return $this->Util->ajaxReturn(false. '系统错误');
+                                }
+                                $nextApplies = $ActivityapplyTable->newEntities([
+                                    [
+                                        'user_id'=>$post['user1'],
+                                        'activity_id' => $id,
+                                        'triple_pid' => $mainApply->id,
+                                    ], [
+                                        'user_id'=>$post['user2'],
+                                        'activity_id' => $id,
+                                        'triple_pid' => $mainApply->id,
+                                    ],
+                                ]);
+                                $res = $ActivityapplyTable->saveMany($nextApplies);
+                            } else {
+                                $res = $ActivityapplyTable->save($activityapply);
+                            }
+                            if ($res) {
                                 return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/activity/details/'.$id.'/enroll']);
                             } else {
-                                return $this->Util->ajaxReturn(false, $activityApply->errors());
+                                return $this->Util->ajaxReturn(false, '系统错误');
                             }
                         } else {
-                            $activityApply = $this->Activity->Activityapply->save($activityApply);
-                            $activityApply->is_check = 0;
-                            $activityApply->is_pass = 0;
+                            if($triple){
+                                $mainApply = $ActivityapplyTable->save($activityapply); 
+                                if(!$mainApply) {
+                                    return $this->Util->ajaxReturn(false. '系统错误');
+                                }
+                                $nextApplies = $ActivityapplyTable->newEntities([
+                                    [
+                                        'user_id'=>$post['user1'],
+                                        'activity_id' => $id,
+                                        'triple_pid' => $mainApply->id,
+                                    ], [
+                                        'user_id'=>$post['user2'],
+                                        'activity_id' => $id,
+                                        'triple_pid' => $mainApply->id,
+                                    ],
+                                ]);
+                                $res = $ActivityapplyTable->saveMany($nextApplies);
+                            } else {
+                                $mainApply = $ActivityapplyTable->save($activityapply);
+                            }
+                            $mainApply->is_check = 0;
+                            $mainApply->is_pass = 0;
                             $OrderTable = \Cake\ORM\TableRegistry::get('order');
-                            $applyTable = \Cake\ORM\TableRegistry::get('activityapply');
                             $order = $OrderTable->newEntity([
                                 'type' => 2, // 类型为活动报名
-                                'relate_id' => $activityApply->id, //预定表的id
+                                'relate_id' => $mainApply->id, //预定表的id
                                 'user_id' => $this->user->id,
                                 'seller_id' => -1,     //活动报名的收入 固定给-1 的用户
                                 'order_no' => time() . $activity->user_id . $id . createRandomCode(4, 1),
                                 'fee' => 0, // 实际支付的默认值
-                                'price' => $activity->apply_fee,
+                                'price' => $triple ? $activity->triple_fee : $activity->apply_fee,
                                 'remark' => '活动报名' . $activity->title
                             ]);
-                            $transRes = $applyTable->connection()->transactional(function()use($activityApply, $applyTable, $order, $OrderTable) {
-                                return $applyTable->save($activityApply) && $OrderTable->save($order);
+                            $transRes = $ActivityapplyTable->connection()->transactional(function()use($mainApply, $ActivityapplyTable, $order, $OrderTable) {
+                                return $ActivityapplyTable->save($mainApply) && $OrderTable->save($order);
                             });
                             if($transRes){
-                                $order = $OrderTable->find()->where(['relate_id'=>$activityApply->id, 'type'=>2, 'user_id'=>$this->user->id])->first();
+                                $order = $OrderTable->find()->where(['relate_id'=>$mainApply->id, 'type'=>2, 'user_id'=>$this->user->id])->first();
     //                            //短信和消息通知
                                 $this->loadComponent('Sms');
                                 if($activity->must_check){
@@ -319,43 +365,65 @@ class ActivityController extends AppController {
                                 $this->Business->usermsg('-1', $this->user->id, '报名通知', $msg, 7, $id);
                                 return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/activity/index']);
                             } else {
-                                return $this->Util->ajaxReturn(false, $activityApply->errors());
+                                return $this->Util->ajaxReturn(false, '系统错误');
                             }
                         }
                     } else {
                         if($activity->apply_fee == 0){
                             if($activity->apply_nums <= $activity->scale){
-                                $activityApply->is_pass = 1;
-                                if ($this->Activity->Activityapply->save($activityApply)) {
+                                $activityapply->is_pass = 1;
+                                $activityapply->is_check = 1;
+                                if ($ActivityapplyTable->save($activityapply)) {
                                     $activity->apply_nums += 1;
                                     $this->Activity->save($activity);
                                     return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/activity/details/'.$id.'/enroll']);
                                 } else {
-                                    return $this->Util->ajaxReturn(false, $activityApply->errors());
+                                    return $this->Util->ajaxReturn(false, '系统错误');
                                 }
                             } else {
                                 return $this->Util->ajaxReturn(false, '报名人数已满');
                             }
                         } else {
-                            $activityApply = $this->Activity->Activityapply->save($activityApply);
-                            $activityApply->is_pass = 0;
+                            if($triple){
+                                $mainApply = $ActivityapplyTable->save($activityapply); 
+                                if(!$mainApply) {
+                                    return $this->Util->ajaxReturn(false. '系统错误');
+                                }
+                                $nextApplies = $ActivityapplyTable->newEntities([
+                                    [
+                                        'user_id'=>$post['user1'],
+                                        'activity_id' => $id,
+                                        'triple_pid' => $mainApply->id,
+                                        'is_check' => 1
+                                    ], [
+                                        'user_id'=>$post['user2'],
+                                        'activity_id' => $id,
+                                        'triple_pid' => $mainApply->id,
+                                        'is_check' => 1
+                                    ],
+                                ]);
+                                $res = $ActivityapplyTable->saveMany($nextApplies);
+                            } else {
+                                $mainApply = $ActivityapplyTable->save($activityapply);
+                            }
+                            $activityapply->is_pass = 0;
+                            $activityapply->is_check = 1;
                             $OrderTable = \Cake\ORM\TableRegistry::get('order');
-                            $applyTable = \Cake\ORM\TableRegistry::get('activityapply');
                             $order = $OrderTable->newEntity([
                                 'type' => 2, // 类型为活动报名
-                                'relate_id' => $activityApply->id, //预定表的id
+                                'relate_id' => $mainApply->id, //预定表的id
                                 'user_id' => $this->user->id,
                                 'seller_id' => $activity->user_id,
                                 'order_no' => time() . $activity->user_id . $id . createRandomCode(4, 1),
                                 'fee' => 0, // 实际支付的默认值
-                                'price' => $activity->apply_fee,
+                                'price' => $triple ? $activity->triple_fee : $activity->apply_fee,
                                 'remark' => '活动报名' . $activity->title
                             ]);
-                            $transRes = $applyTable->connection()->transactional(function()use($activityApply, $applyTable, $order, $OrderTable) {
-                                return $applyTable->save($activityApply) && $OrderTable->save($order);
+                            $transRes = $ActivityapplyTable->connection()->transactional(function()use($activityapply, $ActivityapplyTable, $order, $OrderTable) {
+                                return $ActivityapplyTable->save($activityapply) && $OrderTable->save($order);
                             });
                             if($transRes){
-                                $order = $OrderTable->find()->where(['relate_id'=>$activityApply->id, 'type'=>2, 'user_id'=>$this->user->id])->first();
+                                $order = $OrderTable->find()->where(['relate_id'=>$mainApply->id, 'type'=>2, 'user_id'=>$this->user->id])->first();
     //                            //短信和消息通知
                                 $this->loadComponent('Sms');
                                 if($activity->must_check){
@@ -368,18 +436,76 @@ class ActivityController extends AppController {
                                 $this->Business->usermsg('-1', $this->user->id, '报名通知', $msg, 7, $id);
                                 return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'提交成功', 'url'=>'/wx/meet-pay/'.$order->id]);
                             } else {
-                                return $this->Util->ajaxReturn(false, $activityApply->errors());
+                                return $this->Util->ajaxReturn(false, '系统错误');
                             }
                         }
                     }
                 }
             }
             $user = $UserTable->get($this->user->id);
-            $this->set('activity', $activity);
-            $this->set('user', $user);
-            $this->set('pageTitle', '我要报名');
+            $this->set([
+                'pageTitle'=>'我要报名',
+                'user'=>$user,
+                'activity'=>$activity,
+                'triple'=>$triple
+            ]);
         } else {
             return $this->Util->ajaxReturn(false, '传值错误');
+        }
+    }
+    
+    /**
+     * 选择同行人
+     * @param type $id 活动id
+     */
+    public function chooseMember($id=null){
+        $this->handCheckLogin();
+        $this->set([
+            'pageTitle' => '选择同行人',
+            'activity_id' => $id,
+        ]);
+    }
+    
+    /**
+     * 选择同行人搜索
+     * @param type $id 活动id
+     */
+    public function getMember($id=null){
+        if($this->request->is('post')){
+            $data = $this->request->data;
+            $keyword = $data['keyword'];
+            $UserTable = \Cake\ORM\TableRegistry::get('User');
+            $where = [];
+            $where['or'] = ['truename like' => "%$keyword%", 'phone like' => "%$keyword%"];
+            $where['enabled'] = 1;
+            $where['id !='] = $this->user->id;
+            $user = $UserTable
+                    ->find()
+                    ->where($where)
+                    ->select(['id', 'truename', 'avatar', 'company', 'position', 'level'])
+                    ->toArray();
+            if($user){
+                return $this->Util->ajaxReturn(['status'=>true, 'data'=>$user]);
+            } elseif($user == []){
+                return $this->Util->ajaxReturn(false, '暂无此人');
+            } else {
+                return $this->Util->ajaxReturn(false, '系统错误');
+            }
+        }
+    }
+    
+    public function checkMember($id){
+        $ActivityapplyTable = \Cake\ORM\TableRegistry::get('Activityapply');
+        $data = $this->request->data;
+        $where = [];
+        $where['or'] = ['user_id'=>$data['user1'], 'user_id'=>$data['user2']];
+        $where['activity_id'] = $id;
+        $where['is_pass'] = 1;
+        $activityapply = $ActivityapplyTable->find()->where($where)->toArray();
+        if($activityapply){
+            return $this->Util->ajaxReturn(false, '请重新选择，同行人已有报名记录');
+        } else {
+            return $this->Util->ajaxReturn(true, '');
         }
     }
 

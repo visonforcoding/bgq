@@ -83,6 +83,44 @@ class MeetController extends AppController {
     }
     
     /**
+     * ajax获取菁英推荐
+     */
+    public function getElite(){
+        $user_id = '';
+        if($this->user){
+            $user_id = $this->user->id;
+        }
+        $elite = $this
+                ->User
+                ->find()
+                ->distinct('User.id')
+                ->contain(['Subjects'=>function($q){
+                    return $q->where(['Subjects.is_del'=>0])->orderDesc('Subjects.create_time');
+                }, 'Followers'=>function($q)use($user_id){
+                    return $q->where(['user_id'=>$user_id]);
+                }, 'Savants'=>function($q){
+                    return $q->order(['Savants.check_time'=>'desc', 'reco_nums'=>'desc']);
+                }])
+                ->select(['id', 'truename', 'position', 'company', 'avatar', 'fans', 'meet_nums'])
+                ->where(['enabled'=>'1', 'level'=>'2'])
+                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc', 'fans'=>'desc'])
+                ->limit(3)
+                ->formatResults(function($items) {
+                    return $items->map(function($item) {
+                        $item['avatar'] = getSmallAvatar($item['avatar']);
+                        $item['followers'] = count($item['followers']) ? 1 : 0;
+                        return $item;
+                    });
+                })
+                ->toArray();
+        if($elite){
+            return $this->Util->ajaxReturn(['status'=>true, 'data'=>$elite]);
+        } else {
+            return $this->Util->ajaxReturn(false, '');
+        }
+    }
+    
+    /**
      * 约见首页点击类别获取结果
      */
     public function getIndex(){

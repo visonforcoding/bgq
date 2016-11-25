@@ -149,49 +149,55 @@
     </div>
 
     <!--吸底按钮-->
-    <div class="fixed-btn">
-        <?php if ($activity->apply_end_time < time()): ?>
-            <a style="background:gray;" class="l-btn">我要赞助</a>
-        <?php else: ?>
-            <a href="javascript:$.util.checkLogin('/activity/recommend/<?= $activity->id; ?>')" class="l-btn">我要赞助</a>
-        <?php endif; ?>
-        <?php if ($activity->apply_end_time < time() || time() < $activity->apply_start_time): ?>
-            <a style="background:gray;" class="r-btn">我要报名</a>
-        <?php else: ?>
-            <!--报名人数-->
-            <?php if ($activity->apply_nums < $activity->scale): ?>
-                <!--是否要审核-->
-                <?php if ($activity->must_check): ?>
-                    <?php if (empty($activity->activityapply)): ?>
-                        <a id="want_enroll" class="r-btn" href="javascript:void(0);" is_three="<?= $activity->triple_fee ? 1 : 0 ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
-                    <?php else: ?>
-                        <?php if ($activity->activityapply['0']->is_pass == 0): ?>
-                            <?php if ($activity->activityapply['0']->is_check == 1): ?>;
-                                <a href="/wx/meet-pay/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
-                            <?php elseif ($activity->activityapply['0']->is_check == 2): ?>
-                                <a style="background:gray;" class="r-btn">审核未通过</a>
-                            <?php else: ?>
-                                <a class="r-btn">审核中</a>
+    <div class="a_fixed_group">
+        <div class="entrol_group" id="choose">
+            <a href="javascript:$.util.checkLogin('/activity/enroll/<?= $activity->id; ?>');"><span class="choose_num">单人行（<?= $activity->apply_fee ?>）</span></a>
+            <a href="javascript:$.util.checkLogin('/activity/choose_member/<?= $activity->id; ?>');"><span class="choose_num">三人行（<?= $activity->triple_fee ?>）</span></a>
+        </div>
+        <div class="bottombtn flex">
+            <?php if ($activity->apply_end_time < time()): ?>
+                <a style="background:gray;" class="l-btn">我要赞助</a>
+            <?php else: ?>
+                <a href="javascript:$.util.checkLogin('/activity/recommend/<?= $activity->id; ?>')" class="l-btn">我要赞助</a>
+            <?php endif; ?>
+            <?php if ($activity->apply_end_time < time() || time() < $activity->apply_start_time): ?>
+                <a style="background:gray;" class="r-btn">我要报名</a>
+            <?php else: ?>
+                <!--报名人数-->
+                <?php if ($activity->apply_nums < $activity->scale): ?>
+                    <!--是否要审核-->
+                    <?php if ($activity->must_check): ?>
+                        <?php if (empty($activity->activityapply)): ?>
+                            <a id="want_enroll" class="r-btn" href="javascript:void(0);" is_three="<?= $activity->triple_fee ? 1 : 0 ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                        <?php else: ?>
+                            <?php if ($activity->activityapply['0']->is_pass == 0): ?>
+                                <?php if ($activity->activityapply['0']->is_check == 1): ?>;
+                                    <a href="/wx/meet-pay/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
+                                <?php elseif ($activity->activityapply['0']->is_check == 2): ?>
+                                    <a style="background:gray;" class="r-btn">审核未通过</a>
+                                <?php else: ?>
+                                    <a class="r-btn">审核中</a>
+                                <?php endif; ?>
+                            <?php elseif ($activity->activityapply['0']->is_pass == 1): ?>
+                                <a class="r-btn">已报名</a>
                             <?php endif; ?>
-                        <?php elseif ($activity->activityapply['0']->is_pass == 1): ?>
-                            <a class="r-btn">已报名</a>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <?php if (empty($activity->activityapply)): ?>
+                            <a id="want_enroll" class="r-btn" href="javascript:void(0);" is_three="<?= $activity->triple_fee ? 1 : 0 ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                        <?php else: ?>
+                            <?php if ($activity->activityapply['0']->is_pass == 0): ?>
+                                <a href="/wx/meet-pay/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
+                            <?php elseif ($activity->activityapply['0']->is_pass == 1): ?>
+                                <a class="r-btn">已报名</a>
+                            <?php endif; ?>
                         <?php endif; ?>
                     <?php endif; ?>
                 <?php else: ?>
-                    <?php if (empty($activity->activityapply)): ?>
-                        <a id="want_enroll" class="r-btn" href="javascript:void(0);" is_three="<?= $activity->triple_fee ? 1 : 0 ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
-                    <?php else: ?>
-                        <?php if ($activity->activityapply['0']->is_pass == 0): ?>
-                            <a href="/wx/meet-pay/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->apply_fee; ?>元)</a>
-                        <?php elseif ($activity->activityapply['0']->is_pass == 1): ?>
-                            <a class="r-btn">已报名</a>
-                        <?php endif; ?>
-                    <?php endif; ?>
+                    <a class="r-btn">报名人数已满</a>
                 <?php endif; ?>
-            <?php else: ?>
-                <a class="r-btn">报名人数已满</a>
             <?php endif; ?>
-        <?php endif; ?>
+        </div>
     </div>
     <!-- 微信分享 -->
     <div class="reg-shadow" style="display: none;" id="shadow"></div>
@@ -272,7 +278,9 @@
 </script>
 <script>
     if(window.__id == '32'){
-        $('#want_enroll').attr('href', '/beauty/index');
+        setTimeout(function(){
+            $('#want_enroll').attr('href', '/beauty/index');
+        }, 1000);
     }
     
     window.article = true;
@@ -720,17 +728,7 @@
                 break;
             case 'want_enroll':
                 if($(em).attr('is_three') == 1){
-                    layer.open({
-                        anim: 'up',
-                        content: '您的选择？',
-                        btn: ['三人行(<?= $activity->triple_fee ?>元)', '单人行(<?= $activity->apply_fee ?>元)'],
-                        yes: function(index){
-                            alert('施工中……');
-                        },
-                        no: function(index){
-                            $.util.checkLogin('/activity/enroll/<?= $activity->id; ?>');
-                        }
-                    });
+                    $('#choose').toggleClass('hide_group');
                 } else {
                     $.util.checkLogin('/activity/enroll/<?= $activity->id; ?>');
                 }
