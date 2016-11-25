@@ -148,7 +148,6 @@ class SavantController extends AppController {
         if ($this->request->query('do') == 'check' && $savant_status === NULL) {
             $where['User.savant_status'] = 2;
         }
-        $where['User.savant_status !='] = 1;
         if (!empty($keywords)) {
             $where['or'] = [['truename like' => "%$keywords%"], ['company like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
         }
