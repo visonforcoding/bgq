@@ -57,6 +57,11 @@
     </div>
     <div class="h2"></div>
     <div class="m_title_des bd1">
+        <h3>菁英推荐</h3>
+    </div>
+    <div id='elite'></div>
+    <div class="h2"></div>
+    <div class="m_title_des bd1">
         <h3>全部会员</h3>
     </div>
     <div id='biggie'></div>
@@ -126,7 +131,9 @@
 <script>
     var meet = function(o){
         this.opt = {
-            init_vip: LEMON.db.get('vip'), // 页面初始直接获取的数据
+            no_cache: true,
+            init_data: LEMON.db.get('vip'), // 页面初始直接获取的数据
+            init_elite: LEMON.db.get('elite'),
             init_banner: LEMON.db.get('banner'),
             init_biggieAd: LEMON.db.get('biggieAd')
         };
@@ -139,11 +146,12 @@
             this.getRecommend();
             this.getData();
             this.getUnReadMsg();
+            this.getElite();
         },
         
         getBanner: function(){
             var obj = this;
-            if(!obj.init_banner){
+            if(!obj.init_banner || obj.no_cache){
                 $.getJSON('/meet/get-banner', function (res) {
                     if (res.status) {
                         obj.staticBanner(res.data);
@@ -156,7 +164,7 @@
         },
         getRecommend: function(){
             var obj = this;
-            if(!obj.init_recommend){
+            if(!obj.init_biggieAd || obj.no_cache){
                 $.getJSON('/meet/get-recommend', function (res) {
                     if (res.status) {
                         obj.staticRecommend(res.data);
@@ -175,19 +183,32 @@
                     }, 0);
                 });
             } else {
-                this.setRecommend(JSON.parse(obj.init_recommend));
+                this.setRecommend(JSON.parse(obj.init_biggieAd));
+            }
+        },
+        getElite: function(){
+            var obj = this;
+            if(!obj.init_elite || obj.no_cache){
+                $.getJSON('/meet/get-elite', function (res) {
+                    if (res.status) {
+                        obj.staticElite(res.data);
+                    }
+                });
+            } else {
+                var html = $.util.dataToTpl('', 'biggie_tpl', JSON.parse(obj.init_elite), tpldate);
+                $('#elite').append(html);
             }
         },
         getData: function(){
             var obj = this;
-            if(!obj.init_data){
+            if(!obj.init_data || obj.no_cache){
                 $.getJSON('/meet/getMoreBiggie/1', function (res) {
                     if (res.status) {
                         obj.staticData(res.data);
                     }
                 });
             } else {
-                var html = $.util.dataToTpl('', 'biggie_tpl', JSON.parse(data), tpldate);
+                var html = $.util.dataToTpl('', 'biggie_tpl', JSON.parse(obj.init_data), tpldate);
                 $('#biggie').append(html);
             }
         },
@@ -218,11 +239,20 @@
         },
         staticRecommend: function (netRecommend){
             var str = JSON.stringify(netRecommend);
-            if(str == this.init_recommend){
-                this.setRecommend(JSON.parse(this.init_recommend));
+            if(str == this.init_biggieAd){
+                this.setRecommend(JSON.parse(this.init_biggieAd));
             } else {
                 LEMON.db.set('biggieAd', str);
                 this.setRecommend(JSON.parse(str));
+            }
+        },
+        staticElite: function (netData){
+            var str = JSON.stringify(netData);
+            if(str == this.init_elite){
+                $.util.dataToTpl('elite', 'biggie_tpl', JSON.parse(this.init_elite), tpldate);
+            } else {
+                LEMON.db.set('elite', str);
+                $.util.dataToTpl('elite', 'biggie_tpl', JSON.parse(str), tpldate);
             }
         },
         staticData: function (netData){
