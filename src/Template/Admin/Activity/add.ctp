@@ -125,10 +125,18 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">费用</label>
+        <label class="col-md-2 control-label">单人费用</label>
         <div class="col-md-8">
             <?php
             echo $this->Form->input('apply_fee', ['label' => false, 'class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">三人费用</label>
+        <div class="col-md-8">
+            <?php
+            echo $this->Form->input('triple_fee', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>

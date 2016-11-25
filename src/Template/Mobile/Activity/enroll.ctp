@@ -2,6 +2,10 @@
     <div class="wraper">
         
         <form action="" method="post">
+            <?php if($triple): ?>
+                <input type="hidden" name="user1" />
+                <input type="hidden" name="user2" />
+            <?php endif; ?>
             <div class="infobox sing-up">
                 <ul>
                     <li>活动名称：<span class='infocard'><input type="text" name="title" value="<?= $activity->title; ?>" readonly/></span></li>
@@ -11,7 +15,10 @@
                     <li>公司：<span class='infocard'><input type="text" name="company" value="<?= $user->company; ?>" readonly/></span></li>
                     <li>职务：<span class='infocard'><input type="text" name="position" value="<?= $user->position; ?>" readonly/></span></li>
                     <li>联系方式：<span class='infocard reg-pass'><input type="text" name="phone" value="<?= $user->phone; ?>" readonly/></span></li>
-                    <li class='no-bottom'>费用：<span class='infocard reg-repass'><input type="text" name="apply_fee" placeholder="<?= $activity->apply_fee; ?>元" readonly/></span></li>
+                    <li <?php if(!$triple): ?>class='no-bottom'<?php endif; ?>>费用：<span class='infocard reg-repass'><input type="text" name="apply_fee" placeholder="<?= $triple ? $activity->triple_fee : $activity->apply_fee; ?>元" readonly/></span></li>
+                    <?php if($triple): ?>
+                        <li class='no-bottom'>同行人：<span class='infocard reg-repass'><input type="text" name="triple" placeholder="" readonly/></span></li>
+                    <?php endif; ?>
                 </ul>
             </div>
             <a href="javascript:void(0)" class="nextstep" id="submit">提交</a>
@@ -44,6 +51,11 @@
 //        $.util.checkUserinfoStatus();
 //    };
 //    window.onBackView();
+    if($.util.getCookie('acti_1_id')){
+        $('input[name="triple"]').attr('placeholder', $.util.getCookie('acti_1_name')+'、'+$.util.getCookie('acti_2_name'));
+        $('input[name="user1"]').val($.util.getCookie('acti_1_id'));
+        $('input[name="user2"]').val($.util.getCookie('acti_2_id'));
+    }
     
     $('#submit').on('tap', function () {
         $form = $('form');
