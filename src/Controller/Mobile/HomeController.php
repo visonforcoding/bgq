@@ -738,7 +738,7 @@ class HomeController extends AppController {
                 $msg = "您预约的话题：《" . $book->subject->title . "》已确认通过。";
                 $this->Sms->sendByQf106($book->user->phone, $msg);
                 $this->loadComponent('Business');
-                $jump_url = '/home/my-book/#2';
+                $jump_url = '/meet/chat-list';
                 $this->Business->usermsg($book->user_id, '预约通知', $msg, 4, $id, $jump_url);
                 return $this->Util->ajaxReturn(true, '处理成功!');
             } else {

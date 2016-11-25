@@ -42,6 +42,9 @@ class MeetController extends AppController {
         ]);
     }
     
+    /**
+     * 是否有未读消息
+     */
     public function unReadMsg(){
         if($this->user){
             $BookChatTable = \Cake\ORM\TableRegistry::get('BookChat');
@@ -50,6 +53,12 @@ class MeetController extends AppController {
                 'is_read'=>0
             ])->toArray();
             $unReadMsg = count($bookChat);
+            $UsermsgTable = \Cake\ORM\TableRegistry::get('Usermsg');
+            $usermsg = $UsermsgTable
+                    ->find()
+                    ->where(['user_id'=>$this->user->id, 'type'=>4, 'status'=>0])
+                    ->toArray();
+            $unReadMsg += $usermsg;
         }
         return $this->Util->ajaxReturn(['status'=>true, 'data'=>$unReadMsg]);
     }
@@ -85,7 +94,7 @@ class MeetController extends AppController {
     /**
      * ajax获取菁英推荐
      */
-    public function getElite(){
+    public function getElite($limit=null){
         $user_id = '';
         if($this->user){
             $user_id = $this->user->id;
@@ -103,8 +112,8 @@ class MeetController extends AppController {
                 }])
                 ->select(['id', 'truename', 'position', 'company', 'avatar', 'fans', 'meet_nums'])
                 ->where(['enabled'=>'1', 'level'=>'2', 'is_elite'=>1])
-                ->order(['is_top'=>'desc', 'subject_update_time'=>'desc', 'fans'=>'desc'])
-                ->limit(3)
+                ->order(['is_elite_top'=>'desc', 'subject_update_time'=>'desc', 'fans'=>'desc'])
+                ->limit($limit)
                 ->formatResults(function($items) {
                     return $items->map(function($item) {
                         $item['avatar'] = getSmallAvatar($item['avatar']);
@@ -118,6 +127,12 @@ class MeetController extends AppController {
         } else {
             return $this->Util->ajaxReturn(false, '');
         }
+    }
+    
+    public function allElite(){
+        $this->set([
+            'pageTitle' => '全部菁英推荐',
+        ]);
     }
     
     /**
@@ -907,6 +922,8 @@ class MeetController extends AppController {
                 ->distinct('SubjectBook.id')
                 ->contain(['Users', 'Savants', 'Subjects', 'BookChats'=>function($q)use($user_id){
                     return $q->where(['is_read'=>0, 'reply_id'=>$user_id]);
+                }, 'Usermsgs'=>function($q){
+                    return $q->where(['Usermsgs.type'=>4, 'status'=>0]);
                 }])
                 ->leftJoinWith('BookChats')
                 ->where([
@@ -915,7 +932,7 @@ class MeetController extends AppController {
                         'SubjectBook.savant_id'=>$user_id
                     ]
                 ])
-                ->orderDesc('BookChats.create_time')
+                ->order(['BookChats.create_time'=>'desc'])
                 ->formatResults(function($items){
                     return $items->map(function($item){
                         if($item->book_chats){
@@ -932,12 +949,25 @@ class MeetController extends AppController {
                 ->toArray();
         foreach($subjectBook as $k=>$v){
             $subjectBook[$k]['unReadMsg'] = count($v['book_chats']);
+            $subjectBook[$k]['unReadMsg'] += count($v['usermsgs']);
         }
         $this->set([
             'pageTitle' => '消息列表',
             'uid' => $user_id,
             'subjectBook' => $subjectBook,
         ]);
+    }
+    
+    public function readMsg($id=null){
+        $UsermsgTable = \Cake\ORM\TableRegistry::get('Usermsg');
+        $usermsg = $UsermsgTable->find()->where(['user_id'=>$this->user->id, 'table_id'=>$id, 'type'=>4])->first();
+        $usermsg->status = 1;
+        $res = $UsermsgTable->save($usermsg);
+        if($res){
+            return $this->Util->ajaxReturn(true, '成功');
+        } else {
+            return $this->Util->ajaxReturn(false, '失败');
+        }
     }
 
 }

@@ -43,6 +43,13 @@
                 <?php endif; ?>
             <?php endif; ?>
         </ul>
+        <?php if($book->is_done == 1): ?>
+            <?php if($book->user_id == $uid): ?>
+                <div class="desc"><span>对方已结束这次对话</span></div>
+            <?php else: ?>
+                <div class="desc"><span>你已结束这次对话</span></div>
+            <?php endif; ?>
+        <?php endif; ?>
     </div>
 </div>
 <?php if ($book->is_done != 1 && $book->status == 1): ?>
@@ -50,10 +57,15 @@
     <div style="height:1.5rem"></div>
     <div class="chatbottom">
         <div class="chatcon flex flex_jusitify">
-            <input type="text" placeholder="请在这里输入你想发送的话" id="content" />
+            <textarea class="sub-text" id="content" ></textarea>
             <button id="submit">发送</button>
         </div>
     </div>
+    <?php if($book->savant_id == $uid): ?>
+        <div class="over-meet" id="done">
+            <span>约见<br>结束</span>
+        </div>
+    <?php endif; ?>
 <?php endif; ?>
 <script type="text/html" id="tpl">
     {#msg#}
@@ -206,6 +218,20 @@
             }
          });
     }
+    
+    $('#done').on('click', function(){
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: "/home/change-subject-status/" + book_id,
+            success: function (res) {
+                $.util.alert(res.msg);
+                if (res.status) {
+                    location.reload();
+                }
+            }
+        });
+    });
 </script>
 <?php
 $this->end('script');
