@@ -940,3 +940,6 @@ ALTER TABLE `binggq`.`user`
 
 ALTER TABLE `binggq`.`user`
   ADD COLUMN `is_elite_top` tinyint(2) unsigned NOT NULL DEFAULT 0 COMMENT '是否菁英推荐的置顶' COMMENT '是否菁英推荐的置顶';
+
+ALTER TABLE `binggq`.`activityapply`
+  ADD COLUMN `is_triple` tinyint(2) unsigned NOT NULL DEFAULT 0 COMMENT '是否三人行' COMMENT '是否三人行';

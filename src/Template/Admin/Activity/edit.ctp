@@ -146,7 +146,7 @@
             <?php
             echo $this->Form->input('apply_fee', ['label' => false, 'class' => 'form-control']);
             ?>
-            <span style="color:red">（请注意：从免费改为付费会导致已报名的人去付款时会报错）</span>
+            <span style="color:red">（请注意：从免费改为付费会导致已报名的人去付款时会报错；三人行有费用时，单人费用不可为0）</span>
         </div>
     </div>
     <div class="form-group">
@@ -155,7 +155,7 @@
             <?php
             echo $this->Form->input('triple_fee', ['label' => false, 'class' => 'form-control']);
             ?>
-            <span style="color:red">（请注意：从免费改为付费会导致已报名的人去付款时会报错）</span>
+            <span style="color:red">（请注意：从免费改为付费会导致已报名的人去付款时会报错；不填或填0，则该活动无三人行报名方式）</span>
         </div>
     </div>
     <div class="form-group">

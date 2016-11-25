@@ -1,7 +1,7 @@
 <script src="/mobile/js/view.js"></script>
 <div class="wraper">
     <div class="entroll-search flex mt20">
-        <div class="search—input"><input name="keyword" type="text" placeholder="请输入姓名或者手机号码" /></div>
+        <div class="search—input"><input name="keyword" type="text" placeholder="姓名、手机号" /></div>
         <input type="hidden" name="user_id1" />
         <input type="hidden" name="user_id2" />
         <span class="seachbtn" id="search">搜索</span>
