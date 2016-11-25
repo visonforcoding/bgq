@@ -17,6 +17,7 @@
             </li>
         </form>
     </ul>
+<!--    <div>
     <?php if($user->savant_status==1): ?>
         <a id="submit" class="nextstep">申请认证</a>
     <?php endif; ?>
@@ -31,6 +32,10 @@
     <?php endif; ?>
     <?php if($user->savant_status!=3): ?>
     <div class="line"><span class="mistips">我们会在三个工作日内处理您的申请</span></div>
+    <?php endif; ?>
+    </div>-->
+    <?php if($user->savant_status!=3): ?>
+        <div class="line"><span class="mistips">暂时停止开放会员认证</span></div>
     <?php endif; ?>
 </div>
 <div class="reg-shadow" id="shadow" hidden></div>
