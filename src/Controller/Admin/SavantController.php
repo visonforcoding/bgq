@@ -143,11 +143,12 @@ class SavantController extends AppController {
         $end_time = $this->request->data('end_time');
         $where = ['enabled'=>1];
         if ($savant_status > -1) {
-            $where['User.savant_status'] = $savant_status;
+            $where['and']['User.savant_status'] = $savant_status;
         }
         if ($this->request->query('do') == 'check' && $savant_status === NULL) {
-            $where['User.savant_status'] = 2;
+            $where['and']['User.savant_status'] = 2;
         }
+        $where['and']['User.savant_status !='] = 1;
         if (!empty($keywords)) {
             $where['or'] = [['truename like' => "%$keywords%"], ['company like' => "%$keywords%"], ['phone like' => "%$keywords%"]];
         }
