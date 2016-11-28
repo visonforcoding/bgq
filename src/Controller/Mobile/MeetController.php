@@ -921,7 +921,10 @@ class MeetController extends AppController {
                 ->find()
                 ->distinct('SubjectBook.id')
                 ->contain(['Users', 'Savants', 'Subjects', 'BookChats'=>function($q)use($user_id){
-                    return $q->where(['reply_id'=>$user_id]);
+                    return $q->where(['or'=>[
+                        'reply_id'=>$user_id,
+                        'user_id' => $user_id
+                    ]]);
                 }, 'Usermsgs'=>function($q){
                     return $q->where(['Usermsgs.type'=>4, 'status'=>0]);
                 }])
