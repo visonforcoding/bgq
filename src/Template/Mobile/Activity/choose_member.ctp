@@ -114,7 +114,7 @@
         submit: function(){
             var obj = this;
             $('#submit').on('click', function(){
-                if($('.chosen_user').eq(0).html() == '' || $('.chosen_user').eq(0).html() == ''){
+                if($('.chosen_user').eq(0).html() == '' || $('.chosen_user').eq(1).html() == ''){
                     $.util.alert('请继续选择同行人');
                     return;
                 }
