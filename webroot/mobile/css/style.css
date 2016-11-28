@@ -101,7 +101,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .a_banner_title{position:absolute;bottom:0;height:32px;background: rgba(0,0,0,.6);color:#fff;width:100%;text-indent: .3rem;line-height: 30px;}
 .a_banner_title h3{font-size:14px;}
 .a-search-box{position:fixed;top:0.6rem;width:100%; padding:0 0.68rem;z-index:3;max-width:750px;}
-.a_search_box{position:fixed;right:.3rem;top:.75rem;z-index:9999;padding:5px;}
+.a_search_box{position:fixed;right:.3rem;top:.75rem;z-index:9999;padding:5px;display: none;}
 .a_search_box a{display: block;height:32px;width:32px;border-radius: 50%;background: rgba(0,0,0,.5);text-align: center;}
 .a_search_box i{color:#fff;font-size:17px;line-height: 32px; }
 .a-search{/*display: flex;align-items: center;*/background:rgba(255,255,255,.5); width:100%;border-radius: 4px;height:30px;line-height: 30px;}
@@ -382,6 +382,7 @@ border-bottom:none;top:-1px;margin-top:-1px;margin-left:-1px;}
 .dk img{width:100%;height:auto;display: block;}
 .dk span{position:absolute;right:-5%;padding:0 0.2rem 0 0.1rem ;background: #E01A48;top:0.3rem;color:#fff;font-size:0.24rem;
 height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;}
+.dk .more{font-size: .26rem;}
 .itemsbox .no-b-right{border-right:none;}
 .m-items .m-title{border-bottom:1px #e5e5e5 solid;padding-top:0.14rem;padding-bottom:0.14rem;}
 .m-items h3{border-left:0.04rem #e01a48 solid;padding-left:0.1rem;font-size:0.3rem;}
@@ -1367,7 +1368,7 @@ box-align:center;-webkit-box-align:center;}
 .meet_search_box .search-content .iconfont{color:#B71C2D;}
 .meet_search_box .rico{color:#e2a4ab;margin-left:15px;font-size: 20px;width:20px;height:28px;line-height: 28px;position: relative}
 .meet_search_box .rico .iconfont{font-size: 20px;display:block;}
-.meet_search_box .rico .num{position: absolute;right:-6px;top:0;width:12px;height:12px;border-radius: 50%;background: #fff;font-size: 7px;color:#B71C2D;text-align: center;line-height: 12px;}
+.meet_search_box .rico .num{position: absolute;right:-5px;top:2px;width:12px;height:12px;border-radius: 50%;background: #fff;font-size: 7px;color:#B71C2D;text-align: center;line-height: 12px;}
 .chatinfo_list{background: #fff;}
 .chatinfo_list li{border-bottom:1px #e5e5e5 solid;padding:0.2rem .3rem;}
 .chatinfo_list li .avatar{width:1.12rem;height:1.12rem;position:absolute;overflow:hidden;}
