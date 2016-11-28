@@ -215,3 +215,7 @@ header{display:none;}
 .flex_jusitify{-webkit-box-pack:justify;}
 .flex_center{-webkit-box-pack:center;}
 .rmore{font-size: .28rem;}
+/*循环动画*/
+/*@-webkit-keyframes infinites{from{transform:scale(1);} to{transform:scale(0.8);}}
+@keyframes infinites{from{transform:scale(1);} to{transform:scale(0.8);}}
+.infinite{-webkit-animation: infinites .8s infinite alternate ease-in-out;animation: infinites .8s infinite alternate ease-in-out;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}*/
