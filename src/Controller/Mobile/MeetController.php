@@ -937,10 +937,18 @@ class MeetController extends AppController {
                     return $items->map(function($item){
                         if($item->book_chats){
                             $now = \Cake\I18n\Time::now();
-                            if($item->book_chats[0]->create_time->format('d') == $now->format('d')){
-                                $item->last_msg_time = $item->book_chats[0]->create_time->format('H:i');
+                            if($item->book_chats){
+                                if($item->book_chats[0]->create_time->format('d') == $now->format('d')){
+                                    $item->last_msg_time = $item->book_chats[0]->create_time->format('H:i');
+                                } else {
+                                    $item->last_msg_time = $item->book_chats[0]->create_time->format('m月d日');
+                                }
                             } else {
-                                $item->last_msg_time = $item->book_chats[0]->create_time->format('m月d日');
+                                if($item->create_time->format('d') == $now->format('d')){
+                                    $item->last_msg_time = $item->create_time->format('H:i');
+                                } else {
+                                    $item->last_msg_time = $item->create_time->format('m月d日');
+                                }
                             }
                         }
                         return $item;
