@@ -945,9 +945,10 @@ class MeetController extends AppController {
                                 }
                             } else {
                                 if($item->create_time->format('d') == $now->format('d')){
-                                    debug($item->create_time);
+                                    
                                     $item->last_msg_time = $item->create_time->format('H:i');
                                 } else {
+                                    debug($item->create_time);
                                     $item->last_msg_time = $item->create_time->format('m月d日');
                                 }
                             }
