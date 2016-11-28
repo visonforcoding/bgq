@@ -921,7 +921,7 @@ class MeetController extends AppController {
                 ->find()
                 ->distinct('SubjectBook.id')
                 ->contain(['Users', 'Savants', 'Subjects', 'BookChats'=>function($q)use($user_id){
-                    return $q->where(['is_read'=>0, 'reply_id'=>$user_id]);
+                    return $q->where(['reply_id'=>$user_id]);
                 }, 'Usermsgs'=>function($q){
                     return $q->where(['Usermsgs.type'=>4, 'status'=>0]);
                 }])
@@ -932,7 +932,7 @@ class MeetController extends AppController {
                         'SubjectBook.savant_id'=>$user_id
                     ]
                 ])
-                ->order(['BookChats.create_time'=>'desc'])
+                ->order(['SubjectBook.is_done'=>'asc', 'SubjectBook.sort_time'=>'desc'])
                 ->formatResults(function($items){
                     return $items->map(function($item){
                         if($item->book_chats){
@@ -948,7 +948,12 @@ class MeetController extends AppController {
                 })
                 ->toArray();
         foreach($subjectBook as $k=>$v){
-            $subjectBook[$k]['unReadMsg'] = count($v['book_chats']);
+            for($i=0;$i<count($v['book_chats']);$i++){
+                if($v['book_chats'][$i]['is_read'] == 0){
+                    $subjectBook[$k]['unReadMsg'] += 1;
+                }
+            }
+//            $subjectBook[$k]['unReadMsg'] = count($v['book_chats']);
             $subjectBook[$k]['unReadMsg'] += count($v['usermsgs']);
         }
         $this->set([

@@ -88,18 +88,24 @@
                 if(i.hasClass('chosen')){
                     i.html('&#xe6a9;');
                     if($('.chosen_user').eq(0).html() == ''){
-                        $('.chosen_user').eq(0).html($(this).find('span.truename').html());
+                        $('.chosen_user').eq(0).html('<span class="choosed cancel">'+$(this).find('span.truename').html()+'<i class="iconfont">&#xe67b;</i></span>');
                         $('.chosen_user').eq(0).addClass('user_'+user_id);
                         $('.chosen_user').eq(0).attr('user_id', user_id);
+                        $('.chosen_user').eq(0).attr('user_name', $(this).find('span.truename').html());
                     } else if($('.chosen_user').eq(1).html() == '') {
-                        $('.chosen_user').eq(1).html($(this).find('span.truename').html());
+                        $('.chosen_user').eq(1).html('<span class="choosed cancel">'+$(this).find('span.truename').html()+'<i class="iconfont">&#xe67b;</i></span>');
                         $('.chosen_user').eq(1).addClass('user_'+user_id);
                         $('.chosen_user').eq(1).attr('user_id', user_id);
+                        $('.chosen_user').eq(1).attr('user_name', $(this).find('span.truename').html());
                     } else {
                         $.util.alert('最多选择两位同行人');
                         i.toggleClass('chosen');
                         i.html('&#xe6a8;');
                     }
+                    $('.cancel').on('click', function(){
+                        $('li[user_id="'+$(this).parent().attr('user_id')+'"]').find('i.choose_status').html('&#xe6a8;');
+                        $(this).parent().html('');
+                    });
                 } else {
                     i.html('&#xe6a8;');
                     $('.user_'+user_id).html('').attr('user_id', '').removeClass('user_'+user_id);
@@ -126,9 +132,9 @@
                     success: function (res) {
                         if(res.status){
                             $.util.setCookie('acti_1_id', $('.chosen_user').eq(0).attr('user_id'));
-                            $.util.setCookie('acti_1_name', $('.chosen_user').eq(0).html());
+                            $.util.setCookie('acti_1_name', $('.chosen_user').eq(0).attr('user_name'));
                             $.util.setCookie('acti_2_id', $('.chosen_user').eq(1).attr('user_id'));
-                            $.util.setCookie('acti_2_name', $('.chosen_user').eq(1).html());
+                            $.util.setCookie('acti_2_name', $('.chosen_user').eq(1).attr('user_name'));
                             location.href = '/activity/enroll/'+obj.activity_id + '/' + '1';
                         } else {
                             $.util.alert(res.msg);
@@ -136,7 +142,8 @@
                     }
                 });
             });
-        }
+        },
+        
     });
     
     var userobj = new user();

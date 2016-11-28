@@ -71,6 +71,7 @@ class SubjectBookTable extends Table {
             'events' => [
                 'Model.beforeSave' => [
                     'create_time' => 'new',
+                    'sort_time' => 'new',
                     'update_time' => 'always'
                 ]
             ]

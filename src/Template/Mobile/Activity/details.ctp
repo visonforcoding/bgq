@@ -603,6 +603,7 @@
                     $('#wxshare').hide();
                     $('#isdel').hide();
                     $('#isdel').attr('com_id', '');
+                    $('#choose').removeClass('hide_group');
                 }, 400);
                 break;
             case 'reply_shadow':
@@ -737,6 +738,11 @@
             case 'want_enroll':
                 if($(em).attr('is_three') == 1){
                     $('#choose').toggleClass('hide_group');
+                    if($('#choose').hasClass('hide_group')){
+                        $('#shadow').show();
+                    } else {
+                        $('#shadow').hide();
+                    }
                 } else {
                     $.util.checkLogin('/activity/enroll/<?= $activity->id; ?>');
                 }

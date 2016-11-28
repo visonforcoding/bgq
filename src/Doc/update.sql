@@ -943,3 +943,6 @@ ALTER TABLE `binggq`.`user`
 
 ALTER TABLE `binggq`.`activityapply`
   ADD COLUMN `is_triple` tinyint(2) unsigned NOT NULL DEFAULT 0 COMMENT '是否三人行' COMMENT '是否三人行';
+
+ALTER TABLE `binggq`.`subject_book`
+  ADD COLUMN `sort_time` datetime NOT NULL COMMENT '回复更新时间（用于排序）' COMMENT '回复更新时间（用于排序）';
