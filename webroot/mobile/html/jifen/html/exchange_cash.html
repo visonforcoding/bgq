@@ -56,6 +56,13 @@
                 </div>
             </div>
         </div>
+        <div class="tips" style="display: none;">
+            <div class="tips_des">
+                <h1 id="msg" style="color: #525151;" class="warning">系统错误</h1>
+                <p id="chargeTips"></p>
+                <span class="closed"></span>
+            </div>
+        </div>
         <script>
             $('.nochoose').on('click', function () {
                 if ($(this).hasClass('choose')) {
@@ -73,11 +80,11 @@
 
             $('#submit').on('click', function () {
                 if ($('input[name="type"]').val() == 1 && $('input[name="wx"]').val() == '') {
-                    alert('请输入您的微信账号');
+                    $.func.alert('请输入您的微信账号');
                     return false;
                 }
                 if ($('input[name="type"]').val() == 2 && $('input[name="ali"]').val() == '') {
-                    alert('请输入您的微支付宝账号');
+                    $.func.alert('请输入您的微支付宝账号');
                     return false;
                 }
                 if ($('input[name="type"]').val() == 1) {
