@@ -949,6 +949,7 @@ class MeetController extends AppController {
                     });
                 })
                 ->toArray();
+        debug($subjectBook);die;
         foreach($subjectBook as $k=>$v){
             for($i=0;$i<count($v['book_chats']);$i++){
                 if($v['book_chats'][$i]['is_read'] == 0){
