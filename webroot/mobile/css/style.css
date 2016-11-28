@@ -380,9 +380,9 @@ border-bottom:none;top:-1px;margin-top:-1px;margin-left:-1px;}
 .dk a.meet-con{width:4.23rem;height:2.44rem;overflow:hidden; display: block;position:relative;border-radius: 0.1rem;
 -webkit-box-shadow: 1px 1px 4px rgba(34, 44, 56, 0.3);box-shadow: 1px 1px 4px rgba(34, 44, 56, 0.3);}
 .dk img{width:100%;height:auto;display: block;}
-.dk span{position:absolute;right:-5%;padding:0 0.2rem 0 0.1rem ;background: #E01A48;top:0.3rem;color:#fff;font-size:0.24rem;
-height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;}
-.dk .more{font-size: .26rem;}
+/*.dk span{position:absolute;right:-5%;padding:0 0.2rem 0 0.1rem ;background: #E01A48;top:0.3rem;color:#fff;font-size:0.24rem;
+height:0.4rem;line-height: 0.4rem;border-radius: 0.2rem;}*/
+.dk .more{font-size: .24rem;color:#999;}
 .itemsbox .no-b-right{border-right:none;}
 .m-items .m-title{border-bottom:1px #e5e5e5 solid;padding-top:0.14rem;padding-bottom:0.14rem;}
 .m-items h3{border-left:0.04rem #e01a48 solid;padding-left:0.1rem;font-size:0.3rem;}
