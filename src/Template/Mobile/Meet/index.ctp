@@ -58,10 +58,10 @@
     <div class="h2"></div>
     <div class="m_title_des bd1">
         <a class="title" href="/meet/all-elite">菁英推荐
-            <div class="fr more">
+            <span class="fr more">
                 查看更多
                 <i class="more iconfont fr rmore">&#xe667;</i>
-            </div>
+            </span>
         </a>
     </div>
     <div id='elite'></div>

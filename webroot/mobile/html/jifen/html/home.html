@@ -100,10 +100,10 @@
             </div>
             <!--<div style="height:50px;"></div>-->
         </div>
-        <div class="tips" style="display:none">
+        <div class="tips" style="display: none;">
             <div class="tips_des">
-                <h1 id="chargeStatus">兑换失败</h1>
-                <p id="chargeTips">请重新发送短信</p>
+                <h1 id="msg" style="color: #525151;" class="warning">系统错误</h1>
+                <p id="chargeTips"></p>
                 <span class="closed"></span>
             </div>
         </div>
@@ -116,9 +116,6 @@
                 </div>
             </div>
         </script>
-        <script type="text/html" id="mtpl">
-        <option value="{##}">20.0</option>
-    </script>
     <script type="text/javascript">
         if ($.func.getCookie('phone')) {
             $('#nickName').html($.func.getCookie('phone'));
@@ -131,18 +128,18 @@
         $('.submitbtn').on('click', function () {
             var chargePhone = $('input[name="chargePhone"]').val();
             if (!chargePhone) {
-                alert('请填写手机');
+                $.func.alert('请填写手机');
                 return;
             }
             var reg = /^0?1[3|4|5|7|8][0-9]\d{8}$/;
             if (!reg.test(chargePhone)) {
-                alert('请填写正确的手机号码');
+                $.func.alert('请填写正确的手机号码');
                 return;
             }
             var chargeNo = $('input[name="chargeNo"]').val();
             console.log(chargeNo);
             if (!chargeNo) {
-                alert('请填写串码');
+                $.func.alert('请填写串码');
                 return;
             }
             var chargeMoney = $('select').val();
@@ -156,16 +153,15 @@
         // 输入手机号码超过11位，异步加载可兑换金额
         $(function () {
             $('#chargePhone').bind('input propertychange', function () {
-                //alert($(this).val());
                 if (!$.func.getCookie('phone')) {
-                    alert('请先登录');
+                    $.func.alert('请先登录');
                     location.href = 'login.html?channelId=' + $.func.getUrlParam('channelId');
                     return false;
                 }
                 if ($(this).val().length >= 11) {
                     var reg = /^0?1[3|4|5|7|8][0-9]\d{8}$/;
                     if (!reg.test($(this).val())) {
-                        alert('请填写正确的手机号码');
+                        $.func.alert('请填写正确的手机号码');
                         return;
                     }
                     //获取可兑换金额
@@ -176,14 +172,14 @@
         
         $('#order').click(function(){
             if(!$.func.getCookie('phone')){
-                alert('请先登录');
+                $.func.alert('请先登录');
                 location.href = 'login.html?channelId=' + $.func.getUrlParam('channelId');
                 return;
             }
             location.href = 'order_query.html?channelId='+$.func.getUrlParam('channelId');
         });
         
-        $('header, .wraper').css('width', $(window).width())
+        $('header, .wraper').css('width', $(window).width());
     </script>
 </body>
 </html>

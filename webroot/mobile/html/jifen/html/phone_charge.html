@@ -31,10 +31,17 @@
                 </div>
             </div>
         </div>
+        <div class="tips" style="display: none;">
+            <div class="tips_des">
+                <h1 id="msg" style="color: #525151;" class="warning">系统错误</h1>
+                <p id="chargeTips"></p>
+                <span class="closed"></span>
+            </div>
+        </div>
         <script>
             $('#submit').on('click', function(){
                 if($('input[name="recharge_phone"]').val() == ''){
-                    alert('请输入您需要充值的手机号码');
+                    $.func.alert('请输入您需要充值的手机号码');
                     return false;
                 }
                 $.func.phoneCharge($.func.getUrlParam('id'), $('input[name="recharge_phone"]').val());

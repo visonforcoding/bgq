@@ -28,13 +28,11 @@ $.func = {
             var user = $('#username').val();
             var pwd = $('#valid').val();
             if (user == '') {
-                $('#msg').html('请输入手机号');
-                $('.tips').show();
+                $.func.alert('请输入手机号');
                 return;
             }
             if(pwd == ''){
-                $('#msg').html('请输入密码');
-                $('.tips').show();
+                $.func.alert('请输入密码');
                 return;
             }
             var str = 'channelId=' + $.func.getUrlParam('channelId') + '&userName=' + user + '&loginPwd=' + pwd;
@@ -51,8 +49,7 @@ $.func = {
                         $.func.setCookie('phone', user);
                         location.href = 'home.html?channelId='+$.func.getUrlParam('channelId');
                     } else {
-                        $('#msg').html(res.msg);
-                        $('.tips').show();
+                        $.func.alert(res.msg);
                         return false;
                     }
                 }
@@ -68,23 +65,19 @@ $.func = {
      */
     register: function(phone, pwd, vcode){
         if(phone == ''){
-            $('#msg').html('请输入手机号');
-            $('.tips').show();
+            $.func.alert('请输入手机号');
             return;
         }
         if(vcode == ''){
-            $('#msg').html('请输入验证码');
-            $('.tips').show();
+            $.func.alert('请输入验证码');
             return;
         }
         if(vcode.length < 6){
-            $('#msg').html('请输入正确的验证码');
-            $('.tips').show();
+            $.func.alert('请输入正确的验证码');
             return;
         }
         if(pwd == ''){
-            $('#msg').html('请输入密码');
-            $('.tips').show();
+            $.func.alert('请输入密码');
             return;
         }
         var str = 'userName=' + phone + '&userPwd=' + pwd + '&verificationCode=' + vcode + '&channelId=' + $.func.getUrlParam('channelId');
@@ -101,8 +94,7 @@ $.func = {
                     $.func.setCookie('phone', phone);
                     location.href = 'home.html?channelId='+$.func.getUrlParam('channelId');
                 } else {
-                    $('#msg').html(res.msg);
-                    $('.tips').show();
+                    $.func.alert(res.msg);
                     return false;
                 }
             }
@@ -115,8 +107,7 @@ $.func = {
      */
     getVcode: function(phone, type){
         if(phone == '') {
-            $('#msg').html('请输入手机号');
-            $('.tips').show();
+            $.func.alert('请输入手机号');
             return;
         }
         var str = 'userName=' + phone + '&channelId=' + $.func.getUrlParam('channelId') + '&type=' + type;
@@ -131,34 +122,34 @@ $.func = {
                 if (res.status == 0) {
                     
                 } else {
-                    $('#msg').html(res.msg);
-                    $('.tips').show();
+                    $.func.alert(res.msg);
                     return false;
                 }
             }
         });
     },
     
-    
+    /**
+     * 重置密码
+     * @param {type} phone 手机号
+     * @param {type} pwd 新密码
+     * @param {type} vcode 验证码
+     */
     resetPwd: function(phone, pwd, vcode){
         if(phone == ''){
-            $('#msg').html('请输入手机号');
-            $('.tips').show();
+            $.func.alert('请输入手机号');
             return;
         }
         if(vcode == ''){
-            $('#msg').html('请输入验证码');
-            $('.tips').show();
+            $.func.alert('请输入验证码');
             return;
         }
         if(vcode.length < 6){
-            $('#msg').html('请输入正确的验证码');
-            $('.tips').show();
+            $.func.alert('请输入正确的验证码');
             return;
         }
         if(pwd == ''){
-            $('#msg').html('请输入密码');
-            $('.tips').show();
+            $.func.alert('请输入密码');
             return;
         }
         var str = 'userName=' + phone + '&channelId=' + $.func.getUrlParam('channelId') + '&verificationCode=' + vcode + '&pwd=' + pwd;
@@ -172,8 +163,7 @@ $.func = {
                 if (res.status == 0) {
                     location.href = 'login.html?channelId='+$.func.getUrlParam('channelId');
                 } else {
-                    $('#msg').html(res.msg);
-                    $('.tips').show();
+                    $.func.alert(res.msg);
                     return false;
                 }
             }
@@ -223,7 +213,7 @@ $.func = {
                         $.func.checkjifen($('#jifen').html(), $(this).attr('link'));
                     });
                 } else {
-                    alert(res.msg);
+                    $.func.alert(res.msg);
                     return false;
                 }
             }
@@ -271,43 +261,11 @@ $.func = {
             success: function (res) {
                 res = JSON.parse(res);
                 console.log(res.data);
-                $('.tips').show();
                 if (res.status == 0) {
-                    $('#chargeStatus').html('兑换成功');
-                    $('#chargeTips').hide();
+                    $.func.alert('兑换成功');
                     $('#jifen').html(res.data.userJiFen);
-                }
-            }
-        });
-    },
-    
-    /**
-     * 串码兑换状态(弃用)
-     * @param {type} chargeNo 串码号
-     */
-    chargeStatus: function(chargeNo){
-        var str = 'channelId=' + $.func.getUrlParam('channelId') + '&chargeNo='+chargeNo;
-        var code = strEnc(str, _config.key1, _config.key2, _config.key3);
-        $.ajax({
-            type: 'post',
-            url: _config.url_chargeStatus + code,
-            success: function (res) {
-                res = JSON.parse(res);
-                console.log(res.data);
-                $('.tips').show();
-                if (res.status == 0) {
-                    if(res.data.chargeStatus == 4){
-                        
-                    } else if(res.data.chargeStatus == 1){
-                        $('#chargeStatus').html('兑换成功');
-                        $('#chargeTips').hide();
-                        $('#jifen').html(res.data.userJiFen);
-                    } else {
-                        $.func.chargeStatus(chargeNo);
-                    }
                 } else {
-                    alert(res.msg);
-                    return false;
+                    $.func.alert(res.msg);
                 }
             }
         });
@@ -430,7 +388,7 @@ $.func = {
                 res = JSON.parse(res);
                 console.log(res.data);
                 if (res.status !== 0) {
-                    alert(res.msg);
+                    $.func.alert(res.msg);
                     return false;
                 }
                 if(!res.data.cmds.length) return;
@@ -477,7 +435,7 @@ $.func = {
                 res = JSON.parse(res);
                 console.log(res.data);
                 if (res.status !== 0) {
-                    alert(res.msg);
+                    $.func.alert(res.msg);
                     return false;
                 }
                 location.href = 'order_query.html?channelId='+$.func.getUrlParam('channelId');
@@ -504,7 +462,7 @@ $.func = {
                 console.log(res.data);
                 if (res.status !== 0) {
                     window.holdLoad = true;
-                    alert(res.msg);
+                    $.func.alert(res.msg);
                     return false;
                 }
                 if (res.data.products.length === 0) window.holdLoad = true;
@@ -537,7 +495,7 @@ $.func = {
                 var clickMoney = parseInt($(em).eq(i).find('#money').attr('money')) * 100;
                 clickMoney /= 100;
                 if(userJiFen < clickMoney){
-                    alert('兑换余额不足');
+                    $.func.alert('兑换余额不足');
                     $('.order_detail_item li[data-type ="0"]').addClass('noTap');
                 }
                 var dataType = $(em).attr('data-type');
@@ -556,7 +514,7 @@ $.func = {
                 }
                 total_price /= 100;
                 if(total_price > userJiFen){
-                    alert('兑换余额不足');
+                    $.func.alert('兑换余额不足');
                     $('.order_detail_item li[data-type ="0"]').addClass('noTap');
                     $(em).find('.choosebtn').removeClass('choosed');
                     $(em).attr('data-type', 0);
@@ -576,12 +534,12 @@ $.func = {
      */
     checkjifen: function(jifen, url){
         if (!$.func.getCookie('phone')) {
-            alert('请先登录');
+            $.func.alert('请先登录');
             location.href = 'login.html?channelId=' + $.func.getUrlParam('channelId');
             return false;
         }
         if(jifen == 0){
-            alert('您的积分为0');
+            $.func.alert('您的积分为0');
             return false;
         } else {
             location.href = url;
@@ -606,13 +564,10 @@ $.func = {
                 res = JSON.parse(res);
                 console.log(res.data);
                 if (res.status !== 0) {
-                    alert(res.msg);
+                    $.func.alert(res.msg);
                     return false;
-                };
-                $('.tips').show();
-//                setTimeout(function(){
-//                    location.href = 'order_query.html?channelId='+$.func.getUrlParam('channelId');
-//                }, 2000);
+                }
+                $.func.alert(res.msg);
             }
         });
     },
@@ -634,7 +589,7 @@ $.func = {
                 res = JSON.parse(res);
                 console.log(res.data);
                 if (res.status !== 0) {
-                    alert(res.msg);
+                    $.func.alert(res.msg);
                     return false;
                 };
                 location.href = 'order_query.html?channelId='+$.func.getUrlParam('channelId');
@@ -659,11 +614,19 @@ $.func = {
                 res = JSON.parse(res);
                 console.log(res.data);
                 if (res.status !== 0) {
-                    alert(res.msg);
+                    $.func.alert(res.msg);
                     return false;
                 };
                 location.href = 'order_query.html?channelId='+$.func.getUrlParam('channelId');
             }
+        });
+    },
+    
+    alert: function(str){
+        $('#msg').html(str);
+        $('.tips').show();
+        $('.closed').on('click', function () {
+            $('.tips').hide();
         });
     },
     
