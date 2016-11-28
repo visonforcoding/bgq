@@ -935,22 +935,18 @@ class MeetController extends AppController {
                 ->order(['SubjectBook.is_done'=>'asc', 'SubjectBook.sort_time'=>'desc'])
                 ->formatResults(function($items){
                     return $items->map(function($item){
+                        $now = \Cake\I18n\Time::now();
                         if($item->book_chats){
-                            $now = \Cake\I18n\Time::now();
-                            if($item->book_chats){
-                                if($item->book_chats[0]->create_time->format('d') == $now->format('d')){
-                                    $item->last_msg_time = $item->book_chats[0]->create_time->format('H:i');
-                                } else {
-                                    $item->last_msg_time = $item->book_chats[0]->create_time->format('m月d日');
-                                }
+                            if($item->book_chats[0]->create_time->format('d') == $now->format('d')){
+                                $item->last_msg_time = $item->book_chats[0]->create_time->format('H:i');
                             } else {
-                                if($item->create_time->format('d') == $now->format('d')){
-                                    
-                                    $item->last_msg_time = $item->create_time->format('H:i');
-                                } else {
-                                    debug($item->create_time);
-                                    $item->last_msg_time = $item->create_time->format('m月d日');
-                                }
+                                $item->last_msg_time = $item->book_chats[0]->create_time->format('m月d日');
+                            }
+                        } else {
+                            if($item->create_time->format('d') == $now->format('d')){
+                                $item->last_msg_time = $item->create_time->format('H:i');
+                            } else {
+                                $item->last_msg_time = $item->create_time->format('m月d日');
                             }
                         }
                         return $item;
