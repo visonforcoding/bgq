@@ -8,7 +8,9 @@
                 <li class="fl">
                     <div class="flex chatbox">
                         <div class="avatar">
-                            <img src="../images/nv05.png"/>
+                            <a href="/user/home-page/<?= $user->id ?>">
+                                <img src="<?= $user->avatar; ?>"/>
+                            </a>
                         </div>
                         <div class="chat_text">
                             <span>我已约见你发布的话题【<?= $book->subject->title ?>】期待您的回应！<br />
@@ -32,7 +34,9 @@
                             <a href="/home/my-book-detail/<?= $book->id ?>">查看详情</a></span>
                         </div>
                         <div class="avatar">
-                            <img src="<?= $user->avatar ?>"/>
+                            <a href="/user/home-page/<?= $user->id ?>">
+                                <img src="<?= $user->avatar; ?>"/>
+                            </a>
                         </div>
                     </div>
                 </li>
@@ -67,6 +71,12 @@
         </div>
     <?php endif; ?>
 <?php endif; ?>
+<div class="reg-shadow" ontouchmove="return false;" hidden id="shadow"></div>
+<div class="totips" hidden id="is_done" >
+    <h3>确定要结束这个对话吗？</h3>
+    <span style="display: none"></span>
+    <a href="javascript:void(0)" class="tipsbtn bggray" id="no">否</a><a href="javascript:void(0)" class="tipsbtn bgred" id="yes">是</a>
+</div>
 <script type="text/html" id="tpl">
     {#msg#}
 </script>
@@ -110,7 +120,7 @@
                             msg += '<li class="fr"><div class="flex chatbox"><div class="chat_text"><span>'+d.content+'</span></div><div class="avatar"><a href="/user/home-page/'+ d.user.id +'"><img src="'+d.user_avatar+'"></a></div></div></li>';
                         } else {
                             d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                            msg += '<li class="fl"><div class="flex chatbox"><div class="avatar"><img src="'+d.user_avatar+'"></div><div class="chat_text"><span>' + d.content + '</span></div></div></li>';
+                            msg += '<li class="fl"><div class="flex chatbox"><div class="avatar"><a href="/user/home-page/'+d.user.id+'"><img src="'+d.user_avatar+'"></a></div><div class="chat_text"><span>' + d.content + '</span></div></div></li>';
                         }
                         d.msg = msg;
                         return d;
@@ -220,6 +230,11 @@
     }
     
     $('#done').on('click', function(){
+        $('#shadow').show();
+        $('.totips').show();
+    });
+    
+    $('#yes').on('click', function(){
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -231,6 +246,11 @@
                 }
             }
         });
+    });
+    
+    $('#no, #shadow').on('click', function(){
+        $('#shadow').hide();
+        $('.totips').hide();
     });
 </script>
 <?php

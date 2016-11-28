@@ -904,6 +904,9 @@ class HomeController extends AppController {
         $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
         $bookChatTable = \Cake\ORM\TableRegistry::get('BookChat');
         $book = $BookTable->get($book_id);
+        if($book->is_done == 1){
+            return $this->Util->ajaxReturn(false, '这个对话已经结束了');
+        }
         $where = [];
         $where['BookChat.user_id in'] = [$book->savant_id, $book->user_id];
         $where['reply_id in'] = [$book->savant_id, $book->user_id];
@@ -935,7 +938,10 @@ class HomeController extends AppController {
         $data['book_id'] = $book_id;
         $chat = $bookChatTable->newEntity();
         $chat = $bookChatTable->patchEntity($chat, $data);
-        $res = $bookChatTable->save($chat);
+        $book->sort_time = $now;
+        $res = $bookChatTable->connection()->transactional(function()use($BookTable, $book, $bookChatTable, $chat){
+            return $BookTable->save($book) && $bookChatTable->save($chat);
+        });
         if($res){
             $UserTable = \Cake\ORM\TableRegistry::get('user');
             $user = $UserTable->get($data['reply_id']);
