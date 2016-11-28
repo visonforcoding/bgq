@@ -713,20 +713,6 @@ class HomeController extends AppController {
                 ]
             ]);
             $book->status = 1; //更改
-//            $OrderTable = \Cake\ORM\TableRegistry::get('order');
-//            $order = $OrderTable->newEntity([
-//                'type' => 1,
-//                'relate_id' => $id, //预定表的id
-//                'user_id' => $book->user_id,
-//                'seller_id' => $book->savant_id,
-//                'order_no' => time() . $book->user_id . $id . createRandomCode(2, 2),
-//                'fee' => 0, // 实际支付的默认值
-//                'price' => $book->subject->price,
-//                'remark' => '预约话题' . $book->subject->title
-//            ]);
-//            $transRes = $BookTable->connection()->transactional(function()use($book, $BookTable, $order, $OrderTable) {
-//                return $BookTable->save($book) && $OrderTable->save($order);
-//            });
             $UserTable = \Cake\ORM\TableRegistry::get('user');
             $savant = $UserTable->get($book->savant_id);
             $savant->meet_nums += 1;
@@ -739,7 +725,7 @@ class HomeController extends AppController {
                 $this->Sms->sendByQf106($book->user->phone, $msg);
                 $this->loadComponent('Business');
                 $jump_url = '/meet/chat-list';
-                $this->Business->usermsg($book->user_id, '预约通知', $msg, 4, $id, $jump_url);
+                $this->Business->usermsg($book->savant_id, $book->user_id, '预约通知', $msg, 4, $id, $jump_url);
                 return $this->Util->ajaxReturn(true, '处理成功!');
             } else {
                 return $this->Util->ajaxReturn(false, '服务器出错!');

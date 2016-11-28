@@ -40,11 +40,6 @@
             url: "/meet/read-msg/" + obj.attr('table_id'),
             success: function (res) {
                 location.href = obj.attr('link');
-//                if (res.status) {
-//                    
-//                } else {
-//                    $.util.alert(res.msg);
-//                }
             }
         });
     });

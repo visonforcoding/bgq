@@ -940,7 +940,7 @@ class MeetController extends AppController {
                             if($item->book_chats[0]->create_time->format('d') == $now->format('d')){
                                 $item->last_msg_time = $item->book_chats[0]->create_time->format('H:i');
                             } else {
-                                $item->last_msg_time = $item->book_chats[0]->create_time->format('Y月d日');
+                                $item->last_msg_time = $item->book_chats[0]->create_time->format('m月d日');
                             }
                         }
                         return $item;
@@ -958,11 +958,18 @@ class MeetController extends AppController {
         ]);
     }
     
+    /**
+     * 消息变已读
+     * @param type $id 约见id
+     */
     public function readMsg($id=null){
+        $res = null;
         $UsermsgTable = \Cake\ORM\TableRegistry::get('Usermsg');
-        $usermsg = $UsermsgTable->find()->where(['user_id'=>$this->user->id, 'table_id'=>$id, 'type'=>4])->first();
-        $usermsg->status = 1;
-        $res = $UsermsgTable->save($usermsg);
+        $usermsg = $UsermsgTable->find()->where(['user_id'=>$this->user->id, 'table_id'=>$id, 'type'=>4, 'status'=>0])->first();
+        if($usermsg){
+            $usermsg->status = 1;
+            $res = $UsermsgTable->save($usermsg);
+        }
         if($res){
             return $this->Util->ajaxReturn(true, '成功');
         } else {
