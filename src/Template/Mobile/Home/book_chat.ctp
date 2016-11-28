@@ -12,6 +12,9 @@
                         </div>
                         <div class="chat_text">
                             <span>我已约见你发布的话题【<?= $book->subject->title ?>】期待您的回应！<br />
+                                <?php if($book->summary): ?>
+                                    我的需求是：<?= $book->summary ?> <br />
+                                <?php endif; ?>
                                 <?php if($book->status == 0): ?>
                                     <a href="javascript:bookNo(<?= $book->id ?>);">拒绝</a> <a href="javascript:bookOk(<?= $book->id ?>);">接受</a>
                                 <?php else: ?>
@@ -21,9 +24,6 @@
                         </div>
                     </div>
                 </li>
-                <?php if($book->summary): ?>
-                    <div class="desc"><span><?= $book->summary ?></span></div>
-                <?php endif; ?>
             <?php else: ?>
                 <li class="fr">
                     <div class="flex chatbox">

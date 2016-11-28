@@ -30,7 +30,7 @@ use Cake\Error\Debugger;
         </p>
 
         <div class="btnlist n_err_btn">
-            <a href="javascript:location.href='/<?= $this->request->url ?>';"><i></i>刷新</a><a href="/"><i></i>主页</a><a href="javascript:LEMON.event.back();"><i></i>返回</a>
+            <a href="javascript:location.href='/<?= $this->request->url ?>';"><i></i>刷新</a><a href="/meet/index"><i></i>主页</a><a href="javascript:if($.util.isApp){LEMON.event.back()}else{history.back();}"><i></i>返回</a>
         </div>
     </div>
 <?php else: ?>
