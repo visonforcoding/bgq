@@ -12,9 +12,9 @@
                     </div>
                     <div class='l_text'>
                         <?php if($v['user_id'] == $uid): ?>
-                            <h3 class="title flex"><i><?= $v['savant']['truename'] ?></i> <span class="job line1"><?= $v['savant']['company'] ?> / <?= $v['savant']['position'] ?></span></h3>
+                            <h3 class="title flex"><i><?= $v['savant']['truename'] ?></i> <span class="job line1"><?= $v['savant']['position'] ?></span></h3><span class="company line1"><?= $v['savant']['company'] ?></span>
                         <?php else: ?>
-                            <h3 class="title flex"><i><?= $v['user']['truename'] ?></i> <span class="job line1"><?= $v['user']['company'] ?> / <?= $v['user']['position'] ?></span></h3>
+                            <h3 class="title flex"><i><?= $v['user']['truename'] ?></i> <span class="job line1"><?= $v['user']['position'] ?></span></h3><span class="company line1"><?= $v['user']['company'] ?></span>
                         <?php endif; ?>
                         <span class="cont"><i class='iconfont'>&#xe6aa;</i><?= $v['subject']['title'] ?></span>
                     </div>
