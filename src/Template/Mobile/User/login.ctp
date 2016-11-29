@@ -66,6 +66,7 @@
     window.onBackView = function () {
         LEMON.event.back();
     };
+
     if (location.href.indexOf('loginout=1') > 0) {
         $.util.setCookie('token_uin', '');
         LEMON.db.set('token_uin', '');
@@ -219,6 +220,11 @@
                 alert('手机号不合法！');
             }
         }
+    }
+
+
+    if($.util.isIOS && $.util.isAPP && LEMON.env.hasWX() != 1){
+        $('.wxlogin').hide();
     }
 </script>
 <?php
