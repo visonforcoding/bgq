@@ -33,18 +33,20 @@
 </div>
 <script>
     window.onBackView = function(){
-        location.reload();
+        location.href = '/meet/chat-list?t=' + Math.random();
     };
     
     $('.subjectBook').on('click', function(){
         var obj = $(this);
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            url: "/meet/read-msg/" + obj.attr('table_id'),
-            success: function (res) {
-                location.href = obj.attr('link');
-            }
-        });
+        (new Image()).src = "/meet/read-msg/" + obj.attr('table_id');
+        location.href = obj.attr('link');
+//        $.ajax({
+//            type: 'POST',
+//            dataType: 'json',
+//            url: "/meet/read-msg/" + obj.attr('table_id'),
+//            success: function (res) {
+//                location.href = obj.attr('link');
+//            }
+//        });
     });
 </script>
