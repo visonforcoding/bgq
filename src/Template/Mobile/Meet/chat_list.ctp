@@ -6,9 +6,9 @@
                 <div class="l_info">
                     <div class="avatar">
                         <?php if($v['user_id'] == $uid): ?>
-                        <img src="<?= $v['savant']['avatar'] ? $v['savant']['avatar'] : '/mobile/images/touxiang.png' ?>" alt="" />
+                            <img src="<?= $v['savant']['avatar'] ? $v['savant']['avatar'] : '/mobile/images/touxiang.png' ?>" alt="" />
                         <?php else: ?>
-                        <img src="<?= $v['user']['avatar'] ? $v['user']['avatar'] : '/mobile/images/touxiang.png' ?>" alt="" />
+                            <img src="<?= $v['user']['avatar'] ? $v['user']['avatar'] : '/mobile/images/touxiang.png' ?>" alt="" />
                         <?php endif; ?>
                         <?php if($v['unReadMsg']): ?>
                             <i class="num"><?= $v['unReadMsg'] ?></i>
@@ -20,7 +20,7 @@
                         <?php else: ?>
                             <h3 class="title flex"><i><?= $v['user']['truename'] ?></i> <span class="job line1"><?= $v['user']['position'] ?></span></h3><span class="company line1"><?= $v['user']['company'] ?></span>
                         <?php endif; ?>
-                        <span class="cont"><i class='iconfont'>&#xe6aa;</i><?= $v['subject']['title'] ?></span>
+                        <span class="cont line1"><i class='iconfont'>&#xe6aa;</i><?= $v['subject']['title'] ?></span>
                     </div>
                 </div>
                 <div class="r_info">
