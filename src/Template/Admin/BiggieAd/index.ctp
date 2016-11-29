@@ -1,6 +1,7 @@
 <?php $this->start('static') ?>   
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" type="text/css" href="/wpadmin/lib/jqgrid/css/ui.ace.css">
+<link rel="stylesheet" type="text/css" href="/wpadmin/lib/lightbox/css/lightbox-rotate.css">
 <?php $this->end() ?> 
 <div class="col-xs-12">
     <form id="table-bar-form">
@@ -28,6 +29,9 @@
 <?php $this->start('script'); ?>
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
+<!--查看大图-->
+<script src="/wpadmin/lib/jqueryrotate.js"></script>
+<script src="/wpadmin/lib/lightbox/js/lightbox-rotate.js"></script>
 <script>
                 $(function () {
                     $('#main-content').bind('resize', function () {
@@ -45,7 +49,7 @@
                                 return '<a title="查看" onClick="showSavant(' +" ' "+rowObject.savant.user.id+" ' " + ');" class="grid-btn ">'+cellvalue+'</a>';
                             }},
                             {name: 'url', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
-                                return '<a title="查看" onClick="showCover(' +" ' "+rowObject.url+" ' " + ');" class="grid-btn "><i class="icon icon-picture"></i></a>';
+                                return '<a title="查看名片" href="' + rowObject.card_path + '" data-lightbox="' + rowObject.id + '" data-title="' + rowObject.truename + '"><i class="icon icon-picture"></i> </a>';
                             }},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
