@@ -2,7 +2,7 @@
 <!--    <div class="m-pos-title">
         <h3>约谈话题：<?= $book->subject->title ?></h3>
     </div>-->
-    <div class="dialogue chatlist" style="padding-top:1.2rem">
+    <div class="dialogue chatlist">
         <ul id="chat">
             <?php if($book->savant_id == $uid): ?>
                 <li class="fl">
