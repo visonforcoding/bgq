@@ -5,7 +5,11 @@
             <a link="/home/book-chat/<?= $v['id'] ?>/<?php if($v['user_id'] == $uid): ?>1<?php else: ?>2<?php endif; ?>" class="flex flex_jusitify subjectBook" table_id='<?= $v['id'] ?>'>
                 <div class="l_info">
                     <div class="avatar">
-                        <img src="../images/home-pic.png" alt="" />
+                        <?php if($v['user_id'] == $uid): ?>
+                        <img src="<?= $v['savant']['avatar'] ?>" alt="" />
+                        <?php else: ?>
+                        <img src="<?= $v['user']['avatar'] ?>" alt="" />
+                        <?php endif; ?>
                         <?php if($v['unReadMsg']): ?>
                             <i class="num"><?= $v['unReadMsg'] ?></i>
                         <?php endif; ?>
