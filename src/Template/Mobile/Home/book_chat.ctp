@@ -35,7 +35,7 @@
                         </div>
                         <div class="avatar">
                             <a href="/user/home-page/<?= $user->id ?>">
-                                <img src="<?= $this->user->avatar; ?>"/>
+                                <img src="<?= $user->avatar; ?>"/>
                             </a>
                         </div>
                     </div>
