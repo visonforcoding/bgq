@@ -201,7 +201,7 @@
                 if(res.status){
                     setTimeout(function(){
                         location.reload();
-                    },1500);
+                    }, 500);
                 } else {
                     window.bookOk_noTap = false;
                 }
@@ -221,7 +221,7 @@
               if(res.stauts){
                 setTimeout(function(){
                      location.reload();
-                  },1500);
+                  }, 500);
               } else {
                   window.bookNo_noTap = false;
               }
