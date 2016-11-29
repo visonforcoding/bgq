@@ -39,6 +39,7 @@
     $('.subjectBook').on('click', function(){
         var obj = $(this);
         (new Image()).src = "/meet/read-msg/" + obj.attr('table_id');
+        obj.find('i.num').remove();
         location.href = obj.attr('link');
 //        $.ajax({
 //            type: 'POST',
