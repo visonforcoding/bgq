@@ -787,6 +787,7 @@ class HomeController extends AppController {
             'user' => $user,
             'book' => $book,
             'uid' => $uid,
+            'me' => $this->user,
             'type' => $type
         ]);
     }
@@ -929,10 +930,10 @@ class HomeController extends AppController {
         $data['content'] = $this->request->data('content');
         if($type == '1'){
             $data['reply_id'] = $book->savant_id;
-            $extra['url'] = 'http://m.chinamatop.com/home/my-book/#5';
+            $extra['url'] = 'http://m.chinamatop.com/home/book-chat/';
         } else {
             $data['reply_id'] = $book->user_id;
-            $extra['url'] = 'http://m.chinamatop.com/home/my-book/#2';
+            $extra['url'] = 'http://m.chinamatop.com/home/book-chat/#2';
         }
         $data['user_id'] = $user_id;
         $data['book_id'] = $book_id;
