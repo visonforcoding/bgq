@@ -941,7 +941,8 @@ class HomeController extends AppController {
         $chat = $bookChatTable->patchEntity($chat, $data);
         $book->sort_time = $now;
         $res = $bookChatTable->connection()->transactional(function()use($BookTable, $book, $bookChatTable, $chat){
-            return $BookTable->save($book) && $bookChatTable->save($chat);
+            $chat_res = $bookChatTable->save($chat);
+            return $chat_res && $BookTable->save($book) ? $chat_res : false;
         });
         if($res){
             $UserTable = \Cake\ORM\TableRegistry::get('user');
