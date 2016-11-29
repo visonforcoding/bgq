@@ -1322,7 +1322,7 @@ box-align:center;-webkit-box-align:center;}
 .chatlist   .chatbox .chat_text{max-width: 5rem;}
 .dialogue .desc{text-align: center;clear:both;}
 .dialogue .desc time{color:#d2d2d2;font-size: 13px;margin:.2rem 0;display: inline-block;}
-.dialogue .desc span{padding:.1rem .2rem;background: #ccc;color:#fff;border-radius: 5px;display: inline-block;margin:.2rem 0;}
+.dialogue .desc span{padding:0 .2rem;background: #ccc;color:#fff;border-radius: 5px;display: inline-block;margin:.2rem 0;height:20px;font-size: 12px;line-height: 20px;}
 .chatbottom{height:50px;width:100%;max-width: 750px;position:fixed;bottom:0;background: #eceded;box-shadow: 0 -1px 0 rgba(0,0,0,.1);}
 .chatbottom .chatcon .sub-text{width:5rem;height:30px;border:none;}
 .chatbottom .chatcon{border:1px #ccc solid;height:32px;width:90%;margin:0 auto;margin-top:9px;border-radius: 10px;text-indent:.2rem;line-height: 30px;}
