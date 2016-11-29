@@ -138,6 +138,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                         }
                     });
                     break;
+                case "env.hasWX":
                 case "sys.version":
                 case "sys.device":
                 case "sys.isUseLOC":  //是否使用缓存  on  off
