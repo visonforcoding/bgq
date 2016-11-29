@@ -1313,8 +1313,8 @@ box-align:center;-webkit-box-align:center;}
 .invoic_dialog_footer .surebtn{background: #b71c2c;}
 .dialog_inner{background: #fff;border-radius: .2rem;}
 .chatlist  .chatbox .avatar{width:1.3rem;height:1.3rem;overflow: hidden;border-radius: 50%;}
-.chatlist  .fr  a{color:#fff;text-decoration: underline;}
-.chatlist .fl  a{color:#B71C2D;text-decoration: underline;margin-right:.2rem;}
+.chatlist  .fr  a{color:#fff;text-decoration: underline;font-size: 14px;}
+.chatlist .fl  a{color:#B71C2D;text-decoration: underline;margin-right:.2rem;font-size: 14px;}
 .chatlist  .fr  .avatar{margin-left:10px;}
 .chatlist .fl .avatar{margin-right:10px;}
 .chatlist .fl span{background: #fff;color:#303030;}
