@@ -140,7 +140,7 @@
     }
 
     $('#submit').on('tap', function () {
-    var obj = $(this);
+        var obj = $(this);
         if (is_done == '1') {
             return false;
         }
