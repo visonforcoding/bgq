@@ -134,7 +134,7 @@
                 $.util.report();  //页面访问上报
             })();
 
-            LEMON.sys.closeLOC();  //临时的   关闭缓存
+//            LEMON.sys.closeLOC();  //临时的   关闭缓存
         </script>
 
 
