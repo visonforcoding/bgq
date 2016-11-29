@@ -120,7 +120,7 @@
                             msg += '<li class="fr"><div class="flex chatbox"><div class="chat_text"><span>'+d.content+'</span></div><div class="avatar"><a href="/user/home-page/'+ d.user.id +'"><img src="'+d.user_avatar+'"></a></div></div></li>';
                         } else {
                             d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                            msg += '<li class="fl"><div class="flex chatbox"><div class="avatar"><a href="/user/home-page/'+d.user.id+'"><img src="'+d.user_avatar+'"></a></div><div class="chat_text"><span>' + d.content + '</span></div></div></li>';
+                            msg += '<li class="fl"><div class="flex chatbox"><a class="avatar" style="display:block;"><img src="'+d.user_avatar+'"></a></div><div class="chat_text"><span>' + d.content + '</span></div></div></li>';
                         }
                         d.msg = msg;
                         return d;
