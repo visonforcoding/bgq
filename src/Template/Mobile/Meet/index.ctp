@@ -279,6 +279,8 @@
                 success: function (res) {
                     if(res.data){
                         $('#un_read_msg').addClass('num').html(res.data);
+                    } else {
+                        $('#un_read_msg').removeClass('num').html('');
                     }
                 }
             })
@@ -293,7 +295,7 @@
             setFollow(user_follow);
             $.util.setCookie('user_follow', '');
         }
-        meetobj.getElite();
+        meetobj.getUnReadMsg();
     };
     window.onActiveView = window.onBackView;
 
