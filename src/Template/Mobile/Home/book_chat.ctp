@@ -26,6 +26,9 @@
                         </div>
                     </div>
                 </li>
+                <?php if($book->status == -1): ?>
+                    <div class="desc"><span>对方已取消</span></div>
+                <?php endif; ?>
             <?php else: ?>
                 <li class="fr">
                     <div class="flex chatbox">
@@ -44,6 +47,8 @@
                     <div class="desc"><span>对方已接受你的约见</span></div>
                 <?php elseif($book->status == 2): ?>
                     <div class="desc"><span>对方已拒绝你的约见</span></div>
+                <?php elseif($book->status == -1): ?>
+                    <div class="desc"><span>你已取消此次约见</span></div>
                 <?php endif; ?>
             <?php endif; ?>
         </ul>
@@ -139,7 +144,7 @@
         }, 8000);
     }
 
-    $('#submit').on('tap', function () {
+    $('#submit').on('click', function () {
         var obj = $(this);
         if (is_done == '1') {
             return false;
