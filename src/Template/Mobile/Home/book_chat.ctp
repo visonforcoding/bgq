@@ -2,7 +2,7 @@
 <!--    <div class="m-pos-title">
         <h3>约谈话题：<?= $book->subject->title ?></h3>
     </div>-->
-    <div class="dialogue" style="padding-top:1.2rem">
+    <div class="dialogue chatlist" style="padding-top:1.2rem">
         <ul id="chat">
             <?php if($book->savant_id == $uid): ?>
                 <li class="fl">
@@ -117,10 +117,10 @@
                         }
                         if (d.user.id == uid) {
                             d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                            msg += '<li class="fr"><div class="flex chatbox"><div class="chat_text"><span>'+d.content+'</span></div><div class="avatar"><a href="/user/home-page/'+ d.user.id +'"><img src="'+d.user_avatar+'"></a></div></div></li>';
+                            msg += '<li><div class="flex chatbox fr"><div class="chat_text"><span>'+d.content+'</span></div><a class="avatar ablock" href="/user/home-page/'+ d.user.id +'"><img src="'+d.user_avatar+'"/></a></div></li>';
                         } else {
                             d.user_avatar = d.user.avatar ? d.user.avatar : '/mobile/images/touxiang.png';
-                            msg += '<li class="fl"><div class="flex chatbox"><div class="avatar"><a href="/user/home-page/'+d.user.id+'"><img src="'+d.user_avatar+'"></a></div><div class="chat_text"><span>' + d.content + '</span></div></div></li>';
+                            msg += '<li><div class="flex chatbox fl"><a class="avatar ablock" href="/user/home-page/'+d.user.id+'"><img src="'+d.user_avatar+'"/></a><div class="chat_text"><span>' + d.content + '</span></div></div></li>';
                         }
                         d.msg = msg;
                         return d;
