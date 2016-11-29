@@ -293,6 +293,7 @@
             setFollow(user_follow);
             $.util.setCookie('user_follow', '');
         }
+        meetobj.getElite();
     };
     window.onActiveView = window.onBackView;
 
