@@ -49,7 +49,7 @@
                                 return '<a title="查看" onClick="showSavant(' +" ' "+rowObject.savant.user.id+" ' " + ');" class="grid-btn ">'+cellvalue+'</a>';
                             }},
                             {name: 'url', editable: true, align: 'center',formatter:function(cellvalue,options,rowObject){
-                                return '<a title="查看名片" href="' + rowObject.card_path + '" data-lightbox="' + rowObject.id + '" data-title="' + rowObject.truename + '"><i class="icon icon-picture"></i> </a>';
+                                return '<a title="查看名片" href="' + rowObject.url + '" ><i class="icon icon-picture"></i> </a>';
                             }},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'actionBtn', align: 'center', viewable: false, sortable: false, formatter: actionFormatter}],
