@@ -259,17 +259,17 @@
                 LEMON.db.set('elite', str);
                 $.util.dataToTpl('elite', 'biggie_tpl', JSON.parse(str), tpldate);
             }
+            $.util.initLoadImg('elite');
         },
         staticData: function (netData){
             var str = JSON.stringify(netData);
             if(str == this.init_data){
                 $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(this.init_data), tpldate);
-                $.util.initLoadImg('biggie');
             } else {
                 LEMON.db.set('vip', str);
                 $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(str), tpldate);
-                $.util.initLoadImg('biggie');
             }
+            $.util.initLoadImg('biggie');
         },
         getUnReadMsg: function (){
             $.ajax({
