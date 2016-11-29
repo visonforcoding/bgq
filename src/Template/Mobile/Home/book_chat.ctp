@@ -5,13 +5,11 @@
     <div class="dialogue chatlist">
         <ul id="chat">
             <?php if($book->savant_id == $uid): ?>
-                <li class="fl">
-                    <div class="flex chatbox">
-                        <div class="avatar">
-                            <a href="/user/home-page/<?= $user->id ?>">
-                                <img src="<?= $user->avatar; ?>"/>
-                            </a>
-                        </div>
+                <li>
+                    <div class="flex chatbox fl">
+                        <a href="/user/home-page/<?= $user->id ?>" class="avatar ablock">
+                            <img src="<?= $user->avatar; ?>"/>
+                        </a>
                         <div class="chat_text">
                             <span>我已约见你发布的话题【<?= $book->subject->title ?>】期待您的回应！<br />
                                 <?php if($book->summary): ?>
@@ -30,17 +28,15 @@
                     <div class="desc"><span>对方已取消</span></div>
                 <?php endif; ?>
             <?php else: ?>
-                <li class="fr">
-                    <div class="flex chatbox">
+                <li>
+                    <div class="flex chatbox fr">
                         <div class="chat_text">
                             <span>我已发出约见，快来确认吧。<br />
                             <a href="/home/my-book-detail/<?= $book->id ?>">查看详情</a></span>
                         </div>
-                        <div class="avatar">
-                            <a href="/user/home-page/<?= $user->id ?>">
+                        <a href="/user/home-page/<?= $user->id ?>" class="avatar ablock">
                                 <img src="<?= $me->avatar; ?>"/>
-                            </a>
-                        </div>
+                        </a>
                     </div>
                 </li>
                 <?php if($book->status == 1): ?>
