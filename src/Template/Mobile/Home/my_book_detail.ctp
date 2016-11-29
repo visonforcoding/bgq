@@ -24,11 +24,13 @@
                     <?=$subject->summary?>
                 </p>
             </li>
+            <?php if($book->status==2):?>
+                <li>
+                    <p>状态：预约没通过</p>
+                </li>
+            <?php endif;?>
         </ul>
     </section>
-    <?php if($book->status==2):?>
-        <a href="javscript:void(0)" class="nextstep">预约没通过</a>
-    <?php endif;?>
     <?php if($book->status==0):?>
         <a href="javascript:void(0)" class="nextstep" id="cancel">取消预约</a>
     <?php endif;?>
