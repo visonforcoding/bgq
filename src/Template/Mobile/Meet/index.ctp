@@ -136,7 +136,7 @@
 <script>
     var meet = function(o){
         this.opt = {
-            no_cache: true,
+            no_cache: false,
             init_data: LEMON.db.get('vip'), // 页面初始直接获取的数据
             init_elite: LEMON.db.get('elite'),
             init_banner: LEMON.db.get('banner'),
