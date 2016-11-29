@@ -112,7 +112,7 @@
                 if (res.status) {
                     var html = $.util.topDataToTpl('', 'tpl', res.data, function (d) {
                         var msg = '';
-                        if(d.is_show_time){
+                        if(d.is_show_time == 1){
                             msg = '<div class="desc"><span>'+d.create_time+'</span></div>';
                         }
                         if (d.user.id == uid) {
