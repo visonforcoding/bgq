@@ -86,7 +86,7 @@
 
 </div>
 <script id="itemsTpl" type="text/html">
-    <li><a href="/user/home-page/{#user_id#}"><img src="{#url#}"/></a></li>
+    <li><a href="/user/home-page/{#user_id#}" class="meet-con"><img src="{#url#}"/></a></li>
 </script>
 <script type="text/html" id="bannerTpl">
     <li><a href="{#url#}"><img src="{#img#}"/></a></li>
