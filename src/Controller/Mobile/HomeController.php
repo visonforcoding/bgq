@@ -644,6 +644,7 @@ class HomeController extends AppController {
                 $BookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
                 $book = $BookTable->get($id);
                 $book->is_done = 1;
+                $book->status = 3;
                 $res = $BookTable->save($book);
                 if($res){
                     return $this->Util->ajaxReturn(true, '操作成功');
