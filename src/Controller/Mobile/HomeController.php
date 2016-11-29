@@ -918,7 +918,7 @@ class HomeController extends AppController {
                 ->orderDesc('BookChat.create_time')
                 ->select(['book_id', 'content', 'id', 'reply_id', 'create_time'])
                 ->first();
-        $now = Time::now();
+        $now = \Cake\I18n\Time::now();
         if($last_msg){
             if($last_msg->create_time->modify('5 minutes') < $now){
                 $data['is_show_time'] = 1;
