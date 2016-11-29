@@ -33,7 +33,7 @@
 </div>
 <script>
     window.onBackView = function(){
-        location.href = '/meet/chat-list?t=' + Math.random();
+        location.reload();
     };
     
     $('.subjectBook').on('click', function(){
