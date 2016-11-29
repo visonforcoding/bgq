@@ -930,10 +930,10 @@ class HomeController extends AppController {
         $data['content'] = $this->request->data('content');
         if($type == '1'){
             $data['reply_id'] = $book->savant_id;
-            $extra['url'] = 'http://m.chinamatop.com/home/book-chat/';
+            $extra['url'] = 'http://m.chinamatop.com/home/book-chat/'.$book->id.'/1';
         } else {
             $data['reply_id'] = $book->user_id;
-            $extra['url'] = 'http://m.chinamatop.com/home/book-chat/#2';
+            $extra['url'] = 'http://m.chinamatop.com/home/book-chat/'.$book->id.'/2';
         }
         $data['user_id'] = $user_id;
         $data['book_id'] = $book_id;
