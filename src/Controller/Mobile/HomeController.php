@@ -961,7 +961,7 @@ class HomeController extends AppController {
                         return $item;
                     });
                 })
-                ->toArray();
+                ->first();
             return $this->Util->ajaxReturn(['status'=>true, 'msg'=>'发送成功', 'data'=>$reply_res]);
         } else {
             return $this->Util->ajaxReturn(false, '系统错误');
