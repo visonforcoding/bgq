@@ -6,9 +6,9 @@
                 <div class="l_info">
                     <div class="avatar">
                         <?php if($v['user_id'] == $uid): ?>
-                        <img src="<?= $v['savant']['avatar'] ?>" alt="" />
+                        <img src="<?= $v['savant']['avatar'] ? $v['savant']['avatar'] : '/mobile/images/touxiang.png' ?>" alt="" />
                         <?php else: ?>
-                        <img src="<?= $v['user']['avatar'] ?>" alt="" />
+                        <img src="<?= $v['user']['avatar'] ? $v['user']['avatar'] : '/mobile/images/touxiang.png' ?>" alt="" />
                         <?php endif; ?>
                         <?php if($v['unReadMsg']): ?>
                             <i class="num"><?= $v['unReadMsg'] ?></i>
