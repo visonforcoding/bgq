@@ -14,7 +14,7 @@
         </script>
         <?= $this->fetch('css') ?>
         <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-        <script type="text/javascript" src="/mobile/js/jsapi.js?1129"></script>
+        <script type="text/javascript" src="/mobile/js/jsapi.js?11292"></script>
         <script type="text/javascript" src="/mobile/js/zepto.min.js"></script>
         <script type="text/javascript" src="/mobile/js/util.js?1129"></script>
         <script>
