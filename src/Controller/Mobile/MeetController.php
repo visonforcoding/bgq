@@ -428,7 +428,10 @@ class MeetController extends AppController {
                 return $this->Util->ajaxReturn(false,'不可约见自己');
             }
             $SubjectBookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
-            $subjectBook = $SubjectBookTable->find()->where(['subject_id'=>$id, 'user_id'=>$this->user->id,'status <'=>2, 'is_done'=>0])->first();
+            $subjectBook = $SubjectBookTable->find()->where(['or'=>[
+                ['subject_id'=>$id, 'user_id'=>$this->user->id,'status'=>0, 'is_done'=>0],
+                ['subject_id'=>$id, 'user_id'=>$this->user->id,'status'=>1, 'is_done'=>0]
+            ]])->first();
             if($subjectBook){
                 //该话题约见过了
                 return $this->Util->ajaxReturn(false,'该话题您已约见过正在进行中');
