@@ -26,6 +26,8 @@
                 </li>
                 <?php if($book->status == -1): ?>
                     <div class="desc"><span>对方已取消</span></div>
+                <?php elseif($book->status == 2): ?>
+                    <div class="desc"><span>你已拒绝对方的申请</span></div>
                 <?php endif; ?>
             <?php else: ?>
                 <li>
