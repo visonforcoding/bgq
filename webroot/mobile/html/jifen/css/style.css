@@ -154,5 +154,8 @@ max-width: 600px;}
 .help_list ul .show{max-height:9999px;-webkit-transition:max-height .3s ease-in;transition:max-height  .3s  ease;}
 .help_list ul .hide{max-height:0;-webkit-transition:max-height .3s ease-in;transition:max-height  .3s  ease;}
 .help_list ul .scale{-webkit-transform: rotate(180deg);transform: rotate(180deg);-webkit-transition: all .1s ease-out;transition: all .1s ease-out;}
-.help_list ul .con p{font-size: 14px;color:#8a8a8a;margin:5px 0;}
+.help_list ul .con-cont{margin-top:5px;}
+.help_list ul .con .imgmark{width:19px;height:19px;overflow: hidden;margin-top:2px;margin-right:10px;}
+.help_list ul .con .imgmark img{width:100%;height:auto;display: block;}
+.help_list ul .con p{font-size: 14px;color:#8a8a8a;max-width:89%;text-align: justify;word-break: break-all;}
 .wraper div ul li.mt25 a.a_icon{display: inline-block;text-align: center;}
