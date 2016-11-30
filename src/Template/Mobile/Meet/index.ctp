@@ -137,7 +137,7 @@
     var meet = function(o){
         this.opt = {
             no_cache: false,
-            init_data: LEMON.db.get('vip'), // 页面初始直接获取的数据
+            init_data: LEMON.db.get('biggie'), // 页面初始直接获取的数据
             init_elite: LEMON.db.get('elite'),
             init_banner: LEMON.db.get('banner'),
             init_biggieAd: LEMON.db.get('biggieAd')
@@ -202,8 +202,8 @@
             } else {
                 var html = $.util.dataToTpl('', 'biggie_tpl', JSON.parse(obj.init_elite), tpldate);
                 $('#elite').append(html);
+                $.util.initLoadImg('elite');
             }
-            $.util.initLoadImg('elite');
         },
         getData: function(){
             var obj = this;
@@ -216,8 +216,8 @@
             } else {
                 var html = $.util.dataToTpl('', 'biggie_tpl', JSON.parse(obj.init_data), tpldate);
                 $('#biggie').append(html);
+                $.util.initLoadImg('biggie');
             }
-            $.util.initLoadImg('biggie');
         },
         setHeader: function (data){
             var tab = [], html = $.util.dataToTpl('', 'bannerTpl', data, function (d) {
@@ -268,7 +268,7 @@
             if(str == this.init_data){
                 $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(this.init_data), tpldate);
             } else {
-                LEMON.db.set('vip', str);
+                LEMON.db.set('biggie', str);
                 $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(str), tpldate);
             }
             $.util.initLoadImg('biggie');
