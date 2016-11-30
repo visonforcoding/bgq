@@ -699,7 +699,7 @@ class HomeController extends AppController {
     }
 
     /**
-     * 同意约见 约见状态更改->生成一条订单(目前对前台用户暂时没作用)
+     * 同意约见 约见状态更改(目前对前台用户暂时没作用)
      */
     public function bookOk() {
         if ($this->request->is('post')) {
@@ -713,7 +713,9 @@ class HomeController extends AppController {
                     }
                 ]
             ]);
+            $now = \Cake\I18n\Time::now();
             $book->status = 1; //更改
+            $book->sort_time = $now;
             $UserTable = \Cake\ORM\TableRegistry::get('user');
             $savant = $UserTable->get($book->savant_id);
             $savant->meet_nums += 1;
