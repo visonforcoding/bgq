@@ -203,6 +203,7 @@
                 var html = $.util.dataToTpl('', 'biggie_tpl', JSON.parse(obj.init_elite), tpldate);
                 $('#elite').append(html);
             }
+            $.util.initLoadImg('elite');
         },
         getData: function(){
             var obj = this;
@@ -216,6 +217,7 @@
                 var html = $.util.dataToTpl('', 'biggie_tpl', JSON.parse(obj.init_data), tpldate);
                 $('#biggie').append(html);
             }
+            $.util.initLoadImg('biggie');
         },
         setHeader: function (data){
             var tab = [], html = $.util.dataToTpl('', 'bannerTpl', data, function (d) {
