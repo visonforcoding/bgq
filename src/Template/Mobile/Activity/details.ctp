@@ -168,7 +168,7 @@
                     <!--是否要审核-->
                     <?php if ($activity->must_check): ?>
                         <?php if (empty($activity->activityapply)): ?>
-                            <a id="want_enroll" class="r-btn" href="javascript:void(0);" is_three="<?= $activity->triple_fee ? 1 : 0 ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                            <a id="want_enroll" class="r-btn" href="javascript:void(0);" is_three="<?= $activity->triple_fee ? 1 : 0 ?>">我要报名(<?= $activity->triple_fee ? '' : $activity->apply_fee; ?>元)</a>
                         <?php else: ?>
                             <?php if ($activity->activityapply['0']->is_pass == 0): ?>
                                 <?php if ($activity->activityapply['0']->is_check == 1): ?>
@@ -188,7 +188,7 @@
                         <?php endif; ?>
                     <?php else: ?>
                         <?php if (empty($activity->activityapply)): ?>
-                            <a id="want_enroll" class="r-btn" href="javascript:void(0);" is_three="<?= $activity->triple_fee ? 1 : 0 ?>">我要报名(<?= $activity->apply_fee; ?>元)</a>
+                            <a id="want_enroll" class="r-btn" href="javascript:void(0);" is_three="<?= $activity->triple_fee ? 1 : 0 ?>">我要报名(<?= $activity->triple_fee ? '' : $activity->apply_fee; ?>元)</a>
                         <?php else: ?>
                             <?php if ($activity->activityapply['0']->is_pass == 0): ?>
                                 <?php if ($activity->activityapply['0']->triple_pid): ?>
