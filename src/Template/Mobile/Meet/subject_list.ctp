@@ -1,12 +1,3 @@
-<!--<header>
-    <div class='inner'>
-        <a href='javascript:history.go(-1);' class='toback'></a>
-        <h1>
-            话题列表
-        </h1>
-        <a href="#this" class='add-s h-regiser'></a>
-    </div>
-</header>-->
 <div class="wraper">
     <div class="h2">
     </div>
