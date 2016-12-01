@@ -922,13 +922,13 @@ class MeetController extends AppController {
         $SubjectBookTable = \Cake\ORM\TableRegistry::get('SubjectBook');
         $subjectBook = $SubjectBookTable
                 ->find()
-                ->distinct('SubjectBook.id')
+//                ->distinct('SubjectBook.id')
                 ->contain(['Users', 'Savants', 'Subjects', 'BookChats'=>function($q)use($user_id){
                     return $q->where(['reply_id'=>$user_id]);
                 }, 'Usermsgs'=>function($q){
                     return $q->where(['Usermsgs.type'=>4, 'status'=>0]);
                 }])
-                ->leftJoinWith('BookChats')
+//                ->leftJoinWith('BookChats')
                 ->where([
                     'or'=>[
                         'SubjectBook.user_id'=>$user_id,
@@ -939,18 +939,19 @@ class MeetController extends AppController {
                 ->formatResults(function($items){
                     return $items->map(function($item){
                         $now = \Cake\I18n\Time::now();
-                        if($item->book_chats){
-                            if($item->book_chats[0]->create_time->format('d') == $now->format('d')){
-                                $item->last_msg_time = $item->book_chats[0]->create_time->format('H:i');
-                            } else {
-                                $item->last_msg_time = $item->book_chats[0]->create_time->format('m月d日');
-                            }
+//                        if($item->book_chats){
+//                            
+//                        } else {
+//                            if($item->create_time->format('d') == $now->format('d')){
+//                                $item->last_msg_time = $item->create_time->format('H:i');
+//                            } else {
+//                                $item->last_msg_time = $item->create_time->format('m月d日');
+//                            }
+//                        }
+                        if($item->sort_time->format('d') == $now->format('d')){
+                            $item->last_msg_time = $item->sort_time->format('H:i');
                         } else {
-                            if($item->create_time->format('d') == $now->format('d')){
-                                $item->last_msg_time = $item->create_time->format('H:i');
-                            } else {
-                                $item->last_msg_time = $item->create_time->format('m月d日');
-                            }
+                            $item->last_msg_time = $item->sort_time->format('m月d日');
                         }
                         return $item;
                     });
