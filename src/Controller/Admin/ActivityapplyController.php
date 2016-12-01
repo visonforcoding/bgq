@@ -376,9 +376,12 @@ class ActivityapplyController extends AppController {
             $this->loadComponent('Business');
             $this->Business->usermsg('-1', $apply->user_id, '活动报名消息', '您报名的活动《' . $activity->title . '》已审核通过', 11, $id, '/activity/details/' . $activity->id);
             if ($activity->apply_fee > 0) {
-                $this->loadComponent('Sms');
-                $this->Sms->sendByQf106($apply->user->phone, '您报名的活动《' . $activity->title . '》已审核通过，请及时登录平台支付费用，并购帮祝您生活愉快~');
+                $sms_msg = '您报名的活动《' . $activity->title . '》已审核通过，请及时登录平台支付费用，并购帮祝您生活愉快~';
+            } else {
+                $sms_msg = '您报名的活动《' . $activity->title . '》已审核通过';
             }
+            $this->loadComponent('Sms');
+            $this->Sms->sendByQf106($apply->user->phone, $sms_msg);
             $this->Util->ajaxReturn(true, '操作成功');
         } else {
             $this->Util->ajaxReturn(false, '操作失败');
