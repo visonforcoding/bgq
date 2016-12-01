@@ -241,7 +241,7 @@ class MeetController extends AppController {
                 ->contain(['User'=>function($q){
                     return $q->select(['id','truename','company','position']);
                 }, 'SubjectBooks'=>function($q){
-                    return $q->where(['or'=>['SubjectBooks.status'=>1, 'SubjectBooks.status'=>0]]);
+                    return $q->where(['or'=>['SubjectBooks.status'=>1, 'SubjectBooks.status'=>0]])->orderDesc('SubjectBooks.create_time');
                 }])
                 ->where(['MeetSubject.id' => $id])
                 ->first();
