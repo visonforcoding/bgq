@@ -61,6 +61,7 @@
             } else {
                 var html = $.util.dataToTpl('', 'biggie_tpl', JSON.parse(obj.init_elite), tpldate);
                 $('#elite').append(html);
+                $.util.initLoadImg('elite');
             }
         },
         staticElite: function (netData){
@@ -71,6 +72,7 @@
                 LEMON.db.set('elite', str);
                 $.util.dataToTpl('elite', 'biggie_tpl', JSON.parse(str), tpldate);
             }
+            $.util.initLoadImg('elite');
         }
     });
     var meetobj = new meet();
