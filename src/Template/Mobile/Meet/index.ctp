@@ -161,7 +161,7 @@
                     if (res.status) {
                         obj.staticBanner(res.data);
                     }
-                    var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'), $('.a-banner'));
+//                    var loop = $.util.loopImg($('#imgList'), $('#imgList li'), $('#imgTab span'), $('.a-banner'));
                 });
             } else {
                 this.setHeader(JSON.parse(obj.init_banner));
