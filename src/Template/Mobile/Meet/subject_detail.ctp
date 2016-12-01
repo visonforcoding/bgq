@@ -24,7 +24,7 @@
             </li>
         </ul>
     </div>
-    <a href="javascript:void(0)" id="submit" class="f-bottom" user_id="<?= $user_id ?>">立即约见</a>
+    <a href="javascript:void(0)" id="submit" class="f-bottom" user_id="<?= $user_id ?>"><?= $subject->subject_book ? '正在约TA，和TA对话' : '立即约见' ?></a>
 </div>
 <div class="reg-shadow" ontouchmove="return false;" id="shadow" hidden></div>
 <div class="totips" hidden id="checkBtn">
@@ -46,6 +46,7 @@
     LEMON.show.shareIco();
     
     window.subject_id = '<?= $subject->id ?>';
+    window.book_id = <?= $subject->subject_book ? $subject->subject_book->id : '0' ?>;
 </script>
 <script>
     $('#summary').on('focus', function(){
@@ -73,24 +74,28 @@
                 $.util.alert('请填写300字以下');
                 return false;
             }
-            $.util.ajax({
-                url: '/meet/book/<?= $subject->id ?>',
-                data: {id: id, summary: summary},
-                func: function (res) {
-                    if (res.status) {
-                        $.util.alert(res.msg);
-                        document.location.href = '/home/book-chat/'+res.data+'/1/?book=1';
-                    } else {
-                        if (res.msg.indexOf('请先去完善个人资料') != -1) {
-                            $('#msg').html(res.msg);
-                            $('#shadow').show();
-                            $('#checkBtn').show();
-                        } else {
+            if(window.book_id){
+                location.href = '/home/book-chat/' + book_id + '/1';
+            } else {
+                $.util.ajax({
+                    url: '/meet/book/<?= $subject->id ?>',
+                    data: {id: id, summary: summary},
+                    func: function (res) {
+                        if (res.status) {
                             $.util.alert(res.msg);
+                            document.location.href = '/home/book-chat/'+res.data+'/1/?book=1';
+                        } else {
+                            if (res.msg.indexOf('请先去完善个人资料') != -1) {
+                                $('#msg').html(res.msg);
+                                $('#shadow').show();
+                                $('#checkBtn').show();
+                            } else {
+                                $.util.alert(res.msg);
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
         }
     });
 </script>
