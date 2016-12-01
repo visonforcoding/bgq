@@ -8,7 +8,7 @@
                 <li>
                     <div class="flex chatbox fl">
                         <a href="/user/home-page/<?= $user->id ?>" class="avatar ablock">
-                            <img src="<?= $user->avatar; ?>"/>
+                            <img src="<?= $user->avatar ? $user->avatar : '/mobile/images/touxiang.png'; ?>"/>
                         </a>
                         <div class="chat_text">
                             <span>我已约见你发布的话题【<?= $book->subject->title ?>】期待您的回应！<br />
@@ -37,7 +37,7 @@
                             <a href="/home/my-book-detail/<?= $book->id ?>">查看详情</a></span>
                         </div>
                         <a href="/user/home-page/<?= $user->id ?>" class="avatar ablock">
-                                <img src="<?= $me->avatar; ?>"/>
+                            <img src="<?= $me->avatar ? $me->avatar : '/mobile/images/touxiang.png'; ?>"/>
                         </a>
                     </div>
                 </li>
