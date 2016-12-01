@@ -939,17 +939,11 @@ class MeetController extends AppController {
                 ->formatResults(function($items){
                     return $items->map(function($item){
                         $now = \Cake\I18n\Time::now();
-                        if($item->book_chats){
-                            if($item->book_chats[0]->create_time->format('d') == $now->format('d')){
-                                $item->last_msg_time = $item->book_chats[0]->create_time->format('H:i');
+                        if($item->sort_time){
+                            if($item->sort_time->format('d') == $now->format('d')){
+                                $item->last_msg_time = $item->sort_time->format('H:i');
                             } else {
-                                $item->last_msg_time = $item->book_chats[0]->create_time->format('m月d日');
-                            }
-                        } else {
-                            if($item->create_time->format('d') == $now->format('d')){
-                                $item->last_msg_time = $item->create_time->format('H:i');
-                            } else {
-                                $item->last_msg_time = $item->create_time->format('m月d日');
+                                $item->last_msg_time = $item->sort_time->format('m月d日');
                             }
                         }
                         return $item;
