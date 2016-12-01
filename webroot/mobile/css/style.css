@@ -427,7 +427,7 @@ line-height: .34rem;height:.34rem;}
 .l-place i{font-size:.2rem;margin-right:.04rem;}
 .vipinfo h3 span{float:right;}
 .vipinfo span.job,.vipinfo span.c-info{line-height: 0.64rem;font-size:0.26rem;margin-top:0.06rem;color: #7a7e83;}
-.vipinfo span.job{line-height: 0.3rem;}
+.vipinfo span.job{line-height: 0.3rem;display: inline-block;min-height:.2rem;}
 .c_info_list{width: 75%;overflow:hidden;}
 .c_info_list div.job{font-size: 0.26rem;margin-top: 0.06rem;color: #7a7e83;line-height: .3rem;}
 .m_focus_r .meetnum{margin-bottom:.2rem;text-align: right;}
@@ -1064,7 +1064,7 @@ background-size:3.82rem 1.9rem;margin-top:1rem;}
 .ptips em{text-indent:1.7rem;display: block;}
 .btnlist{margin-top:1.5rem;padding:0 0.4rem;overflow:hidden;}
 .n_err_btn{margin:1rem auto 0;border-top:1px #557791 solid;padding-top:1rem; width:92%;}
-.btnlist a{display: block;float:left;width:33.3%;text-align: center;color:#557791;font-size:.3rem;height:.6rem;line-height: .6rem;}
+.btnlist a{display: block;float:left;width:50%;text-align: center;color:#557791;font-size:.3rem;height:.6rem;line-height: .6rem;}
 .btnlist i{display:inline-block;background: url(img/re.png) no-repeat;width:0.37rem;height:0.36rem;background-size: contain;margin-right:0.08rem;vertical-align: middle;}
 .btnlist a:nth-of-type(2) i{background: url(img/ho.png) no-repeat;width:0.38rem;height:0.37rem;background-size: contain;}
 .btnlist a:nth-of-type(3) i{background: url(img/ba.png) no-repeat;width:0.4rem;height:0.32rem;background-size: contain;}
