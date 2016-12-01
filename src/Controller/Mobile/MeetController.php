@@ -237,26 +237,25 @@ class MeetController extends AppController {
     public function subjectDetail($id = null) {
         $this->handCheckLogin();
         $SubjectTable = \Cake\ORM\TableRegistry::get('MeetSubject');
-        $subject = $SubjectTable->get($id);
+        $subject = $SubjectTable->find()
+                ->contain(['User'=>function($q){
+                    return $q->select(['id','truename','company','position']);
+                }, 'SubjectBooks'=>function($q){
+                    return $q->where(['or'=>['SubjectBooks.status'=>1, 'SubjectBooks.status'=>0]])->orderDesc('SubjectBooks.create_time');
+                }])
+                ->where(['MeetSubject.id' => $id])
+                ->first();
+        \Cake\Log\Log::debug($subject, 'devlog');
+        $this->set([
+            'pageTitle'=>'话题详情'
+        ]);
         $user_id = '';
         if($this->user){
             $user_id = $this->user->id;
             if($subject->user_id == $user_id){
                 $this->redirect('/meet/subject/'.$subject->id);
             }
-            $subject = $SubjectTable->find()
-                ->contain(['User'=>function($q){
-                    return $q->select(['id','truename','company','position']);
-                }, 'SubjectBooks'=>function($q)use($user_id){
-                    return $q->where(['or'=>['SubjectBooks.status'=>1, 'SubjectBooks.status'=>0, 'user_id'=>$user_id]])->orderDesc('SubjectBooks.create_time');
-                }])
-                ->where(['MeetSubject.id' => $id])
-                ->first();
         }
-        \Cake\Log\Log::debug($subject, 'devlog');
-        $this->set([
-            'pageTitle'=>'话题详情'
-        ]);
         $this->set(compact('subject', 'user_id'));
     }
 
