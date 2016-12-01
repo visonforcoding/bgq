@@ -236,22 +236,17 @@ class MeetController extends AppController {
      */
     public function subjectDetail($id = null) {
         $this->handCheckLogin();
+        $user_id = $this->user->id;
         $SubjectTable = \Cake\ORM\TableRegistry::get('MeetSubject');
         $subject = $SubjectTable->find()
                 ->contain(['User'=>function($q){
                     return $q->select(['id','truename','company','position']);
-                }, 'SubjectBooks'=>function($q){
-                    return $q->where(['or'=>['SubjectBooks.status'=>1, 'SubjectBooks.status'=>0]])->orderDesc('SubjectBooks.create_time');
+                }, 'SubjectBooks'=>function($q)use($user_id){
+                    return $q->where(['or'=>['SubjectBooks.status'=>1, 'SubjectBooks.status'=>0, 'user_id'=>$user_id]])->orderDesc('SubjectBooks.create_time');
                 }])
                 ->where(['MeetSubject.id' => $id])
                 ->first();
-        $subject1 = $SubjectTable->find()
-                ->contain(['User'=>function($q){
-                    return $q->select(['id','truename','company','position']);
-                }, 'SubjectBooks'])
-                ->where(['MeetSubject.id' => $id])
-                ->first();
-        \Cake\Log\Log::debug($subject1, 'devlog');
+        \Cake\Log\Log::debug($subject, 'devlog');
         $this->set([
             'pageTitle'=>'话题详情'
         ]);
