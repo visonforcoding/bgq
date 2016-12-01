@@ -245,7 +245,13 @@ class MeetController extends AppController {
                 }])
                 ->where(['MeetSubject.id' => $id])
                 ->first();
-        \Cake\Log\Log::debug($subject, 'devlog');
+        $subject1 = $SubjectTable->find()
+                ->contain(['User'=>function($q){
+                    return $q->select(['id','truename','company','position']);
+                }, 'SubjectBooks'])
+                ->where(['MeetSubject.id' => $id])
+                ->first();
+        \Cake\Log\Log::debug($subject1, 'devlog');
         $this->set([
             'pageTitle'=>'话题详情'
         ]);
