@@ -48,7 +48,7 @@
         </div>
     </div>
     <!--分类--end-->
-    <div class="dk">
+    
         <div class="m_title_des bd1">
             <h3>为您推荐</h3>
         </div>
@@ -56,13 +56,15 @@
         </ul>
     </div>
     <div class="h2"></div>
-    <div class="m_title_des bd1">
-        <a class="title" href="/meet/all-elite">菁英推荐
-            <span class="fr more">
-                查看更多
-                <i class="more iconfont fr rmore">&#xe667;</i>
-            </span>
-        </a>
+    <div class="dk">
+        <div class="m_title_des bd1">
+            <a class="title" href="/meet/all-elite">菁英推荐
+                <span class="fr more">
+                    查看更多
+                    <i class="more iconfont fr rmore">&#xe667;</i>
+                </span>
+            </a>
+        </div>
     </div>
     <div id='elite'></div>
     <div class="h2"></div>
