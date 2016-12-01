@@ -245,6 +245,7 @@ class MeetController extends AppController {
                 }])
                 ->where(['MeetSubject.id' => $id])
                 ->first();
+        \Cake\Log\Log::debug($subject, 'devlog');
         $this->set([
             'pageTitle'=>'话题详情'
         ]);
