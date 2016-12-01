@@ -240,6 +240,8 @@ class MeetController extends AppController {
         $subject = $SubjectTable->find()
                 ->contain(['User'=>function($q){
                     return $q->select(['id','truename','company','position']);
+                }, 'SubjectBooks'=>function($q){
+                    return $q->where(['or'=>['SubjectBooks.status'=>1, 'SubjectBooks.status'=>0]]);
                 }])
                 ->where(['MeetSubject.id' => $id])
                 ->first();
