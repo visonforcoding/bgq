@@ -1,12 +1,3 @@
-<!--<header>
-    <div class='inner'>
-        <a href='#this' class='toback'></a>
-        <h1>
-            话题详情
-        </h1>
-        <a href="#this" class='iconfont share h-regiser'>&#xe614;</a>
-    </div>
-</header>-->
 <div class="wraper">
     <div class="h20">
     </div>
@@ -14,13 +5,7 @@
         <ul class="m-detail">
             <li class='mtitle'>
                 <h3><?= $subject->title ?><span class='m-block'><?= $subject->user->truename ?> <?= $subject->user->company ?> <?= $subject->user->position ?></span></h3>
-<!--                <span class="meet-type">
-                </span>-->
             </li>
-            <!--            <li>
-                            <span><?= $subject->price ?>元/次</span>
-                            <span class="fr">约<?= $subject->last_time ?>小时</span>
-                        </li>-->
             <li>
                 <h3 class="t-tittle">话题简介</h3>
                 <p>

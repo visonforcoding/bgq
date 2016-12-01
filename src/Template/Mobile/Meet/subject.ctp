@@ -49,8 +49,8 @@
     });
     $('#del').on('click',function(){
         $.util.ajax({
-            url:'/meet/del-subject/'<?php if(isset($subject)):?>+<?=$subject->id?><?php endif;?>,
-            func:function(res){
+            url:'/meet/del-subject/<?php if(isset($subject)):?><?=$subject->id?><?php endif;?>',
+            func:function (res) {
                 $.util.alert(res.msg);
                 if(res.status){
                     setTimeout(function(){
