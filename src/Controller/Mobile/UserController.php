@@ -251,13 +251,18 @@ class UserController extends AppController {
                     $data['wx_openid'] = $this->request->session()->read('reg.wx_openid');
                 }
                 if($this->request->session()->check('reg.avatar')){
+                    
                     $data['avatar'] = $this->request->session()->read('reg.avatar');
                 }
             }
             $user = $this->User->patchEntity($user, $data,[
                 'associated'=> ['Secret','Industries']
             ]);
-            if ($this->User->save($user)) {
+            $res = $this->User->save($user);
+            if ($res) {
+                if($this->request->session()->check('reg.avatar')){
+                    $this->setAvatarTask($res->id);
+                }
                 $jumpUrl = '/home/index';
                 $msg = '注册成功';
                 if($this->request->is('weixin')){
@@ -304,6 +309,18 @@ class UserController extends AppController {
             'pageTitle'=>'并购帮-注册'
         ]);
         $this->render('register2');
+    }
+    
+    /**
+     * 把用户头像放进队列
+     * @param type $id
+     */
+    public function setAvatarTask($id) {
+        $redis = new \Redis();
+        $redis_conf = \Cake\Core\Configure::read('redis_server');
+        $redis->connect($redis_conf['host'], $redis_conf['port']);
+        $res = $redis->rPush('bgq_avatar_queue', $id);
+        return $res;
     }
 
     /**
