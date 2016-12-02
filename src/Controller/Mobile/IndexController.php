@@ -30,7 +30,8 @@ class IndexController extends AppController {
         $this->autoRender = false;
 //        $res = \Cake\Cache\Cache::write('foo', 'bar2', 'redis');
 //        //debug($res);
-        debug(date('Y-m-d H:i:s'));exit();
+        debug(date('Y-m-d H:i:s'));
+        exit();
         debug(\Cake\Cache\Cache::read('foo', 'redis'));
         //$wordstr = file_get_contents(ROOT.'/config/words');
         //$words = preg_match_all('/(.*?)\n/', $wordstr,$matches);
@@ -42,9 +43,9 @@ class IndexController extends AppController {
                         'valueField' => 'body'
                     ])->hydrate(false)->toList();
             $pattern = '';
-            $patt = implode('|',array_values($words));
+            $patt = implode('|', array_values($words));
             $pattern = '/' . $patt . '/';
-            \Cake\Cache\Cache::write('wordpatt',$pattern, 'redis');
+            \Cake\Cache\Cache::write('wordpatt', $pattern, 'redis');
         }
         $content = '办理票据的小商贩也会和习近平去卖半刺刀';
         $str = preg_replace($pattern, '**', $content);
@@ -129,6 +130,37 @@ class IndexController extends AppController {
             $redis->sAdd('phones', $user['phone']);
         }
         debug($redis->sGetMembers('phones'));
+    }
+
+    public function setAvatarTask($id) {
+        $redis = new \Redis();
+        $redis_conf = \Cake\Core\Configure::read('redis_server');
+        $redis->connect('192.168.1.11', $redis_conf['port']);
+        $res = $redis->rPush('bgq_avatar_queue', $id);
+        debug($res);
+        exit();
+    }
+
+    public function handAvatarTask() {
+        set_time_limit(0);
+        $redis = new \Redis();
+        $redis_conf = \Cake\Core\Configure::read('redis_server');
+        $redis->connect('192.168.1.11', $redis_conf['port']);
+        $size = $redis->lSize('bgq_avatar_queue');
+        $records = $redis->lrange('bgq_avatar_queue', 0, $size - 1);
+        foreach ($records as $record) {
+            
+        }
+        //hand this ids   save weixin avatar to local
+        if($save){
+              //插入成功则 删除掉已保存 队列元素
+              $redis->ltrim('pvlog', $size, -1);
+        }else{
+            //出错报警 出错处理
+              //出错 警报
+          dblog($flag, $msg);
+         \Cake\Log\Log::error('pvlog shell pvsave 保存失败','cron');
+        }
     }
 
 }
