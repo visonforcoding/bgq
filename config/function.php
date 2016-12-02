@@ -101,3 +101,29 @@ function getAvatar($avatar) {
 function createImg($url){
     return preg_replace('/upload/','img',$url);
 }
+
+
+/**
+ * 对重要信息的数据库日志记录，例如订单漏单
+ * @param string $flag 
+ * @param string $msg
+ * @param string $data
+ */
+function dblog($flag, $msg, $data = null) {
+    $LogTable = \Cake\ORM\TableRegistry::get('Log');
+
+    $log = $LogTable->newEntity();
+    if ($data) {
+        $log->data = var_export($data, true);
+    }
+    $log = $LogTable->patchEntity($log, [
+        'flag' => $flag,
+        'msg' => $msg
+    ]);
+    try {
+        $LogTable->save($log);
+    } catch (\Exception $exc) {
+        Cake\Log\Log::error('devlog',$log->errors());
+        Cake\Log\Log::error('devlog',$exc->getTraceAsString());
+    }
+}
