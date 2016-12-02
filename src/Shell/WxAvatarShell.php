@@ -70,7 +70,7 @@ class WxAvatarShell extends Shell {
                 }
             }
             //插入成功则 删除掉已保存 队列元素
-            //$redis->lrem('bgq_avatar_queue', $v, 0);
+            $redis->lrem('bgq_avatar_queue', $v, 0);
         }
     }
 
