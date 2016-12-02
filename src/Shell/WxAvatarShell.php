@@ -31,7 +31,7 @@ class WxAvatarShell extends Shell {
         $this->out($this->OptionParser->help());
     }
 
-    public function handAvatarTask() {
+    public function run() {
         set_time_limit(0);
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $redis = new \Redis();
@@ -41,7 +41,6 @@ class WxAvatarShell extends Shell {
         $records = $redis->lrange('bgq_avatar_queue', 0, $size - 1);
         foreach ($records as $k=>$v) {
             $user = $UserTable->get($v);
-            $res = $UserTable->save($user);
             if(strpos($user->avatar, 'http:')){
                 $today = date('Y-m-d');
                 $path = 'upload/user/avatar/'.$today;
@@ -64,15 +63,14 @@ class WxAvatarShell extends Shell {
                         ->save($file_name);
                 $user->avatar = '/' . $path . '/' . $file_name;
                 $res = $UserTable->save($user);
+                if(!$res){
+                  //出错报警 出错处理
+                  dblog('user', '微信头像保存失败，用户id为：'.$v.',原因为：'.$user->errors());
+                  \Cake\Log\Log::error('bgq_avatar_queue 保存失败','cron');
+                }
             }
-            if($res){
-                //插入成功则 删除掉已保存 队列元素
-                $redis->lrem('bgq_avatar_queue', $v, 0);
-            }else{
-              //出错报警 出错处理
-              dblog('user', '微信头像保存失败，用户id为：'.$v.',原因为：'.$user->errors());
-              \Cake\Log\Log::error('bgq_avatar_queue 保存失败','cron');
-            }
+            //插入成功则 删除掉已保存 队列元素
+            $redis->lrem('bgq_avatar_queue', $v, 0);
         }
     }
 
