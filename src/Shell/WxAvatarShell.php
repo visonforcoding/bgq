@@ -49,7 +49,7 @@ class WxAvatarShell extends Shell {
                 if(!is_dir($path)){
                     mkdir($path,0777,true);
                 }
-                \Intervention\Image\ImageManagerStatic::make($this->request->session()->read('reg.avatar'))
+                \Intervention\Image\ImageManagerStatic::make($user->avatar)
                                 ->save($path.'/'.$uniqid.'.jpg');
                 $img = \Intervention\Image\ImageManagerStatic::make($path.'/'.$uniqid.'.jpg');
                 $info = $img->exif();
