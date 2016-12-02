@@ -41,27 +41,27 @@ class WxAvatarShell extends Shell {
         $records = $redis->lrange('bgq_avatar_queue', 0, $size - 1);
         foreach ($records as $k=>$v) {
             $user = $UserTable->get($v);
-            if(strpos($user->avatar, 'http:')){
+            if(strpos($user->avatar, 'http:')!==false){
                 $today = date('Y-m-d');
                 $path = 'upload/user/avatar/'.$today;
                 $uniqid = uniqid();
                 $file_name = $path.'/thumb_' . $uniqid.'.jpg';
-                if(!is_dir($path)){
-                    mkdir($path,0777,true);
+                if(!is_dir(WWW_ROOT.$path)){
+                    mkdir(WWW_ROOT.$path,0777,true);
                 }
                 \Intervention\Image\ImageManagerStatic::make($user->avatar)
-                                ->save($path.'/'.$uniqid.'.jpg');
-                $img = \Intervention\Image\ImageManagerStatic::make($path.'/'.$uniqid.'.jpg');
+                                ->save(WWW_ROOT.$path.'/'.$uniqid.'.jpg');
+                $img = \Intervention\Image\ImageManagerStatic::make(WWW_ROOT.$path.'/'.$uniqid.'.jpg');
                 $info = $img->exif();
         //        \Cake\Log\Log::debug($info,'devlog');
                 $image = $info['COMPUTED'];
-                \Intervention\Image\ImageManagerStatic::make($path.'/'.$uniqid.'.jpg')
+                \Intervention\Image\ImageManagerStatic::make(WWW_ROOT.$path.'/'.$uniqid.'.jpg')
                         ->resize(intval($image['Width']*0.4), intval($image['Height']*0.4))
-                        ->save($path .'/small_' .$uniqid . '.jpg');
-                \Intervention\Image\ImageManagerStatic::make($path.'/'.$uniqid.'.jpg')
+                        ->save(WWW_ROOT.$path .'/small_' .$uniqid . '.jpg');
+                \Intervention\Image\ImageManagerStatic::make(WWW_ROOT.$path.'/'.$uniqid.'.jpg')
                         ->resize(60,60)
-                        ->save($file_name);
-                $user->avatar = '/' . $path . '/' . $file_name;
+                        ->save(WWW_ROOT.$file_name);
+                $user->avatar = '/' . $file_name;
                 $res = $UserTable->save($user);
                 if(!$res){
                   //出错报警 出错处理
@@ -70,7 +70,7 @@ class WxAvatarShell extends Shell {
                 }
             }
             //插入成功则 删除掉已保存 队列元素
-            $redis->lrem('bgq_avatar_queue', $v, 0);
+            //$redis->lrem('bgq_avatar_queue', $v, 0);
         }
     }
 
