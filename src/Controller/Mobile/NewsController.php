@@ -162,8 +162,10 @@ class NewsController extends AppController {
             $news->comments[$k]->user->avatar = getSmallAvatar($v->user->avatar);
         }
         $this->set('isCollect', $isCollect);
-        //阅读数+1
-        $news->read_nums +=1;
+        if($this->request->is('weixin') || $this->request->is('lemon')){
+            //阅读数+1
+            $news->read_nums +=1;
+        }
         $this->News->save($news);
         $this->set('news', $news);
         $this->set('user', $this->user);
