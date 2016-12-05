@@ -22,7 +22,7 @@
                 </ul>
             </div>
             <a href="javascript:void(0)" class="nextstep" id="submit">提交</a>
-            <div class="line"><span class="mistips">活动费用不可退哦</span></div>
+            <!--<div class="line"><span class="mistips">活动费用不可退哦</span></div>-->
         </form>
     </div>
     <div class='reg-shadow' hidden id="shadow"></div>
