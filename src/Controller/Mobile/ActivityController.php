@@ -174,7 +174,9 @@ class ActivityController extends AppController {
             foreach($activity->activitycom as $k=>$v){
                 $activity->activitycom[$k]->user->avatar = getSmallAvatar($v->user->avatar);
             }
-            $activity->read_nums += 1; // 阅读加1
+            if($this->request->is('weixin') || $this->request->is('lemon')){
+                $activity->read_nums += 1; // 阅读加1
+            }
             $this->Activity->save($activity);
             $this->set([
                 'pageTitle'=>'并购帮',
