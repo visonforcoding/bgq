@@ -332,11 +332,27 @@ class NewsController extends AppController {
      * @param int $id 活动id
      */
     public function getMoreComment($page, $id) {
+        if($this->user){
+            $user_id = $this->user->id;
+            $contain = ['Users' => function($q){
+                        return $q->where(['Users.enabled'=>1])->select(['id', 'truename', 'company', 'position', 'avatar']);
+                    }, 'Reply' => function($q){
+                        return $q->where(['Reply.enabled'=>1])->select(['id', 'truename', 'company', 'position', 'avatar']);
+                    }, 'Likes'=>function($q)use($user_id){
+                        return $q->where(['type'=>1,'user_id'=>$user_id]);
+                    }];
+        } else {
+            $contain = ['Users' => function($q){
+                        return $q->where(['Users.enabled'=>1])->select(['id', 'truename', 'company', 'position', 'avatar']);
+                    }, 'Reply' => function($q){
+                        return $q->where(['Reply.enabled'=>1])->select(['id', 'truename', 'company', 'position', 'avatar']);
+                    }];
+        }
         $comment = $this->News
                         ->Comments
                         ->find()
                         ->where(['news_id' => $id, 'is_delete'=>0])
-                        ->contain(['Users', 'Reply'])
+                        ->contain($contain)
                         ->page($page, $this->newslimit)
                         ->orderDesc('Comments.create_time')
                         ->toArray();
@@ -354,37 +370,29 @@ class NewsController extends AppController {
     public function showAllComment($id){
         if($this->user){
             $user_id = $this->user->id;
-            // 评论
-            $comment = $this
-                    ->News
-                    ->Comments
-                    ->find()
-                    ->contain(['Users' => function($q){
-                        return $q->where(['Users.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
+            $contain = ['Users' => function($q){
+                        return $q->where(['Users.enabled'=>1])->select(['id', 'truename', 'company', 'position', 'avatar']);
                     }, 'Reply' => function($q){
-                        return $q->where(['Reply.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
+                        return $q->where(['Reply.enabled'=>1])->select(['id', 'truename', 'company', 'position', 'avatar']);
                     }, 'Likes'=>function($q)use($user_id){
                         return $q->where(['type'=>1,'user_id'=>$user_id]);
-                    }])
-                    ->where(['news_id' => $id, 'is_delete'=>0])
-                    ->order(['Comments.create_time' => 'DESC'])
-                    ->limit(10)
-                    ->toArray();
+                    }];
         } else {
-            $comment = $this
+            $contain = ['Users' => function($q){
+                        return $q->where(['Users.enabled'=>1])->select(['id', 'truename', 'company', 'position', 'avatar']);
+                    }, 'Reply' => function($q){
+                        return $q->where(['Reply.enabled'=>1])->select(['id', 'truename', 'company', 'position', 'avatar']);
+                    }];
+        }
+        $comment = $this
                     ->News
                     ->Comments
                     ->find()
-                    ->contain(['Users' => function($q){
-                        return $q->where(['Users.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
-                    }, 'Reply' => function($q){
-                        return $q->where(['Reply.enabled'=>1])->select(['id', 'truename', 'company', 'position']);
-                    }])
+                    ->contain($contain)
                     ->where(['news_id' => $id, 'is_delete'=>0])
                     ->order(['Comments.create_time' => 'DESC'])
                     ->limit(10)
                     ->toArray();
-        }
         if ($comment) {
             return $this->Util->ajaxReturn(['status' => true, 'data' => $comment]);
         } else {
