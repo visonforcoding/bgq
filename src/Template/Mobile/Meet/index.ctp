@@ -13,7 +13,7 @@
             </div>
         </a>
     </div>
-    <div style="height:68px;"></div>
+    <div id="top_block"></div>
     <div class="a-banner" >
         <ul class="pic-list-container" id="imgList">
         </ul>
@@ -129,8 +129,12 @@
 <script>
     if ($.util.isAPP) {
         $('#search').css({'top': '0.6rem'});
+        $('#top_block').css({'height': '68px'});
+        $('.meet_search_box').css({'padding-top': '20px', 'height': '68px'});
     } else if ($.util.isWX) {
         $('#search').css({'top': '0.2rem'});
+        $('#top_block').css({'height': '48px'});
+        $('.meet_search_box').css({'padding-top': '0', 'height': '48px'});
     }
 </script>
 <script>
