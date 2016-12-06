@@ -6,19 +6,11 @@
 <div class="work-copy">
     <?= $this->Form->create($activityapply, ['class' => 'form-horizontal']) ?>
     <div class="form-group">
-        <label class="col-md-2 control-label">用户id</label>
+        <label class="col-md-2 control-label">用户</label>
         <div class="col-md-8">
             <?= $this->cell('User') ?>
         </div>
     </div>
-<!--    <div class="form-group">
-        <label class="col-md-2 control-label">是否直接通过（只有需要付款）</label>
-        <div class="col-md-8">
-            <?php
-            echo $this->Form->input('is_pass', ['type'=>'select', 'options'=>['0'=>'否', '1'=>'是'], 'label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>-->
     <div class="form-group">
         <label class="col-md-2 control-label">是否置顶</label>
         <div class="col-md-8">
