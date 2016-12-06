@@ -55,9 +55,9 @@
         window.sid = a;
     }
     $('input[name="series_id"]').val(<?= $sid ?>);
+    window.isApply = ',' + '<?= $isApply ?>' + ',';
 </script>
 <script>
-
     $.ajax({
         type: 'POST',
         dataType: 'json',
@@ -103,6 +103,10 @@
                                 if (msg.status === true) {
                                     var html = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
                                         d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
+                                        d.cover = d.thumb ? d.thumb : d.cover;
+                                        if(d.cover){
+                                            d.img = '<img src="' + d.cover + '"/>';
+                                        }                                    
                                         return d;
                                     });
                                 } else {
@@ -116,11 +120,6 @@
             }
         }
     });
-
-
-    window.isApply = ',' + <?= $isApply ?> + ',';
-
-
 
     $('.a-s-title').on('touchstart', function () {
         $('.orgname').toggleClass('active');
@@ -142,8 +141,6 @@
             $('.arealist').show();
         }
     });
-
-
 
     function seriesTap(em) {
         $('.series').removeClass('active');
@@ -182,8 +179,6 @@
             }
         });
     }
-
-
 
     var page = 2;
     setTimeout(function () {
@@ -265,8 +260,7 @@
             }
         });
         $('input[name="keyword"]').blur();
-    }
-    ;
+    };
 </script>
 <?php
 $this->end('script');
