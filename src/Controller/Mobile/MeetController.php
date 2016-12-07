@@ -934,8 +934,8 @@ class MeetController extends AppController {
                 ->distinct('SubjectBook.id')
                 ->contain(['Users', 'Savants', 'Subjects', 'BookChats'=>function($q)use($user_id){
                     return $q->where(['reply_id'=>$user_id]);
-                }, 'Usermsgs'=>function($q){
-                    return $q->where(['Usermsgs.type'=>4, 'status'=>0]);
+                }, 'Usermsgs'=>function($q)use($user_id){
+                    return $q->where(['Usermsgs.type'=>4, 'status'=>0, 'user_id'=>$user_id]);
                 }])
                 ->leftJoinWith('BookChats')
                 ->where([
