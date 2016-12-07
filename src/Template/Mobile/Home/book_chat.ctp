@@ -69,9 +69,9 @@
         </div>
     </div>
     <?php if($book->savant_id == $uid): ?>
-        <div class="over-meet" id="done">
+<!--        <div class="over-meet" id="done">
             <span>约见<br>结束</span>
-        </div>
+        </div>-->
     <?php endif; ?>
 <?php endif; ?>
 <div class="reg-shadow" ontouchmove="return false;" hidden id="shadow"></div>
