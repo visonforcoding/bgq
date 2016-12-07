@@ -121,10 +121,13 @@ class ExportComponent extends Component {
                 if($k == 'card_path'){
                     if(file_exists(WWW_ROOT . $v)) {
                         $objDrawing = new \PHPExcel_Worksheet_Drawing();
+                        $objDrawing->setResizeProportional(false);
+                        $objDrawing->setWidthAndHeight(100, 100);
                         $objDrawing->setPath(WWW_ROOT . $v);
                         $objDrawing->setCoordinates($A . $i);
                         $objDrawing->setWorksheet($objPHPExcel->setActiveSheetIndex(0));
-                        $objPHPExcel->setActiveSheetIndex(0)->getRowDimension($i)->setRowHeight(120);
+                        $objPHPExcel->setActiveSheetIndex(0)->getRowDimension($i)->setRowHeight(100);
+                        $objPHPExcel->setActiveSheetIndex(0)->getColumnDimension($A)->setWidth(30);
                     } else {
                         $objPHPExcel->setActiveSheetIndex(0)
                                 ->setCellValue($A . $i, $v);
