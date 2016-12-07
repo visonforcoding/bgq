@@ -411,8 +411,7 @@ class UserController extends AppController {
                         return $q->select(['Agencies.name']);
                     }
                 ])
-//                ->where(['User.id !='=>'-1'])
-                ->where(['User.id'=>3])
+                ->where(['User.id !='=>'-1'])
                 ->select([
                     'User.truename','User.phone','User.company','User.position','User.savant_status','User.id','User.agency_id',
                     'User.card_path',
