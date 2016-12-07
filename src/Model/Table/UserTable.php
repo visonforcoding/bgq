@@ -82,10 +82,25 @@ class UserTable extends Table {
             'targetForeignKey' => 'activity_id'
         ]);
 
+        $this->hasMany('SubjectBooks', [
+            'className' => 'SubjectBook',
+            'foreignKey' => 'user_id'
+        ]);
 
         $this->hasOne('UserFans', [
             'className' => 'UserFans',
         ]);
+        
+        $this->hasMany('SendMsgs', [
+            'className' => 'BookChat',
+            'foreignKey' => 'user_id',
+        ]);
+        
+        $this->hasMany('ReceiveMsgs', [
+            'className' => 'BookChat',
+            'foreignKey' => 'reply_id',
+        ]);
+        
         $this->hasMany('Focus', [
             'className' => 'UserFans',
             'foreignKey' => 'user_id'
@@ -104,6 +119,16 @@ class UserTable extends Table {
         //活动评论
         $this->hasMany('Activitycoms', [
             'className' => 'Activitycom',
+            'foreignKey' => 'user_id'
+        ]);
+        
+        $this->hasMany('CommentLikes', [
+            'className' => 'CommentLike',
+            'foreignKey' => 'user_id'
+        ]);
+        
+        $this->hasMany('LikeLogses', [
+            'className' => 'LikeLogs',
             'foreignKey' => 'user_id'
         ]);
 
