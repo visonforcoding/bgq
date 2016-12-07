@@ -118,7 +118,7 @@ class ExportComponent extends Component {
         $i = 2;
         foreach ($data as $value) {
             foreach ($value as $k => $v) {
-                if($k == 'card_path'){
+                if($k == 'card_path' && $v){
                     if(file_exists(WWW_ROOT . $v)) {
                         $objDrawing = new \PHPExcel_Worksheet_Drawing();
                         $objDrawing->setResizeProportional(false);
