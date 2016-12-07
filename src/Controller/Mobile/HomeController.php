@@ -835,7 +835,9 @@ class HomeController extends AppController {
                 ->toArray();
         if($bookChat !== false){
             $BookChatTable = \Cake\ORM\TableRegistry::get('book_chat');
+            \Cake\Log\Log::debug('开始全部更新', 'devlog');
             $BookChatTable->updateAll(['is_read'=>1], ['reply_id'=>$user_id, 'book_id'=>$book_id, 'is_read'=>0]);
+            \Cake\Log\Log::debug('更新完成', 'devlog');
             return $this->Util->ajaxReturn(['status'=>true, 'data'=>$bookChat]);
         } else {
             return $this->Util->ajaxReturn(false, '系统错误');
@@ -891,7 +893,9 @@ class HomeController extends AppController {
                 ->toArray();
         if($bookChat){
             $BookChatTable = \Cake\ORM\TableRegistry::get('book_chat');
+            \Cake\Log\Log::debug('开始个别更新', 'devlog');
             $BookChatTable->updateAll(['is_read'=>1], ['reply_id'=>$user_id, 'book_id'=>$book_id, 'is_read'=>0]);
+            \Cake\Log\Log::debug('更新完成', 'devlog');
             return $this->Util->ajaxReturn(['status'=>true, 'data'=>$bookChat]);
         } else {
             return $this->Util->ajaxReturn(false);
