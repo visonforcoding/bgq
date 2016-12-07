@@ -370,6 +370,133 @@ class UserController extends AppController {
         $this->loadComponent('Export');
         $this->Export->phpexcelExport($filename, $column, $user);
     }
+    
+    /**
+     * 导出姓名、手机、公司、职位、会员认证、递名片、收名片、关注人、粉丝数、所有点赞
+     * 发话题、发约见消息、收约见消息、发评论、申请约见、约见申请审核通过数量、报名活动、机构标签、行业标签
+     */
+    public function exprotActiveData(){
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $user = $UserTable->find()
+                ->contain([
+                    'GetCards'=>function($q){
+                        return $q->select(['GetCards.ownerid']);
+                    },'GiveCards'=>function($q){
+                        return $q->select(['GiveCards.uid']);
+                    },'Focus'=>function($q){
+                        return $q->select(['Focus.user_id']);
+                    },'Followers'=>function($q){
+                        return $q->select(['Followers.following_id']);
+                    },'CommentLikes'=>function($q){
+                        return $q->select(['CommentLikes.user_id']);
+                    },'LikeLogses'=>function($q){
+                        return $q->select(['LikeLogses.user_id']);
+                    },'Subjects'=>function($q){
+                        return $q->select(['Subjects.user_id']);
+                    },'SendMsgs'=>function($q){
+                        return $q->select(['SendMsgs.user_id']);
+                    },'ReceiveMsgs'=>function($q){
+                        return $q->select(['ReceiveMsgs.reply_id']);
+                    },'Activitycoms'=>function($q){
+                        return $q->select(['Activitycoms.user_id']);
+                    },'Newscoms'=>function($q){
+                        return $q->select(['Newscoms.user_id']);
+                    },'SubjectBooks'=>function($q){
+                        return $q->select(['SubjectBooks.user_id','SubjectBooks.status']);
+                    },'Activityapply'=>function($q){
+                        return $q->select(['Activityapply.user_id']);
+                    },'Industries'=>function($q){
+                        return $q->select(['Industries.name']);
+                    },'Agencies'=>function($q){
+                        return $q->select(['Agencies.name']);
+                    }
+                ])
+//                ->where(['User.id !='=>'-1'])
+                ->where(['User.id'=>3])
+                ->select([
+                    'User.truename','User.phone','User.company','User.position','User.savant_status','User.id','User.agency_id',
+                    'User.card_path',
+                ])
+                ->formatResults(function($items){
+                    return $items->map(function($item){
+                        $industry = [];
+                        foreach($item['industries'] as $k=>$v){
+                            $industry[] = $v['name'];
+                        }
+                        $item['industries'] = implode('、', $industry);
+                        switch ($item['savant_status']){
+                            case 0:
+                                $item['savant_status'] = '审核不通过';
+                                break;
+                            case 1:
+                                $item['savant_status'] = '未认证';
+                                break;
+                            case 2:
+                                $item['savant_status'] = '待审核';
+                                break;
+                            case 3:
+                                $item['savant_status'] = '审核通过';
+                                break;
+                        }
+                        $item['agency'] = $item['agency']['name'];
+                        $item['activityapply'] = count($item['activityapply']);
+                        $item['give_cards'] = count($item['give_cards']);
+                        $item['get_cards'] = count($item['get_cards']);
+                        $item['focus'] = count($item['focus']);
+                        $item['followers'] = count($item['followers']);
+                        $item['comment_likes'] = count($item['comment_likes']);
+                        $item['like_logses'] = count($item['like_logses']);
+                        $item['like'] = count($item['comment_likes']) + count($item['like_logses']);
+                        $item['subjects'] = count($item['subjects']);
+                        $item['send_msgs'] = count($item['send_msgs']);
+                        $item['receive_msgs'] = count($item['receive_msgs']);
+                        $item['activitycoms'] = count($item['activitycoms']);
+                        $item['newscoms'] = count($item['newscoms']);
+                        $item['comment'] = count($item['activitycoms']) + count($item['newscoms']);
+                        $item['subject_books_pass'] = 0;
+                        foreach($item['subject_books'] as $k=>$v){
+                            if($v['status'] == 1 || $v['status'] == 3){
+                                $item['subject_books_pass'] ++;
+                            }
+                        }
+                        $item['subject_books_total'] = count($item['subject_books']);
+                        return $item;
+                    });
+                })
+                ->hydrate(false)
+                ->toArray();
+        $res = [];
+        foreach($user as $k=>$v){
+            $res[$k]['name'] = $v['truename'];
+            $res[$k]['phone'] = $v['phone'];
+            $res[$k]['company'] = $v['company'];
+            $res[$k]['position'] = $v['position'];
+            $res[$k]['savant_status'] = $v['savant_status'];
+            $res[$k]['give_card'] = $v['give_cards'];
+            $res[$k]['get_card'] = $v['get_cards'];
+            $res[$k]['card_path'] = $v['card_path'];
+            $res[$k]['focus'] = $v['focus'];
+            $res[$k]['followers'] = $v['followers'];
+            $res[$k]['like'] = $v['like'];
+            $res[$k]['subject'] = $v['subjects'];
+            $res[$k]['send_msg'] = $v['send_msgs'];
+            $res[$k]['receive_msg'] = $v['receive_msgs'];
+            $res[$k]['comment'] = $v['comment'];
+            $res[$k]['subject_book_total'] = $v['subject_books_total'];
+            $res[$k]['subject_book_pass'] = $v['subject_books_pass'];
+            $res[$k]['activityapply'] = $v['activityapply'];
+            $res[$k]['agency'] = $v['agency'];
+            $res[$k]['industry'] = $v['industries'];
+        }
+        $column = [
+            '姓名','手机','公司','职位','会员认证','递名片','收名片','名片',
+            '关注人','粉丝数','点赞','发话题','发约见消息','收约见消息',
+            '发评论','申请约见','约见申请通过数量','报名活动','机构标签','行业标签'
+        ];
+        $filename = '会员_' . date('Y-m-d') . '.xlsx';
+        $this->loadComponent('Export');
+        $this->Export->phpexcelExportWithImg($filename, $column, $res);
+    }
 
     /**
      * 实名认证管理

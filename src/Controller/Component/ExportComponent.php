@@ -99,5 +99,56 @@ class ExportComponent extends Component {
         $objWriter->save('php://output');
         exit();
     }
+    
+    
+    
+    public function phpexcelExportWithImg($filename, array $header, array $data) {
+        $objPHPExcel = new \PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("柠檬智慧科技")
+                ->setDescription("柠檬智慧科技生成.");
+        $A = 'A';
+        foreach ($header as $value) {
+            $objPHPExcel->setActiveSheetIndex(0)
+                    ->setCellValue($A . '1', $value);
+            //$objPHPExcel->getActiveSheet(0)->getColumnDimension($A)->setAutoSize(true);
+            $A++;
+        }
+        unset($A);
+        $A = 'A';
+        $i = 2;
+        foreach ($data as $value) {
+            foreach ($value as $k => $v) {
+                if($k == 'card_path'){
+                    if(file_exists(WWW_ROOT . $v)) {
+                        $objDrawing = new \PHPExcel_Worksheet_Drawing();
+                        $objDrawing->setPath(WWW_ROOT . $v);
+                        $objDrawing->setCoordinates($A . $i);
+                        $objDrawing->setWorksheet($objPHPExcel->setActiveSheetIndex(0));
+                        $objPHPExcel->setActiveSheetIndex(0)->getRowDimension($i)->setRowHeight(120);
+                    } else {
+                        $objPHPExcel->setActiveSheetIndex(0)
+                                ->setCellValue($A . $i, $v);
+                    }
+                } else {
+                    $objPHPExcel->setActiveSheetIndex(0)
+                            ->setCellValue($A . $i, $v);
+                }
+                $A++;
+            }
+            $A = 'A';
+            $i++;
+        }
+        
+        $objPHPExcel->setActiveSheetIndex(0);
+//    $objPHPExcel->getActiveSheet()->setTitle('Simple');
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        // We'll be outputting an excel file
+        header('Content-type: application/vnd.ms-excel');
+        // It will be called file.xls
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        // Write file to the browser
+        $objWriter->save('php://output');
+        exit();
+    }
 
 }
