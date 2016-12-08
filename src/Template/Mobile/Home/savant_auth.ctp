@@ -6,13 +6,13 @@
             <li class="no-right-ico changeflex nopr">
                 <b>项目经验<a href="javascript:void(0);" class="r-example" id="xmjyTap">样例</a></b>
                 <div >
-                    <textarea name="xmjy" <?php if($user->savant_status==2 || $user->savant_status==3): ?>disabled style="background: gainsboro;"<?php endif; ?> placeholder="" ><?=isset($user->savant) ? $user->savant->xmjy : ''?></textarea>
+                    <textarea name="xmjy" readonly <?php if($user->savant_status==2 || $user->savant_status==3): ?>disabled style="background: gainsboro;"<?php endif; ?> placeholder="" ><?=isset($user->savant) ? $user->savant->xmjy : ''?></textarea>
                 </div>
             </li>
             <li class="nobottom no-right-ico changeflex nopr">
                 <b>擅长话题<a href="javascript:void(0);" class="r-example" id="schtTap">样例</a></b>
                 <div >
-                    <textarea name="zyys" <?php if($user->savant_status==2 || $user->savant_status==3): ?>disabled style="background: gainsboro;"<?php endif; ?> placeholder="" ><?= isset($user->savant)?$user->savant->zyys:''?></textarea>
+                    <textarea name="zyys" readonly <?php if($user->savant_status==2 || $user->savant_status==3): ?>disabled style="background: gainsboro;"<?php endif; ?> placeholder="" ><?= isset($user->savant)?$user->savant->zyys:''?></textarea>
                 </div>
             </li>
         </form>
@@ -58,7 +58,7 @@
 <?php $this->start('script') ?>
 <script>
     window.onBackView = function(){
-        $.util.checkUserinfoStatus();
+//        $.util.checkUserinfoStatus();
     };
     window.onBackView();
     
