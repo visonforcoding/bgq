@@ -101,7 +101,12 @@ class ExportComponent extends Component {
     }
     
     
-    
+    /**
+     * 导出图片，特别写的，不适用全部情况
+     * @param type $filename
+     * @param array $header
+     * @param array $data
+     */
     public function phpexcelExportWithImg($filename, array $header, array $data) {
         $objPHPExcel = new \PHPExcel();
         $objPHPExcel->getProperties()->setCreator("柠檬智慧科技")
