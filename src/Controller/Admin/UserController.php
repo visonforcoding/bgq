@@ -443,15 +443,15 @@ class UserController extends AppController {
                         $item['get_cards'] = count($item['get_cards']);
                         $item['focus'] = count($item['focus']);
                         $item['followers'] = count($item['followers']);
+                        $item['like'] = count($item['comment_likes']) + count($item['like_logses']);
                         $item['comment_likes'] = count($item['comment_likes']);
                         $item['like_logses'] = count($item['like_logses']);
-                        $item['like'] = count($item['comment_likes']) + count($item['like_logses']);
                         $item['subjects'] = count($item['subjects']);
                         $item['send_msgs'] = count($item['send_msgs']);
                         $item['receive_msgs'] = count($item['receive_msgs']);
+                        $item['comment'] = count($item['activitycoms']) + count($item['newscoms']);
                         $item['activitycoms'] = count($item['activitycoms']);
                         $item['newscoms'] = count($item['newscoms']);
-                        $item['comment'] = count($item['activitycoms']) + count($item['newscoms']);
                         $item['subject_books_pass'] = 0;
                         foreach($item['subject_books'] as $k=>$v){
                             if($v['status'] == 1 || $v['status'] == 3){
