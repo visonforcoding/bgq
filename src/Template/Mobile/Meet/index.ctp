@@ -60,7 +60,7 @@
         <a class="title" href="/meet/all-elite">菁英推荐
             <span class="fr more">
                 查看更多
-                <i class="more iconfont fr rmore">&#xe667;</i>
+                <i class="more iconfont rmore">&#xe667;</i>
             </span>
         </a>
     </div>
