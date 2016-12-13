@@ -1,50 +1,25 @@
 <?php $this->start('static') ?>   
 <link href="/wpadmin/lib/jqupload/uploadfile.css" rel="stylesheet">
 <link href="/wpadmin/lib/jqvalidation/css/validationEngine.jquery.css" rel="stylesheet">
+<link href="/wpadmin/lib/select2/css/select2.min.css" rel="stylesheet">
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($need, ['class' => 'form-horizontal']) ?>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">用户</label>
         <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('user_id', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <?= $this->cell('User'); ?>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">内容</label>
         <div class="col-md-8">
-                        <?php
+            <?php
             echo $this->Form->input('msg', ['label' => false, 'class' => 'form-control']);
             ?>
         </div>
     </div>
-        <div class="form-group">
-        <label class="col-md-2 control-label">状态</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('status', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-        <div class="form-group">
-        <label class="col-md-2 control-label">创建时间</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('create_time', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-        <div class="form-group">
-        <label class="col-md-2 control-label">修改时间</label>
-        <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('update_time', ['label' => false, 'class' => 'form-control']);
-            ?>
-        </div>
-    </div>
-        <div class="form-group">
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
         </div>
@@ -57,6 +32,7 @@
 <script type="text/javascript" src="/wpadmin/lib/jqupload/jquery.uploadfile.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/languages/jquery.validationEngine-zh_CN.js"></script>
 <script type="text/javascript" src="/wpadmin/lib/jqvalidation/js/jquery.validationEngine.js"></script>
+<script src="/wpadmin/lib/select2/js/select2.full.min.js" ></script>
 <!--<script src="/wpadmin/lib/ueditor/ueditor.config.js" ></script>
     <script src="/wpadmin/lib/ueditor/ueditor.all.js" ></script>
     <script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>-->
@@ -64,6 +40,10 @@
     $(function () {
         // initJqupload('cover', '/wpadmin/util/doUpload', 'jpg,png,gif,jpeg'); //初始化图片上传
         //var ue = UE.getEditor('content'); //初始化富文本编辑器
+        $('#select-user').select2({
+            language: 'zh-CN',
+            placeholder: '请选择一位用户'
+        });
         $('form').validationEngine({focusFirstField: true, autoPositionUpdate: true, promptPosition: "bottomRight"});
         $('form').submit(function () {
             var form = $(this);
