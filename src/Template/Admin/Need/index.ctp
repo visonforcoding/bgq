@@ -5,6 +5,9 @@
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
+            <a href="/admin/need/add" class="btn btn-small btn-warning">
+                <i class="icon icon-plus-sign"></i>添加
+            </a>
             <div class="form-group">
                 <label for="keywords">关键字</label>
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="用户姓名、内容">
@@ -37,6 +40,11 @@
                 $(function () {
                     $('#main-content').bind('resize', function () {
                         $("#list").setGridWidth($('#main-content').width() - 40);
+                    });
+                    $(document).keypress(function (e) {
+                        if (e.which == 13) {
+                            doSearch();
+                        }
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
