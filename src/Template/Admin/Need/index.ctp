@@ -12,7 +12,7 @@
                 <label for="keywords">关键字</label>
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="用户姓名、内容">
                 <!--只有一个input，回车会提交表单-->
-                <input type="hidden" />
+                <input type="text" hidden />
             </div>
             <div class="form-group">
                 <label for="keywords">状态</label>
