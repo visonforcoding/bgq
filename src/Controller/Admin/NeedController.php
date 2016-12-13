@@ -54,8 +54,15 @@ class NeedController extends AppController {
     public function add() {
         $need = $this->Need->newEntity();
         if ($this->request->is('post')) {
-            $need = $this->Need->patchEntity($need, $this->request->data);
-            if ($this->Need->save($need)) {
+            $data = [];
+            $data['reply_id'] = $this->request->data('user_id');
+            $data['user_id'] = -1;
+            $data['msg'] = $this->request->data('msg');
+            $need = $this->Need->patchEntity($need, $data);
+            $need = $this->Need->save($need);
+            if ($need) {
+                $this->loadComponent('Business');
+                $this->Business->usermsg('-1', $data['reply_id'], '您有新的消息', '您有新的小秘书消息', '6', $need->id);
                 $this->Util->ajaxReturn(true, '添加成功');
             } else {
                 $errors = $need->errors();
