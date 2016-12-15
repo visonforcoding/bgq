@@ -60,7 +60,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .mark-items .cart{max-height:0;clear:both;-webkit-transition: max-height .1s ease;transition:max-height .1s ease;}
 .mark-items .shows,.b-mark li span.active{max-height:999px;-webkit-transition:max-height .6s .1s ease-in;transition:max-height .6s .1s ease-in;}
 .mark-items .hide{max-height: 0;-webkit-transition: max-height .2s ease;transition:max-height .2s ease;}
-.nextstep,.s-btn{ display:block;text-align:center;height:0.78rem;width:80%;font-size:0.3rem;line-height:0.78rem;background: #b71c2d;color:#fff;margin:0 auto;margin-top:0.4rem;margin-bottom:0.4rem;border-radius:0.2rem;}
+.nextstep,.s-btn{ display:block;text-align:center;height:0.78rem;width:80%;font-size:0.3rem;line-height:0.78rem;background: #b71c2d;color:#fff;margin:0 auto;margin-top:0.4rem;margin-bottom:0.4rem;border-radius:5px;}
 .f-bottom{position: fixed;width: 100%;height: 1rem;bottom: 0;border-radius: 0;color: #fff;
     font-size: 0.32rem;text-align: center;line-height: 1rem;background: #b71c2d;max-width: 750px;}
 .submited{background: #7A7E83;}
@@ -1450,3 +1450,43 @@ box-align:center;-webkit-box-align:center;}
 .courselist .couser-pro{padding:.2rem .3rem 0;font-size: .28rem;color:#707070;}
 .course .items{padding-top:.2rem;padding-bottom:.2rem;}
 .course .items.read{opacity: .6;}
+.alert-booking{border-radius: 4px;background: #fff;min-height: 1rem;width:90%;padding:.2rem .3rem;}
+.alert-booking .pro{border-top:1px #efefef solid;padding:.2rem 0;}
+.alert-booking .pro p{font-size: .28rem;color:#303030;line-height: .36rem;}
+.alert-booking .user-name{font-size: .32rem;line-height: .36rem;color:#303030;margin-bottom:.1rem;}
+.alert-booking  .company-info{font-size: .28rem;line-height: .32rem;}
+.alert-booking .nav-title{padding:.2rem 0;}
+.alert-booking .btn-booking{position: absolute;padding:.12rem .18rem;background: #B71C2D;color:#fff;border-radius: 4px;right:.8rem;font-size: .28rem;}
+.charge-box{position: fixed;bottom:0;width:100%;max-width: 750px;z-index:1;background: #fff;box-shadow: 0 -1px 5px rgba(0,0,0,.3);max-height: 999px;-webkit-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
+.charge-box .nav-title{font-size: .3rem;line-height: .36rem;height:.6rem;margin-top:.7rem;}
+.charge-box .title{height:1.3rem;border-bottom:1px #efefef solid;}
+.charge-box .closed{position: absolute;top:.2rem;right:.4rem;}
+.charge-box li{padding:.2rem 0.3rem;}
+.charge-box .items{height:.6rem;}
+.btn-pay{height:.8;width:100%;background: #B71C2D;line-height: .8rem;font-size: .32rem;color:#fff;border-radius: 4px;text-align: center;margin-bottom:.2rem;}
+.charge-box-hide{max-height: 0;overflow: hidden;-webkit-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
+.charge-container{background: #fff;}
+.charge-container .title{height:1rem;line-height: 1rem;font-size: .4rem;color:#000;padding:0 .3rem;}
+.charge-container .input-block{height:1rem;line-height: 1rem;border-top:1px #efefef solid;border-bottom:1px #efefef solid;text-indent:.3rem;}
+.charge-container .input-disabled{background: #efefef;}
+.discount-charge .discount-title{height:1rem;line-height: 1rem;padding:.2rem 0 0;font-size: .34rem;color:#707070;}
+.discount-charge .discount-title .really-count{font-size: .3rem;margin-left:.2rem;}
+.discount-charge li{width:2.1rem;height:1.8rem;margin-right:.22rem;margin-top:.3rem;}
+.discount-charge li:nth-of-type(3n){margin-right: 0;}
+
+.discount-charge li .items{width:100%;height:1.8rem;border:1px #e5e5e5 solid;border-radius: 4px;font-size: .4rem;color:#666;}
+.discount-charge li.active .items{border:1px #B71C2D solid;color:#B71C2D;}
+.charge-tips{position: absolute;bottom:1.2rem;width:100%;text-align: center;font-size: .26rem;color:#707070;}
+.train-account{text-align: center;height:1.7rem;line-height: 1.7rem;}
+.train-account h3{font-size: .4rem;color:#000;}
+.train-pay-box .choose-pay-box li{height:1rem;}
+.train-pay-box .pay-type{font-size:.3rem;}
+.train-pay-box .pay-type .iconfont{font-size: .3rem;vertical-align: top;margin-right: .1rem;}
+.train-pay-box .wxpay{color:#00b276;}
+.train-pay-box .alipay{color:#0180b7;}
+.choose-pay-box .choose-btn .iconfont:after{content:'\e6a8';color:#999;font-size: .34rem;}
+.choose-pay-box li.choosed .choose-btn .iconfont:after{content:'\e6a9';color:#B71C2D;font-size: .34rem;}
+.charge-success{height:3.2rem;}
+.charge-success .iconfont{font-size: 1.4rem;color:#B71C2D;line-height: 1.4rem;}
+.charge-success p{font-size: .34rem;line-height: .6rem;}
+.charge-success-box{background: #fff;height:1rem;padding:0 .3rem;}
