@@ -216,12 +216,14 @@ header{display:none;}
 .flex{display:-webkit-box;display:box;-webkit-box-align: center;-webkit-box-pack:start;}
 .flex_jusitify{-webkit-box-pack:justify;}
 .flex_center{-webkit-box-pack:center;}
+.box_start{-webkit-box-align: start;}
 .rmore{font-size: .28rem;}
 /*循环动画*/
 /*@-webkit-keyframes infinites{from{transform:scale(1);} to{transform:scale(0.8);}}
 @keyframes infinites{from{transform:scale(1);} to{transform:scale(0.8);}}
 .infinite{-webkit-animation: infinites .8s infinite alternate ease-in-out;animation: infinites .8s infinite alternate ease-in-out;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}*/
 /**/
+.smallarea{font-size: .26rem;}
 .r-ico{color:#999;font-size: 14px;}
 .list-line{overflow: hidden;clear:both;}
 .list-line li{float:left;}
