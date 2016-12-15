@@ -12,8 +12,6 @@
 		<link rel="stylesheet" type="text/css" href="../font/font1/iconfont.css"/>
 		<script src="../js/view.js"></script>
         <script src="../js/zepto.min.js"></script>
-        <script src="../js/loopScroll.js"></script>
-        <script src="../js/util.js"></script>
 	</head>
 	<body>
 		<header class='trainpage'>
@@ -29,19 +27,19 @@
 					<img src="../images/t-detail01.jpg" class="responseimg"/>
 				</div>
 				<div class="con">
-					<h3 class="nav-title">并购中对目标公司有哪些好的评估方法方法方法？</h3>
-					<div class="flex flex_jusitify">
+					<h3 class="nav-title">并购中对目标公司有哪些好的评估方法方法方法并购中对目标公司有哪些好的评估方法方法方？</h3>
+					<div class="flex flex_jusitify smallarea">
 						<div class="price color-items">￥888</div>
 						<div class="color-gray"><i>500</i>人预览</div>
 					</div>
 				</div>
 			</div>
 			<div class="train-intro-detail bgff mt20">
-				<div class="title flex flex_jusitify  inner">
+				<div class="title flex flex_jusitify  inner" id="down">
 					<h3 class="color-items">课程简述</h3>
 					<div class="iconfont r-ico">&#xe666;</div>
 				</div>
-				<div class="con inner">
+				<div class="con inner" id="con">
 					<p class='line2'>四大专业导师亲自授课，向你讲述并购中好的评估方法，帮助你在并购中少走弯路和简述简述简述简述简述简述</p>
 				</div>
 			</div>
@@ -53,7 +51,7 @@
 					<ul class="outerblock">
 						<li class="items">
 							<h3 class="course-title flex flex_jusitify">
-								<div class="left-info"><i class="serial ">01</i>并购中对目标公司有哪些好的评估方法</div>
+								<a class="eleblock left-info flex box_start"><i class="serial ">01</i><div>并购中对目标公司有哪些并购中对目标公司有哪些好的评估方法方法方好的评估方法</div></a>
 								<div class="iconfont r-ico">&#xe667;</div>
 							</h3>
 							<div class="couser-pro flex">
@@ -67,7 +65,7 @@
 						</li>
 						<li class="items">
 							<h3 class="course-title flex flex_jusitify">
-								<div class="left-info"><i class="serial ">02</i>并购中对目标公司有哪些好的评估方法</div>
+								<a class="eleblock  box_start left-info flex"><i class="serial ">02</i><div>并购中对目标公司有哪些好的评估方法</div></a>
 								<div class="iconfont r-ico">&#xe667;</div>
 							</h3>
 							<div class="couser-pro flex">
@@ -81,7 +79,7 @@
 						</li>
 						<li class="items read">
 							<h3 class="course-title flex flex_jusitify">
-								<div class="left-info"><i class="serial ">03</i>并购中对目标公司有哪些好的评估方法</div>
+								<a class="eleblock  box_start left-info flex"><i class="serial ">03</i><div>并购中对目标公司有哪些并购中对目标公司有哪些好的评估方法方法方好的评估方法</div></a>
 								<div class="iconfont r-ico">&#xe667;</div>
 							</h3>
 							<div class="couser-pro flex">
@@ -98,6 +96,69 @@
 			</div>
 		</div>
 		<div style="height:1rem;"></div>
-		<a href="booking-success.html" class="f-bottom">我要报名</a>
+		<a href="#this" class="f-bottom">我要报名</a>
+		<!--遮罩层-->
+		<div class="reg-shadow" style="display: none;">
+			<div class="flex flex_center fullwraper">
+				<div class="alert-booking">
+					<div class="tab-con-box tab-booking">
+								<div class="booking-items">
+									<div class="nav-title flex">
+										<div class="avatar">
+											<img src='../images/home-pic.png' class="responseimg"/>
+										</div>
+										<div class="avatar-info">
+											<h3 class="user-name"><span>陆涛</span></h3>
+											<div class="company-info">
+												<span>和灵资本</span> | 
+											    <span>创始人</span>
+											</div>
+										</div>
+										<div class="btn-booking color-items">订阅</div>
+									</div>
+									<div class="pro">
+										<p>陆涛为阿里巴巴集团CPO，肩负着持续发展集团架构、推动阿里巴巴集团价值观及文化建设的重任。自2010年1月起兼任支付宝CEO以来，她一直致力于将支付宝打造为全球最领先的支付平台。</p>
+									</div>
+								</div>
+						</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		<div class="charge-box charge-box-hide">
+			<div class="title">
+				<h3 class="nav-title  inner">并购中对目标公司有哪些好的评估方法并购中对目标公司有哪些好的评估方法？</h3>
+				<div class="iconfont closed">&#xe6b4;</div>
+			</div>
+			<ul class="outerblock">
+				<li>
+					<div class="items flex flex_jusitify">
+						<div class="left-info">支付总额：</div>
+						<div class="color-items">￥1000</div>
+					</div>
+					<div class="items flex flex_jusitify">
+						<div class="left-info">我的钱包：</div>
+						<div class="color-items">￥100</div>
+					</div>
+				</li>
+				<li>
+					<div class="items flex flex_jusitify">
+						<div class="left-info">还需充值：</div>
+						<div class="color-items">￥800</div>
+					</div>
+				</li>
+			</ul>
+			<div class="inner mt60">
+				<div class="btn-pay">
+					立即充值
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$('#down').on('tap',function(){
+				$('#con').find('p').removeClass('line2');
+			})
+		</script>
 	</body>
 </html>
