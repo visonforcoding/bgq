@@ -1409,20 +1409,20 @@ box-align:center;-webkit-box-align:center;}
 /*
  * 订阅
  */
-.booking-items{background: #fff;padding:.3rem;margin-bottom:.2rem;overflow: hidden;}
-.booking-items .avatar{width:.56rem;height:.56rem;overflow: hidden;border-radius: 50%;margin-right: .3rem;}
+.booking-items{background: #fff;padding:.2rem 0;margin-bottom:.1rem;overflow: hidden;}
+.booking-items .avatar{width:.8rem;height:.8rem;overflow: hidden;border-radius: 50%;margin-right: .3rem;}
 .booking-items .nav-title{font-size: 12px;color:#707070;}
-.booking-items .con{padding-left:.86rem;}
-.booking-items .con .title{margin-top:.2rem;line-height: 16px;font-size: 14px;text-align: justify;}
-.booking-items .con p{color:#707070;font-size: 12px;line-height: 15px;margin-top:.15rem;text-align: justify;word-break: break-all;}
-.booking-items .con .price{font-size: 14px;margin-top: .3rem;}
+.booking-items .con{padding-left:1.1rem;}
+.booking-items .con .title{margin-top:.1rem;line-height: .34rem;font-size:.3rem;text-align: justify;}
+.booking-items .con p{color:#707070;font-size: .26rem;line-height: .32rem;margin-top:.15rem;text-align: justify;word-break: break-all;}
+.booking-items .price{font-size: 14px;position: absolute;right:.3rem;line-height: .8rem;}
 
 /*培训 ---02*/
-.train-items-box .title{height:1rem;border-bottom:1px #ccc solid;}
-.train-items-box .title-box{height:1rem;font-size: .32rem;line-height: 1rem;}
-.train-items-box .title-box .ico{margin-left:-5px;}
+.train-common-title{height:1rem;border-bottom:1px #ccc solid;}
+.train-common-title .title-box{height:1rem;font-size: .32rem;line-height: 1rem;}
+.train-common-title .title-box .ico{margin-left:-5px;}
 .train-items-box .con{}
-.train-items-box .title-box .iconfont{color:#B71C2D;vertical-align: top;font-size: .3rem;}
+.train-common-title .title-box .iconfont{color:#B71C2D;vertical-align: top;font-size: .3rem;}
 .train-items-box .con .pic-news{width:1.92rem;height:1.84rem;overflow: hidden;position: absolute;}
 .train-items-box .con-right-info{padding-left:2.1rem;}
 .train-items-box .train-items{height:1.82rem;overflow: hidden;}
@@ -1435,14 +1435,16 @@ box-align:center;-webkit-box-align:center;}
 .train-items-box  .foot .marks{padding:.1rem .15rem;border-radius: 4px;border:1px #ccc solid;font-size: 12px;margin-top:-.12rem;}
 .trainpage{background: none;display: block;border-bottom: none;position: absolute;}
 .train-intro{width:100%;height:2.95rem;overflow: hidden;}
-.train-intro-box .con{padding:.4rem .3rem;color:#707070;}
+.train-intro-box .con{padding:.4rem .3rem;}
 .train-intro-detail{padding:.2rem 0;}
-.train-intro-box .con .nav-title{line-height: .34rem;font-size:.3rem;text-align: justify;word-break: break-all;margin-bottom:.4rem;}
+.train-intro-box .con .nav-title{line-height: .34rem;font-size:.3rem;text-align: justify;word-break: break-all;margin-bottom:.3rem;}
 .train-intro-detail .title{height:.8rem;}
 .train-intro-detail .con{padding-bottom:.2rem;}
-.train-intro-detail .con p{line-height: .36rem;}
+.train-intro-detail .con p{line-height: .36rem;color:#666;}
 .courselist .avatar{width:.56rem;height:.56rem;overflow: hidden;margin-right: .3rem;}
-.courselist .course-title{font-size: .3rem;line-height: .32rem;}
+.courselist .course-title{font-size: .3rem;line-height: .32rem;padding:.1rem 0;}
+.courselist .left-info{max-width: 80%;font-size: .3rem;}
+.courselist .left-info div{line-height: .34rem;}
 .courselist .course-title i{margin-right:.1rem;}
 .course .title{height:1rem;border-bottom:1px #efefef solid;}
 .courselist .couser-pro{padding:.2rem .3rem 0;font-size: .28rem;color:#707070;}
