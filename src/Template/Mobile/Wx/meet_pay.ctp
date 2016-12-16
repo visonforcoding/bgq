@@ -23,7 +23,8 @@
             <?php endif; ?>
         </ul>
     </div>
-    <a  id="submit"  class="nextstep"><?= $order_detail->price ?>元&nbsp;&nbsp;确认支付</a>
+    <a id="submit"  class="nextstep"><?= $order_detail->price ?>元&nbsp;&nbsp;确认支付</a>
+    <a id="submit"  class="nextstep">取消报名</a>
 </div>
 
 <?php $this->start('script') ?>

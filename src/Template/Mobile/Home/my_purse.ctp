@@ -1,16 +1,17 @@
-<header>
+<!--<header>
     <div class='inner'>
         <a href='#this' class='toback'></a>
         <h1>
             钱包
         </h1>
     </div>
-</header>
+</header>-->
 <div class="wraper">
     <div class="my-purse-info">
         <a href='javascript:void(0);'></a>
         <p>¥<i><?= $userInfo->money ?></i></p>
-        <a href="/home/withdraw" class="nextstep">提现</a>
+        <!--<a href="/home/withdraw" class="nextstep">提现</a>-->
+        <a href="/home/charge" class="nextstep">充值</a>
     </div>
     <ul class='pay-detail' id="flows">
         <li><h3 class="color-items">钱包明细</h3></li>
@@ -25,5 +26,4 @@
     </ul>
 </div>
 <?php $this->start('script') ?>
-<?php
-$this->end('script')?>
+<?php $this->end('script')?>
