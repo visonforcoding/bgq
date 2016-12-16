@@ -946,3 +946,136 @@ ALTER TABLE `binggq`.`activityapply`
 
 ALTER TABLE `binggq`.`subject_book`
   ADD COLUMN `sort_time` datetime NOT NULL COMMENT '回复更新时间（用于排序）' COMMENT '回复更新时间（用于排序）';
+
+#12.05
+ALTER TABLE `binggq`.`activityapply`
+  ADD COLUMN `verify_code` int(11) unsigned NULL DEFAULT NULL COMMENT '报名验证码',
+  ADD COLUMN `name` varchar(20) NULL DEFAULT NULL COMMENT '报名人姓名',
+  ADD COLUMN `phone` int(11) unsigned NULL DEFAULT NULL COMMENT '报名人电话',
+  ADD COLUMN `company` varchar(50) NULL DEFAULT NULL COMMENT '报名人公司',
+  ADD COLUMN `position` varchar(50) NULL DEFAULT NULL COMMENT '报名人职位',
+
+CREATE TABLE `course` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`title` VARCHAR(150) NOT NULL COMMENT '培训标题',
+	`abstract` text NOT NULL COMMENT '内容介绍',
+	`fee` FLOAT unsigned DEFAULT 0 COMMENT '培训费用',
+	`cover` VARCHAR(250) DEFAULT NULL COMMENT '封面',
+	`pic` VARCHAR(250) DEFAULT NULL COMMENT '详情页图片',
+	`bonus_fee` FLOAT COMMENT '优惠费用',
+	`bonus_start_time` DATETIME COMMENT '优惠开始时间',
+	`bonus_end_time` DATETIME COMMENT '优惠结束时间',
+	`comment_nums` INT(11) DEFAULT 0 COMMENT '评论数',
+	`read_nums` INT(11) DEFAULT 0 COMMENT '阅读数',
+	`class_nums` INT(11) DEFAULT 0 COMMENT '课程数',
+	`pay_nums` INT(11) DEFAULT 0 COMMENT '购买数',
+	`is_online` TINYINT(2) DEFAULT 0 COMMENT '是否上架',
+	`is_recom` TINYINT(2) DEFAULT 0 COMMENT '是否推荐',
+	`is_del` TINYINT(2) DEFAULT 0 COMMENT '是否删除',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	`update_time` DATETIME NOT NULL COMMENT '更新时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='培训表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `class` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`mentor_id` INT(11) NOT NULL COMMENT '导师id',
+	`course_id` INT(11) NOT NULL COMMENT '培训id',
+	`title` VARCHAR(150) NOT NULL COMMENT '课程标题',
+	`abstract` text NOT NULL COMMENT '课程介绍',
+	`class_period` VARCHAR(20) COMMENT '课程时长',
+	`audio` VARCHAR(250) NULL DEFAULT NULL COMMENT '音频',
+	`audio_title` VARCHAR(150) NULL DEFAULT NULL COMMENT '音频标题',
+	`pdf` VARCHAR(250) NULL DEFAULT NULL COMMENT '课件',
+	`is_free` TINYINT(2) DEFAULT 0 COMMENT '是否免费',
+	`is_del` TINYINT(2) DEFAULT 0 COMMENT '是否删除',
+	`sort` INT(11) NULL COMMENT '排序',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	`update_time` DATETIME NOT NULL COMMENT '更新时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='课程表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `mentor` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`avatar` VARCHAR(250) NOT NULL COMMENT '导师头像',
+	`name` VARCHAR(20) NOT NULL COMMENT '导师姓名',
+	`company` VARCHAR(50) NOT NULL COMMENT '导师公司',
+	`position` VARCHAR(50) NOT NULL COMMENT '导师职位',
+	`introduce` text NOT NULL COMMENT '导师介绍',
+	`subscribe_nums` INT(11) DEFAULT 0 COMMENT '订阅数',
+	`is_del` TINYINT(2) DEFAULT 0 COMMENT '是否删除',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	`update_time` DATETIME NOT NULL COMMENT '更新时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='导师表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `mentor_subscribe` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`uid` INT(11) NOT NULL COMMENT '用户id',
+	`mentor_id` INT(11) NOT NULL COMMENT '导师id',
+	`is_del` INT(11) NOT NULL DEFAULT 0 COMMENT '是否已取消订阅',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	`update_time` DATETIME NOT NULL COMMENT '更新时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='导师订阅表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `course_apply` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NOT NULL COMMENT '报名用户',
+	`course_id` INT(11) NOT NULL COMMENT '培训id',
+	`star` TINYINT(1) DEFAULT NULL COMMENT '评价星数',
+	`is_pay` TINYINT(2) DEFAULT 0 COMMENT '是否已付款',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	`update_time` DATETIME NOT NULL COMMENT '更新时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='培训报名表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `class_learn` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`uid` INT(11) NOT NULL COMMENT '用户id',
+	`class_id` INT(11) NOT NULL COMMENT '课程id',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='课程是否已学表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `recharge_gift` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`recharge_money` INT(11) NOT NULL COMMENT '充值金额',
+	`gift` INT(11) NOT NULL COMMENT '充值赠送金额',
+	PRIMARY KEY (`id`)
+)
+COMMENT='充值套餐表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+
+ALTER TABLE `binggq`.`activity`
+  ADD COLUMN `bonus_start_time` DATETIME NULL DEFAULT NULL COMMENT '报名优惠开始时间',
+  ADD COLUMN `bonus_end_time` DATETIME NULL DEFAULT NULL COMMENT '报名优惠结束时间',
+  ADD COLUMN `bonus_fee` Float NULL DEFAULT NULL COMMENT '优惠费用' AFTER `apply_fee`,
+  ADD COLUMN `bonus_triple_fee` Float NULL DEFAULT NULL COMMENT '多人行优惠费用' AFTER `triple_fee`,
+  ADD COLUMN `multi_nums` Float NULL DEFAULT NULL COMMENT '多人行的数量';
+
+ALTER TABLE `binggq`.`order`
+  CHANGE COLUMN `type` `type` tinyint(3) NOT NULL DEFAULT 1 COMMENT '订单类型1约见2活动3培训' COMMENT '订单类型1约见2活动3培训';
+
+ALTER TABLE `binggq`.`order`
+  CHANGE COLUMN `paytype` `paytype` tinyint(3) NULL DEFAULT 0 COMMENT '实际支付方式：1微信2支付宝3余额' COMMENT '实际支付方式：1微信2支付宝3余额';
+
