@@ -1490,3 +1490,27 @@ box-align:center;-webkit-box-align:center;}
 .charge-success .iconfont{font-size: 1.4rem;color:#B71C2D;line-height: 1.4rem;}
 .charge-success p{font-size: .34rem;line-height: .6rem;}
 .charge-success-box{background: #fff;height:1rem;padding:0 .3rem;}
+.train-entroll-type .entroll-box{height:2.6rem;color:#B71C2D;font-size: .3rem;background: #fff;}
+.train-entroll-type .entroll-box .iconfont{font-size: 1rem;line-height: 1.2rem;}
+.btn-active{padding:.15rem .2rem;background: #B71C2D;color:#fff;border:1px #B71C2D solid;border-radius: 2px;display: block;margin-right:1.4rem;}
+.btn-common{padding:.15rem .2rem;border:1px #e5e5e5 solid;border-radius: 2px;display: block;}
+.train-btn-group{padding-bottom:.4rem;border-bottom:1px #efefef solid;}
+.more-train{padding-bottom:.8rem;}
+.more-train .train-news{width:3.2rem;height:2.1rem;overflow: hidden;}
+.more-train li{margin-right: .3rem;margin-top:.3rem;overflow: hidden;width:3.2rem;}
+.more-train li:nth-of-type(2n){margin-right: 0;}
+.more-train li h3{min-height: .4rem;line-height: .32rem;margin-top: .2rem;margin-bottom:.1rem;font-size: .28rem;}
+.more-train .nav-title{line-height: .6rem;color:#707070;padding-top:.3rem;}
+.detail-course-box .title{padding:.4rem .3rem 0;}
+.detail-course-box .title{line-height: .36rem;}
+.train-audio-box .title{height:1rem;line-height: 1rem;padding:0 .3rem;font-size: .3rem;}
+.train-audio-box{padding-bottom:.2rem;}
+.audio-box{width:6.8rem;box-shadow: 1px 1px 10px rgba(0,0,0,.2);margin:.2rem auto;border-radius: 4px;padding:.2rem .2rem .5rem;}
+.audio-box .audio-info{height:1rem;}
+.audio-box .playbtn:after{content: '\e673';color:#B71C2D;font-size: .6rem;}
+.audio-box .playbtn.active:after{content:'\e674'}
+.audio-box  .duration{font-size: .28rem;color:#707070;}
+.bar-progress{width:100%;position: relative;}
+.bar-progress .range{height:6px;top:0;width:5rem;position: absolute;width:100%;background: #c2c2c4;-webkit-appearance: none;border-radius: 5px;left:0;}
+.bar-progress .range::-webkit-slider-thumb{width:20px;height:20px;border-radius:50%;box-shadow:1px 1px 5px rgba(0,0,0,.5);-webkit-appearance: none;background: #B71C2D;}
+.bar-progress .play-line{position: absolute;left:0;top:2px;right:200px;height:6px;background: #B71C2D;border-radius: 5px;}
