@@ -250,8 +250,8 @@ class MeetController extends AppController {
                 }, 'SubjectBooks'=>function($q)use($user_id){
                     return $q
                             ->where(['or'=>[
-                                ['SubjectBooks.status'=>1, 'SubjectBooks.user_id'=>$user_id],
-                                ['SubjectBooks.status'=>0, 'SubjectBooks.user_id'=>$user_id]
+                                ['SubjectBooks.status'=>1, 'SubjectBooks.user_id'=>$user_id, 'SubjectBooks.is_done'=>0],
+                                ['SubjectBooks.status'=>0, 'SubjectBooks.user_id'=>$user_id, 'SubjectBooks.is_done'=>0]
                             ]])
                             ->order(['SubjectBooks.create_time'=>'desc']);
                 }])
