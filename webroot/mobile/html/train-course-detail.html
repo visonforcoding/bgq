@@ -1,141 +1,140 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="format-detection"content="telephone=no, email=no" />
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-		<title>并购帮-课程详情</title>
-		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
-		<script src="../js/view.js"></script>
+    <head>
+        <meta charset="utf-8">
+        <meta name="format-detection"content="telephone=no, email=no" />
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <title>并购帮-课程详情</title>
+        <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+        <script src="../js/view.js"></script>
         <script src="../js/zepto.min.js"></script>
-	</head>
-	<body>
-		<header>
-			<div class='inner'>
-				<a href='javascript:history.go(-1);' class='toback'></a>
-				<!--<h1>培训详情</h1>-->
-				<!--<a href="#this" class='iconfont news-serch h-regiser'>&#xe613;</a>-->
-			</div>
-		</header>
-		<div class="wraper">
-			<div class="detail-course-box bgff">
-				<div class="title">
-					<h3 class="color-items"><span>01</span> 并购中的评估方</h3>
-				</div>
-				<div class="tab-con-box tab-booking inner">
-				<div class="booking-items">
-					<div class="nav-title flex">
-						<div class="avatar">
-							<img src='../images/home-pic.png' class="responseimg"/>
-						</div>
-						<div class="avatar-info">
-							<span>陆涛</span> | 
-							<span>和灵资本</span> | 
-							<span>创始人</span>
-						</div>
-					</div>
-				</div>
-				</div>
-			</div>
-			<div class="train-intro-detail bgff mt20">
-				<div class="title flex flex_jusitify  inner" id="down">
-					<h3 class="color-items">课程简述</h3>
-					<div class="iconfont r-ico">&#xe666;</div>
-				</div>
-				<div class="con inner" id="con">
-					<p class='line2'>四大专业导师亲自授课，向你讲述并购中好的评估方法，帮助你在并购中少走弯路和简述简述简述简述简述简述</p>
-				</div>
-			</div>
-			<div class="train-audio-box bgff mt20">
-				<div class="title">
-					音频资料
-				</div>
-				<div class="con">
-					<div class="audio-box">
-						<div class="audio-info flex flex_jusitify">
-							<div class="playbtn iconfont" id="play"></div>
-							<div class="duration"><i id="cur">00:00</i>/<i id="duration">00:00</i></div>
-						</div>
-						<div class="audio-bar">
-							<div class="bar-progress">
-								<input type="range" class="range" id="range" value="0"/>
-								<audio id="audio" class="myMusic" height='1' width='1' preload="auto">
-									<source src="../mp3/2016-08-16/57b2ef22c8be3.mp3"></source>
-								</audio>
-								<div class="play-line" id="play-line"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<script type="text/javascript">
-			function fixedSeconds(value) {
-                var hs='', ms='', ss='', n = parseInt(value), h=parseInt(n/3600), m=parseInt(n/60)%60, s=parseInt(n%60);
-                hs = h>0 ? h+':' : '';
-                ms = m>0 ? (h >0&&m<10?'0':'')+m+':' : '0:';
-                ms = m==0 && h>0 ? '00:' : ms;
-                ss = s>0 ? (s<10?'0':'')+s: '00';
-                return hs+ms+ss;
+    </head>
+    <body>
+        <header>
+            <div class='inner'>
+                <a href='javascript:history.go(-1);' class='toback'></a>
+                <!--<h1>培训详情</h1>-->
+                <!--<a href="#this" class='iconfont news-serch h-regiser'>&#xe613;</a>-->
+            </div>
+        </header>
+        <div class="wraper">
+            <div class="detail-course-box bgff">
+                <div class="title">
+                    <h3 class="color-items"><span>01</span> 并购中的评估方</h3>
+                </div>
+                <div class="tab-con-box tab-booking inner">
+                    <div class="booking-items">
+                        <div class="nav-title flex">
+                            <div class="avatar">
+                                <img src='../images/home-pic.png' class="responseimg"/>
+                            </div>
+                            <div class="avatar-info">
+                                <span>陆涛</span> | 
+                                <span>和灵资本</span> | 
+                                <span>创始人</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="train-intro-detail bgff mt20">
+                <div class="title flex flex_jusitify  inner" id="down">
+                    <h3 class="color-items">课程简述</h3>
+                    <div class="iconfont r-ico">&#xe666;</div>
+                </div>
+                <div class="con inner" id="con">
+                    <p class='line2'>四大专业导师亲自授课，向你讲述并购中好的评估方法，帮助你在并购中少走弯路和简述简述简述简述简述简述</p>
+                </div>
+            </div>
+            <div class="train-audio-box bgff mt20">
+                <div class="title">
+                    音频资料
+                </div>
+                <div class="con">
+                    <div class="audio-box">
+                        <div class="audio-info flex flex_jusitify">
+                            <div class="playbtn iconfont" id="play"></div>
+                            <div class="duration"><i id="cur">00:00</i>/<i id="duration">00:00</i></div>
+                        </div>
+                        <div class="audio-bar">
+                            <div class="bar-progress">
+                                <input type="range" class="range" id="range" value="0"/>
+                                <audio id="audio" class="myMusic" height='1' width='1' preload="auto">
+                                    <source src="../mp3/2016-08-16/57b2ef22c8be3.mp3"></source>
+                                </audio>
+                                <div class="play-line" id="play-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function fixedSeconds(value) {
+                var hs = '', ms = '', ss = '', n = parseInt(value), h = parseInt(n / 3600), m = parseInt(n / 60) % 60, s = parseInt(n % 60);
+                hs = h > 0 ? h + ':' : '';
+                ms = m > 0 ? (h > 0 && m < 10 ? '0' : '') + m + ':' : '0:';
+                ms = m == 0 && h > 0 ? '00:' : ms;
+                ss = s > 0 ? (s < 10 ? '0' : '') + s : '00';
+                return hs + ms + ss;
             }
-			var wid = $('#range').width();
-			var timer=null;
-			var audio = $('#audio').get(0);
-			var cur = audio.currentTime;
-			var dur = audio.duration;
-			var rightLength = wid - (wid*cur)/dur+'px';
-			$('#play-line').css('right',wid);
-			$('#play').on('click',function(){
-				audio = $('#audio').get(0);
-				dur = audio.duration;
-				cur = audio.currentTime;
-				console.log(cur);
-				$('#duration').html(fixedSeconds(dur));
-				$('#cur').html(fixedSeconds(cur));
-				$('#range').attr('max',dur);
-				$('#range').val(cur);
-				wid = $('#range').width();
-				rightLength = wid - (wid*cur)/dur+'px';
-				$('#play-line').css('right',rightLength);
-				
-				audio.onended = function(){
-                        audio.pause();
-                       $('#play').removeClass('active');
-                        clearInterval(timer);
-                    }
-				if($(this).hasClass('active')){
-					 audio.pause();
-					 $(this).removeClass('active');
-					 
-				}else{
-					 audio.play();
-					 $(this).addClass('active');
-					 timer=setInterval(function(){
-					 	$('#range').on('input',function(){
-							audio = $('#audio').get(0);
-							cur = $(this).val();
-							console.log(cur);
-							$('#cur').html(fixedSeconds($(this).val()));
-							$("#range").val(this.value);
-							rightLength = wid - (wid*cur)/dur+'px';
-							$('#play-line').css('right',rightLength);
-						})
-					 	dur = audio.duration;
-					 	cur = audio.currentTime;
-					 	console.log(cur);
-					 	$('#duration').html(fixedSeconds(dur));
-						$('#cur').html(fixedSeconds(cur));
-						$('#range').val(cur);
-						rightLength = wid - (wid*cur)/dur+'px';
-						$('#play-line').css('right',rightLength);
-						
-					 },1000)
-				}
-			});
-			
-		</script>
-	</body>
+            var wid = $('#range').width();
+            var timer = null;
+            var audio = $('#audio').get(0);
+            var cur = audio.currentTime;
+            var dur = audio.duration;
+            var rightLength = wid - (wid * cur) / dur + 'px';
+            $('#play-line').css('right', wid);
+            $('#play').on('click', function () {
+                audio = $('#audio').get(0);
+                dur = audio.duration;
+                cur = audio.currentTime;
+                $('#duration').html(fixedSeconds(dur));
+                $('#cur').html(fixedSeconds(cur));
+                $('#range').attr('max', dur);
+                $('#range').val(cur);
+                wid = $('#range').width();
+                rightLength = wid - (wid * cur) / dur + 'px';
+                $('#play-line').css('right', rightLength);
+
+                audio.onended = function () {
+                    audio.pause();
+                    $('#play').removeClass('active');
+                    clearInterval(timer);
+                }
+                if ($(this).hasClass('active')) {
+                    audio.pause();
+                    $(this).removeClass('active');
+
+                } else {
+                    audio.play();
+                    $(this).addClass('active');
+                    timer = setInterval(function () {
+                        $('#range').on('input', function () {
+                            audio = $('#audio').get(0);
+                            cur = $(this).val();
+                            audio.currentTime = cur;
+                            console.log(cur);
+                            $('#cur').html(fixedSeconds($(this).val()));
+                            $("#range").val(this.value);
+                            rightLength = wid - (wid * cur) / dur + 'px';
+                            $('#play-line').css('right', rightLength);
+                        })
+                        dur = audio.duration;
+                        cur = audio.currentTime;
+                        $('#duration').html(fixedSeconds(dur));
+                        $('#cur').html(fixedSeconds(cur));
+                        $('#range').val(cur);
+                        rightLength = wid - (wid * cur) / dur + 'px';
+                        $('#play-line').css('right', rightLength);
+
+                    }, 1000)
+                }
+            });
+
+        </script>
+    </body>
 </html>
