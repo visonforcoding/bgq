@@ -1512,5 +1512,7 @@ box-align:center;-webkit-box-align:center;}
 .audio-box  .duration{font-size: .28rem;color:#707070;}
 .bar-progress{width:100%;position: relative;}
 .bar-progress .range{height:6px;top:0;width:5rem;position: absolute;width:100%;background: #c2c2c4;-webkit-appearance: none;border-radius: 5px;left:0;}
-.bar-progress .range::-webkit-slider-thumb{width:20px;height:20px;border-radius:50%;box-shadow:1px 1px 5px rgba(0,0,0,.5);-webkit-appearance: none;background: #B71C2D;}
+.bar-progress .range::-webkit-slider-thumb{width:20px;height:20px;border-radius:50%;box-shadow:1px 1px 5px rgba(0,0,0,.1);-webkit-appearance: none;background: #B71C2D;}
 .bar-progress .play-line{position: absolute;left:0;top:2px;right:200px;height:6px;background: #B71C2D;border-radius: 5px;}
+.train-intro-detail .ppt-box img{max-width: 100%;height:auto;margin:.1rem auto;display: block;}
+.train-intro-detail .ppt-box{}
