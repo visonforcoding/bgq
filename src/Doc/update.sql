@@ -989,7 +989,7 @@ CREATE TABLE `class` (
 	`class_period` VARCHAR(20) COMMENT '课程时长',
 	`audio` VARCHAR(250) NULL DEFAULT NULL COMMENT '音频',
 	`audio_title` VARCHAR(150) NULL DEFAULT NULL COMMENT '音频标题',
-	`pdf` VARCHAR(250) NULL DEFAULT NULL COMMENT '课件',
+	`zip` VARCHAR(250) NULL DEFAULT NULL COMMENT '课件',
 	`is_free` TINYINT(2) DEFAULT 0 COMMENT '是否免费',
 	`is_del` TINYINT(2) DEFAULT 0 COMMENT '是否删除',
 	`sort` INT(11) NULL COMMENT '排序',
@@ -1078,4 +1078,22 @@ ALTER TABLE `binggq`.`order`
 
 ALTER TABLE `binggq`.`order`
   CHANGE COLUMN `paytype` `paytype` tinyint(3) NULL DEFAULT 0 COMMENT '实际支付方式：1微信2支付宝3余额' COMMENT '实际支付方式：1微信2支付宝3余额';
+
+ALTER TABLE `binggq`.`order`
+  ADD COLUMN `gift` int(11) unsigned NOT NULL DEFAULT 0 COMMENT '赠送金额' COMMENT '赠送金额';
+
+CREATE TABLE `class_pic`(
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`class_id` INT(11) NOT NULL COMMENT '课程id',
+	`pic` VARCHAR(250) NOT NULL COMMENT '图片地址',
+	`sort` INT(11) COMMENT '排序',
+	`create_time` DATETIME NOT NULL COMMENT '创建时间',
+	PRIMARY KEY(`id`)
+)
+COMMENT='课程图片'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+ALTER TABLE `binggq`.`flow`
+  ADD COLUMN `is_gift` tinyint(2) unsigned NOT NULL DEFAULT 0 COMMENT '是否赠送' COMMENT '是否赠送';
 

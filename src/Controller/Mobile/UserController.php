@@ -927,6 +927,9 @@ class UserController extends AppController {
         }
     }
     
+    /**
+     * 国外注册
+     */
     public function foreignRegister(){
         if($this->request->is('post')){
             $data = $this->request->data;
@@ -945,5 +948,19 @@ class UserController extends AppController {
         $this->set([
             'pageTitle' => '并购帮-国外用户注册'
         ]);
+    }
+    
+    /**
+     * 获取用户钱包余额
+     */
+    public function getWallet(){
+        $this->handCheckLogin();
+        if($this->request->is('post')){
+            $UserTable = \Cake\ORM\TableRegistry::get('User');
+            $user = $UserTable->get($this->user->id, [
+                'fields' => ['money']
+            ]);
+            return $this->Util->ajaxReturn(true, '', $user->money);
+        }
     }
 }

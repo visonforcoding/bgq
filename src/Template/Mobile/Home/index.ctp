@@ -24,10 +24,12 @@
         </ul>
     </div>
     <ul class="h-home-menu navlist clearfix">
-        <li><a href="/home/my-following" class="clickbtn"><i class="iconfont">&#xe614;</i>我的关注</a></li>
+        <li><a href="/course/pay-course" class="clickbtn"><i class="iconfont">&#xe6ad;</i>我的培训</a></li>
         <li><a href="/home/my-activity-submit" class="clickbtn mtips"><i class="iconfont">&#xe617;</i>我的活动<span id='activityMsg'></span></a></li>
         <li><a href="/home/my-collect-activity" class="clickbtn"><i class="iconfont">&#xe615;</i>我的收藏</a></li>
         <li><a href="/meet/chat-list" class="clickbtn mtips"><i class="iconfont">&#xe616;</i>我的约见<span id="meetMsg"></span></a></li>
+        <li><a href="/home/my-purse" class="clickbtn"><i class="iconfont">&#xe620;</i>我的钱包<span></span></a></li>
+        <li></li>
     </ul>
     <!--分类一-->
 
@@ -61,7 +63,7 @@
 <script type="text/html" id="userTpl">
     <div class='inner h-home-top'>
         <a href='/home/my-message-fans'><div class="iconfont share" style='width:.4rem;'>&#xe625;{#hasMsg#}</div>
-            
+
         </a>
         <!--<h1>个人中心</h1>-->
         {#setUp#}
@@ -77,8 +79,12 @@
         <h3>{#truename#}
             {#v#}
         </h3>
-        <div class="info-desc"><span><i class='iconfont'>&#xe62a;</i>{#company#}</span><span><i class='iconfont'>&#xe612;</i>{#position#}</span></div>
+        <div class="info-desc">
+            <span><!--<i class='iconfont'>&#xe62a;</i>-->{#company#}</span>
+            <span><!--<i class='iconfont'>&#xe612;</i>-->{#position#}</span>
+        </div>
     </a>
+    <div class="home-focus"><span>关注 <i id="attention">0</i></span> | <span>粉丝 <i id='fans'>0</i></span></div>
 </script>
 <script type="text/html" id='defaultTpl'>
     <div class='inner h-home-top'>
@@ -171,6 +177,8 @@
                     }
                     $('#personal_file').attr('href', '/user/home-page/' + res.data.user.id);
                     $('.clickbtn').unbind('click');
+                    $('#fans').html(res.data.fans);
+                    $('#attention').html(res.data.follows);
                 } else {
                     $('#avatar').attr('src', '/mobile/images/touxiang.png');
                     $('#loginBtn').css("visibility","visible");

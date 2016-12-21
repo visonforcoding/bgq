@@ -51,7 +51,7 @@
                                 ['类型', '链接地址', '备注说明', '创建时间', '操作'],
                         colModel: [
                             {name: 'type', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
-                                    var types = {'1': '资讯', '2': '活动', '3': '大咖'};
+                                    var types = {'1': '资讯', '2': '活动', '3': '大咖', '4': '培训'};
                                     return types[cellvalue];
                                 }},
                             {name: 'url', editable: true, align: 'center',formatter:function(cell,opt,row){

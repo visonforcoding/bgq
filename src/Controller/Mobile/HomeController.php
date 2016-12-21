@@ -88,7 +88,14 @@ class HomeController extends AppController {
         if($unReadMeet || $unReadChat){
             $meetMsg = true;
         }
-        $res = compact('user', 'isWx', 'hasMsg', 'activityMsg', 'meetMsg');
+        $FansTable = \Cake\ORM\TableRegistry::get('UserFans');
+        $follows = $FansTable->find()->contain(['Followings'=>function($q){
+            return $q->where(['enabled'=>1, 'is_del'=>0]);
+        }])->where(['user_id'=>$user_id])->count('id');
+        $fans = $FansTable->find()->contain(['Users'=>function($q){
+            return $q->where(['enabled'=>1, 'is_del'=>0]);
+        }])->where(['following_id'=>$user_id])->count('id');
+        $res = compact('user', 'isWx', 'hasMsg', 'activityMsg', 'meetMsg', 'follows', 'fans');
         return $this->Util->ajaxReturn(['status'=>true, 'data'=>$res]);
     }
 
@@ -984,7 +991,10 @@ class HomeController extends AppController {
         $user_id = $this->user->id;
         $userInfo = $this->User->get($user_id);
         $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
-        $flows = $FlowTable->find()->where(['user_id' => $user_id])->orderDesc('create_time')->toArray();
+        $flows = $FlowTable->find()->where(['or'=>[
+            'user_id' => $user_id,
+            'buyer_id' => $user_id
+        ]])->orderDesc('create_time')->toArray();
         $this->set(array(
             'userInfo' => $userInfo,
             'flows' => $flows,

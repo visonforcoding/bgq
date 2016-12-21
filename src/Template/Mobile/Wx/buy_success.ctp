@@ -1,4 +1,4 @@
-<div class="wraper bgff">
+<div class="wraper bgff fullwraper">
     <div class="train-entroll-type">
         <div class="flex flex_center entroll-box">
             <div class="aligncenter">

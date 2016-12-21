@@ -1,7 +1,7 @@
 <div class="wraper">
     <div class="train-pay-box">
         <div class="train-account bgff">
-            <h3>充值<?= $money ?>元</h3>
+            <h3>充值<?= $order->price ?>元</h3>
         </div>
         <ul class="choose-pay-box outerblock bgff mt20">
             <li class="flex flex_jusitify choosed pay" payMethod="wx">
@@ -42,7 +42,7 @@
                         if (res == '0') {
                             $.util.alert('支付成功');
                             setTimeout(function () {
-                                window.location.href = '/buy/buy-success/';
+                                window.location.href = '/wx/buy-success/';
                             }, 1000);
                         } else {
                             $.util.alert('支付未成功');
@@ -95,8 +95,8 @@
                 'getBrandWCPayRequest',
                 <?= json_encode($jsApiParameters) ?>,
                 function (res) {
-                    alert(res.err_msg);
-                    if (res.err_msg == "get_brand_wcpay_request：ok") {
+                    alert(JSON.stringify(res));
+                    if (res.err_msg == "get_brand_wcpay_request:ok") {
                         $.util.alert('支付成功');
                         setTimeout(function () {
                             window.location.href = '/wx/buy-success/<?= $order->id ?>';

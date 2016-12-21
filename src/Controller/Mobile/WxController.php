@@ -9,6 +9,7 @@ use App\Controller\Mobile\AppController;
  *
  * @property \App\Model\Table\UserTable $User
  * @property \App\Controller\Component\WxComponent $Wx
+ * @property \App\Controller\Component\BussinessComponent $Bussiness
  * @property \App\Controller\Component\WxpayComponent $Wxpay
  * @property \App\Controller\Component\AlipayComponent $Alipay
  */
@@ -170,8 +171,9 @@ class WxController extends AppController {
      * 预约支付页  此页面URL 需在微信公众号的微信支付那里配置 支付域
      * @param int $id  订单id
      */
-    public function meetPay($id = null) {
+    public function meetPay($id = null, $is_charge=NULL) {
         $this->handCheckLogin();
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
         $theorder = $OrderTable->get($id);
         $type = $theorder->type;
@@ -182,7 +184,9 @@ class WxController extends AppController {
             $body = '预约话题《' . $order->subject_book->subject->title . '》支付';
             $title = '并购帮-预约话题';
             $order_detail = $order->subject_book->subject;
-        } else {
+            $order_detail->price = $order->price;
+            $order_detail->type = $type;
+        } elseif($type == 2) {
             $order = $OrderTable->get($id, [
                 'contain' => ['Activityapplys', 'Activityapplys.Activities']
             ]);
@@ -200,13 +204,17 @@ class WxController extends AppController {
             }
             $title = '并购帮-活动报名';
             $order_detail = $order->activityapply->activity;
+            $order_detail->price = $order->price;
+            $order_detail->type = $type;
+        } elseif($type == 3){
+            $order = $OrderTable->get($id);
+            $title = '充值余额';
+            $body = '充值余额';
         }
-        $order_detail->price = $order->price;
-        $order_detail->type = $type;
+        
         $out_trade_no = $order->order_no;
 //        $openid = $this->user->wx_openid;
 //        \Cake\Log\Log::error('数据库openid为:'.$openid,'devlog');
-        $UserTable = \Cake\ORM\TableRegistry::get('User');
         $user = $UserTable->get($this->user->id);
         $openid = $user->wx_openid;
         if(!$openid&&!$this->request->session()->check('Pay.getopenid')){
@@ -221,7 +229,7 @@ class WxController extends AppController {
             $user->union_id = $res->unionid;
             $UserTable->save($user);
         }
-        
+
         $fee = $order->price;  //支付金额(分)
         $this->loadComponent('Wxpay');
         $isApp = false;
@@ -233,7 +241,7 @@ class WxController extends AppController {
             $this->loadComponent('Alipay');
             $aliPayParameters = $this->Alipay->setPayParameter($out_trade_no, $title, $fee, $body);
         }
-        
+
         if ($openid) {
             $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, null, $isApp);
         }
@@ -245,6 +253,9 @@ class WxController extends AppController {
 
         $this->set(['pageTitle' => '订单支付']);
         $this->set(compact('order_detail', 'order'));
+        if($order->type == 3){
+            $this->render('pay');
+        }
     }
 
     /**
@@ -277,7 +288,7 @@ class WxController extends AppController {
                 'contain' => ['SubjectBook', 'SubjectBook.Subjects']
             ]);
             $body = '预约话题《' . $order->subject_book->subject->title . '》支付';
-        } else {
+        } elseif($order->type == 2) {
             $order = $OrderTable->get($id, [
                 'contain' => ['Activityapplys', 'Activityapplys.Activities']
             ]);
@@ -399,6 +410,11 @@ class WxController extends AppController {
         }
     }
 
+    /**
+     * 下载
+     * @param type $controller 控制器
+     * @param type $id 关联id
+     */
     public function shareDownload($controller = null, $id = null) {
         if ($controller && $id) {
             if ($controller == 'news') {
@@ -409,6 +425,8 @@ class WxController extends AppController {
                 $url = '/meet/view/' . $id;
             } elseif ($controller == 'beauty'){
                 $url = '/beauty/homepage/' . $id;
+            } elseif ($controller == 'course'){
+                $url = '/course/detail/' . $id;
             }
         } else {
             $url = '/meet/index';
@@ -416,6 +434,144 @@ class WxController extends AppController {
         $this->set([
             'pageTitle' => '下载并购帮',
             'url' => $url,
+        ]);
+    }
+    
+    /**
+     * 直接购买
+     */
+    public function buy(){
+        $this->handCheckLogin();
+        if($this->request->is('post')){
+            $course_id = $this->request->data('course_id');
+            $user_id = $this->user->id;
+            $CourseTable = \Cake\ORM\TableRegistry::get('Course');
+            $course = $CourseTable->get($course_id);
+            $UserTable = \Cake\ORM\TableRegistry::get('User');
+            $user = $UserTable->get($user_id);
+            $platform = $UserTable->get('-1');
+            $CourseApplyTable = \Cake\ORM\TableRegistry::get('CourseApply');
+            $courseApply = $CourseApplyTable->newEntity([
+                'course_id' => $course_id,
+                'user_id' => $user_id,
+                'is_pay' => 1
+            ]);
+            $courseApply = $CourseApplyTable->save($courseApply);
+            if(!$courseApply){
+                return $this->Util->ajaxReturn(false, '系统错误');
+            }
+            $courseApply->is_pay = 1;
+            $pre_amount = $platform->money;
+            $user->money -= $course->fee;    //余额-
+            $platform->money += $course->fee;
+            $course->pay_nums += 1;    // 报名次数+1
+            $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+            $flow = $FlowTable->newEntity([
+                'user_id' => -1,
+                'buyer_id'=>$user_id,
+                'type' => 3, // 培训
+                'relate_id' => $courseApply->id,   //关联的订单id
+                'type_msg' => '培训收入',
+                'income' => 1,
+                'amount' => $course->fee,
+                'price'=>$course->fee,
+                'pre_amount' => $pre_amount,
+                'paytype'=>3,
+                'after_amount' => $user->money,
+                'status' => 1,
+                'remark' => '购买培训《'.$course->title.'》'
+            ]);
+            $tran = $FlowTable->connection()->transactional(function()use($UserTable, $user, $platform, $FlowTable, $flow){
+                return $UserTable->save($user) && $UserTable->save($platform) && $FlowTable->save($flow);
+            });
+            if($tran){
+                $this->loadComponent('Business');
+                $this->Business->usermsg('-1', $user->id, '您成功购买了此培训', '', 11, $course->id, '/course/detail/'.$course->id);
+                return $this->Util->ajaxReturn(true, '购买成功', $course_id);
+            } else {
+                return $this->Util->ajaxReturn(false, '购买失败');
+            }
+        }
+    }
+    
+    public function buySuccess($id=NULL){
+        $CourseTable = \Cake\ORM\TableRegistry::get('Course');
+        $course = $CourseTable->find()
+                ->where(['Course.is_del'=>0, 'Course.is_recom'=>1, 'Course.id !='=>$id])
+                ->limit(4)
+                ->order('rand()')
+                ->toArray();
+        $this->set([
+            'pageTitle' => '购买成功',
+            'course' => $course,
+            'course_id' => $id
+        ]);
+    }
+    
+    /**
+     * 充值
+     */
+    public function charge(){
+        $RechargeGiftTable = \Cake\ORM\TableRegistry::get('RechargeGift');
+        $gift = $RechargeGiftTable->find()->order(['recharge_money'=>'asc'])->all()->toArray();
+        $this->set([
+            'pageTitle'=>'充值',
+            'gift' => $gift
+        ]);
+    }
+    
+    public function pay($money){
+        $this->handCheckLogin();
+        $OrderTable = \Cake\ORM\TableRegistry::get('Order');
+        $order = $OrderTable->newEntity([
+            'type' => 3, // 类型为充值
+            'relate_id' => 0, //充值
+            'user_id' => $this->user->id,
+            'seller_id' => $this->user->id,     //活动报名的收入 固定给-1 的用户
+            'order_no' => time() . $this->user->id . createRandomCode(4, 1),
+            'fee' => 0, // 实际支付的默认值
+            'price' => $money,
+            'remark' => '充值余额'
+        ]);
+        $order = $OrderTable->save($order);
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $user = $UserTable->get($this->user->id);
+        $openid = $user->wx_openid;
+        if(!$openid&&!$this->request->session()->check('Pay.getopenid')){
+            \Cake\Log\Log::error('数据库openid为空重新获取openid','devlog');
+            $this->request->session()->write('Pay.getopenid',true);
+            $this->Wx->getUserJump(true, true);
+        }
+        if($code=$this->request->query('code')){
+            $res = $this->Wx->getUser($code);
+            $openid = $res->openid;
+            $user->wx_openid = $openid;
+            $user->union_id = $res->unionid;
+            $UserTable->save($user);
+        }
+        $this->loadComponent('Wxpay');
+        $isApp = false;
+        $aliPayParameters = '';
+        $jsApiParameters = '';
+        if ($this->request->is('lemon')) {
+            $isApp = true;
+            $openid = $this->user->app_wx_openid;
+            $this->loadComponent('Alipay');
+            $aliPayParameters = $this->Alipay->setPayParameter($order->order_no, '并购帮-充值余额', $money, '并购帮-充值余额');
+        }
+        
+        if ($openid) {
+            $jsApiParameters = $this->Wxpay->getPayParameter('并购帮-充值余额', $openid, $order->order_no, $money, null, $isApp);
+        }
+        $this->set(array(
+            'jsApiParameters' => $jsApiParameters,
+            'isWx' => $this->request->is('weixin') ? true : false,
+            'aliPayParameters' => $aliPayParameters,
+        ));
+        $this->set([
+            'pageTitle'=>'支付',
+            'money' => $money,
+            'order'=>$order
         ]);
     }
 
