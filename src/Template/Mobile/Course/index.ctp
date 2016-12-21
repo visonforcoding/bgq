@@ -82,6 +82,8 @@
             </ul>
         </div>
     </div>
+    
+    <div class="reg-shadow" style="display: none;" id="mentorData"></div>
 </div>
 <script type="text/html" id="courseTpl">
     <li class="con-items">
@@ -102,10 +104,10 @@
         </a>
     </li>
 </script>
-<script type="text/html" id="mentorTpl">
+<script type="text/html" id="mentorSubTpl">
     <li class="tab-con-box tab-booking">
         <div class="booking-items">
-            <div class="nav-title flex">
+            <div class="nav-title flex" id="mentor_{#id#}">
                 <div class="avatar">
                     <img src='{#avatar#}' class="responseimg"/>
                 </div>
@@ -119,7 +121,7 @@
             <a href="/course/detail/{#course_id#}">
                 <div class="con">
                     <h3 class="title">{#course_title#}</h3>
-                    <p>{#course_abstract#}</p>
+                    <p class="line2">{#course_abstract#}</p>
                 </div>
             </a>
         </div>
@@ -127,6 +129,32 @@
 </script>
 <script type="text/html" id="bannerTpl">
     <li><a href="{#url#}"><img src="{#img#}"/></a></li>
+</script>
+<script type="text/html" id="mentorTpl">
+    <div class="flex flex_center fullwraper">
+        <div class="alert-booking">
+            <div class="tab-con-box tab-booking">
+                <div class="booking-items">
+                    <div class="nav-title flex">
+                        <div class="avatar">
+                            <img src='{#avatar#}' class="responseimg"/>
+                        </div>
+                        <div class="avatar-info">
+                            <h3 class="user-name"><span>{#name#}</span></h3>
+                            <div class="company-info">
+                                <span>{#company#}</span> | 
+                                <span>{#position#}</span>
+                            </div>
+                        </div>
+                        <div class="btn-booking color-items" id="subscr_{#id#}" mentor_id="{#id#}">{#subscr_msg#}</div>
+                    </div>
+                    <div class="pro">
+                        <p>{#introduce#}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </script>
 <?= $this->element('footer') ?>
 <?php $this->start('script'); ?>
@@ -146,6 +174,7 @@
             this.getFreeCourse();
             this.getSubscrMentor();
             this.search();
+            this.bodyTap();
         },
         
         getBanner: function(){
@@ -219,7 +248,7 @@
         },
         
         dealMentorTpl: function(data){
-            var html = $.util.dataToTpl('', 'mentorTpl', data, function(d){
+            var html = $.util.dataToTpl('', 'mentorSubTpl', data, function(d){
                 d.course = d.classes[0].course;
                 d.course_title = d.course.title;
                 d.course_abstract = d.course.abstract;
@@ -259,6 +288,70 @@
                     return false;
                 }
             });
+        },
+        
+        bodyTap: function(){
+            var obj = this;
+            $.util.tap($('body'), function(e){
+                var target = e.srcElement || e.target, em = target, i = 1;
+                while (em && !em.id && i <= 3) {
+                    em = em.parentNode;
+                    i++;
+                }
+                if (!em || !em.id)
+                    return;
+                if(em.id.indexOf('mentor_') != -1){
+                    var tapObj = $(em);
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        url: "/course/get-mentor-data/"+tapObj.attr('mentor_id'),
+                        success: function (res) {
+                            if(res.status){
+                                $('#mentorData').html(obj.dealMentor(res.data)).show();
+                            }
+                        }
+                    });
+                }
+                if(em.id.indexOf('subscr_') != -1){
+                    if(!$.util.isLogin()){
+                        $.util.alert('请先登录');
+                        setTimeout(function(){location.href = '/user/login?redirect_url='+document.URL;}, 500);
+                        return;
+                    }
+                    var tapObj = $(em);
+                    $.util.ajax({
+                        url: '/course/subscr-mentor/'+$(em).attr('mentor_id'),
+                        func: function(res){
+                            $.util.alert(res.msg);
+                            if(res.data){
+//                                $('#subscr_'+tapObj.attr('mentor_id')).html('订阅');
+                                $('#mentorData').hide();
+                                $('#mentor_'+$(em).attr('mentor_id')).parents('li').remove();
+                            } else {
+                                $('#subscr_'+tapObj.attr('mentor_id')).html('取消订阅');
+                            }
+                        }
+                    });
+                }
+                switch(em.id){
+                    case 'mentorData': 
+                        $('#mentorData').hide();
+                        break;
+                }
+            });
+        },
+        
+        dealMentor: function(data){
+            var html = $.util.dataToTpl('', 'mentorTpl', data, function(d){
+                if(d.mentor_subscribe){
+                    d.subscr_msg = d.mentor_subscribe.is_del ? '订阅' : '取消订阅';
+                } else {
+                    d.subscr_msg = '订阅';
+                }
+                return d;
+            });
+            return html;
         }
     });
     
