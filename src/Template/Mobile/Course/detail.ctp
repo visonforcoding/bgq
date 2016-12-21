@@ -26,48 +26,6 @@
         </div>
         <div class="courselist">
             <ul class="outerblock">
-<!--                <li class="items">
-                    <h3 class="course-title flex flex_jusitify">
-                        <a class="eleblock left-info flex box_start"><i class="serial ">01</i><div>并购中对目标公司有哪些并购中对目标公司有哪些好的评估方法方法方好的评估方法</div></a>
-                        <div class="iconfont r-ico">&#xe667;</div>
-                    </h3>
-                    <div class="couser-pro flex">
-                        <div class="avatar"><img src="../images/home-pic.png" class="responseimg" /></div>
-                        <div class="avatar-info">
-                            <span>陆涛</span> | 
-                            <span>和灵资本</span> | 
-                            <span>创始人</span>
-                        </div>
-                    </div>
-                </li>
-                <li class="items">
-                    <h3 class="course-title flex flex_jusitify">
-                        <a class="eleblock  box_start left-info flex"><i class="serial ">02</i><div>并购中对目标公司有哪些好的评估方法</div></a>
-                        <div class="iconfont r-ico">&#xe667;</div>
-                    </h3>
-                    <div class="couser-pro flex">
-                        <div class="avatar"><img src="../images/home-pic.png" class="responseimg" /></div>
-                        <div class="avatar-info">
-                            <span>陆涛</span> | 
-                            <span>和灵资本</span> | 
-                            <span>创始人</span>
-                        </div>
-                    </div>
-                </li>
-                <li class="items read">
-                    <h3 class="course-title flex flex_jusitify">
-                        <a class="eleblock  box_start left-info flex"><i class="serial ">03</i><div>并购中对目标公司有哪些并购中对目标公司有哪些好的评估方法方法方好的评估方法</div></a>
-                        <div class="iconfont r-ico">&#xe667;</div>
-                    </h3>
-                    <div class="couser-pro flex">
-                        <div class="avatar"><img src="../images/home-pic.png" class="responseimg" /></div>
-                        <div class="avatar-info">
-                            <span>陆涛</span> | 
-                            <span>和灵资本</span> | 
-                            <span>创始人</span>
-                        </div>
-                    </div>
-                </li>-->
                 <?php foreach ($course->classes as $k=>$v):?>
                 <li class="items <?php $v->class_learn ? 'read' : ''; ?>" >
                     <h3 class="course-title flex flex_jusitify">
