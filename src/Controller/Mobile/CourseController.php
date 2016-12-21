@@ -30,10 +30,15 @@ class CourseController extends AppController {
             $user_id = $this->user->id;
             $MentorTable = \Cake\ORM\TableRegistry::get('Mentor');
             $mentor = $MentorTable->find()
-                    ->contain(['MentorSubscribes'=>function($q)use($user_id){
-                        return $q->where(['is_del'=>0, 'uid'=>$user_id]);
-                    }, 'Classes', 'Classes.Courses'])
-                    ->where(['is_del'=>0])
+                    ->contain(['Classes'=>function($q){
+                        return $q->where(['Classes.is_del'=>0]);
+                    }, 'Classes.Courses'=>function($q){
+                        return $q->where(['Courses.is_del'=>0]);
+                    }])
+                    ->matching('MentorSubscribes',function($q)use($user_id){
+                        return $q->where(['MentorSubscribes.is_del'=>0, 'uid'=>$user_id]);
+                    })
+                    ->where(['Mentor.is_del'=>0])
                     ->page($page, $limit?$limit:$this->limit)
                     ->toArray();
             if($mentor){

@@ -35,7 +35,8 @@ class MentorTable extends Table {
         ]);
         $this->hasMany('MentorSubscribes', [
             'foreignKey' => 'mentor_id',
-            'className' => 'MentorSubscribe'
+            'className' => 'MentorSubscribe',
+            'joinType' => 'INNER'
         ]);
         $this->hasOne('MentorSubscribe', [
             'foreignKey' => 'mentor_id',
