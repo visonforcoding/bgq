@@ -147,7 +147,7 @@
         
         getBanner: function(){
             var obj = this;
-            if(!obj.init_banner || obj.no_cache){
+            if(!obj.init_banner){
                 $.getJSON('/course/get-banner', function (res) {
                     if (res.status) {
                         obj.staticBanner(res.data);
