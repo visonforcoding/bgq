@@ -34,7 +34,7 @@
                 <h3>{#title#}</h3>
                 {#apply_msg#}
                 <span>{#address#}</span>
-                <span>{#time#}<i>{#apply_nums#}人报名</i></span>
+                <span class="a-number" style="{#display#}">{#apply_nums#}人报名</span>
             </div>
         </a>
     </div>
@@ -104,6 +104,7 @@
                                     var html = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
                                         d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
                                         d.cover = d.thumb ? d.thumb : d.cover;
+                                        d.display = d.is_show_apply ? '' : 'display:none;';
                                         if(d.cover){
                                             d.img = '<img src="' + d.cover + '"/>';
                                         }                                    
@@ -160,6 +161,7 @@
                         var html = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
                             d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
                             d.cover = d.thumb ? d.thumb : d.cover;
+                            d.display = d.is_show_apply ? '' : 'display:none;';
                             if(d.cover){
                                 d.img = '<img src="' + d.cover + '"/>';
                             }
@@ -210,6 +212,7 @@
                                 var html = $.util.dataToTpl('', 'search_tpl', msg.data, function (d) {
                                     d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
                                     d.cover = d.thumb ? d.thumb : d.cover;
+                                    d.display = d.is_show_apply ? '' : 'display:none;';
                                     if(d.cover){
                                         d.img = '<img src="' + d.cover + '"/>';
                                     }
@@ -247,6 +250,7 @@
                         var html = $.util.dataToTpl('search', 'search_tpl', msg.data, function (d) {
                             d.apply_msg = window.isApply.indexOf(',' + d.id + ',') == -1 ? '' : '<span class="is-apply">已报名</span>';
                             d.cover = d.thumb ? d.thumb : d.cover;
+                            d.display = d.is_show_apply ? '' : 'display:none;';
                             if(d.cover){
                                 d.img = '<img src="' + d.cover + '"/>';
                             }
