@@ -1407,6 +1407,8 @@ box-align:center;-webkit-box-align:center;}
 .train-tab-box .tab.active{color:#B71C2D;}
 .train-tab-box .train-tab{position: relative;height:50px;}
 .train-tab-box .train-tab .tabline{height:3px;width:2rem;background: #B71C2D;position: absolute;bottom:0;left:0;-webkit-transition: all .1s ease-in-out;transition: all .1s ease-in-out;margin-bottom:-1px;}
+.train-intro-detail .r-ico{display: block;-webkit-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
+.train-intro-detail .r-ico.rote{-webkit-transform: rotate(-180deg);transform: rotate(-180deg);-webkit-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
 /*
  * 订阅
  */
