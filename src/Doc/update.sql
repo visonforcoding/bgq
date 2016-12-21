@@ -953,7 +953,7 @@ ALTER TABLE `binggq`.`activityapply`
   ADD COLUMN `name` varchar(20) NULL DEFAULT NULL COMMENT '报名人姓名',
   ADD COLUMN `phone` int(11) unsigned NULL DEFAULT NULL COMMENT '报名人电话',
   ADD COLUMN `company` varchar(50) NULL DEFAULT NULL COMMENT '报名人公司',
-  ADD COLUMN `position` varchar(50) NULL DEFAULT NULL COMMENT '报名人职位',
+  ADD COLUMN `position` varchar(50) NULL DEFAULT NULL COMMENT '报名人职位';
 
 CREATE TABLE `course` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -1064,7 +1064,7 @@ CREATE TABLE `recharge_gift` (
 )
 COMMENT='充值套餐表'
 COLLATE='utf8_general_ci'
-ENGINE=InnoDB
+ENGINE=InnoDB;
 
 ALTER TABLE `binggq`.`activity`
   ADD COLUMN `bonus_start_time` DATETIME NULL DEFAULT NULL COMMENT '报名优惠开始时间',
