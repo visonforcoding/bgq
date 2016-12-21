@@ -121,9 +121,10 @@ class CourseController extends AppController {
         }
     }
     
-    public function search(){
+    public function search($keyword=NULL){
         $this->set([
-            'pageTitle' => '课程搜索'
+            'pageTitle' => '课程搜索',
+            'keyword' => $keyword,
         ]);
     }
     
@@ -132,9 +133,8 @@ class CourseController extends AppController {
      * @param type $page
      */
     public function getSearchRes($page=''){
-//        if($this->request->is('post')){
-//            $data = $this->request->data;
-            $data['keyword'] = '蔡';
+        if($this->request->is('post')){
+            $data = $this->request->data;
             $CourseTable = \Cake\ORM\TableRegistry::get('Course');
             $course = $CourseTable->find()
                     ->distinct('Course.id')
@@ -151,7 +151,6 @@ class CourseController extends AppController {
                     ], 'Course.is_del'=>0, 'Course.is_online'=>1])
                     ->orderDesc('Course.create_time')
                     ->toArray();
-            debug($course);die;
             if($course){
                 return $this->Util->ajaxReturn(true, '', $course);
             } elseif($course == []){
@@ -159,7 +158,7 @@ class CourseController extends AppController {
             } else {
                 return $this->Util->ajaxReturn(false, '系统错误');
             }
-//        }
+        }
     }
     
     /**
@@ -339,6 +338,10 @@ class CourseController extends AppController {
         }
     }
     
+    /**
+     * 删除已购培训
+     * @param type $id 培训id
+     */
     public function delPayCourse($id=NULL){
         $this->handCheckLogin();
         if($this->request->is('post')){
