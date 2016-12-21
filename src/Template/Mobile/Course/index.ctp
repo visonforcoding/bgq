@@ -1,8 +1,10 @@
 <div class="wraper newswraper">
     <div class="meet_search_box flex flex_center innercon">
-        <div class="search-content">
+        <div class="search-content flex">
             <i class="iconfont">&#xe602;</i>
-            <input type="text" placeholder="搜索" />
+            <form id="searchForm" method="post">
+                <input type="text" placeholder="搜索" name='keyword' />
+            </form>
         </div>
     </div>
     <div style="height:68px;"></div>
@@ -143,6 +145,7 @@
             this.getRecomCourse();
             this.getFreeCourse();
             this.getSubscrMentor();
+            this.search();
         },
         
         getBanner: function(){
@@ -245,6 +248,17 @@
             } else {
                 $('#subscribe').hide();
             }
+        },
+        
+        search: function(){
+            $('#searchForm').on('submit', function(){
+                if($('input[name="keyword"]').val() == ''){
+                    return false;
+                } else {
+                    location.href = encodeURI('/course/search/'+$('input[name="keyword"]').val());
+                    return false;
+                }
+            });
         }
     });
     
