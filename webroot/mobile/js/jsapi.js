@@ -85,6 +85,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
         "sys.clearWebCatch",
         "sys.logout",
         "sys.device", //获取唯一设备id
+        "sys.storeUrl", //缓存文件
         "show.shareIco", //隐藏分享图标
         "share.banner",  //调出分享的层
         "share.QQ",
@@ -198,6 +199,7 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //ios�
                         return JSApiInvoke(api, {url:jump}, '');
                     });
                     break;
+                case "sys.storeUrl":
                 case "sys.update":
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {url:arguments[0]}, '');
