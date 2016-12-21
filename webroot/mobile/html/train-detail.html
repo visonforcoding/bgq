@@ -157,7 +157,8 @@
 		</div>
 		<script type="text/javascript">
 			$('#down').on('tap',function(){
-				$('#con').find('p').removeClass('line2');
+				$('#con').find('p').toggleClass('line2');
+				$(this).find('.r-ico').toggleClass('rote');
 			})
 		</script>
 	</body>
