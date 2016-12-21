@@ -202,10 +202,11 @@ function initJqupload(id, url, allowedTypes) {
  * @param {type} allowedTypes
  * @returns {undefined}
  */
-function initJquploadAttach(id, url, allowedTypes) {
+function initJquploadAttach(id, url, allowedTypes, size) {
     var uploadObj = $('#' + id).uploadFile({
         url: url,
         returnType: 'json',
+        maxFileSize: size?size:-1,
         maxFileCount: 1,
         allowedTypes: allowedTypes,
         doneStr: "上传完成",

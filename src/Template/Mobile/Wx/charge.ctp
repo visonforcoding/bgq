@@ -5,12 +5,15 @@
             <input type="text" name="recharge_money" placeholder="请输入充值金额" />
         </div>
         <div class="discount-charge inner" id="charge">
-            <div class="discount-title">优惠套餐 <span class="really-count color-items" id="gift_money" hidden>送<i id="gift">10.00</i>元</span></div>
+            <div class="discount-title">优惠套餐</div>
             <ul class="list-line clearfix">
                 <?php foreach ($gift as $k=>$v): ?>
-                <li gift="<?= $v->gift ?>">
+                <li>
                     <div class="items flex flex_center">
-                        ￥<span><?= $v->recharge_money ?></span>
+                        <div class="aligncenter">
+                            <h3>￥<span class="money"><?= $v->recharge_money ?></span></h3>
+                            <span class="really-count">送<i><?= $v->gift ?></i>元</span>
+                        </div>
                     </div>
                 </li>
                 <?php endforeach; ?>
@@ -29,13 +32,12 @@
     $('#charge li').on('tap', function () {
         $('#gift_money').show();
         $(this).addClass('active').siblings().removeClass('active');
-        $('#gift').html($(this).attr('gift'));
-        $('input[name="recharge_money"]').val($(this).find('span').html());
+        $('input[name="recharge_money"]').val($(this).find('.money').html());
     });
     
     $('input[name="recharge_money"]').on('input prototypechange', function(){
         for(var i=0;i<$('#charge li').length;i++){
-            if($(this).val() >= parseInt($('#charge li').eq(i).find('span').html())){
+            if($(this).val() >= parseInt($('#charge li').eq(i).find('.money').html())){
                 $('#charge li').eq(i).addClass('active').siblings().removeClass('active');
             } else {
                 $('#charge li').eq(i).removeClass('active');
@@ -45,7 +47,14 @@
     
     $('#submit').on('tap', function (){
         var input = $('input[name="recharge_money"]').val();
-        location.href = '/wx/pay/'+input;
+        $.util.ajax({
+            url: '/course/charge-order/'+input,
+            func: function(res){
+                if(res.status){
+                    location.href = '/wx/meet-pay/'+res.data;
+                }
+            }
+        });
     });
 </script>
 <?php $this->end('script');

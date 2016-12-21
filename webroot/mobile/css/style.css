@@ -1457,7 +1457,7 @@ box-align:center;-webkit-box-align:center;}
 .alert-booking  .company-info{font-size: .28rem;line-height: .32rem;}
 .alert-booking .nav-title{padding:.2rem 0;}
 .alert-booking .btn-booking{position: absolute;padding:.12rem .18rem;background: #B71C2D;color:#fff;border-radius: 4px;right:.8rem;font-size: .28rem;}
-.charge-box{position: fixed;bottom:0;width:100%;max-width: 750px;z-index:1;background: #fff;box-shadow: 0 -1px 5px rgba(0,0,0,.3);max-height: 999px;-webkit-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
+.charge-box{position: fixed;bottom:0;width:100%;max-width: 750px;z-index:999;background: #fff;box-shadow: 0 -1px 5px rgba(0,0,0,.3);max-height: 999px;-webkit-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
 .charge-box .nav-title{font-size: .3rem;line-height: .36rem;height:.6rem;margin-top:.7rem;}
 .charge-box .title{height:1.3rem;border-bottom:1px #efefef solid;}
 .charge-box .closed{position: absolute;top:.2rem;right:.4rem;}

@@ -3,6 +3,9 @@
         <li>
             <a href="/news/index" class="news_icon"><span class="iconfont">&#xe69f;</span>资讯</a>
         </li>
+        <li class="active">
+            <a href="/course/index" class="course_icon"><span class="iconfont">&#xe6ac;</span>培训</a>
+        </li>
         <li>
             <a href="/activity/index" class="activity_icon"><span class="iconfont">&#xe69d;</span>活动</a>
         </li>
@@ -24,6 +27,10 @@
         else if (window.location.href.indexOf('meet') != -1) {
             $('.meet_icon').css({color: '#b71c2d'});
             $('.meet_icon span').html('&#xe6a2;').css({color: '#b71c2d'});
+        }
+        else if (window.location.href.indexOf('course') != -1) {
+            $('.course_icon').css({color: '#b71c2d'});
+            $('.course_icon span').html('&#xe6ac;').css({color: '#b71c2d'});
         }
         else if (window.location.href.indexOf('home') != -1) {
             $('.home_icon').css({color: '#b71c2d'});

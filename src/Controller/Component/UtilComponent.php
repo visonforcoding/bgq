@@ -23,7 +23,7 @@ class UtilComponent extends Component {
      * @param array/bool $status 可为数组也可以为bool
      * @param \Cake\Network\Response $response
      */
-    public function ajaxReturn($status, $msg = '', $statusCode = 200) {
+    public function ajaxReturn($status, $msg = '', $data = [], $statusCode = 200) {
         $this->autoRender = false;
         $this->response->type('json');
         if (is_array($status) && !empty($status)) {
@@ -32,7 +32,7 @@ class UtilComponent extends Component {
             }
             $json = json_encode($status, JSON_UNESCAPED_UNICODE);
         } else {
-            $json = json_encode(array('status' => $status, 'msg' => $msg, 'code' => $statusCode), JSON_UNESCAPED_UNICODE);
+            $json = json_encode(array('status' => $status, 'msg' => $msg, 'data'=>$data, 'code' => $statusCode), JSON_UNESCAPED_UNICODE);
         }
         $this->response->body($json);
         return $this->response;

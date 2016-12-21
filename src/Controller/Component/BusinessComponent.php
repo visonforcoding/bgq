@@ -421,12 +421,16 @@ class BusinessComponent extends Component {
      * @param string $out_trade_no 第三方平台交易号
      */
     public function handOrder(\App\Model\Entity\Order $order,$realFee,$payType,$out_trade_no) {
+        \Cake\Log\Log::debug($order, 'devlog');
         if ($order->type == 1) {
             //处理预约
             return $this->handMeetOrder($order,$realFee,$payType,$out_trade_no);
         } elseif ($order->type == 2) {
             // 处理报名
             return $this->handApplyOrder($order,$realFee,$payType,$out_trade_no);
+        } elseif($order->type == 3) {
+            // 处理充值
+            return $this->handChangeOrder($order,$realFee,$payType,$out_trade_no);
         }
     }
 
@@ -490,7 +494,7 @@ class BusinessComponent extends Component {
         $Activityapply->is_check = 1; //审核通过
         $order->status = 1;  //订单完成
         $order->fee = $realFee;  //实际支付金额
-        $order->paytype = $payType;  //实际支付金额
+        $order->paytype = $payType;  //实际支付方式
         $order->out_trade_no = $out_trade_no;  //第三方订单号
         $pre_amount = $order->seller->money;
         $order->seller->money += $order->price;    //余额+
@@ -524,6 +528,75 @@ class BusinessComponent extends Component {
             //资金流水记录
             $buyer_msg = '您已成功报名活动《' . $Activityapply->activity->title . '》，详情请打开并购帮APP查看';
             $this->Sms->sendByQf106($order->user->phone, $buyer_msg);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    /**
+     * 处理充值  1.根据订单 2.处理赠额 3.并购帮用户余额+ 4.交易流水
+     * @param \App\Model\Entity\Order $order
+     */
+    protected function handChargeOrder(\App\Model\Entity\Order $order,$realFee,$payType,$out_trade_no) {
+        \Cake\Log\Log::debug('开始处理', 'devlog');
+        $order->status = 1;  //订单完成
+        $order->fee = $realFee;  //实际支付金额
+        $order->paytype = $payType;  //实际支付方式
+        $order->out_trade_no = $out_trade_no;  //第三方订单号
+        $pre_amount = $order->seller->money;
+        $order->seller->money = $order->seller->money + $order->price + $order->gift;    //余额+
+        $order->dirty('seller', true);  //这里的seller 一定得是关联属性 不是关联模型名称 可以理解为实体
+        $OrderTable = \Cake\ORM\TableRegistry::get('Order');
+        $FlowTable = \Cake\ORM\TableRegistry::get('Flow');
+        $flow = $FlowTable->newEntity([
+            'user_id' => $order->user->id,
+            'buyer_id'=>$order->user->id,
+            'type' => 3,
+            'relate_id'=>$order->id,   //关联的订单id
+            'type_msg' => '充值钱包',
+            'income' => 1,
+            'amount' => $order->fee,
+            'price'=>$order->price,
+            'pre_amount' => $pre_amount,
+            'paytype'=>$order->paytype,
+            'after_amount' => $pre_amount + $order->price,
+            'status' => 1,
+            'remark' => '充值收入'
+        ]);
+        $gift = [];
+        if($order->gift){
+            $gift = $FlowTable->newEntity([
+                'user_id' => $order->user->id,
+                'buyer_id'=>$order->user->id,
+                'type' => 4,
+                'relate_id'=>$order->id,   //关联的订单id
+                'type_msg' => '充值赠送',
+                'income' => 1,
+                'amount' => 0,
+                'price'=>$order->gift,
+                'pre_amount' => $pre_amount + $order->price,
+                'paytype'=>4,
+                'after_amount' => $pre_amount + $order->price + $order->gift,
+                'status' => 1,
+                'remark' => '赠送收入',
+                'is_gift' => 1
+            ]);
+        }
+        $transRes = $UserTable->connection()->transactional(function()use($order, $OrderTable, $FlowTable, $flow, $gift) {
+            $res = $OrderTable->save($order, ['associated' => ['Sellers']]) && $FlowTable->save($flow);
+            if($order->gift){
+                return $res && $FlowTable->save($gift);
+            } else {
+                return $res;
+            }
+        });
+        \Cake\Log\Log::debug('处理结束', 'devlog');
+        \Cake\Log\Log::debug($transRes, 'devlog');
+        if ($transRes) {
+            //向专家和买家发送一条短信
+            //资金流水记录
+//            $buyer_msg = '您已成功报名活动《' . $Activityapply->activity->title . '》，详情请打开并购帮APP查看';
+//            $this->Sms->sendByQf106($order->user->phone, $buyer_msg);
             return true;
         }else{
             return false;

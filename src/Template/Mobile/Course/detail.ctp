@@ -69,9 +69,19 @@
                     </div>
                 </li>-->
                 <?php foreach ($course->classes as $k=>$v):?>
-                <li class="items">
+                <li class="items <?php $v->class_learn ? 'read' : ''; ?>" >
                     <h3 class="course-title flex flex_jusitify">
-                        <a class="eleblock  box_start left-info flex"><!--<i class="serial ">03</i>--><div><?= $v->title ?></div></a>
+                        <a href="
+                            <?php if($v->is_free): ?>
+                            /class/detail/<?= $v->id; ?>
+                            <?php else: ?>
+                                <?php if($course->course_apply): ?>
+                                /class/detail/<?= $v->id; ?>
+                                <?php else: ?>
+                                javascript:$.util.alert('您还没有购买此培训')
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        " class="eleblock  box_start left-info flex"><!--<i class="serial ">03</i>--><div><?= $v->title ?></div></a>
                         <div class="iconfont r-ico">&#xe667;</div>
                     </h3>
                     <div class="couser-pro flex" mentor_id="<?= $v->mentor->id ?>" id="mentor_<?= $v->mentor->id ?>">
@@ -111,13 +121,13 @@
             </div>
             <div class="items flex flex_jusitify">
                 <div class="left-info">我的钱包：</div>
-                <div class="color-items" id="my_wallet">￥100</div>
+                <div class="color-items" id="my_wallet">--</div>
             </div>
         </li>
         <li id="need_charge">
             <div class="items flex flex_jusitify">
                 <div class="left-info">还需充值：</div>
-                <div class="color-items">￥800</div>
+                <div class="color-items">--</div>
             </div>
         </li>
     </ul>
