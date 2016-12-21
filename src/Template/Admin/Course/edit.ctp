@@ -62,7 +62,7 @@
         <label class="col-md-2 control-label">优惠开始时间</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('bonus_start_time', ['label' => false, 'type' => 'text', 'value' => $course->bonus_start_time->format('Y-m-d H:m:s'), 'class' => 'datetimepicker form-control']);
+            echo $this->Form->input('bonus_start_time', ['label' => false, 'type' => 'text', 'value' => $course->bonus_start_time?$course->bonus_start_time->format('Y-m-d H:m:s'):'', 'class' => 'datetimepicker form-control']);
             ?>
         </div>
     </div>
@@ -70,7 +70,7 @@
         <label class="col-md-2 control-label">优惠结束时间</label>
         <div class="col-md-8">
             <?php
-            echo $this->Form->input('bonus_end_time', ['label' => false, 'type' => 'text', 'value' => $course->bonus_end_time->format('Y-m-d H:m:s'), 'class' => 'datetimepicker form-control']);
+            echo $this->Form->input('bonus_end_time', ['label' => false, 'type' => 'text', 'value' => $course->bonus_end_time?$course->bonus_end_time->format('Y-m-d H:m:s'):'', 'class' => 'datetimepicker form-control']);
             ?>
         </div>
     </div>-->
