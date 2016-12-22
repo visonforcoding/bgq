@@ -54,7 +54,7 @@
         <div class="col-md-8">
             <input name="zip" type="text" readonly class="form-control" value=""/>
             <div id="zip"  class="jqupload"></div>
-            <span class="notice" style=" display: block">(*文件仅支持格式为zip,直接改后缀会导致解压缩失败)</span>
+            <span class="notice" style=" display: block">(*文件仅支持格式为zip,直接改后缀会导致解压缩失败,压缩包里面不要带有文件夹)</span>
 <!--            <div class="col-md-8 form-group mt10">
                 <label style=" display: inline-block;">音频标题</label>
                 <input name="audio_title" type="text"  placeholder="音频标题" class="inner-input"  value=""/>
