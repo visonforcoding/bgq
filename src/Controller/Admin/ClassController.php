@@ -246,8 +246,13 @@ class ClassController extends AppController {
                 $zip->extractTo(WWW_ROOT . '/' . $url);
                 $zip->close();
                 $file = scandir(WWW_ROOT . '/' . $url);
-                unset($file[0]);
-                unset($file[1]);
+                foreach($file as $k=>$v){
+                    if(strpos(strtolower($v), '.jpg') === false){
+                        unset($file[$k]);
+                    }
+                }
+//                unset($file[0]);
+//                unset($file[1]);
                 $file = array_values($file);
                 $ClassPicTable = \Cake\ORM\TableRegistry::get('ClassPic');
                 $is_exist = $ClassPicTable->find()->where(['class_id'=>$id])->toArray();
