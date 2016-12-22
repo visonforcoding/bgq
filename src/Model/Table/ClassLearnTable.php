@@ -27,6 +27,14 @@ class ClassLearnTable extends Table
         $this->table('class_learn');
         $this->displayField('id');
         $this->primaryKey('id');
+        
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'create_time' => 'new'
+                ]
+            ]
+        ]);
     }
 
     /**

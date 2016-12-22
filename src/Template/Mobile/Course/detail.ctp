@@ -27,7 +27,7 @@
         <div class="courselist">
             <ul class="outerblock">
                 <?php foreach ($course->classes as $k=>$v):?>
-                <li class="items <?php $v->class_learn ? 'read' : ''; ?>" >
+                <li class="items <?= $v->class_learn !== null ? 'read' : ''; ?>" >
                     <h3 class="course-title flex flex_jusitify">
                         <a href="
                             <?php if($v->is_free): ?>
