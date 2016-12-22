@@ -27,7 +27,40 @@
         <div class="courselist">
             <ul class="outerblock">
                 <?php foreach ($course->classes as $k=>$v):?>
-                <li class="items <?= $v->class_learn !== null ? 'read' : ''; ?>" >
+                <li class="items <?= $v->class_learn !== null ? 'read' : ''; ?>">
+                    <a href="
+                       <?php if($v->is_free): ?>
+                            /class/detail/<?= $v->id; ?>
+                            <?php else: ?>
+                                <?php if($course->course_apply): ?>
+                                /class/detail/<?= $v->id; ?>
+                                <?php else: ?>
+                                javascript:$.util.alert('您还没有购买此培训')
+                                <?php endif; ?>
+                            <?php endif; ?>
+                       " class="eleblock">
+                        <h3 class="course-title flex flex_jusitify">
+                            <div class="eleblock left-info flex box_start">
+                                <div>
+                                    <?= $v->title ?>
+                                    <?php if($v->is_free): ?>
+                                        <i class="color-items" style="display: inline-block;padding:.02rem .1rem;border:1px #B71C2D solid;border-radius: 4px;">试听</i>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <div class="iconfont r-ico">&#xe667;</div>
+                        </h3>
+                        <div class="couser-pro flex" mentor_id="<?= $v->mentor->id ?>" id="mentor_<?= $v->mentor->id ?>">
+                            <div class="avatar"><img src="<?= $v->mentor->avatar ?>" class="responseimg" /></div>
+                            <div class="avatar-info">
+                                <span><?= $v->mentor->name ?></span> | 
+                                <span><?= $v->mentor->company ?></span> | 
+                                <span><?= $v->mentor->position ?></span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+<!--                <li class="items <?= $v->class_learn !== null ? 'read' : ''; ?>" >
                     <h3 class="course-title flex flex_jusitify">
                         <a href="
                             <?php if($v->is_free): ?>
@@ -39,7 +72,7 @@
                                 javascript:$.util.alert('您还没有购买此培训')
                                 <?php endif; ?>
                             <?php endif; ?>
-                        " class="eleblock  box_start left-info flex"><!--<i class="serial ">03</i>--><div><?= $v->title ?></div></a>
+                        " class="eleblock  box_start left-info flex"><i class="serial ">03</i><div><?= $v->title ?></div></a>
                         <div class="iconfont r-ico">&#xe667;</div>
                     </h3>
                     <div class="couser-pro flex" mentor_id="<?= $v->mentor->id ?>" id="mentor_<?= $v->mentor->id ?>">
@@ -50,7 +83,7 @@
                             <span><?= $v->mentor->position ?></span>
                         </div>
                     </div>
-                </li>
+                </li>-->
                 <?php endforeach; ?>
             </ul>
         </div>
@@ -172,6 +205,7 @@
                             }
                         }
                     });
+                    return false;
                 }
                 if(em.id.indexOf('subscr_') != -1){
                     if(!$.util.isLogin()){
