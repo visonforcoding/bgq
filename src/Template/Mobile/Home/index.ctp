@@ -75,16 +75,20 @@
             </a>
         </span>
     </div>
-    <a href="/user/home-page/{#user_id#}">
+    <!--<a href="/user/home-page/{#user_id#}">-->
         <h3>{#truename#}
             {#v#}
         </h3>
         <div class="info-desc">
-            <span><!--<i class='iconfont'>&#xe62a;</i>-->{#company#}</span>
-            <span><!--<i class='iconfont'>&#xe612;</i>-->{#position#}</span>
+            <span><i class='iconfont'>&#xe62a;</i>{#company#}</span>
         </div>
-    </a>
-    <div class="home-focus"><span>关注 <i id="attention">0</i></span> | <span>粉丝 <i id='fans'>0</i></span></div>
+        <div class="info-desc">
+            <span><i class='iconfont'>&#xe612;</i>{#position#}</span>
+        </div>
+    <!--</a>-->
+    <div class="home-focus">
+        <a href="/home/my-following/1"><span>关注 <i id="attention">0</i></span></a> | <a href="/home/my-following/2"><span>粉丝 <i id='fans'>0</i></span></a>
+    </div>
 </script>
 <script type="text/html" id='defaultTpl'>
     <div class='inner h-home-top'>

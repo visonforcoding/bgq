@@ -5,7 +5,7 @@
         </div>
         <div class="tab-con-box tab-booking inner">
             <div class="booking-items">
-                <div class="nav-title flex">
+                <div class="nav-title flex" id='mentor_<?= $class->mentor->id ?>' mentor_id='<?= $class->mentor->id ?>'>
                     <div class="avatar">
                         <img src='<?= $class->mentor->avatar ?>' class="responseimg"/>
                     </div>
@@ -34,8 +34,8 @@
         </div>
         <div class="con">
             <div class="audio-box">
-                <div class="audio-info flex flex_jusitify">
-                    <div class="playbtn iconfont" id="play"></div>
+                <div class="audio-info flex flex_jusitify" id="play">
+                    <div class="playbtn iconfont"></div>
                     <div class="duration"><i id="cur">00:00</i>/<i id="duration">00:00</i></div>
                 </div>
                 <div class="audio-bar">
@@ -63,7 +63,34 @@
         </div>
     </div>
     <?php endif; ?>
+    <div class="reg-shadow" style="display: none;" id="mentorData"></div>
 </div>
+<script type="text/html" id="mentorTpl">
+    <div class="flex flex_center fullwraper">
+        <div class="alert-booking">
+            <div class="tab-con-box tab-booking">
+                <div class="booking-items">
+                    <div class="nav-title flex">
+                        <div class="avatar">
+                            <img src='{#avatar#}' class="responseimg"/>
+                        </div>
+                        <div class="avatar-info">
+                            <h3 class="user-name"><span>{#name#}</span></h3>
+                            <div class="company-info">
+                                <span>{#company#}</span> | 
+                                <span>{#position#}</span>
+                            </div>
+                        </div>
+                        <div class="btn-booking color-items" id="subscr_{#id#}" mentor_id="{#id#}">{#subscr_msg#}</div>
+                    </div>
+                    <div class="pro">
+                        <p>{#introduce#}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
 <script type="text/javascript">
     function fixedSeconds(value) {
         var hs = '', ms = '', ss = '', n = parseInt(value), h = parseInt(n / 3600), m = parseInt(n / 60) % 60, s = parseInt(n % 60);
@@ -134,4 +161,69 @@
         $('#pic img').each(function(){imgs.push(this.src)});
         $.util.viewImg(this.src, imgs);
     });
+    
+    $.util.tap($('body'), function(e){
+        var target = e.srcElement || e.target, em = target, i = 1;
+        while (em && !em.id && i <= 3) {
+            em = em.parentNode;
+            i++;
+        }
+        if (!em || !em.id)
+            return;
+        if(em.id.indexOf('mentor_') != -1){
+            var tapObj = $(em);
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: "/course/get-mentor-data/"+tapObj.attr('mentor_id'),
+                success: function (res) {
+                    if(res.status){
+                        var html = $.util.dataToTpl('', 'mentorTpl', res.data, function(d){
+                            if(d.mentor_subscribe){
+                                d.subscr_msg = d.mentor_subscribe.is_del ? '订阅' : '取消订阅';
+                            } else {
+                                d.subscr_msg = '订阅';
+                            }
+                            return d;
+                        });
+                        $('#mentorData').html(html).show();
+                    }
+                }
+            });
+        }
+        if(em.id.indexOf('subscr_') != -1){
+            if(!$.util.isLogin()){
+                $.util.alert('请先登录');
+                setTimeout(function(){location.href = '/user/login?redirect_url='+document.URL;}, 500);
+                return;
+            }
+            var tapObj = $(em);
+            $.util.ajax({
+                url: '/course/subscr-mentor/'+$(em).attr('mentor_id'),
+                func: function(res){
+                    $.util.alert(res.msg);
+                    if(res.data){
+                        $('#subscr_'+tapObj.attr('mentor_id')).html('订阅');
+                    } else {
+                        $('#subscr_'+tapObj.attr('mentor_id')).html('取消订阅');
+                    }
+                }
+            });
+        }
+        switch(em.id){
+            case 'mentorData': 
+                $('#mentorData').hide();
+                break;
+            case 'shadow': case 'closed':
+                $('#buy').toggleClass('charge-box-hide');
+                setTimeout(function(){$('#shadow').hide();}, 100);//和动画一致
+                break;
+            case 'down':
+                $('#con').find('p').toggleClass('line2');
+                $(em).find('.r-ico').toggleClass('rote');
+                break;
+        }
+        return false;
+    });
+    
 </script>

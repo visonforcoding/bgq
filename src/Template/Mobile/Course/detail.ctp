@@ -142,15 +142,8 @@
     };
     $.extend(detail.prototype, {
         init: function(){
-            this.abstract();
             this.buy();
             this.bodyTap();
-        },
-        
-        abstract: function(){
-            $('#down').on('tap', function () {
-                $('#con').find('p').removeClass('line2');
-            });
         },
         
         buy: function(){
@@ -251,7 +244,12 @@
                             location.href = '/wx/charge';
                         }
                         break;
+                    case 'down':
+                        $('#con').find('p').toggleClass('line2');
+                        $(em).find('.r-ico').toggleClass('rote');
+                        break;
                 }
+                return false;
             });
         },
         
