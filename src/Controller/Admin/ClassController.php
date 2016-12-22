@@ -242,7 +242,7 @@ class ClassController extends AppController {
         $zip = new \ZipArchive();
         if($zip->open(WWW_ROOT . $url)){
             $url = '/upload/class/pic/' . uniqid() . '-' . $id;
-            if(mkdir(WWW_ROOT . '/' . $url, 777)){
+            if(mkdir(WWW_ROOT . '/' . $url)){
                 $zip->extractTo(WWW_ROOT . '/' . $url);
                 $zip->close();
                 $file = scandir(WWW_ROOT . '/' . $url);
