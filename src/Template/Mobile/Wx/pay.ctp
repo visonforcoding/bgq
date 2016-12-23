@@ -37,37 +37,16 @@
         if (payMethod == 'wx') {
             var wxConfig = '<?= json_encode($jsApiParameters) ?>';
             if ($.util.isAPP) {
-                if (wxConfig) {
-                    LEMON.pay.wx(<?= json_encode($jsApiParameters) ?>, function (res) {
-                        if (res == '0') {
-                            $.util.alert('支付成功');
-                            setTimeout(function () {
-                                window.location.href = '/wx/charge-success/<?= $order->id ?>';
-                            }, 1000);
-                        } else {
-                            $.util.alert('支付未成功');
-                        }
-                    });
-                } else {
-                    LEMON.event.getWXCode(function (code) {
-                        $.util.ajax({//获取open id,比对是否存在,登录或是注册  生成token
-                            data: {code: code},
-                            url: '/wx/paywx/<?= $order->id ?>',
-                            func: function (res) {
-                                LEMON.pay.wx(res.jsApiParameters, function (res) {
-                                    if (res == '0') {
-                                        $.util.alert('支付成功');
-                                        setTimeout(function () {
-                                            window.location.href = '/wx/charge-success/<?= $order->id ?>';
-                                        }, 1000);
-                                    } else {
-                                        $.util.alert('支付未成功');
-                                    }
-                                });
-                            }
-                        });
-                    });
-                }
+                LEMON.pay.wx(<?= json_encode($jsApiParameters) ?>, function (res) {
+                    if (res == '0') {
+                        $.util.alert('支付成功');
+                        setTimeout(function () {
+                            window.location.href = '/wx/charge-success/<?= $order->id ?>';
+                        }, 1000);
+                    } else {
+                        $.util.alert('支付未成功');
+                    }
+                });
                 return false;
             }
             callpay();
