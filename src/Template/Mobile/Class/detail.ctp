@@ -34,8 +34,8 @@
         </div>
         <div class="con">
             <div class="audio-box">
-                <div class="audio-info flex flex_jusitify" id="play">
-                    <div class="playbtn iconfont"></div>
+                <div class="audio-info flex flex_jusitify">
+                    <div class="playbtn iconfont" id="play"></div>
                     <div class="duration"><i id="cur">00:00</i>/<i id="duration">00:00</i></div>
                 </div>
                 <div class="audio-bar">
