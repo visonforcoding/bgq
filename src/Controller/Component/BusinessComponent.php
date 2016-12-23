@@ -421,7 +421,7 @@ class BusinessComponent extends Component {
      * @param string $out_trade_no 第三方平台交易号
      */
     public function handOrder(\App\Model\Entity\Order $order,$realFee,$payType,$out_trade_no) {
-        \Cake\Log\Log::debug($order, 'devlog');
+        \Cake\Log\Log::debug('测试：'.$order, 'devlog');
         if ($order->type == 1) {
             //处理预约
             return $this->handMeetOrder($order,$realFee,$payType,$out_trade_no);
@@ -430,7 +430,8 @@ class BusinessComponent extends Component {
             return $this->handApplyOrder($order,$realFee,$payType,$out_trade_no);
         } elseif($order->type == 3) {
             // 处理充值
-            return $this->handChangeOrder($order,$realFee,$payType,$out_trade_no);
+            \Cake\Log\Log::debug('准备充值', 'devlog');
+            return $this->handChargeOrder($order,$realFee,$payType,$out_trade_no);
         }
     }
 
