@@ -28,8 +28,8 @@
         <li><a href="/home/my-activity-submit" class="clickbtn mtips"><i class="iconfont">&#xe617;</i>我的活动<span id='activityMsg'></span></a></li>
         <li><a href="/home/my-collect-activity" class="clickbtn"><i class="iconfont">&#xe615;</i>我的收藏</a></li>
         <li><a href="/meet/chat-list" class="clickbtn mtips"><i class="iconfont">&#xe616;</i>我的约见<span id="meetMsg"></span></a></li>
-        <li><a href="/home/my-purse" class="clickbtn"><i class="iconfont">&#xe620;</i>我的钱包<span></span></a></li>
-        <li></li>
+<!--        <li><a href="/home/my-purse" class="clickbtn"><i class="iconfont">&#xe620;</i>我的钱包<span></span></a></li>
+        <li></li>-->
     </ul>
     <!--分类一-->
 
@@ -55,7 +55,7 @@
     <div class="h-home-menu">
         <ul class="clearfix">
             {#savant#}
-            <li><a href="javascript:QRCode();"><i class="iconfont">&#xe60a;</i>扫一扫</a></li>
+            <li><a href="javascript:QRCode();"><i class="iconfont">&#xe60a;</i>扫一扫签到</a></li>
         </ul>
     </div>
 
@@ -139,7 +139,8 @@
                     var html = $('#savantTpl').text();
                     var user = $('#userTpl').text();
                     var ico = $('#icoTpl').text();
-                    savant = '<li><a href="/home/savant-auth"><i class="iconfont">&#xe623;</i>会员认证</a></li>';
+//                    savant = '<li><a href="/home/savant-auth"><i class="iconfont">&#xe623;</i>会员认证</a></li>';
+                    savant = '<li><a href="/home/my-purse" class="clickbtn"><i class="iconfont">&#xe620;</i>我的钱包<span></span></a></li>';
                     if (res.data.user.level == 2) {
 //                    savant = '<li><a href="/home/my-purse"><i class="iconfont">&#xe620;</i>钱包</a></li>';
                         user = user.replace('{#v#}', '<i class="v"></i>');

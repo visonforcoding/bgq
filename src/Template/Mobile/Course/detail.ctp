@@ -44,7 +44,7 @@
                                 <div>
                                     <?= $v->title ?>
                                     <?php if($v->is_free): ?>
-                                        <i class="color-items" style="display: inline-block;padding:.02rem .1rem;border:1px #B71C2D solid;border-radius: 4px;">试听</i>
+                                        <i class="color-items free-course" >试听</i>
                                     <?php endif; ?>
                                 </div>
                             </div>
