@@ -399,7 +399,7 @@ class ActivityapplyController extends AppController {
         
         //无需付费的 直接通过
         $apply->is_pass = 0;
-        if($activity->apply_nums <= 0){
+        if($activity->apply_nums >= 0){
             $activity->apply_nums -= 1;  //报名人数-1
         }
         $apply->is_check = 0;
