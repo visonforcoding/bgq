@@ -230,7 +230,7 @@ class WxController extends AppController {
         if(!$openid&&!$this->request->session()->check('Pay.getopenid')){
             \Cake\Log\Log::error('数据库openid为空重新获取openid','devlog');
             $this->request->session()->write('Pay.getopenid',true);
-            return $this->Wx->getUserJump(true, true);
+            $this->Wx->getUserJump(true, true);
         }
 
         $fee = $order->price;  //支付金额(分)
