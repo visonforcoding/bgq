@@ -520,6 +520,15 @@ class WxController extends AppController {
         ]);
     }
     
+    public function chargeSuccess($id=NULL){
+        $OrderTable = \Cake\ORM\TableRegistry::get('Order');
+        $order = $OrderTable->get($id);
+        $this->set([
+            'pageTitle' => '充值成功',
+            'charge_money' => $order->price + $order->gift
+        ]);
+    }
+    
     public function pay($money){
         $this->handCheckLogin();
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
