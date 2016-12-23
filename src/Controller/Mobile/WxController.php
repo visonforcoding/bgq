@@ -216,6 +216,13 @@ class WxController extends AppController {
 //        $openid = $this->user->wx_openid;
 //        \Cake\Log\Log::error('数据库openid为:'.$openid,'devlog');
         $user = $UserTable->get($this->user->id);
+        $openid = $user->wx_openid;
+        if(!$openid&&!$this->request->session()->check('Pay.getopenid')&&$this->request->is('weixin')){
+            \Cake\Log\Log::error('数据库openid为空重新获取openid','devlog');
+            $this->request->session()->write('Pay.getopenid',true);
+            $this->Wx->getUserJump(true, true);
+        }
+        
         $code=$this->request->query('code');
         \Cake\Log\Log::debug('code为：'.$code, 'devlog');
         if($code){
@@ -225,13 +232,6 @@ class WxController extends AppController {
             $user->union_id = $res->unionid;
             $UserTable->save($user);
         }
-        
-        $openid = $user->wx_openid;
-        if(!$openid&&!$this->request->session()->check('Pay.getopenid')){
-            \Cake\Log\Log::error('数据库openid为空重新获取openid','devlog');
-            $this->request->session()->write('Pay.getopenid',true);
-            $this->Wx->getUserJump(true, true);
-        }
 
         $fee = $order->price;  //支付金额(分)
         $this->loadComponent('Wxpay');
@@ -240,14 +240,14 @@ class WxController extends AppController {
         $jsApiParameters = '';
         if ($this->request->is('lemon')) {
             $isApp = true;
-            $openid = $this->user->app_wx_openid;
+            $openid = $user->app_wx_openid;
             $this->loadComponent('Alipay');
             $aliPayParameters = $this->Alipay->setPayParameter($out_trade_no, $title, $fee, $body);
         }
 
-        if ($openid) {
-            $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, null, $isApp);
-        }
+        $jsApiParameters = $this->Wxpay->getPayParameter($body, $openid, $out_trade_no, $fee, null, $isApp);
+        \Cake\Log\Log::debug($openid,'devlog');
+        \Cake\Log\Log::debug($jsApiParameters,'devlog');
         $this->set(array(
             'jsApiParameters' => $jsApiParameters,
             'isWx' => $this->request->is('weixin') ? true : false,
