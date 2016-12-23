@@ -223,7 +223,6 @@ class WxController extends AppController {
             return $this->Wx->getUserJump(true, true);
         }
         $code=$this->request->query('code');
-        \Cake\Log\Log::debug('code为：'.$code, 'devlog');
         if($code){
             $res = $this->Wx->getUser($code);
             $openid = $res->openid;
@@ -295,6 +294,9 @@ class WxController extends AppController {
                 'contain' => ['Activityapplys', 'Activityapplys.Activities']
             ]);
             $body = '活动报名《' . $order->activityapply->activity->title . '》支付';
+        } elseif($order->type == 3){
+            $order = $OrderTable->get($id);
+            $body = '充值余额';
         }
         $out_trade_no = $order->order_no;
         $fee = $order->price;  //支付金额(分)
