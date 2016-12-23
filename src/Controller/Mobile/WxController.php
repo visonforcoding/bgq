@@ -268,7 +268,7 @@ class WxController extends AppController {
         //用户第一次在平台 用微信支付
         $code = $this->request->data('code');
         $res = $this->Wx->getUser($code, true);
-        \Cake\Log\Log::debug($res, 'devlog');
+        \Cake\Log\Log::debug('测试'.$res, 'devlog');
         if (!$res) {
             //获取到openid 有问题
             return $this->Util->ajaxReturn(['status' => false, 'msg' => '与微信服务器交互出现问题']);
