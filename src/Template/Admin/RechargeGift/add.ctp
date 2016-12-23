@@ -54,7 +54,7 @@
                             layer.confirm(res.msg, {
                                 btn: ['确认', '继续添加'] //按钮
                             }, function () {
-                                window.location.href = '/admin/rechargegift/index';
+                                window.location.href = '/admin/recharge-gift/index';
                             }, function () {
                                 window.location.reload();
                             });

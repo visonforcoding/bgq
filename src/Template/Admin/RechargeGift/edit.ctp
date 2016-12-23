@@ -52,7 +52,7 @@
                     if (typeof res === 'object') {
                         if (res.status) {
                             layer.alert(res.msg, function () {
-                                window.location.href = '/admin/rechargegift/index';
+                                window.location.href = '/admin/recharge-gift/index';
                             });
                         } else {
                             layer.alert(res.msg, {icon: 5});
