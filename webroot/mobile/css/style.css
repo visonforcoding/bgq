@@ -1387,6 +1387,7 @@ box-align:center;-webkit-box-align:center;}
 .chatinfo_list li .r_info{color:#999;font-size: .22rem;}
 /*个人中心*/
 .home-focus{text-align: center;margin-top:.1rem;}
+.home-focus a{color:#fff;}
 
 /*培训*/
 .train-search-box{height:50px;background: #fff;padding:0 .6rem;border-bottom:1px #efefef solid;position:fixed;z-index:2;overflow: hidden;}
@@ -1409,6 +1410,7 @@ box-align:center;-webkit-box-align:center;}
 .train-tab-box .train-tab .tabline{height:3px;width:2rem;background: #B71C2D;position: absolute;bottom:0;left:0;-webkit-transition: all .1s ease-in-out;transition: all .1s ease-in-out;margin-bottom:-1px;}
 .train-intro-detail .r-ico{display: block;-webkit-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
 .train-intro-detail .r-ico.rote{-webkit-transform: rotate(-180deg);transform: rotate(-180deg);-webkit-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
+.durationtime{display: inline-block;}
 /*
  * 订阅
  */
@@ -1447,7 +1449,7 @@ box-align:center;-webkit-box-align:center;}
 .courselist .avatar{width:.56rem;height:.56rem;overflow: hidden;margin-right: .3rem;}
 .courselist .course-title{font-size: .3rem;line-height: .32rem;padding:.1rem 0;}
 .courselist .left-info{max-width: 80%;font-size: .3rem;}
-.courselist .left-info div{line-height: .34rem;}
+.courselist .left-info div{line-height: .36rem;}
 .courselist .course-title i{margin-right:.1rem;}
 .course .title{height:1rem;border-bottom:1px #efefef solid;}
 .courselist .couser-pro{padding:.2rem .3rem 0;font-size: .28rem;color:#707070;}
@@ -1521,3 +1523,5 @@ box-align:center;-webkit-box-align:center;}
 .bar-progress .play-line{position: absolute;left:0;top:2px;right:200px;height:6px;background: #B71C2D;border-radius: 5px;}
 .train-intro-detail .ppt-box img{max-width: 100%;height:auto;margin:.1rem auto;display: block;}
 .train-intro-detail .ppt-box{}
+
+.free-course{display: inline-block;padding:.02rem .1rem;border:1px #B71C2D solid;border-radius: 4px;font-size: .28rem;}
