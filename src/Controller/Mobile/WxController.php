@@ -222,7 +222,9 @@ class WxController extends AppController {
             $this->request->session()->write('Pay.getopenid',true);
             $this->Wx->getUserJump(true, true);
         }
-        if($code=$this->request->query('code')){
+        $code=$this->request->query('code');
+        \Cake\Log\Log::debug('code为：'.$code, 'devlog');
+        if($code){
             $res = $this->Wx->getUser($code);
             $openid = $res->openid;
             $user->wx_openid = $openid;
