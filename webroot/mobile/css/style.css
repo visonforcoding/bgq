@@ -1497,7 +1497,7 @@ box-align:center;-webkit-box-align:center;}
 .charge-success .iconfont{font-size: 1.4rem;color:#B71C2D;line-height: 1.4rem;}
 .charge-success p{font-size: .34rem;line-height: .6rem;}
 .charge-success-box{background: #fff;height:1rem;padding:0 .3rem;}
-.train-entroll-type .entroll-box{height:2.6rem;color:#B71C2D;font-size: .3rem;background: #fff;}
+.train-entroll-type .entroll-box{height:2.6rem;color:#B71C2D;font-size: .3rem;}
 .train-entroll-type .entroll-box .iconfont{font-size: 1rem;line-height: 1.2rem;}
 .btn-active{padding:.15rem .2rem;background: #B71C2D;color:#fff;border:1px #B71C2D solid;border-radius: 2px;display: block;margin-right:1.4rem;}
 .btn-common{padding:.15rem .2rem;border:1px #e5e5e5 solid;border-radius: 2px;display: block;}
@@ -1523,5 +1523,9 @@ box-align:center;-webkit-box-align:center;}
 .bar-progress .play-line{position: absolute;left:0;top:2px;right:200px;height:6px;background: #B71C2D;border-radius: 5px;}
 .train-intro-detail .ppt-box img{max-width: 100%;height:auto;margin:.1rem auto;display: block;}
 .train-intro-detail .ppt-box{}
-
+.charge-pay .entroll-box{padding-top:.3rem;}
+.charge-pay .entroll-box .iconfont{font-size: 1.4rem;line-height: 1.8rem;}
+.charge-pay p{font-size: .4rem;color:#000;}
 .free-course{display: inline-block;padding:.02rem .1rem;border:1px #B71C2D solid;border-radius: 4px;font-size: .28rem;}
+.charge-detail{background: #fff;height:1rem;padding:0 .3rem;font-size: .3rem;margin-top:.6rem;}
+.charge-detail .left-info{color:#999;}
