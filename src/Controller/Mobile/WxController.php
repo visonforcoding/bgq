@@ -217,6 +217,7 @@ class WxController extends AppController {
 //        \Cake\Log\Log::error('数据库openid为:'.$openid,'devlog');
         $user = $UserTable->get($this->user->id);
         $code=$this->request->query('code');
+        \Cake\Log\Log::debug('code为：'.$code, 'devlog');
         if($code){
             $res = $this->Wx->getUser($code);
             $openid = $res->openid;
