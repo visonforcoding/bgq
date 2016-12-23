@@ -216,12 +216,6 @@ class WxController extends AppController {
 //        $openid = $this->user->wx_openid;
 //        \Cake\Log\Log::error('数据库openid为:'.$openid,'devlog');
         $user = $UserTable->get($this->user->id);
-        $openid = $user->wx_openid;
-        if(!$openid&&!$this->request->session()->check('Pay.getopenid')){
-            \Cake\Log\Log::error('数据库openid为空重新获取openid','devlog');
-            $this->request->session()->write('Pay.getopenid',true);
-            return $this->Wx->getUserJump(true, true);
-        }
         $code=$this->request->query('code');
         if($code){
             $res = $this->Wx->getUser($code);
@@ -229,6 +223,13 @@ class WxController extends AppController {
             $user->wx_openid = $openid;
             $user->union_id = $res->unionid;
             $UserTable->save($user);
+        }
+        
+        $openid = $user->wx_openid;
+        if(!$openid&&!$this->request->session()->check('Pay.getopenid')){
+            \Cake\Log\Log::error('数据库openid为空重新获取openid','devlog');
+            $this->request->session()->write('Pay.getopenid',true);
+            return $this->Wx->getUserJump(true, true);
         }
 
         $fee = $order->price;  //支付金额(分)
