@@ -44,14 +44,14 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['标题', '培训费用', '优惠费用', '优惠时间', '状态', '报名人数', '创建时间', '更新时间', '操作'],
+                                ['标题', '培训费用', '状态', '报名人数', '创建时间', '更新时间', '操作'],
                         colModel: [
                             {name: 'title', editable: true, align: 'center'},
                             {name: 'fee', editable: true, align: 'center'},
-                            {name: 'bonus_fee', editable: true, align: 'center'},
-                            {name: 'bonus_start_time', editable: true, align: 'center', formatter: function(cellvalue, options, rowObject) {
-                                    return rowObject.bonus_start_time + '到' + rowObject.bonus_end_time;
-                                }},
+//                            {name: 'bonus_fee', editable: true, align: 'center'},
+//                            {name: 'bonus_start_time', editable: true, align: 'center', formatter: function(cellvalue, options, rowObject) {
+//                                    return rowObject.bonus_start_time + '到' + rowObject.bonus_end_time;
+//                                }},
                             {name: 'is_online', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     var s;
                                     switch (cellvalue) {
