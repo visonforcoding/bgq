@@ -213,7 +213,7 @@
         switch(em.id){
             case 'mentorData': 
                 $('#mentorData').hide();
-                break;
+                return false;
             case 'shadow': case 'closed':
                 $('#buy').toggleClass('charge-box-hide');
                 setTimeout(function(){$('#shadow').hide();}, 100);//和动画一致
@@ -223,7 +223,6 @@
                 $(em).find('.r-ico').toggleClass('rote');
                 break;
         }
-        return false;
     });
     
 </script>

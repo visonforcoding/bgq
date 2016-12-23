@@ -74,7 +74,6 @@
                 'getBrandWCPayRequest',
                 <?= json_encode($jsApiParameters) ?>,
                 function (res) {
-                    alert(JSON.stringify(res));
                     if (res.err_msg == "get_brand_wcpay_request:ok") {
                         $.util.alert('支付成功');
                         setTimeout(function () {
