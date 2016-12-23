@@ -50,9 +50,11 @@
                             </div>
                             <div class="iconfont r-ico">&#xe667;</div>
                         </h3>
-                        <div class="couser-pro flex" mentor_id="<?= $v->mentor->id ?>" id="mentor_<?= $v->mentor->id ?>">
-                            <div class="avatar"><img src="<?= $v->mentor->avatar ?>" class="responseimg" /></div>
-                            <div class="avatar-info">
+                        <div class="couser-pro flex" >
+                            <div class="avatar" mentor_id="<?= $v->mentor->id ?>" id="mentor_<?= $v->mentor->id ?>">
+                                <img src="<?= $v->mentor->avatar ?>" class="responseimg" />
+                            </div>
+                            <div class="avatar-info" mentor_id="<?= $v->mentor->id ?>" id="mentor_<?= $v->mentor->id ?>">
                                 <span><?= $v->mentor->name ?></span> | 
                                 <span><?= $v->mentor->company ?></span> | 
                                 <span><?= $v->mentor->position ?></span>
