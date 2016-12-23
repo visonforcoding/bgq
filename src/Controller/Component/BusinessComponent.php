@@ -421,7 +421,6 @@ class BusinessComponent extends Component {
      * @param string $out_trade_no 第三方平台交易号
      */
     public function handOrder(\App\Model\Entity\Order $order,$realFee,$payType,$out_trade_no) {
-        \Cake\Log\Log::debug('测试：'.$order, 'devlog');
         if ($order->type == 1) {
             //处理预约
             return $this->handMeetOrder($order,$realFee,$payType,$out_trade_no);
@@ -539,7 +538,7 @@ class BusinessComponent extends Component {
      * @param \App\Model\Entity\Order $order
      */
     protected function handChargeOrder(\App\Model\Entity\Order $order,$realFee,$payType,$out_trade_no) {
-        \Cake\Log\Log::debug('开始处理', 'devlog');
+//        \Cake\Log\Log::debug('开始处理', 'devlog');
         $order->status = 1;  //订单完成
         $order->fee = $realFee;  //实际支付金额
         $order->paytype = $payType;  //实际支付方式
@@ -583,7 +582,7 @@ class BusinessComponent extends Component {
                 'is_gift' => 1
             ]);
         }
-        $transRes = $UserTable->connection()->transactional(function()use($order, $OrderTable, $FlowTable, $flow, $gift) {
+        $transRes = $OrderTable->connection()->transactional(function()use($order, $OrderTable, $FlowTable, $flow, $gift) {
             $res = $OrderTable->save($order, ['associated' => ['Sellers']]) && $FlowTable->save($flow);
             if($order->gift){
                 return $res && $FlowTable->save($gift);
@@ -591,8 +590,8 @@ class BusinessComponent extends Component {
                 return $res;
             }
         });
-        \Cake\Log\Log::debug('处理结束', 'devlog');
-        \Cake\Log\Log::debug($transRes, 'devlog');
+//        \Cake\Log\Log::debug('处理结束', 'devlog');
+//        \Cake\Log\Log::debug($transRes, 'devlog');
         if ($transRes) {
             //向专家和买家发送一条短信
             //资金流水记录
