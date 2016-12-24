@@ -120,9 +120,14 @@
         audio.pause();
         $('#play').removeClass('active');
         clearInterval(timer);
+        timer = null;
     }
 
     audio.onplaying = function () {
+        if(timer){
+            clearInterval(timer);
+            timer = null;
+        }
         timer = setInterval(setAudio, 1000);
     }
 
@@ -133,6 +138,7 @@
     /**
     $('#range').on('touchstart', function () {
         clearInterval(timer);
+        timer = null;
     });
     $('#range').on('ontouchend', function () {
         audio.play();
