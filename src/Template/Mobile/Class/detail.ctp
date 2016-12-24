@@ -103,10 +103,7 @@
     var wid = $('#range').width();
     var timer = null;
     var audio = $('#audio').get(0);
-    var cur = audio.currentTime;
-    var dur = audio.duration;
-    var rightLength = wid - (wid * cur) / dur + 'px';
-    $('#play-line').css('right', wid);
+    /**
     $('#play').on('click', function () {
         audio = $('#audio').get(0);
         dur = audio.duration;
@@ -133,7 +130,7 @@
             $(this).addClass('active');
             timer = setInterval(function () {
                 $('#range').on('input', function () {
-                    audio = $('#audio').get(0);
+                    //audio = $('#audio').get(0);
                     cur = $(this).val();
                     audio.currentTime = cur;
                     console.log(cur);
@@ -148,9 +145,40 @@
                 $('#cur').html(fixedSeconds(cur));
                 $('#range').val(cur);
                 rightLength = wid - (wid * cur) / dur + 'px';
-                $('#play-line').css('right', rightLength);
+                $('#play-line').css('right', rightLength-1);
 
             }, 1000);
+        }
+    });
+     */
+
+    function setAudio() {
+        dur = audio.duration;
+        cur = audio.currentTime;
+        $('#duration').html(fixedSeconds(dur));
+        $('#cur').html(fixedSeconds(cur));
+        $('#range').attr('max', dur);
+        $('#range').val(cur);
+        rightLength = wid - (wid * cur) / dur + 'px';
+        $('#play-line').css('right', rightLength-1);
+    }
+
+    audio.onloadedmetadata = setAudio;
+    audio.onended = function () {
+        audio.pause();
+        $('#play').removeClass('active');
+        clearInterval(timer);
+    }
+
+    $('#play').on('click', function () {
+        if ($(this).hasClass('active')) {
+            audio.pause();
+            $(this).removeClass('active');
+
+        } else {
+            audio.play();
+            $(this).addClass('active');
+            timer = setInterval(setAudio, 1000);
         }
     });
     
