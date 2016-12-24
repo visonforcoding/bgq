@@ -103,55 +103,6 @@
     var wid = $('#range').width();
     var timer = null;
     var audio = $('#audio').get(0);
-    /**
-    $('#play').on('click', function () {
-        audio = $('#audio').get(0);
-        dur = audio.duration;
-        cur = audio.currentTime;
-        $('#duration').html(fixedSeconds(dur));
-        $('#cur').html(fixedSeconds(cur));
-        $('#range').attr('max', dur);
-        $('#range').val(cur);
-        wid = $('#range').width();
-        rightLength = wid - (wid * cur) / dur + 'px';
-        $('#play-line').css('right', rightLength);
-
-        audio.onended = function () {
-            audio.pause();
-            $('#play').removeClass('active');
-            clearInterval(timer);
-        }
-        if ($(this).hasClass('active')) {
-            audio.pause();
-            $(this).removeClass('active');
-
-        } else {
-            audio.play();
-            $(this).addClass('active');
-            timer = setInterval(function () {
-                $('#range').on('input', function () {
-                    //audio = $('#audio').get(0);
-                    cur = $(this).val();
-                    audio.currentTime = cur;
-                    console.log(cur);
-                    $('#cur').html(fixedSeconds($(this).val()));
-                    $("#range").val(this.value);
-                    rightLength = wid - (wid * cur) / dur + 'px';
-                    $('#play-line').css('right', rightLength);
-                })
-                dur = audio.duration;
-                cur = audio.currentTime;
-                $('#duration').html(fixedSeconds(dur));
-                $('#cur').html(fixedSeconds(cur));
-                $('#range').val(cur);
-                rightLength = wid - (wid * cur) / dur + 'px';
-                $('#play-line').css('right', rightLength-1);
-
-            }, 1000);
-        }
-    });
-     */
-
     function setAudio() {
         dur = audio.duration;
         cur = audio.currentTime;
@@ -160,7 +111,8 @@
         $('#range').attr('max', dur);
         $('#range').val(cur);
         rightLength = wid - (wid * cur) / dur + 'px';
-        $('#play-line').css('right', rightLength-1);
+        console.log(rightLength)
+        $('#play-line').css('right', rightLength);
     }
 
     audio.onloadedmetadata = setAudio;
@@ -169,9 +121,14 @@
         $('#play').removeClass('active');
         clearInterval(timer);
     }
+
     audio.onplaying = function () {
         timer = setInterval(setAudio, 1000);
     }
+
+    $('#range').on('input', function () {
+        audio.currentTime = $(this).val();
+    });
 
     $('#play').on('click', function () {
         if ($(this).hasClass('active')) {
@@ -183,7 +140,7 @@
             $(this).addClass('active');
         }
     });
-    
+
     $.util.initLoadImg('pic');
     
     $('#pic img').on('click', function(){
