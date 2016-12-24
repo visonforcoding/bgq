@@ -133,6 +133,7 @@
 
     $('#range').on('input', function () {
         audio.currentTime = $(this).val();
+        setAudio()
         audio.play();
     });
     /**
