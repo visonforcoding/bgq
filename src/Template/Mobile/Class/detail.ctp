@@ -115,20 +115,20 @@
         $('#play-line').css('right', rightLength);
     }
 
-    audio.onloadedmetadata = setAudio;
-    audio.onended = function () {
-        audio.pause();
-        $('#play').removeClass('active');
+    function clearTimer() {
         clearInterval(timer);
         timer = null;
     }
 
+    audio.onloadedmetadata = setAudio;
+    audio.onended = function () {
+        audio.pause();
+        $('#play').removeClass('active');
+        clearTimer();
+    }
+
     audio.onplaying = function () {
-        if(timer){
-            clearInterval(timer);
-            timer = null;
-        }
-        timer = setInterval(setAudio, 1000);
+        if(!timer) timer = setInterval(setAudio, 1000);
     }
 
     $('#range').on('input', function () {
@@ -138,8 +138,7 @@
     });
     /**
     $('#range').on('touchstart', function () {
-        clearInterval(timer);
-        timer = null;
+        clearTimer();
     });
     $('#range').on('ontouchend', function () {
         audio.play();
