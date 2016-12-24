@@ -128,7 +128,16 @@
 
     $('#range').on('input', function () {
         audio.currentTime = $(this).val();
+        audio.play();
     });
+    /**
+    $('#range').on('touchstart', function () {
+        clearInterval(timer);
+    });
+    $('#range').on('ontouchend', function () {
+        audio.play();
+    });
+     */
 
     $('#play').on('click', function () {
         if ($(this).hasClass('active')) {
