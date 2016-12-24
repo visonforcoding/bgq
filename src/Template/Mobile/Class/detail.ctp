@@ -169,6 +169,9 @@
         $('#play').removeClass('active');
         clearInterval(timer);
     }
+    audio.onplaying = function () {
+        timer = setInterval(setAudio, 1000);
+    }
 
     $('#play').on('click', function () {
         if ($(this).hasClass('active')) {
@@ -178,7 +181,6 @@
         } else {
             audio.play();
             $(this).addClass('active');
-            timer = setInterval(setAudio, 1000);
         }
     });
     
