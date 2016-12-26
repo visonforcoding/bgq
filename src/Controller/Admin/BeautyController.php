@@ -235,6 +235,53 @@ class BeautyController extends AppController {
         $this->loadComponent('Export');
         $this->Export->phpexcelExport($filename, $column, $arr);
     }
+    
+    public function export(){
+        $sort = $this->request->query('sidx');
+        $order = $this->request->query('sord');
+        $keywords = $this->request->query('keywords');
+        $begin_time = $this->request->query('begin_time');
+        $end_time = $this->request->query('end_time');
+        $where = [];
+        $where['is_pass'] = 1;
+        if (!empty($keywords)) {
+            $where['User.truename like'] = "%$keywords%";
+        }
+        if (!empty($begin_time) && !empty($end_time)) {
+            $begin_time = date('Y-m-d', strtotime($begin_time));
+            $end_time = date('Y-m-d', strtotime($end_time));
+            $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
+        }
+        $Table = $this->Beauty;
+        $column = ['姓名', '公司', '职位', '票数', '参选类型', '参选宣言', '兴趣爱好', '个人简介', '项目经验'];
+        $query = $Table->find()->contain(['Users', 'Users.Savants']);
+        $query->hydrate(false);
+        $query->select(['user_id', 'Users.truename', 'Users.position', 'Users.company', 'vote_nums', 'type_id', 'declaration', 'hobby', 'brief', 'Savants.xmjy', 'is_pass']);
+        if (!empty($where)) {
+            $query->where($where);
+        }
+        if (!empty($sort) && !empty($order)) {
+            $query->order([$sort => $order]);
+        }
+        $res = $query->toArray();
+        $arr = [];
+        $type = \Cake\Core\Configure::read('votingType');
+        foreach ($res as $k=>$v){
+            $arr[$k]['user_name'] = $v['user']['truename'];
+            $arr[$k]['user_company'] = $v['user']['company'];
+            $arr[$k]['user_position'] = $v['user']['position'];
+            $arr[$k]['vote_nums'] = $v['vote_nums'];
+            $arr[$k]['type'] = $type[$v['type_id']];
+            $arr[$k]['declaration'] = $v['declaration'];
+            $arr[$k]['hobby'] = $v['hobby'];
+            $arr[$k]['brief'] = $v['brief'];
+            $arr[$k]['xmjy'] = $v['user']['savant']['xmjy'];
+        }
+        $this->autoRender = false;
+        $filename = '菁英评选活动_' . date('Y-m-d') . '.xlsx';
+        $this->loadComponent('Export');
+        $this->Export->phpexcelExport($filename, $column, $arr);
+    }
 
     public function check($id) {
         $beauty = $this->Beauty->get($id);
