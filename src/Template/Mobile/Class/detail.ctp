@@ -92,6 +92,10 @@
     </div>
 </script>
 <script type="text/javascript">
+    <?php if($class->audio): ?>
+    LEMON.sys.storeUrl('<?= $class->audio ?>', '<?= $class->audio_mime ?>');
+    <?php endif; ?>
+    
     function fixedSeconds(value) {
         var hs = '', ms = '', ss = '', n = parseInt(value), h = parseInt(n / 3600), m = parseInt(n / 60) % 60, s = parseInt(n % 60);
         hs = h > 0 ? h + ':' : '';

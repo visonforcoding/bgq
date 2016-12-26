@@ -83,7 +83,7 @@ class ClassTable extends Table {
                 ->allowEmpty('audio');
 
         $validator
-                ->allowEmpty('pdf');
+                ->allowEmpty('zip');
 
         $validator
                 ->integer('is_free')
