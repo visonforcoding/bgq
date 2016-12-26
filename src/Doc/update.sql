@@ -1097,3 +1097,6 @@ ENGINE=InnoDB;
 ALTER TABLE `binggq`.`flow`
   ADD COLUMN `is_gift` tinyint(2) unsigned NOT NULL DEFAULT 0 COMMENT '是否赠送' COMMENT '是否赠送';
 
+ALTER TABLE `class`
+	ADD COLUMN `audio_mime` VARCHAR(20) NULL COMMENT '音频mime类型' AFTER `audio`;
+
