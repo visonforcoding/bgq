@@ -53,7 +53,7 @@
                 <div class="title">
                     音频资料
                 </div>
-                <div class="con">
+                <div class="con" id="oaudio">
                     <div class="audio-box">
                         <div class="audio-info flex flex_jusitify">
                             <div class="playbtn iconfont" id="play"></div>
@@ -79,9 +79,25 @@
                    <img src="../images/train-detail01.jpg"/>
                     <img src="../images/train-detail01.jpg"/>
                      <img src="../images/train-detail01.jpg"/>
+                      <img src="../images/train-detail01.jpg"/>
+                    <img src="../images/train-detail01.jpg"/>
+                     <img src="../images/train-detail01.jpg"/>
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+        	var oAudio = $('#oaudio');
+        	var offsetTop = oAudio.offset().top;
+        	$(window).on('scroll',function(){
+        		var scrollTop = document.body.scrollTop;
+        		if(scrollTop >= offsetTop){
+        			$(oAudio).addClass('fixed-audio-box');
+//      			$('.wraper').css;
+        		}else{
+        			$(oAudio).removeClass('fixed-audio-box');
+        		}
+        	})
+        </script>
         <script type="text/javascript">
             function fixedSeconds(value) {
                 var hs = '', ms = '', ss = '', n = parseInt(value), h = parseInt(n / 3600), m = parseInt(n / 60) % 60, s = parseInt(n % 60);
@@ -133,6 +149,7 @@
                             rightLength = wid - (wid * cur) / dur + 'px';
                             $('#play-line').css('right', rightLength);
                         })
+                         console.log(audio.currentTime);
                         dur = audio.duration;
                         cur = audio.currentTime;
                         $('#duration').html(fixedSeconds(dur));
