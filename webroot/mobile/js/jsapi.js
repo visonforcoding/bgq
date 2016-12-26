@@ -199,10 +199,14 @@ if(navigator.userAgent.toLocaleLowerCase().indexOf('smartlemon_ios')>0){  //iosé
                         return JSApiInvoke(api, {url:jump}, '');
                     });
                     break;
-                case "sys.storeUrl":
                 case "sys.update":
                     registerAPI(null, api, function () {
                         return JSApiInvoke(api, {url:arguments[0]}, '');
+                    });
+                    break;
+                case "sys.storeUrl":
+                    registerAPI(null, api, function () {
+                        return JSApiInvoke(api, {url:arguments[0], mime:arguments[1]}, '');
                     });
                     break;
                 case "event.tel":
