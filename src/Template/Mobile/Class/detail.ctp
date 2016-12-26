@@ -94,6 +94,7 @@
 <script type="text/javascript">
     <?php if($class->audio): ?>
     LEMON.sys.storeUrl('<?= $class->audio ?>', '<?= $class->audio_mime ?>');
+    LEMON.sys.mediaPlay();
     <?php endif; ?>
     
     function fixedSeconds(value) {
@@ -153,7 +154,6 @@
         if ($(this).hasClass('active')) {
             audio.pause();
             $(this).removeClass('active');
-
         } else {
             audio.play();
             $(this).addClass('active');
