@@ -42,11 +42,11 @@
         <div class="col-md-8">
             <input name="audio" type="text" readonly class="form-control" value=""/>
             <div id="audio"  class="jqupload"></div>
-            <span class="notice" style=" display: block">(*文件大小在10M以内,支持格式为mp3)</span>
-            <div class="col-md-8 form-group mt10">
+            <span class="notice" style=" display: block">(*文件大小在10M以内)</span>
+<!--            <div class="col-md-8 form-group mt10">
                 <label style=" display: inline-block;">音频标题</label>
                 <input name="audio_title" type="text"  placeholder="音频标题" class="inner-input"  value=""/>
-            </div>
+            </div>-->
         </div>
     </div>
     <div class="form-group media audio">
@@ -54,7 +54,7 @@
         <div class="col-md-8">
             <input name="zip" type="text" readonly class="form-control" value=""/>
             <div id="zip"  class="jqupload"></div>
-            <span class="notice" style=" display: block">(*文件仅支持格式为zip,直接改后缀会导致解压缩失败,压缩包里面不要带有文件夹)</span>
+            <span class="notice" style=" display: block">(*文件仅支持格式为zip,直接改后缀会导致解压缩失败)</span>
 <!--            <div class="col-md-8 form-group mt10">
                 <label style=" display: inline-block;">音频标题</label>
                 <input name="audio_title" type="text"  placeholder="音频标题" class="inner-input"  value=""/>
@@ -80,7 +80,7 @@
     <script href="/wpadmin/lib/ueditor/lang/zh-cn/zh-cn.js" ></script>-->
 <script>
     $(function () {
-        initJquploadAttach('audio', '/wpadmin/util/doUpload?dir=class/audio', 'mp3', 10485760);
+        initJquploadAttach('audio', '/wpadmin/util/doUpload?dir=class/audio', '*', 10485760);
         initJquploadAttach('zip', '/wpadmin/util/doUpload?dir=class/courseware', 'zip');
 //         initJqupload('cover', '/wpadmin/util/doUpload?dir=', 'jpg,png,gif,jpeg'); //初始化图片上传
         //var ue = UE.getEditor('content'); //初始化富文本编辑器

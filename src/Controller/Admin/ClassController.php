@@ -48,6 +48,11 @@ class ClassController extends AppController {
         $clas = $this->Class->newEntity();
         if ($this->request->is('post')) {
             $data = $this->request->data;
+            $finfo = new \finfo(FILEINFO_MIME);
+            if(!$finfo){
+                return $this->Util->ajaxReturn(false, '获取文件mime类型失败');
+            }
+            $data['audio_mime'] = $finfo->file(WWW_ROOT . $data['audio']);
             $clas = $this->Class->patchEntity($clas, $data);
             $clas->course_id = $course_id;
             $res = $this->Class->save($clas);
@@ -82,7 +87,13 @@ class ClassController extends AppController {
         ]);
         $old = $clas->zip;
         if ($this->request->is(['post', 'put'])) {
-            $class = $this->Class->patchEntity($clas, $this->request->data);
+            $data = $this->request->data;
+            $finfo = new \finfo(FILEINFO_MIME);
+            if(!$finfo){
+                return $this->Util->ajaxReturn(false, '获取文件mime类型失败');
+            }
+            $data['audio_mime'] = substr($finfo->file(WWW_ROOT . $data['audio']), 0, strpos($finfo->file(WWW_ROOT . $data['audio']), ';'));
+            $class = $this->Class->patchEntity($clas, $data);
             $res = $this->Class->save($class);
             if ($res) {
                 if($old != $res->zip){
