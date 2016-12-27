@@ -93,7 +93,6 @@
 </script>
 <script type="text/javascript">
     <?php if($class->audio): ?>
-    LEMON.sys.storeUrl('<?= $class->audio ?>', '<?= $class->audio_mime ?>');
     LEMON.sys.mediaPlay();
     <?php endif; ?>
     
@@ -155,6 +154,7 @@
             audio.pause();
             $(this).removeClass('active');
         } else {
+            LEMON.sys.storeUrl('<?= $class->audio ?>', '<?= $class->audio_mime ?>');
             audio.play();
             $(this).addClass('active');
         }
