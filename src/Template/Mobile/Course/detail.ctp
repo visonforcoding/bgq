@@ -277,7 +277,7 @@
                                 }
                             });
                         } else {
-                            location.href = '/wx/charge';
+                            location.href = '/wx/charge/' + window.course_id;
                         }
                         break;
                     case 'down':

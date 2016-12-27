@@ -171,7 +171,7 @@ class WxController extends AppController {
      * 预约支付页  此页面URL 需在微信公众号的微信支付那里配置 支付域
      * @param int $id  订单id
      */
-    public function meetPay($id = null, $is_charge=NULL) {
+    public function meetPay($id = null) {
         $this->handCheckLogin();
         $UserTable = \Cake\ORM\TableRegistry::get('User');
         $OrderTable = \Cake\ORM\TableRegistry::get('Order');
@@ -253,8 +253,13 @@ class WxController extends AppController {
             'isWx' => $this->request->is('weixin') ? true : false,
             'aliPayParameters' => $aliPayParameters,
         ));
-
-        $this->set(['pageTitle' => '订单支付']);
+        
+        if($this->request->is('get')){
+            $this->set('course_id', $this->request->query('course_id'));
+        }
+        $this->set([
+            'pageTitle' => '订单支付',
+        ]);
         $this->set(compact('order_detail', 'order'));
         if($order->type == 3){
             $this->render('pay');
@@ -517,12 +522,13 @@ class WxController extends AppController {
     /**
      * 充值
      */
-    public function charge(){
+    public function charge($id=NULL){
         $RechargeGiftTable = \Cake\ORM\TableRegistry::get('RechargeGift');
         $gift = $RechargeGiftTable->find()->order(['recharge_money'=>'asc'])->all()->toArray();
         $this->set([
             'pageTitle'=>'充值',
-            'gift' => $gift
+            'gift' => $gift,
+            'course_id' => $id
         ]);
     }
     
