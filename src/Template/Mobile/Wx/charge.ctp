@@ -54,7 +54,11 @@
             url: '/course/charge-order/'+input,
             func: function(res){
                 if(res.status){
-                    location.href = '/wx/meet-pay/'+res.data+'?course_id='+window.course_id;
+                    if(window.course_id){
+                        location.href = '/wx/meet-pay/'+res.data+'?course_id='+window.course_id;
+                    } else {
+                        location.href = '/wx/meet-pay/'+res.data;
+                    }
                 }
             }
         });
