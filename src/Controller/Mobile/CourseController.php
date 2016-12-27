@@ -336,8 +336,9 @@ class CourseController extends AppController {
                 'remark' => '充值余额',
                 'gift' => $gift
             ]);
-            $order = $OrderTable->save($order);die;
+            $order = $OrderTable->save($order);
             \Cake\Log\Log::debug('订单：'.$order, 'devlog');
+            die;
             if($order){
                 return $this->Util->ajaxReturn(true, '', $order->id);
             } else {
