@@ -50,6 +50,7 @@
             </div>
         </div>
     </div>
+    <img src="<?= $class->zip ?>" />
     <?php endif; ?>
     <?php if(file_exists(WWW_ROOT . $class->zip)): ?>
     <div class="train-intro-detail bgff mt20">
