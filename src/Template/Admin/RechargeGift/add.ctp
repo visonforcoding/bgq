@@ -7,17 +7,13 @@
     <div class="form-group">
         <label class="col-md-2 control-label">充值金额（元）</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('recharge_money', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <input type="text" name="recharge_money" class="form-control validate[custom[number]]" required="required" id="recharge-money">
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">充值赠送金额（元）</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('gift', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <input type="text" name="gift" class="form-control validate[custom[number]]" required="required" id="gift">
         </div>
     </div>
     <div class="form-group">

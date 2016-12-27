@@ -4,23 +4,19 @@
 <?php $this->end() ?> 
 <div class="work-copy">
     <?= $this->Form->create($rechargeGift, ['class' => 'form-horizontal']) ?>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">充值金额（元）</label>
         <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('recharge_money', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <input type="text" name="recharge_money" class="form-control validate[custom[number]]" required="required" id="recharge-money" value="<?= $rechargeGift->recharge_money ?>">
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 control-label">充值赠送金额（元）</label>
         <div class="col-md-8">
-                        <?php
-            echo $this->Form->input('gift', ['label' => false, 'class' => 'form-control']);
-            ?>
+            <input type="text" name="gift" class="form-control validate[custom[number]]" required="required" id="gift" value="<?= $rechargeGift->gift ?>">
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type='submit' id='submit' class='btn btn-primary' value='保存' data-loading='稍候...' /> 
         </div>
