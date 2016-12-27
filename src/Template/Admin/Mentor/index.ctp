@@ -50,7 +50,7 @@
                             {name: 'company', editable: true, align: 'center'},
                             {name: 'position', editable: true, align: 'center'},
                             {name: 'subscribe_nums', editable: true, align: 'center', formatter: function(cell, opt, row){
-                                    return '<a href="/admin/mentorsubscribe/index/'+row.id+'">'+cell+'</a>';
+                                    return '<a href="/admin/mentor-subscribe/index/'+row.id+'">'+cell+'</a>';
                             }},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
