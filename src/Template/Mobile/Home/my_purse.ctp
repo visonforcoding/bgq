@@ -22,7 +22,7 @@
                     <?php if($flow->is_gift): ?>
                     <!--TODO:赠送展示-->
                     <?php endif; ?>
-                    <?php if($flow->user_id==$userInfo->id):?>+<?php else:?>-<?php endif;?><?=$flow->amount?>
+                    <?php if($flow->user_id==$userInfo->id):?>+<?php else:?>-<?php endif;?><?=$flow->price?>
                 </span>
             </li>
         <?php endforeach; ?>
