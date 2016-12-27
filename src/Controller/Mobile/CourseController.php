@@ -317,7 +317,7 @@ class CourseController extends AppController {
             $gift = 0;
             $RechargeGiftTable = \Cake\ORM\TableRegistry::get('RechargeGift');
             $rechargeGift = $RechargeGiftTable->find()->all()->toArray();
-            \Cake\Log\Log::debug('充值赠送：'.$rechargeGift, 'devlog');
+            \Cake\Log\Log::debug($rechargeGift, 'devlog');
             for($i=0;$i<count($rechargeGift);$i++){
                 if($money >= $rechargeGift[$i]->recharge_money){
                     $gift = $rechargeGift[$i]->gift;
