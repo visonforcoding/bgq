@@ -334,7 +334,7 @@ class CourseController extends AppController {
                 'fee' => 0, // 实际支付的默认值
                 'price' => $money,
                 'remark' => '充值余额',
-                'gift' => $gift
+                'gift' => number_format($gift, '2')
             ]);
             $order = $OrderTable->save($order);
             \Cake\Log\Log::debug('订单：'.$order, 'devlog');
