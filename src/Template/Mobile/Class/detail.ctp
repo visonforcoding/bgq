@@ -32,7 +32,7 @@
         <div class="title">
             音频资料
         </div>
-        <div class="con">
+        <div class="con"id="oaudio">
             <div class="audio-box">
                 <div class="audio-info flex flex_jusitify">
                     <div class="playbtn iconfont" id="play"></div>
@@ -230,6 +230,17 @@
                 $('#con').find('p').toggleClass('line2');
                 $(em).find('.r-ico').toggleClass('rote');
                 break;
+        }
+    });
+    
+    var oAudio = $('#oaudio');
+    var offsetTop = oAudio.offset().top;
+    $(window).on('scroll',function(){
+        var scrollTop = document.body.scrollTop;
+        if(scrollTop >= offsetTop){
+            $(oAudio).addClass('fixed-audio-box');
+        }else{
+            $(oAudio).removeClass('fixed-audio-box');
         }
     });
     

@@ -68,7 +68,7 @@
                                     return s;
                                 }},
                             {name: 'pay_nums', editable: true, align: 'center', formatter: function(cell, opt, row){
-                                    return '<a href="/admin/courseapply/index/'+row.id+'">'+cell+'</a>';
+                                    return '<a href="/admin/course-apply/index/'+row.id+'">'+cell+'</a>';
                             }},
                             {name: 'create_time', editable: true, align: 'center'},
                             {name: 'update_time', editable: true, align: 'center'},
