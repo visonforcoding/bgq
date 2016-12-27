@@ -42,12 +42,12 @@ class RechargeGiftTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->integer('recharge_money')
+            ->decimal('recharge_money')
             ->requirePresence('recharge_money', 'create')
             ->notEmpty('recharge_money');
 
         $validator
-            ->integer('gift')
+            ->decimal('gift')
             ->requirePresence('gift', 'create')
             ->notEmpty('gift');
 
