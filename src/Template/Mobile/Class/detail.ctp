@@ -50,7 +50,6 @@
             </div>
         </div>
     </div>
-    <img src="<?= $class->zip ?>" />
     <?php endif; ?>
     <?php if(file_exists(WWW_ROOT . $class->zip)): ?>
     <div class="train-intro-detail bgff mt20">
@@ -93,8 +92,8 @@
     </div>
 </script>
 <script type="text/javascript">
-    <?php if($class->zip): ?>
-    LEMON.sys.storeUrl('<?= $class->zip ?>', '<?= $class->audio_mime ?>');
+    <?php if(file_exists(WWW_ROOT . $class->audio)): ?>
+    LEMON.sys.storeUrl('<?= $class->audio ?>', '<?= $class->audio_mime ?>');
     LEMON.sys.mediaPlay();
     <?php endif; ?>
     
@@ -139,8 +138,12 @@
 
     $('#range').on('input', function () {
         audio.currentTime = $(this).val();
-        setAudio()
-        audio.play();
+        setAudio();
+        if ($('#play').hasClass('active')) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
     });
     /**
     $('#range').on('touchstart', function () {
@@ -156,7 +159,6 @@
             audio.pause();
             $(this).removeClass('active');
         } else {
-            
             audio.play();
             $(this).addClass('active');
         }
