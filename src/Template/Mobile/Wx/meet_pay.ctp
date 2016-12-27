@@ -35,8 +35,6 @@
             window.apply = true;
         }
     }
-    
-    window.course_id = '<?= $course_id ?>';
 </script>
 <script>
     var payMethod = 'wx';
@@ -75,19 +73,7 @@
                                     if (res == '0') {
                                         $.util.alert('支付成功');
                                         setTimeout(function () {
-                                            if(window.course_id){
-                                                $.util.ajax({
-                                                    url: '/wx/buy',
-                                                    data: {course_id: window.course_id},
-                                                    func: function(res){
-                                                        if(res.status){
-                                                            location.href = '/wx/buy-success/'+res.data;
-                                                        }
-                                                    }
-                                                });
-                                            } else {
-                                                window.location.href = '/wx/pay-success/<?= $order->id ?>';
-                                            }
+                                            window.location.href = '/wx/pay-success/<?= $order->id ?>';
                                         }, 1000);
                                     } else {
                                         $.util.alert('支付未成功');
@@ -103,19 +89,7 @@
                                                 if (res == '0') {
                                                     $.util.alert('支付成功');
                                                     setTimeout(function () {
-                                                        if(window.course_id){
-                                                            $.util.ajax({
-                                                                url: '/wx/buy',
-                                                                data: {course_id: window.course_id},
-                                                                func: function(res){
-                                                                    if(res.status){
-                                                                        location.href = '/wx/buy-success/'+res.data;
-                                                                    }
-                                                                }
-                                                            });
-                                                        } else {
-                                                            window.location.href = '/wx/pay-success/<?= $order->id ?>';
-                                                        }
+                                                        window.location.href = '/wx/pay-success/<?= $order->id ?>';
                                                     }, 1000);
                                                 } else {
                                                     $.util.alert('支付未成功');
@@ -135,19 +109,7 @@
                                 if (res == '9000') {
                                     $.util.alert('支付成功');
                                     setTimeout(function () {
-                                        if(window.course_id){
-                                            $.util.ajax({
-                                                url: '/wx/buy',
-                                                data: {course_id: window.course_id},
-                                                func: function(res){
-                                                    if(res.status){
-                                                        location.href = '/wx/buy-success/'+res.data;
-                                                    }
-                                                }
-                                            });
-                                        } else {
-                                            window.location.href = '/wx/pay-success/<?= $order->id ?>';
-                                        }
+                                        window.location.href = '/wx/pay-success/<?= $order->id ?>';
                                     }, 1000);
                                 } else {
                                     $.util.alert('支付未成功');
@@ -173,19 +135,7 @@
                     if (res.err_msg == "get_brand_wcpay_request：ok") {
                         $.util.alert('支付成功');
                         setTimeout(function () {
-                            if(window.course_id){
-                                $.util.ajax({
-                                    url: '/wx/buy',
-                                    data: {course_id: window.course_id},
-                                    func: function(res){
-                                        if(res.status){
-                                            location.href = '/wx/buy-success/'+res.data;
-                                        }
-                                    }
-                                });
-                            } else {
-                                window.location.href = '/wx/pay-success/<?= $order->id ?>';
-                            }
+                            window.location.href = '/wx/pay-success/<?= $order->id ?>';
                         }, 1000);
                     }else{
                         $.util.alert('未成功支付');
