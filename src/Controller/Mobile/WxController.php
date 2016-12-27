@@ -254,9 +254,7 @@ class WxController extends AppController {
             'aliPayParameters' => $aliPayParameters,
         ));
         
-        if($this->request->is('get')){
-            $this->set('course_id', $this->request->query('course_id'));
-        }
+        $this->set('course_id', $this->request->query('course_id'));
         $this->set([
             'pageTitle' => '订单支付',
         ]);
