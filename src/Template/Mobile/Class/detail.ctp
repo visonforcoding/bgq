@@ -93,6 +93,7 @@
 </script>
 <script type="text/javascript">
     <?php if($class->audio): ?>
+    LEMON.sys.storeUrl('<?= $class->audio ?>', '<?= $class->audio_mime ?>');
     LEMON.sys.mediaPlay();
     <?php endif; ?>
     
@@ -154,14 +155,15 @@
             audio.pause();
             $(this).removeClass('active');
         } else {
-            LEMON.sys.storeUrl('<?= $class->audio ?>', '<?= $class->audio_mime ?>');
+            <?php if($class->audio): ?>
+                $('source').attr('src', '<?= $class->audio ?>');
+            <?php endif; ?>
             audio.play();
             $(this).addClass('active');
         }
     });
 
     $.util.initLoadImg('pic');
-    
     $('#pic img').on('click', function(){
         var imgs = [];
         $('#pic img').each(function(){imgs.push(this.src)});
