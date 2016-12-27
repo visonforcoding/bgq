@@ -317,11 +317,13 @@ class CourseController extends AppController {
             $gift = 0;
             $RechargeGiftTable = \Cake\ORM\TableRegistry::get('RechargeGift');
             $rechargeGift = $RechargeGiftTable->find()->all()->toArray();
+            \Cake\Log\Log::debug('充值赠送：'.$rechargeGift, 'devlog');
             for($i=0;$i<count($rechargeGift);$i++){
                 if($money >= $rechargeGift[$i]->recharge_money){
                     $gift = $rechargeGift[$i]->gift;
                 }
             }
+            \Cake\Log\Log::debug('赠送：'.$gift, 'devlog');
             $OrderTable = \Cake\ORM\TableRegistry::get('Order');
             $order = $OrderTable->newEntity([
                 'type' => 3, // 类型为充值
@@ -334,7 +336,7 @@ class CourseController extends AppController {
                 'remark' => '充值余额',
                 'gift' => $gift
             ]);
-            \Cake\Log\Log::debug($order, 'devlog');
+            \Cake\Log\Log::debug('订单：'.$order, 'devlog');
             $order = $OrderTable->save($order);
             if($order){
                 return $this->Util->ajaxReturn(true, '', $order->id);
