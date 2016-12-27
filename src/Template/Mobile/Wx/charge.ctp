@@ -28,6 +28,9 @@
     立即充值
 </div>
 <?php $this->start('script'); ?>
+<script>
+   window.course_id = '<?= $course_id ?>';
+</script>
 <script type="text/javascript">
     $('#charge li').on('tap', function () {
         $('#gift_money').show();
@@ -51,7 +54,7 @@
             url: '/course/charge-order/'+input,
             func: function(res){
                 if(res.status){
-                    location.href = '/wx/meet-pay/'+res.data;
+                    location.href = '/wx/meet-pay/'+res.data+'?course_id='+window.course_id;
                 }
             }
         });
