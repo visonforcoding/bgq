@@ -27,12 +27,16 @@
             <p class='line2'><?= $class->abstract ?></p>
         </div>
     </div>
-    <?php if(file_exists(WWW_ROOT . $class->audio)): ?>
     <div class="train-audio-box bgff mt20">
-        <div class="title">
-            音频资料
-        </div>
-        <div class="con" id="oaudio">
+                <div class="title">
+                   	 音频资料
+                </div>
+             </div>
+</div>
+    
+    <?php //if(file_exists(WWW_ROOT . $class->audio)): ?>
+    <div class="train-audio-box bgff mt20" id="oaudio">
+        <div class="con">
             <div class="audio-box bgff">
                 <div class="audio-info flex flex_jusitify">
                     <div class="playbtn iconfont" id="play"></div>
@@ -50,8 +54,9 @@
             </div>
         </div>
     </div>
-    <?php endif; ?>
-    <?php if(file_exists(WWW_ROOT . $class->zip)): ?>
+<?php //endif; ?>
+<div class="wraper" style="height:1000px;">
+    <?php //if(file_exists(WWW_ROOT . $class->zip)): ?>
     <div class="train-intro-detail bgff mt20">
         <div class="title flex flex_jusitify  innerwaper" id="down">
             <h3 class="">PPT课程</h3>
@@ -62,9 +67,10 @@
             <?php endforeach; ?>
         </div>
     </div>
-    <?php endif; ?>
-    <div class="reg-shadow" style="display: none;" id="mentorData"></div>
+    <?php //endif; ?>
 </div>
+    <div class="reg-shadow" style="display: none;" id="mentorData"></div>
+
 <script type="text/html" id="mentorTpl">
     <div class="flex flex_center fullwraper">
         <div class="alert-booking">
@@ -96,6 +102,10 @@
     LEMON.sys.storeUrl('<?= $class->audio ?>', '<?= $class->audio_mime ?>');
     LEMON.sys.mediaPlay();
     <?php endif; ?>
+        
+    if($.util.isIOS){
+        $('#oaudio').addClass('sticky');
+    }
     
     function fixedSeconds(value) {
         var hs = '', ms = '', ss = '', n = parseInt(value), h = parseInt(n / 3600), m = parseInt(n / 60) % 60, s = parseInt(n % 60);
@@ -240,7 +250,9 @@
     $(window).on('scroll',function(){
         var scrollTop = document.body.scrollTop;
         if(scrollTop >= offsetTop){
-            $(oAudio).addClass('fixed-audio-box');
+            if(!$.util.isIOS){
+                $(oAudio).addClass('fixed-audio-box');
+            }
         }else{
             $(oAudio).removeClass('fixed-audio-box');
         }
