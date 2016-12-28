@@ -7,16 +7,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title><?= isset($pageTitle) ? $pageTitle : '并购帮'; ?></title>
-        <link rel="stylesheet" type="text/css" href="/mobile/css/common.css?t=1222"/>
-        <link rel="stylesheet" type="text/css" href="/mobile/css/style.css?t=1222"/>
+        <link rel="stylesheet" type="text/css" href="/mobile/css/common.css?t=1228"/>
+        <link rel="stylesheet" type="text/css" href="/mobile/css/style.css?t=1228"/>
         <script type="text/javascript">
             (function (win) { var h; var docEl = document.documentElement; function setUnitA() { var clientWidth = docEl.clientWidth; if (!clientWidth) { return } if (clientWidth > 750) { docEl.style.fontSize = 100 + "px" } else { docEl.style.fontSize = 100 * (clientWidth / 750) + "px" } } win.addEventListener("resize", function () { clearTimeout(h); h = setTimeout(setUnitA, 300) }, false); win.addEventListener("pageshow", function (e) { if (e.persisted) { clearTimeout(h); h = setTimeout(setUnitA, 300) } }, false); setUnitA() })(window);
         </script>
         <?= $this->fetch('css') ?>
         <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-        <script type="text/javascript" src="/mobile/js/jsapi.js?1222"></script>
+        <script type="text/javascript" src="/mobile/js/jsapi.js?1228"></script>
         <script type="text/javascript" src="/mobile/js/zepto.min.js"></script>
-        <script type="text/javascript" src="/mobile/js/util.js?1222"></script>
+        <script type="text/javascript" src="/mobile/js/util.js?1228"></script>
         <script>
             var __wxConfig = <?= json_encode($wxConfig) ?>;
             var __loginStatus = '<?=$isLogin ?>';
