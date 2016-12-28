@@ -721,6 +721,9 @@ class HomeController extends AppController {
                 ]
             ]);
             $now = \Cake\I18n\Time::now();
+            if($book->status == 1){
+                return $this->Util->ajaxReturn(false, '您已经通过申请了');
+            }
             $book->status = 1; //更改
             $book->sort_time = $now;
             $UserTable = \Cake\ORM\TableRegistry::get('user');
@@ -758,6 +761,9 @@ class HomeController extends AppController {
                     }
                 ]
             ]);
+            if($book->status == 2){
+                return $this->Util->ajaxReturn(false, '您已经拒绝过了');
+            }
             $book->status = 2;
             if ($BookTable->save($book)) {
                 $this->loadComponent('Business');
