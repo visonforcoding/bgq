@@ -51,10 +51,14 @@
             </div>
             <div class="train-audio-box bgff mt20">
                 <div class="title">
-                    音频资料
+                   	 音频资料
                 </div>
-                <div class="con" id="oaudio">
-                    <div class="audio-box">
+             </div>
+             <!--wraper--end-->
+             </div>
+             <div class="train-audio-box sticky fixed-audio-box"  id="oaudio">
+                <div class="con">
+                    <div class="audio-box bgff">
                         <div class="audio-info flex flex_jusitify">
                             <div class="playbtn iconfont" id="play"></div>
                             <div class="duration"><i id="cur">00:00</i>/<i id="duration">00:00</i></div>
@@ -71,6 +75,7 @@
                     </div>
                 </div>
             </div>
+            <div class='wraper'>
               <div class="train-intro-detail bgff mt20">
                 <div class="title flex flex_jusitify  inner" id="down">
                     <h3 class="">PPT课程</h3>
@@ -86,6 +91,14 @@
             </div>
         </div>
         <script type="text/javascript">
+        	function onInputFileChange(){
+				var file = document.getElementById('file').files[0]; 
+				var url = URL.createObjectURL(file); 
+				console.log(url); 
+				document.getElementById("audio").src = url; 
+        	}
+        </script>
+       <script type="text/javascript">
         	var oAudio = $('#oaudio');
         	var offsetTop = oAudio.offset().top;
         	$(window).on('scroll',function(){
