@@ -12,17 +12,17 @@
         </div>
     </div>
     <div class="train-intro-detail bgff mt20">
-        <div class="title flex flex_jusitify  inner" id="down">
+        <div class="title flex flex_jusitify  innerwaper" id="down">
             <h3 class="color-items">课程简述</h3>
             <div class="iconfont r-ico">&#xe666;</div>
         </div>
-        <div class="con inner" id="con">
+        <div class="con innerwaper" id="con">
             <p class='line2'><?= $course->abstract ?></p>
         </div>
     </div>
     <div class="course bgff mt20">
         <div class="title flex flex_jusitify">
-            <h3 class="inner">课程目录（<?= $course->class_nums ?>）</h3>
+            <h3 class="innerwaper">课程目录（<?= $course->class_nums ?>）</h3>
         </div>
         <div class="courselist">
             <ul class="outerblock">
@@ -103,7 +103,7 @@
 </div>
 <div class="charge-box charge-box-hide" id="buy">
     <div class="title">
-        <h3 class="nav-title  inner"><?= $course->title ?></h3>
+        <h3 class="nav-title  innerwaper"><?= $course->title ?></h3>
         <div class="iconfont closed" id="closed">&#xe6b4;</div>
     </div>
     <ul class="outerblock">
@@ -124,7 +124,7 @@
             </div>
         </li>
     </ul>
-    <div class="inner mt60">
+    <div class="innerwaper mt60">
         <div class="btn-pay" id="buy_btn">
             立即充值
         </div>
