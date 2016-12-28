@@ -3,7 +3,7 @@
         <div class="title">
             <h3 class="color-items"><!--<span>01</span>--> <?= $class->title ?></h3>
         </div>
-        <div class="tab-con-box tab-booking inner">
+        <div class="tab-con-box tab-booking innerwaper">
             <div class="booking-items">
                 <div class="nav-title flex" id='mentor_<?= $class->mentor->id ?>' mentor_id='<?= $class->mentor->id ?>'>
                     <div class="avatar">
@@ -19,11 +19,11 @@
         </div>
     </div>
     <div class="train-intro-detail bgff mt20">
-        <div class="title flex flex_jusitify  inner" id="down">
+        <div class="title flex flex_jusitify  innerwaper" id="down">
             <h3 class="color-items">课程简述</h3>
             <div class="iconfont r-ico">&#xe666;</div>
         </div>
-        <div class="con inner" id="con">
+        <div class="con innerwaper" id="con">
             <p class='line2'><?= $class->abstract ?></p>
         </div>
     </div>
@@ -32,8 +32,8 @@
         <div class="title">
             音频资料
         </div>
-        <div class="con"id="oaudio">
-            <div class="audio-box">
+        <div class="con" id="oaudio">
+            <div class="audio-box bgff">
                 <div class="audio-info flex flex_jusitify">
                     <div class="playbtn iconfont" id="play"></div>
                     <div class="duration"><i id="cur">00:00</i>/<i id="duration">00:00</i></div>
@@ -53,10 +53,10 @@
     <?php endif; ?>
     <?php if(file_exists(WWW_ROOT . $class->zip)): ?>
     <div class="train-intro-detail bgff mt20">
-        <div class="title flex flex_jusitify  inner" id="down">
+        <div class="title flex flex_jusitify  innerwaper" id="down">
             <h3 class="">PPT课程</h3>
         </div>
-        <div class="con inner ppt-box" id='pic'>
+        <div class="con innerwaper ppt-box" id='pic'>
             <?php foreach($class->class_pics as $k=>$v): ?>
             <img init_src="<?= $v->pic ?>"/>
             <?php endforeach; ?>
