@@ -152,7 +152,7 @@ class ClassController extends AppController {
         $where = [];
         $where['Class.is_del'] = 0;
         if($id){
-            $where['course_id'] = $id;
+            $where['Class.course_id'] = $id;
         }
         if (!empty($keywords)) {
             $where['or'] = [

@@ -40,7 +40,7 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/mentor-subscribe/getDataList",
+                        url: "/admin/mentor-subscribe/getDataList/<?= $id ?>",
                         datatype: "json",
                         mtype: "POST",
                         colNames:
