@@ -5,7 +5,7 @@
 <div class="col-xs-12">
     <form id="table-bar-form">
         <div class="table-bar form-inline">
-            <a href="/admin/meetSubject/add" class="btn btn-small btn-warning">
+            <a href="/admin/meet-subject/add" class="btn btn-small btn-warning">
                 <i class="icon icon-plus-sign"></i>添加
             </a>
             <div class="form-group">
@@ -35,7 +35,7 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/meetSubject/getDataList<?php if(isset($user_id)):?>/<?=$user_id?><?php endif;?>",
+                        url: "/admin/meet-subject/getDataList<?php if(isset($user_id)):?>/<?=$user_id?><?php endif;?>",
                         datatype: "json",
                         mtype: "POST",
                         colNames:
@@ -103,7 +103,7 @@
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-                    response += '<a title="编辑" href="/admin/meetSubject/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+                    response += '<a title="编辑" href="/admin/meet-subject/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     return response;
                 }
 
@@ -115,7 +115,7 @@
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/admin/meetSubject/delete',
+                            url: '/admin/meet-subject/delete',
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
@@ -148,12 +148,12 @@
                     searchData['sidx'] = sortColumnName;
                     searchData['sort'] = sortOrder;
                     var searchQueryStr = $.param(searchData);
-                    $("body").append("<iframe src='/admin/meetSubject/exportExcel<?php if(isset($user_id)):?>/<?=$user_id?><?php endif;?>?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                    $("body").append("<iframe src='/admin/meet-subject/exportExcel<?php if(isset($user_id)):?>/<?=$user_id?><?php endif;?>?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
 
                 function doView(id) {
                     //查看明细
-                    url = '/admin/meetSubject/view/' + id;
+                    url = '/admin/meet-subject/view/' + id;
                     layer.open({
                         type: 2,
                         title: '查看详情',
