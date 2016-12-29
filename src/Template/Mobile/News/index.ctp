@@ -38,14 +38,14 @@
             </div>
         </a>
         <div class="news-bottom clearfix">
-            <div class="sec-b-l">
+<!--            <div class="sec-b-l">
                 <div class="sec-like">
                     <span class="iconfont">&#xe61b;</span>{#praise_nums#}
                 </div>
                 <div class="sec-comment">
                     <span class="iconfont">&#xe61d;</span>{#comment_nums#}
                 </div>
-            </div>
+            </div>-->
             <div class="sec-b-r">
                 {#newstags#}
             </div>
