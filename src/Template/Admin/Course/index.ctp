@@ -94,6 +94,17 @@
                             repeatitems: false,
                             id: "id"
                         },
+                        loadComplete: function (data) {
+                            var clip = '';
+                            clip = new ZeroClipboard($('.copy'));
+                            console.log('可以复制了');
+                            clip.on('copy', function (event) {
+                                clip.setData('text/plain', '/course/detail/' + event.target.id);
+                            });
+                            clip.on("aftercopy", function (event) {
+                                layer.msg("复制了: " + event.data["text/plain"]);
+                            });
+                        },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
                 });
 
@@ -102,6 +113,7 @@
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="课程" href="/admin/class/index/'+rowObject.id+'" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-book"></i> </a>';
                     response += '<a title="编辑" href="/admin/course/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+                    response += '<a title="复制链接" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
                     if(rowObject.is_recom){
                         response += '<a title="取消推荐" onclick="recom('+rowObject.id+')" href="javascript:void(0)" class="grid-btn "><i class="icon icon-thumbs-o-down"></i> </a>';
                     } else {
