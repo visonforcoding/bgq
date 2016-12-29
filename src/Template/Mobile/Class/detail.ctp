@@ -55,7 +55,7 @@
         </div>
     </div>
 <?php //endif; ?>
-<div class="wraper" style="height:1000px;">
+<div class="wraper">
     <?php //if(file_exists(WWW_ROOT . $class->zip)): ?>
     <div class="train-intro-detail bgff mt20">
         <div class="title flex flex_jusitify  innerwaper" id="down">
