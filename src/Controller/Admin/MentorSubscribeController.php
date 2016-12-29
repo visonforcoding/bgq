@@ -21,8 +21,11 @@ class MentorSubscribeController extends AppController {
      *
      * @return void
      */
-    public function index() {
-        $this->set('mentorSubscribe', $this->MentorSubscribe);
+    public function index($id=null) {
+        $this->set([
+            'mentorSubscribe'=>$this->MentorSubscribe,
+            'id' => $id
+        ]);
     }
 
     /**
@@ -111,7 +114,7 @@ class MentorSubscribeController extends AppController {
      *
      * @return json
      */
-    public function getDataList() {
+    public function getDataList($id=null) {
         $this->request->allowMethod('ajax');
         $page = $this->request->data('page');
         $rows = $this->request->data('rows');
@@ -122,6 +125,9 @@ class MentorSubscribeController extends AppController {
         $end_time = $this->request->data('end_time');
         $where = [];
         $where['MentorSubscribe.is_del'] = 0;
+        if($id){
+            $where['MentorSubscribe.mentor_id'] = $id;
+        }
         if (!empty($keywords)) {
             $where['or'] = [
                 'Mentors.name' => "%$keywords%",
