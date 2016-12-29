@@ -7,11 +7,11 @@
         <div class="table-bar form-inline">
             <div class="form-group">
                 <label for="keywords">关键字</label>
-                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
+                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="姓名">
                 <input style="display: none" />
             </div>
             <a onclick="doSearch();" class="btn btn-info"><i class="icon icon-search"></i>搜索</a>
-            <a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>
+            <!--<a onclick="doExport();" class="btn btn-info"><i class="icon icon-file-excel"></i>导出</a>-->
         </div>
     </form>
     <table id="list"><tr><td></td></tr></table> 
