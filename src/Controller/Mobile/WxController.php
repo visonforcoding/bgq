@@ -488,8 +488,8 @@ class WxController extends AppController {
                 'status' => 1,
                 'remark' => '购买培训《'.$course->title.'》'
             ]);
-            $tran = $FlowTable->connection()->transactional(function()use($UserTable, $user, $platform, $FlowTable, $flow){
-                return $UserTable->save($user) && $UserTable->save($platform) && $FlowTable->save($flow);
+            $tran = $FlowTable->connection()->transactional(function()use($UserTable, $user, $platform, $FlowTable, $flow, $CourseTable, $course){
+                return $UserTable->save($user) && $UserTable->save($platform) && $FlowTable->save($flow) && $CourseTable->save($course);
             });
             if($tran){
                 $this->loadComponent('Business');
