@@ -169,6 +169,8 @@
     window.course_id = '<?= $course->id ?>';
 </script>
 <script type="text/javascript">
+    LEMON.sys.back('/course/index');
+    
     var detail = function(o){
         this.opt = {
             course_id: ''
