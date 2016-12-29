@@ -245,7 +245,7 @@
                                     $('#my_wallet').html('￥'+res.data);
                                     if(res.data < window.course_fee){
                                         $('#need_charge').show();
-                                        $('#need_charge').find('.color-items').html('￥'+(parseFloat(window.course_fee)-parseFloat(res.data)));
+                                        $('#need_charge').find('.color-items').html('￥'+(parseFloat(window.course_fee)*100-parseFloat(res.data)*100)/100);
                                         $('#buy_btn').html('立即充值');
                                         window.is_money_enough = 0;
                                     } else {
