@@ -331,8 +331,10 @@
                     });
                 }
                 switch(em.id){
-                    case 'mentorData': 
-                        $('#mentorData').hide();
+                    case 'mentorData':
+                        setTimeout(function(){
+                            $('#mentorData').hide();
+                        }, 301);
                         break;
                 }
             });
