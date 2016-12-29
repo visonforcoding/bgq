@@ -65,7 +65,7 @@
                             layer.confirm(res.msg, {
                                 btn: ['确认', '继续添加'] //按钮
                             }, function () {
-                                window.location.href = '/admin/meetSubject/index';
+                                window.location.href = '/admin/meet-subject/index';
                             }, function () {
                                 window.location.reload();
                             });

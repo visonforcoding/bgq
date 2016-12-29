@@ -58,7 +58,7 @@
                             layer.confirm(res.msg, {
                                 btn: ['确认', '继续添加'] //按钮
                             }, function () {
-                                window.location.href = '/admin/courseapply/index/<?= $course_id ?>';
+                                window.location.href = '/admin/course-apply/index/<?= $course_id ?>';
                             }, function () {
                                 window.location.reload();
                             });
