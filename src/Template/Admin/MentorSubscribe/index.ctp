@@ -40,7 +40,7 @@
                     });
                     $.zui.store.pageClear(); //刷新页面缓存清除
                     $("#list").jqGrid({
-                        url: "/admin/mentorsubscribe/getDataList",
+                        url: "/admin/mentor-subscribe/getDataList",
                         datatype: "json",
                         mtype: "POST",
                         colNames:
@@ -77,7 +77,7 @@
                 function actionFormatter(cellvalue, options, rowObject) {
 //                    response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response = '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
-                    response += '<a title="编辑" href="/admin/mentorsubscribe/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
+                    response += '<a title="编辑" href="/admin/mentor-subscribe/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
                     return response;
                 }
 
@@ -89,7 +89,7 @@
                             type: 'post',
                             data: {id: id},
                             dataType: 'json',
-                            url: '/admin/mentorsubscribe/delete',
+                            url: '/admin/mentor-subscribe/delete',
                             success: function (res) {
                                 layer.msg(res.msg);
                                 if (res.status) {
@@ -122,12 +122,12 @@
                     searchData['sidx'] = sortColumnName;
                     searchData['sort'] = sortOrder;
                     var searchQueryStr = $.param(searchData);
-                    $("body").append("<iframe src='/admin/mentorsubscribe/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
+                    $("body").append("<iframe src='/admin/mentor-subscribe/exportExcel?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
 
                 function doView(id) {
                     //查看明细
-                    url = '/admin/mentorsubscribe/view/' + id;
+                    url = '/admin/mentor-subscribe/view/' + id;
                     layer.open({
                         type: 2,
                         title: '查看详情',

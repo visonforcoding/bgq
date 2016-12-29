@@ -76,7 +76,7 @@
                     if (typeof res === 'object') {
                         if (res.status) {
                             layer.alert(res.msg, function () {
-                                window.location.href = '/admin/mentorsubscribe/index';
+                                window.location.href = '/admin/mentor-subscribe/index';
                             });
                         } else {
                             layer.alert(res.msg, {icon: 5});
