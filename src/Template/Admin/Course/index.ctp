@@ -28,6 +28,7 @@
 <?php $this->start('script'); ?>
 <script src="/wpadmin/lib/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="/wpadmin/lib/jqgrid/js/i18n/grid.locale-cn.js"></script>
+<script src="/wpadmin/lib/zeroclipboard/dist/ZeroClipboard.js"></script>
 <script>
                 $(function () {
                     $('#main-content').bind('resize', function () {
