@@ -136,7 +136,7 @@ class MentorController extends AppController {
         }
         $query->contain(['Classes'=>function($q){
             return $q->where(['Classes.is_del'=>0]);
-        }, 'MentorSubscribe']);
+        }]);
         $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
