@@ -151,6 +151,9 @@ class ClassController extends AppController {
         $end_time = $this->request->data('end_time');
         $where = [];
         $where['Class.is_del'] = 0;
+        if($id){
+            $where['course_id'] = $id;
+        }
         if (!empty($keywords)) {
             $where['or'] = [
                 'Class.title like' => "%$keywords%",
