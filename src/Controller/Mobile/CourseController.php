@@ -281,14 +281,26 @@ class CourseController extends AppController {
         }
     }
     
+    /**
+     * 订阅导师
+     * @param type $id 导师id
+     */
     public function subscrMentor($id=NULL){
         $this->handCheckLogin();
         if($this->request->is('post')){
             $MentorSubscribeTable = \Cake\ORM\TableRegistry::get('MentorSubscribe');
+            $MentorTable = \Cake\ORM\TableRegistry::get('Mentor');
+            $mentor = $MentorTable->get($id);
             $mentorSubscribe = $MentorSubscribeTable->find()
                     ->where(['uid'=>$this->user->id, 'mentor_id'=>$id])->first();
             if($mentorSubscribe){
-                $mentorSubscribe->is_del = $mentorSubscribe->is_del ? 0 : 1;
+                if($mentorSubscribe->is_del){
+                    $mentorSubscribe->is_del = 0;
+                    $mentor->subscribe_nums += 1;
+                } else {
+                    $mentorSubscribe->is_del = 1;
+                    $mentor->subscribe_nums -= 1;
+                }
             } else {
                 $data = [
                     'mentor_id' => $id,
@@ -296,8 +308,17 @@ class CourseController extends AppController {
                     'is_del' => 0
                 ];
                 $mentorSubscribe = $MentorSubscribeTable->newEntity($data);
+                $mentor->subscribe_nums += 1;
             }
-            $res = $MentorSubscribeTable->save($mentorSubscribe);
+            $res = $MentorSubscribeTable->connection()->transactional(function()use($MentorSubscribeTable, $mentorSubscribe, $MentorTable, $mentor){
+                $subscrRes = $MentorSubscribeTable->save($mentorSubscribe);
+                $mentorRes = $MentorTable->save($mentor);
+                if($subscrRes && $mentorRes){
+                    return $subscrRes;
+                } else {
+                    return false;
+                }
+            });
             if($res){
                 if($res->is_del){
                     return $this->Util->ajaxReturn(true, '取消订阅成功', $res->is_del);

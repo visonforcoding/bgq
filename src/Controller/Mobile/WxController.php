@@ -492,8 +492,8 @@ class WxController extends AppController {
                 return $UserTable->save($user) && $UserTable->save($platform) && $FlowTable->save($flow) && $CourseTable->save($course);
             });
             if($tran){
-                $this->loadComponent('Business');
-                $this->Business->usermsg('-1', $user->id, '您成功购买了此培训', '', 11, $course->id, '/course/detail/'.$course->id);
+//                $this->loadComponent('Business');
+//                $this->Business->usermsg('-1', $user->id, '您成功购买了此培训', '', 11, $course->id, '/course/detail/'.$course->id);
                 return $this->Util->ajaxReturn(true, '购买成功', $course_id);
             } else {
                 return $this->Util->ajaxReturn(false, '购买失败');
