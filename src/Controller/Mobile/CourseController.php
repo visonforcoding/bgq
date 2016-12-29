@@ -200,7 +200,7 @@ class CourseController extends AppController {
     public function allCourse($page=NULL, $limit=NULL, $is_recom=NULL, $is_free=NULL){
         if($is_recom){
             $pageTitle = '推荐课程';
-        } elseif($is_free !== 0){
+        } elseif($is_free !== '0'){
             $pageTitle = '免费收听';
         } else {
             $pageTitle = '付费课程';
