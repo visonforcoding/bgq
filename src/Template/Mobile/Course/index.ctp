@@ -179,15 +179,11 @@
         
         getBanner: function(){
             var obj = this;
-            if(!obj.init_banner){
-                $.getJSON('/course/get-banner', function (res) {
-                    if (res.status) {
-                        obj.staticBanner(res.data);
-                    }
-                });
-            } else {
-                this.setHeader(JSON.parse(obj.init_banner));
-            }
+            $.getJSON('/course/get-banner', function (res) {
+                if (res.status) {
+                    obj.staticBanner(res.data);
+                }
+            });
         },
         
         staticBanner: function (netBanner){
