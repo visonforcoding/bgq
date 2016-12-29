@@ -24,6 +24,11 @@ class RechargeGiftController extends AppController {
     public function index() {
         $this->set('rechargeGift', $this->RechargeGift);
     }
+    
+    
+    public function rechargeList(){
+        $this->set('order', \Cake\ORM\TableRegistry::get('Order'));
+    }
 
     /**
      * View method
@@ -128,6 +133,49 @@ class RechargeGiftController extends AppController {
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
         $data = $this->getJsonForJqrid($page, $rows, '', $sort, $order, $where);
+        $this->autoRender = false;
+        $this->response->type('json');
+        echo json_encode($data);
+    }
+    
+    
+    public function getList() {
+        $this->request->allowMethod('ajax');
+        $page = $this->request->data('page');
+        $rows = $this->request->data('rows');
+        $sort = 'Lmorder.' . $this->request->data('sidx');
+        $order = $this->request->data('sord');
+        $keywords = $this->request->data('keywords');
+        $where = [];
+        $where['Lmorder.type'] = 3;
+        $where['Lmorder.status'] = 1;
+        if (!empty($keywords)) {
+            $where['Users.truename like'] = "%$keywords%";
+        }
+        $OrderTable = \Cake\ORM\TableRegistry::get('Order');
+        $query = $OrderTable->find();
+        $query->hydrate(false);
+        if (!empty($where)) {
+            $query->where($where);
+        }
+        $query->contain(['Users']);
+        $nums = $query->count();
+        if (!empty($sort) && !empty($order)) {
+            $query->order([$sort => $order]);
+        }
+
+        $query->limit(intval($rows))
+                ->page(intval($page));
+        $res = $query->toArray();
+        if (empty($res)) {
+            $res = array();
+        }
+        if ($nums > 0) {
+            $total_pages = ceil($nums / $rows);
+        } else {
+            $total_pages = 0;
+        }
+        $data = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $res);
         $this->autoRender = false;
         $this->response->type('json');
         echo json_encode($data);
