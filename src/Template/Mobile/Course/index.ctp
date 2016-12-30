@@ -334,7 +334,7 @@
                     case 'mentorData':
                         setTimeout(function(){
                             $('#mentorData').hide();
-                        }, 301);
+                        }, 400);
                         break;
                 }
             });
