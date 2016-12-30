@@ -251,7 +251,7 @@ class RechargeGiftController extends AppController {
         $result = $connection->execute($sql)->fetchAll('assoc');
         $this->loadComponent('Echart');
         $title['text'] = '充值统计';
-        echo $this->Echart->setLineChart($result,$type,$name,$title,'个');
+        echo $this->Echart->setLineChart($result,$type,$name,$title,'元');
         exit();
     }
     
@@ -284,7 +284,7 @@ class RechargeGiftController extends AppController {
         $result = $connection->execute($sql)->fetchAll('assoc');
         $this->loadComponent('Echart');
         $title['text'] = '充值统计';
-        echo $this->Echart->setLineChart($result,$type,$name,$title,'个');
+        echo $this->Echart->setLineChart($result,$type,$name,$title,'元');
         exit();
     }
 
