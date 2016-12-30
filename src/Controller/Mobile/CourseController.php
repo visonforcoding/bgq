@@ -272,7 +272,7 @@ class CourseController extends AppController {
         $MentorTable = \Cake\ORM\TableRegistry::get('Mentor');
         $mentor = $MentorTable->find()
                 ->contain($contain)
-                ->where(['Mentor.is_del'=>0])
+                ->where(['Mentor.is_del'=>0, 'Mentor.id'=>$id])
                 ->toArray();
         if($mentor){
             return $this->Util->ajaxReturn(true, '', $mentor);
