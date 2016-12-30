@@ -107,7 +107,7 @@
 <script type="text/html" id="mentorSubTpl">
     <li class="tab-con-box tab-booking">
         <div class="booking-items">
-            <div class="nav-title flex" id="mentor_{#id#}">
+            <div class="nav-title flex" id="mentor_{#id#}" mentor_id="{#id#}">
                 <div class="avatar">
                     <img src='{#avatar#}' class="responseimg"/>
                 </div>
