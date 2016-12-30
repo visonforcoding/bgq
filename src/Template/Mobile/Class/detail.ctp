@@ -97,6 +97,18 @@
         </div>
     </div>
 </script>
+<script>
+    // 分享设置
+    window.shareConfig.link = 'http://m.chinamatop.com/course/detail/<?= $class->course->id ?>?share=1';
+    window.shareConfig.title = '<?= $class->course->title ?>';
+    var share_desc = '<?= str_replace(["\r\n", "\r", "\n"], '', $class->course->abstract) ?>';
+    share_desc && (window.shareConfig.desc = share_desc);
+    LEMON.show.shareIco();
+    
+    <?php if(!$class->course->course_apply): ?>
+        location.href = '/course/detail/<?= $class->course->id ?>';
+    <?php endif; ?>
+</script>
 <script type="text/javascript">
     <?php if(file_exists(WWW_ROOT . $class->audio)): ?>
 //    LEMON.sys.storeUrl('<?= $class->audio ?>', '<?= $class->audio_mime ?>');
