@@ -217,5 +217,75 @@ class RechargeGiftController extends AppController {
         $filename = 'RechargeGift_' . date('Y-m-d') . '.csv';
         \Wpadmin\Utils\Export::exportCsv($column, $res, $filename);
     }
+    
+    /**
+     * 数据统计
+     */
+    public function chart(){
+        
+    }
+    
+    public function getRechargeChart(){
+        $date = $this->request->query('date');
+        $date = date('Y-m-d H:i:s',  strtotime($date));
+        $type = $this->request->query('type');
+        $connection = \Cake\Datasource\ConnectionManager::get('default');
+        if($type=='month'){
+            $sql = "select sum(o.fee) as nums, day(o.create_time) as time_item, date(o.create_time) as date
+                            from `order` o where month(o.create_time) = month('".$date."') and o.type = 3
+                            group by date(o.create_time)";
+            $name = date('n',  strtotime($date)).'月';
+        }
+        if($type=='year'){
+            $sql = "select sum(o.fee) as nums, month(o.create_time) as time_item
+                            from `order` o where year(o.create_time) = year('".$date."') and o.type = 3
+                            group by month(o.create_time)";
+            $name = date('Y',  strtotime($date)).'年';
+        }
+        if($type=='week'){
+            $sql = "select sum(o.fee) as nums, weekday(o.create_time) as time_item
+                            from `order` o where week(o.create_time) = week('".$date."') and o.type = 3
+                            group by weekday(o.create_time)";
+            $name = date('Y',  strtotime($date)).'年第'.date('W',  strtotime($date)).'周';
+        }
+        $result = $connection->execute($sql)->fetchAll('assoc');
+        $this->loadComponent('Echart');
+        $title['text'] = '充值统计';
+        echo $this->Echart->setLineChart($result,$type,$name,$title,'个');
+        exit();
+    }
+    
+    /**
+     * 赠送统计
+     */
+    public function getGiftChart(){
+        $date = $this->request->query('date');
+        $date = date('Y-m-d H:i:s',  strtotime($date));
+        $type = $this->request->query('type');
+        $connection = \Cake\Datasource\ConnectionManager::get('default');
+        if($type=='month'){
+            $sql = "select sum(o.gift) as nums, day(o.create_time) as time_item, date(o.create_time) as date
+                            from `order` o where month(o.create_time) = month('".$date."') and o.type = 3
+                            group by date(o.create_time)";
+            $name = date('n',  strtotime($date)).'月';
+        }
+        if($type=='year'){
+            $sql = "select sum(o.gift) as nums, month(o.create_time) as time_item
+                            from `order` o where year(o.create_time) = year('".$date."') and o.type = 3
+                            group by month(o.create_time)";
+            $name = date('Y',  strtotime($date)).'年';
+        }
+        if($type=='week'){
+            $sql = "select sum(o.gift) as nums, weekday(o.create_time) as time_item
+                            from `order` o where week(o.create_time) = week('".$date."') and o.type = 3
+                            group by weekday(o.create_time)";
+            $name = date('Y',  strtotime($date)).'年第'.date('W',  strtotime($date)).'周';
+        }
+        $result = $connection->execute($sql)->fetchAll('assoc');
+        $this->loadComponent('Echart');
+        $title['text'] = '充值统计';
+        echo $this->Echart->setLineChart($result,$type,$name,$title,'个');
+        exit();
+    }
 
 }
