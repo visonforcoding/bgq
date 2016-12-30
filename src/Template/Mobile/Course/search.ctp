@@ -2,7 +2,7 @@
     <div class='h-news-search'>
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe618;</a>
         <form id="searchForm">
-            <h1><input type="text" name="keyword" placeholder="培训标题、描述；导师姓名、公司、职位" value="<?= $keyword ?>"></h1>
+            <h1><input type="text" name="keyword" placeholder="标题、描述、姓名、公司、头衔" value="<?= $keyword ?>"></h1>
         </form>
         <div class='h-regiser' id="doSearch">搜 索</div>
     </div>
