@@ -153,6 +153,8 @@ class CourseController extends AppController {
                         'Course.title like'=>'%' . $data['keyword'] . '%',
                         'Course.abstract like'=>'%' . $data['keyword'] . '%',
                         'Mentors.name like'=>'%' . $data['keyword'] . '%',
+                        'Mentors.company like'=>'%' . $data['keyword'] . '%',
+                        'Mentors.position like'=>'%' . $data['keyword'] . '%',
                     ], 'Course.is_del'=>0, 'Course.is_online'=>1])
                     ->orderDesc('Course.create_time')
                     ->toArray();
