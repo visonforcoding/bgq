@@ -113,7 +113,7 @@ class CourseController extends AppController {
                     ->contain(['Courses'=>function($q){
                         return $q->where(['Courses.is_del'=>0]);
                     }])
-                    ->where(['CourseApply.is_pay'=>1, 'CourseApply.user_id'=>$user_id, 'CourseApply.is_del'=>0])
+                    ->where(['CourseApply.is_pay'=>1, 'CourseApply.user_id'=>$user_id])
                     ->orderDesc('CourseApply.create_time')
                     ->toArray();
             if($course_apply){
