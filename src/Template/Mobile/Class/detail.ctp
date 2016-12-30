@@ -105,7 +105,7 @@
     share_desc && (window.shareConfig.desc = share_desc);
     LEMON.show.shareIco();
     
-    <?php if(!$class->course->course_apply): ?>
+    <?php if(!$class->course->course_apply && !$class->is_free): ?>
         location.href = '/course/detail/<?= $class->course->id ?>';
     <?php endif; ?>
 </script>
