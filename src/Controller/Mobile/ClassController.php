@@ -59,6 +59,7 @@ class ClassController extends AppController {
             ]);
             $ClassLearnTable->save($learn);
         }
+        \Cake\Log\Log::debug($class, 'devlog');
         $this->set([
             'pageTitle' => $class->title,
             'class' => $class,
