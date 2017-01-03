@@ -1,11 +1,11 @@
 <div class="wraper newswraper">
     <div class="meet_search_box flex innercon">
-        <a href="/meet/search" class="eleblock">
+        <form class="eleblock" id="searchForm">
             <div class="search-content">
                 <i class="iconfont">&#xe602;</i>
-                <input type="text" placeholder="搜索" readonly/>
+                <input type="text" placeholder="搜索" name="keyword"/>
             </div>
-        </a>
+        </form>
         <a href="/meet/chat-list">
             <div class="rico">
                 <i class="iconfont">&#xe6ab;</i>
@@ -156,6 +156,7 @@
             this.getData();
             this.getUnReadMsg();
             this.getElite();
+            this.search();
         },
         
         getBanner: function(){
@@ -289,7 +290,17 @@
                         $('#un_read_msg').removeClass('num').html('');
                     }
                 }
-            })
+            });
+        },
+        search: function(){
+            $('#searchForm').on('submit', function(){
+                if($('input[name="keyword"]').val() == ''){
+                    return false;
+                } else {
+                    location.href = encodeURI('/meet/search/'+$('input[name="keyword"]').val());
+                    return false;
+                }
+            });
         }
     });
     var meetobj = new meet();

@@ -1,11 +1,20 @@
 
 <body>
     <div class="wraper">
-        <div class="a_search_box" id="search">
+<!--        <div class="a_search_box" id="search">
             <a href="/activity/search"> 
                 <i class="iconfont">&#xe618;</i>
             </a>
+        </div>-->
+        <div class="meet_search_box flex flex_center innercon">
+            <div class="search-content flex">
+                <i class="iconfont">&#xe602;</i>
+                <form id="searchForm" method="post">
+                    <input type="text" placeholder="搜索" name='keyword' />
+                </form>
+            </div>
         </div>
+        <div id="top_block"></div>
         <div class="a-banner">
             <ul class="pic-list-container" id="imgList"></ul>
             <div class="yd" id="imgTab"></div>
@@ -79,10 +88,14 @@
 <script src="/mobile/js/loopScroll.js"></script>
 <script src="/mobile/js/activity_index.js"></script>
 <script>
-    if($.util.isAPP){
-        $('#search').css({'top':'0.6rem'});
-    } else if($.util.isWX) {
-        $('#search').css({'top':'0.2rem'});
+    if ($.util.isAPP) {
+        $('#search').css({'top': '0.6rem'});
+        $('#top_block').css({'height': '68px'});
+        $('.meet_search_box').css({'padding-top': '20px', 'height': '68px'});
+    } else if ($.util.isWX) {
+        $('#search').css({'top': '0.2rem'});
+        $('#top_block').css({'height': '48px'});
+        $('.meet_search_box').css({'padding-top': '0', 'height': '48px'});
     }
 </script>
 <script>
@@ -127,7 +140,15 @@
         return html;
     }
 
-    $.util.searchHide();
+//    $.util.searchHide();
+    $('#searchForm').on('submit', function(){
+        if($('input[name="keyword"]').val() == ''){
+            return false;
+        } else {
+            location.href = encodeURI('/activity/search?keyword='+$('input[name="keyword"]').val());
+            return false;
+        }
+    });
 </script>
 <?php
 $this->end('script');

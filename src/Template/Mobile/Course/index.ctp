@@ -7,7 +7,7 @@
             </form>
         </div>
     </div>
-    <div style="height:68px;"></div>
+    <div id="top_block"></div>
     <div class="a-banner" >
         <ul class="pic-list-container" id="imgList">
         </ul>

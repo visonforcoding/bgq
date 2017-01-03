@@ -3,7 +3,7 @@
     <div class='h-news-search'>
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe618;</a>
         <form id="searchForm" >
-            <h1><input type="text" placeholder="请输入关键词" name="keyword"></h1>
+            <h1><input type="text" placeholder="请输入关键词" name="keyword" value="<?= $keyword ?>"></h1>
             <input type="hidden" name="newstag_id" value="" />
         </form>
         <div class='h-regiser' id="doSearch" >搜 索</div>
@@ -232,6 +232,8 @@
         $('input[name="keyword"]').blur();
         LEMON.sys.hideKeyboard();
     }
+    
+    search();
 </script>
 <?php
 $this->end('script');

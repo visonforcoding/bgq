@@ -232,10 +232,13 @@ class NewsController extends AppController {
      */
     public function search($id=null) {
         $newstags = $this->News->Newstags->find()->hydrate(false)->all()->toArray();
+        $keyword = '';
+        $keyword = $this->request->query('keyword');
         $this->set([
             'pageTitle'=>'资讯搜索',
             'industries'=>$newstags,
             'id' => $id,
+            'keyword' => $keyword
         ]);
     }
     

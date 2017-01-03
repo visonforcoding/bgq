@@ -7,7 +7,7 @@
             </div>
         </span>
         <form id="searchForm" >
-            <h1><input type="text" name="keyword" placeholder="请输入关键词"></h1>
+            <h1><input type="text" name="keyword" placeholder="请输入关键词" value="<?= $keyword ?>"></h1>
             <input type="hidden" name="series_id" value="" />
             <input type="hidden" name="region" value="" />
         </form>
@@ -256,6 +256,8 @@
                             }
                             return d;
                         });
+                        $('.orgname').removeClass('active');
+                        $('.a-s-mark').addClass('a-s-width');
                     } else {
                         $('#search').html('');
                         $.util.alert(msg.msg);
@@ -265,6 +267,8 @@
         });
         $('input[name="keyword"]').blur();
     };
+    
+    search();
 </script>
 <?php
 $this->end('script');
