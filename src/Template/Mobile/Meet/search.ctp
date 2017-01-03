@@ -3,7 +3,6 @@
         <a href='#this' class='toback'></a>
         <h1>
             搜索
-           
         </h1>
        <!--  <a href="javascript:void(0);" class='h-regiser'>取消</a> -->
     </div>
@@ -13,7 +12,7 @@
     <div class='h-news-search'>
         <a href='javascript:void(0);' class='iconfont news-serch'>&#xe618;</a>
         <form id="searchForm">
-            <h1><input type="text" name="keyword" placeholder="姓名、话题"></h1>
+            <h1><input type="text" name="keyword" placeholder="姓名、话题" value="<?= $keyword ?>"></h1>
         </form>
         <div class='h-regiser' id="doSearch">搜 索</div>
     </div>
@@ -90,39 +89,15 @@
     }, 1000);
     
     $('#searchForm').on('submit', function(){
-        if(!$('input[name="keyword"]').val)
-        {
-            $.util.alert('请输入搜索内容');
-            return false;
-        }
-        $.ajax({
-            type: 'post',
-            url: '/meet/getSearchRes',
-            data: $('#searchForm').serialize(),
-            dataType: 'json',
-            success: function (msg) {
-                if (typeof msg === 'object') {
-                    console.log(msg.data);
-                    if (msg.status === true) {
-                        $.util.dataToTpl('biggie', 'biggie_tpl', msg.data , function (d) {
-                            d.avatar = d.avatar ? d.avatar : '/mobile/images/touxiang.png';
-                            d.city = d.city ? '<div class="l-place"><i class="iconfont">&#xe660;</i>' + d.city + '</div>' : '';
-                            d.subjects = $.util.dataToTpl('', 'subTpl', d.subjects);
-                            return d;
-                        });
-                    } else {
-                        $.util.hideLoading('buttonLoading');
-                        $('#biggie').html('');
-                        $.util.alert(msg.msg);
-                    }
-                }
-            }
-        });
-        $('input[name="keyword"]').blur();
+        search();
         return false;
     });
     
     $('#doSearch').on('tap', function(){
+        search();
+    });
+    
+    function search(){
         if(!$('input[name="keyword"]').val) {
             $.util.alert('请输入搜索内容');
             return false;
@@ -151,6 +126,8 @@
             }
         });
         $('input[name="keyword"]').blur();
-    });
+    }
+    
+    search();
 </script>
 <?php $this->end('script');

@@ -496,9 +496,12 @@ class MeetController extends AppController {
     /**
      * 搜索页
      */
-    public function search(){
+    public function search($keyword=''){
         $this->set('search');
-        $this->set('pageTitle', '会员搜索');
+        $this->set([
+            'pageTitle' => '会员搜索',
+            'keyword' => $keyword
+        ]);
     }
 
     /**
