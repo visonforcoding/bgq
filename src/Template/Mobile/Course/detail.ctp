@@ -51,7 +51,7 @@
                             <div class="iconfont r-ico">&#xe667;</div>
                         </h3>
                         <div class="couser-pro flex" >
-                            <div class="avatar" mentor_id="<?= $v->mentor->id ?>" id="mentor_<?= $v->mentor->id ?>">
+                            <div class="avatar" mentor_id="<?= $v->mentor->id ?>" id="mentor_<?= $v->mentor->id ?>"  style="width: .86rem;padding-right: .3rem;margin-right: 0;">
                                 <img src="<?= $v->mentor->avatar ?>" class="responseimg" />
                             </div>
                             <div class="avatar-info" mentor_id="<?= $v->mentor->id ?>" id="mentor_<?= $v->mentor->id ?>">
