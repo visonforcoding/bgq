@@ -85,7 +85,7 @@ class SmsComponent extends Component {
             'password' => $smsConfig['password'],
             'content' => $smsConfig['password'],
             'mobile' => $mobile,
-            'content' => $content . ' 退订回T'
+            'content' => $content
         ];
         $url = 'http://www.qf106.com/sms.aspx?action=send';
         $response = $http->post($url, $requestData);
