@@ -303,6 +303,7 @@ class BeautyController extends AppController {
      * @param int $id 投票对象id
      */
     public function vote($id=null){
+        return $this->Util->ajaxReturn(false, '评选已结束');
         $this->handCheckLogin();
         $user_id = $this->user->id;
         $VoteTable = \Cake\ORM\TableRegistry::get('vote');
