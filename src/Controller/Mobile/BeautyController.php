@@ -221,6 +221,7 @@ class BeautyController extends AppController {
         $BeautyTable = \Cake\ORM\TableRegistry::get('beauty');
         $SavantTable = \Cake\ORM\TableRegistry::get('savant');
         if($this->request->is('post')){
+            return $this->Util->ajaxReturn(false, '评选已结束');
 //            $UserTable = \Cake\ORM\TableRegistry::get('user');
 //            $user = $UserTable->get($this->user->id, [
 //                'contain' => ['Careers', 'Educations', 'Industries'],
