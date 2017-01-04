@@ -155,8 +155,8 @@
     }
 
     $('#submit').on('click', function () {
-        if (!check())
-            return;
+//        if (!check())
+        $.util.alert('评选已结束');return;
         submit();
     });
 
