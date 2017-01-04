@@ -217,7 +217,6 @@ class BeautyController extends AppController {
      * 报名活动和修改报名信息
      */
     public function enroll(){
-        return $this->Util->ajaxReturn(false, '评选已结束');
         $this->handCheckLogin();
         $BeautyTable = \Cake\ORM\TableRegistry::get('beauty');
         $SavantTable = \Cake\ORM\TableRegistry::get('savant');
