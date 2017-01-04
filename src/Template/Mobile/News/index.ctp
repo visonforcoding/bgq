@@ -4,12 +4,12 @@
     </div>
 </header>
 <div class="wraper newswraper">
-    <div class="a_search_box" id="search" ptag="10000">
+<!--    <div class="a_search_box" id="search">
         <a href="/news/search"> 
             <i class="iconfont">&#xe618;</i>
         </a> 
-    </div>
-    <div class="meet_search_box flex flex_center innercon">
+    </div>-->
+    <div class="meet_search_box flex flex_center innercon"  ptag="10000">
         <div class="search-content flex">
             <i class="iconfont">&#xe602;</i>
             <form id="searchForm" method="post">
