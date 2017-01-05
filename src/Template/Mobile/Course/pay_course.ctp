@@ -19,7 +19,7 @@
                     <div class="nav-desc line1"><p>{#abstract#}</p></div>
                     <div class="foot flex flex_jusitify">
                         <div class="price color-items">{#fee#}</div>
-                        <div class="iconfont color-gray del" course_id="{#id#}">&#xe6b3;</div>
+                        <!--<div class="iconfont color-gray del" course_id="{#id#}">&#xe6b3;</div>-->
                     </div>
                 </div>
             </div>
