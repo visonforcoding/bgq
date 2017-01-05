@@ -74,7 +74,7 @@ table,tbody,tr,td,th,thead,tfoot{border:1px #e5e5e5 solid;}
 .bggray{background: #7a7d82;}
 .bgred{background: #e01a48;}
 .bg-ff{background: #fff;}
-.newswraper,.a-wraper{padding-bottom:1.2rem;}
+/*.newswraper,.a-wraper{padding-bottom:1.2rem;}*/
 .innercon{margin:0 auto;padding:0 0.3rem;background: #fff;}
 .h20{height:0.2rem;border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid;}
 .wraper .border{border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid;}
