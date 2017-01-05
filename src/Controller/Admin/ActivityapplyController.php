@@ -241,7 +241,7 @@ class ActivityapplyController extends AppController {
             $where['is_sign'] = $is_sign;
         }
         $Table = $this->Activityapply;
-        $column = ['用户', '公司', '职位', '手机号', '活动', '报名时间','是否需审核','审核状态','报名状态','签到','置顶'];
+        $column = ['用户', '公司', '职位', '手机号', '活动', '报名时间', '注册时间', '是否需审核','审核状态','报名状态','签到','置顶'];
         if ($id) {
             $query = $Table->find()->where(['activity_id' => $id]);
         } else {
@@ -250,7 +250,7 @@ class ActivityapplyController extends AppController {
         $query->hydrate(false);
         $query->contain(['Users', 'Activities']);
         $query->select(['user_truename' => 'Users.truename', 'user_company' => 'Users.company', 'user_position' => 'Users.position',
-            'user_phone' => 'Users.phone', 'activity_title' => 'Activities.title', 'create_time',
+            'user_phone' => 'Users.phone', 'activity_title' => 'Activities.title', 'create_time', 'user_create_time' => 'Users.create_time',
             'must_check'=>'Activities.must_check','is_check','is_pass','is_sign','is_top']);
         if (!empty($where)) {
             $query->where($where);
