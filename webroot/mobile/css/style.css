@@ -7,6 +7,7 @@
 .loginbox .username,.loginbox .password{border-bottom:1px #e5e5e5 solid;padding-left:1.2rem;
 /*display:-webkit-flex;display: flex;-webkit-align-items: center;align-items: center;*/}
 /**/
+
 .tabbox{overflow: hidden;background: #fff;}
 .tabhead{height:.76rem;line-height: .74rem;font-size: 0;background: #f9f9f9;border-bottom:1px #e5e5e5 solid;}
 .tabhead span{width:50%;display: inline-block;font-size:.32rem;text-align: center;}
@@ -1533,3 +1534,4 @@ box-align:center;-webkit-box-align:center;}
 .free-course{display: inline-block;padding:.02rem .1rem;border:1px #B71C2D solid;border-radius: 4px;font-size: .28rem;}
 .charge-detail{background: #fff;height:1rem;padding:0 .3rem;font-size: .3rem;margin-top:.6rem;}
 .charge-detail .left-info{color:#999;}
+.searchwraper{top:68px;bottom:1rem;position:absolute;overflow-y:scroll;-webkit-overflow-scrolling: touch;max-width:750px;width:100%;margin:0 auto;}
