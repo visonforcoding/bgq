@@ -1,12 +1,12 @@
-<div class="wraper newswraper">
-    <div class="meet_search_box flex flex_center innercon">
+<div class="meet_search_box flex flex_center innercon">
         <div class="search-content flex">
             <i class="iconfont">&#xe602;</i>
             <form id="searchForm" method="post">
                 <input type="text" placeholder="搜索" name='keyword' />
             </form>
         </div>
-    </div>
+</div>
+<div class="wraper newswraper" id='wraper'>
     <div id="top_block"></div>
     <div class="a-banner" >
         <ul class="pic-list-container" id="imgList">
@@ -168,6 +168,9 @@
         $('#search').css({'top': '0.2rem'});
         $('#top_block').css({'height': '48px'});
         $('.meet_search_box').css({'padding-top': '0', 'height': '48px'});
+    }
+    if ($.util.isIOS) {
+        $('#wraper').addClass('searchwraper');
     }
 </script>
 <script>
