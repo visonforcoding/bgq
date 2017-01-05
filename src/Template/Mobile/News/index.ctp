@@ -1,22 +1,18 @@
-<header>
+<!-- <header>
     <div class='inner'>
         <h1>资讯首页</h1>
     </div>
-</header>
-<div class="wraper newswraper">
-<!--    <div class="a_search_box" id="search">
-        <a href="/news/search"> 
-            <i class="iconfont">&#xe618;</i>
-        </a> 
-    </div>-->
-    <div class="meet_search_box flex flex_center innercon"  ptag="10000">
+</header> -->
+<div class="meet_search_box flex flex_center innercon"  ptag="10000">
         <div class="search-content flex">
             <i class="iconfont">&#xe602;</i>
             <form id="searchForm" method="post">
-                <input type="text" placeholder="搜索" name='keyword' />
+                <input type="text" placeholder="搜" name='keyword' />
             </form>
         </div>
     </div>
+<div class="wraper newswraper" id='wraper'>
+    
     <div id="top_block"></div>
     <div class="a-banner">
         <ul class="pic-list-container" id="imgList"></ul>
@@ -79,6 +75,9 @@
         $('#search').css({'top': '0.2rem'});
         $('#top_block').css({'height': '48px'});
         $('.meet_search_box').css({'padding-top': '0', 'height': '48px'});
+    }
+    if ($.util.isIOS) {
+        $('#wraper').addClass('searchwraper');
     }
 </script>
 <script>

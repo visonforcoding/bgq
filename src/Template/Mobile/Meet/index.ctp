@@ -1,5 +1,4 @@
-<div class="wraper newswraper">
-    <div class="meet_search_box flex innercon">
+ <div class="meet_search_box flex innercon">
         <form class="eleblock" id="searchForm">
             <div class="search-content">
                 <i class="iconfont">&#xe602;</i>
@@ -13,6 +12,8 @@
             </div>
         </a>
     </div>
+<div class="wraper newswraper" id='wraper'>
+   
     <div id="top_block"></div>
     <div class="a-banner" >
         <ul class="pic-list-container" id="imgList">
@@ -71,7 +72,9 @@
     </div>
     <div id='biggie'></div>
     <div id="buttonLoading" class="loadingbox"></div>
-    <div class="submitbtn subactivity">
+
+</div>
+<div class="submitbtn subactivity">
         <div class="back_to_top" id="toTop" onclick="javascript:window.scrollTo(0, 0);" style="display: none"><i class="iconfont">&#xe664;</i></div>
         <?php if (!$is_savant): ?>
             <div class="submit_require" id="auth"><a href="javascript:$.util.checkLogin('/home/savant-auth');">
@@ -83,8 +86,6 @@
             </div>
         <?php endif; ?>
     </div>
-
-</div>
 <script id="itemsTpl" type="text/html">
     <li><a href="/user/home-page/{#user_id#}" class="meet-con"><img src="{#url#}"/></a></li>
 </script>
@@ -135,6 +136,9 @@
         $('#search').css({'top': '0.2rem'});
         $('#top_block').css({'height': '48px'});
         $('.meet_search_box').css({'padding-top': '0', 'height': '48px'});
+    }
+    if ($.util.isIOS) {
+        $('#wraper').addClass('searchwraper');
     }
 </script>
 <script>

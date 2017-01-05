@@ -1,19 +1,14 @@
 
 <body>
-    <div class="wraper">
-<!--        <div class="a_search_box" id="search">
-            <a href="/activity/search"> 
-                <i class="iconfont">&#xe618;</i>
-            </a>
-        </div>-->
-        <div class="meet_search_box flex flex_center innercon">
-            <div class="search-content flex">
-                <i class="iconfont">&#xe602;</i>
-                <form id="searchForm" method="post">
-                    <input type="text" placeholder="搜索" name='keyword' />
-                </form>
-            </div>
+    <div class="meet_search_box flex flex_center innercon">
+        <div class="search-content flex">
+            <i class="iconfont">&#xe602;</i>
+            <form id="searchForm" method="post">
+                <input type="text" placeholder="搜索" name='keyword' />
+            </form>
         </div>
+    </div>
+    <div class="wraper" id='wraper'>
         <div id="top_block"></div>
         <div class="a-banner">
             <ul class="pic-list-container" id="imgList"></ul>
@@ -46,11 +41,12 @@
         <div id="activity" style='border-bottom:1px #e5e5e5 solid;'></div>
         <div id="buttonLoading" class="loadingbox"></div>
         <div style="height: 1.2rem; display: none;" id="iosBottom"></div>
-        <div class="submitbtn subactivity">
+        
+    </div>
+     <div class="submitbtn subactivity">
             <div class="back_to_top" id="toTop" onclick="javascript:window.scrollTo(0, 0);" style="display: none"><i class="iconfont">&#xe664;</i></div>
             <div class="submit_require" id="release"><a href="javascript:$.util.checkLogin('/activity/release');">发布<br />需求</a></div>
         </div>
-    </div>
 </body>
 <script type="text/html" id="activity_tpl">
     <section class='news-list-items'>
@@ -105,6 +101,7 @@
 <script>
     if ($.util.isIOS) {
         $('#iosBottom').show();
+        $('#wraper').addClass('searchwraper');
     }
     $.getJSON('/activity/get-banner', function (res) {
         if (res.status) {
