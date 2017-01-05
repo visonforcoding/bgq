@@ -378,7 +378,7 @@
 //    $.util.initLoadImg('biggie');
 
     setTimeout(function () {
-        $(window).on("scroll", function () {
+        $('#wraper').on("scroll", function () {
             $.util.listScroll('biggie', function () {
                 if (page == 9999) {
                     $('#buttonLoading').html('亲，没有更多条目了，请看看其他的栏目吧');
