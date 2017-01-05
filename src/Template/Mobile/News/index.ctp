@@ -7,7 +7,7 @@
         <div class="search-content flex">
             <i class="iconfont">&#xe602;</i>
             <form id="searchForm" method="post">
-                <input type="text" placeholder="搜" name='keyword' />
+                <input type="text" placeholder="搜索" name='keyword' />
             </form>
         </div>
     </div>
