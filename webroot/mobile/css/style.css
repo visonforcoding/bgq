@@ -1534,4 +1534,5 @@ box-align:center;-webkit-box-align:center;}
 .free-course{display: inline-block;padding:.02rem .1rem;border:1px #B71C2D solid;border-radius: 4px;font-size: .28rem;}
 .charge-detail{background: #fff;height:1rem;padding:0 .3rem;font-size: .3rem;margin-top:.6rem;}
 .charge-detail .left-info{color:#999;}
-.searchwraper{top:68px;bottom:0;position:absolute;overflow-y:scroll;-webkit-overflow-scrolling: touch;max-width:750px;width:100%;margin:0 auto;}
+.searchwraper{top:0;bottom:0;position:absolute;overflow-y:scroll;-webkit-overflow-scrolling: touch;max-width:750px;width:100%;margin:0 auto;}
+.searchwraper::-webkit-scrollbar{display:none;}
