@@ -458,6 +458,10 @@ class WxController extends AppController {
             $user = $UserTable->get($user_id);
             $platform = $UserTable->get('-1');
             $CourseApplyTable = \Cake\ORM\TableRegistry::get('CourseApply');
+            $apply = $CourseApplyTable->find()->where(['course_id'=>$course_id, 'user_id'=>$user_id, 'is_pay'=>1])->first();
+            if($apply){
+                return $this->Util->ajaxReturn(false, '您已经购买了');
+            }
             $courseApply = $CourseApplyTable->newEntity([
                 'course_id' => $course_id,
                 'user_id' => $user_id,
