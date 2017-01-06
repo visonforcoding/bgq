@@ -32,6 +32,10 @@
             <label class="col-md-2 control-label">备注（记录用）</label>
             <div class="col-md-8"><input type="text" name="remark" class="form-control"/></div>
         </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label"></label>
+            <div class="col-md-8" style="color: red;">推送营销类短信的时候，需要短信内容最后加上“退订回T”字样，如果最后是链接，请注意加上空格分开！</div>
+        </div>
         <input type="hidden" name="industry_id" value=""/>
         <input type="hidden" name="push" value=""/>
         <input type="hidden" name="text" value=""/>
