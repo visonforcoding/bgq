@@ -100,7 +100,7 @@
                     if (typeof res === 'object') {
                         if (res.status) {
                             layer.alert(res.msg, function () {
-                                window.location.href = '/admin/class/index';
+                                window.location.href = '/admin/class/index/<?= $course_id ?>';
                             });
                         } else {
                             layer.alert(res.msg, {icon: 5});

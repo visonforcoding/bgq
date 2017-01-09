@@ -81,7 +81,7 @@ class ClassController extends AppController {
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null) {
+    public function edit($id = null, $course_id=NULL) {
         $clas = $this->Class->get($id, [
             'contain' => []
         ]);
@@ -110,7 +110,7 @@ class ClassController extends AppController {
         }
         $mentors = $this->Class->Mentors->find('list', ['limit' => 200]);
         $courses = $this->Class->Courses->find('list', ['limit' => 200]);
-        $this->set(compact('clas', 'mentors', 'courses'));
+        $this->set(compact('clas', 'mentors', 'courses', 'course_id'));
     }
 
     /**
