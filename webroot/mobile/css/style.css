@@ -1541,9 +1541,10 @@ box-align:center;-webkit-box-align:center;}
 .review-containner h3{font-size: 1rem;height:1rem;}
 .review-containner .bold{font-weight: bold;color:#303030;}
 .review-containner .tip{margin-bottom:.8rem;}
-.review-containner .active-des-pass{margin-top:.4rem;color:#999;}
+.review-containner .active-des-pass{margin-top:.4rem;color:#999;line-height: .34rem;}
 .review-containner .activity-nopass-img{width:6.58rem;height:4.73rem;overflow: hidden;margin:0 auto;margin-top:3rem;}
 .review-containner .activity-nopass-img img{width:100%;height:auto;display: block;}
+.review-containner  .right-info{max-width: 5.2rem;}
 .f-bottom-call{font-size: .26rem;}
 .f-bottom-call a{color:#fff;}
 .f-bottom-call i{display: inline-block;margin-top:-3px;vertical-align: top;}
