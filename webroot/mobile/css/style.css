@@ -1557,7 +1557,8 @@ box-align:center;-webkit-box-align:center;}
 .activity-choosed-box .choosed-box-title{font-size: .28rem;color:#666;padding:0 .3rem;line-height: .36rem;}
 .activity-choosed-box .choosed-box-items{background: #fff;padding:.3rem 0 .3rem .3rem;margin-top: .2rem;}
 .activity-choosed-box .choosed-box-items .user-name{font-size:.32rem;color:#000;}
-.activity-choosed-box .chooseplace-info{margin-bottom:.3rem;line-height: .4rem;}
+.activity-choosed-box .chooseplace-info{margin-bottom:.2rem;line-height: .4rem;}
+.activity-choosed-box .chooseplace-info .job{max-width: 5.2rem;margin-left:.2rem;font-size: .26rem;color:#666;}
 .activity-choosed-box .chooseplace-info .r-info{padding:0 .3rem;color:#c2c2c2;}
 .activity-choosed-box .chooseplace-otherinfo{font-size: .28rem;line-height: .36rem;margin-top:.1rem;padding-right: .3rem;}
 .activity-choosed-box .chooseplace-info .r-info .iconfont{font-size: .36rem;}
