@@ -1551,6 +1551,8 @@ box-align:center;-webkit-box-align:center;}
 /*活动-多人行*/
 .activity-entroll-more{padding-bottom:.1rem;}
 .activity-entroll-more li{height:45px;}
+.activity-entroll-more li div{width:5.4rem;}
+.activity-entroll-more li div input{width:100%;}
 .activity-entroll-more .entroll-items{margin-right: .3rem;}
 .activity-entroll-more .outerblock li:last-of-type{border-bottom: 1px #efefef solid;}
 .activity-entroll-more .disabled{background: #ccc;}
@@ -1562,5 +1564,5 @@ box-align:center;-webkit-box-align:center;}
 .activity-choosed-box .chooseplace-info .r-info{padding:0 .3rem;color:#c2c2c2;}
 .activity-choosed-box .chooseplace-otherinfo{font-size: .28rem;line-height: .36rem;margin-top:.1rem;padding-right: .3rem;}
 .activity-choosed-box .chooseplace-info .r-info .iconfont{font-size: .36rem;}
-.activity-choosed-box .chooseplace-otherinfo .l-info{color:#666;margin-right: .2rem;}
+.activity-choosed-box .chooseplace-otherinfo .l-info{color:#666;margin-right: .44rem;}
 .activity-choosed-box .chooseplace-otherinfo .r-info{max-width: 5.8rem;}
