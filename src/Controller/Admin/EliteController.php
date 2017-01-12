@@ -106,11 +106,13 @@ class EliteController extends AppController {
         $this->request->allowMethod('post');
         $id = $this->request->data('id');
         if ($this->request->is('post')) {
-            $savant = $this->Savant->get($id);
-            if ($this->Savant->delete($savant)) {
+            $user = $this->User->get($id);
+            $user->is_elite = 0;
+            $res = $this->User->save($user);
+            if ($res) {
                 $this->Util->ajaxReturn(true, '删除成功');
             } else {
-                $errors = $savant->errors();
+                $errors = $user->errors();
                 $this->Util->ajaxReturn(true, getMessage($errors));
             }
         }
@@ -146,7 +148,8 @@ class EliteController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $query = $this->User->find()->select(['User.id', 'User.phone','User.card_path' ,'User.grade', 'User.truename', 'User.company', 'User.position', 'User.is_elite_top',
+        $query = $this->User->find()
+                ->select(['User.id', 'User.phone','User.card_path' ,'User.grade', 'User.truename', 'User.company', 'User.position', 'User.is_elite_top',
                     'User.meet_nums', 'User.truename', 'Savant.reco_nums', 'User.savant_status', 'Savant.xmjy', 'Savant.zyys', 'Savant.summary'])
                 ->contain(['Savant']);
         if (!empty($where)) {
