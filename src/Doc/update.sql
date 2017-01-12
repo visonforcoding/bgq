@@ -1100,3 +1100,10 @@ ALTER TABLE `binggq`.`flow`
 ALTER TABLE `class`
 	ADD COLUMN `audio_mime` VARCHAR(20) NULL COMMENT '音频mime类型' AFTER `audio`;
 
+#1月10日
+ALTER TABLE `activityapply`
+	ADD COLUMN `reason` VARCHAR(255) NULL DEFAULT NULL COMMENT '审核不通过理由' AFTER `code`;
+
+ALTER TABLE `user`
+	ADD COLUMN `elite_top_time` DATETIME NULL DEFAULT NULL COMMENT '菁英置顶时间' AFTER `is_elite_top`;
+

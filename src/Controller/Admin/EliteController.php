@@ -157,7 +157,7 @@ class EliteController extends AppController {
         }
         $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
-            $query->order(['is_elite_top' => 'desc', $sort => $order]);
+            $query->order(['is_elite_top' => 'desc', 'elite_top_time'=>'desc', $sort => $order]);
         }
 
         $query->limit(intval($rows))
@@ -256,6 +256,7 @@ class EliteController extends AppController {
     public function top($id) {
         $user = $this->User->get($id);
         $user->is_elite_top = $user->is_elite_top == 1 ? 0 : 1;
+        $user->elite_top_time = \Cake\I18n\Time::now();
         $res = $this->User->save($user);
         if ($res) {
             return $this->Util->ajaxReturn(true, '操作成功');
