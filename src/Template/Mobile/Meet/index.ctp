@@ -220,6 +220,7 @@
                 $.getJSON('/meet/getMoreBiggie/1', function (res) {
                     if (res.status) {
                         obj.staticData(res.data);
+                        $.util.initLoadImg('biggie');
                     }
                 });
             } else {
@@ -280,7 +281,6 @@
                 LEMON.db.set('biggie', str);
                 $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(str), tpldate);
             }
-            $.util.initLoadImg('biggie');
         },
         getUnReadMsg: function (){
             $.ajax({
