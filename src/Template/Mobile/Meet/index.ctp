@@ -380,6 +380,7 @@
     setTimeout(function () {
         $('#wraper').on("scroll", function () {
             $.util.listScroll('biggie', function () {
+                $.util.initLoadImg('biggie');
                 if (page == 9999) {
                     $('#buttonLoading').html('亲，没有更多条目了，请看看其他的栏目吧');
                     return;
@@ -405,7 +406,6 @@
                             page++;
                         }
                     }
-                    $.util.initLoadImg('biggie');
                 });
             });
         });
