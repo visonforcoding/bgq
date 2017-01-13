@@ -220,7 +220,6 @@
                 $.getJSON('/meet/getMoreBiggie/1', function (res) {
                     if (res.status) {
                         obj.staticData(res.data);
-                        $.util.initLoadImg('biggie');
                     }
                 });
             } else {
@@ -281,6 +280,7 @@
                 LEMON.db.set('biggie', str);
                 $.util.dataToTpl('biggie', 'biggie_tpl', JSON.parse(str), tpldate);
             }
+            $.util.initLoadImg('biggie');
         },
         getUnReadMsg: function (){
             $.ajax({
@@ -398,7 +398,6 @@
                     if (res.status) {
                         var html = $.util.dataToTpl('', 'biggie_tpl', res.data, tpldate);
                         $('#biggie').append(html);
-                        $.util.initLoadImg('biggie');
                         if (res.data.length < 100) {
                             page = 9999;
                             $('#buttonLoading').html('亲，没有更多条目了，请看看其他的栏目吧');
@@ -406,6 +405,7 @@
                             page++;
                         }
                     }
+                    $.util.initLoadImg('biggie');
                 });
             });
         });
