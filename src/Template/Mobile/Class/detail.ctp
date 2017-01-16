@@ -112,7 +112,7 @@
 <script type="text/javascript">
     <?php if(file_exists(WWW_ROOT . $class->audio)): ?>
 //    LEMON.sys.storeUrl('<?= $class->audio ?>', '<?= $class->audio_mime ?>');
-//    LEMON.sys.mediaPlay();
+    LEMON.sys.mediaPlay();
     <?php endif; ?>
         
     if($.util.isIOS){
