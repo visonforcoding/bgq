@@ -70,7 +70,7 @@
                             {name: 'user.truename', editable: true, align: 'center'},
                             {name: 'company', editable: true, align: 'center'},
                             {name: 'title', editable: true, align: 'center', formatter: function (cell, opt, row) {
-                                    var s = '<a  data-toggle="tooltip" title="这是提示消息内容" onClick="showActivity(' + " ' " + row.id + " ' " + ');" class="grid-btn ">' + cell + '</a>';
+                                    var s = '<a  data-toggle="tooltip" title="'+cell+'" onClick="showActivity(' + " ' " + row.id + " ' " + ');" class="grid-btn ">' + cell + '</a>';
                                     return s;
                                 }},
                             {name: 'time', editable: true, align: 'center'},
@@ -151,6 +151,7 @@
                                 clip.setData('text/plain', '<?= $domain ?>' + '/activity/details/' + event.target.id);
                             });
                             clip.on("aftercopy", function (event) {
+                                //if(window.copy_index) layer.close(window.copy_index);
                                 layer.msg("复制了: " + event.data["text/plain"]);
                             });
                         },
@@ -169,26 +170,24 @@
                 }
 
                 function actionFormatter(cellvalue, options, rowObject) {
-//                    response = '<div class="bigdiv" onmouseout="$(this).find(\'.position\').hide()" onmouseover="$(this).find(\'.position\').show()">';
-//                    response += '<div class="position"><a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
                     response = '<a title="删除" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-//                    response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="编辑" href="/admin/activity/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
-                    response += '<a title="复制链接" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
+                    response += '<a title="复制链接" onclick="copy('+rowObject.id+')" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
                     if (rowObject.is_top == 0) {
                         response += '<a title="置顶" href="javascript:void(0)" class="grid-btn top" onclick="istop(' + rowObject.id + ')"><i class="icon icon-long-arrow-up"></i> </a>';
                     } else if (rowObject.is_top == 1) {
                         response += '<a title="取消置顶" href="javascript:void(0)" class="grid-btn untop" onclick="untop(' + rowObject.id + ')"><i class="icon icon-long-arrow-down"></i></a>';
                     }
-//                    response += '<a title="评论详情" onClick="viewComs(' + rowObject.id + ')" class="grid-btn "><i class="icon icon-comment"></i> </a>';
-//                    response += '<a title="点赞日志" href="/admin/likeLogs/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-heart"></i> </a>';
                     response += '<a title="收藏日志" href="/admin/activity/view-collect/' + rowObject.id + '" class="grid-btn "><i class="icon icon-star"></i> </a>';
-//                    response += '<a title="报名用户" href="/admin/activityapply/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-user"></i> </a>';
                     response += '<a title="赞助详情" href="/admin/sponsor/index/' + rowObject.id + '" class="grid-btn "><i class="icon icon-dollar"></i> </a>';
-                    response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(' + rowObject.id + ');"><i class="icon icon-qrcode"></i><div hidden id="code_' + rowObject.id + '" style="position:relative;top:0;"><img back_src="/' + rowObject.qrcode + '" /></div> </a>';
+//                    response += '<a title="签到二维码" href="javascript:void(0)" class="grid-btn" onclick="oncode(' + rowObject.id + ');"><i class="icon icon-qrcode"></i><div hidden id="code_' + rowObject.id + '" style="position:relative;top:0;"><img back_src="/' + rowObject.qrcode + '" /></div> </a>';
+                    response += '<a title="签到" href="javascript:void(0)" class="grid-btn" onclick="sign(' + rowObject.id + ');"><i class="icon icon-qrcode"></i> </a>';
                     return response;
                 }
 
+                function copy(id){
+                    window.copy_index = layer.alert("请复制: " + '/activity/details/'+id);
+                }
 
                 function oncode(id) {
                     var activity_id = '#code_' + id;
@@ -283,6 +282,38 @@
                                 layer.msg(res.msg);
                                 if (res.status) {
                                     $('#list').trigger('reloadGrid');
+                                }
+                            }
+                        });
+                    }, function () {
+                    });
+                }
+                
+                function sign(id){
+                    layer.prompt({
+                        title: '请输入签到码',
+                        btn: ['确认', '取消'], //按钮
+                        formType: 0, // input.type 0:text,1:password,2:textarea
+                    }, function (code) {
+                        var msg = {};
+                        msg.code = code;
+                        $.ajax({
+                            type: 'post',
+                            data: msg,
+                            dataType: 'json',
+                            url: '/activity/sign/' + id,
+                            success: function (res) {
+                                if (res.status) {
+                                    layer.open({
+                                        type: 2,
+                                        title: '查看详情',
+                                        shadeClose: true,
+                                        shade: 0.8,
+                                        area: ['60%', '70%'],
+                                        content: '/admin/activity/view-user/' + res.data
+                                    });
+                                } else {
+                                    layer.msg(res.msg);
                                 }
                             }
                         });
