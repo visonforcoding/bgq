@@ -144,16 +144,16 @@
                             id: 'id'
                         },
                         loadComplete: function (data) {
-//                            var clip = '';
-//                            clip = new ZeroClipboard($('.copy'));
-//                            console.log('可以复制了');
-//                            clip.on('copy', function (event) {
-//                                clip.setData('text/plain', '<?= $domain ?>' + '/activity/details/' + event.target.id);
-//                            });
-//                            clip.on("aftercopy", function (event) {
-//                                //if(window.copy_index) layer.close(window.copy_index);
-//                                layer.msg("复制了: " + event.data["text/plain"]);
-//                            });
+                            var clip = '';
+                            clip = new ZeroClipboard($('.copy'));
+                            console.log('可以复制了');
+                            clip.on('copy', function (event) {
+                                clip.setData('text/plain', '<?= $domain ?>' + '/activity/details/' + event.target.id);
+                            });
+                            clip.on("aftercopy", function (event) {
+                                //if(window.copy_index) layer.close(window.copy_index);
+                                layer.msg("复制了: " + event.data["text/plain"]);
+                            });
                         },
                     }).navGrid('#pager', {edit: false, add: false, del: false, view: true});
                 });
@@ -186,18 +186,7 @@
                 }
 
                 function copy(id){
-//                    window.copy_index = layer.alert("请复制: " + '/activity/details/'+id);
-                    layer.prompt({
-                        title: '复制链接',
-                        value: '/activity/details/'+id,
-                        btn: ['复制', '取消'], //按钮
-                        formType: 0, // input.type 0:text,1:password,2:textarea
-                    }, function (val, index, elem) {
-                        elem.get(0).select();
-                        var success = document.execCommand('copy');
-                        if(success) layer.msg('复制了：'+val);
-                    }, function () {
-                    });
+                    window.copy_index = layer.alert("请手动复制: " + '/activity/details/'+id);
                 }
 
                 function oncode(id) {
