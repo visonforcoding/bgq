@@ -114,13 +114,17 @@
                     response += '<a title="查看" onClick="doView(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-eye-open"></i> </a>';
                     response += '<a title="课程" href="/admin/class/index/'+rowObject.id+'" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-book"></i> </a>';
                     response += '<a title="编辑" href="/admin/course/edit/' + rowObject.id + '" class="grid-btn "><i class="icon icon-pencil"></i> </a>';
-                    response += '<a title="复制链接" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
+                    response += '<a title="复制链接" onclick="copy('+rowObject.id+')" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
                     if(rowObject.is_recom){
                         response += '<a title="取消推荐" onclick="recom('+rowObject.id+')" href="javascript:void(0)" class="grid-btn "><i class="icon icon-thumbs-o-down"></i> </a>';
                     } else {
                         response += '<a title="推荐" onclick="recom('+rowObject.id+')" href="javascript:void(0)" class="grid-btn "><i class="icon icon-thumbs-o-up"></i> </a>';
                     }
                     return response;
+                }
+                
+                function copy(id){
+                    layer.alert("请手动复制: " + '/course/detail/' + id);
                 }
 
                 function delRecord(id) {
