@@ -148,7 +148,7 @@
                             clip = new ZeroClipboard($('.copy'));
                             console.log('可以复制了');
                             clip.on('copy', function (event) {
-                                clip.setData('text/plain', '<?= $domain ?>' + '/activity/details/' + event.target.id);
+                                clip.setData('text/plain', '/activity/details/' + event.target.id);
                             });
                             clip.on("aftercopy", function (event) {
                                 //if(window.copy_index) layer.close(window.copy_index);
@@ -186,19 +186,16 @@
                 }
 
                 function copy(id){
-                    window.copy_index = layer.alert("请手动复制: " + '/activity/details/'+id);
+                    layer.alert("请手动复制: " + '/activity/details/'+id);
                 }
 
                 function oncode(id) {
                     var activity_id = '#code_' + id;
                     $(activity_id).find('img').attr('src', $(activity_id).find('img').attr('back_src'));
-                    if ($(activity_id).hasClass('active'))
-                    {
+                    if ($(activity_id).hasClass('active')) {
                         $(activity_id).hide();
                         $(activity_id).removeClass('active');
-                    }
-                    else
-                    {
+                    } else {
                         $(activity_id).show();
                         $(activity_id).addClass('active');
                     }

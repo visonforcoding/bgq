@@ -196,22 +196,14 @@
                     } else {
                         response += '<a title="查看名片" href="javascript:layer.alert(\'此人还没有上传名片\')"><i class="icon icon-picture"></i> </a>';
                     }
-                    response += '<a title="复制个人主页" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
+                    response += '<a title="复制个人主页" onclick="copy('+rowObject.id+')" data-id="' + rowObject.id + '" class="grid-btn copy" id="' + rowObject.id + '"><i class="icon icon-link"></i> </a>';
                     response += '<a title="修改" href="/admin/user/edit/' + rowObject.id + '" class="grid-btn"><i class="icon icon-pencil"></i> </a>';
                     return response;
                 }
 
-//                var clip = '';
-//                setTimeout(function () {
-//                    clip = new ZeroClipboard($('.copy'));
-//                    console.log('可以复制了');
-//                    clip.on('copy', function (event) {
-//                        clip.setData('text/plain', '/user/home-page/' + event.target.id);
-//                    });
-//                    clip.on("aftercopy", function (event) {
-//                        alert("复制了: " + event.data["text/plain"]);
-//                    });
-//                }, 1000);
+                function copy(id){
+                    layer.alert("请手动复制: " + '/user/home-page/'+id);
+                }
 
                 function delRecord(id) {
                     layer.confirm('确定删除？', {
