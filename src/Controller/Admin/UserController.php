@@ -18,6 +18,8 @@ class UserController extends AppController {
      * @return void
      */
     public function index() {
+        $domain = $this->request->scheme().'://'.$this->request->env('SERVER_NAME');
+        $this->set(compact('domain'));
         $this->set('user', $this->User);
     }
 

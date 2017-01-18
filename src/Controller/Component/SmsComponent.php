@@ -91,7 +91,6 @@ class SmsComponent extends Component {
         $response = $http->post($url, $requestData);
         if ($response->isOk()) {
             $body = Xml::toArray(Xml::build($response->body()));
-            //\Cake\Log\Log::debug($body);
             if($body['returnsms']['successCounts']) {
                 $smsTable = \Cake\ORM\TableRegistry::get('smsmsg');
                 $mobile_arr = explode(',', $mobile);

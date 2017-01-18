@@ -170,7 +170,7 @@
                             clip = new ZeroClipboard($('.copy'));
                             console.log('可以复制了');
                             clip.on('copy', function (event) {
-                                clip.setData('text/plain', '/user/home-page/' + event.target.id);
+                                clip.setData('text/plain', '<?= $domain ?>' + '/user/home-page/' + event.target.id);
                             });
                             clip.on("aftercopy", function (event) {
                                 layer.msg("复制了: " + event.data["text/plain"]);
@@ -202,7 +202,7 @@
                 }
 
                 function copy(id){
-                    layer.alert("请手动复制: " + '/user/home-page/'+id);
+                    layer.alert("请手动复制: " + '<?= $domain ?>' + '/user/home-page/'+id);
                 }
 
                 function delRecord(id) {

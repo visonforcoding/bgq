@@ -148,7 +148,7 @@
                             clip = new ZeroClipboard($('.copy'));
                             console.log('可以复制了');
                             clip.on('copy', function (event) {
-                                clip.setData('text/plain', '/activity/details/' + event.target.id);
+                                clip.setData('text/plain', '<?= $domain ?>' + '/activity/details/' + event.target.id);
                             });
                             clip.on("aftercopy", function (event) {
                                 //if(window.copy_index) layer.close(window.copy_index);
@@ -186,7 +186,7 @@
                 }
 
                 function copy(id){
-                    layer.alert("请手动复制: " + '/activity/details/'+id);
+                    layer.alert("请手动复制: " + '<?= $domain ?>' + '/activity/details/'+id);
                 }
 
                 function oncode(id) {
