@@ -1,62 +1,60 @@
-<body>
-    <div class="wraper">
-        
-        <form action="" method="post">
-            <?php if($triple): ?>
-                <input type="hidden" name="user1" />
-                <input type="hidden" name="user2" />
-            <?php endif; ?>
-            <div class="infobox sing-up">
-                <ul>
-                    <li>活动名称：<span class='infocard'><input type="text" name="title" value="<?= $activity->title; ?>" readonly/></span></li>
-                    <li>时间：<span class='infocard'><input type="text" name="time" value="<?= $activity->time; ?>" readonly/></span></li>
-                    <li>地点：<span class='infocard'><input type="text" name="address" value="<?= $activity->address; ?>" readonly/></span></li>
-                    <li>参与人：<span class='infocard'><input type="text" name="truename" value="<?= $user->truename; ?>" readonly/></span></li>
-                    <li>公司：<span class='infocard'><input type="text" name="company" value="<?= $user->company; ?>" readonly/></span></li>
-                    <li>职务：<span class='infocard'><input type="text" name="position" value="<?= $user->position; ?>" readonly/></span></li>
-                    <li>联系方式：<span class='infocard reg-pass'><input type="text" name="phone" value="<?= $user->phone; ?>" readonly/></span></li>
-                    <li <?php if(!$triple): ?>class='no-bottom'<?php endif; ?>>费用：<span class='infocard reg-repass'><input type="text" name="apply_fee" placeholder="<?= $triple ? $activity->triple_fee : $activity->apply_fee; ?>元" readonly/></span></li>
-                    <?php if($triple): ?>
-                        <li class='no-bottom'>同行人：<span class='infocard reg-repass'><input type="text" name="triple" placeholder="" readonly/></span></li>
-                    <?php endif; ?>
-                </ul>
-            </div>
-            <a href="javascript:void(0)" class="nextstep" id="submit">提交</a>
-            <!--<div class="line"><span class="mistips">活动费用不可退哦</span></div>-->
-        </form>
-    </div>
-    <div class='reg-shadow' hidden id="shadow"></div>
-    <div class="totips suc" style="display:none;">
-        <h3>活动报名成功</h3>
-        <span></span>
-        <a href="" class="nextstep comfirm">确认</a>
-    </div>
-    <div class="totips check" style="display:none;">
-        <h3>活动申请已提交</h3>
-        <span>秘书会在三个工作日内审核</span>
-        <a href="" class="nextstep checkComfirm">确认</a>
-    </div>
-    <div class="totips" hidden id="checkBtn">
-        <h3 id="msg">请先去完善个人资料</h3>
-        <span style="display: none;"></span>
-        <a href="javascript:void(0)" class="tipsbtn bggray" id="no">取消</a><a href="/home/edit-userinfo" class="tipsbtn bgred" id="yes">去完善</a>
-    </div>
-</body>
+<div class="wraper">
+    <form action="" method="post">
+        <div class="infobox sing-up">
+            <ul>
+                <li>活动名称：<span class='infocard'><input type="text" name="title" value="<?= $activity->title; ?>" readonly/></span></li>
+                <li>时间：<span class='infocard'><input type="text" name="time" value="<?= $activity->time->format('Y-m-d'); ?>" readonly/></span></li>
+                <li>地点：<span class='infocard'><input type="text" name="address" value="<?= $activity->address; ?>" readonly/></span></li>
+                <li>参与人：<span class='infocard'><input type="text" name="truename" value="<?= $user->truename; ?>" readonly/></span></li>
+                <li>公司：<span class='infocard'><input type="text" name="company" value="<?= $user->company; ?>" readonly/></span></li>
+                <li>职务：<span class='infocard'><input type="text" name="position" value="<?= $user->position; ?>" readonly/></span></li>
+                <li>联系方式：<span class='infocard reg-pass'><input type="text" name="phone" value="<?= $user->phone; ?>" readonly/></span></li>
+                <?php if ($activity->bonus_start_time < Cake\I18n\Time::now() && $activity->bonus_end_time > Cake\I18n\Time::now()): ?>
+                    <li <?php if (!$triple): ?>class='no-bottom'<?php endif; ?>>费用：
+                        <span class='infocard reg-repass'>
+                            <input 
+                                type="text"
+                                name="apply_fee"
+                                placeholder="<?= $triple ? $activity->bonus_triple_fee . '*' . $multi_nums . '=' . ($triple ? $activity->bonus_triple_fee : $activity->bonus_fee) * $multi_nums : $activity->bonus_fee; ?>元"
+                                readonly/>
+                        </span>
+                    </li>
+                <?php else: ?>
+                    <li <?php if (!$triple): ?>class='no-bottom'<?php endif; ?>>费用：
+                        <span class='infocard reg-repass'>
+                            <input
+                                type="text"
+                                name="apply_fee"
+                                placeholder="<?= $triple ? $activity->triple_fee . '*' . $multi_nums . '=' . ($triple ? $activity->triple_fee : $activity->apply_fee) * $multi_nums : $activity->apply_fee; ?>元"
+                                readonly/>
+                        </span>
+                    </li>
+                <?php endif; ?>
+                <?php if ($triple): ?>
+                    <li class='no-bottom'>同行人：<span class='infocard reg-repass'><input type="text" name="triple" placeholder="" readonly value="<?= $uname ?>"/></span></li>
+                <?php endif; ?>
+            </ul>
+        </div>
+        <a href="javascript:void(0)" class="nextstep" id="submit">提交</a>
+        <!--<div class="line"><span class="mistips">活动费用不可退哦</span></div>-->
+    </form>
+</div>
+<div class='reg-shadow' hidden id="shadow"></div>
+<div class="totips suc" style="display:none;">
+    <h3>活动报名成功</h3>
+    <span></span>
+    <a href="" class="nextstep comfirm">确认</a>
+</div>
+<div class="totips check" style="display:none;">
+    <h3>活动申请已提交</h3>
+    <span>秘书会在三个工作日内审核</span>
+    <a href="" class="nextstep checkComfirm">确认</a>
+</div>
 <?php $this->start('script'); ?>
 <script>
     window.must_check = <?= $activity->must_check; ?>;
 </script>
 <script>
-//    window.onBackView = function(){
-//        $.util.checkUserinfoStatus();
-//    };
-//    window.onBackView();
-    if($.util.getCookie('acti_1_id')){
-        $('input[name="triple"]').attr('placeholder', $.util.getCookie('acti_1_name')+'、'+$.util.getCookie('acti_2_name'));
-        $('input[name="user1"]').val($.util.getCookie('acti_1_id'));
-        $('input[name="user2"]').val($.util.getCookie('acti_2_id'));
-    }
-    
     $('#submit').on('tap', function () {
         $form = $('form');
         $.ajax({
@@ -67,41 +65,23 @@
             success: function (msg) {
                 if (typeof msg === 'object') {
                     if (msg.status === true) {
-                        if(msg.url.indexOf('/Wx/') != -1){
-                            window.location.href = msg.url;
-                        } else {
-                            setTimeout(function(){
-                                if(window.must_check){
-                                    $('.check').show('slow');
-                                    $('.checkComfirm').attr('href', msg.url);
-                                } else {
-                                    $('.suc').show('slow');
-                                    $('.comfirm').attr('href', msg.url);
-                                }
-                                $('#shadow').show('slow');
-                            }, 400);
-                        }
+                        setTimeout(function () {
+                            if (window.must_check) {
+                                $('.check').show('slow');
+                                $('.checkComfirm').attr('href', msg.url);
+                            } else {
+                                $('.suc').show('slow');
+                                $('.comfirm').attr('href', msg.url);
+                            }
+                            $('#shadow').show('slow');
+                        }, 400);
                     } else {
-                        if (msg.msg.indexOf('请先去完善个人资料') != -1) {
-                            setTimeout(function(){
-                                $('#msg').html(msg.msg);
-                                $('#shadow').show();
-                                $('#checkBtn').show();
-                            }, 400);
-                        } else {
-                            $.util.alert(msg.msg);
-                        }
+                        $.util.alert(msg.msg);
                     }
                 }
             }
         });
         return false;
-    });
-    $('.closed').on('click', function(){
-        setTimeout(function(){
-            $('#shadow').hide('slow');
-            $('.totips').hide('slow');
-        }, 400);
     });
 </script>
 <?php

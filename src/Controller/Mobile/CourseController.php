@@ -333,38 +333,6 @@ class CourseController extends AppController {
         }
     }
     
-    public function chargeOrder($money=NULL){
-        $this->handCheckLogin();
-        if($this->request->is('post')){
-            $gift = 0;
-            $RechargeGiftTable = \Cake\ORM\TableRegistry::get('RechargeGift');
-            $rechargeGift = $RechargeGiftTable->find()->orderAsc('recharge_money')->all()->toArray();
-            for($i=0;$i<count($rechargeGift);$i++){
-                if($money >= $rechargeGift[$i]->recharge_money){
-                    $gift = $rechargeGift[$i]->gift;
-                }
-            }
-            $OrderTable = \Cake\ORM\TableRegistry::get('Order');
-            $order = $OrderTable->newEntity([
-                'type' => 3, // 类型为充值
-                'relate_id' => 0, //充值
-                'user_id' => $this->user->id,
-                'seller_id' => $this->user->id,     //活动报名的收入 固定给-1 的用户
-                'order_no' => time() . $this->user->id . createRandomCode(4, 1),
-                'fee' => 0, // 实际支付的默认值
-                'price' => $money,
-                'remark' => '充值余额',
-                'gift' => $gift
-            ]);
-            $order = $OrderTable->save($order);
-            if($order){
-                return $this->Util->ajaxReturn(true, '', $order->id);
-            } else {
-                return $this->Util->ajaxReturn(false, '系统错误');
-            }
-        }
-    }
-    
     /**
      * 删除已购培训
      * @param type $id 培训id

@@ -151,8 +151,29 @@
     <!--吸底按钮-->
     <div class="a_fixed_group">
         <div class="entrol_group" id="choose">
-            <a href="javascript:$.util.checkLogin('/activity/enroll/<?= $activity->id; ?>');"><span class="choose_num">单人行（<?= $activity->apply_fee ?>）</span></a>
-            <a href="javascript:$.util.checkLogin('/activity/choose_member/<?= $activity->id; ?>');"><span class="choose_num">三人行（<?= $activity->triple_fee ?>）</span></a>
+            <?php if($activity->bonus_start_time < Cake\I18n\Time::now() && $activity->bonus_end_time > Cake\I18n\Time::now()): ?>
+                <a href="javascript:$.util.checkLogin('/activity/enroll/<?= $activity->id; ?>');">
+                    <span class="choose_num">
+                        1人
+                        <span style="text-decoration:line-through;">（<?= $activity->apply_fee ?>元/人）</span>
+                        （<?= $activity->bonus_fee ? $activity->bonus_fee : $activity->apply_fee ?>元/人）
+                    </span>
+                </a>
+                <a href="javascript:$.util.checkLogin('/activity/choose_member/<?= $activity->id; ?>');">
+                    <span class="choose_num">
+                        <?= $activity->multi_nums ?>人
+                        <span style="text-decoration:line-through;">（<?= $activity->triple_fee ?>元/人）</span>
+                        （<?= $activity->bonus_triple_fee ?>元/人）
+                    </span>
+                </a>
+            <?php else: ?>
+                <a href="javascript:$.util.checkLogin('/activity/enroll/<?= $activity->id; ?>');">
+                    <span class="choose_num">1人（<?= $activity->apply_fee ?>元/人）</span>
+                </a>
+                <a href="javascript:$.util.checkLogin('/activity/choose_member/<?= $activity->id; ?>');">
+                    <span class="choose_num"><?= $activity->multi_nums ?>人（<?= $activity->triple_fee ?>元/人）</span>
+                </a>
+            <?php endif; ?>
         </div>
         <div class="bottombtn flex">
             <?php if ($activity->apply_end_time < time()): ?>
@@ -168,14 +189,14 @@
                     <!--是否要审核-->
                     <?php if ($activity->must_check): ?>
                         <?php if (empty($activity->activityapply)): ?>
-                            <a id="want_enroll" class="r-btn" href="javascript:void(0);" is_three="<?= $activity->triple_fee ? 1 : 0 ?>">我要报名<?= $activity->triple_fee ? '' : '('.$activity->apply_fee.'元)'; ?></a>
+                            <a id="want_enroll" class="r-btn" href="javascript:void(0);" is_multi="<?= $activity->multi_nums ? 1 : 0 ?>">我要报名<?= $activity->triple_fee ? '' : '('.$activity->apply_fee.'元)'; ?></a>
                         <?php else: ?>
                             <?php if ($activity->activityapply['0']->is_pass == 0): ?>
                                 <?php if ($activity->activityapply['0']->is_check == 1): ?>
                                     <?php if ($activity->activityapply['0']->triple_pid): ?>
                                         <a class="r-btn">报名中</a>
                                     <?php else: ?>
-                                        <a href="/wx/meet-pay/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->activityapply['0']->is_triple ? $activity->triple_fee : $activity->apply_fee; ?>元)</a>
+                                        <a href="/activity/pay/<?= $activity->activityapply['0']->id; ?>" class="r-btn">去付款(<?= $activity->activityapply['0']->is_triple ? $activity->triple_fee : $activity->apply_fee; ?>元)</a>
                                     <?php endif; ?>
                                 <?php elseif ($activity->activityapply['0']->is_check == 2): ?>
                                     <a style="background:gray;" class="r-btn">审核未通过</a>
@@ -188,13 +209,13 @@
                         <?php endif; ?>
                     <?php else: ?>
                         <?php if (empty($activity->activityapply)): ?>
-                            <a id="want_enroll" class="r-btn" href="javascript:void(0);" is_three="<?= $activity->triple_fee ? 1 : 0 ?>">我要报名<?= $activity->triple_fee ? '' : '('.$activity->apply_fee.'元)'; ?></a>
+                            <a id="want_enroll" class="r-btn" href="javascript:void(0);" is_multi="<?= $activity->multi_nums ? 1 : 0 ?>">我要报名<?= $activity->triple_fee ? '' : '('.$activity->apply_fee.'元)'; ?></a>
                         <?php else: ?>
                             <?php if ($activity->activityapply['0']->is_pass == 0): ?>
                                 <?php if ($activity->activityapply['0']->triple_pid): ?>
                                     <a class="r-btn">报名中</a>
                                 <?php else: ?>
-                                    <a href="/wx/meet-pay/<?= $order->id; ?>" class="r-btn">去付款(<?= $activity->activityapply['0']->is_triple ? $activity->triple_fee : $activity->apply_fee; ?>元)</a>
+                                    <a href="/activity/pay/<?= $activity->activityapply['0']->id; ?>" class="r-btn">去付款(<?= $activity->activityapply['0']->is_triple ? $activity->triple_fee : $activity->apply_fee; ?>元)</a>
                                 <?php endif; ?>
                             <?php elseif ($activity->activityapply['0']->is_pass == 1): ?>
                                 <a class="r-btn">已报名</a>
@@ -736,7 +757,7 @@
                 }, 400);
                 break;
             case 'want_enroll':
-                if($(em).attr('is_three') == 1){
+                if($(em).attr('is_multi') == 1){
                     $('#choose').toggleClass('hide_group');
                     if($('#choose').hasClass('hide_group')){
                         $('#shadow').show();

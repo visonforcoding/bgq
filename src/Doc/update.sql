@@ -1107,3 +1107,6 @@ ALTER TABLE `activityapply`
 ALTER TABLE `user`
 	ADD COLUMN `elite_top_time` DATETIME NULL DEFAULT NULL COMMENT '菁英置顶时间' AFTER `is_elite_top`;
 
+ALTER TABLE `activityapply`
+	ADD COLUMN `apply_fee` DECIMAL(10,2) UNSIGNED NULL DEFAULT NULL COMMENT '报名总费用' AFTER `reason`;
+

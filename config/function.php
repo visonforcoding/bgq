@@ -127,3 +127,13 @@ function dblog($flag, $msg, $data = null) {
         Cake\Log\Log::error('devlog',$exc->getTraceAsString());
     }
 }
+
+function dec2s4($dec) {
+    $base = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $result = '';
+    do {
+        $result = $base[$dec % 16] . $result;
+        $dec = intval($dec / 16);
+    } while ($dec != 0);
+    return $result;
+}

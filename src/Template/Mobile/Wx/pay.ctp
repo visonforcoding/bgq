@@ -27,7 +27,8 @@
 </div>
 <a href="javascript:void(0)" class="f-bottom" id="submit">确认支付</a>
 <script>
-    window.course_id = '<?= $course_id ?>';
+    window.relate_id = '<?= $relate_id ?>';
+    window.type = '<?= $type ?>';
 </script>
 <script>
     var payMethod = 'wx';
@@ -44,13 +45,19 @@
                     if (res == '0') {
                         $.util.alert('支付成功');
                         setTimeout(function () {
-                            if(window.course_id){
+                            if(window.relate_id){
                                 $.util.ajax({
                                     url: '/wx/buy',
-                                    data: {course_id: window.course_id},
+                                    data: {relate_id: window.relate_id, type:window.type},
                                     func: function(res){
                                         if(res.status){
-                                            location.href = '/wx/buy-success/'+res.data;
+                                            if(window.type == 1){
+                                                location.href = '/wx/buy-success/'+res.data;
+                                            } else if(window.type == 2){
+                                                location.href = '/wx/pay-success/';
+                                            }
+                                        } else {
+                                            $.util.alert(res.msg);
                                         }
                                     }
                                 });
@@ -72,13 +79,19 @@
                     if (res == '9000') {
                         $.util.alert('支付成功');
                         setTimeout(function () {
-                            if(window.course_id){
+                            if(window.relate_id){
                                 $.util.ajax({
                                     url: '/wx/buy',
-                                    data: {course_id: window.course_id},
+                                    data: {relate_id: window.relate_id, type:window.type},
                                     func: function(res){
                                         if(res.status){
-                                            location.href = '/wx/buy-success/'+res.data;
+                                            if(window.type == 1){
+                                                location.href = '/wx/buy-success/'+res.data;
+                                            } else if(window.type == 2){
+                                                location.href = '/wx/pay-success/';
+                                            }
+                                        } else {
+                                            $.util.alert(res.msg);
                                         }
                                     }
                                 });
@@ -104,13 +117,19 @@
                     if (res.err_msg == "get_brand_wcpay_request:ok") {
                         $.util.alert('支付成功');
                         setTimeout(function () {
-                            if(window.course_id){
+                            if(window.relate_id){
                                 $.util.ajax({
                                     url: '/wx/buy',
-                                    data: {course_id: window.course_id},
+                                    data: {relate_id: window.relate_id, type:window.type},
                                     func: function(res){
                                         if(res.status){
-                                            location.href = '/wx/buy-success/'+res.data;
+                                            if(window.type == 1){
+                                                location.href = '/wx/buy-success/'+res.data;
+                                            } else if(window.type == 2){
+                                                location.href = '/wx/pay-success/';
+                                            }
+                                        } else {
+                                            $.util.alert(res.msg);
                                         }
                                     }
                                 });

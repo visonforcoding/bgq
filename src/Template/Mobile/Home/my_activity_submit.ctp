@@ -53,7 +53,6 @@
     var type = '<?= $type ?>';
 </script>
 <script>
-
     if(type == 2){
         myActivity($('#myActivity').get(0));
     } else {
@@ -126,6 +125,7 @@
                 if (typeof msg == 'object') {
                     if (msg.status) {
                         $.util.dataToTpl('dataBox', 'listTpl', msg.data, function (d) {
+                            d.apply_id = d.id;
                             d.id = d.activity.id;
                             d.cover = d.activity.thumb ? d.activity.thumb : d.activity.cover;
                             d.title = d.activity.title;
@@ -140,13 +140,32 @@
                                     if(d.triple_pid){
                                         d.check = '报名中';
                                         d.id = '/activity/details/' + d.activity.id;
+                                        if (d.is_check === 2 && d.is_pass === 0) {
+                                            d.check = '审核不通过';
+                                            if(d.reason){
+                                                d.id = '/activity/no_pass/' + d.activity.id;
+                                            } else {
+                                                d.id = 'javascript:void(0);';
+                                            }
+                                        }
                                     } else {
                                         if (d.is_check === 0 && d.is_pass === 0) {
                                             d.check = '审核中';
                                             d.id = '/activity/details/' + d.activity.id;
                                         } else if (d.is_check === 1 && d.is_pass === 0) {
                                             d.check = '未付款';
-                                            d.id = '/wx/meet-pay/' + d.lmorder.id;
+                                            if(d.apply_fee){
+                                                d.id = '/activity/pay/' + d.apply_id;
+                                            } else {
+                                                d.id = 'javascript:void(0);';
+                                            }
+                                        } else if (d.is_check === 2 && d.is_pass === 0) {
+                                            d.check = '审核不通过';
+                                            if(d.reason){
+                                                d.id = '/activity/no_pass/' + d.activity.id;
+                                            } else {
+                                                d.id = 'javascript:void(0);';
+                                            }
                                         }
                                     }
                                 }
@@ -157,7 +176,11 @@
                                         d.id = '/activity/details/' + d.activity.id;
                                     } else {
                                         d.check = '未付款';
-                                        d.id = '/wx/meet-pay/' + d.lmorder.id;
+                                        if(d.apply_fee){
+                                            d.id = '/activity/pay/' + d.apply_id;
+                                        } else {
+                                            d.id = "javascript:void(0)";
+                                        }
                                     }
                                 } else if (d.is_pass === 1) {
                                     d.check = '报名成功';

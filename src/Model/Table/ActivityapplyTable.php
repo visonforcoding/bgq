@@ -31,7 +31,13 @@ class ActivityapplyTable extends Table {
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
-            'joinType' => 'INNER',
+            'joinType' => 'LEFT',
+            'className' => 'User',
+        ]);
+        $this->belongsTo('OtherUsers', [
+            'foreignKey' => 'phone',
+            'bindingKey' => 'phone',
+            'joinType' => 'LEFT',
             'className' => 'User',
         ]);
         $this->belongsTo('Activities', [
@@ -51,6 +57,12 @@ class ActivityapplyTable extends Table {
             'bindingKey' => 'activity_id',
             'className' => 'Usermsg',
             'joinType' => 'left'
+        ]);
+        
+        $this->hasMany('Companions', [
+            'foreignKey' => 'triple_pid',
+            'joinType' => 'LEFT',
+            'className' => 'Activityapply',
         ]);
 
         $this->addBehavior('Timestamp', [
@@ -74,11 +86,6 @@ class ActivityapplyTable extends Table {
                 ->integer('id')
                 ->allowEmpty('id', 'create');
 
-
-
-
-
-
         return $validator;
     }
 
@@ -90,7 +97,7 @@ class ActivityapplyTable extends Table {
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules) {
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
+//        $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['activity_id'], 'Activities'));
         return $rules;
     }

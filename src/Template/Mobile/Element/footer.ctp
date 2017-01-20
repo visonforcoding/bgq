@@ -1,9 +1,6 @@
 <footer class="footer" id="footer" style="display: none">
     <ul class="navfooter clearfix">
         <li>
-            <a href="/news/index" class="news_icon"><span class="iconfont">&#xe69f;</span>资讯</a>
-        </li>
-        <li>
             <a href="/course/index" class="course_icon"><span class="iconfont">&#xe6ac;</span>培训</a>
         </li>
         <li>
@@ -11,6 +8,9 @@
         </li>
         <li>
             <a href="/meet/index" class="meet_icon"><span class="iconfont">&#xe6a0;</span>约见</a>
+        </li>
+        <li>
+            <a href="/news/index" class="news_icon"><span class="iconfont">&#xe69f;</span>资讯</a>
         </li>
         <li>
             <a href="/home/index" class="home_icon"><span class="iconfont">&#xe69e;</span>我</a>

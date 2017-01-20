@@ -29,7 +29,8 @@
 </div>
 <?php $this->start('script'); ?>
 <script>
-   window.course_id = '<?= $course_id ?>';
+   window.relate_id = '<?= $id ?>';
+   window.type = '<?= $type ?>';
 </script>
 <script type="text/javascript">
     $('#charge li').on('tap', function () {
@@ -51,11 +52,11 @@
     $('#submit').on('tap', function (){
         var input = $('input[name="recharge_money"]').val();
         $.util.ajax({
-            url: '/course/charge-order/'+input,
+            url: '/wx/charge-order/'+input,
             func: function(res){
                 if(res.status){
-                    if(window.course_id){
-                        location.href = '/wx/meet-pay/'+res.data+'?course_id='+window.course_id;
+                    if(window.relate_id){
+                        location.href = '/wx/meet-pay/'+res.data+'?relate_id='+window.relate_id+'&type='+window.type;
                     } else {
                         location.href = '/wx/meet-pay/'+res.data;
                     }

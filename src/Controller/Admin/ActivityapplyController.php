@@ -56,9 +56,9 @@ class ActivityapplyController extends AppController {
     public function view($id = null) {
         $this->viewBuilder()->autoLayout(false);
         $activityapply = $this->Activityapply->get($id, [
-            'contain' => ['Users', 'Activities']
+            'contain' => ['Companions']
         ]);
-        $this->set('activityapply', $activityapply);
+        $this->set('companions', $activityapply->companions);
         $this->set('_serialize', ['activityapply']);
     }
 
@@ -162,6 +162,7 @@ class ActivityapplyController extends AppController {
         $is_sign = $this->request->data('is_sign');
         $is_pay = $this->request->data('is_pay');
         $where = [];
+        $where['triple_pid'] = 0;
         if (is_numeric($is_check)) {
             $where = ['Activityapply.is_check' => $is_check];
         }
@@ -170,7 +171,7 @@ class ActivityapplyController extends AppController {
             $where = ['Activityapply.is_check' => 0];
         }
         if (!empty($keywords)) {
-            $where['Users.truename like'] = "%$keywords%";
+            $where['Activityapply.name like'] = "%$keywords%";
         }
         if (is_numeric($must_check)) {
             $where['Activities.must_check'] = $must_check;
@@ -195,7 +196,11 @@ class ActivityapplyController extends AppController {
         if (!empty($where)) {
             $query->where($where);
         }
-        $query->contain(['Users', 'Activities']);
+        $query->contain(['Users'=>function($q){
+            return $q->select(['Users.id', 'Users.truename', 'Users.company', 'Users.position', 'Users.phone', 'Users.create_time']);
+        }, 'Activities', 'OtherUsers'=>function($q){
+            return $q->select(['OtherUsers.create_time']);
+        }, 'Companions']);
         $nums = $query->count();
         if (!empty($sort) && !empty($order)) {
             $query->order([$sort => $order]);
@@ -307,42 +312,31 @@ class ActivityapplyController extends AppController {
     }
 
     /**
-     * 发布活动操作
+     * 直接操作报名状态
      * @param int $id 活动id
      */
     public function pass($id) {
-        $activityapply = $this->Activityapply->get($id);
-        $ActivityTable = \Cake\ORM\TableRegistry::get('Activity');
-        $activity = $ActivityTable->get($activityapply->activity_id);
+        $activityapply = $this->Activityapply->get($id, [
+            'contain' => ['Companions', 'Activities']
+        ]);
         if($activityapply->is_pass == 0){
-            $activityapply->is_pass = 1;
-            $activityapply->is_check = 1;
-            $activity->apply_nums += 1;
+            $activityapply->activity->apply_nums += (1 + count($activityapply->companions));
         } else {
-            $activityapply->is_pass = 0;
-            $activityapply->is_check = 0;
-            $activity->apply_nums -= 1;
+            $activityapply->activity->apply_nums -= (1 + count($activityapply->companions));
         }
+        foreach ($activityapply->companions as $k=>$v){
+            $activityapply->companions[$k]['is_pass'] = $activityapply->is_pass ? 0 : 1;
+            $activityapply->companions[$k]['is_check'] = $activityapply->is_pass ? 0 : 1;
+            $activityapply->companions[$k]['check_man'] = $this->_user->truename;
+        }
+        if($activityapply->activity->must_check){
+            $activityapply->is_check = $activityapply->is_pass ? 0 : 1;
+        }
+        $activityapply->is_pass = $activityapply->is_pass ? 0 : 1;
+        $activityapply->dirty('activity', true);
+        $activityapply->dirty('companions', true);
         $activityapply->check_man = $this->_user->truename;
-        $res = $this->Activityapply->connection()->transactional(function()use($activityapply, $activity, $ActivityTable){
-            return $this->Activityapply->save($activityapply) && $ActivityTable->save($activity);
-        });
-        if ($res) {
-            $this->Util->ajaxReturn(true, '操作成功');
-        } else {
-            $this->Util->ajaxReturn(false, '操作失败');
-        }
-    }
-
-    /**
-     * 审核不通过操作
-     * @param int $id 活动id
-     */
-    public function unpass($id) {
-        $data = $this->request->data();
-        $activity = $this->Activityapply->get($id);
-        $activity->is_pass = 0;
-        $res = $this->Activityapply->save($activity);
+        $res = $this->Activityapply->save($activityapply);
         if ($res) {
             $this->Util->ajaxReturn(true, '操作成功');
         } else {
@@ -355,33 +349,52 @@ class ActivityapplyController extends AppController {
      * @param type $id
      */
     public function check($id) {
-        $apply = $this->Activityapply->get($id, [
-            'contain' => 'Users'
-        ]);
         $ActivityapplyTable = \Cake\ORM\TableRegistry::get('Activityapply');
-        $ActivityTable = \Cake\ORM\TableRegistry::get('Activity');
-        $activity = $ActivityTable->get($apply->activity_id);
-        if ($activity->apply_fee == 0) {
+        $apply = $ActivityapplyTable->get($id, [
+            'contain' => ['Companions', 'Activities']
+        ]);
+        if ($apply->apply_fee == 0) {
             //无需付费的 直接通过
             $apply->is_pass = 1;
-            $activity->apply_nums += 1;  //报名人数+1
+            if(!$apply->verify_code){
+                $apply->verify_code = dec2s4($apply->id + 1000000000);
+            }
+            $apply->activity->apply_nums += (1 + count($apply->companions));  //报名人数+1
         }
+        if($apply->companions){
+            foreach ($apply->companions as $k=>$v){
+                if ($apply->apply_fee == 0) {
+                    $apply->companions[$k]->is_pass = 1;
+                }
+                $apply->companions[$k]->is_check = 1;
+                $apply->companions[$k]->check_man = $this->_user->truename;
+                if(!$apply->companions[$k]->verify_code){
+                    $apply->companions[$k]->verify_code = dec2s4($apply->companions[$k]->id + 1000000000);
+                }
+            }
+        }
+        $apply->dirty('companions', true);
+        $apply->dirty('activity', true);
         $apply->is_check = 1;
         $apply->check_man = $this->_user->truename;
-        $trans = $this->Activityapply->connection()->transactional(function()use($ActivityTable, $activity, $ActivityapplyTable, $apply) {
-            return $ActivityapplyTable->save($apply) && $ActivityTable->save($activity);
-        });
+        $trans = $ActivityapplyTable->save($apply);
         if ($trans) {
             //消息
             $this->loadComponent('Business');
-            $this->Business->usermsg('-1', $apply->user_id, '活动报名消息', '您报名的活动《' . $activity->title . '》已审核通过', 11, $id, '/activity/details/' . $activity->id);
-            if ($activity->apply_fee > 0) {
-                $sms_msg = '您报名的活动《' . $activity->title . '》已审核通过，请及时登录平台支付费用，并购帮祝您生活愉快~';
-            } else {
-                $sms_msg = '您报名的活动《' . $activity->title . '》已审核通过';
-            }
             $this->loadComponent('Sms');
-            $this->Sms->sendByQf106($apply->user->phone, $sms_msg);
+            $this->Business->usermsg('-1', $apply->user_id, '活动报名消息', '您报名的活动《' . $apply->activity->title . '》已审核通过', 11, $id, '/activity/details/' . $apply->activity->id);
+            if ($apply->apply_fee > 0) {
+                $sms_msg = '您报名的活动《' . $apply->activity->title . '》已审核通过，请及时登录平台支付费用，并购帮祝您生活愉快~';
+                $this->Sms->sendByQf106($apply->phone, $sms_msg);
+            } else {
+                $apply = $ActivityapplyTable->get($id, [
+                    'contain' => ['Companions']
+                ]);
+                foreach ($apply->companions as $k=>$v){
+                    $this->Sms->sendByQf106($v->phone, '您报名的活动《' . $apply->activity->title . '》已审核通过！' . '您的签到码为：' . $v->verify_code);
+                }
+                $this->Sms->sendByQf106($apply->phone, '您报名的活动《' . $apply->activity->title . '》已审核通过！' . '您的签到码为：' . $apply->verify_code);
+            }
             $this->Util->ajaxReturn(true, '操作成功');
         } else {
             $this->Util->ajaxReturn(false, '操作失败');
@@ -390,23 +403,29 @@ class ActivityapplyController extends AppController {
     
     
     public function resue($id) {
-        $apply = $this->Activityapply->get($id, [
-            'contain' => 'Users'
-        ]);
         $ActivityapplyTable = \Cake\ORM\TableRegistry::get('Activityapply');
-        $ActivityTable = \Cake\ORM\TableRegistry::get('Activity');
-        $activity = $ActivityTable->get($apply->activity_id);
-        
-        //无需付费的 直接通过
-        $apply->is_pass = 0;
-        if($activity->apply_nums >= 0){
-            $activity->apply_nums -= 1;  //报名人数-1
+        $apply = $ActivityapplyTable->get($id, [
+            'contain' => ['Companions', 'Activities']
+        ]);
+        if($apply->activity->apply_nums >= 0){
+            $apply->activity->apply_nums -= (1 + count($apply->companions));  //报名人数-1
         }
-        $apply->is_check = 0;
+        $apply->is_pass = 0;
+        if($apply->activity->must_check){
+            $apply->is_check = 0;
+        }
         $apply->check_man = $this->_user->truename;
-        $trans = $this->Activityapply->connection()->transactional(function()use($ActivityTable, $activity, $ActivityapplyTable, $apply) {
-            return $ActivityapplyTable->save($apply) && $ActivityTable->save($activity);
-        });
+        if($apply->companions){
+            foreach ($apply->companions as $k=>$v){
+                $apply->companions[$k]->is_pass = 0;
+                if($apply->activity->must_check){
+                    $apply->companions[$k]->is_check = 0;
+                }
+                $apply->companions[$k]->check_man = $this->_user->truename;
+            }
+        }
+        $apply->dirty('companions', true);
+        $trans = $ActivityapplyTable->save($apply);
         if($trans){
             $this->Util->ajaxReturn(true,'还原成功');
         }  else {
@@ -419,16 +438,26 @@ class ActivityapplyController extends AppController {
      * @param type $id
      */
     public function uncheck($id) {
-        $apply = $this->Activityapply->get($id);
+        $data = $this->request->data;
+        $apply = $this->Activityapply->get($id, [
+            'contain' => ['Companions', 'Activities', 'OtherUsers']
+        ]);
+        if($apply->companions){
+            foreach($apply->companions as $k=>$v){
+                $apply->companions[$k]['is_check'] = 2;
+                $apply->companions[$k]['reason'] = $data['reason'];
+                $apply->companions[$k]['check_man'] = $this->_user->truename;
+            }
+        }
         $apply->is_check = 2;
+        $apply->reason = $data['reason'];
         $apply->check_man = $this->_user->truename;
+        $apply->dirty('companions', true);
         $res = $this->Activityapply->save($apply);
         if ($res) {
             //消息
-            $ActivityTable = \Cake\ORM\TableRegistry::get('Activity');
-            $activity = $ActivityTable->get($apply->activity_id);
             $this->loadComponent('Business');
-            $this->Business->usermsg('-1', $apply->user_id, '活动报名消息', '您报名的活动《' . $activity->title . '》审核未通过', 11, $id, '/activity/details/' . $activity->id);
+            $this->Business->usermsg('-1', $apply->other_user->id, '活动报名消息', '您报名的活动《' . $apply->activity->title . '》审核未通过, 理由为：' . $data['reason'], 11, $id, '/activity/details/' . $apply->activity->id);
             $this->Util->ajaxReturn(true, '操作成功');
         } else {
             $this->Util->ajaxReturn(false, '操作失败');

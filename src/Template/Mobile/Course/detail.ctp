@@ -71,12 +71,9 @@
 <?php if(!$course->course_apply): ?>
 <a class="f-bottom" id="apply">我要报名</a>
 <?php endif; ?>
+<div class="reg-shadow" style="display: none;" id="mentorData"></div>
 <!--遮罩层-->
-<div class="reg-shadow" style="display: none;" id="mentorData">
-    
-</div>
-<div class="reg-shadow" style="display: none;" id="shadow">
-</div>
+<div class="reg-shadow" style="display: none;" id="shadow"></div>
 <div class="charge-box charge-box-hide" id="buy">
     <div class="title">
         <h3 class="nav-title  innerwaper"><?= $course->title ?></h3>
@@ -250,12 +247,12 @@
                                 data: {course_id: window.course_id},
                                 func: function(res){
                                     if(res.status){
-                                        location.href = '/wx/buy-success/'+res.data;
+                                        location.href = '/wx/pay-success/'+res.data;
                                     }
                                 }
                             });
                         } else {
-                            location.href = '/wx/charge/' + window.course_id;
+                            location.href = '/wx/charge/' + window.course_id + '/1';
                         }
                         break;
                     case 'down':
