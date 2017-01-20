@@ -83,9 +83,9 @@
                 data: {phone: phone},
                 dataType: 'json',
                 url: "/user/sendLoginCode",
-                beforeSend: function (request) {
-                    request.setRequestHeader("sms_token", $.util.getCookie('sms_token'));
-                },
+//                beforeSend: function (request) {
+//                    request.setRequestHeader("HTTP_FOO", $.util.getCookie('sms_token'));
+//                },
                 success: function (res) {
                     if (res.status === true) {
                         $.util.alert(res.msg);
