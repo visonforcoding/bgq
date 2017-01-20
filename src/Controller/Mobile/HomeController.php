@@ -105,15 +105,19 @@ class HomeController extends AppController {
             public function myActivityApply() {
                 $applyTable = \Cake\ORM\TableRegistry::get('activityapply');
 //                $UsermsgTable = \Cake\ORM\TableRegistry::get('usermsg');
-                $orderTable = \Cake\ORM\TableRegistry::get('order');
+//                $orderTable = \Cake\ORM\TableRegistry::get('order');
                 $myActivity = $applyTable->find()->distinct(['activityapply.id'])
                         ->contain(['Activities'=>function($q){
-                    return $q->where(['status'=>1, 'is_del'=>0]);
-                }, 'Lmorder'=>function($q){
-                    return $q->where(['type'=>2]);
-                }, 'Usermsg'=>function($q){
-                    return $q->where(['Usermsg.status'=>0, 'Usermsg.type'=>7]);
-                }])->where(['activityapply.user_id' => $this->user->id])->orderDesc('activityapply.create_time')->toArray();
+                            return $q->where(['status'=>1, 'is_del'=>0]);
+                        }, 'Usermsg'=>function($q){
+                            return $q->where(['Usermsg.status'=>0, 'Usermsg.type'=>7]);
+                        }])
+                        ->where(['or'=>[
+                            'activityapply.phone' => $this->user->phone,
+                            'activityapply.user_id' => $this->user->id
+                        ]])
+                        ->orderDesc('activityapply.create_time')
+                        ->toArray();
 //                $UsermsgTable->updateAll(['status'=>1], ['user_id'=>$this->user->id, 'status'=>0, 'type'=>7]);
                 if ($myActivity !== false) {
                     return $this->Util->ajaxReturn(['status' => true, 'data' => $myActivity]);

@@ -96,6 +96,10 @@ class ActivityController extends AppController {
             $activity = $this->Activity->patchEntity($activity, $this->request->data);
             $activity->apply_end_time = strtotime($this->request->data('apply_end_time'));
             $activity->apply_start_time = strtotime($this->request->data('apply_start_time'));
+            if(!$activity->multi_nums){
+                $activity->triple_fee = 0;
+                $activity->bonus_triple_fee = 0;
+            }
             $OrderTable = \Cake\ORM\TableRegistry::get('Order');
             $updateOrder = false;
             if($activity->dirty('apply_fee')){
@@ -566,4 +570,40 @@ class ActivityController extends AppController {
             ]);
         }
     }
+    
+    public function viewUser($id=NULL){
+        $this->viewBuilder()->autoLayout(false);
+        $ActivityapplyTable = \Cake\ORM\TableRegistry::get('Activityapply');
+        $apply = $ActivityapplyTable->get($id, [
+            'contain' => 'OtherUsers'
+        ]);
+        $this->set([
+            'apply' => $apply,
+        ]);
+    }
+    
+    public function signConfirm($id=NULL){
+        $ActivityapplyTable = \Cake\ORM\TableRegistry::get('Activityapply');
+        $activityapply = $ActivityapplyTable->get($id);
+        if(!$activityapply){
+            return $this->Util->ajaxReturn(false, '未报名');
+        }
+        if($activityapply->is_check){
+            return $this->Util->ajaxReturn(false, '审核未通过');
+        }
+        if($activityapply->is_pass){
+            return $this->Util->ajaxReturn(false, '报名未付款');
+        }
+        if($activityapply->is_sign == 1){
+            return $this->Util->ajaxReturn(false, '已签到过了');
+        }
+        $activityapply->is_sign = 1;
+        $res = $ActivityapplyTable->save($activityapply);
+        if($res){
+            return $this->Util->ajaxReturn(true, '操作成功');
+        } else {
+            return $this->Util->ajaxReturn(false, '系统错误');
+        }
+    }
+    
 }

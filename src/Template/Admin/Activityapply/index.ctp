@@ -10,7 +10,7 @@
             </a>
             <div class="form-group">
                 <label for="keywords">关键字</label>
-                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="输入关键字">
+                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="主要报名人">
             </div>
             <div class="form-group">
                 <label for="must_check">是否需要审核</label>
@@ -93,14 +93,31 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['用户', '公司', '职位','报名活动', '提交时间', '注册时间', '是否需审核', '审核状态', '报名状态', '付款', '操作人', '是否置顶', '是否签到', '操作'],
+                                ['用户', '公司', '职位', '报名活动', '多人同行', '提交时间', '注册时间', '是否需审核', '审核状态', '审核不通过理由', '报名状态', '付款', '操作人', '是否置顶', '是否签到', '操作'],
                         colModel: [
-                            {name: 'user.truename', editable: true, align: 'center'},
-                            {name: 'user.company', editable: true, align: 'center'},
-                            {name: 'user.position', editable: true, align: 'center'},
+                            {name: 'name', editable: true, align: 'center', formatter: function(cell, opt, row){
+                                return cell ? cell : row.user.truename;
+                            }},
+                            {name: 'company', editable: true, align: 'center', formatter: function(cell, opt, row){
+                                return cell ? cell : row.user.company;
+                            }},
+                            {name: 'position', editable: true, align: 'center', formatter: function(cell, opt, row){
+                                return cell ? cell : row.user.position;
+                            }},
                             {name: 'activity.title', editable: true, align: 'center'},
+                            {name: 'Companions', editable: true, align: 'center', formatter: function(cell, opt, row){
+                                    return row.companions.length ? '<a href="javascript:void(0)" onclick="showCompanions('+row.id+')">是，点击查看详情</a>' : '否';
+                            }},
                             {name: 'create_time', editable: true, align: 'center'},
-                            {name: 'user.create_time', editable: true, align: 'center'},
+                            {name: 'user.create_time', editable: true, align: 'center', formatter: function(cell, opt, row){
+                                if(row.other_user){
+                                    return row.other_user.create_time;
+                                } else if(row.user) {
+                                    return cell;
+                                } else {
+                                    return '';
+                                }
+                            }},
                             {name: 'activity.must_check', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     if (cellvalue == '1') {
                                         return '是';
@@ -122,6 +139,7 @@
                                         return '无需审核';
                                     }
                                 }},
+                            {name: 'reason', editable: true, align: 'center'},
                             {name: 'is_pass', editable: true, align: 'center', formatter: function (cellvalue, options, rowObject) {
                                     switch (cellvalue) {
                                         case 1:
@@ -202,15 +220,15 @@
 
                 function actionFormatter(cellvalue, options, rowObject) {
                     response = ''; // '<a title="删除" href="javascript:void(0)" onClick="delRecord(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-trash"></i> </a>';
-                    if (rowObject.is_top == 0) {
-                        response += '<a title="置顶" href="javascript:void(0)" onClick="topit(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">置顶</a>';
-                    } else {
-                        response += '<a title="取消置顶" href="javascript:void(0)" onClick="untop(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">取消置顶</a>';
-                    }
+//                    if (rowObject.is_top == 0) {
+//                        response += '<a title="置顶" href="javascript:void(0)" onClick="topit(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">置顶</a>';
+//                    } else {
+//                        response += '<a title="取消置顶" href="javascript:void(0)" onClick="untop(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn ">取消置顶</a>';
+//                    }
                     if (rowObject.activity.must_check == 1 && rowObject.is_check == 0 && rowObject.is_pass != 1) {
                         response += '<a title="审核通过" onClick="check(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-check"></i> </a>';
                         response += '<a title="审核不通过" onClick="uncheck(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-remove-circle"></i> </a>';
-                    }else if (rowObject.is_pass == 1){
+                    }else if (rowObject.is_pass == 1 && rowObject.activity.must_check == 1){
                         response += '<a title="改为未通过" onClick="resue(' + rowObject.id + ');" data-id="' + rowObject.id + '" class="grid-btn "><i class="icon icon-undo"></i> </a>';
                     }
                     return response;
@@ -302,7 +320,7 @@
                     });
                 }
                 function resue(id) {
-                    layer.confirm('确定撤销？', {
+                    layer.confirm('确定撤销？（已发送的消息和短信无效）', {
                         btn: ['确认', '取消'] //按钮
                     }, function () {
                         $.ajax({
@@ -322,43 +340,25 @@
                     }, function () {
                     });
                 }
+                
                 function uncheck(id) {
-                    layer.confirm('确定不通过审核？', {
-                        btn: ['确认', '取消'] //按钮
-                    }, function () {
+                    //需要引入layer.ext.js文件
+                    layer.prompt({
+                        title: '请输入理由（只有主要报名人才会收到）',
+                        btn: ['确认', '取消'], //按钮
+                        formType: 0, // input.type 0:text,1:password,2:textarea
+                    }, function (pass) {
+                        var msg = {};
+                        msg.reason = pass;
                         $.ajax({
                             type: 'post',
-                            data: '',
+                            data: msg,
                             dataType: 'json',
                             url: '/admin/activityapply/uncheck/' + id,
                             success: function (res) {
+                                layer.msg(res.msg);
                                 if (res.status) {
-                                    layer.msg(res.msg);
-                                    setTimeout(function () {
-                                        $('#list').trigger('reloadGrid');
-                                    }, 2000);
-                                }
-                            }
-                        });
-                    }, function () {
-                    });
-                }
-
-                function unpass(id) {
-                    layer.confirm('确定不通过审核？', {
-                        btn: ['确认', '取消'] //按钮
-                    }, function () {
-                        $.ajax({
-                            type: 'post',
-                            data: '',
-                            dataType: 'json',
-                            url: '/admin/activityapply/unpass/' + id,
-                            success: function (res) {
-                                if (res.status) {
-                                    layer.msg(res.msg);
-                                    setTimeout(function () {
-                                        $('#list').trigger('reloadGrid');
-                                    }, 2000);
+                                    $('#list').trigger('reloadGrid');
                                 }
                             }
                         });
@@ -380,6 +380,7 @@
                 }
 
                 function doExport() {
+                    layer.msg('正在加班加点修改……');return;
                     //导出excel
                     var sortColumnName = $("#list").jqGrid('getGridParam', 'sortname');
                     var sortOrder = $("#list").jqGrid('getGridParam', 'sortorder');
@@ -390,19 +391,21 @@
                     $("body").append("<iframe src='/admin/activityapply/exportExcel/<?= $id ?>?" + searchQueryStr + "' style='display: none;' ></iframe>");
                 }
 
-                function doView(id) {
+                function showCompanions(id) {
                     //查看明细
                     url = '/admin/activityapply/view/' + id;
                     layer.open({
                         type: 2,
-                        title: '查看详情',
+                        title: '同行人',
                         shadeClose: true,
                         shade: 0.8,
-                        area: ['380px', '70%'],
-                        content: url//iframe的url
+                        area: ['50%', '70%'],
+                        skin: 'layui-layer-lan', //没有背景色
+                        content: url
                     });
                 }
                 function doPush() {
+                    layer.msg('正在加班加点修改……');return;
                     window.select = $("#list").jqGrid('getGridParam', 'selarrrow');
                     if(window.select.length == 0){
                         layer.alert('请选择至少一个对象');

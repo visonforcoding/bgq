@@ -97,10 +97,6 @@
                         $('.chosen_user').eq(1).addClass('user_'+user_id);
                         $('.chosen_user').eq(1).attr('user_id', user_id);
                         $('.chosen_user').eq(1).attr('user_name', $(this).find('span.truename').html());
-                    } else {
-                        $.util.alert('最多选择两位同行人');
-                        i.toggleClass('chosen');
-                        i.html('&#xe6a8;');
                     }
                     $('.cancel').on('click', function(){
                         $('li[user_id="'+$(this).parent().attr('user_id')+'"]').find('i.choose_status').html('&#xe6a8;');

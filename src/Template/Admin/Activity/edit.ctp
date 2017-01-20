@@ -71,21 +71,16 @@
     <div class="form-group">
         <label class="col-md-2 control-label">过期时间</label>
         <div class="col-md-8">
-            <?php
-            echo $this->Form->input('time', ['label' => false, 'type' => 'text', 'class' => 'datepicker form-control']);
-            ?>
+            <input type="text" class="form-control datepicker" value="<?= $activity->time->format('Y-m-d') ?>" name="time" />
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">报名开始时间</label>
-        <div class="col-md-8">
-            <input type="text" class="form-control datetimepicker" value="<?= date('Y-m-d H:i:s', $activity->apply_start_time) ?>" name="apply_start_time" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">报名截止时间</label>
-        <div class="col-md-8">
-            <input type="text" class="form-control datetimepicker" value="<?= date('Y-m-d H:i:s', $activity->apply_end_time) ?>" name="apply_end_time" />
+        <label class="col-md-2 control-label">报名时间</label>
+        <div class="input-group col-md-6">
+            <span class="input-group-addon">开始时间</span>
+            <input type="text" class="form-control" value="<?= date('Y-m-d H:i', $activity->apply_start_time) ?>" name="apply_start_time" />
+            <span  class="input-group-addon">结束时间</span>
+            <input type="text" class="form-control" value="<?= date('Y-m-d H:i', $activity->apply_end_time) ?>" name="apply_end_time" />
         </div>
     </div>
     <div class="form-group">
@@ -140,7 +135,7 @@
             <?= $this->cell('ActivityRecommend', [$selActivityIds]); ?>
         </div>
     </div>
-    <div class="form-group">
+<!--    <div class="form-group">
         <label class="col-md-2 control-label">单人费用</label>
         <div class="col-md-8">
             <?php
@@ -150,12 +145,55 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">三人费用</label>
+        <label class="col-md-2 control-label">多人费用</label>
         <div class="col-md-8">
             <?php
             echo $this->Form->input('triple_fee', ['label' => false, 'class' => 'form-control']);
             ?>
             <span style="color:red">（请注意：从免费改为付费会导致已报名的人去付款时会报错；不填或填0，则该活动无三人行报名方式）</span>
+        </div>
+    </div>-->
+    <div class="form-group">
+        <label class="col-md-2 control-label">单人</label>
+        <div class="input-group col-md-6">
+            <span class="input-group-addon">费用</span>
+            <?php
+            echo $this->Form->input('apply_fee', ['label' => false, 'class' => 'form-control']);
+            ?>
+            <span class="input-group-addon">优惠费用</span>
+            <?php
+            echo $this->Form->input('bonus_fee', ['label' => false, 'class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">多人数量</label>
+        <div class="col-md-8">
+            <?php
+            echo $this->Form->input('multi_nums', ['label' => false, 'class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+    <div class="form-group multi hide">
+        <label class="col-md-2 control-label">多人</label>
+        <div class="input-group col-md-6">
+            <span class="input-group-addon">费用</span>
+            <?php
+            echo $this->Form->input('triple_fee', ['label' => false, 'class' => 'form-control']);
+            ?>
+            <span  class="input-group-addon">优惠费用</span>
+            <?php
+            echo $this->Form->input('bonus_triple_fee', ['label' => false, 'class' => 'form-control']);
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">优惠时间</label>
+        <div class="input-group col-md-6">
+            <span class="input-group-addon">开始时间</span>
+            <input type="text" name="bonus_start_time" class="form-control" value="<?= $activity->bonus_start_time ? $activity->bonus_start_time->format('Y-m-d H:i') : '' ?>" />
+            <span  class="input-group-addon">结束时间</span>
+            <input type="text" name="bonus_end_time" class="form-control" value="<?= $activity->bonus_end_time ? $activity->bonus_end_time->format('Y-m-d H:i') : '' ?>" />
         </div>
     </div>
     <div class="form-group">
@@ -274,6 +312,9 @@
             $(this).parents('div.xb').after(obj);
         });
         $('.xb .del').click(function () {
+            if($('div.xb').length <= 1){
+                return;
+            }
             $(this).parents('div.xb').remove();
         });
         $('#select-industry').on('change', function (evt) {
@@ -292,7 +333,68 @@
             language: "zh-CN",
             placeholder: '选择一个活动'
         });
+        
+        if($('input[name="multi_nums"]').val()){
+            $('.multi').removeClass('hide');
+        }
+        $('input[name="multi_nums"]').on('input prototypechange', function(){
+            if(parseInt($(this).val()) <= 1 || $(this).val() == 0){
+                $('.multi').addClass('hide');
+            } else {
+                $('.multi').removeClass('hide');
+            }
+        });
+        
+        $('input[name="apply_start_time"]').datetimepicker({
+            format: 'Y-m-d H:i',
+//            onShow: function (ct) {
+//                this.setOptions({
+//                    maxDate: $('input[name="apply_end_time"]').val() ? $('input[name="apply_end_time"]').val() : false
+//                });
+//            },
+            timepicker: true,
+            lang:'zh'
+        });
+        $('input[name="apply_end_time"]').datetimepicker({
+            format: 'Y-m-d H:i',
+//            onShow: function (ct) {
+//                this.setOptions({
+//                   minDate: $('input[name="apply_start_time"]').val() ? $('input[name="apply_start_time"]').val() : false
+//                });
+//            },
+            timepicker: true,
+            lang:'zh'
+        });
+        $('input[name="bonus_start_time"]').datetimepicker({
+            format: 'Y-m-d H:i',
+//            onShow: function (ct) {
+//                this.setOptions({
+//                    maxDate: $('input[name="bonus_end_time"]').val() ? $('input[name="bonus_end_time"]').val() : false
+//                });
+//            },
+            timepicker: true,
+            lang:'zh'
+        });
+        $('input[name="bonus_end_time"]').datetimepicker({
+            format: 'Y-m-d H:i',
+//            onShow: function (ct) {
+//                this.setOptions({
+//                   minDate: $('input[name="bonus_start_time"]').val() ? $('input[name="bonus_start_time"]').val() : false
+//                });
+//            },
+            timepicker: true,
+            lang:'zh'
+        });
+        
         $('form').submit(function () {
+            if(parseInt($('input[name="apply_fee"]').val()) < parseInt($('input[name="bonus_fee"]').val())){
+                layer.alert('单人优惠价格高于平时价格');
+                return false;
+            }
+            if(parseInt($('input[name="triple_fee"]').val()) < parseInt($('input[name="bonus_triple_fee"]').val())){
+                layer.alert('多人优惠价格高于平时价格');
+                return false;
+            }
             var form = $(this);
             $.ajax({
                 type: $(form).attr('method'),
