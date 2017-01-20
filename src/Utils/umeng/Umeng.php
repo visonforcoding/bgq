@@ -86,6 +86,8 @@ class Umeng {
         $ios_brocast->setCustomizedField("extra", $extra); // ios额外内容
         $ios_res = json_decode($ios_brocast->send());
         if ($ios_res->ret == 'FAIL' && $android_res->ret == 'FAIL') {
+            \Cake\Log\Log::debug('推送失败，ios返回', $ios_res);
+            \Cake\Log\Log::debug('推送失败，安卓返回', $android_res);
             if ($production_mode) {
                 return false;
             } else {
@@ -93,6 +95,12 @@ class Umeng {
             }
         }
         if ($ios_res->ret == 'SUCCESS' || $android_res->ret == 'SUCCESS') {
+            if($ios_res == 'FAIL'){
+                \Cake\Log\Log::debug('推送失败，ios返回', $ios_res);
+            }
+            if($android_res == 'FAIL'){
+                \Cake\Log\Log::debug('推送失败，安卓返回', $android_res);
+            }
             if ($production_mode) {
                 return true;
             } else {
@@ -154,6 +162,8 @@ class Umeng {
         $ios_brocast->setCustomizedField("extra", $extra); // ios额外内容
         $ios_res = json_decode($ios_brocast->send());
         if ($ios_res->ret == 'FAIL' && $android_res->ret == 'FAIL') {
+            \Cake\Log\Log::debug('推送失败，ios返回', $ios_res);
+            \Cake\Log\Log::debug('推送失败，安卓返回', $android_res);
             if ($production_mode) {
                 return false;
             } else {
@@ -161,6 +171,12 @@ class Umeng {
             }
         }
         if ($ios_res->ret == 'SUCCESS' || $android_res->ret == 'SUCCESS') {
+            if($ios_res == 'FAIL'){
+                \Cake\Log\Log::debug('推送失败，ios返回', $ios_res);
+            }
+            if($android_res == 'FAIL'){
+                \Cake\Log\Log::debug('推送失败，安卓返回', $android_res);
+            }
             if ($production_mode) {
                 return true;
             } else {
