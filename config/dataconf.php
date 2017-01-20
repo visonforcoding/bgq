@@ -13,7 +13,8 @@ return [
     'sms' => [
         'userid' => 14394,
         'account' => 'chinamatop',
-        'password' => 'jyh1606_jh'
+        'password' => 'jyh1606_jh',
+        'token' => 'qSWyynIzTJE9xMKJ' // 防止短信接口被攻击所设
     ],
     'encrypt'=>[
         'key'=>'e878caddbb44ee591f30389477f21e30a3cd4377', //实际要求要32位
@@ -58,5 +59,5 @@ return [
     ],
     'pvlog'=>[
       'store_nums'=>100, //pvlog的redis 缓冲区数目 
-    ]
+    ],
 ];

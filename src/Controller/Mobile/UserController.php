@@ -455,6 +455,13 @@ class UserController extends AppController {
                 return $this->Util->ajaxReturn(['status' => false, 'msg' => '该手机号未注册或被禁用']);
             }
         }
+        $sms = \Cake\Core\Configure::read('sms');
+        $sms_token = md5(time() . $sms['token']);
+        $this->response->cookie([
+            'name' => 'sms_token',
+            'value' => $sms_token,
+        ]);
+        $this->request->session()->write('reg.sms_token', $sms_token);
         $this->set(array(
             'pageTitle' => '并购帮-登录'
         ));
@@ -525,8 +532,18 @@ class UserController extends AppController {
      * 发送登录验证码
      */
     public function sendLoginCode() {
+        $header = apache_request_headers();
+        if($header['sms_token'] != $this->request->cookie('sms_token')){
+            return $this->Util->ajaxReturn(false, '非法操作');
+        }
+        if($header['sms_token'] != $this->request->session()->read('reg.sms_token')){
+            return $this->Util->ajaxReturn(false, '非法操作');
+        }
         $this->loadComponent('Sms');
         $mobile = $this->request->data('phone');
+        if(!$mobile){
+            return $this->Util->ajaxReturn(false, '请输入手机号码');
+        }
         $user = $this->User->findByPhone($mobile)->first();
         if (!$user) {
             return $this->Util->ajaxReturn(['status' => false,'msg'=>'该手机未注册,是否前往注册','phone'=>$mobile,'errCode'=>1]);
