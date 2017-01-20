@@ -1,12 +1,3 @@
-<header>
-    <div class='inner'>
-        <a href='#this' class='toback'></a>
-        <h1>
-            登录
-        </h1>
-        <!-- <a href="/user/register-vphone" class='h-regiser'>注册</a> -->
-    </div>
-</header>
 <div class="wraper">
     <div id="user-login" class='login-area'>
         <form action="" method="post">
@@ -84,43 +75,50 @@
             return false;
         }
         var $obj = $(this);
-        if ($obj.hasClass('noTap')) {
-            return false;
-        }
+        if ($obj.hasClass('noTap')) return false;
         $obj.addClass('noTap');
         if ($.util.isMobile(phone)) {
-            $.post('/user/sendLoginCode', {phone: phone}, function (res) {
-                if (res.status === true) {
-                    $.util.alert(res.msg);
-                    var text = '<i id="timer">' + 30 + '</i>秒后重新发送';
-                    $obj.html(text);
-                    t1 = setInterval(function () {
-                        var timer = $('#timer').text();
-                        timer--;
-                        if (timer < 1) {
-                            $obj.html('获取验证码');
-                            $obj.removeClass('noTap');
-                            clearInterval(t1);
-                        } else {
-                            $('#timer').text(timer);
-                        }
-                    }, 1000);
-                } else {
-                    if (res.status === false) {
-                        if (res.errCode === 1) {
-                            if (window.confirm(res.msg)) {
-                                location.href = '/user/register-vphone?rephone=' + phone;
+            $.ajax({
+                type: 'POST',
+                data: {phone: phone},
+                dataType: 'json',
+                url: "/user/sendLoginCode",
+                beforeSend: function (request) {
+                    request.setRequestHeader("sms_token", $.util.getCookie('sms_token'));
+                },
+                success: function (res) {
+                    if (res.status === true) {
+                        $.util.alert(res.msg);
+                        var text = '<i id="timer">' + 30 + '</i>秒后重新发送';
+                        $obj.html(text);
+                        t1 = setInterval(function () {
+                            var timer = $('#timer').text();
+                            timer--;
+                            if (timer < 1) {
+                                $obj.html('获取验证码');
+                                $obj.removeClass('noTap');
+                                clearInterval(t1);
+                            } else {
+                                $('#timer').text(timer);
                             }
-                            ;
-                        }
-                        if (res.errCode === 2) {
-                            $.util.alert(res.msg);
-                        }
+                        }, 1000);
                     } else {
-                        $obj.removeClass('noTap');
+                        if (res.status === false) {
+                            if (res.errCode === 1) {
+                                if (window.confirm(res.msg)) {
+                                    location.href = '/user/register-vphone?rephone=' + phone;
+                                }
+                                ;
+                            }
+                            if (res.errCode === 2) {
+                                $.util.alert(res.msg);
+                            }
+                        } else {
+                            $obj.removeClass('noTap');
+                        }
                     }
                 }
-            }, 'json');
+            });
         } else {
             $.util.alert('请填写正确的手机号码');
             $obj.removeClass('noTap');

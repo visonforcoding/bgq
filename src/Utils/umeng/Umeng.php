@@ -86,8 +86,10 @@ class Umeng {
         $ios_brocast->setCustomizedField("extra", $extra); // ios额外内容
         $ios_res = json_decode($ios_brocast->send());
         if ($ios_res->ret == 'FAIL' && $android_res->ret == 'FAIL') {
-            \Cake\Log\Log::debug('推送失败，ios返回', $ios_res);
-            \Cake\Log\Log::debug('推送失败，安卓返回', $android_res);
+            \Cake\Log\Log::debug('ios推送失败', 'devlog');
+            \Cake\Log\Log::debug($ios_res, 'devlog');
+            \Cake\Log\Log::debug('安卓推送失败', 'devlog');
+            \Cake\Log\Log::debug($android_res, 'devlog');
             if ($production_mode) {
                 return false;
             } else {
@@ -96,10 +98,12 @@ class Umeng {
         }
         if ($ios_res->ret == 'SUCCESS' || $android_res->ret == 'SUCCESS') {
             if($ios_res == 'FAIL'){
-                \Cake\Log\Log::debug('推送失败，ios返回', $ios_res);
+                \Cake\Log\Log::debug('ios推送失败', 'devlog');
+                \Cake\Log\Log::debug($ios_res, 'devlog');
             }
             if($android_res == 'FAIL'){
-                \Cake\Log\Log::debug('推送失败，安卓返回', $android_res);
+                \Cake\Log\Log::debug('安卓推送失败', 'devlog');
+                \Cake\Log\Log::debug($android_res, 'devlog');
             }
             if ($production_mode) {
                 return true;
@@ -162,8 +166,10 @@ class Umeng {
         $ios_brocast->setCustomizedField("extra", $extra); // ios额外内容
         $ios_res = json_decode($ios_brocast->send());
         if ($ios_res->ret == 'FAIL' && $android_res->ret == 'FAIL') {
-            \Cake\Log\Log::debug('推送失败，ios返回', $ios_res);
-            \Cake\Log\Log::debug('推送失败，安卓返回', $android_res);
+            \Cake\Log\Log::debug('ios推送失败', 'devlog');
+            \Cake\Log\Log::debug($ios_res, 'devlog');
+            \Cake\Log\Log::debug('安卓推送失败', 'devlog');
+            \Cake\Log\Log::debug($android_res, 'devlog');
             if ($production_mode) {
                 return false;
             } else {
@@ -172,10 +178,12 @@ class Umeng {
         }
         if ($ios_res->ret == 'SUCCESS' || $android_res->ret == 'SUCCESS') {
             if($ios_res == 'FAIL'){
-                \Cake\Log\Log::debug('推送失败，ios返回', $ios_res);
+                \Cake\Log\Log::debug('ios推送失败', 'devlog');
+                \Cake\Log\Log::debug($ios_res, 'devlog');
             }
             if($android_res == 'FAIL'){
-                \Cake\Log\Log::debug('推送失败，安卓返回', $android_res);
+                \Cake\Log\Log::debug('安卓推送失败', 'devlog');
+                \Cake\Log\Log::debug($android_res, 'devlog');
             }
             if ($production_mode) {
                 return true;
@@ -247,6 +255,10 @@ class Umeng {
         }
         
         if ($ios_data->ret == 'FAIL' && $android_data->ret == 'FAIL') {
+            \Cake\Log\Log::debug('ios文件播上传文件失败', 'devlog');
+            \Cake\Log\Log::debug($ios_data, 'devlog');
+            \Cake\Log\Log::debug('安卓文件播上传文件失败', 'devlog');
+            \Cake\Log\Log::debug($android_data, 'devlog');
             if ($production_mode) {
                 return false;
             } else {
@@ -254,6 +266,10 @@ class Umeng {
             }
         }
         if ($ios_res->ret == 'FAIL' && $android_res->ret == 'FAIL') {
+            \Cake\Log\Log::debug('ios推送失败', 'devlog');
+            \Cake\Log\Log::debug($ios_res, 'devlog');
+            \Cake\Log\Log::debug('安卓推送失败', 'devlog');
+            \Cake\Log\Log::debug($android_res, 'devlog');
             if ($production_mode) {
                 return false;
             } else {
@@ -261,6 +277,14 @@ class Umeng {
             }
         }
         if ($ios_res->ret == 'SUCCESS' || $android_res->ret == 'SUCCESS') {
+            if($ios_res == 'FAIL'){
+                \Cake\Log\Log::debug('ios推送失败', 'devlog');
+                \Cake\Log\Log::debug($ios_res, 'devlog');
+            }
+            if($android_res == 'FAIL'){
+                \Cake\Log\Log::debug('安卓推送失败', 'devlog');
+                \Cake\Log\Log::debug($android_res, 'devlog');
+            }
             if ($production_mode) {
                 return true;
             } else {
