@@ -471,6 +471,13 @@ class UserController extends AppController {
      * 忘记密码
      */
     public function  forgotPwd(){
+        $sms = \Cake\Core\Configure::read('sms');
+        $sms_token = md5(time() . $sms['token']);
+        $this->response->cookie([
+            'name' => 'sms_token',
+            'value' => $sms_token,
+        ]);
+        $this->request->session()->write('reg.sms_token', $sms_token);
         if($this->request->is('post')){
             $vcode = $this->request->data('vcode');
             $code = $this->request->session()->read('UserLoginVcode');
@@ -532,11 +539,7 @@ class UserController extends AppController {
      * 发送登录验证码
      */
     public function sendLoginCode() {
-        $header = apache_request_headers();
-        if($header['sms_token'] != $this->request->cookie('sms_token')){
-            return $this->Util->ajaxReturn(false, '非法操作');
-        }
-        if($header['sms_token'] != $this->request->session()->read('reg.sms_token')){
+        if($this->request->session()->read('reg.sms_token') != $this->request->cookie('sms_token')){
             return $this->Util->ajaxReturn(false, '非法操作');
         }
         $this->loadComponent('Sms');
@@ -571,7 +574,9 @@ class UserController extends AppController {
      * 发送动态验证码
      */
     public function sendVcode() {
-        
+        if($this->request->session()->read('reg.sms_token') != $this->request->cookie('sms_token')){
+            return $this->Util->ajaxReturn(false, '非法操作');
+        }
         $this->loadComponent('Sms');
         $mobile = $this->request->data('phone');
 //        $user = $this->User->findByPhoneAndEnabled($mobile, 1)->first();
