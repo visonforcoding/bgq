@@ -122,7 +122,32 @@ class PvlogController extends AppController {
             $end_time = date('Y-m-d', strtotime($end_time));
             $where['and'] = [['date(`create_time`) >' => $begin_time], ['date(`create_time`) <' => $end_time]];
         }
-        $data = $this->getJsonForJqrid($page, $rows, '', $sort, $order, $where);
+        $query = $this->Pvlog->find();
+        $query->hydrate(false);
+        if (!empty($where)) {
+            $query->where($where);
+        }
+        $query->contain(['Users'=>function($q){
+            return $q->where(['Users.enabled'=>1])->select(['Users.id', 'Users.phone', 'Users.truename']);
+        }]);
+        $nums = $query->count();
+        if (!empty($sort) && !empty($order)) {
+            $query->order([$sort => $order]);
+        }
+
+        $query->limit(intval($rows))
+                ->page(intval($page));
+        $res = $query->toArray();
+        if (empty($res)) {
+            $res = array();
+        }
+        if ($nums > 0) {
+            $total_pages = ceil($nums / $rows);
+        } else {
+            $total_pages = 0;
+        }
+        $data = array('page' => $page, 'total' => $total_pages, 'records' => $nums, 'rows' => $res);
+//        $data = $this->getJsonForJqrid($page, $rows, '', $sort, $order, $where);
         $this->autoRender = false;
         $this->response->type('json');
         echo json_encode($data);

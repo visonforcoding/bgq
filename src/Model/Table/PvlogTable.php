@@ -32,6 +32,12 @@ class PvlogTable extends Table {
             'className' => 'Pvtag',
             'joinType'=>'LEFT'
         ]);
+        
+        $this->belongsTo('Users', [
+            'foreignKey'=>'user_id',
+            'className'=>'User',
+            'joinType'=>'LEFT'
+        ]);
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [
