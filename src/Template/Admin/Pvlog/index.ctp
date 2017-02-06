@@ -44,8 +44,20 @@
                         datatype: "json",
                         mtype: "POST",
                         colNames:
-                                ['ptag', 'ip', '屏幕尺寸', '访问页', 'act', 'create_time', '操作'],
+                                ['用户名', '用户电话', 'ptag', 'ip', '屏幕尺寸', '访问页', 'act', 'create_time', '操作'],
                         colModel: [
+                            {name: 'user.truename', editable: true, align: 'center', formatter: function(cell, opt, row){
+                                    if(row.user_id == 0){
+                                        return '游客';
+                                    }
+                                    return cell;
+                            }},
+                            {name: 'user.phone', editable: true, align: 'center', formatter: function(cell, opt, row){
+                                    if(row.user_id == 0){
+                                        return '游客';
+                                    }
+                                    return cell;
+                            }},
                             {name: 'ptag', editable: true, align: 'center'},
                             {name: 'ip', editable: true, align: 'center'},
                             {name: 'screen', editable: true, align: 'center'},
