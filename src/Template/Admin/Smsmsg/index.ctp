@@ -47,7 +47,7 @@
                                 ['用户', '手机号', '公司', '职位', '验证码', '短信内容', '创建时间'],
                         colModel: [
                             {name: 'user.truename', editable: true, align: 'center'},
-                            {name: 'user.phone', editable: true, align: 'center'},
+                            {name: 'phone', editable: true, align: 'center'},
                             {name: 'user.company', editable: true, align: 'center'},
                             {name: 'user.position', editable: true, align: 'center'},
                             {name: 'code', editable: true, align: 'center'},
