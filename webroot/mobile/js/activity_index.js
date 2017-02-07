@@ -62,7 +62,13 @@ activity.prototype.scroll = function () {
 
 activity.prototype.getData = function(){
     var  obj = this;
-    $('.wraper').on("scroll", function () {
+    var scrollObj;
+    if ($.util.isIOS) {
+        scrollObj = $('#wraper');
+    } else {
+        scrollObj = $(window);
+    }
+    scrollObj.on("scroll", function () {
         
         $.util.listScroll('items', function () {
             if (obj.page == 9999) {
