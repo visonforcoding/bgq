@@ -197,11 +197,27 @@ class PushController extends AppController {
     
     public function test(){
         $this->loadComponent('Push');
-//        $str = "13560627825\n13510663507\n15986227560\n18316629973\n15914057632\n13763053901";
-        $str = '13560627825';
-        $res = $this->Push->sendFile('标题', '内容', 'ticker', $str);
-        \Cake\Log\Log::debug('测试推送', 'devlog');
-        \Cake\Log\Log::debug($res, 'devlog');die;
+        $UserTable = \Cake\ORM\TableRegistry::get('User');
+        $where['or'] = [
+            ['phone'=>'13560627825'],
+            ['phone'=>'13510663507'],
+            ['phone'=>'15986227560'],
+            ['phone'=>'18316629973'],
+            ['phone'=>'15914057632'],
+            ['phone'=>'13763053901']
+        ];
+        $user = $UserTable->find()
+                ->where($where)
+                ->select(['user_token'])
+                ->hydrate(false)
+                ->toArray();
+        $phone = [];
+        foreach ($user as $k=>$v){
+            $phone[] = $v['user_token'];
+        }
+        $user = implode("\n", $phone);
+        $res = $this->Push->sendFile('标题', '内容', 'ticker', $user);
+        print_r($res);die;
     }
     
     public function check($a, $i){
