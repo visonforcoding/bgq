@@ -200,7 +200,8 @@ class PushController extends AppController {
 //        $str = "13560627825\n13510663507\n15986227560\n18316629973\n15914057632\n13763053901";
         $str = '13560627825';
         $res = $this->Push->sendFile('标题', '内容', 'ticker', $str);
-        print_r($res);die;
+        \Cake\Log\Log::debug('测试推送', 'devlog');
+        \Cake\Log\Log::debug($res, 'devlog');die;
     }
     
     public function check($a, $i){
