@@ -199,7 +199,7 @@ class PushController extends AppController {
         $this->loadComponent('Push');
         $str = "13560627825\n13510663507\n15986227560\n18316629973\n15914057632\n13763053901";
         $res = $this->Push->sendFile('标题', '内容', 'ticker', $str, 'BGB', false);
-        debug($res);die;
+        print_r($res);die;
     }
     
     public function check($a, $i){
