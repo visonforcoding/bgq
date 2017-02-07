@@ -204,7 +204,8 @@ class PushController extends AppController {
             ['phone'=>'15986227560'],
             ['phone'=>'18316629973'],
             ['phone'=>'15914057632'],
-            ['phone'=>'13763053901']
+            ['phone'=>'13763053901'],
+            ['phone'=>'15013797469'],
         ];
         $user = $UserTable->find()
                 ->where($where)
