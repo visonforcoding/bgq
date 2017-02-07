@@ -33,8 +33,10 @@
 			<div class="education-items">
 				<div class="education-title">
 					<h3>
+						<!--<a href="javascript:void(0);" class="deletbtn iconfont">&#xe67a;</a>-->
 					教育经历<i>2</i></span>
-					<a href="javascript:void(0);" class="deletbtn">删除</a>
+					
+					<!--<a href="javascript:void(0);" class="deletbtn fr">保存</a>-->
 				</h3>
 				</div>
 				<ul class="h-info-box e-info-box">
@@ -74,46 +76,17 @@
 							<input type="text" placeholder="2004-7-1" readonly="readonly" class="checktime"/>
 						</div>
 					</li>
-					
 				</ul>
+				<div class="e_bottom_btn" >
+					<a class="deletbtn">删除</a>
+					<a class="savebtn">保存</a>
+				</div>
 			</div>
 			<div class="add-subject nobottom">
 				<span>添加教育经历</span>
 			</div>
-			<a href="javascript:void(0);" class="nextstep">完成</a>
+			<a href="javascript:void(0);" class="nextstep">保存</a>
 		</div>
 		<div class='reg-shadow'  style="display: none;"></div>
-		
-<script src="../js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/mobiscroll.2.13.2.js" type="text/javascript" charset="utf-8"></script>
-
-<script type="text/javascript">
-// 日期选择
-     $('.checktime').mobiscroll().date({
-        theme: 'mobiscroll',
-        display: 'bottom',
-        headerText: function (valueText) { return "请选择时间"; },
-        //onBeforeShow: function (inst) { inst.settings.wheels[0].length>2?inst.settings.wheels[0].pop():null; },
-      	 endYear:2020,
-      	 //startYear:1980
-      	 dateFormat: 'yy-mm-dd',
-      	 rows:3
-     });
-    
-     $('.education').mobiscroll().select({
-        theme: 'mobiscroll',
-        display: 'bottom',
-         headerText: function (valueText) { return "请选择学历"; },
-          rows:3
-        
-       
-    });
-//性别选择
-     $('.checkedsex').mobiscroll().select({
-        theme: 'mobiscroll',
-        display: 'bottom',
-        headerText: function (valueText) { return "请选择性别"; },
-    });
-</script>
 	</body>
 </html>

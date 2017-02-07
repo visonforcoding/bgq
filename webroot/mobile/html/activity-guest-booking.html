@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="format-detection"content="telephone=no, email=no" />
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<title>并购帮</title>
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<script src="../js/view.js"></script>
+		
+	</head>
+	<body>
+		<header>
+			<div class='inner'>
+				<h1>嘉宾预约</h1>
+			</div>
+		</header>
+		
+		<div class="wraper">
+			<div class="infobox sing-up mt20">
+				<div class="choose_cooper flex flex_jusitify">
+					<div class="l-info">预约时间</div>
+					<div class="r-info flex">
+						<div class="checkdate">
+							<input type="text" placeholder="请输入时间" readonly="readonly" id="date" />
+							<input type="date" onchange = 'checkDate(this)' />
+						</div>
+						 <i class="iconfont">&#xe667;</i></div>
+				</div>
+				<div class="choose_cooper flex flex_jusitify">
+					<div class="l-info">地点</div>
+					<div class="r-info"><input type="text" placeholder="请输入" /></div>
+				</div>
+				<div class="choose_cooper flex flex_jusitify">
+					<div class="l-info">活动主题</div>
+					<div class="r-info"><input type="text" placeholder="请输入" /></div>
+				</div>
+				<div class="choose_cooper flex flex_jusitify">
+					<div class="l-info">费用</div>
+					<div class="r-info"><span class="color-items">￥1000/次</span></div>
+				</div>
+			</div>
+			<a href="booking-success.html" class="f-bottom">确认预约</a>
+		</div>
+		<script src="../js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		function checkDate(that){
+			var value = $(that).val();
+			$('#date').val(value);
+			console.log(value);
+		}
+	</script>
+	</body>
+</html>
