@@ -378,7 +378,13 @@
 //    $.util.initLoadImg('biggie');
 
     setTimeout(function () {
-        $('#wraper').on("scroll", function () {
+        var scrollObj;
+        if ($.util.isIOS) {
+            scrollObj = $('#wraper');
+        } else {
+            scrollObj = $(window);
+        }
+        scrollObj.on("scroll", function () {
             $.util.initLoadImg('biggie');
             $.util.listScroll('biggie', function () {
                 if (page == 9999) {
