@@ -160,7 +160,7 @@ outline:none;height:0.8rem;line-height: 0.78rem;}
 .inner .collection{right:0.6rem;font-size:0.32rem;color:#fff;}
 .inner .share{font-size:0.34rem;color:#fff;}
 .newscon-box,.newscomment-box{background: #fff;overflow:hidden;border-bottom:1px #e5e5e5 solid;}
-.newscon-box h3{line-height:0.46rem;width:100%;font-size:0.4rem;color:#222c38; margin:0.3rem 0 0.2rem;padding:0 0.3rem;}
+.newscon-box h3{line-height:0.46rem;width:100%;font-size:0.4rem;color:#222c38; margin:0.3rem 0 0.1rem;padding:0 0.3rem;}
 .newscon-box img{max-width:100%;height:auto;display: block;margin:.2rem auto;}
 .newscon-box br{display: inline;line-height: 10px;}
 .body-con{margin:.3rem 0;}
@@ -1595,7 +1595,7 @@ box-align:center;-webkit-box-align:center;}
 .result-search{width:6.4rem;background: #fff;height:28px;margin:.2rem auto;border-radius: 4px;padding:0 .1rem;}
 .result-search .r-info{margin-right:.2rem;text-indent:.2rem;}
 .result-search .search-input input{width:5rem;}
-.active-autor{height:.56rem;padding:0 .3rem;margin:.1rem 0;}
+.active-autor{height:.56rem;padding:0 .3rem;margin:0 0 .12rem;}
 .active-autor .avatar{width:.56rem;height:.56rem;overflow: hidden;margin-right:.2rem;}
 .active-autor .active-r-info{max-width:5.8rem;line-height: .3rem;font-size: .28rem;color:#595858;}
 .active-autor .avatar img{margin:0;}
@@ -1606,3 +1606,9 @@ box-align:center;-webkit-box-align:center;}
 .choose_cooper .checkdate input[type='date']{position: absolute;top:0;left:0;-webkit-appearance: none;opacity: 0;}
 .choose_cooper .iconfont{font-size: .28rem;}
 .choose_cooper .l-info{color:#595858;}
+.active-autor .active-r-info .company{max-width:3rem;overflow: hidden;text-overflow: ellipsis;
+white-space: nowrap;vertical-align: bottom;}
+/*.a_title_time{text-indent:.7rem;}*/
+.active-autor .active-r-info span{display: inline-block;vertical-align: middle;}
+.active-autor .active-r-info .job{max-width:1.6rem;overflow: hidden;text-overflow: ellipsis;
+white-space: nowrap;}
