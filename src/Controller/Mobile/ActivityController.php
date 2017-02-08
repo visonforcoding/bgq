@@ -50,6 +50,15 @@ class ActivityController extends AppController {
                 $this->set('userApply', $userApply);
             }
             $order = [];
+            //不是后台判断文章状态
+            if(strpos($this->request->referer(), 'admin') === FALSE){
+                $conditions = [
+                    'Activity.status' => 1,
+                ];
+            } else {
+                $conditions = [];
+            }
+            
             if ($this->user) {
                 // 是否已赞
                 $isLike = $this->Activity->Likelogs->find()
@@ -73,44 +82,26 @@ class ActivityController extends AppController {
                 $user_phone = $this->user->phone;
                 // 活动详情
                 
-                if(strpos($this->request->referer(), 'admin') === FALSE){
-                    $activity = $this->Activity->get($id, [
-                        'contain' => [
-                            'Admins','Industries','Regions','Savants',
-                            'Activity_recommends','Activityapply' => function($q)use($user_id, $user_phone){
-                                return $q->where(['or'=>['user_id'=>$user_id, 'phone'=>$user_phone]]);
-                            },'Activitycom' => function($q)use($id){
-                                return $q->where(['activity_id'=>$id, 'is_delete'=>0])->orderDesc('Activitycom.create_time')->limit($this->limit);
-                            },'Activitycom.Users'=>function($q){
-                                return $q->where(['Users.enabled'=>1]);
-                            },'Activitycom.Replyusers'=>function($q){
-                                return $q->where(['Replyusers.enabled'=>1]);
-                            },'Activitycom.Likes'=>function($q)use($user_id){
-                                return $q->where(['type'=>0,'user_id'=>$user_id]);
-                            }
-                        ],
-                        'conditions' => [
-                            'status' => 1,
-                        ]
-                    ]);
-                } else {
-                    $activity = $this->Activity->get($id, [
-                        'contain' => [
-                            'Admins','Industries','Regions','Savants',
-                            'Activity_recommends','Activityapply' => function($q)use($user_id, $user_phone){
-                                return $q->where(['or'=>['user_id'=>$user_id, 'phone'=>$user_phone]]);
-                            },'Activitycom' => function($q)use($id){
-                                return $q->where(['activity_id'=>$id, 'is_delete'=>0])->orderDesc('Activitycom.create_time')->limit($this->limit);
-                            },'Activitycom.Users'=>function($q){
-                                return $q->where(['Users.enabled'=>1]);
-                            },'Activitycom.Replyusers'=>function($q){
-                                return $q->where(['Replyusers.enabled'=>1]);
-                            },'Activitycom.Likes'=>function($q)use($user_id){
-                                return $q->where(['type'=>0,'user_id'=>$user_id]);
-                            }
-                        ],
-                    ]);
-                }
+                $activity = $this->Activity->get($id, [
+                    'contain' => [
+                        'Admins','Industries','Regions','Savants',
+                        'Users'=>function($q){
+                            return $q->select(['avatar', 'truename', 'id', 'company', 'position']);
+                        },
+                        'Activity_recommends','Activityapply' => function($q)use($user_id, $user_phone){
+                            return $q->where(['or'=>['user_id'=>$user_id, 'phone'=>$user_phone]]);
+                        },'Activitycom' => function($q)use($id){
+                            return $q->where(['activity_id'=>$id, 'is_delete'=>0])->orderDesc('Activitycom.create_time')->limit($this->limit);
+                        },'Activitycom.Users'=>function($q){
+                            return $q->where(['Users.enabled'=>1]);
+                        },'Activitycom.Replyusers'=>function($q){
+                            return $q->where(['Replyusers.enabled'=>1]);
+                        },'Activitycom.Likes'=>function($q)use($user_id){
+                            return $q->where(['type'=>0,'user_id'=>$user_id]);
+                        }
+                    ],
+                    'conditions' => $conditions
+                ]);
                 $orderTable = \Cake\ORM\TableRegistry::get('order');
                 if($activity->activityapply){
                     if($activity->activityapply['0']->is_pass == 0){
@@ -118,38 +109,23 @@ class ActivityController extends AppController {
                     }
                 }
             } else {
-                if(strpos($this->request->referer(), 'admin') === FALSE){
-                    $activity = $this->Activity->get($id, [
-                        'contain' => [
-                            'Admins','Industries','Regions','Savants','Activity_recommends',
-                            'Activitycom' => function($q)use($id){
-                                return $q->where(['activity_id'=>$id, 'is_delete' => 0])
-                                        ->orderDesc('Activitycom.create_time')->limit($this->limit);
-                            },'Activitycom.Users'=>function($q){
-                                return $q->where(['Users.enabled'=>1]);
-                            },'Activitycom.Replyusers'=>function($q){
-                                return $q->where(['Replyusers.enabled'=>1]);
-                            },
-                        ],
-                        'conditions' => [
-                            'status' => 1
-                        ]
-                    ]);
-                } else {
-                    $activity = $this->Activity->get($id, [
-                        'contain' => [
-                            'Admins','Industries','Regions','Savants','Activity_recommends',
-                            'Activitycom' => function($q)use($id){
-                                return $q->where(['activity_id'=>$id, 'is_delete' => 0])
-                                        ->orderDesc('Activitycom.create_time')->limit($this->limit);
-                            },'Activitycom.Users'=>function($q){
-                                return $q->where(['Users.enabled'=>1]);
-                            },'Activitycom.Replyusers'=>function($q){
-                                return $q->where(['Replyusers.enabled'=>1]);
-                            },
-                        ],
-                    ]);
-                }
+                $activity = $this->Activity->get($id, [
+                    'contain' => [
+                        'Admins','Industries','Regions','Savants','Activity_recommends',
+                        'Users'=>function($q){
+                            return $q->select(['avatar', 'truename', 'id', 'company', 'position']);
+                        },
+                        'Activitycom' => function($q)use($id){
+                            return $q->where(['activity_id'=>$id, 'is_delete' => 0])
+                                    ->orderDesc('Activitycom.create_time')->limit($this->limit);
+                        },'Activitycom.Users'=>function($q){
+                            return $q->where(['Users.enabled'=>1]);
+                        },'Activitycom.Replyusers'=>function($q){
+                            return $q->where(['Replyusers.enabled'=>1]);
+                        },
+                    ],
+                    'conditions' => $conditions
+                ]);
                 $this->set('user', '');
             }
             foreach($activity->activitycom as $k=>$v){

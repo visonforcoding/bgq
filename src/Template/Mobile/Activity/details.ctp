@@ -5,7 +5,18 @@
     <?= $this->element('share', ['table'=>'activity', 'id'=>$activity->id]); ?>
     <div class="wraper" id="activity_detail" >
         <section class="newscon-box a-detail">
-            <h3><?= $activity->title ? $activity->title : ''; ?><time class='a_title_time'><?= $activity->create_time->format('Y-m-d H:i:s'); ?></time></h3>
+            <h3><?= $activity->title ? $activity->title : ''; ?></h3>
+            <a class="active-autor flex">
+                <div class="avatar">
+                    <img src="<?= $activity->user->avatar ?>" class="responseimg">
+                </div>
+                <div class="active-r-info">
+                    <span class="user"><?= $activity->user->truename ?></span> | <span class="company"><?= $activity->user->company ?></span> | <span class="job"><?= $activity->user->position ?></span>
+                </div>
+            </a>
+            <div class="inner">
+                <time class='a_title_time'><?= $activity->create_time->format('Y-m-d H:i:s'); ?></time>
+            </div>
             <div class='innercon'> <img src="<?= $activity->cover; ?>"/>
                 <p>主办单位：<?= $activity->company ? $activity->company : ''; ?> 
                     <?php if ($activity->org): ?>
